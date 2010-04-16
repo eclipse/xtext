@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.impl;
 
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -42,7 +43,6 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.Range;
-import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.XtextSwitch;
 
 import com.google.inject.Inject;
@@ -54,7 +54,7 @@ import com.google.inject.Inject;
 public class PartialParsingHelper implements IPartialParsingHelper {
 
 	private static final Logger log = Logger.getLogger(PartialParsingHelper.class);
-	
+
 	@Inject
 	private IReferableElementsUnloader unloader;
 
@@ -82,17 +82,16 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			// no replaceNode -> no rule to call
 			// If region is empty, any entryRule is likely to fail.
 			// Let parser decide whether empty model is valid
-			return parser.parse(new StringInputStream(""));
+			return parser.parse(new StringReader(""));
 		}
 		String entryRuleName = parsingPointers.findEntryRuleName(replaceNode);
 		ParseResult parseResult = null;
 		try {
-			parseResult = (ParseResult) parser.parse(entryRuleName, new StringInputStream(
-					reparseRegion));
+			parseResult = (ParseResult) parser.parse(entryRuleName, new StringReader(reparseRegion));
+		} catch (ParseException exc) {
 		}
-		catch (ParseException exc) {
-		}
-		if (parseResult == null || parseResult.getParseErrors() != null && !parseResult.getParseErrors().isEmpty() && !rootNode.equals(replaceNode)) {
+		if (parseResult == null || parseResult.getParseErrors() != null && !parseResult.getParseErrors().isEmpty()
+				&& !rootNode.equals(replaceNode)) {
 			// on error fully reparse
 			return fullyReparse(parser, rootNode, offset, replacedTextLength, newText);
 		}
@@ -111,8 +110,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 				int astElementChildIndex = featureValueList.indexOf(replaceAstElement);
 				unloadSemanticObject(replaceAstElement);
 				featureValueList.set(astElementChildIndex, parseResult.getRootASTElement());
-			}
-			else {
+			} else {
 				unloadSemanticObject(replaceAstElement);
 				astParentElement.eSet(feature, parseResult.getRootASTElement());
 			}
@@ -138,10 +136,9 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			// it precedes the old node
 			final Iterator<LeafNode> lookAheadIter = from.getLookaheadLeafNodes().iterator();
 			int idx = 0;
-			while(lookAheadIter.hasNext()) {
+			while (lookAheadIter.hasNext()) {
 				final LeafNode leaf = lookAheadIter.next();
-				if (leaf.getTotalOffset() < from.getTotalOffset())
-				{
+				if (leaf.getTotalOffset() < from.getTotalOffset()) {
 					to.getLookaheadLeafNodes().add(idx, leaf);
 					idx++;
 					lookAhead--;
@@ -151,9 +148,9 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			if (wasEmpty) {
 				// We assume, that the lookahead-length should be the same as before
 				final Iterator<LeafNode> leafIter = to.getLeafNodes().iterator();
-				while(leafIter.hasNext() && lookAhead > 0) {
+				while (leafIter.hasNext() && lookAhead > 0) {
 					LeafNode nextLeaf = leafIter.next();
-					while(nextLeaf.isHidden() && leafIter.hasNext())
+					while (nextLeaf.isHidden() && leafIter.hasNext())
 						nextLeaf = leafIter.next();
 					if (!nextLeaf.isHidden()) {
 						to.getLookaheadLeafNodes().add(nextLeaf);
@@ -164,22 +161,22 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		}
 	}
 
-	private IParseResult fullyReparse(IParser parser, CompositeNode rootNode, int offset,
-			int replacedTextLength, String newText) {
+	private IParseResult fullyReparse(IParser parser, CompositeNode rootNode, int offset, int replacedTextLength,
+			String newText) {
 		unloadNode(rootNode);
 		String reparseRegion = insertChangeIntoReplaceRegion(rootNode, offset, replacedTextLength, newText);
-		return parser.parse(new StringInputStream(reparseRegion));
+		return parser.parse(new StringReader(reparseRegion));
 	}
-	
+
 	public void unloadNode(AbstractNode rootNode) {
 		if (rootNode != null) {
 			EObject semantic = rootNode.getElement();
 			if (rootNode instanceof CompositeNode && semantic == null)
 				semantic = NodeUtil.getASTElementForRootNode((CompositeNode) rootNode);
 			unloadSemanticObject(semantic);
-		}	
+		}
 	}
-	
+
 	public void unloadSemanticObject(EObject object) {
 		if (unloader != null && object != null)
 			unloader.unloadRoot(object);
@@ -190,8 +187,8 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 	 * @param offset
 	 * @param replacedTextLength
 	 */
-	public String insertChangeIntoReplaceRegion(CompositeNode replaceRootNode, int offset,
-			int replacedTextLength, String newText) {
+	public String insertChangeIntoReplaceRegion(CompositeNode replaceRootNode, int offset, int replacedTextLength,
+			String newText) {
 		String originalRegion = replaceRootNode.serialize();
 		int changeOffset = offset - replaceRootNode.getTotalOffset();
 		StringBuffer reparseRegion = new StringBuffer();
@@ -214,16 +211,15 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		// include any existing parse errors
 		Range range = new Range(myOffset, myOffset + myReplacedTextLength);
 		range.mergeAllErrors(rootNode);
-		
+
 		myOffset = range.getFromOffset();
 		List<CompositeNode> nodesEnclosingRegion = collectNodesEnclosingChangeRegion(rootNode, range.getFromOffset(),
 				range.getToOffset() - range.getFromOffset());
 		List<CompositeNode> validReplaceRootNodes = internalFindValidReplaceRootNodeForChangeRegion(
-				nodesEnclosingRegion, range.getFromOffset(),
-				range.getToOffset() - range.getFromOffset());
+				nodesEnclosingRegion, range.getFromOffset(), range.getToOffset() - range.getFromOffset());
 
 		filterInvalidRootNodes(rootNode, validReplaceRootNodes);
-		
+
 		if (validReplaceRootNodes.isEmpty()) {
 			validReplaceRootNodes = Collections.<CompositeNode> singletonList(rootNode);
 		}
@@ -233,7 +229,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 
 	private void filterInvalidRootNodes(CompositeNode rootNode, List<CompositeNode> validReplaceRootNodes) {
 		ListIterator<CompositeNode> iter = validReplaceRootNodes.listIterator(validReplaceRootNodes.size());
-		while(iter.hasPrevious()) {
+		while (iter.hasPrevious()) {
 			if (isInvalidRootNode(rootNode, iter.previous()))
 				iter.remove();
 			else
@@ -265,35 +261,35 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		}
 		return false;
 	}
-	
+
 	private boolean isCalledBy(final EObject child, AbstractElement parent) {
 		return new XtextSwitch<Boolean>() {
 			private final Set<ParserRule> rules = new HashSet<ParserRule>(4);
-			
+
 			@Override
 			public Boolean caseCompoundElement(CompoundElement object) {
-				for (AbstractElement elem: object.getElements()) {
+				for (AbstractElement elem : object.getElements()) {
 					if (doSwitch(elem))
 						return true;
 				}
 				return false;
 			}
-			
+
 			@Override
 			public Boolean caseAbstractElement(AbstractElement object) {
 				return object == child;
 			}
-			
+
 			@Override
 			public Boolean caseRuleCall(RuleCall object) {
 				return object == child || doSwitch(object.getRule());
 			}
-			
+
 			@Override
 			public Boolean caseAbstractRule(AbstractRule object) {
 				return object == child;
 			}
-			
+
 			@Override
 			public Boolean caseParserRule(ParserRule object) {
 				return object == child || (rules.add(object) && doSwitch(object.getAlternatives()));
@@ -316,50 +312,55 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		}
 		return false;
 	}
-	
+
 	private boolean isMandatory(AbstractElement element) {
 		return new XtextSwitch<Boolean>() {
 			private final Set<ParserRule> rules = new HashSet<ParserRule>(4);
+
 			@Override
 			public Boolean caseAction(Action object) {
 				return false;
 			}
-			
+
 			@Override
 			public Boolean caseCompoundElement(CompoundElement object) {
 				if (GrammarUtil.isOptionalCardinality(object))
 					return false;
-				for (AbstractElement child: object.getElements()) {
+				for (AbstractElement child : object.getElements()) {
 					if (doSwitch(child)) {
 						return true;
 					}
 				}
 				return false;
 			}
-			
+
 			@Override
 			public Boolean caseAlternatives(Alternatives object) {
 				if (GrammarUtil.isOptionalCardinality(object))
 					return false;
-				for (AbstractElement child: object.getElements()) {
+				for (AbstractElement child : object.getElements()) {
 					if (!doSwitch(child)) {
 						return false;
 					}
 				}
 				return true;
 			}
+
 			@Override
 			public Boolean caseAbstractElement(AbstractElement object) {
 				return !GrammarUtil.isOptionalCardinality(object);
 			}
+
 			@Override
 			public Boolean caseRuleCall(RuleCall object) {
 				return !GrammarUtil.isOptionalCardinality(object) || doSwitch(object.getRule());
 			}
+
 			@Override
 			public Boolean caseAbstractRule(AbstractRule object) {
 				return true;
 			}
+
 			@Override
 			public Boolean caseParserRule(ParserRule object) {
 				return rules.add(object) && doSwitch(object.getAlternatives());
@@ -417,11 +418,10 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 	}
 
 	/**
-	 * Investigates the composite nodes containing the changed region and
-	 * collects a list of nodes which could possibly replaced by a partial
-	 * parse. Such a node has a parent that consumes all his current lookahead
-	 * tokens and all of these tokens are located before the changed region.
-	 *
+	 * Investigates the composite nodes containing the changed region and collects a list of nodes which could possibly
+	 * replaced by a partial parse. Such a node has a parent that consumes all his current lookahead tokens and all of
+	 * these tokens are located before the changed region.
+	 * 
 	 * @param nodesEnclosingRegion
 	 * @param offset
 	 * @param length

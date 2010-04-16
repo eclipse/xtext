@@ -78,17 +78,17 @@ public abstract class AbstractArithmeticsRuntimeModule extends DefaultRuntimeMod
 		return org.eclipse.xtext.example.arithmetics.validation.ArithmeticsJavaValidator.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment
+	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
 	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
 		return org.eclipse.xtext.example.arithmetics.scoping.ArithmeticsScopeProvider.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment
+	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
 	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(com.google.inject.name.Names.named("org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.delegate")).to(org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider.class);
 	}
 
-	// contributed by org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment
+	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
 	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider.class;
 	}

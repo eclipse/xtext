@@ -330,6 +330,7 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 	public void close() throws IOException {
 		if (line != null)
 			line.flush();
+		super.close();
 	}
 
 	@Override

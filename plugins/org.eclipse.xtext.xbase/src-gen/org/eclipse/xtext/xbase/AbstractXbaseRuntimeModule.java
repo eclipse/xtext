@@ -93,22 +93,17 @@ public abstract class AbstractXbaseRuntimeModule extends DefaultRuntimeModule {
 		return org.eclipse.xtext.common.types.xtext.ClasspathBasedTypeScopeProvider.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment
+	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
 	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
 		return org.eclipse.xtext.xbase.scoping.XbaseScopeProvider.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment
+	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
 	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(com.google.inject.name.Names.named("org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.delegate")).to(org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider.class);
 	}
 
-	// contributed by org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment
-	public Class<? extends org.eclipse.xtext.naming.IQualifiedNameProvider> bindIQualifiedNameProvider() {
-		return org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment
+	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
 	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider.class;
 	}

@@ -17,25 +17,25 @@ T17 : 'otherRefs' ;
 T18 : ',' ;
 T19 : '.' ;
 
-// $ANTLR src "../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/ui/contentassist/antlr/internal/InternalBuilderTestLanguage.g" 828
+// $ANTLR src "../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/ui/contentassist/antlr/internal/InternalBuilderTestLanguage.g" 829
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/ui/contentassist/antlr/internal/InternalBuilderTestLanguage.g" 830
+// $ANTLR src "../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/ui/contentassist/antlr/internal/InternalBuilderTestLanguage.g" 831
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/ui/contentassist/antlr/internal/InternalBuilderTestLanguage.g" 832
+// $ANTLR src "../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/ui/contentassist/antlr/internal/InternalBuilderTestLanguage.g" 833
 RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
-// $ANTLR src "../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/ui/contentassist/antlr/internal/InternalBuilderTestLanguage.g" 834
+// $ANTLR src "../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/ui/contentassist/antlr/internal/InternalBuilderTestLanguage.g" 835
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-// $ANTLR src "../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/ui/contentassist/antlr/internal/InternalBuilderTestLanguage.g" 836
+// $ANTLR src "../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/ui/contentassist/antlr/internal/InternalBuilderTestLanguage.g" 837
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-// $ANTLR src "../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/ui/contentassist/antlr/internal/InternalBuilderTestLanguage.g" 838
+// $ANTLR src "../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/ui/contentassist/antlr/internal/InternalBuilderTestLanguage.g" 839
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/ui/contentassist/antlr/internal/InternalBuilderTestLanguage.g" 840
+// $ANTLR src "../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/ui/contentassist/antlr/internal/InternalBuilderTestLanguage.g" 841
 RULE_ANY_OTHER : .;
 
 

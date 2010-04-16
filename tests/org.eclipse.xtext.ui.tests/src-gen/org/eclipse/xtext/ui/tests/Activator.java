@@ -123,6 +123,10 @@ public class Activator extends AbstractUIPlugin {
 				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguage"))).with(getSharedStateModule())
 			));
 			
+			injectors.put("org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage", Guice.createInjector(
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage"))).with(getSharedStateModule())
+			));
+			
 			injectors.put("org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguage", Guice.createInjector(
 				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguage"))).with(getSharedStateModule())
 			));
@@ -243,6 +247,10 @@ public class Activator extends AbstractUIPlugin {
 		  return new org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguageRuntimeModule();
 		}
 		
+		if ("org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguageRuntimeModule();
+		}
+		
 		if ("org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguageRuntimeModule();
 		}
@@ -353,6 +361,10 @@ public class Activator extends AbstractUIPlugin {
 		
 		if ("org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.ui.tests.testlanguages.ui.ReferenceGrammarUiTestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingTestLanguageUiModule(this);
 		}
 		
 		if ("org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguage".equals(grammar)) {

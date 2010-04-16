@@ -3,15 +3,13 @@
 */
 package org.eclipse.xtext.parser.antlr;
 
-import org.antlr.runtime.ANTLRInputStream;
+import org.antlr.runtime.CharStream;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.services.XtextGrammarAccess;
 
 import com.google.inject.Inject;
-
-import org.eclipse.xtext.services.XtextGrammarAccess;
 
 public class XtextParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
@@ -19,7 +17,7 @@ public class XtextParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrPar
 	private XtextGrammarAccess grammarAccess;
 	
 	@Override
-	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
+	protected IParseResult parse(String ruleName, CharStream in) {
 		TokenSource tokenSource = createLexer(in);
 		XtextTokenStream tokenStream = createTokenStream(tokenSource);
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");

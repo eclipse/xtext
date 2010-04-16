@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public interface ITokenStream {
+	
 	public void close() throws IOException;
 
 	public void writeHidden(EObject grammarElement, String value)

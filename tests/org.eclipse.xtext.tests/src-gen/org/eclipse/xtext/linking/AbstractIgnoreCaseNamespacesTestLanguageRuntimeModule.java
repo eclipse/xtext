@@ -34,7 +34,6 @@ public abstract class AbstractIgnoreCaseNamespacesTestLanguageRuntimeModule exte
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
-	@Override
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
@@ -60,7 +59,6 @@ public abstract class AbstractIgnoreCaseNamespacesTestLanguageRuntimeModule exte
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
-	@Override
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
@@ -81,7 +79,6 @@ public abstract class AbstractIgnoreCaseNamespacesTestLanguageRuntimeModule exte
 	}
 
 	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
-	@Override
 	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
 		return org.eclipse.xtext.linking.scoping.IgnoreCaseNamespacesTestLanguageScopeProvider.class;
 	}
@@ -92,7 +89,6 @@ public abstract class AbstractIgnoreCaseNamespacesTestLanguageRuntimeModule exte
 	}
 
 	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
-	@Override
 	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return org.eclipse.xtext.resource.ignorecase.IgnoreCaseDefaultGlobalScopeProvider.class;
 	}

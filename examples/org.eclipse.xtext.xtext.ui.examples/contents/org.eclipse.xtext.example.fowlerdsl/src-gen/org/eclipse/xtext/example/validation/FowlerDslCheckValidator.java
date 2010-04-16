@@ -18,7 +18,7 @@ public class FowlerDslCheckValidator extends org.eclipse.xtext.check.AbstractChe
 		addCheckFile("org::eclipse::xtext::example::validation::FowlerDslExpensiveChecks", CheckType.EXPENSIVE);
 	}
 	
-	@Override
+@Override
 	protected List<EPackage> getEPackages() {
 	    List<EPackage> result = new ArrayList<EPackage>();
 	    result.add(org.eclipse.xtext.example.fowlerdsl.FowlerdslPackage.eINSTANCE);

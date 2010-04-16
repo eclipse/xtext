@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,25 +8,25 @@
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.Writer;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting.impl.AbstractTokenStream;
 
 /**
- * @author Moritz Eysholdt - Initial contribution and API
+ * @author koehnlein - Initial contribution and API
  */
-public class TokenOutputStream extends AbstractTokenStream {
+public class WriterTokenStream extends AbstractTokenStream {
 
 	private boolean allowClose;
 
-	private OutputStream out;
+	private Writer out;
 
-	public TokenOutputStream(OutputStream out) {
+	public WriterTokenStream(Writer out) {
 		this(out, false);
 	}
 
-	public TokenOutputStream(OutputStream out, boolean allowClose) {
+	public WriterTokenStream(Writer out, boolean allowClose) {
 		super();
 		this.out = out;
 		this.allowClose = allowClose;
@@ -34,6 +34,7 @@ public class TokenOutputStream extends AbstractTokenStream {
 
 	@Override
 	public void close() throws IOException {
+		out.flush();
 		if (allowClose)
 			out.close();
 	}
@@ -42,14 +43,14 @@ public class TokenOutputStream extends AbstractTokenStream {
 	public void writeHidden(EObject grammarElement, String value)
 			throws IOException {
 		if (value != null && value.length() > 0)
-			out.write(value.getBytes());
+			out.write(value);
 	}
 
 	@Override
 	public void writeSemantic(EObject grammarElement, String value)
 			throws IOException {
 		if (value != null && value.length() > 0)
-			out.write(value.getBytes());
+			out.write(value);
 	}
 
 }

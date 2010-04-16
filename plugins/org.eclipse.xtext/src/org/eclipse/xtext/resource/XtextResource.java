@@ -10,7 +10,9 @@ package org.eclipse.xtext.resource;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -23,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.diagnostics.DiagnosticSeverity;
 import org.eclipse.xtext.linking.ILinker;
+import org.eclipse.xtext.parser.IDefaultEncodingProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ISwitchingParser;
@@ -65,6 +68,8 @@ public class XtextResource extends ResourceImpl {
 	 */
 	public static String OPTION_SERIALIZATION_OPTIONS = XtextResource.class.getName() + ".SERIALIZATION_OPTIONS";
 
+	public static String OPTION_ENCODING = XtextResource.class.getName() + ".DEFAULT_ENCODING";
+
 	private boolean validationDisabled;
 
 	private IParser parser;
@@ -86,9 +91,14 @@ public class XtextResource extends ResourceImpl {
 
 	@Inject
 	private IConcreteSyntaxValidator validator;
-	
+
 	@Inject
 	private IResourceScopeCache cache = IResourceScopeCache.NullImpl.INSTANCE;
+
+	@Inject
+	private IDefaultEncodingProvider deafultEncodingProvider;
+
+	private String encoding;
 
 	public IResourceServiceProvider getResourceServiceProvider() {
 		return resourceServiceProvider;
@@ -119,8 +129,29 @@ public class XtextResource extends ResourceImpl {
 
 	@Override
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
-		IParseResult result = parser.parse(inputStream);
+		setEncodingFromOptions(options);
+		IParseResult result = parser.parse(new InputStreamReader(inputStream, getEncoding()));
 		updateInternalState(result);
+	}
+
+	protected void setEncodingFromOptions(Map<?, ?> options) {
+		if (options != null) {
+			Object encodingOption = options.get(OPTION_ENCODING);
+			if (encodingOption instanceof String) {
+				setEncoding((String) encodingOption);
+			}
+		}
+	}
+
+	public String getEncoding() {
+		if (encoding == null) {
+			encoding = deafultEncodingProvider.getEncoding();
+		}
+		return encoding;
+	}
+
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
 	}
 
 	public void reparse(String newContent) throws IOException {
@@ -226,10 +257,10 @@ public class XtextResource extends ResourceImpl {
 
 			public String get() {
 				String result = (fragmentProvider != null) ? fragmentProvider.getFragment(object) : null;
-				
+
 				if (result == null)
 					result = XtextResource.super.getURIFragment(object);
-				
+
 				return result;
 			}
 		});
@@ -245,7 +276,8 @@ public class XtextResource extends ResourceImpl {
 		else
 			serialzeOptions = new SerializationOptions();
 		serialzeOptions.setFormat(options != null && Boolean.TRUE.equals(options.get(OPTION_FORMAT)));
-		serializer.serialize(contents.get(0), outputStream, serialzeOptions);
+		setEncodingFromOptions(options);
+		serializer.serialize(contents.get(0), new OutputStreamWriter(outputStream, getEncoding()), serialzeOptions);
 	}
 
 	/**
@@ -333,5 +365,4 @@ public class XtextResource extends ResourceImpl {
 	public IReferableElementsUnloader getUnloader() {
 		return unloader;
 	}
-
 }

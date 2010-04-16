@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.DFA;
 import org.eclipse.xtext.example.arithmetics.services.ArithmeticsGrammarAccess;
 
 
@@ -63,11 +64,11 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleModule
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:60:1: entryRuleModule : ruleModule EOF ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:61:1: entryRuleModule : ruleModule EOF ;
     public final void entryRuleModule() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:61:1: ( ruleModule EOF )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:62:1: ruleModule EOF
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:62:1: ( ruleModule EOF )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:63:1: ruleModule EOF
             {
              before(grammarAccess.getModuleRule()); 
             pushFollow(FOLLOW_ruleModule_in_entryRuleModule61);
@@ -92,21 +93,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleModule
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:69:1: ruleModule : ( ( rule__Module__Group__0 ) ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:70:1: ruleModule : ( ( rule__Module__Group__0 ) ) ;
     public final void ruleModule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:73:2: ( ( ( rule__Module__Group__0 ) ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:74:1: ( ( rule__Module__Group__0 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:74:2: ( ( ( rule__Module__Group__0 ) ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:75:1: ( ( rule__Module__Group__0 ) )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:74:1: ( ( rule__Module__Group__0 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:75:1: ( rule__Module__Group__0 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:75:1: ( ( rule__Module__Group__0 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:76:1: ( rule__Module__Group__0 )
             {
              before(grammarAccess.getModuleAccess().getGroup()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:76:1: ( rule__Module__Group__0 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:76:2: rule__Module__Group__0
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:77:1: ( rule__Module__Group__0 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:77:2: rule__Module__Group__0
             {
             pushFollow(FOLLOW_rule__Module__Group__0_in_ruleModule94);
             rule__Module__Group__0();
@@ -138,11 +139,11 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleImport
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:88:1: entryRuleImport : ruleImport EOF ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:89:1: entryRuleImport : ruleImport EOF ;
     public final void entryRuleImport() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:89:1: ( ruleImport EOF )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:90:1: ruleImport EOF
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:90:1: ( ruleImport EOF )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:91:1: ruleImport EOF
             {
              before(grammarAccess.getImportRule()); 
             pushFollow(FOLLOW_ruleImport_in_entryRuleImport121);
@@ -167,21 +168,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleImport
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:97:1: ruleImport : ( ( rule__Import__Group__0 ) ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:98:1: ruleImport : ( ( rule__Import__Group__0 ) ) ;
     public final void ruleImport() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:101:2: ( ( ( rule__Import__Group__0 ) ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:102:1: ( ( rule__Import__Group__0 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:102:2: ( ( ( rule__Import__Group__0 ) ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:103:1: ( ( rule__Import__Group__0 ) )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:102:1: ( ( rule__Import__Group__0 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:103:1: ( rule__Import__Group__0 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:103:1: ( ( rule__Import__Group__0 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:104:1: ( rule__Import__Group__0 )
             {
              before(grammarAccess.getImportAccess().getGroup()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:104:1: ( rule__Import__Group__0 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:104:2: rule__Import__Group__0
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:105:1: ( rule__Import__Group__0 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:105:2: rule__Import__Group__0
             {
             pushFollow(FOLLOW_rule__Import__Group__0_in_ruleImport154);
             rule__Import__Group__0();
@@ -213,11 +214,11 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleImportName
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:116:1: entryRuleImportName : ruleImportName EOF ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:117:1: entryRuleImportName : ruleImportName EOF ;
     public final void entryRuleImportName() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:117:1: ( ruleImportName EOF )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:118:1: ruleImportName EOF
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:118:1: ( ruleImportName EOF )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:119:1: ruleImportName EOF
             {
              before(grammarAccess.getImportNameRule()); 
             pushFollow(FOLLOW_ruleImportName_in_entryRuleImportName181);
@@ -242,21 +243,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleImportName
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:125:1: ruleImportName : ( ( rule__ImportName__Group__0 ) ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:126:1: ruleImportName : ( ( rule__ImportName__Group__0 ) ) ;
     public final void ruleImportName() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:129:2: ( ( ( rule__ImportName__Group__0 ) ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:130:1: ( ( rule__ImportName__Group__0 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:130:2: ( ( ( rule__ImportName__Group__0 ) ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:131:1: ( ( rule__ImportName__Group__0 ) )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:130:1: ( ( rule__ImportName__Group__0 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:131:1: ( rule__ImportName__Group__0 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:131:1: ( ( rule__ImportName__Group__0 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:132:1: ( rule__ImportName__Group__0 )
             {
              before(grammarAccess.getImportNameAccess().getGroup()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:132:1: ( rule__ImportName__Group__0 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:132:2: rule__ImportName__Group__0
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:133:1: ( rule__ImportName__Group__0 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:133:2: rule__ImportName__Group__0
             {
             pushFollow(FOLLOW_rule__ImportName__Group__0_in_ruleImportName214);
             rule__ImportName__Group__0();
@@ -288,11 +289,11 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleStatement
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:144:1: entryRuleStatement : ruleStatement EOF ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:145:1: entryRuleStatement : ruleStatement EOF ;
     public final void entryRuleStatement() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:145:1: ( ruleStatement EOF )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:146:1: ruleStatement EOF
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:146:1: ( ruleStatement EOF )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:147:1: ruleStatement EOF
             {
              before(grammarAccess.getStatementRule()); 
             pushFollow(FOLLOW_ruleStatement_in_entryRuleStatement241);
@@ -317,21 +318,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleStatement
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:153:1: ruleStatement : ( ( rule__Statement__Alternatives ) ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:154:1: ruleStatement : ( ( rule__Statement__Alternatives ) ) ;
     public final void ruleStatement() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:157:2: ( ( ( rule__Statement__Alternatives ) ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:158:1: ( ( rule__Statement__Alternatives ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:158:2: ( ( ( rule__Statement__Alternatives ) ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:159:1: ( ( rule__Statement__Alternatives ) )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:158:1: ( ( rule__Statement__Alternatives ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:159:1: ( rule__Statement__Alternatives )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:159:1: ( ( rule__Statement__Alternatives ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:160:1: ( rule__Statement__Alternatives )
             {
              before(grammarAccess.getStatementAccess().getAlternatives()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:160:1: ( rule__Statement__Alternatives )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:160:2: rule__Statement__Alternatives
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:161:1: ( rule__Statement__Alternatives )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:161:2: rule__Statement__Alternatives
             {
             pushFollow(FOLLOW_rule__Statement__Alternatives_in_ruleStatement274);
             rule__Statement__Alternatives();
@@ -363,11 +364,11 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleDefinition
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:172:1: entryRuleDefinition : ruleDefinition EOF ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:173:1: entryRuleDefinition : ruleDefinition EOF ;
     public final void entryRuleDefinition() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:173:1: ( ruleDefinition EOF )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:174:1: ruleDefinition EOF
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:174:1: ( ruleDefinition EOF )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:175:1: ruleDefinition EOF
             {
              before(grammarAccess.getDefinitionRule()); 
             pushFollow(FOLLOW_ruleDefinition_in_entryRuleDefinition301);
@@ -392,21 +393,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleDefinition
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:181:1: ruleDefinition : ( ( rule__Definition__Group__0 ) ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:182:1: ruleDefinition : ( ( rule__Definition__Group__0 ) ) ;
     public final void ruleDefinition() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:185:2: ( ( ( rule__Definition__Group__0 ) ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:186:1: ( ( rule__Definition__Group__0 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:186:2: ( ( ( rule__Definition__Group__0 ) ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:187:1: ( ( rule__Definition__Group__0 ) )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:186:1: ( ( rule__Definition__Group__0 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:187:1: ( rule__Definition__Group__0 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:187:1: ( ( rule__Definition__Group__0 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:188:1: ( rule__Definition__Group__0 )
             {
              before(grammarAccess.getDefinitionAccess().getGroup()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:188:1: ( rule__Definition__Group__0 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:188:2: rule__Definition__Group__0
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:189:1: ( rule__Definition__Group__0 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:189:2: rule__Definition__Group__0
             {
             pushFollow(FOLLOW_rule__Definition__Group__0_in_ruleDefinition334);
             rule__Definition__Group__0();
@@ -438,11 +439,11 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleDeclaredParameter
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:200:1: entryRuleDeclaredParameter : ruleDeclaredParameter EOF ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:201:1: entryRuleDeclaredParameter : ruleDeclaredParameter EOF ;
     public final void entryRuleDeclaredParameter() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:201:1: ( ruleDeclaredParameter EOF )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:202:1: ruleDeclaredParameter EOF
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:202:1: ( ruleDeclaredParameter EOF )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:203:1: ruleDeclaredParameter EOF
             {
              before(grammarAccess.getDeclaredParameterRule()); 
             pushFollow(FOLLOW_ruleDeclaredParameter_in_entryRuleDeclaredParameter361);
@@ -467,21 +468,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleDeclaredParameter
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:209:1: ruleDeclaredParameter : ( ( rule__DeclaredParameter__NameAssignment ) ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:210:1: ruleDeclaredParameter : ( ( rule__DeclaredParameter__NameAssignment ) ) ;
     public final void ruleDeclaredParameter() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:213:2: ( ( ( rule__DeclaredParameter__NameAssignment ) ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:214:1: ( ( rule__DeclaredParameter__NameAssignment ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:214:2: ( ( ( rule__DeclaredParameter__NameAssignment ) ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:215:1: ( ( rule__DeclaredParameter__NameAssignment ) )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:214:1: ( ( rule__DeclaredParameter__NameAssignment ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:215:1: ( rule__DeclaredParameter__NameAssignment )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:215:1: ( ( rule__DeclaredParameter__NameAssignment ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:216:1: ( rule__DeclaredParameter__NameAssignment )
             {
              before(grammarAccess.getDeclaredParameterAccess().getNameAssignment()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:216:1: ( rule__DeclaredParameter__NameAssignment )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:216:2: rule__DeclaredParameter__NameAssignment
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:217:1: ( rule__DeclaredParameter__NameAssignment )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:217:2: rule__DeclaredParameter__NameAssignment
             {
             pushFollow(FOLLOW_rule__DeclaredParameter__NameAssignment_in_ruleDeclaredParameter394);
             rule__DeclaredParameter__NameAssignment();
@@ -513,11 +514,11 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleEvaluation
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:230:1: entryRuleEvaluation : ruleEvaluation EOF ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:231:1: entryRuleEvaluation : ruleEvaluation EOF ;
     public final void entryRuleEvaluation() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:231:1: ( ruleEvaluation EOF )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:232:1: ruleEvaluation EOF
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:232:1: ( ruleEvaluation EOF )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:233:1: ruleEvaluation EOF
             {
              before(grammarAccess.getEvaluationRule()); 
             pushFollow(FOLLOW_ruleEvaluation_in_entryRuleEvaluation423);
@@ -542,21 +543,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleEvaluation
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:239:1: ruleEvaluation : ( ( rule__Evaluation__Group__0 ) ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:240:1: ruleEvaluation : ( ( rule__Evaluation__Group__0 ) ) ;
     public final void ruleEvaluation() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:243:2: ( ( ( rule__Evaluation__Group__0 ) ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:244:1: ( ( rule__Evaluation__Group__0 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:244:2: ( ( ( rule__Evaluation__Group__0 ) ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:245:1: ( ( rule__Evaluation__Group__0 ) )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:244:1: ( ( rule__Evaluation__Group__0 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:245:1: ( rule__Evaluation__Group__0 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:245:1: ( ( rule__Evaluation__Group__0 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:246:1: ( rule__Evaluation__Group__0 )
             {
              before(grammarAccess.getEvaluationAccess().getGroup()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:246:1: ( rule__Evaluation__Group__0 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:246:2: rule__Evaluation__Group__0
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:247:1: ( rule__Evaluation__Group__0 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:247:2: rule__Evaluation__Group__0
             {
             pushFollow(FOLLOW_rule__Evaluation__Group__0_in_ruleEvaluation456);
             rule__Evaluation__Group__0();
@@ -588,11 +589,11 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleExpression
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:258:1: entryRuleExpression : ruleExpression EOF ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:259:1: entryRuleExpression : ruleExpression EOF ;
     public final void entryRuleExpression() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:259:1: ( ruleExpression EOF )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:260:1: ruleExpression EOF
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:260:1: ( ruleExpression EOF )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:261:1: ruleExpression EOF
             {
              before(grammarAccess.getExpressionRule()); 
             pushFollow(FOLLOW_ruleExpression_in_entryRuleExpression483);
@@ -617,17 +618,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleExpression
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:267:1: ruleExpression : ( ruleAddition ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:268:1: ruleExpression : ( ruleAddition ) ;
     public final void ruleExpression() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:271:2: ( ( ruleAddition ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:272:1: ( ruleAddition )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:272:2: ( ( ruleAddition ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:273:1: ( ruleAddition )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:272:1: ( ruleAddition )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:273:1: ruleAddition
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:273:1: ( ruleAddition )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:274:1: ruleAddition
             {
              before(grammarAccess.getExpressionAccess().getAdditionParserRuleCall()); 
             pushFollow(FOLLOW_ruleAddition_in_ruleExpression516);
@@ -657,11 +658,11 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleAddition
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:286:1: entryRuleAddition : ruleAddition EOF ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:287:1: entryRuleAddition : ruleAddition EOF ;
     public final void entryRuleAddition() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:287:1: ( ruleAddition EOF )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:288:1: ruleAddition EOF
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:288:1: ( ruleAddition EOF )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:289:1: ruleAddition EOF
             {
              before(grammarAccess.getAdditionRule()); 
             pushFollow(FOLLOW_ruleAddition_in_entryRuleAddition542);
@@ -686,21 +687,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleAddition
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:295:1: ruleAddition : ( ( rule__Addition__Group__0 ) ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:296:1: ruleAddition : ( ( rule__Addition__Group__0 ) ) ;
     public final void ruleAddition() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:299:2: ( ( ( rule__Addition__Group__0 ) ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:300:1: ( ( rule__Addition__Group__0 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:300:2: ( ( ( rule__Addition__Group__0 ) ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:301:1: ( ( rule__Addition__Group__0 ) )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:300:1: ( ( rule__Addition__Group__0 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:301:1: ( rule__Addition__Group__0 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:301:1: ( ( rule__Addition__Group__0 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:302:1: ( rule__Addition__Group__0 )
             {
              before(grammarAccess.getAdditionAccess().getGroup()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:302:1: ( rule__Addition__Group__0 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:302:2: rule__Addition__Group__0
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:303:1: ( rule__Addition__Group__0 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:303:2: rule__Addition__Group__0
             {
             pushFollow(FOLLOW_rule__Addition__Group__0_in_ruleAddition575);
             rule__Addition__Group__0();
@@ -732,11 +733,11 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleMultiplication
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:314:1: entryRuleMultiplication : ruleMultiplication EOF ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:315:1: entryRuleMultiplication : ruleMultiplication EOF ;
     public final void entryRuleMultiplication() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:315:1: ( ruleMultiplication EOF )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:316:1: ruleMultiplication EOF
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:316:1: ( ruleMultiplication EOF )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:317:1: ruleMultiplication EOF
             {
              before(grammarAccess.getMultiplicationRule()); 
             pushFollow(FOLLOW_ruleMultiplication_in_entryRuleMultiplication602);
@@ -761,21 +762,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleMultiplication
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:323:1: ruleMultiplication : ( ( rule__Multiplication__Group__0 ) ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:324:1: ruleMultiplication : ( ( rule__Multiplication__Group__0 ) ) ;
     public final void ruleMultiplication() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:327:2: ( ( ( rule__Multiplication__Group__0 ) ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:328:1: ( ( rule__Multiplication__Group__0 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:328:2: ( ( ( rule__Multiplication__Group__0 ) ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:329:1: ( ( rule__Multiplication__Group__0 ) )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:328:1: ( ( rule__Multiplication__Group__0 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:329:1: ( rule__Multiplication__Group__0 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:329:1: ( ( rule__Multiplication__Group__0 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:330:1: ( rule__Multiplication__Group__0 )
             {
              before(grammarAccess.getMultiplicationAccess().getGroup()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:330:1: ( rule__Multiplication__Group__0 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:330:2: rule__Multiplication__Group__0
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:331:1: ( rule__Multiplication__Group__0 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:331:2: rule__Multiplication__Group__0
             {
             pushFollow(FOLLOW_rule__Multiplication__Group__0_in_ruleMultiplication635);
             rule__Multiplication__Group__0();
@@ -807,11 +808,11 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRulePrimaryExpression
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:342:1: entryRulePrimaryExpression : rulePrimaryExpression EOF ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:343:1: entryRulePrimaryExpression : rulePrimaryExpression EOF ;
     public final void entryRulePrimaryExpression() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:343:1: ( rulePrimaryExpression EOF )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:344:1: rulePrimaryExpression EOF
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:344:1: ( rulePrimaryExpression EOF )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:345:1: rulePrimaryExpression EOF
             {
              before(grammarAccess.getPrimaryExpressionRule()); 
             pushFollow(FOLLOW_rulePrimaryExpression_in_entryRulePrimaryExpression662);
@@ -836,21 +837,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rulePrimaryExpression
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:351:1: rulePrimaryExpression : ( ( rule__PrimaryExpression__Alternatives ) ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:352:1: rulePrimaryExpression : ( ( rule__PrimaryExpression__Alternatives ) ) ;
     public final void rulePrimaryExpression() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:355:2: ( ( ( rule__PrimaryExpression__Alternatives ) ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:356:1: ( ( rule__PrimaryExpression__Alternatives ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:356:2: ( ( ( rule__PrimaryExpression__Alternatives ) ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:357:1: ( ( rule__PrimaryExpression__Alternatives ) )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:356:1: ( ( rule__PrimaryExpression__Alternatives ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:357:1: ( rule__PrimaryExpression__Alternatives )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:357:1: ( ( rule__PrimaryExpression__Alternatives ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:358:1: ( rule__PrimaryExpression__Alternatives )
             {
              before(grammarAccess.getPrimaryExpressionAccess().getAlternatives()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:358:1: ( rule__PrimaryExpression__Alternatives )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:358:2: rule__PrimaryExpression__Alternatives
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:359:1: ( rule__PrimaryExpression__Alternatives )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:359:2: rule__PrimaryExpression__Alternatives
             {
             pushFollow(FOLLOW_rule__PrimaryExpression__Alternatives_in_rulePrimaryExpression695);
             rule__PrimaryExpression__Alternatives();
@@ -882,13 +883,13 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Statement__Alternatives
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:370:1: rule__Statement__Alternatives : ( ( ruleDefinition ) | ( ruleEvaluation ) );
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:371:1: rule__Statement__Alternatives : ( ( ruleDefinition ) | ( ruleEvaluation ) );
     public final void rule__Statement__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:374:1: ( ( ruleDefinition ) | ( ruleEvaluation ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:375:1: ( ( ruleDefinition ) | ( ruleEvaluation ) )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -900,16 +901,16 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("370:1: rule__Statement__Alternatives : ( ( ruleDefinition ) | ( ruleEvaluation ) );", 1, 0, input);
+                    new NoViableAltException("371:1: rule__Statement__Alternatives : ( ( ruleDefinition ) | ( ruleEvaluation ) );", 1, 0, input);
 
                 throw nvae;
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:375:1: ( ruleDefinition )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:376:1: ( ruleDefinition )
                     {
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:375:1: ( ruleDefinition )
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:376:1: ruleDefinition
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:376:1: ( ruleDefinition )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:377:1: ruleDefinition
                     {
                      before(grammarAccess.getStatementAccess().getDefinitionParserRuleCall_0()); 
                     pushFollow(FOLLOW_ruleDefinition_in_rule__Statement__Alternatives731);
@@ -924,10 +925,10 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:381:6: ( ruleEvaluation )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:382:6: ( ruleEvaluation )
                     {
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:381:6: ( ruleEvaluation )
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:382:1: ruleEvaluation
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:382:6: ( ruleEvaluation )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:383:1: ruleEvaluation
                     {
                      before(grammarAccess.getStatementAccess().getEvaluationParserRuleCall_1()); 
                     pushFollow(FOLLOW_ruleEvaluation_in_rule__Statement__Alternatives748);
@@ -959,13 +960,13 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Addition__Alternatives_1_0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:393:1: rule__Addition__Alternatives_1_0 : ( ( ( rule__Addition__Group_1_0_0__0 ) ) | ( ( rule__Addition__Group_1_0_1__0 ) ) );
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:394:1: rule__Addition__Alternatives_1_0 : ( ( ( rule__Addition__Group_1_0_0__0 ) ) | ( ( rule__Addition__Group_1_0_1__0 ) ) );
     public final void rule__Addition__Alternatives_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:397:1: ( ( ( rule__Addition__Group_1_0_0__0 ) ) | ( ( rule__Addition__Group_1_0_1__0 ) ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:398:1: ( ( ( rule__Addition__Group_1_0_0__0 ) ) | ( ( rule__Addition__Group_1_0_1__0 ) ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -977,20 +978,20 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("393:1: rule__Addition__Alternatives_1_0 : ( ( ( rule__Addition__Group_1_0_0__0 ) ) | ( ( rule__Addition__Group_1_0_1__0 ) ) );", 2, 0, input);
+                    new NoViableAltException("394:1: rule__Addition__Alternatives_1_0 : ( ( ( rule__Addition__Group_1_0_0__0 ) ) | ( ( rule__Addition__Group_1_0_1__0 ) ) );", 2, 0, input);
 
                 throw nvae;
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:398:1: ( ( rule__Addition__Group_1_0_0__0 ) )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:399:1: ( ( rule__Addition__Group_1_0_0__0 ) )
                     {
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:398:1: ( ( rule__Addition__Group_1_0_0__0 ) )
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:399:1: ( rule__Addition__Group_1_0_0__0 )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:399:1: ( ( rule__Addition__Group_1_0_0__0 ) )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:400:1: ( rule__Addition__Group_1_0_0__0 )
                     {
                      before(grammarAccess.getAdditionAccess().getGroup_1_0_0()); 
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:400:1: ( rule__Addition__Group_1_0_0__0 )
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:400:2: rule__Addition__Group_1_0_0__0
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:401:1: ( rule__Addition__Group_1_0_0__0 )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:401:2: rule__Addition__Group_1_0_0__0
                     {
                     pushFollow(FOLLOW_rule__Addition__Group_1_0_0__0_in_rule__Addition__Alternatives_1_0781);
                     rule__Addition__Group_1_0_0__0();
@@ -1007,14 +1008,14 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:404:6: ( ( rule__Addition__Group_1_0_1__0 ) )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:405:6: ( ( rule__Addition__Group_1_0_1__0 ) )
                     {
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:404:6: ( ( rule__Addition__Group_1_0_1__0 ) )
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:405:1: ( rule__Addition__Group_1_0_1__0 )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:405:6: ( ( rule__Addition__Group_1_0_1__0 ) )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:406:1: ( rule__Addition__Group_1_0_1__0 )
                     {
                      before(grammarAccess.getAdditionAccess().getGroup_1_0_1()); 
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:406:1: ( rule__Addition__Group_1_0_1__0 )
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:406:2: rule__Addition__Group_1_0_1__0
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:407:1: ( rule__Addition__Group_1_0_1__0 )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:407:2: rule__Addition__Group_1_0_1__0
                     {
                     pushFollow(FOLLOW_rule__Addition__Group_1_0_1__0_in_rule__Addition__Alternatives_1_0799);
                     rule__Addition__Group_1_0_1__0();
@@ -1048,13 +1049,13 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Multiplication__Alternatives_1_0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:415:1: rule__Multiplication__Alternatives_1_0 : ( ( ( rule__Multiplication__Group_1_0_0__0 ) ) | ( ( rule__Multiplication__Group_1_0_1__0 ) ) );
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:416:1: rule__Multiplication__Alternatives_1_0 : ( ( ( rule__Multiplication__Group_1_0_0__0 ) ) | ( ( rule__Multiplication__Group_1_0_1__0 ) ) );
     public final void rule__Multiplication__Alternatives_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:419:1: ( ( ( rule__Multiplication__Group_1_0_0__0 ) ) | ( ( rule__Multiplication__Group_1_0_1__0 ) ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:420:1: ( ( ( rule__Multiplication__Group_1_0_0__0 ) ) | ( ( rule__Multiplication__Group_1_0_1__0 ) ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -1066,20 +1067,20 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("415:1: rule__Multiplication__Alternatives_1_0 : ( ( ( rule__Multiplication__Group_1_0_0__0 ) ) | ( ( rule__Multiplication__Group_1_0_1__0 ) ) );", 3, 0, input);
+                    new NoViableAltException("416:1: rule__Multiplication__Alternatives_1_0 : ( ( ( rule__Multiplication__Group_1_0_0__0 ) ) | ( ( rule__Multiplication__Group_1_0_1__0 ) ) );", 3, 0, input);
 
                 throw nvae;
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:420:1: ( ( rule__Multiplication__Group_1_0_0__0 ) )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:421:1: ( ( rule__Multiplication__Group_1_0_0__0 ) )
                     {
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:420:1: ( ( rule__Multiplication__Group_1_0_0__0 ) )
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:421:1: ( rule__Multiplication__Group_1_0_0__0 )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:421:1: ( ( rule__Multiplication__Group_1_0_0__0 ) )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:422:1: ( rule__Multiplication__Group_1_0_0__0 )
                     {
                      before(grammarAccess.getMultiplicationAccess().getGroup_1_0_0()); 
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:422:1: ( rule__Multiplication__Group_1_0_0__0 )
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:422:2: rule__Multiplication__Group_1_0_0__0
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:423:1: ( rule__Multiplication__Group_1_0_0__0 )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:423:2: rule__Multiplication__Group_1_0_0__0
                     {
                     pushFollow(FOLLOW_rule__Multiplication__Group_1_0_0__0_in_rule__Multiplication__Alternatives_1_0832);
                     rule__Multiplication__Group_1_0_0__0();
@@ -1096,14 +1097,14 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:426:6: ( ( rule__Multiplication__Group_1_0_1__0 ) )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:427:6: ( ( rule__Multiplication__Group_1_0_1__0 ) )
                     {
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:426:6: ( ( rule__Multiplication__Group_1_0_1__0 ) )
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:427:1: ( rule__Multiplication__Group_1_0_1__0 )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:427:6: ( ( rule__Multiplication__Group_1_0_1__0 ) )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:428:1: ( rule__Multiplication__Group_1_0_1__0 )
                     {
                      before(grammarAccess.getMultiplicationAccess().getGroup_1_0_1()); 
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:428:1: ( rule__Multiplication__Group_1_0_1__0 )
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:428:2: rule__Multiplication__Group_1_0_1__0
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:429:1: ( rule__Multiplication__Group_1_0_1__0 )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:429:2: rule__Multiplication__Group_1_0_1__0
                     {
                     pushFollow(FOLLOW_rule__Multiplication__Group_1_0_1__0_in_rule__Multiplication__Alternatives_1_0850);
                     rule__Multiplication__Group_1_0_1__0();
@@ -1137,13 +1138,13 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Alternatives
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:437:1: rule__PrimaryExpression__Alternatives : ( ( ( rule__PrimaryExpression__Group_0__0 ) ) | ( ( rule__PrimaryExpression__Group_1__0 ) ) | ( ( rule__PrimaryExpression__Group_2__0 ) ) );
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:438:1: rule__PrimaryExpression__Alternatives : ( ( ( rule__PrimaryExpression__Group_0__0 ) ) | ( ( rule__PrimaryExpression__Group_1__0 ) ) | ( ( rule__PrimaryExpression__Group_2__0 ) ) );
     public final void rule__PrimaryExpression__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:441:1: ( ( ( rule__PrimaryExpression__Group_0__0 ) ) | ( ( rule__PrimaryExpression__Group_1__0 ) ) | ( ( rule__PrimaryExpression__Group_2__0 ) ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:442:1: ( ( ( rule__PrimaryExpression__Group_0__0 ) ) | ( ( rule__PrimaryExpression__Group_1__0 ) ) | ( ( rule__PrimaryExpression__Group_2__0 ) ) )
             int alt4=3;
             switch ( input.LA(1) ) {
             case 19:
@@ -1163,21 +1164,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("437:1: rule__PrimaryExpression__Alternatives : ( ( ( rule__PrimaryExpression__Group_0__0 ) ) | ( ( rule__PrimaryExpression__Group_1__0 ) ) | ( ( rule__PrimaryExpression__Group_2__0 ) ) );", 4, 0, input);
+                    new NoViableAltException("438:1: rule__PrimaryExpression__Alternatives : ( ( ( rule__PrimaryExpression__Group_0__0 ) ) | ( ( rule__PrimaryExpression__Group_1__0 ) ) | ( ( rule__PrimaryExpression__Group_2__0 ) ) );", 4, 0, input);
 
                 throw nvae;
             }
 
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:442:1: ( ( rule__PrimaryExpression__Group_0__0 ) )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:443:1: ( ( rule__PrimaryExpression__Group_0__0 ) )
                     {
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:442:1: ( ( rule__PrimaryExpression__Group_0__0 ) )
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:443:1: ( rule__PrimaryExpression__Group_0__0 )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:443:1: ( ( rule__PrimaryExpression__Group_0__0 ) )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:444:1: ( rule__PrimaryExpression__Group_0__0 )
                     {
                      before(grammarAccess.getPrimaryExpressionAccess().getGroup_0()); 
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:444:1: ( rule__PrimaryExpression__Group_0__0 )
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:444:2: rule__PrimaryExpression__Group_0__0
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:445:1: ( rule__PrimaryExpression__Group_0__0 )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:445:2: rule__PrimaryExpression__Group_0__0
                     {
                     pushFollow(FOLLOW_rule__PrimaryExpression__Group_0__0_in_rule__PrimaryExpression__Alternatives883);
                     rule__PrimaryExpression__Group_0__0();
@@ -1194,14 +1195,14 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:448:6: ( ( rule__PrimaryExpression__Group_1__0 ) )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:449:6: ( ( rule__PrimaryExpression__Group_1__0 ) )
                     {
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:448:6: ( ( rule__PrimaryExpression__Group_1__0 ) )
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:449:1: ( rule__PrimaryExpression__Group_1__0 )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:449:6: ( ( rule__PrimaryExpression__Group_1__0 ) )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:450:1: ( rule__PrimaryExpression__Group_1__0 )
                     {
                      before(grammarAccess.getPrimaryExpressionAccess().getGroup_1()); 
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:450:1: ( rule__PrimaryExpression__Group_1__0 )
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:450:2: rule__PrimaryExpression__Group_1__0
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:451:1: ( rule__PrimaryExpression__Group_1__0 )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:451:2: rule__PrimaryExpression__Group_1__0
                     {
                     pushFollow(FOLLOW_rule__PrimaryExpression__Group_1__0_in_rule__PrimaryExpression__Alternatives901);
                     rule__PrimaryExpression__Group_1__0();
@@ -1218,14 +1219,14 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:454:6: ( ( rule__PrimaryExpression__Group_2__0 ) )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:455:6: ( ( rule__PrimaryExpression__Group_2__0 ) )
                     {
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:454:6: ( ( rule__PrimaryExpression__Group_2__0 ) )
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:455:1: ( rule__PrimaryExpression__Group_2__0 )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:455:6: ( ( rule__PrimaryExpression__Group_2__0 ) )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:456:1: ( rule__PrimaryExpression__Group_2__0 )
                     {
                      before(grammarAccess.getPrimaryExpressionAccess().getGroup_2()); 
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:456:1: ( rule__PrimaryExpression__Group_2__0 )
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:456:2: rule__PrimaryExpression__Group_2__0
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:457:1: ( rule__PrimaryExpression__Group_2__0 )
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:457:2: rule__PrimaryExpression__Group_2__0
                     {
                     pushFollow(FOLLOW_rule__PrimaryExpression__Group_2__0_in_rule__PrimaryExpression__Alternatives919);
                     rule__PrimaryExpression__Group_2__0();
@@ -1259,17 +1260,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Module__Group__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:467:1: rule__Module__Group__0 : ( 'module' ) rule__Module__Group__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:468:1: rule__Module__Group__0 : ( 'module' ) rule__Module__Group__1 ;
     public final void rule__Module__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:471:1: ( ( 'module' ) rule__Module__Group__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:472:1: ( 'module' ) rule__Module__Group__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:472:1: ( ( 'module' ) rule__Module__Group__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:473:1: ( 'module' ) rule__Module__Group__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:472:1: ( 'module' )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:473:1: 'module'
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:473:1: ( 'module' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:474:1: 'module'
             {
              before(grammarAccess.getModuleAccess().getModuleKeyword_0()); 
             match(input,12,FOLLOW_12_in_rule__Module__Group__0955); 
@@ -1300,21 +1301,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Module__Group__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:487:1: rule__Module__Group__1 : ( ( rule__Module__NameAssignment_1 ) ) rule__Module__Group__2 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:488:1: rule__Module__Group__1 : ( ( rule__Module__NameAssignment_1 ) ) rule__Module__Group__2 ;
     public final void rule__Module__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:491:1: ( ( ( rule__Module__NameAssignment_1 ) ) rule__Module__Group__2 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:492:1: ( ( rule__Module__NameAssignment_1 ) ) rule__Module__Group__2
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:492:1: ( ( ( rule__Module__NameAssignment_1 ) ) rule__Module__Group__2 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:493:1: ( ( rule__Module__NameAssignment_1 ) ) rule__Module__Group__2
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:492:1: ( ( rule__Module__NameAssignment_1 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:493:1: ( rule__Module__NameAssignment_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:493:1: ( ( rule__Module__NameAssignment_1 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:494:1: ( rule__Module__NameAssignment_1 )
             {
              before(grammarAccess.getModuleAccess().getNameAssignment_1()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:494:1: ( rule__Module__NameAssignment_1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:494:2: rule__Module__NameAssignment_1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:495:1: ( rule__Module__NameAssignment_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:495:2: rule__Module__NameAssignment_1
             {
             pushFollow(FOLLOW_rule__Module__NameAssignment_1_in_rule__Module__Group__1993);
             rule__Module__NameAssignment_1();
@@ -1350,20 +1351,20 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Module__Group__2
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:505:1: rule__Module__Group__2 : ( ( rule__Module__ImportsAssignment_2 )* ) rule__Module__Group__3 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:506:1: rule__Module__Group__2 : ( ( rule__Module__ImportsAssignment_2 )* ) rule__Module__Group__3 ;
     public final void rule__Module__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:509:1: ( ( ( rule__Module__ImportsAssignment_2 )* ) rule__Module__Group__3 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:510:1: ( ( rule__Module__ImportsAssignment_2 )* ) rule__Module__Group__3
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:510:1: ( ( ( rule__Module__ImportsAssignment_2 )* ) rule__Module__Group__3 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:511:1: ( ( rule__Module__ImportsAssignment_2 )* ) rule__Module__Group__3
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:510:1: ( ( rule__Module__ImportsAssignment_2 )* )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:511:1: ( rule__Module__ImportsAssignment_2 )*
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:511:1: ( ( rule__Module__ImportsAssignment_2 )* )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:512:1: ( rule__Module__ImportsAssignment_2 )*
             {
              before(grammarAccess.getModuleAccess().getImportsAssignment_2()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:512:1: ( rule__Module__ImportsAssignment_2 )*
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:513:1: ( rule__Module__ImportsAssignment_2 )*
             loop5:
             do {
                 int alt5=2;
@@ -1376,7 +1377,7 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
                 switch (alt5) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:512:2: rule__Module__ImportsAssignment_2
+            	    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:513:2: rule__Module__ImportsAssignment_2
             	    {
             	    pushFollow(FOLLOW_rule__Module__ImportsAssignment_2_in_rule__Module__Group__21030);
             	    rule__Module__ImportsAssignment_2();
@@ -1418,20 +1419,20 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Module__Group__3
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:523:1: rule__Module__Group__3 : ( ( rule__Module__StatementsAssignment_3 )* ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:524:1: rule__Module__Group__3 : ( ( rule__Module__StatementsAssignment_3 )* ) ;
     public final void rule__Module__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:527:1: ( ( ( rule__Module__StatementsAssignment_3 )* ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:528:1: ( ( rule__Module__StatementsAssignment_3 )* )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:528:1: ( ( ( rule__Module__StatementsAssignment_3 )* ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:529:1: ( ( rule__Module__StatementsAssignment_3 )* )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:528:1: ( ( rule__Module__StatementsAssignment_3 )* )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:529:1: ( rule__Module__StatementsAssignment_3 )*
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:529:1: ( ( rule__Module__StatementsAssignment_3 )* )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:530:1: ( rule__Module__StatementsAssignment_3 )*
             {
              before(grammarAccess.getModuleAccess().getStatementsAssignment_3()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:530:1: ( rule__Module__StatementsAssignment_3 )*
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:531:1: ( rule__Module__StatementsAssignment_3 )*
             loop6:
             do {
                 int alt6=2;
@@ -1444,7 +1445,7 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
                 switch (alt6) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:530:2: rule__Module__StatementsAssignment_3
+            	    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:531:2: rule__Module__StatementsAssignment_3
             	    {
             	    pushFollow(FOLLOW_rule__Module__StatementsAssignment_3_in_rule__Module__Group__31068);
             	    rule__Module__StatementsAssignment_3();
@@ -1482,17 +1483,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Import__Group__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:548:1: rule__Import__Group__0 : ( 'import' ) rule__Import__Group__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:549:1: rule__Import__Group__0 : ( 'import' ) rule__Import__Group__1 ;
     public final void rule__Import__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:552:1: ( ( 'import' ) rule__Import__Group__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:553:1: ( 'import' ) rule__Import__Group__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:553:1: ( ( 'import' ) rule__Import__Group__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:554:1: ( 'import' ) rule__Import__Group__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:553:1: ( 'import' )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:554:1: 'import'
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:554:1: ( 'import' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:555:1: 'import'
             {
              before(grammarAccess.getImportAccess().getImportKeyword_0()); 
             match(input,13,FOLLOW_13_in_rule__Import__Group__01112); 
@@ -1523,21 +1524,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Import__Group__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:568:1: rule__Import__Group__1 : ( ( rule__Import__ImportedNamespaceAssignment_1 ) ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:569:1: rule__Import__Group__1 : ( ( rule__Import__ImportedNamespaceAssignment_1 ) ) ;
     public final void rule__Import__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:572:1: ( ( ( rule__Import__ImportedNamespaceAssignment_1 ) ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:573:1: ( ( rule__Import__ImportedNamespaceAssignment_1 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:573:1: ( ( ( rule__Import__ImportedNamespaceAssignment_1 ) ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:574:1: ( ( rule__Import__ImportedNamespaceAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:573:1: ( ( rule__Import__ImportedNamespaceAssignment_1 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:574:1: ( rule__Import__ImportedNamespaceAssignment_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:574:1: ( ( rule__Import__ImportedNamespaceAssignment_1 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:575:1: ( rule__Import__ImportedNamespaceAssignment_1 )
             {
              before(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:575:1: ( rule__Import__ImportedNamespaceAssignment_1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:575:2: rule__Import__ImportedNamespaceAssignment_1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:576:1: ( rule__Import__ImportedNamespaceAssignment_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:576:2: rule__Import__ImportedNamespaceAssignment_1
             {
             pushFollow(FOLLOW_rule__Import__ImportedNamespaceAssignment_1_in_rule__Import__Group__11150);
             rule__Import__ImportedNamespaceAssignment_1();
@@ -1569,17 +1570,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__ImportName__Group__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:589:1: rule__ImportName__Group__0 : ( RULE_ID ) rule__ImportName__Group__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:590:1: rule__ImportName__Group__0 : ( RULE_ID ) rule__ImportName__Group__1 ;
     public final void rule__ImportName__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:593:1: ( ( RULE_ID ) rule__ImportName__Group__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:594:1: ( RULE_ID ) rule__ImportName__Group__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:594:1: ( ( RULE_ID ) rule__ImportName__Group__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:595:1: ( RULE_ID ) rule__ImportName__Group__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:594:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:595:1: RULE_ID
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:595:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:596:1: RULE_ID
             {
              before(grammarAccess.getImportNameAccess().getIDTerminalRuleCall_0()); 
             match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__ImportName__Group__01188); 
@@ -1610,20 +1611,20 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__ImportName__Group__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:607:1: rule__ImportName__Group__1 : ( ( rule__ImportName__Group_1__0 )? ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:608:1: rule__ImportName__Group__1 : ( ( rule__ImportName__Group_1__0 )? ) ;
     public final void rule__ImportName__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:611:1: ( ( ( rule__ImportName__Group_1__0 )? ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:612:1: ( ( rule__ImportName__Group_1__0 )? )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:612:1: ( ( ( rule__ImportName__Group_1__0 )? ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:613:1: ( ( rule__ImportName__Group_1__0 )? )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:612:1: ( ( rule__ImportName__Group_1__0 )? )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:613:1: ( rule__ImportName__Group_1__0 )?
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:613:1: ( ( rule__ImportName__Group_1__0 )? )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:614:1: ( rule__ImportName__Group_1__0 )?
             {
              before(grammarAccess.getImportNameAccess().getGroup_1()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:614:1: ( rule__ImportName__Group_1__0 )?
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:615:1: ( rule__ImportName__Group_1__0 )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1632,7 +1633,7 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:614:2: rule__ImportName__Group_1__0
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:615:2: rule__ImportName__Group_1__0
                     {
                     pushFollow(FOLLOW_rule__ImportName__Group_1__0_in_rule__ImportName__Group__11224);
                     rule__ImportName__Group_1__0();
@@ -1667,17 +1668,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__ImportName__Group_1__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:628:1: rule__ImportName__Group_1__0 : ( '.' ) rule__ImportName__Group_1__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:629:1: rule__ImportName__Group_1__0 : ( '.' ) rule__ImportName__Group_1__1 ;
     public final void rule__ImportName__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:632:1: ( ( '.' ) rule__ImportName__Group_1__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:633:1: ( '.' ) rule__ImportName__Group_1__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:633:1: ( ( '.' ) rule__ImportName__Group_1__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:634:1: ( '.' ) rule__ImportName__Group_1__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:633:1: ( '.' )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:634:1: '.'
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:634:1: ( '.' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:635:1: '.'
             {
              before(grammarAccess.getImportNameAccess().getFullStopKeyword_1_0()); 
             match(input,14,FOLLOW_14_in_rule__ImportName__Group_1__01264); 
@@ -1708,17 +1709,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__ImportName__Group_1__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:648:1: rule__ImportName__Group_1__1 : ( '*' ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:649:1: rule__ImportName__Group_1__1 : ( '*' ) ;
     public final void rule__ImportName__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:652:1: ( ( '*' ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:653:1: ( '*' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:653:1: ( ( '*' ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:654:1: ( '*' )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:653:1: ( '*' )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:654:1: '*'
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:654:1: ( '*' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:655:1: '*'
             {
              before(grammarAccess.getImportNameAccess().getAsteriskKeyword_1_1()); 
             match(input,15,FOLLOW_15_in_rule__ImportName__Group_1__11303); 
@@ -1745,17 +1746,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Definition__Group__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:671:1: rule__Definition__Group__0 : ( 'def' ) rule__Definition__Group__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:672:1: rule__Definition__Group__0 : ( 'def' ) rule__Definition__Group__1 ;
     public final void rule__Definition__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:675:1: ( ( 'def' ) rule__Definition__Group__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:676:1: ( 'def' ) rule__Definition__Group__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:676:1: ( ( 'def' ) rule__Definition__Group__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:677:1: ( 'def' ) rule__Definition__Group__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:676:1: ( 'def' )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:677:1: 'def'
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:677:1: ( 'def' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:678:1: 'def'
             {
              before(grammarAccess.getDefinitionAccess().getDefKeyword_0()); 
             match(input,16,FOLLOW_16_in_rule__Definition__Group__01343); 
@@ -1786,21 +1787,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Definition__Group__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:691:1: rule__Definition__Group__1 : ( ( rule__Definition__NameAssignment_1 ) ) rule__Definition__Group__2 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:692:1: rule__Definition__Group__1 : ( ( rule__Definition__NameAssignment_1 ) ) rule__Definition__Group__2 ;
     public final void rule__Definition__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:695:1: ( ( ( rule__Definition__NameAssignment_1 ) ) rule__Definition__Group__2 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:696:1: ( ( rule__Definition__NameAssignment_1 ) ) rule__Definition__Group__2
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:696:1: ( ( ( rule__Definition__NameAssignment_1 ) ) rule__Definition__Group__2 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:697:1: ( ( rule__Definition__NameAssignment_1 ) ) rule__Definition__Group__2
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:696:1: ( ( rule__Definition__NameAssignment_1 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:697:1: ( rule__Definition__NameAssignment_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:697:1: ( ( rule__Definition__NameAssignment_1 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:698:1: ( rule__Definition__NameAssignment_1 )
             {
              before(grammarAccess.getDefinitionAccess().getNameAssignment_1()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:698:1: ( rule__Definition__NameAssignment_1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:698:2: rule__Definition__NameAssignment_1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:699:1: ( rule__Definition__NameAssignment_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:699:2: rule__Definition__NameAssignment_1
             {
             pushFollow(FOLLOW_rule__Definition__NameAssignment_1_in_rule__Definition__Group__11381);
             rule__Definition__NameAssignment_1();
@@ -1836,20 +1837,20 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Definition__Group__2
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:709:1: rule__Definition__Group__2 : ( ( rule__Definition__Group_2__0 )? ) rule__Definition__Group__3 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:710:1: rule__Definition__Group__2 : ( ( rule__Definition__Group_2__0 )? ) rule__Definition__Group__3 ;
     public final void rule__Definition__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:713:1: ( ( ( rule__Definition__Group_2__0 )? ) rule__Definition__Group__3 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:714:1: ( ( rule__Definition__Group_2__0 )? ) rule__Definition__Group__3
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:714:1: ( ( ( rule__Definition__Group_2__0 )? ) rule__Definition__Group__3 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:715:1: ( ( rule__Definition__Group_2__0 )? ) rule__Definition__Group__3
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:714:1: ( ( rule__Definition__Group_2__0 )? )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:715:1: ( rule__Definition__Group_2__0 )?
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:715:1: ( ( rule__Definition__Group_2__0 )? )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:716:1: ( rule__Definition__Group_2__0 )?
             {
              before(grammarAccess.getDefinitionAccess().getGroup_2()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:716:1: ( rule__Definition__Group_2__0 )?
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:717:1: ( rule__Definition__Group_2__0 )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1858,7 +1859,7 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:716:2: rule__Definition__Group_2__0
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:717:2: rule__Definition__Group_2__0
                     {
                     pushFollow(FOLLOW_rule__Definition__Group_2__0_in_rule__Definition__Group__21418);
                     rule__Definition__Group_2__0();
@@ -1897,17 +1898,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Definition__Group__3
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:727:1: rule__Definition__Group__3 : ( ':' ) rule__Definition__Group__4 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:728:1: rule__Definition__Group__3 : ( ':' ) rule__Definition__Group__4 ;
     public final void rule__Definition__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:731:1: ( ( ':' ) rule__Definition__Group__4 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:732:1: ( ':' ) rule__Definition__Group__4
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:732:1: ( ( ':' ) rule__Definition__Group__4 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:733:1: ( ':' ) rule__Definition__Group__4
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:732:1: ( ':' )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:733:1: ':'
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:733:1: ( ':' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:734:1: ':'
             {
              before(grammarAccess.getDefinitionAccess().getColonKeyword_3()); 
             match(input,17,FOLLOW_17_in_rule__Definition__Group__31457); 
@@ -1938,21 +1939,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Definition__Group__4
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:747:1: rule__Definition__Group__4 : ( ( rule__Definition__ExprAssignment_4 ) ) rule__Definition__Group__5 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:748:1: rule__Definition__Group__4 : ( ( rule__Definition__ExprAssignment_4 ) ) rule__Definition__Group__5 ;
     public final void rule__Definition__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:751:1: ( ( ( rule__Definition__ExprAssignment_4 ) ) rule__Definition__Group__5 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:752:1: ( ( rule__Definition__ExprAssignment_4 ) ) rule__Definition__Group__5
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:752:1: ( ( ( rule__Definition__ExprAssignment_4 ) ) rule__Definition__Group__5 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:753:1: ( ( rule__Definition__ExprAssignment_4 ) ) rule__Definition__Group__5
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:752:1: ( ( rule__Definition__ExprAssignment_4 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:753:1: ( rule__Definition__ExprAssignment_4 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:753:1: ( ( rule__Definition__ExprAssignment_4 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:754:1: ( rule__Definition__ExprAssignment_4 )
             {
              before(grammarAccess.getDefinitionAccess().getExprAssignment_4()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:754:1: ( rule__Definition__ExprAssignment_4 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:754:2: rule__Definition__ExprAssignment_4
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:755:1: ( rule__Definition__ExprAssignment_4 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:755:2: rule__Definition__ExprAssignment_4
             {
             pushFollow(FOLLOW_rule__Definition__ExprAssignment_4_in_rule__Definition__Group__41495);
             rule__Definition__ExprAssignment_4();
@@ -1988,17 +1989,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Definition__Group__5
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:765:1: rule__Definition__Group__5 : ( ';' ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:766:1: rule__Definition__Group__5 : ( ';' ) ;
     public final void rule__Definition__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:769:1: ( ( ';' ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:770:1: ( ';' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:770:1: ( ( ';' ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:771:1: ( ';' )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:770:1: ( ';' )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:771:1: ';'
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:771:1: ( ';' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:772:1: ';'
             {
              before(grammarAccess.getDefinitionAccess().getSemicolonKeyword_5()); 
             match(input,18,FOLLOW_18_in_rule__Definition__Group__51533); 
@@ -2025,17 +2026,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Definition__Group_2__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:796:1: rule__Definition__Group_2__0 : ( '(' ) rule__Definition__Group_2__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:797:1: rule__Definition__Group_2__0 : ( '(' ) rule__Definition__Group_2__1 ;
     public final void rule__Definition__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:800:1: ( ( '(' ) rule__Definition__Group_2__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:801:1: ( '(' ) rule__Definition__Group_2__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:801:1: ( ( '(' ) rule__Definition__Group_2__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:802:1: ( '(' ) rule__Definition__Group_2__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:801:1: ( '(' )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:802:1: '('
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:802:1: ( '(' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:803:1: '('
             {
              before(grammarAccess.getDefinitionAccess().getLeftParenthesisKeyword_2_0()); 
             match(input,19,FOLLOW_19_in_rule__Definition__Group_2__01581); 
@@ -2066,21 +2067,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Definition__Group_2__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:816:1: rule__Definition__Group_2__1 : ( ( rule__Definition__ArgsAssignment_2_1 ) ) rule__Definition__Group_2__2 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:817:1: rule__Definition__Group_2__1 : ( ( rule__Definition__ArgsAssignment_2_1 ) ) rule__Definition__Group_2__2 ;
     public final void rule__Definition__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:820:1: ( ( ( rule__Definition__ArgsAssignment_2_1 ) ) rule__Definition__Group_2__2 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:821:1: ( ( rule__Definition__ArgsAssignment_2_1 ) ) rule__Definition__Group_2__2
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:821:1: ( ( ( rule__Definition__ArgsAssignment_2_1 ) ) rule__Definition__Group_2__2 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:822:1: ( ( rule__Definition__ArgsAssignment_2_1 ) ) rule__Definition__Group_2__2
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:821:1: ( ( rule__Definition__ArgsAssignment_2_1 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:822:1: ( rule__Definition__ArgsAssignment_2_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:822:1: ( ( rule__Definition__ArgsAssignment_2_1 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:823:1: ( rule__Definition__ArgsAssignment_2_1 )
             {
              before(grammarAccess.getDefinitionAccess().getArgsAssignment_2_1()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:823:1: ( rule__Definition__ArgsAssignment_2_1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:823:2: rule__Definition__ArgsAssignment_2_1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:824:1: ( rule__Definition__ArgsAssignment_2_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:824:2: rule__Definition__ArgsAssignment_2_1
             {
             pushFollow(FOLLOW_rule__Definition__ArgsAssignment_2_1_in_rule__Definition__Group_2__11619);
             rule__Definition__ArgsAssignment_2_1();
@@ -2116,20 +2117,20 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Definition__Group_2__2
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:834:1: rule__Definition__Group_2__2 : ( ( rule__Definition__Group_2_2__0 )* ) rule__Definition__Group_2__3 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:835:1: rule__Definition__Group_2__2 : ( ( rule__Definition__Group_2_2__0 )* ) rule__Definition__Group_2__3 ;
     public final void rule__Definition__Group_2__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:838:1: ( ( ( rule__Definition__Group_2_2__0 )* ) rule__Definition__Group_2__3 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:839:1: ( ( rule__Definition__Group_2_2__0 )* ) rule__Definition__Group_2__3
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:839:1: ( ( ( rule__Definition__Group_2_2__0 )* ) rule__Definition__Group_2__3 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:840:1: ( ( rule__Definition__Group_2_2__0 )* ) rule__Definition__Group_2__3
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:839:1: ( ( rule__Definition__Group_2_2__0 )* )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:840:1: ( rule__Definition__Group_2_2__0 )*
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:840:1: ( ( rule__Definition__Group_2_2__0 )* )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:841:1: ( rule__Definition__Group_2_2__0 )*
             {
              before(grammarAccess.getDefinitionAccess().getGroup_2_2()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:841:1: ( rule__Definition__Group_2_2__0 )*
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:842:1: ( rule__Definition__Group_2_2__0 )*
             loop9:
             do {
                 int alt9=2;
@@ -2142,7 +2143,7 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
                 switch (alt9) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:841:2: rule__Definition__Group_2_2__0
+            	    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:842:2: rule__Definition__Group_2_2__0
             	    {
             	    pushFollow(FOLLOW_rule__Definition__Group_2_2__0_in_rule__Definition__Group_2__21656);
             	    rule__Definition__Group_2_2__0();
@@ -2184,17 +2185,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Definition__Group_2__3
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:852:1: rule__Definition__Group_2__3 : ( ')' ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:853:1: rule__Definition__Group_2__3 : ( ')' ) ;
     public final void rule__Definition__Group_2__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:856:1: ( ( ')' ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:857:1: ( ')' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:857:1: ( ( ')' ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:858:1: ( ')' )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:857:1: ( ')' )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:858:1: ')'
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:858:1: ( ')' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:859:1: ')'
             {
              before(grammarAccess.getDefinitionAccess().getRightParenthesisKeyword_2_3()); 
             match(input,20,FOLLOW_20_in_rule__Definition__Group_2__31695); 
@@ -2221,17 +2222,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Definition__Group_2_2__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:879:1: rule__Definition__Group_2_2__0 : ( ',' ) rule__Definition__Group_2_2__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:880:1: rule__Definition__Group_2_2__0 : ( ',' ) rule__Definition__Group_2_2__1 ;
     public final void rule__Definition__Group_2_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:883:1: ( ( ',' ) rule__Definition__Group_2_2__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:884:1: ( ',' ) rule__Definition__Group_2_2__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:884:1: ( ( ',' ) rule__Definition__Group_2_2__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:885:1: ( ',' ) rule__Definition__Group_2_2__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:884:1: ( ',' )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:885:1: ','
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:885:1: ( ',' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:886:1: ','
             {
              before(grammarAccess.getDefinitionAccess().getCommaKeyword_2_2_0()); 
             match(input,21,FOLLOW_21_in_rule__Definition__Group_2_2__01739); 
@@ -2262,21 +2263,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Definition__Group_2_2__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:899:1: rule__Definition__Group_2_2__1 : ( ( rule__Definition__ArgsAssignment_2_2_1 ) ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:900:1: rule__Definition__Group_2_2__1 : ( ( rule__Definition__ArgsAssignment_2_2_1 ) ) ;
     public final void rule__Definition__Group_2_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:903:1: ( ( ( rule__Definition__ArgsAssignment_2_2_1 ) ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:904:1: ( ( rule__Definition__ArgsAssignment_2_2_1 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:904:1: ( ( ( rule__Definition__ArgsAssignment_2_2_1 ) ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:905:1: ( ( rule__Definition__ArgsAssignment_2_2_1 ) )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:904:1: ( ( rule__Definition__ArgsAssignment_2_2_1 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:905:1: ( rule__Definition__ArgsAssignment_2_2_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:905:1: ( ( rule__Definition__ArgsAssignment_2_2_1 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:906:1: ( rule__Definition__ArgsAssignment_2_2_1 )
             {
              before(grammarAccess.getDefinitionAccess().getArgsAssignment_2_2_1()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:906:1: ( rule__Definition__ArgsAssignment_2_2_1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:906:2: rule__Definition__ArgsAssignment_2_2_1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:907:1: ( rule__Definition__ArgsAssignment_2_2_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:907:2: rule__Definition__ArgsAssignment_2_2_1
             {
             pushFollow(FOLLOW_rule__Definition__ArgsAssignment_2_2_1_in_rule__Definition__Group_2_2__11777);
             rule__Definition__ArgsAssignment_2_2_1();
@@ -2308,21 +2309,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Evaluation__Group__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:920:1: rule__Evaluation__Group__0 : ( ( rule__Evaluation__ExpressionAssignment_0 ) ) rule__Evaluation__Group__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:921:1: rule__Evaluation__Group__0 : ( ( rule__Evaluation__ExpressionAssignment_0 ) ) rule__Evaluation__Group__1 ;
     public final void rule__Evaluation__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:924:1: ( ( ( rule__Evaluation__ExpressionAssignment_0 ) ) rule__Evaluation__Group__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:925:1: ( ( rule__Evaluation__ExpressionAssignment_0 ) ) rule__Evaluation__Group__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:925:1: ( ( ( rule__Evaluation__ExpressionAssignment_0 ) ) rule__Evaluation__Group__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:926:1: ( ( rule__Evaluation__ExpressionAssignment_0 ) ) rule__Evaluation__Group__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:925:1: ( ( rule__Evaluation__ExpressionAssignment_0 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:926:1: ( rule__Evaluation__ExpressionAssignment_0 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:926:1: ( ( rule__Evaluation__ExpressionAssignment_0 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:927:1: ( rule__Evaluation__ExpressionAssignment_0 )
             {
              before(grammarAccess.getEvaluationAccess().getExpressionAssignment_0()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:927:1: ( rule__Evaluation__ExpressionAssignment_0 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:927:2: rule__Evaluation__ExpressionAssignment_0
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:928:1: ( rule__Evaluation__ExpressionAssignment_0 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:928:2: rule__Evaluation__ExpressionAssignment_0
             {
             pushFollow(FOLLOW_rule__Evaluation__ExpressionAssignment_0_in_rule__Evaluation__Group__01815);
             rule__Evaluation__ExpressionAssignment_0();
@@ -2358,17 +2359,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Evaluation__Group__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:938:1: rule__Evaluation__Group__1 : ( ';' ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:939:1: rule__Evaluation__Group__1 : ( ';' ) ;
     public final void rule__Evaluation__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:942:1: ( ( ';' ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:943:1: ( ';' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:943:1: ( ( ';' ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:944:1: ( ';' )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:943:1: ( ';' )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:944:1: ';'
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:944:1: ( ';' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:945:1: ';'
             {
              before(grammarAccess.getEvaluationAccess().getSemicolonKeyword_1()); 
             match(input,18,FOLLOW_18_in_rule__Evaluation__Group__11853); 
@@ -2395,17 +2396,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Addition__Group__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:961:1: rule__Addition__Group__0 : ( ruleMultiplication ) rule__Addition__Group__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:962:1: rule__Addition__Group__0 : ( ruleMultiplication ) rule__Addition__Group__1 ;
     public final void rule__Addition__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:965:1: ( ( ruleMultiplication ) rule__Addition__Group__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:966:1: ( ruleMultiplication ) rule__Addition__Group__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:966:1: ( ( ruleMultiplication ) rule__Addition__Group__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:967:1: ( ruleMultiplication ) rule__Addition__Group__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:966:1: ( ruleMultiplication )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:967:1: ruleMultiplication
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:967:1: ( ruleMultiplication )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:968:1: ruleMultiplication
             {
              before(grammarAccess.getAdditionAccess().getMultiplicationParserRuleCall_0()); 
             pushFollow(FOLLOW_ruleMultiplication_in_rule__Addition__Group__01892);
@@ -2439,20 +2440,20 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Addition__Group__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:979:1: rule__Addition__Group__1 : ( ( rule__Addition__Group_1__0 )* ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:980:1: rule__Addition__Group__1 : ( ( rule__Addition__Group_1__0 )* ) ;
     public final void rule__Addition__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:983:1: ( ( ( rule__Addition__Group_1__0 )* ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:984:1: ( ( rule__Addition__Group_1__0 )* )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:984:1: ( ( ( rule__Addition__Group_1__0 )* ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:985:1: ( ( rule__Addition__Group_1__0 )* )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:984:1: ( ( rule__Addition__Group_1__0 )* )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:985:1: ( rule__Addition__Group_1__0 )*
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:985:1: ( ( rule__Addition__Group_1__0 )* )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:986:1: ( rule__Addition__Group_1__0 )*
             {
              before(grammarAccess.getAdditionAccess().getGroup_1()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:986:1: ( rule__Addition__Group_1__0 )*
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:987:1: ( rule__Addition__Group_1__0 )*
             loop10:
             do {
                 int alt10=2;
@@ -2465,7 +2466,7 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
                 switch (alt10) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:986:2: rule__Addition__Group_1__0
+            	    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:987:2: rule__Addition__Group_1__0
             	    {
             	    pushFollow(FOLLOW_rule__Addition__Group_1__0_in_rule__Addition__Group__11928);
             	    rule__Addition__Group_1__0();
@@ -2503,21 +2504,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Addition__Group_1__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1000:1: rule__Addition__Group_1__0 : ( ( rule__Addition__Alternatives_1_0 ) ) rule__Addition__Group_1__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1001:1: rule__Addition__Group_1__0 : ( ( rule__Addition__Alternatives_1_0 ) ) rule__Addition__Group_1__1 ;
     public final void rule__Addition__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1004:1: ( ( ( rule__Addition__Alternatives_1_0 ) ) rule__Addition__Group_1__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1005:1: ( ( rule__Addition__Alternatives_1_0 ) ) rule__Addition__Group_1__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1005:1: ( ( ( rule__Addition__Alternatives_1_0 ) ) rule__Addition__Group_1__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1006:1: ( ( rule__Addition__Alternatives_1_0 ) ) rule__Addition__Group_1__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1005:1: ( ( rule__Addition__Alternatives_1_0 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1006:1: ( rule__Addition__Alternatives_1_0 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1006:1: ( ( rule__Addition__Alternatives_1_0 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1007:1: ( rule__Addition__Alternatives_1_0 )
             {
              before(grammarAccess.getAdditionAccess().getAlternatives_1_0()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1007:1: ( rule__Addition__Alternatives_1_0 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1007:2: rule__Addition__Alternatives_1_0
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1008:1: ( rule__Addition__Alternatives_1_0 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1008:2: rule__Addition__Alternatives_1_0
             {
             pushFollow(FOLLOW_rule__Addition__Alternatives_1_0_in_rule__Addition__Group_1__01967);
             rule__Addition__Alternatives_1_0();
@@ -2553,21 +2554,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Addition__Group_1__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1018:1: rule__Addition__Group_1__1 : ( ( rule__Addition__RightAssignment_1_1 ) ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1019:1: rule__Addition__Group_1__1 : ( ( rule__Addition__RightAssignment_1_1 ) ) ;
     public final void rule__Addition__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1022:1: ( ( ( rule__Addition__RightAssignment_1_1 ) ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1023:1: ( ( rule__Addition__RightAssignment_1_1 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1023:1: ( ( ( rule__Addition__RightAssignment_1_1 ) ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1024:1: ( ( rule__Addition__RightAssignment_1_1 ) )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1023:1: ( ( rule__Addition__RightAssignment_1_1 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1024:1: ( rule__Addition__RightAssignment_1_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1024:1: ( ( rule__Addition__RightAssignment_1_1 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1025:1: ( rule__Addition__RightAssignment_1_1 )
             {
              before(grammarAccess.getAdditionAccess().getRightAssignment_1_1()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1025:1: ( rule__Addition__RightAssignment_1_1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1025:2: rule__Addition__RightAssignment_1_1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1026:1: ( rule__Addition__RightAssignment_1_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1026:2: rule__Addition__RightAssignment_1_1
             {
             pushFollow(FOLLOW_rule__Addition__RightAssignment_1_1_in_rule__Addition__Group_1__12004);
             rule__Addition__RightAssignment_1_1();
@@ -2599,21 +2600,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Addition__Group_1_0_0__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1039:1: rule__Addition__Group_1_0_0__0 : ( () ) rule__Addition__Group_1_0_0__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1040:1: rule__Addition__Group_1_0_0__0 : ( () ) rule__Addition__Group_1_0_0__1 ;
     public final void rule__Addition__Group_1_0_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1043:1: ( ( () ) rule__Addition__Group_1_0_0__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1044:1: ( () ) rule__Addition__Group_1_0_0__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1044:1: ( ( () ) rule__Addition__Group_1_0_0__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1045:1: ( () ) rule__Addition__Group_1_0_0__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1044:1: ( () )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1045:1: ()
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1045:1: ( () )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1046:1: ()
             {
              before(grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1046:1: ()
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1048:1: 
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1047:1: ()
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1049:1: 
             {
             }
 
@@ -2644,17 +2645,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Addition__Group_1_0_0__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1059:1: rule__Addition__Group_1_0_0__1 : ( '+' ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1060:1: rule__Addition__Group_1_0_0__1 : ( '+' ) ;
     public final void rule__Addition__Group_1_0_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1063:1: ( ( '+' ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1064:1: ( '+' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1064:1: ( ( '+' ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1065:1: ( '+' )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1064:1: ( '+' )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1065:1: '+'
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1065:1: ( '+' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1066:1: '+'
             {
              before(grammarAccess.getAdditionAccess().getPlusSignKeyword_1_0_0_1()); 
             match(input,22,FOLLOW_22_in_rule__Addition__Group_1_0_0__12081); 
@@ -2681,21 +2682,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Addition__Group_1_0_1__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1082:1: rule__Addition__Group_1_0_1__0 : ( () ) rule__Addition__Group_1_0_1__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1083:1: rule__Addition__Group_1_0_1__0 : ( () ) rule__Addition__Group_1_0_1__1 ;
     public final void rule__Addition__Group_1_0_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1086:1: ( ( () ) rule__Addition__Group_1_0_1__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1087:1: ( () ) rule__Addition__Group_1_0_1__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1087:1: ( ( () ) rule__Addition__Group_1_0_1__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1088:1: ( () ) rule__Addition__Group_1_0_1__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1087:1: ( () )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1088:1: ()
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1088:1: ( () )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1089:1: ()
             {
              before(grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1089:1: ()
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1091:1: 
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1090:1: ()
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1092:1: 
             {
             }
 
@@ -2726,17 +2727,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Addition__Group_1_0_1__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1102:1: rule__Addition__Group_1_0_1__1 : ( '-' ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1103:1: rule__Addition__Group_1_0_1__1 : ( '-' ) ;
     public final void rule__Addition__Group_1_0_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1106:1: ( ( '-' ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1107:1: ( '-' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1107:1: ( ( '-' ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1108:1: ( '-' )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1107:1: ( '-' )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1108:1: '-'
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1108:1: ( '-' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1109:1: '-'
             {
              before(grammarAccess.getAdditionAccess().getHyphenMinusKeyword_1_0_1_1()); 
             match(input,23,FOLLOW_23_in_rule__Addition__Group_1_0_1__12159); 
@@ -2763,17 +2764,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Multiplication__Group__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1125:1: rule__Multiplication__Group__0 : ( rulePrimaryExpression ) rule__Multiplication__Group__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1126:1: rule__Multiplication__Group__0 : ( rulePrimaryExpression ) rule__Multiplication__Group__1 ;
     public final void rule__Multiplication__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1129:1: ( ( rulePrimaryExpression ) rule__Multiplication__Group__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1130:1: ( rulePrimaryExpression ) rule__Multiplication__Group__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1130:1: ( ( rulePrimaryExpression ) rule__Multiplication__Group__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1131:1: ( rulePrimaryExpression ) rule__Multiplication__Group__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1130:1: ( rulePrimaryExpression )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1131:1: rulePrimaryExpression
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1131:1: ( rulePrimaryExpression )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1132:1: rulePrimaryExpression
             {
              before(grammarAccess.getMultiplicationAccess().getPrimaryExpressionParserRuleCall_0()); 
             pushFollow(FOLLOW_rulePrimaryExpression_in_rule__Multiplication__Group__02198);
@@ -2807,20 +2808,20 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Multiplication__Group__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1143:1: rule__Multiplication__Group__1 : ( ( rule__Multiplication__Group_1__0 )* ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1144:1: rule__Multiplication__Group__1 : ( ( rule__Multiplication__Group_1__0 )* ) ;
     public final void rule__Multiplication__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1147:1: ( ( ( rule__Multiplication__Group_1__0 )* ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1148:1: ( ( rule__Multiplication__Group_1__0 )* )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1148:1: ( ( ( rule__Multiplication__Group_1__0 )* ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1149:1: ( ( rule__Multiplication__Group_1__0 )* )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1148:1: ( ( rule__Multiplication__Group_1__0 )* )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1149:1: ( rule__Multiplication__Group_1__0 )*
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1149:1: ( ( rule__Multiplication__Group_1__0 )* )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1150:1: ( rule__Multiplication__Group_1__0 )*
             {
              before(grammarAccess.getMultiplicationAccess().getGroup_1()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1150:1: ( rule__Multiplication__Group_1__0 )*
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1151:1: ( rule__Multiplication__Group_1__0 )*
             loop11:
             do {
                 int alt11=2;
@@ -2833,7 +2834,7 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
                 switch (alt11) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1150:2: rule__Multiplication__Group_1__0
+            	    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1151:2: rule__Multiplication__Group_1__0
             	    {
             	    pushFollow(FOLLOW_rule__Multiplication__Group_1__0_in_rule__Multiplication__Group__12234);
             	    rule__Multiplication__Group_1__0();
@@ -2871,21 +2872,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Multiplication__Group_1__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1164:1: rule__Multiplication__Group_1__0 : ( ( rule__Multiplication__Alternatives_1_0 ) ) rule__Multiplication__Group_1__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1165:1: rule__Multiplication__Group_1__0 : ( ( rule__Multiplication__Alternatives_1_0 ) ) rule__Multiplication__Group_1__1 ;
     public final void rule__Multiplication__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1168:1: ( ( ( rule__Multiplication__Alternatives_1_0 ) ) rule__Multiplication__Group_1__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1169:1: ( ( rule__Multiplication__Alternatives_1_0 ) ) rule__Multiplication__Group_1__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1169:1: ( ( ( rule__Multiplication__Alternatives_1_0 ) ) rule__Multiplication__Group_1__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1170:1: ( ( rule__Multiplication__Alternatives_1_0 ) ) rule__Multiplication__Group_1__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1169:1: ( ( rule__Multiplication__Alternatives_1_0 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1170:1: ( rule__Multiplication__Alternatives_1_0 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1170:1: ( ( rule__Multiplication__Alternatives_1_0 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1171:1: ( rule__Multiplication__Alternatives_1_0 )
             {
              before(grammarAccess.getMultiplicationAccess().getAlternatives_1_0()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1171:1: ( rule__Multiplication__Alternatives_1_0 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1171:2: rule__Multiplication__Alternatives_1_0
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1172:1: ( rule__Multiplication__Alternatives_1_0 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1172:2: rule__Multiplication__Alternatives_1_0
             {
             pushFollow(FOLLOW_rule__Multiplication__Alternatives_1_0_in_rule__Multiplication__Group_1__02273);
             rule__Multiplication__Alternatives_1_0();
@@ -2921,21 +2922,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Multiplication__Group_1__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1182:1: rule__Multiplication__Group_1__1 : ( ( rule__Multiplication__RightAssignment_1_1 ) ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1183:1: rule__Multiplication__Group_1__1 : ( ( rule__Multiplication__RightAssignment_1_1 ) ) ;
     public final void rule__Multiplication__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1186:1: ( ( ( rule__Multiplication__RightAssignment_1_1 ) ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1187:1: ( ( rule__Multiplication__RightAssignment_1_1 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1187:1: ( ( ( rule__Multiplication__RightAssignment_1_1 ) ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1188:1: ( ( rule__Multiplication__RightAssignment_1_1 ) )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1187:1: ( ( rule__Multiplication__RightAssignment_1_1 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1188:1: ( rule__Multiplication__RightAssignment_1_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1188:1: ( ( rule__Multiplication__RightAssignment_1_1 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1189:1: ( rule__Multiplication__RightAssignment_1_1 )
             {
              before(grammarAccess.getMultiplicationAccess().getRightAssignment_1_1()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1189:1: ( rule__Multiplication__RightAssignment_1_1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1189:2: rule__Multiplication__RightAssignment_1_1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1190:1: ( rule__Multiplication__RightAssignment_1_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1190:2: rule__Multiplication__RightAssignment_1_1
             {
             pushFollow(FOLLOW_rule__Multiplication__RightAssignment_1_1_in_rule__Multiplication__Group_1__12310);
             rule__Multiplication__RightAssignment_1_1();
@@ -2967,21 +2968,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Multiplication__Group_1_0_0__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1203:1: rule__Multiplication__Group_1_0_0__0 : ( () ) rule__Multiplication__Group_1_0_0__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1204:1: rule__Multiplication__Group_1_0_0__0 : ( () ) rule__Multiplication__Group_1_0_0__1 ;
     public final void rule__Multiplication__Group_1_0_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1207:1: ( ( () ) rule__Multiplication__Group_1_0_0__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1208:1: ( () ) rule__Multiplication__Group_1_0_0__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1208:1: ( ( () ) rule__Multiplication__Group_1_0_0__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1209:1: ( () ) rule__Multiplication__Group_1_0_0__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1208:1: ( () )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1209:1: ()
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1209:1: ( () )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1210:1: ()
             {
              before(grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1210:1: ()
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1212:1: 
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1211:1: ()
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1213:1: 
             {
             }
 
@@ -3012,17 +3013,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Multiplication__Group_1_0_0__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1223:1: rule__Multiplication__Group_1_0_0__1 : ( '*' ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1224:1: rule__Multiplication__Group_1_0_0__1 : ( '*' ) ;
     public final void rule__Multiplication__Group_1_0_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1227:1: ( ( '*' ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1228:1: ( '*' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1228:1: ( ( '*' ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1229:1: ( '*' )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1228:1: ( '*' )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1229:1: '*'
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1229:1: ( '*' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1230:1: '*'
             {
              before(grammarAccess.getMultiplicationAccess().getAsteriskKeyword_1_0_0_1()); 
             match(input,15,FOLLOW_15_in_rule__Multiplication__Group_1_0_0__12387); 
@@ -3049,21 +3050,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Multiplication__Group_1_0_1__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1246:1: rule__Multiplication__Group_1_0_1__0 : ( () ) rule__Multiplication__Group_1_0_1__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1247:1: rule__Multiplication__Group_1_0_1__0 : ( () ) rule__Multiplication__Group_1_0_1__1 ;
     public final void rule__Multiplication__Group_1_0_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1250:1: ( ( () ) rule__Multiplication__Group_1_0_1__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1251:1: ( () ) rule__Multiplication__Group_1_0_1__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1251:1: ( ( () ) rule__Multiplication__Group_1_0_1__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1252:1: ( () ) rule__Multiplication__Group_1_0_1__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1251:1: ( () )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1252:1: ()
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1252:1: ( () )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1253:1: ()
             {
              before(grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1253:1: ()
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1255:1: 
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1254:1: ()
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1256:1: 
             {
             }
 
@@ -3094,17 +3095,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Multiplication__Group_1_0_1__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1266:1: rule__Multiplication__Group_1_0_1__1 : ( '/' ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1267:1: rule__Multiplication__Group_1_0_1__1 : ( '/' ) ;
     public final void rule__Multiplication__Group_1_0_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1270:1: ( ( '/' ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1271:1: ( '/' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1271:1: ( ( '/' ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1272:1: ( '/' )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1271:1: ( '/' )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1272:1: '/'
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1272:1: ( '/' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1273:1: '/'
             {
              before(grammarAccess.getMultiplicationAccess().getSolidusKeyword_1_0_1_1()); 
             match(input,24,FOLLOW_24_in_rule__Multiplication__Group_1_0_1__12465); 
@@ -3131,17 +3132,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Group_0__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1289:1: rule__PrimaryExpression__Group_0__0 : ( '(' ) rule__PrimaryExpression__Group_0__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1290:1: rule__PrimaryExpression__Group_0__0 : ( '(' ) rule__PrimaryExpression__Group_0__1 ;
     public final void rule__PrimaryExpression__Group_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1293:1: ( ( '(' ) rule__PrimaryExpression__Group_0__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1294:1: ( '(' ) rule__PrimaryExpression__Group_0__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1294:1: ( ( '(' ) rule__PrimaryExpression__Group_0__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1295:1: ( '(' ) rule__PrimaryExpression__Group_0__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1294:1: ( '(' )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1295:1: '('
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1295:1: ( '(' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1296:1: '('
             {
              before(grammarAccess.getPrimaryExpressionAccess().getLeftParenthesisKeyword_0_0()); 
             match(input,19,FOLLOW_19_in_rule__PrimaryExpression__Group_0__02505); 
@@ -3172,17 +3173,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Group_0__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1309:1: rule__PrimaryExpression__Group_0__1 : ( ruleExpression ) rule__PrimaryExpression__Group_0__2 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1310:1: rule__PrimaryExpression__Group_0__1 : ( ruleExpression ) rule__PrimaryExpression__Group_0__2 ;
     public final void rule__PrimaryExpression__Group_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1313:1: ( ( ruleExpression ) rule__PrimaryExpression__Group_0__2 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1314:1: ( ruleExpression ) rule__PrimaryExpression__Group_0__2
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1314:1: ( ( ruleExpression ) rule__PrimaryExpression__Group_0__2 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1315:1: ( ruleExpression ) rule__PrimaryExpression__Group_0__2
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1314:1: ( ruleExpression )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1315:1: ruleExpression
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1315:1: ( ruleExpression )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1316:1: ruleExpression
             {
              before(grammarAccess.getPrimaryExpressionAccess().getExpressionParserRuleCall_0_1()); 
             pushFollow(FOLLOW_ruleExpression_in_rule__PrimaryExpression__Group_0__12543);
@@ -3216,17 +3217,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Group_0__2
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1327:1: rule__PrimaryExpression__Group_0__2 : ( ')' ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1328:1: rule__PrimaryExpression__Group_0__2 : ( ')' ) ;
     public final void rule__PrimaryExpression__Group_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1331:1: ( ( ')' ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1332:1: ( ')' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1332:1: ( ( ')' ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1333:1: ( ')' )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1332:1: ( ')' )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1333:1: ')'
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1333:1: ( ')' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1334:1: ')'
             {
              before(grammarAccess.getPrimaryExpressionAccess().getRightParenthesisKeyword_0_2()); 
             match(input,20,FOLLOW_20_in_rule__PrimaryExpression__Group_0__22580); 
@@ -3253,21 +3254,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Group_1__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1352:1: rule__PrimaryExpression__Group_1__0 : ( () ) rule__PrimaryExpression__Group_1__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1353:1: rule__PrimaryExpression__Group_1__0 : ( () ) rule__PrimaryExpression__Group_1__1 ;
     public final void rule__PrimaryExpression__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1356:1: ( ( () ) rule__PrimaryExpression__Group_1__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1357:1: ( () ) rule__PrimaryExpression__Group_1__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1357:1: ( ( () ) rule__PrimaryExpression__Group_1__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1358:1: ( () ) rule__PrimaryExpression__Group_1__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1357:1: ( () )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1358:1: ()
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1358:1: ( () )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1359:1: ()
             {
              before(grammarAccess.getPrimaryExpressionAccess().getNumberLiteralAction_1_0()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1359:1: ()
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1361:1: 
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1360:1: ()
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1362:1: 
             {
             }
 
@@ -3298,21 +3299,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Group_1__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1372:1: rule__PrimaryExpression__Group_1__1 : ( ( rule__PrimaryExpression__ValueAssignment_1_1 ) ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1373:1: rule__PrimaryExpression__Group_1__1 : ( ( rule__PrimaryExpression__ValueAssignment_1_1 ) ) ;
     public final void rule__PrimaryExpression__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1376:1: ( ( ( rule__PrimaryExpression__ValueAssignment_1_1 ) ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1377:1: ( ( rule__PrimaryExpression__ValueAssignment_1_1 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1377:1: ( ( ( rule__PrimaryExpression__ValueAssignment_1_1 ) ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1378:1: ( ( rule__PrimaryExpression__ValueAssignment_1_1 ) )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1377:1: ( ( rule__PrimaryExpression__ValueAssignment_1_1 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1378:1: ( rule__PrimaryExpression__ValueAssignment_1_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1378:1: ( ( rule__PrimaryExpression__ValueAssignment_1_1 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1379:1: ( rule__PrimaryExpression__ValueAssignment_1_1 )
             {
              before(grammarAccess.getPrimaryExpressionAccess().getValueAssignment_1_1()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1379:1: ( rule__PrimaryExpression__ValueAssignment_1_1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1379:2: rule__PrimaryExpression__ValueAssignment_1_1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1380:1: ( rule__PrimaryExpression__ValueAssignment_1_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1380:2: rule__PrimaryExpression__ValueAssignment_1_1
             {
             pushFollow(FOLLOW_rule__PrimaryExpression__ValueAssignment_1_1_in_rule__PrimaryExpression__Group_1__12659);
             rule__PrimaryExpression__ValueAssignment_1_1();
@@ -3344,21 +3345,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Group_2__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1393:1: rule__PrimaryExpression__Group_2__0 : ( () ) rule__PrimaryExpression__Group_2__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1394:1: rule__PrimaryExpression__Group_2__0 : ( () ) rule__PrimaryExpression__Group_2__1 ;
     public final void rule__PrimaryExpression__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1397:1: ( ( () ) rule__PrimaryExpression__Group_2__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1398:1: ( () ) rule__PrimaryExpression__Group_2__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1398:1: ( ( () ) rule__PrimaryExpression__Group_2__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1399:1: ( () ) rule__PrimaryExpression__Group_2__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1398:1: ( () )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1399:1: ()
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1399:1: ( () )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1400:1: ()
             {
              before(grammarAccess.getPrimaryExpressionAccess().getFunctionCallAction_2_0()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1400:1: ()
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1402:1: 
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1401:1: ()
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1403:1: 
             {
             }
 
@@ -3389,21 +3390,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Group_2__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1413:1: rule__PrimaryExpression__Group_2__1 : ( ( rule__PrimaryExpression__FuncAssignment_2_1 ) ) rule__PrimaryExpression__Group_2__2 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1414:1: rule__PrimaryExpression__Group_2__1 : ( ( rule__PrimaryExpression__FuncAssignment_2_1 ) ) rule__PrimaryExpression__Group_2__2 ;
     public final void rule__PrimaryExpression__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1417:1: ( ( ( rule__PrimaryExpression__FuncAssignment_2_1 ) ) rule__PrimaryExpression__Group_2__2 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1418:1: ( ( rule__PrimaryExpression__FuncAssignment_2_1 ) ) rule__PrimaryExpression__Group_2__2
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1418:1: ( ( ( rule__PrimaryExpression__FuncAssignment_2_1 ) ) rule__PrimaryExpression__Group_2__2 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1419:1: ( ( rule__PrimaryExpression__FuncAssignment_2_1 ) ) rule__PrimaryExpression__Group_2__2
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1418:1: ( ( rule__PrimaryExpression__FuncAssignment_2_1 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1419:1: ( rule__PrimaryExpression__FuncAssignment_2_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1419:1: ( ( rule__PrimaryExpression__FuncAssignment_2_1 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1420:1: ( rule__PrimaryExpression__FuncAssignment_2_1 )
             {
              before(grammarAccess.getPrimaryExpressionAccess().getFuncAssignment_2_1()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1420:1: ( rule__PrimaryExpression__FuncAssignment_2_1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1420:2: rule__PrimaryExpression__FuncAssignment_2_1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1421:1: ( rule__PrimaryExpression__FuncAssignment_2_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1421:2: rule__PrimaryExpression__FuncAssignment_2_1
             {
             pushFollow(FOLLOW_rule__PrimaryExpression__FuncAssignment_2_1_in_rule__PrimaryExpression__Group_2__12735);
             rule__PrimaryExpression__FuncAssignment_2_1();
@@ -3439,20 +3440,20 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Group_2__2
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1431:1: rule__PrimaryExpression__Group_2__2 : ( ( rule__PrimaryExpression__Group_2_2__0 )? ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1432:1: rule__PrimaryExpression__Group_2__2 : ( ( rule__PrimaryExpression__Group_2_2__0 )? ) ;
     public final void rule__PrimaryExpression__Group_2__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1435:1: ( ( ( rule__PrimaryExpression__Group_2_2__0 )? ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1436:1: ( ( rule__PrimaryExpression__Group_2_2__0 )? )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1436:1: ( ( ( rule__PrimaryExpression__Group_2_2__0 )? ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1437:1: ( ( rule__PrimaryExpression__Group_2_2__0 )? )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1436:1: ( ( rule__PrimaryExpression__Group_2_2__0 )? )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1437:1: ( rule__PrimaryExpression__Group_2_2__0 )?
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1437:1: ( ( rule__PrimaryExpression__Group_2_2__0 )? )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1438:1: ( rule__PrimaryExpression__Group_2_2__0 )?
             {
              before(grammarAccess.getPrimaryExpressionAccess().getGroup_2_2()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1438:1: ( rule__PrimaryExpression__Group_2_2__0 )?
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1439:1: ( rule__PrimaryExpression__Group_2_2__0 )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -3461,7 +3462,7 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
             }
             switch (alt12) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1438:2: rule__PrimaryExpression__Group_2_2__0
+                    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1439:2: rule__PrimaryExpression__Group_2_2__0
                     {
                     pushFollow(FOLLOW_rule__PrimaryExpression__Group_2_2__0_in_rule__PrimaryExpression__Group_2__22772);
                     rule__PrimaryExpression__Group_2_2__0();
@@ -3496,17 +3497,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Group_2_2__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1454:1: rule__PrimaryExpression__Group_2_2__0 : ( '(' ) rule__PrimaryExpression__Group_2_2__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1455:1: rule__PrimaryExpression__Group_2_2__0 : ( '(' ) rule__PrimaryExpression__Group_2_2__1 ;
     public final void rule__PrimaryExpression__Group_2_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1458:1: ( ( '(' ) rule__PrimaryExpression__Group_2_2__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1459:1: ( '(' ) rule__PrimaryExpression__Group_2_2__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1459:1: ( ( '(' ) rule__PrimaryExpression__Group_2_2__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1460:1: ( '(' ) rule__PrimaryExpression__Group_2_2__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1459:1: ( '(' )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1460:1: '('
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1460:1: ( '(' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1461:1: '('
             {
              before(grammarAccess.getPrimaryExpressionAccess().getLeftParenthesisKeyword_2_2_0()); 
             match(input,19,FOLLOW_19_in_rule__PrimaryExpression__Group_2_2__02814); 
@@ -3537,21 +3538,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Group_2_2__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1474:1: rule__PrimaryExpression__Group_2_2__1 : ( ( rule__PrimaryExpression__ArgsAssignment_2_2_1 ) ) rule__PrimaryExpression__Group_2_2__2 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1475:1: rule__PrimaryExpression__Group_2_2__1 : ( ( rule__PrimaryExpression__ArgsAssignment_2_2_1 ) ) rule__PrimaryExpression__Group_2_2__2 ;
     public final void rule__PrimaryExpression__Group_2_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1478:1: ( ( ( rule__PrimaryExpression__ArgsAssignment_2_2_1 ) ) rule__PrimaryExpression__Group_2_2__2 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1479:1: ( ( rule__PrimaryExpression__ArgsAssignment_2_2_1 ) ) rule__PrimaryExpression__Group_2_2__2
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1479:1: ( ( ( rule__PrimaryExpression__ArgsAssignment_2_2_1 ) ) rule__PrimaryExpression__Group_2_2__2 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1480:1: ( ( rule__PrimaryExpression__ArgsAssignment_2_2_1 ) ) rule__PrimaryExpression__Group_2_2__2
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1479:1: ( ( rule__PrimaryExpression__ArgsAssignment_2_2_1 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1480:1: ( rule__PrimaryExpression__ArgsAssignment_2_2_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1480:1: ( ( rule__PrimaryExpression__ArgsAssignment_2_2_1 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1481:1: ( rule__PrimaryExpression__ArgsAssignment_2_2_1 )
             {
              before(grammarAccess.getPrimaryExpressionAccess().getArgsAssignment_2_2_1()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1481:1: ( rule__PrimaryExpression__ArgsAssignment_2_2_1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1481:2: rule__PrimaryExpression__ArgsAssignment_2_2_1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1482:1: ( rule__PrimaryExpression__ArgsAssignment_2_2_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1482:2: rule__PrimaryExpression__ArgsAssignment_2_2_1
             {
             pushFollow(FOLLOW_rule__PrimaryExpression__ArgsAssignment_2_2_1_in_rule__PrimaryExpression__Group_2_2__12852);
             rule__PrimaryExpression__ArgsAssignment_2_2_1();
@@ -3587,20 +3588,20 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Group_2_2__2
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1492:1: rule__PrimaryExpression__Group_2_2__2 : ( ( rule__PrimaryExpression__Group_2_2_2__0 )* ) rule__PrimaryExpression__Group_2_2__3 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1493:1: rule__PrimaryExpression__Group_2_2__2 : ( ( rule__PrimaryExpression__Group_2_2_2__0 )* ) rule__PrimaryExpression__Group_2_2__3 ;
     public final void rule__PrimaryExpression__Group_2_2__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1496:1: ( ( ( rule__PrimaryExpression__Group_2_2_2__0 )* ) rule__PrimaryExpression__Group_2_2__3 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1497:1: ( ( rule__PrimaryExpression__Group_2_2_2__0 )* ) rule__PrimaryExpression__Group_2_2__3
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1497:1: ( ( ( rule__PrimaryExpression__Group_2_2_2__0 )* ) rule__PrimaryExpression__Group_2_2__3 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1498:1: ( ( rule__PrimaryExpression__Group_2_2_2__0 )* ) rule__PrimaryExpression__Group_2_2__3
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1497:1: ( ( rule__PrimaryExpression__Group_2_2_2__0 )* )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1498:1: ( rule__PrimaryExpression__Group_2_2_2__0 )*
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1498:1: ( ( rule__PrimaryExpression__Group_2_2_2__0 )* )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1499:1: ( rule__PrimaryExpression__Group_2_2_2__0 )*
             {
              before(grammarAccess.getPrimaryExpressionAccess().getGroup_2_2_2()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1499:1: ( rule__PrimaryExpression__Group_2_2_2__0 )*
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1500:1: ( rule__PrimaryExpression__Group_2_2_2__0 )*
             loop13:
             do {
                 int alt13=2;
@@ -3613,7 +3614,7 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
                 switch (alt13) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1499:2: rule__PrimaryExpression__Group_2_2_2__0
+            	    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1500:2: rule__PrimaryExpression__Group_2_2_2__0
             	    {
             	    pushFollow(FOLLOW_rule__PrimaryExpression__Group_2_2_2__0_in_rule__PrimaryExpression__Group_2_2__22889);
             	    rule__PrimaryExpression__Group_2_2_2__0();
@@ -3655,17 +3656,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Group_2_2__3
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1510:1: rule__PrimaryExpression__Group_2_2__3 : ( ')' ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1511:1: rule__PrimaryExpression__Group_2_2__3 : ( ')' ) ;
     public final void rule__PrimaryExpression__Group_2_2__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1514:1: ( ( ')' ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1515:1: ( ')' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1515:1: ( ( ')' ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1516:1: ( ')' )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1515:1: ( ')' )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1516:1: ')'
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1516:1: ( ')' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1517:1: ')'
             {
              before(grammarAccess.getPrimaryExpressionAccess().getRightParenthesisKeyword_2_2_3()); 
             match(input,20,FOLLOW_20_in_rule__PrimaryExpression__Group_2_2__32928); 
@@ -3692,17 +3693,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Group_2_2_2__0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1537:1: rule__PrimaryExpression__Group_2_2_2__0 : ( ',' ) rule__PrimaryExpression__Group_2_2_2__1 ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1538:1: rule__PrimaryExpression__Group_2_2_2__0 : ( ',' ) rule__PrimaryExpression__Group_2_2_2__1 ;
     public final void rule__PrimaryExpression__Group_2_2_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1541:1: ( ( ',' ) rule__PrimaryExpression__Group_2_2_2__1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1542:1: ( ',' ) rule__PrimaryExpression__Group_2_2_2__1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1542:1: ( ( ',' ) rule__PrimaryExpression__Group_2_2_2__1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1543:1: ( ',' ) rule__PrimaryExpression__Group_2_2_2__1
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1542:1: ( ',' )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1543:1: ','
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1543:1: ( ',' )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1544:1: ','
             {
              before(grammarAccess.getPrimaryExpressionAccess().getCommaKeyword_2_2_2_0()); 
             match(input,21,FOLLOW_21_in_rule__PrimaryExpression__Group_2_2_2__02972); 
@@ -3733,21 +3734,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Group_2_2_2__1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1557:1: rule__PrimaryExpression__Group_2_2_2__1 : ( ( rule__PrimaryExpression__ArgsAssignment_2_2_2_1 ) ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1558:1: rule__PrimaryExpression__Group_2_2_2__1 : ( ( rule__PrimaryExpression__ArgsAssignment_2_2_2_1 ) ) ;
     public final void rule__PrimaryExpression__Group_2_2_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1561:1: ( ( ( rule__PrimaryExpression__ArgsAssignment_2_2_2_1 ) ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1562:1: ( ( rule__PrimaryExpression__ArgsAssignment_2_2_2_1 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1562:1: ( ( ( rule__PrimaryExpression__ArgsAssignment_2_2_2_1 ) ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1563:1: ( ( rule__PrimaryExpression__ArgsAssignment_2_2_2_1 ) )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1562:1: ( ( rule__PrimaryExpression__ArgsAssignment_2_2_2_1 ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1563:1: ( rule__PrimaryExpression__ArgsAssignment_2_2_2_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1563:1: ( ( rule__PrimaryExpression__ArgsAssignment_2_2_2_1 ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1564:1: ( rule__PrimaryExpression__ArgsAssignment_2_2_2_1 )
             {
              before(grammarAccess.getPrimaryExpressionAccess().getArgsAssignment_2_2_2_1()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1564:1: ( rule__PrimaryExpression__ArgsAssignment_2_2_2_1 )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1564:2: rule__PrimaryExpression__ArgsAssignment_2_2_2_1
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1565:1: ( rule__PrimaryExpression__ArgsAssignment_2_2_2_1 )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1565:2: rule__PrimaryExpression__ArgsAssignment_2_2_2_1
             {
             pushFollow(FOLLOW_rule__PrimaryExpression__ArgsAssignment_2_2_2_1_in_rule__PrimaryExpression__Group_2_2_2__13010);
             rule__PrimaryExpression__ArgsAssignment_2_2_2_1();
@@ -3779,17 +3780,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Module__NameAssignment_1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1579:1: rule__Module__NameAssignment_1 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1580:1: rule__Module__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Module__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1583:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1584:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1584:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1585:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1584:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1585:1: RULE_ID
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1585:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1586:1: RULE_ID
             {
              before(grammarAccess.getModuleAccess().getNameIDTerminalRuleCall_1_0()); 
             match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Module__NameAssignment_13049); 
@@ -3816,17 +3817,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Module__ImportsAssignment_2
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1594:1: rule__Module__ImportsAssignment_2 : ( ruleImport ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1595:1: rule__Module__ImportsAssignment_2 : ( ruleImport ) ;
     public final void rule__Module__ImportsAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1598:1: ( ( ruleImport ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1599:1: ( ruleImport )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1599:1: ( ( ruleImport ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1600:1: ( ruleImport )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1599:1: ( ruleImport )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1600:1: ruleImport
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1600:1: ( ruleImport )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1601:1: ruleImport
             {
              before(grammarAccess.getModuleAccess().getImportsImportParserRuleCall_2_0()); 
             pushFollow(FOLLOW_ruleImport_in_rule__Module__ImportsAssignment_23080);
@@ -3856,17 +3857,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Module__StatementsAssignment_3
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1609:1: rule__Module__StatementsAssignment_3 : ( ruleStatement ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1610:1: rule__Module__StatementsAssignment_3 : ( ruleStatement ) ;
     public final void rule__Module__StatementsAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1613:1: ( ( ruleStatement ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1614:1: ( ruleStatement )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1614:1: ( ( ruleStatement ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1615:1: ( ruleStatement )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1614:1: ( ruleStatement )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1615:1: ruleStatement
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1615:1: ( ruleStatement )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1616:1: ruleStatement
             {
              before(grammarAccess.getModuleAccess().getStatementsStatementParserRuleCall_3_0()); 
             pushFollow(FOLLOW_ruleStatement_in_rule__Module__StatementsAssignment_33111);
@@ -3896,17 +3897,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Import__ImportedNamespaceAssignment_1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1624:1: rule__Import__ImportedNamespaceAssignment_1 : ( ruleImportName ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1625:1: rule__Import__ImportedNamespaceAssignment_1 : ( ruleImportName ) ;
     public final void rule__Import__ImportedNamespaceAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1628:1: ( ( ruleImportName ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1629:1: ( ruleImportName )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1629:1: ( ( ruleImportName ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1630:1: ( ruleImportName )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1629:1: ( ruleImportName )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1630:1: ruleImportName
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1630:1: ( ruleImportName )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1631:1: ruleImportName
             {
              before(grammarAccess.getImportAccess().getImportedNamespaceImportNameParserRuleCall_1_0()); 
             pushFollow(FOLLOW_ruleImportName_in_rule__Import__ImportedNamespaceAssignment_13142);
@@ -3936,17 +3937,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Definition__NameAssignment_1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1639:1: rule__Definition__NameAssignment_1 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1640:1: rule__Definition__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Definition__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1643:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1644:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1644:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1645:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1644:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1645:1: RULE_ID
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1645:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1646:1: RULE_ID
             {
              before(grammarAccess.getDefinitionAccess().getNameIDTerminalRuleCall_1_0()); 
             match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Definition__NameAssignment_13173); 
@@ -3973,17 +3974,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Definition__ArgsAssignment_2_1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1654:1: rule__Definition__ArgsAssignment_2_1 : ( ruleDeclaredParameter ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1655:1: rule__Definition__ArgsAssignment_2_1 : ( ruleDeclaredParameter ) ;
     public final void rule__Definition__ArgsAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1658:1: ( ( ruleDeclaredParameter ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1659:1: ( ruleDeclaredParameter )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1659:1: ( ( ruleDeclaredParameter ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1660:1: ( ruleDeclaredParameter )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1659:1: ( ruleDeclaredParameter )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1660:1: ruleDeclaredParameter
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1660:1: ( ruleDeclaredParameter )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1661:1: ruleDeclaredParameter
             {
              before(grammarAccess.getDefinitionAccess().getArgsDeclaredParameterParserRuleCall_2_1_0()); 
             pushFollow(FOLLOW_ruleDeclaredParameter_in_rule__Definition__ArgsAssignment_2_13204);
@@ -4013,17 +4014,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Definition__ArgsAssignment_2_2_1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1669:1: rule__Definition__ArgsAssignment_2_2_1 : ( ruleDeclaredParameter ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1670:1: rule__Definition__ArgsAssignment_2_2_1 : ( ruleDeclaredParameter ) ;
     public final void rule__Definition__ArgsAssignment_2_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1673:1: ( ( ruleDeclaredParameter ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1674:1: ( ruleDeclaredParameter )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1674:1: ( ( ruleDeclaredParameter ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1675:1: ( ruleDeclaredParameter )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1674:1: ( ruleDeclaredParameter )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1675:1: ruleDeclaredParameter
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1675:1: ( ruleDeclaredParameter )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1676:1: ruleDeclaredParameter
             {
              before(grammarAccess.getDefinitionAccess().getArgsDeclaredParameterParserRuleCall_2_2_1_0()); 
             pushFollow(FOLLOW_ruleDeclaredParameter_in_rule__Definition__ArgsAssignment_2_2_13235);
@@ -4053,17 +4054,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Definition__ExprAssignment_4
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1684:1: rule__Definition__ExprAssignment_4 : ( ruleExpression ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1685:1: rule__Definition__ExprAssignment_4 : ( ruleExpression ) ;
     public final void rule__Definition__ExprAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1688:1: ( ( ruleExpression ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1689:1: ( ruleExpression )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1689:1: ( ( ruleExpression ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1690:1: ( ruleExpression )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1689:1: ( ruleExpression )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1690:1: ruleExpression
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1690:1: ( ruleExpression )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1691:1: ruleExpression
             {
              before(grammarAccess.getDefinitionAccess().getExprExpressionParserRuleCall_4_0()); 
             pushFollow(FOLLOW_ruleExpression_in_rule__Definition__ExprAssignment_43266);
@@ -4093,17 +4094,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__DeclaredParameter__NameAssignment
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1699:1: rule__DeclaredParameter__NameAssignment : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1700:1: rule__DeclaredParameter__NameAssignment : ( RULE_ID ) ;
     public final void rule__DeclaredParameter__NameAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1703:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1704:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1704:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1705:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1704:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1705:1: RULE_ID
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1705:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1706:1: RULE_ID
             {
              before(grammarAccess.getDeclaredParameterAccess().getNameIDTerminalRuleCall_0()); 
             match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__DeclaredParameter__NameAssignment3297); 
@@ -4130,17 +4131,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Evaluation__ExpressionAssignment_0
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1714:1: rule__Evaluation__ExpressionAssignment_0 : ( ruleExpression ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1715:1: rule__Evaluation__ExpressionAssignment_0 : ( ruleExpression ) ;
     public final void rule__Evaluation__ExpressionAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1718:1: ( ( ruleExpression ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1719:1: ( ruleExpression )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1719:1: ( ( ruleExpression ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1720:1: ( ruleExpression )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1719:1: ( ruleExpression )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1720:1: ruleExpression
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1720:1: ( ruleExpression )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1721:1: ruleExpression
             {
              before(grammarAccess.getEvaluationAccess().getExpressionExpressionParserRuleCall_0_0()); 
             pushFollow(FOLLOW_ruleExpression_in_rule__Evaluation__ExpressionAssignment_03328);
@@ -4170,17 +4171,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Addition__RightAssignment_1_1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1729:1: rule__Addition__RightAssignment_1_1 : ( ruleMultiplication ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1730:1: rule__Addition__RightAssignment_1_1 : ( ruleMultiplication ) ;
     public final void rule__Addition__RightAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1733:1: ( ( ruleMultiplication ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1734:1: ( ruleMultiplication )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1734:1: ( ( ruleMultiplication ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1735:1: ( ruleMultiplication )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1734:1: ( ruleMultiplication )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1735:1: ruleMultiplication
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1735:1: ( ruleMultiplication )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1736:1: ruleMultiplication
             {
              before(grammarAccess.getAdditionAccess().getRightMultiplicationParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_ruleMultiplication_in_rule__Addition__RightAssignment_1_13359);
@@ -4210,17 +4211,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Multiplication__RightAssignment_1_1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1744:1: rule__Multiplication__RightAssignment_1_1 : ( rulePrimaryExpression ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1745:1: rule__Multiplication__RightAssignment_1_1 : ( rulePrimaryExpression ) ;
     public final void rule__Multiplication__RightAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1748:1: ( ( rulePrimaryExpression ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1749:1: ( rulePrimaryExpression )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1749:1: ( ( rulePrimaryExpression ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1750:1: ( rulePrimaryExpression )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1749:1: ( rulePrimaryExpression )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1750:1: rulePrimaryExpression
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1750:1: ( rulePrimaryExpression )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1751:1: rulePrimaryExpression
             {
              before(grammarAccess.getMultiplicationAccess().getRightPrimaryExpressionParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_rulePrimaryExpression_in_rule__Multiplication__RightAssignment_1_13390);
@@ -4250,17 +4251,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__ValueAssignment_1_1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1759:1: rule__PrimaryExpression__ValueAssignment_1_1 : ( RULE_NUMBER ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1760:1: rule__PrimaryExpression__ValueAssignment_1_1 : ( RULE_NUMBER ) ;
     public final void rule__PrimaryExpression__ValueAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1763:1: ( ( RULE_NUMBER ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1764:1: ( RULE_NUMBER )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1764:1: ( ( RULE_NUMBER ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1765:1: ( RULE_NUMBER )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1764:1: ( RULE_NUMBER )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1765:1: RULE_NUMBER
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1765:1: ( RULE_NUMBER )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1766:1: RULE_NUMBER
             {
              before(grammarAccess.getPrimaryExpressionAccess().getValueNUMBERTerminalRuleCall_1_1_0()); 
             match(input,RULE_NUMBER,FOLLOW_RULE_NUMBER_in_rule__PrimaryExpression__ValueAssignment_1_13421); 
@@ -4287,21 +4288,21 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__FuncAssignment_2_1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1774:1: rule__PrimaryExpression__FuncAssignment_2_1 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1775:1: rule__PrimaryExpression__FuncAssignment_2_1 : ( ( RULE_ID ) ) ;
     public final void rule__PrimaryExpression__FuncAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1778:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1779:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1779:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1780:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1779:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1780:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1780:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1781:1: ( RULE_ID )
             {
              before(grammarAccess.getPrimaryExpressionAccess().getFuncAbstractDefinitionCrossReference_2_1_0()); 
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1781:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1782:1: RULE_ID
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1782:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1783:1: RULE_ID
             {
              before(grammarAccess.getPrimaryExpressionAccess().getFuncAbstractDefinitionIDTerminalRuleCall_2_1_0_1()); 
             match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__PrimaryExpression__FuncAssignment_2_13456); 
@@ -4332,17 +4333,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__ArgsAssignment_2_2_1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1793:1: rule__PrimaryExpression__ArgsAssignment_2_2_1 : ( ruleExpression ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1794:1: rule__PrimaryExpression__ArgsAssignment_2_2_1 : ( ruleExpression ) ;
     public final void rule__PrimaryExpression__ArgsAssignment_2_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1797:1: ( ( ruleExpression ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1798:1: ( ruleExpression )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1798:1: ( ( ruleExpression ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1799:1: ( ruleExpression )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1798:1: ( ruleExpression )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1799:1: ruleExpression
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1799:1: ( ruleExpression )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1800:1: ruleExpression
             {
              before(grammarAccess.getPrimaryExpressionAccess().getArgsExpressionParserRuleCall_2_2_1_0()); 
             pushFollow(FOLLOW_ruleExpression_in_rule__PrimaryExpression__ArgsAssignment_2_2_13491);
@@ -4372,17 +4373,17 @@ public class InternalArithmeticsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__ArgsAssignment_2_2_2_1
-    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1808:1: rule__PrimaryExpression__ArgsAssignment_2_2_2_1 : ( ruleExpression ) ;
+    // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1809:1: rule__PrimaryExpression__ArgsAssignment_2_2_2_1 : ( ruleExpression ) ;
     public final void rule__PrimaryExpression__ArgsAssignment_2_2_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1812:1: ( ( ruleExpression ) )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1813:1: ( ruleExpression )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1813:1: ( ( ruleExpression ) )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1814:1: ( ruleExpression )
             {
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1813:1: ( ruleExpression )
-            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1814:1: ruleExpression
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1814:1: ( ruleExpression )
+            // ../org.eclipse.xtext.example.arithmetics.ui/src-gen/org/eclipse/xtext/example/arithmetics/ui/contentassist/antlr/internal/InternalArithmetics.g:1815:1: ruleExpression
             {
              before(grammarAccess.getPrimaryExpressionAccess().getArgsExpressionParserRuleCall_2_2_2_1_0()); 
             pushFollow(FOLLOW_ruleExpression_in_rule__PrimaryExpression__ArgsAssignment_2_2_2_13522);

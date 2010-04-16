@@ -8,10 +8,10 @@ import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 
 public class AbstractXbaseJavaValidator extends AbstractDeclarativeValidator {
 
-    @Override
-    protected List<EPackage> getEPackages() {
-        List<EPackage> result = new ArrayList<EPackage>();
-        return result;
-    }
+@Override
+	protected List<EPackage> getEPackages() {
+	    List<EPackage> result = new ArrayList<EPackage>();
+		return result;
+	}
 
 }

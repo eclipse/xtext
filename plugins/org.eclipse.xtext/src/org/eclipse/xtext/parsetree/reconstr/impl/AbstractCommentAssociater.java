@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 

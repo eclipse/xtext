@@ -3,7 +3,7 @@
 */
 package org.eclipse.xtext.ui.tests.linking.parser.antlr;
 
-import org.antlr.runtime.ANTLRInputStream;
+import org.antlr.runtime.CharStream;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
@@ -19,7 +19,7 @@ public class ImportUriUiTestLanguageParser extends org.eclipse.xtext.parser.antl
 	private ImportUriUiTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
+	protected IParseResult parse(String ruleName, CharStream in) {
 		TokenSource tokenSource = createLexer(in);
 		XtextTokenStream tokenStream = createTokenStream(tokenSource);
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");

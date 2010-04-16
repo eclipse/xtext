@@ -3,7 +3,7 @@
 */
 package org.eclipse.xtext.parser.antlr.parser.antlr;
 
-import org.antlr.runtime.ANTLRInputStream;
+import org.antlr.runtime.CharStream;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
@@ -19,7 +19,7 @@ public class Bug301935TestLanguageParser extends org.eclipse.xtext.parser.antlr.
 	private Bug301935TestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
+	protected IParseResult parse(String ruleName, CharStream in) {
 		TokenSource tokenSource = createLexer(in);
 		XtextTokenStream tokenStream = createTokenStream(tokenSource);
 		tokenStream.setInitialHiddenTokens();

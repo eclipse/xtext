@@ -9,16 +9,21 @@
 package org.eclipse.xtext.parser;
 
 import java.io.InputStream;
+import java.io.Reader;
 
 import org.eclipse.xtext.parsetree.CompositeNode;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Jan Koehnlein
  */
 public interface IParser {
 	
+	@Deprecated
 	IParseResult parse(InputStream in);
+
+	IParseResult parse(Reader reader);
 	
-    IParseResult reparse(CompositeNode originalRootNode, int offset, int length, String change);
-    
+	IParseResult reparse(CompositeNode originalRootNode, int offset, int length, String change);
+
 }

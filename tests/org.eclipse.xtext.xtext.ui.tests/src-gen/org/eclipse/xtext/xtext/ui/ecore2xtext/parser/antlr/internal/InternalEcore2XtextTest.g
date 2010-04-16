@@ -237,11 +237,11 @@ ruleAbstract returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getAbstractAccess().getConcrete0ParserRuleCall_0(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getAbstractAccess().getConcrete0_ImplParserRuleCall_0(), currentNode); 
     }
-    this_Concrete0_0=ruleConcrete0
+    this_Concrete0_Impl_0=ruleConcrete0_Impl
     { 
-        $current = $this_Concrete0_0.current; 
+        $current = $this_Concrete0_Impl_0.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -250,11 +250,24 @@ ruleAbstract returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getAbstractAccess().getConcrete1ParserRuleCall_1(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getAbstractAccess().getConcrete1_ImplParserRuleCall_1(), currentNode); 
     }
-    this_Concrete1_1=ruleConcrete1
+    this_Concrete1_Impl_1=ruleConcrete1_Impl
     { 
-        $current = $this_Concrete1_1.current; 
+        $current = $this_Concrete1_Impl_1.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |
+	{ 
+	  /* */ 
+	}
+    { 
+        currentNode=createCompositeNode(grammarAccess.getAbstractAccess().getDiamondInheritanceParserRuleCall_2(), currentNode); 
+    }
+    this_DiamondInheritance_2=ruleDiamondInheritance
+    { 
+        $current = $this_DiamondInheritance_2.current; 
         currentNode = currentNode.getParent();
     }
 )
@@ -331,44 +344,31 @@ ruleEString returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
 
 
 
-// Entry rule entryRuleConcrete0
-entryRuleConcrete0 returns [EObject current=null] 
+// Entry rule entryRuleConcrete0_Impl
+entryRuleConcrete0_Impl returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getConcrete0Rule(), currentNode); }
-	 iv_ruleConcrete0=ruleConcrete0 
-	 { $current=$iv_ruleConcrete0.current; } 
+	{ currentNode = createCompositeNode(grammarAccess.getConcrete0_ImplRule(), currentNode); }
+	 iv_ruleConcrete0_Impl=ruleConcrete0_Impl 
+	 { $current=$iv_ruleConcrete0_Impl.current; } 
 	 EOF 
 ;
 
-// Rule Concrete0
-ruleConcrete0 returns [EObject current=null] 
+// Rule Concrete0_Impl
+ruleConcrete0_Impl returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(
+((
 	{ 
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getConcrete0Access().getDiamondInheritanceParserRuleCall_0(), currentNode); 
-    }
-    this_DiamondInheritance_0=ruleDiamondInheritance
-    { 
-        $current = $this_DiamondInheritance_0.current; 
-        currentNode = currentNode.getParent();
-    }
-
-    |((
-	{ 
-	  /* */ 
-	}
-    { 
-        temp=factory.create(grammarAccess.getConcrete0Access().getConcrete0Action_1_0().getType().getClassifier());
+        temp=factory.create(grammarAccess.getConcrete0_ImplAccess().getConcrete0Action_0().getType().getClassifier());
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getConcrete0Access().getConcrete0Action_1_0(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.getConcrete0_ImplAccess().getConcrete0Action_0(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -376,23 +376,23 @@ ruleConcrete0 returns [EObject current=null]
     }
 )	'Concrete0' 
     {
-        createLeafNode(grammarAccess.getConcrete0Access().getConcrete0Keyword_1_1(), null); 
+        createLeafNode(grammarAccess.getConcrete0_ImplAccess().getConcrete0Keyword_1(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getConcrete0Access().getNameEStringParserRuleCall_1_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getConcrete0_ImplAccess().getNameEStringParserRuleCall_2_0(), currentNode); 
 	    }
-		lv_name_3_0=ruleEString		{
+		lv_name_2_0=ruleEString		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getConcrete0Rule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getConcrete0_ImplRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
 	       		set(
 	       			$current, 
 	       			"name",
-	        		lv_name_3_0, 
+	        		lv_name_2_0, 
 	        		"EString", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -402,51 +402,38 @@ ruleConcrete0 returns [EObject current=null]
 	    }
 
 )
-)))
+))
 ;
 
 
 
 
 
-// Entry rule entryRuleConcrete1
-entryRuleConcrete1 returns [EObject current=null] 
+// Entry rule entryRuleConcrete1_Impl
+entryRuleConcrete1_Impl returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getConcrete1Rule(), currentNode); }
-	 iv_ruleConcrete1=ruleConcrete1 
-	 { $current=$iv_ruleConcrete1.current; } 
+	{ currentNode = createCompositeNode(grammarAccess.getConcrete1_ImplRule(), currentNode); }
+	 iv_ruleConcrete1_Impl=ruleConcrete1_Impl 
+	 { $current=$iv_ruleConcrete1_Impl.current; } 
 	 EOF 
 ;
 
-// Rule Concrete1
-ruleConcrete1 returns [EObject current=null] 
+// Rule Concrete1_Impl
+ruleConcrete1_Impl returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(
+((
 	{ 
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getConcrete1Access().getDiamondInheritanceParserRuleCall_0(), currentNode); 
-    }
-    this_DiamondInheritance_0=ruleDiamondInheritance
-    { 
-        $current = $this_DiamondInheritance_0.current; 
-        currentNode = currentNode.getParent();
-    }
-
-    |((
-	{ 
-	  /* */ 
-	}
-    { 
-        temp=factory.create(grammarAccess.getConcrete1Access().getConcrete1Action_1_0().getType().getClassifier());
+        temp=factory.create(grammarAccess.getConcrete1_ImplAccess().getConcrete1Action_0().getType().getClassifier());
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getConcrete1Access().getConcrete1Action_1_0(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.getConcrete1_ImplAccess().getConcrete1Action_0(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -454,23 +441,23 @@ ruleConcrete1 returns [EObject current=null]
     }
 )	'Concrete1' 
     {
-        createLeafNode(grammarAccess.getConcrete1Access().getConcrete1Keyword_1_1(), null); 
+        createLeafNode(grammarAccess.getConcrete1_ImplAccess().getConcrete1Keyword_1(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getConcrete1Access().getNameEStringParserRuleCall_1_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getConcrete1_ImplAccess().getNameEStringParserRuleCall_2_0(), currentNode); 
 	    }
-		lv_name_3_0=ruleEString		{
+		lv_name_2_0=ruleEString		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getConcrete1Rule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getConcrete1_ImplRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
 	       		set(
 	       			$current, 
 	       			"name",
-	        		lv_name_3_0, 
+	        		lv_name_2_0, 
 	        		"EString", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -480,7 +467,7 @@ ruleConcrete1 returns [EObject current=null]
 	    }
 
 )
-)))
+))
 ;
 
 
