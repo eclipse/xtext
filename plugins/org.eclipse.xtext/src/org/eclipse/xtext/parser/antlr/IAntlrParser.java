@@ -8,15 +8,20 @@
 package org.eclipse.xtext.parser.antlr;
 
 import java.io.InputStream;
+import java.io.Reader;
 
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Jan Koehnlein
  */
 public interface IAntlrParser extends IParser {
 	
+	@Deprecated
 	IParseResult parse(String ruleName, InputStream in);
+
+	IParseResult parse(String ruleName, Reader reader);
 	
 }

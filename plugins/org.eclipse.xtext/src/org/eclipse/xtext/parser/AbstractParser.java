@@ -9,33 +9,59 @@
 package org.eclipse.xtext.parser;
 
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 
+import com.google.inject.Inject;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Jan Koehnlein
  */
-public abstract class AbstractParser<Parseable> implements IParser {
+public abstract class AbstractParser implements IParser {
+
+	@Inject
+	private IDefaultEncodingProvider defaultEncodingProvider;
+
+	protected String getDefaultEncoding() {
+		return defaultEncodingProvider.getEncoding();
+	}
 
 	protected boolean isReparseSupported() {
 		return false;
 	}
 
+	@Deprecated
 	public final IParseResult parse(InputStream in) {
-		return doParse(createParseable(in));
+		try {
+			return parse(new InputStreamReader(in, getDefaultEncoding()));
+		} catch (UnsupportedEncodingException e) {
+			throw new WrappedException(e);
+		}
 	}
 
-	protected abstract IParseResult doParse(Parseable parseable);
+	public final IParseResult parse(Reader reader) {
+		return doParse(reader);
+	}
+
+	protected abstract IParseResult doParse(Reader reader);
+
+	protected abstract IParseResult doParse(CharSequence sequence);
 
 	public final IParseResult reparse(CompositeNode originalRootNode, int offset, int length, String change) {
 		if (!isReparseSupported()) {
 			final List<LeafNode> leafNodes = originalRootNode.getLeafNodes();
 			final StringBuilder builder = new StringBuilder(originalRootNode.getTotalLength());
 			boolean changeAppended = false;
-			for (LeafNode leaf: leafNodes) {
-				if ((leaf.getTotalOffset() + leaf.getTotalLength() <= offset) || (leaf.getTotalOffset() > offset + length))
+			for (LeafNode leaf : leafNodes) {
+				if ((leaf.getTotalOffset() + leaf.getTotalLength() <= offset)
+						|| (leaf.getTotalOffset() > offset + length))
 					builder.append(leaf.getText());
 				else {
 					if (leaf.getTotalOffset() < offset) {
@@ -50,17 +76,13 @@ public abstract class AbstractParser<Parseable> implements IParser {
 					}
 				}
 			}
-			return doParse(createParseable(builder));
+			return doParse(builder);
 		}
 		return doReparse(originalRootNode, offset, length, change);
 	}
-	
+
 	protected IParseResult doReparse(CompositeNode originalRootNode, int offset, int length, String change) {
 		throw new UnsupportedOperationException();
 	}
-	
-	protected abstract Parseable createParseable(CharSequence sequence);
-	
-	protected abstract Parseable createParseable(InputStream stream);
 
 }

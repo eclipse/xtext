@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.service;
 
+import java.nio.charset.Charset;
+
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -28,10 +30,8 @@ import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.NullTokenDefProvider;
 import org.eclipse.xtext.parser.impl.PartialParsingHelper;
 import org.eclipse.xtext.parser.packrat.ParseResultFactory;
-import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenMerger;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
-import org.eclipse.xtext.parsetree.reconstr.impl.DefaultHiddenTokenMerger;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
 import org.eclipse.xtext.resource.DefaultFragmentProvider;
 import org.eclipse.xtext.resource.DefaultLocationInFileProvider;
@@ -61,6 +61,7 @@ import com.google.inject.name.Names;
 /**
  * @author Heiko Behrens - Initial contribution and API
  * @author Sven Efftinge
+ * @author Jan Koehnlein
  */
 public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 
@@ -68,7 +69,7 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	public void configure(Binder binder) {
 		super.configure(binder);
 	}
-
+	
 	public EValidator.Registry bindEValidatorRegistry() {
 		return EValidator.Registry.INSTANCE;
 	}

@@ -9,8 +9,7 @@ package org.eclipse.xtext.parser.packrat;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.Arrays;
 
 import org.apache.log4j.Logger;
@@ -24,13 +23,13 @@ import org.eclipse.xtext.parser.AbstractParser;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.consumers.EnumLiteralConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.IRootConsumerListener;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.KeywordConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.EnumLiteralConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.debug.DebugBacktracker;
 import org.eclipse.xtext.parser.packrat.debug.DebugCharSequenceWithOffset;
@@ -53,8 +52,9 @@ import org.eclipse.xtext.parser.packrat.tokens.ParsedToken;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Jan Koehnlein
  */
-public abstract class AbstractPackratParser extends AbstractParser<CharSequence> implements
+public abstract class AbstractPackratParser extends AbstractParser implements
 	IPackratParser,
 	IMarkerClient,
 	ICharSequenceWithOffset,
@@ -395,17 +395,17 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 			hidden.setHidden(true);
 	}
 
+	
 	@Override
-	protected CharSequence createParseable(CharSequence sequence) {
-		return sequence;
+	protected IParseResult doParse(Reader reader) {
+		return doParse(createCharSequence(reader));
 	}
-
-	@Override
-	protected CharSequence createParseable(InputStream stream) {
+	
+	protected CharSequence createCharSequence(Reader reader0) {
 		try {
 			char[] buff = new char[1024];
-			BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-			CharArrayWriterAsSequence result = new CharArrayWriterAsSequence(stream.available());
+			BufferedReader reader = new BufferedReader(reader0);
+			CharArrayWriterAsSequence result = new CharArrayWriterAsSequence();
 			int chars = 0;
 			while((chars = reader.read(buff)) != -1) {
 				result.write(buff, 0, chars);

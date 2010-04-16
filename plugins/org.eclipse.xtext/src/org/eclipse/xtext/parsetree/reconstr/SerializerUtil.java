@@ -8,7 +8,7 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,14 +17,15 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.TreeConstructionReport;
-import org.eclipse.xtext.parsetree.reconstr.impl.TokenOutputStream;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
+import org.eclipse.xtext.parsetree.reconstr.impl.WriterTokenStream;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 
 import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * @author Jan Koehnlein
  */
 public class SerializerUtil {
 
@@ -83,31 +84,17 @@ public class SerializerUtil {
 						"These errors need to be fixed before the model an be serialized.", diags);
 		}
 		ITokenStream t = formatter.createFormatterStream(null, out, !options.isFormat());
-		return parseTreeReconstructor.serializeRecursive(obj, t);
+		TreeConstructionReport report = parseTreeReconstructor.serializeRecursive(obj, t);
+		out.close();
+		return report;
 	}
 
-	@Deprecated
-	// use serialize(EObject, OutputStream, CompositeNode, SerializationOptions) instead
-	public TreeConstructionReport serialize(EObject obj, OutputStream out, boolean format) throws IOException {
-		SerializationOptions opt = new SerializationOptions();
-		opt.setFormat(format);
-		return serialize(obj, out, opt);
-	}
-
-	public TreeConstructionReport serialize(EObject obj, OutputStream out, SerializationOptions opt) throws IOException {
-		return serialize(obj, new TokenOutputStream(out), opt);
+	public TreeConstructionReport serialize(EObject obj, Writer out, SerializationOptions opt) throws IOException {
+		return serialize(obj, new WriterTokenStream(out, false), opt);
 	}
 
 	public String serialize(EObject obj) {
 		return serialize(obj, new SerializationOptions());
-	}
-
-	@Deprecated
-	// SerializerUtil.serialize(EObject, SerializationOptions) instead
-	public String serialize(EObject obj, boolean format) {
-		SerializationOptions opt = new SerializationOptions();
-		opt.setFormat(format);
-		return serialize(obj, opt);
 	}
 
 	public String serialize(EObject obj, SerializationOptions opt) {

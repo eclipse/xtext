@@ -8,6 +8,7 @@
 package org.eclipse.xtext.parser;
 
 import java.io.InputStream;
+import java.io.Reader;
 
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.parser.antlr.IAntlrParser;
@@ -18,6 +19,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Jan Koehnlein
  */
 public class SwitchingParser implements ISwitchingParser {
 
@@ -44,12 +46,21 @@ public class SwitchingParser implements ISwitchingParser {
 		displayed = true;
 	}
 
+	@Deprecated
 	public IParseResult parse(InputStream in) {
 		if (antlrParser != null && !usePackrat) {
 			return antlrParser.parse(in);
 		}
 		displayPackratInfo();
 		return packratParser.parse(in);
+	}
+	
+	public IParseResult parse(Reader reader) {
+		if (antlrParser != null && !usePackrat) {
+			return antlrParser.parse(reader);
+		}
+		displayPackratInfo();
+		return packratParser.parse(reader);
 	}
 
 	public IParseResult reparse(CompositeNode originalRootNode, int offset, int length, String change) {
