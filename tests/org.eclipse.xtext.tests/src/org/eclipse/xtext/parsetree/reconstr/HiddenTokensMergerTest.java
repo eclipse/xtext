@@ -3,6 +3,7 @@ package org.eclipse.xtext.parsetree.reconstr;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.SerializerUtil.SerializationOptions;
+import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.AppendToFileEnd;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Commentable;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.CommentableItem;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.HiddentokenmergertestFactory;
@@ -22,7 +23,7 @@ public class HiddenTokensMergerTest extends AbstractXtextTests {
 		//System.out.println(EmfFormatter.objToStr(((XtextResource) o.eResource()).getParseResult().getRootNode()));
 		SerializerUtil.SerializationOptions opt = new SerializerUtil.SerializationOptions();
 		opt.setFormat(false);
-//		System.out.println(EmfFormatter.objToStr(((XtextResource) o.eResource()).getParseResult().getRootNode()));
+		//		System.out.println(EmfFormatter.objToStr(((XtextResource) o.eResource()).getParseResult().getRootNode()));
 		String r = getSerializer().serialize(o, opt);
 		assertEquals(model, r);
 	}
@@ -79,11 +80,25 @@ public class HiddenTokensMergerTest extends AbstractXtextTests {
 		model.getIds().move(1, 2);
 		assertEquals("#4 a. /* ab */ b e.  /*ef*/f.g /*hi*/ .i c./*cd*/d", serialize(model));
 	}
-	
+
 	public void testRefList2() throws Exception {
 		RefList model = (RefList) getModel("#5 a. b c.d e.f.g.i refs a./* ab */ b c./*cd*/  d e.  /*ef*/f.g/*hi*/.i");
 		model.getRefs().move(1, 2);
 		assertEquals("#5 a. b c.d e.f.g.i refs a./* ab */ b e.  /*ef*/f.g/*hi*/.i c./*cd*/  d", serialize(model));
+	}
+
+	//	public void testRefList3() throws Exception {
+	//		RefList model = (RefList) getResourceFromStringAndExpect("#5 a.b refs x.y", 1).getContents().get(0);
+	//		assertEquals("#5 a. b c.d e.f.g.i refs a./* ab */ b e.  /*ef*/f.g/*hi*/.i c./*cd*/  d", serialize(model));
+	//	}
+
+	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=297938
+	public void testAppendToEnd() throws Exception {
+		AppendToFileEnd model = (AppendToFileEnd) getResourceFromStringAndExpect("#7 class foo classend", 1)
+				.getContents().get(0);
+		model.getItems().add(HiddentokenmergertestFactory.eINSTANCE.createAppendToFileEndItem());
+		model.getItems().get(1).setName("bar");
+		assertEquals("#7 class foo endclass class bar endclass", serialize(model));
 	}
 
 	@Override
