@@ -85,12 +85,12 @@ public class SerializerUtil {
 		}
 		ITokenStream t = formatter.createFormatterStream(null, out, !options.isFormat());
 		TreeConstructionReport report = parseTreeReconstructor.serializeRecursive(obj, t);
-		out.close();
+		out.flush();
 		return report;
 	}
 
 	public TreeConstructionReport serialize(EObject obj, Writer out, SerializationOptions opt) throws IOException {
-		return serialize(obj, new WriterTokenStream(out, false), opt);
+		return serialize(obj, new WriterTokenStream(out), opt);
 	}
 
 	public String serialize(EObject obj) {

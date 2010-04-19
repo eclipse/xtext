@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ITokenStream {
 	
-	public void close() throws IOException;
+	public void flush() throws IOException;
 
 	public void writeHidden(EObject grammarElement, String value)
 			throws IOException;

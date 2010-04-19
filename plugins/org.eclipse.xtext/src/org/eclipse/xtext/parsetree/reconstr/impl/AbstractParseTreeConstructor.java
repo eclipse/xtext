@@ -463,7 +463,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			this.out = out;
 		}
 
-		public void close() throws IOException {
+		public void flush() throws IOException {
 			CompositeNode c = lastCont;
 			int i = lastIndex;
 			List<LeafNode> ws = Lists.newArrayList();
@@ -482,12 +482,12 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 						//						System.out.println("WS: '" + l.getText() + "'");
 						out.writeHidden(l.getGrammarElement(), l.getText());
 					}
-					out.close();
+					out.flush();
 					return;
 				}
 				AbstractNode n = c.getChildren().get(i);
 				if (tokenUtil.isToken(n)) {
-					out.close();
+					out.flush();
 					return;
 				} else if (tokenUtil.isWhitespaceNode(n))
 					ws.add((LeafNode) n);
@@ -790,7 +790,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		WsMergerStream wsout = new WsMergerStream(out);
 		//		dump("", root);
 		write(root, wsout);
-		wsout.close();
+		wsout.flush();
 		return rep;
 	}
 

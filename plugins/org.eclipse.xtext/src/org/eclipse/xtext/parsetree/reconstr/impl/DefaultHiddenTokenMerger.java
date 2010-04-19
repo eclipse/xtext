@@ -138,9 +138,9 @@ public class DefaultHiddenTokenMerger extends AbstractHiddenTokenMerger {
 		}
 
 		@Override
-		public void close() throws IOException {
+		public void flush() throws IOException {
 			endSerialize();
-			super.close();
+			super.flush();
 		}
 
 		public void endSerialize() throws IOException {

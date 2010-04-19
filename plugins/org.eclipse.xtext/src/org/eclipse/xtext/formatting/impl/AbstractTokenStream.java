@@ -18,7 +18,7 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 public abstract class AbstractTokenStream implements
 		ITokenStream {
 
-	public void close() throws IOException {
+	public void flush() throws IOException {
 	}
 
 	public void writeHidden(EObject grammarElement, String value)
