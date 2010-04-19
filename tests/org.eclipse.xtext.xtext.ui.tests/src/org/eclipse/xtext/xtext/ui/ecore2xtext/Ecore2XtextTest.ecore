@@ -13,6 +13,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="classes" upperBound="-1"
         eType="#//Abstract" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//INT" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="concrete0" eType="#//Concrete0"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="INT" instanceClassName="java.lang.String"/>
   <eClassifiers xsi:type="ecore:EClass" name="DiamondInheritance" eSuperTypes="#//Concrete0 #//Concrete1"/>
