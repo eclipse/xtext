@@ -11,23 +11,27 @@ Root returns Root:
 	name=INT0
 	'{'
 		('classes' '{' classes+=Abstract ( "," classes+=Abstract)* '}' )?
+		('concrete0' concrete0=Concrete0)?
     '}';
 
 
 Abstract returns Abstract:
 	Concrete0_Impl | Concrete1_Impl | DiamondInheritance;
 
+Concrete0 returns Concrete0:
+	Concrete0_Impl | DiamondInheritance;
+
 INT0 returns INT:
 	'INT' /* TODO: implement this rule and an appropriate IValueConverter */;
-
-EString returns ecore::EString:
-	STRING | ID;
 
 Concrete0_Impl returns Concrete0:
 	{Concrete0}
 	'Concrete0'
 	name=EString
 ;
+
+EString returns ecore::EString:
+	STRING | ID;
 
 Concrete1_Impl returns Concrete1:
 	{Concrete1}

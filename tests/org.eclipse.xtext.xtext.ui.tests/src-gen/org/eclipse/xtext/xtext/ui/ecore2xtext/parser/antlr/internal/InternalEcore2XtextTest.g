@@ -205,9 +205,37 @@ ruleRoot returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getRootAccess().getRightCurlyBracketKeyword_4_4(), null); 
     }
-)?	'}' 
+)?(	'concrete0' 
     {
-        createLeafNode(grammarAccess.getRootAccess().getRightCurlyBracketKeyword_5(), null); 
+        createLeafNode(grammarAccess.getRootAccess().getConcrete0Keyword_5_0(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getRootAccess().getConcrete0Concrete0ParserRuleCall_5_1_0(), currentNode); 
+	    }
+		lv_concrete0_11_0=ruleConcrete0		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getRootRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"concrete0",
+	        		lv_concrete0_11_0, 
+	        		"Concrete0", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+))?	'}' 
+    {
+        createLeafNode(grammarAccess.getRootAccess().getRightCurlyBracketKeyword_6(), null); 
     }
 )
 ;
@@ -277,6 +305,54 @@ ruleAbstract returns [EObject current=null]
 
 
 
+// Entry rule entryRuleConcrete0
+entryRuleConcrete0 returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getConcrete0Rule(), currentNode); }
+	 iv_ruleConcrete0=ruleConcrete0 
+	 { $current=$iv_ruleConcrete0.current; } 
+	 EOF 
+;
+
+// Rule Concrete0
+ruleConcrete0 returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(
+	{ 
+	  /* */ 
+	}
+    { 
+        currentNode=createCompositeNode(grammarAccess.getConcrete0Access().getConcrete0_ImplParserRuleCall_0(), currentNode); 
+    }
+    this_Concrete0_Impl_0=ruleConcrete0_Impl
+    { 
+        $current = $this_Concrete0_Impl_0.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |
+	{ 
+	  /* */ 
+	}
+    { 
+        currentNode=createCompositeNode(grammarAccess.getConcrete0Access().getDiamondInheritanceParserRuleCall_1(), currentNode); 
+    }
+    this_DiamondInheritance_1=ruleDiamondInheritance
+    { 
+        $current = $this_DiamondInheritance_1.current; 
+        currentNode = currentNode.getParent();
+    }
+)
+;
+
+
+
+
+
 // Entry rule entryRuleINT0
 entryRuleINT0 returns [String current=null] 
 	:
@@ -300,44 +376,6 @@ ruleINT0 returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
         createLeafNode(grammarAccess.getINT0Access().getINTKeyword(), null); 
     }
 
-    ;
-
-
-
-
-
-// Entry rule entryRuleEString
-entryRuleEString returns [String current=null] 
-	:
-	{ currentNode = createCompositeNode(grammarAccess.getEStringRule(), currentNode); } 
-	 iv_ruleEString=ruleEString 
-	 { $current=$iv_ruleEString.current.getText(); }  
-	 EOF 
-;
-
-// Rule EString
-ruleEString returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); 
-    }
-    @after { resetLookahead(); 
-	    lastConsumedNode = currentNode;
-    }:
-(    this_STRING_0=RULE_STRING    {
-		$current.merge(this_STRING_0);
-    }
-
-    { 
-    createLeafNode(grammarAccess.getEStringAccess().getSTRINGTerminalRuleCall_0(), null); 
-    }
-
-    |    this_ID_1=RULE_ID    {
-		$current.merge(this_ID_1);
-    }
-
-    { 
-    createLeafNode(grammarAccess.getEStringAccess().getIDTerminalRuleCall_1(), null); 
-    }
-)
     ;
 
 
@@ -404,6 +442,44 @@ ruleConcrete0_Impl returns [EObject current=null]
 )
 ))
 ;
+
+
+
+
+
+// Entry rule entryRuleEString
+entryRuleEString returns [String current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getEStringRule(), currentNode); } 
+	 iv_ruleEString=ruleEString 
+	 { $current=$iv_ruleEString.current.getText(); }  
+	 EOF 
+;
+
+// Rule EString
+ruleEString returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+	    lastConsumedNode = currentNode;
+    }:
+(    this_STRING_0=RULE_STRING    {
+		$current.merge(this_STRING_0);
+    }
+
+    { 
+    createLeafNode(grammarAccess.getEStringAccess().getSTRINGTerminalRuleCall_0(), null); 
+    }
+
+    |    this_ID_1=RULE_ID    {
+		$current.merge(this_ID_1);
+    }
+
+    { 
+    createLeafNode(grammarAccess.getEStringAccess().getIDTerminalRuleCall_1(), null); 
+    }
+)
+    ;
 
 
 
