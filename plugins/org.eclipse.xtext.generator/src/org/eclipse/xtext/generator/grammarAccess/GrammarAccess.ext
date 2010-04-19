@@ -148,23 +148,9 @@ String gaElementAccessor(AbstractElement ele):
  */	
 String gaRuleElementAccessor(AbstractElement ele):
 	ele.containingRule().gaElementsAccessor() + "." + ele.gaElementAccessor();
-		
-/**
- * Returns the invokation of the element accessor method as full qualified Java statement.
- * Example: return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele1AssignmentStates()
- * @param ele the element
- * @return The java statement
- */	
-String gaFullAccessor(AbstractElement ele):
-	ele.containingGrammar().gaSimpleName() + ".INSTANCE." + ele.gaRuleElementAccessor();
-	
-/*
- *
- */
+
 String grammarFragmentToStr(EObject ele, String prefix):	
 	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.serialize(org.eclipse.emf.ecore.EObject, java.lang.String);
-
-
 
 // ******************************************************************************
 // ***  the API below is private. Only GrammarAccess.xpt is allowed to use it ***
@@ -187,7 +173,7 @@ String gaRuleAccessorLocalVarName(TerminalRule rule):
 	
 String getClassName(EObject obj):
 	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.getClassName(org.eclipse.emf.ecore.EObject);
-	
+
 Grammar usedGrammar(AbstractRule rule, Grammar parent):
 	parent.usedGrammars.selectFirst(g|g.allRules().contains(rule));
 
