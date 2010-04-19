@@ -37,6 +37,10 @@ Workflow {
 			fragment = @TestLanguagesFragments auto-inject {}
 		}
 		language = {
+			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xtext"
+			fragment = @TestLanguagesFragments auto-inject {}
+		}
+		language = {
 			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
 		}
