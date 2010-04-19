@@ -60,7 +60,7 @@ public class Bug303200Test extends AbstractXtextTests {
 		Collection<FollowElement> followElements = Lists.newArrayList(parser.getFollowElements("function f() {} function f() {"));
 		assertEquals(6, followElements.size());
 	}
-
+	
 	protected void recursiveTestFollowElements(Bug303200TestLanguageParser parser, FollowElement element) {
 		if (element.getLookAhead() > 1) {
 			Collection<FollowElement> elements = parser.getFollowElements(element);

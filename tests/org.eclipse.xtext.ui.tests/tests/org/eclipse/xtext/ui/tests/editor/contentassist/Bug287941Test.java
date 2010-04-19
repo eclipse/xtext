@@ -49,4 +49,12 @@ public class Bug287941Test extends AbstractContentAssistProcessorTest {
 						+ "select t from Test as t \n" + "	where t.testAttr like \"\"").assertTextAtCursorPosition(
 				"t.testAttr", 2, "testAttr", "testRef", ".");
 	}
+	
+	public void testBug309449() throws Exception {
+		newBuilder(getBug287941TestLanguageSetup()).append(
+				"import \"classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestModel.ecore\"\n"
+			  + "select t from Test as t \n" 
+			  + "	where t.testAttr like \"\"").assertTextAtCursorPosition(
+				"like", 0, "<", ">", "<=", ">=", "=", "!=", "like", "notlike", "not", "in");
+	}
 }

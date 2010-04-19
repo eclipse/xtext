@@ -32,6 +32,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug291022Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug297909Test.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200ContentAssistTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug304681Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.CamelCasePrefixMatcherTest.class);
@@ -55,6 +56,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.antlr.Bug303200Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.antlr.ParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.antlr.internal.InternalParserTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.encoding.EncodingTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.folding.DefaultFoldingRegionProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.model.edit.DefaultDocumentEditorTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.model.edit.DefaultTextEditComposerTest.class);
