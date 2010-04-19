@@ -22,7 +22,8 @@ Require-Bundle: org.eclipse.xtext;bundle-version="1.0.0",
  org.eclipse.xpand,
  org.eclipse.xtext.generator;bundle-version="1.0.0";resolution:=optional,
  de.itemis.xtext.antlr;bundle-version="1.0.0";resolution:=optional,
- org.eclipse.xtext.ui.shared
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.emf.mwe2.launch;resolution:=optional;bundle-version="1.0.0"
 Bundle-Activator: org.eclipse.xtext.xtend.XtendTestsActivator
 Import-Package: org.apache.log4j
 Export-Package: org.eclipse.xtext.xtend,

@@ -5,7 +5,6 @@ grammar InternalEcore2XtextTest;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	backtrack=true;
 	
 }
 
@@ -38,11 +37,6 @@ import org.eclipse.xtext.xtext.ui.ecore2xtext.services.Ecore2XtextTestGrammarAcc
 
 @parser::members {
 
-/*
-  This grammar contains a lot of empty actions to work around a bug in ANTLR.
-  Otherwise the ANTLR tool will create synpreds that cannot be compiled in some rare cases.
-*/
- 
  	private Ecore2XtextTestGrammarAccess grammarAccess;
  	
     public InternalEcore2XtextTestParser(TokenStream input, IAstFactory factory, Ecore2XtextTestGrammarAccess grammarAccess) {
@@ -96,9 +90,6 @@ ruleRoot returns [EObject current=null]
     	lastConsumedNode = currentNode;
     }:
 ((
-	{ 
-	  /* */ 
-	}
     { 
         temp=factory.create(grammarAccess.getRootAccess().getRootAction_0().getType().getClassifier());
         $current = temp; 
@@ -261,9 +252,6 @@ ruleAbstract returns [EObject current=null]
     	lastConsumedNode = currentNode;
     }:
 (
-	{ 
-	  /* */ 
-	}
     { 
         currentNode=createCompositeNode(grammarAccess.getAbstractAccess().getConcrete0_ImplParserRuleCall_0(), currentNode); 
     }
@@ -274,9 +262,6 @@ ruleAbstract returns [EObject current=null]
     }
 
     |
-	{ 
-	  /* */ 
-	}
     { 
         currentNode=createCompositeNode(grammarAccess.getAbstractAccess().getConcrete1_ImplParserRuleCall_1(), currentNode); 
     }
@@ -287,9 +272,6 @@ ruleAbstract returns [EObject current=null]
     }
 
     |
-	{ 
-	  /* */ 
-	}
     { 
         currentNode=createCompositeNode(grammarAccess.getAbstractAccess().getDiamondInheritanceParserRuleCall_2(), currentNode); 
     }
@@ -322,9 +304,6 @@ ruleConcrete0 returns [EObject current=null]
     	lastConsumedNode = currentNode;
     }:
 (
-	{ 
-	  /* */ 
-	}
     { 
         currentNode=createCompositeNode(grammarAccess.getConcrete0Access().getConcrete0_ImplParserRuleCall_0(), currentNode); 
     }
@@ -335,9 +314,6 @@ ruleConcrete0 returns [EObject current=null]
     }
 
     |
-	{ 
-	  /* */ 
-	}
     { 
         currentNode=createCompositeNode(grammarAccess.getConcrete0Access().getDiamondInheritanceParserRuleCall_1(), currentNode); 
     }
@@ -399,9 +375,6 @@ ruleConcrete0_Impl returns [EObject current=null]
     	lastConsumedNode = currentNode;
     }:
 ((
-	{ 
-	  /* */ 
-	}
     { 
         temp=factory.create(grammarAccess.getConcrete0_ImplAccess().getConcrete0Action_0().getType().getClassifier());
         $current = temp; 
@@ -502,9 +475,6 @@ ruleConcrete1_Impl returns [EObject current=null]
     	lastConsumedNode = currentNode;
     }:
 ((
-	{ 
-	  /* */ 
-	}
     { 
         temp=factory.create(grammarAccess.getConcrete1_ImplAccess().getConcrete1Action_0().getType().getClassifier());
         $current = temp; 
@@ -567,9 +537,6 @@ ruleDiamondInheritance returns [EObject current=null]
     	lastConsumedNode = currentNode;
     }:
 ((
-	{ 
-	  /* */ 
-	}
     { 
         temp=factory.create(grammarAccess.getDiamondInheritanceAccess().getDiamondInheritanceAction_0().getType().getClassifier());
         $current = temp; 

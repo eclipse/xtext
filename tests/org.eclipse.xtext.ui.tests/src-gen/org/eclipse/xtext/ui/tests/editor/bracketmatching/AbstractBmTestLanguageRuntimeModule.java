@@ -38,11 +38,6 @@ public abstract class AbstractBmTestLanguageRuntimeModule extends DefaultRuntime
 		return org.eclipse.xtext.ui.tests.editor.bracketmatching.parseTreeConstruction.BmTestLanguageParsetreeConstructor.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.ui.tests.editor.bracketmatching.validation.BmTestLanguageJavaValidator> bindBmTestLanguageJavaValidator() {
-		return org.eclipse.xtext.ui.tests.editor.bracketmatching.validation.BmTestLanguageJavaValidator.class;
-	}
-
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.ui.tests.editor.bracketmatching.parser.antlr.BmTestLanguageParser.class;
@@ -76,6 +71,11 @@ public abstract class AbstractBmTestLanguageRuntimeModule extends DefaultRuntime
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.ui.tests.editor.bracketmatching.validation.BmTestLanguageJavaValidator> bindBmTestLanguageJavaValidator() {
+		return org.eclipse.xtext.ui.tests.editor.bracketmatching.validation.BmTestLanguageJavaValidator.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment

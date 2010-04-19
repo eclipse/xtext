@@ -33,11 +33,6 @@ public abstract class AbstractEnumRulesUiTestLanguageRuntimeModule extends Defau
 		return org.eclipse.xtext.ui.tests.enumrules.services.EnumRulesUiTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.ui.tests.enumrules.parser.packrat.EnumRulesUiTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.ui.tests.enumrules.parseTreeConstruction.EnumRulesUiTestLanguageParsetreeConstructor.class;

@@ -5,7 +5,6 @@ grammar InternalEcore2XtextTest;
 
 options {
 	superClass=AbstractInternalContentAssistParser;
-	backtrack=true;
 	
 }
 

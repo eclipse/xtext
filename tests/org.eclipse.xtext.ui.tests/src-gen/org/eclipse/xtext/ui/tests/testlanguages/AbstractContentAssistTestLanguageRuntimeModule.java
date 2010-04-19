@@ -33,11 +33,6 @@ public abstract class AbstractContentAssistTestLanguageRuntimeModule extends Def
 		return org.eclipse.xtext.ui.tests.testlanguages.services.ContentAssistTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.ui.tests.testlanguages.parser.packrat.ContentAssistTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.ui.tests.testlanguages.parseTreeConstruction.ContentAssistTestLanguageParsetreeConstructor.class;
