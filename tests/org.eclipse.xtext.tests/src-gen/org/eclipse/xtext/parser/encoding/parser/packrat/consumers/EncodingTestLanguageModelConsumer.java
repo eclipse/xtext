@@ -10,10 +10,10 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.RuleCall;
 
 import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.encoding.services.EncodingTestLanguageGrammarAccess.ModelElements;
 
@@ -21,13 +21,11 @@ public final class EncodingTestLanguageModelConsumer extends NonTerminalConsumer
 
 	private ModelElements rule;	
 
-	private ITerminalConsumer wordConsumer;
+	private INonTerminalConsumer wordConsumer;
 
 	private IElementConsumer assignment$1$Consumer;
 
 	private IElementConsumer ruleCall$2$Consumer;
-
-	private ISequenceMatcher ruleCall$2$Delimiter;
 
 	protected class Assignment$1$Consumer extends LoopAssignmentConsumer {
 		
@@ -49,13 +47,12 @@ public final class EncodingTestLanguageModelConsumer extends NonTerminalConsumer
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(wordConsumer, "words", true, false, getElement(), getRuleCall$2$Delimiter(), optional);
+			return consumeNonTerminal(wordConsumer, "words", true, false, false, getElement(), optional);
 		}
 	}
 
 	public EncodingTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		ruleCall$2$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
@@ -71,7 +68,7 @@ public final class EncodingTestLanguageModelConsumer extends NonTerminalConsumer
 		this.rule = rule;
 		
 		assignment$1$Consumer = new Assignment$1$Consumer(rule.getWordsAssignment());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getWordsWORDTerminalRuleCall_0());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getWordsWordParserRuleCall_0());
 	}
 	
 	@Override
@@ -84,16 +81,8 @@ public final class EncodingTestLanguageModelConsumer extends NonTerminalConsumer
 		return getGrammarElement().getType().getClassifier();
 	}
 	
-	public void setWordConsumer(ITerminalConsumer wordConsumer) {
+	public void setWordConsumer(INonTerminalConsumer wordConsumer) {
 		this.wordConsumer = wordConsumer;
-	}
-	
-	public ISequenceMatcher getRuleCall$2$Delimiter() {
-		return ruleCall$2$Delimiter;
-	}
-	
-	public void setRuleCall$2$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$2$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

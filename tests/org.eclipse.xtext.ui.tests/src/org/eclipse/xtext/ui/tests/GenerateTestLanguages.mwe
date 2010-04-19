@@ -79,7 +79,7 @@
 		<language uri="classpath:/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/tests/TestLanguageSetup.mwe"/>
 		</language>
-		<language uri="classpath:/org/eclipse/xtext/ui/tests/editor/encoding/EncodingTestLanguage.xtext">
+		<language uri="classpath:/org/eclipse/xtext/ui/tests/editor/encoding/EncodingTestLanguage.xtext" fileExtensions="encodinguitestlanguge">
 			<fragment file="org/eclipse/xtext/ui/tests/TestLanguageSetup.mwe"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/ui/tests/enumrules/EnumRulesUiTestLanguage.xtext">

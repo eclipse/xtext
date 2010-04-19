@@ -83,6 +83,11 @@ public class EncodingTestAdapterFactory extends AdapterFactoryImpl
         return createModelAdapter();
       }
       @Override
+      public Adapter caseWord(Word object)
+      {
+        return createWordAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -115,6 +120,21 @@ public class EncodingTestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createModelAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.editor.encoding.encodingTest.Word <em>Word</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ui.tests.editor.encoding.encodingTest.Word
+   * @generated
+   */
+  public Adapter createWordAdapter()
   {
     return null;
   }

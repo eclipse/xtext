@@ -8,9 +8,9 @@ import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsu
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 
 
-public final class EncodingTestLanguageWORDConsumer extends AbstractRuleAwareTerminalConsumer {
+public final class EncodingTestLanguageLEXEMEConsumer extends AbstractRuleAwareTerminalConsumer {
 
-	public EncodingTestLanguageWORDConsumer(ITerminalConsumerConfiguration configuration) {
+	public EncodingTestLanguageLEXEMEConsumer(ITerminalConsumerConfiguration configuration) {
 		super(configuration);
 	}
 	

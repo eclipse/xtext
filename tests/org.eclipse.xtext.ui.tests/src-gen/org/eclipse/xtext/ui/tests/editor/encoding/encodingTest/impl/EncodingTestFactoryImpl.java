@@ -68,6 +68,7 @@ public class EncodingTestFactoryImpl extends EFactoryImpl implements EncodingTes
     switch (eClass.getClassifierID())
     {
       case EncodingTestPackage.MODEL: return createModel();
+      case EncodingTestPackage.WORD: return createWord();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -82,6 +83,17 @@ public class EncodingTestFactoryImpl extends EFactoryImpl implements EncodingTes
   {
     ModelImpl model = new ModelImpl();
     return model;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Word createWord()
+  {
+    WordImpl word = new WordImpl();
+    return word;
   }
 
   /**

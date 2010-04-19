@@ -10,7 +10,10 @@
   <genPackages prefix="EncodingTest" basePackage="org.eclipse.xtext.ui.tests.editor.encoding"
       disposableProviderFactory="true" ecorePackage="EncodingTestLanguage.ecore#/">
     <genClasses ecoreClass="EncodingTestLanguage.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EncodingTestLanguage.ecore#//Model/words"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EncodingTestLanguage.ecore#//Model/words"/>
+    </genClasses>
+    <genClasses ecoreClass="EncodingTestLanguage.ecore#//Word">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EncodingTestLanguage.ecore#//Word/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

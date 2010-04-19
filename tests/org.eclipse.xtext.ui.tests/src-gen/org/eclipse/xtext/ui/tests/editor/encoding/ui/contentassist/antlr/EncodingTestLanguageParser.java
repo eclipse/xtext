@@ -38,6 +38,7 @@ public class EncodingTestLanguageParser extends AbstractContentAssistParser {
 				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getModelAccess().getWordsAssignment(), "rule__Model__WordsAssignment");
+					put(grammarAccess.getWordAccess().getValueAssignment(), "rule__Word__ValueAssignment");
 				}
 			};
 		}

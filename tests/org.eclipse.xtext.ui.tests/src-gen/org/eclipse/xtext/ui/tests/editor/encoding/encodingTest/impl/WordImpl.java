@@ -5,55 +5,57 @@
  */
 package org.eclipse.xtext.ui.tests.editor.encoding.encodingTest.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.xtext.ui.tests.editor.encoding.encodingTest.EncodingTestPackage;
-import org.eclipse.xtext.ui.tests.editor.encoding.encodingTest.Model;
 import org.eclipse.xtext.ui.tests.editor.encoding.encodingTest.Word;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Model</b></em>'.
+ * An implementation of the model object '<em><b>Word</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.ui.tests.editor.encoding.encodingTest.impl.ModelImpl#getWords <em>Words</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.tests.editor.encoding.encodingTest.impl.WordImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ModelImpl extends MinimalEObjectImpl.Container implements Model
+public class WordImpl extends MinimalEObjectImpl.Container implements Word
 {
   /**
-   * The cached value of the '{@link #getWords() <em>Words</em>}' containment reference list.
+   * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getWords()
+   * @see #getValue()
    * @generated
    * @ordered
    */
-  protected EList<Word> words;
+  protected static final String VALUE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getValue()
+   * @generated
+   * @ordered
+   */
+  protected String value = VALUE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ModelImpl()
+  protected WordImpl()
   {
     super();
   }
@@ -66,7 +68,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   @Override
   protected EClass eStaticClass()
   {
-    return EncodingTestPackage.Literals.MODEL;
+    return EncodingTestPackage.Literals.WORD;
   }
 
   /**
@@ -74,13 +76,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Word> getWords()
+  public String getValue()
   {
-    if (words == null)
-    {
-      words = new EObjectContainmentEList<Word>(Word.class, this, EncodingTestPackage.MODEL__WORDS);
-    }
-    return words;
+    return value;
   }
 
   /**
@@ -88,15 +86,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  public void setValue(String newValue)
   {
-    switch (featureID)
-    {
-      case EncodingTestPackage.MODEL__WORDS:
-        return ((InternalEList<?>)getWords()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    String oldValue = value;
+    value = newValue;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, EncodingTestPackage.WORD__VALUE, oldValue, value));
   }
 
   /**
@@ -109,8 +104,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case EncodingTestPackage.MODEL__WORDS:
-        return getWords();
+      case EncodingTestPackage.WORD__VALUE:
+        return getValue();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -120,15 +115,13 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case EncodingTestPackage.MODEL__WORDS:
-        getWords().clear();
-        getWords().addAll((Collection<? extends Word>)newValue);
+      case EncodingTestPackage.WORD__VALUE:
+        setValue((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -144,8 +137,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case EncodingTestPackage.MODEL__WORDS:
-        getWords().clear();
+      case EncodingTestPackage.WORD__VALUE:
+        setValue(VALUE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -161,10 +154,27 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case EncodingTestPackage.MODEL__WORDS:
-        return words != null && !words.isEmpty();
+      case EncodingTestPackage.WORD__VALUE:
+        return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
     }
     return super.eIsSet(featureID);
   }
 
-} //ModelImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (value: ");
+    result.append(value);
+    result.append(')');
+    return result.toString();
+  }
+
+} //WordImpl

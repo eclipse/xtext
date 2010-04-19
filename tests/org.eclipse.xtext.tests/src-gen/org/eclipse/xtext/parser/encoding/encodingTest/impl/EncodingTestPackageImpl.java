@@ -8,12 +8,14 @@ package org.eclipse.xtext.parser.encoding.encodingTest.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.parser.encoding.encodingTest.EncodingTestFactory;
 import org.eclipse.xtext.parser.encoding.encodingTest.EncodingTestPackage;
 import org.eclipse.xtext.parser.encoding.encodingTest.Model;
+import org.eclipse.xtext.parser.encoding.encodingTest.Word;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,6 +31,13 @@ public class EncodingTestPackageImpl extends EPackageImpl implements EncodingTes
    * @generated
    */
   private EClass modelEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass wordEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -108,9 +117,29 @@ public class EncodingTestPackageImpl extends EPackageImpl implements EncodingTes
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_Words()
+  public EReference getModel_Words()
   {
-    return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
+    return (EReference)modelEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getWord()
+  {
+    return wordEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getWord_Value()
+  {
+    return (EAttribute)wordEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -144,7 +173,10 @@ public class EncodingTestPackageImpl extends EPackageImpl implements EncodingTes
 
     // Create classes and their features
     modelEClass = createEClass(MODEL);
-    createEAttribute(modelEClass, MODEL__WORDS);
+    createEReference(modelEClass, MODEL__WORDS);
+
+    wordEClass = createEClass(WORD);
+    createEAttribute(wordEClass, WORD__VALUE);
   }
 
   /**
@@ -179,7 +211,10 @@ public class EncodingTestPackageImpl extends EPackageImpl implements EncodingTes
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getModel_Words(), ecorePackage.getEString(), "words", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_Words(), this.getWord(), null, "words", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(wordEClass, Word.class, "Word", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getWord_Value(), ecorePackage.getEString(), "value", null, 0, 1, Word.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

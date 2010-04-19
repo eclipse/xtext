@@ -91,25 +91,25 @@ ruleModel returns [EObject current=null]
     }:
 (
 (
-		lv_words_0_0=RULE_WORD
-		{
-			createLeafNode(grammarAccess.getModelAccess().getWordsWORDTerminalRuleCall_0(), "words"); 
-		}
-		{
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getWordsWordParserRuleCall_0(), currentNode); 
+	    }
+		lv_words_0_0=ruleWord		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
 	       		add(
 	       			$current, 
 	       			"words",
 	        		lv_words_0_0, 
-	        		"WORD", 
-	        		lastConsumedNode);
+	        		"Word", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 
 )
@@ -120,7 +120,54 @@ ruleModel returns [EObject current=null]
 
 
 
-RULE_WORD : ('a'..'z'|'A'..'Z'|'0'..'9'|'\u00E4'|'\u00F6'|'\u00FC'|'\u00DF'|'\u00C4'|'\u00D6'|'\u00DC')*;
+// Entry rule entryRuleWord
+entryRuleWord returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getWordRule(), currentNode); }
+	 iv_ruleWord=ruleWord 
+	 { $current=$iv_ruleWord.current; } 
+	 EOF 
+;
+
+// Rule Word
+ruleWord returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(
+(
+		lv_value_0_0=RULE_LEXEME
+		{
+			createLeafNode(grammarAccess.getWordAccess().getValueLEXEMETerminalRuleCall_0(), "value"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getWordRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"value",
+	        		lv_value_0_0, 
+	        		"LEXEME", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)
+;
+
+
+
+
+
+RULE_LEXEME : ('a'..'z'|'A'..'Z'|'0'..'9'|'\u00E4'|'\u00F6'|'\u00FC'|'\u00DF'|'\u00C4'|'\u00D6'|'\u00DC')*;
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 

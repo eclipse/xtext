@@ -9,14 +9,16 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.encoding.services.EncodingTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.parser.encoding.parser.packrat.consumers.EncodingTestLanguageModelConsumer;
-import org.eclipse.xtext.parser.encoding.parser.packrat.consumers.EncodingTestLanguageWORDConsumer;
+import org.eclipse.xtext.parser.encoding.parser.packrat.consumers.EncodingTestLanguageWordConsumer;
+import org.eclipse.xtext.parser.encoding.parser.packrat.consumers.EncodingTestLanguageLEXEMEConsumer;
 import org.eclipse.xtext.parser.encoding.parser.packrat.consumers.EncodingTestLanguageWSConsumer;
 import org.eclipse.xtext.parser.encoding.parser.packrat.consumers.EncodingTestLanguageANY_OTHERConsumer;
 
 public class EncodingTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
     private EncodingTestLanguageModelConsumer modelConsumer;
-    private EncodingTestLanguageWORDConsumer wordConsumer;
+    private EncodingTestLanguageWordConsumer wordConsumer;
+    private EncodingTestLanguageLEXEMEConsumer lexemeConsumer;
     private EncodingTestLanguageWSConsumer wsConsumer;
     private EncodingTestLanguageANY_OTHERConsumer anyOtherConsumer;
 
@@ -35,10 +37,13 @@ public class EncodingTestLanguageParserConfiguration extends AbstractParserConfi
 		modelConsumer = new EncodingTestLanguageModelConsumer(
     		this, null
     	);
+		wordConsumer = new EncodingTestLanguageWordConsumer(
+    		this, null
+    	);
 	}
 	
 	public void createTerminalConsumers() {
-		wordConsumer = new EncodingTestLanguageWORDConsumer(this);
+		lexemeConsumer = new EncodingTestLanguageLEXEMEConsumer(this);
 		wsConsumer = new EncodingTestLanguageWSConsumer(this);
 		anyOtherConsumer = new EncodingTestLanguageANY_OTHERConsumer(this);
 	}
@@ -47,22 +52,29 @@ public class EncodingTestLanguageParserConfiguration extends AbstractParserConfi
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
 		getModelConsumer().setRule(grammarAccess.getModelAccess());
-		getWordConsumer().setRule(grammarAccess.getWORDRule());
+		getWordConsumer().setRule(grammarAccess.getWordAccess());
+		getLexemeConsumer().setRule(grammarAccess.getLEXEMERule());
 		getWsConsumer().setRule(grammarAccess.getWSRule());
 		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
 
 		getModelConsumer().setWordConsumer(getWordConsumer());
 
-		getModelConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.encoding.parser.packrat.EncodingTestLanguageDelimiters.ruleCall$5$Delimiter);
+		getWordConsumer().setLexemeConsumer(getLexemeConsumer());
+
+		getWordConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.encoding.parser.packrat.EncodingTestLanguageDelimiters.ruleCall$9$Delimiter);
 	}
 	
     public EncodingTestLanguageModelConsumer getModelConsumer() {
     	return modelConsumer;
     }
 
-    public EncodingTestLanguageWORDConsumer getWordConsumer() {
+    public EncodingTestLanguageWordConsumer getWordConsumer() {
     	return wordConsumer;
+    }
+
+    public EncodingTestLanguageLEXEMEConsumer getLexemeConsumer() {
+    	return lexemeConsumer;
     }
 
     public EncodingTestLanguageWSConsumer getWsConsumer() {

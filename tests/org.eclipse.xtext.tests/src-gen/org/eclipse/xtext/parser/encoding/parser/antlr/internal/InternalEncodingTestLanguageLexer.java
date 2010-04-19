@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class InternalEncodingTestLanguageLexer extends Lexer {
     public static final int RULE_WS=5;
     public static final int EOF=-1;
-    public static final int RULE_WORD=4;
+    public static final int RULE_LEXEME=4;
     public static final int Tokens=7;
     public static final int RULE_ANY_OTHER=6;
     public InternalEncodingTestLanguageLexer() {;} 
@@ -22,14 +22,14 @@ public class InternalEncodingTestLanguageLexer extends Lexer {
     }
     public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g"; }
 
-    // $ANTLR start RULE_WORD
-    public final void mRULE_WORD() throws RecognitionException {
+    // $ANTLR start RULE_LEXEME
+    public final void mRULE_LEXEME() throws RecognitionException {
         try {
-            int _type = RULE_WORD;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:123:11: ( ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:123:13: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )*
+            int _type = RULE_LEXEME;
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:170:13: ( ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:170:15: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:123:13: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:170:15: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )*
             loop1:
             do {
                 int alt1=2;
@@ -71,16 +71,16 @@ public class InternalEncodingTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end RULE_WORD
+    // $ANTLR end RULE_LEXEME
 
     // $ANTLR start RULE_WS
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:125:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:125:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:172:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:172:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:125:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:172:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt2=0;
             loop2:
             do {
@@ -133,8 +133,8 @@ public class InternalEncodingTestLanguageLexer extends Lexer {
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:127:16: ( . )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:127:18: .
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:174:16: ( . )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:174:18: .
             {
             matchAny(); 
 
@@ -148,7 +148,7 @@ public class InternalEncodingTestLanguageLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:1:8: ( RULE_WORD | RULE_WS | RULE_ANY_OTHER )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:1:8: ( RULE_LEXEME | RULE_WS | RULE_ANY_OTHER )
         int alt3=3;
         int LA3_0 = input.LA(1);
 
@@ -165,21 +165,21 @@ public class InternalEncodingTestLanguageLexer extends Lexer {
             alt3 = mTokensHelper004();}
         switch (alt3) {
             case 1 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:1:10: RULE_WORD
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:1:10: RULE_LEXEME
                 {
-                mRULE_WORD(); 
+                mRULE_LEXEME(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:1:20: RULE_WS
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:1:22: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:1:28: RULE_ANY_OTHER
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:1:30: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

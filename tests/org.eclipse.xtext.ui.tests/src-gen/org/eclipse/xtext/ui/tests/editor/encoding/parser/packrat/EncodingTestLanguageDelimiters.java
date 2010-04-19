@@ -11,6 +11,6 @@ public final class EncodingTestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	public static final ISequenceMatcher ruleCall$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 }

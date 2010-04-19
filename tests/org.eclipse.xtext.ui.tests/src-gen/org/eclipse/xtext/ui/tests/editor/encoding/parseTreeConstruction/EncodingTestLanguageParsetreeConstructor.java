@@ -36,6 +36,7 @@ protected class ThisRootNode extends RootToken {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Model_WordsAssignment(this, this, 0, inst);
+			case 1: return new Word_ValueAssignment(this, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -45,11 +46,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   words+=WORD*;
+ *   words+=Word*;
  *
  **/
 
-// words+=WORD*
+// words+=Word*
 protected class Model_WordsAssignment extends AssignmentToken  {
 	
 	public Model_WordsAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -64,8 +65,8 @@ protected class Model_WordsAssignment extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Model_WordsAssignment(parent, this, 0, inst);
-			default: return parent.createParentFollower(this, index, index - 1, inst);
+			case 0: return new Word_ValueAssignment(this, this, 0, inst);
+			default: return null;
 		}	
 	}	
 		
@@ -78,9 +79,69 @@ protected class Model_WordsAssignment extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("words",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("words");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getWordRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getModelAccess().getWordsWordParserRuleCall_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Model_WordsAssignment(parent, next, actIndex, consumed);
+			default: return parent.createParentFollower(next, actIndex , index - 1, consumed);
+		}	
+	}	
+}
+
+/************ end Rule Model ****************/
+
+
+/************ begin Rule Word ****************
+ *
+ * Word:
+ *   value=LEXEME;
+ *
+ **/
+
+// value=LEXEME
+protected class Word_ValueAssignment extends AssignmentToken  {
+	
+	public Word_ValueAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getWordAccess().getValueAssignment();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getWordRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("value",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("value");
 		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
-			element = grammarAccess.getModelAccess().getWordsWORDTerminalRuleCall_0();
+			element = grammarAccess.getWordAccess().getValueLEXEMETerminalRuleCall_0();
 			return obj;
 		}
 		return null;
@@ -88,6 +149,6 @@ protected class Model_WordsAssignment extends AssignmentToken  {
 
 }
 
-/************ end Rule Model ****************/
+/************ end Rule Word ****************/
 
 }

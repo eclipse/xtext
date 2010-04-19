@@ -28,19 +28,19 @@ import org.eclipse.emf.ecore.EObject;
 public interface Model extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Words</b></em>' attribute list.
-   * The list contents are of type {@link java.lang.String}.
+   * Returns the value of the '<em><b>Words</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.encoding.encodingTest.Word}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Words</em>' attribute list isn't clear,
+   * If the meaning of the '<em>Words</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Words</em>' attribute list.
+   * @return the value of the '<em>Words</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.encoding.encodingTest.EncodingTestPackage#getModel_Words()
-   * @model unique="false"
+   * @model containment="true"
    * @generated
    */
-  EList<String> getWords();
+  EList<Word> getWords();
 
 } // Model

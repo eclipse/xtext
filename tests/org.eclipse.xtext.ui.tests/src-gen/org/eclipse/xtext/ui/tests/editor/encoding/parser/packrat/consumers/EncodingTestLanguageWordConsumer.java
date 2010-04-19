@@ -10,24 +10,26 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.RuleCall;
 
 import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
-import org.eclipse.xtext.ui.tests.editor.encoding.services.EncodingTestLanguageGrammarAccess.ModelElements;
+import org.eclipse.xtext.ui.tests.editor.encoding.services.EncodingTestLanguageGrammarAccess.WordElements;
 
-public final class EncodingTestLanguageModelConsumer extends NonTerminalConsumer {
+public final class EncodingTestLanguageWordConsumer extends NonTerminalConsumer {
 
-	private ModelElements rule;	
+	private WordElements rule;	
 
-	private INonTerminalConsumer wordConsumer;
+	private ITerminalConsumer lexemeConsumer;
 
 	private IElementConsumer assignment$1$Consumer;
 
 	private IElementConsumer ruleCall$2$Consumer;
 
-	protected class Assignment$1$Consumer extends LoopAssignmentConsumer {
+	private ISequenceMatcher ruleCall$2$Delimiter;
+
+	protected class Assignment$1$Consumer extends AssignmentConsumer {
 		
 		protected Assignment$1$Consumer(final Assignment assignment) {
 			super(assignment);
@@ -47,12 +49,13 @@ public final class EncodingTestLanguageModelConsumer extends NonTerminalConsumer
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(wordConsumer, "words", true, false, false, getElement(), optional);
+			return consumeTerminal(lexemeConsumer, "value", false, false, getElement(), getRuleCall$2$Delimiter(), optional);
 		}
 	}
 
-	public EncodingTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
+	public EncodingTestLanguageWordConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
+		ruleCall$2$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
@@ -60,15 +63,15 @@ public final class EncodingTestLanguageModelConsumer extends NonTerminalConsumer
 		return assignment$1$Consumer.consume();
 	}
 
-	public ModelElements getRule() {
+	public WordElements getRule() {
 		return rule;
 	}
 	
-	public void setRule(ModelElements rule) {
+	public void setRule(WordElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.getWordsAssignment());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getWordsWordParserRuleCall_0());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getValueAssignment());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getValueLEXEMETerminalRuleCall_0());
 	}
 	
 	@Override
@@ -81,8 +84,16 @@ public final class EncodingTestLanguageModelConsumer extends NonTerminalConsumer
 		return getGrammarElement().getType().getClassifier();
 	}
 	
-	public void setWordConsumer(INonTerminalConsumer wordConsumer) {
-		this.wordConsumer = wordConsumer;
+	public void setLexemeConsumer(ITerminalConsumer lexemeConsumer) {
+		this.lexemeConsumer = lexemeConsumer;
+	}
+	
+	public ISequenceMatcher getRuleCall$2$Delimiter() {
+		return ruleCall$2$Delimiter;
+	}
+	
+	public void setRuleCall$2$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$2$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

@@ -8,6 +8,7 @@ package org.eclipse.xtext.parser.encoding.encodingTest;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,7 +70,7 @@ public interface EncodingTestPackage extends EPackage
   int MODEL = 0;
 
   /**
-   * The feature id for the '<em><b>Words</b></em>' attribute list.
+   * The feature id for the '<em><b>Words</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -86,6 +87,34 @@ public interface EncodingTestPackage extends EPackage
    */
   int MODEL_FEATURE_COUNT = 1;
 
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parser.encoding.encodingTest.impl.WordImpl <em>Word</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parser.encoding.encodingTest.impl.WordImpl
+   * @see org.eclipse.xtext.parser.encoding.encodingTest.impl.EncodingTestPackageImpl#getWord()
+   * @generated
+   */
+  int WORD = 1;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WORD__VALUE = 0;
+
+  /**
+   * The number of structural features of the '<em>Word</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WORD_FEATURE_COUNT = 1;
+
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parser.encoding.encodingTest.Model <em>Model</em>}'.
@@ -98,15 +127,36 @@ public interface EncodingTestPackage extends EPackage
   EClass getModel();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parser.encoding.encodingTest.Model#getWords <em>Words</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.parser.encoding.encodingTest.Model#getWords <em>Words</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Words</em>'.
+   * @return the meta object for the containment reference list '<em>Words</em>'.
    * @see org.eclipse.xtext.parser.encoding.encodingTest.Model#getWords()
    * @see #getModel()
    * @generated
    */
-  EAttribute getModel_Words();
+  EReference getModel_Words();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parser.encoding.encodingTest.Word <em>Word</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Word</em>'.
+   * @see org.eclipse.xtext.parser.encoding.encodingTest.Word
+   * @generated
+   */
+  EClass getWord();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parser.encoding.encodingTest.Word#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.eclipse.xtext.parser.encoding.encodingTest.Word#getValue()
+   * @see #getWord()
+   * @generated
+   */
+  EAttribute getWord_Value();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -142,12 +192,30 @@ public interface EncodingTestPackage extends EPackage
     EClass MODEL = eINSTANCE.getModel();
 
     /**
-     * The meta object literal for the '<em><b>Words</b></em>' attribute list feature.
+     * The meta object literal for the '<em><b>Words</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute MODEL__WORDS = eINSTANCE.getModel_Words();
+    EReference MODEL__WORDS = eINSTANCE.getModel_Words();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parser.encoding.encodingTest.impl.WordImpl <em>Word</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parser.encoding.encodingTest.impl.WordImpl
+     * @see org.eclipse.xtext.parser.encoding.encodingTest.impl.EncodingTestPackageImpl#getWord()
+     * @generated
+     */
+    EClass WORD = eINSTANCE.getWord();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute WORD__VALUE = eINSTANCE.getWord_Value();
 
   }
 

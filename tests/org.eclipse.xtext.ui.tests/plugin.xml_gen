@@ -3186,7 +3186,7 @@
             class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
-            extensions="encodingtestlanguage"
+            extensions="encodinguitestlanguge"
             id="org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage"
             name="EncodingTestLanguage Editor">
         </editor>

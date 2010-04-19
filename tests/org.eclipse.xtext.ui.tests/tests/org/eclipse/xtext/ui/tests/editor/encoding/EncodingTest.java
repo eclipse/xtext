@@ -36,12 +36,12 @@ public class EncodingTest extends AbstractEditorTest {
 	}
 
 	public void testFileEncodingIsUsedInEMFResource() throws Exception {
-		IFile file = createFile("foo/x_default.encodingtestlanguage", "");
+		IFile file = createFile("foo/x_default.encodinguitestlanguage", "");
 		openEditorAndCheckEncoding(file, ResourcesPlugin.getWorkspace().getRoot().getDefaultCharset());
-		file = createFile("foo/x_utf.encodingtestlanguage", "");
+		file = createFile("foo/x_utf.encodinguitestlanguage", "");
 		file.setCharset("UTF-8", null);
 		openEditorAndCheckEncoding(file, "UTF-8");
-		file = createFile("foo/x_iso.encodingtestlanguage", "");
+		file = createFile("foo/x_iso.encodinguitestlanguage", "");
 		file.setCharset("ISO-8859-1", null);
 		openEditorAndCheckEncoding(file, "ISO-8859-1");
 	}

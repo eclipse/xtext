@@ -23,11 +23,11 @@ import java.util.ArrayList;
 
 public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_WORD", "RULE_WS", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_LEXEME", "RULE_WS", "RULE_ANY_OTHER"
     };
-    public static final int RULE_WORD=4;
     public static final int RULE_ANY_OTHER=6;
     public static final int RULE_WS=5;
+    public static final int RULE_LEXEME=4;
     public static final int EOF=-1;
 
         public InternalEncodingTestLanguageParser(TokenStream input) {
@@ -103,56 +103,60 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start ruleModel
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:86:1: ruleModel returns [EObject current=null] : ( (lv_words_0_0= RULE_WORD ) )* ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:86:1: ruleModel returns [EObject current=null] : ( (lv_words_0_0= ruleWord ) )* ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
-        Token lv_words_0_0=null;
+        EObject lv_words_0_0 = null;
+
 
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:91:6: ( ( (lv_words_0_0= RULE_WORD ) )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:92:1: ( (lv_words_0_0= RULE_WORD ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:91:6: ( ( (lv_words_0_0= ruleWord ) )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:92:1: ( (lv_words_0_0= ruleWord ) )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:92:1: ( (lv_words_0_0= RULE_WORD ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:92:1: ( (lv_words_0_0= ruleWord ) )*
             loop1:
             do {
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==RULE_WORD) ) {
+                if ( (LA1_0==RULE_LEXEME) ) {
                     alt1=1;
                 }
 
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:93:1: (lv_words_0_0= RULE_WORD )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:93:1: (lv_words_0_0= ruleWord )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:93:1: (lv_words_0_0= RULE_WORD )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:94:3: lv_words_0_0= RULE_WORD
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:93:1: (lv_words_0_0= ruleWord )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:94:3: lv_words_0_0= ruleWord
             	    {
-            	    lv_words_0_0=(Token)input.LT(1);
-            	    match(input,RULE_WORD,FollowSets000.FOLLOW_RULE_WORD_in_ruleModel126); 
+            	     
+            	    	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getWordsWordParserRuleCall_0(), currentNode); 
+            	    	    
+            	    pushFollow(FollowSets000.FOLLOW_ruleWord_in_ruleModel130);
+            	    lv_words_0_0=ruleWord();
+            	    _fsp--;
 
-            	    			createLeafNode(grammarAccess.getModelAccess().getWordsWORDTerminalRuleCall_0(), "words"); 
-            	    		
 
             	    	        if (current==null) {
             	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        try {
             	    	       		add(
             	    	       			current, 
             	    	       			"words",
             	    	        		lv_words_0_0, 
-            	    	        		"WORD", 
-            	    	        		lastConsumedNode);
+            	    	        		"Word", 
+            	    	        		currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
             	    	        }
+            	    	        currentNode = currentNode.getParent();
             	    	    
 
             	    }
@@ -185,13 +189,116 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
     // $ANTLR end ruleModel
 
 
+    // $ANTLR start entryRuleWord
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:124:1: entryRuleWord returns [EObject current=null] : iv_ruleWord= ruleWord EOF ;
+    public final EObject entryRuleWord() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleWord = null;
+
+
+        try {
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:125:2: (iv_ruleWord= ruleWord EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:126:2: iv_ruleWord= ruleWord EOF
+            {
+             currentNode = createCompositeNode(grammarAccess.getWordRule(), currentNode); 
+            pushFollow(FollowSets000.FOLLOW_ruleWord_in_entryRuleWord166);
+            iv_ruleWord=ruleWord();
+            _fsp--;
+
+             current =iv_ruleWord; 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleWord176); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end entryRuleWord
+
+
+    // $ANTLR start ruleWord
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:133:1: ruleWord returns [EObject current=null] : ( (lv_value_0_0= RULE_LEXEME ) ) ;
+    public final EObject ruleWord() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_value_0_0=null;
+
+         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+            
+        try {
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:138:6: ( ( (lv_value_0_0= RULE_LEXEME ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:139:1: ( (lv_value_0_0= RULE_LEXEME ) )
+            {
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:139:1: ( (lv_value_0_0= RULE_LEXEME ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:140:1: (lv_value_0_0= RULE_LEXEME )
+            {
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:140:1: (lv_value_0_0= RULE_LEXEME )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/encoding/parser/antlr/internal/InternalEncodingTestLanguage.g:141:3: lv_value_0_0= RULE_LEXEME
+            {
+            lv_value_0_0=(Token)input.LT(1);
+            match(input,RULE_LEXEME,FollowSets000.FOLLOW_RULE_LEXEME_in_ruleWord217); 
+
+            			createLeafNode(grammarAccess.getWordAccess().getValueLEXEMETerminalRuleCall_0(), "value"); 
+            		
+
+            	        if (current==null) {
+            	            current = factory.create(grammarAccess.getWordRule().getType().getClassifier());
+            	            associateNodeWithAstElement(currentNode, current);
+            	        }
+            	        try {
+            	       		set(
+            	       			current, 
+            	       			"value",
+            	        		lv_value_0_0, 
+            	        		"LEXEME", 
+            	        		lastConsumedNode);
+            	        } catch (ValueConverterException vce) {
+            				handleValueConverterException(vce);
+            	        }
+            	    
+
+            }
+
+
+            }
+
+
+            }
+
+             resetLookahead(); 
+                	lastConsumedNode = currentNode;
+                
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end ruleWord
+
+
  
 
     
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleModel_in_entryRuleModel75 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleModel85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_WORD_in_ruleModel126 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_ruleWord_in_ruleModel130 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_ruleWord_in_entryRuleWord166 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleWord176 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_LEXEME_in_ruleWord217 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

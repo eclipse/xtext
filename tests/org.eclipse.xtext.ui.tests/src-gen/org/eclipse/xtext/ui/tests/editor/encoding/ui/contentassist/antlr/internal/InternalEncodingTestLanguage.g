@@ -85,6 +85,34 @@ finally {
 
 
 
+// Entry rule entryRuleWord
+entryRuleWord 
+:
+{ before(grammarAccess.getWordRule()); }
+	 ruleWord
+{ after(grammarAccess.getWordRule()); } 
+	 EOF 
+;
+
+// Rule Word
+ruleWord
+    @init {
+		int stackSize = keepStackSize();
+    }
+	:
+(
+{ before(grammarAccess.getWordAccess().getValueAssignment()); }
+(rule__Word__ValueAssignment)
+{ after(grammarAccess.getWordAccess().getValueAssignment()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
 
 
 
@@ -95,8 +123,23 @@ rule__Model__WordsAssignment
     }
 :
 (
-{ before(grammarAccess.getModelAccess().getWordsWORDTerminalRuleCall_0()); }
-	RULE_WORD{ after(grammarAccess.getModelAccess().getWordsWORDTerminalRuleCall_0()); }
+{ before(grammarAccess.getModelAccess().getWordsWordParserRuleCall_0()); }
+	ruleWord{ after(grammarAccess.getModelAccess().getWordsWordParserRuleCall_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Word__ValueAssignment
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getWordAccess().getValueLEXEMETerminalRuleCall_0()); }
+	RULE_LEXEME{ after(grammarAccess.getWordAccess().getValueLEXEMETerminalRuleCall_0()); }
 )
 
 ;
@@ -105,7 +148,7 @@ finally {
 }
 
 
-RULE_WORD : ('a'..'z'|'A'..'Z'|'0'..'9'|'\u00E4'|'\u00F6'|'\u00FC'|'\u00DF'|'\u00C4'|'\u00D6'|'\u00DC')*;
+RULE_LEXEME : ('a'..'z'|'A'..'Z'|'0'..'9'|'\u00E4'|'\u00F6'|'\u00FC'|'\u00DF'|'\u00C4'|'\u00D6'|'\u00DC')*;
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
