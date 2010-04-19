@@ -92,19 +92,23 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 			AbstractElement elementToParse, String[] ruleNames, int startIndex) {
 		try {
 			final boolean[] wasEof = new boolean[] { false };
+			final boolean[] announcedEofWithLA = new boolean[] { false };
 			final boolean[] consumedSomething = new boolean[] { true };
-			final boolean[] errorRecovery = new boolean[] { false };
+			final boolean[] wasRecovering = new boolean[] { false };
 			ObservableXtextTokenStream stream = (ObservableXtextTokenStream) parser.getTokenStream();
 			stream.setListener(new StreamListener() {
 				public void announceEof(int lookAhead) {
-					if (!errorRecovery[0])
+					if (!wasRecovering[0]) {
 						parser.announceEof(lookAhead);
+						if (lookAhead > 1)
+							announcedEofWithLA[0] = true;
+					}
 					wasEof[0] = true;
 				}
 				
 				public void announceConsume() {
 					parser.announceConsume();
-					if (!errorRecovery[0])
+					if (!wasRecovering[0])
 						consumedSomething[0] = true;
 				}
 
@@ -118,23 +122,24 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 			});
 			parser.setRecoveryListener(new AbstractInternalContentAssistParser.RecoveryListener() {
 				public void endErrorRecovery() {
-					errorRecovery[0] = false;
 				}
 				
 				public void beginErrorRecovery() {
-					errorRecovery[0] = true;
+					wasRecovering[0] = true;
 				}
 			});
 			int i = startIndex;
 			Collection<FollowElement> result = null;
 			while(i < ruleNames.length && !wasEof[0] && consumedSomething[0]) {
 				consumedSomething[0] = false;
+				announcedEofWithLA[0] = false;
+				wasRecovering[0] = false;
 				Method method = parser.getClass().getDeclaredMethod(ruleNames[i]);
 				method.setAccessible(true);
 				method.invoke(parser);
 				result = parser.getFollowElements();
 				if (i == ruleNames.length - 1 && !GrammarUtil.isMultipleCardinality(elementToParse)) {
-					if (consumedSomething[0])
+					if (consumedSomething[0] || announcedEofWithLA[0])
 						return result;
 					return Collections.emptyList();
 				}

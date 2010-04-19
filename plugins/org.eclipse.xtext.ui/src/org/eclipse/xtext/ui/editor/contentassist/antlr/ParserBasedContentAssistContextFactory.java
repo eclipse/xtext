@@ -616,6 +616,8 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 
 		private UnorderedGroup group;
 		
+		private Collection<RuleCall> visitedRuleCalls = Sets.newHashSet();
+		
 		public void doSwitch(UnorderedGroup group, List<AbstractElement> handledAlternatives) {
 			this.group = group;
 			this.handledAlternatives = handledAlternatives;
@@ -706,8 +708,12 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		
 		@Override
 		public Boolean caseRuleCall(RuleCall object) {
+			if (!visitedRuleCalls.add(object))
+				return isOptional(object);
 			acceptor.accept(object);
-			return doSwitch(object.getRule()) || isOptional(object);
+			Boolean result = doSwitch(object.getRule()) || isOptional(object);
+			visitedRuleCalls.remove(object);
+			return result;
 		}
 		
 		@Override
