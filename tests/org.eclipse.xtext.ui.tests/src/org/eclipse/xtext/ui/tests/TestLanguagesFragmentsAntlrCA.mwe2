@@ -1,0 +1,35 @@
+module org.eclipse.xtext.ui.tests.TestLanguagesFragmentsAntlrCA
+
+import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.ui.generator.*
+import de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+import de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
+import de.itemis.xtext.antlr.ex.ca.ContentAssistParserGeneratorFragment
+
+var genModels =""
+var referencedGenModels = ""
+var genModel = ""
+var basePackage = ""
+var javaModelDirectory = ""
+var xmiModelDirectory = ""
+var file.extensions = ""
+var classSplitting = true
+var skipGenerate = false
+var backtrack = false
+var memoize = false
+
+CompositeGeneratorFragment {
+	fragment = ecore.EcoreGeneratorFragment auto-inject {}
+	fragment = grammarAccess.GrammarAccessFragment {}
+	fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+	fragment = resourceFactory.ResourceFactoryFragment { 
+		fileExtensions = file.extensions
+	} 
+	fragment = XtextAntlrGeneratorFragment {
+		options = auto-inject {}
+	}
+	fragment = contentAssist.JavaBasedContentAssistFragment {}
+	fragment = ContentAssistParserGeneratorFragment {
+		options = auto-inject {}
+	}
+}

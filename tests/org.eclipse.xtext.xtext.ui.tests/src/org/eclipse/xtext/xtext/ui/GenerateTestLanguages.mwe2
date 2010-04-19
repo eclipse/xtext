@@ -1,0 +1,50 @@
+module org.eclipse.xtext.xtext.ui.GenerateTestLanguages
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.*
+import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.ui.generator.*
+import de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+import de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
+import org.eclipse.xtext.generator.ecore2xtext.Ecore2XtextValueConverterServiceFragment
+
+var projectName = "org.eclipse.xtext.xtext.ui.tests"
+var runtimeProject = "../${projectName}"
+
+Workflow {
+	bean = StandaloneSetup {
+		platformUri = "${runtimeProject}/.."
+	} 
+	
+	component = DirectoryCleaner {
+		directory="${runtimeProject}/src-gen"
+	} 
+	
+	component = Generator {
+		pathRtProject = "${runtimeProject}"
+		pathUiProject = "${runtimeProject}"
+		projectNameRt = "${projectName}"
+		activator = "org.eclipse.xtext.xtext.ui.tests.Activator"
+		
+		language = { 
+			uri="classpath:/org/eclipse/xtext/xtext/ui/ecore2xtext/Ecore2XtextTest.xtext"
+			fragment = ecore.EcoreGeneratorFragment {}
+			fragment = grammarAccess.GrammarAccessFragment {}
+			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+			fragment = resourceFactory.ResourceFactoryFragment {} 
+			fragment = XtextAntlrGeneratorFragment {
+				options = {
+					classSplitting = true
+				}
+			}
+			fragment = contentAssist.JavaBasedContentAssistFragment {}
+			fragment = XtextAntlrUiGeneratorFragment {
+				options = {
+					classSplitting = true
+				}
+			}
+			fragment = Ecore2XtextValueConverterServiceFragment {}
+		}
+	}
+}

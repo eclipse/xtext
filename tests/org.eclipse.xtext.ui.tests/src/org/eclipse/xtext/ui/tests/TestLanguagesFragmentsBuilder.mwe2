@@ -1,0 +1,22 @@
+module org.eclipse.xtext.ui.tests.TestLanguagesFragmentsBuilder
+
+import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.ui.tests.*
+
+var genModels =""
+var referencedGenModels = ""
+var genModel = ""
+var basePackage = ""
+var javaModelDirectory = ""
+var xmiModelDirectory = ""
+var file.extensions = ""
+var classSplitting = true
+var skipGenerate = false
+var backtrack = false
+var memoize = false
+
+CompositeGeneratorFragment {
+	fragment = @TestLanguagesFragments {}
+	fragment = validation.JavaValidatorFragment {}
+	fragment = builder.BuilderIntegrationFragment {}
+}
