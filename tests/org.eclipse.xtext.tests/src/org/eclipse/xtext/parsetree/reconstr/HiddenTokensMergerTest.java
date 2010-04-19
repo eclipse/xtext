@@ -3,6 +3,7 @@ package org.eclipse.xtext.parsetree.reconstr;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.SerializerUtil.SerializationOptions;
+import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.AppendToFileEnd;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Commentable;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.CommentableItem;
@@ -94,11 +95,15 @@ public class HiddenTokensMergerTest extends AbstractXtextTests {
 
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=297938
 	public void testAppendToEnd() throws Exception {
-		AppendToFileEnd model = (AppendToFileEnd) getResourceFromStringAndExpect("#7 class foo classend", 1)
-				.getContents().get(0);
+		AppendToFileEnd model = (AppendToFileEnd) getModel("#7 class foo endclass");
 		model.getItems().add(HiddentokenmergertestFactory.eINSTANCE.createAppendToFileEndItem());
 		model.getItems().get(1).setName("bar");
 		assertEquals("#7 class foo endclass class bar endclass", serialize(model));
+	}
+	
+	public void testAction1() throws Exception {
+		Action1 model = (Action1) getModel("#8  foo  sub1  sub2");
+		assertEquals("#8  foo  sub1  sub2", serialize(model));
 	}
 
 	@Override
