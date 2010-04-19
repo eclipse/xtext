@@ -19,7 +19,9 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -78,7 +80,13 @@ public class EditorUtils {
 	}
 
 	public static XtextEditor getActiveXtextEditor() {
-		IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+		IWorkbench workbench = PlatformUI.getWorkbench();
+		IWorkbenchWindow workbenchWindow = workbench.getActiveWorkbenchWindow();
+		if (workbenchWindow == null) 
+			return null;
+		IWorkbenchPage activePage = workbenchWindow.getActivePage();
+		if (activePage == null) 
+			return null;
 		IEditorPart activeEditor = activePage.getActiveEditor();
 		if (activeEditor == null)
 			return null;
