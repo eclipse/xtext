@@ -78,7 +78,7 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 				IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
 				IEditorPart editor = IDE.openEditor(activePage, editorInput, editorID);
 				selectAndReveal(editor, uri, crossReference, indexInList, select);
-				return editor;
+				return EditorUtils.getXtextEditor(editor);
 			} catch (WrappedException e) {
 				logger.error("Error while opening editor part for EMF URI '" + uri + "'", e.getCause());
 			} catch (PartInitException partInitException) {
