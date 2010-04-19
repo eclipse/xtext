@@ -11,7 +11,7 @@ grammar org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage with
 generate hiddentokenmergertest "http://www.eclipse.org/2009/tmf/xtext/hiddentokensmerger"
 
 Model:
-	DatatypeBug286557 | EnumBug | Commentable | ValueList | RefList | AppendToFileEnd;
+	DatatypeBug286557 | EnumBug | Commentable | ValueList | RefList | SingleRef|  AppendToFileEnd | Action1;
 
 DatatypeBug286557:
 	'#1' name=FQN ('ref' ref=[DatatypeBug286557|FQN])? ";";
@@ -47,3 +47,12 @@ AppendToFileEnd:
 
 AppendToFileEndItem:
 	'class' name=ID 'endclass';
+	
+Action1:
+	'#8' {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2;
+	
+Action1Sub1:
+	{Action1Sub} "sub1";
+	
+Action1Sub2:
+	{Action1SubClass} "sub2";  
