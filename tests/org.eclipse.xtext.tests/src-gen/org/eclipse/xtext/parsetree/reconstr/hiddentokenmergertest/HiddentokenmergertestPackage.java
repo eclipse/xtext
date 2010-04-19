@@ -319,7 +319,7 @@ public interface HiddentokenmergertestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SINGLE_REF__OBJ = 0;
+  int SINGLE_REF__OBJ = MODEL_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -328,7 +328,7 @@ public interface HiddentokenmergertestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SINGLE_REF__REF = 1;
+  int SINGLE_REF__REF = MODEL_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Single Ref</em>' class.
@@ -337,7 +337,7 @@ public interface HiddentokenmergertestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SINGLE_REF_FEATURE_COUNT = 2;
+  int SINGLE_REF_FEATURE_COUNT = MODEL_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.AppendToFileEndImpl <em>Append To File End</em>}' class.
@@ -396,6 +396,119 @@ public interface HiddentokenmergertestPackage extends EPackage
   int APPEND_TO_FILE_END_ITEM_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1Impl <em>Action1</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1Impl
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getAction1()
+   * @generated
+   */
+  int ACTION1 = 11;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION1__NAME = MODEL_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Actions2</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION1__ACTIONS2 = MODEL_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Action1</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION1_FEATURE_COUNT = MODEL_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1Sub1Impl <em>Action1 Sub1</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1Sub1Impl
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getAction1Sub1()
+   * @generated
+   */
+  int ACTION1_SUB1 = 12;
+
+  /**
+   * The number of structural features of the '<em>Action1 Sub1</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION1_SUB1_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1Sub2Impl <em>Action1 Sub2</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1Sub2Impl
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getAction1Sub2()
+   * @generated
+   */
+  int ACTION1_SUB2 = 13;
+
+  /**
+   * The number of structural features of the '<em>Action1 Sub2</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION1_SUB2_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1SubImpl <em>Action1 Sub</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1SubImpl
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getAction1Sub()
+   * @generated
+   */
+  int ACTION1_SUB = 14;
+
+  /**
+   * The number of structural features of the '<em>Action1 Sub</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION1_SUB_FEATURE_COUNT = ACTION1_SUB1_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1SubClassImpl <em>Action1 Sub Class</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1SubClassImpl
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getAction1SubClass()
+   * @generated
+   */
+  int ACTION1_SUB_CLASS = 15;
+
+  /**
+   * The number of structural features of the '<em>Action1 Sub Class</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION1_SUB_CLASS_FEATURE_COUNT = ACTION1_SUB2_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBugEnum <em>Enum Bug Enum</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -403,7 +516,7 @@ public interface HiddentokenmergertestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getEnumBugEnum()
    * @generated
    */
-  int ENUM_BUG_ENUM = 11;
+  int ENUM_BUG_ENUM = 16;
 
 
   /**
@@ -671,6 +784,78 @@ public interface HiddentokenmergertestPackage extends EPackage
   EAttribute getAppendToFileEndItem_Name();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1 <em>Action1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Action1</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1
+   * @generated
+   */
+  EClass getAction1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1#getName()
+   * @see #getAction1()
+   * @generated
+   */
+  EAttribute getAction1_Name();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1#getActions2 <em>Actions2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Actions2</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1#getActions2()
+   * @see #getAction1()
+   * @generated
+   */
+  EReference getAction1_Actions2();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1Sub1 <em>Action1 Sub1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Action1 Sub1</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1Sub1
+   * @generated
+   */
+  EClass getAction1Sub1();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1Sub2 <em>Action1 Sub2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Action1 Sub2</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1Sub2
+   * @generated
+   */
+  EClass getAction1Sub2();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1Sub <em>Action1 Sub</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Action1 Sub</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1Sub
+   * @generated
+   */
+  EClass getAction1Sub();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1SubClass <em>Action1 Sub Class</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Action1 Sub Class</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1SubClass
+   * @generated
+   */
+  EClass getAction1SubClass();
+
+  /**
    * Returns the meta object for enum '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBugEnum <em>Enum Bug Enum</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -924,6 +1109,72 @@ public interface HiddentokenmergertestPackage extends EPackage
      * @generated
      */
     EAttribute APPEND_TO_FILE_END_ITEM__NAME = eINSTANCE.getAppendToFileEndItem_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1Impl <em>Action1</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1Impl
+     * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getAction1()
+     * @generated
+     */
+    EClass ACTION1 = eINSTANCE.getAction1();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ACTION1__NAME = eINSTANCE.getAction1_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Actions2</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTION1__ACTIONS2 = eINSTANCE.getAction1_Actions2();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1Sub1Impl <em>Action1 Sub1</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1Sub1Impl
+     * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getAction1Sub1()
+     * @generated
+     */
+    EClass ACTION1_SUB1 = eINSTANCE.getAction1Sub1();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1Sub2Impl <em>Action1 Sub2</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1Sub2Impl
+     * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getAction1Sub2()
+     * @generated
+     */
+    EClass ACTION1_SUB2 = eINSTANCE.getAction1Sub2();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1SubImpl <em>Action1 Sub</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1SubImpl
+     * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getAction1Sub()
+     * @generated
+     */
+    EClass ACTION1_SUB = eINSTANCE.getAction1Sub();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1SubClassImpl <em>Action1 Sub Class</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1SubClassImpl
+     * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getAction1SubClass()
+     * @generated
+     */
+    EClass ACTION1_SUB_CLASS = eINSTANCE.getAction1SubClass();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBugEnum <em>Enum Bug Enum</em>}' enum.

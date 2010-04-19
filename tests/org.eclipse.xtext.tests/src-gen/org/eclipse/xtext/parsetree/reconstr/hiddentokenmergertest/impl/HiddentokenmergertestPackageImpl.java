@@ -13,6 +13,11 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1;
+import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1Sub;
+import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1Sub1;
+import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1Sub2;
+import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1SubClass;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.AppendToFileEnd;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.AppendToFileEndItem;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Commentable;
@@ -112,6 +117,41 @@ public class HiddentokenmergertestPackageImpl extends EPackageImpl implements Hi
    * @generated
    */
   private EClass appendToFileEndItemEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass action1EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass action1Sub1EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass action1Sub2EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass action1SubEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass action1SubClassEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -438,6 +478,76 @@ public class HiddentokenmergertestPackageImpl extends EPackageImpl implements Hi
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getAction1()
+  {
+    return action1EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAction1_Name()
+  {
+    return (EAttribute)action1EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAction1_Actions2()
+  {
+    return (EReference)action1EClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAction1Sub1()
+  {
+    return action1Sub1EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAction1Sub2()
+  {
+    return action1Sub2EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAction1Sub()
+  {
+    return action1SubEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAction1SubClass()
+  {
+    return action1SubClassEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getEnumBugEnum()
   {
     return enumBugEnumEEnum;
@@ -509,6 +619,18 @@ public class HiddentokenmergertestPackageImpl extends EPackageImpl implements Hi
     appendToFileEndItemEClass = createEClass(APPEND_TO_FILE_END_ITEM);
     createEAttribute(appendToFileEndItemEClass, APPEND_TO_FILE_END_ITEM__NAME);
 
+    action1EClass = createEClass(ACTION1);
+    createEAttribute(action1EClass, ACTION1__NAME);
+    createEReference(action1EClass, ACTION1__ACTIONS2);
+
+    action1Sub1EClass = createEClass(ACTION1_SUB1);
+
+    action1Sub2EClass = createEClass(ACTION1_SUB2);
+
+    action1SubEClass = createEClass(ACTION1_SUB);
+
+    action1SubClassEClass = createEClass(ACTION1_SUB_CLASS);
+
     // Create enums
     enumBugEnumEEnum = createEEnum(ENUM_BUG_ENUM);
   }
@@ -547,7 +669,11 @@ public class HiddentokenmergertestPackageImpl extends EPackageImpl implements Hi
     commentableEClass.getESuperTypes().add(this.getModel());
     valueListEClass.getESuperTypes().add(this.getModel());
     refListEClass.getESuperTypes().add(this.getModel());
+    singleRefEClass.getESuperTypes().add(this.getModel());
     appendToFileEndEClass.getESuperTypes().add(this.getModel());
+    action1EClass.getESuperTypes().add(this.getModel());
+    action1SubEClass.getESuperTypes().add(this.getAction1Sub1());
+    action1SubClassEClass.getESuperTypes().add(this.getAction1Sub2());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -585,6 +711,18 @@ public class HiddentokenmergertestPackageImpl extends EPackageImpl implements Hi
 
     initEClass(appendToFileEndItemEClass, AppendToFileEndItem.class, "AppendToFileEndItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAppendToFileEndItem_Name(), ecorePackage.getEString(), "name", null, 0, 1, AppendToFileEndItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(action1EClass, Action1.class, "Action1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAction1_Name(), ecorePackage.getEString(), "name", null, 0, 1, Action1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAction1_Actions2(), ecorePackage.getEObject(), null, "actions2", null, 0, -1, Action1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(action1Sub1EClass, Action1Sub1.class, "Action1Sub1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(action1Sub2EClass, Action1Sub2.class, "Action1Sub2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(action1SubEClass, Action1Sub.class, "Action1Sub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(action1SubClassEClass, Action1SubClass.class, "Action1SubClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     // Initialize enums and add enum literals
     initEEnum(enumBugEnumEEnum, EnumBugEnum.class, "EnumBugEnum");

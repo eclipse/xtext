@@ -50,5 +50,13 @@
     <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//AppendToFileEndItem">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTokensMergerTestLanguage.ecore#//AppendToFileEndItem/name"/>
     </genClasses>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//Action1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTokensMergerTestLanguage.ecore#//Action1/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HiddenTokensMergerTestLanguage.ecore#//Action1/actions2"/>
+    </genClasses>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//Action1Sub1"/>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//Action1Sub2"/>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//Action1Sub"/>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//Action1SubClass"/>
   </genPackages>
 </genmodel:GenModel>

@@ -5,7 +5,6 @@
  */
 package org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface SingleRef extends EObject
+public interface SingleRef extends Model
 {
   /**
    * Returns the value of the '<em><b>Obj</b></em>' containment reference.

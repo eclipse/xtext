@@ -125,6 +125,51 @@ public interface HiddentokenmergertestFactory extends EFactory
   AppendToFileEndItem createAppendToFileEndItem();
 
   /**
+   * Returns a new object of class '<em>Action1</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Action1</em>'.
+   * @generated
+   */
+  Action1 createAction1();
+
+  /**
+   * Returns a new object of class '<em>Action1 Sub1</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Action1 Sub1</em>'.
+   * @generated
+   */
+  Action1Sub1 createAction1Sub1();
+
+  /**
+   * Returns a new object of class '<em>Action1 Sub2</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Action1 Sub2</em>'.
+   * @generated
+   */
+  Action1Sub2 createAction1Sub2();
+
+  /**
+   * Returns a new object of class '<em>Action1 Sub</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Action1 Sub</em>'.
+   * @generated
+   */
+  Action1Sub createAction1Sub();
+
+  /**
+   * Returns a new object of class '<em>Action1 Sub Class</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Action1 Sub Class</em>'.
+   * @generated
+   */
+  Action1SubClass createAction1SubClass();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -46,6 +46,9 @@ protected class ThisRootNode extends RootToken {
 			case 8: return new SingleRef_Group(this, this, 8, inst);
 			case 9: return new AppendToFileEnd_Group(this, this, 9, inst);
 			case 10: return new AppendToFileEndItem_Group(this, this, 10, inst);
+			case 11: return new Action1_Group(this, this, 11, inst);
+			case 12: return new Action1Sub1_Group(this, this, 12, inst);
+			case 13: return new Action1Sub2_Group(this, this, 13, inst);
 			default: return null;
 		}	
 	}	
@@ -55,11 +58,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   DatatypeBug286557|EnumBug|Commentable|ValueList|RefList|AppendToFileEnd;
+ *   DatatypeBug286557|EnumBug|Commentable|ValueList|RefList|SingleRef|
+ *   AppendToFileEnd|Action1;
  *
  **/
 
-// DatatypeBug286557|EnumBug|Commentable|ValueList|RefList|AppendToFileEnd
+// DatatypeBug286557|EnumBug|Commentable|ValueList|RefList|SingleRef|
+// AppendToFileEnd|Action1
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -79,7 +84,9 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 2: return new Model_CommentableParserRuleCall_2(parent, this, 2, inst);
 			case 3: return new Model_ValueListParserRuleCall_3(parent, this, 3, inst);
 			case 4: return new Model_RefListParserRuleCall_4(parent, this, 4, inst);
-			case 5: return new Model_AppendToFileEndParserRuleCall_5(parent, this, 5, inst);
+			case 5: return new Model_SingleRefParserRuleCall_5(parent, this, 5, inst);
+			case 6: return new Model_AppendToFileEndParserRuleCall_6(parent, this, 6, inst);
+			case 7: return new Model_Action1ParserRuleCall_7(parent, this, 7, inst);
 			default: return null;
 		}	
 	}	
@@ -266,16 +273,51 @@ protected class Model_RefListParserRuleCall_4 extends RuleCallToken {
 	}	
 }
 
-// AppendToFileEnd
-protected class Model_AppendToFileEndParserRuleCall_5 extends RuleCallToken {
+// SingleRef
+protected class Model_SingleRefParserRuleCall_5 extends RuleCallToken {
 	
-	public Model_AppendToFileEndParserRuleCall_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Model_SingleRefParserRuleCall_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getModelAccess().getAppendToFileEndParserRuleCall_5();
+		return grammarAccess.getModelAccess().getSingleRefParserRuleCall_5();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new SingleRef_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(SingleRef_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getSingleRefRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// AppendToFileEnd
+protected class Model_AppendToFileEndParserRuleCall_6 extends RuleCallToken {
+	
+	public Model_AppendToFileEndParserRuleCall_6(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getModelAccess().getAppendToFileEndParserRuleCall_6();
 	}
 
     @Override
@@ -290,6 +332,41 @@ protected class Model_AppendToFileEndParserRuleCall_5 extends RuleCallToken {
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(AppendToFileEnd_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getAppendToFileEndRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// Action1
+protected class Model_Action1ParserRuleCall_7 extends RuleCallToken {
+	
+	public Model_Action1ParserRuleCall_7(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getModelAccess().getAction1ParserRuleCall_7();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Action1_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Action1_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getAction1Rule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -1551,5 +1628,395 @@ protected class AppendToFileEndItem_EndclassKeyword_2 extends KeywordToken  {
 
 
 /************ end Rule AppendToFileEndItem ****************/
+
+
+/************ begin Rule Action1 ****************
+ *
+ * Action1:
+ *   "#8" {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2;
+ *
+ **/
+
+// "#8" {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2
+protected class Action1_Group extends GroupToken {
+	
+	public Action1_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getAction1Access().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Action1_Actions2Assignment_4(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getAction1Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#8"
+protected class Action1_NumberSignDigitEightKeyword_0 extends KeywordToken  {
+	
+	public Action1_NumberSignDigitEightKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getAction1Access().getNumberSignDigitEightKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// {Action1}
+protected class Action1_Action1Action_1 extends ActionToken  {
+
+	public Action1_Action1Action_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getAction1Access().getAction1Action_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Action1_NumberSignDigitEightKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(!current.isInstanceOf(grammarAccess.getAction1Access().getAction1Action_1().getType().getClassifier())) return null;
+		if(!current.isConsumed()) return null;
+		return current;
+	}
+}
+
+// name=ID
+protected class Action1_NameAssignment_2 extends AssignmentToken  {
+	
+	public Action1_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAction1Access().getNameAssignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Action1_Action1Action_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getAction1Access().getNameIDTerminalRuleCall_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// actions2+=Action1Sub1
+protected class Action1_Actions2Assignment_3 extends AssignmentToken  {
+	
+	public Action1_Actions2Assignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAction1Access().getActions2Assignment_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Action1Sub1_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("actions2",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("actions2");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getAction1Sub1Rule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getAction1Access().getActions2Action1Sub1ParserRuleCall_3_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Action1_NameAssignment_2(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// actions2+=Action1Sub2
+protected class Action1_Actions2Assignment_4 extends AssignmentToken  {
+	
+	public Action1_Actions2Assignment_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAction1Access().getActions2Assignment_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Action1Sub2_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("actions2",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("actions2");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getAction1Sub2Rule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getAction1Access().getActions2Action1Sub2ParserRuleCall_4_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Action1_Actions2Assignment_3(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+/************ end Rule Action1 ****************/
+
+
+/************ begin Rule Action1Sub1 ****************
+ *
+ * Action1Sub1:
+ *   {Action1Sub} "sub1";
+ *
+ **/
+
+// {Action1Sub} "sub1"
+protected class Action1Sub1_Group extends GroupToken {
+	
+	public Action1Sub1_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getAction1Sub1Access().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Action1Sub1_Sub1Keyword_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getAction1Sub1Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// {Action1Sub}
+protected class Action1Sub1_Action1SubAction_0 extends ActionToken  {
+
+	public Action1Sub1_Action1SubAction_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getAction1Sub1Access().getAction1SubAction_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+	
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(!current.isInstanceOf(grammarAccess.getAction1Sub1Access().getAction1SubAction_0().getType().getClassifier())) return null;
+		if(!current.isConsumed()) return null;
+		return current;
+	}
+}
+
+// "sub1"
+protected class Action1Sub1_Sub1Keyword_1 extends KeywordToken  {
+	
+	public Action1Sub1_Sub1Keyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getAction1Sub1Access().getSub1Keyword_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Action1Sub1_Action1SubAction_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+/************ end Rule Action1Sub1 ****************/
+
+
+/************ begin Rule Action1Sub2 ****************
+ *
+ * Action1Sub2:
+ *   {Action1SubClass} "sub2";
+ *
+ **/
+
+// {Action1SubClass} "sub2"
+protected class Action1Sub2_Group extends GroupToken {
+	
+	public Action1Sub2_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getAction1Sub2Access().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Action1Sub2_Sub2Keyword_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getAction1Sub2Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// {Action1SubClass}
+protected class Action1Sub2_Action1SubClassAction_0 extends ActionToken  {
+
+	public Action1Sub2_Action1SubClassAction_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getAction1Sub2Access().getAction1SubClassAction_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+	
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(!current.isInstanceOf(grammarAccess.getAction1Sub2Access().getAction1SubClassAction_0().getType().getClassifier())) return null;
+		if(!current.isConsumed()) return null;
+		return current;
+	}
+}
+
+// "sub2"
+protected class Action1Sub2_Sub2Keyword_1 extends KeywordToken  {
+	
+	public Action1Sub2_Sub2Keyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getAction1Sub2Access().getSub2Keyword_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Action1Sub2_Action1SubClassAction_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+/************ end Rule Action1Sub2 ****************/
 
 }

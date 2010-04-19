@@ -1,0 +1,96 @@
+## This is a Graphviz .dot file (http://www.graphviz.org/)
+## You can use the command 'dot -Tpdf this.dot > out.pdf' to render it.
+digraph G {
+assignment2488371 [shape=record,label="Assignment-a94108\nModel:\nelements+= *",peripheries=2];
+rulecall13233083 [color=grey,label="????=>Element",style=dashed];
+group3040352 [shape=record,label="Group-ecb52f\nGroup-ecb52f-1\nElement:\n( )"];
+assignment12580195 [label="Assignment-963193\nname= ",peripheries=2];
+rulecall8872067 [color=grey,label="????=>Variable",style=dashed];
+assignment13713778 [label="Assignment-6b2df5\nvalue= ?"];
+rulecall2083787 [color=grey,label="????=>Value",style=dashed];
+group6626386 [shape=record,label="Group-90e427\nGroup-90e427-1\nVariable:\n( )"];
+rulecall2515391 [label="RuleCall-876ce7\n=>ID",peripheries=2];
+group14385603 [label="Group-febdc2\n( )*"];
+alternatives2372583 [label="Alternatives-5c2a53\n\|"];
+keyword13348707 [label="Keyword-ded8df\n\".\""];
+keyword6787483 [color=green,label="Keyword-7056fb\nRuleCall-72dafe-2\n\"-\"",style=dashed];
+rulecall8938795 [label="RuleCall-72dafe\nRuleCall-72dafe-4\n=>ID"];
+group2134187 [shape=record,label="Group-5e83bc\nGroup-5e83bc-1\nValue:\n( )"];
+alternatives16373878 [label="Alternatives-4a638f\n\|"];
+keyword15886336 [label="Keyword-ce437c\n\"=\"",peripheries=2];
+keyword9035427 [color=green,label="Keyword-b09a69\nGroup-5e83bc-4\n\"+=\"",peripheries=2,style=dashed];
+keyword7856188 [color=green,label="Keyword-696b07\nGroup-5e83bc-4\n\"-=\"",peripheries=2,style=dashed];
+untiltoken2263564 [label="UntilToken-1aacdb\nUntilToken"];
+keyword9778978 [color=grey,label="????\"
+\"",style=dashed];
+group13039677 [shape=record,label="Group-f1d02b\nGroup-f1d02b-1\nSL_COMMENT:\n( )"];
+keyword13872330 [label="Keyword-66711f\n\"#\"",peripheries=2];
+negatedtoken16070800 [color=blue,label="NegatedToken-237731\nGroup-f1d02b-2\nNegatedToken*",style=dashed];
+alternatives5549785 [label="????\|"];
+keyword10697652 [color=grey,label="????\"
+\"",style=dashed];
+keyword10802409 [color=grey,label="????\"\"",style=dashed];
+group9836175 [color=blue,label="Group-99f722\n( )?",style=dashed];
+keyword10684447 [color=blue,label="Keyword-fbff04\n\"\"?",style=dashed];
+keyword6972933 [color=blue,label="Keyword-300e51\n\"
+\"",style=dashed];
+assignment2488371->rulecall13233083 [];
+assignment2488371->group3040352 [label=0,style=dotted,arrowhead=onormalonormal];
+assignment2488371->assignment2488371 [arrowtail=odot,label=0,style=dotted,arrowhead=onormal];
+assignment12580195->rulecall8872067 [];
+group3040352->assignment12580195 [];
+assignment13713778->rulecall2083787 [];
+assignment13713778->assignment12580195 [label=0,style=dotted,arrowhead=onormal];
+group3040352->assignment13713778 [];
+group3040352->assignment13713778 [label=0,style=dotted,arrowhead=onormal];
+group3040352->assignment12580195 [label=1,style=dotted,arrowhead=onormal];
+group6626386->rulecall2515391 [];
+keyword13348707->group14385603 [label=0,style=dotted,arrowhead=onormal];
+keyword13348707->rulecall2515391 [label=1,style=dotted,arrowhead=onormal];
+alternatives2372583->keyword13348707 [];
+keyword6787483->group14385603 [color=green,style=dotted,arrowhead=onormal];
+keyword6787483->rulecall2515391 [color=green,style=dotted,arrowhead=onormal];
+alternatives2372583->keyword6787483 [];
+alternatives2372583->keyword13348707 [label=0,style=dotted,arrowhead=onormal];
+alternatives2372583->keyword6787483 [color=green,style=dotted,arrowhead=onormal];
+group14385603->alternatives2372583 [];
+rulecall8938795->alternatives2372583 [label=0,style=dotted,arrowhead=onormal];
+group14385603->rulecall8938795 [];
+group14385603->rulecall8938795 [label=0,style=dotted,arrowhead=onormal];
+group6626386->group14385603 [];
+group6626386->group14385603 [label=0,style=dotted,arrowhead=onormal];
+group6626386->rulecall2515391 [label=1,style=dotted,arrowhead=onormal];
+alternatives16373878->keyword15886336 [];
+alternatives16373878->keyword9035427 [];
+alternatives16373878->keyword7856188 [];
+alternatives16373878->keyword15886336 [label=0,style=dotted,arrowhead=onormal];
+alternatives16373878->keyword9035427 [color=green,style=dotted,arrowhead=onormal];
+alternatives16373878->keyword7856188 [color=green,style=dotted,arrowhead=onormal];
+group2134187->alternatives16373878 [];
+untiltoken2263564->keyword9778978 [];
+untiltoken2263564->alternatives16373878 [label=0,style=dotted,arrowhead=onormal];
+group2134187->untiltoken2263564 [];
+group2134187->untiltoken2263564 [label=0,style=dotted,arrowhead=onormal];
+group13039677->keyword13872330 [];
+alternatives5549785->keyword10697652 [];
+alternatives5549785->keyword10802409 [];
+alternatives5549785->keyword10697652 [color=grey,style=dotted,arrowhead=onormal];
+alternatives5549785->keyword10802409 [color=grey,style=dotted,arrowhead=onormal];
+negatedtoken16070800->alternatives5549785 [];
+negatedtoken16070800->negatedtoken16070800 [color=blue,style=dotted,arrowhead=onormal];
+negatedtoken16070800->keyword13872330 [color=blue,style=dotted,arrowhead=onormal];
+group13039677->negatedtoken16070800 [];
+keyword10684447->negatedtoken16070800 [color=blue,style=dotted,arrowhead=onormal];
+keyword10684447->keyword13872330 [color=blue,style=dotted,arrowhead=onormal];
+group9836175->keyword10684447 [];
+keyword6972933->keyword10684447 [color=blue,style=dotted,arrowhead=onormal];
+keyword6972933->negatedtoken16070800 [color=blue,style=dotted,arrowhead=onormal];
+keyword6972933->keyword13872330 [color=blue,style=dotted,arrowhead=onormal];
+group9836175->keyword6972933 [];
+group9836175->keyword6972933 [color=blue,style=dotted,arrowhead=onormal];
+group13039677->group9836175 [];
+group13039677->group9836175 [color=blue,style=dotted,arrowhead=onormal];
+group13039677->negatedtoken16070800 [color=blue,style=dotted,arrowhead=onormal];
+group13039677->keyword13872330 [label=0,style=dotted,arrowhead=onormal];
+}
+

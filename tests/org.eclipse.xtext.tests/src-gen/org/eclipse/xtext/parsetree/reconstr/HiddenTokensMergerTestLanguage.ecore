@@ -38,7 +38,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="RefObj">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SingleRef">
+  <eClassifiers xsi:type="ecore:EClass" name="SingleRef" eSuperTypes="#//Model">
     <eStructuralFeatures xsi:type="ecore:EReference" name="obj" eType="#//RefObj"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//RefObj"/>
@@ -50,4 +50,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="AppendToFileEndItem">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action1" eSuperTypes="#//Model">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions2" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action1Sub1"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Action1Sub2"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Action1Sub" eSuperTypes="#//Action1Sub1"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Action1SubClass" eSuperTypes="#//Action1Sub2"/>
 </ecore:EPackage>

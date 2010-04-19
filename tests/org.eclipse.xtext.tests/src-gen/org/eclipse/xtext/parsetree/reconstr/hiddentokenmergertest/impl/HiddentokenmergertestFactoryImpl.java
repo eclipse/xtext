@@ -79,6 +79,11 @@ public class HiddentokenmergertestFactoryImpl extends EFactoryImpl implements Hi
       case HiddentokenmergertestPackage.SINGLE_REF: return createSingleRef();
       case HiddentokenmergertestPackage.APPEND_TO_FILE_END: return createAppendToFileEnd();
       case HiddentokenmergertestPackage.APPEND_TO_FILE_END_ITEM: return createAppendToFileEndItem();
+      case HiddentokenmergertestPackage.ACTION1: return createAction1();
+      case HiddentokenmergertestPackage.ACTION1_SUB1: return createAction1Sub1();
+      case HiddentokenmergertestPackage.ACTION1_SUB2: return createAction1Sub2();
+      case HiddentokenmergertestPackage.ACTION1_SUB: return createAction1Sub();
+      case HiddentokenmergertestPackage.ACTION1_SUB_CLASS: return createAction1SubClass();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -237,6 +242,61 @@ public class HiddentokenmergertestFactoryImpl extends EFactoryImpl implements Hi
   {
     AppendToFileEndItemImpl appendToFileEndItem = new AppendToFileEndItemImpl();
     return appendToFileEndItem;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Action1 createAction1()
+  {
+    Action1Impl action1 = new Action1Impl();
+    return action1;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Action1Sub1 createAction1Sub1()
+  {
+    Action1Sub1Impl action1Sub1 = new Action1Sub1Impl();
+    return action1Sub1;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Action1Sub2 createAction1Sub2()
+  {
+    Action1Sub2Impl action1Sub2 = new Action1Sub2Impl();
+    return action1Sub2;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Action1Sub createAction1Sub()
+  {
+    Action1SubImpl action1Sub = new Action1SubImpl();
+    return action1Sub;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Action1SubClass createAction1SubClass()
+  {
+    Action1SubClassImpl action1SubClass = new Action1SubClassImpl();
+    return action1SubClass;
   }
 
   /**

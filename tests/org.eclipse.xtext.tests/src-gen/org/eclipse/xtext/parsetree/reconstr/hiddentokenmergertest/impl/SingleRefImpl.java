@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.HiddentokenmergertestPackage;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.RefObj;
@@ -32,7 +31,7 @@ import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.SingleRef;
  *
  * @generated
  */
-public class SingleRefImpl extends MinimalEObjectImpl.Container implements SingleRef
+public class SingleRefImpl extends ModelImpl implements SingleRef
 {
   /**
    * The cached value of the '{@link #getObj() <em>Obj</em>}' containment reference.

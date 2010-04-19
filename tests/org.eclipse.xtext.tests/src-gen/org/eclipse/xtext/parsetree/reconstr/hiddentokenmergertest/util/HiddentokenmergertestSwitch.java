@@ -160,6 +160,7 @@ public class HiddentokenmergertestSwitch<T>
       {
         SingleRef singleRef = (SingleRef)theEObject;
         T result = caseSingleRef(singleRef);
+        if (result == null) result = caseModel(singleRef);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -175,6 +176,44 @@ public class HiddentokenmergertestSwitch<T>
       {
         AppendToFileEndItem appendToFileEndItem = (AppendToFileEndItem)theEObject;
         T result = caseAppendToFileEndItem(appendToFileEndItem);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case HiddentokenmergertestPackage.ACTION1:
+      {
+        Action1 action1 = (Action1)theEObject;
+        T result = caseAction1(action1);
+        if (result == null) result = caseModel(action1);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case HiddentokenmergertestPackage.ACTION1_SUB1:
+      {
+        Action1Sub1 action1Sub1 = (Action1Sub1)theEObject;
+        T result = caseAction1Sub1(action1Sub1);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case HiddentokenmergertestPackage.ACTION1_SUB2:
+      {
+        Action1Sub2 action1Sub2 = (Action1Sub2)theEObject;
+        T result = caseAction1Sub2(action1Sub2);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case HiddentokenmergertestPackage.ACTION1_SUB:
+      {
+        Action1Sub action1Sub = (Action1Sub)theEObject;
+        T result = caseAction1Sub(action1Sub);
+        if (result == null) result = caseAction1Sub1(action1Sub);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case HiddentokenmergertestPackage.ACTION1_SUB_CLASS:
+      {
+        Action1SubClass action1SubClass = (Action1SubClass)theEObject;
+        T result = caseAction1SubClass(action1SubClass);
+        if (result == null) result = caseAction1Sub2(action1SubClass);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -354,6 +393,86 @@ public class HiddentokenmergertestSwitch<T>
    * @generated
    */
   public T caseAppendToFileEndItem(AppendToFileEndItem object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Action1</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Action1</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAction1(Action1 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Action1 Sub1</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Action1 Sub1</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAction1Sub1(Action1Sub1 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Action1 Sub2</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Action1 Sub2</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAction1Sub2(Action1Sub2 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Action1 Sub</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Action1 Sub</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAction1Sub(Action1Sub object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Action1 Sub Class</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Action1 Sub Class</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAction1SubClass(Action1SubClass object)
   {
     return null;
   }

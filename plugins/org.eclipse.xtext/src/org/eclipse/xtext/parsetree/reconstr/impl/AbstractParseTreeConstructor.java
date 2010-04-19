@@ -527,12 +527,15 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 					i = c.getParent() != null ? c.getParent().getChildren().indexOf(c) + 1 : -1;
 					c = c.getParent();
 				}
-				while (c != null && c.getChildren().get(i) != node && c.getChildren().get(i) instanceof CompositeNode) {
+				while (c != null && c.getChildren().size() > 0 && c.getChildren().get(i) != node
+						&& c.getChildren().get(i) instanceof CompositeNode) {
 					c = (CompositeNode) c.getChildren().get(i);
 					i = 0;
 				}
 				if (c == null)
 					return;
+				if (c.getChildren().size() == 0)
+					continue;
 				AbstractNode n = c.getChildren().get(i);
 				if (n == node) {
 					if (n instanceof CompositeNode)

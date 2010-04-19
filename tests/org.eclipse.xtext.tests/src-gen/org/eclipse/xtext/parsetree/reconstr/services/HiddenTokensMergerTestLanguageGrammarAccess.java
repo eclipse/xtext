@@ -25,13 +25,17 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cCommentableParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cValueListParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final RuleCall cRefListParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
-		private final RuleCall cAppendToFileEndParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cSingleRefParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cAppendToFileEndParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cAction1ParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
 		
 		//Model:
-		//  DatatypeBug286557|EnumBug|Commentable|ValueList|RefList|AppendToFileEnd;
+		//  DatatypeBug286557|EnumBug|Commentable|ValueList|RefList|SingleRef|
+		//  AppendToFileEnd|Action1;
 		public ParserRule getRule() { return rule; }
 
-		//DatatypeBug286557|EnumBug|Commentable|ValueList|RefList|AppendToFileEnd
+		//DatatypeBug286557|EnumBug|Commentable|ValueList|RefList|SingleRef|
+		//AppendToFileEnd|Action1
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//DatatypeBug286557
@@ -49,8 +53,14 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		//RefList
 		public RuleCall getRefListParserRuleCall_4() { return cRefListParserRuleCall_4; }
 
+		//SingleRef
+		public RuleCall getSingleRefParserRuleCall_5() { return cSingleRefParserRuleCall_5; }
+
 		//AppendToFileEnd
-		public RuleCall getAppendToFileEndParserRuleCall_5() { return cAppendToFileEndParserRuleCall_5; }
+		public RuleCall getAppendToFileEndParserRuleCall_6() { return cAppendToFileEndParserRuleCall_6; }
+
+		//Action1
+		public RuleCall getAction1ParserRuleCall_7() { return cAction1ParserRuleCall_7; }
 	}
 
 	public class DatatypeBug286557Elements extends AbstractParserRuleElementFinder {
@@ -387,6 +397,90 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		//"endclass"
 		public Keyword getEndclassKeyword_2() { return cEndclassKeyword_2; }
 	}
+
+	public class Action1Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Action1");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitEightKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Action cAction1Action_1 = (Action)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Assignment cActions2Assignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cActions2Action1Sub1ParserRuleCall_3_0 = (RuleCall)cActions2Assignment_3.eContents().get(0);
+		private final Assignment cActions2Assignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cActions2Action1Sub2ParserRuleCall_4_0 = (RuleCall)cActions2Assignment_4.eContents().get(0);
+		
+		//Action1:
+		//  "#8" {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2;
+		public ParserRule getRule() { return rule; }
+
+		//"#8" {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2
+		public Group getGroup() { return cGroup; }
+
+		//"#8"
+		public Keyword getNumberSignDigitEightKeyword_0() { return cNumberSignDigitEightKeyword_0; }
+
+		//{Action1}
+		public Action getAction1Action_1() { return cAction1Action_1; }
+
+		//name=ID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
+
+		//actions2+=Action1Sub1
+		public Assignment getActions2Assignment_3() { return cActions2Assignment_3; }
+
+		//Action1Sub1
+		public RuleCall getActions2Action1Sub1ParserRuleCall_3_0() { return cActions2Action1Sub1ParserRuleCall_3_0; }
+
+		//actions2+=Action1Sub2
+		public Assignment getActions2Assignment_4() { return cActions2Assignment_4; }
+
+		//Action1Sub2
+		public RuleCall getActions2Action1Sub2ParserRuleCall_4_0() { return cActions2Action1Sub2ParserRuleCall_4_0; }
+	}
+
+	public class Action1Sub1Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Action1Sub1");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cAction1SubAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cSub1Keyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//Action1Sub1:
+		//  {Action1Sub} "sub1";
+		public ParserRule getRule() { return rule; }
+
+		//{Action1Sub} "sub1"
+		public Group getGroup() { return cGroup; }
+
+		//{Action1Sub}
+		public Action getAction1SubAction_0() { return cAction1SubAction_0; }
+
+		//"sub1"
+		public Keyword getSub1Keyword_1() { return cSub1Keyword_1; }
+	}
+
+	public class Action1Sub2Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Action1Sub2");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cAction1SubClassAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cSub2Keyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//Action1Sub2:
+		//  {Action1SubClass} "sub2";
+		public ParserRule getRule() { return rule; }
+
+		//{Action1SubClass} "sub2"
+		public Group getGroup() { return cGroup; }
+
+		//{Action1SubClass}
+		public Action getAction1SubClassAction_0() { return cAction1SubClassAction_0; }
+
+		//"sub2"
+		public Keyword getSub2Keyword_1() { return cSub2Keyword_1; }
+	}
 	
 	
 	public class EnumBugEnumElements extends AbstractEnumRuleElementFinder {
@@ -446,6 +540,9 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	private SingleRefElements pSingleRef;
 	private AppendToFileEndElements pAppendToFileEnd;
 	private AppendToFileEndItemElements pAppendToFileEndItem;
+	private Action1Elements pAction1;
+	private Action1Sub1Elements pAction1Sub1;
+	private Action1Sub2Elements pAction1Sub2;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -469,7 +566,8 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 
 	
 	//Model:
-	//  DatatypeBug286557|EnumBug|Commentable|ValueList|RefList|AppendToFileEnd;
+	//  DatatypeBug286557|EnumBug|Commentable|ValueList|RefList|SingleRef|
+	//  AppendToFileEnd|Action1;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -599,6 +697,36 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	
 	public ParserRule getAppendToFileEndItemRule() {
 		return getAppendToFileEndItemAccess().getRule();
+	}
+
+	//Action1:
+	//  "#8" {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2;
+	public Action1Elements getAction1Access() {
+		return (pAction1 != null) ? pAction1 : (pAction1 = new Action1Elements());
+	}
+	
+	public ParserRule getAction1Rule() {
+		return getAction1Access().getRule();
+	}
+
+	//Action1Sub1:
+	//  {Action1Sub} "sub1";
+	public Action1Sub1Elements getAction1Sub1Access() {
+		return (pAction1Sub1 != null) ? pAction1Sub1 : (pAction1Sub1 = new Action1Sub1Elements());
+	}
+	
+	public ParserRule getAction1Sub1Rule() {
+		return getAction1Sub1Access().getRule();
+	}
+
+	//Action1Sub2:
+	//  {Action1SubClass} "sub2";
+	public Action1Sub2Elements getAction1Sub2Access() {
+		return (pAction1Sub2 != null) ? pAction1Sub2 : (pAction1Sub2 = new Action1Sub2Elements());
+	}
+	
+	public ParserRule getAction1Sub2Rule() {
+		return getAction1Sub2Access().getRule();
 	}
 
 	//terminal ID:
