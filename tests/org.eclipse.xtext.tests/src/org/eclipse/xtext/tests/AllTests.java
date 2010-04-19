@@ -101,6 +101,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.PartialParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.SerializationTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.ValueConverterTest.class);
+//      suite.addTestSuite(org.eclipse.xtext.parser.encoding.EncodingTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.epatch.EpatchComparingTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.keywords.AntlrParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.keywords.GrammarAccessTest.class);
@@ -155,6 +156,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parsetree.unassignedtext.UnassignedTextTest.class);
       suite.addTestSuite(org.eclipse.xtext.reference.CommentOnEofBug_234135_Test.class);
       suite.addTestSuite(org.eclipse.xtext.reference.LeafNodeBug_234132_Test.class);
+      suite.addTestSuite(org.eclipse.xtext.resource.Bug306325Test.class);
       suite.addTestSuite(org.eclipse.xtext.resource.ClassloaderClasspathUriResolverTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.EObjectAtOffsetTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.EObjectHandleImplTest.class);
