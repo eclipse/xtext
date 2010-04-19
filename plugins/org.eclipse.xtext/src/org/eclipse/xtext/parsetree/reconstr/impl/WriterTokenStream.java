@@ -18,37 +18,26 @@ import org.eclipse.xtext.formatting.impl.AbstractTokenStream;
  */
 public class WriterTokenStream extends AbstractTokenStream {
 
-	private boolean allowClose;
-
 	private Writer out;
 
 	public WriterTokenStream(Writer out) {
-		this(out, false);
-	}
-
-	public WriterTokenStream(Writer out, boolean allowClose) {
 		super();
 		this.out = out;
-		this.allowClose = allowClose;
 	}
 
 	@Override
-	public void close() throws IOException {
+	public void flush() throws IOException {
 		out.flush();
-		if (allowClose)
-			out.close();
 	}
 
 	@Override
-	public void writeHidden(EObject grammarElement, String value)
-			throws IOException {
+	public void writeHidden(EObject grammarElement, String value) throws IOException {
 		if (value != null && value.length() > 0)
 			out.write(value);
 	}
 
 	@Override
-	public void writeSemantic(EObject grammarElement, String value)
-			throws IOException {
+	public void writeSemantic(EObject grammarElement, String value) throws IOException {
 		if (value != null && value.length() > 0)
 			out.write(value);
 	}

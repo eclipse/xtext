@@ -327,10 +327,10 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 	}
 
 	@Override
-	public void close() throws IOException {
+	public void flush() throws IOException {
 		if (line != null)
 			line.flush();
-		super.close();
+		super.flush();
 	}
 
 	@Override

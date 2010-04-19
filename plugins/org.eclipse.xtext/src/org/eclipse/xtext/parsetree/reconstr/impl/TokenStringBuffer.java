@@ -20,7 +20,7 @@ public class TokenStringBuffer extends AbstractTokenStream {
 	private StringBuffer out = new StringBuffer();
 
 	@Override
-	public void close() throws IOException {
+	public void flush() throws IOException {
 	}
 
 	@Override

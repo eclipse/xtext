@@ -67,7 +67,7 @@ public class DefaultNodeModelFormatter extends AbstractNodeModelFormatter {
 					fmt.writeSemantic(rc, text);
 				}
 			}
-			fmt.close();
+			fmt.flush();
 		} catch (IOException e) {
 			// this should never happen since TokenStringBuffer doesn't throw
 			// IOEs.
