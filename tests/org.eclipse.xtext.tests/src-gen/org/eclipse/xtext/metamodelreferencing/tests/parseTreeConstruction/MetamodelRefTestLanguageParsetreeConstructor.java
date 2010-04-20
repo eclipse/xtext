@@ -70,13 +70,15 @@ protected class Foo_Group extends GroupToken {
 			case 1: return new Foo_NameAssignment_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getFooRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getFooRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // name=ID
@@ -96,8 +98,8 @@ protected class Foo_NameAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -130,8 +132,8 @@ protected class Foo_NameRefsAssignment_1 extends AssignmentToken  {
 			case 0: return new NameRef_RuleAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("nameRefs",false)) == null) return null;
@@ -187,13 +189,15 @@ protected class NameRef_RuleAssignment extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getNameRefRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getNameRefRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("rule",true)) == null) return null;
@@ -238,13 +242,15 @@ protected class MyRule_NameAssignment extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getMyRuleRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getMyRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;

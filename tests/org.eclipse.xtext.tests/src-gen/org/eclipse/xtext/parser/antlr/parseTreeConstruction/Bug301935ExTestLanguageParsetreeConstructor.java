@@ -68,17 +68,18 @@ protected class DelegateModel_ModelParserRuleCall extends RuleCallToken {
 			case 0: return new Model_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getDelegateModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getModelRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Model_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -118,13 +119,15 @@ protected class Model_Group extends GroupToken {
 			case 0: return new Model_WSTerminalRuleCall_5(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getModelRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // name=ID
@@ -144,8 +147,8 @@ protected class Model_NameAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -178,8 +181,8 @@ protected class Model_WSTerminalRuleCall_1 extends UnassignedTextToken {
 			case 0: return new Model_NameAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // value=ID
@@ -200,8 +203,8 @@ protected class Model_ValueAssignment_2 extends AssignmentToken  {
 			case 0: return new Model_WSTerminalRuleCall_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
@@ -234,8 +237,8 @@ protected class Model_NLParserRuleCall_3 extends UnassignedTextToken {
 			case 0: return new Model_ValueAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // value2=ID
@@ -256,8 +259,8 @@ protected class Model_Value2Assignment_4 extends AssignmentToken  {
 			case 0: return new Model_NLParserRuleCall_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value2",true)) == null) return null;
@@ -290,8 +293,8 @@ protected class Model_WSTerminalRuleCall_5 extends UnassignedTextToken {
 			case 0: return new Model_Value2Assignment_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 

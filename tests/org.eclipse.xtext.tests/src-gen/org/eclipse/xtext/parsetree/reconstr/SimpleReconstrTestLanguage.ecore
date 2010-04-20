@@ -107,6 +107,16 @@
   <eClassifiers xsi:type="ecore:EClass" name="EObjectElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeBug305577_1" eSuperTypes="#//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeBug305577_2" eSuperTypes="#//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeBug1A" eSuperTypes="#//TypeBug305577_1">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeBug1B" eSuperTypes="#//TypeBug305577_1 #//TypeBug1A"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeBug2A" eSuperTypes="#//TypeBug305577_2">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeBug2B" eSuperTypes="#//TypeBug305577_2 #//TypeBug2A"/>
   <eClassifiers xsi:type="ecore:EClass" name="Op" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
         eType="#//Expression" containment="true"/>

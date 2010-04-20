@@ -75,13 +75,15 @@ protected class Spielplatz_Group extends GroupToken {
 			case 0: return new Spielplatz_RightCurlyBracketKeyword_5(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getSpielplatzRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getSpielplatzRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "spielplatz"
@@ -101,8 +103,8 @@ protected class Spielplatz_SpielplatzKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // groesse=INT
@@ -123,8 +125,8 @@ protected class Spielplatz_GroesseAssignment_1 extends AssignmentToken  {
 			case 0: return new Spielplatz_SpielplatzKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("groesse",true)) == null) return null;
@@ -157,8 +159,8 @@ protected class Spielplatz_BeschreibungAssignment_2 extends AssignmentToken  {
 			case 0: return new Spielplatz_GroesseAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("beschreibung",false)) == null) return null;
@@ -192,8 +194,8 @@ protected class Spielplatz_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 			case 1: return new Spielplatz_GroesseAssignment_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie)*
@@ -217,8 +219,8 @@ protected class Spielplatz_Alternatives_4 extends AlternativesToken {
 			case 3: return new Spielplatz_FamilieAssignment_4_3(parent, this, 3, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // kinder+=Kind
@@ -239,8 +241,8 @@ protected class Spielplatz_KinderAssignment_4_0 extends AssignmentToken  {
 			case 0: return new Kind_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("kinder",true)) == null) return null;
@@ -286,8 +288,8 @@ protected class Spielplatz_ErzieherAssignment_4_1 extends AssignmentToken  {
 			case 0: return new Erwachsener_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("erzieher",true)) == null) return null;
@@ -333,8 +335,8 @@ protected class Spielplatz_SpielzeugeAssignment_4_2 extends AssignmentToken  {
 			case 0: return new Spielzeug_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("spielzeuge",true)) == null) return null;
@@ -380,8 +382,8 @@ protected class Spielplatz_FamilieAssignment_4_3 extends AssignmentToken  {
 			case 0: return new Familie_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("familie",true)) == null) return null;
@@ -429,8 +431,8 @@ protected class Spielplatz_RightCurlyBracketKeyword_5 extends KeywordToken  {
 			case 1: return new Spielplatz_LeftCurlyBracketKeyword_3(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -463,13 +465,16 @@ protected class Person_Alternatives extends AlternativesToken {
 			case 1: return new Person_ErwachsenerParserRuleCall_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getPersonRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getKindRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getErwachsenerRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // Kind
@@ -490,12 +495,18 @@ protected class Person_KindParserRuleCall_0 extends RuleCallToken {
 			case 0: return new Kind_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getKindRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Kind_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getKindRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -525,12 +536,18 @@ protected class Person_ErwachsenerParserRuleCall_1 extends RuleCallToken {
 			case 0: return new Erwachsener_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getErwachsenerRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Erwachsener_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getErwachsenerRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -571,13 +588,15 @@ protected class Kind_Group extends GroupToken {
 			case 0: return new Kind_RightParenthesisKeyword_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getKindRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getKindRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "kind"
@@ -597,8 +616,8 @@ protected class Kind_KindKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // "("
@@ -619,8 +638,8 @@ protected class Kind_LeftParenthesisKeyword_1 extends KeywordToken  {
 			case 0: return new Kind_KindKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -641,8 +660,8 @@ protected class Kind_NameAssignment_2 extends AssignmentToken  {
 			case 0: return new Kind_LeftParenthesisKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -675,8 +694,8 @@ protected class Kind_AgeAssignment_3 extends AssignmentToken  {
 			case 0: return new Kind_NameAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("age",true)) == null) return null;
@@ -709,8 +728,8 @@ protected class Kind_RightParenthesisKeyword_4 extends KeywordToken  {
 			case 0: return new Kind_AgeAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -742,13 +761,15 @@ protected class Erwachsener_Group extends GroupToken {
 			case 0: return new Erwachsener_RightParenthesisKeyword_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getErwachsenerRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getErwachsenerRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "erwachsener"
@@ -768,8 +789,8 @@ protected class Erwachsener_ErwachsenerKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // "("
@@ -790,8 +811,8 @@ protected class Erwachsener_LeftParenthesisKeyword_1 extends KeywordToken  {
 			case 0: return new Erwachsener_ErwachsenerKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -812,8 +833,8 @@ protected class Erwachsener_NameAssignment_2 extends AssignmentToken  {
 			case 0: return new Erwachsener_LeftParenthesisKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -846,8 +867,8 @@ protected class Erwachsener_AgeAssignment_3 extends AssignmentToken  {
 			case 0: return new Erwachsener_NameAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("age",true)) == null) return null;
@@ -880,8 +901,8 @@ protected class Erwachsener_RightParenthesisKeyword_4 extends KeywordToken  {
 			case 0: return new Erwachsener_AgeAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -913,13 +934,15 @@ protected class Spielzeug_Group extends GroupToken {
 			case 0: return new Spielzeug_RightParenthesisKeyword_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getSpielzeugRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getSpielzeugRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "spielzeug"
@@ -939,8 +962,8 @@ protected class Spielzeug_SpielzeugKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // "("
@@ -961,8 +984,8 @@ protected class Spielzeug_LeftParenthesisKeyword_1 extends KeywordToken  {
 			case 0: return new Spielzeug_SpielzeugKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -983,8 +1006,8 @@ protected class Spielzeug_NameAssignment_2 extends AssignmentToken  {
 			case 0: return new Spielzeug_LeftParenthesisKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -1017,8 +1040,8 @@ protected class Spielzeug_FarbeAssignment_3 extends AssignmentToken  {
 			case 0: return new Farbe_WertAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("farbe",true)) == null) return null;
@@ -1063,8 +1086,8 @@ protected class Spielzeug_RightParenthesisKeyword_4 extends KeywordToken  {
 			case 0: return new Spielzeug_FarbeAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -1095,13 +1118,15 @@ protected class Farbe_WertAssignment extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getFarbeRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getFarbeRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("wert",true)) == null) return null;
@@ -1123,7 +1148,7 @@ protected class Farbe_WertAssignment extends AssignmentToken  {
 		}
 		if("GRÜN".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
-			element = grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3();
+			element = grammarAccess.getFarbeAccess().getWertGRNKeyword_0_3();
 			return obj;
 		}
 		return null;
@@ -1161,13 +1186,15 @@ protected class Familie_Group extends GroupToken {
 			case 0: return new Familie_RightParenthesisKeyword_7(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getFamilieRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getFamilieRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "familie"
@@ -1187,8 +1214,8 @@ protected class Familie_FamilieKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // "("
@@ -1209,8 +1236,8 @@ protected class Familie_LeftParenthesisKeyword_1 extends KeywordToken  {
 			case 0: return new Familie_FamilieKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // name=( "keyword" | STRING | ID )
@@ -1231,8 +1258,8 @@ protected class Familie_NameAssignment_2 extends AssignmentToken  {
 			case 0: return new Familie_LeftParenthesisKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -1275,8 +1302,8 @@ protected class Familie_MutterAssignment_3 extends AssignmentToken  {
 			case 0: return new Familie_NameAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("mutter",true)) == null) return null;
@@ -1312,8 +1339,8 @@ protected class Familie_VaterAssignment_4 extends AssignmentToken  {
 			case 0: return new Familie_MutterAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("vater",true)) == null) return null;
@@ -1349,8 +1376,8 @@ protected class Familie_KinderAssignment_5 extends AssignmentToken  {
 			case 0: return new Familie_VaterAssignment_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("kinder",true)) == null) return null;
@@ -1386,8 +1413,8 @@ protected class Familie_Group_6 extends GroupToken {
 			case 0: return new Familie_KinderAssignment_6_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // ","
@@ -1409,8 +1436,8 @@ protected class Familie_CommaKeyword_6_0 extends KeywordToken  {
 			case 1: return new Familie_KinderAssignment_5(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // kinder+=[Kind]
@@ -1431,8 +1458,8 @@ protected class Familie_KinderAssignment_6_1 extends AssignmentToken  {
 			case 0: return new Familie_CommaKeyword_6_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("kinder",false)) == null) return null;
@@ -1470,8 +1497,8 @@ protected class Familie_RightParenthesisKeyword_7 extends KeywordToken  {
 			case 1: return new Familie_KinderAssignment_5(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 

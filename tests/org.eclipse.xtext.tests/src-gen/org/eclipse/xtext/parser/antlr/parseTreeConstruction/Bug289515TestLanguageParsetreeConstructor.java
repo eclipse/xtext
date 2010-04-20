@@ -74,13 +74,15 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 5: return new Model_Group_5(parent, this, 5, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getModelRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "1" value="%"
@@ -101,8 +103,8 @@ protected class Model_Group_0 extends GroupToken {
 			case 0: return new Model_ValueAssignment_0_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "1"
@@ -122,8 +124,8 @@ protected class Model_DigitOneKeyword_0_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // value="%"
@@ -144,8 +146,8 @@ protected class Model_ValueAssignment_0_1 extends AssignmentToken  {
 			case 0: return new Model_DigitOneKeyword_0_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
@@ -179,8 +181,8 @@ protected class Model_Group_1 extends GroupToken {
 			case 0: return new Model_ValueAssignment_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "2"
@@ -200,8 +202,8 @@ protected class Model_DigitTwoKeyword_1_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // value="%"
@@ -222,8 +224,8 @@ protected class Model_ValueAssignment_1_1 extends AssignmentToken  {
 			case 0: return new Model_DigitTwoKeyword_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
@@ -257,8 +259,8 @@ protected class Model_Group_2 extends GroupToken {
 			case 0: return new Model_ValueAssignment_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "3"
@@ -278,8 +280,8 @@ protected class Model_DigitThreeKeyword_2_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // value="\\%"
@@ -300,8 +302,8 @@ protected class Model_ValueAssignment_2_1 extends AssignmentToken  {
 			case 0: return new Model_DigitThreeKeyword_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
@@ -335,8 +337,8 @@ protected class Model_Group_3 extends GroupToken {
 			case 0: return new Model_ValueAssignment_3_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "4"
@@ -356,8 +358,8 @@ protected class Model_DigitFourKeyword_3_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // value="\\%"
@@ -378,8 +380,8 @@ protected class Model_ValueAssignment_3_1 extends AssignmentToken  {
 			case 0: return new Model_DigitFourKeyword_3_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
@@ -413,8 +415,8 @@ protected class Model_Group_4 extends GroupToken {
 			case 0: return new Model_ValueAssignment_4_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "5"
@@ -434,8 +436,8 @@ protected class Model_DigitFiveKeyword_4_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // value="%%"
@@ -456,8 +458,8 @@ protected class Model_ValueAssignment_4_1 extends AssignmentToken  {
 			case 0: return new Model_DigitFiveKeyword_4_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
@@ -491,8 +493,8 @@ protected class Model_Group_5 extends GroupToken {
 			case 0: return new Model_ValueAssignment_5_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "6"
@@ -512,8 +514,8 @@ protected class Model_DigitSixKeyword_5_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // value="%%"
@@ -534,8 +536,8 @@ protected class Model_ValueAssignment_5_1 extends AssignmentToken  {
 			case 0: return new Model_DigitSixKeyword_5_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;

@@ -67,13 +67,15 @@ protected class Second_Group extends GroupToken {
 			case 0: return new Second_FirstAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getSecondRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getSecondRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // name=ID
@@ -93,8 +95,8 @@ protected class Second_NameAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -127,8 +129,8 @@ protected class Second_FirstKeyword_1 extends KeywordToken  {
 			case 0: return new Second_NameAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // first=[first::First]
@@ -149,8 +151,8 @@ protected class Second_FirstAssignment_2 extends AssignmentToken  {
 			case 0: return new Second_FirstKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("first",true)) == null) return null;

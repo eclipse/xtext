@@ -70,13 +70,15 @@ protected class Model_Group extends GroupToken {
 			case 0: return new Model_DetailAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getModelRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "model"
@@ -96,8 +98,8 @@ protected class Model_ModelKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // name=FQN
@@ -118,8 +120,8 @@ protected class Model_NameAssignment_1 extends AssignmentToken  {
 			case 0: return new Model_ModelKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -153,8 +155,8 @@ protected class Model_DetailAssignment_2 extends AssignmentToken  {
 			case 1: return new AssociatedDetail_Group(this, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("detail",true)) == null) return null;
@@ -221,13 +223,16 @@ protected class AbstractDetail_Alternatives extends AlternativesToken {
 			case 1: return new AbstractDetail_AssociatedDetailParserRuleCall_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAbstractDetailRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getAssociatedDetailRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getDetailRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // Detail
@@ -248,12 +253,18 @@ protected class AbstractDetail_DetailParserRuleCall_0 extends RuleCallToken {
 			case 0: return new Detail_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getDetailRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Detail_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getDetailRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -283,12 +294,18 @@ protected class AbstractDetail_AssociatedDetailParserRuleCall_1 extends RuleCall
 			case 0: return new AssociatedDetail_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getAssociatedDetailRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(AssociatedDetail_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getAssociatedDetailRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -329,13 +346,15 @@ protected class Detail_Group extends GroupToken {
 			case 0: return new Detail_DetailClassAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getDetailRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getDetailRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "detail"
@@ -355,8 +374,8 @@ protected class Detail_DetailKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // visibility=( "private" | "protected" | "public" )?
@@ -377,8 +396,8 @@ protected class Detail_VisibilityAssignment_1 extends AssignmentToken  {
 			case 0: return new Detail_DetailKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("visibility",false)) == null) return null;
@@ -422,8 +441,8 @@ protected class Detail_DetailClassAssignment_2 extends AssignmentToken  {
 			case 1: return new Detail_DetailKeyword_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("detailClass",true)) == null) return null;
@@ -470,13 +489,15 @@ protected class AssociatedDetail_Group extends GroupToken {
 			case 0: return new AssociatedDetail_SemicolonKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAssociatedDetailRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getAssociatedDetailRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "associated"
@@ -496,8 +517,8 @@ protected class AssociatedDetail_AssociatedKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // detailClass=[Model|FQN]
@@ -518,8 +539,8 @@ protected class AssociatedDetail_DetailClassAssignment_1 extends AssignmentToken
 			case 0: return new AssociatedDetail_AssociatedKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("detailClass",true)) == null) return null;
@@ -555,8 +576,8 @@ protected class AssociatedDetail_SemicolonKeyword_2 extends KeywordToken  {
 			case 0: return new AssociatedDetail_DetailClassAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 

@@ -37,6 +37,12 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Spare;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TwoNumbers;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Type;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug1A;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug1B;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug2A;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug2B;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug305577_1;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug305577_2;
 
 /**
  * <!-- begin-user-doc -->
@@ -321,6 +327,60 @@ public class SimplerewritetestSwitch<T>
       {
         EObjectElement eObjectElement = (EObjectElement)theEObject;
         T result = caseEObjectElement(eObjectElement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.TYPE_BUG305577_1:
+      {
+        TypeBug305577_1 typeBug305577_1 = (TypeBug305577_1)theEObject;
+        T result = caseTypeBug305577_1(typeBug305577_1);
+        if (result == null) result = caseExpression(typeBug305577_1);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.TYPE_BUG305577_2:
+      {
+        TypeBug305577_2 typeBug305577_2 = (TypeBug305577_2)theEObject;
+        T result = caseTypeBug305577_2(typeBug305577_2);
+        if (result == null) result = caseExpression(typeBug305577_2);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.TYPE_BUG1_A:
+      {
+        TypeBug1A typeBug1A = (TypeBug1A)theEObject;
+        T result = caseTypeBug1A(typeBug1A);
+        if (result == null) result = caseTypeBug305577_1(typeBug1A);
+        if (result == null) result = caseExpression(typeBug1A);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.TYPE_BUG1_B:
+      {
+        TypeBug1B typeBug1B = (TypeBug1B)theEObject;
+        T result = caseTypeBug1B(typeBug1B);
+        if (result == null) result = caseTypeBug1A(typeBug1B);
+        if (result == null) result = caseTypeBug305577_1(typeBug1B);
+        if (result == null) result = caseExpression(typeBug1B);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.TYPE_BUG2_A:
+      {
+        TypeBug2A typeBug2A = (TypeBug2A)theEObject;
+        T result = caseTypeBug2A(typeBug2A);
+        if (result == null) result = caseTypeBug305577_2(typeBug2A);
+        if (result == null) result = caseExpression(typeBug2A);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.TYPE_BUG2_B:
+      {
+        TypeBug2B typeBug2B = (TypeBug2B)theEObject;
+        T result = caseTypeBug2B(typeBug2B);
+        if (result == null) result = caseTypeBug2A(typeBug2B);
+        if (result == null) result = caseTypeBug305577_2(typeBug2B);
+        if (result == null) result = caseExpression(typeBug2B);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -748,6 +808,102 @@ public class SimplerewritetestSwitch<T>
    * @generated
    */
   public T caseEObjectElement(EObjectElement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Type Bug305577 1</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Type Bug305577 1</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTypeBug305577_1(TypeBug305577_1 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Type Bug305577 2</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Type Bug305577 2</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTypeBug305577_2(TypeBug305577_2 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Type Bug1 A</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Type Bug1 A</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTypeBug1A(TypeBug1A object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Type Bug1 B</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Type Bug1 B</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTypeBug1B(TypeBug1B object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Type Bug2 A</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Type Bug2 A</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTypeBug2A(TypeBug2A object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Type Bug2 B</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Type Bug2 B</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTypeBug2B(TypeBug2B object)
   {
     return null;
   }

@@ -72,13 +72,15 @@ protected class Model_ConstantsAssignment extends AssignmentToken  {
 			case 0: return new TConstant_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getModelRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("constants",true)) == null) return null;
@@ -134,13 +136,17 @@ protected class TConstant_Alternatives extends AlternativesToken {
 			case 2: return new TConstant_TBooleanConstantParserRuleCall_2(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTConstantRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTBooleanConstantRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTStringConstantRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTIntegerConstantRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // TStringConstant
@@ -161,12 +167,18 @@ protected class TConstant_TStringConstantParserRuleCall_0 extends RuleCallToken 
 			case 0: return new TStringConstant_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getTStringConstantRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TStringConstant_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getTStringConstantRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -196,12 +208,18 @@ protected class TConstant_TIntegerConstantParserRuleCall_1 extends RuleCallToken
 			case 0: return new TIntegerConstant_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getTIntegerConstantRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TIntegerConstant_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getTIntegerConstantRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -231,12 +249,18 @@ protected class TConstant_TBooleanConstantParserRuleCall_2 extends RuleCallToken
 			case 0: return new TBooleanConstant_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getTBooleanConstantRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TBooleanConstant_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getTBooleanConstantRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -277,13 +301,15 @@ protected class TStringConstant_Group extends GroupToken {
 			case 0: return new TStringConstant_NameAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTStringConstantRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTStringConstantRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // annotations+=TAnnotation*
@@ -304,8 +330,8 @@ protected class TStringConstant_AnnotationsAssignment_0 extends AssignmentToken 
 			case 0: return new TAnnotation_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("annotations",false)) == null) return null;
@@ -350,8 +376,8 @@ protected class TStringConstant_ConstantKeyword_1 extends KeywordToken  {
 			case 0: return new TStringConstant_AnnotationsAssignment_0(parent, this, 0, inst);
 			default: return parent.createParentFollower(this, index, index - 1, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // "string"
@@ -372,8 +398,8 @@ protected class TStringConstant_StringKeyword_2 extends KeywordToken  {
 			case 0: return new TStringConstant_ConstantKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -394,8 +420,8 @@ protected class TStringConstant_NameAssignment_3 extends AssignmentToken  {
 			case 0: return new TStringConstant_StringKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -439,13 +465,15 @@ protected class TIntegerConstant_Group extends GroupToken {
 			case 0: return new TIntegerConstant_NameAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTIntegerConstantRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTIntegerConstantRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // annotations+=TAnnotation*
@@ -466,8 +494,8 @@ protected class TIntegerConstant_AnnotationsAssignment_0 extends AssignmentToken
 			case 0: return new TAnnotation_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("annotations",false)) == null) return null;
@@ -512,8 +540,8 @@ protected class TIntegerConstant_ConstantKeyword_1 extends KeywordToken  {
 			case 0: return new TIntegerConstant_AnnotationsAssignment_0(parent, this, 0, inst);
 			default: return parent.createParentFollower(this, index, index - 1, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // "integer"
@@ -534,8 +562,8 @@ protected class TIntegerConstant_IntegerKeyword_2 extends KeywordToken  {
 			case 0: return new TIntegerConstant_ConstantKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -556,8 +584,8 @@ protected class TIntegerConstant_NameAssignment_3 extends AssignmentToken  {
 			case 0: return new TIntegerConstant_IntegerKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -601,13 +629,15 @@ protected class TBooleanConstant_Group extends GroupToken {
 			case 0: return new TBooleanConstant_NameAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTBooleanConstantRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTBooleanConstantRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // annotations+=TAnnotation*
@@ -628,8 +658,8 @@ protected class TBooleanConstant_AnnotationsAssignment_0 extends AssignmentToken
 			case 0: return new TAnnotation_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("annotations",false)) == null) return null;
@@ -674,8 +704,8 @@ protected class TBooleanConstant_ConstantKeyword_1 extends KeywordToken  {
 			case 0: return new TBooleanConstant_AnnotationsAssignment_0(parent, this, 0, inst);
 			default: return parent.createParentFollower(this, index, index - 1, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // "boolean"
@@ -696,8 +726,8 @@ protected class TBooleanConstant_BooleanKeyword_2 extends KeywordToken  {
 			case 0: return new TBooleanConstant_ConstantKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -718,8 +748,8 @@ protected class TBooleanConstant_NameAssignment_3 extends AssignmentToken  {
 			case 0: return new TBooleanConstant_BooleanKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -763,13 +793,15 @@ protected class TAnnotation_Group extends GroupToken {
 			case 0: return new TAnnotation_DescriptionAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTAnnotationRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTAnnotationRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "@desc"
@@ -789,8 +821,8 @@ protected class TAnnotation_DescKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // description=STRING
@@ -811,8 +843,8 @@ protected class TAnnotation_DescriptionAssignment_1 extends AssignmentToken  {
 			case 0: return new TAnnotation_DescKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("description",true)) == null) return null;

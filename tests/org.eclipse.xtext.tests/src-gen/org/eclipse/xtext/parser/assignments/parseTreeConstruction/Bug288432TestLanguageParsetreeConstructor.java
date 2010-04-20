@@ -76,13 +76,15 @@ protected class Body_Group extends GroupToken {
 			case 0: return new Body_EndBodyKeyword_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getBodyRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getBodyRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // ("(" parameter+=Parameter ("," parameter+=Parameter)* ")")?
@@ -103,8 +105,8 @@ protected class Body_Group_0 extends GroupToken {
 			case 0: return new Body_RightParenthesisKeyword_0_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "("
@@ -124,8 +126,8 @@ protected class Body_LeftParenthesisKeyword_0_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // parameter+=Parameter
@@ -146,8 +148,8 @@ protected class Body_ParameterAssignment_0_1 extends AssignmentToken  {
 			case 0: return new Parameter_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("parameter",true)) == null) return null;
@@ -192,8 +194,8 @@ protected class Body_Group_0_2 extends GroupToken {
 			case 0: return new Body_ParameterAssignment_0_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // ","
@@ -215,8 +217,8 @@ protected class Body_CommaKeyword_0_2_0 extends KeywordToken  {
 			case 1: return new Body_ParameterAssignment_0_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // parameter+=Parameter
@@ -237,8 +239,8 @@ protected class Body_ParameterAssignment_0_2_1 extends AssignmentToken  {
 			case 0: return new Parameter_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("parameter",false)) == null) return null;
@@ -285,8 +287,8 @@ protected class Body_RightParenthesisKeyword_0_3 extends KeywordToken  {
 			case 1: return new Body_ParameterAssignment_0_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -308,8 +310,8 @@ protected class Body_BodyKeyword_1 extends KeywordToken  {
 			case 0: return new Body_Group_0(parent, this, 0, inst);
 			default: return parent.createParentFollower(this, index, index - 1, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // content=( Content | ParameterRef )
@@ -331,8 +333,8 @@ protected class Body_ContentAssignment_2 extends AssignmentToken  {
 			case 1: return new ParameterRef_ParameterAssignment(this, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("content",true)) == null) return null;
@@ -386,8 +388,8 @@ protected class Body_FooAssignment_3 extends AssignmentToken  {
 			case 0: return new Foo_FooValueAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("foo",true)) == null) return null;
@@ -433,8 +435,8 @@ protected class Body_EndBodyKeyword_4 extends KeywordToken  {
 			case 0: return new Body_FooAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -465,13 +467,15 @@ protected class Foo_FooValueAssignment extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getFooRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getFooRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("fooValue",true)) == null) return null;
@@ -514,13 +518,15 @@ protected class Content_Group extends GroupToken {
 			case 0: return new Content_EndContentKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getContentRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getMyElementRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "content"
@@ -540,8 +546,8 @@ protected class Content_ContentKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // MyElement
@@ -562,12 +568,11 @@ protected class Content_MyElementParserRuleCall_1 extends RuleCallToken {
 			case 0: return new MyElement_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(MyElement_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getMyElementRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -598,8 +603,8 @@ protected class Content_EndContentKeyword_2 extends KeywordToken  {
 			case 0: return new Content_MyElementParserRuleCall_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -631,13 +636,15 @@ protected class MyElement_Group extends GroupToken {
 			case 0: return new MyElement_BarAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getMyElementRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getMyElementRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "element"
@@ -657,8 +664,8 @@ protected class MyElement_ElementKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // bar=( MyInt | ParameterRef )
@@ -680,8 +687,8 @@ protected class MyElement_BarAssignment_1 extends AssignmentToken  {
 			case 1: return new ParameterRef_ParameterAssignment(this, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("bar",true)) == null) return null;
@@ -748,13 +755,17 @@ protected class ParameterObject_Alternatives extends AlternativesToken {
 			case 2: return new ParameterObject_ParameterRefParserRuleCall_2(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getParameterObjectRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getMyElementRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMyIntRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getParameterRefRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // MyInt
@@ -775,12 +786,18 @@ protected class ParameterObject_MyIntParserRuleCall_0 extends RuleCallToken {
 			case 0: return new MyInt_IntAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getMyIntRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(MyInt_IntAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getMyIntRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -810,12 +827,18 @@ protected class ParameterObject_ContentParserRuleCall_1 extends RuleCallToken {
 			case 0: return new Content_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getMyElementRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Content_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getContentRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -845,12 +868,18 @@ protected class ParameterObject_ParameterRefParserRuleCall_2 extends RuleCallTok
 			case 0: return new ParameterRef_ParameterAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getParameterRefRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ParameterRef_ParameterAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getParameterRefRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -892,13 +921,15 @@ protected class Parameter_Group extends GroupToken {
 			case 1: return new Parameter_NameAssignment_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getParameterRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getParameterRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // name=ID
@@ -918,8 +949,8 @@ protected class Parameter_NameAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -952,8 +983,8 @@ protected class Parameter_ValueAssignment_1 extends AssignmentToken  {
 			case 0: return new Parameter_NameAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",false)) == null) return null;
@@ -999,13 +1030,15 @@ protected class ParameterRef_ParameterAssignment extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getParameterRefRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getParameterRefRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("parameter",true)) == null) return null;
@@ -1050,13 +1083,15 @@ protected class MyInt_IntAssignment extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getMyIntRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getMyIntRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("int",true)) == null) return null;

@@ -71,13 +71,8 @@ protected class EntryRule_MultiFeatureAssignment extends AssignmentToken  {
 			case 0: return new AbstractRule_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getEntryRuleRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("multiFeature",false)) == null) return null;
@@ -133,13 +128,17 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 			case 1: return new AbstractRule_ReducibleRuleParserRuleCall_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAbstractRuleRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTerminalRuleRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getChoiceRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // ChoiceRule
@@ -160,12 +159,18 @@ protected class AbstractRule_ChoiceRuleParserRuleCall_0 extends RuleCallToken {
 			case 0: return new ChoiceRule_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getChoiceRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ChoiceRule_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getChoiceRuleRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -195,12 +200,19 @@ protected class AbstractRule_ReducibleRuleParserRuleCall_1 extends RuleCallToken
 			case 0: return new ReducibleRule_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getTerminalRuleRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ReducibleRule_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getReducibleRuleRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -241,13 +253,15 @@ protected class ChoiceRule_Group extends GroupToken {
 			case 0: return new ChoiceRule_NameAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getChoiceRuleRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getChoiceRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "choice"
@@ -267,8 +281,8 @@ protected class ChoiceRule_ChoiceKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // optionalKeyword?="optional"?
@@ -289,8 +303,8 @@ protected class ChoiceRule_OptionalKeywordAssignment_1 extends AssignmentToken  
 			case 0: return new ChoiceRule_ChoiceKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("optionalKeyword",false)) == null) return null;
@@ -324,8 +338,8 @@ protected class ChoiceRule_NameAssignment_2 extends AssignmentToken  {
 			case 1: return new ChoiceRule_ChoiceKeyword_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -372,13 +386,16 @@ protected class ReducibleRule_Group extends GroupToken {
 			case 1: return new ReducibleRule_TerminalRuleParserRuleCall_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getReducibleRuleRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTerminalRuleRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "reducible"
@@ -398,8 +415,8 @@ protected class ReducibleRule_ReducibleKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // TerminalRule
@@ -420,12 +437,18 @@ protected class ReducibleRule_TerminalRuleParserRuleCall_1 extends RuleCallToken
 			case 0: return new TerminalRule_StringFeatureAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getTerminalRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TerminalRule_StringFeatureAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getTerminalRuleRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -456,8 +479,15 @@ protected class ReducibleRule_Group_2 extends GroupToken {
 			case 0: return new ReducibleRule_ActionFeatureAssignment_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {ReducibleComposite.actionFeature+=current}
@@ -478,12 +508,10 @@ protected class ReducibleRule_ReducibleCompositeActionFeatureAction_2_0 extends 
 			case 0: return new ReducibleRule_TerminalRuleParserRuleCall_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("actionFeature", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("actionFeature")) return null;
@@ -509,8 +537,8 @@ protected class ReducibleRule_ActionFeatureAssignment_2_1 extends AssignmentToke
 			case 0: return new TerminalRule_StringFeatureAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("actionFeature",false)) == null) return null;
@@ -566,13 +594,15 @@ protected class TerminalRule_StringFeatureAssignment extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTerminalRuleRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTerminalRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stringFeature",true)) == null) return null;

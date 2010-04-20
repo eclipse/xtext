@@ -73,13 +73,17 @@ protected class Sequence_Group extends GroupToken {
 			case 1: return new Sequence_AdditionParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getSequenceRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // Addition
@@ -100,12 +104,19 @@ protected class Sequence_AdditionParserRuleCall_0 extends RuleCallToken {
 			case 0: return new Addition_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Addition_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getAdditionRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -135,8 +146,15 @@ protected class Sequence_Group_1 extends GroupToken {
 			case 0: return new Sequence_ExpressionsAssignment_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {Sequence.expressions+=current}
@@ -158,12 +176,10 @@ protected class Sequence_SequenceExpressionsAction_1_0 extends ActionToken  {
 			case 1: return new Sequence_AdditionParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("expressions", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("expressions")) return null;
@@ -189,8 +205,8 @@ protected class Sequence_ExpressionsAssignment_1_1 extends AssignmentToken  {
 			case 0: return new Addition_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("expressions",false)) == null) return null;
@@ -248,13 +264,16 @@ protected class Addition_Group extends GroupToken {
 			case 1: return new Addition_MultiplicationParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAdditionRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // Multiplication
@@ -275,12 +294,11 @@ protected class Addition_MultiplicationParserRuleCall_0 extends RuleCallToken {
 			case 0: return new Multiplication_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Multiplication_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getMultiplicationRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -310,8 +328,15 @@ protected class Addition_Group_1 extends GroupToken {
 			case 0: return new Addition_ValuesAssignment_1_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {Op.values+=current}
@@ -333,12 +358,10 @@ protected class Addition_OpValuesAction_1_0 extends ActionToken  {
 			case 1: return new Addition_MultiplicationParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("values", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("values")) return null;
@@ -364,8 +387,8 @@ protected class Addition_OperatorAssignment_1_1 extends AssignmentToken  {
 			case 0: return new Addition_OpValuesAction_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
@@ -403,8 +426,8 @@ protected class Addition_ValuesAssignment_1_2 extends AssignmentToken  {
 			case 0: return new Multiplication_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("values",true)) == null) return null;
@@ -462,13 +485,16 @@ protected class Multiplication_Group extends GroupToken {
 			case 1: return new Multiplication_TermParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getMultiplicationRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // Term
@@ -489,12 +515,11 @@ protected class Multiplication_TermParserRuleCall_0 extends RuleCallToken {
 			case 0: return new Term_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Term_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getTermRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -524,8 +549,15 @@ protected class Multiplication_Group_1 extends GroupToken {
 			case 0: return new Multiplication_ValuesAssignment_1_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {Op.values+=current}
@@ -547,12 +579,10 @@ protected class Multiplication_OpValuesAction_1_0 extends ActionToken  {
 			case 1: return new Multiplication_TermParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("values", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("values")) return null;
@@ -578,8 +608,8 @@ protected class Multiplication_OperatorAssignment_1_1 extends AssignmentToken  {
 			case 0: return new Multiplication_OpValuesAction_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
@@ -617,8 +647,8 @@ protected class Multiplication_ValuesAssignment_1_2 extends AssignmentToken  {
 			case 0: return new Term_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("values",true)) == null) return null;
@@ -676,13 +706,16 @@ protected class Term_Alternatives extends AlternativesToken {
 			case 1: return new Term_ParensParserRuleCall_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTermRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // Atom
@@ -703,12 +736,18 @@ protected class Term_AtomParserRuleCall_0 extends RuleCallToken {
 			case 0: return new Atom_NameAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Atom_NameAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getAtomRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -738,12 +777,11 @@ protected class Term_ParensParserRuleCall_1 extends RuleCallToken {
 			case 0: return new Parens_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Parens_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getParensRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -783,13 +821,15 @@ protected class Atom_NameAssignment extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAtomRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -832,13 +872,16 @@ protected class Parens_Group extends GroupToken {
 			case 0: return new Parens_RightParenthesisKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getParensRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "("
@@ -858,8 +901,8 @@ protected class Parens_LeftParenthesisKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // Addition
@@ -880,12 +923,11 @@ protected class Parens_AdditionParserRuleCall_1 extends RuleCallToken {
 			case 0: return new Addition_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Addition_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getAdditionRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -916,8 +958,8 @@ protected class Parens_RightParenthesisKeyword_2 extends KeywordToken  {
 			case 0: return new Parens_AdditionParserRuleCall_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 

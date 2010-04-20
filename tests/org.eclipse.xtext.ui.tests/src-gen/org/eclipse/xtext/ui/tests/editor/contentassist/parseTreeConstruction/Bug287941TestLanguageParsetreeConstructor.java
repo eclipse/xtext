@@ -90,13 +90,15 @@ protected class Model_Group extends GroupToken {
 			case 0: return new Model_QueryAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getModelRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // imports+=Import*
@@ -117,8 +119,8 @@ protected class Model_ImportsAssignment_0 extends AssignmentToken  {
 			case 0: return new Import_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("imports",false)) == null) return null;
@@ -163,8 +165,8 @@ protected class Model_QueryAssignment_1 extends AssignmentToken  {
 			case 0: return new MQLquery_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("query",true)) == null) return null;
@@ -220,13 +222,15 @@ protected class Import_Group extends GroupToken {
 			case 0: return new Import_ImportURIAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getImportRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getImportRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "import"
@@ -246,8 +250,8 @@ protected class Import_ImportKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // importURI=STRING
@@ -268,8 +272,8 @@ protected class Import_ImportURIAssignment_1 extends AssignmentToken  {
 			case 0: return new Import_ImportKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("importURI",true)) == null) return null;
@@ -319,13 +323,15 @@ protected class MQLquery_Group extends GroupToken {
 			case 2: return new MQLquery_FromEntriesAssignment_4(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getMQLqueryRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getMQLqueryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "select"
@@ -345,8 +351,8 @@ protected class MQLquery_SelectKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // selectEntries+=SelectEntry
@@ -367,8 +373,8 @@ protected class MQLquery_SelectEntriesAssignment_1 extends AssignmentToken  {
 			case 0: return new SelectEntry_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("selectEntries",true)) == null) return null;
@@ -413,8 +419,8 @@ protected class MQLquery_Group_2 extends GroupToken {
 			case 0: return new MQLquery_SelectEntriesAssignment_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // ","
@@ -436,8 +442,8 @@ protected class MQLquery_CommaKeyword_2_0 extends KeywordToken  {
 			case 1: return new MQLquery_SelectEntriesAssignment_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // selectEntries+=SelectEntry
@@ -458,8 +464,8 @@ protected class MQLquery_SelectEntriesAssignment_2_1 extends AssignmentToken  {
 			case 0: return new SelectEntry_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("selectEntries",false)) == null) return null;
@@ -506,8 +512,8 @@ protected class MQLquery_FromKeyword_3 extends KeywordToken  {
 			case 1: return new MQLquery_SelectEntriesAssignment_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // fromEntries+=FromEntry
@@ -528,8 +534,8 @@ protected class MQLquery_FromEntriesAssignment_4 extends AssignmentToken  {
 			case 0: return new FromEntry_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("fromEntries",true)) == null) return null;
@@ -574,8 +580,8 @@ protected class MQLquery_Group_5 extends GroupToken {
 			case 0: return new MQLquery_FromEntriesAssignment_5_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // ","
@@ -597,8 +603,8 @@ protected class MQLquery_CommaKeyword_5_0 extends KeywordToken  {
 			case 1: return new MQLquery_FromEntriesAssignment_4(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // fromEntries+=FromEntry
@@ -619,8 +625,8 @@ protected class MQLquery_FromEntriesAssignment_5_1 extends AssignmentToken  {
 			case 0: return new FromEntry_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("fromEntries",false)) == null) return null;
@@ -666,8 +672,8 @@ protected class MQLquery_Group_6 extends GroupToken {
 			case 0: return new MQLquery_WhereEntriesAssignment_6_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "where"
@@ -689,8 +695,8 @@ protected class MQLquery_WhereKeyword_6_0 extends KeywordToken  {
 			case 1: return new MQLquery_FromEntriesAssignment_4(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // whereEntries+=WhereEntry+
@@ -711,8 +717,8 @@ protected class MQLquery_WhereEntriesAssignment_6_1 extends AssignmentToken  {
 			case 0: return new WhereEntry_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("whereEntries",false)) == null) return null;
@@ -771,13 +777,15 @@ protected class SelectEntry_Group extends GroupToken {
 			case 1: return new SelectEntry_SelectAssignment_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getSelectEntryRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getSelectEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // select=[FromEntry]
@@ -797,8 +805,8 @@ protected class SelectEntry_SelectAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("select",true)) == null) return null;
@@ -834,8 +842,8 @@ protected class SelectEntry_Group_1 extends GroupToken {
 			case 0: return new SelectEntry_AttributeAssignment_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "."
@@ -856,8 +864,8 @@ protected class SelectEntry_FullStopKeyword_1_0 extends KeywordToken  {
 			case 0: return new SelectEntry_SelectAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // attribute=[ecore::EAttribute]
@@ -878,8 +886,8 @@ protected class SelectEntry_AttributeAssignment_1_1 extends AssignmentToken  {
 			case 0: return new SelectEntry_FullStopKeyword_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attribute",false)) == null) return null;
@@ -930,13 +938,15 @@ protected class FromEntry_Group extends GroupToken {
 			case 1: return new FromEntry_AliasAssignment_3(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getFromEntryRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getFromEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // type=[ecore::EClass]
@@ -956,8 +966,8 @@ protected class FromEntry_TypeAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
@@ -993,8 +1003,8 @@ protected class FromEntry_WithoutsubtypesAssignment_1 extends AssignmentToken  {
 			case 0: return new FromEntry_TypeAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("withoutsubtypes",false)) == null) return null;
@@ -1028,8 +1038,8 @@ protected class FromEntry_AsKeyword_2 extends KeywordToken  {
 			case 1: return new FromEntry_TypeAssignment_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // alias=ID
@@ -1050,8 +1060,8 @@ protected class FromEntry_AliasAssignment_3 extends AssignmentToken  {
 			case 0: return new FromEntry_AsKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
@@ -1084,8 +1094,8 @@ protected class FromEntry_ScopeClauseAssignment_4 extends AssignmentToken  {
 			case 0: return new ScopeClause_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("scopeClause",false)) == null) return null;
@@ -1141,13 +1151,15 @@ protected class ScopeClause_Group extends GroupToken {
 			case 0: return new ScopeClause_ScopeAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getScopeClauseRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getScopeClauseRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // notIn?="not"?
@@ -1167,8 +1179,8 @@ protected class ScopeClause_NotInAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("notIn",false)) == null) return null;
@@ -1201,8 +1213,8 @@ protected class ScopeClause_InKeyword_1 extends KeywordToken  {
 			case 0: return new ScopeClause_NotInAssignment_0(parent, this, 0, inst);
 			default: return parent.createParentFollower(this, index, index - 1, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // scope=Scope
@@ -1223,8 +1235,8 @@ protected class ScopeClause_ScopeAssignment_2 extends AssignmentToken  {
 			case 0: return new Scope_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("scope",true)) == null) return null;
@@ -1281,13 +1293,16 @@ protected class Scope_Alternatives extends AlternativesToken {
 			case 1: return new Scope_ElementScopeParserRuleCall_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getScopeRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getResourceScopeRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getElementScopeRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // ResourceScope
@@ -1308,12 +1323,18 @@ protected class Scope_ResourceScopeParserRuleCall_0 extends RuleCallToken {
 			case 0: return new ResourceScope_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getResourceScopeRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ResourceScope_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getResourceScopeRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -1343,12 +1364,18 @@ protected class Scope_ElementScopeParserRuleCall_1 extends RuleCallToken {
 			case 0: return new ElementScope_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getElementScopeRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ElementScope_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getElementScopeRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -1389,13 +1416,15 @@ protected class ResourceScope_Group extends GroupToken {
 			case 0: return new ResourceScope_RightCurlyBracketKeyword_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getResourceScopeRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getResourceScopeRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "resources"
@@ -1415,8 +1444,8 @@ protected class ResourceScope_ResourcesKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // "{"
@@ -1437,8 +1466,8 @@ protected class ResourceScope_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 			case 0: return new ResourceScope_ResourcesKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // uris+=STRING
@@ -1459,8 +1488,8 @@ protected class ResourceScope_UrisAssignment_2 extends AssignmentToken  {
 			case 0: return new ResourceScope_LeftCurlyBracketKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("uris",true)) == null) return null;
@@ -1493,8 +1522,8 @@ protected class ResourceScope_Group_3 extends GroupToken {
 			case 0: return new ResourceScope_UrisAssignment_3_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // ","
@@ -1516,8 +1545,8 @@ protected class ResourceScope_CommaKeyword_3_0 extends KeywordToken  {
 			case 1: return new ResourceScope_UrisAssignment_2(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // uris+=STRING
@@ -1538,8 +1567,8 @@ protected class ResourceScope_UrisAssignment_3_1 extends AssignmentToken  {
 			case 0: return new ResourceScope_CommaKeyword_3_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("uris",false)) == null) return null;
@@ -1574,8 +1603,8 @@ protected class ResourceScope_RightCurlyBracketKeyword_4 extends KeywordToken  {
 			case 1: return new ResourceScope_UrisAssignment_2(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -1607,13 +1636,15 @@ protected class ElementScope_Group extends GroupToken {
 			case 0: return new ElementScope_RightCurlyBracketKeyword_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getElementScopeRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getElementScopeRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "elements"
@@ -1633,8 +1664,8 @@ protected class ElementScope_ElementsKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // "{"
@@ -1655,8 +1686,8 @@ protected class ElementScope_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 			case 0: return new ElementScope_ElementsKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // uris+=STRING
@@ -1677,8 +1708,8 @@ protected class ElementScope_UrisAssignment_2 extends AssignmentToken  {
 			case 0: return new ElementScope_LeftCurlyBracketKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("uris",true)) == null) return null;
@@ -1711,8 +1742,8 @@ protected class ElementScope_Group_3 extends GroupToken {
 			case 0: return new ElementScope_UrisAssignment_3_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // ","
@@ -1734,8 +1765,8 @@ protected class ElementScope_CommaKeyword_3_0 extends KeywordToken  {
 			case 1: return new ElementScope_UrisAssignment_2(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // uris+=STRING
@@ -1756,8 +1787,8 @@ protected class ElementScope_UrisAssignment_3_1 extends AssignmentToken  {
 			case 0: return new ElementScope_CommaKeyword_3_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("uris",false)) == null) return null;
@@ -1792,8 +1823,8 @@ protected class ElementScope_RightCurlyBracketKeyword_4 extends KeywordToken  {
 			case 1: return new ElementScope_UrisAssignment_2(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -1826,13 +1857,25 @@ protected class WhereEntry_Group extends GroupToken {
 			case 1: return new WhereEntry_AndWhereEntryParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getWhereEntryRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getNullWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAliasWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getWhereEntryAccess().getOrWhereEntryEntriesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getSubselectWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getReferenceAliasWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getVariableWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAndWhereEntryAccess().getAndWhereEntryEntriesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getBooleanAttributeWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // AndWhereEntry
@@ -1853,12 +1896,11 @@ protected class WhereEntry_AndWhereEntryParserRuleCall_0 extends RuleCallToken {
 			case 0: return new AndWhereEntry_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(AndWhereEntry_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getAndWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -1888,8 +1930,15 @@ protected class WhereEntry_Group_1 extends GroupToken {
 			case 0: return new WhereEntry_Group_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getWhereEntryAccess().getOrWhereEntryEntriesAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {OrWhereEntry.entries+=current}
@@ -1910,12 +1959,10 @@ protected class WhereEntry_OrWhereEntryEntriesAction_1_0 extends ActionToken  {
 			case 0: return new WhereEntry_AndWhereEntryParserRuleCall_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getWhereEntryAccess().getOrWhereEntryEntriesAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("entries", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("entries")) return null;
@@ -1941,8 +1988,8 @@ protected class WhereEntry_Group_1_1 extends GroupToken {
 			case 0: return new WhereEntry_EntriesAssignment_1_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "or"
@@ -1964,8 +2011,8 @@ protected class WhereEntry_OrKeyword_1_1_0 extends KeywordToken  {
 			case 1: return new WhereEntry_OrWhereEntryEntriesAction_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // entries+=AndWhereEntry
@@ -1986,8 +2033,8 @@ protected class WhereEntry_EntriesAssignment_1_1_1 extends AssignmentToken  {
 			case 0: return new AndWhereEntry_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("entries",false)) == null) return null;
@@ -2048,13 +2095,25 @@ protected class AndWhereEntry_Group extends GroupToken {
 			case 1: return new AndWhereEntry_ConcreteWhereEntryParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAndWhereEntryRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getNullWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAliasWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getWhereEntryAccess().getOrWhereEntryEntriesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getSubselectWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getReferenceAliasWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getVariableWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAndWhereEntryAccess().getAndWhereEntryEntriesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getBooleanAttributeWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // ConcreteWhereEntry
@@ -2075,12 +2134,11 @@ protected class AndWhereEntry_ConcreteWhereEntryParserRuleCall_0 extends RuleCal
 			case 0: return new ConcreteWhereEntry_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ConcreteWhereEntry_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getConcreteWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2110,8 +2168,15 @@ protected class AndWhereEntry_Group_1 extends GroupToken {
 			case 0: return new AndWhereEntry_Group_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getAndWhereEntryAccess().getAndWhereEntryEntriesAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {AndWhereEntry.entries+=current}
@@ -2132,12 +2197,10 @@ protected class AndWhereEntry_AndWhereEntryEntriesAction_1_0 extends ActionToken
 			case 0: return new AndWhereEntry_ConcreteWhereEntryParserRuleCall_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getAndWhereEntryAccess().getAndWhereEntryEntriesAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("entries", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("entries")) return null;
@@ -2163,8 +2226,8 @@ protected class AndWhereEntry_Group_1_1 extends GroupToken {
 			case 0: return new AndWhereEntry_EntriesAssignment_1_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "and"
@@ -2186,8 +2249,8 @@ protected class AndWhereEntry_AndKeyword_1_1_0 extends KeywordToken  {
 			case 1: return new AndWhereEntry_AndWhereEntryEntriesAction_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // entries+=ConcreteWhereEntry
@@ -2208,8 +2271,8 @@ protected class AndWhereEntry_EntriesAssignment_1_1_1 extends AssignmentToken  {
 			case 0: return new ConcreteWhereEntry_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("entries",false)) == null) return null;
@@ -2274,13 +2337,25 @@ protected class ConcreteWhereEntry_Alternatives extends AlternativesToken {
 			case 5: return new ConcreteWhereEntry_SubselectWhereEntryParserRuleCall_5(parent, this, 5, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getConcreteWhereEntryRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getNullWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAliasWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getWhereEntryAccess().getOrWhereEntryEntriesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getSubselectWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getReferenceAliasWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getVariableWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAndWhereEntryAccess().getAndWhereEntryEntriesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getBooleanAttributeWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // ParWhereEntry
@@ -2301,12 +2376,11 @@ protected class ConcreteWhereEntry_ParWhereEntryParserRuleCall_0 extends RuleCal
 			case 0: return new ParWhereEntry_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ParWhereEntry_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getParWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2336,12 +2410,22 @@ protected class ConcreteWhereEntry_AttributeWhereEntryParserRuleCall_1 extends R
 			case 0: return new AttributeWhereEntry_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getVariableWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getBooleanAttributeWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(AttributeWhereEntry_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getAttributeWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2371,12 +2455,18 @@ protected class ConcreteWhereEntry_NullWhereEntryParserRuleCall_2 extends RuleCa
 			case 0: return new NullWhereEntry_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getNullWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(NullWhereEntry_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getNullWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2406,12 +2496,18 @@ protected class ConcreteWhereEntry_ReferenceAliasWhereEntryParserRuleCall_3 exte
 			case 0: return new ReferenceAliasWhereEntry_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getReferenceAliasWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ReferenceAliasWhereEntry_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getReferenceAliasWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2441,12 +2537,18 @@ protected class ConcreteWhereEntry_AliasWhereEntryParserRuleCall_4 extends RuleC
 			case 0: return new AliasWhereEntry_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getAliasWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(AliasWhereEntry_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getAliasWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2476,12 +2578,18 @@ protected class ConcreteWhereEntry_SubselectWhereEntryParserRuleCall_5 extends R
 			case 0: return new SubselectWhereEntry_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getSubselectWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(SubselectWhereEntry_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getSubselectWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2522,13 +2630,25 @@ protected class ParWhereEntry_Group extends GroupToken {
 			case 0: return new ParWhereEntry_RightParenthesisKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getParWhereEntryRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getNullWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAliasWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getWhereEntryAccess().getOrWhereEntryEntriesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getSubselectWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getReferenceAliasWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getVariableWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAndWhereEntryAccess().getAndWhereEntryEntriesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getBooleanAttributeWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "("
@@ -2548,8 +2668,8 @@ protected class ParWhereEntry_LeftParenthesisKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // WhereEntry
@@ -2570,12 +2690,11 @@ protected class ParWhereEntry_WhereEntryParserRuleCall_1 extends RuleCallToken {
 			case 0: return new WhereEntry_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(WhereEntry_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2606,8 +2725,8 @@ protected class ParWhereEntry_RightParenthesisKeyword_2 extends KeywordToken  {
 			case 0: return new ParWhereEntry_WhereEntryParserRuleCall_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -2644,13 +2763,19 @@ protected class AttributeWhereEntry_Alternatives extends AlternativesToken {
 			case 3: return new AttributeWhereEntry_VariableWhereEntryParserRuleCall_3(parent, this, 3, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAttributeWhereEntryRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getVariableWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getBooleanAttributeWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // NumericAttributeWhereEntry
@@ -2671,12 +2796,19 @@ protected class AttributeWhereEntry_NumericAttributeWhereEntryParserRuleCall_0 e
 			case 0: return new NumericAttributeWhereEntry_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(NumericAttributeWhereEntry_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getNumericAttributeWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2706,12 +2838,18 @@ protected class AttributeWhereEntry_StringAttributeWhereEntryParserRuleCall_1 ex
 			case 0: return new StringAttributeWhereEntry_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(StringAttributeWhereEntry_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2741,12 +2879,18 @@ protected class AttributeWhereEntry_BooleanAttributeWhereEntryParserRuleCall_2 e
 			case 0: return new BooleanAttributeWhereEntry_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getBooleanAttributeWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(BooleanAttributeWhereEntry_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getBooleanAttributeWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2776,12 +2920,18 @@ protected class AttributeWhereEntry_VariableWhereEntryParserRuleCall_3 extends R
 			case 0: return new VariableWhereEntry_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getVariableWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(VariableWhereEntry_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getVariableWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2823,13 +2973,16 @@ protected class NumericAttributeWhereEntry_Alternatives extends AlternativesToke
 			case 1: return new NumericAttributeWhereEntry_LongWhereEntryParserRuleCall_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getNumericAttributeWhereEntryRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // DoubleWhereEntry
@@ -2850,12 +3003,18 @@ protected class NumericAttributeWhereEntry_DoubleWhereEntryParserRuleCall_0 exte
 			case 0: return new DoubleWhereEntry_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(DoubleWhereEntry_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getDoubleWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2885,12 +3044,18 @@ protected class NumericAttributeWhereEntry_LongWhereEntryParserRuleCall_1 extend
 			case 0: return new LongWhereEntry_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(LongWhereEntry_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getLongWhereEntryRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2933,13 +3098,15 @@ protected class DoubleWhereEntry_Group extends GroupToken {
 			case 0: return new DoubleWhereEntry_ValueAssignment_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getDoubleWhereEntryRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // alias=[FromEntry]
@@ -2959,8 +3126,8 @@ protected class DoubleWhereEntry_AliasAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
@@ -2996,8 +3163,8 @@ protected class DoubleWhereEntry_FullStopKeyword_1 extends KeywordToken  {
 			case 0: return new DoubleWhereEntry_AliasAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // attribute=[ecore::EAttribute]
@@ -3018,8 +3185,8 @@ protected class DoubleWhereEntry_AttributeAssignment_2 extends AssignmentToken  
 			case 0: return new DoubleWhereEntry_FullStopKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attribute",true)) == null) return null;
@@ -3055,8 +3222,8 @@ protected class DoubleWhereEntry_OperatorAssignment_3 extends AssignmentToken  {
 			case 0: return new DoubleWhereEntry_AttributeAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
@@ -3089,8 +3256,8 @@ protected class DoubleWhereEntry_ValueAssignment_4 extends AssignmentToken  {
 			case 0: return new DoubleWhereEntry_OperatorAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
@@ -3136,13 +3303,15 @@ protected class LongWhereEntry_Group extends GroupToken {
 			case 0: return new LongWhereEntry_ValueAssignment_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getLongWhereEntryRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // alias=[FromEntry]
@@ -3162,8 +3331,8 @@ protected class LongWhereEntry_AliasAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
@@ -3199,8 +3368,8 @@ protected class LongWhereEntry_FullStopKeyword_1 extends KeywordToken  {
 			case 0: return new LongWhereEntry_AliasAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // attribute=[ecore::EAttribute]
@@ -3221,8 +3390,8 @@ protected class LongWhereEntry_AttributeAssignment_2 extends AssignmentToken  {
 			case 0: return new LongWhereEntry_FullStopKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attribute",true)) == null) return null;
@@ -3258,8 +3427,8 @@ protected class LongWhereEntry_OperatorAssignment_3 extends AssignmentToken  {
 			case 0: return new LongWhereEntry_AttributeAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
@@ -3292,8 +3461,8 @@ protected class LongWhereEntry_ValueAssignment_4 extends AssignmentToken  {
 			case 0: return new LongWhereEntry_OperatorAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
@@ -3339,13 +3508,15 @@ protected class VariableWhereEntry_Group extends GroupToken {
 			case 0: return new VariableWhereEntry_RightAttributeAssignment_6(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getVariableWhereEntryRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getVariableWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // alias=[FromEntry]
@@ -3365,8 +3536,8 @@ protected class VariableWhereEntry_AliasAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
@@ -3402,8 +3573,8 @@ protected class VariableWhereEntry_FullStopKeyword_1 extends KeywordToken  {
 			case 0: return new VariableWhereEntry_AliasAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // attribute=[ecore::EAttribute]
@@ -3424,8 +3595,8 @@ protected class VariableWhereEntry_AttributeAssignment_2 extends AssignmentToken
 			case 0: return new VariableWhereEntry_FullStopKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attribute",true)) == null) return null;
@@ -3461,8 +3632,8 @@ protected class VariableWhereEntry_OperatorAssignment_3 extends AssignmentToken 
 			case 0: return new VariableWhereEntry_AttributeAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
@@ -3495,8 +3666,8 @@ protected class VariableWhereEntry_RightAliasAssignment_4 extends AssignmentToke
 			case 0: return new VariableWhereEntry_OperatorAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("rightAlias",true)) == null) return null;
@@ -3532,8 +3703,8 @@ protected class VariableWhereEntry_FullStopKeyword_5 extends KeywordToken  {
 			case 0: return new VariableWhereEntry_RightAliasAssignment_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // rightAttribute=[ecore::EAttribute]
@@ -3554,8 +3725,8 @@ protected class VariableWhereEntry_RightAttributeAssignment_6 extends Assignment
 			case 0: return new VariableWhereEntry_FullStopKeyword_5(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("rightAttribute",true)) == null) return null;
@@ -3604,13 +3775,15 @@ protected class StringAttributeWhereEntry_Group extends GroupToken {
 			case 0: return new StringAttributeWhereEntry_PatternAssignment_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // alias=[FromEntry]
@@ -3630,8 +3803,8 @@ protected class StringAttributeWhereEntry_AliasAssignment_0 extends AssignmentTo
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
@@ -3667,8 +3840,8 @@ protected class StringAttributeWhereEntry_FullStopKeyword_1 extends KeywordToken
 			case 0: return new StringAttributeWhereEntry_AliasAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // attribute=[ecore::EAttribute]
@@ -3689,8 +3862,8 @@ protected class StringAttributeWhereEntry_AttributeAssignment_2 extends Assignme
 			case 0: return new StringAttributeWhereEntry_FullStopKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attribute",true)) == null) return null;
@@ -3726,8 +3899,8 @@ protected class StringAttributeWhereEntry_OperatorAssignment_3 extends Assignmen
 			case 0: return new StringAttributeWhereEntry_AttributeAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
@@ -3760,8 +3933,8 @@ protected class StringAttributeWhereEntry_PatternAssignment_4 extends Assignment
 			case 0: return new StringAttributeWhereEntry_OperatorAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("pattern",true)) == null) return null;
@@ -3807,13 +3980,15 @@ protected class BooleanAttributeWhereEntry_Group extends GroupToken {
 			case 0: return new BooleanAttributeWhereEntry_Alternatives_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getBooleanAttributeWhereEntryRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getBooleanAttributeWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // alias=[FromEntry]
@@ -3833,8 +4008,8 @@ protected class BooleanAttributeWhereEntry_AliasAssignment_0 extends AssignmentT
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
@@ -3870,8 +4045,8 @@ protected class BooleanAttributeWhereEntry_FullStopKeyword_1 extends KeywordToke
 			case 0: return new BooleanAttributeWhereEntry_AliasAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // attribute=[ecore::EAttribute]
@@ -3892,8 +4067,8 @@ protected class BooleanAttributeWhereEntry_AttributeAssignment_2 extends Assignm
 			case 0: return new BooleanAttributeWhereEntry_FullStopKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attribute",true)) == null) return null;
@@ -3929,8 +4104,8 @@ protected class BooleanAttributeWhereEntry_OperatorAssignment_3 extends Assignme
 			case 0: return new BooleanAttributeWhereEntry_AttributeAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
@@ -3964,8 +4139,8 @@ protected class BooleanAttributeWhereEntry_Alternatives_4 extends AlternativesTo
 			case 1: return new BooleanAttributeWhereEntry_FalseKeyword_4_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // isTrue?="true"
@@ -3986,8 +4161,8 @@ protected class BooleanAttributeWhereEntry_IsTrueAssignment_4_0 extends Assignme
 			case 0: return new BooleanAttributeWhereEntry_OperatorAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("isTrue",true)) == null) return null;
@@ -4020,8 +4195,8 @@ protected class BooleanAttributeWhereEntry_FalseKeyword_4_1 extends KeywordToken
 			case 0: return new BooleanAttributeWhereEntry_OperatorAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -4056,13 +4231,15 @@ protected class NullWhereEntry_Group extends GroupToken {
 			case 0: return new NullWhereEntry_NullKeyword_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getNullWhereEntryRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getNullWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // alias=[FromEntry]
@@ -4082,8 +4259,8 @@ protected class NullWhereEntry_AliasAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
@@ -4119,8 +4296,8 @@ protected class NullWhereEntry_FullStopKeyword_1 extends KeywordToken  {
 			case 0: return new NullWhereEntry_AliasAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // feature=[ecore::EStructuralFeature]
@@ -4141,8 +4318,8 @@ protected class NullWhereEntry_FeatureAssignment_2 extends AssignmentToken  {
 			case 0: return new NullWhereEntry_FullStopKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("feature",true)) == null) return null;
@@ -4178,8 +4355,8 @@ protected class NullWhereEntry_OperatorAssignment_3 extends AssignmentToken  {
 			case 0: return new NullWhereEntry_FeatureAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
@@ -4212,8 +4389,8 @@ protected class NullWhereEntry_NullKeyword_4 extends KeywordToken  {
 			case 0: return new NullWhereEntry_OperatorAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -4245,13 +4422,15 @@ protected class ReferenceAliasWhereEntry_Group extends GroupToken {
 			case 0: return new ReferenceAliasWhereEntry_RightAliasAssignment_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getReferenceAliasWhereEntryRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getReferenceAliasWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // alias=[FromEntry]
@@ -4271,8 +4450,8 @@ protected class ReferenceAliasWhereEntry_AliasAssignment_0 extends AssignmentTok
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
@@ -4308,8 +4487,8 @@ protected class ReferenceAliasWhereEntry_FullStopKeyword_1 extends KeywordToken 
 			case 0: return new ReferenceAliasWhereEntry_AliasAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // reference=[ecore::EReference]
@@ -4330,8 +4509,8 @@ protected class ReferenceAliasWhereEntry_ReferenceAssignment_2 extends Assignmen
 			case 0: return new ReferenceAliasWhereEntry_FullStopKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("reference",true)) == null) return null;
@@ -4367,8 +4546,8 @@ protected class ReferenceAliasWhereEntry_EqualsSignKeyword_3 extends KeywordToke
 			case 0: return new ReferenceAliasWhereEntry_ReferenceAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // rightAlias=[FromEntry]
@@ -4389,8 +4568,8 @@ protected class ReferenceAliasWhereEntry_RightAliasAssignment_4 extends Assignme
 			case 0: return new ReferenceAliasWhereEntry_EqualsSignKeyword_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("rightAlias",true)) == null) return null;
@@ -4439,13 +4618,15 @@ protected class SubselectWhereEntry_Group extends GroupToken {
 			case 0: return new SubselectWhereEntry_RightParenthesisKeyword_7(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getSubselectWhereEntryRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getSubselectWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // alias=[FromEntry]
@@ -4465,8 +4646,8 @@ protected class SubselectWhereEntry_AliasAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
@@ -4502,8 +4683,8 @@ protected class SubselectWhereEntry_FullStopKeyword_1 extends KeywordToken  {
 			case 0: return new SubselectWhereEntry_AliasAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // reference=[ecore::EReference]
@@ -4524,8 +4705,8 @@ protected class SubselectWhereEntry_ReferenceAssignment_2 extends AssignmentToke
 			case 0: return new SubselectWhereEntry_FullStopKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("reference",true)) == null) return null;
@@ -4561,8 +4742,8 @@ protected class SubselectWhereEntry_NotInAssignment_3 extends AssignmentToken  {
 			case 0: return new SubselectWhereEntry_ReferenceAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("notIn",false)) == null) return null;
@@ -4596,8 +4777,8 @@ protected class SubselectWhereEntry_InKeyword_4 extends KeywordToken  {
 			case 1: return new SubselectWhereEntry_ReferenceAssignment_2(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "("
@@ -4618,8 +4799,8 @@ protected class SubselectWhereEntry_LeftParenthesisKeyword_5 extends KeywordToke
 			case 0: return new SubselectWhereEntry_InKeyword_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // subQuery=MQLquery
@@ -4640,8 +4821,8 @@ protected class SubselectWhereEntry_SubQueryAssignment_6 extends AssignmentToken
 			case 0: return new MQLquery_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("subQuery",true)) == null) return null;
@@ -4686,8 +4867,8 @@ protected class SubselectWhereEntry_RightParenthesisKeyword_7 extends KeywordTok
 			case 0: return new SubselectWhereEntry_SubQueryAssignment_6(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -4719,13 +4900,15 @@ protected class AliasWhereEntry_Group extends GroupToken {
 			case 0: return new AliasWhereEntry_RightAliasAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAliasWhereEntryRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getAliasWhereEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // alias=[FromEntry]
@@ -4745,8 +4928,8 @@ protected class AliasWhereEntry_AliasAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
@@ -4782,8 +4965,8 @@ protected class AliasWhereEntry_EqualsSignKeyword_1 extends KeywordToken  {
 			case 0: return new AliasWhereEntry_AliasAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // rightAlias=[FromEntry]
@@ -4804,8 +4987,8 @@ protected class AliasWhereEntry_RightAliasAssignment_2 extends AssignmentToken  
 			case 0: return new AliasWhereEntry_EqualsSignKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("rightAlias",true)) == null) return null;

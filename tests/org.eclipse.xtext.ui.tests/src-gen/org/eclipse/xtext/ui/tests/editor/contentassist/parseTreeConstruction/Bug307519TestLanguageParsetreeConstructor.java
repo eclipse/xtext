@@ -70,13 +70,8 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 1: return new Model_E2Assignment_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
 	}
+
 }
 
 // e1+=Elem1
@@ -97,8 +92,8 @@ protected class Model_E1Assignment_0 extends AssignmentToken  {
 			case 0: return new Elem1_ValueAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("e1",true)) == null) return null;
@@ -143,8 +138,8 @@ protected class Model_E2Assignment_1 extends AssignmentToken  {
 			case 0: return new Elem2_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("e2",true)) == null) return null;
@@ -199,13 +194,15 @@ protected class Elem1_ValueAssignment extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getElem1Rule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getElem1Rule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
@@ -248,13 +245,15 @@ protected class Elem2_Group extends GroupToken {
 			case 0: return new Elem2_DollarSignKeyword_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getElem2Rule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getElem2Rule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // value=EnumT
@@ -274,8 +273,8 @@ protected class Elem2_ValueAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
@@ -308,8 +307,8 @@ protected class Elem2_FooKeyword_1 extends KeywordToken  {
 			case 0: return new Elem2_ValueAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "%"
@@ -330,8 +329,8 @@ protected class Elem2_PercentSignKeyword_2 extends KeywordToken  {
 			case 0: return new Elem2_FooKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "$"
@@ -352,8 +351,8 @@ protected class Elem2_DollarSignKeyword_3 extends KeywordToken  {
 			case 0: return new Elem2_PercentSignKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 

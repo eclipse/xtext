@@ -69,13 +69,16 @@ protected class Model_Group extends GroupToken {
 			case 1: return new Model_ChildParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getChildRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getModelAccess().getParentLeftAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // Child
@@ -96,12 +99,18 @@ protected class Model_ChildParserRuleCall_0 extends RuleCallToken {
 			case 0: return new Child_NameAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getChildRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Child_NameAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getChildRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -131,8 +140,15 @@ protected class Model_Group_1 extends GroupToken {
 			case 0: return new Model_RightAssignment_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getModelAccess().getParentLeftAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {Parent.left=current}
@@ -153,12 +169,10 @@ protected class Model_ParentLeftAction_1_0 extends ActionToken  {
 			case 0: return new Model_ChildParserRuleCall_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getModelAccess().getParentLeftAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("left", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("left")) return null;
@@ -184,8 +198,8 @@ protected class Model_RightAssignment_1_1 extends AssignmentToken  {
 			case 0: return new Child_NameAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("right",false)) == null) return null;
@@ -241,13 +255,15 @@ protected class Child_NameAssignment extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getChildRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getChildRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;

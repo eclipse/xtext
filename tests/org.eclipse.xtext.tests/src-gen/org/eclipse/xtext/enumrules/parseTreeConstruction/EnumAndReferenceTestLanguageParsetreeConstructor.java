@@ -67,13 +67,15 @@ protected class EntityWithEnumAndReference_Group extends GroupToken {
 			case 0: return new EntityWithEnumAndReference_RefAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getEntityWithEnumAndReferenceRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getEntityWithEnumAndReferenceRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // type=KindOfKeyword
@@ -93,8 +95,8 @@ protected class EntityWithEnumAndReference_TypeAssignment_0 extends AssignmentTo
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
@@ -127,8 +129,8 @@ protected class EntityWithEnumAndReference_NameAssignment_1 extends AssignmentTo
 			case 0: return new EntityWithEnumAndReference_TypeAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -161,8 +163,8 @@ protected class EntityWithEnumAndReference_ReferenceKeyword_2 extends KeywordTok
 			case 0: return new EntityWithEnumAndReference_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // ref=[EntityWithEnumAndReference]
@@ -183,8 +185,8 @@ protected class EntityWithEnumAndReference_RefAssignment_3 extends AssignmentTok
 			case 0: return new EntityWithEnumAndReference_ReferenceKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ref",true)) == null) return null;

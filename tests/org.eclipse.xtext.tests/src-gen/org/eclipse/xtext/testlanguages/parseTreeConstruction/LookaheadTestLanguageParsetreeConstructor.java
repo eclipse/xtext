@@ -73,13 +73,8 @@ protected class Entry_ContentsAssignment extends AssignmentToken  {
 			case 0: return new Alts_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getEntryRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("contents",false)) == null) return null;
@@ -136,13 +131,17 @@ protected class Alts_Alternatives extends AlternativesToken {
 			case 2: return new Alts_LookAhead3ParserRuleCall_2(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAltsRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getLookAhead3Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLookAhead0Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLookAhead1Rule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // LookAhead0
@@ -163,12 +162,18 @@ protected class Alts_LookAhead0ParserRuleCall_0 extends RuleCallToken {
 			case 0: return new LookAhead0_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getLookAhead0Rule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(LookAhead0_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getLookAhead0Rule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -198,12 +203,18 @@ protected class Alts_LookAhead1ParserRuleCall_1 extends RuleCallToken {
 			case 0: return new LookAhead1_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getLookAhead1Rule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(LookAhead1_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getLookAhead1Rule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -233,12 +244,18 @@ protected class Alts_LookAhead3ParserRuleCall_2 extends RuleCallToken {
 			case 0: return new LookAhead3_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getLookAhead3Rule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(LookAhead3_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getLookAhead3Rule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -279,13 +296,15 @@ protected class LookAhead0_Group extends GroupToken {
 			case 0: return new LookAhead0_XAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getLookAhead0Rule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getLookAhead0Rule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "bar"
@@ -305,8 +324,8 @@ protected class LookAhead0_BarKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // x="a"
@@ -327,8 +346,8 @@ protected class LookAhead0_XAssignment_1 extends AssignmentToken  {
 			case 0: return new LookAhead0_BarKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("x",true)) == null) return null;
@@ -372,13 +391,15 @@ protected class LookAhead1_Group extends GroupToken {
 			case 0: return new LookAhead1_XAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getLookAhead1Rule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getLookAhead1Rule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "foo"
@@ -398,8 +419,8 @@ protected class LookAhead1_FooKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // y=LookAhead2
@@ -420,8 +441,8 @@ protected class LookAhead1_YAssignment_1 extends AssignmentToken  {
 			case 0: return new LookAhead2_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("y",true)) == null) return null;
@@ -466,8 +487,8 @@ protected class LookAhead1_XAssignment_2 extends AssignmentToken  {
 			case 0: return new LookAhead1_YAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("x",true)) == null) return null;
@@ -500,8 +521,8 @@ protected class LookAhead1_XAssignment_3 extends AssignmentToken  {
 			case 0: return new LookAhead1_XAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("x",true)) == null) return null;
@@ -545,13 +566,15 @@ protected class LookAhead2_Group extends GroupToken {
 			case 0: return new LookAhead2_CKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getLookAhead2Rule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getLookAhead2Rule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // z="foo"|z="bar"
@@ -573,8 +596,8 @@ protected class LookAhead2_Alternatives_0 extends AlternativesToken {
 			case 1: return new LookAhead2_ZAssignment_0_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // z="foo"
@@ -594,8 +617,8 @@ protected class LookAhead2_ZAssignment_0_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("z",true)) == null) return null;
@@ -627,8 +650,8 @@ protected class LookAhead2_ZAssignment_0_1 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("z",true)) == null) return null;
@@ -662,8 +685,8 @@ protected class LookAhead2_CKeyword_1 extends KeywordToken  {
 			case 0: return new LookAhead2_Alternatives_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -695,13 +718,15 @@ protected class LookAhead3_Group extends GroupToken {
 			case 0: return new LookAhead3_ZAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getLookAhead3Rule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getLookAhead3Rule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "foo"
@@ -721,8 +746,8 @@ protected class LookAhead3_FooKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // "bar"
@@ -743,8 +768,8 @@ protected class LookAhead3_BarKeyword_1 extends KeywordToken  {
 			case 0: return new LookAhead3_FooKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // x="b"
@@ -765,8 +790,8 @@ protected class LookAhead3_XAssignment_2 extends AssignmentToken  {
 			case 0: return new LookAhead3_BarKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("x",true)) == null) return null;
@@ -799,8 +824,8 @@ protected class LookAhead3_ZAssignment_3 extends AssignmentToken  {
 			case 0: return new LookAhead4_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("z",true)) == null) return null;
@@ -857,13 +882,15 @@ protected class LookAhead4_Alternatives extends AlternativesToken {
 			case 1: return new LookAhead4_XAssignment_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getLookAhead4Rule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getLookAhead4Rule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // x="c"
@@ -883,8 +910,8 @@ protected class LookAhead4_XAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("x",true)) == null) return null;
@@ -916,8 +943,8 @@ protected class LookAhead4_XAssignment_1 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("x",true)) == null) return null;

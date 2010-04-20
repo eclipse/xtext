@@ -68,13 +68,8 @@ protected class Model_ElementsAssignment extends AssignmentToken  {
 			case 0: return new Element_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("elements",false)) == null) return null;
@@ -129,13 +124,15 @@ protected class Element_Group extends GroupToken {
 			case 0: return new Element_EndKeyword_5(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getElementAccess().getElementAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // {Element}
@@ -155,12 +152,10 @@ protected class Element_ElementAction_0 extends ActionToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getElementAccess().getElementAction_0().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -184,8 +179,8 @@ protected class Element_AAssignment_1 extends AssignmentToken  {
 			case 0: return new Element_ElementAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("a",false)) == null) return null;
@@ -219,8 +214,8 @@ protected class Element_ElementKeyword_2 extends KeywordToken  {
 			case 1: return new Element_ElementAction_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID?
@@ -241,8 +236,8 @@ protected class Element_NameAssignment_3 extends AssignmentToken  {
 			case 0: return new Element_ElementKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",false)) == null) return null;
@@ -275,8 +270,8 @@ protected class Element_ElementsAssignment_4 extends AssignmentToken  {
 			case 0: return new Element_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("elements",false)) == null) return null;
@@ -325,8 +320,8 @@ protected class Element_EndKeyword_5 extends KeywordToken  {
 			case 2: return new Element_ElementKeyword_2(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 

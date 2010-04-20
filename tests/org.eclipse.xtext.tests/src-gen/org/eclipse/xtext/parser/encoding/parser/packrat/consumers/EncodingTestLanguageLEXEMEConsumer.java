@@ -61,31 +61,31 @@ public final class EncodingTestLanguageLEXEMEConsumer extends AbstractRuleAwareT
 	}
 
 	protected boolean consumeKeyword$11() {
-		return readChar('\u00E4');
+		return readChar('\u2030');
 	}
 
 	protected boolean consumeKeyword$12() {
-		return readChar('\u00F6');
+		return readChar('\u02C6');
 	}
 
 	protected boolean consumeKeyword$13() {
-		return readChar('\u00FC');
+		return readChar('\u00B8');
 	}
 
 	protected boolean consumeKeyword$14() {
-		return readChar('\u00DF');
+		return readChar('\uFB02');
 	}
 
 	protected boolean consumeKeyword$15() {
-		return readChar('\u00C4');
+		return readChar('\u0192');
 	}
 
 	protected boolean consumeKeyword$16() {
-		return readChar('\u00D6');
+		return readChar('\u00F7');
 	}
 
 	protected boolean consumeKeyword$17() {
-		return readChar('\u00DC');
+		return readChar('\u2039');
 	}
 	
 }

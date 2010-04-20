@@ -68,13 +68,8 @@ protected class FoldingModel_ElementsAssignment extends AssignmentToken  {
 			case 0: return new Element_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getFoldingModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("elements",false)) == null) return null;
@@ -129,13 +124,15 @@ protected class Element_Group extends GroupToken {
 			case 0: return new Element_EndKeyword_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getElementRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "element"
@@ -155,8 +152,8 @@ protected class Element_ElementKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -177,8 +174,8 @@ protected class Element_NameAssignment_1 extends AssignmentToken  {
 			case 0: return new Element_ElementKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -211,8 +208,8 @@ protected class Element_SubelementsAssignment_2 extends AssignmentToken  {
 			case 0: return new Element_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("subelements",false)) == null) return null;
@@ -259,8 +256,8 @@ protected class Element_EndKeyword_3 extends KeywordToken  {
 			case 1: return new Element_NameAssignment_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 

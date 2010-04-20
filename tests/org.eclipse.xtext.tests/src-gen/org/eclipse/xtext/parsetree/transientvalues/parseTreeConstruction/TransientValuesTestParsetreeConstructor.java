@@ -70,13 +70,17 @@ protected class Root_Group extends GroupToken {
 			case 0: return new Root_Alternatives_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getRootRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTestRequiredRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTestOptionalRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTestListRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "test"
@@ -96,8 +100,8 @@ protected class Root_TestKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // TestRequired|TestOptional|TestList
@@ -120,8 +124,8 @@ protected class Root_Alternatives_1 extends AlternativesToken {
 			case 2: return new Root_TestListParserRuleCall_1_2(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // TestRequired
@@ -142,12 +146,18 @@ protected class Root_TestRequiredParserRuleCall_1_0 extends RuleCallToken {
 			case 0: return new TestRequired_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getTestRequiredRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TestRequired_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getTestRequiredRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -178,12 +188,18 @@ protected class Root_TestOptionalParserRuleCall_1_1 extends RuleCallToken {
 			case 0: return new TestOptional_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getTestOptionalRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TestOptional_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getTestOptionalRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -214,12 +230,18 @@ protected class Root_TestListParserRuleCall_1_2 extends RuleCallToken {
 			case 0: return new TestList_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getTestListRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TestList_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getTestListRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -262,13 +284,15 @@ protected class TestRequired_Group extends GroupToken {
 			case 0: return new TestRequired_Required2Assignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTestRequiredRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTestRequiredRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "required"
@@ -288,8 +312,8 @@ protected class TestRequired_RequiredKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // required1=INT
@@ -310,8 +334,8 @@ protected class TestRequired_Required1Assignment_1 extends AssignmentToken  {
 			case 0: return new TestRequired_RequiredKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("required1",true)) == null) return null;
@@ -344,8 +368,8 @@ protected class TestRequired_Required2Assignment_2 extends AssignmentToken  {
 			case 0: return new TestRequired_Required1Assignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("required2",true)) == null) return null;
@@ -391,13 +415,15 @@ protected class TestOptional_Group extends GroupToken {
 			case 2: return new TestOptional_OptionalKeyword_0(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTestOptionalRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTestOptionalRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "optional"
@@ -417,8 +443,8 @@ protected class TestOptional_OptionalKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // opt1=INT?
@@ -439,8 +465,8 @@ protected class TestOptional_Opt1Assignment_1 extends AssignmentToken  {
 			case 0: return new TestOptional_OptionalKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("opt1",false)) == null) return null;
@@ -473,8 +499,8 @@ protected class TestOptional_Group_2 extends GroupToken {
 			case 0: return new TestOptional_Opt2Assignment_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // ":"
@@ -496,8 +522,8 @@ protected class TestOptional_ColonKeyword_2_0 extends KeywordToken  {
 			case 1: return new TestOptional_OptionalKeyword_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // opt2=INT
@@ -518,8 +544,8 @@ protected class TestOptional_Opt2Assignment_2_1 extends AssignmentToken  {
 			case 0: return new TestOptional_ColonKeyword_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("opt2",false)) == null) return null;
@@ -565,13 +591,15 @@ protected class TestList_Group extends GroupToken {
 			case 1: return new TestList_ListKeyword_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTestListRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTestListRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "list"
@@ -591,8 +619,8 @@ protected class TestList_ListKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // item+=INT*
@@ -614,8 +642,8 @@ protected class TestList_ItemAssignment_1 extends AssignmentToken  {
 			case 1: return new TestList_ListKeyword_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("item",false)) == null) return null;

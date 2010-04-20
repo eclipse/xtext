@@ -70,13 +70,15 @@ protected class Model_Group extends GroupToken {
 			case 1: return new Model_ModelKeyword_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getModelAccess().getModelAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // {Model}
@@ -96,12 +98,10 @@ protected class Model_ModelAction_0 extends ActionToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getModelAccess().getModelAction_0().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -125,8 +125,8 @@ protected class Model_ModelKeyword_1 extends KeywordToken  {
 			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // refs+=ModelElement*
@@ -147,8 +147,8 @@ protected class Model_RefsAssignment_2 extends AssignmentToken  {
 			case 0: return new ModelElement_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("refs",false)) == null) return null;
@@ -207,13 +207,15 @@ protected class ModelElement_Group extends GroupToken {
 			case 0: return new ModelElement_Alternatives_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelElementRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getModelElementAccess().getModelElementAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // {ModelElement}
@@ -233,12 +235,10 @@ protected class ModelElement_ModelElementAction_0 extends ActionToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getModelElementAccess().getModelElementAction_0().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -263,8 +263,8 @@ protected class ModelElement_Alternatives_1 extends AlternativesToken {
 			case 1: return new ModelElement_Group_1_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // containments+=Contained
@@ -285,8 +285,8 @@ protected class ModelElement_ContainmentsAssignment_1_0 extends AssignmentToken 
 			case 0: return new Contained_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("containments",true)) == null) return null;
@@ -333,8 +333,8 @@ protected class ModelElement_Group_1_1 extends GroupToken {
 			case 1: return new ModelElement_RefsAssignment_1_1_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "reference"
@@ -356,8 +356,8 @@ protected class ModelElement_ReferenceKeyword_1_1_0 extends KeywordToken  {
 			case 1: return new ModelElement_ModelElementAction_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // refs+=[Contained]
@@ -378,8 +378,8 @@ protected class ModelElement_RefsAssignment_1_1_1 extends AssignmentToken  {
 			case 0: return new ModelElement_ReferenceKeyword_1_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("refs",true)) == null) return null;
@@ -415,8 +415,8 @@ protected class ModelElement_Group_1_1_2 extends GroupToken {
 			case 0: return new ModelElement_RefsAssignment_1_1_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "$"
@@ -438,8 +438,8 @@ protected class ModelElement_DollarSignKeyword_1_1_2_0 extends KeywordToken  {
 			case 1: return new ModelElement_RefsAssignment_1_1_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // refs+=[Contained]
@@ -460,8 +460,8 @@ protected class ModelElement_RefsAssignment_1_1_2_1 extends AssignmentToken  {
 			case 0: return new ModelElement_DollarSignKeyword_1_1_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("refs",false)) == null) return null;
@@ -511,13 +511,15 @@ protected class Contained_Group extends GroupToken {
 			case 0: return new Contained_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getContainedRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getContainedRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "containment"
@@ -537,8 +539,8 @@ protected class Contained_ContainmentKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -559,8 +561,8 @@ protected class Contained_NameAssignment_1 extends AssignmentToken  {
 			case 0: return new Contained_ContainmentKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;

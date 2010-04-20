@@ -70,13 +70,8 @@ protected class Model_TypesAssignment extends AssignmentToken  {
 			case 0: return new Type_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("types",false)) == null) return null;
@@ -135,13 +130,15 @@ protected class Type_Group extends GroupToken {
 			case 0: return new Type_RightCurlyBracketKeyword_7(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTypeRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTypeRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "type"
@@ -161,8 +158,8 @@ protected class Type_TypeKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -183,8 +180,8 @@ protected class Type_NameAssignment_1 extends AssignmentToken  {
 			case 0: return new Type_TypeKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -217,8 +214,8 @@ protected class Type_Group_2 extends GroupToken {
 			case 0: return new Type_ParentIdAssignment_2_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "extends"
@@ -239,8 +236,8 @@ protected class Type_ExtendsKeyword_2_0 extends KeywordToken  {
 			case 0: return new Type_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // extends=[Type]
@@ -261,8 +258,8 @@ protected class Type_ExtendsAssignment_2_1 extends AssignmentToken  {
 			case 0: return new Type_ExtendsKeyword_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("extends",true)) == null) return null;
@@ -298,8 +295,8 @@ protected class Type_FullStopKeyword_2_2 extends KeywordToken  {
 			case 0: return new Type_ExtendsAssignment_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // parentId=[Property]
@@ -320,8 +317,8 @@ protected class Type_ParentIdAssignment_2_3 extends AssignmentToken  {
 			case 0: return new Type_FullStopKeyword_2_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("parentId",true)) == null) return null;
@@ -358,8 +355,8 @@ protected class Type_Group_3 extends GroupToken {
 			case 0: return new Type_ExtendsAssignment_3_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "for"
@@ -381,8 +378,8 @@ protected class Type_ForKeyword_3_0 extends KeywordToken  {
 			case 1: return new Type_NameAssignment_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // parentId=[Property]
@@ -403,8 +400,8 @@ protected class Type_ParentIdAssignment_3_1 extends AssignmentToken  {
 			case 0: return new Type_ForKeyword_3_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("parentId",true)) == null) return null;
@@ -440,8 +437,8 @@ protected class Type_InKeyword_3_2 extends KeywordToken  {
 			case 0: return new Type_ParentIdAssignment_3_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // extends=[Type]
@@ -462,8 +459,8 @@ protected class Type_ExtendsAssignment_3_3 extends AssignmentToken  {
 			case 0: return new Type_InKeyword_3_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("extends",true)) == null) return null;
@@ -502,8 +499,8 @@ protected class Type_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 			case 2: return new Type_NameAssignment_1(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // properties+=Property*
@@ -524,8 +521,8 @@ protected class Type_PropertiesAssignment_5 extends AssignmentToken  {
 			case 0: return new Property_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("properties",false)) == null) return null;
@@ -571,8 +568,8 @@ protected class Type_UnresolvedProxyPropertyAssignment_6 extends AssignmentToken
 			case 0: return new UnresolvedProxyProperty_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("unresolvedProxyProperty",false)) == null) return null;
@@ -621,8 +618,8 @@ protected class Type_RightCurlyBracketKeyword_7 extends KeywordToken  {
 			case 2: return new Type_LeftCurlyBracketKeyword_4(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -654,13 +651,15 @@ protected class Property_Group extends GroupToken {
 			case 0: return new Property_SemicolonKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getPropertyRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getPropertyRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // type+=[Type]+
@@ -681,8 +680,8 @@ protected class Property_TypeAssignment_0 extends AssignmentToken  {
 			case 0: return new Property_TypeAssignment_0(parent, this, 0, inst);
 			default: return parent.createParentFollower(this, index, index - 1, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
@@ -718,8 +717,8 @@ protected class Property_NameAssignment_1 extends AssignmentToken  {
 			case 0: return new Property_TypeAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -752,8 +751,8 @@ protected class Property_SemicolonKeyword_2 extends KeywordToken  {
 			case 0: return new Property_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -785,13 +784,15 @@ protected class UnresolvedProxyProperty_Group extends GroupToken {
 			case 0: return new UnresolvedProxyProperty_SemicolonKeyword_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getUnresolvedProxyPropertyRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getUnresolvedProxyPropertyRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "unresolved"
@@ -811,8 +812,8 @@ protected class UnresolvedProxyProperty_UnresolvedKeyword_0 extends KeywordToken
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // type+=[Type]+
@@ -834,8 +835,8 @@ protected class UnresolvedProxyProperty_TypeAssignment_1 extends AssignmentToken
 			case 1: return new UnresolvedProxyProperty_UnresolvedKeyword_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
@@ -871,8 +872,8 @@ protected class UnresolvedProxyProperty_NameAssignment_2 extends AssignmentToken
 			case 0: return new UnresolvedProxyProperty_TypeAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -905,8 +906,8 @@ protected class UnresolvedProxyProperty_SemicolonKeyword_3 extends KeywordToken 
 			case 0: return new UnresolvedProxyProperty_NameAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 

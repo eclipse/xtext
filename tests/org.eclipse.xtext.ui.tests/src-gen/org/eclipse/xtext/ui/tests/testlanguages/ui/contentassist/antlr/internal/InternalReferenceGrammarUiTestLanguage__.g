@@ -10,7 +10,7 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
 T11 : 'ROT' ;
 T12 : 'BLAU' ;
 T13 : 'GELB' ;
-T14 : 'GR\u00DCN' ;
+T14 : 'GR\u2039N' ;
 T15 : 'keyword' ;
 T16 : 'spielplatz' ;
 T17 : '{' ;

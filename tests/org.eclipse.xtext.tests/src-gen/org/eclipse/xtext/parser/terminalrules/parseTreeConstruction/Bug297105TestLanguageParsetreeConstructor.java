@@ -71,13 +71,8 @@ protected class Model_ExpressionsAssignment extends AssignmentToken  {
 			case 0: return new Expression_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("expressions",false)) == null) return null;
@@ -132,13 +127,15 @@ protected class Expression_Group extends GroupToken {
 			case 0: return new Expression_RightAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getExpressionRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getExpressionRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // left=Literal
@@ -159,8 +156,8 @@ protected class Expression_LeftAssignment_0 extends AssignmentToken  {
 			case 0: return new Literal_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("left",true)) == null) return null;
@@ -204,8 +201,8 @@ protected class Expression_PlusSignKeyword_1 extends KeywordToken  {
 			case 0: return new Expression_LeftAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // right=Literal
@@ -226,8 +223,8 @@ protected class Expression_RightAssignment_2 extends AssignmentToken  {
 			case 0: return new Literal_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("right",true)) == null) return null;
@@ -284,13 +281,16 @@ protected class Literal_Alternatives extends AlternativesToken {
 			case 1: return new Literal_IntLiteralParserRuleCall_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getLiteralRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getRealLiteralRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getIntLiteralRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // RealLiteral
@@ -311,12 +311,18 @@ protected class Literal_RealLiteralParserRuleCall_0 extends RuleCallToken {
 			case 0: return new RealLiteral_ValueAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getRealLiteralRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(RealLiteral_ValueAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRealLiteralRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -346,12 +352,18 @@ protected class Literal_IntLiteralParserRuleCall_1 extends RuleCallToken {
 			case 0: return new IntLiteral_ValueAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getIntLiteralRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(IntLiteral_ValueAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getIntLiteralRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -391,13 +403,15 @@ protected class IntLiteral_ValueAssignment extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getIntLiteralRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getIntLiteralRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
@@ -439,13 +453,15 @@ protected class RealLiteral_ValueAssignment extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getRealLiteralRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getRealLiteralRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;

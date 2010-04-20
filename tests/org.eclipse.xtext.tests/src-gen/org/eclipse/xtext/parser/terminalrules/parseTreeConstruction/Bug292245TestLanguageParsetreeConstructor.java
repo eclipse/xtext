@@ -69,13 +69,8 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 2: return new Model_Group_2(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
 	}
+
 }
 
 // "FIX" fix+=Fix+
@@ -96,8 +91,8 @@ protected class Model_Group_0 extends GroupToken {
 			case 0: return new Model_FixAssignment_0_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "FIX"
@@ -118,8 +113,8 @@ protected class Model_FIXKeyword_0_0 extends KeywordToken  {
 			case 0: return new Model_Alternatives(parent, this, 0, inst);
 			default: return parent.createParentFollower(this, index, index - 1, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // fix+=Fix+
@@ -141,8 +136,8 @@ protected class Model_FixAssignment_0_1 extends AssignmentToken  {
 			case 1: return new Model_FIXKeyword_0_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("fix",true)) == null) return null;
@@ -176,8 +171,8 @@ protected class Model_Group_1 extends GroupToken {
 			case 0: return new Model_ErrorAssignment_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "ERROR"
@@ -198,8 +193,8 @@ protected class Model_ERRORKeyword_1_0 extends KeywordToken  {
 			case 0: return new Model_Alternatives(parent, this, 0, inst);
 			default: return parent.createParentFollower(this, index, index - 1, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // error+=Error+
@@ -221,8 +216,8 @@ protected class Model_ErrorAssignment_1_1 extends AssignmentToken  {
 			case 1: return new Model_ERRORKeyword_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("error",true)) == null) return null;
@@ -256,8 +251,8 @@ protected class Model_Group_2 extends GroupToken {
 			case 0: return new Model_TickAssignment_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "TICK"
@@ -278,8 +273,8 @@ protected class Model_TICKKeyword_2_0 extends KeywordToken  {
 			case 0: return new Model_Alternatives(parent, this, 0, inst);
 			default: return parent.createParentFollower(this, index, index - 1, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // tick+=Apostrophe+
@@ -301,8 +296,8 @@ protected class Model_TickAssignment_2_1 extends AssignmentToken  {
 			case 1: return new Model_TICKKeyword_2_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("tick",true)) == null) return null;

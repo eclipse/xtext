@@ -70,13 +70,15 @@ protected class Model_Group extends GroupToken {
 			case 2: return new Model_NameAssignment_0(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getModelRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // name=ID
@@ -96,8 +98,8 @@ protected class Model_NameAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -130,8 +132,8 @@ protected class Model_EnabledAssignment_1 extends AssignmentToken  {
 			case 0: return new UnassignedAction_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("enabled",false)) == null) return null;
@@ -177,8 +179,8 @@ protected class Model_ReferenceAssignment_2 extends AssignmentToken  {
 			case 1: return new Model_NameAssignment_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("reference",false)) == null) return null;
@@ -225,13 +227,15 @@ protected class UnassignedAction_Group extends GroupToken {
 			case 0: return new UnassignedAction_EnabledKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getUnassignedActionRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getUnassignedActionAccess().getUnassignedActionAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // {UnassignedAction}
@@ -251,12 +255,10 @@ protected class UnassignedAction_UnassignedActionAction_0 extends ActionToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getUnassignedActionAccess().getUnassignedActionAction_0().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -280,8 +282,8 @@ protected class UnassignedAction_EnabledKeyword_1 extends KeywordToken  {
 			case 0: return new UnassignedAction_UnassignedActionAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 

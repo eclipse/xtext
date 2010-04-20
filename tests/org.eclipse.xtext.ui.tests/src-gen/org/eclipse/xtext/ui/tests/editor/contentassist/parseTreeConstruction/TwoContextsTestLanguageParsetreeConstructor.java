@@ -68,13 +68,8 @@ protected class MainModel_ElementsAssignment extends AssignmentToken  {
 			case 0: return new AnElement_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getMainModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("elements",false)) == null) return null;
@@ -129,13 +124,15 @@ protected class AnElement_Group extends GroupToken {
 			case 0: return new AnElement_SemicolonKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAnElementRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getAnElementRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // name=ID
@@ -155,8 +152,8 @@ protected class AnElement_NameAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -189,8 +186,8 @@ protected class AnElement_Group_1 extends GroupToken {
 			case 0: return new AnElement_ReferredAssignment_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "refersTo"
@@ -211,8 +208,8 @@ protected class AnElement_RefersToKeyword_1_0 extends KeywordToken  {
 			case 0: return new AnElement_NameAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // referred=[AnElement]
@@ -233,8 +230,8 @@ protected class AnElement_ReferredAssignment_1_1 extends AssignmentToken  {
 			case 0: return new AnElement_RefersToKeyword_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("referred",false)) == null) return null;
@@ -272,8 +269,8 @@ protected class AnElement_SemicolonKeyword_2 extends KeywordToken  {
 			case 1: return new AnElement_NameAssignment_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 

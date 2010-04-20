@@ -68,13 +68,15 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 1: return new Model_Group_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getModelRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "foo" foo=ID ("bar" bar=ID)?
@@ -96,8 +98,8 @@ protected class Model_Group_0 extends GroupToken {
 			case 1: return new Model_FooAssignment_0_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "foo"
@@ -117,8 +119,8 @@ protected class Model_FooKeyword_0_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // foo=ID
@@ -139,8 +141,8 @@ protected class Model_FooAssignment_0_1 extends AssignmentToken  {
 			case 0: return new Model_FooKeyword_0_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("foo",true)) == null) return null;
@@ -173,8 +175,8 @@ protected class Model_Group_0_2 extends GroupToken {
 			case 0: return new Model_BarAssignment_0_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "bar"
@@ -195,8 +197,8 @@ protected class Model_BarKeyword_0_2_0 extends KeywordToken  {
 			case 0: return new Model_FooAssignment_0_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // bar=ID
@@ -217,8 +219,8 @@ protected class Model_BarAssignment_0_2_1 extends AssignmentToken  {
 			case 0: return new Model_BarKeyword_0_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("bar",false)) == null) return null;
@@ -253,8 +255,8 @@ protected class Model_Group_1 extends GroupToken {
 			case 0: return new Model_BarAssignment_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "bar"
@@ -274,8 +276,8 @@ protected class Model_BarKeyword_1_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // bar=ID
@@ -296,8 +298,8 @@ protected class Model_BarAssignment_1_1 extends AssignmentToken  {
 			case 0: return new Model_BarKeyword_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("bar",true)) == null) return null;

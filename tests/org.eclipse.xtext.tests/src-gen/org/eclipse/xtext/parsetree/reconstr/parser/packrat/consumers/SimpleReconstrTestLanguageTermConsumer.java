@@ -59,6 +59,10 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 
 	private INonTerminalConsumer twoNumbersConsumer;
 
+	private INonTerminalConsumer typeBug3055771Consumer;
+
+	private INonTerminalConsumer typeBug3055772Consumer;
+
 	private INonTerminalConsumer typeConsumer;
 
 	private IElementConsumer alternatives$1$Consumer;
@@ -103,6 +107,10 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 
 	private IElementConsumer ruleCall$21$Consumer;
 
+	private IElementConsumer ruleCall$22$Consumer;
+
+	private IElementConsumer ruleCall$23$Consumer;
+
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
 		protected Alternatives$1$Consumer(final Alternatives alternatives) {
@@ -131,6 +139,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 			acceptor.accept(ruleCall$19$Consumer);
 			acceptor.accept(ruleCall$20$Consumer);
 			acceptor.accept(ruleCall$21$Consumer);
+			acceptor.accept(ruleCall$22$Consumer);
+			acceptor.accept(ruleCall$23$Consumer);
 		}
 	}
 
@@ -178,7 +188,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(parensConsumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(typeConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -190,7 +200,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(typeConsumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(ref2Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -202,7 +212,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(ref2Consumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(spareConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -214,7 +224,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(spareConsumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(booleanConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -226,7 +236,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(booleanConsumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(transient1Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -238,7 +248,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(transient1Consumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(consumed1Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -250,7 +260,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(consumed1Consumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(consumed2Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -262,7 +272,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(consumed2Consumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(loop1Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -274,7 +284,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(loop1Consumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(loop2Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -286,7 +296,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(loop2Consumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(loop3Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -298,7 +308,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(loop3Consumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(loop4Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -310,7 +320,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(loop4Consumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(loopBug285452Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -322,7 +332,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(loopBug285452Consumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(duplicateBug284491Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -334,7 +344,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(duplicateBug284491Consumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(emptyObjectBug284850Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -346,7 +356,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(emptyObjectBug284850Consumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(multiInheritanceBug280439Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -358,7 +368,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(multiInheritanceBug280439Consumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(eObjectRefConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -370,7 +380,31 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(eObjectRefConsumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(typeBug3055771Consumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$22$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$22$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(typeBug3055772Consumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$23$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$23$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(parensConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -394,23 +428,25 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getAtomParserRuleCall_0());
 		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getTwoNumbersParserRuleCall_1());
 		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getManyStringsParserRuleCall_2());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getParensParserRuleCall_3());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getTypeParserRuleCall_4());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getRef2ParserRuleCall_5());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getSpareParserRuleCall_6());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getBooleanParserRuleCall_7());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.getTransient1ParserRuleCall_8());
-		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.getConsumed1ParserRuleCall_9());
-		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.getConsumed2ParserRuleCall_10());
-		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.getLoop1ParserRuleCall_11());
-		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.getLoop2ParserRuleCall_12());
-		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.getLoop3ParserRuleCall_13());
-		ruleCall$16$Consumer = new RuleCall$16$Consumer(rule.getLoop4ParserRuleCall_14());
-		ruleCall$17$Consumer = new RuleCall$17$Consumer(rule.getLoopBug285452ParserRuleCall_15());
-		ruleCall$18$Consumer = new RuleCall$18$Consumer(rule.getDuplicateBug284491ParserRuleCall_16());
-		ruleCall$19$Consumer = new RuleCall$19$Consumer(rule.getEmptyObjectBug284850ParserRuleCall_17());
-		ruleCall$20$Consumer = new RuleCall$20$Consumer(rule.getMultiInheritanceBug280439ParserRuleCall_18());
-		ruleCall$21$Consumer = new RuleCall$21$Consumer(rule.getEObjectRefParserRuleCall_19());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getTypeParserRuleCall_3());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getRef2ParserRuleCall_4());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getSpareParserRuleCall_5());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getBooleanParserRuleCall_6());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getTransient1ParserRuleCall_7());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.getConsumed1ParserRuleCall_8());
+		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.getConsumed2ParserRuleCall_9());
+		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.getLoop1ParserRuleCall_10());
+		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.getLoop2ParserRuleCall_11());
+		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.getLoop3ParserRuleCall_12());
+		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.getLoop4ParserRuleCall_13());
+		ruleCall$16$Consumer = new RuleCall$16$Consumer(rule.getLoopBug285452ParserRuleCall_14());
+		ruleCall$17$Consumer = new RuleCall$17$Consumer(rule.getDuplicateBug284491ParserRuleCall_15());
+		ruleCall$18$Consumer = new RuleCall$18$Consumer(rule.getEmptyObjectBug284850ParserRuleCall_16());
+		ruleCall$19$Consumer = new RuleCall$19$Consumer(rule.getMultiInheritanceBug280439ParserRuleCall_17());
+		ruleCall$20$Consumer = new RuleCall$20$Consumer(rule.getEObjectRefParserRuleCall_18());
+		ruleCall$21$Consumer = new RuleCall$21$Consumer(rule.getTypeBug305577_1ParserRuleCall_19());
+		ruleCall$22$Consumer = new RuleCall$22$Consumer(rule.getTypeBug305577_2ParserRuleCall_20());
+		ruleCall$23$Consumer = new RuleCall$23$Consumer(rule.getParensParserRuleCall_21());
 	}
 	
 	@Override
@@ -497,6 +533,14 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 	
 	public void setTwoNumbersConsumer(INonTerminalConsumer twoNumbersConsumer) {
 		this.twoNumbersConsumer = twoNumbersConsumer;
+	}
+	
+	public void setTypeBug3055771Consumer(INonTerminalConsumer typeBug3055771Consumer) {
+		this.typeBug3055771Consumer = typeBug3055771Consumer;
+	}
+	
+	public void setTypeBug3055772Consumer(INonTerminalConsumer typeBug3055772Consumer) {
+		this.typeBug3055772Consumer = typeBug3055772Consumer;
 	}
 	
 	public void setTypeConsumer(INonTerminalConsumer typeConsumer) {

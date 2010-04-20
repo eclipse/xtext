@@ -71,13 +71,15 @@ protected class WorkflowElement_Alternatives extends AlternativesToken {
 			case 1: return new WorkflowElement_Group_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getWorkflowElementRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getWorkflowElementRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // name=START_TAG attributes+=Attribute* END_TAG_SHORT
@@ -98,8 +100,8 @@ protected class WorkflowElement_Group_0 extends GroupToken {
 			case 0: return new WorkflowElement_END_TAG_SHORTTerminalRuleCall_0_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // name=START_TAG
@@ -119,8 +121,8 @@ protected class WorkflowElement_NameAssignment_0_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -153,8 +155,8 @@ protected class WorkflowElement_AttributesAssignment_0_1 extends AssignmentToken
 			case 0: return new Attribute_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attributes",false)) == null) return null;
@@ -201,8 +203,8 @@ protected class WorkflowElement_END_TAG_SHORTTerminalRuleCall_0_2 extends Unassi
 			case 1: return new WorkflowElement_NameAssignment_0_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -224,8 +226,8 @@ protected class WorkflowElement_Group_1 extends GroupToken {
 			case 0: return new WorkflowElement_EndAssignment_1_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // name=START_TAG
@@ -245,8 +247,8 @@ protected class WorkflowElement_NameAssignment_1_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -279,8 +281,8 @@ protected class WorkflowElement_AttributesAssignment_1_1 extends AssignmentToken
 			case 0: return new Attribute_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attributes",false)) == null) return null;
@@ -327,8 +329,8 @@ protected class WorkflowElement_GTTerminalRuleCall_1_2 extends UnassignedTextTok
 			case 1: return new WorkflowElement_NameAssignment_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // children+=WorkflowElement*
@@ -349,8 +351,8 @@ protected class WorkflowElement_ChildrenAssignment_1_3 extends AssignmentToken  
 			case 0: return new WorkflowElement_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("children",false)) == null) return null;
@@ -397,8 +399,8 @@ protected class WorkflowElement_EndAssignment_1_4 extends AssignmentToken  {
 			case 1: return new WorkflowElement_GTTerminalRuleCall_1_2(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("end",true)) == null) return null;
@@ -443,13 +445,15 @@ protected class Attribute_Group extends GroupToken {
 			case 0: return new Attribute_ValueAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAttributeRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getAttributeRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // name=ID
@@ -469,8 +473,8 @@ protected class Attribute_NameAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -503,8 +507,8 @@ protected class Attribute_EQTerminalRuleCall_1 extends UnassignedTextToken {
 			case 0: return new Attribute_NameAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // value=STRING
@@ -525,8 +529,8 @@ protected class Attribute_ValueAssignment_2 extends AssignmentToken  {
 			case 0: return new Attribute_EQTerminalRuleCall_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;

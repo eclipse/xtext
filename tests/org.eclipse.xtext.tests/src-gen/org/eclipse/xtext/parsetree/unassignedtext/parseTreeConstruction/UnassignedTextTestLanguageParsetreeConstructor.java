@@ -77,13 +77,19 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 4: return new Model_CommonTerminalsRuleParserRuleCall_4(parent, this, 4, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getCommonTerminalsRuleRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getPluralRuleRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getDatatypeRuleRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMultiRuleRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCaseInsensitiveKeywordRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // CaseInsensitiveKeywordRule
@@ -104,12 +110,18 @@ protected class Model_CaseInsensitiveKeywordRuleParserRuleCall_0 extends RuleCal
 			case 0: return new CaseInsensitiveKeywordRule_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getCaseInsensitiveKeywordRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(CaseInsensitiveKeywordRule_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getCaseInsensitiveKeywordRuleRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -139,12 +151,18 @@ protected class Model_PluralRuleParserRuleCall_1 extends RuleCallToken {
 			case 0: return new PluralRule_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getPluralRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(PluralRule_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getPluralRuleRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -174,12 +192,18 @@ protected class Model_MultiRuleParserRuleCall_2 extends RuleCallToken {
 			case 0: return new MultiRule_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getMultiRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(MultiRule_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getMultiRuleRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -209,12 +233,18 @@ protected class Model_DatatypeRuleParserRuleCall_3 extends RuleCallToken {
 			case 0: return new DatatypeRule_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getDatatypeRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(DatatypeRule_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getDatatypeRuleRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -244,12 +274,18 @@ protected class Model_CommonTerminalsRuleParserRuleCall_4 extends RuleCallToken 
 			case 0: return new CommonTerminalsRule_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getCommonTerminalsRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(CommonTerminalsRule_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getCommonTerminalsRuleRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -290,13 +326,15 @@ protected class CaseInsensitiveKeywordRule_Group extends GroupToken {
 			case 0: return new CaseInsensitiveKeywordRule_ValAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getCaseInsensitiveKeywordRuleRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getCaseInsensitiveKeywordRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // CaseInsensitiveKeyword
@@ -316,8 +354,8 @@ protected class CaseInsensitiveKeywordRule_CaseInsensitiveKeywordTerminalRuleCal
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // val=INT
@@ -338,8 +376,8 @@ protected class CaseInsensitiveKeywordRule_ValAssignment_1 extends AssignmentTok
 			case 0: return new CaseInsensitiveKeywordRule_CaseInsensitiveKeywordTerminalRuleCall_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("val",true)) == null) return null;
@@ -383,13 +421,15 @@ protected class PluralRule_Group extends GroupToken {
 			case 0: return new PluralRule_PluralTerminalRuleCall_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getPluralRuleRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getPluralRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "contents:"
@@ -409,8 +449,8 @@ protected class PluralRule_ContentsKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // count=INT
@@ -431,8 +471,8 @@ protected class PluralRule_CountAssignment_1 extends AssignmentToken  {
 			case 0: return new PluralRule_ContentsKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("count",true)) == null) return null;
@@ -465,8 +505,8 @@ protected class PluralRule_PluralTerminalRuleCall_2 extends UnassignedTextToken 
 			case 0: return new PluralRule_CountAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -498,13 +538,15 @@ protected class MultiRule_Group extends GroupToken {
 			case 0: return new MultiRule_MultiTerminalRuleCall_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getMultiRuleRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getMultiRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "multi"
@@ -524,8 +566,8 @@ protected class MultiRule_MultiKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // val=INT
@@ -546,8 +588,8 @@ protected class MultiRule_ValAssignment_1 extends AssignmentToken  {
 			case 0: return new MultiRule_MultiKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("val",true)) == null) return null;
@@ -580,8 +622,8 @@ protected class MultiRule_MultiTerminalRuleCall_2 extends UnassignedTextToken {
 			case 0: return new MultiRule_ValAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // Multi
@@ -602,8 +644,8 @@ protected class MultiRule_MultiTerminalRuleCall_3 extends UnassignedTextToken {
 			case 0: return new MultiRule_MultiTerminalRuleCall_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // Multi
@@ -624,8 +666,8 @@ protected class MultiRule_MultiTerminalRuleCall_4 extends UnassignedTextToken {
 			case 0: return new MultiRule_MultiTerminalRuleCall_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -657,13 +699,15 @@ protected class DatatypeRule_Group extends GroupToken {
 			case 0: return new DatatypeRule_DatatypeParserRuleCall_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getDatatypeRuleRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getDatatypeRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "datatype"
@@ -683,8 +727,8 @@ protected class DatatypeRule_DatatypeKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // val=INT
@@ -705,8 +749,8 @@ protected class DatatypeRule_ValAssignment_1 extends AssignmentToken  {
 			case 0: return new DatatypeRule_DatatypeKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("val",true)) == null) return null;
@@ -739,8 +783,8 @@ protected class DatatypeRule_DatatypeParserRuleCall_2 extends UnassignedTextToke
 			case 0: return new DatatypeRule_ValAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -774,13 +818,15 @@ protected class CommonTerminalsRule_Group extends GroupToken {
 			case 0: return new CommonTerminalsRule_ValAssignment_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getCommonTerminalsRuleRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getCommonTerminalsRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "terminals"
@@ -800,8 +846,8 @@ protected class CommonTerminalsRule_TerminalsKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // ID
@@ -822,8 +868,8 @@ protected class CommonTerminalsRule_IDTerminalRuleCall_1 extends UnassignedTextT
 			case 0: return new CommonTerminalsRule_TerminalsKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // INT
@@ -844,8 +890,8 @@ protected class CommonTerminalsRule_INTTerminalRuleCall_2 extends UnassignedText
 			case 0: return new CommonTerminalsRule_IDTerminalRuleCall_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // STRING
@@ -866,8 +912,8 @@ protected class CommonTerminalsRule_STRINGTerminalRuleCall_3 extends UnassignedT
 			case 0: return new CommonTerminalsRule_INTTerminalRuleCall_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // val=ID
@@ -888,8 +934,8 @@ protected class CommonTerminalsRule_ValAssignment_4 extends AssignmentToken  {
 			case 0: return new CommonTerminalsRule_STRINGTerminalRuleCall_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("val",true)) == null) return null;

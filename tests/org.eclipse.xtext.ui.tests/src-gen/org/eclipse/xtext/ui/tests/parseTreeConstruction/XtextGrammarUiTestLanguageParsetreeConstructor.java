@@ -110,13 +110,15 @@ protected class Grammar_Group extends GroupToken {
 			case 0: return new Grammar_RulesAssignment_5(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getGrammarRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getGrammarRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "grammar"
@@ -136,8 +138,8 @@ protected class Grammar_GrammarKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // name=GrammarID
@@ -158,8 +160,8 @@ protected class Grammar_NameAssignment_1 extends AssignmentToken  {
 			case 0: return new Grammar_GrammarKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -194,8 +196,8 @@ protected class Grammar_Group_2 extends GroupToken {
 			case 1: return new Grammar_UsedGrammarsAssignment_2_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "with"
@@ -216,8 +218,8 @@ protected class Grammar_WithKeyword_2_0 extends KeywordToken  {
 			case 0: return new Grammar_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // usedGrammars+=[Grammar|GrammarID]
@@ -238,8 +240,8 @@ protected class Grammar_UsedGrammarsAssignment_2_1 extends AssignmentToken  {
 			case 0: return new Grammar_WithKeyword_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("usedGrammars",true)) == null) return null;
@@ -275,8 +277,8 @@ protected class Grammar_Group_2_2 extends GroupToken {
 			case 0: return new Grammar_UsedGrammarsAssignment_2_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // ","
@@ -298,8 +300,8 @@ protected class Grammar_CommaKeyword_2_2_0 extends KeywordToken  {
 			case 1: return new Grammar_UsedGrammarsAssignment_2_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // usedGrammars+=[Grammar|GrammarID]
@@ -320,8 +322,8 @@ protected class Grammar_UsedGrammarsAssignment_2_2_1 extends AssignmentToken  {
 			case 0: return new Grammar_CommaKeyword_2_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("usedGrammars",false)) == null) return null;
@@ -360,8 +362,8 @@ protected class Grammar_Group_3 extends GroupToken {
 			case 0: return new Grammar_RightParenthesisKeyword_3_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // definesHiddenTokens?="hidden"
@@ -383,8 +385,8 @@ protected class Grammar_DefinesHiddenTokensAssignment_3_0 extends AssignmentToke
 			case 1: return new Grammar_NameAssignment_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("definesHiddenTokens",true)) == null) return null;
@@ -417,8 +419,8 @@ protected class Grammar_LeftParenthesisKeyword_3_1 extends KeywordToken  {
 			case 0: return new Grammar_DefinesHiddenTokensAssignment_3_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)?
@@ -440,8 +442,8 @@ protected class Grammar_Group_3_2 extends GroupToken {
 			case 1: return new Grammar_HiddenTokensAssignment_3_2_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // hiddenTokens+=[AbstractRule]
@@ -462,8 +464,8 @@ protected class Grammar_HiddenTokensAssignment_3_2_0 extends AssignmentToken  {
 			case 0: return new Grammar_LeftParenthesisKeyword_3_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("hiddenTokens",true)) == null) return null;
@@ -499,8 +501,8 @@ protected class Grammar_Group_3_2_1 extends GroupToken {
 			case 0: return new Grammar_HiddenTokensAssignment_3_2_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // ","
@@ -522,8 +524,8 @@ protected class Grammar_CommaKeyword_3_2_1_0 extends KeywordToken  {
 			case 1: return new Grammar_HiddenTokensAssignment_3_2_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // hiddenTokens+=[AbstractRule]
@@ -544,8 +546,8 @@ protected class Grammar_HiddenTokensAssignment_3_2_1_1 extends AssignmentToken  
 			case 0: return new Grammar_CommaKeyword_3_2_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("hiddenTokens",false)) == null) return null;
@@ -584,8 +586,8 @@ protected class Grammar_RightParenthesisKeyword_3_3 extends KeywordToken  {
 			case 1: return new Grammar_LeftParenthesisKeyword_3_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -607,8 +609,8 @@ protected class Grammar_MetamodelDeclarationsAssignment_4 extends AssignmentToke
 			case 0: return new AbstractMetamodelDeclaration_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("metamodelDeclarations",false)) == null) return null;
@@ -656,8 +658,8 @@ protected class Grammar_RulesAssignment_5 extends AssignmentToken  {
 			case 0: return new AbstractRule_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("rules",true)) == null) return null;
@@ -720,13 +722,17 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 			case 2: return new AbstractRule_EnumRuleParserRuleCall_2(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAbstractRuleRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTerminalRuleRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getParserRuleRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getEnumRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // ParserRule
@@ -747,12 +753,18 @@ protected class AbstractRule_ParserRuleParserRuleCall_0 extends RuleCallToken {
 			case 0: return new ParserRule_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getParserRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ParserRule_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getParserRuleRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -782,12 +794,18 @@ protected class AbstractRule_TerminalRuleParserRuleCall_1 extends RuleCallToken 
 			case 0: return new TerminalRule_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getTerminalRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TerminalRule_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getTerminalRuleRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -817,12 +835,18 @@ protected class AbstractRule_EnumRuleParserRuleCall_2 extends RuleCallToken {
 			case 0: return new EnumRule_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getEnumRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(EnumRule_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getEnumRuleRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -864,13 +888,16 @@ protected class AbstractMetamodelDeclaration_Alternatives extends AlternativesTo
 			case 1: return new AbstractMetamodelDeclaration_ReferencedMetamodelParserRuleCall_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAbstractMetamodelDeclarationRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getReferencedMetamodelRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getGeneratedMetamodelRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // GeneratedMetamodel
@@ -891,12 +918,18 @@ protected class AbstractMetamodelDeclaration_GeneratedMetamodelParserRuleCall_0 
 			case 0: return new GeneratedMetamodel_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getGeneratedMetamodelRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(GeneratedMetamodel_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getGeneratedMetamodelRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -926,12 +959,18 @@ protected class AbstractMetamodelDeclaration_ReferencedMetamodelParserRuleCall_1
 			case 0: return new ReferencedMetamodel_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getReferencedMetamodelRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ReferencedMetamodel_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getReferencedMetamodelRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -977,13 +1016,15 @@ protected class GeneratedMetamodel_Group extends GroupToken {
 			case 1: return new GeneratedMetamodel_EPackageAssignment_2(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getGeneratedMetamodelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getGeneratedMetamodelRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "generate"
@@ -1003,8 +1044,8 @@ protected class GeneratedMetamodel_GenerateKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -1025,8 +1066,8 @@ protected class GeneratedMetamodel_NameAssignment_1 extends AssignmentToken  {
 			case 0: return new GeneratedMetamodel_GenerateKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -1059,8 +1100,8 @@ protected class GeneratedMetamodel_EPackageAssignment_2 extends AssignmentToken 
 			case 0: return new GeneratedMetamodel_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ePackage",true)) == null) return null;
@@ -1096,8 +1137,8 @@ protected class GeneratedMetamodel_Group_3 extends GroupToken {
 			case 0: return new GeneratedMetamodel_AliasAssignment_3_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "as"
@@ -1118,8 +1159,8 @@ protected class GeneratedMetamodel_AsKeyword_3_0 extends KeywordToken  {
 			case 0: return new GeneratedMetamodel_EPackageAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // alias=ID
@@ -1140,8 +1181,8 @@ protected class GeneratedMetamodel_AliasAssignment_3_1 extends AssignmentToken  
 			case 0: return new GeneratedMetamodel_AsKeyword_3_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",false)) == null) return null;
@@ -1191,13 +1232,15 @@ protected class ReferencedMetamodel_Group extends GroupToken {
 			case 1: return new ReferencedMetamodel_EPackageAssignment_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getReferencedMetamodelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getReferencedMetamodelRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "import"
@@ -1217,8 +1260,8 @@ protected class ReferencedMetamodel_ImportKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // ePackage=[ecore::EPackage|STRING]
@@ -1239,8 +1282,8 @@ protected class ReferencedMetamodel_EPackageAssignment_1 extends AssignmentToken
 			case 0: return new ReferencedMetamodel_ImportKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ePackage",true)) == null) return null;
@@ -1276,8 +1319,8 @@ protected class ReferencedMetamodel_Group_2 extends GroupToken {
 			case 0: return new ReferencedMetamodel_AliasAssignment_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "as"
@@ -1298,8 +1341,8 @@ protected class ReferencedMetamodel_AsKeyword_2_0 extends KeywordToken  {
 			case 0: return new ReferencedMetamodel_EPackageAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // alias=ID
@@ -1320,8 +1363,8 @@ protected class ReferencedMetamodel_AliasAssignment_2_1 extends AssignmentToken 
 			case 0: return new ReferencedMetamodel_AsKeyword_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",false)) == null) return null;
@@ -1370,13 +1413,15 @@ protected class ParserRule_Group extends GroupToken {
 			case 0: return new ParserRule_SemicolonKeyword_5(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getParserRuleRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getParserRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // name=ID
@@ -1396,8 +1441,8 @@ protected class ParserRule_NameAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -1430,8 +1475,8 @@ protected class ParserRule_Group_1 extends GroupToken {
 			case 0: return new ParserRule_TypeAssignment_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "returns"
@@ -1452,8 +1497,8 @@ protected class ParserRule_ReturnsKeyword_1_0 extends KeywordToken  {
 			case 0: return new ParserRule_NameAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // type=TypeRef
@@ -1474,8 +1519,8 @@ protected class ParserRule_TypeAssignment_1_1 extends AssignmentToken  {
 			case 0: return new TypeRef_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",false)) == null) return null;
@@ -1522,8 +1567,8 @@ protected class ParserRule_Group_2 extends GroupToken {
 			case 0: return new ParserRule_RightParenthesisKeyword_2_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // definesHiddenTokens?="hidden"
@@ -1545,8 +1590,8 @@ protected class ParserRule_DefinesHiddenTokensAssignment_2_0 extends AssignmentT
 			case 1: return new ParserRule_NameAssignment_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("definesHiddenTokens",true)) == null) return null;
@@ -1579,8 +1624,8 @@ protected class ParserRule_LeftParenthesisKeyword_2_1 extends KeywordToken  {
 			case 0: return new ParserRule_DefinesHiddenTokensAssignment_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)?
@@ -1602,8 +1647,8 @@ protected class ParserRule_Group_2_2 extends GroupToken {
 			case 1: return new ParserRule_HiddenTokensAssignment_2_2_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // hiddenTokens+=[AbstractRule]
@@ -1624,8 +1669,8 @@ protected class ParserRule_HiddenTokensAssignment_2_2_0 extends AssignmentToken 
 			case 0: return new ParserRule_LeftParenthesisKeyword_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("hiddenTokens",true)) == null) return null;
@@ -1661,8 +1706,8 @@ protected class ParserRule_Group_2_2_1 extends GroupToken {
 			case 0: return new ParserRule_HiddenTokensAssignment_2_2_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // ","
@@ -1684,8 +1729,8 @@ protected class ParserRule_CommaKeyword_2_2_1_0 extends KeywordToken  {
 			case 1: return new ParserRule_HiddenTokensAssignment_2_2_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // hiddenTokens+=[AbstractRule]
@@ -1706,8 +1751,8 @@ protected class ParserRule_HiddenTokensAssignment_2_2_1_1 extends AssignmentToke
 			case 0: return new ParserRule_CommaKeyword_2_2_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("hiddenTokens",false)) == null) return null;
@@ -1746,8 +1791,8 @@ protected class ParserRule_RightParenthesisKeyword_2_3 extends KeywordToken  {
 			case 1: return new ParserRule_LeftParenthesisKeyword_2_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -1771,8 +1816,8 @@ protected class ParserRule_ColonKeyword_3 extends KeywordToken  {
 			case 2: return new ParserRule_NameAssignment_0(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // alternatives=Alternatives
@@ -1793,8 +1838,8 @@ protected class ParserRule_AlternativesAssignment_4 extends AssignmentToken  {
 			case 0: return new Alternatives_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alternatives",true)) == null) return null;
@@ -1839,8 +1884,8 @@ protected class ParserRule_SemicolonKeyword_5 extends KeywordToken  {
 			case 0: return new ParserRule_AlternativesAssignment_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -1872,13 +1917,15 @@ protected class TypeRef_Group extends GroupToken {
 			case 0: return new TypeRef_ClassifierAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTypeRefRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTypeRefRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // (metamodel=[AbstractMetamodelDeclaration] "::")?
@@ -1899,8 +1946,8 @@ protected class TypeRef_Group_0 extends GroupToken {
 			case 0: return new TypeRef_ColonColonKeyword_0_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // metamodel=[AbstractMetamodelDeclaration]
@@ -1920,8 +1967,8 @@ protected class TypeRef_MetamodelAssignment_0_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("metamodel",false)) == null) return null;
@@ -1957,8 +2004,8 @@ protected class TypeRef_ColonColonKeyword_0_1 extends KeywordToken  {
 			case 0: return new TypeRef_MetamodelAssignment_0_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -1980,8 +2027,8 @@ protected class TypeRef_ClassifierAssignment_1 extends AssignmentToken  {
 			case 0: return new TypeRef_Group_0(parent, this, 0, inst);
 			default: return parent.createParentFollower(this, index, index - 1, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("classifier",true)) == null) return null;
@@ -2029,13 +2076,20 @@ protected class Alternatives_Group extends GroupToken {
 			case 1: return new Alternatives_GroupParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAlternativesRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getActionRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAssignmentRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getGroupAccess().getGroupTokensAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // Group
@@ -2056,12 +2110,11 @@ protected class Alternatives_GroupParserRuleCall_0 extends RuleCallToken {
 			case 0: return new Group_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Group_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getGroupRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2091,8 +2144,15 @@ protected class Alternatives_Group_1 extends GroupToken {
 			case 0: return new Alternatives_Group_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {Alternatives.groups+=current}
@@ -2113,12 +2173,10 @@ protected class Alternatives_AlternativesGroupsAction_1_0 extends ActionToken  {
 			case 0: return new Alternatives_GroupParserRuleCall_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("groups", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("groups")) return null;
@@ -2144,8 +2202,8 @@ protected class Alternatives_Group_1_1 extends GroupToken {
 			case 0: return new Alternatives_GroupsAssignment_1_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "|"
@@ -2167,8 +2225,8 @@ protected class Alternatives_VerticalLineKeyword_1_1_0 extends KeywordToken  {
 			case 1: return new Alternatives_AlternativesGroupsAction_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // groups+=Group
@@ -2189,8 +2247,8 @@ protected class Alternatives_GroupsAssignment_1_1_1 extends AssignmentToken  {
 			case 0: return new Group_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("groups",false)) == null) return null;
@@ -2249,13 +2307,20 @@ protected class Group_Group extends GroupToken {
 			case 1: return new Group_AbstractTokenParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getGroupRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getActionRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAssignmentRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getGroupAccess().getGroupTokensAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // AbstractToken
@@ -2276,12 +2341,11 @@ protected class Group_AbstractTokenParserRuleCall_0 extends RuleCallToken {
 			case 0: return new AbstractToken_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(AbstractToken_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getAbstractTokenRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2311,8 +2375,15 @@ protected class Group_Group_1 extends GroupToken {
 			case 0: return new Group_TokensAssignment_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getGroupAccess().getGroupTokensAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {Group.tokens+=current}
@@ -2333,12 +2404,10 @@ protected class Group_GroupTokensAction_1_0 extends ActionToken  {
 			case 0: return new Group_AbstractTokenParserRuleCall_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getGroupAccess().getGroupTokensAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("tokens", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("tokens")) return null;
@@ -2364,8 +2433,8 @@ protected class Group_TokensAssignment_1_1 extends AssignmentToken  {
 			case 0: return new AbstractToken_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("tokens",false)) == null) return null;
@@ -2424,13 +2493,20 @@ protected class AbstractToken_Alternatives extends AlternativesToken {
 			case 1: return new AbstractToken_ActionParserRuleCall_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAbstractTokenRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getActionRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAssignmentRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getGroupAccess().getGroupTokensAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // AbstractTokenWithCardinality
@@ -2451,12 +2527,11 @@ protected class AbstractToken_AbstractTokenWithCardinalityParserRuleCall_0 exten
 			case 0: return new AbstractTokenWithCardinality_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(AbstractTokenWithCardinality_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getAbstractTokenWithCardinalityRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2486,12 +2561,18 @@ protected class AbstractToken_ActionParserRuleCall_1 extends RuleCallToken {
 			case 0: return new Action_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getActionRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Action_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getActionRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2533,13 +2614,20 @@ protected class AbstractTokenWithCardinality_Group extends GroupToken {
 			case 1: return new AbstractTokenWithCardinality_Alternatives_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAbstractTokenWithCardinalityRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getActionRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAssignmentRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getGroupAccess().getGroupTokensAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // Assignment|AbstractTerminal
@@ -2561,8 +2649,8 @@ protected class AbstractTokenWithCardinality_Alternatives_0 extends Alternatives
 			case 1: return new AbstractTokenWithCardinality_AbstractTerminalParserRuleCall_0_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // Assignment
@@ -2583,12 +2671,18 @@ protected class AbstractTokenWithCardinality_AssignmentParserRuleCall_0_0 extend
 			case 0: return new Assignment_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getAssignmentRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Assignment_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getAssignmentRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2618,12 +2712,11 @@ protected class AbstractTokenWithCardinality_AbstractTerminalParserRuleCall_0_1 
 			case 0: return new AbstractTerminal_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(AbstractTerminal_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getAbstractTerminalRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2654,8 +2747,8 @@ protected class AbstractTokenWithCardinality_CardinalityAssignment_1 extends Ass
 			case 0: return new AbstractTokenWithCardinality_Alternatives_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("cardinality",false)) == null) return null;
@@ -2709,13 +2802,15 @@ protected class Action_Group extends GroupToken {
 			case 0: return new Action_RightCurlyBracketKeyword_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getActionRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getActionRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "{"
@@ -2735,8 +2830,8 @@ protected class Action_LeftCurlyBracketKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // type=TypeRef
@@ -2757,8 +2852,8 @@ protected class Action_TypeAssignment_1 extends AssignmentToken  {
 			case 0: return new TypeRef_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
@@ -2803,8 +2898,8 @@ protected class Action_Group_2 extends GroupToken {
 			case 0: return new Action_CurrentKeyword_2_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "."
@@ -2825,8 +2920,8 @@ protected class Action_FullStopKeyword_2_0 extends KeywordToken  {
 			case 0: return new Action_TypeAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // feature=ID
@@ -2847,8 +2942,8 @@ protected class Action_FeatureAssignment_2_1 extends AssignmentToken  {
 			case 0: return new Action_FullStopKeyword_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("feature",true)) == null) return null;
@@ -2881,8 +2976,8 @@ protected class Action_OperatorAssignment_2_2 extends AssignmentToken  {
 			case 0: return new Action_FeatureAssignment_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
@@ -2920,8 +3015,8 @@ protected class Action_CurrentKeyword_2_3 extends KeywordToken  {
 			case 0: return new Action_OperatorAssignment_2_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -2944,8 +3039,8 @@ protected class Action_RightCurlyBracketKeyword_3 extends KeywordToken  {
 			case 1: return new Action_TypeAssignment_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -2979,13 +3074,20 @@ protected class AbstractTerminal_Alternatives extends AlternativesToken {
 			case 2: return new AbstractTerminal_ParenthesizedElementParserRuleCall_2(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAbstractTerminalRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getActionRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAssignmentRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getGroupAccess().getGroupTokensAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // Keyword
@@ -3006,12 +3108,18 @@ protected class AbstractTerminal_KeywordParserRuleCall_0 extends RuleCallToken {
 			case 0: return new Keyword_ValueAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Keyword_ValueAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getKeywordRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -3041,12 +3149,18 @@ protected class AbstractTerminal_RuleCallParserRuleCall_1 extends RuleCallToken 
 			case 0: return new RuleCall_RuleAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(RuleCall_RuleAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleCallRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -3076,12 +3190,11 @@ protected class AbstractTerminal_ParenthesizedElementParserRuleCall_2 extends Ru
 			case 0: return new ParenthesizedElement_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ParenthesizedElement_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getParenthesizedElementRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -3121,13 +3234,15 @@ protected class Keyword_ValueAssignment extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getKeywordRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
@@ -3169,13 +3284,15 @@ protected class RuleCall_RuleAssignment extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getRuleCallRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("rule",true)) == null) return null;
@@ -3221,13 +3338,15 @@ protected class Assignment_Group extends GroupToken {
 			case 0: return new Assignment_TerminalAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAssignmentRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getAssignmentRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // feature=ID
@@ -3247,8 +3366,8 @@ protected class Assignment_FeatureAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("feature",true)) == null) return null;
@@ -3281,8 +3400,8 @@ protected class Assignment_OperatorAssignment_1 extends AssignmentToken  {
 			case 0: return new Assignment_FeatureAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
@@ -3325,8 +3444,8 @@ protected class Assignment_TerminalAssignment_2 extends AssignmentToken  {
 			case 0: return new AssignableTerminal_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("terminal",true)) == null) return null;
@@ -3385,13 +3504,18 @@ protected class AssignableTerminal_Alternatives extends AlternativesToken {
 			case 3: return new AssignableTerminal_CrossReferenceParserRuleCall_3(parent, this, 3, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAssignableTerminalRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAssignableAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCrossReferenceRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // Keyword
@@ -3412,12 +3536,18 @@ protected class AssignableTerminal_KeywordParserRuleCall_0 extends RuleCallToken
 			case 0: return new Keyword_ValueAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Keyword_ValueAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getKeywordRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -3447,12 +3577,18 @@ protected class AssignableTerminal_RuleCallParserRuleCall_1 extends RuleCallToke
 			case 0: return new RuleCall_RuleAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(RuleCall_RuleAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleCallRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -3482,12 +3618,11 @@ protected class AssignableTerminal_ParenthesizedAssignableElementParserRuleCall_
 			case 0: return new ParenthesizedAssignableElement_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ParenthesizedAssignableElement_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getParenthesizedAssignableElementRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -3517,12 +3652,18 @@ protected class AssignableTerminal_CrossReferenceParserRuleCall_3 extends RuleCa
 			case 0: return new CrossReference_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getCrossReferenceRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(CrossReference_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getCrossReferenceRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -3563,13 +3704,18 @@ protected class ParenthesizedAssignableElement_Group extends GroupToken {
 			case 0: return new ParenthesizedAssignableElement_RightParenthesisKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getParenthesizedAssignableElementRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAssignableAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCrossReferenceRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "("
@@ -3589,8 +3735,8 @@ protected class ParenthesizedAssignableElement_LeftParenthesisKeyword_0 extends 
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // AssignableAlternatives
@@ -3611,12 +3757,11 @@ protected class ParenthesizedAssignableElement_AssignableAlternativesParserRuleC
 			case 0: return new AssignableAlternatives_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(AssignableAlternatives_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getAssignableAlternativesRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -3647,8 +3792,8 @@ protected class ParenthesizedAssignableElement_RightParenthesisKeyword_2 extends
 			case 0: return new ParenthesizedAssignableElement_AssignableAlternativesParserRuleCall_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -3683,13 +3828,18 @@ protected class AssignableAlternatives_Group extends GroupToken {
 			case 1: return new AssignableAlternatives_AssignableTerminalParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAssignableAlternativesRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAssignableAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCrossReferenceRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // AssignableTerminal
@@ -3710,12 +3860,11 @@ protected class AssignableAlternatives_AssignableTerminalParserRuleCall_0 extend
 			case 0: return new AssignableTerminal_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(AssignableTerminal_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getAssignableTerminalRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -3745,8 +3894,15 @@ protected class AssignableAlternatives_Group_1 extends GroupToken {
 			case 0: return new AssignableAlternatives_Group_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getAssignableAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {Alternatives.groups+=current}
@@ -3767,12 +3923,10 @@ protected class AssignableAlternatives_AlternativesGroupsAction_1_0 extends Acti
 			case 0: return new AssignableAlternatives_AssignableTerminalParserRuleCall_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getAssignableAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("groups", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("groups")) return null;
@@ -3798,8 +3952,8 @@ protected class AssignableAlternatives_Group_1_1 extends GroupToken {
 			case 0: return new AssignableAlternatives_GroupsAssignment_1_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "|"
@@ -3821,8 +3975,8 @@ protected class AssignableAlternatives_VerticalLineKeyword_1_1_0 extends Keyword
 			case 1: return new AssignableAlternatives_AlternativesGroupsAction_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // groups+=AssignableTerminal
@@ -3843,8 +3997,8 @@ protected class AssignableAlternatives_GroupsAssignment_1_1_1 extends Assignment
 			case 0: return new AssignableTerminal_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("groups",false)) == null) return null;
@@ -3902,13 +4056,15 @@ protected class CrossReference_Group extends GroupToken {
 			case 0: return new CrossReference_RightSquareBracketKeyword_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getCrossReferenceRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getCrossReferenceRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "["
@@ -3928,8 +4084,8 @@ protected class CrossReference_LeftSquareBracketKeyword_0 extends KeywordToken  
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // type=TypeRef
@@ -3950,8 +4106,8 @@ protected class CrossReference_TypeAssignment_1 extends AssignmentToken  {
 			case 0: return new TypeRef_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
@@ -3996,8 +4152,8 @@ protected class CrossReference_Group_2 extends GroupToken {
 			case 0: return new CrossReference_TerminalAssignment_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "|"
@@ -4018,8 +4174,8 @@ protected class CrossReference_VerticalLineKeyword_2_0 extends KeywordToken  {
 			case 0: return new CrossReference_TypeAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // ^terminal=CrossReferenceableTerminal
@@ -4040,8 +4196,8 @@ protected class CrossReference_TerminalAssignment_2_1 extends AssignmentToken  {
 			case 0: return new CrossReferenceableTerminal_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("terminal",false)) == null) return null;
@@ -4088,8 +4244,8 @@ protected class CrossReference_RightSquareBracketKeyword_3 extends KeywordToken 
 			case 1: return new CrossReference_TypeAssignment_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -4123,13 +4279,17 @@ protected class CrossReferenceableTerminal_Alternatives extends AlternativesToke
 			case 2: return new CrossReferenceableTerminal_ParenthesizedCrossReferenceableElementParserRuleCall_2(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getCrossReferenceableTerminalRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCrossReferenceableAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // Keyword
@@ -4150,12 +4310,18 @@ protected class CrossReferenceableTerminal_KeywordParserRuleCall_0 extends RuleC
 			case 0: return new Keyword_ValueAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Keyword_ValueAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getKeywordRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -4185,12 +4351,18 @@ protected class CrossReferenceableTerminal_RuleCallParserRuleCall_1 extends Rule
 			case 0: return new RuleCall_RuleAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(RuleCall_RuleAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleCallRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -4220,12 +4392,11 @@ protected class CrossReferenceableTerminal_ParenthesizedCrossReferenceableElemen
 			case 0: return new ParenthesizedCrossReferenceableElement_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ParenthesizedCrossReferenceableElement_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getParenthesizedCrossReferenceableElementRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -4266,13 +4437,17 @@ protected class ParenthesizedCrossReferenceableElement_Group extends GroupToken 
 			case 0: return new ParenthesizedCrossReferenceableElement_RightParenthesisKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getParenthesizedCrossReferenceableElementRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCrossReferenceableAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "("
@@ -4292,8 +4467,8 @@ protected class ParenthesizedCrossReferenceableElement_LeftParenthesisKeyword_0 
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // CrossReferenceableAlternatives
@@ -4314,12 +4489,11 @@ protected class ParenthesizedCrossReferenceableElement_CrossReferenceableAlterna
 			case 0: return new CrossReferenceableAlternatives_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(CrossReferenceableAlternatives_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getCrossReferenceableAlternativesRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -4350,8 +4524,8 @@ protected class ParenthesizedCrossReferenceableElement_RightParenthesisKeyword_2
 			case 0: return new ParenthesizedCrossReferenceableElement_CrossReferenceableAlternativesParserRuleCall_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -4386,13 +4560,17 @@ protected class CrossReferenceableAlternatives_Group extends GroupToken {
 			case 1: return new CrossReferenceableAlternatives_CrossReferenceableTerminalParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getCrossReferenceableAlternativesRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCrossReferenceableAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // CrossReferenceableTerminal
@@ -4413,12 +4591,11 @@ protected class CrossReferenceableAlternatives_CrossReferenceableTerminalParserR
 			case 0: return new CrossReferenceableTerminal_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(CrossReferenceableTerminal_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getCrossReferenceableTerminalRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -4448,8 +4625,15 @@ protected class CrossReferenceableAlternatives_Group_1 extends GroupToken {
 			case 0: return new CrossReferenceableAlternatives_Group_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getCrossReferenceableAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {Alternatives.groups+=current}
@@ -4470,12 +4654,10 @@ protected class CrossReferenceableAlternatives_AlternativesGroupsAction_1_0 exte
 			case 0: return new CrossReferenceableAlternatives_CrossReferenceableTerminalParserRuleCall_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getCrossReferenceableAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("groups", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("groups")) return null;
@@ -4501,8 +4683,8 @@ protected class CrossReferenceableAlternatives_Group_1_1 extends GroupToken {
 			case 0: return new CrossReferenceableAlternatives_GroupsAssignment_1_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "|"
@@ -4524,8 +4706,8 @@ protected class CrossReferenceableAlternatives_VerticalLineKeyword_1_1_0 extends
 			case 1: return new CrossReferenceableAlternatives_AlternativesGroupsAction_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // groups+=CrossReferenceableTerminal
@@ -4546,8 +4728,8 @@ protected class CrossReferenceableAlternatives_GroupsAssignment_1_1_1 extends As
 			case 0: return new CrossReferenceableTerminal_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("groups",false)) == null) return null;
@@ -4605,13 +4787,20 @@ protected class ParenthesizedElement_Group extends GroupToken {
 			case 0: return new ParenthesizedElement_RightParenthesisKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getParenthesizedElementRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getActionRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAssignmentRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getGroupAccess().getGroupTokensAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "("
@@ -4631,8 +4820,8 @@ protected class ParenthesizedElement_LeftParenthesisKeyword_0 extends KeywordTok
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // Alternatives
@@ -4653,12 +4842,11 @@ protected class ParenthesizedElement_AlternativesParserRuleCall_1 extends RuleCa
 			case 0: return new Alternatives_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Alternatives_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getAlternativesRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -4689,8 +4877,8 @@ protected class ParenthesizedElement_RightParenthesisKeyword_2 extends KeywordTo
 			case 0: return new ParenthesizedElement_AlternativesParserRuleCall_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -4723,13 +4911,15 @@ protected class TerminalRule_Group extends GroupToken {
 			case 0: return new TerminalRule_SemicolonKeyword_5(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTerminalRuleRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTerminalRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "terminal"
@@ -4749,8 +4939,8 @@ protected class TerminalRule_TerminalKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -4771,8 +4961,8 @@ protected class TerminalRule_NameAssignment_1 extends AssignmentToken  {
 			case 0: return new TerminalRule_TerminalKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -4805,8 +4995,8 @@ protected class TerminalRule_Group_2 extends GroupToken {
 			case 0: return new TerminalRule_TypeAssignment_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "returns"
@@ -4827,8 +5017,8 @@ protected class TerminalRule_ReturnsKeyword_2_0 extends KeywordToken  {
 			case 0: return new TerminalRule_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // type=TypeRef
@@ -4849,8 +5039,8 @@ protected class TerminalRule_TypeAssignment_2_1 extends AssignmentToken  {
 			case 0: return new TypeRef_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",false)) == null) return null;
@@ -4897,8 +5087,8 @@ protected class TerminalRule_ColonKeyword_3 extends KeywordToken  {
 			case 1: return new TerminalRule_NameAssignment_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // alternatives=TerminalAlternatives
@@ -4919,8 +5109,8 @@ protected class TerminalRule_AlternativesAssignment_4 extends AssignmentToken  {
 			case 0: return new TerminalAlternatives_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alternatives",true)) == null) return null;
@@ -4965,8 +5155,8 @@ protected class TerminalRule_SemicolonKeyword_5 extends KeywordToken  {
 			case 0: return new TerminalRule_AlternativesAssignment_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -4999,13 +5189,22 @@ protected class TerminalAlternatives_Group extends GroupToken {
 			case 1: return new TerminalAlternatives_TerminalGroupParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTerminalAlternativesRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getNegatedTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getWildcardAccess().getWildcardAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // TerminalGroup
@@ -5026,12 +5225,11 @@ protected class TerminalAlternatives_TerminalGroupParserRuleCall_0 extends RuleC
 			case 0: return new TerminalGroup_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TerminalGroup_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getTerminalGroupRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -5061,8 +5259,15 @@ protected class TerminalAlternatives_Group_1 extends GroupToken {
 			case 0: return new TerminalAlternatives_Group_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {Alternatives.groups+=current}
@@ -5083,12 +5288,10 @@ protected class TerminalAlternatives_AlternativesGroupsAction_1_0 extends Action
 			case 0: return new TerminalAlternatives_TerminalGroupParserRuleCall_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("groups", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("groups")) return null;
@@ -5114,8 +5317,8 @@ protected class TerminalAlternatives_Group_1_1 extends GroupToken {
 			case 0: return new TerminalAlternatives_GroupsAssignment_1_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "|"
@@ -5137,8 +5340,8 @@ protected class TerminalAlternatives_VerticalLineKeyword_1_1_0 extends KeywordTo
 			case 1: return new TerminalAlternatives_AlternativesGroupsAction_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // groups+=TerminalGroup
@@ -5159,8 +5362,8 @@ protected class TerminalAlternatives_GroupsAssignment_1_1_1 extends AssignmentTo
 			case 0: return new TerminalGroup_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("groups",false)) == null) return null;
@@ -5219,13 +5422,22 @@ protected class TerminalGroup_Group extends GroupToken {
 			case 1: return new TerminalGroup_TerminalTokenParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTerminalGroupRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getNegatedTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getWildcardAccess().getWildcardAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // TerminalToken
@@ -5246,12 +5458,11 @@ protected class TerminalGroup_TerminalTokenParserRuleCall_0 extends RuleCallToke
 			case 0: return new TerminalToken_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TerminalToken_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getTerminalTokenRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -5281,8 +5492,15 @@ protected class TerminalGroup_Group_1 extends GroupToken {
 			case 0: return new TerminalGroup_TokensAssignment_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {Group.tokens+=current}
@@ -5303,12 +5521,10 @@ protected class TerminalGroup_GroupTokensAction_1_0 extends ActionToken  {
 			case 0: return new TerminalGroup_TerminalTokenParserRuleCall_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("tokens", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("tokens")) return null;
@@ -5334,8 +5550,8 @@ protected class TerminalGroup_TokensAssignment_1_1 extends AssignmentToken  {
 			case 0: return new TerminalToken_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("tokens",false)) == null) return null;
@@ -5394,13 +5610,22 @@ protected class TerminalToken_Group extends GroupToken {
 			case 1: return new TerminalToken_TerminalTokenElementParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTerminalTokenRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getNegatedTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getWildcardAccess().getWildcardAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // TerminalTokenElement
@@ -5421,12 +5646,11 @@ protected class TerminalToken_TerminalTokenElementParserRuleCall_0 extends RuleC
 			case 0: return new TerminalTokenElement_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TerminalTokenElement_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getTerminalTokenElementRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -5456,8 +5680,8 @@ protected class TerminalToken_CardinalityAssignment_1 extends AssignmentToken  {
 			case 0: return new TerminalToken_TerminalTokenElementParserRuleCall_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("cardinality",false)) == null) return null;
@@ -5517,13 +5741,22 @@ protected class TerminalTokenElement_Alternatives extends AlternativesToken {
 			case 4: return new TerminalTokenElement_WildcardParserRuleCall_4(parent, this, 4, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTerminalTokenElementRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getNegatedTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getWildcardAccess().getWildcardAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // CharacterRange
@@ -5544,12 +5777,19 @@ protected class TerminalTokenElement_CharacterRangeParserRuleCall_0 extends Rule
 			case 0: return new CharacterRange_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(CharacterRange_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getCharacterRangeRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -5579,12 +5819,18 @@ protected class TerminalTokenElement_RuleCallParserRuleCall_1 extends RuleCallTo
 			case 0: return new RuleCall_RuleAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(RuleCall_RuleAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleCallRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -5614,12 +5860,11 @@ protected class TerminalTokenElement_ParenthesizedTerminalElementParserRuleCall_
 			case 0: return new ParenthesizedTerminalElement_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(ParenthesizedTerminalElement_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getParenthesizedTerminalElementRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -5649,12 +5894,19 @@ protected class TerminalTokenElement_AbstractNegatedTokenParserRuleCall_3 extend
 			case 0: return new AbstractNegatedToken_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getNegatedTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(AbstractNegatedToken_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getAbstractNegatedTokenRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -5684,12 +5936,18 @@ protected class TerminalTokenElement_WildcardParserRuleCall_4 extends RuleCallTo
 			case 0: return new Wildcard_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getWildcardAccess().getWildcardAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Wildcard_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getWildcardRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -5730,13 +5988,22 @@ protected class ParenthesizedTerminalElement_Group extends GroupToken {
 			case 0: return new ParenthesizedTerminalElement_RightParenthesisKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getParenthesizedTerminalElementRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getNegatedTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getWildcardAccess().getWildcardAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "("
@@ -5756,8 +6023,8 @@ protected class ParenthesizedTerminalElement_LeftParenthesisKeyword_0 extends Ke
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // TerminalAlternatives
@@ -5778,12 +6045,11 @@ protected class ParenthesizedTerminalElement_TerminalAlternativesParserRuleCall_
 			case 0: return new TerminalAlternatives_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TerminalAlternatives_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getTerminalAlternativesRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -5814,8 +6080,8 @@ protected class ParenthesizedTerminalElement_RightParenthesisKeyword_2 extends K
 			case 0: return new ParenthesizedTerminalElement_TerminalAlternativesParserRuleCall_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -5848,13 +6114,16 @@ protected class AbstractNegatedToken_Alternatives extends AlternativesToken {
 			case 1: return new AbstractNegatedToken_UntilTokenParserRuleCall_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAbstractNegatedTokenRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getNegatedTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // NegatedToken
@@ -5875,12 +6144,18 @@ protected class AbstractNegatedToken_NegatedTokenParserRuleCall_0 extends RuleCa
 			case 0: return new NegatedToken_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getNegatedTokenRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(NegatedToken_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getNegatedTokenRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -5910,12 +6185,18 @@ protected class AbstractNegatedToken_UntilTokenParserRuleCall_1 extends RuleCall
 			case 0: return new UntilToken_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(UntilToken_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getUntilTokenRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -5956,13 +6237,15 @@ protected class NegatedToken_Group extends GroupToken {
 			case 0: return new NegatedToken_TerminalAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getNegatedTokenRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getNegatedTokenRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "!"
@@ -5982,8 +6265,8 @@ protected class NegatedToken_ExclamationMarkKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // ^terminal=TerminalTokenElement
@@ -6004,8 +6287,8 @@ protected class NegatedToken_TerminalAssignment_1 extends AssignmentToken  {
 			case 0: return new TerminalTokenElement_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("terminal",true)) == null) return null;
@@ -6061,13 +6344,15 @@ protected class UntilToken_Group extends GroupToken {
 			case 0: return new UntilToken_TerminalAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getUntilTokenRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "->"
@@ -6087,8 +6372,8 @@ protected class UntilToken_HyphenMinusGreaterThanSignKeyword_0 extends KeywordTo
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // ^terminal=TerminalTokenElement
@@ -6109,8 +6394,8 @@ protected class UntilToken_TerminalAssignment_1 extends AssignmentToken  {
 			case 0: return new TerminalTokenElement_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("terminal",true)) == null) return null;
@@ -6166,13 +6451,15 @@ protected class Wildcard_Group extends GroupToken {
 			case 0: return new Wildcard_FullStopKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getWildcardRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getWildcardAccess().getWildcardAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // {Wildcard}
@@ -6192,12 +6479,10 @@ protected class Wildcard_WildcardAction_0 extends ActionToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getWildcardAccess().getWildcardAction_0().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -6221,8 +6506,8 @@ protected class Wildcard_FullStopKeyword_1 extends KeywordToken  {
 			case 0: return new Wildcard_WildcardAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -6255,13 +6540,16 @@ protected class CharacterRange_Group extends GroupToken {
 			case 1: return new CharacterRange_KeywordParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getCharacterRangeRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // Keyword
@@ -6282,12 +6570,18 @@ protected class CharacterRange_KeywordParserRuleCall_0 extends RuleCallToken {
 			case 0: return new Keyword_ValueAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Keyword_ValueAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getKeywordRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -6317,8 +6611,15 @@ protected class CharacterRange_Group_1 extends GroupToken {
 			case 0: return new CharacterRange_RightAssignment_1_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {CharacterRange.left=current}
@@ -6339,12 +6640,10 @@ protected class CharacterRange_CharacterRangeLeftAction_1_0 extends ActionToken 
 			case 0: return new CharacterRange_KeywordParserRuleCall_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("left", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("left")) return null;
@@ -6370,8 +6669,8 @@ protected class CharacterRange_FullStopFullStopKeyword_1_1 extends KeywordToken 
 			case 0: return new CharacterRange_CharacterRangeLeftAction_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // right=Keyword
@@ -6392,8 +6691,8 @@ protected class CharacterRange_RightAssignment_1_2 extends AssignmentToken  {
 			case 0: return new Keyword_ValueAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("right",false)) == null) return null;
@@ -6450,13 +6749,15 @@ protected class EnumRule_Group extends GroupToken {
 			case 0: return new EnumRule_SemicolonKeyword_5(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getEnumRuleRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getEnumRuleRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "enum"
@@ -6476,8 +6777,8 @@ protected class EnumRule_EnumKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -6498,8 +6799,8 @@ protected class EnumRule_NameAssignment_1 extends AssignmentToken  {
 			case 0: return new EnumRule_EnumKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -6532,8 +6833,8 @@ protected class EnumRule_Group_2 extends GroupToken {
 			case 0: return new EnumRule_TypeAssignment_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "returns"
@@ -6554,8 +6855,8 @@ protected class EnumRule_ReturnsKeyword_2_0 extends KeywordToken  {
 			case 0: return new EnumRule_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // type=TypeRef
@@ -6576,8 +6877,8 @@ protected class EnumRule_TypeAssignment_2_1 extends AssignmentToken  {
 			case 0: return new TypeRef_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",false)) == null) return null;
@@ -6624,8 +6925,8 @@ protected class EnumRule_ColonKeyword_3 extends KeywordToken  {
 			case 1: return new EnumRule_NameAssignment_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // alternatives=EnumLiterals
@@ -6646,8 +6947,8 @@ protected class EnumRule_AlternativesAssignment_4 extends AssignmentToken  {
 			case 0: return new EnumLiterals_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alternatives",true)) == null) return null;
@@ -6692,8 +6993,8 @@ protected class EnumRule_SemicolonKeyword_5 extends KeywordToken  {
 			case 0: return new EnumRule_AlternativesAssignment_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -6728,13 +7029,16 @@ protected class EnumLiterals_Group extends GroupToken {
 			case 1: return new EnumLiterals_EnumLiteralDeclarationParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getEnumLiteralsRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getEnumLiteralDeclarationRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getEnumLiteralsAccess().getAlternativesGroupsAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // EnumLiteralDeclaration
@@ -6755,12 +7059,18 @@ protected class EnumLiterals_EnumLiteralDeclarationParserRuleCall_0 extends Rule
 			case 0: return new EnumLiteralDeclaration_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getEnumLiteralDeclarationRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(EnumLiteralDeclaration_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getEnumLiteralDeclarationRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -6790,8 +7100,15 @@ protected class EnumLiterals_Group_1 extends GroupToken {
 			case 0: return new EnumLiterals_Group_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getEnumLiteralsAccess().getAlternativesGroupsAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {Alternatives.groups+=current}
@@ -6812,12 +7129,10 @@ protected class EnumLiterals_AlternativesGroupsAction_1_0 extends ActionToken  {
 			case 0: return new EnumLiterals_EnumLiteralDeclarationParserRuleCall_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getEnumLiteralsAccess().getAlternativesGroupsAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("groups", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("groups")) return null;
@@ -6843,8 +7158,8 @@ protected class EnumLiterals_Group_1_1 extends GroupToken {
 			case 0: return new EnumLiterals_GroupsAssignment_1_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "|"
@@ -6866,8 +7181,8 @@ protected class EnumLiterals_VerticalLineKeyword_1_1_0 extends KeywordToken  {
 			case 1: return new EnumLiterals_AlternativesGroupsAction_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // groups+=EnumLiteralDeclaration
@@ -6888,8 +7203,8 @@ protected class EnumLiterals_GroupsAssignment_1_1_1 extends AssignmentToken  {
 			case 0: return new EnumLiteralDeclaration_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("groups",false)) == null) return null;
@@ -6948,13 +7263,15 @@ protected class EnumLiteralDeclaration_Group extends GroupToken {
 			case 1: return new EnumLiteralDeclaration_EnumLiteralAssignment_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getEnumLiteralDeclarationRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getEnumLiteralDeclarationRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // enumLiteral=[ecore::EEnumLiteral]
@@ -6974,8 +7291,8 @@ protected class EnumLiteralDeclaration_EnumLiteralAssignment_0 extends Assignmen
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("enumLiteral",true)) == null) return null;
@@ -7011,8 +7328,8 @@ protected class EnumLiteralDeclaration_Group_1 extends GroupToken {
 			case 0: return new EnumLiteralDeclaration_LiteralAssignment_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "="
@@ -7033,8 +7350,8 @@ protected class EnumLiteralDeclaration_EqualsSignKeyword_1_0 extends KeywordToke
 			case 0: return new EnumLiteralDeclaration_EnumLiteralAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // literal=Keyword
@@ -7055,8 +7372,8 @@ protected class EnumLiteralDeclaration_LiteralAssignment_1_1 extends AssignmentT
 			case 0: return new Keyword_ValueAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("literal",false)) == null) return null;

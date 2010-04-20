@@ -260,6 +260,60 @@ public interface SimplerewritetestFactory extends EFactory
   EObjectElement createEObjectElement();
 
   /**
+   * Returns a new object of class '<em>Type Bug305577 1</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Type Bug305577 1</em>'.
+   * @generated
+   */
+  TypeBug305577_1 createTypeBug305577_1();
+
+  /**
+   * Returns a new object of class '<em>Type Bug305577 2</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Type Bug305577 2</em>'.
+   * @generated
+   */
+  TypeBug305577_2 createTypeBug305577_2();
+
+  /**
+   * Returns a new object of class '<em>Type Bug1 A</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Type Bug1 A</em>'.
+   * @generated
+   */
+  TypeBug1A createTypeBug1A();
+
+  /**
+   * Returns a new object of class '<em>Type Bug1 B</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Type Bug1 B</em>'.
+   * @generated
+   */
+  TypeBug1B createTypeBug1B();
+
+  /**
+   * Returns a new object of class '<em>Type Bug2 A</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Type Bug2 A</em>'.
+   * @generated
+   */
+  TypeBug2A createTypeBug2A();
+
+  /**
+   * Returns a new object of class '<em>Type Bug2 B</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Type Bug2 B</em>'.
+   * @generated
+   */
+  TypeBug2B createTypeBug2B();
+
+  /**
    * Returns a new object of class '<em>Op</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

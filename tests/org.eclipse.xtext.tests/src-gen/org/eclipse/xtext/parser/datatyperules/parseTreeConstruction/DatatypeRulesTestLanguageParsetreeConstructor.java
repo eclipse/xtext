@@ -68,13 +68,8 @@ protected class CompositeModel_ModelAssignment extends AssignmentToken  {
 			case 0: return new Model_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getCompositeModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("model",true)) == null) return null;
@@ -131,13 +126,15 @@ protected class Model_Group extends GroupToken {
 			case 0: return new Model_SemicolonKeyword_5(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getModelRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // id=NestedModelId
@@ -157,8 +154,8 @@ protected class Model_IdAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("id",true)) == null) return null;
@@ -191,8 +188,8 @@ protected class Model_Group_1 extends GroupToken {
 			case 0: return new Model_ValueAssignment_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // ":"
@@ -213,8 +210,8 @@ protected class Model_ColonKeyword_1_0 extends KeywordToken  {
 			case 0: return new Model_IdAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // value=Fraction
@@ -235,8 +232,8 @@ protected class Model_ValueAssignment_1_1 extends AssignmentToken  {
 			case 0: return new Model_ColonKeyword_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",false)) == null) return null;
@@ -270,8 +267,8 @@ protected class Model_Group_2 extends GroupToken {
 			case 0: return new Model_VectorAssignment_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "#"
@@ -293,8 +290,8 @@ protected class Model_NumberSignKeyword_2_0 extends KeywordToken  {
 			case 1: return new Model_IdAssignment_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // vector=Vector
@@ -315,8 +312,8 @@ protected class Model_VectorAssignment_2_1 extends AssignmentToken  {
 			case 0: return new Model_NumberSignKeyword_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("vector",false)) == null) return null;
@@ -350,8 +347,8 @@ protected class Model_Group_3 extends GroupToken {
 			case 0: return new Model_DotsAssignment_3_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "+"
@@ -374,8 +371,8 @@ protected class Model_PlusSignKeyword_3_0 extends KeywordToken  {
 			case 2: return new Model_IdAssignment_0(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // dots=Dots
@@ -396,8 +393,8 @@ protected class Model_DotsAssignment_3_1 extends AssignmentToken  {
 			case 0: return new Model_PlusSignKeyword_3_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("dots",false)) == null) return null;
@@ -431,8 +428,8 @@ protected class Model_Group_4 extends GroupToken {
 			case 0: return new Model_DoubleAssignment_4_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "*"
@@ -456,8 +453,8 @@ protected class Model_AsteriskKeyword_4_0 extends KeywordToken  {
 			case 3: return new Model_IdAssignment_0(parent, this, 3, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // double=Double
@@ -478,8 +475,8 @@ protected class Model_DoubleAssignment_4_1 extends AssignmentToken  {
 			case 0: return new Model_AsteriskKeyword_4_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("double",false)) == null) return null;
@@ -517,8 +514,8 @@ protected class Model_SemicolonKeyword_5 extends KeywordToken  {
 			case 4: return new Model_IdAssignment_0(parent, this, 4, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 

@@ -39,6 +39,12 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Spare;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TwoNumbers;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Type;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug1A;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug1B;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug2A;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug2B;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug305577_1;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug305577_2;
 
 /**
  * <!-- begin-user-doc -->
@@ -232,6 +238,36 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEObjectElement(EObjectElement object)
       {
         return createEObjectElementAdapter();
+      }
+      @Override
+      public Adapter caseTypeBug305577_1(TypeBug305577_1 object)
+      {
+        return createTypeBug305577_1Adapter();
+      }
+      @Override
+      public Adapter caseTypeBug305577_2(TypeBug305577_2 object)
+      {
+        return createTypeBug305577_2Adapter();
+      }
+      @Override
+      public Adapter caseTypeBug1A(TypeBug1A object)
+      {
+        return createTypeBug1AAdapter();
+      }
+      @Override
+      public Adapter caseTypeBug1B(TypeBug1B object)
+      {
+        return createTypeBug1BAdapter();
+      }
+      @Override
+      public Adapter caseTypeBug2A(TypeBug2A object)
+      {
+        return createTypeBug2AAdapter();
+      }
+      @Override
+      public Adapter caseTypeBug2B(TypeBug2B object)
+      {
+        return createTypeBug2BAdapter();
       }
       @Override
       public Adapter caseOp(Op object)
@@ -646,6 +682,96 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEObjectElementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug305577_1 <em>Type Bug305577 1</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug305577_1
+   * @generated
+   */
+  public Adapter createTypeBug305577_1Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug305577_2 <em>Type Bug305577 2</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug305577_2
+   * @generated
+   */
+  public Adapter createTypeBug305577_2Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug1A <em>Type Bug1 A</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug1A
+   * @generated
+   */
+  public Adapter createTypeBug1AAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug1B <em>Type Bug1 B</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug1B
+   * @generated
+   */
+  public Adapter createTypeBug1BAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug2A <em>Type Bug2 A</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug2A
+   * @generated
+   */
+  public Adapter createTypeBug2AAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug2B <em>Type Bug2 B</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug2B
+   * @generated
+   */
+  public Adapter createTypeBug2BAdapter()
   {
     return null;
   }

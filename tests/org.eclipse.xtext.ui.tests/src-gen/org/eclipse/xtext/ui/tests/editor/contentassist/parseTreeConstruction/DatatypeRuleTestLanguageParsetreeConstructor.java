@@ -72,17 +72,18 @@ protected class Model_TypesParserRuleCall extends RuleCallToken {
 			case 0: return new Types_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTypesRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Types_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getTypesRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -123,13 +124,15 @@ protected class Types_Group extends GroupToken {
 			case 1: return new Types_TypesKeyword_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTypesRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTypesRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "Types"
@@ -149,8 +152,8 @@ protected class Types_TypesKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // types+=Type*
@@ -171,8 +174,8 @@ protected class Types_TypesAssignment_1 extends AssignmentToken  {
 			case 0: return new Type_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("types",false)) == null) return null;
@@ -230,13 +233,16 @@ protected class Type_Alternatives extends AlternativesToken {
 			case 1: return new Type_CompositeTypeParserRuleCall_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTypeRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getSimpleTypeRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCompositeTypeRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // SimpleType
@@ -257,12 +263,18 @@ protected class Type_SimpleTypeParserRuleCall_0 extends RuleCallToken {
 			case 0: return new SimpleType_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getSimpleTypeRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(SimpleType_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getSimpleTypeRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -292,12 +304,18 @@ protected class Type_CompositeTypeParserRuleCall_1 extends RuleCallToken {
 			case 0: return new CompositeType_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getCompositeTypeRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(CompositeType_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getCompositeTypeRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -338,13 +356,15 @@ protected class SimpleType_Group extends GroupToken {
 			case 0: return new SimpleType_SemicolonKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getSimpleTypeRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getSimpleTypeRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "Type"
@@ -364,8 +384,8 @@ protected class SimpleType_TypeKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -386,8 +406,8 @@ protected class SimpleType_NameAssignment_1 extends AssignmentToken  {
 			case 0: return new SimpleType_TypeKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -420,8 +440,8 @@ protected class SimpleType_SemicolonKeyword_2 extends KeywordToken  {
 			case 0: return new SimpleType_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -453,13 +473,15 @@ protected class CompositeType_Group extends GroupToken {
 			case 0: return new CompositeType_SemicolonKeyword_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getCompositeTypeRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getCompositeTypeRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "Composite"
@@ -479,8 +501,8 @@ protected class CompositeType_CompositeKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -501,8 +523,8 @@ protected class CompositeType_NameAssignment_1 extends AssignmentToken  {
 			case 0: return new CompositeType_CompositeKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -535,8 +557,8 @@ protected class CompositeType_BaseKeyword_2 extends KeywordToken  {
 			case 0: return new CompositeType_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // baseType=CompositeTypeEntry
@@ -557,8 +579,8 @@ protected class CompositeType_BaseTypeAssignment_3 extends AssignmentToken  {
 			case 0: return new CompositeTypeEntry_DataTypeAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("baseType",true)) == null) return null;
@@ -603,8 +625,8 @@ protected class CompositeType_SemicolonKeyword_4 extends KeywordToken  {
 			case 0: return new CompositeType_BaseTypeAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -635,13 +657,15 @@ protected class CompositeTypeEntry_DataTypeAssignment extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getCompositeTypeEntryRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getCompositeTypeEntryRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("dataType",true)) == null) return null;

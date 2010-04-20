@@ -73,13 +73,15 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 1: return new Model_TestAssignment_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getModelRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // test=Test
@@ -100,8 +102,8 @@ protected class Model_TestAssignment_0 extends AssignmentToken  {
 			case 0: return new Test_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("test",true)) == null) return null;
@@ -145,8 +147,8 @@ protected class Model_TestAssignment_1 extends AssignmentToken  {
 			case 0: return new Parenthesis_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("test",true)) == null) return null;
@@ -201,13 +203,17 @@ protected class Parenthesis_Group extends GroupToken {
 			case 0: return new Parenthesis_RightParenthesisKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getParenthesisRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTwoRequiredRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTwoOptionsRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getIndentRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "("
@@ -227,8 +233,8 @@ protected class Parenthesis_LeftParenthesisKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // Test
@@ -249,12 +255,11 @@ protected class Parenthesis_TestParserRuleCall_1 extends RuleCallToken {
 			case 0: return new Test_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Test_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getTestRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -285,8 +290,8 @@ protected class Parenthesis_RightParenthesisKeyword_2 extends KeywordToken  {
 			case 0: return new Parenthesis_TestParserRuleCall_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -320,13 +325,17 @@ protected class Test_Alternatives extends AlternativesToken {
 			case 2: return new Test_IndentParserRuleCall_2(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTestRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTwoRequiredRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTwoOptionsRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getIndentRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // TwoRequired
@@ -347,12 +356,18 @@ protected class Test_TwoRequiredParserRuleCall_0 extends RuleCallToken {
 			case 0: return new TwoRequired_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getTwoRequiredRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TwoRequired_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getTwoRequiredRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -382,12 +397,18 @@ protected class Test_TwoOptionsParserRuleCall_1 extends RuleCallToken {
 			case 0: return new TwoOptions_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getTwoOptionsRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TwoOptions_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getTwoOptionsRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -417,12 +438,18 @@ protected class Test_IndentParserRuleCall_2 extends RuleCallToken {
 			case 0: return new Indent_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getIndentRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Indent_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getIndentRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -463,13 +490,15 @@ protected class TwoRequired_Group extends GroupToken {
 			case 0: return new TwoRequired_TwoAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTwoRequiredRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTwoRequiredRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "tworequired"
@@ -489,8 +518,8 @@ protected class TwoRequired_TworequiredKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // one=ID
@@ -511,8 +540,8 @@ protected class TwoRequired_OneAssignment_1 extends AssignmentToken  {
 			case 0: return new TwoRequired_TworequiredKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("one",true)) == null) return null;
@@ -545,8 +574,8 @@ protected class TwoRequired_TwoAssignment_2 extends AssignmentToken  {
 			case 0: return new TwoRequired_OneAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("two",true)) == null) return null;
@@ -590,13 +619,15 @@ protected class TwoOptions_Group extends GroupToken {
 			case 0: return new TwoOptions_Alternatives_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTwoOptionsRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getTwoOptionsRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "twooptions"
@@ -616,8 +647,8 @@ protected class TwoOptions_TwooptionsKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // "one" one=ID|"two" two=ID
@@ -639,8 +670,8 @@ protected class TwoOptions_Alternatives_1 extends AlternativesToken {
 			case 1: return new TwoOptions_Group_1_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "one" one=ID
@@ -661,8 +692,8 @@ protected class TwoOptions_Group_1_0 extends GroupToken {
 			case 0: return new TwoOptions_OneAssignment_1_0_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "one"
@@ -683,8 +714,8 @@ protected class TwoOptions_OneKeyword_1_0_0 extends KeywordToken  {
 			case 0: return new TwoOptions_TwooptionsKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // one=ID
@@ -705,8 +736,8 @@ protected class TwoOptions_OneAssignment_1_0_1 extends AssignmentToken  {
 			case 0: return new TwoOptions_OneKeyword_1_0_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("one",true)) == null) return null;
@@ -740,8 +771,8 @@ protected class TwoOptions_Group_1_1 extends GroupToken {
 			case 0: return new TwoOptions_TwoAssignment_1_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "two"
@@ -762,8 +793,8 @@ protected class TwoOptions_TwoKeyword_1_1_0 extends KeywordToken  {
 			case 0: return new TwoOptions_TwooptionsKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // two=ID
@@ -784,8 +815,8 @@ protected class TwoOptions_TwoAssignment_1_1_1 extends AssignmentToken  {
 			case 0: return new TwoOptions_TwoKeyword_1_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("two",true)) == null) return null;
@@ -831,13 +862,15 @@ protected class Indent_Group extends GroupToken {
 			case 0: return new Indent_RightCurlyBracketKeyword_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getIndentRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getIndentRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "{"
@@ -857,8 +890,8 @@ protected class Indent_LeftCurlyBracketKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // req=TwoRequired?
@@ -879,8 +912,8 @@ protected class Indent_ReqAssignment_1 extends AssignmentToken  {
 			case 0: return new TwoRequired_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("req",false)) == null) return null;
@@ -925,8 +958,8 @@ protected class Indent_OptAssignment_2 extends AssignmentToken  {
 			case 0: return new TwoOptions_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("opt",false)) == null) return null;
@@ -972,8 +1005,8 @@ protected class Indent_IndentAssignment_3 extends AssignmentToken  {
 			case 0: return new Indent_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("indent",false)) == null) return null;
@@ -1024,8 +1057,8 @@ protected class Indent_RightCurlyBracketKeyword_4 extends KeywordToken  {
 			case 3: return new Indent_LeftCurlyBracketKeyword_0(parent, this, 3, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 

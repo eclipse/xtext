@@ -74,13 +74,15 @@ protected class State_Group extends GroupToken {
 			case 3: return new State_Alternatives_0(parent, this, 3, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getStateRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getStateRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // (isInitial?="init"|isFinal?="final"|stateKind=StateType|isInitial?="init"
@@ -106,8 +108,8 @@ protected class State_Alternatives_0 extends AlternativesToken {
 			case 4: return new State_Group_0_4(parent, this, 4, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // isInitial?="init"
@@ -127,8 +129,8 @@ protected class State_IsInitialAssignment_0_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("isInitial",true)) == null) return null;
@@ -160,8 +162,8 @@ protected class State_IsFinalAssignment_0_1 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("isFinal",true)) == null) return null;
@@ -193,8 +195,8 @@ protected class State_StateKindAssignment_0_2 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stateKind",true)) == null) return null;
@@ -227,8 +229,8 @@ protected class State_Group_0_3 extends GroupToken {
 			case 0: return new State_StateKindAssignment_0_3_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // isInitial?="init"
@@ -248,8 +250,8 @@ protected class State_IsInitialAssignment_0_3_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("isInitial",true)) == null) return null;
@@ -282,8 +284,8 @@ protected class State_StateKindAssignment_0_3_1 extends AssignmentToken  {
 			case 0: return new State_IsInitialAssignment_0_3_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stateKind",true)) == null) return null;
@@ -317,8 +319,8 @@ protected class State_Group_0_4 extends GroupToken {
 			case 0: return new State_IsFinalAssignment_0_4_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // isInitial?="init"
@@ -338,8 +340,8 @@ protected class State_IsInitialAssignment_0_4_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("isInitial",true)) == null) return null;
@@ -372,8 +374,8 @@ protected class State_StateKindAssignment_0_4_1 extends AssignmentToken  {
 			case 0: return new State_IsInitialAssignment_0_4_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stateKind",true)) == null) return null;
@@ -406,8 +408,8 @@ protected class State_IsFinalAssignment_0_4_2 extends AssignmentToken  {
 			case 0: return new State_StateKindAssignment_0_4_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("isFinal",true)) == null) return null;
@@ -441,8 +443,8 @@ protected class State_StateKeyword_1 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // stateName=ID?
@@ -464,8 +466,8 @@ protected class State_StateNameAssignment_2 extends AssignmentToken  {
 			case 1: return new State_Alternatives_0(parent, this, 1, inst);
 			default: return parent.createParentFollower(this, index, index - 2, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stateName",false)) == null) return null;
@@ -500,8 +502,8 @@ protected class State_LabelAssignment_3 extends AssignmentToken  {
 			case 2: return new State_Alternatives_0(parent, this, 2, inst);
 			default: return parent.createParentFollower(this, index, index - 3, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("label",false)) == null) return null;

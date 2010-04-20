@@ -70,13 +70,15 @@ protected class SubMain_Group extends GroupToken {
 			case 1: return new SubMain_RightCurlyBracketKeyword_2(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getSubMainRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getSubMainRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "{"
@@ -96,8 +98,8 @@ protected class SubMain_LeftCurlyBracketKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // superMains+=SuperMain
@@ -118,8 +120,8 @@ protected class SubMain_SuperMainsAssignment_1 extends AssignmentToken  {
 			case 0: return new SuperMain_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("superMains",true)) == null) return null;
@@ -164,8 +166,8 @@ protected class SubMain_RightCurlyBracketKeyword_2 extends KeywordToken  {
 			case 0: return new SubMain_SuperMainsAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // another=AnotherSuperMain?
@@ -186,8 +188,8 @@ protected class SubMain_AnotherAssignment_3 extends AssignmentToken  {
 			case 0: return new AnotherSuperMain_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("another",false)) == null) return null;
@@ -243,13 +245,15 @@ protected class AnotherSuperMain_Group extends GroupToken {
 			case 0: return new AnotherSuperMain_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAnotherSuperMainRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getAnotherSuperMainRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "ups"
@@ -269,8 +273,8 @@ protected class AnotherSuperMain_UpsKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -291,8 +295,8 @@ protected class AnotherSuperMain_NameAssignment_1 extends AssignmentToken  {
 			case 0: return new AnotherSuperMain_UpsKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -336,13 +340,15 @@ protected class SuperMain_Group extends GroupToken {
 			case 0: return new SuperMain_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getSuperMainRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getSuperMainRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "super"
@@ -362,8 +368,8 @@ protected class SuperMain_SuperKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -384,8 +390,8 @@ protected class SuperMain_NameAssignment_1 extends AssignmentToken  {
 			case 0: return new SuperMain_SuperKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;

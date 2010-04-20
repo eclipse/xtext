@@ -87,13 +87,15 @@ protected class Model_Group extends GroupToken {
 			case 0: return new Model_Alternatives_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getModelAccess().getModelAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // {Model}
@@ -113,12 +115,10 @@ protected class Model_ModelAction_0 extends ActionToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getModelAccess().getModelAction_0().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -167,8 +167,8 @@ protected class Model_Alternatives_1 extends AlternativesToken {
 			case 16: return new Model_Group_1_16(parent, this, 16, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "1" (first?="a" & second?="b")
@@ -189,8 +189,8 @@ protected class Model_Group_1_0 extends GroupToken {
 			case 0: return new Model_UnorderedGroup_1_0_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "1"
@@ -211,8 +211,8 @@ protected class Model_DigitOneKeyword_1_0_0 extends KeywordToken  {
 			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // first?="a" & second?="b"
@@ -233,8 +233,8 @@ protected class Model_UnorderedGroup_1_0_1 extends UnorderedGroupToken {
 			case 0: return new Model_SecondAssignment_1_0_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // first?="a"
@@ -255,8 +255,8 @@ protected class Model_FirstAssignment_1_0_1_0 extends AssignmentToken  {
 			case 0: return new Model_DigitOneKeyword_1_0_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("first",false)) == null) return null;
@@ -289,8 +289,8 @@ protected class Model_SecondAssignment_1_0_1_1 extends AssignmentToken  {
 			case 0: return new Model_FirstAssignment_1_0_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("second",false)) == null) return null;
@@ -325,8 +325,8 @@ protected class Model_Group_1_1 extends GroupToken {
 			case 0: return new Model_UnorderedGroup_1_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "2"
@@ -347,8 +347,8 @@ protected class Model_DigitTwoKeyword_1_1_0 extends KeywordToken  {
 			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // first?="a" & second?="b" & third?="c" & forth?="d"
@@ -369,8 +369,8 @@ protected class Model_UnorderedGroup_1_1_1 extends UnorderedGroupToken {
 			case 0: return new Model_ForthAssignment_1_1_1_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // first?="a"
@@ -391,8 +391,8 @@ protected class Model_FirstAssignment_1_1_1_0 extends AssignmentToken  {
 			case 0: return new Model_DigitTwoKeyword_1_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("first",false)) == null) return null;
@@ -425,8 +425,8 @@ protected class Model_SecondAssignment_1_1_1_1 extends AssignmentToken  {
 			case 0: return new Model_FirstAssignment_1_1_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("second",false)) == null) return null;
@@ -459,8 +459,8 @@ protected class Model_ThirdAssignment_1_1_1_2 extends AssignmentToken  {
 			case 0: return new Model_SecondAssignment_1_1_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("third",false)) == null) return null;
@@ -493,8 +493,8 @@ protected class Model_ForthAssignment_1_1_1_3 extends AssignmentToken  {
 			case 0: return new Model_ThirdAssignment_1_1_1_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("forth",false)) == null) return null;
@@ -529,8 +529,8 @@ protected class Model_Group_1_2 extends GroupToken {
 			case 0: return new Model_UnorderedGroup_1_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "3"
@@ -551,8 +551,8 @@ protected class Model_DigitThreeKeyword_1_2_0 extends KeywordToken  {
 			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // first?="a"? & second?="b"?
@@ -574,8 +574,8 @@ protected class Model_UnorderedGroup_1_2_1 extends UnorderedGroupToken {
 			case 1: return new Model_FirstAssignment_1_2_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // first?="a"?
@@ -596,8 +596,8 @@ protected class Model_FirstAssignment_1_2_1_0 extends AssignmentToken  {
 			case 0: return new Model_DigitThreeKeyword_1_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("first",false)) == null) return null;
@@ -631,8 +631,8 @@ protected class Model_SecondAssignment_1_2_1_1 extends AssignmentToken  {
 			case 1: return new Model_DigitThreeKeyword_1_2_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("second",false)) == null) return null;
@@ -667,8 +667,8 @@ protected class Model_Group_1_3 extends GroupToken {
 			case 0: return new Model_UnorderedGroup_1_3_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "4"
@@ -689,8 +689,8 @@ protected class Model_DigitFourKeyword_1_3_0 extends KeywordToken  {
 			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // first?="a" & second?="b"?
@@ -712,8 +712,8 @@ protected class Model_UnorderedGroup_1_3_1 extends UnorderedGroupToken {
 			case 1: return new Model_FirstAssignment_1_3_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // first?="a"
@@ -734,8 +734,8 @@ protected class Model_FirstAssignment_1_3_1_0 extends AssignmentToken  {
 			case 0: return new Model_DigitFourKeyword_1_3_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("first",false)) == null) return null;
@@ -768,8 +768,8 @@ protected class Model_SecondAssignment_1_3_1_1 extends AssignmentToken  {
 			case 0: return new Model_FirstAssignment_1_3_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("second",false)) == null) return null;
@@ -804,8 +804,8 @@ protected class Model_Group_1_4 extends GroupToken {
 			case 0: return new Model_UnorderedGroup_1_4_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "5"
@@ -826,8 +826,8 @@ protected class Model_DigitFiveKeyword_1_4_0 extends KeywordToken  {
 			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // first?="a"? & second?="b"
@@ -848,8 +848,8 @@ protected class Model_UnorderedGroup_1_4_1 extends UnorderedGroupToken {
 			case 0: return new Model_SecondAssignment_1_4_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // first?="a"?
@@ -870,8 +870,8 @@ protected class Model_FirstAssignment_1_4_1_0 extends AssignmentToken  {
 			case 0: return new Model_DigitFiveKeyword_1_4_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("first",false)) == null) return null;
@@ -905,8 +905,8 @@ protected class Model_SecondAssignment_1_4_1_1 extends AssignmentToken  {
 			case 1: return new Model_DigitFiveKeyword_1_4_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("second",false)) == null) return null;
@@ -941,8 +941,8 @@ protected class Model_Group_1_5 extends GroupToken {
 			case 0: return new Model_UnorderedGroup_1_5_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "6"
@@ -963,8 +963,8 @@ protected class Model_DigitSixKeyword_1_5_0 extends KeywordToken  {
 			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // firstAsList+="a"+ & secondAsList+="b"*
@@ -986,8 +986,8 @@ protected class Model_UnorderedGroup_1_5_1 extends UnorderedGroupToken {
 			case 1: return new Model_FirstAsListAssignment_1_5_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // firstAsList+="a"+
@@ -1009,8 +1009,8 @@ protected class Model_FirstAsListAssignment_1_5_1_0 extends AssignmentToken  {
 			case 1: return new Model_DigitSixKeyword_1_5_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("firstAsList",false)) == null) return null;
@@ -1044,8 +1044,8 @@ protected class Model_SecondAsListAssignment_1_5_1_1 extends AssignmentToken  {
 			case 1: return new Model_FirstAsListAssignment_1_5_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("secondAsList",false)) == null) return null;
@@ -1080,8 +1080,8 @@ protected class Model_Group_1_6 extends GroupToken {
 			case 0: return new Model_UnorderedGroup_1_6_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "7"
@@ -1102,8 +1102,8 @@ protected class Model_DigitSevenKeyword_1_6_0 extends KeywordToken  {
 			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // firstAsList+="a"* & secondAsList+="b"+
@@ -1124,8 +1124,8 @@ protected class Model_UnorderedGroup_1_6_1 extends UnorderedGroupToken {
 			case 0: return new Model_SecondAsListAssignment_1_6_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // firstAsList+="a"*
@@ -1147,8 +1147,8 @@ protected class Model_FirstAsListAssignment_1_6_1_0 extends AssignmentToken  {
 			case 1: return new Model_DigitSevenKeyword_1_6_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("firstAsList",false)) == null) return null;
@@ -1183,8 +1183,8 @@ protected class Model_SecondAsListAssignment_1_6_1_1 extends AssignmentToken  {
 			case 2: return new Model_DigitSevenKeyword_1_6_0(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("secondAsList",false)) == null) return null;
@@ -1219,8 +1219,8 @@ protected class Model_Group_1_7 extends GroupToken {
 			case 0: return new Model_UnorderedGroup_1_7_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "8"
@@ -1241,8 +1241,8 @@ protected class Model_DigitEightKeyword_1_7_0 extends KeywordToken  {
 			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "a" "b" first?="c" & "a" "b" second?="d"
@@ -1263,8 +1263,8 @@ protected class Model_UnorderedGroup_1_7_1 extends UnorderedGroupToken {
 			case 0: return new Model_Group_1_7_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "a" "b" first?="c"
@@ -1285,8 +1285,8 @@ protected class Model_Group_1_7_1_0 extends GroupToken {
 			case 0: return new Model_FirstAssignment_1_7_1_0_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "a"
@@ -1307,8 +1307,8 @@ protected class Model_AKeyword_1_7_1_0_0 extends KeywordToken  {
 			case 0: return new Model_DigitEightKeyword_1_7_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "b"
@@ -1329,8 +1329,8 @@ protected class Model_BKeyword_1_7_1_0_1 extends KeywordToken  {
 			case 0: return new Model_AKeyword_1_7_1_0_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // first?="c"
@@ -1351,8 +1351,8 @@ protected class Model_FirstAssignment_1_7_1_0_2 extends AssignmentToken  {
 			case 0: return new Model_BKeyword_1_7_1_0_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("first",true)) == null) return null;
@@ -1386,8 +1386,8 @@ protected class Model_Group_1_7_1_1 extends GroupToken {
 			case 0: return new Model_SecondAssignment_1_7_1_1_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "a"
@@ -1408,8 +1408,8 @@ protected class Model_AKeyword_1_7_1_1_0 extends KeywordToken  {
 			case 0: return new Model_Group_1_7_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "b"
@@ -1430,8 +1430,8 @@ protected class Model_BKeyword_1_7_1_1_1 extends KeywordToken  {
 			case 0: return new Model_AKeyword_1_7_1_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // second?="d"
@@ -1452,8 +1452,8 @@ protected class Model_SecondAssignment_1_7_1_1_2 extends AssignmentToken  {
 			case 0: return new Model_BKeyword_1_7_1_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("second",true)) == null) return null;
@@ -1489,8 +1489,8 @@ protected class Model_Group_1_8 extends GroupToken {
 			case 0: return new Model_UnorderedGroup_1_8_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "9"
@@ -1511,8 +1511,8 @@ protected class Model_DigitNineKeyword_1_8_0 extends KeywordToken  {
 			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // (firstAsList+="a" & secondAsList+="b")+
@@ -1533,8 +1533,8 @@ protected class Model_UnorderedGroup_1_8_1 extends UnorderedGroupToken {
 			case 0: return new Model_SecondAsListAssignment_1_8_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // firstAsList+="a"
@@ -1556,8 +1556,8 @@ protected class Model_FirstAsListAssignment_1_8_1_0 extends AssignmentToken  {
 			case 1: return new Model_DigitNineKeyword_1_8_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("firstAsList",false)) == null) return null;
@@ -1590,8 +1590,8 @@ protected class Model_SecondAsListAssignment_1_8_1_1 extends AssignmentToken  {
 			case 0: return new Model_FirstAsListAssignment_1_8_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("secondAsList",false)) == null) return null;
@@ -1627,8 +1627,8 @@ protected class Model_Group_1_9 extends GroupToken {
 			case 1: return new Model_DigitOneDigitZeroKeyword_1_9_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "10"
@@ -1649,8 +1649,8 @@ protected class Model_DigitOneDigitZeroKeyword_1_9_0 extends KeywordToken  {
 			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // (firstAsList+="a" & secondAsList+="b")*
@@ -1671,8 +1671,8 @@ protected class Model_UnorderedGroup_1_9_1 extends UnorderedGroupToken {
 			case 0: return new Model_SecondAsListAssignment_1_9_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // firstAsList+="a"
@@ -1694,8 +1694,8 @@ protected class Model_FirstAsListAssignment_1_9_1_0 extends AssignmentToken  {
 			case 1: return new Model_DigitOneDigitZeroKeyword_1_9_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("firstAsList",false)) == null) return null;
@@ -1728,8 +1728,8 @@ protected class Model_SecondAsListAssignment_1_9_1_1 extends AssignmentToken  {
 			case 0: return new Model_FirstAsListAssignment_1_9_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("secondAsList",false)) == null) return null;
@@ -1765,8 +1765,8 @@ protected class Model_Group_1_10 extends GroupToken {
 			case 1: return new Model_DigitOneDigitOneKeyword_1_10_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "11"
@@ -1787,8 +1787,8 @@ protected class Model_DigitOneDigitOneKeyword_1_10_0 extends KeywordToken  {
 			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // (first?="a" & second?="b")?
@@ -1809,8 +1809,8 @@ protected class Model_UnorderedGroup_1_10_1 extends UnorderedGroupToken {
 			case 0: return new Model_SecondAssignment_1_10_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // first?="a"
@@ -1831,8 +1831,8 @@ protected class Model_FirstAssignment_1_10_1_0 extends AssignmentToken  {
 			case 0: return new Model_DigitOneDigitOneKeyword_1_10_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("first",false)) == null) return null;
@@ -1865,8 +1865,8 @@ protected class Model_SecondAssignment_1_10_1_1 extends AssignmentToken  {
 			case 0: return new Model_FirstAssignment_1_10_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("second",false)) == null) return null;
@@ -1901,8 +1901,8 @@ protected class Model_Group_1_11 extends GroupToken {
 			case 0: return new Model_UnorderedGroup_1_11_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "12"
@@ -1923,8 +1923,8 @@ protected class Model_DigitOneDigitTwoKeyword_1_11_0 extends KeywordToken  {
 			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // firstAsList+="a" & secondAsList+="b"
@@ -1945,8 +1945,8 @@ protected class Model_UnorderedGroup_1_11_1 extends UnorderedGroupToken {
 			case 0: return new Model_SecondAsListAssignment_1_11_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // firstAsList+="a"
@@ -1967,8 +1967,8 @@ protected class Model_FirstAsListAssignment_1_11_1_0 extends AssignmentToken  {
 			case 0: return new Model_DigitOneDigitTwoKeyword_1_11_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("firstAsList",false)) == null) return null;
@@ -2001,8 +2001,8 @@ protected class Model_SecondAsListAssignment_1_11_1_1 extends AssignmentToken  {
 			case 0: return new Model_FirstAsListAssignment_1_11_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("secondAsList",false)) == null) return null;
@@ -2036,8 +2036,8 @@ protected class Model_UnorderedGroup_1_11_2 extends UnorderedGroupToken {
 			case 0: return new Model_SecondAsListAssignment_1_11_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // firstAsList+="a"
@@ -2058,8 +2058,8 @@ protected class Model_FirstAsListAssignment_1_11_2_0 extends AssignmentToken  {
 			case 0: return new Model_UnorderedGroup_1_11_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("firstAsList",false)) == null) return null;
@@ -2092,8 +2092,8 @@ protected class Model_SecondAsListAssignment_1_11_2_1 extends AssignmentToken  {
 			case 0: return new Model_FirstAsListAssignment_1_11_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("secondAsList",false)) == null) return null;
@@ -2128,8 +2128,8 @@ protected class Model_Group_1_12 extends GroupToken {
 			case 0: return new Model_SecondAsListAssignment_1_12_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "13"
@@ -2150,8 +2150,8 @@ protected class Model_DigitOneDigitThreeKeyword_1_12_0 extends KeywordToken  {
 			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // (firstAsList+="a" & secondAsList+="b")?
@@ -2172,8 +2172,8 @@ protected class Model_UnorderedGroup_1_12_1 extends UnorderedGroupToken {
 			case 0: return new Model_SecondAsListAssignment_1_12_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // firstAsList+="a"
@@ -2194,8 +2194,8 @@ protected class Model_FirstAsListAssignment_1_12_1_0 extends AssignmentToken  {
 			case 0: return new Model_DigitOneDigitThreeKeyword_1_12_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("firstAsList",false)) == null) return null;
@@ -2228,8 +2228,8 @@ protected class Model_SecondAsListAssignment_1_12_1_1 extends AssignmentToken  {
 			case 0: return new Model_FirstAsListAssignment_1_12_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("secondAsList",false)) == null) return null;
@@ -2264,8 +2264,8 @@ protected class Model_FirstAsListAssignment_1_12_2 extends AssignmentToken  {
 			case 1: return new Model_DigitOneDigitThreeKeyword_1_12_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("firstAsList",true)) == null) return null;
@@ -2298,8 +2298,8 @@ protected class Model_SecondAsListAssignment_1_12_3 extends AssignmentToken  {
 			case 0: return new Model_FirstAsListAssignment_1_12_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("secondAsList",true)) == null) return null;
@@ -2333,8 +2333,8 @@ protected class Model_Group_1_13 extends GroupToken {
 			case 0: return new Model_UnorderedGroup_1_13_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "14"
@@ -2355,8 +2355,8 @@ protected class Model_DigitOneDigitFourKeyword_1_13_0 extends KeywordToken  {
 			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))+
@@ -2377,8 +2377,8 @@ protected class Model_UnorderedGroup_1_13_1 extends UnorderedGroupToken {
 			case 0: return new Model_UnorderedGroup_1_13_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // firstAsList+="a" & secondAsList+="b"
@@ -2399,8 +2399,8 @@ protected class Model_UnorderedGroup_1_13_1_0 extends UnorderedGroupToken {
 			case 0: return new Model_SecondAsListAssignment_1_13_1_0_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // firstAsList+="a"
@@ -2422,8 +2422,8 @@ protected class Model_FirstAsListAssignment_1_13_1_0_0 extends AssignmentToken  
 			case 1: return new Model_DigitOneDigitFourKeyword_1_13_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("firstAsList",false)) == null) return null;
@@ -2456,8 +2456,8 @@ protected class Model_SecondAsListAssignment_1_13_1_0_1 extends AssignmentToken 
 			case 0: return new Model_FirstAsListAssignment_1_13_1_0_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("secondAsList",false)) == null) return null;
@@ -2491,8 +2491,8 @@ protected class Model_UnorderedGroup_1_13_1_1 extends UnorderedGroupToken {
 			case 0: return new Model_ForthAsListAssignment_1_13_1_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // thirdAsList+="c"
@@ -2513,8 +2513,8 @@ protected class Model_ThirdAsListAssignment_1_13_1_1_0 extends AssignmentToken  
 			case 0: return new Model_UnorderedGroup_1_13_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("thirdAsList",false)) == null) return null;
@@ -2547,8 +2547,8 @@ protected class Model_ForthAsListAssignment_1_13_1_1_1 extends AssignmentToken  
 			case 0: return new Model_ThirdAsListAssignment_1_13_1_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("forthAsList",false)) == null) return null;
@@ -2584,8 +2584,8 @@ protected class Model_Group_1_14 extends GroupToken {
 			case 0: return new Model_ValueAssignment_1_14_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "datatypes"
@@ -2606,8 +2606,8 @@ protected class Model_DatatypesKeyword_1_14_0 extends KeywordToken  {
 			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // value=UnorderedDatatype
@@ -2628,8 +2628,8 @@ protected class Model_ValueAssignment_1_14_1 extends AssignmentToken  {
 			case 0: return new Model_DatatypesKeyword_1_14_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
@@ -2663,8 +2663,8 @@ protected class Model_Group_1_15 extends GroupToken {
 			case 0: return new Model_SerializedAssignment_1_15_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "serialization"
@@ -2685,8 +2685,8 @@ protected class Model_SerializationKeyword_1_15_0 extends KeywordToken  {
 			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // serialized=UnorderedSerialization
@@ -2707,8 +2707,8 @@ protected class Model_SerializedAssignment_1_15_1 extends AssignmentToken  {
 			case 0: return new UnorderedSerialization_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("serialized",true)) == null) return null;
@@ -2755,8 +2755,8 @@ protected class Model_Group_1_16 extends GroupToken {
 			case 1: return new Model_Bug302585Keyword_1_16_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "bug302585"
@@ -2777,8 +2777,8 @@ protected class Model_Bug302585Keyword_1_16_0 extends KeywordToken  {
 			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // nestedModel+=NestedModel*
@@ -2799,8 +2799,8 @@ protected class Model_NestedModelAssignment_1_16_1 extends AssignmentToken  {
 			case 0: return new NestedModel_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("nestedModel",false)) == null) return null;
@@ -2859,13 +2859,15 @@ protected class NestedModel_Group extends GroupToken {
 			case 0: return new NestedModel_NestedKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getNestedModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getNestedModelAccess().getNestedModelAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // {NestedModel}
@@ -2885,12 +2887,10 @@ protected class NestedModel_NestedModelAction_0 extends ActionToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getNestedModelAccess().getNestedModelAction_0().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -2914,8 +2914,8 @@ protected class NestedModel_UnorderedGroup_1 extends UnorderedGroupToken {
 			case 0: return new NestedModel_SecondAssignment_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // first?="a"
@@ -2936,8 +2936,8 @@ protected class NestedModel_FirstAssignment_1_0 extends AssignmentToken  {
 			case 0: return new NestedModel_NestedModelAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("first",false)) == null) return null;
@@ -2970,8 +2970,8 @@ protected class NestedModel_SecondAssignment_1_1 extends AssignmentToken  {
 			case 0: return new NestedModel_FirstAssignment_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("second",false)) == null) return null;
@@ -3006,8 +3006,8 @@ protected class NestedModel_NestedKeyword_2 extends KeywordToken  {
 			case 1: return new NestedModel_NestedModelAction_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -3042,13 +3042,15 @@ protected class UnorderedSerialization_Group extends GroupToken {
 			case 0: return new UnorderedSerialization_Alternatives_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getUnorderedSerializationRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getUnorderedSerializationAccess().getUnorderedSerializationAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // {UnorderedSerialization}
@@ -3068,12 +3070,10 @@ protected class UnorderedSerialization_UnorderedSerializationAction_0 extends Ac
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getUnorderedSerializationAccess().getUnorderedSerializationAction_0().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -3100,8 +3100,8 @@ protected class UnorderedSerialization_Alternatives_1 extends AlternativesToken 
 			case 2: return new UnorderedSerialization_Group_1_2(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "1" first?="a"? & second?="b"? & third?="c"? & forth?="d"?
@@ -3125,8 +3125,8 @@ protected class UnorderedSerialization_UnorderedGroup_1_0 extends UnorderedGroup
 			case 3: return new UnorderedSerialization_Group_1_0_0(parent, this, 3, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "1" first?="a"?
@@ -3148,8 +3148,8 @@ protected class UnorderedSerialization_Group_1_0_0 extends GroupToken {
 			case 1: return new UnorderedSerialization_DigitOneKeyword_1_0_0_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "1"
@@ -3170,8 +3170,8 @@ protected class UnorderedSerialization_DigitOneKeyword_1_0_0_0 extends KeywordTo
 			case 0: return new UnorderedSerialization_UnorderedSerializationAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // first?="a"?
@@ -3192,8 +3192,8 @@ protected class UnorderedSerialization_FirstAssignment_1_0_0_1 extends Assignmen
 			case 0: return new UnorderedSerialization_DigitOneKeyword_1_0_0_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("first",false)) == null) return null;
@@ -3227,8 +3227,8 @@ protected class UnorderedSerialization_SecondAssignment_1_0_1 extends Assignment
 			case 0: return new UnorderedSerialization_Group_1_0_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("second",false)) == null) return null;
@@ -3262,8 +3262,8 @@ protected class UnorderedSerialization_ThirdAssignment_1_0_2 extends AssignmentT
 			case 1: return new UnorderedSerialization_Group_1_0_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("third",false)) == null) return null;
@@ -3298,8 +3298,8 @@ protected class UnorderedSerialization_ForthAssignment_1_0_3 extends AssignmentT
 			case 2: return new UnorderedSerialization_Group_1_0_0(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("forth",false)) == null) return null;
@@ -3334,8 +3334,8 @@ protected class UnorderedSerialization_Group_1_1 extends GroupToken {
 			case 1: return new UnorderedSerialization_DigitTwoKeyword_1_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "2"
@@ -3356,8 +3356,8 @@ protected class UnorderedSerialization_DigitTwoKeyword_1_1_0 extends KeywordToke
 			case 0: return new UnorderedSerialization_UnorderedSerializationAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // (firstAsList+="a" & secondAsList+="b")*
@@ -3378,8 +3378,8 @@ protected class UnorderedSerialization_UnorderedGroup_1_1_1 extends UnorderedGro
 			case 0: return new UnorderedSerialization_SecondAsListAssignment_1_1_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // firstAsList+="a"
@@ -3401,8 +3401,8 @@ protected class UnorderedSerialization_FirstAsListAssignment_1_1_1_0 extends Ass
 			case 1: return new UnorderedSerialization_DigitTwoKeyword_1_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("firstAsList",false)) == null) return null;
@@ -3435,8 +3435,8 @@ protected class UnorderedSerialization_SecondAsListAssignment_1_1_1_1 extends As
 			case 0: return new UnorderedSerialization_FirstAsListAssignment_1_1_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("secondAsList",false)) == null) return null;
@@ -3472,8 +3472,8 @@ protected class UnorderedSerialization_Group_1_2 extends GroupToken {
 			case 1: return new UnorderedSerialization_DigitThreeKeyword_1_2_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "3"
@@ -3494,8 +3494,8 @@ protected class UnorderedSerialization_DigitThreeKeyword_1_2_0 extends KeywordTo
 			case 0: return new UnorderedSerialization_UnorderedSerializationAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // (firstAsList+="a"+ & second?="b")*
@@ -3516,8 +3516,8 @@ protected class UnorderedSerialization_UnorderedGroup_1_2_1 extends UnorderedGro
 			case 0: return new UnorderedSerialization_SecondAssignment_1_2_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // firstAsList+="a"+
@@ -3540,8 +3540,8 @@ protected class UnorderedSerialization_FirstAsListAssignment_1_2_1_0 extends Ass
 			case 2: return new UnorderedSerialization_DigitThreeKeyword_1_2_0(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("firstAsList",false)) == null) return null;
@@ -3574,8 +3574,8 @@ protected class UnorderedSerialization_SecondAssignment_1_2_1_1 extends Assignme
 			case 0: return new UnorderedSerialization_FirstAsListAssignment_1_2_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("second",false)) == null) return null;

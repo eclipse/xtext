@@ -68,13 +68,8 @@ protected class Main_ElementsAssignment extends AssignmentToken  {
 			case 0: return new Element_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getMainRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("elements",false)) == null) return null;
@@ -129,13 +124,15 @@ protected class Element_Group extends GroupToken {
 			case 0: return new Element_RightCurlyBracketKeyword_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getElementRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // name=ID
@@ -155,8 +152,8 @@ protected class Element_NameAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -189,8 +186,8 @@ protected class Element_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 			case 0: return new Element_NameAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // contained+=Element*
@@ -211,8 +208,8 @@ protected class Element_ContainedAssignment_2 extends AssignmentToken  {
 			case 0: return new Element_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("contained",false)) == null) return null;
@@ -258,8 +255,8 @@ protected class Element_Group_3 extends GroupToken {
 			case 0: return new Element_ReferencedAssignment_3_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "ref"
@@ -282,8 +279,8 @@ protected class Element_RefKeyword_3_0 extends KeywordToken  {
 			case 2: return new Element_LeftCurlyBracketKeyword_1(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // referenced+=[Element]
@@ -304,8 +301,8 @@ protected class Element_ReferencedAssignment_3_1 extends AssignmentToken  {
 			case 0: return new Element_RefKeyword_3_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("referenced",false)) == null) return null;
@@ -344,8 +341,8 @@ protected class Element_RightCurlyBracketKeyword_4 extends KeywordToken  {
 			case 2: return new Element_LeftCurlyBracketKeyword_1(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 

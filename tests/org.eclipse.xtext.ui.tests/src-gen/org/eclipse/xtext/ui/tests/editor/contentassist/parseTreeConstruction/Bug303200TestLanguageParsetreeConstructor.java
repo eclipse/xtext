@@ -74,18 +74,19 @@ protected class Program_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Program_LTTerminalRuleCall_2(parent, this, 0, inst);
-			case 1: return new Program_Group_1(parent, this, 1, inst);
-			case 2: return new Program_ProgramAction_0(parent, this, 2, inst);
+			case 0: return new Program_Group_1(parent, this, 0, inst);
+			case 1: return new Program_ProgramAction_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getProgramRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getProgramAccess().getProgramAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // {Program}
@@ -105,12 +106,10 @@ protected class Program_ProgramAction_0 extends ActionToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getProgramAccess().getProgramAction_0().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -134,32 +133,8 @@ protected class Program_Group_1 extends GroupToken {
 			case 0: return new Program_DirectivesAssignment_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-}
-
-// LT*
-protected class Program_LTTerminalRuleCall_1_0 extends UnassignedTextToken {
-
-	public Program_LTTerminalRuleCall_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getProgramAccess().getLTTerminalRuleCall_1_0();
 	}
 
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Program_LTTerminalRuleCall_1_0(parent, this, 0, inst);
-			case 1: return new Program_Group_1(parent, this, 1, inst);
-			case 2: return new Program_ProgramAction_0(parent, this, 2, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 // directives+=ProgramDirective
@@ -180,8 +155,8 @@ protected class Program_DirectivesAssignment_1_1 extends AssignmentToken  {
 			case 0: return new ProgramDirective_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("directives",false)) == null) return null;
@@ -202,38 +177,13 @@ protected class Program_DirectivesAssignment_1_1 extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Program_LTTerminalRuleCall_1_0(parent, next, actIndex, consumed);
-			case 1: return new Program_Group_1(parent, next, actIndex, consumed);
-			case 2: return new Program_ProgramAction_0(parent, next, actIndex, consumed);
+			case 0: return new Program_Group_1(parent, next, actIndex, consumed);
+			case 1: return new Program_ProgramAction_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
-
-// LT*
-protected class Program_LTTerminalRuleCall_2 extends UnassignedTextToken {
-
-	public Program_LTTerminalRuleCall_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getProgramAccess().getLTTerminalRuleCall_2();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Program_LTTerminalRuleCall_2(parent, this, 0, inst);
-			case 1: return new Program_Group_1(parent, this, 1, inst);
-			case 2: return new Program_ProgramAction_0(parent, this, 2, inst);
-			default: return null;
-		}	
-	}	
-		
-}
 
 
 /************ end Rule Program ****************/
@@ -265,13 +215,17 @@ protected class ProgramDirective_Alternatives extends AlternativesToken {
 			case 1: return new ProgramDirective_StatementParserRuleCall_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getProgramDirectiveRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getStatementAccess().getExpressionStatementAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getFunctionDefinitionRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getBlockAccess().getBlockAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // FunctionDefinition
@@ -292,12 +246,18 @@ protected class ProgramDirective_FunctionDefinitionParserRuleCall_0 extends Rule
 			case 0: return new FunctionDefinition_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getFunctionDefinitionRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(FunctionDefinition_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getFunctionDefinitionRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -327,12 +287,19 @@ protected class ProgramDirective_StatementParserRuleCall_1 extends RuleCallToken
 			case 0: return new Statement_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getStatementAccess().getExpressionStatementAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getBlockAccess().getBlockAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Statement_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getStatementRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -373,13 +340,15 @@ protected class FunctionDefinition_Group extends GroupToken {
 			case 0: return new FunctionDefinition_BodyAssignment_7(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getFunctionDefinitionRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getFunctionDefinitionRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // attributes+=Attribute*
@@ -400,8 +369,8 @@ protected class FunctionDefinition_AttributesAssignment_0 extends AssignmentToke
 			case 0: return new Attribute_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attributes",false)) == null) return null;
@@ -446,31 +415,8 @@ protected class FunctionDefinition_FunctionKeyword_1 extends KeywordToken  {
 			case 0: return new FunctionDefinition_AttributesAssignment_0(parent, this, 0, inst);
 			default: return parent.createParentFollower(this, index, index - 1, inst);
 		}	
-	}	
-		
-}
-
-// LT*
-protected class FunctionDefinition_LTTerminalRuleCall_2 extends UnassignedTextToken {
-
-	public FunctionDefinition_LTTerminalRuleCall_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getFunctionDefinitionAccess().getLTTerminalRuleCall_2();
 	}
 
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new FunctionDefinition_LTTerminalRuleCall_2(parent, this, 0, inst);
-			case 1: return new FunctionDefinition_FunctionKeyword_1(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 // name=ID
@@ -488,12 +434,11 @@ protected class FunctionDefinition_NameAssignment_3 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new FunctionDefinition_LTTerminalRuleCall_2(parent, this, 0, inst);
-			case 1: return new FunctionDefinition_FunctionKeyword_1(parent, this, 1, inst);
+			case 0: return new FunctionDefinition_FunctionKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -506,29 +451,6 @@ protected class FunctionDefinition_NameAssignment_3 extends AssignmentToken  {
 		return null;
 	}
 
-}
-
-// LT*
-protected class FunctionDefinition_LTTerminalRuleCall_4 extends UnassignedTextToken {
-
-	public FunctionDefinition_LTTerminalRuleCall_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getFunctionDefinitionAccess().getLTTerminalRuleCall_4();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new FunctionDefinition_LTTerminalRuleCall_4(parent, this, 0, inst);
-			case 1: return new FunctionDefinition_NameAssignment_3(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 // params=Parameters
@@ -549,8 +471,8 @@ protected class FunctionDefinition_ParamsAssignment_5 extends AssignmentToken  {
 			case 0: return new Parameters_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("params",true)) == null) return null;
@@ -571,34 +493,10 @@ protected class FunctionDefinition_ParamsAssignment_5 extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new FunctionDefinition_LTTerminalRuleCall_4(parent, next, actIndex, consumed);
-			case 1: return new FunctionDefinition_NameAssignment_3(parent, next, actIndex, consumed);
+			case 0: return new FunctionDefinition_NameAssignment_3(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
-}
-
-// LT*
-protected class FunctionDefinition_LTTerminalRuleCall_6 extends UnassignedTextToken {
-
-	public FunctionDefinition_LTTerminalRuleCall_6(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getFunctionDefinitionAccess().getLTTerminalRuleCall_6();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new FunctionDefinition_LTTerminalRuleCall_6(parent, this, 0, inst);
-			case 1: return new FunctionDefinition_ParamsAssignment_5(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 // body=Block
@@ -619,8 +517,8 @@ protected class FunctionDefinition_BodyAssignment_7 extends AssignmentToken  {
 			case 0: return new Block_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("body",true)) == null) return null;
@@ -641,8 +539,7 @@ protected class FunctionDefinition_BodyAssignment_7 extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new FunctionDefinition_LTTerminalRuleCall_6(parent, next, actIndex, consumed);
-			case 1: return new FunctionDefinition_ParamsAssignment_5(parent, next, actIndex, consumed);
+			case 0: return new FunctionDefinition_ParamsAssignment_5(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -678,13 +575,16 @@ protected class Attribute_Alternatives extends AlternativesToken {
 			case 1: return new Attribute_Group_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAttributeRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getAttributeRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAttributeAccess().getBracketAttributeAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // ident=ID
@@ -704,8 +604,15 @@ protected class Attribute_IdentAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getAttributeRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ident",true)) == null) return null;
@@ -738,8 +645,15 @@ protected class Attribute_Group_1 extends GroupToken {
 			case 0: return new Attribute_RightSquareBracketKeyword_1_5(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getAttributeAccess().getBracketAttributeAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {BracketAttribute}
@@ -759,12 +673,10 @@ protected class Attribute_BracketAttributeAction_1_0 extends ActionToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getAttributeAccess().getBracketAttributeAction_1_0().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -788,31 +700,8 @@ protected class Attribute_LeftSquareBracketKeyword_1_1 extends KeywordToken  {
 			case 0: return new Attribute_BracketAttributeAction_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-}
-
-// LT*
-protected class Attribute_LTTerminalRuleCall_1_2 extends UnassignedTextToken {
-
-	public Attribute_LTTerminalRuleCall_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getAttributeAccess().getLTTerminalRuleCall_1_2();
 	}
 
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Attribute_LTTerminalRuleCall_1_2(parent, this, 0, inst);
-			case 1: return new Attribute_LeftSquareBracketKeyword_1_1(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 // expression=PostfixExpression
@@ -833,8 +722,8 @@ protected class Attribute_ExpressionAssignment_1_3 extends AssignmentToken  {
 			case 0: return new PostfixExpression_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("expression",true)) == null) return null;
@@ -855,34 +744,10 @@ protected class Attribute_ExpressionAssignment_1_3 extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Attribute_LTTerminalRuleCall_1_2(parent, next, actIndex, consumed);
-			case 1: return new Attribute_LeftSquareBracketKeyword_1_1(parent, next, actIndex, consumed);
+			case 0: return new Attribute_LeftSquareBracketKeyword_1_1(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
-}
-
-// LT*
-protected class Attribute_LTTerminalRuleCall_1_4 extends UnassignedTextToken {
-
-	public Attribute_LTTerminalRuleCall_1_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getAttributeAccess().getLTTerminalRuleCall_1_4();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Attribute_LTTerminalRuleCall_1_4(parent, this, 0, inst);
-			case 1: return new Attribute_ExpressionAssignment_1_3(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 // "]"
@@ -900,12 +765,11 @@ protected class Attribute_RightSquareBracketKeyword_1_5 extends KeywordToken  {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Attribute_LTTerminalRuleCall_1_4(parent, this, 0, inst);
-			case 1: return new Attribute_ExpressionAssignment_1_3(parent, this, 1, inst);
+			case 0: return new Attribute_ExpressionAssignment_1_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -938,13 +802,15 @@ protected class Parameters_Group extends GroupToken {
 			case 0: return new Parameters_RightParenthesisKeyword_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getParametersRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getParametersAccess().getParametersAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // {Parameters}
@@ -964,12 +830,10 @@ protected class Parameters_ParametersAction_0 extends ActionToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getParametersAccess().getParametersAction_0().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -993,31 +857,8 @@ protected class Parameters_LeftParenthesisKeyword_1 extends KeywordToken  {
 			case 0: return new Parameters_ParametersAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-}
-
-// LT*
-protected class Parameters_LTTerminalRuleCall_2 extends UnassignedTextToken {
-
-	public Parameters_LTTerminalRuleCall_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getParametersAccess().getLTTerminalRuleCall_2();
 	}
 
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Parameters_LTTerminalRuleCall_2(parent, this, 0, inst);
-			case 1: return new Parameters_LeftParenthesisKeyword_1(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 // (params+=ID LT* ("," LT* params+=ID LT*)*)?
@@ -1036,12 +877,11 @@ protected class Parameters_Group_3 extends GroupToken {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Parameters_Group_3_2(parent, this, 0, inst);
-			case 1: return new Parameters_LTTerminalRuleCall_3_1(parent, this, 1, inst);
-			case 2: return new Parameters_ParamsAssignment_3_0(parent, this, 2, inst);
+			case 1: return new Parameters_ParamsAssignment_3_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // params+=ID
@@ -1059,12 +899,11 @@ protected class Parameters_ParamsAssignment_3_0 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Parameters_LTTerminalRuleCall_2(parent, this, 0, inst);
-			case 1: return new Parameters_LeftParenthesisKeyword_1(parent, this, 1, inst);
+			case 0: return new Parameters_LeftParenthesisKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("params",true)) == null) return null;
@@ -1077,29 +916,6 @@ protected class Parameters_ParamsAssignment_3_0 extends AssignmentToken  {
 		return null;
 	}
 
-}
-
-// LT*
-protected class Parameters_LTTerminalRuleCall_3_1 extends UnassignedTextToken {
-
-	public Parameters_LTTerminalRuleCall_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getParametersAccess().getLTTerminalRuleCall_3_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Parameters_LTTerminalRuleCall_3_1(parent, this, 0, inst);
-			case 1: return new Parameters_ParamsAssignment_3_0(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 // ("," LT* params+=ID LT*)*
@@ -1117,12 +933,11 @@ protected class Parameters_Group_3_2 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Parameters_LTTerminalRuleCall_3_2_3(parent, this, 0, inst);
-			case 1: return new Parameters_ParamsAssignment_3_2_2(parent, this, 1, inst);
+			case 0: return new Parameters_ParamsAssignment_3_2_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // ","
@@ -1141,35 +956,11 @@ protected class Parameters_CommaKeyword_3_2_0 extends KeywordToken  {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Parameters_Group_3_2(parent, this, 0, inst);
-			case 1: return new Parameters_LTTerminalRuleCall_3_1(parent, this, 1, inst);
-			case 2: return new Parameters_ParamsAssignment_3_0(parent, this, 2, inst);
+			case 1: return new Parameters_ParamsAssignment_3_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
-}
-
-// LT*
-protected class Parameters_LTTerminalRuleCall_3_2_1 extends UnassignedTextToken {
-
-	public Parameters_LTTerminalRuleCall_3_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getParametersAccess().getLTTerminalRuleCall_3_2_1();
 	}
 
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Parameters_LTTerminalRuleCall_3_2_1(parent, this, 0, inst);
-			case 1: return new Parameters_CommaKeyword_3_2_0(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 // params+=ID
@@ -1187,12 +978,11 @@ protected class Parameters_ParamsAssignment_3_2_2 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Parameters_LTTerminalRuleCall_3_2_1(parent, this, 0, inst);
-			case 1: return new Parameters_CommaKeyword_3_2_0(parent, this, 1, inst);
+			case 0: return new Parameters_CommaKeyword_3_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("params",false)) == null) return null;
@@ -1205,29 +995,6 @@ protected class Parameters_ParamsAssignment_3_2_2 extends AssignmentToken  {
 		return null;
 	}
 
-}
-
-// LT*
-protected class Parameters_LTTerminalRuleCall_3_2_3 extends UnassignedTextToken {
-
-	public Parameters_LTTerminalRuleCall_3_2_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getParametersAccess().getLTTerminalRuleCall_3_2_3();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Parameters_LTTerminalRuleCall_3_2_3(parent, this, 0, inst);
-			case 1: return new Parameters_ParamsAssignment_3_2_2(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 
@@ -1248,12 +1015,11 @@ protected class Parameters_RightParenthesisKeyword_4 extends KeywordToken  {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Parameters_Group_3(parent, this, 0, inst);
-			case 1: return new Parameters_LTTerminalRuleCall_2(parent, this, 1, inst);
-			case 2: return new Parameters_LeftParenthesisKeyword_1(parent, this, 2, inst);
+			case 1: return new Parameters_LeftParenthesisKeyword_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -1285,13 +1051,15 @@ protected class Block_Group extends GroupToken {
 			case 0: return new Block_RightCurlyBracketKeyword_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getBlockRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getBlockAccess().getBlockAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // {Block}
@@ -1311,12 +1079,10 @@ protected class Block_BlockAction_0 extends ActionToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getBlockAccess().getBlockAction_0().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -1340,8 +1106,8 @@ protected class Block_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 			case 0: return new Block_BlockAction_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // (LT* directives+=Statement)*
@@ -1362,32 +1128,8 @@ protected class Block_Group_2 extends GroupToken {
 			case 0: return new Block_DirectivesAssignment_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-}
-
-// LT*
-protected class Block_LTTerminalRuleCall_2_0 extends UnassignedTextToken {
-
-	public Block_LTTerminalRuleCall_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getBlockAccess().getLTTerminalRuleCall_2_0();
 	}
 
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Block_LTTerminalRuleCall_2_0(parent, this, 0, inst);
-			case 1: return new Block_Group_2(parent, this, 1, inst);
-			case 2: return new Block_LeftCurlyBracketKeyword_1(parent, this, 2, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 // directives+=Statement
@@ -1408,8 +1150,8 @@ protected class Block_DirectivesAssignment_2_1 extends AssignmentToken  {
 			case 0: return new Statement_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("directives",false)) == null) return null;
@@ -1430,38 +1172,13 @@ protected class Block_DirectivesAssignment_2_1 extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Block_LTTerminalRuleCall_2_0(parent, next, actIndex, consumed);
-			case 1: return new Block_Group_2(parent, next, actIndex, consumed);
-			case 2: return new Block_LeftCurlyBracketKeyword_1(parent, next, actIndex, consumed);
+			case 0: return new Block_Group_2(parent, next, actIndex, consumed);
+			case 1: return new Block_LeftCurlyBracketKeyword_1(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
-
-// LT*
-protected class Block_LTTerminalRuleCall_3 extends UnassignedTextToken {
-
-	public Block_LTTerminalRuleCall_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getBlockAccess().getLTTerminalRuleCall_3();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Block_LTTerminalRuleCall_3(parent, this, 0, inst);
-			case 1: return new Block_Group_2(parent, this, 1, inst);
-			case 2: return new Block_LeftCurlyBracketKeyword_1(parent, this, 2, inst);
-			default: return null;
-		}	
-	}	
-		
-}
 
 // "}"
 protected class Block_RightCurlyBracketKeyword_4 extends KeywordToken  {
@@ -1478,13 +1195,12 @@ protected class Block_RightCurlyBracketKeyword_4 extends KeywordToken  {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Block_LTTerminalRuleCall_3(parent, this, 0, inst);
-			case 1: return new Block_Group_2(parent, this, 1, inst);
-			case 2: return new Block_LeftCurlyBracketKeyword_1(parent, this, 2, inst);
+			case 0: return new Block_Group_2(parent, this, 0, inst);
+			case 1: return new Block_LeftCurlyBracketKeyword_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -1517,13 +1233,16 @@ protected class Statement_Alternatives extends AlternativesToken {
 			case 1: return new Statement_Group_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getStatementRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getStatementAccess().getExpressionStatementAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getBlockAccess().getBlockAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // Block
@@ -1544,12 +1263,18 @@ protected class Statement_BlockParserRuleCall_0 extends RuleCallToken {
 			case 0: return new Block_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getBlockAccess().getBlockAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Block_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getBlockRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -1579,8 +1304,15 @@ protected class Statement_Group_1 extends GroupToken {
 			case 0: return new Statement_Alternatives_1_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getStatementAccess().getExpressionStatementAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {ExpressionStatement}
@@ -1600,12 +1332,10 @@ protected class Statement_ExpressionStatementAction_1_0 extends ActionToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getStatementAccess().getExpressionStatementAction_1_0().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -1629,8 +1359,8 @@ protected class Statement_ExpressionAssignment_1_1 extends AssignmentToken  {
 			case 0: return new PostfixExpression_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("expression",true)) == null) return null;
@@ -1673,11 +1403,10 @@ protected class Statement_Alternatives_1_2 extends AlternativesToken {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Statement_SemicolonKeyword_1_2_0(parent, this, 0, inst);
-			case 1: return new Statement_LTTerminalRuleCall_1_2_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // ";"
@@ -1698,30 +1427,8 @@ protected class Statement_SemicolonKeyword_1_2_0 extends KeywordToken  {
 			case 0: return new Statement_ExpressionAssignment_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-}
-
-// LT
-protected class Statement_LTTerminalRuleCall_1_2_1 extends UnassignedTextToken {
-
-	public Statement_LTTerminalRuleCall_1_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getStatementAccess().getLTTerminalRuleCall_1_2_1();
 	}
 
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Statement_ExpressionAssignment_1_1(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 
@@ -1760,13 +1467,18 @@ protected class PostfixExpression_Group extends GroupToken {
 			case 1: return new PostfixExpression_PrimaryExpressionParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getPostfixExpressionRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getFunctionExpressionAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getPostfixExpressionAccess().getPostfixExpressionExpressionAction_1_0_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getPostfixExpressionAccess().getInvocationExpressionAction_1_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getIdentifierAction_0_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // PrimaryExpression
@@ -1787,12 +1499,19 @@ protected class PostfixExpression_PrimaryExpressionParserRuleCall_0 extends Rule
 			case 0: return new PrimaryExpression_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getFunctionExpressionAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getIdentifierAction_0_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(PrimaryExpression_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getPrimaryExpressionRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -1824,8 +1543,16 @@ protected class PostfixExpression_Alternatives_1 extends AlternativesToken {
 			case 1: return new PostfixExpression_Group_1_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getPostfixExpressionAccess().getPostfixExpressionExpressionAction_1_0_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getPostfixExpressionAccess().getInvocationExpressionAction_1_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {PostfixExpression.expression=current} LT* property=PropertyOperator
@@ -1846,8 +1573,15 @@ protected class PostfixExpression_Group_1_0 extends GroupToken {
 			case 0: return new PostfixExpression_PropertyAssignment_1_0_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getPostfixExpressionAccess().getPostfixExpressionExpressionAction_1_0_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {PostfixExpression.expression=current}
@@ -1869,40 +1603,15 @@ protected class PostfixExpression_PostfixExpressionExpressionAction_1_0_0 extend
 			case 1: return new PostfixExpression_PrimaryExpressionParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getPostfixExpressionAccess().getPostfixExpressionExpressionAction_1_0_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("expression", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("expression")) return null;
 		return getDescr((EObject) val);
 	}
-}
-
-// LT*
-protected class PostfixExpression_LTTerminalRuleCall_1_0_1 extends UnassignedTextToken {
-
-	public PostfixExpression_LTTerminalRuleCall_1_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getPostfixExpressionAccess().getLTTerminalRuleCall_1_0_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new PostfixExpression_LTTerminalRuleCall_1_0_1(parent, this, 0, inst);
-			case 1: return new PostfixExpression_PostfixExpressionExpressionAction_1_0_0(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 // property=PropertyOperator
@@ -1923,8 +1632,8 @@ protected class PostfixExpression_PropertyAssignment_1_0_2 extends AssignmentTok
 			case 0: return new PropertyOperator_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("property",true)) == null) return null;
@@ -1945,8 +1654,7 @@ protected class PostfixExpression_PropertyAssignment_1_0_2 extends AssignmentTok
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new PostfixExpression_LTTerminalRuleCall_1_0_1(parent, next, actIndex, consumed);
-			case 1: return new PostfixExpression_PostfixExpressionExpressionAction_1_0_0(parent, next, actIndex, consumed);
+			case 0: return new PostfixExpression_PostfixExpressionExpressionAction_1_0_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1971,8 +1679,15 @@ protected class PostfixExpression_Group_1_1 extends GroupToken {
 			case 0: return new PostfixExpression_RightParenthesisKeyword_1_1_5(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getPostfixExpressionAccess().getInvocationExpressionAction_1_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {Invocation.expression=current}
@@ -1994,40 +1709,15 @@ protected class PostfixExpression_InvocationExpressionAction_1_1_0 extends Actio
 			case 1: return new PostfixExpression_PrimaryExpressionParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getPostfixExpressionAccess().getInvocationExpressionAction_1_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("expression", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("expression")) return null;
 		return getDescr((EObject) val);
 	}
-}
-
-// LT*
-protected class PostfixExpression_LTTerminalRuleCall_1_1_1 extends UnassignedTextToken {
-
-	public PostfixExpression_LTTerminalRuleCall_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getPostfixExpressionAccess().getLTTerminalRuleCall_1_1_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new PostfixExpression_LTTerminalRuleCall_1_1_1(parent, this, 0, inst);
-			case 1: return new PostfixExpression_InvocationExpressionAction_1_1_0(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 // "("
@@ -2045,35 +1735,11 @@ protected class PostfixExpression_LeftParenthesisKeyword_1_1_2 extends KeywordTo
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new PostfixExpression_LTTerminalRuleCall_1_1_1(parent, this, 0, inst);
-			case 1: return new PostfixExpression_InvocationExpressionAction_1_1_0(parent, this, 1, inst);
+			case 0: return new PostfixExpression_InvocationExpressionAction_1_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-}
-
-// LT*
-protected class PostfixExpression_LTTerminalRuleCall_1_1_3 extends UnassignedTextToken {
-
-	public PostfixExpression_LTTerminalRuleCall_1_1_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getPostfixExpressionAccess().getLTTerminalRuleCall_1_1_3();
 	}
 
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new PostfixExpression_LTTerminalRuleCall_1_1_3(parent, this, 0, inst);
-			case 1: return new PostfixExpression_LeftParenthesisKeyword_1_1_2(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 // (arguments=ListExpression LT*)?
@@ -2091,12 +1757,11 @@ protected class PostfixExpression_Group_1_1_4 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new PostfixExpression_LTTerminalRuleCall_1_1_4_1(parent, this, 0, inst);
-			case 1: return new PostfixExpression_ArgumentsAssignment_1_1_4_0(parent, this, 1, inst);
+			case 0: return new PostfixExpression_ArgumentsAssignment_1_1_4_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // arguments=ListExpression
@@ -2117,8 +1782,8 @@ protected class PostfixExpression_ArgumentsAssignment_1_1_4_0 extends Assignment
 			case 0: return new ListExpression_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("arguments",false)) == null) return null;
@@ -2139,34 +1804,10 @@ protected class PostfixExpression_ArgumentsAssignment_1_1_4_0 extends Assignment
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new PostfixExpression_LTTerminalRuleCall_1_1_3(parent, next, actIndex, consumed);
-			case 1: return new PostfixExpression_LeftParenthesisKeyword_1_1_2(parent, next, actIndex, consumed);
+			case 0: return new PostfixExpression_LeftParenthesisKeyword_1_1_2(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
-}
-
-// LT*
-protected class PostfixExpression_LTTerminalRuleCall_1_1_4_1 extends UnassignedTextToken {
-
-	public PostfixExpression_LTTerminalRuleCall_1_1_4_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getPostfixExpressionAccess().getLTTerminalRuleCall_1_1_4_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new PostfixExpression_LTTerminalRuleCall_1_1_4_1(parent, this, 0, inst);
-			case 1: return new PostfixExpression_ArgumentsAssignment_1_1_4_0(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 
@@ -2186,12 +1827,11 @@ protected class PostfixExpression_RightParenthesisKeyword_1_1_5 extends KeywordT
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new PostfixExpression_Group_1_1_4(parent, this, 0, inst);
-			case 1: return new PostfixExpression_LTTerminalRuleCall_1_1_3(parent, this, 1, inst);
-			case 2: return new PostfixExpression_LeftParenthesisKeyword_1_1_2(parent, this, 2, inst);
+			case 1: return new PostfixExpression_LeftParenthesisKeyword_1_1_2(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -2226,13 +1866,15 @@ protected class ListExpression_Group extends GroupToken {
 			case 1: return new ListExpression_ExpressionsAssignment_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getListExpressionRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getListExpressionRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // expressions+=PostfixExpression
@@ -2253,8 +1895,8 @@ protected class ListExpression_ExpressionsAssignment_0 extends AssignmentToken  
 			case 0: return new PostfixExpression_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("expressions",true)) == null) return null;
@@ -2298,32 +1940,8 @@ protected class ListExpression_Group_1 extends GroupToken {
 			case 0: return new ListExpression_ExpressionsAssignment_1_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-}
-
-// LT*
-protected class ListExpression_LTTerminalRuleCall_1_0 extends UnassignedTextToken {
-
-	public ListExpression_LTTerminalRuleCall_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getListExpressionAccess().getLTTerminalRuleCall_1_0();
 	}
 
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new ListExpression_LTTerminalRuleCall_1_0(parent, this, 0, inst);
-			case 1: return new ListExpression_Group_1(parent, this, 1, inst);
-			case 2: return new ListExpression_ExpressionsAssignment_0(parent, this, 2, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 // ","
@@ -2341,36 +1959,12 @@ protected class ListExpression_CommaKeyword_1_1 extends KeywordToken  {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new ListExpression_LTTerminalRuleCall_1_0(parent, this, 0, inst);
-			case 1: return new ListExpression_Group_1(parent, this, 1, inst);
-			case 2: return new ListExpression_ExpressionsAssignment_0(parent, this, 2, inst);
+			case 0: return new ListExpression_Group_1(parent, this, 0, inst);
+			case 1: return new ListExpression_ExpressionsAssignment_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
-}
-
-// LT*
-protected class ListExpression_LTTerminalRuleCall_1_2 extends UnassignedTextToken {
-
-	public ListExpression_LTTerminalRuleCall_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getListExpressionAccess().getLTTerminalRuleCall_1_2();
 	}
 
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new ListExpression_LTTerminalRuleCall_1_2(parent, this, 0, inst);
-			case 1: return new ListExpression_CommaKeyword_1_1(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 // expressions+=PostfixExpression
@@ -2391,8 +1985,8 @@ protected class ListExpression_ExpressionsAssignment_1_3 extends AssignmentToken
 			case 0: return new PostfixExpression_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("expressions",false)) == null) return null;
@@ -2413,8 +2007,7 @@ protected class ListExpression_ExpressionsAssignment_1_3 extends AssignmentToken
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new ListExpression_LTTerminalRuleCall_1_2(parent, next, actIndex, consumed);
-			case 1: return new ListExpression_CommaKeyword_1_1(parent, next, actIndex, consumed);
+			case 0: return new ListExpression_CommaKeyword_1_1(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2451,13 +2044,15 @@ protected class PropertyOperator_Alternatives extends AlternativesToken {
 			case 1: return new PropertyOperator_Group_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getPropertyOperatorRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getPropertyOperatorRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "." LT* name=ID
@@ -2478,8 +2073,8 @@ protected class PropertyOperator_Group_0 extends GroupToken {
 			case 0: return new PropertyOperator_NameAssignment_0_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "."
@@ -2499,31 +2094,8 @@ protected class PropertyOperator_FullStopKeyword_0_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
-}
-
-// LT*
-protected class PropertyOperator_LTTerminalRuleCall_0_1 extends UnassignedTextToken {
-
-	public PropertyOperator_LTTerminalRuleCall_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getPropertyOperatorAccess().getLTTerminalRuleCall_0_1();
 	}
 
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new PropertyOperator_LTTerminalRuleCall_0_1(parent, this, 0, inst);
-			case 1: return new PropertyOperator_FullStopKeyword_0_0(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 // name=ID
@@ -2541,12 +2113,11 @@ protected class PropertyOperator_NameAssignment_0_2 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new PropertyOperator_LTTerminalRuleCall_0_1(parent, this, 0, inst);
-			case 1: return new PropertyOperator_FullStopKeyword_0_0(parent, this, 1, inst);
+			case 0: return new PropertyOperator_FullStopKeyword_0_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -2580,8 +2151,8 @@ protected class PropertyOperator_Group_1 extends GroupToken {
 			case 0: return new PropertyOperator_RightSquareBracketKeyword_1_4(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "["
@@ -2601,31 +2172,8 @@ protected class PropertyOperator_LeftSquareBracketKeyword_1_0 extends KeywordTok
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
-}
-
-// LT*
-protected class PropertyOperator_LTTerminalRuleCall_1_1 extends UnassignedTextToken {
-
-	public PropertyOperator_LTTerminalRuleCall_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getPropertyOperatorAccess().getLTTerminalRuleCall_1_1();
 	}
 
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new PropertyOperator_LTTerminalRuleCall_1_1(parent, this, 0, inst);
-			case 1: return new PropertyOperator_LeftSquareBracketKeyword_1_0(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 // expressions=ListExpression
@@ -2646,8 +2194,8 @@ protected class PropertyOperator_ExpressionsAssignment_1_2 extends AssignmentTok
 			case 0: return new ListExpression_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("expressions",true)) == null) return null;
@@ -2668,34 +2216,10 @@ protected class PropertyOperator_ExpressionsAssignment_1_2 extends AssignmentTok
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new PropertyOperator_LTTerminalRuleCall_1_1(parent, next, actIndex, consumed);
-			case 1: return new PropertyOperator_LeftSquareBracketKeyword_1_0(parent, next, actIndex, consumed);
+			case 0: return new PropertyOperator_LeftSquareBracketKeyword_1_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
-}
-
-// LT*
-protected class PropertyOperator_LTTerminalRuleCall_1_3 extends UnassignedTextToken {
-
-	public PropertyOperator_LTTerminalRuleCall_1_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getPropertyOperatorAccess().getLTTerminalRuleCall_1_3();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new PropertyOperator_LTTerminalRuleCall_1_3(parent, this, 0, inst);
-			case 1: return new PropertyOperator_ExpressionsAssignment_1_2(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 // "]"
@@ -2713,12 +2237,11 @@ protected class PropertyOperator_RightSquareBracketKeyword_1_4 extends KeywordTo
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new PropertyOperator_LTTerminalRuleCall_1_3(parent, this, 0, inst);
-			case 1: return new PropertyOperator_ExpressionsAssignment_1_2(parent, this, 1, inst);
+			case 0: return new PropertyOperator_ExpressionsAssignment_1_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -2754,13 +2277,16 @@ protected class PrimaryExpression_Alternatives extends AlternativesToken {
 			case 1: return new PrimaryExpression_Group_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getPrimaryExpressionRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getFunctionExpressionAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getIdentifierAction_0_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // {Identifier} name=ID
@@ -2781,8 +2307,15 @@ protected class PrimaryExpression_Group_0 extends GroupToken {
 			case 0: return new PrimaryExpression_NameAssignment_0_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getIdentifierAction_0_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {Identifier}
@@ -2802,12 +2335,10 @@ protected class PrimaryExpression_IdentifierAction_0_0 extends ActionToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getPrimaryExpressionAccess().getIdentifierAction_0_0().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -2831,8 +2362,8 @@ protected class PrimaryExpression_NameAssignment_0_1 extends AssignmentToken  {
 			case 0: return new PrimaryExpression_IdentifierAction_0_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -2866,8 +2397,15 @@ protected class PrimaryExpression_Group_1 extends GroupToken {
 			case 0: return new PrimaryExpression_BodyAssignment_1_5(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getFunctionExpressionAction_1_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
 }
 
 // {FunctionExpression}
@@ -2887,12 +2425,10 @@ protected class PrimaryExpression_FunctionExpressionAction_1_0 extends ActionTok
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getPrimaryExpressionAccess().getFunctionExpressionAction_1_0().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -2916,31 +2452,8 @@ protected class PrimaryExpression_FunctionKeyword_1_1 extends KeywordToken  {
 			case 0: return new PrimaryExpression_FunctionExpressionAction_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-}
-
-// LT*
-protected class PrimaryExpression_LTTerminalRuleCall_1_2 extends UnassignedTextToken {
-
-	public PrimaryExpression_LTTerminalRuleCall_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getPrimaryExpressionAccess().getLTTerminalRuleCall_1_2();
 	}
 
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new PrimaryExpression_LTTerminalRuleCall_1_2(parent, this, 0, inst);
-			case 1: return new PrimaryExpression_FunctionKeyword_1_1(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 // params=Parameters
@@ -2961,8 +2474,8 @@ protected class PrimaryExpression_ParamsAssignment_1_3 extends AssignmentToken  
 			case 0: return new Parameters_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("params",true)) == null) return null;
@@ -2983,34 +2496,10 @@ protected class PrimaryExpression_ParamsAssignment_1_3 extends AssignmentToken  
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new PrimaryExpression_LTTerminalRuleCall_1_2(parent, next, actIndex, consumed);
-			case 1: return new PrimaryExpression_FunctionKeyword_1_1(parent, next, actIndex, consumed);
+			case 0: return new PrimaryExpression_FunctionKeyword_1_1(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
-}
-
-// LT*
-protected class PrimaryExpression_LTTerminalRuleCall_1_4 extends UnassignedTextToken {
-
-	public PrimaryExpression_LTTerminalRuleCall_1_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getPrimaryExpressionAccess().getLTTerminalRuleCall_1_4();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new PrimaryExpression_LTTerminalRuleCall_1_4(parent, this, 0, inst);
-			case 1: return new PrimaryExpression_ParamsAssignment_1_3(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
 }
 
 // body=Block
@@ -3031,8 +2520,8 @@ protected class PrimaryExpression_BodyAssignment_1_5 extends AssignmentToken  {
 			case 0: return new Block_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("body",true)) == null) return null;
@@ -3053,8 +2542,7 @@ protected class PrimaryExpression_BodyAssignment_1_5 extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new PrimaryExpression_LTTerminalRuleCall_1_4(parent, next, actIndex, consumed);
-			case 1: return new PrimaryExpression_ParamsAssignment_1_3(parent, next, actIndex, consumed);
+			case 0: return new PrimaryExpression_ParamsAssignment_1_3(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	

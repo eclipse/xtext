@@ -68,13 +68,8 @@ protected class File_StuffAssignment extends AssignmentToken  {
 			case 0: return new Stuff_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getFileRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stuff",false)) == null) return null;
@@ -130,13 +125,15 @@ protected class Stuff_Group extends GroupToken {
 			case 1: return new Stuff_NameAssignment_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getStuffRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getStuffRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "stuff"
@@ -156,8 +153,8 @@ protected class Stuff_StuffKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -178,8 +175,8 @@ protected class Stuff_NameAssignment_1 extends AssignmentToken  {
 			case 0: return new Stuff_StuffKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -212,8 +209,8 @@ protected class Stuff_Group_2 extends GroupToken {
 			case 0: return new Stuff_RefsAssignment_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "refs"
@@ -234,8 +231,8 @@ protected class Stuff_RefsKeyword_2_0 extends KeywordToken  {
 			case 0: return new Stuff_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // refs=[Stuff]
@@ -256,8 +253,8 @@ protected class Stuff_RefsAssignment_2_1 extends AssignmentToken  {
 			case 0: return new Stuff_RefsKeyword_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("refs",false)) == null) return null;

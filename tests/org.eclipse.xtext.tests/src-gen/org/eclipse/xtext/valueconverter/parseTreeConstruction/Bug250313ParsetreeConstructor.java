@@ -86,13 +86,15 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 8: return new Model_Group_8(parent, this, 8, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getModelRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )
@@ -113,8 +115,8 @@ protected class Model_Group_0 extends GroupToken {
 			case 0: return new Model_ValueAssignment_0_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )
@@ -134,8 +136,8 @@ protected class Model_ValueAssignment_0_1 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
@@ -189,8 +191,8 @@ protected class Model_Group_1 extends GroupToken {
 			case 0: return new Model_MultiValueAssignment_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "1+"
@@ -210,8 +212,8 @@ protected class Model_DigitOnePlusSignKeyword_1_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )
@@ -232,8 +234,8 @@ protected class Model_MultiValueAssignment_1_1 extends AssignmentToken  {
 			case 0: return new Model_DigitOnePlusSignKeyword_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("multiValue",true)) == null) return null;
@@ -287,8 +289,8 @@ protected class Model_Group_2 extends GroupToken {
 			case 0: return new Model_ValueAssignment_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "2"
@@ -308,8 +310,8 @@ protected class Model_DigitTwoKeyword_2_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // value=STRING
@@ -330,8 +332,8 @@ protected class Model_ValueAssignment_2_1 extends AssignmentToken  {
 			case 0: return new Model_DigitTwoKeyword_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
@@ -365,8 +367,8 @@ protected class Model_Group_3 extends GroupToken {
 			case 0: return new Model_MultiValueAssignment_3_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "2+"
@@ -386,8 +388,8 @@ protected class Model_DigitTwoPlusSignKeyword_3_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // multiValue+=STRING
@@ -408,8 +410,8 @@ protected class Model_MultiValueAssignment_3_1 extends AssignmentToken  {
 			case 0: return new Model_DigitTwoPlusSignKeyword_3_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("multiValue",true)) == null) return null;
@@ -443,8 +445,8 @@ protected class Model_Group_4 extends GroupToken {
 			case 0: return new Model_ValueAssignment_4_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "3"
@@ -464,8 +466,8 @@ protected class Model_DigitThreeKeyword_4_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // value=Datatype
@@ -486,8 +488,8 @@ protected class Model_ValueAssignment_4_1 extends AssignmentToken  {
 			case 0: return new Model_DigitThreeKeyword_4_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
@@ -521,8 +523,8 @@ protected class Model_Group_5 extends GroupToken {
 			case 0: return new Model_MultiValueAssignment_5_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "3+"
@@ -542,8 +544,8 @@ protected class Model_DigitThreePlusSignKeyword_5_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // multiValue+=Datatype
@@ -564,8 +566,8 @@ protected class Model_MultiValueAssignment_5_1 extends AssignmentToken  {
 			case 0: return new Model_DigitThreePlusSignKeyword_5_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("multiValue",true)) == null) return null;
@@ -599,8 +601,8 @@ protected class Model_Group_6 extends GroupToken {
 			case 0: return new Model_ValueAssignment_6_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "4"
@@ -620,8 +622,8 @@ protected class Model_DigitFourKeyword_6_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // value=NestedDatatype
@@ -642,8 +644,8 @@ protected class Model_ValueAssignment_6_1 extends AssignmentToken  {
 			case 0: return new Model_DigitFourKeyword_6_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
@@ -677,8 +679,8 @@ protected class Model_Group_7 extends GroupToken {
 			case 0: return new Model_MultiValueAssignment_7_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "4+"
@@ -698,8 +700,8 @@ protected class Model_DigitFourPlusSignKeyword_7_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // multiValue+=NestedDatatype
@@ -720,8 +722,8 @@ protected class Model_MultiValueAssignment_7_1 extends AssignmentToken  {
 			case 0: return new Model_DigitFourPlusSignKeyword_7_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("multiValue",true)) == null) return null;
@@ -756,8 +758,8 @@ protected class Model_Group_8 extends GroupToken {
 			case 1: return new Model_Group_8_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "content" children=Child
@@ -778,8 +780,8 @@ protected class Model_Group_8_0 extends GroupToken {
 			case 0: return new Model_ChildrenAssignment_8_0_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "content"
@@ -799,8 +801,8 @@ protected class Model_ContentKeyword_8_0_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // children=Child
@@ -821,8 +823,8 @@ protected class Model_ChildrenAssignment_8_0_1 extends AssignmentToken  {
 			case 0: return new Child_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("children",true)) == null) return null;
@@ -868,8 +870,8 @@ protected class Model_Group_8_1 extends GroupToken {
 			case 0: return new Model_RefAssignment_8_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "ref"
@@ -890,8 +892,8 @@ protected class Model_RefKeyword_8_1_0 extends KeywordToken  {
 			case 0: return new Model_Group_8_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // ref=( [Child1|STRING] | [Child2] )
@@ -912,8 +914,8 @@ protected class Model_RefAssignment_8_1_1 extends AssignmentToken  {
 			case 0: return new Model_RefKeyword_8_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ref",false)) == null) return null;
@@ -983,13 +985,16 @@ protected class Child_Alternatives extends AlternativesToken {
 			case 1: return new Child_Child2ParserRuleCall_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getChildRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getChild1Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getChild2Rule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // Child1
@@ -1010,12 +1015,18 @@ protected class Child_Child1ParserRuleCall_0 extends RuleCallToken {
 			case 0: return new Child1_NameAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getChild1Rule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Child1_NameAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getChild1Rule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -1045,12 +1056,18 @@ protected class Child_Child2ParserRuleCall_1 extends RuleCallToken {
 			case 0: return new Child2_NameAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getChild2Rule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Child2_NameAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getChild2Rule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -1090,13 +1107,15 @@ protected class Child1_NameAssignment extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getChild1Rule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getChild1Rule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -1138,13 +1157,15 @@ protected class Child2_NameAssignment extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getChild2Rule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getChild2Rule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;

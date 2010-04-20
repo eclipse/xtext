@@ -76,13 +76,15 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 3: return new Model_Group_3(parent, this, 3, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getModelRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "(" attribute+=Attribute* attribute+=Pair* ")"
@@ -103,8 +105,8 @@ protected class Model_Group_0 extends GroupToken {
 			case 0: return new Model_RightParenthesisKeyword_0_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "("
@@ -124,8 +126,8 @@ protected class Model_LeftParenthesisKeyword_0_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // attribute+=Attribute*
@@ -146,8 +148,8 @@ protected class Model_AttributeAssignment_0_1 extends AssignmentToken  {
 			case 0: return new Attribute_ValueAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attribute",false)) == null) return null;
@@ -193,8 +195,8 @@ protected class Model_AttributeAssignment_0_2 extends AssignmentToken  {
 			case 0: return new Pair_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attribute",false)) == null) return null;
@@ -243,8 +245,8 @@ protected class Model_RightParenthesisKeyword_0_3 extends KeywordToken  {
 			case 2: return new Model_LeftParenthesisKeyword_0_0(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -266,8 +268,8 @@ protected class Model_Group_1 extends GroupToken {
 			case 0: return new Model_RightSquareBracketKeyword_1_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "["
@@ -287,8 +289,8 @@ protected class Model_LeftSquareBracketKeyword_1_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // attribute+=Attribute+
@@ -309,8 +311,8 @@ protected class Model_AttributeAssignment_1_1 extends AssignmentToken  {
 			case 0: return new Attribute_ValueAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attribute",true)) == null) return null;
@@ -356,8 +358,8 @@ protected class Model_AttributeAssignment_1_2 extends AssignmentToken  {
 			case 0: return new Pair_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attribute",false)) == null) return null;
@@ -404,8 +406,8 @@ protected class Model_RightSquareBracketKeyword_1_3 extends KeywordToken  {
 			case 1: return new Model_AttributeAssignment_1_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -427,8 +429,8 @@ protected class Model_Group_2 extends GroupToken {
 			case 0: return new Model_GreaterThanSignKeyword_2_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "<"
@@ -448,8 +450,8 @@ protected class Model_LessThanSignKeyword_2_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // attribute+=Attribute*
@@ -470,8 +472,8 @@ protected class Model_AttributeAssignment_2_1 extends AssignmentToken  {
 			case 0: return new Attribute_ValueAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attribute",false)) == null) return null;
@@ -517,8 +519,8 @@ protected class Model_AttributeAssignment_2_2 extends AssignmentToken  {
 			case 0: return new Pair_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attribute",true)) == null) return null;
@@ -565,8 +567,8 @@ protected class Model_GreaterThanSignKeyword_2_3 extends KeywordToken  {
 			case 0: return new Model_AttributeAssignment_2_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -588,8 +590,8 @@ protected class Model_Group_3 extends GroupToken {
 			case 0: return new Model_RightCurlyBracketKeyword_3_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "{"
@@ -609,8 +611,8 @@ protected class Model_LeftCurlyBracketKeyword_3_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // attribute+=Attribute+
@@ -631,8 +633,8 @@ protected class Model_AttributeAssignment_3_1 extends AssignmentToken  {
 			case 0: return new Attribute_ValueAssignment(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attribute",true)) == null) return null;
@@ -678,8 +680,8 @@ protected class Model_AttributeAssignment_3_2 extends AssignmentToken  {
 			case 0: return new Pair_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attribute",true)) == null) return null;
@@ -725,8 +727,8 @@ protected class Model_RightCurlyBracketKeyword_3_3 extends KeywordToken  {
 			case 0: return new Model_AttributeAssignment_3_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -758,13 +760,15 @@ protected class Attribute_ValueAssignment extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAttributeRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getAttributeRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
@@ -807,13 +811,15 @@ protected class Pair_Group extends GroupToken {
 			case 0: return new Pair_ValueAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getPairRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getPairRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // name=ID
@@ -833,8 +839,8 @@ protected class Pair_NameAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -867,8 +873,8 @@ protected class Pair_EqualsSignKeyword_1 extends KeywordToken  {
 			case 0: return new Pair_NameAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // value=ID
@@ -889,8 +895,8 @@ protected class Pair_ValueAssignment_2 extends AssignmentToken  {
 			case 0: return new Pair_EqualsSignKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;

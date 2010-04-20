@@ -40,11 +40,11 @@ public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminal
 
 	private IElementConsumer ruleCall$7$Consumer;
 
+	private ICharacterClass keyword$2$Delimiter;
+
 	private ICharacterClass keyword$4$Delimiter;
 
 	private ICharacterClass keyword$5$Delimiter;
-
-	private ICharacterClass keyword$2$Delimiter;
 
 	private ISequenceMatcher ruleCall$7$Delimiter;
 
@@ -137,9 +137,9 @@ public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminal
 
 	public SimpleReconstrTestLanguageBooleanConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
+		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
@@ -178,6 +178,14 @@ public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminal
 		this.idConsumer = idConsumer;
 	}
 	
+	public ICharacterClass getKeyword$2$Delimiter() {
+		return keyword$2$Delimiter;
+	}
+	
+	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
+		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
 	public ICharacterClass getKeyword$4$Delimiter() {
 		return keyword$4$Delimiter;
 	}
@@ -192,14 +200,6 @@ public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminal
 	
 	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
 		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$2$Delimiter() {
-		return keyword$2$Delimiter;
-	}
-	
-	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
-		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ISequenceMatcher getRuleCall$7$Delimiter() {

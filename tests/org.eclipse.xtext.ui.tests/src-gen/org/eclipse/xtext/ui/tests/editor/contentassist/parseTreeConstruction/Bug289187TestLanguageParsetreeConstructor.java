@@ -70,13 +70,8 @@ protected class Model_ClassesAssignment extends AssignmentToken  {
 			case 0: return new Class_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("classes",false)) == null) return null;
@@ -139,13 +134,15 @@ protected class Class_Group extends GroupToken {
 			case 0: return new Class_RightCurlyBracketKeyword_12(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getClassRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getClassRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // abstract?="abstract"?
@@ -165,8 +162,8 @@ protected class Class_AbstractAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("abstract",false)) == null) return null;
@@ -199,8 +196,8 @@ protected class Class_TransientAssignment_1 extends AssignmentToken  {
 			case 0: return new Class_AbstractAssignment_0(parent, this, 0, inst);
 			default: return parent.createParentFollower(this, index, index - 1, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("transient",false)) == null) return null;
@@ -234,8 +231,8 @@ protected class Class_ClassKeyword_2 extends KeywordToken  {
 			case 1: return new Class_AbstractAssignment_0(parent, this, 1, inst);
 			default: return parent.createParentFollower(this, index, index - 2, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -256,8 +253,8 @@ protected class Class_NameAssignment_3 extends AssignmentToken  {
 			case 0: return new Class_ClassKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -290,8 +287,8 @@ protected class Class_Group_4 extends GroupToken {
 			case 0: return new Class_SuperClassAssignment_4_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "extends"
@@ -312,8 +309,8 @@ protected class Class_ExtendsKeyword_4_0 extends KeywordToken  {
 			case 0: return new Class_NameAssignment_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // superClass=[Class]
@@ -334,8 +331,8 @@ protected class Class_SuperClassAssignment_4_1 extends AssignmentToken  {
 			case 0: return new Class_ExtendsKeyword_4_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("superClass",false)) == null) return null;
@@ -374,8 +371,8 @@ protected class Class_Group_5 extends GroupToken {
 			case 1: return new Class_ImplementedInterfacesAssignment_5_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "implements"
@@ -397,8 +394,8 @@ protected class Class_ImplementsKeyword_5_0 extends KeywordToken  {
 			case 1: return new Class_NameAssignment_3(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // implementedInterfaces+=[Class]
@@ -419,8 +416,8 @@ protected class Class_ImplementedInterfacesAssignment_5_1 extends AssignmentToke
 			case 0: return new Class_ImplementsKeyword_5_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("implementedInterfaces",true)) == null) return null;
@@ -456,8 +453,8 @@ protected class Class_Group_5_2 extends GroupToken {
 			case 0: return new Class_ImplementedInterfacesAssignment_5_2_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // ","
@@ -479,8 +476,8 @@ protected class Class_CommaKeyword_5_2_0 extends KeywordToken  {
 			case 1: return new Class_ImplementedInterfacesAssignment_5_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "implements"
@@ -501,8 +498,8 @@ protected class Class_ImplementsKeyword_5_2_1 extends KeywordToken  {
 			case 0: return new Class_CommaKeyword_5_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // implementedInterfaces+=[Class]
@@ -523,8 +520,8 @@ protected class Class_ImplementedInterfacesAssignment_5_2_2 extends AssignmentTo
 			case 0: return new Class_ImplementsKeyword_5_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("implementedInterfaces",false)) == null) return null;
@@ -564,8 +561,8 @@ protected class Class_LeftCurlyBracketKeyword_6 extends KeywordToken  {
 			case 2: return new Class_NameAssignment_3(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // ("classNumber" "=" classNumber=INT)?
@@ -586,8 +583,8 @@ protected class Class_Group_7 extends GroupToken {
 			case 0: return new Class_ClassNumberAssignment_7_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "classNumber"
@@ -608,8 +605,8 @@ protected class Class_ClassNumberKeyword_7_0 extends KeywordToken  {
 			case 0: return new Class_LeftCurlyBracketKeyword_6(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "="
@@ -630,8 +627,8 @@ protected class Class_EqualsSignKeyword_7_1 extends KeywordToken  {
 			case 0: return new Class_ClassNumberKeyword_7_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // classNumber=INT
@@ -652,8 +649,8 @@ protected class Class_ClassNumberAssignment_7_2 extends AssignmentToken  {
 			case 0: return new Class_EqualsSignKeyword_7_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("classNumber",false)) == null) return null;
@@ -687,8 +684,8 @@ protected class Class_Group_8 extends GroupToken {
 			case 0: return new Class_QuidAssignment_8_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "quid"
@@ -710,8 +707,8 @@ protected class Class_QuidKeyword_8_0 extends KeywordToken  {
 			case 1: return new Class_LeftCurlyBracketKeyword_6(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "="
@@ -732,8 +729,8 @@ protected class Class_EqualsSignKeyword_8_1 extends KeywordToken  {
 			case 0: return new Class_QuidKeyword_8_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // quid=INT
@@ -754,8 +751,8 @@ protected class Class_QuidAssignment_8_2 extends AssignmentToken  {
 			case 0: return new Class_EqualsSignKeyword_8_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("quid",false)) == null) return null;
@@ -789,8 +786,8 @@ protected class Class_Group_9 extends GroupToken {
 			case 0: return new Class_DocumentationAssignment_9_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "documentation"
@@ -813,8 +810,8 @@ protected class Class_DocumentationKeyword_9_0 extends KeywordToken  {
 			case 2: return new Class_LeftCurlyBracketKeyword_6(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "="
@@ -835,8 +832,8 @@ protected class Class_EqualsSignKeyword_9_1 extends KeywordToken  {
 			case 0: return new Class_DocumentationKeyword_9_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // documentation=STRING
@@ -857,8 +854,8 @@ protected class Class_DocumentationAssignment_9_2 extends AssignmentToken  {
 			case 0: return new Class_EqualsSignKeyword_9_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("documentation",false)) == null) return null;
@@ -892,8 +889,8 @@ protected class Class_AttributesAssignment_10 extends AssignmentToken  {
 			case 0: return new Attribute_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attributes",false)) == null) return null;
@@ -942,8 +939,8 @@ protected class Class_OperationsAssignment_11 extends AssignmentToken  {
 			case 0: return new Operation_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operations",false)) == null) return null;
@@ -998,8 +995,8 @@ protected class Class_RightCurlyBracketKeyword_12 extends KeywordToken  {
 			case 5: return new Class_LeftCurlyBracketKeyword_6(parent, this, 5, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -1031,13 +1028,15 @@ protected class Attribute_Group extends GroupToken {
 			case 0: return new Attribute_NameAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAttributeRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getAttributeRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // visibility=Visibility?
@@ -1057,8 +1056,8 @@ protected class Attribute_VisibilityAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("visibility",false)) == null) return null;
@@ -1091,8 +1090,8 @@ protected class Attribute_AttributeKeyword_1 extends KeywordToken  {
 			case 0: return new Attribute_VisibilityAssignment_0(parent, this, 0, inst);
 			default: return parent.createParentFollower(this, index, index - 1, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -1113,8 +1112,8 @@ protected class Attribute_NameAssignment_2 extends AssignmentToken  {
 			case 0: return new Attribute_AttributeKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -1158,13 +1157,15 @@ protected class Operation_Group extends GroupToken {
 			case 0: return new Operation_NameAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getOperationRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getOperationRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // visibility=Visibility?
@@ -1184,8 +1185,8 @@ protected class Operation_VisibilityAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("visibility",false)) == null) return null;
@@ -1218,8 +1219,8 @@ protected class Operation_OperationKeyword_1 extends KeywordToken  {
 			case 0: return new Operation_VisibilityAssignment_0(parent, this, 0, inst);
 			default: return parent.createParentFollower(this, index, index - 1, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -1240,8 +1241,8 @@ protected class Operation_NameAssignment_2 extends AssignmentToken  {
 			case 0: return new Operation_OperationKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;

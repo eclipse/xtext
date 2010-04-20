@@ -71,13 +71,16 @@ protected class NamedElement_Alternatives extends AlternativesToken {
 			case 1: return new NamedElement_ElementParserRuleCall_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getNamedElementRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getNamespaceRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getElementRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // Namespace
@@ -98,12 +101,18 @@ protected class NamedElement_NamespaceParserRuleCall_0 extends RuleCallToken {
 			case 0: return new Namespace_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getNamespaceRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Namespace_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getNamespaceRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -133,12 +142,18 @@ protected class NamedElement_ElementParserRuleCall_1 extends RuleCallToken {
 			case 0: return new Element_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getElementRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Element_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -179,13 +194,15 @@ protected class Namespace_Group extends GroupToken {
 			case 0: return new Namespace_RightCurlyBracketKeyword_5(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getNamespaceRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getNamespaceRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "namespace"
@@ -205,8 +222,8 @@ protected class Namespace_NamespaceKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // name=QualifiedName
@@ -227,8 +244,8 @@ protected class Namespace_NameAssignment_1 extends AssignmentToken  {
 			case 0: return new Namespace_NamespaceKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -261,8 +278,8 @@ protected class Namespace_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 			case 0: return new Namespace_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // imports+=Import*
@@ -283,8 +300,8 @@ protected class Namespace_ImportsAssignment_3 extends AssignmentToken  {
 			case 0: return new Import_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("imports",false)) == null) return null;
@@ -330,8 +347,8 @@ protected class Namespace_ElementsAssignment_4 extends AssignmentToken  {
 			case 0: return new NamedElement_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("elements",false)) == null) return null;
@@ -380,8 +397,8 @@ protected class Namespace_RightCurlyBracketKeyword_5 extends KeywordToken  {
 			case 2: return new Namespace_LeftCurlyBracketKeyword_2(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -413,13 +430,15 @@ protected class Import_Group extends GroupToken {
 			case 0: return new Import_ImportedNamespaceAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getImportRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getImportRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "import"
@@ -439,8 +458,8 @@ protected class Import_ImportKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // importedNamespace=QualifiedName
@@ -461,8 +480,8 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 			case 0: return new Import_ImportKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("importedNamespace",true)) == null) return null;
@@ -510,13 +529,15 @@ protected class Element_Group extends GroupToken {
 			case 2: return new Element_NameAssignment_1(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getElementRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "object"
@@ -536,8 +557,8 @@ protected class Element_ObjectKeyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // name=ID
@@ -558,8 +579,8 @@ protected class Element_NameAssignment_1 extends AssignmentToken  {
 			case 0: return new Element_ObjectKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -592,8 +613,8 @@ protected class Element_Group_2 extends GroupToken {
 			case 0: return new Element_ReferencesAssignment_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "references"
@@ -614,8 +635,8 @@ protected class Element_ReferencesKeyword_2_0 extends KeywordToken  {
 			case 0: return new Element_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // references=[Element|QualifiedName]
@@ -636,8 +657,8 @@ protected class Element_ReferencesAssignment_2_1 extends AssignmentToken  {
 			case 0: return new Element_ReferencesKeyword_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("references",false)) == null) return null;
@@ -676,8 +697,8 @@ protected class Element_Group_3 extends GroupToken {
 			case 1: return new Element_OtherRefsAssignment_3_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "otherRefs"
@@ -699,8 +720,8 @@ protected class Element_OtherRefsKeyword_3_0 extends KeywordToken  {
 			case 1: return new Element_NameAssignment_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // otherRefs+=[Element|QualifiedName]
@@ -721,8 +742,8 @@ protected class Element_OtherRefsAssignment_3_1 extends AssignmentToken  {
 			case 0: return new Element_OtherRefsKeyword_3_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("otherRefs",true)) == null) return null;
@@ -758,8 +779,8 @@ protected class Element_Group_3_2 extends GroupToken {
 			case 0: return new Element_OtherRefsAssignment_3_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // ","
@@ -781,8 +802,8 @@ protected class Element_CommaKeyword_3_2_0 extends KeywordToken  {
 			case 1: return new Element_OtherRefsAssignment_3_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // otherRefs+=[Element|QualifiedName]
@@ -803,8 +824,8 @@ protected class Element_OtherRefsAssignment_3_2_1 extends AssignmentToken  {
 			case 0: return new Element_CommaKeyword_3_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("otherRefs",false)) == null) return null;

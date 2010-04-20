@@ -13,15 +13,15 @@ public final class SimpleReconstrTestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	public static final ISequenceMatcher ruleCall$37$Delimiter = new SetBasedKeywordMatcher(
-		"type", "extends", "mykeyword1", "mykeyword2", "myoption", "kw", "v1", "v2", "kw0", "kw1", "kw2", "kw30", "kw3", "kw4", "kw5", "kw6", "kw7", "interface", "class", "static", "final", "transient", "item", "refs");
+	public static final ISequenceMatcher ruleCall$39$Delimiter = new SetBasedKeywordMatcher(
+		"type", "extends", "mykeyword1", "mykeyword2", "myoption", "kw", "v1", "v2", "kw0", "kw1", "kw2", "kw30", "kw3", "kw4", "kw5", "kw6", "kw7", "interface", "class", "static", "final", "transient", "item", "refs", "ka", "kb");
 
-	public static final ICharacterClass keyword$41$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$43$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static final ISequenceMatcher ruleCall$50$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$52$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
     
-	public static final ICharacterClass keyword$68$Delimiter = ICharacterClass.Factory.join(
+	public static final ICharacterClass keyword$70$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),

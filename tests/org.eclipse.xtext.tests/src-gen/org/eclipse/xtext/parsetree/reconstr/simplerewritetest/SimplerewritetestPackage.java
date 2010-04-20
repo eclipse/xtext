@@ -1085,6 +1085,210 @@ public interface SimplerewritetestPackage extends EPackage
   int EOBJECT_ELEMENT_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug305577_1Impl <em>Type Bug305577 1</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug305577_1Impl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getTypeBug305577_1()
+   * @generated
+   */
+  int TYPE_BUG305577_1 = 26;
+
+  /**
+   * The feature id for the '<em><b>Em</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_BUG305577_1__EM = EXPRESSION__EM;
+
+  /**
+   * The number of structural features of the '<em>Type Bug305577 1</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_BUG305577_1_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug305577_2Impl <em>Type Bug305577 2</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug305577_2Impl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getTypeBug305577_2()
+   * @generated
+   */
+  int TYPE_BUG305577_2 = 27;
+
+  /**
+   * The feature id for the '<em><b>Em</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_BUG305577_2__EM = EXPRESSION__EM;
+
+  /**
+   * The number of structural features of the '<em>Type Bug305577 2</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_BUG305577_2_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug1AImpl <em>Type Bug1 A</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug1AImpl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getTypeBug1A()
+   * @generated
+   */
+  int TYPE_BUG1_A = 28;
+
+  /**
+   * The feature id for the '<em><b>Em</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_BUG1_A__EM = TYPE_BUG305577_1__EM;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_BUG1_A__NAME = TYPE_BUG305577_1_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Type Bug1 A</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_BUG1_A_FEATURE_COUNT = TYPE_BUG305577_1_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug1BImpl <em>Type Bug1 B</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug1BImpl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getTypeBug1B()
+   * @generated
+   */
+  int TYPE_BUG1_B = 29;
+
+  /**
+   * The feature id for the '<em><b>Em</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_BUG1_B__EM = TYPE_BUG305577_1__EM;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_BUG1_B__NAME = TYPE_BUG305577_1_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Type Bug1 B</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_BUG1_B_FEATURE_COUNT = TYPE_BUG305577_1_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug2AImpl <em>Type Bug2 A</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug2AImpl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getTypeBug2A()
+   * @generated
+   */
+  int TYPE_BUG2_A = 30;
+
+  /**
+   * The feature id for the '<em><b>Em</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_BUG2_A__EM = TYPE_BUG305577_2__EM;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_BUG2_A__NAME = TYPE_BUG305577_2_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Type Bug2 A</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_BUG2_A_FEATURE_COUNT = TYPE_BUG305577_2_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug2BImpl <em>Type Bug2 B</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug2BImpl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getTypeBug2B()
+   * @generated
+   */
+  int TYPE_BUG2_B = 31;
+
+  /**
+   * The feature id for the '<em><b>Em</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_BUG2_B__EM = TYPE_BUG305577_2__EM;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_BUG2_B__NAME = TYPE_BUG305577_2_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Type Bug2 B</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_BUG2_B_FEATURE_COUNT = TYPE_BUG305577_2_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1092,7 +1296,7 @@ public interface SimplerewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getOp()
    * @generated
    */
-  int OP = 26;
+  int OP = 32;
 
   /**
    * The feature id for the '<em><b>Em</b></em>' attribute.
@@ -1801,6 +2005,88 @@ public interface SimplerewritetestPackage extends EPackage
   EAttribute getEObjectElement_Name();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug305577_1 <em>Type Bug305577 1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Type Bug305577 1</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug305577_1
+   * @generated
+   */
+  EClass getTypeBug305577_1();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug305577_2 <em>Type Bug305577 2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Type Bug305577 2</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug305577_2
+   * @generated
+   */
+  EClass getTypeBug305577_2();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug1A <em>Type Bug1 A</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Type Bug1 A</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug1A
+   * @generated
+   */
+  EClass getTypeBug1A();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug1A#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug1A#getName()
+   * @see #getTypeBug1A()
+   * @generated
+   */
+  EAttribute getTypeBug1A_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug1B <em>Type Bug1 B</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Type Bug1 B</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug1B
+   * @generated
+   */
+  EClass getTypeBug1B();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug2A <em>Type Bug2 A</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Type Bug2 A</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug2A
+   * @generated
+   */
+  EClass getTypeBug2A();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug2A#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug2A#getName()
+   * @see #getTypeBug2A()
+   * @generated
+   */
+  EAttribute getTypeBug2A_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug2B <em>Type Bug2 B</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Type Bug2 B</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug2B
+   * @generated
+   */
+  EClass getTypeBug2B();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op <em>Op</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2407,6 +2693,82 @@ public interface SimplerewritetestPackage extends EPackage
      * @generated
      */
     EAttribute EOBJECT_ELEMENT__NAME = eINSTANCE.getEObjectElement_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug305577_1Impl <em>Type Bug305577 1</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug305577_1Impl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getTypeBug305577_1()
+     * @generated
+     */
+    EClass TYPE_BUG305577_1 = eINSTANCE.getTypeBug305577_1();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug305577_2Impl <em>Type Bug305577 2</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug305577_2Impl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getTypeBug305577_2()
+     * @generated
+     */
+    EClass TYPE_BUG305577_2 = eINSTANCE.getTypeBug305577_2();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug1AImpl <em>Type Bug1 A</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug1AImpl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getTypeBug1A()
+     * @generated
+     */
+    EClass TYPE_BUG1_A = eINSTANCE.getTypeBug1A();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TYPE_BUG1_A__NAME = eINSTANCE.getTypeBug1A_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug1BImpl <em>Type Bug1 B</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug1BImpl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getTypeBug1B()
+     * @generated
+     */
+    EClass TYPE_BUG1_B = eINSTANCE.getTypeBug1B();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug2AImpl <em>Type Bug2 A</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug2AImpl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getTypeBug2A()
+     * @generated
+     */
+    EClass TYPE_BUG2_A = eINSTANCE.getTypeBug2A();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TYPE_BUG2_A__NAME = eINSTANCE.getTypeBug2A_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug2BImpl <em>Type Bug2 B</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug2BImpl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getTypeBug2B()
+     * @generated
+     */
+    EClass TYPE_BUG2_B = eINSTANCE.getTypeBug2B();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.

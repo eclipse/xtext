@@ -41,6 +41,12 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Spare;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TwoNumbers;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Type;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug1A;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug1B;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug2A;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug2B;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug305577_1;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug305577_2;
 
 /**
  * <!-- begin-user-doc -->
@@ -120,6 +126,12 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
       case SimplerewritetestPackage.CONCRETE_MULTI: return createConcreteMulti();
       case SimplerewritetestPackage.EOBJECT_REF: return createEObjectRef();
       case SimplerewritetestPackage.EOBJECT_ELEMENT: return createEObjectElement();
+      case SimplerewritetestPackage.TYPE_BUG305577_1: return createTypeBug305577_1();
+      case SimplerewritetestPackage.TYPE_BUG305577_2: return createTypeBug305577_2();
+      case SimplerewritetestPackage.TYPE_BUG1_A: return createTypeBug1A();
+      case SimplerewritetestPackage.TYPE_BUG1_B: return createTypeBug1B();
+      case SimplerewritetestPackage.TYPE_BUG2_A: return createTypeBug2A();
+      case SimplerewritetestPackage.TYPE_BUG2_B: return createTypeBug2B();
       case SimplerewritetestPackage.OP: return createOp();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -410,6 +422,72 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
   {
     EObjectElementImpl eObjectElement = new EObjectElementImpl();
     return eObjectElement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TypeBug305577_1 createTypeBug305577_1()
+  {
+    TypeBug305577_1Impl typeBug305577_1 = new TypeBug305577_1Impl();
+    return typeBug305577_1;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TypeBug305577_2 createTypeBug305577_2()
+  {
+    TypeBug305577_2Impl typeBug305577_2 = new TypeBug305577_2Impl();
+    return typeBug305577_2;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TypeBug1A createTypeBug1A()
+  {
+    TypeBug1AImpl typeBug1A = new TypeBug1AImpl();
+    return typeBug1A;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TypeBug1B createTypeBug1B()
+  {
+    TypeBug1BImpl typeBug1B = new TypeBug1BImpl();
+    return typeBug1B;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TypeBug2A createTypeBug2A()
+  {
+    TypeBug2AImpl typeBug2A = new TypeBug2AImpl();
+    return typeBug2A;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TypeBug2B createTypeBug2B()
+  {
+    TypeBug2BImpl typeBug2B = new TypeBug2BImpl();
+    return typeBug2B;
   }
 
   /**

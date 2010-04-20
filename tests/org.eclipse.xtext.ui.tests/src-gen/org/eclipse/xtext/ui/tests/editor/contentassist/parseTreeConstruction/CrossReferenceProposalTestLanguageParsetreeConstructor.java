@@ -68,13 +68,8 @@ protected class Model_ElementsAssignment extends AssignmentToken  {
 			case 0: return new Class_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("elements",false)) == null) return null;
@@ -129,13 +124,15 @@ protected class Class_Group extends GroupToken {
 			case 0: return new Class_RightCurlyBracketKeyword_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getClassRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getClassRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // (superClass=[Class] "<-")?
@@ -156,8 +153,8 @@ protected class Class_Group_0 extends GroupToken {
 			case 0: return new Class_LessThanSignHyphenMinusKeyword_0_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // superClass=[Class]
@@ -177,8 +174,8 @@ protected class Class_SuperClassAssignment_0_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("superClass",false)) == null) return null;
@@ -214,8 +211,8 @@ protected class Class_LessThanSignHyphenMinusKeyword_0_1 extends KeywordToken  {
 			case 0: return new Class_SuperClassAssignment_0_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -237,8 +234,8 @@ protected class Class_NameAssignment_1 extends AssignmentToken  {
 			case 0: return new Class_Group_0(parent, this, 0, inst);
 			default: return parent.createParentFollower(this, index, index - 1, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -271,8 +268,8 @@ protected class Class_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 			case 0: return new Class_NameAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "}"
@@ -293,8 +290,8 @@ protected class Class_RightCurlyBracketKeyword_3 extends KeywordToken  {
 			case 0: return new Class_LeftCurlyBracketKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 

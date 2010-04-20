@@ -40,6 +40,12 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Spare;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TwoNumbers;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Type;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug1A;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug1B;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug2A;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug2B;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug305577_1;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug305577_2;
 
 /**
  * <!-- begin-user-doc -->
@@ -230,6 +236,48 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * @generated
    */
   private EClass eObjectElementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass typeBug305577_1EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass typeBug305577_2EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass typeBug1AEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass typeBug1BEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass typeBug2AEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass typeBug2BEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -946,6 +994,86 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getTypeBug305577_1()
+  {
+    return typeBug305577_1EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTypeBug305577_2()
+  {
+    return typeBug305577_2EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTypeBug1A()
+  {
+    return typeBug1AEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTypeBug1A_Name()
+  {
+    return (EAttribute)typeBug1AEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTypeBug1B()
+  {
+    return typeBug1BEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTypeBug2A()
+  {
+    return typeBug2AEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTypeBug2A_Name()
+  {
+    return (EAttribute)typeBug2AEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTypeBug2B()
+  {
+    return typeBug2BEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getOp()
   {
     return opEClass;
@@ -1081,6 +1209,20 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     eObjectElementEClass = createEClass(EOBJECT_ELEMENT);
     createEAttribute(eObjectElementEClass, EOBJECT_ELEMENT__NAME);
 
+    typeBug305577_1EClass = createEClass(TYPE_BUG305577_1);
+
+    typeBug305577_2EClass = createEClass(TYPE_BUG305577_2);
+
+    typeBug1AEClass = createEClass(TYPE_BUG1_A);
+    createEAttribute(typeBug1AEClass, TYPE_BUG1_A__NAME);
+
+    typeBug1BEClass = createEClass(TYPE_BUG1_B);
+
+    typeBug2AEClass = createEClass(TYPE_BUG2_A);
+    createEAttribute(typeBug2AEClass, TYPE_BUG2_A__NAME);
+
+    typeBug2BEClass = createEClass(TYPE_BUG2_B);
+
     opEClass = createEClass(OP);
     createEReference(opEClass, OP__VALUES);
   }
@@ -1135,6 +1277,14 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     concreteMultiEClass.getESuperTypes().add(this.getAbstractMulti1());
     concreteMultiEClass.getESuperTypes().add(this.getAbstractMulti2());
     eObjectRefEClass.getESuperTypes().add(this.getExpression());
+    typeBug305577_1EClass.getESuperTypes().add(this.getExpression());
+    typeBug305577_2EClass.getESuperTypes().add(this.getExpression());
+    typeBug1AEClass.getESuperTypes().add(this.getTypeBug305577_1());
+    typeBug1BEClass.getESuperTypes().add(this.getTypeBug305577_1());
+    typeBug1BEClass.getESuperTypes().add(this.getTypeBug1A());
+    typeBug2AEClass.getESuperTypes().add(this.getTypeBug305577_2());
+    typeBug2BEClass.getESuperTypes().add(this.getTypeBug305577_2());
+    typeBug2BEClass.getESuperTypes().add(this.getTypeBug2A());
     opEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
@@ -1227,6 +1377,20 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
 
     initEClass(eObjectElementEClass, EObjectElement.class, "EObjectElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEObjectElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, EObjectElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(typeBug305577_1EClass, TypeBug305577_1.class, "TypeBug305577_1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(typeBug305577_2EClass, TypeBug305577_2.class, "TypeBug305577_2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(typeBug1AEClass, TypeBug1A.class, "TypeBug1A", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTypeBug1A_Name(), ecorePackage.getEString(), "name", null, 0, 1, TypeBug1A.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(typeBug1BEClass, TypeBug1B.class, "TypeBug1B", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(typeBug2AEClass, TypeBug2A.class, "TypeBug2A", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTypeBug2A_Name(), ecorePackage.getEString(), "name", null, 0, 1, TypeBug2A.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(typeBug2BEClass, TypeBug2B.class, "TypeBug2B", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(opEClass, Op.class, "Op", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getOp_Values(), this.getExpression(), null, "values", null, 0, -1, Op.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

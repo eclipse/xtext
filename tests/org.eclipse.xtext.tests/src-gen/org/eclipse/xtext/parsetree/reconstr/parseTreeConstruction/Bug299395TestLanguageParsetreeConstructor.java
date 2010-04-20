@@ -73,13 +73,15 @@ protected class Model_Group extends GroupToken {
 			case 3: return new Model_ModelAction_0(parent, this, 3, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getModelAccess().getModelAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // {Model}
@@ -99,12 +101,10 @@ protected class Model_ModelAction_0 extends ActionToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getModelAccess().getModelAction_0().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -128,8 +128,8 @@ protected class Model_Group_1 extends GroupToken {
 			case 0: return new Model_RightCurlyBracketKeyword_1_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "{"
@@ -151,8 +151,8 @@ protected class Model_LeftCurlyBracketKeyword_1_0 extends KeywordToken  {
 			case 1: return new Model_ModelAction_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // strings+=STRING?
@@ -173,8 +173,8 @@ protected class Model_StringsAssignment_1_1 extends AssignmentToken  {
 			case 0: return new Model_LeftCurlyBracketKeyword_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("strings",false)) == null) return null;
@@ -207,8 +207,8 @@ protected class Model_RightCurlyBracketKeyword_1_2 extends KeywordToken  {
 			case 0: return new Model_StringsAssignment_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -230,8 +230,8 @@ protected class Model_Group_2 extends GroupToken {
 			case 0: return new Model_RightSquareBracketKeyword_2_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "["
@@ -253,8 +253,8 @@ protected class Model_LeftSquareBracketKeyword_2_0 extends KeywordToken  {
 			case 1: return new Model_ModelAction_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // (keys+=STRING values+=STRING)*
@@ -275,8 +275,8 @@ protected class Model_Group_2_1 extends GroupToken {
 			case 0: return new Model_ValuesAssignment_2_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // keys+=STRING
@@ -298,8 +298,8 @@ protected class Model_KeysAssignment_2_1_0 extends AssignmentToken  {
 			case 1: return new Model_LeftSquareBracketKeyword_2_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("keys",true)) == null) return null;
@@ -332,8 +332,8 @@ protected class Model_ValuesAssignment_2_1_1 extends AssignmentToken  {
 			case 0: return new Model_KeysAssignment_2_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("values",true)) == null) return null;
@@ -367,8 +367,8 @@ protected class Model_RightSquareBracketKeyword_2_2 extends KeywordToken  {
 			case 0: return new Model_Group_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
@@ -390,8 +390,8 @@ protected class Model_Group_3 extends GroupToken {
 			case 0: return new Model_SubModelAssignment_3_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "subModel"
@@ -414,8 +414,8 @@ protected class Model_SubModelKeyword_3_0 extends KeywordToken  {
 			case 2: return new Model_ModelAction_0(parent, this, 2, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // subModel=SubModel
@@ -436,8 +436,8 @@ protected class Model_SubModelAssignment_3_1 extends AssignmentToken  {
 			case 0: return new SubModel_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("subModel",false)) == null) return null;
@@ -495,13 +495,15 @@ protected class SubModel_Group extends GroupToken {
 			case 1: return new SubModel_SubModelAction_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getSubModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getSubModelAccess().getSubModelAction_0().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // {SubModel}
@@ -521,12 +523,10 @@ protected class SubModel_SubModelAction_0 extends ActionToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getSubModelAccess().getSubModelAction_0().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -550,8 +550,8 @@ protected class SubModel_Group_1 extends GroupToken {
 			case 0: return new SubModel_StringsAssignment_1_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "1"
@@ -573,8 +573,8 @@ protected class SubModel_DigitOneKeyword_1_0 extends KeywordToken  {
 			case 1: return new SubModel_SubModelAction_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "2"
@@ -595,8 +595,8 @@ protected class SubModel_DigitTwoKeyword_1_1 extends KeywordToken  {
 			case 0: return new SubModel_DigitOneKeyword_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // strings+=STRING?
@@ -617,8 +617,8 @@ protected class SubModel_StringsAssignment_1_2 extends AssignmentToken  {
 			case 0: return new SubModel_DigitTwoKeyword_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("strings",false)) == null) return null;

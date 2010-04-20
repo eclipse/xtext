@@ -67,13 +67,8 @@ protected class Start_FeatureAAssignment extends AssignmentToken  {
 			case 0: return new Start_FeatureAAssignment(parent, this, 0, inst);
 			default: return parent.createParentFollower(this, index, index - 1, inst);
 		}	
-	}	
-		
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getStartRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("featureA",true)) == null) return null;

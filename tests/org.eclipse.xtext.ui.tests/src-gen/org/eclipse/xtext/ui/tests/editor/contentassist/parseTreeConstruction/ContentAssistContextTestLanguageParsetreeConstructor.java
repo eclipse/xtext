@@ -74,13 +74,15 @@ protected class FirstLevel_Group extends GroupToken {
 			case 1: return new FirstLevel_SecondLevelAAssignment_0(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getFirstLevelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getFirstLevelRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // secondLevelA+=SecondLevelA*
@@ -101,8 +103,8 @@ protected class FirstLevel_SecondLevelAAssignment_0 extends AssignmentToken  {
 			case 0: return new SecondLevelA_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("secondLevelA",false)) == null) return null;
@@ -147,8 +149,8 @@ protected class FirstLevel_SecondLevelBAssignment_1 extends AssignmentToken  {
 			case 0: return new SecondLevelB_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("secondLevelB",false)) == null) return null;
@@ -205,13 +207,15 @@ protected class SecondLevelA_Group extends GroupToken {
 			case 0: return new SecondLevelA_ThirdLevelA2Assignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getSecondLevelARule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getSecondLevelARule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // thirdLevelA1+=ThirdLevelA1+
@@ -232,8 +236,8 @@ protected class SecondLevelA_ThirdLevelA1Assignment_0 extends AssignmentToken  {
 			case 0: return new ThirdLevelA1_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("thirdLevelA1",true)) == null) return null;
@@ -278,8 +282,8 @@ protected class SecondLevelA_ThirdLevelA2Assignment_1 extends AssignmentToken  {
 			case 0: return new ThirdLevelA2_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("thirdLevelA2",true)) == null) return null;
@@ -336,13 +340,15 @@ protected class SecondLevelB_Group extends GroupToken {
 			case 0: return new SecondLevelB_ThirdLevelB2Assignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getSecondLevelBRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getSecondLevelBRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // thirdLevelB1+=ThirdLevelB1+
@@ -363,8 +369,8 @@ protected class SecondLevelB_ThirdLevelB1Assignment_0 extends AssignmentToken  {
 			case 0: return new ThirdLevelB1_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("thirdLevelB1",true)) == null) return null;
@@ -409,8 +415,8 @@ protected class SecondLevelB_ThirdLevelB2Assignment_1 extends AssignmentToken  {
 			case 0: return new ThirdLevelB2_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("thirdLevelB2",true)) == null) return null;
@@ -468,13 +474,15 @@ protected class ThirdLevelA1_Group extends GroupToken {
 			case 1: return new ThirdLevelA1_ThirdLevelA1Action_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getThirdLevelA1Rule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getThirdLevelA1Access().getThirdLevelA1Action_1().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "A1"
@@ -494,8 +502,8 @@ protected class ThirdLevelA1_A1Keyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // {ThirdLevelA1}
@@ -516,12 +524,10 @@ protected class ThirdLevelA1_ThirdLevelA1Action_1 extends ActionToken  {
 			case 0: return new ThirdLevelA1_A1Keyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getThirdLevelA1Access().getThirdLevelA1Action_1().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -545,8 +551,8 @@ protected class ThirdLevelA1_NameAssignment_2 extends AssignmentToken  {
 			case 0: return new ThirdLevelA1_ThirdLevelA1Action_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",false)) == null) return null;
@@ -591,13 +597,15 @@ protected class ThirdLevelA2_Group extends GroupToken {
 			case 1: return new ThirdLevelA2_ThirdLevelA2Action_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getThirdLevelA2Rule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getThirdLevelA2Access().getThirdLevelA2Action_1().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "A2"
@@ -617,8 +625,8 @@ protected class ThirdLevelA2_A2Keyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // {ThirdLevelA2}
@@ -639,12 +647,10 @@ protected class ThirdLevelA2_ThirdLevelA2Action_1 extends ActionToken  {
 			case 0: return new ThirdLevelA2_A2Keyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getThirdLevelA2Access().getThirdLevelA2Action_1().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -668,8 +674,8 @@ protected class ThirdLevelA2_NameAssignment_2 extends AssignmentToken  {
 			case 0: return new ThirdLevelA2_ThirdLevelA2Action_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",false)) == null) return null;
@@ -714,13 +720,15 @@ protected class ThirdLevelB1_Group extends GroupToken {
 			case 1: return new ThirdLevelB1_ThirdLevelB1Action_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getThirdLevelB1Rule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getThirdLevelB1Access().getThirdLevelB1Action_1().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "B1"
@@ -740,8 +748,8 @@ protected class ThirdLevelB1_B1Keyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // {ThirdLevelB1}
@@ -762,12 +770,10 @@ protected class ThirdLevelB1_ThirdLevelB1Action_1 extends ActionToken  {
 			case 0: return new ThirdLevelB1_B1Keyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getThirdLevelB1Access().getThirdLevelB1Action_1().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -791,8 +797,8 @@ protected class ThirdLevelB1_NameAssignment_2 extends AssignmentToken  {
 			case 0: return new ThirdLevelB1_ThirdLevelB1Action_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",false)) == null) return null;
@@ -837,13 +843,15 @@ protected class ThirdLevelB2_Group extends GroupToken {
 			case 1: return new ThirdLevelB2_ThirdLevelB2Action_1(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getThirdLevelB2Rule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getThirdLevelB2Access().getThirdLevelB2Action_1().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // "B2"
@@ -863,8 +871,8 @@ protected class ThirdLevelB2_B2Keyword_0 extends KeywordToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
 }
 
 // {ThirdLevelB2}
@@ -885,12 +893,10 @@ protected class ThirdLevelB2_ThirdLevelB2Action_1 extends ActionToken  {
 			case 0: return new ThirdLevelB2_B2Keyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-	
+	}
+
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getThirdLevelB2Access().getThirdLevelB2Action_1().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
@@ -914,8 +920,8 @@ protected class ThirdLevelB2_NameAssignment_2 extends AssignmentToken  {
 			case 0: return new ThirdLevelB2_ThirdLevelB2Action_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",false)) == null) return null;
