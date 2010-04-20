@@ -8,16 +8,16 @@
 package org.eclipse.xtext.xtext.parser.packrat;
 
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.packrat.XtextPackratParser;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextPackratParserTest extends AbstractGeneratorTest {
+public class XtextPackratParserTest extends AbstractXtextTests {
 
 	private XtextPackratParser parser;
 

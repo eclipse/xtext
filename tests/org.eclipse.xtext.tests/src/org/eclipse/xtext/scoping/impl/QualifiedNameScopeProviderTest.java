@@ -25,6 +25,7 @@ import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetup;
 import org.eclipse.xtext.index.indexTestLanguage.Datatype;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -39,7 +40,6 @@ import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider.ImportNormalizer;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.collect.Iterables;
@@ -48,7 +48,7 @@ import com.google.common.collect.Iterables;
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class QualifiedNameScopeProviderTest extends AbstractGeneratorTest {
+public class QualifiedNameScopeProviderTest extends AbstractXtextTests {
 
 	private ImportedNamespaceAwareLocalScopeProvider scopeProvider;
 	private ResourceSetGlobalScopeProvider globalScopeProvider;

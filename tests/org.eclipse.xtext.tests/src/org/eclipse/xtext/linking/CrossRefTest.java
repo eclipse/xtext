@@ -11,6 +11,7 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.linking.langATestLanguage.LangATestLanguageFactory;
 import org.eclipse.xtext.linking.langATestLanguage.Main;
 import org.eclipse.xtext.linking.langATestLanguage.Type;
@@ -26,9 +27,8 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
-public class CrossRefTest extends AbstractGeneratorTest {
+public class CrossRefTest extends AbstractXtextTests {
 	private static final Logger logger = Logger.getLogger(CrossRefTest.class);
 	private ICrossReferenceSerializer linkingService;
 	private LangATestLanguageGrammarAccess grammar;

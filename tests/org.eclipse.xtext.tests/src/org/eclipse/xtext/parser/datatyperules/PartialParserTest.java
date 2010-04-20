@@ -7,16 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.datatyperules;
 
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.tests.EmfAssert;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class PartialParserTest extends AbstractGeneratorTest {
+public class PartialParserTest extends AbstractXtextTests {
 	
 	private String model;
 	private XtextResource resource;

@@ -9,9 +9,9 @@
 package org.eclipse.xtext.parsetree;
 
 import org.eclipse.xtext.dummy.DummyTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 
-public class HiddenTokensTest extends AbstractGeneratorTest {
+public class HiddenTokensTest extends AbstractXtextTests {
 	
 	@Override
 	protected void setUp() throws Exception {

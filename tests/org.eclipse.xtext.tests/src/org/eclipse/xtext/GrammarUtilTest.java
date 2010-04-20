@@ -12,16 +12,16 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.services.LangATestLanguageGrammarAccess;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-public class GrammarUtilTest extends AbstractGeneratorTest {
+public class GrammarUtilTest extends AbstractXtextTests {
 
 	public void testAllMetamodelDeclarations_01() throws Exception {
 		with(XtextStandaloneSetup.class);

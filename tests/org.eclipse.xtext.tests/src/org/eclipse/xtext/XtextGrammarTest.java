@@ -10,13 +10,13 @@
 package org.eclipse.xtext;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public class XtextGrammarTest extends AbstractGeneratorTest {
+public class XtextGrammarTest extends AbstractXtextTests {
 
 	@Override
 	protected void setUp() throws Exception {

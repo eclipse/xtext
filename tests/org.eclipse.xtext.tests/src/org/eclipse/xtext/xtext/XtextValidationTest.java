@@ -29,8 +29,8 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 import com.google.common.base.Predicate;
@@ -40,7 +40,7 @@ import com.google.common.collect.Collections2;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Michael Clay
  */
-public class XtextValidationTest extends AbstractGeneratorTest implements ValidationMessageAcceptor {
+public class XtextValidationTest extends AbstractXtextTests implements ValidationMessageAcceptor {
 
 	private String lastMessage;
 	

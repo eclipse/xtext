@@ -7,9 +7,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 
-public class ResourceTest extends AbstractGeneratorTest {
+public class ResourceTest extends AbstractXtextTests {
 
 //	FIXME: Make this test work again
 

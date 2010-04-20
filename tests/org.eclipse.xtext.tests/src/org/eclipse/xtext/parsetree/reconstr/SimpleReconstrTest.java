@@ -9,11 +9,11 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectBug284850;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
-public class SimpleReconstrTest extends AbstractGeneratorTest {
+public class SimpleReconstrTest extends AbstractXtextTests {
 
 	public void testSimple1() throws Exception {
 		String model = "a b";

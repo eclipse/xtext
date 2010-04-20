@@ -10,17 +10,17 @@ package org.eclipse.xtext.resource;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.Wrapper;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextResourceTest extends AbstractGeneratorTest {
+public class XtextResourceTest extends AbstractXtextTests {
 
 	private XtextResource resource;
 	private final String simpleModel = "spielplatz 1 { kind ( Bob 0 ) }";

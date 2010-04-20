@@ -20,12 +20,12 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 
-public class InheritanceTest extends AbstractGeneratorTest {
+public class InheritanceTest extends AbstractXtextTests {
 
 	@Override
 	protected void setUp() throws Exception {

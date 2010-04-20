@@ -21,11 +21,11 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.TestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
-public class NodeModelTest extends AbstractGeneratorTest {
+public class NodeModelTest extends AbstractXtextTests {
 
 	private static final String MODEL = "reducible 'x' choice optional y choice z reducible 'x' 'y'";
 

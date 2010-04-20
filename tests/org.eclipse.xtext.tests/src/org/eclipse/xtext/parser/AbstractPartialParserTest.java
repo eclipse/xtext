@@ -9,15 +9,15 @@
 package org.eclipse.xtext.parser;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.impl.PartialParsingHelper;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.EmfStructureComparator;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public abstract class AbstractPartialParserTest extends AbstractGeneratorTest {
+public abstract class AbstractPartialParserTest extends AbstractXtextTests {
 
 	protected static final boolean DEBUG = true;
 	protected EmfStructureComparator comparator;

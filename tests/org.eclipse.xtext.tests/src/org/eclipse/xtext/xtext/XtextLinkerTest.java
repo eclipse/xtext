@@ -12,14 +12,14 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public class XtextLinkerTest extends AbstractGeneratorTest {
+public class XtextLinkerTest extends AbstractXtextTests {
 
 
 	@Override

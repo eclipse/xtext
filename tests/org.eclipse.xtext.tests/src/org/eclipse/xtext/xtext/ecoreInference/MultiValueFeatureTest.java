@@ -13,13 +13,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.xtext.ecoreInference.multiValueFeatureTestLanguage.MultiValueFeatureTestLanguagePackage;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class MultiValueFeatureTest extends AbstractGeneratorTest {
+public class MultiValueFeatureTest extends AbstractXtextTests {
 
 	@Override
 	protected void setUp() throws Exception {
