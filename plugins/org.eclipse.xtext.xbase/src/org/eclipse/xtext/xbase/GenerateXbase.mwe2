@@ -1,0 +1,85 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+module org.eclipse.xtext.xbase.GenerateXbase
+
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.ui.generator.*
+import de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+import de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
+
+var projectName = "org.eclipse.xtext.xbase"
+var runtimeProject = "../${projectName}"
+var uiProject = "${runtimeProject}.ui"
+
+Workflow {
+	bean = StandaloneSetup { 
+		platformUri = "${runtimeProject}/.."
+	}
+
+	component = DirectoryCleaner {
+		directory="${runtimeProject}/src-gen"
+	}
+	component = DirectoryCleaner {
+		directory="${uiProject}/src-gen"
+	}
+
+	component = Generator {
+		pathRtProject = runtimeProject
+		pathUiProject = uiProject
+		projectNameRt = projectName
+		projectNameUi = "${projectName}.ui"
+		
+		language = {
+			uri = "classpath:/org/eclipse/xtext/xbase/Xtype.xtext" 
+			fileExtensions="___xtype"
+			fragment = grammarAccess.GrammarAccessFragment {}
+			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+			fragment = contentAssist.JavaBasedContentAssistFragment {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/xbase/Xpression.xtext" 	
+			fileExtensions = "___xtension"
+			fragment = grammarAccess.GrammarAccessFragment {}
+			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+			fragment = XtextAntlrGeneratorFragment {
+				options = {
+					backtrack = true
+				}
+			}
+			fragment = contentAssist.JavaBasedContentAssistFragment {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/xbase/Xbase.xtext" 
+			fileExtensions = "xbase"
+			fragment = grammarAccess.GrammarAccessFragment {}
+			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+			fragment = resourceFactory.ResourceFactoryFragment auto-inject {}
+			fragment = XtextAntlrGeneratorFragment {
+				options = {
+					backtrack = true
+				}
+			}
+			fragment = validation.JavaValidatorFragment {}
+            fragment = types.TypesGeneratorFragment {}
+			fragment = scoping.ImportNamespacesScopingFragment {}
+			fragment = builder.BuilderIntegrationFragment {}
+			fragment = formatting.FormatterFragment {}
+			fragment = quickfix.QuickfixProviderFragment {}
+			fragment = labeling.LabelProviderFragment {}
+			fragment = outline.TransformerFragment {}
+			fragment = outline.OutlineNodeAdapterFactoryFragment {}
+			fragment = contentAssist.JavaBasedContentAssistFragment {}
+			fragment = XtextAntlrUiGeneratorFragment {
+				options = {
+					backtrack = true
+				}
+			}
+		}
+	}
+}
