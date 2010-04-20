@@ -33,7 +33,7 @@ public class EncodingTestFactoryImpl extends EFactoryImpl implements EncodingTes
   {
     try
     {
-      EncodingTestFactory theEncodingTestFactory = (EncodingTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2010/tmf/xtext/parser/EncodingTest"); 
+      EncodingTestFactory theEncodingTestFactory = (EncodingTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2010/tmf/xtext/parser/EncodingUiTest"); 
       if (theEncodingTestFactory != null)
       {
         return theEncodingTestFactory;

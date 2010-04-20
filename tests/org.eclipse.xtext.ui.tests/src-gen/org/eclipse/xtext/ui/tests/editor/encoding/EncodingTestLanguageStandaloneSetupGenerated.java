@@ -34,8 +34,8 @@ public class EncodingTestLanguageStandaloneSetupGenerated implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2010/tmf/xtext/parser/EncodingTest")) {
-		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2010/tmf/xtext/parser/EncodingTest", org.eclipse.xtext.ui.tests.editor.encoding.encodingTest.EncodingTestPackage.eINSTANCE);
+	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2010/tmf/xtext/parser/EncodingUiTest")) {
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2010/tmf/xtext/parser/EncodingUiTest", org.eclipse.xtext.ui.tests.editor.encoding.encodingTest.EncodingTestPackage.eINSTANCE);
 	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);

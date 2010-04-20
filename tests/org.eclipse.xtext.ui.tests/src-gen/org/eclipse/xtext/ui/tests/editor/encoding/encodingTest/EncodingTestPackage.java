@@ -41,7 +41,7 @@ public interface EncodingTestPackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://www.eclipse.org/2010/tmf/xtext/parser/EncodingTest";
+  String eNS_URI = "http://www.eclipse.org/2010/tmf/xtext/parser/EncodingUiTest";
 
   /**
    * The package namespace name.

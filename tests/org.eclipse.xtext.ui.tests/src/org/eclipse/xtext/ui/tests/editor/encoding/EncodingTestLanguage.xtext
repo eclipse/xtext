@@ -9,7 +9,7 @@ grammar org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage hidden(W
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
-generate encodingTest "http://www.eclipse.org/2010/tmf/xtext/parser/EncodingTest"
+generate encodingTest "http://www.eclipse.org/2010/tmf/xtext/parser/EncodingUiTest"
 
 Model:
 	(words+=Word)*;
