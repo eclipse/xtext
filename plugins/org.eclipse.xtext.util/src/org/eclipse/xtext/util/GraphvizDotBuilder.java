@@ -10,6 +10,7 @@ package org.eclipse.xtext.util;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -28,8 +29,7 @@ import org.eclipse.emf.ecore.EPackage;
  */
 public abstract class GraphvizDotBuilder {
 
-	protected static final Logger log = Logger
-			.getLogger(GraphvizDotBuilder.class);
+	protected static final Logger log = Logger.getLogger(GraphvizDotBuilder.class);
 
 	protected class Digraph extends Props {
 
@@ -118,10 +118,10 @@ public abstract class GraphvizDotBuilder {
 
 		public abstract void draw(PrintStream out);
 
-		private String esc(String s) {
+		protected String esc(String s) {
 			if (noEsc.matcher(s).matches())
 				return s;
-			return "\"" + s.replaceAll("\"", "\\\\\"") + "\"";
+			return "\"" + s.replaceAll("\"|\\[|\\]|>|<|&", "\\\\$0") + "\"";
 		}
 
 		public void print(PrintStream out) {
@@ -163,22 +163,19 @@ public abstract class GraphvizDotBuilder {
 	}
 
 	public void draw(Object obj, PrintStream out) {
-		out.println("## This is a Graphviz .dot file "
-				+ "(http://www.graphviz.org/)");
-		out.println("## You can use the command "
-				+ "'dot -Tpdf this.dot > out.pdf' to render it.");
+		out.println("## This is a Graphviz .dot file " + "(http://www.graphviz.org/)");
+		out.println("## You can use the command " + "'dot -Tpdf this.dot > out.pdf' to render it.");
 		drawObject(obj).draw(out);
 	}
 
 	// example options: "-v -T png"
-	public void draw(Object obj, String outfile, String options)
-			throws IOException {
+	public void draw(Object obj, String outfile, String options) throws IOException {
 		String cmd = getGraphvizBinary() + " -o " + outfile + " " + options;
 		draw(obj, cmd);
 	}
 
 	public void draw(Object obj, String cmd) throws IOException {
-		log.info("Running '" + cmd + "'");
+		log.info("Running '" + cmd + "' in '" + new File(".").getCanonicalPath() + "'");
 		Process p = Runtime.getRuntime().exec(cmd);
 		PrintStream ps = new PrintStream(p.getOutputStream());
 		BufferedInputStream in = new BufferedInputStream(p.getInputStream());
@@ -208,8 +205,7 @@ public abstract class GraphvizDotBuilder {
 		if (cls instanceof EPackage)
 			return "cluster" + cls.hashCode();
 		else if (cls instanceof EObject)
-			return ((EObject) cls).eClass().getName().toLowerCase()
-					+ cls.hashCode();
+			return ((EObject) cls).eClass().getName().toLowerCase() + cls.hashCode();
 		return cls.getClass().getSimpleName().toLowerCase() + cls.hashCode();
 	}
 
