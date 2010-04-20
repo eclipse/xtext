@@ -18,15 +18,15 @@ import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.services.XtextGrammarAccess;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextGrammarSerializationTest extends AbstractGeneratorTest {
+public class XtextGrammarSerializationTest extends AbstractXtextTests {
 
 	@Override
 	public void setUp() throws Exception {

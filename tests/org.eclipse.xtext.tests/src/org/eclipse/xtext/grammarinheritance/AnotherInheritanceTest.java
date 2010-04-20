@@ -11,9 +11,9 @@ package org.eclipse.xtext.grammarinheritance;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 import org.eclipse.xtext.grammarinheritance.services.InheritanceTest2LanguageGrammarAccess;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 
-public class AnotherInheritanceTest extends AbstractGeneratorTest {
+public class AnotherInheritanceTest extends AbstractXtextTests {
 
 	@Override
 	protected void setUp() throws Exception {

@@ -7,16 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat;
 
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguagePackratParser;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class PerformanceTest extends AbstractGeneratorTest {
+public class PerformanceTest extends AbstractXtextTests {
 
 	private XtextTerminalsTestLanguagePackratParser generatedWithTerminals;
 

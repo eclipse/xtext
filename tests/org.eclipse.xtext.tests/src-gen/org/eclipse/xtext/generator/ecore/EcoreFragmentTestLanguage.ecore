@@ -5,6 +5,6 @@
     nsURI="http://www.eclipse.org/2009/tmf/xtext/EcoreFragmentTestLanguage" nsPrefix="second">
   <eClassifiers xsi:type="ecore:EClass" name="Second">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="first" eType="ecore:EClass ../../../../../../src/org/eclipse/xtext/generator/ecore/First.ecore#//First"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="first" eType="ecore:EClass classpath:/org/eclipse/xtext/generator/ecore/First.ecore#//First"/>
   </eClassifiers>
 </ecore:EPackage>

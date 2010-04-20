@@ -13,13 +13,14 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit.AbstractXtextTests.Keys;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParserTestHelper;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.valueconverter.Bug250313RuntimeModule.Converters;
 
 import com.google.inject.Binder;
@@ -27,7 +28,7 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-public abstract class AbstractBug250313Test extends AbstractGeneratorTest {
+public abstract class AbstractBug250313Test extends AbstractXtextTests {
 
 	private ParserTestHelper helper;
 	private AbstractNode node;

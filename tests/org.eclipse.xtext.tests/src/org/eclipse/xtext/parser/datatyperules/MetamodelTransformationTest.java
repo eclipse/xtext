@@ -12,12 +12,12 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class MetamodelTransformationTest extends AbstractGeneratorTest {
+public class MetamodelTransformationTest extends AbstractXtextTests {
 
 	private String model;
 	private Grammar grammar;

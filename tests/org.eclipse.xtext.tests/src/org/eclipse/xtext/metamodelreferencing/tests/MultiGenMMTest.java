@@ -10,9 +10,9 @@ package org.eclipse.xtext.metamodelreferencing.tests;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 
-public class MultiGenMMTest extends AbstractGeneratorTest {
+public class MultiGenMMTest extends AbstractXtextTests {
 
     @Override
     protected void setUp() throws Exception {

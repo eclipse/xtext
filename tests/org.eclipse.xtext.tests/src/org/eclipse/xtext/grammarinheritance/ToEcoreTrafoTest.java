@@ -17,15 +17,15 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-public class ToEcoreTrafoTest extends AbstractGeneratorTest {
+public class ToEcoreTrafoTest extends AbstractXtextTests {
 	private static final Logger logger = Logger.getLogger(ToEcoreTrafoTest.class);
 
 	@Override

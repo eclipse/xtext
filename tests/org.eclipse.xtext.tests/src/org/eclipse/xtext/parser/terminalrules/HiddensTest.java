@@ -12,13 +12,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.HiddenTerminalsTestLanguagePackage;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class HiddensTest extends AbstractGeneratorTest {
+public class HiddensTest extends AbstractXtextTests {
 
 	private EClass withoutHiddens;
 	private EClass withHiddens;

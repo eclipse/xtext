@@ -7,14 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.testlanguages.FowlerDslTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextParserBugsTest extends AbstractGeneratorTest {
+public class XtextParserBugsTest extends AbstractXtextTests {
 
 	public void testFirstTokenIsIllegal_254841() throws Exception {
 		with(FowlerDslTestLanguageStandaloneSetup.class);

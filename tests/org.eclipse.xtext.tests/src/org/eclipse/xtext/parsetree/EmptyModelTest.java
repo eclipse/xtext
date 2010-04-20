@@ -1,12 +1,12 @@
 package org.eclipse.xtext.parsetree;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.StringInputStream;
 
-public class EmptyModelTest extends AbstractGeneratorTest {
+public class EmptyModelTest extends AbstractXtextTests {
 	
 	@Override
 	protected void setUp() throws Exception {

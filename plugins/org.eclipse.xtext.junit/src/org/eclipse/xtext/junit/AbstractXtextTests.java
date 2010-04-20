@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import junit.framework.TestCase;
 
@@ -55,6 +58,7 @@ import com.google.inject.Key;
 import com.google.inject.Module;
 import com.google.inject.Provider;
 import com.google.inject.TypeLiteral;
+import com.google.inject.internal.Lists;
 import com.google.inject.name.Names;
 
 /**
@@ -73,6 +77,7 @@ public abstract class AbstractXtextTests extends TestCase {
 	private HashMap<String, Object> protocolToServiceProviderMap;
 	private HashMap<String, Object> extensionToServiceProviderMap;
 	private HashMap<String, Object> contentTypeIdentifierToServiceProviderMap;
+	private List<String> testGrammarPaths;
 
 	static {
 		//EMF Standalone setup
@@ -409,6 +414,27 @@ public abstract class AbstractXtextTests extends TestCase {
 			}
 		}
 		throw new IllegalStateException("May not happen, but helps to suppress false positives in eclipse' control flow analysis.");
+	}
+
+	protected List<String> getAllTestGrammarPaths(boolean firstOnly) {
+		if (testGrammarPaths == null) {
+			testGrammarPaths = Lists.newArrayList();
+			try {
+				String mweFile = readFileIntoString("org/eclipse/xtext/GenerateAllTestLanguages.mwe2");
+				Pattern pattern = Pattern.compile("uri\\s*=\\s*\"([^\"]*)\"");
+				Matcher matcher = pattern.matcher(mweFile);
+				while (matcher.find()) {
+					String grammarURI = matcher.group(1);
+					String grammarPath = grammarURI.replaceFirst("classpath:/", "");
+					testGrammarPaths.add(grammarPath);
+					if(firstOnly) 
+						break;
+				}
+			} catch (Exception exc) {
+	
+			}
+		}
+		return testGrammarPaths;
 	}
 
 	public static final class Keys {

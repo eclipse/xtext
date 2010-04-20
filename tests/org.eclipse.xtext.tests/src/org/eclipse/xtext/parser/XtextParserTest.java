@@ -14,9 +14,9 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 
-public class XtextParserTest extends AbstractGeneratorTest {
+public class XtextParserTest extends AbstractXtextTests {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();

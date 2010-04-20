@@ -11,8 +11,8 @@ package org.eclipse.xtext.parsetree;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
  * Unit test for <code>ParseTreeUtil</code>.
@@ -20,7 +20,7 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
  * @author Michael Clay - Initial contribution and API
  * @see ParseTreeUtil
  */
-public class ParseTreeUtilTest extends AbstractGeneratorTest {
+public class ParseTreeUtilTest extends AbstractXtextTests {
 
 	@Override
 	protected void setUp() throws Exception {

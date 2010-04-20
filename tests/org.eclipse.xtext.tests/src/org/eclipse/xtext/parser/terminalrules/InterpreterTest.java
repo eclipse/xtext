@@ -9,13 +9,13 @@ package org.eclipse.xtext.parser.terminalrules;
 
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.generator.parser.TerminalRuleInterpreter;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguageGrammarAccess;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class InterpreterTest extends AbstractGeneratorTest {
+public class InterpreterTest extends AbstractXtextTests {
 
 	private TerminalRulesTestLanguageGrammarAccess grammarAccess;
 

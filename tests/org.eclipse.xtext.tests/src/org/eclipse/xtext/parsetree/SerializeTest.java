@@ -1,9 +1,9 @@
 package org.eclipse.xtext.parsetree;
 
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
-public class SerializeTest extends AbstractGeneratorTest {
+public class SerializeTest extends AbstractXtextTests {
 	
 	@Override
 	protected void setUp() throws Exception {
