@@ -1,0 +1,94 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+module org.eclipse.xtext.bootstrap.GenerateXtext
+
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.ui.generator.*
+import de.itemis.xtext.antlr.*
+
+var runtimeProjectName = "org.eclipse.xtext"
+var uiProjectName = "org.eclipse.xtext.xtext.ui"
+var commonUiProjectName = "org.eclipse.xtext.ui"
+var runtimeProject = "../${runtimeProjectName}"
+var uiProject = "../${uiProjectName}"
+var commonUiProject = "../${commonUiProjectName}"
+var file.extensions = "xtext,xtext2"
+
+Workflow {
+	bean = StandaloneSetup {
+		platformUri = "${runtimeProject}/.."
+	}
+	
+	component = DirectoryCleaner {
+		directory="${runtimeProject}/src-gen"
+	}
+	component = DirectoryCleaner {
+		directory="${uiProject}/src-gen"
+	}
+	component = DirectoryCleaner {
+		directory="${commonUiProject}/src-gen"
+	}
+	
+	component = Generator {
+		pathRtProject = runtimeProject
+		pathUiProject = uiProject
+		projectNameRt = runtimeProjectName
+		projectNameUi = uiProjectName
+		activator = "org.eclipse.xtext.xtext.ui.internal.Activator"
+		language = {
+			fragment = grammarAccess.GrammarAccessFragment {}
+			fragment = parser.PackratParserFragment {}
+			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+			fragment = XtextAntlrGeneratorFragment {
+				options = {
+					classSplitting = true
+				} 
+			}
+			fragment = resourceFactory.ResourceFactoryFragment { 
+				fileExtensions="${file.extensions}"
+			}
+			fragment = contentAssist.JavaBasedContentAssistFragment {}
+			fragment = labeling.LabelProviderFragment {}
+			fragment = XtextAntlrUiGeneratorFragment {
+				options = {
+					classSplitting = true 
+				}
+			}
+		}
+	}
+	
+	component = Generator {
+		pathRtProject = runtimeProject
+		pathUiProject = uiProject
+		projectNameRt = runtimeProjectName
+		projectNameUi = uiProjectName
+		activator = "org.eclipse.xtext.xtext.ui.internal.Activator"
+		language = {
+			uri = "platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext" 
+			fileExtensions = "${file.extensions}"
+		}
+	}
+
+	component = Generator {
+		pathRtProject = runtimeProject
+		pathUiProject = uiProject
+		projectNameRt = runtimeProjectName
+		projectNameUi = uiProjectName
+		activator = "org.eclipse.xtext.xtext.ui.internal.Activator"
+		language = {
+			uri = "platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/common/Terminals.xtext" 
+			fileExtensions = "${file.extensions}"
+			fragment = grammarAccess.GrammarAccessFragment {}
+			fragment = parser.PackratParserFragment {}
+			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+			fragment = contentAssist.JavaBasedContentAssistFragment {}
+		}
+	}
+}
+
