@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
@@ -27,7 +28,6 @@ import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 import org.eclipse.xtext.scoping.impl.LoadOnDemandResourceDescriptions;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.IResourceScopeCache;
 
 import com.google.inject.Provider;
@@ -35,7 +35,7 @@ import com.google.inject.Provider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeProvider {
+public class PartialLinkingTest extends AbstractXtextTests implements IScopeProvider {
 
 	private boolean doFakeScope;
 

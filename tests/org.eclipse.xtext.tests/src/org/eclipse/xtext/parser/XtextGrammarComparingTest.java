@@ -8,11 +8,8 @@
 package org.eclipse.xtext.parser;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 
-import org.eclipse.xtext.GenerateAllTestGrammars;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.util.Pair;
@@ -28,18 +25,16 @@ public class XtextGrammarComparingTest extends AbstractParserComparingTest {
 
 	@Override
 	protected Iterator<Pair<String, String>> getAllModels() {
-		List<Class<?>> classes = Arrays.asList(GenerateAllTestGrammars.getTestGrammarClasses());
-		return Iterators.transform(classes.iterator(), new Function<Class<?>, Pair<String, String>>() {
-			public Pair<String, String> apply(Class<?> param) {
-				String filename = GenerateAllTestGrammars.getGrammarFileName(param);
+		return Iterators.transform(getAllTestGrammarPaths(false).iterator(), new Function<String, Pair<String, String>>() {
+			public Pair<String, String> apply(String grammarPath) {
 				String model;
 				try {
-					model = readFileIntoString(filename);
+					model = readFileIntoString(grammarPath);
 				}
 				catch (IOException e) {
 					throw new RuntimeException(e);
 				}
-				return Tuples.create(param.getSimpleName(), model);
+				return Tuples.create(grammarPath, model);
 			}
 		});
 	}

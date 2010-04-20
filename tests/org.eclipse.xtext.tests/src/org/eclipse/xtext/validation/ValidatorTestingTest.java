@@ -7,8 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
-import static org.eclipse.xtext.junit.validation.AssertableDiagnostics.error;
-import static org.eclipse.xtext.junit.validation.AssertableDiagnostics.warning;
+import static org.eclipse.xtext.junit.validation.AssertableDiagnostics.*;
 
 import java.util.Arrays;
 import java.util.List;

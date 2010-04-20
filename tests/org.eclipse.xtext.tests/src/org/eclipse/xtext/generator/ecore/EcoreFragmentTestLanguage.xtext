@@ -1,6 +1,6 @@
 grammar org.eclipse.xtext.generator.ecore.EcoreFragmentTestLanguage with org.eclipse.xtext.common.Terminals
 
-import "platform:/resource/org.eclipse.xtext.tests/src/org/eclipse/xtext/generator/ecore/First.ecore" as first
+import "classpath:/org/eclipse/xtext/generator/ecore/First.ecore" as first
 generate second "http://www.eclipse.org/2009/tmf/xtext/EcoreFragmentTestLanguage" as second
 
 Second returns second::Second:

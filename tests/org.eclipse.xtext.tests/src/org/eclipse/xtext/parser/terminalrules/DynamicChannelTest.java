@@ -9,15 +9,15 @@ package org.eclipse.xtext.parser.terminalrules;
 
 import java.util.List;
 
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DynamicChannelTest extends AbstractGeneratorTest {
+public class DynamicChannelTest extends AbstractXtextTests {
 
 	private final String grammar = "grammar";
 	private final String a = "a";

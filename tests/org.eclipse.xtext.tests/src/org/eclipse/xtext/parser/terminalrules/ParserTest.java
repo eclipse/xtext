@@ -11,13 +11,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.TerminalRulesTestLanguagePackage;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ParserTest extends AbstractGeneratorTest {
+public class ParserTest extends AbstractXtextTests {
 
 	private EStructuralFeature idFeature;
 	private EStructuralFeature intFeature;

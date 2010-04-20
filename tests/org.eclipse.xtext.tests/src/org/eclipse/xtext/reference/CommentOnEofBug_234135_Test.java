@@ -11,15 +11,15 @@ package org.eclipse.xtext.reference;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  *
  */
-public class CommentOnEofBug_234135_Test extends AbstractGeneratorTest {
+public class CommentOnEofBug_234135_Test extends AbstractXtextTests {
 
     public void testCommentOnEof() throws Exception {
         with(ReferenceGrammarTestLanguageStandaloneSetup.class);

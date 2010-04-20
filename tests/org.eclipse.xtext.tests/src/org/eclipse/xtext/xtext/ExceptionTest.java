@@ -10,14 +10,14 @@ package org.eclipse.xtext.xtext;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 
 import com.google.common.collect.Iterables;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ExceptionTest extends AbstractGeneratorTest {
+public class ExceptionTest extends AbstractXtextTests {
 
 	@Override
 	protected void setUp() throws Exception {

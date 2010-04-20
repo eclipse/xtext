@@ -7,52 +7,54 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
-import java.io.IOException;
+import java.util.Iterator;
 
 import junit.framework.TestResult;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.eclipse.xtext.GenerateAllTestGrammars;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.resource.XtextResource;
 
 /**
- * Really long running smoke tests for the xtext grammar.
- * Uses all test grammars.
- *
+ * Really long running smoke tests for the xtext grammar. Uses all test grammars.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Jan Koehnlein
  */
-@SuppressWarnings("unused")
-public class ResourceLoadTest extends AbstractGeneratorTest {
+public class ResourceLoadTest extends AbstractXtextTests {
 
-	private Class<?> clazz;
-
+	private String grammarPath;
 	private String model;
+	
+	private static boolean FIRST_ONLY = true; 
 
 	@Override
 	public int countTestCases() {
-		return super.countTestCases() * getTestClasses().length;
-	}
-
-	private Class<?>[] getTestClasses() {
-		return GenerateAllTestGrammars.getTestGrammarClasses();
+		return super.countTestCases() * getAllTestGrammarPaths(FIRST_ONLY).size();
 	}
 
 	@Override
 	public String getName() {
-		return super.getName() + (clazz != null ? (" [" + clazz.getSimpleName() + "]") : "");
+		return super.getName() + (grammarPath != null ? (" [" + grammarPath + "]") : "");
 	}
 
 	@Override
 	public void run(TestResult result) {
-		for(int i = 0; i < getTestClasses().length; i++) {
-//		for(int i = GenerateAllTestGrammars.testclasses.length - 1; i >= 0; i--) {
-			this.clazz = getTestClasses()[i];
-//			this.clazz = GenerateAllTestGrammars.testclasses[8];
-			initModel();
-			super.run(result);
+		for (String testGrammarPath : getAllTestGrammarPaths(FIRST_ONLY)) {
+			try {
+				model = null;
+				grammarPath = testGrammarPath;
+				model = readFileIntoString(testGrammarPath);
+				super.run(result);
+			} catch (Exception exc) {
+				result.addError(this, exc);
+			}
 		}
 	}
 
@@ -62,66 +64,54 @@ public class ResourceLoadTest extends AbstractGeneratorTest {
 		with(XtextStandaloneSetup.class);
 	}
 
-	private void initModel() {
-		try {
-			model = readFileIntoString(GenerateAllTestGrammars.getGrammarFileName(clazz));
-		} catch(IOException e) {
-			throw new RuntimeException(e);
+	public void testNoExceptionDiagnostics_01() throws Exception {
+		for (int i = 0; i < model.length(); i++) {
+			String model = this.model.substring(0, i);
+			Resource r = getResourceFromStringAndExpect(model, UNKNOWN_EXPECTATION);
+			assertNoExceptionDiagnostic(r, model);
 		}
 	}
 
-//	public void testNoExceptionDiagnostics_01() throws Exception{
-//		for(int i = 0; i < model.length(); i++) {
-//			String model = this.model.substring(0, i);
-//			Resource r = getResourceFromString(model);
-//			assertNoExceptionDiagnostic(r, model);
-//		}
-//	}
+	public void testNoExceptionDiagnostics_02() throws Exception {
+		for (int i = 0; i < model.length(); i++) {
+			String model = this.model.substring(i);
+			Resource r = getResourceFromStringAndExpect(model, UNKNOWN_EXPECTATION);
+			assertNoExceptionDiagnostic(r, model);
+		}
+	}
 
-//	public void testNoExceptionDiagnostics_02() throws Exception{
-//		for(int i = 0; i < model.length(); i++) {
-//			String model = this.model.substring(i);
-//			Resource r = getResourceFromString(model);
-//			assertNoExceptionDiagnostic(r, model);
-//		}
-//	}
+	public void testNoExceptionDiagnostics_03() throws Exception {
+		for (int i = 0; i < model.length() - 1; i++) {
+			String model = this.model.substring(0, i) + this.model.substring(i + 1);
+			//			System.out.println(model);
+			Resource r = getResourceFromStringAndExpect(model, UNKNOWN_EXPECTATION);
+			assertNoExceptionDiagnostic(r, model);
+		}
+	}
 
-//	public void testNoExceptionDiagnostics_03() throws Exception{
-//		for(int i = 0; i < model.length() - 1; i++) {
-//			String model = this.model.substring(0, i) + this.model.substring(i + 1);
-////			System.out.println(model);
-//			Resource r = getResourceFromString(model);
-//			assertNoExceptionDiagnostic(r, model);
-//		}
-//	}
-//
-//	public void testNoExceptionDiagnostics_04() throws Exception {
-//		XtextResource r = getResourceFromString(this.model);
-//		assertTrue(r.getErrors().isEmpty());
-//		CompositeNode node = r.getParseResult().getRootNode();
-//		Iterable<Pair<Integer, Integer>> nodeBounds = CollectionUtils.map(node.eAllContents(), new Function<EObject, Pair<Integer, Integer>>() {
-//			public Pair<Integer, Integer> exec(EObject param) {
-//				AbstractNode node = (AbstractNode) param;
-//				return Tuples.create(node.getOffset(), node.getLength());
-//			}
-//		});
-//		for(Pair<Integer, Integer> bound: nodeBounds) {
-//			String model = this.model.substring(0, bound.getFirst()) + this.model.substring(bound.getFirst() + bound.getSecond());
-//			Resource res = getResourceFromString(model);
-//			assertNoExceptionDiagnostic(res, model);
-//		}
-//	}
+	public void testNoExceptionDiagnostics_04() throws Exception {
+		XtextResource r = getResourceFromString(this.model);
+		assertTrue(r.getErrors().isEmpty());
+		CompositeNode node = r.getParseResult().getRootNode();
+		for (Iterator<EObject> i = node.eAllContents(); i.hasNext();) {
+			AbstractNode childNode = (AbstractNode) i.next();
+			String subModel = model.substring(0, childNode.getOffset())
+					+ model.substring(childNode.getOffset() + childNode.getLength());
+			Resource res = getResourceFromStringAndExpect(model, UNKNOWN_EXPECTATION);
+			assertNoExceptionDiagnostic(res, subModel);
+		}
+	}
 
 	private void assertNoExceptionDiagnostic(Resource r, String model) throws Exception {
-		for(Diagnostic d: r.getErrors()) {
+		for (Diagnostic d : r.getErrors()) {
 			if (d instanceof ExceptionDiagnostic) {
-				throw new Exception(model, ((ExceptionDiagnostic)d).getException());
+				throw new Exception(model, ((ExceptionDiagnostic) d).getException());
 			}
 		}
 	}
 
 	public void testDummy() {
-		assertNotNull(clazz);
+		assertNotNull(model);
 	}
 
 }

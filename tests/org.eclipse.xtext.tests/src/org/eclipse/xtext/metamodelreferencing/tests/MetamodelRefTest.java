@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.metamodelreferencing.tests;
 
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 
-public class MetamodelRefTest extends AbstractGeneratorTest {
+public class MetamodelRefTest extends AbstractXtextTests {
 
     @Override
     protected void setUp() throws Exception {

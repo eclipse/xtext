@@ -11,16 +11,16 @@ package org.eclipse.xtext.reference;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  *
  */
-public class LeafNodeBug_234132_Test extends AbstractGeneratorTest {
+public class LeafNodeBug_234132_Test extends AbstractXtextTests {
 	
 	private static final Logger logger = Logger.getLogger(LeafNodeBug_234132_Test.class);
 

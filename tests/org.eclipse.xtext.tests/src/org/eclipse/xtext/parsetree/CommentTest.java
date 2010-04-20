@@ -11,13 +11,13 @@ package org.eclipse.xtext.parsetree;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.dummy.DummyTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  *
  */
-public class CommentTest extends AbstractGeneratorTest{
+public class CommentTest extends AbstractXtextTests{
 
     @Override
     protected void setUp() throws Exception {

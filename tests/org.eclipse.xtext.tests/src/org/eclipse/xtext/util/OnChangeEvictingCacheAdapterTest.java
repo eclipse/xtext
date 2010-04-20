@@ -7,12 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
+import junit.framework.TestCase;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.util.OnChangeEvictingCache.CacheAdapter;
-
-import junit.framework.TestCase;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
