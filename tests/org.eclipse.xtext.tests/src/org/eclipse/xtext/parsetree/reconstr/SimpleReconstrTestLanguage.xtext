@@ -15,8 +15,11 @@ Op returns Expression:
 	Term ({Op.values+=current} values+=Term)*;
 	
 Term returns Expression:
-	Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2 | Loop1 | Loop2 | Loop3 | Loop4 | LoopBug285452 | DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439 | EObjectRef;
-	
+	Atom | TwoNumbers | ManyStrings | Type | Ref2 | Spare | Boolean | Transient1 | 
+	Consumed1 | Consumed2 | Loop1 | Loop2 | Loop3 | Loop4 | LoopBug285452 | 
+	DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439 | 
+	EObjectRef | TypeBug305577_1 | TypeBug305577_2 | Parens;
+		
 Atom: 
 	name=ID;
 
@@ -94,3 +97,13 @@ EObjectRef:
 	
 EObjectElement:
 	name=ID;
+	
+TypeBug305577_1: "#17" (TypeBug1A | TypeBug1B);
+TypeBug305577_2: "#18" (TypeBug2B | TypeBug2A);
+
+TypeBug1AInh returns TypeBug1A: TypeBug1B; 
+TypeBug1A: {TypeBug1A} "ka" name=ID;
+TypeBug1B: {TypeBug1B} "kb" name=ID;
+TypeBug2AInh returns TypeBug2A: TypeBug2B; 
+TypeBug2A: {TypeBug2A} "ka" name=ID;
+TypeBug2B: {TypeBug2B} "kb" name=ID;

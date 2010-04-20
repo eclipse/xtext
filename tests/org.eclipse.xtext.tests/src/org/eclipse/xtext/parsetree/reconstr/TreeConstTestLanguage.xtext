@@ -6,18 +6,9 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.grammaranalysis;
+grammar org.eclipse.xtext.parsetree.reconstr.TreeConstTestLanguage
+   with org.eclipse.xtext.common.Terminals
 
-/**
- * @author Moritz Eysholdt - Initial contribution and API
- */
-@SuppressWarnings("rawtypes")
-public interface INFATransition<S extends INFAState, T extends INFATransition> {
-	public int getPrecedence();
-
-	public S getSource();
-
-	public S getTarget();
-
-	public boolean isRuleCall();
-}
+generate treeConstTest "http://www.eclipse.org/2010/tmf/xtext/TreeConstTest"
+ 
+Model: name=ID;

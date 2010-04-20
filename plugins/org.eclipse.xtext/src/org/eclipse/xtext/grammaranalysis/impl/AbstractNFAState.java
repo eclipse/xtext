@@ -8,9 +8,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.grammaranalysis.impl;
 
+import static com.google.common.collect.Iterables.*;
+import static org.eclipse.xtext.GrammarUtil.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.xtext.AbstractElement;
@@ -24,9 +28,12 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.UnorderedGroup;
+import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider.NFABuilder;
 import org.eclipse.xtext.grammaranalysis.INFAState;
 import org.eclipse.xtext.grammaranalysis.INFATransition;
-import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider.NFABuilder;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -56,8 +63,7 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 			collectCalledRules(ele);
 			collectFollowers(ele);
 		} else {
-			followers.add(builder.getTransition((S) this,
-					builder.getState(ele), false));
+			followers.add(builder.getTransition((S) this, builder.getState(ele), false));
 		}
 	}
 
@@ -85,8 +91,7 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 			if (r.getRule() instanceof ParserRule) {
 				ParserRule pr = (ParserRule) r.getRule();
 				if (!GrammarUtil.isDatatypeRule(pr))
-					ruleCalls.add(builder.getTransition((S) this, builder
-							.getState(pr.getAlternatives()), true));
+					ruleCalls.add(builder.getTransition((S) this, builder.getState(pr.getAlternatives()), true));
 			}
 	}
 
@@ -94,22 +99,20 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 		if (ele instanceof Group || ele instanceof UnorderedGroup) {
 			List<AbstractElement> elements = ((CompoundElement) ele).getElements();
 			switch (builder.getDirection()) {
-			case FORWARD:
-				for (int i = 0; i < elements.size(); i++) {
-					addFollower(elements.get(i));
-					if (!GrammarUtil
-							.isOptionalCardinality(elements.get(i)))
-						break;
-				}
-				break;
-			case BACKWARD:
-				for (int i = elements.size() - 1; i >= 0; i--) {
-					addFollower(elements.get(i));
-					if (!GrammarUtil
-							.isOptionalCardinality(elements.get(i)))
-						break;
-				}
-				break;
+				case FORWARD:
+					for (int i = 0; i < elements.size(); i++) {
+						addFollower(elements.get(i));
+						if (!GrammarUtil.isOptionalCardinality(elements.get(i)))
+							break;
+					}
+					break;
+				case BACKWARD:
+					for (int i = elements.size() - 1; i >= 0; i--) {
+						addFollower(elements.get(i));
+						if (!GrammarUtil.isOptionalCardinality(elements.get(i)))
+							break;
+					}
+					break;
 			}
 		} else if (ele instanceof Alternatives)
 			for (AbstractElement e : ((Alternatives) ele).getElements())
@@ -136,30 +139,30 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 			List<AbstractElement> siblings = ((CompoundElement) container).getElements();
 			int i = siblings.indexOf(ele);
 			switch (builder.getDirection()) {
-			case FORWARD:
-				if ((i + 1) >= siblings.size()) {
-					if (GrammarUtil.isMultipleCardinality(container))
-						addFollower(container);
-					collectFollowersOther(container);
-				} else {
-					AbstractElement next = siblings.get(i + 1);
-					addFollower(next);
-					if (GrammarUtil.isOptionalCardinality(next))
-						collectFollowersOther(next);
-				}
-				break;
-			case BACKWARD:
-				if (i <= 0) {
-					if (GrammarUtil.isMultipleCardinality(container))
-						addFollower(container);
-					collectFollowersOther(container);
-				} else {
-					AbstractElement next = siblings.get(i - 1);
-					addFollower(next);
-					if (GrammarUtil.isOptionalCardinality(next))
-						collectFollowersOther(next);
-				}
-				break;
+				case FORWARD:
+					if ((i + 1) >= siblings.size()) {
+						if (GrammarUtil.isMultipleCardinality(container))
+							addFollower(container);
+						collectFollowersOther(container);
+					} else {
+						AbstractElement next = siblings.get(i + 1);
+						addFollower(next);
+						if (GrammarUtil.isOptionalCardinality(next))
+							collectFollowersOther(next);
+					}
+					break;
+				case BACKWARD:
+					if (i <= 0) {
+						if (GrammarUtil.isMultipleCardinality(container))
+							addFollower(container);
+						collectFollowersOther(container);
+					} else {
+						AbstractElement next = siblings.get(i - 1);
+						addFollower(next);
+						if (GrammarUtil.isOptionalCardinality(next))
+							collectFollowersOther(next);
+					}
+					break;
 			}
 		} else if (ele.eContainer() instanceof Assignment) {
 			Assignment cntAss = (Assignment) ele.eContainer();
@@ -173,6 +176,18 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 			collectFollowersOther(cntAss);
 		} else if (ele.eContainer() instanceof AbstractRule)
 			endState = true;
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	protected void collectReferencesToThis(S match, Set<Object> visited, List<T> following) {
+		if (!visited.add(this))
+			return;
+		for (T transition : concat(getFollowers(), getParentFollowers()))
+			if (!transition.isRuleCall()) {
+				((AbstractNFAState) transition.getTarget()).collectReferencesToThis(match, visited, following);
+				if (transition.getTarget() == match)
+					following.add(transition);
+			}
 	}
 
 	protected boolean filter(AbstractElement ele) {
@@ -193,6 +208,14 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 		if (followers == null || ruleCalls == null)
 			collectAllFollowers();
 		return ruleCalls.size() == 0 ? followers : ruleCalls;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public List<T> getLocalIncomming() {
+		List<T> result = Lists.newArrayList();
+		AbstractElement rootEle = containingRule(element).getAlternatives();
+		((AbstractNFAState) builder.getState(rootEle)).collectReferencesToThis(this, Sets.newHashSet(), result);
+		return result;
 	}
 
 	public List<T> getParentFollowers() {

@@ -274,6 +274,26 @@ public class SimpleReconstrTest extends AbstractXtextTests {
 		opt.setFormat(false);
 		assertEquals(model, getSerializer().serialize(result, opt));
 	}
+	
+	public void testTypeBug305577a() throws Exception {
+		String model = "#17 ka foo";
+		assertEquals(model, parseAndSerialize(model));
+	}
+	
+	public void testTypeBug305577b() throws Exception {
+		String model = "#17 kb foo";
+		assertEquals(model, parseAndSerialize(model));
+	}
+	
+	public void testTypeBug305577c() throws Exception {
+		String model = "#18 ka foo";
+		assertEquals(model, parseAndSerialize(model));
+	}
+	
+	public void testTypeBug305577d() throws Exception {
+		String model = "#17 kb foo";
+		assertEquals(model, parseAndSerialize(model));
+	}
 
 	@Override
 	protected void setUp() throws Exception {

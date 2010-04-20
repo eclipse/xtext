@@ -16,7 +16,6 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
@@ -27,7 +26,6 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -37,15 +35,14 @@ import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
-import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
-import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
-import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IEnumLiteralSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IKeywordSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer;
+import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
+import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
+import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
 import org.eclipse.xtext.util.EmfFormatter;
-import org.eclipse.xtext.xtext.CurrentTypeFinder;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -177,11 +174,10 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			return tryConsumeVal();
 		}
 
-		protected abstract IInstanceDescription tryConsumeVal();
+		protected IInstanceDescription tryConsumeVal() {
+			return current;
+		}
 	}
-
-	@Inject
-	protected TokenUtil tokenUtil;
 
 	public abstract class ActionToken extends AbstractToken {
 
@@ -191,18 +187,8 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 	}
 
 	public abstract class AlternativesToken extends AbstractToken {
-
 		public AlternativesToken(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 			super(parent, next, no, current);
-		}
-
-		@Override
-		protected IInstanceDescription tryConsumeVal() {
-			EClassifier currentType = currentTypeFinder.findCurrentTypeAfter(getGrammarElement());
-			if (currentType != null)
-				if (!current.isInstanceOf(currentType))
-					return null;
-			return current;
 		}
 	}
 
@@ -339,18 +325,8 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 	}
 
 	public abstract class GroupToken extends AbstractToken {
-
 		public GroupToken(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 			super(parent, next, no, current);
-		}
-
-		@Override
-		protected IInstanceDescription tryConsumeVal() {
-			EClassifier currentType = currentTypeFinder.findCurrentTypeAfter(getGrammarElement());
-			if (currentType != null)
-				if (!current.isInstanceOf(currentType))
-					return null;
-			return current;
 		}
 	}
 
@@ -369,11 +345,6 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		protected String serializeThisInternal(AbstractNode node) {
 			return keywordSerializer.serializeUnassignedKeyword(current.getDelegate(), (Keyword) getGrammarElement(),
 					node);
-		}
-
-		@Override
-		protected IInstanceDescription tryConsumeVal() {
-			return current;
 		}
 	}
 
@@ -400,15 +371,9 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		public AbstractElement getGrammarElement() {
 			return null;
 		}
-
-		@Override
-		protected IInstanceDescription tryConsumeVal() {
-			return current;
-		}
 	}
 
 	public abstract class RuleCallToken extends AbstractToken {
-
 		public RuleCallToken(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 			super(parent, next, no, current);
 		}
@@ -430,26 +395,11 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			return valueSerializer
 					.serializeUnassignedValue(current.getDelegate(), (RuleCall) getGrammarElement(), node);
 		}
-
-		@Override
-		protected IInstanceDescription tryConsumeVal() {
-			return current;
-		}
 	}
 
 	public abstract class UnorderedGroupToken extends AbstractToken {
-
 		public UnorderedGroupToken(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 			super(parent, next, no, current);
-		}
-
-		@Override
-		protected IInstanceDescription tryConsumeVal() {
-			EClassifier currentType = currentTypeFinder.findCurrentTypeAfter(getGrammarElement());
-			if (currentType != null)
-				if (!current.isInstanceOf(currentType))
-					return null;
-			return current;
 		}
 	}
 
@@ -565,13 +515,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 	protected ICommentAssociater commentAssociater;
 
 	@Inject
-	protected IValueConverterService converterService;
-
-	@Inject
 	protected ICrossReferenceSerializer crossRefSerializer;
-
-	@Inject
-	protected CurrentTypeFinder currentTypeFinder;
 
 	@Inject
 	protected IEnumLiteralSerializer enumLitSerializer;
@@ -583,6 +527,9 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 	protected IKeywordSerializer keywordSerializer;
 
 	private final Logger log = Logger.getLogger(AbstractParseTreeConstructor.class);
+
+	@Inject
+	protected TokenUtil tokenUtil;
 
 	@Inject
 	protected ITransientValueService tvService;
