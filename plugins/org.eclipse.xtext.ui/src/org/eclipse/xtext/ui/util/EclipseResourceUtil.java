@@ -90,7 +90,7 @@ public class EclipseResourceUtil {
 			final IJavaProject javaProject = JavaCore.create(project);
 			final IProjectDescription projectDescription = ResourcesPlugin.getWorkspace().newProjectDescription(
 					projectName);
-			if (!Platform.getLocation().equals(location.removeLastSegments(1))) {
+			if (location!=null && !Platform.getLocation().equals(location.removeLastSegments(1))) {
 				projectDescription.setLocation(location);
 			}
 			project.create(projectDescription, subMonitor.newChild(1));
