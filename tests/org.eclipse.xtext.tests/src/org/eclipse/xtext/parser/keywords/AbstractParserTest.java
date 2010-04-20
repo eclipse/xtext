@@ -11,16 +11,17 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit.AbstractXtextTests.Keys;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParserTestHelper;
 import org.eclipse.xtext.parser.keywords.keywordsTestLanguage.KeywordsTestLanguagePackage;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractParserTest extends AbstractGeneratorTest {
+public abstract class AbstractParserTest extends AbstractXtextTests {
 
 	private ParserTestHelper helper;
 	private EStructuralFeature first;

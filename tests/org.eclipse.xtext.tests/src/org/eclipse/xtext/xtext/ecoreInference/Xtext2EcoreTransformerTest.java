@@ -34,11 +34,11 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.xtext.XtextLinker;
 import org.eclipse.xtext.xtext.XtextLinker.PackageRemover;
 
@@ -47,7 +47,7 @@ import org.eclipse.xtext.xtext.XtextLinker.PackageRemover;
  * @author Heiko Behrens
  * @see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#metamodelInference
  */
-public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
+public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 
 	private ErrorAcceptor errorAcceptorMock;
 

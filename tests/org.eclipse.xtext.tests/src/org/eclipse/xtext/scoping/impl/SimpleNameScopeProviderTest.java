@@ -12,12 +12,12 @@ import java.util.HashSet;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.linking.ImportUriTestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.importedURI.ImportedURIPackage;
 import org.eclipse.xtext.linking.importedURI.Main;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 import com.google.common.collect.Sets;
 
@@ -25,7 +25,7 @@ import com.google.common.collect.Sets;
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public class SimpleNameScopeProviderTest extends AbstractGeneratorTest {
+public class SimpleNameScopeProviderTest extends AbstractXtextTests {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();

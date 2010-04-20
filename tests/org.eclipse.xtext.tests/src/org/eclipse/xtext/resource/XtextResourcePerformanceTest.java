@@ -7,13 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextResourcePerformanceTest extends AbstractGeneratorTest {
+public class XtextResourcePerformanceTest extends AbstractXtextTests {
 
 	private static final int NUM_ELEMENTS = 10;
 	private String model;

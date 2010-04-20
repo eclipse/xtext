@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
@@ -24,14 +25,13 @@ import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.TreeTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.treeTestLanguage.Model;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.xtextTest.AbstractRule;
 import org.eclipse.xtext.xtextTest.Assignment;
 import org.eclipse.xtext.xtextTest.Grammar;
 import org.eclipse.xtext.xtextTest.Keyword;
 import org.eclipse.xtext.xtextTest.RuleCall;
 
-public class ParseErrorHandlingTest extends AbstractGeneratorTest {
+public class ParseErrorHandlingTest extends AbstractXtextTests {
 
 	private static final Logger logger = Logger.getLogger(ParseErrorHandlingTest.class);
 

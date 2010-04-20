@@ -11,13 +11,13 @@ package org.eclipse.xtext.scoping;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import junit.framework.TestCase;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.resource.IEObjectDescription;
-
-import junit.framework.TestCase;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

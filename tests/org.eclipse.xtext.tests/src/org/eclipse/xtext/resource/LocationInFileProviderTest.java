@@ -10,8 +10,6 @@ package org.eclipse.xtext.resource;
 import java.util.List;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.resource.DefaultLocationInFileProvider;
-import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.tests.LocationProviderTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.locationprovidertest.Element;
 import org.eclipse.xtext.ui.tests.locationprovidertest.LocationprovidertestPackage;

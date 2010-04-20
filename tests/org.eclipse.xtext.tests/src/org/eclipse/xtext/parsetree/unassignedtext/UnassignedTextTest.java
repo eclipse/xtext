@@ -1,11 +1,11 @@
 package org.eclipse.xtext.parsetree.unassignedtext;
 
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class UnassignedTextTest extends AbstractGeneratorTest {
+public class UnassignedTextTest extends AbstractXtextTests {
 
 	@Override
 	protected void setUp() throws Exception {

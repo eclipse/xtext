@@ -2,11 +2,11 @@ package org.eclipse.xtext.parsetree.formatter;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting.INodeModelFormatter.IFormattedRegion;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
-public class FormatterTest extends AbstractGeneratorTest {
+public class FormatterTest extends AbstractXtextTests {
 
 	@Override
 	protected void setUp() throws Exception {

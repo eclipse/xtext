@@ -11,9 +11,10 @@ import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.junit.AbstractXtextTests.Keys;
 import org.eclipse.xtext.parsetree.ParsetreePackage;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.EmfStructureComparator;
 import org.eclipse.xtext.util.Pair;
@@ -23,7 +24,7 @@ import org.eclipse.xtext.util.Wrapper;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractParserComparingTest extends AbstractGeneratorTest {
+public abstract class AbstractParserComparingTest extends AbstractXtextTests {
 
 	private IParser firstParser;
 	private IParser secondParser;

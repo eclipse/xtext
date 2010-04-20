@@ -9,14 +9,14 @@
 package org.eclipse.xtext.parsetree;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  *
  */
-public class InvalidTokenTest extends AbstractGeneratorTest {
+public class InvalidTokenTest extends AbstractXtextTests {
 
 	public void testInvalidTokenError() throws Exception {
 		with(OptionalEmptyTestLanguageStandaloneSetup.class);

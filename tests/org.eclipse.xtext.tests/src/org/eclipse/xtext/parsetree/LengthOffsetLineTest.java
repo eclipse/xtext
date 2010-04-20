@@ -12,9 +12,9 @@ import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.dummy.DummyTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 
-public class LengthOffsetLineTest extends AbstractGeneratorTest {
+public class LengthOffsetLineTest extends AbstractXtextTests {
 
 	public void testOffset() throws Exception {
 		String model = "element foo;\nelement bar;";

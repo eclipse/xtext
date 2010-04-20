@@ -1,12 +1,12 @@
 package org.eclipse.xtext.parsetree.transientvalues;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class TransientValuesTest extends AbstractGeneratorTest {
+public class TransientValuesTest extends AbstractXtextTests {
 
 	@Override
 	protected void setUp() throws Exception {

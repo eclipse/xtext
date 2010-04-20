@@ -14,13 +14,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.diagnostics.Diagnostic;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
  */
-public class LinkingErrorTest extends AbstractGeneratorTest {
+public class LinkingErrorTest extends AbstractXtextTests {
 
 	private static final Logger logger = Logger.getLogger(CrossRefTest.class);
 

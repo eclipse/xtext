@@ -12,12 +12,12 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.tests.EmfAssert;
 import org.eclipse.xtext.util.EmfFormatter;
 
-public class ComplexReconstrTest extends AbstractGeneratorTest {
+public class ComplexReconstrTest extends AbstractXtextTests {
 
 	private static final Logger logger = Logger
 			.getLogger(ComplexReconstrTest.class);

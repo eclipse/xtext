@@ -10,9 +10,9 @@ package org.eclipse.xtext.parsetree;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.dummy.DummyTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 
-public class ASTChangeTest extends AbstractGeneratorTest {
+public class ASTChangeTest extends AbstractXtextTests {
 	
 	@Override
 	protected void setUp() throws Exception {

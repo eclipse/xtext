@@ -1,15 +1,15 @@
 package org.eclipse.xtext.parser;
 
+import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParsetreePackage;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.tests.EmfAssert;
 import org.eclipse.xtext.util.StringInputStream;
 
-public class OffsetInformationTest extends AbstractGeneratorTest {
+public class OffsetInformationTest extends AbstractXtextTests {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
