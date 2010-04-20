@@ -3173,7 +3173,7 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipse.org/2010/tmf/xtext/parser/EncodingTest" 
+       uri = "http://www.eclipse.org/2010/tmf/xtext/parser/EncodingUiTest" 
        class = "org.eclipse.xtext.ui.tests.editor.encoding.encodingTest.EncodingTestPackage"
        genModel = "org/eclipse/xtext/ui/tests/editor/encoding/EncodingTestLanguage.genmodel" /> 
 	
