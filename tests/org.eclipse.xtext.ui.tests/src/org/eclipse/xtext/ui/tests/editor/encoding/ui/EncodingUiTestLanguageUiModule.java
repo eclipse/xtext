@@ -8,8 +8,8 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * Use this class to register components to be used within the IDE.
  */
-public class EncodingTestLanguageUiModule extends org.eclipse.xtext.ui.tests.editor.encoding.ui.AbstractEncodingTestLanguageUiModule {
-	public EncodingTestLanguageUiModule(AbstractUIPlugin plugin) {
+public class EncodingUiTestLanguageUiModule extends org.eclipse.xtext.ui.tests.editor.encoding.ui.AbstractEncodingUiTestLanguageUiModule {
+	public EncodingUiTestLanguageUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}
 }

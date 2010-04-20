@@ -26,7 +26,7 @@ public class EncodingTest extends AbstractEditorTest {
 
 	@Override
 	protected String getEditorId() {
-		return "org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage";
+		return "org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage";
 	}
 
 	@Override
