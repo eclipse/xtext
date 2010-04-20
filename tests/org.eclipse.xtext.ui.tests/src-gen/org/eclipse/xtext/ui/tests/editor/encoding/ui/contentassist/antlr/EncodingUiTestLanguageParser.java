@@ -15,18 +15,18 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternal
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.ui.tests.editor.encoding.services.EncodingTestLanguageGrammarAccess;
+import org.eclipse.xtext.ui.tests.editor.encoding.services.EncodingUiTestLanguageGrammarAccess;
 
-public class EncodingTestLanguageParser extends AbstractContentAssistParser {
+public class EncodingUiTestLanguageParser extends AbstractContentAssistParser {
 	
 	@Inject
-	private EncodingTestLanguageGrammarAccess grammarAccess;
+	private EncodingUiTestLanguageGrammarAccess grammarAccess;
 	
 	private Map<AbstractElement, String> nameMappings;
 	
 	@Override
-	protected org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.antlr.internal.InternalEncodingTestLanguageParser createParser() {
-		org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.antlr.internal.InternalEncodingTestLanguageParser result = new org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.antlr.internal.InternalEncodingTestLanguageParser(null);
+	protected org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.antlr.internal.InternalEncodingUiTestLanguageParser createParser() {
+		org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.antlr.internal.InternalEncodingUiTestLanguageParser result = new org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.antlr.internal.InternalEncodingUiTestLanguageParser(null);
 		result.setGrammarAccess(grammarAccess);
 		return result;
 	}
@@ -48,7 +48,7 @@ public class EncodingTestLanguageParser extends AbstractContentAssistParser {
 	@Override
 	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
 		try {
-			org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.antlr.internal.InternalEncodingTestLanguageParser typedParser = (org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.antlr.internal.InternalEncodingTestLanguageParser) parser;
+			org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.antlr.internal.InternalEncodingUiTestLanguageParser typedParser = (org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.antlr.internal.InternalEncodingUiTestLanguageParser) parser;
 			typedParser.entryRuleModel();
 			return typedParser.getFollowElements();
 		} catch(RecognitionException ex) {
@@ -61,11 +61,11 @@ public class EncodingTestLanguageParser extends AbstractContentAssistParser {
 		return new String[] { "RULE_WS" };
 	}
 	
-	public EncodingTestLanguageGrammarAccess getGrammarAccess() {
+	public EncodingUiTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
 	
-	public void setGrammarAccess(EncodingTestLanguageGrammarAccess grammarAccess) {
+	public void setGrammarAccess(EncodingUiTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
 }

@@ -6,10 +6,10 @@ package org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr;
 import java.io.InputStream;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
-public class EncodingTestLanguageAntlrTokenFileProvider implements IAntlrTokenFileProvider {
+public class EncodingUiTestLanguageAntlrTokenFileProvider implements IAntlrTokenFileProvider {
 	
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/editor/encoding/parser/antlr/internal/InternalEncodingTestLanguage.tokens");
+    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/editor/encoding/parser/antlr/internal/InternalEncodingUiTestLanguage.tokens");
 	}
 }

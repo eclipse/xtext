@@ -13,7 +13,7 @@ import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 
 @Singleton
-public class EncodingTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
+public class EncodingUiTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
@@ -58,7 +58,7 @@ public class EncodingTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	private final GrammarProvider grammarProvider;
 
 	@Inject
-	public EncodingTestLanguageGrammarAccess(GrammarProvider grammarProvider) {
+	public EncodingUiTestLanguageGrammarAccess(GrammarProvider grammarProvider) {
 		this.grammarProvider = grammarProvider;
 	}
 	

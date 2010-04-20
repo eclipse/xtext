@@ -3,10 +3,10 @@
 */
 package org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist;
 
-import org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.AbstractEncodingTestLanguageProposalProvider;
+import org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.AbstractEncodingUiTestLanguageProposalProvider;
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
-public class EncodingTestLanguageProposalProvider extends AbstractEncodingTestLanguageProposalProvider {
+public class EncodingUiTestLanguageProposalProvider extends AbstractEncodingUiTestLanguageProposalProvider {
 
 }

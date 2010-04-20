@@ -11,7 +11,7 @@ import com.google.inject.Injector;
 /**
  * Generated from StandaloneSetup.xpt!
  */
-public class EncodingTestLanguageStandaloneSetupGenerated implements ISetup {
+public class EncodingUiTestLanguageStandaloneSetupGenerated implements ISetup {
 
 	public Injector createInjectorAndDoEMFRegistration() {
 		// register default ePackages
@@ -30,7 +30,7 @@ public class EncodingTestLanguageStandaloneSetupGenerated implements ISetup {
 	}
 	
 	public Injector createInjector() {
-		return Guice.createInjector(new org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguageRuntimeModule());
+		return Guice.createInjector(new org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguageRuntimeModule());
 	}
 	
 	public void register(Injector injector) {
@@ -40,8 +40,8 @@ public class EncodingTestLanguageStandaloneSetupGenerated implements ISetup {
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("encodingtestlanguage", resourceFactory);
-		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("encodingtestlanguage", serviceProvider);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("encodinguitestlanguage", resourceFactory);
+		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("encodinguitestlanguage", serviceProvider);
 		
 
 	}

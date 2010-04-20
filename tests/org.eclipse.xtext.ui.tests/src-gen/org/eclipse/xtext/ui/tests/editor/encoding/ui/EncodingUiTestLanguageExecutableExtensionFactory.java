@@ -13,7 +13,7 @@ import com.google.inject.Injector;
 /**
  *@generated
  */
-public class EncodingTestLanguageExecutableExtensionFactory extends AbstractGuiceAwareExecutableExtensionFactory {
+public class EncodingUiTestLanguageExecutableExtensionFactory extends AbstractGuiceAwareExecutableExtensionFactory {
 
 	@Override
 	protected Bundle getBundle() {
@@ -22,7 +22,7 @@ public class EncodingTestLanguageExecutableExtensionFactory extends AbstractGuic
 	
 	@Override
 	protected Injector getInjector() {
-		return org.eclipse.xtext.ui.tests.Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage");
+		return org.eclipse.xtext.ui.tests.Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage");
 	}
 	
 }

@@ -8,17 +8,17 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
-import org.eclipse.xtext.ui.tests.editor.encoding.services.EncodingTestLanguageGrammarAccess;
+import org.eclipse.xtext.ui.tests.editor.encoding.services.EncodingUiTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class EncodingTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class EncodingUiTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
-	private EncodingTestLanguageGrammarAccess grammarAccess;
+	private EncodingUiTestLanguageGrammarAccess grammarAccess;
 	
 	@Override	
-	public EncodingTestLanguageGrammarAccess getGrammarAccess() {
+	public EncodingUiTestLanguageGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 

@@ -117,8 +117,7 @@ Workflow {
 			fragment = @TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/encoding/EncodingTestLanguage.xtext" 
-			fileExtensions="encodinguitestlanguge"
+			uri="classpath:/org/eclipse/xtext/ui/tests/editor/encoding/EncodingUiTestLanguage.xtext" 
 			fragment = @TestLanguagesFragments {}
 		}
 		language = { 

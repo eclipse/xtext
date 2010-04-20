@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-grammar org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage hidden(WS)
+grammar org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage hidden(WS)
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 

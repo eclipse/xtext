@@ -11,36 +11,36 @@ import com.google.inject.Binder;
 import com.google.inject.name.Names;
 
 /**
- * Manual modifications go to {org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguageRuntimeModule}
+ * Manual modifications go to {org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguageRuntimeModule}
  */
-public abstract class AbstractEncodingTestLanguageRuntimeModule extends DefaultRuntimeModule {
+public abstract class AbstractEncodingUiTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
-			"org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage");
+			"org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage");
 		bindProperties(binder);
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "org/eclipse/xtext/ui/tests/editor/encoding/EncodingTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/ui/tests/editor/encoding/EncodingUiTestLanguage.properties");
 	}
 	
 	
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
-		return org.eclipse.xtext.ui.tests.editor.encoding.services.EncodingTestLanguageGrammarAccess.class;
+		return org.eclipse.xtext.ui.tests.editor.encoding.services.EncodingUiTestLanguageGrammarAccess.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.ui.tests.editor.encoding.parseTreeConstruction.EncodingTestLanguageParsetreeConstructor.class;
+		return org.eclipse.xtext.ui.tests.editor.encoding.parseTreeConstruction.EncodingUiTestLanguageParsetreeConstructor.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
-		return org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.EncodingTestLanguageParser.class;
+		return org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.EncodingUiTestLanguageParser.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
@@ -50,22 +50,22 @@ public abstract class AbstractEncodingTestLanguageRuntimeModule extends DefaultR
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
-		return org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.EncodingTestLanguageAntlrTokenFileProvider.class;
+		return org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.EncodingUiTestLanguageAntlrTokenFileProvider.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
-		return org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.internal.InternalEncodingTestLanguageLexer.class;
+		return org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.internal.InternalEncodingUiTestLanguageLexer.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
-	public com.google.inject.Provider<org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.internal.InternalEncodingTestLanguageLexer> provideInternalEncodingTestLanguageLexer() {
-		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.internal.InternalEncodingTestLanguageLexer.class);
+	public com.google.inject.Provider<org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.internal.InternalEncodingUiTestLanguageLexer> provideInternalEncodingUiTestLanguageLexer() {
+		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.internal.InternalEncodingUiTestLanguageLexer.class);
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public void configureRuntimeLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.internal.InternalEncodingTestLanguageLexer.class);
+		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.internal.InternalEncodingUiTestLanguageLexer.class);
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment

@@ -11,19 +11,19 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.ui.tests.editor.encoding.services.EncodingTestLanguageGrammarAccess;
+import org.eclipse.xtext.ui.tests.editor.encoding.services.EncodingUiTestLanguageGrammarAccess;
 
-public class EncodingTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
+public class EncodingUiTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
 	@Inject
-	private EncodingTestLanguageGrammarAccess grammarAccess;
+	private EncodingUiTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
 	protected IParseResult parse(String ruleName, CharStream in) {
 		TokenSource tokenSource = createLexer(in);
 		XtextTokenStream tokenStream = createTokenStream(tokenSource);
 		tokenStream.setInitialHiddenTokens("RULE_WS");
-		org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.internal.InternalEncodingTestLanguageParser parser = createParser(tokenStream);
+		org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.internal.InternalEncodingUiTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
 		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
@@ -36,8 +36,8 @@ public class EncodingTestLanguageParser extends org.eclipse.xtext.parser.antlr.A
 		}
 	}
 	
-	protected org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.internal.InternalEncodingTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.internal.InternalEncodingTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
+	protected org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.internal.InternalEncodingUiTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.internal.InternalEncodingUiTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -45,11 +45,11 @@ public class EncodingTestLanguageParser extends org.eclipse.xtext.parser.antlr.A
 		return "Model";
 	}
 	
-	public EncodingTestLanguageGrammarAccess getGrammarAccess() {
+	public EncodingUiTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
 	
-	public void setGrammarAccess(EncodingTestLanguageGrammarAccess grammarAccess) {
+	public void setGrammarAccess(EncodingUiTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
 	

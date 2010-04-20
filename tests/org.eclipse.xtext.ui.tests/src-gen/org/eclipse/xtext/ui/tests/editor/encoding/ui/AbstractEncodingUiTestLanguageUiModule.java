@@ -8,11 +8,11 @@ import org.eclipse.xtext.ui.DefaultUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
- * Manual modifications go to {org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingTestLanguageUiModule}
+ * Manual modifications go to {org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingUiTestLanguageUiModule}
  */
-public abstract class AbstractEncodingTestLanguageUiModule extends DefaultUiModule {
+public abstract class AbstractEncodingUiTestLanguageUiModule extends DefaultUiModule {
 	
-	public AbstractEncodingTestLanguageUiModule(AbstractUIPlugin plugin) {
+	public AbstractEncodingUiTestLanguageUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}
 	
@@ -34,7 +34,7 @@ public abstract class AbstractEncodingTestLanguageUiModule extends DefaultUiModu
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public void configureHighlightingLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING)).to(org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.internal.InternalEncodingTestLanguageLexer.class);
+		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING)).to(org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.internal.InternalEncodingUiTestLanguageLexer.class);
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
@@ -44,7 +44,7 @@ public abstract class AbstractEncodingTestLanguageUiModule extends DefaultUiModu
 
 	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
-		return org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.EncodingTestLanguageProposalProvider.class;
+		return org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.EncodingUiTestLanguageProposalProvider.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
@@ -54,17 +54,17 @@ public abstract class AbstractEncodingTestLanguageUiModule extends DefaultUiModu
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.antlr.IContentAssistParser> bindIContentAssistParser() {
-		return org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.antlr.EncodingTestLanguageParser.class;
+		return org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.antlr.EncodingUiTestLanguageParser.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public void configureContentAssistLexerProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.antlr.internal.InternalEncodingTestLanguageLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.antlr.internal.InternalEncodingTestLanguageLexer.class));
+		binder.bind(org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.antlr.internal.InternalEncodingUiTestLanguageLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.antlr.internal.InternalEncodingUiTestLanguageLexer.class));
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public void configureContentAssistLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.antlr.internal.InternalEncodingTestLanguageLexer.class);
+		binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.ui.tests.editor.encoding.ui.contentassist.antlr.internal.InternalEncodingUiTestLanguageLexer.class);
 	}
 
 

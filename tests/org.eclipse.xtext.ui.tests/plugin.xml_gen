@@ -3175,7 +3175,7 @@
     <package 
        uri = "http://www.eclipse.org/2010/tmf/xtext/parser/EncodingUiTest" 
        class = "org.eclipse.xtext.ui.tests.editor.encoding.encodingTest.EncodingTestPackage"
-       genModel = "org/eclipse/xtext/ui/tests/editor/encoding/EncodingTestLanguage.genmodel" /> 
+       genModel = "org/eclipse/xtext/ui/tests/editor/encoding/EncodingUiTestLanguage.genmodel" /> 
 	
   </extension>
 
@@ -3183,42 +3183,42 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
-            extensions="encodinguitestlanguge"
-            id="org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage"
-            name="EncodingTestLanguage Editor">
+            extensions="encodinguitestlanguage"
+            id="org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage"
+            name="EncodingUiTestLanguage Editor">
         </editor>
     </extension>
     <extension
         point="org.eclipse.ui.handlers">
         <handler
-            class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
             commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
             <activeWhen>
                 <reference
-                    definitionId="org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage.Editor.opened">
+                    definitionId="org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.Editor.opened">
                 </reference>
             </activeWhen>
         </handler>
         <handler
-            class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
-            commandId="org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage.validate">
+            class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.validate">
          <activeWhen>
             <reference
-                    definitionId="org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage.Editor.opened">
+                    definitionId="org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.Editor.opened">
             </reference>
          </activeWhen>
       </handler>
     </extension>
     <extension point="org.eclipse.core.expressions.definitions">
-        <definition id="org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage.Editor.opened">
+        <definition id="org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.Editor.opened">
             <and>
                 <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
                 <with variable="activeEditor">
                     <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-                        value="org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage" 
+                        value="org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage" 
                         forcePluginActivation="true"/>
                 </with>        
             </and>
@@ -3227,37 +3227,37 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
-            class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-            id="org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage"
-            name="EncodingTestLanguage">
-            <keywordReference id="org.eclipse.xtext.ui.tests.editor.encoding.ui.keyword_EncodingTestLanguage"/>
+            class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage"
+            name="EncodingUiTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.encoding.ui.keyword_EncodingUiTestLanguage"/>
         </page>
         <page
-            category="org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage"
-            class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-            id="org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage.coloring"
+            category="org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage"
+            class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.coloring"
             name="Syntax Coloring">
-            <keywordReference id="org.eclipse.xtext.ui.tests.editor.encoding.ui.keyword_EncodingTestLanguage"/>
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.encoding.ui.keyword_EncodingUiTestLanguage"/>
         </page>
         <page
-            category="org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage"
-            class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
-            id="org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage.templates"
+            category="org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage"
+            class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.templates"
             name="Templates">
-            <keywordReference id="org.eclipse.xtext.ui.tests.editor.encoding.ui.keyword_EncodingTestLanguage"/>
+            <keywordReference id="org.eclipse.xtext.ui.tests.editor.encoding.ui.keyword_EncodingUiTestLanguage"/>
         </page>
     </extension>
     <extension
         point="org.eclipse.ui.keywords">
         <keyword
-            id="org.eclipse.xtext.ui.tests.editor.encoding.ui.keyword_EncodingTestLanguage"
-            label="EncodingTestLanguage"/>
+            id="org.eclipse.xtext.ui.tests.editor.encoding.ui.keyword_EncodingUiTestLanguage"
+            label="EncodingUiTestLanguage"/>
     </extension>
     <extension
          point="org.eclipse.ui.commands">
       <command
             description="Trigger expensive validation"
-            id="org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage.validate"
+            id="org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.validate"
             name="Validate">
       </command>
     </extension>
@@ -3265,12 +3265,12 @@
         <menuContribution
             locationURI="popup:#TextEditorContext?after=group.edit">
              <command
-                 commandId="org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage.validate"
+                 commandId="org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.validate"
                  style="push"
                  tooltip="Trigger expensive validation">
             <visibleWhen checkEnabled="false">
                 <reference
-                    definitionId="org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage.Editor.opened">
+                    definitionId="org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.Editor.opened">
                 </reference>
             </visibleWhen>
          </command>  
@@ -3280,7 +3280,7 @@
 		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
 			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
 				<visibleWhen checkEnabled="false">
-                	<reference definitionId="org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage.Editor.opened">
+                	<reference definitionId="org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.Editor.opened">
                 	</reference>
             	</visibleWhen>
 			</command>
@@ -3288,11 +3288,11 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 	    <handler
-            class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
             commandId="org.eclipse.xtext.ui.editor.FindReferences">
             <activeWhen>
                 <reference
-                    definitionId="org.eclipse.xtext.ui.tests.editor.encoding.EncodingTestLanguage.Editor.opened">
+                    definitionId="org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.Editor.opened">
                 </reference>
             </activeWhen>
         </handler>
@@ -3303,14 +3303,14 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-			type="encodingtestlanguage">
+			class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="encodinguitestlanguage">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-            uriExtension="encodingtestlanguage">
+            class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="encodinguitestlanguage">
         </resourceServiceProvider>
     </extension>
 
