@@ -5,34 +5,22 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-module org.eclipse.xtext.lexer.IgnoreCaseLexerTestLanguage
+module org.eclipse.xtext.xtext.ui.ecore2xtext.GenerateEcore2XtextTestGrammar
 
-import org.eclipse.emf.mwe2.runtime.workflow.Workflow
 import org.eclipse.emf.mwe.utils.*
-import org.eclipse.xtext.*
-import org.eclipse.xtext.generator.*
 
-var projectName = "org.eclipse.xtext.tests"
+var projectName = "org.eclipse.xtext.xtext.ui.tests"
 var runtimeProject = "../${projectName}"
+var src = "${runtimeProject}/src"
 
 Workflow {
 	bean = StandaloneSetup {
 		platformUri = "${runtimeProject}/.."
-	}
+	} 
 	
-	component = DirectoryCleaner {
-		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/lexer"
-	}
-	
-	component = Generator {
-		pathRtProject = runtimeProject
-		projectNameRt = projectName
-		
-		language = {
-			uri = "classpath:/org/eclipse/xtext/lexer/IgnoreCaseLexerTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
-				ignoreCase = true
-			}
-		}
-	}
+	component = Ecore2XtextGenerator {
+		genPath = "${src}"
+		ecoreFile = "org/eclipse/xtext/xtext/ui/ecore2xtext/Ecore2XtextTest.ecore"
+		rootElement = "Root"
+	}	
 }
