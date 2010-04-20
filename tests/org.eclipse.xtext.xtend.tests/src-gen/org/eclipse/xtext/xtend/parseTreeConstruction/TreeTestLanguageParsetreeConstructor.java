@@ -68,13 +68,8 @@ protected class Model_ChildrenAssignment extends AssignmentToken  {
 			case 0: return new Node_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
 	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("children",false)) == null) return null;
@@ -129,13 +124,15 @@ protected class Node_Group extends GroupToken {
 			case 0: return new Node_RightCurlyBracketSemicolonKeyword_6(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getNodeRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(current.getDelegate().eClass() == grammarAccess.getNodeRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
 	}
+
 }
 
 // name=ID
@@ -155,8 +152,8 @@ protected class Node_NameAssignment_0 extends AssignmentToken  {
 		switch(index) {
 			default: return parent.createParentFollower(this, index, index, inst);
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -189,8 +186,8 @@ protected class Node_LeftParenthesisKeyword_1 extends KeywordToken  {
 			case 0: return new Node_NameAssignment_0(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // attrib=STRING
@@ -211,8 +208,8 @@ protected class Node_AttribAssignment_2 extends AssignmentToken  {
 			case 0: return new Node_LeftParenthesisKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attrib",true)) == null) return null;
@@ -245,8 +242,8 @@ protected class Node_RightParenthesisKeyword_3 extends KeywordToken  {
 			case 0: return new Node_AttribAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // "{"
@@ -267,8 +264,8 @@ protected class Node_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 			case 0: return new Node_RightParenthesisKeyword_3(parent, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 // children+=Node*
@@ -289,8 +286,8 @@ protected class Node_ChildrenAssignment_5 extends AssignmentToken  {
 			case 0: return new Node_Group(this, this, 0, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("children",false)) == null) return null;
@@ -337,8 +334,8 @@ protected class Node_RightCurlyBracketSemicolonKeyword_6 extends KeywordToken  {
 			case 1: return new Node_LeftCurlyBracketKeyword_4(parent, this, 1, inst);
 			default: return null;
 		}	
-	}	
-		
+	}
+
 }
 
 
