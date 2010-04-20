@@ -114,7 +114,7 @@ public class «projectCreatorClassName().toSimpleName()» extends DefaultProjectCr
         return new String[] {
         	"org.eclipse.jdt.core.javanature",
 			"org.eclipse.pde.PluginNature",
-			"org.eclipse.xtext.builder.xtextNature"
+			"org.eclipse.xtext.ui.shared.xtextNature"
 		};
     }
     
