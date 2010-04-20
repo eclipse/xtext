@@ -24,6 +24,8 @@ public interface INFAState<S extends INFAState, T extends INFATransition> {
 
 	public List<T> getFollowers();
 
+	public List<T> getLocalIncomming();
+	
 	public List<T> getParentFollowers();
 
 	public boolean isEndState();

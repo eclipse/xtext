@@ -8,10 +8,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GrammarToDot;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider;
 import org.eclipse.xtext.parsetree.reconstr.impl.TreeConstState.Status;
+
+import com.google.common.base.Join;
+import com.google.common.collect.Lists;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -39,8 +47,7 @@ public class TreeConstNFAToDot extends GrammarToDot {
 		return n;
 	}
 
-	protected Edge drawFollowerEdge(AbstractElement ele, TreeConstTransition t,
-			boolean isParent) {
+	protected Edge drawFollowerEdge(AbstractElement ele, TreeConstTransition t, boolean isParent) {
 		Edge e = new Edge(ele, t.getTarget().getElement());
 		if (t.getPrecedence() > -1)
 			e.setLabel(String.valueOf(t.getPrecedence()));
@@ -71,6 +78,22 @@ public class TreeConstNFAToDot extends GrammarToDot {
 				break;
 			case ENABLED:
 				break;
+		}
+	}
+
+	@Override
+	protected Node newNode(EObject obj, String label) {
+		TreeConstState nfas = nfaProvider.getNFA((AbstractElement) obj);
+		List<String> types = Lists.newArrayList();
+		for (TypeRef t : nfas.getTypesToCheck())
+			types.add(t == null ? "null" : t.getClassifier().getName());
+		if (obj.eContainer() instanceof AbstractRule) {
+			AbstractRule r = (AbstractRule) obj.eContainer();
+			String t = types.isEmpty() ? "" : " [" + Join.join(",", types) + "]";
+			return new Node(obj, r.getName() + t + ":\\n" + label, "record");
+		} else {
+			String t = types.isEmpty() ? "" : "[" + Join.join(",", types) + "]\\n";
+			return new Node(obj, t + label);
 		}
 	}
 }

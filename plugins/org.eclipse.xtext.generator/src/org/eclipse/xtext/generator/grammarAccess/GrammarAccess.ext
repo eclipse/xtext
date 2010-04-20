@@ -148,9 +148,28 @@ String gaElementAccessor(AbstractElement ele):
  */	
 String gaRuleElementAccessor(AbstractElement ele):
 	ele.containingRule().gaElementsAccessor() + "." + ele.gaElementAccessor();
-
+	
+/**
+ * Returns the invokation of an element or rule accessor, including the .getType() call.
+ * Example1: getFooRule().getType()
+ * Example2: getBarRule().getFooAction().getType()
+ */
+String gaTypeAccessor(TypeRef ele):
+	switch {
+	case AbstractElement.isInstance(ele.eContainer()):
+		((AbstractElement)ele.eContainer()).gaRuleElementAccessor() + ".getType()"
+	case AbstractRule.isInstance(ele.eContainer()):
+		((AbstractRule)ele.eContainer()).gaRuleAccessor() + ".getType()"
+		default: "<error: unknown type "+ele.eContainer().metaType+">"
+	};
+	
+/*
+ *
+ */
 String grammarFragmentToStr(EObject ele, String prefix):	
 	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.serialize(org.eclipse.emf.ecore.EObject, java.lang.String);
+
+
 
 // ******************************************************************************
 // ***  the API below is private. Only GrammarAccess.xpt is allowed to use it ***
@@ -173,7 +192,7 @@ String gaRuleAccessorLocalVarName(TerminalRule rule):
 	
 String getClassName(EObject obj):
 	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.getClassName(org.eclipse.emf.ecore.EObject);
-
+	
 Grammar usedGrammar(AbstractRule rule, Grammar parent):
 	parent.usedGrammars.selectFirst(g|g.allRules().contains(rule));
 

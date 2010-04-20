@@ -46,6 +46,10 @@ public class AbstractNFATransition<S extends INFAState<S, T>, T extends INFATran
 		return i > -1 ? i : s.getParentFollowers().indexOf(this);
 	}
 
+	public S getSource() {
+		return source;
+	}
+
 	public S getTarget() {
 		return target;
 	}

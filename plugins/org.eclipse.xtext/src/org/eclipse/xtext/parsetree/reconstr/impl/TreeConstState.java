@@ -8,29 +8,37 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
-import static org.eclipse.xtext.GrammarUtil.containingRule;
+import static com.google.common.collect.Iterables.*;
+import static org.eclipse.xtext.GrammarUtil.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider.NFABuilder;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractNFAState;
 
-import static com.google.common.collect.Iterables.*;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import com.google.inject.internal.Maps;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class TreeConstState extends
-		AbstractNFAState<TreeConstState, TreeConstTransition> {
+public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTransition> {
 
 	enum Status {
 		AMBIGIOUS, DETOUR_OR_LOOP, ENABLED, ORPHAN, UNKNOWN
@@ -46,8 +54,11 @@ public class TreeConstState extends
 
 	protected Status status = Status.UNKNOWN;
 
-	public TreeConstState(AbstractElement element,
-			NFABuilder<TreeConstState, TreeConstTransition> builder) {
+	protected Set<TypeRef> types;
+
+	protected boolean typesDirty = false;
+
+	public TreeConstState(AbstractElement element, NFABuilder<TreeConstState, TreeConstTransition> builder) {
 		super(element, builder);
 	}
 
@@ -61,42 +72,13 @@ public class TreeConstState extends
 			root = this;
 			dist = 0;
 		}
-		for (TreeConstTransition t : concat(getFollowers(),
-				getParentFollowers())) 
+		for (TreeConstTransition t : concat(getFollowers(), getParentFollowers()))
 			if (!t.isRuleCall())
 				t.getTarget().calculateDistances(root, dist + 1);
 		if (isEndState())
 			getEndDistances().put(root, dist + 1);
 	}
 
-	protected void discardMisleadingDistances(Set<TreeConstState> visited) {
-		if (!visited.add(this))
-			return;
-		for (TreeConstTransition t : concat(getFollowers(),	getParentFollowers())) { 
-			if (!t.isRuleCall())
-				t.getTarget().discardMisleadingDistances(visited);
-		}
-		if (isConsumingElement() || isEndState())
-			return;
-		Set<TreeConstState> doNotRemove = new HashSet<TreeConstState>();
-		for (TreeConstTransition t : concat(getFollowers(),	getParentFollowers())) {
-			if (!t.isRuleCall()) {
-				TreeConstState target = t.getTarget();
-				Map<TreeConstState, Integer> targetDistances = target.distances;
-				for(Map.Entry<TreeConstState, Integer> entry: targetDistances.entrySet()) {
-					Integer targetDistance = entry.getValue();
-					Integer ownDistance = distances.get(entry.getKey());
-					if (ownDistance == null || targetDistance >= ownDistance) {
-						doNotRemove.add(entry.getKey());
-					} 
-				}
-			} else {
-				doNotRemove.addAll(t.getTarget().distances.keySet());
-			}
-		}
-		distances.keySet().retainAll(doNotRemove);
-	}
-	
 	protected Status checkForAmbigiousPaths(Set<TreeConstState> visited) {
 		if (getStatInt() != Status.ENABLED || visited.contains(this))
 			return getStatInt();
@@ -106,8 +88,7 @@ public class TreeConstState extends
 			consume(getEndDistances());
 			vEnd = true;
 		}
-		for (TreeConstTransition t : concat(getFollowers(),
-				getParentFollowers())) {
+		for (TreeConstTransition t : concat(getFollowers(), getParentFollowers())) {
 			if (t.isRuleCall() || t.getStatus() != Status.ENABLED)
 				continue;
 			if (t.getTarget().checkForAmbigiousPaths(visited) != Status.ENABLED
@@ -130,8 +111,7 @@ public class TreeConstState extends
 		if (isEndState() && isTransitionEnabledTo(getEndDistances()))
 			vEnd = true;
 
-		for (TreeConstTransition t : concat(getFollowers(),
-				getParentFollowers())) {
+		for (TreeConstTransition t : concat(getFollowers(), getParentFollowers())) {
 			if (t.isRuleCall())
 				continue;
 			if (t.getTarget().checkForDetoursAndLoops(visited) != Status.ENABLED
@@ -154,6 +134,46 @@ public class TreeConstState extends
 				if (i != null && i > e.getValue())
 					dist.remove(e.getKey());
 			}
+	}
+
+	protected void discardMisleadingDistances(Set<TreeConstState> visited) {
+		if (!visited.add(this))
+			return;
+		for (TreeConstTransition t : concat(getFollowers(), getParentFollowers())) {
+			if (!t.isRuleCall())
+				t.getTarget().discardMisleadingDistances(visited);
+		}
+		if (isConsumingElement() || isEndState())
+			return;
+		Set<TreeConstState> doNotRemove = new HashSet<TreeConstState>();
+		for (TreeConstTransition t : concat(getFollowers(), getParentFollowers())) {
+			if (!t.isRuleCall()) {
+				TreeConstState target = t.getTarget();
+				Map<TreeConstState, Integer> targetDistances = target.distances;
+				for (Map.Entry<TreeConstState, Integer> entry : targetDistances.entrySet()) {
+					Integer targetDistance = entry.getValue();
+					Integer ownDistance = distances.get(entry.getKey());
+					if (ownDistance == null || targetDistance >= ownDistance) {
+						doNotRemove.add(entry.getKey());
+					}
+				}
+			} else {
+				doNotRemove.addAll(t.getTarget().distances.keySet());
+			}
+		}
+		distances.keySet().retainAll(doNotRemove);
+	}
+
+	public Set<TypeRef> getTypes() {
+		if (types == null) {
+			getStatus();
+			Map<TreeConstState, List<TreeConstState>> map = Maps.newHashMap();
+			Set<TreeConstState> endStates = Sets.newHashSet();
+			initTypes(map, endStates);
+			for (TreeConstState s : endStates)
+				s.populateTypes(map);
+		}
+		return types;
 	}
 
 	public List<TreeConstTransition> getEnabledFollowers() {
@@ -186,8 +206,7 @@ public class TreeConstState extends
 
 	protected Status getStatInt() {
 		if (status == Status.UNKNOWN)
-			status = isEndState() || getFollowers().size() > 0
-					|| getParentFollowers().size() > 0 ? Status.ENABLED
+			status = isEndState() || getFollowers().size() > 0 || getParentFollowers().size() > 0 ? Status.ENABLED
 					: Status.ORPHAN;
 		return status;
 	}
@@ -200,6 +219,22 @@ public class TreeConstState extends
 		return getStatInt();
 	}
 
+	public Collection<TypeRef> getTypesToCheck() {
+		Map<EClassifier, TypeRef> localTypes = Maps.newHashMap();
+		for (TypeRef t : getTypes())
+			if (t != null)
+				localTypes.put(t.getClassifier(), t);
+
+		List<TreeConstTransition> incomming = getLocalIncomming();
+		if (incomming.isEmpty())
+			return localTypes.values();
+		for (TreeConstTransition t : incomming)
+			for (TypeRef r : t.getSource().getTypes())
+				if (r != null && !localTypes.containsKey(r.getClassifier()))
+					return localTypes.values();
+		return Collections.emptyList();
+	}
+
 	protected void initStatus() {
 		if (distances == null) {
 			calculateDistances(this, 1);
@@ -209,8 +244,36 @@ public class TreeConstState extends
 		}
 	}
 
+	protected void initTypes(Map<TreeConstState, List<TreeConstState>> map, Set<TreeConstState> endStates) {
+		if (types != null) {
+			endStates.add(this);
+		} else {
+			types = Sets.newHashSet();
+			typesDirty = true;
+			for (TreeConstTransition t : concat(getFollowers(), getParentFollowers())) {
+				if (t.isDisabled() || (t.isRuleCall() && getElement() instanceof Assignment))
+					continue;
+				t.getTarget().initTypes(map, endStates);
+				List<TreeConstState> orgins = map.get(t.getTarget());
+				if (orgins == null)
+					map.put(t.getTarget(), orgins = Lists.newArrayList());
+				orgins.add(this);
+			}
+			if (element instanceof Action)
+				types.add(((Action) element).getType());
+			if (isEndState()) {
+				endStates.add(this);
+				if (element instanceof Assignment)
+					types.add(GrammarUtil.containingRule(element).getType());
+				else if (!isConsumingElement())
+					types.add(null);
+			}
+		}
+	}
+
 	protected boolean isConsumingElement() {
-		return element instanceof Assignment || element instanceof RuleCall
+		return element instanceof Assignment
+				|| (element instanceof RuleCall && ((RuleCall) element).getRule().getType().getClassifier() instanceof EClass)
 				|| element instanceof Action;
 	}
 
@@ -229,16 +292,37 @@ public class TreeConstState extends
 		return false;
 	}
 
+	protected void populateTypes(Map<TreeConstState, List<TreeConstState>> map) {
+		typesDirty = false;
+		List<TreeConstState> origins = map.get(this);
+		if (origins != null)
+			for (TreeConstState origin : origins) {
+				Set<TypeRef> t = types;
+				if (origin.getElement() instanceof Action && ((Action) origin.getElement()).getFeature() != null)
+					t = Collections.emptySet();
+				else if (t.contains(null) && origin.isConsumingElement()) {
+					t = Sets.newHashSet(t);
+					t.remove(null);
+					if (origin.getElement() instanceof Assignment)
+						t.add(GrammarUtil.containingRule(origin.getElement()).getType());
+				}
+				if (origin.getTypes().addAll(t) || origin.typesDirty)
+					origin.populateTypes(map);
+			}
+	}
+
 	@Override
 	public String toString() {
-		if (distances == null)
-			return "????";
-		StringBuffer b = new StringBuffer(element.eClass().getName()).append("-").append(Integer.toHexString(hashCode())).append("\\n");
-		for (Map.Entry<TreeConstState, Integer> e : distances.entrySet()) {
-			String hash = e.getKey() == null ? "??" : 
-					e.getKey().element.eClass().getName() + "-" + Integer.toHexString(e.getKey().hashCode());
-			b.append(hash + "-" + e.getValue() + "\\n");
-		}
-		return b.toString();
+		//		if (distances == null)
+		//			return "????";
+		//		StringBuffer b = new StringBuffer(element.eClass().getName()).append("-").append(
+		//				Integer.toHexString(hashCode())).append("\\n");
+		//		for (Map.Entry<TreeConstState, Integer> e : distances.entrySet()) {
+		//			String hash = e.getKey() == null ? "??" : e.getKey().element.eClass().getName() + "-"
+		//					+ Integer.toHexString(e.getKey().hashCode());
+		//			b.append(hash + "-" + e.getValue() + "\\n");
+		//		}
+		//		return b.toString();
+		return "";
 	}
 }

@@ -95,13 +95,14 @@ protected class ThisRootNode extends RootToken {
 	}
 
 «EXPAND createFollowerMethod FOR getTreeConstState()-»
-		
-«IF getTreeConstState().startState-»
+«IF !getTreeConstState().typesToCheck.isEmpty-»
     @Override
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.«containingRule().gaRuleAccessor()».getType().getClassifier())) return null;
-		return tryConsumeVal();
+		if(«FOREACH getTreeConstState().typesToCheck AS e SEPARATOR " || \n\t\t   "»current.getDelegate().eClass() == grammarAccess.«e.gaTypeAccessor()».getClassifier()«ENDFOREACH»)
+			return tryConsumeVal();
+		return null;
 	}
+
 «ENDIF-»
 «ENDDEFINE»
 
@@ -120,7 +121,8 @@ protected class ThisRootNode extends RootToken {
 			default: return null;
 «ENDIF-»			
 		}	
-	}	
+	}
+
 «ENDIF-»
 «ENDDEFINE»
 
@@ -203,7 +205,6 @@ protected class «elementMethodName()» extends RuleCallToken {
     @Override
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(«calledParserRule().alternatives.elementMethodName()».class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.«calledParserRule().gaRuleAccessor()».getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -311,19 +312,16 @@ protected class «elementMethodName()» extends AssignmentToken  {
 «grammarFragmentToStr("// ")»
 protected class «elementMethodName()» extends ActionToken  {
 
-«EXPAND constructor-»
-	
+«EXPAND constructor-»	
 «IF feature == null || feature == ""-»
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.«gaRuleElementAccessor()».getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
 «ELSE-»
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.«gaRuleElementAccessor()».getType().getClassifier())) return null;
 		Object val = current.getConsumable("«feature»", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("«feature»")) return null;
