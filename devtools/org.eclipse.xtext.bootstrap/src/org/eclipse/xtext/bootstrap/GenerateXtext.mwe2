@@ -40,8 +40,10 @@ Workflow {
 		pathUiProject = uiProject
 		projectNameRt = runtimeProjectName
 		projectNameUi = uiProjectName
-		activator = "org.eclipse.xtext.xtext.ui.internal.Activator"
+		activator =  "org.eclipse.xtext.xtext.ui.internal.Activator"
 		language = {
+			uri = "platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext" 
+			fileExtensions="${file.extensions}"
 			fragment = grammarAccess.GrammarAccessFragment {}
 			fragment = parser.PackratParserFragment {}
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
@@ -64,26 +66,13 @@ Workflow {
 	}
 	
 	component = Generator {
+		suppressUi = true
 		pathRtProject = runtimeProject
-		pathUiProject = uiProject
+		pathUiProject = commonUiProject
 		projectNameRt = runtimeProjectName
-		projectNameUi = uiProjectName
-		activator = "org.eclipse.xtext.xtext.ui.internal.Activator"
-		language = {
-			uri = "platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext" 
-			fileExtensions = "${file.extensions}"
-		}
-	}
-
-	component = Generator {
-		pathRtProject = runtimeProject
-		pathUiProject = uiProject
-		projectNameRt = runtimeProjectName
-		projectNameUi = uiProjectName
-		activator = "org.eclipse.xtext.xtext.ui.internal.Activator"
+		projectNameUi = commonUiProjectName
 		language = {
 			uri = "platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/common/Terminals.xtext" 
-			fileExtensions = "${file.extensions}"
 			fragment = grammarAccess.GrammarAccessFragment {}
 			fragment = parser.PackratParserFragment {}
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}

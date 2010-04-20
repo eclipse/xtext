@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
@@ -68,4 +69,8 @@ public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
 		return inherit;
 	}
 	
+	@Override
+	public void generate(Grammar grammar, XpandExecutionContext ctx) {
+		super.generate(grammar, ctx);
+	}
 }

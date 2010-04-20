@@ -167,7 +167,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 		output.addOutlet(new Outlet(false, getEncoding(), PLUGIN_RT, false, getPathRtProject()));
 		output.addOutlet(new Outlet(false, getEncoding(), SRC, false, getPathRtProject() + getSrcPath()));
 		output.addOutlet(new Outlet(false, getEncoding(), SRC_GEN, true, getPathRtProject() + getSrcGenPath()));
-		if (isUi()) {
+		if (getPathUiProject() != null) {
 			output.addOutlet(new Outlet(false, getEncoding(), PLUGIN_UI, false, getPathUiProject()));
 			output.addOutlet(new Outlet(false, getEncoding(), SRC_UI, false, getPathUiProject() + getSrcPath()));
 			output.addOutlet(new Outlet(false, getEncoding(), SRC_GEN_UI, true, getPathUiProject() + getSrcGenPath()));
@@ -287,7 +287,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	}
 
 	private boolean isUi() {
-		return getPathUiProject() != null;
+		return getPathUiProject() != null && !isSuppressUi;
 	}
 
 	private void generate(LanguageConfig config, XpandExecutionContext ctx) {
@@ -439,6 +439,8 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 	private String projectNameUi;
 
+	private boolean isSuppressUi;
+
 	public void setProjectNameUi(String projectNameUi) {
 		this.projectNameUi = projectNameUi;
 	}
@@ -465,6 +467,10 @@ public class Generator extends AbstractWorkflowComponent2 {
 			return naming.basePackageUi(grammar) + ".internal." + GrammarUtil.getName(grammar) + "Activator";
 		}
 		return activator;
+	}
+	
+	public void setSuppressUi(boolean isSuppressUi) {
+		this.isSuppressUi = isSuppressUi;
 	}
 
 }
