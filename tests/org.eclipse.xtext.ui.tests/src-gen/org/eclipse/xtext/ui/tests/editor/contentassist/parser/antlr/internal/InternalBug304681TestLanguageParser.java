@@ -702,28 +702,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                 int alt9=9;
                 int LA9_0 = input.LA(1);
 
-                if ( (LA9_0==20) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0))) {
+                if ( LA9_0==20 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0) ) {
                     alt9=1;
                 }
-                else if ( (LA9_0==21) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1))) {
+                else if ( LA9_0==21 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1) ) {
                     alt9=2;
                 }
-                else if ( (LA9_0==22) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2))) {
+                else if ( LA9_0==22 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2) ) {
                     alt9=3;
                 }
-                else if ( (LA9_0==23) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3))) {
+                else if ( LA9_0==23 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3) ) {
                     alt9=4;
                 }
-                else if ( ((LA9_0>=29 && LA9_0<=30)) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4))) {
+                else if ( LA9_0>=29 && LA9_0<=30 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
                     alt9=5;
                 }
-                else if ( (LA9_0==24) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5))) {
+                else if ( LA9_0==24 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5) ) {
                     alt9=6;
                 }
-                else if ( (LA9_0==26) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6))) {
+                else if ( LA9_0==26 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6) ) {
                     alt9=7;
                 }
-                else if ( (LA9_0==27) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7))) {
+                else if ( LA9_0==27 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7) ) {
                     alt9=8;
                 }
 
@@ -735,7 +735,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:364:4: ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) )
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:365:5: {...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) )
             	    {
-            	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0)) ) {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0)");
             	    }
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:365:103: ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) )
@@ -809,7 +809,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:408:4: ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) )
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:409:5: {...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) )
             	    {
-            	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1)) ) {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1)");
             	    }
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:409:103: ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) )
@@ -883,7 +883,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:452:4: ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) )
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:453:5: {...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) )
             	    {
-            	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2)) ) {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2)");
             	    }
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:453:103: ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) )
@@ -957,7 +957,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:496:4: ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) )
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:497:5: {...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) )
             	    {
-            	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3)) ) {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3) ) {
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3)");
             	    }
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:497:103: ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) )
@@ -1023,7 +1023,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:533:4: ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) )
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:534:5: {...}? => ( ( (lv_features_19_0= ruleFeature ) )+ )
             	    {
-            	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4)) ) {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4)");
             	    }
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:534:103: ( ( (lv_features_19_0= ruleFeature ) )+ )
@@ -1042,7 +1042,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	        if ( (LA5_0==29) ) {
             	            int LA5_6 = input.LA(2);
 
-            	            if ( (!(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4))) ) {
+            	            if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
             	                alt5=1;
             	            }
 
@@ -1051,7 +1051,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	        else if ( (LA5_0==30) ) {
             	            int LA5_7 = input.LA(2);
 
-            	            if ( (!(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4))) ) {
+            	            if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
             	                alt5=1;
             	            }
 
@@ -1124,7 +1124,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:569:4: ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) )
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:570:5: {...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) )
             	    {
-            	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5)) ) {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5) ) {
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5)");
             	    }
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:570:103: ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) )
@@ -1219,7 +1219,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:613:4: ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) )
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:614:5: {...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) )
             	    {
-            	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6)) ) {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6) ) {
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6)");
             	    }
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:614:103: ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) )
@@ -1304,7 +1304,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:653:4: ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) )
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:654:5: {...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) )
             	    {
-            	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7)) ) {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7) ) {
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7)");
             	    }
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:654:103: ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) )
@@ -1902,10 +1902,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         int alt12=3;
                         int LA12_0 = input.LA(1);
 
-                        if ( (LA12_0==20) && (getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0))) {
+                        if ( LA12_0==20 && getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0) ) {
                             alt12=1;
                         }
-                        else if ( (LA12_0==21) && (getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 1))) {
+                        else if ( LA12_0==21 && getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 1) ) {
                             alt12=2;
                         }
 
@@ -1917,7 +1917,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:924:4: ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) )
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:925:5: {...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) )
                     	    {
-                    	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0)) ) {
+                    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleReference", "getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0)");
                     	    }
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:925:110: ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) )
@@ -1991,7 +1991,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:968:4: ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) )
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:969:5: {...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) )
                     	    {
-                    	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 1)) ) {
+                    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleReference", "getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 1)");
                     	    }
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:969:110: ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) )
@@ -2553,19 +2553,19 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                 int alt18=6;
                 int LA18_0 = input.LA(1);
 
-                if ( (LA18_0==20) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 0))) {
+                if ( LA18_0==20 && getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 0) ) {
                     alt18=1;
                 }
-                else if ( (LA18_0==21) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 1))) {
+                else if ( LA18_0==21 && getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 1) ) {
                     alt18=2;
                 }
-                else if ( (LA18_0==22) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 2))) {
+                else if ( LA18_0==22 && getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 2) ) {
                     alt18=3;
                 }
-                else if ( (LA18_0==23) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 3))) {
+                else if ( LA18_0==23 && getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 3) ) {
                     alt18=4;
                 }
-                else if ( ((LA18_0>=29 && LA18_0<=30)) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4))) {
+                else if ( LA18_0>=29 && LA18_0<=30 && getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {
                     alt18=5;
                 }
 
@@ -2577,7 +2577,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1243:4: ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) )
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1244:5: {...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) )
             	    {
-            	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 0)) ) {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleObject2", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 0)");
             	    }
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1244:104: ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) )
@@ -2651,7 +2651,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1287:4: ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) )
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1288:5: {...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) )
             	    {
-            	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 1)) ) {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleObject2", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 1)");
             	    }
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1288:104: ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) )
@@ -2725,7 +2725,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1331:4: ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) )
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1332:5: {...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) )
             	    {
-            	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 2)) ) {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleObject2", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 2)");
             	    }
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1332:104: ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) )
@@ -2799,7 +2799,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1375:4: ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) )
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1376:5: {...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) )
             	    {
-            	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 3)) ) {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 3) ) {
             	        throw new FailedPredicateException(input, "ruleObject2", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 3)");
             	    }
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1376:104: ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) )
@@ -2865,7 +2865,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1412:4: ({...}? => ( ( (lv_features_19_0= ruleFeature2 ) )+ ) )
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1413:5: {...}? => ( ( (lv_features_19_0= ruleFeature2 ) )+ )
             	    {
-            	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4)) ) {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {
             	        throw new FailedPredicateException(input, "ruleObject2", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4)");
             	    }
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1413:104: ( ( (lv_features_19_0= ruleFeature2 ) )+ )
@@ -2884,7 +2884,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	        if ( (LA17_0==29) ) {
             	            int LA17_6 = input.LA(2);
 
-            	            if ( (!(getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4))) ) {
+            	            if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {
             	                alt17=1;
             	            }
 
@@ -2893,7 +2893,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	        else if ( (LA17_0==30) ) {
             	            int LA17_7 = input.LA(2);
 
-            	            if ( (!(getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4))) ) {
+            	            if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {
             	                alt17=1;
             	            }
 
@@ -3301,19 +3301,19 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         int alt21=6;
                         int LA21_0 = input.LA(1);
 
-                        if ( (LA21_0==20) && (getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 0))) {
+                        if ( LA21_0==20 && getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 0) ) {
                             alt21=1;
                         }
-                        else if ( (LA21_0==21) && (getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 1))) {
+                        else if ( LA21_0==21 && getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 1) ) {
                             alt21=2;
                         }
-                        else if ( (LA21_0==34) && (getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2))) {
+                        else if ( LA21_0==34 && getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2) ) {
                             alt21=3;
                         }
-                        else if ( (LA21_0==32) && (getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 3))) {
+                        else if ( LA21_0==32 && getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 3) ) {
                             alt21=4;
                         }
-                        else if ( (LA21_0==33) && (getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 4))) {
+                        else if ( LA21_0==33 && getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 4) ) {
                             alt21=5;
                         }
 
@@ -3325,7 +3325,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1589:4: ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) ';' ) ) )
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1590:5: {...}? => ( ( 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) ';' ) )
                     	    {
-                    	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 0)) ) {
+                    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleAttribute2", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 0)");
                     	    }
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1590:111: ( ( 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) ';' ) )
@@ -3399,7 +3399,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1633:4: ({...}? => ( ( 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) ';' ) ) )
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1634:5: {...}? => ( ( 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) ';' ) )
                     	    {
-                    	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 1)) ) {
+                    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleAttribute2", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 1)");
                     	    }
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1634:111: ( ( 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) ';' ) )
@@ -3473,7 +3473,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1677:4: ({...}? => ( ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) )+ ) )
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1678:5: {...}? => ( ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) )+ )
                     	    {
-                    	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2)) ) {
+                    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2) ) {
                     	        throw new FailedPredicateException(input, "ruleAttribute2", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2)");
                     	    }
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1678:111: ( ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) )+ )
@@ -3492,7 +3492,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	        if ( (LA20_0==34) ) {
                     	            int LA20_4 = input.LA(2);
 
-                    	            if ( (!(getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2))) ) {
+                    	            if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2) ) {
                     	                alt20=1;
                     	            }
 
@@ -3565,7 +3565,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1713:4: ({...}? => ( ( ( (lv_required_12_0= 'required' ) ) ';' ) ) )
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1714:5: {...}? => ( ( ( (lv_required_12_0= 'required' ) ) ';' ) )
                     	    {
-                    	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 3)) ) {
+                    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 3) ) {
                     	        throw new FailedPredicateException(input, "ruleAttribute2", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 3)");
                     	    }
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1714:111: ( ( ( (lv_required_12_0= 'required' ) ) ';' ) )
@@ -3631,7 +3631,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1750:4: ({...}? => ( ( ( (lv_technical_14_0= 'technical' ) ) ';' ) ) )
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1751:5: {...}? => ( ( ( (lv_technical_14_0= 'technical' ) ) ';' ) )
                     	    {
-                    	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 4)) ) {
+                    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 4) ) {
                     	        throw new FailedPredicateException(input, "ruleAttribute2", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 4)");
                     	    }
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1751:111: ( ( ( (lv_technical_14_0= 'technical' ) ) ';' ) )
@@ -3952,10 +3952,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         int alt24=3;
                         int LA24_0 = input.LA(1);
 
-                        if ( (LA24_0==20) && (getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 0))) {
+                        if ( LA24_0==20 && getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 0) ) {
                             alt24=1;
                         }
-                        else if ( (LA24_0==21) && (getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 1))) {
+                        else if ( LA24_0==21 && getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 1) ) {
                             alt24=2;
                         }
 
@@ -3967,7 +3967,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1902:4: ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) )
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1903:5: {...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) )
                     	    {
-                    	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 0)) ) {
+                    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleReference2", "getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 0)");
                     	    }
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1903:111: ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) )
@@ -4041,7 +4041,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1946:4: ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) )
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1947:5: {...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) )
                     	    {
-                    	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 1)) ) {
+                    	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleReference2", "getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 1)");
                     	    }
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1947:111: ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) )
@@ -4285,10 +4285,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                 int alt27=3;
                 int LA27_0 = input.LA(1);
 
-                if ( (LA27_0==35) && (getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 0))) {
+                if ( LA27_0==35 && getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 0) ) {
                     alt27=1;
                 }
-                else if ( (LA27_0==36) && (getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 1))) {
+                else if ( LA27_0==36 && getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 1) ) {
                     alt27=2;
                 }
 
@@ -4300,7 +4300,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:2070:4: ({...}? => ( ( 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* ';' ) ) )
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:2071:5: {...}? => ( ( 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* ';' ) )
             	    {
-            	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 0)) ) {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleConstraintDefinition", "getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 0)");
             	    }
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:2071:117: ( ( 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* ';' ) )
@@ -4392,7 +4392,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:2114:4: ({...}? => ( ( 'message' ( (lv_message_8_0= RULE_STRING ) ) ';' ) ) )
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:2115:5: {...}? => ( ( 'message' ( (lv_message_8_0= RULE_STRING ) ) ';' ) )
             	    {
-            	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 1)) ) {
+            	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleConstraintDefinition", "getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 1)");
             	    }
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:2115:117: ( ( 'message' ( (lv_message_8_0= RULE_STRING ) ) ';' ) )
@@ -4470,7 +4470,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                 cnt27++;
             } while (true);
 
-            if ( !(getUnorderedGroupHelper().canLeave(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3())) ) {
+            if ( ! getUnorderedGroupHelper().canLeave(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3()) ) {
                 throw new FailedPredicateException(input, "ruleConstraintDefinition", "getUnorderedGroupHelper().canLeave(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3())");
             }
 
@@ -4601,9 +4601,9 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         int index7_18 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (!(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4))) ) {s = 19;}
+                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
 
-                        else if ( (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4)) ) {s = 10;}
+                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
 
                          
                         input.seek(index7_18);
@@ -4618,23 +4618,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         s = -1;
                         if ( (LA7_0==28) ) {s = 1;}
 
-                        else if ( (LA7_0==20) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0))) {s = 2;}
+                        else if ( LA7_0==20 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0) ) {s = 2;}
 
-                        else if ( (LA7_0==21) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1))) {s = 3;}
+                        else if ( LA7_0==21 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1) ) {s = 3;}
 
-                        else if ( (LA7_0==22) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2))) {s = 4;}
+                        else if ( LA7_0==22 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2) ) {s = 4;}
 
-                        else if ( (LA7_0==23) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3))) {s = 5;}
+                        else if ( LA7_0==23 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3) ) {s = 5;}
 
                         else if ( (LA7_0==29) ) {s = 6;}
 
                         else if ( (LA7_0==30) ) {s = 7;}
 
-                        else if ( (LA7_0==24) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5))) {s = 8;}
+                        else if ( LA7_0==24 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5) ) {s = 8;}
 
-                        else if ( (LA7_0==26) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6))) {s = 9;}
+                        else if ( LA7_0==26 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6) ) {s = 9;}
 
-                        else if ( (LA7_0==27) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7))) {s = 10;}
+                        else if ( LA7_0==27 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7) ) {s = 10;}
 
                          
                         input.seek(index7_0);
@@ -4647,9 +4647,9 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         int index7_16 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (!(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4))) ) {s = 19;}
+                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
 
-                        else if ( (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4)) ) {s = 10;}
+                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
 
                          
                         input.seek(index7_16);
@@ -4662,9 +4662,9 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         int index7_28 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (!(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4))) ) {s = 19;}
+                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
 
-                        else if ( (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4)) ) {s = 10;}
+                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
 
                          
                         input.seek(index7_28);
@@ -4677,9 +4677,9 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         int index7_27 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (!(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4))) ) {s = 19;}
+                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
 
-                        else if ( (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4)) ) {s = 10;}
+                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
 
                          
                         input.seek(index7_27);
@@ -4692,9 +4692,9 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         int index7_22 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (!(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4))) ) {s = 19;}
+                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
 
-                        else if ( (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4)) ) {s = 10;}
+                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
 
                          
                         input.seek(index7_22);
@@ -4796,9 +4796,9 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         int index8_16 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (!(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4))) ) {s = 19;}
+                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
 
-                        else if ( (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4)) ) {s = 10;}
+                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
 
                          
                         input.seek(index8_16);
@@ -4811,9 +4811,9 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         int index8_18 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (!(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4))) ) {s = 23;}
+                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 23;}
 
-                        else if ( (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4)) ) {s = 10;}
+                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
 
                          
                         input.seek(index8_18);
@@ -4828,23 +4828,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         s = -1;
                         if ( (LA8_0==28) ) {s = 1;}
 
-                        else if ( (LA8_0==20) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0))) {s = 2;}
+                        else if ( LA8_0==20 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0) ) {s = 2;}
 
-                        else if ( (LA8_0==21) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1))) {s = 3;}
+                        else if ( LA8_0==21 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1) ) {s = 3;}
 
-                        else if ( (LA8_0==22) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2))) {s = 4;}
+                        else if ( LA8_0==22 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2) ) {s = 4;}
 
-                        else if ( (LA8_0==23) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3))) {s = 5;}
+                        else if ( LA8_0==23 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3) ) {s = 5;}
 
                         else if ( (LA8_0==29) ) {s = 6;}
 
                         else if ( (LA8_0==30) ) {s = 7;}
 
-                        else if ( (LA8_0==24) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5))) {s = 8;}
+                        else if ( LA8_0==24 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5) ) {s = 8;}
 
-                        else if ( (LA8_0==26) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6))) {s = 9;}
+                        else if ( LA8_0==26 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6) ) {s = 9;}
 
-                        else if ( (LA8_0==27) && (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7))) {s = 10;}
+                        else if ( LA8_0==27 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7) ) {s = 10;}
 
                          
                         input.seek(index8_0);
@@ -4857,9 +4857,9 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         int index8_29 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (!(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4))) ) {s = 19;}
+                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
 
-                        else if ( (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4)) ) {s = 10;}
+                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
 
                          
                         input.seek(index8_29);
@@ -4872,9 +4872,9 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         int index8_28 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (!(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4))) ) {s = 19;}
+                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
 
-                        else if ( (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4)) ) {s = 10;}
+                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
 
                          
                         input.seek(index8_28);
@@ -4887,9 +4887,9 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         int index8_22 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (!(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4))) ) {s = 19;}
+                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
 
-                        else if ( (getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4)) ) {s = 10;}
+                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
 
                          
                         input.seek(index8_22);
