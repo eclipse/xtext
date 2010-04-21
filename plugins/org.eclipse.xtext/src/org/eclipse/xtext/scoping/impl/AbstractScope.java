@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -21,11 +20,12 @@ import org.eclipse.xtext.scoping.IScope;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
+ * @author Holger Schill - Contribution to Bug 309764
  */
 public abstract class AbstractScope implements IScope {
 	
@@ -36,7 +36,7 @@ public abstract class AbstractScope implements IScope {
 	protected abstract Iterable<IEObjectDescription> internalGetContents();
 
 	public Iterable<IEObjectDescription> getAllContents() {
-		final Set<String> identifiers = new HashSet<String>();
+		final Set<String> identifiers = Sets.newHashSet();
 		return Iterables.concat(Iterables.transform(getContents(), new Function<IEObjectDescription, IEObjectDescription>() {
 			public IEObjectDescription apply(IEObjectDescription param) {
 				identifiers.add(param.getName());
@@ -50,22 +50,26 @@ public abstract class AbstractScope implements IScope {
 	}
 
 	public IEObjectDescription getContentByEObject(EObject object) {
-		Iterator<IEObjectDescription> contents = getContents().iterator();
-		URI uri = EcoreUtil.getURI(object);
-		Set<String> names = new HashSet<String>();
-		while (contents.hasNext()) {
-			IEObjectDescription element = contents.next();
-			names.add(element.getName());
-			URI elementsUri = EcoreUtil.getURI(element.getEObjectOrProxy());
-			if (uri.equals(elementsUri))
-				return element;
-		}
-		IEObjectDescription contentByEObject = getOuterScope().getContentByEObject(object);
-		if (contentByEObject!=null && names.contains(contentByEObject.getName())) {
-			// element is shadowed by a local element with the same name.
-			return null;
-		}
-		return contentByEObject;
+		Iterator<IEObjectDescription> iterator = getAllContentsByEObject(object).iterator();
+		if(iterator.hasNext())
+			return iterator.next();
+		return null;
+	}
+	
+	
+	public Iterable<IEObjectDescription> getAllContentsByEObject(EObject object) {
+		final Set<String> identifiers = Sets.newHashSet(); 
+		final URI uri = EcoreUtil.getURI(object);
+		return Iterables.concat(Iterables.filter(getContents(), new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription param) {
+				identifiers.add(param.getName());
+				return param.getEObjectURI().equals(uri);
+			}
+		}), Iterables.filter(getOuterScope().getAllContentsByEObject(object), new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription param) {
+				return !identifiers.contains(param.getName());
+			}
+		}));
 	}
 
 	public IEObjectDescription getContentByName(String name) {

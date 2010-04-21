@@ -43,6 +43,10 @@ public class FilteringScope implements IScope {
 	public IEObjectDescription getContentByEObject(EObject object) {
 		return filter(delegate.getContentByEObject(object));
 	}
+	
+	public Iterable<IEObjectDescription> getAllContentsByEObject(EObject object) {
+		return filter(delegate.getAllContentsByEObject(object));
+	}
 
 	protected Iterable<IEObjectDescription> filter(
 			Iterable<IEObjectDescription> unfiltered) {
@@ -54,5 +58,4 @@ public class FilteringScope implements IScope {
 			return null;
 		return contentByEObject;
 	}
-
 }
