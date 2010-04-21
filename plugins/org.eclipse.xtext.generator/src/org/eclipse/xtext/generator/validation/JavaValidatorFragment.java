@@ -29,10 +29,22 @@ import com.google.inject.internal.Lists;
  * @author Michael Clay - Initial contribution and API
  */
 public class JavaValidatorFragment extends AbstractValidatorFragment {
-
 	private static final Logger log = Logger.getLogger(JavaValidatorFragment.class);
-
 	private final List<String> composedChecks = new ArrayList<String>();
+	private String basePackage;
+	
+	@Override
+	public void setBasePackage(String basePackage) {
+		this.basePackage = basePackage;
+	}
+	
+	@Override
+	public String getBasePackage(Grammar g, Naming n) {
+		if (basePackage != null) {
+			return basePackage;
+		}
+		return super.getBasePackage(g, n);
+	}
 
 	/**
 	 * Adds a validator that is to be executed additionally.
