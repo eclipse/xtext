@@ -16,8 +16,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.junit.validation.AssertableDiagnostics;
 import org.eclipse.xtext.junit.validation.AssertableDiagnostics.DiagnosticPredicate;
-import org.eclipse.xtext.validation.ConcreteSyntaxValidator.ConcreteSyntaxFeatureDiagnostic;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator.DiagnosticChainAcceptor;
+import org.eclipse.xtext.validation.impl.ConcreteSyntaxDiagnosticProvider.ConcreteSyntaxFeatureDiagnostic;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
