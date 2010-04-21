@@ -8,7 +8,7 @@
 package org.eclipse.xtext.validation;
 
 import static org.eclipse.xtext.junit.validation.AssertableDiagnostics.*;
-import static org.eclipse.xtext.validation.ConcreteSyntaxValidator.*;
+import static org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider.*;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -47,6 +47,7 @@ import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2Sub;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2SubAction;
 import org.eclipse.xtext.validation.csvalidationtest.impl.TransientObjectImpl;
+import org.eclipse.xtext.validation.impl.ConcreteSyntaxValidator;
 
 /**
  * @author meysholdt - Initial contribution and API
@@ -620,21 +621,21 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(m).assertAll(
 				err(p.getTwoVersion_Shared2(), ERROR_VALUE_REQUIRED, null, null,
 						"((shared1? shared2 shared3* version1?)|(shared1? shared2"
-						+ " shared3* extra1? ((extra2 extra3)|extra4)?))"));
+								+ " shared3* extra1? ((extra2 extra3)|extra4)?))"));
 
 		m = f.createTwoVersion();
 		m.setExtra4("foo");
 		validate(m).assertAll(
 				err(p.getTwoVersion_Shared2(), ERROR_VALUE_REQUIRED, null, null,
 						"((shared1? shared2 shared3* version1?)|(shared1? shared2"
-						+ " shared3* extra1? ((extra2 extra3)|extra4)?))"));
+								+ " shared3* extra1? ((extra2 extra3)|extra4)?))"));
 
 		m = f.createTwoVersion();
 		m.setExtra3("foo");
 		validate(m).assertAll(
 				err(p.getTwoVersion_Shared2(), ERROR_VALUE_REQUIRED, null, null,
 						"((shared1? shared2 shared3* version1?)|(shared1? shared2"
-						+ " shared3* extra1? ((extra2 extra3)|extra4)?))"),
+								+ " shared3* extra1? ((extra2 extra3)|extra4)?))"),
 				err(p.getTwoVersion_Extra2(), ERROR_VALUE_REQUIRED, null, null,
 						"((shared1? shared2 shared3* version1?)|((extra2 extra3)|extra4)?)"));
 	}
