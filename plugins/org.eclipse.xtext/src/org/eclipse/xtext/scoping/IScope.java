@@ -18,6 +18,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
  * {@link IScopedElement}s.
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * @author Holger Schill - Contribution to Bug 309764
  */
 public interface IScope {
 	
@@ -37,9 +38,13 @@ public interface IScope {
 		public IScope getOuterScope() {
 			return NULLSCOPE;
 		}
-		
+
 		public IEObjectDescription getContentByEObject(EObject object) {
 			return null;
+		}
+		
+		public Iterable<IEObjectDescription> getAllContentsByEObject(EObject object) {
+			return Collections.emptyList();
 		}
 
 		public IEObjectDescription getContentByName(String name) {
@@ -53,13 +58,14 @@ public interface IScope {
     IScope getOuterScope();
 
     /**
-     * @return an {@link Iterable} of {@link IScopedElement}s contained in this scope only
+     * @return an {@link Iterable} of {@link IEObjectDescription}s directly contained in this scope.
+     * @throws UnsupportedOperationException if the scope cannot be enumerated.
      */
     Iterable<IEObjectDescription> getContents();
     
     /**
-     * @return an {@link Iterable} of {@link IScopedElement}s contained in this scope and it's outer scope
-     * (see {@link IScope#getOuterScope()}), where the elements from an outer scope follows the one from it's inner scope
+     * @return an {@link Iterable} of {@link IEObjectDescription}s contained in this scope and it's outer scope
+     * @throws UnsupportedOperationException if the scope or an outer scope cannot be enumerated.
      */
     Iterable<IEObjectDescription> getAllContents();
     
@@ -69,8 +75,14 @@ public interface IScope {
     IEObjectDescription getContentByName(String name);
     
     /**
-     * a deep search for the element with the given object
+     * @return an {@link IEObjectDescription} that represents the first element from {@link IScope#getAllContentsByEObject(EObject)} or null
      */
     IEObjectDescription getContentByEObject(EObject object);
+    
+    /**
+     * A deep search for the elements pointing to the given object.
+     * @return an {@link Iterable} of {@link IEObjectDescription}s that matches the given object ordered by the occurrence in this scope and it's following outer scope 
+     */
+    Iterable<IEObjectDescription> getAllContentsByEObject(EObject object);
     
 }

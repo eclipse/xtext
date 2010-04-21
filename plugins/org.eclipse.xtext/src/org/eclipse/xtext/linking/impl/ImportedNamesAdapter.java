@@ -65,6 +65,12 @@ public class ImportedNamesAdapter extends AdapterImpl implements IScopeWrapper {
 			log.error("getContentByEObject shouldn't be called on a global scope during linking.", new IllegalStateException());
 			return delegate.getContentByEObject(object);
 		}
+		
+		public Iterable<IEObjectDescription> getAllContentsByEObject(EObject object){
+			log.error("getAllContentsByEObject shouldn't be called on a global scope during linking.", new IllegalStateException());
+			return delegate.getAllContentsByEObject(object);
+			
+		}
 
 		public Iterable<IEObjectDescription> getContents() {
 			log.error("getContents shouldn't be called on a global scope during linking.", new IllegalStateException());
