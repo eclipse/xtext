@@ -101,7 +101,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.PartialParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.SerializationTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.ValueConverterTest.class);
-//      suite.addTestSuite(org.eclipse.xtext.parser.encoding.EncodingTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.encoding.EncodingTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.epatch.EpatchComparingTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.keywords.AntlrParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.keywords.GrammarAccessTest.class);
@@ -150,6 +150,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.SerializationBug269362Test.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.SerializationErrorTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.TreeConstTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.WhitespacePreservingCallbackTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.XtextGrammarReconcilationTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest.class);
