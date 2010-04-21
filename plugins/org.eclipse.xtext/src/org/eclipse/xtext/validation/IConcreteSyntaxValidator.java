@@ -13,6 +13,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider.IConcreteSyntaxDiagnostic;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -72,9 +73,6 @@ public interface IConcreteSyntaxValidator {
 			return msg.toString();
 		}
 
-	}
-
-	public interface IConcreteSyntaxDiagnostic extends Diagnostic {
 	}
 
 	public interface IDiagnosticAcceptor {
