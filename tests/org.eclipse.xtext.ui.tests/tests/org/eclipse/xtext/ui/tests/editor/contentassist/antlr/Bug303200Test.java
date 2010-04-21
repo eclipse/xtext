@@ -44,7 +44,7 @@ public class Bug303200Test extends AbstractXtextTests {
 	public void testBug303200_01() throws Exception {
 		Bug303200TestLanguageParser parser = get(Bug303200TestLanguageParser.class);
 		Collection<FollowElement> followElements = parser.getFollowElements("function f() {");
-		assertEquals(6, followElements.size());
+		assertEquals(4, followElements.size());
 	}
 	
 	public void testBug303200_02() throws Exception {
@@ -58,7 +58,7 @@ public class Bug303200Test extends AbstractXtextTests {
 	public void testBug303200_03() throws Exception {
 		Bug303200TestLanguageParser parser = get(Bug303200TestLanguageParser.class);
 		Collection<FollowElement> followElements = Lists.newArrayList(parser.getFollowElements("function f() {} function f() {"));
-		assertEquals(6, followElements.size());
+		assertEquals(4, followElements.size());
 	}
 	
 	protected void recursiveTestFollowElements(Bug303200TestLanguageParser parser, FollowElement element) {
