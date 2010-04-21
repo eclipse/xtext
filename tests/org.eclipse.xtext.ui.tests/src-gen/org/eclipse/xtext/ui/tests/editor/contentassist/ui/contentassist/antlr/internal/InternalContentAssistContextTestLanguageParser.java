@@ -588,52 +588,20 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start rule__FirstLevel__Group__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:259:1: rule__FirstLevel__Group__0 : ( ( rule__FirstLevel__SecondLevelAAssignment_0 )* ) rule__FirstLevel__Group__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:259:1: rule__FirstLevel__Group__0 : rule__FirstLevel__Group__0__Impl rule__FirstLevel__Group__1 ;
     public final void rule__FirstLevel__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:263:1: ( ( ( rule__FirstLevel__SecondLevelAAssignment_0 )* ) rule__FirstLevel__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:264:1: ( ( rule__FirstLevel__SecondLevelAAssignment_0 )* ) rule__FirstLevel__Group__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:263:1: ( rule__FirstLevel__Group__0__Impl rule__FirstLevel__Group__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:264:2: rule__FirstLevel__Group__0__Impl rule__FirstLevel__Group__1
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:264:1: ( ( rule__FirstLevel__SecondLevelAAssignment_0 )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:265:1: ( rule__FirstLevel__SecondLevelAAssignment_0 )*
-            {
-             before(grammarAccess.getFirstLevelAccess().getSecondLevelAAssignment_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:266:1: ( rule__FirstLevel__SecondLevelAAssignment_0 )*
-            loop1:
-            do {
-                int alt1=2;
-                int LA1_0 = input.LA(1);
+            pushFollow(FollowSets000.FOLLOW_rule__FirstLevel__Group__0__Impl_in_rule__FirstLevel__Group__0488);
+            rule__FirstLevel__Group__0__Impl();
+            _fsp--;
 
-                if ( (LA1_0==11) ) {
-                    alt1=1;
-                }
-
-
-                switch (alt1) {
-            	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:266:2: rule__FirstLevel__SecondLevelAAssignment_0
-            	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__FirstLevel__SecondLevelAAssignment_0_in_rule__FirstLevel__Group__0492);
-            	    rule__FirstLevel__SecondLevelAAssignment_0();
-            	    _fsp--;
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop1;
-                }
-            } while (true);
-
-             after(grammarAccess.getFirstLevelAccess().getSecondLevelAAssignment_0()); 
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__FirstLevel__Group__1_in_rule__FirstLevel__Group__0502);
+            pushFollow(FollowSets000.FOLLOW_rule__FirstLevel__Group__1_in_rule__FirstLevel__Group__0491);
             rule__FirstLevel__Group__1();
             _fsp--;
 
@@ -655,21 +623,117 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
     // $ANTLR end rule__FirstLevel__Group__0
 
 
+    // $ANTLR start rule__FirstLevel__Group__0__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:271:1: rule__FirstLevel__Group__0__Impl : ( ( rule__FirstLevel__SecondLevelAAssignment_0 )* ) ;
+    public final void rule__FirstLevel__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:275:1: ( ( ( rule__FirstLevel__SecondLevelAAssignment_0 )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:276:1: ( ( rule__FirstLevel__SecondLevelAAssignment_0 )* )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:276:1: ( ( rule__FirstLevel__SecondLevelAAssignment_0 )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:277:1: ( rule__FirstLevel__SecondLevelAAssignment_0 )*
+            {
+             before(grammarAccess.getFirstLevelAccess().getSecondLevelAAssignment_0()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:278:1: ( rule__FirstLevel__SecondLevelAAssignment_0 )*
+            loop1:
+            do {
+                int alt1=2;
+                int LA1_0 = input.LA(1);
+
+                if ( (LA1_0==11) ) {
+                    alt1=1;
+                }
+
+
+                switch (alt1) {
+            	case 1 :
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:278:2: rule__FirstLevel__SecondLevelAAssignment_0
+            	    {
+            	    pushFollow(FollowSets000.FOLLOW_rule__FirstLevel__SecondLevelAAssignment_0_in_rule__FirstLevel__Group__0__Impl518);
+            	    rule__FirstLevel__SecondLevelAAssignment_0();
+            	    _fsp--;
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop1;
+                }
+            } while (true);
+
+             after(grammarAccess.getFirstLevelAccess().getSecondLevelAAssignment_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__FirstLevel__Group__0__Impl
+
+
     // $ANTLR start rule__FirstLevel__Group__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:277:1: rule__FirstLevel__Group__1 : ( ( rule__FirstLevel__SecondLevelBAssignment_1 )* ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:288:1: rule__FirstLevel__Group__1 : rule__FirstLevel__Group__1__Impl ;
     public final void rule__FirstLevel__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:281:1: ( ( ( rule__FirstLevel__SecondLevelBAssignment_1 )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:282:1: ( ( rule__FirstLevel__SecondLevelBAssignment_1 )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:292:1: ( rule__FirstLevel__Group__1__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:293:2: rule__FirstLevel__Group__1__Impl
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:282:1: ( ( rule__FirstLevel__SecondLevelBAssignment_1 )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:283:1: ( rule__FirstLevel__SecondLevelBAssignment_1 )*
+            pushFollow(FollowSets000.FOLLOW_rule__FirstLevel__Group__1__Impl_in_rule__FirstLevel__Group__1549);
+            rule__FirstLevel__Group__1__Impl();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__FirstLevel__Group__1
+
+
+    // $ANTLR start rule__FirstLevel__Group__1__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:299:1: rule__FirstLevel__Group__1__Impl : ( ( rule__FirstLevel__SecondLevelBAssignment_1 )* ) ;
+    public final void rule__FirstLevel__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:303:1: ( ( ( rule__FirstLevel__SecondLevelBAssignment_1 )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:304:1: ( ( rule__FirstLevel__SecondLevelBAssignment_1 )* )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:304:1: ( ( rule__FirstLevel__SecondLevelBAssignment_1 )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:305:1: ( rule__FirstLevel__SecondLevelBAssignment_1 )*
             {
              before(grammarAccess.getFirstLevelAccess().getSecondLevelBAssignment_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:284:1: ( rule__FirstLevel__SecondLevelBAssignment_1 )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:306:1: ( rule__FirstLevel__SecondLevelBAssignment_1 )*
             loop2:
             do {
                 int alt2=2;
@@ -682,9 +746,9 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:284:2: rule__FirstLevel__SecondLevelBAssignment_1
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:306:2: rule__FirstLevel__SecondLevelBAssignment_1
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__FirstLevel__SecondLevelBAssignment_1_in_rule__FirstLevel__Group__1530);
+            	    pushFollow(FollowSets000.FOLLOW_rule__FirstLevel__SecondLevelBAssignment_1_in_rule__FirstLevel__Group__1__Impl576);
             	    rule__FirstLevel__SecondLevelBAssignment_1();
             	    _fsp--;
 
@@ -716,80 +780,24 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
         }
         return ;
     }
-    // $ANTLR end rule__FirstLevel__Group__1
+    // $ANTLR end rule__FirstLevel__Group__1__Impl
 
 
     // $ANTLR start rule__SecondLevelA__Group__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:298:1: rule__SecondLevelA__Group__0 : ( ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 ) ) ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )* ) ) rule__SecondLevelA__Group__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:320:1: rule__SecondLevelA__Group__0 : rule__SecondLevelA__Group__0__Impl rule__SecondLevelA__Group__1 ;
     public final void rule__SecondLevelA__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:302:1: ( ( ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 ) ) ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )* ) ) rule__SecondLevelA__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:303:1: ( ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 ) ) ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )* ) ) rule__SecondLevelA__Group__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:324:1: ( rule__SecondLevelA__Group__0__Impl rule__SecondLevelA__Group__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:325:2: rule__SecondLevelA__Group__0__Impl rule__SecondLevelA__Group__1
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:303:1: ( ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 ) ) ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:304:1: ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 ) ) ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )* )
-            {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:304:1: ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:305:1: ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )
-            {
-             before(grammarAccess.getSecondLevelAAccess().getThirdLevelA1Assignment_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:306:1: ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:306:2: rule__SecondLevelA__ThirdLevelA1Assignment_0
-            {
-            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__ThirdLevelA1Assignment_0_in_rule__SecondLevelA__Group__0571);
-            rule__SecondLevelA__ThirdLevelA1Assignment_0();
+            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__Group__0__Impl_in_rule__SecondLevelA__Group__0611);
+            rule__SecondLevelA__Group__0__Impl();
             _fsp--;
 
-
-            }
-
-             after(grammarAccess.getSecondLevelAAccess().getThirdLevelA1Assignment_0()); 
-
-            }
-
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:309:1: ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:310:1: ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )*
-            {
-             before(grammarAccess.getSecondLevelAAccess().getThirdLevelA1Assignment_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:311:1: ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )*
-            loop3:
-            do {
-                int alt3=2;
-                int LA3_0 = input.LA(1);
-
-                if ( (LA3_0==11) ) {
-                    alt3=1;
-                }
-
-
-                switch (alt3) {
-            	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:311:2: rule__SecondLevelA__ThirdLevelA1Assignment_0
-            	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__ThirdLevelA1Assignment_0_in_rule__SecondLevelA__Group__0583);
-            	    rule__SecondLevelA__ThirdLevelA1Assignment_0();
-            	    _fsp--;
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop3;
-                }
-            } while (true);
-
-             after(grammarAccess.getSecondLevelAAccess().getThirdLevelA1Assignment_0()); 
-
-            }
-
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__Group__1_in_rule__SecondLevelA__Group__0595);
+            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__Group__1_in_rule__SecondLevelA__Group__0614);
             rule__SecondLevelA__Group__1();
             _fsp--;
 
@@ -811,27 +819,147 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
     // $ANTLR end rule__SecondLevelA__Group__0
 
 
+    // $ANTLR start rule__SecondLevelA__Group__0__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:332:1: rule__SecondLevelA__Group__0__Impl : ( ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 ) ) ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )* ) ) ;
+    public final void rule__SecondLevelA__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:336:1: ( ( ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 ) ) ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )* ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:337:1: ( ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 ) ) ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )* ) )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:337:1: ( ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 ) ) ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:338:1: ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 ) ) ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )* )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:338:1: ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:339:1: ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )
+            {
+             before(grammarAccess.getSecondLevelAAccess().getThirdLevelA1Assignment_0()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:340:1: ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:340:2: rule__SecondLevelA__ThirdLevelA1Assignment_0
+            {
+            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__ThirdLevelA1Assignment_0_in_rule__SecondLevelA__Group__0__Impl643);
+            rule__SecondLevelA__ThirdLevelA1Assignment_0();
+            _fsp--;
+
+
+            }
+
+             after(grammarAccess.getSecondLevelAAccess().getThirdLevelA1Assignment_0()); 
+
+            }
+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:343:1: ( ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:344:1: ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )*
+            {
+             before(grammarAccess.getSecondLevelAAccess().getThirdLevelA1Assignment_0()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:345:1: ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )*
+            loop3:
+            do {
+                int alt3=2;
+                int LA3_0 = input.LA(1);
+
+                if ( (LA3_0==11) ) {
+                    alt3=1;
+                }
+
+
+                switch (alt3) {
+            	case 1 :
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:345:2: rule__SecondLevelA__ThirdLevelA1Assignment_0
+            	    {
+            	    pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__ThirdLevelA1Assignment_0_in_rule__SecondLevelA__Group__0__Impl655);
+            	    rule__SecondLevelA__ThirdLevelA1Assignment_0();
+            	    _fsp--;
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop3;
+                }
+            } while (true);
+
+             after(grammarAccess.getSecondLevelAAccess().getThirdLevelA1Assignment_0()); 
+
+            }
+
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__SecondLevelA__Group__0__Impl
+
+
     // $ANTLR start rule__SecondLevelA__Group__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:323:1: rule__SecondLevelA__Group__1 : ( ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 ) ) ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )* ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:356:1: rule__SecondLevelA__Group__1 : rule__SecondLevelA__Group__1__Impl ;
     public final void rule__SecondLevelA__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:327:1: ( ( ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 ) ) ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )* ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:328:1: ( ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 ) ) ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:360:1: ( rule__SecondLevelA__Group__1__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:361:2: rule__SecondLevelA__Group__1__Impl
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:328:1: ( ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 ) ) ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:329:1: ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 ) ) ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )* )
+            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__Group__1__Impl_in_rule__SecondLevelA__Group__1688);
+            rule__SecondLevelA__Group__1__Impl();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__SecondLevelA__Group__1
+
+
+    // $ANTLR start rule__SecondLevelA__Group__1__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:367:1: rule__SecondLevelA__Group__1__Impl : ( ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 ) ) ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )* ) ) ;
+    public final void rule__SecondLevelA__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:371:1: ( ( ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 ) ) ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )* ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:372:1: ( ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 ) ) ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )* ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:329:1: ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:330:1: ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:372:1: ( ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 ) ) ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:373:1: ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 ) ) ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )* )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:373:1: ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:374:1: ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )
             {
              before(grammarAccess.getSecondLevelAAccess().getThirdLevelA2Assignment_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:331:1: ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:331:2: rule__SecondLevelA__ThirdLevelA2Assignment_1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:375:1: ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:375:2: rule__SecondLevelA__ThirdLevelA2Assignment_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__ThirdLevelA2Assignment_1_in_rule__SecondLevelA__Group__1625);
+            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__ThirdLevelA2Assignment_1_in_rule__SecondLevelA__Group__1__Impl717);
             rule__SecondLevelA__ThirdLevelA2Assignment_1();
             _fsp--;
 
@@ -842,11 +970,11 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:334:1: ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:335:1: ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:378:1: ( ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:379:1: ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )*
             {
              before(grammarAccess.getSecondLevelAAccess().getThirdLevelA2Assignment_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:336:1: ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:380:1: ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )*
             loop4:
             do {
                 int alt4=2;
@@ -859,9 +987,9 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:336:2: rule__SecondLevelA__ThirdLevelA2Assignment_1
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:380:2: rule__SecondLevelA__ThirdLevelA2Assignment_1
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__ThirdLevelA2Assignment_1_in_rule__SecondLevelA__Group__1637);
+            	    pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__ThirdLevelA2Assignment_1_in_rule__SecondLevelA__Group__1__Impl729);
             	    rule__SecondLevelA__ThirdLevelA2Assignment_1();
             	    _fsp--;
 
@@ -896,80 +1024,24 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
         }
         return ;
     }
-    // $ANTLR end rule__SecondLevelA__Group__1
+    // $ANTLR end rule__SecondLevelA__Group__1__Impl
 
 
     // $ANTLR start rule__SecondLevelB__Group__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:351:1: rule__SecondLevelB__Group__0 : ( ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 ) ) ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )* ) ) rule__SecondLevelB__Group__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:395:1: rule__SecondLevelB__Group__0 : rule__SecondLevelB__Group__0__Impl rule__SecondLevelB__Group__1 ;
     public final void rule__SecondLevelB__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:355:1: ( ( ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 ) ) ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )* ) ) rule__SecondLevelB__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:356:1: ( ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 ) ) ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )* ) ) rule__SecondLevelB__Group__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:399:1: ( rule__SecondLevelB__Group__0__Impl rule__SecondLevelB__Group__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:400:2: rule__SecondLevelB__Group__0__Impl rule__SecondLevelB__Group__1
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:356:1: ( ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 ) ) ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:357:1: ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 ) ) ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )* )
-            {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:357:1: ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:358:1: ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )
-            {
-             before(grammarAccess.getSecondLevelBAccess().getThirdLevelB1Assignment_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:359:1: ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:359:2: rule__SecondLevelB__ThirdLevelB1Assignment_0
-            {
-            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__ThirdLevelB1Assignment_0_in_rule__SecondLevelB__Group__0680);
-            rule__SecondLevelB__ThirdLevelB1Assignment_0();
+            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__Group__0__Impl_in_rule__SecondLevelB__Group__0766);
+            rule__SecondLevelB__Group__0__Impl();
             _fsp--;
 
-
-            }
-
-             after(grammarAccess.getSecondLevelBAccess().getThirdLevelB1Assignment_0()); 
-
-            }
-
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:362:1: ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:363:1: ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )*
-            {
-             before(grammarAccess.getSecondLevelBAccess().getThirdLevelB1Assignment_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:364:1: ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )*
-            loop5:
-            do {
-                int alt5=2;
-                int LA5_0 = input.LA(1);
-
-                if ( (LA5_0==13) ) {
-                    alt5=1;
-                }
-
-
-                switch (alt5) {
-            	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:364:2: rule__SecondLevelB__ThirdLevelB1Assignment_0
-            	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__ThirdLevelB1Assignment_0_in_rule__SecondLevelB__Group__0692);
-            	    rule__SecondLevelB__ThirdLevelB1Assignment_0();
-            	    _fsp--;
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop5;
-                }
-            } while (true);
-
-             after(grammarAccess.getSecondLevelBAccess().getThirdLevelB1Assignment_0()); 
-
-            }
-
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__Group__1_in_rule__SecondLevelB__Group__0704);
+            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__Group__1_in_rule__SecondLevelB__Group__0769);
             rule__SecondLevelB__Group__1();
             _fsp--;
 
@@ -991,27 +1063,147 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
     // $ANTLR end rule__SecondLevelB__Group__0
 
 
+    // $ANTLR start rule__SecondLevelB__Group__0__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:407:1: rule__SecondLevelB__Group__0__Impl : ( ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 ) ) ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )* ) ) ;
+    public final void rule__SecondLevelB__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:411:1: ( ( ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 ) ) ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )* ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:412:1: ( ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 ) ) ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )* ) )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:412:1: ( ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 ) ) ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:413:1: ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 ) ) ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )* )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:413:1: ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:414:1: ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )
+            {
+             before(grammarAccess.getSecondLevelBAccess().getThirdLevelB1Assignment_0()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:415:1: ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:415:2: rule__SecondLevelB__ThirdLevelB1Assignment_0
+            {
+            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__ThirdLevelB1Assignment_0_in_rule__SecondLevelB__Group__0__Impl798);
+            rule__SecondLevelB__ThirdLevelB1Assignment_0();
+            _fsp--;
+
+
+            }
+
+             after(grammarAccess.getSecondLevelBAccess().getThirdLevelB1Assignment_0()); 
+
+            }
+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:418:1: ( ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:419:1: ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )*
+            {
+             before(grammarAccess.getSecondLevelBAccess().getThirdLevelB1Assignment_0()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:420:1: ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )*
+            loop5:
+            do {
+                int alt5=2;
+                int LA5_0 = input.LA(1);
+
+                if ( (LA5_0==13) ) {
+                    alt5=1;
+                }
+
+
+                switch (alt5) {
+            	case 1 :
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:420:2: rule__SecondLevelB__ThirdLevelB1Assignment_0
+            	    {
+            	    pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__ThirdLevelB1Assignment_0_in_rule__SecondLevelB__Group__0__Impl810);
+            	    rule__SecondLevelB__ThirdLevelB1Assignment_0();
+            	    _fsp--;
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop5;
+                }
+            } while (true);
+
+             after(grammarAccess.getSecondLevelBAccess().getThirdLevelB1Assignment_0()); 
+
+            }
+
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__SecondLevelB__Group__0__Impl
+
+
     // $ANTLR start rule__SecondLevelB__Group__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:376:1: rule__SecondLevelB__Group__1 : ( ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 ) ) ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )* ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:431:1: rule__SecondLevelB__Group__1 : rule__SecondLevelB__Group__1__Impl ;
     public final void rule__SecondLevelB__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:380:1: ( ( ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 ) ) ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )* ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:381:1: ( ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 ) ) ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:435:1: ( rule__SecondLevelB__Group__1__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:436:2: rule__SecondLevelB__Group__1__Impl
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:381:1: ( ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 ) ) ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:382:1: ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 ) ) ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )* )
+            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__Group__1__Impl_in_rule__SecondLevelB__Group__1843);
+            rule__SecondLevelB__Group__1__Impl();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__SecondLevelB__Group__1
+
+
+    // $ANTLR start rule__SecondLevelB__Group__1__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:442:1: rule__SecondLevelB__Group__1__Impl : ( ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 ) ) ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )* ) ) ;
+    public final void rule__SecondLevelB__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:446:1: ( ( ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 ) ) ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )* ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:447:1: ( ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 ) ) ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )* ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:382:1: ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:383:1: ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:447:1: ( ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 ) ) ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:448:1: ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 ) ) ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )* )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:448:1: ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:449:1: ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )
             {
              before(grammarAccess.getSecondLevelBAccess().getThirdLevelB2Assignment_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:384:1: ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:384:2: rule__SecondLevelB__ThirdLevelB2Assignment_1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:450:1: ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:450:2: rule__SecondLevelB__ThirdLevelB2Assignment_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__ThirdLevelB2Assignment_1_in_rule__SecondLevelB__Group__1734);
+            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__ThirdLevelB2Assignment_1_in_rule__SecondLevelB__Group__1__Impl872);
             rule__SecondLevelB__ThirdLevelB2Assignment_1();
             _fsp--;
 
@@ -1022,11 +1214,11 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:387:1: ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:388:1: ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:453:1: ( ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:454:1: ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )*
             {
              before(grammarAccess.getSecondLevelBAccess().getThirdLevelB2Assignment_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:389:1: ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:455:1: ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )*
             loop6:
             do {
                 int alt6=2;
@@ -1039,9 +1231,9 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
                 switch (alt6) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:389:2: rule__SecondLevelB__ThirdLevelB2Assignment_1
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:455:2: rule__SecondLevelB__ThirdLevelB2Assignment_1
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__ThirdLevelB2Assignment_1_in_rule__SecondLevelB__Group__1746);
+            	    pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__ThirdLevelB2Assignment_1_in_rule__SecondLevelB__Group__1__Impl884);
             	    rule__SecondLevelB__ThirdLevelB2Assignment_1();
             	    _fsp--;
 
@@ -1076,29 +1268,24 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
         }
         return ;
     }
-    // $ANTLR end rule__SecondLevelB__Group__1
+    // $ANTLR end rule__SecondLevelB__Group__1__Impl
 
 
     // $ANTLR start rule__ThirdLevelA1__Group__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:404:1: rule__ThirdLevelA1__Group__0 : ( 'A1' ) rule__ThirdLevelA1__Group__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:470:1: rule__ThirdLevelA1__Group__0 : rule__ThirdLevelA1__Group__0__Impl rule__ThirdLevelA1__Group__1 ;
     public final void rule__ThirdLevelA1__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:408:1: ( ( 'A1' ) rule__ThirdLevelA1__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:409:1: ( 'A1' ) rule__ThirdLevelA1__Group__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:474:1: ( rule__ThirdLevelA1__Group__0__Impl rule__ThirdLevelA1__Group__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:475:2: rule__ThirdLevelA1__Group__0__Impl rule__ThirdLevelA1__Group__1
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:409:1: ( 'A1' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:410:1: 'A1'
-            {
-             before(grammarAccess.getThirdLevelA1Access().getA1Keyword_0()); 
-            match(input,11,FollowSets000.FOLLOW_11_in_rule__ThirdLevelA1__Group__0788); 
-             after(grammarAccess.getThirdLevelA1Access().getA1Keyword_0()); 
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA1__Group__0__Impl_in_rule__ThirdLevelA1__Group__0921);
+            rule__ThirdLevelA1__Group__0__Impl();
+            _fsp--;
 
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA1__Group__1_in_rule__ThirdLevelA1__Group__0798);
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA1__Group__1_in_rule__ThirdLevelA1__Group__0924);
             rule__ThirdLevelA1__Group__1();
             _fsp--;
 
@@ -1120,30 +1307,58 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
     // $ANTLR end rule__ThirdLevelA1__Group__0
 
 
+    // $ANTLR start rule__ThirdLevelA1__Group__0__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:482:1: rule__ThirdLevelA1__Group__0__Impl : ( 'A1' ) ;
+    public final void rule__ThirdLevelA1__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:486:1: ( ( 'A1' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:487:1: ( 'A1' )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:487:1: ( 'A1' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:488:1: 'A1'
+            {
+             before(grammarAccess.getThirdLevelA1Access().getA1Keyword_0()); 
+            match(input,11,FollowSets000.FOLLOW_11_in_rule__ThirdLevelA1__Group__0__Impl952); 
+             after(grammarAccess.getThirdLevelA1Access().getA1Keyword_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__ThirdLevelA1__Group__0__Impl
+
+
     // $ANTLR start rule__ThirdLevelA1__Group__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:424:1: rule__ThirdLevelA1__Group__1 : ( () ) rule__ThirdLevelA1__Group__2 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:501:1: rule__ThirdLevelA1__Group__1 : rule__ThirdLevelA1__Group__1__Impl rule__ThirdLevelA1__Group__2 ;
     public final void rule__ThirdLevelA1__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:428:1: ( ( () ) rule__ThirdLevelA1__Group__2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:429:1: ( () ) rule__ThirdLevelA1__Group__2
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:505:1: ( rule__ThirdLevelA1__Group__1__Impl rule__ThirdLevelA1__Group__2 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:506:2: rule__ThirdLevelA1__Group__1__Impl rule__ThirdLevelA1__Group__2
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:429:1: ( () )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:430:1: ()
-            {
-             before(grammarAccess.getThirdLevelA1Access().getThirdLevelA1Action_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:431:1: ()
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:433:1: 
-            {
-            }
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA1__Group__1__Impl_in_rule__ThirdLevelA1__Group__1983);
+            rule__ThirdLevelA1__Group__1__Impl();
+            _fsp--;
 
-             after(grammarAccess.getThirdLevelA1Access().getThirdLevelA1Action_1()); 
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA1__Group__2_in_rule__ThirdLevelA1__Group__1836);
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA1__Group__2_in_rule__ThirdLevelA1__Group__1986);
             rule__ThirdLevelA1__Group__2();
             _fsp--;
 
@@ -1165,21 +1380,90 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
     // $ANTLR end rule__ThirdLevelA1__Group__1
 
 
+    // $ANTLR start rule__ThirdLevelA1__Group__1__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:513:1: rule__ThirdLevelA1__Group__1__Impl : ( () ) ;
+    public final void rule__ThirdLevelA1__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:517:1: ( ( () ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:518:1: ( () )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:518:1: ( () )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:519:1: ()
+            {
+             before(grammarAccess.getThirdLevelA1Access().getThirdLevelA1Action_1()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:520:1: ()
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:522:1: 
+            {
+            }
+
+             after(grammarAccess.getThirdLevelA1Access().getThirdLevelA1Action_1()); 
+
+            }
+
+
+            }
+
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__ThirdLevelA1__Group__1__Impl
+
+
     // $ANTLR start rule__ThirdLevelA1__Group__2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:444:1: rule__ThirdLevelA1__Group__2 : ( ( rule__ThirdLevelA1__NameAssignment_2 )? ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:532:1: rule__ThirdLevelA1__Group__2 : rule__ThirdLevelA1__Group__2__Impl ;
     public final void rule__ThirdLevelA1__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:448:1: ( ( ( rule__ThirdLevelA1__NameAssignment_2 )? ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:449:1: ( ( rule__ThirdLevelA1__NameAssignment_2 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:536:1: ( rule__ThirdLevelA1__Group__2__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:537:2: rule__ThirdLevelA1__Group__2__Impl
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:449:1: ( ( rule__ThirdLevelA1__NameAssignment_2 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:450:1: ( rule__ThirdLevelA1__NameAssignment_2 )?
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA1__Group__2__Impl_in_rule__ThirdLevelA1__Group__21044);
+            rule__ThirdLevelA1__Group__2__Impl();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__ThirdLevelA1__Group__2
+
+
+    // $ANTLR start rule__ThirdLevelA1__Group__2__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:543:1: rule__ThirdLevelA1__Group__2__Impl : ( ( rule__ThirdLevelA1__NameAssignment_2 )? ) ;
+    public final void rule__ThirdLevelA1__Group__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:547:1: ( ( ( rule__ThirdLevelA1__NameAssignment_2 )? ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:548:1: ( ( rule__ThirdLevelA1__NameAssignment_2 )? )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:548:1: ( ( rule__ThirdLevelA1__NameAssignment_2 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:549:1: ( rule__ThirdLevelA1__NameAssignment_2 )?
             {
              before(grammarAccess.getThirdLevelA1Access().getNameAssignment_2()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:451:1: ( rule__ThirdLevelA1__NameAssignment_2 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:550:1: ( rule__ThirdLevelA1__NameAssignment_2 )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1188,9 +1472,9 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:451:2: rule__ThirdLevelA1__NameAssignment_2
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:550:2: rule__ThirdLevelA1__NameAssignment_2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA1__NameAssignment_2_in_rule__ThirdLevelA1__Group__2864);
+                    pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA1__NameAssignment_2_in_rule__ThirdLevelA1__Group__2__Impl1071);
                     rule__ThirdLevelA1__NameAssignment_2();
                     _fsp--;
 
@@ -1219,29 +1503,24 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
         }
         return ;
     }
-    // $ANTLR end rule__ThirdLevelA1__Group__2
+    // $ANTLR end rule__ThirdLevelA1__Group__2__Impl
 
 
     // $ANTLR start rule__ThirdLevelA2__Group__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:467:1: rule__ThirdLevelA2__Group__0 : ( 'A2' ) rule__ThirdLevelA2__Group__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:566:1: rule__ThirdLevelA2__Group__0 : rule__ThirdLevelA2__Group__0__Impl rule__ThirdLevelA2__Group__1 ;
     public final void rule__ThirdLevelA2__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:471:1: ( ( 'A2' ) rule__ThirdLevelA2__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:472:1: ( 'A2' ) rule__ThirdLevelA2__Group__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:570:1: ( rule__ThirdLevelA2__Group__0__Impl rule__ThirdLevelA2__Group__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:571:2: rule__ThirdLevelA2__Group__0__Impl rule__ThirdLevelA2__Group__1
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:472:1: ( 'A2' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:473:1: 'A2'
-            {
-             before(grammarAccess.getThirdLevelA2Access().getA2Keyword_0()); 
-            match(input,12,FollowSets000.FOLLOW_12_in_rule__ThirdLevelA2__Group__0906); 
-             after(grammarAccess.getThirdLevelA2Access().getA2Keyword_0()); 
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA2__Group__0__Impl_in_rule__ThirdLevelA2__Group__01108);
+            rule__ThirdLevelA2__Group__0__Impl();
+            _fsp--;
 
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA2__Group__1_in_rule__ThirdLevelA2__Group__0916);
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA2__Group__1_in_rule__ThirdLevelA2__Group__01111);
             rule__ThirdLevelA2__Group__1();
             _fsp--;
 
@@ -1263,30 +1542,58 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
     // $ANTLR end rule__ThirdLevelA2__Group__0
 
 
+    // $ANTLR start rule__ThirdLevelA2__Group__0__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:578:1: rule__ThirdLevelA2__Group__0__Impl : ( 'A2' ) ;
+    public final void rule__ThirdLevelA2__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:582:1: ( ( 'A2' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:583:1: ( 'A2' )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:583:1: ( 'A2' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:584:1: 'A2'
+            {
+             before(grammarAccess.getThirdLevelA2Access().getA2Keyword_0()); 
+            match(input,12,FollowSets000.FOLLOW_12_in_rule__ThirdLevelA2__Group__0__Impl1139); 
+             after(grammarAccess.getThirdLevelA2Access().getA2Keyword_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__ThirdLevelA2__Group__0__Impl
+
+
     // $ANTLR start rule__ThirdLevelA2__Group__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:487:1: rule__ThirdLevelA2__Group__1 : ( () ) rule__ThirdLevelA2__Group__2 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:597:1: rule__ThirdLevelA2__Group__1 : rule__ThirdLevelA2__Group__1__Impl rule__ThirdLevelA2__Group__2 ;
     public final void rule__ThirdLevelA2__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:491:1: ( ( () ) rule__ThirdLevelA2__Group__2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:492:1: ( () ) rule__ThirdLevelA2__Group__2
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:601:1: ( rule__ThirdLevelA2__Group__1__Impl rule__ThirdLevelA2__Group__2 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:602:2: rule__ThirdLevelA2__Group__1__Impl rule__ThirdLevelA2__Group__2
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:492:1: ( () )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:493:1: ()
-            {
-             before(grammarAccess.getThirdLevelA2Access().getThirdLevelA2Action_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:494:1: ()
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:496:1: 
-            {
-            }
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA2__Group__1__Impl_in_rule__ThirdLevelA2__Group__11170);
+            rule__ThirdLevelA2__Group__1__Impl();
+            _fsp--;
 
-             after(grammarAccess.getThirdLevelA2Access().getThirdLevelA2Action_1()); 
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA2__Group__2_in_rule__ThirdLevelA2__Group__1954);
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA2__Group__2_in_rule__ThirdLevelA2__Group__11173);
             rule__ThirdLevelA2__Group__2();
             _fsp--;
 
@@ -1308,21 +1615,90 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
     // $ANTLR end rule__ThirdLevelA2__Group__1
 
 
+    // $ANTLR start rule__ThirdLevelA2__Group__1__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:609:1: rule__ThirdLevelA2__Group__1__Impl : ( () ) ;
+    public final void rule__ThirdLevelA2__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:613:1: ( ( () ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:614:1: ( () )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:614:1: ( () )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:615:1: ()
+            {
+             before(grammarAccess.getThirdLevelA2Access().getThirdLevelA2Action_1()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:616:1: ()
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:618:1: 
+            {
+            }
+
+             after(grammarAccess.getThirdLevelA2Access().getThirdLevelA2Action_1()); 
+
+            }
+
+
+            }
+
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__ThirdLevelA2__Group__1__Impl
+
+
     // $ANTLR start rule__ThirdLevelA2__Group__2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:507:1: rule__ThirdLevelA2__Group__2 : ( ( rule__ThirdLevelA2__NameAssignment_2 )? ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:628:1: rule__ThirdLevelA2__Group__2 : rule__ThirdLevelA2__Group__2__Impl ;
     public final void rule__ThirdLevelA2__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:511:1: ( ( ( rule__ThirdLevelA2__NameAssignment_2 )? ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:512:1: ( ( rule__ThirdLevelA2__NameAssignment_2 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:632:1: ( rule__ThirdLevelA2__Group__2__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:633:2: rule__ThirdLevelA2__Group__2__Impl
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:512:1: ( ( rule__ThirdLevelA2__NameAssignment_2 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:513:1: ( rule__ThirdLevelA2__NameAssignment_2 )?
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA2__Group__2__Impl_in_rule__ThirdLevelA2__Group__21231);
+            rule__ThirdLevelA2__Group__2__Impl();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__ThirdLevelA2__Group__2
+
+
+    // $ANTLR start rule__ThirdLevelA2__Group__2__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:639:1: rule__ThirdLevelA2__Group__2__Impl : ( ( rule__ThirdLevelA2__NameAssignment_2 )? ) ;
+    public final void rule__ThirdLevelA2__Group__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:643:1: ( ( ( rule__ThirdLevelA2__NameAssignment_2 )? ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:644:1: ( ( rule__ThirdLevelA2__NameAssignment_2 )? )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:644:1: ( ( rule__ThirdLevelA2__NameAssignment_2 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:645:1: ( rule__ThirdLevelA2__NameAssignment_2 )?
             {
              before(grammarAccess.getThirdLevelA2Access().getNameAssignment_2()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:514:1: ( rule__ThirdLevelA2__NameAssignment_2 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:646:1: ( rule__ThirdLevelA2__NameAssignment_2 )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1331,9 +1707,9 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:514:2: rule__ThirdLevelA2__NameAssignment_2
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:646:2: rule__ThirdLevelA2__NameAssignment_2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA2__NameAssignment_2_in_rule__ThirdLevelA2__Group__2982);
+                    pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA2__NameAssignment_2_in_rule__ThirdLevelA2__Group__2__Impl1258);
                     rule__ThirdLevelA2__NameAssignment_2();
                     _fsp--;
 
@@ -1362,29 +1738,24 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
         }
         return ;
     }
-    // $ANTLR end rule__ThirdLevelA2__Group__2
+    // $ANTLR end rule__ThirdLevelA2__Group__2__Impl
 
 
     // $ANTLR start rule__ThirdLevelB1__Group__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:530:1: rule__ThirdLevelB1__Group__0 : ( 'B1' ) rule__ThirdLevelB1__Group__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:662:1: rule__ThirdLevelB1__Group__0 : rule__ThirdLevelB1__Group__0__Impl rule__ThirdLevelB1__Group__1 ;
     public final void rule__ThirdLevelB1__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:534:1: ( ( 'B1' ) rule__ThirdLevelB1__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:535:1: ( 'B1' ) rule__ThirdLevelB1__Group__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:666:1: ( rule__ThirdLevelB1__Group__0__Impl rule__ThirdLevelB1__Group__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:667:2: rule__ThirdLevelB1__Group__0__Impl rule__ThirdLevelB1__Group__1
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:535:1: ( 'B1' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:536:1: 'B1'
-            {
-             before(grammarAccess.getThirdLevelB1Access().getB1Keyword_0()); 
-            match(input,13,FollowSets000.FOLLOW_13_in_rule__ThirdLevelB1__Group__01024); 
-             after(grammarAccess.getThirdLevelB1Access().getB1Keyword_0()); 
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB1__Group__0__Impl_in_rule__ThirdLevelB1__Group__01295);
+            rule__ThirdLevelB1__Group__0__Impl();
+            _fsp--;
 
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB1__Group__1_in_rule__ThirdLevelB1__Group__01034);
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB1__Group__1_in_rule__ThirdLevelB1__Group__01298);
             rule__ThirdLevelB1__Group__1();
             _fsp--;
 
@@ -1406,30 +1777,58 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
     // $ANTLR end rule__ThirdLevelB1__Group__0
 
 
+    // $ANTLR start rule__ThirdLevelB1__Group__0__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:674:1: rule__ThirdLevelB1__Group__0__Impl : ( 'B1' ) ;
+    public final void rule__ThirdLevelB1__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:678:1: ( ( 'B1' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:679:1: ( 'B1' )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:679:1: ( 'B1' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:680:1: 'B1'
+            {
+             before(grammarAccess.getThirdLevelB1Access().getB1Keyword_0()); 
+            match(input,13,FollowSets000.FOLLOW_13_in_rule__ThirdLevelB1__Group__0__Impl1326); 
+             after(grammarAccess.getThirdLevelB1Access().getB1Keyword_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__ThirdLevelB1__Group__0__Impl
+
+
     // $ANTLR start rule__ThirdLevelB1__Group__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:550:1: rule__ThirdLevelB1__Group__1 : ( () ) rule__ThirdLevelB1__Group__2 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:693:1: rule__ThirdLevelB1__Group__1 : rule__ThirdLevelB1__Group__1__Impl rule__ThirdLevelB1__Group__2 ;
     public final void rule__ThirdLevelB1__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:554:1: ( ( () ) rule__ThirdLevelB1__Group__2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:555:1: ( () ) rule__ThirdLevelB1__Group__2
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:697:1: ( rule__ThirdLevelB1__Group__1__Impl rule__ThirdLevelB1__Group__2 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:698:2: rule__ThirdLevelB1__Group__1__Impl rule__ThirdLevelB1__Group__2
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:555:1: ( () )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:556:1: ()
-            {
-             before(grammarAccess.getThirdLevelB1Access().getThirdLevelB1Action_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:557:1: ()
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:559:1: 
-            {
-            }
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB1__Group__1__Impl_in_rule__ThirdLevelB1__Group__11357);
+            rule__ThirdLevelB1__Group__1__Impl();
+            _fsp--;
 
-             after(grammarAccess.getThirdLevelB1Access().getThirdLevelB1Action_1()); 
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB1__Group__2_in_rule__ThirdLevelB1__Group__11072);
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB1__Group__2_in_rule__ThirdLevelB1__Group__11360);
             rule__ThirdLevelB1__Group__2();
             _fsp--;
 
@@ -1451,21 +1850,90 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
     // $ANTLR end rule__ThirdLevelB1__Group__1
 
 
+    // $ANTLR start rule__ThirdLevelB1__Group__1__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:705:1: rule__ThirdLevelB1__Group__1__Impl : ( () ) ;
+    public final void rule__ThirdLevelB1__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:709:1: ( ( () ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:710:1: ( () )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:710:1: ( () )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:711:1: ()
+            {
+             before(grammarAccess.getThirdLevelB1Access().getThirdLevelB1Action_1()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:712:1: ()
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:714:1: 
+            {
+            }
+
+             after(grammarAccess.getThirdLevelB1Access().getThirdLevelB1Action_1()); 
+
+            }
+
+
+            }
+
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__ThirdLevelB1__Group__1__Impl
+
+
     // $ANTLR start rule__ThirdLevelB1__Group__2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:570:1: rule__ThirdLevelB1__Group__2 : ( ( rule__ThirdLevelB1__NameAssignment_2 )? ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:724:1: rule__ThirdLevelB1__Group__2 : rule__ThirdLevelB1__Group__2__Impl ;
     public final void rule__ThirdLevelB1__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:574:1: ( ( ( rule__ThirdLevelB1__NameAssignment_2 )? ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:575:1: ( ( rule__ThirdLevelB1__NameAssignment_2 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:728:1: ( rule__ThirdLevelB1__Group__2__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:729:2: rule__ThirdLevelB1__Group__2__Impl
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:575:1: ( ( rule__ThirdLevelB1__NameAssignment_2 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:576:1: ( rule__ThirdLevelB1__NameAssignment_2 )?
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB1__Group__2__Impl_in_rule__ThirdLevelB1__Group__21418);
+            rule__ThirdLevelB1__Group__2__Impl();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__ThirdLevelB1__Group__2
+
+
+    // $ANTLR start rule__ThirdLevelB1__Group__2__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:735:1: rule__ThirdLevelB1__Group__2__Impl : ( ( rule__ThirdLevelB1__NameAssignment_2 )? ) ;
+    public final void rule__ThirdLevelB1__Group__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:739:1: ( ( ( rule__ThirdLevelB1__NameAssignment_2 )? ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:740:1: ( ( rule__ThirdLevelB1__NameAssignment_2 )? )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:740:1: ( ( rule__ThirdLevelB1__NameAssignment_2 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:741:1: ( rule__ThirdLevelB1__NameAssignment_2 )?
             {
              before(grammarAccess.getThirdLevelB1Access().getNameAssignment_2()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:577:1: ( rule__ThirdLevelB1__NameAssignment_2 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:742:1: ( rule__ThirdLevelB1__NameAssignment_2 )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -1474,9 +1942,9 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             }
             switch (alt9) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:577:2: rule__ThirdLevelB1__NameAssignment_2
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:742:2: rule__ThirdLevelB1__NameAssignment_2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB1__NameAssignment_2_in_rule__ThirdLevelB1__Group__21100);
+                    pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB1__NameAssignment_2_in_rule__ThirdLevelB1__Group__2__Impl1445);
                     rule__ThirdLevelB1__NameAssignment_2();
                     _fsp--;
 
@@ -1505,29 +1973,24 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
         }
         return ;
     }
-    // $ANTLR end rule__ThirdLevelB1__Group__2
+    // $ANTLR end rule__ThirdLevelB1__Group__2__Impl
 
 
     // $ANTLR start rule__ThirdLevelB2__Group__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:593:1: rule__ThirdLevelB2__Group__0 : ( 'B2' ) rule__ThirdLevelB2__Group__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:758:1: rule__ThirdLevelB2__Group__0 : rule__ThirdLevelB2__Group__0__Impl rule__ThirdLevelB2__Group__1 ;
     public final void rule__ThirdLevelB2__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:597:1: ( ( 'B2' ) rule__ThirdLevelB2__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:598:1: ( 'B2' ) rule__ThirdLevelB2__Group__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:762:1: ( rule__ThirdLevelB2__Group__0__Impl rule__ThirdLevelB2__Group__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:763:2: rule__ThirdLevelB2__Group__0__Impl rule__ThirdLevelB2__Group__1
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:598:1: ( 'B2' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:599:1: 'B2'
-            {
-             before(grammarAccess.getThirdLevelB2Access().getB2Keyword_0()); 
-            match(input,14,FollowSets000.FOLLOW_14_in_rule__ThirdLevelB2__Group__01142); 
-             after(grammarAccess.getThirdLevelB2Access().getB2Keyword_0()); 
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB2__Group__0__Impl_in_rule__ThirdLevelB2__Group__01482);
+            rule__ThirdLevelB2__Group__0__Impl();
+            _fsp--;
 
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB2__Group__1_in_rule__ThirdLevelB2__Group__01152);
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB2__Group__1_in_rule__ThirdLevelB2__Group__01485);
             rule__ThirdLevelB2__Group__1();
             _fsp--;
 
@@ -1549,30 +2012,58 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
     // $ANTLR end rule__ThirdLevelB2__Group__0
 
 
+    // $ANTLR start rule__ThirdLevelB2__Group__0__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:770:1: rule__ThirdLevelB2__Group__0__Impl : ( 'B2' ) ;
+    public final void rule__ThirdLevelB2__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:774:1: ( ( 'B2' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:775:1: ( 'B2' )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:775:1: ( 'B2' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:776:1: 'B2'
+            {
+             before(grammarAccess.getThirdLevelB2Access().getB2Keyword_0()); 
+            match(input,14,FollowSets000.FOLLOW_14_in_rule__ThirdLevelB2__Group__0__Impl1513); 
+             after(grammarAccess.getThirdLevelB2Access().getB2Keyword_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__ThirdLevelB2__Group__0__Impl
+
+
     // $ANTLR start rule__ThirdLevelB2__Group__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:613:1: rule__ThirdLevelB2__Group__1 : ( () ) rule__ThirdLevelB2__Group__2 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:789:1: rule__ThirdLevelB2__Group__1 : rule__ThirdLevelB2__Group__1__Impl rule__ThirdLevelB2__Group__2 ;
     public final void rule__ThirdLevelB2__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:617:1: ( ( () ) rule__ThirdLevelB2__Group__2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:618:1: ( () ) rule__ThirdLevelB2__Group__2
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:793:1: ( rule__ThirdLevelB2__Group__1__Impl rule__ThirdLevelB2__Group__2 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:794:2: rule__ThirdLevelB2__Group__1__Impl rule__ThirdLevelB2__Group__2
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:618:1: ( () )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:619:1: ()
-            {
-             before(grammarAccess.getThirdLevelB2Access().getThirdLevelB2Action_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:620:1: ()
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:622:1: 
-            {
-            }
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB2__Group__1__Impl_in_rule__ThirdLevelB2__Group__11544);
+            rule__ThirdLevelB2__Group__1__Impl();
+            _fsp--;
 
-             after(grammarAccess.getThirdLevelB2Access().getThirdLevelB2Action_1()); 
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB2__Group__2_in_rule__ThirdLevelB2__Group__11190);
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB2__Group__2_in_rule__ThirdLevelB2__Group__11547);
             rule__ThirdLevelB2__Group__2();
             _fsp--;
 
@@ -1594,21 +2085,90 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
     // $ANTLR end rule__ThirdLevelB2__Group__1
 
 
+    // $ANTLR start rule__ThirdLevelB2__Group__1__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:801:1: rule__ThirdLevelB2__Group__1__Impl : ( () ) ;
+    public final void rule__ThirdLevelB2__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:805:1: ( ( () ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:806:1: ( () )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:806:1: ( () )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:807:1: ()
+            {
+             before(grammarAccess.getThirdLevelB2Access().getThirdLevelB2Action_1()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:808:1: ()
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:810:1: 
+            {
+            }
+
+             after(grammarAccess.getThirdLevelB2Access().getThirdLevelB2Action_1()); 
+
+            }
+
+
+            }
+
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__ThirdLevelB2__Group__1__Impl
+
+
     // $ANTLR start rule__ThirdLevelB2__Group__2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:633:1: rule__ThirdLevelB2__Group__2 : ( ( rule__ThirdLevelB2__NameAssignment_2 )? ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:820:1: rule__ThirdLevelB2__Group__2 : rule__ThirdLevelB2__Group__2__Impl ;
     public final void rule__ThirdLevelB2__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:637:1: ( ( ( rule__ThirdLevelB2__NameAssignment_2 )? ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:638:1: ( ( rule__ThirdLevelB2__NameAssignment_2 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:824:1: ( rule__ThirdLevelB2__Group__2__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:825:2: rule__ThirdLevelB2__Group__2__Impl
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:638:1: ( ( rule__ThirdLevelB2__NameAssignment_2 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:639:1: ( rule__ThirdLevelB2__NameAssignment_2 )?
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB2__Group__2__Impl_in_rule__ThirdLevelB2__Group__21605);
+            rule__ThirdLevelB2__Group__2__Impl();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__ThirdLevelB2__Group__2
+
+
+    // $ANTLR start rule__ThirdLevelB2__Group__2__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:831:1: rule__ThirdLevelB2__Group__2__Impl : ( ( rule__ThirdLevelB2__NameAssignment_2 )? ) ;
+    public final void rule__ThirdLevelB2__Group__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:835:1: ( ( ( rule__ThirdLevelB2__NameAssignment_2 )? ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:836:1: ( ( rule__ThirdLevelB2__NameAssignment_2 )? )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:836:1: ( ( rule__ThirdLevelB2__NameAssignment_2 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:837:1: ( rule__ThirdLevelB2__NameAssignment_2 )?
             {
              before(grammarAccess.getThirdLevelB2Access().getNameAssignment_2()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:640:1: ( rule__ThirdLevelB2__NameAssignment_2 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:838:1: ( rule__ThirdLevelB2__NameAssignment_2 )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1617,9 +2177,9 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:640:2: rule__ThirdLevelB2__NameAssignment_2
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:838:2: rule__ThirdLevelB2__NameAssignment_2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB2__NameAssignment_2_in_rule__ThirdLevelB2__Group__21218);
+                    pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB2__NameAssignment_2_in_rule__ThirdLevelB2__Group__2__Impl1632);
                     rule__ThirdLevelB2__NameAssignment_2();
                     _fsp--;
 
@@ -1648,24 +2208,24 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
         }
         return ;
     }
-    // $ANTLR end rule__ThirdLevelB2__Group__2
+    // $ANTLR end rule__ThirdLevelB2__Group__2__Impl
 
 
     // $ANTLR start rule__FirstLevel__SecondLevelAAssignment_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:657:1: rule__FirstLevel__SecondLevelAAssignment_0 : ( ruleSecondLevelA ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:855:1: rule__FirstLevel__SecondLevelAAssignment_0 : ( ruleSecondLevelA ) ;
     public final void rule__FirstLevel__SecondLevelAAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:661:1: ( ( ruleSecondLevelA ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:662:1: ( ruleSecondLevelA )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:859:1: ( ( ruleSecondLevelA ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:860:1: ( ruleSecondLevelA )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:662:1: ( ruleSecondLevelA )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:663:1: ruleSecondLevelA
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:860:1: ( ruleSecondLevelA )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:861:1: ruleSecondLevelA
             {
              before(grammarAccess.getFirstLevelAccess().getSecondLevelASecondLevelAParserRuleCall_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSecondLevelA_in_rule__FirstLevel__SecondLevelAAssignment_01260);
+            pushFollow(FollowSets000.FOLLOW_ruleSecondLevelA_in_rule__FirstLevel__SecondLevelAAssignment_01674);
             ruleSecondLevelA();
             _fsp--;
 
@@ -1692,20 +2252,20 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start rule__FirstLevel__SecondLevelBAssignment_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:672:1: rule__FirstLevel__SecondLevelBAssignment_1 : ( ruleSecondLevelB ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:870:1: rule__FirstLevel__SecondLevelBAssignment_1 : ( ruleSecondLevelB ) ;
     public final void rule__FirstLevel__SecondLevelBAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:676:1: ( ( ruleSecondLevelB ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:677:1: ( ruleSecondLevelB )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:874:1: ( ( ruleSecondLevelB ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:875:1: ( ruleSecondLevelB )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:677:1: ( ruleSecondLevelB )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:678:1: ruleSecondLevelB
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:875:1: ( ruleSecondLevelB )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:876:1: ruleSecondLevelB
             {
              before(grammarAccess.getFirstLevelAccess().getSecondLevelBSecondLevelBParserRuleCall_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSecondLevelB_in_rule__FirstLevel__SecondLevelBAssignment_11291);
+            pushFollow(FollowSets000.FOLLOW_ruleSecondLevelB_in_rule__FirstLevel__SecondLevelBAssignment_11705);
             ruleSecondLevelB();
             _fsp--;
 
@@ -1732,20 +2292,20 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start rule__SecondLevelA__ThirdLevelA1Assignment_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:687:1: rule__SecondLevelA__ThirdLevelA1Assignment_0 : ( ruleThirdLevelA1 ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:885:1: rule__SecondLevelA__ThirdLevelA1Assignment_0 : ( ruleThirdLevelA1 ) ;
     public final void rule__SecondLevelA__ThirdLevelA1Assignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:691:1: ( ( ruleThirdLevelA1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:692:1: ( ruleThirdLevelA1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:889:1: ( ( ruleThirdLevelA1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:890:1: ( ruleThirdLevelA1 )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:692:1: ( ruleThirdLevelA1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:693:1: ruleThirdLevelA1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:890:1: ( ruleThirdLevelA1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:891:1: ruleThirdLevelA1
             {
              before(grammarAccess.getSecondLevelAAccess().getThirdLevelA1ThirdLevelA1ParserRuleCall_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelA1_in_rule__SecondLevelA__ThirdLevelA1Assignment_01322);
+            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelA1_in_rule__SecondLevelA__ThirdLevelA1Assignment_01736);
             ruleThirdLevelA1();
             _fsp--;
 
@@ -1772,20 +2332,20 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start rule__SecondLevelA__ThirdLevelA2Assignment_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:702:1: rule__SecondLevelA__ThirdLevelA2Assignment_1 : ( ruleThirdLevelA2 ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:900:1: rule__SecondLevelA__ThirdLevelA2Assignment_1 : ( ruleThirdLevelA2 ) ;
     public final void rule__SecondLevelA__ThirdLevelA2Assignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:706:1: ( ( ruleThirdLevelA2 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:707:1: ( ruleThirdLevelA2 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:904:1: ( ( ruleThirdLevelA2 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:905:1: ( ruleThirdLevelA2 )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:707:1: ( ruleThirdLevelA2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:708:1: ruleThirdLevelA2
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:905:1: ( ruleThirdLevelA2 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:906:1: ruleThirdLevelA2
             {
              before(grammarAccess.getSecondLevelAAccess().getThirdLevelA2ThirdLevelA2ParserRuleCall_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelA2_in_rule__SecondLevelA__ThirdLevelA2Assignment_11353);
+            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelA2_in_rule__SecondLevelA__ThirdLevelA2Assignment_11767);
             ruleThirdLevelA2();
             _fsp--;
 
@@ -1812,20 +2372,20 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start rule__SecondLevelB__ThirdLevelB1Assignment_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:717:1: rule__SecondLevelB__ThirdLevelB1Assignment_0 : ( ruleThirdLevelB1 ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:915:1: rule__SecondLevelB__ThirdLevelB1Assignment_0 : ( ruleThirdLevelB1 ) ;
     public final void rule__SecondLevelB__ThirdLevelB1Assignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:721:1: ( ( ruleThirdLevelB1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:722:1: ( ruleThirdLevelB1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:919:1: ( ( ruleThirdLevelB1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:920:1: ( ruleThirdLevelB1 )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:722:1: ( ruleThirdLevelB1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:723:1: ruleThirdLevelB1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:920:1: ( ruleThirdLevelB1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:921:1: ruleThirdLevelB1
             {
              before(grammarAccess.getSecondLevelBAccess().getThirdLevelB1ThirdLevelB1ParserRuleCall_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelB1_in_rule__SecondLevelB__ThirdLevelB1Assignment_01384);
+            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelB1_in_rule__SecondLevelB__ThirdLevelB1Assignment_01798);
             ruleThirdLevelB1();
             _fsp--;
 
@@ -1852,20 +2412,20 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start rule__SecondLevelB__ThirdLevelB2Assignment_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:732:1: rule__SecondLevelB__ThirdLevelB2Assignment_1 : ( ruleThirdLevelB2 ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:930:1: rule__SecondLevelB__ThirdLevelB2Assignment_1 : ( ruleThirdLevelB2 ) ;
     public final void rule__SecondLevelB__ThirdLevelB2Assignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:736:1: ( ( ruleThirdLevelB2 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:737:1: ( ruleThirdLevelB2 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:934:1: ( ( ruleThirdLevelB2 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:935:1: ( ruleThirdLevelB2 )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:737:1: ( ruleThirdLevelB2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:738:1: ruleThirdLevelB2
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:935:1: ( ruleThirdLevelB2 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:936:1: ruleThirdLevelB2
             {
              before(grammarAccess.getSecondLevelBAccess().getThirdLevelB2ThirdLevelB2ParserRuleCall_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelB2_in_rule__SecondLevelB__ThirdLevelB2Assignment_11415);
+            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelB2_in_rule__SecondLevelB__ThirdLevelB2Assignment_11829);
             ruleThirdLevelB2();
             _fsp--;
 
@@ -1892,20 +2452,20 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start rule__ThirdLevelA1__NameAssignment_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:747:1: rule__ThirdLevelA1__NameAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:945:1: rule__ThirdLevelA1__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__ThirdLevelA1__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:751:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:752:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:949:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:950:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:752:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:753:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:950:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:951:1: RULE_ID
             {
              before(grammarAccess.getThirdLevelA1Access().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ThirdLevelA1__NameAssignment_21446); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ThirdLevelA1__NameAssignment_21860); 
              after(grammarAccess.getThirdLevelA1Access().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -1929,20 +2489,20 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start rule__ThirdLevelA2__NameAssignment_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:762:1: rule__ThirdLevelA2__NameAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:960:1: rule__ThirdLevelA2__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__ThirdLevelA2__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:766:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:767:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:964:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:965:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:767:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:768:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:965:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:966:1: RULE_ID
             {
              before(grammarAccess.getThirdLevelA2Access().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ThirdLevelA2__NameAssignment_21477); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ThirdLevelA2__NameAssignment_21891); 
              after(grammarAccess.getThirdLevelA2Access().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -1966,20 +2526,20 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start rule__ThirdLevelB1__NameAssignment_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:777:1: rule__ThirdLevelB1__NameAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:975:1: rule__ThirdLevelB1__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__ThirdLevelB1__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:781:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:782:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:979:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:980:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:782:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:783:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:980:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:981:1: RULE_ID
             {
              before(grammarAccess.getThirdLevelB1Access().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ThirdLevelB1__NameAssignment_21508); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ThirdLevelB1__NameAssignment_21922); 
              after(grammarAccess.getThirdLevelB1Access().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -2003,20 +2563,20 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start rule__ThirdLevelB2__NameAssignment_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:792:1: rule__ThirdLevelB2__NameAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:990:1: rule__ThirdLevelB2__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__ThirdLevelB2__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:796:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:797:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:994:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:995:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:797:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:798:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:995:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:996:1: RULE_ID
             {
              before(grammarAccess.getThirdLevelB2Access().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ThirdLevelB2__NameAssignment_21539); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ThirdLevelB2__NameAssignment_21953); 
              after(grammarAccess.getThirdLevelB2Access().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -2064,45 +2624,63 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
         public static final BitSet FOLLOW_ruleThirdLevelB2_in_entryRuleThirdLevelB2421 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleThirdLevelB2428 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ThirdLevelB2__Group__0_in_ruleThirdLevelB2454 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__FirstLevel__SecondLevelAAssignment_0_in_rule__FirstLevel__Group__0492 = new BitSet(new long[]{0x0000000000002802L});
-        public static final BitSet FOLLOW_rule__FirstLevel__Group__1_in_rule__FirstLevel__Group__0502 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__FirstLevel__SecondLevelBAssignment_1_in_rule__FirstLevel__Group__1530 = new BitSet(new long[]{0x0000000000002002L});
-        public static final BitSet FOLLOW_rule__SecondLevelA__ThirdLevelA1Assignment_0_in_rule__SecondLevelA__Group__0571 = new BitSet(new long[]{0x0000000000001800L});
-        public static final BitSet FOLLOW_rule__SecondLevelA__ThirdLevelA1Assignment_0_in_rule__SecondLevelA__Group__0583 = new BitSet(new long[]{0x0000000000001800L});
-        public static final BitSet FOLLOW_rule__SecondLevelA__Group__1_in_rule__SecondLevelA__Group__0595 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SecondLevelA__ThirdLevelA2Assignment_1_in_rule__SecondLevelA__Group__1625 = new BitSet(new long[]{0x0000000000001002L});
-        public static final BitSet FOLLOW_rule__SecondLevelA__ThirdLevelA2Assignment_1_in_rule__SecondLevelA__Group__1637 = new BitSet(new long[]{0x0000000000001002L});
-        public static final BitSet FOLLOW_rule__SecondLevelB__ThirdLevelB1Assignment_0_in_rule__SecondLevelB__Group__0680 = new BitSet(new long[]{0x0000000000006000L});
-        public static final BitSet FOLLOW_rule__SecondLevelB__ThirdLevelB1Assignment_0_in_rule__SecondLevelB__Group__0692 = new BitSet(new long[]{0x0000000000006000L});
-        public static final BitSet FOLLOW_rule__SecondLevelB__Group__1_in_rule__SecondLevelB__Group__0704 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SecondLevelB__ThirdLevelB2Assignment_1_in_rule__SecondLevelB__Group__1734 = new BitSet(new long[]{0x0000000000004002L});
-        public static final BitSet FOLLOW_rule__SecondLevelB__ThirdLevelB2Assignment_1_in_rule__SecondLevelB__Group__1746 = new BitSet(new long[]{0x0000000000004002L});
-        public static final BitSet FOLLOW_11_in_rule__ThirdLevelA1__Group__0788 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_rule__ThirdLevelA1__Group__1_in_rule__ThirdLevelA1__Group__0798 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ThirdLevelA1__Group__2_in_rule__ThirdLevelA1__Group__1836 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ThirdLevelA1__NameAssignment_2_in_rule__ThirdLevelA1__Group__2864 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_rule__ThirdLevelA2__Group__0906 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_rule__ThirdLevelA2__Group__1_in_rule__ThirdLevelA2__Group__0916 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ThirdLevelA2__Group__2_in_rule__ThirdLevelA2__Group__1954 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ThirdLevelA2__NameAssignment_2_in_rule__ThirdLevelA2__Group__2982 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_rule__ThirdLevelB1__Group__01024 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_rule__ThirdLevelB1__Group__1_in_rule__ThirdLevelB1__Group__01034 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ThirdLevelB1__Group__2_in_rule__ThirdLevelB1__Group__11072 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ThirdLevelB1__NameAssignment_2_in_rule__ThirdLevelB1__Group__21100 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_rule__ThirdLevelB2__Group__01142 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_rule__ThirdLevelB2__Group__1_in_rule__ThirdLevelB2__Group__01152 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ThirdLevelB2__Group__2_in_rule__ThirdLevelB2__Group__11190 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ThirdLevelB2__NameAssignment_2_in_rule__ThirdLevelB2__Group__21218 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSecondLevelA_in_rule__FirstLevel__SecondLevelAAssignment_01260 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSecondLevelB_in_rule__FirstLevel__SecondLevelBAssignment_11291 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleThirdLevelA1_in_rule__SecondLevelA__ThirdLevelA1Assignment_01322 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleThirdLevelA2_in_rule__SecondLevelA__ThirdLevelA2Assignment_11353 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleThirdLevelB1_in_rule__SecondLevelB__ThirdLevelB1Assignment_01384 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleThirdLevelB2_in_rule__SecondLevelB__ThirdLevelB2Assignment_11415 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__ThirdLevelA1__NameAssignment_21446 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__ThirdLevelA2__NameAssignment_21477 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__ThirdLevelB1__NameAssignment_21508 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__ThirdLevelB2__NameAssignment_21539 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__FirstLevel__Group__0__Impl_in_rule__FirstLevel__Group__0488 = new BitSet(new long[]{0x0000000000002002L});
+        public static final BitSet FOLLOW_rule__FirstLevel__Group__1_in_rule__FirstLevel__Group__0491 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__FirstLevel__SecondLevelAAssignment_0_in_rule__FirstLevel__Group__0__Impl518 = new BitSet(new long[]{0x0000000000000802L});
+        public static final BitSet FOLLOW_rule__FirstLevel__Group__1__Impl_in_rule__FirstLevel__Group__1549 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__FirstLevel__SecondLevelBAssignment_1_in_rule__FirstLevel__Group__1__Impl576 = new BitSet(new long[]{0x0000000000002002L});
+        public static final BitSet FOLLOW_rule__SecondLevelA__Group__0__Impl_in_rule__SecondLevelA__Group__0611 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_rule__SecondLevelA__Group__1_in_rule__SecondLevelA__Group__0614 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SecondLevelA__ThirdLevelA1Assignment_0_in_rule__SecondLevelA__Group__0__Impl643 = new BitSet(new long[]{0x0000000000000802L});
+        public static final BitSet FOLLOW_rule__SecondLevelA__ThirdLevelA1Assignment_0_in_rule__SecondLevelA__Group__0__Impl655 = new BitSet(new long[]{0x0000000000000802L});
+        public static final BitSet FOLLOW_rule__SecondLevelA__Group__1__Impl_in_rule__SecondLevelA__Group__1688 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SecondLevelA__ThirdLevelA2Assignment_1_in_rule__SecondLevelA__Group__1__Impl717 = new BitSet(new long[]{0x0000000000001002L});
+        public static final BitSet FOLLOW_rule__SecondLevelA__ThirdLevelA2Assignment_1_in_rule__SecondLevelA__Group__1__Impl729 = new BitSet(new long[]{0x0000000000001002L});
+        public static final BitSet FOLLOW_rule__SecondLevelB__Group__0__Impl_in_rule__SecondLevelB__Group__0766 = new BitSet(new long[]{0x0000000000004000L});
+        public static final BitSet FOLLOW_rule__SecondLevelB__Group__1_in_rule__SecondLevelB__Group__0769 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SecondLevelB__ThirdLevelB1Assignment_0_in_rule__SecondLevelB__Group__0__Impl798 = new BitSet(new long[]{0x0000000000002002L});
+        public static final BitSet FOLLOW_rule__SecondLevelB__ThirdLevelB1Assignment_0_in_rule__SecondLevelB__Group__0__Impl810 = new BitSet(new long[]{0x0000000000002002L});
+        public static final BitSet FOLLOW_rule__SecondLevelB__Group__1__Impl_in_rule__SecondLevelB__Group__1843 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SecondLevelB__ThirdLevelB2Assignment_1_in_rule__SecondLevelB__Group__1__Impl872 = new BitSet(new long[]{0x0000000000004002L});
+        public static final BitSet FOLLOW_rule__SecondLevelB__ThirdLevelB2Assignment_1_in_rule__SecondLevelB__Group__1__Impl884 = new BitSet(new long[]{0x0000000000004002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelA1__Group__0__Impl_in_rule__ThirdLevelA1__Group__0921 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_rule__ThirdLevelA1__Group__1_in_rule__ThirdLevelA1__Group__0924 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_rule__ThirdLevelA1__Group__0__Impl952 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelA1__Group__1__Impl_in_rule__ThirdLevelA1__Group__1983 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_rule__ThirdLevelA1__Group__2_in_rule__ThirdLevelA1__Group__1986 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelA1__Group__2__Impl_in_rule__ThirdLevelA1__Group__21044 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelA1__NameAssignment_2_in_rule__ThirdLevelA1__Group__2__Impl1071 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelA2__Group__0__Impl_in_rule__ThirdLevelA2__Group__01108 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_rule__ThirdLevelA2__Group__1_in_rule__ThirdLevelA2__Group__01111 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_rule__ThirdLevelA2__Group__0__Impl1139 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelA2__Group__1__Impl_in_rule__ThirdLevelA2__Group__11170 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_rule__ThirdLevelA2__Group__2_in_rule__ThirdLevelA2__Group__11173 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelA2__Group__2__Impl_in_rule__ThirdLevelA2__Group__21231 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelA2__NameAssignment_2_in_rule__ThirdLevelA2__Group__2__Impl1258 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelB1__Group__0__Impl_in_rule__ThirdLevelB1__Group__01295 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_rule__ThirdLevelB1__Group__1_in_rule__ThirdLevelB1__Group__01298 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_rule__ThirdLevelB1__Group__0__Impl1326 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelB1__Group__1__Impl_in_rule__ThirdLevelB1__Group__11357 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_rule__ThirdLevelB1__Group__2_in_rule__ThirdLevelB1__Group__11360 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelB1__Group__2__Impl_in_rule__ThirdLevelB1__Group__21418 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelB1__NameAssignment_2_in_rule__ThirdLevelB1__Group__2__Impl1445 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelB2__Group__0__Impl_in_rule__ThirdLevelB2__Group__01482 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_rule__ThirdLevelB2__Group__1_in_rule__ThirdLevelB2__Group__01485 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_rule__ThirdLevelB2__Group__0__Impl1513 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelB2__Group__1__Impl_in_rule__ThirdLevelB2__Group__11544 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_rule__ThirdLevelB2__Group__2_in_rule__ThirdLevelB2__Group__11547 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelB2__Group__2__Impl_in_rule__ThirdLevelB2__Group__21605 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelB2__NameAssignment_2_in_rule__ThirdLevelB2__Group__2__Impl1632 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSecondLevelA_in_rule__FirstLevel__SecondLevelAAssignment_01674 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSecondLevelB_in_rule__FirstLevel__SecondLevelBAssignment_11705 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleThirdLevelA1_in_rule__SecondLevelA__ThirdLevelA1Assignment_01736 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleThirdLevelA2_in_rule__SecondLevelA__ThirdLevelA2Assignment_11767 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleThirdLevelB1_in_rule__SecondLevelB__ThirdLevelB1Assignment_01798 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleThirdLevelB2_in_rule__SecondLevelB__ThirdLevelB2Assignment_11829 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__ThirdLevelA1__NameAssignment_21860 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__ThirdLevelA2__NameAssignment_21891 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__ThirdLevelB1__NameAssignment_21922 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__ThirdLevelB2__NameAssignment_21953 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

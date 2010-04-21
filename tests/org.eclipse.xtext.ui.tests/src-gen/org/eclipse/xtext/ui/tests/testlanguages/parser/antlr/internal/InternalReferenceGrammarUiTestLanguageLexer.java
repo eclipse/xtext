@@ -250,10 +250,10 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
     public final void mT22() throws RecognitionException {
         try {
             int _type = T22;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:21:5: ( 'GR\\u2039N' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:21:7: 'GR\\u2039N'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:21:5: ( 'GR\\u00DCN' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:21:7: 'GR\\u00DCN'
             {
-            match("GR\u2039N"); 
+            match("GR\u00DCN"); 
 
 
             }
@@ -1382,7 +1382,7 @@ public class InternalReferenceGrammarUiTestLanguageLexer extends Lexer {
             {
             int LA12_33 = input.LA(3);
 
-            if ( (LA12_33=='\u2039') ) {
+            if ( (LA12_33=='\u00DC') ) {
                 return 12;
             }
             else {

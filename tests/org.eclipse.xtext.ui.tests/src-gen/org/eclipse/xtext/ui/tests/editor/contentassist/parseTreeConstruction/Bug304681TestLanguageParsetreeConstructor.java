@@ -1607,8 +1607,8 @@ protected class Feature_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getAttributeRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getReferenceRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getReferenceRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAttributeRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -3375,8 +3375,8 @@ protected class Feature2_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getAttribute2Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getReference2Rule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getReference2Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAttribute2Rule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

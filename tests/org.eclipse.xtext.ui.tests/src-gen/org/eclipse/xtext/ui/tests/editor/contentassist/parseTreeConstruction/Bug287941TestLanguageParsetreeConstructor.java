@@ -1861,17 +1861,17 @@ protected class WhereEntry_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getNullWhereEntryRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getSubselectWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getAliasWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getWhereEntryAccess().getOrWhereEntryEntriesAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getSubselectWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getReferenceAliasWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getVariableWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAndWhereEntryAccess().getAndWhereEntryEntriesAction_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getBooleanAttributeWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getWhereEntryAccess().getOrWhereEntryEntriesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getVariableWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getReferenceAliasWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAndWhereEntryAccess().getAndWhereEntryEntriesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getNullWhereEntryRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -2099,17 +2099,17 @@ protected class AndWhereEntry_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getNullWhereEntryRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getSubselectWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getAliasWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getWhereEntryAccess().getOrWhereEntryEntriesAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getSubselectWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getReferenceAliasWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getVariableWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAndWhereEntryAccess().getAndWhereEntryEntriesAction_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getBooleanAttributeWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getWhereEntryAccess().getOrWhereEntryEntriesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getVariableWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getReferenceAliasWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAndWhereEntryAccess().getAndWhereEntryEntriesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getNullWhereEntryRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -2341,17 +2341,17 @@ protected class ConcreteWhereEntry_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getNullWhereEntryRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getSubselectWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getAliasWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getWhereEntryAccess().getOrWhereEntryEntriesAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getSubselectWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getReferenceAliasWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getVariableWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAndWhereEntryAccess().getAndWhereEntryEntriesAction_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getBooleanAttributeWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getWhereEntryAccess().getOrWhereEntryEntriesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getVariableWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getReferenceAliasWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAndWhereEntryAccess().getAndWhereEntryEntriesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getNullWhereEntryRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -2414,11 +2414,11 @@ protected class ConcreteWhereEntry_AttributeWhereEntryParserRuleCall_1 extends R
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getVariableWhereEntryRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getBooleanAttributeWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getVariableWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -2634,17 +2634,17 @@ protected class ParWhereEntry_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getNullWhereEntryRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getSubselectWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getAliasWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getWhereEntryAccess().getOrWhereEntryEntriesAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getSubselectWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getReferenceAliasWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getVariableWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAndWhereEntryAccess().getAndWhereEntryEntriesAction_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getBooleanAttributeWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getWhereEntryAccess().getOrWhereEntryEntriesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getVariableWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getReferenceAliasWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAndWhereEntryAccess().getAndWhereEntryEntriesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getNullWhereEntryRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -2767,11 +2767,11 @@ protected class AttributeWhereEntry_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getVariableWhereEntryRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getBooleanAttributeWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getStringAttributeWhereEntryRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getVariableWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -2800,8 +2800,8 @@ protected class AttributeWhereEntry_NumericAttributeWhereEntryParserRuleCall_0 e
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -2977,8 +2977,8 @@ protected class NumericAttributeWhereEntry_Alternatives extends AlternativesToke
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getDoubleWhereEntryRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLongWhereEntryRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

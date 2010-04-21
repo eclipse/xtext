@@ -308,8 +308,8 @@ protected class Type_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getDataTypeRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getClassRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getClassRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getDataTypeRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -848,8 +848,8 @@ protected class Property_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getReferenceRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAttributeRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getAttributeRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getReferenceRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

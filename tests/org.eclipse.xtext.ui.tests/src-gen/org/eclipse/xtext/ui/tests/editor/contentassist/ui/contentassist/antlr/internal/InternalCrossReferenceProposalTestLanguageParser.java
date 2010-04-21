@@ -231,49 +231,20 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start rule__Class__Group__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:119:1: rule__Class__Group__0 : ( ( rule__Class__Group_0__0 )? ) rule__Class__Group__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:119:1: rule__Class__Group__0 : rule__Class__Group__0__Impl rule__Class__Group__1 ;
     public final void rule__Class__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:123:1: ( ( ( rule__Class__Group_0__0 )? ) rule__Class__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:124:1: ( ( rule__Class__Group_0__0 )? ) rule__Class__Group__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:123:1: ( rule__Class__Group__0__Impl rule__Class__Group__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:124:2: rule__Class__Group__0__Impl rule__Class__Group__1
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:124:1: ( ( rule__Class__Group_0__0 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:125:1: ( rule__Class__Group_0__0 )?
-            {
-             before(grammarAccess.getClassAccess().getGroup_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:126:1: ( rule__Class__Group_0__0 )?
-            int alt2=2;
-            int LA2_0 = input.LA(1);
+            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__0__Impl_in_rule__Class__Group__0189);
+            rule__Class__Group__0__Impl();
+            _fsp--;
 
-            if ( (LA2_0==RULE_ID) ) {
-                int LA2_1 = input.LA(2);
-
-                if ( (LA2_1==13) ) {
-                    alt2=1;
-                }
-            }
-            switch (alt2) {
-                case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:126:2: rule__Class__Group_0__0
-                    {
-                    pushFollow(FollowSets000.FOLLOW_rule__Class__Group_0__0_in_rule__Class__Group__0193);
-                    rule__Class__Group_0__0();
-                    _fsp--;
-
-
-                    }
-                    break;
-
-            }
-
-             after(grammarAccess.getClassAccess().getGroup_0()); 
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__1_in_rule__Class__Group__0203);
+            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__1_in_rule__Class__Group__0192);
             rule__Class__Group__1();
             _fsp--;
 
@@ -295,35 +266,82 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
     // $ANTLR end rule__Class__Group__0
 
 
+    // $ANTLR start rule__Class__Group__0__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:131:1: rule__Class__Group__0__Impl : ( ( rule__Class__Group_0__0 )? ) ;
+    public final void rule__Class__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:135:1: ( ( ( rule__Class__Group_0__0 )? ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:136:1: ( ( rule__Class__Group_0__0 )? )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:136:1: ( ( rule__Class__Group_0__0 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:137:1: ( rule__Class__Group_0__0 )?
+            {
+             before(grammarAccess.getClassAccess().getGroup_0()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:138:1: ( rule__Class__Group_0__0 )?
+            int alt2=2;
+            int LA2_0 = input.LA(1);
+
+            if ( (LA2_0==RULE_ID) ) {
+                int LA2_1 = input.LA(2);
+
+                if ( (LA2_1==13) ) {
+                    alt2=1;
+                }
+            }
+            switch (alt2) {
+                case 1 :
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:138:2: rule__Class__Group_0__0
+                    {
+                    pushFollow(FollowSets000.FOLLOW_rule__Class__Group_0__0_in_rule__Class__Group__0__Impl219);
+                    rule__Class__Group_0__0();
+                    _fsp--;
+
+
+                    }
+                    break;
+
+            }
+
+             after(grammarAccess.getClassAccess().getGroup_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Class__Group__0__Impl
+
+
     // $ANTLR start rule__Class__Group__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:137:1: rule__Class__Group__1 : ( ( rule__Class__NameAssignment_1 ) ) rule__Class__Group__2 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:148:1: rule__Class__Group__1 : rule__Class__Group__1__Impl rule__Class__Group__2 ;
     public final void rule__Class__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:141:1: ( ( ( rule__Class__NameAssignment_1 ) ) rule__Class__Group__2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:142:1: ( ( rule__Class__NameAssignment_1 ) ) rule__Class__Group__2
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:152:1: ( rule__Class__Group__1__Impl rule__Class__Group__2 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:153:2: rule__Class__Group__1__Impl rule__Class__Group__2
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:142:1: ( ( rule__Class__NameAssignment_1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:143:1: ( rule__Class__NameAssignment_1 )
-            {
-             before(grammarAccess.getClassAccess().getNameAssignment_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:144:1: ( rule__Class__NameAssignment_1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:144:2: rule__Class__NameAssignment_1
-            {
-            pushFollow(FollowSets000.FOLLOW_rule__Class__NameAssignment_1_in_rule__Class__Group__1231);
-            rule__Class__NameAssignment_1();
+            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__1__Impl_in_rule__Class__Group__1250);
+            rule__Class__Group__1__Impl();
             _fsp--;
 
-
-            }
-
-             after(grammarAccess.getClassAccess().getNameAssignment_1()); 
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__2_in_rule__Class__Group__1240);
+            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__2_in_rule__Class__Group__1253);
             rule__Class__Group__2();
             _fsp--;
 
@@ -345,26 +363,67 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
     // $ANTLR end rule__Class__Group__1
 
 
+    // $ANTLR start rule__Class__Group__1__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:160:1: rule__Class__Group__1__Impl : ( ( rule__Class__NameAssignment_1 ) ) ;
+    public final void rule__Class__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:164:1: ( ( ( rule__Class__NameAssignment_1 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:165:1: ( ( rule__Class__NameAssignment_1 ) )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:165:1: ( ( rule__Class__NameAssignment_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:166:1: ( rule__Class__NameAssignment_1 )
+            {
+             before(grammarAccess.getClassAccess().getNameAssignment_1()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:167:1: ( rule__Class__NameAssignment_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:167:2: rule__Class__NameAssignment_1
+            {
+            pushFollow(FollowSets000.FOLLOW_rule__Class__NameAssignment_1_in_rule__Class__Group__1__Impl280);
+            rule__Class__NameAssignment_1();
+            _fsp--;
+
+
+            }
+
+             after(grammarAccess.getClassAccess().getNameAssignment_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Class__Group__1__Impl
+
+
     // $ANTLR start rule__Class__Group__2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:155:1: rule__Class__Group__2 : ( '{' ) rule__Class__Group__3 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:177:1: rule__Class__Group__2 : rule__Class__Group__2__Impl rule__Class__Group__3 ;
     public final void rule__Class__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:159:1: ( ( '{' ) rule__Class__Group__3 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:160:1: ( '{' ) rule__Class__Group__3
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:181:1: ( rule__Class__Group__2__Impl rule__Class__Group__3 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:182:2: rule__Class__Group__2__Impl rule__Class__Group__3
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:160:1: ( '{' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:161:1: '{'
-            {
-             before(grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_2()); 
-            match(input,11,FollowSets000.FOLLOW_11_in_rule__Class__Group__2269); 
-             after(grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_2()); 
+            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__2__Impl_in_rule__Class__Group__2310);
+            rule__Class__Group__2__Impl();
+            _fsp--;
 
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__3_in_rule__Class__Group__2279);
+            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__3_in_rule__Class__Group__2313);
             rule__Class__Group__3();
             _fsp--;
 
@@ -386,24 +445,56 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
     // $ANTLR end rule__Class__Group__2
 
 
+    // $ANTLR start rule__Class__Group__2__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:189:1: rule__Class__Group__2__Impl : ( '{' ) ;
+    public final void rule__Class__Group__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:193:1: ( ( '{' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:194:1: ( '{' )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:194:1: ( '{' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:195:1: '{'
+            {
+             before(grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_2()); 
+            match(input,11,FollowSets000.FOLLOW_11_in_rule__Class__Group__2__Impl341); 
+             after(grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_2()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Class__Group__2__Impl
+
+
     // $ANTLR start rule__Class__Group__3
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:175:1: rule__Class__Group__3 : ( '}' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:208:1: rule__Class__Group__3 : rule__Class__Group__3__Impl ;
     public final void rule__Class__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:179:1: ( ( '}' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:180:1: ( '}' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:212:1: ( rule__Class__Group__3__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:213:2: rule__Class__Group__3__Impl
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:180:1: ( '}' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:181:1: '}'
-            {
-             before(grammarAccess.getClassAccess().getRightCurlyBracketKeyword_3()); 
-            match(input,12,FollowSets000.FOLLOW_12_in_rule__Class__Group__3308); 
-             after(grammarAccess.getClassAccess().getRightCurlyBracketKeyword_3()); 
-
-            }
+            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__3__Impl_in_rule__Class__Group__3372);
+            rule__Class__Group__3__Impl();
+            _fsp--;
 
 
             }
@@ -423,35 +514,58 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
     // $ANTLR end rule__Class__Group__3
 
 
+    // $ANTLR start rule__Class__Group__3__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:219:1: rule__Class__Group__3__Impl : ( '}' ) ;
+    public final void rule__Class__Group__3__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:223:1: ( ( '}' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:224:1: ( '}' )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:224:1: ( '}' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:225:1: '}'
+            {
+             before(grammarAccess.getClassAccess().getRightCurlyBracketKeyword_3()); 
+            match(input,12,FollowSets000.FOLLOW_12_in_rule__Class__Group__3__Impl400); 
+             after(grammarAccess.getClassAccess().getRightCurlyBracketKeyword_3()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Class__Group__3__Impl
+
+
     // $ANTLR start rule__Class__Group_0__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:202:1: rule__Class__Group_0__0 : ( ( rule__Class__SuperClassAssignment_0_0 ) ) rule__Class__Group_0__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:246:1: rule__Class__Group_0__0 : rule__Class__Group_0__0__Impl rule__Class__Group_0__1 ;
     public final void rule__Class__Group_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:206:1: ( ( ( rule__Class__SuperClassAssignment_0_0 ) ) rule__Class__Group_0__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:207:1: ( ( rule__Class__SuperClassAssignment_0_0 ) ) rule__Class__Group_0__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:250:1: ( rule__Class__Group_0__0__Impl rule__Class__Group_0__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:251:2: rule__Class__Group_0__0__Impl rule__Class__Group_0__1
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:207:1: ( ( rule__Class__SuperClassAssignment_0_0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:208:1: ( rule__Class__SuperClassAssignment_0_0 )
-            {
-             before(grammarAccess.getClassAccess().getSuperClassAssignment_0_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:209:1: ( rule__Class__SuperClassAssignment_0_0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:209:2: rule__Class__SuperClassAssignment_0_0
-            {
-            pushFollow(FollowSets000.FOLLOW_rule__Class__SuperClassAssignment_0_0_in_rule__Class__Group_0__0351);
-            rule__Class__SuperClassAssignment_0_0();
+            pushFollow(FollowSets000.FOLLOW_rule__Class__Group_0__0__Impl_in_rule__Class__Group_0__0439);
+            rule__Class__Group_0__0__Impl();
             _fsp--;
 
-
-            }
-
-             after(grammarAccess.getClassAccess().getSuperClassAssignment_0_0()); 
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group_0__1_in_rule__Class__Group_0__0360);
+            pushFollow(FollowSets000.FOLLOW_rule__Class__Group_0__1_in_rule__Class__Group_0__0442);
             rule__Class__Group_0__1();
             _fsp--;
 
@@ -473,24 +587,65 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
     // $ANTLR end rule__Class__Group_0__0
 
 
+    // $ANTLR start rule__Class__Group_0__0__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:258:1: rule__Class__Group_0__0__Impl : ( ( rule__Class__SuperClassAssignment_0_0 ) ) ;
+    public final void rule__Class__Group_0__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:262:1: ( ( ( rule__Class__SuperClassAssignment_0_0 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:263:1: ( ( rule__Class__SuperClassAssignment_0_0 ) )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:263:1: ( ( rule__Class__SuperClassAssignment_0_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:264:1: ( rule__Class__SuperClassAssignment_0_0 )
+            {
+             before(grammarAccess.getClassAccess().getSuperClassAssignment_0_0()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:265:1: ( rule__Class__SuperClassAssignment_0_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:265:2: rule__Class__SuperClassAssignment_0_0
+            {
+            pushFollow(FollowSets000.FOLLOW_rule__Class__SuperClassAssignment_0_0_in_rule__Class__Group_0__0__Impl469);
+            rule__Class__SuperClassAssignment_0_0();
+            _fsp--;
+
+
+            }
+
+             after(grammarAccess.getClassAccess().getSuperClassAssignment_0_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Class__Group_0__0__Impl
+
+
     // $ANTLR start rule__Class__Group_0__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:220:1: rule__Class__Group_0__1 : ( '<-' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:275:1: rule__Class__Group_0__1 : rule__Class__Group_0__1__Impl ;
     public final void rule__Class__Group_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:224:1: ( ( '<-' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:225:1: ( '<-' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:279:1: ( rule__Class__Group_0__1__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:280:2: rule__Class__Group_0__1__Impl
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:225:1: ( '<-' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:226:1: '<-'
-            {
-             before(grammarAccess.getClassAccess().getLessThanSignHyphenMinusKeyword_0_1()); 
-            match(input,13,FollowSets000.FOLLOW_13_in_rule__Class__Group_0__1389); 
-             after(grammarAccess.getClassAccess().getLessThanSignHyphenMinusKeyword_0_1()); 
-
-            }
+            pushFollow(FollowSets000.FOLLOW_rule__Class__Group_0__1__Impl_in_rule__Class__Group_0__1499);
+            rule__Class__Group_0__1__Impl();
+            _fsp--;
 
 
             }
@@ -510,21 +665,58 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
     // $ANTLR end rule__Class__Group_0__1
 
 
+    // $ANTLR start rule__Class__Group_0__1__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:286:1: rule__Class__Group_0__1__Impl : ( '<-' ) ;
+    public final void rule__Class__Group_0__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:290:1: ( ( '<-' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:291:1: ( '<-' )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:291:1: ( '<-' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:292:1: '<-'
+            {
+             before(grammarAccess.getClassAccess().getLessThanSignHyphenMinusKeyword_0_1()); 
+            match(input,13,FollowSets000.FOLLOW_13_in_rule__Class__Group_0__1__Impl527); 
+             after(grammarAccess.getClassAccess().getLessThanSignHyphenMinusKeyword_0_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Class__Group_0__1__Impl
+
+
     // $ANTLR start rule__Model__ElementsAssignment
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:244:1: rule__Model__ElementsAssignment : ( ruleClass ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:310:1: rule__Model__ElementsAssignment : ( ruleClass ) ;
     public final void rule__Model__ElementsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:248:1: ( ( ruleClass ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:249:1: ( ruleClass )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:314:1: ( ( ruleClass ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:315:1: ( ruleClass )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:249:1: ( ruleClass )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:250:1: ruleClass
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:315:1: ( ruleClass )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:316:1: ruleClass
             {
              before(grammarAccess.getModelAccess().getElementsClassParserRuleCall_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleClass_in_rule__Model__ElementsAssignment429);
+            pushFollow(FollowSets000.FOLLOW_ruleClass_in_rule__Model__ElementsAssignment567);
             ruleClass();
             _fsp--;
 
@@ -551,24 +743,24 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start rule__Class__SuperClassAssignment_0_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:259:1: rule__Class__SuperClassAssignment_0_0 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:325:1: rule__Class__SuperClassAssignment_0_0 : ( ( RULE_ID ) ) ;
     public final void rule__Class__SuperClassAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:263:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:264:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:329:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:330:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:264:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:265:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:330:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:331:1: ( RULE_ID )
             {
              before(grammarAccess.getClassAccess().getSuperClassClassCrossReference_0_0_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:266:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:267:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:332:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:333:1: RULE_ID
             {
              before(grammarAccess.getClassAccess().getSuperClassClassIDTerminalRuleCall_0_0_0_1()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Class__SuperClassAssignment_0_0464); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Class__SuperClassAssignment_0_0602); 
              after(grammarAccess.getClassAccess().getSuperClassClassIDTerminalRuleCall_0_0_0_1()); 
 
             }
@@ -596,20 +788,20 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
 
     // $ANTLR start rule__Class__NameAssignment_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:278:1: rule__Class__NameAssignment_1 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:344:1: rule__Class__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Class__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:282:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:283:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:348:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:349:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:283:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:284:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:349:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:350:1: RULE_ID
             {
              before(grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Class__NameAssignment_1499); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Class__NameAssignment_1637); 
              after(grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -642,19 +834,25 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
         public static final BitSet FOLLOW_ruleClass_in_entryRuleClass122 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleClass129 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Class__Group__0_in_ruleClass155 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Class__Group_0__0_in_rule__Class__Group__0193 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_rule__Class__Group__1_in_rule__Class__Group__0203 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Class__NameAssignment_1_in_rule__Class__Group__1231 = new BitSet(new long[]{0x0000000000000800L});
-        public static final BitSet FOLLOW_rule__Class__Group__2_in_rule__Class__Group__1240 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_rule__Class__Group__2269 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_rule__Class__Group__3_in_rule__Class__Group__2279 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_rule__Class__Group__3308 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Class__SuperClassAssignment_0_0_in_rule__Class__Group_0__0351 = new BitSet(new long[]{0x0000000000002000L});
-        public static final BitSet FOLLOW_rule__Class__Group_0__1_in_rule__Class__Group_0__0360 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_rule__Class__Group_0__1389 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleClass_in_rule__Model__ElementsAssignment429 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Class__SuperClassAssignment_0_0464 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Class__NameAssignment_1499 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Class__Group__0__Impl_in_rule__Class__Group__0189 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__Class__Group__1_in_rule__Class__Group__0192 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Class__Group_0__0_in_rule__Class__Group__0__Impl219 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Class__Group__1__Impl_in_rule__Class__Group__1250 = new BitSet(new long[]{0x0000000000000800L});
+        public static final BitSet FOLLOW_rule__Class__Group__2_in_rule__Class__Group__1253 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Class__NameAssignment_1_in_rule__Class__Group__1__Impl280 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Class__Group__2__Impl_in_rule__Class__Group__2310 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_rule__Class__Group__3_in_rule__Class__Group__2313 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_rule__Class__Group__2__Impl341 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Class__Group__3__Impl_in_rule__Class__Group__3372 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_rule__Class__Group__3__Impl400 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Class__Group_0__0__Impl_in_rule__Class__Group_0__0439 = new BitSet(new long[]{0x0000000000002000L});
+        public static final BitSet FOLLOW_rule__Class__Group_0__1_in_rule__Class__Group_0__0442 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Class__SuperClassAssignment_0_0_in_rule__Class__Group_0__0__Impl469 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Class__Group_0__1__Impl_in_rule__Class__Group_0__1499 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_rule__Class__Group_0__1__Impl527 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleClass_in_rule__Model__ElementsAssignment567 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Class__SuperClassAssignment_0_0602 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Class__NameAssignment_1637 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

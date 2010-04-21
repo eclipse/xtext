@@ -83,6 +83,10 @@ public class Activator extends AbstractUIPlugin {
 				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519TestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519TestLanguage"))).with(getSharedStateModule())
 			));
 			
+			injectors.put("org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage", Guice.createInjector(
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage"))).with(getSharedStateModule())
+			));
+			
 			injectors.put("org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage", Guice.createInjector(
 				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage"))).with(getSharedStateModule())
 			));
@@ -207,6 +211,10 @@ public class Activator extends AbstractUIPlugin {
 		  return new org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519TestLanguageRuntimeModule();
 		}
 		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguageRuntimeModule();
+		}
+		
 		if ("org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguageRuntimeModule();
 		}
@@ -321,6 +329,10 @@ public class Activator extends AbstractUIPlugin {
 		
 		if ("org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519TestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug307519TestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug309949TestLanguageUiModule(this);
 		}
 		
 		if ("org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage".equals(grammar)) {

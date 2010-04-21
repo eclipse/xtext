@@ -141,8 +141,8 @@ protected class TConstant_Alternatives extends AlternativesToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getTBooleanConstantRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTStringConstantRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTIntegerConstantRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getTIntegerConstantRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTStringConstantRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

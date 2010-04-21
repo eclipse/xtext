@@ -8,7 +8,7 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
 }
 
 // $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g" 151
-RULE_LEXEME : ('a'..'z'|'A'..'Z'|'0'..'9'|'\u2030'|'\u02C6'|'\u00B8'|'\uFB02'|'\u0192'|'\u00F7'|'\u2039')*;
+RULE_LEXEME : ('a'..'z'|'A'..'Z'|'0'..'9'|'\u00E4'|'\u00F6'|'\u00FC'|'\u00DF'|'\u00C4'|'\u00D6'|'\u00DC')*;
 
 // $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g" 153
 RULE_WS : (' '|'\t'|'\r'|'\n')+;

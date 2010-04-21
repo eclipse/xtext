@@ -121,13 +121,24 @@ rule__Class__Group__0
 		int stackSize = keepStackSize();
     }
 :
+	rule__Class__Group__0__Impl
+	rule__Class__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Class__Group__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getClassAccess().getGroup_0()); }
 (rule__Class__Group_0__0)?
 { after(grammarAccess.getClassAccess().getGroup_0()); }
 )
 
-	rule__Class__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -139,13 +150,24 @@ rule__Class__Group__1
 		int stackSize = keepStackSize();
     }
 :
+	rule__Class__Group__1__Impl
+	rule__Class__Group__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Class__Group__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getClassAccess().getNameAssignment_1()); }
 (rule__Class__NameAssignment_1)
 { after(grammarAccess.getClassAccess().getNameAssignment_1()); }
 )
 
-	rule__Class__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -153,6 +175,18 @@ finally {
 
 
 rule__Class__Group__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__Class__Group__2__Impl
+	rule__Class__Group__3
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Class__Group__2__Impl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -165,7 +199,6 @@ rule__Class__Group__2
 { after(grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_2()); }
 )
 
-	rule__Class__Group__3
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -173,6 +206,17 @@ finally {
 
 
 rule__Class__Group__3
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__Class__Group__3__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Class__Group__3__Impl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -204,13 +248,24 @@ rule__Class__Group_0__0
 		int stackSize = keepStackSize();
     }
 :
+	rule__Class__Group_0__0__Impl
+	rule__Class__Group_0__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Class__Group_0__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getClassAccess().getSuperClassAssignment_0_0()); }
 (rule__Class__SuperClassAssignment_0_0)
 { after(grammarAccess.getClassAccess().getSuperClassAssignment_0_0()); }
 )
 
-	rule__Class__Group_0__1
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -218,6 +273,17 @@ finally {
 
 
 rule__Class__Group_0__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__Class__Group_0__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Class__Group_0__1__Impl
     @init {
 		int stackSize = keepStackSize();
     }

@@ -121,13 +121,24 @@ rule__AnElement__Group__0
 		int stackSize = keepStackSize();
     }
 :
+	rule__AnElement__Group__0__Impl
+	rule__AnElement__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__AnElement__Group__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getAnElementAccess().getNameAssignment_0()); }
 (rule__AnElement__NameAssignment_0)
 { after(grammarAccess.getAnElementAccess().getNameAssignment_0()); }
 )
 
-	rule__AnElement__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -139,13 +150,24 @@ rule__AnElement__Group__1
 		int stackSize = keepStackSize();
     }
 :
+	rule__AnElement__Group__1__Impl
+	rule__AnElement__Group__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__AnElement__Group__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getAnElementAccess().getGroup_1()); }
 (rule__AnElement__Group_1__0)?
 { after(grammarAccess.getAnElementAccess().getGroup_1()); }
 )
 
-	rule__AnElement__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -153,6 +175,17 @@ finally {
 
 
 rule__AnElement__Group__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__AnElement__Group__2__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__AnElement__Group__2__Impl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -182,6 +215,18 @@ rule__AnElement__Group_1__0
 		int stackSize = keepStackSize();
     }
 :
+	rule__AnElement__Group_1__0__Impl
+	rule__AnElement__Group_1__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__AnElement__Group_1__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getAnElementAccess().getRefersToKeyword_1_0()); }
 
@@ -190,7 +235,6 @@ rule__AnElement__Group_1__0
 { after(grammarAccess.getAnElementAccess().getRefersToKeyword_1_0()); }
 )
 
-	rule__AnElement__Group_1__1
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -198,6 +242,17 @@ finally {
 
 
 rule__AnElement__Group_1__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__AnElement__Group_1__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__AnElement__Group_1__1__Impl
     @init {
 		int stackSize = keepStackSize();
     }

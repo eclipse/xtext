@@ -381,34 +381,20 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start rule__Type__Group__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:175:1: rule__Type__Group__0 : ( ( rule__Type__NameAssignment_0 ) ) rule__Type__Group__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:175:1: rule__Type__Group__0 : rule__Type__Group__0__Impl rule__Type__Group__1 ;
     public final void rule__Type__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:179:1: ( ( ( rule__Type__NameAssignment_0 ) ) rule__Type__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:180:1: ( ( rule__Type__NameAssignment_0 ) ) rule__Type__Group__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:179:1: ( rule__Type__Group__0__Impl rule__Type__Group__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:180:2: rule__Type__Group__0__Impl rule__Type__Group__1
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:180:1: ( ( rule__Type__NameAssignment_0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:181:1: ( rule__Type__NameAssignment_0 )
-            {
-             before(grammarAccess.getTypeAccess().getNameAssignment_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:182:1: ( rule__Type__NameAssignment_0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:182:2: rule__Type__NameAssignment_0
-            {
-            pushFollow(FollowSets000.FOLLOW_rule__Type__NameAssignment_0_in_rule__Type__Group__0313);
-            rule__Type__NameAssignment_0();
+            pushFollow(FollowSets000.FOLLOW_rule__Type__Group__0__Impl_in_rule__Type__Group__0309);
+            rule__Type__Group__0__Impl();
             _fsp--;
 
-
-            }
-
-             after(grammarAccess.getTypeAccess().getNameAssignment_0()); 
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Type__Group__1_in_rule__Type__Group__0322);
+            pushFollow(FollowSets000.FOLLOW_rule__Type__Group__1_in_rule__Type__Group__0312);
             rule__Type__Group__1();
             _fsp--;
 
@@ -430,46 +416,67 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
     // $ANTLR end rule__Type__Group__0
 
 
+    // $ANTLR start rule__Type__Group__0__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:187:1: rule__Type__Group__0__Impl : ( ( rule__Type__NameAssignment_0 ) ) ;
+    public final void rule__Type__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:191:1: ( ( ( rule__Type__NameAssignment_0 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:192:1: ( ( rule__Type__NameAssignment_0 ) )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:192:1: ( ( rule__Type__NameAssignment_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:193:1: ( rule__Type__NameAssignment_0 )
+            {
+             before(grammarAccess.getTypeAccess().getNameAssignment_0()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:194:1: ( rule__Type__NameAssignment_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:194:2: rule__Type__NameAssignment_0
+            {
+            pushFollow(FollowSets000.FOLLOW_rule__Type__NameAssignment_0_in_rule__Type__Group__0__Impl339);
+            rule__Type__NameAssignment_0();
+            _fsp--;
+
+
+            }
+
+             after(grammarAccess.getTypeAccess().getNameAssignment_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Type__Group__0__Impl
+
+
     // $ANTLR start rule__Type__Group__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:193:1: rule__Type__Group__1 : ( ( rule__Type__Group_1__0 )? ) rule__Type__Group__2 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:204:1: rule__Type__Group__1 : rule__Type__Group__1__Impl rule__Type__Group__2 ;
     public final void rule__Type__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:197:1: ( ( ( rule__Type__Group_1__0 )? ) rule__Type__Group__2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:198:1: ( ( rule__Type__Group_1__0 )? ) rule__Type__Group__2
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:208:1: ( rule__Type__Group__1__Impl rule__Type__Group__2 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:209:2: rule__Type__Group__1__Impl rule__Type__Group__2
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:198:1: ( ( rule__Type__Group_1__0 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:199:1: ( rule__Type__Group_1__0 )?
-            {
-             before(grammarAccess.getTypeAccess().getGroup_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:200:1: ( rule__Type__Group_1__0 )?
-            int alt2=2;
-            int LA2_0 = input.LA(1);
+            pushFollow(FollowSets000.FOLLOW_rule__Type__Group__1__Impl_in_rule__Type__Group__1369);
+            rule__Type__Group__1__Impl();
+            _fsp--;
 
-            if ( (LA2_0==12) ) {
-                alt2=1;
-            }
-            switch (alt2) {
-                case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:200:2: rule__Type__Group_1__0
-                    {
-                    pushFollow(FollowSets000.FOLLOW_rule__Type__Group_1__0_in_rule__Type__Group__1350);
-                    rule__Type__Group_1__0();
-                    _fsp--;
-
-
-                    }
-                    break;
-
-            }
-
-             after(grammarAccess.getTypeAccess().getGroup_1()); 
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Type__Group__2_in_rule__Type__Group__1360);
+            pushFollow(FollowSets000.FOLLOW_rule__Type__Group__2_in_rule__Type__Group__1372);
             rule__Type__Group__2();
             _fsp--;
 
@@ -491,24 +498,76 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
     // $ANTLR end rule__Type__Group__1
 
 
+    // $ANTLR start rule__Type__Group__1__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:216:1: rule__Type__Group__1__Impl : ( ( rule__Type__Group_1__0 )? ) ;
+    public final void rule__Type__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:220:1: ( ( ( rule__Type__Group_1__0 )? ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:221:1: ( ( rule__Type__Group_1__0 )? )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:221:1: ( ( rule__Type__Group_1__0 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:222:1: ( rule__Type__Group_1__0 )?
+            {
+             before(grammarAccess.getTypeAccess().getGroup_1()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:223:1: ( rule__Type__Group_1__0 )?
+            int alt2=2;
+            int LA2_0 = input.LA(1);
+
+            if ( (LA2_0==12) ) {
+                alt2=1;
+            }
+            switch (alt2) {
+                case 1 :
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:223:2: rule__Type__Group_1__0
+                    {
+                    pushFollow(FollowSets000.FOLLOW_rule__Type__Group_1__0_in_rule__Type__Group__1__Impl399);
+                    rule__Type__Group_1__0();
+                    _fsp--;
+
+
+                    }
+                    break;
+
+            }
+
+             after(grammarAccess.getTypeAccess().getGroup_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Type__Group__1__Impl
+
+
     // $ANTLR start rule__Type__Group__2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:211:1: rule__Type__Group__2 : ( ';' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:233:1: rule__Type__Group__2 : rule__Type__Group__2__Impl ;
     public final void rule__Type__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:215:1: ( ( ';' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:216:1: ( ';' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:237:1: ( rule__Type__Group__2__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:238:2: rule__Type__Group__2__Impl
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:216:1: ( ';' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:217:1: ';'
-            {
-             before(grammarAccess.getTypeAccess().getSemicolonKeyword_2()); 
-            match(input,11,FollowSets000.FOLLOW_11_in_rule__Type__Group__2389); 
-             after(grammarAccess.getTypeAccess().getSemicolonKeyword_2()); 
-
-            }
+            pushFollow(FollowSets000.FOLLOW_rule__Type__Group__2__Impl_in_rule__Type__Group__2430);
+            rule__Type__Group__2__Impl();
+            _fsp--;
 
 
             }
@@ -528,26 +587,58 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
     // $ANTLR end rule__Type__Group__2
 
 
+    // $ANTLR start rule__Type__Group__2__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:244:1: rule__Type__Group__2__Impl : ( ';' ) ;
+    public final void rule__Type__Group__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:248:1: ( ( ';' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:249:1: ( ';' )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:249:1: ( ';' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:250:1: ';'
+            {
+             before(grammarAccess.getTypeAccess().getSemicolonKeyword_2()); 
+            match(input,11,FollowSets000.FOLLOW_11_in_rule__Type__Group__2__Impl458); 
+             after(grammarAccess.getTypeAccess().getSemicolonKeyword_2()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Type__Group__2__Impl
+
+
     // $ANTLR start rule__Type__Group_1__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:236:1: rule__Type__Group_1__0 : ( 'extends' ) rule__Type__Group_1__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:269:1: rule__Type__Group_1__0 : rule__Type__Group_1__0__Impl rule__Type__Group_1__1 ;
     public final void rule__Type__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:240:1: ( ( 'extends' ) rule__Type__Group_1__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:241:1: ( 'extends' ) rule__Type__Group_1__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:273:1: ( rule__Type__Group_1__0__Impl rule__Type__Group_1__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:274:2: rule__Type__Group_1__0__Impl rule__Type__Group_1__1
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:241:1: ( 'extends' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:242:1: 'extends'
-            {
-             before(grammarAccess.getTypeAccess().getExtendsKeyword_1_0()); 
-            match(input,12,FollowSets000.FOLLOW_12_in_rule__Type__Group_1__0431); 
-             after(grammarAccess.getTypeAccess().getExtendsKeyword_1_0()); 
+            pushFollow(FollowSets000.FOLLOW_rule__Type__Group_1__0__Impl_in_rule__Type__Group_1__0495);
+            rule__Type__Group_1__0__Impl();
+            _fsp--;
 
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Type__Group_1__1_in_rule__Type__Group_1__0441);
+            pushFollow(FollowSets000.FOLLOW_rule__Type__Group_1__1_in_rule__Type__Group_1__0498);
             rule__Type__Group_1__1();
             _fsp--;
 
@@ -569,24 +660,93 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
     // $ANTLR end rule__Type__Group_1__0
 
 
+    // $ANTLR start rule__Type__Group_1__0__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:281:1: rule__Type__Group_1__0__Impl : ( 'extends' ) ;
+    public final void rule__Type__Group_1__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:285:1: ( ( 'extends' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:286:1: ( 'extends' )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:286:1: ( 'extends' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:287:1: 'extends'
+            {
+             before(grammarAccess.getTypeAccess().getExtendsKeyword_1_0()); 
+            match(input,12,FollowSets000.FOLLOW_12_in_rule__Type__Group_1__0__Impl526); 
+             after(grammarAccess.getTypeAccess().getExtendsKeyword_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Type__Group_1__0__Impl
+
+
     // $ANTLR start rule__Type__Group_1__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:256:1: rule__Type__Group_1__1 : ( ( rule__Type__SuperTypeAssignment_1_1 ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:300:1: rule__Type__Group_1__1 : rule__Type__Group_1__1__Impl ;
     public final void rule__Type__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:260:1: ( ( ( rule__Type__SuperTypeAssignment_1_1 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:261:1: ( ( rule__Type__SuperTypeAssignment_1_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:304:1: ( rule__Type__Group_1__1__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:305:2: rule__Type__Group_1__1__Impl
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:261:1: ( ( rule__Type__SuperTypeAssignment_1_1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:262:1: ( rule__Type__SuperTypeAssignment_1_1 )
+            pushFollow(FollowSets000.FOLLOW_rule__Type__Group_1__1__Impl_in_rule__Type__Group_1__1557);
+            rule__Type__Group_1__1__Impl();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Type__Group_1__1
+
+
+    // $ANTLR start rule__Type__Group_1__1__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:311:1: rule__Type__Group_1__1__Impl : ( ( rule__Type__SuperTypeAssignment_1_1 ) ) ;
+    public final void rule__Type__Group_1__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:315:1: ( ( ( rule__Type__SuperTypeAssignment_1_1 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:316:1: ( ( rule__Type__SuperTypeAssignment_1_1 ) )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:316:1: ( ( rule__Type__SuperTypeAssignment_1_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:317:1: ( rule__Type__SuperTypeAssignment_1_1 )
             {
              before(grammarAccess.getTypeAccess().getSuperTypeAssignment_1_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:263:1: ( rule__Type__SuperTypeAssignment_1_1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:263:2: rule__Type__SuperTypeAssignment_1_1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:318:1: ( rule__Type__SuperTypeAssignment_1_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:318:2: rule__Type__SuperTypeAssignment_1_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Type__SuperTypeAssignment_1_1_in_rule__Type__Group_1__1469);
+            pushFollow(FollowSets000.FOLLOW_rule__Type__SuperTypeAssignment_1_1_in_rule__Type__Group_1__1__Impl584);
             rule__Type__SuperTypeAssignment_1_1();
             _fsp--;
 
@@ -612,29 +772,24 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
         }
         return ;
     }
-    // $ANTLR end rule__Type__Group_1__1
+    // $ANTLR end rule__Type__Group_1__1__Impl
 
 
     // $ANTLR start rule__FQN__Group__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:277:1: rule__FQN__Group__0 : ( RULE_ID ) rule__FQN__Group__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:332:1: rule__FQN__Group__0 : rule__FQN__Group__0__Impl rule__FQN__Group__1 ;
     public final void rule__FQN__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:281:1: ( ( RULE_ID ) rule__FQN__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:282:1: ( RULE_ID ) rule__FQN__Group__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:336:1: ( rule__FQN__Group__0__Impl rule__FQN__Group__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:337:2: rule__FQN__Group__0__Impl rule__FQN__Group__1
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:282:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:283:1: RULE_ID
-            {
-             before(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__FQN__Group__0507); 
-             after(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
+            pushFollow(FollowSets000.FOLLOW_rule__FQN__Group__0__Impl_in_rule__FQN__Group__0618);
+            rule__FQN__Group__0__Impl();
+            _fsp--;
 
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__FQN__Group__1_in_rule__FQN__Group__0515);
+            pushFollow(FollowSets000.FOLLOW_rule__FQN__Group__1_in_rule__FQN__Group__0621);
             rule__FQN__Group__1();
             _fsp--;
 
@@ -656,21 +811,90 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
     // $ANTLR end rule__FQN__Group__0
 
 
+    // $ANTLR start rule__FQN__Group__0__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:344:1: rule__FQN__Group__0__Impl : ( RULE_ID ) ;
+    public final void rule__FQN__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:348:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:349:1: ( RULE_ID )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:349:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:350:1: RULE_ID
+            {
+             before(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__FQN__Group__0__Impl648); 
+             after(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__FQN__Group__0__Impl
+
+
     // $ANTLR start rule__FQN__Group__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:295:1: rule__FQN__Group__1 : ( ( rule__FQN__Group_1__0 )* ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:361:1: rule__FQN__Group__1 : rule__FQN__Group__1__Impl ;
     public final void rule__FQN__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:299:1: ( ( ( rule__FQN__Group_1__0 )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:300:1: ( ( rule__FQN__Group_1__0 )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:365:1: ( rule__FQN__Group__1__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:366:2: rule__FQN__Group__1__Impl
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:300:1: ( ( rule__FQN__Group_1__0 )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:301:1: ( rule__FQN__Group_1__0 )*
+            pushFollow(FollowSets000.FOLLOW_rule__FQN__Group__1__Impl_in_rule__FQN__Group__1677);
+            rule__FQN__Group__1__Impl();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__FQN__Group__1
+
+
+    // $ANTLR start rule__FQN__Group__1__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:372:1: rule__FQN__Group__1__Impl : ( ( rule__FQN__Group_1__0 )* ) ;
+    public final void rule__FQN__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:376:1: ( ( ( rule__FQN__Group_1__0 )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:377:1: ( ( rule__FQN__Group_1__0 )* )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:377:1: ( ( rule__FQN__Group_1__0 )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:378:1: ( rule__FQN__Group_1__0 )*
             {
              before(grammarAccess.getFQNAccess().getGroup_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:302:1: ( rule__FQN__Group_1__0 )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:379:1: ( rule__FQN__Group_1__0 )*
             loop3:
             do {
                 int alt3=2;
@@ -683,9 +907,9 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:302:2: rule__FQN__Group_1__0
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:379:2: rule__FQN__Group_1__0
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__FQN__Group_1__0_in_rule__FQN__Group__1543);
+            	    pushFollow(FollowSets000.FOLLOW_rule__FQN__Group_1__0_in_rule__FQN__Group__1__Impl704);
             	    rule__FQN__Group_1__0();
             	    _fsp--;
 
@@ -717,29 +941,24 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
         }
         return ;
     }
-    // $ANTLR end rule__FQN__Group__1
+    // $ANTLR end rule__FQN__Group__1__Impl
 
 
     // $ANTLR start rule__FQN__Group_1__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:316:1: rule__FQN__Group_1__0 : ( '.' ) rule__FQN__Group_1__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:393:1: rule__FQN__Group_1__0 : rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 ;
     public final void rule__FQN__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:320:1: ( ( '.' ) rule__FQN__Group_1__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:321:1: ( '.' ) rule__FQN__Group_1__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:397:1: ( rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:398:2: rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:321:1: ( '.' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:322:1: '.'
-            {
-             before(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
-            match(input,13,FollowSets000.FOLLOW_13_in_rule__FQN__Group_1__0583); 
-             after(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
+            pushFollow(FollowSets000.FOLLOW_rule__FQN__Group_1__0__Impl_in_rule__FQN__Group_1__0739);
+            rule__FQN__Group_1__0__Impl();
+            _fsp--;
 
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__FQN__Group_1__1_in_rule__FQN__Group_1__0593);
+            pushFollow(FollowSets000.FOLLOW_rule__FQN__Group_1__1_in_rule__FQN__Group_1__0742);
             rule__FQN__Group_1__1();
             _fsp--;
 
@@ -761,24 +980,56 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
     // $ANTLR end rule__FQN__Group_1__0
 
 
+    // $ANTLR start rule__FQN__Group_1__0__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:405:1: rule__FQN__Group_1__0__Impl : ( '.' ) ;
+    public final void rule__FQN__Group_1__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:409:1: ( ( '.' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:410:1: ( '.' )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:410:1: ( '.' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:411:1: '.'
+            {
+             before(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
+            match(input,13,FollowSets000.FOLLOW_13_in_rule__FQN__Group_1__0__Impl770); 
+             after(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__FQN__Group_1__0__Impl
+
+
     // $ANTLR start rule__FQN__Group_1__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:336:1: rule__FQN__Group_1__1 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:424:1: rule__FQN__Group_1__1 : rule__FQN__Group_1__1__Impl ;
     public final void rule__FQN__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:340:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:341:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:428:1: ( rule__FQN__Group_1__1__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:429:2: rule__FQN__Group_1__1__Impl
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:341:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:342:1: RULE_ID
-            {
-             before(grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__FQN__Group_1__1621); 
-             after(grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1()); 
-
-            }
+            pushFollow(FollowSets000.FOLLOW_rule__FQN__Group_1__1__Impl_in_rule__FQN__Group_1__1801);
+            rule__FQN__Group_1__1__Impl();
+            _fsp--;
 
 
             }
@@ -798,21 +1049,58 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
     // $ANTLR end rule__FQN__Group_1__1
 
 
+    // $ANTLR start rule__FQN__Group_1__1__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:435:1: rule__FQN__Group_1__1__Impl : ( RULE_ID ) ;
+    public final void rule__FQN__Group_1__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:439:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:440:1: ( RULE_ID )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:440:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:441:1: RULE_ID
+            {
+             before(grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1()); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__FQN__Group_1__1__Impl828); 
+             after(grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__FQN__Group_1__1__Impl
+
+
     // $ANTLR start rule__Model__TypesAssignment
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:358:1: rule__Model__TypesAssignment : ( ruleType ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:457:1: rule__Model__TypesAssignment : ( ruleType ) ;
     public final void rule__Model__TypesAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:362:1: ( ( ruleType ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:363:1: ( ruleType )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:461:1: ( ( ruleType ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:462:1: ( ruleType )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:363:1: ( ruleType )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:364:1: ruleType
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:462:1: ( ruleType )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:463:1: ruleType
             {
              before(grammarAccess.getModelAccess().getTypesTypeParserRuleCall_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleType_in_rule__Model__TypesAssignment659);
+            pushFollow(FollowSets000.FOLLOW_ruleType_in_rule__Model__TypesAssignment866);
             ruleType();
             _fsp--;
 
@@ -839,20 +1127,20 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start rule__Type__NameAssignment_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:373:1: rule__Type__NameAssignment_0 : ( ruleFQN ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:472:1: rule__Type__NameAssignment_0 : ( ruleFQN ) ;
     public final void rule__Type__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:377:1: ( ( ruleFQN ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:378:1: ( ruleFQN )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:476:1: ( ( ruleFQN ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:477:1: ( ruleFQN )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:378:1: ( ruleFQN )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:379:1: ruleFQN
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:477:1: ( ruleFQN )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:478:1: ruleFQN
             {
              before(grammarAccess.getTypeAccess().getNameFQNParserRuleCall_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleFQN_in_rule__Type__NameAssignment_0690);
+            pushFollow(FollowSets000.FOLLOW_ruleFQN_in_rule__Type__NameAssignment_0897);
             ruleFQN();
             _fsp--;
 
@@ -879,20 +1167,20 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start rule__Type__SuperTypeAssignment_1_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:388:1: rule__Type__SuperTypeAssignment_1_1 : ( ruleTypeRef ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:487:1: rule__Type__SuperTypeAssignment_1_1 : ( ruleTypeRef ) ;
     public final void rule__Type__SuperTypeAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:392:1: ( ( ruleTypeRef ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:393:1: ( ruleTypeRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:491:1: ( ( ruleTypeRef ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:492:1: ( ruleTypeRef )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:393:1: ( ruleTypeRef )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:394:1: ruleTypeRef
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:492:1: ( ruleTypeRef )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:493:1: ruleTypeRef
             {
              before(grammarAccess.getTypeAccess().getSuperTypeTypeRefParserRuleCall_1_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__Type__SuperTypeAssignment_1_1721);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__Type__SuperTypeAssignment_1_1928);
             ruleTypeRef();
             _fsp--;
 
@@ -919,24 +1207,24 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
 
 
     // $ANTLR start rule__TypeRef__TypeAssignment
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:403:1: rule__TypeRef__TypeAssignment : ( ( ruleFQN ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:502:1: rule__TypeRef__TypeAssignment : ( ( ruleFQN ) ) ;
     public final void rule__TypeRef__TypeAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:407:1: ( ( ( ruleFQN ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:408:1: ( ( ruleFQN ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:506:1: ( ( ( ruleFQN ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:507:1: ( ( ruleFQN ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:408:1: ( ( ruleFQN ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:409:1: ( ruleFQN )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:507:1: ( ( ruleFQN ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:508:1: ( ruleFQN )
             {
              before(grammarAccess.getTypeRefAccess().getTypeTypeCrossReference_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:410:1: ( ruleFQN )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:411:1: ruleFQN
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:509:1: ( ruleFQN )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:510:1: ruleFQN
             {
              before(grammarAccess.getTypeRefAccess().getTypeTypeFQNParserRuleCall_0_1()); 
-            pushFollow(FollowSets000.FOLLOW_ruleFQN_in_rule__TypeRef__TypeAssignment756);
+            pushFollow(FollowSets000.FOLLOW_ruleFQN_in_rule__TypeRef__TypeAssignment963);
             ruleFQN();
             _fsp--;
 
@@ -982,24 +1270,33 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
         public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN242 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleFQN249 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__FQN__Group__0_in_ruleFQN275 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Type__NameAssignment_0_in_rule__Type__Group__0313 = new BitSet(new long[]{0x0000000000001800L});
-        public static final BitSet FOLLOW_rule__Type__Group__1_in_rule__Type__Group__0322 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Type__Group_1__0_in_rule__Type__Group__1350 = new BitSet(new long[]{0x0000000000000800L});
-        public static final BitSet FOLLOW_rule__Type__Group__2_in_rule__Type__Group__1360 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_rule__Type__Group__2389 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_rule__Type__Group_1__0431 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_rule__Type__Group_1__1_in_rule__Type__Group_1__0441 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Type__SuperTypeAssignment_1_1_in_rule__Type__Group_1__1469 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__FQN__Group__0507 = new BitSet(new long[]{0x0000000000002002L});
-        public static final BitSet FOLLOW_rule__FQN__Group__1_in_rule__FQN__Group__0515 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__FQN__Group_1__0_in_rule__FQN__Group__1543 = new BitSet(new long[]{0x0000000000002002L});
-        public static final BitSet FOLLOW_13_in_rule__FQN__Group_1__0583 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_rule__FQN__Group_1__1_in_rule__FQN__Group_1__0593 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__FQN__Group_1__1621 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleType_in_rule__Model__TypesAssignment659 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFQN_in_rule__Type__NameAssignment_0690 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypeRef_in_rule__Type__SuperTypeAssignment_1_1721 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFQN_in_rule__TypeRef__TypeAssignment756 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Type__Group__0__Impl_in_rule__Type__Group__0309 = new BitSet(new long[]{0x0000000000001800L});
+        public static final BitSet FOLLOW_rule__Type__Group__1_in_rule__Type__Group__0312 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Type__NameAssignment_0_in_rule__Type__Group__0__Impl339 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Type__Group__1__Impl_in_rule__Type__Group__1369 = new BitSet(new long[]{0x0000000000000800L});
+        public static final BitSet FOLLOW_rule__Type__Group__2_in_rule__Type__Group__1372 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Type__Group_1__0_in_rule__Type__Group__1__Impl399 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Type__Group__2__Impl_in_rule__Type__Group__2430 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_rule__Type__Group__2__Impl458 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Type__Group_1__0__Impl_in_rule__Type__Group_1__0495 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__Type__Group_1__1_in_rule__Type__Group_1__0498 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_rule__Type__Group_1__0__Impl526 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Type__Group_1__1__Impl_in_rule__Type__Group_1__1557 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Type__SuperTypeAssignment_1_1_in_rule__Type__Group_1__1__Impl584 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__FQN__Group__0__Impl_in_rule__FQN__Group__0618 = new BitSet(new long[]{0x0000000000002002L});
+        public static final BitSet FOLLOW_rule__FQN__Group__1_in_rule__FQN__Group__0621 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__FQN__Group__0__Impl648 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__FQN__Group__1__Impl_in_rule__FQN__Group__1677 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__FQN__Group_1__0_in_rule__FQN__Group__1__Impl704 = new BitSet(new long[]{0x0000000000002002L});
+        public static final BitSet FOLLOW_rule__FQN__Group_1__0__Impl_in_rule__FQN__Group_1__0739 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__FQN__Group_1__1_in_rule__FQN__Group_1__0742 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_rule__FQN__Group_1__0__Impl770 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__FQN__Group_1__1__Impl_in_rule__FQN__Group_1__1801 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__FQN__Group_1__1__Impl828 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleType_in_rule__Model__TypesAssignment866 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFQN_in_rule__Type__NameAssignment_0897 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeRef_in_rule__Type__SuperTypeAssignment_1_1928 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFQN_in_rule__TypeRef__TypeAssignment963 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

@@ -261,13 +261,24 @@ rule__TStringConstant__Group__0
 		int stackSize = keepStackSize();
     }
 :
+	rule__TStringConstant__Group__0__Impl
+	rule__TStringConstant__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TStringConstant__Group__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getTStringConstantAccess().getAnnotationsAssignment_0()); }
 (rule__TStringConstant__AnnotationsAssignment_0)*
 { after(grammarAccess.getTStringConstantAccess().getAnnotationsAssignment_0()); }
 )
 
-	rule__TStringConstant__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -275,6 +286,18 @@ finally {
 
 
 rule__TStringConstant__Group__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__TStringConstant__Group__1__Impl
+	rule__TStringConstant__Group__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TStringConstant__Group__1__Impl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -287,7 +310,6 @@ rule__TStringConstant__Group__1
 { after(grammarAccess.getTStringConstantAccess().getConstantKeyword_1()); }
 )
 
-	rule__TStringConstant__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -295,6 +317,18 @@ finally {
 
 
 rule__TStringConstant__Group__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__TStringConstant__Group__2__Impl
+	rule__TStringConstant__Group__3
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TStringConstant__Group__2__Impl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -307,7 +341,6 @@ rule__TStringConstant__Group__2
 { after(grammarAccess.getTStringConstantAccess().getStringKeyword_2()); }
 )
 
-	rule__TStringConstant__Group__3
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -315,6 +348,17 @@ finally {
 
 
 rule__TStringConstant__Group__3
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__TStringConstant__Group__3__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TStringConstant__Group__3__Impl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -344,13 +388,24 @@ rule__TIntegerConstant__Group__0
 		int stackSize = keepStackSize();
     }
 :
+	rule__TIntegerConstant__Group__0__Impl
+	rule__TIntegerConstant__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TIntegerConstant__Group__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getTIntegerConstantAccess().getAnnotationsAssignment_0()); }
 (rule__TIntegerConstant__AnnotationsAssignment_0)*
 { after(grammarAccess.getTIntegerConstantAccess().getAnnotationsAssignment_0()); }
 )
 
-	rule__TIntegerConstant__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -358,6 +413,18 @@ finally {
 
 
 rule__TIntegerConstant__Group__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__TIntegerConstant__Group__1__Impl
+	rule__TIntegerConstant__Group__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TIntegerConstant__Group__1__Impl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -370,7 +437,6 @@ rule__TIntegerConstant__Group__1
 { after(grammarAccess.getTIntegerConstantAccess().getConstantKeyword_1()); }
 )
 
-	rule__TIntegerConstant__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -378,6 +444,18 @@ finally {
 
 
 rule__TIntegerConstant__Group__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__TIntegerConstant__Group__2__Impl
+	rule__TIntegerConstant__Group__3
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TIntegerConstant__Group__2__Impl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -390,7 +468,6 @@ rule__TIntegerConstant__Group__2
 { after(grammarAccess.getTIntegerConstantAccess().getIntegerKeyword_2()); }
 )
 
-	rule__TIntegerConstant__Group__3
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -398,6 +475,17 @@ finally {
 
 
 rule__TIntegerConstant__Group__3
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__TIntegerConstant__Group__3__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TIntegerConstant__Group__3__Impl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -427,13 +515,24 @@ rule__TBooleanConstant__Group__0
 		int stackSize = keepStackSize();
     }
 :
+	rule__TBooleanConstant__Group__0__Impl
+	rule__TBooleanConstant__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TBooleanConstant__Group__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getTBooleanConstantAccess().getAnnotationsAssignment_0()); }
 (rule__TBooleanConstant__AnnotationsAssignment_0)*
 { after(grammarAccess.getTBooleanConstantAccess().getAnnotationsAssignment_0()); }
 )
 
-	rule__TBooleanConstant__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -441,6 +540,18 @@ finally {
 
 
 rule__TBooleanConstant__Group__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__TBooleanConstant__Group__1__Impl
+	rule__TBooleanConstant__Group__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TBooleanConstant__Group__1__Impl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -453,7 +564,6 @@ rule__TBooleanConstant__Group__1
 { after(grammarAccess.getTBooleanConstantAccess().getConstantKeyword_1()); }
 )
 
-	rule__TBooleanConstant__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -461,6 +571,18 @@ finally {
 
 
 rule__TBooleanConstant__Group__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__TBooleanConstant__Group__2__Impl
+	rule__TBooleanConstant__Group__3
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TBooleanConstant__Group__2__Impl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -473,7 +595,6 @@ rule__TBooleanConstant__Group__2
 { after(grammarAccess.getTBooleanConstantAccess().getBooleanKeyword_2()); }
 )
 
-	rule__TBooleanConstant__Group__3
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -481,6 +602,17 @@ finally {
 
 
 rule__TBooleanConstant__Group__3
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__TBooleanConstant__Group__3__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TBooleanConstant__Group__3__Impl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -510,6 +642,18 @@ rule__TAnnotation__Group__0
 		int stackSize = keepStackSize();
     }
 :
+	rule__TAnnotation__Group__0__Impl
+	rule__TAnnotation__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TAnnotation__Group__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getTAnnotationAccess().getDescKeyword_0()); }
 
@@ -518,7 +662,6 @@ rule__TAnnotation__Group__0
 { after(grammarAccess.getTAnnotationAccess().getDescKeyword_0()); }
 )
 
-	rule__TAnnotation__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -526,6 +669,17 @@ finally {
 
 
 rule__TAnnotation__Group__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__TAnnotation__Group__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TAnnotation__Group__1__Impl
     @init {
 		int stackSize = keepStackSize();
     }

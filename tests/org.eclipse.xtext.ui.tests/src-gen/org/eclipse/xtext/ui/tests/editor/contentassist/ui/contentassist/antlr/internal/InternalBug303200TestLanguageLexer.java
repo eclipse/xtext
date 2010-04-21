@@ -217,10 +217,10 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:2378:9: ( ( 'a' .. 'z' | 'A' .. 'Z' )+ )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:2378:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3214:9: ( ( 'a' .. 'z' | 'A' .. 'Z' )+ )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3214:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:2378:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3214:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
             int cnt1=0;
             loop1:
             do {
@@ -273,10 +273,10 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:2380:9: ( ( ' ' | '\\t' )+ )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:2380:11: ( ' ' | '\\t' )+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3216:9: ( ( ' ' | '\\t' )+ )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3216:11: ( ' ' | '\\t' )+
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:2380:11: ( ' ' | '\\t' )+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3216:11: ( ' ' | '\\t' )+
             int cnt2=0;
             loop2:
             do {
@@ -329,8 +329,8 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
     public final void mRULE_LT() throws RecognitionException {
         try {
             int _type = RULE_LT;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:2382:9: ( ( '\\r' | '\\n' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:2382:11: ( '\\r' | '\\n' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3218:9: ( ( '\\r' | '\\n' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3218:11: ( '\\r' | '\\n' )
             {
             if ( input.LA(1)=='\n'||input.LA(1)=='\r' ) {
                 input.consume();

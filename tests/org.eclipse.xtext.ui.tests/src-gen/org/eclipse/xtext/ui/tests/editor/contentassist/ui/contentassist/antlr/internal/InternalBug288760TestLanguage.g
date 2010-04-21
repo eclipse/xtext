@@ -143,13 +143,24 @@ rule__WorkflowElement__Group_0__0
 		int stackSize = keepStackSize();
     }
 :
+	rule__WorkflowElement__Group_0__0__Impl
+	rule__WorkflowElement__Group_0__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__WorkflowElement__Group_0__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getWorkflowElementAccess().getNameAssignment_0_0()); }
 (rule__WorkflowElement__NameAssignment_0_0)
 { after(grammarAccess.getWorkflowElementAccess().getNameAssignment_0_0()); }
 )
 
-	rule__WorkflowElement__Group_0__1
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -161,13 +172,24 @@ rule__WorkflowElement__Group_0__1
 		int stackSize = keepStackSize();
     }
 :
+	rule__WorkflowElement__Group_0__1__Impl
+	rule__WorkflowElement__Group_0__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__WorkflowElement__Group_0__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getWorkflowElementAccess().getAttributesAssignment_0_1()); }
 (rule__WorkflowElement__AttributesAssignment_0_1)*
 { after(grammarAccess.getWorkflowElementAccess().getAttributesAssignment_0_1()); }
 )
 
-	rule__WorkflowElement__Group_0__2
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -175,6 +197,17 @@ finally {
 
 
 rule__WorkflowElement__Group_0__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__WorkflowElement__Group_0__2__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__WorkflowElement__Group_0__2__Impl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -202,13 +235,24 @@ rule__WorkflowElement__Group_1__0
 		int stackSize = keepStackSize();
     }
 :
+	rule__WorkflowElement__Group_1__0__Impl
+	rule__WorkflowElement__Group_1__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__WorkflowElement__Group_1__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getWorkflowElementAccess().getNameAssignment_1_0()); }
 (rule__WorkflowElement__NameAssignment_1_0)
 { after(grammarAccess.getWorkflowElementAccess().getNameAssignment_1_0()); }
 )
 
-	rule__WorkflowElement__Group_1__1
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -220,13 +264,24 @@ rule__WorkflowElement__Group_1__1
 		int stackSize = keepStackSize();
     }
 :
+	rule__WorkflowElement__Group_1__1__Impl
+	rule__WorkflowElement__Group_1__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__WorkflowElement__Group_1__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getWorkflowElementAccess().getAttributesAssignment_1_1()); }
 (rule__WorkflowElement__AttributesAssignment_1_1)*
 { after(grammarAccess.getWorkflowElementAccess().getAttributesAssignment_1_1()); }
 )
 
-	rule__WorkflowElement__Group_1__2
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -238,13 +293,24 @@ rule__WorkflowElement__Group_1__2
 		int stackSize = keepStackSize();
     }
 :
+	rule__WorkflowElement__Group_1__2__Impl
+	rule__WorkflowElement__Group_1__3
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__WorkflowElement__Group_1__2__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getWorkflowElementAccess().getGTTerminalRuleCall_1_2()); }
 	RULE_GT
 { after(grammarAccess.getWorkflowElementAccess().getGTTerminalRuleCall_1_2()); }
 )
 
-	rule__WorkflowElement__Group_1__3
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -256,13 +322,24 @@ rule__WorkflowElement__Group_1__3
 		int stackSize = keepStackSize();
     }
 :
+	rule__WorkflowElement__Group_1__3__Impl
+	rule__WorkflowElement__Group_1__4
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__WorkflowElement__Group_1__3__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getWorkflowElementAccess().getChildrenAssignment_1_3()); }
 (rule__WorkflowElement__ChildrenAssignment_1_3)*
 { after(grammarAccess.getWorkflowElementAccess().getChildrenAssignment_1_3()); }
 )
 
-	rule__WorkflowElement__Group_1__4
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -270,6 +347,17 @@ finally {
 
 
 rule__WorkflowElement__Group_1__4
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__WorkflowElement__Group_1__4__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__WorkflowElement__Group_1__4__Impl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -301,13 +389,24 @@ rule__Attribute__Group__0
 		int stackSize = keepStackSize();
     }
 :
+	rule__Attribute__Group__0__Impl
+	rule__Attribute__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Attribute__Group__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getAttributeAccess().getNameAssignment_0()); }
 (rule__Attribute__NameAssignment_0)
 { after(grammarAccess.getAttributeAccess().getNameAssignment_0()); }
 )
 
-	rule__Attribute__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -319,13 +418,24 @@ rule__Attribute__Group__1
 		int stackSize = keepStackSize();
     }
 :
+	rule__Attribute__Group__1__Impl
+	rule__Attribute__Group__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Attribute__Group__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getAttributeAccess().getEQTerminalRuleCall_1()); }
 	RULE_EQ
 { after(grammarAccess.getAttributeAccess().getEQTerminalRuleCall_1()); }
 )
 
-	rule__Attribute__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -333,6 +443,17 @@ finally {
 
 
 rule__Attribute__Group__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__Attribute__Group__2__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Attribute__Group__2__Impl
     @init {
 		int stackSize = keepStackSize();
     }

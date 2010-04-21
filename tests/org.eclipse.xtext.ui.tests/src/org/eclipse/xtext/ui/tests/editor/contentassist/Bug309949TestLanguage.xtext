@@ -1,0 +1,108 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+grammar org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage with org.eclipse.xtext.common.Terminals
+
+generate bug309949TestLanguage "http://www.eclipse.org/xtext/ui/common/tests/2010/bug309949TestLanguage"
+
+Model: 
+  {Model} 
+  (
+	"#1*" "{"
+	   (errors+=Error_1)*
+	   (operations+=Operation_1)*    
+	   "}"
+  | "#1+" "{"
+	   (errors+=Error_1)+
+	   (operations+=Operation_1)+    
+	   "}"
+  | "#2*" "{"
+	   (errors+=Error_2)*
+	   (operations+=Operation_2)*    
+	   "}"
+  | "#2+" name=ID "{"
+	   (errors+=Error_2)+
+	   (operations+=Operation_2)+    
+	   "}"
+  | "#3*" name=ID "{"
+	   (errors+=Error_3)*
+	   (operations+=Operation_3)*    
+	   "}"
+  | "#3+" name=ID "{"
+	   (errors+=Error_3)+
+	   (operations+=Operation_3)+    
+	   "}"
+  | "#4*" name=ID "{"
+	   (errors+=Error_4)*
+	   (operations+=Operation_4)*    
+	   "}"
+  | "#4+" name=ID "{"
+	   (errors+=Error_4)+
+	   (operations+=Operation_4)+    
+	   "}"
+  | "#5*" name=ID "{"
+	   (errors+=Error_5)*
+	   (operations+=Operation_5)*    
+	   "}"
+  | "#5+" name=ID "{"
+	   (errors+=Error_5)+
+	   (operations+=Operation_5)+
+	   "}"
+  )
+;
+
+Error_1 returns Error:
+   (annotations+=Annotation)*
+   "error" name = ID
+;
+
+Operation_1 returns Operation:
+   (annotations+=Annotation)*
+   "operation" name = ID
+;
+
+Error_2 returns Error:
+   (annotations+=Annotation)+
+   "error" name = ID
+;
+
+Operation_2 returns Operation:
+   (annotations+=Annotation)+
+   "operation" name = ID
+;
+
+Error_3 returns Error:
+   (annotations+=Annotation)?
+   "error" name = ID
+;
+
+Operation_3 returns Operation:
+   (annotations+=Annotation)?
+   "operation" name = ID
+;
+
+Error_4 returns Error:
+   (annotations+=Annotation)
+   "error" name = ID
+;
+
+Operation_4 returns Operation:
+   (annotations+=Annotation)
+   "operation" name = ID
+;
+
+Error_5 returns Error:
+   "error" name = ID
+;
+
+Operation_5 returns Operation:
+   "operation" name = ID
+;
+
+Annotation:
+   "@uuid" name = ID
+;

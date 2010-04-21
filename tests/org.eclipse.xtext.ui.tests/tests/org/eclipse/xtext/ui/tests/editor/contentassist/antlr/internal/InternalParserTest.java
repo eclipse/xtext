@@ -12,7 +12,6 @@ import java.util.Set;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.RecognitionException;
-import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ObservableXtextTokenStream;
 import org.eclipse.xtext.ui.tests.editor.contentassist.antlr.AbstractParserTest;
@@ -28,11 +27,12 @@ public class InternalParserTest extends AbstractParserTest {
 	protected InternalXtextGrammarUiTestLanguageParser createParser(String input) {
 		CharStream stream = new ANTLRStringStream(input);
 		InternalXtextGrammarUiTestLanguageLexer lexer = new InternalXtextGrammarUiTestLanguageLexer(stream);
-		ObservableXtextTokenStream tokenStream = new ObservableXtextTokenStream(lexer, get(ITokenDefProvider.class));
+		InternalXtextGrammarUiTestLanguageParser result = new InternalXtextGrammarUiTestLanguageParser(null);
+		ObservableXtextTokenStream tokenStream = new ObservableXtextTokenStream(lexer, result);
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		InternalXtextGrammarUiTestLanguageParser result = new InternalXtextGrammarUiTestLanguageParser(tokenStream);
 		tokenStream.setListener(result);
 		result.setGrammarAccess(grammarAccess);
+		result.setTokenStream(tokenStream);
 		return result;
 	}
 	

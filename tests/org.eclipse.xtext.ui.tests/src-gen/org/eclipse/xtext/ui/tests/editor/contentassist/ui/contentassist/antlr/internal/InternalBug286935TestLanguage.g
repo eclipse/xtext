@@ -190,13 +190,24 @@ rule__State__Group__0
 		int stackSize = keepStackSize();
     }
 :
+	rule__State__Group__0__Impl
+	rule__State__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__State__Group__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getStateAccess().getAlternatives_0()); }
 (rule__State__Alternatives_0)?
 { after(grammarAccess.getStateAccess().getAlternatives_0()); }
 )
 
-	rule__State__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -204,6 +215,18 @@ finally {
 
 
 rule__State__Group__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__State__Group__1__Impl
+	rule__State__Group__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__State__Group__1__Impl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -216,7 +239,6 @@ rule__State__Group__1
 { after(grammarAccess.getStateAccess().getStateKeyword_1()); }
 )
 
-	rule__State__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -228,13 +250,24 @@ rule__State__Group__2
 		int stackSize = keepStackSize();
     }
 :
+	rule__State__Group__2__Impl
+	rule__State__Group__3
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__State__Group__2__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getStateAccess().getStateNameAssignment_2()); }
 (rule__State__StateNameAssignment_2)?
 { after(grammarAccess.getStateAccess().getStateNameAssignment_2()); }
 )
 
-	rule__State__Group__3
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -242,6 +275,17 @@ finally {
 
 
 rule__State__Group__3
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__State__Group__3__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__State__Group__3__Impl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -271,13 +315,24 @@ rule__State__Group_0_3__0
 		int stackSize = keepStackSize();
     }
 :
+	rule__State__Group_0_3__0__Impl
+	rule__State__Group_0_3__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__State__Group_0_3__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getStateAccess().getIsInitialAssignment_0_3_0()); }
 (rule__State__IsInitialAssignment_0_3_0)
 { after(grammarAccess.getStateAccess().getIsInitialAssignment_0_3_0()); }
 )
 
-	rule__State__Group_0_3__1
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -285,6 +340,17 @@ finally {
 
 
 rule__State__Group_0_3__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__State__Group_0_3__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__State__Group_0_3__1__Impl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -310,13 +376,24 @@ rule__State__Group_0_4__0
 		int stackSize = keepStackSize();
     }
 :
+	rule__State__Group_0_4__0__Impl
+	rule__State__Group_0_4__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__State__Group_0_4__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getStateAccess().getIsInitialAssignment_0_4_0()); }
 (rule__State__IsInitialAssignment_0_4_0)
 { after(grammarAccess.getStateAccess().getIsInitialAssignment_0_4_0()); }
 )
 
-	rule__State__Group_0_4__1
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -328,13 +405,24 @@ rule__State__Group_0_4__1
 		int stackSize = keepStackSize();
     }
 :
+	rule__State__Group_0_4__1__Impl
+	rule__State__Group_0_4__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__State__Group_0_4__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getStateAccess().getStateKindAssignment_0_4_1()); }
 (rule__State__StateKindAssignment_0_4_1)
 { after(grammarAccess.getStateAccess().getStateKindAssignment_0_4_1()); }
 )
 
-	rule__State__Group_0_4__2
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -342,6 +430,17 @@ finally {
 
 
 rule__State__Group_0_4__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__State__Group_0_4__2__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__State__Group_0_4__2__Impl
     @init {
 		int stackSize = keepStackSize();
     }

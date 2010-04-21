@@ -219,9 +219,9 @@ protected class ProgramDirective_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getStatementAccess().getExpressionStatementAction_1_0().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getBlockAccess().getBlockAction_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getFunctionDefinitionRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getBlockAccess().getBlockAction_0().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getStatementAccess().getExpressionStatementAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -291,8 +291,8 @@ protected class ProgramDirective_StatementParserRuleCall_1 extends RuleCallToken
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getStatementAccess().getExpressionStatementAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getBlockAccess().getBlockAction_0().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getBlockAccess().getBlockAction_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getStatementAccess().getExpressionStatementAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -1237,8 +1237,8 @@ protected class Statement_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getStatementAccess().getExpressionStatementAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getBlockAccess().getBlockAction_0().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getBlockAccess().getBlockAction_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getStatementAccess().getExpressionStatementAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -1471,10 +1471,10 @@ protected class PostfixExpression_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getFunctionExpressionAction_1_0().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getPostfixExpressionAccess().getInvocationExpressionAction_1_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getPostfixExpressionAccess().getPostfixExpressionExpressionAction_1_0_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getPostfixExpressionAccess().getInvocationExpressionAction_1_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getIdentifierAction_0_0().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getIdentifierAction_0_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getFunctionExpressionAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -1503,8 +1503,8 @@ protected class PostfixExpression_PrimaryExpressionParserRuleCall_0 extends Rule
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getFunctionExpressionAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getIdentifierAction_0_0().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getIdentifierAction_0_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getFunctionExpressionAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -1547,8 +1547,8 @@ protected class PostfixExpression_Alternatives_1 extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getPostfixExpressionAccess().getPostfixExpressionExpressionAction_1_0_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getPostfixExpressionAccess().getInvocationExpressionAction_1_1_0().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getPostfixExpressionAccess().getInvocationExpressionAction_1_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getPostfixExpressionAccess().getPostfixExpressionExpressionAction_1_0_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -2281,8 +2281,8 @@ protected class PrimaryExpression_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getFunctionExpressionAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getIdentifierAction_0_0().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getIdentifierAction_0_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getFunctionExpressionAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

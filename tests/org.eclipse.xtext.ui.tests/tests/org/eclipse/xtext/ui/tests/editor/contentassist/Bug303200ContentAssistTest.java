@@ -44,8 +44,19 @@ public class Bug303200ContentAssistTest extends AbstractContentAssistProcessorTe
 				);
 	}
 	
-	public void testAfterFunction() throws Exception {
+	public void testAfterFunction_01() throws Exception {
 		newBuilder().append("function f() {}").assertText(
+				"function", // FunctionDefinition
+				"Ident", // Attribute
+				"[", // Attribute
+				"{", // Block
+				"Name", // PrimaryExpression
+				"}" // closing brace
+				);
+	}
+	
+	public void testAfterFunction_02() throws Exception {
+		newBuilder().appendNl("function f() {}").assertText(
 				"function", // FunctionDefinition
 				"Ident", // Attribute
 				"[", // Attribute
@@ -53,7 +64,6 @@ public class Bug303200ContentAssistTest extends AbstractContentAssistProcessorTe
 				"Name" // PrimaryExpression
 				);
 	}
-	
 	
 	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
 		return super.newBuilder(getSetup());

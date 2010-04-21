@@ -84,6 +84,10 @@ Workflow {
 			fragment = @TestLanguagesFragmentsAntlrCA {}
 		}
 		language = { 
+			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug309949TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
 			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}

@@ -172,5 +172,8 @@ Export-Package: org.eclipse.xtext.ui.tests,
  org.eclipse.xtext.ui.tests.editor.bracketmatching.parser.antlr,
  org.eclipse.xtext.ui.tests.editor.bracketmatching.parser.antlr.internal,
  org.eclipse.xtext.ui.tests.editor.bracketmatching.validation,
- org.eclipse.xtext.ui.tests.editor.bracketmatching.ui.contentassist.antlr
+ org.eclipse.xtext.ui.tests.editor.bracketmatching.ui.contentassist.antlr,
+ org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage,
+ org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.impl,
+ org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.util
 

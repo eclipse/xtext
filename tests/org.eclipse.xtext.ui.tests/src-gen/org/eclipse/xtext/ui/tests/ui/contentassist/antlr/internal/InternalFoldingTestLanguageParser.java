@@ -231,25 +231,20 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start rule__Element__Group__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:119:1: rule__Element__Group__0 : ( 'element' ) rule__Element__Group__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:119:1: rule__Element__Group__0 : rule__Element__Group__0__Impl rule__Element__Group__1 ;
     public final void rule__Element__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:123:1: ( ( 'element' ) rule__Element__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:124:1: ( 'element' ) rule__Element__Group__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:123:1: ( rule__Element__Group__0__Impl rule__Element__Group__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:124:2: rule__Element__Group__0__Impl rule__Element__Group__1
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:124:1: ( 'element' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:125:1: 'element'
-            {
-             before(grammarAccess.getElementAccess().getElementKeyword_0()); 
-            match(input,11,FollowSets000.FOLLOW_11_in_rule__Element__Group__0194); 
-             after(grammarAccess.getElementAccess().getElementKeyword_0()); 
+            pushFollow(FollowSets000.FOLLOW_rule__Element__Group__0__Impl_in_rule__Element__Group__0189);
+            rule__Element__Group__0__Impl();
+            _fsp--;
 
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Element__Group__1_in_rule__Element__Group__0204);
+            pushFollow(FollowSets000.FOLLOW_rule__Element__Group__1_in_rule__Element__Group__0192);
             rule__Element__Group__1();
             _fsp--;
 
@@ -271,35 +266,58 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
     // $ANTLR end rule__Element__Group__0
 
 
+    // $ANTLR start rule__Element__Group__0__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:131:1: rule__Element__Group__0__Impl : ( 'element' ) ;
+    public final void rule__Element__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:135:1: ( ( 'element' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:136:1: ( 'element' )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:136:1: ( 'element' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:137:1: 'element'
+            {
+             before(grammarAccess.getElementAccess().getElementKeyword_0()); 
+            match(input,11,FollowSets000.FOLLOW_11_in_rule__Element__Group__0__Impl220); 
+             after(grammarAccess.getElementAccess().getElementKeyword_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Element__Group__0__Impl
+
+
     // $ANTLR start rule__Element__Group__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:139:1: rule__Element__Group__1 : ( ( rule__Element__NameAssignment_1 ) ) rule__Element__Group__2 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:150:1: rule__Element__Group__1 : rule__Element__Group__1__Impl rule__Element__Group__2 ;
     public final void rule__Element__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:143:1: ( ( ( rule__Element__NameAssignment_1 ) ) rule__Element__Group__2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:144:1: ( ( rule__Element__NameAssignment_1 ) ) rule__Element__Group__2
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:154:1: ( rule__Element__Group__1__Impl rule__Element__Group__2 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:155:2: rule__Element__Group__1__Impl rule__Element__Group__2
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:144:1: ( ( rule__Element__NameAssignment_1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:145:1: ( rule__Element__NameAssignment_1 )
-            {
-             before(grammarAccess.getElementAccess().getNameAssignment_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:146:1: ( rule__Element__NameAssignment_1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:146:2: rule__Element__NameAssignment_1
-            {
-            pushFollow(FollowSets000.FOLLOW_rule__Element__NameAssignment_1_in_rule__Element__Group__1232);
-            rule__Element__NameAssignment_1();
+            pushFollow(FollowSets000.FOLLOW_rule__Element__Group__1__Impl_in_rule__Element__Group__1251);
+            rule__Element__Group__1__Impl();
             _fsp--;
 
-
-            }
-
-             after(grammarAccess.getElementAccess().getNameAssignment_1()); 
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Element__Group__2_in_rule__Element__Group__1241);
+            pushFollow(FollowSets000.FOLLOW_rule__Element__Group__2_in_rule__Element__Group__1254);
             rule__Element__Group__2();
             _fsp--;
 
@@ -321,53 +339,67 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
     // $ANTLR end rule__Element__Group__1
 
 
+    // $ANTLR start rule__Element__Group__1__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:162:1: rule__Element__Group__1__Impl : ( ( rule__Element__NameAssignment_1 ) ) ;
+    public final void rule__Element__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:166:1: ( ( ( rule__Element__NameAssignment_1 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:167:1: ( ( rule__Element__NameAssignment_1 ) )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:167:1: ( ( rule__Element__NameAssignment_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:168:1: ( rule__Element__NameAssignment_1 )
+            {
+             before(grammarAccess.getElementAccess().getNameAssignment_1()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:169:1: ( rule__Element__NameAssignment_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:169:2: rule__Element__NameAssignment_1
+            {
+            pushFollow(FollowSets000.FOLLOW_rule__Element__NameAssignment_1_in_rule__Element__Group__1__Impl281);
+            rule__Element__NameAssignment_1();
+            _fsp--;
+
+
+            }
+
+             after(grammarAccess.getElementAccess().getNameAssignment_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Element__Group__1__Impl
+
+
     // $ANTLR start rule__Element__Group__2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:157:1: rule__Element__Group__2 : ( ( rule__Element__SubelementsAssignment_2 )* ) rule__Element__Group__3 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:179:1: rule__Element__Group__2 : rule__Element__Group__2__Impl rule__Element__Group__3 ;
     public final void rule__Element__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:161:1: ( ( ( rule__Element__SubelementsAssignment_2 )* ) rule__Element__Group__3 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:162:1: ( ( rule__Element__SubelementsAssignment_2 )* ) rule__Element__Group__3
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:183:1: ( rule__Element__Group__2__Impl rule__Element__Group__3 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:184:2: rule__Element__Group__2__Impl rule__Element__Group__3
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:162:1: ( ( rule__Element__SubelementsAssignment_2 )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:163:1: ( rule__Element__SubelementsAssignment_2 )*
-            {
-             before(grammarAccess.getElementAccess().getSubelementsAssignment_2()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:164:1: ( rule__Element__SubelementsAssignment_2 )*
-            loop2:
-            do {
-                int alt2=2;
-                int LA2_0 = input.LA(1);
+            pushFollow(FollowSets000.FOLLOW_rule__Element__Group__2__Impl_in_rule__Element__Group__2311);
+            rule__Element__Group__2__Impl();
+            _fsp--;
 
-                if ( (LA2_0==11) ) {
-                    alt2=1;
-                }
-
-
-                switch (alt2) {
-            	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:164:2: rule__Element__SubelementsAssignment_2
-            	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__Element__SubelementsAssignment_2_in_rule__Element__Group__2269);
-            	    rule__Element__SubelementsAssignment_2();
-            	    _fsp--;
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop2;
-                }
-            } while (true);
-
-             after(grammarAccess.getElementAccess().getSubelementsAssignment_2()); 
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Element__Group__3_in_rule__Element__Group__2279);
+            pushFollow(FollowSets000.FOLLOW_rule__Element__Group__3_in_rule__Element__Group__2314);
             rule__Element__Group__3();
             _fsp--;
 
@@ -389,24 +421,83 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
     // $ANTLR end rule__Element__Group__2
 
 
+    // $ANTLR start rule__Element__Group__2__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:191:1: rule__Element__Group__2__Impl : ( ( rule__Element__SubelementsAssignment_2 )* ) ;
+    public final void rule__Element__Group__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:195:1: ( ( ( rule__Element__SubelementsAssignment_2 )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:196:1: ( ( rule__Element__SubelementsAssignment_2 )* )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:196:1: ( ( rule__Element__SubelementsAssignment_2 )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:197:1: ( rule__Element__SubelementsAssignment_2 )*
+            {
+             before(grammarAccess.getElementAccess().getSubelementsAssignment_2()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:198:1: ( rule__Element__SubelementsAssignment_2 )*
+            loop2:
+            do {
+                int alt2=2;
+                int LA2_0 = input.LA(1);
+
+                if ( (LA2_0==11) ) {
+                    alt2=1;
+                }
+
+
+                switch (alt2) {
+            	case 1 :
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:198:2: rule__Element__SubelementsAssignment_2
+            	    {
+            	    pushFollow(FollowSets000.FOLLOW_rule__Element__SubelementsAssignment_2_in_rule__Element__Group__2__Impl341);
+            	    rule__Element__SubelementsAssignment_2();
+            	    _fsp--;
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop2;
+                }
+            } while (true);
+
+             after(grammarAccess.getElementAccess().getSubelementsAssignment_2()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Element__Group__2__Impl
+
+
     // $ANTLR start rule__Element__Group__3
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:175:1: rule__Element__Group__3 : ( 'end' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:208:1: rule__Element__Group__3 : rule__Element__Group__3__Impl ;
     public final void rule__Element__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:179:1: ( ( 'end' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:180:1: ( 'end' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:212:1: ( rule__Element__Group__3__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:213:2: rule__Element__Group__3__Impl
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:180:1: ( 'end' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:181:1: 'end'
-            {
-             before(grammarAccess.getElementAccess().getEndKeyword_3()); 
-            match(input,12,FollowSets000.FOLLOW_12_in_rule__Element__Group__3308); 
-             after(grammarAccess.getElementAccess().getEndKeyword_3()); 
-
-            }
+            pushFollow(FollowSets000.FOLLOW_rule__Element__Group__3__Impl_in_rule__Element__Group__3372);
+            rule__Element__Group__3__Impl();
+            _fsp--;
 
 
             }
@@ -426,21 +517,58 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
     // $ANTLR end rule__Element__Group__3
 
 
+    // $ANTLR start rule__Element__Group__3__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:219:1: rule__Element__Group__3__Impl : ( 'end' ) ;
+    public final void rule__Element__Group__3__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:223:1: ( ( 'end' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:224:1: ( 'end' )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:224:1: ( 'end' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:225:1: 'end'
+            {
+             before(grammarAccess.getElementAccess().getEndKeyword_3()); 
+            match(input,12,FollowSets000.FOLLOW_12_in_rule__Element__Group__3__Impl400); 
+             after(grammarAccess.getElementAccess().getEndKeyword_3()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Element__Group__3__Impl
+
+
     // $ANTLR start rule__FoldingModel__ElementsAssignment
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:203:1: rule__FoldingModel__ElementsAssignment : ( ruleElement ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:247:1: rule__FoldingModel__ElementsAssignment : ( ruleElement ) ;
     public final void rule__FoldingModel__ElementsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:207:1: ( ( ruleElement ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:208:1: ( ruleElement )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:251:1: ( ( ruleElement ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:252:1: ( ruleElement )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:208:1: ( ruleElement )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:209:1: ruleElement
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:252:1: ( ruleElement )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:253:1: ruleElement
             {
              before(grammarAccess.getFoldingModelAccess().getElementsElementParserRuleCall_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleElement_in_rule__FoldingModel__ElementsAssignment352);
+            pushFollow(FollowSets000.FOLLOW_ruleElement_in_rule__FoldingModel__ElementsAssignment444);
             ruleElement();
             _fsp--;
 
@@ -467,20 +595,20 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start rule__Element__NameAssignment_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:218:1: rule__Element__NameAssignment_1 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:262:1: rule__Element__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Element__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:222:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:223:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:266:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:267:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:223:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:224:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:267:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:268:1: RULE_ID
             {
              before(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Element__NameAssignment_1383); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Element__NameAssignment_1475); 
              after(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -504,20 +632,20 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start rule__Element__SubelementsAssignment_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:233:1: rule__Element__SubelementsAssignment_2 : ( ruleElement ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:277:1: rule__Element__SubelementsAssignment_2 : ( ruleElement ) ;
     public final void rule__Element__SubelementsAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:237:1: ( ( ruleElement ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:238:1: ( ruleElement )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:281:1: ( ( ruleElement ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:282:1: ( ruleElement )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:238:1: ( ruleElement )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:239:1: ruleElement
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:282:1: ( ruleElement )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalFoldingTestLanguage.g:283:1: ruleElement
             {
              before(grammarAccess.getElementAccess().getSubelementsElementParserRuleCall_2_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleElement_in_rule__Element__SubelementsAssignment_2414);
+            pushFollow(FollowSets000.FOLLOW_ruleElement_in_rule__Element__SubelementsAssignment_2506);
             ruleElement();
             _fsp--;
 
@@ -553,16 +681,20 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalContentAs
         public static final BitSet FOLLOW_ruleElement_in_entryRuleElement122 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleElement129 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Element__Group__0_in_ruleElement155 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_rule__Element__Group__0194 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_rule__Element__Group__1_in_rule__Element__Group__0204 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Element__NameAssignment_1_in_rule__Element__Group__1232 = new BitSet(new long[]{0x0000000000001800L});
-        public static final BitSet FOLLOW_rule__Element__Group__2_in_rule__Element__Group__1241 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Element__SubelementsAssignment_2_in_rule__Element__Group__2269 = new BitSet(new long[]{0x0000000000001800L});
-        public static final BitSet FOLLOW_rule__Element__Group__3_in_rule__Element__Group__2279 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_rule__Element__Group__3308 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleElement_in_rule__FoldingModel__ElementsAssignment352 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Element__NameAssignment_1383 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleElement_in_rule__Element__SubelementsAssignment_2414 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Element__Group__0__Impl_in_rule__Element__Group__0189 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__Element__Group__1_in_rule__Element__Group__0192 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_rule__Element__Group__0__Impl220 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Element__Group__1__Impl_in_rule__Element__Group__1251 = new BitSet(new long[]{0x0000000000001800L});
+        public static final BitSet FOLLOW_rule__Element__Group__2_in_rule__Element__Group__1254 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Element__NameAssignment_1_in_rule__Element__Group__1__Impl281 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Element__Group__2__Impl_in_rule__Element__Group__2311 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_rule__Element__Group__3_in_rule__Element__Group__2314 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Element__SubelementsAssignment_2_in_rule__Element__Group__2__Impl341 = new BitSet(new long[]{0x0000000000000802L});
+        public static final BitSet FOLLOW_rule__Element__Group__3__Impl_in_rule__Element__Group__3372 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_rule__Element__Group__3__Impl400 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleElement_in_rule__FoldingModel__ElementsAssignment444 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Element__NameAssignment_1475 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleElement_in_rule__Element__SubelementsAssignment_2506 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

@@ -229,13 +229,24 @@ rule__Elem2__Group__0
 		int stackSize = keepStackSize();
     }
 :
+	rule__Elem2__Group__0__Impl
+	rule__Elem2__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Elem2__Group__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
 (
 { before(grammarAccess.getElem2Access().getValueAssignment_0()); }
 (rule__Elem2__ValueAssignment_0)
 { after(grammarAccess.getElem2Access().getValueAssignment_0()); }
 )
 
-	rule__Elem2__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -243,6 +254,18 @@ finally {
 
 
 rule__Elem2__Group__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__Elem2__Group__1__Impl
+	rule__Elem2__Group__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Elem2__Group__1__Impl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -255,7 +278,6 @@ rule__Elem2__Group__1
 { after(grammarAccess.getElem2Access().getFooKeyword_1()); }
 )
 
-	rule__Elem2__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -263,6 +285,18 @@ finally {
 
 
 rule__Elem2__Group__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__Elem2__Group__2__Impl
+	rule__Elem2__Group__3
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Elem2__Group__2__Impl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -275,7 +309,6 @@ rule__Elem2__Group__2
 { after(grammarAccess.getElem2Access().getPercentSignKeyword_2()); }
 )
 
-	rule__Elem2__Group__3
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -283,6 +316,17 @@ finally {
 
 
 rule__Elem2__Group__3
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__Elem2__Group__3__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Elem2__Group__3__Impl
     @init {
 		int stackSize = keepStackSize();
     }

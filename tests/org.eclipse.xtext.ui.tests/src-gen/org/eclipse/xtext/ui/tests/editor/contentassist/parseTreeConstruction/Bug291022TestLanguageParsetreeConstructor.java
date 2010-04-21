@@ -688,8 +688,8 @@ protected class ModelAttribute_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getModelElementRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAttributeRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getAttributeRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getModelElementRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
