@@ -75,14 +75,14 @@ public class EncodingTest extends AbstractXtextTests {
 	}
 
 	public void testEncodingOption() throws Exception {
-		Map<String,String> isoOptions = Collections.singletonMap(XtextResource.OPTION_ENCODING, UTF_8);
+		Map<String,String> isoOptions = Collections.singletonMap(XtextResource.OPTION_ENCODING, ISO_8859_1);
 		Map<String,String> utfOptions = Collections.singletonMap(XtextResource.OPTION_ENCODING, UTF_8);
 		
 		assertFalse(Arrays.equals(utfBytes, isoBytes));
 		XtextResource resource = createXtextResource();
 		
 		resource.load(new ByteArrayInputStream(utfBytes), isoOptions);
-		assertFalse(resource.getErrors().isEmpty());
+		assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
 
 		resource.load(new ByteArrayInputStream(isoBytes), utfOptions);
 		assertFalse(resource.getErrors().isEmpty());
