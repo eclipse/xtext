@@ -10,8 +10,6 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.common,
  org.eclipse.xtext.common.parseTreeConstruction,
- org.eclipse.xtext.common.parser.packrat,
- org.eclipse.xtext.common.parser.packrat.consumers,
  org.eclipse.xtext.common.services,
  org.eclipse.xtext.concurrent,
  org.eclipse.xtext.conversion,
@@ -53,7 +51,9 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.util,
  org.eclipse.xtext.validation,
  org.eclipse.xtext.xtext,
- org.eclipse.xtext.xtext.ecoreInference
+ org.eclipse.xtext.xtext.ecoreInference,
+ org.eclipse.xtext.common.parser.packrat,
+ org.eclipse.xtext.common.parser.packrat.consumers
 Require-Bundle: org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.emf.ecore;bundle-version="2.5.0";visibility:=reexport,
  org.eclipse.xtext.util;bundle-version="1.0.0";visibility:=reexport,
@@ -70,4 +70,3 @@ Require-Bundle: org.eclipse.emf.ecore.xmi;visibility:=reexport,
 Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.xtext.internal.Activator
-
