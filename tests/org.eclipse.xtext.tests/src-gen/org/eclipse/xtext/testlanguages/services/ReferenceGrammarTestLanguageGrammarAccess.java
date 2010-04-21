@@ -242,7 +242,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final Keyword cWertROTKeyword_0_0 = (Keyword)cWertAlternatives_0.eContents().get(0);
 		private final Keyword cWertBLAUKeyword_0_1 = (Keyword)cWertAlternatives_0.eContents().get(1);
 		private final Keyword cWertGELBKeyword_0_2 = (Keyword)cWertAlternatives_0.eContents().get(2);
-		private final Keyword cWertGRNKeyword_0_3 = (Keyword)cWertAlternatives_0.eContents().get(3);
+		private final Keyword cWertGRÜNKeyword_0_3 = (Keyword)cWertAlternatives_0.eContents().get(3);
 		
 		//Farbe:
 		//  wert=( "ROT" | "BLAU" | "GELB" | "GRÜN" );
@@ -264,7 +264,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		public Keyword getWertGELBKeyword_0_2() { return cWertGELBKeyword_0_2; }
 
 		//"GRÜN"
-		public Keyword getWertGRNKeyword_0_3() { return cWertGRNKeyword_0_3; }
+		public Keyword getWertGRÜNKeyword_0_3() { return cWertGRÜNKeyword_0_3; }
 	}
 
 	public class FamilieElements extends AbstractParserRuleElementFinder {

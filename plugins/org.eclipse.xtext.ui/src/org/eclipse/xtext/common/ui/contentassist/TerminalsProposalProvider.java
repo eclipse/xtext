@@ -5,6 +5,7 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
@@ -14,9 +15,8 @@ import org.eclipse.xtext.util.Strings;
 /**
  * @author Sebastian Zarnekow
  */
-public class TerminalsProposalProvider extends org.eclipse.xtext.common.ui.contentassist.AbstractTerminalsProposalProvider {
+public class TerminalsProposalProvider extends AbstractJavaBasedContentProposalProvider {
 	
-	@Override
 	public void complete_ID(EObject model, RuleCall ruleCall, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (doCreateIdProposals()) {
@@ -65,7 +65,6 @@ public class TerminalsProposalProvider extends org.eclipse.xtext.common.ui.conte
 		return null;
 	}
 	
-	@Override
 	public void complete_STRING(EObject model, RuleCall ruleCall, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (doCreateStringProposals()) {
@@ -93,7 +92,6 @@ public class TerminalsProposalProvider extends org.eclipse.xtext.common.ui.conte
 		acceptor.accept(proposal);
 	}
 	
-	@Override
 	public void complete_INT(EObject model, RuleCall ruleCall, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		String feature = getAssignedFeature(ruleCall);
@@ -136,6 +134,22 @@ public class TerminalsProposalProvider extends org.eclipse.xtext.common.ui.conte
 			configurable.setSimpleLinkedMode(context.getViewer(), '\t', ' ');
 		}
 		acceptor.accept(proposal);
+	}
+
+	public void complete_ML_COMMENT(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// subclasses may override
+	}
+
+	public void complete_SL_COMMENT(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// subclasses may override
+	}
+
+	public void complete_WS(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// subclasses may override
+	}
+
+	public void complete_ANY_OTHER(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// subclasses may override
 	}
 
 }

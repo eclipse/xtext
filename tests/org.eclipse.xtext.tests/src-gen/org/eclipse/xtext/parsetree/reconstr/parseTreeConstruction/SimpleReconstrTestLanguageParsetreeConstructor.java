@@ -107,30 +107,30 @@ protected class Op_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLoop4Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTwoNumbersRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getOpAccess().getOpValuesAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getLoop3Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getMultiInheritanceBug280439Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getManyStringsRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTransient1Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getDuplicateBug284491Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getConsumed1Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getEmptyObjectBug284850Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTypeBug1AAccess().getTypeBug1AAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getEObjectRefRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getBooleanRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getTypeBug2AAccess().getTypeBug2AAction_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getRef2Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTypeBug2BAccess().getTypeBug2BAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getLoop1Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLoop3Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLoop2Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTransient1Rule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getSpareRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTypeBug1BAccess().getTypeBug1BAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getConsumed2Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTypeBug2AAccess().getTypeBug2AAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getLoopBug285452Rule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getTypeRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getLoop2Rule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getConsumed2Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getEmptyObjectBug284850Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getBooleanRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLoop4Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTypeBug2BAccess().getTypeBug2BAction_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTypeBug1BAccess().getTypeBug1BAction_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTwoNumbersRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLoop1Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getConsumed1Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLoopBug285452Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getDuplicateBug284491Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getManyStringsRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMultiInheritanceBug280439Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTypeBug1AAccess().getTypeBug1AAction_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getOpAccess().getOpValuesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getEObjectRefRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -337,30 +337,30 @@ protected class Term_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLoop4Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTwoNumbersRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getOpAccess().getOpValuesAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getLoop3Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getMultiInheritanceBug280439Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getManyStringsRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTransient1Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getDuplicateBug284491Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getConsumed1Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getEmptyObjectBug284850Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getEObjectRefRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTypeBug1AAccess().getTypeBug1AAction_0().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getTypeBug2AAccess().getTypeBug2AAction_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getRef2Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getBooleanRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTypeBug2BAccess().getTypeBug2BAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getLoop1Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLoop3Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLoop2Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTransient1Rule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getSpareRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTypeBug1BAccess().getTypeBug1BAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getConsumed2Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTypeBug2AAccess().getTypeBug2AAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getLoopBug285452Rule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getTypeRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getLoop2Rule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getConsumed2Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getEmptyObjectBug284850Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getBooleanRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLoop4Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTypeBug2BAccess().getTypeBug2BAction_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTypeBug1BAccess().getTypeBug1BAction_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTwoNumbersRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLoop1Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getConsumed1Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLoopBug285452Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getDuplicateBug284491Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getManyStringsRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMultiInheritanceBug280439Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTypeBug1AAccess().getTypeBug1AAction_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getOpAccess().getOpValuesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getEObjectRefRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -1168,8 +1168,8 @@ protected class Term_TypeBug305577_1ParserRuleCall_19 extends RuleCallToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTypeBug1AAccess().getTypeBug1AAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTypeBug1BAccess().getTypeBug1BAction_0().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getTypeBug1BAccess().getTypeBug1BAction_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTypeBug1AAccess().getTypeBug1AAction_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -1210,8 +1210,8 @@ protected class Term_TypeBug305577_2ParserRuleCall_20 extends RuleCallToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTypeBug2BAccess().getTypeBug2BAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTypeBug2AAccess().getTypeBug2AAction_0().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getTypeBug2AAccess().getTypeBug2AAction_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTypeBug2BAccess().getTypeBug2BAction_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -1348,30 +1348,30 @@ protected class Parens_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLoop4Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTwoNumbersRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getOpAccess().getOpValuesAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getLoop3Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getMultiInheritanceBug280439Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getManyStringsRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTransient1Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getDuplicateBug284491Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getConsumed1Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getEmptyObjectBug284850Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTypeBug1AAccess().getTypeBug1AAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getEObjectRefRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getTypeBug2AAccess().getTypeBug2AAction_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getRef2Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getBooleanRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTypeBug2BAccess().getTypeBug2BAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getLoop1Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLoop3Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLoop2Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTransient1Rule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getSpareRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTypeBug1BAccess().getTypeBug1BAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getConsumed2Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTypeBug2AAccess().getTypeBug2AAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getLoopBug285452Rule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getTypeRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getLoop2Rule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getConsumed2Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getEmptyObjectBug284850Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getBooleanRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLoop4Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTypeBug2BAccess().getTypeBug2BAction_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTypeBug1BAccess().getTypeBug1BAction_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTwoNumbersRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLoop1Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getConsumed1Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLoopBug285452Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getDuplicateBug284491Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getManyStringsRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMultiInheritanceBug280439Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTypeBug1AAccess().getTypeBug1AAction_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getOpAccess().getOpValuesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getEObjectRefRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -4968,8 +4968,8 @@ protected class AbstractMulti2_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getConcreteMultiRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAbstractMulti2Rule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getAbstractMulti2Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getConcreteMultiRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -5413,8 +5413,8 @@ protected class TypeBug305577_1_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTypeBug1AAccess().getTypeBug1AAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTypeBug1BAccess().getTypeBug1BAction_0().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getTypeBug1BAccess().getTypeBug1BAction_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTypeBug1AAccess().getTypeBug1AAction_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -5583,8 +5583,8 @@ protected class TypeBug305577_2_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTypeBug2BAccess().getTypeBug2BAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTypeBug2AAccess().getTypeBug2AAction_0().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getTypeBug2AAccess().getTypeBug2AAction_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTypeBug2BAccess().getTypeBug2BAction_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

@@ -82,10 +82,10 @@ protected class Model_Alternatives extends AlternativesToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getCommonTerminalsRuleRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getPluralRuleRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCaseInsensitiveKeywordRuleRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getDatatypeRuleRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getMultiRuleRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getCaseInsensitiveKeywordRuleRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getPluralRuleRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMultiRuleRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

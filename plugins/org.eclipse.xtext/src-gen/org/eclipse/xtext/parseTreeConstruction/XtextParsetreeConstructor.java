@@ -726,8 +726,8 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getTerminalRuleRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getEnumRuleRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getParserRuleRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getParserRuleRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getEnumRuleRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -891,8 +891,8 @@ protected class AbstractMetamodelDeclaration_Alternatives extends AlternativesTo
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getGeneratedMetamodelRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getReferencedMetamodelRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getReferencedMetamodelRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getGeneratedMetamodelRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -2080,11 +2080,11 @@ protected class Alternatives_Group extends GroupToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getActionRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getAssignmentRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
@@ -2312,11 +2312,11 @@ protected class UnorderedGroup_Group extends GroupToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getActionRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getAssignmentRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
@@ -2544,11 +2544,11 @@ protected class Group_Group extends GroupToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getActionRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getAssignmentRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
@@ -2731,11 +2731,11 @@ protected class AbstractToken_Alternatives extends AlternativesToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getActionRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getAssignmentRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
@@ -2853,11 +2853,11 @@ protected class AbstractTokenWithCardinality_Group extends GroupToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getActionRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getAssignmentRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
@@ -3314,11 +3314,11 @@ protected class AbstractTerminal_Alternatives extends AlternativesToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getActionRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getAssignmentRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
@@ -3744,10 +3744,10 @@ protected class AssignableTerminal_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getCrossReferenceRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getAssignableAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getCrossReferenceRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -3944,10 +3944,10 @@ protected class ParenthesizedAssignableElement_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getCrossReferenceRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getAssignableAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getCrossReferenceRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -4068,10 +4068,10 @@ protected class AssignableAlternatives_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getCrossReferenceRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getAssignableAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getCrossReferenceRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -4518,8 +4518,8 @@ protected class CrossReferenceableTerminal_Alternatives extends AlternativesToke
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -4642,11 +4642,11 @@ protected class ParenthesizedElement_Group extends GroupToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getActionRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getAssignmentRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
@@ -5044,14 +5044,14 @@ protected class TerminalAlternatives_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getWildcardAccess().getWildcardAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getNegatedTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -5277,14 +5277,14 @@ protected class TerminalGroup_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getWildcardAccess().getWildcardAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getNegatedTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -5465,14 +5465,14 @@ protected class TerminalToken_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getWildcardAccess().getWildcardAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getNegatedTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -5596,14 +5596,14 @@ protected class TerminalTokenElement_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getWildcardAccess().getWildcardAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getNegatedTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -5632,8 +5632,8 @@ protected class TerminalTokenElement_CharacterRangeParserRuleCall_0 extends Rule
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -5749,8 +5749,8 @@ protected class TerminalTokenElement_AbstractNegatedTokenParserRuleCall_3 extend
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getNegatedTokenRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getNegatedTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -5843,14 +5843,14 @@ protected class ParenthesizedTerminalElement_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getWildcardAccess().getWildcardAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getNegatedTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getRuleCallRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -5969,8 +5969,8 @@ protected class AbstractNegatedToken_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getNegatedTokenRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getNegatedTokenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getUntilTokenRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -6395,8 +6395,8 @@ protected class CharacterRange_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getKeywordRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -6884,8 +6884,8 @@ protected class EnumLiterals_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getEnumLiteralsAccess().getAlternativesElementsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getEnumLiteralDeclarationRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getEnumLiteralDeclarationRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getEnumLiteralsAccess().getAlternativesElementsAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

@@ -77,9 +77,9 @@ protected class Sequence_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

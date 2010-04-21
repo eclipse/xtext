@@ -93,14 +93,14 @@ protected class Model_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getCommentableRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getValueListRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getDatatypeBug286557Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getSingleRefRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getRefListRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAppendToFileEndRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getEnumBugRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getAction1Access().getAction1Action_1().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getValueListRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getEnumBugRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getRefListRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getSingleRefRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCommentableRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAppendToFileEndRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

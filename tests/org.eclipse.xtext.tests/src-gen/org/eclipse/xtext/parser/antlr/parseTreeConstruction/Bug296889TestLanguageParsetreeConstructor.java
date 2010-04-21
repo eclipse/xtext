@@ -289,9 +289,9 @@ protected class Expression_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getPostopAccess().getPostopExprAction_1_0().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getVariableAccess().getVariableAction_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getPreopAccess().getPreopAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getVariableAccess().getVariableAction_0().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getPostopAccess().getPostopExprAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -320,8 +320,8 @@ protected class Expression_PostopParserRuleCall_0 extends RuleCallToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getPostopAccess().getPostopExprAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getVariableAccess().getVariableAction_0().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getVariableAccess().getVariableAction_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getPostopAccess().getPostopExprAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -561,8 +561,8 @@ protected class Postop_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getPostopAccess().getPostopExprAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getVariableAccess().getVariableAction_0().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getVariableAccess().getVariableAction_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getPostopAccess().getPostopExprAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

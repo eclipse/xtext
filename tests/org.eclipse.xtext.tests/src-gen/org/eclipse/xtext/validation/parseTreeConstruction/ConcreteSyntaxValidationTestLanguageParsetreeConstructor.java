@@ -8222,7 +8222,7 @@ protected class TwoVersion_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTwoVersionNo1Rule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getTwoVersionNo2Rule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

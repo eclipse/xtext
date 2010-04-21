@@ -14,10 +14,8 @@ import de.itemis.xtext.antlr.*
 
 var runtimeProjectName = "org.eclipse.xtext"
 var uiProjectName = "org.eclipse.xtext.xtext.ui"
-var commonUiProjectName = "org.eclipse.xtext.ui"
 var runtimeProject = "../${runtimeProjectName}"
 var uiProject = "../${uiProjectName}"
-var commonUiProject = "../${commonUiProjectName}"
 var file.extensions = "xtext,xtext2"
 
 Workflow {
@@ -30,9 +28,6 @@ Workflow {
 	}
 	component = DirectoryCleaner {
 		directory="${uiProject}/src-gen"
-	}
-	component = DirectoryCleaner {
-		directory="${commonUiProject}/src-gen"
 	}
 	
 	component = Generator {
@@ -66,17 +61,13 @@ Workflow {
 	}
 	
 	component = Generator {
-		suppressUi = true
 		pathRtProject = runtimeProject
-		pathUiProject = commonUiProject
 		projectNameRt = runtimeProjectName
-		projectNameUi = commonUiProjectName
 		language = {
 			uri = "platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/common/Terminals.xtext" 
 			fragment = grammarAccess.GrammarAccessFragment {}
 			fragment = parser.PackratParserFragment {}
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
-			fragment = contentAssist.JavaBasedContentAssistFragment {}
 		}
 	}
 }

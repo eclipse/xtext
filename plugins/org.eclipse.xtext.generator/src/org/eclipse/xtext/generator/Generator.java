@@ -287,7 +287,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	}
 
 	private boolean isUi() {
-		return getPathUiProject() != null && !isSuppressUi;
+		return getPathUiProject() != null;
 	}
 
 	private void generate(LanguageConfig config, XpandExecutionContext ctx) {
@@ -439,8 +439,6 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 	private String projectNameUi;
 
-	private boolean isSuppressUi;
-
 	public void setProjectNameUi(String projectNameUi) {
 		this.projectNameUi = projectNameUi;
 	}
@@ -468,9 +466,4 @@ public class Generator extends AbstractWorkflowComponent2 {
 		}
 		return activator;
 	}
-	
-	public void setSuppressUi(boolean isSuppressUi) {
-		this.isSuppressUi = isSuppressUi;
-	}
-
 }

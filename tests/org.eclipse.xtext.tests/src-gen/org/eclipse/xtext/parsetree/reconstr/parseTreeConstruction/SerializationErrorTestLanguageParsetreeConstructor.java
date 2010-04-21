@@ -208,8 +208,8 @@ protected class Parenthesis_Group extends GroupToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getTwoRequiredRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTwoOptionsRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getIndentRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getIndentRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTwoOptionsRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -330,8 +330,8 @@ protected class Test_Alternatives extends AlternativesToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getTwoRequiredRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTwoOptionsRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getIndentRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getIndentRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTwoOptionsRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

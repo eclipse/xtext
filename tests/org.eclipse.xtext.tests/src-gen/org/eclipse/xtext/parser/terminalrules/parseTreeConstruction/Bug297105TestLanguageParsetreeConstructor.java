@@ -285,8 +285,8 @@ protected class Literal_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getRealLiteralRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getIntLiteralRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getIntLiteralRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getRealLiteralRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

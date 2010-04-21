@@ -385,10 +385,10 @@ protected class Import_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getResourceImportRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getEPackageImportRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getJavaImportRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getExtensionImportRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getEPackageImportRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getExtensionImportRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getResourceImportRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getJavaImportRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -417,8 +417,8 @@ protected class Import_ModelImportParserRuleCall_0 extends RuleCallToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getResourceImportRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getEPackageImportRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getEPackageImportRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getResourceImportRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -553,8 +553,8 @@ protected class ModelImport_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getResourceImportRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getEPackageImportRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getEPackageImportRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getResourceImportRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -1902,9 +1902,9 @@ protected class NamedObject_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getObjectRefRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getObjectCopyRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getObjectNewRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getObjectCopyRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getObjectRefRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -1974,8 +1974,8 @@ protected class NamedObject_CreatedObjectParserRuleCall_1 extends RuleCallToken 
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getObjectNewRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getObjectCopyRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getObjectCopyRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getObjectNewRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -5870,8 +5870,8 @@ protected class CreatedObject_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getObjectNewRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getObjectCopyRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getObjectCopyRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getObjectNewRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

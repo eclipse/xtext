@@ -1184,8 +1184,8 @@ protected class AbstractChild_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getSecondConcreteRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getFirstConcreteRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getFirstConcreteRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getSecondConcreteRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

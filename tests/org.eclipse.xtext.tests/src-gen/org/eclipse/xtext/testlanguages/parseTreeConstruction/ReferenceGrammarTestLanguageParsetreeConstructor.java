@@ -1148,7 +1148,7 @@ protected class Farbe_WertAssignment extends AssignmentToken  {
 		}
 		if("GRÜN".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
-			element = grammarAccess.getFarbeAccess().getWertGRNKeyword_0_3();
+			element = grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3();
 			return obj;
 		}
 		return null;

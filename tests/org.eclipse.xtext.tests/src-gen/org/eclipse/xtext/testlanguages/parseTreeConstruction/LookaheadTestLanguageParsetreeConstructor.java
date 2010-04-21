@@ -135,9 +135,9 @@ protected class Alts_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLookAhead3Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getLookAhead0Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getLookAhead1Rule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getLookAhead0Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLookAhead1Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getLookAhead3Rule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

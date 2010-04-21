@@ -249,8 +249,8 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:873:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '\\u02C6' | '\\u2030' | '\\u00B8' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:873:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '\\u02C6' | '\\u2030' | '\\u00B8' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:873:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '\\u00F6' | '\\u00E4' | '\\u00FC' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:873:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '\\u00F6' | '\\u00E4' | '\\u00FC' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:873:11: ( '^' )?
             int alt1=2;
@@ -270,7 +270,7 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
 
             }
 
-            if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z')||input.LA(1)=='\u00B8'||input.LA(1)=='\u02C6'||input.LA(1)=='\u2030' ) {
+            if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z')||input.LA(1)=='\u00E4'||input.LA(1)=='\u00F6'||input.LA(1)=='\u00FC' ) {
                 input.consume();
 
             }
@@ -909,7 +909,7 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
         "\1\145\1\154\1\145\1\154\1\60\1\155\1\60\1\uffff\1\145\1\uffff\1"+
         "\156\1\164\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\ufffe\1\157\1\uffff\1\166\1\uffff\1\165\1\170\1\71\1\u2030\1"+
+        "\1\ufffe\1\157\1\uffff\1\166\1\uffff\1\165\1\170\1\71\1\u00fc\1"+
         "\uffff\2\ufffe\1\57\2\uffff\1\144\2\uffff\1\145\1\uffff\1\142\1"+
         "\145\1\164\1\uffff\1\71\5\uffff\1\145\2\162\1\155\1\145\1\154\1"+
         "\162\1\165\1\145\1\156\1\172\1\151\1\154\1\156\1\144\1\uffff\1\144"+
@@ -927,8 +927,8 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
     static final String[] DFA12_transitionS = {
             "\11\16\2\15\2\16\1\15\22\16\1\15\1\16\1\12\4\16\1\13\5\16\1"+
             "\4\1\16\1\14\12\7\1\2\6\16\32\11\3\16\1\10\1\11\1\16\4\11\1"+
-            "\6\7\11\1\1\1\11\1\3\3\11\1\5\7\11\75\16\1\11\u020d\16\1\11"+
-            "\u1d69\16\1\11\udfce\16",
+            "\6\7\11\1\1\1\11\1\3\3\11\1\5\7\11\151\16\1\11\21\16\1\11\5"+
+            "\16\1\11\uff02\16",
             "\1\17",
             "",
             "\1\22",
@@ -936,8 +936,8 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
             "\1\24",
             "\1\25\13\uffff\1\26",
             "\1\31\1\uffff\12\30",
-            "\32\20\4\uffff\1\20\1\uffff\32\20\75\uffff\1\20\u020d\uffff"+
-            "\1\20\u1d69\uffff\1\20",
+            "\32\20\4\uffff\1\20\1\uffff\32\20\151\uffff\1\20\21\uffff\1"+
+            "\20\5\uffff\1\20",
             "",
             "\uffff\32",
             "\uffff\32",

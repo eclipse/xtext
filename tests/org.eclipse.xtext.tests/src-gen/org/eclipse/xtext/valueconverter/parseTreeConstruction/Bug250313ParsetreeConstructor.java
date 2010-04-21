@@ -989,8 +989,8 @@ protected class Child_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getChild1Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getChild2Rule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getChild2Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getChild1Rule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
