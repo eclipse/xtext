@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.service;
 
-import java.nio.charset.Charset;
-
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -52,8 +50,8 @@ import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider;
 import org.eclipse.xtext.validation.CancelableDiagnostician;
-import org.eclipse.xtext.validation.ConcreteSyntaxValidator;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
+import org.eclipse.xtext.validation.impl.ConcreteSyntaxValidator;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;

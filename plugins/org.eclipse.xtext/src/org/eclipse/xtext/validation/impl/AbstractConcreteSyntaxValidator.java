@@ -5,12 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.validation;
+package org.eclipse.xtext.validation.impl;
 
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
