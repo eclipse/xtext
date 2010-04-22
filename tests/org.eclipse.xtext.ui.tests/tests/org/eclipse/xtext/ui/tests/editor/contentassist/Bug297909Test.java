@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import java.nio.charset.Charset;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -85,7 +87,7 @@ public class Bug297909Test extends AbstractContentAssistProcessorTest {
 		});
 		XtextResource resource = injector.getInstance(XtextResource.class);
 		resource.load(new StringInputStream(""), null);
-		document.setInput(resource);
+		document.setInput(resource,Charset.defaultCharset().name());
 		document.set("abstract rules firstRule");
 		XtextDocumentReconcileStrategy strategy = injector.getInstance(XtextDocumentReconcileStrategy.class);
 		strategy.setDocument(document);

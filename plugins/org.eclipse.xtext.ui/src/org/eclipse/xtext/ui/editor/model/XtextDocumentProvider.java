@@ -67,10 +67,14 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	}
 
 	@Override
-	protected void setupDocument(Object element, IDocument document) {
-		XtextDocument xtextDocument = (XtextDocument) document;
-		IEditorInput input = (IEditorInput) element;
-		xtextDocument.setInput(input);
+	protected boolean setDocumentContent(IDocument document, IEditorInput editorInput, String encoding)
+			throws CoreException {
+		boolean result = super.setDocumentContent(document, editorInput, encoding);
+		if (result) {
+			XtextDocument xtextDocument = (XtextDocument) document;
+			xtextDocument.setInput(editorInput,encoding);
+		}
+		return result;
 	}
 	
 	@Override
