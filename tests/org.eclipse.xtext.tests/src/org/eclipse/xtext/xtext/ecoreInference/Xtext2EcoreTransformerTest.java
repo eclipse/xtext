@@ -1301,4 +1301,22 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertEquals(createdType.getEStructuralFeature("enumFeature").getEType(), createdType.getEStructuralFeature("otherEnumFeature").getEType());
 	}
 	
+	public void testBug310122() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.common.Terminals\n" + 
+			"generate myDsl \"http://example.xtext.org/MyDsl\"\n" +
+			"Model: Sub1 | name=ID 'somekeyword';\n" + 
+			"Sub1 returns Model: '(' Model ')';"; 
+		XtextResource resource = getResourceFromString(grammarAsString);
+		Grammar grammar = (Grammar) resource.getContents().get(0);
+		GeneratedMetamodel generatedMetamodel = (GeneratedMetamodel) grammar.getMetamodelDeclarations().get(0);
+		assertEquals("myDsl", generatedMetamodel.getName());
+		assertEquals(1, generatedMetamodel.getEPackage().getEClassifiers().size());
+		EClass createdModel = (EClass) generatedMetamodel.getEPackage().getEClassifier("Model");
+		assertEquals(EcorePackage.Literals.ESTRING, createdModel.getEStructuralFeature("name").getEType());
+		for(AbstractRule rule: grammar.getRules()) {
+			assertEquals(createdModel, rule.getType().getClassifier());
+		}
+	}
+	
 }
