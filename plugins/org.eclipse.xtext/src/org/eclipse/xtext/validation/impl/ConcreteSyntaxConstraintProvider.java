@@ -36,6 +36,8 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.UnorderedGroup;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.IConcreteSyntaxConstraintProvider;
 
 import com.google.common.base.Function;
@@ -56,18 +58,23 @@ import com.google.inject.internal.Lists;
  */
 @Singleton
 public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstraintProvider {
+
 	public class SyntaxConstraintNode implements ISyntaxConstraint {
 		protected ISyntaxConstraint container = null;
 		protected List<ISyntaxConstraint> contents;
 		protected AbstractElement element;
-		protected List<AbstractElement> lazyContents;
 		protected boolean multiple = false;
 		protected boolean optional = false;
+		@SuppressWarnings("unchecked")
+		protected Set<EClass> semanticTypes = Collections.EMPTY_SET;
 		protected EClass semanticType = null;
 		protected ConstraintType type;
 
-		public SyntaxConstraintNode(ConstraintType type, AbstractElement ele, List<AbstractElement> lazyContents,
-				List<ISyntaxConstraint> eagerContents, EClass semanticType, boolean multiple, boolean optional) {
+		protected SyntaxConstraintNode() {
+		}
+
+		public SyntaxConstraintNode(ConstraintType type, AbstractElement ele, List<ISyntaxConstraint> contents,
+				EClass semanticType, boolean multiple, boolean optional) {
 			super();
 			if (type == null)
 				throw new NullPointerException("type must not be null");
@@ -76,10 +83,67 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 			this.semanticType = semanticType;
 			this.multiple = multiple;
 			this.optional = optional;
-			this.contents = eagerContents;
-			this.lazyContents = lazyContents;
+			this.contents = contents;
 			for (ISyntaxConstraint e : contents)
 				((SyntaxConstraintNode) e).container = this;
+		}
+
+		protected boolean containsType() {
+			for (ISyntaxConstraint c : getContents()) {
+				SyntaxConstraintNode n = (SyntaxConstraintNode) c;
+				if (n.semanticType != null || n.containsType())
+					return true;
+			}
+			return false;
+		}
+
+		protected Pair<Set<EClass>, Set<EClass>> getAllSemanticTypesPairs(Set<ISyntaxConstraint> exclude) {
+			Set<EClass> mandatory = Sets.newHashSet();
+			Set<EClass> optional = Sets.newHashSet();
+			boolean allChildrenContrMandType = !getContents().isEmpty();
+			for (ISyntaxConstraint sc : getContents())
+				if (exclude == null || !exclude.contains(sc)) {
+					Pair<Set<EClass>, Set<EClass>> t = ((SyntaxConstraintNode) sc).getAllSemanticTypesPairs(exclude);
+					if (sc.isOptional()) {
+						optional.addAll(t.getFirst());
+						optional.addAll(t.getSecond());
+						allChildrenContrMandType = false;
+					} else {
+						mandatory.addAll(t.getFirst());
+						optional.addAll(t.getSecond());
+						if (t.getFirst().isEmpty())
+							allChildrenContrMandType = false;
+					}
+				}
+			if ((isRoot() && isOptional()) || (type == ConstraintType.ALTERNATIVE && !allChildrenContrMandType)) {
+				optional.addAll(mandatory);
+				mandatory.clear();
+			}
+			if (semanticType != null) {
+				if (mandatory.isEmpty() && optional.isEmpty())
+					mandatory.add(semanticType);
+				else
+					optional.add(semanticType);
+			}
+			if (exclude == null && !isRoot() && mandatory.isEmpty() && optional.isEmpty())
+				optional.addAll(((SyntaxConstraintNode) getContainer()).getSemanticTypeByParent(Sets
+						.<ISyntaxConstraint> newHashSet(this)));
+			return Tuples.create(mandatory, optional);
+		}
+
+		protected Set<EClass> getSemanticTypeByParent(Set<ISyntaxConstraint> exclude) {
+			if (type == ConstraintType.ALTERNATIVE) {
+				exclude.addAll(getContents());
+				if (isRoot())
+					return Sets.newHashSet(semanticType);
+			} else {
+				Pair<Set<EClass>, Set<EClass>> types = getAllSemanticTypesPairs(exclude);
+				if (!types.getFirst().isEmpty())
+					return types.getFirst();
+				if (isRoot())
+					return types.getSecond();
+			}
+			return ((SyntaxConstraintNode) getContainer()).getSemanticTypeByParent(exclude);
 		}
 
 		public boolean dependsOn(ISyntaxConstraint ele) {
@@ -113,6 +177,11 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 			return null;
 		}
 
+		public Set<EClass> getSemanticTypes() {
+			Pair<Set<EClass>, Set<EClass>> types = getAllSemanticTypesPairs(null);
+			return !types.getFirst().isEmpty() ? types.getFirst() : types.getSecond();
+		}
+
 		public EStructuralFeature getAssignmentFeature(EClass clazz) {
 			String name = getAssignmentName();
 			EStructuralFeature f = clazz.getEStructuralFeature(name);
@@ -136,16 +205,6 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 		}
 
 		public List<ISyntaxConstraint> getContents() {
-			if (lazyContents != null) {
-				for (EObject obj : lazyContents) {
-					ISyntaxConstraint e = createElement(obj);
-					if (e != null) {
-						((SyntaxConstraintNode) e).container = this;
-						contents.add(e);
-					}
-				}
-				lazyContents = null;
-			}
 			return contents;
 		}
 
@@ -153,8 +212,15 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 			return element;
 		}
 
-		public EClass getSemanticType() {
-			return semanticType;
+		public Set<EClass> getSemanticTypesToCheck() {
+			if (semanticTypes == Collections.EMPTY_SET) {
+				semanticTypes = getSemanticTypes();
+				if (semanticTypes.isEmpty()
+						|| (!isRoot() && semanticTypes.equals(((SyntaxConstraintNode) getContainer())
+								.getSemanticTypes())))
+					semanticTypes = null;
+			}
+			return semanticTypes;
 		}
 
 		public ConstraintType getType() {
@@ -184,7 +250,7 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 		}
 
 		public String toString(final Map<ISyntaxConstraint, String> postfix) {
-			String t = getSemanticType() == null ? "" : getSemanticType().getName() + ":";
+			// String t = getSemanticTypes() == null ? "" : getSemanticTypes().getName() + ":";
 			String p = postfix != null && postfix.containsKey(this) ? postfix.get(this) : "";
 			Iterable<String> contents = Iterables.transform(getContents(), new Function<ISyntaxConstraint, String>() {
 				public String apply(ISyntaxConstraint from) {
@@ -193,11 +259,11 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 			});
 			switch (getType()) {
 				case ASSIGNMENT:
-					return t + ((Assignment) element).getFeature() + p + getCardinality();
+					return /*t +*/((Assignment) element).getFeature() + p + getCardinality();
 				case GROUP:
-					return t + "(" + Join.join(" ", contents) + ")" + p + getCardinality();
+					return /*t +*/"(" + Join.join(" ", contents) + ")" + p + getCardinality();
 				case ALTERNATIVE:
-					return t + "(" + Join.join("|", contents) + ")" + p + getCardinality();
+					return /*t +*/"(" + Join.join("|", contents) + ")" + p + getCardinality();
 				case ACTION:
 					return "{" + ((Action) element).getType().getClassifier().getName() + "}" + p;
 			}
@@ -205,11 +271,13 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 		}
 	}
 
-	@Inject
-	private IGrammarAccess grammar;
-	private Map<ParserRule, ISyntaxConstraint> rule2element = Maps.newHashMap();
-	private Map<EClass, List<ISyntaxConstraint>> type2Elements = Maps.newHashMap();
-	private Set<ParserRule> validRules;
+	protected Grammar grammar;
+
+	protected Map<ParserRule, ISyntaxConstraint> rule2element = Maps.newHashMap();
+
+	protected Map<EClass, List<ISyntaxConstraint>> type2Elements = Maps.newHashMap();
+
+	protected Set<ParserRule> validRules;
 
 	protected void collectReachableRules(ParserRule pr, Set<ParserRule> rules, Set<ParserRule> visited) {
 		if (!visited.add(pr))
@@ -241,9 +309,15 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 	}
 
 	protected ISyntaxConstraint createElement(ConstraintType type, AbstractElement ele,
-			List<AbstractElement> lazyContents, List<ISyntaxConstraint> eagerContents, EClass semanticType,
+			List<AbstractElement> lazyContents, List<ISyntaxConstraint> contents, EClass semanticType,
 			boolean multiple, boolean optional) {
-		return new SyntaxConstraintNode(type, ele, lazyContents, eagerContents, semanticType, multiple, optional);
+		if (lazyContents != null)
+			for (EObject obj : lazyContents) {
+				ISyntaxConstraint e = createElement(obj);
+				if (e != null)
+					contents.add(e);
+			}
+		return new SyntaxConstraintNode(type, ele, contents, semanticType, multiple, optional);
 	}
 
 	protected ISyntaxConstraint createElement(EObject obj) {
@@ -353,11 +427,38 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 		return result;
 	}
 
-	protected ISyntaxConstraint getElement(ParserRule rule) {
+	protected final ISyntaxConstraint INVALID_RULE = new SyntaxConstraintNode();
+
+	public ISyntaxConstraint getConstraint(ParserRule rule) {
 		ISyntaxConstraint e = rule2element.get(rule);
-		if (e == null)
-			rule2element.put(rule, e = createElement(rule.getAlternatives()));
-		return e;
+		if (e == null) {
+			if (isValidateableRule(rule))
+				e = createElement(rule.getAlternatives());
+			else
+				e = INVALID_RULE;
+			rule2element.put(rule, e);
+		}
+		return e != INVALID_RULE ? e : null;
+	}
+
+	public Collection<ISyntaxConstraint> getConstraints(EClass cls) {
+		List<ISyntaxConstraint> eles = type2Elements.get(cls);
+		if (eles != null)
+			return eles;
+		eles = Lists.newArrayList();
+		for (ParserRule r : getValidRules()) {
+			if (((EClass) r.getType().getClassifier()).isSuperTypeOf(cls)) {
+				ISyntaxConstraint e = getConstraint(r);
+				if (e != null)
+					eles.add(e);
+				else {
+					eles.clear();
+					break;
+				}
+			}
+		}
+		type2Elements.put(cls, eles);
+		return eles;
 	}
 
 	protected ParserRule getFirstParserRule(Grammar grammar) {
@@ -367,32 +468,11 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 		throw new RuntimeException("Grammar " + grammar.getName() + " contains no parser rules");
 	}
 
-	public Collection<ISyntaxConstraint> getRulesFor(EClass cls) {
-		List<ISyntaxConstraint> eles = type2Elements.get(cls);
-		if (eles != null)
-			return eles;
-		eles = Lists.newArrayList();
-		for (ParserRule r : getValidRules()) {
-			if (((EClass) r.getType().getClassifier()).isSuperTypeOf(cls)) {
-				ISyntaxConstraint e = getElement(r);
-				if (e != null)
-					eles.add(e);
-			}
-		}
-		for (ISyntaxConstraint e : eles)
-			if (!isValidateableRule(GrammarUtil.containingParserRule(e.getGrammarElement()))) {
-				eles.clear();
-				break;
-			}
-		type2Elements.put(cls, eles);
-		return eles;
-	}
-
 	protected Set<ParserRule> getValidRules() {
 		if (validRules != null)
 			return validRules;
 		validRules = Sets.newHashSet();
-		ParserRule first = getFirstParserRule(grammar.getGrammar());
+		ParserRule first = getFirstParserRule(grammar);
 		validRules.add(first);
 		collectReachableRules(first, validRules, new HashSet<ParserRule>());
 		return validRules;
@@ -429,5 +509,10 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 			}
 		}
 		return false;
+	}
+
+	@Inject
+	protected void setGrammar(IGrammarAccess grammar) {
+		this.grammar = grammar.getGrammar();
 	}
 }

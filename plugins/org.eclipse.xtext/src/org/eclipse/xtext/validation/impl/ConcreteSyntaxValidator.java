@@ -154,7 +154,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 
 	protected void collectAssignments(ISyntaxConstraint rule, EObject obj, ISyntaxConstraint ele,
 			Multimap<EStructuralFeature, ISyntaxConstraint> assignments, List<IConcreteSyntaxDiagnostic> acceptor) {
-		if (ele.getSemanticType() != null && !ele.getSemanticType().isSuperTypeOf(obj.eClass()))
+		if (ele.getSemanticTypesToCheck() != null && !ele.getSemanticTypesToCheck().contains(obj.eClass()))
 			return;
 		if (ele.getType() == ConstraintType.ASSIGNMENT) {
 			EStructuralFeature f = obj.eClass().getEStructuralFeature(
@@ -172,7 +172,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 	protected Set<ISyntaxConstraint> collectUnfulfilledSemanticElements(EClass cls, ISyntaxConstraint ele) {
 		if (ele.isOptional())
 			return Collections.emptySet();
-		if (ele.getSemanticType() != null && !ele.getSemanticType().isSuperTypeOf(cls))
+		if (ele.getSemanticTypesToCheck() != null && !ele.getSemanticTypesToCheck().contains(cls))
 			return Collections.singleton(ele);
 		switch (ele.getType()) {
 			case GROUP:
@@ -216,7 +216,9 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 						return false;
 				return true;
 			case ACTION:
-				return !child.getSemanticType().isInstance(ctx.getDelegate());
+				if (child.getSemanticTypesToCheck() != null)
+					return !child.getSemanticTypesToCheck().contains(ctx.getDelegate().eClass());
+				return false;
 			default:
 				return false;
 		}
@@ -307,7 +309,8 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 	}
 
 	protected int getMaxCountForChild(Quantities ctx, ISyntaxConstraint child, Set<ISyntaxConstraint> involved) {
-		if (child.getSemanticType() != null && !child.getSemanticType().isInstance(ctx.getDelegate()))
+		if (child.getSemanticTypesToCheck() != null
+				&& !child.getSemanticTypesToCheck().contains(ctx.getDelegate().eClass()))
 			return 0;
 		if (child.isOptional())
 			return MAX;
@@ -386,7 +389,8 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 	}
 
 	protected int getMinCountForChild(Quantities ctx, ISyntaxConstraint child, Set<ISyntaxConstraint> involved) {
-		if (child.getSemanticType() != null && !child.getSemanticType().isInstance(ctx.getDelegate()))
+		if (child.getSemanticTypesToCheck() != null
+				&& !child.getSemanticTypesToCheck().contains(ctx.getDelegate().eClass()))
 			return 0;
 		int count = UNDEF;
 		switch (child.getType()) {
@@ -487,7 +491,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		if (helper.isEObjectTransient(obj))
 			return true;
 		List<IConcreteSyntaxDiagnostic> allDiags = new ArrayList<IConcreteSyntaxDiagnostic>();
-		Collection<ISyntaxConstraint> rules = constraintProvider.getRulesFor(obj.eClass());
+		Collection<ISyntaxConstraint> rules = constraintProvider.getConstraints(obj.eClass());
 		if (rules.isEmpty())
 			return true;// no validation if there are no rules for this EClass
 		for (ISyntaxConstraint rule : rules) {
@@ -542,6 +546,8 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		Set<ISyntaxConstraint> expectedTypes = collectUnfulfilledSemanticElements(obj.eClass(), rule);
 		if (expectedTypes.size() > 0)
 			allDiags.add(diagnosticProvider.createObjectDiagnostic(rule, obj, expectedTypes));
+		if (!allDiags.isEmpty())
+			return allDiags;
 		List<Quantities> quantities = getQuantities(obj, rule, allDiags);
 		if (!allDiags.isEmpty())
 			return allDiags;
