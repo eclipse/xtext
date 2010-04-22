@@ -14,6 +14,7 @@ import static org.eclipse.xtext.GrammarUtil.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -164,18 +165,6 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 		distances.keySet().retainAll(doNotRemove);
 	}
 
-	public Set<TypeRef> getTypes() {
-		if (types == null) {
-			getStatus();
-			Map<TreeConstState, List<TreeConstState>> map = Maps.newHashMap();
-			Set<TreeConstState> endStates = Sets.newHashSet();
-			initTypes(map, endStates);
-			for (TreeConstState s : endStates)
-				s.populateTypes(map);
-		}
-		return types;
-	}
-
 	public List<TreeConstTransition> getEnabledFollowers() {
 		if (enabledFollowers == null) {
 			enabledFollowers = new ArrayList<TreeConstTransition>();
@@ -219,7 +208,19 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 		return getStatInt();
 	}
 
-	public Collection<TypeRef> getTypesToCheck() {
+	public Set<TypeRef> getTypes() {
+		if (types == null) {
+			getStatus();
+			Map<TreeConstState, List<TreeConstState>> map = Maps.newHashMap();
+			Set<TreeConstState> endStates = Sets.newHashSet();
+			initTypes(map, endStates);
+			for (TreeConstState s : endStates)
+				s.populateTypes(map);
+		}
+		return types;
+	}
+
+	public List<TypeRef> getTypesToCheck() {
 		Map<EClassifier, TypeRef> localTypes = Maps.newHashMap();
 		for (TypeRef t : getTypes())
 			if (t != null)
@@ -227,11 +228,11 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 
 		List<TreeConstTransition> incomming = getLocalIncomming();
 		if (incomming.isEmpty())
-			return localTypes.values();
+			return sortTypes(localTypes.values());
 		for (TreeConstTransition t : incomming)
 			for (TypeRef r : t.getSource().getTypes())
 				if (r != null && !localTypes.containsKey(r.getClassifier()))
-					return localTypes.values();
+					return sortTypes(localTypes.values());
 		return Collections.emptyList();
 	}
 
@@ -309,6 +310,16 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 				if (origin.getTypes().addAll(t) || origin.typesDirty)
 					origin.populateTypes(map);
 			}
+	}
+
+	protected List<TypeRef> sortTypes(Collection<TypeRef> types) {
+		List<TypeRef> result = Lists.newArrayList(types);
+		Collections.sort(result, new Comparator<TypeRef>() {
+			public int compare(TypeRef o1, TypeRef o2) {
+				return o1.getClassifier().getName().compareTo(o2.getClassifier().getName());
+			}
+		});
+		return result;
 	}
 
 	@Override
