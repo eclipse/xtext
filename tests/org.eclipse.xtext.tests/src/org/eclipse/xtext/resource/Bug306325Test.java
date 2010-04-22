@@ -10,6 +10,7 @@ package org.eclipse.xtext.resource;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Collections;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -42,8 +43,7 @@ public class Bug306325Test extends AbstractXtextTests {
 		String model = "Öclüpß Mödälüng Pröjäkt";
 		byte[] utfBytes = model.getBytes(encoding);
 		XtextResource resource = createXtextResource();
-		resource.setEncoding(encoding);
-		resource.load(new ByteArrayInputStream(utfBytes), null);
+		resource.load(new ByteArrayInputStream(utfBytes), Collections.singletonMap(XtextResource.OPTION_ENCODING, encoding));
 		Model root = (Model) resource.getContents().get(0);
 		EList<Word> words = root.getWords();
 		assertEquals(3,words.size());

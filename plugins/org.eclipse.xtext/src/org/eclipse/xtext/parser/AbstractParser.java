@@ -18,23 +18,19 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 
-import com.google.inject.Inject;
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
  */
 public abstract class AbstractParser implements IParser {
 
-	@Inject
-	private IDefaultEncodingProvider defaultEncodingProvider;
-
-	protected String getDefaultEncoding() {
-		return defaultEncodingProvider.getEncoding();
-	}
-
 	protected boolean isReparseSupported() {
 		return false;
+	}
+	
+	@Deprecated
+	protected String getDefaultEncoding() {
+		return "ISO-8859-1";
 	}
 
 	@Deprecated
