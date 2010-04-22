@@ -8,10 +8,14 @@
 package org.eclipse.xtext.xtext.ecoreInference;
 
 import java.util.HashSet;
+import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
@@ -20,6 +24,9 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.util.XtextSwitch;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterators;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -68,14 +75,25 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 					visitedRules.remove(object);
 					return result;
 				} else {
-					return true;
+					return getApproximatedResult(object);
 				}
 			}
 			if (!visitedRules.add(object))
-				return true;
+				return getApproximatedResult(object);
 			Boolean result = (object.getAlternatives() != null && doSwitch(object.getAlternatives()));
 			visitedRules.remove(object);
 			return result; 
+		}
+
+		protected Boolean getApproximatedResult(ParserRule object) {
+			if (object.getAlternatives() == null)
+				return true;
+			Iterator<?> contents = EcoreUtil.getAllContents(object.getAlternatives(), true);
+			return !Iterators.filter(contents, new Predicate<Object>() {
+				public boolean apply(Object input) {
+					return input instanceof Assignment || input instanceof Action;
+				}
+			}).hasNext();
 		}
 
 	}
