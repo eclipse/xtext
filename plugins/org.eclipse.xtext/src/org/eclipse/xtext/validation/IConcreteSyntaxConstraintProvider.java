@@ -10,10 +10,12 @@ package org.eclipse.xtext.validation;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxConstraintProvider;
 
 import com.google.inject.ImplementedBy;
@@ -45,7 +47,9 @@ public interface IConcreteSyntaxConstraintProvider {
 
 		public AbstractElement getGrammarElement();
 
-		public EClass getSemanticType();
+		public Set<EClass> getSemanticTypes();
+
+		public Set<EClass> getSemanticTypesToCheck();
 
 		public ConstraintType getType();
 
@@ -59,5 +63,7 @@ public interface IConcreteSyntaxConstraintProvider {
 
 	}
 
-	public Collection<ISyntaxConstraint> getRulesFor(EClass cls);
+	public ISyntaxConstraint getConstraint(ParserRule rule);
+
+	public Collection<ISyntaxConstraint> getConstraints(EClass cls);
 }

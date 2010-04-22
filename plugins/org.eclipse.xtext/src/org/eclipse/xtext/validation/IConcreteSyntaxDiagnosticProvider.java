@@ -28,6 +28,8 @@ public interface IConcreteSyntaxDiagnosticProvider {
 
 	public static final int ERROR_ASSIGNMENT_MISSING = 7;
 
+	public static final int ERROR_ASSIGNMENT_PROHIBITED = 8;
+
 	public static final int ERROR_FEATURE_MISSING = 6;
 
 	public static final int ERROR_LIST_TOO_FEW = 4;
@@ -45,11 +47,12 @@ public interface IConcreteSyntaxDiagnosticProvider {
 	public IConcreteSyntaxDiagnostic createAssignmentMissingDiagnostic(ISyntaxConstraint rule, EObject source,
 			EStructuralFeature feature, Set<ISyntaxConstraint> involved);
 
-	public IConcreteSyntaxDiagnostic createFeatureDiagnostic(ISyntaxConstraint rule, EObject source, EStructuralFeature feature,
-			int actual, int min, int max, Set<ISyntaxConstraint> involved);
+	public IConcreteSyntaxDiagnostic createFeatureDiagnostic(ISyntaxConstraint rule, EObject source,
+			EStructuralFeature feature, int actual, int min, int max, Set<ISyntaxConstraint> involved);
 
-	public IConcreteSyntaxDiagnostic createFeatureMissingDiagnostic(ISyntaxConstraint rule, EObject source, ISyntaxConstraint element,
+	public IConcreteSyntaxDiagnostic createFeatureMissingDiagnostic(ISyntaxConstraint rule, EObject source,
+			ISyntaxConstraint element, Set<ISyntaxConstraint> involved);
+
+	public IConcreteSyntaxDiagnostic createObjectDiagnostic(ISyntaxConstraint rule, EObject source,
 			Set<ISyntaxConstraint> involved);
-
-	public IConcreteSyntaxDiagnostic createObjectDiagnostic(ISyntaxConstraint rule, EObject source, Set<ISyntaxConstraint> involved);
 }

@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.Action;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider;
 import com.google.common.base.Function;
 import com.google.common.base.Join;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -158,15 +160,27 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 
 	public class ConcreteSyntaxAssignmentMissingDiagnostic extends AbstractConcreteSyntaxDiagnostic {
 		protected EStructuralFeature feature;
+		protected Set<EClass> requiredTypes;
 
 		public ConcreteSyntaxAssignmentMissingDiagnostic(ISyntaxConstraint rule, EObject source,
 				EStructuralFeature feature, Set<ISyntaxConstraint> involved) {
 			super(rule, source, involved);
 			this.feature = feature;
+			this.requiredTypes = Sets.newHashSet();
+			collectAssignments(this.rule, this.feature, requiredTypes);
+		}
+
+		protected void collectAssignments(ISyntaxConstraint ele, EStructuralFeature matcher, Set<EClass> types) {
+			if (ele.getType() == ConstraintType.ASSIGNMENT && ele.getAssignmentName().equals(matcher.getName()))
+				types.addAll(ele.getSemanticTypes());
+			for (ISyntaxConstraint e : ele.getContents())
+				collectAssignments(e, matcher, types);
 		}
 
 		public int getCode() {
-			return ERROR_ASSIGNMENT_MISSING;
+			if (requiredTypes.isEmpty())
+				return ERROR_ASSIGNMENT_MISSING;
+			return ERROR_ASSIGNMENT_PROHIBITED;
 		}
 
 		public String getMessage() {
@@ -180,8 +194,20 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 			}
 			msg.append(".");
 			msg.append(feature.getName());
-			msg.append(" contains non-transient values but has no corresponding assignment in rule ");
-			msg.append(getRule().getName());
+			switch (getCode()) {
+				case ERROR_ASSIGNMENT_MISSING:
+					msg.append(" contains non-transient values but has no corresponding assignment in rule ");
+					msg.append(getRule().getName());
+					break;
+				case ERROR_ASSIGNMENT_PROHIBITED:
+					msg.append(" is not allowed to contain non-transient values. ");
+					msg.append("The object needs to be of type ");
+					msg.append(Join.join(" or ", Iterables.transform(requiredTypes, new Function<EClass, String>() {
+						public String apply(EClass from) {
+							return from.getName();
+						}
+					})));
+			}
 			msg.append(".");
 			appendConstraint(msg);
 			return msg.toString();
@@ -323,9 +349,9 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 		public String getMessage() {
 			StringBuffer msg = new StringBuffer();
 			msg.append("An object of type ");
-			msg.append(Join.join(" or ", Iterables.transform(involved, new Function<ISyntaxConstraint, String>() {
-				public String apply(ISyntaxConstraint from) {
-					return from.getSemanticType().getName();
+			msg.append(Join.join(" or ", Iterables.transform(getSemanticTypes(), new Function<EClass, String>() {
+				public String apply(EClass from) {
+					return from.getName();
 				}
 			})));
 			msg.append(" is needed instead of ");
@@ -335,6 +361,14 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 			msg.append(".");
 			appendConstraint(msg);
 			return msg.toString();
+		}
+
+		protected Set<EClass> getSemanticTypes() {
+			Set<EClass> types = Sets.newHashSet();
+			for (ISyntaxConstraint c : involved)
+				if (c.getSemanticTypesToCheck() != null)
+					types.addAll(c.getSemanticTypesToCheck());
+			return types;
 		}
 	}
 
