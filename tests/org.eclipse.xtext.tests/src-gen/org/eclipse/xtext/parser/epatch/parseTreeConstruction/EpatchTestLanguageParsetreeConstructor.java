@@ -387,8 +387,8 @@ protected class Import_Alternatives extends AlternativesToken {
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getEPackageImportRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getExtensionImportRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getResourceImportRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getJavaImportRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getJavaImportRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getResourceImportRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -2835,7 +2835,7 @@ protected class Assignment_Alternatives extends AlternativesToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getMonoListAssignmentRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getMonoSingleAssignmentRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getBiSingleAssignmentRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

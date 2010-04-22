@@ -837,8 +837,8 @@ public class InternalEcoreDslLexer extends Lexer {
     public final void mRULE_BAG() throws RecognitionException {
         try {
             int _type = RULE_BAG;
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6374:10: ( 'bag' )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6374:12: 'bag'
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8343:10: ( 'bag' )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8343:12: 'bag'
             {
             match("bag"); 
 
@@ -856,8 +856,8 @@ public class InternalEcoreDslLexer extends Lexer {
     public final void mRULE_RANDOM() throws RecognitionException {
         try {
             int _type = RULE_RANDOM;
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6376:13: ( 'random' )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6376:15: 'random'
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8345:13: ( 'random' )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8345:15: 'random'
             {
             match("random"); 
 
@@ -875,8 +875,8 @@ public class InternalEcoreDslLexer extends Lexer {
     public final void mRULE_READONLY() throws RecognitionException {
         try {
             int _type = RULE_READONLY;
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6378:15: ( 'readonly' )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6378:17: 'readonly'
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8347:15: ( 'readonly' )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8347:17: 'readonly'
             {
             match("readonly"); 
 
@@ -894,8 +894,8 @@ public class InternalEcoreDslLexer extends Lexer {
     public final void mRULE_LOCAL() throws RecognitionException {
         try {
             int _type = RULE_LOCAL;
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6380:12: ( 'local' )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6380:14: 'local'
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8349:12: ( 'local' )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8349:14: 'local'
             {
             match("local"); 
 
@@ -913,8 +913,8 @@ public class InternalEcoreDslLexer extends Lexer {
     public final void mRULE_SERIALIZABLE() throws RecognitionException {
         try {
             int _type = RULE_SERIALIZABLE;
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6382:19: ( '!serializable' )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6382:21: '!serializable'
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8351:19: ( '!serializable' )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8351:21: '!serializable'
             {
             match("!serializable"); 
 
@@ -932,10 +932,10 @@ public class InternalEcoreDslLexer extends Lexer {
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6384:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6384:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8353:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8353:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6384:11: ( '^' )?
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8353:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -944,7 +944,7 @@ public class InternalEcoreDslLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6384:11: '^'
+                    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8353:11: '^'
                     {
                     match('^'); 
 
@@ -963,7 +963,7 @@ public class InternalEcoreDslLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6384:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8353:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -1011,10 +1011,10 @@ public class InternalEcoreDslLexer extends Lexer {
     public final void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6386:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6386:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8355:10: ( ( '0' .. '9' )+ )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8355:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6386:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8355:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -1028,7 +1028,7 @@ public class InternalEcoreDslLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6386:13: '0' .. '9'
+            	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8355:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1058,10 +1058,10 @@ public class InternalEcoreDslLexer extends Lexer {
     public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6388:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6388:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8357:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8357:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6388:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8357:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1073,16 +1073,16 @@ public class InternalEcoreDslLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("6388:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )", 6, 0, input);
+                    new NoViableAltException("8357:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6388:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8357:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6388:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8357:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -1098,7 +1098,7 @@ public class InternalEcoreDslLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6388:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8357:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -1115,7 +1115,7 @@ public class InternalEcoreDslLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6388:62: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8357:62: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -1141,10 +1141,10 @@ public class InternalEcoreDslLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6388:82: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8357:82: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6388:87: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8357:87: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -1160,7 +1160,7 @@ public class InternalEcoreDslLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6388:88: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8357:88: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -1177,7 +1177,7 @@ public class InternalEcoreDslLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6388:129: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8357:129: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -1219,12 +1219,12 @@ public class InternalEcoreDslLexer extends Lexer {
     public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6390:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6390:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8359:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8359:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6390:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8359:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -1249,7 +1249,7 @@ public class InternalEcoreDslLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6390:52: .
+            	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8359:52: .
             	    {
             	    matchAny(); 
 
@@ -1277,12 +1277,12 @@ public class InternalEcoreDslLexer extends Lexer {
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6392:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6392:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8361:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8361:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6392:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8361:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -1295,7 +1295,7 @@ public class InternalEcoreDslLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6392:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8361:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -1316,7 +1316,7 @@ public class InternalEcoreDslLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6392:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8361:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1325,9 +1325,9 @@ public class InternalEcoreDslLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6392:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8361:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6392:41: ( '\\r' )?
+                    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8361:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1336,7 +1336,7 @@ public class InternalEcoreDslLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6392:41: '\\r'
+                            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8361:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1366,10 +1366,10 @@ public class InternalEcoreDslLexer extends Lexer {
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6394:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6394:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8363:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8363:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6394:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8363:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -1422,8 +1422,8 @@ public class InternalEcoreDslLexer extends Lexer {
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6396:16: ( . )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6396:18: .
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8365:16: ( . )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8365:18: .
             {
             matchAny(); 
 

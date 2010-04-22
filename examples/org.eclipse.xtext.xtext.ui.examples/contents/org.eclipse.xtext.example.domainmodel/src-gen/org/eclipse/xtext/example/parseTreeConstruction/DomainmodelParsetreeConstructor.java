@@ -144,8 +144,8 @@ protected class AbstractElement_Alternatives extends AlternativesToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getDataTypeRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getImportRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getEntityRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getImportRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getPackageDeclarationRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;

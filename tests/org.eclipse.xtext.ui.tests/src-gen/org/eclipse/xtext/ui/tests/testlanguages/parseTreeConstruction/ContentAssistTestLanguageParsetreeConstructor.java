@@ -206,8 +206,8 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getSecondAbstractRuleChildRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getFirstAbstractRuleChildRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getFirstAbstractRuleChildRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getSecondAbstractRuleChildRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

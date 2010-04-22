@@ -75,8 +75,8 @@ protected class Root_Group extends GroupToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getTestListRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTestRequiredRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTestOptionalRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getTestOptionalRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTestRequiredRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

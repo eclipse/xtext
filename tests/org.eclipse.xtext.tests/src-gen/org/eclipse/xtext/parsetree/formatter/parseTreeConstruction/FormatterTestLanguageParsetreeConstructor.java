@@ -80,8 +80,8 @@ protected class Root_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTestLinewrapRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTestIndentationRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getTestIndentationRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTestLinewrapRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -251,9 +251,9 @@ protected class Line_Group extends GroupToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getAssignRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getFqnRefRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getFqnObjRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getDeclRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getFqnObjRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getFqnRefRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getMethRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;

@@ -88,9 +88,9 @@ protected class RootRule_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getCallOverridenParserRuleRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getOverridableParserRule2Rule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getOverridableParserRule2Rule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getCallExtendedParserRuleRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getCallOverridenParserRuleRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getConcreteParserRuleRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
@@ -783,8 +783,8 @@ protected class ExtendableParserRule_Alternatives extends AlternativesToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getSubrule1Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getSubrule3Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getSubrule2Rule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getSubrule2Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getSubrule3Rule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

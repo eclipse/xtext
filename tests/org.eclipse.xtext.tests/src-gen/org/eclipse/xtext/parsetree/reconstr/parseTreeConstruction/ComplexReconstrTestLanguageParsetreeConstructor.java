@@ -86,10 +86,10 @@ protected class Root_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getOpAccess().getMinusMinusOperandsAction_1_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTrickyGRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getOpAccess().getAddAddOperandsAction_1_0_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getOpAccess().getAddAddOperandsAction_1_0_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getOpAccess().getMinusMinusOperandsAction_1_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTrickyGRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -118,9 +118,9 @@ protected class Root_OpParserRuleCall_0 extends RuleCallToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getOpAccess().getMinusMinusOperandsAction_1_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getOpAccess().getAddAddOperandsAction_1_0_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getOpAccess().getAddAddOperandsAction_1_0_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getOpAccess().getMinusMinusOperandsAction_1_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -216,9 +216,9 @@ protected class Op_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getOpAccess().getMinusMinusOperandsAction_1_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getOpAccess().getAddAddOperandsAction_1_0_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getOpAccess().getAddAddOperandsAction_1_0_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getOpAccess().getMinusMinusOperandsAction_1_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -283,8 +283,8 @@ protected class Op_Alternatives_1 extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getOpAccess().getMinusMinusOperandsAction_1_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getOpAccess().getAddAddOperandsAction_1_0_0().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getOpAccess().getAddAddOperandsAction_1_0_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getOpAccess().getMinusMinusOperandsAction_1_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -582,9 +582,9 @@ protected class Term_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getOpAccess().getMinusMinusOperandsAction_1_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getOpAccess().getAddAddOperandsAction_1_0_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getOpAccess().getAddAddOperandsAction_1_0_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getOpAccess().getMinusMinusOperandsAction_1_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -750,9 +750,9 @@ protected class Parens_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getOpAccess().getMinusMinusOperandsAction_1_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getOpAccess().getAddAddOperandsAction_1_0_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getOpAccess().getAddAddOperandsAction_1_0_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getOpAccess().getMinusMinusOperandsAction_1_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -909,9 +909,9 @@ protected class TrickyA_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTrickyA1Rule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getTrickyAAccess().getTypeBXAction_3_0_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getTrickyAAccess().getTypeCXAction_3_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTrickyAAccess().getTypeBXAction_3_0_0().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getTrickyA1Rule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -1046,8 +1046,8 @@ protected class TrickyA_Alternatives_3 extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTrickyAAccess().getTypeCXAction_3_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTrickyAAccess().getTypeBXAction_3_0_0().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getTrickyAAccess().getTypeBXAction_3_0_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTrickyAAccess().getTypeCXAction_3_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -1531,10 +1531,10 @@ protected class TrickyC_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTrickyCRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getTrickyCAccess().getC1XAction_2_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTrickyCAccess().getC2YAction_3_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getTrickyCAccess().getC3ZAction_4_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTrickyCAccess().getC1XAction_2_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTrickyCAccess().getC2YAction_3_0().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getTrickyCRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -3110,8 +3110,8 @@ protected class TrickyG2_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTrickyG2Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTrickyG1Rule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getTrickyG1Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTrickyG2Rule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

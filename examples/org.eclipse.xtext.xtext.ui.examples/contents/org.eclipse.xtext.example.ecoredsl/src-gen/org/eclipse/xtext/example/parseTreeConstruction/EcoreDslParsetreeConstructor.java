@@ -1194,9 +1194,9 @@ protected class EClassifierDecl_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getEEnumDeclRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getEClassDeclRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getEDataTypeDeclRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getEClassDeclRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getEDataTypeDeclRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getEEnumDeclRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -1266,8 +1266,8 @@ protected class EClassifierDecl_EDataTypeDeclParserRuleCall_1 extends RuleCallTo
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getEEnumDeclRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getEDataTypeDeclRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getEDataTypeDeclRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getEEnumDeclRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -1322,8 +1322,8 @@ protected class EDataTypeDecl_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getEEnumDeclRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getEDataTypeDeclRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getEDataTypeDeclRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getEEnumDeclRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

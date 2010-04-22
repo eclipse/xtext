@@ -75,8 +75,8 @@ protected class NamedElement_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getNamespaceRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getElementRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getElementRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getNamespaceRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

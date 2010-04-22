@@ -3095,8 +3095,8 @@ protected class Bug304681Feature_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getBug304681ReferenceRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getBug304681AttributeRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getBug304681AttributeRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getBug304681ReferenceRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

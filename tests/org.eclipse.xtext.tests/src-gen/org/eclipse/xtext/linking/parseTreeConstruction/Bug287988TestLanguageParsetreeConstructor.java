@@ -686,8 +686,8 @@ protected class BaseAttribute_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getMasterAccess().getMasterAction_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAttributeAccess().getAttributeAction_0().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getAttributeAccess().getAttributeAction_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMasterAccess().getMasterAction_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -1207,8 +1207,8 @@ protected class ActionAttribute_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getActionAttributeAccess().getMasterAction_0_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getActionAttributeAccess().getAttributeAction_0_0_0().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getActionAttributeAccess().getAttributeAction_0_0_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getActionAttributeAccess().getMasterAction_0_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

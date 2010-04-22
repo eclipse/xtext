@@ -759,8 +759,8 @@ protected class ParameterObject_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getMyIntRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getMyElementRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getMyElementRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMyIntRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getParameterRefRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;

@@ -3649,8 +3649,8 @@ protected class UnassignedAction3_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getUnassignedAction3Access().getUnassignedAction2Sub2Action_1_1_1().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getUnassignedAction3Access().getUnassignedAction2Sub1Action_1_0_1().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getUnassignedAction3Access().getUnassignedAction2Sub1Action_1_0_1().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getUnassignedAction3Access().getUnassignedAction2Sub2Action_1_1_1().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

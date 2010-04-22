@@ -370,8 +370,8 @@ protected class Statement_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getEvaluationRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getDefinitionRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getDefinitionRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getEvaluationRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -1168,12 +1168,12 @@ protected class Expression_AdditionParserRuleCall extends RuleCallToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getNumberLiteralAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getFunctionCallAction_2_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getNumberLiteralAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -1227,12 +1227,12 @@ protected class Addition_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getNumberLiteralAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getFunctionCallAction_2_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getNumberLiteralAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -1574,12 +1574,12 @@ protected class Multiplication_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getNumberLiteralAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getFunctionCallAction_2_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getNumberLiteralAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -1642,8 +1642,8 @@ protected class Multiplication_Group_1 extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -1922,12 +1922,12 @@ protected class PrimaryExpression_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getNumberLiteralAction_1_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getFunctionCallAction_2_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getPrimaryExpressionAccess().getNumberLiteralAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

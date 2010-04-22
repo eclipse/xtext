@@ -906,29 +906,20 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start rule__Root__Group__0
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:361:1: rule__Root__Group__0 : ( () ) rule__Root__Group__1 ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:361:1: rule__Root__Group__0 : rule__Root__Group__0__Impl rule__Root__Group__1 ;
     public final void rule__Root__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:365:1: ( ( () ) rule__Root__Group__1 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:366:1: ( () ) rule__Root__Group__1
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:365:1: ( rule__Root__Group__0__Impl rule__Root__Group__1 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:366:2: rule__Root__Group__0__Impl rule__Root__Group__1
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:366:1: ( () )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:367:1: ()
-            {
-             before(grammarAccess.getRootAccess().getRootAction_0()); 
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:368:1: ()
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:370:1: 
-            {
-            }
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group__0__Impl_in_rule__Root__Group__0714);
+            rule__Root__Group__0__Impl();
+            _fsp--;
 
-             after(grammarAccess.getRootAccess().getRootAction_0()); 
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Root__Group__1_in_rule__Root__Group__0728);
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group__1_in_rule__Root__Group__0717);
             rule__Root__Group__1();
             _fsp--;
 
@@ -950,26 +941,58 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
     // $ANTLR end rule__Root__Group__0
 
 
+    // $ANTLR start rule__Root__Group__0__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:373:1: rule__Root__Group__0__Impl : ( () ) ;
+    public final void rule__Root__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:377:1: ( ( () ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:378:1: ( () )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:378:1: ( () )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:379:1: ()
+            {
+             before(grammarAccess.getRootAccess().getRootAction_0()); 
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:380:1: ()
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:382:1: 
+            {
+            }
+
+             after(grammarAccess.getRootAccess().getRootAction_0()); 
+
+            }
+
+
+            }
+
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Root__Group__0__Impl
+
+
     // $ANTLR start rule__Root__Group__1
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:381:1: rule__Root__Group__1 : ( 'Root' ) rule__Root__Group__2 ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:392:1: rule__Root__Group__1 : rule__Root__Group__1__Impl rule__Root__Group__2 ;
     public final void rule__Root__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:385:1: ( ( 'Root' ) rule__Root__Group__2 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:386:1: ( 'Root' ) rule__Root__Group__2
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:396:1: ( rule__Root__Group__1__Impl rule__Root__Group__2 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:397:2: rule__Root__Group__1__Impl rule__Root__Group__2
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:386:1: ( 'Root' )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:387:1: 'Root'
-            {
-             before(grammarAccess.getRootAccess().getRootKeyword_1()); 
-            match(input,12,FollowSets000.FOLLOW_12_in_rule__Root__Group__1757); 
-             after(grammarAccess.getRootAccess().getRootKeyword_1()); 
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group__1__Impl_in_rule__Root__Group__1775);
+            rule__Root__Group__1__Impl();
+            _fsp--;
 
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Root__Group__2_in_rule__Root__Group__1767);
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group__2_in_rule__Root__Group__1778);
             rule__Root__Group__2();
             _fsp--;
 
@@ -991,35 +1014,58 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
     // $ANTLR end rule__Root__Group__1
 
 
+    // $ANTLR start rule__Root__Group__1__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:404:1: rule__Root__Group__1__Impl : ( 'Root' ) ;
+    public final void rule__Root__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:408:1: ( ( 'Root' ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:409:1: ( 'Root' )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:409:1: ( 'Root' )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:410:1: 'Root'
+            {
+             before(grammarAccess.getRootAccess().getRootKeyword_1()); 
+            match(input,12,FollowSets000.FOLLOW_12_in_rule__Root__Group__1__Impl806); 
+             after(grammarAccess.getRootAccess().getRootKeyword_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Root__Group__1__Impl
+
+
     // $ANTLR start rule__Root__Group__2
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:401:1: rule__Root__Group__2 : ( ( rule__Root__NameAssignment_2 ) ) rule__Root__Group__3 ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:423:1: rule__Root__Group__2 : rule__Root__Group__2__Impl rule__Root__Group__3 ;
     public final void rule__Root__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:405:1: ( ( ( rule__Root__NameAssignment_2 ) ) rule__Root__Group__3 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:406:1: ( ( rule__Root__NameAssignment_2 ) ) rule__Root__Group__3
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:427:1: ( rule__Root__Group__2__Impl rule__Root__Group__3 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:428:2: rule__Root__Group__2__Impl rule__Root__Group__3
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:406:1: ( ( rule__Root__NameAssignment_2 ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:407:1: ( rule__Root__NameAssignment_2 )
-            {
-             before(grammarAccess.getRootAccess().getNameAssignment_2()); 
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:408:1: ( rule__Root__NameAssignment_2 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:408:2: rule__Root__NameAssignment_2
-            {
-            pushFollow(FollowSets000.FOLLOW_rule__Root__NameAssignment_2_in_rule__Root__Group__2795);
-            rule__Root__NameAssignment_2();
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group__2__Impl_in_rule__Root__Group__2837);
+            rule__Root__Group__2__Impl();
             _fsp--;
 
-
-            }
-
-             after(grammarAccess.getRootAccess().getNameAssignment_2()); 
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Root__Group__3_in_rule__Root__Group__2804);
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group__3_in_rule__Root__Group__2840);
             rule__Root__Group__3();
             _fsp--;
 
@@ -1041,26 +1087,67 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
     // $ANTLR end rule__Root__Group__2
 
 
+    // $ANTLR start rule__Root__Group__2__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:435:1: rule__Root__Group__2__Impl : ( ( rule__Root__NameAssignment_2 ) ) ;
+    public final void rule__Root__Group__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:439:1: ( ( ( rule__Root__NameAssignment_2 ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:440:1: ( ( rule__Root__NameAssignment_2 ) )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:440:1: ( ( rule__Root__NameAssignment_2 ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:441:1: ( rule__Root__NameAssignment_2 )
+            {
+             before(grammarAccess.getRootAccess().getNameAssignment_2()); 
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:442:1: ( rule__Root__NameAssignment_2 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:442:2: rule__Root__NameAssignment_2
+            {
+            pushFollow(FollowSets000.FOLLOW_rule__Root__NameAssignment_2_in_rule__Root__Group__2__Impl867);
+            rule__Root__NameAssignment_2();
+            _fsp--;
+
+
+            }
+
+             after(grammarAccess.getRootAccess().getNameAssignment_2()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Root__Group__2__Impl
+
+
     // $ANTLR start rule__Root__Group__3
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:419:1: rule__Root__Group__3 : ( '{' ) rule__Root__Group__4 ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:452:1: rule__Root__Group__3 : rule__Root__Group__3__Impl rule__Root__Group__4 ;
     public final void rule__Root__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:423:1: ( ( '{' ) rule__Root__Group__4 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:424:1: ( '{' ) rule__Root__Group__4
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:456:1: ( rule__Root__Group__3__Impl rule__Root__Group__4 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:457:2: rule__Root__Group__3__Impl rule__Root__Group__4
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:424:1: ( '{' )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:425:1: '{'
-            {
-             before(grammarAccess.getRootAccess().getLeftCurlyBracketKeyword_3()); 
-            match(input,13,FollowSets000.FOLLOW_13_in_rule__Root__Group__3833); 
-             after(grammarAccess.getRootAccess().getLeftCurlyBracketKeyword_3()); 
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group__3__Impl_in_rule__Root__Group__3897);
+            rule__Root__Group__3__Impl();
+            _fsp--;
 
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Root__Group__4_in_rule__Root__Group__3843);
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group__4_in_rule__Root__Group__3900);
             rule__Root__Group__4();
             _fsp--;
 
@@ -1082,46 +1169,58 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
     // $ANTLR end rule__Root__Group__3
 
 
+    // $ANTLR start rule__Root__Group__3__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:464:1: rule__Root__Group__3__Impl : ( '{' ) ;
+    public final void rule__Root__Group__3__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:468:1: ( ( '{' ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:469:1: ( '{' )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:469:1: ( '{' )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:470:1: '{'
+            {
+             before(grammarAccess.getRootAccess().getLeftCurlyBracketKeyword_3()); 
+            match(input,13,FollowSets000.FOLLOW_13_in_rule__Root__Group__3__Impl928); 
+             after(grammarAccess.getRootAccess().getLeftCurlyBracketKeyword_3()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Root__Group__3__Impl
+
+
     // $ANTLR start rule__Root__Group__4
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:439:1: rule__Root__Group__4 : ( ( rule__Root__Group_4__0 )? ) rule__Root__Group__5 ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:483:1: rule__Root__Group__4 : rule__Root__Group__4__Impl rule__Root__Group__5 ;
     public final void rule__Root__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:443:1: ( ( ( rule__Root__Group_4__0 )? ) rule__Root__Group__5 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:444:1: ( ( rule__Root__Group_4__0 )? ) rule__Root__Group__5
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:487:1: ( rule__Root__Group__4__Impl rule__Root__Group__5 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:488:2: rule__Root__Group__4__Impl rule__Root__Group__5
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:444:1: ( ( rule__Root__Group_4__0 )? )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:445:1: ( rule__Root__Group_4__0 )?
-            {
-             before(grammarAccess.getRootAccess().getGroup_4()); 
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:446:1: ( rule__Root__Group_4__0 )?
-            int alt4=2;
-            int LA4_0 = input.LA(1);
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group__4__Impl_in_rule__Root__Group__4959);
+            rule__Root__Group__4__Impl();
+            _fsp--;
 
-            if ( (LA4_0==15) ) {
-                alt4=1;
-            }
-            switch (alt4) {
-                case 1 :
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:446:2: rule__Root__Group_4__0
-                    {
-                    pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4__0_in_rule__Root__Group__4871);
-                    rule__Root__Group_4__0();
-                    _fsp--;
-
-
-                    }
-                    break;
-
-            }
-
-             after(grammarAccess.getRootAccess().getGroup_4()); 
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Root__Group__5_in_rule__Root__Group__4881);
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group__5_in_rule__Root__Group__4962);
             rule__Root__Group__5();
             _fsp--;
 
@@ -1143,33 +1242,33 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
     // $ANTLR end rule__Root__Group__4
 
 
-    // $ANTLR start rule__Root__Group__5
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:457:1: rule__Root__Group__5 : ( ( rule__Root__Group_5__0 )? ) rule__Root__Group__6 ;
-    public final void rule__Root__Group__5() throws RecognitionException {
+    // $ANTLR start rule__Root__Group__4__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:495:1: rule__Root__Group__4__Impl : ( ( rule__Root__Group_4__0 )? ) ;
+    public final void rule__Root__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:461:1: ( ( ( rule__Root__Group_5__0 )? ) rule__Root__Group__6 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:462:1: ( ( rule__Root__Group_5__0 )? ) rule__Root__Group__6
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:499:1: ( ( ( rule__Root__Group_4__0 )? ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:500:1: ( ( rule__Root__Group_4__0 )? )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:462:1: ( ( rule__Root__Group_5__0 )? )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:463:1: ( rule__Root__Group_5__0 )?
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:500:1: ( ( rule__Root__Group_4__0 )? )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:501:1: ( rule__Root__Group_4__0 )?
             {
-             before(grammarAccess.getRootAccess().getGroup_5()); 
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:464:1: ( rule__Root__Group_5__0 )?
-            int alt5=2;
-            int LA5_0 = input.LA(1);
+             before(grammarAccess.getRootAccess().getGroup_4()); 
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:502:1: ( rule__Root__Group_4__0 )?
+            int alt4=2;
+            int LA4_0 = input.LA(1);
 
-            if ( (LA5_0==17) ) {
-                alt5=1;
+            if ( (LA4_0==15) ) {
+                alt4=1;
             }
-            switch (alt5) {
+            switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:464:2: rule__Root__Group_5__0
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:502:2: rule__Root__Group_4__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Root__Group_5__0_in_rule__Root__Group__5909);
-                    rule__Root__Group_5__0();
+                    pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4__0_in_rule__Root__Group__4__Impl989);
+                    rule__Root__Group_4__0();
                     _fsp--;
 
 
@@ -1178,11 +1277,43 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
 
             }
 
-             after(grammarAccess.getRootAccess().getGroup_5()); 
+             after(grammarAccess.getRootAccess().getGroup_4()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__Root__Group__6_in_rule__Root__Group__5919);
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Root__Group__4__Impl
+
+
+    // $ANTLR start rule__Root__Group__5
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:512:1: rule__Root__Group__5 : rule__Root__Group__5__Impl rule__Root__Group__6 ;
+    public final void rule__Root__Group__5() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:516:1: ( rule__Root__Group__5__Impl rule__Root__Group__6 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:517:2: rule__Root__Group__5__Impl rule__Root__Group__6
+            {
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group__5__Impl_in_rule__Root__Group__51020);
+            rule__Root__Group__5__Impl();
+            _fsp--;
+
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group__6_in_rule__Root__Group__51023);
             rule__Root__Group__6();
             _fsp--;
 
@@ -1204,24 +1335,76 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
     // $ANTLR end rule__Root__Group__5
 
 
+    // $ANTLR start rule__Root__Group__5__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:524:1: rule__Root__Group__5__Impl : ( ( rule__Root__Group_5__0 )? ) ;
+    public final void rule__Root__Group__5__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:528:1: ( ( ( rule__Root__Group_5__0 )? ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:529:1: ( ( rule__Root__Group_5__0 )? )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:529:1: ( ( rule__Root__Group_5__0 )? )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:530:1: ( rule__Root__Group_5__0 )?
+            {
+             before(grammarAccess.getRootAccess().getGroup_5()); 
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:531:1: ( rule__Root__Group_5__0 )?
+            int alt5=2;
+            int LA5_0 = input.LA(1);
+
+            if ( (LA5_0==17) ) {
+                alt5=1;
+            }
+            switch (alt5) {
+                case 1 :
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:531:2: rule__Root__Group_5__0
+                    {
+                    pushFollow(FollowSets000.FOLLOW_rule__Root__Group_5__0_in_rule__Root__Group__5__Impl1050);
+                    rule__Root__Group_5__0();
+                    _fsp--;
+
+
+                    }
+                    break;
+
+            }
+
+             after(grammarAccess.getRootAccess().getGroup_5()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Root__Group__5__Impl
+
+
     // $ANTLR start rule__Root__Group__6
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:475:1: rule__Root__Group__6 : ( '}' ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:541:1: rule__Root__Group__6 : rule__Root__Group__6__Impl ;
     public final void rule__Root__Group__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:479:1: ( ( '}' ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:480:1: ( '}' )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:545:1: ( rule__Root__Group__6__Impl )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:546:2: rule__Root__Group__6__Impl
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:480:1: ( '}' )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:481:1: '}'
-            {
-             before(grammarAccess.getRootAccess().getRightCurlyBracketKeyword_6()); 
-            match(input,14,FollowSets000.FOLLOW_14_in_rule__Root__Group__6948); 
-             after(grammarAccess.getRootAccess().getRightCurlyBracketKeyword_6()); 
-
-            }
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group__6__Impl_in_rule__Root__Group__61081);
+            rule__Root__Group__6__Impl();
+            _fsp--;
 
 
             }
@@ -1241,26 +1424,58 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
     // $ANTLR end rule__Root__Group__6
 
 
+    // $ANTLR start rule__Root__Group__6__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:552:1: rule__Root__Group__6__Impl : ( '}' ) ;
+    public final void rule__Root__Group__6__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:556:1: ( ( '}' ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:557:1: ( '}' )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:557:1: ( '}' )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:558:1: '}'
+            {
+             before(grammarAccess.getRootAccess().getRightCurlyBracketKeyword_6()); 
+            match(input,14,FollowSets000.FOLLOW_14_in_rule__Root__Group__6__Impl1109); 
+             after(grammarAccess.getRootAccess().getRightCurlyBracketKeyword_6()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Root__Group__6__Impl
+
+
     // $ANTLR start rule__Root__Group_4__0
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:508:1: rule__Root__Group_4__0 : ( 'classes' ) rule__Root__Group_4__1 ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:585:1: rule__Root__Group_4__0 : rule__Root__Group_4__0__Impl rule__Root__Group_4__1 ;
     public final void rule__Root__Group_4__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:512:1: ( ( 'classes' ) rule__Root__Group_4__1 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:513:1: ( 'classes' ) rule__Root__Group_4__1
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:589:1: ( rule__Root__Group_4__0__Impl rule__Root__Group_4__1 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:590:2: rule__Root__Group_4__0__Impl rule__Root__Group_4__1
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:513:1: ( 'classes' )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:514:1: 'classes'
-            {
-             before(grammarAccess.getRootAccess().getClassesKeyword_4_0()); 
-            match(input,15,FollowSets000.FOLLOW_15_in_rule__Root__Group_4__0998); 
-             after(grammarAccess.getRootAccess().getClassesKeyword_4_0()); 
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4__0__Impl_in_rule__Root__Group_4__01154);
+            rule__Root__Group_4__0__Impl();
+            _fsp--;
 
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4__1_in_rule__Root__Group_4__01008);
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4__1_in_rule__Root__Group_4__01157);
             rule__Root__Group_4__1();
             _fsp--;
 
@@ -1282,26 +1497,58 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
     // $ANTLR end rule__Root__Group_4__0
 
 
+    // $ANTLR start rule__Root__Group_4__0__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:597:1: rule__Root__Group_4__0__Impl : ( 'classes' ) ;
+    public final void rule__Root__Group_4__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:601:1: ( ( 'classes' ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:602:1: ( 'classes' )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:602:1: ( 'classes' )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:603:1: 'classes'
+            {
+             before(grammarAccess.getRootAccess().getClassesKeyword_4_0()); 
+            match(input,15,FollowSets000.FOLLOW_15_in_rule__Root__Group_4__0__Impl1185); 
+             after(grammarAccess.getRootAccess().getClassesKeyword_4_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Root__Group_4__0__Impl
+
+
     // $ANTLR start rule__Root__Group_4__1
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:528:1: rule__Root__Group_4__1 : ( '{' ) rule__Root__Group_4__2 ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:616:1: rule__Root__Group_4__1 : rule__Root__Group_4__1__Impl rule__Root__Group_4__2 ;
     public final void rule__Root__Group_4__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:532:1: ( ( '{' ) rule__Root__Group_4__2 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:533:1: ( '{' ) rule__Root__Group_4__2
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:620:1: ( rule__Root__Group_4__1__Impl rule__Root__Group_4__2 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:621:2: rule__Root__Group_4__1__Impl rule__Root__Group_4__2
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:533:1: ( '{' )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:534:1: '{'
-            {
-             before(grammarAccess.getRootAccess().getLeftCurlyBracketKeyword_4_1()); 
-            match(input,13,FollowSets000.FOLLOW_13_in_rule__Root__Group_4__11037); 
-             after(grammarAccess.getRootAccess().getLeftCurlyBracketKeyword_4_1()); 
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4__1__Impl_in_rule__Root__Group_4__11216);
+            rule__Root__Group_4__1__Impl();
+            _fsp--;
 
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4__2_in_rule__Root__Group_4__11047);
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4__2_in_rule__Root__Group_4__11219);
             rule__Root__Group_4__2();
             _fsp--;
 
@@ -1323,35 +1570,58 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
     // $ANTLR end rule__Root__Group_4__1
 
 
+    // $ANTLR start rule__Root__Group_4__1__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:628:1: rule__Root__Group_4__1__Impl : ( '{' ) ;
+    public final void rule__Root__Group_4__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:632:1: ( ( '{' ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:633:1: ( '{' )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:633:1: ( '{' )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:634:1: '{'
+            {
+             before(grammarAccess.getRootAccess().getLeftCurlyBracketKeyword_4_1()); 
+            match(input,13,FollowSets000.FOLLOW_13_in_rule__Root__Group_4__1__Impl1247); 
+             after(grammarAccess.getRootAccess().getLeftCurlyBracketKeyword_4_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Root__Group_4__1__Impl
+
+
     // $ANTLR start rule__Root__Group_4__2
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:548:1: rule__Root__Group_4__2 : ( ( rule__Root__ClassesAssignment_4_2 ) ) rule__Root__Group_4__3 ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:647:1: rule__Root__Group_4__2 : rule__Root__Group_4__2__Impl rule__Root__Group_4__3 ;
     public final void rule__Root__Group_4__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:552:1: ( ( ( rule__Root__ClassesAssignment_4_2 ) ) rule__Root__Group_4__3 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:553:1: ( ( rule__Root__ClassesAssignment_4_2 ) ) rule__Root__Group_4__3
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:651:1: ( rule__Root__Group_4__2__Impl rule__Root__Group_4__3 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:652:2: rule__Root__Group_4__2__Impl rule__Root__Group_4__3
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:553:1: ( ( rule__Root__ClassesAssignment_4_2 ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:554:1: ( rule__Root__ClassesAssignment_4_2 )
-            {
-             before(grammarAccess.getRootAccess().getClassesAssignment_4_2()); 
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:555:1: ( rule__Root__ClassesAssignment_4_2 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:555:2: rule__Root__ClassesAssignment_4_2
-            {
-            pushFollow(FollowSets000.FOLLOW_rule__Root__ClassesAssignment_4_2_in_rule__Root__Group_4__21075);
-            rule__Root__ClassesAssignment_4_2();
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4__2__Impl_in_rule__Root__Group_4__21278);
+            rule__Root__Group_4__2__Impl();
             _fsp--;
 
-
-            }
-
-             after(grammarAccess.getRootAccess().getClassesAssignment_4_2()); 
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4__3_in_rule__Root__Group_4__21084);
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4__3_in_rule__Root__Group_4__21281);
             rule__Root__Group_4__3();
             _fsp--;
 
@@ -1373,53 +1643,67 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
     // $ANTLR end rule__Root__Group_4__2
 
 
+    // $ANTLR start rule__Root__Group_4__2__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:659:1: rule__Root__Group_4__2__Impl : ( ( rule__Root__ClassesAssignment_4_2 ) ) ;
+    public final void rule__Root__Group_4__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:663:1: ( ( ( rule__Root__ClassesAssignment_4_2 ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:664:1: ( ( rule__Root__ClassesAssignment_4_2 ) )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:664:1: ( ( rule__Root__ClassesAssignment_4_2 ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:665:1: ( rule__Root__ClassesAssignment_4_2 )
+            {
+             before(grammarAccess.getRootAccess().getClassesAssignment_4_2()); 
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:666:1: ( rule__Root__ClassesAssignment_4_2 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:666:2: rule__Root__ClassesAssignment_4_2
+            {
+            pushFollow(FollowSets000.FOLLOW_rule__Root__ClassesAssignment_4_2_in_rule__Root__Group_4__2__Impl1308);
+            rule__Root__ClassesAssignment_4_2();
+            _fsp--;
+
+
+            }
+
+             after(grammarAccess.getRootAccess().getClassesAssignment_4_2()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Root__Group_4__2__Impl
+
+
     // $ANTLR start rule__Root__Group_4__3
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:566:1: rule__Root__Group_4__3 : ( ( rule__Root__Group_4_3__0 )* ) rule__Root__Group_4__4 ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:676:1: rule__Root__Group_4__3 : rule__Root__Group_4__3__Impl rule__Root__Group_4__4 ;
     public final void rule__Root__Group_4__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:570:1: ( ( ( rule__Root__Group_4_3__0 )* ) rule__Root__Group_4__4 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:571:1: ( ( rule__Root__Group_4_3__0 )* ) rule__Root__Group_4__4
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:680:1: ( rule__Root__Group_4__3__Impl rule__Root__Group_4__4 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:681:2: rule__Root__Group_4__3__Impl rule__Root__Group_4__4
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:571:1: ( ( rule__Root__Group_4_3__0 )* )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:572:1: ( rule__Root__Group_4_3__0 )*
-            {
-             before(grammarAccess.getRootAccess().getGroup_4_3()); 
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:573:1: ( rule__Root__Group_4_3__0 )*
-            loop6:
-            do {
-                int alt6=2;
-                int LA6_0 = input.LA(1);
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4__3__Impl_in_rule__Root__Group_4__31338);
+            rule__Root__Group_4__3__Impl();
+            _fsp--;
 
-                if ( (LA6_0==16) ) {
-                    alt6=1;
-                }
-
-
-                switch (alt6) {
-            	case 1 :
-            	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:573:2: rule__Root__Group_4_3__0
-            	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4_3__0_in_rule__Root__Group_4__31112);
-            	    rule__Root__Group_4_3__0();
-            	    _fsp--;
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop6;
-                }
-            } while (true);
-
-             after(grammarAccess.getRootAccess().getGroup_4_3()); 
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4__4_in_rule__Root__Group_4__31122);
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4__4_in_rule__Root__Group_4__31341);
             rule__Root__Group_4__4();
             _fsp--;
 
@@ -1441,24 +1725,83 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
     // $ANTLR end rule__Root__Group_4__3
 
 
+    // $ANTLR start rule__Root__Group_4__3__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:688:1: rule__Root__Group_4__3__Impl : ( ( rule__Root__Group_4_3__0 )* ) ;
+    public final void rule__Root__Group_4__3__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:692:1: ( ( ( rule__Root__Group_4_3__0 )* ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:693:1: ( ( rule__Root__Group_4_3__0 )* )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:693:1: ( ( rule__Root__Group_4_3__0 )* )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:694:1: ( rule__Root__Group_4_3__0 )*
+            {
+             before(grammarAccess.getRootAccess().getGroup_4_3()); 
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:695:1: ( rule__Root__Group_4_3__0 )*
+            loop6:
+            do {
+                int alt6=2;
+                int LA6_0 = input.LA(1);
+
+                if ( (LA6_0==16) ) {
+                    alt6=1;
+                }
+
+
+                switch (alt6) {
+            	case 1 :
+            	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:695:2: rule__Root__Group_4_3__0
+            	    {
+            	    pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4_3__0_in_rule__Root__Group_4__3__Impl1368);
+            	    rule__Root__Group_4_3__0();
+            	    _fsp--;
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop6;
+                }
+            } while (true);
+
+             after(grammarAccess.getRootAccess().getGroup_4_3()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Root__Group_4__3__Impl
+
+
     // $ANTLR start rule__Root__Group_4__4
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:584:1: rule__Root__Group_4__4 : ( '}' ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:705:1: rule__Root__Group_4__4 : rule__Root__Group_4__4__Impl ;
     public final void rule__Root__Group_4__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:588:1: ( ( '}' ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:589:1: ( '}' )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:709:1: ( rule__Root__Group_4__4__Impl )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:710:2: rule__Root__Group_4__4__Impl
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:589:1: ( '}' )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:590:1: '}'
-            {
-             before(grammarAccess.getRootAccess().getRightCurlyBracketKeyword_4_4()); 
-            match(input,14,FollowSets000.FOLLOW_14_in_rule__Root__Group_4__41151); 
-             after(grammarAccess.getRootAccess().getRightCurlyBracketKeyword_4_4()); 
-
-            }
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4__4__Impl_in_rule__Root__Group_4__41399);
+            rule__Root__Group_4__4__Impl();
+            _fsp--;
 
 
             }
@@ -1478,26 +1821,58 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
     // $ANTLR end rule__Root__Group_4__4
 
 
+    // $ANTLR start rule__Root__Group_4__4__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:716:1: rule__Root__Group_4__4__Impl : ( '}' ) ;
+    public final void rule__Root__Group_4__4__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:720:1: ( ( '}' ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:721:1: ( '}' )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:721:1: ( '}' )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:722:1: '}'
+            {
+             before(grammarAccess.getRootAccess().getRightCurlyBracketKeyword_4_4()); 
+            match(input,14,FollowSets000.FOLLOW_14_in_rule__Root__Group_4__4__Impl1427); 
+             after(grammarAccess.getRootAccess().getRightCurlyBracketKeyword_4_4()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Root__Group_4__4__Impl
+
+
     // $ANTLR start rule__Root__Group_4_3__0
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:613:1: rule__Root__Group_4_3__0 : ( ',' ) rule__Root__Group_4_3__1 ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:745:1: rule__Root__Group_4_3__0 : rule__Root__Group_4_3__0__Impl rule__Root__Group_4_3__1 ;
     public final void rule__Root__Group_4_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:617:1: ( ( ',' ) rule__Root__Group_4_3__1 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:618:1: ( ',' ) rule__Root__Group_4_3__1
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:749:1: ( rule__Root__Group_4_3__0__Impl rule__Root__Group_4_3__1 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:750:2: rule__Root__Group_4_3__0__Impl rule__Root__Group_4_3__1
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:618:1: ( ',' )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:619:1: ','
-            {
-             before(grammarAccess.getRootAccess().getCommaKeyword_4_3_0()); 
-            match(input,16,FollowSets000.FOLLOW_16_in_rule__Root__Group_4_3__01197); 
-             after(grammarAccess.getRootAccess().getCommaKeyword_4_3_0()); 
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4_3__0__Impl_in_rule__Root__Group_4_3__01468);
+            rule__Root__Group_4_3__0__Impl();
+            _fsp--;
 
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4_3__1_in_rule__Root__Group_4_3__01207);
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4_3__1_in_rule__Root__Group_4_3__01471);
             rule__Root__Group_4_3__1();
             _fsp--;
 
@@ -1519,24 +1894,93 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
     // $ANTLR end rule__Root__Group_4_3__0
 
 
+    // $ANTLR start rule__Root__Group_4_3__0__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:757:1: rule__Root__Group_4_3__0__Impl : ( ',' ) ;
+    public final void rule__Root__Group_4_3__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:761:1: ( ( ',' ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:762:1: ( ',' )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:762:1: ( ',' )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:763:1: ','
+            {
+             before(grammarAccess.getRootAccess().getCommaKeyword_4_3_0()); 
+            match(input,16,FollowSets000.FOLLOW_16_in_rule__Root__Group_4_3__0__Impl1499); 
+             after(grammarAccess.getRootAccess().getCommaKeyword_4_3_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Root__Group_4_3__0__Impl
+
+
     // $ANTLR start rule__Root__Group_4_3__1
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:633:1: rule__Root__Group_4_3__1 : ( ( rule__Root__ClassesAssignment_4_3_1 ) ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:776:1: rule__Root__Group_4_3__1 : rule__Root__Group_4_3__1__Impl ;
     public final void rule__Root__Group_4_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:637:1: ( ( ( rule__Root__ClassesAssignment_4_3_1 ) ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:638:1: ( ( rule__Root__ClassesAssignment_4_3_1 ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:780:1: ( rule__Root__Group_4_3__1__Impl )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:781:2: rule__Root__Group_4_3__1__Impl
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:638:1: ( ( rule__Root__ClassesAssignment_4_3_1 ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:639:1: ( rule__Root__ClassesAssignment_4_3_1 )
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_4_3__1__Impl_in_rule__Root__Group_4_3__11530);
+            rule__Root__Group_4_3__1__Impl();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Root__Group_4_3__1
+
+
+    // $ANTLR start rule__Root__Group_4_3__1__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:787:1: rule__Root__Group_4_3__1__Impl : ( ( rule__Root__ClassesAssignment_4_3_1 ) ) ;
+    public final void rule__Root__Group_4_3__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:791:1: ( ( ( rule__Root__ClassesAssignment_4_3_1 ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:792:1: ( ( rule__Root__ClassesAssignment_4_3_1 ) )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:792:1: ( ( rule__Root__ClassesAssignment_4_3_1 ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:793:1: ( rule__Root__ClassesAssignment_4_3_1 )
             {
              before(grammarAccess.getRootAccess().getClassesAssignment_4_3_1()); 
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:640:1: ( rule__Root__ClassesAssignment_4_3_1 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:640:2: rule__Root__ClassesAssignment_4_3_1
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:794:1: ( rule__Root__ClassesAssignment_4_3_1 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:794:2: rule__Root__ClassesAssignment_4_3_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Root__ClassesAssignment_4_3_1_in_rule__Root__Group_4_3__11235);
+            pushFollow(FollowSets000.FOLLOW_rule__Root__ClassesAssignment_4_3_1_in_rule__Root__Group_4_3__1__Impl1557);
             rule__Root__ClassesAssignment_4_3_1();
             _fsp--;
 
@@ -1562,29 +2006,24 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
         }
         return ;
     }
-    // $ANTLR end rule__Root__Group_4_3__1
+    // $ANTLR end rule__Root__Group_4_3__1__Impl
 
 
     // $ANTLR start rule__Root__Group_5__0
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:654:1: rule__Root__Group_5__0 : ( 'concrete0' ) rule__Root__Group_5__1 ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:808:1: rule__Root__Group_5__0 : rule__Root__Group_5__0__Impl rule__Root__Group_5__1 ;
     public final void rule__Root__Group_5__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:658:1: ( ( 'concrete0' ) rule__Root__Group_5__1 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:659:1: ( 'concrete0' ) rule__Root__Group_5__1
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:812:1: ( rule__Root__Group_5__0__Impl rule__Root__Group_5__1 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:813:2: rule__Root__Group_5__0__Impl rule__Root__Group_5__1
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:659:1: ( 'concrete0' )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:660:1: 'concrete0'
-            {
-             before(grammarAccess.getRootAccess().getConcrete0Keyword_5_0()); 
-            match(input,17,FollowSets000.FOLLOW_17_in_rule__Root__Group_5__01274); 
-             after(grammarAccess.getRootAccess().getConcrete0Keyword_5_0()); 
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_5__0__Impl_in_rule__Root__Group_5__01591);
+            rule__Root__Group_5__0__Impl();
+            _fsp--;
 
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_5__1_in_rule__Root__Group_5__01284);
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_5__1_in_rule__Root__Group_5__01594);
             rule__Root__Group_5__1();
             _fsp--;
 
@@ -1606,24 +2045,93 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
     // $ANTLR end rule__Root__Group_5__0
 
 
+    // $ANTLR start rule__Root__Group_5__0__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:820:1: rule__Root__Group_5__0__Impl : ( 'concrete0' ) ;
+    public final void rule__Root__Group_5__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:824:1: ( ( 'concrete0' ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:825:1: ( 'concrete0' )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:825:1: ( 'concrete0' )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:826:1: 'concrete0'
+            {
+             before(grammarAccess.getRootAccess().getConcrete0Keyword_5_0()); 
+            match(input,17,FollowSets000.FOLLOW_17_in_rule__Root__Group_5__0__Impl1622); 
+             after(grammarAccess.getRootAccess().getConcrete0Keyword_5_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Root__Group_5__0__Impl
+
+
     // $ANTLR start rule__Root__Group_5__1
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:674:1: rule__Root__Group_5__1 : ( ( rule__Root__Concrete0Assignment_5_1 ) ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:839:1: rule__Root__Group_5__1 : rule__Root__Group_5__1__Impl ;
     public final void rule__Root__Group_5__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:678:1: ( ( ( rule__Root__Concrete0Assignment_5_1 ) ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:679:1: ( ( rule__Root__Concrete0Assignment_5_1 ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:843:1: ( rule__Root__Group_5__1__Impl )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:844:2: rule__Root__Group_5__1__Impl
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:679:1: ( ( rule__Root__Concrete0Assignment_5_1 ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:680:1: ( rule__Root__Concrete0Assignment_5_1 )
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Group_5__1__Impl_in_rule__Root__Group_5__11653);
+            rule__Root__Group_5__1__Impl();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Root__Group_5__1
+
+
+    // $ANTLR start rule__Root__Group_5__1__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:850:1: rule__Root__Group_5__1__Impl : ( ( rule__Root__Concrete0Assignment_5_1 ) ) ;
+    public final void rule__Root__Group_5__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:854:1: ( ( ( rule__Root__Concrete0Assignment_5_1 ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:855:1: ( ( rule__Root__Concrete0Assignment_5_1 ) )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:855:1: ( ( rule__Root__Concrete0Assignment_5_1 ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:856:1: ( rule__Root__Concrete0Assignment_5_1 )
             {
              before(grammarAccess.getRootAccess().getConcrete0Assignment_5_1()); 
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:681:1: ( rule__Root__Concrete0Assignment_5_1 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:681:2: rule__Root__Concrete0Assignment_5_1
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:857:1: ( rule__Root__Concrete0Assignment_5_1 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:857:2: rule__Root__Concrete0Assignment_5_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Root__Concrete0Assignment_5_1_in_rule__Root__Group_5__11312);
+            pushFollow(FollowSets000.FOLLOW_rule__Root__Concrete0Assignment_5_1_in_rule__Root__Group_5__1__Impl1680);
             rule__Root__Concrete0Assignment_5_1();
             _fsp--;
 
@@ -1649,33 +2157,24 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
         }
         return ;
     }
-    // $ANTLR end rule__Root__Group_5__1
+    // $ANTLR end rule__Root__Group_5__1__Impl
 
 
     // $ANTLR start rule__Concrete0_Impl__Group__0
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:695:1: rule__Concrete0_Impl__Group__0 : ( () ) rule__Concrete0_Impl__Group__1 ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:871:1: rule__Concrete0_Impl__Group__0 : rule__Concrete0_Impl__Group__0__Impl rule__Concrete0_Impl__Group__1 ;
     public final void rule__Concrete0_Impl__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:699:1: ( ( () ) rule__Concrete0_Impl__Group__1 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:700:1: ( () ) rule__Concrete0_Impl__Group__1
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:875:1: ( rule__Concrete0_Impl__Group__0__Impl rule__Concrete0_Impl__Group__1 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:876:2: rule__Concrete0_Impl__Group__0__Impl rule__Concrete0_Impl__Group__1
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:700:1: ( () )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:701:1: ()
-            {
-             before(grammarAccess.getConcrete0_ImplAccess().getConcrete0Action_0()); 
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:702:1: ()
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:704:1: 
-            {
-            }
+            pushFollow(FollowSets000.FOLLOW_rule__Concrete0_Impl__Group__0__Impl_in_rule__Concrete0_Impl__Group__01714);
+            rule__Concrete0_Impl__Group__0__Impl();
+            _fsp--;
 
-             after(grammarAccess.getConcrete0_ImplAccess().getConcrete0Action_0()); 
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Concrete0_Impl__Group__1_in_rule__Concrete0_Impl__Group__01360);
+            pushFollow(FollowSets000.FOLLOW_rule__Concrete0_Impl__Group__1_in_rule__Concrete0_Impl__Group__01717);
             rule__Concrete0_Impl__Group__1();
             _fsp--;
 
@@ -1697,26 +2196,58 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
     // $ANTLR end rule__Concrete0_Impl__Group__0
 
 
+    // $ANTLR start rule__Concrete0_Impl__Group__0__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:883:1: rule__Concrete0_Impl__Group__0__Impl : ( () ) ;
+    public final void rule__Concrete0_Impl__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:887:1: ( ( () ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:888:1: ( () )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:888:1: ( () )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:889:1: ()
+            {
+             before(grammarAccess.getConcrete0_ImplAccess().getConcrete0Action_0()); 
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:890:1: ()
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:892:1: 
+            {
+            }
+
+             after(grammarAccess.getConcrete0_ImplAccess().getConcrete0Action_0()); 
+
+            }
+
+
+            }
+
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Concrete0_Impl__Group__0__Impl
+
+
     // $ANTLR start rule__Concrete0_Impl__Group__1
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:715:1: rule__Concrete0_Impl__Group__1 : ( 'Concrete0' ) rule__Concrete0_Impl__Group__2 ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:902:1: rule__Concrete0_Impl__Group__1 : rule__Concrete0_Impl__Group__1__Impl rule__Concrete0_Impl__Group__2 ;
     public final void rule__Concrete0_Impl__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:719:1: ( ( 'Concrete0' ) rule__Concrete0_Impl__Group__2 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:720:1: ( 'Concrete0' ) rule__Concrete0_Impl__Group__2
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:906:1: ( rule__Concrete0_Impl__Group__1__Impl rule__Concrete0_Impl__Group__2 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:907:2: rule__Concrete0_Impl__Group__1__Impl rule__Concrete0_Impl__Group__2
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:720:1: ( 'Concrete0' )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:721:1: 'Concrete0'
-            {
-             before(grammarAccess.getConcrete0_ImplAccess().getConcrete0Keyword_1()); 
-            match(input,18,FollowSets000.FOLLOW_18_in_rule__Concrete0_Impl__Group__11389); 
-             after(grammarAccess.getConcrete0_ImplAccess().getConcrete0Keyword_1()); 
+            pushFollow(FollowSets000.FOLLOW_rule__Concrete0_Impl__Group__1__Impl_in_rule__Concrete0_Impl__Group__11775);
+            rule__Concrete0_Impl__Group__1__Impl();
+            _fsp--;
 
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Concrete0_Impl__Group__2_in_rule__Concrete0_Impl__Group__11399);
+            pushFollow(FollowSets000.FOLLOW_rule__Concrete0_Impl__Group__2_in_rule__Concrete0_Impl__Group__11778);
             rule__Concrete0_Impl__Group__2();
             _fsp--;
 
@@ -1738,24 +2269,93 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
     // $ANTLR end rule__Concrete0_Impl__Group__1
 
 
+    // $ANTLR start rule__Concrete0_Impl__Group__1__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:914:1: rule__Concrete0_Impl__Group__1__Impl : ( 'Concrete0' ) ;
+    public final void rule__Concrete0_Impl__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:918:1: ( ( 'Concrete0' ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:919:1: ( 'Concrete0' )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:919:1: ( 'Concrete0' )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:920:1: 'Concrete0'
+            {
+             before(grammarAccess.getConcrete0_ImplAccess().getConcrete0Keyword_1()); 
+            match(input,18,FollowSets000.FOLLOW_18_in_rule__Concrete0_Impl__Group__1__Impl1806); 
+             after(grammarAccess.getConcrete0_ImplAccess().getConcrete0Keyword_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Concrete0_Impl__Group__1__Impl
+
+
     // $ANTLR start rule__Concrete0_Impl__Group__2
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:735:1: rule__Concrete0_Impl__Group__2 : ( ( rule__Concrete0_Impl__NameAssignment_2 ) ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:933:1: rule__Concrete0_Impl__Group__2 : rule__Concrete0_Impl__Group__2__Impl ;
     public final void rule__Concrete0_Impl__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:739:1: ( ( ( rule__Concrete0_Impl__NameAssignment_2 ) ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:740:1: ( ( rule__Concrete0_Impl__NameAssignment_2 ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:937:1: ( rule__Concrete0_Impl__Group__2__Impl )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:938:2: rule__Concrete0_Impl__Group__2__Impl
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:740:1: ( ( rule__Concrete0_Impl__NameAssignment_2 ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:741:1: ( rule__Concrete0_Impl__NameAssignment_2 )
+            pushFollow(FollowSets000.FOLLOW_rule__Concrete0_Impl__Group__2__Impl_in_rule__Concrete0_Impl__Group__21837);
+            rule__Concrete0_Impl__Group__2__Impl();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Concrete0_Impl__Group__2
+
+
+    // $ANTLR start rule__Concrete0_Impl__Group__2__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:944:1: rule__Concrete0_Impl__Group__2__Impl : ( ( rule__Concrete0_Impl__NameAssignment_2 ) ) ;
+    public final void rule__Concrete0_Impl__Group__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:948:1: ( ( ( rule__Concrete0_Impl__NameAssignment_2 ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:949:1: ( ( rule__Concrete0_Impl__NameAssignment_2 ) )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:949:1: ( ( rule__Concrete0_Impl__NameAssignment_2 ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:950:1: ( rule__Concrete0_Impl__NameAssignment_2 )
             {
              before(grammarAccess.getConcrete0_ImplAccess().getNameAssignment_2()); 
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:742:1: ( rule__Concrete0_Impl__NameAssignment_2 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:742:2: rule__Concrete0_Impl__NameAssignment_2
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:951:1: ( rule__Concrete0_Impl__NameAssignment_2 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:951:2: rule__Concrete0_Impl__NameAssignment_2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Concrete0_Impl__NameAssignment_2_in_rule__Concrete0_Impl__Group__21427);
+            pushFollow(FollowSets000.FOLLOW_rule__Concrete0_Impl__NameAssignment_2_in_rule__Concrete0_Impl__Group__2__Impl1864);
             rule__Concrete0_Impl__NameAssignment_2();
             _fsp--;
 
@@ -1781,33 +2381,24 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
         }
         return ;
     }
-    // $ANTLR end rule__Concrete0_Impl__Group__2
+    // $ANTLR end rule__Concrete0_Impl__Group__2__Impl
 
 
     // $ANTLR start rule__Concrete1_Impl__Group__0
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:758:1: rule__Concrete1_Impl__Group__0 : ( () ) rule__Concrete1_Impl__Group__1 ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:967:1: rule__Concrete1_Impl__Group__0 : rule__Concrete1_Impl__Group__0__Impl rule__Concrete1_Impl__Group__1 ;
     public final void rule__Concrete1_Impl__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:762:1: ( ( () ) rule__Concrete1_Impl__Group__1 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:763:1: ( () ) rule__Concrete1_Impl__Group__1
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:971:1: ( rule__Concrete1_Impl__Group__0__Impl rule__Concrete1_Impl__Group__1 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:972:2: rule__Concrete1_Impl__Group__0__Impl rule__Concrete1_Impl__Group__1
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:763:1: ( () )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:764:1: ()
-            {
-             before(grammarAccess.getConcrete1_ImplAccess().getConcrete1Action_0()); 
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:765:1: ()
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:767:1: 
-            {
-            }
+            pushFollow(FollowSets000.FOLLOW_rule__Concrete1_Impl__Group__0__Impl_in_rule__Concrete1_Impl__Group__01900);
+            rule__Concrete1_Impl__Group__0__Impl();
+            _fsp--;
 
-             after(grammarAccess.getConcrete1_ImplAccess().getConcrete1Action_0()); 
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Concrete1_Impl__Group__1_in_rule__Concrete1_Impl__Group__01477);
+            pushFollow(FollowSets000.FOLLOW_rule__Concrete1_Impl__Group__1_in_rule__Concrete1_Impl__Group__01903);
             rule__Concrete1_Impl__Group__1();
             _fsp--;
 
@@ -1829,26 +2420,58 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
     // $ANTLR end rule__Concrete1_Impl__Group__0
 
 
+    // $ANTLR start rule__Concrete1_Impl__Group__0__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:979:1: rule__Concrete1_Impl__Group__0__Impl : ( () ) ;
+    public final void rule__Concrete1_Impl__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:983:1: ( ( () ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:984:1: ( () )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:984:1: ( () )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:985:1: ()
+            {
+             before(grammarAccess.getConcrete1_ImplAccess().getConcrete1Action_0()); 
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:986:1: ()
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:988:1: 
+            {
+            }
+
+             after(grammarAccess.getConcrete1_ImplAccess().getConcrete1Action_0()); 
+
+            }
+
+
+            }
+
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Concrete1_Impl__Group__0__Impl
+
+
     // $ANTLR start rule__Concrete1_Impl__Group__1
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:778:1: rule__Concrete1_Impl__Group__1 : ( 'Concrete1' ) rule__Concrete1_Impl__Group__2 ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:998:1: rule__Concrete1_Impl__Group__1 : rule__Concrete1_Impl__Group__1__Impl rule__Concrete1_Impl__Group__2 ;
     public final void rule__Concrete1_Impl__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:782:1: ( ( 'Concrete1' ) rule__Concrete1_Impl__Group__2 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:783:1: ( 'Concrete1' ) rule__Concrete1_Impl__Group__2
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1002:1: ( rule__Concrete1_Impl__Group__1__Impl rule__Concrete1_Impl__Group__2 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1003:2: rule__Concrete1_Impl__Group__1__Impl rule__Concrete1_Impl__Group__2
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:783:1: ( 'Concrete1' )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:784:1: 'Concrete1'
-            {
-             before(grammarAccess.getConcrete1_ImplAccess().getConcrete1Keyword_1()); 
-            match(input,19,FollowSets000.FOLLOW_19_in_rule__Concrete1_Impl__Group__11506); 
-             after(grammarAccess.getConcrete1_ImplAccess().getConcrete1Keyword_1()); 
+            pushFollow(FollowSets000.FOLLOW_rule__Concrete1_Impl__Group__1__Impl_in_rule__Concrete1_Impl__Group__11961);
+            rule__Concrete1_Impl__Group__1__Impl();
+            _fsp--;
 
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__Concrete1_Impl__Group__2_in_rule__Concrete1_Impl__Group__11516);
+            pushFollow(FollowSets000.FOLLOW_rule__Concrete1_Impl__Group__2_in_rule__Concrete1_Impl__Group__11964);
             rule__Concrete1_Impl__Group__2();
             _fsp--;
 
@@ -1870,24 +2493,93 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
     // $ANTLR end rule__Concrete1_Impl__Group__1
 
 
+    // $ANTLR start rule__Concrete1_Impl__Group__1__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1010:1: rule__Concrete1_Impl__Group__1__Impl : ( 'Concrete1' ) ;
+    public final void rule__Concrete1_Impl__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1014:1: ( ( 'Concrete1' ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1015:1: ( 'Concrete1' )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1015:1: ( 'Concrete1' )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1016:1: 'Concrete1'
+            {
+             before(grammarAccess.getConcrete1_ImplAccess().getConcrete1Keyword_1()); 
+            match(input,19,FollowSets000.FOLLOW_19_in_rule__Concrete1_Impl__Group__1__Impl1992); 
+             after(grammarAccess.getConcrete1_ImplAccess().getConcrete1Keyword_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Concrete1_Impl__Group__1__Impl
+
+
     // $ANTLR start rule__Concrete1_Impl__Group__2
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:798:1: rule__Concrete1_Impl__Group__2 : ( ( rule__Concrete1_Impl__NameAssignment_2 ) ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1029:1: rule__Concrete1_Impl__Group__2 : rule__Concrete1_Impl__Group__2__Impl ;
     public final void rule__Concrete1_Impl__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:802:1: ( ( ( rule__Concrete1_Impl__NameAssignment_2 ) ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:803:1: ( ( rule__Concrete1_Impl__NameAssignment_2 ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1033:1: ( rule__Concrete1_Impl__Group__2__Impl )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1034:2: rule__Concrete1_Impl__Group__2__Impl
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:803:1: ( ( rule__Concrete1_Impl__NameAssignment_2 ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:804:1: ( rule__Concrete1_Impl__NameAssignment_2 )
+            pushFollow(FollowSets000.FOLLOW_rule__Concrete1_Impl__Group__2__Impl_in_rule__Concrete1_Impl__Group__22023);
+            rule__Concrete1_Impl__Group__2__Impl();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Concrete1_Impl__Group__2
+
+
+    // $ANTLR start rule__Concrete1_Impl__Group__2__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1040:1: rule__Concrete1_Impl__Group__2__Impl : ( ( rule__Concrete1_Impl__NameAssignment_2 ) ) ;
+    public final void rule__Concrete1_Impl__Group__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1044:1: ( ( ( rule__Concrete1_Impl__NameAssignment_2 ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1045:1: ( ( rule__Concrete1_Impl__NameAssignment_2 ) )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1045:1: ( ( rule__Concrete1_Impl__NameAssignment_2 ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1046:1: ( rule__Concrete1_Impl__NameAssignment_2 )
             {
              before(grammarAccess.getConcrete1_ImplAccess().getNameAssignment_2()); 
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:805:1: ( rule__Concrete1_Impl__NameAssignment_2 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:805:2: rule__Concrete1_Impl__NameAssignment_2
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1047:1: ( rule__Concrete1_Impl__NameAssignment_2 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1047:2: rule__Concrete1_Impl__NameAssignment_2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Concrete1_Impl__NameAssignment_2_in_rule__Concrete1_Impl__Group__21544);
+            pushFollow(FollowSets000.FOLLOW_rule__Concrete1_Impl__NameAssignment_2_in_rule__Concrete1_Impl__Group__2__Impl2050);
             rule__Concrete1_Impl__NameAssignment_2();
             _fsp--;
 
@@ -1913,33 +2605,24 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
         }
         return ;
     }
-    // $ANTLR end rule__Concrete1_Impl__Group__2
+    // $ANTLR end rule__Concrete1_Impl__Group__2__Impl
 
 
     // $ANTLR start rule__DiamondInheritance__Group__0
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:821:1: rule__DiamondInheritance__Group__0 : ( () ) rule__DiamondInheritance__Group__1 ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1063:1: rule__DiamondInheritance__Group__0 : rule__DiamondInheritance__Group__0__Impl rule__DiamondInheritance__Group__1 ;
     public final void rule__DiamondInheritance__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:825:1: ( ( () ) rule__DiamondInheritance__Group__1 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:826:1: ( () ) rule__DiamondInheritance__Group__1
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1067:1: ( rule__DiamondInheritance__Group__0__Impl rule__DiamondInheritance__Group__1 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1068:2: rule__DiamondInheritance__Group__0__Impl rule__DiamondInheritance__Group__1
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:826:1: ( () )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:827:1: ()
-            {
-             before(grammarAccess.getDiamondInheritanceAccess().getDiamondInheritanceAction_0()); 
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:828:1: ()
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:830:1: 
-            {
-            }
+            pushFollow(FollowSets000.FOLLOW_rule__DiamondInheritance__Group__0__Impl_in_rule__DiamondInheritance__Group__02086);
+            rule__DiamondInheritance__Group__0__Impl();
+            _fsp--;
 
-             after(grammarAccess.getDiamondInheritanceAccess().getDiamondInheritanceAction_0()); 
-
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__DiamondInheritance__Group__1_in_rule__DiamondInheritance__Group__01594);
+            pushFollow(FollowSets000.FOLLOW_rule__DiamondInheritance__Group__1_in_rule__DiamondInheritance__Group__02089);
             rule__DiamondInheritance__Group__1();
             _fsp--;
 
@@ -1961,26 +2644,58 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
     // $ANTLR end rule__DiamondInheritance__Group__0
 
 
+    // $ANTLR start rule__DiamondInheritance__Group__0__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1075:1: rule__DiamondInheritance__Group__0__Impl : ( () ) ;
+    public final void rule__DiamondInheritance__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1079:1: ( ( () ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1080:1: ( () )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1080:1: ( () )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1081:1: ()
+            {
+             before(grammarAccess.getDiamondInheritanceAccess().getDiamondInheritanceAction_0()); 
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1082:1: ()
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1084:1: 
+            {
+            }
+
+             after(grammarAccess.getDiamondInheritanceAccess().getDiamondInheritanceAction_0()); 
+
+            }
+
+
+            }
+
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__DiamondInheritance__Group__0__Impl
+
+
     // $ANTLR start rule__DiamondInheritance__Group__1
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:841:1: rule__DiamondInheritance__Group__1 : ( 'DiamondInheritance' ) rule__DiamondInheritance__Group__2 ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1094:1: rule__DiamondInheritance__Group__1 : rule__DiamondInheritance__Group__1__Impl rule__DiamondInheritance__Group__2 ;
     public final void rule__DiamondInheritance__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:845:1: ( ( 'DiamondInheritance' ) rule__DiamondInheritance__Group__2 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:846:1: ( 'DiamondInheritance' ) rule__DiamondInheritance__Group__2
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1098:1: ( rule__DiamondInheritance__Group__1__Impl rule__DiamondInheritance__Group__2 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1099:2: rule__DiamondInheritance__Group__1__Impl rule__DiamondInheritance__Group__2
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:846:1: ( 'DiamondInheritance' )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:847:1: 'DiamondInheritance'
-            {
-             before(grammarAccess.getDiamondInheritanceAccess().getDiamondInheritanceKeyword_1()); 
-            match(input,20,FollowSets000.FOLLOW_20_in_rule__DiamondInheritance__Group__11623); 
-             after(grammarAccess.getDiamondInheritanceAccess().getDiamondInheritanceKeyword_1()); 
+            pushFollow(FollowSets000.FOLLOW_rule__DiamondInheritance__Group__1__Impl_in_rule__DiamondInheritance__Group__12147);
+            rule__DiamondInheritance__Group__1__Impl();
+            _fsp--;
 
-            }
-
-            pushFollow(FollowSets000.FOLLOW_rule__DiamondInheritance__Group__2_in_rule__DiamondInheritance__Group__11633);
+            pushFollow(FollowSets000.FOLLOW_rule__DiamondInheritance__Group__2_in_rule__DiamondInheritance__Group__12150);
             rule__DiamondInheritance__Group__2();
             _fsp--;
 
@@ -2002,24 +2717,93 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
     // $ANTLR end rule__DiamondInheritance__Group__1
 
 
+    // $ANTLR start rule__DiamondInheritance__Group__1__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1106:1: rule__DiamondInheritance__Group__1__Impl : ( 'DiamondInheritance' ) ;
+    public final void rule__DiamondInheritance__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1110:1: ( ( 'DiamondInheritance' ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1111:1: ( 'DiamondInheritance' )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1111:1: ( 'DiamondInheritance' )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1112:1: 'DiamondInheritance'
+            {
+             before(grammarAccess.getDiamondInheritanceAccess().getDiamondInheritanceKeyword_1()); 
+            match(input,20,FollowSets000.FOLLOW_20_in_rule__DiamondInheritance__Group__1__Impl2178); 
+             after(grammarAccess.getDiamondInheritanceAccess().getDiamondInheritanceKeyword_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__DiamondInheritance__Group__1__Impl
+
+
     // $ANTLR start rule__DiamondInheritance__Group__2
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:861:1: rule__DiamondInheritance__Group__2 : ( ( rule__DiamondInheritance__NameAssignment_2 ) ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1125:1: rule__DiamondInheritance__Group__2 : rule__DiamondInheritance__Group__2__Impl ;
     public final void rule__DiamondInheritance__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:865:1: ( ( ( rule__DiamondInheritance__NameAssignment_2 ) ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:866:1: ( ( rule__DiamondInheritance__NameAssignment_2 ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1129:1: ( rule__DiamondInheritance__Group__2__Impl )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1130:2: rule__DiamondInheritance__Group__2__Impl
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:866:1: ( ( rule__DiamondInheritance__NameAssignment_2 ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:867:1: ( rule__DiamondInheritance__NameAssignment_2 )
+            pushFollow(FollowSets000.FOLLOW_rule__DiamondInheritance__Group__2__Impl_in_rule__DiamondInheritance__Group__22209);
+            rule__DiamondInheritance__Group__2__Impl();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__DiamondInheritance__Group__2
+
+
+    // $ANTLR start rule__DiamondInheritance__Group__2__Impl
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1136:1: rule__DiamondInheritance__Group__2__Impl : ( ( rule__DiamondInheritance__NameAssignment_2 ) ) ;
+    public final void rule__DiamondInheritance__Group__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1140:1: ( ( ( rule__DiamondInheritance__NameAssignment_2 ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1141:1: ( ( rule__DiamondInheritance__NameAssignment_2 ) )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1141:1: ( ( rule__DiamondInheritance__NameAssignment_2 ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1142:1: ( rule__DiamondInheritance__NameAssignment_2 )
             {
              before(grammarAccess.getDiamondInheritanceAccess().getNameAssignment_2()); 
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:868:1: ( rule__DiamondInheritance__NameAssignment_2 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:868:2: rule__DiamondInheritance__NameAssignment_2
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1143:1: ( rule__DiamondInheritance__NameAssignment_2 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1143:2: rule__DiamondInheritance__NameAssignment_2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__DiamondInheritance__NameAssignment_2_in_rule__DiamondInheritance__Group__21661);
+            pushFollow(FollowSets000.FOLLOW_rule__DiamondInheritance__NameAssignment_2_in_rule__DiamondInheritance__Group__2__Impl2236);
             rule__DiamondInheritance__NameAssignment_2();
             _fsp--;
 
@@ -2045,24 +2829,24 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
         }
         return ;
     }
-    // $ANTLR end rule__DiamondInheritance__Group__2
+    // $ANTLR end rule__DiamondInheritance__Group__2__Impl
 
 
     // $ANTLR start rule__Root__NameAssignment_2
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:885:1: rule__Root__NameAssignment_2 : ( ruleINT0 ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1160:1: rule__Root__NameAssignment_2 : ( ruleINT0 ) ;
     public final void rule__Root__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:889:1: ( ( ruleINT0 ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:890:1: ( ruleINT0 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1164:1: ( ( ruleINT0 ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1165:1: ( ruleINT0 )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:890:1: ( ruleINT0 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:891:1: ruleINT0
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1165:1: ( ruleINT0 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1166:1: ruleINT0
             {
              before(grammarAccess.getRootAccess().getNameINT0ParserRuleCall_2_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleINT0_in_rule__Root__NameAssignment_21702);
+            pushFollow(FollowSets000.FOLLOW_ruleINT0_in_rule__Root__NameAssignment_22277);
             ruleINT0();
             _fsp--;
 
@@ -2089,20 +2873,20 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start rule__Root__ClassesAssignment_4_2
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:900:1: rule__Root__ClassesAssignment_4_2 : ( ruleAbstract ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1175:1: rule__Root__ClassesAssignment_4_2 : ( ruleAbstract ) ;
     public final void rule__Root__ClassesAssignment_4_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:904:1: ( ( ruleAbstract ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:905:1: ( ruleAbstract )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1179:1: ( ( ruleAbstract ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1180:1: ( ruleAbstract )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:905:1: ( ruleAbstract )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:906:1: ruleAbstract
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1180:1: ( ruleAbstract )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1181:1: ruleAbstract
             {
              before(grammarAccess.getRootAccess().getClassesAbstractParserRuleCall_4_2_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAbstract_in_rule__Root__ClassesAssignment_4_21733);
+            pushFollow(FollowSets000.FOLLOW_ruleAbstract_in_rule__Root__ClassesAssignment_4_22308);
             ruleAbstract();
             _fsp--;
 
@@ -2129,20 +2913,20 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start rule__Root__ClassesAssignment_4_3_1
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:915:1: rule__Root__ClassesAssignment_4_3_1 : ( ruleAbstract ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1190:1: rule__Root__ClassesAssignment_4_3_1 : ( ruleAbstract ) ;
     public final void rule__Root__ClassesAssignment_4_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:919:1: ( ( ruleAbstract ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:920:1: ( ruleAbstract )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1194:1: ( ( ruleAbstract ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1195:1: ( ruleAbstract )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:920:1: ( ruleAbstract )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:921:1: ruleAbstract
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1195:1: ( ruleAbstract )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1196:1: ruleAbstract
             {
              before(grammarAccess.getRootAccess().getClassesAbstractParserRuleCall_4_3_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAbstract_in_rule__Root__ClassesAssignment_4_3_11764);
+            pushFollow(FollowSets000.FOLLOW_ruleAbstract_in_rule__Root__ClassesAssignment_4_3_12339);
             ruleAbstract();
             _fsp--;
 
@@ -2169,20 +2953,20 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start rule__Root__Concrete0Assignment_5_1
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:930:1: rule__Root__Concrete0Assignment_5_1 : ( ruleConcrete0 ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1205:1: rule__Root__Concrete0Assignment_5_1 : ( ruleConcrete0 ) ;
     public final void rule__Root__Concrete0Assignment_5_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:934:1: ( ( ruleConcrete0 ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:935:1: ( ruleConcrete0 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1209:1: ( ( ruleConcrete0 ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1210:1: ( ruleConcrete0 )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:935:1: ( ruleConcrete0 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:936:1: ruleConcrete0
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1210:1: ( ruleConcrete0 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1211:1: ruleConcrete0
             {
              before(grammarAccess.getRootAccess().getConcrete0Concrete0ParserRuleCall_5_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleConcrete0_in_rule__Root__Concrete0Assignment_5_11795);
+            pushFollow(FollowSets000.FOLLOW_ruleConcrete0_in_rule__Root__Concrete0Assignment_5_12370);
             ruleConcrete0();
             _fsp--;
 
@@ -2209,20 +2993,20 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start rule__Concrete0_Impl__NameAssignment_2
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:945:1: rule__Concrete0_Impl__NameAssignment_2 : ( ruleEString ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1220:1: rule__Concrete0_Impl__NameAssignment_2 : ( ruleEString ) ;
     public final void rule__Concrete0_Impl__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:949:1: ( ( ruleEString ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:950:1: ( ruleEString )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1224:1: ( ( ruleEString ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1225:1: ( ruleEString )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:950:1: ( ruleEString )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:951:1: ruleEString
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1225:1: ( ruleEString )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1226:1: ruleEString
             {
              before(grammarAccess.getConcrete0_ImplAccess().getNameEStringParserRuleCall_2_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEString_in_rule__Concrete0_Impl__NameAssignment_21826);
+            pushFollow(FollowSets000.FOLLOW_ruleEString_in_rule__Concrete0_Impl__NameAssignment_22401);
             ruleEString();
             _fsp--;
 
@@ -2249,20 +3033,20 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start rule__Concrete1_Impl__NameAssignment_2
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:960:1: rule__Concrete1_Impl__NameAssignment_2 : ( ruleEString ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1235:1: rule__Concrete1_Impl__NameAssignment_2 : ( ruleEString ) ;
     public final void rule__Concrete1_Impl__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:964:1: ( ( ruleEString ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:965:1: ( ruleEString )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1239:1: ( ( ruleEString ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1240:1: ( ruleEString )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:965:1: ( ruleEString )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:966:1: ruleEString
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1240:1: ( ruleEString )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1241:1: ruleEString
             {
              before(grammarAccess.getConcrete1_ImplAccess().getNameEStringParserRuleCall_2_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEString_in_rule__Concrete1_Impl__NameAssignment_21857);
+            pushFollow(FollowSets000.FOLLOW_ruleEString_in_rule__Concrete1_Impl__NameAssignment_22432);
             ruleEString();
             _fsp--;
 
@@ -2289,20 +3073,20 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start rule__DiamondInheritance__NameAssignment_2
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:975:1: rule__DiamondInheritance__NameAssignment_2 : ( ruleEString ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1250:1: rule__DiamondInheritance__NameAssignment_2 : ( ruleEString ) ;
     public final void rule__DiamondInheritance__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:979:1: ( ( ruleEString ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:980:1: ( ruleEString )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1254:1: ( ( ruleEString ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1255:1: ( ruleEString )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:980:1: ( ruleEString )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:981:1: ruleEString
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1255:1: ( ruleEString )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/ui/contentassist/antlr/internal/InternalEcore2XtextTest.g:1256:1: ruleEString
             {
              before(grammarAccess.getDiamondInheritanceAccess().getNameEStringParserRuleCall_2_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEString_in_rule__DiamondInheritance__NameAssignment_21888);
+            pushFollow(FollowSets000.FOLLOW_ruleEString_in_rule__DiamondInheritance__NameAssignment_22463);
             ruleEString();
             _fsp--;
 
@@ -2363,52 +3147,77 @@ public class InternalEcore2XtextTestParser extends AbstractInternalContentAssist
         public static final BitSet FOLLOW_ruleDiamondInheritance_in_rule__Concrete0__Alternatives635 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_STRING_in_rule__EString__Alternatives667 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__EString__Alternatives684 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Root__Group__1_in_rule__Root__Group__0728 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_rule__Root__Group__1757 = new BitSet(new long[]{0x0000000000000800L});
-        public static final BitSet FOLLOW_rule__Root__Group__2_in_rule__Root__Group__1767 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Root__NameAssignment_2_in_rule__Root__Group__2795 = new BitSet(new long[]{0x0000000000002000L});
-        public static final BitSet FOLLOW_rule__Root__Group__3_in_rule__Root__Group__2804 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_rule__Root__Group__3833 = new BitSet(new long[]{0x000000000002C000L});
-        public static final BitSet FOLLOW_rule__Root__Group__4_in_rule__Root__Group__3843 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Root__Group_4__0_in_rule__Root__Group__4871 = new BitSet(new long[]{0x0000000000024000L});
-        public static final BitSet FOLLOW_rule__Root__Group__5_in_rule__Root__Group__4881 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Root__Group_5__0_in_rule__Root__Group__5909 = new BitSet(new long[]{0x0000000000004000L});
-        public static final BitSet FOLLOW_rule__Root__Group__6_in_rule__Root__Group__5919 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_rule__Root__Group__6948 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_rule__Root__Group_4__0998 = new BitSet(new long[]{0x0000000000002000L});
-        public static final BitSet FOLLOW_rule__Root__Group_4__1_in_rule__Root__Group_4__01008 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_rule__Root__Group_4__11037 = new BitSet(new long[]{0x00000000001C0000L});
-        public static final BitSet FOLLOW_rule__Root__Group_4__2_in_rule__Root__Group_4__11047 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Root__ClassesAssignment_4_2_in_rule__Root__Group_4__21075 = new BitSet(new long[]{0x0000000000014000L});
-        public static final BitSet FOLLOW_rule__Root__Group_4__3_in_rule__Root__Group_4__21084 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Root__Group_4_3__0_in_rule__Root__Group_4__31112 = new BitSet(new long[]{0x0000000000014000L});
-        public static final BitSet FOLLOW_rule__Root__Group_4__4_in_rule__Root__Group_4__31122 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_rule__Root__Group_4__41151 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_16_in_rule__Root__Group_4_3__01197 = new BitSet(new long[]{0x00000000001C0000L});
-        public static final BitSet FOLLOW_rule__Root__Group_4_3__1_in_rule__Root__Group_4_3__01207 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Root__ClassesAssignment_4_3_1_in_rule__Root__Group_4_3__11235 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_17_in_rule__Root__Group_5__01274 = new BitSet(new long[]{0x0000000000140000L});
-        public static final BitSet FOLLOW_rule__Root__Group_5__1_in_rule__Root__Group_5__01284 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Root__Concrete0Assignment_5_1_in_rule__Root__Group_5__11312 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Concrete0_Impl__Group__1_in_rule__Concrete0_Impl__Group__01360 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_18_in_rule__Concrete0_Impl__Group__11389 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_rule__Concrete0_Impl__Group__2_in_rule__Concrete0_Impl__Group__11399 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Concrete0_Impl__NameAssignment_2_in_rule__Concrete0_Impl__Group__21427 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Concrete1_Impl__Group__1_in_rule__Concrete1_Impl__Group__01477 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_19_in_rule__Concrete1_Impl__Group__11506 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_rule__Concrete1_Impl__Group__2_in_rule__Concrete1_Impl__Group__11516 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Concrete1_Impl__NameAssignment_2_in_rule__Concrete1_Impl__Group__21544 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__DiamondInheritance__Group__1_in_rule__DiamondInheritance__Group__01594 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_20_in_rule__DiamondInheritance__Group__11623 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_rule__DiamondInheritance__Group__2_in_rule__DiamondInheritance__Group__11633 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__DiamondInheritance__NameAssignment_2_in_rule__DiamondInheritance__Group__21661 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleINT0_in_rule__Root__NameAssignment_21702 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAbstract_in_rule__Root__ClassesAssignment_4_21733 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAbstract_in_rule__Root__ClassesAssignment_4_3_11764 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleConcrete0_in_rule__Root__Concrete0Assignment_5_11795 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEString_in_rule__Concrete0_Impl__NameAssignment_21826 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEString_in_rule__Concrete1_Impl__NameAssignment_21857 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEString_in_rule__DiamondInheritance__NameAssignment_21888 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__Group__0__Impl_in_rule__Root__Group__0714 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_rule__Root__Group__1_in_rule__Root__Group__0717 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__Group__1__Impl_in_rule__Root__Group__1775 = new BitSet(new long[]{0x0000000000000800L});
+        public static final BitSet FOLLOW_rule__Root__Group__2_in_rule__Root__Group__1778 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_rule__Root__Group__1__Impl806 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__Group__2__Impl_in_rule__Root__Group__2837 = new BitSet(new long[]{0x0000000000002000L});
+        public static final BitSet FOLLOW_rule__Root__Group__3_in_rule__Root__Group__2840 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__NameAssignment_2_in_rule__Root__Group__2__Impl867 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__Group__3__Impl_in_rule__Root__Group__3897 = new BitSet(new long[]{0x000000000002C000L});
+        public static final BitSet FOLLOW_rule__Root__Group__4_in_rule__Root__Group__3900 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_rule__Root__Group__3__Impl928 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__Group__4__Impl_in_rule__Root__Group__4959 = new BitSet(new long[]{0x0000000000024000L});
+        public static final BitSet FOLLOW_rule__Root__Group__5_in_rule__Root__Group__4962 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__Group_4__0_in_rule__Root__Group__4__Impl989 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__Group__5__Impl_in_rule__Root__Group__51020 = new BitSet(new long[]{0x0000000000004000L});
+        public static final BitSet FOLLOW_rule__Root__Group__6_in_rule__Root__Group__51023 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__Group_5__0_in_rule__Root__Group__5__Impl1050 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__Group__6__Impl_in_rule__Root__Group__61081 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_rule__Root__Group__6__Impl1109 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__Group_4__0__Impl_in_rule__Root__Group_4__01154 = new BitSet(new long[]{0x0000000000002000L});
+        public static final BitSet FOLLOW_rule__Root__Group_4__1_in_rule__Root__Group_4__01157 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_rule__Root__Group_4__0__Impl1185 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__Group_4__1__Impl_in_rule__Root__Group_4__11216 = new BitSet(new long[]{0x00000000001C0000L});
+        public static final BitSet FOLLOW_rule__Root__Group_4__2_in_rule__Root__Group_4__11219 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_rule__Root__Group_4__1__Impl1247 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__Group_4__2__Impl_in_rule__Root__Group_4__21278 = new BitSet(new long[]{0x0000000000014000L});
+        public static final BitSet FOLLOW_rule__Root__Group_4__3_in_rule__Root__Group_4__21281 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__ClassesAssignment_4_2_in_rule__Root__Group_4__2__Impl1308 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__Group_4__3__Impl_in_rule__Root__Group_4__31338 = new BitSet(new long[]{0x0000000000004000L});
+        public static final BitSet FOLLOW_rule__Root__Group_4__4_in_rule__Root__Group_4__31341 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__Group_4_3__0_in_rule__Root__Group_4__3__Impl1368 = new BitSet(new long[]{0x0000000000010002L});
+        public static final BitSet FOLLOW_rule__Root__Group_4__4__Impl_in_rule__Root__Group_4__41399 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_rule__Root__Group_4__4__Impl1427 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__Group_4_3__0__Impl_in_rule__Root__Group_4_3__01468 = new BitSet(new long[]{0x00000000001C0000L});
+        public static final BitSet FOLLOW_rule__Root__Group_4_3__1_in_rule__Root__Group_4_3__01471 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_rule__Root__Group_4_3__0__Impl1499 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__Group_4_3__1__Impl_in_rule__Root__Group_4_3__11530 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__ClassesAssignment_4_3_1_in_rule__Root__Group_4_3__1__Impl1557 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__Group_5__0__Impl_in_rule__Root__Group_5__01591 = new BitSet(new long[]{0x0000000000140000L});
+        public static final BitSet FOLLOW_rule__Root__Group_5__1_in_rule__Root__Group_5__01594 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_17_in_rule__Root__Group_5__0__Impl1622 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__Group_5__1__Impl_in_rule__Root__Group_5__11653 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Root__Concrete0Assignment_5_1_in_rule__Root__Group_5__1__Impl1680 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Concrete0_Impl__Group__0__Impl_in_rule__Concrete0_Impl__Group__01714 = new BitSet(new long[]{0x0000000000040000L});
+        public static final BitSet FOLLOW_rule__Concrete0_Impl__Group__1_in_rule__Concrete0_Impl__Group__01717 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Concrete0_Impl__Group__1__Impl_in_rule__Concrete0_Impl__Group__11775 = new BitSet(new long[]{0x0000000000000030L});
+        public static final BitSet FOLLOW_rule__Concrete0_Impl__Group__2_in_rule__Concrete0_Impl__Group__11778 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_18_in_rule__Concrete0_Impl__Group__1__Impl1806 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Concrete0_Impl__Group__2__Impl_in_rule__Concrete0_Impl__Group__21837 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Concrete0_Impl__NameAssignment_2_in_rule__Concrete0_Impl__Group__2__Impl1864 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Concrete1_Impl__Group__0__Impl_in_rule__Concrete1_Impl__Group__01900 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_rule__Concrete1_Impl__Group__1_in_rule__Concrete1_Impl__Group__01903 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Concrete1_Impl__Group__1__Impl_in_rule__Concrete1_Impl__Group__11961 = new BitSet(new long[]{0x0000000000000030L});
+        public static final BitSet FOLLOW_rule__Concrete1_Impl__Group__2_in_rule__Concrete1_Impl__Group__11964 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_19_in_rule__Concrete1_Impl__Group__1__Impl1992 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Concrete1_Impl__Group__2__Impl_in_rule__Concrete1_Impl__Group__22023 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Concrete1_Impl__NameAssignment_2_in_rule__Concrete1_Impl__Group__2__Impl2050 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__DiamondInheritance__Group__0__Impl_in_rule__DiamondInheritance__Group__02086 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_rule__DiamondInheritance__Group__1_in_rule__DiamondInheritance__Group__02089 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__DiamondInheritance__Group__1__Impl_in_rule__DiamondInheritance__Group__12147 = new BitSet(new long[]{0x0000000000000030L});
+        public static final BitSet FOLLOW_rule__DiamondInheritance__Group__2_in_rule__DiamondInheritance__Group__12150 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_20_in_rule__DiamondInheritance__Group__1__Impl2178 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__DiamondInheritance__Group__2__Impl_in_rule__DiamondInheritance__Group__22209 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__DiamondInheritance__NameAssignment_2_in_rule__DiamondInheritance__Group__2__Impl2236 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleINT0_in_rule__Root__NameAssignment_22277 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstract_in_rule__Root__ClassesAssignment_4_22308 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstract_in_rule__Root__ClassesAssignment_4_3_12339 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleConcrete0_in_rule__Root__Concrete0Assignment_5_12370 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEString_in_rule__Concrete0_Impl__NameAssignment_22401 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEString_in_rule__Concrete1_Impl__NameAssignment_22432 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEString_in_rule__DiamondInheritance__NameAssignment_22463 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

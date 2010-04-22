@@ -491,8 +491,8 @@ protected class Content_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getChildrenRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAbstractChildrenRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getAbstractChildrenRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getChildrenRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

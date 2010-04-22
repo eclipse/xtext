@@ -132,9 +132,9 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTerminalRuleRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getChoiceRuleRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getChoiceRuleRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getTerminalRuleRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -204,8 +204,8 @@ protected class AbstractRule_ReducibleRuleParserRuleCall_1 extends RuleCallToken
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTerminalRuleRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTerminalRuleRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -390,8 +390,8 @@ protected class ReducibleRule_Group extends GroupToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTerminalRuleRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getTerminalRuleRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

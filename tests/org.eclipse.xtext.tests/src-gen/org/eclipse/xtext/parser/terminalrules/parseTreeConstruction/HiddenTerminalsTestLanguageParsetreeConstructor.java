@@ -83,11 +83,11 @@ protected class Model_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getWithoutHiddensRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getOverridingHiddensRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getDatatypeHiddensRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getInheritingHiddensRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getOverridingHiddensRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getWithHiddensRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getDatatypeHiddensRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getWithoutHiddensRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

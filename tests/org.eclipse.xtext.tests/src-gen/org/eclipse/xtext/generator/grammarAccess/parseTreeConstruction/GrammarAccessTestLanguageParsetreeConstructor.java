@@ -131,8 +131,8 @@ protected class Type_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getAnotherTypeAccess().getAnotherTypeAction_1().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getATypeAccess().getATypeAction_1().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getATypeAccess().getATypeAction_1().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getAnotherTypeAccess().getAnotherTypeAction_1().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

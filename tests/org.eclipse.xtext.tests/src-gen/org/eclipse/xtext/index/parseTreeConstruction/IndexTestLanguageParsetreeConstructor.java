@@ -398,10 +398,10 @@ protected class Element_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getEntityRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getNamespaceRule().getType().getClassifier() || 
+		if(current.getDelegate().eClass() == grammarAccess.getDatatypeRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getEntityRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getImportRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getDatatypeRule().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getNamespaceRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -471,8 +471,8 @@ protected class Element_TypeParserRuleCall_1 extends RuleCallToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getEntityRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getDatatypeRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getDatatypeRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getEntityRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -566,8 +566,8 @@ protected class Type_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getEntityRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getDatatypeRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getDatatypeRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getEntityRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
