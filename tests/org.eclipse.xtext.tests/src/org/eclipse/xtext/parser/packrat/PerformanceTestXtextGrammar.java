@@ -7,12 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat;
 
+import java.io.StringReader;
+
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguagePackratParser;
 import org.eclipse.xtext.tests.EmfAssert;
-import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,7 +24,6 @@ public class PerformanceTestXtextGrammar extends AbstractXtextTests {
 
 	private String model;
 
-	private StringInputStream modelAsStream;
 
 	private XtextTerminalsTestLanguagePackratParser packratParser;
 
@@ -32,12 +32,12 @@ public class PerformanceTestXtextGrammar extends AbstractXtextTests {
 		super.setUp();
 		with(XtextTerminalsTestLanguageStandaloneSetup.class);
 		model = readFileIntoString("org/eclipse/xtext/Xtext.xtext");
-		modelAsStream = new StringInputStream(model);
 		packratParser = get(XtextTerminalsTestLanguagePackratParser.class);
 	}
 
 	public void testSetUp() throws InterruptedException {
 		assertNotNull(model);
+		StringReader modelAsStream = new StringReader(model);
 		IParseResult packratResult = packratParser.parse(model);
 		assertNotNull(packratResult);
 		assertNotNull(packratResult.getRootASTElement());
@@ -51,10 +51,9 @@ public class PerformanceTestXtextGrammar extends AbstractXtextTests {
 
 	public void testAntlr() {
 		for(int i = 0 ; i < iterations ; i++ ) {
-			modelAsStream.mark(0);
+			StringReader modelAsStream = new StringReader(model);
 			IParseResult result = getParser().parse(modelAsStream);
 			assertNotNull(result);
-			modelAsStream.reset();
 		}
 	}
 

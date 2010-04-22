@@ -45,35 +45,6 @@ public class EncodingTest extends AbstractXtextTests {
 		assertEquals(Charset.defaultCharset().name(), resource.getEncoding());
 	}
 
-	public void testGetAndSetEncoding() throws Exception {
-		assertFalse(Arrays.equals(utfBytes, isoBytes));
-		XtextResource resource = createXtextResource();
-		
-		resource.setEncoding(ISO_8859_1);
-		resource.load(new ByteArrayInputStream(utfBytes), null);
-		assertFalse(resource.getErrors().isEmpty());
-
-		resource.setEncoding(UTF_8);
-		resource.load(new ByteArrayInputStream(isoBytes), null);
-		assertFalse(resource.getErrors().isEmpty());
-
-		resource = createXtextResource();
-		resource.setEncoding(ISO_8859_1);
-		resource.load(new ByteArrayInputStream(isoBytes), null);
-		assertTrue(resource.getErrors().isEmpty());
-		ByteArrayOutputStream isoSaveStream = new ByteArrayOutputStream();
-		resource.save(isoSaveStream, null);
-		isoSaveStream.close();
-		byte[] savedIsoBytes = isoSaveStream.toByteArray();
-		assertTrue(Arrays.equals(isoBytes, savedIsoBytes));
-		
-		resource.setEncoding(UTF_8);
-		ByteArrayOutputStream utfSaveStream = new ByteArrayOutputStream();
-		resource.save(utfSaveStream, null);
-		byte[] savedUtfBytes = utfSaveStream.toByteArray();
-		assertTrue(Arrays.equals(utfBytes, savedUtfBytes));
-	}
-
 	public void testEncodingOption() throws Exception {
 		Map<String,String> isoOptions = Collections.singletonMap(XtextResource.OPTION_ENCODING, ISO_8859_1);
 		Map<String,String> utfOptions = Collections.singletonMap(XtextResource.OPTION_ENCODING, UTF_8);
