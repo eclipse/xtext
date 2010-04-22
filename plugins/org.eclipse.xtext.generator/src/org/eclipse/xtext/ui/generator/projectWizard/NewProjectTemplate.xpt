@@ -45,13 +45,15 @@ entity Composable {
 «OP()»ENDDEFINE«CL()»
 
 «OP()»DEFINE workflow FOR «projectInfoClassName().toSimpleName()»«CL()»
-«OP()»FILE "src/Generator.mwe"-«CL()»
-<workflow>
-	<property name="modelFile" value="Model.«modelFileExtension»"/>
-	<property name="targetDir" value="../src-gen"/>
+«OP()»FILE "src/Generator.mwe2"-«CL()»
+module Generator
 
-	<workflow file="workflow/«getName()»Generator.mwe"/>
-</workflow>
+var modelFile = "Model.«modelFileExtension»"
+var targetDir = "../src-gen"
+
+Workflow {
+	component = @workflow.«getName()»Generator auto-inject {}
+}
 «OP()»ENDFILE«CL()»
 «OP()»ENDDEFINE«CL()»
 «ENDFILE»

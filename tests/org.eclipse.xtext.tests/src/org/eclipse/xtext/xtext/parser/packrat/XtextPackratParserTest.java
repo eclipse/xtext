@@ -7,12 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.parser.packrat;
 
+import java.io.StringReader;
+
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.packrat.XtextPackratParser;
 import org.eclipse.xtext.util.EmfFormatter;
-import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -40,7 +41,7 @@ public class XtextPackratParserTest extends AbstractXtextTests {
 		assertNotNull(parseResult.getRootASTElement());
 		String rootNode = EmfFormatter.objToStr(parseResult.getRootASTElement());
 //		printParseResult(parseResult);
-		IParseResult orig = getParser().parse(new StringInputStream(model));
+		IParseResult orig = getParser().parse(new StringReader(model));
 		String origRootNode = EmfFormatter.objToStr(orig.getRootASTElement());
 		assertEquals("Model: '" + model + "'", origRootNode, rootNode);
 	}
@@ -98,7 +99,7 @@ public class XtextPackratParserTest extends AbstractXtextTests {
 		String filename = "org/eclipse/xtext/Xtext.xtext";
 		String model = readFileIntoString(filename);
 		for (int i = 0; i < 1000; i++) {
-			IParseResult parseResult = getParser().parse(new StringInputStream(model));
+			IParseResult parseResult = getParser().parse(new StringReader(model));
 			assertNotNull(parseResult);
 			assertNotNull(parseResult.getRootNode());
 			assertNotNull(parseResult.getRootASTElement());

@@ -7,12 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.terminalrules;
 
+import java.io.StringReader;
 import java.util.List;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -45,7 +45,7 @@ public class DynamicChannelTest extends AbstractXtextTests {
 	}
 
 	public void testParseSimpleLanguage() throws Exception {
-		IParseResult result = getParser().parse(new StringInputStream(model));
+		IParseResult result = getParser().parse(new StringReader(model));
 		assertNotNull(result);
 		assertNotNull(result.getRootASTElement());
 		assertNotNull(result.getRootNode());
@@ -54,7 +54,7 @@ public class DynamicChannelTest extends AbstractXtextTests {
 	}
 
 	public void testNodeModelOfSimpleLanguage() throws Exception {
-		IParseResult result = getParser().parse(new StringInputStream(model));
+		IParseResult result = getParser().parse(new StringReader(model));
 		List<LeafNode> leafs = result.getRootNode().getLeafNodes();
 		assertEquals(23, leafs.size());
 		int i = 0;

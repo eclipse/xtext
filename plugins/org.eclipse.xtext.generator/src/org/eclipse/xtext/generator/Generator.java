@@ -64,6 +64,8 @@ public class Generator extends AbstractWorkflowComponent2 {
 	
 	private Naming naming = new Naming();
 	
+	private String encoding;
+	
 	public void setNaming(Naming naming) {
 		this.naming = naming;
 	}
@@ -193,7 +195,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	}
 
 	private String getEncoding() {
-		return System.getProperty("file.encoding");
+		return (encoding != null) ? encoding : System.getProperty("file.encoding");
 	}
 
 	private final List<LanguageConfig> languageConfigs = new ArrayList<LanguageConfig>();
@@ -465,5 +467,12 @@ public class Generator extends AbstractWorkflowComponent2 {
 			return naming.basePackageUi(grammar) + ".internal." + GrammarUtil.getName(grammar) + "Activator";
 		}
 		return activator;
+	}
+	
+	/**
+	 * Sets the encoding of the generated files
+	 */
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
 	}
 }
