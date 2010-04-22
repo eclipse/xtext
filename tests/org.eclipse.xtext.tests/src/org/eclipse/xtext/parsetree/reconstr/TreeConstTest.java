@@ -24,7 +24,7 @@ import com.google.common.base.Join;
 import com.google.common.collect.Sets;
 
 /**
- * @author meysholdt - Initial contribution and API
+ * @author Moritz Eysholdt - Initial contribution and API
  */
 public class TreeConstTest extends AbstractXtextTests {
 

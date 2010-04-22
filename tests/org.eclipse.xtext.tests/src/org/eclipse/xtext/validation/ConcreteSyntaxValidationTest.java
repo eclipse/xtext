@@ -234,7 +234,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(m).assertAll(err(p.getUnassignedRuleCall1Sub_Val1(), ERROR_VALUE_REQUIRED, 1, 1, ""));
 
 		UnassignedRuleCall1 m1 = f.createUnassignedRuleCall1();
-		validate(m1).assertAll(errorCode(ERROR_FEATURE_MISSING), errorCode(ERROR_WRONG_TYPE));
+		validate(m1).assertAll(errorCode(ERROR_WRONG_TYPE));
 	}
 
 	public void testUnassignedRuleCall2() throws Exception {
@@ -247,7 +247,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(s).assertAll(errorCode(ERROR_WRONG_TYPE));
 
 		UnassignedRuleCall2 c = f.createUnassignedRuleCall2();
-		validate(c).assertAll(errorCode(ERROR_WRONG_TYPE), errorCode(ERROR_FEATURE_MISSING));
+		validate(c).assertAll(errorCode(ERROR_WRONG_TYPE));
 	}
 
 	public void testCombination1() throws Exception {
@@ -535,7 +535,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 
 		m = f.createEmptyAlternativeSub();
 		m.setVal1("foo");
-		validate(m).assertAll(err(p.getStaticSimplification_Val1(), ERROR_VALUE_PROHIBITED, null, 0, ""));
+		validate(m).assertAll(errorCode(ERROR_ASSIGNMENT_PROHIBITED));
 
 		m = f.createEmptyAlternativeSub();
 		m.setVal2("foo");
