@@ -18,7 +18,6 @@ import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxValidator;
 
 /**
- * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ConcreteSyntaxValidatorTest extends AbstractConcreteSyntaxValidationTest {
@@ -167,24 +166,24 @@ public class ConcreteSyntaxValidatorTest extends AbstractConcreteSyntaxValidatio
 		validate(toBeValidated).assertOK();
 	}
 
-//	public void testValidate_3_A_B() {
-//		toBeValidated.getFirstAsList().add("a");
-//		toBeValidated.setSecond(true);
-//		validate(toBeValidated).assertOK();
-//	}
-//
-//	public void testValidate_3_A_A_B() {
-//		toBeValidated.getFirstAsList().add("a");
-//		toBeValidated.getFirstAsList().add("a");
-//		toBeValidated.setSecond(true);
-//		validate(toBeValidated).assertOK();
-//	}
-//
-//	public void testValidate_3_A_A_A_B() {
-//		toBeValidated.getFirstAsList().add("a");
-//		toBeValidated.getFirstAsList().add("a");
-//		toBeValidated.getFirstAsList().add("a");
-//		toBeValidated.setSecond(true);
-//		validate(toBeValidated).assertOK();
-//	}
+	public void testValidate_3_A_B() {
+		toBeValidated.getFirstAsList().add("a");
+		toBeValidated.setSecond(true);
+		validate(toBeValidated).assertOK();
+	}
+
+	public void testValidate_3_A_A_B() {
+		toBeValidated.getFirstAsList().add("a");
+		toBeValidated.getFirstAsList().add("a");
+		toBeValidated.setSecond(true);
+		validate(toBeValidated).assertOK();
+	}
+
+	public void testValidate_3_A_A_A_B() {
+		toBeValidated.getFirstAsList().add("a");
+		toBeValidated.getFirstAsList().add("a");
+		toBeValidated.getFirstAsList().add("a");
+		toBeValidated.setSecond(true);
+		validate(toBeValidated).assertOK();
+	}
 }
