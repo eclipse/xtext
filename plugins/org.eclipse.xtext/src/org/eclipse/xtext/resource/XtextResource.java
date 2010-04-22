@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.diagnostics.DiagnosticSeverity;
 import org.eclipse.xtext.linking.ILinker;
-import org.eclipse.xtext.parser.IDefaultEncodingProvider;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ISwitchingParser;
@@ -96,7 +96,7 @@ public class XtextResource extends ResourceImpl {
 	private IResourceScopeCache cache = IResourceScopeCache.NullImpl.INSTANCE;
 
 	@Inject
-	private IDefaultEncodingProvider deafultEncodingProvider;
+	private IEncodingProvider encodingProvider;
 
 	private String encoding;
 
@@ -138,20 +138,16 @@ public class XtextResource extends ResourceImpl {
 		if (options != null) {
 			Object encodingOption = options.get(OPTION_ENCODING);
 			if (encodingOption instanceof String) {
-				setEncoding((String) encodingOption);
+				encoding = (String) encodingOption;
 			}
 		}
 	}
 
 	public String getEncoding() {
 		if (encoding == null) {
-			encoding = deafultEncodingProvider.getEncoding();
+			encoding = encodingProvider.getEncoding(getURI());
 		}
 		return encoding;
-	}
-
-	public void setEncoding(String encoding) {
-		this.encoding = encoding;
 	}
 
 	public void reparse(String newContent) throws IOException {

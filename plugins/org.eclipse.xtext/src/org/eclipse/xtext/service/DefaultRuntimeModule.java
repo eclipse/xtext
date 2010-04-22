@@ -22,6 +22,7 @@ import org.eclipse.xtext.linking.lazy.LazyLinker;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.SimpleNameProvider;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.SwitchingParser;
 import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
@@ -54,6 +55,7 @@ import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxValidator;
 
 import com.google.inject.Binder;
+import com.google.inject.Provider;
 import com.google.inject.name.Names;
 
 /**
@@ -184,4 +186,14 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	public Class<? extends IContainer.Manager> bindIContainer$Manager() {
 		return SimpleResourceDescriptionsBasedContainerManager.class;
 	}
+	
+	public void configureRuntimeEncodingProvider(Binder binder) {
+		binder.bind(IEncodingProvider.class).annotatedWith(DispatchingProvider.Runtime.class).to(IEncodingProvider.Runtime.class);
+	}
+
+	public Class<? extends Provider<IEncodingProvider>> provideIEncodingProvider() {
+		return IEncodingProviderDispatcher.class;
+	}
+
+	static class IEncodingProviderDispatcher extends DispatchingProvider<IEncodingProvider>{}
 }

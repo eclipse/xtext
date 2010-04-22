@@ -9,7 +9,8 @@ package org.eclipse.xtext.parser;
 
 import java.nio.charset.Charset;
 
-import com.google.inject.ImplementedBy;
+import org.eclipse.emf.common.util.URI;
+
 import com.google.inject.Singleton;
 
 /**
@@ -17,15 +18,14 @@ import com.google.inject.Singleton;
  * 
  * @author koehnlein - Initial contribution and API
  */
-@ImplementedBy(IDefaultEncodingProvider.Runtime.class)
-public interface IDefaultEncodingProvider {
+public interface IEncodingProvider {
 
-	String getEncoding();
+	String getEncoding(URI uri);
 
 	@Singleton
-	public class Runtime implements IDefaultEncodingProvider {
+	public class Runtime implements IEncodingProvider {
 
-		public String getEncoding() {
+		public String getEncoding(URI uri) {
 			return Charset.defaultCharset().name();
 		}
 

@@ -21,14 +21,15 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.formatting.IIndentationInformation;
-import org.eclipse.xtext.parser.IDefaultEncodingProvider;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.service.AbstractGenericModule;
+import org.eclipse.xtext.service.DispatchingProvider;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.LanguageSpecificURIEditorOpener;
-import org.eclipse.xtext.ui.editor.WorkspaceDefaultEncodingProvider;
+import org.eclipse.xtext.ui.editor.WorkspaceEncodingProvider;
 import org.eclipse.xtext.ui.editor.XtextEditorErrorTickUpdater;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.contentassist.DefaultCompletionProposalPostProcessor;
@@ -216,7 +217,7 @@ public class DefaultUiModule extends AbstractGenericModule {
 		binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class).to(LanguageSpecificURIEditorOpener.class);
 	}
 	
-	public Class<? extends IDefaultEncodingProvider> bindIDefaultEncodingProvider() {
-		return WorkspaceDefaultEncodingProvider.class;
+	public void configureUiEncodingProvider(Binder binder) {
+		binder.bind(IEncodingProvider.class).annotatedWith(DispatchingProvider.Ui.class).to(WorkspaceEncodingProvider.class);
 	}
 }

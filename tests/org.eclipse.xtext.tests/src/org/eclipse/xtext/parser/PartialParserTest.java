@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
+import java.io.StringReader;
 import java.util.Collections;
 import java.util.Iterator;
 
@@ -26,7 +27,6 @@ import org.eclipse.xtext.testlanguages.LookaheadTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.PartialParserTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
-import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -232,7 +232,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		PartialParsingPointers parsingPointers = partialParser.calculatePartialParsingPointers(rootNode, offset,
 				length);
 		String entryRuleName = parsingPointers.findEntryRuleName();
-		IParseResult parseResult = getAntlrParser().parse(entryRuleName, new StringInputStream(
+		IParseResult parseResult = getAntlrParser().parse(entryRuleName, new StringReader(
 				parsingPointers.findReparseRegion()));
 		comparator.assertSameStructure(parsingPointers.getDefaultReplaceRootNode(), parseResult.getRootNode());
 		comparator.assertSameStructure(parsingPointers.findASTReplaceElement(), parseResult.getRootASTElement());

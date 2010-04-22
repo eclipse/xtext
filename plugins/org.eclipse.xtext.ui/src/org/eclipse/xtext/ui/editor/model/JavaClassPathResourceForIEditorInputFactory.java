@@ -105,7 +105,6 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 		configureResourceSet(resourceSet, uri);
 		XtextResource resource = getResource(resourceSet, uri);
 		resource.setValidationDisabled(false);
-		resource.setEncoding(storage.getCharset());
 		return resource;
 	}
 

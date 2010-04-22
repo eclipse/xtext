@@ -7,11 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat;
 
+import java.io.StringReader;
+
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguagePackratParser;
-import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -90,14 +91,14 @@ public class PerformanceTest extends AbstractXtextTests {
 	}
 
 	public void testFirstAntlr() {
-		IParseResult result = getParser().parse(new StringInputStream(model));
+		IParseResult result = getParser().parse(new StringReader(model));
 		assertNotNull(result);
 		assertNotNull(result.getRootASTElement());
 		assertNotNull(result.getRootNode());
 	}
 
 	public void testSecondAntlr() {
-		IParseResult result = getParser().parse(new StringInputStream(model));
+		IParseResult result = getParser().parse(new StringReader(model));
 		assertNotNull(result);
 		assertNotNull(result.getRootASTElement());
 		assertNotNull(result.getRootNode());
@@ -105,7 +106,7 @@ public class PerformanceTest extends AbstractXtextTests {
 
 	public void testAntlrTwice() {
 		for (int i = 0; i < 2; i++) {
-			IParseResult result = getParser().parse(new StringInputStream(model));
+			IParseResult result = getParser().parse(new StringReader(model));
 			assertNotNull(result);
 			assertNotNull(result.getRootASTElement());
 			assertNotNull(result.getRootNode());
