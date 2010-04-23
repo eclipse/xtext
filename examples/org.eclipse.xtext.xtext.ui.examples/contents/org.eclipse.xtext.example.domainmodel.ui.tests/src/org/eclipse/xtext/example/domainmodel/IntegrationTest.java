@@ -11,7 +11,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.xtext.builder.nature.XtextNature;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 
 public class IntegrationTest extends TestCase {
 
@@ -30,7 +30,7 @@ public class IntegrationTest extends TestCase {
 
 	private IJavaProject createJavaProjectWithRootSrc(String string) throws CoreException {
 		IJavaProject project = createJavaProject(string);
-		addNature(project.getProject(), XtextNature.NATURE_ID);
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		addSourceFolder(project, "src");
 		return project;
 	}

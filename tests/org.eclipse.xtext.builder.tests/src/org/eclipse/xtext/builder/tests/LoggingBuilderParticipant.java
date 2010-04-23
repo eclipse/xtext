@@ -20,14 +20,17 @@ import com.google.inject.Singleton;
 public class LoggingBuilderParticipant implements IXtextBuilderParticipant {
 
 	private int invocationCount = 0;
+	private IBuildContext context;
 
-	public void build(IXtextBuilderParticipant.IBuildContext ctx, IProgressMonitor monitor)
+	public void build(IXtextBuilderParticipant.IBuildContext context, IProgressMonitor monitor)
 			throws CoreException {
 		invocationCount++;	
+		this.context = context;
 	}
 	
 	public void reset() {
 		invocationCount = 0;
+		context = null;
 	}
 	
 	public int getInvocationCount() {
@@ -35,8 +38,11 @@ public class LoggingBuilderParticipant implements IXtextBuilderParticipant {
 	}
 
 	public void build(BuildContext context, IProgressMonitor monitor) throws CoreException {
-		// TODO Auto-generated method stub
-		
+		this.context = context;
+	}
+
+	public IBuildContext getContext() {
+		return context;
 	}
 
 }

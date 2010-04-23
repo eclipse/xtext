@@ -27,7 +27,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
-import org.eclipse.xtext.builder.nature.XtextNature;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
 import com.google.common.collect.Sets;
@@ -81,6 +81,15 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 								if ((delta.getFlags() & IResourceDelta.OPEN) != 0 && project.isOpen()) {
 									toUpdate.add(project);
 								}
+								if ((delta.getKind() & IResourceDelta.CHANGED) != 0 && project.isOpen()) {
+									if ((delta.getFlags() & IResourceDelta.DESCRIPTION) != 0) {
+										if (XtextProjectHelper.hasNature(project))
+											toUpdate.add(project);
+										else {
+											scheduleRemoveProjectJob(project);
+										}
+									}
+								}
 							}
 							return false;
 						}
@@ -90,42 +99,47 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 					log.error(e.getMessage(), e);
 				}
 			} else if ((event.getType() == IResourceChangeEvent.PRE_CLOSE || event.getType() == IResourceChangeEvent.PRE_DELETE)) {
-				if (event.getResource() instanceof IProject && XtextNature.hasNature((IProject) event.getResource())) {
-					final ToBeBuilt toBeBuilt = getToBeBuiltComputer().removeProject((IProject) event.getResource(),
-							new NullProgressMonitor());
-					new Job("removing project " + event.getResource().getName() + " from xtext index.") {
-						{
-							setRule(workspace.getRoot());
-						}
-
-						@Override
-						public boolean belongsTo(Object family) {
-							return family == ResourcesPlugin.FAMILY_AUTO_BUILD;
-						}
-
-						@Override
-						protected IStatus run(IProgressMonitor monitor) {
-							try {
-								new WorkspaceModifyOperation(getRule()) {
-									@Override
-									protected void execute(IProgressMonitor monitor) throws CoreException,
-											InvocationTargetException, InterruptedException {
-										getBuilderState().update(
-												getResourceSetProvider().get(event.getResource().getProject()),
-												toBeBuilt.getToBeUpdated(), toBeBuilt.getToBeDeleted(), monitor);
-									}
-								}.run(monitor);
-							} catch (InvocationTargetException e) {
-								log.error(e.getMessage(), e);
-							} catch (InterruptedException e) {
-								log.error(e.getMessage(), e);
-							}
-							return Status.OK_STATUS;
-						}
-					}.schedule();
+				if (event.getResource() instanceof IProject && XtextProjectHelper.hasNature((IProject) event.getResource())) {
+					scheduleRemoveProjectJob((IProject) event.getResource());
 				}
 			}
 		}
+	}
+
+	protected void scheduleRemoveProjectJob(final IProject project) {
+		final ToBeBuilt toBeBuilt = getToBeBuiltComputer().removeProject(project, new NullProgressMonitor());
+		new Job("Removing project " + project.getName() + " from Xtext index.") {
+			{
+				setRule(workspace.getRoot());
+			}
+
+			@Override
+			public boolean belongsTo(Object family) {
+				return family == ResourcesPlugin.FAMILY_AUTO_BUILD;
+			}
+
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				try {
+					new WorkspaceModifyOperation(getRule()) {
+						@Override
+						protected void execute(IProgressMonitor monitor) throws CoreException,
+								InvocationTargetException, InterruptedException {
+							getBuilderState().update(
+									getResourceSetProvider().get(project),
+									toBeBuilt.getToBeUpdated(), 
+									toBeBuilt.getToBeDeleted(), 
+									monitor);
+						}
+					}.run(monitor);
+				} catch (InvocationTargetException e) {
+					log.error(e.getMessage(), e);
+				} catch (InterruptedException e) {
+					log.error(e.getMessage(), e);
+				}
+				return Status.OK_STATUS;
+			}
+		}.schedule();
 	}
 
 }

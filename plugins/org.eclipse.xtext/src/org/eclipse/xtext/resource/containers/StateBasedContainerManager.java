@@ -60,6 +60,8 @@ public class StateBasedContainerManager implements IContainer.Manager {
 	}
 
 	protected List<IContainer> getVisibleContainers(List<String> handles, IResourceDescriptions resourceDescriptions) {
+		if (handles.isEmpty())
+			return Collections.emptyList();
 		List<IContainer> result = Lists.newArrayListWithExpectedSize(handles.size());
 		for(String handle: handles) {
 			result.add(createContainer(handle, resourceDescriptions));

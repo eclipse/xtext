@@ -21,10 +21,10 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
-import org.eclipse.xtext.builder.nature.XtextNature;
 import org.eclipse.xtext.junit.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Event;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -57,7 +57,7 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 	
 	public void testFullBuildBigProject() throws Exception {
 		IJavaProject project = createJavaProject("foo");
-		addNature(project.getProject(), XtextNature.NATURE_ID);
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = addSourceFolder(project, "src");
 		int NUM_FILES = 200;
 		IFile[] files = new IFile[NUM_FILES];
@@ -77,7 +77,7 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 	
 	public void testFullBuildBigProjectWithRefeernceToJar() throws Exception {
 		IJavaProject project = createJavaProject("foo");
-		addNature(project.getProject(), XtextNature.NATURE_ID);
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = addSourceFolder(project, "src");
 		IFile jarFile = project.getProject().getFile("my.jar");
 		jarFile.create(jarInputStream(new TextFile("my/element"+F_EXT,"object ReferenceMe")), true, monitor());
@@ -104,7 +104,7 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 	
 	public void testFullBuildBigProjectWithLinkingErrors() throws Exception {
 		IJavaProject project = createJavaProject("foo");
-		addNature(project.getProject(), XtextNature.NATURE_ID);
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = addSourceFolder(project, "src");
 		int NUM_FILES = 200;
 		IFile[] files = new IFile[NUM_FILES];
@@ -126,7 +126,7 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 	
 	public void testFullBuildBigProjectWithSyntaxErrors() throws Exception {
 		IJavaProject project = createJavaProject("foo");
-		addNature(project.getProject(), XtextNature.NATURE_ID);
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = addSourceFolder(project, "src");
 		int NUM_FILES = 500;
 		IFile[] files = new IFile[NUM_FILES];
@@ -148,7 +148,7 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 
 	public void testLotsOfFiles() throws Exception {
 		IJavaProject project = createJavaProject("foo");
-		addNature(project.getProject(), XtextNature.NATURE_ID);
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = addSourceFolder(project, "src");
 		int NUM_FILES = 10;
 		IFile[] files = new IFile[NUM_FILES];

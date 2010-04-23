@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IStorage;
@@ -32,15 +33,28 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.ui.resource.PackageFragmentRootWalker;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Singleton
-public class JavaProjectsState extends AbstractAllContainersState implements IElementChangedListener {
+public class JavaProjectsState extends WorkspaceProjectsState implements IElementChangedListener {
 
+	public static final String STRICT = "org.eclipse.xtext.ui.containers.JavaProjectsState.STRICT";
+	
 	private final static Logger log = Logger.getLogger(JavaProjectsState.class);
+	
+	/**
+	 * Set <code>strict</code> to <code>true</code> to enforce model files to reside 
+	 * in Java project's source paths. Models in normal paths or simple java projects 
+	 * will not be found.
+	 */
+	@Named(JavaProjectsState.STRICT)
+	@Inject(optional = true)
+	private boolean strict = false;
 	
 	@Override
 	protected void registerAsListener() {
@@ -59,7 +73,9 @@ public class JavaProjectsState extends AbstractAllContainersState implements IEl
 		IPackageFragmentRoot root = getPackageFragmentRoot(uri);
 		if (root != null)
 			return root.getHandleIdentifier();
-		return null;
+		if (strict)
+			return null;
+		return super.doInitHandle(uri);
 	}
 	
 	@Override
@@ -67,6 +83,10 @@ public class JavaProjectsState extends AbstractAllContainersState implements IEl
 		IJavaElement javaElement = JavaCore.create(containerHandle);
 		if (javaElement instanceof IPackageFragmentRoot) {
 			IPackageFragmentRoot root = (IPackageFragmentRoot) javaElement;
+			IJavaProject javaProject = root.getJavaProject();
+			if (!isAccessibleXtextProject(javaProject.getProject())) {
+				return Collections.emptyList();
+			}
 			final List<URI> uris = Lists.newArrayList();
 			if (root.isArchive() || root.isExternal()) {
 				try {
@@ -90,18 +110,21 @@ public class JavaProjectsState extends AbstractAllContainersState implements IEl
 				try {
 					IResource resource = root.getResource();
 					if (resource != null) {
-						resource.accept(new IResourceVisitor() {
-							public boolean visit(IResource resource) throws CoreException {
-								if (resource instanceof IStorage) {
-									URI uri = getUri((IStorage) resource);
-									if (uri != null) {
-										uris.add(uri);	
+						IProject project = resource.getProject();
+						if (isAccessibleXtextProject(project)) {
+							resource.accept(new IResourceVisitor() {
+								public boolean visit(IResource resource) throws CoreException {
+									if (resource instanceof IStorage) {
+										URI uri = getUri((IStorage) resource);
+										if (uri != null) {
+											uris.add(uri);	
+										}
+										return false;
 									}
-									return false;
+									return true;
 								}
-								return true;
-							}
-						});
+							});
+						}
 					}
 					return uris;
 				} catch (CoreException e) {
@@ -110,7 +133,9 @@ public class JavaProjectsState extends AbstractAllContainersState implements IEl
 				}
 			}
 		}
-		return Collections.emptyList();
+		if (strict)
+			return Collections.emptyList();
+		return super.doInitContainedURIs(containerHandle);
 	}
 	
 	@Override
@@ -118,10 +143,15 @@ public class JavaProjectsState extends AbstractAllContainersState implements IEl
 		IJavaElement javaElement = JavaCore.create(handle);
 		if (javaElement != null) {
 			IJavaProject project = javaElement.getJavaProject();
-			List<String> rootHandles = getPackageFragmentRootHandles(project);
-			return rootHandles;
+			if (isAccessibleXtextProject(project.getProject())) {
+				List<String> rootHandles = getPackageFragmentRootHandles(project);
+				return rootHandles;
+			} 
+			return Collections.emptyList();
 		}
-		return Collections.emptyList();
+		if (strict)
+			return Collections.emptyList();
+		return super.doInitVisibleHandles(handle);
 	}
 	
 	protected List<String> getPackageFragmentRootHandles(IJavaProject project) {
@@ -226,6 +256,14 @@ public class JavaProjectsState extends AbstractAllContainersState implements IEl
 				return true;
 		}
 		return false;
+	}
+
+	public void setStrict(boolean strict) {
+		this.strict = strict;
+	}
+
+	public boolean isStrict() {
+		return strict;
 	}
 
 }

@@ -17,6 +17,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
@@ -165,6 +166,8 @@ public abstract class AbstractAllContainersState implements IResourceChangeListe
 	
 	protected List<String> initVisibleContainerHandles(String handle, List<String> result) {
 		List<String> visibleHandles = doInitVisibleHandles(handle);
+		if (visibleHandles.isEmpty())
+			return visibleHandles;
 		try {
 			writeLock.lock();
 			if (result.isEmpty())
@@ -199,6 +202,12 @@ public abstract class AbstractAllContainersState implements IResourceChangeListe
 									clear.set(Boolean.TRUE);
 									return false;
 								}
+							}
+						}
+						if (delta.getKind() == IResourceDelta.CHANGED && delta.getResource() instanceof IProject) {
+							if ((delta.getFlags() & IResourceDelta.DESCRIPTION) != 0) {
+								clear.set(Boolean.TRUE);
+								return false;
 							}
 						}
 						return true;
