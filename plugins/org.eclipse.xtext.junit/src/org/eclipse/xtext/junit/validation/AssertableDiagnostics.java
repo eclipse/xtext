@@ -199,9 +199,10 @@ public class AssertableDiagnostics {
 			fail("There are diagnostics missing for theses predicates: " + unconsumed);
 	}
 
-	public AssertableDiagnostics assertAny(DiagnosticPredicate predicate) {
-		if (Iterables.any(getAllDiagnostics(), predicate))
-			return this;
+	public AssertableDiagnostics assertAny(DiagnosticPredicate... predicates) {
+		for (DiagnosticPredicate predicate : predicates)
+			if (Iterables.any(getAllDiagnostics(), predicate))
+				return this;
 		fail("predicate not found");
 		return this;
 	}
