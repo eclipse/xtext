@@ -23,8 +23,11 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IExternalContentSupport;
+import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.service.DispatchingProvider;
+import org.eclipse.xtext.ui.containers.ContainerStateProvider;
+import org.eclipse.xtext.ui.containers.JavaProjectsState;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
@@ -219,5 +222,13 @@ public class DefaultUiModule extends AbstractGenericModule {
 	
 	public void configureUiEncodingProvider(Binder binder) {
 		binder.bind(IEncodingProvider.class).annotatedWith(DispatchingProvider.Ui.class).to(WorkspaceEncodingProvider.class);
+	}
+	
+	public Class<? extends IAllContainersState> bindIAllContainersState() {
+		return JavaProjectsState.class;
+	}
+	
+	public Class<? extends IAllContainersState.Provider> bindIAllContainersState$Provider() {
+		return ContainerStateProvider.class;
 	}
 }
