@@ -46,7 +46,8 @@ public class JavaImportsTool implements PostProcessor {
 	private Set<String> imports = new HashSet<String>();
 	
 	public String registerImport(String qualifiedName) {
-		imports.add(qualifiedName);
+		if (qualifiedName != null)
+			imports.add(qualifiedName);
 		return qualifiedName;
 	}
 
