@@ -8,18 +8,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.model;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.Collections;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.MarkerUtil;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.editor.quickfix.XtextResourceMarkerAnnotationModel;
 import org.eclipse.xtext.ui.editor.validation.AnnotationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.ValidationJob;
+import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 
@@ -44,6 +52,9 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	
 	@Inject
 	private MarkerUtil markerUtil;
+	
+	@Inject
+	private IResourceForEditorInputFactory resourceForEditorInputFactory;
 
 	@Override
 	protected XtextDocument createEmptyDocument() {
@@ -72,9 +83,22 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		boolean result = super.setDocumentContent(document, editorInput, encoding);
 		if (result) {
 			XtextDocument xtextDocument = (XtextDocument) document;
-			xtextDocument.setInput(editorInput,encoding);
+			XtextResource xtextResource = (XtextResource) resourceForEditorInputFactory.createResource(editorInput);
+			loadResource(xtextResource, xtextDocument.get(), encoding);
+			xtextDocument.setInput(xtextResource);
 		}
 		return result;
+	}
+	
+	protected void loadResource(XtextResource resource, String document, String encoding) throws CoreException {
+		try {
+			resource.load(new ByteArrayInputStream(document.getBytes(encoding)),
+					Collections.singletonMap(XtextResource.OPTION_ENCODING, encoding));
+		} catch (IOException ex) {
+			String message = (ex.getMessage() != null ? ex.getMessage() : ex.toString());
+			IStatus s = new Status(IStatus.ERROR, Activator.PLUGIN_ID, IStatus.OK, message, ex);
+			throw new CoreException(s);
+		}
 	}
 	
 	@Override
@@ -94,6 +118,14 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 			return new XtextResourceMarkerAnnotationModel(input.getFile(), issueResolutionProvider, markerUtil);
 		}
 		return super.createAnnotationModel(element);
+	}
+
+	public void setResourceForEditorInputFactory(IResourceForEditorInputFactory resourceForEditorInputFactory) {
+		this.resourceForEditorInputFactory = resourceForEditorInputFactory;
+	}
+
+	public IResourceForEditorInputFactory getResourceForEditorInputFactory() {
+		return resourceForEditorInputFactory;
 	}
 
 }
