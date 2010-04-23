@@ -25,14 +25,6 @@ public abstract class AbstractConcreteSyntaxValidator implements IConcreteSyntax
 	@Named(Constants.LANGUAGE_NAME)
 	private String language;
 
-	public boolean validateObject(EObject obj, IDiagnosticAcceptor acceptor, Map<Object, Object> context) {
-		return true;
-	}
-
-	public boolean validateRecursive(EObject obj, IDiagnosticAcceptor acceptor, Map<Object, Object> context) {
-		return true;
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof AbstractConcreteSyntaxValidator)
@@ -43,6 +35,14 @@ public abstract class AbstractConcreteSyntaxValidator implements IConcreteSyntax
 	@Override
 	public int hashCode() {
 		return language.hashCode();
+	}
+
+	public boolean validateObject(EObject obj, IDiagnosticAcceptor acceptor, Map<Object, Object> context) {
+		return true;
+	}
+
+	public boolean validateRecursive(EObject obj, IDiagnosticAcceptor acceptor, Map<Object, Object> context) {
+		return true;
 	}
 
 }

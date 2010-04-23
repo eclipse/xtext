@@ -36,14 +36,14 @@ public class ConcreteSyntaxEValidator extends AbstractInjectableValidator {
 	private IGrammarAccess grammar;
 
 	@Inject
+	private IConcreteSyntaxValidator validator;
+
+	@Inject
 	// this ensures that the grammar is available when AbstractInjectableValidator.register(EValidatorRegistrar) is called
 	public ConcreteSyntaxEValidator(IGrammarAccess grammar) {
 		super();
 		this.grammar = grammar;
 	}
-
-	@Inject
-	private IConcreteSyntaxValidator validator;
 
 	@Override
 	protected List<EPackage> getEPackages() {

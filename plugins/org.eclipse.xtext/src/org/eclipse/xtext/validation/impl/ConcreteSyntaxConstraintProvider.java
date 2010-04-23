@@ -58,16 +58,14 @@ import com.google.inject.internal.Lists;
  */
 @Singleton
 public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstraintProvider {
-
 	public class SyntaxConstraintNode implements ISyntaxConstraint {
 		protected ISyntaxConstraint container = null;
 		protected List<ISyntaxConstraint> contents;
 		protected AbstractElement element;
 		protected boolean multiple = false;
 		protected boolean optional = false;
-		@SuppressWarnings("unchecked")
-		protected Set<EClass> semanticTypes = Collections.EMPTY_SET;
 		protected EClass semanticType = null;
+		protected Set<EClass> semanticTypes = UNINITIALIZED;
 		protected ConstraintType type;
 
 		protected SyntaxConstraintNode() {
@@ -95,55 +93,6 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 					return true;
 			}
 			return false;
-		}
-
-		protected Pair<Set<EClass>, Set<EClass>> getAllSemanticTypesPairs(Set<ISyntaxConstraint> exclude) {
-			Set<EClass> mandatory = Sets.newHashSet();
-			Set<EClass> optional = Sets.newHashSet();
-			boolean allChildrenContrMandType = !getContents().isEmpty();
-			for (ISyntaxConstraint sc : getContents())
-				if (exclude == null || !exclude.contains(sc)) {
-					Pair<Set<EClass>, Set<EClass>> t = ((SyntaxConstraintNode) sc).getAllSemanticTypesPairs(exclude);
-					if (sc.isOptional()) {
-						optional.addAll(t.getFirst());
-						optional.addAll(t.getSecond());
-						allChildrenContrMandType = false;
-					} else {
-						mandatory.addAll(t.getFirst());
-						optional.addAll(t.getSecond());
-						if (t.getFirst().isEmpty())
-							allChildrenContrMandType = false;
-					}
-				}
-			if ((isRoot() && isOptional()) || (type == ConstraintType.ALTERNATIVE && !allChildrenContrMandType)) {
-				optional.addAll(mandatory);
-				mandatory.clear();
-			}
-			if (semanticType != null) {
-				if (mandatory.isEmpty() && optional.isEmpty())
-					mandatory.add(semanticType);
-				else
-					optional.add(semanticType);
-			}
-			if (exclude == null && !isRoot() && mandatory.isEmpty() && optional.isEmpty())
-				optional.addAll(((SyntaxConstraintNode) getContainer()).getSemanticTypeByParent(Sets
-						.<ISyntaxConstraint> newHashSet(this)));
-			return Tuples.create(mandatory, optional);
-		}
-
-		protected Set<EClass> getSemanticTypeByParent(Set<ISyntaxConstraint> exclude) {
-			if (type == ConstraintType.ALTERNATIVE) {
-				exclude.addAll(getContents());
-				if (isRoot())
-					return Sets.newHashSet(semanticType);
-			} else {
-				Pair<Set<EClass>, Set<EClass>> types = getAllSemanticTypesPairs(exclude);
-				if (!types.getFirst().isEmpty())
-					return types.getFirst();
-				if (isRoot())
-					return types.getSecond();
-			}
-			return ((SyntaxConstraintNode) getContainer()).getSemanticTypeByParent(exclude);
 		}
 
 		public boolean dependsOn(ISyntaxConstraint ele) {
@@ -177,9 +126,39 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 			return null;
 		}
 
-		public Set<EClass> getSemanticTypes() {
-			Pair<Set<EClass>, Set<EClass>> types = getAllSemanticTypesPairs(null);
-			return !types.getFirst().isEmpty() ? types.getFirst() : types.getSecond();
+		protected Pair<Set<EClass>, Set<EClass>> getAllSemanticTypesPairs(Set<ISyntaxConstraint> exclude) {
+			Set<EClass> mandatory = Sets.newHashSet();
+			Set<EClass> optional = Sets.newHashSet();
+			boolean allChildrenContributeMandatoryType = !getContents().isEmpty();
+			for (ISyntaxConstraint sc : getContents())
+				if (exclude == null || !exclude.contains(sc)) {
+					Pair<Set<EClass>, Set<EClass>> t = ((SyntaxConstraintNode) sc).getAllSemanticTypesPairs(exclude);
+					if (sc.isOptional()) {
+						optional.addAll(t.getFirst());
+						optional.addAll(t.getSecond());
+						allChildrenContributeMandatoryType = false;
+					} else {
+						mandatory.addAll(t.getFirst());
+						optional.addAll(t.getSecond());
+						if (t.getFirst().isEmpty())
+							allChildrenContributeMandatoryType = false;
+					}
+				}
+			if ((isRoot() && isOptional())
+					|| (type == ConstraintType.ALTERNATIVE && !allChildrenContributeMandatoryType)) {
+				optional.addAll(mandatory);
+				mandatory.clear();
+			}
+			if (semanticType != null) {
+				if (mandatory.isEmpty() && optional.isEmpty())
+					mandatory.add(semanticType);
+				else
+					optional.add(semanticType);
+			}
+			if (exclude == null && !isRoot() && mandatory.isEmpty() && optional.isEmpty())
+				optional.addAll(((SyntaxConstraintNode) getContainer()).getSemanticTypeByParent(Sets
+						.<ISyntaxConstraint> newHashSet(this)));
+			return Tuples.create(mandatory, optional);
 		}
 
 		public EStructuralFeature getAssignmentFeature(EClass clazz) {
@@ -212,8 +191,28 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 			return element;
 		}
 
+		protected Set<EClass> getSemanticTypeByParent(Set<ISyntaxConstraint> exclude) {
+			if (type == ConstraintType.ALTERNATIVE) {
+				exclude.addAll(getContents());
+				if (isRoot())
+					return Sets.newHashSet(semanticType);
+			} else {
+				Pair<Set<EClass>, Set<EClass>> types = getAllSemanticTypesPairs(exclude);
+				if (!types.getFirst().isEmpty())
+					return types.getFirst();
+				if (isRoot())
+					return types.getSecond();
+			}
+			return ((SyntaxConstraintNode) getContainer()).getSemanticTypeByParent(exclude);
+		}
+
+		public Set<EClass> getSemanticTypes() {
+			Pair<Set<EClass>, Set<EClass>> types = getAllSemanticTypesPairs(null);
+			return !types.getFirst().isEmpty() ? types.getFirst() : types.getSecond();
+		}
+
 		public Set<EClass> getSemanticTypesToCheck() {
-			if (semanticTypes == Collections.EMPTY_SET) {
+			if (semanticTypes == UNINITIALIZED) {
 				semanticTypes = getSemanticTypes();
 				if (semanticTypes.isEmpty()
 						|| (!isRoot() && semanticTypes.equals(((SyntaxConstraintNode) getContainer())
@@ -271,7 +270,11 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 		}
 	}
 
+	protected final static Set<EClass> UNINITIALIZED = Sets.newHashSet();
+
 	protected Grammar grammar;
+
+	protected final ISyntaxConstraint INVALID_RULE = new SyntaxConstraintNode();
 
 	protected Map<ParserRule, ISyntaxConstraint> rule2element = Maps.newHashMap();
 
@@ -386,8 +389,14 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 			while (i.hasNext()) {
 				EObject obj = i.next();
 				if (obj instanceof RuleCall || obj instanceof Action || obj instanceof Alternatives)
-					break;
-				else if (obj instanceof Assignment) {
+					return Lists.newArrayList();
+				else if (obj instanceof Group) {
+					Set<String> names = Sets.newHashSet();
+					for (Assignment ass : EcoreUtil2.getAllContentsOfType(obj, Assignment.class))
+						names.add(ass.getFeature());
+					if (names.size() > 1) 
+						i.prune();
+				} else if (obj instanceof Assignment) {
 					Assignment a = (Assignment) obj;
 					feature2ass.put(a.getFeature(), a);
 					feature2child.put(a.getFeature(), c);
@@ -426,8 +435,6 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 		}
 		return result;
 	}
-
-	protected final ISyntaxConstraint INVALID_RULE = new SyntaxConstraintNode();
 
 	public ISyntaxConstraint getConstraint(ParserRule rule) {
 		ISyntaxConstraint e = rule2element.get(rule);

@@ -64,7 +64,7 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 			return Collections.emptyList();
 		}
 
-		private List<String> getChildren(ISyntaxConstraint obj, final Set<ISyntaxConstraint> included) {
+		protected List<String> getChildren(ISyntaxConstraint obj, final Set<ISyntaxConstraint> included) {
 			ArrayList<String> r = new ArrayList<String>();
 			for (ISyntaxConstraint o : obj.getContents())
 				if (included.contains(o))
@@ -72,7 +72,7 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 			return r;
 		}
 
-		private ISyntaxConstraint getCommonContainer() {
+		protected ISyntaxConstraint getCommonContainer() {
 			Iterator<ISyntaxConstraint> i = involved.iterator();
 			if (!i.hasNext())
 				return null;
@@ -90,7 +90,7 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 				return "";
 		}
 
-		private String getConstraint(ISyntaxConstraint element, Set<ISyntaxConstraint> all) {
+		protected String getConstraint(ISyntaxConstraint element, Set<ISyntaxConstraint> all) {
 			switch (element.getType()) {
 				case ASSIGNMENT:
 					return ((Assignment) element.getGrammarElement()).getFeature() + element.getCardinality();
@@ -116,7 +116,7 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 			return null;
 		}
 
-		private Set<ISyntaxConstraint> getInvolvedIncludingContainers(ISyntaxConstraint commonRoot) {
+		protected Set<ISyntaxConstraint> getInvolvedIncludingContainers(ISyntaxConstraint commonRoot) {
 			HashSet<ISyntaxConstraint> all = new HashSet<ISyntaxConstraint>(involved);
 			all.add(commonRoot);
 			for (ISyntaxConstraint a : involved) {
