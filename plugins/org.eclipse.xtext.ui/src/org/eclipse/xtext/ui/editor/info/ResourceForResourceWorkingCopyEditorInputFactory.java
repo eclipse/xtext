@@ -1,6 +1,7 @@
 package org.eclipse.xtext.ui.editor.info;
 
 import java.io.InputStream;
+import java.util.Collections;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -23,13 +24,13 @@ public class ResourceForResourceWorkingCopyEditorInputFactory extends JavaClassP
 		}
 	}
 
-	private Resource createWorkingCopy(ResourceWorkingCopyFileEditorInput editorInput) {
+	protected Resource createWorkingCopy(ResourceWorkingCopyFileEditorInput editorInput) {
 		try {
 			ResourceSet resourceSet = getResourceSet(editorInput.getFile());
 			Resource workingCopy = resourceSet.createResource(editorInput.getResource().getURI());
 			InputStream inputStream = editorInput.getFile().getContents();
 			try {
-				workingCopy.load(inputStream, null);
+				workingCopy.load(inputStream, Collections.singletonMap(XtextResource.OPTION_ENCODING, editorInput.getEncoding()));
 			} finally {
 				inputStream.close();
 			}
