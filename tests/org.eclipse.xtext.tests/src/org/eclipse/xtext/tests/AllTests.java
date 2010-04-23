@@ -197,6 +197,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.util.TuplesTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.CompositeValidatorWithEObjectValidatorTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.CompositeValidatorWithoutEObjectValidatorTest.class);
+      suite.addTestSuite(org.eclipse.xtext.validation.ConcreteSyntaxConstraintProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.ConcreteSyntaxValidationTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.ConcurrentValidationTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.DeclarativeValidatorTest.class);
