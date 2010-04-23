@@ -136,6 +136,8 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 		}
 
 		public ICompletionProposal[] computeQuickAssistProposals(IQuickAssistInvocationContext invocationContext) {
+			if (invocationContext.getSourceViewer() == null)
+				return new ICompletionProposal[0];
 			final IDocument d = invocationContext.getSourceViewer().getDocument();
 			if (!(d instanceof IXtextDocument))
 				return new ICompletionProposal[0];
