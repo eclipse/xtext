@@ -243,7 +243,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	public void testConstructorCall_2() throws Exception {
 		XConstructorCall cc = (XConstructorCall) expression("new Foo(0,1,2) { this.foo = bar;}");
 		assertNotNull(cc.getType());
-		assertTrue(cc.getInitializer() instanceof XBlockExpression);
+		assertNotNull(cc.getInitializer());
 		assertEquals(3, cc.getParams().size());
 		for (int i = 0; i < 3; i++)
 			assertEquals(i, ((XIntLiteral) cc.getParams().get(i)).getValue());
