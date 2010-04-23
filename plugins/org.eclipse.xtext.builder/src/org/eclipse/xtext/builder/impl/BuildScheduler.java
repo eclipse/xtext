@@ -20,7 +20,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.xtext.builder.internal.Activator;
-import org.eclipse.xtext.builder.nature.XtextNature;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Sets;
@@ -58,7 +58,7 @@ public class BuildScheduler {
 	}
 
 	protected boolean isBuildable(IProject project) {
-		return project.isAccessible() && XtextNature.hasNature(project);
+		return XtextProjectHelper.hasNature(project);
 	}
 
 	protected class BuildJob extends Job {

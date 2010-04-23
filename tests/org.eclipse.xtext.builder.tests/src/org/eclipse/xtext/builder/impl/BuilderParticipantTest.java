@@ -14,9 +14,9 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
-import org.eclipse.xtext.builder.nature.XtextNature;
 import org.eclipse.xtext.builder.tests.Activator;
 import org.eclipse.xtext.builder.tests.LoggingBuilderParticipant;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
@@ -37,7 +37,7 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 	
 	public void testParticipantInvoked() throws Exception {
 		IJavaProject project = createJavaProject("foo");
-		addNature(project.getProject(), XtextNature.NATURE_ID);
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = addSourceFolder(project, "src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());

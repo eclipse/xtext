@@ -20,6 +20,7 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Singleton;
@@ -45,7 +46,7 @@ public class WorkspaceProjectsState extends AbstractAllContainersState {
 	@Override
 	protected Collection<URI> doInitContainedURIs(String containerHandle) {
 		IProject project = getWorkspaceRoot().getProject(containerHandle);
-		if (project != null && project.exists()) {
+		if (project != null && isAccessibleXtextProject(project)) {
 			final List<URI> uris = Lists.newArrayList();
 			try {
 				project.accept(new IResourceVisitor() {
@@ -70,35 +71,31 @@ public class WorkspaceProjectsState extends AbstractAllContainersState {
 
 	@Override
 	protected List<String> doInitVisibleHandles(String handle) {
-		IProject project = getWorkspaceRoot().getProject(handle);
-		if (isAccessibleXtextProject(project)) {
-			try {
-				IProject[] referencedProjects = project.getReferencedProjects();
-				List<String> result = Lists.newArrayListWithExpectedSize(referencedProjects.length);
-				for(IProject referencedProject: referencedProjects) {
-					if (isAccessibleXtextProject(referencedProject)) {
-						result.add(referencedProject.getName());
+		try {
+			IProject project = getWorkspaceRoot().getProject(handle);
+			if (isAccessibleXtextProject(project)) {
+				try {
+					IProject[] referencedProjects = project.getReferencedProjects();
+					List<String> result = Lists.newArrayListWithExpectedSize(referencedProjects.length);
+					result.add(handle);
+					for(IProject referencedProject: referencedProjects) {
+						if (isAccessibleXtextProject(referencedProject)) {
+							result.add(referencedProject.getName());
+						}
 					}
+					return result;
+				} catch(CoreException e) {
+					log.error(e.getMessage(), e);
 				}
-				return result;
-			} catch(CoreException e) {
-				log.error(e.getMessage(), e);
 			}
+		} catch (IllegalArgumentException e) {
+			// ignore for now
 		}
 		return Collections.emptyList();
 	}
 	
 	protected boolean isAccessibleXtextProject(IProject p) {
-		return p != null && p.isAccessible() && hasXtextNature(p);
-	}
-	
-	protected boolean hasXtextNature(IProject p) {
-		try {
-			return p.getNature("org.eclipse.xtext.builder.xtextNature") != null;
-		} catch (CoreException e) {
-			log.error(e.getMessage(), e);
-			return false;
-		}
+		return p != null && XtextProjectHelper.hasNature(p);
 	}
 
 }

@@ -19,7 +19,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
-import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.UriValidator;
@@ -46,15 +45,14 @@ public class ToBeBuiltComputer {
 		SubMonitor.convert(monitor, 0);
 		Iterable<IResourceDescription> allResourceDescriptions = builderState.getAllResourceDescriptions();
 		SubMonitor subMonitor = SubMonitor.convert(monitor, Collections2.forIterable(allResourceDescriptions).size());
-		for (IResourceDescription iResourceDescription : allResourceDescriptions) {
-			ResourceDescriptionImpl descImpl = (ResourceDescriptionImpl) iResourceDescription;
-			Iterable<IStorage> storages = mapper.getStorages(descImpl.getURI());
+		for (IResourceDescription description : allResourceDescriptions) {
+			Iterable<IStorage> storages = mapper.getStorages(description.getURI());
 			if (!storages.iterator().hasNext()) {
-				result.getToBeDeleted().add(descImpl.getURI());
+				result.getToBeDeleted().add(description.getURI());
 			} else {
 				for (IStorage storage : storages) {
 					if (isOnProject(storage, project))
-						result.getToBeDeleted().add(descImpl.getURI());
+						result.getToBeDeleted().add(description.getURI());
 				}
 			}
 			subMonitor.worked(1);

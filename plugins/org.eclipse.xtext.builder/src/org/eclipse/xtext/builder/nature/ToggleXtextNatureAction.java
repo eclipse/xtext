@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.builder.nature;
 
 import java.util.Iterator;
@@ -12,7 +19,11 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ */
 public class ToggleXtextNatureAction implements IObjectActionDelegate {
 	
 	private static final Logger log = Logger.getLogger(ToggleXtextNatureAction.class);
@@ -49,7 +60,7 @@ public class ToggleXtextNatureAction implements IObjectActionDelegate {
 			String[] natures = description.getNatureIds();
 
 			for (int i = 0; i < natures.length; ++i) {
-				if (XtextNature.NATURE_ID.equals(natures[i])) {
+				if (XtextProjectHelper.NATURE_ID.equals(natures[i])) {
 					// Remove the nature
 					String[] newNatures = new String[natures.length - 1];
 					System.arraycopy(natures, 0, newNatures, 0, i);
@@ -63,7 +74,7 @@ public class ToggleXtextNatureAction implements IObjectActionDelegate {
 			// Add the nature
 			String[] newNatures = new String[natures.length + 1];
 			System.arraycopy(natures, 0, newNatures, 0, natures.length);
-			newNatures[natures.length] = XtextNature.NATURE_ID;
+			newNatures[natures.length] = XtextProjectHelper.NATURE_ID;
 			description.setNatureIds(newNatures);
 			project.setDescription(description, null);
 		} catch (CoreException e) {
@@ -72,7 +83,7 @@ public class ToggleXtextNatureAction implements IObjectActionDelegate {
 	}
 
 	public boolean hasNature(IProject project) {
-		return XtextNature.hasNature(project);
+		return XtextProjectHelper.hasNature(project);
 	}
 
 }
