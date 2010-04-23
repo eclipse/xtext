@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.model;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -19,11 +18,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -31,16 +27,12 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.BadPositionCategoryException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.Position;
-import org.eclipse.ui.IEditorInput;
 import org.eclipse.xtext.resource.EObjectHandleImpl;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver.Processor;
-import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.util.concurrent.IEObjectHandle;
 import org.eclipse.xtext.util.concurrent.IStateAccess;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-
-import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -51,26 +43,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 	private final ListenerList modelListeners = new ListenerList(ListenerList.IDENTITY);
 	private final ListenerList xtextDocumentObservers = new ListenerList(ListenerList.IDENTITY);
 
-	@Inject
-	private IResourceForEditorInputFactory resourceForEditorInputFactory;
-
-	public void setInput(IEditorInput editorInput, String encoding) throws CoreException {
-		XtextResource xtextResource = (XtextResource) resourceForEditorInputFactory.createResource(editorInput);
-		setInput(xtextResource,encoding);
-	}
-
-	public void setInput(XtextResource resource, String encoding) throws CoreException {
+	public void setInput(XtextResource resource) {
 		Assert.isNotNull(resource);
 		this.resource = resource;
-		if (!this.resource.isLoaded()) {
-			try {
-				this.resource.load(new ByteArrayInputStream(get().getBytes(encoding)), null);
-			} catch (IOException ex) {
-				String message = (ex.getMessage() != null ? ex.getMessage() : ""); //$NON-NLS-1$
-				IStatus s = new Status(IStatus.ERROR, Activator.PLUGIN_ID, IStatus.OK, message, ex);
-				throw new CoreException(s);
-			}
-		}
 	}
 
 	private final XtextDocumentLocker stateAccess = createDocumentLocker();
