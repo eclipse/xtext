@@ -66,9 +66,8 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 		ResourceSet resourceSet = getResourceSet(storage);
 		URI uri = storageToUriMapper.getUri(storage);
 		configureResourceSet(resourceSet, uri);
-		XtextResource resource = getResource(resourceSet, uri);
+		XtextResource resource = createResource(resourceSet, uri);
 		resource.setValidationDisabled(true);
-		// TODO: set some encoding ?
 		return resource;
 	}
 
@@ -77,7 +76,7 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 		externalContentSupport.configureResourceSet(resourceSet, externalContentProvider);
 	}
 
-	private XtextResource getResource(ResourceSet resourceSet, URI uri) {
+	protected XtextResource createResource(ResourceSet resourceSet, URI uri) {
 		Resource aResource = resourceSet.createResource(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		if (!(aResource instanceof XtextResource))
 			throw new IllegalStateException("The resource factory registered for " + uri
@@ -99,11 +98,11 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 		return resourceSetProvider.get(null);
 	}
 
-	private Resource createResourceFor(IFile storage) throws CoreException {
+	protected Resource createResourceFor(IFile storage) throws CoreException {
 		ResourceSet resourceSet = getResourceSet(storage);
 		URI uri = URI.createPlatformResourceURI(storage.getFullPath().toString(), true);
 		configureResourceSet(resourceSet, uri);
-		XtextResource resource = getResource(resourceSet, uri);
+		XtextResource resource = createResource(resourceSet, uri);
 		resource.setValidationDisabled(false);
 		return resource;
 	}
