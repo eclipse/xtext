@@ -127,33 +127,44 @@ public class EcoreUtil2 extends EcoreUtil {
 	public static TreeIterator<EObject> eAll(final EObject obj) {
 		return new TreeIterator<EObject>() {
 			private TreeIterator<EObject> it = null;
-			private boolean pruned = false;
+			private int index = 0;
 
 			public void prune() {
-				if (it != null)
-					it.prune();
-				else
-					pruned = true;
+				switch (index) {
+					case 0:
+						return;
+					case 1:
+						it = null;
+						break;
+					default:
+						if (it != null)
+							it.prune();
+				}
 			}
 
 			public boolean hasNext() {
+				if (index == 0)
+					return true;
 				if (it != null)
 					return it.hasNext();
-				return !pruned;
+				return false;
 			}
 
 			public EObject next() {
+				if (index++ == 0) {
+					it = obj.eAllContents();
+					return obj;
+				}
 				if (it != null)
 					return it.next();
-				it = obj.eAllContents();
-				return obj;
+				return null;
 			}
 
 			public void remove() {
+				if (index == 0)
+					EcoreUtil.remove(obj);
 				if (it != null)
 					it.remove();
-				else
-					EcoreUtil.remove(obj);
 			}
 		};
 	}
