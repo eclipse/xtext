@@ -55,7 +55,9 @@ public abstract class AbstractConcreteSyntaxValidationTest extends AbstractXtext
 					return false;
 				if (max != null && max != s.getMax())
 					return false;
-				return s.getFeature() == feat && s.getCode() == code && constraint.equals(s.getConstraint());
+				if (constraint != null && !constraint.equals(s.getConstraint()))
+					return false;
+				return s.getFeature() == feat && s.getCode() == code;
 			}
 			return false;
 		}

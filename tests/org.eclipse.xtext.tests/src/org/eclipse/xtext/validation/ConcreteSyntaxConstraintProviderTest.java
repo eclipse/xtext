@@ -166,6 +166,11 @@ public class ConcreteSyntaxConstraintProviderTest extends AbstractXtextTests {
 		assertEquals("<Model>val*", constraint);
 	}
 
+	public void testMulti1() throws Exception {
+		String constraint = parseRule("model : ('kw1' a+=ID b+=ID)* ('kw2' a+=ID c+=ID)* ('kw3' b+=ID c+=ID)*;");
+		assertEquals("<model>((a b)* (a c)* (b c)*)", constraint);
+	}
+
 	public void testRuleCall1() throws Exception {
 		StringBuilder b = new StringBuilder();
 		b.append("Model: Sub; ");

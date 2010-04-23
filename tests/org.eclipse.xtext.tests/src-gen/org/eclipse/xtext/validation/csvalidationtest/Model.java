@@ -42,6 +42,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX25 <em>X25</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX26 <em>X26</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX27 <em>X27</em>}</li>
+ *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX28 <em>X28</em>}</li>
  * </ul>
  * </p>
  *
@@ -752,5 +753,31 @@ public interface Model extends EObject
    * @generated
    */
   void setX27(TwoVersion value);
+
+  /**
+   * Returns the value of the '<em><b>X28</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X28</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X28</em>' containment reference.
+   * @see #setX28(Heuristic1)
+   * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getModel_X28()
+   * @model containment="true"
+   * @generated
+   */
+  Heuristic1 getX28();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX28 <em>X28</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X28</em>' containment reference.
+   * @see #getX28()
+   * @generated
+   */
+  void setX28(Heuristic1 value);
 
 } // Model

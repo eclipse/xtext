@@ -16,6 +16,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
@@ -26,6 +27,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.IConcreteSyntaxConstraintProvider;
 import org.eclipse.xtext.validation.IConcreteSyntaxConstraintProvider.ConstraintType;
@@ -33,6 +35,7 @@ import org.eclipse.xtext.validation.IConcreteSyntaxConstraintProvider.ISyntaxCon
 import org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider;
 import org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider.IConcreteSyntaxDiagnostic;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
@@ -62,6 +65,19 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			this.delegate = delegate;
 		}
 
+		public void consistencyCheck() {
+			Map<EStructuralFeature, Integer> quantities = Maps.newHashMap();
+			for (Map.Entry<ISyntaxConstraint, Integer> e : assignmentQuants.entrySet()) {
+				EStructuralFeature f = e.getKey().getAssignmentFeature(delegate.eClass());
+				Integer q = quantities.get(f);
+				quantities.put(f, q == null ? e.getValue() : q + e.getValue());
+			}
+			for (Map.Entry<EStructuralFeature, Integer> q : quantities.entrySet())
+				if (!featureQuants.get(q.getKey()).equals(q.getValue()))
+					throw new RuntimeException("Feature " + q.getKey().getName() + ": Quantity " + q.getValue()
+							+ " found, but " + featureQuants.get(q.getKey()) + " expected. Please report a bug.");
+		}
+
 		public Integer getAssignmentQuantity(ISyntaxConstraint assignement) {
 			Integer i = assignmentQuants.get(assignement);
 			return i == null || i < 0 ? -1 : i;
@@ -78,6 +94,20 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		public Integer getFeatureQuantity(EStructuralFeature feat) {
 			Integer i = featureQuants.get(feat);
 			return i == null || i < 0 ? -1 : i;
+		}
+
+		public int getQuality() {
+			int quality = 0;
+			for (Map.Entry<ISyntaxConstraint, Integer> e : assignmentQuants.entrySet()) {
+				int min = getMinCount(this, e.getKey(), Sets.<ISyntaxConstraint> newHashSet());
+				int max = getMaxCount(this, e.getKey(), Sets.<ISyntaxConstraint> newHashSet(), e.getKey()
+						.getAssignmentName());
+				if (e.getValue() < min)
+					quality += min - e.getValue();
+				if (e.getValue() > max)
+					quality += e.getValue() - max;
+			}
+			return quality;
 		}
 
 		public Map<EStructuralFeature, Collection<ISyntaxConstraint>> groupByFeature() {
@@ -147,6 +177,8 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 
 	@Inject
 	protected ConcreteSyntaxValidationHelper helper;
+
+	protected Random random = new Random();
 
 	protected boolean allowTransient(EStructuralFeature f, Collection<ISyntaxConstraint> ele) {
 		return f.getEType() instanceof EEnum || f.getEType() == EcorePackage.eINSTANCE.getEInt();
@@ -223,39 +255,6 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 				return false;
 		}
 
-	}
-
-	protected int distributeQuantity(List<ISyntaxConstraint> assignments, Quantities quants,
-			Map<ISyntaxConstraint, Pair<Integer, Integer>> minmax, int quantity) {
-		for (ISyntaxConstraint ass : assignments) {
-			int min = Math.max(Math.min(minmax.get(ass).getFirst(), minmax.get(ass).getSecond()), 0);
-			int q = quants.getAssignmentQuantity(ass);
-			if (q < 0)
-				q = 0;
-			int toAdd = min - q;
-			if (toAdd > 0) {
-				if (min <= quantity) {
-					quants.setAssignmentQuantity(ass, min);
-					quantity -= min;
-				} else {
-					quants.setAssignmentQuantity(ass, quantity);
-					quantity = 0;
-				}
-			} else
-				quants.setAssignmentQuantity(ass, q);
-		}
-		for (ISyntaxConstraint ass : assignments) {
-			if (quantity == 0)
-				break;
-			int max = minmax.get(ass).getSecond();
-			int q = quants.getAssignmentQuantity(ass);
-			if (q < max) {
-				int nv = Math.min(max, quantity + q);
-				quants.setAssignmentQuantity(ass, nv);
-				quantity -= nv - q;
-			}
-		}
-		return quantity;
 	}
 
 	protected int getHardMax(ISyntaxConstraint e) {
@@ -419,8 +418,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		return count;
 	}
 
-	protected List<Quantities> getQuantities(EObject obj, ISyntaxConstraint rule,
-			List<IConcreteSyntaxDiagnostic> acceptor) {
+	protected Quantities getQuantities(EObject obj, ISyntaxConstraint rule, List<IConcreteSyntaxDiagnostic> acceptor) {
 		Multimap<EStructuralFeature, ISyntaxConstraint> assignments = Multimaps.newHashMultimap();
 		collectAssignments(rule, obj, rule, assignments, acceptor);
 		//		Map<EStructuralFeature, Integer> quantities = Maps.newHashMap();
@@ -448,7 +446,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 					quants.setAssignmentQuantity(a, f.getValue());
 		}
 		if (multiAssignments.isEmpty() && allowTransients.isEmpty())
-			return Collections.singletonList(quants);
+			return quants;
 		for (Map.Entry<EStructuralFeature, Collection<ISyntaxConstraint>> e : allowTransients.asMap().entrySet()) {
 			int min = 0;
 			for (ISyntaxConstraint x : e.getValue())
@@ -460,7 +458,47 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		}
 		//		System.out.println("AllowTransientsQuantities: " + quants.toString());
 		if (multiAssignments.isEmpty())
-			return Collections.singletonList(quants);
+			return quants;
+		heuristicSolver(quants, multiAssignments);
+		//		System.out.println("FinalQuantities: " + quants.toString(minmax));
+		return quants;
+	}
+
+	protected int heuristicDistributeQuantity(List<ISyntaxConstraint> assignments, Quantities quants,
+			Map<ISyntaxConstraint, Pair<Integer, Integer>> minmax, int quantity) {
+		for (ISyntaxConstraint ass : assignments) {
+			int min = Math.max(Math.min(minmax.get(ass).getFirst(), minmax.get(ass).getSecond()), 0);
+			int q = quants.getAssignmentQuantity(ass);
+			if (q < 0)
+				q = 0;
+			int toAdd = min - q;
+			if (toAdd > 0) {
+				if (min <= quantity) {
+					quants.setAssignmentQuantity(ass, min);
+					quantity -= min;
+				} else {
+					quants.setAssignmentQuantity(ass, quantity);
+					quantity = 0;
+				}
+			} else
+				quants.setAssignmentQuantity(ass, q);
+		}
+		for (ISyntaxConstraint ass : assignments) {
+			if (quantity == 0)
+				break;
+			int max = minmax.get(ass).getSecond();
+			int q = quants.getAssignmentQuantity(ass);
+			if (q < max) {
+				int nv = Math.min(max, quantity + q);
+				quants.setAssignmentQuantity(ass, nv);
+				quantity -= nv - q;
+			}
+		}
+		return quantity;
+	}
+
+	protected void heuristicInitialSolution(Quantities quants,
+			Multimap<EStructuralFeature, ISyntaxConstraint> multiAssignments) {
 		Map<ISyntaxConstraint, Pair<Integer, Integer>> minmax = Maps.newHashMap();
 		for (Map.Entry<EStructuralFeature, Collection<ISyntaxConstraint>> e : multiAssignments.asMap().entrySet()) {
 			for (ISyntaxConstraint f : e.getValue()) {
@@ -471,19 +509,142 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			List<ISyntaxConstraint> ass = new ArrayList<ISyntaxConstraint>(e.getValue());
 			Collections.sort(ass, new DependencyComparator());
 			int quantity = quants.getFeatureQuantity(e.getKey());
-			quantity = distributeQuantity(ass, quants, minmax, quantity);
+			quantity = heuristicDistributeQuantity(ass, quants, minmax, quantity);
 			if (quantity > 0) {
 				//				System.out.println("Quantities: " + quants.toString(minmax));
 				for (ISyntaxConstraint x : ass)
 					minmax.put(x, Tuples.create(getHardMin(x), getHardMax(x)));
 				Collections.sort(ass, new QuantityComparator(quants));
-				quantity = distributeQuantity(ass, quants, minmax, quantity);
+				quantity = heuristicDistributeQuantity(ass, quants, minmax, quantity);
 				if (quantity > 0)
 					quants.setAssignmentQuantity(ass.get(0), quants.getAssignmentQuantity(ass.get(0)) + quantity);
 			}
 		}
-		//		System.out.println("FinalQuantities: " + quants.toString(minmax));
-		return Collections.singletonList(quants);
+	}
+
+	protected int heuristicMaxTries(Quantities quants, Multimap<EStructuralFeature, ISyntaxConstraint> multiAssignments) {
+		int result = 10;
+		for (EStructuralFeature f : quants.getDelegate().eClass().getEAllStructuralFeatures())
+			if (quants.getDelegate().eIsSet(f)) {
+				if (f.isMany())
+					result += ((List<?>) quants.getDelegate().eGet(f)).size();
+				else
+					result += 1;
+			}
+		return result * multiAssignments.values().size();
+	}
+
+	protected boolean heuristicOptimizeSolution(Quantities quants,
+			Multimap<EStructuralFeature, ISyntaxConstraint> multiAssignments) {
+		List<Triple<Integer, ISyntaxConstraint, Collection<ISyntaxConstraint>>> cands = Lists.newArrayList();
+		Map<ISyntaxConstraint, Pair<Integer, Integer>> minmax = Maps.newHashMap();
+		for (Map.Entry<EStructuralFeature, Collection<ISyntaxConstraint>> e : multiAssignments.asMap().entrySet()) {
+			for (ISyntaxConstraint f : e.getValue()) {
+				int min = getMinCount(quants, f, Sets.<ISyntaxConstraint> newHashSet());
+				int max = getMaxCount(quants, f, Sets.<ISyntaxConstraint> newHashSet(), e.getKey().getName());
+				minmax.put(f, Tuples.create(min, max));
+			}
+			for (ISyntaxConstraint f : e.getValue()) {
+				int q = quants.getAssignmentQuantity(f);
+				int diff = Math.max(0, minmax.get(f).getFirst() - q) + Math.max(0, q - minmax.get(f).getSecond());
+				if (diff > 0)
+					cands.add(Tuples.create(diff, f, e.getValue()));
+			}
+		}
+		if (cands.isEmpty())
+			return false;
+		Triple<Integer, ISyntaxConstraint, Collection<ISyntaxConstraint>> c = cands.get(random.nextInt(cands.size()));
+		ISyntaxConstraint f = c.getSecond();
+		int q = quants.getAssignmentQuantity(f);
+		if (q < minmax.get(f).getFirst()) {
+			int addition = (int) Math.ceil((minmax.get(f).getFirst() - q) * 0.5f);
+			addition = heuristicPullQuantities(quants, c.getThird(), minmax, f, addition);
+			quants.setAssignmentQuantity(f, q + addition);
+			//			System.out.println(f.getAssignmentName() + " + " + addition + "-> " + quants.toString() + " => "
+			//					+ quants.getQuality());
+		} else if (q > minmax.get(f).getSecond()) {
+			int subtraction = (int) Math.ceil((q - minmax.get(f).getSecond()) * 0.5f);
+			subtraction = heuristicPushQuantities(quants, c.getThird(), minmax, f, subtraction);
+			quants.setAssignmentQuantity(f, q - subtraction);
+			//			System.out.println(f.getAssignmentName() + " - " + subtraction + "-> " + quants.toString() + " => "
+			//					+ quants.getQuality());
+		}
+		quants.consistencyCheck();
+		return true;
+	}
+
+	protected int heuristicPullQuantities(Quantities quants, Collection<ISyntaxConstraint> assignments,
+			Map<ISyntaxConstraint, Pair<Integer, Integer>> minmax, ISyntaxConstraint ass, int wanted) {
+		int result = 0;
+		List<ISyntaxConstraint> involved = Lists.newArrayList();
+		for (ISyntaxConstraint c : assignments)
+			if (c != ass) {
+				involved.add(c);
+				int q = quants.getAssignmentQuantity(c);
+				if (q > minmax.get(c).getFirst()) {
+					int subtract = Math.min(wanted, q - minmax.get(c).getFirst());
+					result += subtract;
+					quants.setAssignmentQuantity(c, q - subtract);
+					wanted -= subtract;
+				}
+			}
+		while (result != wanted && involved.size() > 0) {
+			int choice = random.nextInt(involved.size());
+			ISyntaxConstraint c = involved.get(choice);
+			int q = quants.getAssignmentQuantity(c);
+			int subtract = Math.min(wanted, q);
+			result += subtract;
+			quants.setAssignmentQuantity(c, q - subtract);
+			wanted -= subtract;
+			involved.remove(choice);
+		}
+		return result;
+	}
+
+	protected int heuristicPushQuantities(Quantities quants, Collection<ISyntaxConstraint> assignments,
+			Map<ISyntaxConstraint, Pair<Integer, Integer>> minmax, ISyntaxConstraint ass, int wanted) {
+		int result = 0;
+		List<ISyntaxConstraint> involved = Lists.newArrayList();
+		for (ISyntaxConstraint c : assignments)
+			if (c != ass) {
+				involved.add(c);
+				int q = quants.getAssignmentQuantity(c);
+				if (q < minmax.get(c).getSecond()) {
+					int addition = Math.min(wanted, minmax.get(c).getSecond() - q);
+					result += addition;
+					quants.setAssignmentQuantity(c, q + addition);
+					wanted -= addition;
+				}
+			}
+		if (result != wanted) {
+			ISyntaxConstraint c = involved.get(random.nextInt(involved.size()));
+			result += wanted;
+			quants.setAssignmentQuantity(c, quants.getAssignmentQuantity(c) + wanted);
+		}
+		return result;
+	}
+
+	protected void heuristicSolver(Quantities quants, Multimap<EStructuralFeature, ISyntaxConstraint> multiAssignments) {
+		//		System.out.println();
+		//		System.out.println("BeforeHeuristic: " + quants.toString());
+		heuristicInitialSolution(quants, multiAssignments);
+		//		System.out.println("InitalHeuristic: " + quants.toString());
+		int currentTry = 0;
+		int currentNoImprovement = 0;
+		int bestQuality = MAX;
+		int maxTries = heuristicMaxTries(quants, multiAssignments);
+		int maxNoImprovement = (maxTries / 10) + 10;
+		//		System.out.println("MaxTries: " + maxTries + " maxNoImprovement: " + maxNoImprovement);
+		while (currentTry < maxTries && currentNoImprovement < maxNoImprovement
+				&& heuristicOptimizeSolution(quants, multiAssignments)) {
+			int quality = quants.getQuality();
+			if (quality < bestQuality) {
+				bestQuality = quality;
+				currentNoImprovement = 0;
+			} else
+				currentNoImprovement++;
+			currentTry++;
+		}
 	}
 
 	@Override
@@ -548,15 +709,13 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			allDiags.add(diagnosticProvider.createObjectDiagnostic(rule, obj, expectedTypes));
 		if (!allDiags.isEmpty())
 			return allDiags;
-		List<Quantities> quantities = getQuantities(obj, rule, allDiags);
+		Quantities quantities = getQuantities(obj, rule, allDiags);
 		if (!allDiags.isEmpty())
 			return allDiags;
-		for (Quantities q : quantities) {
-			List<IConcreteSyntaxDiagnostic> diags = validateQuantities(q, rule);
-			if (diags.isEmpty())
-				return diags;
-			allDiags.addAll(diags);
-		}
+		List<IConcreteSyntaxDiagnostic> diags = validateQuantities(quantities, rule);
+		if (diags.isEmpty())
+			return diags;
+		allDiags.addAll(diags);
 		return allDiags;
 	}
 

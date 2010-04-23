@@ -68,6 +68,7 @@ protected class ThisRootNode extends RootToken {
 			case 30: return new TwoVersion_Group(this, this, 30, inst);
 			case 31: return new TwoVersionNo1_Group(this, this, 31, inst);
 			case 32: return new TwoVersionNo2_Group(this, this, 32, inst);
+			case 33: return new Heuristic1_Group(this, this, 33, inst);
 			default: return null;
 		}	
 	}	
@@ -84,7 +85,7 @@ protected class ThisRootNode extends RootToken {
  *   Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
  *   List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|x24=
  *   TransientObject|x25=TransientSerializeables1|x26=StaticSimplification|x27=
- *   TwoVersion;
+ *   TwoVersion|x28=Heuristic1;
  *
  **/
 
@@ -95,7 +96,7 @@ protected class ThisRootNode extends RootToken {
 // Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
 // List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|x24=
 // TransientObject|x25=TransientSerializeables1|x26=StaticSimplification|x27=
-// TwoVersion
+// TwoVersion|x28=Heuristic1
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -137,6 +138,7 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 24: return new Model_X25Assignment_24(parent, this, 24, inst);
 			case 25: return new Model_X26Assignment_25(parent, this, 25, inst);
 			case 26: return new Model_X27Assignment_26(parent, this, 26, inst);
+			case 27: return new Model_X28Assignment_27(parent, this, 27, inst);
 			default: return null;
 		}	
 	}
@@ -1349,6 +1351,51 @@ protected class Model_X27Assignment_26 extends AssignmentToken  {
 			if(param.isInstanceOf(grammarAccess.getTwoVersionRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
 				element = grammarAccess.getModelAccess().getX27TwoVersionParserRuleCall_26_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x28=Heuristic1
+protected class Model_X28Assignment_27 extends AssignmentToken  {
+	
+	public Model_X28Assignment_27(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX28Assignment_27();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Heuristic1_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("x28",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("x28");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getHeuristic1Rule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getModelAccess().getX28Heuristic1ParserRuleCall_27_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -9105,5 +9152,414 @@ protected class TwoVersionNo2_Extra4Assignment_6_1_1 extends AssignmentToken  {
 
 
 /************ end Rule TwoVersionNo2 ****************/
+
+
+/************ begin Rule Heuristic1 ****************
+ *
+ * Heuristic1:
+ *   "#28" ("kw1" a+=ID b+=ID)* ("kw2" a+=ID c+=ID)* ("kw3" b+=ID c+=ID)*;
+ *
+ **/
+
+// "#28" ("kw1" a+=ID b+=ID)* ("kw2" a+=ID c+=ID)* ("kw3" b+=ID c+=ID)*
+protected class Heuristic1_Group extends GroupToken {
+	
+	public Heuristic1_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getHeuristic1Access().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Heuristic1_Group_3(parent, this, 0, inst);
+			case 1: return new Heuristic1_Group_2(parent, this, 1, inst);
+			case 2: return new Heuristic1_Group_1(parent, this, 2, inst);
+			case 3: return new Heuristic1_NumberSignDigitTwoDigitEightKeyword_0(parent, this, 3, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getHeuristic1Rule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
+}
+
+// "#28"
+protected class Heuristic1_NumberSignDigitTwoDigitEightKeyword_0 extends KeywordToken  {
+	
+	public Heuristic1_NumberSignDigitTwoDigitEightKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getHeuristic1Access().getNumberSignDigitTwoDigitEightKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}
+
+}
+
+// ("kw1" a+=ID b+=ID)*
+protected class Heuristic1_Group_1 extends GroupToken {
+	
+	public Heuristic1_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getHeuristic1Access().getGroup_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Heuristic1_BAssignment_1_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "kw1"
+protected class Heuristic1_Kw1Keyword_1_0 extends KeywordToken  {
+	
+	public Heuristic1_Kw1Keyword_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getHeuristic1Access().getKw1Keyword_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Heuristic1_Group_1(parent, this, 0, inst);
+			case 1: return new Heuristic1_NumberSignDigitTwoDigitEightKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// a+=ID
+protected class Heuristic1_AAssignment_1_1 extends AssignmentToken  {
+	
+	public Heuristic1_AAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getHeuristic1Access().getAAssignment_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Heuristic1_Kw1Keyword_1_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("a",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("a");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getHeuristic1Access().getAIDTerminalRuleCall_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// b+=ID
+protected class Heuristic1_BAssignment_1_2 extends AssignmentToken  {
+	
+	public Heuristic1_BAssignment_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getHeuristic1Access().getBAssignment_1_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Heuristic1_AAssignment_1_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("b",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("b");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getHeuristic1Access().getBIDTerminalRuleCall_1_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// ("kw2" a+=ID c+=ID)*
+protected class Heuristic1_Group_2 extends GroupToken {
+	
+	public Heuristic1_Group_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getHeuristic1Access().getGroup_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Heuristic1_CAssignment_2_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "kw2"
+protected class Heuristic1_Kw2Keyword_2_0 extends KeywordToken  {
+	
+	public Heuristic1_Kw2Keyword_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getHeuristic1Access().getKw2Keyword_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Heuristic1_Group_2(parent, this, 0, inst);
+			case 1: return new Heuristic1_Group_1(parent, this, 1, inst);
+			case 2: return new Heuristic1_NumberSignDigitTwoDigitEightKeyword_0(parent, this, 2, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// a+=ID
+protected class Heuristic1_AAssignment_2_1 extends AssignmentToken  {
+	
+	public Heuristic1_AAssignment_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getHeuristic1Access().getAAssignment_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Heuristic1_Kw2Keyword_2_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("a",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("a");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getHeuristic1Access().getAIDTerminalRuleCall_2_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// c+=ID
+protected class Heuristic1_CAssignment_2_2 extends AssignmentToken  {
+	
+	public Heuristic1_CAssignment_2_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getHeuristic1Access().getCAssignment_2_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Heuristic1_AAssignment_2_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("c",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("c");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getHeuristic1Access().getCIDTerminalRuleCall_2_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// ("kw3" b+=ID c+=ID)*
+protected class Heuristic1_Group_3 extends GroupToken {
+	
+	public Heuristic1_Group_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getHeuristic1Access().getGroup_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Heuristic1_CAssignment_3_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "kw3"
+protected class Heuristic1_Kw3Keyword_3_0 extends KeywordToken  {
+	
+	public Heuristic1_Kw3Keyword_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getHeuristic1Access().getKw3Keyword_3_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Heuristic1_Group_3(parent, this, 0, inst);
+			case 1: return new Heuristic1_Group_2(parent, this, 1, inst);
+			case 2: return new Heuristic1_Group_1(parent, this, 2, inst);
+			case 3: return new Heuristic1_NumberSignDigitTwoDigitEightKeyword_0(parent, this, 3, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// b+=ID
+protected class Heuristic1_BAssignment_3_1 extends AssignmentToken  {
+	
+	public Heuristic1_BAssignment_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getHeuristic1Access().getBAssignment_3_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Heuristic1_Kw3Keyword_3_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("b",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("b");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getHeuristic1Access().getBIDTerminalRuleCall_3_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// c+=ID
+protected class Heuristic1_CAssignment_3_2 extends AssignmentToken  {
+	
+	public Heuristic1_CAssignment_3_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getHeuristic1Access().getCAssignment_3_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Heuristic1_BAssignment_3_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("c",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("c");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getHeuristic1Access().getCIDTerminalRuleCall_3_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+
+/************ end Rule Heuristic1 ****************/
 
 }

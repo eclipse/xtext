@@ -296,6 +296,15 @@ public interface CsvalidationtestFactory extends EFactory
   TwoVersion createTwoVersion();
 
   /**
+   * Returns a new object of class '<em>Heuristic1</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Heuristic1</em>'.
+   * @generated
+   */
+  Heuristic1 createHeuristic1();
+
+  /**
    * Returns a new object of class '<em>Unassigned Action2 Sub</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

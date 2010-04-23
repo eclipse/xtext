@@ -764,6 +764,31 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
+)
+    |(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getX28Heuristic1ParserRuleCall_27_0(), currentNode); 
+	    }
+		lv_x28_27_0=ruleHeuristic1		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"x28",
+	        		lv_x28_27_0, 
+	        		"Heuristic1", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
 ))
 ;
 
@@ -4238,6 +4263,189 @@ ruleTwoVersionNo2 returns [EObject current=null]
 
 )
 )))?)
+;
+
+
+
+
+
+// Entry rule entryRuleHeuristic1
+entryRuleHeuristic1 returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getHeuristic1Rule(), currentNode); }
+	 iv_ruleHeuristic1=ruleHeuristic1 
+	 { $current=$iv_ruleHeuristic1.current; } 
+	 EOF 
+;
+
+// Rule Heuristic1
+ruleHeuristic1 returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(	'#28' 
+    {
+        createLeafNode(grammarAccess.getHeuristic1Access().getNumberSignDigitTwoDigitEightKeyword_0(), null); 
+    }
+(	'kw1' 
+    {
+        createLeafNode(grammarAccess.getHeuristic1Access().getKw1Keyword_1_0(), null); 
+    }
+(
+(
+		lv_a_2_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getHeuristic1Access().getAIDTerminalRuleCall_1_1_0(), "a"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getHeuristic1Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"a",
+	        		lv_a_2_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)(
+(
+		lv_b_3_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getHeuristic1Access().getBIDTerminalRuleCall_1_2_0(), "b"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getHeuristic1Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"b",
+	        		lv_b_3_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+))*(	'kw2' 
+    {
+        createLeafNode(grammarAccess.getHeuristic1Access().getKw2Keyword_2_0(), null); 
+    }
+(
+(
+		lv_a_5_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getHeuristic1Access().getAIDTerminalRuleCall_2_1_0(), "a"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getHeuristic1Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"a",
+	        		lv_a_5_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)(
+(
+		lv_c_6_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getHeuristic1Access().getCIDTerminalRuleCall_2_2_0(), "c"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getHeuristic1Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"c",
+	        		lv_c_6_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+))*(	'kw3' 
+    {
+        createLeafNode(grammarAccess.getHeuristic1Access().getKw3Keyword_3_0(), null); 
+    }
+(
+(
+		lv_b_8_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getHeuristic1Access().getBIDTerminalRuleCall_3_1_0(), "b"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getHeuristic1Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"b",
+	        		lv_b_8_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)(
+(
+		lv_c_9_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getHeuristic1Access().getCIDTerminalRuleCall_3_2_0(), "c"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getHeuristic1Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"c",
+	        		lv_c_9_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+))*)
 ;
 
 

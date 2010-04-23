@@ -314,13 +314,22 @@ public interface CsvalidationtestPackage extends EPackage
   int MODEL__X27 = 26;
 
   /**
+   * The feature id for the '<em><b>X28</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X28 = 27;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 27;
+  int MODEL_FEATURE_COUNT = 28;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -1594,6 +1603,52 @@ public interface CsvalidationtestPackage extends EPackage
   int TWO_VERSION_FEATURE_COUNT = 8;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.Heuristic1Impl <em>Heuristic1</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.validation.csvalidationtest.impl.Heuristic1Impl
+   * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getHeuristic1()
+   * @generated
+   */
+  int HEURISTIC1 = 30;
+
+  /**
+   * The feature id for the '<em><b>A</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int HEURISTIC1__A = 0;
+
+  /**
+   * The feature id for the '<em><b>B</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int HEURISTIC1__B = 1;
+
+  /**
+   * The feature id for the '<em><b>C</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int HEURISTIC1__C = 2;
+
+  /**
+   * The number of structural features of the '<em>Heuristic1</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int HEURISTIC1_FEATURE_COUNT = 3;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.UnassignedAction2SubImpl <em>Unassigned Action2 Sub</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1601,7 +1656,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getUnassignedAction2Sub()
    * @generated
    */
-  int UNASSIGNED_ACTION2_SUB = 30;
+  int UNASSIGNED_ACTION2_SUB = 31;
 
   /**
    * The feature id for the '<em><b>Val1</b></em>' attribute.
@@ -1638,7 +1693,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getUnassignedAction2Sub1()
    * @generated
    */
-  int UNASSIGNED_ACTION2_SUB1 = 31;
+  int UNASSIGNED_ACTION2_SUB1 = 32;
 
   /**
    * The feature id for the '<em><b>Val1</b></em>' attribute.
@@ -1675,7 +1730,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getUnassignedAction2Sub2()
    * @generated
    */
-  int UNASSIGNED_ACTION2_SUB2 = 32;
+  int UNASSIGNED_ACTION2_SUB2 = 33;
 
   /**
    * The feature id for the '<em><b>Val1</b></em>' attribute.
@@ -1712,7 +1767,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getUnassignedRuleCall2SubAction()
    * @generated
    */
-  int UNASSIGNED_RULE_CALL2_SUB_ACTION = 33;
+  int UNASSIGNED_RULE_CALL2_SUB_ACTION = 34;
 
   /**
    * The feature id for the '<em><b>Val2</b></em>' attribute.
@@ -1740,7 +1795,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getEmptyAlternativeSub()
    * @generated
    */
-  int EMPTY_ALTERNATIVE_SUB = 34;
+  int EMPTY_ALTERNATIVE_SUB = 35;
 
   /**
    * The feature id for the '<em><b>Val1</b></em>' attribute.
@@ -1786,7 +1841,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getTransientSerializeables1Enum()
    * @generated
    */
-  int TRANSIENT_SERIALIZEABLES1_ENUM = 35;
+  int TRANSIENT_SERIALIZEABLES1_ENUM = 36;
 
 
   /**
@@ -2095,6 +2150,17 @@ public interface CsvalidationtestPackage extends EPackage
    * @generated
    */
   EReference getModel_X27();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX28 <em>X28</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X28</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.Model#getX28()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X28();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.validation.csvalidationtest.SimpleGroup <em>Simple Group</em>}'.
@@ -3267,6 +3333,49 @@ public interface CsvalidationtestPackage extends EPackage
   EAttribute getTwoVersion_Extra4();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.validation.csvalidationtest.Heuristic1 <em>Heuristic1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Heuristic1</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.Heuristic1
+   * @generated
+   */
+  EClass getHeuristic1();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.validation.csvalidationtest.Heuristic1#getA <em>A</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>A</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.Heuristic1#getA()
+   * @see #getHeuristic1()
+   * @generated
+   */
+  EAttribute getHeuristic1_A();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.validation.csvalidationtest.Heuristic1#getB <em>B</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>B</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.Heuristic1#getB()
+   * @see #getHeuristic1()
+   * @generated
+   */
+  EAttribute getHeuristic1_B();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.validation.csvalidationtest.Heuristic1#getC <em>C</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>C</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.Heuristic1#getC()
+   * @see #getHeuristic1()
+   * @generated
+   */
+  EAttribute getHeuristic1_C();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.validation.csvalidationtest.UnassignedAction2Sub <em>Unassigned Action2 Sub</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3596,6 +3705,14 @@ public interface CsvalidationtestPackage extends EPackage
      * @generated
      */
     EReference MODEL__X27 = eINSTANCE.getModel_X27();
+
+    /**
+     * The meta object literal for the '<em><b>X28</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X28 = eINSTANCE.getModel_X28();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -4526,6 +4643,40 @@ public interface CsvalidationtestPackage extends EPackage
      * @generated
      */
     EAttribute TWO_VERSION__EXTRA4 = eINSTANCE.getTwoVersion_Extra4();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.Heuristic1Impl <em>Heuristic1</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.validation.csvalidationtest.impl.Heuristic1Impl
+     * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getHeuristic1()
+     * @generated
+     */
+    EClass HEURISTIC1 = eINSTANCE.getHeuristic1();
+
+    /**
+     * The meta object literal for the '<em><b>A</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute HEURISTIC1__A = eINSTANCE.getHeuristic1_A();
+
+    /**
+     * The meta object literal for the '<em><b>B</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute HEURISTIC1__B = eINSTANCE.getHeuristic1_B();
+
+    /**
+     * The meta object literal for the '<em><b>C</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute HEURISTIC1__C = eINSTANCE.getHeuristic1_C();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.UnassignedAction2SubImpl <em>Unassigned Action2 Sub</em>}' class.

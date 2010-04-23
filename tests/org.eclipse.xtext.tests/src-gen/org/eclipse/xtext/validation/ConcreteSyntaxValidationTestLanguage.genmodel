@@ -41,6 +41,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x25"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x26"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x27"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x28"/>
     </genClasses>
     <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//SimpleGroup">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//SimpleGroup/val1"/>
@@ -176,6 +177,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//TwoVersion/extra2"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//TwoVersion/extra3"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//TwoVersion/extra4"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//Heuristic1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//Heuristic1/a"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//Heuristic1/b"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//Heuristic1/c"/>
     </genClasses>
     <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction2Sub">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction2Sub/val1"/>

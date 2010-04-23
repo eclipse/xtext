@@ -42,6 +42,8 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 
 	private INonTerminalConsumer groupMultiplicitiesConsumer;
 
+	private INonTerminalConsumer heuristic1Consumer;
+
 	private INonTerminalConsumer list1Consumer;
 
 	private INonTerminalConsumer list2Consumer;
@@ -186,6 +188,10 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 
 	private IElementConsumer ruleCall$55$Consumer;
 
+	private IElementConsumer assignment$56$Consumer;
+
+	private IElementConsumer ruleCall$57$Consumer;
+
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
 		protected Alternatives$1$Consumer(final Alternatives alternatives) {
@@ -221,6 +227,7 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 			acceptor.accept(assignment$50$Consumer);
 			acceptor.accept(assignment$52$Consumer);
 			acceptor.accept(assignment$54$Consumer);
+			acceptor.accept(assignment$56$Consumer);
 		}
 	}
 
@@ -872,6 +879,30 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 		}
 	}
 
+	protected class Assignment$56$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$56$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$57$Consumer;
+		}
+	}
+
+	protected class RuleCall$57$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$57$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(heuristic1Consumer, "x28", false, false, false, getElement(), optional);
+		}
+	}
+
 	public ConcreteSyntaxValidationTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
@@ -943,6 +974,8 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 		ruleCall$53$Consumer = new RuleCall$53$Consumer(rule.getX26StaticSimplificationParserRuleCall_25_0());
 		assignment$54$Consumer = new Assignment$54$Consumer(rule.getX27Assignment_26());
 		ruleCall$55$Consumer = new RuleCall$55$Consumer(rule.getX27TwoVersionParserRuleCall_26_0());
+		assignment$56$Consumer = new Assignment$56$Consumer(rule.getX28Assignment_27());
+		ruleCall$57$Consumer = new RuleCall$57$Consumer(rule.getX28Heuristic1ParserRuleCall_27_0());
 	}
 	
 	@Override
@@ -993,6 +1026,10 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 	
 	public void setGroupMultiplicitiesConsumer(INonTerminalConsumer groupMultiplicitiesConsumer) {
 		this.groupMultiplicitiesConsumer = groupMultiplicitiesConsumer;
+	}
+	
+	public void setHeuristic1Consumer(INonTerminalConsumer heuristic1Consumer) {
+		this.heuristic1Consumer = heuristic1Consumer;
 	}
 	
 	public void setList1Consumer(INonTerminalConsumer list1Consumer) {

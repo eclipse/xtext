@@ -25,6 +25,7 @@ import org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestFactory;
 import org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage;
 import org.eclipse.xtext.validation.csvalidationtest.EmptyAlternativeSub;
 import org.eclipse.xtext.validation.csvalidationtest.GroupMultiplicities;
+import org.eclipse.xtext.validation.csvalidationtest.Heuristic1;
 import org.eclipse.xtext.validation.csvalidationtest.List1;
 import org.eclipse.xtext.validation.csvalidationtest.List2;
 import org.eclipse.xtext.validation.csvalidationtest.List3;
@@ -269,6 +270,13 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
    * @generated
    */
   private EClass twoVersionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass heuristic1EClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -653,6 +661,16 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
   public EReference getModel_X27()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(26);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X28()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(27);
   }
 
   /**
@@ -1750,6 +1768,46 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getHeuristic1()
+  {
+    return heuristic1EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getHeuristic1_A()
+  {
+    return (EAttribute)heuristic1EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getHeuristic1_B()
+  {
+    return (EAttribute)heuristic1EClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getHeuristic1_C()
+  {
+    return (EAttribute)heuristic1EClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getUnassignedAction2Sub()
   {
     return unassignedAction2SubEClass;
@@ -1883,6 +1941,7 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     createEReference(modelEClass, MODEL__X25);
     createEReference(modelEClass, MODEL__X26);
     createEReference(modelEClass, MODEL__X27);
+    createEReference(modelEClass, MODEL__X28);
 
     simpleGroupEClass = createEClass(SIMPLE_GROUP);
     createEAttribute(simpleGroupEClass, SIMPLE_GROUP__VAL1);
@@ -2022,6 +2081,11 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     createEAttribute(twoVersionEClass, TWO_VERSION__EXTRA3);
     createEAttribute(twoVersionEClass, TWO_VERSION__EXTRA4);
 
+    heuristic1EClass = createEClass(HEURISTIC1);
+    createEAttribute(heuristic1EClass, HEURISTIC1__A);
+    createEAttribute(heuristic1EClass, HEURISTIC1__B);
+    createEAttribute(heuristic1EClass, HEURISTIC1__C);
+
     unassignedAction2SubEClass = createEClass(UNASSIGNED_ACTION2_SUB);
     createEAttribute(unassignedAction2SubEClass, UNASSIGNED_ACTION2_SUB__VAL1);
     createEAttribute(unassignedAction2SubEClass, UNASSIGNED_ACTION2_SUB__VAL2);
@@ -2104,6 +2168,7 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     initEReference(getModel_X25(), this.getTransientSerializeables1(), null, "x25", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X26(), this.getStaticSimplification(), null, "x26", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X27(), this.getTwoVersion(), null, "x27", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X28(), this.getHeuristic1(), null, "x28", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleGroupEClass, SimpleGroup.class, "SimpleGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSimpleGroup_Val1(), ecorePackage.getEString(), "val1", null, 0, 1, SimpleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2242,6 +2307,11 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     initEAttribute(getTwoVersion_Extra2(), ecorePackage.getEString(), "extra2", null, 0, 1, TwoVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTwoVersion_Extra3(), ecorePackage.getEString(), "extra3", null, 0, 1, TwoVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTwoVersion_Extra4(), ecorePackage.getEString(), "extra4", null, 0, 1, TwoVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(heuristic1EClass, Heuristic1.class, "Heuristic1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getHeuristic1_A(), ecorePackage.getEString(), "a", null, 0, -1, Heuristic1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getHeuristic1_B(), ecorePackage.getEString(), "b", null, 0, -1, Heuristic1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getHeuristic1_C(), ecorePackage.getEString(), "c", null, 0, -1, Heuristic1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(unassignedAction2SubEClass, UnassignedAction2Sub.class, "UnassignedAction2Sub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getUnassignedAction2Sub_Val1(), ecorePackage.getEString(), "val1", null, 0, 1, UnassignedAction2Sub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
