@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.tests.scoping.namespaces;
 
 import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.junit.util.JavaProjectSetupUtil.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
@@ -21,6 +22,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.junit.util.URIBasedTestResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 
 import com.google.common.collect.Maps;
 
@@ -41,6 +43,8 @@ public abstract class AbstractAllContainersStateTests extends TestCase implement
 		assertEquals(0, root().getProjects().length);
 		project1 = createProject("someProject1");
 		project2 = createProject("someProject2");
+		addProjectNature(project1, XtextProjectHelper.NATURE_ID);
+		addProjectNature(project2, XtextProjectHelper.NATURE_ID);
 		uriToResourceDescription = Maps.newHashMap();
 	}
 	
@@ -58,6 +62,8 @@ public abstract class AbstractAllContainersStateTests extends TestCase implement
 		uriToResourceDescription.put(uri, new URIBasedTestResourceDescription(uri));
 		return uri;
 	}
+	
+	public abstract void testRemoveNature() throws CoreException;
 	
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
 		return uriToResourceDescription.values();
