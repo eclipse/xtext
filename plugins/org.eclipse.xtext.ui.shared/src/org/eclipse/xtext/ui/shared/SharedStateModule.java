@@ -6,10 +6,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.service.AbstractGenericModule;
-import org.eclipse.xtext.ui.containers.ContainerStateProvider;
-import org.eclipse.xtext.ui.containers.JavaProjectsState;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
@@ -36,13 +33,6 @@ public class SharedStateModule extends AbstractGenericModule {
 	}
 	public Provider<IURIEditorOpener> provideIURIEditorOpener() {
 		return Access.getIURIEditorOpener();
-	}
-	public Provider<? extends IAllContainersState> provideIAllContainersState() {
-		return Access.provider(JavaProjectsState.class);
-	}
-	
-	public Class<? extends IAllContainersState.Provider> bindIAllContainersState$Provider() {
-		return ContainerStateProvider.class;
 	}
 	
 	public Provider<IWorkspace> provideIWorkspace(){
