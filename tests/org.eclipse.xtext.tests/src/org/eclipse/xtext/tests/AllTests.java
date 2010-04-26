@@ -168,6 +168,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.resource.XtextResourceTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.ecore.EcoreResourceDescriptionManagerTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.ecore.EcoreResourceDescriptionTest.class);
+      suite.addTestSuite(org.eclipse.xtext.resource.ecore.XMLEncodingProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.ignorecase.IgnoreCaseResourceDescriptionManagerTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.impl.DefaultReferenceDescriptionTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.impl.DefaultResourceDescription2Test.class);

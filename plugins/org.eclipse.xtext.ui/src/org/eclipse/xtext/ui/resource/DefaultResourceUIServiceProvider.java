@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.resource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IContainer.Manager;
 import org.eclipse.xtext.ui.LanguageSpecific;
@@ -62,6 +63,13 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 		return delegate.canHandle(uri);
 	}
 
+	@Inject 
+	private IEncodingProvider encodingProvider;
+	
+	public IEncodingProvider getEncodingProvider() {
+		return encodingProvider;
+	}
+	
 	@Inject
 	@LanguageSpecific
 	private IURIEditorOpener uriEditorOpener;
