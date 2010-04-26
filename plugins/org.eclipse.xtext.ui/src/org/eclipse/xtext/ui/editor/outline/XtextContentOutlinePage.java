@@ -129,7 +129,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 
 	private void configureViewer() {
 		TreeViewer viewer = getTreeViewer();
-		viewer.setAutoExpandLevel(6);
+		viewer.setAutoExpandLevel(2);
 		viewer.setUseHashlookup(false);
 	}
 
