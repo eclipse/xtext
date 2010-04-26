@@ -159,7 +159,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		if (!allDiags.isEmpty())
 			return allDiags;
 		IQuantities quantities = quantityProvider.getAssignmentQuantities(obj, rule, allDiags);
-		if (!allDiags.isEmpty())
+		if (quantities == null || !allDiags.isEmpty())
 			return allDiags;
 		List<IConcreteSyntaxDiagnostic> diags = validateQuantities(quantities, rule);
 		if (diags.isEmpty())

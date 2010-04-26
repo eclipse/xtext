@@ -139,14 +139,15 @@ public class ConcreteSyntaxValidatorTest extends AbstractConcreteSyntaxValidatio
 		validate(toBeValidated).assertOK();
 	}
 
-	public void testValidate_2_A_A_B() {
-		toBeValidated.getFirstAsList().add("a");
-		toBeValidated.getFirstAsList().add("a");
-		toBeValidated.getSecondAsList().add("b");
-		validate(toBeValidated).assertAll(
-				err(pack.getUnorderedSerialization_FirstAsList(), ERROR_LIST_TOO_MANY, null, 1, "((first? second? third? forth?)|(firstAsList secondAsList)*|(firstAsList+ second)*)"),
-				err(pack.getUnorderedSerialization_SecondAsList(), ERROR_LIST_TOO_FEW, 2, null, "((first? second? third? forth?)|(firstAsList secondAsList)*|(firstAsList+ second)*)"));
-	}
+// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=310454
+//	public void testValidate_2_A_A_B() {
+//		toBeValidated.getFirstAsList().add("a");
+//		toBeValidated.getFirstAsList().add("a");
+//		toBeValidated.getSecondAsList().add("b");
+//		validate(toBeValidated).assertAll(
+//				err(pack.getUnorderedSerialization_FirstAsList(), ERROR_LIST_TOO_MANY, null, 1, "((first? second? third? forth?)|(firstAsList secondAsList)*|(firstAsList+ second)*)"),
+//				err(pack.getUnorderedSerialization_SecondAsList(), ERROR_LIST_TOO_FEW, 2, null, "((first? second? third? forth?)|(firstAsList secondAsList)*|(firstAsList+ second)*)"));
+//	}
 
 	public void testValidate_2_A_B_A_B() {
 		toBeValidated.getFirstAsList().add("a");

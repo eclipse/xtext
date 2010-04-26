@@ -10,8 +10,6 @@ package org.eclipse.xtext.validation;
 import static org.eclipse.xtext.junit.validation.AssertableDiagnostics.*;
 import static org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider.*;
 
-import java.util.List;
-
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -27,7 +25,6 @@ import org.eclipse.xtext.validation.csvalidationtest.Combination4;
 import org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestFactory;
 import org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage;
 import org.eclipse.xtext.validation.csvalidationtest.GroupMultiplicities;
-import org.eclipse.xtext.validation.csvalidationtest.Heuristic1;
 import org.eclipse.xtext.validation.csvalidationtest.List1;
 import org.eclipse.xtext.validation.csvalidationtest.List2;
 import org.eclipse.xtext.validation.csvalidationtest.List3;
@@ -51,8 +48,6 @@ import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2Sub;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2SubAction;
 import org.eclipse.xtext.validation.csvalidationtest.impl.TransientObjectImpl;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxValidator;
-
-import com.google.common.collect.Lists;
 
 /**
  * @author meysholdt - Initial contribution and API
@@ -644,68 +639,69 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 				err(p.getTwoVersion_Extra2(), ERROR_VALUE_REQUIRED, null, null,
 						"((shared1? shared2 shared3* version1?)|((extra2 extra3)|extra4)?)"));
 	}
-
-	private List<String> strings(int count) {
-		List<String> result = Lists.newArrayList();
-		for (int i = 0; i < count; i++)
-			result.add("foo" + i);
-		return result;
-	}
-
-	public void testHeuristic1() {
-		Heuristic1 m = f.createHeuristic1();
-		m.getA().addAll(Lists.newArrayList("foo", "foo", "foo"));
-		m.getB().addAll(Lists.newArrayList("foo", "foo", "foo"));
-		validate(m).assertOK();
-
-		m = f.createHeuristic1();
-		m.getA().addAll(Lists.newArrayList("foo", "foo", "foo"));
-		m.getC().addAll(Lists.newArrayList("foo", "foo", "foo"));
-		validate(m).assertOK();
-
-		m = f.createHeuristic1();
-		m.getB().addAll(Lists.newArrayList("foo", "foo", "foo"));
-		m.getC().addAll(Lists.newArrayList("foo", "foo", "foo"));
-		validate(m).assertOK();
-
-		m = f.createHeuristic1();
-		m.getA().addAll(Lists.newArrayList("foo", "foo", "foo"));
-		m.getB().addAll(Lists.newArrayList("foo", "foo", "foo"));
-		m.getB().addAll(Lists.newArrayList("foo", "foo"));
-		m.getC().addAll(Lists.newArrayList("foo", "foo"));
-		validate(m).assertOK();
-
-		m = f.createHeuristic1();
-		m.getA().addAll(Lists.newArrayList("foo", "foo", "foo"));
-		m.getB().addAll(Lists.newArrayList("foo", "foo", "foo"));
-		m.getB().addAll(Lists.newArrayList("foo", "foo"));
-		m.getC().addAll(Lists.newArrayList("foo", "foo"));
-		m.getA().addAll(Lists.newArrayList("foo"));
-		m.getC().addAll(Lists.newArrayList("foo"));
-		validate(m).assertOK();
-
-	}
-
-	public void testHeuristic1Large1() {
-		Heuristic1 m = f.createHeuristic1();
-		m.getA().addAll(strings(42));
-		m.getB().addAll(strings(42));
-		m.getB().addAll(strings(37));
-		m.getC().addAll(strings(37));
-		m.getA().addAll(strings(111));
-		m.getC().addAll(strings(111));
-		validate(m).assertOK();
-	}
-
-	public void testHeuristic1Large2() {
-		Heuristic1 m = f.createHeuristic1();
-		m.getA().addAll(strings(42));
-		m.getB().addAll(strings(42));
-		m.getB().addAll(strings(37));
-		m.getC().addAll(strings(37));
-		m.getA().addAll(strings(111));
-		m.getC().addAll(strings(111));
-		m.getC().addAll(Lists.newArrayList("foo"));
-		validate(m).assertAll(errorCode(ERROR_LIST_TOO_MANY), errorCode(ERROR_LIST_TOO_FEW));
-	}
+	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=310454
+	//	private List<String> strings(int count) {
+	//		List<String> result = Lists.newArrayList();
+	//		for (int i = 0; i < count; i++)
+	//			result.add("foo" + i);
+	//		return result;
+	//	}
+	//
+	//	public void testHeuristic1() {
+	//		Heuristic1 m = f.createHeuristic1();
+	//		m.getA().addAll(Lists.newArrayList("foo", "foo", "foo"));
+	//		m.getB().addAll(Lists.newArrayList("foo", "foo", "foo"));
+	//		validate(m).assertOK();
+	//
+	//		m = f.createHeuristic1();
+	//		m.getA().addAll(Lists.newArrayList("foo", "foo", "foo"));
+	//		m.getC().addAll(Lists.newArrayList("foo", "foo", "foo"));
+	//		validate(m).assertOK();
+	//
+	//		m = f.createHeuristic1();
+	//		m.getB().addAll(Lists.newArrayList("foo", "foo", "foo"));
+	//		m.getC().addAll(Lists.newArrayList("foo", "foo", "foo"));
+	//		validate(m).assertOK();
+	//
+	//		m = f.createHeuristic1();
+	//		m.getA().addAll(Lists.newArrayList("foo", "foo", "foo"));
+	//		m.getB().addAll(Lists.newArrayList("foo", "foo", "foo"));
+	//		m.getB().addAll(Lists.newArrayList("foo", "foo"));
+	//		m.getC().addAll(Lists.newArrayList("foo", "foo"));
+	//		validate(m).assertOK();
+	//
+	//		m = f.createHeuristic1();
+	//		m.getA().addAll(Lists.newArrayList("foo", "foo", "foo"));
+	//		m.getB().addAll(Lists.newArrayList("foo", "foo", "foo"));
+	//		m.getB().addAll(Lists.newArrayList("foo", "foo"));
+	//		m.getC().addAll(Lists.newArrayList("foo", "foo"));
+	//		m.getA().addAll(Lists.newArrayList("foo"));
+	//		m.getC().addAll(Lists.newArrayList("foo"));
+	//		validate(m).assertOK();
+	//
+	//	}
+	//
+	//	public void testHeuristic1Large1() {
+	//		Heuristic1 m = f.createHeuristic1();
+	//		m.getA().addAll(strings(42));
+	//		m.getB().addAll(strings(42));
+	//		m.getB().addAll(strings(37));
+	//		m.getC().addAll(strings(37));
+	//		m.getA().addAll(strings(111));
+	//		m.getC().addAll(strings(111));
+	//		validate(m).assertOK();
+	//	}
+	//
+	//	public void testHeuristic1Large2() {
+	//		Heuristic1 m = f.createHeuristic1();
+	//		m.getA().addAll(strings(42));
+	//		m.getB().addAll(strings(42));
+	//		m.getB().addAll(strings(37));
+	//		m.getC().addAll(strings(37));
+	//		m.getA().addAll(strings(111));
+	//		m.getC().addAll(strings(111));
+	//		m.getC().addAll(Lists.newArrayList("foo"));
+	//		validate(m).assertAll(errorCode(ERROR_LIST_TOO_MANY), errorCode(ERROR_LIST_TOO_FEW));
+	//	}
 }
