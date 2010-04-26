@@ -12,6 +12,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.validation.IAssignmentQuantityAllocator.IQuantities;
 import org.eclipse.xtext.validation.IConcreteSyntaxConstraintProvider.ISyntaxConstraint;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxDiagnosticProvider;
 
@@ -47,12 +48,12 @@ public interface IConcreteSyntaxDiagnosticProvider {
 	public IConcreteSyntaxDiagnostic createAssignmentMissingDiagnostic(ISyntaxConstraint rule, EObject source,
 			EStructuralFeature feature, Set<ISyntaxConstraint> involved);
 
-	public IConcreteSyntaxDiagnostic createFeatureDiagnostic(ISyntaxConstraint rule, EObject source,
-			EStructuralFeature feature, int actual, int min, int max, Set<ISyntaxConstraint> involved);
-
 	public IConcreteSyntaxDiagnostic createFeatureMissingDiagnostic(ISyntaxConstraint rule, EObject source,
 			ISyntaxConstraint element, Set<ISyntaxConstraint> involved);
 
-	public IConcreteSyntaxDiagnostic createObjectDiagnostic(ISyntaxConstraint rule, EObject source,
+	public IConcreteSyntaxDiagnostic createFeatureQuantityDiagnostic(ISyntaxConstraint rule, IQuantities source,
+			EStructuralFeature feature, int actual, int min, int max, Set<ISyntaxConstraint> involved);
+
+	public IConcreteSyntaxDiagnostic createUnexpectedTypeDiagnostic(ISyntaxConstraint rule, EObject source,
 			Set<ISyntaxConstraint> involved);
 }

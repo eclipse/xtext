@@ -24,6 +24,8 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.util.EmfFormatter;
+import org.eclipse.xtext.validation.IAssignmentQuantityAllocator;
+import org.eclipse.xtext.validation.IAssignmentQuantityAllocator.IQuantities;
 import org.eclipse.xtext.validation.IConcreteSyntaxConstraintProvider.ConstraintType;
 import org.eclipse.xtext.validation.IConcreteSyntaxConstraintProvider.ISyntaxConstraint;
 import org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider;
@@ -146,7 +148,7 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 					feats.add(a.getAssignmentFeature(source.eClass()));
 			return Join.join(", ", Iterables.transform(feats, new Function<EStructuralFeature, String>() {
 				public String apply(EStructuralFeature from) {
-					return from.getName() + ":" + helper.countNonTransientValues(source, from);
+					return from.getName() + ":" + quantityAllocator.getFeatureQuantity(source, from);
 				}
 			}));
 		}
@@ -219,9 +221,9 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 		protected EStructuralFeature feature;
 		protected int min, max, actual;
 
-		public ConcreteSyntaxFeatureDiagnostic(ISyntaxConstraint rule, EObject source, EStructuralFeature feature,
+		public ConcreteSyntaxFeatureDiagnostic(ISyntaxConstraint rule, IQuantities source, EStructuralFeature feature,
 				int actual, int min, int max, Set<ISyntaxConstraint> involved) {
-			super(rule, source, involved);
+			super(rule, source.getEObject(), involved);
 			this.feature = feature;
 			this.actual = actual;
 			this.min = min;
@@ -373,16 +375,11 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 	}
 
 	@Inject
-	protected ConcreteSyntaxValidationHelper helper;
+	protected IAssignmentQuantityAllocator quantityAllocator;
 
 	public IConcreteSyntaxDiagnostic createAssignmentMissingDiagnostic(ISyntaxConstraint rule, EObject source,
 			EStructuralFeature feature, Set<ISyntaxConstraint> involved) {
 		return new ConcreteSyntaxAssignmentMissingDiagnostic(rule, source, feature, involved);
-	}
-
-	public IConcreteSyntaxDiagnostic createFeatureDiagnostic(ISyntaxConstraint rule, EObject source,
-			EStructuralFeature feature, int actual, int min, int max, Set<ISyntaxConstraint> involved) {
-		return new ConcreteSyntaxFeatureDiagnostic(rule, source, feature, actual, min, max, involved);
 	}
 
 	public IConcreteSyntaxDiagnostic createFeatureMissingDiagnostic(ISyntaxConstraint rule, EObject source,
@@ -390,7 +387,12 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 		return new ConcreteSyntaxFeatureMissingDiagnostic(rule, source, element, involved);
 	}
 
-	public IConcreteSyntaxDiagnostic createObjectDiagnostic(ISyntaxConstraint rule, EObject source,
+	public IConcreteSyntaxDiagnostic createFeatureQuantityDiagnostic(ISyntaxConstraint rule, IQuantities source,
+			EStructuralFeature feature, int actual, int min, int max, Set<ISyntaxConstraint> involved) {
+		return new ConcreteSyntaxFeatureDiagnostic(rule, source, feature, actual, min, max, involved);
+	}
+
+	public IConcreteSyntaxDiagnostic createUnexpectedTypeDiagnostic(ISyntaxConstraint rule, EObject source,
 			Set<ISyntaxConstraint> involved) {
 		return new ConcreteSyntaxObjectDiagnostic(rule, source, involved);
 	}
