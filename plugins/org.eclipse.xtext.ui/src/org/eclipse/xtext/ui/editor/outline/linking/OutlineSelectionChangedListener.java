@@ -33,10 +33,13 @@ public final class OutlineSelectionChangedListener extends AbstractSelectionChan
 				IStructuredSelection structuredSelection = (IStructuredSelection) sel;
 				Object firstElement = structuredSelection.getFirstElement();
 				if (firstElement instanceof ContentOutlineNode) {
-					final ContentOutlineNode outlineNode = (ContentOutlineNode) firstElement;
-					getSourceViewer().revealRange(outlineNode.getSelectionOffset(), outlineNode.getSelectionLength());
-					getSourceViewer().setSelectedRange(outlineNode.getSelectionOffset(),
-							outlineNode.getSelectionLength());
+					ContentOutlineNode outlineNode = (ContentOutlineNode) firstElement;
+					if (outlineNode.getRegion() != null) {
+						getSourceViewer().revealRange(outlineNode.getSelectionOffset(),
+								outlineNode.getSelectionLength());
+						getSourceViewer().setSelectedRange(outlineNode.getSelectionOffset(),
+								outlineNode.getSelectionLength());
+					}
 				}
 			}
 		}
