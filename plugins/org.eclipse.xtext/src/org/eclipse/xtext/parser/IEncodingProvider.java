@@ -30,5 +30,5 @@ public interface IEncodingProvider {
 		}
 
 	}
-
+	
 }
