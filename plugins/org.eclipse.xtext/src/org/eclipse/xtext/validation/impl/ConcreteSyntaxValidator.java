@@ -431,7 +431,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			else
 				quants.setFeatureQuantity(f, quantity);
 		}
-		Multimap<EStructuralFeature, ISyntaxConstraint> multiAssignments = Multimaps.newHashMultimap();
+		Multimap<EStructuralFeature, ISyntaxConstraint> multipleAssignments = Multimaps.newHashMultimap();
 		Multimap<EStructuralFeature, ISyntaxConstraint> allowTransients = Multimaps.newHashMultimap();
 		for (Map.Entry<EStructuralFeature, Integer> f : quants.getFeatureQuantities().entrySet()) {
 			Collection<ISyntaxConstraint> ass = assignments.get(f.getKey());
@@ -440,12 +440,12 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			if (allowTransient)
 				allowTransients.putAll(f.getKey(), ass);
 			if (multiNeeded)
-				multiAssignments.putAll(f.getKey(), ass);
+				multipleAssignments.putAll(f.getKey(), ass);
 			if (!allowTransient && !multiNeeded)
 				for (ISyntaxConstraint a : ass)
 					quants.setAssignmentQuantity(a, f.getValue());
 		}
-		if (multiAssignments.isEmpty() && allowTransients.isEmpty())
+		if (multipleAssignments.isEmpty() && allowTransients.isEmpty())
 			return quants;
 		for (Map.Entry<EStructuralFeature, Collection<ISyntaxConstraint>> e : allowTransients.asMap().entrySet()) {
 			int min = 0;
@@ -457,9 +457,9 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 				quants.setAssignmentQuantity(e.getValue().iterator().next(), val);
 		}
 		//		System.out.println("AllowTransientsQuantities: " + quants.toString());
-		if (multiAssignments.isEmpty())
+		if (multipleAssignments.isEmpty())
 			return quants;
-		heuristicSolver(quants, multiAssignments);
+		heuristicSolver(quants, multipleAssignments);
 		//		System.out.println("FinalQuantities: " + quants.toString(minmax));
 		return quants;
 	}
@@ -667,25 +667,25 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		return false;
 	}
 
-	protected List<IConcreteSyntaxDiagnostic> validateQuantities(Quantities obj, ISyntaxConstraint rule) {
+	protected List<IConcreteSyntaxDiagnostic> validateQuantities(Quantities quants, ISyntaxConstraint rule) {
 		List<IConcreteSyntaxDiagnostic> diag = new ArrayList<IConcreteSyntaxDiagnostic>();
 		Map<ISyntaxConstraint, Pair<Integer, Integer>> minmax = Maps.newHashMap();
-		for (Map.Entry<EStructuralFeature, Collection<ISyntaxConstraint>> e : obj.groupByFeature().entrySet()) {
+		for (Map.Entry<EStructuralFeature, Collection<ISyntaxConstraint>> e : quants.groupByFeature().entrySet()) {
 			int min = UNDEF, max = 0;
 			Set<ISyntaxConstraint> involved = new HashSet<ISyntaxConstraint>();
 			for (ISyntaxConstraint a : e.getValue()) {
 				involved.add(a);
-				int mi = getMinCount(obj, a, involved);
+				int mi = getMinCount(quants, a, involved);
 				if (mi != UNDEF)
 					min = min == UNDEF ? mi : mi + min;
-				int ma = getMaxCount(obj, a, involved, null);
+				int ma = getMaxCount(quants, a, involved, null);
 				if (ma != UNDEF && max != MAX)
 					max = ma == MAX ? ma : max + ma;
 				minmax.put(a, Tuples.create(mi, ma));
 			}
-			int actual = obj.getFeatureQuantity(e.getKey());
-			if (actual < min || (actual > max))
-				diag.add(diagnosticProvider.createFeatureDiagnostic(rule, obj.getDelegate(), e.getKey(), actual, min,
+			int actual = quants.getFeatureQuantity(e.getKey());
+			if (actual < min || actual > max)
+				diag.add(diagnosticProvider.createFeatureDiagnostic(rule, quants.getDelegate(), e.getKey(), actual, min,
 						max, involved));
 		}
 		//		System.out.println("Validation: " + obj.toString(minmax));
