@@ -11,6 +11,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IContainer.Manager;
@@ -69,4 +70,10 @@ public class DefaultResourceServiceProvider implements IResourceServiceProvider 
 		return extensions.contains(uri.fileExtension());
 	}
 
+	@Inject 
+	private IEncodingProvider encodingProvider;
+	
+	public IEncodingProvider getEncodingProvider() {
+		return encodingProvider;
+	}
 }

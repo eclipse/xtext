@@ -10,6 +10,7 @@ package org.eclipse.xtext.resource;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -44,6 +45,8 @@ public interface IResourceServiceProvider {
 	 * @return true if the URI can be handled
 	 */
 	boolean canHandle(URI uri);
+	
+	IEncodingProvider getEncodingProvider();
 	
 	@ProvidedBy(Registry.RegistryProvider.class)
 	interface Registry {
