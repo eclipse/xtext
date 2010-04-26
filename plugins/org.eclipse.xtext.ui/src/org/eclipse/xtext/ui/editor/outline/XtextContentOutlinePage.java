@@ -9,7 +9,6 @@
 package org.eclipse.xtext.ui.editor.outline;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -30,17 +29,14 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.search.ui.IContextMenuConstants;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.part.IPageSite;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
-import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.ParseTreeUtil;
+import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.editor.IXtextEditorAware;
@@ -55,6 +51,7 @@ import org.eclipse.xtext.ui.editor.outline.linking.EditorSelectionChangedListene
 import org.eclipse.xtext.ui.editor.outline.linking.LinkingHelper;
 import org.eclipse.xtext.ui.editor.outline.linking.OutlineSelectionChangedListener;
 import org.eclipse.xtext.ui.internal.Activator;
+import org.eclipse.xtext.util.TextLocation;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
@@ -132,7 +129,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 
 	private void configureViewer() {
 		TreeViewer viewer = getTreeViewer();
-		viewer.setAutoExpandLevel(2);
+		viewer.setAutoExpandLevel(6);
 		viewer.setUseHashlookup(false);
 	}
 
@@ -307,54 +304,39 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 		getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
 			public void process(XtextResource resource) throws Exception {
-				int caretOffset = getSourceViewer().getTextWidget().getCaretOffset();
-
-				IParseResult parseResult = resource.getParseResult();
-				Assert.isNotNull(parseResult);
-				CompositeNode rootNode = parseResult.getRootNode();
-				AbstractNode currentNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, caretOffset);
-				synchronizeOutlinePage(currentNode);
+				Point selection = getSourceViewer().getTextWidget().getSelection();
+				EObject eObject = EObjectAtOffsetHelper.resolveContainedElementAt(resource, selection.x,
+						new TextLocation());
+				synchronizeOutlinePage(eObject);
 			}
 		});
 	}
 
-	private boolean shouldSynchronizeOutlinePage() {
-		return isLinkingEnabled();
+	public void synchronizeOutlinePage(EObject eObject) {
+		if (isLinkingEnabled()) {
+			ContentOutlineNode mostSignificantOutlineNode = findMostSignificantOutlineNode(eObject);
+			if (mostSignificantOutlineNode != null) {
+				outlineSelectionChangedListener.uninstall(this);
+				this.setSelection(new StructuredSelection(mostSignificantOutlineNode), true);
+				outlineSelectionChangedListener.install(this);
+			}
+		}
 	}
 
-	private ContentOutlineNode findMostSignificantOutlineNode(AbstractNode node) {
-		if (node != null) {
-			CompositeNode compositeNode = node instanceof CompositeNode ? (CompositeNode) node : node.getParent();
-			EObject astElement = NodeUtil.getASTElementForRootNode(compositeNode);
-			if (astElement != null) {
-				ContentOutlineNodeAdapter adapter = (ContentOutlineNodeAdapter) EcoreUtil.getAdapter(astElement
-						.eAdapters(), ContentOutlineNode.class);
-				if (adapter != null) {
-					ContentOutlineNode contentOutlineNode = adapter.getContentOutlineNode();
-					if (contentOutlineNode != null) {
-						return contentOutlineNode;
-					}
-				} else {
-					CompositeNode parent = node.getParent();
-					return findMostSignificantOutlineNode(parent);
+	private ContentOutlineNode findMostSignificantOutlineNode(EObject eObject) {
+		if (eObject != null) {
+			ContentOutlineNodeAdapter adapter = (ContentOutlineNodeAdapter) EcoreUtil.getAdapter(eObject.eAdapters(),
+					ContentOutlineNode.class);
+			if (adapter != null) {
+				ContentOutlineNode contentOutlineNode = adapter.getContentOutlineNode();
+				if (contentOutlineNode != null) {
+					return contentOutlineNode;
 				}
+			} else {
+				return findMostSignificantOutlineNode(eObject.eContainer());
 			}
 		}
 		return null;
-	}
-
-	public void synchronizeOutlinePage(AbstractNode node) {
-		ISelection selection = StructuredSelection.EMPTY;
-
-		if (shouldSynchronizeOutlinePage()) {
-			ContentOutlineNode mostSignificantOutlineNode = findMostSignificantOutlineNode(node);
-			if (mostSignificantOutlineNode != null) {
-				selection = new StructuredSelection(mostSignificantOutlineNode);
-			}
-			outlineSelectionChangedListener.uninstall(this);
-			this.setSelection(selection, true);
-			outlineSelectionChangedListener.install(this);
-		}
 	}
 
 	public void setSorted(boolean sorted) {

@@ -137,6 +137,7 @@ public class ContentOutlineNode implements IAdaptable {
 		int result = 1;
 		result = prime * result + ((getLabel() == null) ? 0 : getLabel().hashCode());
 		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
+		result = prime * result + ((region == null) ? 0 : region.hashCode());
 		return result;
 	}
 
@@ -165,6 +166,13 @@ public class ContentOutlineNode implements IAdaptable {
 				return false;
 			}
 		} else if (!parent.equals(other.parent)) {
+			return false;
+		}
+		if (region == null) {
+			if (other.region != null) {
+				return false;
+			}
+		} else if (!region.equals(other.region)) {
 			return false;
 		}
 
