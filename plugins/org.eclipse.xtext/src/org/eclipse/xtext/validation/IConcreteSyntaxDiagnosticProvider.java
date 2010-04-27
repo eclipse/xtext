@@ -27,23 +27,23 @@ public interface IConcreteSyntaxDiagnosticProvider {
 	public interface IConcreteSyntaxDiagnostic extends Diagnostic {
 	}
 
-	public static final int ERROR_ASSIGNMENT_MISSING = 7;
+	public static final int ERROR_ASSIGNMENT_MISSING = 1;
 
-	public static final int ERROR_ASSIGNMENT_PROHIBITED = 8;
+	public static final int ERROR_ASSIGNMENT_PROHIBITED = 2;
 
-	public static final int ERROR_FEATURE_MISSING = 6;
+	public static final int ERROR_FEATURE_MISSING = 3;
 
 	public static final int ERROR_LIST_TOO_FEW = 4;
 
 	public static final int ERROR_LIST_TOO_MANY = 5;
 
-	public static final int ERROR_LIST_UNDECIDEABLE = 3;
+	public static final int ERROR_LIST_UNDECIDEABLE = 6;
 
-	public static final int ERROR_VALUE_PROHIBITED = 2;
+	public static final int ERROR_VALUE_PROHIBITED = 7;
 
-	public static final int ERROR_VALUE_REQUIRED = 1;
+	public static final int ERROR_VALUE_REQUIRED = 8;
 
-	public static final int ERROR_WRONG_TYPE = 7;
+	public static final int ERROR_WRONG_TYPE = 9;
 
 	public IConcreteSyntaxDiagnostic createAssignmentMissingDiagnostic(ISyntaxConstraint rule, EObject source,
 			EStructuralFeature feature, Set<ISyntaxConstraint> involved);
