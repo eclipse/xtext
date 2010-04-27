@@ -105,6 +105,8 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			String featureName = parsingPointers.findASTContainmentFeatureName(replaceNode);
 			EClass astParentEClass = astParentElement.eClass();
 			EStructuralFeature feature = astParentEClass.getEStructuralFeature(featureName);
+			if (feature == null)
+				return fullyReparse(parser, rootNode, offset, replacedTextLength, newText);
 			if (feature.isMany()) {
 				List featureValueList = (List) astParentElement.eGet(feature);
 				int astElementChildIndex = featureValueList.indexOf(replaceAstElement);
