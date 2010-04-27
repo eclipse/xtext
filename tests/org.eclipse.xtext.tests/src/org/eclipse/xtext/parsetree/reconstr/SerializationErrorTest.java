@@ -56,20 +56,17 @@ public class SerializationErrorTest extends AbstractXtextTests {
 		// assertEquals(2, r.getLikelyErrorReasons(3).size());
 		// assertTrue(r.toString(), r.getLikelyErrorReasons(1).get(0).contains(
 		// "Test(TwoRequired).one is not set"));
-		assertTrue(r.toString(), r.toString().contains(
-				"TwoRequired.one is not set"));
+		assertTrue(r.toString(), r.toString().contains("TwoRequired.one is not set"));
 	}
 
-	public void testElementToMuch() throws Exception {
+	public void testElementTooMuch() throws Exception {
 		Model m = (Model) getModel("twooptions one a");
 		// System.out.println(EmfFormatter.objToStr(m));
 		((TwoOptions) m.getTest()).setTwo("b");
 		TreeConstructionReport r = ser(m);
 		assertFalse(r.isSuccess());
 		assertTrue(r.toString(), r.toString().contains(
-				"Can not leave rule 'Parenthesis' "
-						+ "since the current object "
-						+ "'TwoOptions' has features with "
+				"Can not leave rule 'Parenthesis' " + "since the current object " + "'TwoOptions' has features with "
 						+ "unconsumed values: 'two':1"));
 		// assertTrue(r.toString(), r.getLikelyErrorReasons(1).get(0).contains(
 		// "Can not leave rule 'Parenthesis' "
@@ -79,7 +76,7 @@ public class SerializationErrorTest extends AbstractXtextTests {
 
 	}
 
-	public void testDeepToMuch() throws Exception {
+	public void testDeep() throws Exception {
 		Model m = (Model) getModel("{ twooptions one a { twooptions one a { twooptions one a }}}");
 		// System.out.println(EmfFormatter.objToStr(m));
 		Indent i = ((Indent) m.getTest()).getIndent().get(0).getIndent().get(0);
@@ -87,11 +84,7 @@ public class SerializationErrorTest extends AbstractXtextTests {
 		TreeConstructionReport r = ser(m);
 		assertFalse(r.isSuccess());
 		String msg = r.toString();
-		assertTrue(msg, msg.contains("Model {"));
-		assertTrue(msg, msg.contains("indent[0] = Indent"));
-		assertTrue(msg, msg.contains("Can not leave rule 'TwoOptions' "
-				+ "since the current object "
-				+ "'TwoOptions' has features with "
-				+ "unconsumed values: 'two':1"));
+		assertTrue(msg, msg.contains("Can not leave rule 'TwoOptions' " + "since the current object "
+				+ "'TwoOptions' has features with " + "unconsumed values: 'two':1"));
 	}
 }
