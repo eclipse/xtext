@@ -54,7 +54,7 @@ public class ConcreteSyntaxEValidator extends AbstractInjectableValidator {
 	}
 
 	public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (context.containsKey(DISABLE_CONCRETE_SYNTAX_EVALIDATOR))
+		if (Boolean.TRUE.equals(context.get(DISABLE_CONCRETE_SYNTAX_EVALIDATOR)))
 			return true;
 		if (!(eObject.eResource() instanceof XtextResource))
 			return true;
