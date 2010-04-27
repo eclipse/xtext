@@ -667,37 +667,39 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 
 	protected abstract AbstractToken getRootToken(IInstanceDescription inst);
 
-	protected AbstractToken serialize(EObject object, AbstractToken f, TreeConstructionReportImpl rep) {
+	protected AbstractToken serialize(EObject object, AbstractToken currentToken, TreeConstructionReportImpl rep) {
 		if (object == null)
 			throw new NullPointerException("The to-be-serialized EObject is null");
-		IInstanceDescription inst = f.getCurrent();
-		int no = 0;
-		boolean lastSucc = true;
-		while (f != null) {
-			AbstractToken n = null;
-			IInstanceDescription i = null;
-			if ((n = f.createFollower(no, inst)) != null) {
-				while (n != null && (i = n.tryConsume()) == null)
-					n = f.createFollower(++no, inst);
+		IInstanceDescription currentInstance = currentToken.getCurrent();
+		int followerIndex = 0, depth = 0;
+		boolean lastSuccess = true;
+		while (currentToken != null) {
+			AbstractToken nextToken = null;
+			IInstanceDescription nextInstance = null;
+			if ((nextToken = currentToken.createFollower(followerIndex, currentInstance)) != null) {
+				while (nextToken != null && (nextInstance = nextToken.tryConsume()) == null)
+					nextToken = currentToken.createFollower(++followerIndex, currentInstance);
 			}
-			if (n instanceof RootToken && n.getNext() != null)
-				return n.getNext();
-			if (n != null && i != null) {
+			if (nextToken instanceof RootToken && nextToken.getNext() != null)
+				return nextToken.getNext();
+			if (nextToken != null && nextInstance != null) {
 				if (log.isTraceEnabled())
-					log.trace(debug(f, inst) + " -> found -> " + f.serializeThis(null));
-				f = n;
-				inst = i;
-				no = 0;
-				lastSucc = true;
+					log.trace(debug(currentToken, currentInstance) + " -> found -> " + currentToken.serializeThis(null));
+				currentToken = nextToken;
+				currentInstance = nextInstance;
+				followerIndex = 0;
+				lastSuccess = true;
+				depth++;
 			} else {
 				if (log.isTraceEnabled())
-					log.trace(debug(f, inst) + " -> fail -> " + (f.getNo() + 1));
-				if (lastSucc)
-					rep.addDeadEnd(f);
-				no = f.getNo() + 1;
-				inst = f.getCurrent();
-				f = f.getNext();
-				lastSucc = false;
+					log.trace(debug(currentToken, currentInstance) + " -> fail -> " + (currentToken.getNo() + 1));
+				if (lastSuccess)
+					rep.addDeadEnd(depth, currentToken);
+				followerIndex = currentToken.getNo() + 1;
+				currentInstance = currentToken.getCurrent();
+				currentToken = currentToken.getNext();
+				lastSuccess = false;
+				depth--;
 			}
 		}
 		throw new XtextSerializationException(rep, "Serialization failed");

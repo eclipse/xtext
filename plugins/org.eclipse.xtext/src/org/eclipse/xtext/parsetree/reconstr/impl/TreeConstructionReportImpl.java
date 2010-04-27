@@ -9,7 +9,6 @@
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -17,9 +16,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
@@ -27,6 +26,13 @@ import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.TreeConstructionDiagnostic;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.TreeConstructionReport;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken;
+import org.eclipse.xtext.util.EmfFormatter;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
+
+import com.google.common.base.Join;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -34,12 +40,9 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 @SuppressWarnings("serial")
 public class TreeConstructionReportImpl implements TreeConstructionReport {
 
-	protected class TreeConstructionDiagnosticImpl implements
-			TreeConstructionDiagnostic {
+	protected class TreeConstructionDiagnosticImpl implements TreeConstructionDiagnostic {
 
-		protected EObject current;
-
-		protected List<AbstractToken> ends;
+		protected AbstractToken deadend;
 
 		protected Map<AbstractToken, Integer> length = new HashMap<AbstractToken, Integer>() {
 			@Override
@@ -60,128 +63,58 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 
 		protected Map<EObject, TreeConstructionDiagnosticImpl> subDiag;
 
-		public TreeConstructionDiagnosticImpl(EObject current) {
+		public TreeConstructionDiagnosticImpl(AbstractToken deadend) {
 			super();
-			this.current = current;
-		}
-
-		protected void addDeadend(AbstractToken end) {
-			if (ends == null)
-				ends = new ArrayList<AbstractToken>();
-			ends.add(end);
-		}
-
-		public List<AbstractToken> getDeadEndsSorted() {
-			if (ends == null)
-				return Collections.emptyList();
-			ArrayList<AbstractToken> r = new ArrayList<AbstractToken>(ends);
-			Collections.sort(r, new Comparator<AbstractToken>() {
-				public int compare(AbstractToken o1, AbstractToken o2) {
-					return length.get(o2).compareTo(length.get(o1));
-				}
-			});
-			return r;
-
+			this.deadend = deadend;
 		}
 
 		public EObject getEObject() {
-			return current;
+			return deadend.getCurrent().getDelegate();
 		}
 
-		public List<String> getLikelyErrorReasons(int count) {
-			return getLikelyErrorReasons("", count);
+		public String getLikelyErrorReasons() {
+			return getLikelyErrorReasons("");
 		}
 
-		public List<String> getLikelyErrorReasons(String prefix, int count) {
-			List<AbstractToken> r = getDeadEndsSorted();
-			ArrayList<String> msgs = new ArrayList<String>();
-			for (int i = 0; i < r.size() && i < count; i++) {
-				AbstractToken t = r.get(i);
-				StringBuffer b = new StringBuffer(prefix);
-				b.append(length.get(r.get(i)));
-				b.append(": \"");
-				b.append(t.serialize(10, 50, true));
-				b.append("\":");
-				for (String s : collectDiagnostics(t)) {
-					b.append("\n");
-					b.append(prefix);
-					b.append("  -> ");
-					b.append(s);
-				}
-				msgs.add(b.toString());
+		public String getLikelyErrorReasons(String prefix) {
+			StringBuffer b = new StringBuffer(prefix);
+			b.append(length.get(deadend));
+			b.append(":");
+			b.append(EmfFormatter.objPath(deadend.getCurrent().getDelegate()));
+			b.append(": \"");
+			b.append(deadend.serialize(10, 50, true));
+			b.append("\":");
+			for (String s : collectDiagnostics(deadend)) {
+				b.append("\n");
+				b.append(prefix);
+				b.append("  -> ");
+				b.append(s);
 			}
-			return msgs;
-		}
-
-		protected TreeConstructionDiagnosticImpl getSubDiagnostic(EObject obj) {
-			if (obj == current)
-				return this;
-			if (subDiag == null)
-				subDiag = new HashMap<EObject, TreeConstructionDiagnosticImpl>();
-			TreeConstructionDiagnosticImpl r = subDiag.get(obj);
-			if (r == null)
-				subDiag.put(obj, r = createDiagnostic(obj));
-			return r;
-		}
-
-		public Collection<? extends TreeConstructionDiagnostic> getSubDiagnostics() {
-			if (subDiag == null)
-				return Collections.emptyList();
-			return subDiag.values();
+			return b.toString();
 		}
 
 		@Override
 		public String toString() {
-			StringBuffer b = new StringBuffer();
-			toString("", b);
-			return b.toString();
+			return getLikelyErrorReasons();
 		}
 
-		public void toString(String prefix, StringBuffer out) {
-			final String INDENT = "    ";
-			out.append(prefix);
-			if (current.eContainer() != null) {
-				out.append(current.eContainmentFeature().getName());
-				if (current.eContainmentFeature().isMany()) {
-					Object lst = current.eContainer().eGet(
-							current.eContainmentFeature());
-					int index = ((List<?>) lst).indexOf(current);
-					out.append("[");
-					out.append(index);
-					out.append("]");
-				}
-				out.append(" = ");
-			}
-			out.append(current.eClass().getName());
-			EStructuralFeature nameF = current.eClass().getEStructuralFeature(
-					"name");
-			if (nameF != null) {
-				out.append("(name='");
-				out.append(current.eGet(nameF));
-				out.append("')");
-			}
-			out.append(" { \n");
-			if (subDiag != null)
-				for (TreeConstructionDiagnosticImpl tcd : subDiag.values())
-					tcd.toString(prefix + INDENT, out);
-			else
-				for (String r : getLikelyErrorReasons(prefix + INDENT, 5)) {
-					out.append(r);
-					out.append("\n");
-				}
-			out.append(prefix);
-			out.append("}\n");
-		}
 	}
 
-	protected List<AbstractToken> deadends = new ArrayList<AbstractToken>();
+	private static final int THRESHOLD = 10;
+
+	protected SortedSet<Pair<Integer, AbstractToken>> deadends = Sets
+			.newTreeSet(new Comparator<Pair<Integer, AbstractToken>>() {
+				public int compare(Pair<Integer, AbstractToken> o1, Pair<Integer, AbstractToken> o2) {
+					return o1.getFirst().compareTo(o2.getFirst());
+				}
+			});
 
 	protected TreeConstructionDiagnosticImpl diagnostic;
 
 	protected TreeConstructionNFAProvider nfaProvider = new TreeConstructionNFAProvider();
 
 	protected EObject root;
-	
+
 	protected AbstractToken success;
 
 	public TreeConstructionReportImpl(EObject root) {
@@ -189,8 +122,12 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		this.root = root;
 	}
 
-	protected void addDeadEnd(AbstractToken deadend) {
-		this.deadends.add(deadend);
+	protected void addDeadEnd(int depth, AbstractToken deadend) {
+		if (deadends.size() >= THRESHOLD && depth < deadends.first().getFirst())
+			return;
+		if (deadends.size() >= THRESHOLD)
+			deadends.remove(deadends.first());
+		deadends.add(Tuples.pair(depth, deadend));
 	}
 
 	protected String checkUnconsumed(AbstractToken t, IInstanceDescription inst) {
@@ -221,13 +158,12 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 
 	public Set<EObject> collectConsumedEObjects() {
 		Set<EObject> r = new HashSet<EObject>();
-		for (AbstractToken end : deadends) {
+		for (AbstractToken end : getDeadends()) {
 			AbstractToken t = end;
 			while (t.getNext() != null && t.getNext().getParent() != null
 					&& t.getNext().getParent().getGrammarElement() != null) {
-				if (GrammarUtil.containingRule(t.getNext().getParent()
-						.getGrammarElement()) == GrammarUtil.containingRule(t
-						.getGrammarElement()))
+				if (GrammarUtil.containingRule(t.getNext().getParent().getGrammarElement()) == GrammarUtil
+						.containingRule(t.getGrammarElement()))
 					r.add(t.getNext().getCurrent().getDelegate());
 				t = t.getNext();
 			}
@@ -257,48 +193,25 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		return diags;
 	}
 
-	protected TreeConstructionDiagnosticImpl createDiagnostic(EObject current) {
-		return new TreeConstructionDiagnosticImpl(current);
+	protected TreeConstructionDiagnosticImpl createDiagnostic(AbstractToken token) {
+		return new TreeConstructionDiagnosticImpl(token);
 	}
 
 	public List<AbstractToken> getDeadends() {
+		List<AbstractToken> deadends = Lists.newArrayList();
+		for (Pair<Integer, AbstractToken> p : this.deadends)
+			deadends.add(p.getSecond());
+		Collections.reverse(deadends);
 		return deadends;
 	}
 
-	public TreeConstructionDiagnostic getDiagnostic() {
+	public List<TreeConstructionDiagnostic> getDiagnostics() {
 		if (isSuccess())
 			return null;
-		if (diagnostic == null) {
-			diagnostic = createDiagnostic(root);
-			Set<EObject> consumed = collectConsumedEObjects();
-			for (AbstractToken t : deadends) {
-				EObject c = t.getCurrent().getDelegate();
-				if (!consumed.contains(c)) {
-					List<EObject> path = new ArrayList<EObject>();
-					path.add(c);
-					while (c.eContainer() != null)
-						path.add(c = c.eContainer());
-					Collections.reverse(path);
-					TreeConstructionDiagnosticImpl di = diagnostic;
-					for (EObject p : path)
-						di = di.getSubDiagnostic(p);
-					di.addDeadend(t);
-				}
-			}
-		}
-		return diagnostic;
-	}
-
-	protected String getPath(EObject obj) {
-		if (obj.eContainer() == null)
-			return "";
-		EObject c = obj.eContainer();
-		EReference r = obj.eContainmentFeature();
-		if (r.isMany()) {
-			int index = ((List<?>) c.eGet(r)).indexOf(obj);
-			return getPath(c) + "/" + r.getName() + "[" + index + "]";
-		}
-		return getPath(c) + "/" + r.getName();
+		List<TreeConstructionDiagnostic> result = Lists.newArrayList();
+		for (AbstractToken t : getDeadends())
+			result.add(createDiagnostic(t));
+		return result;
 	}
 
 	public AbstractToken getSuccess() {
@@ -318,10 +231,10 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		if (isSuccess())
 			return "Serialization has been successful";
 		StringBuffer b = new StringBuffer();
-		b.append("<# of serialized tokens>: ");
+		b.append("<# of serialized tokens>: <EObject path> ");
 		b.append("\"<serializable fragment, starting from the end>\":\n");
 		b.append("  -> <possible reasons for not continuing>\n");
-		b.append(getDiagnostic().toString());
+		b.append(Join.join("\n", getDiagnostics()));
 		return b.toString();
 	}
 }
