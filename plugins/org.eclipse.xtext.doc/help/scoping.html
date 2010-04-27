@@ -289,7 +289,7 @@ entity&nbsp;Foo;<br>
 </div>
 </div>
 </div>
-<p>The QualifiedNameScopeProvider looks up EAttributes with name &lsquo;importNamespace&rsquo; and interprets such as import statements.
+<p>The QualifiedNameScopeProvider looks up EAttributes with name &sbquo;importNamespace&rsquo; and interprets such as import statements.
 						By default qualified names with or without a wildcard at the end are supported. For an import of a qualified name the simple name is made available as we know from e.g. Java, where</p>
 <div class="literallayout">
 <p>
@@ -298,13 +298,11 @@ entity&nbsp;Foo;<br>
 </code>
 </p>
 </div>
-<p>makes it possible to refer to &lsquo;java.util.Set&rsquo; by its simple name &lsquo;Set&rsquo;.
+<p>makes it possible to refer to &sbquo;java.util.Set&rsquo; by its simple name &sbquo;Set&rsquo;.
 						Contrary to Java the import is not active for the whole file but only for the namespace it is declared in and its child namespaces. That is why you can write the following in the example DSL:</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-package&nbsp;foo&nbsp;{<br>
+<code class="code">package&nbsp;foo&nbsp;{<br>
 &nbsp;&nbsp;import&nbsp;bar.Foo<br>
 &nbsp;&nbsp;entity&nbsp;Bar&nbsp;extends&nbsp;Foo&nbsp;{<br>
 &nbsp;&nbsp;}<br>
@@ -323,9 +321,7 @@ package&nbsp;bar&nbsp;{<br>
 <p>Of course the declared elements within a package are as well referable by their simple name:</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-package&nbsp;bar&nbsp;{<br>
+<code class="code">package&nbsp;bar&nbsp;{<br>
 &nbsp;&nbsp;entity&nbsp;Bar&nbsp;extends&nbsp;Foo&nbsp;{}<br>
 &nbsp;&nbsp;entity&nbsp;Foo&nbsp;{}<br>
 }<br>
@@ -338,9 +334,7 @@ package&nbsp;bar&nbsp;{<br>
 <p>Of course the following would as well be ok:</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-package&nbsp;bar&nbsp;{<br>
+<code class="code">package&nbsp;bar&nbsp;{<br>
 &nbsp;&nbsp;entity&nbsp;Bar&nbsp;extends&nbsp;bar.Foo&nbsp;{}<br>
 &nbsp;&nbsp;entity&nbsp;Foo&nbsp;{}<br>
 }<br>

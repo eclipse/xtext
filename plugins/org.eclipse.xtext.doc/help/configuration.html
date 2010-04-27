@@ -133,7 +133,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 </p>
 </div>
 <p>Obviously the latter is far more readable and should be preferred. However, 
-					as soon as you want to add multiple values to the same &lsquo;adder&rsquo; method you 
+					as soon as you want to add multiple values to the same &sbquo;adder&rsquo; method you 
 					will need to use the first syntax because you cannot define the same 
 					attribute twice in XML.</p>
 <p>If an element does not have an attribute 
@@ -161,7 +161,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 					
 <span class="bold"><strong>Tip</strong></span>
 
-					<span class="italic">Whenever you are in an *.mwe file and wonder what kind of configuration the underlying component may accept: Just use JDT&rsquo;s open type action (CTRL+Shift+T) open the source file of the class in question, use the quick outline view (CTRL+O, use CTRL+O twice to see inherited members as well) and type &lsquo;set&rsquo; or &lsquo;add&rsquo; and you will see the available modifiers. Note that we plan to replace the XML syntax with an Xtext-based implementation as soon as possible.</span>
+					<span class="italic">Whenever you are in an *.mwe file and wonder what kind of configuration the underlying component may accept: Just use JDT&rsquo;s open type action (CTRL+Shift+T) open the source file of the class in question, use the quick outline view (CTRL+O, use CTRL+O twice to see inherited members as well) and type &sbquo;set&rsquo; or &sbquo;add&rsquo; and you will see the available modifiers. Note that we plan to replace the XML syntax with an Xtext-based implementation as soon as possible.</span>
 				
 </p>
 <p>This is the basic idea of the MWE language. There are of course a couple of additional concepts and features in the language and we also have not yet talked about the runtime workflow model. Please consult the MWE reference documentation (available through Eclipse help) for additional information.</p>
@@ -218,9 +218,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 						In the following we see an exemplary Xtext generator configuration written in MWE configuration code:  </p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-&lt;workflow&gt;<br>
+<code class="code">&lt;workflow&gt;<br>
 	&lt;property&nbsp;file="org/xtext/example/GenerateMyDsl.properties"/&gt;<br>
 	
 <br>

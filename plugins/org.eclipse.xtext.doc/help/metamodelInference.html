@@ -13,7 +13,7 @@
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Ecore model inference</h1>
 <p>The Ecore model (or meta model) of a textual language describes the structure of its abstract syntax trees (AST). </p>
 <p>Xtext uses Ecore&rsquo;s EPackages to define Ecore models. Ecore models are declared to be either inferred (generated) from the grammar or imported. 
-				By using the &lsquo;generate&rsquo; directive, one tells Xtext to derive an EPackage from the grammar. </p>
+				By using the &sbquo;generate&rsquo; directive, one tells Xtext to derive an EPackage from the grammar. </p>
 <div class="section" title="Type and Package Generation">
 <div class="titlepage">
 <div>
@@ -31,7 +31,7 @@
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
 <li class="listitem">
-<p>for each generate-package declaration. After the directive &lsquo;generate&rsquo; a list of parameters follows. The &lsquo;name&rsquo; of the EPackage will be set to the first parameter, its &lsquo;nsURI&rsquo; to the second parameter. An optional alias as the third parameter allows to distinguish generated EPackages later. Only one generated package declaration per alias is allowed.</p>
+<p>for each generate-package declaration. After the directive &sbquo;generate&rsquo; a list of parameters follows. The &sbquo;name&rsquo; of the EPackage will be set to the first parameter, its &sbquo;nsURI&rsquo; to the second parameter. An optional alias as the third parameter allows to distinguish generated EPackages later. Only one generated package declaration per alias is allowed.</p>
 </li>
 </ul>
 </div>
@@ -104,7 +104,7 @@
 <p>An optional rule call does not modify the set.</p>
 </li>
 <li class="listitem">
-<p>A rule call is optional, if its cardinality is &lsquo;?&rsquo; or &lsquo;*&rsquo;.</p>
+<p>A rule call is optional, if its cardinality is &sbquo;?&rsquo; or &sbquo;*&rsquo;.</p>
 </li>
 </ul>
 </div>
@@ -116,10 +116,10 @@
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
 <li class="listitem">
-<p>of type EBoolean for each feature assignment using the &lsquo;?=&rsquo; operator. No further EReferences or EAttributes will be generated from this assignment.</p>
+<p>of type EBoolean for each feature assignment using the &sbquo;?=&rsquo; operator. No further EReferences or EAttributes will be generated from this assignment.</p>
 </li>
 <li class="listitem">
-<p>for each assignment with the &lsquo;=&rsquo; or &lsquo;+=&rsquo; operator calling a terminal rule. Its type will be the return type of the called rule.</p>
+<p>for each assignment with the &sbquo;=&rsquo; or &sbquo;+=&rsquo; operator calling a terminal rule. Its type will be the return type of the called rule.</p>
 </li>
 </ul>
 </div>
@@ -129,7 +129,7 @@
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
 <li class="listitem">
-<p>for each assignment with the &lsquo;=&rsquo; or &lsquo;+=&rsquo; operator in a parser rule calling a parser rule. The EReference&rsquo;s type will be the return type of the called parser rule.</p>
+<p>for each assignment with the &sbquo;=&rsquo; or &sbquo;+=&rsquo; operator in a parser rule calling a parser rule. The EReference&rsquo;s type will be the return type of the called parser rule.</p>
 </li>
 <li class="listitem">
 <p>for each assigned action. The reference&rsquo;s type will be set to the return type of the current calling rule. </p>
@@ -139,8 +139,8 @@
 </li>
 </ul>
 </div>
-<p>Each EAttribute or EReference takes its name from the assignment or action that caused it. Multiplicities will be 0...1 for assignments with the &lsquo;=&rsquo; operator and 0...* for assignments with the &lsquo;+=&rsquo; operator. </p>
-<p>Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of &ldquo;artificial&rdquo; parser rules, that are never called, e.g.</p>
+<p>Each EAttribute or EReference takes its name from the assignment or action that caused it. Multiplicities will be 0...1 for assignments with the &sbquo;=&rsquo; operator and 0...* for assignments with the &sbquo;+=&rsquo; operator. </p>
+<p>Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of &bdquo;artificial&rdquo; parser rules, that are never called, e.g.</p>
 <div class="literallayout">
 <p>
 <code class="code">CommonSuperType:<br>
@@ -161,7 +161,7 @@
 </div>
 </div>
 </div>
-<p>For each alternative defined in an enum rule, the transformer creates an enum literal, when another literal with the same name cannot be found. The &lsquo;literal&rsquo; property of the generated enum literal is set to the right hand side of the declaration. If it is omitted, you will get an enum literal with equal &lsquo;name&rsquo; and &lsquo;literal&rsquo; attributes.</p>
+<p>For each alternative defined in an enum rule, the transformer creates an enum literal, when another literal with the same name cannot be found. The &sbquo;literal&rsquo; property of the generated enum literal is set to the right hand side of the declaration. If it is omitted, you will get an enum literal with equal &sbquo;name&rsquo; and &sbquo;literal&rsquo; attributes.</p>
 <div class="literallayout">
 <p>
 <code class="code">enum&nbsp;MyGeneratedEnum:<br>

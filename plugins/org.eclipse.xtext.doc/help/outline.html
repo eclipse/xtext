@@ -309,9 +309,7 @@
 <p>First, you need to define a command &ndash; it will serve as a handle to glue together the handler and the menu contribution:</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-&lt;extension<br>
+<code class="code">&lt;extension<br>
 &nbsp;&nbsp;point="org.eclipse.ui.commands"&gt;<br>
 &nbsp;&nbsp;&lt;command<br>
 &nbsp;&nbsp;&nbsp;&nbsp;id="org.example.mydsl.ui.editor.outline.SampleOutlineCommand"<br>
@@ -331,9 +329,7 @@
 					</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-&lt;extension<br>
+<code class="code">&lt;extension<br>
 &nbsp;&nbsp;point="org.eclipse.ui.handlers"&gt;<br>
 &nbsp;&nbsp;&lt;handler<br>
 &nbsp;&nbsp;&nbsp;&nbsp;class="org.example.mydsl.ui.editor.outline.SampleOutlineNodeHandler"<br>
@@ -351,9 +347,7 @@
 					</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-&lt;extension<br>
+<code class="code">&lt;extension<br>
 &nbsp;&nbsp;point="org.eclipse.ui.menus"&gt;<br>
 &nbsp;&nbsp;&lt;menuContribution<br>
 &nbsp;&nbsp;&nbsp;&nbsp;locationURI="popup:org.eclipse.xtext.ui.common.outline?after=additions"&gt;<br>

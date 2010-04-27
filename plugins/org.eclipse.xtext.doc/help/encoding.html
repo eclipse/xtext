@@ -1,0 +1,168 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Encoding in Xtext</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="RuntimeConcepts.html" title="Runtime Concepts">
+<link rel="prev" href="emf_integration.html" title="Integration with EMF">
+<link rel="next" href="IDEconcepts.html" title="IDE concepts">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Encoding in Xtext</h1>
+<p>
+				
+<span class="emphasis"><em>Encoding</em></span>, AKA 
+				<span class="emphasis"><em>character set</em></span>, describes the way characters are encoded into bytes and vice versa. 
+				Famous standard encodings are &bdquo;UTF-8&rdquo; or &bdquo;ISO-8859-1&rdquo;. The list of available encodings can be determined
+				by calling 
+				<code class="code">java.nio.Charset.availableCharsets()</code>. There is also a list of encodings and their 
+				canonical Java names in the 
+				<a class="ulink" href="http://java.sun.com/j2se/1.5.0/docs/guide/intl/encoding.doc.html" target="_new">API docs</a>.
+			</p>
+<p>Unfortunately, each platform and/or spoken language tends to define its own native encoding, 
+				e.g. 
+				<code class="code">Cp1258</code> on Windows in Vietnamese or 
+				<code class="code">MacIceland</code> on Mac OS X in Icelandic. 
+			</p>
+<p>In an Eclipse workspace, files, folders, projects can have individual encodings, which are stored
+				in the file 
+				<code class="code">.settings/org.eclipse.core.resources.prefs</code> in each project. If a resource does not have an 
+				explicit encoding, it inherits the one from its parent recursively. Eclipse chooses the native
+				platform encoding as the default for the workspace root. You can change the default workspace 
+				encoding in the Eclipse preferences 
+				<span class="emphasis"><em>Preferences-&gt;Workspace-&gt;Default text encoding</em></span>. If you develop on
+				different platforms, you should consider choosing an explicit common encoding for your text or code
+				files, especially if you use special characters. 
+			</p>
+<p>While Eclipse allows to define and inspect the encoding of a file, your file system usually doesn&rsquo;t. 
+				Given an arbitrary text file there is no general strategy to tell how it was encoded. If you deploy 
+				an Eclipse project as a jar (even a plug-in), any encoding information not stored in the file itself 
+				is lost, too. Some languages define the encoding of a file explicitly, as in the first processing 
+				instruction of an XML file. Most languages don&rsquo;t. Others imply a fixed encoding or offer enhanced 
+				syntax for character literals, e.g. 
+				<code class="code">\uXXXX</code> in Java. 
+			</p>
+<p>As Xtext is about textual modeling, it allows to tweak the encoding in various places.</p>
+<div class="section" title="Encoding at Language Design Time">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="EncodingatLanguageDesignTime"></a>Encoding at Language Design Time</h3>
+</div>
+</div>
+</div>
+<p>The plug-ins created by the 
+					<span class="emphasis"><em>New Xtext Project</em></span> wizard are by default encoded in the workspace&rsquo;s standard
+					encoding. The same holds for all files that Xtext generates in there.
+					If you want to change that, e.g. because your grammar uses/allows special characters, you should manually 
+					set the encoding in the properties of these projects after their creation. Do this before 
+					adding special characters to your grammar or at least make sure the grammar reads correctly after the 
+					encoding change. To tell the Xtext generator to generate files in the same encoding, set the encoding 
+					property in the workflow next to your grammar, e.g.
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">Generator&nbsp;{<br>
+	encoding&nbsp;="UTF-8"<br>
+	...<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Encoding at Language Runtime">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="EncodingatLanguageRuntime"></a>Encoding at Language Runtime</h3>
+</div>
+</div>
+</div>
+<p>As each language could handle the encoding problem differently, Xtext offers a service here. 
+					The ${org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider} has a single method 
+
+					<code class="code">getEncoding(URI)</code> to define the encoding of the resource with the given URI. Users can implement 
+					their own strategy but keep in mind that this is not intended to be a long running method. If the 
+					encoding is stored within the model file itself, it should be extractable in an easy way, like from 
+					then first line in an XML file. The default implementation returns the default Java character set 
+					in the runtime scenario. 
+				</p>
+<p>In the UI scenario, when there is a workspace, users will expect the encoding of the model files 
+					to be settable the same way as for other files in the workspace. The default implementation 
+					of the 
+					<code class="code">IEncodingProvider</code> in the UI scenario Xtext therefore returns the file&rsquo;s workspace encoding 
+					for files in the workspace and delegates to the runtime implementation for all other resources, 
+					e.g. models in a jar or from a deployed plug-in. Keep in mind that you are going to loose the 
+					workspace encoding information as soon as you leave this workspace, e.g. deploy your project.
+				</p>
+<p>Unless you want to enforce a uniform encoding for all models of your language, we advise to 
+					override the runtime service only. It is bound in the runtime module using the binding annotation 
+
+					<code class="code">Runtime</code>. For the uniform encoding, bind the plain 
+					<code class="code">IEncodingProvider</code> to the same implementation 
+					in both modules.
+				</p>
+</div>
+<div class="section" title="Encoding of an XtextResource">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="EncodingofanXtextResource"></a>Encoding of an XtextResource</h3>
+</div>
+</div>
+</div>
+<p>An ${org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource} uses the 
+					<code class="code">IEncodingProvider</code> 
+					of your language by default. You can override that by passing an option on load and save, e.g.
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">Map&lt;?,?&gt;&nbsp;options&nbsp;=&nbsp;new&nbsp;HashMap();<br>
+options.put(XtextResource.OPTION_ENCODING,&nbsp;"UTF-8");<br>
+myXtextResource.load(options);<br>
+options.put(XtextResource.OPTION_ENCODING,&nbsp;"ISO-8859-1");<br>
+myXtextResource.save(options);<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Encoding in New Model Projects">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="EncodinginNewModelProjects"></a>Encoding in New Model Projects</h3>
+</div>
+</div>
+</div>
+<p>The ${org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment} 
+					generates a wizard that clients of your language can use to create model 
+					projects. This wizard expects its templates to be in the encoding of the Generator that created it 
+					(see above). As every new project wizard, its output will be encoded in the default encoding of the 
+					target workspace. </p>
+</div>
+<div class="section" title="Encoding of Xtext source code">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="EncodingofXtextsourcecode"></a>Encoding of Xtext source code</h3>
+</div>
+</div>
+</div>
+<p>The source code of the Xtext framework itself is completely encoded in &bdquo;ISO 8859-1&rdquo;, which is necessary 
+					to make the Xpand templates work everywhere (they use french quotation markup). That encoding is hard 
+					coded into the Xtext generator code. You are likely never going to change that. </p>
+</div>
+</body>
+</html>

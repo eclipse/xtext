@@ -17,6 +17,7 @@
 100-serialization.textile
 105-emf-integration.textile
 110-fragmentprovider.textile
+115-encoding.textile
 
 120-heading-UI.textile
 130-managing-concurrency.textile

@@ -51,7 +51,7 @@
 </ul>
 </div>
 <p>In the project navigator, right click on 
-					<span class="emphasis"><em>org.xtext.example.start.generator/templates</em></span> and select 
+					<span class="emphasis"><em>org.xtext.example.start.generator/src/templates</em></span> and select 
 					<span class="emphasis"><em>New -&gt; Other... -&gt; Xpand Template</em></span>. Name the new template 
 					<code class="code">Main.xpt</code> and click on 
 					<span class="emphasis"><em>Finish</em></span>.
@@ -59,9 +59,7 @@
 <p>First, we need to import the meta model, as we&rsquo;re going to be working with the concepts from the meta model:</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-&laquo;IMPORT&nbsp;entities&raquo;<br>
+<code class="code">&laquo;IMPORT&nbsp;entities&raquo;<br>
 
 </code>
 </p>
@@ -72,9 +70,7 @@
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&raquo;<br>
+<code class="code">&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&raquo;<br>
 &nbsp;&nbsp;&laquo;EXPAND&nbsp;DAO::dao&nbsp;FOREACH&nbsp;this.elements.typeSelect(Entity)&raquo;<br>
 &nbsp;&nbsp;&laquo;EXPAND&nbsp;Entity::entity&nbsp;FOREACH&nbsp;this.elements.typeSelect(Entity)&raquo;<br>
 &laquo;ENDDEFINE&raquo;<br>
@@ -94,9 +90,7 @@
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-&laquo;IMPORT&nbsp;entities&raquo;<br>
+<code class="code">&laquo;IMPORT&nbsp;entities&raquo;<br>
 &laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&raquo;<br>
 &nbsp;&nbsp;&laquo;EXPAND&nbsp;DAO::dao&nbsp;FOREACH&nbsp;this.elements.typeSelect(Entity)&raquo;<br>
 &nbsp;&nbsp;&laquo;EXPAND&nbsp;Entity::entity&nbsp;FOREACH&nbsp;this.elements.typeSelect(Entity)&raquo;<br>
@@ -130,9 +124,7 @@
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-&laquo;IMPORT&nbsp;entities&raquo;<br>
+<code class="code">&laquo;IMPORT&nbsp;entities&raquo;<br>
 
 <br>
 &laquo;DEFINE&nbsp;entity&nbsp;FOR&nbsp;Entity&raquo;<br>
@@ -179,9 +171,7 @@
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-&laquo;IMPORT&nbsp;entities&raquo;<br>
+<code class="code">&laquo;IMPORT&nbsp;entities&raquo;<br>
 
 <br>
 &laquo;DEFINE&nbsp;dao&nbsp;FOR&nbsp;Entity&raquo;<br>
@@ -246,9 +236,7 @@
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-	&lt;component&nbsp;class="org.eclipse.xpand2.Generator"&gt;<br>
+<code class="code">	&lt;component&nbsp;class="org.eclipse.xpand2.Generator"&gt;<br>
 		&lt;metaModel&nbsp;class="org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel"/&gt;<br>
 		&lt;fileEncoding&nbsp;value="ISO-8859-1"/&gt;<br>
 		&lt;expand&nbsp;value="templates::Main::main&nbsp;FOR&nbsp;model"/&gt;<br>

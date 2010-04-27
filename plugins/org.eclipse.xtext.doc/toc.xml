@@ -47,7 +47,7 @@
 <topic href="help/syntax.html#Groups" label="Groups"></topic>
 </topic>
 </topic>
-<topic href="help/syntax.html#ParserRules" label="Parser Rules">
+<topic href="help/syntax.html#parser_rules" label="Parser Rules">
 <topic href="help/syntax.html#ExtendedBackusNaurFormexpressions" label="Extended Backus-Naur Form expressions">
 <topic href="help/syntax.html#assignments" label="Assignments"></topic>
 <topic href="help/syntax.html#CrossReferences" label="Cross References"></topic>
@@ -131,7 +131,19 @@
 </topic>
 <topic href="help/emf_integration.html" label="Integration with EMF">
 <topic href="help/emf_integration.html#XtextResourceImplementation" label="XtextResource Implementation"></topic>
+<topic href="help/emf_integration.html#gmf_integration" label="Integration with GMF">
+<topic href="help/emf_integration.html#gmf_integration_stage_1" label="Stage 1: Make GMF read and write the semantic model as text"></topic>
+<topic href="help/emf_integration.html#Stage2CallingtheXtextparsertoparseGMFlabels" label="Stage 2: Calling the Xtext parser to parse GMF labels"></topic>
+<topic href="help/emf_integration.html#Stage3APopupXtextEditorexperimental" label="Stage 3: A Popup Xtext Editor (experimental)"></topic>
+</topic>
 <topic href="help/emf_integration.html#fragmentProvider" label="Fragment Provider (referencing Xtext models from other EMF artifacts)"></topic>
+</topic>
+<topic href="help/encoding.html" label="Encoding in Xtext">
+<topic href="help/encoding.html#EncodingatLanguageDesignTime" label="Encoding at Language Design Time"></topic>
+<topic href="help/encoding.html#EncodingatLanguageRuntime" label="Encoding at Language Runtime"></topic>
+<topic href="help/encoding.html#EncodingofanXtextResource" label="Encoding of an XtextResource"></topic>
+<topic href="help/encoding.html#EncodinginNewModelProjects" label="Encoding in New Model Projects"></topic>
+<topic href="help/encoding.html#EncodingofXtextsourcecode" label="Encoding of Xtext source code"></topic>
 </topic>
 </topic>
 <topic href="help/IDEconcepts.html" label="IDE concepts">

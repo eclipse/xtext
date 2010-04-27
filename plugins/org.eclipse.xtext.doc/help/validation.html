@@ -126,9 +126,7 @@
 <p>All in all this is very similar to how JUnit works. Here is an example:</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-public&nbsp;class&nbsp;DomainmodelJavaValidator&nbsp;<br>
+<code class="code">public&nbsp;class&nbsp;DomainmodelJavaValidator&nbsp;<br>
 &nbsp;&nbsp;extends&nbsp;AbstractDomainmodelJavaValidator&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;&nbsp;@Check<br>
@@ -168,10 +166,8 @@ public&nbsp;class&nbsp;DomainmodelJavaValidator&nbsp;<br>
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning("Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital",&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.TYPE__NAME,&nbsp;INVALID_TYPE_NAME);<br>
+<code class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning("Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital",&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.TYPE__NAME,&nbsp;INVALID_TYPE_NAME,&nbsp;type.getName());<br>
 
 <br>
 
@@ -188,16 +184,15 @@ public&nbsp;class&nbsp;DomainmodelJavaValidator&nbsp;<br>
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">
-<br>
-public&nbsp;class&nbsp;DomainmodelQuickfixProvider&nbsp;extends&nbsp;AbstractDeclarativeQuickfixProvider&nbsp;{<br>
-
-<br>
-&nbsp;&nbsp;@Fix(code&nbsp;=&nbsp;DomainmodelJavaValidator.INVALID_TYPE_NAME,&nbsp;label&nbsp;=&nbsp;"Capitalize&nbsp;name",<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;description&nbsp;=&nbsp;"Capitalize&nbsp;name&nbsp;of&nbsp;type")<br>
-&nbsp;&nbsp;public&nbsp;void&nbsp;fixName(Type&nbsp;type,&nbsp;IMarker&nbsp;marker)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;type.setName(type.getName().toUpperCase());<br>
-&nbsp;&nbsp;}<br>
+<code class="code">@Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)<br>
+public&nbsp;void&nbsp;fixName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{<br>
+		acceptor.accept(issue,&nbsp;"Capitalize&nbsp;name",&nbsp;"Capitalize&nbsp;name&nbsp;&nbsp;of&nbsp;'"&nbsp;+&nbsp;issue.getData()[0]&nbsp;+&nbsp;"'",&nbsp;"upcase.png",&nbsp;new&nbsp;IModification()&nbsp;{<br>
+		public&nbsp;void&nbsp;apply(IModificationContext&nbsp;context)&nbsp;throws&nbsp;BadLocationException&nbsp;{<br>
+			IXtextDocument&nbsp;xtextDocument&nbsp;=&nbsp;context.getXtextDocument();<br>
+			String&nbsp;firstLetter&nbsp;=&nbsp;xtextDocument.get(issue.getOffset(),&nbsp;1);<br>
+			xtextDocument.replace(issue.getOffset(),&nbsp;1,&nbsp;Strings.toFirstUpper(firstLetter));<br>
+	}<br>
+	});<br>
 }<br>
 
 <br>
@@ -208,44 +203,13 @@ public&nbsp;class&nbsp;DomainmodelQuickfixProvider&nbsp;extends&nbsp;AbstractDec
 <p>By using the correct signature (see below) and annotating the method with the 
 					<code class="code">Fix</code> annotation referencing the code we specified in the validator, Xtext knows that this method implements a fix for the problem. This also allows us to annotate multiple methods as fixes for the same problem.
 				</p>
-<p>The 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/editor/quickfix/Fix.java?root=Modeling_Project&view=co" target="_new">Fix</a> annotation accepts the following arguments:
+<p>The first three parameters given to the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/quickfix/IssueResolutionAcceptor.java?root=Modeling_Project&view=co" target="_new">IssueResolutionAcceptor</a> define the UI representation of the quickfix. As the document is not necessarily loaded when the quickfix is offered, we need to provide any additional data from the model that we want to refer to in the UI when creating the issue in the validator above. In this case, we provided the existing type name.
 				</p>
-<div class="itemizedlist">
-<ul class="itemizedlist" type="disc">
-<li class="listitem">
-<p>
-							
-<span class="bold"><strong>code</strong></span> - the code of the validation this fix is applicable to
-						</p>
-</li>
-<li class="listitem">
-<p>
-							
-<span class="bold"><strong>label</strong></span> - the label text to display for this fix in the editor
-						</p>
-</li>
-<li class="listitem">
-<p>
-							
-<span class="bold"><strong>description</strong></span> - the description to display for this fix
-						</p>
-</li>
-<li class="listitem">
-<p>
-							
-<span class="bold"><strong>icon</strong></span> - the name of the icon file (in the UI plug-in&rsquo;s 
-							<code class="code">icons</code> directory) to display for this fix
-						</p>
-</li>
-</ul>
-</div>
-<p>In addition to the 
-					<code class="code">Fix</code> annotation our fix method also needs to have the correct signature: Its first argument needs to be of a type which is compatible with the type of the object the validation was created for (the validation&rsquo;s 
-					<span class="emphasis"><em>source</em></span>) and its second argument is of type 
-					<span class="emphasis"><em>IMarker</em></span>.
+<p>The actual model modification is implemented in the ${org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModification}. The ${org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModificationContext} provides access to the erroneous document.  </p>
+<p>If you prefer to implement the quickfix in terms of the semantic model use a ${org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/ISemanticModification.java} instead. Its 
+					<code class="code">apply(EObject, IModificationContext)</code> method will be invoked inside a modification transaction and the first argument will be the erroneous semantic element. This makes it very easy for the fix method to modify the model as necessary. After the method returns the model as well as the Xtext editor&rsquo;s content will be updated accordingly. If the method fails (throws an exception) the change will not be committed.
 				</p>
-<p>The fix method will be invoked inside a modification transaction and the first argument will be passed as the actual object the validation was created for and the second argument will be passed as the Eclipse marker that corresponds to the validation. This makes it very easy for the fix method to modify the model as necessary. After the method returns the model as well as the Xtext editor&rsquo;s content will be updated accordingly. If the method fails (throws an exception) the change will not be committed.</p>
 </div>
 <div class="section" title="Validation with the Check language">
 <div class="titlepage">
@@ -271,7 +235,7 @@ public&nbsp;class&nbsp;DomainmodelQuickfixProvider&nbsp;extends&nbsp;AbstractDec
 </code>
 </p>
 </div>
-<p>After regenerating your language artifacts you will find three new files &ldquo;YourLanguageChecks.chk&rdquo;, &ldquo;YourLanguageFastChecks.chk&rdquo; and &ldquo;YourLanguageExpensiveChecks.chk&rdquo; in the 
+<p>After regenerating your language artifacts you will find three new files &bdquo;YourLanguageChecks.chk&rdquo;, &bdquo;YourLanguageFastChecks.chk&rdquo; and &bdquo;YourLanguageExpensiveChecks.chk&rdquo; in the 
 					<code class="code">src/</code> folder in the sub-package 
 					<code class="code">validation</code>.  The checks in these files will be executed when saving a file, while typing (FastChecks) or when triggering the validation explicitly (ExpensiveChecks). When using Check the example of the previous chapter could be written like this.
 				</p>
