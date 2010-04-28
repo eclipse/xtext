@@ -25,25 +25,22 @@ public class JdtTypeProviderFactory extends AbstractTypeProviderFactory {
 		this.javaProjectProvider = javaProjectProvider;
 	}
 	
-	public JdtTypeProvider createTypeProvider(ResourceSet resourceSet) {
+	public IJdtTypeProvider createTypeProvider(ResourceSet resourceSet) {
 		if (resourceSet == null)
 			throw new IllegalArgumentException("resourceSet may not be null.");
 		IJavaProject javaProject = javaProjectProvider.getJavaProject(resourceSet);
-		JdtTypeProvider result = createJdtTypeProvider(javaProject, resourceSet);
+		IJdtTypeProvider result = createJdtTypeProvider(javaProject, resourceSet);
 		return result;
 	}
 
-	protected JdtTypeProvider createJdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet) {
+	protected IJdtTypeProvider createJdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet) {
+		if (javaProject == null)
+			return new NullJdtTypeProvider(resourceSet);
 		return new JdtTypeProvider(javaProject, resourceSet);
 	}
 
 	@Override
-	public JdtTypeProvider findTypeProvider(ResourceSet resourceSet) {
-		return (JdtTypeProvider) super.findTypeProvider(resourceSet);
-	}
-	
-	@Override
-	public JdtTypeProvider createTypeProvider() throws UnsupportedOperationException {
+	public IJdtTypeProvider createTypeProvider() throws UnsupportedOperationException {
 		throw new UnsupportedOperationException();
 	}
 	

@@ -8,7 +8,7 @@
 package org.eclipse.xtext.common.types.xtext.ui;
 
 import org.eclipse.xtext.common.types.access.ITypeProvider;
-import org.eclipse.xtext.common.types.access.jdt.JdtTypeProvider;
+import org.eclipse.xtext.common.types.access.jdt.IJdtTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
 
@@ -24,7 +24,7 @@ public class JdtBasedSimpleTypeScopeProvider extends AbstractTypeScopeProvider {
 
 	@Override
 	public JdtBasedSimpleTypeScope createTypeScope(ITypeProvider typeProvider) {
-		return new JdtBasedSimpleTypeScope((JdtTypeProvider) typeProvider);
+		return new JdtBasedSimpleTypeScope((IJdtTypeProvider) typeProvider);
 	}
 
 	public void setTypeProviderFactory(JdtTypeProviderFactory typeProviderFactory) {
