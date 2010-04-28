@@ -29,12 +29,12 @@ import com.google.inject.Inject;
  */
 public class SerializerUtil {
 
-	public static final SerializationOptions NO_FORMAT = new SerializationOptions(false, false);
+	public static final SerializationOptions NO_FORMAT = new SerializationOptions(false, true);
 
 	public static class SerializationOptions {
 
 		private boolean format = true;
-		private boolean validateConcreteSyntax = false;
+		private boolean validateConcreteSyntax = true;
 
 		public SerializationOptions() {
 		}
