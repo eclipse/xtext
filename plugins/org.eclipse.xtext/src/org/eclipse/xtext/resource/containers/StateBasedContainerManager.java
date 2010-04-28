@@ -33,7 +33,8 @@ public class StateBasedContainerManager implements IContainer.Manager {
 	public IContainer getContainer(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
 		String root = internalGetContainerHandle(desc, resourceDescriptions);
 		if (root == null) {
-			log.warn("Cannot find IContainer for: " + desc.getURI());
+			if (log.isDebugEnabled())
+				log.debug("Cannot find IContainer for: " + desc.getURI());
 			return IIgnoreCaseContainer.Null;
 		}
 		return createContainer(root, resourceDescriptions);
@@ -42,7 +43,8 @@ public class StateBasedContainerManager implements IContainer.Manager {
 	public List<IContainer> getVisibleContainers(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
 		String root = internalGetContainerHandle(desc, resourceDescriptions);
 		if (root == null) {
-			log.warn("Cannot find IContainer for: " + desc.getURI());
+			if (log.isDebugEnabled())
+				log.debug("Cannot find IContainer for: " + desc.getURI());
 			return Collections.emptyList();
 		}
 		List<String> handles = getState(resourceDescriptions).getVisibleContainerHandles(root);

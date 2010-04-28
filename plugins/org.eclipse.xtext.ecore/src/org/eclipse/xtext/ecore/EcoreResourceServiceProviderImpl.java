@@ -9,8 +9,8 @@ package org.eclipse.xtext.ecore;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.parser.IEncodingProvider;
+import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.resource.IContainer.Manager;
 import org.eclipse.xtext.validation.IResourceValidator;
 
 /**
@@ -18,7 +18,7 @@ import org.eclipse.xtext.validation.IResourceValidator;
  */
 public class EcoreResourceServiceProviderImpl implements IResourceServiceProvider {
 
-	public Manager getContainerManager() {
+	public IContainer.Manager getContainerManager() {
 		return null;
 	}
 

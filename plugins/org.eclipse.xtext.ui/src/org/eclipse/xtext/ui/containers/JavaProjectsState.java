@@ -178,6 +178,8 @@ public class JavaProjectsState extends WorkspaceProjectsState implements IElemen
 		if (file == null) {
 			return getJarWithEntry(uri);
 		}
+		if (!file.exists())
+			return null;
 		IPackageFragmentRoot root = getJavaElement(file);
 		if (root == null)
 			return getJarWithEntry(uri);

@@ -9,13 +9,17 @@ package org.eclipse.xtext.resource.impl;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.DescriptionUtils;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.util.IResourceScopeCache;
 
@@ -38,6 +42,9 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	
 	@Inject
 	private IResourceScopeCache cache = IResourceScopeCache.NullImpl.INSTANCE;
+	
+	@Inject
+	private DescriptionUtils descriptionUtils;
 	
 	private static final String CACHE_KEY = DefaultResourceDescriptionManager.class.getName() + "#getResourceDescription";
 	
@@ -94,4 +101,49 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 		}
 	}
 
+	public boolean isAffected(Collection<IResourceDescription.Delta> deltas,
+			IResourceDescription candidate,
+			IResourceDescriptions context) {
+		Set<URI> outgoingReferences = descriptionUtils.collectOutgoingReferences(candidate);
+		Set<URI> visibleResources = collectVisibleResources(candidate, context);
+		if (visibleResources.isEmpty()) // should at least contain the resource itself
+			return true;
+		for (IResourceDescription.Delta delta : deltas) {
+			if (delta.haveEObjectDescriptionsChanged()) {
+				URI deltaURI = delta.getUri();
+				if (outgoingReferences.contains(deltaURI)) {
+					return true;
+				}
+				if (visibleResources.contains(deltaURI)) {
+					if (isAffected(delta, candidate)) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	protected Set<URI> collectVisibleResources(IResourceDescription description, IResourceDescriptions allDescriptions) {
+		Set<URI> result = null;
+		List<IContainer> containers = containerManager.getVisibleContainers(description, allDescriptions);
+		for (IContainer container: containers) {
+			for(IResourceDescription resourceDescription: container.getResourceDescriptions()) {
+				if (result == null)
+					result = Sets.newHashSet();
+				result.add(resourceDescription.getURI());
+			}
+		}
+		if (result == null)
+			return Collections.emptySet();
+		return result;
+	}
+	
+	public DescriptionUtils getDescriptionUtils() {
+		return descriptionUtils;
+	}
+	
+	public void setDescriptionUtils(DescriptionUtils descriptionUtils) {
+		this.descriptionUtils = descriptionUtils;
+	}
 }

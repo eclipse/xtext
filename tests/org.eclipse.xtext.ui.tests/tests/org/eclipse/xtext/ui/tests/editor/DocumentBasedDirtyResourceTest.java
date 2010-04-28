@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -15,6 +17,7 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource;
@@ -194,22 +197,28 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 	}
 
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
-		fail("Unexpected call");
+		fail("Unexpected invocation");
+		return false;
+	}
+	
+	public boolean isAffected(Collection<Delta> deltas, IResourceDescription candidate,
+			IResourceDescriptions descriptions) throws IllegalArgumentException {
+		fail("Unexpected invocation");
 		return false;
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjects(EClass clazz) {
-		fail("Unexpected call");
+		fail("Unexpected invocation");
 		return null;
 	}
 	
 	public Iterable<IEObjectDescription> getExportedObjects(EClass clazz, String name) {
-		fail("Unexpected call");
+		fail("Unexpected invocation");
 		return null;
 	}
 	
 	public Iterable<IEObjectDescription> getExportedObjectsForEObject(EObject object) {
-		fail("Unexpected call");
+		fail("Unexpected invocation");
 		return null;
 	}
 	
@@ -218,12 +227,12 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 	}
 	
 	public Iterable<String> getImportedNames() {
-		fail("Unexpected call");
+		fail("Unexpected invocation");
 		return null;
 	}
 	
 	public org.eclipse.xtext.resource.IContainer.Manager getContainerManager() {
-		fail("Unexpected call");
+		fail("Unexpected invocation");
 		return null;
 	}
 

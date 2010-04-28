@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ecore;
 
+import java.util.Collection;
+
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
 
@@ -22,6 +25,11 @@ public class EcoreResourceDescriptionManager implements Manager {
 	}
 
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
+		return false;
+	}
+	
+	public boolean isAffected(Collection<Delta> deltas, IResourceDescription candidate,
+			IResourceDescriptions descriptions) throws IllegalArgumentException {
 		return false;
 	}
 

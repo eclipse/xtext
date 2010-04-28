@@ -237,7 +237,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(1, countMarkers(bar_file));
 		foo_project.getProject().open(monitor());
 		waitForAutoBuild();
-		assertEquals(0, countMarkers(bar_file));
+		assertEquals(printMarkers(bar_file), 0, countMarkers(bar_file));
 	}
 
 	public void testChangeReferencedFile() throws Exception {
