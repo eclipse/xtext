@@ -26,9 +26,13 @@ import org.eclipse.ui.IEditorPart;
 /**
  * @author Peter Friese - Initial contribution and API
  */
-public class MWELaunchUtils {
+public class WorkflowLaunchUtils {
 
-	private static final Logger logger = Logger.getLogger(MWELaunchUtils.class);
+	protected static final String MWE2_FILE_EXTENSION = "mwe2";
+	protected static final String MWE2_LAUNCH_SHORCUT_ID = "org.eclipse.emf.mwe2.launch.shortcut1";
+	
+	
+	protected static final Logger logger = Logger.getLogger(WorkflowLaunchUtils.class);
 
 	public static IResource workflowFileFor(ExecutionEvent event) {
 		IFile file = getSelectedFile(event);
@@ -55,22 +59,22 @@ public class MWELaunchUtils {
 
 	public static IResource workflowFileFor(IResource resource) {
 		IContainer parent = resource.getParent();
-		IPath location = parent.getProjectRelativePath().append("Generate" + resource.getName()).removeFileExtension()
-				.addFileExtension("mwe");
-		IResource workflowFile = resource.getProject().findMember(location);
+		IPath locationWithoutFileExtension = parent.getProjectRelativePath().append("Generate" + resource.getName()).removeFileExtension();
+		IResource workflowFile = resource.getProject().findMember(locationWithoutFileExtension
+				.addFileExtension(MWE2_FILE_EXTENSION));
 		return workflowFile;
 	}
 
 	/**
-	 * Find the MWE launch shortcut in the extension registry. Using this introspective approach to avoid an explicit
-	 * dependency to the <code>org.eclipse.emf.mwe.ui</code> bundle.
+	 * Find launch shortcut in the extension registry. Using this introspective approach to avoid an explicit
+	 * dependency to <code>org.eclipse.emf.mwe2.launch</code> bundle.
 	 */
-	private static ILaunchShortcut findMWELaunchShortcut() throws CoreException {
+	protected static ILaunchShortcut findLaunchShortcut() throws CoreException {
 		IConfigurationElement[] config = Platform.getExtensionRegistry().getConfigurationElementsFor(
 				"org.eclipse.debug.ui.launchShortcuts");
 		for (IConfigurationElement configurationElement : config) {
 			String id = configurationElement.getAttribute("id");
-			if (id.equals("org.eclipse.emf.mwe.ui.debug.launching.shortcut")) {
+			if (id.equals(MWE2_LAUNCH_SHORCUT_ID)) {
 				Object executableExtension = configurationElement.createExecutableExtension("class");
 				if (executableExtension instanceof ILaunchShortcut) {
 					ILaunchShortcut launchShortcut = (ILaunchShortcut) executableExtension;
@@ -81,13 +85,13 @@ public class MWELaunchUtils {
 		return null;
 	}
 
-	public static void invokeGenerator(IResource workflowFile, String mode) {
+	public static void runWorkflow(IResource workflowFile, String mode) {
 		try {
-			ILaunchShortcut launchShortcut = findMWELaunchShortcut();
+			ILaunchShortcut launchShortcut = findLaunchShortcut();
 			ISelection selection = new StructuredSelection(workflowFile);
 			launchShortcut.launch(selection, mode);
 		} catch (CoreException e) {
-			logger.error("Could not delegate to MWE launch shortcut.", e);
+			logger.error("Could not delegate to MWE2 launch shortcut.", e);
 			e.printStackTrace();
 		}
 	}
