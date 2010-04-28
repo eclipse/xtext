@@ -48,6 +48,10 @@ public interface ITokenSerializer {
 		public String serializeAssignedEnumLiteral(EObject context, RuleCall ruleCall, Object value, AbstractNode node);
 	}
 
+	public interface IErrorAcceptor {
+		public void error(String message);
+	}
+
 	@ImplementedBy(DefaultKeywordSerializer.class)
 	public interface IKeywordSerializer extends ITokenSerializer {
 
@@ -66,6 +70,8 @@ public interface ITokenSerializer {
 		public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, AbstractNode node);
 
 		public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, AbstractNode node);
+
+		public boolean isValid(EObject context, RuleCall ruleCall, Object value, IErrorAcceptor errorAcceptor);
 
 		public String serializeAssignedValue(EObject context, RuleCall ruleCall, Object value, AbstractNode node);
 
