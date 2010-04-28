@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.launcher;
 
-import static org.eclipse.xtext.xtext.launcher.MWELaunchUtils.*;
+import static org.eclipse.xtext.xtext.launcher.WorkflowLaunchUtils.*;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.debug.ui.ILaunchShortcut;
@@ -22,14 +22,14 @@ public class GenerateArtifactsLaunchShortcut implements ILaunchShortcut {
 	public void launch(ISelection selection, String mode) {
 		IResource workflowFile = workflowFileFor(selection);
 		if (workflowFile != null) {
-			invokeGenerator(workflowFile, mode);
+			runWorkflow(workflowFile, mode);
 		}
 	}
 
 	public void launch(IEditorPart editor, String mode) {
 		IResource workflowFile = workflowFileFor(editor);
 		if (workflowFile != null) {
-			invokeGenerator(workflowFile, mode);
+			runWorkflow(workflowFile, mode);
 		}
 	}
 

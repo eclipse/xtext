@@ -37,13 +37,13 @@ public class WorkflowPropertyTester extends PropertyTester {
 		IResource resource = (IResource) Platform.getAdapterManager().getAdapter(receiver,
 				org.eclipse.core.resources.IResource.class);
 		if (resource != null) {
-			return MWELaunchUtils.workflowFileAvailableForGrammarFile(resource);
+			return WorkflowLaunchUtils.workflowFileAvailableForGrammarFile(resource);
 		} else
 
 		if (receiver instanceof ContentOutlineNode) {
 			IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 			XtextEditor activeEditor = (XtextEditor) activePage.getActiveEditor();
-			return MWELaunchUtils.workflowFileAvailableFor(activeEditor);
+			return WorkflowLaunchUtils.workflowFileAvailableFor(activeEditor);
 		}
 
 		TextSelection textSelection = (TextSelection) Platform.getAdapterManager().getAdapter(receiver,
@@ -51,7 +51,7 @@ public class WorkflowPropertyTester extends PropertyTester {
 		if (textSelection != null) {
 			IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 			IEditorPart activeEditor = activePage.getActiveEditor();
-			return MWELaunchUtils.workflowFileAvailableFor(activeEditor);
+			return WorkflowLaunchUtils.workflowFileAvailableFor(activeEditor);
 		}
 
 		return false;
