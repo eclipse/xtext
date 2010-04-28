@@ -41,7 +41,7 @@ public interface IAssignmentQuantityAllocator {
 	}
 
 	public IQuantities getAssignmentQuantities(EObject obj, ISyntaxConstraint rule,
-			List<IConcreteSyntaxDiagnostic> acceptor);
+			List<IConcreteSyntaxDiagnostic> acceptor); // TODO: use IDiagnAcceptor
 
 	public int getFeatureQuantity(EObject obj, EStructuralFeature feat);
 }

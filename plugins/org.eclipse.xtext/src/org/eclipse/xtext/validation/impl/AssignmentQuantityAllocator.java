@@ -16,9 +16,11 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
+import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.IAssignmentQuantityAllocator;
 import org.eclipse.xtext.validation.IAssignmentQuantityIntervalProvider;
@@ -119,8 +121,18 @@ public class AssignmentQuantityAllocator implements IAssignmentQuantityAllocator
 	@Inject
 	protected ITransientValueService transSrvc;
 
-	protected boolean allowTransient(EStructuralFeature f, Collection<ISyntaxConstraint> ele) {
-		return f.getEType() instanceof EEnum || f.getEType() == EcorePackage.eINSTANCE.getEInt();
+	@Inject
+	protected IValueSerializer valueSerializer;
+
+	protected boolean allowTransient(EObject obj, EStructuralFeature feature, Collection<ISyntaxConstraint> constraint) {
+		if (feature.getEType() instanceof EEnum)
+			return true;
+		Object value = obj.eGet(feature);
+		List<RuleCall> ruleCalls = GrammarUtil.containedRuleCalls(constraint.iterator().next().getGrammarElement());
+		if (ruleCalls.isEmpty())
+			return false;
+		return valueSerializer.isValid(obj, ruleCalls.get(0), value, null);
+
 	}
 
 	protected void collectAssignments(ISyntaxConstraint rule, EObject obj, ISyntaxConstraint ele,
@@ -162,7 +174,9 @@ public class AssignmentQuantityAllocator implements IAssignmentQuantityAllocator
 		Multimap<EStructuralFeature, ISyntaxConstraint> allowTransients = Multimaps.newHashMultimap();
 		for (Map.Entry<EStructuralFeature, Integer> f : quants.getFeatureQuantities().entrySet()) {
 			Collection<ISyntaxConstraint> ass = assignments.get(f.getKey());
-			boolean allowTransient = !f.getKey().isMany() && f.getValue() == 0 && allowTransient(f.getKey(), ass);
+			if (ass.isEmpty())
+				continue;
+			boolean allowTransient = !f.getKey().isMany() && f.getValue() == 0 && allowTransient(obj, f.getKey(), ass);
 			boolean multiNeeded = ass.size() > 1 && f.getValue() != 0;
 			if (allowTransient)
 				allowTransients.putAll(f.getKey(), ass);

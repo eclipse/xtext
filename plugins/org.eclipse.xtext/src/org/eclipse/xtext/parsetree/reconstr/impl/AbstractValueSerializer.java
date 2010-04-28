@@ -25,6 +25,10 @@ public class AbstractValueSerializer implements ITokenSerializer.IValueSerialize
 		return false;
 	}
 
+	public boolean isValid(EObject context, RuleCall ruleCall, Object value, IErrorAcceptor errorAcceptor) {
+		return true;
+	}
+
 	public String serializeAssignedValue(EObject context, RuleCall ruleCall, Object value, AbstractNode node) {
 		return null;
 	}
