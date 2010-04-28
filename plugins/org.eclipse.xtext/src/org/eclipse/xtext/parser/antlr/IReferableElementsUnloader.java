@@ -23,14 +23,14 @@ public interface IReferableElementsUnloader {
 
 	void unloadRoot(EObject root);
 	
-	public final class NullUnloader implements IReferableElementsUnloader {
+	final class NullUnloader implements IReferableElementsUnloader {
 
 		public void unloadRoot(EObject root) {
 		}
 		
 	}
 	
-	public final class GenericUnloader implements IReferableElementsUnloader {
+	final class GenericUnloader implements IReferableElementsUnloader {
 
 		public void unloadRoot(EObject root) {
 			for(Iterator<EObject> i = EcoreUtil.getAllProperContents(root, false); i.hasNext();) {

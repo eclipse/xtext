@@ -32,11 +32,11 @@ public interface IValueConverter<Type> {
 	 * @return
 	 * @throws ValueConverterException
 	 */
-	public Type toValue(String string, AbstractNode node) throws ValueConverterException;
+	Type toValue(String string, AbstractNode node) throws ValueConverterException;
 	
 	/**
 	 * @param value
 	 * @return
 	 */
-	public String toString(Type value);
+	String toString(Type value);
 }

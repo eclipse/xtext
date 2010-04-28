@@ -25,8 +25,8 @@ public interface IResourceValidator {
 	 * @return all issues of the underlying resources (includes syntax errors as well as semantic problems)
 	 */
 	List<Issue> validate(Resource resource, CheckMode mode, CancelIndicator indicator);
-	
-	public static IResourceValidator NULL = new IResourceValidator() {
+
+	IResourceValidator NULL = new IResourceValidator() {
 		public List<Issue> validate(Resource resource, CheckMode mode, CancelIndicator indicator) {
 			return Collections.emptyList();
 		}

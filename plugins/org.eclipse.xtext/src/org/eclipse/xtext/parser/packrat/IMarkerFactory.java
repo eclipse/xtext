@@ -27,7 +27,7 @@ public interface IMarkerFactory {
 	 * Represents a nestable parser state
 	 * @author Sebastian Zarnekow - Initial contribution and API
 	 */
-	public interface IMarker {
+	interface IMarker {
 		/**
 		 * Discard all recorded information. Rolls
 		 * the parser's state back as it was before it was marked.

@@ -12,10 +12,11 @@ import com.google.inject.Injector;
 
 /**
  * TODO document me!
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
 public interface ISetup {
 
-	public Injector createInjectorAndDoEMFRegistration();
+	Injector createInjectorAndDoEMFRegistration();
 
 }

@@ -18,10 +18,10 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultHiddenTokenHelper.class)
 public interface IHiddenTokenHelper {
 
-	public boolean isWhitespace(AbstractRule rule);
+	boolean isWhitespace(AbstractRule rule);
 
-	public boolean isComment(AbstractRule rule);
+	boolean isComment(AbstractRule rule);
 
 	// is called when the formatter inserts whitespace
-	public AbstractRule getWhitespaceRuleFor(String whitespace);
+	AbstractRule getWhitespaceRuleFor(String whitespace);
 }

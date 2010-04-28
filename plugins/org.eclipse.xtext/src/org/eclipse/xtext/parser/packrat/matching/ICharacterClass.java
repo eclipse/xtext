@@ -14,7 +14,7 @@ public interface ICharacterClass {
 
 	boolean matches(char candidate);
 	
-	public class Factory {
+	class Factory {
 		private static class NullCharacterClass implements ICharacterClass {
 			private static ICharacterClass INSTANCE = new NullCharacterClass();
 			public boolean matches(char candidate) {

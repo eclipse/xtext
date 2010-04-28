@@ -23,7 +23,7 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultCommentAssociater.class)
 public interface ICommentAssociater {
 
-	public Map<LeafNode, EObject> associateCommentsWithSemanticEObjects(EObject model, Set<CompositeNode> roots);
+	Map<LeafNode, EObject> associateCommentsWithSemanticEObjects(EObject model, Set<CompositeNode> roots);
 
 	//	public void arrangeCommentsForEObject(EObject context, List<CommentOrSemanticToken> tokens);
 

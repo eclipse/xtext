@@ -20,30 +20,32 @@ public interface IAstFactory {
 
 	/**
 	 * creates an instance of the given type
-	 *
+	 * 
 	 * @param typeName
 	 * @return
 	 */
-	public EObject create(EClassifier clazz);
+	EObject create(EClassifier clazz);
 
 	/**
-	 *
+	 * 
 	 * sets the value to the feature of _this element
-	 *
+	 * 
 	 * @param _this
 	 * @param feature
 	 * @param value
 	 * @throws RecognitionException
 	 */
-	public void set(EObject _this, String feature, Object value, String lexerRule, AbstractNode node) throws ValueConverterException;
+	void set(EObject _this, String feature, Object value, String lexerRule, AbstractNode node)
+			throws ValueConverterException;
 
 	/**
 	 * adds the value to the feature of _this element
-	 *
+	 * 
 	 * @param _this
 	 * @param feature
 	 * @param value
 	 */
-	public void add(EObject _this, String feature, Object value, String lexerRule, AbstractNode node) throws ValueConverterException;
+	void add(EObject _this, String feature, Object value, String lexerRule, AbstractNode node)
+			throws ValueConverterException;
 
 }

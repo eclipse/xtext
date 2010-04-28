@@ -23,7 +23,7 @@ public interface IEncodingProvider {
 	String getEncoding(URI uri);
 
 	@Singleton
-	public class Runtime implements IEncodingProvider {
+	class Runtime implements IEncodingProvider {
 
 		public String getEncoding(URI uri) {
 			return Charset.defaultCharset().name();

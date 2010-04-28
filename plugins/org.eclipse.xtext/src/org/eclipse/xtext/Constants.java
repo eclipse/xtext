@@ -8,7 +8,7 @@
 package org.eclipse.xtext;
 
 public interface Constants {
-	public final static String LANGUAGE_NAME = "languageName";
-	public final static String FILE_EXTENSIONS = "file.extensions";
-	public final static String WORKFLOW_FILE = "workflow.file";
+	String LANGUAGE_NAME = "languageName";
+	String FILE_EXTENSIONS = "file.extensions";
+	String WORKFLOW_FILE = "workflow.file";
 }

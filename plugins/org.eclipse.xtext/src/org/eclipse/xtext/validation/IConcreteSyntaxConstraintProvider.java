@@ -25,45 +25,45 @@ import com.google.inject.ImplementedBy;
  */
 @ImplementedBy(ConcreteSyntaxConstraintProvider.class)
 public interface IConcreteSyntaxConstraintProvider {
-	public enum ConstraintType {
+	enum ConstraintType {
 		ACTION, ALTERNATIVE, ASSIGNMENT, GROUP
 	}
 
-	public interface ISyntaxConstraint {
+	interface ISyntaxConstraint {
 
-		public boolean dependsOn(ISyntaxConstraint ele);
+		boolean dependsOn(ISyntaxConstraint ele);
 
-		public ISyntaxConstraint findCommonContainer(ISyntaxConstraint obj1);
+		ISyntaxConstraint findCommonContainer(ISyntaxConstraint obj1);
 
-		public EStructuralFeature getAssignmentFeature(EClass clazz);
+		EStructuralFeature getAssignmentFeature(EClass clazz);
 
-		public String getAssignmentName();
+		String getAssignmentName();
 
-		public String getCardinality();
+		String getCardinality();
 
-		public ISyntaxConstraint getContainer();
+		ISyntaxConstraint getContainer();
 
-		public List<ISyntaxConstraint> getContents();
+		List<ISyntaxConstraint> getContents();
 
-		public AbstractElement getGrammarElement();
+		AbstractElement getGrammarElement();
 
-		public Set<EClass> getSemanticTypes();
+		Set<EClass> getSemanticTypes();
 
-		public Set<EClass> getSemanticTypesToCheck();
+		Set<EClass> getSemanticTypesToCheck();
 
-		public ConstraintType getType();
+		ConstraintType getType();
 
-		public boolean isMultiple();
+		boolean isMultiple();
 
-		public boolean isOptional();
+		boolean isOptional();
 
-		public boolean isRoot();
+		boolean isRoot();
 
-		public String toString(final Map<ISyntaxConstraint, String> postfix);
+		String toString(final Map<ISyntaxConstraint, String> postfix);
 
 	}
 
-	public ISyntaxConstraint getConstraint(ParserRule rule);
+	ISyntaxConstraint getConstraint(ParserRule rule);
 
-	public Collection<ISyntaxConstraint> getConstraints(EClass cls);
+	Collection<ISyntaxConstraint> getConstraints(EClass cls);
 }

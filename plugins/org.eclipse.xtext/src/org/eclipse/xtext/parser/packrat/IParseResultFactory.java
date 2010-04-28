@@ -20,15 +20,15 @@ import com.google.inject.ImplementedBy;
 public interface IParseResultFactory {
 
 	IParseResult createParseResult(AbstractParsedToken token, CharSequence input);
-	
-	public class NullParseResultFactory implements IParseResultFactory {
+
+	class NullParseResultFactory implements IParseResultFactory {
 
 		public static IParseResultFactory INSTANCE = new NullParseResultFactory();
-		
+
 		public IParseResult createParseResult(AbstractParsedToken tokens, CharSequence input) {
 			return new ParseResult();
 		}
-		
+
 	}
-	
+
 }

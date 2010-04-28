@@ -14,7 +14,7 @@ public interface ISequenceMatcher {
 
 	boolean matches(CharSequence input, int offset, int length);
 
-	public static class Factory {
+	class Factory {
 		private static class NullSequenceMatcher implements ISequenceMatcher {
 			private static ISequenceMatcher INSTANCE = new NullSequenceMatcher();
 			public boolean matches(CharSequence input, int offset, int length) {

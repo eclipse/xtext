@@ -24,7 +24,7 @@ public interface IDiagnosticConverter {
 	 * Accepts the created markers.
 	 * @author Sebastian Zarnekow - Initial contribution and API
 	 */
-	public interface Acceptor {
+	interface Acceptor {
 		
 		/**
 		 * Accepts the create markers. Implementors should ignore any null values that are passed to this method.
