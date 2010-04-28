@@ -137,8 +137,8 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
 		try {
 			IProject project = getProject();
-			final ToBeBuilt toBeBuilt = (isRecoveryBuild) ? toBeBuiltComputer.updateProjectNewResourcesOnly(
-					project, subMonitor.newChild(1)) : toBeBuiltComputer.updateProject(project, subMonitor.newChild(1));
+			final ToBeBuilt toBeBuilt = (isRecoveryBuild) ? toBeBuiltComputer.updateProjectNewResourcesOnly(project,
+					subMonitor.newChild(1)) : toBeBuiltComputer.updateProject(project, subMonitor.newChild(1));
 			doBuild(toBeBuilt, subMonitor.newChild(1));
 		} finally {
 			subMonitor.done();
@@ -150,4 +150,14 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 				&& ((IProject) delta.getResource()).isOpen();
 	}
 
+	@Override
+	protected void clean(IProgressMonitor monitor) throws CoreException {
+		SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
+		try {
+			ToBeBuilt toBeBuilt = toBeBuiltComputer.removeProject(getProject(), subMonitor.newChild(1));
+			doBuild(toBeBuilt, subMonitor.newChild(1));
+		} finally {
+			subMonitor.done();
+		}
+	}
 }

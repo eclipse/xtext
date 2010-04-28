@@ -12,6 +12,7 @@ import static org.eclipse.xtext.junit.util.JavaProjectSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.tests.Activator;
@@ -48,5 +49,11 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		file.delete(true, monitor());
 		waitForAutoBuild();
 		assertEquals(1, participant.getInvocationCount());
+		
+		participant.reset();
+		project.getProject().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor());
+		waitForAutoBuild();
+		assertEquals(2, participant.getInvocationCount());
 	}
+	
 }
