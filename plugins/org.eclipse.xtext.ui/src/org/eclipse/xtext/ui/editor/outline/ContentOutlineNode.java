@@ -136,8 +136,9 @@ public class ContentOutlineNode implements IAdaptable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((getLabel() == null) ? 0 : getLabel().hashCode());
+		result = prime * result + ((image == null) ? 0 : image.hashCode());
 		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
-		result = prime * result + ((region == null) ? 0 : region.hashCode());
+		result = prime * result + ((handle == null) ? 0 : handle.hashCode());
 		return result;
 	}
 
@@ -152,8 +153,19 @@ public class ContentOutlineNode implements IAdaptable {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-
 		final ContentOutlineNode other = (ContentOutlineNode) obj;
+		if(handle != null) {
+			return handle.equals(other.handle);
+		}
+		if (parent == null) {
+			if (other.parent != null) {
+				return false;
+			}
+		} else {
+			if (!parent.equals(other.parent)) {
+				return false;
+			}
+		}
 		if (getLabel() == null) {
 			if (other.getLabel() != null) {
 				return false;
@@ -161,21 +173,13 @@ public class ContentOutlineNode implements IAdaptable {
 		} else if (!getLabel().equals(other.getLabel())) {
 			return false;
 		}
-		if (parent == null) {
-			if (other.parent != null) {
+		if (image == null) {
+			if (other.image != null) {
 				return false;
 			}
-		} else if (!parent.equals(other.parent)) {
+		} else if (!image.equals(other.image)) {
 			return false;
 		}
-		if (region == null) {
-			if (other.region != null) {
-				return false;
-			}
-		} else if (!region.equals(other.region)) {
-			return false;
-		}
-
 		return true;
 	}
 

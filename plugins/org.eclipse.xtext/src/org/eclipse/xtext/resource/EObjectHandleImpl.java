@@ -57,5 +57,17 @@ public class EObjectHandleImpl<P extends EObject> implements IEObjectHandle<P> {
 			return work.exec(obj);
 		}
 	}
-
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof EObjectHandleImpl<?>) {
+			return uri.equals(((EObjectHandleImpl<?>) obj).getURI());
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return 7 * uri.hashCode();
+	}
 }
