@@ -19,10 +19,10 @@ import com.google.inject.Singleton;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Singleton
-public class WorkspaceProjectsState extends AbstractAllContainersState {
+public class StrictJavaProjectsState extends AbstractJavaProjectsState {
 
 	@Inject
-	private WorkspaceProjectsStateHelper helper;
+	private JavaProjectsStateHelper helper;
 	
 	@Override
 	protected String doInitHandle(URI uri) {
@@ -39,12 +39,11 @@ public class WorkspaceProjectsState extends AbstractAllContainersState {
 		return helper.initVisibleHandles(handle);
 	}
 	
-	public WorkspaceProjectsStateHelper getHelper() {
+	public JavaProjectsStateHelper getHelper() {
 		return helper;
 	}
 	
-	public void setHelper(WorkspaceProjectsStateHelper helper) {
+	public void setHelper(JavaProjectsStateHelper helper) {
 		this.helper = helper;
 	}
-
 }

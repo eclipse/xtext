@@ -19,21 +19,21 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.xtext.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.ui.containers.JavaProjectsState;
+import org.eclipse.xtext.ui.containers.AbstractJavaProjectsState;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class AbstractJavaProjectsStateTest extends AbstractAllContainersStateTests {
+public abstract class AbstractJavaProjectsStateTest extends AbstractAllContainersStateTests {
 
 	protected URI uri1;
 	protected URI uri2;
 	protected URI uri3;
 	
 	protected IJavaProject javaProject1;
-	protected JavaProjectsState projectsState;
+	protected AbstractJavaProjectsState projectsState;
 	protected IPackageFragmentRoot srcRoot;
 
 	@Override
@@ -54,9 +54,10 @@ public class AbstractJavaProjectsStateTest extends AbstractAllContainersStateTes
 					&& !uri.toString().endsWith("/.classpath");
 			}
 		};
-		projectsState = new JavaProjectsState();
-		projectsState.setMapper(mapper);
+		projectsState = createProjectsState(mapper);
 	}
+
+	protected abstract AbstractJavaProjectsState createProjectsState(IStorage2UriMapper mapper);
 	
 	@Override
 	public void testRemoveNature() throws CoreException {

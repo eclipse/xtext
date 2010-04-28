@@ -8,264 +8,63 @@
 package org.eclipse.xtext.ui.containers;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceVisitor;
-import org.eclipse.core.resources.IStorage;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.core.ElementChangedEvent;
-import org.eclipse.jdt.core.IElementChangedListener;
-import org.eclipse.jdt.core.IJarEntryResource;
-import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.core.IJavaElementDelta;
-import org.eclipse.jdt.core.IJavaModel;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.xtext.ui.resource.PackageFragmentRootWalker;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Singleton
-public class JavaProjectsState extends WorkspaceProjectsState implements IElementChangedListener {
+public class JavaProjectsState extends AbstractJavaProjectsState {
 
-	public static final String STRICT = "org.eclipse.xtext.ui.containers.JavaProjectsState.STRICT";
+	@Inject
+	private WorkspaceProjectsStateHelper projectsHelper;
 	
-	private final static Logger log = Logger.getLogger(JavaProjectsState.class);
-	
-	/**
-	 * Set <code>strict</code> to <code>true</code> to enforce model files to reside 
-	 * in Java project's source paths. Models in normal paths or simple java projects 
-	 * will not be found.
-	 */
-	@Named(JavaProjectsState.STRICT)
-	@Inject(optional = true)
-	private boolean strict = false;
+	@Inject
+	private JavaProjectsStateHelper javaProjectsHelper;
 	
 	@Override
-	protected void registerAsListener() {
-		super.registerAsListener();
-		JavaCore.addElementChangedListener(this);
-	}
-	
-	@Override
-	public void unregisterAsListener() {
-		JavaCore.removeElementChangedListener(this);
-		super.unregisterAsListener();
+	protected Collection<URI> doInitContainedURIs(String containerHandle) {
+		Collection<URI> result = javaProjectsHelper.initContainedURIs(containerHandle);
+		if (!result.isEmpty())
+			return result;
+		return projectsHelper.initContainedURIs(containerHandle);
 	}
 	
 	@Override
 	protected String doInitHandle(URI uri) {
-		IPackageFragmentRoot root = getPackageFragmentRoot(uri);
-		if (root != null)
-			return root.getHandleIdentifier();
-		if (strict)
-			return null;
-		return super.doInitHandle(uri);
-	}
-	
-	@Override
-	protected Collection<URI> doInitContainedURIs(String containerHandle) {
-		IJavaElement javaElement = JavaCore.create(containerHandle);
-		if (javaElement instanceof IPackageFragmentRoot) {
-			IPackageFragmentRoot root = (IPackageFragmentRoot) javaElement;
-			IJavaProject javaProject = root.getJavaProject();
-			if (!isAccessibleXtextProject(javaProject.getProject())) {
-				return Collections.emptyList();
-			}
-			final List<URI> uris = Lists.newArrayList();
-			if (root.isArchive() || root.isExternal()) {
-				try {
-					new PackageFragmentRootWalker<Void>() {
-						@Override
-						protected Void handle(IJarEntryResource jarEntry, TraversalState state) {
-							URI uri = getUri(jarEntry);
-							if (uri != null) {
-								uris.add(uri);	
-							}
-							return null;
-						}
-					}.traverse(root, false);
-					return uris;
-				} catch (JavaModelException e) {
-					if (!e.isDoesNotExist())
-						log.error(e.getMessage(), e);
-					return Collections.emptyList();
-				}
-			} else {
-				try {
-					IResource resource = root.getResource();
-					if (resource != null) {
-						IProject project = resource.getProject();
-						if (isAccessibleXtextProject(project)) {
-							resource.accept(new IResourceVisitor() {
-								public boolean visit(IResource resource) throws CoreException {
-									if (resource instanceof IStorage) {
-										URI uri = getUri((IStorage) resource);
-										if (uri != null) {
-											uris.add(uri);	
-										}
-										return false;
-									}
-									return true;
-								}
-							});
-						}
-					}
-					return uris;
-				} catch (CoreException e) {
-					log.error(e.getMessage(), e);
-					return Collections.emptyList();
-				}
-			}
-		}
-		if (strict)
-			return Collections.emptyList();
-		return super.doInitContainedURIs(containerHandle);
+		String result = javaProjectsHelper.initHandle(uri);
+		if (result != null)
+			return result;
+		return projectsHelper.initHandle(uri);
 	}
 	
 	@Override
 	protected List<String> doInitVisibleHandles(String handle) {
-		IJavaElement javaElement = JavaCore.create(handle);
-		if (javaElement != null) {
-			IJavaProject project = javaElement.getJavaProject();
-			if (isAccessibleXtextProject(project.getProject())) {
-				List<String> rootHandles = getPackageFragmentRootHandles(project);
-				return rootHandles;
-			} 
-			return Collections.emptyList();
-		}
-		if (strict)
-			return Collections.emptyList();
-		return super.doInitVisibleHandles(handle);
+		List<String> result = javaProjectsHelper.initVisibleHandles(handle);
+		if (!result.isEmpty())
+			return result;
+		return projectsHelper.initVisibleHandles(handle);
 	}
 	
-	protected List<String> getPackageFragmentRootHandles(IJavaProject project) {
-		List<String> result = Lists.newArrayList();
-		try {
-			IPackageFragmentRoot[] roots = project.getAllPackageFragmentRoots();
-			for (IPackageFragmentRoot root : roots) {
-				if (root != null && !"org.eclipse.jdt.launching.JRE_CONTAINER".equals(root.getRawClasspathEntry().getPath().toString()))
-					result.add(root.getHandleIdentifier());
-			}
-		} catch (JavaModelException e) {
-			if (!e.isDoesNotExist()) {
-				log.error("Cannot find rootHandles in project " + project.getProject().getName(), e);
-			}
-		}
-		return result;
+	public JavaProjectsStateHelper getJavaProjectsHelper() {
+		return javaProjectsHelper;
 	}
 	
-	protected IPackageFragmentRoot getPackageFragmentRoot(URI uri) {
-		if (uri.isArchive()) {
-			return getJarWithEntry(uri);
-		}
-		final IFile file = getWorkspaceRoot().getFile(new Path(uri.toPlatformString(true)));
-		if (file == null) {
-			return getJarWithEntry(uri);
-		}
-		if (!file.exists())
-			return null;
-		IPackageFragmentRoot root = getJavaElement(file);
-		if (root == null)
-			return getJarWithEntry(uri);
-		return root;
+	public void setJavaProjectsHelper(JavaProjectsStateHelper javaProjectsHelper) {
+		this.javaProjectsHelper = javaProjectsHelper;
 	}
 	
-	protected IPackageFragmentRoot getJavaElement(final IFile file) {
-		IJavaProject jp = JavaCore.create(file.getProject());
-		if (!jp.exists())
-			return null;
-		IPackageFragmentRoot[] roots;
-		try {
-			roots = jp.getPackageFragmentRoots();
-			for (IPackageFragmentRoot root : roots) {
-				if (root.getKind() == IPackageFragmentRoot.K_SOURCE) {
-					IResource resource2 = root.getUnderlyingResource();
-					if (resource2.contains(file))
-						return root;
-				}
-			}
-		} catch (JavaModelException e) {
-			if (!e.isDoesNotExist())
-				log.error(e.getMessage(), e);
-		}
-		return null;
-	}
-
-	protected IPackageFragmentRoot getJarWithEntry(URI uri) {
-		Iterable<IStorage> storages = getStorages(uri);
-		for (IStorage storage : storages) {
-			if (storage instanceof IJarEntryResource) {
-				IPackageFragmentRoot fragmentRoot = ((IJarEntryResource) storage).getPackageFragmentRoot();
-				if (fragmentRoot != null)
-					return fragmentRoot;
-			}
-		}
-		return null;
-	}
-
-	public void elementChanged(ElementChangedEvent event) {
-		if (event.getDelta() != null) {
-			if (isAffectingPackageFragmentRoots(event.getDelta())) {
-				initialize();
-			}
-		}
-	}
-
-	private boolean isAffectingPackageFragmentRoots(IJavaElementDelta delta) {
-		IJavaElement element = delta.getElement();
-		if (element instanceof IPackageFragmentRoot) {
-			if (delta.getKind() == IJavaElementDelta.REMOVED
-				|| delta.getKind() == IJavaElementDelta.ADDED
-				|| (delta.getFlags() & IJavaElementDelta.F_REORDER) != 0
-				|| (delta.getFlags() & IJavaElementDelta.F_REMOVED_FROM_CLASSPATH) != 0
-				|| (delta.getFlags() & IJavaElementDelta.F_ADDED_TO_CLASSPATH) != 0
-				|| (((IPackageFragmentRoot) element).isExternal() && (delta.getFlags() & // external folders change
-						(IJavaElementDelta.F_CONTENT 
-								| IJavaElementDelta.F_SOURCEATTACHED 
-								| IJavaElementDelta.F_SOURCEDETACHED)) == delta.getFlags())) {
-				return true;
-			}
-		} else if (element instanceof IJavaModel) {
-			return isAffectingPackageFragmentRoots(delta.getAffectedChildren());
-		} else if (element instanceof IJavaProject) {
-			if ((delta.getFlags() & IJavaElementDelta.F_CLASSPATH_CHANGED) != 0 ||
-					(delta.getFlags() & IJavaElementDelta.F_RESOLVED_CLASSPATH_CHANGED) != 0)
-				return true;
-			return isAffectingPackageFragmentRoots(delta.getAffectedChildren());
-		}
-		return false;
+	public WorkspaceProjectsStateHelper getProjectsHelper() {
+		return projectsHelper;
 	}
 	
-	private boolean isAffectingPackageFragmentRoots(IJavaElementDelta[] affectedChildren) {
-		for (IJavaElementDelta delta : affectedChildren) {
-			if (isAffectingPackageFragmentRoots(delta))
-				return true;
-		}
-		return false;
+	public void setProjectsHelper(WorkspaceProjectsStateHelper projectsHelper) {
+		this.projectsHelper = projectsHelper;
 	}
-
-	public void setStrict(boolean strict) {
-		this.strict = strict;
-	}
-
-	public boolean isStrict() {
-		return strict;
-	}
-
+	
 }

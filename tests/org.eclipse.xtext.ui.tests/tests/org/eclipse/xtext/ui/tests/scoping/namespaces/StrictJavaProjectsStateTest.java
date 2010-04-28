@@ -9,7 +9,11 @@ package org.eclipse.xtext.ui.tests.scoping.namespaces;
 
 import java.util.Collection;
 
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.ui.containers.JavaProjectsStateHelper;
+import org.eclipse.xtext.ui.containers.StrictJavaProjectsState;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -17,9 +21,14 @@ import org.eclipse.emf.common.util.URI;
 public class StrictJavaProjectsStateTest extends AbstractJavaProjectsStateTest {
 
 	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		projectsState.setStrict(true);
+	protected StrictJavaProjectsState createProjectsState(IStorage2UriMapper mapper) {
+		StrictJavaProjectsState result = new StrictJavaProjectsState();
+		result.setMapper(mapper);
+		JavaProjectsStateHelper javaProjectsStateHelper = new JavaProjectsStateHelper();
+		javaProjectsStateHelper.setMapper(mapper);
+		javaProjectsStateHelper.setWorkspace(ResourcesPlugin.getWorkspace());
+		result.setHelper(javaProjectsStateHelper);
+		return result;
 	}
 	
 	public void testGetContainerHandle() {

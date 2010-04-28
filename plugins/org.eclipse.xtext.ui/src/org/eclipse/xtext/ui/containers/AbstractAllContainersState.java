@@ -28,7 +28,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
-import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.Wrapper;
 
 import com.google.common.collect.ListMultimap;
@@ -36,17 +35,13 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
-import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractAllContainersState implements IResourceChangeListener, IAllContainersState {
+public abstract class AbstractAllContainersState extends AbstractStorage2UriMapperClient implements IResourceChangeListener, IAllContainersState {
 
 	private final static Logger log = Logger.getLogger(AbstractAllContainersState.class);
-	
-	@Inject
-	private IStorage2UriMapper mapper;
 	
 	private Map<URI, String> uriToHandle;
 	private ListMultimap<String, String> handleToVisibleHandles;
@@ -226,19 +221,4 @@ public abstract class AbstractAllContainersState implements IResourceChangeListe
 		return ResourcesPlugin.getWorkspace().getRoot();
 	}
 	
-	protected URI getUri(IStorage file) {
-		return mapper.getUri(file);
-	}
-	
-	protected Iterable<IStorage> getStorages(URI uri) {
-		return mapper.getStorages(uri);
-	}
-	
-	public void setMapper(IStorage2UriMapper mapper) {
-		this.mapper = mapper;
-	}
-	
-	public IStorage2UriMapper getMapper() {
-		return mapper;
-	}
 }

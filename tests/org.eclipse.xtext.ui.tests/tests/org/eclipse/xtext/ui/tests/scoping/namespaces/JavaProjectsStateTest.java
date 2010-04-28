@@ -10,15 +10,20 @@ package org.eclipse.xtext.ui.tests.scoping.namespaces;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.eclipse.xtext.ui.containers.JavaProjectsState;
+import org.eclipse.xtext.ui.containers.JavaProjectsStateHelper;
+import org.eclipse.xtext.ui.containers.WorkspaceProjectsStateHelper;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class LooseJavaProjectsStateTest extends AbstractJavaProjectsStateTest {
+public class JavaProjectsStateTest extends AbstractJavaProjectsStateTest {
 
 	private URI simpleUri1;
 	private URI simpleUri2;
@@ -30,7 +35,21 @@ public class LooseJavaProjectsStateTest extends AbstractJavaProjectsStateTest {
 		simpleUri1 = createFileAndRegisterResource(project1, "file1");
 		simpleUri2 = createFileAndRegisterResource(project1, "file2");
 		simpleUri3 = createFileAndRegisterResource(project2, "file3");
-		projectsState.setStrict(false);
+	}
+	
+	@Override
+	protected JavaProjectsState createProjectsState(IStorage2UriMapper mapper) {
+		JavaProjectsState result = new JavaProjectsState();
+		result.setMapper(mapper);
+		JavaProjectsStateHelper javaProjectsStateHelper = new JavaProjectsStateHelper();
+		javaProjectsStateHelper.setMapper(mapper);
+		javaProjectsStateHelper.setWorkspace(ResourcesPlugin.getWorkspace());
+		result.setJavaProjectsHelper(javaProjectsStateHelper);
+		WorkspaceProjectsStateHelper workspaceStateHelper = new WorkspaceProjectsStateHelper();
+		workspaceStateHelper.setMapper(mapper);
+		workspaceStateHelper.setWorkspace(ResourcesPlugin.getWorkspace());
+		result.setProjectsHelper(workspaceStateHelper);
+		return result;
 	}
 	
 	public void testGetContainerHandle() {

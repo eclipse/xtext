@@ -75,7 +75,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.syntaxcoloring.MergingHighlightedPositionAcceptorTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.label.DefaultEObjectLabelProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.label.LabelProviderInjectionTest.class);
-      suite.addTestSuite(org.eclipse.xtext.ui.tests.scoping.namespaces.LooseJavaProjectsStateTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.scoping.namespaces.JavaProjectsStateTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.scoping.namespaces.StrictJavaProjectsStateTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.scoping.namespaces.WorkspaceProjectsStateTest.class);
       return suite;
