@@ -26,6 +26,6 @@ public interface IAssignmentQuantityIntervalProvider {
 
 	public abstract int getMin(IQuantities ctx, ISyntaxConstraint assignment, Set<ISyntaxConstraint> involved);
 
-	public abstract int getMax(IQuantities ctx, ISyntaxConstraint ass, Set<ISyntaxConstraint> involved,
+	public abstract int getMax(IQuantities ctx, ISyntaxConstraint assignment, Set<ISyntaxConstraint> involved,
 			String excludeFeature);
 }

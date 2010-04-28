@@ -43,6 +43,22 @@ public class DefaultValueSerializer extends AbstractValueSerializer {
 		return converted != null && converted.equals(value);
 	}
 
+	@Override
+	public boolean isValid(EObject context, RuleCall ruleCall, Object value, IErrorAcceptor errorAcceptor) {
+		try {
+			String str = converter.toString(value, ruleCall.getRule().getName());
+			if (str != null)
+				return true;
+			if (errorAcceptor != null)
+				errorAcceptor.error("The value may not be null.");
+			return false;
+		} catch (Throwable e) {
+			if (errorAcceptor != null)
+				errorAcceptor.error(e.getMessage());
+			return false;
+		}
+	}
+
 	protected String serialize(AbstractNode node) {
 		if (node instanceof LeafNode)
 			return ((LeafNode) node).getText();
