@@ -42,8 +42,8 @@ public class AbstractNFATransition<S extends INFAState<S, T>, T extends INFATran
 
 	public int getPrecedence() {
 		INFAState<S, T> s = source;
-		int i = s.getFollowers().indexOf(this);
-		return i > -1 ? i : s.getParentFollowers().indexOf(this);
+		int i = s.getOutgoing().indexOf(this);
+		return i > -1 ? i : s.getOutgoingAfterReturn().indexOf(this);
 	}
 
 	public S getSource() {
