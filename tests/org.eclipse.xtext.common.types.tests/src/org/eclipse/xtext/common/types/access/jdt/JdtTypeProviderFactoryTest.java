@@ -41,13 +41,13 @@ public class JdtTypeProviderFactoryTest extends TestCase {
 	
 	public void testCreateTypeProvider_02() {
 		ResourceSet resourceSet = new ResourceSetImpl();
-		JdtTypeProvider typeProvider = factory.createTypeProvider(resourceSet);
+		IJdtTypeProvider typeProvider = factory.createTypeProvider(resourceSet);
 		assertNotNull(typeProvider);
 		assertEquals(resourceSet, typeProvider.getResourceSet());
 	}
 	
 	public void testCreateTypeProvider_03() {
-		JdtTypeProvider typeProvider = factory.createTypeProvider(new ResourceSetImpl());
+		IJdtTypeProvider typeProvider = factory.createTypeProvider(new ResourceSetImpl());
 		ResourceSet resourceSet = typeProvider.getResourceSet();
 		Map<String, Object> map = resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap();
 		assertEquals(typeProvider, map.get(URIHelperConstants.PROTOCOL));
@@ -60,7 +60,7 @@ public class JdtTypeProviderFactoryTest extends TestCase {
 	
 	public void testFindTypeProvider_02() {
 		ResourceSet resourceSet = new ResourceSetImpl();
-		JdtTypeProvider typeProvider = factory.createTypeProvider(resourceSet);
+		IJdtTypeProvider typeProvider = factory.createTypeProvider(resourceSet);
 		assertSame(typeProvider, factory.findTypeProvider(resourceSet));
 	}
 }
