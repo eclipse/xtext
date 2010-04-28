@@ -26,14 +26,14 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'#1'", "'#2'", "'kw1'", "'kw2'", "'#3'", "'kw3'", "'#4'", "'#5'", "'kw4'", "'kw5'", "'#6'", "'#7'", "'#8'", "'#9'", "'#10'", "'#11'", "'#12'", "'#13'", "'#14'", "'#15'", "'#16'", "'group'", "'#17'", "','", "'#18'", "'#19'", "'#20'", "'#21'", "'#22'", "'#23'", "'kw'", "'#24'", "'#25'", "'#26'", "'#27'", "'short'", "'one'", "'long'", "'extra'", "'two'", "'#28'", "'lit1'", "'lit2'"
     };
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
-    public static final int EOF=-1;
-    public static final int RULE_INT=5;
     public static final int RULE_STRING=6;
     public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
     public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
 
         public InternalConcreteSyntaxValidationTestLanguageParser(TokenStream input) {
             super(input);
@@ -8061,25 +8061,25 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
 
             if ( (LA42_0==RULE_ID) ) {
                 switch ( input.LA(2) ) {
-                case 48:
-                    {
-                    alt42=2;
-                    }
-                    break;
                 case 46:
                     {
                     alt42=1;
+                    }
+                    break;
+                case 48:
+                    {
+                    alt42=2;
                     }
                     break;
                 case RULE_ID:
                     {
                     int LA42_4 = input.LA(3);
 
-                    if ( (LA42_4==48) ) {
-                        alt42=2;
-                    }
-                    else if ( (LA42_4==46) ) {
+                    if ( (LA42_4==46) ) {
                         alt42=1;
+                    }
+                    else if ( (LA42_4==48) ) {
+                        alt42=2;
                     }
                     else {
                         NoViableAltException nvae =

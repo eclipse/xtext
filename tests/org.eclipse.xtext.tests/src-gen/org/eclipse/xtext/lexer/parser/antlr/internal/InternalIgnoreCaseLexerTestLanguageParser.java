@@ -25,12 +25,12 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "KEYWORD_2", "KEYWORD_1", "RULE_WS", "RULE_SL_COMMENT", "Tokens"
     };
-    public static final int RULE_WS=6;
     public static final int KEYWORD_1=5;
+    public static final int KEYWORD_2=4;
+    public static final int RULE_WS=6;
+    public static final int RULE_SL_COMMENT=7;
     public static final int EOF=-1;
     public static final int Tokens=8;
-    public static final int KEYWORD_2=4;
-    public static final int RULE_SL_COMMENT=7;
 
         public InternalIgnoreCaseLexerTestLanguageParser(TokenStream input) {
             super(input);

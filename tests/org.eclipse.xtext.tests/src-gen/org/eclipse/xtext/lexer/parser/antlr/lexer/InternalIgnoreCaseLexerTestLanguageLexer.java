@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
-    public static final int RULE_WS=6;
     public static final int KEYWORD_1=5;
-    public static final int EOF=-1;
-    public static final int Tokens=8;
     public static final int KEYWORD_2=4;
+    public static final int RULE_WS=6;
+    public static final int Tokens=8;
+    public static final int EOF=-1;
     public static final int RULE_SL_COMMENT=7;
     public InternalIgnoreCaseLexerTestLanguageLexer() {;} 
     public InternalIgnoreCaseLexerTestLanguageLexer(CharStream input) {

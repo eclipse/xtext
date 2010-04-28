@@ -78,7 +78,7 @@ protected class Sequence_Group extends GroupToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
@@ -109,7 +109,7 @@ protected class Sequence_AdditionParserRuleCall_0 extends RuleCallToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -269,7 +269,7 @@ protected class Addition_Group extends GroupToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -490,7 +490,7 @@ protected class Multiplication_Group extends GroupToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -711,7 +711,7 @@ protected class Term_Alternatives extends AlternativesToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}
@@ -877,7 +877,7 @@ protected class Parens_Group extends GroupToken {
     @Override
 	public IInstanceDescription tryConsume() {
 		if(current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())
+		   current.getDelegate().eClass() == grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

@@ -11,18 +11,18 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalDummyTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
-    public static final int T11=11;
-    public static final int EOF=-1;
-    public static final int RULE_INT=6;
     public static final int RULE_STRING=5;
-    public static final int T12=12;
-    public static final int Tokens=14;
     public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_INT=6;
+    public static final int T11=11;
+    public static final int T12=12;
     public static final int T13=13;
+    public static final int RULE_WS=9;
+    public static final int Tokens=14;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
     public InternalDummyTestLanguageLexer() {;} 
     public InternalDummyTestLanguageLexer(CharStream input) {
         super(input);
@@ -851,13 +851,13 @@ public class InternalDummyTestLanguageLexer extends Lexer {
 
     private int mTokensHelper009() throws RecognitionException {
         switch ( input.LA(2) ) {
-        case '/':
-            {
-            return 8;
-            }
         case '*':
             {
             return 7;
+            }
+        case '/':
+            {
+            return 8;
             }
         default:
             return 10;}

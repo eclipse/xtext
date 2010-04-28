@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalEncodingTestLanguageLexer extends Lexer {
+    public static final int RULE_ANY_OTHER=6;
+    public static final int RULE_LEXEME=4;
     public static final int RULE_WS=5;
     public static final int EOF=-1;
-    public static final int RULE_LEXEME=4;
     public static final int Tokens=7;
-    public static final int RULE_ANY_OTHER=6;
     public InternalEncodingTestLanguageLexer() {;} 
     public InternalEncodingTestLanguageLexer(CharStream input) {
         super(input);

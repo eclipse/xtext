@@ -2834,8 +2834,8 @@ protected class Assignment_Alternatives extends AlternativesToken {
 
     @Override
 	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getMonoListAssignmentRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getBiSingleAssignmentRule().getType().getClassifier())
+		if(current.getDelegate().eClass() == grammarAccess.getBiListAssignmentRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getMonoSingleAssignmentRule().getType().getClassifier())
 			return tryConsumeVal();
 		return null;
 	}

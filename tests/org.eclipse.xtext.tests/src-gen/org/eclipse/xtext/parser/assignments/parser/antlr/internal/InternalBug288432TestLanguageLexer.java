@@ -11,23 +11,23 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalBug288432TestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=7;
-    public static final int T14=14;
     public static final int RULE_ID=5;
-    public static final int T11=11;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int EOF=-1;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int Tokens=19;
+    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_STRING=4;
+    public static final int RULE_INT=6;
+    public static final int T11=11;
     public static final int T12=12;
     public static final int T13=13;
-    public static final int T18=18;
+    public static final int T14=14;
     public static final int RULE_WS=9;
     public static final int T15=15;
-    public static final int RULE_INT=6;
-    public static final int EOF=-1;
-    public static final int T17=17;
-    public static final int Tokens=19;
-    public static final int RULE_ANY_OTHER=10;
     public static final int T16=16;
-    public static final int RULE_SL_COMMENT=8;
+    public static final int T17=17;
+    public static final int T18=18;
     public InternalBug288432TestLanguageLexer() {;} 
     public InternalBug288432TestLanguageLexer(CharStream input) {
         super(input);
@@ -893,20 +893,49 @@ public class InternalBug288432TestLanguageLexer extends Lexer {
 
     private int mTokensHelper005() throws RecognitionException {
         switch ( input.LA(2) ) {
-        case 'l':
+        case 'n':
             {
             int LA12_20 = input.LA(3);
 
-            if ( (LA12_20=='e') ) {
+            if ( (LA12_20=='d') ) {
                 int LA12_29 = input.LA(4);
 
-                if ( (LA12_29=='m') ) {
+                if ( (LA12_29==' ') ) {
                     int LA12_33 = input.LA(5);
 
-                    if ( (LA12_33=='e') ) {
-                        int LA12_37 = input.LA(6);
+                    if ( (LA12_33=='b') ) {
+                        return 5;
+                    }
+                    else if ( (LA12_33=='c') ) {
+                        return 7;
+                    }
+                    else {
+                        NoViableAltException nvae =
+                            new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 33, input);
 
-                        if ( (LA12_37=='n') ) {
+                        throw nvae;
+                    }
+                }
+                else {
+                    return 9;}
+            }
+            else {
+                return 9;}
+            }
+        case 'l':
+            {
+            int LA12_21 = input.LA(3);
+
+            if ( (LA12_21=='e') ) {
+                int LA12_30 = input.LA(4);
+
+                if ( (LA12_30=='m') ) {
+                    int LA12_34 = input.LA(5);
+
+                    if ( (LA12_34=='e') ) {
+                        int LA12_39 = input.LA(6);
+
+                        if ( (LA12_39=='n') ) {
                             int LA12_41 = input.LA(7);
 
                             if ( (LA12_41=='t') ) {
@@ -926,35 +955,6 @@ public class InternalBug288432TestLanguageLexer extends Lexer {
                     }
                     else {
                         return 9;}
-                }
-                else {
-                    return 9;}
-            }
-            else {
-                return 9;}
-            }
-        case 'n':
-            {
-            int LA12_21 = input.LA(3);
-
-            if ( (LA12_21=='d') ) {
-                int LA12_30 = input.LA(4);
-
-                if ( (LA12_30==' ') ) {
-                    int LA12_34 = input.LA(5);
-
-                    if ( (LA12_34=='b') ) {
-                        return 5;
-                    }
-                    else if ( (LA12_34=='c') ) {
-                        return 7;
-                    }
-                    else {
-                        NoViableAltException nvae =
-                            new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 34, input);
-
-                        throw nvae;
-                    }
                 }
                 else {
                     return 9;}

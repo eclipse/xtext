@@ -26,14 +26,14 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'Model'", "'DataType'", "'--'"
     };
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
-    public static final int EOF=-1;
-    public static final int RULE_INT=5;
     public static final int RULE_STRING=6;
     public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
     public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
 
         public InternalBug296889TestLanguageParser(TokenStream input) {
             super(input);
@@ -737,15 +737,15 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             if ( (LA5_0==13) ) {
                 int LA5_1 = input.LA(2);
 
-                if ( (LA5_1==RULE_ID) ) {
-                    int LA5_3 = input.LA(3);
+                if ( (LA5_1==EOF||LA5_1==13) ) {
+                    alt5=1;
+                }
+                else if ( (LA5_1==RULE_ID) ) {
+                    int LA5_4 = input.LA(3);
 
                     if ( (synpred5()) ) {
                         alt5=1;
                     }
-                }
-                else if ( (LA5_1==EOF||LA5_1==13) ) {
-                    alt5=1;
                 }
             }
             switch (alt5) {
@@ -1502,11 +1502,11 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
     }
     // $ANTLR end synpred7
 
-    public final boolean synpred7() {
+    public final boolean synpred5() {
         backtracking++;
         int start = input.mark();
         try {
-            synpred7_fragment(); // can never throw exception
+            synpred5_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -1516,11 +1516,11 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
         failed=false;
         return success;
     }
-    public final boolean synpred5() {
+    public final boolean synpred7() {
         backtracking++;
         int start = input.mark();
         try {
-            synpred5_fragment(); // can never throw exception
+            synpred7_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
