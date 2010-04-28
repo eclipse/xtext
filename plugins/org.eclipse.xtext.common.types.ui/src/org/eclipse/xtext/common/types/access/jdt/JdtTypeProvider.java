@@ -22,7 +22,7 @@ import org.eclipse.xtext.common.types.access.impl.AbstractTypeProvider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JdtTypeProvider extends AbstractTypeProvider {
+public class JdtTypeProvider extends AbstractTypeProvider implements IJdtTypeProvider {
 
 	private final IJavaProject javaProject;
 

@@ -7,12 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.xtext.ui;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
 import org.eclipse.jdt.core.search.IJavaSearchScope;
@@ -20,7 +22,7 @@ import org.eclipse.jdt.core.search.SearchEngine;
 import org.eclipse.jdt.core.search.TypeNameRequestor;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.Primitives;
-import org.eclipse.xtext.common.types.access.jdt.JdtTypeProvider;
+import org.eclipse.xtext.common.types.access.jdt.IJdtTypeProvider;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScope;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -32,15 +34,18 @@ import com.google.common.collect.Lists;
  */
 public class JdtBasedSimpleTypeScope extends AbstractTypeScope {
 
-	public JdtBasedSimpleTypeScope(JdtTypeProvider typeProvider) {
+	public JdtBasedSimpleTypeScope(IJdtTypeProvider typeProvider) {
 		super(typeProvider);
 	}
 
 	@Override
 	public Iterable<IEObjectDescription> internalGetContents() {
+		IJavaProject javaProject = getTypeProvider().getJavaProject();
+		if (javaProject == null)
+			return Collections.emptyList();
 		final List<IEObjectDescription> allScopedElements = Lists.newArrayListWithExpectedSize(25000);
 		try {
-			IJavaSearchScope searchScope = SearchEngine.createJavaSearchScope(new IJavaElement[] { getTypeProvider().getJavaProject() });
+			IJavaSearchScope searchScope = SearchEngine.createJavaSearchScope(new IJavaElement[] { javaProject });
 			for(Class<?> clazz: Primitives.ALL_PRIMITIVE_TYPES) {
 				IEObjectDescription primitive = createScopedElement(clazz.getName());
 				if (primitive != null)
@@ -93,8 +98,8 @@ public class JdtBasedSimpleTypeScope extends AbstractTypeScope {
 	}
 	
 	@Override
-	public JdtTypeProvider getTypeProvider() {
-		return (JdtTypeProvider) super.getTypeProvider();
+	public IJdtTypeProvider getTypeProvider() {
+		return (IJdtTypeProvider) super.getTypeProvider();
 	}
 
 }
