@@ -15,20 +15,20 @@ import org.eclipse.xtext.AbstractElement;
  */
 public interface IGrammarNFAProvider<S, T> {
 
-	public interface NFABuilder<S, T> {
+	interface NFABuilder<S, T> {
 
-		public boolean filter(AbstractElement ele);
+		boolean filter(AbstractElement ele);
 
-		public NFADirection getDirection();
+		NFADirection getDirection();
 
-		public S getState(AbstractElement ele);
+		S getState(AbstractElement ele);
 
-		public T getTransition(S source, S target, boolean isRuleCall);
+		T getTransition(S source, S target, boolean isRuleCall);
 	}
 
-	public enum NFADirection {
+	enum NFADirection {
 		BACKWARD, FORWARD
 	}
 
-	public S getNFA(AbstractElement element);
+	S getNFA(AbstractElement element);
 }

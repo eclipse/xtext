@@ -13,11 +13,11 @@ package org.eclipse.xtext.grammaranalysis;
  */
 @SuppressWarnings("rawtypes")
 public interface INFATransition<S extends INFAState, T extends INFATransition> {
-	public int getPrecedence();
+	int getPrecedence();
 
-	public S getSource();
+	S getSource();
 
-	public S getTarget();
+	S getTarget();
 
-	public boolean isRuleCall();
+	boolean isRuleCall();
 }

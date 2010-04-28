@@ -15,6 +15,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ErrorAcceptor {
 	
-	public void acceptError(TransformationErrorCode errorCode, String message, EObject element);
+	void acceptError(TransformationErrorCode errorCode, String message, EObject element);
 	
 }

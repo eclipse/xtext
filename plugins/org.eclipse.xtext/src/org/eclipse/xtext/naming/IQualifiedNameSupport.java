@@ -17,7 +17,7 @@ public interface IQualifiedNameSupport {
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
 	 */
-	public class DefaultImpl implements IQualifiedNameSupport {
+	class DefaultImpl implements IQualifiedNameSupport {
 		public String getDelimiter() {
 			return ".";
 		}

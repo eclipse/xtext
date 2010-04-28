@@ -14,7 +14,6 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
  */
 public interface IFormatter {
 
-	public ITokenStream createFormatterStream(String initalIndentation,
-			ITokenStream outputStream, boolean preserveWhitespaces);
+	ITokenStream createFormatterStream(String initalIndentation, ITokenStream outputStream, boolean preserveWhitespaces);
 
 }

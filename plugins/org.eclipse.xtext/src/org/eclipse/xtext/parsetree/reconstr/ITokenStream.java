@@ -15,12 +15,10 @@ import org.eclipse.emf.ecore.EObject;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public interface ITokenStream {
-	
-	public void flush() throws IOException;
 
-	public void writeHidden(EObject grammarElement, String value)
-			throws IOException;
+	void flush() throws IOException;
 
-	public void writeSemantic(EObject grammarElement, String value)
-			throws IOException;
+	void writeHidden(EObject grammarElement, String value) throws IOException;
+
+	void writeSemantic(EObject grammarElement, String value) throws IOException;
 }

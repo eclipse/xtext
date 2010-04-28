@@ -14,14 +14,14 @@ import org.eclipse.xtext.parsetree.CompositeNode;
  */
 public interface INodeModelFormatter {
 
-	public interface IFormattedRegion {
-		public String getFormattedText();
+	interface IFormattedRegion {
+		String getFormattedText();
 
-		public int getLenght();
+		int getLenght();
 
-		public int getOffset();
+		int getOffset();
 	}
 
-	public IFormattedRegion format(CompositeNode root, int offset, int length);
+	IFormattedRegion format(CompositeNode root, int offset, int length);
 
 }

@@ -18,17 +18,17 @@ import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider.NFABuilder;
  */
 @SuppressWarnings("rawtypes")
 public interface INFAState<S extends INFAState, T extends INFATransition> {
-	public NFABuilder<S, T> getBuilder();
+	NFABuilder<S, T> getBuilder();
 
-	public AbstractElement getElement();
+	AbstractElement getElement(); // TODO: getGrammarElement
 
-	public List<T> getFollowers();
+	List<T> getFollowers(); // TODO: getOutgoing
 
-	public List<T> getLocalIncomming();
-	
-	public List<T> getParentFollowers();
+	List<T> getLocalIncomming(); // TODO: getIncommingWithoutRuleCalls
 
-	public boolean isEndState();
+	List<T> getParentFollowers(); // TODO: getOutgoingAfterReturn // TODO: createFollowerAfterReturn
 
-	public boolean isStartState();
+	boolean isEndState();
+
+	boolean isStartState();
 }

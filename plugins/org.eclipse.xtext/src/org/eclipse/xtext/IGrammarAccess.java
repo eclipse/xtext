@@ -11,29 +11,28 @@ import java.util.List;
 
 import org.eclipse.xtext.util.Pair;
 
-
 /**
  * TODO Javadoc
  */
 public interface IGrammarAccess {
 
 	/**
-     * TODO can we use generics instead of inheritance?
-     */
-	public interface IAbstractRuleAccess {
-		public AbstractRule getRule();
+	 * TODO can we use generics instead of inheritance?
+	 */
+	interface IAbstractRuleAccess {
+		AbstractRule getRule();
 	}
 
-	public interface IParserRuleAccess extends IAbstractRuleAccess {
-		public ParserRule getRule();
+	interface IParserRuleAccess extends IAbstractRuleAccess {
+		ParserRule getRule();
 	}
-	
-	public interface IEnumRuleAccess extends IAbstractRuleAccess {
-		public EnumRule getRule();
-	}
-	
-	public List<Pair<Keyword, Keyword>> findKeywordPairs(String leftKw, String rightKw);
 
-	public Grammar getGrammar();
+	interface IEnumRuleAccess extends IAbstractRuleAccess {
+		EnumRule getRule();
+	}
+
+	List<Pair<Keyword, Keyword>> findKeywordPairs(String leftKw, String rightKw);
+
+	Grammar getGrammar();
 
 }

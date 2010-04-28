@@ -24,7 +24,7 @@ public interface IExternalContentSupport {
 	/**
 	 * Lightweight abstraction for a contributor of external state.
 	 */
-	public interface IExternalContentProvider {
+	interface IExternalContentProvider {
 		
 		/**
 		 * Get the content that will shadow the persistent state.

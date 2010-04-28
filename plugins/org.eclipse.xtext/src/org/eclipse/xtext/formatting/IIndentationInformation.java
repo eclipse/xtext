@@ -14,5 +14,5 @@ public interface IIndentationInformation {
 	/**
 	 * returns the string used to indent a line one level
 	 */
-	public String getIndentString();
+	String getIndentString();
 }

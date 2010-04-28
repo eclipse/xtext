@@ -25,7 +25,7 @@ public interface IScope {
     /**
      * The <code>NULLSCOPE</code> to be returned by the most outer scope
      */
-    public final static IScope NULLSCOPE = new IScope() {
+    final IScope NULLSCOPE = new IScope() {
 		
     	public Iterable<IEObjectDescription> getAllContents() {
     		return Collections.emptyList();

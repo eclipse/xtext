@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse  License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
@@ -20,7 +20,7 @@ import org.eclipse.xtext.parsetree.reconstr.impl.DefaultValueSerializer;
 import com.google.inject.ImplementedBy;
 
 /**
- * @author meysholdt - Initial contribution and API
+ * @author Moritz Eysholdt - Initial contribution and API
  */
 public interface ITokenSerializer {
 
@@ -34,49 +34,49 @@ public interface ITokenSerializer {
 	 * Implementations might introduce some kind of scoping.
 	 */
 	@ImplementedBy(DefaultCrossReferenceSerializer.class)
-	public interface ICrossReferenceSerializer extends ITokenSerializer {
+	interface ICrossReferenceSerializer extends ITokenSerializer {
 
-		public boolean equalsOrReplacesNode(EObject context, CrossReference crossref, EObject target, AbstractNode node);
+		boolean equalsOrReplacesNode(EObject context, CrossReference crossref, EObject target, AbstractNode node);
 
-		public String serializeCrossRef(EObject context, CrossReference crossref, EObject target, AbstractNode node);
+		String serializeCrossRef(EObject context, CrossReference crossref, EObject target, AbstractNode node);
 	}
 
 	@ImplementedBy(DefaultEnumLiteralSerializer.class)
-	public interface IEnumLiteralSerializer extends ITokenSerializer {
-		public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, AbstractNode node);
+	interface IEnumLiteralSerializer extends ITokenSerializer {
+		boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, AbstractNode node);
 
-		public String serializeAssignedEnumLiteral(EObject context, RuleCall ruleCall, Object value, AbstractNode node);
+		String serializeAssignedEnumLiteral(EObject context, RuleCall ruleCall, Object value, AbstractNode node);
 	}
 
-	public interface IErrorAcceptor {
-		public void error(String message);
+	interface IErrorAcceptor {
+		void error(String message);
 	}
 
 	@ImplementedBy(DefaultKeywordSerializer.class)
-	public interface IKeywordSerializer extends ITokenSerializer {
+	interface IKeywordSerializer extends ITokenSerializer {
 
-		public boolean equalsOrReplacesNode(EObject context, Keyword keyword, AbstractNode node);
+		boolean equalsOrReplacesNode(EObject context, Keyword keyword, AbstractNode node);
 
-		public boolean equalsOrReplacesNode(EObject context, Keyword keyword, Object value, AbstractNode node);
+		boolean equalsOrReplacesNode(EObject context, Keyword keyword, Object value, AbstractNode node);
 
-		public String serializeAssignedKeyword(EObject context, Keyword keyword, Object value, AbstractNode node);
+		String serializeAssignedKeyword(EObject context, Keyword keyword, Object value, AbstractNode node);
 
-		public String serializeUnassignedKeyword(EObject context, Keyword keyword, AbstractNode node);
+		String serializeUnassignedKeyword(EObject context, Keyword keyword, AbstractNode node);
 	}
 
 	@ImplementedBy(DefaultValueSerializer.class)
-	public interface IValueSerializer extends ITokenSerializer {
+	interface IValueSerializer extends ITokenSerializer {
 
-		public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, AbstractNode node);
+		boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, AbstractNode node);
 
-		public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, AbstractNode node);
+		boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, AbstractNode node);
 
-		public boolean isValid(EObject context, RuleCall ruleCall, Object value, IErrorAcceptor errorAcceptor);
+		boolean isValid(EObject context, RuleCall ruleCall, Object value, IErrorAcceptor errorAcceptor);
 
-		public String serializeAssignedValue(EObject context, RuleCall ruleCall, Object value, AbstractNode node);
+		String serializeAssignedValue(EObject context, RuleCall ruleCall, Object value, AbstractNode node);
 
-		public String serializeUnassignedValue(EObject context, RuleCall ruleCall, AbstractNode node);
+		String serializeUnassignedValue(EObject context, RuleCall ruleCall, AbstractNode node);
 	}
 
-	public final static String KEEP_VALUE_FROM_NODE_MODEL = new String();
+	final static String KEEP_VALUE_FROM_NODE_MODEL = new String();
 }

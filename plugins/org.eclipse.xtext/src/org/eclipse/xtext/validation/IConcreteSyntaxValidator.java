@@ -20,7 +20,7 @@ import org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider.IConcreteS
  */
 public interface IConcreteSyntaxValidator {
 
-	public class DiagnosticChainAcceptor implements IDiagnosticAcceptor {
+	class DiagnosticChainAcceptor implements IDiagnosticAcceptor {
 
 		private DiagnosticChain chain;
 
@@ -48,7 +48,7 @@ public interface IConcreteSyntaxValidator {
 
 	}
 
-	public class InvalidConcreteSyntaxException extends RuntimeException {
+	class InvalidConcreteSyntaxException extends RuntimeException {
 
 		private static final long serialVersionUID = -6599356530663272947L;
 
@@ -75,12 +75,12 @@ public interface IConcreteSyntaxValidator {
 
 	}
 
-	public interface IDiagnosticAcceptor {
-		public void accept(IConcreteSyntaxDiagnostic diag);
+	interface IDiagnosticAcceptor {
+		void accept(IConcreteSyntaxDiagnostic diag);
 	}
 
-	public boolean validateObject(EObject obj, IDiagnosticAcceptor acceptor, Map<Object, Object> context);
+	boolean validateObject(EObject obj, IDiagnosticAcceptor acceptor, Map<Object, Object> context);
 
-	public boolean validateRecursive(EObject obj, IDiagnosticAcceptor acceptor, Map<Object, Object> context);
+	boolean validateRecursive(EObject obj, IDiagnosticAcceptor acceptor, Map<Object, Object> context);
 
 }

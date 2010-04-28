@@ -20,12 +20,11 @@ import com.google.inject.ImplementedBy;
  */
 @ImplementedBy(AssignmentQuantityIntervalProvider.class)
 public interface IAssignmentQuantityIntervalProvider {
-	public static int MAX = Integer.MAX_VALUE;
+	int MAX = Integer.MAX_VALUE;
 
-	public static int UNDEF = -1;
+	int UNDEF = -1;
 
-	public abstract int getMin(IQuantities ctx, ISyntaxConstraint assignment, Set<ISyntaxConstraint> involved);
+	int getMin(IQuantities ctx, ISyntaxConstraint assignment, Set<ISyntaxConstraint> involved);
 
-	public abstract int getMax(IQuantities ctx, ISyntaxConstraint assignment, Set<ISyntaxConstraint> involved,
-			String excludeFeature);
+	int getMax(IQuantities ctx, ISyntaxConstraint assignment, Set<ISyntaxConstraint> involved, String excludeFeature);
 }

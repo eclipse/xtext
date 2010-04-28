@@ -31,6 +31,6 @@ public interface IScopeProvider {
 	 *         passed context and reference. Note for implementors: The result may not be <code>null</code>.
 	 *         Return <code>IScope.NULLSCOPE</code> instead.
 	 */
-	public IScope getScope(EObject context, EReference reference);
+	IScope getScope(EObject context, EReference reference);
 
 }

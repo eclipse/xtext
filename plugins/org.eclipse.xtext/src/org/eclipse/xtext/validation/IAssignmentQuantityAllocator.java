@@ -24,24 +24,23 @@ import com.google.inject.ImplementedBy;
  */
 @ImplementedBy(AssignmentQuantityAllocator.class)
 public interface IAssignmentQuantityAllocator {
-	public interface IQuantities {
+	interface IQuantities {
 
-		public Map<ISyntaxConstraint, Integer> getAssignmentQuantities();
+		Map<ISyntaxConstraint, Integer> getAssignmentQuantities();
 
-		public Integer getAssignmentQuantity(ISyntaxConstraint assignement);
+		Integer getAssignmentQuantity(ISyntaxConstraint assignement);
 
-		public EObject getEObject();
+		EObject getEObject();
 
-		public Map<EStructuralFeature, Integer> getFeatureQuantities();
+		Map<EStructuralFeature, Integer> getFeatureQuantities();
 
-		public Integer getFeatureQuantity(EStructuralFeature feat);
+		Integer getFeatureQuantity(EStructuralFeature feat);
 
-		public Map<EStructuralFeature, Collection<ISyntaxConstraint>> groupByFeature();
+		Map<EStructuralFeature, Collection<ISyntaxConstraint>> groupByFeature();
 
 	}
 
-	public IQuantities getAssignmentQuantities(EObject obj, ISyntaxConstraint rule,
-			List<IConcreteSyntaxDiagnostic> acceptor); // TODO: use IDiagnAcceptor
+	IQuantities getAssignmentQuantities(EObject obj, ISyntaxConstraint rule, List<IConcreteSyntaxDiagnostic> acceptor); // TODO: use IDiagnAcceptor
 
-	public int getFeatureQuantity(EObject obj, EStructuralFeature feat);
+	int getFeatureQuantity(EObject obj, EStructuralFeature feat);
 }

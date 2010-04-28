@@ -19,17 +19,17 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface IParseTreeConstructor {
 
-	public interface TreeConstructionDiagnostic {
-		public EObject getEObject();
+	interface TreeConstructionDiagnostic {
+		EObject getEObject();
 
-		public String getLikelyErrorReasons();
+		String getLikelyErrorReasons();
 	}
 
-	public interface TreeConstructionReport {
-		public List<TreeConstructionDiagnostic> getDiagnostics();
+	interface TreeConstructionReport {
+		List<TreeConstructionDiagnostic> getDiagnostics();
 
-		public boolean isSuccess();
+		boolean isSuccess();
 	}
 
-	public TreeConstructionReport serializeRecursive(EObject object, ITokenStream out) throws IOException;
+	TreeConstructionReport serializeRecursive(EObject object, ITokenStream out) throws IOException;
 }

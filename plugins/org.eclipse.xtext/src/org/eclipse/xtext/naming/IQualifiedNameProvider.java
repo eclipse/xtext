@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import com.google.common.base.Function;
 
 /**
- * Provides qualified names for EObjects. 
+ * Provides qualified names for EObjects.
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -28,7 +28,7 @@ public interface IQualifiedNameProvider extends Function<EObject, String> {
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
 	 */
-	public static abstract class AbstractImpl implements IQualifiedNameProvider {
+	abstract class AbstractImpl implements IQualifiedNameProvider {
 		public String apply(EObject from) {
 			return getQualifiedName(from);
 		}

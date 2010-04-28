@@ -15,8 +15,8 @@ import org.eclipse.xtext.parsetree.AbstractNode;
  */
 public interface IValueConverterService {
 
-	public Object toValue(String string, String lexerRule, AbstractNode node) throws ValueConverterException;
+	Object toValue(String string, String lexerRule, AbstractNode node) throws ValueConverterException;
 
-	public String toString(Object value, String lexerRule);
+	String toString(Object value, String lexerRule);
 
 }
