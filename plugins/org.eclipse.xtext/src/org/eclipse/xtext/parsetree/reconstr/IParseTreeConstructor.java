@@ -9,7 +9,6 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -19,18 +18,18 @@ import org.eclipse.emf.ecore.EObject;
  * @author Moritz Eysholt
  */
 public interface IParseTreeConstructor {
-	
-	public TreeConstructionReport serializeRecursive(EObject object, ITokenStream out)
-			throws IOException;
-	
-	public interface TreeConstructionReport {
-		public boolean isSuccess();
-		public TreeConstructionDiagnostic getDiagnostic();
-	}
-	
+
 	public interface TreeConstructionDiagnostic {
 		public EObject getEObject();
-		public List<String> getLikelyErrorReasons(int count);
-		public Collection<? extends TreeConstructionDiagnostic> getSubDiagnostics();
-	} 
+
+		public String getLikelyErrorReasons();
+	}
+
+	public interface TreeConstructionReport {
+		public List<TreeConstructionDiagnostic> getDiagnostics();
+
+		public boolean isSuccess();
+	}
+
+	public TreeConstructionReport serializeRecursive(EObject object, ITokenStream out) throws IOException;
 }
