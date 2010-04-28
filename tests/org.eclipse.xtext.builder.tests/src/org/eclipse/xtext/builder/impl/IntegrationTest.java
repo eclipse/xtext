@@ -18,6 +18,7 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -324,6 +325,29 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(0, countResourcesInIndex());
 	}
 	
+	public void testCleanBuild() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		IFolder folder = addSourceFolder(project, "src");
+		IFile file = folder.getFile("Foo" + F_EXT);
+		file.create(new StringInputStream("object Foo"), true, monitor());
+		waitForAutoBuild();
+		assertTrue(indexContainsElement(file.getFullPath().toString(),"Foo"));
+		assertEquals(1, countResourcesInIndex());
+		
+		getBuilderState().addListener(this);
+		project.getProject().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor());
+		waitForAutoBuild();
+		// clean build should first remove the IResourceDescriptor and then add it again  
+		assertEquals(2, getEvents().size());
+		assertEquals(1, getEvents().get(0).getDeltas().size());
+		assertNotNull(getEvents().get(0).getDeltas().get(0).getOld());
+		assertNull(getEvents().get(0).getDeltas().get(0).getNew());
+		assertEquals(1,getEvents().get(1).getDeltas().size());
+		assertNull(getEvents().get(1).getDeltas().get(0).getOld());
+		assertNotNull(getEvents().get(1).getDeltas().get(0).getNew());
+	}
+	
 	public void testFileInJar() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
@@ -377,7 +401,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(BuilderTestLanguagePackage.Literals.ELEMENT__REFERENCES,next.getEReference());
 	}
 	
-	public void testCleanBuild() throws Exception {
+	public void testFullBuild() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IProject someProject = createProject("bar");
