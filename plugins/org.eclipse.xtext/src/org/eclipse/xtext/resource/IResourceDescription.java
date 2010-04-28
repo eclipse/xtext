@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -58,6 +60,9 @@ public interface IResourceDescription {
 	 */
 	Iterable<IReferenceDescription> getReferenceDescriptions();
 
+	/**
+	 * @return the uri of the described resource. Will not return <code>null</code>.
+	 */
 	URI getURI();
 
 	@ImplementedBy(DefaultResourceDescriptionManager.class)
@@ -75,6 +80,22 @@ public interface IResourceDescription {
 		 *             if this manager is not responsible for the given candidate.
 		 */
 		boolean isAffected(IResourceDescription.Delta delta, IResourceDescription candidate)
+				throws IllegalArgumentException;
+
+		/**
+		 * Batch operation to check whether a description is affected by any given delta in
+		 * the given context. Implementations may perform any optimizations to return <code>false</code> whenever
+		 * possible, e.g. check the deltas against the visible containers.
+		 * @param deltas List of deltas to check. May not be <code>null</code>.
+		 * @param candidate The description to check. May not be <code>null</code>.
+		 * @param context The current context of the batch operation. May not be <code>null</code>.
+		 * @return whether the condidate is affected by any of the given changes.
+		 * @throws IllegalArgumentException
+		 *             if this manager is not responsible for the given candidate.
+		 */
+		boolean isAffected(Collection<IResourceDescription.Delta> deltas,
+				IResourceDescription candidate,
+				IResourceDescriptions context)
 				throws IllegalArgumentException;
 
 	}
