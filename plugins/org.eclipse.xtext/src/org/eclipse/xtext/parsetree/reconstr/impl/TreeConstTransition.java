@@ -32,11 +32,11 @@ public class TreeConstTransition extends
 			return -1;
 		if (precedence < 0) {
 			int i = 0;
-			for (TreeConstTransition t : source.getFollowers())
+			for (TreeConstTransition t : source.getOutgoing())
 				if (t.getStatus() == Status.ENABLED)
 					t.precedence = i++;
 			i = 0;
-			for (TreeConstTransition t : source.getParentFollowers())
+			for (TreeConstTransition t : source.getOutgoingAfterReturn())
 				if (t.getStatus() == Status.ENABLED)
 					t.precedence = i++;
 		}

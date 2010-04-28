@@ -20,13 +20,13 @@ import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider.NFABuilder;
 public interface INFAState<S extends INFAState, T extends INFATransition> {
 	NFABuilder<S, T> getBuilder();
 
-	AbstractElement getElement(); // TODO: getGrammarElement
+	AbstractElement getGrammarElement();
 
-	List<T> getFollowers(); // TODO: getOutgoing
+	List<T> getIncommingWithoutRuleCalls();
 
-	List<T> getLocalIncomming(); // TODO: getIncommingWithoutRuleCalls
+	List<T> getOutgoing();
 
-	List<T> getParentFollowers(); // TODO: getOutgoingAfterReturn // TODO: createFollowerAfterReturn
+	List<T> getOutgoingAfterReturn();
 
 	boolean isEndState();
 

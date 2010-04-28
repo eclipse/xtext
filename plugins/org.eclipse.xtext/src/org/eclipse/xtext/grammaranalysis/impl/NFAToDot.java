@@ -24,13 +24,13 @@ public class NFAToDot extends GrammarToDot {
 		Node n = super.drawAbstractElementTree(ele, d);
 		DefaultNFAState nfas = nfaProvider.getNFA(ele);
 
-		for (DefaultNFATransition t : nfas.getFollowers())
+		for (DefaultNFATransition t : nfas.getOutgoing())
 			d.add(drawFollowerEdge(ele, t, false));
-		for (DefaultNFATransition t : nfas.getParentFollowers())
+		for (DefaultNFATransition t : nfas.getOutgoingAfterReturn())
 			d.add(drawFollowerEdge(ele, t, true));
 
-		if (nfas.getFollowers().size() == 0
-				&& nfas.getParentFollowers().size() == 0 && !nfas.isEndState())
+		if (nfas.getOutgoing().size() == 0
+				&& nfas.getOutgoingAfterReturn().size() == 0 && !nfas.isEndState())
 			n.setStyle("dotted");
 		if (nfas.isEndState())
 			n.put("peripheries", "2");
@@ -39,7 +39,7 @@ public class NFAToDot extends GrammarToDot {
 
 	protected Edge drawFollowerEdge(AbstractElement ele,
 			DefaultNFATransition t, boolean isParent) {
-		Edge e = new Edge(ele, t.getTarget().getElement());
+		Edge e = new Edge(ele, t.getTarget().getGrammarElement());
 		e.setLabel(String.valueOf(t.getPrecedence()));
 		e.setStyle("dotted");
 		if (isParent)

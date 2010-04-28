@@ -33,9 +33,9 @@ public class TreeConstNFAToDot extends GrammarToDot {
 		Node n = super.drawAbstractElementTree(ele, d);
 		TreeConstState nfas = nfaProvider.getNFA(ele);
 
-		for (TreeConstTransition t : nfas.getFollowers())
+		for (TreeConstTransition t : nfas.getOutgoing())
 			d.add(drawFollowerEdge(ele, t, false));
-		for (TreeConstTransition t : nfas.getParentFollowers())
+		for (TreeConstTransition t : nfas.getOutgoingAfterReturn())
 			d.add(drawFollowerEdge(ele, t, true));
 
 		if (nfas.getStatInt() != Status.ENABLED)
@@ -48,7 +48,7 @@ public class TreeConstNFAToDot extends GrammarToDot {
 	}
 
 	protected Edge drawFollowerEdge(AbstractElement ele, TreeConstTransition t, boolean isParent) {
-		Edge e = new Edge(ele, t.getTarget().getElement());
+		Edge e = new Edge(ele, t.getTarget().getGrammarElement());
 		if (t.getPrecedence() > -1)
 			e.setLabel(String.valueOf(t.getPrecedence()));
 		e.setStyle("dotted");

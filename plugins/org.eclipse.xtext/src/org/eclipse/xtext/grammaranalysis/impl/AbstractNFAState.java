@@ -47,9 +47,9 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 
 	protected boolean endState = false;
 
-	protected List<T> followers;
+	protected List<T> outgoing;
 
-	protected List<T> ruleCalls;
+	protected List<T> outgoingRuleCalls;
 
 	public AbstractNFAState(AbstractElement element, NFABuilder<S, T> builder) {
 		super();
@@ -63,20 +63,20 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 			collectCalledRules(ele);
 			collectFollowers(ele);
 		} else {
-			followers.add(builder.getTransition((S) this, builder.getState(ele), false));
+			outgoing.add(builder.getTransition((S) this, builder.getState(ele), false));
 		}
 	}
 
 	protected void collectAllFollowers() {
 		if (filter(element))
-			followers = ruleCalls = Collections.emptyList();
+			outgoing = outgoingRuleCalls = Collections.emptyList();
 		else {
-			followers = new ArrayList<T>();
-			ruleCalls = new ArrayList<T>();
+			outgoing = new ArrayList<T>();
+			outgoingRuleCalls = new ArrayList<T>();
 			collectCalledRules(element);
 			collectFollowers(element);
-			removeDuplicates(followers);
-			removeDuplicates(ruleCalls);
+			removeDuplicates(outgoing);
+			removeDuplicates(outgoingRuleCalls);
 		}
 	}
 
@@ -91,7 +91,8 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 			if (r.getRule() instanceof ParserRule) {
 				ParserRule pr = (ParserRule) r.getRule();
 				if (!GrammarUtil.isDatatypeRule(pr))
-					ruleCalls.add(builder.getTransition((S) this, builder.getState(pr.getAlternatives()), true));
+					outgoingRuleCalls
+							.add(builder.getTransition((S) this, builder.getState(pr.getAlternatives()), true));
 			}
 	}
 
@@ -182,7 +183,7 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 	protected void collectReferencesToThis(S match, Set<Object> visited, List<T> following) {
 		if (!visited.add(this))
 			return;
-		for (T transition : concat(getFollowers(), getParentFollowers()))
+		for (T transition : concat(getOutgoing(), getOutgoingAfterReturn()))
 			if (!transition.isRuleCall()) {
 				((AbstractNFAState) transition.getTarget()).collectReferencesToThis(match, visited, following);
 				if (transition.getTarget() == match)
@@ -200,32 +201,32 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 		return builder;
 	}
 
-	public AbstractElement getElement() {
+	public AbstractElement getGrammarElement() {
 		return element;
 	}
 
-	public List<T> getFollowers() {
-		if (followers == null || ruleCalls == null)
-			collectAllFollowers();
-		return ruleCalls.size() == 0 ? followers : ruleCalls;
-	}
-
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public List<T> getLocalIncomming() {
+	public List<T> getIncommingWithoutRuleCalls() {
 		List<T> result = Lists.newArrayList();
 		AbstractElement rootEle = containingRule(element).getAlternatives();
 		((AbstractNFAState) builder.getState(rootEle)).collectReferencesToThis(this, Sets.newHashSet(), result);
 		return result;
 	}
 
-	public List<T> getParentFollowers() {
-		if (followers == null || ruleCalls == null)
+	public List<T> getOutgoing() {
+		if (outgoing == null || outgoingRuleCalls == null)
 			collectAllFollowers();
-		return ruleCalls.size() == 0 ? ruleCalls : followers;
+		return outgoingRuleCalls.size() == 0 ? outgoing : outgoingRuleCalls;
+	}
+
+	public List<T> getOutgoingAfterReturn() {
+		if (outgoing == null || outgoingRuleCalls == null)
+			collectAllFollowers();
+		return outgoingRuleCalls.size() == 0 ? outgoingRuleCalls : outgoing;
 	}
 
 	public boolean isEndState() {
-		if (followers == null || ruleCalls == null)
+		if (outgoing == null || outgoingRuleCalls == null)
 			collectAllFollowers();
 		return endState;
 	}

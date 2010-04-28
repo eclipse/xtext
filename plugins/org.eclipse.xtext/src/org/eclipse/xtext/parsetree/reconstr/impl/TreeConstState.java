@@ -47,9 +47,9 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 
 	protected Map<TreeConstState, Integer> distances;
 
-	protected List<TreeConstTransition> enabledFollowers;
+	protected List<TreeConstTransition> enabledOutgoing;
 
-	protected List<TreeConstTransition> enabledParentFollowers;
+	protected List<TreeConstTransition> enabledOutgoingAfterReturn;
 
 	protected Map<TreeConstState, Integer> endDistances;
 
@@ -73,7 +73,7 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 			root = this;
 			dist = 0;
 		}
-		for (TreeConstTransition t : concat(getFollowers(), getParentFollowers()))
+		for (TreeConstTransition t : concat(getOutgoing(), getOutgoingAfterReturn()))
 			if (!t.isRuleCall())
 				t.getTarget().calculateDistances(root, dist + 1);
 		if (isEndState())
@@ -89,7 +89,7 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 			consume(getEndDistances());
 			vEnd = true;
 		}
-		for (TreeConstTransition t : concat(getFollowers(), getParentFollowers())) {
+		for (TreeConstTransition t : concat(getOutgoing(), getOutgoingAfterReturn())) {
 			if (t.isRuleCall() || t.getStatus() != Status.ENABLED)
 				continue;
 			if (t.getTarget().checkForAmbigiousPaths(visited) != Status.ENABLED
@@ -112,7 +112,7 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 		if (isEndState() && isTransitionEnabledTo(getEndDistances()))
 			vEnd = true;
 
-		for (TreeConstTransition t : concat(getFollowers(), getParentFollowers())) {
+		for (TreeConstTransition t : concat(getOutgoing(), getOutgoingAfterReturn())) {
 			if (t.isRuleCall())
 				continue;
 			if (t.getTarget().checkForDetoursAndLoops(visited) != Status.ENABLED
@@ -140,14 +140,14 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 	protected void discardMisleadingDistances(Set<TreeConstState> visited) {
 		if (!visited.add(this))
 			return;
-		for (TreeConstTransition t : concat(getFollowers(), getParentFollowers())) {
+		for (TreeConstTransition t : concat(getOutgoing(), getOutgoingAfterReturn())) {
 			if (!t.isRuleCall())
 				t.getTarget().discardMisleadingDistances(visited);
 		}
 		if (isConsumingElement() || isEndState())
 			return;
 		Set<TreeConstState> doNotRemove = new HashSet<TreeConstState>();
-		for (TreeConstTransition t : concat(getFollowers(), getParentFollowers())) {
+		for (TreeConstTransition t : concat(getOutgoing(), getOutgoingAfterReturn())) {
 			if (!t.isRuleCall()) {
 				TreeConstState target = t.getTarget();
 				Map<TreeConstState, Integer> targetDistances = target.distances;
@@ -165,24 +165,24 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 		distances.keySet().retainAll(doNotRemove);
 	}
 
-	public List<TreeConstTransition> getEnabledFollowers() {
-		if (enabledFollowers == null) {
-			enabledFollowers = new ArrayList<TreeConstTransition>();
-			for (TreeConstTransition t : getFollowers())
+	public List<TreeConstTransition> getEnabledOutgoing() {
+		if (enabledOutgoing == null) {
+			enabledOutgoing = new ArrayList<TreeConstTransition>();
+			for (TreeConstTransition t : getOutgoing())
 				if (!t.isDisabled())
-					enabledFollowers.add(t);
+					enabledOutgoing.add(t);
 		}
-		return enabledFollowers;
+		return enabledOutgoing;
 	}
 
-	public List<TreeConstTransition> getEnabledParentFollowers() {
-		if (enabledParentFollowers == null) {
-			enabledParentFollowers = new ArrayList<TreeConstTransition>();
-			for (TreeConstTransition t : getParentFollowers())
+	public List<TreeConstTransition> getEnabledOutgoingAfterReturn() {
+		if (enabledOutgoingAfterReturn == null) {
+			enabledOutgoingAfterReturn = new ArrayList<TreeConstTransition>();
+			for (TreeConstTransition t : getOutgoingAfterReturn())
 				if (!t.isDisabled())
-					enabledParentFollowers.add(t);
+					enabledOutgoingAfterReturn.add(t);
 		}
-		return enabledParentFollowers;
+		return enabledOutgoingAfterReturn;
 	}
 
 	protected Map<TreeConstState, Integer> getEndDistances() {
@@ -195,7 +195,7 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 
 	protected Status getStatInt() {
 		if (status == Status.UNKNOWN)
-			status = isEndState() || getFollowers().size() > 0 || getParentFollowers().size() > 0 ? Status.ENABLED
+			status = isEndState() || getOutgoing().size() > 0 || getOutgoingAfterReturn().size() > 0 ? Status.ENABLED
 					: Status.ORPHAN;
 		return status;
 	}
@@ -226,7 +226,7 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 			if (t != null)
 				localTypes.put(t.getClassifier(), t);
 
-		List<TreeConstTransition> incomming = getLocalIncomming();
+		List<TreeConstTransition> incomming = getIncommingWithoutRuleCalls();
 		if (incomming.isEmpty())
 			return sortTypes(localTypes.values());
 		for (TreeConstTransition t : incomming)
@@ -251,8 +251,8 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 		} else {
 			types = Sets.newHashSet();
 			typesDirty = true;
-			for (TreeConstTransition t : concat(getFollowers(), getParentFollowers())) {
-				if (t.isDisabled() || (t.isRuleCall() && getElement() instanceof Assignment))
+			for (TreeConstTransition t : concat(getOutgoing(), getOutgoingAfterReturn())) {
+				if (t.isDisabled() || (t.isRuleCall() && getGrammarElement() instanceof Assignment))
 					continue;
 				t.getTarget().initTypes(map, endStates);
 				List<TreeConstState> orgins = map.get(t.getTarget());
@@ -299,13 +299,13 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 		if (origins != null)
 			for (TreeConstState origin : origins) {
 				Set<TypeRef> t = types;
-				if (origin.getElement() instanceof Action && ((Action) origin.getElement()).getFeature() != null)
+				if (origin.getGrammarElement() instanceof Action && ((Action) origin.getGrammarElement()).getFeature() != null)
 					t = Collections.emptySet();
 				else if (t.contains(null) && origin.isConsumingElement()) {
 					t = Sets.newHashSet(t);
 					t.remove(null);
-					if (origin.getElement() instanceof Assignment)
-						t.add(GrammarUtil.containingRule(origin.getElement()).getType());
+					if (origin.getGrammarElement() instanceof Assignment)
+						t.add(GrammarUtil.containingRule(origin.getGrammarElement()).getType());
 				}
 				if (origin.getTypes().addAll(t) || origin.typesDirty)
 					origin.populateTypes(map);
