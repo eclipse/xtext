@@ -35,8 +35,10 @@ public class WorkspaceProjectsState extends AbstractAllContainersState {
 	
 	@Override
 	protected String doInitHandle(URI uri) {
+		if (!uri.isPlatform())
+			return null;
 		final IFile file = getWorkspaceRoot().getFile(new Path(uri.toPlatformString(true)));
-		if (file == null) {
+		if (file == null || !file.exists()) {
 			return null;
 		}
 		final IProject project = file.getProject();

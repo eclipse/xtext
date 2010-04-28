@@ -13,6 +13,7 @@ public class AllTests {
       TestSuite suite = new TestSuite("Tests for org.eclipse.xtext.builder.tests");
       suite.addTestSuite(org.eclipse.xtext.builder.builderState.BinaryResourceBasedPersisterTest.class);
       suite.addTestSuite(org.eclipse.xtext.builder.builderState.PersistableResourceDescriptionsTest.class);
+      suite.addTestSuite(org.eclipse.xtext.builder.builderState.ResourceDescriptionUpdaterTest.class);
       suite.addTestSuite(org.eclipse.xtext.builder.builderState.XMIBasedPersisterTest.class);
       suite.addTestSuite(org.eclipse.xtext.builder.impl.BuilderParticipantTest.class);
       suite.addTestSuite(org.eclipse.xtext.builder.impl.IntegrationTest.class);

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,6 +22,7 @@ import org.eclipse.xtext.naming.SimpleNameProvider;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.IContainer.Manager;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
@@ -361,6 +363,11 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 	}
 
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
+		return false;
+	}
+	
+	public boolean isAffected(Collection<Delta> deltas, IResourceDescription candidate,
+			IResourceDescriptions descriptions) throws IllegalArgumentException {
 		return false;
 	}
 	
