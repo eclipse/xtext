@@ -5,9 +5,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-grammar org.eclipse.xtext.ui.tests.LocationProviderTestLanguage with org.eclipse.xtext.common.Terminals
+grammar org.eclipse.xtext.resource.LocationProviderTestLanguage with org.eclipse.xtext.common.Terminals
 
-generate locationprovidertest "http://xtext.org/locationProviderTestLaguage"
+generate locationprovidertest "http://www.xtext.org/locationProviderTestLaguage"
 
 Model :
 	(elements+=Element)*;
