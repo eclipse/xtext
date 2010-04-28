@@ -1,5 +1,5 @@
 
-package org.eclipse.xtext.ui.tests;
+package org.eclipse.xtext.resource;
 
 /**
  * Initialization support for running Xtext languages 

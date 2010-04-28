@@ -10,10 +10,9 @@ package org.eclipse.xtext.resource;
 import java.util.List;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.ui.tests.LocationProviderTestLanguageStandaloneSetup;
-import org.eclipse.xtext.ui.tests.locationprovidertest.Element;
-import org.eclipse.xtext.ui.tests.locationprovidertest.LocationprovidertestPackage;
-import org.eclipse.xtext.ui.tests.locationprovidertest.Model;
+import org.eclipse.xtext.resource.locationprovidertest.Element;
+import org.eclipse.xtext.resource.locationprovidertest.LocationprovidertestPackage;
+import org.eclipse.xtext.resource.locationprovidertest.Model;
 import org.eclipse.xtext.util.TextLocation;
 
 /**
