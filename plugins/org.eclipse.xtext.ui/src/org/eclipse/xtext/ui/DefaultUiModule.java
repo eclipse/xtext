@@ -44,6 +44,7 @@ import org.eclipse.xtext.ui.editor.formatting.ContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting.PreferenceStoreIndentationInformation;
 import org.eclipse.xtext.ui.editor.hyperlinking.DefaultHyperlinkDetector;
+import org.eclipse.xtext.ui.editor.outline.IContentOutlineNodeComparer;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.XtextContentOutlinePage;
 import org.eclipse.xtext.ui.editor.outline.actions.IActionBarContributor;
@@ -222,8 +223,12 @@ public class DefaultUiModule extends AbstractGenericModule {
 	public void configureUiEncodingProvider(Binder binder) {
 		binder.bind(IEncodingProvider.class).annotatedWith(DispatchingProvider.Ui.class).to(WorkspaceEncodingProvider.class);
 	}
-	
+
 	public Class<? extends IAllContainersState.Provider> bindIAllContainersState$Provider() {
 		return ContainerStateProvider.class;
+	}
+
+	public Class<? extends IContentOutlineNodeComparer> bindIContentOutlineNodeComparer() {
+		return IContentOutlineNodeComparer.Default.class;
 	}
 }

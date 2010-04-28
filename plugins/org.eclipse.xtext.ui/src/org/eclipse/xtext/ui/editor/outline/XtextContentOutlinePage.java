@@ -20,6 +20,7 @@ import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
+import org.eclipse.jface.viewers.IElementComparer;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -95,6 +96,9 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 
 	@Inject
 	private IActionBarContributor actionbarContributor;
+	
+	@Inject
+	private IContentOutlineNodeComparer nodeComparer;
 
 	private XtextEditor editor;
 	private ISourceViewer sourceViewer;
@@ -131,6 +135,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 		TreeViewer viewer = getTreeViewer();
 		viewer.setAutoExpandLevel(2);
 		viewer.setUseHashlookup(false);
+		viewer.setComparer(nodeComparer);
 	}
 
 	private void configureContextMenu() {
