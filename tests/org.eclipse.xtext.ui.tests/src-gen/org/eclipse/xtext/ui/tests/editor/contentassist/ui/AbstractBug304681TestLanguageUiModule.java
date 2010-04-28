@@ -17,6 +17,11 @@ public abstract class AbstractBug304681TestLanguageUiModule extends DefaultUiMod
 	}
 	
 	
+	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
+	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
+		return org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();
+	}
+
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.jface.text.rules.ITokenScanner> bindITokenScanner() {
 		return org.eclipse.xtext.ui.editor.syntaxcoloring.antlr.AntlrTokenScanner.class;

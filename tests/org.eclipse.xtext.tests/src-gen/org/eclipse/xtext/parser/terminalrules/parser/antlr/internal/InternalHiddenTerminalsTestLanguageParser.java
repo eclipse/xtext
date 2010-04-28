@@ -25,11 +25,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_ANY_OTHER", "'without'", "'hiddens'", "';'", "'with'", "'overriding'", "'('", "')'", "'call'", "'inheriting'", "'datatype'", "'rule'", "'hiding'"
     };
-    public static final int RULE_ANY_OTHER=7;
+    public static final int RULE_ML_COMMENT=5;
     public static final int RULE_WS=4;
     public static final int EOF=-1;
+    public static final int RULE_ANY_OTHER=7;
     public static final int RULE_SL_COMMENT=6;
-    public static final int RULE_ML_COMMENT=5;
 
         public InternalHiddenTerminalsTestLanguageParser(TokenStream input) {
             super(input);

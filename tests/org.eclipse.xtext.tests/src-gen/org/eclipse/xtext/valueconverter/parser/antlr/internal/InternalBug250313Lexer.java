@@ -11,27 +11,27 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalBug250313Lexer extends Lexer {
-    public static final int RULE_ID=5;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int Tokens=24;
-    public static final int EOF=-1;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T23=23;
-    public static final int T22=22;
     public static final int T21=21;
-    public static final int T20=20;
     public static final int RULE_ML_COMMENT=7;
-    public static final int RULE_STRING=4;
-    public static final int RULE_INT=6;
-    public static final int T11=11;
-    public static final int T12=12;
-    public static final int T13=13;
     public static final int T14=14;
+    public static final int RULE_ID=5;
+    public static final int T22=22;
+    public static final int T11=11;
+    public static final int RULE_STRING=4;
+    public static final int T12=12;
+    public static final int T23=23;
+    public static final int T13=13;
+    public static final int T20=20;
+    public static final int T18=18;
     public static final int RULE_WS=9;
     public static final int T15=15;
-    public static final int T16=16;
+    public static final int RULE_INT=6;
+    public static final int EOF=-1;
     public static final int T17=17;
-    public static final int T18=18;
+    public static final int Tokens=24;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T16=16;
+    public static final int RULE_SL_COMMENT=8;
     public static final int T19=19;
     public InternalBug250313Lexer() {;} 
     public InternalBug250313Lexer(CharStream input) {
@@ -1268,13 +1268,13 @@ public class InternalBug250313Lexer extends Lexer {
 
     private int mTokensHelper015() throws RecognitionException {
         switch ( input.LA(2) ) {
-        case '/':
-            {
-            return 18;
-            }
         case '*':
             {
             return 17;
+            }
+        case '/':
+            {
+            return 18;
             }
         default:
             return 20;}

@@ -11,46 +11,46 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalXtextGrammarTestLanguageLexer extends Lexer {
-    public static final int RULE_ID=4;
-    public static final int RULE_ANY_OTHER=10;
+    public static final int T21=21;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T14=14;
     public static final int T29=29;
+    public static final int RULE_ID=4;
+    public static final int T33=33;
+    public static final int T22=22;
+    public static final int T11=11;
+    public static final int T36=36;
+    public static final int RULE_STRING=5;
+    public static final int T12=12;
     public static final int T28=28;
-    public static final int T27=27;
-    public static final int T26=26;
-    public static final int T25=25;
-    public static final int Tokens=42;
-    public static final int T24=24;
-    public static final int EOF=-1;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T41=41;
     public static final int T23=23;
     public static final int T40=40;
-    public static final int T22=22;
-    public static final int T21=21;
-    public static final int T20=20;
-    public static final int RULE_ML_COMMENT=7;
-    public static final int RULE_STRING=5;
-    public static final int RULE_INT=6;
-    public static final int T38=38;
-    public static final int T11=11;
-    public static final int T37=37;
-    public static final int T12=12;
-    public static final int T13=13;
-    public static final int T39=39;
-    public static final int T14=14;
-    public static final int T34=34;
-    public static final int RULE_WS=9;
-    public static final int T15=15;
-    public static final int T33=33;
-    public static final int T16=16;
-    public static final int T36=36;
-    public static final int T17=17;
     public static final int T35=35;
+    public static final int T13=13;
+    public static final int T34=34;
+    public static final int T20=20;
+    public static final int T25=25;
+    public static final int T37=37;
     public static final int T18=18;
-    public static final int T30=30;
-    public static final int T19=19;
+    public static final int RULE_WS=9;
+    public static final int T26=26;
+    public static final int T15=15;
+    public static final int RULE_INT=6;
+    public static final int EOF=-1;
     public static final int T32=32;
+    public static final int T17=17;
+    public static final int Tokens=42;
     public static final int T31=31;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T16=16;
+    public static final int T38=38;
+    public static final int T27=27;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int T41=41;
+    public static final int T30=30;
+    public static final int T24=24;
+    public static final int T19=19;
+    public static final int T39=39;
     public InternalXtextGrammarTestLanguageLexer() {;} 
     public InternalXtextGrammarTestLanguageLexer(CharStream input) {
         super(input);
@@ -1521,30 +1521,36 @@ public class InternalXtextGrammarTestLanguageLexer extends Lexer {
     }
     private int mTokensHelper001() throws RecognitionException {
         switch ( input.LA(2) ) {
-        case 'r':
+        case 'e':
             {
             int LA12_35 = input.LA(3);
 
-            if ( (LA12_35=='a') ) {
+            if ( (LA12_35=='n') ) {
                 int LA12_72 = input.LA(4);
 
-                if ( (LA12_72=='m') ) {
+                if ( (LA12_72=='e') ) {
                     int LA12_82 = input.LA(5);
 
-                    if ( (LA12_82=='m') ) {
+                    if ( (LA12_82=='r') ) {
                         int LA12_91 = input.LA(6);
 
                         if ( (LA12_91=='a') ) {
                             int LA12_100 = input.LA(7);
 
-                            if ( (LA12_100=='r') ) {
+                            if ( (LA12_100=='t') ) {
                                 int LA12_107 = input.LA(8);
 
-                                if ( ((LA12_107>='0' && LA12_107<='9')||(LA12_107>='A' && LA12_107<='Z')||LA12_107=='_'||(LA12_107>='a' && LA12_107<='z')) ) {
-                                    return 32;
+                                if ( (LA12_107=='e') ) {
+                                    int LA12_114 = input.LA(9);
+
+                                    if ( ((LA12_114>='0' && LA12_114<='9')||(LA12_114>='A' && LA12_114<='Z')||LA12_114=='_'||(LA12_114>='a' && LA12_114<='z')) ) {
+                                        return 32;
+                                    }
+                                    else {
+                                        return 8;}
                                 }
                                 else {
-                                    return 1;}
+                                    return 32;}
                             }
                             else {
                                 return 32;}
@@ -1561,36 +1567,30 @@ public class InternalXtextGrammarTestLanguageLexer extends Lexer {
             else {
                 return 32;}
             }
-        case 'e':
+        case 'r':
             {
             int LA12_36 = input.LA(3);
 
-            if ( (LA12_36=='n') ) {
+            if ( (LA12_36=='a') ) {
                 int LA12_73 = input.LA(4);
 
-                if ( (LA12_73=='e') ) {
+                if ( (LA12_73=='m') ) {
                     int LA12_83 = input.LA(5);
 
-                    if ( (LA12_83=='r') ) {
+                    if ( (LA12_83=='m') ) {
                         int LA12_92 = input.LA(6);
 
                         if ( (LA12_92=='a') ) {
                             int LA12_101 = input.LA(7);
 
-                            if ( (LA12_101=='t') ) {
+                            if ( (LA12_101=='r') ) {
                                 int LA12_108 = input.LA(8);
 
-                                if ( (LA12_108=='e') ) {
-                                    int LA12_115 = input.LA(9);
-
-                                    if ( ((LA12_115>='0' && LA12_115<='9')||(LA12_115>='A' && LA12_115<='Z')||LA12_115=='_'||(LA12_115>='a' && LA12_115<='z')) ) {
-                                        return 32;
-                                    }
-                                    else {
-                                        return 8;}
+                                if ( ((LA12_108>='0' && LA12_108<='9')||(LA12_108>='A' && LA12_108<='Z')||LA12_108=='_'||(LA12_108>='a' && LA12_108<='z')) ) {
+                                    return 32;
                                 }
                                 else {
-                                    return 32;}
+                                    return 1;}
                             }
                             else {
                                 return 32;}

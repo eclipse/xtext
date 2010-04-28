@@ -11,15 +11,15 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalBug292245TestLanguageLexer extends Lexer {
-    public static final int RULE_APOSTROPHE_CHAR=4;
-    public static final int T7=7;
     public static final int T10=10;
+    public static final int RULE_WS=6;
+    public static final int T9=9;
+    public static final int EOF=-1;
+    public static final int RULE_APOSTROPHE_CHAR=4;
+    public static final int Tokens=11;
     public static final int RULE_CHAR=5;
     public static final int T8=8;
-    public static final int T9=9;
-    public static final int RULE_WS=6;
-    public static final int Tokens=11;
-    public static final int EOF=-1;
+    public static final int T7=7;
     public InternalBug292245TestLanguageLexer() {;} 
     public InternalBug292245TestLanguageLexer(CharStream input) {
         super(input);

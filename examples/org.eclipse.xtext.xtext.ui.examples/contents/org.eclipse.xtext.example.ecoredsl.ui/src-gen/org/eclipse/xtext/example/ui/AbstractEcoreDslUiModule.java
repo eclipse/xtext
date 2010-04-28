@@ -17,6 +17,11 @@ public abstract class AbstractEcoreDslUiModule extends DefaultUiModule {
 	}
 	
 	
+	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
+	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
+		return org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();
+	}
+
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.jface.text.rules.ITokenScanner> bindITokenScanner() {
 		return org.eclipse.xtext.ui.editor.syntaxcoloring.antlr.AntlrTokenScanner.class;

@@ -25,17 +25,17 @@ public class InternalBug299237TestLanguageParser extends AbstractInternalAntlrPa
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "KEYWORD_2", "KEYWORD_1", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "Tokens"
     };
+    public static final int RULE_ML_COMMENT=9;
     public static final int RULE_ID=6;
-    public static final int RULE_STRING=8;
-    public static final int RULE_ANY_OTHER=12;
+    public static final int RULE_WS=11;
     public static final int KEYWORD_1=5;
     public static final int RULE_INT=7;
-    public static final int KEYWORD_2=4;
-    public static final int RULE_WS=11;
-    public static final int RULE_SL_COMMENT=10;
-    public static final int Tokens=13;
     public static final int EOF=-1;
-    public static final int RULE_ML_COMMENT=9;
+    public static final int RULE_STRING=8;
+    public static final int Tokens=13;
+    public static final int RULE_ANY_OTHER=12;
+    public static final int KEYWORD_2=4;
+    public static final int RULE_SL_COMMENT=10;
 
         public InternalBug299237TestLanguageParser(TokenStream input) {
             super(input);

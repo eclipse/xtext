@@ -25,15 +25,15 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_REAL", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'element'"
     };
-    public static final int RULE_ID=4;
-    public static final int RULE_STRING=7;
-    public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_INT=5;
-    public static final int RULE_REAL=6;
-    public static final int RULE_WS=10;
-    public static final int RULE_SL_COMMENT=9;
-    public static final int EOF=-1;
     public static final int RULE_ML_COMMENT=8;
+    public static final int RULE_ID=4;
+    public static final int RULE_WS=10;
+    public static final int EOF=-1;
+    public static final int RULE_INT=5;
+    public static final int RULE_STRING=7;
+    public static final int RULE_REAL=6;
+    public static final int RULE_ANY_OTHER=11;
+    public static final int RULE_SL_COMMENT=9;
 
         public InternalAbstractTestLanguageParser(TokenStream input) {
             super(input);

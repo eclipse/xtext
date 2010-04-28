@@ -11,15 +11,15 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalTerminalRulesTestLanguageLexer extends Lexer {
-    public static final int RULE_ID=4;
-    public static final int RULE_STRING=6;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_INT=5;
-    public static final int RULE_WS=9;
-    public static final int Tokens=11;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
     public static final int RULE_ML_COMMENT=7;
+    public static final int RULE_ID=4;
+    public static final int RULE_WS=9;
+    public static final int EOF=-1;
+    public static final int RULE_INT=5;
+    public static final int RULE_STRING=6;
+    public static final int Tokens=11;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_SL_COMMENT=8;
     public InternalTerminalRulesTestLanguageLexer() {;} 
     public InternalTerminalRulesTestLanguageLexer(CharStream input) {
         super(input);
@@ -660,13 +660,13 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
 
     private int mTokensHelper006() throws RecognitionException {
         switch ( input.LA(2) ) {
-        case '*':
-            {
-            return 4;
-            }
         case '/':
             {
             return 5;
+            }
+        case '*':
+            {
+            return 4;
             }
         default:
             return 7;}

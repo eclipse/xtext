@@ -11,18 +11,18 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalBug296889ExTestLanguageLexer extends Lexer {
+    public static final int RULE_ML_COMMENT=10;
     public static final int RULE_ID=7;
-    public static final int RULE_STRING=9;
-    public static final int RULE_ANY_OTHER=13;
+    public static final int RULE_WS=12;
     public static final int KEYWORD_1=6;
     public static final int RULE_INT=8;
-    public static final int KEYWORD_3=4;
-    public static final int KEYWORD_2=5;
-    public static final int RULE_WS=12;
-    public static final int Tokens=14;
-    public static final int RULE_SL_COMMENT=11;
     public static final int EOF=-1;
-    public static final int RULE_ML_COMMENT=10;
+    public static final int RULE_STRING=9;
+    public static final int Tokens=14;
+    public static final int RULE_ANY_OTHER=13;
+    public static final int KEYWORD_2=5;
+    public static final int RULE_SL_COMMENT=11;
+    public static final int KEYWORD_3=4;
     public InternalBug296889ExTestLanguageLexer() {;} 
     public InternalBug296889ExTestLanguageLexer(CharStream input) {
         super(input);
