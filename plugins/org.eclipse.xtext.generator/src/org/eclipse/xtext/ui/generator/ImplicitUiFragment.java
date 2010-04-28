@@ -2,9 +2,13 @@ package org.eclipse.xtext.ui.generator;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
+import org.eclipse.xtext.generator.BindFactory;
+import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.resource.containers.IAllContainersState;
 
 public class ImplicitUiFragment extends AbstractGeneratorFragment {
 
@@ -17,6 +21,15 @@ public class ImplicitUiFragment extends AbstractGeneratorFragment {
 	@Override
 	protected List<Object> getParameters(Grammar g) {
 		return Collections.singletonList((Object) fileExtensions);
+	}
+	
+	@Override
+	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
+		return new BindFactory()
+			.addTypeToProviderInstance(
+					IAllContainersState.class.getName(), 
+					"org.eclipse.xtext.ui.shared.Access.getJavaProjectsState()")
+			.getBindings();
 	}
 
 	@Override
