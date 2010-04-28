@@ -71,7 +71,7 @@ public interface ITokenSerializer {
 
 		public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, AbstractNode node);
 
-		public boolean isValid(EObject context, RuleCall ruleCall, Object value, IErrorAcceptor errorAcceptor);
+//		public boolean isValid(EObject context, RuleCall ruleCall, Object value, IErrorAcceptor errorAcceptor);
 
 		public String serializeAssignedValue(EObject context, RuleCall ruleCall, Object value, AbstractNode node);
 
