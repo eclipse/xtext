@@ -108,15 +108,15 @@ protected class ThisRootNode extends RootToken {
 
 
 «DEFINE createFollowerMethod FOR TreeConstState-»
-«IF enabledFollowers.size > 0 || endState-»
+«IF enabledOutgoing.size > 0 || endState-»
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-«FOREACH enabledFollowers AS e-»
-			case «e.precedence»: return new «e.target.element.elementMethodName()»(«e.ruleCall ? "this" : "parent"», this, «e.precedence», inst);
+«FOREACH enabledOutgoing AS e-»
+			case «e.precedence»: return new «e.target.grammarElement.elementMethodName()»(«e.ruleCall ? "this" : "parent"», this, «e.precedence», inst);
 «ENDFOREACH-»
-«IF endState && !enabledFollowers.exists(e|e.ruleCall)-»
-			default: return parent.createParentFollower(this, index, index«enabledFollowers.size > 0 ? (" - " + enabledFollowers.size) : ""», inst);
+«IF endState && !enabledOutgoing.exists(e|e.ruleCall)-»
+			default: return parent.createParentFollower(this, index, index«enabledOutgoing.size > 0 ? (" - " + enabledOutgoing.size) : ""», inst);
 «ELSE-»
 			default: return null;
 «ENDIF-»			
@@ -128,21 +128,21 @@ protected class ThisRootNode extends RootToken {
 
 
 «DEFINE createParentFollowerMethod(boolean isAss) FOR TreeConstState-»
-«IF enabledFollowers.exists(e|e.ruleCall)-»
+«IF enabledOutgoing.exists(e|e.ruleCall)-»
     @Override
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 «IF isAss-»
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
-«ENDIF-»	
+«ENDIF-»
 		switch(index) {
-«FOREACH enabledParentFollowers AS e-»
-			case «e.precedence»: return new «e.target.element.elementMethodName()»(«e.ruleCall ? "this" : "parent"», next, actIndex, «isAss ? "consumed" : "inst"»);
+«FOREACH enabledOutgoingAfterReturn AS e-»
+			case «e.precedence»: return new «e.target.grammarElement.elementMethodName()»(«e.ruleCall ? "this" : "parent"», next, actIndex, «isAss ? "consumed" : "inst"»);
 «ENDFOREACH-»
 «IF endState-»
-			default: return parent.createParentFollower(next, actIndex , index«enabledParentFollowers.size > 0 ? (" - " + enabledParentFollowers.size) : ""», «isAss ? "consumed" : "inst"»);
+			default: return parent.createParentFollower(next, actIndex , index«enabledOutgoingAfterReturn.size > 0 ? (" - " + enabledOutgoingAfterReturn.size) : ""», «isAss ? "consumed" : "inst"»);
 «ELSE-»
 			default: return null;
-«ENDIF-»			
+«ENDIF-»
 		}	
 	}	
 «ENDIF-»
