@@ -46,7 +46,7 @@ public class StringConverterTest extends AbstractXtextTests {
 			fail("Null value not detected.");
 		} catch (ValueConverterException e) {
 			// normal operation
-			System.out.println(e.getMessage());
+//			System.out.println(e.getMessage());
 		}
 	}
 

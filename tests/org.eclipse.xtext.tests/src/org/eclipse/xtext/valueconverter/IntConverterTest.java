@@ -40,7 +40,7 @@ public class IntConverterTest extends AbstractXtextTests {
 			fail("Negative value not detected.");
 		} catch (ValueConverterException e) {
 			// normal operation
-			System.out.println(e.getMessage());
+//			System.out.println(e.getMessage());
 		}
 	}
 
@@ -51,7 +51,7 @@ public class IntConverterTest extends AbstractXtextTests {
 			fail("Negative value not detected.");
 		} catch (ValueConverterException e) {
 			// normal operation
-			System.out.println(e.getMessage());
+//			System.out.println(e.getMessage());
 		}
 	}
 

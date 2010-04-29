@@ -49,7 +49,7 @@ public class ProfilingTest extends AbstractXtextTests {
 		Sets.newHashSet(iResourceDescription.getReferenceDescriptions());
 //		Yourkit.stopCpuProfiling();
 		watch.resetAndLog("resourcedescriptions");
-		System.out.println(Sets.newHashSet(inner.getAllContents()).size());
+//		System.out.println(Sets.newHashSet(inner.getAllContents()).size());
 	}
 
 	private String generateFile(int numberOfElements) {
