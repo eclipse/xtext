@@ -18,7 +18,7 @@ Term returns Expression:
 	Atom | TwoNumbers | ManyStrings | Type | Ref2 | Spare | Boolean | Transient1 | 
 	Consumed1 | Consumed2 | Loop1 | Loop2 | Loop3 | Loop4 | LoopBug285452 | 
 	DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439 | 
-	EObjectRef | TypeBug305577_1 | TypeBug305577_2 | Parens;
+	EObjectRef | TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171;
 		
 Atom: 
 	name=ID;
@@ -107,3 +107,6 @@ TypeBug1B: {TypeBug1B} "kb" name=ID;
 TypeBug2AInh returns TypeBug2A: TypeBug2B; 
 TypeBug2A: {TypeBug2A} "ka" name=ID;
 TypeBug2B: {TypeBug2B} "kb" name=ID;
+
+Bug305171:
+	"#19" (('kx' x+=ID (',' x+=ID)*)? ('ky' y+=ID (',' y+=ID)*)?) name=ID;

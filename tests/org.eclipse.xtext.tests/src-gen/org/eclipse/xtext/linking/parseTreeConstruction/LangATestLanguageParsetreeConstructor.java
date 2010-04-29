@@ -68,7 +68,7 @@ protected class Main_Group extends GroupToken {
 		switch(index) {
 			case 0: return new Main_TypesAssignment_1(parent, this, 0, inst);
 			case 1: return new Main_ImportsAssignment_0(parent, this, 1, inst);
-			default: return null;
+			default: return parent.createParentFollower(this, index, index - 2, inst);
 		}	
 	}
 

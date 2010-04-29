@@ -74,18 +74,19 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cTypeBug305577_1ParserRuleCall_19 = (RuleCall)cAlternatives.eContents().get(19);
 		private final RuleCall cTypeBug305577_2ParserRuleCall_20 = (RuleCall)cAlternatives.eContents().get(20);
 		private final RuleCall cParensParserRuleCall_21 = (RuleCall)cAlternatives.eContents().get(21);
+		private final RuleCall cBug305171ParserRuleCall_22 = (RuleCall)cAlternatives.eContents().get(22);
 		
 		//Term returns Expression:
 		//  Atom|TwoNumbers|ManyStrings|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
 		//  Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
 		//  EmptyObjectBug284850|MultiInheritanceBug280439|EObjectRef|TypeBug305577_1|
-		//  TypeBug305577_2|Parens;
+		//  TypeBug305577_2|Parens|Bug305171;
 		public ParserRule getRule() { return rule; }
 
 		//Atom|TwoNumbers|ManyStrings|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
 		//Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
 		//EmptyObjectBug284850|MultiInheritanceBug280439|EObjectRef|TypeBug305577_1|
-		//TypeBug305577_2|Parens
+		//TypeBug305577_2|Parens|Bug305171
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Atom
@@ -153,6 +154,9 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 
 		//Parens
 		public RuleCall getParensParserRuleCall_21() { return cParensParserRuleCall_21; }
+
+		//Bug305171
+		public RuleCall getBug305171ParserRuleCall_22() { return cBug305171ParserRuleCall_22; }
 	}
 
 	public class AtomElements extends AbstractParserRuleElementFinder {
@@ -1346,6 +1350,98 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 	}
+
+	public class Bug305171Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Bug305171");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitOneDigitNineKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Group cGroup_1_0 = (Group)cGroup_1.eContents().get(0);
+		private final Keyword cKxKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
+		private final Assignment cXAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
+		private final RuleCall cXIDTerminalRuleCall_1_0_1_0 = (RuleCall)cXAssignment_1_0_1.eContents().get(0);
+		private final Group cGroup_1_0_2 = (Group)cGroup_1_0.eContents().get(2);
+		private final Keyword cCommaKeyword_1_0_2_0 = (Keyword)cGroup_1_0_2.eContents().get(0);
+		private final Assignment cXAssignment_1_0_2_1 = (Assignment)cGroup_1_0_2.eContents().get(1);
+		private final RuleCall cXIDTerminalRuleCall_1_0_2_1_0 = (RuleCall)cXAssignment_1_0_2_1.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
+		private final Keyword cKyKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Assignment cYAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cYIDTerminalRuleCall_1_1_1_0 = (RuleCall)cYAssignment_1_1_1.eContents().get(0);
+		private final Group cGroup_1_1_2 = (Group)cGroup_1_1.eContents().get(2);
+		private final Keyword cCommaKeyword_1_1_2_0 = (Keyword)cGroup_1_1_2.eContents().get(0);
+		private final Assignment cYAssignment_1_1_2_1 = (Assignment)cGroup_1_1_2.eContents().get(1);
+		private final RuleCall cYIDTerminalRuleCall_1_1_2_1_0 = (RuleCall)cYAssignment_1_1_2_1.eContents().get(0);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		
+		//Bug305171:
+		//  "#19" (("kx" x+=ID ("," x+=ID)*)? ("ky" y+=ID ("," y+=ID)*)?) name=ID;
+		public ParserRule getRule() { return rule; }
+
+		//"#19" (("kx" x+=ID ("," x+=ID)*)? ("ky" y+=ID ("," y+=ID)*)?) name=ID
+		public Group getGroup() { return cGroup; }
+
+		//"#19"
+		public Keyword getNumberSignDigitOneDigitNineKeyword_0() { return cNumberSignDigitOneDigitNineKeyword_0; }
+
+		//("kx" x+=ID ("," x+=ID)*)? ("ky" y+=ID ("," y+=ID)*)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//("kx" x+=ID ("," x+=ID)*)?
+		public Group getGroup_1_0() { return cGroup_1_0; }
+
+		//"kx"
+		public Keyword getKxKeyword_1_0_0() { return cKxKeyword_1_0_0; }
+
+		//x+=ID
+		public Assignment getXAssignment_1_0_1() { return cXAssignment_1_0_1; }
+
+		//ID
+		public RuleCall getXIDTerminalRuleCall_1_0_1_0() { return cXIDTerminalRuleCall_1_0_1_0; }
+
+		//("," x+=ID)*
+		public Group getGroup_1_0_2() { return cGroup_1_0_2; }
+
+		//","
+		public Keyword getCommaKeyword_1_0_2_0() { return cCommaKeyword_1_0_2_0; }
+
+		//x+=ID
+		public Assignment getXAssignment_1_0_2_1() { return cXAssignment_1_0_2_1; }
+
+		//ID
+		public RuleCall getXIDTerminalRuleCall_1_0_2_1_0() { return cXIDTerminalRuleCall_1_0_2_1_0; }
+
+		//("ky" y+=ID ("," y+=ID)*)?
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//"ky"
+		public Keyword getKyKeyword_1_1_0() { return cKyKeyword_1_1_0; }
+
+		//y+=ID
+		public Assignment getYAssignment_1_1_1() { return cYAssignment_1_1_1; }
+
+		//ID
+		public RuleCall getYIDTerminalRuleCall_1_1_1_0() { return cYIDTerminalRuleCall_1_1_1_0; }
+
+		//("," y+=ID)*
+		public Group getGroup_1_1_2() { return cGroup_1_1_2; }
+
+		//","
+		public Keyword getCommaKeyword_1_1_2_0() { return cCommaKeyword_1_1_2_0; }
+
+		//y+=ID
+		public Assignment getYAssignment_1_1_2_1() { return cYAssignment_1_1_2_1; }
+
+		//ID
+		public RuleCall getYIDTerminalRuleCall_1_1_2_1_0() { return cYIDTerminalRuleCall_1_1_2_1_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
+	}
 	
 	
 	private OpElements pOp;
@@ -1384,6 +1480,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	private TypeBug2AInhElements pTypeBug2AInh;
 	private TypeBug2AElements pTypeBug2A;
 	private TypeBug2BElements pTypeBug2B;
+	private Bug305171Elements pBug305171;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -1420,7 +1517,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//  Atom|TwoNumbers|ManyStrings|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
 	//  Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
 	//  EmptyObjectBug284850|MultiInheritanceBug280439|EObjectRef|TypeBug305577_1|
-	//  TypeBug305577_2|Parens;
+	//  TypeBug305577_2|Parens|Bug305171;
 	public TermElements getTermAccess() {
 		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
 	}
@@ -1767,6 +1864,16 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	
 	public ParserRule getTypeBug2BRule() {
 		return getTypeBug2BAccess().getRule();
+	}
+
+	//Bug305171:
+	//  "#19" (("kx" x+=ID ("," x+=ID)*)? ("ky" y+=ID ("," y+=ID)*)?) name=ID;
+	public Bug305171Elements getBug305171Access() {
+		return (pBug305171 != null) ? pBug305171 : (pBug305171 = new Bug305171Elements());
+	}
+	
+	public ParserRule getBug305171Rule() {
+		return getBug305171Access().getRule();
 	}
 
 	//terminal ID:

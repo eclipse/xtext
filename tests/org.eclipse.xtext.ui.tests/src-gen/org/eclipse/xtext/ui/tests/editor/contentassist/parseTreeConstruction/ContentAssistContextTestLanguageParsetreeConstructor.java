@@ -72,7 +72,7 @@ protected class FirstLevel_Group extends GroupToken {
 		switch(index) {
 			case 0: return new FirstLevel_SecondLevelBAssignment_1(parent, this, 0, inst);
 			case 1: return new FirstLevel_SecondLevelAAssignment_0(parent, this, 1, inst);
-			default: return null;
+			default: return parent.createParentFollower(this, index, index - 2, inst);
 		}	
 	}
 

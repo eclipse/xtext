@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
@@ -268,6 +269,11 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseTypeBug2B(TypeBug2B object)
       {
         return createTypeBug2BAdapter();
+      }
+      @Override
+      public Adapter caseBug305171(Bug305171 object)
+      {
+        return createBug305171Adapter();
       }
       @Override
       public Adapter caseOp(Op object)
@@ -772,6 +778,21 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createTypeBug2BAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171 <em>Bug305171</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171
+   * @generated
+   */
+  public Adapter createBug305171Adapter()
   {
     return null;
   }

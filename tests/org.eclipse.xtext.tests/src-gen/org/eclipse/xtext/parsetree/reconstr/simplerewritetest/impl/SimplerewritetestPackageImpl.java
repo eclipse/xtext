@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
@@ -278,6 +279,13 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * @generated
    */
   private EClass typeBug2BEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass bug305171EClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1074,6 +1082,46 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getBug305171()
+  {
+    return bug305171EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBug305171_X()
+  {
+    return (EAttribute)bug305171EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBug305171_Y()
+  {
+    return (EAttribute)bug305171EClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBug305171_Name()
+  {
+    return (EAttribute)bug305171EClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getOp()
   {
     return opEClass;
@@ -1223,6 +1271,11 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
 
     typeBug2BEClass = createEClass(TYPE_BUG2_B);
 
+    bug305171EClass = createEClass(BUG305171);
+    createEAttribute(bug305171EClass, BUG305171__X);
+    createEAttribute(bug305171EClass, BUG305171__Y);
+    createEAttribute(bug305171EClass, BUG305171__NAME);
+
     opEClass = createEClass(OP);
     createEReference(opEClass, OP__VALUES);
   }
@@ -1285,6 +1338,7 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     typeBug2AEClass.getESuperTypes().add(this.getTypeBug305577_2());
     typeBug2BEClass.getESuperTypes().add(this.getTypeBug305577_2());
     typeBug2BEClass.getESuperTypes().add(this.getTypeBug2A());
+    bug305171EClass.getESuperTypes().add(this.getExpression());
     opEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
@@ -1391,6 +1445,11 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     initEAttribute(getTypeBug2A_Name(), ecorePackage.getEString(), "name", null, 0, 1, TypeBug2A.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeBug2BEClass, TypeBug2B.class, "TypeBug2B", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(bug305171EClass, Bug305171.class, "Bug305171", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getBug305171_X(), ecorePackage.getEString(), "x", null, 0, -1, Bug305171.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getBug305171_Y(), ecorePackage.getEString(), "y", null, 0, -1, Bug305171.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getBug305171_Name(), ecorePackage.getEString(), "name", null, 0, 1, Bug305171.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(opEClass, Op.class, "Op", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getOp_Values(), this.getExpression(), null, "values", null, 0, -1, Op.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

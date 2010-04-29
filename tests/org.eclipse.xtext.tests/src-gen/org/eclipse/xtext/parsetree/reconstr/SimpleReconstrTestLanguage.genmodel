@@ -108,6 +108,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//TypeBug2A/name"/>
     </genClasses>
     <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//TypeBug2B"/>
+    <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//Bug305171">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//Bug305171/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//Bug305171/y"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//Bug305171/name"/>
+    </genClasses>
     <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//Op">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleReconstrTestLanguage.ecore#//Op/values"/>
     </genClasses>

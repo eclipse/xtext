@@ -73,7 +73,7 @@ protected class Model_Group extends GroupToken {
 		switch(index) {
 			case 0: return new Model_ElementsAssignment_1(parent, this, 0, inst);
 			case 1: return new Model_ImportsAssignment_0(parent, this, 1, inst);
-			default: return null;
+			default: return parent.createParentFollower(this, index, index - 2, inst);
 		}	
 	}
 

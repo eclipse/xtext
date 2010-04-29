@@ -380,6 +380,16 @@ ruleTerm returns [EObject current=null]
         $current = $this_Parens_21.current; 
         currentNode = currentNode.getParent();
     }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getTermAccess().getBug305171ParserRuleCall_22(), currentNode); 
+    }
+    this_Bug305171_22=ruleBug305171
+    { 
+        $current = $this_Bug305171_22.current; 
+        currentNode = currentNode.getParent();
+    }
 )
 ;
 
@@ -2573,6 +2583,169 @@ ruleTypeBug2B returns [EObject current=null]
 	       			$current, 
 	       			"name",
 	        		lv_name_2_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleBug305171
+entryRuleBug305171 returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getBug305171Rule(), currentNode); }
+	 iv_ruleBug305171=ruleBug305171 
+	 { $current=$iv_ruleBug305171.current; } 
+	 EOF 
+;
+
+// Rule Bug305171
+ruleBug305171 returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(	'#19' 
+    {
+        createLeafNode(grammarAccess.getBug305171Access().getNumberSignDigitOneDigitNineKeyword_0(), null); 
+    }
+((	'kx' 
+    {
+        createLeafNode(grammarAccess.getBug305171Access().getKxKeyword_1_0_0(), null); 
+    }
+(
+(
+		lv_x_2_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getBug305171Access().getXIDTerminalRuleCall_1_0_1_0(), "x"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getBug305171Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"x",
+	        		lv_x_2_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)(	',' 
+    {
+        createLeafNode(grammarAccess.getBug305171Access().getCommaKeyword_1_0_2_0(), null); 
+    }
+(
+(
+		lv_x_4_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getBug305171Access().getXIDTerminalRuleCall_1_0_2_1_0(), "x"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getBug305171Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"x",
+	        		lv_x_4_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+))*)?(	'ky' 
+    {
+        createLeafNode(grammarAccess.getBug305171Access().getKyKeyword_1_1_0(), null); 
+    }
+(
+(
+		lv_y_6_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getBug305171Access().getYIDTerminalRuleCall_1_1_1_0(), "y"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getBug305171Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"y",
+	        		lv_y_6_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)(	',' 
+    {
+        createLeafNode(grammarAccess.getBug305171Access().getCommaKeyword_1_1_2_0(), null); 
+    }
+(
+(
+		lv_y_8_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getBug305171Access().getYIDTerminalRuleCall_1_1_2_1_0(), "y"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getBug305171Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"y",
+	        		lv_y_8_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+))*)?)(
+(
+		lv_name_9_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getBug305171Access().getNameIDTerminalRuleCall_2_0(), "name"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getBug305171Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"name",
+	        		lv_name_9_0, 
 	        		"ID", 
 	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {

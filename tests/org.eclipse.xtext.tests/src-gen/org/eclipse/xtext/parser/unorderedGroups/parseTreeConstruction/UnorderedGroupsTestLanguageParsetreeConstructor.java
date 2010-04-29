@@ -572,6 +572,7 @@ protected class Model_UnorderedGroup_1_2_1 extends UnorderedGroupToken {
 		switch(index) {
 			case 0: return new Model_SecondAssignment_1_2_1_1(parent, this, 0, inst);
 			case 1: return new Model_FirstAssignment_1_2_1_0(parent, this, 1, inst);
+			case 2: return new Model_DigitThreeKeyword_1_2_0(parent, this, 2, inst);
 			default: return null;
 		}	
 	}

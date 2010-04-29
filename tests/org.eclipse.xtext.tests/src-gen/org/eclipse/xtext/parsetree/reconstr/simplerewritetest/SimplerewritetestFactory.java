@@ -314,6 +314,15 @@ public interface SimplerewritetestFactory extends EFactory
   TypeBug2B createTypeBug2B();
 
   /**
+   * Returns a new object of class '<em>Bug305171</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Bug305171</em>'.
+   * @generated
+   */
+  Bug305171 createBug305171();
+
+  /**
    * Returns a new object of class '<em>Op</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

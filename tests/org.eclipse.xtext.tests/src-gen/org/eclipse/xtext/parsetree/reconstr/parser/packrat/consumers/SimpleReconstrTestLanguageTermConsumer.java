@@ -25,6 +25,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 
 	private INonTerminalConsumer booleanConsumer;
 
+	private INonTerminalConsumer bug305171Consumer;
+
 	private INonTerminalConsumer consumed1Consumer;
 
 	private INonTerminalConsumer consumed2Consumer;
@@ -111,6 +113,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 
 	private IElementConsumer ruleCall$23$Consumer;
 
+	private IElementConsumer ruleCall$24$Consumer;
+
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
 		protected Alternatives$1$Consumer(final Alternatives alternatives) {
@@ -141,6 +145,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 			acceptor.accept(ruleCall$21$Consumer);
 			acceptor.accept(ruleCall$22$Consumer);
 			acceptor.accept(ruleCall$23$Consumer);
+			acceptor.accept(ruleCall$24$Consumer);
 		}
 	}
 
@@ -408,6 +413,18 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		}
 	}
 
+	protected class RuleCall$24$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$24$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(bug305171Consumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
 	public SimpleReconstrTestLanguageTermConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
@@ -447,6 +464,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		ruleCall$21$Consumer = new RuleCall$21$Consumer(rule.getTypeBug305577_1ParserRuleCall_19());
 		ruleCall$22$Consumer = new RuleCall$22$Consumer(rule.getTypeBug305577_2ParserRuleCall_20());
 		ruleCall$23$Consumer = new RuleCall$23$Consumer(rule.getParensParserRuleCall_21());
+		ruleCall$24$Consumer = new RuleCall$24$Consumer(rule.getBug305171ParserRuleCall_22());
 	}
 	
 	@Override
@@ -465,6 +483,10 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 	
 	public void setBooleanConsumer(INonTerminalConsumer booleanConsumer) {
 		this.booleanConsumer = booleanConsumer;
+	}
+	
+	public void setBug305171Consumer(INonTerminalConsumer bug305171Consumer) {
+		this.bug305171Consumer = bug305171Consumer;
 	}
 	
 	public void setConsumed1Consumer(INonTerminalConsumer consumed1Consumer) {

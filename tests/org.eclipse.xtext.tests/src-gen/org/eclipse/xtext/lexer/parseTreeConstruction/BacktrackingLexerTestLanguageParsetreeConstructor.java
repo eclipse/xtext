@@ -69,7 +69,7 @@ protected class Model_Group extends GroupToken {
 			case 0: return new Model_XbsAssignment_2(parent, this, 0, inst);
 			case 1: return new Model_AbsAssignment_1(parent, this, 1, inst);
 			case 2: return new Model_EnumsAssignment_0(parent, this, 2, inst);
-			default: return null;
+			default: return parent.createParentFollower(this, index, index - 3, inst);
 		}	
 	}
 

@@ -787,6 +787,7 @@ protected class Object_UnorderedGroup_5 extends UnorderedGroupToken {
 			case 5: return new Object_Group_5_2(parent, this, 5, inst);
 			case 6: return new Object_Group_5_1(parent, this, 6, inst);
 			case 7: return new Object_Group_5_0(parent, this, 7, inst);
+			case 8: return new Object_LeftCurlyBracketKeyword_4(parent, this, 8, inst);
 			default: return null;
 		}	
 	}
@@ -1344,7 +1345,6 @@ protected class Object_AfterKeyword_5_5_2 extends KeywordToken  {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Object_FeaturesAssignment_5_5_1(parent, this, 0, inst);
-			case 1: return new Object_BeforeKeyword_5_5_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -1368,7 +1368,6 @@ protected class Object_Group_5_6 extends GroupToken {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Object_FeaturesAssignment_5_6_1(parent, this, 0, inst);
-			case 1: return new Object_OptionalLoopKeyword_5_6_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -2873,6 +2872,7 @@ protected class Object2_UnorderedGroup_5 extends UnorderedGroupToken {
 			case 2: return new Object2_Group_5_2(parent, this, 2, inst);
 			case 3: return new Object2_Group_5_1(parent, this, 3, inst);
 			case 4: return new Object2_Group_5_0(parent, this, 4, inst);
+			case 5: return new Object2_LeftCurlyBracketKeyword_4(parent, this, 5, inst);
 			default: return null;
 		}	
 	}

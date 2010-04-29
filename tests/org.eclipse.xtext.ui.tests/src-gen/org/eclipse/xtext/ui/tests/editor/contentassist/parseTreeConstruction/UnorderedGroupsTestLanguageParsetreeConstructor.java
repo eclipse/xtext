@@ -697,7 +697,7 @@ protected class SimpleModel_UnorderedGroup_0 extends UnorderedGroupToken {
 			case 1: return new SimpleModel_SynchronizedAssignment_0_2(parent, this, 1, inst);
 			case 2: return new SimpleModel_StaticAssignment_0_1(parent, this, 2, inst);
 			case 3: return new SimpleModel_VisibilityAssignment_0_0(parent, this, 3, inst);
-			default: return null;
+			default: return parent.createParentFollower(this, index, index - 4, inst);
 		}	
 	}
 
@@ -1444,7 +1444,7 @@ protected class LoopedModel_UnorderedGroup_0 extends UnorderedGroupToken {
 			case 1: return new LoopedModel_SynchronizedAssignment_0_2(parent, this, 1, inst);
 			case 2: return new LoopedModel_StaticAssignment_0_1(parent, this, 2, inst);
 			case 3: return new LoopedModel_VisibilityAssignment_0_0(parent, this, 3, inst);
-			default: return null;
+			default: return parent.createParentFollower(this, index, index - 4, inst);
 		}	
 	}
 
@@ -2593,6 +2593,7 @@ protected class Bug304681Model_UnorderedGroup_1 extends UnorderedGroupToken {
 			case 2: return new Bug304681Model_Group_1_2(parent, this, 2, inst);
 			case 3: return new Bug304681Model_Group_1_1(parent, this, 3, inst);
 			case 4: return new Bug304681Model_Group_1_0(parent, this, 4, inst);
+			case 5: return new Bug304681Model_LeftCurlyBracketKeyword_0(parent, this, 5, inst);
 			default: return null;
 		}	
 	}

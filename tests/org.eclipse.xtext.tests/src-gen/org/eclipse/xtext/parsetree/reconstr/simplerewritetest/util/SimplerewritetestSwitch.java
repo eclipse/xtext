@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
@@ -381,6 +382,14 @@ public class SimplerewritetestSwitch<T>
         if (result == null) result = caseTypeBug2A(typeBug2B);
         if (result == null) result = caseTypeBug305577_2(typeBug2B);
         if (result == null) result = caseExpression(typeBug2B);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimplerewritetestPackage.BUG305171:
+      {
+        Bug305171 bug305171 = (Bug305171)theEObject;
+        T result = caseBug305171(bug305171);
+        if (result == null) result = caseExpression(bug305171);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -904,6 +913,22 @@ public class SimplerewritetestSwitch<T>
    * @generated
    */
   public T caseTypeBug2B(TypeBug2B object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Bug305171</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Bug305171</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBug305171(Bug305171 object)
   {
     return null;
   }

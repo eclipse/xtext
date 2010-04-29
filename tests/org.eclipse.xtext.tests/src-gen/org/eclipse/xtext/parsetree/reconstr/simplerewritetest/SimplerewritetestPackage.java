@@ -1289,6 +1289,61 @@ public interface SimplerewritetestPackage extends EPackage
   int TYPE_BUG2_B_FEATURE_COUNT = TYPE_BUG305577_2_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Bug305171Impl <em>Bug305171</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Bug305171Impl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getBug305171()
+   * @generated
+   */
+  int BUG305171 = 32;
+
+  /**
+   * The feature id for the '<em><b>Em</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG305171__EM = EXPRESSION__EM;
+
+  /**
+   * The feature id for the '<em><b>X</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG305171__X = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Y</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG305171__Y = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG305171__NAME = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Bug305171</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG305171_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1296,7 +1351,7 @@ public interface SimplerewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getOp()
    * @generated
    */
-  int OP = 32;
+  int OP = 33;
 
   /**
    * The feature id for the '<em><b>Em</b></em>' attribute.
@@ -2087,6 +2142,49 @@ public interface SimplerewritetestPackage extends EPackage
   EClass getTypeBug2B();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171 <em>Bug305171</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Bug305171</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171
+   * @generated
+   */
+  EClass getBug305171();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171#getX <em>X</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>X</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171#getX()
+   * @see #getBug305171()
+   * @generated
+   */
+  EAttribute getBug305171_X();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171#getY <em>Y</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Y</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171#getY()
+   * @see #getBug305171()
+   * @generated
+   */
+  EAttribute getBug305171_Y();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171#getName()
+   * @see #getBug305171()
+   * @generated
+   */
+  EAttribute getBug305171_Name();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op <em>Op</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2769,6 +2867,40 @@ public interface SimplerewritetestPackage extends EPackage
      * @generated
      */
     EClass TYPE_BUG2_B = eINSTANCE.getTypeBug2B();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Bug305171Impl <em>Bug305171</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Bug305171Impl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getBug305171()
+     * @generated
+     */
+    EClass BUG305171 = eINSTANCE.getBug305171();
+
+    /**
+     * The meta object literal for the '<em><b>X</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BUG305171__X = eINSTANCE.getBug305171_X();
+
+    /**
+     * The meta object literal for the '<em><b>Y</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BUG305171__Y = eINSTANCE.getBug305171_Y();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BUG305171__NAME = eINSTANCE.getBug305171_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.

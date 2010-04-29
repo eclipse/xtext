@@ -70,9 +70,8 @@ protected class State_Group extends GroupToken {
 		switch(index) {
 			case 0: return new State_LabelAssignment_3(parent, this, 0, inst);
 			case 1: return new State_StateNameAssignment_2(parent, this, 1, inst);
-			case 2: return new State_StateKeyword_1(parent, this, 2, inst);
-			case 3: return new State_Alternatives_0(parent, this, 3, inst);
-			default: return null;
+			case 2: return new State_Alternatives_0(parent, this, 2, inst);
+			default: return parent.createParentFollower(this, index, index - 3, inst);
 		}	
 	}
 
@@ -426,27 +425,6 @@ protected class State_IsFinalAssignment_0_4_2 extends AssignmentToken  {
 
 
 
-// "state"?
-protected class State_StateKeyword_1 extends KeywordToken  {
-	
-	public State_StateKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getStateAccess().getStateKeyword_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
-		}	
-	}
-
-}
-
 // stateName=ID?
 protected class State_StateNameAssignment_2 extends AssignmentToken  {
 	
@@ -462,9 +440,8 @@ protected class State_StateNameAssignment_2 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new State_StateKeyword_1(parent, this, 0, inst);
-			case 1: return new State_Alternatives_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index, index - 2, inst);
+			case 0: return new State_Alternatives_0(parent, this, 0, inst);
+			default: return parent.createParentFollower(this, index, index - 1, inst);
 		}	
 	}
 
@@ -498,9 +475,8 @@ protected class State_LabelAssignment_3 extends AssignmentToken  {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new State_StateNameAssignment_2(parent, this, 0, inst);
-			case 1: return new State_StateKeyword_1(parent, this, 1, inst);
-			case 2: return new State_Alternatives_0(parent, this, 2, inst);
-			default: return parent.createParentFollower(this, index, index - 3, inst);
+			case 1: return new State_Alternatives_0(parent, this, 1, inst);
+			default: return parent.createParentFollower(this, index, index - 2, inst);
 		}	
 	}
 

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
@@ -132,6 +133,7 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
       case SimplerewritetestPackage.TYPE_BUG1_B: return createTypeBug1B();
       case SimplerewritetestPackage.TYPE_BUG2_A: return createTypeBug2A();
       case SimplerewritetestPackage.TYPE_BUG2_B: return createTypeBug2B();
+      case SimplerewritetestPackage.BUG305171: return createBug305171();
       case SimplerewritetestPackage.OP: return createOp();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -488,6 +490,17 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
   {
     TypeBug2BImpl typeBug2B = new TypeBug2BImpl();
     return typeBug2B;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Bug305171 createBug305171()
+  {
+    Bug305171Impl bug305171 = new Bug305171Impl();
+    return bug305171;
   }
 
   /**

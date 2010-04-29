@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
@@ -58,125 +59,117 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 	}
 
 	@SuppressWarnings("unchecked")
-	protected void addFollower(AbstractElement ele) {
+	protected void addOutgoing(AbstractElement ele) {
 		if (filter(ele)) {
-			collectCalledRules(ele);
-			collectFollowers(ele);
+			collectOutgoingRuleCalls(ele);
+			collectOutgoing(ele);
 		} else {
 			outgoing.add(builder.getTransition((S) this, builder.getState(ele), false));
 		}
 	}
 
-	protected void collectAllFollowers() {
+	protected void collectAllOutgoingTransitions() {
 		if (filter(element))
 			outgoing = outgoingRuleCalls = Collections.emptyList();
 		else {
 			outgoing = new ArrayList<T>();
 			outgoingRuleCalls = new ArrayList<T>();
-			collectCalledRules(element);
-			collectFollowers(element);
+			collectOutgoingRuleCalls(element);
+			collectOutgoing(element);
 			removeDuplicates(outgoing);
 			removeDuplicates(outgoingRuleCalls);
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	protected void collectCalledRules(AbstractElement ele) {
-		List<RuleCall> calls = new ArrayList<RuleCall>();
-		if (ele instanceof RuleCall)
-			calls.add((RuleCall) ele);
-		// else if (ele instanceof Assignment)
-		// calls.addAll(GrammarUtil.containedRuleCalls(ele));
-		for (RuleCall r : calls)
-			if (r.getRule() instanceof ParserRule) {
-				ParserRule pr = (ParserRule) r.getRule();
-				if (!GrammarUtil.isDatatypeRule(pr))
-					outgoingRuleCalls
-							.add(builder.getTransition((S) this, builder.getState(pr.getAlternatives()), true));
-			}
-	}
-
-	protected void collectFollowers(AbstractElement ele) {
-		if (ele instanceof Group || ele instanceof UnorderedGroup) {
-			List<AbstractElement> elements = ((CompoundElement) ele).getElements();
+	protected void collectOutgoing(AbstractElement element) {
+		if (element instanceof Group || element instanceof UnorderedGroup) {
+			List<AbstractElement> elements = ((CompoundElement) element).getElements();
 			switch (builder.getDirection()) {
 				case FORWARD:
-					for (int i = 0; i < elements.size(); i++) {
-						addFollower(elements.get(i));
-						if (!GrammarUtil.isOptionalCardinality(elements.get(i)))
-							break;
-					}
-					break;
+					throw new UnsupportedOperationException();
+					//					for (int i = 0; i < elements.size(); i++) {
+					//						addOutgoing(elements.get(i));
+					//						if (!GrammarUtil.isOptionalCardinality(elements.get(i)))
+					//							break;
+					//					}
+					//				break;
 				case BACKWARD:
-					for (int i = elements.size() - 1; i >= 0; i--) {
-						addFollower(elements.get(i));
+					int i = elements.size() - 1;
+					while (i >= 0) {
+						addOutgoing(elements.get(i));
 						if (!GrammarUtil.isOptionalCardinality(elements.get(i)))
 							break;
+						i--;
 					}
+					// add transitions to the next sibling of this element if all children are optional
+					if (i < 0)
+						collectOutgoingByContainer(element);
 					break;
 			}
-		} else if (ele instanceof Alternatives)
-			for (AbstractElement e : ((Alternatives) ele).getElements())
-				addFollower(e);
-		else if (ele instanceof Assignment)
-			addFollower(((Assignment) ele).getTerminal());
-		else if (ele instanceof CrossReference)
-			addFollower(((CrossReference) ele).getTerminal());
+		} else if (element instanceof Alternatives)
+			for (AbstractElement e : ((Alternatives) element).getElements())
+				addOutgoing(e);
+		else if (element instanceof Assignment)
+			addOutgoing(((Assignment) element).getTerminal());
+		else if (element instanceof CrossReference)
+			addOutgoing(((CrossReference) element).getTerminal());
 		else {
-			if (GrammarUtil.isMultipleCardinality(ele) && !filter(ele))
-				addFollower(ele);
-			collectFollowersOther(ele);
+			if (GrammarUtil.isMultipleCardinality(element) && !filter(element))
+				addOutgoing(element);
+			collectOutgoingByContainer(element);
 		}
 	}
 
-	protected void collectFollowersOther(AbstractElement ele) {
-		if (ele.eContainer() instanceof Alternatives) {
-			Alternatives cntAlt = (Alternatives) ele.eContainer();
-			if (GrammarUtil.isMultipleCardinality(cntAlt))
-				addFollower(cntAlt);
-			collectFollowersOther(cntAlt);
-		} else if (ele.eContainer() instanceof Group || ele.eContainer() instanceof UnorderedGroup) {
-			AbstractElement container = (AbstractElement) ele.eContainer();
-			List<AbstractElement> siblings = ((CompoundElement) container).getElements();
-			int i = siblings.indexOf(ele);
+	protected void collectOutgoingByContainer(AbstractElement element) {
+		EObject container = element.eContainer();
+		if (container instanceof Group || container instanceof UnorderedGroup) {
+			CompoundElement compoundContainer = (CompoundElement) container;
+			List<AbstractElement> siblings = compoundContainer.getElements();
+			int i = siblings.indexOf(element);
 			switch (builder.getDirection()) {
 				case FORWARD:
 					if ((i + 1) >= siblings.size()) {
-						if (GrammarUtil.isMultipleCardinality(container))
-							addFollower(container);
-						collectFollowersOther(container);
+						if (GrammarUtil.isMultipleCardinality(compoundContainer))
+							addOutgoing(compoundContainer);
+						collectOutgoingByContainer(compoundContainer);
 					} else {
 						AbstractElement next = siblings.get(i + 1);
-						addFollower(next);
+						addOutgoing(next);
 						if (GrammarUtil.isOptionalCardinality(next))
-							collectFollowersOther(next);
+							collectOutgoingByContainer(next);
 					}
 					break;
 				case BACKWARD:
 					if (i <= 0) {
-						if (GrammarUtil.isMultipleCardinality(container))
-							addFollower(container);
-						collectFollowersOther(container);
+						if (GrammarUtil.isMultipleCardinality(compoundContainer))
+							addOutgoing(compoundContainer);
+						collectOutgoingByContainer(compoundContainer);
 					} else {
 						AbstractElement next = siblings.get(i - 1);
-						addFollower(next);
+						addOutgoing(next);
 						if (GrammarUtil.isOptionalCardinality(next))
-							collectFollowersOther(next);
+							collectOutgoingByContainer(next);
 					}
 					break;
 			}
-		} else if (ele.eContainer() instanceof Assignment) {
-			Assignment cntAss = (Assignment) ele.eContainer();
-			if (GrammarUtil.isMultipleCardinality(cntAss))
-				addFollower(cntAss);
-			collectFollowersOther(cntAss);
-		} else if (ele.eContainer() instanceof CrossReference) {
-			CrossReference cntAss = (CrossReference) ele.eContainer();
-			if (GrammarUtil.isMultipleCardinality(cntAss))
-				addFollower(cntAss);
-			collectFollowersOther(cntAss);
-		} else if (ele.eContainer() instanceof AbstractRule)
+		} else if (container instanceof AbstractRule)
 			endState = true;
+		else if (container instanceof AbstractElement) {
+			AbstractElement elementContainer = (AbstractElement) container;
+			if (GrammarUtil.isMultipleCardinality(elementContainer))
+				addOutgoing(elementContainer);
+			collectOutgoingByContainer(elementContainer);
+		} else
+			throw new IllegalStateException("Unknown container: " + container);
+	}
+
+	@SuppressWarnings("unchecked")
+	protected void collectOutgoingRuleCalls(AbstractElement element) {
+		if (element instanceof RuleCall && ((RuleCall) element).getRule() instanceof ParserRule) {
+			ParserRule rule = (ParserRule) ((RuleCall) element).getRule();
+			if (!GrammarUtil.isDatatypeRule(rule))
+				outgoingRuleCalls.add(builder.getTransition((S) this, builder.getState(rule.getAlternatives()), true));
+		}
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -215,19 +208,19 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 
 	public List<T> getOutgoing() {
 		if (outgoing == null || outgoingRuleCalls == null)
-			collectAllFollowers();
-		return outgoingRuleCalls.size() == 0 ? outgoing : outgoingRuleCalls;
+			collectAllOutgoingTransitions();
+		return outgoingRuleCalls.isEmpty() ? outgoing : outgoingRuleCalls;
 	}
 
 	public List<T> getOutgoingAfterReturn() {
 		if (outgoing == null || outgoingRuleCalls == null)
-			collectAllFollowers();
-		return outgoingRuleCalls.size() == 0 ? outgoingRuleCalls : outgoing;
+			collectAllOutgoingTransitions();
+		return outgoingRuleCalls.isEmpty() ? Collections.<T> emptyList() : outgoing;
 	}
 
 	public boolean isEndState() {
 		if (outgoing == null || outgoingRuleCalls == null)
-			collectAllFollowers();
+			collectAllOutgoingTransitions();
 		return endState;
 	}
 
