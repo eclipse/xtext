@@ -59,8 +59,10 @@ public class XtextResource extends ResourceImpl {
 
 	public static String OPTION_RESOLVE_ALL = XtextResource.class.getName() + ".RESOLVE_ALL";
 
+	/**
+	 * @deprecated use OPTION_SERIALIZATION_OPTIONS
+	 */
 	@Deprecated
-	// use OPTION_SERIALIZER_OPTIONS
 	public static String OPTION_FORMAT = XtextResource.class.getName() + ".FORMAT";
 
 	/**
@@ -269,9 +271,10 @@ public class XtextResource extends ResourceImpl {
 		SerializationOptions serializerOptions;
 		if (options != null && options.containsKey(OPTION_SERIALIZATION_OPTIONS))
 			serializerOptions = (SerializationOptions) options.get(OPTION_SERIALIZATION_OPTIONS);
-		else
+		else {
 			serializerOptions = new SerializationOptions();
-		serializerOptions.setFormat(options != null && Boolean.TRUE.equals(options.get(OPTION_FORMAT)));
+			serializerOptions.setFormat(options != null && Boolean.TRUE.equals(options.get(OPTION_FORMAT)));
+		}
 		setEncodingFromOptions(options);
 		serializer.serialize(contents.get(0), new OutputStreamWriter(outputStream, getEncoding()), serializerOptions);
 	}
