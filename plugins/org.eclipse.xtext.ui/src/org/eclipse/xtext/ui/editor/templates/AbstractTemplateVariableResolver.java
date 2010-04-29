@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.templates.TemplateContext;
 import org.eclipse.jface.text.templates.TemplateVariable;
@@ -42,15 +43,24 @@ public abstract class AbstractTemplateVariableResolver extends
 		variable.setResolved(true);
 	}
 
-	protected EClassifier getEClassifierForGrammar(String eClassName,
+	protected EClassifier getEClassifierForGrammar(String fqnClassName,
 			Grammar grammar) {
+		int dotIndex = fqnClassName.indexOf('.');
+		String packageName = null;
+		String className = fqnClassName;
+		if (dotIndex > 0) {
+			packageName = fqnClassName.substring(0, dotIndex);
+			className = fqnClassName.substring(dotIndex + 1);
+		}
 		List<AbstractMetamodelDeclaration> allMetamodelDeclarations = GrammarUtil
 				.allMetamodelDeclarations(grammar);
 		for (AbstractMetamodelDeclaration decl : allMetamodelDeclarations) {
-			EClassifier eClassifier = decl.getEPackage().getEClassifier(
-					eClassName);
-			if (eClassifier != null) {
-				return eClassifier;
+			EPackage pack = decl.getEPackage();
+			if (packageName == null || pack.getName().equals(packageName)) {
+				EClassifier eClassifier = pack.getEClassifier(className);
+				if (eClassifier != null) {
+					return eClassifier;
+				}
 			}
 		}
 		return null;
