@@ -57,6 +57,10 @@ public class XtextAnnotation extends Annotation implements IAnnotationPresentati
 		return issue;
 	}
 	
+	public boolean isQuickFixable() {
+		return isQuickfixable;
+	}
+	
 	public XtextAnnotation(String type, boolean isPersistent, IXtextDocument document, Issue issue, boolean isQuickfixable) {
 		super(type, isPersistent, issue.getMessage());
 		
