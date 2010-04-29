@@ -60,7 +60,7 @@ public interface IContentOutlineNodeComparer extends IElementComparer {
 				int hashCode = addHashCode(0, node.getClazz());
 				hashCode = addHashCode(hashCode, node.getLabel());
 				hashCode = addHashCode(hashCode, node.getImage());
-				hashCode = addHashCode(hashCode, node.getParent());
+				hashCode = hashCode *PRIME + ((node.getParent() == null) ? 0 : hashCode(node.getParent()));
 				return hashCode;
 			}
 			return element.hashCode();
