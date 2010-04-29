@@ -12,6 +12,7 @@ import java.util.Iterator;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.services.XtextGrammarAccess;
+import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplateContextTypeRegistry;
 
@@ -36,7 +37,7 @@ public class XtextTemplateContextTypeRegistryTest extends AbstractXtextTests imp
 	}
 	
 	public void testTypesAreSorted() {
-		XtextTemplateContextTypeRegistry registry = new XtextTemplateContextTypeRegistry(grammarAccess, this);
+		XtextTemplateContextTypeRegistry registry = new XtextTemplateContextTypeRegistry(grammarAccess, this, new ContextTypeIdHelper());
 		String prevName = "";
 		Iterator<?> iter = registry.contextTypes();
 		assertTrue(iter.hasNext());

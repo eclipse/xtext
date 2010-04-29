@@ -30,8 +30,11 @@ import com.google.inject.Singleton;
 @Singleton
 public class XtextTemplateContextTypeRegistry extends ContextTypeRegistry {
 	
+	private final ContextTypeIdHelper helper;
+
 	@Inject
-	public XtextTemplateContextTypeRegistry(IGrammarAccess grammarAccess, Provider<XtextTemplateContextType> ctxTypeProvider) {
+	public XtextTemplateContextTypeRegistry(IGrammarAccess grammarAccess, Provider<XtextTemplateContextType> ctxTypeProvider, ContextTypeIdHelper helper) {
+		this.helper = helper;
 		registerContextTypes(grammarAccess, ctxTypeProvider);
 	}
 
@@ -61,10 +64,14 @@ public class XtextTemplateContextTypeRegistry extends ContextTypeRegistry {
 	}
 	
 	public String getId(Keyword k) {
-		return GrammarUtil.getGrammar(k).getName()+".kw_"+k.getValue();
+		return helper.getId(k);
 	}
 
 	public String getId(ParserRule parserRule) {
-		return GrammarUtil.getGrammar(parserRule).getName()+"."+parserRule.getName();
+		return helper.getId(parserRule);
+	}
+	
+	public ContextTypeIdHelper getHelper() {
+		return helper;
 	}
 }
