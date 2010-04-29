@@ -20,7 +20,6 @@ import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
-import org.eclipse.jface.viewers.IElementComparer;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -131,14 +130,18 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 		registerToolbarActions(getSite().getActionBars());
 	}
 
-	private void configureViewer() {
+	protected void configureViewer() {
 		TreeViewer viewer = getTreeViewer();
-		viewer.setAutoExpandLevel(2);
+		viewer.setAutoExpandLevel(getAutoExpandLevel());
 		viewer.setUseHashlookup(false);
 		viewer.setComparer(nodeComparer);
 	}
 
-	private void configureContextMenu() {
+	protected int getAutoExpandLevel() {
+		return 2;
+	}
+
+	protected void configureContextMenu() {
 		MenuManager manager = new MenuManager(contextMenuID, contextMenuID);
 		manager.setRemoveAllWhenShown(true);
 		manager.addMenuListener(new IMenuListener() {
@@ -154,7 +157,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 		site.registerContextMenu(Activator.PLUGIN_ID + ".outline", manager, getTreeViewer()); //$NON-NLS-1$
 	}
 	
-	private void fillContextMenu(IMenuManager menu) {
+	protected void fillContextMenu(IMenuManager menu) {
 		menu.add(new Separator(IContextMenuConstants.GROUP_ADDITIONS));
 	}
 
@@ -163,7 +166,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 		getTreeViewer().setLabelProvider(new DelegatorLabelProvider(labelProvider));
 	}
 
-	private void configureDocument() {
+	protected void configureDocument() {
 		if (sourceViewer != null) {
 			IDocument document = sourceViewer.getDocument();
 			IXtextDocument xtextDocument = XtextDocumentUtil.get(document);
@@ -238,7 +241,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 	 * Runs the runnable in the SWT thread. (Simply runs the runnable if the current thread is the UI thread, otherwise
 	 * calls the runnable in asyncexec.)
 	 */
-	private void runInSWTThread(Runnable runnable) {
+	protected void runInSWTThread(Runnable runnable) {
 		if (Display.getCurrent() == null) {
 			Display.getDefault().asyncExec(runnable);
 		} else {
@@ -328,7 +331,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 		}
 	}
 
-	private ContentOutlineNode findMostSignificantOutlineNode(EObject eObject) {
+	protected ContentOutlineNode findMostSignificantOutlineNode(EObject eObject) {
 		if (eObject != null) {
 			ContentOutlineNodeAdapter adapter = (ContentOutlineNodeAdapter) EcoreUtil.getAdapter(eObject.eAdapters(),
 					ContentOutlineNode.class);
@@ -372,7 +375,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 		}
 	}
 
-	private void refresh() {
+	protected void refresh() {
 		runInSWTThread(new Runnable() {
 			public void run() {
 				TreeViewer tv = getTreeViewer();
