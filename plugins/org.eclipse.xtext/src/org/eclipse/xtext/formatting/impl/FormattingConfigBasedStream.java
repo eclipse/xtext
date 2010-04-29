@@ -9,7 +9,6 @@ package org.eclipse.xtext.formatting.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -27,48 +26,54 @@ import org.eclipse.xtext.formatting.impl.FormattingConfig.NoSpaceLocator;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class FormattingConfigBasedStream extends BaseTokenStream {
 
-	protected class LineEntry {
-		protected EObject grammarEle;
-		protected String val;
+	protected static class LineEntry {
+		protected EObject grammarElement;
+		protected String value;
 		protected boolean isHidden;
-		protected Set<ElementLocator> beforeLoc;
-		protected String beforeWS;
+		protected Set<ElementLocator> leadingLocators;
+		protected String leadingWS;
 		protected int indent;
 
 		@Override
 		public String toString() {
-			return beforeLoc + " --> " + val;
+			return leadingLocators + " --> " + (leadingWS != null ? "[" + leadingWS + "] " : "") +  value;
 		}
 
-		public LineEntry(EObject grammarEle, String val, boolean isHidden,
-				Set<ElementLocator> beforeLoc, String beforeWS, int indent) {
+		public LineEntry(EObject grammarElement, String value, boolean isHidden,
+				Set<ElementLocator> beforeLocators, String leadingWS, int indent) {
 			super();
-			this.grammarEle = grammarEle;
-			this.val = val;
+			this.grammarElement = grammarElement;
+			this.value = value;
 			this.isHidden = isHidden;
-			this.beforeLoc = beforeLoc;
+			this.leadingLocators = beforeLocators;
 			this.indent = indent;
-			this.beforeWS = beforeWS;
+			this.leadingWS = leadingWS;
 		}
 
-		protected int charsInNewLine() {
-			int pos = val.lastIndexOf('\n');
-			if (pos >= 0)
-				return (val.length() - pos) - 1;
-			if (beforeWS != null && (pos = beforeWS.lastIndexOf('\n')) >= 0)
-				return ((beforeWS.length() - pos) + val.length()) - 1;
+		protected int countCharactersInLastLine() {
+			int lastNLIndex = value.lastIndexOf('\n');
+			if (lastNLIndex >= 0)
+				return (value.length() - lastNLIndex) - 1;
+			if (leadingWS != null) {
+				int lastNLIndexInLeadingWs = leadingWS.lastIndexOf('\n');
+				if (lastNLIndexInLeadingWs >= 0)
+					return ((leadingWS.length() - lastNLIndexInLeadingWs) + value.length()) - 1;
+			}
 			return -1;
 		}
 
 		protected boolean isBreakable() {
-			if (beforeLoc == null)
+			if (leadingLocators == null)
 				return false;
-			for (ElementLocator e : beforeLoc)
+			for (ElementLocator e : leadingLocators)
 				if (e instanceof NoLinewrapLocator)
 					return false;
 			return true;
@@ -76,9 +81,9 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 	}
 
 	protected class Line {
-		protected int length;
+		protected int totalLength;
 		protected List<LineEntry> entries;
-		protected int lastBreakable;
+		protected int lastBreakableEntryIndex;
 		protected boolean startWithNL;
 		protected String indent = null;
 		protected int leftover;
@@ -89,80 +94,99 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 
 		@Override
 		public String toString() {
-			TokenStringBuffer b = new TokenStringBuffer();
+			TokenStringBuffer result = new TokenStringBuffer();
 			try {
-				flush(b, entries.size());
+				flush(result, entries.size());
 			} catch (IOException e) {
 				e.printStackTrace();
 				return "Error: " + e.getMessage();
 			}
-			return b.toString();
+			return result.toString();
 		}
 
 		protected Line(int leftover) {
 			this(null, leftover);
 		}
 
-		protected Line(List<LineEntry> e) {
-			this(e, 0);
+		protected Line(List<LineEntry> entries) {
+			this(entries, 0);
 		}
 
 		protected String getIndentation(int indentation) {
 			if (leftover > 0)
 				return "";
-			StringBuffer b = new StringBuffer();
-			b.append(indentationPrefix);
+			if (indentation == 0)
+				return indentationPrefix;
+			StringBuffer result = new StringBuffer(
+					indentation * cfg.getIndentationSpace().length() + indentationPrefix.length());
+			result.append(indentationPrefix);
 			for (int i = 0; i < indentation; i++)
-				b.append(cfg.getIndentationSpace());
-			return b.toString();
+				result.append(cfg.getIndentationSpace());
+			return result.toString();
 		}
 
-		protected Line(List<LineEntry> e, int leftover) {
+		protected Line(List<LineEntry> initialEntries, int leftover) {
 			super();
 			this.leftover = leftover;
-			this.length = leftover;
-			this.entries = e == null ? new ArrayList<LineEntry>() : e;
-			this.lastBreakable = -1;
-			this.startWithNL = e != null;
-			if (e != null && e.size() > 0)
-				indent = getIndentation(e.get(0).indent);
+			this.totalLength = leftover;
+			this.entries = initialEntries == null ? new ArrayList<LineEntry>() : initialEntries;
+			this.lastBreakableEntryIndex = -1;
+			this.startWithNL = initialEntries != null;
+			if (initialEntries != null && initialEntries.size() > 0)
+				indent = getIndentation(initialEntries.get(0).indent);
 			for (int i = 0; i < this.entries.size(); i++) {
-				this.length += this.entries.get(i).val.length();
-				if (this.entries.get(i).isBreakable())
-					lastBreakable = i;
+				LineEntry lineEntry = this.entries.get(i);
+				this.totalLength += lineEntry.value.length();
+				addSpacesToTotalLength(lineEntry, i == 0);
+				if (lineEntry.isBreakable())
+					lastBreakableEntryIndex = i;
 			}
 		}
 
-		public Line add(LineEntry e) throws IOException {
-			entries.add(e);
-			if (indent == null)
+		public Line add(LineEntry lineEntry) throws IOException {
+			entries.add(lineEntry);
+			if (indent == null) {
 				indent = getIndentation(entries.get(0).indent);
-			int nl = e.charsInNewLine();
-			if (nl >= 0) {
-				flush();
-				return new Line(nl);
 			}
-			if (e.isBreakable())
-				lastBreakable = entries.size() - 1;
-			length += e.val.length();
-			if (e.beforeLoc != null)
-				for (ElementLocator l : e.beforeLoc)
+			addSpacesToTotalLength(lineEntry, entries.size() == 1);
+			int lastLineLength = lineEntry.countCharactersInLastLine();
+			if (lastLineLength >= 0) {
+				flush();
+				return new Line(lastLineLength);
+			}
+			if (lineEntry.isBreakable())
+				lastBreakableEntryIndex = entries.size() - 1;
+			totalLength += lineEntry.value.length();
+			if (lineEntry.leadingLocators != null)
+				for (ElementLocator l : lineEntry.leadingLocators) {
 					if (l instanceof LinewrapLocator) {
-						lastBreakable = entries.size() - 1;
+						lastBreakableEntryIndex = entries.size() - 1;
 						return flushLine();
 					}
-			if (length > cfg.getCharsPerLine() && lastBreakable > 0)
+				}
+			if (totalLength > cfg.getCharsPerLine() && lastBreakableEntryIndex > 0)
 				return flushLine();
 			return null;
 		}
 
+		protected void addSpacesToTotalLength(LineEntry lineEntry, boolean first) {
+			String spaces = getSpaces(lineEntry, first);
+			if (spaces != null) {
+				int lastIndexOfNL = spaces.lastIndexOf('\n'); 
+				if (lastIndexOfNL >= 0)
+					totalLength += spaces.length() - lastIndexOfNL;
+				else
+					totalLength += spaces.length();
+			}
+		}
+
 		protected Line flushLine() throws IOException {
-			flush(out, lastBreakable);
+			flush(out, lastBreakableEntryIndex);
 			// TokenStringBuffer b = new TokenStringBuffer();
 			// flush(b, lastBreakable);
 			// System.out.println("WrapLine: \"" + b + "\"");
-			return new Line(new ArrayList<LineEntry>(entries.subList(
-					lastBreakable, entries.size())));
+			return new Line(Lists.newArrayList(
+					entries.subList(lastBreakableEntryIndex, entries.size())));
 		}
 
 		public void flush() throws IOException {
@@ -172,35 +196,38 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 			// System.out.println("BreakLine: \"" + this + "\"");
 		}
 
-		protected void flush(ITokenStream str, int limit) throws IOException {
-			for (int i = 0; i < limit; i++) {
+		/**
+		 * @param endIndex the index of the last entry to flush, exclusive.
+		 */
+		protected void flush(ITokenStream intoStream, int endIndex) throws IOException {
+			for (int i = 0; i < endIndex; i++) {
 				LineEntry e = this.entries.get(i);
 				String sp = getSpaces(e, i == 0);
 				// System.out.println("Spaces: '" + sp + "' before '" + e.val
 				// + "'");
 				if (sp != null)
-					str.writeHidden(cfg.getWhitespaceRule(), sp);
+					intoStream.writeHidden(cfg.getWhitespaceRule(), sp);
 				if (e.isHidden)
-					str.writeHidden(e.grammarEle, e.val);
+					intoStream.writeHidden(e.grammarElement, e.value);
 				else
-					str.writeSemantic(e.grammarEle, e.val);
+					intoStream.writeSemantic(e.grammarElement, e.value);
 			}
 		}
 
-		public String getSpaces(LineEntry e, boolean isLineStart) {
-			if (e.beforeWS != null)
-				return e.beforeWS;
-			if (e.beforeLoc == null)
+		public String getSpaces(LineEntry entry, boolean isLineStart) {
+			if (entry.leadingWS != null)
+				return entry.leadingWS;
+			if (entry.leadingLocators == null)
 				return null;
 			boolean nospace = false;
 			int wrap = isLineStart && startWithNL && leftover <= 0 ? 1 : 0;
-			for (ElementLocator l : e.beforeLoc)
-				if (l instanceof LinewrapLocator)
-					wrap = Math.max(wrap, ((LinewrapLocator) l).getLines());
-			for (ElementLocator l : e.beforeLoc) {
-				if (l instanceof NoSpaceLocator)
+			for (ElementLocator leadingLocator : entry.leadingLocators)
+				if (leadingLocator instanceof LinewrapLocator)
+					wrap = Math.max(wrap, ((LinewrapLocator) leadingLocator).getLines());
+			for (ElementLocator leadingLocator : entry.leadingLocators) {
+				if (leadingLocator instanceof NoSpaceLocator)
 					nospace = true;
-				else if (l instanceof NoLinewrapLocator)
+				else if (leadingLocator instanceof NoLinewrapLocator)
 					wrap = 0;
 			}
 			if (wrap > 0)
@@ -213,11 +240,19 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 		}
 
 		protected String wrap(int lines, String indent) {
-			StringBuffer r = new StringBuffer();
+			StringBuffer result = new StringBuffer(lines + indent);
 			for (int i = 0; i < lines; i++)
-				r.append("\n");
-			r.append(indent);
-			return r.toString();
+				result.append("\n");
+			// do not indent too deep as there would be no space left
+			// for semantic information
+			int indentLength = indent.length();
+			while ((cfg.getCharsPerLine() * 2 / 3) < indentLength) {
+				indentLength = indentLength - cfg.getCharsPerLine() / 2;
+			}
+			if (indentLength != indent.length())
+				indent = indent.substring(0, indentLength);
+			result.append(indent);
+			return result.toString();
 		}
 
 	}
@@ -243,93 +278,93 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 	}
 
 	public Set<ElementLocator> collectLocators(EObject left, EObject right) {
-		Set<ElementLocator> r = new HashSet<ElementLocator>(activeRangeLocators);
+		Set<ElementLocator> result = Sets.newHashSet(activeRangeLocators);
 
 		if (left != null) {
-			Assignment lass = GrammarUtil.containingAssignment(left);
-			List<ElementLocator> lel;
-			if (lass == null)
-				lel = cfg.getAfter(left);
+			Assignment assignment = GrammarUtil.containingAssignment(left);
+			List<ElementLocator> trailingElementLocators;
+			if (assignment == null)
+				trailingElementLocators = cfg.getAfter(left);
 			else {
-				lel = new ArrayList<ElementLocator>(cfg.getAfter(left));
-				lel.addAll(cfg.getAfter(lass));
+				trailingElementLocators = new ArrayList<ElementLocator>(cfg.getAfter(left));
+				trailingElementLocators.addAll(cfg.getAfter(assignment));
 			}
 
-			r.addAll(lel);
-			for (ElementLocator l : lel)
-				if (l.getType() == LocatorType.RANGE)
-					activeRangeLocators.add(l);
+			result.addAll(trailingElementLocators);
+			for (ElementLocator locator : trailingElementLocators)
+				if (locator.getType() == LocatorType.RANGE)
+					activeRangeLocators.add(locator);
 		}
 		if (right != null) {
-			Assignment rass = GrammarUtil.containingAssignment(right);
-			List<ElementLocator> rel;
-			if (rass == null)
-				rel = cfg.getBefore(right);
+			Assignment assignment = GrammarUtil.containingAssignment(right);
+			List<ElementLocator> leadingElementLocators;
+			if (assignment == null)
+				leadingElementLocators = cfg.getBefore(right);
 			else {
-				rel = new ArrayList<ElementLocator>(cfg.getBefore(right));
-				rel.addAll(cfg.getBefore(rass));
+				leadingElementLocators = new ArrayList<ElementLocator>(cfg.getBefore(right));
+				leadingElementLocators.addAll(cfg.getBefore(assignment));
 			}
-			for (Iterator<ElementLocator> i = r.iterator(); i.hasNext();) {
-				ElementLocator l = i.next();
-				if (l.getType() == LocatorType.BETWEEN && !rel.contains(l))
+			for (Iterator<ElementLocator> i = result.iterator(); i.hasNext();) {
+				ElementLocator locator = i.next();
+				if (locator.getType() == LocatorType.BETWEEN && !leadingElementLocators.contains(locator))
 					i.remove();
 			}
-			for (Iterator<ElementLocator> i = rel.iterator(); i.hasNext();) {
+			for (Iterator<ElementLocator> i = leadingElementLocators.iterator(); i.hasNext();) {
 				if (i.next().getType() == LocatorType.BETWEEN)
 					i.remove();
 			}
-			r.addAll(rel);
-			for (ElementLocator l : rel)
-				if (l.getType() == LocatorType.RANGE)
-					activeRangeLocators.remove(l);
+			result.addAll(leadingElementLocators);
+			for (ElementLocator locator : leadingElementLocators)
+				if (locator.getType() == LocatorType.RANGE)
+					activeRangeLocators.remove(locator);
 		}
-		for (ElementLocator e : r) {
-			if (e instanceof IndentationLocatorStart)
+		for (ElementLocator locator : result) {
+			if (locator instanceof IndentationLocatorStart)
 				indentationLevel++;
-			else if (e instanceof IndentationLocatorEnd)
+			else if (locator instanceof IndentationLocatorEnd)
 				indentationLevel--;
 		}
 		// System.out.println(r);
-		return r;
+		return result;
 	}
 
-	protected String lastWS = null;
+	protected String preservedWS = null;
 
-	protected Line line = null;
+	protected Line currentLine = null;
 
 	@Override
 	public void writeHidden(EObject grammarElement, String value)
 			throws IOException {
 		if (cfg.getWhitespaceRule() == grammarElement) {
 			if (preserveSpaces) {
-				if (lastWS == null)
-					lastWS = value;
+				if (preservedWS == null)
+					preservedWS = value;
 				else
-					lastWS += value;
+					preservedWS += value;
 			}
 		} else
 			addLineEntry(grammarElement, value, true);
 	}
 
-	protected void addLineEntry(EObject grammarEle, String value,
+	protected void addLineEntry(EObject grammarElement, String value,
 			boolean isHidden) throws IOException {
-		Set<ElementLocator> loc = collectLocators(last, grammarEle);
+		Set<ElementLocator> locators = collectLocators(last, grammarElement);
 		// System.out.println(loc + " --> " + value.replaceAll("\n", "\\n"));
-		last = grammarEle;
-		LineEntry e = new LineEntry(grammarEle, value, true, loc, lastWS,
+		last = grammarElement;
+		LineEntry e = new LineEntry(grammarElement, value, true, locators, preservedWS,
 				indentationLevel);
-		lastWS = null;
-		if (line == null)
-			line = new Line();
-		Line newLine = line.add(e);
+		preservedWS = null;
+		if (currentLine == null)
+			currentLine = new Line();
+		Line newLine = currentLine.add(e);
 		if (newLine != null)
-			line = newLine;
+			currentLine = newLine;
 	}
 
 	@Override
 	public void flush() throws IOException {
-		if (line != null)
-			line.flush();
+		if (currentLine != null)
+			currentLine.flush();
 		super.flush();
 	}
 
