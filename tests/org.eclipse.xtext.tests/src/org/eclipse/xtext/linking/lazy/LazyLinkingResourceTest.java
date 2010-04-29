@@ -66,8 +66,6 @@ public class LazyLinkingResourceTest extends TestCase {
     
     public void testWarningInsteadOfError() throws Exception {
     	final EAnnotation source = EcoreFactory.eINSTANCE.createEAnnotation();
-        final EObject referencedObject = XtextFactory.eINSTANCE.createGrammar();
-
         LazyLinkingResource res = new LazyLinkingResource();
         res.setEncoder(new LazyURIEncoder() {
             @Override
