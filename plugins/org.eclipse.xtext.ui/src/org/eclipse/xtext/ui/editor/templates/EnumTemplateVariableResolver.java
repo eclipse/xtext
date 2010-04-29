@@ -10,7 +10,7 @@ import org.eclipse.jface.text.templates.TemplateVariable;
 /**
  * Resolves a template variable to <code>EEnumLiteral literals</code> which are
  * assignment-compatible with the <code>TemplateVariable variable</code>
- * enumeration parameter (e.g. in ${modifier:Enum('Visibility')}).
+ * enumeration parameter (e.g. in ${modifier:Enum('[PackageName.]Visibility')}).
  * 
  * @author Michael Clay - Initial contribution and API
  */
@@ -18,9 +18,10 @@ public class EnumTemplateVariableResolver extends
 		AbstractTemplateVariableResolver {
 
 	public EnumTemplateVariableResolver() {
-		super("Enum", "EnumTemplateVariableResolver for Enumeration");
+		super("Enum", "Select a value of an enumeration, e.g." +
+				" ${modifier:Enum('[PackageName.]Visibility')}");
 	}
-
+	
 	@Override
 	public List<String> resolveValues(TemplateVariable variable,
 			XtextTemplateContext castedContext) {
