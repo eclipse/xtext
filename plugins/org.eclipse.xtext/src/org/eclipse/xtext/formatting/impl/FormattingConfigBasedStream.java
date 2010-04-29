@@ -240,7 +240,7 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 		}
 
 		protected String wrap(int lines, String indent) {
-			StringBuffer result = new StringBuffer(lines + indent);
+			StringBuffer result = new StringBuffer(lines + indent.length());
 			for (int i = 0; i < lines; i++)
 				result.append("\n");
 			// do not indent too deep as there would be no space left
