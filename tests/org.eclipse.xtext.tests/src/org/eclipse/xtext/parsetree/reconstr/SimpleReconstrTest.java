@@ -34,7 +34,7 @@ public class SimpleReconstrTest extends AbstractXtextTests {
 		String model = "( ( a b ) ! c  d e  f (  x s ) ( \t ( a \n\rb/*ffo \n bar */ ) ! c ) ! ) //holla\n!";
 		assertEquals(model, parseAndSerialize(model));
 	}
-	
+
 	public void testComplex1() throws Exception {
 		String model = "(a b) //holla\n!";
 		assertEquals(model, parseAndSerialize(model));
@@ -42,11 +42,11 @@ public class SimpleReconstrTest extends AbstractXtextTests {
 
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = getModel(model);
-//		if (logger.isTraceEnabled()) {
-//			System.out.println(EmfFormatter.objToStr(result));
-//			System.out.println(EmfFormatter.objToStr(NodeUtil.getRootNode(result)));
-//			logger.trace(EmfFormatter.objToStr(NodeUtil.getRootNode(result).getLeafNodes()));
-//		}
+		//		if (logger.isTraceEnabled()) {
+		//			System.out.println(EmfFormatter.objToStr(result));
+		//			System.out.println(EmfFormatter.objToStr(NodeUtil.getRootNode(result)));
+		//			logger.trace(EmfFormatter.objToStr(NodeUtil.getRootNode(result).getLeafNodes()));
+		//		}
 		SerializerUtil.SerializationOptions opt = new SerializerUtil.SerializationOptions();
 		opt.setFormat(false);
 		return getSerializer().serialize(result, opt);
@@ -63,7 +63,7 @@ public class SimpleReconstrTest extends AbstractXtextTests {
 		String model = "a + b - c";
 		assertEquals(model, parseAndSerialize(model));
 	}
-	
+
 	public void testSimpleExpressions3() throws Exception {
 		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
 		String model = "a + (b - c)";
@@ -252,7 +252,7 @@ public class SimpleReconstrTest extends AbstractXtextTests {
 		String model = "#14 item test";
 		EmptyObjectBug284850 result = (EmptyObjectBug284850) getModel(model);
 		result.getItems().getList().clear();
-//		System.out.println(EmfFormatter.objToStr(result));
+		//		System.out.println(EmfFormatter.objToStr(result));
 		SerializerUtil.SerializationOptions opt = new SerializerUtil.SerializationOptions();
 		opt.setFormat(false);
 		String actual = getSerializer().serialize(result, opt);
@@ -266,7 +266,7 @@ public class SimpleReconstrTest extends AbstractXtextTests {
 		opt.setFormat(false);
 		assertEquals(model, getSerializer().serialize(result, opt));
 	}
-	
+
 	public void testEObjectRef() throws Exception {
 		String model = "#16 obj refs obj";
 		EObject result = getModel(model);
@@ -274,24 +274,41 @@ public class SimpleReconstrTest extends AbstractXtextTests {
 		opt.setFormat(false);
 		assertEquals(model, getSerializer().serialize(result, opt));
 	}
-	
+
 	public void testTypeBug305577a() throws Exception {
 		String model = "#17 ka foo";
 		assertEquals(model, parseAndSerialize(model));
 	}
-	
+
 	public void testTypeBug305577b() throws Exception {
 		String model = "#17 kb foo";
 		assertEquals(model, parseAndSerialize(model));
 	}
-	
+
 	public void testTypeBug305577c() throws Exception {
 		String model = "#18 ka foo";
 		assertEquals(model, parseAndSerialize(model));
 	}
-	
+
 	public void testTypeBug305577d() throws Exception {
 		String model = "#17 kb foo";
+		assertEquals(model, parseAndSerialize(model));
+	}
+
+	public void testBug305171() throws Exception {
+		String model = "#19 kx a,b ky c,d foo";
+		assertEquals(model, parseAndSerialize(model));
+
+		model = "#19 ky c,d foo";
+		assertEquals(model, parseAndSerialize(model));
+
+		model = "#19 kx a,b foo";
+		assertEquals(model, parseAndSerialize(model));
+
+		model = "#19 foo";
+		assertEquals(model, parseAndSerialize(model));
+
+		model = "#19 kx a ky c foo";
 		assertEquals(model, parseAndSerialize(model));
 	}
 
