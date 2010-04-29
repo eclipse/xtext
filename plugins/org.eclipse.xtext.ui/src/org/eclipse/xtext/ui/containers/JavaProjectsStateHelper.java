@@ -138,7 +138,7 @@ public class JavaProjectsStateHelper extends AbstractStorage2UriMapperClient {
 	}
 	
 	protected IPackageFragmentRoot getPackageFragmentRoot(URI uri) {
-		if (uri.isArchive()) {
+		if (uri.isArchive() || !uri.isPlatform()) {
 			return getJarWithEntry(uri);
 		}
 		final IFile file = getWorkspaceRoot().getFile(new Path(uri.toPlatformString(true)));
