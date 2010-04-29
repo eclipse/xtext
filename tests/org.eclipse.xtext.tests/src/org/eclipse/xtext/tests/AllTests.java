@@ -196,6 +196,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.util.StringsTest.class);
       suite.addTestSuite(org.eclipse.xtext.util.TailWriterTest.class);
       suite.addTestSuite(org.eclipse.xtext.util.TuplesTest.class);
+      suite.addTestSuite(org.eclipse.xtext.validation.AssignmentAllocatorTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.CompositeValidatorWithEObjectValidatorTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.CompositeValidatorWithoutEObjectValidatorTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.ConcreteSyntaxConstraintProviderTest.class);
@@ -209,6 +210,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.validation.ValidatorTestingTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.Bug250313AntlrTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.Bug250313PackratTest.class);
+      suite.addTestSuite(org.eclipse.xtext.valueconverter.IdConverterTest.class);
+      suite.addTestSuite(org.eclipse.xtext.valueconverter.IntConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.ParserComparingTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.StringConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.Bug285605Test.class);
