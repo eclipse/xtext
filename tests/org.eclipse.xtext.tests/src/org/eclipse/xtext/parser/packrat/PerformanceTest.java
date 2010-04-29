@@ -27,7 +27,7 @@ public class PerformanceTest extends AbstractXtextTests {
 
 	private static int lexerRuleCount = metamodelCount;
 
-	private long startTime;
+//	private long startTime;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -48,17 +48,17 @@ public class PerformanceTest extends AbstractXtextTests {
 		System.gc();
 		if (metamodelCount >= 1000)
 			Thread.sleep(2000); // increase chance for the gc to collect unused objects
-		System.out.println("===== " + getName() + " =====");
-		System.out.println("model.length(): " + model.length() + " chars (ca. " + (metamodelCount * 2)+ " lines)" );
-		System.out.println("usage before:   " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
-		startTime = System.currentTimeMillis();
+//		System.out.println("===== " + getName() + " =====");
+//		System.out.println("model.length(): " + model.length() + " chars (ca. " + (metamodelCount * 2)+ " lines)" );
+//		System.out.println("usage before:   " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
+//		startTime = System.currentTimeMillis();
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
-		long endTime = System.currentTimeMillis();
-		System.out.println("usage after:    " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
-		System.out.println("duration:               " + (endTime - startTime) + " ms");
+//		long endTime = System.currentTimeMillis();
+//		System.out.println("usage after:    " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
+//		System.out.println("duration:               " + (endTime - startTime) + " ms");
 		this.model = null;
 		super.tearDown();
 	}

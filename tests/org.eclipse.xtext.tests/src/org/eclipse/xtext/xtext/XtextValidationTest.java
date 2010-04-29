@@ -369,7 +369,7 @@ public class XtextValidationTest extends AbstractXtextTests implements Validatio
 				"grammar org.foo.Bar with org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage\n" +
 				"import 'classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.ecore' as mm\n" +
 				"Atom returns mm::Atom: name = ID;", 1);
-		System.out.println(resource.getErrors());
+//		System.out.println(resource.getErrors());
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
 
