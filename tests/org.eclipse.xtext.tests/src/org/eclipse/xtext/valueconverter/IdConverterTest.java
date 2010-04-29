@@ -42,7 +42,7 @@ public class IdConverterTest extends AbstractXtextTests {
 			fail("Null value not detected.");
 		} catch (ValueConverterException e) {
 			// normal operation
-			System.out.println(e.getMessage());
+//			System.out.println(e.getMessage());
 		}
 	}
 
@@ -53,7 +53,7 @@ public class IdConverterTest extends AbstractXtextTests {
 			fail("Empty value not detected.");
 		} catch (ValueConverterException e) {
 			// normal operation
-			System.out.println(e.getMessage());
+//			System.out.println(e.getMessage());
 		}
 	}
 
@@ -64,7 +64,7 @@ public class IdConverterTest extends AbstractXtextTests {
 			fail("invalid char not detected..");
 		} catch (ValueConverterException e) {
 			// normal operation
-			System.out.println(e.getMessage());
+//			System.out.println(e.getMessage());
 		}
 	}
 
@@ -75,7 +75,7 @@ public class IdConverterTest extends AbstractXtextTests {
 			fail("Empty value not detected.");
 		} catch (ValueConverterException e) {
 			// normal operation
-			System.out.println(e.getMessage());
+//			System.out.println(e.getMessage());
 		}
 	}
 
@@ -86,7 +86,7 @@ public class IdConverterTest extends AbstractXtextTests {
 			fail("Empty value not detected.");
 		} catch (ValueConverterException e) {
 			// normal operation
-			System.out.println(e.getMessage());
+//			System.out.println(e.getMessage());
 		}
 	}
 
