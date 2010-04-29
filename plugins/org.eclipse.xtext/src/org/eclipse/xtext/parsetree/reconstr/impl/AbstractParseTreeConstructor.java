@@ -95,7 +95,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			return false;
 		}
 
-		public List<AbstractToken> getChildren() {
+		public List<AbstractToken> getTokensForSemanticChildren() {
 			return children;
 		}
 
@@ -544,14 +544,14 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			return;
 		AbstractToken token = eObject2Token.get(container);
 		if (token != null) {
-			for (int i = 0; i < token.getChildren().size(); i++) {
-				AbstractToken t = token.getChildren().get(i);
+			for (int i = 0; i < token.getTokensForSemanticChildren().size(); i++) {
+				AbstractToken t = token.getTokensForSemanticChildren().get(i);
 				if ((t instanceof KeywordToken || t instanceof AssignmentToken) && t.getNode() == null) {
-					token.getChildren().add(i, new CommentToken(comment));
+					token.getTokensForSemanticChildren().add(i, new CommentToken(comment));
 					return;
 				}
 			}
-			token.getChildren().add(new CommentToken(comment));
+			token.getTokensForSemanticChildren().add(new CommentToken(comment));
 		}
 	}
 
@@ -580,7 +580,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 	}
 
 	protected void assignTokenByMatcher(AbstractNode node, AbstractToken token, boolean rec) {
-		for (AbstractToken t : token.getChildren())
+		for (AbstractToken t : token.getTokensForSemanticChildren())
 			if (rec && t instanceof AssignmentToken)
 				return;
 			else if (t.getNode() == null && t.equalsOrReplacesNode(node)) {
@@ -619,10 +619,10 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 				node = node.getParent();
 			roots.add(node);
 		}
-		if (!token.getChildren().isEmpty()) {
-			obj2token.put(token.getChildren().get(0).getCurrent().getDelegate(), token);
-			for (AbstractToken t : token.getChildren())
-				if (!t.getChildren().isEmpty())
+		if (!token.getTokensForSemanticChildren().isEmpty()) {
+			obj2token.put(token.getTokensForSemanticChildren().get(0).getCurrent().getDelegate(), token);
+			for (AbstractToken t : token.getTokensForSemanticChildren())
+				if (!t.getTokensForSemanticChildren().isEmpty())
 					collectRootsAndEObjects(t, obj2token, roots);
 		}
 	}
@@ -637,19 +637,23 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		return b.toString();
 	}
 
-	protected void dump(String ident, AbstractToken token) {
-		System.out.println(ident + "begin " + token.getClass().getSimpleName() + " - "
+	protected void dump(String indent, AbstractToken token) {
+		System.out.println(indent + "begin " + token.getClass().getSimpleName() + " - "
 				+ EmfFormatter.objPath(token.getCurrent().getDelegate()) + " node:" + dumpNode(token.getNode()));
-		String i = ident + "\t";
-		for (AbstractToken t : token.getChildren()) {
-			if (t.getChildren().isEmpty())
-				System.out.println(i + " -> " + t.getClass().getSimpleName() + " - "
-						+ (t.getCurrent() == null ? "null" : EmfFormatter.objPath(t.getCurrent().getDelegate()))
-						+ " node:" + dumpNode(t.getNode()));
+		String newIndent = indent + "\t";
+		for (AbstractToken child : token.getTokensForSemanticChildren()) {
+			if (child.getTokensForSemanticChildren().isEmpty())
+				System.out
+						.println(newIndent
+								+ " -> "
+								+ child.getClass().getSimpleName()
+								+ " - "
+								+ (child.getCurrent() == null ? "null" : EmfFormatter.objPath(child.getCurrent()
+										.getDelegate())) + " node:" + dumpNode(child.getNode()));
 			else
-				dump(i, t);
+				dump(newIndent, child);
 		}
-		System.out.println(ident + "end");
+		System.out.println(indent + "end");
 	}
 
 	protected String dumpNode(AbstractNode node) {
@@ -710,19 +714,19 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			throw new NullPointerException("The to-be-serialized EObject is null");
 		AbstractToken root = getRootToken(getDescr(object));
 		AbstractToken first = serialize(object, root, rep);
-		Map<EObject, List<AbstractToken>> tree = Maps.newHashMap();
+		Map<EObject, List<AbstractToken>> semantic2token = Maps.newHashMap();
 		AbstractToken t = first;
 		while (t != null) {
-			List<AbstractToken> l = tree.get(t.getCurrent().getDelegate());
-			if (l == null)
-				tree.put(t.getCurrent().getDelegate(), l = Lists.newArrayList());
+			List<AbstractToken> tokens = semantic2token.get(t.getCurrent().getDelegate());
+			if (tokens == null)
+				semantic2token.put(t.getCurrent().getDelegate(), tokens = Lists.newArrayList());
 			if (t.getParent() != null)
-				l.add(t);
+				tokens.add(t);
 			if (t.getNext() != null) {
 				if (t.getNext().getParent() == null)
-					root.children = l;
+					root.children = tokens;
 				else if (t.getNext().getCurrent().getDelegate() == t.getCurrent().getDelegate().eContainer())
-					t.getNext().children = l;
+					t.getNext().children = tokens;
 			}
 			t = t.getNext();
 		}
@@ -747,8 +751,8 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 	}
 
 	protected void write(AbstractToken token, WsMergerStream out) throws IOException {
-		if (!token.getChildren().isEmpty())
-			for (AbstractToken t : token.getChildren())
+		if (!token.getTokensForSemanticChildren().isEmpty())
+			for (AbstractToken t : token.getTokensForSemanticChildren())
 				write(t, out);
 		else {
 			if (token instanceof CommentToken)
