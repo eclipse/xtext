@@ -12,7 +12,6 @@ import java.util.Iterator;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.junit.AbstractXtextTests.Keys;
 import org.eclipse.xtext.parsetree.ParsetreePackage;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.EmfFormatter;
