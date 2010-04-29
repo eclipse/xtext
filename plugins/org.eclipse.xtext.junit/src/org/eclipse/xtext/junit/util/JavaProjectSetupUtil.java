@@ -80,13 +80,13 @@ public class JavaProjectSetupUtil {
 	}
 
 	public static IJavaProject createJavaProject(String projectName) throws CoreException {
-		IProject project = createProject(projectName);
+		IProject project = createSimpleProject(projectName);
 		JavaCore.initializeAfterLoad(monitor());
 		IJavaProject javaProject = makeJavaProject(project);
 		return javaProject;
 	}
 
-	private static IProject createProject(String projectName) throws CoreException {
+	public static IProject createSimpleProject(String projectName) throws CoreException {
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		IProject project = root.getProject(projectName);
 		deleteProject(project);
@@ -218,7 +218,7 @@ public class JavaProjectSetupUtil {
 		waitForAutoBuild();
 	}
 
-	private static IFolder createSubFolder(IProject project, String folderName) throws CoreException {
+	public static IFolder createSubFolder(IProject project, String folderName) throws CoreException {
 		IFolder folder = project.getFolder(folderName);
 		if (folder.exists()) {
 			folder.delete(true, null);
