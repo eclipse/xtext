@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -29,6 +30,7 @@ import org.eclipse.xtext.ui.editor.model.edit.IssueUtil;
 import org.eclipse.xtext.ui.editor.validation.XtextAnnotation;
 import org.eclipse.xtext.validation.Issue;
 
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.internal.Lists;
 
@@ -84,8 +86,8 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 		List<ICompletionProposal> result = Lists.newArrayList();
 		try {
 			final int offset = invocationContext.getOffset();
-			Annotation annotation = getApplicableAnnotation(xtextDocument, annotationModel, offset);
-			if (annotation != null) {
+			Set<Annotation> applicableAnnotations = getApplicableAnnotations(xtextDocument, annotationModel, offset);
+			for(Annotation annotation : applicableAnnotations) {
 				final Issue issue = issueUtil.getIssueFromAnnotation(annotation);
 				if (issue != null) {
 					Iterable<IssueResolution> resolutions = getResolutions(issue, xtextDocument);
@@ -93,9 +95,14 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 						Position pos = annotationModel.getPosition(annotation);
 						for (IssueResolution resolution : resolutions)
 							result.add(create(pos, resolution));
-						sourceViewer.setSelectedRange(pos.getOffset(), pos.getLength());
 					}
 				}
+			}
+			Iterator<Annotation> iterator = applicableAnnotations.iterator();
+			if(iterator.hasNext() && !result.isEmpty()){
+				Position pos = annotationModel.getPosition(iterator.next());
+				sourceViewer.setSelectedRange(pos.getOffset(), pos.getLength());
+				sourceViewer.revealRange(pos.getOffset(), pos.getLength());
 			}
 		} catch (BadLocationException e) {
 			errorMessage = e.getMessage();
@@ -116,7 +123,7 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 		});
 	}
 
-	protected Annotation getApplicableAnnotation(final IXtextDocument document, final IAnnotationModel annotationModel,
+	protected Set<Annotation> getApplicableAnnotations(final IXtextDocument document, final IAnnotationModel annotationModel,
 			final int offset) throws BadLocationException {
 		final int line = document.getLineOfOffset(offset);
 		final String delim = document.getLineDelimiter(line);
@@ -131,6 +138,7 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 		else
 			iterator = annotationModel.getAnnotationIterator();
 
+		Set<Annotation> possibleAnnotations = Sets.newHashSet();
 		Annotation actualAnnotation = null;
 		int nearestAnnotationOffset = Integer.MAX_VALUE;
 		Annotation firstAnnotation = null;
@@ -150,23 +158,32 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 				continue;
 
 			if (pos.overlapsWith(lineOffset, lineLength)) {
+				possibleAnnotations.add(annotationTemp);
 				if (pos.getOffset() < offsetOfFirstAnnotation) {
 					offsetOfFirstAnnotation = pos.getOffset();
 					firstAnnotation = annotationTemp;
 				}
-
 				int distanceToOffset = offset - pos.getOffset();
 				if (distanceToOffset >= 0 && distanceToOffset < nearestAnnotationOffset) {
 					actualAnnotation = annotationTemp;
 					nearestAnnotationOffset = distanceToOffset;
-				}
+				} 
 			}
 		}
 		// choose the first annotation if there is no better selection available
 		if (actualAnnotation == null) {
 			actualAnnotation = firstAnnotation;
 		}
-		return actualAnnotation;
+		// Find Annotations with same offset an length
+		Set<Annotation> actualAnnotations = Sets.newHashSet();
+		for(Annotation possibleAnnotation : possibleAnnotations){
+			Position possibleAnnotationPosition = annotationModel.getPosition(possibleAnnotation);
+			Position actualAnnotationPosition = annotationModel.getPosition(actualAnnotation);
+			if(possibleAnnotationPosition.equals(actualAnnotationPosition)){
+				actualAnnotations.add(possibleAnnotation);
+			}
+		}
+		return actualAnnotations;
 	}
 	
 	public IssueUtil getIssueUtil() {
