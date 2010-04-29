@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.TemplateContext;
 import org.eclipse.jface.text.templates.TemplateContextType;
@@ -41,13 +42,15 @@ import com.google.inject.Singleton;
 public class DefaultTemplateProposalProvider extends AbstractTemplateProposalProvider {
 
 	private TemplateStore templateStore;
-	private XtextTemplateContextTypeRegistry registry;
+	private ContextTypeRegistry registry;
+	private ContextTypeIdHelper helper;
 	private Image image;
 	
 	@Inject
-	public DefaultTemplateProposalProvider(TemplateStore templateStore, XtextTemplateContextTypeRegistry registry) {
+	public DefaultTemplateProposalProvider(TemplateStore templateStore, ContextTypeRegistry registry, ContextTypeIdHelper helper) {
 		this.templateStore = templateStore;
 		this.registry = registry;
+		this.helper = helper;
 	}
 
 	@Override
@@ -131,11 +134,11 @@ public class DefaultTemplateProposalProvider extends AbstractTemplateProposalPro
 		}
 		
 		protected void addContextType(ParserRule rule) {
-			addContextType(registry.getId(rule));
+			addContextType(helper.getId(rule));
 		}
 
 		protected void addContextType(Keyword keyword) {
-			addContextType(registry.getId(keyword));
+			addContextType(helper.getId(keyword));
 		}
 
 		protected void addContextType(String id) {
