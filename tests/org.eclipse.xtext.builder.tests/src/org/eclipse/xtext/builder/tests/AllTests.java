@@ -17,6 +17,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.builder.builderState.XMIBasedPersisterTest.class);
       suite.addTestSuite(org.eclipse.xtext.builder.impl.BuilderParticipantTest.class);
       suite.addTestSuite(org.eclipse.xtext.builder.impl.IntegrationTest.class);
+      suite.addTestSuite(org.eclipse.xtext.builder.impl.SimpleProjectsIntegrationTest.class);
       return suite;
    }
 }
