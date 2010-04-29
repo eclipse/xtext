@@ -81,22 +81,14 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 
 			IResourceValidator resourceValidator = provider.getResourceValidator();
 			List<Issue> list = resourceValidator
-					.validate(resource, CheckMode.FAST_ONLY, getCancelIndicator(subMonitor));
+					.validate(resource, CheckMode.NORMAL_AND_FAST, getCancelIndicator(subMonitor));
 			if (monitor.isCanceled())
 				return;
+			subMonitor.worked(1);
 			file.deleteMarkers(MarkerTypes.FAST_VALIDATION, true, 1);
-			for (Issue issue : list) {
-				markerCreator.createMarker(issue, file, MarkerTypes.FAST_VALIDATION);
-			}
-			subMonitor.worked(1);
-
-			list = resourceValidator.validate(resource, CheckMode.NORMAL_ONLY, getCancelIndicator(monitor));
-			subMonitor.worked(1);
 			file.deleteMarkers(MarkerTypes.NORMAL_VALIDATION, true, 1);
-			if (subMonitor.isCanceled())
-				return;
 			for (Issue issue : list) {
-				markerCreator.createMarker(issue, file, MarkerTypes.NORMAL_VALIDATION);
+				markerCreator.createMarker(issue, file, MarkerTypes.forCheckType(issue.getType()));
 			}
 		} catch (CoreException e) {
 			log.error(e.getMessage(), e);

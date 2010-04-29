@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui;
 
+import org.eclipse.xtext.validation.CheckType;
+
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -19,4 +21,12 @@ public final class MarkerTypes {
 	public final static String NORMAL_VALIDATION = "org.eclipse.xtext.ui.check.normal";
 	public final static String EXPENSIVE_VALIDATION = "org.eclipse.xtext.ui.check.expensive";
 	
+	public static String forCheckType(CheckType checkType) {
+		switch(checkType) {
+			case FAST: return FAST_VALIDATION;
+			case NORMAL: return NORMAL_VALIDATION;
+			case EXPENSIVE: return EXPENSIVE_VALIDATION;
+			default: return ANY_VALIDATION;
+		}
+	}
 }
