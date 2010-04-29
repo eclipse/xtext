@@ -15,8 +15,7 @@ import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.XtextContentOutlinePage;
 
 /**
- * This listener listens to selections in the outline and will update the editor
- * selection accordingly.
+ * This listener listens to selections in the outline and will update the editor selection accordingly.
  * 
  * @author Peter Friese - Initial contribution and API
  */
@@ -35,6 +34,8 @@ public final class OutlineSelectionChangedListener extends AbstractSelectionChan
 				if (firstElement instanceof ContentOutlineNode) {
 					ContentOutlineNode outlineNode = (ContentOutlineNode) firstElement;
 					if (outlineNode.getRegion() != null) {
+						getSourceViewer().setRangeIndication(outlineNode.getSelectionOffset(),
+								outlineNode.getSelectionLength(), true);
 						getSourceViewer().revealRange(outlineNode.getSelectionOffset(),
 								outlineNode.getSelectionLength());
 						getSourceViewer().setSelectedRange(outlineNode.getSelectionOffset(),
