@@ -41,9 +41,9 @@ public class TokenUtil {
 			boolean isParser = node.getParent().getGrammarElement() instanceof ParserRule
 					|| (node.getParent().getGrammarElement() instanceof RuleCall && ((RuleCall) node.getParent()
 							.getGrammarElement()).getRule().getType().getClassifier() instanceof EClass);
-			for (AbstractNode n : node.getParent().getChildren())
-				if (n.getElement() != null && (isParser || n.getGrammarElement() instanceof Action))
-					return n.getElement();
+			for (AbstractNode sibling : node.getParent().getChildren())
+				if (sibling.getElement() != null && (isParser || sibling.getGrammarElement() instanceof Action))
+					return sibling.getElement();
 		}
 		return NodeUtil.findASTElement(node);
 	}

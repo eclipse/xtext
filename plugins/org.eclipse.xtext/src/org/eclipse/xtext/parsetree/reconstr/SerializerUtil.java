@@ -24,16 +24,19 @@ import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 import com.google.inject.Inject;
 
 /**
+ * TODO: Rethink name: Is that a Util or the Serializer itself?
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  * @author Jan Koehnlein
  */
 public class SerializerUtil {
 
+	// TODO: rename NO_FORMATTING
 	public static final SerializationOptions NO_FORMAT = new SerializationOptions(false, true);
 
 	public static class SerializationOptions {
 
-		private boolean format = true;
+		private boolean formatting = true;
 		private boolean validateConcreteSyntax = true;
 
 		public SerializationOptions() {
@@ -41,16 +44,18 @@ public class SerializerUtil {
 
 		public SerializationOptions(boolean format, boolean validateConcreteSyntax) {
 			super();
-			this.format = format;
+			this.formatting = format;
 			this.validateConcreteSyntax = validateConcreteSyntax;
 		}
 
+		// rename: isFormatting
 		public boolean isFormat() {
-			return format;
+			return formatting;
 		}
 
-		public void setFormat(boolean format) {
-			this.format = format;
+		// rename: setFormatting
+		public void setFormat(boolean formatting) {
+			this.formatting = formatting;
 		}
 
 		public boolean isValidateConcreteSyntax() {
@@ -73,38 +78,39 @@ public class SerializerUtil {
 		this.validator = val;
 	}
 
-	public TreeConstructionReport serialize(EObject obj, ITokenStream out, SerializationOptions options)
+	public TreeConstructionReport serialize(EObject obj, ITokenStream tokenStream, SerializationOptions options)
 			throws IOException {
 		if (options.isValidateConcreteSyntax()) {
-			List<Diagnostic> diags = new ArrayList<Diagnostic>();
-			validator.validateRecursive(obj, new IConcreteSyntaxValidator.DiagnosticListAcceptor(diags),
+			List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
+			validator.validateRecursive(obj, new IConcreteSyntaxValidator.DiagnosticListAcceptor(diagnostics),
 					new HashMap<Object, Object>());
-			if (diags.size() > 0)
+			if (diagnostics.size() > 0)
 				throw new IConcreteSyntaxValidator.InvalidConcreteSyntaxException(
-						"These errors need to be fixed before the model an be serialized.", diags);
+						"These errors need to be fixed before the model an be serialized.", diagnostics);
 		}
-		ITokenStream t = formatter.createFormatterStream(null, out, !options.isFormat());
-		TreeConstructionReport report = parseTreeReconstructor.serializeRecursive(obj, t);
-		out.flush();
+		ITokenStream formatterTokenStream = formatter.createFormatterStream(null, tokenStream, !options.isFormat());
+		TreeConstructionReport report = parseTreeReconstructor.serializeRecursive(obj, formatterTokenStream);
+		// TODO: formatterTokenStream.flush() instead?
+		tokenStream.flush();
 		return report;
 	}
 
-	public TreeConstructionReport serialize(EObject obj, Writer out, SerializationOptions opt) throws IOException {
-		return serialize(obj, new WriterTokenStream(out), opt);
+	public TreeConstructionReport serialize(EObject obj, Writer writer, SerializationOptions options) throws IOException {
+		return serialize(obj, new WriterTokenStream(writer), options);
 	}
 
 	public String serialize(EObject obj) {
 		return serialize(obj, new SerializationOptions());
 	}
 
-	public String serialize(EObject obj, SerializationOptions opt) {
-		TokenStringBuffer out = new TokenStringBuffer();
+	public String serialize(EObject obj, SerializationOptions options) {
+		TokenStringBuffer tokenStringBuffer = new TokenStringBuffer();
 		try {
-			serialize(obj, out, opt);
+			serialize(obj, tokenStringBuffer, options);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		return out.toString();
+		return tokenStringBuffer.toString();
 	}
 
 }

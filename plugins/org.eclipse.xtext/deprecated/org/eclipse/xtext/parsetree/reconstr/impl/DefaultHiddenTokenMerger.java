@@ -31,6 +31,7 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import com.google.inject.Inject;
 
 /**
+ * TODO Moritz: convince me not to delete this
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @Deprecated

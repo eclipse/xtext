@@ -16,6 +16,8 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.reconstr.ICommentAssociater;
 
 /**
+ * TODO: consider moving all methods to the default impl and removing this class
+ * 
  * @author meysholdt - Initial contribution and API
  */
 public class AbstractCommentAssociater implements ICommentAssociater {

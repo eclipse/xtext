@@ -8,6 +8,8 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 /**
+ * TODO Moritz: convince me not to delete this
+ * 
  * In the process of serializing a model to a DSL, references to model elements need to be turned into string
  * representations which identify the targeted model element. Implementations of this interface compute this string
  * representation.

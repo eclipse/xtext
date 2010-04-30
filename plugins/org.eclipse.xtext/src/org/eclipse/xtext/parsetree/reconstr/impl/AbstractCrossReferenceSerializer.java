@@ -13,6 +13,8 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 
 /**
+ * TODO: consider moving all methods to the default impl and removing this class
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class AbstractCrossReferenceSerializer implements ITokenSerializer.ICrossReferenceSerializer {

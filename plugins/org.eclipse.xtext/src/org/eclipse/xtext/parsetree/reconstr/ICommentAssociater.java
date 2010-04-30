@@ -18,27 +18,13 @@ import org.eclipse.xtext.parsetree.reconstr.impl.DefaultCommentAssociater;
 import com.google.inject.ImplementedBy;
 
 /**
+ * Associates comments to semantic objects. Used in serialization to recover comments in the right places.
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @ImplementedBy(DefaultCommentAssociater.class)
 public interface ICommentAssociater {
 
 	Map<LeafNode, EObject> associateCommentsWithSemanticEObjects(EObject model, Set<CompositeNode> roots);
-
-	//	public void arrangeCommentsForEObject(EObject context, List<CommentOrSemanticToken> tokens);
-
-	//	public interface CommentOrSemanticToken {
-	//		public AbstractNode getNode();
-	//	}
-	//
-	//	public interface SemanticToken extends CommentOrSemanticToken {
-	//		AbstractElement getGrammarElement();
-	//
-	//		Object getValue();
-	//	}
-	//
-	//	public interface CommentToken extends CommentOrSemanticToken {
-	//
-	//	}
 
 }

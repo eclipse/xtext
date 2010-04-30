@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 
 /**
+ * TODO: consider moving all methods to the default impl and removing this class
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class AbstractTransientValueService implements ITransientValueService {

@@ -21,6 +21,7 @@ public interface ITransientValueService {
 	/**
 	 * For features with isMany() == true, isMixedList() has to return true when isTransient should be called for each
 	 * element of the list instead of once for the whole list.
+	 * TODO: consider renaming, maybe isCheckElementsIndividually
 	 * 
 	 * @param owner
 	 * @param feature

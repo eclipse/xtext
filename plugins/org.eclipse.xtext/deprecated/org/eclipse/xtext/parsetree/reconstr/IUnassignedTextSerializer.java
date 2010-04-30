@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.RuleCall;
 
 /**
+ * TODO Moritz: convince me not to delete this
+ * 
  * A Grammar can instruct the parser to consume text without storing the text in the semantic model. If this text can
  * have more than one valid value according to the Grammar, the serializer needs to be instructed which value to take.
  * 
