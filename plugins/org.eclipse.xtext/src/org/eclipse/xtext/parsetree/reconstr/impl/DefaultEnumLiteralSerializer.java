@@ -48,7 +48,9 @@ public class DefaultEnumLiteralSerializer extends AbstractEnumLiteralSerializer 
 		EnumRule rule = (EnumRule) ruleCall.getRule();
 		if (rule.getAlternatives() instanceof EnumLiteralDeclaration) {
 			EnumLiteralDeclaration decl = (EnumLiteralDeclaration) rule.getAlternatives();
-			return decl.getLiteral();
+			if (decl.getEnumLiteral().getInstance().equals(value)) {
+				return decl.getLiteral();
+			}
 		} else {
 			for (AbstractElement element : ((Alternatives) rule.getAlternatives()).getElements()) {
 				EnumLiteralDeclaration decl = (EnumLiteralDeclaration) element;
@@ -56,8 +58,13 @@ public class DefaultEnumLiteralSerializer extends AbstractEnumLiteralSerializer 
 					return decl.getLiteral();
 				}
 			}
-			return null;
 		}
+		return null;
+	}
+
+	@Override
+	public boolean isValid(EObject context, RuleCall ruleCall, Object value, IErrorAcceptor errorAcceptor) {
+		return getLiteral(context, ruleCall, value) != null;
 	}
 
 	@Override

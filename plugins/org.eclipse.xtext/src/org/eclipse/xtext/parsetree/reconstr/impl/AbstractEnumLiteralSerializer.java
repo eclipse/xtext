@@ -19,16 +19,20 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IEnumLiteralSeriali
  */
 public class AbstractEnumLiteralSerializer implements IEnumLiteralSerializer {
 
+	public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, AbstractNode node) {
+		return false;
+	}
+
+	public boolean isValid(EObject context, RuleCall ruleCall, Object value, IErrorAcceptor errorAcceptor) {
+		return true;
+	}
+
 	public boolean isValidNodeForLiteral(EObject context, RuleCall ruleCall, Object value, AbstractNode node) {
 		return false;
 	}
 
 	public String serializeAssignedEnumLiteral(EObject context, RuleCall ruleCall, Object value, AbstractNode node) {
 		return null;
-	}
-
-	public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, AbstractNode node) {
-		return false;
 	}
 
 }
