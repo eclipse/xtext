@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Guice Plug-in
-Bundle-SymbolicName: com.google.guice
+Bundle-SymbolicName: com.google.inject
 Bundle-Version: 2.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: aopalliance.jar,
