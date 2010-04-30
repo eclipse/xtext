@@ -18,11 +18,13 @@ v1.0 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
 
-   <license url="http://www.eclipse.org/legal/epl-v10.html">%license</license>
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      %license
+   </license>
 
    <requires>
       <import feature="org.eclipse.emf.mwe2.runtime.sdk" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="com.google.collect"/>
+      <import plugin="com.google.collect" version="0.8.0" match="compatible"/>
       <import plugin="com.google.inject"/>
    </requires>
 
@@ -96,7 +98,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.ecore"
          download-size="0"
