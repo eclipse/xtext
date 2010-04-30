@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.TypeResource;
+import org.eclipse.xtext.resource.IFragmentProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -24,16 +25,16 @@ public class PrimitiveMirror extends AbstractClassMirror {
 	}
 
 	@Override
-	public EObject getEObject(Resource resource, String fragment) {
+	public EObject getEObject(Resource resource, String fragment, IFragmentProvider.Fallback fallback) {
 		if (fragment.endsWith("[]")) {
-			return getArrayEObject(resource, fragment);
+			return getArrayEObject(resource, fragment, fallback);
 		}
 		for (EObject obj: resource.getContents()) {
-			String otherFragment = getFragment(obj);
+			String otherFragment = getFragment(obj, fallback);
 			if (fragment.equals(otherFragment))
 				return obj;
 		}
-		return null;
+		return fallback.getEObject(fragment);
 	}
 	
 	@Override

@@ -81,6 +81,17 @@ public class XtextResource extends ResourceImpl {
 
 	@Inject
 	private IFragmentProvider fragmentProvider;
+	
+	private IFragmentProvider.Fallback fragmentProviderFallback = new IFragmentProvider.Fallback() {
+		
+		public String getFragment(EObject obj) {
+			return XtextResource.super.getURIFragment(obj);
+		}
+		
+		public EObject getEObject(String fragment) {
+			return XtextResource.super.getEObject(fragment);
+		}
+	};
 
 	@Inject
 	private SerializerUtil serializer;
@@ -241,24 +252,23 @@ public class XtextResource extends ResourceImpl {
 
 	@Override
 	public EObject getEObject(String uriFragment) {
-		EObject result = (fragmentProvider != null) ? fragmentProvider.getEObject(this, uriFragment) : null;
-
-		if (result == null)
-			result = super.getEObject(uriFragment);
-
+		if (fragmentProvider != null) {
+			EObject result = fragmentProvider.getEObject(this, uriFragment, fragmentProviderFallback);
+			return result;
+		}
+		EObject result = super.getEObject(uriFragment);
 		return result;
 	}
 
 	@Override
 	public String getURIFragment(final EObject object) {
 		return cache.get(Tuples.pair(object, "fragment"), this, new Provider<String>() {
-
 			public String get() {
-				String result = (fragmentProvider != null) ? fragmentProvider.getFragment(object) : null;
-
-				if (result == null)
-					result = XtextResource.super.getURIFragment(object);
-
+				if (fragmentProvider != null) {
+					String result = fragmentProvider.getFragment(object, fragmentProviderFallback);
+					return result;
+				}
+				String result = XtextResource.super.getURIFragment(object);
 				return result;
 			}
 		});
