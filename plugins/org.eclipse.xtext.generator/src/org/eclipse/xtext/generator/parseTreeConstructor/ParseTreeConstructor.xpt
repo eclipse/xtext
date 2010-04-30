@@ -265,20 +265,20 @@ protected class «elementMethodName()» extends UnassignedTextToken {
 			}
 		}
 «ELSE-»
-		if(Boolean.TRUE.booleanValue()) { «REM»metaType.name FIXME: check if value is valid for datatype rule«ENDREM»
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.«gaRuleElementAccessor()», value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.«gaRuleElementAccessor()»;
 			return obj;
 		}
 «ENDIF-»
 «ELSEIF calledEnumRule()!=null-»
-		if(Boolean.TRUE.booleanValue()) { «REM»metaType.name FIXME: check if value is valid for enum rule«ENDREM» 
+		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.«gaRuleElementAccessor()», value, null)) { 
 			type = AssignmentType.ERC;
 			element = grammarAccess.«gaRuleElementAccessor()»;
 			return obj;
 		}
 «ELSE-»
-		if(Boolean.TRUE.booleanValue()) { «REM»metaType.name FIXME: check if value is valid for lexer rule«ENDREM»
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.«gaRuleElementAccessor()», value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.«gaRuleElementAccessor()»;
 			return obj;
