@@ -48,6 +48,8 @@ public interface ITokenSerializer {
 	interface IEnumLiteralSerializer extends ITokenSerializer {
 		boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, AbstractNode node);
 
+		boolean isValid(EObject context, RuleCall ruleCall, Object value, IErrorAcceptor errorAcceptor);
+
 		String serializeAssignedEnumLiteral(EObject context, RuleCall ruleCall, Object value, AbstractNode node);
 	}
 
