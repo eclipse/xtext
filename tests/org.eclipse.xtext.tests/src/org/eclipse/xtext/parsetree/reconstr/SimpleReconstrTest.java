@@ -317,6 +317,17 @@ public class SimpleReconstrTest extends AbstractXtextTests {
 		model = "#19 kz d foo";
 		assertEquals(model, parseAndSerialize(model));
 	}
+	
+	public void testEnumBug310435Enum() throws Exception {
+		String model = "#20 kw1 lit1 kw2 lit2 kw1 lit1 kw2 lit2 kw1 lit1 kw2 lit2";
+		assertEquals(model, parseAndSerialize(model));
+	}
+	
+	public void testEnumBug310435Val() throws Exception {
+		String model = "#21 kw2 '234' kw1 foo kw2 '[]' kw1 bar";
+		assertEquals(model, parseAndSerialize(model));
+	}
+
 
 	@Override
 	protected void setUp() throws Exception {
