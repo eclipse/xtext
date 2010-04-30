@@ -15,11 +15,11 @@ import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.TreeConstructi
  */
 @SuppressWarnings("serial")
 public class XtextSerializationException extends RuntimeException {
-	private TreeConstructionReport rep;
+	private TreeConstructionReport report;
 
-	public XtextSerializationException(TreeConstructionReport rep, String msg) {
-		super(msg + "\n" + rep.toString());
-		this.rep = rep;
+	public XtextSerializationException(TreeConstructionReport report, String message) {
+		super(message + "\n" + report.toString());
+		this.report = report;
 	}
 
 	public XtextSerializationException(String message) {
@@ -27,6 +27,6 @@ public class XtextSerializationException extends RuntimeException {
 	}
 
 	public TreeConstructionReport getReport() {
-		return rep;
+		return report;
 	}
 }

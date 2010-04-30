@@ -50,23 +50,26 @@ import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
+ * TODO: Break up this class into smaller pieces. Consider non-static inner classes
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public abstract class AbstractParseTreeConstructor implements IParseTreeConstructor {
 
 	public abstract class AbstractToken {
-		protected List<AbstractToken> children = Collections.emptyList();
+		protected List<AbstractToken> tokensForSemanticChildren = Collections.emptyList();
 		protected final IInstanceDescription current;
 		protected final AbstractToken next;
 		protected final int no;
 		protected AbstractNode node;
+		//TODO: rename. predecessor? previous? Also rename getters and setters
 		protected final AbstractToken parent;
 
-		public AbstractToken(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		public AbstractToken(AbstractToken parent, AbstractToken next, int no, IInstanceDescription currentSemanticElement) {
 			this.next = next;
 			this.parent = parent;
 			this.no = no;
-			this.current = current;
+			this.current = currentSemanticElement;
 		}
 
 		protected boolean checkForRecursion(Class<?> clazz, IInstanceDescription curr) {
@@ -83,10 +86,12 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			return null;
 		}
 
+		// TODO: consider rename createFollowerAfterReturn
 		public AbstractToken createParentFollower(AbstractToken next, int index, IInstanceDescription inst) {
 			return createParentFollower(next, index, index, inst);
 		}
 
+		// TODO: consider rename createFollowerAfterReturn
 		public AbstractToken createParentFollower(AbstractToken next, int actIndex, int index, IInstanceDescription inst) {
 			return null;
 		}
@@ -96,13 +101,15 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		}
 
 		public List<AbstractToken> getTokensForSemanticChildren() {
-			return children;
+			return tokensForSemanticChildren;
 		}
 
+		// TODO: consider rename getCurrentSemanticElement
 		public IInstanceDescription getCurrent() {
 			return current;
 		}
 
+		// TODO: rename getDiagnsticMessage as ther is a TreeConstructionDiagnostic
 		public String getDiagnostic() {
 			return null;
 		}
@@ -113,6 +120,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			return next;
 		}
 
+		// TODO: rename. what kind of number? index?
 		public int getNo() {
 			return no;
 		}
@@ -121,40 +129,44 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			return node;
 		}
 
+		// TODO rename: getPredecessor()? getParentToken()? I guess you're referring to the linked list of tokens here. If children are instanceDescriptions, parent should be, too
 		public AbstractToken getParent() {
 			return parent;
 		}
 
+		// TODO rename as it seems to be used only for debugging. Maybe "dump()", "toString()"?
+		// serialize is a misleading name within the serializer component!
 		public String serialize(int depth, int length, boolean appendDots) {
-			ArrayList<String> tokens = new ArrayList<String>();
-			AbstractToken t = this;
-			while (t != null && tokens.size() <= depth + 1) {
-				String s = t.serializeThis(null);
+			ArrayList<String> tokensAsStrings = new ArrayList<String>();
+			AbstractToken currentToken = this;
+			while (currentToken != null && tokensAsStrings.size() <= depth + 1) {
+				String s = currentToken.serializeThis(null);
 				if (s != null)
-					tokens.add(s);
-				t = t.getNext();
+					tokensAsStrings.add(s);
+				currentToken = currentToken.getNext();
 			}
-			boolean overdepth = tokens.size() > depth;
+			boolean overdepth = tokensAsStrings.size() > depth;
 			if (overdepth)
-				tokens.remove(tokens.size() - 1);
-			StringBuffer r = new StringBuffer();
-			for (int i = 0; i < tokens.size(); i++) {
-				r.append(tokens.get(i));
-				if (i != tokens.size() - 1)
-					r.append(" ");
+				tokensAsStrings.remove(tokensAsStrings.size() - 1);
+			StringBuffer result = new StringBuffer();
+			for (int i = 0; i < tokensAsStrings.size(); i++) {
+				result.append(tokensAsStrings.get(i));
+				if (i != tokensAsStrings.size() - 1)
+					result.append(" ");
 			}
-			boolean overlength = r.length() > length;
+			boolean overlength = result.length() > length;
 			if (overlength)
-				r.delete(length + 1, r.length());
+				result.delete(length + 1, result.length());
 			if (appendDots && (overdepth || overlength))
-				r.append("...");
-			return r.toString();
+				result.append("...");
+			return result.toString();
 		}
 
+		// TODO: rename to serialize(), as this is the method everything seems to be about! 
 		public final String serializeThis(AbstractNode node) {
-			String r = serializeThisInternal(node);
-			if (r != ITokenSerializer.KEEP_VALUE_FROM_NODE_MODEL)
-				return r;
+			String result = serializeThisInternal(node);
+			if (result != ITokenSerializer.KEEP_VALUE_FROM_NODE_MODEL)
+				return result;
 			if (node == null)
 				throw new UnsupportedOperationException(
 						"Can not keep value from Node Model when there is no Node Model. Context:" + this);
@@ -174,6 +186,8 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			return tryConsumeVal();
 		}
 
+		// TODO: rename tryConsumeValue ? 
+		// TODO: document what is the difference to tryConsume
 		protected IInstanceDescription tryConsumeVal() {
 			return current;
 		}
@@ -302,6 +316,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 	}
 
 	public enum AssignmentType {
+		// TODO rename. This is pretty close to obfuscation! 
 		CR, DRC, ERC, KW, LRC, PRC
 	}
 
@@ -555,33 +570,33 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		}
 	}
 
-	protected void assignNodesByMatching(Map<EObject, AbstractToken> eObject2Token, CompositeNode node,
+	protected void assignNodesByMatching(Map<EObject, AbstractToken> eObject2Token, CompositeNode rootNode,
 			Map<LeafNode, EObject> comments) throws IOException {
-		TreeIterator<EObject> i = node.eAllContents();
-		while (i.hasNext()) {
-			EObject o = i.next();
-			if (!(o instanceof AbstractNode))
+		TreeIterator<EObject> contents = rootNode.eAllContents();
+		while (contents.hasNext()) {
+			EObject containedElement = contents.next();
+			if (!(containedElement instanceof AbstractNode))
 				continue;
-			AbstractNode n = (AbstractNode) o;
-			AbstractRule r = n.getGrammarElement() instanceof AbstractRule ? (AbstractRule) n.getGrammarElement()
+			AbstractNode containedNode = (AbstractNode) containedElement;
+			AbstractRule rule = containedNode.getGrammarElement() instanceof AbstractRule ? (AbstractRule) containedNode.getGrammarElement()
 					: null;
-			if (hiddenTokenHelper.isWhitespace(r))
+			if (hiddenTokenHelper.isWhitespace(rule))
 				continue;
-			else if (n instanceof LeafNode && hiddenTokenHelper.isComment(r))
-				assignComment((LeafNode) n, eObject2Token, comments);
-			else if (tokenUtil.isToken(n)) {
-				assignTokenByMatcher(n, eObject2Token);
-				i.prune();
-				CompositeNode p = n.getParent();
-				while (p != null && assignTokenDirect(p, eObject2Token))
-					p = p.getParent();
+			else if (containedNode instanceof LeafNode && hiddenTokenHelper.isComment(rule))
+				assignComment((LeafNode) containedNode, eObject2Token, comments);
+			else if (tokenUtil.isToken(containedNode)) {
+				assignTokenByMatcher(containedNode, eObject2Token);
+				contents.prune();
+				CompositeNode parentNode = containedNode.getParent();
+				while (parentNode != null && assignTokenDirect(parentNode, eObject2Token))
+					parentNode = parentNode.getParent();
 			}
 		}
 	}
 
-	protected void assignTokenByMatcher(AbstractNode node, AbstractToken token, boolean rec) {
+	protected void assignTokenByMatcher(AbstractNode node, AbstractToken token, boolean recursive) {
 		for (AbstractToken t : token.getTokensForSemanticChildren())
-			if (rec && t instanceof AssignmentToken)
+			if (recursive && t instanceof AssignmentToken)
 				return;
 			else if (t.getNode() == null && t.equalsOrReplacesNode(node)) {
 				t.setNode(node);
@@ -724,9 +739,9 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 				tokens.add(t);
 			if (t.getNext() != null) {
 				if (t.getNext().getParent() == null)
-					root.children = tokens;
+					root.tokensForSemanticChildren = tokens;
 				else if (t.getNext().getCurrent().getDelegate() == t.getCurrent().getDelegate().eContainer())
-					t.getNext().children = tokens;
+					t.getNext().tokensForSemanticChildren = tokens;
 			}
 			t = t.getNext();
 		}

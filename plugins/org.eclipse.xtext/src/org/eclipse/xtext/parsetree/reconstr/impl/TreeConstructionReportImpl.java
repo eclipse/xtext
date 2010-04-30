@@ -47,21 +47,22 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		protected Map<AbstractToken, Integer> length = new HashMap<AbstractToken, Integer>() {
 			@Override
 			public Integer get(Object key) {
-				AbstractToken t = (AbstractToken) key;
+				AbstractToken token = (AbstractToken) key;
+				// TODO: I am lost. What's r, l, x?
 				Integer r = super.get(key);
 				if (r == null) {
 					int l = 0;
-					AbstractToken x = t;
+					AbstractToken x = token;
 					while ((x = x.getNext()) != null)
 						l++;
 					r = l;
-					put(t, l);
+					put(token, l);
 				}
 				return r;
 			}
 		};
 
-		protected Map<EObject, TreeConstructionDiagnosticImpl> subDiag;
+		protected Map<EObject, TreeConstructionDiagnosticImpl> semanticElement2diagnostic;
 
 		public TreeConstructionDiagnosticImpl(AbstractToken deadend) {
 			super();
@@ -84,11 +85,11 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 			b.append(": \"");
 			b.append(deadend.serialize(10, 50, true));
 			b.append("\":");
-			for (String s : collectDiagnostics(deadend)) {
+			for (String diagnosticAsString : collectDiagnostics(deadend)) {
 				b.append("\n");
 				b.append(prefix);
 				b.append("  -> ");
-				b.append(s);
+				b.append(diagnosticAsString);
 			}
 			return b.toString();
 		}
@@ -130,67 +131,67 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		deadends.add(Tuples.pair(depth, deadend));
 	}
 
-	protected String checkUnconsumed(AbstractToken t, IInstanceDescription inst) {
-		if (t.getGrammarElement() == null)
+	protected String checkUnconsumed(AbstractToken token, IInstanceDescription instanceDescription) {
+		if (token.getGrammarElement() == null)
 			return null;
-		boolean finalNode = nfaProvider.getNFA(t.getGrammarElement()).isEndState();
-		if (!finalNode || inst.isConsumed())
+		boolean finalNode = nfaProvider.getNFA(token.getGrammarElement()).isEndState();
+		if (!finalNode || instanceDescription.isConsumed())
 			return null;
-		ParserRule pr = GrammarUtil.containingParserRule(t.getGrammarElement());
+		ParserRule parserRule = GrammarUtil.containingParserRule(token.getGrammarElement());
 		StringBuffer b = new StringBuffer();
 		b.append("Can not leave rule '");
-		b.append(pr.getName());
+		b.append(parserRule.getName());
 		b.append("' since the current object '");
-		b.append(inst.getDelegate().eClass().getName());
+		b.append(instanceDescription.getDelegate().eClass().getName());
 		b.append("' has features with unconsumed values: ");
-		Map<EStructuralFeature, Integer> unc = inst.getUnconsumed();
+		Map<EStructuralFeature, Integer> unconsumedTokens = instanceDescription.getUnconsumed();
 		int i = 0;
-		for (Map.Entry<EStructuralFeature, Integer> e : unc.entrySet()) {
+		for (Map.Entry<EStructuralFeature, Integer> unconsumedFeature2NumberEntry : unconsumedTokens.entrySet()) {
 			b.append("'");
-			b.append(e.getKey().getName());
+			b.append(unconsumedFeature2NumberEntry.getKey().getName());
 			b.append("':");
-			b.append(e.getValue());
-			if (++i != unc.size())
+			b.append(unconsumedFeature2NumberEntry.getValue());
+			if (++i != unconsumedTokens.size())
 				b.append(", ");
 		}
 		return b.toString();
 	}
 
 	public Set<EObject> collectConsumedEObjects() {
-		Set<EObject> r = new HashSet<EObject>();
-		for (AbstractToken end : getDeadends()) {
-			AbstractToken t = end;
-			while (t.getNext() != null && t.getNext().getParent() != null
-					&& t.getNext().getParent().getGrammarElement() != null) {
-				if (GrammarUtil.containingRule(t.getNext().getParent().getGrammarElement()) == GrammarUtil
-						.containingRule(t.getGrammarElement()))
-					r.add(t.getNext().getCurrent().getDelegate());
-				t = t.getNext();
+		Set<EObject> result = new HashSet<EObject>();
+		for (AbstractToken endToken : getDeadends()) {
+			AbstractToken currentToken = endToken;
+			while (currentToken.getNext() != null && currentToken.getNext().getParent() != null
+					&& currentToken.getNext().getParent().getGrammarElement() != null) {
+				if (GrammarUtil.containingRule(currentToken.getNext().getParent().getGrammarElement()) == GrammarUtil
+						.containingRule(currentToken.getGrammarElement()))
+					result.add(currentToken.getNext().getCurrent().getDelegate());
+				currentToken = currentToken.getNext();
 			}
 		}
-		return r;
+		return result;
 	}
 
-	protected List<String> collectDiagnostics(AbstractToken t) {
+	protected List<String> collectDiagnostics(AbstractToken token) {
 		int i = 0;
-		AbstractToken f;
-		IInstanceDescription inst = t.tryConsume();
-		ArrayList<String> diags = new ArrayList<String>();
-		while ((f = t.createFollower(i++, inst)) != null) {
+		AbstractToken currentFollowerToken;
+		IInstanceDescription instanceDescription = token.tryConsume();
+		ArrayList<String> diagnsotics = new ArrayList<String>();
+		while ((currentFollowerToken = token.createFollower(i++, instanceDescription)) != null) {
 			StringBuffer b = new StringBuffer();
-			b.append(f.getClass().getSimpleName());
+			b.append(currentFollowerToken.getClass().getSimpleName());
 			b.append(": ");
-			String d = f.getDiagnostic();
-			if (d == null)
+			String diagnostic = currentFollowerToken.getDiagnostic();
+			if (diagnostic == null)
 				b.append("n/a");
 			else
-				b.append(d);
-			diags.add(b.toString());
+				b.append(diagnostic);
+			diagnsotics.add(b.toString());
 		}
-		String cons = checkUnconsumed(t, inst);
-		if (cons != null)
-			diags.add(cons);
-		return diags;
+		String consumedTokenAsString = checkUnconsumed(token, instanceDescription);
+		if (consumedTokenAsString != null)
+			diagnsotics.add(consumedTokenAsString);
+		return diagnsotics;
 	}
 
 	protected TreeConstructionDiagnosticImpl createDiagnostic(AbstractToken token) {
@@ -209,8 +210,8 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		if (isSuccess())
 			return null;
 		List<TreeConstructionDiagnostic> result = Lists.newArrayList();
-		for (AbstractToken t : getDeadends())
-			result.add(createDiagnostic(t));
+		for (AbstractToken deadEndToken : getDeadends())
+			result.add(createDiagnostic(deadEndToken));
 		return result;
 	}
 

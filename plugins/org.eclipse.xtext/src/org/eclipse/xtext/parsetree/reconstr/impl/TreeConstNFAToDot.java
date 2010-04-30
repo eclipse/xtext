@@ -29,52 +29,52 @@ public class TreeConstNFAToDot extends GrammarToDot {
 	protected IGrammarNFAProvider<TreeConstState, TreeConstTransition> nfaProvider = new TreeConstructionNFAProvider();
 
 	@Override
-	protected Node drawAbstractElementTree(AbstractElement ele, Digraph d) {
-		Node n = super.drawAbstractElementTree(ele, d);
-		TreeConstState nfas = nfaProvider.getNFA(ele);
+	protected Node drawAbstractElementTree(AbstractElement grammarElement, Digraph digraph) {
+		Node node = super.drawAbstractElementTree(grammarElement, digraph);
+		TreeConstState nfas = nfaProvider.getNFA(grammarElement);
 
-		for (TreeConstTransition t : nfas.getOutgoing())
-			d.add(drawFollowerEdge(ele, t, false));
-		for (TreeConstTransition t : nfas.getOutgoingAfterReturn())
-			d.add(drawFollowerEdge(ele, t, true));
+		for (TreeConstTransition outgoing : nfas.getOutgoing())
+			digraph.add(drawFollowerEdge(grammarElement, outgoing, false));
+		for (TreeConstTransition outgoingAfterReturn : nfas.getOutgoingAfterReturn())
+			digraph.add(drawFollowerEdge(grammarElement, outgoingAfterReturn, true));
 
 		if (nfas.getStatInt() != Status.ENABLED)
-			n.setStyle("dashed");
+			node.setStyle("dashed");
 		if (nfas.isEndState())
-			n.put("peripheries", "2");
-		setStatusStyle(n, nfas.getStatus());
-		n.setLabel(nfas + n.get("label"));
-		return n;
+			node.put("peripheries", "2");
+		setStatusStyle(node, nfas.getStatus());
+		node.setLabel(nfas + node.get("label"));
+		return node;
 	}
 
-	protected Edge drawFollowerEdge(AbstractElement ele, TreeConstTransition t, boolean isParent) {
-		Edge e = new Edge(ele, t.getTarget().getGrammarElement());
-		if (t.getPrecedence() > -1)
-			e.setLabel(String.valueOf(t.getPrecedence()));
-		e.setStyle("dotted");
+	protected Edge drawFollowerEdge(AbstractElement grammarElement, TreeConstTransition transition, boolean isParent) {
+		Edge edge = new Edge(grammarElement, transition.getTarget().getGrammarElement());
+		if (transition.getPrecedence() > -1)
+			edge.setLabel(String.valueOf(transition.getPrecedence()));
+		edge.setStyle("dotted");
 		if (isParent)
-			e.put("arrowtail", "odot");
-		if (t.isRuleCall())
-			e.put("arrowhead", "onormalonormal");
+			edge.put("arrowtail", "odot");
+		if (transition.isRuleCall())
+			edge.put("arrowhead", "onormalonormal");
 		else
-			e.put("arrowhead", "onormal");
-		setStatusStyle(e, t.getStatus());
-		return e;
+			edge.put("arrowhead", "onormal");
+		setStatusStyle(edge, transition.getStatus());
+		return edge;
 	}
 
-	protected void setStatusStyle(Props p, Status s) {
-		switch (s) {
+	protected void setStatusStyle(Props properties, Status status) {
+		switch (status) {
 			case AMBIGIOUS:
-				p.put("color", "green");
+				properties.put("color", "green");
 				break;
 			case DETOUR_OR_LOOP:
-				p.put("color", "blue");
+				properties.put("color", "blue");
 				break;
 			case ORPHAN:
-				p.put("color", "grey");
+				properties.put("color", "grey");
 				break;
 			case UNKNOWN:
-				p.put("color", "red");
+				properties.put("color", "red");
 				break;
 			case ENABLED:
 				break;
@@ -82,18 +82,18 @@ public class TreeConstNFAToDot extends GrammarToDot {
 	}
 
 	@Override
-	protected Node newNode(EObject obj, String label) {
-		TreeConstState nfas = nfaProvider.getNFA((AbstractElement) obj);
+	protected Node newNode(EObject semanticObject, String label) {
+		TreeConstState nfas = nfaProvider.getNFA((AbstractElement) semanticObject);
 		List<String> types = Lists.newArrayList();
-		for (TypeRef t : nfas.getTypesToCheck())
-			types.add(t == null ? "null" : t.getClassifier().getName());
-		if (obj.eContainer() instanceof AbstractRule) {
-			AbstractRule r = (AbstractRule) obj.eContainer();
-			String t = types.isEmpty() ? "" : " [" + Join.join(",", types) + "]";
-			return new Node(obj, r.getName() + t + ":\\n" + label, "record");
+		for (TypeRef typeRef : nfas.getTypesToCheck())
+			types.add(typeRef == null ? "null" : typeRef.getClassifier().getName());
+		if (semanticObject.eContainer() instanceof AbstractRule) {
+			AbstractRule rule = (AbstractRule) semanticObject.eContainer();
+			String typesAsString = types.isEmpty() ? "" : " [" + Join.join(",", types) + "]";
+			return new Node(semanticObject, rule.getName() + typesAsString + ":\\n" + label, "record");
 		} else {
-			String t = types.isEmpty() ? "" : "[" + Join.join(",", types) + "]\\n";
-			return new Node(obj, t + label);
+			String typesAsString = types.isEmpty() ? "" : "[" + Join.join(",", types) + "]\\n";
+			return new Node(semanticObject, typesAsString + label);
 		}
 	}
 }

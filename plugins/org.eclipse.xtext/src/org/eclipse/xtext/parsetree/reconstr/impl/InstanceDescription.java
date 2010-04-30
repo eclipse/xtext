@@ -31,32 +31,32 @@ public class InstanceDescription implements IInstanceDescription {
 
 	// private final AbstractParseTreeConstructor astSer;
 
-	private final ITransientValueService tv;
+	private final ITransientValueService transientValueService;
 
 	private final EObject described;
 
 	private BitSet multiFeatures;
 
-	private final int[] next;
+	private final int[] nextFeatureId;
 
-	public InstanceDescription(ITransientValueService t, EObject desc) {
-		described = desc;
-		tv = t;
+	public InstanceDescription(ITransientValueService transientValueService, EObject described) {
+		this.described = described;
+		this.transientValueService = transientValueService;
 		EList<EStructuralFeature> features = described.eClass().getEAllStructuralFeatures();
-		next = new int[features.size()];
-		for (int id = 0; id < features.size(); id++) {
-			EStructuralFeature f = features.get(id);
-			if (f.isMany() && tv.isMixedList(desc, f)) {
+		nextFeatureId = new int[features.size()];
+		for (int featureId = 0; featureId < features.size(); featureId++) {
+			EStructuralFeature feature = features.get(featureId);
+			if (feature.isMany() && transientValueService.isMixedList(described, feature)) {
 				if (multiFeatures == null)
 					multiFeatures = new BitSet();
-				multiFeatures.set(id);
-				next[id] = firstID(f);
+				multiFeatures.set(featureId);
+				nextFeatureId[featureId] = firstID(feature);
 			}
-			else if (!tv.isTransient(described, f, -1)) {
-				next[id] = firstID(f);
+			else if (!transientValueService.isTransient(described, feature, -1)) {
+				nextFeatureId[featureId] = firstID(feature);
 			}
 			else
-				next[id] = -1;
+				nextFeatureId[featureId] = -1;
 			// System.out.println(id + ":" + f.getName() + " -> " + next[id]);
 		}
 		// System.out.println("x");
@@ -64,32 +64,32 @@ public class InstanceDescription implements IInstanceDescription {
 
 	private InstanceDescription(ITransientValueService tv, EObject described, int[] next, BitSet multi) {
 		super();
-		this.tv = tv;
+		this.transientValueService = tv;
 		this.described = described;
-		this.next = next;
+		this.nextFeatureId = next;
 		this.multiFeatures = multi;
 	}
 
-	public IInstanceDescription cloneAndConsume(String feature) {
-		EStructuralFeature f = getFeature(feature);
-		int[] con = new int[next.length];
-		System.arraycopy(next, 0, con, 0, next.length);
-		int fid = described.eClass().getFeatureID(f);
-		con[fid] = nextID(f, con[fid]);
-		return new InstanceDescription(tv, described, con, multiFeatures);
+	public IInstanceDescription cloneAndConsume(String featureName) {
+		EStructuralFeature feature = getFeature(featureName);
+		int[] consumedFeatureId = new int[nextFeatureId.length];
+		System.arraycopy(nextFeatureId, 0, consumedFeatureId, 0, nextFeatureId.length);
+		int featureId = described.eClass().getFeatureID(feature);
+		consumedFeatureId[featureId] = nextID(feature, consumedFeatureId[featureId]);
+		return new InstanceDescription(transientValueService, described, consumedFeatureId, multiFeatures);
 	}
 
-	private int firstID(EStructuralFeature f) {
-		return nextID(f, f.isMany() ? ((List<?>) described.eGet(f)).size() : 1);
+	private int firstID(EStructuralFeature feature) {
+		return nextID(feature, feature.isMany() ? ((List<?>) described.eGet(feature)).size() : 1);
 	}
 
-	public Object getConsumable(String feature, boolean allowDefault) {
-		EStructuralFeature f = getFeature(feature);
-		if (f != null && isConsumable(f, allowDefault)) {
-			Object get = described.eGet(f);
-			if (f.isMany()) {
+	public Object getConsumable(String featureName, boolean allowDefault) {
+		EStructuralFeature feature = getFeature(featureName);
+		if (feature != null && isConsumable(feature, allowDefault)) {
+			Object get = described.eGet(feature);
+			if (feature.isMany()) {
 				List<?> list = (List<?>) get;
-				get = list.get(next[described.eClass().getFeatureID(f)]);
+				get = list.get(nextFeatureId[described.eClass().getFeatureID(feature)]);
 			}
 			return get;
 		}
@@ -105,31 +105,31 @@ public class InstanceDescription implements IInstanceDescription {
 	}
 
 	public Map<EStructuralFeature, Integer> getUnconsumed() {
-		Map<EStructuralFeature, Integer> m = new HashMap<EStructuralFeature, Integer>();
+		Map<EStructuralFeature, Integer> feature2FeatureId = new HashMap<EStructuralFeature, Integer>();
 		EList<EStructuralFeature> features = described.eClass().getEAllStructuralFeatures();
 		for (int id = 0; id < features.size(); id++) {
-			if (next[id] > -1)
-				m.put(features.get(id), next[id] + 1);
+			if (nextFeatureId[id] > -1)
+				feature2FeatureId.put(features.get(id), nextFeatureId[id] + 1);
 		}
-		return m;
+		return feature2FeatureId;
 	}
 
-	public boolean isConsumable(EStructuralFeature f, boolean allowDefault) {
-		return next[described.eClass().getFeatureID(f)] > ((allowDefault && !f.isMany()) ? -2 : -1);
+	public boolean isConsumable(EStructuralFeature feature, boolean allowDefault) {
+		return nextFeatureId[described.eClass().getFeatureID(feature)] > ((allowDefault && !feature.isMany()) ? -2 : -1);
 	}
 
 	public boolean isConsumed() {
-		for (int i = 0; i < next.length; i++)
-			if (next[i] > -1)
+		for (int i = 0; i < nextFeatureId.length; i++)
+			if (nextFeatureId[i] > -1)
 				return false;
 		return true;
 	}
 
-	public boolean isConsumedWithLastConsumtion(String feature) {
-		EStructuralFeature f = getFeature(feature);
-		int id = described.eClass().getFeatureID(f);
-		for (int i = 0; i < next.length; i++)
-			if (((i == id) ? nextID(f, next[i]) : next[i]) > -1)
+	public boolean isConsumedWithLastConsumtion(String featureName) {
+		EStructuralFeature feature = getFeature(featureName);
+		int featureId = described.eClass().getFeatureID(feature);
+		for (int i = 0; i < nextFeatureId.length; i++)
+			if (((i == featureId) ? nextID(feature, nextFeatureId[i]) : nextFeatureId[i]) > -1)
 				return false;
 		return true;
 	}
@@ -142,12 +142,12 @@ public class InstanceDescription implements IInstanceDescription {
 		return ((EClass) classifier).isSuperTypeOf(getDelegate().eClass());
 	}
 	
-	private int nextID(EStructuralFeature f, int lastId) {
+	private int nextID(EStructuralFeature feature, int lastId) {
 		int myLastId = lastId;
-		if (f.isMany()) {
-			if (multiFeatures != null && multiFeatures.get(described.eClass().getFeatureID(f))) {
+		if (feature.isMany()) {
+			if (multiFeatures != null && multiFeatures.get(described.eClass().getFeatureID(feature))) {
 				myLastId--;
-				while (myLastId >= 0 && tv.isTransient(described, f, myLastId))
+				while (myLastId >= 0 && transientValueService.isTransient(described, feature, myLastId))
 					myLastId--;
 				return myLastId;
 			}
@@ -159,17 +159,17 @@ public class InstanceDescription implements IInstanceDescription {
 
 	@Override
 	public String toString() {
-		List<String> l = new ArrayList<String>();
-		for (Entry<EStructuralFeature, Integer> f : getUnconsumed().entrySet()) {
+		List<String> featureNameAndValues = new ArrayList<String>();
+		for (Entry<EStructuralFeature, Integer> feature2IdEntry : getUnconsumed().entrySet()) {
 			// Object v = described.eGet(f);
 			// @SuppressWarnings("unchecked")
 			// int count = (v instanceof Collection) ? ((Collection) v).size() :
 			// 1;
 			// l.add(f.getName() + ":" + next[f.getFeatureID()] + "/" + count);
-			l.add(f.getKey().getName() + ":" + f.getValue().intValue());
+			featureNameAndValues.add(feature2IdEntry.getKey().getName() + ":" + feature2IdEntry.getValue().intValue());
 		}
 		return /* hashCode() + "/" + */described.eClass().getName() + ":" + described.hashCode()
-				+ (l.size() > 0 ? (":" + l) : "");
+				+ (featureNameAndValues.size() > 0 ? (":" + featureNameAndValues) : "");
 	}
 
 }

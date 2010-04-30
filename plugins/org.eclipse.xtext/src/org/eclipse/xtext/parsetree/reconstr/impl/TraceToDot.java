@@ -29,41 +29,41 @@ public class TraceToDot extends TreeConstNFAToDot {
 		return super.drawObject(obj);
 	}
 
-	protected Digraph drawPTC(TreeConstructionReportImpl rep) {
-		Digraph d = new Digraph();
-		Set<AbstractToken> drawn = new HashSet<AbstractToken>();
+	protected Digraph drawPTC(TreeConstructionReportImpl report) {
+		Digraph digraph = new Digraph();
+		Set<AbstractToken> drawnTokens = new HashSet<AbstractToken>();
 		Set<ParserRule> drawnRules = new HashSet<ParserRule>();
 		List<AbstractToken> traces = new ArrayList<AbstractToken>();
-		traces.add(rep.getSuccess());
-		traces.addAll(rep.getDeadends());
-		boolean sol = true;
-		for (AbstractToken t : traces) {
-			while (t != null && !drawn.contains(t)) {
+		traces.add(report.getSuccess());
+		traces.addAll(report.getDeadends());
+		boolean solid = true;
+		for (AbstractToken token : traces) {
+			while (token != null && !drawnTokens.contains(token)) {
 				// String ser = ((AbstractToken) t).serialize().replaceAll(
 				// "\\\\", "\\\\");
-				String s = t.getClass().getSimpleName() + "\\n"
-						+ t.getCurrent() + "\\n'" /* + ser */+ "'";
-				d.add(new Node(t, s));
-				if (t.getGrammarElement() != null) {
-					ParserRule pr = GrammarUtil.containingParserRule(t
+				String tokenDescription = token.getClass().getSimpleName() + "\\n"
+						+ token.getCurrent() + "\\n'" /* + ser */+ "'";
+				digraph.add(new Node(token, tokenDescription));
+				if (token.getGrammarElement() != null) {
+					ParserRule parserRule = GrammarUtil.containingParserRule(token
 							.getGrammarElement());
-					if (pr != null && !drawnRules.contains(pr)) {
-						drawnRules.add(pr);
-						drawRule(pr, d);
+					if (parserRule != null && !drawnRules.contains(parserRule)) {
+						drawnRules.add(parserRule);
+						drawRule(parserRule, digraph);
 					}
 				}
-				if (t.getNext() != null) {
-					Edge e = new Edge(t.getNext(), t);
-					e.setLabel(String.valueOf((t).getNo()));
-					if (!sol)
-						e.setStyle("dashed");
-					d.add(e);
+				if (token.getNext() != null) {
+					Edge edge = new Edge(token.getNext(), token);
+					edge.setLabel(String.valueOf((token).getNo()));
+					if (!solid)
+						edge.setStyle("dashed");
+					digraph.add(edge);
 				}
-				drawn.add(t);
-				t = t.getNext();
+				drawnTokens.add(token);
+				token = token.getNext();
 			}
-			sol = false;
+			solid = false;
 		}
-		return d;
+		return digraph;
 	}
 }

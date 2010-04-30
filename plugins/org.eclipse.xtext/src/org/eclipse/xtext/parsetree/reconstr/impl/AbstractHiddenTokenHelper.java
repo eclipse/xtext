@@ -11,6 +11,8 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 
 /**
+ * TODO: consider moving all methods to the default impl and removing this class
+ * 
  * @author meysholdt - Initial contribution and API
  */
 public class AbstractHiddenTokenHelper implements IHiddenTokenHelper {

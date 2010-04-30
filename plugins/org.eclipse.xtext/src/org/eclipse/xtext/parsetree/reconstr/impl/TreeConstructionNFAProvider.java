@@ -21,8 +21,8 @@ public class TreeConstructionNFAProvider extends
 			AbstractCachingNFABuilder<TreeConstState, TreeConstTransition> {
 
 		@Override
-		protected TreeConstState createState(AbstractElement ele) {
-			return new TreeConstState(ele, this);
+		protected TreeConstState createState(AbstractElement grammarElement) {
+			return new TreeConstState(grammarElement, this);
 		}
 
 		@Override
@@ -32,10 +32,10 @@ public class TreeConstructionNFAProvider extends
 		}
 
 		@Override
-		public boolean filter(AbstractElement ele) {
-			if (ele.eContainer() instanceof AbstractRule)
+		public boolean filter(AbstractElement grammarElement) {
+			if (grammarElement.eContainer() instanceof AbstractRule)
 				return false;
-			if (EcoreUtil2.getContainerOfType(ele.eContainer(), Assignment.class) != null)
+			if (EcoreUtil2.getContainerOfType(grammarElement.eContainer(), Assignment.class) != null)
 				return true;
 
 			return false;

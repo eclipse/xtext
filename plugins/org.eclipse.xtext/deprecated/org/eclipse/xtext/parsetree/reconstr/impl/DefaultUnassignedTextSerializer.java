@@ -5,6 +5,9 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 
+/**
+ * TODO Moritz: convince me not to delete this
+ */
 @Deprecated
 //this has been replaced by org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer.serializeUnassignedValue(EObject, RuleCall, AbstractNode)
 public class DefaultUnassignedTextSerializer extends AbstractUnassignedTextSerializer {

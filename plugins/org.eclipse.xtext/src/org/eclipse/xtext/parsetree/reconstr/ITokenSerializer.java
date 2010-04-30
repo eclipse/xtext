@@ -20,6 +20,9 @@ import org.eclipse.xtext.parsetree.reconstr.impl.DefaultValueSerializer;
 import com.google.inject.ImplementedBy;
 
 /**
+ * TODO: this interface does not define any methods. It just acts a container for other interfaces.
+ * Shouldn't it be replaced by a package?
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public interface ITokenSerializer {
@@ -78,5 +81,6 @@ public interface ITokenSerializer {
 		String serializeUnassignedValue(EObject context, RuleCall ruleCall, AbstractNode node);
 	}
 
+	// TODO: does an empty string really communicate what's going on? Consider debugging...
 	final static String KEEP_VALUE_FROM_NODE_MODEL = new String();
 }

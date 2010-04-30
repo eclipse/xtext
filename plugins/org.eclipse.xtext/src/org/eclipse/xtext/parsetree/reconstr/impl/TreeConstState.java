@@ -193,6 +193,7 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 		return root.endDistances;
 	}
 
+	// TODO: rename
 	protected Status getStatInt() {
 		if (status == Status.UNKNOWN)
 			status = isEndState() || getOutgoing().size() > 0 || getOutgoingAfterReturn().size() > 0 ? Status.ENABLED
