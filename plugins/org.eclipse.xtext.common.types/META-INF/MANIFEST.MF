@@ -11,7 +11,7 @@ Require-Bundle:
  org.eclipse.emf.common,
  org.antlr.runtime,
  com.google.collect;bundle-version="0.8.0",
- com.google.guice;bundle-version="2.0.0",
+ com.google.inject;bundle-version="2.0.0",
  org.eclipse.xtext;bundle-version="1.0.0"
 Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
