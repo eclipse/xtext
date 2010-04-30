@@ -5,7 +5,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.reconstr.impl.DefaultValueSerializer;
+import org.eclipse.xtext.parsetree.reconstr.impl.ValueSerializer;
 import org.eclipse.xtext.parsetree.unassignedtext.services.UnassignedTextTestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.unassignedtext.services.UnassignedTextTestLanguageGrammarAccess.CommonTerminalsRuleElements;
 import org.eclipse.xtext.parsetree.unassignedtext.services.UnassignedTextTestLanguageGrammarAccess.MultiRuleElements;
@@ -13,7 +13,7 @@ import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.PluralRule;
 
 import com.google.inject.Inject;
 
-public class UnassignedTextTestSerializer extends DefaultValueSerializer {
+public class UnassignedTextTestSerializer extends ValueSerializer {
 
 	@Inject
 	private IGrammarAccess grammar;

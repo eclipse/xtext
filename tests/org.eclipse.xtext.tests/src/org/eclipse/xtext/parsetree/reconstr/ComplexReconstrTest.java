@@ -58,8 +58,8 @@ public class ComplexReconstrTest extends AbstractXtextTests {
 		EObject result = getModel(model);
 		if (logger.isTraceEnabled())
 			logger.trace(EmfFormatter.objToStr(result));
-		Serializer.SerializationOptions opt = new Serializer.SerializationOptions();
-		opt.setFormat(false);
+		SerializerOptions opt = new SerializerOptions();
+		opt.setFormatting(false);
 		return getSerializer().serialize(result, opt);
 	}
 
