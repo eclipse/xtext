@@ -1,0 +1,21 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.parsetree.reconstr.PartialSerializationTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate partialserializationtest "http://www.eclipse.org/2009/tmf/xtext/partialserializationtest"
+
+Model:
+	NodeRoot;
+	
+NodeRoot:
+	"#1" node=Node;
+	
+Node:
+	"node" name=ID ("(" children+=Node+ ")")?;
+
