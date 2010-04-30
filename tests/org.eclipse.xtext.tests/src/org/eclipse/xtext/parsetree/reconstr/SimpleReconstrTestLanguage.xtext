@@ -18,7 +18,7 @@ Term returns Expression:
 	Atom | TwoNumbers | ManyStrings | Type | Ref2 | Spare | Boolean | Transient1 | 
 	Consumed1 | Consumed2 | Loop1 | Loop2 | Loop3 | Loop4 | LoopBug285452 | 
 	DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439 | 
-	EObjectRef | TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171;
+	EObjectRef | TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum;
 		
 Atom: 
 	name=ID;
@@ -110,3 +110,15 @@ TypeBug2B: {TypeBug2B} "kb" name=ID;
 
 Bug305171:
 	"#19" (('kx' x+=ID (',' x+=ID)*)? (('ky' y+=ID (',' y+=ID)*)? ('kz' z+=ID (',' z+=ID)*)?)) name=ID;
+
+Bug310435Enum:
+	"#20" ('kw1' lits+=EnumBug310435Lit1 | 'kw2' lits+=EnumBug310435Lit2)*;
+	
+Bug310435Val:
+	"#21" ('kw1' lits+=ID | 'kw2' lits+=STRING)*;
+	
+enum EnumBug310435Lit1 returns EnumBug310435Enum:
+	lit1='lit1';
+	
+enum EnumBug310435Lit2 returns EnumBug310435Enum:
+	lit2='lit2';
