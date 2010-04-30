@@ -29,9 +29,9 @@ import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.SimpleCache;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.internal.Lists;
 
 /**
  * Allows subclasses to specify invariants in a declarative manner using

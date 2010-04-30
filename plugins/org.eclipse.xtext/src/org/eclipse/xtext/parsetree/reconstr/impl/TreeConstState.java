@@ -34,7 +34,7 @@ import org.eclipse.xtext.grammaranalysis.impl.AbstractNFAState;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.inject.internal.Maps;
+import com.google.common.collect.Maps;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
