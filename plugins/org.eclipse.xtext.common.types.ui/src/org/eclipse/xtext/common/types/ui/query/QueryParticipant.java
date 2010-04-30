@@ -51,7 +51,7 @@ import org.eclipse.xtext.util.TextLocation;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.inject.internal.Maps;
+import com.google.common.collect.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

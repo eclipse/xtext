@@ -31,8 +31,8 @@ import org.eclipse.xtext.ui.editor.validation.XtextAnnotation;
 import org.eclipse.xtext.validation.Issue;
 
 import com.google.common.collect.Sets;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
-import com.google.inject.internal.Lists;
 
 public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAdapter implements
 		IQuickAssistProcessor {

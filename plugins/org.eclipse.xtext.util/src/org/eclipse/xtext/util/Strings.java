@@ -14,8 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
-import com.google.inject.internal.Lists;
+import com.google.common.collect.Lists;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -320,7 +319,7 @@ public class Strings {
 		} else {
 			List<String> strings = Lists.newArrayList();
 			unpack(strings, packed);
-			return Iterables.newArray(strings, String.class);
+			return strings.toArray(new String[strings.size()]);
 		}
 	}
 

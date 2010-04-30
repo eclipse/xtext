@@ -19,7 +19,7 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.util.Strings;
 
-import com.google.inject.internal.Lists;
+import com.google.common.collect.Lists;
 
 /**
  * Common base class for {@link IGeneratorFragment fragments} generating some validation support classes.
@@ -63,6 +63,6 @@ public abstract class AbstractValidatorFragment extends AbstractGeneratorFragmen
 		for (GeneratedMetamodel generatedMetamodel : list) {
 			packageQNames.add(getGeneratedEPackageName(grammar, getNaming(), generatedMetamodel.getEPackage()));
 		}
-		return Lists.newArrayList(new Object[] { packageQNames, isRegisterForImportedPackages });
+		return Lists.newArrayList(packageQNames, isRegisterForImportedPackages);
 	}
 }
