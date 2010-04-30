@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.resource.IFragmentProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -29,24 +30,24 @@ public abstract class AbstractClassMirror implements IClassMirror {
 
 	private static final Logger logger = Logger.getLogger(AbstractClassMirror.class);
 	
-	public String getFragment(EObject obj) {
+	public String getFragment(EObject obj, IFragmentProvider.Fallback fallback) {
 		if (obj instanceof JvmTypeParameter)
-			return getFragment(obj.eContainer()) + "/" + ((JvmTypeParameter) obj).getName();
+			return getFragment(obj.eContainer(), fallback) + "/" + ((JvmTypeParameter) obj).getName();
 		if (obj instanceof JvmTypeReference)
-			return null; // use default implementation
+			return fallback.getFragment(obj);
 		if (obj instanceof JvmIdentifyableElement)
 			return ((JvmIdentifyableElement) obj).getCanonicalName();
-		return null;
+		return fallback.getFragment(obj);
 	}
 	
-	public EObject getEObject(Resource resource, String fragment) {
+	public EObject getEObject(Resource resource, String fragment, IFragmentProvider.Fallback fallback) {
 		if (fragment.endsWith("[]")) {
-			return getArrayEObject(resource, fragment);
+			return getArrayEObject(resource, fragment, fallback);
 		}
 		int slash = fragment.indexOf('/'); 
 		if (slash != -1) {
 			String containerFragment = fragment.substring(0, slash);
-			EObject container = getEObject(resource, containerFragment);
+			EObject container = getEObject(resource, containerFragment, fallback);
 			if (container != null) {
 				String parameterName = fragment.substring(slash + 1);
 				if (container instanceof JvmTypeParameterDeclarator) {
@@ -71,7 +72,7 @@ public abstract class AbstractClassMirror implements IClassMirror {
 			int dollar = fragment.lastIndexOf('$', paren);
 			int dot = fragment.lastIndexOf('.', paren);
 			String subFragment = fragment.substring(0, Math.max(dollar, dot));
-			EObject container = getEObject(resource, subFragment);
+			EObject container = getEObject(resource, subFragment, fallback);
 			if (container instanceof JvmDeclaredType) {
 				EList<JvmMember> members = ((JvmDeclaredType) container).getMembers();
 				for(JvmMember member: members) {
@@ -81,11 +82,11 @@ public abstract class AbstractClassMirror implements IClassMirror {
 				}
 			}
 		}
-		return null;	
+		return fallback.getEObject(fragment);	
 	}
 
-	protected EObject getArrayEObject(Resource resource, String fragment) {
-		JvmComponentType component = (JvmComponentType) getEObject(resource, fragment.substring(0, fragment.length() - 2));
+	protected EObject getArrayEObject(Resource resource, String fragment, IFragmentProvider.Fallback fallback) {
+		JvmComponentType component = (JvmComponentType) getEObject(resource, fragment.substring(0, fragment.length() - 2), fallback);
 		if (component == null)
 			return null;
 		if (component.getArrayType() == null) {

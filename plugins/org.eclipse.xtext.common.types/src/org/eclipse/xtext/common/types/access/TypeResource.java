@@ -14,6 +14,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.xtext.resource.IFragmentProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,6 +22,17 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 public class TypeResource extends ResourceImpl {
 
 	private IMirror mirror;
+	
+	private IFragmentProvider.Fallback fragmentProviderFallback = new IFragmentProvider.Fallback() {
+		
+		public String getFragment(EObject obj) {
+			return TypeResource.super.getURIFragment(obj);
+		}
+		
+		public EObject getEObject(String fragment) {
+			return TypeResource.super.getEObject(fragment);
+		}
+	};
 	
 	public TypeResource() {
 		super();
@@ -33,9 +45,8 @@ public class TypeResource extends ResourceImpl {
 	@Override
 	public EObject getEObject(String uriFragment) {
 		if (mirror != null) {
-			EObject result = mirror.getEObject(this, uriFragment);
-			if (result != null)
-				return result;
+			EObject result = mirror.getEObject(this, uriFragment, fragmentProviderFallback);
+			return result;
 		}
 		return super.getEObject(uriFragment);
 	}
@@ -43,9 +54,8 @@ public class TypeResource extends ResourceImpl {
 	@Override
 	public String getURIFragment(EObject eObject) {
 		if (mirror != null) {
-			String result = mirror.getFragment(eObject);
-			if (result != null)
-				return result;
+			String result = mirror.getFragment(eObject, fragmentProviderFallback);
+			return result;
 		}
 		return super.getURIFragment(eObject);
 	}
