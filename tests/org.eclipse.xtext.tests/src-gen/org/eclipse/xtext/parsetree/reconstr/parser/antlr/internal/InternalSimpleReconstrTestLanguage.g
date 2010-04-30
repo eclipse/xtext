@@ -26,6 +26,7 @@ import org.eclipse.xtext.parser.impl.*;
 import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
@@ -388,6 +389,26 @@ ruleTerm returns [EObject current=null]
     this_Bug305171_22=ruleBug305171
     { 
         $current = $this_Bug305171_22.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getTermAccess().getBug310435ValParserRuleCall_23(), currentNode); 
+    }
+    this_Bug310435Val_23=ruleBug310435Val
+    { 
+        $current = $this_Bug310435Val_23.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getTermAccess().getBug310435EnumParserRuleCall_24(), currentNode); 
+    }
+    this_Bug310435Enum_24=ruleBug310435Enum
+    { 
+        $current = $this_Bug310435Enum_24.current; 
         currentNode = currentNode.getParent();
     }
 )
@@ -2814,6 +2835,204 @@ ruleBug305171 returns [EObject current=null]
 ;
 
 
+
+
+
+// Entry rule entryRuleBug310435Enum
+entryRuleBug310435Enum returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getBug310435EnumRule(), currentNode); }
+	 iv_ruleBug310435Enum=ruleBug310435Enum 
+	 { $current=$iv_ruleBug310435Enum.current; } 
+	 EOF 
+;
+
+// Rule Bug310435Enum
+ruleBug310435Enum returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(	'#20' 
+    {
+        createLeafNode(grammarAccess.getBug310435EnumAccess().getNumberSignDigitTwoDigitZeroKeyword_0(), null); 
+    }
+((	'kw1' 
+    {
+        createLeafNode(grammarAccess.getBug310435EnumAccess().getKw1Keyword_1_0_0(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getBug310435EnumAccess().getLitsEnumBug310435Lit1EnumRuleCall_1_0_1_0(), currentNode); 
+	    }
+		lv_lits_2_0=ruleEnumBug310435Lit1		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getBug310435EnumRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"lits",
+	        		lv_lits_2_0, 
+	        		"EnumBug310435Lit1", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+))
+    |(	'kw2' 
+    {
+        createLeafNode(grammarAccess.getBug310435EnumAccess().getKw2Keyword_1_1_0(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getBug310435EnumAccess().getLitsEnumBug310435Lit2EnumRuleCall_1_1_1_0(), currentNode); 
+	    }
+		lv_lits_4_0=ruleEnumBug310435Lit2		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getBug310435EnumRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"lits",
+	        		lv_lits_4_0, 
+	        		"EnumBug310435Lit2", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)))*)
+;
+
+
+
+
+
+// Entry rule entryRuleBug310435Val
+entryRuleBug310435Val returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getBug310435ValRule(), currentNode); }
+	 iv_ruleBug310435Val=ruleBug310435Val 
+	 { $current=$iv_ruleBug310435Val.current; } 
+	 EOF 
+;
+
+// Rule Bug310435Val
+ruleBug310435Val returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(	'#21' 
+    {
+        createLeafNode(grammarAccess.getBug310435ValAccess().getNumberSignDigitTwoDigitOneKeyword_0(), null); 
+    }
+((	'kw1' 
+    {
+        createLeafNode(grammarAccess.getBug310435ValAccess().getKw1Keyword_1_0_0(), null); 
+    }
+(
+(
+		lv_lits_2_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getBug310435ValAccess().getLitsIDTerminalRuleCall_1_0_1_0(), "lits"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getBug310435ValRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"lits",
+	        		lv_lits_2_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+))
+    |(	'kw2' 
+    {
+        createLeafNode(grammarAccess.getBug310435ValAccess().getKw2Keyword_1_1_0(), null); 
+    }
+(
+(
+		lv_lits_4_0=RULE_STRING
+		{
+			createLeafNode(grammarAccess.getBug310435ValAccess().getLitsSTRINGTerminalRuleCall_1_1_1_0(), "lits"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getBug310435ValRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"lits",
+	        		lv_lits_4_0, 
+	        		"STRING", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)))*)
+;
+
+
+
+
+
+// Rule EnumBug310435Lit1
+ruleEnumBug310435Lit1 returns [Enumerator current=null] 
+    @init { setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(	'lit1' 
+	{
+        $current = grammarAccess.getEnumBug310435Lit1Access().getLit1EnumLiteralDeclaration().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getEnumBug310435Lit1Access().getLit1EnumLiteralDeclaration(), null); 
+    }
+);
+
+
+
+// Rule EnumBug310435Lit2
+ruleEnumBug310435Lit2 returns [Enumerator current=null] 
+    @init { setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(	'lit2' 
+	{
+        $current = grammarAccess.getEnumBug310435Lit2Access().getLit2EnumLiteralDeclaration().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getEnumBug310435Lit2Access().getLit2EnumLiteralDeclaration(), null); 
+    }
+);
 
 
 

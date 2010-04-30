@@ -46,12 +46,12 @@ public class Bug289515TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cValuePercentSignPercentSignKeyword_5_1_0 = (Keyword)cValueAssignment_5_1.eContents().get(0);
 		
 		//Model:
-		//  "1" value="%"|"2" value="%"|"3" value="\\%"|"4" value="\\%"|"5" value="%%"|"6" value=
-		//  "%%";
+		//  "1" value="%"|"2" value="%"|"3" value="\\%"|"4" value="\\%"|"5" value="%%"|
+		//  "6" value="%%";
 		public ParserRule getRule() { return rule; }
 
-		//"1" value="%"|"2" value="%"|"3" value="\\%"|"4" value="\\%"|"5" value="%%"|"6" value=
-		//"%%"
+		//"1" value="%"|"2" value="%"|"3" value="\\%"|"4" value="\\%"|"5" value="%%"|"6"
+		//value="%%"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"1" value="%"
@@ -152,8 +152,8 @@ public class Bug289515TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//  "1" value="%"|"2" value="%"|"3" value="\\%"|"4" value="\\%"|"5" value="%%"|"6" value=
-	//  "%%";
+	//  "1" value="%"|"2" value="%"|"3" value="\\%"|"4" value="\\%"|"5" value="%%"|
+	//  "6" value="%%";
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -175,8 +175,9 @@ public class Bug289515TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

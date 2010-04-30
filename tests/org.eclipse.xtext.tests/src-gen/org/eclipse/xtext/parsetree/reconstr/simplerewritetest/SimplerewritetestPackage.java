@@ -7,6 +7,7 @@ package org.eclipse.xtext.parsetree.reconstr.simplerewritetest;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -1353,6 +1354,80 @@ public interface SimplerewritetestPackage extends EPackage
   int BUG305171_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 4;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Bug310435EnumImpl <em>Bug310435 Enum</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Bug310435EnumImpl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getBug310435Enum()
+   * @generated
+   */
+  int BUG310435_ENUM = 33;
+
+  /**
+   * The feature id for the '<em><b>Em</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG310435_ENUM__EM = EXPRESSION__EM;
+
+  /**
+   * The feature id for the '<em><b>Lits</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG310435_ENUM__LITS = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Bug310435 Enum</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG310435_ENUM_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Bug310435ValImpl <em>Bug310435 Val</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Bug310435ValImpl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getBug310435Val()
+   * @generated
+   */
+  int BUG310435_VAL = 34;
+
+  /**
+   * The feature id for the '<em><b>Em</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG310435_VAL__EM = EXPRESSION__EM;
+
+  /**
+   * The feature id for the '<em><b>Lits</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG310435_VAL__LITS = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Bug310435 Val</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG310435_VAL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1360,7 +1435,7 @@ public interface SimplerewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getOp()
    * @generated
    */
-  int OP = 33;
+  int OP = 35;
 
   /**
    * The feature id for the '<em><b>Em</b></em>' attribute.
@@ -1388,6 +1463,16 @@ public interface SimplerewritetestPackage extends EPackage
    * @ordered
    */
   int OP_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EnumBug310435Enum <em>Enum Bug310435 Enum</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EnumBug310435Enum
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getEnumBug310435Enum()
+   * @generated
+   */
+  int ENUM_BUG310435_ENUM = 36;
 
 
   /**
@@ -2205,6 +2290,48 @@ public interface SimplerewritetestPackage extends EPackage
   EAttribute getBug305171_Name();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Enum <em>Bug310435 Enum</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Bug310435 Enum</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Enum
+   * @generated
+   */
+  EClass getBug310435Enum();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Enum#getLits <em>Lits</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Lits</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Enum#getLits()
+   * @see #getBug310435Enum()
+   * @generated
+   */
+  EAttribute getBug310435Enum_Lits();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Val <em>Bug310435 Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Bug310435 Val</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Val
+   * @generated
+   */
+  EClass getBug310435Val();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Val#getLits <em>Lits</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Lits</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Val#getLits()
+   * @see #getBug310435Val()
+   * @generated
+   */
+  EAttribute getBug310435Val_Lits();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op <em>Op</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2224,6 +2351,16 @@ public interface SimplerewritetestPackage extends EPackage
    * @generated
    */
   EReference getOp_Values();
+
+  /**
+   * Returns the meta object for enum '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EnumBug310435Enum <em>Enum Bug310435 Enum</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>Enum Bug310435 Enum</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EnumBug310435Enum
+   * @generated
+   */
+  EEnum getEnumBug310435Enum();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -2931,6 +3068,42 @@ public interface SimplerewritetestPackage extends EPackage
     EAttribute BUG305171__NAME = eINSTANCE.getBug305171_Name();
 
     /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Bug310435EnumImpl <em>Bug310435 Enum</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Bug310435EnumImpl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getBug310435Enum()
+     * @generated
+     */
+    EClass BUG310435_ENUM = eINSTANCE.getBug310435Enum();
+
+    /**
+     * The meta object literal for the '<em><b>Lits</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BUG310435_ENUM__LITS = eINSTANCE.getBug310435Enum_Lits();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Bug310435ValImpl <em>Bug310435 Val</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Bug310435ValImpl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getBug310435Val()
+     * @generated
+     */
+    EClass BUG310435_VAL = eINSTANCE.getBug310435Val();
+
+    /**
+     * The meta object literal for the '<em><b>Lits</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BUG310435_VAL__LITS = eINSTANCE.getBug310435Val_Lits();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2947,6 +3120,16 @@ public interface SimplerewritetestPackage extends EPackage
      * @generated
      */
     EReference OP__VALUES = eINSTANCE.getOp_Values();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EnumBug310435Enum <em>Enum Bug310435 Enum</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EnumBug310435Enum
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getEnumBug310435Enum()
+     * @generated
+     */
+    EEnum ENUM_BUG310435_ENUM = eINSTANCE.getEnumBug310435Enum();
 
   }
 

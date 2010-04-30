@@ -244,7 +244,7 @@ protected class Model_ValuesAssignment_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("values",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("values");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getValuesDataTypeExpressionParserRuleCall_1_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getValuesDataTypeExpressionParserRuleCall_1_1_0();
 			return obj;
@@ -793,7 +793,7 @@ protected class Variable_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getVariableAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getVariableAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;

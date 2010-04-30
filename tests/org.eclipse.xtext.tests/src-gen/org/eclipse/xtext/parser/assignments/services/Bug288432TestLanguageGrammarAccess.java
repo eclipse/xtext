@@ -39,12 +39,12 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cEndBodyKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Body:
-		//  ("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=( Content |
-		//  ParameterRef ) foo+=Foo+ "end body";
+		//  ("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=(
+		//  Content | ParameterRef ) foo+=Foo+ "end body";
 		public ParserRule getRule() { return rule; }
 
-		//("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=( Content |
-		//ParameterRef ) foo+=Foo+ "end body"
+		//("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=(
+		//Content | ParameterRef ) foo+=Foo+ "end body"
 		public Group getGroup() { return cGroup; }
 
 		//("(" parameter+=Parameter ("," parameter+=Parameter)* ")")?
@@ -295,8 +295,8 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Body:
-	//  ("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=( Content |
-	//  ParameterRef ) foo+=Foo+ "end body";
+	//  ("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=(
+	//  Content | ParameterRef ) foo+=Foo+ "end body";
 	public BodyElements getBodyAccess() {
 		return (pBody != null) ? pBody : (pBody = new BodyElements());
 	}
@@ -388,8 +388,9 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

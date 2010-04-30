@@ -323,6 +323,24 @@ public interface SimplerewritetestFactory extends EFactory
   Bug305171 createBug305171();
 
   /**
+   * Returns a new object of class '<em>Bug310435 Enum</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Bug310435 Enum</em>'.
+   * @generated
+   */
+  Bug310435Enum createBug310435Enum();
+
+  /**
+   * Returns a new object of class '<em>Bug310435 Val</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Bug310435 Val</em>'.
+   * @generated
+   */
+  Bug310435Val createBug310435Val();
+
+  /**
    * Returns a new object of class '<em>Op</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

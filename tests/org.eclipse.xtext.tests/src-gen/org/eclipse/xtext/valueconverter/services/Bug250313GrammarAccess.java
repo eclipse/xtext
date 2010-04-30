@@ -77,18 +77,18 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRefChild2IDTerminalRuleCall_8_1_1_0_1_1 = (RuleCall)cRefChild2CrossReference_8_1_1_0_1.eContents().get(1);
 		
 		//Model:
-		//  "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+" multiValue+=(
-		//  "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2" value=STRING|"2+" multiValue+=
-		//  STRING|"3" value=Datatype|"3+" multiValue+=Datatype|"4" value=NestedDatatype|"4+"
-		//  multiValue+=NestedDatatype|("content" children=Child) ("ref" ref=( [Child1|STRING] | [
-		//  Child2] ))?;
+		//  "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+"
+		//  multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2"
+		//  value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+" multiValue+=
+		//  Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|("content"
+		//  children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?;
 		public ParserRule getRule() { return rule; }
 
-		//"1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+" multiValue+=(
-		//"mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2" value=STRING|"2+" multiValue+=
-		//STRING|"3" value=Datatype|"3+" multiValue+=Datatype|"4" value=NestedDatatype|"4+"
-		//multiValue+=NestedDatatype|("content" children=Child) ("ref" ref=( [Child1|STRING] | [
-		//Child2] ))?
+		//"1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+"
+		//multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2"
+		//value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+" multiValue+=
+		//Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|("content"
+		//children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )
@@ -387,11 +387,11 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Model:
-	//  "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+" multiValue+=(
-	//  "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2" value=STRING|"2+" multiValue+=
-	//  STRING|"3" value=Datatype|"3+" multiValue+=Datatype|"4" value=NestedDatatype|"4+"
-	//  multiValue+=NestedDatatype|("content" children=Child) ("ref" ref=( [Child1|STRING] | [
-	//  Child2] ))?;
+	//  "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+"
+	//  multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2"
+	//  value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+" multiValue+=
+	//  Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|("content"
+	//  children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -463,8 +463,9 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

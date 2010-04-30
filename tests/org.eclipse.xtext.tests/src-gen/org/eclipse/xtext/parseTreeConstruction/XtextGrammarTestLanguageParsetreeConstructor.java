@@ -82,17 +82,17 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Grammar ****************
  *
  * Grammar:
- *   "grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars
- *   +=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[
- *   AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? metamodelDeclarations+=
- *   AbstractMetamodelDeclaration* rules+=AbstractRule+;
+ *   "grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] (","
+ *   usedGrammars+=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (
+ *   hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
+ *   metamodelDeclarations+=AbstractMetamodelDeclaration* rules+=AbstractRule+;
  *
  **/
 
-// "grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars
-// +=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[
-// AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? metamodelDeclarations+=
-// AbstractMetamodelDeclaration* rules+=AbstractRule+
+// "grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] (","
+// usedGrammars+=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (
+// hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
+// metamodelDeclarations+=AbstractMetamodelDeclaration* rules+=AbstractRule+
 protected class Grammar_Group extends GroupToken {
 	
 	public Grammar_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -166,7 +166,7 @@ protected class Grammar_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getGrammarAccess().getNameGrammarIDParserRuleCall_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getGrammarAccess().getNameGrammarIDParserRuleCall_1_0();
 			return obj;
@@ -176,8 +176,8 @@ protected class Grammar_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)
-// ?
+// ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID]
+// )*)?
 protected class Grammar_Group_2 extends GroupToken {
 	
 	public Grammar_Group_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -343,8 +343,8 @@ protected class Grammar_UsedGrammarsAssignment_2_2_1 extends AssignmentToken  {
 
 
 
-// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=
-// [AbstractRule])*)? ")")?
+// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] (","
+// hiddenTokens+=[AbstractRule])*)? ")")?
 protected class Grammar_Group_3 extends GroupToken {
 	
 	public Grammar_Group_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1072,7 +1072,7 @@ protected class GeneratedMetamodel_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getGeneratedMetamodelAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getGeneratedMetamodelAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -1187,7 +1187,7 @@ protected class GeneratedMetamodel_AliasAssignment_3_1 extends AssignmentToken  
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alias");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getGeneratedMetamodelAccess().getAliasIDTerminalRuleCall_3_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getGeneratedMetamodelAccess().getAliasIDTerminalRuleCall_3_1_0();
 			return obj;
@@ -1369,7 +1369,7 @@ protected class ReferencedMetamodel_AliasAssignment_2_1 extends AssignmentToken 
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alias");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getReferencedMetamodelAccess().getAliasIDTerminalRuleCall_2_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getReferencedMetamodelAccess().getAliasIDTerminalRuleCall_2_1_0();
 			return obj;
@@ -1387,15 +1387,15 @@ protected class ReferencedMetamodel_AliasAssignment_2_1 extends AssignmentToken 
 /************ begin Rule ParserRule ****************
  *
  * ParserRule:
- *   name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[
- *   AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=
- *   Alternatives ";";
+ *   name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (
+ *   hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":"
+ *   alternatives=Alternatives ";";
  *
  **/
 
-// name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[
-// AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=
-// Alternatives ";"
+// name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (
+// hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":"
+// alternatives=Alternatives ";"
 protected class ParserRule_Group extends GroupToken {
 	
 	public ParserRule_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1447,7 +1447,7 @@ protected class ParserRule_NameAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getParserRuleAccess().getNameIDTerminalRuleCall_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getParserRuleAccess().getNameIDTerminalRuleCall_0_0();
 			return obj;
@@ -1548,8 +1548,8 @@ protected class ParserRule_TypeAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=
-// [AbstractRule])*)? ")")?
+// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] (","
+// hiddenTokens+=[AbstractRule])*)? ")")?
 protected class ParserRule_Group_2 extends GroupToken {
 	
 	public ParserRule_Group_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1895,7 +1895,8 @@ protected class ParserRule_SemicolonKeyword_5 extends KeywordToken  {
 /************ begin Rule TypeRef ****************
  *
  * TypeRef:
- *   (metamodel=[AbstractMetamodelDeclaration] "::")? classifier=[ecore::EClassifier];
+ *   (metamodel=[AbstractMetamodelDeclaration] "::")? classifier=[ecore::
+ *   EClassifier];
  *
  **/
 
@@ -2948,7 +2949,7 @@ protected class Action_FeatureAssignment_2_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("feature",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("feature");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getActionAccess().getFeatureIDTerminalRuleCall_2_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getActionAccess().getFeatureIDTerminalRuleCall_2_1_0();
 			return obj;
@@ -3247,7 +3248,7 @@ protected class Keyword_ValueAssignment extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getKeywordAccess().getValueSTRINGTerminalRuleCall_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getKeywordAccess().getValueSTRINGTerminalRuleCall_0();
 			return obj;
@@ -3372,7 +3373,7 @@ protected class Assignment_FeatureAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("feature",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("feature");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAssignmentAccess().getFeatureIDTerminalRuleCall_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAssignmentAccess().getFeatureIDTerminalRuleCall_0_0();
 			return obj;
@@ -3803,13 +3804,13 @@ protected class ParenthesizedAssignableElement_RightParenthesisKeyword_2 extends
 /************ begin Rule AssignableAlternatives ****************
  *
  * AssignableAlternatives returns AbstractElement:
- *   AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=AssignableTerminal)
- *   +)?;
+ *   AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=
+ *   AssignableTerminal)+)?;
  *
  **/
 
-// AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=AssignableTerminal)
-// +)?
+// AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=
+// AssignableTerminal)+)?
 protected class AssignableAlternatives_Group extends GroupToken {
 	
 	public AssignableAlternatives_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -4888,12 +4889,13 @@ protected class ParenthesizedElement_RightParenthesisKeyword_2 extends KeywordTo
 /************ begin Rule TerminalRule ****************
  *
  * TerminalRule:
- *   "terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";"
- * ;
+ *   "terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=
+ *   TerminalAlternatives ";";
  *
  **/
 
-// "terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";"
+// "terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=
+// TerminalAlternatives ";"
 protected class TerminalRule_Group extends GroupToken {
 	
 	public TerminalRule_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -4967,7 +4969,7 @@ protected class TerminalRule_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTerminalRuleAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTerminalRuleAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -6805,7 +6807,7 @@ protected class EnumRule_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEnumRuleAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEnumRuleAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;

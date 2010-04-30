@@ -52,13 +52,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Body ****************
  *
  * Body:
- *   ("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=( Content |
- *   ParameterRef ) foo+=Foo+ "end body";
+ *   ("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=(
+ *   Content | ParameterRef ) foo+=Foo+ "end body";
  *
  **/
 
-// ("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=( Content |
-// ParameterRef ) foo+=Foo+ "end body"
+// ("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=(
+// Content | ParameterRef ) foo+=Foo+ "end body"
 protected class Body_Group extends GroupToken {
 	
 	public Body_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -480,7 +480,7 @@ protected class Foo_FooValueAssignment extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("fooValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("fooValue");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getFooAccess().getFooValueSTRINGTerminalRuleCall_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getFooAccess().getFooValueSTRINGTerminalRuleCall_0();
 			return obj;
@@ -955,7 +955,7 @@ protected class Parameter_NameAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getParameterAccess().getNameIDTerminalRuleCall_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getParameterAccess().getNameIDTerminalRuleCall_0_0();
 			return obj;
@@ -1096,7 +1096,7 @@ protected class MyInt_IntAssignment extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("int",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("int");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getMyIntAccess().getIntINTTerminalRuleCall_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getMyIntAccess().getIntINTTerminalRuleCall_0();
 			return obj;

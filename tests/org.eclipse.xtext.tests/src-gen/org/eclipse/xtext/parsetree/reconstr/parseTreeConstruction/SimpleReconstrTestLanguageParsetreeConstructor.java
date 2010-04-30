@@ -72,6 +72,8 @@ protected class ThisRootNode extends RootToken {
 			case 34: return new TypeBug2A_Group(this, this, 34, inst);
 			case 35: return new TypeBug2B_Group(this, this, 35, inst);
 			case 36: return new Bug305171_Group(this, this, 36, inst);
+			case 37: return new Bug310435Enum_Group(this, this, 37, inst);
+			case 38: return new Bug310435Val_Group(this, this, 38, inst);
 			default: return null;
 		}	
 	}	
@@ -111,6 +113,8 @@ protected class Op_Group extends GroupToken {
 		if(current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getBooleanRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getBug305171Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getBug310435EnumRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getBug310435ValRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getConsumed1Rule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getConsumed2Rule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getDuplicateBug284491Rule().getType().getClassifier() || 
@@ -289,14 +293,14 @@ protected class Op_ValuesAssignment_1_1 extends AssignmentToken  {
  *   Atom|TwoNumbers|ManyStrings|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
  *   Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
  *   EmptyObjectBug284850|MultiInheritanceBug280439|EObjectRef|TypeBug305577_1|
- *   TypeBug305577_2|Parens|Bug305171;
+ *   TypeBug305577_2|Parens|Bug305171|Bug310435Val|Bug310435Enum;
  *
  **/
 
 // Atom|TwoNumbers|ManyStrings|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
 // Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
 // EmptyObjectBug284850|MultiInheritanceBug280439|EObjectRef|TypeBug305577_1|
-// TypeBug305577_2|Parens|Bug305171
+// TypeBug305577_2|Parens|Bug305171|Bug310435Val|Bug310435Enum
 protected class Term_Alternatives extends AlternativesToken {
 
 	public Term_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -334,6 +338,8 @@ protected class Term_Alternatives extends AlternativesToken {
 			case 20: return new Term_TypeBug305577_2ParserRuleCall_20(parent, this, 20, inst);
 			case 21: return new Term_ParensParserRuleCall_21(parent, this, 21, inst);
 			case 22: return new Term_Bug305171ParserRuleCall_22(parent, this, 22, inst);
+			case 23: return new Term_Bug310435ValParserRuleCall_23(parent, this, 23, inst);
+			case 24: return new Term_Bug310435EnumParserRuleCall_24(parent, this, 24, inst);
 			default: return null;
 		}	
 	}
@@ -343,6 +349,8 @@ protected class Term_Alternatives extends AlternativesToken {
 		if(current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getBooleanRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getBug305171Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getBug310435EnumRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getBug310435ValRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getConsumed1Rule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getConsumed2Rule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getDuplicateBug284491Rule().getType().getClassifier() || 
@@ -1309,6 +1317,88 @@ protected class Term_Bug305171ParserRuleCall_22 extends RuleCallToken {
 	}	
 }
 
+// Bug310435Val
+protected class Term_Bug310435ValParserRuleCall_23 extends RuleCallToken {
+	
+	public Term_Bug310435ValParserRuleCall_23(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getTermAccess().getBug310435ValParserRuleCall_23();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug310435Val_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getBug310435ValRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Bug310435Val_Group.class, current)) return null;
+		return current;
+	}
+	
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// Bug310435Enum
+protected class Term_Bug310435EnumParserRuleCall_24 extends RuleCallToken {
+	
+	public Term_Bug310435EnumParserRuleCall_24(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getTermAccess().getBug310435EnumParserRuleCall_24();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug310435Enum_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getBug310435EnumRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Bug310435Enum_Group.class, current)) return null;
+		return current;
+	}
+	
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
 
 /************ end Rule Term ****************/
 
@@ -1350,7 +1440,7 @@ protected class Atom_NameAssignment extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAtomAccess().getNameIDTerminalRuleCall_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAtomAccess().getNameIDTerminalRuleCall_0();
 			return obj;
@@ -1396,6 +1486,8 @@ protected class Parens_Group extends GroupToken {
 		if(current.getDelegate().eClass() == grammarAccess.getAtomRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getBooleanRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getBug305171Rule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getBug310435EnumRule().getType().getClassifier() || 
+		   current.getDelegate().eClass() == grammarAccess.getBug310435ValRule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getConsumed1Rule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getConsumed2Rule().getType().getClassifier() || 
 		   current.getDelegate().eClass() == grammarAccess.getDuplicateBug284491Rule().getType().getClassifier() || 
@@ -1600,7 +1692,7 @@ protected class TwoNumbers_Num1Assignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("num1",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("num1");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTwoNumbersAccess().getNum1INTTerminalRuleCall_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTwoNumbersAccess().getNum1INTTerminalRuleCall_0_0();
 			return obj;
@@ -1634,7 +1726,7 @@ protected class TwoNumbers_Num2Assignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("num2",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("num2");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTwoNumbersAccess().getNum2INTTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTwoNumbersAccess().getNum2INTTerminalRuleCall_1_0();
 			return obj;
@@ -1713,7 +1805,7 @@ protected class TwoNumbers_Num3Assignment_2_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("num3",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("num3");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTwoNumbersAccess().getNum3INTTerminalRuleCall_2_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTwoNumbersAccess().getNum3INTTerminalRuleCall_2_1_0();
 			return obj;
@@ -1810,7 +1902,7 @@ protected class ManyStrings_Str1Assignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("str1",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("str1");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getManyStringsAccess().getStr1STRINGTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getManyStringsAccess().getStr1STRINGTerminalRuleCall_1_0();
 			return obj;
@@ -1845,7 +1937,7 @@ protected class ManyStrings_Str2Assignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("str2",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("str2");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getManyStringsAccess().getStr2STRINGTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getManyStringsAccess().getStr2STRINGTerminalRuleCall_2_0();
 			return obj;
@@ -1940,7 +2032,7 @@ protected class Type_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTypeAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTypeAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -2104,7 +2196,7 @@ protected class Ref2_Ref2Assignment_1 extends AssignmentToken  {
 			element = grammarAccess.getRef2Access().getRef2Mykeyword2Keyword_1_0_2();
 			return obj;
 		}
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getRef2Access().getRef2STRINGTerminalRuleCall_1_0_1(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getRef2Access().getRef2STRINGTerminalRuleCall_1_0_1();
 			return obj;
@@ -2200,7 +2292,7 @@ protected class Spare_IdAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("id",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("id");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getSpareAccess().getIdIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSpareAccess().getIdIDTerminalRuleCall_1_0();
 			return obj;
@@ -2279,7 +2371,7 @@ protected class Spare_IdAssignment_2_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("id",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("id");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getSpareAccess().getIdIDTerminalRuleCall_2_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSpareAccess().getIdIDTerminalRuleCall_2_1_0();
 			return obj;
@@ -2432,7 +2524,7 @@ protected class Boolean_ValueAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getBooleanAccess().getValueIDTerminalRuleCall_3_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getBooleanAccess().getValueIDTerminalRuleCall_3_0();
 			return obj;
@@ -2585,7 +2677,7 @@ protected class Transient1_PrecAssignment_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("prec",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("prec");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTransient1Access().getPrecINTTerminalRuleCall_1_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTransient1Access().getPrecINTTerminalRuleCall_1_1_0();
 			return obj;
@@ -2721,7 +2813,7 @@ protected class Transient1_ScaleAssignment_2_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("scale",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("scale");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTransient1Access().getScaleINTTerminalRuleCall_2_1_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTransient1Access().getScaleINTTerminalRuleCall_2_1_1_0();
 			return obj;
@@ -2886,7 +2978,7 @@ protected class Consumed1_V1Assignment_1_0_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("v1",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("v1");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getConsumed1Access().getV1INTTerminalRuleCall_1_0_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getConsumed1Access().getV1INTTerminalRuleCall_1_0_1_0();
 			return obj;
@@ -2921,7 +3013,7 @@ protected class Consumed1_V2Assignment_1_0_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("v2",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("v2");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getConsumed1Access().getV2IDTerminalRuleCall_1_0_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getConsumed1Access().getV2IDTerminalRuleCall_1_0_2_0();
 			return obj;
@@ -3001,7 +3093,7 @@ protected class Consumed1_V2Assignment_1_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("v2",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("v2");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getConsumed1Access().getV2IDTerminalRuleCall_1_1_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getConsumed1Access().getV2IDTerminalRuleCall_1_1_1_0();
 			return obj;
@@ -3036,7 +3128,7 @@ protected class Consumed1_V1Assignment_1_1_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("v1",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("v1");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getConsumed1Access().getV1INTTerminalRuleCall_1_1_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getConsumed1Access().getV1INTTerminalRuleCall_1_1_2_0();
 			return obj;
@@ -3240,7 +3332,7 @@ protected class Loop1_IdAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("id",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("id");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getLoop1Access().getIdIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getLoop1Access().getIdIDTerminalRuleCall_2_0();
 			return obj;
@@ -3274,7 +3366,7 @@ protected class Loop1_IdAssignment_4 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("id",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("id");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getLoop1Access().getIdIDTerminalRuleCall_4_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getLoop1Access().getIdIDTerminalRuleCall_4_0();
 			return obj;
@@ -3414,7 +3506,7 @@ protected class Loop2_IdAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("id",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("id");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getLoop2Access().getIdIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getLoop2Access().getIdIDTerminalRuleCall_1_0();
 			return obj;
@@ -3515,7 +3607,7 @@ protected class Loop2_IdAssignment_2_1_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("id",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("id");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getLoop2Access().getIdIDTerminalRuleCall_2_1_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getLoop2Access().getIdIDTerminalRuleCall_2_1_0_0();
 			return obj;
@@ -3617,7 +3709,7 @@ protected class Loop2_IdAssignment_3_1_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("id",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("id");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getLoop2Access().getIdIDTerminalRuleCall_3_1_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getLoop2Access().getIdIDTerminalRuleCall_3_1_0_0();
 			return obj;
@@ -3828,7 +3920,7 @@ protected class Loop3_IdAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("id",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("id");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getLoop3Access().getIdIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getLoop3Access().getIdIDTerminalRuleCall_2_0();
 			return obj;
@@ -3907,7 +3999,7 @@ protected class Loop3_IdAssignment_3_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("id",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("id");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getLoop3Access().getIdIDTerminalRuleCall_3_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getLoop3Access().getIdIDTerminalRuleCall_3_1_0();
 			return obj;
@@ -4070,7 +4162,7 @@ protected class Loop4_IdAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("id",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("id");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getLoop4Access().getIdIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getLoop4Access().getIdIDTerminalRuleCall_2_0();
 			return obj;
@@ -4290,7 +4382,7 @@ protected class LoopBug285452_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getLoopBug285452Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getLoopBug285452Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -4740,7 +4832,7 @@ protected class EmptyObjectItem_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEmptyObjectItemAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEmptyObjectItemAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -4970,7 +5062,7 @@ protected class AbstractMulti1_M1Assignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("m1",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("m1");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAbstractMulti1Access().getM1IDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAbstractMulti1Access().getM1IDTerminalRuleCall_1_0();
 			return obj;
@@ -5093,7 +5185,7 @@ protected class AbstractMulti2_M2Assignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("m2",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("m2");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAbstractMulti2Access().getM2IDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAbstractMulti2Access().getM2IDTerminalRuleCall_1_0();
 			return obj;
@@ -5166,7 +5258,7 @@ protected class ConcreteMulti_M1Assignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("m1",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("m1");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getConcreteMultiAccess().getM1IDTerminalRuleCall_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getConcreteMultiAccess().getM1IDTerminalRuleCall_0_0();
 			return obj;
@@ -5200,7 +5292,7 @@ protected class ConcreteMulti_M2Assignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("m2",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("m2");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getConcreteMultiAccess().getM2IDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getConcreteMultiAccess().getM2IDTerminalRuleCall_1_0();
 			return obj;
@@ -5417,7 +5509,7 @@ protected class EObjectElement_NameAssignment extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEObjectElementAccess().getNameIDTerminalRuleCall_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEObjectElementAccess().getNameIDTerminalRuleCall_0();
 			return obj;
@@ -5929,7 +6021,7 @@ protected class TypeBug1A_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTypeBug1AAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTypeBug1AAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -6051,7 +6143,7 @@ protected class TypeBug1B_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTypeBug1BAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTypeBug1BAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -6224,7 +6316,7 @@ protected class TypeBug2A_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTypeBug2AAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTypeBug2AAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -6346,7 +6438,7 @@ protected class TypeBug2B_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTypeBug2BAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTypeBug2BAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -6511,7 +6603,7 @@ protected class Bug305171_XAssignment_1_0_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("x",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getBug305171Access().getXIDTerminalRuleCall_1_0_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getBug305171Access().getXIDTerminalRuleCall_1_0_1_0();
 			return obj;
@@ -6590,7 +6682,7 @@ protected class Bug305171_XAssignment_1_0_2_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("x",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getBug305171Access().getXIDTerminalRuleCall_1_0_2_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getBug305171Access().getXIDTerminalRuleCall_1_0_2_1_0();
 			return obj;
@@ -6697,7 +6789,7 @@ protected class Bug305171_YAssignment_1_1_0_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("y",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("y");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getBug305171Access().getYIDTerminalRuleCall_1_1_0_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getBug305171Access().getYIDTerminalRuleCall_1_1_0_1_0();
 			return obj;
@@ -6776,7 +6868,7 @@ protected class Bug305171_YAssignment_1_1_0_2_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("y",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("y");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getBug305171Access().getYIDTerminalRuleCall_1_1_0_2_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getBug305171Access().getYIDTerminalRuleCall_1_1_0_2_1_0();
 			return obj;
@@ -6859,7 +6951,7 @@ protected class Bug305171_ZAssignment_1_1_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("z",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("z");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getBug305171Access().getZIDTerminalRuleCall_1_1_1_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getBug305171Access().getZIDTerminalRuleCall_1_1_1_1_0();
 			return obj;
@@ -6938,7 +7030,7 @@ protected class Bug305171_ZAssignment_1_1_1_2_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("z",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("z");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getBug305171Access().getZIDTerminalRuleCall_1_1_1_2_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getBug305171Access().getZIDTerminalRuleCall_1_1_1_2_1_0();
 			return obj;
@@ -6976,7 +7068,7 @@ protected class Bug305171_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getBug305171Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getBug305171Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -6988,5 +7080,497 @@ protected class Bug305171_NameAssignment_2 extends AssignmentToken  {
 
 
 /************ end Rule Bug305171 ****************/
+
+
+/************ begin Rule Bug310435Enum ****************
+ *
+ * Bug310435Enum:
+ *   "#20" ("kw1" lits+=EnumBug310435Lit1|"kw2" lits+=EnumBug310435Lit2)*;
+ *
+ **/
+
+// "#20" ("kw1" lits+=EnumBug310435Lit1|"kw2" lits+=EnumBug310435Lit2)*
+protected class Bug310435Enum_Group extends GroupToken {
+	
+	public Bug310435Enum_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getBug310435EnumAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug310435Enum_Alternatives_1(parent, this, 0, inst);
+			case 1: return new Bug310435Enum_NumberSignDigitTwoDigitZeroKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getBug310435EnumRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
+}
+
+// "#20"
+protected class Bug310435Enum_NumberSignDigitTwoDigitZeroKeyword_0 extends KeywordToken  {
+	
+	public Bug310435Enum_NumberSignDigitTwoDigitZeroKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug310435EnumAccess().getNumberSignDigitTwoDigitZeroKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}
+
+}
+
+// ("kw1" lits+=EnumBug310435Lit1|"kw2" lits+=EnumBug310435Lit2)*
+protected class Bug310435Enum_Alternatives_1 extends AlternativesToken {
+
+	public Bug310435Enum_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getBug310435EnumAccess().getAlternatives_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug310435Enum_Group_1_0(parent, this, 0, inst);
+			case 1: return new Bug310435Enum_Group_1_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "kw1" lits+=EnumBug310435Lit1
+protected class Bug310435Enum_Group_1_0 extends GroupToken {
+	
+	public Bug310435Enum_Group_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getBug310435EnumAccess().getGroup_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug310435Enum_LitsAssignment_1_0_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "kw1"
+protected class Bug310435Enum_Kw1Keyword_1_0_0 extends KeywordToken  {
+	
+	public Bug310435Enum_Kw1Keyword_1_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug310435EnumAccess().getKw1Keyword_1_0_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug310435Enum_Alternatives_1(parent, this, 0, inst);
+			case 1: return new Bug310435Enum_NumberSignDigitTwoDigitZeroKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// lits+=EnumBug310435Lit1
+protected class Bug310435Enum_LitsAssignment_1_0_1 extends AssignmentToken  {
+	
+	public Bug310435Enum_LitsAssignment_1_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getBug310435EnumAccess().getLitsAssignment_1_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug310435Enum_Kw1Keyword_1_0_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("lits",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("lits");
+		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getBug310435EnumAccess().getLitsEnumBug310435Lit1EnumRuleCall_1_0_1_0(), value, null)) { 
+			type = AssignmentType.ERC;
+			element = grammarAccess.getBug310435EnumAccess().getLitsEnumBug310435Lit1EnumRuleCall_1_0_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// "kw2" lits+=EnumBug310435Lit2
+protected class Bug310435Enum_Group_1_1 extends GroupToken {
+	
+	public Bug310435Enum_Group_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getBug310435EnumAccess().getGroup_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug310435Enum_LitsAssignment_1_1_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "kw2"
+protected class Bug310435Enum_Kw2Keyword_1_1_0 extends KeywordToken  {
+	
+	public Bug310435Enum_Kw2Keyword_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug310435EnumAccess().getKw2Keyword_1_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug310435Enum_Alternatives_1(parent, this, 0, inst);
+			case 1: return new Bug310435Enum_NumberSignDigitTwoDigitZeroKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// lits+=EnumBug310435Lit2
+protected class Bug310435Enum_LitsAssignment_1_1_1 extends AssignmentToken  {
+	
+	public Bug310435Enum_LitsAssignment_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getBug310435EnumAccess().getLitsAssignment_1_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug310435Enum_Kw2Keyword_1_1_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("lits",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("lits");
+		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getBug310435EnumAccess().getLitsEnumBug310435Lit2EnumRuleCall_1_1_1_0(), value, null)) { 
+			type = AssignmentType.ERC;
+			element = grammarAccess.getBug310435EnumAccess().getLitsEnumBug310435Lit2EnumRuleCall_1_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+
+
+/************ end Rule Bug310435Enum ****************/
+
+
+/************ begin Rule Bug310435Val ****************
+ *
+ * Bug310435Val:
+ *   "#21" ("kw1" lits+=ID|"kw2" lits+=STRING)*;
+ *
+ **/
+
+// "#21" ("kw1" lits+=ID|"kw2" lits+=STRING)*
+protected class Bug310435Val_Group extends GroupToken {
+	
+	public Bug310435Val_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getBug310435ValAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug310435Val_Alternatives_1(parent, this, 0, inst);
+			case 1: return new Bug310435Val_NumberSignDigitTwoDigitOneKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(current.getDelegate().eClass() == grammarAccess.getBug310435ValRule().getType().getClassifier())
+			return tryConsumeVal();
+		return null;
+	}
+
+}
+
+// "#21"
+protected class Bug310435Val_NumberSignDigitTwoDigitOneKeyword_0 extends KeywordToken  {
+	
+	public Bug310435Val_NumberSignDigitTwoDigitOneKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug310435ValAccess().getNumberSignDigitTwoDigitOneKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}
+
+}
+
+// ("kw1" lits+=ID|"kw2" lits+=STRING)*
+protected class Bug310435Val_Alternatives_1 extends AlternativesToken {
+
+	public Bug310435Val_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getBug310435ValAccess().getAlternatives_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug310435Val_Group_1_0(parent, this, 0, inst);
+			case 1: return new Bug310435Val_Group_1_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "kw1" lits+=ID
+protected class Bug310435Val_Group_1_0 extends GroupToken {
+	
+	public Bug310435Val_Group_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getBug310435ValAccess().getGroup_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug310435Val_LitsAssignment_1_0_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "kw1"
+protected class Bug310435Val_Kw1Keyword_1_0_0 extends KeywordToken  {
+	
+	public Bug310435Val_Kw1Keyword_1_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug310435ValAccess().getKw1Keyword_1_0_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug310435Val_Alternatives_1(parent, this, 0, inst);
+			case 1: return new Bug310435Val_NumberSignDigitTwoDigitOneKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// lits+=ID
+protected class Bug310435Val_LitsAssignment_1_0_1 extends AssignmentToken  {
+	
+	public Bug310435Val_LitsAssignment_1_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getBug310435ValAccess().getLitsAssignment_1_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug310435Val_Kw1Keyword_1_0_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("lits",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("lits");
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getBug310435ValAccess().getLitsIDTerminalRuleCall_1_0_1_0(), value, null)) {
+			type = AssignmentType.LRC;
+			element = grammarAccess.getBug310435ValAccess().getLitsIDTerminalRuleCall_1_0_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// "kw2" lits+=STRING
+protected class Bug310435Val_Group_1_1 extends GroupToken {
+	
+	public Bug310435Val_Group_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getBug310435ValAccess().getGroup_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug310435Val_LitsAssignment_1_1_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "kw2"
+protected class Bug310435Val_Kw2Keyword_1_1_0 extends KeywordToken  {
+	
+	public Bug310435Val_Kw2Keyword_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug310435ValAccess().getKw2Keyword_1_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug310435Val_Alternatives_1(parent, this, 0, inst);
+			case 1: return new Bug310435Val_NumberSignDigitTwoDigitOneKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// lits+=STRING
+protected class Bug310435Val_LitsAssignment_1_1_1 extends AssignmentToken  {
+	
+	public Bug310435Val_LitsAssignment_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getBug310435ValAccess().getLitsAssignment_1_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug310435Val_Kw2Keyword_1_1_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("lits",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("lits");
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getBug310435ValAccess().getLitsSTRINGTerminalRuleCall_1_1_1_0(), value, null)) {
+			type = AssignmentType.LRC;
+			element = grammarAccess.getBug310435ValAccess().getLitsSTRINGTerminalRuleCall_1_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+
+
+/************ end Rule Bug310435Val ****************/
 
 }

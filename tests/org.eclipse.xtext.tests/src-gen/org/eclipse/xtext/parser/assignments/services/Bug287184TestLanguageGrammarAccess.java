@@ -91,10 +91,12 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cDetailClassModelFQNParserRuleCall_2_0_1 = (RuleCall)cDetailClassModelCrossReference_2_0.eContents().get(1);
 		
 		//Detail:
-		//  "detail" visibility=( "private" | "protected" | "public" )? detailClass=[Model|FQN];
+		//  "detail" visibility=( "private" | "protected" | "public" )? detailClass=[
+		//  Model|FQN];
 		public ParserRule getRule() { return rule; }
 
-		//"detail" visibility=( "private" | "protected" | "public" )? detailClass=[Model|FQN]
+		//"detail" visibility=( "private" | "protected" | "public" )? detailClass=[Model|
+		//FQN]
 		public Group getGroup() { return cGroup; }
 
 		//"detail"
@@ -234,7 +236,8 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Detail:
-	//  "detail" visibility=( "private" | "protected" | "public" )? detailClass=[Model|FQN];
+	//  "detail" visibility=( "private" | "protected" | "public" )? detailClass=[
+	//  Model|FQN];
 	public DetailElements getDetailAccess() {
 		return (pDetail != null) ? pDetail : (pDetail = new DetailElements());
 	}
@@ -276,8 +279,9 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

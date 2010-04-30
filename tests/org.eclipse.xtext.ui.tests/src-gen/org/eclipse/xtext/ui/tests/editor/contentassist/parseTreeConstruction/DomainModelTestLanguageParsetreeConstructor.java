@@ -264,7 +264,7 @@ protected class Import_ImportURIAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("importURI",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("importURI");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0();
 			return obj;
@@ -483,7 +483,7 @@ protected class DataType_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -500,13 +500,13 @@ protected class DataType_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule Class ****************
  *
  * Class:
- *   "class" name=ID ("extends" superClass=[Class])? "{" properties+=Property* subClasses+=
- *   Class* "}";
+ *   "class" name=ID ("extends" superClass=[Class])? "{" properties+=Property*
+ *   subClasses+=Class* "}";
  *
  **/
 
-// "class" name=ID ("extends" superClass=[Class])? "{" properties+=Property* subClasses+=
-// Class* "}"
+// "class" name=ID ("extends" superClass=[Class])? "{" properties+=Property*
+// subClasses+=Class* "}"
 protected class Class_Group extends GroupToken {
 	
 	public Class_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -580,7 +580,7 @@ protected class Class_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -1023,7 +1023,7 @@ protected class Attribute_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -1177,7 +1177,7 @@ protected class Reference_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;

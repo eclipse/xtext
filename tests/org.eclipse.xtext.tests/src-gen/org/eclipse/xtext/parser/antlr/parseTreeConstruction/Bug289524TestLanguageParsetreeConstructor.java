@@ -183,13 +183,13 @@ protected class Model_RefsAssignment_2 extends AssignmentToken  {
 /************ begin Rule ModelElement ****************
  *
  * ModelElement:
- *   {ModelElement} (containments+=Contained|"reference" refs+=[Contained] ("$" refs+=[
- *   Contained])*)+;
+ *   {ModelElement} (containments+=Contained|"reference" refs+=[Contained] ("$"
+ *   refs+=[Contained])*)+;
  *
  **/
 
-// {ModelElement} (containments+=Contained|"reference" refs+=[Contained] ("$" refs+=[
-// Contained])*)+
+// {ModelElement} (containments+=Contained|"reference" refs+=[Contained] ("$" refs
+// +=[Contained])*)+
 protected class ModelElement_Group extends GroupToken {
 	
 	public ModelElement_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -244,7 +244,8 @@ protected class ModelElement_ModelElementAction_0 extends ActionToken  {
 	}
 }
 
-// (containments+=Contained|"reference" refs+=[Contained] ("$" refs+=[Contained])*)+
+// (containments+=Contained|"reference" refs+=[Contained] ("$" refs+=[Contained])*)
+// +
 protected class ModelElement_Alternatives_1 extends AlternativesToken {
 
 	public ModelElement_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -567,7 +568,7 @@ protected class Contained_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getContainedAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getContainedAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;

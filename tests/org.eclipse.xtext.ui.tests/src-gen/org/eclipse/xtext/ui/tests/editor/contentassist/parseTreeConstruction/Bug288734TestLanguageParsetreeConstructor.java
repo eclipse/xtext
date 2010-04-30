@@ -426,7 +426,7 @@ protected class TStringConstant_NameAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTStringConstantAccess().getNameIDTerminalRuleCall_3_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTStringConstantAccess().getNameIDTerminalRuleCall_3_0();
 			return obj;
@@ -590,7 +590,7 @@ protected class TIntegerConstant_NameAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTIntegerConstantAccess().getNameIDTerminalRuleCall_3_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTIntegerConstantAccess().getNameIDTerminalRuleCall_3_0();
 			return obj;
@@ -754,7 +754,7 @@ protected class TBooleanConstant_NameAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTBooleanConstantAccess().getNameIDTerminalRuleCall_3_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTBooleanConstantAccess().getNameIDTerminalRuleCall_3_0();
 			return obj;
@@ -849,7 +849,7 @@ protected class TAnnotation_DescriptionAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("description",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("description");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTAnnotationAccess().getDescriptionSTRINGTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTAnnotationAccess().getDescriptionSTRINGTerminalRuleCall_1_0();
 			return obj;

@@ -64,18 +64,19 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cRefsContainedIDTerminalRuleCall_1_1_2_1_0_1 = (RuleCall)cRefsContainedCrossReference_1_1_2_1_0.eContents().get(1);
 		
 		//ModelElement:
-		//  {ModelElement} (containments+=Contained|"reference" refs+=[Contained] ("$" refs+=[
-		//  Contained])*)+;
+		//  {ModelElement} (containments+=Contained|"reference" refs+=[Contained] ("$"
+		//  refs+=[Contained])*)+;
 		public ParserRule getRule() { return rule; }
 
-		//{ModelElement} (containments+=Contained|"reference" refs+=[Contained] ("$" refs+=[
-		//Contained])*)+
+		//{ModelElement} (containments+=Contained|"reference" refs+=[Contained] ("$" refs
+		//+=[Contained])*)+
 		public Group getGroup() { return cGroup; }
 
 		//{ModelElement}
 		public Action getModelElementAction_0() { return cModelElementAction_0; }
 
-		//(containments+=Contained|"reference" refs+=[Contained] ("$" refs+=[Contained])*)+
+		//(containments+=Contained|"reference" refs+=[Contained] ("$" refs+=[Contained])*)
+		//+
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//containments+=Contained
@@ -176,8 +177,8 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//ModelElement:
-	//  {ModelElement} (containments+=Contained|"reference" refs+=[Contained] ("$" refs+=[
-	//  Contained])*)+;
+	//  {ModelElement} (containments+=Contained|"reference" refs+=[Contained] ("$"
+	//  refs+=[Contained])*)+;
 	public ModelElementElements getModelElementAccess() {
 		return (pModelElement != null) ? pModelElement : (pModelElement = new ModelElementElements());
 	}
@@ -209,8 +210,9 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

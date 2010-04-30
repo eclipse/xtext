@@ -278,7 +278,7 @@ protected class Import_ImportURIAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("importURI",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("importURI");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0();
 			return obj;
@@ -913,13 +913,13 @@ protected class SelectEntry_AttributeAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule FromEntry ****************
  *
  * FromEntry:
- *   type=[ecore::EClass] withoutsubtypes?="withoutsubtypes"? "as" alias=ID scopeClause=
- *   ScopeClause?;
+ *   type=[ecore::EClass] withoutsubtypes?="withoutsubtypes"? "as" alias=ID
+ *   scopeClause=ScopeClause?;
  *
  **/
 
-// type=[ecore::EClass] withoutsubtypes?="withoutsubtypes"? "as" alias=ID scopeClause=
-// ScopeClause?
+// type=[ecore::EClass] withoutsubtypes?="withoutsubtypes"? "as" alias=ID
+// scopeClause=ScopeClause?
 protected class FromEntry_Group extends GroupToken {
 	
 	public FromEntry_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1066,7 +1066,7 @@ protected class FromEntry_AliasAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alias");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getFromEntryAccess().getAliasIDTerminalRuleCall_3_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getFromEntryAccess().getAliasIDTerminalRuleCall_3_0();
 			return obj;
@@ -1494,7 +1494,7 @@ protected class ResourceScope_UrisAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("uris",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("uris");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getResourceScopeAccess().getUrisSTRINGTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getResourceScopeAccess().getUrisSTRINGTerminalRuleCall_2_0();
 			return obj;
@@ -1573,7 +1573,7 @@ protected class ResourceScope_UrisAssignment_3_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("uris",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("uris");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getResourceScopeAccess().getUrisSTRINGTerminalRuleCall_3_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getResourceScopeAccess().getUrisSTRINGTerminalRuleCall_3_1_0();
 			return obj;
@@ -1714,7 +1714,7 @@ protected class ElementScope_UrisAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("uris",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("uris");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getElementScopeAccess().getUrisSTRINGTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getElementScopeAccess().getUrisSTRINGTerminalRuleCall_2_0();
 			return obj;
@@ -1793,7 +1793,7 @@ protected class ElementScope_UrisAssignment_3_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("uris",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("uris");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getElementScopeAccess().getUrisSTRINGTerminalRuleCall_3_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getElementScopeAccess().getUrisSTRINGTerminalRuleCall_3_1_0();
 			return obj;
@@ -1834,7 +1834,8 @@ protected class ElementScope_RightCurlyBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule WhereEntry ****************
  *
  * WhereEntry:
- *   AndWhereEntry ({OrWhereEntry.entries+=current} ("or" entries+=AndWhereEntry)+)?;
+ *   AndWhereEntry ({OrWhereEntry.entries+=current} ("or" entries+=AndWhereEntry)+
+ *   )?;
  *
  **/
 
@@ -2736,8 +2737,8 @@ protected class ParWhereEntry_RightParenthesisKeyword_2 extends KeywordToken  {
 /************ begin Rule AttributeWhereEntry ****************
  *
  * AttributeWhereEntry:
- *   NumericAttributeWhereEntry|StringAttributeWhereEntry|BooleanAttributeWhereEntry|
- *   VariableWhereEntry;
+ *   NumericAttributeWhereEntry|StringAttributeWhereEntry|
+ *   BooleanAttributeWhereEntry|VariableWhereEntry;
  *
  **/
 
@@ -3074,13 +3075,13 @@ protected class NumericAttributeWhereEntry_LongWhereEntryParserRuleCall_1 extend
 /************ begin Rule DoubleWhereEntry ****************
  *
  * DoubleWhereEntry:
- *   alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator value=
- *   SIGNED_DOUBLE;
+ *   alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator
+ *   value=SIGNED_DOUBLE;
  *
  **/
 
-// alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator value=
-// SIGNED_DOUBLE
+// alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator
+// value=SIGNED_DOUBLE
 protected class DoubleWhereEntry_Group extends GroupToken {
 	
 	public DoubleWhereEntry_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -3228,7 +3229,7 @@ protected class DoubleWhereEntry_OperatorAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
-		if(Boolean.TRUE.booleanValue()) {  
+		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getDoubleWhereEntryAccess().getOperatorNumericOperatorEnumRuleCall_3_0(), value, null)) { 
 			type = AssignmentType.ERC;
 			element = grammarAccess.getDoubleWhereEntryAccess().getOperatorNumericOperatorEnumRuleCall_3_0();
 			return obj;
@@ -3262,7 +3263,7 @@ protected class DoubleWhereEntry_ValueAssignment_4 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getDoubleWhereEntryAccess().getValueSIGNED_DOUBLETerminalRuleCall_4_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getDoubleWhereEntryAccess().getValueSIGNED_DOUBLETerminalRuleCall_4_0();
 			return obj;
@@ -3279,13 +3280,13 @@ protected class DoubleWhereEntry_ValueAssignment_4 extends AssignmentToken  {
 /************ begin Rule LongWhereEntry ****************
  *
  * LongWhereEntry:
- *   alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator value=
- *   SINGED_LONG;
+ *   alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator
+ *   value=SINGED_LONG;
  *
  **/
 
-// alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator value=
-// SINGED_LONG
+// alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator
+// value=SINGED_LONG
 protected class LongWhereEntry_Group extends GroupToken {
 	
 	public LongWhereEntry_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -3433,7 +3434,7 @@ protected class LongWhereEntry_OperatorAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
-		if(Boolean.TRUE.booleanValue()) {  
+		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getLongWhereEntryAccess().getOperatorNumericOperatorEnumRuleCall_3_0(), value, null)) { 
 			type = AssignmentType.ERC;
 			element = grammarAccess.getLongWhereEntryAccess().getOperatorNumericOperatorEnumRuleCall_3_0();
 			return obj;
@@ -3467,7 +3468,7 @@ protected class LongWhereEntry_ValueAssignment_4 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getLongWhereEntryAccess().getValueSINGED_LONGTerminalRuleCall_4_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getLongWhereEntryAccess().getValueSINGED_LONGTerminalRuleCall_4_0();
 			return obj;
@@ -3638,7 +3639,7 @@ protected class VariableWhereEntry_OperatorAssignment_3 extends AssignmentToken 
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
-		if(Boolean.TRUE.booleanValue()) {  
+		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getVariableWhereEntryAccess().getOperatorNumericOperatorEnumRuleCall_3_0(), value, null)) { 
 			type = AssignmentType.ERC;
 			element = grammarAccess.getVariableWhereEntryAccess().getOperatorNumericOperatorEnumRuleCall_3_0();
 			return obj;
@@ -3751,13 +3752,13 @@ protected class VariableWhereEntry_RightAttributeAssignment_6 extends Assignment
 /************ begin Rule StringAttributeWhereEntry ****************
  *
  * StringAttributeWhereEntry:
- *   alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=StringOperator pattern=
- *   STRING;
+ *   alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=StringOperator
+ *   pattern=STRING;
  *
  **/
 
-// alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=StringOperator pattern=
-// STRING
+// alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=StringOperator
+// pattern=STRING
 protected class StringAttributeWhereEntry_Group extends GroupToken {
 	
 	public StringAttributeWhereEntry_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -3905,7 +3906,7 @@ protected class StringAttributeWhereEntry_OperatorAssignment_3 extends Assignmen
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
-		if(Boolean.TRUE.booleanValue()) {  
+		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getStringAttributeWhereEntryAccess().getOperatorStringOperatorEnumRuleCall_3_0(), value, null)) { 
 			type = AssignmentType.ERC;
 			element = grammarAccess.getStringAttributeWhereEntryAccess().getOperatorStringOperatorEnumRuleCall_3_0();
 			return obj;
@@ -3939,7 +3940,7 @@ protected class StringAttributeWhereEntry_PatternAssignment_4 extends Assignment
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("pattern",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("pattern");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getStringAttributeWhereEntryAccess().getPatternSTRINGTerminalRuleCall_4_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getStringAttributeWhereEntryAccess().getPatternSTRINGTerminalRuleCall_4_0();
 			return obj;
@@ -3956,13 +3957,13 @@ protected class StringAttributeWhereEntry_PatternAssignment_4 extends Assignment
 /************ begin Rule BooleanAttributeWhereEntry ****************
  *
  * BooleanAttributeWhereEntry:
- *   alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=BooleanOperator (isTrue
- *   ?="true"|"false");
+ *   alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=BooleanOperator
+ *   (isTrue?="true"|"false");
  *
  **/
 
-// alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=BooleanOperator (isTrue
-// ?="true"|"false")
+// alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=BooleanOperator (
+// isTrue?="true"|"false")
 protected class BooleanAttributeWhereEntry_Group extends GroupToken {
 	
 	public BooleanAttributeWhereEntry_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -4110,7 +4111,7 @@ protected class BooleanAttributeWhereEntry_OperatorAssignment_3 extends Assignme
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
-		if(Boolean.TRUE.booleanValue()) {  
+		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getBooleanAttributeWhereEntryAccess().getOperatorBooleanOperatorEnumRuleCall_3_0(), value, null)) { 
 			type = AssignmentType.ERC;
 			element = grammarAccess.getBooleanAttributeWhereEntryAccess().getOperatorBooleanOperatorEnumRuleCall_3_0();
 			return obj;
@@ -4207,13 +4208,13 @@ protected class BooleanAttributeWhereEntry_FalseKeyword_4_1 extends KeywordToken
 /************ begin Rule NullWhereEntry ****************
  *
  * NullWhereEntry:
- *   alias=[FromEntry] "." feature=[ecore::EStructuralFeature] operator=BooleanOperator
- *   "null";
+ *   alias=[FromEntry] "." feature=[ecore::EStructuralFeature] operator=
+ *   BooleanOperator "null";
  *
  **/
 
-// alias=[FromEntry] "." feature=[ecore::EStructuralFeature] operator=BooleanOperator
-// "null"
+// alias=[FromEntry] "." feature=[ecore::EStructuralFeature] operator=
+// BooleanOperator "null"
 protected class NullWhereEntry_Group extends GroupToken {
 	
 	public NullWhereEntry_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -4361,7 +4362,7 @@ protected class NullWhereEntry_OperatorAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
-		if(Boolean.TRUE.booleanValue()) {  
+		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getNullWhereEntryAccess().getOperatorBooleanOperatorEnumRuleCall_3_0(), value, null)) { 
 			type = AssignmentType.ERC;
 			element = grammarAccess.getNullWhereEntryAccess().getOperatorBooleanOperatorEnumRuleCall_3_0();
 			return obj;
@@ -4400,7 +4401,8 @@ protected class NullWhereEntry_NullKeyword_4 extends KeywordToken  {
 /************ begin Rule ReferenceAliasWhereEntry ****************
  *
  * ReferenceAliasWhereEntry:
- *   alias=[FromEntry] "." reference=[ecore::EReference] "=" rightAlias=[FromEntry];
+ *   alias=[FromEntry] "." reference=[ecore::EReference] "=" rightAlias=[FromEntry
+ *   ];
  *
  **/
 
@@ -4594,13 +4596,13 @@ protected class ReferenceAliasWhereEntry_RightAliasAssignment_4 extends Assignme
 /************ begin Rule SubselectWhereEntry ****************
  *
  * SubselectWhereEntry:
- *   alias=[FromEntry] "." reference=[ecore::EReference] notIn?="not"? "in" "(" subQuery=
- *   MQLquery ")";
+ *   alias=[FromEntry] "." reference=[ecore::EReference] notIn?="not"? "in" "("
+ *   subQuery=MQLquery ")";
  *
  **/
 
-// alias=[FromEntry] "." reference=[ecore::EReference] notIn?="not"? "in" "(" subQuery=
-// MQLquery ")"
+// alias=[FromEntry] "." reference=[ecore::EReference] notIn?="not"? "in" "("
+// subQuery=MQLquery ")"
 protected class SubselectWhereEntry_Group extends GroupToken {
 	
 	public SubselectWhereEntry_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {

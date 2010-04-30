@@ -48,19 +48,19 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+" multiValue+=(
- *   "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2" value=STRING|"2+" multiValue+=
- *   STRING|"3" value=Datatype|"3+" multiValue+=Datatype|"4" value=NestedDatatype|"4+"
- *   multiValue+=NestedDatatype|("content" children=Child) ("ref" ref=( [Child1|STRING] | [
- *   Child2] ))?;
+ *   "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+"
+ *   multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2"
+ *   value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+" multiValue+=
+ *   Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|("content"
+ *   children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?;
  *
  **/
 
-// "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+" multiValue+=(
-// "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2" value=STRING|"2+" multiValue+=
-// STRING|"3" value=Datatype|"3+" multiValue+=Datatype|"4" value=NestedDatatype|"4+"
-// multiValue+=NestedDatatype|("content" children=Child) ("ref" ref=( [Child1|STRING] | [
-// Child2] ))?
+// "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+"
+// multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2"
+// value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+" multiValue+=
+// Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|("content"
+// children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -147,22 +147,22 @@ protected class Model_ValueAssignment_0_1 extends AssignmentToken  {
 			element = grammarAccess.getModelAccess().getValueMykeyword1Keyword_0_1_0_0();
 			return obj;
 		}
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getValueSTRINGTerminalRuleCall_0_1_0_1(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getValueSTRINGTerminalRuleCall_0_1_0_1();
 			return obj;
 		}
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getValueNestedDatatypeParserRuleCall_0_1_0_2(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getValueNestedDatatypeParserRuleCall_0_1_0_2();
 			return obj;
 		}
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getValueDatatypeParserRuleCall_0_1_0_3(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getValueDatatypeParserRuleCall_0_1_0_3();
 			return obj;
 		}
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getValueIDTerminalRuleCall_0_1_0_4(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getValueIDTerminalRuleCall_0_1_0_4();
 			return obj;
@@ -245,22 +245,22 @@ protected class Model_MultiValueAssignment_1_1 extends AssignmentToken  {
 			element = grammarAccess.getModelAccess().getMultiValueMykeyword1Keyword_1_1_0_0();
 			return obj;
 		}
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getMultiValueSTRINGTerminalRuleCall_1_1_0_1(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getMultiValueSTRINGTerminalRuleCall_1_1_0_1();
 			return obj;
 		}
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getMultiValueNestedDatatypeParserRuleCall_1_1_0_2(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getMultiValueNestedDatatypeParserRuleCall_1_1_0_2();
 			return obj;
 		}
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getMultiValueDatatypeParserRuleCall_1_1_0_3(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getMultiValueDatatypeParserRuleCall_1_1_0_3();
 			return obj;
 		}
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getMultiValueIDTerminalRuleCall_1_1_0_4(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getMultiValueIDTerminalRuleCall_1_1_0_4();
 			return obj;
@@ -338,7 +338,7 @@ protected class Model_ValueAssignment_2_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getValueSTRINGTerminalRuleCall_2_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getValueSTRINGTerminalRuleCall_2_1_0();
 			return obj;
@@ -416,7 +416,7 @@ protected class Model_MultiValueAssignment_3_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("multiValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("multiValue");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getMultiValueSTRINGTerminalRuleCall_3_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getMultiValueSTRINGTerminalRuleCall_3_1_0();
 			return obj;
@@ -494,7 +494,7 @@ protected class Model_ValueAssignment_4_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getValueDatatypeParserRuleCall_4_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getValueDatatypeParserRuleCall_4_1_0();
 			return obj;
@@ -572,7 +572,7 @@ protected class Model_MultiValueAssignment_5_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("multiValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("multiValue");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getMultiValueDatatypeParserRuleCall_5_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getMultiValueDatatypeParserRuleCall_5_1_0();
 			return obj;
@@ -650,7 +650,7 @@ protected class Model_ValueAssignment_6_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getValueNestedDatatypeParserRuleCall_6_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getValueNestedDatatypeParserRuleCall_6_1_0();
 			return obj;
@@ -728,7 +728,7 @@ protected class Model_MultiValueAssignment_7_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("multiValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("multiValue");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getMultiValueNestedDatatypeParserRuleCall_7_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getMultiValueNestedDatatypeParserRuleCall_7_1_0();
 			return obj;
@@ -920,12 +920,12 @@ protected class Model_RefAssignment_8_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ref",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ref");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getRefChild1STRINGTerminalRuleCall_8_1_1_0_0_1(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getRefChild1STRINGTerminalRuleCall_8_1_1_0_0_1();
 			return obj;
 		}
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getRefChild2IDTerminalRuleCall_8_1_1_0_1_1(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getRefChild2IDTerminalRuleCall_8_1_1_0_1_1();
 			return obj;
@@ -1120,7 +1120,7 @@ protected class Child1_NameAssignment extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getChild1Access().getNameIDTerminalRuleCall_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getChild1Access().getNameIDTerminalRuleCall_0();
 			return obj;
@@ -1170,7 +1170,7 @@ protected class Child2_NameAssignment extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getChild2Access().getNameSTRINGTerminalRuleCall_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getChild2Access().getNameSTRINGTerminalRuleCall_0();
 			return obj;

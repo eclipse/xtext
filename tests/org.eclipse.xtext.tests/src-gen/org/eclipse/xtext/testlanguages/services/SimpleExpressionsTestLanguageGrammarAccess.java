@@ -63,10 +63,12 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 		private final RuleCall cValuesMultiplicationParserRuleCall_1_2_0 = (RuleCall)cValuesAssignment_1_2.eContents().get(0);
 		
 		//Addition returns Expression:
-		//  Multiplication ({Op.values+=current} operator=( "+" | "-" ) values+=Multiplication)*;
+		//  Multiplication ({Op.values+=current} operator=( "+" | "-" ) values+=
+		//  Multiplication)*;
 		public ParserRule getRule() { return rule; }
 
-		//Multiplication ({Op.values+=current} operator=( "+" | "-" ) values+=Multiplication)*
+		//Multiplication ({Op.values+=current} operator=( "+" | "-" ) values+=
+		//Multiplication)*
 		public Group getGroup() { return cGroup; }
 
 		//Multiplication
@@ -245,7 +247,8 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 
 	//Addition returns Expression:
-	//  Multiplication ({Op.values+=current} operator=( "+" | "-" ) values+=Multiplication)*;
+	//  Multiplication ({Op.values+=current} operator=( "+" | "-" ) values+=
+	//  Multiplication)*;
 	public AdditionElements getAdditionAccess() {
 		return (pAddition != null) ? pAddition : (pAddition = new AdditionElements());
 	}
@@ -307,8 +310,9 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

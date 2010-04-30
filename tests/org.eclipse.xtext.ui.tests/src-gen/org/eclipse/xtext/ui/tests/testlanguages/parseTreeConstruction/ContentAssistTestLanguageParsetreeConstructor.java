@@ -359,7 +359,7 @@ protected class FirstAbstractRuleChild_NameAssignment_0 extends AssignmentToken 
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getFirstAbstractRuleChildAccess().getNameIDTerminalRuleCall_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getFirstAbstractRuleChildAccess().getNameIDTerminalRuleCall_0_0();
 			return obj;
@@ -545,7 +545,7 @@ protected class SecondAbstractRuleChild_NameAssignment_0 extends AssignmentToken
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getSecondAbstractRuleChildAccess().getNameIDTerminalRuleCall_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSecondAbstractRuleChildAccess().getNameIDTerminalRuleCall_0_0();
 			return obj;

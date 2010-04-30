@@ -207,7 +207,7 @@ protected class Elem1_ValueAssignment extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) {  
+		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getElem1Access().getValueEnumTEnumRuleCall_0(), value, null)) { 
 			type = AssignmentType.ERC;
 			element = grammarAccess.getElem1Access().getValueEnumTEnumRuleCall_0();
 			return obj;
@@ -279,7 +279,7 @@ protected class Elem2_ValueAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) {  
+		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getElem2Access().getValueEnumTEnumRuleCall_0_0(), value, null)) { 
 			type = AssignmentType.ERC;
 			element = grammarAccess.getElem2Access().getValueEnumTEnumRuleCall_0_0();
 			return obj;

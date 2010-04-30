@@ -557,7 +557,7 @@ protected class ThirdLevelA1_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getThirdLevelA1Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getThirdLevelA1Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -680,7 +680,7 @@ protected class ThirdLevelA2_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getThirdLevelA2Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getThirdLevelA2Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -803,7 +803,7 @@ protected class ThirdLevelB1_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getThirdLevelB1Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getThirdLevelB1Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -926,7 +926,7 @@ protected class ThirdLevelB2_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getThirdLevelB2Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getThirdLevelB2Access().getNameIDTerminalRuleCall_2_0();
 			return obj;

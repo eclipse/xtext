@@ -159,7 +159,7 @@ protected class Type_NameAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTypeAccess().getNameFQNParserRuleCall_0_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getTypeAccess().getNameFQNParserRuleCall_0_0();
 			return obj;

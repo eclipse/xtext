@@ -50,13 +50,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Root ****************
  *
  * Root:
- *   {Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract ("," classes+=Abstract)* "}"
- *   )? ("concrete0" concrete0=Concrete0)? "}";
+ *   {Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract ("," classes+=
+ *   Abstract)* "}")? ("concrete0" concrete0=Concrete0)? "}";
  *
  **/
 
-// {Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract ("," classes+=Abstract)* "}"
-// )? ("concrete0" concrete0=Concrete0)? "}"
+// {Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract ("," classes+=
+// Abstract)* "}")? ("concrete0" concrete0=Concrete0)? "}"
 protected class Root_Group extends GroupToken {
 	
 	public Root_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -157,7 +157,7 @@ protected class Root_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getRootAccess().getNameINT0ParserRuleCall_2_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getRootAccess().getNameINT0ParserRuleCall_2_0();
 			return obj;
@@ -937,7 +937,7 @@ protected class Concrete0_Impl_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getConcrete0_ImplAccess().getNameEStringParserRuleCall_2_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getConcrete0_ImplAccess().getNameEStringParserRuleCall_2_0();
 			return obj;
@@ -1060,7 +1060,7 @@ protected class Concrete1_Impl_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getConcrete1_ImplAccess().getNameEStringParserRuleCall_2_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getConcrete1_ImplAccess().getNameEStringParserRuleCall_2_0();
 			return obj;
@@ -1182,7 +1182,7 @@ protected class DiamondInheritance_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getDiamondInheritanceAccess().getNameEStringParserRuleCall_2_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getDiamondInheritanceAccess().getNameEStringParserRuleCall_2_0();
 			return obj;

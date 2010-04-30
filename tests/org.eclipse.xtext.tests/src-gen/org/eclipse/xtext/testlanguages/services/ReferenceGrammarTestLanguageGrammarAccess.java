@@ -294,12 +294,12 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final Keyword cRightParenthesisKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//Familie:
-		//  "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[Erwachsener]
-		//  kinder+=[Kind] ("," kinder+=[Kind])* ")";
+		//  "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[
+		//  Erwachsener] kinder+=[Kind] ("," kinder+=[Kind])* ")";
 		public ParserRule getRule() { return rule; }
 
-		//"familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[Erwachsener]
-		//kinder+=[Kind] ("," kinder+=[Kind])* ")"
+		//"familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[
+		//Erwachsener] kinder+=[Kind] ("," kinder+=[Kind])* ")"
 		public Group getGroup() { return cGroup; }
 
 		//"familie"
@@ -461,8 +461,8 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 
 	//Familie:
-	//  "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[Erwachsener]
-	//  kinder+=[Kind] ("," kinder+=[Kind])* ")";
+	//  "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[
+	//  Erwachsener] kinder+=[Kind] ("," kinder+=[Kind])* ")";
 	public FamilieElements getFamilieAccess() {
 		return (pFamilie != null) ? pFamilie : (pFamilie = new FamilieElements());
 	}
@@ -484,8 +484,9 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

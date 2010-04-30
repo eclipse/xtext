@@ -82,18 +82,18 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_12 = (Keyword)cGroup.eContents().get(12);
 		
 		//Class:
-		//  abstract?="abstract"? transient?="transient"? "class" name=ID ("extends" superClass=[
-		//  Class])? ("implements" implementedInterfaces+=[Class] ("," "implements"
-		//  implementedInterfaces+=[Class])*)? "{" ("classNumber" "=" classNumber=INT)? ("quid"
-		//  "=" quid=INT)? ("documentation" "=" documentation=STRING)? attributes+=Attribute*
-		//  operations+=Operation* "}";
+		//  abstract?="abstract"? transient?="transient"? "class" name=ID ("extends"
+		//  superClass=[Class])? ("implements" implementedInterfaces+=[Class] (","
+		//  "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
+		//  classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "=" documentation=
+		//  STRING)? attributes+=Attribute* operations+=Operation* "}";
 		public ParserRule getRule() { return rule; }
 
-		//abstract?="abstract"? transient?="transient"? "class" name=ID ("extends" superClass=[
-		//Class])? ("implements" implementedInterfaces+=[Class] ("," "implements"
-		//implementedInterfaces+=[Class])*)? "{" ("classNumber" "=" classNumber=INT)? ("quid"
-		//"=" quid=INT)? ("documentation" "=" documentation=STRING)? attributes+=Attribute*
-		//operations+=Operation* "}"
+		//abstract?="abstract"? transient?="transient"? "class" name=ID ("extends"
+		//superClass=[Class])? ("implements" implementedInterfaces+=[Class] (","
+		//"implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
+		//classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "=" documentation=
+		//STRING)? attributes+=Attribute* operations+=Operation* "}"
 		public Group getGroup() { return cGroup; }
 
 		//abstract?="abstract"?
@@ -132,8 +132,8 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getSuperClassClassIDTerminalRuleCall_4_1_0_1() { return cSuperClassClassIDTerminalRuleCall_4_1_0_1; }
 
-		//("implements" implementedInterfaces+=[Class] ("," "implements" implementedInterfaces
-		//+=[Class])*)?
+		//("implements" implementedInterfaces+=[Class] ("," "implements"
+		//implementedInterfaces+=[Class])*)?
 		public Group getGroup_5() { return cGroup_5; }
 
 		//"implements"
@@ -377,11 +377,11 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Class:
-	//  abstract?="abstract"? transient?="transient"? "class" name=ID ("extends" superClass=[
-	//  Class])? ("implements" implementedInterfaces+=[Class] ("," "implements"
-	//  implementedInterfaces+=[Class])*)? "{" ("classNumber" "=" classNumber=INT)? ("quid"
-	//  "=" quid=INT)? ("documentation" "=" documentation=STRING)? attributes+=Attribute*
-	//  operations+=Operation* "}";
+	//  abstract?="abstract"? transient?="transient"? "class" name=ID ("extends"
+	//  superClass=[Class])? ("implements" implementedInterfaces+=[Class] (","
+	//  "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
+	//  classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "=" documentation=
+	//  STRING)? attributes+=Attribute* operations+=Operation* "}";
 	public ClassElements getClassAccess() {
 		return (pClass != null) ? pClass : (pClass = new ClassElements());
 	}
@@ -433,8 +433,9 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

@@ -330,7 +330,8 @@ protected class Expression_RightSquareBracketKeyword_2_2 extends KeywordToken  {
 /************ begin Rule SExpression ****************
  *
  * SExpression:
- *   {SExpression} ("(" element+=Expression* ")"|"begin" element+=Expression* "end");
+ *   {SExpression} ("(" element+=Expression* ")"|"begin" element+=Expression*
+ *   "end");
  *
  **/
 
@@ -684,7 +685,7 @@ protected class Atom_ValueAssignment extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAtomAccess().getValueVALUEParserRuleCall_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getAtomAccess().getValueVALUEParserRuleCall_0();
 			return obj;

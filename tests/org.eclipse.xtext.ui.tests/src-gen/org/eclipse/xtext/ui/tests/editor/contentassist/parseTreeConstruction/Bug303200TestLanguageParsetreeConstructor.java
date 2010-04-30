@@ -318,11 +318,13 @@ protected class ProgramDirective_StatementParserRuleCall_1 extends RuleCallToken
 /************ begin Rule FunctionDefinition ****************
  *
  * FunctionDefinition:
- *   attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=Block;
+ *   attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=
+ *   Block;
  *
  **/
 
-// attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=Block
+// attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=
+// Block
 protected class FunctionDefinition_Group extends GroupToken {
 	
 	public FunctionDefinition_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -443,7 +445,7 @@ protected class FunctionDefinition_NameAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getFunctionDefinitionAccess().getNameIDTerminalRuleCall_3_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getFunctionDefinitionAccess().getNameIDTerminalRuleCall_3_0();
 			return obj;
@@ -617,7 +619,7 @@ protected class Attribute_IdentAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ident",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ident");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAttributeAccess().getIdentIDTerminalRuleCall_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAttributeAccess().getIdentIDTerminalRuleCall_0_0();
 			return obj;
@@ -908,7 +910,7 @@ protected class Parameters_ParamsAssignment_3_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("params",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("params");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getParametersAccess().getParamsIDTerminalRuleCall_3_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getParametersAccess().getParamsIDTerminalRuleCall_3_0_0();
 			return obj;
@@ -987,7 +989,7 @@ protected class Parameters_ParamsAssignment_3_2_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("params",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("params");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getParametersAccess().getParamsIDTerminalRuleCall_3_2_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getParametersAccess().getParamsIDTerminalRuleCall_3_2_2_0();
 			return obj;
@@ -1523,8 +1525,9 @@ protected class PostfixExpression_PrimaryExpressionParserRuleCall_0 extends Rule
 	}	
 }
 
-// ({PostfixExpression.expression=current} LT* property=PropertyOperator|{Invocation.
-// expression=current} LT* "(" LT* (arguments=ListExpression LT*)? ")")*
+// ({PostfixExpression.expression=current} LT* property=PropertyOperator|{
+// Invocation.expression=current} LT* "(" LT* (arguments=ListExpression LT*)? ")")
+// *
 protected class PostfixExpression_Alternatives_1 extends AlternativesToken {
 
 	public PostfixExpression_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2122,7 +2125,7 @@ protected class PropertyOperator_NameAssignment_0_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getPropertyOperatorAccess().getNameIDTerminalRuleCall_0_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getPropertyOperatorAccess().getNameIDTerminalRuleCall_0_2_0();
 			return obj;
@@ -2252,13 +2255,13 @@ protected class PropertyOperator_RightSquareBracketKeyword_1_4 extends KeywordTo
 /************ begin Rule PrimaryExpression ****************
  *
  * PrimaryExpression:
- *   {Identifier} name=ID|{FunctionExpression} "function" LT* params=Parameters LT* body=
- *   Block;
+ *   {Identifier} name=ID|{FunctionExpression} "function" LT* params=Parameters LT
+ *   * body=Block;
  *
  **/
 
-// {Identifier} name=ID|{FunctionExpression} "function" LT* params=Parameters LT* body=
-// Block
+// {Identifier} name=ID|{FunctionExpression} "function" LT* params=Parameters LT*
+// body=Block
 protected class PrimaryExpression_Alternatives extends AlternativesToken {
 
 	public PrimaryExpression_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2368,7 +2371,7 @@ protected class PrimaryExpression_NameAssignment_0_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getPrimaryExpressionAccess().getNameIDTerminalRuleCall_0_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getPrimaryExpressionAccess().getNameIDTerminalRuleCall_0_1_0();
 			return obj;

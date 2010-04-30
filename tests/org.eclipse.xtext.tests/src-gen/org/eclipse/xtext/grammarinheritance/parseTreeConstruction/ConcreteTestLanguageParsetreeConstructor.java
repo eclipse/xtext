@@ -351,7 +351,7 @@ protected class ConcreteParserRule_MagicNumberAssignment_1 extends AssignmentTok
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("magicNumber",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("magicNumber");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getConcreteParserRuleAccess().getMagicNumberREALTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getConcreteParserRuleAccess().getMagicNumberREALTerminalRuleCall_1_0();
 			return obj;
@@ -518,7 +518,7 @@ protected class OverridableParserRule_NameAssignment_1 extends AssignmentToken  
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getOverridableParserRuleAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getOverridableParserRuleAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -678,7 +678,7 @@ protected class OverridableParserRule2_NameAssignment_1 extends AssignmentToken 
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getOverridableParserRule2Access().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getOverridableParserRule2Access().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -734,7 +734,7 @@ protected class OverridableParserRule2_AgeAssignment_3 extends AssignmentToken  
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("age",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("age");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getOverridableParserRule2Access().getAgeINTTerminalRuleCall_3_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getOverridableParserRule2Access().getAgeINTTerminalRuleCall_3_0();
 			return obj;
@@ -999,7 +999,7 @@ protected class Subrule1_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getSubrule1Access().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSubrule1Access().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -1033,7 +1033,7 @@ protected class Subrule1_Sub1Assignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("sub1",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("sub1");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getSubrule1Access().getSub1IDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSubrule1Access().getSub1IDTerminalRuleCall_2_0();
 			return obj;
@@ -1128,7 +1128,7 @@ protected class Subrule2_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getSubrule2Access().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSubrule2Access().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -1162,7 +1162,7 @@ protected class Subrule2_Sub2Assignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("sub2",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("sub2");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getSubrule2Access().getSub2STRINGTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSubrule2Access().getSub2STRINGTerminalRuleCall_2_0();
 			return obj;
@@ -1257,7 +1257,7 @@ protected class Subrule3_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getSubrule3Access().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSubrule3Access().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -1291,7 +1291,7 @@ protected class Subrule3_Sub1Assignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("sub1",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("sub1");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getSubrule3Access().getSub1INTTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSubrule3Access().getSub1INTTerminalRuleCall_2_0();
 			return obj;
@@ -1448,7 +1448,7 @@ protected class InheritedParserRule_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getInheritedParserRuleAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getInheritedParserRuleAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;

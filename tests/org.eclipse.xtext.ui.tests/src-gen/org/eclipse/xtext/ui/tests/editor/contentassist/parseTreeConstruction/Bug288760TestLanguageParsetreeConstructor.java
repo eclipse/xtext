@@ -46,8 +46,8 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule WorkflowElement ****************
  *
  * WorkflowElement:
- *   name=START_TAG attributes+=Attribute* END_TAG_SHORT|name=START_TAG attributes+=
- *   Attribute* GT children+=WorkflowElement* end=END_TAG;
+ *   name=START_TAG attributes+=Attribute* END_TAG_SHORT|name=START_TAG attributes
+ *   +=Attribute* GT children+=WorkflowElement* end=END_TAG;
  *
  **/
 
@@ -127,7 +127,7 @@ protected class WorkflowElement_NameAssignment_0_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getWorkflowElementAccess().getNameSTART_TAGTerminalRuleCall_0_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getWorkflowElementAccess().getNameSTART_TAGTerminalRuleCall_0_0_0();
 			return obj;
@@ -253,7 +253,7 @@ protected class WorkflowElement_NameAssignment_1_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getWorkflowElementAccess().getNameSTART_TAGTerminalRuleCall_1_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getWorkflowElementAccess().getNameSTART_TAGTerminalRuleCall_1_0_0();
 			return obj;
@@ -405,7 +405,7 @@ protected class WorkflowElement_EndAssignment_1_4 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("end",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("end");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getWorkflowElementAccess().getEndEND_TAGTerminalRuleCall_1_4_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getWorkflowElementAccess().getEndEND_TAGTerminalRuleCall_1_4_0();
 			return obj;
@@ -479,7 +479,7 @@ protected class Attribute_NameAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_0_0();
 			return obj;
@@ -535,7 +535,7 @@ protected class Attribute_ValueAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAttributeAccess().getValueSTRINGTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAttributeAccess().getValueSTRINGTerminalRuleCall_2_0();
 			return obj;

@@ -135,7 +135,7 @@ protected class Module_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModuleAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModuleAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -325,7 +325,7 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("importedNamespace",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("importedNamespace");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getImportAccess().getImportedNamespaceImportNameParserRuleCall_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getImportAccess().getImportedNamespaceImportNameParserRuleCall_1_0();
 			return obj;
@@ -467,13 +467,13 @@ protected class Statement_EvaluationParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Definition ****************
  *
  * Definition:
- *   "def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")")? ":" expr
- *   =Expression ";";
+ *   "def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")"
+ *   )? ":" expr=Expression ";";
  *
  **/
 
-// "def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")")? ":" expr
-// =Expression ";"
+// "def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")")?
+// ":" expr=Expression ";"
 protected class Definition_Group extends GroupToken {
 	
 	public Definition_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -547,7 +547,7 @@ protected class Definition_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getDefinitionAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getDefinitionAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -895,7 +895,7 @@ protected class DeclaredParameter_NameAssignment extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getDeclaredParameterAccess().getNameIDTerminalRuleCall_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getDeclaredParameterAccess().getNameIDTerminalRuleCall_0();
 			return obj;
@@ -2114,7 +2114,7 @@ protected class PrimaryExpression_ValueAssignment_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getPrimaryExpressionAccess().getValueNUMBERTerminalRuleCall_1_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getPrimaryExpressionAccess().getValueNUMBERTerminalRuleCall_1_1_0();
 			return obj;
@@ -2125,8 +2125,8 @@ protected class PrimaryExpression_ValueAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// {FunctionCall} func=[AbstractDefinition] ("(" args+=Expression ("," args+=Expression)
-// * ")")?
+// {FunctionCall} func=[AbstractDefinition] ("(" args+=Expression ("," args+=
+// Expression)* ")")?
 protected class PrimaryExpression_Group_2 extends GroupToken {
 	
 	public PrimaryExpression_Group_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {

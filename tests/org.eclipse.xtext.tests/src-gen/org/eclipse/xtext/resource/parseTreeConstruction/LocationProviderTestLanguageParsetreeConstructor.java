@@ -102,13 +102,13 @@ protected class Model_ElementsAssignment extends AssignmentToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- *   "element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[Element]
- *   )*;
+ *   "element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[
+ *   Element])*;
  *
  **/
 
-// "element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[Element]
-// )*
+// "element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[
+// Element])*
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -184,7 +184,7 @@ protected class Element_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;

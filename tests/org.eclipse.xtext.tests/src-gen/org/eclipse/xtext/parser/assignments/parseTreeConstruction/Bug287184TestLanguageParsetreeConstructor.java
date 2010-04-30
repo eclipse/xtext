@@ -126,7 +126,7 @@ protected class Model_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getNameFQNParserRuleCall_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getNameFQNParserRuleCall_1_0();
 			return obj;
@@ -324,11 +324,13 @@ protected class AbstractDetail_AssociatedDetailParserRuleCall_1 extends RuleCall
 /************ begin Rule Detail ****************
  *
  * Detail:
- *   "detail" visibility=( "private" | "protected" | "public" )? detailClass=[Model|FQN];
+ *   "detail" visibility=( "private" | "protected" | "public" )? detailClass=[
+ *   Model|FQN];
  *
  **/
 
-// "detail" visibility=( "private" | "protected" | "public" )? detailClass=[Model|FQN]
+// "detail" visibility=( "private" | "protected" | "public" )? detailClass=[Model|
+// FQN]
 protected class Detail_Group extends GroupToken {
 	
 	public Detail_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {

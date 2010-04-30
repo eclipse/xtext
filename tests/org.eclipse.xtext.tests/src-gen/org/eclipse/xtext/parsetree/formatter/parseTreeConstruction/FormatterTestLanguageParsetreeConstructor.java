@@ -578,7 +578,7 @@ protected class Decl_TypeAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getDeclAccess().getTypeIDTerminalRuleCall_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getDeclAccess().getTypeIDTerminalRuleCall_0_0();
 			return obj;
@@ -612,7 +612,7 @@ protected class Decl_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getDeclAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getDeclAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -685,7 +685,7 @@ protected class Assign_VarAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("var",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("var");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAssignAccess().getVarIDTerminalRuleCall_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAssignAccess().getVarIDTerminalRuleCall_0_0();
 			return obj;
@@ -803,7 +803,7 @@ protected class Assign_ValAssignment_3_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("val",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("val");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAssignAccess().getValINTTerminalRuleCall_3_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAssignAccess().getValINTTerminalRuleCall_3_0_0();
 			return obj;
@@ -882,7 +882,7 @@ protected class Assign_ValAssignment_3_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("val",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("val");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAssignAccess().getValINTTerminalRuleCall_3_1_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAssignAccess().getValINTTerminalRuleCall_3_1_1_0();
 			return obj;
@@ -1002,7 +1002,7 @@ protected class Meth_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getMethAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getMethAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -1282,7 +1282,7 @@ protected class Param_NameAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getParamAccess().getNameIDTerminalRuleCall_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getParamAccess().getNameIDTerminalRuleCall_0_0();
 			return obj;
@@ -1338,7 +1338,7 @@ protected class Param_TypeAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getParamAccess().getTypeIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getParamAccess().getTypeIDTerminalRuleCall_2_0();
 			return obj;
@@ -1801,7 +1801,7 @@ protected class FqnObj_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getFqnObjAccess().getNameFQNParserRuleCall_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getFqnObjAccess().getNameFQNParserRuleCall_1_0();
 			return obj;

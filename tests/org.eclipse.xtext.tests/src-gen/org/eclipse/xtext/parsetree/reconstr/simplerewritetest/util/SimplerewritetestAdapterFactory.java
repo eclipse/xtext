@@ -16,6 +16,8 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Enum;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Val;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
@@ -274,6 +276,16 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseBug305171(Bug305171 object)
       {
         return createBug305171Adapter();
+      }
+      @Override
+      public Adapter caseBug310435Enum(Bug310435Enum object)
+      {
+        return createBug310435EnumAdapter();
+      }
+      @Override
+      public Adapter caseBug310435Val(Bug310435Val object)
+      {
+        return createBug310435ValAdapter();
       }
       @Override
       public Adapter caseOp(Op object)
@@ -793,6 +805,36 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createBug305171Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Enum <em>Bug310435 Enum</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Enum
+   * @generated
+   */
+  public Adapter createBug310435EnumAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Val <em>Bug310435 Val</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Val
+   * @generated
+   */
+  public Adapter createBug310435ValAdapter()
   {
     return null;
   }

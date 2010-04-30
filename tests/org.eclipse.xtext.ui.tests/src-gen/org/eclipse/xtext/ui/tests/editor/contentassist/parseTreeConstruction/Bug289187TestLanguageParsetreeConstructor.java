@@ -104,19 +104,19 @@ protected class Model_ClassesAssignment extends AssignmentToken  {
 /************ begin Rule Class ****************
  *
  * Class:
- *   abstract?="abstract"? transient?="transient"? "class" name=ID ("extends" superClass=[
- *   Class])? ("implements" implementedInterfaces+=[Class] ("," "implements"
- *   implementedInterfaces+=[Class])*)? "{" ("classNumber" "=" classNumber=INT)? ("quid"
- *   "=" quid=INT)? ("documentation" "=" documentation=STRING)? attributes+=Attribute*
- *   operations+=Operation* "}";
+ *   abstract?="abstract"? transient?="transient"? "class" name=ID ("extends"
+ *   superClass=[Class])? ("implements" implementedInterfaces+=[Class] (","
+ *   "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
+ *   classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "=" documentation=
+ *   STRING)? attributes+=Attribute* operations+=Operation* "}";
  *
  **/
 
-// abstract?="abstract"? transient?="transient"? "class" name=ID ("extends" superClass=[
-// Class])? ("implements" implementedInterfaces+=[Class] ("," "implements"
-// implementedInterfaces+=[Class])*)? "{" ("classNumber" "=" classNumber=INT)? ("quid"
-// "=" quid=INT)? ("documentation" "=" documentation=STRING)? attributes+=Attribute*
-// operations+=Operation* "}"
+// abstract?="abstract"? transient?="transient"? "class" name=ID ("extends"
+// superClass=[Class])? ("implements" implementedInterfaces+=[Class] (","
+// "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
+// classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "=" documentation=
+// STRING)? attributes+=Attribute* operations+=Operation* "}"
 protected class Class_Group extends GroupToken {
 	
 	public Class_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -259,7 +259,7 @@ protected class Class_NameAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getClassAccess().getNameIDTerminalRuleCall_3_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getClassAccess().getNameIDTerminalRuleCall_3_0();
 			return obj;
@@ -351,8 +351,8 @@ protected class Class_SuperClassAssignment_4_1 extends AssignmentToken  {
 }
 
 
-// ("implements" implementedInterfaces+=[Class] ("," "implements" implementedInterfaces
-// +=[Class])*)?
+// ("implements" implementedInterfaces+=[Class] ("," "implements"
+// implementedInterfaces+=[Class])*)?
 protected class Class_Group_5 extends GroupToken {
 	
 	public Class_Group_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -655,7 +655,7 @@ protected class Class_ClassNumberAssignment_7_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("classNumber",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("classNumber");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getClassAccess().getClassNumberINTTerminalRuleCall_7_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getClassAccess().getClassNumberINTTerminalRuleCall_7_2_0();
 			return obj;
@@ -757,7 +757,7 @@ protected class Class_QuidAssignment_8_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("quid",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("quid");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getClassAccess().getQuidINTTerminalRuleCall_8_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getClassAccess().getQuidINTTerminalRuleCall_8_2_0();
 			return obj;
@@ -860,7 +860,7 @@ protected class Class_DocumentationAssignment_9_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("documentation",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("documentation");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getClassAccess().getDocumentationSTRINGTerminalRuleCall_9_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getClassAccess().getDocumentationSTRINGTerminalRuleCall_9_2_0();
 			return obj;
@@ -1062,7 +1062,7 @@ protected class Attribute_VisibilityAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("visibility",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("visibility");
-		if(Boolean.TRUE.booleanValue()) {  
+		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getAttributeAccess().getVisibilityVisibilityEnumRuleCall_0_0(), value, null)) { 
 			type = AssignmentType.ERC;
 			element = grammarAccess.getAttributeAccess().getVisibilityVisibilityEnumRuleCall_0_0();
 			return obj;
@@ -1118,7 +1118,7 @@ protected class Attribute_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -1191,7 +1191,7 @@ protected class Operation_VisibilityAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("visibility",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("visibility");
-		if(Boolean.TRUE.booleanValue()) {  
+		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getOperationAccess().getVisibilityVisibilityEnumRuleCall_0_0(), value, null)) { 
 			type = AssignmentType.ERC;
 			element = grammarAccess.getOperationAccess().getVisibilityVisibilityEnumRuleCall_0_0();
 			return obj;
@@ -1247,7 +1247,7 @@ protected class Operation_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getOperationAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getOperationAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;

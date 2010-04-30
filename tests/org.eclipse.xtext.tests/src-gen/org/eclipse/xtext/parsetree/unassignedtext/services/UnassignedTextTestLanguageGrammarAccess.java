@@ -27,8 +27,8 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cCommonTerminalsRuleParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//Model:
-		//  CaseInsensitiveKeywordRule|PluralRule|MultiRule|DatatypeRule|CommonTerminalsRule
-		//;
+		//  CaseInsensitiveKeywordRule|PluralRule|MultiRule|DatatypeRule|
+		//  CommonTerminalsRule;
 		public ParserRule getRule() { return rule; }
 
 		//CaseInsensitiveKeywordRule|PluralRule|MultiRule|DatatypeRule|CommonTerminalsRule
@@ -274,8 +274,8 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 
 	
 	//Model:
-	//  CaseInsensitiveKeywordRule|PluralRule|MultiRule|DatatypeRule|CommonTerminalsRule
-	//;
+	//  CaseInsensitiveKeywordRule|PluralRule|MultiRule|DatatypeRule|
+	//  CommonTerminalsRule;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -295,7 +295,8 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//terminal CaseInsensitiveKeyword:
-	//  ("k" | "K") ("e" | "E") ("y" | "Y") ("w" | "W") ("o" | "O") ("r" | "R") ("d" | "D");
+	//  ("k" | "K") ("e" | "E") ("y" | "Y") ("w" | "W") ("o" | "O") ("r" | "R") ("d"
+	//  | "D");
 	public TerminalRule getCaseInsensitiveKeywordRule() {
 		return (tCaseInsensitiveKeyword != null) ? tCaseInsensitiveKeyword : (tCaseInsensitiveKeyword = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CaseInsensitiveKeyword"));
 	} 
@@ -327,7 +328,8 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//terminal Multi:
-	//  "a" "b"? "c"+ "d"* ("e" | "f") (("g" | "h") | "i"+) Multi2 "0".."9" "0".."9"+;
+	//  "a" "b"? "c"+ "d"* ("e" | "f") (("g" | "h") | "i"+) Multi2 "0".."9" "0".."9"+
+	//;
 	public TerminalRule getMultiRule() {
 		return (tMulti != null) ? tMulti : (tMulti = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Multi"));
 	} 
@@ -391,8 +393,9 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

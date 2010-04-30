@@ -26,7 +26,8 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final RuleCall cDatatypeHiddensParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//Model:
-		//  WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|DatatypeHiddens;
+		//  WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|
+		//  DatatypeHiddens;
 		public ParserRule getRule() { return rule; }
 
 		//WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|DatatypeHiddens
@@ -212,12 +213,12 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Keyword cValidSemicolonKeyword_5_0 = (Keyword)cValidAssignment_5.eContents().get(0);
 		
 		//InheritingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
-		//  "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens
-		//  ) ")" valid?=";";
+		//  "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=
+		//  HidingHiddens) ")" valid?=";";
 		public ParserRule getRule() { return rule; }
 
-		//"inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens
-		//) ")" valid?=";"
+		//"inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=
+		//HidingHiddens) ")" valid?=";"
 		public Group getGroup() { return cGroup; }
 
 		//"inheriting"
@@ -384,7 +385,8 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 
 	
 	//Model:
-	//  WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|DatatypeHiddens;
+	//  WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|
+	//  DatatypeHiddens;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -434,8 +436,8 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//InheritingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
-	//  "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens
-	//  ) ")" valid?=";";
+	//  "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=
+	//  HidingHiddens) ")" valid?=";";
 	public InheritingHiddensElements getInheritingHiddensAccess() {
 		return (pInheritingHiddens != null) ? pInheritingHiddens : (pInheritingHiddens = new InheritingHiddensElements());
 	}

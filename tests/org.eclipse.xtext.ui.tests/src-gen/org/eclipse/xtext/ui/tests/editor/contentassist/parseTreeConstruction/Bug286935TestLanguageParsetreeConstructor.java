@@ -200,7 +200,7 @@ protected class State_StateKindAssignment_0_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stateKind",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stateKind");
-		if(Boolean.TRUE.booleanValue()) {  
+		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_2_0(), value, null)) { 
 			type = AssignmentType.ERC;
 			element = grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_2_0();
 			return obj;
@@ -289,7 +289,7 @@ protected class State_StateKindAssignment_0_3_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stateKind",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stateKind");
-		if(Boolean.TRUE.booleanValue()) {  
+		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_3_1_0(), value, null)) { 
 			type = AssignmentType.ERC;
 			element = grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_3_1_0();
 			return obj;
@@ -379,7 +379,7 @@ protected class State_StateKindAssignment_0_4_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stateKind",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stateKind");
-		if(Boolean.TRUE.booleanValue()) {  
+		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_4_1_0(), value, null)) { 
 			type = AssignmentType.ERC;
 			element = grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_4_1_0();
 			return obj;
@@ -449,7 +449,7 @@ protected class State_StateNameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stateName",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stateName");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getStateAccess().getStateNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getStateAccess().getStateNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -484,7 +484,7 @@ protected class State_LabelAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("label",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("label");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getStateAccess().getLabelSTRINGTerminalRuleCall_3_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getStateAccess().getLabelSTRINGTerminalRuleCall_3_0();
 			return obj;

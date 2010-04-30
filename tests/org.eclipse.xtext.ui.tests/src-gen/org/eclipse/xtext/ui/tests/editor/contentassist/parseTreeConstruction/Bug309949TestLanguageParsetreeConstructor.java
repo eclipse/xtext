@@ -56,25 +56,27 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   {Model} ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}"|"#1+" "{" errors+=
- *   Error_1+ operations+=Operation_1+ "}"|"#2*" "{" errors+=Error_2* operations+=
- *   Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+ operations+=Operation_2+ "}"|"#3*"
- *   name=ID "{" errors+=Error_3* operations+=Operation_3* "}"|"#3+" name=ID "{" errors+=
- *   Error_3+ operations+=Operation_3+ "}"|"#4*" name=ID "{" errors+=Error_4* operations+=
- *   Operation_4* "}"|"#4+" name=ID "{" errors+=Error_4+ operations+=Operation_4+ "}"|"#5*"
- *   name=ID "{" errors+=Error_5* operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=
- *   Error_5+ operations+=Operation_5+ "}");
+ *   {Model} ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}"|"#1+" "{"
+ *   errors+=Error_1+ operations+=Operation_1+ "}"|"#2*" "{" errors+=Error_2*
+ *   operations+=Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+ operations+=
+ *   Operation_2+ "}"|"#3*" name=ID "{" errors+=Error_3* operations+=Operation_3*
+ *   "}"|"#3+" name=ID "{" errors+=Error_3+ operations+=Operation_3+ "}"|"#4*"
+ *   name=ID "{" errors+=Error_4* operations+=Operation_4* "}"|"#4+" name=ID "{"
+ *   errors+=Error_4+ operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=
+ *   Error_5* operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+
+ *   operations+=Operation_5+ "}");
  *
  **/
 
-// {Model} ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}"|"#1+" "{" errors+=
-// Error_1+ operations+=Operation_1+ "}"|"#2*" "{" errors+=Error_2* operations+=
-// Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+ operations+=Operation_2+ "}"|"#3*"
-// name=ID "{" errors+=Error_3* operations+=Operation_3* "}"|"#3+" name=ID "{" errors+=
-// Error_3+ operations+=Operation_3+ "}"|"#4*" name=ID "{" errors+=Error_4* operations+=
-// Operation_4* "}"|"#4+" name=ID "{" errors+=Error_4+ operations+=Operation_4+ "}"|"#5*"
-// name=ID "{" errors+=Error_5* operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=
-// Error_5+ operations+=Operation_5+ "}")
+// {Model} ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}"|"#1+" "{"
+// errors+=Error_1+ operations+=Operation_1+ "}"|"#2*" "{" errors+=Error_2*
+// operations+=Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+ operations+=
+// Operation_2+ "}"|"#3*" name=ID "{" errors+=Error_3* operations+=Operation_3*
+// "}"|"#3+" name=ID "{" errors+=Error_3+ operations+=Operation_3+ "}"|"#4*" name=
+// ID "{" errors+=Error_4* operations+=Operation_4* "}"|"#4+" name=ID "{" errors+=
+// Error_4+ operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=Error_5*
+// operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+ operations+=
+// Operation_5+ "}")
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -129,14 +131,15 @@ protected class Model_ModelAction_0 extends ActionToken  {
 	}
 }
 
-// "#1*" "{" errors+=Error_1* operations+=Operation_1* "}"|"#1+" "{" errors+=Error_1+
-// operations+=Operation_1+ "}"|"#2*" "{" errors+=Error_2* operations+=Operation_2* "}"|
-// "#2+" name=ID "{" errors+=Error_2+ operations+=Operation_2+ "}"|"#3*" name=ID "{" errors
-// +=Error_3* operations+=Operation_3* "}"|"#3+" name=ID "{" errors+=Error_3+ operations
-// +=Operation_3+ "}"|"#4*" name=ID "{" errors+=Error_4* operations+=Operation_4* "}"|
-// "#4+" name=ID "{" errors+=Error_4+ operations+=Operation_4+ "}"|"#5*" name=ID "{" errors
-// +=Error_5* operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+ operations
-// +=Operation_5+ "}"
+// "#1*" "{" errors+=Error_1* operations+=Operation_1* "}"|"#1+" "{" errors+=
+// Error_1+ operations+=Operation_1+ "}"|"#2*" "{" errors+=Error_2* operations+=
+// Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+ operations+=Operation_2+
+// "}"|"#3*" name=ID "{" errors+=Error_3* operations+=Operation_3* "}"|"#3+" name=
+// ID "{" errors+=Error_3+ operations+=Operation_3+ "}"|"#4*" name=ID "{" errors+=
+// Error_4* operations+=Operation_4* "}"|"#4+" name=ID "{" errors+=Error_4+
+// operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=Error_5* operations+=
+// Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+ operations+=Operation_5+
+// "}"
 protected class Model_Alternatives_1 extends AlternativesToken {
 
 	public Model_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -790,7 +793,7 @@ protected class Model_NameAssignment_1_3_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_3_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_3_1_0();
 			return obj;
@@ -1007,7 +1010,7 @@ protected class Model_NameAssignment_1_4_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_4_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_4_1_0();
 			return obj;
@@ -1227,7 +1230,7 @@ protected class Model_NameAssignment_1_5_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_5_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_5_1_0();
 			return obj;
@@ -1444,7 +1447,7 @@ protected class Model_NameAssignment_1_6_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_6_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_6_1_0();
 			return obj;
@@ -1664,7 +1667,7 @@ protected class Model_NameAssignment_1_7_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_7_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_7_1_0();
 			return obj;
@@ -1881,7 +1884,7 @@ protected class Model_NameAssignment_1_8_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_8_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_8_1_0();
 			return obj;
@@ -2101,7 +2104,7 @@ protected class Model_NameAssignment_1_9_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_9_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_9_1_0();
 			return obj;
@@ -2383,7 +2386,7 @@ protected class Error_1_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getError_1Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getError_1Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -2525,7 +2528,7 @@ protected class Operation_1_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getOperation_1Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getOperation_1Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -2667,7 +2670,7 @@ protected class Error_2_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getError_2Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getError_2Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -2809,7 +2812,7 @@ protected class Operation_2_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getOperation_2Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getOperation_2Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -2950,7 +2953,7 @@ protected class Error_3_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getError_3Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getError_3Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -3091,7 +3094,7 @@ protected class Operation_3_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getOperation_3Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getOperation_3Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -3232,7 +3235,7 @@ protected class Error_4_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getError_4Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getError_4Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -3373,7 +3376,7 @@ protected class Operation_4_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getOperation_4Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getOperation_4Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -3468,7 +3471,7 @@ protected class Error_5_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getError_5Access().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getError_5Access().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -3563,7 +3566,7 @@ protected class Operation_5_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getOperation_5Access().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getOperation_5Access().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -3658,7 +3661,7 @@ protected class Annotation_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAnnotationAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAnnotationAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;

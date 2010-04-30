@@ -89,10 +89,12 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cBodyBlockParserRuleCall_7_0 = (RuleCall)cBodyAssignment_7.eContents().get(0);
 		
 		//FunctionDefinition:
-		//  attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=Block;
+		//  attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=
+		//  Block;
 		public ParserRule getRule() { return rule; }
 
-		//attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=Block
+		//attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=
+		//Block
 		public Group getGroup() { return cGroup; }
 
 		//attributes+=Attribute*
@@ -375,8 +377,9 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//PrimaryExpression
 		public RuleCall getPrimaryExpressionParserRuleCall_0() { return cPrimaryExpressionParserRuleCall_0; }
 
-		//({PostfixExpression.expression=current} LT* property=PropertyOperator|{Invocation.
-		//expression=current} LT* "(" LT* (arguments=ListExpression LT*)? ")")*
+		//({PostfixExpression.expression=current} LT* property=PropertyOperator|{
+		//Invocation.expression=current} LT* "(" LT* (arguments=ListExpression LT*)? ")")
+		// *
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//{PostfixExpression.expression=current} LT* property=PropertyOperator
@@ -547,12 +550,12 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cBodyBlockParserRuleCall_1_5_0 = (RuleCall)cBodyAssignment_1_5.eContents().get(0);
 		
 		//PrimaryExpression:
-		//  {Identifier} name=ID|{FunctionExpression} "function" LT* params=Parameters LT* body=
-		//  Block;
+		//  {Identifier} name=ID|{FunctionExpression} "function" LT* params=Parameters LT
+		//  * body=Block;
 		public ParserRule getRule() { return rule; }
 
-		//{Identifier} name=ID|{FunctionExpression} "function" LT* params=Parameters LT* body=
-		//Block
+		//{Identifier} name=ID|{FunctionExpression} "function" LT* params=Parameters LT*
+		//body=Block
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//{Identifier} name=ID
@@ -645,7 +648,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//FunctionDefinition:
-	//  attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=Block;
+	//  attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=
+	//  Block;
 	public FunctionDefinitionElements getFunctionDefinitionAccess() {
 		return (pFunctionDefinition != null) ? pFunctionDefinition : (pFunctionDefinition = new FunctionDefinitionElements());
 	}
@@ -727,8 +731,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//PrimaryExpression:
-	//  {Identifier} name=ID|{FunctionExpression} "function" LT* params=Parameters LT* body=
-	//  Block;
+	//  {Identifier} name=ID|{FunctionExpression} "function" LT* params=Parameters LT
+	//  * body=Block;
 	public PrimaryExpressionElements getPrimaryExpressionAccess() {
 		return (pPrimaryExpression != null) ? pPrimaryExpression : (pPrimaryExpression = new PrimaryExpressionElements());
 	}

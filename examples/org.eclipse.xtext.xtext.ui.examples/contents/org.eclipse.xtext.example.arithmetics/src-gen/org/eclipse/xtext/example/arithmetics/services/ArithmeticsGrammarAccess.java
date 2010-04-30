@@ -150,12 +150,12 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Definition:
-		//  "def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")")? ":" expr
-		//  =Expression ";";
+		//  "def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")"
+		//  )? ":" expr=Expression ";";
 		public ParserRule getRule() { return rule; }
 
-		//"def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")")? ":" expr
-		//=Expression ";"
+		//"def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")")?
+		//":" expr=Expression ";"
 		public Group getGroup() { return cGroup; }
 
 		//"def"
@@ -454,8 +454,8 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		//NUMBER
 		public RuleCall getValueNUMBERTerminalRuleCall_1_1_0() { return cValueNUMBERTerminalRuleCall_1_1_0; }
 
-		//{FunctionCall} func=[AbstractDefinition] ("(" args+=Expression ("," args+=Expression)
-		// * ")")?
+		//{FunctionCall} func=[AbstractDefinition] ("(" args+=Expression ("," args+=
+		//Expression)* ")")?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//{FunctionCall}
@@ -576,8 +576,8 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Definition:
-	//  "def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")")? ":" expr
-	//  =Expression ";";
+	//  "def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")"
+	//  )? ":" expr=Expression ";";
 	public DefinitionElements getDefinitionAccess() {
 		return (pDefinition != null) ? pDefinition : (pDefinition = new DefinitionElements());
 	}
@@ -678,8 +678,9 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

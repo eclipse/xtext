@@ -172,7 +172,8 @@ protected class NamedElement_ElementParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Namespace ****************
  *
  * Namespace:
- *   "namespace" name=QualifiedName "{" imports+=Import* elements+=NamedElement* "}";
+ *   "namespace" name=QualifiedName "{" imports+=Import* elements+=NamedElement*
+ *   "}";
  *
  **/
 
@@ -250,7 +251,7 @@ protected class Namespace_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getNamespaceAccess().getNameQualifiedNameParserRuleCall_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getNamespaceAccess().getNameQualifiedNameParserRuleCall_1_0();
 			return obj;
@@ -486,7 +487,7 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("importedNamespace",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("importedNamespace");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameParserRuleCall_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameParserRuleCall_1_0();
 			return obj;
@@ -503,8 +504,9 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- *   "object" name=ID ("references" references=[Element|QualifiedName])? ("otherRefs"
- *   otherRefs+=[Element|QualifiedName] ("," otherRefs+=[Element|QualifiedName])*)?;
+ *   "object" name=ID ("references" references=[Element|QualifiedName])? (
+ *   "otherRefs" otherRefs+=[Element|QualifiedName] ("," otherRefs+=[Element|
+ *   QualifiedName])*)?;
  *
  **/
 
@@ -585,7 +587,7 @@ protected class Element_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;

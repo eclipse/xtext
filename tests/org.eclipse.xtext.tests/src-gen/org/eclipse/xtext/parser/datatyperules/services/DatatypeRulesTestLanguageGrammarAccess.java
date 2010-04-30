@@ -57,12 +57,12 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Model:
-		//  id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ("*" double
-		//  =Double)? ";";
+		//  id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)?
+		//  ("*" double=Double)? ";";
 		public ParserRule getRule() { return rule; }
 
-		//id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ("*" double
-		//=Double)? ";"
+		//id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? (
+		//"*" double=Double)? ";"
 		public Group getGroup() { return cGroup; }
 
 		//id=NestedModelId
@@ -341,8 +341,8 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//Model:
-	//  id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ("*" double
-	//  =Double)? ";";
+	//  id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)?
+	//  ("*" double=Double)? ";";
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -424,8 +424,9 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

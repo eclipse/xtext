@@ -158,7 +158,7 @@ protected class Node_NameAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getNodeAccess().getNameIDTerminalRuleCall_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getNodeAccess().getNameIDTerminalRuleCall_0_0();
 			return obj;
@@ -214,7 +214,7 @@ protected class Node_AttribAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("attrib",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("attrib");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getNodeAccess().getAttribSTRINGTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getNodeAccess().getAttribSTRINGTerminalRuleCall_2_0();
 			return obj;

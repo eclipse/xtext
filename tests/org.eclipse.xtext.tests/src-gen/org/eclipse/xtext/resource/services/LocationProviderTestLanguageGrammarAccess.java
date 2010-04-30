@@ -51,12 +51,12 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final RuleCall cMultirefsElementIDTerminalRuleCall_3_1_0_1 = (RuleCall)cMultirefsElementCrossReference_3_1_0.eContents().get(1);
 		
 		//Element:
-		//  "element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[Element]
-		//  )*;
+		//  "element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[
+		//  Element])*;
 		public ParserRule getRule() { return rule; }
 
-		//"element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[Element]
-		//)*
+		//"element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[
+		//Element])*
 		public Group getGroup() { return cGroup; }
 
 		//"element"
@@ -135,8 +135,8 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 
 	//Element:
-	//  "element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[Element]
-	//  )*;
+	//  "element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[
+	//  Element])*;
 	public ElementElements getElementAccess() {
 		return (pElement != null) ? pElement : (pElement = new ElementElements());
 	}
@@ -158,8 +158,9 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

@@ -7,6 +7,7 @@ package org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -16,6 +17,8 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Enum;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Val;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
@@ -25,6 +28,7 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectRef;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectBug284850;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItem;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItems;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EnumBug310435Enum;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Expression;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2;
@@ -292,7 +296,28 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass bug310435EnumEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass bug310435ValEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass opEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum enumBug310435EnumEEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -1132,6 +1157,46 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getBug310435Enum()
+  {
+    return bug310435EnumEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBug310435Enum_Lits()
+  {
+    return (EAttribute)bug310435EnumEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getBug310435Val()
+  {
+    return bug310435ValEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBug310435Val_Lits()
+  {
+    return (EAttribute)bug310435ValEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getOp()
   {
     return opEClass;
@@ -1145,6 +1210,16 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
   public EReference getOp_Values()
   {
     return (EReference)opEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EEnum getEnumBug310435Enum()
+  {
+    return enumBug310435EnumEEnum;
   }
 
   /**
@@ -1287,8 +1362,17 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     createEAttribute(bug305171EClass, BUG305171__Z);
     createEAttribute(bug305171EClass, BUG305171__NAME);
 
+    bug310435EnumEClass = createEClass(BUG310435_ENUM);
+    createEAttribute(bug310435EnumEClass, BUG310435_ENUM__LITS);
+
+    bug310435ValEClass = createEClass(BUG310435_VAL);
+    createEAttribute(bug310435ValEClass, BUG310435_VAL__LITS);
+
     opEClass = createEClass(OP);
     createEReference(opEClass, OP__VALUES);
+
+    // Create enums
+    enumBug310435EnumEEnum = createEEnum(ENUM_BUG310435_ENUM);
   }
 
   /**
@@ -1350,6 +1434,8 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     typeBug2BEClass.getESuperTypes().add(this.getTypeBug305577_2());
     typeBug2BEClass.getESuperTypes().add(this.getTypeBug2A());
     bug305171EClass.getESuperTypes().add(this.getExpression());
+    bug310435EnumEClass.getESuperTypes().add(this.getExpression());
+    bug310435ValEClass.getESuperTypes().add(this.getExpression());
     opEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
@@ -1463,8 +1549,19 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     initEAttribute(getBug305171_Z(), ecorePackage.getEString(), "z", null, 0, -1, Bug305171.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getBug305171_Name(), ecorePackage.getEString(), "name", null, 0, 1, Bug305171.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(bug310435EnumEClass, Bug310435Enum.class, "Bug310435Enum", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getBug310435Enum_Lits(), this.getEnumBug310435Enum(), "lits", null, 0, -1, Bug310435Enum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(bug310435ValEClass, Bug310435Val.class, "Bug310435Val", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getBug310435Val_Lits(), ecorePackage.getEString(), "lits", null, 0, -1, Bug310435Val.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(opEClass, Op.class, "Op", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getOp_Values(), this.getExpression(), null, "values", null, 0, -1, Op.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    // Initialize enums and add enum literals
+    initEEnum(enumBug310435EnumEEnum, EnumBug310435Enum.class, "EnumBug310435Enum");
+    addEEnumLiteral(enumBug310435EnumEEnum, EnumBug310435Enum.LIT1);
+    addEEnumLiteral(enumBug310435EnumEEnum, EnumBug310435Enum.LIT2);
 
     // Create resource
     createResource(eNS_URI);

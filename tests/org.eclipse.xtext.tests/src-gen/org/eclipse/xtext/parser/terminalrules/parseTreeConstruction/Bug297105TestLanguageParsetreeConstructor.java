@@ -416,7 +416,7 @@ protected class IntLiteral_ValueAssignment extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getIntLiteralAccess().getValueIntValueParserRuleCall_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getIntLiteralAccess().getValueIntValueParserRuleCall_0();
 			return obj;
@@ -466,7 +466,7 @@ protected class RealLiteral_ValueAssignment extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getRealLiteralAccess().getValueRealValueParserRuleCall_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getRealLiteralAccess().getValueRealValueParserRuleCall_0();
 			return obj;

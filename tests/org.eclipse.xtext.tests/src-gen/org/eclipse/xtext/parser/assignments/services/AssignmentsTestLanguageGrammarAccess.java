@@ -197,7 +197,8 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cValueSTRINGTerminalRuleCall_2_1_0 = (RuleCall)cValueAssignment_2_1.eContents().get(0);
 		
 		//MultiValue:
-		//  "ids" value+=ID|"alternatives" value+=( ID | STRING )|"strings" value+=STRING;
+		//  "ids" value+=ID|"alternatives" value+=( ID | STRING )|"strings" value+=STRING
+		//;
 		public ParserRule getRule() { return rule; }
 
 		//"ids" value+=ID|"alternatives" value+=( ID | STRING )|"strings" value+=STRING
@@ -463,7 +464,8 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//MultiValue:
-	//  "ids" value+=ID|"alternatives" value+=( ID | STRING )|"strings" value+=STRING;
+	//  "ids" value+=ID|"alternatives" value+=( ID | STRING )|"strings" value+=STRING
+	//;
 	public MultiValueElements getMultiValueAccess() {
 		return (pMultiValue != null) ? pMultiValue : (pMultiValue = new MultiValueElements());
 	}
@@ -527,8 +529,9 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

@@ -156,18 +156,20 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//Object:
-		//  (enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends" parent=[
-		//  Object])? "{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription"
-		//  longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT ";")? & (cloneable?=
-		//  "cloneable" ";")? & features+=Feature* & ("before" features+=Feature* "after")? & (
-		//  "optionalLoop" features+=Feature*)? & ("mandatoryLoop" features+=Feature+)?) "}";
+		//  (enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends" parent
+		//  =[Object])? "{" (("shortDescription" shortDescription=STRING ";")? & (
+		//  "longDescription" longDescription=STRING ";")? & ("serialUID"
+		//  serialVersionUID=INT ";")? & (cloneable?="cloneable" ";")? & features+=
+		//  Feature* & ("before" features+=Feature* "after")? & ("optionalLoop" features
+		//  +=Feature*)? & ("mandatoryLoop" features+=Feature+)?) "}";
 		public ParserRule getRule() { return rule; }
 
 		//(enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends" parent=[
-		//Object])? "{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription"
-		//longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT ";")? & (cloneable?=
-		//"cloneable" ";")? & features+=Feature* & ("before" features+=Feature* "after")? & (
-		//"optionalLoop" features+=Feature*)? & ("mandatoryLoop" features+=Feature+)?) "}"
+		//Object])? "{" (("shortDescription" shortDescription=STRING ";")? & (
+		//"longDescription" longDescription=STRING ";")? & ("serialUID" serialVersionUID=
+		//INT ";")? & (cloneable?="cloneable" ";")? & features+=Feature* & ("before"
+		//features+=Feature* "after")? & ("optionalLoop" features+=Feature*)? & (
+		//"mandatoryLoop" features+=Feature+)?) "}"
 		public Group getGroup() { return cGroup; }
 
 		//(enabled?="enabled"|abstract?="abstract")?
@@ -213,9 +215,10 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 
 		//("shortDescription" shortDescription=STRING ";")? & ("longDescription"
-		//longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT ";")? & (cloneable?=
-		//"cloneable" ";")? & features+=Feature* & ("before" features+=Feature* "after")? & (
-		//"optionalLoop" features+=Feature*)? & ("mandatoryLoop" features+=Feature+)?
+		//longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT ";")? & (
+		//cloneable?="cloneable" ";")? & features+=Feature* & ("before" features+=Feature
+		// * "after")? & ("optionalLoop" features+=Feature*)? & ("mandatoryLoop" features
+		//+=Feature+)?
 		public UnorderedGroup getUnorderedGroup_5() { return cUnorderedGroup_5; }
 
 		//("shortDescription" shortDescription=STRING ";")?
@@ -410,13 +413,13 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Reference:
 		//  "Reference" type=[Object] many?="*"? name=ID ("{" (("shortDescription"
-		//  shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?) "}"|
-		//  ";");
+		//  shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";"
+		//  )?) "}"|";");
 		public ParserRule getRule() { return rule; }
 
 		//"Reference" type=[Object] many?="*"? name=ID ("{" (("shortDescription"
-		//shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?) "}"|
-		//";")
+		//shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?
+		//) "}"|";")
 		public Group getGroup() { return cGroup; }
 
 		//"Reference"
@@ -577,16 +580,17 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//Object2 returns Object:
-		//  (enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends" parent=[
-		//  Object])? "{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription"
-		//  longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT ";")? & (cloneable?=
-		//  "cloneable" ";")? & features+=Feature2*) "}";
+		//  (enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends" parent
+		//  =[Object])? "{" (("shortDescription" shortDescription=STRING ";")? & (
+		//  "longDescription" longDescription=STRING ";")? & ("serialUID"
+		//  serialVersionUID=INT ";")? & (cloneable?="cloneable" ";")? & features+=
+		//  Feature2*) "}";
 		public ParserRule getRule() { return rule; }
 
 		//(enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends" parent=[
-		//Object])? "{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription"
-		//longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT ";")? & (cloneable?=
-		//"cloneable" ";")? & features+=Feature2*) "}"
+		//Object])? "{" (("shortDescription" shortDescription=STRING ";")? & (
+		//"longDescription" longDescription=STRING ";")? & ("serialUID" serialVersionUID=
+		//INT ";")? & (cloneable?="cloneable" ";")? & features+=Feature2*) "}"
 		public Group getGroup() { return cGroup; }
 
 		//(enabled?="enabled"|abstract?="abstract")?
@@ -632,8 +636,8 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 
 		//("shortDescription" shortDescription=STRING ";")? & ("longDescription"
-		//longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT ";")? & (cloneable?=
-		//"cloneable" ";")? & features+=Feature2*
+		//longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT ";")? & (
+		//cloneable?="cloneable" ";")? & features+=Feature2*
 		public UnorderedGroup getUnorderedGroup_5() { return cUnorderedGroup_5; }
 
 		//("shortDescription" shortDescription=STRING ";")?
@@ -759,16 +763,16 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cSemicolonKeyword_3_1 = (Keyword)cAlternatives_3.eContents().get(1);
 		
 		//Attribute2 returns Attribut:
-		//  "Attribute" type=ID name=ID ("{" (("shortDescription" shortDescription=STRING ";")? & (
-		//  "longDescription" longDescription=STRING ";")? & constraintDefinitions+=
-		//  ConstraintDefinition* & (required?="required" ";")? & (technical?="technical" ";")?)
-		//  "}"|";");
+		//  "Attribute" type=ID name=ID ("{" (("shortDescription" shortDescription=STRING
+		//  ";")? & ("longDescription" longDescription=STRING ";")? &
+		//  constraintDefinitions+=ConstraintDefinition* & (required?="required" ";")? &
+		//  (technical?="technical" ";")?) "}"|";");
 		public ParserRule getRule() { return rule; }
 
-		//"Attribute" type=ID name=ID ("{" (("shortDescription" shortDescription=STRING ";")? & (
-		//"longDescription" longDescription=STRING ";")? & constraintDefinitions+=
-		//ConstraintDefinition* & (required?="required" ";")? & (technical?="technical" ";")?)
-		//"}"|";")
+		//"Attribute" type=ID name=ID ("{" (("shortDescription" shortDescription=STRING
+		//";")? & ("longDescription" longDescription=STRING ";")? & constraintDefinitions
+		//+=ConstraintDefinition* & (required?="required" ";")? & (technical?="technical"
+		//";")?) "}"|";")
 		public Group getGroup() { return cGroup; }
 
 		//"Attribute"
@@ -901,13 +905,13 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Reference2 returns Reference:
 		//  "Reference" type=[Object] many?="*"? name=ID ("{" (("shortDescription"
-		//  shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?) "}"|
-		//  ";");
+		//  shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";"
+		//  )?) "}"|";");
 		public ParserRule getRule() { return rule; }
 
 		//"Reference" type=[Object] many?="*"? name=ID ("{" (("shortDescription"
-		//shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?) "}"|
-		//";")
+		//shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?
+		//) "}"|";")
 		public Group getGroup() { return cGroup; }
 
 		//"Reference"
@@ -1007,12 +1011,12 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//ConstraintDefinition:
-		//  "constraint" type=ID "{" ("parameters" parameters+=STRING* ";" & "message" message=
-		//  STRING ";") "}";
+		//  "constraint" type=ID "{" ("parameters" parameters+=STRING* ";" & "message"
+		//  message=STRING ";") "}";
 		public ParserRule getRule() { return rule; }
 
-		//"constraint" type=ID "{" ("parameters" parameters+=STRING* ";" & "message" message=
-		//STRING ";") "}"
+		//"constraint" type=ID "{" ("parameters" parameters+=STRING* ";" & "message"
+		//message=STRING ";") "}"
 		public Group getGroup() { return cGroup; }
 
 		//"constraint"
@@ -1120,11 +1124,12 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Object:
-	//  (enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends" parent=[
-	//  Object])? "{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription"
-	//  longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT ";")? & (cloneable?=
-	//  "cloneable" ";")? & features+=Feature* & ("before" features+=Feature* "after")? & (
-	//  "optionalLoop" features+=Feature*)? & ("mandatoryLoop" features+=Feature+)?) "}";
+	//  (enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends" parent
+	//  =[Object])? "{" (("shortDescription" shortDescription=STRING ";")? & (
+	//  "longDescription" longDescription=STRING ";")? & ("serialUID"
+	//  serialVersionUID=INT ";")? & (cloneable?="cloneable" ";")? & features+=
+	//  Feature* & ("before" features+=Feature* "after")? & ("optionalLoop" features
+	//  +=Feature*)? & ("mandatoryLoop" features+=Feature+)?) "}";
 	public ObjectElements getObjectAccess() {
 		return (pObject != null) ? pObject : (pObject = new ObjectElements());
 	}
@@ -1155,8 +1160,8 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	//Reference:
 	//  "Reference" type=[Object] many?="*"? name=ID ("{" (("shortDescription"
-	//  shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?) "}"|
-	//  ";");
+	//  shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";"
+	//  )?) "}"|";");
 	public ReferenceElements getReferenceAccess() {
 		return (pReference != null) ? pReference : (pReference = new ReferenceElements());
 	}
@@ -1176,10 +1181,11 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Object2 returns Object:
-	//  (enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends" parent=[
-	//  Object])? "{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription"
-	//  longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT ";")? & (cloneable?=
-	//  "cloneable" ";")? & features+=Feature2*) "}";
+	//  (enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends" parent
+	//  =[Object])? "{" (("shortDescription" shortDescription=STRING ";")? & (
+	//  "longDescription" longDescription=STRING ";")? & ("serialUID"
+	//  serialVersionUID=INT ";")? & (cloneable?="cloneable" ";")? & features+=
+	//  Feature2*) "}";
 	public Object2Elements getObject2Access() {
 		return (pObject2 != null) ? pObject2 : (pObject2 = new Object2Elements());
 	}
@@ -1199,10 +1205,10 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Attribute2 returns Attribut:
-	//  "Attribute" type=ID name=ID ("{" (("shortDescription" shortDescription=STRING ";")? & (
-	//  "longDescription" longDescription=STRING ";")? & constraintDefinitions+=
-	//  ConstraintDefinition* & (required?="required" ";")? & (technical?="technical" ";")?)
-	//  "}"|";");
+	//  "Attribute" type=ID name=ID ("{" (("shortDescription" shortDescription=STRING
+	//  ";")? & ("longDescription" longDescription=STRING ";")? &
+	//  constraintDefinitions+=ConstraintDefinition* & (required?="required" ";")? &
+	//  (technical?="technical" ";")?) "}"|";");
 	public Attribute2Elements getAttribute2Access() {
 		return (pAttribute2 != null) ? pAttribute2 : (pAttribute2 = new Attribute2Elements());
 	}
@@ -1213,8 +1219,8 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	//Reference2 returns Reference:
 	//  "Reference" type=[Object] many?="*"? name=ID ("{" (("shortDescription"
-	//  shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?) "}"|
-	//  ";");
+	//  shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";"
+	//  )?) "}"|";");
 	public Reference2Elements getReference2Access() {
 		return (pReference2 != null) ? pReference2 : (pReference2 = new Reference2Elements());
 	}
@@ -1224,8 +1230,8 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//ConstraintDefinition:
-	//  "constraint" type=ID "{" ("parameters" parameters+=STRING* ";" & "message" message=
-	//  STRING ";") "}";
+	//  "constraint" type=ID "{" ("parameters" parameters+=STRING* ";" & "message"
+	//  message=STRING ";") "}";
 	public ConstraintDefinitionElements getConstraintDefinitionAccess() {
 		return (pConstraintDefinition != null) ? pConstraintDefinition : (pConstraintDefinition = new ConstraintDefinitionElements());
 	}
@@ -1247,8 +1253,9 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

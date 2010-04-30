@@ -6,6 +6,7 @@
 package org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -17,6 +18,8 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.AbstractMulti2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Atom;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Enum;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug310435Val;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.ConcreteMulti;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Consumed2;
@@ -26,6 +29,7 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EObjectRef;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectBug284850;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItem;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectItems;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EnumBug310435Enum;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Expression;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Loop2;
@@ -134,9 +138,45 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
       case SimplerewritetestPackage.TYPE_BUG2_A: return createTypeBug2A();
       case SimplerewritetestPackage.TYPE_BUG2_B: return createTypeBug2B();
       case SimplerewritetestPackage.BUG305171: return createBug305171();
+      case SimplerewritetestPackage.BUG310435_ENUM: return createBug310435Enum();
+      case SimplerewritetestPackage.BUG310435_VAL: return createBug310435Val();
       case SimplerewritetestPackage.OP: return createOp();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Object createFromString(EDataType eDataType, String initialValue)
+  {
+    switch (eDataType.getClassifierID())
+    {
+      case SimplerewritetestPackage.ENUM_BUG310435_ENUM:
+        return createEnumBug310435EnumFromString(eDataType, initialValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String convertToString(EDataType eDataType, Object instanceValue)
+  {
+    switch (eDataType.getClassifierID())
+    {
+      case SimplerewritetestPackage.ENUM_BUG310435_ENUM:
+        return convertEnumBug310435EnumToString(eDataType, instanceValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
   }
 
@@ -508,10 +548,54 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  public Bug310435Enum createBug310435Enum()
+  {
+    Bug310435EnumImpl bug310435Enum = new Bug310435EnumImpl();
+    return bug310435Enum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Bug310435Val createBug310435Val()
+  {
+    Bug310435ValImpl bug310435Val = new Bug310435ValImpl();
+    return bug310435Val;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Op createOp()
   {
     OpImpl op = new OpImpl();
     return op;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EnumBug310435Enum createEnumBug310435EnumFromString(EDataType eDataType, String initialValue)
+  {
+    EnumBug310435Enum result = EnumBug310435Enum.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertEnumBug310435EnumToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

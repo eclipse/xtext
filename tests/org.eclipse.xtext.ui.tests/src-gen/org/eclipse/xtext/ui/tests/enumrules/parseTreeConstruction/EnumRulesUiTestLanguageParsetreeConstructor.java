@@ -45,13 +45,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|"generated"
- *   generated=GeneratedEnum;
+ *   "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|
+ *   "generated" generated=GeneratedEnum;
  *
  **/
 
-// "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|"generated"
-// generated=GeneratedEnum
+// "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|
+// "generated" generated=GeneratedEnum
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -149,7 +149,7 @@ protected class Model_ExistingAssignment_0_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("existing",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("existing");
-		if(Boolean.TRUE.booleanValue()) {  
+		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getExistingExistingEnumEnumRuleCall_0_1_0(), value, null)) { 
 			type = AssignmentType.ERC;
 			element = grammarAccess.getModelAccess().getExistingExistingEnumEnumRuleCall_0_1_0();
 			return obj;
@@ -227,7 +227,7 @@ protected class Model_GeneratedAssignment_0_2_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("generated",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("generated");
-		if(Boolean.TRUE.booleanValue()) {  
+		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0(), value, null)) { 
 			type = AssignmentType.ERC;
 			element = grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0();
 			return obj;
@@ -306,7 +306,7 @@ protected class Model_GeneratedAssignment_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("generated",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("generated");
-		if(Boolean.TRUE.booleanValue()) {  
+		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_1_1_0(), value, null)) { 
 			type = AssignmentType.ERC;
 			element = grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_1_1_0();
 			return obj;

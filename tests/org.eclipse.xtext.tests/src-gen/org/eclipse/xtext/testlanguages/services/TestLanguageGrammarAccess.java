@@ -96,12 +96,12 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cActionFeatureTerminalRuleParserRuleCall_2_1_0 = (RuleCall)cActionFeatureAssignment_2_1.eContents().get(0);
 		
 		//ReducibleRule returns ReducibleElement:
-		//  "reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature
-		//  +=TerminalRule)?;
+		//  "reducible" TerminalRule ({ReducibleComposite.actionFeature+=current}
+		//  actionFeature+=TerminalRule)?;
 		public ParserRule getRule() { return rule; }
 
-		//"reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature
-		//+=TerminalRule)?
+		//"reducible" TerminalRule ({ReducibleComposite.actionFeature+=current}
+		//actionFeature+=TerminalRule)?
 		public Group getGroup() { return cGroup; }
 
 		//"reducible"
@@ -198,8 +198,8 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ReducibleRule returns ReducibleElement:
-	//  "reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature
-	//  +=TerminalRule)?;
+	//  "reducible" TerminalRule ({ReducibleComposite.actionFeature+=current}
+	//  actionFeature+=TerminalRule)?;
 	public ReducibleRuleElements getReducibleRuleAccess() {
 		return (pReducibleRule != null) ? pReducibleRule : (pReducibleRule = new ReducibleRuleElements());
 	}
@@ -231,8 +231,9 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

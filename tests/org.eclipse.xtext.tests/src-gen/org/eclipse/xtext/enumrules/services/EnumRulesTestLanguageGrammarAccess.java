@@ -34,12 +34,12 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cGeneratedGeneratedEnumEnumRuleCall_1_1_0 = (RuleCall)cGeneratedAssignment_1_1.eContents().get(0);
 		
 		//Model:
-		//  "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|"generated"
-		//  generated=GeneratedEnum;
+		//  "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|
+		//  "generated" generated=GeneratedEnum;
 		public ParserRule getRule() { return rule; }
 
-		//"existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|"generated"
-		//generated=GeneratedEnum
+		//"existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|
+		//"generated" generated=GeneratedEnum
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?
@@ -170,8 +170,8 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//  "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|"generated"
-	//  generated=GeneratedEnum;
+	//  "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|
+	//  "generated" generated=GeneratedEnum;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -213,8 +213,9 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

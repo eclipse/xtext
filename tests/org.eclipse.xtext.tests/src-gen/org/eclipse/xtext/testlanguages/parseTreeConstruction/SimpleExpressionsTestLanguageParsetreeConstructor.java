@@ -241,11 +241,13 @@ protected class Sequence_ExpressionsAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule Addition ****************
  *
  * Addition returns Expression:
- *   Multiplication ({Op.values+=current} operator=( "+" | "-" ) values+=Multiplication)*;
+ *   Multiplication ({Op.values+=current} operator=( "+" | "-" ) values+=
+ *   Multiplication)*;
  *
  **/
 
-// Multiplication ({Op.values+=current} operator=( "+" | "-" ) values+=Multiplication)*
+// Multiplication ({Op.values+=current} operator=( "+" | "-" ) values+=
+// Multiplication)*
 protected class Addition_Group extends GroupToken {
 	
 	public Addition_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -834,7 +836,7 @@ protected class Atom_NameAssignment extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAtomAccess().getNameIDTerminalRuleCall_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAtomAccess().getNameIDTerminalRuleCall_0();
 			return obj;

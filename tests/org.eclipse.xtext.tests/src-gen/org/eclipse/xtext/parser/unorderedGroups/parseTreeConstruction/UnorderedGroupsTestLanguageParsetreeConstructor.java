@@ -47,29 +47,31 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   {Model} ("1" (first?="a" & second?="b")|"2" (first?="a" & second?="b" & third?="c" & forth
- *   ?="d")|"3" (first?="a"? & second?="b"?)|"4" (first?="a" & second?="b"?)|"5" (first?="a"
- *   ? & second?="b")|"6" (firstAsList+="a"+ & secondAsList+="b"*)|"7" (firstAsList+="a"* &
- *   secondAsList+="b"+)|"8" ("a" "b" first?="c" & "a" "b" second?="d")|"9" (firstAsList+="a"
- *   & secondAsList+="b")+|"10" (firstAsList+="a" & secondAsList+="b")*|"11" (first?="a" &
- *   second?="b")?|"12" (firstAsList+="a" & secondAsList+="b") (firstAsList+="a" &
- *   secondAsList+="b")|"13" (firstAsList+="a" & secondAsList+="b")? firstAsList+="a"
- *   secondAsList+="b"|"14" ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" &
- *   forthAsList+="d"))+|"datatypes" value=UnorderedDatatype|"serialization" serialized
- *   =UnorderedSerialization|"bug302585" nestedModel+=NestedModel*);
+ *   {Model} ("1" (first?="a" & second?="b")|"2" (first?="a" & second?="b" & third
+ *   ?="c" & forth?="d")|"3" (first?="a"? & second?="b"?)|"4" (first?="a" & second
+ *   ?="b"?)|"5" (first?="a"? & second?="b")|"6" (firstAsList+="a"+ & secondAsList
+ *   +="b"*)|"7" (firstAsList+="a"* & secondAsList+="b"+)|"8" ("a" "b" first?="c"
+ *   & "a" "b" second?="d")|"9" (firstAsList+="a" & secondAsList+="b")+|"10" (
+ *   firstAsList+="a" & secondAsList+="b")*|"11" (first?="a" & second?="b")?|"12"
+ *   (firstAsList+="a" & secondAsList+="b") (firstAsList+="a" & secondAsList+="b")
+ *   |"13" (firstAsList+="a" & secondAsList+="b")? firstAsList+="a" secondAsList+=
+ *   "b"|"14" ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" &
+ *   forthAsList+="d"))+|"datatypes" value=UnorderedDatatype|"serialization"
+ *   serialized=UnorderedSerialization|"bug302585" nestedModel+=NestedModel*);
  *
  **/
 
-// {Model} ("1" (first?="a" & second?="b")|"2" (first?="a" & second?="b" & third?="c" & forth
-// ?="d")|"3" (first?="a"? & second?="b"?)|"4" (first?="a" & second?="b"?)|"5" (first?="a"
-// ? & second?="b")|"6" (firstAsList+="a"+ & secondAsList+="b"*)|"7" (firstAsList+="a"* &
-// secondAsList+="b"+)|"8" ("a" "b" first?="c" & "a" "b" second?="d")|"9" (firstAsList+="a"
-// & secondAsList+="b")+|"10" (firstAsList+="a" & secondAsList+="b")*|"11" (first?="a" &
-// second?="b")?|"12" (firstAsList+="a" & secondAsList+="b") (firstAsList+="a" &
-// secondAsList+="b")|"13" (firstAsList+="a" & secondAsList+="b")? firstAsList+="a"
-// secondAsList+="b"|"14" ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" &
-// forthAsList+="d"))+|"datatypes" value=UnorderedDatatype|"serialization" serialized
-// =UnorderedSerialization|"bug302585" nestedModel+=NestedModel*)
+// {Model} ("1" (first?="a" & second?="b")|"2" (first?="a" & second?="b" & third?=
+// "c" & forth?="d")|"3" (first?="a"? & second?="b"?)|"4" (first?="a" & second?=
+// "b"?)|"5" (first?="a"? & second?="b")|"6" (firstAsList+="a"+ & secondAsList+=
+// "b"*)|"7" (firstAsList+="a"* & secondAsList+="b"+)|"8" ("a" "b" first?="c" &
+// "a" "b" second?="d")|"9" (firstAsList+="a" & secondAsList+="b")+|"10" (
+// firstAsList+="a" & secondAsList+="b")*|"11" (first?="a" & second?="b")?|"12" (
+// firstAsList+="a" & secondAsList+="b") (firstAsList+="a" & secondAsList+="b")|
+// "13" (firstAsList+="a" & secondAsList+="b")? firstAsList+="a" secondAsList+="b"
+// |"14" ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" & forthAsList
+// +="d"))+|"datatypes" value=UnorderedDatatype|"serialization" serialized=
+// UnorderedSerialization|"bug302585" nestedModel+=NestedModel*)
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -124,16 +126,17 @@ protected class Model_ModelAction_0 extends ActionToken  {
 	}
 }
 
-// "1" (first?="a" & second?="b")|"2" (first?="a" & second?="b" & third?="c" & forth?="d")|
-// "3" (first?="a"? & second?="b"?)|"4" (first?="a" & second?="b"?)|"5" (first?="a"? &
-// second?="b")|"6" (firstAsList+="a"+ & secondAsList+="b"*)|"7" (firstAsList+="a"* &
-// secondAsList+="b"+)|"8" ("a" "b" first?="c" & "a" "b" second?="d")|"9" (firstAsList+="a"
-// & secondAsList+="b")+|"10" (firstAsList+="a" & secondAsList+="b")*|"11" (first?="a" &
-// second?="b")?|"12" (firstAsList+="a" & secondAsList+="b") (firstAsList+="a" &
-// secondAsList+="b")|"13" (firstAsList+="a" & secondAsList+="b")? firstAsList+="a"
-// secondAsList+="b"|"14" ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" &
-// forthAsList+="d"))+|"datatypes" value=UnorderedDatatype|"serialization" serialized
-// =UnorderedSerialization|"bug302585" nestedModel+=NestedModel*
+// "1" (first?="a" & second?="b")|"2" (first?="a" & second?="b" & third?="c" &
+// forth?="d")|"3" (first?="a"? & second?="b"?)|"4" (first?="a" & second?="b"?)|
+// "5" (first?="a"? & second?="b")|"6" (firstAsList+="a"+ & secondAsList+="b"*)|
+// "7" (firstAsList+="a"* & secondAsList+="b"+)|"8" ("a" "b" first?="c" & "a" "b"
+// second?="d")|"9" (firstAsList+="a" & secondAsList+="b")+|"10" (firstAsList+="a"
+// & secondAsList+="b")*|"11" (first?="a" & second?="b")?|"12" (firstAsList+="a" &
+// secondAsList+="b") (firstAsList+="a" & secondAsList+="b")|"13" (firstAsList+=
+// "a" & secondAsList+="b")? firstAsList+="a" secondAsList+="b"|"14" ((firstAsList
+// +="a" & secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))+|
+// "datatypes" value=UnorderedDatatype|"serialization" serialized=
+// UnorderedSerialization|"bug302585" nestedModel+=NestedModel*
 protected class Model_Alternatives_1 extends AlternativesToken {
 
 	public Model_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1884,7 +1887,8 @@ protected class Model_SecondAssignment_1_10_1_1 extends AssignmentToken  {
 
 
 
-// "12" (firstAsList+="a" & secondAsList+="b") (firstAsList+="a" & secondAsList+="b")
+// "12" (firstAsList+="a" & secondAsList+="b") (firstAsList+="a" & secondAsList+=
+// "b")
 protected class Model_Group_1_11 extends GroupToken {
 	
 	public Model_Group_1_11(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2316,7 +2320,8 @@ protected class Model_SecondAsListAssignment_1_12_3 extends AssignmentToken  {
 }
 
 
-// "14" ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))+
+// "14" ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" & forthAsList+=
+// "d"))+
 protected class Model_Group_1_13 extends GroupToken {
 	
 	public Model_Group_1_13(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2360,7 +2365,8 @@ protected class Model_DigitOneDigitFourKeyword_1_13_0 extends KeywordToken  {
 
 }
 
-// ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))+
+// ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))
+// +
 protected class Model_UnorderedGroup_1_13_1 extends UnorderedGroupToken {
 	
 	public Model_UnorderedGroup_1_13_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2635,7 +2641,7 @@ protected class Model_ValueAssignment_1_14_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getValueUnorderedDatatypeParserRuleCall_1_14_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getValueUnorderedDatatypeParserRuleCall_1_14_1_0();
 			return obj;
@@ -3019,13 +3025,15 @@ protected class NestedModel_NestedKeyword_2 extends KeywordToken  {
 /************ begin Rule UnorderedSerialization ****************
  *
  * UnorderedSerialization:
- *   {UnorderedSerialization} ("1" first?="a"? & second?="b"? & third?="c"? & forth?="d"?|"2"
- *   (firstAsList+="a" & secondAsList+="b")*|"3" (firstAsList+="a"+ & second?="b")*);
+ *   {UnorderedSerialization} ("1" first?="a"? & second?="b"? & third?="c"? &
+ *   forth?="d"?|"2" (firstAsList+="a" & secondAsList+="b")*|"3" (firstAsList+="a"
+ *   + & second?="b")*);
  *
  **/
 
-// {UnorderedSerialization} ("1" first?="a"? & second?="b"? & third?="c"? & forth?="d"?|"2"
-// (firstAsList+="a" & secondAsList+="b")*|"3" (firstAsList+="a"+ & second?="b")*)
+// {UnorderedSerialization} ("1" first?="a"? & second?="b"? & third?="c"? & forth?=
+// "d"?|"2" (firstAsList+="a" & secondAsList+="b")*|"3" (firstAsList+="a"+ &
+// second?="b")*)
 protected class UnorderedSerialization_Group extends GroupToken {
 	
 	public UnorderedSerialization_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -3080,8 +3088,8 @@ protected class UnorderedSerialization_UnorderedSerializationAction_0 extends Ac
 	}
 }
 
-// "1" first?="a"? & second?="b"? & third?="c"? & forth?="d"?|"2" (firstAsList+="a" &
-// secondAsList+="b")*|"3" (firstAsList+="a"+ & second?="b")*
+// "1" first?="a"? & second?="b"? & third?="c"? & forth?="d"?|"2" (firstAsList+="a"
+// & secondAsList+="b")*|"3" (firstAsList+="a"+ & second?="b")*
 protected class UnorderedSerialization_Alternatives_1 extends AlternativesToken {
 
 	public UnorderedSerialization_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {

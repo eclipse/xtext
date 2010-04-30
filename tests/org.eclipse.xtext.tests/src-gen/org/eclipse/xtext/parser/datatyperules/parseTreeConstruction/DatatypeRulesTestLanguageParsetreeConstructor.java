@@ -102,13 +102,13 @@ protected class CompositeModel_ModelAssignment extends AssignmentToken  {
 /************ begin Rule Model ****************
  *
  * Model:
- *   id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ("*" double
- *   =Double)? ";";
+ *   id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)?
+ *   ("*" double=Double)? ";";
  *
  **/
 
-// id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ("*" double
-// =Double)? ";"
+// id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? (
+// "*" double=Double)? ";"
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -160,7 +160,7 @@ protected class Model_IdAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("id",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("id");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getIdNestedModelIdParserRuleCall_0_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getIdNestedModelIdParserRuleCall_0_0();
 			return obj;
@@ -238,7 +238,7 @@ protected class Model_ValueAssignment_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getValueFractionParserRuleCall_1_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getValueFractionParserRuleCall_1_1_0();
 			return obj;
@@ -318,7 +318,7 @@ protected class Model_VectorAssignment_2_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("vector",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("vector");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getVectorVectorParserRuleCall_2_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getVectorVectorParserRuleCall_2_1_0();
 			return obj;
@@ -399,7 +399,7 @@ protected class Model_DotsAssignment_3_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("dots",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("dots");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getDotsDotsParserRuleCall_3_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getDotsDotsParserRuleCall_3_1_0();
 			return obj;
@@ -481,7 +481,7 @@ protected class Model_DoubleAssignment_4_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("double",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("double");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getDoubleDoubleParserRuleCall_4_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getDoubleDoubleParserRuleCall_4_1_0();
 			return obj;

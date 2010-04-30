@@ -295,7 +295,7 @@ protected class ReferencedMetamodel_AliasAssignment_1_0 extends AssignmentToken 
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alias");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getReferencedMetamodelAccess().getAliasIDTerminalRuleCall_1_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getReferencedMetamodelAccess().getAliasIDTerminalRuleCall_1_0_0();
 			return obj;
@@ -395,15 +395,15 @@ protected class ReferencedMetamodel_SemicolonKeyword_3 extends KeywordToken  {
 /************ begin Rule EPackageDecl ****************
  *
  * EPackageDecl returns ecore::EPackage:
- *   eAnnotations+=EAnnotationDecl* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix"
- *   "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)*
- *   "}";
+ *   eAnnotations+=EAnnotationDecl* "package" name=QID "nsURI" "=" nsURI=STRING
+ *   "nsPrefix" "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=
+ *   EClassifierDecl)* "}";
  *
  **/
 
-// eAnnotations+=EAnnotationDecl* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix"
-// "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)*
-// "}"
+// eAnnotations+=EAnnotationDecl* "package" name=QID "nsURI" "=" nsURI=STRING
+// "nsPrefix" "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=
+// EClassifierDecl)* "}"
 protected class EPackageDecl_Group extends GroupToken {
 	
 	public EPackageDecl_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -524,7 +524,7 @@ protected class EPackageDecl_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEPackageDeclAccess().getNameQIDParserRuleCall_2_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getEPackageDeclAccess().getNameQIDParserRuleCall_2_0();
 			return obj;
@@ -602,7 +602,7 @@ protected class EPackageDecl_NsURIAssignment_5 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("nsURI",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("nsURI");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEPackageDeclAccess().getNsURISTRINGTerminalRuleCall_5_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEPackageDeclAccess().getNsURISTRINGTerminalRuleCall_5_0();
 			return obj;
@@ -680,7 +680,7 @@ protected class EPackageDecl_NsPrefixAssignment_8 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("nsPrefix",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("nsPrefix");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEPackageDeclAccess().getNsPrefixQIDParserRuleCall_8_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getEPackageDeclAccess().getNsPrefixQIDParserRuleCall_8_0();
 			return obj;
@@ -860,13 +860,13 @@ protected class EPackageDecl_RightCurlyBracketKeyword_11 extends KeywordToken  {
 /************ begin Rule SubEPackageDecl ****************
  *
  * SubEPackageDecl returns ecore::EPackage:
- *   eAnnotations+=EAnnotationDecl* "package" name=ID "{" (eSubpackages+=SubEPackageDecl|
- *   eClassifiers+=EClassifierDecl)* "}";
+ *   eAnnotations+=EAnnotationDecl* "package" name=ID "{" (eSubpackages+=
+ *   SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}";
  *
  **/
 
-// eAnnotations+=EAnnotationDecl* "package" name=ID "{" (eSubpackages+=SubEPackageDecl|
-// eClassifiers+=EClassifierDecl)* "}"
+// eAnnotations+=EAnnotationDecl* "package" name=ID "{" (eSubpackages+=
+// SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}"
 protected class SubEPackageDecl_Group extends GroupToken {
 	
 	public SubEPackageDecl_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -987,7 +987,7 @@ protected class SubEPackageDecl_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getSubEPackageDeclAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSubEPackageDeclAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -1293,13 +1293,13 @@ protected class EClassifierDecl_EDataTypeDeclParserRuleCall_1 extends RuleCallTo
 /************ begin Rule EDataTypeDecl ****************
  *
  * EDataTypeDecl returns ecore::EDataType:
- *   eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID ":"
- *   instanceClassName=STRING_OR_QID ";")|EEnumDecl;
+ *   eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID
+ *   ":" instanceClassName=STRING_OR_QID ";")|EEnumDecl;
  *
  **/
 
-// eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID ":"
-// instanceClassName=STRING_OR_QID ";")|EEnumDecl
+// eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID
+// ":" instanceClassName=STRING_OR_QID ";")|EEnumDecl
 protected class EDataTypeDecl_Alternatives extends AlternativesToken {
 
 	public EDataTypeDecl_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1330,8 +1330,8 @@ protected class EDataTypeDecl_Alternatives extends AlternativesToken {
 
 }
 
-// eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID ":"
-// instanceClassName=STRING_OR_QID ";")
+// eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID
+// ":" instanceClassName=STRING_OR_QID ";")
 protected class EDataTypeDecl_Group_0 extends GroupToken {
 	
 	public EDataTypeDecl_Group_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1430,7 +1430,7 @@ protected class EDataTypeDecl_SerializableAssignment_0_1 extends AssignmentToken
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("serializable",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("serializable");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEDataTypeDeclAccess().getSerializableSerializableTerminalRuleCall_0_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEDataTypeDeclAccess().getSerializableSerializableTerminalRuleCall_0_1_0();
 			return obj;
@@ -1509,7 +1509,7 @@ protected class EDataTypeDecl_NameAssignment_0_2_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEDataTypeDeclAccess().getNameIDTerminalRuleCall_0_2_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEDataTypeDeclAccess().getNameIDTerminalRuleCall_0_2_1_0();
 			return obj;
@@ -1565,7 +1565,7 @@ protected class EDataTypeDecl_InstanceClassNameAssignment_0_2_3 extends Assignme
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("instanceClassName",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("instanceClassName");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEDataTypeDeclAccess().getInstanceClassNameSTRING_OR_QIDParserRuleCall_0_2_3_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getEDataTypeDeclAccess().getInstanceClassNameSTRING_OR_QIDParserRuleCall_0_2_3_0();
 			return obj;
@@ -1647,7 +1647,8 @@ protected class EDataTypeDecl_EEnumDeclParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule EAnnotationDecl ****************
  *
  * EAnnotationDecl returns ecore::EAnnotation:
- *   "@" source=STRING_OR_QID ("(" details+=MapEntry ("," details+=MapEntry)* ")")?;
+ *   "@" source=STRING_OR_QID ("(" details+=MapEntry ("," details+=MapEntry)* ")")
+ *   ?;
  *
  **/
 
@@ -1726,7 +1727,7 @@ protected class EAnnotationDecl_SourceAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("source",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("source");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEAnnotationDeclAccess().getSourceSTRING_OR_QIDParserRuleCall_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getEAnnotationDeclAccess().getSourceSTRING_OR_QIDParserRuleCall_1_0();
 			return obj;
@@ -1950,20 +1951,20 @@ protected class EAnnotationDecl_RightParenthesisKeyword_2_3 extends KeywordToken
  *
  * EClassDecl returns ecore::EClass:
  *   eAnnotations+=EAnnotationDecl* abstract?="abstract"? (interface?="interface"|
- *   "class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=
- *   ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl
- *   ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":" instanceClassName=
- *   STRING_OR_QID)? "{" (eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=
- *   EOperationDecl)* "}";
+ *   "class") name=ID ("<" eTypeParameters+=ETypeParameterDecl (","
+ *   eTypeParameters+=ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=
+ *   EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)
+ *   *)? (":" instanceClassName=STRING_OR_QID)? "{" (eStructuralFeatures+=
+ *   EStructuralFeatureDecl|eOperations+=EOperationDecl)* "}";
  *
  **/
 
 // eAnnotations+=EAnnotationDecl* abstract?="abstract"? (interface?="interface"|
-// "class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=
-// ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl
-// ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":" instanceClassName=
-// STRING_OR_QID)? "{" (eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=
-// EOperationDecl)* "}"
+// "class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters
+// +=ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=
+// EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)
+// ? (":" instanceClassName=STRING_OR_QID)? "{" (eStructuralFeatures+=
+// EStructuralFeatureDecl|eOperations+=EOperationDecl)* "}"
 protected class EClassDecl_Group extends GroupToken {
 	
 	public EClassDecl_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2178,7 +2179,7 @@ protected class EClassDecl_NameAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEClassDeclAccess().getNameIDTerminalRuleCall_3_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEClassDeclAccess().getNameIDTerminalRuleCall_3_0();
 			return obj;
@@ -2188,8 +2189,8 @@ protected class EClassDecl_NameAssignment_3 extends AssignmentToken  {
 
 }
 
-// ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)*
-// ">")?
+// ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=
+// ETypeParameterDecl)* ">")?
 protected class EClassDecl_Group_4 extends GroupToken {
 	
 	public EClassDecl_Group_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2395,8 +2396,8 @@ protected class EClassDecl_GreaterThanSignKeyword_4_3 extends KeywordToken  {
 }
 
 
-// ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=
-// EGenericTypeReferenceDecl)*)?
+// ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes
+// +=EGenericTypeReferenceDecl)*)?
 protected class EClassDecl_Group_5 extends GroupToken {
 	
 	public EClassDecl_Group_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2651,7 +2652,7 @@ protected class EClassDecl_InstanceClassNameAssignment_6_1 extends AssignmentTok
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("instanceClassName",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("instanceClassName");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEClassDeclAccess().getInstanceClassNameSTRING_OR_QIDParserRuleCall_6_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getEClassDeclAccess().getInstanceClassNameSTRING_OR_QIDParserRuleCall_6_1_0();
 			return obj;
@@ -2959,17 +2960,19 @@ protected class EStructuralFeatureDecl_EReferenceDeclParserRuleCall_1 extends Ru
 /************ begin Rule EAttributeDecl ****************
  *
  * EAttributeDecl returns ecore::EAttribute:
- *   eAnnotations+=EAnnotationDecl* (iD?="ID"|unique=Bag|ordered=Random|changeable=
- *   Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|
- *   derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=
- *   INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";";
+ *   eAnnotations+=EAnnotationDecl* (iD?="ID"|unique=Bag|ordered=Random|changeable
+ *   =Readonly|volatile?="volatile"|transient?="transient"|unsettable?=
+ *   "unsettable"|derived?="derived")* "attr" eGenericType=
+ *   EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")?
+ *   name=ID ("=" defaultValueLiteral=STRING)? ";";
  *
  **/
 
 // eAnnotations+=EAnnotationDecl* (iD?="ID"|unique=Bag|ordered=Random|changeable=
 // Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|
-// derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=
-// INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";"
+// derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("["
+// lowerBound=INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=
+// STRING)? ";"
 protected class EAttributeDecl_Group extends GroupToken {
 	
 	public EAttributeDecl_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -3134,7 +3137,7 @@ protected class EAttributeDecl_UniqueAssignment_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("unique",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("unique");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEAttributeDeclAccess().getUniqueBagTerminalRuleCall_1_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEAttributeDeclAccess().getUniqueBagTerminalRuleCall_1_1_0();
 			return obj;
@@ -3169,7 +3172,7 @@ protected class EAttributeDecl_OrderedAssignment_1_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ordered",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ordered");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEAttributeDeclAccess().getOrderedRandomTerminalRuleCall_1_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEAttributeDeclAccess().getOrderedRandomTerminalRuleCall_1_2_0();
 			return obj;
@@ -3204,7 +3207,7 @@ protected class EAttributeDecl_ChangeableAssignment_1_3 extends AssignmentToken 
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("changeable",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("changeable");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEAttributeDeclAccess().getChangeableReadonlyTerminalRuleCall_1_3_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEAttributeDeclAccess().getChangeableReadonlyTerminalRuleCall_1_3_0();
 			return obj;
@@ -3492,7 +3495,7 @@ protected class EAttributeDecl_LowerBoundAssignment_4_1 extends AssignmentToken 
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("lowerBound",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("lowerBound");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEAttributeDeclAccess().getLowerBoundINTTerminalRuleCall_4_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEAttributeDeclAccess().getLowerBoundINTTerminalRuleCall_4_1_0();
 			return obj;
@@ -3570,7 +3573,7 @@ protected class EAttributeDecl_UpperBoundAssignment_4_2_1 extends AssignmentToke
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("upperBound",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("upperBound");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEAttributeDeclAccess().getUpperBoundSINTParserRuleCall_4_2_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getEAttributeDeclAccess().getUpperBoundSINTParserRuleCall_4_2_1_0();
 			return obj;
@@ -3630,7 +3633,7 @@ protected class EAttributeDecl_NameAssignment_5 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEAttributeDeclAccess().getNameIDTerminalRuleCall_5_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEAttributeDeclAccess().getNameIDTerminalRuleCall_5_0();
 			return obj;
@@ -3708,7 +3711,7 @@ protected class EAttributeDecl_DefaultValueLiteralAssignment_6_1 extends Assignm
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("defaultValueLiteral",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("defaultValueLiteral");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEAttributeDeclAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_6_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEAttributeDeclAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_6_1_0();
 			return obj;
@@ -3749,19 +3752,19 @@ protected class EAttributeDecl_SemicolonKeyword_7 extends KeywordToken  {
 /************ begin Rule EReferenceDecl ****************
  *
  * EReferenceDecl returns ecore::EReference:
- *   eAnnotations+=EAnnotationDecl* (resolveProxies=Local|unique=Bag|ordered=Random|
- *   changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?=
- *   "unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=
- *   EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#"
- *   eOpposite=[ecore::EReference])? name=ID ";";
+ *   eAnnotations+=EAnnotationDecl* (resolveProxies=Local|unique=Bag|ordered=
+ *   Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|
+ *   unsettable?="unsettable"|derived?="derived")* (containment?="val"|"ref")
+ *   eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=
+ *   SINT)? "]")? ("#" eOpposite=[ecore::EReference])? name=ID ";";
  *
  **/
 
 // eAnnotations+=EAnnotationDecl* (resolveProxies=Local|unique=Bag|ordered=Random|
 // changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?=
 // "unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=
-// EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#"
-// eOpposite=[ecore::EReference])? name=ID ";"
+// EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? (
+// "#" eOpposite=[ecore::EReference])? name=ID ";"
 protected class EReferenceDecl_Group extends GroupToken {
 	
 	public EReferenceDecl_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -3891,7 +3894,7 @@ protected class EReferenceDecl_ResolveProxiesAssignment_1_0 extends AssignmentTo
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("resolveProxies",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("resolveProxies");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEReferenceDeclAccess().getResolveProxiesLocalTerminalRuleCall_1_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEReferenceDeclAccess().getResolveProxiesLocalTerminalRuleCall_1_0_0();
 			return obj;
@@ -3926,7 +3929,7 @@ protected class EReferenceDecl_UniqueAssignment_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("unique",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("unique");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEReferenceDeclAccess().getUniqueBagTerminalRuleCall_1_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEReferenceDeclAccess().getUniqueBagTerminalRuleCall_1_1_0();
 			return obj;
@@ -3961,7 +3964,7 @@ protected class EReferenceDecl_OrderedAssignment_1_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ordered",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ordered");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEReferenceDeclAccess().getOrderedRandomTerminalRuleCall_1_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEReferenceDeclAccess().getOrderedRandomTerminalRuleCall_1_2_0();
 			return obj;
@@ -3996,7 +3999,7 @@ protected class EReferenceDecl_ChangeableAssignment_1_3 extends AssignmentToken 
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("changeable",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("changeable");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEReferenceDeclAccess().getChangeableReadonlyTerminalRuleCall_1_3_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEReferenceDeclAccess().getChangeableReadonlyTerminalRuleCall_1_3_0();
 			return obj;
@@ -4343,7 +4346,7 @@ protected class EReferenceDecl_LowerBoundAssignment_4_1 extends AssignmentToken 
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("lowerBound",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("lowerBound");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEReferenceDeclAccess().getLowerBoundINTTerminalRuleCall_4_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEReferenceDeclAccess().getLowerBoundINTTerminalRuleCall_4_1_0();
 			return obj;
@@ -4421,7 +4424,7 @@ protected class EReferenceDecl_UpperBoundAssignment_4_2_1 extends AssignmentToke
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("upperBound",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("upperBound");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEReferenceDeclAccess().getUpperBoundSINTParserRuleCall_4_2_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getEReferenceDeclAccess().getUpperBoundSINTParserRuleCall_4_2_1_0();
 			return obj;
@@ -4565,7 +4568,7 @@ protected class EReferenceDecl_NameAssignment_6 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEReferenceDeclAccess().getNameIDTerminalRuleCall_6_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEReferenceDeclAccess().getNameIDTerminalRuleCall_6_0();
 			return obj;
@@ -4604,11 +4607,13 @@ protected class EReferenceDecl_SemicolonKeyword_7 extends KeywordToken  {
 /************ begin Rule EEnumDecl ****************
  *
  * EEnumDecl returns ecore::EEnum:
- *   eAnnotations+=EAnnotationDecl* "enum" name=ID "{" eLiterals+=EEnumLiteralDecl+ "}";
+ *   eAnnotations+=EAnnotationDecl* "enum" name=ID "{" eLiterals+=EEnumLiteralDecl
+ *   + "}";
  *
  **/
 
-// eAnnotations+=EAnnotationDecl* "enum" name=ID "{" eLiterals+=EEnumLiteralDecl+ "}"
+// eAnnotations+=EAnnotationDecl* "enum" name=ID "{" eLiterals+=EEnumLiteralDecl+
+// "}"
 protected class EEnumDecl_Group extends GroupToken {
 	
 	public EEnumDecl_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -4729,7 +4734,7 @@ protected class EEnumDecl_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEEnumDeclAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEEnumDeclAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -4940,7 +4945,7 @@ protected class EEnumLiteralDecl_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEEnumLiteralDeclAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEEnumLiteralDeclAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -5018,7 +5023,7 @@ protected class EEnumLiteralDecl_ValueAssignment_2_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEEnumLiteralDeclAccess().getValueINTTerminalRuleCall_2_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEEnumLiteralDeclAccess().getValueINTTerminalRuleCall_2_1_0();
 			return obj;
@@ -5054,7 +5059,7 @@ protected class EEnumLiteralDecl_LiteralAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("literal",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("literal");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEEnumLiteralDeclAccess().getLiteralSTRINGTerminalRuleCall_3_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEEnumLiteralDeclAccess().getLiteralSTRINGTerminalRuleCall_3_0();
 			return obj;
@@ -5152,7 +5157,7 @@ protected class ETypeParameterDecl_NameAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getETypeParameterDeclAccess().getNameIDTerminalRuleCall_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getETypeParameterDeclAccess().getNameIDTerminalRuleCall_0_0();
 			return obj;
@@ -5261,14 +5266,14 @@ protected class ETypeParameterDecl_EBoundsAssignment_1_1 extends AssignmentToken
  *
  * EGenericTypeReferenceDecl returns ecore::EGenericType:
  *   eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl (","
- *   eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter
- *   ];
+ *   eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::
+ *   ETypeParameter];
  *
  **/
 
 // eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl (","
-// eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter
-// ]
+// eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::
+// ETypeParameter]
 protected class EGenericTypeReferenceDecl_Alternatives extends AlternativesToken {
 
 	public EGenericTypeReferenceDecl_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -5358,7 +5363,8 @@ protected class EGenericTypeReferenceDecl_EClassifierAssignment_0_0 extends Assi
 
 }
 
-// ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?
+// ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)*
+// ">")?
 protected class EGenericTypeReferenceDecl_Group_0_1 extends GroupToken {
 	
 	public EGenericTypeReferenceDecl_Group_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -5654,15 +5660,16 @@ protected class EGenericTypeReferenceDecl_ETypeParameterAssignment_1_1 extends A
  *
  * EGenericTypeDecl returns ecore::EGenericType:
  *   eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl (","
- *   eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter
- *   ]|"?" ("extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl)
- * ;
+ *   eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::
+ *   ETypeParameter]|"?" ("extends" eUpperBound=EGenericTypeDecl|"super"
+ *   eLowerBound=EGenericTypeDecl);
  *
  **/
 
 // eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl (","
-// eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter
-// ]|"?" ("extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl)
+// eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::
+// ETypeParameter]|"?" ("extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound
+// =EGenericTypeDecl)
 protected class EGenericTypeDecl_Alternatives extends AlternativesToken {
 
 	public EGenericTypeDecl_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -5753,7 +5760,8 @@ protected class EGenericTypeDecl_EClassifierAssignment_0_0 extends AssignmentTok
 
 }
 
-// ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?
+// ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)*
+// ">")?
 protected class EGenericTypeDecl_Group_0_1 extends GroupToken {
 	
 	public EGenericTypeDecl_Group_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -6041,7 +6049,8 @@ protected class EGenericTypeDecl_ETypeParameterAssignment_1_1 extends Assignment
 }
 
 
-// "?" ("extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl)
+// "?" ("extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl
+// )
 protected class EGenericTypeDecl_Group_2 extends GroupToken {
 	
 	public EGenericTypeDecl_Group_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -6298,21 +6307,21 @@ protected class EGenericTypeDecl_ELowerBoundAssignment_2_1_1_1 extends Assignmen
 /************ begin Rule EOperationDecl ****************
  *
  * EOperationDecl returns ecore::EOperation:
- *   eAnnotations+=EAnnotationDecl* (unique?=Bag|ordered?=Random)* "op" (eGenericType=
- *   EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl (
- *   "," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl (","
- *   eParameters+=EParameterDecl)*)? ")" ("throws" eGenericExceptions+=
- *   EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)?
- *   ";";
+ *   eAnnotations+=EAnnotationDecl* (unique?=Bag|ordered?=Random)* "op" (
+ *   eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=
+ *   ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (
+ *   eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" (
+ *   "throws" eGenericExceptions+=EGenericTypeReferenceDecl (","
+ *   eGenericExceptions+=EGenericTypeReferenceDecl)*)? ";";
  *
  **/
 
-// eAnnotations+=EAnnotationDecl* (unique?=Bag|ordered?=Random)* "op" (eGenericType=
-// EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl (
-// "," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl (","
-// eParameters+=EParameterDecl)*)? ")" ("throws" eGenericExceptions+=
-// EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)?
-// ";"
+// eAnnotations+=EAnnotationDecl* (unique?=Bag|ordered?=Random)* "op" (eGenericType
+// =EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=
+// ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (
+// eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws"
+// eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=
+// EGenericTypeReferenceDecl)*)? ";"
 protected class EOperationDecl_Group extends GroupToken {
 	
 	public EOperationDecl_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -6435,7 +6444,7 @@ protected class EOperationDecl_UniqueAssignment_1_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("unique",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("unique");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEOperationDeclAccess().getUniqueBagTerminalRuleCall_1_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEOperationDeclAccess().getUniqueBagTerminalRuleCall_1_0_0();
 			return obj;
@@ -6470,7 +6479,7 @@ protected class EOperationDecl_OrderedAssignment_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ordered",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ordered");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEOperationDeclAccess().getOrderedRandomTerminalRuleCall_1_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEOperationDeclAccess().getOrderedRandomTerminalRuleCall_1_1_0();
 			return obj;
@@ -6620,7 +6629,7 @@ protected class EOperationDecl_NameAssignment_4 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEOperationDeclAccess().getNameIDTerminalRuleCall_4_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEOperationDeclAccess().getNameIDTerminalRuleCall_4_0();
 			return obj;
@@ -6630,8 +6639,8 @@ protected class EOperationDecl_NameAssignment_4 extends AssignmentToken  {
 
 }
 
-// ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)*
-// ">")?
+// ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=
+// ETypeParameterDecl)* ">")?
 protected class EOperationDecl_Group_5 extends GroupToken {
 	
 	public EOperationDecl_Group_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -7045,8 +7054,8 @@ protected class EOperationDecl_RightParenthesisKeyword_8 extends KeywordToken  {
 
 }
 
-// ("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=
-// EGenericTypeReferenceDecl)*)?
+// ("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions
+// +=EGenericTypeReferenceDecl)*)?
 protected class EOperationDecl_Group_9 extends GroupToken {
 	
 	public EOperationDecl_Group_9(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -7260,7 +7269,8 @@ protected class EOperationDecl_SemicolonKeyword_10 extends KeywordToken  {
 /************ begin Rule EParameterDecl ****************
  *
  * EParameterDecl returns ecore::EParameter:
- *   eAnnotations+=EAnnotationDecl* eGenericType=EGenericTypeReferenceDecl name=ID;
+ *   eAnnotations+=EAnnotationDecl* eGenericType=EGenericTypeReferenceDecl name=ID
+ * ;
  *
  **/
 
@@ -7409,7 +7419,7 @@ protected class EParameterDecl_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEParameterDeclAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEParameterDeclAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -7482,7 +7492,7 @@ protected class MapEntry_KeyAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("key",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("key");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getMapEntryAccess().getKeyIDTerminalRuleCall_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getMapEntryAccess().getKeyIDTerminalRuleCall_0_0();
 			return obj;
@@ -7538,7 +7548,7 @@ protected class MapEntry_ValueAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getMapEntryAccess().getValueSTRINGTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getMapEntryAccess().getValueSTRINGTerminalRuleCall_2_0();
 			return obj;

@@ -92,8 +92,8 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final RuleCall cImplementsTypeIDTerminalRuleCall_3_2_1_0_1 = (RuleCall)cImplementsTypeCrossReference_3_2_1_0.eContents().get(1);
 		
 		//Type:
-		//  "type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] (","
-		//  implements+=[Type])*)?;
+		//  "type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] (
+		//  "," implements+=[Type])*)?;
 		public ParserRule getRule() { return rule; }
 
 		//"type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] (","
@@ -202,8 +202,8 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//Type:
-	//  "type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] (","
-	//  implements+=[Type])*)?;
+	//  "type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] (
+	//  "," implements+=[Type])*)?;
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}
@@ -225,8 +225,9 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

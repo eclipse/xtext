@@ -142,7 +142,7 @@ protected class Model_FixAssignment_0_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("fix",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("fix");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getFixFixParserRuleCall_0_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getFixFixParserRuleCall_0_1_0();
 			return obj;
@@ -222,7 +222,7 @@ protected class Model_ErrorAssignment_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("error",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("error");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getErrorErrorParserRuleCall_1_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getErrorErrorParserRuleCall_1_1_0();
 			return obj;
@@ -302,7 +302,7 @@ protected class Model_TickAssignment_2_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("tick",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("tick");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getTickApostropheParserRuleCall_2_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getTickApostropheParserRuleCall_2_1_0();
 			return obj;

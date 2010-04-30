@@ -344,7 +344,7 @@ protected class ChoiceRule_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getChoiceRuleAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getChoiceRuleAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -361,13 +361,13 @@ protected class ChoiceRule_NameAssignment_2 extends AssignmentToken  {
 /************ begin Rule ReducibleRule ****************
  *
  * ReducibleRule returns ReducibleElement:
- *   "reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature
- *   +=TerminalRule)?;
+ *   "reducible" TerminalRule ({ReducibleComposite.actionFeature+=current}
+ *   actionFeature+=TerminalRule)?;
  *
  **/
 
-// "reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature
-// +=TerminalRule)?
+// "reducible" TerminalRule ({ReducibleComposite.actionFeature+=current}
+// actionFeature+=TerminalRule)?
 protected class ReducibleRule_Group extends GroupToken {
 	
 	public ReducibleRule_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -607,7 +607,7 @@ protected class TerminalRule_StringFeatureAssignment extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stringFeature",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stringFeature");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTerminalRuleAccess().getStringFeatureSTRINGTerminalRuleCall_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTerminalRuleAccess().getStringFeatureSTRINGTerminalRuleCall_0();
 			return obj;

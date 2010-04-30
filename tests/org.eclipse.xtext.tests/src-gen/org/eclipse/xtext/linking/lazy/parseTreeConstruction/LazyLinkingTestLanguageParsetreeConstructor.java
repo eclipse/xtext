@@ -104,15 +104,15 @@ protected class Model_TypesAssignment extends AssignmentToken  {
 /************ begin Rule Type ****************
  *
  * Type:
- *   "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[
- *   Property] "in" extends=[Type])? "{" properties+=Property* unresolvedProxyProperty+=
- *   UnresolvedProxyProperty* "}";
+ *   "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for"
+ *   parentId=[Property] "in" extends=[Type])? "{" properties+=Property*
+ *   unresolvedProxyProperty+=UnresolvedProxyProperty* "}";
  *
  **/
 
-// "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[
-// Property] "in" extends=[Type])? "{" properties+=Property* unresolvedProxyProperty+=
-// UnresolvedProxyProperty* "}"
+// "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for"
+// parentId=[Property] "in" extends=[Type])? "{" properties+=Property*
+// unresolvedProxyProperty+=UnresolvedProxyProperty* "}"
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -186,7 +186,7 @@ protected class Type_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTypeAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTypeAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -723,7 +723,7 @@ protected class Property_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -878,7 +878,7 @@ protected class UnresolvedProxyProperty_NameAssignment_2 extends AssignmentToken
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getUnresolvedProxyPropertyAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getUnresolvedProxyPropertyAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;

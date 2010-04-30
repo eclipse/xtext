@@ -259,7 +259,8 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	} 
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "ö" | "ä" | "ü" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//  "^"? ("a".."z" | "A".."Z" | "ö" | "ä" | "ü" | "_") ("a".."z" | "A".."Z" | "_"
+	//  | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
 	} 
@@ -271,8 +272,9 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

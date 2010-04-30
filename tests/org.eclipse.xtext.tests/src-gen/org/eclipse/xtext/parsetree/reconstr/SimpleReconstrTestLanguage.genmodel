@@ -9,6 +9,10 @@
     editorPluginID="org.eclipse.xtext.tests.editor">
   <genPackages prefix="Simplerewritetest" basePackage="org.eclipse.xtext.parsetree.reconstr"
       disposableProviderFactory="true" ecorePackage="SimpleReconstrTestLanguage.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="SimpleReconstrTestLanguage.ecore#//EnumBug310435Enum">
+      <genEnumLiterals ecoreEnumLiteral="SimpleReconstrTestLanguage.ecore#//EnumBug310435Enum/lit1"/>
+      <genEnumLiterals ecoreEnumLiteral="SimpleReconstrTestLanguage.ecore#//EnumBug310435Enum/lit2"/>
+    </genEnums>
     <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//Expression">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//Expression/em"/>
     </genClasses>
@@ -113,6 +117,12 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//Bug305171/y"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//Bug305171/z"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//Bug305171/name"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//Bug310435Enum">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//Bug310435Enum/lits"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//Bug310435Val">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleReconstrTestLanguage.ecore#//Bug310435Val/lits"/>
     </genClasses>
     <genClasses ecoreClass="SimpleReconstrTestLanguage.ecore#//Op">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleReconstrTestLanguage.ecore#//Op/values"/>

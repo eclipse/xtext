@@ -54,14 +54,15 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   "1" first=SimpleModel|"2" second=MandatoryModel|"3" thrird=LoopedModel|"4" forth=
- *   GroupLoopedModel|"5" fifth=LoopedAlternativeModel|"bug304681" model=Bug304681Model
- * ;
+ *   "1" first=SimpleModel|"2" second=MandatoryModel|"3" thrird=LoopedModel|"4"
+ *   forth=GroupLoopedModel|"5" fifth=LoopedAlternativeModel|"bug304681" model=
+ *   Bug304681Model;
  *
  **/
 
-// "1" first=SimpleModel|"2" second=MandatoryModel|"3" thrird=LoopedModel|"4" forth=
-// GroupLoopedModel|"5" fifth=LoopedAlternativeModel|"bug304681" model=Bug304681Model
+// "1" first=SimpleModel|"2" second=MandatoryModel|"3" thrird=LoopedModel|"4" forth
+// =GroupLoopedModel|"5" fifth=LoopedAlternativeModel|"bug304681" model=
+// Bug304681Model
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -642,13 +643,15 @@ protected class Model_ModelAssignment_5_1 extends AssignmentToken  {
 /************ begin Rule SimpleModel ****************
  *
  * SimpleModel:
- *   (visibility=( "public" | "private" | "protected" )? & static?="static"? & synchronized?=
- *   "synchronized"? & (abstract?="abstract"|final?="final")?) "class" name=ID "{" "}";
+ *   (visibility=( "public" | "private" | "protected" )? & static?="static"? &
+ *   synchronized?="synchronized"? & (abstract?="abstract"|final?="final")?)
+ *   "class" name=ID "{" "}";
  *
  **/
 
-// (visibility=( "public" | "private" | "protected" )? & static?="static"? & synchronized?=
-// "synchronized"? & (abstract?="abstract"|final?="final")?) "class" name=ID "{" "}"
+// (visibility=( "public" | "private" | "protected" )? & static?="static"? &
+// synchronized?="synchronized"? & (abstract?="abstract"|final?="final")?) "class"
+// name=ID "{" "}"
 protected class SimpleModel_Group extends GroupToken {
 	
 	public SimpleModel_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -677,8 +680,8 @@ protected class SimpleModel_Group extends GroupToken {
 
 }
 
-// visibility=( "public" | "private" | "protected" )? & static?="static"? & synchronized?=
-// "synchronized"? & (abstract?="abstract"|final?="final")?
+// visibility=( "public" | "private" | "protected" )? & static?="static"? &
+// synchronized?="synchronized"? & (abstract?="abstract"|final?="final")?
 protected class SimpleModel_UnorderedGroup_0 extends UnorderedGroupToken {
 	
 	public SimpleModel_UnorderedGroup_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -958,7 +961,7 @@ protected class SimpleModel_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getSimpleModelAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSimpleModelAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -1019,13 +1022,15 @@ protected class SimpleModel_RightCurlyBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule MandatoryModel ****************
  *
  * MandatoryModel:
- *   (visibility=( "public" | "private" | "protected" ) & static?="static" & synchronized?=
- *   "synchronized" & (abstract?="abstract"|final?="final")?) "class" name=ID "{" "}";
+ *   (visibility=( "public" | "private" | "protected" ) & static?="static" &
+ *   synchronized?="synchronized" & (abstract?="abstract"|final?="final")?)
+ *   "class" name=ID "{" "}";
  *
  **/
 
-// (visibility=( "public" | "private" | "protected" ) & static?="static" & synchronized?=
-// "synchronized" & (abstract?="abstract"|final?="final")?) "class" name=ID "{" "}"
+// (visibility=( "public" | "private" | "protected" ) & static?="static" &
+// synchronized?="synchronized" & (abstract?="abstract"|final?="final")?) "class"
+// name=ID "{" "}"
 protected class MandatoryModel_Group extends GroupToken {
 	
 	public MandatoryModel_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1054,8 +1059,8 @@ protected class MandatoryModel_Group extends GroupToken {
 
 }
 
-// visibility=( "public" | "private" | "protected" ) & static?="static" & synchronized?=
-// "synchronized" & (abstract?="abstract"|final?="final")?
+// visibility=( "public" | "private" | "protected" ) & static?="static" &
+// synchronized?="synchronized" & (abstract?="abstract"|final?="final")?
 protected class MandatoryModel_UnorderedGroup_0 extends UnorderedGroupToken {
 	
 	public MandatoryModel_UnorderedGroup_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1328,7 +1333,7 @@ protected class MandatoryModel_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getMandatoryModelAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getMandatoryModelAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -1389,13 +1394,15 @@ protected class MandatoryModel_RightCurlyBracketKeyword_4 extends KeywordToken  
 /************ begin Rule LoopedModel ****************
  *
  * LoopedModel:
- *   (visibility+=( "public" | "private" | "protected" )* & static+="static"* & synchronized+=
- *   "synchronized"* & (abstract+="abstract"|final+="final")*) "class" name=ID "{" "}";
+ *   (visibility+=( "public" | "private" | "protected" )* & static+="static"* &
+ *   synchronized+="synchronized"* & (abstract+="abstract"|final+="final")*)
+ *   "class" name=ID "{" "}";
  *
  **/
 
-// (visibility+=( "public" | "private" | "protected" )* & static+="static"* & synchronized+=
-// "synchronized"* & (abstract+="abstract"|final+="final")*) "class" name=ID "{" "}"
+// (visibility+=( "public" | "private" | "protected" )* & static+="static"* &
+// synchronized+="synchronized"* & (abstract+="abstract"|final+="final")*) "class"
+// name=ID "{" "}"
 protected class LoopedModel_Group extends GroupToken {
 	
 	public LoopedModel_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1424,8 +1431,8 @@ protected class LoopedModel_Group extends GroupToken {
 
 }
 
-// visibility+=( "public" | "private" | "protected" )* & static+="static"* & synchronized+=
-// "synchronized"* & (abstract+="abstract"|final+="final")*
+// visibility+=( "public" | "private" | "protected" )* & static+="static"* &
+// synchronized+="synchronized"* & (abstract+="abstract"|final+="final")*
 protected class LoopedModel_UnorderedGroup_0 extends UnorderedGroupToken {
 	
 	public LoopedModel_UnorderedGroup_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1710,7 +1717,7 @@ protected class LoopedModel_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getLoopedModelAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getLoopedModelAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -1771,13 +1778,15 @@ protected class LoopedModel_RightCurlyBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule GroupLoopedModel ****************
  *
  * GroupLoopedModel:
- *   (visibility+=( "public" | "private" | "protected" ) & static+="static" & synchronized+=
- *   "synchronized" & (abstract+="abstract"|final+="final"))* "class" name=ID "{" "}";
+ *   (visibility+=( "public" | "private" | "protected" ) & static+="static" &
+ *   synchronized+="synchronized" & (abstract+="abstract"|final+="final"))*
+ *   "class" name=ID "{" "}";
  *
  **/
 
-// (visibility+=( "public" | "private" | "protected" ) & static+="static" & synchronized+=
-// "synchronized" & (abstract+="abstract"|final+="final"))* "class" name=ID "{" "}"
+// (visibility+=( "public" | "private" | "protected" ) & static+="static" &
+// synchronized+="synchronized" & (abstract+="abstract"|final+="final"))* "class"
+// name=ID "{" "}"
 protected class GroupLoopedModel_Group extends GroupToken {
 	
 	public GroupLoopedModel_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1806,8 +1815,8 @@ protected class GroupLoopedModel_Group extends GroupToken {
 
 }
 
-// (visibility+=( "public" | "private" | "protected" ) & static+="static" & synchronized+=
-// "synchronized" & (abstract+="abstract"|final+="final"))*
+// (visibility+=( "public" | "private" | "protected" ) & static+="static" &
+// synchronized+="synchronized" & (abstract+="abstract"|final+="final"))*
 protected class GroupLoopedModel_UnorderedGroup_0 extends UnorderedGroupToken {
 	
 	public GroupLoopedModel_UnorderedGroup_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2080,7 +2089,7 @@ protected class GroupLoopedModel_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getGroupLoopedModelAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getGroupLoopedModelAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -2141,15 +2150,15 @@ protected class GroupLoopedModel_RightCurlyBracketKeyword_4 extends KeywordToken
 /************ begin Rule LoopedAlternativeModel ****************
  *
  * LoopedAlternativeModel:
- *   (visibility+=( "public" | "private" | "protected" )|static+="static"|synchronized+=
- *   "synchronized"|(abstract+="abstract"|final+="final")|"before" "after"*)* "class"
- *   name=ID "{" "}";
+ *   (visibility+=( "public" | "private" | "protected" )|static+="static"|
+ *   synchronized+="synchronized"|(abstract+="abstract"|final+="final")|"before"
+ *   "after"*)* "class" name=ID "{" "}";
  *
  **/
 
-// (visibility+=( "public" | "private" | "protected" )|static+="static"|synchronized+=
-// "synchronized"|(abstract+="abstract"|final+="final")|"before" "after"*)* "class"
-// name=ID "{" "}"
+// (visibility+=( "public" | "private" | "protected" )|static+="static"|
+// synchronized+="synchronized"|(abstract+="abstract"|final+="final")|"before"
+// "after"*)* "class" name=ID "{" "}"
 protected class LoopedAlternativeModel_Group extends GroupToken {
 	
 	public LoopedAlternativeModel_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2178,8 +2187,9 @@ protected class LoopedAlternativeModel_Group extends GroupToken {
 
 }
 
-// (visibility+=( "public" | "private" | "protected" )|static+="static"|synchronized+=
-// "synchronized"|(abstract+="abstract"|final+="final")|"before" "after"*)*
+// (visibility+=( "public" | "private" | "protected" )|static+="static"|
+// synchronized+="synchronized"|(abstract+="abstract"|final+="final")|"before"
+// "after"*)*
 protected class LoopedAlternativeModel_Alternatives_0 extends AlternativesToken {
 
 	public LoopedAlternativeModel_Alternatives_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2455,7 +2465,7 @@ protected class LoopedAlternativeModel_NameAssignment_2 extends AssignmentToken 
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getLoopedAlternativeModelAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getLoopedAlternativeModelAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -2516,13 +2526,15 @@ protected class LoopedAlternativeModel_RightCurlyBracketKeyword_4 extends Keywor
 /************ begin Rule Bug304681Model ****************
  *
  * Bug304681Model:
- *   "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & (
- *   "uid" uid=STRING ";")? & (flag?="flag" ";")? & features+=Bug304681Feature*) "}";
+ *   "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING
+ *   ";")? & ("uid" uid=STRING ";")? & (flag?="flag" ";")? & features+=
+ *   Bug304681Feature*) "}";
  *
  **/
 
-// "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & (
-// "uid" uid=STRING ";")? & (flag?="flag" ";")? & features+=Bug304681Feature*) "}"
+// "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";"
+// )? & ("uid" uid=STRING ";")? & (flag?="flag" ";")? & features+=Bug304681Feature
+// *) "}"
 protected class Bug304681Model_Group extends GroupToken {
 	
 	public Bug304681Model_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2572,8 +2584,8 @@ protected class Bug304681Model_LeftCurlyBracketKeyword_0 extends KeywordToken  {
 
 }
 
-// ("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid"
-// uid=STRING ";")? & (flag?="flag" ";")? & features+=Bug304681Feature*
+// ("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? &
+// ("uid" uid=STRING ";")? & (flag?="flag" ";")? & features+=Bug304681Feature*
 protected class Bug304681Model_UnorderedGroup_1 extends UnorderedGroupToken {
 	
 	public Bug304681Model_UnorderedGroup_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2668,7 +2680,7 @@ protected class Bug304681Model_ShortDescriptionAssignment_1_0_1 extends Assignme
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("shortDescription",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("shortDescription");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getBug304681ModelAccess().getShortDescriptionSTRINGTerminalRuleCall_1_0_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getBug304681ModelAccess().getShortDescriptionSTRINGTerminalRuleCall_1_0_1_0();
 			return obj;
@@ -2770,7 +2782,7 @@ protected class Bug304681Model_LongDescriptionAssignment_1_1_1 extends Assignmen
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("longDescription",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("longDescription");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getBug304681ModelAccess().getLongDescriptionSTRINGTerminalRuleCall_1_1_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getBug304681ModelAccess().getLongDescriptionSTRINGTerminalRuleCall_1_1_1_0();
 			return obj;
@@ -2873,7 +2885,7 @@ protected class Bug304681Model_UidAssignment_1_2_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("uid",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("uid");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getBug304681ModelAccess().getUidSTRINGTerminalRuleCall_1_2_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getBug304681ModelAccess().getUidSTRINGTerminalRuleCall_1_2_1_0();
 			return obj;
@@ -3271,7 +3283,7 @@ protected class Bug304681Attribute_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getBug304681AttributeAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getBug304681AttributeAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -3388,7 +3400,7 @@ protected class Bug304681Reference_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getBug304681ReferenceAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getBug304681ReferenceAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;

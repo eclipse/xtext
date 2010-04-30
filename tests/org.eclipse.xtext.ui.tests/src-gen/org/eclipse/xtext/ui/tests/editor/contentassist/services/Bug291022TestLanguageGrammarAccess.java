@@ -33,7 +33,8 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//RootModel returns ModelElement:
-		//  ({RootModel} name=ID type=[ModelElement]? ("{" elements+=ModelAttribute* "}")?)?;
+		//  ({RootModel} name=ID type=[ModelElement]? ("{" elements+=ModelAttribute* "}")
+		//  ?)?;
 		public ParserRule getRule() { return rule; }
 
 		//({RootModel} name=ID type=[ModelElement]? ("{" elements+=ModelAttribute* "}")?)?
@@ -95,12 +96,12 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_3_1_2 = (Keyword)cGroup_3_1.eContents().get(2);
 		
 		//ModelElement:
-		//  firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]? (";"|
-		//  "{" elements+=ModelAttribute* "}");
+		//  firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]?
+		//  (";"|"{" elements+=ModelAttribute* "}");
 		public ParserRule getRule() { return rule; }
 
-		//firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]? (";"|
-		//"{" elements+=ModelAttribute* "}")
+		//firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]? (
+		//";"|"{" elements+=ModelAttribute* "}")
 		public Group getGroup() { return cGroup; }
 
 		//firstReference=[ModelElement]
@@ -239,7 +240,8 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//RootModel returns ModelElement:
-	//  ({RootModel} name=ID type=[ModelElement]? ("{" elements+=ModelAttribute* "}")?)?;
+	//  ({RootModel} name=ID type=[ModelElement]? ("{" elements+=ModelAttribute* "}")
+	//  ?)?;
 	public RootModelElements getRootModelAccess() {
 		return (pRootModel != null) ? pRootModel : (pRootModel = new RootModelElements());
 	}
@@ -249,8 +251,8 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//ModelElement:
-	//  firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]? (";"|
-	//  "{" elements+=ModelAttribute* "}");
+	//  firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]?
+	//  (";"|"{" elements+=ModelAttribute* "}");
 	public ModelElementElements getModelElementAccess() {
 		return (pModelElement != null) ? pModelElement : (pModelElement = new ModelElementElements());
 	}
@@ -292,8 +294,9 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

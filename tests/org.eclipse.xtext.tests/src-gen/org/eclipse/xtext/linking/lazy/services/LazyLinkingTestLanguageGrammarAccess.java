@@ -65,14 +65,14 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//Type:
-		//  "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[
-		//  Property] "in" extends=[Type])? "{" properties+=Property* unresolvedProxyProperty+=
-		//  UnresolvedProxyProperty* "}";
+		//  "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for"
+		//  parentId=[Property] "in" extends=[Type])? "{" properties+=Property*
+		//  unresolvedProxyProperty+=UnresolvedProxyProperty* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[
-		//Property] "in" extends=[Type])? "{" properties+=Property* unresolvedProxyProperty+=
-		//UnresolvedProxyProperty* "}"
+		//"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for"
+		//parentId=[Property] "in" extends=[Type])? "{" properties+=Property*
+		//unresolvedProxyProperty+=UnresolvedProxyProperty* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"type"
@@ -271,9 +271,9 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Type:
-	//  "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[
-	//  Property] "in" extends=[Type])? "{" properties+=Property* unresolvedProxyProperty+=
-	//  UnresolvedProxyProperty* "}";
+	//  "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for"
+	//  parentId=[Property] "in" extends=[Type])? "{" properties+=Property*
+	//  unresolvedProxyProperty+=UnresolvedProxyProperty* "}";
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}
@@ -315,8 +315,9 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

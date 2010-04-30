@@ -179,7 +179,7 @@ protected class Model_StringsAssignment_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("strings",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("strings");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getStringsSTRINGTerminalRuleCall_1_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getStringsSTRINGTerminalRuleCall_1_1_0();
 			return obj;
@@ -304,7 +304,7 @@ protected class Model_KeysAssignment_2_1_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("keys",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("keys");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getKeysSTRINGTerminalRuleCall_2_1_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getKeysSTRINGTerminalRuleCall_2_1_0_0();
 			return obj;
@@ -338,7 +338,7 @@ protected class Model_ValuesAssignment_2_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("values",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("values");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getValuesSTRINGTerminalRuleCall_2_1_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getValuesSTRINGTerminalRuleCall_2_1_1_0();
 			return obj;
@@ -623,7 +623,7 @@ protected class SubModel_StringsAssignment_1_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("strings",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("strings");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getSubModelAccess().getStringsSTRINGTerminalRuleCall_1_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSubModelAccess().getStringsSTRINGTerminalRuleCall_1_2_0();
 			return obj;

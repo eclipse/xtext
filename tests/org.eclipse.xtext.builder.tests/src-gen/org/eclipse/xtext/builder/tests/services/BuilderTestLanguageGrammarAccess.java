@@ -51,7 +51,8 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Namespace:
-		//  "namespace" name=QualifiedName "{" imports+=Import* elements+=NamedElement* "}";
+		//  "namespace" name=QualifiedName "{" imports+=Import* elements+=NamedElement*
+		//  "}";
 		public ParserRule getRule() { return rule; }
 
 		//"namespace" name=QualifiedName "{" imports+=Import* elements+=NamedElement* "}"
@@ -132,8 +133,9 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final RuleCall cOtherRefsElementQualifiedNameParserRuleCall_3_2_1_0_1 = (RuleCall)cOtherRefsElementCrossReference_3_2_1_0.eContents().get(1);
 		
 		//Element:
-		//  "object" name=ID ("references" references=[Element|QualifiedName])? ("otherRefs"
-		//  otherRefs+=[Element|QualifiedName] ("," otherRefs+=[Element|QualifiedName])*)?;
+		//  "object" name=ID ("references" references=[Element|QualifiedName])? (
+		//  "otherRefs" otherRefs+=[Element|QualifiedName] ("," otherRefs+=[Element|
+		//  QualifiedName])*)?;
 		public ParserRule getRule() { return rule; }
 
 		//"object" name=ID ("references" references=[Element|QualifiedName])? ("otherRefs"
@@ -263,7 +265,8 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//Namespace:
-	//  "namespace" name=QualifiedName "{" imports+=Import* elements+=NamedElement* "}";
+	//  "namespace" name=QualifiedName "{" imports+=Import* elements+=NamedElement*
+	//  "}";
 	public NamespaceElements getNamespaceAccess() {
 		return (pNamespace != null) ? pNamespace : (pNamespace = new NamespaceElements());
 	}
@@ -283,8 +286,9 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//Element:
-	//  "object" name=ID ("references" references=[Element|QualifiedName])? ("otherRefs"
-	//  otherRefs+=[Element|QualifiedName] ("," otherRefs+=[Element|QualifiedName])*)?;
+	//  "object" name=ID ("references" references=[Element|QualifiedName])? (
+	//  "otherRefs" otherRefs+=[Element|QualifiedName] ("," otherRefs+=[Element|
+	//  QualifiedName])*)?;
 	public ElementElements getElementAccess() {
 		return (pElement != null) ? pElement : (pElement = new ElementElements());
 	}
@@ -316,8 +320,9 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

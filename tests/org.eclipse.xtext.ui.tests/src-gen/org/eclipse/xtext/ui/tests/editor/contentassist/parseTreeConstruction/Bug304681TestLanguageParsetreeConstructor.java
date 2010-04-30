@@ -383,7 +383,7 @@ protected class PackageDefinition_NamespaceAssignment_2 extends AssignmentToken 
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("namespace",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("namespace");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getPackageDefinitionAccess().getNamespaceIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getPackageDefinitionAccess().getNamespaceIDTerminalRuleCall_2_0();
 			return obj;
@@ -469,19 +469,21 @@ protected class PackageDefinition_ContentsAssignment_4 extends AssignmentToken  
 /************ begin Rule Object ****************
  *
  * Object:
- *   (enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends" parent=[
- *   Object])? "{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription"
- *   longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT ";")? & (cloneable?=
- *   "cloneable" ";")? & features+=Feature* & ("before" features+=Feature* "after")? & (
- *   "optionalLoop" features+=Feature*)? & ("mandatoryLoop" features+=Feature+)?) "}";
+ *   (enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends" parent
+ *   =[Object])? "{" (("shortDescription" shortDescription=STRING ";")? & (
+ *   "longDescription" longDescription=STRING ";")? & ("serialUID"
+ *   serialVersionUID=INT ";")? & (cloneable?="cloneable" ";")? & features+=
+ *   Feature* & ("before" features+=Feature* "after")? & ("optionalLoop" features
+ *   +=Feature*)? & ("mandatoryLoop" features+=Feature+)?) "}";
  *
  **/
 
 // (enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends" parent=[
-// Object])? "{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription"
-// longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT ";")? & (cloneable?=
-// "cloneable" ";")? & features+=Feature* & ("before" features+=Feature* "after")? & (
-// "optionalLoop" features+=Feature*)? & ("mandatoryLoop" features+=Feature+)?) "}"
+// Object])? "{" (("shortDescription" shortDescription=STRING ";")? & (
+// "longDescription" longDescription=STRING ";")? & ("serialUID" serialVersionUID=
+// INT ";")? & (cloneable?="cloneable" ";")? & features+=Feature* & ("before"
+// features+=Feature* "after")? & ("optionalLoop" features+=Feature*)? & (
+// "mandatoryLoop" features+=Feature+)?) "}"
 protected class Object_Group extends GroupToken {
 	
 	public Object_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -646,7 +648,7 @@ protected class Object_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getObjectAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getObjectAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -762,9 +764,10 @@ protected class Object_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 }
 
 // ("shortDescription" shortDescription=STRING ";")? & ("longDescription"
-// longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT ";")? & (cloneable?=
-// "cloneable" ";")? & features+=Feature* & ("before" features+=Feature* "after")? & (
-// "optionalLoop" features+=Feature*)? & ("mandatoryLoop" features+=Feature+)?
+// longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT ";")? & (
+// cloneable?="cloneable" ";")? & features+=Feature* & ("before" features+=Feature
+// * "after")? & ("optionalLoop" features+=Feature*)? & ("mandatoryLoop" features
+// +=Feature+)?
 protected class Object_UnorderedGroup_5 extends UnorderedGroupToken {
 	
 	public Object_UnorderedGroup_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -862,7 +865,7 @@ protected class Object_ShortDescriptionAssignment_5_0_1 extends AssignmentToken 
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("shortDescription",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("shortDescription");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getObjectAccess().getShortDescriptionSTRINGTerminalRuleCall_5_0_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getObjectAccess().getShortDescriptionSTRINGTerminalRuleCall_5_0_1_0();
 			return obj;
@@ -964,7 +967,7 @@ protected class Object_LongDescriptionAssignment_5_1_1 extends AssignmentToken  
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("longDescription",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("longDescription");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getObjectAccess().getLongDescriptionSTRINGTerminalRuleCall_5_1_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getObjectAccess().getLongDescriptionSTRINGTerminalRuleCall_5_1_1_0();
 			return obj;
@@ -1067,7 +1070,7 @@ protected class Object_SerialVersionUIDAssignment_5_2_1 extends AssignmentToken 
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("serialVersionUID",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("serialVersionUID");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getObjectAccess().getSerialVersionUIDINTTerminalRuleCall_5_2_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getObjectAccess().getSerialVersionUIDINTTerminalRuleCall_5_2_1_0();
 			return obj;
@@ -1781,7 +1784,7 @@ protected class Attribute_TypeAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAttributeAccess().getTypeIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAttributeAccess().getTypeIDTerminalRuleCall_1_0();
 			return obj;
@@ -1815,7 +1818,7 @@ protected class Attribute_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -1855,14 +1858,14 @@ protected class Attribute_SemicolonKeyword_3 extends KeywordToken  {
  *
  * Reference:
  *   "Reference" type=[Object] many?="*"? name=ID ("{" (("shortDescription"
- *   shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?) "}"|
- *   ";");
+ *   shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";"
+ *   )?) "}"|";");
  *
  **/
 
 // "Reference" type=[Object] many?="*"? name=ID ("{" (("shortDescription"
-// shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?) "}"|
-// ";")
+// shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?
+// ) "}"|";")
 protected class Reference_Group extends GroupToken {
 	
 	public Reference_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2008,7 +2011,7 @@ protected class Reference_NameAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_3_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_3_0();
 			return obj;
@@ -2179,7 +2182,7 @@ protected class Reference_ShortDescriptionAssignment_4_0_1_0_1 extends Assignmen
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("shortDescription",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("shortDescription");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getReferenceAccess().getShortDescriptionSTRINGTerminalRuleCall_4_0_1_0_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getReferenceAccess().getShortDescriptionSTRINGTerminalRuleCall_4_0_1_0_1_0();
 			return obj;
@@ -2281,7 +2284,7 @@ protected class Reference_LongDescriptionAssignment_4_0_1_1_1 extends Assignment
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("longDescription",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("longDescription");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getReferenceAccess().getLongDescriptionSTRINGTerminalRuleCall_4_0_1_1_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getReferenceAccess().getLongDescriptionSTRINGTerminalRuleCall_4_0_1_1_1_0();
 			return obj;
@@ -2474,7 +2477,7 @@ protected class PackageDefinition2_NamespaceAssignment_2 extends AssignmentToken
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("namespace",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("namespace");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getPackageDefinition2Access().getNamespaceIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getPackageDefinition2Access().getNamespaceIDTerminalRuleCall_2_0();
 			return obj;
@@ -2560,17 +2563,18 @@ protected class PackageDefinition2_ContentsAssignment_4 extends AssignmentToken 
 /************ begin Rule Object2 ****************
  *
  * Object2 returns Object:
- *   (enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends" parent=[
- *   Object])? "{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription"
- *   longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT ";")? & (cloneable?=
- *   "cloneable" ";")? & features+=Feature2*) "}";
+ *   (enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends" parent
+ *   =[Object])? "{" (("shortDescription" shortDescription=STRING ";")? & (
+ *   "longDescription" longDescription=STRING ";")? & ("serialUID"
+ *   serialVersionUID=INT ";")? & (cloneable?="cloneable" ";")? & features+=
+ *   Feature2*) "}";
  *
  **/
 
 // (enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends" parent=[
-// Object])? "{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription"
-// longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT ";")? & (cloneable?=
-// "cloneable" ";")? & features+=Feature2*) "}"
+// Object])? "{" (("shortDescription" shortDescription=STRING ";")? & (
+// "longDescription" longDescription=STRING ";")? & ("serialUID" serialVersionUID=
+// INT ";")? & (cloneable?="cloneable" ";")? & features+=Feature2*) "}"
 protected class Object2_Group extends GroupToken {
 	
 	public Object2_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2735,7 +2739,7 @@ protected class Object2_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getObject2Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getObject2Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -2851,8 +2855,8 @@ protected class Object2_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 }
 
 // ("shortDescription" shortDescription=STRING ";")? & ("longDescription"
-// longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT ";")? & (cloneable?=
-// "cloneable" ";")? & features+=Feature2*
+// longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT ";")? & (
+// cloneable?="cloneable" ";")? & features+=Feature2*
 protected class Object2_UnorderedGroup_5 extends UnorderedGroupToken {
 	
 	public Object2_UnorderedGroup_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2947,7 +2951,7 @@ protected class Object2_ShortDescriptionAssignment_5_0_1 extends AssignmentToken
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("shortDescription",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("shortDescription");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getObject2Access().getShortDescriptionSTRINGTerminalRuleCall_5_0_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getObject2Access().getShortDescriptionSTRINGTerminalRuleCall_5_0_1_0();
 			return obj;
@@ -3049,7 +3053,7 @@ protected class Object2_LongDescriptionAssignment_5_1_1 extends AssignmentToken 
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("longDescription",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("longDescription");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getObject2Access().getLongDescriptionSTRINGTerminalRuleCall_5_1_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getObject2Access().getLongDescriptionSTRINGTerminalRuleCall_5_1_1_0();
 			return obj;
@@ -3152,7 +3156,7 @@ protected class Object2_SerialVersionUIDAssignment_5_2_1 extends AssignmentToken
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("serialVersionUID",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("serialVersionUID");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getObject2Access().getSerialVersionUIDINTTerminalRuleCall_5_2_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getObject2Access().getSerialVersionUIDINTTerminalRuleCall_5_2_1_0();
 			return obj;
@@ -3472,17 +3476,17 @@ protected class Feature2_Reference2ParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Attribute2 ****************
  *
  * Attribute2 returns Attribut:
- *   "Attribute" type=ID name=ID ("{" (("shortDescription" shortDescription=STRING ";")? & (
- *   "longDescription" longDescription=STRING ";")? & constraintDefinitions+=
- *   ConstraintDefinition* & (required?="required" ";")? & (technical?="technical" ";")?)
- *   "}"|";");
+ *   "Attribute" type=ID name=ID ("{" (("shortDescription" shortDescription=STRING
+ *   ";")? & ("longDescription" longDescription=STRING ";")? &
+ *   constraintDefinitions+=ConstraintDefinition* & (required?="required" ";")? &
+ *   (technical?="technical" ";")?) "}"|";");
  *
  **/
 
-// "Attribute" type=ID name=ID ("{" (("shortDescription" shortDescription=STRING ";")? & (
-// "longDescription" longDescription=STRING ";")? & constraintDefinitions+=
-// ConstraintDefinition* & (required?="required" ";")? & (technical?="technical" ";")?)
-// "}"|";")
+// "Attribute" type=ID name=ID ("{" (("shortDescription" shortDescription=STRING
+// ";")? & ("longDescription" longDescription=STRING ";")? & constraintDefinitions
+// +=ConstraintDefinition* & (required?="required" ";")? & (technical?="technical"
+// ";")?) "}"|";")
 protected class Attribute2_Group extends GroupToken {
 	
 	public Attribute2_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -3556,7 +3560,7 @@ protected class Attribute2_TypeAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAttribute2Access().getTypeIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAttribute2Access().getTypeIDTerminalRuleCall_1_0();
 			return obj;
@@ -3590,7 +3594,7 @@ protected class Attribute2_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAttribute2Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAttribute2Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -3767,7 +3771,7 @@ protected class Attribute2_ShortDescriptionAssignment_3_0_1_0_1 extends Assignme
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("shortDescription",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("shortDescription");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAttribute2Access().getShortDescriptionSTRINGTerminalRuleCall_3_0_1_0_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAttribute2Access().getShortDescriptionSTRINGTerminalRuleCall_3_0_1_0_1_0();
 			return obj;
@@ -3869,7 +3873,7 @@ protected class Attribute2_LongDescriptionAssignment_3_0_1_1_1 extends Assignmen
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("longDescription",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("longDescription");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAttribute2Access().getLongDescriptionSTRINGTerminalRuleCall_3_0_1_1_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAttribute2Access().getLongDescriptionSTRINGTerminalRuleCall_3_0_1_1_1_0();
 			return obj;
@@ -4171,14 +4175,14 @@ protected class Attribute2_SemicolonKeyword_3_1 extends KeywordToken  {
  *
  * Reference2 returns Reference:
  *   "Reference" type=[Object] many?="*"? name=ID ("{" (("shortDescription"
- *   shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?) "}"|
- *   ";");
+ *   shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";"
+ *   )?) "}"|";");
  *
  **/
 
 // "Reference" type=[Object] many?="*"? name=ID ("{" (("shortDescription"
-// shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?) "}"|
-// ";")
+// shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?
+// ) "}"|";")
 protected class Reference2_Group extends GroupToken {
 	
 	public Reference2_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -4324,7 +4328,7 @@ protected class Reference2_NameAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getReference2Access().getNameIDTerminalRuleCall_3_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getReference2Access().getNameIDTerminalRuleCall_3_0();
 			return obj;
@@ -4495,7 +4499,7 @@ protected class Reference2_ShortDescriptionAssignment_4_0_1_0_1 extends Assignme
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("shortDescription",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("shortDescription");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getReference2Access().getShortDescriptionSTRINGTerminalRuleCall_4_0_1_0_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getReference2Access().getShortDescriptionSTRINGTerminalRuleCall_4_0_1_0_1_0();
 			return obj;
@@ -4597,7 +4601,7 @@ protected class Reference2_LongDescriptionAssignment_4_0_1_1_1 extends Assignmen
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("longDescription",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("longDescription");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getReference2Access().getLongDescriptionSTRINGTerminalRuleCall_4_0_1_1_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getReference2Access().getLongDescriptionSTRINGTerminalRuleCall_4_0_1_1_1_0();
 			return obj;
@@ -4684,13 +4688,13 @@ protected class Reference2_SemicolonKeyword_4_1 extends KeywordToken  {
 /************ begin Rule ConstraintDefinition ****************
  *
  * ConstraintDefinition:
- *   "constraint" type=ID "{" ("parameters" parameters+=STRING* ";" & "message" message=
- *   STRING ";") "}";
+ *   "constraint" type=ID "{" ("parameters" parameters+=STRING* ";" & "message"
+ *   message=STRING ";") "}";
  *
  **/
 
-// "constraint" type=ID "{" ("parameters" parameters+=STRING* ";" & "message" message=
-// STRING ";") "}"
+// "constraint" type=ID "{" ("parameters" parameters+=STRING* ";" & "message"
+// message=STRING ";") "}"
 protected class ConstraintDefinition_Group extends GroupToken {
 	
 	public ConstraintDefinition_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -4764,7 +4768,7 @@ protected class ConstraintDefinition_TypeAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getConstraintDefinitionAccess().getTypeIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getConstraintDefinitionAccess().getTypeIDTerminalRuleCall_1_0();
 			return obj;
@@ -4887,7 +4891,7 @@ protected class ConstraintDefinition_ParametersAssignment_3_0_1 extends Assignme
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("parameters",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("parameters");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getConstraintDefinitionAccess().getParametersSTRINGTerminalRuleCall_3_0_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getConstraintDefinitionAccess().getParametersSTRINGTerminalRuleCall_3_0_1_0();
 			return obj;
@@ -4989,7 +4993,7 @@ protected class ConstraintDefinition_MessageAssignment_3_1_1 extends AssignmentT
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("message",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("message");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getConstraintDefinitionAccess().getMessageSTRINGTerminalRuleCall_3_1_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getConstraintDefinitionAccess().getMessageSTRINGTerminalRuleCall_3_1_1_0();
 			return obj;

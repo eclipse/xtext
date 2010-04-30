@@ -86,7 +86,8 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cEndKeyword_1_1_2 = (Keyword)cGroup_1_1.eContents().get(2);
 		
 		//SExpression:
-		//  {SExpression} ("(" element+=Expression* ")"|"begin" element+=Expression* "end");
+		//  {SExpression} ("(" element+=Expression* ")"|"begin" element+=Expression*
+		//  "end");
 		public ParserRule getRule() { return rule; }
 
 		//{SExpression} ("(" element+=Expression* ")"|"begin" element+=Expression* "end")
@@ -218,7 +219,8 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SExpression:
-	//  {SExpression} ("(" element+=Expression* ")"|"begin" element+=Expression* "end");
+	//  {SExpression} ("(" element+=Expression* ")"|"begin" element+=Expression*
+	//  "end");
 	public SExpressionElements getSExpressionAccess() {
 		return (pSExpression != null) ? pSExpression : (pSExpression = new SExpressionElements());
 	}
@@ -260,8 +262,9 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

@@ -73,7 +73,7 @@ protected class Start_FeatureAAssignment extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("featureA",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("featureA");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0();
 			return obj;

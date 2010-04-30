@@ -75,18 +75,20 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cTypeBug305577_2ParserRuleCall_20 = (RuleCall)cAlternatives.eContents().get(20);
 		private final RuleCall cParensParserRuleCall_21 = (RuleCall)cAlternatives.eContents().get(21);
 		private final RuleCall cBug305171ParserRuleCall_22 = (RuleCall)cAlternatives.eContents().get(22);
+		private final RuleCall cBug310435ValParserRuleCall_23 = (RuleCall)cAlternatives.eContents().get(23);
+		private final RuleCall cBug310435EnumParserRuleCall_24 = (RuleCall)cAlternatives.eContents().get(24);
 		
 		//Term returns Expression:
 		//  Atom|TwoNumbers|ManyStrings|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
 		//  Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
 		//  EmptyObjectBug284850|MultiInheritanceBug280439|EObjectRef|TypeBug305577_1|
-		//  TypeBug305577_2|Parens|Bug305171;
+		//  TypeBug305577_2|Parens|Bug305171|Bug310435Val|Bug310435Enum;
 		public ParserRule getRule() { return rule; }
 
 		//Atom|TwoNumbers|ManyStrings|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
 		//Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
 		//EmptyObjectBug284850|MultiInheritanceBug280439|EObjectRef|TypeBug305577_1|
-		//TypeBug305577_2|Parens|Bug305171
+		//TypeBug305577_2|Parens|Bug305171|Bug310435Val|Bug310435Enum
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Atom
@@ -157,6 +159,12 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 
 		//Bug305171
 		public RuleCall getBug305171ParserRuleCall_22() { return cBug305171ParserRuleCall_22; }
+
+		//Bug310435Val
+		public RuleCall getBug310435ValParserRuleCall_23() { return cBug310435ValParserRuleCall_23; }
+
+		//Bug310435Enum
+		public RuleCall getBug310435EnumParserRuleCall_24() { return cBug310435EnumParserRuleCall_24; }
 	}
 
 	public class AtomElements extends AbstractParserRuleElementFinder {
@@ -1481,7 +1489,143 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 	}
+
+	public class Bug310435EnumElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Bug310435Enum");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitTwoDigitZeroKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
+		private final Keyword cKw1Keyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
+		private final Assignment cLitsAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
+		private final RuleCall cLitsEnumBug310435Lit1EnumRuleCall_1_0_1_0 = (RuleCall)cLitsAssignment_1_0_1.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
+		private final Keyword cKw2Keyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Assignment cLitsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cLitsEnumBug310435Lit2EnumRuleCall_1_1_1_0 = (RuleCall)cLitsAssignment_1_1_1.eContents().get(0);
+		
+		//Bug310435Enum:
+		//  "#20" ("kw1" lits+=EnumBug310435Lit1|"kw2" lits+=EnumBug310435Lit2)*;
+		public ParserRule getRule() { return rule; }
+
+		//"#20" ("kw1" lits+=EnumBug310435Lit1|"kw2" lits+=EnumBug310435Lit2)*
+		public Group getGroup() { return cGroup; }
+
+		//"#20"
+		public Keyword getNumberSignDigitTwoDigitZeroKeyword_0() { return cNumberSignDigitTwoDigitZeroKeyword_0; }
+
+		//("kw1" lits+=EnumBug310435Lit1|"kw2" lits+=EnumBug310435Lit2)*
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//"kw1" lits+=EnumBug310435Lit1
+		public Group getGroup_1_0() { return cGroup_1_0; }
+
+		//"kw1"
+		public Keyword getKw1Keyword_1_0_0() { return cKw1Keyword_1_0_0; }
+
+		//lits+=EnumBug310435Lit1
+		public Assignment getLitsAssignment_1_0_1() { return cLitsAssignment_1_0_1; }
+
+		//EnumBug310435Lit1
+		public RuleCall getLitsEnumBug310435Lit1EnumRuleCall_1_0_1_0() { return cLitsEnumBug310435Lit1EnumRuleCall_1_0_1_0; }
+
+		//"kw2" lits+=EnumBug310435Lit2
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//"kw2"
+		public Keyword getKw2Keyword_1_1_0() { return cKw2Keyword_1_1_0; }
+
+		//lits+=EnumBug310435Lit2
+		public Assignment getLitsAssignment_1_1_1() { return cLitsAssignment_1_1_1; }
+
+		//EnumBug310435Lit2
+		public RuleCall getLitsEnumBug310435Lit2EnumRuleCall_1_1_1_0() { return cLitsEnumBug310435Lit2EnumRuleCall_1_1_1_0; }
+	}
+
+	public class Bug310435ValElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Bug310435Val");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitTwoDigitOneKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
+		private final Keyword cKw1Keyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
+		private final Assignment cLitsAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
+		private final RuleCall cLitsIDTerminalRuleCall_1_0_1_0 = (RuleCall)cLitsAssignment_1_0_1.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
+		private final Keyword cKw2Keyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Assignment cLitsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cLitsSTRINGTerminalRuleCall_1_1_1_0 = (RuleCall)cLitsAssignment_1_1_1.eContents().get(0);
+		
+		//Bug310435Val:
+		//  "#21" ("kw1" lits+=ID|"kw2" lits+=STRING)*;
+		public ParserRule getRule() { return rule; }
+
+		//"#21" ("kw1" lits+=ID|"kw2" lits+=STRING)*
+		public Group getGroup() { return cGroup; }
+
+		//"#21"
+		public Keyword getNumberSignDigitTwoDigitOneKeyword_0() { return cNumberSignDigitTwoDigitOneKeyword_0; }
+
+		//("kw1" lits+=ID|"kw2" lits+=STRING)*
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//"kw1" lits+=ID
+		public Group getGroup_1_0() { return cGroup_1_0; }
+
+		//"kw1"
+		public Keyword getKw1Keyword_1_0_0() { return cKw1Keyword_1_0_0; }
+
+		//lits+=ID
+		public Assignment getLitsAssignment_1_0_1() { return cLitsAssignment_1_0_1; }
+
+		//ID
+		public RuleCall getLitsIDTerminalRuleCall_1_0_1_0() { return cLitsIDTerminalRuleCall_1_0_1_0; }
+
+		//"kw2" lits+=STRING
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//"kw2"
+		public Keyword getKw2Keyword_1_1_0() { return cKw2Keyword_1_1_0; }
+
+		//lits+=STRING
+		public Assignment getLitsAssignment_1_1_1() { return cLitsAssignment_1_1_1; }
+
+		//STRING
+		public RuleCall getLitsSTRINGTerminalRuleCall_1_1_1_0() { return cLitsSTRINGTerminalRuleCall_1_1_1_0; }
+	}
 	
+	
+	public class EnumBug310435Lit1Elements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "EnumBug310435Lit1");
+		private final EnumLiteralDeclaration cLit1EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
+		private final Keyword cLit1Lit1Keyword_0 = (Keyword)cLit1EnumLiteralDeclaration.eContents().get(0);
+		
+		//enum EnumBug310435Lit1 returns EnumBug310435Enum:
+		//  lit1;
+		public EnumRule getRule() { return rule; }
+
+		//lit1
+		public EnumLiteralDeclaration getLit1EnumLiteralDeclaration() { return cLit1EnumLiteralDeclaration; }
+
+		//"lit1"
+		public Keyword getLit1Lit1Keyword_0() { return cLit1Lit1Keyword_0; }
+	}
+
+	public class EnumBug310435Lit2Elements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "EnumBug310435Lit2");
+		private final EnumLiteralDeclaration cLit2EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
+		private final Keyword cLit2Lit2Keyword_0 = (Keyword)cLit2EnumLiteralDeclaration.eContents().get(0);
+		
+		//enum EnumBug310435Lit2 returns EnumBug310435Enum:
+		//  lit2;
+		public EnumRule getRule() { return rule; }
+
+		//lit2
+		public EnumLiteralDeclaration getLit2EnumLiteralDeclaration() { return cLit2EnumLiteralDeclaration; }
+
+		//"lit2"
+		public Keyword getLit2Lit2Keyword_0() { return cLit2Lit2Keyword_0; }
+	}
 	
 	private OpElements pOp;
 	private TermElements pTerm;
@@ -1520,6 +1664,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	private TypeBug2AElements pTypeBug2A;
 	private TypeBug2BElements pTypeBug2B;
 	private Bug305171Elements pBug305171;
+	private Bug310435EnumElements pBug310435Enum;
+	private Bug310435ValElements pBug310435Val;
+	private EnumBug310435Lit1Elements unknownRuleEnumBug310435Lit1;
+	private EnumBug310435Lit2Elements unknownRuleEnumBug310435Lit2;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -1556,7 +1704,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	//  Atom|TwoNumbers|ManyStrings|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
 	//  Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
 	//  EmptyObjectBug284850|MultiInheritanceBug280439|EObjectRef|TypeBug305577_1|
-	//  TypeBug305577_2|Parens|Bug305171;
+	//  TypeBug305577_2|Parens|Bug305171|Bug310435Val|Bug310435Enum;
 	public TermElements getTermAccess() {
 		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
 	}
@@ -1914,6 +2062,46 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	
 	public ParserRule getBug305171Rule() {
 		return getBug305171Access().getRule();
+	}
+
+	//Bug310435Enum:
+	//  "#20" ("kw1" lits+=EnumBug310435Lit1|"kw2" lits+=EnumBug310435Lit2)*;
+	public Bug310435EnumElements getBug310435EnumAccess() {
+		return (pBug310435Enum != null) ? pBug310435Enum : (pBug310435Enum = new Bug310435EnumElements());
+	}
+	
+	public ParserRule getBug310435EnumRule() {
+		return getBug310435EnumAccess().getRule();
+	}
+
+	//Bug310435Val:
+	//  "#21" ("kw1" lits+=ID|"kw2" lits+=STRING)*;
+	public Bug310435ValElements getBug310435ValAccess() {
+		return (pBug310435Val != null) ? pBug310435Val : (pBug310435Val = new Bug310435ValElements());
+	}
+	
+	public ParserRule getBug310435ValRule() {
+		return getBug310435ValAccess().getRule();
+	}
+
+	//enum EnumBug310435Lit1 returns EnumBug310435Enum:
+	//  lit1;
+	public EnumBug310435Lit1Elements getEnumBug310435Lit1Access() {
+		return (unknownRuleEnumBug310435Lit1 != null) ? unknownRuleEnumBug310435Lit1 : (unknownRuleEnumBug310435Lit1 = new EnumBug310435Lit1Elements());
+	}
+	
+	public EnumRule getEnumBug310435Lit1Rule() {
+		return getEnumBug310435Lit1Access().getRule();
+	}
+
+	//enum EnumBug310435Lit2 returns EnumBug310435Enum:
+	//  lit2;
+	public EnumBug310435Lit2Elements getEnumBug310435Lit2Access() {
+		return (unknownRuleEnumBug310435Lit2 != null) ? unknownRuleEnumBug310435Lit2 : (unknownRuleEnumBug310435Lit2 = new EnumBug310435Lit2Elements());
+	}
+	
+	public EnumRule getEnumBug310435Lit2Rule() {
+		return getEnumBug310435Lit2Access().getRule();
 	}
 
 	//terminal ID:

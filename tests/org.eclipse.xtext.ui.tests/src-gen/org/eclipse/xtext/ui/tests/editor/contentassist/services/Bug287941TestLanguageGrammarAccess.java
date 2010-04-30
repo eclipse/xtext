@@ -215,12 +215,12 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cScopeClauseScopeClauseParserRuleCall_4_0 = (RuleCall)cScopeClauseAssignment_4.eContents().get(0);
 		
 		//FromEntry:
-		//  type=[ecore::EClass] withoutsubtypes?="withoutsubtypes"? "as" alias=ID scopeClause=
-		//  ScopeClause?;
+		//  type=[ecore::EClass] withoutsubtypes?="withoutsubtypes"? "as" alias=ID
+		//  scopeClause=ScopeClause?;
 		public ParserRule getRule() { return rule; }
 
-		//type=[ecore::EClass] withoutsubtypes?="withoutsubtypes"? "as" alias=ID scopeClause=
-		//ScopeClause?
+		//type=[ecore::EClass] withoutsubtypes?="withoutsubtypes"? "as" alias=ID
+		//scopeClause=ScopeClause?
 		public Group getGroup() { return cGroup; }
 
 		//type=[ecore::EClass]
@@ -414,7 +414,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cEntriesAndWhereEntryParserRuleCall_1_1_1_0 = (RuleCall)cEntriesAssignment_1_1_1.eContents().get(0);
 		
 		//WhereEntry:
-		//  AndWhereEntry ({OrWhereEntry.entries+=current} ("or" entries+=AndWhereEntry)+)?;
+		//  AndWhereEntry ({OrWhereEntry.entries+=current} ("or" entries+=AndWhereEntry)+
+		//  )?;
 		public ParserRule getRule() { return rule; }
 
 		//AndWhereEntry ({OrWhereEntry.entries+=current} ("or" entries+=AndWhereEntry)+)?
@@ -555,8 +556,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cVariableWhereEntryParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//AttributeWhereEntry:
-		//  NumericAttributeWhereEntry|StringAttributeWhereEntry|BooleanAttributeWhereEntry|
-		//  VariableWhereEntry;
+		//  NumericAttributeWhereEntry|StringAttributeWhereEntry|
+		//  BooleanAttributeWhereEntry|VariableWhereEntry;
 		public ParserRule getRule() { return rule; }
 
 		//NumericAttributeWhereEntry|StringAttributeWhereEntry|BooleanAttributeWhereEntry|
@@ -612,12 +613,12 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cValueSIGNED_DOUBLETerminalRuleCall_4_0 = (RuleCall)cValueAssignment_4.eContents().get(0);
 		
 		//DoubleWhereEntry:
-		//  alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator value=
-		//  SIGNED_DOUBLE;
+		//  alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator
+		//  value=SIGNED_DOUBLE;
 		public ParserRule getRule() { return rule; }
 
-		//alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator value=
-		//SIGNED_DOUBLE
+		//alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator
+		//value=SIGNED_DOUBLE
 		public Group getGroup() { return cGroup; }
 
 		//alias=[FromEntry]
@@ -670,12 +671,12 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cValueSINGED_LONGTerminalRuleCall_4_0 = (RuleCall)cValueAssignment_4.eContents().get(0);
 		
 		//LongWhereEntry:
-		//  alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator value=
-		//  SINGED_LONG;
+		//  alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator
+		//  value=SINGED_LONG;
 		public ParserRule getRule() { return rule; }
 
-		//alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator value=
-		//SINGED_LONG
+		//alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator
+		//value=SINGED_LONG
 		public Group getGroup() { return cGroup; }
 
 		//alias=[FromEntry]
@@ -806,12 +807,12 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cPatternSTRINGTerminalRuleCall_4_0 = (RuleCall)cPatternAssignment_4.eContents().get(0);
 		
 		//StringAttributeWhereEntry:
-		//  alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=StringOperator pattern=
-		//  STRING;
+		//  alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=StringOperator
+		//  pattern=STRING;
 		public ParserRule getRule() { return rule; }
 
-		//alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=StringOperator pattern=
-		//STRING
+		//alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=StringOperator
+		//pattern=STRING
 		public Group getGroup() { return cGroup; }
 
 		//alias=[FromEntry]
@@ -866,12 +867,12 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cFalseKeyword_4_1 = (Keyword)cAlternatives_4.eContents().get(1);
 		
 		//BooleanAttributeWhereEntry:
-		//  alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=BooleanOperator (isTrue
-		//  ?="true"|"false");
+		//  alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=BooleanOperator
+		//  (isTrue?="true"|"false");
 		public ParserRule getRule() { return rule; }
 
-		//alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=BooleanOperator (isTrue
-		//?="true"|"false")
+		//alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=BooleanOperator (
+		//isTrue?="true"|"false")
 		public Group getGroup() { return cGroup; }
 
 		//alias=[FromEntry]
@@ -929,12 +930,12 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cNullKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//NullWhereEntry:
-		//  alias=[FromEntry] "." feature=[ecore::EStructuralFeature] operator=BooleanOperator
-		//  "null";
+		//  alias=[FromEntry] "." feature=[ecore::EStructuralFeature] operator=
+		//  BooleanOperator "null";
 		public ParserRule getRule() { return rule; }
 
-		//alias=[FromEntry] "." feature=[ecore::EStructuralFeature] operator=BooleanOperator
-		//"null"
+		//alias=[FromEntry] "." feature=[ecore::EStructuralFeature] operator=
+		//BooleanOperator "null"
 		public Group getGroup() { return cGroup; }
 
 		//alias=[FromEntry]
@@ -984,7 +985,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cRightAliasFromEntryIDTerminalRuleCall_4_0_1 = (RuleCall)cRightAliasFromEntryCrossReference_4_0.eContents().get(1);
 		
 		//ReferenceAliasWhereEntry:
-		//  alias=[FromEntry] "." reference=[ecore::EReference] "=" rightAlias=[FromEntry];
+		//  alias=[FromEntry] "." reference=[ecore::EReference] "=" rightAlias=[FromEntry
+		//  ];
 		public ParserRule getRule() { return rule; }
 
 		//alias=[FromEntry] "." reference=[ecore::EReference] "=" rightAlias=[FromEntry]
@@ -1043,12 +1045,12 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightParenthesisKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//SubselectWhereEntry:
-		//  alias=[FromEntry] "." reference=[ecore::EReference] notIn?="not"? "in" "(" subQuery=
-		//  MQLquery ")";
+		//  alias=[FromEntry] "." reference=[ecore::EReference] notIn?="not"? "in" "("
+		//  subQuery=MQLquery ")";
 		public ParserRule getRule() { return rule; }
 
-		//alias=[FromEntry] "." reference=[ecore::EReference] notIn?="not"? "in" "(" subQuery=
-		//MQLquery ")"
+		//alias=[FromEntry] "." reference=[ecore::EReference] notIn?="not"? "in" "("
+		//subQuery=MQLquery ")"
 		public Group getGroup() { return cGroup; }
 
 		//alias=[FromEntry]
@@ -1152,12 +1154,12 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cNotEqualExclamationMarkEqualsSignKeyword_5_0 = (Keyword)cNotEqualEnumLiteralDeclaration_5.eContents().get(0);
 		
 		//enum NumericOperator:
-		//  lessThen="<" | greaterThen=">" | lessEqual="<=" | greaterEqual=">=" | equal="=" | notEqual
-		//  ="!=";
+		//  lessThen="<" | greaterThen=">" | lessEqual="<=" | greaterEqual=">=" | equal=
+		//  "=" | notEqual="!=";
 		public EnumRule getRule() { return rule; }
 
-		//lessThen="<" | greaterThen=">" | lessEqual="<=" | greaterEqual=">=" | equal="=" | notEqual
-		//="!="
+		//lessThen="<" | greaterThen=">" | lessEqual="<=" | greaterEqual=">=" | equal="="
+		//| notEqual="!="
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//lessThen="<"
@@ -1360,8 +1362,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//FromEntry:
-	//  type=[ecore::EClass] withoutsubtypes?="withoutsubtypes"? "as" alias=ID scopeClause=
-	//  ScopeClause?;
+	//  type=[ecore::EClass] withoutsubtypes?="withoutsubtypes"? "as" alias=ID
+	//  scopeClause=ScopeClause?;
 	public FromEntryElements getFromEntryAccess() {
 		return (pFromEntry != null) ? pFromEntry : (pFromEntry = new FromEntryElements());
 	}
@@ -1411,7 +1413,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//WhereEntry:
-	//  AndWhereEntry ({OrWhereEntry.entries+=current} ("or" entries+=AndWhereEntry)+)?;
+	//  AndWhereEntry ({OrWhereEntry.entries+=current} ("or" entries+=AndWhereEntry)+
+	//  )?;
 	public WhereEntryElements getWhereEntryAccess() {
 		return (pWhereEntry != null) ? pWhereEntry : (pWhereEntry = new WhereEntryElements());
 	}
@@ -1453,8 +1456,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//AttributeWhereEntry:
-	//  NumericAttributeWhereEntry|StringAttributeWhereEntry|BooleanAttributeWhereEntry|
-	//  VariableWhereEntry;
+	//  NumericAttributeWhereEntry|StringAttributeWhereEntry|
+	//  BooleanAttributeWhereEntry|VariableWhereEntry;
 	public AttributeWhereEntryElements getAttributeWhereEntryAccess() {
 		return (pAttributeWhereEntry != null) ? pAttributeWhereEntry : (pAttributeWhereEntry = new AttributeWhereEntryElements());
 	}
@@ -1474,8 +1477,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//DoubleWhereEntry:
-	//  alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator value=
-	//  SIGNED_DOUBLE;
+	//  alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator
+	//  value=SIGNED_DOUBLE;
 	public DoubleWhereEntryElements getDoubleWhereEntryAccess() {
 		return (pDoubleWhereEntry != null) ? pDoubleWhereEntry : (pDoubleWhereEntry = new DoubleWhereEntryElements());
 	}
@@ -1485,8 +1488,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//LongWhereEntry:
-	//  alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator value=
-	//  SINGED_LONG;
+	//  alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator
+	//  value=SINGED_LONG;
 	public LongWhereEntryElements getLongWhereEntryAccess() {
 		return (pLongWhereEntry != null) ? pLongWhereEntry : (pLongWhereEntry = new LongWhereEntryElements());
 	}
@@ -1507,8 +1510,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//enum NumericOperator:
-	//  lessThen="<" | greaterThen=">" | lessEqual="<=" | greaterEqual=">=" | equal="=" | notEqual
-	//  ="!=";
+	//  lessThen="<" | greaterThen=">" | lessEqual="<=" | greaterEqual=">=" | equal=
+	//  "=" | notEqual="!=";
 	public NumericOperatorElements getNumericOperatorAccess() {
 		return (unknownRuleNumericOperator != null) ? unknownRuleNumericOperator : (unknownRuleNumericOperator = new NumericOperatorElements());
 	}
@@ -1518,8 +1521,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//StringAttributeWhereEntry:
-	//  alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=StringOperator pattern=
-	//  STRING;
+	//  alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=StringOperator
+	//  pattern=STRING;
 	public StringAttributeWhereEntryElements getStringAttributeWhereEntryAccess() {
 		return (pStringAttributeWhereEntry != null) ? pStringAttributeWhereEntry : (pStringAttributeWhereEntry = new StringAttributeWhereEntryElements());
 	}
@@ -1539,8 +1542,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//BooleanAttributeWhereEntry:
-	//  alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=BooleanOperator (isTrue
-	//  ?="true"|"false");
+	//  alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=BooleanOperator
+	//  (isTrue?="true"|"false");
 	public BooleanAttributeWhereEntryElements getBooleanAttributeWhereEntryAccess() {
 		return (pBooleanAttributeWhereEntry != null) ? pBooleanAttributeWhereEntry : (pBooleanAttributeWhereEntry = new BooleanAttributeWhereEntryElements());
 	}
@@ -1560,8 +1563,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//NullWhereEntry:
-	//  alias=[FromEntry] "." feature=[ecore::EStructuralFeature] operator=BooleanOperator
-	//  "null";
+	//  alias=[FromEntry] "." feature=[ecore::EStructuralFeature] operator=
+	//  BooleanOperator "null";
 	public NullWhereEntryElements getNullWhereEntryAccess() {
 		return (pNullWhereEntry != null) ? pNullWhereEntry : (pNullWhereEntry = new NullWhereEntryElements());
 	}
@@ -1571,7 +1574,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//ReferenceAliasWhereEntry:
-	//  alias=[FromEntry] "." reference=[ecore::EReference] "=" rightAlias=[FromEntry];
+	//  alias=[FromEntry] "." reference=[ecore::EReference] "=" rightAlias=[FromEntry
+	//  ];
 	public ReferenceAliasWhereEntryElements getReferenceAliasWhereEntryAccess() {
 		return (pReferenceAliasWhereEntry != null) ? pReferenceAliasWhereEntry : (pReferenceAliasWhereEntry = new ReferenceAliasWhereEntryElements());
 	}
@@ -1581,8 +1585,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//SubselectWhereEntry:
-	//  alias=[FromEntry] "." reference=[ecore::EReference] notIn?="not"? "in" "(" subQuery=
-	//  MQLquery ")";
+	//  alias=[FromEntry] "." reference=[ecore::EReference] notIn?="not"? "in" "("
+	//  subQuery=MQLquery ")";
 	public SubselectWhereEntryElements getSubselectWhereEntryAccess() {
 		return (pSubselectWhereEntry != null) ? pSubselectWhereEntry : (pSubselectWhereEntry = new SubselectWhereEntryElements());
 	}
@@ -1620,8 +1624,9 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return (tSTRING != null) ? tSTRING : (tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
 	} 

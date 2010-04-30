@@ -53,7 +53,8 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|DatatypeHiddens;
+ *   WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|
+ *   DatatypeHiddens;
  *
  **/
 
@@ -384,7 +385,7 @@ protected class WithoutHiddens_SpacesAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("spaces",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_1_0();
 			return obj;
@@ -440,7 +441,7 @@ protected class WithoutHiddens_SpacesAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("spaces",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_3_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_3_0();
 			return obj;
@@ -894,7 +895,7 @@ protected class OverridingHiddensCall_SpacesAssignment_1 extends AssignmentToken
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("spaces",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getOverridingHiddensCallAccess().getSpacesWSTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getOverridingHiddensCallAccess().getSpacesWSTerminalRuleCall_1_0();
 			return obj;
@@ -946,13 +947,13 @@ protected class OverridingHiddensCall_ValidAssignment_2 extends AssignmentToken 
 /************ begin Rule InheritingHiddens ****************
  *
  * InheritingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
- *   "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens
- *   ) ")" valid?=";";
+ *   "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=
+ *   HidingHiddens) ")" valid?=";";
  *
  **/
 
-// "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens
-// ) ")" valid?=";"
+// "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=
+// HidingHiddens) ")" valid?=";"
 protected class InheritingHiddens_Group extends GroupToken {
 	
 	public InheritingHiddens_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1303,7 +1304,7 @@ protected class DatatypeHiddens_ValidAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("valid",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("valid");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getDatatypeHiddensAccess().getValidDatatypeRuleParserRuleCall_1_0(), value, null)) {
 			type = AssignmentType.DRC;
 			element = grammarAccess.getDatatypeHiddensAccess().getValidDatatypeRuleParserRuleCall_1_0();
 			return obj;
@@ -1399,7 +1400,7 @@ protected class HidingHiddens_SpaceAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("space",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("space");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getHidingHiddensAccess().getSpaceWSTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getHidingHiddensAccess().getSpaceWSTerminalRuleCall_1_0();
 			return obj;

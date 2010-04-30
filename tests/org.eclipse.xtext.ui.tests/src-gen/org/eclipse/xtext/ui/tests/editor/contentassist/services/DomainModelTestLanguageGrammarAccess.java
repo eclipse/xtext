@@ -136,12 +136,12 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//Class:
-		//  "class" name=ID ("extends" superClass=[Class])? "{" properties+=Property* subClasses+=
-		//  Class* "}";
+		//  "class" name=ID ("extends" superClass=[Class])? "{" properties+=Property*
+		//  subClasses+=Class* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"class" name=ID ("extends" superClass=[Class])? "{" properties+=Property* subClasses+=
-		//Class* "}"
+		//"class" name=ID ("extends" superClass=[Class])? "{" properties+=Property*
+		//subClasses+=Class* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"class"
@@ -367,8 +367,8 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Class:
-	//  "class" name=ID ("extends" superClass=[Class])? "{" properties+=Property* subClasses+=
-	//  Class* "}";
+	//  "class" name=ID ("extends" superClass=[Class])? "{" properties+=Property*
+	//  subClasses+=Class* "}";
 	public ClassElements getClassAccess() {
 		return (pClass != null) ? pClass : (pClass = new ClassElements());
 	}
@@ -420,8 +420,9 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

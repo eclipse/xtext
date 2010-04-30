@@ -50,14 +50,14 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 		private final Keyword cRightCurlyBracketKeyword_3_3 = (Keyword)cGroup_3.eContents().get(3);
 		
 		//Model:
-		//  "(" attribute+=Attribute* attribute+=Pair* ")"|"[" attribute+=Attribute+ attribute+=
-		//  Pair* "]"|"<" attribute+=Attribute* attribute+=Pair+ ">"|"{" attribute+=Attribute+
-		//  attribute+=Pair+ "}";
+		//  "(" attribute+=Attribute* attribute+=Pair* ")"|"[" attribute+=Attribute+
+		//  attribute+=Pair* "]"|"<" attribute+=Attribute* attribute+=Pair+ ">"|"{"
+		//  attribute+=Attribute+ attribute+=Pair+ "}";
 		public ParserRule getRule() { return rule; }
 
-		//"(" attribute+=Attribute* attribute+=Pair* ")"|"[" attribute+=Attribute+ attribute+=
-		//Pair* "]"|"<" attribute+=Attribute* attribute+=Pair+ ">"|"{" attribute+=Attribute+
-		//attribute+=Pair+ "}"
+		//"(" attribute+=Attribute* attribute+=Pair* ")"|"[" attribute+=Attribute+
+		//attribute+=Pair* "]"|"<" attribute+=Attribute* attribute+=Pair+ ">"|"{"
+		//attribute+=Attribute+ attribute+=Pair+ "}"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"(" attribute+=Attribute* attribute+=Pair* ")"
@@ -220,9 +220,9 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 
 	
 	//Model:
-	//  "(" attribute+=Attribute* attribute+=Pair* ")"|"[" attribute+=Attribute+ attribute+=
-	//  Pair* "]"|"<" attribute+=Attribute* attribute+=Pair+ ">"|"{" attribute+=Attribute+
-	//  attribute+=Pair+ "}";
+	//  "(" attribute+=Attribute* attribute+=Pair* ")"|"[" attribute+=Attribute+
+	//  attribute+=Pair* "]"|"<" attribute+=Attribute* attribute+=Pair+ ">"|"{"
+	//  attribute+=Attribute+ attribute+=Pair+ "}";
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -264,8 +264,9 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

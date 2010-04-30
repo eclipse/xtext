@@ -37,8 +37,8 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cEndEND_TAGTerminalRuleCall_1_4_0 = (RuleCall)cEndAssignment_1_4.eContents().get(0);
 		
 		//WorkflowElement:
-		//  name=START_TAG attributes+=Attribute* END_TAG_SHORT|name=START_TAG attributes+=
-		//  Attribute* GT children+=WorkflowElement* end=END_TAG;
+		//  name=START_TAG attributes+=Attribute* END_TAG_SHORT|name=START_TAG attributes
+		//  +=Attribute* GT children+=WorkflowElement* end=END_TAG;
 		public ParserRule getRule() { return rule; }
 
 		//name=START_TAG attributes+=Attribute* END_TAG_SHORT|name=START_TAG attributes+=
@@ -157,8 +157,8 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//WorkflowElement:
-	//  name=START_TAG attributes+=Attribute* END_TAG_SHORT|name=START_TAG attributes+=
-	//  Attribute* GT children+=WorkflowElement* end=END_TAG;
+	//  name=START_TAG attributes+=Attribute* END_TAG_SHORT|name=START_TAG attributes
+	//  +=Attribute* GT children+=WorkflowElement* end=END_TAG;
 	public WorkflowElementElements getWorkflowElementAccess() {
 		return (pWorkflowElement != null) ? pWorkflowElement : (pWorkflowElement = new WorkflowElementElements());
 	}
@@ -238,8 +238,9 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return (tSTRING != null) ? tSTRING : (tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
 	} 

@@ -49,7 +49,8 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Statemachine ****************
  *
  * Statemachine:
- *   "events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*;
+ *   "events" events+=Event* "end" "commands" commands+=Command* "end" states+=
+ *   State*;
  *
  **/
 
@@ -410,7 +411,7 @@ protected class Event_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEventAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEventAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -444,7 +445,7 @@ protected class Event_CodeAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("code",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("code");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEventAccess().getCodeIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEventAccess().getCodeIDTerminalRuleCall_2_0();
 			return obj;
@@ -517,7 +518,7 @@ protected class Command_NameAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getCommandAccess().getNameIDTerminalRuleCall_0_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getCommandAccess().getNameIDTerminalRuleCall_0_0();
 			return obj;
@@ -551,7 +552,7 @@ protected class Command_CodeAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("code",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("code");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getCommandAccess().getCodeIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getCommandAccess().getCodeIDTerminalRuleCall_1_0();
 			return obj;
@@ -568,12 +569,13 @@ protected class Command_CodeAssignment_1 extends AssignmentToken  {
 /************ begin Rule State ****************
  *
  * State:
- *   "state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end"
- * ;
+ *   "state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=
+ *   Transition* "end";
  *
  **/
 
-// "state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end"
+// "state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition
+// * "end"
 protected class State_Group extends GroupToken {
 	
 	public State_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -647,7 +649,7 @@ protected class State_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { 
+		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getStateAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.LRC;
 			element = grammarAccess.getStateAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
