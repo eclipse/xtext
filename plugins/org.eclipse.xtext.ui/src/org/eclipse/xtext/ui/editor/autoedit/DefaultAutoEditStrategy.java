@@ -69,16 +69,11 @@ public class DefaultAutoEditStrategy implements IAutoEditStrategy, ISourceViewer
 	}
 
 	protected void configure(IEditStrategyAcceptor acceptor) {
-		configureImportantInformation(acceptor);
 		configureStringLiteral(acceptor);
 		configureParenthesis(acceptor);
 		configureSquareBrackets(acceptor);
 		configureCurlyBracesBlock(acceptor);
 		configureMultilineComments(acceptor);
-	}
-
-	protected void configureImportantInformation(IEditStrategyAcceptor acceptor) {
-		acceptor.accept(newShortCuts("42", "42 /*Answer to the Ultimate Question of Life, the Universe, and Everything!*/"));
 	}
 
 	protected void configureMultilineComments(IEditStrategyAcceptor acceptor) {
