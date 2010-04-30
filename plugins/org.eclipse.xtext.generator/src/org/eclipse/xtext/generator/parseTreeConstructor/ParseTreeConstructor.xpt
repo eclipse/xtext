@@ -28,7 +28,7 @@ package «getParseTreeConstructorName().toJavaPackage()»;
 
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import «gaFQName()»;
@@ -40,23 +40,18 @@ public class «getParseTreeConstructorName().toSimpleName()» extends AbstractPars
 	@Inject
 	private «gaSimpleName()» grammarAccess;
 	
-	@Override	
-	public «gaSimpleName()» getGrammarAccess() {
-		return grammarAccess;
-	}
-
 	@Override
-	protected AbstractToken getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IEObjectConsumer inst) {
 		return new ThisRootNode(inst);	
 	}
 	
 protected class ThisRootNode extends RootToken {
-	public ThisRootNode(IInstanceDescription inst) {
+	public ThisRootNode(IEObjectConsumer inst) {
 		super(inst);
 	}
 	
 	@Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 «FOREACH calcRootFollowers() AS e ITERATOR i-»
 			case «i.counter0»: return new «e.elementMethodName()»(this, this, «i.counter0», inst);
@@ -85,8 +80,8 @@ protected class ThisRootNode extends RootToken {
 «ENDDEFINE»
 
 «DEFINE constructor FOR AbstractElement-»
-	public «elementMethodName()»(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public «elementMethodName()»(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -95,12 +90,21 @@ protected class ThisRootNode extends RootToken {
 	}
 
 «EXPAND createFollowerMethod FOR getTreeConstState()-»
+«ENDDEFINE»
+
+«DEFINE typeCheckInline FOR AbstractElement-»
+«IF !getTreeConstState().typesToCheck.isEmpty-»
+		if(«FOREACH getTreeConstState().typesToCheck AS e SEPARATOR " && \n\t\t   "»getEObject().eClass() != grammarAccess.«e.gaTypeAccessor()».getClassifier()«ENDFOREACH»)
+			return null;
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE typeCheckTryConsume FOR AbstractElement-»
 «IF !getTreeConstState().typesToCheck.isEmpty-»
     @Override
-	public IInstanceDescription tryConsume() {
-		if(«FOREACH getTreeConstState().typesToCheck AS e SEPARATOR " || \n\t\t   "»current.getDelegate().eClass() == grammarAccess.«e.gaTypeAccessor()».getClassifier()«ENDFOREACH»)
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+«EXPAND typeCheckInline-»
+		return eObjectConsumer;
 	}
 
 «ENDIF-»
@@ -110,13 +114,13 @@ protected class ThisRootNode extends RootToken {
 «DEFINE createFollowerMethod FOR TreeConstState-»
 «IF enabledOutgoing.size > 0 || endState-»
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 «FOREACH enabledOutgoing AS e-»
-			case «e.precedence»: return new «e.target.grammarElement.elementMethodName()»(«e.ruleCall ? "this" : "parent"», this, «e.precedence», inst);
+			case «e.precedence»: return new «e.target.grammarElement.elementMethodName()»(«e.ruleCall ? "this" : "lastRuleCallOrigin"», this, «e.precedence», inst);
 «ENDFOREACH-»
 «IF endState && !enabledOutgoing.exists(e|e.ruleCall)-»
-			default: return parent.createParentFollower(this, index, index«enabledOutgoing.size > 0 ? (" - " + enabledOutgoing.size) : ""», inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index«enabledOutgoing.size > 0 ? (" - " + enabledOutgoing.size) : ""», inst);
 «ELSE-»
 			default: return null;
 «ENDIF-»			
@@ -127,19 +131,19 @@ protected class ThisRootNode extends RootToken {
 «ENDDEFINE»
 
 
-«DEFINE createParentFollowerMethod(boolean isAss) FOR TreeConstState-»
+«DEFINE createFollowerAfterReturnMethod(boolean isAss) FOR TreeConstState-»
 «IF enabledOutgoing.exists(e|e.ruleCall)-»
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 «IF isAss-»
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 «ENDIF-»
 		switch(index) {
 «FOREACH enabledOutgoingAfterReturn AS e-»
-			case «e.precedence»: return new «e.target.grammarElement.elementMethodName()»(«e.ruleCall ? "this" : "parent"», next, actIndex, «isAss ? "consumed" : "inst"»);
+			case «e.precedence»: return new «e.target.grammarElement.elementMethodName()»(«e.ruleCall ? "this" : "lastRuleCallOrigin"», next, actIndex, «isAss ? "consumed" : "inst"»);
 «ENDFOREACH-»
 «IF endState-»
-			default: return parent.createParentFollower(next, actIndex , index«enabledOutgoingAfterReturn.size > 0 ? (" - " + enabledOutgoingAfterReturn.size) : ""», «isAss ? "consumed" : "inst"»);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index«enabledOutgoingAfterReturn.size > 0 ? (" - " + enabledOutgoingAfterReturn.size) : ""», «isAss ? "consumed" : "inst"»);
 «ELSE-»
 			default: return null;
 «ENDIF-»
@@ -165,6 +169,7 @@ protected class ThisRootNode extends RootToken {
 protected class «elementMethodName()» extends GroupToken {
 	
 «EXPAND constructor-»
+«EXPAND typeCheckTryConsume-»
 }
 «EXPAND element FOREACH elements.reject(e|e.getTreeConstState().disabled)»
 «ENDDEFINE»
@@ -176,6 +181,7 @@ protected class «elementMethodName()» extends GroupToken {
 protected class «elementMethodName()» extends UnorderedGroupToken {
 	
 «EXPAND constructor-»
+«EXPAND typeCheckTryConsume-»
 }
 «EXPAND element FOREACH elements.reject(e|e.getTreeConstState().disabled)»
 «ENDDEFINE»
@@ -188,6 +194,7 @@ protected class «elementMethodName()» extends UnorderedGroupToken {
 protected class «elementMethodName()» extends AlternativesToken {
 
 «EXPAND constructor-»
+«EXPAND typeCheckTryConsume-»
 }
 «EXPAND element FOREACH elements.reject(e|e.getTreeConstState().disabled)»
 «ENDDEFINE»
@@ -203,12 +210,13 @@ protected class «elementMethodName()» extends RuleCallToken {
 	
 «EXPAND constructor-»
     @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(«calledParserRule().alternatives.elementMethodName()».class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+«EXPAND typeCheckInline-»
+		if(checkForRecursion(«calledParserRule().alternatives.elementMethodName()».class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
-«EXPAND createParentFollowerMethod(false) FOR getTreeConstState()-»
+«EXPAND createFollowerAfterReturnMethod(false) FOR getTreeConstState()-»
 }
 «ELSE-»
 protected class «elementMethodName()» extends UnassignedTextToken {
@@ -228,13 +236,13 @@ protected class «elementMethodName()» extends UnassignedTextToken {
 «DEFINE assignmentCreate FOR Keyword-»
 «IF containingAssignment().operator == '?='-»
 		if(Boolean.TRUE.equals(value)) { // «metaType.name»
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.«gaRuleElementAccessor()»;
 			return obj;
 		}
 «ELSE-»
 		if("«value.replaceAll("\\\\","\\\\\\\\").replaceAll("\\\"","\\\\\\\"")»".equals(value)) { // «metaType.name»
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.«gaRuleElementAccessor()»;
 			return obj;
 		}
@@ -243,9 +251,9 @@ protected class «elementMethodName()» extends UnassignedTextToken {
 
 «DEFINE assignmentCreate FOR CrossReference-»
 		if(value instanceof EObject) { // «metaType.name»
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.«gaRuleElementAccessor()».getType().getClassifier())) {
-				type = AssignmentType.CR;
+				type = AssignmentType.CROSS_REFERENCE;
 				element = grammarAccess.«gaRuleElementAccessor()»; 
 				return obj;
 			}
@@ -256,30 +264,30 @@ protected class «elementMethodName()» extends UnassignedTextToken {
 «IF calledParserRule()!=null-»
 «IF !isDatatypeRule(calledParserRule())-»
 		if(value instanceof EObject) { // «metaType.name»
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.«calledParserRule().gaRuleAccessor()».getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.«gaRuleElementAccessor()»; 
 				consumed = obj;
 				return param;
 			}
 		}
 «ELSE-»
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.«gaRuleElementAccessor()», value, null)) {
-			type = AssignmentType.DRC;
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.«gaRuleElementAccessor()», value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
 			element = grammarAccess.«gaRuleElementAccessor()»;
 			return obj;
 		}
 «ENDIF-»
 «ELSEIF calledEnumRule()!=null-»
-		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.«gaRuleElementAccessor()», value, null)) { 
-			type = AssignmentType.ERC;
+		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.«gaRuleElementAccessor()», value, null)) { 
+			type = AssignmentType.ENUM_RULE_CALL;
 			element = grammarAccess.«gaRuleElementAccessor()»;
 			return obj;
 		}
 «ELSE-»
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.«gaRuleElementAccessor()», value, null)) {
-			type = AssignmentType.LRC;
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.«gaRuleElementAccessor()», value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.«gaRuleElementAccessor()»;
 			return obj;
 		}
@@ -293,14 +301,15 @@ protected class «elementMethodName()» extends AssignmentToken  {
 	
 «EXPAND constructor-»
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("«feature»",«IF isAssignmentRequired()»true«ELSE»false«ENDIF»)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("«feature»");
+	public IEObjectConsumer tryConsume() {
+«EXPAND typeCheckInline-»
+		if((value = eObjectConsumer.getConsumable("«feature»",«IF isAssignmentRequired()»true«ELSE»false«ENDIF»)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("«feature»");
 		«EXPAND assignmentCreate FOREACH getNestedElementsFromAssignment()-»
 		return null;
 	}
 
-«EXPAND createParentFollowerMethod(true) FOR getTreeConstState()-»
+«EXPAND createFollowerAfterReturnMethod(true) FOR getTreeConstState()-»
 }
 «ENDDEFINE»
 
@@ -315,17 +324,19 @@ protected class «elementMethodName()» extends ActionToken  {
 «EXPAND constructor-»	
 «IF feature == null || feature == ""-»
     @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isConsumed()) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+«EXPAND typeCheckInline-»
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
 	}
 «ELSE-»
     @Override
-	protected IInstanceDescription tryConsumeVal() {
-		Object val = current.getConsumable("«feature»", false);
+	public IEObjectConsumer tryConsume() {
+«EXPAND typeCheckInline-»
+		Object val = eObjectConsumer.getConsumable("«feature»", false);
 		if(val == null) return null;
-		if(!current.isConsumedWithLastConsumtion("«feature»")) return null;
-		return getDescr((EObject) val);
+		if(!eObjectConsumer.isConsumedWithLastConsumtion("«feature»")) return null;
+		return createEObjectConsumer((EObject) val);
 	}
 «ENDIF-»	
 }
@@ -340,6 +351,7 @@ protected class «elementMethodName()» extends ActionToken  {
 protected class «elementMethodName()» extends KeywordToken  {
 	
 «EXPAND constructor-»
+«EXPAND typeCheckTryConsume-»
 }
 «ENDDEFINE»
 

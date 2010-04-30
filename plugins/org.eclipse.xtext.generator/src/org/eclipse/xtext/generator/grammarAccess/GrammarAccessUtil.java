@@ -25,7 +25,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.generator.Naming;
-import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
+import org.eclipse.xtext.parsetree.reconstr.Serializer;
 
 import com.google.inject.Guice;
 
@@ -78,12 +78,12 @@ public class GrammarAccessUtil {
 		return Collections.emptyList();
 	}
 
-	private static SerializerUtil xtextSerializer;
+	private static Serializer xtextSerializer;
 
 	public static String serialize(EObject obj, String prefix) {
 		String s;
 		try {
-			SerializerUtil.SerializationOptions opt = new SerializerUtil.SerializationOptions();
+			Serializer.SerializationOptions opt = new Serializer.SerializationOptions();
 			opt.setFormat(true);
 			s = getSerializer().serialize(obj, opt);
 		} catch (Exception e) {
@@ -96,10 +96,10 @@ public class GrammarAccessUtil {
 		return s;
 	}
 
-	private static SerializerUtil getSerializer() {
+	private static Serializer getSerializer() {
 		if (xtextSerializer==null)
 			xtextSerializer = Guice.createInjector(
-					new XtextRuntimeModule()).getInstance(SerializerUtil.class);
+					new XtextRuntimeModule()).getInstance(Serializer.class);
 		return xtextSerializer;
 	}
 
