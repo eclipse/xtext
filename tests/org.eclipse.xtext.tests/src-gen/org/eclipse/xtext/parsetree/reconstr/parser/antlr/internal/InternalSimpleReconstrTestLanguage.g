@@ -2674,15 +2674,15 @@ ruleBug305171 returns [EObject current=null]
 	    }
 
 )
-))*)?(	'ky' 
+))*)?((	'ky' 
     {
-        createLeafNode(grammarAccess.getBug305171Access().getKyKeyword_1_1_0(), null); 
+        createLeafNode(grammarAccess.getBug305171Access().getKyKeyword_1_1_0_0(), null); 
     }
 (
 (
 		lv_y_6_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getBug305171Access().getYIDTerminalRuleCall_1_1_1_0(), "y"); 
+			createLeafNode(grammarAccess.getBug305171Access().getYIDTerminalRuleCall_1_1_0_1_0(), "y"); 
 		}
 		{
 	        if ($current==null) {
@@ -2704,13 +2704,13 @@ ruleBug305171 returns [EObject current=null]
 )
 )(	',' 
     {
-        createLeafNode(grammarAccess.getBug305171Access().getCommaKeyword_1_1_2_0(), null); 
+        createLeafNode(grammarAccess.getBug305171Access().getCommaKeyword_1_1_0_2_0(), null); 
     }
 (
 (
 		lv_y_8_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getBug305171Access().getYIDTerminalRuleCall_1_1_2_1_0(), "y"); 
+			createLeafNode(grammarAccess.getBug305171Access().getYIDTerminalRuleCall_1_1_0_2_1_0(), "y"); 
 		}
 		{
 	        if ($current==null) {
@@ -2730,9 +2730,65 @@ ruleBug305171 returns [EObject current=null]
 	    }
 
 )
-))*)?)(
+))*)?(	'kz' 
+    {
+        createLeafNode(grammarAccess.getBug305171Access().getKzKeyword_1_1_1_0(), null); 
+    }
 (
-		lv_name_9_0=RULE_ID
+(
+		lv_z_10_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getBug305171Access().getZIDTerminalRuleCall_1_1_1_1_0(), "z"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getBug305171Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"z",
+	        		lv_z_10_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)(	',' 
+    {
+        createLeafNode(grammarAccess.getBug305171Access().getCommaKeyword_1_1_1_2_0(), null); 
+    }
+(
+(
+		lv_z_12_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getBug305171Access().getZIDTerminalRuleCall_1_1_1_2_1_0(), "z"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getBug305171Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"z",
+	        		lv_z_12_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+))*)?))(
+(
+		lv_name_13_0=RULE_ID
 		{
 			createLeafNode(grammarAccess.getBug305171Access().getNameIDTerminalRuleCall_2_0(), "name"); 
 		}
@@ -2745,7 +2801,7 @@ ruleBug305171 returns [EObject current=null]
 	       		set(
 	       			$current, 
 	       			"name",
-	        		lv_name_9_0, 
+	        		lv_name_13_0, 
 	        		"ID", 
 	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {

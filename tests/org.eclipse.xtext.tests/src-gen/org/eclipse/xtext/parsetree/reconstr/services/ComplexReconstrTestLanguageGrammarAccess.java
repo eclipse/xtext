@@ -191,10 +191,12 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		// * /
 		//
 		//TrickyA returns TypeA1:
-		//  "TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=STRING;
+		//  "TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=
+		//  STRING;
 		public ParserRule getRule() { return rule; }
 
-		//"TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=STRING
+		//"TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=
+		//STRING
 		public Group getGroup() { return cGroup; }
 
 		//"TA"
@@ -314,7 +316,8 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Keyword cZKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
 		
 		//TrickyC:
-		//  "TC" name=ID ({C1.x=current} "x")? ({C2.y=current} "y")? ({C3.z=current} "z")?;
+		//  "TC" name=ID ({C1.x=current} "x")? ({C2.y=current} "y")? ({C3.z=current} "z")
+		//  ?;
 		public ParserRule getRule() { return rule; }
 
 		//"TC" name=ID ({C1.x=current} "x")? ({C2.y=current} "y")? ({C3.z=current} "z")?
@@ -750,7 +753,8 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	// * /
 	//
 	//TrickyA returns TypeA1:
-	//  "TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=STRING;
+	//  "TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=
+	//  STRING;
 	public TrickyAElements getTrickyAAccess() {
 		return (pTrickyA != null) ? pTrickyA : (pTrickyA = new TrickyAElements());
 	}
@@ -780,7 +784,8 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//TrickyC:
-	//  "TC" name=ID ({C1.x=current} "x")? ({C2.y=current} "y")? ({C3.z=current} "z")?;
+	//  "TC" name=ID ({C1.x=current} "x")? ({C2.y=current} "y")? ({C3.z=current} "z")
+	//  ?;
 	public TrickyCElements getTrickyCAccess() {
 		return (pTrickyC != null) ? pTrickyC : (pTrickyC = new TrickyCElements());
 	}
@@ -868,8 +873,9 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

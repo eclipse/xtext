@@ -1365,27 +1365,39 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Assignment cXAssignment_1_0_2_1 = (Assignment)cGroup_1_0_2.eContents().get(1);
 		private final RuleCall cXIDTerminalRuleCall_1_0_2_1_0 = (RuleCall)cXAssignment_1_0_2_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
-		private final Keyword cKyKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
-		private final Assignment cYAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
-		private final RuleCall cYIDTerminalRuleCall_1_1_1_0 = (RuleCall)cYAssignment_1_1_1.eContents().get(0);
-		private final Group cGroup_1_1_2 = (Group)cGroup_1_1.eContents().get(2);
-		private final Keyword cCommaKeyword_1_1_2_0 = (Keyword)cGroup_1_1_2.eContents().get(0);
-		private final Assignment cYAssignment_1_1_2_1 = (Assignment)cGroup_1_1_2.eContents().get(1);
-		private final RuleCall cYIDTerminalRuleCall_1_1_2_1_0 = (RuleCall)cYAssignment_1_1_2_1.eContents().get(0);
+		private final Group cGroup_1_1_0 = (Group)cGroup_1_1.eContents().get(0);
+		private final Keyword cKyKeyword_1_1_0_0 = (Keyword)cGroup_1_1_0.eContents().get(0);
+		private final Assignment cYAssignment_1_1_0_1 = (Assignment)cGroup_1_1_0.eContents().get(1);
+		private final RuleCall cYIDTerminalRuleCall_1_1_0_1_0 = (RuleCall)cYAssignment_1_1_0_1.eContents().get(0);
+		private final Group cGroup_1_1_0_2 = (Group)cGroup_1_1_0.eContents().get(2);
+		private final Keyword cCommaKeyword_1_1_0_2_0 = (Keyword)cGroup_1_1_0_2.eContents().get(0);
+		private final Assignment cYAssignment_1_1_0_2_1 = (Assignment)cGroup_1_1_0_2.eContents().get(1);
+		private final RuleCall cYIDTerminalRuleCall_1_1_0_2_1_0 = (RuleCall)cYAssignment_1_1_0_2_1.eContents().get(0);
+		private final Group cGroup_1_1_1 = (Group)cGroup_1_1.eContents().get(1);
+		private final Keyword cKzKeyword_1_1_1_0 = (Keyword)cGroup_1_1_1.eContents().get(0);
+		private final Assignment cZAssignment_1_1_1_1 = (Assignment)cGroup_1_1_1.eContents().get(1);
+		private final RuleCall cZIDTerminalRuleCall_1_1_1_1_0 = (RuleCall)cZAssignment_1_1_1_1.eContents().get(0);
+		private final Group cGroup_1_1_1_2 = (Group)cGroup_1_1_1.eContents().get(2);
+		private final Keyword cCommaKeyword_1_1_1_2_0 = (Keyword)cGroup_1_1_1_2.eContents().get(0);
+		private final Assignment cZAssignment_1_1_1_2_1 = (Assignment)cGroup_1_1_1_2.eContents().get(1);
+		private final RuleCall cZIDTerminalRuleCall_1_1_1_2_1_0 = (RuleCall)cZAssignment_1_1_1_2_1.eContents().get(0);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//Bug305171:
-		//  "#19" (("kx" x+=ID ("," x+=ID)*)? ("ky" y+=ID ("," y+=ID)*)?) name=ID;
+		//  "#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID (
+		//  "," z+=ID)*)?)) name=ID;
 		public ParserRule getRule() { return rule; }
 
-		//"#19" (("kx" x+=ID ("," x+=ID)*)? ("ky" y+=ID ("," y+=ID)*)?) name=ID
+		//"#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z
+		//+=ID)*)?)) name=ID
 		public Group getGroup() { return cGroup; }
 
 		//"#19"
 		public Keyword getNumberSignDigitOneDigitNineKeyword_0() { return cNumberSignDigitOneDigitNineKeyword_0; }
 
-		//("kx" x+=ID ("," x+=ID)*)? ("ky" y+=ID ("," y+=ID)*)?
+		//("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z+=ID)*)
+		//?)
 		public Group getGroup_1() { return cGroup_1; }
 
 		//("kx" x+=ID ("," x+=ID)*)?
@@ -1412,29 +1424,56 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getXIDTerminalRuleCall_1_0_2_1_0() { return cXIDTerminalRuleCall_1_0_2_1_0; }
 
-		//("ky" y+=ID ("," y+=ID)*)?
+		//("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z+=ID)*)?
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
+		//("ky" y+=ID ("," y+=ID)*)?
+		public Group getGroup_1_1_0() { return cGroup_1_1_0; }
+
 		//"ky"
-		public Keyword getKyKeyword_1_1_0() { return cKyKeyword_1_1_0; }
+		public Keyword getKyKeyword_1_1_0_0() { return cKyKeyword_1_1_0_0; }
 
 		//y+=ID
-		public Assignment getYAssignment_1_1_1() { return cYAssignment_1_1_1; }
+		public Assignment getYAssignment_1_1_0_1() { return cYAssignment_1_1_0_1; }
 
 		//ID
-		public RuleCall getYIDTerminalRuleCall_1_1_1_0() { return cYIDTerminalRuleCall_1_1_1_0; }
+		public RuleCall getYIDTerminalRuleCall_1_1_0_1_0() { return cYIDTerminalRuleCall_1_1_0_1_0; }
 
 		//("," y+=ID)*
-		public Group getGroup_1_1_2() { return cGroup_1_1_2; }
+		public Group getGroup_1_1_0_2() { return cGroup_1_1_0_2; }
 
 		//","
-		public Keyword getCommaKeyword_1_1_2_0() { return cCommaKeyword_1_1_2_0; }
+		public Keyword getCommaKeyword_1_1_0_2_0() { return cCommaKeyword_1_1_0_2_0; }
 
 		//y+=ID
-		public Assignment getYAssignment_1_1_2_1() { return cYAssignment_1_1_2_1; }
+		public Assignment getYAssignment_1_1_0_2_1() { return cYAssignment_1_1_0_2_1; }
 
 		//ID
-		public RuleCall getYIDTerminalRuleCall_1_1_2_1_0() { return cYIDTerminalRuleCall_1_1_2_1_0; }
+		public RuleCall getYIDTerminalRuleCall_1_1_0_2_1_0() { return cYIDTerminalRuleCall_1_1_0_2_1_0; }
+
+		//("kz" z+=ID ("," z+=ID)*)?
+		public Group getGroup_1_1_1() { return cGroup_1_1_1; }
+
+		//"kz"
+		public Keyword getKzKeyword_1_1_1_0() { return cKzKeyword_1_1_1_0; }
+
+		//z+=ID
+		public Assignment getZAssignment_1_1_1_1() { return cZAssignment_1_1_1_1; }
+
+		//ID
+		public RuleCall getZIDTerminalRuleCall_1_1_1_1_0() { return cZIDTerminalRuleCall_1_1_1_1_0; }
+
+		//("," z+=ID)*
+		public Group getGroup_1_1_1_2() { return cGroup_1_1_1_2; }
+
+		//","
+		public Keyword getCommaKeyword_1_1_1_2_0() { return cCommaKeyword_1_1_1_2_0; }
+
+		//z+=ID
+		public Assignment getZAssignment_1_1_1_2_1() { return cZAssignment_1_1_1_2_1; }
+
+		//ID
+		public RuleCall getZIDTerminalRuleCall_1_1_1_2_1_0() { return cZIDTerminalRuleCall_1_1_1_2_1_0; }
 
 		//name=ID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
@@ -1867,7 +1906,8 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Bug305171:
-	//  "#19" (("kx" x+=ID ("," x+=ID)*)? ("ky" y+=ID ("," y+=ID)*)?) name=ID;
+	//  "#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID (
+	//  "," z+=ID)*)?)) name=ID;
 	public Bug305171Elements getBug305171Access() {
 		return (pBug305171 != null) ? pBug305171 : (pBug305171 = new Bug305171Elements());
 	}
@@ -1889,8 +1929,9 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

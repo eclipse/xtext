@@ -6363,11 +6363,13 @@ protected class TypeBug2B_NameAssignment_2 extends AssignmentToken  {
 /************ begin Rule Bug305171 ****************
  *
  * Bug305171:
- *   "#19" (("kx" x+=ID ("," x+=ID)*)? ("ky" y+=ID ("," y+=ID)*)?) name=ID;
+ *   "#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID (
+ *   "," z+=ID)*)?)) name=ID;
  *
  **/
 
-// "#19" (("kx" x+=ID ("," x+=ID)*)? ("ky" y+=ID ("," y+=ID)*)?) name=ID
+// "#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z
+// +=ID)*)?)) name=ID
 protected class Bug305171_Group extends GroupToken {
 	
 	public Bug305171_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -6417,7 +6419,8 @@ protected class Bug305171_NumberSignDigitOneDigitNineKeyword_0 extends KeywordTo
 
 }
 
-// ("kx" x+=ID ("," x+=ID)*)? ("ky" y+=ID ("," y+=ID)*)?
+// ("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z+=ID)*)
+// ?)
 protected class Bug305171_Group_1 extends GroupToken {
 	
 	public Bug305171_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -6433,8 +6436,6 @@ protected class Bug305171_Group_1 extends GroupToken {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Bug305171_Group_1_1(parent, this, 0, inst);
-			case 1: return new Bug305171_Group_1_0(parent, this, 1, inst);
-			case 2: return new Bug305171_NumberSignDigitOneDigitNineKeyword_0(parent, this, 2, inst);
 			default: return null;
 		}	
 	}
@@ -6601,7 +6602,7 @@ protected class Bug305171_XAssignment_1_0_2_1 extends AssignmentToken  {
 
 
 
-// ("ky" y+=ID ("," y+=ID)*)?
+// ("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z+=ID)*)?
 protected class Bug305171_Group_1_1 extends GroupToken {
 	
 	public Bug305171_Group_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -6616,8 +6617,33 @@ protected class Bug305171_Group_1_1 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Bug305171_Group_1_1_2(parent, this, 0, inst);
-			case 1: return new Bug305171_YAssignment_1_1_1(parent, this, 1, inst);
+			case 0: return new Bug305171_Group_1_1_1(parent, this, 0, inst);
+			case 1: return new Bug305171_Group_1_1_0(parent, this, 1, inst);
+			case 2: return new Bug305171_Group_1_0(parent, this, 2, inst);
+			case 3: return new Bug305171_NumberSignDigitOneDigitNineKeyword_0(parent, this, 3, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// ("ky" y+=ID ("," y+=ID)*)?
+protected class Bug305171_Group_1_1_0 extends GroupToken {
+	
+	public Bug305171_Group_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getBug305171Access().getGroup_1_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug305171_Group_1_1_0_2(parent, this, 0, inst);
+			case 1: return new Bug305171_YAssignment_1_1_0_1(parent, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -6625,15 +6651,15 @@ protected class Bug305171_Group_1_1 extends GroupToken {
 }
 
 // "ky"
-protected class Bug305171_KyKeyword_1_1_0 extends KeywordToken  {
+protected class Bug305171_KyKeyword_1_1_0_0 extends KeywordToken  {
 	
-	public Bug305171_KyKeyword_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Bug305171_KyKeyword_1_1_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getBug305171Access().getKyKeyword_1_1_0();
+		return grammarAccess.getBug305171Access().getKyKeyword_1_1_0_0();
 	}
 
     @Override
@@ -6648,21 +6674,21 @@ protected class Bug305171_KyKeyword_1_1_0 extends KeywordToken  {
 }
 
 // y+=ID
-protected class Bug305171_YAssignment_1_1_1 extends AssignmentToken  {
+protected class Bug305171_YAssignment_1_1_0_1 extends AssignmentToken  {
 	
-	public Bug305171_YAssignment_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Bug305171_YAssignment_1_1_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getBug305171Access().getYAssignment_1_1_1();
+		return grammarAccess.getBug305171Access().getYAssignment_1_1_0_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Bug305171_KyKeyword_1_1_0(parent, this, 0, inst);
+			case 0: return new Bug305171_KyKeyword_1_1_0_0(parent, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -6673,7 +6699,7 @@ protected class Bug305171_YAssignment_1_1_1 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("y");
 		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
-			element = grammarAccess.getBug305171Access().getYIDTerminalRuleCall_1_1_1_0();
+			element = grammarAccess.getBug305171Access().getYIDTerminalRuleCall_1_1_0_1_0();
 			return obj;
 		}
 		return null;
@@ -6682,21 +6708,21 @@ protected class Bug305171_YAssignment_1_1_1 extends AssignmentToken  {
 }
 
 // ("," y+=ID)*
-protected class Bug305171_Group_1_1_2 extends GroupToken {
+protected class Bug305171_Group_1_1_0_2 extends GroupToken {
 	
-	public Bug305171_Group_1_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Bug305171_Group_1_1_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getBug305171Access().getGroup_1_1_2();
+		return grammarAccess.getBug305171Access().getGroup_1_1_0_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Bug305171_YAssignment_1_1_2_1(parent, this, 0, inst);
+			case 0: return new Bug305171_YAssignment_1_1_0_2_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -6704,22 +6730,22 @@ protected class Bug305171_Group_1_1_2 extends GroupToken {
 }
 
 // ","
-protected class Bug305171_CommaKeyword_1_1_2_0 extends KeywordToken  {
+protected class Bug305171_CommaKeyword_1_1_0_2_0 extends KeywordToken  {
 	
-	public Bug305171_CommaKeyword_1_1_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Bug305171_CommaKeyword_1_1_0_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getBug305171Access().getCommaKeyword_1_1_2_0();
+		return grammarAccess.getBug305171Access().getCommaKeyword_1_1_0_2_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Bug305171_Group_1_1_2(parent, this, 0, inst);
-			case 1: return new Bug305171_YAssignment_1_1_1(parent, this, 1, inst);
+			case 0: return new Bug305171_Group_1_1_0_2(parent, this, 0, inst);
+			case 1: return new Bug305171_YAssignment_1_1_0_1(parent, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -6727,21 +6753,21 @@ protected class Bug305171_CommaKeyword_1_1_2_0 extends KeywordToken  {
 }
 
 // y+=ID
-protected class Bug305171_YAssignment_1_1_2_1 extends AssignmentToken  {
+protected class Bug305171_YAssignment_1_1_0_2_1 extends AssignmentToken  {
 	
-	public Bug305171_YAssignment_1_1_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Bug305171_YAssignment_1_1_0_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getBug305171Access().getYAssignment_1_1_2_1();
+		return grammarAccess.getBug305171Access().getYAssignment_1_1_0_2_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Bug305171_CommaKeyword_1_1_2_0(parent, this, 0, inst);
+			case 0: return new Bug305171_CommaKeyword_1_1_0_2_0(parent, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -6752,13 +6778,176 @@ protected class Bug305171_YAssignment_1_1_2_1 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("y");
 		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
-			element = grammarAccess.getBug305171Access().getYIDTerminalRuleCall_1_1_2_1_0();
+			element = grammarAccess.getBug305171Access().getYIDTerminalRuleCall_1_1_0_2_1_0();
 			return obj;
 		}
 		return null;
 	}
 
 }
+
+
+
+// ("kz" z+=ID ("," z+=ID)*)?
+protected class Bug305171_Group_1_1_1 extends GroupToken {
+	
+	public Bug305171_Group_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getBug305171Access().getGroup_1_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug305171_Group_1_1_1_2(parent, this, 0, inst);
+			case 1: return new Bug305171_ZAssignment_1_1_1_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "kz"
+protected class Bug305171_KzKeyword_1_1_1_0 extends KeywordToken  {
+	
+	public Bug305171_KzKeyword_1_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug305171Access().getKzKeyword_1_1_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug305171_Group_1_1_0(parent, this, 0, inst);
+			case 1: return new Bug305171_Group_1_0(parent, this, 1, inst);
+			case 2: return new Bug305171_NumberSignDigitOneDigitNineKeyword_0(parent, this, 2, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// z+=ID
+protected class Bug305171_ZAssignment_1_1_1_1 extends AssignmentToken  {
+	
+	public Bug305171_ZAssignment_1_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getBug305171Access().getZAssignment_1_1_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug305171_KzKeyword_1_1_1_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("z",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("z");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getBug305171Access().getZIDTerminalRuleCall_1_1_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ("," z+=ID)*
+protected class Bug305171_Group_1_1_1_2 extends GroupToken {
+	
+	public Bug305171_Group_1_1_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getBug305171Access().getGroup_1_1_1_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug305171_ZAssignment_1_1_1_2_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// ","
+protected class Bug305171_CommaKeyword_1_1_1_2_0 extends KeywordToken  {
+	
+	public Bug305171_CommaKeyword_1_1_1_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug305171Access().getCommaKeyword_1_1_1_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug305171_Group_1_1_1_2(parent, this, 0, inst);
+			case 1: return new Bug305171_ZAssignment_1_1_1_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// z+=ID
+protected class Bug305171_ZAssignment_1_1_1_2_1 extends AssignmentToken  {
+	
+	public Bug305171_ZAssignment_1_1_1_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getBug305171Access().getZAssignment_1_1_1_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug305171_CommaKeyword_1_1_1_2_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("z",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("z");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getBug305171Access().getZIDTerminalRuleCall_1_1_1_2_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
 
 
 

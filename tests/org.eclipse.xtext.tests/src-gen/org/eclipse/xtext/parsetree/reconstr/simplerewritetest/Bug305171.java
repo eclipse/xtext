@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171#getX <em>X</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171#getY <em>Y</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171#getZ <em>Z</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171#getName <em>Name</em>}</li>
  * </ul>
  * </p>
@@ -58,6 +59,22 @@ public interface Bug305171 extends Expression
    * @generated
    */
   EList<String> getY();
+
+  /**
+   * Returns the value of the '<em><b>Z</b></em>' attribute list.
+   * The list contents are of type {@link java.lang.String}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Z</em>' attribute list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Z</em>' attribute list.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestPackage#getBug305171_Z()
+   * @model unique="false"
+   * @generated
+   */
+  EList<String> getZ();
 
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.

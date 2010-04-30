@@ -1112,9 +1112,19 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getBug305171_Name()
+  public EAttribute getBug305171_Z()
   {
     return (EAttribute)bug305171EClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBug305171_Name()
+  {
+    return (EAttribute)bug305171EClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1274,6 +1284,7 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     bug305171EClass = createEClass(BUG305171);
     createEAttribute(bug305171EClass, BUG305171__X);
     createEAttribute(bug305171EClass, BUG305171__Y);
+    createEAttribute(bug305171EClass, BUG305171__Z);
     createEAttribute(bug305171EClass, BUG305171__NAME);
 
     opEClass = createEClass(OP);
@@ -1449,6 +1460,7 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     initEClass(bug305171EClass, Bug305171.class, "Bug305171", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getBug305171_X(), ecorePackage.getEString(), "x", null, 0, -1, Bug305171.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getBug305171_Y(), ecorePackage.getEString(), "y", null, 0, -1, Bug305171.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getBug305171_Z(), ecorePackage.getEString(), "z", null, 0, -1, Bug305171.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getBug305171_Name(), ecorePackage.getEString(), "name", null, 0, 1, Bug305171.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(opEClass, Op.class, "Op", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

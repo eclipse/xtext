@@ -883,11 +883,13 @@ protected class Parens_EmAssignment_3 extends AssignmentToken  {
  * * /
  * 
  * TrickyA returns TypeA1:
- *   "TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=STRING;
+ *   "TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=
+ *   STRING;
  *
  **/
 
-// "TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=STRING
+// "TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=
+// STRING
 protected class TrickyA_Group extends GroupToken {
 	
 	public TrickyA_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1502,7 +1504,8 @@ protected class TrickyB_TypeAssignment_2 extends AssignmentToken  {
 /************ begin Rule TrickyC ****************
  *
  * TrickyC:
- *   "TC" name=ID ({C1.x=current} "x")? ({C2.y=current} "y")? ({C3.z=current} "z")?;
+ *   "TC" name=ID ({C1.x=current} "x")? ({C2.y=current} "y")? ({C3.z=current} "z")
+ *   ?;
  *
  **/
 

@@ -14,7 +14,7 @@ public final class SimpleReconstrTestLanguageDelimiters {
 	}
 	
 	public static final ISequenceMatcher ruleCall$40$Delimiter = new SetBasedKeywordMatcher(
-		"type", "extends", "mykeyword1", "mykeyword2", "myoption", "kw", "v1", "v2", "kw0", "kw1", "kw2", "kw30", "kw3", "kw4", "kw5", "kw6", "kw7", "interface", "class", "static", "final", "transient", "item", "refs", "ka", "kb", "kx", "ky");
+		"type", "extends", "mykeyword1", "mykeyword2", "myoption", "kw", "v1", "v2", "kw0", "kw1", "kw2", "kw30", "kw3", "kw4", "kw5", "kw6", "kw7", "interface", "class", "static", "final", "transient", "item", "refs", "ka", "kb", "kx", "ky", "kz");
 
 	public static final ICharacterClass keyword$44$Delimiter = ICharacterClass.Factory.nullClass();
 

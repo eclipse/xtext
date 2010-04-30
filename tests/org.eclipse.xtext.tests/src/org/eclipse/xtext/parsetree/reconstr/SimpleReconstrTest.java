@@ -310,6 +310,12 @@ public class SimpleReconstrTest extends AbstractXtextTests {
 
 		model = "#19 kx a ky c foo";
 		assertEquals(model, parseAndSerialize(model));
+
+		model = "#19 kx a ky c kz d foo";
+		assertEquals(model, parseAndSerialize(model));
+
+		model = "#19 kz d foo";
+		assertEquals(model, parseAndSerialize(model));
 	}
 
 	@Override

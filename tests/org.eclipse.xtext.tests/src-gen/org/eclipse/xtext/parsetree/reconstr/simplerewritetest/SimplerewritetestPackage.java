@@ -1326,13 +1326,22 @@ public interface SimplerewritetestPackage extends EPackage
   int BUG305171__Y = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
+   * The feature id for the '<em><b>Z</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG305171__Z = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int BUG305171__NAME = EXPRESSION_FEATURE_COUNT + 2;
+  int BUG305171__NAME = EXPRESSION_FEATURE_COUNT + 3;
 
   /**
    * The number of structural features of the '<em>Bug305171</em>' class.
@@ -1341,7 +1350,7 @@ public interface SimplerewritetestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BUG305171_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+  int BUG305171_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 4;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.
@@ -2174,6 +2183,17 @@ public interface SimplerewritetestPackage extends EPackage
   EAttribute getBug305171_Y();
 
   /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171#getZ <em>Z</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Z</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171#getZ()
+   * @see #getBug305171()
+   * @generated
+   */
+  EAttribute getBug305171_Z();
+
+  /**
    * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Bug305171#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2893,6 +2913,14 @@ public interface SimplerewritetestPackage extends EPackage
      * @generated
      */
     EAttribute BUG305171__Y = eINSTANCE.getBug305171_Y();
+
+    /**
+     * The meta object literal for the '<em><b>Z</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BUG305171__Z = eINSTANCE.getBug305171_Z();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.

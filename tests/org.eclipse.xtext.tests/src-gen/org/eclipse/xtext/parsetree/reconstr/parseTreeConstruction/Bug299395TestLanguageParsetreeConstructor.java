@@ -46,8 +46,8 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   {Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")* (
- *   "subModel" subModel=SubModel)?;
+ *   {Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")*
+ *   ("subModel" subModel=SubModel)?;
  *
  **/
 

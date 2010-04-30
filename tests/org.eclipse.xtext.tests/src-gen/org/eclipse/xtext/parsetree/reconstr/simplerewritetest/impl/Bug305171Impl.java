@@ -29,6 +29,7 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestP
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Bug305171Impl#getX <em>X</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Bug305171Impl#getY <em>Y</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Bug305171Impl#getZ <em>Z</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Bug305171Impl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
@@ -56,6 +57,16 @@ public class Bug305171Impl extends ExpressionImpl implements Bug305171
    * @ordered
    */
   protected EList<String> y;
+
+  /**
+   * The cached value of the '{@link #getZ() <em>Z</em>}' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getZ()
+   * @generated
+   * @ordered
+   */
+  protected EList<String> z;
 
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -131,6 +142,20 @@ public class Bug305171Impl extends ExpressionImpl implements Bug305171
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<String> getZ()
+  {
+    if (z == null)
+    {
+      z = new EDataTypeEList<String>(String.class, this, SimplerewritetestPackage.BUG305171__Z);
+    }
+    return z;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public String getName()
   {
     return name;
@@ -163,6 +188,8 @@ public class Bug305171Impl extends ExpressionImpl implements Bug305171
         return getX();
       case SimplerewritetestPackage.BUG305171__Y:
         return getY();
+      case SimplerewritetestPackage.BUG305171__Z:
+        return getZ();
       case SimplerewritetestPackage.BUG305171__NAME:
         return getName();
     }
@@ -188,6 +215,10 @@ public class Bug305171Impl extends ExpressionImpl implements Bug305171
         getY().clear();
         getY().addAll((Collection<? extends String>)newValue);
         return;
+      case SimplerewritetestPackage.BUG305171__Z:
+        getZ().clear();
+        getZ().addAll((Collection<? extends String>)newValue);
+        return;
       case SimplerewritetestPackage.BUG305171__NAME:
         setName((String)newValue);
         return;
@@ -211,6 +242,9 @@ public class Bug305171Impl extends ExpressionImpl implements Bug305171
       case SimplerewritetestPackage.BUG305171__Y:
         getY().clear();
         return;
+      case SimplerewritetestPackage.BUG305171__Z:
+        getZ().clear();
+        return;
       case SimplerewritetestPackage.BUG305171__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -232,6 +266,8 @@ public class Bug305171Impl extends ExpressionImpl implements Bug305171
         return x != null && !x.isEmpty();
       case SimplerewritetestPackage.BUG305171__Y:
         return y != null && !y.isEmpty();
+      case SimplerewritetestPackage.BUG305171__Z:
+        return z != null && !z.isEmpty();
       case SimplerewritetestPackage.BUG305171__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
@@ -253,6 +289,8 @@ public class Bug305171Impl extends ExpressionImpl implements Bug305171
     result.append(x);
     result.append(", y: ");
     result.append(y);
+    result.append(", z: ");
+    result.append(z);
     result.append(", name: ");
     result.append(name);
     result.append(')');

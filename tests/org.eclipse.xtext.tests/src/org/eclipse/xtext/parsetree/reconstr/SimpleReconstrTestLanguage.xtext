@@ -109,4 +109,4 @@ TypeBug2A: {TypeBug2A} "ka" name=ID;
 TypeBug2B: {TypeBug2B} "kb" name=ID;
 
 Bug305171:
-	"#19" (('kx' x+=ID (',' x+=ID)*)? ('ky' y+=ID (',' y+=ID)*)?) name=ID;
+	"#19" (('kx' x+=ID (',' x+=ID)*)? (('ky' y+=ID (',' y+=ID)*)? ('kz' z+=ID (',' z+=ID)*)?)) name=ID;
