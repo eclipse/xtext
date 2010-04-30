@@ -24,9 +24,9 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Sets;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.google.inject.internal.Maps;
 
 /**
  * Schedules extraordinary Xtext builds, e.g. on project open/close. Keeps a set of scheduled jobs to avoid duplicate

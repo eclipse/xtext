@@ -43,9 +43,9 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Maps;
 import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
-import com.google.inject.internal.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

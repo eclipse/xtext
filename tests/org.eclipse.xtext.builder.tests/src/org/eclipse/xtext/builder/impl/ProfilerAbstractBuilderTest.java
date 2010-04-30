@@ -26,11 +26,11 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Event;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.shared.Access;
+import org.eclipse.xtext.util.StopWatch;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
-import com.google.inject.internal.Stopwatch;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -61,7 +61,7 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 		IFolder folder = addSourceFolder(project, "src");
 		int NUM_FILES = 200;
 		IFile[] files = new IFile[NUM_FILES];
-		Stopwatch timer = new Stopwatch();
+		StopWatch timer = new StopWatch();
 		for (int i = 0; i < NUM_FILES; i++) {
 			IFile file = folder.getFile("Test_" + i + "_" + F_EXT);
 			files[i] = file;
@@ -85,7 +85,7 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 		
 		int NUM_FILES = 2000;
 		IFile[] files = new IFile[NUM_FILES];
-		Stopwatch timer = new Stopwatch();
+		StopWatch timer = new StopWatch();
 		for (int i = 0; i < NUM_FILES; i++) {
 			IFile file = folder.getFile("Test_" + i + "_" + F_EXT);
 			files[i] = file;
@@ -108,7 +108,7 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 		IFolder folder = addSourceFolder(project, "src");
 		int NUM_FILES = 200;
 		IFile[] files = new IFile[NUM_FILES];
-		Stopwatch timer = new Stopwatch();
+		StopWatch timer = new StopWatch();
 		for (int i = 0; i < NUM_FILES; i++) {
 			IFile file = folder.getFile("Test_" + i + "_" + F_EXT);
 			files[i] = file;
@@ -130,7 +130,7 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 		IFolder folder = addSourceFolder(project, "src");
 		int NUM_FILES = 500;
 		IFile[] files = new IFile[NUM_FILES];
-		Stopwatch timer = new Stopwatch();
+		StopWatch timer = new StopWatch();
 		for (int i = 0; i < NUM_FILES; i++) {
 			IFile file = folder.getFile("Test_" + i + "_" + F_EXT);
 			files[i] = file;
@@ -152,7 +152,7 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 		IFolder folder = addSourceFolder(project, "src");
 		int NUM_FILES = 10;
 		IFile[] files = new IFile[NUM_FILES];
-		Stopwatch timer = new Stopwatch();
+		StopWatch timer = new StopWatch();
 		for (int i = 0; i < NUM_FILES; i++) {
 			IFile file = folder.getFile("Test_" + i + "_" + F_EXT);
 			files[i] = file;
@@ -178,9 +178,8 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 		assertEquals(NUM_FILES, countResourcesInIndex());
 	}
 
-	private void logAndReset(String string, Stopwatch timer) {
-		long took = timer.reset();
-		System.out.println(string + " took : " + took);
+	private void logAndReset(String string, StopWatch timer) {
+		timer.resetAndLog(string);
 	}
 
 	private IBuilderState getBuilderState() {

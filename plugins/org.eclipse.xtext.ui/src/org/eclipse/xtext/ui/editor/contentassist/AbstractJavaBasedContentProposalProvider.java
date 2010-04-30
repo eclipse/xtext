@@ -37,8 +37,8 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
-import com.google.inject.internal.Lists;
 
 /**
  * @author Michael Clay - Initial contribution and API
@@ -190,7 +190,7 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 		Object[] paramAsArray = new Object[params.length + 1];
 		System.arraycopy(params, 0, paramAsArray, 0, params.length);
 		paramAsArray[params.length] = acceptor;
-		if (handledArguments.add(Lists.newArrayList(methodName, paramAsArray))) {
+		if (handledArguments.add(Lists.asList(methodName, paramAsArray))) {
 			dispatcher.invoke(paramAsArray);
 		}
 	}

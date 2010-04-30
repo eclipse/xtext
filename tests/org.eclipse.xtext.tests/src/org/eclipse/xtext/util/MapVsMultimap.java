@@ -13,7 +13,7 @@ import java.util.Map;
 import junit.framework.TestCase;
 
 import com.google.common.collect.Lists;
-import com.google.inject.internal.Maps;
+import com.google.common.collect.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
