@@ -22,8 +22,8 @@ import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.parsetree.reconstr.SerializerOptions;
 import org.eclipse.xtext.parsetree.reconstr.Serializer;
-import org.eclipse.xtext.parsetree.reconstr.Serializer.SerializationOptions;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -166,8 +166,8 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 			NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(eObject);
 			CompositeNode node = nodeAdapter.getParserNode();
 
-			SerializationOptions options = new SerializationOptions();
-			options.setFormat(false);
+			SerializerOptions options = new SerializerOptions();
+			options.setFormatting(false);
 			String text = serializerUtil.serialize(eObject, options);
 			
 			TextEdit edit = new ReplaceEdit(node.getOffset(), node.getLength(), text);

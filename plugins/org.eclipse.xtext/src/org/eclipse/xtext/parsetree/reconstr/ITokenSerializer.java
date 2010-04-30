@@ -15,7 +15,7 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.reconstr.impl.CrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.impl.EnumLiteralSerializer;
 import org.eclipse.xtext.parsetree.reconstr.impl.KeywordSerializer;
-import org.eclipse.xtext.parsetree.reconstr.impl.DefaultValueSerializer;
+import org.eclipse.xtext.parsetree.reconstr.impl.ValueSerializer;
 
 import com.google.inject.ImplementedBy;
 
@@ -69,7 +69,7 @@ public interface ITokenSerializer {
 		String serializeUnassignedKeyword(EObject context, Keyword keyword, AbstractNode node);
 	}
 
-	@ImplementedBy(DefaultValueSerializer.class)
+	@ImplementedBy(ValueSerializer.class)
 	interface IValueSerializer extends ITokenSerializer {
 
 		boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, AbstractNode node);

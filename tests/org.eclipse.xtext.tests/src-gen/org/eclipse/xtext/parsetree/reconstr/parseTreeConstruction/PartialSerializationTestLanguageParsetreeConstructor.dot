@@ -1,0 +1,43 @@
+## This is a Graphviz .dot file (http://www.graphviz.org/)
+## You can use the command 'dot -Tpdf this.dot > out.pdf' to render it.
+digraph G {
+rulecall14124010 [shape=record,label="Model \[NodeRoot\]:\n=\>NodeRoot",peripheries=2];
+group14835291 [shape=record,label="NodeRoot \[NodeRoot\]:\n( )"];
+keyword10536330 [label="\"#1\"",peripheries=2];
+assignment586269 [label="node= "];
+rulecall5211739 [color=grey,label="=\>Node",style=dashed];
+group2118028 [shape=record,label="Node \[Node\]:\n( )"];
+keyword13223314 [label="\"node\"",peripheries=2];
+assignment13249415 [label="name= "];
+rulecall15708701 [color=grey,label="=\>ID",style=dashed];
+group9867510 [label="( )?"];
+keyword468234 [label="\"(\""];
+assignment1097951 [label="children+= +"];
+rulecall15111929 [color=grey,label="=\>Node",style=dashed];
+keyword12702366 [label="\")\""];
+rulecall14124010->group14835291 [label=0,style=dotted,arrowhead=onormalonormal];
+group14835291->keyword10536330 [];
+assignment586269->rulecall5211739 [];
+assignment586269->group2118028 [label=0,style=dotted,arrowhead=onormalonormal];
+assignment586269->keyword10536330 [arrowtail=odot,label=0,style=dotted,arrowhead=onormal];
+group14835291->assignment586269 [];
+group14835291->assignment586269 [label=0,style=dotted,arrowhead=onormal];
+group2118028->keyword13223314 [];
+assignment13249415->rulecall15708701 [];
+assignment13249415->keyword13223314 [label=0,style=dotted,arrowhead=onormal];
+group2118028->assignment13249415 [];
+keyword468234->assignment13249415 [label=0,style=dotted,arrowhead=onormal];
+group9867510->keyword468234 [];
+assignment1097951->rulecall15111929 [];
+assignment1097951->group2118028 [label=0,style=dotted,arrowhead=onormalonormal];
+assignment1097951->assignment1097951 [arrowtail=odot,label=0,style=dotted,arrowhead=onormal];
+assignment1097951->keyword468234 [arrowtail=odot,label=1,style=dotted,arrowhead=onormal];
+group9867510->assignment1097951 [];
+keyword12702366->assignment1097951 [label=0,style=dotted,arrowhead=onormal];
+group9867510->keyword12702366 [];
+group9867510->keyword12702366 [label=0,style=dotted,arrowhead=onormal];
+group2118028->group9867510 [];
+group2118028->group9867510 [label=0,style=dotted,arrowhead=onormal];
+group2118028->assignment13249415 [label=1,style=dotted,arrowhead=onormal];
+}
+
