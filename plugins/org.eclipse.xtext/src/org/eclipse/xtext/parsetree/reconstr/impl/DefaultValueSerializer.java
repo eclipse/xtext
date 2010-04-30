@@ -16,23 +16,22 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
+import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer;
 
 import com.google.inject.Inject;
 
 /**
  * @author meysholdt - Initial contribution and API
  */
-public class DefaultValueSerializer extends AbstractValueSerializer {
+public class DefaultValueSerializer implements IValueSerializer {
 
 	@Inject
 	private IValueConverterService converter;
 
-	@Override
 	public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, AbstractNode node) {
 		return ruleCall == node.getGrammarElement();
 	}
 
-	@Override
 	public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, AbstractNode node) {
 		if (ruleCall != node.getGrammarElement())
 			return false;
@@ -43,7 +42,6 @@ public class DefaultValueSerializer extends AbstractValueSerializer {
 		return converted != null && converted.equals(value);
 	}
 
-	@Override
 	public boolean isValid(EObject context, RuleCall ruleCall, Object value, IErrorAcceptor errorAcceptor) {
 		try {
 			String str = converter.toString(value, ruleCall.getRule().getName());
@@ -79,7 +77,6 @@ public class DefaultValueSerializer extends AbstractValueSerializer {
 		}
 	}
 
-	@Override
 	public String serializeAssignedValue(EObject context, RuleCall ruleCall, Object value, AbstractNode node) {
 		if (node != null) {
 			Object converted = converter.toValue(serialize(node), ruleCall.getRule().getName(), node);
@@ -89,7 +86,6 @@ public class DefaultValueSerializer extends AbstractValueSerializer {
 		return converter.toString(value, ruleCall.getRule().getName());
 	}
 
-	@Override
 	public String serializeUnassignedValue(EObject context, RuleCall ruleCall, AbstractNode node) {
 		String r = serializeUnassignedValueByRuleCall(ruleCall, context, node);
 		if (r != null)

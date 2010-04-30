@@ -42,7 +42,7 @@ public class TraceToDot extends TreeConstNFAToDot {
 				// String ser = ((AbstractToken) t).serialize().replaceAll(
 				// "\\\\", "\\\\");
 				String tokenDescription = token.getClass().getSimpleName() + "\\n"
-						+ token.getCurrent() + "\\n'" /* + ser */+ "'";
+						+ token.getEObjectConsumer() + "\\n'" /* + ser */+ "'";
 				digraph.add(new Node(token, tokenDescription));
 				if (token.getGrammarElement() != null) {
 					ParserRule parserRule = GrammarUtil.containingParserRule(token
@@ -54,7 +54,7 @@ public class TraceToDot extends TreeConstNFAToDot {
 				}
 				if (token.getNext() != null) {
 					Edge edge = new Edge(token.getNext(), token);
-					edge.setLabel(String.valueOf((token).getNo()));
+					edge.setLabel(String.valueOf((token).getTransitionIndex()));
 					if (!solid)
 						edge.setStyle("dashed");
 					digraph.add(edge);

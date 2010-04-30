@@ -38,7 +38,7 @@ public class TreeConstNFAToDot extends GrammarToDot {
 		for (TreeConstTransition outgoingAfterReturn : nfas.getOutgoingAfterReturn())
 			digraph.add(drawFollowerEdge(grammarElement, outgoingAfterReturn, true));
 
-		if (nfas.getStatInt() != Status.ENABLED)
+		if (nfas.getStatusInternal() != Status.ENABLED)
 			node.setStyle("dashed");
 		if (nfas.isEndState())
 			node.put("peripheries", "2");

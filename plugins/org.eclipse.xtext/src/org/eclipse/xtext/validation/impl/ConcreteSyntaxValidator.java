@@ -88,7 +88,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			return false;
 		EReference ref = obj.eContainmentFeature();
 		EObject cnt = obj.eContainer();
-		if (ref.isMany() && transSrvc.isMixedList(cnt, ref)) {
+		if (ref.isMany() && transSrvc.isCheckElementsIndividually(cnt, ref)) {
 			if (transSrvc.isTransient(cnt, ref, ((List<?>) cnt.eGet(ref)).indexOf(obj)))
 				return true;
 		} else if (transSrvc.isTransient(cnt, ref, 0))

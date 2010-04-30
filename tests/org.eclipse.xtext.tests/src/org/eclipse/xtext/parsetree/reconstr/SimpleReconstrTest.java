@@ -47,7 +47,7 @@ public class SimpleReconstrTest extends AbstractXtextTests {
 		//			System.out.println(EmfFormatter.objToStr(NodeUtil.getRootNode(result)));
 		//			logger.trace(EmfFormatter.objToStr(NodeUtil.getRootNode(result).getLeafNodes()));
 		//		}
-		SerializerUtil.SerializationOptions opt = new SerializerUtil.SerializationOptions();
+		Serializer.SerializationOptions opt = new Serializer.SerializationOptions();
 		opt.setFormat(false);
 		return getSerializer().serialize(result, opt);
 	}
@@ -253,7 +253,7 @@ public class SimpleReconstrTest extends AbstractXtextTests {
 		EmptyObjectBug284850 result = (EmptyObjectBug284850) getModel(model);
 		result.getItems().getList().clear();
 		//		System.out.println(EmfFormatter.objToStr(result));
-		SerializerUtil.SerializationOptions opt = new SerializerUtil.SerializationOptions();
+		Serializer.SerializationOptions opt = new Serializer.SerializationOptions();
 		opt.setFormat(false);
 		String actual = getSerializer().serialize(result, opt);
 		assertEquals(model, actual);
@@ -262,7 +262,7 @@ public class SimpleReconstrTest extends AbstractXtextTests {
 	public void testMultiInheritanceBug280439() throws Exception {
 		String model = "#15 a b";
 		EObject result = getModel(model);
-		SerializerUtil.SerializationOptions opt = new SerializerUtil.SerializationOptions();
+		Serializer.SerializationOptions opt = new Serializer.SerializationOptions();
 		opt.setFormat(false);
 		assertEquals(model, getSerializer().serialize(result, opt));
 	}
@@ -270,7 +270,7 @@ public class SimpleReconstrTest extends AbstractXtextTests {
 	public void testEObjectRef() throws Exception {
 		String model = "#16 obj refs obj";
 		EObject result = getModel(model);
-		SerializerUtil.SerializationOptions opt = new SerializerUtil.SerializationOptions();
+		Serializer.SerializationOptions opt = new Serializer.SerializationOptions();
 		opt.setFormat(false);
 		assertEquals(model, getSerializer().serialize(result, opt));
 	}

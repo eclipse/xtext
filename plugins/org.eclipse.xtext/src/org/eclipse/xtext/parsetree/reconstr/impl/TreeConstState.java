@@ -81,8 +81,8 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 	}
 
 	protected Status checkForAmbigiousPaths(Set<TreeConstState> visited) {
-		if (getStatInt() != Status.ENABLED || visited.contains(this))
-			return getStatInt();
+		if (getStatusInternal() != Status.ENABLED || visited.contains(this))
+			return getStatusInternal();
 		visited.add(this);
 		boolean vEnd = false, vTrans = false;
 		if (isEndState() && isTransitionEnabledTo(getEndDistances())) {
@@ -100,12 +100,12 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 				vTrans = true;
 			}
 		}
-		return !vEnd && !vTrans ? status = Status.AMBIGIOUS : getStatInt();
+		return !vEnd && !vTrans ? status = Status.AMBIGIOUS : getStatusInternal();
 	}
 
 	protected Status checkForDetoursAndLoops(Set<TreeConstState> visited) {
 		if (visited.contains(this)) {
-			return getStatInt();
+			return getStatusInternal();
 		}
 		visited.add(this);
 		boolean vEnd = false, vTrans = false;
@@ -123,7 +123,7 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 				vTrans = true;
 			}
 		}
-		return !vEnd && !vTrans ? status = Status.DETOUR_OR_LOOP : getStatInt();
+		return !vEnd && !vTrans ? status = Status.DETOUR_OR_LOOP : getStatusInternal();
 	}
 
 	protected void consume(Map<TreeConstState, Integer> dist) {
@@ -193,8 +193,7 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 		return root.endDistances;
 	}
 
-	// TODO: rename
-	protected Status getStatInt() {
+	protected Status getStatusInternal() {
 		if (status == Status.UNKNOWN)
 			status = isEndState() || getOutgoing().size() > 0 || getOutgoingAfterReturn().size() > 0 ? Status.ENABLED
 					: Status.ORPHAN;
@@ -206,7 +205,7 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 			AbstractElement rootEle = containingRule(element).getAlternatives();
 			builder.getState(rootEle).initStatus();
 		}
-		return getStatInt();
+		return getStatusInternal();
 	}
 
 	public Set<TypeRef> getTypes() {
@@ -300,7 +299,8 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 		if (origins != null)
 			for (TreeConstState origin : origins) {
 				Set<TypeRef> t = types;
-				if (origin.getGrammarElement() instanceof Action && ((Action) origin.getGrammarElement()).getFeature() != null)
+				if (origin.getGrammarElement() instanceof Action
+						&& ((Action) origin.getGrammarElement()).getFeature() != null)
 					t = Collections.emptySet();
 				else if (t.contains(null) && origin.isConsumingElement()) {
 					t = Sets.newHashSet(t);

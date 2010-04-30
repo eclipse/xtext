@@ -17,13 +17,11 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -31,8 +29,8 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.reconstr.ICommentAssociater;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
-import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer;
@@ -50,102 +48,56 @@ import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
- * TODO: Break up this class into smaller pieces. Consider non-static inner classes
+ * TODO: Extract WsMergerStream to a different class
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public abstract class AbstractParseTreeConstructor implements IParseTreeConstructor {
 
 	public abstract class AbstractToken {
-		protected List<AbstractToken> tokensForSemanticChildren = Collections.emptyList();
-		protected final IInstanceDescription current;
+		protected final IEObjectConsumer eObjectConsumer;
+		protected final AbstractToken lastRuleCallOrigin;
 		protected final AbstractToken next;
-		protected final int no;
 		protected AbstractNode node;
-		//TODO: rename. predecessor? previous? Also rename getters and setters
-		protected final AbstractToken parent;
+		protected List<AbstractToken> tokensForSemanticChildren = Collections.emptyList();
+		protected final int transitionIndex;
 
-		public AbstractToken(AbstractToken parent, AbstractToken next, int no, IInstanceDescription currentSemanticElement) {
+		public AbstractToken(AbstractToken parent, AbstractToken next, int no, IEObjectConsumer currentSemanticElement) {
 			this.next = next;
-			this.parent = parent;
-			this.no = no;
-			this.current = currentSemanticElement;
+			this.lastRuleCallOrigin = parent;
+			this.transitionIndex = no;
+			this.eObjectConsumer = currentSemanticElement;
 		}
 
-		protected boolean checkForRecursion(Class<?> clazz, IInstanceDescription curr) {
+		protected boolean checkForRecursion(Class<?> clazz, IEObjectConsumer curr) {
 			AbstractToken token = next;
 			while (token != null) {
 				if (token.getClass() == clazz)
-					return token.getCurrent() == curr;
+					return token.getEObjectConsumer() == curr;
 				token = token.getNext();
 			}
 			return false;
 		}
 
-		public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 			return null;
 		}
 
-		// TODO: consider rename createFollowerAfterReturn
-		public AbstractToken createParentFollower(AbstractToken next, int index, IInstanceDescription inst) {
-			return createParentFollower(next, index, index, inst);
-		}
-
-		// TODO: consider rename createFollowerAfterReturn
-		public AbstractToken createParentFollower(AbstractToken next, int actIndex, int index, IInstanceDescription inst) {
+		public AbstractToken createFollowerAfterReturn(AbstractToken next, int actIndex, int index,
+				IEObjectConsumer inst) {
 			return null;
 		}
 
-		public boolean equalsOrReplacesNode(AbstractNode node) {
-			return false;
-		}
-
-		public List<AbstractToken> getTokensForSemanticChildren() {
-			return tokensForSemanticChildren;
-		}
-
-		// TODO: consider rename getCurrentSemanticElement
-		public IInstanceDescription getCurrent() {
-			return current;
-		}
-
-		// TODO: rename getDiagnsticMessage as ther is a TreeConstructionDiagnostic
-		public String getDiagnostic() {
-			return null;
-		}
-
-		public abstract AbstractElement getGrammarElement();
-
-		public AbstractToken getNext() {
-			return next;
-		}
-
-		// TODO: rename. what kind of number? index?
-		public int getNo() {
-			return no;
-		}
-
-		public AbstractNode getNode() {
-			return node;
-		}
-
-		// TODO rename: getPredecessor()? getParentToken()? I guess you're referring to the linked list of tokens here. If children are instanceDescriptions, parent should be, too
-		public AbstractToken getParent() {
-			return parent;
-		}
-
-		// TODO rename as it seems to be used only for debugging. Maybe "dump()", "toString()"?
-		// serialize is a misleading name within the serializer component!
-		public String serialize(int depth, int length, boolean appendDots) {
+		public String dumpTokens(int maxTokenCount, int maxStringLength, boolean appendDots) {
 			ArrayList<String> tokensAsStrings = new ArrayList<String>();
 			AbstractToken currentToken = this;
-			while (currentToken != null && tokensAsStrings.size() <= depth + 1) {
-				String s = currentToken.serializeThis(null);
+			while (currentToken != null && tokensAsStrings.size() <= maxTokenCount + 1) {
+				String s = currentToken.serialize(null);
 				if (s != null)
 					tokensAsStrings.add(s);
 				currentToken = currentToken.getNext();
 			}
-			boolean overdepth = tokensAsStrings.size() > depth;
+			boolean overdepth = tokensAsStrings.size() > maxTokenCount;
 			if (overdepth)
 				tokensAsStrings.remove(tokensAsStrings.size() - 1);
 			StringBuffer result = new StringBuffer();
@@ -154,17 +106,50 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 				if (i != tokensAsStrings.size() - 1)
 					result.append(" ");
 			}
-			boolean overlength = result.length() > length;
+			boolean overlength = result.length() > maxStringLength;
 			if (overlength)
-				result.delete(length + 1, result.length());
+				result.delete(maxStringLength + 1, result.length());
 			if (appendDots && (overdepth || overlength))
 				result.append("...");
 			return result.toString();
 		}
 
-		// TODO: rename to serialize(), as this is the method everything seems to be about! 
-		public final String serializeThis(AbstractNode node) {
-			String result = serializeThisInternal(node);
+		public boolean equalsOrReplacesNode(AbstractNode node) {
+			return false;
+		}
+
+		public EObject getEObject() {
+			return eObjectConsumer.getEObject();
+		}
+
+		public IEObjectConsumer getEObjectConsumer() {
+			return eObjectConsumer;
+		}
+
+		public abstract AbstractElement getGrammarElement();
+
+		public AbstractToken getLastRuleCallOrigin() {
+			return lastRuleCallOrigin;
+		}
+
+		public AbstractToken getNext() {
+			return next;
+		}
+
+		public AbstractNode getNode() {
+			return node;
+		}
+
+		public List<AbstractToken> getTokensForSemanticChildren() {
+			return tokensForSemanticChildren;
+		}
+
+		public int getTransitionIndex() {
+			return transitionIndex;
+		}
+
+		public final String serialize(AbstractNode node) {
+			String result = serializeInternal(node);
 			if (result != ITokenSerializer.KEEP_VALUE_FROM_NODE_MODEL)
 				return result;
 			if (node == null)
@@ -174,7 +159,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 				return tokenUtil.serializeNode(node);
 		}
 
-		protected String serializeThisInternal(AbstractNode node) {
+		protected String serializeInternal(AbstractNode node) {
 			return null;
 		}
 
@@ -182,33 +167,27 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			this.node = node;
 		}
 
-		public IInstanceDescription tryConsume() {
-			return tryConsumeVal();
-		}
-
-		// TODO: rename tryConsumeValue ? 
-		// TODO: document what is the difference to tryConsume
-		protected IInstanceDescription tryConsumeVal() {
-			return current;
+		public IEObjectConsumer tryConsume() {
+			return eObjectConsumer;
 		}
 	}
 
 	public abstract class ActionToken extends AbstractToken {
 
-		public ActionToken(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		public ActionToken(AbstractToken parent, AbstractToken next, int no, IEObjectConsumer current) {
 			super(parent, next, no, current);
 		}
 	}
 
 	public abstract class AlternativesToken extends AbstractToken {
-		public AlternativesToken(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		public AlternativesToken(AbstractToken parent, AbstractToken next, int no, IEObjectConsumer current) {
 			super(parent, next, no, current);
 		}
 	}
 
 	public abstract class AssignmentToken extends AbstractToken {
 
-		protected IInstanceDescription consumed;
+		protected IEObjectConsumer consumed;
 
 		protected AbstractElement element;
 
@@ -216,7 +195,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 
 		protected Object value;
 
-		public AssignmentToken(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		public AssignmentToken(AbstractToken parent, AbstractToken next, int no, IEObjectConsumer current) {
 			super(parent, next, no, current);
 		}
 
@@ -225,21 +204,23 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			if (type == null)
 				return false;
 			switch (type) {
-				case CR:
-					return crossRefSerializer.equalsOrReplacesNode(current.getDelegate(), (CrossReference) element,
-							(EObject) value, node);
-				case KW:
-					return keywordSerializer.equalsOrReplacesNode(current.getDelegate(), ((Keyword) element), value,
-							node);
-				case LRC:
-					return valueSerializer.equalsOrReplacesNode(current.getDelegate(), (RuleCall) element, value, node);
-				case ERC:
-					return enumLitSerializer.equalsOrReplacesNode(current.getDelegate(), (RuleCall) element, value,
-							node);
-				case PRC:
+				case CROSS_REFERENCE:
+					return crossRefSerializer.equalsOrReplacesNode(eObjectConsumer.getEObject(),
+							(CrossReference) element, (EObject) value, node);
+				case KEYWORD:
+					return keywordSerializer.equalsOrReplacesNode(eObjectConsumer.getEObject(), ((Keyword) element),
+							value, node);
+				case TERMINAL_RULE_CALL:
+					return valueSerializer.equalsOrReplacesNode(eObjectConsumer.getEObject(), (RuleCall) element,
+							value, node);
+				case ENUM_RULE_CALL:
+					return enumLitSerializer.equalsOrReplacesNode(eObjectConsumer.getEObject(), (RuleCall) element,
+							value, node);
+				case PARSER_RULE_CALL:
 					return false;
-				case DRC:
-					return valueSerializer.equalsOrReplacesNode(current.getDelegate(), (RuleCall) element, value, node);
+				case DATATYPE_RULE_CALL:
+					return valueSerializer.equalsOrReplacesNode(eObjectConsumer.getEObject(), (RuleCall) element,
+							value, node);
 				default:
 					return false;
 			}
@@ -247,29 +228,6 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 
 		public AbstractElement getAssignmentElement() {
 			return element;
-		}
-
-		@Override
-		public String getDiagnostic() {
-			Assignment ass = (Assignment) getGrammarElement();
-			boolean consumable = current.getConsumable(ass.getFeature(), false) != null;
-			if (!consumable) {
-				EStructuralFeature f = current.getDelegate().eClass().getEStructuralFeature(ass.getFeature());
-				if (f == null)
-					return "The current object of type '" + current.getDelegate().eClass().getName()
-							+ "' does not have a feature named '" + ass.getFeature() + "'";
-				String cls = f.getEContainingClass() == current.getDelegate().eClass() ? f.getEContainingClass()
-						.getName() : f.getEContainingClass().getName() + "(" + current.getDelegate().eClass().getName()
-						+ ")";
-				String feat = cls + "." + f.getName();
-				if (f.isMany()) {
-					int size = ((List<?>) current.getDelegate().eGet(f)).size();
-					return "All " + size + " values of " + feat + " have been consumed. "
-							+ "More are needed to continue here.";
-				} else
-					return feat + " is not set.";
-			}
-			return null;
 		}
 
 		public AssignmentType getType() {
@@ -281,34 +239,34 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		}
 
 		@Override
-		protected String serializeThisInternal(AbstractNode node) {
+		protected String serializeInternal(AbstractNode node) {
 			if (type == null)
 				return null;
 			switch (type) {
-				case CR:
-					String ref = crossRefSerializer.serializeCrossRef(current.getDelegate(), (CrossReference) element,
-							(EObject) value, node);
+				case CROSS_REFERENCE:
+					String ref = crossRefSerializer.serializeCrossRef(eObjectConsumer.getEObject(),
+							(CrossReference) element, (EObject) value, node);
 					if (ref == null) {
 						Assignment ass = GrammarUtil.containingAssignment(element);
 						throw new XtextSerializationException("Could not serialize cross reference from "
-								+ EmfFormatter.objPath(current.getDelegate()) + "." + ass.getFeature() + " to "
+								+ EmfFormatter.objPath(eObjectConsumer.getEObject()) + "." + ass.getFeature() + " to "
 								+ EmfFormatter.objPath((EObject) value));
 					}
 					return ref;
-				case KW:
-					return keywordSerializer.serializeAssignedKeyword(current.getDelegate(), ((Keyword) element),
+				case KEYWORD:
+					return keywordSerializer.serializeAssignedKeyword(eObjectConsumer.getEObject(),
+							((Keyword) element), value, node);
+				case TERMINAL_RULE_CALL:
+					return valueSerializer.serializeAssignedValue(eObjectConsumer.getEObject(), (RuleCall) element,
 							value, node);
-				case LRC:
-					return valueSerializer.serializeAssignedValue(current.getDelegate(), (RuleCall) element, value,
-							node);
-				case ERC:
-					return enumLitSerializer.serializeAssignedEnumLiteral(current.getDelegate(), (RuleCall) element,
-							value, node);
-				case PRC:
+				case ENUM_RULE_CALL:
+					return enumLitSerializer.serializeAssignedEnumLiteral(eObjectConsumer.getEObject(),
+							(RuleCall) element, value, node);
+				case PARSER_RULE_CALL:
 					return null;
-				case DRC:
-					return valueSerializer.serializeAssignedValue(current.getDelegate(), (RuleCall) element, value,
-							node);
+				case DATATYPE_RULE_CALL:
+					return valueSerializer.serializeAssignedValue(eObjectConsumer.getEObject(), (RuleCall) element,
+							value, node);
 				default:
 					return null;
 			}
@@ -316,8 +274,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 	}
 
 	public enum AssignmentType {
-		// TODO rename. This is pretty close to obfuscation! 
-		CR, DRC, ERC, KW, LRC, PRC
+		CROSS_REFERENCE, DATATYPE_RULE_CALL, ENUM_RULE_CALL, KEYWORD, PARSER_RULE_CALL, TERMINAL_RULE_CALL
 	}
 
 	protected class CommentToken extends AbstractToken {
@@ -331,45 +288,40 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		public AbstractElement getGrammarElement() {
 			return null;
 		}
-
-		@Override
-		public IInstanceDescription tryConsumeVal() {
-			return null;
-		}
-
 	}
 
 	public abstract class GroupToken extends AbstractToken {
-		public GroupToken(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		public GroupToken(AbstractToken parent, AbstractToken next, int no, IEObjectConsumer current) {
 			super(parent, next, no, current);
 		}
 	}
 
 	public abstract class KeywordToken extends AbstractToken {
 
-		public KeywordToken(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		public KeywordToken(AbstractToken parent, AbstractToken next, int no, IEObjectConsumer current) {
 			super(parent, next, no, current);
 		}
 
 		@Override
 		public boolean equalsOrReplacesNode(AbstractNode node) {
-			return keywordSerializer.equalsOrReplacesNode(current.getDelegate(), (Keyword) getGrammarElement(), node);
+			return keywordSerializer.equalsOrReplacesNode(eObjectConsumer.getEObject(), (Keyword) getGrammarElement(),
+					node);
 		}
 
 		@Override
-		protected String serializeThisInternal(AbstractNode node) {
-			return keywordSerializer.serializeUnassignedKeyword(current.getDelegate(), (Keyword) getGrammarElement(),
-					node);
+		protected String serializeInternal(AbstractNode node) {
+			return keywordSerializer.serializeUnassignedKeyword(eObjectConsumer.getEObject(),
+					(Keyword) getGrammarElement(), node);
 		}
 	}
 
 	public class RootToken extends AbstractToken {
 
-		private RootToken(AbstractToken next, IInstanceDescription inst) {
+		private RootToken(AbstractToken next, IEObjectConsumer inst) {
 			super(null, next, 0, inst);
 		}
 
-		public RootToken(IInstanceDescription inst) {
+		public RootToken(IEObjectConsumer inst) {
 			super(null, null, 0, inst);
 		}
 
@@ -378,7 +330,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		}
 
 		@Override
-		public AbstractToken createParentFollower(AbstractToken next, int actIndex, int index, IInstanceDescription i) {
+		public AbstractToken createFollowerAfterReturn(AbstractToken next, int actIndex, int index, IEObjectConsumer i) {
 			return index != 0 || !i.isConsumed() ? null : new RootToken(next, i);
 		}
 
@@ -389,31 +341,32 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 	}
 
 	public abstract class RuleCallToken extends AbstractToken {
-		public RuleCallToken(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		public RuleCallToken(AbstractToken parent, AbstractToken next, int no, IEObjectConsumer current) {
 			super(parent, next, no, current);
 		}
 	}
 
 	public abstract class UnassignedTextToken extends AbstractToken {
 
-		public UnassignedTextToken(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		public UnassignedTextToken(AbstractToken parent, AbstractToken next, int no, IEObjectConsumer current) {
 			super(parent, next, no, current);
 		}
 
 		@Override
 		public boolean equalsOrReplacesNode(AbstractNode node) {
-			return valueSerializer.equalsOrReplacesNode(current.getDelegate(), (RuleCall) getGrammarElement(), node);
+			return valueSerializer.equalsOrReplacesNode(eObjectConsumer.getEObject(), (RuleCall) getGrammarElement(),
+					node);
 		}
 
 		@Override
-		protected String serializeThisInternal(AbstractNode node) {
-			return valueSerializer
-					.serializeUnassignedValue(current.getDelegate(), (RuleCall) getGrammarElement(), node);
+		protected String serializeInternal(AbstractNode node) {
+			return valueSerializer.serializeUnassignedValue(eObjectConsumer.getEObject(),
+					(RuleCall) getGrammarElement(), node);
 		}
 	}
 
 	public abstract class UnorderedGroupToken extends AbstractToken {
-		public UnorderedGroupToken(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		public UnorderedGroupToken(AbstractToken parent, AbstractToken next, int no, IEObjectConsumer current) {
 			super(parent, next, no, current);
 		}
 	}
@@ -578,7 +531,8 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			if (!(containedElement instanceof AbstractNode))
 				continue;
 			AbstractNode containedNode = (AbstractNode) containedElement;
-			AbstractRule rule = containedNode.getGrammarElement() instanceof AbstractRule ? (AbstractRule) containedNode.getGrammarElement()
+			AbstractRule rule = containedNode.getGrammarElement() instanceof AbstractRule ? (AbstractRule) containedNode
+					.getGrammarElement()
 					: null;
 			if (hiddenTokenHelper.isWhitespace(rule))
 				continue;
@@ -628,43 +582,46 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 
 	protected void collectRootsAndEObjects(AbstractToken token, Map<EObject, AbstractToken> obj2token,
 			Set<CompositeNode> roots) {
-		CompositeNode node = NodeUtil.getNode(token.getCurrent().getDelegate());
+		CompositeNode node = NodeUtil.getNode(token.getEObjectConsumer().getEObject());
 		if (node != null) {
 			while (node.eContainer() != null)
 				node = node.getParent();
 			roots.add(node);
 		}
 		if (!token.getTokensForSemanticChildren().isEmpty()) {
-			obj2token.put(token.getTokensForSemanticChildren().get(0).getCurrent().getDelegate(), token);
+			obj2token.put(token.getTokensForSemanticChildren().get(0).getEObjectConsumer().getEObject(), token);
 			for (AbstractToken t : token.getTokensForSemanticChildren())
 				if (!t.getTokensForSemanticChildren().isEmpty())
 					collectRootsAndEObjects(t, obj2token, roots);
 		}
 	}
 
+	protected IEObjectConsumer createEObjectConsumer(EObject obj) {
+		return new EObjectConsumer(tvService, obj);
+	}
+
 	protected TreeConstructionReportImpl createReport(EObject root) {
 		return new TreeConstructionReportImpl(root);
 	}
 
-	protected String debug(AbstractToken t, IInstanceDescription i) {
-		StringBuffer b = new StringBuffer(t.serialize(10, 50, true));
-		b.append(t.getClass().getSimpleName() + ":" + t.getNo() + " -> " + i);
+	protected String debug(AbstractToken t, IEObjectConsumer i) {
+		StringBuffer b = new StringBuffer(t.dumpTokens(10, 50, true));
+		b.append(t.getClass().getSimpleName() + ":" + t.getTransitionIndex() + " -> " + i);
 		return b.toString();
 	}
 
 	protected void dump(String indent, AbstractToken token) {
 		System.out.println(indent + "begin " + token.getClass().getSimpleName() + " - "
-				+ EmfFormatter.objPath(token.getCurrent().getDelegate()) + " node:" + dumpNode(token.getNode()));
+				+ EmfFormatter.objPath(token.getEObjectConsumer().getEObject()) + " node:" + dumpNode(token.getNode()));
 		String newIndent = indent + "\t";
 		for (AbstractToken child : token.getTokensForSemanticChildren()) {
 			if (child.getTokensForSemanticChildren().isEmpty())
-				System.out
-						.println(newIndent
-								+ " -> "
-								+ child.getClass().getSimpleName()
-								+ " - "
-								+ (child.getCurrent() == null ? "null" : EmfFormatter.objPath(child.getCurrent()
-										.getDelegate())) + " node:" + dumpNode(child.getNode()));
+				System.out.println(newIndent
+						+ " -> "
+						+ child.getClass().getSimpleName()
+						+ " - "
+						+ (child.getEObjectConsumer() == null ? "null" : EmfFormatter.objPath(child
+								.getEObjectConsumer().getEObject())) + " node:" + dumpNode(child.getNode()));
 			else
 				dump(newIndent, child);
 		}
@@ -678,23 +635,17 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 				+ Integer.toHexString(node.hashCode());
 	}
 
-	protected IInstanceDescription getDescr(EObject obj) {
-		return new InstanceDescription(tvService, obj);
-	}
-
-	public abstract IGrammarAccess getGrammarAccess();
-
-	protected abstract AbstractToken getRootToken(IInstanceDescription inst);
+	protected abstract AbstractToken getRootToken(IEObjectConsumer inst);
 
 	protected AbstractToken serialize(EObject object, AbstractToken currentToken, TreeConstructionReportImpl rep) {
 		if (object == null)
 			throw new NullPointerException("The to-be-serialized EObject is null");
-		IInstanceDescription currentInstance = currentToken.getCurrent();
+		IEObjectConsumer currentInstance = currentToken.getEObjectConsumer();
 		int followerIndex = 0, depth = 0;
 		boolean lastSuccess = true;
 		while (currentToken != null) {
 			AbstractToken nextToken = null;
-			IInstanceDescription nextInstance = null;
+			IEObjectConsumer nextInstance = null;
 			if ((nextToken = currentToken.createFollower(followerIndex, currentInstance)) != null) {
 				while (nextToken != null && (nextInstance = nextToken.tryConsume()) == null)
 					nextToken = currentToken.createFollower(++followerIndex, currentInstance);
@@ -703,7 +654,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 				return nextToken.getNext();
 			if (nextToken != null && nextInstance != null) {
 				if (log.isTraceEnabled())
-					log.trace(debug(currentToken, currentInstance) + " -> found -> " + currentToken.serializeThis(null));
+					log.trace(debug(currentToken, currentInstance) + " -> found -> " + currentToken.serialize(null));
 				currentToken = nextToken;
 				currentInstance = nextInstance;
 				followerIndex = 0;
@@ -711,11 +662,12 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 				depth++;
 			} else {
 				if (log.isTraceEnabled())
-					log.trace(debug(currentToken, currentInstance) + " -> fail -> " + (currentToken.getNo() + 1));
+					log.trace(debug(currentToken, currentInstance) + " -> fail -> "
+							+ (currentToken.getTransitionIndex() + 1));
 				if (lastSuccess)
 					rep.addDeadEnd(depth, currentToken);
-				followerIndex = currentToken.getNo() + 1;
-				currentInstance = currentToken.getCurrent();
+				followerIndex = currentToken.getTransitionIndex() + 1;
+				currentInstance = currentToken.getEObjectConsumer();
 				currentToken = currentToken.getNext();
 				lastSuccess = false;
 				depth--;
@@ -727,20 +679,21 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 	protected AbstractToken serialize(EObject object, TreeConstructionReportImpl rep) {
 		if (object == null)
 			throw new NullPointerException("The to-be-serialized EObject is null");
-		AbstractToken root = getRootToken(getDescr(object));
+		AbstractToken root = getRootToken(createEObjectConsumer(object));
 		AbstractToken first = serialize(object, root, rep);
 		Map<EObject, List<AbstractToken>> semantic2token = Maps.newHashMap();
 		AbstractToken t = first;
 		while (t != null) {
-			List<AbstractToken> tokens = semantic2token.get(t.getCurrent().getDelegate());
+			List<AbstractToken> tokens = semantic2token.get(t.getEObjectConsumer().getEObject());
 			if (tokens == null)
-				semantic2token.put(t.getCurrent().getDelegate(), tokens = Lists.newArrayList());
-			if (t.getParent() != null)
+				semantic2token.put(t.getEObjectConsumer().getEObject(), tokens = Lists.newArrayList());
+			if (t.getLastRuleCallOrigin() != null)
 				tokens.add(t);
 			if (t.getNext() != null) {
-				if (t.getNext().getParent() == null)
+				if (t.getNext().getLastRuleCallOrigin() == null)
 					root.tokensForSemanticChildren = tokens;
-				else if (t.getNext().getCurrent().getDelegate() == t.getCurrent().getDelegate().eContainer())
+				else if (t.getNext().getEObjectConsumer().getEObject() == t.getEObjectConsumer().getEObject()
+						.eContainer())
 					t.getNext().tokensForSemanticChildren = tokens;
 			}
 			t = t.getNext();
@@ -748,7 +701,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		return root;
 	}
 
-	public TreeConstructionReport serializeRecursive(EObject object, ITokenStream out) throws IOException {
+	public TreeConstructionReport serializeSubtree(EObject object, ITokenStream out) throws IOException {
 		TreeConstructionReportImpl rep = createReport(object);
 		AbstractToken root = serialize(object, rep);
 		Set<CompositeNode> roots = Sets.newHashSet();
@@ -773,7 +726,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			if (token instanceof CommentToken)
 				out.writeComment((LeafNode) token.getNode());
 			else {
-				String val = token.serializeThis(token.getNode());
+				String val = token.serialize(token.getNode());
 				if (val != null) {
 					if (token instanceof AssignmentToken)
 						out.writeSemantic(((AssignmentToken) token).getAssignmentElement(), val, token.getNode());

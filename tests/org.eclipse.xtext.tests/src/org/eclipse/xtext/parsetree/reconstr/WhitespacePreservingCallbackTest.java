@@ -57,7 +57,7 @@ public class WhitespacePreservingCallbackTest extends AbstractXtextTests {
 
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = getModel(model);
-		SerializerUtil.SerializationOptions opt = new SerializerUtil.SerializationOptions();
+		Serializer.SerializationOptions opt = new Serializer.SerializationOptions();
 		opt.setFormat(false);
 		return getSerializer().serialize(result, opt);
 	}
@@ -65,7 +65,7 @@ public class WhitespacePreservingCallbackTest extends AbstractXtextTests {
 	@SuppressWarnings("unused")
 	private void failsWith(EObject o, Class<? extends RuntimeException> clazz) {
 		try {
-			get(SerializerUtil.class).serialize(o);
+			get(Serializer.class).serialize(o);
 			fail("Should fail with "+clazz.getSimpleName());
 		} catch (RuntimeException e) {
 			if (!clazz.isInstance(e)) {

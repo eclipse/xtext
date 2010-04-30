@@ -12,9 +12,9 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.reconstr.impl.DefaultCrossReferenceSerializer;
-import org.eclipse.xtext.parsetree.reconstr.impl.DefaultEnumLiteralSerializer;
-import org.eclipse.xtext.parsetree.reconstr.impl.DefaultKeywordSerializer;
+import org.eclipse.xtext.parsetree.reconstr.impl.CrossReferenceSerializer;
+import org.eclipse.xtext.parsetree.reconstr.impl.EnumLiteralSerializer;
+import org.eclipse.xtext.parsetree.reconstr.impl.KeywordSerializer;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultValueSerializer;
 
 import com.google.inject.ImplementedBy;
@@ -36,7 +36,7 @@ public interface ITokenSerializer {
 	 * 
 	 * Implementations might introduce some kind of scoping.
 	 */
-	@ImplementedBy(DefaultCrossReferenceSerializer.class)
+	@ImplementedBy(CrossReferenceSerializer.class)
 	interface ICrossReferenceSerializer extends ITokenSerializer {
 
 		boolean equalsOrReplacesNode(EObject context, CrossReference crossref, EObject target, AbstractNode node);
@@ -44,7 +44,7 @@ public interface ITokenSerializer {
 		String serializeCrossRef(EObject context, CrossReference crossref, EObject target, AbstractNode node);
 	}
 
-	@ImplementedBy(DefaultEnumLiteralSerializer.class)
+	@ImplementedBy(EnumLiteralSerializer.class)
 	interface IEnumLiteralSerializer extends ITokenSerializer {
 		boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, AbstractNode node);
 
@@ -57,7 +57,7 @@ public interface ITokenSerializer {
 		void error(String message);
 	}
 
-	@ImplementedBy(DefaultKeywordSerializer.class)
+	@ImplementedBy(KeywordSerializer.class)
 	interface IKeywordSerializer extends ITokenSerializer {
 
 		boolean equalsOrReplacesNode(EObject context, Keyword keyword, AbstractNode node);
@@ -83,6 +83,5 @@ public interface ITokenSerializer {
 		String serializeUnassignedValue(EObject context, RuleCall ruleCall, AbstractNode node);
 	}
 
-	// TODO: does an empty string really communicate what's going on? Consider debugging...
-	final static String KEEP_VALUE_FROM_NODE_MODEL = new String();
+	final static String KEEP_VALUE_FROM_NODE_MODEL = "<KEEP_VALUE_FROM_NODE_MODEL>";
 }

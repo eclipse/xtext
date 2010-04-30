@@ -33,8 +33,8 @@ import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeContentAdapter;
 import org.eclipse.xtext.parsetree.SyntaxError;
-import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
-import org.eclipse.xtext.parsetree.reconstr.SerializerUtil.SerializationOptions;
+import org.eclipse.xtext.parsetree.reconstr.Serializer;
+import org.eclipse.xtext.parsetree.reconstr.Serializer.SerializationOptions;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.StringInputStream;
@@ -94,7 +94,7 @@ public class XtextResource extends ResourceImpl {
 	};
 
 	@Inject
-	private SerializerUtil serializer;
+	private Serializer serializer;
 
 	@Inject
 	private IReferableElementsUnloader unloader;
@@ -343,11 +343,11 @@ public class XtextResource extends ResourceImpl {
 		this.fragmentProvider = fragmentProvider;
 	}
 
-	public SerializerUtil getSerializer() {
+	public Serializer getSerializer() {
 		return serializer;
 	}
 
-	public void setSerializer(SerializerUtil serializer) {
+	public void setSerializer(Serializer serializer) {
 		this.serializer = serializer;
 	}
 

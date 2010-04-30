@@ -30,7 +30,7 @@ import org.eclipse.xtext.parser.antlr.NullTokenDefProvider;
 import org.eclipse.xtext.parser.impl.PartialParsingHelper;
 import org.eclipse.xtext.parser.packrat.ParseResultFactory;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
-import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
+import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
 import org.eclipse.xtext.resource.DefaultFragmentProvider;
 import org.eclipse.xtext.resource.DefaultLocationInFileProvider;
@@ -107,8 +107,8 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		return DefaultNodeModelFormatter.class;
 	}
 
-	public Class<? extends SerializerUtil> bindSerializerUtil() {
-		return SerializerUtil.class;
+	public Class<? extends Serializer> bindSerializerUtil() {
+		return Serializer.class;
 	}
 
 	public Class<? extends IConcreteSyntaxValidator> bindConcreteSyntaxValidator() {

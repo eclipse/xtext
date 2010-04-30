@@ -19,13 +19,13 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
+import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IEnumLiteralSerializer;
 
 /**
- * @author meysholdt - Initial contribution and API
+ * @author Moritz Eysholdt - Initial contribution and API
  */
-public class DefaultEnumLiteralSerializer extends AbstractEnumLiteralSerializer {
+public class EnumLiteralSerializer implements IEnumLiteralSerializer {
 
-	@Override
 	public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, AbstractNode node) {
 		Keyword nodeLit = getLiteral(node);
 		Keyword modelLit = getLiteral(context, ruleCall, value);
@@ -62,12 +62,10 @@ public class DefaultEnumLiteralSerializer extends AbstractEnumLiteralSerializer 
 		return null;
 	}
 
-	@Override
 	public boolean isValid(EObject context, RuleCall ruleCall, Object value, IErrorAcceptor errorAcceptor) {
 		return getLiteral(context, ruleCall, value) != null;
 	}
 
-	@Override
 	public String serializeAssignedEnumLiteral(EObject context, RuleCall ruleCall, Object value, AbstractNode node) {
 		Keyword nodeLit = getLiteral(node);
 		Keyword modelLit = getLiteral(context, ruleCall, value);

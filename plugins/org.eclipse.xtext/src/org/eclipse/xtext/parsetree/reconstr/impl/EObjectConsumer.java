@@ -21,13 +21,13 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class InstanceDescription implements IInstanceDescription {
+public class EObjectConsumer implements IEObjectConsumer {
 
 	// private final AbstractParseTreeConstructor astSer;
 
@@ -39,14 +39,14 @@ public class InstanceDescription implements IInstanceDescription {
 
 	private final int[] nextFeatureId;
 
-	public InstanceDescription(ITransientValueService transientValueService, EObject described) {
+	public EObjectConsumer(ITransientValueService transientValueService, EObject described) {
 		this.described = described;
 		this.transientValueService = transientValueService;
 		EList<EStructuralFeature> features = described.eClass().getEAllStructuralFeatures();
 		nextFeatureId = new int[features.size()];
 		for (int featureId = 0; featureId < features.size(); featureId++) {
 			EStructuralFeature feature = features.get(featureId);
-			if (feature.isMany() && transientValueService.isMixedList(described, feature)) {
+			if (feature.isMany() && transientValueService.isCheckElementsIndividually(described, feature)) {
 				if (multiFeatures == null)
 					multiFeatures = new BitSet();
 				multiFeatures.set(featureId);
@@ -62,7 +62,7 @@ public class InstanceDescription implements IInstanceDescription {
 		// System.out.println("x");
 	}
 
-	private InstanceDescription(ITransientValueService tv, EObject described, int[] next, BitSet multi) {
+	private EObjectConsumer(ITransientValueService tv, EObject described, int[] next, BitSet multi) {
 		super();
 		this.transientValueService = tv;
 		this.described = described;
@@ -70,13 +70,13 @@ public class InstanceDescription implements IInstanceDescription {
 		this.multiFeatures = multi;
 	}
 
-	public IInstanceDescription cloneAndConsume(String featureName) {
+	public IEObjectConsumer cloneAndConsume(String featureName) {
 		EStructuralFeature feature = getFeature(featureName);
 		int[] consumedFeatureId = new int[nextFeatureId.length];
 		System.arraycopy(nextFeatureId, 0, consumedFeatureId, 0, nextFeatureId.length);
 		int featureId = described.eClass().getFeatureID(feature);
 		consumedFeatureId[featureId] = nextID(feature, consumedFeatureId[featureId]);
-		return new InstanceDescription(transientValueService, described, consumedFeatureId, multiFeatures);
+		return new EObjectConsumer(transientValueService, described, consumedFeatureId, multiFeatures);
 	}
 
 	private int firstID(EStructuralFeature feature) {
@@ -96,7 +96,7 @@ public class InstanceDescription implements IInstanceDescription {
 		return null;
 	}
 
-	public EObject getDelegate() {
+	public EObject getEObject() {
 		return described;
 	}
 
@@ -139,7 +139,7 @@ public class InstanceDescription implements IInstanceDescription {
 			return false;
 		if (classifier == EcorePackage.Literals.EOBJECT)
 			return true;
-		return ((EClass) classifier).isSuperTypeOf(getDelegate().eClass());
+		return ((EClass) classifier).isSuperTypeOf(getEObject().eClass());
 	}
 	
 	private int nextID(EStructuralFeature feature, int lastId) {
