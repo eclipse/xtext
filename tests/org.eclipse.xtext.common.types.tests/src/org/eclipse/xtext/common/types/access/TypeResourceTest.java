@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.resource.IFragmentProvider;
 
 import junit.framework.TestCase;
 
@@ -117,13 +118,13 @@ public class TypeResourceTest extends TestCase implements IMirror {
 		assertEquals(expectedURI, typeResource.getURI());
 	}
 
-	public EObject getEObject(Resource resource, String fragment) {
+	public EObject getEObject(Resource resource, String fragment, IFragmentProvider.Fallback fallback) {
 		assertEquals(expectedURI, resource.getURI());
 		assertEquals(expectedFragment, fragment);
 		return expectedObject;
 	}
 
-	public String getFragment(EObject obj) {
+	public String getFragment(EObject obj, IFragmentProvider.Fallback fallback) {
 		assertEquals(expectedObject, obj);
 		return expectedFragment;
 	}
