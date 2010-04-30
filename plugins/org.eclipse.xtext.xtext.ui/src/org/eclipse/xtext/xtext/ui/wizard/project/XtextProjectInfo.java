@@ -95,8 +95,7 @@ public class XtextProjectInfo implements IProjectInfo {
 
 	public String getBasePackage() {
 		int lastIndexOf = getLanguageName().lastIndexOf("."); //$NON-NLS-1$
-		String result = getLanguageName().substring(0, (lastIndexOf == -1 ? getLanguageName().length() : lastIndexOf));
-		return result.toLowerCase();
+		return getLanguageName().substring(0, (lastIndexOf == -1 ? getLanguageName().length() : lastIndexOf));
 	}
 
 	public String getLanguageNameAbbreviation() {
