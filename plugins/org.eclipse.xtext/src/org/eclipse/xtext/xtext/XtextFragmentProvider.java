@@ -22,13 +22,13 @@ import com.google.inject.Singleton;
 @Singleton
 public class XtextFragmentProvider implements IFragmentProvider {
 
-	public EObject getEObject(Resource resource, String fragment) {
+	public EObject getEObject(Resource resource, String fragment, IFragmentProvider.Fallback fallback) {
 		if (!fragment.startsWith(PREFIX))
-			return null;
+			return fallback.getEObject(fragment);
 		String fragmentWithoutPrefix = fragment.substring(PREFIX.length());
 		String[] splitted = fragmentWithoutPrefix.split("/");
 		if (splitted.length == 0) {
-			return null;
+			return fallback.getEObject(fragment);
 		}
 		String firstPart = splitted[0];
 		Grammar grammar = null;
@@ -46,17 +46,17 @@ public class XtextFragmentProvider implements IFragmentProvider {
 		if (splitted.length == 2) {
 			return GrammarUtil.findRuleForName(grammar, splitted[1]);
 		} else {
-			return null;
+			return fallback.getEObject(fragment);
 		}
 	}
 
-	public String getFragment(EObject obj) {
+	public String getFragment(EObject obj, IFragmentProvider.Fallback fallback) {
 		if (obj instanceof Grammar) {
 			return caseGrammar((Grammar)obj);
 		} else if (obj instanceof AbstractRule) {
-			return caseAbstractRule((AbstractRule)obj);
+			return caseAbstractRule((AbstractRule)obj, fallback);
 		}
-		return null;
+		return fallback.getFragment(obj);
 	}
 
 	private static final String PREFIX = "XtextFragmentProvider::";
@@ -65,8 +65,8 @@ public class XtextFragmentProvider implements IFragmentProvider {
 		return PREFIX + obj.getName();
 	}
 	
-	public String caseAbstractRule(AbstractRule obj) {
-		return getFragment(obj.eContainer()) + "/" + obj.getName();
+	public String caseAbstractRule(AbstractRule obj, IFragmentProvider.Fallback fallback) {
+		return getFragment(obj.eContainer(), fallback) + "/" + obj.getName();
 	}
 
 }
