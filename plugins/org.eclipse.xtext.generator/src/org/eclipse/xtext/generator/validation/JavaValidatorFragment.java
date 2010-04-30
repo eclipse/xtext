@@ -21,7 +21,7 @@ import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Naming;
 
-import com.google.inject.internal.Lists;
+import com.google.common.collect.Lists;
 
 /**
  * {@link IGeneratorFragment} to generate a java based validity checker for a given grammar.
