@@ -21,26 +21,26 @@ import org.eclipse.xtext.util.StringInputStream;
  *         https://bugs.eclipse.org/bugs/show_bug.cgi?id=302128
  */
 public class Bug302128Test extends AbstractXtextTests {
-	
+
 	public void testTheBug2() throws Exception {
 		with(new Bug302128TestLanguageStandaloneSetup());
 		String text = "VARIABLE += value.val value2.val\n" + "VARIABLE2 += value3.val value4.val\n\n"
-		+ "#Comment comment comment\n\n" + "VARIABLE3 += value5.val value6.val\n"
-		+ "VARIABLE4 += value.val value2.val\n" + "VARIABLE5 += value3.val value4.val\n\n" +
-		
-		"#Comment comment comment\n\n" +
-		
-		"VARIABLE.varible += value5.val value6.val\n";
+				+ "#Comment comment comment\n\n" + "VARIABLE3 += value5.val value6.val\n"
+				+ "VARIABLE4 += value.val value2.val\n" + "VARIABLE5 += value3.val value4.val\n\n" +
+
+				"#Comment comment comment\n\n" +
+
+				"VARIABLE.varible += value5.val value6.val\n";
 		XtextResource resource = getResource(new StringInputStream(text));
 		Model model = (Model) resource.getContents().get(0);
 		model.getElements().get(2).setValue("+= value5.val value6.val\n");
-		
+
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		resource.save(outputStream, null);
-		assertEquals(text,new String(outputStream.toByteArray()));
+		assertEquals(text, new String(outputStream.toByteArray()));
 	}
 
 	protected String noFormatSerialize(EObject model) {
-		return getSerializer().serialize(model,Serializer.NO_FORMATTING);
+		return getSerializer().serialize(model, new SerializerOptions().setFormatting(false));
 	}
 }

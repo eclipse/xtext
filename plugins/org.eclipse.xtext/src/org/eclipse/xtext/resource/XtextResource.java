@@ -33,8 +33,8 @@ import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeContentAdapter;
 import org.eclipse.xtext.parsetree.SyntaxError;
+import org.eclipse.xtext.parsetree.reconstr.SerializerOptions;
 import org.eclipse.xtext.parsetree.reconstr.Serializer;
-import org.eclipse.xtext.parsetree.reconstr.Serializer.SerializationOptions;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.StringInputStream;
@@ -278,12 +278,12 @@ public class XtextResource extends ResourceImpl {
 	public void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
 		if (contents.size() != 1)
 			throw new IllegalStateException("The Xtext resource must contain exactly one root element");
-		SerializationOptions serializerOptions;
+		SerializerOptions serializerOptions;
 		if (options != null && options.containsKey(OPTION_SERIALIZATION_OPTIONS))
-			serializerOptions = (SerializationOptions) options.get(OPTION_SERIALIZATION_OPTIONS);
+			serializerOptions = (SerializerOptions) options.get(OPTION_SERIALIZATION_OPTIONS);
 		else {
-			serializerOptions = new SerializationOptions();
-			serializerOptions.setFormat(options != null && Boolean.TRUE.equals(options.get(OPTION_FORMAT)));
+			serializerOptions = new SerializerOptions();
+			serializerOptions.setFormatting(options != null && Boolean.TRUE.equals(options.get(OPTION_FORMAT)));
 		}
 		setEncodingFromOptions(options);
 		serializer.serialize(contents.get(0), new OutputStreamWriter(outputStream, getEncoding()), serializerOptions);

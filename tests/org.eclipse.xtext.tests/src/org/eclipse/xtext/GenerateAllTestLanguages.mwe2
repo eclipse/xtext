@@ -290,6 +290,10 @@ Workflow {
 			uri = "classpath:/org/eclipse/xtext/parsetree/impl/Bug305397.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/PartialSerializationTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/Bug299395TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}

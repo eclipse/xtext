@@ -57,8 +57,8 @@ public class WhitespacePreservingCallbackTest extends AbstractXtextTests {
 
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = getModel(model);
-		Serializer.SerializationOptions opt = new Serializer.SerializationOptions();
-		opt.setFormat(false);
+		SerializerOptions opt = new SerializerOptions();
+		opt.setFormatting(false);
 		return getSerializer().serialize(result, opt);
 	}
 

@@ -21,9 +21,9 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer;
 import com.google.inject.Inject;
 
 /**
- * @author meysholdt - Initial contribution and API
+ * @author Moritz Eysholdt - Initial contribution and API
  */
-public class DefaultValueSerializer implements IValueSerializer {
+public class ValueSerializer implements IValueSerializer {
 
 	@Inject
 	private IValueConverterService converter;

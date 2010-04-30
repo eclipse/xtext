@@ -583,8 +583,8 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 	protected void collectRootsAndEObjects(AbstractToken token, Map<EObject, AbstractToken> obj2token,
 			Set<CompositeNode> roots) {
 		CompositeNode node = NodeUtil.getNode(token.getEObjectConsumer().getEObject());
-		if (node != null) {
-			while (node.eContainer() != null)
+		if (node != null && !containsNodeOrAnyParent(roots, node)) {
+			while (node.getParent() != null && node.getParent().getElement() == null)
 				node = node.getParent();
 			roots.add(node);
 		}
@@ -594,6 +594,14 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 				if (!t.getTokensForSemanticChildren().isEmpty())
 					collectRootsAndEObjects(t, obj2token, roots);
 		}
+	}
+
+	protected boolean containsNodeOrAnyParent(Set<CompositeNode> nodes, AbstractNode node) {
+		if (nodes.contains(node))
+			return true;
+		if (node.getParent() != null)
+			return containsNodeOrAnyParent(nodes, node.getParent());
+		return false;
 	}
 
 	protected IEObjectConsumer createEObjectConsumer(EObject obj) {

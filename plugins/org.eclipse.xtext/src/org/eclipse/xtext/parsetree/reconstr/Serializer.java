@@ -28,42 +28,6 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein
  */
 public class Serializer {
-
-	public static final SerializationOptions NO_FORMATTING = new SerializationOptions(false, true);
-
-	public static class SerializationOptions {
-
-		private boolean formatting = true;
-		private boolean validateConcreteSyntax = true;
-
-		public SerializationOptions() {
-		}
-
-		public SerializationOptions(boolean format, boolean validateConcreteSyntax) {
-			super();
-			this.formatting = format;
-			this.validateConcreteSyntax = validateConcreteSyntax;
-		}
-
-		// rename: isFormatting
-		public boolean isFormat() {
-			return formatting;
-		}
-
-		// rename: setFormatting
-		public void setFormat(boolean formatting) {
-			this.formatting = formatting;
-		}
-
-		public boolean isValidateConcreteSyntax() {
-			return validateConcreteSyntax;
-		}
-
-		public void setValidateConcreteSyntax(boolean validateConcreteSyntax) {
-			this.validateConcreteSyntax = validateConcreteSyntax;
-		}
-	}
-
 	private IParseTreeConstructor parseTreeReconstructor;
 	private IFormatter formatter;
 	private IConcreteSyntaxValidator validator;
@@ -75,7 +39,7 @@ public class Serializer {
 		this.validator = val;
 	}
 
-	public TreeConstructionReport serialize(EObject obj, ITokenStream tokenStream, SerializationOptions options)
+	public TreeConstructionReport serialize(EObject obj, ITokenStream tokenStream, SerializerOptions options)
 			throws IOException {
 		if (options.isValidateConcreteSyntax()) {
 			List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
@@ -85,21 +49,21 @@ public class Serializer {
 				throw new IConcreteSyntaxValidator.InvalidConcreteSyntaxException(
 						"These errors need to be fixed before the model an be serialized.", diagnostics);
 		}
-		ITokenStream formatterTokenStream = formatter.createFormatterStream(null, tokenStream, !options.isFormat());
+		ITokenStream formatterTokenStream = formatter.createFormatterStream(null, tokenStream, !options.isFormatting());
 		TreeConstructionReport report = parseTreeReconstructor.serializeSubtree(obj, formatterTokenStream);
 		formatterTokenStream.flush();
 		return report;
 	}
 
-	public TreeConstructionReport serialize(EObject obj, Writer writer, SerializationOptions options) throws IOException {
+	public TreeConstructionReport serialize(EObject obj, Writer writer, SerializerOptions options) throws IOException {
 		return serialize(obj, new WriterTokenStream(writer), options);
 	}
 
 	public String serialize(EObject obj) {
-		return serialize(obj, new SerializationOptions());
+		return serialize(obj, new SerializerOptions());
 	}
 
-	public String serialize(EObject obj, SerializationOptions options) {
+	public String serialize(EObject obj, SerializerOptions options) {
 		TokenStringBuffer tokenStringBuffer = new TokenStringBuffer();
 		try {
 			serialize(obj, tokenStringBuffer, options);
