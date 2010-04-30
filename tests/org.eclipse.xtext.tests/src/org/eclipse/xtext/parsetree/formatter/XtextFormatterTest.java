@@ -9,7 +9,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
+import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
@@ -32,7 +32,7 @@ public class XtextFormatterTest extends AbstractXtextTests {
 		// System.out.println(r.getErrors());
 		ByteArrayOutputStream formatted = new ByteArrayOutputStream();
 		Map<String, Object> opt = new HashMap<String, Object>();
-		opt.put(XtextResource.OPTION_SERIALIZATION_OPTIONS, new SerializerUtil.SerializationOptions());
+		opt.put(XtextResource.OPTION_SERIALIZATION_OPTIONS, new Serializer.SerializationOptions());
 		r.save(formatted, opt);
 		// System.out.println(EmfFormatter.listToStr(r.getContents()));
 		// System.out.println(formatted.toString());

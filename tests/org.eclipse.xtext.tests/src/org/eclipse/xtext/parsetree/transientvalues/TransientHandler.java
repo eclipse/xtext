@@ -31,11 +31,11 @@ public class TransientHandler extends DefaultTransientValueService {
 	}
 
 	@Override
-	public boolean isMixedList(EObject owner, EStructuralFeature feature) {
+	public boolean isCheckElementsIndividually(EObject owner, EStructuralFeature feature) {
 		// System.out.println("isMixedList " + feature.getName());
 		if ("TestList".equals(owner.eClass().getName()))
 			return true;
-		return super.isMixedList(owner, feature);
+		return super.isCheckElementsIndividually(owner, feature);
 	}
 
 }
