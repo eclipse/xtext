@@ -25,15 +25,16 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//XTypeRef:
 		//  XSimpleTypeRef|XFunctionTypeRef;
+		//  XSimpleTypeRef|XFunctionTypeRef;
 		public ParserRule getRule() { return rule; }
 
-		//XSimpleTypeRef|XFunctionTypeRef
+		//XSimpleTypeRef|XFunctionTypeRefXSimpleTypeRef|XFunctionTypeRef
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//XSimpleTypeRef
+		//XSimpleTypeRefXSimpleTypeRef
 		public RuleCall getXSimpleTypeRefParserRuleCall_0() { return cXSimpleTypeRefParserRuleCall_0; }
 
-		//XFunctionTypeRef
+		//XFunctionTypeRefXFunctionTypeRef
 		public RuleCall getXFunctionTypeRefParserRuleCall_1() { return cXFunctionTypeRefParserRuleCall_1; }
 	}
 
@@ -54,46 +55,50 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cReturnTypeXTypeRefParserRuleCall_2_0 = (RuleCall)cReturnTypeAssignment_2.eContents().get(0);
 		
 		//XFunctionTypeRef:
-		//  ("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")? "=>" returnType=XTypeRef;
+		//  ("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")? "=>" returnType=
+		//  XTypeRef;
+		//  XTypeRef;
 		public ParserRule getRule() { return rule; }
 
-		//("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")? "=>" returnType=XTypeRef
+		//("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")? "=>" returnType=
+		//XTypeRef
+		//XTypeRef
 		public Group getGroup() { return cGroup; }
 
-		//("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")?
+		//("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")?("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")?
 		public Group getGroup_0() { return cGroup_0; }
 
-		//"("
+		//"(""("
 		public Keyword getLeftParenthesisKeyword_0_0() { return cLeftParenthesisKeyword_0_0; }
 
-		//paramTypes+=XTypeRef
+		//paramTypes+=XTypeRefparamTypes+=XTypeRef
 		public Assignment getParamTypesAssignment_0_1() { return cParamTypesAssignment_0_1; }
 
-		//XTypeRef
+		//XTypeRefXTypeRef
 		public RuleCall getParamTypesXTypeRefParserRuleCall_0_1_0() { return cParamTypesXTypeRefParserRuleCall_0_1_0; }
 
-		//("," paramTypes+=XTypeRef)*
+		//("," paramTypes+=XTypeRef)*("," paramTypes+=XTypeRef)*
 		public Group getGroup_0_2() { return cGroup_0_2; }
 
-		//","
+		//","","
 		public Keyword getCommaKeyword_0_2_0() { return cCommaKeyword_0_2_0; }
 
-		//paramTypes+=XTypeRef
+		//paramTypes+=XTypeRefparamTypes+=XTypeRef
 		public Assignment getParamTypesAssignment_0_2_1() { return cParamTypesAssignment_0_2_1; }
 
-		//XTypeRef
+		//XTypeRefXTypeRef
 		public RuleCall getParamTypesXTypeRefParserRuleCall_0_2_1_0() { return cParamTypesXTypeRefParserRuleCall_0_2_1_0; }
 
-		//")"
+		//")"")"
 		public Keyword getRightParenthesisKeyword_0_3() { return cRightParenthesisKeyword_0_3; }
 
-		//"=>"
+		//"=>""=>"
 		public Keyword getEqualsSignGreaterThanSignKeyword_1() { return cEqualsSignGreaterThanSignKeyword_1; }
 
-		//returnType=XTypeRef
+		//returnType=XTypeRefreturnType=XTypeRef
 		public Assignment getReturnTypeAssignment_2() { return cReturnTypeAssignment_2; }
 
-		//XTypeRef
+		//XTypeRefXTypeRef
 		public RuleCall getReturnTypeXTypeRefParserRuleCall_2_0() { return cReturnTypeXTypeRefParserRuleCall_2_0; }
 	}
 
@@ -114,48 +119,50 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cGreaterThanSignKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
 		
 		//XSimpleTypeRef:
-		//  type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
-		//  XTypeParam)* ">")?;
+		//  type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam (","
+		//  typeParams+=XTypeParam)* ">")?;
+		//  typeParams+=XTypeParam)* ">")?;
 		public ParserRule getRule() { return rule; }
 
-		//type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
-		//XTypeParam)* ">")?
+		//type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams
+		//+=XTypeParam)* ">")?
+		//+=XTypeParam)* ">")?
 		public Group getGroup() { return cGroup; }
 
-		//type=[types::JvmType|QualifiedName]
+		//type=[types::JvmType|QualifiedName]type=[types::JvmType|QualifiedName]
 		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
 
-		//[types::JvmType|QualifiedName]
+		//[types::JvmType|QualifiedName][types::JvmType|QualifiedName]
 		public CrossReference getTypeJvmTypeCrossReference_0_0() { return cTypeJvmTypeCrossReference_0_0; }
 
-		//QualifiedName
+		//QualifiedNameQualifiedName
 		public RuleCall getTypeJvmTypeQualifiedNameParserRuleCall_0_0_1() { return cTypeJvmTypeQualifiedNameParserRuleCall_0_0_1; }
 
-		//("<" typeParams+=XTypeParam ("," typeParams+=XTypeParam)* ">")?
+		//("<" typeParams+=XTypeParam ("," typeParams+=XTypeParam)* ">")?("<" typeParams+=XTypeParam ("," typeParams+=XTypeParam)* ">")?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"<"
+		//"<""<"
 		public Keyword getLessThanSignKeyword_1_0() { return cLessThanSignKeyword_1_0; }
 
-		//typeParams+=XTypeParam
+		//typeParams+=XTypeParamtypeParams+=XTypeParam
 		public Assignment getTypeParamsAssignment_1_1() { return cTypeParamsAssignment_1_1; }
 
-		//XTypeParam
+		//XTypeParamXTypeParam
 		public RuleCall getTypeParamsXTypeParamParserRuleCall_1_1_0() { return cTypeParamsXTypeParamParserRuleCall_1_1_0; }
 
-		//("," typeParams+=XTypeParam)*
+		//("," typeParams+=XTypeParam)*("," typeParams+=XTypeParam)*
 		public Group getGroup_1_2() { return cGroup_1_2; }
 
-		//","
+		//","","
 		public Keyword getCommaKeyword_1_2_0() { return cCommaKeyword_1_2_0; }
 
-		//typeParams+=XTypeParam
+		//typeParams+=XTypeParamtypeParams+=XTypeParam
 		public Assignment getTypeParamsAssignment_1_2_1() { return cTypeParamsAssignment_1_2_1; }
 
-		//XTypeParam
+		//XTypeParamXTypeParam
 		public RuleCall getTypeParamsXTypeParamParserRuleCall_1_2_1_0() { return cTypeParamsXTypeParamParserRuleCall_1_2_1_0; }
 
-		//">"
+		//">"">"
 		public Keyword getGreaterThanSignKeyword_1_3() { return cGreaterThanSignKeyword_1_3; }
 	}
 
@@ -167,15 +174,16 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//XTypeParam returns XTypeRef:
 		//  XTypeRef|XWildcardParam;
+		//  XTypeRef|XWildcardParam;
 		public ParserRule getRule() { return rule; }
 
-		//XTypeRef|XWildcardParam
+		//XTypeRef|XWildcardParamXTypeRef|XWildcardParam
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//XTypeRef
+		//XTypeRefXTypeRef
 		public RuleCall getXTypeRefParserRuleCall_0() { return cXTypeRefParserRuleCall_0; }
 
-		//XWildcardParam
+		//XWildcardParamXWildcardParam
 		public RuleCall getXWildcardParamParserRuleCall_1() { return cXWildcardParamParserRuleCall_1; }
 	}
 
@@ -196,42 +204,43 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//XWildcardParam returns XTypeRef:
 		//  {XWildcardParam} "?" ("extends" extends=XTypeRef|"super" super=XTypeRef)?;
+		//  {XWildcardParam} "?" ("extends" extends=XTypeRef|"super" super=XTypeRef)?;
 		public ParserRule getRule() { return rule; }
 
-		//{XWildcardParam} "?" ("extends" extends=XTypeRef|"super" super=XTypeRef)?
+		//{XWildcardParam} "?" ("extends" extends=XTypeRef|"super" super=XTypeRef)?{XWildcardParam} "?" ("extends" extends=XTypeRef|"super" super=XTypeRef)?
 		public Group getGroup() { return cGroup; }
 
-		//{XWildcardParam}
+		//{XWildcardParam}{XWildcardParam}
 		public Action getXWildcardParamAction_0() { return cXWildcardParamAction_0; }
 
-		//"?"
+		//"?""?"
 		public Keyword getQuestionMarkKeyword_1() { return cQuestionMarkKeyword_1; }
 
-		//("extends" extends=XTypeRef|"super" super=XTypeRef)?
+		//("extends" extends=XTypeRef|"super" super=XTypeRef)?("extends" extends=XTypeRef|"super" super=XTypeRef)?
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
-		//"extends" extends=XTypeRef
+		//"extends" extends=XTypeRef"extends" extends=XTypeRef
 		public Group getGroup_2_0() { return cGroup_2_0; }
 
-		//"extends"
+		//"extends""extends"
 		public Keyword getExtendsKeyword_2_0_0() { return cExtendsKeyword_2_0_0; }
 
-		//extends=XTypeRef
+		//extends=XTypeRefextends=XTypeRef
 		public Assignment getExtendsAssignment_2_0_1() { return cExtendsAssignment_2_0_1; }
 
-		//XTypeRef
+		//XTypeRefXTypeRef
 		public RuleCall getExtendsXTypeRefParserRuleCall_2_0_1_0() { return cExtendsXTypeRefParserRuleCall_2_0_1_0; }
 
-		//"super" super=XTypeRef
+		//"super" super=XTypeRef"super" super=XTypeRef
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
-		//"super"
+		//"super""super"
 		public Keyword getSuperKeyword_2_1_0() { return cSuperKeyword_2_1_0; }
 
-		//super=XTypeRef
+		//super=XTypeRefsuper=XTypeRef
 		public Assignment getSuperAssignment_2_1_1() { return cSuperAssignment_2_1_1; }
 
-		//XTypeRef
+		//XTypeRefXTypeRef
 		public RuleCall getSuperXTypeRefParserRuleCall_2_1_1_0() { return cSuperXTypeRefParserRuleCall_2_1_1_0; }
 	}
 
@@ -255,57 +264,59 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSuperXTypeRefParserRuleCall_1_1_1_0 = (RuleCall)cSuperAssignment_1_1_1.eContents().get(0);
 		
 		//XTypeParamDeclaration:
-		//  name=ID ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super" super=XTypeRef)
-		//  ?;
+		//  name=ID ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super" super=
+		//  XTypeRef)?;
+		//  XTypeRef)?;
 		public ParserRule getRule() { return rule; }
 
-		//name=ID ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super" super=XTypeRef)
-		//?
+		//name=ID ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super" super=
+		//XTypeRef)?
+		//XTypeRef)?
 		public Group getGroup() { return cGroup; }
 
-		//name=ID
+		//name=IDname=ID
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 
-		//ID
+		//IDID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		//("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super" super=XTypeRef)?
+		//("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super" super=XTypeRef)?("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super" super=XTypeRef)?
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//"extends" extends+=XTypeRef ("&" extends+=XTypeRef)*
+		//"extends" extends+=XTypeRef ("&" extends+=XTypeRef)*"extends" extends+=XTypeRef ("&" extends+=XTypeRef)*
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
-		//"extends"
+		//"extends""extends"
 		public Keyword getExtendsKeyword_1_0_0() { return cExtendsKeyword_1_0_0; }
 
-		//extends+=XTypeRef
+		//extends+=XTypeRefextends+=XTypeRef
 		public Assignment getExtendsAssignment_1_0_1() { return cExtendsAssignment_1_0_1; }
 
-		//XTypeRef
+		//XTypeRefXTypeRef
 		public RuleCall getExtendsXTypeRefParserRuleCall_1_0_1_0() { return cExtendsXTypeRefParserRuleCall_1_0_1_0; }
 
-		//("&" extends+=XTypeRef)*
+		//("&" extends+=XTypeRef)*("&" extends+=XTypeRef)*
 		public Group getGroup_1_0_2() { return cGroup_1_0_2; }
 
-		//"&"
+		//"&""&"
 		public Keyword getAmpersandKeyword_1_0_2_0() { return cAmpersandKeyword_1_0_2_0; }
 
-		//extends+=XTypeRef
+		//extends+=XTypeRefextends+=XTypeRef
 		public Assignment getExtendsAssignment_1_0_2_1() { return cExtendsAssignment_1_0_2_1; }
 
-		//XTypeRef
+		//XTypeRefXTypeRef
 		public RuleCall getExtendsXTypeRefParserRuleCall_1_0_2_1_0() { return cExtendsXTypeRefParserRuleCall_1_0_2_1_0; }
 
-		//"super" super=XTypeRef
+		//"super" super=XTypeRef"super" super=XTypeRef
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
-		//"super"
+		//"super""super"
 		public Keyword getSuperKeyword_1_1_0() { return cSuperKeyword_1_1_0; }
 
-		//super=XTypeRef
+		//super=XTypeRefsuper=XTypeRef
 		public Assignment getSuperAssignment_1_1_1() { return cSuperAssignment_1_1_1; }
 
-		//XTypeRef
+		//XTypeRefXTypeRef
 		public RuleCall getSuperXTypeRefParserRuleCall_1_1_1_0() { return cSuperXTypeRefParserRuleCall_1_1_1_0; }
 	}
 
@@ -319,21 +330,22 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//QualifiedName returns ecore::EString:
 		//  ID ("." ID)*;
+		//  ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
-		//ID ("." ID)*
+		//ID ("." ID)*ID ("." ID)*
 		public Group getGroup() { return cGroup; }
 
-		//ID
+		//IDID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//("." ID)*
+		//("." ID)*("." ID)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"."
+		//".""."
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
 
-		//ID
+		//IDID
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
 	}
 	
@@ -369,6 +381,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//XTypeRef:
 	//  XSimpleTypeRef|XFunctionTypeRef;
+	//  XSimpleTypeRef|XFunctionTypeRef;
 	public XTypeRefElements getXTypeRefAccess() {
 		return (pXTypeRef != null) ? pXTypeRef : (pXTypeRef = new XTypeRefElements());
 	}
@@ -378,7 +391,9 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XFunctionTypeRef:
-	//  ("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")? "=>" returnType=XTypeRef;
+	//  ("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")? "=>" returnType=
+	//  XTypeRef;
+	//  XTypeRef;
 	public XFunctionTypeRefElements getXFunctionTypeRefAccess() {
 		return (pXFunctionTypeRef != null) ? pXFunctionTypeRef : (pXFunctionTypeRef = new XFunctionTypeRefElements());
 	}
@@ -388,8 +403,9 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XSimpleTypeRef:
-	//  type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
-	//  XTypeParam)* ">")?;
+	//  type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam (","
+	//  typeParams+=XTypeParam)* ">")?;
+	//  typeParams+=XTypeParam)* ">")?;
 	public XSimpleTypeRefElements getXSimpleTypeRefAccess() {
 		return (pXSimpleTypeRef != null) ? pXSimpleTypeRef : (pXSimpleTypeRef = new XSimpleTypeRefElements());
 	}
@@ -399,6 +415,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XTypeParam returns XTypeRef:
+	//  XTypeRef|XWildcardParam;
 	//  XTypeRef|XWildcardParam;
 	public XTypeParamElements getXTypeParamAccess() {
 		return (pXTypeParam != null) ? pXTypeParam : (pXTypeParam = new XTypeParamElements());
@@ -410,6 +427,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 
 	//XWildcardParam returns XTypeRef:
 	//  {XWildcardParam} "?" ("extends" extends=XTypeRef|"super" super=XTypeRef)?;
+	//  {XWildcardParam} "?" ("extends" extends=XTypeRef|"super" super=XTypeRef)?;
 	public XWildcardParamElements getXWildcardParamAccess() {
 		return (pXWildcardParam != null) ? pXWildcardParam : (pXWildcardParam = new XWildcardParamElements());
 	}
@@ -419,8 +437,9 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XTypeParamDeclaration:
-	//  name=ID ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super" super=XTypeRef)
-	//  ?;
+	//  name=ID ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super" super=
+	//  XTypeRef)?;
+	//  XTypeRef)?;
 	public XTypeParamDeclarationElements getXTypeParamDeclarationAccess() {
 		return (pXTypeParamDeclaration != null) ? pXTypeParamDeclaration : (pXTypeParamDeclaration = new XTypeParamDeclarationElements());
 	}
@@ -430,6 +449,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//QualifiedName returns ecore::EString:
+	//  ID ("." ID)*;
 	//  ID ("." ID)*;
 	public QualifiedNameElements getQualifiedNameAccess() {
 		return (pQualifiedName != null) ? pQualifiedName : (pQualifiedName = new QualifiedNameElements());
@@ -441,24 +461,29 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 
 	//terminal ID:
 	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
 	//  "0".."9"+;
+	//  "0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" |
-	//  "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
+	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
+	//  "\\" | "\'"))* "\'";
+	//  "\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
+	//  "/ *"->"* /";
 	//  "/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
@@ -466,17 +491,20 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 
 	//terminal SL_COMMENT:
 	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
 	//  (" " | "\t" | "\r" | "\n")+;
+	//  (" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
+	//  .;
 	//  .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();

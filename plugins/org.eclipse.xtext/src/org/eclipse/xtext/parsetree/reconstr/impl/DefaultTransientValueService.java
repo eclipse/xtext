@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.resource.Resource;
  */
 public class DefaultTransientValueService extends AbstractTransientValueService {
 
-	@Override
 	public boolean isTransient(EObject owner, EStructuralFeature feature, int index) {
 		return feature.isTransient() || !owner.eIsSet(feature) || isContainerReferenceInSameResource(owner, feature);
 	}

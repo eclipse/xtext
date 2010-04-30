@@ -18,6 +18,7 @@ import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
+import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -28,7 +29,7 @@ import com.google.inject.Inject;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class DefaultCrossReferenceSerializer extends AbstractCrossReferenceSerializer {
+public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 
 	@Inject
 	private LinkingHelper linkingHelper;
@@ -42,7 +43,6 @@ public class DefaultCrossReferenceSerializer extends AbstractCrossReferenceSeria
 	@Inject
 	private IValueConverterService valueConverter;
 
-	@Override
 	public boolean equalsOrReplacesNode(EObject context, CrossReference crossref, EObject target, AbstractNode node) {
 		if (crossref != node.getGrammarElement())
 			return false;
@@ -71,7 +71,6 @@ public class DefaultCrossReferenceSerializer extends AbstractCrossReferenceSeria
 		return null;
 	}
 
-	@Override
 	public String serializeCrossRef(EObject context, CrossReference grammarElement, EObject target, AbstractNode node) {
 		final EReference ref = GrammarUtil.getReference(grammarElement, context.eClass());
 		String text = null;

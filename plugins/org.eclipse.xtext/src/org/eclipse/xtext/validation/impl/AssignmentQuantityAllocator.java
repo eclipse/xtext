@@ -207,7 +207,7 @@ public class AssignmentQuantityAllocator implements IAssignmentQuantityAllocator
 	public int getFeatureQuantity(EObject obj, EStructuralFeature feat) {
 		if (feat.isMany()) {
 			int count = 0, max = ((List<?>) obj.eGet(feat)).size();
-			if (transSrvc.isMixedList(obj, feat)) {
+			if (transSrvc.isCheckElementsIndividually(obj, feat)) {
 				for (int i = 0; i < max; i++)
 					if (!transSrvc.isTransient(obj, feat, i))
 						count++;

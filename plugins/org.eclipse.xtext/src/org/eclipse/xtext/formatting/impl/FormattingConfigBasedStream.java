@@ -44,11 +44,11 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 
 		@Override
 		public String toString() {
-			return leadingLocators + " --> " + (leadingWS != null ? "[" + leadingWS + "] " : "") +  value;
+			return leadingLocators + " --> " + (leadingWS != null ? "[" + leadingWS + "] " : "") + value;
 		}
 
-		public LineEntry(EObject grammarElement, String value, boolean isHidden,
-				Set<ElementLocator> beforeLocators, String leadingWS, int indent) {
+		public LineEntry(EObject grammarElement, String value, boolean isHidden, Set<ElementLocator> beforeLocators,
+				String leadingWS, int indent) {
 			super();
 			this.grammarElement = grammarElement;
 			this.value = value;
@@ -117,8 +117,8 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 				return "";
 			if (indentation == 0)
 				return indentationPrefix;
-			StringBuffer result = new StringBuffer(
-					indentation * cfg.getIndentationSpace().length() + indentationPrefix.length());
+			StringBuffer result = new StringBuffer(indentation * cfg.getIndentationSpace().length()
+					+ indentationPrefix.length());
 			result.append(indentationPrefix);
 			for (int i = 0; i < indentation; i++)
 				result.append(cfg.getIndentationSpace());
@@ -172,7 +172,7 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 		protected void addSpacesToTotalLength(LineEntry lineEntry, boolean first) {
 			String spaces = getSpaces(lineEntry, first);
 			if (spaces != null) {
-				int lastIndexOfNL = spaces.lastIndexOf('\n'); 
+				int lastIndexOfNL = spaces.lastIndexOf('\n');
 				if (lastIndexOfNL >= 0)
 					totalLength += spaces.length() - lastIndexOfNL;
 				else
@@ -185,8 +185,7 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 			// TokenStringBuffer b = new TokenStringBuffer();
 			// flush(b, lastBreakable);
 			// System.out.println("WrapLine: \"" + b + "\"");
-			return new Line(Lists.newArrayList(
-					entries.subList(lastBreakableEntryIndex, entries.size())));
+			return new Line(Lists.newArrayList(entries.subList(lastBreakableEntryIndex, entries.size())));
 		}
 
 		public void flush() throws IOException {
@@ -197,7 +196,8 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 		}
 
 		/**
-		 * @param endIndex the index of the last entry to flush, exclusive.
+		 * @param endIndex
+		 *            the index of the last entry to flush, exclusive.
 		 */
 		protected void flush(ITokenStream intoStream, int endIndex) throws IOException {
 			for (int i = 0; i < endIndex; i++) {
@@ -269,8 +269,8 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 
 	protected boolean preserveSpaces;
 
-	public FormattingConfigBasedStream(ITokenStream out, String indentation,
-			FormattingConfig cfg, boolean preserveSpaces) {
+	public FormattingConfigBasedStream(ITokenStream out, String indentation, FormattingConfig cfg,
+			boolean preserveSpaces) {
 		super(out);
 		this.cfg = cfg;
 		this.preserveSpaces = preserveSpaces;
@@ -333,8 +333,7 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 	protected Line currentLine = null;
 
 	@Override
-	public void writeHidden(EObject grammarElement, String value)
-			throws IOException {
+	public void writeHidden(EObject grammarElement, String value) throws IOException {
 		if (cfg.getWhitespaceRule() == grammarElement) {
 			if (preserveSpaces) {
 				if (preservedWS == null)
@@ -346,13 +345,11 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 			addLineEntry(grammarElement, value, true);
 	}
 
-	protected void addLineEntry(EObject grammarElement, String value,
-			boolean isHidden) throws IOException {
+	protected void addLineEntry(EObject grammarElement, String value, boolean isHidden) throws IOException {
 		Set<ElementLocator> locators = collectLocators(last, grammarElement);
 		// System.out.println(loc + " --> " + value.replaceAll("\n", "\\n"));
 		last = grammarElement;
-		LineEntry e = new LineEntry(grammarElement, value, true, locators, preservedWS,
-				indentationLevel);
+		LineEntry e = new LineEntry(grammarElement, value, true, locators, preservedWS, indentationLevel);
 		preservedWS = null;
 		if (currentLine == null)
 			currentLine = new Line();
@@ -363,14 +360,15 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 
 	@Override
 	public void flush() throws IOException {
-		if (currentLine != null)
+		if (currentLine != null) {
 			currentLine.flush();
+			currentLine = null;
+		}
 		super.flush();
 	}
 
 	@Override
-	public void writeSemantic(EObject grammarElement, String value)
-			throws IOException {
+	public void writeSemantic(EObject grammarElement, String value) throws IOException {
 		addLineEntry(grammarElement, value, false);
 	}
 }

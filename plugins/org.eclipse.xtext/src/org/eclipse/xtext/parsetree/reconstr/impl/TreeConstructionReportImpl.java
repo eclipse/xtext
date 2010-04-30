@@ -20,12 +20,14 @@ import java.util.SortedSet;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.TreeConstructionDiagnostic;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.TreeConstructionReport;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AssignmentToken;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -44,21 +46,20 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 
 		protected AbstractToken deadend;
 
-		protected Map<AbstractToken, Integer> length = new HashMap<AbstractToken, Integer>() {
+		protected Map<AbstractToken, Integer> lengthCache = new HashMap<AbstractToken, Integer>() {
 			@Override
 			public Integer get(Object key) {
 				AbstractToken token = (AbstractToken) key;
-				// TODO: I am lost. What's r, l, x?
-				Integer r = super.get(key);
-				if (r == null) {
-					int l = 0;
-					AbstractToken x = token;
-					while ((x = x.getNext()) != null)
-						l++;
-					r = l;
-					put(token, l);
+				Integer result = super.get(key);
+				if (result == null) {
+					int length = 0;
+					AbstractToken currentToken = token;
+					while ((currentToken = currentToken.getNext()) != null)
+						length++;
+					result = length;
+					put(token, length);
 				}
-				return r;
+				return result;
 			}
 		};
 
@@ -70,7 +71,7 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		}
 
 		public EObject getEObject() {
-			return deadend.getCurrent().getDelegate();
+			return deadend.getEObjectConsumer().getEObject();
 		}
 
 		public String getLikelyErrorReasons() {
@@ -79,11 +80,11 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 
 		public String getLikelyErrorReasons(String prefix) {
 			StringBuffer b = new StringBuffer(prefix);
-			b.append(length.get(deadend));
+			b.append(lengthCache.get(deadend));
 			b.append(":");
-			b.append(EmfFormatter.objPath(deadend.getCurrent().getDelegate()));
+			b.append(EmfFormatter.objPath(deadend.getEObjectConsumer().getEObject()));
 			b.append(": \"");
-			b.append(deadend.serialize(10, 50, true));
+			b.append(deadend.dumpTokens(10, 50, true));
 			b.append("\":");
 			for (String diagnosticAsString : collectDiagnostics(deadend)) {
 				b.append("\n");
@@ -131,7 +132,7 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		deadends.add(Tuples.pair(depth, deadend));
 	}
 
-	protected String checkUnconsumed(AbstractToken token, IInstanceDescription instanceDescription) {
+	protected String checkUnconsumed(AbstractToken token, IEObjectConsumer instanceDescription) {
 		if (token.getGrammarElement() == null)
 			return null;
 		boolean finalNode = nfaProvider.getNFA(token.getGrammarElement()).isEndState();
@@ -142,7 +143,7 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		b.append("Can not leave rule '");
 		b.append(parserRule.getName());
 		b.append("' since the current object '");
-		b.append(instanceDescription.getDelegate().eClass().getName());
+		b.append(instanceDescription.getEObject().eClass().getName());
 		b.append("' has features with unconsumed values: ");
 		Map<EStructuralFeature, Integer> unconsumedTokens = instanceDescription.getUnconsumed();
 		int i = 0;
@@ -161,11 +162,11 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		Set<EObject> result = new HashSet<EObject>();
 		for (AbstractToken endToken : getDeadends()) {
 			AbstractToken currentToken = endToken;
-			while (currentToken.getNext() != null && currentToken.getNext().getParent() != null
-					&& currentToken.getNext().getParent().getGrammarElement() != null) {
-				if (GrammarUtil.containingRule(currentToken.getNext().getParent().getGrammarElement()) == GrammarUtil
+			while (currentToken.getNext() != null && currentToken.getNext().getLastRuleCallOrigin() != null
+					&& currentToken.getNext().getLastRuleCallOrigin().getGrammarElement() != null) {
+				if (GrammarUtil.containingRule(currentToken.getNext().getLastRuleCallOrigin().getGrammarElement()) == GrammarUtil
 						.containingRule(currentToken.getGrammarElement()))
-					result.add(currentToken.getNext().getCurrent().getDelegate());
+					result.add(currentToken.getNext().getEObjectConsumer().getEObject());
 				currentToken = currentToken.getNext();
 			}
 		}
@@ -175,13 +176,13 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 	protected List<String> collectDiagnostics(AbstractToken token) {
 		int i = 0;
 		AbstractToken currentFollowerToken;
-		IInstanceDescription instanceDescription = token.tryConsume();
+		IEObjectConsumer instanceDescription = token.tryConsume();
 		ArrayList<String> diagnsotics = new ArrayList<String>();
 		while ((currentFollowerToken = token.createFollower(i++, instanceDescription)) != null) {
 			StringBuffer b = new StringBuffer();
 			b.append(currentFollowerToken.getClass().getSimpleName());
 			b.append(": ");
-			String diagnostic = currentFollowerToken.getDiagnostic();
+			String diagnostic = getDiagnosticMessage(currentFollowerToken);
 			if (diagnostic == null)
 				b.append("n/a");
 			else
@@ -204,6 +205,35 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 			deadends.add(p.getSecond());
 		Collections.reverse(deadends);
 		return deadends;
+	}
+
+	protected String getDiagnosticMessage(AbstractToken token) {
+		if (token instanceof AssignmentToken)
+			return getDiagnosticMessage((AssignmentToken) token);
+		return null;
+	}
+
+	protected String getDiagnosticMessage(AssignmentToken token) {
+		Assignment ass = (Assignment) token.getGrammarElement();
+		boolean consumable = token.getEObjectConsumer().getConsumable(ass.getFeature(), false) != null;
+		if (!consumable) {
+			EStructuralFeature f = token.getEObjectConsumer().getEObject().eClass().getEStructuralFeature(
+					ass.getFeature());
+			if (f == null)
+				return "The current object of type '" + token.getEObjectConsumer().getEObject().eClass().getName()
+						+ "' does not have a feature named '" + ass.getFeature() + "'";
+			String cls = f.getEContainingClass() == token.getEObjectConsumer().getEObject().eClass() ? f
+					.getEContainingClass().getName() : f.getEContainingClass().getName() + "("
+					+ token.getEObjectConsumer().getEObject().eClass().getName() + ")";
+			String feat = cls + "." + f.getName();
+			if (f.isMany()) {
+				int size = ((List<?>) token.getEObjectConsumer().getEObject().eGet(f)).size();
+				return "All " + size + " values of " + feat + " have been consumed. "
+						+ "More are needed to continue here.";
+			} else
+				return feat + " is not set.";
+		}
+		return null;
 	}
 
 	public List<TreeConstructionDiagnostic> getDiagnostics() {

@@ -5,7 +5,7 @@ package org.eclipse.xtext.enumrules.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.enumrules.services.EnumRulesTestLanguageGrammarAccess;
@@ -17,23 +17,18 @@ public class EnumRulesTestLanguageParsetreeConstructor extends AbstractParseTree
 	@Inject
 	private EnumRulesTestLanguageGrammarAccess grammarAccess;
 	
-	@Override	
-	public EnumRulesTestLanguageGrammarAccess getGrammarAccess() {
-		return grammarAccess;
-	}
-
 	@Override
-	protected AbstractToken getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IEObjectConsumer inst) {
 		return new ThisRootNode(inst);	
 	}
 	
 protected class ThisRootNode extends RootToken {
-	public ThisRootNode(IInstanceDescription inst) {
+	public ThisRootNode(IEObjectConsumer inst) {
 		super(inst);
 	}
 	
 	@Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Model_Alternatives(this, this, 0, inst);
 			default: return null;
@@ -54,8 +49,8 @@ protected class ThisRootNode extends RootToken {
 // "generated" generated=GeneratedEnum
 protected class Model_Alternatives extends AlternativesToken {
 
-	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -64,19 +59,19 @@ protected class Model_Alternatives extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_Group_0(parent, this, 0, inst);
-			case 1: return new Model_Group_1(parent, this, 1, inst);
+			case 0: return new Model_Group_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_Group_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getModelRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getModelRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -84,8 +79,8 @@ protected class Model_Alternatives extends AlternativesToken {
 // "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?
 protected class Model_Group_0 extends GroupToken {
 	
-	public Model_Group_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -94,10 +89,10 @@ protected class Model_Group_0 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_Group_0_2(parent, this, 0, inst);
-			case 1: return new Model_ExistingAssignment_0_1(parent, this, 1, inst);
+			case 0: return new Model_Group_0_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_ExistingAssignment_0_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -107,8 +102,8 @@ protected class Model_Group_0 extends GroupToken {
 // "existing"
 protected class Model_ExistingKeyword_0_0 extends KeywordToken  {
 	
-	public Model_ExistingKeyword_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_ExistingKeyword_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -117,9 +112,9 @@ protected class Model_ExistingKeyword_0_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -128,8 +123,8 @@ protected class Model_ExistingKeyword_0_0 extends KeywordToken  {
 // existing=ExistingEnum
 protected class Model_ExistingAssignment_0_1 extends AssignmentToken  {
 	
-	public Model_ExistingAssignment_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_ExistingAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -138,19 +133,19 @@ protected class Model_ExistingAssignment_0_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ExistingKeyword_0_0(parent, this, 0, inst);
+			case 0: return new Model_ExistingKeyword_0_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("existing",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("existing");
-		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getExistingExistingEnumEnumRuleCall_0_1_0(), value, null)) { 
-			type = AssignmentType.ERC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("existing",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("existing");
+		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getExistingExistingEnumEnumRuleCall_0_1_0(), value, null)) { 
+			type = AssignmentType.ENUM_RULE_CALL;
 			element = grammarAccess.getModelAccess().getExistingExistingEnumEnumRuleCall_0_1_0();
 			return obj;
 		}
@@ -162,8 +157,8 @@ protected class Model_ExistingAssignment_0_1 extends AssignmentToken  {
 // ("generated" generated=GeneratedEnum)?
 protected class Model_Group_0_2 extends GroupToken {
 	
-	public Model_Group_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -172,9 +167,9 @@ protected class Model_Group_0_2 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_GeneratedAssignment_0_2_1(parent, this, 0, inst);
+			case 0: return new Model_GeneratedAssignment_0_2_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -184,8 +179,8 @@ protected class Model_Group_0_2 extends GroupToken {
 // "generated"
 protected class Model_GeneratedKeyword_0_2_0 extends KeywordToken  {
 	
-	public Model_GeneratedKeyword_0_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_GeneratedKeyword_0_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -194,9 +189,9 @@ protected class Model_GeneratedKeyword_0_2_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ExistingAssignment_0_1(parent, this, 0, inst);
+			case 0: return new Model_ExistingAssignment_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -206,8 +201,8 @@ protected class Model_GeneratedKeyword_0_2_0 extends KeywordToken  {
 // generated=GeneratedEnum
 protected class Model_GeneratedAssignment_0_2_1 extends AssignmentToken  {
 	
-	public Model_GeneratedAssignment_0_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_GeneratedAssignment_0_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -216,19 +211,19 @@ protected class Model_GeneratedAssignment_0_2_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_GeneratedKeyword_0_2_0(parent, this, 0, inst);
+			case 0: return new Model_GeneratedKeyword_0_2_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("generated",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("generated");
-		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0(), value, null)) { 
-			type = AssignmentType.ERC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("generated",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("generated");
+		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0(), value, null)) { 
+			type = AssignmentType.ENUM_RULE_CALL;
 			element = grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0();
 			return obj;
 		}
@@ -242,8 +237,8 @@ protected class Model_GeneratedAssignment_0_2_1 extends AssignmentToken  {
 // "generated" generated=GeneratedEnum
 protected class Model_Group_1 extends GroupToken {
 	
-	public Model_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -252,9 +247,9 @@ protected class Model_Group_1 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_GeneratedAssignment_1_1(parent, this, 0, inst);
+			case 0: return new Model_GeneratedAssignment_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -264,8 +259,8 @@ protected class Model_Group_1 extends GroupToken {
 // "generated"
 protected class Model_GeneratedKeyword_1_0 extends KeywordToken  {
 	
-	public Model_GeneratedKeyword_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_GeneratedKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -274,9 +269,9 @@ protected class Model_GeneratedKeyword_1_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -285,8 +280,8 @@ protected class Model_GeneratedKeyword_1_0 extends KeywordToken  {
 // generated=GeneratedEnum
 protected class Model_GeneratedAssignment_1_1 extends AssignmentToken  {
 	
-	public Model_GeneratedAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_GeneratedAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -295,19 +290,19 @@ protected class Model_GeneratedAssignment_1_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_GeneratedKeyword_1_0(parent, this, 0, inst);
+			case 0: return new Model_GeneratedKeyword_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("generated",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("generated");
-		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_1_1_0(), value, null)) { 
-			type = AssignmentType.ERC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("generated",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("generated");
+		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_1_1_0(), value, null)) { 
+			type = AssignmentType.ENUM_RULE_CALL;
 			element = grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_1_1_0();
 			return obj;
 		}

@@ -5,7 +5,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug304681TestLanguageGrammarAccess;
@@ -17,23 +17,18 @@ public class Bug304681TestLanguageParsetreeConstructor extends AbstractParseTree
 	@Inject
 	private Bug304681TestLanguageGrammarAccess grammarAccess;
 	
-	@Override	
-	public Bug304681TestLanguageGrammarAccess getGrammarAccess() {
-		return grammarAccess;
-	}
-
 	@Override
-	protected AbstractToken getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IEObjectConsumer inst) {
 		return new ThisRootNode(inst);	
 	}
 	
 protected class ThisRootNode extends RootToken {
-	public ThisRootNode(IInstanceDescription inst) {
+	public ThisRootNode(IEObjectConsumer inst) {
 		super(inst);
 	}
 	
 	@Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Model_Alternatives(this, this, 0, inst);
 			case 1: return new PackageDefinition_Group(this, this, 1, inst);
@@ -63,8 +58,8 @@ protected class ThisRootNode extends RootToken {
 // "1" definition=PackageDefinition|"2" definition=PackageDefinition2
 protected class Model_Alternatives extends AlternativesToken {
 
-	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -73,19 +68,19 @@ protected class Model_Alternatives extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_Group_0(parent, this, 0, inst);
-			case 1: return new Model_Group_1(parent, this, 1, inst);
+			case 0: return new Model_Group_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_Group_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getModelRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getModelRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -93,8 +88,8 @@ protected class Model_Alternatives extends AlternativesToken {
 // "1" definition=PackageDefinition
 protected class Model_Group_0 extends GroupToken {
 	
-	public Model_Group_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -103,9 +98,9 @@ protected class Model_Group_0 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_DefinitionAssignment_0_1(parent, this, 0, inst);
+			case 0: return new Model_DefinitionAssignment_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -115,8 +110,8 @@ protected class Model_Group_0 extends GroupToken {
 // "1"
 protected class Model_DigitOneKeyword_0_0 extends KeywordToken  {
 	
-	public Model_DigitOneKeyword_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_DigitOneKeyword_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -125,9 +120,9 @@ protected class Model_DigitOneKeyword_0_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -136,8 +131,8 @@ protected class Model_DigitOneKeyword_0_0 extends KeywordToken  {
 // definition=PackageDefinition
 protected class Model_DefinitionAssignment_0_1 extends AssignmentToken  {
 	
-	public Model_DefinitionAssignment_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_DefinitionAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -146,7 +141,7 @@ protected class Model_DefinitionAssignment_0_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new PackageDefinition_Group(this, this, 0, inst);
 			default: return null;
@@ -154,13 +149,13 @@ protected class Model_DefinitionAssignment_0_1 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("definition",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("definition");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("definition",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("definition");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getPackageDefinitionRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getModelAccess().getDefinitionPackageDefinitionParserRuleCall_0_1_0(); 
 				consumed = obj;
 				return param;
@@ -170,10 +165,10 @@ protected class Model_DefinitionAssignment_0_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Model_DigitOneKeyword_0_0(parent, next, actIndex, consumed);
+			case 0: return new Model_DigitOneKeyword_0_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -183,8 +178,8 @@ protected class Model_DefinitionAssignment_0_1 extends AssignmentToken  {
 // "2" definition=PackageDefinition2
 protected class Model_Group_1 extends GroupToken {
 	
-	public Model_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -193,9 +188,9 @@ protected class Model_Group_1 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_DefinitionAssignment_1_1(parent, this, 0, inst);
+			case 0: return new Model_DefinitionAssignment_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -205,8 +200,8 @@ protected class Model_Group_1 extends GroupToken {
 // "2"
 protected class Model_DigitTwoKeyword_1_0 extends KeywordToken  {
 	
-	public Model_DigitTwoKeyword_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_DigitTwoKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -215,9 +210,9 @@ protected class Model_DigitTwoKeyword_1_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -226,8 +221,8 @@ protected class Model_DigitTwoKeyword_1_0 extends KeywordToken  {
 // definition=PackageDefinition2
 protected class Model_DefinitionAssignment_1_1 extends AssignmentToken  {
 	
-	public Model_DefinitionAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_DefinitionAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -236,7 +231,7 @@ protected class Model_DefinitionAssignment_1_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new PackageDefinition2_Group(this, this, 0, inst);
 			default: return null;
@@ -244,13 +239,13 @@ protected class Model_DefinitionAssignment_1_1 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("definition",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("definition");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("definition",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("definition");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getPackageDefinition2Rule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getModelAccess().getDefinitionPackageDefinition2ParserRuleCall_1_1_0(); 
 				consumed = obj;
 				return param;
@@ -260,10 +255,10 @@ protected class Model_DefinitionAssignment_1_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Model_DigitTwoKeyword_1_0(parent, next, actIndex, consumed);
+			case 0: return new Model_DigitTwoKeyword_1_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -284,8 +279,8 @@ protected class Model_DefinitionAssignment_1_1 extends AssignmentToken  {
 // {PackageDefinition} "package" namespace=ID ";" contents+=Object*
 protected class PackageDefinition_Group extends GroupToken {
 	
-	public PackageDefinition_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public PackageDefinition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -294,19 +289,19 @@ protected class PackageDefinition_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PackageDefinition_ContentsAssignment_4(parent, this, 0, inst);
-			case 1: return new PackageDefinition_SemicolonKeyword_3(parent, this, 1, inst);
+			case 0: return new PackageDefinition_ContentsAssignment_4(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new PackageDefinition_SemicolonKeyword_3(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getPackageDefinitionAccess().getPackageDefinitionAction_0().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getPackageDefinitionAccess().getPackageDefinitionAction_0().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -314,8 +309,8 @@ protected class PackageDefinition_Group extends GroupToken {
 // {PackageDefinition}
 protected class PackageDefinition_PackageDefinitionAction_0 extends ActionToken  {
 
-	public PackageDefinition_PackageDefinitionAction_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public PackageDefinition_PackageDefinitionAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -324,24 +319,24 @@ protected class PackageDefinition_PackageDefinitionAction_0 extends ActionToken 
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isConsumed()) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
 	}
 }
 
 // "package"
 protected class PackageDefinition_PackageKeyword_1 extends KeywordToken  {
 	
-	public PackageDefinition_PackageKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public PackageDefinition_PackageKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -350,9 +345,9 @@ protected class PackageDefinition_PackageKeyword_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PackageDefinition_PackageDefinitionAction_0(parent, this, 0, inst);
+			case 0: return new PackageDefinition_PackageDefinitionAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -362,8 +357,8 @@ protected class PackageDefinition_PackageKeyword_1 extends KeywordToken  {
 // namespace=ID
 protected class PackageDefinition_NamespaceAssignment_2 extends AssignmentToken  {
 	
-	public PackageDefinition_NamespaceAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public PackageDefinition_NamespaceAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -372,19 +367,19 @@ protected class PackageDefinition_NamespaceAssignment_2 extends AssignmentToken 
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PackageDefinition_PackageKeyword_1(parent, this, 0, inst);
+			case 0: return new PackageDefinition_PackageKeyword_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("namespace",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("namespace");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getPackageDefinitionAccess().getNamespaceIDTerminalRuleCall_2_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("namespace",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("namespace");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getPackageDefinitionAccess().getNamespaceIDTerminalRuleCall_2_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getPackageDefinitionAccess().getNamespaceIDTerminalRuleCall_2_0();
 			return obj;
 		}
@@ -396,8 +391,8 @@ protected class PackageDefinition_NamespaceAssignment_2 extends AssignmentToken 
 // ";"
 protected class PackageDefinition_SemicolonKeyword_3 extends KeywordToken  {
 	
-	public PackageDefinition_SemicolonKeyword_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public PackageDefinition_SemicolonKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -406,9 +401,9 @@ protected class PackageDefinition_SemicolonKeyword_3 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PackageDefinition_NamespaceAssignment_2(parent, this, 0, inst);
+			case 0: return new PackageDefinition_NamespaceAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -418,8 +413,8 @@ protected class PackageDefinition_SemicolonKeyword_3 extends KeywordToken  {
 // contents+=Object*
 protected class PackageDefinition_ContentsAssignment_4 extends AssignmentToken  {
 	
-	public PackageDefinition_ContentsAssignment_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public PackageDefinition_ContentsAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -428,7 +423,7 @@ protected class PackageDefinition_ContentsAssignment_4 extends AssignmentToken  
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Object_Group(this, this, 0, inst);
 			default: return null;
@@ -436,13 +431,13 @@ protected class PackageDefinition_ContentsAssignment_4 extends AssignmentToken  
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("contents",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("contents");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("contents",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("contents");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getObjectRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getPackageDefinitionAccess().getContentsObjectParserRuleCall_4_0(); 
 				consumed = obj;
 				return param;
@@ -452,11 +447,11 @@ protected class PackageDefinition_ContentsAssignment_4 extends AssignmentToken  
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new PackageDefinition_ContentsAssignment_4(parent, next, actIndex, consumed);
-			case 1: return new PackageDefinition_SemicolonKeyword_3(parent, next, actIndex, consumed);
+			case 0: return new PackageDefinition_ContentsAssignment_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new PackageDefinition_SemicolonKeyword_3(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -486,8 +481,8 @@ protected class PackageDefinition_ContentsAssignment_4 extends AssignmentToken  
 // "mandatoryLoop" features+=Feature+)?) "}"
 protected class Object_Group extends GroupToken {
 	
-	public Object_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -496,18 +491,18 @@ protected class Object_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_RightCurlyBracketKeyword_6(parent, this, 0, inst);
+			case 0: return new Object_RightCurlyBracketKeyword_6(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getObjectRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getObjectRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -515,8 +510,8 @@ protected class Object_Group extends GroupToken {
 // (enabled?="enabled"|abstract?="abstract")?
 protected class Object_Alternatives_0 extends AlternativesToken {
 
-	public Object_Alternatives_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -525,10 +520,10 @@ protected class Object_Alternatives_0 extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_EnabledAssignment_0_0(parent, this, 0, inst);
-			case 1: return new Object_AbstractAssignment_0_1(parent, this, 1, inst);
+			case 0: return new Object_EnabledAssignment_0_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Object_AbstractAssignment_0_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -538,8 +533,8 @@ protected class Object_Alternatives_0 extends AlternativesToken {
 // enabled?="enabled"
 protected class Object_EnabledAssignment_0_0 extends AssignmentToken  {
 	
-	public Object_EnabledAssignment_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_EnabledAssignment_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -548,18 +543,18 @@ protected class Object_EnabledAssignment_0_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("enabled",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("enabled");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("enabled",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("enabled");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getObjectAccess().getEnabledEnabledKeyword_0_0_0();
 			return obj;
 		}
@@ -571,8 +566,8 @@ protected class Object_EnabledAssignment_0_0 extends AssignmentToken  {
 // abstract?="abstract"
 protected class Object_AbstractAssignment_0_1 extends AssignmentToken  {
 	
-	public Object_AbstractAssignment_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_AbstractAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -581,18 +576,18 @@ protected class Object_AbstractAssignment_0_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("abstract",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("abstract");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("abstract",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("abstract");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getObjectAccess().getAbstractAbstractKeyword_0_1_0();
 			return obj;
 		}
@@ -605,8 +600,8 @@ protected class Object_AbstractAssignment_0_1 extends AssignmentToken  {
 // "object"
 protected class Object_ObjectKeyword_1 extends KeywordToken  {
 	
-	public Object_ObjectKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_ObjectKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -615,10 +610,10 @@ protected class Object_ObjectKeyword_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_Alternatives_0(parent, this, 0, inst);
-			default: return parent.createParentFollower(this, index, index - 1, inst);
+			case 0: return new Object_Alternatives_0(lastRuleCallOrigin, this, 0, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 1, inst);
 		}	
 	}
 
@@ -627,8 +622,8 @@ protected class Object_ObjectKeyword_1 extends KeywordToken  {
 // name=ID
 protected class Object_NameAssignment_2 extends AssignmentToken  {
 	
-	public Object_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_NameAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -637,19 +632,19 @@ protected class Object_NameAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_ObjectKeyword_1(parent, this, 0, inst);
+			case 0: return new Object_ObjectKeyword_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getObjectAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getObjectAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getObjectAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
 		}
@@ -661,8 +656,8 @@ protected class Object_NameAssignment_2 extends AssignmentToken  {
 // ("extends" parent=[Object])?
 protected class Object_Group_3 extends GroupToken {
 	
-	public Object_Group_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -671,9 +666,9 @@ protected class Object_Group_3 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_ParentAssignment_3_1(parent, this, 0, inst);
+			case 0: return new Object_ParentAssignment_3_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -683,8 +678,8 @@ protected class Object_Group_3 extends GroupToken {
 // "extends"
 protected class Object_ExtendsKeyword_3_0 extends KeywordToken  {
 	
-	public Object_ExtendsKeyword_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_ExtendsKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -693,9 +688,9 @@ protected class Object_ExtendsKeyword_3_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_NameAssignment_2(parent, this, 0, inst);
+			case 0: return new Object_NameAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -705,8 +700,8 @@ protected class Object_ExtendsKeyword_3_0 extends KeywordToken  {
 // parent=[Object]
 protected class Object_ParentAssignment_3_1 extends AssignmentToken  {
 	
-	public Object_ParentAssignment_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_ParentAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -715,21 +710,21 @@ protected class Object_ParentAssignment_3_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_ExtendsKeyword_3_0(parent, this, 0, inst);
+			case 0: return new Object_ExtendsKeyword_3_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("parent",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("parent");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("parent",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("parent");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getObjectAccess().getParentObjectCrossReference_3_1_0().getType().getClassifier())) {
-				type = AssignmentType.CR;
+				type = AssignmentType.CROSS_REFERENCE;
 				element = grammarAccess.getObjectAccess().getParentObjectCrossReference_3_1_0(); 
 				return obj;
 			}
@@ -743,8 +738,8 @@ protected class Object_ParentAssignment_3_1 extends AssignmentToken  {
 // "{"
 protected class Object_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 	
-	public Object_LeftCurlyBracketKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_LeftCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -753,10 +748,10 @@ protected class Object_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_Group_3(parent, this, 0, inst);
-			case 1: return new Object_NameAssignment_2(parent, this, 1, inst);
+			case 0: return new Object_Group_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Object_NameAssignment_2(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -770,8 +765,8 @@ protected class Object_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 // +=Feature+)?
 protected class Object_UnorderedGroup_5 extends UnorderedGroupToken {
 	
-	public Object_UnorderedGroup_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_UnorderedGroup_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -780,17 +775,17 @@ protected class Object_UnorderedGroup_5 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_Group_5_7(parent, this, 0, inst);
-			case 1: return new Object_Group_5_6(parent, this, 1, inst);
-			case 2: return new Object_Group_5_5(parent, this, 2, inst);
-			case 3: return new Object_FeaturesAssignment_5_4(parent, this, 3, inst);
-			case 4: return new Object_Group_5_3(parent, this, 4, inst);
-			case 5: return new Object_Group_5_2(parent, this, 5, inst);
-			case 6: return new Object_Group_5_1(parent, this, 6, inst);
-			case 7: return new Object_Group_5_0(parent, this, 7, inst);
-			case 8: return new Object_LeftCurlyBracketKeyword_4(parent, this, 8, inst);
+			case 0: return new Object_Group_5_7(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Object_Group_5_6(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Object_Group_5_5(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Object_FeaturesAssignment_5_4(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new Object_Group_5_3(lastRuleCallOrigin, this, 4, inst);
+			case 5: return new Object_Group_5_2(lastRuleCallOrigin, this, 5, inst);
+			case 6: return new Object_Group_5_1(lastRuleCallOrigin, this, 6, inst);
+			case 7: return new Object_Group_5_0(lastRuleCallOrigin, this, 7, inst);
+			case 8: return new Object_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, this, 8, inst);
 			default: return null;
 		}	
 	}
@@ -800,8 +795,8 @@ protected class Object_UnorderedGroup_5 extends UnorderedGroupToken {
 // ("shortDescription" shortDescription=STRING ";")?
 protected class Object_Group_5_0 extends GroupToken {
 	
-	public Object_Group_5_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_Group_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -810,9 +805,9 @@ protected class Object_Group_5_0 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_SemicolonKeyword_5_0_2(parent, this, 0, inst);
+			case 0: return new Object_SemicolonKeyword_5_0_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -822,8 +817,8 @@ protected class Object_Group_5_0 extends GroupToken {
 // "shortDescription"
 protected class Object_ShortDescriptionKeyword_5_0_0 extends KeywordToken  {
 	
-	public Object_ShortDescriptionKeyword_5_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_ShortDescriptionKeyword_5_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -832,9 +827,9 @@ protected class Object_ShortDescriptionKeyword_5_0_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_LeftCurlyBracketKeyword_4(parent, this, 0, inst);
+			case 0: return new Object_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -844,8 +839,8 @@ protected class Object_ShortDescriptionKeyword_5_0_0 extends KeywordToken  {
 // shortDescription=STRING
 protected class Object_ShortDescriptionAssignment_5_0_1 extends AssignmentToken  {
 	
-	public Object_ShortDescriptionAssignment_5_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_ShortDescriptionAssignment_5_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -854,19 +849,19 @@ protected class Object_ShortDescriptionAssignment_5_0_1 extends AssignmentToken 
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_ShortDescriptionKeyword_5_0_0(parent, this, 0, inst);
+			case 0: return new Object_ShortDescriptionKeyword_5_0_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("shortDescription",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("shortDescription");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getObjectAccess().getShortDescriptionSTRINGTerminalRuleCall_5_0_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("shortDescription",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("shortDescription");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getObjectAccess().getShortDescriptionSTRINGTerminalRuleCall_5_0_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getObjectAccess().getShortDescriptionSTRINGTerminalRuleCall_5_0_1_0();
 			return obj;
 		}
@@ -878,8 +873,8 @@ protected class Object_ShortDescriptionAssignment_5_0_1 extends AssignmentToken 
 // ";"
 protected class Object_SemicolonKeyword_5_0_2 extends KeywordToken  {
 	
-	public Object_SemicolonKeyword_5_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_SemicolonKeyword_5_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -888,9 +883,9 @@ protected class Object_SemicolonKeyword_5_0_2 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_ShortDescriptionAssignment_5_0_1(parent, this, 0, inst);
+			case 0: return new Object_ShortDescriptionAssignment_5_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -901,8 +896,8 @@ protected class Object_SemicolonKeyword_5_0_2 extends KeywordToken  {
 // ("longDescription" longDescription=STRING ";")?
 protected class Object_Group_5_1 extends GroupToken {
 	
-	public Object_Group_5_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_Group_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -911,9 +906,9 @@ protected class Object_Group_5_1 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_SemicolonKeyword_5_1_2(parent, this, 0, inst);
+			case 0: return new Object_SemicolonKeyword_5_1_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -923,8 +918,8 @@ protected class Object_Group_5_1 extends GroupToken {
 // "longDescription"
 protected class Object_LongDescriptionKeyword_5_1_0 extends KeywordToken  {
 	
-	public Object_LongDescriptionKeyword_5_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_LongDescriptionKeyword_5_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -933,10 +928,10 @@ protected class Object_LongDescriptionKeyword_5_1_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_Group_5_0(parent, this, 0, inst);
-			case 1: return new Object_LeftCurlyBracketKeyword_4(parent, this, 1, inst);
+			case 0: return new Object_Group_5_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Object_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -946,8 +941,8 @@ protected class Object_LongDescriptionKeyword_5_1_0 extends KeywordToken  {
 // longDescription=STRING
 protected class Object_LongDescriptionAssignment_5_1_1 extends AssignmentToken  {
 	
-	public Object_LongDescriptionAssignment_5_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_LongDescriptionAssignment_5_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -956,19 +951,19 @@ protected class Object_LongDescriptionAssignment_5_1_1 extends AssignmentToken  
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_LongDescriptionKeyword_5_1_0(parent, this, 0, inst);
+			case 0: return new Object_LongDescriptionKeyword_5_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("longDescription",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("longDescription");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getObjectAccess().getLongDescriptionSTRINGTerminalRuleCall_5_1_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("longDescription",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("longDescription");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getObjectAccess().getLongDescriptionSTRINGTerminalRuleCall_5_1_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getObjectAccess().getLongDescriptionSTRINGTerminalRuleCall_5_1_1_0();
 			return obj;
 		}
@@ -980,8 +975,8 @@ protected class Object_LongDescriptionAssignment_5_1_1 extends AssignmentToken  
 // ";"
 protected class Object_SemicolonKeyword_5_1_2 extends KeywordToken  {
 	
-	public Object_SemicolonKeyword_5_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_SemicolonKeyword_5_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -990,9 +985,9 @@ protected class Object_SemicolonKeyword_5_1_2 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_LongDescriptionAssignment_5_1_1(parent, this, 0, inst);
+			case 0: return new Object_LongDescriptionAssignment_5_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1003,8 +998,8 @@ protected class Object_SemicolonKeyword_5_1_2 extends KeywordToken  {
 // ("serialUID" serialVersionUID=INT ";")?
 protected class Object_Group_5_2 extends GroupToken {
 	
-	public Object_Group_5_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_Group_5_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1013,9 +1008,9 @@ protected class Object_Group_5_2 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_SemicolonKeyword_5_2_2(parent, this, 0, inst);
+			case 0: return new Object_SemicolonKeyword_5_2_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1025,8 +1020,8 @@ protected class Object_Group_5_2 extends GroupToken {
 // "serialUID"
 protected class Object_SerialUIDKeyword_5_2_0 extends KeywordToken  {
 	
-	public Object_SerialUIDKeyword_5_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_SerialUIDKeyword_5_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1035,11 +1030,11 @@ protected class Object_SerialUIDKeyword_5_2_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_Group_5_1(parent, this, 0, inst);
-			case 1: return new Object_Group_5_0(parent, this, 1, inst);
-			case 2: return new Object_LeftCurlyBracketKeyword_4(parent, this, 2, inst);
+			case 0: return new Object_Group_5_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Object_Group_5_0(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Object_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
@@ -1049,8 +1044,8 @@ protected class Object_SerialUIDKeyword_5_2_0 extends KeywordToken  {
 // serialVersionUID=INT
 protected class Object_SerialVersionUIDAssignment_5_2_1 extends AssignmentToken  {
 	
-	public Object_SerialVersionUIDAssignment_5_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_SerialVersionUIDAssignment_5_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1059,19 +1054,19 @@ protected class Object_SerialVersionUIDAssignment_5_2_1 extends AssignmentToken 
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_SerialUIDKeyword_5_2_0(parent, this, 0, inst);
+			case 0: return new Object_SerialUIDKeyword_5_2_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("serialVersionUID",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("serialVersionUID");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getObjectAccess().getSerialVersionUIDINTTerminalRuleCall_5_2_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("serialVersionUID",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("serialVersionUID");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getObjectAccess().getSerialVersionUIDINTTerminalRuleCall_5_2_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getObjectAccess().getSerialVersionUIDINTTerminalRuleCall_5_2_1_0();
 			return obj;
 		}
@@ -1083,8 +1078,8 @@ protected class Object_SerialVersionUIDAssignment_5_2_1 extends AssignmentToken 
 // ";"
 protected class Object_SemicolonKeyword_5_2_2 extends KeywordToken  {
 	
-	public Object_SemicolonKeyword_5_2_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_SemicolonKeyword_5_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1093,9 +1088,9 @@ protected class Object_SemicolonKeyword_5_2_2 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_SerialVersionUIDAssignment_5_2_1(parent, this, 0, inst);
+			case 0: return new Object_SerialVersionUIDAssignment_5_2_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1106,8 +1101,8 @@ protected class Object_SemicolonKeyword_5_2_2 extends KeywordToken  {
 // (cloneable?="cloneable" ";")?
 protected class Object_Group_5_3 extends GroupToken {
 	
-	public Object_Group_5_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_Group_5_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1116,9 +1111,9 @@ protected class Object_Group_5_3 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_SemicolonKeyword_5_3_1(parent, this, 0, inst);
+			case 0: return new Object_SemicolonKeyword_5_3_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1128,8 +1123,8 @@ protected class Object_Group_5_3 extends GroupToken {
 // cloneable?="cloneable"
 protected class Object_CloneableAssignment_5_3_0 extends AssignmentToken  {
 	
-	public Object_CloneableAssignment_5_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_CloneableAssignment_5_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1138,22 +1133,22 @@ protected class Object_CloneableAssignment_5_3_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_Group_5_2(parent, this, 0, inst);
-			case 1: return new Object_Group_5_1(parent, this, 1, inst);
-			case 2: return new Object_Group_5_0(parent, this, 2, inst);
-			case 3: return new Object_LeftCurlyBracketKeyword_4(parent, this, 3, inst);
+			case 0: return new Object_Group_5_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Object_Group_5_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Object_Group_5_0(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Object_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, this, 3, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("cloneable",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("cloneable");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("cloneable",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("cloneable");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getObjectAccess().getCloneableCloneableKeyword_5_3_0_0();
 			return obj;
 		}
@@ -1165,8 +1160,8 @@ protected class Object_CloneableAssignment_5_3_0 extends AssignmentToken  {
 // ";"
 protected class Object_SemicolonKeyword_5_3_1 extends KeywordToken  {
 	
-	public Object_SemicolonKeyword_5_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_SemicolonKeyword_5_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1175,9 +1170,9 @@ protected class Object_SemicolonKeyword_5_3_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_CloneableAssignment_5_3_0(parent, this, 0, inst);
+			case 0: return new Object_CloneableAssignment_5_3_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1188,8 +1183,8 @@ protected class Object_SemicolonKeyword_5_3_1 extends KeywordToken  {
 // features+=Feature*
 protected class Object_FeaturesAssignment_5_4 extends AssignmentToken  {
 	
-	public Object_FeaturesAssignment_5_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_FeaturesAssignment_5_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1198,7 +1193,7 @@ protected class Object_FeaturesAssignment_5_4 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Feature_Alternatives(this, this, 0, inst);
 			default: return null;
@@ -1206,13 +1201,13 @@ protected class Object_FeaturesAssignment_5_4 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("features",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("features");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("features",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("features");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFeatureRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getObjectAccess().getFeaturesFeatureParserRuleCall_5_4_0(); 
 				consumed = obj;
 				return param;
@@ -1222,15 +1217,15 @@ protected class Object_FeaturesAssignment_5_4 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Object_FeaturesAssignment_5_4(parent, next, actIndex, consumed);
-			case 1: return new Object_Group_5_3(parent, next, actIndex, consumed);
-			case 2: return new Object_Group_5_2(parent, next, actIndex, consumed);
-			case 3: return new Object_Group_5_1(parent, next, actIndex, consumed);
-			case 4: return new Object_Group_5_0(parent, next, actIndex, consumed);
-			case 5: return new Object_LeftCurlyBracketKeyword_4(parent, next, actIndex, consumed);
+			case 0: return new Object_FeaturesAssignment_5_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Object_Group_5_3(lastRuleCallOrigin, next, actIndex, consumed);
+			case 2: return new Object_Group_5_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 3: return new Object_Group_5_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 4: return new Object_Group_5_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 5: return new Object_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1239,8 +1234,8 @@ protected class Object_FeaturesAssignment_5_4 extends AssignmentToken  {
 // ("before" features+=Feature* "after")?
 protected class Object_Group_5_5 extends GroupToken {
 	
-	public Object_Group_5_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_Group_5_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1249,9 +1244,9 @@ protected class Object_Group_5_5 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_AfterKeyword_5_5_2(parent, this, 0, inst);
+			case 0: return new Object_AfterKeyword_5_5_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1261,8 +1256,8 @@ protected class Object_Group_5_5 extends GroupToken {
 // "before"
 protected class Object_BeforeKeyword_5_5_0 extends KeywordToken  {
 	
-	public Object_BeforeKeyword_5_5_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_BeforeKeyword_5_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1271,14 +1266,14 @@ protected class Object_BeforeKeyword_5_5_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_FeaturesAssignment_5_4(parent, this, 0, inst);
-			case 1: return new Object_Group_5_3(parent, this, 1, inst);
-			case 2: return new Object_Group_5_2(parent, this, 2, inst);
-			case 3: return new Object_Group_5_1(parent, this, 3, inst);
-			case 4: return new Object_Group_5_0(parent, this, 4, inst);
-			case 5: return new Object_LeftCurlyBracketKeyword_4(parent, this, 5, inst);
+			case 0: return new Object_FeaturesAssignment_5_4(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Object_Group_5_3(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Object_Group_5_2(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Object_Group_5_1(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new Object_Group_5_0(lastRuleCallOrigin, this, 4, inst);
+			case 5: return new Object_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, this, 5, inst);
 			default: return null;
 		}	
 	}
@@ -1288,8 +1283,8 @@ protected class Object_BeforeKeyword_5_5_0 extends KeywordToken  {
 // features+=Feature*
 protected class Object_FeaturesAssignment_5_5_1 extends AssignmentToken  {
 	
-	public Object_FeaturesAssignment_5_5_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_FeaturesAssignment_5_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1298,7 +1293,7 @@ protected class Object_FeaturesAssignment_5_5_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Feature_Alternatives(this, this, 0, inst);
 			default: return null;
@@ -1306,13 +1301,13 @@ protected class Object_FeaturesAssignment_5_5_1 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("features",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("features");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("features",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("features");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFeatureRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getObjectAccess().getFeaturesFeatureParserRuleCall_5_5_1_0(); 
 				consumed = obj;
 				return param;
@@ -1322,11 +1317,11 @@ protected class Object_FeaturesAssignment_5_5_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Object_FeaturesAssignment_5_5_1(parent, next, actIndex, consumed);
-			case 1: return new Object_BeforeKeyword_5_5_0(parent, next, actIndex, consumed);
+			case 0: return new Object_FeaturesAssignment_5_5_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Object_BeforeKeyword_5_5_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1335,8 +1330,8 @@ protected class Object_FeaturesAssignment_5_5_1 extends AssignmentToken  {
 // "after"
 protected class Object_AfterKeyword_5_5_2 extends KeywordToken  {
 	
-	public Object_AfterKeyword_5_5_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_AfterKeyword_5_5_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1345,9 +1340,9 @@ protected class Object_AfterKeyword_5_5_2 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_FeaturesAssignment_5_5_1(parent, this, 0, inst);
+			case 0: return new Object_FeaturesAssignment_5_5_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1358,8 +1353,8 @@ protected class Object_AfterKeyword_5_5_2 extends KeywordToken  {
 // ("optionalLoop" features+=Feature*)?
 protected class Object_Group_5_6 extends GroupToken {
 	
-	public Object_Group_5_6(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_Group_5_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1368,9 +1363,9 @@ protected class Object_Group_5_6 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_FeaturesAssignment_5_6_1(parent, this, 0, inst);
+			case 0: return new Object_FeaturesAssignment_5_6_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1380,8 +1375,8 @@ protected class Object_Group_5_6 extends GroupToken {
 // "optionalLoop"
 protected class Object_OptionalLoopKeyword_5_6_0 extends KeywordToken  {
 	
-	public Object_OptionalLoopKeyword_5_6_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_OptionalLoopKeyword_5_6_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1390,15 +1385,15 @@ protected class Object_OptionalLoopKeyword_5_6_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_Group_5_5(parent, this, 0, inst);
-			case 1: return new Object_FeaturesAssignment_5_4(parent, this, 1, inst);
-			case 2: return new Object_Group_5_3(parent, this, 2, inst);
-			case 3: return new Object_Group_5_2(parent, this, 3, inst);
-			case 4: return new Object_Group_5_1(parent, this, 4, inst);
-			case 5: return new Object_Group_5_0(parent, this, 5, inst);
-			case 6: return new Object_LeftCurlyBracketKeyword_4(parent, this, 6, inst);
+			case 0: return new Object_Group_5_5(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Object_FeaturesAssignment_5_4(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Object_Group_5_3(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Object_Group_5_2(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new Object_Group_5_1(lastRuleCallOrigin, this, 4, inst);
+			case 5: return new Object_Group_5_0(lastRuleCallOrigin, this, 5, inst);
+			case 6: return new Object_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, this, 6, inst);
 			default: return null;
 		}	
 	}
@@ -1408,8 +1403,8 @@ protected class Object_OptionalLoopKeyword_5_6_0 extends KeywordToken  {
 // features+=Feature*
 protected class Object_FeaturesAssignment_5_6_1 extends AssignmentToken  {
 	
-	public Object_FeaturesAssignment_5_6_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_FeaturesAssignment_5_6_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1418,7 +1413,7 @@ protected class Object_FeaturesAssignment_5_6_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Feature_Alternatives(this, this, 0, inst);
 			default: return null;
@@ -1426,13 +1421,13 @@ protected class Object_FeaturesAssignment_5_6_1 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("features",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("features");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("features",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("features");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFeatureRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getObjectAccess().getFeaturesFeatureParserRuleCall_5_6_1_0(); 
 				consumed = obj;
 				return param;
@@ -1442,11 +1437,11 @@ protected class Object_FeaturesAssignment_5_6_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Object_FeaturesAssignment_5_6_1(parent, next, actIndex, consumed);
-			case 1: return new Object_OptionalLoopKeyword_5_6_0(parent, next, actIndex, consumed);
+			case 0: return new Object_FeaturesAssignment_5_6_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Object_OptionalLoopKeyword_5_6_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1456,8 +1451,8 @@ protected class Object_FeaturesAssignment_5_6_1 extends AssignmentToken  {
 // ("mandatoryLoop" features+=Feature+)?
 protected class Object_Group_5_7 extends GroupToken {
 	
-	public Object_Group_5_7(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_Group_5_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1466,9 +1461,9 @@ protected class Object_Group_5_7 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_FeaturesAssignment_5_7_1(parent, this, 0, inst);
+			case 0: return new Object_FeaturesAssignment_5_7_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1478,8 +1473,8 @@ protected class Object_Group_5_7 extends GroupToken {
 // "mandatoryLoop"
 protected class Object_MandatoryLoopKeyword_5_7_0 extends KeywordToken  {
 	
-	public Object_MandatoryLoopKeyword_5_7_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_MandatoryLoopKeyword_5_7_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1488,16 +1483,16 @@ protected class Object_MandatoryLoopKeyword_5_7_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_Group_5_6(parent, this, 0, inst);
-			case 1: return new Object_Group_5_5(parent, this, 1, inst);
-			case 2: return new Object_FeaturesAssignment_5_4(parent, this, 2, inst);
-			case 3: return new Object_Group_5_3(parent, this, 3, inst);
-			case 4: return new Object_Group_5_2(parent, this, 4, inst);
-			case 5: return new Object_Group_5_1(parent, this, 5, inst);
-			case 6: return new Object_Group_5_0(parent, this, 6, inst);
-			case 7: return new Object_LeftCurlyBracketKeyword_4(parent, this, 7, inst);
+			case 0: return new Object_Group_5_6(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Object_Group_5_5(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Object_FeaturesAssignment_5_4(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Object_Group_5_3(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new Object_Group_5_2(lastRuleCallOrigin, this, 4, inst);
+			case 5: return new Object_Group_5_1(lastRuleCallOrigin, this, 5, inst);
+			case 6: return new Object_Group_5_0(lastRuleCallOrigin, this, 6, inst);
+			case 7: return new Object_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, this, 7, inst);
 			default: return null;
 		}	
 	}
@@ -1507,8 +1502,8 @@ protected class Object_MandatoryLoopKeyword_5_7_0 extends KeywordToken  {
 // features+=Feature+
 protected class Object_FeaturesAssignment_5_7_1 extends AssignmentToken  {
 	
-	public Object_FeaturesAssignment_5_7_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_FeaturesAssignment_5_7_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1517,7 +1512,7 @@ protected class Object_FeaturesAssignment_5_7_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Feature_Alternatives(this, this, 0, inst);
 			default: return null;
@@ -1525,13 +1520,13 @@ protected class Object_FeaturesAssignment_5_7_1 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("features",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("features");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("features",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("features");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFeatureRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getObjectAccess().getFeaturesFeatureParserRuleCall_5_7_1_0(); 
 				consumed = obj;
 				return param;
@@ -1541,11 +1536,11 @@ protected class Object_FeaturesAssignment_5_7_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Object_FeaturesAssignment_5_7_1(parent, next, actIndex, consumed);
-			case 1: return new Object_MandatoryLoopKeyword_5_7_0(parent, next, actIndex, consumed);
+			case 0: return new Object_FeaturesAssignment_5_7_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Object_MandatoryLoopKeyword_5_7_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1556,8 +1551,8 @@ protected class Object_FeaturesAssignment_5_7_1 extends AssignmentToken  {
 // "}"
 protected class Object_RightCurlyBracketKeyword_6 extends KeywordToken  {
 	
-	public Object_RightCurlyBracketKeyword_6(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object_RightCurlyBracketKeyword_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1566,9 +1561,9 @@ protected class Object_RightCurlyBracketKeyword_6 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object_UnorderedGroup_5(parent, this, 0, inst);
+			case 0: return new Object_UnorderedGroup_5(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1589,8 +1584,8 @@ protected class Object_RightCurlyBracketKeyword_6 extends KeywordToken  {
 // Attribute|Reference
 protected class Feature_Alternatives extends AlternativesToken {
 
-	public Feature_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Feature_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1599,20 +1594,20 @@ protected class Feature_Alternatives extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Feature_AttributeParserRuleCall_0(parent, this, 0, inst);
-			case 1: return new Feature_ReferenceParserRuleCall_1(parent, this, 1, inst);
+			case 0: return new Feature_AttributeParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Feature_ReferenceParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getAttributeRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getReferenceRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getAttributeRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getReferenceRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -1620,8 +1615,8 @@ protected class Feature_Alternatives extends AlternativesToken {
 // Attribute
 protected class Feature_AttributeParserRuleCall_0 extends RuleCallToken {
 	
-	public Feature_AttributeParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Feature_AttributeParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1630,7 +1625,7 @@ protected class Feature_AttributeParserRuleCall_0 extends RuleCallToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Attribute_Group(this, this, 0, inst);
 			default: return null;
@@ -1638,22 +1633,17 @@ protected class Feature_AttributeParserRuleCall_0 extends RuleCallToken {
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getAttributeRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
-	}
-
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(Attribute_Group.class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getAttributeRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(Attribute_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -1661,8 +1651,8 @@ protected class Feature_AttributeParserRuleCall_0 extends RuleCallToken {
 // Reference
 protected class Feature_ReferenceParserRuleCall_1 extends RuleCallToken {
 	
-	public Feature_ReferenceParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Feature_ReferenceParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1671,7 +1661,7 @@ protected class Feature_ReferenceParserRuleCall_1 extends RuleCallToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Reference_Group(this, this, 0, inst);
 			default: return null;
@@ -1679,22 +1669,17 @@ protected class Feature_ReferenceParserRuleCall_1 extends RuleCallToken {
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getReferenceRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
-	}
-
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(Reference_Group.class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getReferenceRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(Reference_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -1713,8 +1698,8 @@ protected class Feature_ReferenceParserRuleCall_1 extends RuleCallToken {
 // "Attribute" type=ID name=ID ";"
 protected class Attribute_Group extends GroupToken {
 	
-	public Attribute_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1723,18 +1708,18 @@ protected class Attribute_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute_SemicolonKeyword_3(parent, this, 0, inst);
+			case 0: return new Attribute_SemicolonKeyword_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getAttributeRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getAttributeRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -1742,8 +1727,8 @@ protected class Attribute_Group extends GroupToken {
 // "Attribute"
 protected class Attribute_AttributeKeyword_0 extends KeywordToken  {
 	
-	public Attribute_AttributeKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute_AttributeKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1752,9 +1737,9 @@ protected class Attribute_AttributeKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -1763,8 +1748,8 @@ protected class Attribute_AttributeKeyword_0 extends KeywordToken  {
 // type=ID
 protected class Attribute_TypeAssignment_1 extends AssignmentToken  {
 	
-	public Attribute_TypeAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute_TypeAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1773,19 +1758,19 @@ protected class Attribute_TypeAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute_AttributeKeyword_0(parent, this, 0, inst);
+			case 0: return new Attribute_AttributeKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("type",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAttributeAccess().getTypeIDTerminalRuleCall_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("type",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("type");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getAttributeAccess().getTypeIDTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getAttributeAccess().getTypeIDTerminalRuleCall_1_0();
 			return obj;
 		}
@@ -1797,8 +1782,8 @@ protected class Attribute_TypeAssignment_1 extends AssignmentToken  {
 // name=ID
 protected class Attribute_NameAssignment_2 extends AssignmentToken  {
 	
-	public Attribute_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute_NameAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1807,19 +1792,19 @@ protected class Attribute_NameAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute_TypeAssignment_1(parent, this, 0, inst);
+			case 0: return new Attribute_TypeAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
 		}
@@ -1831,8 +1816,8 @@ protected class Attribute_NameAssignment_2 extends AssignmentToken  {
 // ";"
 protected class Attribute_SemicolonKeyword_3 extends KeywordToken  {
 	
-	public Attribute_SemicolonKeyword_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute_SemicolonKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1841,9 +1826,9 @@ protected class Attribute_SemicolonKeyword_3 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute_NameAssignment_2(parent, this, 0, inst);
+			case 0: return new Attribute_NameAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1868,8 +1853,8 @@ protected class Attribute_SemicolonKeyword_3 extends KeywordToken  {
 // ) "}"|";")
 protected class Reference_Group extends GroupToken {
 	
-	public Reference_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1878,18 +1863,18 @@ protected class Reference_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference_Alternatives_4(parent, this, 0, inst);
+			case 0: return new Reference_Alternatives_4(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getReferenceRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getReferenceRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -1897,8 +1882,8 @@ protected class Reference_Group extends GroupToken {
 // "Reference"
 protected class Reference_ReferenceKeyword_0 extends KeywordToken  {
 	
-	public Reference_ReferenceKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference_ReferenceKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1907,9 +1892,9 @@ protected class Reference_ReferenceKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -1918,8 +1903,8 @@ protected class Reference_ReferenceKeyword_0 extends KeywordToken  {
 // type=[Object]
 protected class Reference_TypeAssignment_1 extends AssignmentToken  {
 	
-	public Reference_TypeAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference_TypeAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1928,21 +1913,21 @@ protected class Reference_TypeAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference_ReferenceKeyword_0(parent, this, 0, inst);
+			case 0: return new Reference_ReferenceKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("type",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("type");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("type",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("type");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getReferenceAccess().getTypeObjectCrossReference_1_0().getType().getClassifier())) {
-				type = AssignmentType.CR;
+				type = AssignmentType.CROSS_REFERENCE;
 				element = grammarAccess.getReferenceAccess().getTypeObjectCrossReference_1_0(); 
 				return obj;
 			}
@@ -1955,8 +1940,8 @@ protected class Reference_TypeAssignment_1 extends AssignmentToken  {
 // many?="*"?
 protected class Reference_ManyAssignment_2 extends AssignmentToken  {
 	
-	public Reference_ManyAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference_ManyAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1965,19 +1950,19 @@ protected class Reference_ManyAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference_TypeAssignment_1(parent, this, 0, inst);
+			case 0: return new Reference_TypeAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("many",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("many");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("many",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("many");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getReferenceAccess().getManyAsteriskKeyword_2_0();
 			return obj;
 		}
@@ -1989,8 +1974,8 @@ protected class Reference_ManyAssignment_2 extends AssignmentToken  {
 // name=ID
 protected class Reference_NameAssignment_3 extends AssignmentToken  {
 	
-	public Reference_NameAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference_NameAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1999,20 +1984,20 @@ protected class Reference_NameAssignment_3 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference_ManyAssignment_2(parent, this, 0, inst);
-			case 1: return new Reference_TypeAssignment_1(parent, this, 1, inst);
+			case 0: return new Reference_ManyAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Reference_TypeAssignment_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_3_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_3_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_3_0();
 			return obj;
 		}
@@ -2025,8 +2010,8 @@ protected class Reference_NameAssignment_3 extends AssignmentToken  {
 // longDescription=STRING ";")?) "}"|";"
 protected class Reference_Alternatives_4 extends AlternativesToken {
 
-	public Reference_Alternatives_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference_Alternatives_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2035,10 +2020,10 @@ protected class Reference_Alternatives_4 extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference_Group_4_0(parent, this, 0, inst);
-			case 1: return new Reference_SemicolonKeyword_4_1(parent, this, 1, inst);
+			case 0: return new Reference_Group_4_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Reference_SemicolonKeyword_4_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -2049,8 +2034,8 @@ protected class Reference_Alternatives_4 extends AlternativesToken {
 // longDescription=STRING ";")?) "}"
 protected class Reference_Group_4_0 extends GroupToken {
 	
-	public Reference_Group_4_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference_Group_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2059,9 +2044,9 @@ protected class Reference_Group_4_0 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference_RightCurlyBracketKeyword_4_0_2(parent, this, 0, inst);
+			case 0: return new Reference_RightCurlyBracketKeyword_4_0_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2071,8 +2056,8 @@ protected class Reference_Group_4_0 extends GroupToken {
 // "{"
 protected class Reference_LeftCurlyBracketKeyword_4_0_0 extends KeywordToken  {
 	
-	public Reference_LeftCurlyBracketKeyword_4_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference_LeftCurlyBracketKeyword_4_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2081,9 +2066,9 @@ protected class Reference_LeftCurlyBracketKeyword_4_0_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference_NameAssignment_3(parent, this, 0, inst);
+			case 0: return new Reference_NameAssignment_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2094,8 +2079,8 @@ protected class Reference_LeftCurlyBracketKeyword_4_0_0 extends KeywordToken  {
 // longDescription=STRING ";")?
 protected class Reference_UnorderedGroup_4_0_1 extends UnorderedGroupToken {
 	
-	public Reference_UnorderedGroup_4_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference_UnorderedGroup_4_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2104,10 +2089,10 @@ protected class Reference_UnorderedGroup_4_0_1 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference_Group_4_0_1_1(parent, this, 0, inst);
-			case 1: return new Reference_Group_4_0_1_0(parent, this, 1, inst);
+			case 0: return new Reference_Group_4_0_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Reference_Group_4_0_1_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -2117,8 +2102,8 @@ protected class Reference_UnorderedGroup_4_0_1 extends UnorderedGroupToken {
 // ("shortDescription" shortDescription=STRING ";")?
 protected class Reference_Group_4_0_1_0 extends GroupToken {
 	
-	public Reference_Group_4_0_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference_Group_4_0_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2127,9 +2112,9 @@ protected class Reference_Group_4_0_1_0 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference_SemicolonKeyword_4_0_1_0_2(parent, this, 0, inst);
+			case 0: return new Reference_SemicolonKeyword_4_0_1_0_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2139,8 +2124,8 @@ protected class Reference_Group_4_0_1_0 extends GroupToken {
 // "shortDescription"
 protected class Reference_ShortDescriptionKeyword_4_0_1_0_0 extends KeywordToken  {
 	
-	public Reference_ShortDescriptionKeyword_4_0_1_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference_ShortDescriptionKeyword_4_0_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2149,9 +2134,9 @@ protected class Reference_ShortDescriptionKeyword_4_0_1_0_0 extends KeywordToken
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference_LeftCurlyBracketKeyword_4_0_0(parent, this, 0, inst);
+			case 0: return new Reference_LeftCurlyBracketKeyword_4_0_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2161,8 +2146,8 @@ protected class Reference_ShortDescriptionKeyword_4_0_1_0_0 extends KeywordToken
 // shortDescription=STRING
 protected class Reference_ShortDescriptionAssignment_4_0_1_0_1 extends AssignmentToken  {
 	
-	public Reference_ShortDescriptionAssignment_4_0_1_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference_ShortDescriptionAssignment_4_0_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2171,19 +2156,19 @@ protected class Reference_ShortDescriptionAssignment_4_0_1_0_1 extends Assignmen
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference_ShortDescriptionKeyword_4_0_1_0_0(parent, this, 0, inst);
+			case 0: return new Reference_ShortDescriptionKeyword_4_0_1_0_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("shortDescription",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("shortDescription");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getReferenceAccess().getShortDescriptionSTRINGTerminalRuleCall_4_0_1_0_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("shortDescription",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("shortDescription");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getReferenceAccess().getShortDescriptionSTRINGTerminalRuleCall_4_0_1_0_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getReferenceAccess().getShortDescriptionSTRINGTerminalRuleCall_4_0_1_0_1_0();
 			return obj;
 		}
@@ -2195,8 +2180,8 @@ protected class Reference_ShortDescriptionAssignment_4_0_1_0_1 extends Assignmen
 // ";"
 protected class Reference_SemicolonKeyword_4_0_1_0_2 extends KeywordToken  {
 	
-	public Reference_SemicolonKeyword_4_0_1_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference_SemicolonKeyword_4_0_1_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2205,9 +2190,9 @@ protected class Reference_SemicolonKeyword_4_0_1_0_2 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference_ShortDescriptionAssignment_4_0_1_0_1(parent, this, 0, inst);
+			case 0: return new Reference_ShortDescriptionAssignment_4_0_1_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2218,8 +2203,8 @@ protected class Reference_SemicolonKeyword_4_0_1_0_2 extends KeywordToken  {
 // ("longDescription" longDescription=STRING ";")?
 protected class Reference_Group_4_0_1_1 extends GroupToken {
 	
-	public Reference_Group_4_0_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference_Group_4_0_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2228,9 +2213,9 @@ protected class Reference_Group_4_0_1_1 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference_SemicolonKeyword_4_0_1_1_2(parent, this, 0, inst);
+			case 0: return new Reference_SemicolonKeyword_4_0_1_1_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2240,8 +2225,8 @@ protected class Reference_Group_4_0_1_1 extends GroupToken {
 // "longDescription"
 protected class Reference_LongDescriptionKeyword_4_0_1_1_0 extends KeywordToken  {
 	
-	public Reference_LongDescriptionKeyword_4_0_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference_LongDescriptionKeyword_4_0_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2250,10 +2235,10 @@ protected class Reference_LongDescriptionKeyword_4_0_1_1_0 extends KeywordToken 
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference_Group_4_0_1_0(parent, this, 0, inst);
-			case 1: return new Reference_LeftCurlyBracketKeyword_4_0_0(parent, this, 1, inst);
+			case 0: return new Reference_Group_4_0_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Reference_LeftCurlyBracketKeyword_4_0_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -2263,8 +2248,8 @@ protected class Reference_LongDescriptionKeyword_4_0_1_1_0 extends KeywordToken 
 // longDescription=STRING
 protected class Reference_LongDescriptionAssignment_4_0_1_1_1 extends AssignmentToken  {
 	
-	public Reference_LongDescriptionAssignment_4_0_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference_LongDescriptionAssignment_4_0_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2273,19 +2258,19 @@ protected class Reference_LongDescriptionAssignment_4_0_1_1_1 extends Assignment
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference_LongDescriptionKeyword_4_0_1_1_0(parent, this, 0, inst);
+			case 0: return new Reference_LongDescriptionKeyword_4_0_1_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("longDescription",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("longDescription");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getReferenceAccess().getLongDescriptionSTRINGTerminalRuleCall_4_0_1_1_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("longDescription",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("longDescription");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getReferenceAccess().getLongDescriptionSTRINGTerminalRuleCall_4_0_1_1_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getReferenceAccess().getLongDescriptionSTRINGTerminalRuleCall_4_0_1_1_1_0();
 			return obj;
 		}
@@ -2297,8 +2282,8 @@ protected class Reference_LongDescriptionAssignment_4_0_1_1_1 extends Assignment
 // ";"
 protected class Reference_SemicolonKeyword_4_0_1_1_2 extends KeywordToken  {
 	
-	public Reference_SemicolonKeyword_4_0_1_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference_SemicolonKeyword_4_0_1_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2307,9 +2292,9 @@ protected class Reference_SemicolonKeyword_4_0_1_1_2 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference_LongDescriptionAssignment_4_0_1_1_1(parent, this, 0, inst);
+			case 0: return new Reference_LongDescriptionAssignment_4_0_1_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2321,8 +2306,8 @@ protected class Reference_SemicolonKeyword_4_0_1_1_2 extends KeywordToken  {
 // "}"
 protected class Reference_RightCurlyBracketKeyword_4_0_2 extends KeywordToken  {
 	
-	public Reference_RightCurlyBracketKeyword_4_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference_RightCurlyBracketKeyword_4_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2331,9 +2316,9 @@ protected class Reference_RightCurlyBracketKeyword_4_0_2 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference_UnorderedGroup_4_0_1(parent, this, 0, inst);
+			case 0: return new Reference_UnorderedGroup_4_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2344,8 +2329,8 @@ protected class Reference_RightCurlyBracketKeyword_4_0_2 extends KeywordToken  {
 // ";"
 protected class Reference_SemicolonKeyword_4_1 extends KeywordToken  {
 	
-	public Reference_SemicolonKeyword_4_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference_SemicolonKeyword_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2354,9 +2339,9 @@ protected class Reference_SemicolonKeyword_4_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference_NameAssignment_3(parent, this, 0, inst);
+			case 0: return new Reference_NameAssignment_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2378,8 +2363,8 @@ protected class Reference_SemicolonKeyword_4_1 extends KeywordToken  {
 // {PackageDefinition} "package" namespace=ID ";" contents+=Object2*
 protected class PackageDefinition2_Group extends GroupToken {
 	
-	public PackageDefinition2_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public PackageDefinition2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2388,19 +2373,19 @@ protected class PackageDefinition2_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PackageDefinition2_ContentsAssignment_4(parent, this, 0, inst);
-			case 1: return new PackageDefinition2_SemicolonKeyword_3(parent, this, 1, inst);
+			case 0: return new PackageDefinition2_ContentsAssignment_4(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new PackageDefinition2_SemicolonKeyword_3(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getPackageDefinition2Access().getPackageDefinitionAction_0().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getPackageDefinition2Access().getPackageDefinitionAction_0().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -2408,8 +2393,8 @@ protected class PackageDefinition2_Group extends GroupToken {
 // {PackageDefinition}
 protected class PackageDefinition2_PackageDefinitionAction_0 extends ActionToken  {
 
-	public PackageDefinition2_PackageDefinitionAction_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public PackageDefinition2_PackageDefinitionAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2418,24 +2403,24 @@ protected class PackageDefinition2_PackageDefinitionAction_0 extends ActionToken
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isConsumed()) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
 	}
 }
 
 // "package"
 protected class PackageDefinition2_PackageKeyword_1 extends KeywordToken  {
 	
-	public PackageDefinition2_PackageKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public PackageDefinition2_PackageKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2444,9 +2429,9 @@ protected class PackageDefinition2_PackageKeyword_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PackageDefinition2_PackageDefinitionAction_0(parent, this, 0, inst);
+			case 0: return new PackageDefinition2_PackageDefinitionAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2456,8 +2441,8 @@ protected class PackageDefinition2_PackageKeyword_1 extends KeywordToken  {
 // namespace=ID
 protected class PackageDefinition2_NamespaceAssignment_2 extends AssignmentToken  {
 	
-	public PackageDefinition2_NamespaceAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public PackageDefinition2_NamespaceAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2466,19 +2451,19 @@ protected class PackageDefinition2_NamespaceAssignment_2 extends AssignmentToken
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PackageDefinition2_PackageKeyword_1(parent, this, 0, inst);
+			case 0: return new PackageDefinition2_PackageKeyword_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("namespace",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("namespace");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getPackageDefinition2Access().getNamespaceIDTerminalRuleCall_2_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("namespace",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("namespace");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getPackageDefinition2Access().getNamespaceIDTerminalRuleCall_2_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getPackageDefinition2Access().getNamespaceIDTerminalRuleCall_2_0();
 			return obj;
 		}
@@ -2490,8 +2475,8 @@ protected class PackageDefinition2_NamespaceAssignment_2 extends AssignmentToken
 // ";"
 protected class PackageDefinition2_SemicolonKeyword_3 extends KeywordToken  {
 	
-	public PackageDefinition2_SemicolonKeyword_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public PackageDefinition2_SemicolonKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2500,9 +2485,9 @@ protected class PackageDefinition2_SemicolonKeyword_3 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PackageDefinition2_NamespaceAssignment_2(parent, this, 0, inst);
+			case 0: return new PackageDefinition2_NamespaceAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2512,8 +2497,8 @@ protected class PackageDefinition2_SemicolonKeyword_3 extends KeywordToken  {
 // contents+=Object2*
 protected class PackageDefinition2_ContentsAssignment_4 extends AssignmentToken  {
 	
-	public PackageDefinition2_ContentsAssignment_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public PackageDefinition2_ContentsAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2522,7 +2507,7 @@ protected class PackageDefinition2_ContentsAssignment_4 extends AssignmentToken 
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Object2_Group(this, this, 0, inst);
 			default: return null;
@@ -2530,13 +2515,13 @@ protected class PackageDefinition2_ContentsAssignment_4 extends AssignmentToken 
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("contents",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("contents");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("contents",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("contents");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getObject2Rule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getPackageDefinition2Access().getContentsObject2ParserRuleCall_4_0(); 
 				consumed = obj;
 				return param;
@@ -2546,11 +2531,11 @@ protected class PackageDefinition2_ContentsAssignment_4 extends AssignmentToken 
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new PackageDefinition2_ContentsAssignment_4(parent, next, actIndex, consumed);
-			case 1: return new PackageDefinition2_SemicolonKeyword_3(parent, next, actIndex, consumed);
+			case 0: return new PackageDefinition2_ContentsAssignment_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new PackageDefinition2_SemicolonKeyword_3(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2577,8 +2562,8 @@ protected class PackageDefinition2_ContentsAssignment_4 extends AssignmentToken 
 // INT ";")? & (cloneable?="cloneable" ";")? & features+=Feature2*) "}"
 protected class Object2_Group extends GroupToken {
 	
-	public Object2_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2587,18 +2572,18 @@ protected class Object2_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_RightCurlyBracketKeyword_6(parent, this, 0, inst);
+			case 0: return new Object2_RightCurlyBracketKeyword_6(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getObject2Rule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getObject2Rule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -2606,8 +2591,8 @@ protected class Object2_Group extends GroupToken {
 // (enabled?="enabled"|abstract?="abstract")?
 protected class Object2_Alternatives_0 extends AlternativesToken {
 
-	public Object2_Alternatives_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2616,10 +2601,10 @@ protected class Object2_Alternatives_0 extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_EnabledAssignment_0_0(parent, this, 0, inst);
-			case 1: return new Object2_AbstractAssignment_0_1(parent, this, 1, inst);
+			case 0: return new Object2_EnabledAssignment_0_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Object2_AbstractAssignment_0_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -2629,8 +2614,8 @@ protected class Object2_Alternatives_0 extends AlternativesToken {
 // enabled?="enabled"
 protected class Object2_EnabledAssignment_0_0 extends AssignmentToken  {
 	
-	public Object2_EnabledAssignment_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_EnabledAssignment_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2639,18 +2624,18 @@ protected class Object2_EnabledAssignment_0_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("enabled",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("enabled");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("enabled",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("enabled");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getObject2Access().getEnabledEnabledKeyword_0_0_0();
 			return obj;
 		}
@@ -2662,8 +2647,8 @@ protected class Object2_EnabledAssignment_0_0 extends AssignmentToken  {
 // abstract?="abstract"
 protected class Object2_AbstractAssignment_0_1 extends AssignmentToken  {
 	
-	public Object2_AbstractAssignment_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_AbstractAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2672,18 +2657,18 @@ protected class Object2_AbstractAssignment_0_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("abstract",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("abstract");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("abstract",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("abstract");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getObject2Access().getAbstractAbstractKeyword_0_1_0();
 			return obj;
 		}
@@ -2696,8 +2681,8 @@ protected class Object2_AbstractAssignment_0_1 extends AssignmentToken  {
 // "object"
 protected class Object2_ObjectKeyword_1 extends KeywordToken  {
 	
-	public Object2_ObjectKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_ObjectKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2706,10 +2691,10 @@ protected class Object2_ObjectKeyword_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_Alternatives_0(parent, this, 0, inst);
-			default: return parent.createParentFollower(this, index, index - 1, inst);
+			case 0: return new Object2_Alternatives_0(lastRuleCallOrigin, this, 0, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 1, inst);
 		}	
 	}
 
@@ -2718,8 +2703,8 @@ protected class Object2_ObjectKeyword_1 extends KeywordToken  {
 // name=ID
 protected class Object2_NameAssignment_2 extends AssignmentToken  {
 	
-	public Object2_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_NameAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2728,19 +2713,19 @@ protected class Object2_NameAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_ObjectKeyword_1(parent, this, 0, inst);
+			case 0: return new Object2_ObjectKeyword_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getObject2Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getObject2Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getObject2Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
 		}
@@ -2752,8 +2737,8 @@ protected class Object2_NameAssignment_2 extends AssignmentToken  {
 // ("extends" parent=[Object])?
 protected class Object2_Group_3 extends GroupToken {
 	
-	public Object2_Group_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2762,9 +2747,9 @@ protected class Object2_Group_3 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_ParentAssignment_3_1(parent, this, 0, inst);
+			case 0: return new Object2_ParentAssignment_3_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2774,8 +2759,8 @@ protected class Object2_Group_3 extends GroupToken {
 // "extends"
 protected class Object2_ExtendsKeyword_3_0 extends KeywordToken  {
 	
-	public Object2_ExtendsKeyword_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_ExtendsKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2784,9 +2769,9 @@ protected class Object2_ExtendsKeyword_3_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_NameAssignment_2(parent, this, 0, inst);
+			case 0: return new Object2_NameAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2796,8 +2781,8 @@ protected class Object2_ExtendsKeyword_3_0 extends KeywordToken  {
 // parent=[Object]
 protected class Object2_ParentAssignment_3_1 extends AssignmentToken  {
 	
-	public Object2_ParentAssignment_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_ParentAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2806,21 +2791,21 @@ protected class Object2_ParentAssignment_3_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_ExtendsKeyword_3_0(parent, this, 0, inst);
+			case 0: return new Object2_ExtendsKeyword_3_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("parent",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("parent");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("parent",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("parent");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getObject2Access().getParentObjectCrossReference_3_1_0().getType().getClassifier())) {
-				type = AssignmentType.CR;
+				type = AssignmentType.CROSS_REFERENCE;
 				element = grammarAccess.getObject2Access().getParentObjectCrossReference_3_1_0(); 
 				return obj;
 			}
@@ -2834,8 +2819,8 @@ protected class Object2_ParentAssignment_3_1 extends AssignmentToken  {
 // "{"
 protected class Object2_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 	
-	public Object2_LeftCurlyBracketKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_LeftCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2844,10 +2829,10 @@ protected class Object2_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_Group_3(parent, this, 0, inst);
-			case 1: return new Object2_NameAssignment_2(parent, this, 1, inst);
+			case 0: return new Object2_Group_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Object2_NameAssignment_2(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -2859,8 +2844,8 @@ protected class Object2_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 // cloneable?="cloneable" ";")? & features+=Feature2*
 protected class Object2_UnorderedGroup_5 extends UnorderedGroupToken {
 	
-	public Object2_UnorderedGroup_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_UnorderedGroup_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2869,14 +2854,14 @@ protected class Object2_UnorderedGroup_5 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_FeaturesAssignment_5_4(parent, this, 0, inst);
-			case 1: return new Object2_Group_5_3(parent, this, 1, inst);
-			case 2: return new Object2_Group_5_2(parent, this, 2, inst);
-			case 3: return new Object2_Group_5_1(parent, this, 3, inst);
-			case 4: return new Object2_Group_5_0(parent, this, 4, inst);
-			case 5: return new Object2_LeftCurlyBracketKeyword_4(parent, this, 5, inst);
+			case 0: return new Object2_FeaturesAssignment_5_4(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Object2_Group_5_3(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Object2_Group_5_2(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Object2_Group_5_1(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new Object2_Group_5_0(lastRuleCallOrigin, this, 4, inst);
+			case 5: return new Object2_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, this, 5, inst);
 			default: return null;
 		}	
 	}
@@ -2886,8 +2871,8 @@ protected class Object2_UnorderedGroup_5 extends UnorderedGroupToken {
 // ("shortDescription" shortDescription=STRING ";")?
 protected class Object2_Group_5_0 extends GroupToken {
 	
-	public Object2_Group_5_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_Group_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2896,9 +2881,9 @@ protected class Object2_Group_5_0 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_SemicolonKeyword_5_0_2(parent, this, 0, inst);
+			case 0: return new Object2_SemicolonKeyword_5_0_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2908,8 +2893,8 @@ protected class Object2_Group_5_0 extends GroupToken {
 // "shortDescription"
 protected class Object2_ShortDescriptionKeyword_5_0_0 extends KeywordToken  {
 	
-	public Object2_ShortDescriptionKeyword_5_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_ShortDescriptionKeyword_5_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2918,9 +2903,9 @@ protected class Object2_ShortDescriptionKeyword_5_0_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_LeftCurlyBracketKeyword_4(parent, this, 0, inst);
+			case 0: return new Object2_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2930,8 +2915,8 @@ protected class Object2_ShortDescriptionKeyword_5_0_0 extends KeywordToken  {
 // shortDescription=STRING
 protected class Object2_ShortDescriptionAssignment_5_0_1 extends AssignmentToken  {
 	
-	public Object2_ShortDescriptionAssignment_5_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_ShortDescriptionAssignment_5_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2940,19 +2925,19 @@ protected class Object2_ShortDescriptionAssignment_5_0_1 extends AssignmentToken
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_ShortDescriptionKeyword_5_0_0(parent, this, 0, inst);
+			case 0: return new Object2_ShortDescriptionKeyword_5_0_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("shortDescription",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("shortDescription");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getObject2Access().getShortDescriptionSTRINGTerminalRuleCall_5_0_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("shortDescription",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("shortDescription");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getObject2Access().getShortDescriptionSTRINGTerminalRuleCall_5_0_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getObject2Access().getShortDescriptionSTRINGTerminalRuleCall_5_0_1_0();
 			return obj;
 		}
@@ -2964,8 +2949,8 @@ protected class Object2_ShortDescriptionAssignment_5_0_1 extends AssignmentToken
 // ";"
 protected class Object2_SemicolonKeyword_5_0_2 extends KeywordToken  {
 	
-	public Object2_SemicolonKeyword_5_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_SemicolonKeyword_5_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2974,9 +2959,9 @@ protected class Object2_SemicolonKeyword_5_0_2 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_ShortDescriptionAssignment_5_0_1(parent, this, 0, inst);
+			case 0: return new Object2_ShortDescriptionAssignment_5_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2987,8 +2972,8 @@ protected class Object2_SemicolonKeyword_5_0_2 extends KeywordToken  {
 // ("longDescription" longDescription=STRING ";")?
 protected class Object2_Group_5_1 extends GroupToken {
 	
-	public Object2_Group_5_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_Group_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2997,9 +2982,9 @@ protected class Object2_Group_5_1 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_SemicolonKeyword_5_1_2(parent, this, 0, inst);
+			case 0: return new Object2_SemicolonKeyword_5_1_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3009,8 +2994,8 @@ protected class Object2_Group_5_1 extends GroupToken {
 // "longDescription"
 protected class Object2_LongDescriptionKeyword_5_1_0 extends KeywordToken  {
 	
-	public Object2_LongDescriptionKeyword_5_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_LongDescriptionKeyword_5_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3019,10 +3004,10 @@ protected class Object2_LongDescriptionKeyword_5_1_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_Group_5_0(parent, this, 0, inst);
-			case 1: return new Object2_LeftCurlyBracketKeyword_4(parent, this, 1, inst);
+			case 0: return new Object2_Group_5_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Object2_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -3032,8 +3017,8 @@ protected class Object2_LongDescriptionKeyword_5_1_0 extends KeywordToken  {
 // longDescription=STRING
 protected class Object2_LongDescriptionAssignment_5_1_1 extends AssignmentToken  {
 	
-	public Object2_LongDescriptionAssignment_5_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_LongDescriptionAssignment_5_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3042,19 +3027,19 @@ protected class Object2_LongDescriptionAssignment_5_1_1 extends AssignmentToken 
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_LongDescriptionKeyword_5_1_0(parent, this, 0, inst);
+			case 0: return new Object2_LongDescriptionKeyword_5_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("longDescription",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("longDescription");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getObject2Access().getLongDescriptionSTRINGTerminalRuleCall_5_1_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("longDescription",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("longDescription");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getObject2Access().getLongDescriptionSTRINGTerminalRuleCall_5_1_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getObject2Access().getLongDescriptionSTRINGTerminalRuleCall_5_1_1_0();
 			return obj;
 		}
@@ -3066,8 +3051,8 @@ protected class Object2_LongDescriptionAssignment_5_1_1 extends AssignmentToken 
 // ";"
 protected class Object2_SemicolonKeyword_5_1_2 extends KeywordToken  {
 	
-	public Object2_SemicolonKeyword_5_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_SemicolonKeyword_5_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3076,9 +3061,9 @@ protected class Object2_SemicolonKeyword_5_1_2 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_LongDescriptionAssignment_5_1_1(parent, this, 0, inst);
+			case 0: return new Object2_LongDescriptionAssignment_5_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3089,8 +3074,8 @@ protected class Object2_SemicolonKeyword_5_1_2 extends KeywordToken  {
 // ("serialUID" serialVersionUID=INT ";")?
 protected class Object2_Group_5_2 extends GroupToken {
 	
-	public Object2_Group_5_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_Group_5_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3099,9 +3084,9 @@ protected class Object2_Group_5_2 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_SemicolonKeyword_5_2_2(parent, this, 0, inst);
+			case 0: return new Object2_SemicolonKeyword_5_2_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3111,8 +3096,8 @@ protected class Object2_Group_5_2 extends GroupToken {
 // "serialUID"
 protected class Object2_SerialUIDKeyword_5_2_0 extends KeywordToken  {
 	
-	public Object2_SerialUIDKeyword_5_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_SerialUIDKeyword_5_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3121,11 +3106,11 @@ protected class Object2_SerialUIDKeyword_5_2_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_Group_5_1(parent, this, 0, inst);
-			case 1: return new Object2_Group_5_0(parent, this, 1, inst);
-			case 2: return new Object2_LeftCurlyBracketKeyword_4(parent, this, 2, inst);
+			case 0: return new Object2_Group_5_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Object2_Group_5_0(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Object2_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
@@ -3135,8 +3120,8 @@ protected class Object2_SerialUIDKeyword_5_2_0 extends KeywordToken  {
 // serialVersionUID=INT
 protected class Object2_SerialVersionUIDAssignment_5_2_1 extends AssignmentToken  {
 	
-	public Object2_SerialVersionUIDAssignment_5_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_SerialVersionUIDAssignment_5_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3145,19 +3130,19 @@ protected class Object2_SerialVersionUIDAssignment_5_2_1 extends AssignmentToken
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_SerialUIDKeyword_5_2_0(parent, this, 0, inst);
+			case 0: return new Object2_SerialUIDKeyword_5_2_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("serialVersionUID",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("serialVersionUID");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getObject2Access().getSerialVersionUIDINTTerminalRuleCall_5_2_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("serialVersionUID",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("serialVersionUID");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getObject2Access().getSerialVersionUIDINTTerminalRuleCall_5_2_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getObject2Access().getSerialVersionUIDINTTerminalRuleCall_5_2_1_0();
 			return obj;
 		}
@@ -3169,8 +3154,8 @@ protected class Object2_SerialVersionUIDAssignment_5_2_1 extends AssignmentToken
 // ";"
 protected class Object2_SemicolonKeyword_5_2_2 extends KeywordToken  {
 	
-	public Object2_SemicolonKeyword_5_2_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_SemicolonKeyword_5_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3179,9 +3164,9 @@ protected class Object2_SemicolonKeyword_5_2_2 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_SerialVersionUIDAssignment_5_2_1(parent, this, 0, inst);
+			case 0: return new Object2_SerialVersionUIDAssignment_5_2_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3192,8 +3177,8 @@ protected class Object2_SemicolonKeyword_5_2_2 extends KeywordToken  {
 // (cloneable?="cloneable" ";")?
 protected class Object2_Group_5_3 extends GroupToken {
 	
-	public Object2_Group_5_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_Group_5_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3202,9 +3187,9 @@ protected class Object2_Group_5_3 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_SemicolonKeyword_5_3_1(parent, this, 0, inst);
+			case 0: return new Object2_SemicolonKeyword_5_3_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3214,8 +3199,8 @@ protected class Object2_Group_5_3 extends GroupToken {
 // cloneable?="cloneable"
 protected class Object2_CloneableAssignment_5_3_0 extends AssignmentToken  {
 	
-	public Object2_CloneableAssignment_5_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_CloneableAssignment_5_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3224,22 +3209,22 @@ protected class Object2_CloneableAssignment_5_3_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_Group_5_2(parent, this, 0, inst);
-			case 1: return new Object2_Group_5_1(parent, this, 1, inst);
-			case 2: return new Object2_Group_5_0(parent, this, 2, inst);
-			case 3: return new Object2_LeftCurlyBracketKeyword_4(parent, this, 3, inst);
+			case 0: return new Object2_Group_5_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Object2_Group_5_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Object2_Group_5_0(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Object2_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, this, 3, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("cloneable",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("cloneable");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("cloneable",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("cloneable");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getObject2Access().getCloneableCloneableKeyword_5_3_0_0();
 			return obj;
 		}
@@ -3251,8 +3236,8 @@ protected class Object2_CloneableAssignment_5_3_0 extends AssignmentToken  {
 // ";"
 protected class Object2_SemicolonKeyword_5_3_1 extends KeywordToken  {
 	
-	public Object2_SemicolonKeyword_5_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_SemicolonKeyword_5_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3261,9 +3246,9 @@ protected class Object2_SemicolonKeyword_5_3_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_CloneableAssignment_5_3_0(parent, this, 0, inst);
+			case 0: return new Object2_CloneableAssignment_5_3_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3274,8 +3259,8 @@ protected class Object2_SemicolonKeyword_5_3_1 extends KeywordToken  {
 // features+=Feature2*
 protected class Object2_FeaturesAssignment_5_4 extends AssignmentToken  {
 	
-	public Object2_FeaturesAssignment_5_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_FeaturesAssignment_5_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3284,7 +3269,7 @@ protected class Object2_FeaturesAssignment_5_4 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Feature2_Alternatives(this, this, 0, inst);
 			default: return null;
@@ -3292,13 +3277,13 @@ protected class Object2_FeaturesAssignment_5_4 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("features",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("features");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("features",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("features");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFeature2Rule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getObject2Access().getFeaturesFeature2ParserRuleCall_5_4_0(); 
 				consumed = obj;
 				return param;
@@ -3308,15 +3293,15 @@ protected class Object2_FeaturesAssignment_5_4 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Object2_FeaturesAssignment_5_4(parent, next, actIndex, consumed);
-			case 1: return new Object2_Group_5_3(parent, next, actIndex, consumed);
-			case 2: return new Object2_Group_5_2(parent, next, actIndex, consumed);
-			case 3: return new Object2_Group_5_1(parent, next, actIndex, consumed);
-			case 4: return new Object2_Group_5_0(parent, next, actIndex, consumed);
-			case 5: return new Object2_LeftCurlyBracketKeyword_4(parent, next, actIndex, consumed);
+			case 0: return new Object2_FeaturesAssignment_5_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Object2_Group_5_3(lastRuleCallOrigin, next, actIndex, consumed);
+			case 2: return new Object2_Group_5_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 3: return new Object2_Group_5_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 4: return new Object2_Group_5_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 5: return new Object2_LeftCurlyBracketKeyword_4(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -3326,8 +3311,8 @@ protected class Object2_FeaturesAssignment_5_4 extends AssignmentToken  {
 // "}"
 protected class Object2_RightCurlyBracketKeyword_6 extends KeywordToken  {
 	
-	public Object2_RightCurlyBracketKeyword_6(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Object2_RightCurlyBracketKeyword_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3336,9 +3321,9 @@ protected class Object2_RightCurlyBracketKeyword_6 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Object2_UnorderedGroup_5(parent, this, 0, inst);
+			case 0: return new Object2_UnorderedGroup_5(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3359,8 +3344,8 @@ protected class Object2_RightCurlyBracketKeyword_6 extends KeywordToken  {
 // Attribute2|Reference2
 protected class Feature2_Alternatives extends AlternativesToken {
 
-	public Feature2_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Feature2_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3369,20 +3354,20 @@ protected class Feature2_Alternatives extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Feature2_Attribute2ParserRuleCall_0(parent, this, 0, inst);
-			case 1: return new Feature2_Reference2ParserRuleCall_1(parent, this, 1, inst);
+			case 0: return new Feature2_Attribute2ParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Feature2_Reference2ParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getAttribute2Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getReference2Rule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getAttribute2Rule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getReference2Rule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -3390,8 +3375,8 @@ protected class Feature2_Alternatives extends AlternativesToken {
 // Attribute2
 protected class Feature2_Attribute2ParserRuleCall_0 extends RuleCallToken {
 	
-	public Feature2_Attribute2ParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Feature2_Attribute2ParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3400,7 +3385,7 @@ protected class Feature2_Attribute2ParserRuleCall_0 extends RuleCallToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Attribute2_Group(this, this, 0, inst);
 			default: return null;
@@ -3408,22 +3393,17 @@ protected class Feature2_Attribute2ParserRuleCall_0 extends RuleCallToken {
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getAttribute2Rule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
-	}
-
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(Attribute2_Group.class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getAttribute2Rule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(Attribute2_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -3431,8 +3411,8 @@ protected class Feature2_Attribute2ParserRuleCall_0 extends RuleCallToken {
 // Reference2
 protected class Feature2_Reference2ParserRuleCall_1 extends RuleCallToken {
 	
-	public Feature2_Reference2ParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Feature2_Reference2ParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3441,7 +3421,7 @@ protected class Feature2_Reference2ParserRuleCall_1 extends RuleCallToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Reference2_Group(this, this, 0, inst);
 			default: return null;
@@ -3449,22 +3429,17 @@ protected class Feature2_Reference2ParserRuleCall_1 extends RuleCallToken {
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getReference2Rule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
-	}
-
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(Reference2_Group.class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getReference2Rule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(Reference2_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -3489,8 +3464,8 @@ protected class Feature2_Reference2ParserRuleCall_1 extends RuleCallToken {
 // ";")?) "}"|";")
 protected class Attribute2_Group extends GroupToken {
 	
-	public Attribute2_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3499,18 +3474,18 @@ protected class Attribute2_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_Alternatives_3(parent, this, 0, inst);
+			case 0: return new Attribute2_Alternatives_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getAttribute2Rule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getAttribute2Rule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -3518,8 +3493,8 @@ protected class Attribute2_Group extends GroupToken {
 // "Attribute"
 protected class Attribute2_AttributeKeyword_0 extends KeywordToken  {
 	
-	public Attribute2_AttributeKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_AttributeKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3528,9 +3503,9 @@ protected class Attribute2_AttributeKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -3539,8 +3514,8 @@ protected class Attribute2_AttributeKeyword_0 extends KeywordToken  {
 // type=ID
 protected class Attribute2_TypeAssignment_1 extends AssignmentToken  {
 	
-	public Attribute2_TypeAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_TypeAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3549,19 +3524,19 @@ protected class Attribute2_TypeAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_AttributeKeyword_0(parent, this, 0, inst);
+			case 0: return new Attribute2_AttributeKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("type",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAttribute2Access().getTypeIDTerminalRuleCall_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("type",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("type");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getAttribute2Access().getTypeIDTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getAttribute2Access().getTypeIDTerminalRuleCall_1_0();
 			return obj;
 		}
@@ -3573,8 +3548,8 @@ protected class Attribute2_TypeAssignment_1 extends AssignmentToken  {
 // name=ID
 protected class Attribute2_NameAssignment_2 extends AssignmentToken  {
 	
-	public Attribute2_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_NameAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3583,19 +3558,19 @@ protected class Attribute2_NameAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_TypeAssignment_1(parent, this, 0, inst);
+			case 0: return new Attribute2_TypeAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAttribute2Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getAttribute2Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getAttribute2Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
 		}
@@ -3609,8 +3584,8 @@ protected class Attribute2_NameAssignment_2 extends AssignmentToken  {
 // required?="required" ";")? & (technical?="technical" ";")?) "}"|";"
 protected class Attribute2_Alternatives_3 extends AlternativesToken {
 
-	public Attribute2_Alternatives_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3619,10 +3594,10 @@ protected class Attribute2_Alternatives_3 extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_Group_3_0(parent, this, 0, inst);
-			case 1: return new Attribute2_SemicolonKeyword_3_1(parent, this, 1, inst);
+			case 0: return new Attribute2_Group_3_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Attribute2_SemicolonKeyword_3_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -3634,8 +3609,8 @@ protected class Attribute2_Alternatives_3 extends AlternativesToken {
 // required?="required" ";")? & (technical?="technical" ";")?) "}"
 protected class Attribute2_Group_3_0 extends GroupToken {
 	
-	public Attribute2_Group_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_Group_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3644,9 +3619,9 @@ protected class Attribute2_Group_3_0 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_RightCurlyBracketKeyword_3_0_2(parent, this, 0, inst);
+			case 0: return new Attribute2_RightCurlyBracketKeyword_3_0_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3656,8 +3631,8 @@ protected class Attribute2_Group_3_0 extends GroupToken {
 // "{"
 protected class Attribute2_LeftCurlyBracketKeyword_3_0_0 extends KeywordToken  {
 	
-	public Attribute2_LeftCurlyBracketKeyword_3_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_LeftCurlyBracketKeyword_3_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3666,9 +3641,9 @@ protected class Attribute2_LeftCurlyBracketKeyword_3_0_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_NameAssignment_2(parent, this, 0, inst);
+			case 0: return new Attribute2_NameAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3680,8 +3655,8 @@ protected class Attribute2_LeftCurlyBracketKeyword_3_0_0 extends KeywordToken  {
 // required?="required" ";")? & (technical?="technical" ";")?
 protected class Attribute2_UnorderedGroup_3_0_1 extends UnorderedGroupToken {
 	
-	public Attribute2_UnorderedGroup_3_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_UnorderedGroup_3_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3690,13 +3665,13 @@ protected class Attribute2_UnorderedGroup_3_0_1 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_Group_3_0_1_4(parent, this, 0, inst);
-			case 1: return new Attribute2_Group_3_0_1_3(parent, this, 1, inst);
-			case 2: return new Attribute2_ConstraintDefinitionsAssignment_3_0_1_2(parent, this, 2, inst);
-			case 3: return new Attribute2_Group_3_0_1_1(parent, this, 3, inst);
-			case 4: return new Attribute2_Group_3_0_1_0(parent, this, 4, inst);
+			case 0: return new Attribute2_Group_3_0_1_4(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Attribute2_Group_3_0_1_3(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Attribute2_ConstraintDefinitionsAssignment_3_0_1_2(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Attribute2_Group_3_0_1_1(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new Attribute2_Group_3_0_1_0(lastRuleCallOrigin, this, 4, inst);
 			default: return null;
 		}	
 	}
@@ -3706,8 +3681,8 @@ protected class Attribute2_UnorderedGroup_3_0_1 extends UnorderedGroupToken {
 // ("shortDescription" shortDescription=STRING ";")?
 protected class Attribute2_Group_3_0_1_0 extends GroupToken {
 	
-	public Attribute2_Group_3_0_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_Group_3_0_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3716,9 +3691,9 @@ protected class Attribute2_Group_3_0_1_0 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_SemicolonKeyword_3_0_1_0_2(parent, this, 0, inst);
+			case 0: return new Attribute2_SemicolonKeyword_3_0_1_0_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3728,8 +3703,8 @@ protected class Attribute2_Group_3_0_1_0 extends GroupToken {
 // "shortDescription"
 protected class Attribute2_ShortDescriptionKeyword_3_0_1_0_0 extends KeywordToken  {
 	
-	public Attribute2_ShortDescriptionKeyword_3_0_1_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_ShortDescriptionKeyword_3_0_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3738,9 +3713,9 @@ protected class Attribute2_ShortDescriptionKeyword_3_0_1_0_0 extends KeywordToke
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_LeftCurlyBracketKeyword_3_0_0(parent, this, 0, inst);
+			case 0: return new Attribute2_LeftCurlyBracketKeyword_3_0_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3750,8 +3725,8 @@ protected class Attribute2_ShortDescriptionKeyword_3_0_1_0_0 extends KeywordToke
 // shortDescription=STRING
 protected class Attribute2_ShortDescriptionAssignment_3_0_1_0_1 extends AssignmentToken  {
 	
-	public Attribute2_ShortDescriptionAssignment_3_0_1_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_ShortDescriptionAssignment_3_0_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3760,19 +3735,19 @@ protected class Attribute2_ShortDescriptionAssignment_3_0_1_0_1 extends Assignme
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_ShortDescriptionKeyword_3_0_1_0_0(parent, this, 0, inst);
+			case 0: return new Attribute2_ShortDescriptionKeyword_3_0_1_0_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("shortDescription",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("shortDescription");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAttribute2Access().getShortDescriptionSTRINGTerminalRuleCall_3_0_1_0_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("shortDescription",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("shortDescription");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getAttribute2Access().getShortDescriptionSTRINGTerminalRuleCall_3_0_1_0_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getAttribute2Access().getShortDescriptionSTRINGTerminalRuleCall_3_0_1_0_1_0();
 			return obj;
 		}
@@ -3784,8 +3759,8 @@ protected class Attribute2_ShortDescriptionAssignment_3_0_1_0_1 extends Assignme
 // ";"
 protected class Attribute2_SemicolonKeyword_3_0_1_0_2 extends KeywordToken  {
 	
-	public Attribute2_SemicolonKeyword_3_0_1_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_SemicolonKeyword_3_0_1_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3794,9 +3769,9 @@ protected class Attribute2_SemicolonKeyword_3_0_1_0_2 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_ShortDescriptionAssignment_3_0_1_0_1(parent, this, 0, inst);
+			case 0: return new Attribute2_ShortDescriptionAssignment_3_0_1_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3807,8 +3782,8 @@ protected class Attribute2_SemicolonKeyword_3_0_1_0_2 extends KeywordToken  {
 // ("longDescription" longDescription=STRING ";")?
 protected class Attribute2_Group_3_0_1_1 extends GroupToken {
 	
-	public Attribute2_Group_3_0_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_Group_3_0_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3817,9 +3792,9 @@ protected class Attribute2_Group_3_0_1_1 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_SemicolonKeyword_3_0_1_1_2(parent, this, 0, inst);
+			case 0: return new Attribute2_SemicolonKeyword_3_0_1_1_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3829,8 +3804,8 @@ protected class Attribute2_Group_3_0_1_1 extends GroupToken {
 // "longDescription"
 protected class Attribute2_LongDescriptionKeyword_3_0_1_1_0 extends KeywordToken  {
 	
-	public Attribute2_LongDescriptionKeyword_3_0_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_LongDescriptionKeyword_3_0_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3839,10 +3814,10 @@ protected class Attribute2_LongDescriptionKeyword_3_0_1_1_0 extends KeywordToken
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_Group_3_0_1_0(parent, this, 0, inst);
-			case 1: return new Attribute2_LeftCurlyBracketKeyword_3_0_0(parent, this, 1, inst);
+			case 0: return new Attribute2_Group_3_0_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Attribute2_LeftCurlyBracketKeyword_3_0_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -3852,8 +3827,8 @@ protected class Attribute2_LongDescriptionKeyword_3_0_1_1_0 extends KeywordToken
 // longDescription=STRING
 protected class Attribute2_LongDescriptionAssignment_3_0_1_1_1 extends AssignmentToken  {
 	
-	public Attribute2_LongDescriptionAssignment_3_0_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_LongDescriptionAssignment_3_0_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3862,19 +3837,19 @@ protected class Attribute2_LongDescriptionAssignment_3_0_1_1_1 extends Assignmen
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_LongDescriptionKeyword_3_0_1_1_0(parent, this, 0, inst);
+			case 0: return new Attribute2_LongDescriptionKeyword_3_0_1_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("longDescription",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("longDescription");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAttribute2Access().getLongDescriptionSTRINGTerminalRuleCall_3_0_1_1_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("longDescription",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("longDescription");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getAttribute2Access().getLongDescriptionSTRINGTerminalRuleCall_3_0_1_1_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getAttribute2Access().getLongDescriptionSTRINGTerminalRuleCall_3_0_1_1_1_0();
 			return obj;
 		}
@@ -3886,8 +3861,8 @@ protected class Attribute2_LongDescriptionAssignment_3_0_1_1_1 extends Assignmen
 // ";"
 protected class Attribute2_SemicolonKeyword_3_0_1_1_2 extends KeywordToken  {
 	
-	public Attribute2_SemicolonKeyword_3_0_1_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_SemicolonKeyword_3_0_1_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3896,9 +3871,9 @@ protected class Attribute2_SemicolonKeyword_3_0_1_1_2 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_LongDescriptionAssignment_3_0_1_1_1(parent, this, 0, inst);
+			case 0: return new Attribute2_LongDescriptionAssignment_3_0_1_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3909,8 +3884,8 @@ protected class Attribute2_SemicolonKeyword_3_0_1_1_2 extends KeywordToken  {
 // constraintDefinitions+=ConstraintDefinition*
 protected class Attribute2_ConstraintDefinitionsAssignment_3_0_1_2 extends AssignmentToken  {
 	
-	public Attribute2_ConstraintDefinitionsAssignment_3_0_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_ConstraintDefinitionsAssignment_3_0_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3919,7 +3894,7 @@ protected class Attribute2_ConstraintDefinitionsAssignment_3_0_1_2 extends Assig
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new ConstraintDefinition_Group(this, this, 0, inst);
 			default: return null;
@@ -3927,13 +3902,13 @@ protected class Attribute2_ConstraintDefinitionsAssignment_3_0_1_2 extends Assig
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("constraintDefinitions",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("constraintDefinitions");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("constraintDefinitions",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("constraintDefinitions");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getConstraintDefinitionRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getAttribute2Access().getConstraintDefinitionsConstraintDefinitionParserRuleCall_3_0_1_2_0(); 
 				consumed = obj;
 				return param;
@@ -3943,13 +3918,13 @@ protected class Attribute2_ConstraintDefinitionsAssignment_3_0_1_2 extends Assig
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Attribute2_ConstraintDefinitionsAssignment_3_0_1_2(parent, next, actIndex, consumed);
-			case 1: return new Attribute2_Group_3_0_1_1(parent, next, actIndex, consumed);
-			case 2: return new Attribute2_Group_3_0_1_0(parent, next, actIndex, consumed);
-			case 3: return new Attribute2_LeftCurlyBracketKeyword_3_0_0(parent, next, actIndex, consumed);
+			case 0: return new Attribute2_ConstraintDefinitionsAssignment_3_0_1_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Attribute2_Group_3_0_1_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 2: return new Attribute2_Group_3_0_1_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 3: return new Attribute2_LeftCurlyBracketKeyword_3_0_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -3958,8 +3933,8 @@ protected class Attribute2_ConstraintDefinitionsAssignment_3_0_1_2 extends Assig
 // (required?="required" ";")?
 protected class Attribute2_Group_3_0_1_3 extends GroupToken {
 	
-	public Attribute2_Group_3_0_1_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_Group_3_0_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3968,9 +3943,9 @@ protected class Attribute2_Group_3_0_1_3 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_SemicolonKeyword_3_0_1_3_1(parent, this, 0, inst);
+			case 0: return new Attribute2_SemicolonKeyword_3_0_1_3_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3980,8 +3955,8 @@ protected class Attribute2_Group_3_0_1_3 extends GroupToken {
 // required?="required"
 protected class Attribute2_RequiredAssignment_3_0_1_3_0 extends AssignmentToken  {
 	
-	public Attribute2_RequiredAssignment_3_0_1_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_RequiredAssignment_3_0_1_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3990,22 +3965,22 @@ protected class Attribute2_RequiredAssignment_3_0_1_3_0 extends AssignmentToken 
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_ConstraintDefinitionsAssignment_3_0_1_2(parent, this, 0, inst);
-			case 1: return new Attribute2_Group_3_0_1_1(parent, this, 1, inst);
-			case 2: return new Attribute2_Group_3_0_1_0(parent, this, 2, inst);
-			case 3: return new Attribute2_LeftCurlyBracketKeyword_3_0_0(parent, this, 3, inst);
+			case 0: return new Attribute2_ConstraintDefinitionsAssignment_3_0_1_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Attribute2_Group_3_0_1_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Attribute2_Group_3_0_1_0(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Attribute2_LeftCurlyBracketKeyword_3_0_0(lastRuleCallOrigin, this, 3, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("required",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("required");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("required",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("required");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getAttribute2Access().getRequiredRequiredKeyword_3_0_1_3_0_0();
 			return obj;
 		}
@@ -4017,8 +3992,8 @@ protected class Attribute2_RequiredAssignment_3_0_1_3_0 extends AssignmentToken 
 // ";"
 protected class Attribute2_SemicolonKeyword_3_0_1_3_1 extends KeywordToken  {
 	
-	public Attribute2_SemicolonKeyword_3_0_1_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_SemicolonKeyword_3_0_1_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4027,9 +4002,9 @@ protected class Attribute2_SemicolonKeyword_3_0_1_3_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_RequiredAssignment_3_0_1_3_0(parent, this, 0, inst);
+			case 0: return new Attribute2_RequiredAssignment_3_0_1_3_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4040,8 +4015,8 @@ protected class Attribute2_SemicolonKeyword_3_0_1_3_1 extends KeywordToken  {
 // (technical?="technical" ";")?
 protected class Attribute2_Group_3_0_1_4 extends GroupToken {
 	
-	public Attribute2_Group_3_0_1_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_Group_3_0_1_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4050,9 +4025,9 @@ protected class Attribute2_Group_3_0_1_4 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_SemicolonKeyword_3_0_1_4_1(parent, this, 0, inst);
+			case 0: return new Attribute2_SemicolonKeyword_3_0_1_4_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4062,8 +4037,8 @@ protected class Attribute2_Group_3_0_1_4 extends GroupToken {
 // technical?="technical"
 protected class Attribute2_TechnicalAssignment_3_0_1_4_0 extends AssignmentToken  {
 	
-	public Attribute2_TechnicalAssignment_3_0_1_4_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_TechnicalAssignment_3_0_1_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4072,23 +4047,23 @@ protected class Attribute2_TechnicalAssignment_3_0_1_4_0 extends AssignmentToken
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_Group_3_0_1_3(parent, this, 0, inst);
-			case 1: return new Attribute2_ConstraintDefinitionsAssignment_3_0_1_2(parent, this, 1, inst);
-			case 2: return new Attribute2_Group_3_0_1_1(parent, this, 2, inst);
-			case 3: return new Attribute2_Group_3_0_1_0(parent, this, 3, inst);
-			case 4: return new Attribute2_LeftCurlyBracketKeyword_3_0_0(parent, this, 4, inst);
+			case 0: return new Attribute2_Group_3_0_1_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Attribute2_ConstraintDefinitionsAssignment_3_0_1_2(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Attribute2_Group_3_0_1_1(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Attribute2_Group_3_0_1_0(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new Attribute2_LeftCurlyBracketKeyword_3_0_0(lastRuleCallOrigin, this, 4, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("technical",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("technical");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("technical",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("technical");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getAttribute2Access().getTechnicalTechnicalKeyword_3_0_1_4_0_0();
 			return obj;
 		}
@@ -4100,8 +4075,8 @@ protected class Attribute2_TechnicalAssignment_3_0_1_4_0 extends AssignmentToken
 // ";"
 protected class Attribute2_SemicolonKeyword_3_0_1_4_1 extends KeywordToken  {
 	
-	public Attribute2_SemicolonKeyword_3_0_1_4_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_SemicolonKeyword_3_0_1_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4110,9 +4085,9 @@ protected class Attribute2_SemicolonKeyword_3_0_1_4_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_TechnicalAssignment_3_0_1_4_0(parent, this, 0, inst);
+			case 0: return new Attribute2_TechnicalAssignment_3_0_1_4_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4124,8 +4099,8 @@ protected class Attribute2_SemicolonKeyword_3_0_1_4_1 extends KeywordToken  {
 // "}"
 protected class Attribute2_RightCurlyBracketKeyword_3_0_2 extends KeywordToken  {
 	
-	public Attribute2_RightCurlyBracketKeyword_3_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_RightCurlyBracketKeyword_3_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4134,9 +4109,9 @@ protected class Attribute2_RightCurlyBracketKeyword_3_0_2 extends KeywordToken  
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_UnorderedGroup_3_0_1(parent, this, 0, inst);
+			case 0: return new Attribute2_UnorderedGroup_3_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4147,8 +4122,8 @@ protected class Attribute2_RightCurlyBracketKeyword_3_0_2 extends KeywordToken  
 // ";"
 protected class Attribute2_SemicolonKeyword_3_1 extends KeywordToken  {
 	
-	public Attribute2_SemicolonKeyword_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute2_SemicolonKeyword_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4157,9 +4132,9 @@ protected class Attribute2_SemicolonKeyword_3_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute2_NameAssignment_2(parent, this, 0, inst);
+			case 0: return new Attribute2_NameAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4185,8 +4160,8 @@ protected class Attribute2_SemicolonKeyword_3_1 extends KeywordToken  {
 // ) "}"|";")
 protected class Reference2_Group extends GroupToken {
 	
-	public Reference2_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4195,18 +4170,18 @@ protected class Reference2_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference2_Alternatives_4(parent, this, 0, inst);
+			case 0: return new Reference2_Alternatives_4(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getReference2Rule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getReference2Rule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -4214,8 +4189,8 @@ protected class Reference2_Group extends GroupToken {
 // "Reference"
 protected class Reference2_ReferenceKeyword_0 extends KeywordToken  {
 	
-	public Reference2_ReferenceKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference2_ReferenceKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4224,9 +4199,9 @@ protected class Reference2_ReferenceKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -4235,8 +4210,8 @@ protected class Reference2_ReferenceKeyword_0 extends KeywordToken  {
 // type=[Object]
 protected class Reference2_TypeAssignment_1 extends AssignmentToken  {
 	
-	public Reference2_TypeAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference2_TypeAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4245,21 +4220,21 @@ protected class Reference2_TypeAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference2_ReferenceKeyword_0(parent, this, 0, inst);
+			case 0: return new Reference2_ReferenceKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("type",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("type");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("type",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("type");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getReference2Access().getTypeObjectCrossReference_1_0().getType().getClassifier())) {
-				type = AssignmentType.CR;
+				type = AssignmentType.CROSS_REFERENCE;
 				element = grammarAccess.getReference2Access().getTypeObjectCrossReference_1_0(); 
 				return obj;
 			}
@@ -4272,8 +4247,8 @@ protected class Reference2_TypeAssignment_1 extends AssignmentToken  {
 // many?="*"?
 protected class Reference2_ManyAssignment_2 extends AssignmentToken  {
 	
-	public Reference2_ManyAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference2_ManyAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4282,19 +4257,19 @@ protected class Reference2_ManyAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference2_TypeAssignment_1(parent, this, 0, inst);
+			case 0: return new Reference2_TypeAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("many",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("many");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("many",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("many");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getReference2Access().getManyAsteriskKeyword_2_0();
 			return obj;
 		}
@@ -4306,8 +4281,8 @@ protected class Reference2_ManyAssignment_2 extends AssignmentToken  {
 // name=ID
 protected class Reference2_NameAssignment_3 extends AssignmentToken  {
 	
-	public Reference2_NameAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference2_NameAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4316,20 +4291,20 @@ protected class Reference2_NameAssignment_3 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference2_ManyAssignment_2(parent, this, 0, inst);
-			case 1: return new Reference2_TypeAssignment_1(parent, this, 1, inst);
+			case 0: return new Reference2_ManyAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Reference2_TypeAssignment_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getReference2Access().getNameIDTerminalRuleCall_3_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getReference2Access().getNameIDTerminalRuleCall_3_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getReference2Access().getNameIDTerminalRuleCall_3_0();
 			return obj;
 		}
@@ -4342,8 +4317,8 @@ protected class Reference2_NameAssignment_3 extends AssignmentToken  {
 // longDescription=STRING ";")?) "}"|";"
 protected class Reference2_Alternatives_4 extends AlternativesToken {
 
-	public Reference2_Alternatives_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference2_Alternatives_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4352,10 +4327,10 @@ protected class Reference2_Alternatives_4 extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference2_Group_4_0(parent, this, 0, inst);
-			case 1: return new Reference2_SemicolonKeyword_4_1(parent, this, 1, inst);
+			case 0: return new Reference2_Group_4_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Reference2_SemicolonKeyword_4_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -4366,8 +4341,8 @@ protected class Reference2_Alternatives_4 extends AlternativesToken {
 // longDescription=STRING ";")?) "}"
 protected class Reference2_Group_4_0 extends GroupToken {
 	
-	public Reference2_Group_4_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference2_Group_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4376,9 +4351,9 @@ protected class Reference2_Group_4_0 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference2_RightCurlyBracketKeyword_4_0_2(parent, this, 0, inst);
+			case 0: return new Reference2_RightCurlyBracketKeyword_4_0_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4388,8 +4363,8 @@ protected class Reference2_Group_4_0 extends GroupToken {
 // "{"
 protected class Reference2_LeftCurlyBracketKeyword_4_0_0 extends KeywordToken  {
 	
-	public Reference2_LeftCurlyBracketKeyword_4_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference2_LeftCurlyBracketKeyword_4_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4398,9 +4373,9 @@ protected class Reference2_LeftCurlyBracketKeyword_4_0_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference2_NameAssignment_3(parent, this, 0, inst);
+			case 0: return new Reference2_NameAssignment_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4411,8 +4386,8 @@ protected class Reference2_LeftCurlyBracketKeyword_4_0_0 extends KeywordToken  {
 // longDescription=STRING ";")?
 protected class Reference2_UnorderedGroup_4_0_1 extends UnorderedGroupToken {
 	
-	public Reference2_UnorderedGroup_4_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference2_UnorderedGroup_4_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4421,10 +4396,10 @@ protected class Reference2_UnorderedGroup_4_0_1 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference2_Group_4_0_1_1(parent, this, 0, inst);
-			case 1: return new Reference2_Group_4_0_1_0(parent, this, 1, inst);
+			case 0: return new Reference2_Group_4_0_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Reference2_Group_4_0_1_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -4434,8 +4409,8 @@ protected class Reference2_UnorderedGroup_4_0_1 extends UnorderedGroupToken {
 // ("shortDescription" shortDescription=STRING ";")?
 protected class Reference2_Group_4_0_1_0 extends GroupToken {
 	
-	public Reference2_Group_4_0_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference2_Group_4_0_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4444,9 +4419,9 @@ protected class Reference2_Group_4_0_1_0 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference2_SemicolonKeyword_4_0_1_0_2(parent, this, 0, inst);
+			case 0: return new Reference2_SemicolonKeyword_4_0_1_0_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4456,8 +4431,8 @@ protected class Reference2_Group_4_0_1_0 extends GroupToken {
 // "shortDescription"
 protected class Reference2_ShortDescriptionKeyword_4_0_1_0_0 extends KeywordToken  {
 	
-	public Reference2_ShortDescriptionKeyword_4_0_1_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference2_ShortDescriptionKeyword_4_0_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4466,9 +4441,9 @@ protected class Reference2_ShortDescriptionKeyword_4_0_1_0_0 extends KeywordToke
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference2_LeftCurlyBracketKeyword_4_0_0(parent, this, 0, inst);
+			case 0: return new Reference2_LeftCurlyBracketKeyword_4_0_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4478,8 +4453,8 @@ protected class Reference2_ShortDescriptionKeyword_4_0_1_0_0 extends KeywordToke
 // shortDescription=STRING
 protected class Reference2_ShortDescriptionAssignment_4_0_1_0_1 extends AssignmentToken  {
 	
-	public Reference2_ShortDescriptionAssignment_4_0_1_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference2_ShortDescriptionAssignment_4_0_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4488,19 +4463,19 @@ protected class Reference2_ShortDescriptionAssignment_4_0_1_0_1 extends Assignme
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference2_ShortDescriptionKeyword_4_0_1_0_0(parent, this, 0, inst);
+			case 0: return new Reference2_ShortDescriptionKeyword_4_0_1_0_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("shortDescription",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("shortDescription");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getReference2Access().getShortDescriptionSTRINGTerminalRuleCall_4_0_1_0_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("shortDescription",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("shortDescription");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getReference2Access().getShortDescriptionSTRINGTerminalRuleCall_4_0_1_0_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getReference2Access().getShortDescriptionSTRINGTerminalRuleCall_4_0_1_0_1_0();
 			return obj;
 		}
@@ -4512,8 +4487,8 @@ protected class Reference2_ShortDescriptionAssignment_4_0_1_0_1 extends Assignme
 // ";"
 protected class Reference2_SemicolonKeyword_4_0_1_0_2 extends KeywordToken  {
 	
-	public Reference2_SemicolonKeyword_4_0_1_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference2_SemicolonKeyword_4_0_1_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4522,9 +4497,9 @@ protected class Reference2_SemicolonKeyword_4_0_1_0_2 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference2_ShortDescriptionAssignment_4_0_1_0_1(parent, this, 0, inst);
+			case 0: return new Reference2_ShortDescriptionAssignment_4_0_1_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4535,8 +4510,8 @@ protected class Reference2_SemicolonKeyword_4_0_1_0_2 extends KeywordToken  {
 // ("longDescription" longDescription=STRING ";")?
 protected class Reference2_Group_4_0_1_1 extends GroupToken {
 	
-	public Reference2_Group_4_0_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference2_Group_4_0_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4545,9 +4520,9 @@ protected class Reference2_Group_4_0_1_1 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference2_SemicolonKeyword_4_0_1_1_2(parent, this, 0, inst);
+			case 0: return new Reference2_SemicolonKeyword_4_0_1_1_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4557,8 +4532,8 @@ protected class Reference2_Group_4_0_1_1 extends GroupToken {
 // "longDescription"
 protected class Reference2_LongDescriptionKeyword_4_0_1_1_0 extends KeywordToken  {
 	
-	public Reference2_LongDescriptionKeyword_4_0_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference2_LongDescriptionKeyword_4_0_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4567,10 +4542,10 @@ protected class Reference2_LongDescriptionKeyword_4_0_1_1_0 extends KeywordToken
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference2_Group_4_0_1_0(parent, this, 0, inst);
-			case 1: return new Reference2_LeftCurlyBracketKeyword_4_0_0(parent, this, 1, inst);
+			case 0: return new Reference2_Group_4_0_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Reference2_LeftCurlyBracketKeyword_4_0_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -4580,8 +4555,8 @@ protected class Reference2_LongDescriptionKeyword_4_0_1_1_0 extends KeywordToken
 // longDescription=STRING
 protected class Reference2_LongDescriptionAssignment_4_0_1_1_1 extends AssignmentToken  {
 	
-	public Reference2_LongDescriptionAssignment_4_0_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference2_LongDescriptionAssignment_4_0_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4590,19 +4565,19 @@ protected class Reference2_LongDescriptionAssignment_4_0_1_1_1 extends Assignmen
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference2_LongDescriptionKeyword_4_0_1_1_0(parent, this, 0, inst);
+			case 0: return new Reference2_LongDescriptionKeyword_4_0_1_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("longDescription",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("longDescription");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getReference2Access().getLongDescriptionSTRINGTerminalRuleCall_4_0_1_1_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("longDescription",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("longDescription");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getReference2Access().getLongDescriptionSTRINGTerminalRuleCall_4_0_1_1_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getReference2Access().getLongDescriptionSTRINGTerminalRuleCall_4_0_1_1_1_0();
 			return obj;
 		}
@@ -4614,8 +4589,8 @@ protected class Reference2_LongDescriptionAssignment_4_0_1_1_1 extends Assignmen
 // ";"
 protected class Reference2_SemicolonKeyword_4_0_1_1_2 extends KeywordToken  {
 	
-	public Reference2_SemicolonKeyword_4_0_1_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference2_SemicolonKeyword_4_0_1_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4624,9 +4599,9 @@ protected class Reference2_SemicolonKeyword_4_0_1_1_2 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference2_LongDescriptionAssignment_4_0_1_1_1(parent, this, 0, inst);
+			case 0: return new Reference2_LongDescriptionAssignment_4_0_1_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4638,8 +4613,8 @@ protected class Reference2_SemicolonKeyword_4_0_1_1_2 extends KeywordToken  {
 // "}"
 protected class Reference2_RightCurlyBracketKeyword_4_0_2 extends KeywordToken  {
 	
-	public Reference2_RightCurlyBracketKeyword_4_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference2_RightCurlyBracketKeyword_4_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4648,9 +4623,9 @@ protected class Reference2_RightCurlyBracketKeyword_4_0_2 extends KeywordToken  
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference2_UnorderedGroup_4_0_1(parent, this, 0, inst);
+			case 0: return new Reference2_UnorderedGroup_4_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4661,8 +4636,8 @@ protected class Reference2_RightCurlyBracketKeyword_4_0_2 extends KeywordToken  
 // ";"
 protected class Reference2_SemicolonKeyword_4_1 extends KeywordToken  {
 	
-	public Reference2_SemicolonKeyword_4_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Reference2_SemicolonKeyword_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4671,9 +4646,9 @@ protected class Reference2_SemicolonKeyword_4_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Reference2_NameAssignment_3(parent, this, 0, inst);
+			case 0: return new Reference2_NameAssignment_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4697,8 +4672,8 @@ protected class Reference2_SemicolonKeyword_4_1 extends KeywordToken  {
 // message=STRING ";") "}"
 protected class ConstraintDefinition_Group extends GroupToken {
 	
-	public ConstraintDefinition_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ConstraintDefinition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4707,18 +4682,18 @@ protected class ConstraintDefinition_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ConstraintDefinition_RightCurlyBracketKeyword_4(parent, this, 0, inst);
+			case 0: return new ConstraintDefinition_RightCurlyBracketKeyword_4(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getConstraintDefinitionRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getConstraintDefinitionRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -4726,8 +4701,8 @@ protected class ConstraintDefinition_Group extends GroupToken {
 // "constraint"
 protected class ConstraintDefinition_ConstraintKeyword_0 extends KeywordToken  {
 	
-	public ConstraintDefinition_ConstraintKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ConstraintDefinition_ConstraintKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4736,9 +4711,9 @@ protected class ConstraintDefinition_ConstraintKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -4747,8 +4722,8 @@ protected class ConstraintDefinition_ConstraintKeyword_0 extends KeywordToken  {
 // type=ID
 protected class ConstraintDefinition_TypeAssignment_1 extends AssignmentToken  {
 	
-	public ConstraintDefinition_TypeAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ConstraintDefinition_TypeAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4757,19 +4732,19 @@ protected class ConstraintDefinition_TypeAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ConstraintDefinition_ConstraintKeyword_0(parent, this, 0, inst);
+			case 0: return new ConstraintDefinition_ConstraintKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("type",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getConstraintDefinitionAccess().getTypeIDTerminalRuleCall_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("type",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("type");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getConstraintDefinitionAccess().getTypeIDTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getConstraintDefinitionAccess().getTypeIDTerminalRuleCall_1_0();
 			return obj;
 		}
@@ -4781,8 +4756,8 @@ protected class ConstraintDefinition_TypeAssignment_1 extends AssignmentToken  {
 // "{"
 protected class ConstraintDefinition_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 	
-	public ConstraintDefinition_LeftCurlyBracketKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ConstraintDefinition_LeftCurlyBracketKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4791,9 +4766,9 @@ protected class ConstraintDefinition_LeftCurlyBracketKeyword_2 extends KeywordTo
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ConstraintDefinition_TypeAssignment_1(parent, this, 0, inst);
+			case 0: return new ConstraintDefinition_TypeAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4803,8 +4778,8 @@ protected class ConstraintDefinition_LeftCurlyBracketKeyword_2 extends KeywordTo
 // "parameters" parameters+=STRING* ";" & "message" message=STRING ";"
 protected class ConstraintDefinition_UnorderedGroup_3 extends UnorderedGroupToken {
 	
-	public ConstraintDefinition_UnorderedGroup_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ConstraintDefinition_UnorderedGroup_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4813,9 +4788,9 @@ protected class ConstraintDefinition_UnorderedGroup_3 extends UnorderedGroupToke
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ConstraintDefinition_Group_3_1(parent, this, 0, inst);
+			case 0: return new ConstraintDefinition_Group_3_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4825,8 +4800,8 @@ protected class ConstraintDefinition_UnorderedGroup_3 extends UnorderedGroupToke
 // "parameters" parameters+=STRING* ";"
 protected class ConstraintDefinition_Group_3_0 extends GroupToken {
 	
-	public ConstraintDefinition_Group_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ConstraintDefinition_Group_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4835,9 +4810,9 @@ protected class ConstraintDefinition_Group_3_0 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ConstraintDefinition_SemicolonKeyword_3_0_2(parent, this, 0, inst);
+			case 0: return new ConstraintDefinition_SemicolonKeyword_3_0_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4847,8 +4822,8 @@ protected class ConstraintDefinition_Group_3_0 extends GroupToken {
 // "parameters"
 protected class ConstraintDefinition_ParametersKeyword_3_0_0 extends KeywordToken  {
 	
-	public ConstraintDefinition_ParametersKeyword_3_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ConstraintDefinition_ParametersKeyword_3_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4857,9 +4832,9 @@ protected class ConstraintDefinition_ParametersKeyword_3_0_0 extends KeywordToke
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ConstraintDefinition_LeftCurlyBracketKeyword_2(parent, this, 0, inst);
+			case 0: return new ConstraintDefinition_LeftCurlyBracketKeyword_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4869,8 +4844,8 @@ protected class ConstraintDefinition_ParametersKeyword_3_0_0 extends KeywordToke
 // parameters+=STRING*
 protected class ConstraintDefinition_ParametersAssignment_3_0_1 extends AssignmentToken  {
 	
-	public ConstraintDefinition_ParametersAssignment_3_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ConstraintDefinition_ParametersAssignment_3_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4879,20 +4854,20 @@ protected class ConstraintDefinition_ParametersAssignment_3_0_1 extends Assignme
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ConstraintDefinition_ParametersAssignment_3_0_1(parent, this, 0, inst);
-			case 1: return new ConstraintDefinition_ParametersKeyword_3_0_0(parent, this, 1, inst);
+			case 0: return new ConstraintDefinition_ParametersAssignment_3_0_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new ConstraintDefinition_ParametersKeyword_3_0_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("parameters",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("parameters");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getConstraintDefinitionAccess().getParametersSTRINGTerminalRuleCall_3_0_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("parameters",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("parameters");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getConstraintDefinitionAccess().getParametersSTRINGTerminalRuleCall_3_0_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getConstraintDefinitionAccess().getParametersSTRINGTerminalRuleCall_3_0_1_0();
 			return obj;
 		}
@@ -4904,8 +4879,8 @@ protected class ConstraintDefinition_ParametersAssignment_3_0_1 extends Assignme
 // ";"
 protected class ConstraintDefinition_SemicolonKeyword_3_0_2 extends KeywordToken  {
 	
-	public ConstraintDefinition_SemicolonKeyword_3_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ConstraintDefinition_SemicolonKeyword_3_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4914,10 +4889,10 @@ protected class ConstraintDefinition_SemicolonKeyword_3_0_2 extends KeywordToken
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ConstraintDefinition_ParametersAssignment_3_0_1(parent, this, 0, inst);
-			case 1: return new ConstraintDefinition_ParametersKeyword_3_0_0(parent, this, 1, inst);
+			case 0: return new ConstraintDefinition_ParametersAssignment_3_0_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new ConstraintDefinition_ParametersKeyword_3_0_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -4928,8 +4903,8 @@ protected class ConstraintDefinition_SemicolonKeyword_3_0_2 extends KeywordToken
 // "message" message=STRING ";"
 protected class ConstraintDefinition_Group_3_1 extends GroupToken {
 	
-	public ConstraintDefinition_Group_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ConstraintDefinition_Group_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4938,9 +4913,9 @@ protected class ConstraintDefinition_Group_3_1 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ConstraintDefinition_SemicolonKeyword_3_1_2(parent, this, 0, inst);
+			case 0: return new ConstraintDefinition_SemicolonKeyword_3_1_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4950,8 +4925,8 @@ protected class ConstraintDefinition_Group_3_1 extends GroupToken {
 // "message"
 protected class ConstraintDefinition_MessageKeyword_3_1_0 extends KeywordToken  {
 	
-	public ConstraintDefinition_MessageKeyword_3_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ConstraintDefinition_MessageKeyword_3_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4960,9 +4935,9 @@ protected class ConstraintDefinition_MessageKeyword_3_1_0 extends KeywordToken  
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ConstraintDefinition_Group_3_0(parent, this, 0, inst);
+			case 0: return new ConstraintDefinition_Group_3_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4972,8 +4947,8 @@ protected class ConstraintDefinition_MessageKeyword_3_1_0 extends KeywordToken  
 // message=STRING
 protected class ConstraintDefinition_MessageAssignment_3_1_1 extends AssignmentToken  {
 	
-	public ConstraintDefinition_MessageAssignment_3_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ConstraintDefinition_MessageAssignment_3_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -4982,19 +4957,19 @@ protected class ConstraintDefinition_MessageAssignment_3_1_1 extends AssignmentT
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ConstraintDefinition_MessageKeyword_3_1_0(parent, this, 0, inst);
+			case 0: return new ConstraintDefinition_MessageKeyword_3_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("message",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("message");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getConstraintDefinitionAccess().getMessageSTRINGTerminalRuleCall_3_1_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("message",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("message");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getConstraintDefinitionAccess().getMessageSTRINGTerminalRuleCall_3_1_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getConstraintDefinitionAccess().getMessageSTRINGTerminalRuleCall_3_1_1_0();
 			return obj;
 		}
@@ -5006,8 +4981,8 @@ protected class ConstraintDefinition_MessageAssignment_3_1_1 extends AssignmentT
 // ";"
 protected class ConstraintDefinition_SemicolonKeyword_3_1_2 extends KeywordToken  {
 	
-	public ConstraintDefinition_SemicolonKeyword_3_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ConstraintDefinition_SemicolonKeyword_3_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -5016,9 +4991,9 @@ protected class ConstraintDefinition_SemicolonKeyword_3_1_2 extends KeywordToken
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ConstraintDefinition_MessageAssignment_3_1_1(parent, this, 0, inst);
+			case 0: return new ConstraintDefinition_MessageAssignment_3_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -5030,8 +5005,8 @@ protected class ConstraintDefinition_SemicolonKeyword_3_1_2 extends KeywordToken
 // "}"
 protected class ConstraintDefinition_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
-	public ConstraintDefinition_RightCurlyBracketKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ConstraintDefinition_RightCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -5040,9 +5015,9 @@ protected class ConstraintDefinition_RightCurlyBracketKeyword_4 extends KeywordT
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ConstraintDefinition_UnorderedGroup_3(parent, this, 0, inst);
+			case 0: return new ConstraintDefinition_UnorderedGroup_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}

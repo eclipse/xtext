@@ -41,6 +41,6 @@ public class Bug302128Test extends AbstractXtextTests {
 	}
 
 	protected String noFormatSerialize(EObject model) {
-		return getSerializer().serialize(model,SerializerUtil.NO_FORMAT);
+		return getSerializer().serialize(model,Serializer.NO_FORMATTING);
 	}
 }

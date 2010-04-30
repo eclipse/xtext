@@ -5,7 +5,7 @@ package org.eclipse.xtext.parsetree.reconstr.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SerializationErrorTestLanguageGrammarAccess;
@@ -17,23 +17,18 @@ public class SerializationErrorTestLanguageParsetreeConstructor extends Abstract
 	@Inject
 	private SerializationErrorTestLanguageGrammarAccess grammarAccess;
 	
-	@Override	
-	public SerializationErrorTestLanguageGrammarAccess getGrammarAccess() {
-		return grammarAccess;
-	}
-
 	@Override
-	protected AbstractToken getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IEObjectConsumer inst) {
 		return new ThisRootNode(inst);	
 	}
 	
 protected class ThisRootNode extends RootToken {
-	public ThisRootNode(IInstanceDescription inst) {
+	public ThisRootNode(IEObjectConsumer inst) {
 		super(inst);
 	}
 	
 	@Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Model_Alternatives(this, this, 0, inst);
 			case 1: return new Parenthesis_Group(this, this, 1, inst);
@@ -57,8 +52,8 @@ protected class ThisRootNode extends RootToken {
 // test=Test|test=Parenthesis
 protected class Model_Alternatives extends AlternativesToken {
 
-	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -67,19 +62,19 @@ protected class Model_Alternatives extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_TestAssignment_0(parent, this, 0, inst);
-			case 1: return new Model_TestAssignment_1(parent, this, 1, inst);
+			case 0: return new Model_TestAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_TestAssignment_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getModelRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getModelRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -87,8 +82,8 @@ protected class Model_Alternatives extends AlternativesToken {
 // test=Test
 protected class Model_TestAssignment_0 extends AssignmentToken  {
 	
-	public Model_TestAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_TestAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -97,7 +92,7 @@ protected class Model_TestAssignment_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Test_Alternatives(this, this, 0, inst);
 			default: return null;
@@ -105,13 +100,13 @@ protected class Model_TestAssignment_0 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("test",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("test");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("test",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("test");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTestRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getModelAccess().getTestTestParserRuleCall_0_0(); 
 				consumed = obj;
 				return param;
@@ -121,10 +116,10 @@ protected class Model_TestAssignment_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
 		}	
 	}	
 }
@@ -132,8 +127,8 @@ protected class Model_TestAssignment_0 extends AssignmentToken  {
 // test=Parenthesis
 protected class Model_TestAssignment_1 extends AssignmentToken  {
 	
-	public Model_TestAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_TestAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -142,7 +137,7 @@ protected class Model_TestAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Parenthesis_Group(this, this, 0, inst);
 			default: return null;
@@ -150,13 +145,13 @@ protected class Model_TestAssignment_1 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("test",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("test");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("test",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("test");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getParenthesisRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getModelAccess().getTestParenthesisParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
@@ -166,10 +161,10 @@ protected class Model_TestAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
 		}	
 	}	
 }
@@ -188,8 +183,8 @@ protected class Model_TestAssignment_1 extends AssignmentToken  {
 // "(" Test ")"
 protected class Parenthesis_Group extends GroupToken {
 	
-	public Parenthesis_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Parenthesis_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -198,20 +193,20 @@ protected class Parenthesis_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Parenthesis_RightParenthesisKeyword_2(parent, this, 0, inst);
+			case 0: return new Parenthesis_RightParenthesisKeyword_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getIndentRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTwoOptionsRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTwoRequiredRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getIndentRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getTwoOptionsRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getTwoRequiredRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -219,8 +214,8 @@ protected class Parenthesis_Group extends GroupToken {
 // "("
 protected class Parenthesis_LeftParenthesisKeyword_0 extends KeywordToken  {
 	
-	public Parenthesis_LeftParenthesisKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Parenthesis_LeftParenthesisKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -229,9 +224,9 @@ protected class Parenthesis_LeftParenthesisKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -240,8 +235,8 @@ protected class Parenthesis_LeftParenthesisKeyword_0 extends KeywordToken  {
 // Test
 protected class Parenthesis_TestParserRuleCall_1 extends RuleCallToken {
 	
-	public Parenthesis_TestParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Parenthesis_TestParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -250,7 +245,7 @@ protected class Parenthesis_TestParserRuleCall_1 extends RuleCallToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Test_Alternatives(this, this, 0, inst);
 			default: return null;
@@ -258,15 +253,15 @@ protected class Parenthesis_TestParserRuleCall_1 extends RuleCallToken {
 	}
 
     @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(Test_Alternatives.class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(checkForRecursion(Test_Alternatives.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Parenthesis_LeftParenthesisKeyword_0(parent, next, actIndex, inst);
+			case 0: return new Parenthesis_LeftParenthesisKeyword_0(lastRuleCallOrigin, next, actIndex, inst);
 			default: return null;
 		}	
 	}	
@@ -275,8 +270,8 @@ protected class Parenthesis_TestParserRuleCall_1 extends RuleCallToken {
 // ")"
 protected class Parenthesis_RightParenthesisKeyword_2 extends KeywordToken  {
 	
-	public Parenthesis_RightParenthesisKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Parenthesis_RightParenthesisKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -285,9 +280,9 @@ protected class Parenthesis_RightParenthesisKeyword_2 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Parenthesis_TestParserRuleCall_1(parent, this, 0, inst);
+			case 0: return new Parenthesis_TestParserRuleCall_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -308,8 +303,8 @@ protected class Parenthesis_RightParenthesisKeyword_2 extends KeywordToken  {
 // TwoRequired|TwoOptions|Indent
 protected class Test_Alternatives extends AlternativesToken {
 
-	public Test_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Test_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -318,22 +313,22 @@ protected class Test_Alternatives extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Test_TwoRequiredParserRuleCall_0(parent, this, 0, inst);
-			case 1: return new Test_TwoOptionsParserRuleCall_1(parent, this, 1, inst);
-			case 2: return new Test_IndentParserRuleCall_2(parent, this, 2, inst);
+			case 0: return new Test_TwoRequiredParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Test_TwoOptionsParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Test_IndentParserRuleCall_2(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getIndentRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTwoOptionsRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTwoRequiredRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getIndentRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getTwoOptionsRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getTwoRequiredRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -341,8 +336,8 @@ protected class Test_Alternatives extends AlternativesToken {
 // TwoRequired
 protected class Test_TwoRequiredParserRuleCall_0 extends RuleCallToken {
 	
-	public Test_TwoRequiredParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Test_TwoRequiredParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -351,7 +346,7 @@ protected class Test_TwoRequiredParserRuleCall_0 extends RuleCallToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new TwoRequired_Group(this, this, 0, inst);
 			default: return null;
@@ -359,22 +354,17 @@ protected class Test_TwoRequiredParserRuleCall_0 extends RuleCallToken {
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTwoRequiredRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
-	}
-
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(TwoRequired_Group.class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getTwoRequiredRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(TwoRequired_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -382,8 +372,8 @@ protected class Test_TwoRequiredParserRuleCall_0 extends RuleCallToken {
 // TwoOptions
 protected class Test_TwoOptionsParserRuleCall_1 extends RuleCallToken {
 	
-	public Test_TwoOptionsParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Test_TwoOptionsParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -392,7 +382,7 @@ protected class Test_TwoOptionsParserRuleCall_1 extends RuleCallToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new TwoOptions_Group(this, this, 0, inst);
 			default: return null;
@@ -400,22 +390,17 @@ protected class Test_TwoOptionsParserRuleCall_1 extends RuleCallToken {
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTwoOptionsRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
-	}
-
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(TwoOptions_Group.class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getTwoOptionsRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(TwoOptions_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -423,8 +408,8 @@ protected class Test_TwoOptionsParserRuleCall_1 extends RuleCallToken {
 // Indent
 protected class Test_IndentParserRuleCall_2 extends RuleCallToken {
 	
-	public Test_IndentParserRuleCall_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Test_IndentParserRuleCall_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -433,7 +418,7 @@ protected class Test_IndentParserRuleCall_2 extends RuleCallToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Indent_Group(this, this, 0, inst);
 			default: return null;
@@ -441,22 +426,17 @@ protected class Test_IndentParserRuleCall_2 extends RuleCallToken {
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getIndentRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
-	}
-
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(Indent_Group.class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getIndentRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(Indent_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -475,8 +455,8 @@ protected class Test_IndentParserRuleCall_2 extends RuleCallToken {
 // "tworequired" one=ID two=ID
 protected class TwoRequired_Group extends GroupToken {
 	
-	public TwoRequired_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TwoRequired_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -485,18 +465,18 @@ protected class TwoRequired_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TwoRequired_TwoAssignment_2(parent, this, 0, inst);
+			case 0: return new TwoRequired_TwoAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTwoRequiredRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getTwoRequiredRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -504,8 +484,8 @@ protected class TwoRequired_Group extends GroupToken {
 // "tworequired"
 protected class TwoRequired_TworequiredKeyword_0 extends KeywordToken  {
 	
-	public TwoRequired_TworequiredKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TwoRequired_TworequiredKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -514,9 +494,9 @@ protected class TwoRequired_TworequiredKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -525,8 +505,8 @@ protected class TwoRequired_TworequiredKeyword_0 extends KeywordToken  {
 // one=ID
 protected class TwoRequired_OneAssignment_1 extends AssignmentToken  {
 	
-	public TwoRequired_OneAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TwoRequired_OneAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -535,19 +515,19 @@ protected class TwoRequired_OneAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TwoRequired_TworequiredKeyword_0(parent, this, 0, inst);
+			case 0: return new TwoRequired_TworequiredKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("one",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("one");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTwoRequiredAccess().getOneIDTerminalRuleCall_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("one",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("one");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTwoRequiredAccess().getOneIDTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getTwoRequiredAccess().getOneIDTerminalRuleCall_1_0();
 			return obj;
 		}
@@ -559,8 +539,8 @@ protected class TwoRequired_OneAssignment_1 extends AssignmentToken  {
 // two=ID
 protected class TwoRequired_TwoAssignment_2 extends AssignmentToken  {
 	
-	public TwoRequired_TwoAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TwoRequired_TwoAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -569,19 +549,19 @@ protected class TwoRequired_TwoAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TwoRequired_OneAssignment_1(parent, this, 0, inst);
+			case 0: return new TwoRequired_OneAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("two",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("two");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTwoRequiredAccess().getTwoIDTerminalRuleCall_2_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("two",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("two");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTwoRequiredAccess().getTwoIDTerminalRuleCall_2_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getTwoRequiredAccess().getTwoIDTerminalRuleCall_2_0();
 			return obj;
 		}
@@ -604,8 +584,8 @@ protected class TwoRequired_TwoAssignment_2 extends AssignmentToken  {
 // "twooptions" ("one" one=ID|"two" two=ID)
 protected class TwoOptions_Group extends GroupToken {
 	
-	public TwoOptions_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TwoOptions_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -614,18 +594,18 @@ protected class TwoOptions_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TwoOptions_Alternatives_1(parent, this, 0, inst);
+			case 0: return new TwoOptions_Alternatives_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTwoOptionsRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getTwoOptionsRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -633,8 +613,8 @@ protected class TwoOptions_Group extends GroupToken {
 // "twooptions"
 protected class TwoOptions_TwooptionsKeyword_0 extends KeywordToken  {
 	
-	public TwoOptions_TwooptionsKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TwoOptions_TwooptionsKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -643,9 +623,9 @@ protected class TwoOptions_TwooptionsKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -654,8 +634,8 @@ protected class TwoOptions_TwooptionsKeyword_0 extends KeywordToken  {
 // "one" one=ID|"two" two=ID
 protected class TwoOptions_Alternatives_1 extends AlternativesToken {
 
-	public TwoOptions_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TwoOptions_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -664,10 +644,10 @@ protected class TwoOptions_Alternatives_1 extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TwoOptions_Group_1_0(parent, this, 0, inst);
-			case 1: return new TwoOptions_Group_1_1(parent, this, 1, inst);
+			case 0: return new TwoOptions_Group_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new TwoOptions_Group_1_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -677,8 +657,8 @@ protected class TwoOptions_Alternatives_1 extends AlternativesToken {
 // "one" one=ID
 protected class TwoOptions_Group_1_0 extends GroupToken {
 	
-	public TwoOptions_Group_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TwoOptions_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -687,9 +667,9 @@ protected class TwoOptions_Group_1_0 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TwoOptions_OneAssignment_1_0_1(parent, this, 0, inst);
+			case 0: return new TwoOptions_OneAssignment_1_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -699,8 +679,8 @@ protected class TwoOptions_Group_1_0 extends GroupToken {
 // "one"
 protected class TwoOptions_OneKeyword_1_0_0 extends KeywordToken  {
 	
-	public TwoOptions_OneKeyword_1_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TwoOptions_OneKeyword_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -709,9 +689,9 @@ protected class TwoOptions_OneKeyword_1_0_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TwoOptions_TwooptionsKeyword_0(parent, this, 0, inst);
+			case 0: return new TwoOptions_TwooptionsKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -721,8 +701,8 @@ protected class TwoOptions_OneKeyword_1_0_0 extends KeywordToken  {
 // one=ID
 protected class TwoOptions_OneAssignment_1_0_1 extends AssignmentToken  {
 	
-	public TwoOptions_OneAssignment_1_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TwoOptions_OneAssignment_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -731,19 +711,19 @@ protected class TwoOptions_OneAssignment_1_0_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TwoOptions_OneKeyword_1_0_0(parent, this, 0, inst);
+			case 0: return new TwoOptions_OneKeyword_1_0_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("one",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("one");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTwoOptionsAccess().getOneIDTerminalRuleCall_1_0_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("one",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("one");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTwoOptionsAccess().getOneIDTerminalRuleCall_1_0_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getTwoOptionsAccess().getOneIDTerminalRuleCall_1_0_1_0();
 			return obj;
 		}
@@ -756,8 +736,8 @@ protected class TwoOptions_OneAssignment_1_0_1 extends AssignmentToken  {
 // "two" two=ID
 protected class TwoOptions_Group_1_1 extends GroupToken {
 	
-	public TwoOptions_Group_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TwoOptions_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -766,9 +746,9 @@ protected class TwoOptions_Group_1_1 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TwoOptions_TwoAssignment_1_1_1(parent, this, 0, inst);
+			case 0: return new TwoOptions_TwoAssignment_1_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -778,8 +758,8 @@ protected class TwoOptions_Group_1_1 extends GroupToken {
 // "two"
 protected class TwoOptions_TwoKeyword_1_1_0 extends KeywordToken  {
 	
-	public TwoOptions_TwoKeyword_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TwoOptions_TwoKeyword_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -788,9 +768,9 @@ protected class TwoOptions_TwoKeyword_1_1_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TwoOptions_TwooptionsKeyword_0(parent, this, 0, inst);
+			case 0: return new TwoOptions_TwooptionsKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -800,8 +780,8 @@ protected class TwoOptions_TwoKeyword_1_1_0 extends KeywordToken  {
 // two=ID
 protected class TwoOptions_TwoAssignment_1_1_1 extends AssignmentToken  {
 	
-	public TwoOptions_TwoAssignment_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TwoOptions_TwoAssignment_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -810,19 +790,19 @@ protected class TwoOptions_TwoAssignment_1_1_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TwoOptions_TwoKeyword_1_1_0(parent, this, 0, inst);
+			case 0: return new TwoOptions_TwoKeyword_1_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("two",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("two");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTwoOptionsAccess().getTwoIDTerminalRuleCall_1_1_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("two",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("two");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTwoOptionsAccess().getTwoIDTerminalRuleCall_1_1_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getTwoOptionsAccess().getTwoIDTerminalRuleCall_1_1_1_0();
 			return obj;
 		}
@@ -847,8 +827,8 @@ protected class TwoOptions_TwoAssignment_1_1_1 extends AssignmentToken  {
 // "{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}"
 protected class Indent_Group extends GroupToken {
 	
-	public Indent_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Indent_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -857,18 +837,18 @@ protected class Indent_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Indent_RightCurlyBracketKeyword_4(parent, this, 0, inst);
+			case 0: return new Indent_RightCurlyBracketKeyword_4(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getIndentRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getIndentRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -876,8 +856,8 @@ protected class Indent_Group extends GroupToken {
 // "{"
 protected class Indent_LeftCurlyBracketKeyword_0 extends KeywordToken  {
 	
-	public Indent_LeftCurlyBracketKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Indent_LeftCurlyBracketKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -886,9 +866,9 @@ protected class Indent_LeftCurlyBracketKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -897,8 +877,8 @@ protected class Indent_LeftCurlyBracketKeyword_0 extends KeywordToken  {
 // req=TwoRequired?
 protected class Indent_ReqAssignment_1 extends AssignmentToken  {
 	
-	public Indent_ReqAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Indent_ReqAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -907,7 +887,7 @@ protected class Indent_ReqAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new TwoRequired_Group(this, this, 0, inst);
 			default: return null;
@@ -915,13 +895,13 @@ protected class Indent_ReqAssignment_1 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("req",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("req");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("req",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("req");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTwoRequiredRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getIndentAccess().getReqTwoRequiredParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
@@ -931,10 +911,10 @@ protected class Indent_ReqAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Indent_LeftCurlyBracketKeyword_0(parent, next, actIndex, consumed);
+			case 0: return new Indent_LeftCurlyBracketKeyword_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -943,8 +923,8 @@ protected class Indent_ReqAssignment_1 extends AssignmentToken  {
 // opt=TwoOptions?
 protected class Indent_OptAssignment_2 extends AssignmentToken  {
 	
-	public Indent_OptAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Indent_OptAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -953,7 +933,7 @@ protected class Indent_OptAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new TwoOptions_Group(this, this, 0, inst);
 			default: return null;
@@ -961,13 +941,13 @@ protected class Indent_OptAssignment_2 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("opt",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("opt");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("opt",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("opt");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTwoOptionsRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getIndentAccess().getOptTwoOptionsParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
@@ -977,11 +957,11 @@ protected class Indent_OptAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Indent_ReqAssignment_1(parent, next, actIndex, consumed);
-			case 1: return new Indent_LeftCurlyBracketKeyword_0(parent, next, actIndex, consumed);
+			case 0: return new Indent_ReqAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Indent_LeftCurlyBracketKeyword_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -990,8 +970,8 @@ protected class Indent_OptAssignment_2 extends AssignmentToken  {
 // indent+=Indent*
 protected class Indent_IndentAssignment_3 extends AssignmentToken  {
 	
-	public Indent_IndentAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Indent_IndentAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1000,7 +980,7 @@ protected class Indent_IndentAssignment_3 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Indent_Group(this, this, 0, inst);
 			default: return null;
@@ -1008,13 +988,13 @@ protected class Indent_IndentAssignment_3 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("indent",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("indent");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("indent",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("indent");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getIndentRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getIndentAccess().getIndentIndentParserRuleCall_3_0(); 
 				consumed = obj;
 				return param;
@@ -1024,13 +1004,13 @@ protected class Indent_IndentAssignment_3 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Indent_IndentAssignment_3(parent, next, actIndex, consumed);
-			case 1: return new Indent_OptAssignment_2(parent, next, actIndex, consumed);
-			case 2: return new Indent_ReqAssignment_1(parent, next, actIndex, consumed);
-			case 3: return new Indent_LeftCurlyBracketKeyword_0(parent, next, actIndex, consumed);
+			case 0: return new Indent_IndentAssignment_3(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Indent_OptAssignment_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 2: return new Indent_ReqAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 3: return new Indent_LeftCurlyBracketKeyword_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1039,8 +1019,8 @@ protected class Indent_IndentAssignment_3 extends AssignmentToken  {
 // "}"
 protected class Indent_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
-	public Indent_RightCurlyBracketKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Indent_RightCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1049,12 +1029,12 @@ protected class Indent_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Indent_IndentAssignment_3(parent, this, 0, inst);
-			case 1: return new Indent_OptAssignment_2(parent, this, 1, inst);
-			case 2: return new Indent_ReqAssignment_1(parent, this, 2, inst);
-			case 3: return new Indent_LeftCurlyBracketKeyword_0(parent, this, 3, inst);
+			case 0: return new Indent_IndentAssignment_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Indent_OptAssignment_2(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Indent_ReqAssignment_1(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Indent_LeftCurlyBracketKeyword_0(lastRuleCallOrigin, this, 3, inst);
 			default: return null;
 		}	
 	}

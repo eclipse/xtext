@@ -13,7 +13,7 @@ import java.io.IOException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.TreeConstructionReport;
-import org.eclipse.xtext.parsetree.reconstr.SerializerUtil.SerializationOptions;
+import org.eclipse.xtext.parsetree.reconstr.Serializer.SerializationOptions;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.Indent;
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.Model;

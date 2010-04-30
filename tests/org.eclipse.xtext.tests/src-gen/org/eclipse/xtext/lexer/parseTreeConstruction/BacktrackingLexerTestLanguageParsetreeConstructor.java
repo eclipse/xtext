@@ -5,7 +5,7 @@ package org.eclipse.xtext.lexer.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.lexer.services.BacktrackingLexerTestLanguageGrammarAccess;
@@ -17,23 +17,18 @@ public class BacktrackingLexerTestLanguageParsetreeConstructor extends AbstractP
 	@Inject
 	private BacktrackingLexerTestLanguageGrammarAccess grammarAccess;
 	
-	@Override	
-	public BacktrackingLexerTestLanguageGrammarAccess getGrammarAccess() {
-		return grammarAccess;
-	}
-
 	@Override
-	protected AbstractToken getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IEObjectConsumer inst) {
 		return new ThisRootNode(inst);	
 	}
 	
 protected class ThisRootNode extends RootToken {
-	public ThisRootNode(IInstanceDescription inst) {
+	public ThisRootNode(IEObjectConsumer inst) {
 		super(inst);
 	}
 	
 	@Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Model_Group(this, this, 0, inst);
 			case 1: return new Ab_Group(this, this, 1, inst);
@@ -54,8 +49,8 @@ protected class ThisRootNode extends RootToken {
 // enums+=EnumName* abs+=Ab* xbs+=Xb*
 protected class Model_Group extends GroupToken {
 	
-	public Model_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -64,20 +59,20 @@ protected class Model_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_XbsAssignment_2(parent, this, 0, inst);
-			case 1: return new Model_AbsAssignment_1(parent, this, 1, inst);
-			case 2: return new Model_EnumsAssignment_0(parent, this, 2, inst);
-			default: return parent.createParentFollower(this, index, index - 3, inst);
+			case 0: return new Model_XbsAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_AbsAssignment_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Model_EnumsAssignment_0(lastRuleCallOrigin, this, 2, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 3, inst);
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getModelRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getModelRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -85,8 +80,8 @@ protected class Model_Group extends GroupToken {
 // enums+=EnumName*
 protected class Model_EnumsAssignment_0 extends AssignmentToken  {
 	
-	public Model_EnumsAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_EnumsAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -95,19 +90,19 @@ protected class Model_EnumsAssignment_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_EnumsAssignment_0(parent, this, 0, inst);
-			default: return parent.createParentFollower(this, index, index - 1, inst);
+			case 0: return new Model_EnumsAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 1, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("enums",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("enums");
-		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getEnumsEnumNameEnumRuleCall_0_0(), value, null)) { 
-			type = AssignmentType.ERC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("enums",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("enums");
+		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getEnumsEnumNameEnumRuleCall_0_0(), value, null)) { 
+			type = AssignmentType.ENUM_RULE_CALL;
 			element = grammarAccess.getModelAccess().getEnumsEnumNameEnumRuleCall_0_0();
 			return obj;
 		}
@@ -119,8 +114,8 @@ protected class Model_EnumsAssignment_0 extends AssignmentToken  {
 // abs+=Ab*
 protected class Model_AbsAssignment_1 extends AssignmentToken  {
 	
-	public Model_AbsAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_AbsAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -129,7 +124,7 @@ protected class Model_AbsAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Ab_Group(this, this, 0, inst);
 			default: return null;
@@ -137,13 +132,13 @@ protected class Model_AbsAssignment_1 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("abs",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("abs");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("abs",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("abs");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAbRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getModelAccess().getAbsAbParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
@@ -153,12 +148,12 @@ protected class Model_AbsAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Model_AbsAssignment_1(parent, next, actIndex, consumed);
-			case 1: return new Model_EnumsAssignment_0(parent, next, actIndex, consumed);
-			default: return parent.createParentFollower(next, actIndex , index - 2, consumed);
+			case 0: return new Model_AbsAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Model_EnumsAssignment_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 2, consumed);
 		}	
 	}	
 }
@@ -166,8 +161,8 @@ protected class Model_AbsAssignment_1 extends AssignmentToken  {
 // xbs+=Xb*
 protected class Model_XbsAssignment_2 extends AssignmentToken  {
 	
-	public Model_XbsAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_XbsAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -176,7 +171,7 @@ protected class Model_XbsAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Xb_Group(this, this, 0, inst);
 			default: return null;
@@ -184,13 +179,13 @@ protected class Model_XbsAssignment_2 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("xbs",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("xbs");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("xbs",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("xbs");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getXbRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getModelAccess().getXbsXbParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
@@ -200,13 +195,13 @@ protected class Model_XbsAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Model_XbsAssignment_2(parent, next, actIndex, consumed);
-			case 1: return new Model_AbsAssignment_1(parent, next, actIndex, consumed);
-			case 2: return new Model_EnumsAssignment_0(parent, next, actIndex, consumed);
-			default: return parent.createParentFollower(next, actIndex , index - 3, consumed);
+			case 0: return new Model_XbsAssignment_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Model_AbsAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 2: return new Model_EnumsAssignment_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 3, consumed);
 		}	
 	}	
 }
@@ -225,8 +220,8 @@ protected class Model_XbsAssignment_2 extends AssignmentToken  {
 // x=CharA y=Charb
 protected class Ab_Group extends GroupToken {
 	
-	public Ab_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Ab_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -235,18 +230,18 @@ protected class Ab_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Ab_YAssignment_1(parent, this, 0, inst);
+			case 0: return new Ab_YAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getAbRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getAbRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -254,8 +249,8 @@ protected class Ab_Group extends GroupToken {
 // x=CharA
 protected class Ab_XAssignment_0 extends AssignmentToken  {
 	
-	public Ab_XAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Ab_XAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -264,18 +259,18 @@ protected class Ab_XAssignment_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("x",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("x");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAbAccess().getXCharATerminalRuleCall_0_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getAbAccess().getXCharATerminalRuleCall_0_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getAbAccess().getXCharATerminalRuleCall_0_0();
 			return obj;
 		}
@@ -287,8 +282,8 @@ protected class Ab_XAssignment_0 extends AssignmentToken  {
 // y=Charb
 protected class Ab_YAssignment_1 extends AssignmentToken  {
 	
-	public Ab_YAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Ab_YAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -297,19 +292,19 @@ protected class Ab_YAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Ab_XAssignment_0(parent, this, 0, inst);
+			case 0: return new Ab_XAssignment_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("y",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("y");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAbAccess().getYCharbTerminalRuleCall_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("y",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("y");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getAbAccess().getYCharbTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getAbAccess().getYCharbTerminalRuleCall_1_0();
 			return obj;
 		}
@@ -332,8 +327,8 @@ protected class Ab_YAssignment_1 extends AssignmentToken  {
 // x=CharX y=Charb
 protected class Xb_Group extends GroupToken {
 	
-	public Xb_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Xb_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -342,18 +337,18 @@ protected class Xb_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Xb_YAssignment_1(parent, this, 0, inst);
+			case 0: return new Xb_YAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getXbRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getXbRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -361,8 +356,8 @@ protected class Xb_Group extends GroupToken {
 // x=CharX
 protected class Xb_XAssignment_0 extends AssignmentToken  {
 	
-	public Xb_XAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Xb_XAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -371,18 +366,18 @@ protected class Xb_XAssignment_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("x",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("x");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getXbAccess().getXCharXTerminalRuleCall_0_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getXbAccess().getXCharXTerminalRuleCall_0_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getXbAccess().getXCharXTerminalRuleCall_0_0();
 			return obj;
 		}
@@ -394,8 +389,8 @@ protected class Xb_XAssignment_0 extends AssignmentToken  {
 // y=Charb
 protected class Xb_YAssignment_1 extends AssignmentToken  {
 	
-	public Xb_YAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Xb_YAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -404,19 +399,19 @@ protected class Xb_YAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Xb_XAssignment_0(parent, this, 0, inst);
+			case 0: return new Xb_XAssignment_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("y",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("y");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getXbAccess().getYCharbTerminalRuleCall_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("y",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("y");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getXbAccess().getYCharbTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getXbAccess().getYCharbTerminalRuleCall_1_0();
 			return obj;
 		}

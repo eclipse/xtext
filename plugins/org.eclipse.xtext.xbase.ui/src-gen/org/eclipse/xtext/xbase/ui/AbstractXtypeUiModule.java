@@ -17,6 +17,11 @@ public abstract class AbstractXtypeUiModule extends DefaultUiModule {
 	}
 	
 	
+	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
+	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
+		return org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();
+	}
+
 	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
 		return org.eclipse.xtext.xbase.ui.contentassist.XtypeProposalProvider.class;

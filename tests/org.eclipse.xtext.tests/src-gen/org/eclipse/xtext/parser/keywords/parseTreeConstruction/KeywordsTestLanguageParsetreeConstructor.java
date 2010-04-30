@@ -5,7 +5,7 @@ package org.eclipse.xtext.parser.keywords.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAccess;
@@ -17,23 +17,18 @@ public class KeywordsTestLanguageParsetreeConstructor extends AbstractParseTreeC
 	@Inject
 	private KeywordsTestLanguageGrammarAccess grammarAccess;
 	
-	@Override	
-	public KeywordsTestLanguageGrammarAccess getGrammarAccess() {
-		return grammarAccess;
-	}
-
 	@Override
-	protected AbstractToken getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IEObjectConsumer inst) {
 		return new ThisRootNode(inst);	
 	}
 	
 protected class ThisRootNode extends RootToken {
-	public ThisRootNode(IInstanceDescription inst) {
+	public ThisRootNode(IEObjectConsumer inst) {
 		super(inst);
 	}
 	
 	@Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Model_Alternatives(this, this, 0, inst);
 			default: return null;
@@ -54,8 +49,8 @@ protected class ThisRootNode extends RootToken {
 // sixth?="\'b\'"|seventh?="\'c\'"|eighth?="\"d\""
 protected class Model_Alternatives extends AlternativesToken {
 
-	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -64,25 +59,25 @@ protected class Model_Alternatives extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_FirstAssignment_0(parent, this, 0, inst);
-			case 1: return new Model_SecondAssignment_1(parent, this, 1, inst);
-			case 2: return new Model_ThirdAssignment_2(parent, this, 2, inst);
-			case 3: return new Model_ForthAssignment_3(parent, this, 3, inst);
-			case 4: return new Model_FifthAssignment_4(parent, this, 4, inst);
-			case 5: return new Model_SixthAssignment_5(parent, this, 5, inst);
-			case 6: return new Model_SeventhAssignment_6(parent, this, 6, inst);
-			case 7: return new Model_EighthAssignment_7(parent, this, 7, inst);
+			case 0: return new Model_FirstAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_SecondAssignment_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Model_ThirdAssignment_2(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Model_ForthAssignment_3(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new Model_FifthAssignment_4(lastRuleCallOrigin, this, 4, inst);
+			case 5: return new Model_SixthAssignment_5(lastRuleCallOrigin, this, 5, inst);
+			case 6: return new Model_SeventhAssignment_6(lastRuleCallOrigin, this, 6, inst);
+			case 7: return new Model_EighthAssignment_7(lastRuleCallOrigin, this, 7, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getModelRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getModelRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -90,8 +85,8 @@ protected class Model_Alternatives extends AlternativesToken {
 // first?="foo\\bar"
 protected class Model_FirstAssignment_0 extends AssignmentToken  {
 	
-	public Model_FirstAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_FirstAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -100,18 +95,18 @@ protected class Model_FirstAssignment_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("first",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("first");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("first",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("first");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0();
 			return obj;
 		}
@@ -123,8 +118,8 @@ protected class Model_FirstAssignment_0 extends AssignmentToken  {
 // second?="foo\\"
 protected class Model_SecondAssignment_1 extends AssignmentToken  {
 	
-	public Model_SecondAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SecondAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -133,18 +128,18 @@ protected class Model_SecondAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("second",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("second");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("second",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("second");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondFooKeyword_1_0();
 			return obj;
 		}
@@ -156,8 +151,8 @@ protected class Model_SecondAssignment_1 extends AssignmentToken  {
 // third?="\\bar"
 protected class Model_ThirdAssignment_2 extends AssignmentToken  {
 	
-	public Model_ThirdAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_ThirdAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -166,18 +161,18 @@ protected class Model_ThirdAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("third",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("third");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("third",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("third");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getThirdBarKeyword_2_0();
 			return obj;
 		}
@@ -189,8 +184,8 @@ protected class Model_ThirdAssignment_2 extends AssignmentToken  {
 // forth?="\\"
 protected class Model_ForthAssignment_3 extends AssignmentToken  {
 	
-	public Model_ForthAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_ForthAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -199,18 +194,18 @@ protected class Model_ForthAssignment_3 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("forth",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("forth");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("forth",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("forth");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0();
 			return obj;
 		}
@@ -222,8 +217,8 @@ protected class Model_ForthAssignment_3 extends AssignmentToken  {
 // fifth?="\"a\""
 protected class Model_FifthAssignment_4 extends AssignmentToken  {
 	
-	public Model_FifthAssignment_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_FifthAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -232,18 +227,18 @@ protected class Model_FifthAssignment_4 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("fifth",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("fifth");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("fifth",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("fifth");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFifthAKeyword_4_0();
 			return obj;
 		}
@@ -255,8 +250,8 @@ protected class Model_FifthAssignment_4 extends AssignmentToken  {
 // sixth?="\'b\'"
 protected class Model_SixthAssignment_5 extends AssignmentToken  {
 	
-	public Model_SixthAssignment_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SixthAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -265,18 +260,18 @@ protected class Model_SixthAssignment_5 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("sixth",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("sixth");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("sixth",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("sixth");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSixthBKeyword_5_0();
 			return obj;
 		}
@@ -288,8 +283,8 @@ protected class Model_SixthAssignment_5 extends AssignmentToken  {
 // seventh?="\'c\'"
 protected class Model_SeventhAssignment_6 extends AssignmentToken  {
 	
-	public Model_SeventhAssignment_6(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SeventhAssignment_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -298,18 +293,18 @@ protected class Model_SeventhAssignment_6 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("seventh",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("seventh");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("seventh",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("seventh");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSeventhCKeyword_6_0();
 			return obj;
 		}
@@ -321,8 +316,8 @@ protected class Model_SeventhAssignment_6 extends AssignmentToken  {
 // eighth?="\"d\""
 protected class Model_EighthAssignment_7 extends AssignmentToken  {
 	
-	public Model_EighthAssignment_7(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_EighthAssignment_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -331,18 +326,18 @@ protected class Model_EighthAssignment_7 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("eighth",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("eighth");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("eighth",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("eighth");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getEighthDKeyword_7_0();
 			return obj;
 		}

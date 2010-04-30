@@ -12,19 +12,10 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 
 /**
- * TODO: consider moving all methods to the default impl and removing this class
- * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class AbstractTransientValueService implements ITransientValueService {
-
-	public boolean isMixedList(EObject owner, EStructuralFeature feature) {
+public abstract class AbstractTransientValueService implements ITransientValueService {
+	public boolean isCheckElementsIndividually(EObject owner, EStructuralFeature feature) {
 		return false;
 	}
-
-	public boolean isTransient(EObject owner, EStructuralFeature feature,
-			int index) {
-		return false;
-	}
-
 }

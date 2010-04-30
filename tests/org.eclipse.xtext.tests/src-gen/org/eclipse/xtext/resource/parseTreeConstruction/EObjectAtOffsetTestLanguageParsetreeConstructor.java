@@ -5,7 +5,7 @@ package org.eclipse.xtext.resource.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.resource.services.EObjectAtOffsetTestLanguageGrammarAccess;
@@ -17,23 +17,18 @@ public class EObjectAtOffsetTestLanguageParsetreeConstructor extends AbstractPar
 	@Inject
 	private EObjectAtOffsetTestLanguageGrammarAccess grammarAccess;
 	
-	@Override	
-	public EObjectAtOffsetTestLanguageGrammarAccess getGrammarAccess() {
-		return grammarAccess;
-	}
-
 	@Override
-	protected AbstractToken getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IEObjectConsumer inst) {
 		return new ThisRootNode(inst);	
 	}
 	
 protected class ThisRootNode extends RootToken {
-	public ThisRootNode(IInstanceDescription inst) {
+	public ThisRootNode(IEObjectConsumer inst) {
 		super(inst);
 	}
 	
 	@Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Model_Alternatives(this, this, 0, inst);
 			case 1: return new AbstractBar_Group(this, this, 1, inst);
@@ -55,8 +50,8 @@ protected class ThisRootNode extends RootToken {
 // (foos+=Foo|bars+=AbstractBar)*
 protected class Model_Alternatives extends AlternativesToken {
 
-	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -65,10 +60,10 @@ protected class Model_Alternatives extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_FoosAssignment_0(parent, this, 0, inst);
-			case 1: return new Model_BarsAssignment_1(parent, this, 1, inst);
+			case 0: return new Model_FoosAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_BarsAssignment_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -78,8 +73,8 @@ protected class Model_Alternatives extends AlternativesToken {
 // foos+=Foo
 protected class Model_FoosAssignment_0 extends AssignmentToken  {
 	
-	public Model_FoosAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_FoosAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -88,7 +83,7 @@ protected class Model_FoosAssignment_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Foo_Group(this, this, 0, inst);
 			default: return null;
@@ -96,13 +91,13 @@ protected class Model_FoosAssignment_0 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("foos",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("foos");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("foos",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("foos");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFooRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getModelAccess().getFoosFooParserRuleCall_0_0(); 
 				consumed = obj;
 				return param;
@@ -112,11 +107,11 @@ protected class Model_FoosAssignment_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Model_Alternatives(parent, next, actIndex, consumed);
-			default: return parent.createParentFollower(next, actIndex , index - 1, consumed);
+			case 0: return new Model_Alternatives(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -124,8 +119,8 @@ protected class Model_FoosAssignment_0 extends AssignmentToken  {
 // bars+=AbstractBar
 protected class Model_BarsAssignment_1 extends AssignmentToken  {
 	
-	public Model_BarsAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_BarsAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -134,7 +129,7 @@ protected class Model_BarsAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new AbstractBar_Group(this, this, 0, inst);
 			default: return null;
@@ -142,13 +137,13 @@ protected class Model_BarsAssignment_1 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("bars",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("bars");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("bars",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("bars");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAbstractBarRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getModelAccess().getBarsAbstractBarParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
@@ -158,11 +153,11 @@ protected class Model_BarsAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Model_Alternatives(parent, next, actIndex, consumed);
-			default: return parent.createParentFollower(next, actIndex , index - 1, consumed);
+			case 0: return new Model_Alternatives(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -181,8 +176,8 @@ protected class Model_BarsAssignment_1 extends AssignmentToken  {
 // Bar ({FooBar.bar=current} "foobar" foo+=[Foo])?
 protected class AbstractBar_Group extends GroupToken {
 	
-	public AbstractBar_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public AbstractBar_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -191,20 +186,20 @@ protected class AbstractBar_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new AbstractBar_Group_1(parent, this, 0, inst);
-			case 1: return new AbstractBar_BarParserRuleCall_0(parent, this, 1, inst);
+			case 0: return new AbstractBar_Group_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new AbstractBar_BarParserRuleCall_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getBarRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getAbstractBarAccess().getFooBarBarAction_1_0().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getBarRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getAbstractBarAccess().getFooBarBarAction_1_0().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -212,8 +207,8 @@ protected class AbstractBar_Group extends GroupToken {
 // Bar
 protected class AbstractBar_BarParserRuleCall_0 extends RuleCallToken {
 	
-	public AbstractBar_BarParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public AbstractBar_BarParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -222,7 +217,7 @@ protected class AbstractBar_BarParserRuleCall_0 extends RuleCallToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Bar_Group(this, this, 0, inst);
 			default: return null;
@@ -230,22 +225,17 @@ protected class AbstractBar_BarParserRuleCall_0 extends RuleCallToken {
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getBarRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
-	}
-
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(Bar_Group.class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getBarRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(Bar_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -253,8 +243,8 @@ protected class AbstractBar_BarParserRuleCall_0 extends RuleCallToken {
 // ({FooBar.bar=current} "foobar" foo+=[Foo])?
 protected class AbstractBar_Group_1 extends GroupToken {
 	
-	public AbstractBar_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public AbstractBar_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -263,18 +253,18 @@ protected class AbstractBar_Group_1 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new AbstractBar_FooAssignment_1_2(parent, this, 0, inst);
+			case 0: return new AbstractBar_FooAssignment_1_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getAbstractBarAccess().getFooBarBarAction_1_0().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getAbstractBarAccess().getFooBarBarAction_1_0().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -282,8 +272,8 @@ protected class AbstractBar_Group_1 extends GroupToken {
 // {FooBar.bar=current}
 protected class AbstractBar_FooBarBarAction_1_0 extends ActionToken  {
 
-	public AbstractBar_FooBarBarAction_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public AbstractBar_FooBarBarAction_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -292,27 +282,27 @@ protected class AbstractBar_FooBarBarAction_1_0 extends ActionToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new AbstractBar_BarParserRuleCall_0(parent, this, 0, inst);
+			case 0: return new AbstractBar_BarParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	protected IInstanceDescription tryConsumeVal() {
-		Object val = current.getConsumable("bar", false);
+	public IEObjectConsumer tryConsume() {
+		Object val = eObjectConsumer.getConsumable("bar", false);
 		if(val == null) return null;
-		if(!current.isConsumedWithLastConsumtion("bar")) return null;
-		return getDescr((EObject) val);
+		if(!eObjectConsumer.isConsumedWithLastConsumtion("bar")) return null;
+		return createEObjectConsumer((EObject) val);
 	}
 }
 
 // "foobar"
 protected class AbstractBar_FoobarKeyword_1_1 extends KeywordToken  {
 	
-	public AbstractBar_FoobarKeyword_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public AbstractBar_FoobarKeyword_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -321,9 +311,9 @@ protected class AbstractBar_FoobarKeyword_1_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new AbstractBar_FooBarBarAction_1_0(parent, this, 0, inst);
+			case 0: return new AbstractBar_FooBarBarAction_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -333,8 +323,8 @@ protected class AbstractBar_FoobarKeyword_1_1 extends KeywordToken  {
 // foo+=[Foo]
 protected class AbstractBar_FooAssignment_1_2 extends AssignmentToken  {
 	
-	public AbstractBar_FooAssignment_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public AbstractBar_FooAssignment_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -343,21 +333,21 @@ protected class AbstractBar_FooAssignment_1_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new AbstractBar_FoobarKeyword_1_1(parent, this, 0, inst);
+			case 0: return new AbstractBar_FoobarKeyword_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("foo",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("foo");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("foo",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("foo");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAbstractBarAccess().getFooFooCrossReference_1_2_0().getType().getClassifier())) {
-				type = AssignmentType.CR;
+				type = AssignmentType.CROSS_REFERENCE;
 				element = grammarAccess.getAbstractBarAccess().getFooFooCrossReference_1_2_0(); 
 				return obj;
 			}
@@ -382,8 +372,8 @@ protected class AbstractBar_FooAssignment_1_2 extends AssignmentToken  {
 // "bar" name=ID foo+=[Foo] ("," foo+=[Foo])*
 protected class Bar_Group extends GroupToken {
 	
-	public Bar_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Bar_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -392,19 +382,19 @@ protected class Bar_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bar_Group_3(parent, this, 0, inst);
-			case 1: return new Bar_FooAssignment_2(parent, this, 1, inst);
+			case 0: return new Bar_Group_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Bar_FooAssignment_2(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getBarRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getBarRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -412,8 +402,8 @@ protected class Bar_Group extends GroupToken {
 // "bar"
 protected class Bar_BarKeyword_0 extends KeywordToken  {
 	
-	public Bar_BarKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Bar_BarKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -422,9 +412,9 @@ protected class Bar_BarKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -433,8 +423,8 @@ protected class Bar_BarKeyword_0 extends KeywordToken  {
 // name=ID
 protected class Bar_NameAssignment_1 extends AssignmentToken  {
 	
-	public Bar_NameAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Bar_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -443,19 +433,19 @@ protected class Bar_NameAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bar_BarKeyword_0(parent, this, 0, inst);
+			case 0: return new Bar_BarKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getBarAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getBarAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getBarAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
 		}
@@ -467,8 +457,8 @@ protected class Bar_NameAssignment_1 extends AssignmentToken  {
 // foo+=[Foo]
 protected class Bar_FooAssignment_2 extends AssignmentToken  {
 	
-	public Bar_FooAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Bar_FooAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -477,21 +467,21 @@ protected class Bar_FooAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bar_NameAssignment_1(parent, this, 0, inst);
+			case 0: return new Bar_NameAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("foo",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("foo");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("foo",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("foo");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getBarAccess().getFooFooCrossReference_2_0().getType().getClassifier())) {
-				type = AssignmentType.CR;
+				type = AssignmentType.CROSS_REFERENCE;
 				element = grammarAccess.getBarAccess().getFooFooCrossReference_2_0(); 
 				return obj;
 			}
@@ -504,8 +494,8 @@ protected class Bar_FooAssignment_2 extends AssignmentToken  {
 // ("," foo+=[Foo])*
 protected class Bar_Group_3 extends GroupToken {
 	
-	public Bar_Group_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Bar_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -514,9 +504,9 @@ protected class Bar_Group_3 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bar_FooAssignment_3_1(parent, this, 0, inst);
+			case 0: return new Bar_FooAssignment_3_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -526,8 +516,8 @@ protected class Bar_Group_3 extends GroupToken {
 // ","
 protected class Bar_CommaKeyword_3_0 extends KeywordToken  {
 	
-	public Bar_CommaKeyword_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Bar_CommaKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -536,10 +526,10 @@ protected class Bar_CommaKeyword_3_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bar_Group_3(parent, this, 0, inst);
-			case 1: return new Bar_FooAssignment_2(parent, this, 1, inst);
+			case 0: return new Bar_Group_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Bar_FooAssignment_2(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -549,8 +539,8 @@ protected class Bar_CommaKeyword_3_0 extends KeywordToken  {
 // foo+=[Foo]
 protected class Bar_FooAssignment_3_1 extends AssignmentToken  {
 	
-	public Bar_FooAssignment_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Bar_FooAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -559,21 +549,21 @@ protected class Bar_FooAssignment_3_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bar_CommaKeyword_3_0(parent, this, 0, inst);
+			case 0: return new Bar_CommaKeyword_3_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("foo",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("foo");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("foo",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("foo");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getBarAccess().getFooFooCrossReference_3_1_0().getType().getClassifier())) {
-				type = AssignmentType.CR;
+				type = AssignmentType.CROSS_REFERENCE;
 				element = grammarAccess.getBarAccess().getFooFooCrossReference_3_1_0(); 
 				return obj;
 			}
@@ -598,8 +588,8 @@ protected class Bar_FooAssignment_3_1 extends AssignmentToken  {
 // "foo" name=ID
 protected class Foo_Group extends GroupToken {
 	
-	public Foo_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Foo_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -608,18 +598,18 @@ protected class Foo_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Foo_NameAssignment_1(parent, this, 0, inst);
+			case 0: return new Foo_NameAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getFooRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getFooRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -627,8 +617,8 @@ protected class Foo_Group extends GroupToken {
 // "foo"
 protected class Foo_FooKeyword_0 extends KeywordToken  {
 	
-	public Foo_FooKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Foo_FooKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -637,9 +627,9 @@ protected class Foo_FooKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -648,8 +638,8 @@ protected class Foo_FooKeyword_0 extends KeywordToken  {
 // name=ID
 protected class Foo_NameAssignment_1 extends AssignmentToken  {
 	
-	public Foo_NameAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Foo_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -658,19 +648,19 @@ protected class Foo_NameAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Foo_FooKeyword_0(parent, this, 0, inst);
+			case 0: return new Foo_FooKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getFooAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getFooAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getFooAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
 		}

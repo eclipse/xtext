@@ -22,8 +22,8 @@ import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
-import org.eclipse.xtext.parsetree.reconstr.SerializerUtil.SerializationOptions;
+import org.eclipse.xtext.parsetree.reconstr.Serializer;
+import org.eclipse.xtext.parsetree.reconstr.Serializer.SerializationOptions;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -36,7 +36,7 @@ import com.google.inject.Inject;
 public class DefaultTextEditComposer extends EContentAdapter implements ITextEditComposer {
 
 	@Inject
-	private SerializerUtil serializerUtil;
+	private Serializer serializerUtil;
 
 	private Resource resource;
 	private int resourceSize;
@@ -179,7 +179,7 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 	/** 
 	 * If used in a non-Guice environment, we need to be able to set this.
 	 */
-	public void setSerializerUtil(SerializerUtil serializerUtil) {
+	public void setSerializerUtil(Serializer serializerUtil) {
 		this.serializerUtil = serializerUtil;
 	}
 }

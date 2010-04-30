@@ -5,7 +5,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug288734TestLanguageGrammarAccess;
@@ -17,23 +17,18 @@ public class Bug288734TestLanguageParsetreeConstructor extends AbstractParseTree
 	@Inject
 	private Bug288734TestLanguageGrammarAccess grammarAccess;
 	
-	@Override	
-	public Bug288734TestLanguageGrammarAccess getGrammarAccess() {
-		return grammarAccess;
-	}
-
 	@Override
-	protected AbstractToken getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IEObjectConsumer inst) {
 		return new ThisRootNode(inst);	
 	}
 	
 protected class ThisRootNode extends RootToken {
-	public ThisRootNode(IInstanceDescription inst) {
+	public ThisRootNode(IEObjectConsumer inst) {
 		super(inst);
 	}
 	
 	@Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Model_ConstantsAssignment(this, this, 0, inst);
 			case 1: return new TConstant_Alternatives(this, this, 1, inst);
@@ -57,8 +52,8 @@ protected class ThisRootNode extends RootToken {
 // constants+=TConstant
 protected class Model_ConstantsAssignment extends AssignmentToken  {
 	
-	public Model_ConstantsAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_ConstantsAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -67,28 +62,23 @@ protected class Model_ConstantsAssignment extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new TConstant_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getModelRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
-	}
-
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("constants",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("constants");
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getModelRule().getType().getClassifier())
+			return null;
+		if((value = eObjectConsumer.getConsumable("constants",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("constants");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTConstantRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getModelAccess().getConstantsTConstantParserRuleCall_0(); 
 				consumed = obj;
 				return param;
@@ -98,10 +88,10 @@ protected class Model_ConstantsAssignment extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
 		}	
 	}	
 }
@@ -119,8 +109,8 @@ protected class Model_ConstantsAssignment extends AssignmentToken  {
 // TStringConstant|TIntegerConstant|TBooleanConstant
 protected class TConstant_Alternatives extends AlternativesToken {
 
-	public TConstant_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TConstant_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -129,22 +119,22 @@ protected class TConstant_Alternatives extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TConstant_TStringConstantParserRuleCall_0(parent, this, 0, inst);
-			case 1: return new TConstant_TIntegerConstantParserRuleCall_1(parent, this, 1, inst);
-			case 2: return new TConstant_TBooleanConstantParserRuleCall_2(parent, this, 2, inst);
+			case 0: return new TConstant_TStringConstantParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new TConstant_TIntegerConstantParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new TConstant_TBooleanConstantParserRuleCall_2(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTBooleanConstantRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTIntegerConstantRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getTStringConstantRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getTBooleanConstantRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getTIntegerConstantRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getTStringConstantRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -152,8 +142,8 @@ protected class TConstant_Alternatives extends AlternativesToken {
 // TStringConstant
 protected class TConstant_TStringConstantParserRuleCall_0 extends RuleCallToken {
 	
-	public TConstant_TStringConstantParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TConstant_TStringConstantParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -162,7 +152,7 @@ protected class TConstant_TStringConstantParserRuleCall_0 extends RuleCallToken 
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new TStringConstant_Group(this, this, 0, inst);
 			default: return null;
@@ -170,22 +160,17 @@ protected class TConstant_TStringConstantParserRuleCall_0 extends RuleCallToken 
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTStringConstantRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
-	}
-
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(TStringConstant_Group.class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getTStringConstantRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(TStringConstant_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -193,8 +178,8 @@ protected class TConstant_TStringConstantParserRuleCall_0 extends RuleCallToken 
 // TIntegerConstant
 protected class TConstant_TIntegerConstantParserRuleCall_1 extends RuleCallToken {
 	
-	public TConstant_TIntegerConstantParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TConstant_TIntegerConstantParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -203,7 +188,7 @@ protected class TConstant_TIntegerConstantParserRuleCall_1 extends RuleCallToken
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new TIntegerConstant_Group(this, this, 0, inst);
 			default: return null;
@@ -211,22 +196,17 @@ protected class TConstant_TIntegerConstantParserRuleCall_1 extends RuleCallToken
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTIntegerConstantRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
-	}
-
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(TIntegerConstant_Group.class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getTIntegerConstantRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(TIntegerConstant_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -234,8 +214,8 @@ protected class TConstant_TIntegerConstantParserRuleCall_1 extends RuleCallToken
 // TBooleanConstant
 protected class TConstant_TBooleanConstantParserRuleCall_2 extends RuleCallToken {
 	
-	public TConstant_TBooleanConstantParserRuleCall_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TConstant_TBooleanConstantParserRuleCall_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -244,7 +224,7 @@ protected class TConstant_TBooleanConstantParserRuleCall_2 extends RuleCallToken
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new TBooleanConstant_Group(this, this, 0, inst);
 			default: return null;
@@ -252,22 +232,17 @@ protected class TConstant_TBooleanConstantParserRuleCall_2 extends RuleCallToken
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTBooleanConstantRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
-	}
-
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(TBooleanConstant_Group.class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getTBooleanConstantRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(TBooleanConstant_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -286,8 +261,8 @@ protected class TConstant_TBooleanConstantParserRuleCall_2 extends RuleCallToken
 // annotations+=TAnnotation* "constant" "string" name=ID
 protected class TStringConstant_Group extends GroupToken {
 	
-	public TStringConstant_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TStringConstant_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -296,18 +271,18 @@ protected class TStringConstant_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TStringConstant_NameAssignment_3(parent, this, 0, inst);
+			case 0: return new TStringConstant_NameAssignment_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTStringConstantRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getTStringConstantRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -315,8 +290,8 @@ protected class TStringConstant_Group extends GroupToken {
 // annotations+=TAnnotation*
 protected class TStringConstant_AnnotationsAssignment_0 extends AssignmentToken  {
 	
-	public TStringConstant_AnnotationsAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TStringConstant_AnnotationsAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -325,7 +300,7 @@ protected class TStringConstant_AnnotationsAssignment_0 extends AssignmentToken 
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new TAnnotation_Group(this, this, 0, inst);
 			default: return null;
@@ -333,13 +308,13 @@ protected class TStringConstant_AnnotationsAssignment_0 extends AssignmentToken 
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("annotations",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("annotations");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("annotations",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("annotations");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTAnnotationRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getTStringConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0(); 
 				consumed = obj;
 				return param;
@@ -349,11 +324,11 @@ protected class TStringConstant_AnnotationsAssignment_0 extends AssignmentToken 
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new TStringConstant_AnnotationsAssignment_0(parent, next, actIndex, consumed);
-			default: return parent.createParentFollower(next, actIndex , index - 1, consumed);
+			case 0: return new TStringConstant_AnnotationsAssignment_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -361,8 +336,8 @@ protected class TStringConstant_AnnotationsAssignment_0 extends AssignmentToken 
 // "constant"
 protected class TStringConstant_ConstantKeyword_1 extends KeywordToken  {
 	
-	public TStringConstant_ConstantKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TStringConstant_ConstantKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -371,10 +346,10 @@ protected class TStringConstant_ConstantKeyword_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TStringConstant_AnnotationsAssignment_0(parent, this, 0, inst);
-			default: return parent.createParentFollower(this, index, index - 1, inst);
+			case 0: return new TStringConstant_AnnotationsAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 1, inst);
 		}	
 	}
 
@@ -383,8 +358,8 @@ protected class TStringConstant_ConstantKeyword_1 extends KeywordToken  {
 // "string"
 protected class TStringConstant_StringKeyword_2 extends KeywordToken  {
 	
-	public TStringConstant_StringKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TStringConstant_StringKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -393,9 +368,9 @@ protected class TStringConstant_StringKeyword_2 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TStringConstant_ConstantKeyword_1(parent, this, 0, inst);
+			case 0: return new TStringConstant_ConstantKeyword_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -405,8 +380,8 @@ protected class TStringConstant_StringKeyword_2 extends KeywordToken  {
 // name=ID
 protected class TStringConstant_NameAssignment_3 extends AssignmentToken  {
 	
-	public TStringConstant_NameAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TStringConstant_NameAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -415,19 +390,19 @@ protected class TStringConstant_NameAssignment_3 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TStringConstant_StringKeyword_2(parent, this, 0, inst);
+			case 0: return new TStringConstant_StringKeyword_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTStringConstantAccess().getNameIDTerminalRuleCall_3_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTStringConstantAccess().getNameIDTerminalRuleCall_3_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getTStringConstantAccess().getNameIDTerminalRuleCall_3_0();
 			return obj;
 		}
@@ -450,8 +425,8 @@ protected class TStringConstant_NameAssignment_3 extends AssignmentToken  {
 // annotations+=TAnnotation* "constant" "integer" name=ID
 protected class TIntegerConstant_Group extends GroupToken {
 	
-	public TIntegerConstant_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TIntegerConstant_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -460,18 +435,18 @@ protected class TIntegerConstant_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TIntegerConstant_NameAssignment_3(parent, this, 0, inst);
+			case 0: return new TIntegerConstant_NameAssignment_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTIntegerConstantRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getTIntegerConstantRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -479,8 +454,8 @@ protected class TIntegerConstant_Group extends GroupToken {
 // annotations+=TAnnotation*
 protected class TIntegerConstant_AnnotationsAssignment_0 extends AssignmentToken  {
 	
-	public TIntegerConstant_AnnotationsAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TIntegerConstant_AnnotationsAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -489,7 +464,7 @@ protected class TIntegerConstant_AnnotationsAssignment_0 extends AssignmentToken
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new TAnnotation_Group(this, this, 0, inst);
 			default: return null;
@@ -497,13 +472,13 @@ protected class TIntegerConstant_AnnotationsAssignment_0 extends AssignmentToken
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("annotations",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("annotations");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("annotations",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("annotations");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTAnnotationRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getTIntegerConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0(); 
 				consumed = obj;
 				return param;
@@ -513,11 +488,11 @@ protected class TIntegerConstant_AnnotationsAssignment_0 extends AssignmentToken
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new TIntegerConstant_AnnotationsAssignment_0(parent, next, actIndex, consumed);
-			default: return parent.createParentFollower(next, actIndex , index - 1, consumed);
+			case 0: return new TIntegerConstant_AnnotationsAssignment_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -525,8 +500,8 @@ protected class TIntegerConstant_AnnotationsAssignment_0 extends AssignmentToken
 // "constant"
 protected class TIntegerConstant_ConstantKeyword_1 extends KeywordToken  {
 	
-	public TIntegerConstant_ConstantKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TIntegerConstant_ConstantKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -535,10 +510,10 @@ protected class TIntegerConstant_ConstantKeyword_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TIntegerConstant_AnnotationsAssignment_0(parent, this, 0, inst);
-			default: return parent.createParentFollower(this, index, index - 1, inst);
+			case 0: return new TIntegerConstant_AnnotationsAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 1, inst);
 		}	
 	}
 
@@ -547,8 +522,8 @@ protected class TIntegerConstant_ConstantKeyword_1 extends KeywordToken  {
 // "integer"
 protected class TIntegerConstant_IntegerKeyword_2 extends KeywordToken  {
 	
-	public TIntegerConstant_IntegerKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TIntegerConstant_IntegerKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -557,9 +532,9 @@ protected class TIntegerConstant_IntegerKeyword_2 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TIntegerConstant_ConstantKeyword_1(parent, this, 0, inst);
+			case 0: return new TIntegerConstant_ConstantKeyword_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -569,8 +544,8 @@ protected class TIntegerConstant_IntegerKeyword_2 extends KeywordToken  {
 // name=ID
 protected class TIntegerConstant_NameAssignment_3 extends AssignmentToken  {
 	
-	public TIntegerConstant_NameAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TIntegerConstant_NameAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -579,19 +554,19 @@ protected class TIntegerConstant_NameAssignment_3 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TIntegerConstant_IntegerKeyword_2(parent, this, 0, inst);
+			case 0: return new TIntegerConstant_IntegerKeyword_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTIntegerConstantAccess().getNameIDTerminalRuleCall_3_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTIntegerConstantAccess().getNameIDTerminalRuleCall_3_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getTIntegerConstantAccess().getNameIDTerminalRuleCall_3_0();
 			return obj;
 		}
@@ -614,8 +589,8 @@ protected class TIntegerConstant_NameAssignment_3 extends AssignmentToken  {
 // annotations+=TAnnotation* "constant" "boolean" name=ID
 protected class TBooleanConstant_Group extends GroupToken {
 	
-	public TBooleanConstant_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TBooleanConstant_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -624,18 +599,18 @@ protected class TBooleanConstant_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TBooleanConstant_NameAssignment_3(parent, this, 0, inst);
+			case 0: return new TBooleanConstant_NameAssignment_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTBooleanConstantRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getTBooleanConstantRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -643,8 +618,8 @@ protected class TBooleanConstant_Group extends GroupToken {
 // annotations+=TAnnotation*
 protected class TBooleanConstant_AnnotationsAssignment_0 extends AssignmentToken  {
 	
-	public TBooleanConstant_AnnotationsAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TBooleanConstant_AnnotationsAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -653,7 +628,7 @@ protected class TBooleanConstant_AnnotationsAssignment_0 extends AssignmentToken
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new TAnnotation_Group(this, this, 0, inst);
 			default: return null;
@@ -661,13 +636,13 @@ protected class TBooleanConstant_AnnotationsAssignment_0 extends AssignmentToken
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("annotations",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("annotations");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("annotations",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("annotations");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTAnnotationRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getTBooleanConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0(); 
 				consumed = obj;
 				return param;
@@ -677,11 +652,11 @@ protected class TBooleanConstant_AnnotationsAssignment_0 extends AssignmentToken
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new TBooleanConstant_AnnotationsAssignment_0(parent, next, actIndex, consumed);
-			default: return parent.createParentFollower(next, actIndex , index - 1, consumed);
+			case 0: return new TBooleanConstant_AnnotationsAssignment_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -689,8 +664,8 @@ protected class TBooleanConstant_AnnotationsAssignment_0 extends AssignmentToken
 // "constant"
 protected class TBooleanConstant_ConstantKeyword_1 extends KeywordToken  {
 	
-	public TBooleanConstant_ConstantKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TBooleanConstant_ConstantKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -699,10 +674,10 @@ protected class TBooleanConstant_ConstantKeyword_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TBooleanConstant_AnnotationsAssignment_0(parent, this, 0, inst);
-			default: return parent.createParentFollower(this, index, index - 1, inst);
+			case 0: return new TBooleanConstant_AnnotationsAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 1, inst);
 		}	
 	}
 
@@ -711,8 +686,8 @@ protected class TBooleanConstant_ConstantKeyword_1 extends KeywordToken  {
 // "boolean"
 protected class TBooleanConstant_BooleanKeyword_2 extends KeywordToken  {
 	
-	public TBooleanConstant_BooleanKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TBooleanConstant_BooleanKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -721,9 +696,9 @@ protected class TBooleanConstant_BooleanKeyword_2 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TBooleanConstant_ConstantKeyword_1(parent, this, 0, inst);
+			case 0: return new TBooleanConstant_ConstantKeyword_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -733,8 +708,8 @@ protected class TBooleanConstant_BooleanKeyword_2 extends KeywordToken  {
 // name=ID
 protected class TBooleanConstant_NameAssignment_3 extends AssignmentToken  {
 	
-	public TBooleanConstant_NameAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TBooleanConstant_NameAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -743,19 +718,19 @@ protected class TBooleanConstant_NameAssignment_3 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TBooleanConstant_BooleanKeyword_2(parent, this, 0, inst);
+			case 0: return new TBooleanConstant_BooleanKeyword_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTBooleanConstantAccess().getNameIDTerminalRuleCall_3_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTBooleanConstantAccess().getNameIDTerminalRuleCall_3_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getTBooleanConstantAccess().getNameIDTerminalRuleCall_3_0();
 			return obj;
 		}
@@ -778,8 +753,8 @@ protected class TBooleanConstant_NameAssignment_3 extends AssignmentToken  {
 // "@desc" description=STRING
 protected class TAnnotation_Group extends GroupToken {
 	
-	public TAnnotation_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TAnnotation_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -788,18 +763,18 @@ protected class TAnnotation_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TAnnotation_DescriptionAssignment_1(parent, this, 0, inst);
+			case 0: return new TAnnotation_DescriptionAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getTAnnotationRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getTAnnotationRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -807,8 +782,8 @@ protected class TAnnotation_Group extends GroupToken {
 // "@desc"
 protected class TAnnotation_DescKeyword_0 extends KeywordToken  {
 	
-	public TAnnotation_DescKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TAnnotation_DescKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -817,9 +792,9 @@ protected class TAnnotation_DescKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -828,8 +803,8 @@ protected class TAnnotation_DescKeyword_0 extends KeywordToken  {
 // description=STRING
 protected class TAnnotation_DescriptionAssignment_1 extends AssignmentToken  {
 	
-	public TAnnotation_DescriptionAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public TAnnotation_DescriptionAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -838,19 +813,19 @@ protected class TAnnotation_DescriptionAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TAnnotation_DescKeyword_0(parent, this, 0, inst);
+			case 0: return new TAnnotation_DescKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("description",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("description");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getTAnnotationAccess().getDescriptionSTRINGTerminalRuleCall_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("description",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("description");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getTAnnotationAccess().getDescriptionSTRINGTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getTAnnotationAccess().getDescriptionSTRINGTerminalRuleCall_1_0();
 			return obj;
 		}

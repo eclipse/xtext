@@ -5,7 +5,7 @@ package org.eclipse.xtext.enumrules.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.enumrules.services.EnumAndReferenceTestLanguageGrammarAccess;
@@ -17,23 +17,18 @@ public class EnumAndReferenceTestLanguageParsetreeConstructor extends AbstractPa
 	@Inject
 	private EnumAndReferenceTestLanguageGrammarAccess grammarAccess;
 	
-	@Override	
-	public EnumAndReferenceTestLanguageGrammarAccess getGrammarAccess() {
-		return grammarAccess;
-	}
-
 	@Override
-	protected AbstractToken getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IEObjectConsumer inst) {
 		return new ThisRootNode(inst);	
 	}
 	
 protected class ThisRootNode extends RootToken {
-	public ThisRootNode(IInstanceDescription inst) {
+	public ThisRootNode(IEObjectConsumer inst) {
 		super(inst);
 	}
 	
 	@Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new EntityWithEnumAndReference_Group(this, this, 0, inst);
 			default: return null;
@@ -52,8 +47,8 @@ protected class ThisRootNode extends RootToken {
 // type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference]
 protected class EntityWithEnumAndReference_Group extends GroupToken {
 	
-	public EntityWithEnumAndReference_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public EntityWithEnumAndReference_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -62,18 +57,18 @@ protected class EntityWithEnumAndReference_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new EntityWithEnumAndReference_RefAssignment_3(parent, this, 0, inst);
+			case 0: return new EntityWithEnumAndReference_RefAssignment_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getEntityWithEnumAndReferenceRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getEntityWithEnumAndReferenceRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -81,8 +76,8 @@ protected class EntityWithEnumAndReference_Group extends GroupToken {
 // type=KindOfKeyword
 protected class EntityWithEnumAndReference_TypeAssignment_0 extends AssignmentToken  {
 	
-	public EntityWithEnumAndReference_TypeAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public EntityWithEnumAndReference_TypeAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -91,18 +86,18 @@ protected class EntityWithEnumAndReference_TypeAssignment_0 extends AssignmentTo
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("type",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(enumLitSerializer.isValid(obj.getDelegate(), grammarAccess.getEntityWithEnumAndReferenceAccess().getTypeKindOfKeywordEnumRuleCall_0_0(), value, null)) { 
-			type = AssignmentType.ERC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("type",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("type");
+		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getEntityWithEnumAndReferenceAccess().getTypeKindOfKeywordEnumRuleCall_0_0(), value, null)) { 
+			type = AssignmentType.ENUM_RULE_CALL;
 			element = grammarAccess.getEntityWithEnumAndReferenceAccess().getTypeKindOfKeywordEnumRuleCall_0_0();
 			return obj;
 		}
@@ -114,8 +109,8 @@ protected class EntityWithEnumAndReference_TypeAssignment_0 extends AssignmentTo
 // name=ID
 protected class EntityWithEnumAndReference_NameAssignment_1 extends AssignmentToken  {
 	
-	public EntityWithEnumAndReference_NameAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public EntityWithEnumAndReference_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -124,19 +119,19 @@ protected class EntityWithEnumAndReference_NameAssignment_1 extends AssignmentTo
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new EntityWithEnumAndReference_TypeAssignment_0(parent, this, 0, inst);
+			case 0: return new EntityWithEnumAndReference_TypeAssignment_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getEntityWithEnumAndReferenceAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getEntityWithEnumAndReferenceAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getEntityWithEnumAndReferenceAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
 		}
@@ -148,8 +143,8 @@ protected class EntityWithEnumAndReference_NameAssignment_1 extends AssignmentTo
 // "reference"
 protected class EntityWithEnumAndReference_ReferenceKeyword_2 extends KeywordToken  {
 	
-	public EntityWithEnumAndReference_ReferenceKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public EntityWithEnumAndReference_ReferenceKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -158,9 +153,9 @@ protected class EntityWithEnumAndReference_ReferenceKeyword_2 extends KeywordTok
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new EntityWithEnumAndReference_NameAssignment_1(parent, this, 0, inst);
+			case 0: return new EntityWithEnumAndReference_NameAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -170,8 +165,8 @@ protected class EntityWithEnumAndReference_ReferenceKeyword_2 extends KeywordTok
 // ref=[EntityWithEnumAndReference]
 protected class EntityWithEnumAndReference_RefAssignment_3 extends AssignmentToken  {
 	
-	public EntityWithEnumAndReference_RefAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public EntityWithEnumAndReference_RefAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -180,21 +175,21 @@ protected class EntityWithEnumAndReference_RefAssignment_3 extends AssignmentTok
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new EntityWithEnumAndReference_ReferenceKeyword_2(parent, this, 0, inst);
+			case 0: return new EntityWithEnumAndReference_ReferenceKeyword_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("ref",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("ref");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("ref",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ref");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getEntityWithEnumAndReferenceAccess().getRefEntityWithEnumAndReferenceCrossReference_3_0().getType().getClassifier())) {
-				type = AssignmentType.CR;
+				type = AssignmentType.CROSS_REFERENCE;
 				element = grammarAccess.getEntityWithEnumAndReferenceAccess().getRefEntityWithEnumAndReferenceCrossReference_3_0(); 
 				return obj;
 			}

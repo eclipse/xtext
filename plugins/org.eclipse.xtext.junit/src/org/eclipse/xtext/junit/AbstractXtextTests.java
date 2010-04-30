@@ -42,7 +42,7 @@ import org.eclipse.xtext.parser.antlr.IAntlrParser;
 import org.eclipse.xtext.parser.packrat.IPackratParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
+import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -210,8 +210,8 @@ public abstract class AbstractXtextTests extends TestCase {
 		return injector.getInstance(IValueConverterService.class);
 	}
 
-	protected SerializerUtil getSerializer() {
-		return injector.getInstance(SerializerUtil.class);
+	protected Serializer getSerializer() {
+		return injector.getInstance(Serializer.class);
 	}
 	
 	protected INodeModelFormatter getNodeModelFormatter() {

@@ -24,7 +24,7 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
+import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -164,7 +164,7 @@ public class DefaultTextEditComposerTest extends AbstractXtextTests {
 		assertTrue(edit instanceof ReplaceEdit);
 		AbstractNode node = NodeUtil.getNodeAdapter(obj).getParserNode();
 		assertEquals(node.getOffset(), ((ReplaceEdit) edit).getOffset());
-		SerializerUtil.SerializationOptions serializationOptions = new SerializerUtil.SerializationOptions();
+		Serializer.SerializationOptions serializationOptions = new Serializer.SerializationOptions();
 		serializationOptions.setFormat(false);
 		assertEqualsIgnoringWhitespace(getSerializer().serialize(obj, serializationOptions), ((ReplaceEdit) edit).getText());
 	}

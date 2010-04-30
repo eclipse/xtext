@@ -13,13 +13,13 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.parsetree.reconstr.impl.DefaultCrossReferenceSerializer;
+import org.eclipse.xtext.parsetree.reconstr.impl.CrossReferenceSerializer;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class XtextCrossReferenceSerializer extends DefaultCrossReferenceSerializer {
+public class XtextCrossReferenceSerializer extends CrossReferenceSerializer {
 
 	private final SimpleAttributeResolver<EObject, String> aliasResolver;
 

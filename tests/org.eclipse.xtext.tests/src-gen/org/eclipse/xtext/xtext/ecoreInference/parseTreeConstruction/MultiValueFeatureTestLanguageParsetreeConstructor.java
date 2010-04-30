@@ -5,7 +5,7 @@ package org.eclipse.xtext.xtext.ecoreInference.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.xtext.ecoreInference.services.MultiValueFeatureTestLanguageGrammarAccess;
@@ -17,23 +17,18 @@ public class MultiValueFeatureTestLanguageParsetreeConstructor extends AbstractP
 	@Inject
 	private MultiValueFeatureTestLanguageGrammarAccess grammarAccess;
 	
-	@Override	
-	public MultiValueFeatureTestLanguageGrammarAccess getGrammarAccess() {
-		return grammarAccess;
-	}
-
 	@Override
-	protected AbstractToken getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IEObjectConsumer inst) {
 		return new ThisRootNode(inst);	
 	}
 	
 protected class ThisRootNode extends RootToken {
-	public ThisRootNode(IInstanceDescription inst) {
+	public ThisRootNode(IEObjectConsumer inst) {
 		super(inst);
 	}
 	
 	@Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Start_FeatureAAssignment(this, this, 0, inst);
 			default: return null;
@@ -52,8 +47,8 @@ protected class ThisRootNode extends RootToken {
 // featureA+=ID+
 protected class Start_FeatureAAssignment extends AssignmentToken  {
 	
-	public Start_FeatureAAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Start_FeatureAAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -62,19 +57,19 @@ protected class Start_FeatureAAssignment extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Start_FeatureAAssignment(parent, this, 0, inst);
-			default: return parent.createParentFollower(this, index, index - 1, inst);
+			case 0: return new Start_FeatureAAssignment(lastRuleCallOrigin, this, 0, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 1, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("featureA",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("featureA");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("featureA",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("featureA");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0();
 			return obj;
 		}

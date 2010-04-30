@@ -24,15 +24,12 @@ import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 import com.google.inject.Inject;
 
 /**
- * TODO: Rethink name: Is that a Util or the Serializer itself?
- * 
  * @author Moritz Eysholdt - Initial contribution and API
  * @author Jan Koehnlein
  */
-public class SerializerUtil {
+public class Serializer {
 
-	// TODO: rename NO_FORMATTING
-	public static final SerializationOptions NO_FORMAT = new SerializationOptions(false, true);
+	public static final SerializationOptions NO_FORMATTING = new SerializationOptions(false, true);
 
 	public static class SerializationOptions {
 
@@ -72,7 +69,7 @@ public class SerializerUtil {
 	private IConcreteSyntaxValidator validator;
 
 	@Inject
-	public SerializerUtil(IParseTreeConstructor ptc, IFormatter fmt, IConcreteSyntaxValidator val) {
+	public Serializer(IParseTreeConstructor ptc, IFormatter fmt, IConcreteSyntaxValidator val) {
 		this.parseTreeReconstructor = ptc;
 		this.formatter = fmt;
 		this.validator = val;
@@ -89,9 +86,8 @@ public class SerializerUtil {
 						"These errors need to be fixed before the model an be serialized.", diagnostics);
 		}
 		ITokenStream formatterTokenStream = formatter.createFormatterStream(null, tokenStream, !options.isFormat());
-		TreeConstructionReport report = parseTreeReconstructor.serializeRecursive(obj, formatterTokenStream);
-		// TODO: formatterTokenStream.flush() instead?
-		tokenStream.flush();
+		TreeConstructionReport report = parseTreeReconstructor.serializeSubtree(obj, formatterTokenStream);
+		formatterTokenStream.flush();
 		return report;
 	}
 

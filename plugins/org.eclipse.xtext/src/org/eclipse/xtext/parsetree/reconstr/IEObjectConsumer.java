@@ -20,16 +20,13 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  * @author Sven Efftinge - Initial contribution and API
  * @author Moritz Eysholdt
  */
-public interface IInstanceDescription {
+public interface IEObjectConsumer {
 
-	IInstanceDescription cloneAndConsume(String feature);
+	IEObjectConsumer cloneAndConsume(String feature);
 
 	Object getConsumable(String feature, boolean allowDefault);
 
-	/**
-	 * @return the wrapped EObject
-	 */
-	EObject getDelegate();
+	EObject getEObject();
 
 	Map<EStructuralFeature, Integer> getUnconsumed();
 

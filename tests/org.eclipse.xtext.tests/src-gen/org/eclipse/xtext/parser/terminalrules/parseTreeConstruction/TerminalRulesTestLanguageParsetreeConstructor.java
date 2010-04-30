@@ -5,7 +5,7 @@ package org.eclipse.xtext.parser.terminalrules.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguageGrammarAccess;
@@ -17,23 +17,18 @@ public class TerminalRulesTestLanguageParsetreeConstructor extends AbstractParse
 	@Inject
 	private TerminalRulesTestLanguageGrammarAccess grammarAccess;
 	
-	@Override	
-	public TerminalRulesTestLanguageGrammarAccess getGrammarAccess() {
-		return grammarAccess;
-	}
-
 	@Override
-	protected AbstractToken getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IEObjectConsumer inst) {
 		return new ThisRootNode(inst);	
 	}
 	
 protected class ThisRootNode extends RootToken {
-	public ThisRootNode(IInstanceDescription inst) {
+	public ThisRootNode(IEObjectConsumer inst) {
 		super(inst);
 	}
 	
 	@Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Model_Alternatives(this, this, 0, inst);
 			default: return null;
@@ -54,8 +49,8 @@ protected class ThisRootNode extends RootToken {
 // slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER
 protected class Model_Alternatives extends AlternativesToken {
 
-	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -64,24 +59,24 @@ protected class Model_Alternatives extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_IdValueAssignment_0(parent, this, 0, inst);
-			case 1: return new Model_IntValueAssignment_1(parent, this, 1, inst);
-			case 2: return new Model_StringValueAssignment_2(parent, this, 2, inst);
-			case 3: return new Model_MlCommentValueAssignment_3(parent, this, 3, inst);
-			case 4: return new Model_SlCommentValueAssignment_4(parent, this, 4, inst);
-			case 5: return new Model_WsValueAssignment_5(parent, this, 5, inst);
-			case 6: return new Model_AnyValueAssignment_6(parent, this, 6, inst);
+			case 0: return new Model_IdValueAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_IntValueAssignment_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Model_StringValueAssignment_2(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Model_MlCommentValueAssignment_3(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new Model_SlCommentValueAssignment_4(lastRuleCallOrigin, this, 4, inst);
+			case 5: return new Model_WsValueAssignment_5(lastRuleCallOrigin, this, 5, inst);
+			case 6: return new Model_AnyValueAssignment_6(lastRuleCallOrigin, this, 6, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getModelRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getModelRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -89,8 +84,8 @@ protected class Model_Alternatives extends AlternativesToken {
 // idValue=ID
 protected class Model_IdValueAssignment_0 extends AssignmentToken  {
 	
-	public Model_IdValueAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_IdValueAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -99,18 +94,18 @@ protected class Model_IdValueAssignment_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("idValue",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("idValue");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getIdValueIDTerminalRuleCall_0_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("idValue",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("idValue");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getIdValueIDTerminalRuleCall_0_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getModelAccess().getIdValueIDTerminalRuleCall_0_0();
 			return obj;
 		}
@@ -122,8 +117,8 @@ protected class Model_IdValueAssignment_0 extends AssignmentToken  {
 // intValue=INT
 protected class Model_IntValueAssignment_1 extends AssignmentToken  {
 	
-	public Model_IntValueAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_IntValueAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -132,18 +127,18 @@ protected class Model_IntValueAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("intValue",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("intValue");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getIntValueINTTerminalRuleCall_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("intValue",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("intValue");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getIntValueINTTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getModelAccess().getIntValueINTTerminalRuleCall_1_0();
 			return obj;
 		}
@@ -155,8 +150,8 @@ protected class Model_IntValueAssignment_1 extends AssignmentToken  {
 // stringValue=STRING
 protected class Model_StringValueAssignment_2 extends AssignmentToken  {
 	
-	public Model_StringValueAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_StringValueAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -165,18 +160,18 @@ protected class Model_StringValueAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("stringValue",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("stringValue");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getStringValueSTRINGTerminalRuleCall_2_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("stringValue",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("stringValue");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getStringValueSTRINGTerminalRuleCall_2_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getModelAccess().getStringValueSTRINGTerminalRuleCall_2_0();
 			return obj;
 		}
@@ -188,8 +183,8 @@ protected class Model_StringValueAssignment_2 extends AssignmentToken  {
 // mlCommentValue=ML_COMMENT
 protected class Model_MlCommentValueAssignment_3 extends AssignmentToken  {
 	
-	public Model_MlCommentValueAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_MlCommentValueAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -198,18 +193,18 @@ protected class Model_MlCommentValueAssignment_3 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("mlCommentValue",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("mlCommentValue");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_3_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("mlCommentValue",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("mlCommentValue");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_3_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_3_0();
 			return obj;
 		}
@@ -221,8 +216,8 @@ protected class Model_MlCommentValueAssignment_3 extends AssignmentToken  {
 // slCommentValue=SL_COMMENT
 protected class Model_SlCommentValueAssignment_4 extends AssignmentToken  {
 	
-	public Model_SlCommentValueAssignment_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SlCommentValueAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -231,18 +226,18 @@ protected class Model_SlCommentValueAssignment_4 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("slCommentValue",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("slCommentValue");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_4_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("slCommentValue",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("slCommentValue");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_4_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_4_0();
 			return obj;
 		}
@@ -254,8 +249,8 @@ protected class Model_SlCommentValueAssignment_4 extends AssignmentToken  {
 // wsValue=WS
 protected class Model_WsValueAssignment_5 extends AssignmentToken  {
 	
-	public Model_WsValueAssignment_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_WsValueAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -264,18 +259,18 @@ protected class Model_WsValueAssignment_5 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("wsValue",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("wsValue");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_5_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("wsValue",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("wsValue");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_5_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_5_0();
 			return obj;
 		}
@@ -287,8 +282,8 @@ protected class Model_WsValueAssignment_5 extends AssignmentToken  {
 // anyValue=ANY_OTHER
 protected class Model_AnyValueAssignment_6 extends AssignmentToken  {
 	
-	public Model_AnyValueAssignment_6(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_AnyValueAssignment_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -297,18 +292,18 @@ protected class Model_AnyValueAssignment_6 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("anyValue",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("anyValue");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_6_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("anyValue",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("anyValue");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_6_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_6_0();
 			return obj;
 		}

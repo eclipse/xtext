@@ -5,7 +5,7 @@ package org.eclipse.xtext.testlanguages.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess;
@@ -17,23 +17,18 @@ public class LookaheadTestLanguageParsetreeConstructor extends AbstractParseTree
 	@Inject
 	private LookaheadTestLanguageGrammarAccess grammarAccess;
 	
-	@Override	
-	public LookaheadTestLanguageGrammarAccess getGrammarAccess() {
-		return grammarAccess;
-	}
-
 	@Override
-	protected AbstractToken getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IEObjectConsumer inst) {
 		return new ThisRootNode(inst);	
 	}
 	
 protected class ThisRootNode extends RootToken {
-	public ThisRootNode(IInstanceDescription inst) {
+	public ThisRootNode(IEObjectConsumer inst) {
 		super(inst);
 	}
 	
 	@Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Entry_ContentsAssignment(this, this, 0, inst);
 			case 1: return new Alts_Alternatives(this, this, 1, inst);
@@ -58,8 +53,8 @@ protected class ThisRootNode extends RootToken {
 // contents+=Alts*
 protected class Entry_ContentsAssignment extends AssignmentToken  {
 	
-	public Entry_ContentsAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Entry_ContentsAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -68,7 +63,7 @@ protected class Entry_ContentsAssignment extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Alts_Alternatives(this, this, 0, inst);
 			default: return null;
@@ -76,13 +71,13 @@ protected class Entry_ContentsAssignment extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("contents",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("contents");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("contents",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("contents");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAltsRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getEntryAccess().getContentsAltsParserRuleCall_0(); 
 				consumed = obj;
 				return param;
@@ -92,11 +87,11 @@ protected class Entry_ContentsAssignment extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Entry_ContentsAssignment(parent, next, actIndex, consumed);
-			default: return parent.createParentFollower(next, actIndex , index - 1, consumed);
+			case 0: return new Entry_ContentsAssignment(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -114,8 +109,8 @@ protected class Entry_ContentsAssignment extends AssignmentToken  {
 // LookAhead0|LookAhead1|LookAhead3
 protected class Alts_Alternatives extends AlternativesToken {
 
-	public Alts_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Alts_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -124,22 +119,22 @@ protected class Alts_Alternatives extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Alts_LookAhead0ParserRuleCall_0(parent, this, 0, inst);
-			case 1: return new Alts_LookAhead1ParserRuleCall_1(parent, this, 1, inst);
-			case 2: return new Alts_LookAhead3ParserRuleCall_2(parent, this, 2, inst);
+			case 0: return new Alts_LookAhead0ParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Alts_LookAhead1ParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Alts_LookAhead3ParserRuleCall_2(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLookAhead0Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getLookAhead1Rule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getLookAhead3Rule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getLookAhead0Rule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getLookAhead1Rule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getLookAhead3Rule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -147,8 +142,8 @@ protected class Alts_Alternatives extends AlternativesToken {
 // LookAhead0
 protected class Alts_LookAhead0ParserRuleCall_0 extends RuleCallToken {
 	
-	public Alts_LookAhead0ParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Alts_LookAhead0ParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -157,7 +152,7 @@ protected class Alts_LookAhead0ParserRuleCall_0 extends RuleCallToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new LookAhead0_Group(this, this, 0, inst);
 			default: return null;
@@ -165,22 +160,17 @@ protected class Alts_LookAhead0ParserRuleCall_0 extends RuleCallToken {
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLookAhead0Rule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
-	}
-
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(LookAhead0_Group.class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getLookAhead0Rule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(LookAhead0_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -188,8 +178,8 @@ protected class Alts_LookAhead0ParserRuleCall_0 extends RuleCallToken {
 // LookAhead1
 protected class Alts_LookAhead1ParserRuleCall_1 extends RuleCallToken {
 	
-	public Alts_LookAhead1ParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Alts_LookAhead1ParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -198,7 +188,7 @@ protected class Alts_LookAhead1ParserRuleCall_1 extends RuleCallToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new LookAhead1_Group(this, this, 0, inst);
 			default: return null;
@@ -206,22 +196,17 @@ protected class Alts_LookAhead1ParserRuleCall_1 extends RuleCallToken {
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLookAhead1Rule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
-	}
-
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(LookAhead1_Group.class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getLookAhead1Rule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(LookAhead1_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -229,8 +214,8 @@ protected class Alts_LookAhead1ParserRuleCall_1 extends RuleCallToken {
 // LookAhead3
 protected class Alts_LookAhead3ParserRuleCall_2 extends RuleCallToken {
 	
-	public Alts_LookAhead3ParserRuleCall_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Alts_LookAhead3ParserRuleCall_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -239,7 +224,7 @@ protected class Alts_LookAhead3ParserRuleCall_2 extends RuleCallToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new LookAhead3_Group(this, this, 0, inst);
 			default: return null;
@@ -247,22 +232,17 @@ protected class Alts_LookAhead3ParserRuleCall_2 extends RuleCallToken {
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLookAhead3Rule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
-	}
-
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(LookAhead3_Group.class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getLookAhead3Rule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(LookAhead3_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -281,8 +261,8 @@ protected class Alts_LookAhead3ParserRuleCall_2 extends RuleCallToken {
 // "bar" x="a"
 protected class LookAhead0_Group extends GroupToken {
 	
-	public LookAhead0_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead0_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -291,18 +271,18 @@ protected class LookAhead0_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LookAhead0_XAssignment_1(parent, this, 0, inst);
+			case 0: return new LookAhead0_XAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLookAhead0Rule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getLookAhead0Rule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -310,8 +290,8 @@ protected class LookAhead0_Group extends GroupToken {
 // "bar"
 protected class LookAhead0_BarKeyword_0 extends KeywordToken  {
 	
-	public LookAhead0_BarKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead0_BarKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -320,9 +300,9 @@ protected class LookAhead0_BarKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -331,8 +311,8 @@ protected class LookAhead0_BarKeyword_0 extends KeywordToken  {
 // x="a"
 protected class LookAhead0_XAssignment_1 extends AssignmentToken  {
 	
-	public LookAhead0_XAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead0_XAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -341,19 +321,19 @@ protected class LookAhead0_XAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LookAhead0_BarKeyword_0(parent, this, 0, inst);
+			case 0: return new LookAhead0_BarKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("x",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("x");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x");
 		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLookAhead0Access().getXAKeyword_1_0();
 			return obj;
 		}
@@ -376,8 +356,8 @@ protected class LookAhead0_XAssignment_1 extends AssignmentToken  {
 // "foo" y=LookAhead2 x="b" x="d"
 protected class LookAhead1_Group extends GroupToken {
 	
-	public LookAhead1_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead1_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -386,18 +366,18 @@ protected class LookAhead1_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LookAhead1_XAssignment_3(parent, this, 0, inst);
+			case 0: return new LookAhead1_XAssignment_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLookAhead1Rule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getLookAhead1Rule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -405,8 +385,8 @@ protected class LookAhead1_Group extends GroupToken {
 // "foo"
 protected class LookAhead1_FooKeyword_0 extends KeywordToken  {
 	
-	public LookAhead1_FooKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead1_FooKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -415,9 +395,9 @@ protected class LookAhead1_FooKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -426,8 +406,8 @@ protected class LookAhead1_FooKeyword_0 extends KeywordToken  {
 // y=LookAhead2
 protected class LookAhead1_YAssignment_1 extends AssignmentToken  {
 	
-	public LookAhead1_YAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead1_YAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -436,7 +416,7 @@ protected class LookAhead1_YAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new LookAhead2_Group(this, this, 0, inst);
 			default: return null;
@@ -444,13 +424,13 @@ protected class LookAhead1_YAssignment_1 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("y",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("y");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("y",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("y");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getLookAhead2Rule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getLookAhead1Access().getYLookAhead2ParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
@@ -460,10 +440,10 @@ protected class LookAhead1_YAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new LookAhead1_FooKeyword_0(parent, next, actIndex, consumed);
+			case 0: return new LookAhead1_FooKeyword_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -472,8 +452,8 @@ protected class LookAhead1_YAssignment_1 extends AssignmentToken  {
 // x="b"
 protected class LookAhead1_XAssignment_2 extends AssignmentToken  {
 	
-	public LookAhead1_XAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead1_XAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -482,19 +462,19 @@ protected class LookAhead1_XAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LookAhead1_YAssignment_1(parent, this, 0, inst);
+			case 0: return new LookAhead1_YAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("x",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("x");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x");
 		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLookAhead1Access().getXBKeyword_2_0();
 			return obj;
 		}
@@ -506,8 +486,8 @@ protected class LookAhead1_XAssignment_2 extends AssignmentToken  {
 // x="d"
 protected class LookAhead1_XAssignment_3 extends AssignmentToken  {
 	
-	public LookAhead1_XAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead1_XAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -516,19 +496,19 @@ protected class LookAhead1_XAssignment_3 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LookAhead1_XAssignment_2(parent, this, 0, inst);
+			case 0: return new LookAhead1_XAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("x",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("x");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x");
 		if("d".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLookAhead1Access().getXDKeyword_3_0();
 			return obj;
 		}
@@ -551,8 +531,8 @@ protected class LookAhead1_XAssignment_3 extends AssignmentToken  {
 // (z="foo"|z="bar") "c"
 protected class LookAhead2_Group extends GroupToken {
 	
-	public LookAhead2_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -561,18 +541,18 @@ protected class LookAhead2_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LookAhead2_CKeyword_1(parent, this, 0, inst);
+			case 0: return new LookAhead2_CKeyword_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLookAhead2Rule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getLookAhead2Rule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -580,8 +560,8 @@ protected class LookAhead2_Group extends GroupToken {
 // z="foo"|z="bar"
 protected class LookAhead2_Alternatives_0 extends AlternativesToken {
 
-	public LookAhead2_Alternatives_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead2_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -590,10 +570,10 @@ protected class LookAhead2_Alternatives_0 extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LookAhead2_ZAssignment_0_0(parent, this, 0, inst);
-			case 1: return new LookAhead2_ZAssignment_0_1(parent, this, 1, inst);
+			case 0: return new LookAhead2_ZAssignment_0_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new LookAhead2_ZAssignment_0_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -603,8 +583,8 @@ protected class LookAhead2_Alternatives_0 extends AlternativesToken {
 // z="foo"
 protected class LookAhead2_ZAssignment_0_0 extends AssignmentToken  {
 	
-	public LookAhead2_ZAssignment_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead2_ZAssignment_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -613,18 +593,18 @@ protected class LookAhead2_ZAssignment_0_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("z",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("z");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("z",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("z");
 		if("foo".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLookAhead2Access().getZFooKeyword_0_0_0();
 			return obj;
 		}
@@ -636,8 +616,8 @@ protected class LookAhead2_ZAssignment_0_0 extends AssignmentToken  {
 // z="bar"
 protected class LookAhead2_ZAssignment_0_1 extends AssignmentToken  {
 	
-	public LookAhead2_ZAssignment_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead2_ZAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -646,18 +626,18 @@ protected class LookAhead2_ZAssignment_0_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("z",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("z");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("z",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("z");
 		if("bar".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLookAhead2Access().getZBarKeyword_0_1_0();
 			return obj;
 		}
@@ -670,8 +650,8 @@ protected class LookAhead2_ZAssignment_0_1 extends AssignmentToken  {
 // "c"
 protected class LookAhead2_CKeyword_1 extends KeywordToken  {
 	
-	public LookAhead2_CKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead2_CKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -680,9 +660,9 @@ protected class LookAhead2_CKeyword_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LookAhead2_Alternatives_0(parent, this, 0, inst);
+			case 0: return new LookAhead2_Alternatives_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -703,8 +683,8 @@ protected class LookAhead2_CKeyword_1 extends KeywordToken  {
 // "foo" "bar" x="b" z=LookAhead4
 protected class LookAhead3_Group extends GroupToken {
 	
-	public LookAhead3_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead3_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -713,18 +693,18 @@ protected class LookAhead3_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LookAhead3_ZAssignment_3(parent, this, 0, inst);
+			case 0: return new LookAhead3_ZAssignment_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLookAhead3Rule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getLookAhead3Rule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -732,8 +712,8 @@ protected class LookAhead3_Group extends GroupToken {
 // "foo"
 protected class LookAhead3_FooKeyword_0 extends KeywordToken  {
 	
-	public LookAhead3_FooKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead3_FooKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -742,9 +722,9 @@ protected class LookAhead3_FooKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -753,8 +733,8 @@ protected class LookAhead3_FooKeyword_0 extends KeywordToken  {
 // "bar"
 protected class LookAhead3_BarKeyword_1 extends KeywordToken  {
 	
-	public LookAhead3_BarKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead3_BarKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -763,9 +743,9 @@ protected class LookAhead3_BarKeyword_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LookAhead3_FooKeyword_0(parent, this, 0, inst);
+			case 0: return new LookAhead3_FooKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -775,8 +755,8 @@ protected class LookAhead3_BarKeyword_1 extends KeywordToken  {
 // x="b"
 protected class LookAhead3_XAssignment_2 extends AssignmentToken  {
 	
-	public LookAhead3_XAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead3_XAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -785,19 +765,19 @@ protected class LookAhead3_XAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LookAhead3_BarKeyword_1(parent, this, 0, inst);
+			case 0: return new LookAhead3_BarKeyword_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("x",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("x");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x");
 		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLookAhead3Access().getXBKeyword_2_0();
 			return obj;
 		}
@@ -809,8 +789,8 @@ protected class LookAhead3_XAssignment_2 extends AssignmentToken  {
 // z=LookAhead4
 protected class LookAhead3_ZAssignment_3 extends AssignmentToken  {
 	
-	public LookAhead3_ZAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead3_ZAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -819,7 +799,7 @@ protected class LookAhead3_ZAssignment_3 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new LookAhead4_Alternatives(this, this, 0, inst);
 			default: return null;
@@ -827,13 +807,13 @@ protected class LookAhead3_ZAssignment_3 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("z",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("z");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("z",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("z");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getLookAhead4Rule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getLookAhead3Access().getZLookAhead4ParserRuleCall_3_0(); 
 				consumed = obj;
 				return param;
@@ -843,10 +823,10 @@ protected class LookAhead3_ZAssignment_3 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new LookAhead3_XAssignment_2(parent, next, actIndex, consumed);
+			case 0: return new LookAhead3_XAssignment_2(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -866,8 +846,8 @@ protected class LookAhead3_ZAssignment_3 extends AssignmentToken  {
 // x="c"|x="d"
 protected class LookAhead4_Alternatives extends AlternativesToken {
 
-	public LookAhead4_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead4_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -876,19 +856,19 @@ protected class LookAhead4_Alternatives extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LookAhead4_XAssignment_0(parent, this, 0, inst);
-			case 1: return new LookAhead4_XAssignment_1(parent, this, 1, inst);
+			case 0: return new LookAhead4_XAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new LookAhead4_XAssignment_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getLookAhead4Rule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getLookAhead4Rule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -896,8 +876,8 @@ protected class LookAhead4_Alternatives extends AlternativesToken {
 // x="c"
 protected class LookAhead4_XAssignment_0 extends AssignmentToken  {
 	
-	public LookAhead4_XAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead4_XAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -906,18 +886,18 @@ protected class LookAhead4_XAssignment_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("x",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("x");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x");
 		if("c".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLookAhead4Access().getXCKeyword_0_0();
 			return obj;
 		}
@@ -929,8 +909,8 @@ protected class LookAhead4_XAssignment_0 extends AssignmentToken  {
 // x="d"
 protected class LookAhead4_XAssignment_1 extends AssignmentToken  {
 	
-	public LookAhead4_XAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public LookAhead4_XAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -939,18 +919,18 @@ protected class LookAhead4_XAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("x",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("x");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x");
 		if("d".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLookAhead4Access().getXDKeyword_1_0();
 			return obj;
 		}

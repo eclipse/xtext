@@ -5,7 +5,7 @@ package org.eclipse.xtext.parser.unorderedGroups.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.parser.unorderedGroups.services.UnorderedGroupsTestLanguageGrammarAccess;
@@ -17,23 +17,18 @@ public class UnorderedGroupsTestLanguageParsetreeConstructor extends AbstractPar
 	@Inject
 	private UnorderedGroupsTestLanguageGrammarAccess grammarAccess;
 	
-	@Override	
-	public UnorderedGroupsTestLanguageGrammarAccess getGrammarAccess() {
-		return grammarAccess;
-	}
-
 	@Override
-	protected AbstractToken getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IEObjectConsumer inst) {
 		return new ThisRootNode(inst);	
 	}
 	
 protected class ThisRootNode extends RootToken {
-	public ThisRootNode(IInstanceDescription inst) {
+	public ThisRootNode(IEObjectConsumer inst) {
 		super(inst);
 	}
 	
 	@Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Model_Group(this, this, 0, inst);
 			case 1: return new NestedModel_Group(this, this, 1, inst);
@@ -74,8 +69,8 @@ protected class ThisRootNode extends RootToken {
 // UnorderedSerialization|"bug302585" nestedModel+=NestedModel*)
 protected class Model_Group extends GroupToken {
 	
-	public Model_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -84,18 +79,18 @@ protected class Model_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_Alternatives_1(parent, this, 0, inst);
+			case 0: return new Model_Alternatives_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getModelAccess().getModelAction_0().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getModelAccess().getModelAction_0().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -103,8 +98,8 @@ protected class Model_Group extends GroupToken {
 // {Model}
 protected class Model_ModelAction_0 extends ActionToken  {
 
-	public Model_ModelAction_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_ModelAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -113,16 +108,16 @@ protected class Model_ModelAction_0 extends ActionToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isConsumed()) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
 	}
 }
 
@@ -139,8 +134,8 @@ protected class Model_ModelAction_0 extends ActionToken  {
 // UnorderedSerialization|"bug302585" nestedModel+=NestedModel*
 protected class Model_Alternatives_1 extends AlternativesToken {
 
-	public Model_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -149,25 +144,25 @@ protected class Model_Alternatives_1 extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_Group_1_0(parent, this, 0, inst);
-			case 1: return new Model_Group_1_1(parent, this, 1, inst);
-			case 2: return new Model_Group_1_2(parent, this, 2, inst);
-			case 3: return new Model_Group_1_3(parent, this, 3, inst);
-			case 4: return new Model_Group_1_4(parent, this, 4, inst);
-			case 5: return new Model_Group_1_5(parent, this, 5, inst);
-			case 6: return new Model_Group_1_6(parent, this, 6, inst);
-			case 7: return new Model_Group_1_7(parent, this, 7, inst);
-			case 8: return new Model_Group_1_8(parent, this, 8, inst);
-			case 9: return new Model_Group_1_9(parent, this, 9, inst);
-			case 10: return new Model_Group_1_10(parent, this, 10, inst);
-			case 11: return new Model_Group_1_11(parent, this, 11, inst);
-			case 12: return new Model_Group_1_12(parent, this, 12, inst);
-			case 13: return new Model_Group_1_13(parent, this, 13, inst);
-			case 14: return new Model_Group_1_14(parent, this, 14, inst);
-			case 15: return new Model_Group_1_15(parent, this, 15, inst);
-			case 16: return new Model_Group_1_16(parent, this, 16, inst);
+			case 0: return new Model_Group_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_Group_1_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Model_Group_1_2(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Model_Group_1_3(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new Model_Group_1_4(lastRuleCallOrigin, this, 4, inst);
+			case 5: return new Model_Group_1_5(lastRuleCallOrigin, this, 5, inst);
+			case 6: return new Model_Group_1_6(lastRuleCallOrigin, this, 6, inst);
+			case 7: return new Model_Group_1_7(lastRuleCallOrigin, this, 7, inst);
+			case 8: return new Model_Group_1_8(lastRuleCallOrigin, this, 8, inst);
+			case 9: return new Model_Group_1_9(lastRuleCallOrigin, this, 9, inst);
+			case 10: return new Model_Group_1_10(lastRuleCallOrigin, this, 10, inst);
+			case 11: return new Model_Group_1_11(lastRuleCallOrigin, this, 11, inst);
+			case 12: return new Model_Group_1_12(lastRuleCallOrigin, this, 12, inst);
+			case 13: return new Model_Group_1_13(lastRuleCallOrigin, this, 13, inst);
+			case 14: return new Model_Group_1_14(lastRuleCallOrigin, this, 14, inst);
+			case 15: return new Model_Group_1_15(lastRuleCallOrigin, this, 15, inst);
+			case 16: return new Model_Group_1_16(lastRuleCallOrigin, this, 16, inst);
 			default: return null;
 		}	
 	}
@@ -177,8 +172,8 @@ protected class Model_Alternatives_1 extends AlternativesToken {
 // "1" (first?="a" & second?="b")
 protected class Model_Group_1_0 extends GroupToken {
 	
-	public Model_Group_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -187,9 +182,9 @@ protected class Model_Group_1_0 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_1_0_1(parent, this, 0, inst);
+			case 0: return new Model_UnorderedGroup_1_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -199,8 +194,8 @@ protected class Model_Group_1_0 extends GroupToken {
 // "1"
 protected class Model_DigitOneKeyword_1_0_0 extends KeywordToken  {
 	
-	public Model_DigitOneKeyword_1_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_DigitOneKeyword_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -209,9 +204,9 @@ protected class Model_DigitOneKeyword_1_0_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
+			case 0: return new Model_ModelAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -221,8 +216,8 @@ protected class Model_DigitOneKeyword_1_0_0 extends KeywordToken  {
 // first?="a" & second?="b"
 protected class Model_UnorderedGroup_1_0_1 extends UnorderedGroupToken {
 	
-	public Model_UnorderedGroup_1_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_UnorderedGroup_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -231,9 +226,9 @@ protected class Model_UnorderedGroup_1_0_1 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_SecondAssignment_1_0_1_1(parent, this, 0, inst);
+			case 0: return new Model_SecondAssignment_1_0_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -243,8 +238,8 @@ protected class Model_UnorderedGroup_1_0_1 extends UnorderedGroupToken {
 // first?="a"
 protected class Model_FirstAssignment_1_0_1_0 extends AssignmentToken  {
 	
-	public Model_FirstAssignment_1_0_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_FirstAssignment_1_0_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -253,19 +248,19 @@ protected class Model_FirstAssignment_1_0_1_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_DigitOneKeyword_1_0_0(parent, this, 0, inst);
+			case 0: return new Model_DigitOneKeyword_1_0_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("first",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("first");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("first",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("first");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAKeyword_1_0_1_0_0();
 			return obj;
 		}
@@ -277,8 +272,8 @@ protected class Model_FirstAssignment_1_0_1_0 extends AssignmentToken  {
 // second?="b"
 protected class Model_SecondAssignment_1_0_1_1 extends AssignmentToken  {
 	
-	public Model_SecondAssignment_1_0_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SecondAssignment_1_0_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -287,19 +282,19 @@ protected class Model_SecondAssignment_1_0_1_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_FirstAssignment_1_0_1_0(parent, this, 0, inst);
+			case 0: return new Model_FirstAssignment_1_0_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("second",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("second");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("second",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("second");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondBKeyword_1_0_1_1_0();
 			return obj;
 		}
@@ -313,8 +308,8 @@ protected class Model_SecondAssignment_1_0_1_1 extends AssignmentToken  {
 // "2" (first?="a" & second?="b" & third?="c" & forth?="d")
 protected class Model_Group_1_1 extends GroupToken {
 	
-	public Model_Group_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -323,9 +318,9 @@ protected class Model_Group_1_1 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_1_1_1(parent, this, 0, inst);
+			case 0: return new Model_UnorderedGroup_1_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -335,8 +330,8 @@ protected class Model_Group_1_1 extends GroupToken {
 // "2"
 protected class Model_DigitTwoKeyword_1_1_0 extends KeywordToken  {
 	
-	public Model_DigitTwoKeyword_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_DigitTwoKeyword_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -345,9 +340,9 @@ protected class Model_DigitTwoKeyword_1_1_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
+			case 0: return new Model_ModelAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -357,8 +352,8 @@ protected class Model_DigitTwoKeyword_1_1_0 extends KeywordToken  {
 // first?="a" & second?="b" & third?="c" & forth?="d"
 protected class Model_UnorderedGroup_1_1_1 extends UnorderedGroupToken {
 	
-	public Model_UnorderedGroup_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_UnorderedGroup_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -367,9 +362,9 @@ protected class Model_UnorderedGroup_1_1_1 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ForthAssignment_1_1_1_3(parent, this, 0, inst);
+			case 0: return new Model_ForthAssignment_1_1_1_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -379,8 +374,8 @@ protected class Model_UnorderedGroup_1_1_1 extends UnorderedGroupToken {
 // first?="a"
 protected class Model_FirstAssignment_1_1_1_0 extends AssignmentToken  {
 	
-	public Model_FirstAssignment_1_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_FirstAssignment_1_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -389,19 +384,19 @@ protected class Model_FirstAssignment_1_1_1_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_DigitTwoKeyword_1_1_0(parent, this, 0, inst);
+			case 0: return new Model_DigitTwoKeyword_1_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("first",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("first");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("first",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("first");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAKeyword_1_1_1_0_0();
 			return obj;
 		}
@@ -413,8 +408,8 @@ protected class Model_FirstAssignment_1_1_1_0 extends AssignmentToken  {
 // second?="b"
 protected class Model_SecondAssignment_1_1_1_1 extends AssignmentToken  {
 	
-	public Model_SecondAssignment_1_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SecondAssignment_1_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -423,19 +418,19 @@ protected class Model_SecondAssignment_1_1_1_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_FirstAssignment_1_1_1_0(parent, this, 0, inst);
+			case 0: return new Model_FirstAssignment_1_1_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("second",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("second");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("second",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("second");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondBKeyword_1_1_1_1_0();
 			return obj;
 		}
@@ -447,8 +442,8 @@ protected class Model_SecondAssignment_1_1_1_1 extends AssignmentToken  {
 // third?="c"
 protected class Model_ThirdAssignment_1_1_1_2 extends AssignmentToken  {
 	
-	public Model_ThirdAssignment_1_1_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_ThirdAssignment_1_1_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -457,19 +452,19 @@ protected class Model_ThirdAssignment_1_1_1_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_SecondAssignment_1_1_1_1(parent, this, 0, inst);
+			case 0: return new Model_SecondAssignment_1_1_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("third",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("third");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("third",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("third");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getThirdCKeyword_1_1_1_2_0();
 			return obj;
 		}
@@ -481,8 +476,8 @@ protected class Model_ThirdAssignment_1_1_1_2 extends AssignmentToken  {
 // forth?="d"
 protected class Model_ForthAssignment_1_1_1_3 extends AssignmentToken  {
 	
-	public Model_ForthAssignment_1_1_1_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_ForthAssignment_1_1_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -491,19 +486,19 @@ protected class Model_ForthAssignment_1_1_1_3 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ThirdAssignment_1_1_1_2(parent, this, 0, inst);
+			case 0: return new Model_ThirdAssignment_1_1_1_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("forth",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("forth");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("forth",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("forth");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getForthDKeyword_1_1_1_3_0();
 			return obj;
 		}
@@ -517,8 +512,8 @@ protected class Model_ForthAssignment_1_1_1_3 extends AssignmentToken  {
 // "3" (first?="a"? & second?="b"?)
 protected class Model_Group_1_2 extends GroupToken {
 	
-	public Model_Group_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -527,9 +522,9 @@ protected class Model_Group_1_2 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_1_2_1(parent, this, 0, inst);
+			case 0: return new Model_UnorderedGroup_1_2_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -539,8 +534,8 @@ protected class Model_Group_1_2 extends GroupToken {
 // "3"
 protected class Model_DigitThreeKeyword_1_2_0 extends KeywordToken  {
 	
-	public Model_DigitThreeKeyword_1_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_DigitThreeKeyword_1_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -549,9 +544,9 @@ protected class Model_DigitThreeKeyword_1_2_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
+			case 0: return new Model_ModelAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -561,8 +556,8 @@ protected class Model_DigitThreeKeyword_1_2_0 extends KeywordToken  {
 // first?="a"? & second?="b"?
 protected class Model_UnorderedGroup_1_2_1 extends UnorderedGroupToken {
 	
-	public Model_UnorderedGroup_1_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_UnorderedGroup_1_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -571,11 +566,11 @@ protected class Model_UnorderedGroup_1_2_1 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_SecondAssignment_1_2_1_1(parent, this, 0, inst);
-			case 1: return new Model_FirstAssignment_1_2_1_0(parent, this, 1, inst);
-			case 2: return new Model_DigitThreeKeyword_1_2_0(parent, this, 2, inst);
+			case 0: return new Model_SecondAssignment_1_2_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_FirstAssignment_1_2_1_0(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Model_DigitThreeKeyword_1_2_0(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
@@ -585,8 +580,8 @@ protected class Model_UnorderedGroup_1_2_1 extends UnorderedGroupToken {
 // first?="a"?
 protected class Model_FirstAssignment_1_2_1_0 extends AssignmentToken  {
 	
-	public Model_FirstAssignment_1_2_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_FirstAssignment_1_2_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -595,19 +590,19 @@ protected class Model_FirstAssignment_1_2_1_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_DigitThreeKeyword_1_2_0(parent, this, 0, inst);
+			case 0: return new Model_DigitThreeKeyword_1_2_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("first",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("first");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("first",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("first");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAKeyword_1_2_1_0_0();
 			return obj;
 		}
@@ -619,8 +614,8 @@ protected class Model_FirstAssignment_1_2_1_0 extends AssignmentToken  {
 // second?="b"?
 protected class Model_SecondAssignment_1_2_1_1 extends AssignmentToken  {
 	
-	public Model_SecondAssignment_1_2_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SecondAssignment_1_2_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -629,20 +624,20 @@ protected class Model_SecondAssignment_1_2_1_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_FirstAssignment_1_2_1_0(parent, this, 0, inst);
-			case 1: return new Model_DigitThreeKeyword_1_2_0(parent, this, 1, inst);
+			case 0: return new Model_FirstAssignment_1_2_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_DigitThreeKeyword_1_2_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("second",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("second");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("second",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("second");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondBKeyword_1_2_1_1_0();
 			return obj;
 		}
@@ -656,8 +651,8 @@ protected class Model_SecondAssignment_1_2_1_1 extends AssignmentToken  {
 // "4" (first?="a" & second?="b"?)
 protected class Model_Group_1_3 extends GroupToken {
 	
-	public Model_Group_1_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -666,9 +661,9 @@ protected class Model_Group_1_3 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_1_3_1(parent, this, 0, inst);
+			case 0: return new Model_UnorderedGroup_1_3_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -678,8 +673,8 @@ protected class Model_Group_1_3 extends GroupToken {
 // "4"
 protected class Model_DigitFourKeyword_1_3_0 extends KeywordToken  {
 	
-	public Model_DigitFourKeyword_1_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_DigitFourKeyword_1_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -688,9 +683,9 @@ protected class Model_DigitFourKeyword_1_3_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
+			case 0: return new Model_ModelAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -700,8 +695,8 @@ protected class Model_DigitFourKeyword_1_3_0 extends KeywordToken  {
 // first?="a" & second?="b"?
 protected class Model_UnorderedGroup_1_3_1 extends UnorderedGroupToken {
 	
-	public Model_UnorderedGroup_1_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_UnorderedGroup_1_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -710,10 +705,10 @@ protected class Model_UnorderedGroup_1_3_1 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_SecondAssignment_1_3_1_1(parent, this, 0, inst);
-			case 1: return new Model_FirstAssignment_1_3_1_0(parent, this, 1, inst);
+			case 0: return new Model_SecondAssignment_1_3_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_FirstAssignment_1_3_1_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -723,8 +718,8 @@ protected class Model_UnorderedGroup_1_3_1 extends UnorderedGroupToken {
 // first?="a"
 protected class Model_FirstAssignment_1_3_1_0 extends AssignmentToken  {
 	
-	public Model_FirstAssignment_1_3_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_FirstAssignment_1_3_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -733,19 +728,19 @@ protected class Model_FirstAssignment_1_3_1_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_DigitFourKeyword_1_3_0(parent, this, 0, inst);
+			case 0: return new Model_DigitFourKeyword_1_3_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("first",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("first");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("first",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("first");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAKeyword_1_3_1_0_0();
 			return obj;
 		}
@@ -757,8 +752,8 @@ protected class Model_FirstAssignment_1_3_1_0 extends AssignmentToken  {
 // second?="b"?
 protected class Model_SecondAssignment_1_3_1_1 extends AssignmentToken  {
 	
-	public Model_SecondAssignment_1_3_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SecondAssignment_1_3_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -767,19 +762,19 @@ protected class Model_SecondAssignment_1_3_1_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_FirstAssignment_1_3_1_0(parent, this, 0, inst);
+			case 0: return new Model_FirstAssignment_1_3_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("second",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("second");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("second",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("second");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondBKeyword_1_3_1_1_0();
 			return obj;
 		}
@@ -793,8 +788,8 @@ protected class Model_SecondAssignment_1_3_1_1 extends AssignmentToken  {
 // "5" (first?="a"? & second?="b")
 protected class Model_Group_1_4 extends GroupToken {
 	
-	public Model_Group_1_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -803,9 +798,9 @@ protected class Model_Group_1_4 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_1_4_1(parent, this, 0, inst);
+			case 0: return new Model_UnorderedGroup_1_4_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -815,8 +810,8 @@ protected class Model_Group_1_4 extends GroupToken {
 // "5"
 protected class Model_DigitFiveKeyword_1_4_0 extends KeywordToken  {
 	
-	public Model_DigitFiveKeyword_1_4_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_DigitFiveKeyword_1_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -825,9 +820,9 @@ protected class Model_DigitFiveKeyword_1_4_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
+			case 0: return new Model_ModelAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -837,8 +832,8 @@ protected class Model_DigitFiveKeyword_1_4_0 extends KeywordToken  {
 // first?="a"? & second?="b"
 protected class Model_UnorderedGroup_1_4_1 extends UnorderedGroupToken {
 	
-	public Model_UnorderedGroup_1_4_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_UnorderedGroup_1_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -847,9 +842,9 @@ protected class Model_UnorderedGroup_1_4_1 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_SecondAssignment_1_4_1_1(parent, this, 0, inst);
+			case 0: return new Model_SecondAssignment_1_4_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -859,8 +854,8 @@ protected class Model_UnorderedGroup_1_4_1 extends UnorderedGroupToken {
 // first?="a"?
 protected class Model_FirstAssignment_1_4_1_0 extends AssignmentToken  {
 	
-	public Model_FirstAssignment_1_4_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_FirstAssignment_1_4_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -869,19 +864,19 @@ protected class Model_FirstAssignment_1_4_1_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_DigitFiveKeyword_1_4_0(parent, this, 0, inst);
+			case 0: return new Model_DigitFiveKeyword_1_4_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("first",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("first");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("first",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("first");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAKeyword_1_4_1_0_0();
 			return obj;
 		}
@@ -893,8 +888,8 @@ protected class Model_FirstAssignment_1_4_1_0 extends AssignmentToken  {
 // second?="b"
 protected class Model_SecondAssignment_1_4_1_1 extends AssignmentToken  {
 	
-	public Model_SecondAssignment_1_4_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SecondAssignment_1_4_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -903,20 +898,20 @@ protected class Model_SecondAssignment_1_4_1_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_FirstAssignment_1_4_1_0(parent, this, 0, inst);
-			case 1: return new Model_DigitFiveKeyword_1_4_0(parent, this, 1, inst);
+			case 0: return new Model_FirstAssignment_1_4_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_DigitFiveKeyword_1_4_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("second",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("second");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("second",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("second");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondBKeyword_1_4_1_1_0();
 			return obj;
 		}
@@ -930,8 +925,8 @@ protected class Model_SecondAssignment_1_4_1_1 extends AssignmentToken  {
 // "6" (firstAsList+="a"+ & secondAsList+="b"*)
 protected class Model_Group_1_5 extends GroupToken {
 	
-	public Model_Group_1_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -940,9 +935,9 @@ protected class Model_Group_1_5 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_1_5_1(parent, this, 0, inst);
+			case 0: return new Model_UnorderedGroup_1_5_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -952,8 +947,8 @@ protected class Model_Group_1_5 extends GroupToken {
 // "6"
 protected class Model_DigitSixKeyword_1_5_0 extends KeywordToken  {
 	
-	public Model_DigitSixKeyword_1_5_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_DigitSixKeyword_1_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -962,9 +957,9 @@ protected class Model_DigitSixKeyword_1_5_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
+			case 0: return new Model_ModelAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -974,8 +969,8 @@ protected class Model_DigitSixKeyword_1_5_0 extends KeywordToken  {
 // firstAsList+="a"+ & secondAsList+="b"*
 protected class Model_UnorderedGroup_1_5_1 extends UnorderedGroupToken {
 	
-	public Model_UnorderedGroup_1_5_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_UnorderedGroup_1_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -984,10 +979,10 @@ protected class Model_UnorderedGroup_1_5_1 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_SecondAsListAssignment_1_5_1_1(parent, this, 0, inst);
-			case 1: return new Model_FirstAsListAssignment_1_5_1_0(parent, this, 1, inst);
+			case 0: return new Model_SecondAsListAssignment_1_5_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_FirstAsListAssignment_1_5_1_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -997,8 +992,8 @@ protected class Model_UnorderedGroup_1_5_1 extends UnorderedGroupToken {
 // firstAsList+="a"+
 protected class Model_FirstAsListAssignment_1_5_1_0 extends AssignmentToken  {
 	
-	public Model_FirstAsListAssignment_1_5_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_FirstAsListAssignment_1_5_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1007,20 +1002,20 @@ protected class Model_FirstAsListAssignment_1_5_1_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_FirstAsListAssignment_1_5_1_0(parent, this, 0, inst);
-			case 1: return new Model_DigitSixKeyword_1_5_0(parent, this, 1, inst);
+			case 0: return new Model_FirstAsListAssignment_1_5_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_DigitSixKeyword_1_5_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("firstAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("firstAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("firstAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
 		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAsListAKeyword_1_5_1_0_0();
 			return obj;
 		}
@@ -1032,8 +1027,8 @@ protected class Model_FirstAsListAssignment_1_5_1_0 extends AssignmentToken  {
 // secondAsList+="b"*
 protected class Model_SecondAsListAssignment_1_5_1_1 extends AssignmentToken  {
 	
-	public Model_SecondAsListAssignment_1_5_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SecondAsListAssignment_1_5_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1042,20 +1037,20 @@ protected class Model_SecondAsListAssignment_1_5_1_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_SecondAsListAssignment_1_5_1_1(parent, this, 0, inst);
-			case 1: return new Model_FirstAsListAssignment_1_5_1_0(parent, this, 1, inst);
+			case 0: return new Model_SecondAsListAssignment_1_5_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_FirstAsListAssignment_1_5_1_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("secondAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("secondAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("secondAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondAsList");
 		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondAsListBKeyword_1_5_1_1_0();
 			return obj;
 		}
@@ -1069,8 +1064,8 @@ protected class Model_SecondAsListAssignment_1_5_1_1 extends AssignmentToken  {
 // "7" (firstAsList+="a"* & secondAsList+="b"+)
 protected class Model_Group_1_6 extends GroupToken {
 	
-	public Model_Group_1_6(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1079,9 +1074,9 @@ protected class Model_Group_1_6 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_1_6_1(parent, this, 0, inst);
+			case 0: return new Model_UnorderedGroup_1_6_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1091,8 +1086,8 @@ protected class Model_Group_1_6 extends GroupToken {
 // "7"
 protected class Model_DigitSevenKeyword_1_6_0 extends KeywordToken  {
 	
-	public Model_DigitSevenKeyword_1_6_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_DigitSevenKeyword_1_6_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1101,9 +1096,9 @@ protected class Model_DigitSevenKeyword_1_6_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
+			case 0: return new Model_ModelAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1113,8 +1108,8 @@ protected class Model_DigitSevenKeyword_1_6_0 extends KeywordToken  {
 // firstAsList+="a"* & secondAsList+="b"+
 protected class Model_UnorderedGroup_1_6_1 extends UnorderedGroupToken {
 	
-	public Model_UnorderedGroup_1_6_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_UnorderedGroup_1_6_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1123,9 +1118,9 @@ protected class Model_UnorderedGroup_1_6_1 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_SecondAsListAssignment_1_6_1_1(parent, this, 0, inst);
+			case 0: return new Model_SecondAsListAssignment_1_6_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1135,8 +1130,8 @@ protected class Model_UnorderedGroup_1_6_1 extends UnorderedGroupToken {
 // firstAsList+="a"*
 protected class Model_FirstAsListAssignment_1_6_1_0 extends AssignmentToken  {
 	
-	public Model_FirstAsListAssignment_1_6_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_FirstAsListAssignment_1_6_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1145,20 +1140,20 @@ protected class Model_FirstAsListAssignment_1_6_1_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_FirstAsListAssignment_1_6_1_0(parent, this, 0, inst);
-			case 1: return new Model_DigitSevenKeyword_1_6_0(parent, this, 1, inst);
+			case 0: return new Model_FirstAsListAssignment_1_6_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_DigitSevenKeyword_1_6_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("firstAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("firstAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("firstAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
 		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAsListAKeyword_1_6_1_0_0();
 			return obj;
 		}
@@ -1170,8 +1165,8 @@ protected class Model_FirstAsListAssignment_1_6_1_0 extends AssignmentToken  {
 // secondAsList+="b"+
 protected class Model_SecondAsListAssignment_1_6_1_1 extends AssignmentToken  {
 	
-	public Model_SecondAsListAssignment_1_6_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SecondAsListAssignment_1_6_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1180,21 +1175,21 @@ protected class Model_SecondAsListAssignment_1_6_1_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_SecondAsListAssignment_1_6_1_1(parent, this, 0, inst);
-			case 1: return new Model_FirstAsListAssignment_1_6_1_0(parent, this, 1, inst);
-			case 2: return new Model_DigitSevenKeyword_1_6_0(parent, this, 2, inst);
+			case 0: return new Model_SecondAsListAssignment_1_6_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_FirstAsListAssignment_1_6_1_0(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Model_DigitSevenKeyword_1_6_0(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("secondAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("secondAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("secondAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondAsList");
 		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondAsListBKeyword_1_6_1_1_0();
 			return obj;
 		}
@@ -1208,8 +1203,8 @@ protected class Model_SecondAsListAssignment_1_6_1_1 extends AssignmentToken  {
 // "8" ("a" "b" first?="c" & "a" "b" second?="d")
 protected class Model_Group_1_7 extends GroupToken {
 	
-	public Model_Group_1_7(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1218,9 +1213,9 @@ protected class Model_Group_1_7 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_1_7_1(parent, this, 0, inst);
+			case 0: return new Model_UnorderedGroup_1_7_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1230,8 +1225,8 @@ protected class Model_Group_1_7 extends GroupToken {
 // "8"
 protected class Model_DigitEightKeyword_1_7_0 extends KeywordToken  {
 	
-	public Model_DigitEightKeyword_1_7_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_DigitEightKeyword_1_7_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1240,9 +1235,9 @@ protected class Model_DigitEightKeyword_1_7_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
+			case 0: return new Model_ModelAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1252,8 +1247,8 @@ protected class Model_DigitEightKeyword_1_7_0 extends KeywordToken  {
 // "a" "b" first?="c" & "a" "b" second?="d"
 protected class Model_UnorderedGroup_1_7_1 extends UnorderedGroupToken {
 	
-	public Model_UnorderedGroup_1_7_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_UnorderedGroup_1_7_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1262,9 +1257,9 @@ protected class Model_UnorderedGroup_1_7_1 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_Group_1_7_1_1(parent, this, 0, inst);
+			case 0: return new Model_Group_1_7_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1274,8 +1269,8 @@ protected class Model_UnorderedGroup_1_7_1 extends UnorderedGroupToken {
 // "a" "b" first?="c"
 protected class Model_Group_1_7_1_0 extends GroupToken {
 	
-	public Model_Group_1_7_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1_7_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1284,9 +1279,9 @@ protected class Model_Group_1_7_1_0 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_FirstAssignment_1_7_1_0_2(parent, this, 0, inst);
+			case 0: return new Model_FirstAssignment_1_7_1_0_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1296,8 +1291,8 @@ protected class Model_Group_1_7_1_0 extends GroupToken {
 // "a"
 protected class Model_AKeyword_1_7_1_0_0 extends KeywordToken  {
 	
-	public Model_AKeyword_1_7_1_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_AKeyword_1_7_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1306,9 +1301,9 @@ protected class Model_AKeyword_1_7_1_0_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_DigitEightKeyword_1_7_0(parent, this, 0, inst);
+			case 0: return new Model_DigitEightKeyword_1_7_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1318,8 +1313,8 @@ protected class Model_AKeyword_1_7_1_0_0 extends KeywordToken  {
 // "b"
 protected class Model_BKeyword_1_7_1_0_1 extends KeywordToken  {
 	
-	public Model_BKeyword_1_7_1_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_BKeyword_1_7_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1328,9 +1323,9 @@ protected class Model_BKeyword_1_7_1_0_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_AKeyword_1_7_1_0_0(parent, this, 0, inst);
+			case 0: return new Model_AKeyword_1_7_1_0_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1340,8 +1335,8 @@ protected class Model_BKeyword_1_7_1_0_1 extends KeywordToken  {
 // first?="c"
 protected class Model_FirstAssignment_1_7_1_0_2 extends AssignmentToken  {
 	
-	public Model_FirstAssignment_1_7_1_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_FirstAssignment_1_7_1_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1350,19 +1345,19 @@ protected class Model_FirstAssignment_1_7_1_0_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_BKeyword_1_7_1_0_1(parent, this, 0, inst);
+			case 0: return new Model_BKeyword_1_7_1_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("first",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("first");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("first",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("first");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstCKeyword_1_7_1_0_2_0();
 			return obj;
 		}
@@ -1375,8 +1370,8 @@ protected class Model_FirstAssignment_1_7_1_0_2 extends AssignmentToken  {
 // "a" "b" second?="d"
 protected class Model_Group_1_7_1_1 extends GroupToken {
 	
-	public Model_Group_1_7_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1_7_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1385,9 +1380,9 @@ protected class Model_Group_1_7_1_1 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_SecondAssignment_1_7_1_1_2(parent, this, 0, inst);
+			case 0: return new Model_SecondAssignment_1_7_1_1_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1397,8 +1392,8 @@ protected class Model_Group_1_7_1_1 extends GroupToken {
 // "a"
 protected class Model_AKeyword_1_7_1_1_0 extends KeywordToken  {
 	
-	public Model_AKeyword_1_7_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_AKeyword_1_7_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1407,9 +1402,9 @@ protected class Model_AKeyword_1_7_1_1_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_Group_1_7_1_0(parent, this, 0, inst);
+			case 0: return new Model_Group_1_7_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1419,8 +1414,8 @@ protected class Model_AKeyword_1_7_1_1_0 extends KeywordToken  {
 // "b"
 protected class Model_BKeyword_1_7_1_1_1 extends KeywordToken  {
 	
-	public Model_BKeyword_1_7_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_BKeyword_1_7_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1429,9 +1424,9 @@ protected class Model_BKeyword_1_7_1_1_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_AKeyword_1_7_1_1_0(parent, this, 0, inst);
+			case 0: return new Model_AKeyword_1_7_1_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1441,8 +1436,8 @@ protected class Model_BKeyword_1_7_1_1_1 extends KeywordToken  {
 // second?="d"
 protected class Model_SecondAssignment_1_7_1_1_2 extends AssignmentToken  {
 	
-	public Model_SecondAssignment_1_7_1_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SecondAssignment_1_7_1_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1451,19 +1446,19 @@ protected class Model_SecondAssignment_1_7_1_1_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_BKeyword_1_7_1_1_1(parent, this, 0, inst);
+			case 0: return new Model_BKeyword_1_7_1_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("second",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("second");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("second",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("second");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondDKeyword_1_7_1_1_2_0();
 			return obj;
 		}
@@ -1478,8 +1473,8 @@ protected class Model_SecondAssignment_1_7_1_1_2 extends AssignmentToken  {
 // "9" (firstAsList+="a" & secondAsList+="b")+
 protected class Model_Group_1_8 extends GroupToken {
 	
-	public Model_Group_1_8(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1488,9 +1483,9 @@ protected class Model_Group_1_8 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_1_8_1(parent, this, 0, inst);
+			case 0: return new Model_UnorderedGroup_1_8_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1500,8 +1495,8 @@ protected class Model_Group_1_8 extends GroupToken {
 // "9"
 protected class Model_DigitNineKeyword_1_8_0 extends KeywordToken  {
 	
-	public Model_DigitNineKeyword_1_8_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_DigitNineKeyword_1_8_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1510,9 +1505,9 @@ protected class Model_DigitNineKeyword_1_8_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
+			case 0: return new Model_ModelAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1522,8 +1517,8 @@ protected class Model_DigitNineKeyword_1_8_0 extends KeywordToken  {
 // (firstAsList+="a" & secondAsList+="b")+
 protected class Model_UnorderedGroup_1_8_1 extends UnorderedGroupToken {
 	
-	public Model_UnorderedGroup_1_8_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_UnorderedGroup_1_8_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1532,9 +1527,9 @@ protected class Model_UnorderedGroup_1_8_1 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_SecondAsListAssignment_1_8_1_1(parent, this, 0, inst);
+			case 0: return new Model_SecondAsListAssignment_1_8_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1544,8 +1539,8 @@ protected class Model_UnorderedGroup_1_8_1 extends UnorderedGroupToken {
 // firstAsList+="a"
 protected class Model_FirstAsListAssignment_1_8_1_0 extends AssignmentToken  {
 	
-	public Model_FirstAsListAssignment_1_8_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_FirstAsListAssignment_1_8_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1554,20 +1549,20 @@ protected class Model_FirstAsListAssignment_1_8_1_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_1_8_1(parent, this, 0, inst);
-			case 1: return new Model_DigitNineKeyword_1_8_0(parent, this, 1, inst);
+			case 0: return new Model_UnorderedGroup_1_8_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_DigitNineKeyword_1_8_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("firstAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("firstAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("firstAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
 		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAsListAKeyword_1_8_1_0_0();
 			return obj;
 		}
@@ -1579,8 +1574,8 @@ protected class Model_FirstAsListAssignment_1_8_1_0 extends AssignmentToken  {
 // secondAsList+="b"
 protected class Model_SecondAsListAssignment_1_8_1_1 extends AssignmentToken  {
 	
-	public Model_SecondAsListAssignment_1_8_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SecondAsListAssignment_1_8_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1589,19 +1584,19 @@ protected class Model_SecondAsListAssignment_1_8_1_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_FirstAsListAssignment_1_8_1_0(parent, this, 0, inst);
+			case 0: return new Model_FirstAsListAssignment_1_8_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("secondAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("secondAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("secondAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondAsList");
 		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondAsListBKeyword_1_8_1_1_0();
 			return obj;
 		}
@@ -1615,8 +1610,8 @@ protected class Model_SecondAsListAssignment_1_8_1_1 extends AssignmentToken  {
 // "10" (firstAsList+="a" & secondAsList+="b")*
 protected class Model_Group_1_9 extends GroupToken {
 	
-	public Model_Group_1_9(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1_9(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1625,10 +1620,10 @@ protected class Model_Group_1_9 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_1_9_1(parent, this, 0, inst);
-			case 1: return new Model_DigitOneDigitZeroKeyword_1_9_0(parent, this, 1, inst);
+			case 0: return new Model_UnorderedGroup_1_9_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_DigitOneDigitZeroKeyword_1_9_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -1638,8 +1633,8 @@ protected class Model_Group_1_9 extends GroupToken {
 // "10"
 protected class Model_DigitOneDigitZeroKeyword_1_9_0 extends KeywordToken  {
 	
-	public Model_DigitOneDigitZeroKeyword_1_9_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_DigitOneDigitZeroKeyword_1_9_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1648,9 +1643,9 @@ protected class Model_DigitOneDigitZeroKeyword_1_9_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
+			case 0: return new Model_ModelAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1660,8 +1655,8 @@ protected class Model_DigitOneDigitZeroKeyword_1_9_0 extends KeywordToken  {
 // (firstAsList+="a" & secondAsList+="b")*
 protected class Model_UnorderedGroup_1_9_1 extends UnorderedGroupToken {
 	
-	public Model_UnorderedGroup_1_9_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_UnorderedGroup_1_9_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1670,9 +1665,9 @@ protected class Model_UnorderedGroup_1_9_1 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_SecondAsListAssignment_1_9_1_1(parent, this, 0, inst);
+			case 0: return new Model_SecondAsListAssignment_1_9_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1682,8 +1677,8 @@ protected class Model_UnorderedGroup_1_9_1 extends UnorderedGroupToken {
 // firstAsList+="a"
 protected class Model_FirstAsListAssignment_1_9_1_0 extends AssignmentToken  {
 	
-	public Model_FirstAsListAssignment_1_9_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_FirstAsListAssignment_1_9_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1692,20 +1687,20 @@ protected class Model_FirstAsListAssignment_1_9_1_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_1_9_1(parent, this, 0, inst);
-			case 1: return new Model_DigitOneDigitZeroKeyword_1_9_0(parent, this, 1, inst);
+			case 0: return new Model_UnorderedGroup_1_9_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_DigitOneDigitZeroKeyword_1_9_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("firstAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("firstAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("firstAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
 		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAsListAKeyword_1_9_1_0_0();
 			return obj;
 		}
@@ -1717,8 +1712,8 @@ protected class Model_FirstAsListAssignment_1_9_1_0 extends AssignmentToken  {
 // secondAsList+="b"
 protected class Model_SecondAsListAssignment_1_9_1_1 extends AssignmentToken  {
 	
-	public Model_SecondAsListAssignment_1_9_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SecondAsListAssignment_1_9_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1727,19 +1722,19 @@ protected class Model_SecondAsListAssignment_1_9_1_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_FirstAsListAssignment_1_9_1_0(parent, this, 0, inst);
+			case 0: return new Model_FirstAsListAssignment_1_9_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("secondAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("secondAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("secondAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondAsList");
 		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondAsListBKeyword_1_9_1_1_0();
 			return obj;
 		}
@@ -1753,8 +1748,8 @@ protected class Model_SecondAsListAssignment_1_9_1_1 extends AssignmentToken  {
 // "11" (first?="a" & second?="b")?
 protected class Model_Group_1_10 extends GroupToken {
 	
-	public Model_Group_1_10(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1_10(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1763,10 +1758,10 @@ protected class Model_Group_1_10 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_1_10_1(parent, this, 0, inst);
-			case 1: return new Model_DigitOneDigitOneKeyword_1_10_0(parent, this, 1, inst);
+			case 0: return new Model_UnorderedGroup_1_10_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_DigitOneDigitOneKeyword_1_10_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -1776,8 +1771,8 @@ protected class Model_Group_1_10 extends GroupToken {
 // "11"
 protected class Model_DigitOneDigitOneKeyword_1_10_0 extends KeywordToken  {
 	
-	public Model_DigitOneDigitOneKeyword_1_10_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_DigitOneDigitOneKeyword_1_10_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1786,9 +1781,9 @@ protected class Model_DigitOneDigitOneKeyword_1_10_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
+			case 0: return new Model_ModelAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1798,8 +1793,8 @@ protected class Model_DigitOneDigitOneKeyword_1_10_0 extends KeywordToken  {
 // (first?="a" & second?="b")?
 protected class Model_UnorderedGroup_1_10_1 extends UnorderedGroupToken {
 	
-	public Model_UnorderedGroup_1_10_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_UnorderedGroup_1_10_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1808,9 +1803,9 @@ protected class Model_UnorderedGroup_1_10_1 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_SecondAssignment_1_10_1_1(parent, this, 0, inst);
+			case 0: return new Model_SecondAssignment_1_10_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1820,8 +1815,8 @@ protected class Model_UnorderedGroup_1_10_1 extends UnorderedGroupToken {
 // first?="a"
 protected class Model_FirstAssignment_1_10_1_0 extends AssignmentToken  {
 	
-	public Model_FirstAssignment_1_10_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_FirstAssignment_1_10_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1830,19 +1825,19 @@ protected class Model_FirstAssignment_1_10_1_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_DigitOneDigitOneKeyword_1_10_0(parent, this, 0, inst);
+			case 0: return new Model_DigitOneDigitOneKeyword_1_10_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("first",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("first");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("first",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("first");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAKeyword_1_10_1_0_0();
 			return obj;
 		}
@@ -1854,8 +1849,8 @@ protected class Model_FirstAssignment_1_10_1_0 extends AssignmentToken  {
 // second?="b"
 protected class Model_SecondAssignment_1_10_1_1 extends AssignmentToken  {
 	
-	public Model_SecondAssignment_1_10_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SecondAssignment_1_10_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1864,19 +1859,19 @@ protected class Model_SecondAssignment_1_10_1_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_FirstAssignment_1_10_1_0(parent, this, 0, inst);
+			case 0: return new Model_FirstAssignment_1_10_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("second",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("second");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("second",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("second");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondBKeyword_1_10_1_1_0();
 			return obj;
 		}
@@ -1891,8 +1886,8 @@ protected class Model_SecondAssignment_1_10_1_1 extends AssignmentToken  {
 // "b")
 protected class Model_Group_1_11 extends GroupToken {
 	
-	public Model_Group_1_11(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1_11(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1901,9 +1896,9 @@ protected class Model_Group_1_11 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_1_11_2(parent, this, 0, inst);
+			case 0: return new Model_UnorderedGroup_1_11_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1913,8 +1908,8 @@ protected class Model_Group_1_11 extends GroupToken {
 // "12"
 protected class Model_DigitOneDigitTwoKeyword_1_11_0 extends KeywordToken  {
 	
-	public Model_DigitOneDigitTwoKeyword_1_11_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_DigitOneDigitTwoKeyword_1_11_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1923,9 +1918,9 @@ protected class Model_DigitOneDigitTwoKeyword_1_11_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
+			case 0: return new Model_ModelAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1935,8 +1930,8 @@ protected class Model_DigitOneDigitTwoKeyword_1_11_0 extends KeywordToken  {
 // firstAsList+="a" & secondAsList+="b"
 protected class Model_UnorderedGroup_1_11_1 extends UnorderedGroupToken {
 	
-	public Model_UnorderedGroup_1_11_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_UnorderedGroup_1_11_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1945,9 +1940,9 @@ protected class Model_UnorderedGroup_1_11_1 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_SecondAsListAssignment_1_11_1_1(parent, this, 0, inst);
+			case 0: return new Model_SecondAsListAssignment_1_11_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1957,8 +1952,8 @@ protected class Model_UnorderedGroup_1_11_1 extends UnorderedGroupToken {
 // firstAsList+="a"
 protected class Model_FirstAsListAssignment_1_11_1_0 extends AssignmentToken  {
 	
-	public Model_FirstAsListAssignment_1_11_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_FirstAsListAssignment_1_11_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1967,19 +1962,19 @@ protected class Model_FirstAsListAssignment_1_11_1_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_DigitOneDigitTwoKeyword_1_11_0(parent, this, 0, inst);
+			case 0: return new Model_DigitOneDigitTwoKeyword_1_11_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("firstAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("firstAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("firstAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
 		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAsListAKeyword_1_11_1_0_0();
 			return obj;
 		}
@@ -1991,8 +1986,8 @@ protected class Model_FirstAsListAssignment_1_11_1_0 extends AssignmentToken  {
 // secondAsList+="b"
 protected class Model_SecondAsListAssignment_1_11_1_1 extends AssignmentToken  {
 	
-	public Model_SecondAsListAssignment_1_11_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SecondAsListAssignment_1_11_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2001,19 +1996,19 @@ protected class Model_SecondAsListAssignment_1_11_1_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_FirstAsListAssignment_1_11_1_0(parent, this, 0, inst);
+			case 0: return new Model_FirstAsListAssignment_1_11_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("secondAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("secondAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("secondAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondAsList");
 		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondAsListBKeyword_1_11_1_1_0();
 			return obj;
 		}
@@ -2026,8 +2021,8 @@ protected class Model_SecondAsListAssignment_1_11_1_1 extends AssignmentToken  {
 // firstAsList+="a" & secondAsList+="b"
 protected class Model_UnorderedGroup_1_11_2 extends UnorderedGroupToken {
 	
-	public Model_UnorderedGroup_1_11_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_UnorderedGroup_1_11_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2036,9 +2031,9 @@ protected class Model_UnorderedGroup_1_11_2 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_SecondAsListAssignment_1_11_2_1(parent, this, 0, inst);
+			case 0: return new Model_SecondAsListAssignment_1_11_2_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2048,8 +2043,8 @@ protected class Model_UnorderedGroup_1_11_2 extends UnorderedGroupToken {
 // firstAsList+="a"
 protected class Model_FirstAsListAssignment_1_11_2_0 extends AssignmentToken  {
 	
-	public Model_FirstAsListAssignment_1_11_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_FirstAsListAssignment_1_11_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2058,19 +2053,19 @@ protected class Model_FirstAsListAssignment_1_11_2_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_1_11_1(parent, this, 0, inst);
+			case 0: return new Model_UnorderedGroup_1_11_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("firstAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("firstAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("firstAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
 		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAsListAKeyword_1_11_2_0_0();
 			return obj;
 		}
@@ -2082,8 +2077,8 @@ protected class Model_FirstAsListAssignment_1_11_2_0 extends AssignmentToken  {
 // secondAsList+="b"
 protected class Model_SecondAsListAssignment_1_11_2_1 extends AssignmentToken  {
 	
-	public Model_SecondAsListAssignment_1_11_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SecondAsListAssignment_1_11_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2092,19 +2087,19 @@ protected class Model_SecondAsListAssignment_1_11_2_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_FirstAsListAssignment_1_11_2_0(parent, this, 0, inst);
+			case 0: return new Model_FirstAsListAssignment_1_11_2_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("secondAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("secondAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("secondAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondAsList");
 		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondAsListBKeyword_1_11_2_1_0();
 			return obj;
 		}
@@ -2118,8 +2113,8 @@ protected class Model_SecondAsListAssignment_1_11_2_1 extends AssignmentToken  {
 // "13" (firstAsList+="a" & secondAsList+="b")? firstAsList+="a" secondAsList+="b"
 protected class Model_Group_1_12 extends GroupToken {
 	
-	public Model_Group_1_12(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1_12(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2128,9 +2123,9 @@ protected class Model_Group_1_12 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_SecondAsListAssignment_1_12_3(parent, this, 0, inst);
+			case 0: return new Model_SecondAsListAssignment_1_12_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2140,8 +2135,8 @@ protected class Model_Group_1_12 extends GroupToken {
 // "13"
 protected class Model_DigitOneDigitThreeKeyword_1_12_0 extends KeywordToken  {
 	
-	public Model_DigitOneDigitThreeKeyword_1_12_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_DigitOneDigitThreeKeyword_1_12_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2150,9 +2145,9 @@ protected class Model_DigitOneDigitThreeKeyword_1_12_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
+			case 0: return new Model_ModelAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2162,8 +2157,8 @@ protected class Model_DigitOneDigitThreeKeyword_1_12_0 extends KeywordToken  {
 // (firstAsList+="a" & secondAsList+="b")?
 protected class Model_UnorderedGroup_1_12_1 extends UnorderedGroupToken {
 	
-	public Model_UnorderedGroup_1_12_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_UnorderedGroup_1_12_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2172,9 +2167,9 @@ protected class Model_UnorderedGroup_1_12_1 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_SecondAsListAssignment_1_12_1_1(parent, this, 0, inst);
+			case 0: return new Model_SecondAsListAssignment_1_12_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2184,8 +2179,8 @@ protected class Model_UnorderedGroup_1_12_1 extends UnorderedGroupToken {
 // firstAsList+="a"
 protected class Model_FirstAsListAssignment_1_12_1_0 extends AssignmentToken  {
 	
-	public Model_FirstAsListAssignment_1_12_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_FirstAsListAssignment_1_12_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2194,19 +2189,19 @@ protected class Model_FirstAsListAssignment_1_12_1_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_DigitOneDigitThreeKeyword_1_12_0(parent, this, 0, inst);
+			case 0: return new Model_DigitOneDigitThreeKeyword_1_12_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("firstAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("firstAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("firstAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
 		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAsListAKeyword_1_12_1_0_0();
 			return obj;
 		}
@@ -2218,8 +2213,8 @@ protected class Model_FirstAsListAssignment_1_12_1_0 extends AssignmentToken  {
 // secondAsList+="b"
 protected class Model_SecondAsListAssignment_1_12_1_1 extends AssignmentToken  {
 	
-	public Model_SecondAsListAssignment_1_12_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SecondAsListAssignment_1_12_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2228,19 +2223,19 @@ protected class Model_SecondAsListAssignment_1_12_1_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_FirstAsListAssignment_1_12_1_0(parent, this, 0, inst);
+			case 0: return new Model_FirstAsListAssignment_1_12_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("secondAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("secondAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("secondAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondAsList");
 		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondAsListBKeyword_1_12_1_1_0();
 			return obj;
 		}
@@ -2253,8 +2248,8 @@ protected class Model_SecondAsListAssignment_1_12_1_1 extends AssignmentToken  {
 // firstAsList+="a"
 protected class Model_FirstAsListAssignment_1_12_2 extends AssignmentToken  {
 	
-	public Model_FirstAsListAssignment_1_12_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_FirstAsListAssignment_1_12_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2263,20 +2258,20 @@ protected class Model_FirstAsListAssignment_1_12_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_1_12_1(parent, this, 0, inst);
-			case 1: return new Model_DigitOneDigitThreeKeyword_1_12_0(parent, this, 1, inst);
+			case 0: return new Model_UnorderedGroup_1_12_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_DigitOneDigitThreeKeyword_1_12_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("firstAsList",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("firstAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("firstAsList",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
 		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAsListAKeyword_1_12_2_0();
 			return obj;
 		}
@@ -2288,8 +2283,8 @@ protected class Model_FirstAsListAssignment_1_12_2 extends AssignmentToken  {
 // secondAsList+="b"
 protected class Model_SecondAsListAssignment_1_12_3 extends AssignmentToken  {
 	
-	public Model_SecondAsListAssignment_1_12_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SecondAsListAssignment_1_12_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2298,19 +2293,19 @@ protected class Model_SecondAsListAssignment_1_12_3 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_FirstAsListAssignment_1_12_2(parent, this, 0, inst);
+			case 0: return new Model_FirstAsListAssignment_1_12_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("secondAsList",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("secondAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("secondAsList",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondAsList");
 		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondAsListBKeyword_1_12_3_0();
 			return obj;
 		}
@@ -2324,8 +2319,8 @@ protected class Model_SecondAsListAssignment_1_12_3 extends AssignmentToken  {
 // "d"))+
 protected class Model_Group_1_13 extends GroupToken {
 	
-	public Model_Group_1_13(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1_13(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2334,9 +2329,9 @@ protected class Model_Group_1_13 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_1_13_1(parent, this, 0, inst);
+			case 0: return new Model_UnorderedGroup_1_13_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2346,8 +2341,8 @@ protected class Model_Group_1_13 extends GroupToken {
 // "14"
 protected class Model_DigitOneDigitFourKeyword_1_13_0 extends KeywordToken  {
 	
-	public Model_DigitOneDigitFourKeyword_1_13_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_DigitOneDigitFourKeyword_1_13_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2356,9 +2351,9 @@ protected class Model_DigitOneDigitFourKeyword_1_13_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
+			case 0: return new Model_ModelAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2369,8 +2364,8 @@ protected class Model_DigitOneDigitFourKeyword_1_13_0 extends KeywordToken  {
 // +
 protected class Model_UnorderedGroup_1_13_1 extends UnorderedGroupToken {
 	
-	public Model_UnorderedGroup_1_13_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_UnorderedGroup_1_13_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2379,9 +2374,9 @@ protected class Model_UnorderedGroup_1_13_1 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_1_13_1_1(parent, this, 0, inst);
+			case 0: return new Model_UnorderedGroup_1_13_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2391,8 +2386,8 @@ protected class Model_UnorderedGroup_1_13_1 extends UnorderedGroupToken {
 // firstAsList+="a" & secondAsList+="b"
 protected class Model_UnorderedGroup_1_13_1_0 extends UnorderedGroupToken {
 	
-	public Model_UnorderedGroup_1_13_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_UnorderedGroup_1_13_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2401,9 +2396,9 @@ protected class Model_UnorderedGroup_1_13_1_0 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_SecondAsListAssignment_1_13_1_0_1(parent, this, 0, inst);
+			case 0: return new Model_SecondAsListAssignment_1_13_1_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2413,8 +2408,8 @@ protected class Model_UnorderedGroup_1_13_1_0 extends UnorderedGroupToken {
 // firstAsList+="a"
 protected class Model_FirstAsListAssignment_1_13_1_0_0 extends AssignmentToken  {
 	
-	public Model_FirstAsListAssignment_1_13_1_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_FirstAsListAssignment_1_13_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2423,20 +2418,20 @@ protected class Model_FirstAsListAssignment_1_13_1_0_0 extends AssignmentToken  
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_1_13_1(parent, this, 0, inst);
-			case 1: return new Model_DigitOneDigitFourKeyword_1_13_0(parent, this, 1, inst);
+			case 0: return new Model_UnorderedGroup_1_13_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_DigitOneDigitFourKeyword_1_13_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("firstAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("firstAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("firstAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
 		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAsListAKeyword_1_13_1_0_0_0();
 			return obj;
 		}
@@ -2448,8 +2443,8 @@ protected class Model_FirstAsListAssignment_1_13_1_0_0 extends AssignmentToken  
 // secondAsList+="b"
 protected class Model_SecondAsListAssignment_1_13_1_0_1 extends AssignmentToken  {
 	
-	public Model_SecondAsListAssignment_1_13_1_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SecondAsListAssignment_1_13_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2458,19 +2453,19 @@ protected class Model_SecondAsListAssignment_1_13_1_0_1 extends AssignmentToken 
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_FirstAsListAssignment_1_13_1_0_0(parent, this, 0, inst);
+			case 0: return new Model_FirstAsListAssignment_1_13_1_0_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("secondAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("secondAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("secondAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondAsList");
 		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondAsListBKeyword_1_13_1_0_1_0();
 			return obj;
 		}
@@ -2483,8 +2478,8 @@ protected class Model_SecondAsListAssignment_1_13_1_0_1 extends AssignmentToken 
 // thirdAsList+="c" & forthAsList+="d"
 protected class Model_UnorderedGroup_1_13_1_1 extends UnorderedGroupToken {
 	
-	public Model_UnorderedGroup_1_13_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_UnorderedGroup_1_13_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2493,9 +2488,9 @@ protected class Model_UnorderedGroup_1_13_1_1 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ForthAsListAssignment_1_13_1_1_1(parent, this, 0, inst);
+			case 0: return new Model_ForthAsListAssignment_1_13_1_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2505,8 +2500,8 @@ protected class Model_UnorderedGroup_1_13_1_1 extends UnorderedGroupToken {
 // thirdAsList+="c"
 protected class Model_ThirdAsListAssignment_1_13_1_1_0 extends AssignmentToken  {
 	
-	public Model_ThirdAsListAssignment_1_13_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_ThirdAsListAssignment_1_13_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2515,19 +2510,19 @@ protected class Model_ThirdAsListAssignment_1_13_1_1_0 extends AssignmentToken  
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_1_13_1_0(parent, this, 0, inst);
+			case 0: return new Model_UnorderedGroup_1_13_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("thirdAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("thirdAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("thirdAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("thirdAsList");
 		if("c".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getThirdAsListCKeyword_1_13_1_1_0_0();
 			return obj;
 		}
@@ -2539,8 +2534,8 @@ protected class Model_ThirdAsListAssignment_1_13_1_1_0 extends AssignmentToken  
 // forthAsList+="d"
 protected class Model_ForthAsListAssignment_1_13_1_1_1 extends AssignmentToken  {
 	
-	public Model_ForthAsListAssignment_1_13_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_ForthAsListAssignment_1_13_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2549,19 +2544,19 @@ protected class Model_ForthAsListAssignment_1_13_1_1_1 extends AssignmentToken  
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ThirdAsListAssignment_1_13_1_1_0(parent, this, 0, inst);
+			case 0: return new Model_ThirdAsListAssignment_1_13_1_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("forthAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("forthAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("forthAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("forthAsList");
 		if("d".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getForthAsListDKeyword_1_13_1_1_1_0();
 			return obj;
 		}
@@ -2576,8 +2571,8 @@ protected class Model_ForthAsListAssignment_1_13_1_1_1 extends AssignmentToken  
 // "datatypes" value=UnorderedDatatype
 protected class Model_Group_1_14 extends GroupToken {
 	
-	public Model_Group_1_14(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1_14(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2586,9 +2581,9 @@ protected class Model_Group_1_14 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ValueAssignment_1_14_1(parent, this, 0, inst);
+			case 0: return new Model_ValueAssignment_1_14_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2598,8 +2593,8 @@ protected class Model_Group_1_14 extends GroupToken {
 // "datatypes"
 protected class Model_DatatypesKeyword_1_14_0 extends KeywordToken  {
 	
-	public Model_DatatypesKeyword_1_14_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_DatatypesKeyword_1_14_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2608,9 +2603,9 @@ protected class Model_DatatypesKeyword_1_14_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
+			case 0: return new Model_ModelAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2620,8 +2615,8 @@ protected class Model_DatatypesKeyword_1_14_0 extends KeywordToken  {
 // value=UnorderedDatatype
 protected class Model_ValueAssignment_1_14_1 extends AssignmentToken  {
 	
-	public Model_ValueAssignment_1_14_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_ValueAssignment_1_14_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2630,19 +2625,19 @@ protected class Model_ValueAssignment_1_14_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_DatatypesKeyword_1_14_0(parent, this, 0, inst);
+			case 0: return new Model_DatatypesKeyword_1_14_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("value",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getModelAccess().getValueUnorderedDatatypeParserRuleCall_1_14_1_0(), value, null)) {
-			type = AssignmentType.DRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getValueUnorderedDatatypeParserRuleCall_1_14_1_0(), value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
 			element = grammarAccess.getModelAccess().getValueUnorderedDatatypeParserRuleCall_1_14_1_0();
 			return obj;
 		}
@@ -2655,8 +2650,8 @@ protected class Model_ValueAssignment_1_14_1 extends AssignmentToken  {
 // "serialization" serialized=UnorderedSerialization
 protected class Model_Group_1_15 extends GroupToken {
 	
-	public Model_Group_1_15(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1_15(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2665,9 +2660,9 @@ protected class Model_Group_1_15 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_SerializedAssignment_1_15_1(parent, this, 0, inst);
+			case 0: return new Model_SerializedAssignment_1_15_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2677,8 +2672,8 @@ protected class Model_Group_1_15 extends GroupToken {
 // "serialization"
 protected class Model_SerializationKeyword_1_15_0 extends KeywordToken  {
 	
-	public Model_SerializationKeyword_1_15_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SerializationKeyword_1_15_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2687,9 +2682,9 @@ protected class Model_SerializationKeyword_1_15_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
+			case 0: return new Model_ModelAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2699,8 +2694,8 @@ protected class Model_SerializationKeyword_1_15_0 extends KeywordToken  {
 // serialized=UnorderedSerialization
 protected class Model_SerializedAssignment_1_15_1 extends AssignmentToken  {
 	
-	public Model_SerializedAssignment_1_15_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_SerializedAssignment_1_15_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2709,7 +2704,7 @@ protected class Model_SerializedAssignment_1_15_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new UnorderedSerialization_Group(this, this, 0, inst);
 			default: return null;
@@ -2717,13 +2712,13 @@ protected class Model_SerializedAssignment_1_15_1 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("serialized",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("serialized");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("serialized",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("serialized");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getUnorderedSerializationRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getModelAccess().getSerializedUnorderedSerializationParserRuleCall_1_15_1_0(); 
 				consumed = obj;
 				return param;
@@ -2733,10 +2728,10 @@ protected class Model_SerializedAssignment_1_15_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Model_SerializationKeyword_1_15_0(parent, next, actIndex, consumed);
+			case 0: return new Model_SerializationKeyword_1_15_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2746,8 +2741,8 @@ protected class Model_SerializedAssignment_1_15_1 extends AssignmentToken  {
 // "bug302585" nestedModel+=NestedModel*
 protected class Model_Group_1_16 extends GroupToken {
 	
-	public Model_Group_1_16(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Group_1_16(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2756,10 +2751,10 @@ protected class Model_Group_1_16 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_NestedModelAssignment_1_16_1(parent, this, 0, inst);
-			case 1: return new Model_Bug302585Keyword_1_16_0(parent, this, 1, inst);
+			case 0: return new Model_NestedModelAssignment_1_16_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_Bug302585Keyword_1_16_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -2769,8 +2764,8 @@ protected class Model_Group_1_16 extends GroupToken {
 // "bug302585"
 protected class Model_Bug302585Keyword_1_16_0 extends KeywordToken  {
 	
-	public Model_Bug302585Keyword_1_16_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Bug302585Keyword_1_16_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2779,9 +2774,9 @@ protected class Model_Bug302585Keyword_1_16_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
+			case 0: return new Model_ModelAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2791,8 +2786,8 @@ protected class Model_Bug302585Keyword_1_16_0 extends KeywordToken  {
 // nestedModel+=NestedModel*
 protected class Model_NestedModelAssignment_1_16_1 extends AssignmentToken  {
 	
-	public Model_NestedModelAssignment_1_16_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_NestedModelAssignment_1_16_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2801,7 +2796,7 @@ protected class Model_NestedModelAssignment_1_16_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new NestedModel_Group(this, this, 0, inst);
 			default: return null;
@@ -2809,13 +2804,13 @@ protected class Model_NestedModelAssignment_1_16_1 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("nestedModel",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("nestedModel");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("nestedModel",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("nestedModel");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getNestedModelRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getModelAccess().getNestedModelNestedModelParserRuleCall_1_16_1_0(); 
 				consumed = obj;
 				return param;
@@ -2825,11 +2820,11 @@ protected class Model_NestedModelAssignment_1_16_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Model_NestedModelAssignment_1_16_1(parent, next, actIndex, consumed);
-			case 1: return new Model_Bug302585Keyword_1_16_0(parent, next, actIndex, consumed);
+			case 0: return new Model_NestedModelAssignment_1_16_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Model_Bug302585Keyword_1_16_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2851,8 +2846,8 @@ protected class Model_NestedModelAssignment_1_16_1 extends AssignmentToken  {
 // {NestedModel} (first?="a" & second?="b")? "nested"
 protected class NestedModel_Group extends GroupToken {
 	
-	public NestedModel_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public NestedModel_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2861,18 +2856,18 @@ protected class NestedModel_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new NestedModel_NestedKeyword_2(parent, this, 0, inst);
+			case 0: return new NestedModel_NestedKeyword_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getNestedModelAccess().getNestedModelAction_0().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getNestedModelAccess().getNestedModelAction_0().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -2880,8 +2875,8 @@ protected class NestedModel_Group extends GroupToken {
 // {NestedModel}
 protected class NestedModel_NestedModelAction_0 extends ActionToken  {
 
-	public NestedModel_NestedModelAction_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public NestedModel_NestedModelAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2890,24 +2885,24 @@ protected class NestedModel_NestedModelAction_0 extends ActionToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isConsumed()) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
 	}
 }
 
 // (first?="a" & second?="b")?
 protected class NestedModel_UnorderedGroup_1 extends UnorderedGroupToken {
 	
-	public NestedModel_UnorderedGroup_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public NestedModel_UnorderedGroup_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2916,9 +2911,9 @@ protected class NestedModel_UnorderedGroup_1 extends UnorderedGroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new NestedModel_SecondAssignment_1_1(parent, this, 0, inst);
+			case 0: return new NestedModel_SecondAssignment_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2928,8 +2923,8 @@ protected class NestedModel_UnorderedGroup_1 extends UnorderedGroupToken {
 // first?="a"
 protected class NestedModel_FirstAssignment_1_0 extends AssignmentToken  {
 	
-	public NestedModel_FirstAssignment_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public NestedModel_FirstAssignment_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2938,19 +2933,19 @@ protected class NestedModel_FirstAssignment_1_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new NestedModel_NestedModelAction_0(parent, this, 0, inst);
+			case 0: return new NestedModel_NestedModelAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("first",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("first");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("first",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("first");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getNestedModelAccess().getFirstAKeyword_1_0_0();
 			return obj;
 		}
@@ -2962,8 +2957,8 @@ protected class NestedModel_FirstAssignment_1_0 extends AssignmentToken  {
 // second?="b"
 protected class NestedModel_SecondAssignment_1_1 extends AssignmentToken  {
 	
-	public NestedModel_SecondAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public NestedModel_SecondAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -2972,19 +2967,19 @@ protected class NestedModel_SecondAssignment_1_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new NestedModel_FirstAssignment_1_0(parent, this, 0, inst);
+			case 0: return new NestedModel_FirstAssignment_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("second",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("second");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("second",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("second");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getNestedModelAccess().getSecondBKeyword_1_1_0();
 			return obj;
 		}
@@ -2997,8 +2992,8 @@ protected class NestedModel_SecondAssignment_1_1 extends AssignmentToken  {
 // "nested"
 protected class NestedModel_NestedKeyword_2 extends KeywordToken  {
 	
-	public NestedModel_NestedKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public NestedModel_NestedKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3007,10 +3002,10 @@ protected class NestedModel_NestedKeyword_2 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new NestedModel_UnorderedGroup_1(parent, this, 0, inst);
-			case 1: return new NestedModel_NestedModelAction_0(parent, this, 1, inst);
+			case 0: return new NestedModel_UnorderedGroup_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new NestedModel_NestedModelAction_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -3036,8 +3031,8 @@ protected class NestedModel_NestedKeyword_2 extends KeywordToken  {
 // second?="b")*)
 protected class UnorderedSerialization_Group extends GroupToken {
 	
-	public UnorderedSerialization_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public UnorderedSerialization_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3046,18 +3041,18 @@ protected class UnorderedSerialization_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnorderedSerialization_Alternatives_1(parent, this, 0, inst);
+			case 0: return new UnorderedSerialization_Alternatives_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getUnorderedSerializationAccess().getUnorderedSerializationAction_0().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getUnorderedSerializationAccess().getUnorderedSerializationAction_0().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -3065,8 +3060,8 @@ protected class UnorderedSerialization_Group extends GroupToken {
 // {UnorderedSerialization}
 protected class UnorderedSerialization_UnorderedSerializationAction_0 extends ActionToken  {
 
-	public UnorderedSerialization_UnorderedSerializationAction_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public UnorderedSerialization_UnorderedSerializationAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3075,16 +3070,16 @@ protected class UnorderedSerialization_UnorderedSerializationAction_0 extends Ac
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isConsumed()) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
 	}
 }
 
@@ -3092,8 +3087,8 @@ protected class UnorderedSerialization_UnorderedSerializationAction_0 extends Ac
 // & secondAsList+="b")*|"3" (firstAsList+="a"+ & second?="b")*
 protected class UnorderedSerialization_Alternatives_1 extends AlternativesToken {
 
-	public UnorderedSerialization_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public UnorderedSerialization_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3102,11 +3097,11 @@ protected class UnorderedSerialization_Alternatives_1 extends AlternativesToken 
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnorderedSerialization_UnorderedGroup_1_0(parent, this, 0, inst);
-			case 1: return new UnorderedSerialization_Group_1_1(parent, this, 1, inst);
-			case 2: return new UnorderedSerialization_Group_1_2(parent, this, 2, inst);
+			case 0: return new UnorderedSerialization_UnorderedGroup_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new UnorderedSerialization_Group_1_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new UnorderedSerialization_Group_1_2(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
@@ -3116,8 +3111,8 @@ protected class UnorderedSerialization_Alternatives_1 extends AlternativesToken 
 // "1" first?="a"? & second?="b"? & third?="c"? & forth?="d"?
 protected class UnorderedSerialization_UnorderedGroup_1_0 extends UnorderedGroupToken {
 	
-	public UnorderedSerialization_UnorderedGroup_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public UnorderedSerialization_UnorderedGroup_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3126,12 +3121,12 @@ protected class UnorderedSerialization_UnorderedGroup_1_0 extends UnorderedGroup
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnorderedSerialization_ForthAssignment_1_0_3(parent, this, 0, inst);
-			case 1: return new UnorderedSerialization_ThirdAssignment_1_0_2(parent, this, 1, inst);
-			case 2: return new UnorderedSerialization_SecondAssignment_1_0_1(parent, this, 2, inst);
-			case 3: return new UnorderedSerialization_Group_1_0_0(parent, this, 3, inst);
+			case 0: return new UnorderedSerialization_ForthAssignment_1_0_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new UnorderedSerialization_ThirdAssignment_1_0_2(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new UnorderedSerialization_SecondAssignment_1_0_1(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new UnorderedSerialization_Group_1_0_0(lastRuleCallOrigin, this, 3, inst);
 			default: return null;
 		}	
 	}
@@ -3141,8 +3136,8 @@ protected class UnorderedSerialization_UnorderedGroup_1_0 extends UnorderedGroup
 // "1" first?="a"?
 protected class UnorderedSerialization_Group_1_0_0 extends GroupToken {
 	
-	public UnorderedSerialization_Group_1_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public UnorderedSerialization_Group_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3151,10 +3146,10 @@ protected class UnorderedSerialization_Group_1_0_0 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnorderedSerialization_FirstAssignment_1_0_0_1(parent, this, 0, inst);
-			case 1: return new UnorderedSerialization_DigitOneKeyword_1_0_0_0(parent, this, 1, inst);
+			case 0: return new UnorderedSerialization_FirstAssignment_1_0_0_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new UnorderedSerialization_DigitOneKeyword_1_0_0_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -3164,8 +3159,8 @@ protected class UnorderedSerialization_Group_1_0_0 extends GroupToken {
 // "1"
 protected class UnorderedSerialization_DigitOneKeyword_1_0_0_0 extends KeywordToken  {
 	
-	public UnorderedSerialization_DigitOneKeyword_1_0_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public UnorderedSerialization_DigitOneKeyword_1_0_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3174,9 +3169,9 @@ protected class UnorderedSerialization_DigitOneKeyword_1_0_0_0 extends KeywordTo
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnorderedSerialization_UnorderedSerializationAction_0(parent, this, 0, inst);
+			case 0: return new UnorderedSerialization_UnorderedSerializationAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3186,8 +3181,8 @@ protected class UnorderedSerialization_DigitOneKeyword_1_0_0_0 extends KeywordTo
 // first?="a"?
 protected class UnorderedSerialization_FirstAssignment_1_0_0_1 extends AssignmentToken  {
 	
-	public UnorderedSerialization_FirstAssignment_1_0_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public UnorderedSerialization_FirstAssignment_1_0_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3196,19 +3191,19 @@ protected class UnorderedSerialization_FirstAssignment_1_0_0_1 extends Assignmen
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnorderedSerialization_DigitOneKeyword_1_0_0_0(parent, this, 0, inst);
+			case 0: return new UnorderedSerialization_DigitOneKeyword_1_0_0_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("first",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("first");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("first",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("first");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getUnorderedSerializationAccess().getFirstAKeyword_1_0_0_1_0();
 			return obj;
 		}
@@ -3221,8 +3216,8 @@ protected class UnorderedSerialization_FirstAssignment_1_0_0_1 extends Assignmen
 // second?="b"?
 protected class UnorderedSerialization_SecondAssignment_1_0_1 extends AssignmentToken  {
 	
-	public UnorderedSerialization_SecondAssignment_1_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public UnorderedSerialization_SecondAssignment_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3231,19 +3226,19 @@ protected class UnorderedSerialization_SecondAssignment_1_0_1 extends Assignment
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnorderedSerialization_Group_1_0_0(parent, this, 0, inst);
+			case 0: return new UnorderedSerialization_Group_1_0_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("second",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("second");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("second",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("second");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getUnorderedSerializationAccess().getSecondBKeyword_1_0_1_0();
 			return obj;
 		}
@@ -3255,8 +3250,8 @@ protected class UnorderedSerialization_SecondAssignment_1_0_1 extends Assignment
 // third?="c"?
 protected class UnorderedSerialization_ThirdAssignment_1_0_2 extends AssignmentToken  {
 	
-	public UnorderedSerialization_ThirdAssignment_1_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public UnorderedSerialization_ThirdAssignment_1_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3265,20 +3260,20 @@ protected class UnorderedSerialization_ThirdAssignment_1_0_2 extends AssignmentT
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnorderedSerialization_SecondAssignment_1_0_1(parent, this, 0, inst);
-			case 1: return new UnorderedSerialization_Group_1_0_0(parent, this, 1, inst);
+			case 0: return new UnorderedSerialization_SecondAssignment_1_0_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new UnorderedSerialization_Group_1_0_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("third",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("third");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("third",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("third");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getUnorderedSerializationAccess().getThirdCKeyword_1_0_2_0();
 			return obj;
 		}
@@ -3290,8 +3285,8 @@ protected class UnorderedSerialization_ThirdAssignment_1_0_2 extends AssignmentT
 // forth?="d"?
 protected class UnorderedSerialization_ForthAssignment_1_0_3 extends AssignmentToken  {
 	
-	public UnorderedSerialization_ForthAssignment_1_0_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public UnorderedSerialization_ForthAssignment_1_0_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3300,21 +3295,21 @@ protected class UnorderedSerialization_ForthAssignment_1_0_3 extends AssignmentT
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnorderedSerialization_ThirdAssignment_1_0_2(parent, this, 0, inst);
-			case 1: return new UnorderedSerialization_SecondAssignment_1_0_1(parent, this, 1, inst);
-			case 2: return new UnorderedSerialization_Group_1_0_0(parent, this, 2, inst);
+			case 0: return new UnorderedSerialization_ThirdAssignment_1_0_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new UnorderedSerialization_SecondAssignment_1_0_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new UnorderedSerialization_Group_1_0_0(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("forth",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("forth");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("forth",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("forth");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getUnorderedSerializationAccess().getForthDKeyword_1_0_3_0();
 			return obj;
 		}
@@ -3327,8 +3322,8 @@ protected class UnorderedSerialization_ForthAssignment_1_0_3 extends AssignmentT
 // "2" (firstAsList+="a" & secondAsList+="b")*
 protected class UnorderedSerialization_Group_1_1 extends GroupToken {
 	
-	public UnorderedSerialization_Group_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public UnorderedSerialization_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3337,10 +3332,10 @@ protected class UnorderedSerialization_Group_1_1 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnorderedSerialization_UnorderedGroup_1_1_1(parent, this, 0, inst);
-			case 1: return new UnorderedSerialization_DigitTwoKeyword_1_1_0(parent, this, 1, inst);
+			case 0: return new UnorderedSerialization_UnorderedGroup_1_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new UnorderedSerialization_DigitTwoKeyword_1_1_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -3350,8 +3345,8 @@ protected class UnorderedSerialization_Group_1_1 extends GroupToken {
 // "2"
 protected class UnorderedSerialization_DigitTwoKeyword_1_1_0 extends KeywordToken  {
 	
-	public UnorderedSerialization_DigitTwoKeyword_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public UnorderedSerialization_DigitTwoKeyword_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3360,9 +3355,9 @@ protected class UnorderedSerialization_DigitTwoKeyword_1_1_0 extends KeywordToke
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnorderedSerialization_UnorderedSerializationAction_0(parent, this, 0, inst);
+			case 0: return new UnorderedSerialization_UnorderedSerializationAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3372,8 +3367,8 @@ protected class UnorderedSerialization_DigitTwoKeyword_1_1_0 extends KeywordToke
 // (firstAsList+="a" & secondAsList+="b")*
 protected class UnorderedSerialization_UnorderedGroup_1_1_1 extends UnorderedGroupToken {
 	
-	public UnorderedSerialization_UnorderedGroup_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public UnorderedSerialization_UnorderedGroup_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3382,9 +3377,9 @@ protected class UnorderedSerialization_UnorderedGroup_1_1_1 extends UnorderedGro
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnorderedSerialization_SecondAsListAssignment_1_1_1_1(parent, this, 0, inst);
+			case 0: return new UnorderedSerialization_SecondAsListAssignment_1_1_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3394,8 +3389,8 @@ protected class UnorderedSerialization_UnorderedGroup_1_1_1 extends UnorderedGro
 // firstAsList+="a"
 protected class UnorderedSerialization_FirstAsListAssignment_1_1_1_0 extends AssignmentToken  {
 	
-	public UnorderedSerialization_FirstAsListAssignment_1_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public UnorderedSerialization_FirstAsListAssignment_1_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3404,20 +3399,20 @@ protected class UnorderedSerialization_FirstAsListAssignment_1_1_1_0 extends Ass
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnorderedSerialization_UnorderedGroup_1_1_1(parent, this, 0, inst);
-			case 1: return new UnorderedSerialization_DigitTwoKeyword_1_1_0(parent, this, 1, inst);
+			case 0: return new UnorderedSerialization_UnorderedGroup_1_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new UnorderedSerialization_DigitTwoKeyword_1_1_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("firstAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("firstAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("firstAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
 		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getUnorderedSerializationAccess().getFirstAsListAKeyword_1_1_1_0_0();
 			return obj;
 		}
@@ -3429,8 +3424,8 @@ protected class UnorderedSerialization_FirstAsListAssignment_1_1_1_0 extends Ass
 // secondAsList+="b"
 protected class UnorderedSerialization_SecondAsListAssignment_1_1_1_1 extends AssignmentToken  {
 	
-	public UnorderedSerialization_SecondAsListAssignment_1_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public UnorderedSerialization_SecondAsListAssignment_1_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3439,19 +3434,19 @@ protected class UnorderedSerialization_SecondAsListAssignment_1_1_1_1 extends As
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnorderedSerialization_FirstAsListAssignment_1_1_1_0(parent, this, 0, inst);
+			case 0: return new UnorderedSerialization_FirstAsListAssignment_1_1_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("secondAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("secondAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("secondAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondAsList");
 		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getUnorderedSerializationAccess().getSecondAsListBKeyword_1_1_1_1_0();
 			return obj;
 		}
@@ -3465,8 +3460,8 @@ protected class UnorderedSerialization_SecondAsListAssignment_1_1_1_1 extends As
 // "3" (firstAsList+="a"+ & second?="b")*
 protected class UnorderedSerialization_Group_1_2 extends GroupToken {
 	
-	public UnorderedSerialization_Group_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public UnorderedSerialization_Group_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3475,10 +3470,10 @@ protected class UnorderedSerialization_Group_1_2 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnorderedSerialization_UnorderedGroup_1_2_1(parent, this, 0, inst);
-			case 1: return new UnorderedSerialization_DigitThreeKeyword_1_2_0(parent, this, 1, inst);
+			case 0: return new UnorderedSerialization_UnorderedGroup_1_2_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new UnorderedSerialization_DigitThreeKeyword_1_2_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -3488,8 +3483,8 @@ protected class UnorderedSerialization_Group_1_2 extends GroupToken {
 // "3"
 protected class UnorderedSerialization_DigitThreeKeyword_1_2_0 extends KeywordToken  {
 	
-	public UnorderedSerialization_DigitThreeKeyword_1_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public UnorderedSerialization_DigitThreeKeyword_1_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3498,9 +3493,9 @@ protected class UnorderedSerialization_DigitThreeKeyword_1_2_0 extends KeywordTo
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnorderedSerialization_UnorderedSerializationAction_0(parent, this, 0, inst);
+			case 0: return new UnorderedSerialization_UnorderedSerializationAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3510,8 +3505,8 @@ protected class UnorderedSerialization_DigitThreeKeyword_1_2_0 extends KeywordTo
 // (firstAsList+="a"+ & second?="b")*
 protected class UnorderedSerialization_UnorderedGroup_1_2_1 extends UnorderedGroupToken {
 	
-	public UnorderedSerialization_UnorderedGroup_1_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public UnorderedSerialization_UnorderedGroup_1_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3520,9 +3515,9 @@ protected class UnorderedSerialization_UnorderedGroup_1_2_1 extends UnorderedGro
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnorderedSerialization_SecondAssignment_1_2_1_1(parent, this, 0, inst);
+			case 0: return new UnorderedSerialization_SecondAssignment_1_2_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3532,8 +3527,8 @@ protected class UnorderedSerialization_UnorderedGroup_1_2_1 extends UnorderedGro
 // firstAsList+="a"+
 protected class UnorderedSerialization_FirstAsListAssignment_1_2_1_0 extends AssignmentToken  {
 	
-	public UnorderedSerialization_FirstAsListAssignment_1_2_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public UnorderedSerialization_FirstAsListAssignment_1_2_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3542,21 +3537,21 @@ protected class UnorderedSerialization_FirstAsListAssignment_1_2_1_0 extends Ass
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnorderedSerialization_FirstAsListAssignment_1_2_1_0(parent, this, 0, inst);
-			case 1: return new UnorderedSerialization_UnorderedGroup_1_2_1(parent, this, 1, inst);
-			case 2: return new UnorderedSerialization_DigitThreeKeyword_1_2_0(parent, this, 2, inst);
+			case 0: return new UnorderedSerialization_FirstAsListAssignment_1_2_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new UnorderedSerialization_UnorderedGroup_1_2_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new UnorderedSerialization_DigitThreeKeyword_1_2_0(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("firstAsList",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("firstAsList");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("firstAsList",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
 		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getUnorderedSerializationAccess().getFirstAsListAKeyword_1_2_1_0_0();
 			return obj;
 		}
@@ -3568,8 +3563,8 @@ protected class UnorderedSerialization_FirstAsListAssignment_1_2_1_0 extends Ass
 // second?="b"
 protected class UnorderedSerialization_SecondAssignment_1_2_1_1 extends AssignmentToken  {
 	
-	public UnorderedSerialization_SecondAssignment_1_2_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public UnorderedSerialization_SecondAssignment_1_2_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -3578,19 +3573,19 @@ protected class UnorderedSerialization_SecondAssignment_1_2_1_1 extends Assignme
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnorderedSerialization_FirstAsListAssignment_1_2_1_0(parent, this, 0, inst);
+			case 0: return new UnorderedSerialization_FirstAsListAssignment_1_2_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("second",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("second");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("second",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("second");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getUnorderedSerializationAccess().getSecondBKeyword_1_2_1_1_0();
 			return obj;
 		}

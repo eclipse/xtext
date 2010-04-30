@@ -5,7 +5,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.ContentAssistContextTestLanguageGrammarAccess;
@@ -17,23 +17,18 @@ public class ContentAssistContextTestLanguageParsetreeConstructor extends Abstra
 	@Inject
 	private ContentAssistContextTestLanguageGrammarAccess grammarAccess;
 	
-	@Override	
-	public ContentAssistContextTestLanguageGrammarAccess getGrammarAccess() {
-		return grammarAccess;
-	}
-
 	@Override
-	protected AbstractToken getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IEObjectConsumer inst) {
 		return new ThisRootNode(inst);	
 	}
 	
 protected class ThisRootNode extends RootToken {
-	public ThisRootNode(IInstanceDescription inst) {
+	public ThisRootNode(IEObjectConsumer inst) {
 		super(inst);
 	}
 	
 	@Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new FirstLevel_Group(this, this, 0, inst);
 			case 1: return new SecondLevelA_Group(this, this, 1, inst);
@@ -58,8 +53,8 @@ protected class ThisRootNode extends RootToken {
 // secondLevelA+=SecondLevelA* secondLevelB+=SecondLevelB*
 protected class FirstLevel_Group extends GroupToken {
 	
-	public FirstLevel_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public FirstLevel_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -68,19 +63,19 @@ protected class FirstLevel_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new FirstLevel_SecondLevelBAssignment_1(parent, this, 0, inst);
-			case 1: return new FirstLevel_SecondLevelAAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index, index - 2, inst);
+			case 0: return new FirstLevel_SecondLevelBAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new FirstLevel_SecondLevelAAssignment_0(lastRuleCallOrigin, this, 1, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 2, inst);
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getFirstLevelRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getFirstLevelRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -88,8 +83,8 @@ protected class FirstLevel_Group extends GroupToken {
 // secondLevelA+=SecondLevelA*
 protected class FirstLevel_SecondLevelAAssignment_0 extends AssignmentToken  {
 	
-	public FirstLevel_SecondLevelAAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public FirstLevel_SecondLevelAAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -98,7 +93,7 @@ protected class FirstLevel_SecondLevelAAssignment_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new SecondLevelA_Group(this, this, 0, inst);
 			default: return null;
@@ -106,13 +101,13 @@ protected class FirstLevel_SecondLevelAAssignment_0 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("secondLevelA",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("secondLevelA");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("secondLevelA",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondLevelA");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getSecondLevelARule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getFirstLevelAccess().getSecondLevelASecondLevelAParserRuleCall_0_0(); 
 				consumed = obj;
 				return param;
@@ -122,11 +117,11 @@ protected class FirstLevel_SecondLevelAAssignment_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new FirstLevel_SecondLevelAAssignment_0(parent, next, actIndex, consumed);
-			default: return parent.createParentFollower(next, actIndex , index - 1, consumed);
+			case 0: return new FirstLevel_SecondLevelAAssignment_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -134,8 +129,8 @@ protected class FirstLevel_SecondLevelAAssignment_0 extends AssignmentToken  {
 // secondLevelB+=SecondLevelB*
 protected class FirstLevel_SecondLevelBAssignment_1 extends AssignmentToken  {
 	
-	public FirstLevel_SecondLevelBAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public FirstLevel_SecondLevelBAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -144,7 +139,7 @@ protected class FirstLevel_SecondLevelBAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new SecondLevelB_Group(this, this, 0, inst);
 			default: return null;
@@ -152,13 +147,13 @@ protected class FirstLevel_SecondLevelBAssignment_1 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("secondLevelB",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("secondLevelB");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("secondLevelB",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondLevelB");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getSecondLevelBRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getFirstLevelAccess().getSecondLevelBSecondLevelBParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
@@ -168,12 +163,12 @@ protected class FirstLevel_SecondLevelBAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new FirstLevel_SecondLevelBAssignment_1(parent, next, actIndex, consumed);
-			case 1: return new FirstLevel_SecondLevelAAssignment_0(parent, next, actIndex, consumed);
-			default: return parent.createParentFollower(next, actIndex , index - 2, consumed);
+			case 0: return new FirstLevel_SecondLevelBAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new FirstLevel_SecondLevelAAssignment_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 2, consumed);
 		}	
 	}	
 }
@@ -192,8 +187,8 @@ protected class FirstLevel_SecondLevelBAssignment_1 extends AssignmentToken  {
 // thirdLevelA1+=ThirdLevelA1+ thirdLevelA2+=ThirdLevelA2+
 protected class SecondLevelA_Group extends GroupToken {
 	
-	public SecondLevelA_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public SecondLevelA_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -202,18 +197,18 @@ protected class SecondLevelA_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new SecondLevelA_ThirdLevelA2Assignment_1(parent, this, 0, inst);
+			case 0: return new SecondLevelA_ThirdLevelA2Assignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getSecondLevelARule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getSecondLevelARule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -221,8 +216,8 @@ protected class SecondLevelA_Group extends GroupToken {
 // thirdLevelA1+=ThirdLevelA1+
 protected class SecondLevelA_ThirdLevelA1Assignment_0 extends AssignmentToken  {
 	
-	public SecondLevelA_ThirdLevelA1Assignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public SecondLevelA_ThirdLevelA1Assignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -231,7 +226,7 @@ protected class SecondLevelA_ThirdLevelA1Assignment_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new ThirdLevelA1_Group(this, this, 0, inst);
 			default: return null;
@@ -239,13 +234,13 @@ protected class SecondLevelA_ThirdLevelA1Assignment_0 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("thirdLevelA1",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("thirdLevelA1");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("thirdLevelA1",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("thirdLevelA1");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getThirdLevelA1Rule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getSecondLevelAAccess().getThirdLevelA1ThirdLevelA1ParserRuleCall_0_0(); 
 				consumed = obj;
 				return param;
@@ -255,11 +250,11 @@ protected class SecondLevelA_ThirdLevelA1Assignment_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new SecondLevelA_ThirdLevelA1Assignment_0(parent, next, actIndex, consumed);
-			default: return parent.createParentFollower(next, actIndex , index - 1, consumed);
+			case 0: return new SecondLevelA_ThirdLevelA1Assignment_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -267,8 +262,8 @@ protected class SecondLevelA_ThirdLevelA1Assignment_0 extends AssignmentToken  {
 // thirdLevelA2+=ThirdLevelA2+
 protected class SecondLevelA_ThirdLevelA2Assignment_1 extends AssignmentToken  {
 	
-	public SecondLevelA_ThirdLevelA2Assignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public SecondLevelA_ThirdLevelA2Assignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -277,7 +272,7 @@ protected class SecondLevelA_ThirdLevelA2Assignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new ThirdLevelA2_Group(this, this, 0, inst);
 			default: return null;
@@ -285,13 +280,13 @@ protected class SecondLevelA_ThirdLevelA2Assignment_1 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("thirdLevelA2",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("thirdLevelA2");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("thirdLevelA2",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("thirdLevelA2");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getThirdLevelA2Rule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getSecondLevelAAccess().getThirdLevelA2ThirdLevelA2ParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
@@ -301,11 +296,11 @@ protected class SecondLevelA_ThirdLevelA2Assignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new SecondLevelA_ThirdLevelA2Assignment_1(parent, next, actIndex, consumed);
-			case 1: return new SecondLevelA_ThirdLevelA1Assignment_0(parent, next, actIndex, consumed);
+			case 0: return new SecondLevelA_ThirdLevelA2Assignment_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new SecondLevelA_ThirdLevelA1Assignment_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -325,8 +320,8 @@ protected class SecondLevelA_ThirdLevelA2Assignment_1 extends AssignmentToken  {
 // thirdLevelB1+=ThirdLevelB1+ thirdLevelB2+=ThirdLevelB2+
 protected class SecondLevelB_Group extends GroupToken {
 	
-	public SecondLevelB_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public SecondLevelB_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -335,18 +330,18 @@ protected class SecondLevelB_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new SecondLevelB_ThirdLevelB2Assignment_1(parent, this, 0, inst);
+			case 0: return new SecondLevelB_ThirdLevelB2Assignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getSecondLevelBRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getSecondLevelBRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -354,8 +349,8 @@ protected class SecondLevelB_Group extends GroupToken {
 // thirdLevelB1+=ThirdLevelB1+
 protected class SecondLevelB_ThirdLevelB1Assignment_0 extends AssignmentToken  {
 	
-	public SecondLevelB_ThirdLevelB1Assignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public SecondLevelB_ThirdLevelB1Assignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -364,7 +359,7 @@ protected class SecondLevelB_ThirdLevelB1Assignment_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new ThirdLevelB1_Group(this, this, 0, inst);
 			default: return null;
@@ -372,13 +367,13 @@ protected class SecondLevelB_ThirdLevelB1Assignment_0 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("thirdLevelB1",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("thirdLevelB1");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("thirdLevelB1",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("thirdLevelB1");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getThirdLevelB1Rule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getSecondLevelBAccess().getThirdLevelB1ThirdLevelB1ParserRuleCall_0_0(); 
 				consumed = obj;
 				return param;
@@ -388,11 +383,11 @@ protected class SecondLevelB_ThirdLevelB1Assignment_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new SecondLevelB_ThirdLevelB1Assignment_0(parent, next, actIndex, consumed);
-			default: return parent.createParentFollower(next, actIndex , index - 1, consumed);
+			case 0: return new SecondLevelB_ThirdLevelB1Assignment_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -400,8 +395,8 @@ protected class SecondLevelB_ThirdLevelB1Assignment_0 extends AssignmentToken  {
 // thirdLevelB2+=ThirdLevelB2+
 protected class SecondLevelB_ThirdLevelB2Assignment_1 extends AssignmentToken  {
 	
-	public SecondLevelB_ThirdLevelB2Assignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public SecondLevelB_ThirdLevelB2Assignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -410,7 +405,7 @@ protected class SecondLevelB_ThirdLevelB2Assignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new ThirdLevelB2_Group(this, this, 0, inst);
 			default: return null;
@@ -418,13 +413,13 @@ protected class SecondLevelB_ThirdLevelB2Assignment_1 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("thirdLevelB2",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("thirdLevelB2");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("thirdLevelB2",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("thirdLevelB2");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getThirdLevelB2Rule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getSecondLevelBAccess().getThirdLevelB2ThirdLevelB2ParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
@@ -434,11 +429,11 @@ protected class SecondLevelB_ThirdLevelB2Assignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new SecondLevelB_ThirdLevelB2Assignment_1(parent, next, actIndex, consumed);
-			case 1: return new SecondLevelB_ThirdLevelB1Assignment_0(parent, next, actIndex, consumed);
+			case 0: return new SecondLevelB_ThirdLevelB2Assignment_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new SecondLevelB_ThirdLevelB1Assignment_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -458,8 +453,8 @@ protected class SecondLevelB_ThirdLevelB2Assignment_1 extends AssignmentToken  {
 // "A1" {ThirdLevelA1} name=ID?
 protected class ThirdLevelA1_Group extends GroupToken {
 	
-	public ThirdLevelA1_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ThirdLevelA1_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -468,19 +463,19 @@ protected class ThirdLevelA1_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ThirdLevelA1_NameAssignment_2(parent, this, 0, inst);
-			case 1: return new ThirdLevelA1_ThirdLevelA1Action_1(parent, this, 1, inst);
+			case 0: return new ThirdLevelA1_NameAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new ThirdLevelA1_ThirdLevelA1Action_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getThirdLevelA1Access().getThirdLevelA1Action_1().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getThirdLevelA1Access().getThirdLevelA1Action_1().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -488,8 +483,8 @@ protected class ThirdLevelA1_Group extends GroupToken {
 // "A1"
 protected class ThirdLevelA1_A1Keyword_0 extends KeywordToken  {
 	
-	public ThirdLevelA1_A1Keyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ThirdLevelA1_A1Keyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -498,9 +493,9 @@ protected class ThirdLevelA1_A1Keyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -509,8 +504,8 @@ protected class ThirdLevelA1_A1Keyword_0 extends KeywordToken  {
 // {ThirdLevelA1}
 protected class ThirdLevelA1_ThirdLevelA1Action_1 extends ActionToken  {
 
-	public ThirdLevelA1_ThirdLevelA1Action_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ThirdLevelA1_ThirdLevelA1Action_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -519,25 +514,25 @@ protected class ThirdLevelA1_ThirdLevelA1Action_1 extends ActionToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ThirdLevelA1_A1Keyword_0(parent, this, 0, inst);
+			case 0: return new ThirdLevelA1_A1Keyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isConsumed()) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
 	}
 }
 
 // name=ID?
 protected class ThirdLevelA1_NameAssignment_2 extends AssignmentToken  {
 	
-	public ThirdLevelA1_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ThirdLevelA1_NameAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -546,19 +541,19 @@ protected class ThirdLevelA1_NameAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ThirdLevelA1_ThirdLevelA1Action_1(parent, this, 0, inst);
+			case 0: return new ThirdLevelA1_ThirdLevelA1Action_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getThirdLevelA1Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getThirdLevelA1Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getThirdLevelA1Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
 		}
@@ -581,8 +576,8 @@ protected class ThirdLevelA1_NameAssignment_2 extends AssignmentToken  {
 // "A2" {ThirdLevelA2} name=ID?
 protected class ThirdLevelA2_Group extends GroupToken {
 	
-	public ThirdLevelA2_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ThirdLevelA2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -591,19 +586,19 @@ protected class ThirdLevelA2_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ThirdLevelA2_NameAssignment_2(parent, this, 0, inst);
-			case 1: return new ThirdLevelA2_ThirdLevelA2Action_1(parent, this, 1, inst);
+			case 0: return new ThirdLevelA2_NameAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new ThirdLevelA2_ThirdLevelA2Action_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getThirdLevelA2Access().getThirdLevelA2Action_1().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getThirdLevelA2Access().getThirdLevelA2Action_1().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -611,8 +606,8 @@ protected class ThirdLevelA2_Group extends GroupToken {
 // "A2"
 protected class ThirdLevelA2_A2Keyword_0 extends KeywordToken  {
 	
-	public ThirdLevelA2_A2Keyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ThirdLevelA2_A2Keyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -621,9 +616,9 @@ protected class ThirdLevelA2_A2Keyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -632,8 +627,8 @@ protected class ThirdLevelA2_A2Keyword_0 extends KeywordToken  {
 // {ThirdLevelA2}
 protected class ThirdLevelA2_ThirdLevelA2Action_1 extends ActionToken  {
 
-	public ThirdLevelA2_ThirdLevelA2Action_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ThirdLevelA2_ThirdLevelA2Action_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -642,25 +637,25 @@ protected class ThirdLevelA2_ThirdLevelA2Action_1 extends ActionToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ThirdLevelA2_A2Keyword_0(parent, this, 0, inst);
+			case 0: return new ThirdLevelA2_A2Keyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isConsumed()) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
 	}
 }
 
 // name=ID?
 protected class ThirdLevelA2_NameAssignment_2 extends AssignmentToken  {
 	
-	public ThirdLevelA2_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ThirdLevelA2_NameAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -669,19 +664,19 @@ protected class ThirdLevelA2_NameAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ThirdLevelA2_ThirdLevelA2Action_1(parent, this, 0, inst);
+			case 0: return new ThirdLevelA2_ThirdLevelA2Action_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getThirdLevelA2Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getThirdLevelA2Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getThirdLevelA2Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
 		}
@@ -704,8 +699,8 @@ protected class ThirdLevelA2_NameAssignment_2 extends AssignmentToken  {
 // "B1" {ThirdLevelB1} name=ID?
 protected class ThirdLevelB1_Group extends GroupToken {
 	
-	public ThirdLevelB1_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ThirdLevelB1_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -714,19 +709,19 @@ protected class ThirdLevelB1_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ThirdLevelB1_NameAssignment_2(parent, this, 0, inst);
-			case 1: return new ThirdLevelB1_ThirdLevelB1Action_1(parent, this, 1, inst);
+			case 0: return new ThirdLevelB1_NameAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new ThirdLevelB1_ThirdLevelB1Action_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getThirdLevelB1Access().getThirdLevelB1Action_1().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getThirdLevelB1Access().getThirdLevelB1Action_1().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -734,8 +729,8 @@ protected class ThirdLevelB1_Group extends GroupToken {
 // "B1"
 protected class ThirdLevelB1_B1Keyword_0 extends KeywordToken  {
 	
-	public ThirdLevelB1_B1Keyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ThirdLevelB1_B1Keyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -744,9 +739,9 @@ protected class ThirdLevelB1_B1Keyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -755,8 +750,8 @@ protected class ThirdLevelB1_B1Keyword_0 extends KeywordToken  {
 // {ThirdLevelB1}
 protected class ThirdLevelB1_ThirdLevelB1Action_1 extends ActionToken  {
 
-	public ThirdLevelB1_ThirdLevelB1Action_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ThirdLevelB1_ThirdLevelB1Action_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -765,25 +760,25 @@ protected class ThirdLevelB1_ThirdLevelB1Action_1 extends ActionToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ThirdLevelB1_B1Keyword_0(parent, this, 0, inst);
+			case 0: return new ThirdLevelB1_B1Keyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isConsumed()) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
 	}
 }
 
 // name=ID?
 protected class ThirdLevelB1_NameAssignment_2 extends AssignmentToken  {
 	
-	public ThirdLevelB1_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ThirdLevelB1_NameAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -792,19 +787,19 @@ protected class ThirdLevelB1_NameAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ThirdLevelB1_ThirdLevelB1Action_1(parent, this, 0, inst);
+			case 0: return new ThirdLevelB1_ThirdLevelB1Action_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getThirdLevelB1Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getThirdLevelB1Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getThirdLevelB1Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
 		}
@@ -827,8 +822,8 @@ protected class ThirdLevelB1_NameAssignment_2 extends AssignmentToken  {
 // "B2" {ThirdLevelB2} name=ID?
 protected class ThirdLevelB2_Group extends GroupToken {
 	
-	public ThirdLevelB2_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ThirdLevelB2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -837,19 +832,19 @@ protected class ThirdLevelB2_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ThirdLevelB2_NameAssignment_2(parent, this, 0, inst);
-			case 1: return new ThirdLevelB2_ThirdLevelB2Action_1(parent, this, 1, inst);
+			case 0: return new ThirdLevelB2_NameAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new ThirdLevelB2_ThirdLevelB2Action_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getThirdLevelB2Access().getThirdLevelB2Action_1().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getThirdLevelB2Access().getThirdLevelB2Action_1().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -857,8 +852,8 @@ protected class ThirdLevelB2_Group extends GroupToken {
 // "B2"
 protected class ThirdLevelB2_B2Keyword_0 extends KeywordToken  {
 	
-	public ThirdLevelB2_B2Keyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ThirdLevelB2_B2Keyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -867,9 +862,9 @@ protected class ThirdLevelB2_B2Keyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -878,8 +873,8 @@ protected class ThirdLevelB2_B2Keyword_0 extends KeywordToken  {
 // {ThirdLevelB2}
 protected class ThirdLevelB2_ThirdLevelB2Action_1 extends ActionToken  {
 
-	public ThirdLevelB2_ThirdLevelB2Action_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ThirdLevelB2_ThirdLevelB2Action_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -888,25 +883,25 @@ protected class ThirdLevelB2_ThirdLevelB2Action_1 extends ActionToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ThirdLevelB2_B2Keyword_0(parent, this, 0, inst);
+			case 0: return new ThirdLevelB2_B2Keyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isConsumed()) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
 	}
 }
 
 // name=ID?
 protected class ThirdLevelB2_NameAssignment_2 extends AssignmentToken  {
 	
-	public ThirdLevelB2_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public ThirdLevelB2_NameAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -915,19 +910,19 @@ protected class ThirdLevelB2_NameAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ThirdLevelB2_ThirdLevelB2Action_1(parent, this, 0, inst);
+			case 0: return new ThirdLevelB2_ThirdLevelB2Action_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getThirdLevelB2Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getThirdLevelB2Access().getNameIDTerminalRuleCall_2_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getThirdLevelB2Access().getNameIDTerminalRuleCall_2_0();
 			return obj;
 		}

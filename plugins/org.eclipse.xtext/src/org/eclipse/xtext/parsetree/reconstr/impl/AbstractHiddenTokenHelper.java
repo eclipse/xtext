@@ -7,26 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
-import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 
 /**
- * TODO: consider moving all methods to the default impl and removing this class
- * 
- * @author meysholdt - Initial contribution and API
+ * @author Moritz Eysholdt - Initial contribution and API
  */
-public class AbstractHiddenTokenHelper implements IHiddenTokenHelper {
-
-	public AbstractRule getWhitespaceRuleFor(String whitespace) {
-		return null;
-	}
-
-	public boolean isComment(AbstractRule rule) {
-		return false;
-	}
-
-	public boolean isWhitespace(AbstractRule rule) {
-		return false;
-	}
-
+public abstract class AbstractHiddenTokenHelper implements IHiddenTokenHelper {
 }

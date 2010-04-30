@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EObject;
 public interface IParseTreeConstructor {
 
 	interface TreeConstructionDiagnostic {
-		// TODO: Javadoc
 		EObject getEObject();
 
 		String getLikelyErrorReasons();
@@ -32,6 +31,5 @@ public interface IParseTreeConstructor {
 		boolean isSuccess();
 	}
 
-	// TODO: rename to serializeSubtree()
-	TreeConstructionReport serializeRecursive(EObject object, ITokenStream out) throws IOException;
+	TreeConstructionReport serializeSubtree(EObject object, ITokenStream out) throws IOException;
 }

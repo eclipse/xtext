@@ -5,7 +5,7 @@ package org.eclipse.xtext.parser.terminalrules.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLanguageGrammarAccess;
@@ -17,23 +17,18 @@ public class HiddenTerminalsTestLanguageParsetreeConstructor extends AbstractPar
 	@Inject
 	private HiddenTerminalsTestLanguageGrammarAccess grammarAccess;
 	
-	@Override	
-	public HiddenTerminalsTestLanguageGrammarAccess getGrammarAccess() {
-		return grammarAccess;
-	}
-
 	@Override
-	protected AbstractToken getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IEObjectConsumer inst) {
 		return new ThisRootNode(inst);	
 	}
 	
 protected class ThisRootNode extends RootToken {
-	public ThisRootNode(IInstanceDescription inst) {
+	public ThisRootNode(IEObjectConsumer inst) {
 		super(inst);
 	}
 	
 	@Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Model_Alternatives(this, this, 0, inst);
 			case 1: return new WithoutHiddens_Group(this, this, 1, inst);
@@ -61,8 +56,8 @@ protected class ThisRootNode extends RootToken {
 // WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|DatatypeHiddens
 protected class Model_Alternatives extends AlternativesToken {
 
-	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -71,26 +66,26 @@ protected class Model_Alternatives extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_WithoutHiddensParserRuleCall_0(parent, this, 0, inst);
-			case 1: return new Model_WithHiddensParserRuleCall_1(parent, this, 1, inst);
-			case 2: return new Model_OverridingHiddensParserRuleCall_2(parent, this, 2, inst);
-			case 3: return new Model_InheritingHiddensParserRuleCall_3(parent, this, 3, inst);
-			case 4: return new Model_DatatypeHiddensParserRuleCall_4(parent, this, 4, inst);
+			case 0: return new Model_WithoutHiddensParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_WithHiddensParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Model_OverridingHiddensParserRuleCall_2(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Model_InheritingHiddensParserRuleCall_3(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new Model_DatatypeHiddensParserRuleCall_4(lastRuleCallOrigin, this, 4, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getDatatypeHiddensRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getInheritingHiddensRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getOverridingHiddensRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getWithHiddensRule().getType().getClassifier() || 
-		   current.getDelegate().eClass() == grammarAccess.getWithoutHiddensRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getDatatypeHiddensRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getInheritingHiddensRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getOverridingHiddensRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getWithHiddensRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getWithoutHiddensRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -98,8 +93,8 @@ protected class Model_Alternatives extends AlternativesToken {
 // WithoutHiddens
 protected class Model_WithoutHiddensParserRuleCall_0 extends RuleCallToken {
 	
-	public Model_WithoutHiddensParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_WithoutHiddensParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -108,7 +103,7 @@ protected class Model_WithoutHiddensParserRuleCall_0 extends RuleCallToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new WithoutHiddens_Group(this, this, 0, inst);
 			default: return null;
@@ -116,22 +111,17 @@ protected class Model_WithoutHiddensParserRuleCall_0 extends RuleCallToken {
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getWithoutHiddensRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
-	}
-
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(WithoutHiddens_Group.class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getWithoutHiddensRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(WithoutHiddens_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -139,8 +129,8 @@ protected class Model_WithoutHiddensParserRuleCall_0 extends RuleCallToken {
 // WithHiddens
 protected class Model_WithHiddensParserRuleCall_1 extends RuleCallToken {
 	
-	public Model_WithHiddensParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_WithHiddensParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -149,7 +139,7 @@ protected class Model_WithHiddensParserRuleCall_1 extends RuleCallToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new WithHiddens_Group(this, this, 0, inst);
 			default: return null;
@@ -157,22 +147,17 @@ protected class Model_WithHiddensParserRuleCall_1 extends RuleCallToken {
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getWithHiddensRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
-	}
-
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(WithHiddens_Group.class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getWithHiddensRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(WithHiddens_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -180,8 +165,8 @@ protected class Model_WithHiddensParserRuleCall_1 extends RuleCallToken {
 // OverridingHiddens
 protected class Model_OverridingHiddensParserRuleCall_2 extends RuleCallToken {
 	
-	public Model_OverridingHiddensParserRuleCall_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_OverridingHiddensParserRuleCall_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -190,7 +175,7 @@ protected class Model_OverridingHiddensParserRuleCall_2 extends RuleCallToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new OverridingHiddens_Group(this, this, 0, inst);
 			default: return null;
@@ -198,22 +183,17 @@ protected class Model_OverridingHiddensParserRuleCall_2 extends RuleCallToken {
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getOverridingHiddensRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
-	}
-
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(OverridingHiddens_Group.class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getOverridingHiddensRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(OverridingHiddens_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -221,8 +201,8 @@ protected class Model_OverridingHiddensParserRuleCall_2 extends RuleCallToken {
 // InheritingHiddens
 protected class Model_InheritingHiddensParserRuleCall_3 extends RuleCallToken {
 	
-	public Model_InheritingHiddensParserRuleCall_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_InheritingHiddensParserRuleCall_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -231,7 +211,7 @@ protected class Model_InheritingHiddensParserRuleCall_3 extends RuleCallToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new InheritingHiddens_Group(this, this, 0, inst);
 			default: return null;
@@ -239,22 +219,17 @@ protected class Model_InheritingHiddensParserRuleCall_3 extends RuleCallToken {
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getInheritingHiddensRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
-	}
-
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(InheritingHiddens_Group.class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getInheritingHiddensRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(InheritingHiddens_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -262,8 +237,8 @@ protected class Model_InheritingHiddensParserRuleCall_3 extends RuleCallToken {
 // DatatypeHiddens
 protected class Model_DatatypeHiddensParserRuleCall_4 extends RuleCallToken {
 	
-	public Model_DatatypeHiddensParserRuleCall_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Model_DatatypeHiddensParserRuleCall_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -272,7 +247,7 @@ protected class Model_DatatypeHiddensParserRuleCall_4 extends RuleCallToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new DatatypeHiddens_Group(this, this, 0, inst);
 			default: return null;
@@ -280,22 +255,17 @@ protected class Model_DatatypeHiddensParserRuleCall_4 extends RuleCallToken {
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getDatatypeHiddensRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
-	}
-
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(DatatypeHiddens_Group.class, current)) return null;
-		return current;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getDatatypeHiddensRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(DatatypeHiddens_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
 	
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
 		}	
 	}	
 }
@@ -314,8 +284,8 @@ protected class Model_DatatypeHiddensParserRuleCall_4 extends RuleCallToken {
 // "without" spaces+=WS "hiddens" spaces+=WS? valid?=";"
 protected class WithoutHiddens_Group extends GroupToken {
 	
-	public WithoutHiddens_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WithoutHiddens_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -324,18 +294,18 @@ protected class WithoutHiddens_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new WithoutHiddens_ValidAssignment_4(parent, this, 0, inst);
+			case 0: return new WithoutHiddens_ValidAssignment_4(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getWithoutHiddensRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getWithoutHiddensRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -343,8 +313,8 @@ protected class WithoutHiddens_Group extends GroupToken {
 // "without"
 protected class WithoutHiddens_WithoutKeyword_0 extends KeywordToken  {
 	
-	public WithoutHiddens_WithoutKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WithoutHiddens_WithoutKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -353,9 +323,9 @@ protected class WithoutHiddens_WithoutKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -364,8 +334,8 @@ protected class WithoutHiddens_WithoutKeyword_0 extends KeywordToken  {
 // spaces+=WS
 protected class WithoutHiddens_SpacesAssignment_1 extends AssignmentToken  {
 	
-	public WithoutHiddens_SpacesAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WithoutHiddens_SpacesAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -374,19 +344,19 @@ protected class WithoutHiddens_SpacesAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new WithoutHiddens_WithoutKeyword_0(parent, this, 0, inst);
+			case 0: return new WithoutHiddens_WithoutKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("spaces",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("spaces");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("spaces",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("spaces");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_1_0();
 			return obj;
 		}
@@ -398,8 +368,8 @@ protected class WithoutHiddens_SpacesAssignment_1 extends AssignmentToken  {
 // "hiddens"
 protected class WithoutHiddens_HiddensKeyword_2 extends KeywordToken  {
 	
-	public WithoutHiddens_HiddensKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WithoutHiddens_HiddensKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -408,9 +378,9 @@ protected class WithoutHiddens_HiddensKeyword_2 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new WithoutHiddens_SpacesAssignment_1(parent, this, 0, inst);
+			case 0: return new WithoutHiddens_SpacesAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -420,8 +390,8 @@ protected class WithoutHiddens_HiddensKeyword_2 extends KeywordToken  {
 // spaces+=WS?
 protected class WithoutHiddens_SpacesAssignment_3 extends AssignmentToken  {
 	
-	public WithoutHiddens_SpacesAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WithoutHiddens_SpacesAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -430,19 +400,19 @@ protected class WithoutHiddens_SpacesAssignment_3 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new WithoutHiddens_HiddensKeyword_2(parent, this, 0, inst);
+			case 0: return new WithoutHiddens_HiddensKeyword_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("spaces",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("spaces");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_3_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("spaces",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("spaces");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_3_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_3_0();
 			return obj;
 		}
@@ -454,8 +424,8 @@ protected class WithoutHiddens_SpacesAssignment_3 extends AssignmentToken  {
 // valid?=";"
 protected class WithoutHiddens_ValidAssignment_4 extends AssignmentToken  {
 	
-	public WithoutHiddens_ValidAssignment_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WithoutHiddens_ValidAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -464,20 +434,20 @@ protected class WithoutHiddens_ValidAssignment_4 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new WithoutHiddens_SpacesAssignment_3(parent, this, 0, inst);
-			case 1: return new WithoutHiddens_HiddensKeyword_2(parent, this, 1, inst);
+			case 0: return new WithoutHiddens_SpacesAssignment_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new WithoutHiddens_HiddensKeyword_2(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("valid",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("valid");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("valid",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("valid");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getWithoutHiddensAccess().getValidSemicolonKeyword_4_0();
 			return obj;
 		}
@@ -500,8 +470,8 @@ protected class WithoutHiddens_ValidAssignment_4 extends AssignmentToken  {
 // "with" "hiddens" valid?=";"
 protected class WithHiddens_Group extends GroupToken {
 	
-	public WithHiddens_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WithHiddens_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -510,18 +480,18 @@ protected class WithHiddens_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new WithHiddens_ValidAssignment_2(parent, this, 0, inst);
+			case 0: return new WithHiddens_ValidAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getWithHiddensRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getWithHiddensRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -529,8 +499,8 @@ protected class WithHiddens_Group extends GroupToken {
 // "with"
 protected class WithHiddens_WithKeyword_0 extends KeywordToken  {
 	
-	public WithHiddens_WithKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WithHiddens_WithKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -539,9 +509,9 @@ protected class WithHiddens_WithKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -550,8 +520,8 @@ protected class WithHiddens_WithKeyword_0 extends KeywordToken  {
 // "hiddens"
 protected class WithHiddens_HiddensKeyword_1 extends KeywordToken  {
 	
-	public WithHiddens_HiddensKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WithHiddens_HiddensKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -560,9 +530,9 @@ protected class WithHiddens_HiddensKeyword_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new WithHiddens_WithKeyword_0(parent, this, 0, inst);
+			case 0: return new WithHiddens_WithKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -572,8 +542,8 @@ protected class WithHiddens_HiddensKeyword_1 extends KeywordToken  {
 // valid?=";"
 protected class WithHiddens_ValidAssignment_2 extends AssignmentToken  {
 	
-	public WithHiddens_ValidAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WithHiddens_ValidAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -582,19 +552,19 @@ protected class WithHiddens_ValidAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new WithHiddens_HiddensKeyword_1(parent, this, 0, inst);
+			case 0: return new WithHiddens_HiddensKeyword_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("valid",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("valid");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("valid",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("valid");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getWithHiddensAccess().getValidSemicolonKeyword_2_0();
 			return obj;
 		}
@@ -617,8 +587,8 @@ protected class WithHiddens_ValidAssignment_2 extends AssignmentToken  {
 // "overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";"
 protected class OverridingHiddens_Group extends GroupToken {
 	
-	public OverridingHiddens_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public OverridingHiddens_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -627,18 +597,18 @@ protected class OverridingHiddens_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new OverridingHiddens_ValidAssignment_5(parent, this, 0, inst);
+			case 0: return new OverridingHiddens_ValidAssignment_5(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getOverridingHiddensRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getOverridingHiddensRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -646,8 +616,8 @@ protected class OverridingHiddens_Group extends GroupToken {
 // "overriding"
 protected class OverridingHiddens_OverridingKeyword_0 extends KeywordToken  {
 	
-	public OverridingHiddens_OverridingKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public OverridingHiddens_OverridingKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -656,9 +626,9 @@ protected class OverridingHiddens_OverridingKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -667,8 +637,8 @@ protected class OverridingHiddens_OverridingKeyword_0 extends KeywordToken  {
 // "hiddens"
 protected class OverridingHiddens_HiddensKeyword_1 extends KeywordToken  {
 	
-	public OverridingHiddens_HiddensKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public OverridingHiddens_HiddensKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -677,9 +647,9 @@ protected class OverridingHiddens_HiddensKeyword_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new OverridingHiddens_OverridingKeyword_0(parent, this, 0, inst);
+			case 0: return new OverridingHiddens_OverridingKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -689,8 +659,8 @@ protected class OverridingHiddens_HiddensKeyword_1 extends KeywordToken  {
 // "("
 protected class OverridingHiddens_LeftParenthesisKeyword_2 extends KeywordToken  {
 	
-	public OverridingHiddens_LeftParenthesisKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public OverridingHiddens_LeftParenthesisKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -699,9 +669,9 @@ protected class OverridingHiddens_LeftParenthesisKeyword_2 extends KeywordToken 
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new OverridingHiddens_HiddensKeyword_1(parent, this, 0, inst);
+			case 0: return new OverridingHiddens_HiddensKeyword_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -711,8 +681,8 @@ protected class OverridingHiddens_LeftParenthesisKeyword_2 extends KeywordToken 
 // called=OverridingHiddensCall
 protected class OverridingHiddens_CalledAssignment_3 extends AssignmentToken  {
 	
-	public OverridingHiddens_CalledAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public OverridingHiddens_CalledAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -721,7 +691,7 @@ protected class OverridingHiddens_CalledAssignment_3 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new OverridingHiddensCall_Group(this, this, 0, inst);
 			default: return null;
@@ -729,13 +699,13 @@ protected class OverridingHiddens_CalledAssignment_3 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("called",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("called");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("called",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("called");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getOverridingHiddensCallRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getOverridingHiddensAccess().getCalledOverridingHiddensCallParserRuleCall_3_0(); 
 				consumed = obj;
 				return param;
@@ -745,10 +715,10 @@ protected class OverridingHiddens_CalledAssignment_3 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new OverridingHiddens_LeftParenthesisKeyword_2(parent, next, actIndex, consumed);
+			case 0: return new OverridingHiddens_LeftParenthesisKeyword_2(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -757,8 +727,8 @@ protected class OverridingHiddens_CalledAssignment_3 extends AssignmentToken  {
 // ")"
 protected class OverridingHiddens_RightParenthesisKeyword_4 extends KeywordToken  {
 	
-	public OverridingHiddens_RightParenthesisKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public OverridingHiddens_RightParenthesisKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -767,9 +737,9 @@ protected class OverridingHiddens_RightParenthesisKeyword_4 extends KeywordToken
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new OverridingHiddens_CalledAssignment_3(parent, this, 0, inst);
+			case 0: return new OverridingHiddens_CalledAssignment_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -779,8 +749,8 @@ protected class OverridingHiddens_RightParenthesisKeyword_4 extends KeywordToken
 // valid?=";"
 protected class OverridingHiddens_ValidAssignment_5 extends AssignmentToken  {
 	
-	public OverridingHiddens_ValidAssignment_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public OverridingHiddens_ValidAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -789,19 +759,19 @@ protected class OverridingHiddens_ValidAssignment_5 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new OverridingHiddens_RightParenthesisKeyword_4(parent, this, 0, inst);
+			case 0: return new OverridingHiddens_RightParenthesisKeyword_4(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("valid",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("valid");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("valid",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("valid");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getOverridingHiddensAccess().getValidSemicolonKeyword_5_0();
 			return obj;
 		}
@@ -824,8 +794,8 @@ protected class OverridingHiddens_ValidAssignment_5 extends AssignmentToken  {
 // "call" spaces+=WS? valid?=";"
 protected class OverridingHiddensCall_Group extends GroupToken {
 	
-	public OverridingHiddensCall_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public OverridingHiddensCall_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -834,18 +804,18 @@ protected class OverridingHiddensCall_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new OverridingHiddensCall_ValidAssignment_2(parent, this, 0, inst);
+			case 0: return new OverridingHiddensCall_ValidAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getOverridingHiddensCallRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getOverridingHiddensCallRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -853,8 +823,8 @@ protected class OverridingHiddensCall_Group extends GroupToken {
 // "call"
 protected class OverridingHiddensCall_CallKeyword_0 extends KeywordToken  {
 	
-	public OverridingHiddensCall_CallKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public OverridingHiddensCall_CallKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -863,9 +833,9 @@ protected class OverridingHiddensCall_CallKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -874,8 +844,8 @@ protected class OverridingHiddensCall_CallKeyword_0 extends KeywordToken  {
 // spaces+=WS?
 protected class OverridingHiddensCall_SpacesAssignment_1 extends AssignmentToken  {
 	
-	public OverridingHiddensCall_SpacesAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public OverridingHiddensCall_SpacesAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -884,19 +854,19 @@ protected class OverridingHiddensCall_SpacesAssignment_1 extends AssignmentToken
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new OverridingHiddensCall_CallKeyword_0(parent, this, 0, inst);
+			case 0: return new OverridingHiddensCall_CallKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("spaces",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("spaces");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getOverridingHiddensCallAccess().getSpacesWSTerminalRuleCall_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("spaces",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("spaces");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getOverridingHiddensCallAccess().getSpacesWSTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getOverridingHiddensCallAccess().getSpacesWSTerminalRuleCall_1_0();
 			return obj;
 		}
@@ -908,8 +878,8 @@ protected class OverridingHiddensCall_SpacesAssignment_1 extends AssignmentToken
 // valid?=";"
 protected class OverridingHiddensCall_ValidAssignment_2 extends AssignmentToken  {
 	
-	public OverridingHiddensCall_ValidAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public OverridingHiddensCall_ValidAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -918,20 +888,20 @@ protected class OverridingHiddensCall_ValidAssignment_2 extends AssignmentToken 
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new OverridingHiddensCall_SpacesAssignment_1(parent, this, 0, inst);
-			case 1: return new OverridingHiddensCall_CallKeyword_0(parent, this, 1, inst);
+			case 0: return new OverridingHiddensCall_SpacesAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new OverridingHiddensCall_CallKeyword_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("valid",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("valid");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("valid",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("valid");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getOverridingHiddensCallAccess().getValidSemicolonKeyword_2_0();
 			return obj;
 		}
@@ -956,8 +926,8 @@ protected class OverridingHiddensCall_ValidAssignment_2 extends AssignmentToken 
 // HidingHiddens) ")" valid?=";"
 protected class InheritingHiddens_Group extends GroupToken {
 	
-	public InheritingHiddens_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public InheritingHiddens_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -966,18 +936,18 @@ protected class InheritingHiddens_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new InheritingHiddens_ValidAssignment_5(parent, this, 0, inst);
+			case 0: return new InheritingHiddens_ValidAssignment_5(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getInheritingHiddensRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getInheritingHiddensRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -985,8 +955,8 @@ protected class InheritingHiddens_Group extends GroupToken {
 // "inheriting"
 protected class InheritingHiddens_InheritingKeyword_0 extends KeywordToken  {
 	
-	public InheritingHiddens_InheritingKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public InheritingHiddens_InheritingKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -995,9 +965,9 @@ protected class InheritingHiddens_InheritingKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -1006,8 +976,8 @@ protected class InheritingHiddens_InheritingKeyword_0 extends KeywordToken  {
 // "hiddens"
 protected class InheritingHiddens_HiddensKeyword_1 extends KeywordToken  {
 	
-	public InheritingHiddens_HiddensKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public InheritingHiddens_HiddensKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1016,9 +986,9 @@ protected class InheritingHiddens_HiddensKeyword_1 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new InheritingHiddens_InheritingKeyword_0(parent, this, 0, inst);
+			case 0: return new InheritingHiddens_InheritingKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1028,8 +998,8 @@ protected class InheritingHiddens_HiddensKeyword_1 extends KeywordToken  {
 // "("
 protected class InheritingHiddens_LeftParenthesisKeyword_2 extends KeywordToken  {
 	
-	public InheritingHiddens_LeftParenthesisKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public InheritingHiddens_LeftParenthesisKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1038,9 +1008,9 @@ protected class InheritingHiddens_LeftParenthesisKeyword_2 extends KeywordToken 
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new InheritingHiddens_HiddensKeyword_1(parent, this, 0, inst);
+			case 0: return new InheritingHiddens_HiddensKeyword_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1050,8 +1020,8 @@ protected class InheritingHiddens_LeftParenthesisKeyword_2 extends KeywordToken 
 // called=InheritingHiddensCall|hidingCalled=HidingHiddens
 protected class InheritingHiddens_Alternatives_3 extends AlternativesToken {
 
-	public InheritingHiddens_Alternatives_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public InheritingHiddens_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1060,10 +1030,10 @@ protected class InheritingHiddens_Alternatives_3 extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new InheritingHiddens_CalledAssignment_3_0(parent, this, 0, inst);
-			case 1: return new InheritingHiddens_HidingCalledAssignment_3_1(parent, this, 1, inst);
+			case 0: return new InheritingHiddens_CalledAssignment_3_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new InheritingHiddens_HidingCalledAssignment_3_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -1073,8 +1043,8 @@ protected class InheritingHiddens_Alternatives_3 extends AlternativesToken {
 // called=InheritingHiddensCall
 protected class InheritingHiddens_CalledAssignment_3_0 extends AssignmentToken  {
 	
-	public InheritingHiddens_CalledAssignment_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public InheritingHiddens_CalledAssignment_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1083,7 +1053,7 @@ protected class InheritingHiddens_CalledAssignment_3_0 extends AssignmentToken  
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new InheritingHiddensCall_Group(this, this, 0, inst);
 			default: return null;
@@ -1091,13 +1061,13 @@ protected class InheritingHiddens_CalledAssignment_3_0 extends AssignmentToken  
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("called",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("called");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("called",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("called");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getInheritingHiddensCallRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getInheritingHiddensAccess().getCalledInheritingHiddensCallParserRuleCall_3_0_0(); 
 				consumed = obj;
 				return param;
@@ -1107,10 +1077,10 @@ protected class InheritingHiddens_CalledAssignment_3_0 extends AssignmentToken  
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new InheritingHiddens_LeftParenthesisKeyword_2(parent, next, actIndex, consumed);
+			case 0: return new InheritingHiddens_LeftParenthesisKeyword_2(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1119,8 +1089,8 @@ protected class InheritingHiddens_CalledAssignment_3_0 extends AssignmentToken  
 // hidingCalled=HidingHiddens
 protected class InheritingHiddens_HidingCalledAssignment_3_1 extends AssignmentToken  {
 	
-	public InheritingHiddens_HidingCalledAssignment_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public InheritingHiddens_HidingCalledAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1129,7 +1099,7 @@ protected class InheritingHiddens_HidingCalledAssignment_3_1 extends AssignmentT
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new HidingHiddens_Group(this, this, 0, inst);
 			default: return null;
@@ -1137,13 +1107,13 @@ protected class InheritingHiddens_HidingCalledAssignment_3_1 extends AssignmentT
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("hidingCalled",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("hidingCalled");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("hidingCalled",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("hidingCalled");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getHidingHiddensRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getInheritingHiddensAccess().getHidingCalledHidingHiddensParserRuleCall_3_1_0(); 
 				consumed = obj;
 				return param;
@@ -1153,10 +1123,10 @@ protected class InheritingHiddens_HidingCalledAssignment_3_1 extends AssignmentT
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new InheritingHiddens_LeftParenthesisKeyword_2(parent, next, actIndex, consumed);
+			case 0: return new InheritingHiddens_LeftParenthesisKeyword_2(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1166,8 +1136,8 @@ protected class InheritingHiddens_HidingCalledAssignment_3_1 extends AssignmentT
 // ")"
 protected class InheritingHiddens_RightParenthesisKeyword_4 extends KeywordToken  {
 	
-	public InheritingHiddens_RightParenthesisKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public InheritingHiddens_RightParenthesisKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1176,9 +1146,9 @@ protected class InheritingHiddens_RightParenthesisKeyword_4 extends KeywordToken
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new InheritingHiddens_Alternatives_3(parent, this, 0, inst);
+			case 0: return new InheritingHiddens_Alternatives_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1188,8 +1158,8 @@ protected class InheritingHiddens_RightParenthesisKeyword_4 extends KeywordToken
 // valid?=";"
 protected class InheritingHiddens_ValidAssignment_5 extends AssignmentToken  {
 	
-	public InheritingHiddens_ValidAssignment_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public InheritingHiddens_ValidAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1198,19 +1168,19 @@ protected class InheritingHiddens_ValidAssignment_5 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new InheritingHiddens_RightParenthesisKeyword_4(parent, this, 0, inst);
+			case 0: return new InheritingHiddens_RightParenthesisKeyword_4(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("valid",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("valid");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("valid",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("valid");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getInheritingHiddensAccess().getValidSemicolonKeyword_5_0();
 			return obj;
 		}
@@ -1233,8 +1203,8 @@ protected class InheritingHiddens_ValidAssignment_5 extends AssignmentToken  {
 // "datatype" valid?=DatatypeRule
 protected class DatatypeHiddens_Group extends GroupToken {
 	
-	public DatatypeHiddens_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public DatatypeHiddens_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1243,18 +1213,18 @@ protected class DatatypeHiddens_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new DatatypeHiddens_ValidAssignment_1(parent, this, 0, inst);
+			case 0: return new DatatypeHiddens_ValidAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getDatatypeHiddensRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getDatatypeHiddensRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -1262,8 +1232,8 @@ protected class DatatypeHiddens_Group extends GroupToken {
 // "datatype"
 protected class DatatypeHiddens_DatatypeKeyword_0 extends KeywordToken  {
 	
-	public DatatypeHiddens_DatatypeKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public DatatypeHiddens_DatatypeKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1272,9 +1242,9 @@ protected class DatatypeHiddens_DatatypeKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -1283,8 +1253,8 @@ protected class DatatypeHiddens_DatatypeKeyword_0 extends KeywordToken  {
 // valid?=DatatypeRule
 protected class DatatypeHiddens_ValidAssignment_1 extends AssignmentToken  {
 	
-	public DatatypeHiddens_ValidAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public DatatypeHiddens_ValidAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1293,19 +1263,19 @@ protected class DatatypeHiddens_ValidAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new DatatypeHiddens_DatatypeKeyword_0(parent, this, 0, inst);
+			case 0: return new DatatypeHiddens_DatatypeKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("valid",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("valid");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getDatatypeHiddensAccess().getValidDatatypeRuleParserRuleCall_1_0(), value, null)) {
-			type = AssignmentType.DRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("valid",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("valid");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getDatatypeHiddensAccess().getValidDatatypeRuleParserRuleCall_1_0(), value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
 			element = grammarAccess.getDatatypeHiddensAccess().getValidDatatypeRuleParserRuleCall_1_0();
 			return obj;
 		}
@@ -1329,8 +1299,8 @@ protected class DatatypeHiddens_ValidAssignment_1 extends AssignmentToken  {
 // "hiding" space=WS called=InheritingHiddensCall
 protected class HidingHiddens_Group extends GroupToken {
 	
-	public HidingHiddens_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public HidingHiddens_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1339,18 +1309,18 @@ protected class HidingHiddens_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new HidingHiddens_CalledAssignment_2(parent, this, 0, inst);
+			case 0: return new HidingHiddens_CalledAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getHidingHiddensRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getHidingHiddensRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -1358,8 +1328,8 @@ protected class HidingHiddens_Group extends GroupToken {
 // "hiding"
 protected class HidingHiddens_HidingKeyword_0 extends KeywordToken  {
 	
-	public HidingHiddens_HidingKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public HidingHiddens_HidingKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1368,9 +1338,9 @@ protected class HidingHiddens_HidingKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -1379,8 +1349,8 @@ protected class HidingHiddens_HidingKeyword_0 extends KeywordToken  {
 // space=WS
 protected class HidingHiddens_SpaceAssignment_1 extends AssignmentToken  {
 	
-	public HidingHiddens_SpaceAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public HidingHiddens_SpaceAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1389,19 +1359,19 @@ protected class HidingHiddens_SpaceAssignment_1 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new HidingHiddens_HidingKeyword_0(parent, this, 0, inst);
+			case 0: return new HidingHiddens_HidingKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("space",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("space");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getHidingHiddensAccess().getSpaceWSTerminalRuleCall_1_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("space",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("space");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getHidingHiddensAccess().getSpaceWSTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getHidingHiddensAccess().getSpaceWSTerminalRuleCall_1_0();
 			return obj;
 		}
@@ -1413,8 +1383,8 @@ protected class HidingHiddens_SpaceAssignment_1 extends AssignmentToken  {
 // called=InheritingHiddensCall
 protected class HidingHiddens_CalledAssignment_2 extends AssignmentToken  {
 	
-	public HidingHiddens_CalledAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public HidingHiddens_CalledAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1423,7 +1393,7 @@ protected class HidingHiddens_CalledAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new InheritingHiddensCall_Group(this, this, 0, inst);
 			default: return null;
@@ -1431,13 +1401,13 @@ protected class HidingHiddens_CalledAssignment_2 extends AssignmentToken  {
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("called",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("called");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("called",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("called");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getInheritingHiddensCallRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getHidingHiddensAccess().getCalledInheritingHiddensCallParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
@@ -1447,10 +1417,10 @@ protected class HidingHiddens_CalledAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new HidingHiddens_SpaceAssignment_1(parent, next, actIndex, consumed);
+			case 0: return new HidingHiddens_SpaceAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1470,8 +1440,8 @@ protected class HidingHiddens_CalledAssignment_2 extends AssignmentToken  {
 // "call" valid?=";"
 protected class InheritingHiddensCall_Group extends GroupToken {
 	
-	public InheritingHiddensCall_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public InheritingHiddensCall_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1480,18 +1450,18 @@ protected class InheritingHiddensCall_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new InheritingHiddensCall_ValidAssignment_1(parent, this, 0, inst);
+			case 0: return new InheritingHiddensCall_ValidAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getInheritingHiddensCallRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getInheritingHiddensCallRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -1499,8 +1469,8 @@ protected class InheritingHiddensCall_Group extends GroupToken {
 // "call"
 protected class InheritingHiddensCall_CallKeyword_0 extends KeywordToken  {
 	
-	public InheritingHiddensCall_CallKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public InheritingHiddensCall_CallKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1509,9 +1479,9 @@ protected class InheritingHiddensCall_CallKeyword_0 extends KeywordToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -1520,8 +1490,8 @@ protected class InheritingHiddensCall_CallKeyword_0 extends KeywordToken  {
 // valid?=";"
 protected class InheritingHiddensCall_ValidAssignment_1 extends AssignmentToken  {
 	
-	public InheritingHiddensCall_ValidAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public InheritingHiddensCall_ValidAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -1530,19 +1500,19 @@ protected class InheritingHiddensCall_ValidAssignment_1 extends AssignmentToken 
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new InheritingHiddensCall_CallKeyword_0(parent, this, 0, inst);
+			case 0: return new InheritingHiddensCall_CallKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("valid",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("valid");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("valid",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("valid");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
+			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getInheritingHiddensCallAccess().getValidSemicolonKeyword_1_0();
 			return obj;
 		}

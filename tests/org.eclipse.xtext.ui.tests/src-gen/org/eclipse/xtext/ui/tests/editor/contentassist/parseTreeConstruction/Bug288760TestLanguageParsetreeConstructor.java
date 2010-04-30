@@ -5,7 +5,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.parseTreeConstruction;
 
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug288760TestLanguageGrammarAccess;
@@ -17,23 +17,18 @@ public class Bug288760TestLanguageParsetreeConstructor extends AbstractParseTree
 	@Inject
 	private Bug288760TestLanguageGrammarAccess grammarAccess;
 	
-	@Override	
-	public Bug288760TestLanguageGrammarAccess getGrammarAccess() {
-		return grammarAccess;
-	}
-
 	@Override
-	protected AbstractToken getRootToken(IInstanceDescription inst) {
+	protected AbstractToken getRootToken(IEObjectConsumer inst) {
 		return new ThisRootNode(inst);	
 	}
 	
 protected class ThisRootNode extends RootToken {
-	public ThisRootNode(IInstanceDescription inst) {
+	public ThisRootNode(IEObjectConsumer inst) {
 		super(inst);
 	}
 	
 	@Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new WorkflowElement_Alternatives(this, this, 0, inst);
 			case 1: return new Attribute_Group(this, this, 1, inst);
@@ -55,8 +50,8 @@ protected class ThisRootNode extends RootToken {
 // Attribute* GT children+=WorkflowElement* end=END_TAG
 protected class WorkflowElement_Alternatives extends AlternativesToken {
 
-	public WorkflowElement_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WorkflowElement_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -65,19 +60,19 @@ protected class WorkflowElement_Alternatives extends AlternativesToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new WorkflowElement_Group_0(parent, this, 0, inst);
-			case 1: return new WorkflowElement_Group_1(parent, this, 1, inst);
+			case 0: return new WorkflowElement_Group_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new WorkflowElement_Group_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getWorkflowElementRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getWorkflowElementRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -85,8 +80,8 @@ protected class WorkflowElement_Alternatives extends AlternativesToken {
 // name=START_TAG attributes+=Attribute* END_TAG_SHORT
 protected class WorkflowElement_Group_0 extends GroupToken {
 	
-	public WorkflowElement_Group_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WorkflowElement_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -95,9 +90,9 @@ protected class WorkflowElement_Group_0 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new WorkflowElement_END_TAG_SHORTTerminalRuleCall_0_2(parent, this, 0, inst);
+			case 0: return new WorkflowElement_END_TAG_SHORTTerminalRuleCall_0_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -107,8 +102,8 @@ protected class WorkflowElement_Group_0 extends GroupToken {
 // name=START_TAG
 protected class WorkflowElement_NameAssignment_0_0 extends AssignmentToken  {
 	
-	public WorkflowElement_NameAssignment_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WorkflowElement_NameAssignment_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -117,18 +112,18 @@ protected class WorkflowElement_NameAssignment_0_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getWorkflowElementAccess().getNameSTART_TAGTerminalRuleCall_0_0_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getWorkflowElementAccess().getNameSTART_TAGTerminalRuleCall_0_0_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getWorkflowElementAccess().getNameSTART_TAGTerminalRuleCall_0_0_0();
 			return obj;
 		}
@@ -140,8 +135,8 @@ protected class WorkflowElement_NameAssignment_0_0 extends AssignmentToken  {
 // attributes+=Attribute*
 protected class WorkflowElement_AttributesAssignment_0_1 extends AssignmentToken  {
 	
-	public WorkflowElement_AttributesAssignment_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WorkflowElement_AttributesAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -150,7 +145,7 @@ protected class WorkflowElement_AttributesAssignment_0_1 extends AssignmentToken
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Attribute_Group(this, this, 0, inst);
 			default: return null;
@@ -158,13 +153,13 @@ protected class WorkflowElement_AttributesAssignment_0_1 extends AssignmentToken
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("attributes",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("attributes");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("attributes",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("attributes");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAttributeRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getWorkflowElementAccess().getAttributesAttributeParserRuleCall_0_1_0(); 
 				consumed = obj;
 				return param;
@@ -174,11 +169,11 @@ protected class WorkflowElement_AttributesAssignment_0_1 extends AssignmentToken
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new WorkflowElement_AttributesAssignment_0_1(parent, next, actIndex, consumed);
-			case 1: return new WorkflowElement_NameAssignment_0_0(parent, next, actIndex, consumed);
+			case 0: return new WorkflowElement_AttributesAssignment_0_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new WorkflowElement_NameAssignment_0_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -187,8 +182,8 @@ protected class WorkflowElement_AttributesAssignment_0_1 extends AssignmentToken
 // END_TAG_SHORT
 protected class WorkflowElement_END_TAG_SHORTTerminalRuleCall_0_2 extends UnassignedTextToken {
 
-	public WorkflowElement_END_TAG_SHORTTerminalRuleCall_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WorkflowElement_END_TAG_SHORTTerminalRuleCall_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -197,10 +192,10 @@ protected class WorkflowElement_END_TAG_SHORTTerminalRuleCall_0_2 extends Unassi
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new WorkflowElement_AttributesAssignment_0_1(parent, this, 0, inst);
-			case 1: return new WorkflowElement_NameAssignment_0_0(parent, this, 1, inst);
+			case 0: return new WorkflowElement_AttributesAssignment_0_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new WorkflowElement_NameAssignment_0_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -211,8 +206,8 @@ protected class WorkflowElement_END_TAG_SHORTTerminalRuleCall_0_2 extends Unassi
 // name=START_TAG attributes+=Attribute* GT children+=WorkflowElement* end=END_TAG
 protected class WorkflowElement_Group_1 extends GroupToken {
 	
-	public WorkflowElement_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WorkflowElement_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -221,9 +216,9 @@ protected class WorkflowElement_Group_1 extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new WorkflowElement_EndAssignment_1_4(parent, this, 0, inst);
+			case 0: return new WorkflowElement_EndAssignment_1_4(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -233,8 +228,8 @@ protected class WorkflowElement_Group_1 extends GroupToken {
 // name=START_TAG
 protected class WorkflowElement_NameAssignment_1_0 extends AssignmentToken  {
 	
-	public WorkflowElement_NameAssignment_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WorkflowElement_NameAssignment_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -243,18 +238,18 @@ protected class WorkflowElement_NameAssignment_1_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getWorkflowElementAccess().getNameSTART_TAGTerminalRuleCall_1_0_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getWorkflowElementAccess().getNameSTART_TAGTerminalRuleCall_1_0_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getWorkflowElementAccess().getNameSTART_TAGTerminalRuleCall_1_0_0();
 			return obj;
 		}
@@ -266,8 +261,8 @@ protected class WorkflowElement_NameAssignment_1_0 extends AssignmentToken  {
 // attributes+=Attribute*
 protected class WorkflowElement_AttributesAssignment_1_1 extends AssignmentToken  {
 	
-	public WorkflowElement_AttributesAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WorkflowElement_AttributesAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -276,7 +271,7 @@ protected class WorkflowElement_AttributesAssignment_1_1 extends AssignmentToken
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Attribute_Group(this, this, 0, inst);
 			default: return null;
@@ -284,13 +279,13 @@ protected class WorkflowElement_AttributesAssignment_1_1 extends AssignmentToken
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("attributes",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("attributes");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("attributes",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("attributes");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAttributeRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getWorkflowElementAccess().getAttributesAttributeParserRuleCall_1_1_0(); 
 				consumed = obj;
 				return param;
@@ -300,11 +295,11 @@ protected class WorkflowElement_AttributesAssignment_1_1 extends AssignmentToken
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new WorkflowElement_AttributesAssignment_1_1(parent, next, actIndex, consumed);
-			case 1: return new WorkflowElement_NameAssignment_1_0(parent, next, actIndex, consumed);
+			case 0: return new WorkflowElement_AttributesAssignment_1_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new WorkflowElement_NameAssignment_1_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -313,8 +308,8 @@ protected class WorkflowElement_AttributesAssignment_1_1 extends AssignmentToken
 // GT
 protected class WorkflowElement_GTTerminalRuleCall_1_2 extends UnassignedTextToken {
 
-	public WorkflowElement_GTTerminalRuleCall_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WorkflowElement_GTTerminalRuleCall_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -323,10 +318,10 @@ protected class WorkflowElement_GTTerminalRuleCall_1_2 extends UnassignedTextTok
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new WorkflowElement_AttributesAssignment_1_1(parent, this, 0, inst);
-			case 1: return new WorkflowElement_NameAssignment_1_0(parent, this, 1, inst);
+			case 0: return new WorkflowElement_AttributesAssignment_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new WorkflowElement_NameAssignment_1_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -336,8 +331,8 @@ protected class WorkflowElement_GTTerminalRuleCall_1_2 extends UnassignedTextTok
 // children+=WorkflowElement*
 protected class WorkflowElement_ChildrenAssignment_1_3 extends AssignmentToken  {
 	
-	public WorkflowElement_ChildrenAssignment_1_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WorkflowElement_ChildrenAssignment_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -346,7 +341,7 @@ protected class WorkflowElement_ChildrenAssignment_1_3 extends AssignmentToken  
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new WorkflowElement_Alternatives(this, this, 0, inst);
 			default: return null;
@@ -354,13 +349,13 @@ protected class WorkflowElement_ChildrenAssignment_1_3 extends AssignmentToken  
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("children",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("children");
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("children",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("children");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getWorkflowElementRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
+				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getWorkflowElementAccess().getChildrenWorkflowElementParserRuleCall_1_3_0(); 
 				consumed = obj;
 				return param;
@@ -370,11 +365,11 @@ protected class WorkflowElement_ChildrenAssignment_1_3 extends AssignmentToken  
 	}
 
     @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new WorkflowElement_ChildrenAssignment_1_3(parent, next, actIndex, consumed);
-			case 1: return new WorkflowElement_GTTerminalRuleCall_1_2(parent, next, actIndex, consumed);
+			case 0: return new WorkflowElement_ChildrenAssignment_1_3(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new WorkflowElement_GTTerminalRuleCall_1_2(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -383,8 +378,8 @@ protected class WorkflowElement_ChildrenAssignment_1_3 extends AssignmentToken  
 // end=END_TAG
 protected class WorkflowElement_EndAssignment_1_4 extends AssignmentToken  {
 	
-	public WorkflowElement_EndAssignment_1_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public WorkflowElement_EndAssignment_1_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -393,20 +388,20 @@ protected class WorkflowElement_EndAssignment_1_4 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new WorkflowElement_ChildrenAssignment_1_3(parent, this, 0, inst);
-			case 1: return new WorkflowElement_GTTerminalRuleCall_1_2(parent, this, 1, inst);
+			case 0: return new WorkflowElement_ChildrenAssignment_1_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new WorkflowElement_GTTerminalRuleCall_1_2(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("end",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("end");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getWorkflowElementAccess().getEndEND_TAGTerminalRuleCall_1_4_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("end",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("end");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getWorkflowElementAccess().getEndEND_TAGTerminalRuleCall_1_4_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getWorkflowElementAccess().getEndEND_TAGTerminalRuleCall_1_4_0();
 			return obj;
 		}
@@ -430,8 +425,8 @@ protected class WorkflowElement_EndAssignment_1_4 extends AssignmentToken  {
 // name=ID EQ value=STRING
 protected class Attribute_Group extends GroupToken {
 	
-	public Attribute_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -440,18 +435,18 @@ protected class Attribute_Group extends GroupToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute_ValueAssignment_2(parent, this, 0, inst);
+			case 0: return new Attribute_ValueAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
-	public IInstanceDescription tryConsume() {
-		if(current.getDelegate().eClass() == grammarAccess.getAttributeRule().getType().getClassifier())
-			return tryConsumeVal();
-		return null;
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getAttributeRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
 	}
 
 }
@@ -459,8 +454,8 @@ protected class Attribute_Group extends GroupToken {
 // name=ID
 protected class Attribute_NameAssignment_0 extends AssignmentToken  {
 	
-	public Attribute_NameAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute_NameAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -469,18 +464,18 @@ protected class Attribute_NameAssignment_0 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_0_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_0_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_0_0();
 			return obj;
 		}
@@ -492,8 +487,8 @@ protected class Attribute_NameAssignment_0 extends AssignmentToken  {
 // EQ
 protected class Attribute_EQTerminalRuleCall_1 extends UnassignedTextToken {
 
-	public Attribute_EQTerminalRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute_EQTerminalRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -502,9 +497,9 @@ protected class Attribute_EQTerminalRuleCall_1 extends UnassignedTextToken {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute_NameAssignment_0(parent, this, 0, inst);
+			case 0: return new Attribute_NameAssignment_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -514,8 +509,8 @@ protected class Attribute_EQTerminalRuleCall_1 extends UnassignedTextToken {
 // value=STRING
 protected class Attribute_ValueAssignment_2 extends AssignmentToken  {
 	
-	public Attribute_ValueAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
+	public Attribute_ValueAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
@@ -524,19 +519,19 @@ protected class Attribute_ValueAssignment_2 extends AssignmentToken  {
 	}
 
     @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute_EQTerminalRuleCall_1(parent, this, 0, inst);
+			case 0: return new Attribute_EQTerminalRuleCall_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("value",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(valueSerializer.isValid(obj.getDelegate(), grammarAccess.getAttributeAccess().getValueSTRINGTerminalRuleCall_2_0(), value, null)) {
-			type = AssignmentType.LRC;
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getAttributeAccess().getValueSTRINGTerminalRuleCall_2_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
 			element = grammarAccess.getAttributeAccess().getValueSTRINGTerminalRuleCall_2_0();
 			return obj;
 		}
