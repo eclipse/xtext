@@ -62,14 +62,16 @@ public interface IXtextEObjectSearch {
 
 		protected boolean isNameMatches(SearchPattern searchPattern, IEObjectDescription eObjectDescription, Collection<String> namespaceDelimiters) {
 			String qualifiedName = eObjectDescription.getQualifiedName();
-			if(searchPattern.matches(qualifiedName)) {
-				return true;
-			}
-			for(String namespaceDelimiter : namespaceDelimiters) {
-				int index = qualifiedName.lastIndexOf(namespaceDelimiter); 
-				if(index!=-1 && searchPattern.matches(qualifiedName.substring(index+1))) {
+			if (qualifiedName!=null) {
+				if(searchPattern.matches(qualifiedName)) {
 					return true;
 				}
+				for(String namespaceDelimiter : namespaceDelimiters) {
+					int index = qualifiedName.lastIndexOf(namespaceDelimiter); 
+					if(index!=-1 && searchPattern.matches(qualifiedName.substring(index+1))) {
+						return true;
+					}
+				}	
 			}
 			return false;
 		}
