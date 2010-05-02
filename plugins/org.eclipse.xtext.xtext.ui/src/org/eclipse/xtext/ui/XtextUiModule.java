@@ -6,7 +6,6 @@ package org.eclipse.xtext.ui;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
-import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.ui.editor.bracketmatching.IBracketMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
@@ -15,7 +14,6 @@ import org.eclipse.xtext.ui.editor.outline.actions.IContentOutlineNodeAdapterFac
 import org.eclipse.xtext.ui.editor.outline.transformer.ISemanticModelTransformer;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
-import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.ProjectAwareXtendXtext2EcorePostProcessor;
@@ -30,7 +28,6 @@ import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConf
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
 
 import com.google.inject.Binder;
-import com.google.inject.Provider;
 import com.google.inject.name.Names;
 
 /**
@@ -93,10 +90,6 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 
 	public Class<? extends IXtext2EcorePostProcessor> bindIXtext2EcorePostProcessor() {
 		return ProjectAwareXtendXtext2EcorePostProcessor.class;
-	}
-	
-	public Provider<? extends IAllContainersState> provideAllContainerState() {
-		return Access.getJavaProjectsState();
 	}
 	
 }
