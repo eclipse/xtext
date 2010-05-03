@@ -25,7 +25,7 @@
 «OP()»ENDDEFINE«CL()»
 
 «OP()»DEFINE model FOR «projectInfoClassName().toSimpleName()»«CL()»
-«OP()»FILE "src/Model.«modelFileExtension»"-«CL()»
+«OP()»FILE "src/model/Model.«modelFileExtension»"-«CL()»
 /*
  * This is an example model
  */
@@ -48,8 +48,8 @@ entity Composable {
 «OP()»FILE "src/Generator.mwe2"-«CL()»
 module Generator
 
-var modelFile = "Model.«modelFileExtension»"
-var targetDir = "../src-gen"
+var targetDir = "src-gen"
+var modelPath = "src/model"
 
 Workflow {
 	component = @workflow.«getName()»Generator auto-inject {}
