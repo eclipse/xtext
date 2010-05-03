@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,12 +9,21 @@ package org.eclipse.xtext.ui.resource;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.resource.XtextResourceSet;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
- * @author Sven Efftinge - Initial contribution and API
+ * @author Holger Schill - Initial contribution and API
  */
-public interface IResourceSetProvider {
+public class SimpleResourceSetProvider implements IResourceSetProvider {
 
-	ResourceSet get(IProject project);
+	@Inject
+	private Provider<XtextResourceSet> resourceSetProvider;
 	
+	public ResourceSet get(IProject project) {
+		return resourceSetProvider.get();
+	}
+
 }

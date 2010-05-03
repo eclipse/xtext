@@ -15,14 +15,14 @@
 «EXTENSION org::eclipse::xtext::ui::generator::projectWizard::Extensions»
 «EXTENSION org::eclipse::xtext::GrammarUtil»
 
-«DEFINE generate(String generatorProjectName, String modelFileExtension, String templateEncoding) FOR Grammar»
+«DEFINE generate(String generatorProjectName, String modelFileExtension, boolean pluginProject, String templateEncoding) FOR Grammar»
 	«EXPAND ProjectInfo::root»
 	«EXPAND NewProjectWizard::root»
 	«EXPAND NewProjectTemplate::root(modelFileExtension)»
-	«EXPAND ProjectCreator::root(generatorProjectName, modelFileExtension, templateEncoding)»	
+	«EXPAND ProjectCreator::root(generatorProjectName, templateEncoding, pluginProject)»	
 «ENDDEFINE»
 
-«DEFINE addToPluginXmlUi(String generatorProjectName, String modelFileExtension) FOR Grammar»
+«DEFINE addToPluginXmlUi(String generatorProjectName, String modelFileExtension, boolean pluginProject) FOR Grammar»
    <extension
          point="org.eclipse.ui.newWizards">
       <wizard
@@ -36,6 +36,6 @@
    </extension>
 «ENDDEFINE»
 
-«DEFINE addToPluginXmlRt(String generatorProjectName, String modelFileExtension) FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlRt(String generatorProjectName, String modelFileExtension, boolean pluginProject) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToStandaloneSetup(String generatorProjectName, String modelFileExtension) FOR Grammar»«ENDDEFINE»
+«DEFINE addToStandaloneSetup(String generatorProjectName, String modelFileExtension, boolean pluginProject) FOR Grammar»«ENDDEFINE»

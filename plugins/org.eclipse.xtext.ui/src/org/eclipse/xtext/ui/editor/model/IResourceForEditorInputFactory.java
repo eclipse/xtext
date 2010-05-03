@@ -10,12 +10,9 @@ package org.eclipse.xtext.ui.editor.model;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ui.IEditorInput;
 
-import com.google.inject.ImplementedBy;
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@ImplementedBy(JavaClassPathResourceForIEditorInputFactory.class)
 public interface IResourceForEditorInputFactory {
 	Resource createResource(IEditorInput input);
 }

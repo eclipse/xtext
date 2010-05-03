@@ -7,23 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.model;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IStorageEditorInput;
-import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider;
-import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 
 import com.google.inject.Inject;
@@ -32,37 +24,20 @@ import com.google.inject.Inject;
  * @author Michael Clay
  * @author Jan Koehnlein
  */
-public class JavaClassPathResourceForIEditorInputFactory implements IResourceForEditorInputFactory {
+public class JavaClassPathResourceForIEditorInputFactory extends ResourceForIEditorInputFactory {
 
 	@Inject
 	private IStorage2UriMapper storageToUriMapper;
 
-	@Inject
-	private IResourceSetProvider resourceSetProvider;
-
-	@Inject
-	private IExternalContentSupport externalContentSupport;
-
-	@Inject
-	private IExternalContentProvider externalContentProvider;
-
-	public Resource createResource(IEditorInput editorInput) {
-		try {
-			if (editorInput instanceof IStorageEditorInput) {
-				IStorage storage = ((IStorageEditorInput) editorInput).getStorage();
-				if (storage instanceof IFile) {
-					return createResourceFor((IFile) storage);
-				} else if (storage instanceof IJarEntryResource) {
-					return createResourceFor((IJarEntryResource) storage);
-				}
-			}
-			throw new IllegalArgumentException("Couldn't create EMF Resource for input " + editorInput);
-		} catch (CoreException e) {
-			throw new WrappedException(e);
+	@Override
+	protected Resource createResource(IStorage storage) throws CoreException {
+		if (storage instanceof IJarEntryResource) {
+			return createResourceFor((IJarEntryResource) storage);
 		}
+		return super.createResource(storage);
 	}
 
-	private Resource createResourceFor(IJarEntryResource storage) {
+	protected Resource createResourceFor(IJarEntryResource storage) {
 		ResourceSet resourceSet = getResourceSet(storage);
 		URI uri = storageToUriMapper.getUri(storage);
 		configureResourceSet(resourceSet, uri);
@@ -71,40 +46,16 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 		return resource;
 	}
 
-	protected void configureResourceSet(ResourceSet resourceSet, URI primaryURI) {
-		// TODO: Filter external content - primary resource should not use dirty state
-		externalContentSupport.configureResourceSet(resourceSet, externalContentProvider);
-	}
-
-	protected XtextResource createResource(ResourceSet resourceSet, URI uri) {
-		Resource aResource = resourceSet.createResource(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
-		if (!(aResource instanceof XtextResource))
-			throw new IllegalStateException("The resource factory registered for " + uri
-					+ " does not yield an XtextResource. Make sure the right resource factory has been registered.");
-		return (XtextResource) aResource;
-	}
-
+	@Override
 	protected ResourceSet getResourceSet(IStorage storage) {
-		if (storage instanceof IFile) {
-			return resourceSetProvider.get(((IFile) storage).getProject());
-		} else if (storage instanceof IJarEntryResource){
+		if (storage instanceof IJarEntryResource) {
 			IPackageFragmentRoot root = ((IJarEntryResource) storage).getPackageFragmentRoot();
 			if (root != null) {
 				IJavaProject project = root.getJavaProject();
 				if (project != null)
-					return resourceSetProvider.get(project.getProject());
+					return getResourceSetProvider().get(project.getProject());
 			}
-		}
-		return resourceSetProvider.get(null);
+		} 
+		return getResourceSetProvider().get(null);
 	}
-
-	protected Resource createResourceFor(IFile storage) throws CoreException {
-		ResourceSet resourceSet = getResourceSet(storage);
-		URI uri = URI.createPlatformResourceURI(storage.getFullPath().toString(), true);
-		configureResourceSet(resourceSet, uri);
-		XtextResource resource = createResource(resourceSet, uri);
-		resource.setValidationDisabled(false);
-		return resource;
-	}
-
 }

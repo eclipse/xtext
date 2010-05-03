@@ -39,6 +39,7 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 
 	private String generatorProjectName;
 	private String modelFileExtension;
+	private boolean pluginProject = true;
 
 	@Override
 	public void generate(final Grammar grammar, XpandExecutionContext ctx) {
@@ -77,7 +78,7 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 	
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		return Lists.<Object> newArrayList(getGeneratorProjectName(grammar), getModelFileExtension(grammar));
+		return Lists.<Object> newArrayList(getGeneratorProjectName(grammar), getModelFileExtension(grammar), isPluginProject());
 	}
 
 	private String getGeneratorProjectName(Grammar g) {
@@ -125,4 +126,13 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 		return n.basePackageUi(grammar).replace(".", "::") + "::wizard::"
 				+ GrammarUtil.getName(grammar) + "NewProject";
 	}
+
+	public void setPluginProject(boolean pluginProject) {
+		this.pluginProject = pluginProject;
+	}
+
+	public boolean isPluginProject() {
+		return pluginProject;
+	}
+
 }
