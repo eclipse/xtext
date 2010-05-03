@@ -18,7 +18,9 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.xtext.ui.util.EclipseResourceUtil;
+import org.eclipse.xtext.ui.util.FileOpener;
+
+import com.google.inject.Inject;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -29,6 +31,13 @@ public abstract class XtextNewProjectWizard extends Wizard implements INewWizard
 
 	protected IStructuredSelection selection;
 
+	@Inject
+	private FileOpener fileOpener;
+	
+	private IProjectCreator creator;
+
+	private IWorkbench workbench;
+	
 	public XtextNewProjectWizard(IProjectCreator creator) {
 		this.creator = creator;
 		setNeedsProgressMonitor(true);
@@ -67,15 +76,12 @@ public abstract class XtextNewProjectWizard extends Wizard implements INewWizard
 		return true;
 	}
 
-	private IProjectCreator creator;
-
-	private IWorkbench workbench;
-
-	private void doFinish(final IProjectInfo projectInfo, final IProgressMonitor monitor) {
+	protected void doFinish(final IProjectInfo projectInfo, final IProgressMonitor monitor) {
 		try {
 			creator.setProjectInfo(projectInfo);
 			creator.run(monitor);
-			EclipseResourceUtil.openFileToEdit(getShell(), creator.getResult());
+			fileOpener.selectAndReveal(creator.getResult());
+			fileOpener.openFileToEdit(getShell(), creator.getResult());
 		}
 		catch (final InvocationTargetException e) {
 			logger.error(e.getMessage(), e);
@@ -92,6 +98,10 @@ public abstract class XtextNewProjectWizard extends Wizard implements INewWizard
 
 	public IWorkbench getWorkbench() {
 		return workbench;
+	}
+	
+	protected IProjectCreator getCreator() {
+		return creator;
 	}
 
 }

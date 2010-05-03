@@ -44,6 +44,8 @@ import org.eclipse.xtext.ui.editor.formatting.ContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting.PreferenceStoreIndentationInformation;
 import org.eclipse.xtext.ui.editor.hyperlinking.DefaultHyperlinkDetector;
+import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
+import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.outline.IContentOutlineNodeComparer;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.XtextContentOutlinePage;
@@ -65,6 +67,8 @@ import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
 import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.ui.label.InjectableAdapterFactoryLabelProvider;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -230,5 +234,13 @@ public class DefaultUiModule extends AbstractGenericModule {
 
 	public Class<? extends IContentOutlineNodeComparer> bindIContentOutlineNodeComparer() {
 		return IContentOutlineNodeComparer.Default.class;
+	}
+	
+	public Class<? extends IResourceForEditorInputFactory> bindIResourceForEditorInputFactory() {
+		return JavaClassPathResourceForIEditorInputFactory.class;
+	}
+	
+	public Class<? extends IResourceSetProvider> bindIResourceSetProvider() {
+		return XtextResourceSetProvider.class;
 	}
 }

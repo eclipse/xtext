@@ -1,0 +1,147 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.ui.wizard;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.Collections;
+import java.util.List;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.eclipse.xtext.ui.util.ProjectFactory;
+
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+
+/**
+ * @author Peter Friese - Initial contribution and API
+ */
+public abstract class AbstractProjectCreator extends WorkspaceModifyOperation implements IProjectCreator {
+	
+	private IFile result;
+	private IProjectInfo projectInfo;
+	
+	@Inject
+	@Named("file.extensions")
+	private String fileExtension;
+	
+	public IFile getResult() {
+		return result;
+	}
+	
+	protected void setResult(IFile result) {
+		this.result = result;
+	}
+	
+	public void setProjectInfo(IProjectInfo projectInfo) {
+		this.projectInfo = projectInfo;
+	}
+	
+	protected IProjectInfo getProjectInfo() {
+		return projectInfo;
+	}
+	
+	protected String getEncoding() throws CoreException {
+		return ResourcesPlugin.getWorkspace().getRoot().getDefaultCharset();
+	}
+	
+	@Override
+	protected void execute(final IProgressMonitor monitor)
+			throws CoreException, InvocationTargetException, InterruptedException {
+		SubMonitor subMonitor = SubMonitor.convert(monitor, 
+				getCreateModelProjectMessage(), 
+				2);
+		try {
+			final IProject project = createProject(subMonitor.newChild(1));
+			if (project == null)
+				return;
+			enhanceProject(project, subMonitor.newChild(1));
+			IFile modelFile = getModelFile(project);
+			setResult(modelFile);
+		} finally {
+			subMonitor.done();
+		}
+	}
+
+	protected String getCreateModelProjectMessage() {
+		return "Creating model project " + getProjectInfo().getProjectName();
+	}
+	
+	protected IFile getModelFile(IProject project) throws CoreException {
+		IFolder srcFolder = project.getFolder(getModelFolderName());
+		for (IResource resource : srcFolder.members()) {
+			if (IResource.FILE == resource.getType() && getPrimaryModelFileExtension().equals(resource.getFileExtension())) {
+				return (IFile) resource;
+			}
+		}
+		return null;
+	}
+	
+	protected IProject createProject(IProgressMonitor monitor) {
+		ProjectFactory builder = createProjectFactory();
+		configureProjectBuilder(builder);
+		return builder.createProject(monitor, null);
+	}
+
+	protected ProjectFactory configureProjectBuilder(ProjectFactory builder) {
+		builder.setProjectName(getProjectInfo().getProjectName());
+		builder.addFolders(getAllFolders());
+		builder.addReferencedProjects(getReferencedProjects());
+		builder.addProjectNatures(getProjectNatures());
+		builder.addBuilderIds(getBuilders());
+		return builder;
+	}
+	
+	protected abstract ProjectFactory createProjectFactory();
+	
+	protected void enhanceProject(final IProject project, final IProgressMonitor monitor) throws CoreException {
+	}
+
+	protected String getPrimaryModelFileExtension() {
+		String result = fileExtension;
+		int idx = result.indexOf(',');
+		if (idx > 0) {
+			return result.substring(0, idx).trim();
+		}
+		return result;
+	}
+	
+	protected abstract String getModelFolderName();
+		
+	protected abstract List<String> getAllFolders();
+	
+	protected List<IProject> getReferencedProjects() {
+        return Collections.emptyList();
+    }
+
+    protected String[] getProjectNatures() {
+        return new String[] {
+        	JavaCore.NATURE_ID,
+			"org.eclipse.pde.PluginNature",
+			XtextProjectHelper.NATURE_ID
+		};
+    }
+    
+    protected String[] getBuilders() {
+    	return new String[]{
+			"org.eclipse.jdt.core.javabuilder", 
+			"org.eclipse.pde.ManifestBuilder", 
+			"org.eclipse.pde.SchemaBuilder"
+		};
+	}
+    
+}
