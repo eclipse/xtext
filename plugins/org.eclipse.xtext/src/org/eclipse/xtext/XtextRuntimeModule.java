@@ -19,7 +19,7 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSeri
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xtext.XtextCrossReferenceSerializer;
-import org.eclipse.xtext.xtext.XtextFormattingTokenSerializer;
+import org.eclipse.xtext.xtext.XtextFormatter;
 import org.eclipse.xtext.xtext.XtextFragmentProvider;
 import org.eclipse.xtext.xtext.XtextLinkingService;
 import org.eclipse.xtext.xtext.XtextQualifiedNameSupport;
@@ -70,7 +70,7 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 
 	@Override
 	public Class<? extends IFormatter> bindIFormatter() {
-		return XtextFormattingTokenSerializer.class;
+		return XtextFormatter.class;
 	}
 
 	@Override
