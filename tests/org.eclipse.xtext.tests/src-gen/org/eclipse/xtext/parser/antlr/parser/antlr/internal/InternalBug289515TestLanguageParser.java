@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'1'", "'%'", "'2'", "'3'", "'\\\\%'", "'4'", "'5'", "'%%'", "'6'"
@@ -118,7 +119,7 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_value_9_0=null;
         Token lv_value_11_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:91:6: ( ( ( '1' ( (lv_value_1_0= '%' ) ) ) | ( '2' ( (lv_value_3_0= '%' ) ) ) | ( '3' ( (lv_value_5_0= '\\\\%' ) ) ) | ( '4' ( (lv_value_7_0= '\\\\%' ) ) ) | ( '5' ( (lv_value_9_0= '%%' ) ) ) | ( '6' ( (lv_value_11_0= '%%' ) ) ) ) )

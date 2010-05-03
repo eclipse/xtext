@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "':'", "'#'", "'+'", "'*'", "';'", "'.'", "'/'", "'('", "')'", "'..'", "'-'", "'E'"
@@ -114,7 +115,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
         EObject lv_model_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:91:6: ( ( (lv_model_0_0= ruleModel ) )+ )
@@ -249,7 +250,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
         AntlrDatatypeRuleToken lv_double_8_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:138:6: ( ( ( (lv_id_0_0= ruleNestedModelId ) ) ( ':' ( (lv_value_2_0= ruleFraction ) ) )? ( '#' ( (lv_vector_4_0= ruleVector ) ) )? ( '+' ( (lv_dots_6_0= ruleDots ) ) )? ( '*' ( (lv_double_8_0= ruleDouble ) ) )? ';' ) )

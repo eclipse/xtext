@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalPartialSerializationTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'#1'", "'node'", "'('", "')'"
@@ -114,7 +115,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         EObject this_NodeRoot_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:91:6: (this_NodeRoot_0= ruleNodeRoot )
@@ -193,7 +194,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         EObject lv_node_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:123:6: ( ( '#1' ( (lv_node_1_0= ruleNode ) ) ) )
@@ -308,7 +309,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         EObject lv_children_3_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:174:6: ( ( 'node' ( (lv_name_1_0= RULE_ID ) ) ( '(' ( (lv_children_3_0= ruleNode ) )+ ')' )? ) )

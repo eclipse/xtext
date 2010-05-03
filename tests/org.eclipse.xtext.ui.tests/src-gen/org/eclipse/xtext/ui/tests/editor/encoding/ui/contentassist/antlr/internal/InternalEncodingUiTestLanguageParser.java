@@ -20,6 +20,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalEncodingUiTestLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_LEXEME", "RULE_WS", "RULE_ANY_OTHER"

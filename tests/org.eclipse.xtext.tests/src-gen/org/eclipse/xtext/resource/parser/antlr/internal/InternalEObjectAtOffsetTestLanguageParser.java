@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalEObjectAtOffsetTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'foobar'", "'bar'", "','", "'foo'"
@@ -116,7 +117,7 @@ public class InternalEObjectAtOffsetTestLanguageParser extends AbstractInternalA
         EObject lv_bars_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalEObjectAtOffsetTestLanguage.g:91:6: ( ( ( (lv_foos_0_0= ruleFoo ) ) | ( (lv_bars_1_0= ruleAbstractBar ) ) )* )
@@ -289,7 +290,7 @@ public class InternalEObjectAtOffsetTestLanguageParser extends AbstractInternalA
         EObject this_Bar_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalEObjectAtOffsetTestLanguage.g:163:6: ( (this_Bar_0= ruleBar ( () 'foobar' ( ( RULE_ID ) ) )? ) )
@@ -437,7 +438,7 @@ public class InternalEObjectAtOffsetTestLanguageParser extends AbstractInternalA
 
         Token lv_name_1_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalEObjectAtOffsetTestLanguage.g:229:6: ( ( 'bar' ( (lv_name_1_0= RULE_ID ) ) ( ( RULE_ID ) ) ( ',' ( ( RULE_ID ) ) )* ) )
@@ -619,7 +620,7 @@ public class InternalEObjectAtOffsetTestLanguageParser extends AbstractInternalA
 
         Token lv_name_1_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalEObjectAtOffsetTestLanguage.g:312:6: ( ( 'foo' ( (lv_name_1_0= RULE_ID ) ) ) )

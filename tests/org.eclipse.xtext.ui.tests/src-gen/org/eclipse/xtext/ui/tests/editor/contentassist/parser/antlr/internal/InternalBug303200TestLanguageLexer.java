@@ -10,6 +10,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalBug303200TestLanguageLexer extends Lexer {
     public static final int T10=10;
     public static final int T14=14;

@@ -867,12 +867,12 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cGroupsAssignableTerminalParserRuleCall_1_1_1_0 = (RuleCall)cGroupsAssignment_1_1_1.eContents().get(0);
 		
 		//AssignableAlternatives returns AbstractElement:
-		//  AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=
-		//  AssignableTerminal)+)?;
+		//  AssignableTerminal ({Alternatives.groups+=current} ("|"
+		//  groups+=AssignableTerminal)+)?;
 		public ParserRule getRule() { return rule; }
 
-		//AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=
-		//AssignableTerminal)+)?
+		//AssignableTerminal ({Alternatives.groups+=current} ("|"
+		//groups+=AssignableTerminal)+)?
 		public Group getGroup() { return cGroup; }
 
 		//AssignableTerminal
@@ -1001,12 +1001,12 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cGroupsCrossReferenceableTerminalParserRuleCall_1_1_1_0 = (RuleCall)cGroupsAssignment_1_1_1.eContents().get(0);
 		
 		//CrossReferenceableAlternatives returns AbstractElement:
-		//  CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=
-		//  CrossReferenceableTerminal)+)?;
+		//  CrossReferenceableTerminal ({Alternatives.groups+=current} ("|"
+		//  groups+=CrossReferenceableTerminal)+)?;
 		public ParserRule getRule() { return rule; }
 
-		//CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=
-		//CrossReferenceableTerminal)+)?
+		//CrossReferenceableTerminal ({Alternatives.groups+=current} ("|"
+		//groups+=CrossReferenceableTerminal)+)?
 		public Group getGroup() { return cGroup; }
 
 		//CrossReferenceableTerminal
@@ -1071,12 +1071,12 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//TerminalRule:
-		//  "terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=
-		//  TerminalAlternatives ";";
+		//  "terminal" name=ID ("returns" type=TypeRef)? ":"
+		//  alternatives=TerminalAlternatives ";";
 		public ParserRule getRule() { return rule; }
 
-		//"terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=
-		//TerminalAlternatives ";"
+		//"terminal" name=ID ("returns" type=TypeRef)? ":"
+		//alternatives=TerminalAlternatives ";"
 		public Group getGroup() { return cGroup; }
 
 		//"terminal"
@@ -1471,12 +1471,12 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cGroupsEnumLiteralDeclarationParserRuleCall_1_1_1_0 = (RuleCall)cGroupsAssignment_1_1_1.eContents().get(0);
 		
 		//EnumLiterals returns AbstractElement:
-		//  EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=
-		//  EnumLiteralDeclaration)+)?;
+		//  EnumLiteralDeclaration ({Alternatives.groups+=current} ("|"
+		//  groups+=EnumLiteralDeclaration)+)?;
 		public ParserRule getRule() { return rule; }
 
-		//EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=
-		//EnumLiteralDeclaration)+)?
+		//EnumLiteralDeclaration ({Alternatives.groups+=current} ("|"
+		//groups+=EnumLiteralDeclaration)+)?
 		public Group getGroup() { return cGroup; }
 
 		//EnumLiteralDeclaration
@@ -1808,8 +1808,8 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//AssignableAlternatives returns AbstractElement:
-	//  AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=
-	//  AssignableTerminal)+)?;
+	//  AssignableTerminal ({Alternatives.groups+=current} ("|"
+	//  groups+=AssignableTerminal)+)?;
 	public AssignableAlternativesElements getAssignableAlternativesAccess() {
 		return (pAssignableAlternatives != null) ? pAssignableAlternatives : (pAssignableAlternatives = new AssignableAlternativesElements());
 	}
@@ -1849,8 +1849,8 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//CrossReferenceableAlternatives returns AbstractElement:
-	//  CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=
-	//  CrossReferenceableTerminal)+)?;
+	//  CrossReferenceableTerminal ({Alternatives.groups+=current} ("|"
+	//  groups+=CrossReferenceableTerminal)+)?;
 	public CrossReferenceableAlternativesElements getCrossReferenceableAlternativesAccess() {
 		return (pCrossReferenceableAlternatives != null) ? pCrossReferenceableAlternatives : (pCrossReferenceableAlternatives = new CrossReferenceableAlternativesElements());
 	}
@@ -1870,8 +1870,8 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//TerminalRule:
-	//  "terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=
-	//  TerminalAlternatives ";";
+	//  "terminal" name=ID ("returns" type=TypeRef)? ":"
+	//  alternatives=TerminalAlternatives ";";
 	public TerminalRuleElements getTerminalRuleAccess() {
 		return (pTerminalRule != null) ? pTerminalRule : (pTerminalRule = new TerminalRuleElements());
 	}
@@ -1992,8 +1992,8 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//EnumLiterals returns AbstractElement:
-	//  EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=
-	//  EnumLiteralDeclaration)+)?;
+	//  EnumLiteralDeclaration ({Alternatives.groups+=current} ("|"
+	//  groups+=EnumLiteralDeclaration)+)?;
 	public EnumLiteralsElements getEnumLiteralsAccess() {
 		return (pEnumLiterals != null) ? pEnumLiterals : (pEnumLiterals = new EnumLiteralsElements());
 	}

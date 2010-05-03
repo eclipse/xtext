@@ -85,7 +85,7 @@ entryRuleEntityWithEnumAndReference returns [EObject current=null]
 
 // Rule EntityWithEnumAndReference
 ruleEntityWithEnumAndReference returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;

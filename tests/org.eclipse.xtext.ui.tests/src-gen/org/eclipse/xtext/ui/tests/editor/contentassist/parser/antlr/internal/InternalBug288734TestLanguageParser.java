@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'constant'", "'string'", "'integer'", "'boolean'", "'@desc'"
@@ -114,7 +115,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_constants_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:91:6: ( ( (lv_constants_0_0= ruleTConstant ) ) )
@@ -222,7 +223,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
         EObject this_TBooleanConstant_2 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:138:6: ( (this_TStringConstant_0= ruleTStringConstant | this_TIntegerConstant_1= ruleTIntegerConstant | this_TBooleanConstant_2= ruleTBooleanConstant ) )
@@ -349,7 +350,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_annotations_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:190:6: ( ( ( (lv_annotations_0_0= ruleTAnnotation ) )* 'constant' 'string' ( (lv_name_3_0= RULE_ID ) ) ) )
@@ -519,7 +520,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_annotations_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:269:6: ( ( ( (lv_annotations_0_0= ruleTAnnotation ) )* 'constant' 'integer' ( (lv_name_3_0= RULE_ID ) ) ) )
@@ -689,7 +690,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_annotations_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:348:6: ( ( ( (lv_annotations_0_0= ruleTAnnotation ) )* 'constant' 'boolean' ( (lv_name_3_0= RULE_ID ) ) ) )
@@ -857,7 +858,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
 
         Token lv_description_1_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.g:427:6: ( ( '@desc' ( (lv_description_1_0= RULE_STRING ) ) ) )

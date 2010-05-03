@@ -84,7 +84,7 @@ entryRuleEPatch returns [EObject current=null]
 
 // Rule EPatch
 ruleEPatch returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -215,7 +215,7 @@ entryRuleImport returns [EObject current=null]
 
 // Rule Import
 ruleImport returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -267,7 +267,7 @@ entryRuleModelImport returns [EObject current=null]
 
 // Rule ModelImport
 ruleModelImport returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -309,7 +309,7 @@ entryRuleResourceImport returns [EObject current=null]
 
 // Rule ResourceImport
 ruleResourceImport returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -388,7 +388,7 @@ entryRuleEPackageImport returns [EObject current=null]
 
 // Rule EPackageImport
 ruleEPackageImport returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -467,7 +467,7 @@ entryRuleJavaImport returns [EObject current=null]
 
 // Rule JavaImport
 ruleJavaImport returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -550,7 +550,7 @@ entryRuleExtensionImport returns [EObject current=null]
 
 // Rule ExtensionImport
 ruleExtensionImport returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -633,7 +633,7 @@ entryRuleNamedResource returns [EObject current=null]
 
 // Rule NamedResource
 ruleNamedResource returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -816,7 +816,7 @@ entryRuleObjectRef returns [EObject current=null]
 
 // Rule ObjectRef
 ruleObjectRef returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1105,7 +1105,7 @@ entryRuleBiSingleAssignment returns [EObject current=null]
 
 // Rule BiSingleAssignment
 ruleBiSingleAssignment returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1212,7 +1212,7 @@ entryRuleBiListAssignment returns [EObject current=null]
 
 // Rule BiListAssignment
 ruleBiListAssignment returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1383,7 +1383,7 @@ entryRuleMonoSingleAssignment returns [EObject current=null]
 
 // Rule MonoSingleAssignment
 ruleMonoSingleAssignment returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1462,7 +1462,7 @@ entryRuleMonoListAssignment returns [EObject current=null]
 
 // Rule MonoListAssignment
 ruleMonoListAssignment returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1577,7 +1577,7 @@ entryRuleAssignmentValue returns [EObject current=null]
 
 // Rule AssignmentValue
 ruleAssignmentValue returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1763,7 +1763,7 @@ entryRuleListAssignmentValue returns [EObject current=null]
 
 // Rule ListAssignmentValue
 ruleListAssignmentValue returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2010,7 +2010,7 @@ entryRuleSingleAssignmentValue returns [EObject current=null]
 
 // Rule SingleAssignmentValue
 ruleSingleAssignmentValue returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2218,7 +2218,7 @@ entryRuleCreatedObject returns [EObject current=null]
 
 // Rule CreatedObject
 ruleCreatedObject returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2365,7 +2365,7 @@ entryRuleObjectNew returns [EObject current=null]
 
 // Rule ObjectNew
 ruleObjectNew returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2430,7 +2430,7 @@ entryRuleObjectCopy returns [EObject current=null]
 
 // Rule ObjectCopy
 ruleObjectCopy returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2495,7 +2495,7 @@ entryRuleMigration returns [EObject current=null]
 
 // Rule Migration
 ruleMigration returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2607,7 +2607,7 @@ entryRuleExecutable returns [EObject current=null]
 
 // Rule Executable
 ruleExecutable returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2649,7 +2649,7 @@ entryRuleJavaExecutable returns [EObject current=null]
 
 // Rule JavaExecutable
 ruleJavaExecutable returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2708,7 +2708,7 @@ entryRuleExpressionExecutable returns [EObject current=null]
 
 // Rule ExpressionExecutable
 ruleExpressionExecutable returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;

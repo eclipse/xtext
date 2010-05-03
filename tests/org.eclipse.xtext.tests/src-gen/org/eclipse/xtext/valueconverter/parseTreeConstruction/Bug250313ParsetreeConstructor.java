@@ -45,17 +45,17 @@ protected class ThisRootNode extends RootToken {
  * Model:
  *   "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+"
  *   multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2"
- *   value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+" multiValue+=
- *   Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|("content"
- *   children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?;
+ *   value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+"
+ *   multiValue+=Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype
+ *   |("content" children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?;
  *
  **/
 
 // "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+"
 // multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2"
-// value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+" multiValue+=
-// Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|("content"
-// children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?
+// value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+"
+// multiValue+=Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|(
+// "content" children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

@@ -1397,8 +1397,8 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//  "," z+=ID)*)?)) name=ID;
 		public ParserRule getRule() { return rule; }
 
-		//"#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z
-		//+=ID)*)?)) name=ID
+		//"#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID (","
+		//z+=ID)*)?)) name=ID
 		public Group getGroup() { return cGroup; }
 
 		//"#19"

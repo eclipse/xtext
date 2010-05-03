@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
@@ -119,7 +120,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
         Token lv_wsValue_5_0=null;
         Token lv_anyValue_6_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:91:6: ( ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_mlCommentValue_3_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_4_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_5_0= RULE_WS ) ) | ( (lv_anyValue_6_0= RULE_ANY_OTHER ) ) ) )

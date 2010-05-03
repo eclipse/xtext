@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+@SuppressWarnings("all")
 public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     public static final int FRAGMENT_RULE_CHARA=6;
     public static final int FRAGMENT_RULE_CHARX=8;

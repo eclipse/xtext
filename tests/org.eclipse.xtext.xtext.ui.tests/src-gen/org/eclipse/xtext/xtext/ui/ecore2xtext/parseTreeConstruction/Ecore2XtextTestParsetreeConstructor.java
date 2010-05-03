@@ -45,13 +45,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Root ****************
  *
  * Root:
- *   {Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract ("," classes+=
- *   Abstract)* "}")? ("concrete0" concrete0=Concrete0)? "}";
+ *   {Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract (","
+ *   classes+=Abstract)* "}")? ("concrete0" concrete0=Concrete0)? "}";
  *
  **/
 
-// {Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract ("," classes+=
-// Abstract)* "}")? ("concrete0" concrete0=Concrete0)? "}"
+// {Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract (","
+// classes+=Abstract)* "}")? ("concrete0" concrete0=Concrete0)? "}"
 protected class Root_Group extends GroupToken {
 	
 	public Root_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

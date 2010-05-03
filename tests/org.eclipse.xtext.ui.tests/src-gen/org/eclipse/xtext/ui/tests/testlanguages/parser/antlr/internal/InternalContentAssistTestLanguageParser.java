@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalContentAssistTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'abstract rules'", "'end'", "'('", "')'", "';'", "'rule'", "':'"
@@ -114,7 +115,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
         EObject lv_rules_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/parser/antlr/internal/InternalContentAssistTestLanguage.g:91:6: ( ( 'abstract rules' ( (lv_rules_1_0= ruleAbstractRule ) )+ 'end' ) )
@@ -257,7 +258,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
         EObject this_SecondAbstractRuleChild_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/parser/antlr/internal/InternalContentAssistTestLanguage.g:146:6: ( (this_FirstAbstractRuleChild_0= ruleFirstAbstractRuleChild | this_SecondAbstractRuleChild_1= ruleSecondAbstractRuleChild ) )
@@ -390,7 +391,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
         EObject lv_elements_2_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/parser/antlr/internal/InternalContentAssistTestLanguage.g:188:6: ( ( ( (lv_name_0_0= RULE_ID ) ) '(' ( (lv_elements_2_0= ruleAbstractRule ) )+ ')' ';' ) )
@@ -569,7 +570,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
         EObject lv_rule_3_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/parser/antlr/internal/InternalContentAssistTestLanguage.g:271:6: ( ( ( (lv_name_0_0= RULE_ID ) ) 'rule' ':' ( (lv_rule_3_0= ruleAbstractRuleCall ) ) ';' ) )
@@ -721,7 +722,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
     public final EObject ruleAbstractRuleCall() throws RecognitionException {
         EObject current = null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/parser/antlr/internal/InternalContentAssistTestLanguage.g:354:6: ( ( ( RULE_ID ) ) )

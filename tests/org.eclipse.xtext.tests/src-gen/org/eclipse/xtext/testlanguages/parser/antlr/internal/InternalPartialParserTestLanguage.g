@@ -84,7 +84,7 @@ entryRuleSomeContainer returns [EObject current=null]
 
 // Rule SomeContainer
 ruleSomeContainer returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -192,7 +192,7 @@ entryRuleNested returns [EObject current=null]
 
 // Rule Nested
 ruleNested returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -251,7 +251,7 @@ entryRuleContent returns [EObject current=null]
 
 // Rule Content
 ruleContent returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -293,7 +293,7 @@ entryRuleChildren returns [EObject current=null]
 
 // Rule Children
 ruleChildren returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -380,7 +380,7 @@ entryRuleChild returns [EObject current=null]
 
 // Rule Child
 ruleChild returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -443,7 +443,7 @@ entryRuleAbstractChildren returns [EObject current=null]
 
 // Rule AbstractChildren
 ruleAbstractChildren returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -502,7 +502,7 @@ entryRuleAbstractChild returns [EObject current=null]
 
 // Rule AbstractChild
 ruleAbstractChild returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -544,7 +544,7 @@ entryRuleFirstConcrete returns [EObject current=null]
 
 // Rule FirstConcrete
 ruleFirstConcrete returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -621,7 +621,7 @@ entryRuleSecondConcrete returns [EObject current=null]
 
 // Rule SecondConcrete
 ruleSecondConcrete returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -702,7 +702,7 @@ entryRuleNamed returns [EObject current=null]
 
 // Rule Named
 ruleNamed returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;

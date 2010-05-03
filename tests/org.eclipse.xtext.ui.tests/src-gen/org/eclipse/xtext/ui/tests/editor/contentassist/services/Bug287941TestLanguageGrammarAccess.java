@@ -92,13 +92,13 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//MQLquery:
 		//  "select" selectEntries+=SelectEntry ("," selectEntries+=SelectEntry)* "from"
-		//  fromEntries+=FromEntry ("," fromEntries+=FromEntry)* ("where" whereEntries+=
-		//  WhereEntry+)?;
+		//  fromEntries+=FromEntry ("," fromEntries+=FromEntry)* ("where"
+		//  whereEntries+=WhereEntry+)?;
 		public ParserRule getRule() { return rule; }
 
 		//"select" selectEntries+=SelectEntry ("," selectEntries+=SelectEntry)* "from"
-		//fromEntries+=FromEntry ("," fromEntries+=FromEntry)* ("where" whereEntries+=
-		//WhereEntry+)?
+		//fromEntries+=FromEntry ("," fromEntries+=FromEntry)* ("where"
+		//whereEntries+=WhereEntry+)?
 		public Group getGroup() { return cGroup; }
 
 		//"select"
@@ -455,12 +455,12 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cEntriesConcreteWhereEntryParserRuleCall_1_1_1_0 = (RuleCall)cEntriesAssignment_1_1_1.eContents().get(0);
 		
 		//AndWhereEntry returns WhereEntry:
-		//  ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=
-		//  ConcreteWhereEntry)+)?;
+		//  ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and"
+		//  entries+=ConcreteWhereEntry)+)?;
 		public ParserRule getRule() { return rule; }
 
-		//ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=
-		//ConcreteWhereEntry)+)?
+		//ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and"
+		//entries+=ConcreteWhereEntry)+)?
 		public Group getGroup() { return cGroup; }
 
 		//ConcreteWhereEntry
@@ -930,12 +930,12 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cNullKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//NullWhereEntry:
-		//  alias=[FromEntry] "." feature=[ecore::EStructuralFeature] operator=
-		//  BooleanOperator "null";
+		//  alias=[FromEntry] "." feature=[ecore::EStructuralFeature]
+		//  operator=BooleanOperator "null";
 		public ParserRule getRule() { return rule; }
 
-		//alias=[FromEntry] "." feature=[ecore::EStructuralFeature] operator=
-		//BooleanOperator "null"
+		//alias=[FromEntry] "." feature=[ecore::EStructuralFeature]
+		//operator=BooleanOperator "null"
 		public Group getGroup() { return cGroup; }
 
 		//alias=[FromEntry]
@@ -1341,8 +1341,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	//MQLquery:
 	//  "select" selectEntries+=SelectEntry ("," selectEntries+=SelectEntry)* "from"
-	//  fromEntries+=FromEntry ("," fromEntries+=FromEntry)* ("where" whereEntries+=
-	//  WhereEntry+)?;
+	//  fromEntries+=FromEntry ("," fromEntries+=FromEntry)* ("where"
+	//  whereEntries+=WhereEntry+)?;
 	public MQLqueryElements getMQLqueryAccess() {
 		return (pMQLquery != null) ? pMQLquery : (pMQLquery = new MQLqueryElements());
 	}
@@ -1424,8 +1424,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//AndWhereEntry returns WhereEntry:
-	//  ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=
-	//  ConcreteWhereEntry)+)?;
+	//  ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and"
+	//  entries+=ConcreteWhereEntry)+)?;
 	public AndWhereEntryElements getAndWhereEntryAccess() {
 		return (pAndWhereEntry != null) ? pAndWhereEntry : (pAndWhereEntry = new AndWhereEntryElements());
 	}
@@ -1563,8 +1563,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//NullWhereEntry:
-	//  alias=[FromEntry] "." feature=[ecore::EStructuralFeature] operator=
-	//  BooleanOperator "null";
+	//  alias=[FromEntry] "." feature=[ecore::EStructuralFeature]
+	//  operator=BooleanOperator "null";
 	public NullWhereEntryElements getNullWhereEntryAccess() {
 		return (pNullWhereEntry != null) ? pNullWhereEntry : (pNullWhereEntry = new NullWhereEntryElements());
 	}

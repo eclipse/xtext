@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalLookAheadContentAssistTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'('", "')'", "'['", "']'", "'<'", "'>'", "'{'", "'}'", "'='"
@@ -128,7 +129,7 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
         EObject lv_attribute_14_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:91:6: ( ( ( '(' ( (lv_attribute_1_0= ruleAttribute ) )* ( (lv_attribute_2_0= rulePair ) )* ')' ) | ( '[' ( (lv_attribute_5_0= ruleAttribute ) )+ ( (lv_attribute_6_0= rulePair ) )* ']' ) | ( '<' ( (lv_attribute_9_0= ruleAttribute ) )* ( (lv_attribute_10_0= rulePair ) )+ '>' ) | ( '{' ( (lv_attribute_13_0= ruleAttribute ) )+ ( (lv_attribute_14_0= rulePair ) )+ '}' ) ) )
@@ -785,7 +786,7 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
 
         Token lv_value_0_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:341:6: ( ( (lv_value_0_0= RULE_ID ) ) )
@@ -886,7 +887,7 @@ public class InternalLookAheadContentAssistTestLanguageParser extends AbstractIn
         Token lv_name_0_0=null;
         Token lv_value_2_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.g:388:6: ( ( ( (lv_name_0_0= RULE_ID ) ) '=' ( (lv_value_2_0= RULE_ID ) ) ) )

@@ -22,6 +22,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalHiddenTokensMergerTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'#1'", "'ref'", "';'", "'.'", "'#2'", "'kw1'", "'#3'", "'item'", "'#4'", "'#5'", "'refs'", "'#6'", "'#7'", "'class'", "'endclass'", "'#8'", "'sub1'", "'sub2'", "'array'", "'object'", "'resultSet'", "'iterator'"
@@ -129,7 +130,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
         EObject this_Action1_7 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:92:6: ( (this_DatatypeBug286557_0= ruleDatatypeBug286557 | this_EnumBug_1= ruleEnumBug | this_Commentable_2= ruleCommentable | this_ValueList_3= ruleValueList | this_RefList_4= ruleRefList | this_SingleRef_5= ruleSingleRef | this_AppendToFileEnd_6= ruleAppendToFileEnd | this_Action1_7= ruleAction1 ) )
@@ -387,7 +388,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
         AntlrDatatypeRuleToken lv_name_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:194:6: ( ( '#1' ( (lv_name_1_0= ruleFQN ) ) ( 'ref' ( ( ruleFQN ) ) )? ';' ) )
@@ -676,7 +677,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
         Enumerator lv_return_2_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:312:6: ( ( '#2' 'kw1' ( (lv_return_2_0= ruleEnumBugEnum ) ) ( (lv_name_3_0= RULE_ID ) ) ) )
@@ -827,7 +828,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
         EObject lv_item_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:391:6: ( ( '#3' ( (lv_item_1_0= ruleCommentableItem ) )* ) )
@@ -958,7 +959,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
 
         Token lv_id_1_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:442:6: ( ( 'item' ( (lv_id_1_0= RULE_ID ) ) ) )
@@ -1069,7 +1070,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
         AntlrDatatypeRuleToken lv_ids_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:493:6: ( ( '#4' ( (lv_ids_1_0= ruleFQN ) )* ) )
@@ -1201,7 +1202,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
         EObject lv_objs_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:544:6: ( ( '#5' ( (lv_objs_1_0= ruleRefObj ) )* 'refs' ( ( ruleFQN ) )* ) )
@@ -1383,7 +1384,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
         AntlrDatatypeRuleToken lv_name_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:615:6: ( ( (lv_name_0_0= ruleFQN ) ) )
@@ -1487,7 +1488,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
         EObject lv_obj_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:662:6: ( ( '#6' ( (lv_obj_1_0= ruleRefObj ) ) 'ref' ( ( ruleFQN ) ) ) )
@@ -1633,7 +1634,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
         EObject lv_items_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:733:6: ( ( '#7' ( (lv_items_1_0= ruleAppendToFileEndItem ) )* ) )
@@ -1764,7 +1765,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
 
         Token lv_name_1_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:784:6: ( ( 'class' ( (lv_name_1_0= RULE_ID ) ) 'endclass' ) )
@@ -1882,7 +1883,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
         EObject lv_actions2_4_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:839:6: ( ( '#8' () ( (lv_name_2_0= RULE_ID ) ) ( (lv_actions2_3_0= ruleAction1Sub1 ) ) ( (lv_actions2_4_0= ruleAction1Sub2 ) ) ) )
@@ -2078,7 +2079,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
     public final EObject ruleAction1Sub1() throws RecognitionException {
         EObject current = null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:949:6: ( ( () 'sub1' ) )
@@ -2169,7 +2170,7 @@ public class InternalHiddenTokensMergerTestLanguageParser extends AbstractIntern
     public final EObject ruleAction1Sub2() throws RecognitionException {
         EObject current = null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalHiddenTokensMergerTestLanguage.g:987:6: ( ( () 'sub2' ) )

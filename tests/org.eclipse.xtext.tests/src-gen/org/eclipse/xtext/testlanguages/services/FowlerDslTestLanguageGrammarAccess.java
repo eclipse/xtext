@@ -32,8 +32,8 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cStatesStateParserRuleCall_6_0 = (RuleCall)cStatesAssignment_6.eContents().get(0);
 		
 		//Statemachine:
-		//  "events" events+=Event* "end" "commands" commands+=Command* "end" states+=
-		//  State*;
+		//  "events" events+=Event* "end" "commands" commands+=Command* "end"
+		//  states+=State*;
 		public ParserRule getRule() { return rule; }
 
 		//"events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*
@@ -152,8 +152,8 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cEndKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//State:
-		//  "state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=
-		//  Transition* "end";
+		//  "state" name=ID ("actions" "{" actions+=[Command]+ "}")?
+		//  transitions+=Transition* "end";
 		public ParserRule getRule() { return rule; }
 
 		//"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition
@@ -269,8 +269,8 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Statemachine:
-	//  "events" events+=Event* "end" "commands" commands+=Command* "end" states+=
-	//  State*;
+	//  "events" events+=Event* "end" "commands" commands+=Command* "end"
+	//  states+=State*;
 	public StatemachineElements getStatemachineAccess() {
 		return (pStatemachine != null) ? pStatemachine : (pStatemachine = new StatemachineElements());
 	}
@@ -300,8 +300,8 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//State:
-	//  "state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=
-	//  Transition* "end";
+	//  "state" name=ID ("actions" "{" actions+=[Command]+ "}")?
+	//  transitions+=Transition* "end";
 	public StateElements getStateAccess() {
 		return (pState != null) ? pState : (pState = new StateElements());
 	}

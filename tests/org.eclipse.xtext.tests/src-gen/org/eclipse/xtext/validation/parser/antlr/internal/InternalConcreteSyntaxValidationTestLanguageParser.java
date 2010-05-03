@@ -22,6 +22,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalConcreteSyntaxValidationTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'#1'", "'#2'", "'kw1'", "'kw2'", "'#3'", "'kw3'", "'#4'", "'#5'", "'kw4'", "'kw5'", "'#6'", "'#7'", "'#8'", "'#9'", "'#10'", "'#11'", "'#12'", "'#13'", "'#14'", "'#15'", "'#16'", "'group'", "'#17'", "','", "'#18'", "'#19'", "'#20'", "'#21'", "'#22'", "'#23'", "'kw'", "'#24'", "'#25'", "'#26'", "'#27'", "'short'", "'one'", "'long'", "'extra'", "'two'", "'#28'", "'lit1'", "'lit2'"
@@ -169,7 +170,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         EObject lv_x28_27_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:92:6: ( ( ( (lv_x1_0_0= ruleSimpleGroup ) ) | ( (lv_x2_1_0= ruleSimpleAlternative ) ) | ( (lv_x3_2_0= ruleSimpleMultiplicities ) ) | ( (lv_x4_3_0= ruleGroupMultiplicities ) ) | ( (lv_x5_4_0= ruleAlternativeMultiplicities ) ) | ( (lv_x6_5_0= ruleAssignedAction ) ) | ( (lv_x7_6_0= ruleAssignedActionSecond ) ) | ( (lv_x8_7_0= ruleUnassignedAction1 ) ) | ( (lv_x9_8_0= ruleUnassignedAction2 ) ) | ( (lv_x10_9_0= ruleUnassignedAction3 ) ) | ( (lv_x11_10_0= ruleUnassignedRuleCall1 ) ) | ( (lv_x12_11_0= ruleUnassignedRuleCall2 ) ) | ( (lv_x13_12_0= ruleCombination1 ) ) | ( (lv_x14_13_0= ruleCombination2 ) ) | ( (lv_x15_14_0= ruleCombination3 ) ) | ( (lv_x16_15_0= ruleCombination4 ) ) | ( (lv_x17_16_0= ruleList1 ) ) | ( (lv_x18_17_0= ruleList2 ) ) | ( (lv_x19_18_0= ruleList3 ) ) | ( (lv_x20_19_0= ruleList4 ) ) | ( (lv_x21_20_0= ruleList5 ) ) | ( (lv_x22_21_0= ruleAltList1 ) ) | ( (lv_x23_22_0= ruleAltList2 ) ) | ( (lv_x24_23_0= ruleTransientObject ) ) | ( (lv_x25_24_0= ruleTransientSerializeables1 ) ) | ( (lv_x26_25_0= ruleStaticSimplification ) ) | ( (lv_x27_26_0= ruleTwoVersion ) ) | ( (lv_x28_27_0= ruleHeuristic1 ) ) ) )
@@ -1568,7 +1569,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val1_1_0=null;
         Token lv_val2_2_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:814:6: ( ( '#1' ( (lv_val1_1_0= RULE_ID ) ) ( (lv_val2_2_0= RULE_ID ) ) ) )
@@ -1712,7 +1713,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val1_2_0=null;
         Token lv_val2_4_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:889:6: ( ( '#2' ( ( 'kw1' ( (lv_val1_2_0= RULE_ID ) ) ) | ( 'kw2' ( (lv_val2_4_0= RULE_ID ) ) ) ) ) )
@@ -1910,7 +1911,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val3_5_0=null;
         Token lv_val4_7_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:973:6: ( ( '#3' ( (lv_val1_1_0= RULE_ID ) ) 'kw1' ( (lv_val2_3_0= RULE_ID ) )? 'kw2' ( (lv_val3_5_0= RULE_ID ) )+ 'kw3' ( (lv_val4_7_0= RULE_ID ) )* ) )
@@ -2189,7 +2190,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val6_9_0=null;
         Token lv_val7_10_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:1108:6: ( ( '#4' ( (lv_val1_1_0= RULE_ID ) ) 'kw1' ( ( (lv_val2_3_0= RULE_ID ) ) ( (lv_val3_4_0= RULE_ID ) ) )? 'kw2' ( ( (lv_val4_6_0= RULE_ID ) ) ( (lv_val5_7_0= RULE_ID ) ) )+ 'kw3' ( ( (lv_val6_9_0= RULE_ID ) ) ( (lv_val7_10_0= RULE_ID ) ) )* ) )
@@ -2584,7 +2585,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val6_9_0=null;
         Token lv_val7_11_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:1315:6: ( ( '#5' ( ( (lv_val2_1_0= RULE_ID ) ) | ( 'kw1' ( (lv_val3_3_0= RULE_ID ) ) ) )? 'kw2' ( ( (lv_val4_5_0= RULE_ID ) ) | ( 'kw3' ( (lv_val5_7_0= RULE_ID ) ) ) )+ 'kw4' ( ( (lv_val6_9_0= RULE_ID ) ) | ( 'kw5' ( (lv_val7_11_0= RULE_ID ) ) ) )* ) )
@@ -2995,7 +2996,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val1_1_0=null;
         Token lv_val1_3_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:1509:6: ( ( '#6' ( (lv_val1_1_0= RULE_ID ) ) ( () ( (lv_val1_3_0= RULE_ID ) ) )+ ) )
@@ -3189,7 +3190,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val1_1_0=null;
         Token lv_val2_3_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:1600:6: ( ( '#7' ( (lv_val1_1_0= RULE_ID ) ) 'kw1' ( (lv_val2_3_0= RULE_ID ) ) ) )
@@ -3337,7 +3338,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val1_2_0=null;
         Token lv_val2_3_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:1679:6: ( ( () '#8' ( (lv_val1_2_0= RULE_ID ) ) ( (lv_val2_3_0= RULE_ID ) )? ) )
@@ -3508,7 +3509,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val1_2_0=null;
         Token lv_val2_3_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:1765:6: ( ( () '#9' ( (lv_val1_2_0= RULE_ID ) ) ( (lv_val2_3_0= RULE_ID ) )? ) )
@@ -3679,7 +3680,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val1_5_0=null;
         Token lv_val2_6_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:1851:6: ( ( '#10' ( ( 'kw1' () ) | ( 'kw2' () ) ) ( (lv_val1_5_0= RULE_ID ) ) ( (lv_val2_6_0= RULE_ID ) )? ) )
@@ -3919,7 +3920,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         EObject this_UnassignedRuleCall1Sub_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:1957:6: ( ( '#11' this_UnassignedRuleCall1Sub_1= ruleUnassignedRuleCall1Sub ( (lv_val2_2_0= RULE_ID ) ) ) )
@@ -4040,7 +4041,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
 
         Token lv_val1_0_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:2017:6: ( ( (lv_val1_0_0= RULE_ID ) ) )
@@ -4142,7 +4143,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         EObject this_UnassignedRuleCall2Sub_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:2064:6: ( ( '#12' this_UnassignedRuleCall2Sub_1= ruleUnassignedRuleCall2Sub ( (lv_val2_2_0= RULE_ID ) ) ) )
@@ -4261,7 +4262,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
     public final EObject ruleUnassignedRuleCall2Sub() throws RecognitionException {
         EObject current = null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:2124:6: ( () )
@@ -4342,7 +4343,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val3_5_0=null;
         Token lv_val4_6_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:2158:6: ( ( '#13' ( (lv_val1_1_0= RULE_ID ) ) ( 'kw1' ( (lv_val2_3_0= RULE_ID ) ) ( ( 'kw2' ( (lv_val3_5_0= RULE_ID ) ) ) | ( (lv_val4_6_0= RULE_ID ) ) ) )? ) )
@@ -4617,7 +4618,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val3_4_0=null;
         Token lv_val4_5_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:2290:6: ( ( '#14' ( (lv_val1_1_0= RULE_ID ) ) ( ( 'kw1' ( (lv_val2_3_0= RULE_ID ) ) ) | ( ( (lv_val3_4_0= RULE_ID ) ) ( (lv_val4_5_0= RULE_ID ) ) )* ) ) )
@@ -4894,7 +4895,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val2_2_0=null;
         Token lv_val3_3_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:2418:6: ( ( '#15' ( ( (lv_val1_1_0= RULE_ID ) ) | ( (lv_val2_2_0= RULE_INT ) ) | ( (lv_val3_3_0= RULE_STRING ) ) )* ) )
@@ -5120,7 +5121,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val2_3_0=null;
         Token lv_val3_4_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:2519:6: ( ( '#16' ( 'group' ( (lv_val1_2_0= RULE_ID ) ) ( (lv_val2_3_0= RULE_ID ) ) ( (lv_val3_4_0= RULE_ID ) ) )+ ) )
@@ -5330,7 +5331,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val1_1_0=null;
         Token lv_val1_3_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:2622:6: ( ( '#17' ( (lv_val1_1_0= RULE_ID ) ) ( ',' ( (lv_val1_3_0= RULE_ID ) ) )* ) )
@@ -5502,7 +5503,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val1_1_0=null;
         Token lv_val1_3_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:2701:6: ( ( '#18' ( ( (lv_val1_1_0= RULE_ID ) ) ( ',' ( (lv_val1_3_0= RULE_ID ) ) )* )? ) )
@@ -5692,7 +5693,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val1_3_0=null;
         Token lv_val2_5_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:2780:6: ( ( ( '#19' ( ( (lv_val1_1_0= RULE_ID ) ) ( ',' ( (lv_val1_3_0= RULE_ID ) ) )* ) ) | ( 'kw3' ( (lv_val2_5_0= RULE_ID ) ) ) ) )
@@ -5946,7 +5947,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val1_3_0=null;
         Token lv_val2_5_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:2888:6: ( ( '#20' ( (lv_val1_1_0= RULE_ID ) ) ( ',' ( (lv_val1_3_0= RULE_ID ) ) )* 'kw3' ( (lv_val2_5_0= RULE_ID ) ) ) )
@@ -6157,7 +6158,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val2_5_0=null;
         Token lv_val3_6_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:2995:6: ( ( '#21' ( ( ( (lv_val1_1_0= RULE_ID ) ) ( ',' ( (lv_val1_3_0= RULE_ID ) ) )* 'kw3' ( (lv_val2_5_0= RULE_ID ) ) ) | ( (lv_val3_6_0= RULE_ID ) ) ) ) )
@@ -6451,7 +6452,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val1_7_0=null;
         Token lv_val4_8_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3127:6: ( ( '#22' ( ( ( (lv_val1_1_0= RULE_ID ) ) ( (lv_val2_2_0= RULE_ID ) ) ) | ( 'kw1' ( (lv_val1_4_0= RULE_ID ) ) ( (lv_val3_5_0= RULE_ID ) ) ) | ( 'kw2' ( (lv_val1_7_0= RULE_ID ) ) ( (lv_val4_8_0= RULE_ID ) )? ) ) ) )
@@ -6814,7 +6815,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val1_6_0=null;
         Token lv_val3_7_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3308:6: ( ( '#23' ( ( ( (lv_val1_1_0= RULE_ID ) ) ( (lv_val2_2_0= RULE_ID ) ) ) | ( 'kw' ( (lv_val1_4_0= RULE_ID ) ) ( ',' ( (lv_val1_6_0= RULE_ID ) ) )* ( (lv_val3_7_0= RULE_ID ) ) ) ) ) )
@@ -7134,7 +7135,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         EObject lv_nested_2_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3464:6: ( ( '#24' ( ( (lv_val1_1_0= RULE_ID ) ) ( (lv_nested_2_0= ruleTransientObjectSub ) ) )? ) )
@@ -7298,7 +7299,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val2_0_0=null;
         Token lv_val3_1_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3539:6: ( ( ( (lv_val2_0_0= RULE_ID ) ) ( (lv_val3_1_0= RULE_ID ) ) ) )
@@ -7441,7 +7442,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Enumerator lv_enum1_2_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3610:6: ( ( '#25' ( ( (lv_val1_1_0= RULE_ID ) ) ( (lv_enum1_2_0= ruleTransientSerializeables1Enum ) ) )? ( ( (lv_val2_3_0= RULE_ID ) ) ( (lv_int1_4_0= RULE_INT ) ) )? ) )
@@ -7693,7 +7694,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_val2_5_0=null;
         Token lv_val3_8_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3733:6: ( ( '#26' ( 'kw1' | () | ( (lv_val1_3_0= RULE_ID ) ) ) ( 'kw2' | ( (lv_val2_5_0= RULE_ID ) ) ) ( 'kw3' ( 'kw4' ( (lv_val3_8_0= RULE_ID ) )+ )? ) ) )
@@ -8042,7 +8043,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         EObject this_TwoVersionNo2_2 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3862:6: ( ( '#27' (this_TwoVersionNo1_1= ruleTwoVersionNo1 | this_TwoVersionNo2_2= ruleTwoVersionNo2 ) ) )
@@ -8209,7 +8210,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_shared3_4_0=null;
         Token lv_version1_6_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:3908:6: ( ( ( (lv_shared1_0_0= RULE_ID ) )? ( (lv_shared2_1_0= RULE_ID ) ) 'short' ( ( (lv_shared3_3_0= RULE_ID ) ) ( (lv_shared3_4_0= RULE_ID ) )* )? 'one' ( (lv_version1_6_0= RULE_ID ) )? ) )
@@ -8523,7 +8524,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_extra3_8_0=null;
         Token lv_extra4_10_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:4059:6: ( ( ( (lv_shared1_0_0= RULE_ID ) )? ( (lv_shared2_1_0= RULE_ID ) ) 'long' ( ( (lv_shared3_3_0= RULE_ID ) ) ( (lv_shared3_4_0= RULE_ID ) )* )? 'extra' ( (lv_extra1_6_0= RULE_ID ) )? ( ( ( (lv_extra2_7_0= RULE_ID ) ) ( (lv_extra3_8_0= RULE_ID ) ) ) | ( 'two' ( (lv_extra4_10_0= RULE_ID ) ) ) )? ) )
@@ -8987,7 +8988,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
         Token lv_b_8_0=null;
         Token lv_c_9_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/validation/parser/antlr/internal/InternalConcreteSyntaxValidationTestLanguage.g:4287:6: ( ( '#28' ( 'kw1' ( (lv_a_2_0= RULE_ID ) ) ( (lv_b_3_0= RULE_ID ) ) )* ( 'kw2' ( (lv_a_5_0= RULE_ID ) ) ( (lv_c_6_0= RULE_ID ) ) )* ( 'kw3' ( (lv_b_8_0= RULE_ID ) ) ( (lv_c_9_0= RULE_ID ) ) )* ) )

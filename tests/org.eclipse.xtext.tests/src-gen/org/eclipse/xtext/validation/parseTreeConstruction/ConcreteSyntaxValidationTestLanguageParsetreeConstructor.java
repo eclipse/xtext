@@ -73,25 +73,25 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   x1=SimpleGroup|x2=SimpleAlternative|x3=SimpleMultiplicities|x4=
- *   GroupMultiplicities|x5=AlternativeMultiplicities|x6=AssignedAction|x7=
- *   AssignedActionSecond|x8=UnassignedAction1|x9=UnassignedAction2|x10=
- *   UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
- *   Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18
- *   =List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|x24=
- *   TransientObject|x25=TransientSerializeables1|x26=StaticSimplification|x27=
- *   TwoVersion|x28=Heuristic1;
+ *   x1=SimpleGroup|x2=SimpleAlternative|x3=SimpleMultiplicities|
+ *   x4=GroupMultiplicities|x5=AlternativeMultiplicities|x6=AssignedAction|
+ *   x7=AssignedActionSecond|x8=UnassignedAction1|x9=UnassignedAction2|
+ *   x10=UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|
+ *   x13=Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1
+ *   |x18=List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|
+ *   x24=TransientObject|x25=TransientSerializeables1|x26=StaticSimplification|
+ *   x27=TwoVersion|x28=Heuristic1;
  *
  **/
 
-// x1=SimpleGroup|x2=SimpleAlternative|x3=SimpleMultiplicities|x4=
-// GroupMultiplicities|x5=AlternativeMultiplicities|x6=AssignedAction|x7=
-// AssignedActionSecond|x8=UnassignedAction1|x9=UnassignedAction2|x10=
-// UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
-// Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
-// List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|x24=
-// TransientObject|x25=TransientSerializeables1|x26=StaticSimplification|x27=
-// TwoVersion|x28=Heuristic1
+// x1=SimpleGroup|x2=SimpleAlternative|x3=SimpleMultiplicities|
+// x4=GroupMultiplicities|x5=AlternativeMultiplicities|x6=AssignedAction|
+// x7=AssignedActionSecond|x8=UnassignedAction1|x9=UnassignedAction2|
+// x10=UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|
+// x13=Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|
+// x18=List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|
+// x24=TransientObject|x25=TransientSerializeables1|x26=StaticSimplification|
+// x27=TwoVersion|x28=Heuristic1
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2053,8 +2053,8 @@ protected class SimpleMultiplicities_Val4Assignment_7 extends AssignmentToken  {
 /************ begin Rule GroupMultiplicities ****************
  *
  * GroupMultiplicities:
- *   "#4" val1=ID "kw1" (val2=ID val3=ID)? "kw2" (val4+=ID val5+=ID)+ "kw3" (val6
- *   +=ID val7+=ID)*;
+ *   "#4" val1=ID "kw1" (val2=ID val3=ID)? "kw2" (val4+=ID val5+=ID)+ "kw3" (
+ *   val6+=ID val7+=ID)*;
  *
  **/
 
@@ -2493,8 +2493,8 @@ protected class GroupMultiplicities_Val7Assignment_7_1 extends AssignmentToken  
 /************ begin Rule AlternativeMultiplicities ****************
  *
  * AlternativeMultiplicities:
- *   "#5" (val2=ID|"kw1" val3=ID)? "kw2" (val4+=ID|"kw3" val5+=ID)+ "kw4" (val6+=
- *   ID|"kw5" val7+=ID)*;
+ *   "#5" (val2=ID|"kw1" val3=ID)? "kw2" (val4+=ID|"kw3" val5+=ID)+ "kw4" (
+ *   val6+=ID|"kw5" val7+=ID)*;
  *
  **/
 
@@ -3669,8 +3669,8 @@ protected class UnassignedAction2_Val2Assignment_3 extends AssignmentToken  {
  *
  **/
 
-// "#10" ("kw1" {UnassignedAction2Sub1}|"kw2" {UnassignedAction2Sub2}) val1=ID val2
-// =ID?
+// "#10" ("kw1" {UnassignedAction2Sub1}|"kw2" {UnassignedAction2Sub2}) val1=ID
+// val2=ID?
 protected class UnassignedAction3_Group extends GroupToken {
 	
 	public UnassignedAction3_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7844,8 +7844,8 @@ protected class TransientSerializeables1_Int1Assignment_2_1 extends AssignmentTo
  *
  **/
 
-// "#26" ("kw1"|{EmptyAlternativeSub}|val1=ID) ("kw2"|val2=ID) ("kw3" ("kw4" val3=
-// ID+)?)
+// "#26" ("kw1"|{EmptyAlternativeSub}|val1=ID) ("kw2"|val2=ID) ("kw3" ("kw4"
+// val3=ID+)?)
 protected class StaticSimplification_Group extends GroupToken {
 	
 	public StaticSimplification_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8247,7 +8247,7 @@ protected class TwoVersion_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getTwoVersionNo2Rule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getTwoVersionNo1Rule().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}

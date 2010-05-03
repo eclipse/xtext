@@ -22,6 +22,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'foo'", "'%'", "'$'", "'T1'", "'T2'"
@@ -117,7 +118,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_e2_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:92:6: ( ( ( (lv_e1_0_0= ruleElem1 ) ) | ( (lv_e2_1_0= ruleElem2 ) ) )+ )
@@ -313,7 +314,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
         Enumerator lv_value_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:164:6: ( ( (lv_value_0_0= ruleEnumT ) ) )
@@ -417,7 +418,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
         Enumerator lv_value_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:211:6: ( ( ( (lv_value_0_0= ruleEnumT ) ) 'foo' '%' '$' ) )

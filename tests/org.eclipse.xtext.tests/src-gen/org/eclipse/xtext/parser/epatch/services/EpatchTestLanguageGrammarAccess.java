@@ -33,12 +33,12 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//EPatch:
-		//  "epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=
-		//  ObjectRef* "}";
+		//  "epatch" name=ID "{" imports+=Import* resources+=NamedResource*
+		//  objects+=ObjectRef* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=
-		//ObjectRef* "}"
+		//"epatch" name=ID "{" imports+=Import* resources+=NamedResource*
+		//objects+=ObjectRef* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"epatch"
@@ -450,15 +450,17 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//ObjectRef:
 		//  "object" name=ID? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[
-		//  NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=
-		//  FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment
-		//  )+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?;
+		//  NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource]
+		//  rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|
+		//  assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right"
+		//  rightMig=Migration)? "}")?;
 		public ParserRule getRule() { return rule; }
 
 		//"object" name=ID? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[
-		//NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=
-		//FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+
-		//("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?
+		//NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource]
+		//rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|
+		//assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right"
+		//rightMig=Migration)? "}")?
 		public Group getGroup() { return cGroup; }
 
 		//"object"
@@ -624,12 +626,12 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//BiSingleAssignment returns SingleAssignment:
-		//  feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=
-		//  SingleAssignmentValue ";";
+		//  feature=ID "=" leftValue=SingleAssignmentValue "|"
+		//  rightValue=SingleAssignmentValue ";";
 		public ParserRule getRule() { return rule; }
 
-		//feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=
-		//SingleAssignmentValue ";"
+		//feature=ID "=" leftValue=SingleAssignmentValue "|"
+		//rightValue=SingleAssignmentValue ";"
 		public Group getGroup() { return cGroup; }
 
 		//feature=ID
@@ -686,14 +688,14 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//BiListAssignment returns ListAssignment:
-		//  feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=
-		//  ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue (","
-		//  rightValues+=ListAssignmentValue)*)? "]" ";";
+		//  feature=ID "=" "[" (leftValues+=ListAssignmentValue (","
+		//  leftValues+=ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue (
+		//  "," rightValues+=ListAssignmentValue)*)? "]" ";";
 		public ParserRule getRule() { return rule; }
 
-		//feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=
-		//ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue ("," rightValues
-		//+=ListAssignmentValue)*)? "]" ";"
+		//feature=ID "=" "[" (leftValues+=ListAssignmentValue (","
+		//leftValues+=ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue (","
+		//rightValues+=ListAssignmentValue)*)? "]" ";"
 		public Group getGroup() { return cGroup; }
 
 		//feature=ID
@@ -814,8 +816,8 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//MonoListAssignment returns ListAssignment:
-		//  feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=
-		//  AssignmentValue)*)? "]" ";";
+		//  feature=ID "=" "[" (leftValues+=AssignmentValue (","
+		//  leftValues+=AssignmentValue)*)? "]" ";";
 		public ParserRule getRule() { return rule; }
 
 		//feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue
@@ -1025,8 +1027,8 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 
 		//"[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("." refFeature=ID (
-		//"[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=
-		//FRAGMENT
+		//"[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import]
+		//impFrag=FRAGMENT
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//"[" refIndex=INT "]"
@@ -1145,8 +1147,8 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//SingleAssignmentValue returns AssignmentValue:
 		//  keyword="null"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("["
-		//  refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=
-		//  FRAGMENT;
+		//  refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import]
+		//  impFrag=FRAGMENT;
 		public ParserRule getRule() { return rule; }
 
 		//keyword="null"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("["
@@ -1562,8 +1564,8 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 
 	
 	//EPatch:
-	//  "epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=
-	//  ObjectRef* "}";
+	//  "epatch" name=ID "{" imports+=Import* resources+=NamedResource*
+	//  objects+=ObjectRef* "}";
 	public EPatchElements getEPatchAccess() {
 		return (pEPatch != null) ? pEPatch : (pEPatch = new EPatchElements());
 	}
@@ -1655,9 +1657,10 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 
 	//ObjectRef:
 	//  "object" name=ID? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[
-	//  NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=
-	//  FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment
-	//  )+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?;
+	//  NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource]
+	//  rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|
+	//  assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right"
+	//  rightMig=Migration)? "}")?;
 	public ObjectRefElements getObjectRefAccess() {
 		return (pObjectRef != null) ? pObjectRef : (pObjectRef = new ObjectRefElements());
 	}
@@ -1677,8 +1680,8 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	}
 
 	//BiSingleAssignment returns SingleAssignment:
-	//  feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=
-	//  SingleAssignmentValue ";";
+	//  feature=ID "=" leftValue=SingleAssignmentValue "|"
+	//  rightValue=SingleAssignmentValue ";";
 	public BiSingleAssignmentElements getBiSingleAssignmentAccess() {
 		return (pBiSingleAssignment != null) ? pBiSingleAssignment : (pBiSingleAssignment = new BiSingleAssignmentElements());
 	}
@@ -1688,9 +1691,9 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	}
 
 	//BiListAssignment returns ListAssignment:
-	//  feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=
-	//  ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue (","
-	//  rightValues+=ListAssignmentValue)*)? "]" ";";
+	//  feature=ID "=" "[" (leftValues+=ListAssignmentValue (","
+	//  leftValues+=ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue (
+	//  "," rightValues+=ListAssignmentValue)*)? "]" ";";
 	public BiListAssignmentElements getBiListAssignmentAccess() {
 		return (pBiListAssignment != null) ? pBiListAssignment : (pBiListAssignment = new BiListAssignmentElements());
 	}
@@ -1710,8 +1713,8 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	}
 
 	//MonoListAssignment returns ListAssignment:
-	//  feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=
-	//  AssignmentValue)*)? "]" ";";
+	//  feature=ID "=" "[" (leftValues+=AssignmentValue (","
+	//  leftValues+=AssignmentValue)*)? "]" ";";
 	public MonoListAssignmentElements getMonoListAssignmentAccess() {
 		return (pMonoListAssignment != null) ? pMonoListAssignment : (pMonoListAssignment = new MonoListAssignmentElements());
 	}
@@ -1745,8 +1748,8 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 
 	//SingleAssignmentValue returns AssignmentValue:
 	//  keyword="null"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("["
-	//  refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=
-	//  FRAGMENT;
+	//  refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import]
+	//  impFrag=FRAGMENT;
 	public SingleAssignmentValueElements getSingleAssignmentValueAccess() {
 		return (pSingleAssignmentValue != null) ? pSingleAssignmentValue : (pSingleAssignmentValue = new SingleAssignmentValueElements());
 	}

@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'{'", "'}'", "'['", "']'", "'subModel'", "'1'", "'2'"
@@ -117,7 +118,7 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_subModel_9_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:91:6: ( ( () ( '{' ( (lv_strings_2_0= RULE_STRING ) )? '}' )* ( '[' ( ( (lv_keys_5_0= RULE_STRING ) ) ( (lv_values_6_0= RULE_STRING ) ) )* ']' )* ( 'subModel' ( (lv_subModel_9_0= ruleSubModel ) ) )? ) )
@@ -461,7 +462,7 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
 
         Token lv_strings_3_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.g:241:6: ( ( () ( '1' '2' ( (lv_strings_3_0= RULE_STRING ) )? )* ) )

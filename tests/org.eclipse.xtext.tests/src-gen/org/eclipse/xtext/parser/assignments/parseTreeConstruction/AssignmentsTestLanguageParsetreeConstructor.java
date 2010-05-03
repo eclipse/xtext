@@ -44,15 +44,15 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   "simple" (single=SingleValue|multi=MultiValue|single=SingleDatatype|multi=
- *   MultiDatatype)|"complex" object=( SingleValue | MultiValue | SingleDatatype |
- *   MultiDatatype );
+ *   "simple" (single=SingleValue|multi=MultiValue|single=SingleDatatype|
+ *   multi=MultiDatatype)|"complex" object=( SingleValue | MultiValue |
+ *   SingleDatatype | MultiDatatype );
  *
  **/
 
-// "simple" (single=SingleValue|multi=MultiValue|single=SingleDatatype|multi=
-// MultiDatatype)|"complex" object=( SingleValue | MultiValue | SingleDatatype |
-// MultiDatatype )
+// "simple" (single=SingleValue|multi=MultiValue|single=SingleDatatype|
+// multi=MultiDatatype)|"complex" object=( SingleValue | MultiValue |
+// SingleDatatype | MultiDatatype )
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -82,8 +82,8 @@ protected class Model_Alternatives extends AlternativesToken {
 
 }
 
-// "simple" (single=SingleValue|multi=MultiValue|single=SingleDatatype|multi=
-// MultiDatatype)
+// "simple" (single=SingleValue|multi=MultiValue|single=SingleDatatype|
+// multi=MultiDatatype)
 protected class Model_Group_0 extends GroupToken {
 	
 	public Model_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

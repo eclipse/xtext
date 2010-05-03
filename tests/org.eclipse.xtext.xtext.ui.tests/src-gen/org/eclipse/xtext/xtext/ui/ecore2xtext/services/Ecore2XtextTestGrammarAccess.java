@@ -42,12 +42,12 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//Root:
-		//  {Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract ("," classes+=
-		//  Abstract)* "}")? ("concrete0" concrete0=Concrete0)? "}";
+		//  {Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract (","
+		//  classes+=Abstract)* "}")? ("concrete0" concrete0=Concrete0)? "}";
 		public ParserRule getRule() { return rule; }
 
-		//{Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract ("," classes+=
-		//Abstract)* "}")? ("concrete0" concrete0=Concrete0)? "}"
+		//{Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract (","
+		//classes+=Abstract)* "}")? ("concrete0" concrete0=Concrete0)? "}"
 		public Group getGroup() { return cGroup; }
 
 		//{Root}
@@ -305,8 +305,8 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Root:
-	//  {Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract ("," classes+=
-	//  Abstract)* "}")? ("concrete0" concrete0=Concrete0)? "}";
+	//  {Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract (","
+	//  classes+=Abstract)* "}")? ("concrete0" concrete0=Concrete0)? "}";
 	public RootElements getRootAccess() {
 		return (pRoot != null) ? pRoot : (pRoot = new RootElements());
 	}

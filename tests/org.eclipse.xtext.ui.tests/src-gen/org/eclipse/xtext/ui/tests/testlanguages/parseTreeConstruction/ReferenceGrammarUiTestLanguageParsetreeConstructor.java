@@ -46,13 +46,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Spielplatz ****************
  *
  * Spielplatz:
- *   ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=
- *   Erwachsener|spielzeuge+=Spielzeug|familie+=Familie)* "}")?;
+ *   ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|
+ *   erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie)* "}")?;
  *
  **/
 
-// ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=
-// Erwachsener|spielzeuge+=Spielzeug|familie+=Familie)* "}")?
+// ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|
+// erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie)* "}")?
 protected class Spielplatz_Group extends GroupToken {
 	
 	public Spielplatz_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

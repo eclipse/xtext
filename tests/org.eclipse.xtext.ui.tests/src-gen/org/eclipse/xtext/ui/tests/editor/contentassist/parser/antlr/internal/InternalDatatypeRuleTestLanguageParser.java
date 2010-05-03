@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'Types'", "'Type'", "';'", "'Composite'", "'base'", "'<'", "','", "'>'"
@@ -114,7 +115,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalAntl
         EObject this_Types_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalDatatypeRuleTestLanguage.g:91:6: (this_Types_0= ruleTypes )
@@ -193,7 +194,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalAntl
         EObject lv_types_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalDatatypeRuleTestLanguage.g:123:6: ( ( 'Types' ( (lv_types_1_0= ruleType ) )* ) )
@@ -327,7 +328,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalAntl
         EObject this_CompositeType_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalDatatypeRuleTestLanguage.g:174:6: ( (this_SimpleType_0= ruleSimpleType | this_CompositeType_1= ruleCompositeType ) )
@@ -448,7 +449,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalAntl
 
         Token lv_name_1_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalDatatypeRuleTestLanguage.g:216:6: ( ( 'Type' ( (lv_name_1_0= RULE_ID ) ) ';' ) )
@@ -564,7 +565,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalAntl
         EObject lv_baseType_3_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalDatatypeRuleTestLanguage.g:271:6: ( ( 'Composite' ( (lv_name_1_0= RULE_ID ) ) 'base' ( (lv_baseType_3_0= ruleCompositeTypeEntry ) ) ';' ) )
@@ -716,7 +717,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalAntl
     public final EObject ruleCompositeTypeEntry() throws RecognitionException {
         EObject current = null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalDatatypeRuleTestLanguage.g:354:6: ( ( ( ruleTypeId ) ) )

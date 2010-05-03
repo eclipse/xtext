@@ -22,6 +22,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'init'", "'final'", "'state'", "'NORMAL'", "'cond'", "'reference'", "'textual'"
@@ -126,7 +127,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
         Enumerator lv_stateKind_6_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.g:92:6: ( ( ( ( (lv_isInitial_0_0= 'init' ) ) | ( (lv_isFinal_1_0= 'final' ) ) | ( (lv_stateKind_2_0= ruleStateType ) ) | ( ( (lv_isInitial_3_0= 'init' ) ) ( (lv_stateKind_4_0= ruleStateType ) ) ) | ( ( (lv_isInitial_5_0= 'init' ) ) ( (lv_stateKind_6_0= ruleStateType ) ) ( (lv_isFinal_7_0= 'final' ) ) ) )? ( 'state' )? ( (lv_stateName_9_0= RULE_ID ) )? ( (lv_label_10_0= RULE_STRING ) )? ) )

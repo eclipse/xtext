@@ -53,25 +53,27 @@ protected class ThisRootNode extends RootToken {
  * Model:
  *   {Model} ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}"|"#1+" "{"
  *   errors+=Error_1+ operations+=Operation_1+ "}"|"#2*" "{" errors+=Error_2*
- *   operations+=Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+ operations+=
- *   Operation_2+ "}"|"#3*" name=ID "{" errors+=Error_3* operations+=Operation_3*
- *   "}"|"#3+" name=ID "{" errors+=Error_3+ operations+=Operation_3+ "}"|"#4*"
- *   name=ID "{" errors+=Error_4* operations+=Operation_4* "}"|"#4+" name=ID "{"
- *   errors+=Error_4+ operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=
- *   Error_5* operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+
+ *   operations+=Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+
+ *   operations+=Operation_2+ "}"|"#3*" name=ID "{" errors+=Error_3*
+ *   operations+=Operation_3* "}"|"#3+" name=ID "{" errors+=Error_3+
+ *   operations+=Operation_3+ "}"|"#4*" name=ID "{" errors+=Error_4*
+ *   operations+=Operation_4* "}"|"#4+" name=ID "{" errors+=Error_4+
+ *   operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=Error_5*
+ *   operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+
  *   operations+=Operation_5+ "}");
  *
  **/
 
 // {Model} ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}"|"#1+" "{"
 // errors+=Error_1+ operations+=Operation_1+ "}"|"#2*" "{" errors+=Error_2*
-// operations+=Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+ operations+=
-// Operation_2+ "}"|"#3*" name=ID "{" errors+=Error_3* operations+=Operation_3*
-// "}"|"#3+" name=ID "{" errors+=Error_3+ operations+=Operation_3+ "}"|"#4*" name=
-// ID "{" errors+=Error_4* operations+=Operation_4* "}"|"#4+" name=ID "{" errors+=
-// Error_4+ operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=Error_5*
-// operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+ operations+=
-// Operation_5+ "}")
+// operations+=Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+
+// operations+=Operation_2+ "}"|"#3*" name=ID "{" errors+=Error_3*
+// operations+=Operation_3* "}"|"#3+" name=ID "{" errors+=Error_3+
+// operations+=Operation_3+ "}"|"#4*" name=ID "{" errors+=Error_4*
+// operations+=Operation_4* "}"|"#4+" name=ID "{" errors+=Error_4+
+// operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=Error_5*
+// operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+
+// operations+=Operation_5+ "}")
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -126,15 +128,16 @@ protected class Model_ModelAction_0 extends ActionToken  {
 	}
 }
 
-// "#1*" "{" errors+=Error_1* operations+=Operation_1* "}"|"#1+" "{" errors+=
-// Error_1+ operations+=Operation_1+ "}"|"#2*" "{" errors+=Error_2* operations+=
-// Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+ operations+=Operation_2+
-// "}"|"#3*" name=ID "{" errors+=Error_3* operations+=Operation_3* "}"|"#3+" name=
-// ID "{" errors+=Error_3+ operations+=Operation_3+ "}"|"#4*" name=ID "{" errors+=
-// Error_4* operations+=Operation_4* "}"|"#4+" name=ID "{" errors+=Error_4+
-// operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=Error_5* operations+=
-// Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+ operations+=Operation_5+
-// "}"
+// "#1*" "{" errors+=Error_1* operations+=Operation_1* "}"|"#1+" "{"
+// errors+=Error_1+ operations+=Operation_1+ "}"|"#2*" "{" errors+=Error_2*
+// operations+=Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+
+// operations+=Operation_2+ "}"|"#3*" name=ID "{" errors+=Error_3*
+// operations+=Operation_3* "}"|"#3+" name=ID "{" errors+=Error_3+
+// operations+=Operation_3+ "}"|"#4*" name=ID "{" errors+=Error_4*
+// operations+=Operation_4* "}"|"#4+" name=ID "{" errors+=Error_4+
+// operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=Error_5*
+// operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+
+// operations+=Operation_5+ "}"
 protected class Model_Alternatives_1 extends AlternativesToken {
 
 	public Model_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

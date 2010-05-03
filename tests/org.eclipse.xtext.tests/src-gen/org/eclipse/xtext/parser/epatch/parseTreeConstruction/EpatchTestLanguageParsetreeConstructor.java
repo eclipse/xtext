@@ -64,13 +64,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule EPatch ****************
  *
  * EPatch:
- *   "epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=
- *   ObjectRef* "}";
+ *   "epatch" name=ID "{" imports+=Import* resources+=NamedResource*
+ *   objects+=ObjectRef* "}";
  *
  **/
 
-// "epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=
-// ObjectRef* "}"
+// "epatch" name=ID "{" imports+=Import* resources+=NamedResource*
+// objects+=ObjectRef* "}"
 protected class EPatch_Group extends GroupToken {
 	
 	public EPatch_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1962,16 +1962,18 @@ protected class NamedObject_CreatedObjectParserRuleCall_1 extends RuleCallToken 
  *
  * ObjectRef:
  *   "object" name=ID? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[
- *   NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=
- *   FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment
- *   )+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?;
+ *   NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource]
+ *   rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|
+ *   assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right"
+ *   rightMig=Migration)? "}")?;
  *
  **/
 
 // "object" name=ID? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[
-// NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=
-// FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+
-// ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?
+// NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource]
+// rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|
+// assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right"
+// rightMig=Migration)? "}")?
 protected class ObjectRef_Group extends GroupToken {
 	
 	public ObjectRef_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2953,13 +2955,13 @@ protected class Assignment_MonoListAssignmentParserRuleCall_3 extends RuleCallTo
 /************ begin Rule BiSingleAssignment ****************
  *
  * BiSingleAssignment returns SingleAssignment:
- *   feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=
- *   SingleAssignmentValue ";";
+ *   feature=ID "=" leftValue=SingleAssignmentValue "|"
+ *   rightValue=SingleAssignmentValue ";";
  *
  **/
 
-// feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=
-// SingleAssignmentValue ";"
+// feature=ID "=" leftValue=SingleAssignmentValue "|"
+// rightValue=SingleAssignmentValue ";"
 protected class BiSingleAssignment_Group extends GroupToken {
 	
 	public BiSingleAssignment_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3186,15 +3188,15 @@ protected class BiSingleAssignment_SemicolonKeyword_5 extends KeywordToken  {
 /************ begin Rule BiListAssignment ****************
  *
  * BiListAssignment returns ListAssignment:
- *   feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=
- *   ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue (","
- *   rightValues+=ListAssignmentValue)*)? "]" ";";
+ *   feature=ID "=" "[" (leftValues+=ListAssignmentValue (","
+ *   leftValues+=ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue (
+ *   "," rightValues+=ListAssignmentValue)*)? "]" ";";
  *
  **/
 
-// feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=
-// ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue ("," rightValues
-// +=ListAssignmentValue)*)? "]" ";"
+// feature=ID "=" "[" (leftValues+=ListAssignmentValue (","
+// leftValues+=ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue (","
+// rightValues+=ListAssignmentValue)*)? "]" ";"
 protected class BiListAssignment_Group extends GroupToken {
 	
 	public BiListAssignment_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3862,8 +3864,8 @@ protected class MonoSingleAssignment_SemicolonKeyword_3 extends KeywordToken  {
 /************ begin Rule MonoListAssignment ****************
  *
  * MonoListAssignment returns ListAssignment:
- *   feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=
- *   AssignmentValue)*)? "]" ";";
+ *   feature=ID "=" "[" (leftValues+=AssignmentValue (","
+ *   leftValues+=AssignmentValue)*)? "]" ";";
  *
  **/
 
@@ -4738,8 +4740,8 @@ protected class ListAssignmentValue_ColonKeyword_1 extends KeywordToken  {
 }
 
 // "[" refIndex=INT "]"|value=STRING|refObject=[NamedObject] ("." refFeature=ID (
-// "[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=
-// FRAGMENT
+// "[" refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import]
+// impFrag=FRAGMENT
 protected class ListAssignmentValue_Alternatives_2 extends AlternativesToken {
 
 	public ListAssignmentValue_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5291,8 +5293,8 @@ protected class ListAssignmentValue_ImpFragAssignment_2_4_1 extends AssignmentTo
  *
  * SingleAssignmentValue returns AssignmentValue:
  *   keyword="null"|value=STRING|refObject=[NamedObject] ("." refFeature=ID ("["
- *   refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import] impFrag=
- *   FRAGMENT;
+ *   refIndex=INT "]")?)?|newObject=CreatedObject|^import=[Import]
+ *   impFrag=FRAGMENT;
  *
  **/
 

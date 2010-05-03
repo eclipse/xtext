@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_SERIALIZABLE", "RULE_BAG", "RULE_RANDOM", "RULE_READONLY", "RULE_INT", "RULE_LOCAL", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'import'", "'='", "';'", "'package'", "'nsURI'", "'nsPrefix'", "'{'", "'}'", "'datatype'", "':'", "'@'", "'('", "','", "')'", "'abstract'", "'interface'", "'class'", "'<'", "'>'", "'extends'", "'ID'", "'volatile'", "'transient'", "'unsettable'", "'derived'", "'attr'", "'['", "'..'", "']'", "'val'", "'ref'", "'#'", "'enum'", "'?'", "'super'", "'op'", "'void'", "'throws'", "'.'", "'$'", "'-'"
@@ -121,7 +122,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
         EObject lv_package_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:91:6: ( ( ( (lv_metamodelDeclarations_0_0= ruleReferencedMetamodel ) )* ( (lv_package_1_0= ruleEPackageDecl ) ) ) )
@@ -284,7 +285,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
         Token lv_alias_1_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:162:6: ( ( 'import' ( ( (lv_alias_1_0= RULE_ID ) ) '=' )? ( ( RULE_STRING ) ) ';' ) )
@@ -451,7 +452,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
         EObject lv_eClassifiers_11_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:235:6: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* 'package' ( (lv_name_2_0= ruleQID ) ) 'nsURI' '=' ( (lv_nsURI_5_0= RULE_STRING ) ) 'nsPrefix' '=' ( (lv_nsPrefix_8_0= ruleQID ) ) '{' ( ( (lv_eSubpackages_10_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_11_0= ruleEClassifierDecl ) ) )* '}' ) )
@@ -813,7 +814,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
         EObject lv_eClassifiers_5_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:431:6: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* 'package' ( (lv_name_2_0= RULE_ID ) ) '{' ( ( (lv_eSubpackages_4_0= ruleSubEPackageDecl ) ) | ( (lv_eClassifiers_5_0= ruleEClassifierDecl ) ) )* '}' ) )
@@ -1084,7 +1085,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
         EObject this_EDataTypeDecl_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:563:6: ( (this_EClassDecl_0= ruleEClassDecl | this_EDataTypeDecl_1= ruleEDataTypeDecl ) )
@@ -1199,7 +1200,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
         EObject this_EEnumDecl_7 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:605:6: ( ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_serializable_1_0= RULE_SERIALIZABLE ) )? ( 'datatype' ( (lv_name_3_0= RULE_ID ) ) ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) ';' ) ) | this_EEnumDecl_7= ruleEEnumDecl ) )
@@ -1492,7 +1493,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
         EObject lv_details_5_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:746:6: ( ( '@' ( (lv_source_1_0= ruleSTRING_OR_QID ) ) ( '(' ( (lv_details_3_0= ruleMapEntry ) ) ( ',' ( (lv_details_5_0= ruleMapEntry ) ) )* ')' )? ) )
@@ -1748,7 +1749,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
         EObject lv_eOperations_18_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:857:6: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_abstract_1_0= 'abstract' ) )? ( ( (lv_interface_2_0= 'interface' ) ) | 'class' ) ( (lv_name_4_0= RULE_ID ) ) ( '<' ( (lv_eTypeParameters_6_0= ruleETypeParameterDecl ) ) ( ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) )* '>' )? ( 'extends' ( (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl ) ) ( ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) ) )* )? ( ':' ( (lv_instanceClassName_15_0= ruleSTRING_OR_QID ) ) )? '{' ( ( (lv_eStructuralFeatures_17_0= ruleEStructuralFeatureDecl ) ) | ( (lv_eOperations_18_0= ruleEOperationDecl ) ) )* '}' ) )
@@ -2423,7 +2424,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
         EObject this_EReferenceDecl_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1176:6: ( (this_EAttributeDecl_0= ruleEAttributeDecl | this_EReferenceDecl_1= ruleEReferenceDecl ) )
@@ -2547,7 +2548,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
         AntlrDatatypeRuleToken lv_upperBound_14_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1218:6: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_iD_1_0= 'ID' ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* 'attr' ( (lv_eGenericType_10_0= ruleEGenericTypeReferenceDecl ) ) ( '[' ( (lv_lowerBound_12_0= RULE_INT ) ) ( '..' ( (lv_upperBound_14_0= ruleSINT ) ) )? ']' )? ( (lv_name_16_0= RULE_ID ) ) ( '=' ( (lv_defaultValueLiteral_18_0= RULE_STRING ) ) )? ';' ) )
@@ -3283,7 +3284,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
         AntlrDatatypeRuleToken lv_upperBound_15_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1593:6: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_resolveProxies_1_0= RULE_LOCAL ) ) | ( (lv_unique_2_0= RULE_BAG ) ) | ( (lv_ordered_3_0= RULE_RANDOM ) ) | ( (lv_changeable_4_0= RULE_READONLY ) ) | ( (lv_volatile_5_0= 'volatile' ) ) | ( (lv_transient_6_0= 'transient' ) ) | ( (lv_unsettable_7_0= 'unsettable' ) ) | ( (lv_derived_8_0= 'derived' ) ) )* ( ( (lv_containment_9_0= 'val' ) ) | 'ref' ) ( (lv_eGenericType_11_0= ruleEGenericTypeReferenceDecl ) ) ( '[' ( (lv_lowerBound_13_0= RULE_INT ) ) ( '..' ( (lv_upperBound_15_0= ruleSINT ) ) )? ']' )? ( '#' ( ( RULE_ID ) ) )? ( (lv_name_19_0= RULE_ID ) ) ';' ) )
@@ -4061,7 +4062,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
         EObject lv_eLiterals_4_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1983:6: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* 'enum' ( (lv_name_2_0= RULE_ID ) ) '{' ( (lv_eLiterals_4_0= ruleEEnumLiteralDecl ) )+ '}' ) )
@@ -4296,7 +4297,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
         EObject lv_eAnnotations_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2090:6: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_name_1_0= RULE_ID ) ) ( '=' ( (lv_value_3_0= RULE_INT ) ) )? ( (lv_literal_4_0= RULE_STRING ) )? ';' ) )
@@ -4560,7 +4561,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
         EObject lv_eBounds_2_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2217:6: ( ( ( (lv_name_0_0= RULE_ID ) ) ( 'extends' ( (lv_eBounds_2_0= ruleEGenericTypeDecl ) ) )? ) )
@@ -4726,7 +4727,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
         EObject lv_eTypeArguments_4_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2292:6: ( ( ( ( ( RULE_ID ) ) ( '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) ( ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* '>' )? ) | ( '#' ( ( RULE_ID ) ) ) ) )
@@ -5017,7 +5018,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
         EObject lv_eLowerBound_12_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2408:6: ( ( ( ( ( RULE_ID ) ) ( '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) ( ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* '>' )? ) | ( '#' ( ( RULE_ID ) ) ) | ( '?' ( ( 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) ) | ( 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) ) ) ) ) )
@@ -5468,7 +5469,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
         EObject lv_eGenericExceptions_20_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2586:6: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( ( (lv_unique_1_0= RULE_BAG ) ) | ( (lv_ordered_2_0= RULE_RANDOM ) ) )* 'op' ( ( (lv_eGenericType_4_0= ruleEGenericTypeReferenceDecl ) ) | 'void' ) ( (lv_name_6_0= RULE_ID ) ) ( '<' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) ( ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) ) )* '>' )? '(' ( ( (lv_eParameters_13_0= ruleEParameterDecl ) ) ( ',' ( (lv_eParameters_15_0= ruleEParameterDecl ) ) )* )? ')' ( 'throws' ( (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl ) ) ( ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) ) )* )? ';' ) )
@@ -6182,7 +6183,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
         EObject lv_eGenericType_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2919:6: ( ( ( (lv_eAnnotations_0_0= ruleEAnnotationDecl ) )* ( (lv_eGenericType_1_0= ruleEGenericTypeReferenceDecl ) ) ( (lv_name_2_0= RULE_ID ) ) ) )
@@ -6379,7 +6380,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
         Token lv_key_0_0=null;
         Token lv_value_2_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:3014:6: ( ( ( (lv_key_0_0= RULE_ID ) ) '=' ( (lv_value_2_0= RULE_STRING ) ) ) )

@@ -291,14 +291,14 @@ protected class Import_ImportURIAssignment_1 extends AssignmentToken  {
  *
  * MQLquery:
  *   "select" selectEntries+=SelectEntry ("," selectEntries+=SelectEntry)* "from"
- *   fromEntries+=FromEntry ("," fromEntries+=FromEntry)* ("where" whereEntries+=
- *   WhereEntry+)?;
+ *   fromEntries+=FromEntry ("," fromEntries+=FromEntry)* ("where"
+ *   whereEntries+=WhereEntry+)?;
  *
  **/
 
 // "select" selectEntries+=SelectEntry ("," selectEntries+=SelectEntry)* "from"
-// fromEntries+=FromEntry ("," fromEntries+=FromEntry)* ("where" whereEntries+=
-// WhereEntry+)?
+// fromEntries+=FromEntry ("," fromEntries+=FromEntry)* ("where"
+// whereEntries+=WhereEntry+)?
 protected class MQLquery_Group extends GroupToken {
 	
 	public MQLquery_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2056,13 +2056,13 @@ protected class WhereEntry_EntriesAssignment_1_1_1 extends AssignmentToken  {
 /************ begin Rule AndWhereEntry ****************
  *
  * AndWhereEntry returns WhereEntry:
- *   ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=
- *   ConcreteWhereEntry)+)?;
+ *   ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and"
+ *   entries+=ConcreteWhereEntry)+)?;
  *
  **/
 
-// ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=
-// ConcreteWhereEntry)+)?
+// ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and"
+// entries+=ConcreteWhereEntry)+)?
 protected class AndWhereEntry_Group extends GroupToken {
 	
 	public AndWhereEntry_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4138,13 +4138,13 @@ protected class BooleanAttributeWhereEntry_FalseKeyword_4_1 extends KeywordToken
 /************ begin Rule NullWhereEntry ****************
  *
  * NullWhereEntry:
- *   alias=[FromEntry] "." feature=[ecore::EStructuralFeature] operator=
- *   BooleanOperator "null";
+ *   alias=[FromEntry] "." feature=[ecore::EStructuralFeature]
+ *   operator=BooleanOperator "null";
  *
  **/
 
-// alias=[FromEntry] "." feature=[ecore::EStructuralFeature] operator=
-// BooleanOperator "null"
+// alias=[FromEntry] "." feature=[ecore::EStructuralFeature]
+// operator=BooleanOperator "null"
 protected class NullWhereEntry_Group extends GroupToken {
 	
 	public NullWhereEntry_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

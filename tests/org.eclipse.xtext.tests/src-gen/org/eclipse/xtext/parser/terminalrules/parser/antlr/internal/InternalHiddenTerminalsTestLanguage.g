@@ -84,7 +84,7 @@ entryRuleModel returns [EObject current=null]
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -156,7 +156,7 @@ entryRuleWithoutHiddens returns [EObject current=null]
 
 // Rule WithoutHiddens
 ruleWithoutHiddens returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -262,7 +262,7 @@ finally {
 
 // Rule WithHiddens
 ruleWithHiddens returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
     }
     @after { resetLookahead(); 
@@ -324,7 +324,7 @@ finally {
 
 // Rule OverridingHiddens
 ruleOverridingHiddens returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
     }
     @after { resetLookahead(); 
@@ -418,7 +418,7 @@ finally {
 
 // Rule OverridingHiddensCall
 ruleOverridingHiddensCall returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
     }
     @after { resetLookahead(); 
@@ -500,7 +500,7 @@ finally {
 
 // Rule InheritingHiddens
 ruleInheritingHiddens returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
     }
     @after { resetLookahead(); 
@@ -613,7 +613,7 @@ entryRuleDatatypeHiddens returns [EObject current=null]
 
 // Rule DatatypeHiddens
 ruleDatatypeHiddens returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -715,7 +715,7 @@ finally {
 
 // Rule HidingHiddens
 ruleHidingHiddens returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
     }
     @after { resetLookahead(); 
@@ -794,7 +794,7 @@ entryRuleInheritingHiddensCall returns [EObject current=null]
 
 // Rule InheritingHiddensCall
 ruleInheritingHiddensCall returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;

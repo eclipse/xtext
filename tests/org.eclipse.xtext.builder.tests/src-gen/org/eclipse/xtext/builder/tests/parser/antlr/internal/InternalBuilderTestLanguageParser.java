@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'namespace'", "'{'", "'}'", "'import'", "'object'", "'references'", "'otherRefs'", "','", "'.'"
@@ -116,7 +117,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
         EObject this_Element_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:91:6: ( (this_Namespace_0= ruleNamespace | this_Element_1= ruleElement ) )
@@ -242,7 +243,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
         EObject lv_elements_4_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:133:6: ( ( 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_elements_4_0= ruleNamedElement ) )* '}' ) )
@@ -472,7 +473,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
         AntlrDatatypeRuleToken lv_importedNamespace_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:240:6: ( ( 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) ) ) )
@@ -585,7 +586,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
         Token lv_name_1_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:291:6: ( ( 'object' ( (lv_name_1_0= RULE_ID ) ) ( 'references' ( ( ruleQualifiedName ) ) )? ( 'otherRefs' ( ( ruleQualifiedName ) ) ( ',' ( ( ruleQualifiedName ) ) )* )? ) )

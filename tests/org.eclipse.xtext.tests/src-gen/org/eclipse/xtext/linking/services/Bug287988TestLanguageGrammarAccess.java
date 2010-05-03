@@ -47,14 +47,14 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//  "actions" attributes+=BaseAttribute*|"simple" attributes+=SimpleAttribute*|
-		//  "rulecall" attributes+=RuleCallAttribute*|"rulecall2" attributes+=
-		//  RuleCallAttribute2*|"rulecall3" attributes+=RuleCallAttribute3*|
+		//  "rulecall" attributes+=RuleCallAttribute*|"rulecall2"
+		//  attributes+=RuleCallAttribute2*|"rulecall3" attributes+=RuleCallAttribute3*|
 		//  "inlinedActions" attributes+=ActionAttribute*;
 		public ParserRule getRule() { return rule; }
 
 		//"actions" attributes+=BaseAttribute*|"simple" attributes+=SimpleAttribute*|
-		//"rulecall" attributes+=RuleCallAttribute*|"rulecall2" attributes+=
-		//RuleCallAttribute2*|"rulecall3" attributes+=RuleCallAttribute3*|
+		//"rulecall" attributes+=RuleCallAttribute*|"rulecall2"
+		//attributes+=RuleCallAttribute2*|"rulecall3" attributes+=RuleCallAttribute3*|
 		//"inlinedActions" attributes+=ActionAttribute*
 		public Alternatives getAlternatives() { return cAlternatives; }
 
@@ -266,8 +266,8 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//  type=ID) name=ID ";";
 		public ParserRule getRule() { return rule; }
 
-		//({Attribute} "attribute"|{Master} "master") ("ref" typeRef=[BaseAttribute]|type=
-		//ID) name=ID ";"
+		//({Attribute} "attribute"|{Master} "master") ("ref" typeRef=[BaseAttribute]|
+		//type=ID) name=ID ";"
 		public Group getGroup() { return cGroup; }
 
 		//{Attribute} "attribute"|{Master} "master"
@@ -647,8 +647,8 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	//Model:
 	//  "actions" attributes+=BaseAttribute*|"simple" attributes+=SimpleAttribute*|
-	//  "rulecall" attributes+=RuleCallAttribute*|"rulecall2" attributes+=
-	//  RuleCallAttribute2*|"rulecall3" attributes+=RuleCallAttribute3*|
+	//  "rulecall" attributes+=RuleCallAttribute*|"rulecall2"
+	//  attributes+=RuleCallAttribute2*|"rulecall3" attributes+=RuleCallAttribute3*|
 	//  "inlinedActions" attributes+=ActionAttribute*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());

@@ -47,13 +47,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//Model:
 		//  "1" first=SimpleModel|"2" second=MandatoryModel|"3" thrird=LoopedModel|"4"
-		//  forth=GroupLoopedModel|"5" fifth=LoopedAlternativeModel|"bug304681" model=
-		//  Bug304681Model;
+		//  forth=GroupLoopedModel|"5" fifth=LoopedAlternativeModel|"bug304681"
+		//  model=Bug304681Model;
 		public ParserRule getRule() { return rule; }
 
-		//"1" first=SimpleModel|"2" second=MandatoryModel|"3" thrird=LoopedModel|"4" forth
-		//=GroupLoopedModel|"5" fifth=LoopedAlternativeModel|"bug304681" model=
-		//Bug304681Model
+		//"1" first=SimpleModel|"2" second=MandatoryModel|"3" thrird=LoopedModel|"4"
+		//forth=GroupLoopedModel|"5" fifth=LoopedAlternativeModel|"bug304681"
+		//model=Bug304681Model
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"1" first=SimpleModel
@@ -657,8 +657,8 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//Bug304681Model:
 		//  "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING
-		//  ";")? & ("uid" uid=STRING ";")? & (flag?="flag" ";")? & features+=
-		//  Bug304681Feature*) "}";
+		//  ";")? & ("uid" uid=STRING ";")? & (flag?="flag" ";")? &
+		//  features+=Bug304681Feature*) "}";
 		public ParserRule getRule() { return rule; }
 
 		//"{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";"
@@ -851,8 +851,8 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	
 	//Model:
 	//  "1" first=SimpleModel|"2" second=MandatoryModel|"3" thrird=LoopedModel|"4"
-	//  forth=GroupLoopedModel|"5" fifth=LoopedAlternativeModel|"bug304681" model=
-	//  Bug304681Model;
+	//  forth=GroupLoopedModel|"5" fifth=LoopedAlternativeModel|"bug304681"
+	//  model=Bug304681Model;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -923,8 +923,8 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 
 	//Bug304681Model:
 	//  "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING
-	//  ";")? & ("uid" uid=STRING ";")? & (flag?="flag" ";")? & features+=
-	//  Bug304681Feature*) "}";
+	//  ";")? & ("uid" uid=STRING ";")? & (flag?="flag" ";")? &
+	//  features+=Bug304681Feature*) "}";
 	public Bug304681ModelElements getBug304681ModelAccess() {
 		return (pBug304681Model != null) ? pBug304681Model : (pBug304681Model = new Bug304681ModelElements());
 	}

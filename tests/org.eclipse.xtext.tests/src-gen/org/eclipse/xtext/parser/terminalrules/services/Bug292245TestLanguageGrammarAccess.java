@@ -144,9 +144,6 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Rehide");
 		private final Keyword cCircumflexAccentKeyword = (Keyword)rule.eContents().get(1);
 		
-		////some unused char
-		//
-		//
 		//Rehide returns ecore::EString hidden ( WS ):
 		//  "^"?;
 		public ParserRule getRule() { return rule; }
@@ -161,6 +158,9 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cCHARTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cWSTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
+		////some unused char
+		//
+		//
 		//Graphical returns ecore::EString:
 		//  CHAR|WS;
 		public ParserRule getRule() { return rule; }
@@ -245,9 +245,6 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return (tAPOSTROPHE_CHAR != null) ? tAPOSTROPHE_CHAR : (tAPOSTROPHE_CHAR = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "APOSTROPHE_CHAR"));
 	} 
 
-	////some unused char
-	//
-	//
 	//Rehide returns ecore::EString hidden ( WS ):
 	//  "^"?;
 	public RehideElements getRehideAccess() {
@@ -258,6 +255,9 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getRehideAccess().getRule();
 	}
 
+	////some unused char
+	//
+	//
 	//Graphical returns ecore::EString:
 	//  CHAR|WS;
 	public GraphicalElements getGraphicalAccess() {

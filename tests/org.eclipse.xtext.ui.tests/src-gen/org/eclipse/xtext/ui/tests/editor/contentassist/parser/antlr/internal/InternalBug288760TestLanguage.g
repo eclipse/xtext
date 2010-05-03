@@ -84,7 +84,7 @@ entryRuleWorkflowElement returns [EObject current=null]
 
 // Rule WorkflowElement
 ruleWorkflowElement returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -260,7 +260,7 @@ entryRuleAttribute returns [EObject current=null]
 
 // Rule Attribute
 ruleAttribute returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;

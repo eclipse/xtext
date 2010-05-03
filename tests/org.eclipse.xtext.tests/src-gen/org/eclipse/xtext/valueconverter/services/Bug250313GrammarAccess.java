@@ -79,16 +79,16 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		//Model:
 		//  "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+"
 		//  multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2"
-		//  value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+" multiValue+=
-		//  Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|("content"
-		//  children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?;
+		//  value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+"
+		//  multiValue+=Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype
+		//  |("content" children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?;
 		public ParserRule getRule() { return rule; }
 
 		//"1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+"
 		//multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2"
-		//value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+" multiValue+=
-		//Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|("content"
-		//children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?
+		//value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+"
+		//multiValue+=Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|(
+		//"content" children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )
@@ -389,9 +389,9 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	//Model:
 	//  "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+"
 	//  multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2"
-	//  value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+" multiValue+=
-	//  Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|("content"
-	//  children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?;
+	//  value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+"
+	//  multiValue+=Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype
+	//  |("content" children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}

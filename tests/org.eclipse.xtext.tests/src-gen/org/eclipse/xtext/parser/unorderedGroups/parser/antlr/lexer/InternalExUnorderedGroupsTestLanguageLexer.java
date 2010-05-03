@@ -10,6 +10,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
     public static final int KEYWORD_7=19;
     public static final int RULE_ML_COMMENT=29;

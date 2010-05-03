@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+@SuppressWarnings("all")
 public class InternalBug289524TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'Model'", "'reference'", "'$'", "'containment'"
@@ -125,7 +126,7 @@ public class InternalBug289524TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_refs_2_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289524TestLanguage.g:97:6: ( ( () 'Model' ( (lv_refs_2_0= ruleModelElement ) )* ) )
@@ -292,7 +293,7 @@ public class InternalBug289524TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_containments_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289524TestLanguage.g:162:6: ( ( () ( ( (lv_containments_1_0= ruleContained ) ) | ( 'reference' ( ( RULE_ID ) ) ( '$' ( ( RULE_ID ) ) )* ) )+ ) )
@@ -589,7 +590,7 @@ public class InternalBug289524TestLanguageParser extends AbstractInternalAntlrPa
 
         Token lv_name_1_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289524TestLanguage.g:266:6: ( ( 'containment' ( (lv_name_1_0= RULE_ID ) ) ) )

@@ -10,6 +10,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalKeywordsTestLanguageLexer extends Lexer {
     public static final int RULE_ML_COMMENT=7;
     public static final int T14=14;

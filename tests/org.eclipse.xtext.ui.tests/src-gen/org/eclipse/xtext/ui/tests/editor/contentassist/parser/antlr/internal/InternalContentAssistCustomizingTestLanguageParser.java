@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalContentAssistCustomizingTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'extends'", "';'", "'.'"
@@ -114,7 +115,7 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
         EObject lv_types_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:91:6: ( ( (lv_types_0_0= ruleType ) )* )
@@ -238,7 +239,7 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
         EObject lv_superType_2_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:138:6: ( ( ( (lv_name_0_0= ruleFQN ) ) ( 'extends' ( (lv_superType_2_0= ruleTypeRef ) ) )? ';' ) )
@@ -406,7 +407,7 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
     public final EObject ruleTypeRef() throws RecognitionException {
         EObject current = null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalContentAssistCustomizingTestLanguage.g:217:6: ( ( ( ruleFQN ) ) )

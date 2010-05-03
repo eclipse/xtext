@@ -41,18 +41,18 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cObjectMultiDatatypeParserRuleCall_1_1_0_3 = (RuleCall)cObjectAlternatives_1_1_0.eContents().get(3);
 		
 		//Model:
-		//  "simple" (single=SingleValue|multi=MultiValue|single=SingleDatatype|multi=
-		//  MultiDatatype)|"complex" object=( SingleValue | MultiValue | SingleDatatype |
-		//  MultiDatatype );
+		//  "simple" (single=SingleValue|multi=MultiValue|single=SingleDatatype|
+		//  multi=MultiDatatype)|"complex" object=( SingleValue | MultiValue |
+		//  SingleDatatype | MultiDatatype );
 		public ParserRule getRule() { return rule; }
 
-		//"simple" (single=SingleValue|multi=MultiValue|single=SingleDatatype|multi=
-		//MultiDatatype)|"complex" object=( SingleValue | MultiValue | SingleDatatype |
-		//MultiDatatype )
+		//"simple" (single=SingleValue|multi=MultiValue|single=SingleDatatype|
+		//multi=MultiDatatype)|"complex" object=( SingleValue | MultiValue |
+		//SingleDatatype | MultiDatatype )
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"simple" (single=SingleValue|multi=MultiValue|single=SingleDatatype|multi=
-		//MultiDatatype)
+		//"simple" (single=SingleValue|multi=MultiValue|single=SingleDatatype|
+		//multi=MultiDatatype)
 		public Group getGroup_0() { return cGroup_0; }
 
 		//"simple"
@@ -442,9 +442,9 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 
 	
 	//Model:
-	//  "simple" (single=SingleValue|multi=MultiValue|single=SingleDatatype|multi=
-	//  MultiDatatype)|"complex" object=( SingleValue | MultiValue | SingleDatatype |
-	//  MultiDatatype );
+	//  "simple" (single=SingleValue|multi=MultiValue|single=SingleDatatype|
+	//  multi=MultiDatatype)|"complex" object=( SingleValue | MultiValue |
+	//  SingleDatatype | MultiDatatype );
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}

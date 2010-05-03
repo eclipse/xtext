@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalCrossReferenceProposalTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'<-'", "'{'", "'}'"
@@ -114,7 +115,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
         EObject lv_elements_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:91:6: ( ( (lv_elements_0_0= ruleClass ) )* )
@@ -235,7 +236,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
         Token lv_name_2_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:138:6: ( ( ( ( ( RULE_ID ) ) '<-' )? ( (lv_name_2_0= RULE_ID ) ) '{' '}' ) )

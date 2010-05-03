@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'['", "']'", "'('", "')'", "'begin'", "'end'"
@@ -114,7 +115,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
         EObject lv_expression_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:91:6: ( ( (lv_expression_0_0= ruleExpression ) )* )
@@ -240,7 +241,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
         EObject this_Expression_3 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:138:6: ( (this_SExpression_0= ruleSExpression | this_Atom_1= ruleAtom | ( '[' this_Expression_3= ruleExpression ']' ) ) )
@@ -407,7 +408,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
         EObject lv_element_5_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:198:6: ( ( () ( ( '(' ( (lv_element_2_0= ruleExpression ) )* ')' ) | ( 'begin' ( (lv_element_5_0= ruleExpression ) )* 'end' ) ) ) )
@@ -665,7 +666,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
         AntlrDatatypeRuleToken lv_value_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:297:6: ( ( (lv_value_0_0= ruleVALUE ) ) )

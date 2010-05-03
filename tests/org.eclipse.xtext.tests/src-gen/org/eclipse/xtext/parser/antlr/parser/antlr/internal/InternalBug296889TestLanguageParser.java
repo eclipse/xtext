@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+@SuppressWarnings("all")
 public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'Model'", "'DataType'", "'--'"
@@ -127,7 +128,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
         AntlrDatatypeRuleToken lv_values_3_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889TestLanguage.g:97:6: ( ( ( 'Model' ( (lv_expressions_1_0= ruleExpression ) )* ) | ( 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* ) ) )
@@ -376,7 +377,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
         EObject this_Preop_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889TestLanguage.g:177:6: ( (this_Postop_0= rulePostop | this_Preop_1= rulePreop ) )
@@ -524,7 +525,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_expr_2_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889TestLanguage.g:225:6: ( ( () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) ) ) )
@@ -701,7 +702,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
         EObject this_Variable_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889TestLanguage.g:307:6: ( (this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )? ) )
@@ -889,7 +890,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
         Token lv_name_1_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889TestLanguage.g:382:6: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) )

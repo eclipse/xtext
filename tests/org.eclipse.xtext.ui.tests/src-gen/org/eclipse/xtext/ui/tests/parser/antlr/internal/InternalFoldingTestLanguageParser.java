@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'element'", "'end'"
@@ -114,7 +115,7 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
         EObject lv_elements_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:91:6: ( ( (lv_elements_0_0= ruleElement ) )* )
@@ -237,7 +238,7 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
         EObject lv_subelements_2_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.g:138:6: ( ( 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* 'end' ) )

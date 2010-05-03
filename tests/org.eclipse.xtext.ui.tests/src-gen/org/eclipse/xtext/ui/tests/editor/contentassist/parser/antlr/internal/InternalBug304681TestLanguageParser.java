@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'1'", "'2'", "'package'", "';'", "'enabled'", "'abstract'", "'object'", "'extends'", "'{'", "'shortDescription'", "'longDescription'", "'serialUID'", "'cloneable'", "'before'", "'after'", "'optionalLoop'", "'mandatoryLoop'", "'}'", "'Attribute'", "'Reference'", "'*'", "'required'", "'technical'", "'constraint'", "'parameters'", "'message'"
@@ -116,7 +117,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_definition_3_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:91:6: ( ( ( '1' ( (lv_definition_1_0= rulePackageDefinition ) ) ) | ( '2' ( (lv_definition_3_0= rulePackageDefinition2 ) ) ) ) )
@@ -309,7 +310,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_contents_4_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:171:6: ( ( () 'package' ( (lv_namespace_2_0= RULE_ID ) ) ';' ( (lv_contents_4_0= ruleObject ) )* ) )
@@ -507,7 +508,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_features_26_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:261:6: ( ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? 'object' ( (lv_name_3_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* ) ) ) '}' ) )
@@ -1477,7 +1478,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         EObject this_Reference_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:726:6: ( (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference ) )
@@ -1599,7 +1600,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_type_1_0=null;
         Token lv_name_2_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:768:6: ( ( 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ';' ) )
@@ -1749,7 +1750,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_shortDescription_7_0=null;
         Token lv_longDescription_10_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:847:6: ( ( 'Reference' ( ( RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}' ) | ';' ) ) )
@@ -2166,7 +2167,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_contents_4_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1050:6: ( ( () 'package' ( (lv_namespace_2_0= RULE_ID ) ) ';' ( (lv_contents_4_0= ruleObject2 ) )* ) )
@@ -2358,7 +2359,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_features_19_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1140:6: ( ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? 'object' ( (lv_name_3_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature2 ) )+ ) ) )* ) ) ) '}' ) )
@@ -3049,7 +3050,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         EObject this_Reference2_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1481:6: ( (this_Attribute2_0= ruleAttribute2 | this_Reference2_1= ruleReference2 ) )
@@ -3177,7 +3178,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_constraintDefinitions_11_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1523:6: ( ( 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ( ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_6_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( (lv_constraintDefinitions_11_0= ruleConstraintDefinition ) )+ ) ) | ({...}? => ( ( ( (lv_required_12_0= 'required' ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_technical_14_0= 'technical' ) ) ';' ) ) ) )* ) ) ) '}' ) | ';' ) ) )
@@ -3799,7 +3800,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_shortDescription_7_0=null;
         Token lv_longDescription_10_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:1825:6: ( ( 'Reference' ( ( RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}' ) | ';' ) ) )
@@ -4216,7 +4217,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_parameters_5_0=null;
         Token lv_message_8_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:2028:6: ( ( 'constraint' ( (lv_type_1_0= RULE_ID ) ) '{' ( ( ( ( ({...}? => ( ( 'parameters' ( (lv_parameters_5_0= RULE_STRING ) )* ';' ) ) ) | ({...}? => ( ( 'message' ( (lv_message_8_0= RULE_STRING ) ) ';' ) ) ) )+ {...}?) ) ) '}' ) )

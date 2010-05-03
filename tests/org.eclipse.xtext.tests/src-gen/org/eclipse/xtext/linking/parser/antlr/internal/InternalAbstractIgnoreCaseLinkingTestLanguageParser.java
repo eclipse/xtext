@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'{'", "'}'"
@@ -114,7 +115,7 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
         EObject lv_elements_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalAbstractIgnoreCaseLinkingTestLanguage.g:91:6: ( ( (lv_elements_0_0= ruleElement ) )+ )
@@ -242,7 +243,7 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
         EObject lv_elements_3_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalAbstractIgnoreCaseLinkingTestLanguage.g:138:6: ( ( ( (lv_name_0_0= RULE_ID ) ) ( ( RULE_ID ) )? '{' ( (lv_elements_3_0= ruleElement ) )* '}' ) )

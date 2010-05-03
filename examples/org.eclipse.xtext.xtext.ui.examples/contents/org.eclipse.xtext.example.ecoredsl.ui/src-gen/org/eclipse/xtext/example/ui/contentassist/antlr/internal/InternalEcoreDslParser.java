@@ -20,6 +20,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalEcoreDslParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_SERIALIZABLE", "RULE_BAG", "RULE_RANDOM", "RULE_READONLY", "RULE_LOCAL", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'class'", "'ref'", "'void'", "'.'", "'$'", "'import'", "';'", "'='", "'package'", "'nsURI'", "'nsPrefix'", "'{'", "'}'", "'datatype'", "':'", "'@'", "'('", "')'", "','", "'<'", "'>'", "'extends'", "'attr'", "'['", "']'", "'..'", "'#'", "'enum'", "'?'", "'super'", "'op'", "'throws'", "'-'", "'abstract'", "'interface'", "'ID'", "'volatile'", "'transient'", "'unsettable'", "'derived'", "'val'"

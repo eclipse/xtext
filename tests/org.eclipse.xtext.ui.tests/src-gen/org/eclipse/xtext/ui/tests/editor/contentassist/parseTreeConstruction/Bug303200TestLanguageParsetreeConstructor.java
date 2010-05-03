@@ -303,13 +303,13 @@ protected class ProgramDirective_StatementParserRuleCall_1 extends RuleCallToken
 /************ begin Rule FunctionDefinition ****************
  *
  * FunctionDefinition:
- *   attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=
- *   Block;
+ *   attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT*
+ *   body=Block;
  *
  **/
 
-// attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=
-// Block
+// attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT*
+// body=Block
 protected class FunctionDefinition_Group extends GroupToken {
 	
 	public FunctionDefinition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1417,15 +1417,15 @@ protected class Statement_SemicolonKeyword_1_2_0 extends KeywordToken  {
 /************ begin Rule PostfixExpression ****************
  *
  * PostfixExpression:
- *   PrimaryExpression ({PostfixExpression.expression=current} LT* property=
- *   PropertyOperator|{Invocation.expression=current} LT* "(" LT* (arguments=
- *   ListExpression LT*)? ")")*;
+ *   PrimaryExpression ({PostfixExpression.expression=current} LT*
+ *   property=PropertyOperator|{Invocation.expression=current} LT* "(" LT* (
+ *   arguments=ListExpression LT*)? ")")*;
  *
  **/
 
-// PrimaryExpression ({PostfixExpression.expression=current} LT* property=
-// PropertyOperator|{Invocation.expression=current} LT* "(" LT* (arguments=
-// ListExpression LT*)? ")")*
+// PrimaryExpression ({PostfixExpression.expression=current} LT*
+// property=PropertyOperator|{Invocation.expression=current} LT* "(" LT* (
+// arguments=ListExpression LT*)? ")")*
 protected class PostfixExpression_Group extends GroupToken {
 	
 	public PostfixExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

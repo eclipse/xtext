@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalBug288760TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_START_TAG", "RULE_END_TAG_SHORT", "RULE_GT", "RULE_END_TAG", "RULE_ID", "RULE_EQ", "RULE_STRING", "RULE_ML_COMMENT", "RULE_LT", "RULE_END_TAG_START", "RULE_INT", "RULE_WS", "RULE_ANY_OTHER"
@@ -127,7 +128,7 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_children_6_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288760TestLanguage.g:91:6: ( ( ( ( (lv_name_0_0= RULE_START_TAG ) ) ( (lv_attributes_1_0= ruleAttribute ) )* RULE_END_TAG_SHORT ) | ( ( (lv_name_3_0= RULE_START_TAG ) ) ( (lv_attributes_4_0= ruleAttribute ) )* RULE_GT ( (lv_children_6_0= ruleWorkflowElement ) )* ( (lv_end_7_0= RULE_END_TAG ) ) ) ) )
@@ -495,7 +496,7 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_name_0_0=null;
         Token lv_value_2_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288760TestLanguage.g:267:6: ( ( ( (lv_name_0_0= RULE_ID ) ) RULE_EQ ( (lv_value_2_0= RULE_STRING ) ) ) )

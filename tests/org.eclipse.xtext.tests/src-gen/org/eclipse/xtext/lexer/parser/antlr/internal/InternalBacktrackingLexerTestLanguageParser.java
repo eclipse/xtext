@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+@SuppressWarnings("all")
 public class InternalBacktrackingLexerTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "FRAGMENT_KEYWORD_1", "FRAGMENT_KEYWORD_2", "FRAGMENT_RULE_CHARA", "FRAGMENT_RULE_CHARB", "FRAGMENT_RULE_CHARX", "FRAGMENT_RULE_WS", "FRAGMENT_RULE_SL_COMMENT", "SYNTHETIC_ALL_KEYWORDS", "KEYWORD_1", "KEYWORD_2", "RULE_CHARA", "RULE_CHARB", "RULE_CHARX", "RULE_WS", "RULE_SL_COMMENT", "Tokens", "' '", "'\t'", "'\r'", "'\n'"

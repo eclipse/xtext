@@ -191,12 +191,12 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		// * /
 		//
 		//TrickyA returns TypeA1:
-		//  "TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=
-		//  STRING;
+		//  "TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")?
+		//  name+=STRING;
 		public ParserRule getRule() { return rule; }
 
-		//"TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=
-		//STRING
+		//"TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")?
+		//name+=STRING
 		public Group getGroup() { return cGroup; }
 
 		//"TA"
@@ -753,8 +753,8 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	// * /
 	//
 	//TrickyA returns TypeA1:
-	//  "TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=
-	//  STRING;
+	//  "TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")?
+	//  name+=STRING;
 	public TrickyAElements getTrickyAAccess() {
 		return (pTrickyA != null) ? pTrickyA : (pTrickyA = new TrickyAElements());
 	}

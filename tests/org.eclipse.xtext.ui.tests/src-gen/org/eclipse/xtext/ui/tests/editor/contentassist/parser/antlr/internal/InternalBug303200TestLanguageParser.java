@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+@SuppressWarnings("all")
 public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_LT", "RULE_ID", "RULE_WS", "'function'", "'['", "']'", "'('", "','", "')'", "'{'", "'}'", "';'", "'.'"
@@ -121,7 +122,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_directives_2_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug303200TestLanguage.g:97:6: ( ( () ( ( RULE_LT )* ( (lv_directives_2_0= ruleProgramDirective ) ) )* ( RULE_LT )* ) )
@@ -344,7 +345,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
         EObject this_Statement_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug303200TestLanguage.g:166:6: ( (this_FunctionDefinition_0= ruleFunctionDefinition | this_Statement_1= ruleStatement ) )
@@ -538,7 +539,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_body_7_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug303200TestLanguage.g:214:6: ( ( ( (lv_attributes_0_0= ruleAttribute ) )* 'function' ( RULE_LT )* ( (lv_name_3_0= RULE_ID ) ) ( RULE_LT )* ( (lv_params_5_0= ruleParameters ) ) ( RULE_LT )* ( (lv_body_7_0= ruleBlock ) ) ) )
@@ -890,7 +891,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_expression_4_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug303200TestLanguage.g:349:6: ( ( ( (lv_ident_0_0= RULE_ID ) ) | ( () '[' ( RULE_LT )* ( (lv_expression_4_0= rulePostfixExpression ) ) ( RULE_LT )* ']' ) ) )
@@ -1175,7 +1176,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_params_3_0=null;
         Token lv_params_7_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug303200TestLanguage.g:451:6: ( ( () '(' ( RULE_LT )* ( ( (lv_params_3_0= RULE_ID ) ) ( RULE_LT )* ( ',' ( RULE_LT )* ( (lv_params_7_0= RULE_ID ) ) ( RULE_LT )* )* )? ')' ) )
@@ -1531,7 +1532,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_directives_3_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug303200TestLanguage.g:564:6: ( ( () '{' ( ( RULE_LT )* ( (lv_directives_3_0= ruleStatement ) ) )* ( RULE_LT )* '}' ) )
@@ -1766,7 +1767,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_expression_2_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug303200TestLanguage.g:641:6: ( (this_Block_0= ruleBlock | ( () ( (lv_expression_2_0= rulePostfixExpression ) ) ( ';' | RULE_LT ) ) ) )
@@ -2011,7 +2012,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_arguments_8_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug303200TestLanguage.g:724:6: ( (this_PrimaryExpression_0= rulePrimaryExpression ( ( () ( RULE_LT )* ( (lv_property_3_0= rulePropertyOperator ) ) ) | ( () ( RULE_LT )* '(' ( RULE_LT )* ( ( (lv_arguments_8_0= ruleListExpression ) ) ( RULE_LT )* )? ')' ) )* ) )
@@ -2462,7 +2463,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_expressions_4_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug303200TestLanguage.g:870:6: ( ( ( (lv_expressions_0_0= rulePostfixExpression ) ) ( ( RULE_LT )* ',' ( RULE_LT )* ( (lv_expressions_4_0= rulePostfixExpression ) ) )* ) )
@@ -2707,7 +2708,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_expressions_5_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug303200TestLanguage.g:953:6: ( ( ( '.' ( RULE_LT )* ( (lv_name_2_0= RULE_ID ) ) ) | ( '[' ( RULE_LT )* ( (lv_expressions_5_0= ruleListExpression ) ) ( RULE_LT )* ']' ) ) )
@@ -3014,7 +3015,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_body_7_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug303200TestLanguage.g:1049:6: ( ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | ( () 'function' ( RULE_LT )* ( (lv_params_5_0= ruleParameters ) ) ( RULE_LT )* ( (lv_body_7_0= ruleBlock ) ) ) ) )

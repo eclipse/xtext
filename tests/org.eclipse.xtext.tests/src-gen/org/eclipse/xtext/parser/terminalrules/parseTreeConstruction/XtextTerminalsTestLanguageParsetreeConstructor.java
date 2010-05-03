@@ -3727,13 +3727,13 @@ protected class ParenthesizedAssignableElement_RightParenthesisKeyword_2 extends
 /************ begin Rule AssignableAlternatives ****************
  *
  * AssignableAlternatives returns AbstractElement:
- *   AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=
- *   AssignableTerminal)+)?;
+ *   AssignableTerminal ({Alternatives.groups+=current} ("|"
+ *   groups+=AssignableTerminal)+)?;
  *
  **/
 
-// AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=
-// AssignableTerminal)+)?
+// AssignableTerminal ({Alternatives.groups+=current} ("|"
+// groups+=AssignableTerminal)+)?
 protected class AssignableAlternatives_Group extends GroupToken {
 	
 	public AssignableAlternatives_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4416,13 +4416,13 @@ protected class ParenthesizedElement_RightParenthesisKeyword_2 extends KeywordTo
 /************ begin Rule TerminalRule ****************
  *
  * TerminalRule:
- *   "terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=
- *   TerminalAlternatives ";";
+ *   "terminal" name=ID ("returns" type=TypeRef)? ":"
+ *   alternatives=TerminalAlternatives ";";
  *
  **/
 
-// "terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=
-// TerminalAlternatives ";"
+// "terminal" name=ID ("returns" type=TypeRef)? ":"
+// alternatives=TerminalAlternatives ";"
 protected class TerminalRule_Group extends GroupToken {
 	
 	public TerminalRule_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6498,13 +6498,13 @@ protected class EnumRule_SemicolonKeyword_5 extends KeywordToken  {
 /************ begin Rule EnumLiterals ****************
  *
  * EnumLiterals returns AbstractElement:
- *   EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=
- *   EnumLiteralDeclaration)+)?;
+ *   EnumLiteralDeclaration ({Alternatives.groups+=current} ("|"
+ *   groups+=EnumLiteralDeclaration)+)?;
  *
  **/
 
-// EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=
-// EnumLiteralDeclaration)+)?
+// EnumLiteralDeclaration ({Alternatives.groups+=current} ("|"
+// groups+=EnumLiteralDeclaration)+)?
 protected class EnumLiterals_Group extends GroupToken {
 	
 	public EnumLiterals_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

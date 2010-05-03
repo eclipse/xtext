@@ -53,15 +53,15 @@ protected class ThisRootNode extends RootToken {
  *
  * Model:
  *   "actions" attributes+=BaseAttribute*|"simple" attributes+=SimpleAttribute*|
- *   "rulecall" attributes+=RuleCallAttribute*|"rulecall2" attributes+=
- *   RuleCallAttribute2*|"rulecall3" attributes+=RuleCallAttribute3*|
+ *   "rulecall" attributes+=RuleCallAttribute*|"rulecall2"
+ *   attributes+=RuleCallAttribute2*|"rulecall3" attributes+=RuleCallAttribute3*|
  *   "inlinedActions" attributes+=ActionAttribute*;
  *
  **/
 
 // "actions" attributes+=BaseAttribute*|"simple" attributes+=SimpleAttribute*|
-// "rulecall" attributes+=RuleCallAttribute*|"rulecall2" attributes+=
-// RuleCallAttribute2*|"rulecall3" attributes+=RuleCallAttribute3*|
+// "rulecall" attributes+=RuleCallAttribute*|"rulecall2"
+// attributes+=RuleCallAttribute2*|"rulecall3" attributes+=RuleCallAttribute3*|
 // "inlinedActions" attributes+=ActionAttribute*
 protected class Model_Alternatives extends AlternativesToken {
 
@@ -1169,8 +1169,8 @@ protected class Master_MasterKeyword_1 extends KeywordToken  {
  *
  **/
 
-// ({Attribute} "attribute"|{Master} "master") ("ref" typeRef=[BaseAttribute]|type=
-// ID) name=ID ";"
+// ({Attribute} "attribute"|{Master} "master") ("ref" typeRef=[BaseAttribute]|
+// type=ID) name=ID ";"
 protected class ActionAttribute_Group extends GroupToken {
 	
 	public ActionAttribute_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

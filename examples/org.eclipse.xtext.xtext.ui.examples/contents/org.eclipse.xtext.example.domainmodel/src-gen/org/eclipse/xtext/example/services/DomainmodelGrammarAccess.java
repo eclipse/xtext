@@ -182,12 +182,12 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Entity:
-		//  "entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{" features+=
-		//  Feature* "}";
+		//  "entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{"
+		//  features+=Feature* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{" features+=
-		//Feature* "}"
+		//"entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{"
+		//features+=Feature* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"entity"
@@ -381,12 +381,12 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTypeTypeRefParserRuleCall_7_0 = (RuleCall)cTypeAssignment_7.eContents().get(0);
 		
 		//Operation:
-		//  visibility=Visibility? "op" name=ID "(" (params+=Parameter ("," params+=
-		//  Parameter)*)? ")" ":" type=TypeRef;
+		//  visibility=Visibility? "op" name=ID "(" (params+=Parameter (","
+		//  params+=Parameter)*)? ")" ":" type=TypeRef;
 		public ParserRule getRule() { return rule; }
 
-		//visibility=Visibility? "op" name=ID "(" (params+=Parameter ("," params+=
-		//Parameter)*)? ")" ":" type=TypeRef
+		//visibility=Visibility? "op" name=ID "(" (params+=Parameter (","
+		//params+=Parameter)*)? ")" ":" type=TypeRef
 		public Group getGroup() { return cGroup; }
 
 		//visibility=Visibility?
@@ -695,8 +695,8 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Entity:
-	//  "entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{" features+=
-	//  Feature* "}";
+	//  "entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{"
+	//  features+=Feature* "}";
 	public EntityElements getEntityAccess() {
 		return (pEntity != null) ? pEntity : (pEntity = new EntityElements());
 	}
@@ -746,8 +746,8 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Operation:
-	//  visibility=Visibility? "op" name=ID "(" (params+=Parameter ("," params+=
-	//  Parameter)*)? ")" ":" type=TypeRef;
+	//  visibility=Visibility? "op" name=ID "(" (params+=Parameter (","
+	//  params+=Parameter)*)? ")" ":" type=TypeRef;
 	public OperationElements getOperationAccess() {
 		return (pOperation != null) ? pOperation : (pOperation = new OperationElements());
 	}

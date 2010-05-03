@@ -10,6 +10,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalEncodingUiTestLanguageLexer extends Lexer {
     public static final int RULE_WS=5;
     public static final int EOF=-1;

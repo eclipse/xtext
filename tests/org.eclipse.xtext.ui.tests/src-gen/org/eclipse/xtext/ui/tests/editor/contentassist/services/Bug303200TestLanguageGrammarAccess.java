@@ -89,12 +89,12 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cBodyBlockParserRuleCall_7_0 = (RuleCall)cBodyAssignment_7.eContents().get(0);
 		
 		//FunctionDefinition:
-		//  attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=
-		//  Block;
+		//  attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT*
+		//  body=Block;
 		public ParserRule getRule() { return rule; }
 
-		//attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=
-		//Block
+		//attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT*
+		//body=Block
 		public Group getGroup() { return cGroup; }
 
 		//attributes+=Attribute*
@@ -364,14 +364,14 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightParenthesisKeyword_1_1_5 = (Keyword)cGroup_1_1.eContents().get(5);
 		
 		//PostfixExpression:
-		//  PrimaryExpression ({PostfixExpression.expression=current} LT* property=
-		//  PropertyOperator|{Invocation.expression=current} LT* "(" LT* (arguments=
-		//  ListExpression LT*)? ")")*;
+		//  PrimaryExpression ({PostfixExpression.expression=current} LT*
+		//  property=PropertyOperator|{Invocation.expression=current} LT* "(" LT* (
+		//  arguments=ListExpression LT*)? ")")*;
 		public ParserRule getRule() { return rule; }
 
-		//PrimaryExpression ({PostfixExpression.expression=current} LT* property=
-		//PropertyOperator|{Invocation.expression=current} LT* "(" LT* (arguments=
-		//ListExpression LT*)? ")")*
+		//PrimaryExpression ({PostfixExpression.expression=current} LT*
+		//property=PropertyOperator|{Invocation.expression=current} LT* "(" LT* (
+		//arguments=ListExpression LT*)? ")")*
 		public Group getGroup() { return cGroup; }
 
 		//PrimaryExpression
@@ -648,8 +648,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//FunctionDefinition:
-	//  attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=
-	//  Block;
+	//  attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT*
+	//  body=Block;
 	public FunctionDefinitionElements getFunctionDefinitionAccess() {
 		return (pFunctionDefinition != null) ? pFunctionDefinition : (pFunctionDefinition = new FunctionDefinitionElements());
 	}
@@ -699,9 +699,9 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//PostfixExpression:
-	//  PrimaryExpression ({PostfixExpression.expression=current} LT* property=
-	//  PropertyOperator|{Invocation.expression=current} LT* "(" LT* (arguments=
-	//  ListExpression LT*)? ")")*;
+	//  PrimaryExpression ({PostfixExpression.expression=current} LT*
+	//  property=PropertyOperator|{Invocation.expression=current} LT* "(" LT* (
+	//  arguments=ListExpression LT*)? ")")*;
 	public PostfixExpressionElements getPostfixExpressionAccess() {
 		return (pPostfixExpression != null) ? pPostfixExpression : (pPostfixExpression = new PostfixExpressionElements());
 	}

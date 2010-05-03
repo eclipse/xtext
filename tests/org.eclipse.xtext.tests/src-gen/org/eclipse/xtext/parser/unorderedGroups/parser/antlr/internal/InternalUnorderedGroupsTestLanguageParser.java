@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'1'", "'a'", "'b'", "'2'", "'c'", "'d'", "'3'", "'4'", "'5'", "'6'", "'7'", "'8'", "'9'", "'10'", "'11'", "'12'", "'13'", "'14'", "'datatypes'", "'serialization'", "'bug302585'", "'nested'"
@@ -154,7 +155,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
         EObject lv_nestedModel_77_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalUnorderedGroupsTestLanguage.g:91:6: ( ( () ( ( '1' ( ( ( ( ({...}? => ( ( (lv_first_3_0= 'a' ) ) ) ) | ({...}? => ( ( (lv_second_4_0= 'b' ) ) ) ) )+ {...}?) ) ) ) | ( '2' ( ( ( ( ({...}? => ( ( (lv_first_7_0= 'a' ) ) ) ) | ({...}? => ( ( (lv_second_8_0= 'b' ) ) ) ) | ({...}? => ( ( (lv_third_9_0= 'c' ) ) ) ) | ({...}? => ( ( (lv_forth_10_0= 'd' ) ) ) ) )+ {...}?) ) ) ) | ( '3' ( ( ( ( ({...}? => ( ( (lv_first_13_0= 'a' ) ) ) ) | ({...}? => ( ( (lv_second_14_0= 'b' ) ) ) ) )* ) ) ) ) | ( '4' ( ( ( ( ({...}? => ( ( (lv_first_17_0= 'a' ) ) ) ) | ({...}? => ( ( (lv_second_18_0= 'b' ) ) ) ) )+ {...}?) ) ) ) | ( '5' ( ( ( ( ({...}? => ( ( (lv_first_21_0= 'a' ) ) ) ) | ({...}? => ( ( (lv_second_22_0= 'b' ) ) ) ) )+ {...}?) ) ) ) | ( '6' ( ( ( ( ({...}? => ( ( (lv_firstAsList_25_0= 'a' ) )+ ) ) | ({...}? => ( ( (lv_secondAsList_26_0= 'b' ) )+ ) ) )+ {...}?) ) ) ) | ( '7' ( ( ( ( ({...}? => ( ( (lv_firstAsList_29_0= 'a' ) )+ ) ) | ({...}? => ( ( (lv_secondAsList_30_0= 'b' ) )+ ) ) )+ {...}?) ) ) ) | ( '8' ( ( ( ( ({...}? => ( ( 'a' 'b' ( (lv_first_35_0= 'c' ) ) ) ) ) | ({...}? => ( ( 'a' 'b' ( (lv_second_38_0= 'd' ) ) ) ) ) )+ {...}?) ) ) ) | ( '9' ( ( ( ( ({...}? => ( ( (lv_firstAsList_41_0= 'a' ) ) ) ) | ({...}? => ( ( (lv_secondAsList_42_0= 'b' ) ) ) ) )+ {...}?) ) )+ ) | ( '10' ( ( ( ( ({...}? => ( ( (lv_firstAsList_45_0= 'a' ) ) ) ) | ({...}? => ( ( (lv_secondAsList_46_0= 'b' ) ) ) ) )+ {...}?) ) )* ) | ( '11' ( ( ( ( ({...}? => ( ( (lv_first_49_0= 'a' ) ) ) ) | ({...}? => ( ( (lv_second_50_0= 'b' ) ) ) ) )+ {...}?) ) )? ) | ( '12' ( ( ( ( ({...}? => ( ( (lv_firstAsList_53_0= 'a' ) ) ) ) | ({...}? => ( ( (lv_secondAsList_54_0= 'b' ) ) ) ) )+ {...}?) ) ) ( ( ( ( ({...}? => ( ( (lv_firstAsList_56_0= 'a' ) ) ) ) | ({...}? => ( ( (lv_secondAsList_57_0= 'b' ) ) ) ) )+ {...}?) ) ) ) | ( '13' ( ( ( ( ({...}? => ( ( (lv_firstAsList_60_0= 'a' ) ) ) ) | ({...}? => ( ( (lv_secondAsList_61_0= 'b' ) ) ) ) )+ {...}?) ) )? ( (lv_firstAsList_62_0= 'a' ) ) ( (lv_secondAsList_63_0= 'b' ) ) ) | ( '14' ( ( ( ( ({...}? => ( ( ( ( ( ({...}? => ( ( (lv_firstAsList_67_0= 'a' ) ) ) ) | ({...}? => ( ( (lv_secondAsList_68_0= 'b' ) ) ) ) )+ {...}?) ) ) ) ) | ({...}? => ( ( ( ( ( ({...}? => ( ( (lv_thirdAsList_70_0= 'c' ) ) ) ) | ({...}? => ( ( (lv_forthAsList_71_0= 'd' ) ) ) ) )+ {...}?) ) ) ) ) )+ {...}?) ) )+ ) | ( 'datatypes' ( (lv_value_73_0= ruleUnorderedDatatype ) ) ) | ( 'serialization' ( (lv_serialized_75_0= ruleUnorderedSerialization ) ) ) | ( 'bug302585' ( (lv_nestedModel_77_0= ruleNestedModel ) )* ) ) ) )
@@ -4041,7 +4042,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
         Token lv_first_2_0=null;
         Token lv_second_3_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1773:6: ( ( () ( ( ( ( ({...}? => ( ( (lv_first_2_0= 'a' ) ) ) ) | ({...}? => ( ( (lv_second_3_0= 'b' ) ) ) ) )+ {...}?) ) )? 'nested' ) )
@@ -7389,7 +7390,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
         Token lv_firstAsList_13_0=null;
         Token lv_second_14_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2974:6: ( ( () ( ( ( ( ( ({...}? => ( ( '1' ( (lv_first_3_0= 'a' ) )? ) ) ) | ({...}? => ( ( (lv_second_4_0= 'b' ) ) ) ) | ({...}? => ( ( (lv_third_5_0= 'c' ) ) ) ) | ({...}? => ( ( (lv_forth_6_0= 'd' ) ) ) ) )+ {...}?) ) ) | ( '2' ( ( ( ( ({...}? => ( ( (lv_firstAsList_9_0= 'a' ) ) ) ) | ({...}? => ( ( (lv_secondAsList_10_0= 'b' ) ) ) ) )+ {...}?) ) )* ) | ( '3' ( ( ( ( ({...}? => ( ( (lv_firstAsList_13_0= 'a' ) )+ ) ) | ({...}? => ( ( (lv_second_14_0= 'b' ) ) ) ) )+ {...}?) ) )* ) ) ) )

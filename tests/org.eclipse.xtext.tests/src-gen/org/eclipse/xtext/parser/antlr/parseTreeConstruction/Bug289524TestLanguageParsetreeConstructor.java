@@ -183,8 +183,8 @@ protected class Model_RefsAssignment_2 extends AssignmentToken  {
  *
  **/
 
-// {ModelElement} (containments+=Contained|"reference" refs+=[Contained] ("$" refs
-// +=[Contained])*)+
+// {ModelElement} (containments+=Contained|"reference" refs+=[Contained] ("$"
+// refs+=[Contained])*)+
 protected class ModelElement_Group extends GroupToken {
 	
 	public ModelElement_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

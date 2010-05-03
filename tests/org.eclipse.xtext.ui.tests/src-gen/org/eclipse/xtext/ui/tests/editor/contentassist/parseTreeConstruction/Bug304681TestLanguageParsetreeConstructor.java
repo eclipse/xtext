@@ -464,21 +464,21 @@ protected class PackageDefinition_ContentsAssignment_4 extends AssignmentToken  
 /************ begin Rule Object ****************
  *
  * Object:
- *   (enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends" parent
- *   =[Object])? "{" (("shortDescription" shortDescription=STRING ";")? & (
+ *   (enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends"
+ *   parent=[Object])? "{" (("shortDescription" shortDescription=STRING ";")? & (
  *   "longDescription" longDescription=STRING ";")? & ("serialUID"
- *   serialVersionUID=INT ";")? & (cloneable?="cloneable" ";")? & features+=
- *   Feature* & ("before" features+=Feature* "after")? & ("optionalLoop" features
- *   +=Feature*)? & ("mandatoryLoop" features+=Feature+)?) "}";
+ *   serialVersionUID=INT ";")? & (cloneable?="cloneable" ";")? &
+ *   features+=Feature* & ("before" features+=Feature* "after")? & ("optionalLoop"
+ *   features+=Feature*)? & ("mandatoryLoop" features+=Feature+)?) "}";
  *
  **/
 
 // (enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends" parent=[
 // Object])? "{" (("shortDescription" shortDescription=STRING ";")? & (
-// "longDescription" longDescription=STRING ";")? & ("serialUID" serialVersionUID=
-// INT ";")? & (cloneable?="cloneable" ";")? & features+=Feature* & ("before"
-// features+=Feature* "after")? & ("optionalLoop" features+=Feature*)? & (
-// "mandatoryLoop" features+=Feature+)?) "}"
+// "longDescription" longDescription=STRING ";")? & ("serialUID"
+// serialVersionUID=INT ";")? & (cloneable?="cloneable" ";")? & features+=Feature*
+// & ("before" features+=Feature* "after")? & ("optionalLoop" features+=Feature*)?
+// & ("mandatoryLoop" features+=Feature+)?) "}"
 protected class Object_Group extends GroupToken {
 	
 	public Object_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -761,8 +761,8 @@ protected class Object_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 // ("shortDescription" shortDescription=STRING ";")? & ("longDescription"
 // longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT ";")? & (
 // cloneable?="cloneable" ";")? & features+=Feature* & ("before" features+=Feature
-// * "after")? & ("optionalLoop" features+=Feature*)? & ("mandatoryLoop" features
-// +=Feature+)?
+// * "after")? & ("optionalLoop" features+=Feature*)? & ("mandatoryLoop"
+// features+=Feature+)?
 protected class Object_UnorderedGroup_5 extends UnorderedGroupToken {
 	
 	public Object_UnorderedGroup_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2548,18 +2548,19 @@ protected class PackageDefinition2_ContentsAssignment_4 extends AssignmentToken 
 /************ begin Rule Object2 ****************
  *
  * Object2 returns Object:
- *   (enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends" parent
- *   =[Object])? "{" (("shortDescription" shortDescription=STRING ";")? & (
+ *   (enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends"
+ *   parent=[Object])? "{" (("shortDescription" shortDescription=STRING ";")? & (
  *   "longDescription" longDescription=STRING ";")? & ("serialUID"
- *   serialVersionUID=INT ";")? & (cloneable?="cloneable" ";")? & features+=
- *   Feature2*) "}";
+ *   serialVersionUID=INT ";")? & (cloneable?="cloneable" ";")? &
+ *   features+=Feature2*) "}";
  *
  **/
 
 // (enabled?="enabled"|abstract?="abstract")? "object" name=ID ("extends" parent=[
 // Object])? "{" (("shortDescription" shortDescription=STRING ";")? & (
-// "longDescription" longDescription=STRING ";")? & ("serialUID" serialVersionUID=
-// INT ";")? & (cloneable?="cloneable" ";")? & features+=Feature2*) "}"
+// "longDescription" longDescription=STRING ";")? & ("serialUID"
+// serialVersionUID=INT ";")? & (cloneable?="cloneable" ";")? & features+=Feature2
+// *) "}"
 protected class Object2_Group extends GroupToken {
 	
 	public Object2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3459,9 +3460,9 @@ protected class Feature2_Reference2ParserRuleCall_1 extends RuleCallToken {
  **/
 
 // "Attribute" type=ID name=ID ("{" (("shortDescription" shortDescription=STRING
-// ";")? & ("longDescription" longDescription=STRING ";")? & constraintDefinitions
-// +=ConstraintDefinition* & (required?="required" ";")? & (technical?="technical"
-// ";")?) "}"|";")
+// ";")? & ("longDescription" longDescription=STRING ";")? &
+// constraintDefinitions+=ConstraintDefinition* & (required?="required" ";")? & (
+// technical?="technical" ";")?) "}"|";")
 protected class Attribute2_Group extends GroupToken {
 	
 	public Attribute2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

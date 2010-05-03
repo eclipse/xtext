@@ -73,7 +73,7 @@ protected class Sequence_Group extends GroupToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getAtomRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
@@ -231,13 +231,13 @@ protected class Sequence_ExpressionsAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule Addition ****************
  *
  * Addition returns Expression:
- *   Multiplication ({Op.values+=current} operator=( "+" | "-" ) values+=
- *   Multiplication)*;
+ *   Multiplication ({Op.values+=current} operator=( "+" | "-" )
+ *   values+=Multiplication)*;
  *
  **/
 
-// Multiplication ({Op.values+=current} operator=( "+" | "-" ) values+=
-// Multiplication)*
+// Multiplication ({Op.values+=current} operator=( "+" | "-" )
+// values+=Multiplication)*
 protected class Addition_Group extends GroupToken {
 	
 	public Addition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -261,7 +261,7 @@ protected class Addition_Group extends GroupToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getAtomRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())
+		   getEObject().eClass() != grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -703,7 +703,7 @@ protected class Term_Alternatives extends AlternativesToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getAtomRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())
+		   getEObject().eClass() != grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -859,7 +859,7 @@ protected class Parens_Group extends GroupToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getAtomRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())
+		   getEObject().eClass() != grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}

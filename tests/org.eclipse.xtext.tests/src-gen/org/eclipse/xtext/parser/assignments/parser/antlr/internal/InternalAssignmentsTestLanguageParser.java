@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'simple'", "'complex'", "'id'", "'alternative'", "'string'", "'ids'", "'alternatives'", "'strings'", "'datatypeid'", "'datatypealternative'", "'datatypestring'", "'datatypeids'", "'datatypealternatives'", "'datatypestrings'"
@@ -128,7 +129,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
         EObject lv_object_6_4 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:91:6: ( ( ( 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | ( 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) ) )
@@ -634,7 +635,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
         Token lv_value_3_2=null;
         Token lv_value_5_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:312:6: ( ( ( 'id' ( (lv_value_1_0= RULE_ID ) ) ) | ( 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | ( 'string' ( (lv_value_5_0= RULE_STRING ) ) ) ) )
@@ -933,7 +934,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
         Token lv_value_3_2=null;
         Token lv_value_5_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:445:6: ( ( ( 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | ( 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | ( 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) ) )
@@ -1236,7 +1237,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
         AntlrDatatypeRuleToken lv_value_5_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:578:6: ( ( ( 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | ( 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | ( 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) )
@@ -1551,7 +1552,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
         AntlrDatatypeRuleToken lv_value_5_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:711:6: ( ( ( 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | ( 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | ( 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) )

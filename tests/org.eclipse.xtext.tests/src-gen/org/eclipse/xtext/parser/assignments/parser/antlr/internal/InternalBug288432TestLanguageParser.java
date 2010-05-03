@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalBug288432TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'('", "','", "')'", "'body'", "'end body'", "'content'", "'end content'", "'element'"
@@ -122,7 +123,7 @@ public class InternalBug288432TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_foo_7_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug288432TestLanguage.g:91:6: ( ( ( '(' ( (lv_parameter_1_0= ruleParameter ) ) ( ',' ( (lv_parameter_3_0= ruleParameter ) ) )* ')' )? 'body' ( ( (lv_content_6_1= ruleContent | lv_content_6_2= ruleParameterRef ) ) ) ( (lv_foo_7_0= ruleFoo ) )+ 'end body' ) )
@@ -479,7 +480,7 @@ public class InternalBug288432TestLanguageParser extends AbstractInternalAntlrPa
 
         Token lv_fooValue_0_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug288432TestLanguage.g:254:6: ( ( (lv_fooValue_0_0= RULE_STRING ) ) )
@@ -580,7 +581,7 @@ public class InternalBug288432TestLanguageParser extends AbstractInternalAntlrPa
         EObject this_MyElement_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug288432TestLanguage.g:301:6: ( ( 'content' this_MyElement_1= ruleMyElement 'end content' ) )
@@ -675,7 +676,7 @@ public class InternalBug288432TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_bar_1_2 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug288432TestLanguage.g:341:6: ( ( 'element' ( ( (lv_bar_1_1= ruleMyInt | lv_bar_1_2= ruleParameterRef ) ) ) ) )
@@ -844,7 +845,7 @@ public class InternalBug288432TestLanguageParser extends AbstractInternalAntlrPa
 
         Token lv_name_0_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug288432TestLanguage.g:418:6: ( ( ( (lv_name_0_0= RULE_ID ) ) ( ( RULE_ID ) )? ) )
@@ -981,7 +982,7 @@ public class InternalBug288432TestLanguageParser extends AbstractInternalAntlrPa
     public final EObject ruleParameterRef() throws RecognitionException {
         EObject current = null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug288432TestLanguage.g:479:6: ( ( ( RULE_ID ) ) )
@@ -1070,7 +1071,7 @@ public class InternalBug288432TestLanguageParser extends AbstractInternalAntlrPa
 
         Token lv_int_0_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug288432TestLanguage.g:516:6: ( ( (lv_int_0_0= RULE_INT ) ) )

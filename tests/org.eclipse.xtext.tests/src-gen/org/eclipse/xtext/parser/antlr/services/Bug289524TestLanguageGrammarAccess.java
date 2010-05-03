@@ -68,8 +68,8 @@ public class Bug289524TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//  refs+=[Contained])*)+;
 		public ParserRule getRule() { return rule; }
 
-		//{ModelElement} (containments+=Contained|"reference" refs+=[Contained] ("$" refs
-		//+=[Contained])*)+
+		//{ModelElement} (containments+=Contained|"reference" refs+=[Contained] ("$"
+		//refs+=[Contained])*)+
 		public Group getGroup() { return cGroup; }
 
 		//{ModelElement}

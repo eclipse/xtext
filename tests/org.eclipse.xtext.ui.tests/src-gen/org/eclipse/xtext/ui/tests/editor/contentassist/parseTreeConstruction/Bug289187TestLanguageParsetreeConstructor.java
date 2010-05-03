@@ -102,16 +102,16 @@ protected class Model_ClassesAssignment extends AssignmentToken  {
  *   abstract?="abstract"? transient?="transient"? "class" name=ID ("extends"
  *   superClass=[Class])? ("implements" implementedInterfaces+=[Class] (","
  *   "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
- *   classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "=" documentation=
- *   STRING)? attributes+=Attribute* operations+=Operation* "}";
+ *   classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "="
+ *   documentation=STRING)? attributes+=Attribute* operations+=Operation* "}";
  *
  **/
 
 // abstract?="abstract"? transient?="transient"? "class" name=ID ("extends"
 // superClass=[Class])? ("implements" implementedInterfaces+=[Class] (","
 // "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
-// classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "=" documentation=
-// STRING)? attributes+=Attribute* operations+=Operation* "}"
+// classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "="
+// documentation=STRING)? attributes+=Attribute* operations+=Operation* "}"
 protected class Class_Group extends GroupToken {
 	
 	public Class_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

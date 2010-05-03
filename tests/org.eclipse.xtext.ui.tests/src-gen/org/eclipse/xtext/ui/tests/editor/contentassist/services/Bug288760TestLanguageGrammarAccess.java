@@ -37,12 +37,12 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cEndEND_TAGTerminalRuleCall_1_4_0 = (RuleCall)cEndAssignment_1_4.eContents().get(0);
 		
 		//WorkflowElement:
-		//  name=START_TAG attributes+=Attribute* END_TAG_SHORT|name=START_TAG attributes
-		//  +=Attribute* GT children+=WorkflowElement* end=END_TAG;
+		//  name=START_TAG attributes+=Attribute* END_TAG_SHORT|name=START_TAG
+		//  attributes+=Attribute* GT children+=WorkflowElement* end=END_TAG;
 		public ParserRule getRule() { return rule; }
 
-		//name=START_TAG attributes+=Attribute* END_TAG_SHORT|name=START_TAG attributes+=
-		//Attribute* GT children+=WorkflowElement* end=END_TAG
+		//name=START_TAG attributes+=Attribute* END_TAG_SHORT|name=START_TAG
+		//attributes+=Attribute* GT children+=WorkflowElement* end=END_TAG
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//name=START_TAG attributes+=Attribute* END_TAG_SHORT
@@ -157,8 +157,8 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//WorkflowElement:
-	//  name=START_TAG attributes+=Attribute* END_TAG_SHORT|name=START_TAG attributes
-	//  +=Attribute* GT children+=WorkflowElement* end=END_TAG;
+	//  name=START_TAG attributes+=Attribute* END_TAG_SHORT|name=START_TAG
+	//  attributes+=Attribute* GT children+=WorkflowElement* end=END_TAG;
 	public WorkflowElementElements getWorkflowElementAccess() {
 		return (pWorkflowElement != null) ? pWorkflowElement : (pWorkflowElement = new WorkflowElementElements());
 	}

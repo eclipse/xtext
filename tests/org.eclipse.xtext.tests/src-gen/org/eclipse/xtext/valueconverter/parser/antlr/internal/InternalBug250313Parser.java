@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalBug250313Parser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'1'", "'mykeyword1'", "'1+'", "'2'", "'2+'", "'3'", "'3+'", "'4'", "'4+'", "'content'", "'ref'", "'-'", "'+'"
@@ -138,7 +139,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
         EObject lv_children_17_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:91:6: ( ( ( ( '1' )? ( ( (lv_value_1_1= 'mykeyword1' | lv_value_1_2= RULE_STRING | lv_value_1_3= ruleNestedDatatype | lv_value_1_4= ruleDatatype | lv_value_1_5= RULE_ID ) ) ) ) | ( '1+' ( ( (lv_multiValue_3_1= 'mykeyword1' | lv_multiValue_3_2= RULE_STRING | lv_multiValue_3_3= ruleNestedDatatype | lv_multiValue_3_4= ruleDatatype | lv_multiValue_3_5= RULE_ID ) ) ) ) | ( '2' ( (lv_value_5_0= RULE_STRING ) ) ) | ( '2+' ( (lv_multiValue_7_0= RULE_STRING ) ) ) | ( '3' ( (lv_value_9_0= ruleDatatype ) ) ) | ( '3+' ( (lv_multiValue_11_0= ruleDatatype ) ) ) | ( '4' ( (lv_value_13_0= ruleNestedDatatype ) ) ) | ( '4+' ( (lv_multiValue_15_0= ruleNestedDatatype ) ) ) | ( ( 'content' ( (lv_children_17_0= ruleChild ) ) ) ( 'ref' ( ( ( RULE_STRING | RULE_ID ) ) ) )? ) ) )
@@ -1385,7 +1386,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
         EObject this_Child2_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:664:6: ( (this_Child1_0= ruleChild1 | this_Child2_1= ruleChild2 ) )
@@ -1506,7 +1507,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
         Token lv_name_0_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:706:6: ( ( (lv_name_0_0= RULE_ID ) ) )
@@ -1606,7 +1607,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
         Token lv_name_0_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:753:6: ( ( (lv_name_0_0= RULE_STRING ) ) )

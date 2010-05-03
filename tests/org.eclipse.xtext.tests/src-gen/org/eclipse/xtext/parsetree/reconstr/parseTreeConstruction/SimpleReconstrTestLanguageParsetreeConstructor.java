@@ -6275,8 +6275,8 @@ protected class TypeBug2B_NameAssignment_2 extends AssignmentToken  {
  *
  **/
 
-// "#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z
-// +=ID)*)?)) name=ID
+// "#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID (","
+// z+=ID)*)?)) name=ID
 protected class Bug305171_Group extends GroupToken {
 	
 	public Bug305171_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

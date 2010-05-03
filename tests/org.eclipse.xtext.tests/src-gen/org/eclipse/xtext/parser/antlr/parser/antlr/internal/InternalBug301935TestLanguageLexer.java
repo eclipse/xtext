@@ -10,6 +10,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalBug301935TestLanguageLexer extends Lexer {
     public static final int RULE_ID=4;
     public static final int RULE_WS=5;

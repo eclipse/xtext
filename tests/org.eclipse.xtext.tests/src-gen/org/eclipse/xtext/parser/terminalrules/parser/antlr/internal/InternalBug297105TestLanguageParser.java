@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+@SuppressWarnings("all")
 public class InternalBug297105TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_INT", "RULE_EXT_INT", "RULE_ID", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'+'", "'.'"
@@ -126,7 +127,7 @@ public class InternalBug297105TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_expressions_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug297105TestLanguage.g:97:6: ( ( (lv_expressions_0_0= ruleExpression ) )* )
@@ -260,7 +261,7 @@ public class InternalBug297105TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_right_2_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug297105TestLanguage.g:144:6: ( ( ( (lv_left_0_0= ruleLiteral ) ) '+' ( (lv_right_2_0= ruleLiteral ) ) ) )
@@ -428,7 +429,7 @@ public class InternalBug297105TestLanguageParser extends AbstractInternalAntlrPa
         EObject this_IntLiteral_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug297105TestLanguage.g:219:6: ( (this_RealLiteral_0= ruleRealLiteral | this_IntLiteral_1= ruleIntLiteral ) )
@@ -589,7 +590,7 @@ public class InternalBug297105TestLanguageParser extends AbstractInternalAntlrPa
         AntlrDatatypeRuleToken lv_value_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug297105TestLanguage.g:267:6: ( ( (lv_value_0_0= ruleIntValue ) ) )
@@ -703,7 +704,7 @@ public class InternalBug297105TestLanguageParser extends AbstractInternalAntlrPa
         AntlrDatatypeRuleToken lv_value_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug297105TestLanguage.g:314:6: ( ( (lv_value_0_0= ruleRealValue ) ) )

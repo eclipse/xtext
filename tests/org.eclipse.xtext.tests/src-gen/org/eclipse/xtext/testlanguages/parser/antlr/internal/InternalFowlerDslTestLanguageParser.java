@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'events'", "'end'", "'commands'", "'resetting'", "'state'", "'actions'", "'{'", "'}'", "'=>'"
@@ -118,7 +119,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_states_6_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:91:6: ( ( 'events' ( (lv_events_1_0= ruleEvent ) )* 'end' 'commands' ( (lv_commands_4_0= ruleCommand ) )* 'end' ( (lv_states_6_0= ruleState ) )* ) )
@@ -371,7 +372,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
         Token lv_name_1_0=null;
         Token lv_code_2_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:202:6: ( ( ( (lv_resetting_0_0= 'resetting' ) )? ( (lv_name_1_0= RULE_ID ) ) ( (lv_code_2_0= RULE_ID ) ) ) )
@@ -551,7 +552,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
         Token lv_name_0_0=null;
         Token lv_code_1_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:294:6: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_code_1_0= RULE_ID ) ) ) )
@@ -692,7 +693,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_transitions_6_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:365:6: ( ( 'state' ( (lv_name_1_0= RULE_ID ) ) ( 'actions' '{' ( ( RULE_ID ) )+ '}' )? ( (lv_transitions_6_0= ruleTransition ) )* 'end' ) )
@@ -932,7 +933,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
     public final EObject ruleTransition() throws RecognitionException {
         EObject current = null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:470:6: ( ( ( ( RULE_ID ) ) '=>' ( ( RULE_ID ) ) ) )

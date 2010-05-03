@@ -120,38 +120,41 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Model:
 		//  {Model} ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}"|"#1+" "{"
 		//  errors+=Error_1+ operations+=Operation_1+ "}"|"#2*" "{" errors+=Error_2*
-		//  operations+=Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+ operations+=
-		//  Operation_2+ "}"|"#3*" name=ID "{" errors+=Error_3* operations+=Operation_3*
-		//  "}"|"#3+" name=ID "{" errors+=Error_3+ operations+=Operation_3+ "}"|"#4*"
-		//  name=ID "{" errors+=Error_4* operations+=Operation_4* "}"|"#4+" name=ID "{"
-		//  errors+=Error_4+ operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=
-		//  Error_5* operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+
+		//  operations+=Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+
+		//  operations+=Operation_2+ "}"|"#3*" name=ID "{" errors+=Error_3*
+		//  operations+=Operation_3* "}"|"#3+" name=ID "{" errors+=Error_3+
+		//  operations+=Operation_3+ "}"|"#4*" name=ID "{" errors+=Error_4*
+		//  operations+=Operation_4* "}"|"#4+" name=ID "{" errors+=Error_4+
+		//  operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=Error_5*
+		//  operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+
 		//  operations+=Operation_5+ "}");
 		public ParserRule getRule() { return rule; }
 
 		//{Model} ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}"|"#1+" "{"
 		//errors+=Error_1+ operations+=Operation_1+ "}"|"#2*" "{" errors+=Error_2*
-		//operations+=Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+ operations+=
-		//Operation_2+ "}"|"#3*" name=ID "{" errors+=Error_3* operations+=Operation_3*
-		//"}"|"#3+" name=ID "{" errors+=Error_3+ operations+=Operation_3+ "}"|"#4*" name=
-		//ID "{" errors+=Error_4* operations+=Operation_4* "}"|"#4+" name=ID "{" errors+=
-		//Error_4+ operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=Error_5*
-		//operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+ operations+=
-		//Operation_5+ "}")
+		//operations+=Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+
+		//operations+=Operation_2+ "}"|"#3*" name=ID "{" errors+=Error_3*
+		//operations+=Operation_3* "}"|"#3+" name=ID "{" errors+=Error_3+
+		//operations+=Operation_3+ "}"|"#4*" name=ID "{" errors+=Error_4*
+		//operations+=Operation_4* "}"|"#4+" name=ID "{" errors+=Error_4+
+		//operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=Error_5*
+		//operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+
+		//operations+=Operation_5+ "}")
 		public Group getGroup() { return cGroup; }
 
 		//{Model}
 		public Action getModelAction_0() { return cModelAction_0; }
 
-		//"#1*" "{" errors+=Error_1* operations+=Operation_1* "}"|"#1+" "{" errors+=
-		//Error_1+ operations+=Operation_1+ "}"|"#2*" "{" errors+=Error_2* operations+=
-		//Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+ operations+=Operation_2+
-		//"}"|"#3*" name=ID "{" errors+=Error_3* operations+=Operation_3* "}"|"#3+" name=
-		//ID "{" errors+=Error_3+ operations+=Operation_3+ "}"|"#4*" name=ID "{" errors+=
-		//Error_4* operations+=Operation_4* "}"|"#4+" name=ID "{" errors+=Error_4+
-		//operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=Error_5* operations+=
-		//Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+ operations+=Operation_5+
-		//"}"
+		//"#1*" "{" errors+=Error_1* operations+=Operation_1* "}"|"#1+" "{"
+		//errors+=Error_1+ operations+=Operation_1+ "}"|"#2*" "{" errors+=Error_2*
+		//operations+=Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+
+		//operations+=Operation_2+ "}"|"#3*" name=ID "{" errors+=Error_3*
+		//operations+=Operation_3* "}"|"#3+" name=ID "{" errors+=Error_3+
+		//operations+=Operation_3+ "}"|"#4*" name=ID "{" errors+=Error_4*
+		//operations+=Operation_4* "}"|"#4+" name=ID "{" errors+=Error_4+
+		//operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=Error_5*
+		//operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+
+		//operations+=Operation_5+ "}"
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"#1*" "{" errors+=Error_1* operations+=Operation_1* "}"
@@ -803,12 +806,13 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Model:
 	//  {Model} ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}"|"#1+" "{"
 	//  errors+=Error_1+ operations+=Operation_1+ "}"|"#2*" "{" errors+=Error_2*
-	//  operations+=Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+ operations+=
-	//  Operation_2+ "}"|"#3*" name=ID "{" errors+=Error_3* operations+=Operation_3*
-	//  "}"|"#3+" name=ID "{" errors+=Error_3+ operations+=Operation_3+ "}"|"#4*"
-	//  name=ID "{" errors+=Error_4* operations+=Operation_4* "}"|"#4+" name=ID "{"
-	//  errors+=Error_4+ operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=
-	//  Error_5* operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+
+	//  operations+=Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+
+	//  operations+=Operation_2+ "}"|"#3*" name=ID "{" errors+=Error_3*
+	//  operations+=Operation_3* "}"|"#3+" name=ID "{" errors+=Error_3+
+	//  operations+=Operation_3+ "}"|"#4*" name=ID "{" errors+=Error_4*
+	//  operations+=Operation_4* "}"|"#4+" name=ID "{" errors+=Error_4+
+	//  operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=Error_5*
+	//  operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+
 	//  operations+=Operation_5+ "}");
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());

@@ -10,6 +10,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
     public static final int RULE_WS=6;
     public static final int KEYWORD_1=5;

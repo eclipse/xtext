@@ -755,13 +755,13 @@ protected class DataType_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule Entity ****************
  *
  * Entity:
- *   "entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{" features+=
- *   Feature* "}";
+ *   "entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{"
+ *   features+=Feature* "}";
  *
  **/
 
-// "entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{" features+=
-// Feature* "}"
+// "entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{"
+// features+=Feature* "}"
 protected class Entity_Group extends GroupToken {
 	
 	public Entity_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1666,13 +1666,13 @@ protected class Reference_OppositeAssignment_4_1 extends AssignmentToken  {
 /************ begin Rule Operation ****************
  *
  * Operation:
- *   visibility=Visibility? "op" name=ID "(" (params+=Parameter ("," params+=
- *   Parameter)*)? ")" ":" type=TypeRef;
+ *   visibility=Visibility? "op" name=ID "(" (params+=Parameter (","
+ *   params+=Parameter)*)? ")" ":" type=TypeRef;
  *
  **/
 
-// visibility=Visibility? "op" name=ID "(" (params+=Parameter ("," params+=
-// Parameter)*)? ")" ":" type=TypeRef
+// visibility=Visibility? "op" name=ID "(" (params+=Parameter (","
+// params+=Parameter)*)? ")" ":" type=TypeRef
 protected class Operation_Group extends GroupToken {
 	
 	public Operation_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

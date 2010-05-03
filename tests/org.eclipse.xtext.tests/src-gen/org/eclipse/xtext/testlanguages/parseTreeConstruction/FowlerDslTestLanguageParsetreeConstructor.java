@@ -44,8 +44,8 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Statemachine ****************
  *
  * Statemachine:
- *   "events" events+=Event* "end" "commands" commands+=Command* "end" states+=
- *   State*;
+ *   "events" events+=Event* "end" "commands" commands+=Command* "end"
+ *   states+=State*;
  *
  **/
 
@@ -564,8 +564,8 @@ protected class Command_CodeAssignment_1 extends AssignmentToken  {
 /************ begin Rule State ****************
  *
  * State:
- *   "state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=
- *   Transition* "end";
+ *   "state" name=ID ("actions" "{" actions+=[Command]+ "}")?
+ *   transitions+=Transition* "end";
  *
  **/
 

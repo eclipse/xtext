@@ -22,6 +22,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'('", "')'", "'!'", "'#'", "'='", "'type'", "'extends'", "'#2'", "'mykeyword1'", "'mykeyword2'", "'#3'", "'.'", "'#4'", "'myoption'", "'kw'", "'#5'", "'*'", "','", "'#6'", "'v1'", "'v2'", "'#7'", "'kw0'", "'#8'", "'kw1'", "'kw2'", "'kw30'", "'#9'", "'kw3'", "'kw4'", "'kw5'", "'kw6'", "'#10'", "'#11'", "'kw7'", "'#12'", "'interface'", "'class'", "'#13'", "'static'", "'final'", "'transient'", "'#14'", "'item'", "'#15'", "'#16'", "'refs'", "'#17'", "'#18'", "'ka'", "'kb'", "'#19'", "'kx'", "'ky'", "'kz'", "'#20'", "'#21'", "'lit1'", "'lit2'"
@@ -117,7 +118,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         EObject lv_values_2_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:92:6: ( (this_Term_0= ruleTerm ( () ( (lv_values_2_0= ruleTerm ) ) )* ) )
@@ -331,7 +332,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         EObject this_Bug310435Enum_24 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:164:6: ( (this_Atom_0= ruleAtom | this_TwoNumbers_1= ruleTwoNumbers | this_ManyStrings_2= ruleManyStrings | this_Type_3= ruleType | this_Ref2_4= ruleRef2 | this_Spare_5= ruleSpare | this_Boolean_6= ruleBoolean | this_Transient1_7= ruleTransient1 | this_Consumed1_8= ruleConsumed1 | this_Consumed2_9= ruleConsumed2 | this_Loop1_10= ruleLoop1 | this_Loop2_11= ruleLoop2 | this_Loop3_12= ruleLoop3 | this_Loop4_13= ruleLoop4 | this_LoopBug285452_14= ruleLoopBug285452 | this_DuplicateBug284491_15= ruleDuplicateBug284491 | this_EmptyObjectBug284850_16= ruleEmptyObjectBug284850 | this_MultiInheritanceBug280439_17= ruleMultiInheritanceBug280439 | this_EObjectRef_18= ruleEObjectRef | this_TypeBug305577_1_19= ruleTypeBug305577_1 | this_TypeBug305577_2_20= ruleTypeBug305577_2 | this_Parens_21= ruleParens | this_Bug305171_22= ruleBug305171 | this_Bug310435Val_23= ruleBug310435Val | this_Bug310435Enum_24= ruleBug310435Enum ) )
@@ -965,7 +966,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
         Token lv_name_0_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:436:6: ( ( (lv_name_0_0= RULE_ID ) ) )
@@ -1067,7 +1068,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         EObject this_Op_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:483:6: ( ( '(' this_Op_1= ruleOp ')' ( (lv_em_3_0= '!' ) )? ) )
@@ -1201,7 +1202,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_num2_1_0=null;
         Token lv_num3_3_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:544:6: ( ( ( (lv_num1_0_0= RULE_INT ) ) ( (lv_num2_1_0= RULE_INT ) ) ( '#' ( (lv_num3_3_0= RULE_INT ) ) )* ) )
@@ -1402,7 +1403,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_str1_1_0=null;
         Token lv_str2_2_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:643:6: ( ( '=' ( (lv_str1_1_0= RULE_STRING ) )* ( (lv_str2_2_0= RULE_STRING ) ) ) )
@@ -1569,7 +1570,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
         Token lv_name_1_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:718:6: ( ( 'type' ( (lv_name_1_0= RULE_ID ) ) 'extends' ( ( RULE_ID ) ) ) )
@@ -1707,7 +1708,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_ref2_1_2=null;
         Token lv_ref2_1_3=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:787:6: ( ( '#2' ( ( (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' ) ) ) ) )
@@ -1899,7 +1900,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_id_1_0=null;
         Token lv_id_3_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:877:6: ( ( '#3' ( (lv_id_1_0= RULE_ID ) ) ( '.' ( (lv_id_3_0= RULE_ID ) ) )* ) )
@@ -2071,7 +2072,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_bool_1_0=null;
         Token lv_value_3_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:956:6: ( ( '#4' ( (lv_bool_1_0= 'myoption' ) )? 'kw' ( (lv_value_3_0= RULE_ID ) ) ) )
@@ -2228,7 +2229,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_scaleStar_4_0=null;
         Token lv_scale_5_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1032:6: ( ( '#5' ( ( (lv_precStar_1_0= '*' ) ) | ( (lv_prec_2_0= RULE_INT ) ) ) ( ',' ( ( (lv_scaleStar_4_0= '*' ) ) | ( (lv_scale_5_0= RULE_INT ) ) ) )? ) )
@@ -2517,7 +2518,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_v2_5_0=null;
         Token lv_v1_6_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1155:6: ( ( '#6' ( ( 'v1' ( (lv_v1_2_0= RULE_INT ) )* ( (lv_v2_3_0= RULE_ID ) ) ) | ( 'v2' ( (lv_v2_5_0= RULE_ID ) )* ( (lv_v1_6_0= RULE_INT ) ) ) ) ) )
@@ -2815,7 +2816,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         EObject lv_child_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1287:6: ( ( '#7' ( (lv_child_1_0= ruleConsumed1 ) ) ) )
@@ -2929,7 +2930,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_id_2_0=null;
         Token lv_id_4_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1338:6: ( ( ( 'kw0' )? '#8' ( (lv_id_2_0= RULE_ID ) ) ( 'kw1' )? ( (lv_id_4_0= RULE_ID ) ) ( ( 'kw2' )* 'kw30' )+ ) )
@@ -3186,7 +3187,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_id_3_0=null;
         Token lv_id_6_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1429:6: ( ( '#9' ( (lv_id_1_0= RULE_ID ) ) ( 'kw1' | ( ( (lv_id_3_0= RULE_ID ) ) 'kw2' ) ) ( 'kw3' | ( ( (lv_id_6_0= RULE_ID ) ) 'kw4' ) )? ( 'kw5' | 'kw6' ) ) )
@@ -3489,7 +3490,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_id_4_0=null;
         Token lv_id_6_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1555:6: ( ( ( 'kw1' | 'kw2' | 'kw3' ) '#10' ( (lv_id_4_0= RULE_ID ) ) ( 'kw4' ( (lv_id_6_0= RULE_ID ) ) 'kw5' )* ) )
@@ -3723,7 +3724,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
         Token lv_id_5_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1652:6: ( ( '#11' ( 'kw1' | 'kw2' | ( 'kw3' 'kw4' ) ) ( (lv_id_5_0= RULE_ID ) ) ( 'kw5' ( 'kw6' ( 'kw7' )? )? )+ ) )
@@ -3978,7 +3979,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_interface_1_0=null;
         Token lv_name_3_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1733:6: ( ( '#12' ( ( (lv_interface_1_0= 'interface' ) ) | 'class' ) ( (lv_name_3_0= RULE_ID ) ) ) )
@@ -4155,7 +4156,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_final_2_0=null;
         Token lv_transient_3_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1810:6: ( ( '#13' ( ( (lv_static_1_0= 'static' ) ) | ( (lv_final_2_0= 'final' ) ) | ( (lv_transient_3_0= 'transient' ) ) )* ) )
@@ -4368,7 +4369,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         EObject lv_items_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1902:6: ( ( '#14' ( (lv_items_1_0= ruleEmptyObjectItems ) ) ) )
@@ -4482,7 +4483,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         EObject lv_list_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:1953:6: ( ( (lv_list_0_0= ruleEmptyObjectItem ) )* )
@@ -4603,7 +4604,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
         Token lv_name_1_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:2000:6: ( ( 'item' ( (lv_name_1_0= RULE_ID ) ) ) )
@@ -4714,7 +4715,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         EObject lv_val_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:2051:6: ( ( '#15' ( (lv_val_1_0= ruleConcreteMulti ) ) ) )
@@ -4828,7 +4829,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_m1_0_0=null;
         Token lv_m2_1_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:2106:6: ( ( ( (lv_m1_0_0= RULE_ID ) ) ( (lv_m2_1_0= RULE_ID ) ) ) )
@@ -4968,7 +4969,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         EObject lv_obj_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:2177:6: ( ( '#16' ( (lv_obj_1_0= ruleEObjectElement ) ) 'refs' ( ( RULE_ID ) ) ) )
@@ -5107,7 +5108,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
         Token lv_name_0_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:2246:6: ( ( (lv_name_0_0= RULE_ID ) ) )
@@ -5210,7 +5211,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         EObject this_TypeBug1B_2 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:2293:6: ( ( '#17' (this_TypeBug1A_1= ruleTypeBug1A | this_TypeBug1B_2= ruleTypeBug1B ) ) )
@@ -5344,7 +5345,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         EObject this_TypeBug2A_2 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:2339:6: ( ( '#18' (this_TypeBug2B_1= ruleTypeBug2B | this_TypeBug2A_2= ruleTypeBug2A ) ) )
@@ -5475,7 +5476,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
         Token lv_name_2_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:2387:6: ( ( () 'ka' ( (lv_name_2_0= RULE_ID ) ) ) )
@@ -5601,7 +5602,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
         Token lv_name_2_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:2449:6: ( ( () 'kb' ( (lv_name_2_0= RULE_ID ) ) ) )
@@ -5727,7 +5728,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
         Token lv_name_2_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:2513:6: ( ( () 'ka' ( (lv_name_2_0= RULE_ID ) ) ) )
@@ -5853,7 +5854,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
         Token lv_name_2_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:2575:6: ( ( () 'kb' ( (lv_name_2_0= RULE_ID ) ) ) )
@@ -5985,7 +5986,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_z_12_0=null;
         Token lv_name_13_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:2637:6: ( ( '#19' ( ( 'kx' ( (lv_x_2_0= RULE_ID ) ) ( ',' ( (lv_x_4_0= RULE_ID ) ) )* )? ( ( 'ky' ( (lv_y_6_0= RULE_ID ) ) ( ',' ( (lv_y_8_0= RULE_ID ) ) )* )? ( 'kz' ( (lv_z_10_0= RULE_ID ) ) ( ',' ( (lv_z_12_0= RULE_ID ) ) )* )? ) ) ( (lv_name_13_0= RULE_ID ) ) ) )
@@ -6455,7 +6456,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Enumerator lv_lits_4_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:2856:6: ( ( '#20' ( ( 'kw1' ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) ) ) | ( 'kw2' ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) ) ) )* ) )
@@ -6670,7 +6671,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_lits_2_0=null;
         Token lv_lits_4_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:2940:6: ( ( '#21' ( ( 'kw1' ( (lv_lits_2_0= RULE_ID ) ) ) | ( 'kw2' ( (lv_lits_4_0= RULE_STRING ) ) ) )* ) )

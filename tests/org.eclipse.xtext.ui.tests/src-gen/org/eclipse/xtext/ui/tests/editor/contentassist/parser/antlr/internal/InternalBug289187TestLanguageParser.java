@@ -22,6 +22,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalBug289187TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'abstract'", "'transient'", "'class'", "'extends'", "'implements'", "','", "'{'", "'classNumber'", "'='", "'quid'", "'documentation'", "'}'", "'attribute'", "'operation'", "'PRIVATE'", "'PROTECTED'", "'PACKAGE_PRIVATE'", "'PUBLIC'"
@@ -115,7 +116,7 @@ public class InternalBug289187TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_classes_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug289187TestLanguage.g:92:6: ( ( (lv_classes_0_0= ruleClass ) )* )
@@ -245,7 +246,7 @@ public class InternalBug289187TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_operations_22_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug289187TestLanguage.g:139:6: ( ( ( (lv_abstract_0_0= 'abstract' ) )? ( (lv_transient_1_0= 'transient' ) )? 'class' ( (lv_name_3_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? ( 'implements' ( ( RULE_ID ) ) ( ',' 'implements' ( ( RULE_ID ) ) )* )? '{' ( 'classNumber' '=' ( (lv_classNumber_14_0= RULE_INT ) ) )? ( 'quid' '=' ( (lv_quid_17_0= RULE_INT ) ) )? ( 'documentation' '=' ( (lv_documentation_20_0= RULE_STRING ) ) )? ( (lv_attributes_21_0= ruleAttribute ) )* ( (lv_operations_22_0= ruleOperation ) )* '}' ) )
@@ -913,7 +914,7 @@ public class InternalBug289187TestLanguageParser extends AbstractInternalAntlrPa
         Enumerator lv_visibility_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug289187TestLanguage.g:442:6: ( ( ( (lv_visibility_0_0= ruleVisibility ) )? 'attribute' ( (lv_name_2_0= RULE_ID ) ) ) )
@@ -1072,7 +1073,7 @@ public class InternalBug289187TestLanguageParser extends AbstractInternalAntlrPa
         Enumerator lv_visibility_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug289187TestLanguage.g:517:6: ( ( ( (lv_visibility_0_0= ruleVisibility ) )? 'operation' ( (lv_name_2_0= RULE_ID ) ) ) )

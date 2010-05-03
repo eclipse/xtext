@@ -21,6 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_REAL", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'model'", "':'", "'overriddenelement'", "'overridden other element'", "'-'", "'subrule1'", "'subrule3'", "'element'", "'overridemodel'", "'extendedmodel'"
@@ -121,7 +122,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
         EObject this_OverridableParserRule2_3 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:91:6: ( (this_ConcreteParserRule_0= ruleConcreteParserRule | this_CallOverridenParserRule_1= ruleCallOverridenParserRule | this_CallExtendedParserRule_2= ruleCallExtendedParserRule | this_OverridableParserRule2_3= ruleOverridableParserRule2 ) )
@@ -292,7 +293,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
         EObject lv_elements_3_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:153:6: ( ( 'model' ( (lv_magicNumber_1_0= RULE_REAL ) ) ':' ( (lv_elements_3_0= ruleInheritedParserRule ) )* ) )
@@ -460,7 +461,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
 
         Token lv_name_1_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:232:6: ( ( 'overriddenelement' ( (lv_name_1_0= RULE_ID ) ) ) )
@@ -571,7 +572,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
         EObject lv_call_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:283:6: ( ( (lv_call_0_0= ruleAbstractCallOverridenParserRule ) ) )
@@ -675,7 +676,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
         Token lv_name_1_0=null;
         Token lv_age_3_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:330:6: ( ( 'overridden other element' ( (lv_name_1_0= RULE_ID ) ) '-' ( (lv_age_3_0= RULE_INT ) ) ) )
@@ -827,7 +828,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
         EObject this_Subrule3_2 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:409:6: ( (this_Subrule1_0= ruleSubrule1 | this_Subrule2_1= ruleSubrule2 | this_Subrule3_2= ruleSubrule3 ) )
@@ -989,7 +990,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
         Token lv_name_1_0=null;
         Token lv_sub1_2_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:461:6: ( ( 'subrule1' ( (lv_name_1_0= RULE_ID ) ) ( (lv_sub1_2_0= RULE_ID ) ) ) )
@@ -1133,7 +1134,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
         Token lv_name_1_0=null;
         Token lv_sub2_2_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:536:6: ( ( 'subrule3' ( (lv_name_1_0= RULE_ID ) ) ( (lv_sub2_2_0= RULE_STRING ) ) ) )
@@ -1277,7 +1278,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
         Token lv_name_1_0=null;
         Token lv_sub1_2_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:611:6: ( ( 'subrule3' ( (lv_name_1_0= RULE_ID ) ) ( (lv_sub1_2_0= RULE_INT ) ) ) )
@@ -1421,7 +1422,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
         EObject lv_call_0_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:686:6: ( ( (lv_call_0_0= ruleAbstractCallExtendedParserRule ) ) )
@@ -1524,7 +1525,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
 
         Token lv_name_1_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:733:6: ( ( 'element' ( (lv_name_1_0= RULE_ID ) ) ) )
@@ -1635,7 +1636,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
         EObject lv_elements_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:784:6: ( ( 'overridemodel' ( (lv_elements_1_0= ruleOverridableParserRule ) )* ) )
@@ -1767,7 +1768,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
         EObject lv_elements_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:835:6: ( ( 'extendedmodel' ( (lv_elements_1_0= ruleExtendableParserRule ) )* ) )

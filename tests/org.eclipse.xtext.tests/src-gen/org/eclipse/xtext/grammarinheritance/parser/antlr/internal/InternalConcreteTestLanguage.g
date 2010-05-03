@@ -84,7 +84,7 @@ entryRuleRootRule returns [EObject current=null]
 
 // Rule RootRule
 ruleRootRule returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -146,7 +146,7 @@ entryRuleConcreteParserRule returns [EObject current=null]
 
 // Rule ConcreteParserRule
 ruleConcreteParserRule returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -225,7 +225,7 @@ entryRuleOverridableParserRule returns [EObject current=null]
 
 // Rule OverridableParserRule
 ruleOverridableParserRule returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -276,7 +276,7 @@ entryRuleCallOverridenParserRule returns [EObject current=null]
 
 // Rule CallOverridenParserRule
 ruleCallOverridenParserRule returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -323,7 +323,7 @@ entryRuleOverridableParserRule2 returns [EObject current=null]
 
 // Rule OverridableParserRule2
 ruleOverridableParserRule2 returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -402,7 +402,7 @@ entryRuleExtendableParserRule returns [EObject current=null]
 
 // Rule ExtendableParserRule
 ruleExtendableParserRule returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -454,7 +454,7 @@ entryRuleSubrule1 returns [EObject current=null]
 
 // Rule Subrule1
 ruleSubrule1 returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -529,7 +529,7 @@ entryRuleSubrule2 returns [EObject current=null]
 
 // Rule Subrule2
 ruleSubrule2 returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -604,7 +604,7 @@ entryRuleSubrule3 returns [EObject current=null]
 
 // Rule Subrule3
 ruleSubrule3 returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -679,7 +679,7 @@ entryRuleCallExtendedParserRule returns [EObject current=null]
 
 // Rule CallExtendedParserRule
 ruleCallExtendedParserRule returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -726,7 +726,7 @@ entryRuleInheritedParserRule returns [EObject current=null]
 
 // Rule InheritedParserRule
 ruleInheritedParserRule returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -777,7 +777,7 @@ entryRuleAbstractCallOverridenParserRule returns [EObject current=null]
 
 // Rule AbstractCallOverridenParserRule
 ruleAbstractCallOverridenParserRule returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -828,7 +828,7 @@ entryRuleAbstractCallExtendedParserRule returns [EObject current=null]
 
 // Rule AbstractCallExtendedParserRule
 ruleAbstractCallExtendedParserRule returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;

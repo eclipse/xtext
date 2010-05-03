@@ -50,14 +50,14 @@ protected class ThisRootNode extends RootToken {
  *
  * Model:
  *   "1" first=SimpleModel|"2" second=MandatoryModel|"3" thrird=LoopedModel|"4"
- *   forth=GroupLoopedModel|"5" fifth=LoopedAlternativeModel|"bug304681" model=
- *   Bug304681Model;
+ *   forth=GroupLoopedModel|"5" fifth=LoopedAlternativeModel|"bug304681"
+ *   model=Bug304681Model;
  *
  **/
 
-// "1" first=SimpleModel|"2" second=MandatoryModel|"3" thrird=LoopedModel|"4" forth
-// =GroupLoopedModel|"5" fifth=LoopedAlternativeModel|"bug304681" model=
-// Bug304681Model
+// "1" first=SimpleModel|"2" second=MandatoryModel|"3" thrird=LoopedModel|"4"
+// forth=GroupLoopedModel|"5" fifth=LoopedAlternativeModel|"bug304681"
+// model=Bug304681Model
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2522,8 +2522,8 @@ protected class LoopedAlternativeModel_RightCurlyBracketKeyword_4 extends Keywor
  *
  * Bug304681Model:
  *   "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING
- *   ";")? & ("uid" uid=STRING ";")? & (flag?="flag" ";")? & features+=
- *   Bug304681Feature*) "}";
+ *   ";")? & ("uid" uid=STRING ";")? & (flag?="flag" ";")? &
+ *   features+=Bug304681Feature*) "}";
  *
  **/
 

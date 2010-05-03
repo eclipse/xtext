@@ -84,7 +84,7 @@ entryRuleSuperMain returns [EObject current=null]
 
 // Rule SuperMain
 ruleSuperMain returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
