@@ -295,12 +295,12 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRightMultiplicationParserRuleCall_1_1_0 = (RuleCall)cRightAssignment_1_1.eContents().get(0);
 		
 		//Addition returns Expression:
-		//  Multiplication (({Plus.left=current} "+"|{Minus.left=current} "-") right=
-		//  Multiplication)*;
+		//  Multiplication (({Plus.left=current} "+"|{Minus.left=current} "-")
+		//  right=Multiplication)*;
 		public ParserRule getRule() { return rule; }
 
-		//Multiplication (({Plus.left=current} "+"|{Minus.left=current} "-") right=
-		//Multiplication)*
+		//Multiplication (({Plus.left=current} "+"|{Minus.left=current} "-")
+		//right=Multiplication)*
 		public Group getGroup() { return cGroup; }
 
 		//Multiplication
@@ -353,12 +353,12 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRightPrimaryExpressionParserRuleCall_1_1_0 = (RuleCall)cRightAssignment_1_1.eContents().get(0);
 		
 		//Multiplication returns Expression:
-		//  PrimaryExpression (({Multi.left=current} "*"|{Div.left=current} "/") right=
-		//  PrimaryExpression)*;
+		//  PrimaryExpression (({Multi.left=current} "*"|{Div.left=current} "/")
+		//  right=PrimaryExpression)*;
 		public ParserRule getRule() { return rule; }
 
-		//PrimaryExpression (({Multi.left=current} "*"|{Div.left=current} "/") right=
-		//PrimaryExpression)*
+		//PrimaryExpression (({Multi.left=current} "*"|{Div.left=current} "/")
+		//right=PrimaryExpression)*
 		public Group getGroup() { return cGroup; }
 
 		//PrimaryExpression
@@ -454,8 +454,8 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		//NUMBER
 		public RuleCall getValueNUMBERTerminalRuleCall_1_1_0() { return cValueNUMBERTerminalRuleCall_1_1_0; }
 
-		//{FunctionCall} func=[AbstractDefinition] ("(" args+=Expression ("," args+=
-		//Expression)* ")")?
+		//{FunctionCall} func=[AbstractDefinition] ("(" args+=Expression (","
+		//args+=Expression)* ")")?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//{FunctionCall}
@@ -627,8 +627,8 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Addition returns Expression:
-	//  Multiplication (({Plus.left=current} "+"|{Minus.left=current} "-") right=
-	//  Multiplication)*;
+	//  Multiplication (({Plus.left=current} "+"|{Minus.left=current} "-")
+	//  right=Multiplication)*;
 	public AdditionElements getAdditionAccess() {
 		return (pAddition != null) ? pAddition : (pAddition = new AdditionElements());
 	}
@@ -638,8 +638,8 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Multiplication returns Expression:
-	//  PrimaryExpression (({Multi.left=current} "*"|{Div.left=current} "/") right=
-	//  PrimaryExpression)*;
+	//  PrimaryExpression (({Multi.left=current} "*"|{Div.left=current} "/")
+	//  right=PrimaryExpression)*;
 	public MultiplicationElements getMultiplicationAccess() {
 		return (pMultiplication != null) ? pMultiplication : (pMultiplication = new MultiplicationElements());
 	}

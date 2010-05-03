@@ -27,8 +27,10 @@ import org.eclipse.xtext.ui.editor.DirtyStateManager;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.notification.StateChangeEventBroker;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
+import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provider;
@@ -45,6 +47,7 @@ public class SharedModule extends AbstractModule {
 		bind(IBuilderState.class).to(PersistableResourceDescriptionsImpl.class).in(Scopes.SINGLETON);
 		bind(IResourceDescriptions.class).to(DirtyStateAwareResourceDescriptions.class).in(Scopes.SINGLETON);
 		bind(IResourceServiceProvider.Registry.class).toInstance(IResourceServiceProvider.Registry.INSTANCE);
+		bind(IResourceSetProvider.class).to(SimpleResourceSetProvider.class);
 		bind(IExtensionRegistry.class).toInstance(Platform.getExtensionRegistry());
 		bind(IResourceChangeListener.class).annotatedWith(Names.named(ProjectOpenedOrClosedListener.class.getName())).to(ProjectOpenedOrClosedListener.class);
 		

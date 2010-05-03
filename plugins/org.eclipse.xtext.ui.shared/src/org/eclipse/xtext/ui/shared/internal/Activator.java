@@ -20,7 +20,7 @@ import com.google.inject.util.Modules;
 
 public class Activator extends Plugin {
 
-	private static Logger log = Logger.getLogger(Activator.class);
+	private static final Logger log = Logger.getLogger(Activator.class);
 
 	private static Activator plugin;
 
@@ -78,7 +78,8 @@ public class Activator extends Plugin {
 			JavaCore.initializeAfterLoad(new NullProgressMonitor());
 			return true;
 		} catch (Throwable e) {
-			log.warn("Disabling JDT use.", e);
+			log.warn("Disabling JDT use.");
+			log.debug(e.getMessage(), e);
 		}
 		return false;
 	}

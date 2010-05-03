@@ -1163,13 +1163,13 @@ protected class Expression_AdditionParserRuleCall extends RuleCallToken {
 /************ begin Rule Addition ****************
  *
  * Addition returns Expression:
- *   Multiplication (({Plus.left=current} "+"|{Minus.left=current} "-") right=
- *   Multiplication)*;
+ *   Multiplication (({Plus.left=current} "+"|{Minus.left=current} "-")
+ *   right=Multiplication)*;
  *
  **/
 
-// Multiplication (({Plus.left=current} "+"|{Minus.left=current} "-") right=
-// Multiplication)*
+// Multiplication (({Plus.left=current} "+"|{Minus.left=current} "-")
+// right=Multiplication)*
 protected class Addition_Group extends GroupToken {
 	
 	public Addition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1510,13 +1510,13 @@ protected class Addition_RightAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule Multiplication ****************
  *
  * Multiplication returns Expression:
- *   PrimaryExpression (({Multi.left=current} "*"|{Div.left=current} "/") right=
- *   PrimaryExpression)*;
+ *   PrimaryExpression (({Multi.left=current} "*"|{Div.left=current} "/")
+ *   right=PrimaryExpression)*;
  *
  **/
 
-// PrimaryExpression (({Multi.left=current} "*"|{Div.left=current} "/") right=
-// PrimaryExpression)*
+// PrimaryExpression (({Multi.left=current} "*"|{Div.left=current} "/")
+// right=PrimaryExpression)*
 protected class Multiplication_Group extends GroupToken {
 	
 	public Multiplication_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2090,8 +2090,8 @@ protected class PrimaryExpression_ValueAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// {FunctionCall} func=[AbstractDefinition] ("(" args+=Expression ("," args+=
-// Expression)* ")")?
+// {FunctionCall} func=[AbstractDefinition] ("(" args+=Expression (","
+// args+=Expression)* ")")?
 protected class PrimaryExpression_Group_2 extends GroupToken {
 	
 	public PrimaryExpression_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

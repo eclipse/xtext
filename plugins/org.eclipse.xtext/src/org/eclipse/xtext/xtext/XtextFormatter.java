@@ -34,7 +34,7 @@ import org.eclipse.xtext.services.XtextGrammarAccess.UntilTokenElements;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class XtextFormattingTokenSerializer extends
+public class XtextFormatter extends
 		AbstractDeclarativeFormatter {
 
 	@Override
@@ -83,8 +83,11 @@ public class XtextFormattingTokenSerializer extends
 		// Assignment
 		AssignmentElements as = g.getAssignmentAccess();
 		cfg.setNoSpace().around(as.getOperatorEqualsSignKeyword_1_0_1());
+		cfg.setNoLinewrap().around(as.getOperatorEqualsSignKeyword_1_0_1());
 		cfg.setNoSpace().around(as.getOperatorPlusSignEqualsSignKeyword_1_0_0());
+		cfg.setNoLinewrap().around(as.getOperatorPlusSignEqualsSignKeyword_1_0_0());
 		cfg.setNoSpace().around(as.getOperatorQuestionMarkEqualsSignKeyword_1_0_2());
+		cfg.setNoLinewrap().around(as.getOperatorQuestionMarkEqualsSignKeyword_1_0_2());
 
 		// AbstractToken
 		AbstractTokenWithCardinalityElements at = g
