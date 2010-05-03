@@ -16,7 +16,7 @@ import org.eclipse.xtext.formatting.impl.FormattingConfig;
  * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#formatting
  * on how and when to use it 
  * 
- * Also see {@link org.eclipse.xtext.xtext.XtextFormattingTokenSerializer} as an example
+ * Also see {@link org.eclipse.xtext.xtext.XtextFormatter} as an example
  */
 public class ArithmeticsFormatter extends AbstractDeclarativeFormatter {
 	

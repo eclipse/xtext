@@ -34,11 +34,12 @@ import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * TODO: this class should have a meaningful name
  */
 @Singleton
 public class ElementChangeListener implements IElementChangedListener {
 
-	public final static Logger log = Logger.getLogger(ElementChangeListener.class);
+	private final static Logger log = Logger.getLogger(ElementChangeListener.class);
 
 	@Inject
 	private IWorkspace workspace;

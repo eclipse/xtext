@@ -10,14 +10,15 @@ package org.eclipse.xtext.ui.shared.internal;
 import org.eclipse.xtext.builder.impl.ToBeBuiltComputer;
 import org.eclipse.xtext.builder.impl.javasupport.ElementChangeListener;
 import org.eclipse.xtext.builder.impl.javasupport.JdtToBeBuiltComputer;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl;
+import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 
 import com.google.inject.AbstractModule;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
  */
 public class SharedModuleWithJdt extends AbstractModule {
 
@@ -26,6 +27,7 @@ public class SharedModuleWithJdt extends AbstractModule {
 		bind(ToBeBuiltComputer.class).to(JdtToBeBuiltComputer.class);
 		bind(ElementChangeListener.class).asEagerSingleton();
 		bind(IStorage2UriMapper.class).to(Storage2UriMapperJavaImpl.class);
+		bind(IResourceSetProvider.class).to(XtextResourceSetProvider.class);
 	}
 
 }
