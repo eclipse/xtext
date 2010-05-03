@@ -56,6 +56,6 @@ public class JavaClassPathResourceForIEditorInputFactory extends ResourceForIEdi
 					return getResourceSetProvider().get(project.getProject());
 			}
 		} 
-		return getResourceSetProvider().get(null);
+		return super.getResourceSet(storage);
 	}
 }
