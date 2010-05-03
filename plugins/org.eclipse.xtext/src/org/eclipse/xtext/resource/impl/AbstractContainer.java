@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
+import java.util.Collections;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -25,7 +27,9 @@ public abstract class AbstractContainer implements IIgnoreCaseContainer {
 	public Iterable<IEObjectDescription> findAllEObjects(final EClass type) {
 		return Iterables.concat(Iterables.transform(getResourceDescriptions(), new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
 			public Iterable<IEObjectDescription> apply(IResourceDescription from) {
-				return from.getExportedObjects(type);
+				if (from != null)
+					return from.getExportedObjects(type);
+				return Collections.emptyList();
 			}
 		}));
 	}
@@ -33,7 +37,9 @@ public abstract class AbstractContainer implements IIgnoreCaseContainer {
 	public Iterable<IEObjectDescription> findAllEObjects(final EClass type, final String name) {
 		return Iterables.concat(Iterables.transform(getResourceDescriptions(), new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
 			public Iterable<IEObjectDescription> apply(IResourceDescription from) {
-				return from.getExportedObjects(type, name);
+				if (from != null)
+					return from.getExportedObjects(type, name);
+				return Collections.emptyList();
 			}
 		}));
 	}
@@ -41,6 +47,8 @@ public abstract class AbstractContainer implements IIgnoreCaseContainer {
 	public Iterable<IEObjectDescription> findAllEObjectsIgnoreCase(final EClass type, final String name) {
 		return Iterables.concat(Iterables.transform(getResourceDescriptions(), new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
 			public Iterable<IEObjectDescription> apply(IResourceDescription from) {
+				if (from == null)
+					return Collections.emptyList();
 				if (from instanceof IIgnoreCaseResourceDescription)
 					return ((IIgnoreCaseResourceDescription) from).getExportedObjectsIgnoreCase(type, name);
 				return Iterables.filter(from.getExportedObjects(type), new Predicate<IEObjectDescription>() {
