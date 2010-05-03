@@ -105,8 +105,16 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 			IResourceDescription candidate,
 			IResourceDescriptions context) {
 		Set<URI> outgoingReferences = descriptionUtils.collectOutgoingReferences(candidate);
+		Set<URI> interestingResources = Sets.newHashSet();
+		// deleted resources are no longer visible resources
+		// so we collect them pessimistic up-front
+		for (IResourceDescription.Delta delta : deltas) {
+			if (delta.getNew() == null)
+				interestingResources.add(delta.getUri());
+		}
 		Set<URI> visibleResources = collectVisibleResources(candidate, context);
-		if (visibleResources.isEmpty()) // should at least contain the resource itself
+		interestingResources.addAll(visibleResources);
+		if (interestingResources.isEmpty()) // should at least contain the resource itself
 			return true;
 		for (IResourceDescription.Delta delta : deltas) {
 			if (delta.haveEObjectDescriptionsChanged()) {
@@ -114,7 +122,7 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 				if (outgoingReferences.contains(deltaURI)) {
 					return true;
 				}
-				if (visibleResources.contains(deltaURI)) {
+				if (interestingResources.contains(deltaURI)) {
 					if (isAffected(delta, candidate)) {
 						return true;
 					}

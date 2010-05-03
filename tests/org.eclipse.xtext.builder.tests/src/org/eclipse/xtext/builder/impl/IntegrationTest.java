@@ -76,6 +76,26 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(2, countResourcesInIndex());
 	}
 	
+	public void testTwoFilesInSameProjectCopyAndDelete() throws Exception {
+		createJavaProjectWithRootSrc("foo");
+		IFile file1 = createFile("foo/src/foo"+F_EXT, "object Foo ");
+		IFile file2 = createFile("foo/src/bar"+F_EXT, "object Bar references Foo");
+		waitForAutoBuild();
+		assertEquals(printMarkers(file1), 0, countMarkers(file1));
+		assertEquals(printMarkers(file2), 0, countMarkers(file2));
+		IFile file3 = createFile("foo/src/foo2"+F_EXT, "object Foo ");
+		waitForAutoBuild();
+		assertEquals(printMarkers(file1), 0, countMarkers(file1));
+		assertEquals(printMarkers(file2), 1, countMarkers(file2));
+		assertEquals(printMarkers(file3), 0, countMarkers(file1));
+		assertEquals(3, countResourcesInIndex());
+		file3.delete(true, null);
+		waitForAutoBuild();
+		assertEquals(printMarkers(file1), 0, countMarkers(file1));
+		assertEquals(printMarkers(file2), 0, countMarkers(file2));
+		assertEquals(2, countResourcesInIndex());
+	}
+	
 	public void testTwoFilesInSameProjectRemoveNature() throws Exception {
 		IJavaProject project = createJavaProjectWithRootSrc("foo");
 		createFile("foo/src/foo"+F_EXT, "object Foo ");
