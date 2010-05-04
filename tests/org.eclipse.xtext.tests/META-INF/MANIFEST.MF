@@ -439,5 +439,8 @@ Export-Package: org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.parser.encoding.encodingTest.util,
  org.eclipse.xtext.parser.encoding.parser.packrat,
  org.eclipse.xtext.parser.encoding.parser.packrat.consumers,
- org.eclipse.xtext.parser.encoding.parseTreeConstruction
+ org.eclipse.xtext.parser.encoding.parseTreeConstruction,
+ org.eclipse.xtext.parsetree.impl.commentAssociation,
+ org.eclipse.xtext.parsetree.impl.commentAssociation.impl,
+ org.eclipse.xtext.parsetree.impl.commentAssociation.util
 
