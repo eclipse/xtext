@@ -12,15 +12,20 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Collections;
 
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.MarkerUtil;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
@@ -28,6 +33,7 @@ import org.eclipse.xtext.ui.editor.quickfix.XtextResourceMarkerAnnotationModel;
 import org.eclipse.xtext.ui.editor.validation.AnnotationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.ValidationJob;
 import org.eclipse.xtext.ui.internal.Activator;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 
@@ -43,6 +49,7 @@ import com.google.inject.Provider;
 public class XtextDocumentProvider extends FileDocumentProvider {
 	@Inject
 	private Provider<XtextDocument> document;
+	
 	@Inject
 	private IResourceValidator resourceValidator;
 	
@@ -55,7 +62,13 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	
 	@Inject
 	private IResourceForEditorInputFactory resourceForEditorInputFactory;
-
+	
+	@Inject 
+	private IStorage2UriMapper storage2UriMapper;
+	
+	@Inject 
+	private IEncodingProvider encodingProvider;
+	
 	@Override
 	protected XtextDocument createEmptyDocument() {
 		XtextDocument xtextDocument = document.get();
@@ -126,6 +139,23 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 
 	public IResourceForEditorInputFactory getResourceForEditorInputFactory() {
 		return resourceForEditorInputFactory;
+	}
+	
+	@Override
+	public String getEncoding(Object element) {
+		String encoding = super.getEncoding(element);
+		if(encoding == null && element instanceof IStorageEditorInput) {
+			try {
+				IStorage storage = ((IStorageEditorInput)element).getStorage();
+				URI uri = storage2UriMapper.getUri(storage);
+				if(uri != null) {
+					return encodingProvider.getEncoding(uri);
+				}
+			} catch (CoreException e) {
+				throw new WrappedException(e);
+			}
+		}
+		return encoding;
 	}
 
 }
