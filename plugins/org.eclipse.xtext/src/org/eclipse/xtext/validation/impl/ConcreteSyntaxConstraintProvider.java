@@ -58,7 +58,7 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstraintProvider {
-	public class SyntaxConstraintNode implements ISyntaxConstraint {
+	public static class SyntaxConstraintNode implements ISyntaxConstraint {
 		protected ISyntaxConstraint container = null;
 		protected List<ISyntaxConstraint> contents;
 		protected AbstractElement element;
