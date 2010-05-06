@@ -12,13 +12,16 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.CreateNode;
 import org.eclipse.xtext.ui.editor.outline.GetChildren;
+import org.eclipse.xtext.ui.editor.outline.OutlineLabelProvider;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -28,6 +31,13 @@ public class AbstractDeclarativeSemanticModelTransformer extends DefaultSemantic
 	private static final String GET_CHILDREN_METHOD_NAME = "getChildren";
 	private static final String CREATE_NODE_METHOD_NAME = "createNode";
 	private static final String CONSUME_NODE_METHOD_NAME = "consumeNode";
+	@Inject
+	@OutlineLabelProvider
+	private ILabelProvider labelProvider;
+
+	public void setLabelProvider(ILabelProvider labelProvider) {
+		this.labelProvider = labelProvider;
+	}
 
 	private final PolymorphicDispatcher<Boolean> consumeNode = new PolymorphicDispatcher<Boolean>(Lists
 			.newArrayList(this), new Predicate<Method>() {
@@ -56,6 +66,9 @@ public class AbstractDeclarativeSemanticModelTransformer extends DefaultSemantic
 	}
 
 	public boolean consumeNode(EObject semanticModelObject) {
+		if (labelProvider.getText(semanticModelObject)==null) {
+			return false;
+		}
 		return super.consumeSemanticNode(semanticModelObject);
 	}
 
