@@ -63,6 +63,8 @@ public interface ITokenSerializer {
 		boolean equalsOrReplacesNode(EObject context, Keyword keyword, AbstractNode node);
 
 		boolean equalsOrReplacesNode(EObject context, Keyword keyword, Object value, AbstractNode node);
+		
+		boolean isValid(EObject context, Keyword keyword, Object value, IErrorAcceptor errorAcceptor);
 
 		String serializeAssignedKeyword(EObject context, Keyword keyword, Object value, AbstractNode node);
 

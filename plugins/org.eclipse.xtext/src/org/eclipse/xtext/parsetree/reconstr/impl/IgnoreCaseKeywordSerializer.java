@@ -11,12 +11,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Keyword;
 
 /**
- * @author Moritz Eysholdt - Initial contribution and API
+ * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class KeywordSerializer extends AbstractKeywordSerializer {
+public class IgnoreCaseKeywordSerializer extends AbstractKeywordSerializer {
 
 	public boolean isValid(EObject context, Keyword keyword, Object value, IErrorAcceptor errorAcceptor) {
-		return keyword.getValue().equals(value);
+		if (value instanceof String)
+			return keyword.getValue().equalsIgnoreCase((String)value);
+		return false;
 	}
 
 }

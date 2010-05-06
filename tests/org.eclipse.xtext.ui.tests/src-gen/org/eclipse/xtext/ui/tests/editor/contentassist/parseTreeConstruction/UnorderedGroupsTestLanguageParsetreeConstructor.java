@@ -724,17 +724,17 @@ protected class SimpleModel_VisibilityAssignment_0_0 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("visibility",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("visibility");
-		if("public".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getSimpleModelAccess().getVisibilityPublicKeyword_0_0_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getSimpleModelAccess().getVisibilityPublicKeyword_0_0_0_0();
 			return obj;
 		}
-		if("private".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getSimpleModelAccess().getVisibilityPrivateKeyword_0_0_0_1(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getSimpleModelAccess().getVisibilityPrivateKeyword_0_0_0_1();
 			return obj;
 		}
-		if("protected".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getSimpleModelAccess().getVisibilityProtectedKeyword_0_0_0_2(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getSimpleModelAccess().getVisibilityProtectedKeyword_0_0_0_2();
 			return obj;
@@ -1101,17 +1101,17 @@ protected class MandatoryModel_VisibilityAssignment_0_0 extends AssignmentToken 
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("visibility",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("visibility");
-		if("public".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getMandatoryModelAccess().getVisibilityPublicKeyword_0_0_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getMandatoryModelAccess().getVisibilityPublicKeyword_0_0_0_0();
 			return obj;
 		}
-		if("private".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getMandatoryModelAccess().getVisibilityPrivateKeyword_0_0_0_1(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getMandatoryModelAccess().getVisibilityPrivateKeyword_0_0_0_1();
 			return obj;
 		}
-		if("protected".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getMandatoryModelAccess().getVisibilityProtectedKeyword_0_0_0_2(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getMandatoryModelAccess().getVisibilityProtectedKeyword_0_0_0_2();
 			return obj;
@@ -1476,17 +1476,17 @@ protected class LoopedModel_VisibilityAssignment_0_0 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("visibility",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("visibility");
-		if("public".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLoopedModelAccess().getVisibilityPublicKeyword_0_0_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLoopedModelAccess().getVisibilityPublicKeyword_0_0_0_0();
 			return obj;
 		}
-		if("private".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLoopedModelAccess().getVisibilityPrivateKeyword_0_0_0_1(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLoopedModelAccess().getVisibilityPrivateKeyword_0_0_0_1();
 			return obj;
 		}
-		if("protected".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLoopedModelAccess().getVisibilityProtectedKeyword_0_0_0_2(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLoopedModelAccess().getVisibilityProtectedKeyword_0_0_0_2();
 			return obj;
@@ -1521,7 +1521,7 @@ protected class LoopedModel_StaticAssignment_0_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("static",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("static");
-		if("static".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLoopedModelAccess().getStaticStaticKeyword_0_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLoopedModelAccess().getStaticStaticKeyword_0_1_0();
 			return obj;
@@ -1557,7 +1557,7 @@ protected class LoopedModel_SynchronizedAssignment_0_2 extends AssignmentToken  
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("synchronized",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("synchronized");
-		if("synchronized".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLoopedModelAccess().getSynchronizedSynchronizedKeyword_0_2_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLoopedModelAccess().getSynchronizedSynchronizedKeyword_0_2_0();
 			return obj;
@@ -1617,7 +1617,7 @@ protected class LoopedModel_AbstractAssignment_0_3_0 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("abstract",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("abstract");
-		if("abstract".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLoopedModelAccess().getAbstractAbstractKeyword_0_3_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLoopedModelAccess().getAbstractAbstractKeyword_0_3_0_0();
 			return obj;
@@ -1654,7 +1654,7 @@ protected class LoopedModel_FinalAssignment_0_3_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("final",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("final");
-		if("final".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLoopedModelAccess().getFinalFinalKeyword_0_3_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLoopedModelAccess().getFinalFinalKeyword_0_3_1_0();
 			return obj;
@@ -1857,17 +1857,17 @@ protected class GroupLoopedModel_VisibilityAssignment_0_0 extends AssignmentToke
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("visibility",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("visibility");
-		if("public".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getGroupLoopedModelAccess().getVisibilityPublicKeyword_0_0_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getGroupLoopedModelAccess().getVisibilityPublicKeyword_0_0_0_0();
 			return obj;
 		}
-		if("private".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getGroupLoopedModelAccess().getVisibilityPrivateKeyword_0_0_0_1(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getGroupLoopedModelAccess().getVisibilityPrivateKeyword_0_0_0_1();
 			return obj;
 		}
-		if("protected".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getGroupLoopedModelAccess().getVisibilityProtectedKeyword_0_0_0_2(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getGroupLoopedModelAccess().getVisibilityProtectedKeyword_0_0_0_2();
 			return obj;
@@ -1901,7 +1901,7 @@ protected class GroupLoopedModel_StaticAssignment_0_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("static",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("static");
-		if("static".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getGroupLoopedModelAccess().getStaticStaticKeyword_0_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getGroupLoopedModelAccess().getStaticStaticKeyword_0_1_0();
 			return obj;
@@ -1935,7 +1935,7 @@ protected class GroupLoopedModel_SynchronizedAssignment_0_2 extends AssignmentTo
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("synchronized",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("synchronized");
-		if("synchronized".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getGroupLoopedModelAccess().getSynchronizedSynchronizedKeyword_0_2_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getGroupLoopedModelAccess().getSynchronizedSynchronizedKeyword_0_2_0();
 			return obj;
@@ -1992,7 +1992,7 @@ protected class GroupLoopedModel_AbstractAssignment_0_3_0 extends AssignmentToke
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("abstract",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("abstract");
-		if("abstract".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getGroupLoopedModelAccess().getAbstractAbstractKeyword_0_3_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getGroupLoopedModelAccess().getAbstractAbstractKeyword_0_3_0_0();
 			return obj;
@@ -2026,7 +2026,7 @@ protected class GroupLoopedModel_FinalAssignment_0_3_1 extends AssignmentToken  
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("final",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("final");
-		if("final".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getGroupLoopedModelAccess().getFinalFinalKeyword_0_3_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getGroupLoopedModelAccess().getFinalFinalKeyword_0_3_1_0();
 			return obj;
@@ -2233,17 +2233,17 @@ protected class LoopedAlternativeModel_VisibilityAssignment_0_0 extends Assignme
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("visibility",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("visibility");
-		if("public".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLoopedAlternativeModelAccess().getVisibilityPublicKeyword_0_0_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLoopedAlternativeModelAccess().getVisibilityPublicKeyword_0_0_0_0();
 			return obj;
 		}
-		if("private".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLoopedAlternativeModelAccess().getVisibilityPrivateKeyword_0_0_0_1(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLoopedAlternativeModelAccess().getVisibilityPrivateKeyword_0_0_0_1();
 			return obj;
 		}
-		if("protected".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLoopedAlternativeModelAccess().getVisibilityProtectedKeyword_0_0_0_2(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLoopedAlternativeModelAccess().getVisibilityProtectedKeyword_0_0_0_2();
 			return obj;
@@ -2277,7 +2277,7 @@ protected class LoopedAlternativeModel_StaticAssignment_0_1 extends AssignmentTo
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("static",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("static");
-		if("static".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLoopedAlternativeModelAccess().getStaticStaticKeyword_0_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLoopedAlternativeModelAccess().getStaticStaticKeyword_0_1_0();
 			return obj;
@@ -2311,7 +2311,7 @@ protected class LoopedAlternativeModel_SynchronizedAssignment_0_2 extends Assign
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("synchronized",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("synchronized");
-		if("synchronized".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLoopedAlternativeModelAccess().getSynchronizedSynchronizedKeyword_0_2_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLoopedAlternativeModelAccess().getSynchronizedSynchronizedKeyword_0_2_0();
 			return obj;
@@ -2368,7 +2368,7 @@ protected class LoopedAlternativeModel_AbstractAssignment_0_3_0 extends Assignme
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("abstract",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("abstract");
-		if("abstract".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLoopedAlternativeModelAccess().getAbstractAbstractKeyword_0_3_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLoopedAlternativeModelAccess().getAbstractAbstractKeyword_0_3_0_0();
 			return obj;
@@ -2402,7 +2402,7 @@ protected class LoopedAlternativeModel_FinalAssignment_0_3_1 extends AssignmentT
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("final",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("final");
-		if("final".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLoopedAlternativeModelAccess().getFinalFinalKeyword_0_3_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLoopedAlternativeModelAccess().getFinalFinalKeyword_0_3_1_0();
 			return obj;

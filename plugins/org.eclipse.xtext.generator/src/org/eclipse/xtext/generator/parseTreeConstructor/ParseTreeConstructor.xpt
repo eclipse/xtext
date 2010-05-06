@@ -241,7 +241,7 @@ protected class «elementMethodName()» extends UnassignedTextToken {
 			return obj;
 		}
 «ELSE-»
-		if("«value.replaceAll("\\\\","\\\\\\\\").replaceAll("\\\"","\\\\\\\"")»".equals(value)) { // «metaType.name»
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.«gaRuleElementAccessor()», value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.«gaRuleElementAccessor()»;
 			return obj;

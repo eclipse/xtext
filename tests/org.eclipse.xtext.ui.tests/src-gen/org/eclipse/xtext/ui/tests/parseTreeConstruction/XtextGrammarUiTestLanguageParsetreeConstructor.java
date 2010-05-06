@@ -2714,17 +2714,17 @@ protected class AbstractTokenWithCardinality_CardinalityAssignment_1 extends Ass
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("cardinality",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("cardinality");
-		if("?".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityQuestionMarkKeyword_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityQuestionMarkKeyword_1_0_0();
 			return obj;
 		}
-		if("*".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityAsteriskKeyword_1_0_1(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityAsteriskKeyword_1_0_1();
 			return obj;
 		}
-		if("+".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityPlusSignKeyword_1_0_2(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityPlusSignKeyword_1_0_2();
 			return obj;
@@ -2943,12 +2943,12 @@ protected class Action_OperatorAssignment_2_2 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("operator",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("operator");
-		if("=".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getActionAccess().getOperatorEqualsSignKeyword_2_2_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getActionAccess().getOperatorEqualsSignKeyword_2_2_0_0();
 			return obj;
 		}
-		if("+=".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getActionAccess().getOperatorPlusSignEqualsSignKeyword_2_2_0_1(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getActionAccess().getOperatorPlusSignEqualsSignKeyword_2_2_0_1();
 			return obj;
@@ -3347,17 +3347,17 @@ protected class Assignment_OperatorAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("operator",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("operator");
-		if("+=".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getAssignmentAccess().getOperatorPlusSignEqualsSignKeyword_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getAssignmentAccess().getOperatorPlusSignEqualsSignKeyword_1_0_0();
 			return obj;
 		}
-		if("=".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getAssignmentAccess().getOperatorEqualsSignKeyword_1_0_1(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getAssignmentAccess().getOperatorEqualsSignKeyword_1_0_1();
 			return obj;
 		}
-		if("?=".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getAssignmentAccess().getOperatorQuestionMarkEqualsSignKeyword_1_0_2(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getAssignmentAccess().getOperatorQuestionMarkEqualsSignKeyword_1_0_2();
 			return obj;
@@ -5603,17 +5603,17 @@ protected class TerminalToken_CardinalityAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("cardinality",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("cardinality");
-		if("?".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getTerminalTokenAccess().getCardinalityQuestionMarkKeyword_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getTerminalTokenAccess().getCardinalityQuestionMarkKeyword_1_0_0();
 			return obj;
 		}
-		if("*".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getTerminalTokenAccess().getCardinalityAsteriskKeyword_1_0_1(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getTerminalTokenAccess().getCardinalityAsteriskKeyword_1_0_1();
 			return obj;
 		}
-		if("+".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getTerminalTokenAccess().getCardinalityPlusSignKeyword_1_0_2(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getTerminalTokenAccess().getCardinalityPlusSignKeyword_1_0_2();
 			return obj;
