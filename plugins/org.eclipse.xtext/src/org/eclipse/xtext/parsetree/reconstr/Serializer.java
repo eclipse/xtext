@@ -45,9 +45,9 @@ public class Serializer {
 			List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
 			validator.validateRecursive(obj, new IConcreteSyntaxValidator.DiagnosticListAcceptor(diagnostics),
 					new HashMap<Object, Object>());
-			if (diagnostics.size() > 0)
+			if (!diagnostics.isEmpty())
 				throw new IConcreteSyntaxValidator.InvalidConcreteSyntaxException(
-						"These errors need to be fixed before the model an be serialized.", diagnostics);
+						"These errors need to be fixed before the model can be serialized.", diagnostics);
 		}
 		ITokenStream formatterTokenStream = formatter.createFormatterStream(null, tokenStream, !options.isFormatting());
 		TreeConstructionReport report = parseTreeReconstructor.serializeSubtree(obj, formatterTokenStream);
@@ -73,4 +73,15 @@ public class Serializer {
 		return tokenStringBuffer.toString();
 	}
 
+	protected IParseTreeConstructor getParseTreeReconstructor() {
+		return parseTreeReconstructor;
+	}
+	
+	protected IFormatter getFormatter() {
+		return formatter;
+	}
+	
+	protected IConcreteSyntaxValidator getValidator() {
+		return validator;
+	}
 }
