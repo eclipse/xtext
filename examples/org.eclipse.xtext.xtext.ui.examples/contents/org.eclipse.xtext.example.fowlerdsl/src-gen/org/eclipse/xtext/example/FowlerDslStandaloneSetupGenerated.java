@@ -37,5 +37,7 @@ public class FowlerDslStandaloneSetupGenerated implements ISetup {
 		
 	//TODO registration of EValidators should be added here, too
 
+
+
 	}
 }

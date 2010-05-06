@@ -43,6 +43,7 @@ public class TestTransformerHelper {
 
 	public static class TestTransformerWithNamingConvention extends AbstractDeclarativeSemanticModelTransformer {
 		{
+			setLabelProvider(myLabelProvider);
 			setContentOutlineNodeFactory(new DefaultContentOutlineNodeFactory(myLabelProvider,myLocationProvider)); 
 		}
 		
@@ -81,6 +82,7 @@ public class TestTransformerHelper {
 	
 	public static class TestTransformerWithAnnotations extends AbstractDeclarativeSemanticModelTransformer {
 		{
+			setLabelProvider(myLabelProvider);
 			setContentOutlineNodeFactory(new DefaultContentOutlineNodeFactory(myLabelProvider,myLocationProvider)); 
 		}
 		

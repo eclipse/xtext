@@ -8,18 +8,27 @@
 package org.eclipse.xtext.ui.label;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 
 import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Michael Clay
  */
 public class InjectableAdapterFactoryLabelProvider extends AdapterFactoryLabelProvider {
 
 	@Inject
 	public InjectableAdapterFactoryLabelProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
+	}
+
+	@Override
+	public String getText(Object object) {
+		IItemLabelProvider itemLabelProvider = (IItemLabelProvider) adapterFactory.adapt(object,
+				IItemLabelProvider.class);
+		return itemLabelProvider != null ? itemLabelProvider.getText(object) : null;
 	}
 
 }

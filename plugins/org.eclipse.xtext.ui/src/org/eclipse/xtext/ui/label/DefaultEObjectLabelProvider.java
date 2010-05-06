@@ -63,10 +63,4 @@ public class DefaultEObjectLabelProvider extends DeclarativeLabelProvider {
 		}
 		return result;
 	}
-	
-	@Override
-	protected String getDefaultText() {
-		return "<unknown>";
-	}
-
 }

@@ -59,6 +59,14 @@ Workflow {
 			
 			// Check based validation 
 			fragment = validation.CheckFragment {}
+			
+			// labeling API 
+			fragment = labeling.LabelProviderFragment {}
+			
+			// outline API
+			fragment = outline.OutlineNodeAdapterFactoryFragment {}
+			fragment = outline.TransformerFragment {}
+			fragment = outline.QuickOutlineFragment {}
             
 			// java-based API for content assistance 
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
