@@ -1111,22 +1111,22 @@ protected class Farbe_WertAssignment extends AssignmentToken  {
 			return null;
 		if((value = eObjectConsumer.getConsumable("wert",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("wert");
-		if("ROT".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getFarbeAccess().getWertROTKeyword_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getFarbeAccess().getWertROTKeyword_0_0();
 			return obj;
 		}
-		if("BLAU".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getFarbeAccess().getWertBLAUKeyword_0_1(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getFarbeAccess().getWertBLAUKeyword_0_1();
 			return obj;
 		}
-		if("GELB".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getFarbeAccess().getWertGELBKeyword_0_2(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getFarbeAccess().getWertGELBKeyword_0_2();
 			return obj;
 		}
-		if("GRÜN".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3();
 			return obj;
@@ -1244,7 +1244,7 @@ protected class Familie_NameAssignment_2 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
-		if("keyword".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getFamilieAccess().getNameKeywordKeyword_2_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getFamilieAccess().getNameKeywordKeyword_2_0_0();
 			return obj;

@@ -332,7 +332,7 @@ protected class LookAhead0_XAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("x",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x");
-		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLookAhead0Access().getXAKeyword_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLookAhead0Access().getXAKeyword_1_0();
 			return obj;
@@ -473,7 +473,7 @@ protected class LookAhead1_XAssignment_2 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("x",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x");
-		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLookAhead1Access().getXBKeyword_2_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLookAhead1Access().getXBKeyword_2_0();
 			return obj;
@@ -507,7 +507,7 @@ protected class LookAhead1_XAssignment_3 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("x",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x");
-		if("d".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLookAhead1Access().getXDKeyword_3_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLookAhead1Access().getXDKeyword_3_0();
 			return obj;
@@ -603,7 +603,7 @@ protected class LookAhead2_ZAssignment_0_0 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("z",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("z");
-		if("foo".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLookAhead2Access().getZFooKeyword_0_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLookAhead2Access().getZFooKeyword_0_0_0();
 			return obj;
@@ -636,7 +636,7 @@ protected class LookAhead2_ZAssignment_0_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("z",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("z");
-		if("bar".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLookAhead2Access().getZBarKeyword_0_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLookAhead2Access().getZBarKeyword_0_1_0();
 			return obj;
@@ -776,7 +776,7 @@ protected class LookAhead3_XAssignment_2 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("x",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x");
-		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLookAhead3Access().getXBKeyword_2_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLookAhead3Access().getXBKeyword_2_0();
 			return obj;
@@ -896,7 +896,7 @@ protected class LookAhead4_XAssignment_0 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("x",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x");
-		if("c".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLookAhead4Access().getXCKeyword_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLookAhead4Access().getXCKeyword_0_0();
 			return obj;
@@ -929,7 +929,7 @@ protected class LookAhead4_XAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("x",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x");
-		if("d".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getLookAhead4Access().getXDKeyword_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getLookAhead4Access().getXDKeyword_1_0();
 			return obj;

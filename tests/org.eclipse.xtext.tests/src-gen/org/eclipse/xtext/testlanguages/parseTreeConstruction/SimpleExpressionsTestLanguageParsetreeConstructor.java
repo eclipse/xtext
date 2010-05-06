@@ -73,7 +73,7 @@ protected class Sequence_Group extends GroupToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getAtomRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
@@ -104,7 +104,7 @@ protected class Sequence_AdditionParserRuleCall_0 extends RuleCallToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getAtomRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
+		   getEObject().eClass() != grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())
 			return null;
 		if(checkForRecursion(Addition_Group.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
@@ -261,7 +261,7 @@ protected class Addition_Group extends GroupToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getAtomRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
+		   getEObject().eClass() != grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -385,12 +385,12 @@ protected class Addition_OperatorAssignment_1_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("operator",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("operator");
-		if("+".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getAdditionAccess().getOperatorPlusSignKeyword_1_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getAdditionAccess().getOperatorPlusSignKeyword_1_1_0_0();
 			return obj;
 		}
-		if("-".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getAdditionAccess().getOperatorHyphenMinusKeyword_1_1_0_1(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getAdditionAccess().getOperatorHyphenMinusKeyword_1_1_0_1();
 			return obj;
@@ -482,7 +482,7 @@ protected class Multiplication_Group extends GroupToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getAtomRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
+		   getEObject().eClass() != grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -606,12 +606,12 @@ protected class Multiplication_OperatorAssignment_1_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("operator",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("operator");
-		if("*".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getMultiplicationAccess().getOperatorAsteriskKeyword_1_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getMultiplicationAccess().getOperatorAsteriskKeyword_1_1_0_0();
 			return obj;
 		}
-		if("/".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getMultiplicationAccess().getOperatorSolidusKeyword_1_1_0_1(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getMultiplicationAccess().getOperatorSolidusKeyword_1_1_0_1();
 			return obj;
@@ -703,7 +703,7 @@ protected class Term_Alternatives extends AlternativesToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getAtomRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
+		   getEObject().eClass() != grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -859,7 +859,7 @@ protected class Parens_Group extends GroupToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getAtomRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
+		   getEObject().eClass() != grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}

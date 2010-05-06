@@ -147,7 +147,7 @@ protected class Model_ValueAssignment_0_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
-		if("%".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getValuePercentSignKeyword_0_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getValuePercentSignKeyword_0_1_0();
 			return obj;
@@ -225,7 +225,7 @@ protected class Model_ValueAssignment_1_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
-		if("%".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getValuePercentSignKeyword_1_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getValuePercentSignKeyword_1_1_0();
 			return obj;
@@ -303,7 +303,7 @@ protected class Model_ValueAssignment_2_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
-		if("\\%".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getValueReverseSolidusPercentSignKeyword_2_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getValueReverseSolidusPercentSignKeyword_2_1_0();
 			return obj;
@@ -381,7 +381,7 @@ protected class Model_ValueAssignment_3_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
-		if("\\%".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getValueReverseSolidusPercentSignKeyword_3_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getValueReverseSolidusPercentSignKeyword_3_1_0();
 			return obj;
@@ -459,7 +459,7 @@ protected class Model_ValueAssignment_4_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
-		if("%%".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getValuePercentSignPercentSignKeyword_4_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getValuePercentSignPercentSignKeyword_4_1_0();
 			return obj;
@@ -537,7 +537,7 @@ protected class Model_ValueAssignment_5_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
-		if("%%".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getValuePercentSignPercentSignKeyword_5_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getValuePercentSignPercentSignKeyword_5_1_0();
 			return obj;

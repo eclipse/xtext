@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CommentAssociationFactory.java,v 1.1 2010/05/04 16:03:48 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree.impl.commentAssociation;
 
@@ -16,40 +15,41 @@ import org.eclipse.emf.ecore.EFactory;
  * @see org.eclipse.xtext.parsetree.impl.commentAssociation.CommentAssociationPackage
  * @generated
  */
-public interface CommentAssociationFactory extends EFactory {
-	/**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	CommentAssociationFactory eINSTANCE = org.eclipse.xtext.parsetree.impl.commentAssociation.impl.CommentAssociationFactoryImpl.init();
+public interface CommentAssociationFactory extends EFactory
+{
+  /**
+   * The singleton instance of the factory.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  CommentAssociationFactory eINSTANCE = org.eclipse.xtext.parsetree.impl.commentAssociation.impl.CommentAssociationFactoryImpl.init();
 
-	/**
-	 * Returns a new object of class '<em>Model</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Model</em>'.
-	 * @generated
-	 */
-	Model createModel();
+  /**
+   * Returns a new object of class '<em>Model</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Model</em>'.
+   * @generated
+   */
+  Model createModel();
 
-	/**
-	 * Returns a new object of class '<em>Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Element</em>'.
-	 * @generated
-	 */
-	Element createElement();
+  /**
+   * Returns a new object of class '<em>Element</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Element</em>'.
+   * @generated
+   */
+  Element createElement();
 
-	/**
-	 * Returns the package supported by this factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the package supported by this factory.
-	 * @generated
-	 */
-	CommentAssociationPackage getCommentAssociationPackage();
+  /**
+   * Returns the package supported by this factory.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the package supported by this factory.
+   * @generated
+   */
+  CommentAssociationPackage getCommentAssociationPackage();
 
 } //CommentAssociationFactory

@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CommentAssociationFactoryImpl.java,v 1.1 2010/05/04 16:03:43 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree.impl.commentAssociation.impl;
 
@@ -22,89 +21,101 @@ import org.eclipse.xtext.parsetree.impl.commentAssociation.*;
  * <!-- end-user-doc -->
  * @generated
  */
-public class CommentAssociationFactoryImpl extends EFactoryImpl implements CommentAssociationFactory {
-	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static CommentAssociationFactory init() {
-		try {
-			CommentAssociationFactory theCommentAssociationFactory = (CommentAssociationFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/tests/CommentAssociation"); 
-			if (theCommentAssociationFactory != null) {
-				return theCommentAssociationFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new CommentAssociationFactoryImpl();
-	}
+public class CommentAssociationFactoryImpl extends EFactoryImpl implements CommentAssociationFactory
+{
+  /**
+   * Creates the default factory implementation.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public static CommentAssociationFactory init()
+  {
+    try
+    {
+      CommentAssociationFactory theCommentAssociationFactory = (CommentAssociationFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/tests/CommentAssociation"); 
+      if (theCommentAssociationFactory != null)
+      {
+        return theCommentAssociationFactory;
+      }
+    }
+    catch (Exception exception)
+    {
+      EcorePlugin.INSTANCE.log(exception);
+    }
+    return new CommentAssociationFactoryImpl();
+  }
 
-	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CommentAssociationFactoryImpl() {
-		super();
-	}
+  /**
+   * Creates an instance of the factory.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CommentAssociationFactoryImpl()
+  {
+    super();
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case CommentAssociationPackage.MODEL: return createModel();
-			case CommentAssociationPackage.ELEMENT: return createElement();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EObject create(EClass eClass)
+  {
+    switch (eClass.getClassifierID())
+    {
+      case CommentAssociationPackage.MODEL: return createModel();
+      case CommentAssociationPackage.ELEMENT: return createElement();
+      default:
+        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+    }
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Model createModel() {
-		ModelImpl model = new ModelImpl();
-		return model;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Model createModel()
+  {
+    ModelImpl model = new ModelImpl();
+    return model;
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Element createElement() {
-		ElementImpl element = new ElementImpl();
-		return element;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Element createElement()
+  {
+    ElementImpl element = new ElementImpl();
+    return element;
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CommentAssociationPackage getCommentAssociationPackage() {
-		return (CommentAssociationPackage)getEPackage();
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CommentAssociationPackage getCommentAssociationPackage()
+  {
+    return (CommentAssociationPackage)getEPackage();
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
-	@Deprecated
-	public static CommentAssociationPackage getPackage() {
-		return CommentAssociationPackage.eINSTANCE;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @deprecated
+   * @generated
+   */
+  @Deprecated
+  public static CommentAssociationPackage getPackage()
+  {
+    return CommentAssociationPackage.eINSTANCE;
+  }
 
 } //CommentAssociationFactoryImpl

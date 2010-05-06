@@ -1063,7 +1063,7 @@ protected class Model_FirstAsListAssignment_1_5_1_0 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("firstAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
-		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getFirstAsListAKeyword_1_5_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAsListAKeyword_1_5_1_0_0();
 			return obj;
@@ -1098,7 +1098,7 @@ protected class Model_SecondAsListAssignment_1_5_1_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("secondAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondAsList");
-		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getSecondAsListBKeyword_1_5_1_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondAsListBKeyword_1_5_1_1_0();
 			return obj;
@@ -1201,7 +1201,7 @@ protected class Model_FirstAsListAssignment_1_6_1_0 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("firstAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
-		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getFirstAsListAKeyword_1_6_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAsListAKeyword_1_6_1_0_0();
 			return obj;
@@ -1237,7 +1237,7 @@ protected class Model_SecondAsListAssignment_1_6_1_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("secondAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondAsList");
-		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getSecondAsListBKeyword_1_6_1_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondAsListBKeyword_1_6_1_1_0();
 			return obj;
@@ -1610,7 +1610,7 @@ protected class Model_FirstAsListAssignment_1_8_1_0 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("firstAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
-		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getFirstAsListAKeyword_1_8_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAsListAKeyword_1_8_1_0_0();
 			return obj;
@@ -1644,7 +1644,7 @@ protected class Model_SecondAsListAssignment_1_8_1_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("secondAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondAsList");
-		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getSecondAsListBKeyword_1_8_1_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondAsListBKeyword_1_8_1_1_0();
 			return obj;
@@ -1748,7 +1748,7 @@ protected class Model_FirstAsListAssignment_1_9_1_0 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("firstAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
-		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getFirstAsListAKeyword_1_9_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAsListAKeyword_1_9_1_0_0();
 			return obj;
@@ -1782,7 +1782,7 @@ protected class Model_SecondAsListAssignment_1_9_1_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("secondAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondAsList");
-		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getSecondAsListBKeyword_1_9_1_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondAsListBKeyword_1_9_1_1_0();
 			return obj;
@@ -2022,7 +2022,7 @@ protected class Model_FirstAsListAssignment_1_11_1_0 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("firstAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
-		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getFirstAsListAKeyword_1_11_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAsListAKeyword_1_11_1_0_0();
 			return obj;
@@ -2056,7 +2056,7 @@ protected class Model_SecondAsListAssignment_1_11_1_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("secondAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondAsList");
-		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getSecondAsListBKeyword_1_11_1_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondAsListBKeyword_1_11_1_1_0();
 			return obj;
@@ -2113,7 +2113,7 @@ protected class Model_FirstAsListAssignment_1_11_2_0 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("firstAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
-		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getFirstAsListAKeyword_1_11_2_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAsListAKeyword_1_11_2_0_0();
 			return obj;
@@ -2147,7 +2147,7 @@ protected class Model_SecondAsListAssignment_1_11_2_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("secondAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondAsList");
-		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getSecondAsListBKeyword_1_11_2_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondAsListBKeyword_1_11_2_1_0();
 			return obj;
@@ -2249,7 +2249,7 @@ protected class Model_FirstAsListAssignment_1_12_1_0 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("firstAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
-		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getFirstAsListAKeyword_1_12_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAsListAKeyword_1_12_1_0_0();
 			return obj;
@@ -2283,7 +2283,7 @@ protected class Model_SecondAsListAssignment_1_12_1_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("secondAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondAsList");
-		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getSecondAsListBKeyword_1_12_1_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondAsListBKeyword_1_12_1_1_0();
 			return obj;
@@ -2319,7 +2319,7 @@ protected class Model_FirstAsListAssignment_1_12_2 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("firstAsList",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
-		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getFirstAsListAKeyword_1_12_2_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAsListAKeyword_1_12_2_0();
 			return obj;
@@ -2353,7 +2353,7 @@ protected class Model_SecondAsListAssignment_1_12_3 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("secondAsList",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondAsList");
-		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getSecondAsListBKeyword_1_12_3_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondAsListBKeyword_1_12_3_0();
 			return obj;
@@ -2479,7 +2479,7 @@ protected class Model_FirstAsListAssignment_1_13_1_0_0 extends AssignmentToken  
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("firstAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
-		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getFirstAsListAKeyword_1_13_1_0_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getFirstAsListAKeyword_1_13_1_0_0_0();
 			return obj;
@@ -2513,7 +2513,7 @@ protected class Model_SecondAsListAssignment_1_13_1_0_1 extends AssignmentToken 
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("secondAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondAsList");
-		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getSecondAsListBKeyword_1_13_1_0_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getSecondAsListBKeyword_1_13_1_0_1_0();
 			return obj;
@@ -2570,7 +2570,7 @@ protected class Model_ThirdAsListAssignment_1_13_1_1_0 extends AssignmentToken  
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("thirdAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("thirdAsList");
-		if("c".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getThirdAsListCKeyword_1_13_1_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getThirdAsListCKeyword_1_13_1_1_0_0();
 			return obj;
@@ -2604,7 +2604,7 @@ protected class Model_ForthAsListAssignment_1_13_1_1_1 extends AssignmentToken  
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("forthAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("forthAsList");
-		if("d".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getForthAsListDKeyword_1_13_1_1_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getForthAsListDKeyword_1_13_1_1_1_0();
 			return obj;
@@ -3460,7 +3460,7 @@ protected class UnorderedSerialization_FirstAsListAssignment_1_1_1_0 extends Ass
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("firstAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
-		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getUnorderedSerializationAccess().getFirstAsListAKeyword_1_1_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getUnorderedSerializationAccess().getFirstAsListAKeyword_1_1_1_0_0();
 			return obj;
@@ -3494,7 +3494,7 @@ protected class UnorderedSerialization_SecondAsListAssignment_1_1_1_1 extends As
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("secondAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("secondAsList");
-		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getUnorderedSerializationAccess().getSecondAsListBKeyword_1_1_1_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getUnorderedSerializationAccess().getSecondAsListBKeyword_1_1_1_1_0();
 			return obj;
@@ -3599,7 +3599,7 @@ protected class UnorderedSerialization_FirstAsListAssignment_1_2_1_0 extends Ass
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("firstAsList",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstAsList");
-		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getUnorderedSerializationAccess().getFirstAsListAKeyword_1_2_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getUnorderedSerializationAccess().getFirstAsListAKeyword_1_2_1_0_0();
 			return obj;

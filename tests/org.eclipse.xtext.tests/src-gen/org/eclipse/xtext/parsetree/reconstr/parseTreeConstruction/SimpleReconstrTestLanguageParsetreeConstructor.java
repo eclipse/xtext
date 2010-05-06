@@ -1488,7 +1488,7 @@ protected class Parens_EmAssignment_3 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("em",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("em");
-		if("!".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getParensAccess().getEmExclamationMarkKeyword_3_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getParensAccess().getEmExclamationMarkKeyword_3_0();
 			return obj;
@@ -2056,12 +2056,12 @@ protected class Ref2_Ref2Assignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("ref2",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ref2");
-		if("mykeyword1".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getRef2Access().getRef2Mykeyword1Keyword_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getRef2Access().getRef2Mykeyword1Keyword_1_0_0();
 			return obj;
 		}
-		if("mykeyword2".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getRef2Access().getRef2Mykeyword2Keyword_1_0_2(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getRef2Access().getRef2Mykeyword2Keyword_1_0_2();
 			return obj;

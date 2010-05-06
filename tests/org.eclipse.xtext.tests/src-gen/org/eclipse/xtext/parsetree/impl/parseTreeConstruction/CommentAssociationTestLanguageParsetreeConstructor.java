@@ -124,7 +124,7 @@ protected class Element_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getElementRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getElementAccess().getElementChildAction_2_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}

@@ -679,12 +679,12 @@ protected class Assign_OpAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("op",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("op");
-		if("=".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getAssignAccess().getOpEqualsSignKeyword_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getAssignAccess().getOpEqualsSignKeyword_1_0_0();
 			return obj;
 		}
-		if("+=".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getAssignAccess().getOpPlusSignEqualsSignKeyword_1_0_1(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getAssignAccess().getOpPlusSignEqualsSignKeyword_1_0_1();
 			return obj;

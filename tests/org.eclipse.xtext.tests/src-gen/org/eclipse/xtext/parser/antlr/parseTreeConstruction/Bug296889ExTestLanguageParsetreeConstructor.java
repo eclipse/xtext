@@ -456,7 +456,7 @@ protected class Preop_FunctionNameAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("functionName",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("functionName");
-		if("--".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getPreopAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getPreopAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_0();
 			return obj;
@@ -672,7 +672,7 @@ protected class Postop_FunctionNameAssignment_1_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("functionName",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("functionName");
-		if("--".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getPostopAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_1_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getPostopAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_1_0();
 			return obj;

@@ -5355,7 +5355,7 @@ protected class SingleAssignmentValue_KeywordAssignment_0 extends AssignmentToke
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("keyword",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("keyword");
-		if("null".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getSingleAssignmentValueAccess().getKeywordNullKeyword_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getSingleAssignmentValueAccess().getKeywordNullKeyword_0_0();
 			return obj;

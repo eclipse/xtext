@@ -137,7 +137,7 @@ protected class Model_ValueAssignment_0_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
-		if("mykeyword1".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getValueMykeyword1Keyword_0_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getValueMykeyword1Keyword_0_1_0_0();
 			return obj;
@@ -235,7 +235,7 @@ protected class Model_MultiValueAssignment_1_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("multiValue",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("multiValue");
-		if("mykeyword1".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getMultiValueMykeyword1Keyword_1_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getMultiValueMykeyword1Keyword_1_1_0_0();
 			return obj;

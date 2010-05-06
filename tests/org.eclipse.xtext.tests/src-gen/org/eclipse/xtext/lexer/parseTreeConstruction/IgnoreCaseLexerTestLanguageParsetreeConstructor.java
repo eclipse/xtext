@@ -118,7 +118,7 @@ protected class Model_ValueAssignment_2 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
-		if("CaSe".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getValueCaSeKeyword_2_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getModelAccess().getValueCaSeKeyword_2_0();
 			return obj;

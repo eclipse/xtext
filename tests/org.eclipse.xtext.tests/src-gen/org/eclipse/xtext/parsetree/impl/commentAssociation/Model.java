@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Model.java,v 1.1 2010/05/04 16:03:49 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree.impl.commentAssociation;
 
@@ -26,21 +25,22 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Model extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtext.parsetree.impl.commentAssociation.Element}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Elements</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Elements</em>' containment reference list.
-	 * @see org.eclipse.xtext.parsetree.impl.commentAssociation.CommentAssociationPackage#getModel_Elements()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Element> getElements();
+public interface Model extends EObject
+{
+  /**
+   * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.xtext.parsetree.impl.commentAssociation.Element}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Elements</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Elements</em>' containment reference list.
+   * @see org.eclipse.xtext.parsetree.impl.commentAssociation.CommentAssociationPackage#getModel_Elements()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Element> getElements();
 
 } // Model

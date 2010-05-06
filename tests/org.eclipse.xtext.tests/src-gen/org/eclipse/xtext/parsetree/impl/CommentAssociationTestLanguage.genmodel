@@ -11,7 +11,6 @@
       disposableProviderFactory="true" ecorePackage="CommentAssociationTestLanguage.ecore#/">
     <genClasses ecoreClass="CommentAssociationTestLanguage.ecore#//Model">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CommentAssociationTestLanguage.ecore#//Model/elements"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CommentAssociationTestLanguage.ecore#//Model/element"/>
     </genClasses>
     <genClasses ecoreClass="CommentAssociationTestLanguage.ecore#//Element">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CommentAssociationTestLanguage.ecore#//Element/name"/>

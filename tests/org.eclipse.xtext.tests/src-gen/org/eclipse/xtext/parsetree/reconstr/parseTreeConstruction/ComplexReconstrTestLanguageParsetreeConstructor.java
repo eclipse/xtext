@@ -836,7 +836,7 @@ protected class Parens_EmAssignment_3 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("em",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("em");
-		if("!".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getParensAccess().getEmExclamationMarkKeyword_3_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getParensAccess().getEmExclamationMarkKeyword_3_0();
 			return obj;

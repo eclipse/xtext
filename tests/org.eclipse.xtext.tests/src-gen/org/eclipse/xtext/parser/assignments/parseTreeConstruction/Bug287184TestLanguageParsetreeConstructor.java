@@ -389,17 +389,17 @@ protected class Detail_VisibilityAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("visibility",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("visibility");
-		if("private".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getDetailAccess().getVisibilityPrivateKeyword_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getDetailAccess().getVisibilityPrivateKeyword_1_0_0();
 			return obj;
 		}
-		if("protected".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getDetailAccess().getVisibilityProtectedKeyword_1_0_1(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getDetailAccess().getVisibilityProtectedKeyword_1_0_1();
 			return obj;
 		}
-		if("public".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getDetailAccess().getVisibilityPublicKeyword_1_0_2(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getDetailAccess().getVisibilityPublicKeyword_1_0_2();
 			return obj;
