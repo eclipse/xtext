@@ -38,6 +38,7 @@ import org.eclipse.jface.viewers.IPostSelectionProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorDescriptor;
@@ -555,8 +556,21 @@ public class XtextEditor extends TextEditor {
 		this.callback = callback;
 	}
 	
+	/**
+	 * Copied from {@link org.eclipse.ui.texteditor.AbstractTextEditor#selectAndReveal(int, int)} 
+	 * and removed selection functionality.
+	 */
 	public void reveal(int offset, int length) {
-		selectAndReveal(offset, 0, offset, length);
+		if (getSourceViewer() == null)
+			return;
+		StyledText widget= getSourceViewer().getTextWidget();
+		widget.setRedraw(false);
+		{
+			adjustHighlightRange(offset, length);
+			getSourceViewer().revealRange(offset, length);
+			markInNavigationHistory();
+		}
+		widget.setRedraw(true);
 	}
 
 }
