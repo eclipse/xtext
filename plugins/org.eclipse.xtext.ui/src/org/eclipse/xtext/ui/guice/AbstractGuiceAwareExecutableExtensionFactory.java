@@ -29,7 +29,7 @@ public abstract class AbstractGuiceAwareExecutableExtensionFactory implements IE
 	protected String clazzName;
 	protected IConfigurationElement config;
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "unchecked" })
 	public void setInitializationData(IConfigurationElement config, String propertyName, Object data)
 		throws CoreException {
 		if (data instanceof String) {
