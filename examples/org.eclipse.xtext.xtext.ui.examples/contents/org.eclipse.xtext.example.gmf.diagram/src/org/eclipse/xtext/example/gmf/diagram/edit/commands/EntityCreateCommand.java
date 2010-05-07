@@ -11,6 +11,7 @@ import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.xtext.example.gmf.diagram.providers.ElementInitializers;
 import org.eclipse.xtext.example.gmf.diagram.providers.EntitiesElementTypes;
 import org.eclipse.xtext.example.gmf.entities.EntitiesFactory;
 import org.eclipse.xtext.example.gmf.entities.Entity;
@@ -59,7 +60,7 @@ public class EntityCreateCommand extends EditElementCommand {
 		Model owner = (Model) getElementToEdit();
 		owner.getElements().add(newElement);
 
-		EntitiesElementTypes.init_Entity_1001(newElement);
+		ElementInitializers.getInstance().init_Entity_1001(newElement);
 
 		doConfigure(newElement, monitor, info);
 

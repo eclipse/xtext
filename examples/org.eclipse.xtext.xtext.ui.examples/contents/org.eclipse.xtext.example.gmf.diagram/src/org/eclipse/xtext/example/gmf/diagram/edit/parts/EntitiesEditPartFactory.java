@@ -114,15 +114,17 @@ public class EntitiesEditPartFactory implements EditPartFactory {
 			Text text = (Text) celleditor.getControl();
 			Rectangle rect = getWrapLabel().getTextBounds().getCopy();
 			getWrapLabel().translateToAbsolute(rect);
-			if (getWrapLabel().isTextWrapOn()
-					&& getWrapLabel().getText().length() > 0) {
-				rect.setSize(new Dimension(text.computeSize(rect.width,
-						SWT.DEFAULT)));
-			} else {
-				int avr = FigureUtilities.getFontMetrics(text.getFont())
-						.getAverageCharWidth();
-				rect.setSize(new Dimension(text.computeSize(SWT.DEFAULT,
-						SWT.DEFAULT)).expand(avr * 2, 0));
+			if (!text.getFont().isDisposed()) {
+				if (getWrapLabel().isTextWrapOn()
+						&& getWrapLabel().getText().length() > 0) {
+					rect.setSize(new Dimension(text.computeSize(rect.width,
+							SWT.DEFAULT)));
+				} else {
+					int avr = FigureUtilities.getFontMetrics(text.getFont())
+							.getAverageCharWidth();
+					rect.setSize(new Dimension(text.computeSize(SWT.DEFAULT,
+							SWT.DEFAULT)).expand(avr * 2, 0));
+				}
 			}
 			if (!rect.equals(new Rectangle(text.getBounds()))) {
 				text.setBounds(rect.x, rect.y, rect.width, rect.height);
@@ -161,10 +163,12 @@ public class EntitiesEditPartFactory implements EditPartFactory {
 			Text text = (Text) celleditor.getControl();
 			Rectangle rect = getLabel().getTextBounds().getCopy();
 			getLabel().translateToAbsolute(rect);
-			int avr = FigureUtilities.getFontMetrics(text.getFont())
-					.getAverageCharWidth();
-			rect.setSize(new Dimension(text.computeSize(SWT.DEFAULT,
-					SWT.DEFAULT)).expand(avr * 2, 0));
+			if (!text.getFont().isDisposed()) {
+				int avr = FigureUtilities.getFontMetrics(text.getFont())
+						.getAverageCharWidth();
+				rect.setSize(new Dimension(text.computeSize(SWT.DEFAULT,
+						SWT.DEFAULT)).expand(avr * 2, 0));
+			}
 			if (!rect.equals(new Rectangle(text.getBounds()))) {
 				text.setBounds(rect.x, rect.y, rect.width, rect.height);
 			}

@@ -82,7 +82,7 @@ public class EntitiesVisualIDRegistry {
 	 * @generated
 	 */
 	public static String getType(int visualID) {
-		return String.valueOf(visualID);
+		return Integer.toString(visualID);
 	}
 
 	/**
@@ -124,12 +124,6 @@ public class EntitiesVisualIDRegistry {
 			}
 		}
 		switch (containerVisualID) {
-		case EntitySimpleNameCompartmentEditPart.VISUAL_ID:
-			if (EntitiesPackage.eINSTANCE.getSimpleProperty().isSuperTypeOf(
-					domainElement.eClass())) {
-				return SimplePropertyEditPart.VISUAL_ID;
-			}
-			break;
 		case ModelEditPart.VISUAL_ID:
 			if (EntitiesPackage.eINSTANCE.getEntity().isSuperTypeOf(
 					domainElement.eClass())) {
@@ -138,6 +132,12 @@ public class EntitiesVisualIDRegistry {
 			if (EntitiesPackage.eINSTANCE.getSimpleType().isSuperTypeOf(
 					domainElement.eClass())) {
 				return SimpleTypeEditPart.VISUAL_ID;
+			}
+			break;
+		case EntitySimpleNameCompartmentEditPart.VISUAL_ID:
+			if (EntitiesPackage.eINSTANCE.getSimpleProperty().isSuperTypeOf(
+					domainElement.eClass())) {
+				return SimplePropertyEditPart.VISUAL_ID;
 			}
 			break;
 		}
@@ -165,6 +165,14 @@ public class EntitiesVisualIDRegistry {
 			}
 		}
 		switch (containerVisualID) {
+		case ModelEditPart.VISUAL_ID:
+			if (EntityEditPart.VISUAL_ID == nodeVisualID) {
+				return true;
+			}
+			if (SimpleTypeEditPart.VISUAL_ID == nodeVisualID) {
+				return true;
+			}
+			break;
 		case EntityEditPart.VISUAL_ID:
 			if (EntityNameEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
@@ -180,14 +188,6 @@ public class EntitiesVisualIDRegistry {
 			break;
 		case EntitySimpleNameCompartmentEditPart.VISUAL_ID:
 			if (SimplePropertyEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			break;
-		case ModelEditPart.VISUAL_ID:
-			if (EntityEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			if (SimpleTypeEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
 			break;

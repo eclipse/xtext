@@ -11,6 +11,7 @@ import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.xtext.example.gmf.diagram.providers.ElementInitializers;
 import org.eclipse.xtext.example.gmf.diagram.providers.EntitiesElementTypes;
 import org.eclipse.xtext.example.gmf.entities.EntitiesFactory;
 import org.eclipse.xtext.example.gmf.entities.Model;
@@ -59,7 +60,7 @@ public class SimpleTypeCreateCommand extends EditElementCommand {
 		Model owner = (Model) getElementToEdit();
 		owner.getElements().add(newElement);
 
-		EntitiesElementTypes.init_SimpleType_1002(newElement);
+		ElementInitializers.getInstance().init_SimpleType_1002(newElement);
 
 		doConfigure(newElement, monitor, info);
 

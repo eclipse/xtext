@@ -71,7 +71,7 @@ public class EntityExtendsReorientCommand extends EditElementCommand {
 		if (!(oldEnd instanceof Entity && newEnd instanceof Entity)) {
 			return false;
 		}
-		return EntitiesBaseItemSemanticEditPolicy.LinkConstraints
+		return EntitiesBaseItemSemanticEditPolicy.getLinkConstraints()
 				.canExistEntityExtends_3002(getNewSource(), getOldTarget());
 	}
 
@@ -82,7 +82,7 @@ public class EntityExtendsReorientCommand extends EditElementCommand {
 		if (!(oldEnd instanceof Entity && newEnd instanceof Entity)) {
 			return false;
 		}
-		return EntitiesBaseItemSemanticEditPolicy.LinkConstraints
+		return EntitiesBaseItemSemanticEditPolicy.getLinkConstraints()
 				.canExistEntityExtends_3002(getOldSource(), getNewTarget());
 	}
 

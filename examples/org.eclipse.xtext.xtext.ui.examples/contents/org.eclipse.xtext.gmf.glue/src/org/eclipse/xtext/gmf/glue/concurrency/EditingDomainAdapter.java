@@ -19,9 +19,9 @@ import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.RollbackException;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.transaction.TransactionalEditingDomain.Lifecycle;
 import org.eclipse.emf.transaction.TransactionalEditingDomainEvent;
 import org.eclipse.emf.transaction.TransactionalEditingDomainListener;
-import org.eclipse.emf.transaction.TransactionalEditingDomain.Lifecycle;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
@@ -98,6 +98,10 @@ public class EditingDomainAdapter extends AdapterImpl implements ResourceSetList
 	}
 
 	public void resourceSetChanged(ResourceSetChangeEvent event) {
+		if(event.getTransaction() == null) {
+			// only unload can cause notifications outside an transaction
+			return;
+		}
 		List<URI> remainingURIs = Lists.newArrayList(uri2dirtyResource.keySet());
 		for (Resource resource : editingDomain.getResourceSet().getResources()) {
 			if (resource instanceof XtextResource) {

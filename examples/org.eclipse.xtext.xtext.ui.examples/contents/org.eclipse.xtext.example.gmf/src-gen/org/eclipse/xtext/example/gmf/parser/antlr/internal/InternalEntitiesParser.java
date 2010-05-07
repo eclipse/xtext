@@ -21,18 +21,19 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalEntitiesParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'import'", "'type'", "'entity'", "'extends'", "'{'", "'}'", "'property'", "':'", "'[]'", "'reference'"
     };
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=5;
-    public static final int RULE_WS=9;
-    public static final int EOF=-1;
-    public static final int RULE_INT=6;
     public static final int RULE_STRING=4;
     public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=6;
+    public static final int RULE_WS=9;
     public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
 
         public InternalEntitiesParser(TokenStream input) {
             super(input);
@@ -116,7 +117,7 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         EObject lv_elements_2_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:91:6: ( ( () ( (lv_imports_1_0= ruleImport ) )* ( (lv_elements_2_0= ruleType ) )* ) )
@@ -313,7 +314,7 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
         Token lv_importURI_1_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:173:6: ( ( 'import' ( (lv_importURI_1_0= RULE_STRING ) ) ) )
@@ -426,7 +427,7 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         EObject this_Entity_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:224:6: ( (this_SimpleType_0= ruleSimpleType | this_Entity_1= ruleEntity ) )
@@ -547,7 +548,7 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
         Token lv_name_1_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:266:6: ( ( 'type' ( (lv_name_1_0= RULE_ID ) ) ) )
@@ -659,7 +660,7 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         EObject lv_properties_5_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:317:6: ( ( 'entity' ( (lv_name_1_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? '{' ( (lv_properties_5_0= ruleProperty ) )* '}' ) )
@@ -877,7 +878,7 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         EObject this_Reference_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:418:6: ( (this_SimpleProperty_0= ruleSimpleProperty | this_Reference_1= ruleReference ) )
@@ -999,7 +1000,7 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         Token lv_name_1_0=null;
         Token lv_many_4_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:460:6: ( ( 'property' ( (lv_name_1_0= RULE_ID ) ) ( ':' ( ( RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? )? ) )
@@ -1193,7 +1194,7 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         Token lv_name_1_0=null;
         Token lv_many_4_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:550:6: ( ( 'reference' ( (lv_name_1_0= RULE_ID ) ) ':' ( ( RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? ) )

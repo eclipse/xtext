@@ -76,10 +76,9 @@ public class EntitiesNavigatorItem extends EntitiesAbstractNavigatorItem {
 		if (obj instanceof org.eclipse.xtext.example.gmf.diagram.navigator.EntitiesNavigatorItem) {
 			return EcoreUtil
 					.getURI(getView())
-					.equals(
-							EcoreUtil
-									.getURI(((org.eclipse.xtext.example.gmf.diagram.navigator.EntitiesNavigatorItem) obj)
-											.getView()));
+					.equals(EcoreUtil
+							.getURI(((org.eclipse.xtext.example.gmf.diagram.navigator.EntitiesNavigatorItem) obj)
+									.getView()));
 		}
 		return super.equals(obj);
 	}

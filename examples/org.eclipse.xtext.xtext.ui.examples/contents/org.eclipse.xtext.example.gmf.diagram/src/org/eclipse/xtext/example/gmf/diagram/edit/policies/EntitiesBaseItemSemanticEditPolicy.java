@@ -31,9 +31,11 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.ReorientRelationshipReques
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.xtext.example.gmf.diagram.edit.helpers.EntitiesBaseEditHelper;
+import org.eclipse.xtext.example.gmf.diagram.part.EntitiesDiagramEditorPlugin;
 import org.eclipse.xtext.example.gmf.diagram.part.EntitiesVisualIDRegistry;
 import org.eclipse.xtext.example.gmf.diagram.providers.EntitiesElementTypes;
 import org.eclipse.xtext.example.gmf.entities.Entity;
+import org.eclipse.xtext.example.gmf.entities.Reference;
 
 /**
  * @generated
@@ -72,8 +74,8 @@ public class EntitiesBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 			Object view = ((ReconnectRequest) request).getConnectionEditPart()
 					.getModel();
 			if (view instanceof View) {
-				Integer id = new Integer(EntitiesVisualIDRegistry
-						.getVisualID((View) view));
+				Integer id = new Integer(
+						EntitiesVisualIDRegistry.getVisualID((View) view));
 				request.getExtendedData().put(VISUAL_ID_KEY, id);
 			}
 		}
@@ -123,8 +125,7 @@ public class EntitiesBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 			Command editPolicyCommand) {
 		if (editPolicyCommand != null) {
 			ICommand command = editPolicyCommand instanceof ICommandProxy ? ((ICommandProxy) editPolicyCommand)
-					.getICommand()
-					: new CommandProxy(editPolicyCommand);
+					.getICommand() : new CommandProxy(editPolicyCommand);
 			request.setParameter(EntitiesBaseEditHelper.EDIT_POLICY_COMMAND,
 					command);
 		}
@@ -297,26 +298,39 @@ public class EntitiesBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	/**
 	 * @generated
 	 */
+	public static LinkConstraints getLinkConstraints() {
+		LinkConstraints cached = EntitiesDiagramEditorPlugin.getInstance()
+				.getLinkConstraints();
+		if (cached == null) {
+			EntitiesDiagramEditorPlugin.getInstance().setLinkConstraints(
+					cached = new LinkConstraints());
+		}
+		return cached;
+	}
+
+	/**
+	 * @generated
+	 */
 	public static class LinkConstraints {
 
 		/**
 		 * @generated
 		 */
-		private static final String OPPOSITE_END_VAR = "oppositeEnd"; //$NON-NLS-1$
-
-		/**
-		 * @generated
-		 */
-		public static boolean canCreateReference_3001(Entity source,
-				Entity target) {
-			return canExistReference_3001(source, target);
+		LinkConstraints() {
+			// use static method #getLinkConstraints() to access instance
 		}
 
 		/**
 		 * @generated
 		 */
-		public static boolean canCreateEntityExtends_3002(Entity source,
-				Entity target) {
+		public boolean canCreateReference_3001(Entity source, Entity target) {
+			return canExistReference_3001(null, source, target);
+		}
+
+		/**
+		 * @generated
+		 */
+		public boolean canCreateEntityExtends_3002(Entity source, Entity target) {
 			if (source != null) {
 				if (source.getExtends() != null) {
 					return false;
@@ -329,16 +343,15 @@ public class EntitiesBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 		/**
 		 * @generated
 		 */
-		public static boolean canExistReference_3001(Entity source,
-				Entity target) {
+		public boolean canExistReference_3001(Reference linkInstance,
+				Entity source, Entity target) {
 			return true;
 		}
 
 		/**
 		 * @generated
 		 */
-		public static boolean canExistEntityExtends_3002(Entity source,
-				Entity target) {
+		public boolean canExistEntityExtends_3002(Entity source, Entity target) {
 			return true;
 		}
 	}

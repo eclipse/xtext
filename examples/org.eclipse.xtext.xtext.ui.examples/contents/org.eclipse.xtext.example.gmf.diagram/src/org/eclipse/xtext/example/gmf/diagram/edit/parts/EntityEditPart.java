@@ -1,6 +1,7 @@
 package org.eclipse.xtext.example.gmf.diagram.edit.parts;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.draw2d.IFigure;
@@ -97,8 +98,7 @@ public class EntityEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure createNodeShape() {
-		EntityFigure figure = new EntityFigure();
-		return primaryShape = figure;
+		return primaryShape = new EntityFigure();
 	}
 
 	/**
@@ -273,8 +273,8 @@ public class EntityEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/getMARelTypesOnSource() {
-		List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/types = new ArrayList/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/();
+	public List<IElementType> getMARelTypesOnSource() {
+		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
 		types.add(EntitiesElementTypes.Reference_3001);
 		types.add(EntitiesElementTypes.EntityExtends_3002);
 		return types;
@@ -283,9 +283,9 @@ public class EntityEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/getMARelTypesOnSourceAndTarget(
+	public List<IElementType> getMARelTypesOnSourceAndTarget(
 			IGraphicalEditPart targetEditPart) {
-		List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/types = new ArrayList/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/();
+		LinkedList<IElementType> types = new LinkedList<IElementType>();
 		if (targetEditPart instanceof org.eclipse.xtext.example.gmf.diagram.edit.parts.EntityEditPart) {
 			types.add(EntitiesElementTypes.Reference_3001);
 		}
@@ -298,13 +298,11 @@ public class EntityEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/getMATypesForTarget(
-			IElementType relationshipType) {
-		List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/types = new ArrayList/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/();
+	public List<IElementType> getMATypesForTarget(IElementType relationshipType) {
+		LinkedList<IElementType> types = new LinkedList<IElementType>();
 		if (relationshipType == EntitiesElementTypes.Reference_3001) {
 			types.add(EntitiesElementTypes.Entity_1001);
-		}
-		if (relationshipType == EntitiesElementTypes.EntityExtends_3002) {
+		} else if (relationshipType == EntitiesElementTypes.EntityExtends_3002) {
 			types.add(EntitiesElementTypes.Entity_1001);
 		}
 		return types;
@@ -313,8 +311,8 @@ public class EntityEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/getMARelTypesOnTarget() {
-		List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/types = new ArrayList/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/();
+	public List<IElementType> getMARelTypesOnTarget() {
+		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
 		types.add(EntitiesElementTypes.Reference_3001);
 		types.add(EntitiesElementTypes.EntityExtends_3002);
 		return types;
@@ -323,13 +321,11 @@ public class EntityEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/getMATypesForSource(
-			IElementType relationshipType) {
-		List/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/types = new ArrayList/*<org.eclipse.gmf.runtime.emf.type.core.IElementType>*/();
+	public List<IElementType> getMATypesForSource(IElementType relationshipType) {
+		LinkedList<IElementType> types = new LinkedList<IElementType>();
 		if (relationshipType == EntitiesElementTypes.Reference_3001) {
 			types.add(EntitiesElementTypes.Entity_1001);
-		}
-		if (relationshipType == EntitiesElementTypes.EntityExtends_3002) {
+		} else if (relationshipType == EntitiesElementTypes.EntityExtends_3002) {
 			types.add(EntitiesElementTypes.Entity_1001);
 		}
 		return types;

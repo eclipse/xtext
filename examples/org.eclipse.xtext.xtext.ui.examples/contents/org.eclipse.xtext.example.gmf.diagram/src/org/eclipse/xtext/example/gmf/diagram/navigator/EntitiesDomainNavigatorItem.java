@@ -100,10 +100,9 @@ public class EntitiesDomainNavigatorItem extends PlatformObject {
 		if (obj instanceof org.eclipse.xtext.example.gmf.diagram.navigator.EntitiesDomainNavigatorItem) {
 			return EcoreUtil
 					.getURI(getEObject())
-					.equals(
-							EcoreUtil
-									.getURI(((org.eclipse.xtext.example.gmf.diagram.navigator.EntitiesDomainNavigatorItem) obj)
-											.getEObject()));
+					.equals(EcoreUtil
+							.getURI(((org.eclipse.xtext.example.gmf.diagram.navigator.EntitiesDomainNavigatorItem) obj)
+									.getEObject()));
 		}
 		return super.equals(obj);
 	}

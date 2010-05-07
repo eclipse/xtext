@@ -10,25 +10,26 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("all")
 public class InternalEntitiesLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=7;
-    public static final int T14=14;
     public static final int RULE_ID=5;
-    public static final int T11=11;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int Tokens=21;
+    public static final int EOF=-1;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int T20=20;
+    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_STRING=4;
+    public static final int RULE_INT=6;
+    public static final int T11=11;
     public static final int T12=12;
     public static final int T13=13;
-    public static final int T20=20;
-    public static final int T18=18;
+    public static final int T14=14;
     public static final int RULE_WS=9;
     public static final int T15=15;
-    public static final int RULE_INT=6;
-    public static final int EOF=-1;
-    public static final int T17=17;
-    public static final int Tokens=21;
-    public static final int RULE_ANY_OTHER=10;
     public static final int T16=16;
-    public static final int RULE_SL_COMMENT=8;
+    public static final int T17=17;
+    public static final int T18=18;
     public static final int T19=19;
     public InternalEntitiesLexer() {;} 
     public InternalEntitiesLexer(CharStream input) {
@@ -804,27 +805,33 @@ public class InternalEntitiesLexer extends Lexer {
         }
         else if ( (LA12_0=='e') ) {
             switch ( input.LA(2) ) {
-            case 'n':
+            case 'x':
                 {
                 int LA12_21 = input.LA(3);
 
                 if ( (LA12_21=='t') ) {
                     int LA12_36 = input.LA(4);
 
-                    if ( (LA12_36=='i') ) {
+                    if ( (LA12_36=='e') ) {
                         int LA12_42 = input.LA(5);
 
-                        if ( (LA12_42=='t') ) {
+                        if ( (LA12_42=='n') ) {
                             int LA12_48 = input.LA(6);
 
-                            if ( (LA12_48=='y') ) {
+                            if ( (LA12_48=='d') ) {
                                 int LA12_53 = input.LA(7);
 
-                                if ( ((LA12_53>='0' && LA12_53<='9')||(LA12_53>='A' && LA12_53<='Z')||LA12_53=='_'||(LA12_53>='a' && LA12_53<='z')) ) {
-                                    alt12=11;
+                                if ( (LA12_53=='s') ) {
+                                    int LA12_58 = input.LA(8);
+
+                                    if ( ((LA12_58>='0' && LA12_58<='9')||(LA12_58>='A' && LA12_58<='Z')||LA12_58=='_'||(LA12_58>='a' && LA12_58<='z')) ) {
+                                        alt12=11;
+                                    }
+                                    else {
+                                        alt12=4;}
                                 }
                                 else {
-                                    alt12=3;}
+                                    alt12=11;}
                             }
                             else {
                                 alt12=11;}
@@ -839,33 +846,27 @@ public class InternalEntitiesLexer extends Lexer {
                     alt12=11;}
                 }
                 break;
-            case 'x':
+            case 'n':
                 {
                 int LA12_22 = input.LA(3);
 
                 if ( (LA12_22=='t') ) {
                     int LA12_37 = input.LA(4);
 
-                    if ( (LA12_37=='e') ) {
+                    if ( (LA12_37=='i') ) {
                         int LA12_43 = input.LA(5);
 
-                        if ( (LA12_43=='n') ) {
+                        if ( (LA12_43=='t') ) {
                             int LA12_49 = input.LA(6);
 
-                            if ( (LA12_49=='d') ) {
+                            if ( (LA12_49=='y') ) {
                                 int LA12_54 = input.LA(7);
 
-                                if ( (LA12_54=='s') ) {
-                                    int LA12_59 = input.LA(8);
-
-                                    if ( ((LA12_59>='0' && LA12_59<='9')||(LA12_59>='A' && LA12_59<='Z')||LA12_59=='_'||(LA12_59>='a' && LA12_59<='z')) ) {
-                                        alt12=11;
-                                    }
-                                    else {
-                                        alt12=4;}
+                                if ( ((LA12_54>='0' && LA12_54<='9')||(LA12_54>='A' && LA12_54<='Z')||LA12_54=='_'||(LA12_54>='a' && LA12_54<='z')) ) {
+                                    alt12=11;
                                 }
                                 else {
-                                    alt12=11;}
+                                    alt12=3;}
                             }
                             else {
                                 alt12=11;}

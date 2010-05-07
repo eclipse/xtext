@@ -26,7 +26,7 @@ import org.eclipse.xtext.gmf.glue.Activator;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
+import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.resource.XtextResource;
 
 /**
@@ -108,7 +108,7 @@ public class XtextNodeModelReconciler extends AdapterImpl implements Transaction
 					XtextResource xtextResource = (XtextResource) modificationRoot.eResource();
 					NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(modificationRoot);
 					CompositeNode parserNode = nodeAdapter.getParserNode();
-					SerializerUtil serializer = xtextResource.getSerializer();
+					Serializer serializer = xtextResource.getSerializer();
 					String newText = serializer.serialize(modificationRoot);
 					ICommand newCommand = UpdateXtextResourceTextCommand.createUpdateCommand(xtextResource, parserNode
 							.getOffset(), parserNode.getLength(), newText);

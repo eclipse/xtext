@@ -139,8 +139,8 @@ public class EntitiesCreationWizard extends Wizard implements INewWizard {
 			protected void execute(IProgressMonitor monitor)
 					throws CoreException, InterruptedException {
 				diagram = EntitiesDiagramEditorUtil.createDiagram(
-						diagramModelFilePage.getURI(), domainModelFilePage
-								.getURI(), monitor);
+						diagramModelFilePage.getURI(),
+						domainModelFilePage.getURI(), monitor);
 				if (isOpenNewlyCreatedDiagramEditor() && diagram != null) {
 					try {
 						EntitiesDiagramEditorUtil.openDiagram(diagram);

@@ -98,6 +98,7 @@ public class EntitiesDiagramEditor extends DiagramDocumentEditor implements
 	/**
 	 * @generated
 	 */
+	@SuppressWarnings("rawtypes")
 	public Object getAdapter(Class type) {
 		if (type == IShowInTargetList.class) {
 			return new IShowInTargetList() {
@@ -175,8 +176,7 @@ public class EntitiesDiagramEditor extends DiagramDocumentEditor implements
 		IEditorInput input = getEditorInput();
 		SaveAsDialog dialog = new SaveAsDialog(shell);
 		IFile original = input instanceof IFileEditorInput ? ((IFileEditorInput) input)
-				.getFile()
-				: null;
+				.getFile() : null;
 		if (original != null) {
 			dialog.setOriginalFile(original);
 		}
@@ -188,8 +188,8 @@ public class EntitiesDiagramEditor extends DiagramDocumentEditor implements
 		}
 		if (provider.isDeleted(input) && original != null) {
 			String message = NLS.bind(
-					Messages.EntitiesDiagramEditor_SavingDeletedFile, original
-							.getName());
+					Messages.EntitiesDiagramEditor_SavingDeletedFile,
+					original.getName());
 			dialog.setErrorMessage(null);
 			dialog.setMessage(message, IMessageProvider.WARNING);
 		}
@@ -235,8 +235,8 @@ public class EntitiesDiagramEditor extends DiagramDocumentEditor implements
 			if (status == null || status.getSeverity() != IStatus.CANCEL) {
 				ErrorDialog.openError(shell,
 						Messages.EntitiesDiagramEditor_SaveErrorTitle,
-						Messages.EntitiesDiagramEditor_SaveErrorMessage, x
-								.getStatus());
+						Messages.EntitiesDiagramEditor_SaveErrorMessage,
+						x.getStatus());
 			}
 		} finally {
 			provider.changed(newInput);
