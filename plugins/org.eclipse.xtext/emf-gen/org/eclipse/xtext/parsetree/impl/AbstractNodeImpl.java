@@ -383,7 +383,7 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 	 * @generated
 	 */
 	public String serialize() {
-		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.serialize((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.serialize((LeafNodeImpl) this);} else {return ParsetreeUtil.serialize((AbstractNodeImpl) this);}
+		return ParsetreeUtil.serialize(this);
 	}
 
 	/**
@@ -392,7 +392,7 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 	 * @generated
 	 */
 	public EList<LeafNode> getLeafNodes() {
-		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.getLeafNodes((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.getLeafNodes((LeafNodeImpl) this);} else {return ParsetreeUtil.getLeafNodes((AbstractNodeImpl) this);}
+		return ParsetreeUtil.getLeafNodes(this);
 	}
 
 	/**
@@ -401,7 +401,7 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 	 * @generated
 	 */
 	public EList<LeafNode> getLeafNodes(AbstractNode to) {
-		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.getLeafNodes((CompositeNodeImpl) this, to);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.getLeafNodes((LeafNodeImpl) this, to);} else {return ParsetreeUtil.getLeafNodes((AbstractNodeImpl) this, to);}
+		return ParsetreeUtil.getLeafNodes(this, to);
 	}
 
 	/**
@@ -410,7 +410,7 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 	 * @generated
 	 */
 	public EList<SyntaxError> allSyntaxErrors() {
-		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.allSyntaxErrors((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.allSyntaxErrors((LeafNodeImpl) this);} else {return ParsetreeUtil.allSyntaxErrors((AbstractNodeImpl) this);}
+		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.allSyntaxErrors((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.allSyntaxErrors((LeafNodeImpl) this);} else {return ParsetreeUtil.allSyntaxErrors(this);}
 	}
 
 	/**
@@ -419,7 +419,7 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 	 * @generated
 	 */
 	public int totalEndLine() {
-		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.totalEndLine((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.totalEndLine((LeafNodeImpl) this);} else {return ParsetreeUtil.totalEndLine((AbstractNodeImpl) this);}
+		return ParsetreeUtil.totalEndLine(this);
 	}
 
 	/**
