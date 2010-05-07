@@ -122,6 +122,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://xtext.org/testlanguages/bug311337" 
+       class = "org.eclipse.xtext.linking.lazy.bug311337.Bug311337Package"
+       genModel = "org/eclipse/xtext/linking/lazy/Bug311337TestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/2008/xtext/DummyLang" 
        class = "org.eclipse.xtext.dummy.dummyLang.DummyLangPackage"
        genModel = "org/eclipse/xtext/dummy/DummyTestLanguage.genmodel" /> 
