@@ -3,23 +3,19 @@
 */
 package org.eclipse.xtext.example.gmf.ui.labeling;
 
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+
+import com.google.inject.Inject;
 
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
 public class EntitiesLabelProvider extends DefaultEObjectLabelProvider {
-/*
-	
-	//Labels and icons can be computed like this:
-	
-	String text(MyModel ele) {
-	  return "my "+ele.getName();
+
+	@Inject
+	public EntitiesLabelProvider(AdapterFactoryLabelProvider labelProvider) {
+		super(labelProvider);
 	}
-	 
-    String image(MyModel ele) {
-      return "MyModel.gif";
-    }
-	 
-*/
+	
 }

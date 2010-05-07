@@ -3,7 +3,12 @@
 */
 package org.eclipse.xtext.example.gmf.ui.labeling;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
+
+import com.google.inject.Inject;
 
 /**
  * Provides labels for a IEObjectDescriptions and IResourceDescriptions.
@@ -11,17 +16,22 @@ import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
 public class EntitiesDescriptionLabelProvider extends DefaultDescriptionLabelProvider {
-/*
 	
-	//Labels and icons can be computed like this:
-	
-	String text(IEObjectDescription ele) {
-	  return "my "+ele.getName();
+	private AdapterFactoryLabelProvider adapterFactoryLabelProvider;
+
+	@Inject
+	public EntitiesDescriptionLabelProvider(AdapterFactoryLabelProvider adapterFactoryLabelProvider) {
+		this.adapterFactoryLabelProvider = adapterFactoryLabelProvider; 
 	}
-	 
-    String image(IEObjectDescription ele) {
-      return ele.getEClass().getName() + ".gif";
-    }
-	 
-*/
+	
+	
+	@Override
+	protected Object doGetImage(Object element) {
+		if(element instanceof IEObjectDescription) {
+			EObject eObjectOrProxy = ((IEObjectDescription) element).getEObjectOrProxy();
+			return adapterFactoryLabelProvider.getImage(eObjectOrProxy);
+		}
+		return super.doGetImage(element);
+	}
+	
 }
