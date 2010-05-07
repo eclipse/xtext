@@ -112,6 +112,10 @@ Workflow {
 			}
 		}
 		language = { 
+			uri = "classpath:/org/eclipse/xtext/linking/lazy/Bug311337TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
 			uri = "classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
