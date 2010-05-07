@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.testlanguages.PartialParserTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractPartialParserTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

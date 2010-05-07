@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess.ErwachsenerElements;
 
+@SuppressWarnings("all")
 public final class ReferenceGrammarTestLanguageErwachsenerConsumer extends NonTerminalConsumer {
 
 	private ErwachsenerElements rule;	

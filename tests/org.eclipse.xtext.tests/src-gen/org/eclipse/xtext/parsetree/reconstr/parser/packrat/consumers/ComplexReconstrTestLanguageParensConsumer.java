@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess.ParensElements;
 
+@SuppressWarnings("all")
 public final class ComplexReconstrTestLanguageParensConsumer extends NonTerminalConsumer {
 
 	private ParensElements rule;	

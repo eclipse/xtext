@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammarAccess.NamedElements;
 
+@SuppressWarnings("all")
 public final class PartialParserTestLanguageNamedConsumer extends NonTerminalConsumer {
 
 	private NamedElements rule;	

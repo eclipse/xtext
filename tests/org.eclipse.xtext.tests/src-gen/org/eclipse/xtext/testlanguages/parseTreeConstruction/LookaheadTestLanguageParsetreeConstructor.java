@@ -12,6 +12,7 @@ import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAcce
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class LookaheadTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

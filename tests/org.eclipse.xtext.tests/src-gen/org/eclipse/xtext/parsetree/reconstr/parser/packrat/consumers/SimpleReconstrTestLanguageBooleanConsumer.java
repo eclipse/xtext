@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.BooleanElements;
 
+@SuppressWarnings("all")
 public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminalConsumer {
 
 	private BooleanElements rule;	

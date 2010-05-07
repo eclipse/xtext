@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.ConcreteMultiElements;
 
+@SuppressWarnings("all")
 public final class SimpleReconstrTestLanguageConcreteMultiConsumer extends NonTerminalConsumer {
 
 	private ConcreteMultiElements rule;	

@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.xbase.XtypeRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractXtypeRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

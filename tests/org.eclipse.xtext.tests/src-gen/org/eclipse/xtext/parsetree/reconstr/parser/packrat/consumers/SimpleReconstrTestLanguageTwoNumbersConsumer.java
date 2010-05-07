@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.TwoNumbersElements;
 
+@SuppressWarnings("all")
 public final class SimpleReconstrTestLanguageTwoNumbersConsumer extends NonTerminalConsumer {
 
 	private TwoNumbersElements rule;	

@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SerializationErrorTestLanguageGrammarAccess.TwoRequiredElements;
 
+@SuppressWarnings("all")
 public final class SerializationErrorTestLanguageTwoRequiredConsumer extends NonTerminalConsumer {
 
 	private TwoRequiredElements rule;	

@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.TreeTestLanguageGrammarAccess.NodeElements;
 
+@SuppressWarnings("all")
 public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 
 	private NodeElements rule;	

@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractQuickfixCrossrefTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

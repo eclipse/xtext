@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess.SpielzeugElements;
 
+@SuppressWarnings("all")
 public final class ReferenceGrammarTestLanguageSpielzeugConsumer extends NonTerminalConsumer {
 
 	private SpielzeugElements rule;	

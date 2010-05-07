@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.resource.EObjectAtOffsetTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractEObjectAtOffsetTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

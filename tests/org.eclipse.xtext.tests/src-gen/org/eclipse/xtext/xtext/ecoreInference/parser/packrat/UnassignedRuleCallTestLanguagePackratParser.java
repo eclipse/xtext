@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import org.eclipse.xtext.xtext.ecoreInference.services.UnassignedRuleCallTestLanguageGrammarAccess;
 
+@SuppressWarnings("all")
 public class UnassignedRuleCallTestLanguagePackratParser extends AbstractPackratParser {
 	
 	@Inject

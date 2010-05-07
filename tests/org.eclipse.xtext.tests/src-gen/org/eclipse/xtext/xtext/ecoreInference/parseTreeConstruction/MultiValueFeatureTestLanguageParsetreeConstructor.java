@@ -12,6 +12,7 @@ import org.eclipse.xtext.xtext.ecoreInference.services.MultiValueFeatureTestLang
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class MultiValueFeatureTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

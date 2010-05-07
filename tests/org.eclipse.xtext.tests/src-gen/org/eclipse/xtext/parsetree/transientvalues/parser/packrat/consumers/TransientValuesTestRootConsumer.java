@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess.RootElements;
 
+@SuppressWarnings("all")
 public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 
 	private RootElements rule;	

@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.Bug302128TestLanguageGrammarAccess.VariableElements;
 
+@SuppressWarnings("all")
 public final class Bug302128TestLanguageVariableConsumer extends NonTerminalConsumer {
 
 	private VariableElements rule;	

@@ -12,6 +12,7 @@ import org.eclipse.xtext.xtext.ui.ecore2xtext.services.Ecore2XtextTestGrammarAcc
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class Ecore2XtextTestParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

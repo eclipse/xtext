@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess.FarbeElements;
 
+@SuppressWarnings("all")
 public final class ReferenceGrammarTestLanguageFarbeConsumer extends NonTerminalConsumer {
 
 	private FarbeElements rule;	

@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractUnorderedGroupsTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

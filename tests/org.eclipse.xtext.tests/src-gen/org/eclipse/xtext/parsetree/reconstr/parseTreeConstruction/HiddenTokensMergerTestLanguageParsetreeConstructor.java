@@ -12,6 +12,7 @@ import org.eclipse.xtext.parsetree.reconstr.services.HiddenTokensMergerTestLangu
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class HiddenTokensMergerTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

@@ -12,6 +12,7 @@ import org.eclipse.xtext.ui.tests.testlanguages.services.ContentAssistTestLangua
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class ContentAssistTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

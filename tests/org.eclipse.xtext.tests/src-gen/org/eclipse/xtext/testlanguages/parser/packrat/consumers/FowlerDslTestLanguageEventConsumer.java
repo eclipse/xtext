@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAccess.EventElements;
 
+@SuppressWarnings("all")
 public final class FowlerDslTestLanguageEventConsumer extends NonTerminalConsumer {
 
 	private EventElements rule;	

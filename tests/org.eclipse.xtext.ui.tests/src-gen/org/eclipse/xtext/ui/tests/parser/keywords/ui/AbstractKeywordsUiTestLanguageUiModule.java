@@ -10,6 +10,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.parser.keywords.ui.KeywordsUiTestLanguageUiModule}
  */
+@SuppressWarnings("all")
 public abstract class AbstractKeywordsUiTestLanguageUiModule extends DefaultUiModule {
 	
 	public AbstractKeywordsUiTestLanguageUiModule(AbstractUIPlugin plugin) {

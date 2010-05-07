@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parsetree.reconstr.services.HiddenTokensMergerTestLanguageGrammarAccess.ValueListElements;
 
+@SuppressWarnings("all")
 public final class HiddenTokensMergerTestLanguageValueListConsumer extends NonTerminalConsumer {
 
 	private ValueListElements rule;	

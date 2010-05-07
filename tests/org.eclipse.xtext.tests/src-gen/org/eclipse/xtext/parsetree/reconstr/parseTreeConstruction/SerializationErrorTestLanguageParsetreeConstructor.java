@@ -12,6 +12,7 @@ import org.eclipse.xtext.parsetree.reconstr.services.SerializationErrorTestLangu
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class SerializationErrorTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

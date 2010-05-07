@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parsetree.reconstr.services.HiddenTokensMergerTestLanguageGrammarAccess.DatatypeBug286557Elements;
 
+@SuppressWarnings("all")
 public final class HiddenTokensMergerTestLanguageDatatypeBug286557Consumer extends NonTerminalConsumer {
 
 	private DatatypeBug286557Elements rule;	

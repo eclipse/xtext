@@ -16,6 +16,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parsetree.reconstr.services.PartialSerializationTestLanguageGrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class PartialSerializationTestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

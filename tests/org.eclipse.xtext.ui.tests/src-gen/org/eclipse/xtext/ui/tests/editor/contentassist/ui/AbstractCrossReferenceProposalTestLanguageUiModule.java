@@ -10,6 +10,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.editor.contentassist.ui.CrossReferenceProposalTestLanguageUiModule}
  */
+@SuppressWarnings("all")
 public abstract class AbstractCrossReferenceProposalTestLanguageUiModule extends DefaultUiModule {
 	
 	public AbstractCrossReferenceProposalTestLanguageUiModule(AbstractUIPlugin plugin) {

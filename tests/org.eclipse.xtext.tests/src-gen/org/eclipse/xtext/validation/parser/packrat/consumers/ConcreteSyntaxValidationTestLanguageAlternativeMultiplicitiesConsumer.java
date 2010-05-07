@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess.AlternativeMultiplicitiesElements;
 
+@SuppressWarnings("all")
 public final class ConcreteSyntaxValidationTestLanguageAlternativeMultiplicitiesConsumer extends NonTerminalConsumer {
 
 	private AlternativeMultiplicitiesElements rule;	

@@ -12,6 +12,7 @@ import org.eclipse.xtext.xbase.services.XtypeGrammarAccess;
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class XtypeParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
@@ -46,11 +47,10 @@ protected class ThisRootNode extends RootToken {
  *
  * XTypeRef:
  *   XSimpleTypeRef|XFunctionTypeRef;
- *   XSimpleTypeRef|XFunctionTypeRef;
  *
  **/
 
-// XSimpleTypeRef|XFunctionTypeRefXSimpleTypeRef|XFunctionTypeRef
+// XSimpleTypeRef|XFunctionTypeRef
 protected class XTypeRef_Alternatives extends AlternativesToken {
 
 	public XTypeRef_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -81,7 +81,7 @@ protected class XTypeRef_Alternatives extends AlternativesToken {
 
 }
 
-// XSimpleTypeRefXSimpleTypeRef
+// XSimpleTypeRef
 protected class XTypeRef_XSimpleTypeRefParserRuleCall_0 extends RuleCallToken {
 	
 	public XTypeRef_XSimpleTypeRefParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -117,7 +117,7 @@ protected class XTypeRef_XSimpleTypeRefParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// XFunctionTypeRefXFunctionTypeRef
+// XFunctionTypeRef
 protected class XTypeRef_XFunctionTypeRefParserRuleCall_1 extends RuleCallToken {
 	
 	public XTypeRef_XFunctionTypeRefParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -160,15 +160,13 @@ protected class XTypeRef_XFunctionTypeRefParserRuleCall_1 extends RuleCallToken 
 /************ begin Rule XFunctionTypeRef ****************
  *
  * XFunctionTypeRef:
- *   ("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")? "=>" returnType=
- *   XTypeRef;
- *   XTypeRef;
+ *   ("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")? "=>"
+ *   returnType=XTypeRef;
  *
  **/
 
-// ("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")? "=>" returnType=
-// XTypeRef
-// XTypeRef
+// ("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")? "=>"
+// returnType=XTypeRef
 protected class XFunctionTypeRef_Group extends GroupToken {
 	
 	public XFunctionTypeRef_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -197,7 +195,7 @@ protected class XFunctionTypeRef_Group extends GroupToken {
 
 }
 
-// ("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")?("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")?
+// ("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")?
 protected class XFunctionTypeRef_Group_0 extends GroupToken {
 	
 	public XFunctionTypeRef_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -219,7 +217,7 @@ protected class XFunctionTypeRef_Group_0 extends GroupToken {
 
 }
 
-// "(""("
+// "("
 protected class XFunctionTypeRef_LeftParenthesisKeyword_0_0 extends KeywordToken  {
 	
 	public XFunctionTypeRef_LeftParenthesisKeyword_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -240,7 +238,7 @@ protected class XFunctionTypeRef_LeftParenthesisKeyword_0_0 extends KeywordToken
 
 }
 
-// paramTypes+=XTypeRefparamTypes+=XTypeRef
+// paramTypes+=XTypeRef
 protected class XFunctionTypeRef_ParamTypesAssignment_0_1 extends AssignmentToken  {
 	
 	public XFunctionTypeRef_ParamTypesAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -286,7 +284,7 @@ protected class XFunctionTypeRef_ParamTypesAssignment_0_1 extends AssignmentToke
 	}	
 }
 
-// ("," paramTypes+=XTypeRef)*("," paramTypes+=XTypeRef)*
+// ("," paramTypes+=XTypeRef)*
 protected class XFunctionTypeRef_Group_0_2 extends GroupToken {
 	
 	public XFunctionTypeRef_Group_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -308,7 +306,7 @@ protected class XFunctionTypeRef_Group_0_2 extends GroupToken {
 
 }
 
-// ","","
+// ","
 protected class XFunctionTypeRef_CommaKeyword_0_2_0 extends KeywordToken  {
 	
 	public XFunctionTypeRef_CommaKeyword_0_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -331,7 +329,7 @@ protected class XFunctionTypeRef_CommaKeyword_0_2_0 extends KeywordToken  {
 
 }
 
-// paramTypes+=XTypeRefparamTypes+=XTypeRef
+// paramTypes+=XTypeRef
 protected class XFunctionTypeRef_ParamTypesAssignment_0_2_1 extends AssignmentToken  {
 	
 	public XFunctionTypeRef_ParamTypesAssignment_0_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -378,7 +376,7 @@ protected class XFunctionTypeRef_ParamTypesAssignment_0_2_1 extends AssignmentTo
 }
 
 
-// ")"")"
+// ")"
 protected class XFunctionTypeRef_RightParenthesisKeyword_0_3 extends KeywordToken  {
 	
 	public XFunctionTypeRef_RightParenthesisKeyword_0_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -402,7 +400,7 @@ protected class XFunctionTypeRef_RightParenthesisKeyword_0_3 extends KeywordToke
 }
 
 
-// "=>""=>"
+// "=>"
 protected class XFunctionTypeRef_EqualsSignGreaterThanSignKeyword_1 extends KeywordToken  {
 	
 	public XFunctionTypeRef_EqualsSignGreaterThanSignKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -424,7 +422,7 @@ protected class XFunctionTypeRef_EqualsSignGreaterThanSignKeyword_1 extends Keyw
 
 }
 
-// returnType=XTypeRefreturnType=XTypeRef
+// returnType=XTypeRef
 protected class XFunctionTypeRef_ReturnTypeAssignment_2 extends AssignmentToken  {
 	
 	public XFunctionTypeRef_ReturnTypeAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -479,13 +477,11 @@ protected class XFunctionTypeRef_ReturnTypeAssignment_2 extends AssignmentToken 
  * XSimpleTypeRef:
  *   type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam (","
  *   typeParams+=XTypeParam)* ">")?;
- *   typeParams+=XTypeParam)* ">")?;
  *
  **/
 
-// type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams
-// +=XTypeParam)* ">")?
-// +=XTypeParam)* ">")?
+// type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam (","
+// typeParams+=XTypeParam)* ">")?
 protected class XSimpleTypeRef_Group extends GroupToken {
 	
 	public XSimpleTypeRef_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -515,7 +511,7 @@ protected class XSimpleTypeRef_Group extends GroupToken {
 
 }
 
-// type=[types::JvmType|QualifiedName]type=[types::JvmType|QualifiedName]
+// type=[types::JvmType|QualifiedName]
 protected class XSimpleTypeRef_TypeAssignment_0 extends AssignmentToken  {
 	
 	public XSimpleTypeRef_TypeAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -551,7 +547,7 @@ protected class XSimpleTypeRef_TypeAssignment_0 extends AssignmentToken  {
 
 }
 
-// ("<" typeParams+=XTypeParam ("," typeParams+=XTypeParam)* ">")?("<" typeParams+=XTypeParam ("," typeParams+=XTypeParam)* ">")?
+// ("<" typeParams+=XTypeParam ("," typeParams+=XTypeParam)* ">")?
 protected class XSimpleTypeRef_Group_1 extends GroupToken {
 	
 	public XSimpleTypeRef_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -573,7 +569,7 @@ protected class XSimpleTypeRef_Group_1 extends GroupToken {
 
 }
 
-// "<""<"
+// "<"
 protected class XSimpleTypeRef_LessThanSignKeyword_1_0 extends KeywordToken  {
 	
 	public XSimpleTypeRef_LessThanSignKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -595,7 +591,7 @@ protected class XSimpleTypeRef_LessThanSignKeyword_1_0 extends KeywordToken  {
 
 }
 
-// typeParams+=XTypeParamtypeParams+=XTypeParam
+// typeParams+=XTypeParam
 protected class XSimpleTypeRef_TypeParamsAssignment_1_1 extends AssignmentToken  {
 	
 	public XSimpleTypeRef_TypeParamsAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -641,7 +637,7 @@ protected class XSimpleTypeRef_TypeParamsAssignment_1_1 extends AssignmentToken 
 	}	
 }
 
-// ("," typeParams+=XTypeParam)*("," typeParams+=XTypeParam)*
+// ("," typeParams+=XTypeParam)*
 protected class XSimpleTypeRef_Group_1_2 extends GroupToken {
 	
 	public XSimpleTypeRef_Group_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -663,7 +659,7 @@ protected class XSimpleTypeRef_Group_1_2 extends GroupToken {
 
 }
 
-// ","","
+// ","
 protected class XSimpleTypeRef_CommaKeyword_1_2_0 extends KeywordToken  {
 	
 	public XSimpleTypeRef_CommaKeyword_1_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -686,7 +682,7 @@ protected class XSimpleTypeRef_CommaKeyword_1_2_0 extends KeywordToken  {
 
 }
 
-// typeParams+=XTypeParamtypeParams+=XTypeParam
+// typeParams+=XTypeParam
 protected class XSimpleTypeRef_TypeParamsAssignment_1_2_1 extends AssignmentToken  {
 	
 	public XSimpleTypeRef_TypeParamsAssignment_1_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -733,7 +729,7 @@ protected class XSimpleTypeRef_TypeParamsAssignment_1_2_1 extends AssignmentToke
 }
 
 
-// ">"">"
+// ">"
 protected class XSimpleTypeRef_GreaterThanSignKeyword_1_3 extends KeywordToken  {
 	
 	public XSimpleTypeRef_GreaterThanSignKeyword_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -765,11 +761,10 @@ protected class XSimpleTypeRef_GreaterThanSignKeyword_1_3 extends KeywordToken  
  *
  * XTypeParam returns XTypeRef:
  *   XTypeRef|XWildcardParam;
- *   XTypeRef|XWildcardParam;
  *
  **/
 
-// XTypeRef|XWildcardParamXTypeRef|XWildcardParam
+// XTypeRef|XWildcardParam
 protected class XTypeParam_Alternatives extends AlternativesToken {
 
 	public XTypeParam_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -801,7 +796,7 @@ protected class XTypeParam_Alternatives extends AlternativesToken {
 
 }
 
-// XTypeRefXTypeRef
+// XTypeRef
 protected class XTypeParam_XTypeRefParserRuleCall_0 extends RuleCallToken {
 	
 	public XTypeParam_XTypeRefParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -838,7 +833,7 @@ protected class XTypeParam_XTypeRefParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// XWildcardParamXWildcardParam
+// XWildcardParam
 protected class XTypeParam_XWildcardParamParserRuleCall_1 extends RuleCallToken {
 	
 	public XTypeParam_XWildcardParamParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -882,11 +877,10 @@ protected class XTypeParam_XWildcardParamParserRuleCall_1 extends RuleCallToken 
  *
  * XWildcardParam returns XTypeRef:
  *   {XWildcardParam} "?" ("extends" extends=XTypeRef|"super" super=XTypeRef)?;
- *   {XWildcardParam} "?" ("extends" extends=XTypeRef|"super" super=XTypeRef)?;
  *
  **/
 
-// {XWildcardParam} "?" ("extends" extends=XTypeRef|"super" super=XTypeRef)?{XWildcardParam} "?" ("extends" extends=XTypeRef|"super" super=XTypeRef)?
+// {XWildcardParam} "?" ("extends" extends=XTypeRef|"super" super=XTypeRef)?
 protected class XWildcardParam_Group extends GroupToken {
 	
 	public XWildcardParam_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -916,7 +910,7 @@ protected class XWildcardParam_Group extends GroupToken {
 
 }
 
-// {XWildcardParam}{XWildcardParam}
+// {XWildcardParam}
 protected class XWildcardParam_XWildcardParamAction_0 extends ActionToken  {
 
 	public XWildcardParam_XWildcardParamAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -942,7 +936,7 @@ protected class XWildcardParam_XWildcardParamAction_0 extends ActionToken  {
 	}
 }
 
-// "?""?"
+// "?"
 protected class XWildcardParam_QuestionMarkKeyword_1 extends KeywordToken  {
 	
 	public XWildcardParam_QuestionMarkKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -964,7 +958,7 @@ protected class XWildcardParam_QuestionMarkKeyword_1 extends KeywordToken  {
 
 }
 
-// ("extends" extends=XTypeRef|"super" super=XTypeRef)?("extends" extends=XTypeRef|"super" super=XTypeRef)?
+// ("extends" extends=XTypeRef|"super" super=XTypeRef)?
 protected class XWildcardParam_Alternatives_2 extends AlternativesToken {
 
 	public XWildcardParam_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -987,7 +981,7 @@ protected class XWildcardParam_Alternatives_2 extends AlternativesToken {
 
 }
 
-// "extends" extends=XTypeRef"extends" extends=XTypeRef
+// "extends" extends=XTypeRef
 protected class XWildcardParam_Group_2_0 extends GroupToken {
 	
 	public XWildcardParam_Group_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1009,7 +1003,7 @@ protected class XWildcardParam_Group_2_0 extends GroupToken {
 
 }
 
-// "extends""extends"
+// "extends"
 protected class XWildcardParam_ExtendsKeyword_2_0_0 extends KeywordToken  {
 	
 	public XWildcardParam_ExtendsKeyword_2_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1031,7 +1025,7 @@ protected class XWildcardParam_ExtendsKeyword_2_0_0 extends KeywordToken  {
 
 }
 
-// extends=XTypeRefextends=XTypeRef
+// extends=XTypeRef
 protected class XWildcardParam_ExtendsAssignment_2_0_1 extends AssignmentToken  {
 	
 	public XWildcardParam_ExtendsAssignment_2_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1078,7 +1072,7 @@ protected class XWildcardParam_ExtendsAssignment_2_0_1 extends AssignmentToken  
 }
 
 
-// "super" super=XTypeRef"super" super=XTypeRef
+// "super" super=XTypeRef
 protected class XWildcardParam_Group_2_1 extends GroupToken {
 	
 	public XWildcardParam_Group_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1100,7 +1094,7 @@ protected class XWildcardParam_Group_2_1 extends GroupToken {
 
 }
 
-// "super""super"
+// "super"
 protected class XWildcardParam_SuperKeyword_2_1_0 extends KeywordToken  {
 	
 	public XWildcardParam_SuperKeyword_2_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1122,7 +1116,7 @@ protected class XWildcardParam_SuperKeyword_2_1_0 extends KeywordToken  {
 
 }
 
-// super=XTypeRefsuper=XTypeRef
+// super=XTypeRef
 protected class XWildcardParam_SuperAssignment_2_1_1 extends AssignmentToken  {
 	
 	public XWildcardParam_SuperAssignment_2_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1177,15 +1171,13 @@ protected class XWildcardParam_SuperAssignment_2_1_1 extends AssignmentToken  {
 /************ begin Rule XTypeParamDeclaration ****************
  *
  * XTypeParamDeclaration:
- *   name=ID ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super" super=
- *   XTypeRef)?;
- *   XTypeRef)?;
+ *   name=ID ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super"
+ *   super=XTypeRef)?;
  *
  **/
 
-// name=ID ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super" super=
-// XTypeRef)?
-// XTypeRef)?
+// name=ID ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super"
+// super=XTypeRef)?
 protected class XTypeParamDeclaration_Group extends GroupToken {
 	
 	public XTypeParamDeclaration_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1215,7 +1207,7 @@ protected class XTypeParamDeclaration_Group extends GroupToken {
 
 }
 
-// name=IDname=ID
+// name=ID
 protected class XTypeParamDeclaration_NameAssignment_0 extends AssignmentToken  {
 	
 	public XTypeParamDeclaration_NameAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1248,7 +1240,7 @@ protected class XTypeParamDeclaration_NameAssignment_0 extends AssignmentToken  
 
 }
 
-// ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super" super=XTypeRef)?("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super" super=XTypeRef)?
+// ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super" super=XTypeRef)?
 protected class XTypeParamDeclaration_Alternatives_1 extends AlternativesToken {
 
 	public XTypeParamDeclaration_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1271,7 +1263,7 @@ protected class XTypeParamDeclaration_Alternatives_1 extends AlternativesToken {
 
 }
 
-// "extends" extends+=XTypeRef ("&" extends+=XTypeRef)*"extends" extends+=XTypeRef ("&" extends+=XTypeRef)*
+// "extends" extends+=XTypeRef ("&" extends+=XTypeRef)*
 protected class XTypeParamDeclaration_Group_1_0 extends GroupToken {
 	
 	public XTypeParamDeclaration_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1294,7 +1286,7 @@ protected class XTypeParamDeclaration_Group_1_0 extends GroupToken {
 
 }
 
-// "extends""extends"
+// "extends"
 protected class XTypeParamDeclaration_ExtendsKeyword_1_0_0 extends KeywordToken  {
 	
 	public XTypeParamDeclaration_ExtendsKeyword_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1316,7 +1308,7 @@ protected class XTypeParamDeclaration_ExtendsKeyword_1_0_0 extends KeywordToken 
 
 }
 
-// extends+=XTypeRefextends+=XTypeRef
+// extends+=XTypeRef
 protected class XTypeParamDeclaration_ExtendsAssignment_1_0_1 extends AssignmentToken  {
 	
 	public XTypeParamDeclaration_ExtendsAssignment_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1362,7 +1354,7 @@ protected class XTypeParamDeclaration_ExtendsAssignment_1_0_1 extends Assignment
 	}	
 }
 
-// ("&" extends+=XTypeRef)*("&" extends+=XTypeRef)*
+// ("&" extends+=XTypeRef)*
 protected class XTypeParamDeclaration_Group_1_0_2 extends GroupToken {
 	
 	public XTypeParamDeclaration_Group_1_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1384,7 +1376,7 @@ protected class XTypeParamDeclaration_Group_1_0_2 extends GroupToken {
 
 }
 
-// "&""&"
+// "&"
 protected class XTypeParamDeclaration_AmpersandKeyword_1_0_2_0 extends KeywordToken  {
 	
 	public XTypeParamDeclaration_AmpersandKeyword_1_0_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1407,7 +1399,7 @@ protected class XTypeParamDeclaration_AmpersandKeyword_1_0_2_0 extends KeywordTo
 
 }
 
-// extends+=XTypeRefextends+=XTypeRef
+// extends+=XTypeRef
 protected class XTypeParamDeclaration_ExtendsAssignment_1_0_2_1 extends AssignmentToken  {
 	
 	public XTypeParamDeclaration_ExtendsAssignment_1_0_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1455,7 +1447,7 @@ protected class XTypeParamDeclaration_ExtendsAssignment_1_0_2_1 extends Assignme
 
 
 
-// "super" super=XTypeRef"super" super=XTypeRef
+// "super" super=XTypeRef
 protected class XTypeParamDeclaration_Group_1_1 extends GroupToken {
 	
 	public XTypeParamDeclaration_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1477,7 +1469,7 @@ protected class XTypeParamDeclaration_Group_1_1 extends GroupToken {
 
 }
 
-// "super""super"
+// "super"
 protected class XTypeParamDeclaration_SuperKeyword_1_1_0 extends KeywordToken  {
 	
 	public XTypeParamDeclaration_SuperKeyword_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1499,7 +1491,7 @@ protected class XTypeParamDeclaration_SuperKeyword_1_1_0 extends KeywordToken  {
 
 }
 
-// super=XTypeRefsuper=XTypeRef
+// super=XTypeRef
 protected class XTypeParamDeclaration_SuperAssignment_1_1_1 extends AssignmentToken  {
 	
 	public XTypeParamDeclaration_SuperAssignment_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

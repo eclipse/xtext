@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess.NestedDatatypeElements;
 
+@SuppressWarnings("all")
 public final class Bug250313NestedDatatypeConsumer extends NonTerminalConsumer {
 
 	private NestedDatatypeElements rule;	

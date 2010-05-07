@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.SpareElements;
 
+@SuppressWarnings("all")
 public final class SimpleReconstrTestLanguageSpareConsumer extends NonTerminalConsumer {
 
 	private SpareElements rule;	

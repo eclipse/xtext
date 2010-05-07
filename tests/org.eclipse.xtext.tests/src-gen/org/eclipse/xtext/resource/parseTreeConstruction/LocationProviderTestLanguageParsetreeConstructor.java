@@ -12,6 +12,7 @@ import org.eclipse.xtext.resource.services.LocationProviderTestLanguageGrammarAc
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class LocationProviderTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

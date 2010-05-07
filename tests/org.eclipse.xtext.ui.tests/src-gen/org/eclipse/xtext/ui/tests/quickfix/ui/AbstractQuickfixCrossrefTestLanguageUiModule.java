@@ -10,6 +10,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.quickfix.ui.QuickfixCrossrefTestLanguageUiModule}
  */
+@SuppressWarnings("all")
 public abstract class AbstractQuickfixCrossrefTestLanguageUiModule extends DefaultUiModule {
 	
 	public AbstractQuickfixCrossrefTestLanguageUiModule(AbstractUIPlugin plugin) {

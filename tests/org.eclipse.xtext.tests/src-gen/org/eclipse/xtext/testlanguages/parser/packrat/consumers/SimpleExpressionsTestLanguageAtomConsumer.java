@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess.AtomElements;
 
+@SuppressWarnings("all")
 public final class SimpleExpressionsTestLanguageAtomConsumer extends NonTerminalConsumer {
 
 	private AtomElements rule;	

@@ -10,6 +10,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.editor.contentassist.ui.TwoContextsTestLanguageUiModule}
  */
+@SuppressWarnings("all")
 public abstract class AbstractTwoContextsTestLanguageUiModule extends DefaultUiModule {
 	
 	public AbstractTwoContextsTestLanguageUiModule(AbstractUIPlugin plugin) {

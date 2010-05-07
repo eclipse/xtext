@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess.TrickyFElements;
 
+@SuppressWarnings("all")
 public final class ComplexReconstrTestLanguageTrickyFConsumer extends NonTerminalConsumer {
 
 	private TrickyFElements rule;	

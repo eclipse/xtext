@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.TypeBug305577_1Elements;
 
+@SuppressWarnings("all")
 public final class SimpleReconstrTestLanguageTypeBug305577_1Consumer extends NonTerminalConsumer {
 
 	private TypeBug305577_1Elements rule;	

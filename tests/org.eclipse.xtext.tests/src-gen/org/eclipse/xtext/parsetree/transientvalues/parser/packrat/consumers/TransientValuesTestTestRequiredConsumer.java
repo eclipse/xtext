@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess.TestRequiredElements;
 
+@SuppressWarnings("all")
 public final class TransientValuesTestTestRequiredConsumer extends NonTerminalConsumer {
 
 	private TestRequiredElements rule;	

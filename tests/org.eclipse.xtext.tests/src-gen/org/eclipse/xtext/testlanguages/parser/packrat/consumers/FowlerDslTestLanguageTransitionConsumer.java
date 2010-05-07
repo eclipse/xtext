@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAccess.TransitionElements;
 
+@SuppressWarnings("all")
 public final class FowlerDslTestLanguageTransitionConsumer extends NonTerminalConsumer {
 
 	private TransitionElements rule;	

@@ -10,6 +10,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.editor.contentassist.ui.UnorderedGroupsTestLanguageUiModule}
  */
+@SuppressWarnings("all")
 public abstract class AbstractUnorderedGroupsTestLanguageUiModule extends DefaultUiModule {
 	
 	public AbstractUnorderedGroupsTestLanguageUiModule(AbstractUIPlugin plugin) {

@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.resource.services.LocationProviderTestLanguageGrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class LocationProviderTestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

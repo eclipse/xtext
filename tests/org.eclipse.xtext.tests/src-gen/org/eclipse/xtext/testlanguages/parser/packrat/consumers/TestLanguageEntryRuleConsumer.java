@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess.EntryRuleElements;
 
+@SuppressWarnings("all")
 public final class TestLanguageEntryRuleConsumer extends NonTerminalConsumer {
 
 	private EntryRuleElements rule;	

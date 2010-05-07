@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.testlanguages.LookaheadTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractLookaheadTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

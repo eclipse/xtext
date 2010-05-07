@@ -10,6 +10,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.ui.FoldingTestLanguageUiModule}
  */
+@SuppressWarnings("all")
 public abstract class AbstractFoldingTestLanguageUiModule extends DefaultUiModule {
 	
 	public AbstractFoldingTestLanguageUiModule(AbstractUIPlugin plugin) {

@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.xtext.ecoreInference.services.UnassignedRuleCallTestLanguageGrammarAccess.DataTypeRuleElements;
 
+@SuppressWarnings("all")
 public final class UnassignedRuleCallTestLanguageDataTypeRuleConsumer extends NonTerminalConsumer {
 
 	private DataTypeRuleElements rule;	

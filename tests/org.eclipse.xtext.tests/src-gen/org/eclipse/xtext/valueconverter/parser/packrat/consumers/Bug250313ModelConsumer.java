@@ -23,6 +23,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

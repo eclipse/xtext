@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractDomainModelTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

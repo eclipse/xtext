@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammarAccess.ContentElements;
 
+@SuppressWarnings("all")
 public final class PartialParserTestLanguageContentConsumer extends NonTerminalConsumer {
 
 	private ContentElements rule;	

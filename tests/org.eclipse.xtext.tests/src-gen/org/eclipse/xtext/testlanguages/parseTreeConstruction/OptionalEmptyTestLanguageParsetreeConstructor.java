@@ -12,6 +12,7 @@ import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammar
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class OptionalEmptyTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

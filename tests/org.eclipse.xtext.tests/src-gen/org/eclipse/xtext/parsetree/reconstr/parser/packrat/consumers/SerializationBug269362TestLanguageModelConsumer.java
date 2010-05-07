@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SerializationBug269362TestLanguageGrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class SerializationBug269362TestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess.Heuristic1Elements;
 
+@SuppressWarnings("all")
 public final class ConcreteSyntaxValidationTestLanguageHeuristic1Consumer extends NonTerminalConsumer {
 
 	private Heuristic1Elements rule;	

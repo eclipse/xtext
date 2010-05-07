@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.LexerTestLanguageGrammarAccess.ElementElements;
 
+@SuppressWarnings("all")
 public final class LexerTestLanguageElementConsumer extends NonTerminalConsumer {
 
 	private ElementElements rule;	

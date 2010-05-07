@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess.AtomElements;
 
+@SuppressWarnings("all")
 public final class ComplexReconstrTestLanguageAtomConsumer extends NonTerminalConsumer {
 
 	private AtomElements rule;	

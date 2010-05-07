@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parsetree.reconstr.services.HiddenTokensMergerTestLanguageGrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class HiddenTokensMergerTestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

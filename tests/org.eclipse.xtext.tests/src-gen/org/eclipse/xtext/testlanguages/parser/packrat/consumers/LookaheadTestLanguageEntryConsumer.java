@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess.EntryElements;
 
+@SuppressWarnings("all")
 public final class LookaheadTestLanguageEntryConsumer extends NonTerminalConsumer {
 
 	private EntryElements rule;	

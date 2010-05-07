@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAccess;
 
+@SuppressWarnings("all")
 public class FowlerDslTestLanguagePackratParser extends AbstractPackratParser {
 	
 	@Inject

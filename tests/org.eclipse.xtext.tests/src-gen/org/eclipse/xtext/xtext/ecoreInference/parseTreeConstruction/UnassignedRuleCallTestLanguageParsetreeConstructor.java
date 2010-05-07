@@ -12,6 +12,7 @@ import org.eclipse.xtext.xtext.ecoreInference.services.UnassignedRuleCallTestLan
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class UnassignedRuleCallTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

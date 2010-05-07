@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess.KindElements;
 
+@SuppressWarnings("all")
 public final class ReferenceGrammarTestLanguageKindConsumer extends NonTerminalConsumer {
 
 	private KindElements rule;	

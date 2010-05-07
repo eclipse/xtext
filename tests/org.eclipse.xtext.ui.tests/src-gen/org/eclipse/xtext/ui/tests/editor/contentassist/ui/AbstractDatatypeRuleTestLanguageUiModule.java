@@ -10,6 +10,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.editor.contentassist.ui.DatatypeRuleTestLanguageUiModule}
  */
+@SuppressWarnings("all")
 public abstract class AbstractDatatypeRuleTestLanguageUiModule extends DefaultUiModule {
 	
 	public AbstractDatatypeRuleTestLanguageUiModule(AbstractUIPlugin plugin) {

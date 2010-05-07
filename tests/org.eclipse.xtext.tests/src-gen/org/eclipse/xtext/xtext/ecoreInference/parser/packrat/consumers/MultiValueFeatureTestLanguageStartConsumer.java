@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.xtext.ecoreInference.services.MultiValueFeatureTestLanguageGrammarAccess.StartElements;
 
+@SuppressWarnings("all")
 public final class MultiValueFeatureTestLanguageStartConsumer extends NonTerminalConsumer {
 
 	private StartElements rule;	

@@ -10,6 +10,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.editor.contentassist.ui.LookAheadContentAssistTestLanguageUiModule}
  */
+@SuppressWarnings("all")
 public abstract class AbstractLookAheadContentAssistTestLanguageUiModule extends DefaultUiModule {
 	
 	public AbstractLookAheadContentAssistTestLanguageUiModule(AbstractUIPlugin plugin) {

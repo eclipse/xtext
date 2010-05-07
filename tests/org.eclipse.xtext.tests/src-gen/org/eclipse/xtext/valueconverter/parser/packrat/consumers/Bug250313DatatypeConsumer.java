@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess.DatatypeElements;
 
+@SuppressWarnings("all")
 public final class Bug250313DatatypeConsumer extends NonTerminalConsumer {
 
 	private DatatypeElements rule;	

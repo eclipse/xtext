@@ -22,6 +22,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess.StaticSimplificationElements;
 
+@SuppressWarnings("all")
 public final class ConcreteSyntaxValidationTestLanguageStaticSimplificationConsumer extends NonTerminalConsumer {
 
 	private StaticSimplificationElements rule;	

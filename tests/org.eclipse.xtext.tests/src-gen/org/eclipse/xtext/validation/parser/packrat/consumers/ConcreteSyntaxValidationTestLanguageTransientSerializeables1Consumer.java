@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess.TransientSerializeables1Elements;
 
+@SuppressWarnings("all")
 public final class ConcreteSyntaxValidationTestLanguageTransientSerializeables1Consumer extends NonTerminalConsumer {
 
 	private TransientSerializeables1Elements rule;	

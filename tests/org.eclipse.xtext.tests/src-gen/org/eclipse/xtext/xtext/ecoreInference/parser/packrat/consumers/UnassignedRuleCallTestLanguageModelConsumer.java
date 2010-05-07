@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.xtext.ecoreInference.services.UnassignedRuleCallTestLanguageGrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class UnassignedRuleCallTestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

@@ -22,6 +22,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess.OpElements;
 
+@SuppressWarnings("all")
 public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalConsumer {
 
 	private OpElements rule;	

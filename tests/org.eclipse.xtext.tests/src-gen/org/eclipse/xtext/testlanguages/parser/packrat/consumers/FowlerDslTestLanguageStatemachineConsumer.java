@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAccess.StatemachineElements;
 
+@SuppressWarnings("all")
 public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminalConsumer {
 
 	private StatemachineElements rule;	

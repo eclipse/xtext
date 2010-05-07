@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parsetree.reconstr.services.HiddenTokensMergerTestLanguageGrammarAccess.EnumBugEnumElements;
 
+@SuppressWarnings("all")
 public final class HiddenTokensMergerTestLanguageEnumBugEnumConsumer extends NonTerminalConsumer {
 
 	private EnumBugEnumElements rule;	

@@ -12,6 +12,7 @@ import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class Bug250313ParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

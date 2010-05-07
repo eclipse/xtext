@@ -12,6 +12,7 @@ import org.eclipse.xtext.parsetree.reconstr.services.PartialSerializationTestLan
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class PartialSerializationTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

@@ -10,6 +10,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.editor.bracketmatching.ui.BmTestLanguageUiModule}
  */
+@SuppressWarnings("all")
 public abstract class AbstractBmTestLanguageUiModule extends DefaultUiModule {
 	
 	public AbstractBmTestLanguageUiModule(AbstractUIPlugin plugin) {

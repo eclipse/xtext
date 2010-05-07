@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parsetree.reconstr.services.HiddenTokensMergerTestLanguageGrammarAccess.AppendToFileEndElements;
 
+@SuppressWarnings("all")
 public final class HiddenTokensMergerTestLanguageAppendToFileEndConsumer extends NonTerminalConsumer {
 
 	private AppendToFileEndElements rule;	

@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess.ChoiceRuleElements;
 
+@SuppressWarnings("all")
 public final class TestLanguageChoiceRuleConsumer extends NonTerminalConsumer {
 
 	private ChoiceRuleElements rule;	

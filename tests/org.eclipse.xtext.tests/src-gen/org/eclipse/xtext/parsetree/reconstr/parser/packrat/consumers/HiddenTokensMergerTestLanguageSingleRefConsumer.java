@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parsetree.reconstr.services.HiddenTokensMergerTestLanguageGrammarAccess.SingleRefElements;
 
+@SuppressWarnings("all")
 public final class HiddenTokensMergerTestLanguageSingleRefConsumer extends NonTerminalConsumer {
 
 	private SingleRefElements rule;	

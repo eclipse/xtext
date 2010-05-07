@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess.TransientObjectElements;
 
+@SuppressWarnings("all")
 public final class ConcreteSyntaxValidationTestLanguageTransientObjectConsumer extends NonTerminalConsumer {
 
 	private TransientObjectElements rule;	

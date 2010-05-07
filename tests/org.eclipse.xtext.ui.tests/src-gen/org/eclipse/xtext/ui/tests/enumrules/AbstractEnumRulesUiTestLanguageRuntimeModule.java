@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractEnumRulesUiTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

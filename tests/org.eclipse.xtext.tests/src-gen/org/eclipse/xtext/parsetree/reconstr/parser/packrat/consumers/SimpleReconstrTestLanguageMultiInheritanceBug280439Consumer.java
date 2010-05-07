@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.MultiInheritanceBug280439Elements;
 
+@SuppressWarnings("all")
 public final class SimpleReconstrTestLanguageMultiInheritanceBug280439Consumer extends NonTerminalConsumer {
 
 	private MultiInheritanceBug280439Elements rule;	

@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import org.eclipse.xtext.xtext.ecoreInference.services.MultiValueFeatureTestLanguageGrammarAccess;
 
+@SuppressWarnings("all")
 public class MultiValueFeatureTestLanguagePackratParser extends AbstractPackratParser {
 	
 	@Inject

@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess.TerminalRuleElements;
 
+@SuppressWarnings("all")
 public final class TestLanguageTerminalRuleConsumer extends NonTerminalConsumer {
 
 	private TerminalRuleElements rule;	

@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess.TermElements;
 
+@SuppressWarnings("all")
 public final class SimpleExpressionsTestLanguageTermConsumer extends NonTerminalConsumer {
 
 	private TermElements rule;	

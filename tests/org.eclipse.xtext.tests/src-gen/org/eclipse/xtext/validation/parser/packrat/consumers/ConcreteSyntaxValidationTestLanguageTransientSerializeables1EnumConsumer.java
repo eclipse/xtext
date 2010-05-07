@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess.TransientSerializeables1EnumElements;
 
+@SuppressWarnings("all")
 public final class ConcreteSyntaxValidationTestLanguageTransientSerializeables1EnumConsumer extends NonTerminalConsumer {
 
 	private TransientSerializeables1EnumElements rule;	

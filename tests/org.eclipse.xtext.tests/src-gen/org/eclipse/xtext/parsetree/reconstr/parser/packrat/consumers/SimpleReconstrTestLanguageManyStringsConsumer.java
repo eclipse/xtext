@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.ManyStringsElements;
 
+@SuppressWarnings("all")
 public final class SimpleReconstrTestLanguageManyStringsConsumer extends NonTerminalConsumer {
 
 	private ManyStringsElements rule;	

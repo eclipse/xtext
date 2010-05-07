@@ -22,6 +22,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.HiddenTokensMergerTestLanguageGrammarAccess.Action1Elements;
 
+@SuppressWarnings("all")
 public final class HiddenTokensMergerTestLanguageAction1Consumer extends NonTerminalConsumer {
 
 	private Action1Elements rule;	

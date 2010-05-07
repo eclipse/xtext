@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess.TwoVersionNo2Elements;
 
+@SuppressWarnings("all")
 public final class ConcreteSyntaxValidationTestLanguageTwoVersionNo2Consumer extends NonTerminalConsumer {
 
 	private TwoVersionNo2Elements rule;	

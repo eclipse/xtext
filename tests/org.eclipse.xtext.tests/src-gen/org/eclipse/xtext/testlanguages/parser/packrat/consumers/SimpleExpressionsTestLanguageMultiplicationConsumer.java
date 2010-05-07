@@ -22,6 +22,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess.MultiplicationElements;
 
+@SuppressWarnings("all")
 public final class SimpleExpressionsTestLanguageMultiplicationConsumer extends NonTerminalConsumer {
 
 	private MultiplicationElements rule;	

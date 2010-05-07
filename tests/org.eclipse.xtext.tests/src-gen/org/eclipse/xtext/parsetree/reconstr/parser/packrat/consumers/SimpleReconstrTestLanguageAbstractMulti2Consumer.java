@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.AbstractMulti2Elements;
 
+@SuppressWarnings("all")
 public final class SimpleReconstrTestLanguageAbstractMulti2Consumer extends NonTerminalConsumer {
 
 	private AbstractMulti2Elements rule;	

@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.TypeElements;
 
+@SuppressWarnings("all")
 public final class SimpleReconstrTestLanguageTypeConsumer extends NonTerminalConsumer {
 
 	private TypeElements rule;	

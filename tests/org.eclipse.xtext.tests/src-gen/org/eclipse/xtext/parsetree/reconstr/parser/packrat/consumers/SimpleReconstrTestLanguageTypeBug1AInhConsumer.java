@@ -16,6 +16,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.TypeBug1AInhElements;
 
+@SuppressWarnings("all")
 public final class SimpleReconstrTestLanguageTypeBug1AInhConsumer extends NonTerminalConsumer {
 
 	private TypeBug1AInhElements rule;	

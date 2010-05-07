@@ -22,6 +22,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess.AdditionElements;
 
+@SuppressWarnings("all")
 public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerminalConsumer {
 
 	private AdditionElements rule;	

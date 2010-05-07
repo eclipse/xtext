@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess.UnassignedAction1Elements;
 
+@SuppressWarnings("all")
 public final class ConcreteSyntaxValidationTestLanguageUnassignedAction1Consumer extends NonTerminalConsumer {
 
 	private UnassignedAction1Elements rule;	

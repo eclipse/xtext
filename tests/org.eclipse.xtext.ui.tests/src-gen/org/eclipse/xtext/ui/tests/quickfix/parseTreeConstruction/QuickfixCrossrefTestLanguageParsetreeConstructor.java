@@ -12,6 +12,7 @@ import org.eclipse.xtext.ui.tests.quickfix.services.QuickfixCrossrefTestLanguage
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class QuickfixCrossrefTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

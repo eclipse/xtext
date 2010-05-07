@@ -22,6 +22,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess.SpielplatzElements;
 
+@SuppressWarnings("all")
 public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTerminalConsumer {
 
 	private SpielplatzElements rule;	

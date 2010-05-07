@@ -12,6 +12,7 @@ import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammar
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class PartialParserTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.resource.services.EObjectAtOffsetTestLanguageGrammarAccess.FooElements;
 
+@SuppressWarnings("all")
 public final class EObjectAtOffsetTestLanguageFooConsumer extends NonTerminalConsumer {
 
 	private FooElements rule;	

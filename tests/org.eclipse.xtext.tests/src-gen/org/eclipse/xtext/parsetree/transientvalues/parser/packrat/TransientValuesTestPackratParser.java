@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess;
 
+@SuppressWarnings("all")
 public class TransientValuesTestPackratParser extends AbstractPackratParser {
 	
 	@Inject

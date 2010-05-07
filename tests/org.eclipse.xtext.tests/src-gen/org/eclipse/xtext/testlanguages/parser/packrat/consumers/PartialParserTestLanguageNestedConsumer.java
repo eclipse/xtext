@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammarAccess.NestedElements;
 
+@SuppressWarnings("all")
 public final class PartialParserTestLanguageNestedConsumer extends NonTerminalConsumer {
 
 	private NestedElements rule;	

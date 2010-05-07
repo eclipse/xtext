@@ -90,7 +90,7 @@ entryRuleXExpression returns [EObject current=null]
 
 // Rule XExpression
 ruleXExpression returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -125,7 +125,7 @@ entryRuleXAssignment returns [EObject current=null]
 
 // Rule XAssignment
 ruleXAssignment returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -245,7 +245,7 @@ entryRuleXOrExpression returns [EObject current=null]
 
 // Rule XOrExpression
 ruleXOrExpression returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -344,7 +344,7 @@ entryRuleXAndExpression returns [EObject current=null]
 
 // Rule XAndExpression
 ruleXAndExpression returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -443,7 +443,7 @@ entryRuleXEqualityExpression returns [EObject current=null]
 
 // Rule XEqualityExpression
 ruleXEqualityExpression returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -563,7 +563,7 @@ entryRuleXRelationalExpression returns [EObject current=null]
 
 // Rule XRelationalExpression
 ruleXRelationalExpression returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -762,7 +762,7 @@ entryRuleXOtherOperatorExpression returns [EObject current=null]
 
 // Rule XOtherOperatorExpression
 ruleXOtherOperatorExpression returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -882,7 +882,7 @@ entryRuleXAdditiveExpression returns [EObject current=null]
 
 // Rule XAdditiveExpression
 ruleXAdditiveExpression returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1002,7 +1002,7 @@ entryRuleXMultiplicativeExpression returns [EObject current=null]
 
 // Rule XMultiplicativeExpression
 ruleXMultiplicativeExpression returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1158,7 +1158,7 @@ entryRuleXUnaryOperation returns [EObject current=null]
 
 // Rule XUnaryOperation
 ruleXUnaryOperation returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1363,7 +1363,7 @@ entryRuleXFeatureCall returns [EObject current=null]
 
 // Rule XFeatureCall
 ruleXFeatureCall returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1505,7 +1505,7 @@ entryRuleXPrimaryExpression returns [EObject current=null]
 
 // Rule XPrimaryExpression
 ruleXPrimaryExpression returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1709,7 +1709,7 @@ entryRuleXClosure returns [EObject current=null]
 
 // Rule XClosure
 ruleXClosure returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1826,7 +1826,7 @@ entryRuleXParenthesizedExpression returns [EObject current=null]
 
 // Rule XParenthesizedExpression
 ruleXParenthesizedExpression returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1869,7 +1869,7 @@ entryRuleXIfExpression returns [EObject current=null]
 
 // Rule XIfExpression
 ruleXIfExpression returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1980,7 +1980,7 @@ entryRuleXSwitchExpression returns [EObject current=null]
 
 // Rule XSwitchExpression
 ruleXSwitchExpression returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2095,7 +2095,7 @@ entryRuleXWhileExpression returns [EObject current=null]
 
 // Rule XWhileExpression
 ruleXWhileExpression returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2170,7 +2170,7 @@ entryRuleXCasePart returns [EObject current=null]
 
 // Rule XCasePart
 ruleXCasePart returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2249,7 +2249,7 @@ entryRuleXBlockExpression returns [EObject current=null]
 
 // Rule XBlockExpression
 ruleXBlockExpression returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2308,7 +2308,7 @@ entryRuleXExpressionInsideBlock returns [EObject current=null]
 
 // Rule XExpressionInsideBlock
 ruleXExpressionInsideBlock returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2356,7 +2356,7 @@ entryRuleXVariableDeclaration returns [EObject current=null]
 
 // Rule XVariableDeclaration
 ruleXVariableDeclaration returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2460,7 +2460,7 @@ entryRuleXDeclaredParameter returns [EObject current=null]
 
 // Rule XDeclaredParameter
 ruleXDeclaredParameter returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2531,7 +2531,7 @@ entryRuleXSimpleFeatureCall returns [EObject current=null]
 
 // Rule XSimpleFeatureCall
 ruleXSimpleFeatureCall returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2638,7 +2638,7 @@ entryRuleXConstructorCall returns [EObject current=null]
 
 // Rule XConstructorCall
 ruleXConstructorCall returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2773,7 +2773,7 @@ entryRuleXBooleanLiteral returns [EObject current=null]
 
 // Rule XBooleanLiteral
 ruleXBooleanLiteral returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2836,7 +2836,7 @@ entryRuleXNullLiteral returns [EObject current=null]
 
 // Rule XNullLiteral
 ruleXNullLiteral returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2877,7 +2877,7 @@ entryRuleXIntLiteral returns [EObject current=null]
 
 // Rule XIntLiteral
 ruleXIntLiteral returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2924,7 +2924,7 @@ entryRuleXStringLiteral returns [EObject current=null]
 
 // Rule XStringLiteral
 ruleXStringLiteral returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2971,7 +2971,7 @@ entryRuleXTypeLiteral returns [EObject current=null]
 
 // Rule XTypeLiteral
 ruleXTypeLiteral returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -3021,7 +3021,7 @@ entryRuleXRichString returns [EObject current=null]
 
 // Rule XRichString
 ruleXRichString returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -3116,7 +3116,7 @@ entryRuleXRichStringLiteral returns [EObject current=null]
 
 // Rule XRichStringLiteral
 ruleXRichStringLiteral returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -3163,7 +3163,7 @@ entryRuleXTypeRef returns [EObject current=null]
 
 // Rule XTypeRef
 ruleXTypeRef returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -3211,7 +3211,7 @@ entryRuleXFunctionTypeRef returns [EObject current=null]
 
 // Rule XFunctionTypeRef
 ruleXFunctionTypeRef returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -3322,7 +3322,7 @@ entryRuleXSimpleTypeRef returns [EObject current=null]
 
 // Rule XSimpleTypeRef
 ruleXSimpleTypeRef returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -3424,7 +3424,7 @@ entryRuleXTypeParam returns [EObject current=null]
 
 // Rule XTypeParam
 ruleXTypeParam returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -3472,7 +3472,7 @@ entryRuleXWildcardParam returns [EObject current=null]
 
 // Rule XWildcardParam
 ruleXWildcardParam returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;

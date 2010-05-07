@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parsetree.reconstr.services.HiddenTokensMergerTestLanguageGrammarAccess.RefObjElements;
 
+@SuppressWarnings("all")
 public final class HiddenTokensMergerTestLanguageRefObjConsumer extends NonTerminalConsumer {
 
 	private RefObjElements rule;	

@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAccess.CommandElements;
 
+@SuppressWarnings("all")
 public final class FowlerDslTestLanguageCommandConsumer extends NonTerminalConsumer {
 
 	private CommandElements rule;	

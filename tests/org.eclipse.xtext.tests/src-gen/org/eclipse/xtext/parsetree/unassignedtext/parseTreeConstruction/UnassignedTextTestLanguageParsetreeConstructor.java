@@ -12,6 +12,7 @@ import org.eclipse.xtext.parsetree.unassignedtext.services.UnassignedTextTestLan
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class UnassignedTextTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

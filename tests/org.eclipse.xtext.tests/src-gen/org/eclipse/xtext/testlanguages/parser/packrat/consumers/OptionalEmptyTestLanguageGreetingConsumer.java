@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammarAccess.GreetingElements;
 
+@SuppressWarnings("all")
 public final class OptionalEmptyTestLanguageGreetingConsumer extends NonTerminalConsumer {
 
 	private GreetingElements rule;	

@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SerializationErrorTestLanguageGrammarAccess.TwoOptionsElements;
 
+@SuppressWarnings("all")
 public final class SerializationErrorTestLanguageTwoOptionsConsumer extends NonTerminalConsumer {
 
 	private TwoOptionsElements rule;	

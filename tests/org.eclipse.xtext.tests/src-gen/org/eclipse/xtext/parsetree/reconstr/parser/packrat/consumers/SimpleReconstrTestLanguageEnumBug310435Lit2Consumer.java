@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.EnumBug310435Lit2Elements;
 
+@SuppressWarnings("all")
 public final class SimpleReconstrTestLanguageEnumBug310435Lit2Consumer extends NonTerminalConsumer {
 
 	private EnumBug310435Lit2Elements rule;	

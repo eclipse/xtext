@@ -22,6 +22,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.impl.services.Bug305397GrammarAccess.ElementElements;
 
+@SuppressWarnings("all")
 public final class Bug305397ElementConsumer extends NonTerminalConsumer {
 
 	private ElementElements rule;	

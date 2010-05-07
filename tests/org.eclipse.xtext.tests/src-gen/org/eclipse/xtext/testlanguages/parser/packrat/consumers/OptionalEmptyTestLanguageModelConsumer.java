@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class OptionalEmptyTestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

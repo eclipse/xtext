@@ -12,6 +12,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.LookAheadContent
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class LookAheadContentAssistTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

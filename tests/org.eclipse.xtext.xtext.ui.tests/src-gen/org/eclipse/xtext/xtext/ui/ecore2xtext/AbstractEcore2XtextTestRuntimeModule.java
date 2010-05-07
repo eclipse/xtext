@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTestRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractEcore2XtextTestRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess.PersonElements;
 
+@SuppressWarnings("all")
 public final class ReferenceGrammarTestLanguagePersonConsumer extends NonTerminalConsumer {
 
 	private PersonElements rule;	

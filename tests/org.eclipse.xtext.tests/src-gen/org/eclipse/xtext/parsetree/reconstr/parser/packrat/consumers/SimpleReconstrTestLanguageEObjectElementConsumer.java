@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.EObjectElementElements;
 
+@SuppressWarnings("all")
 public final class SimpleReconstrTestLanguageEObjectElementConsumer extends NonTerminalConsumer {
 
 	private EObjectElementElements rule;	

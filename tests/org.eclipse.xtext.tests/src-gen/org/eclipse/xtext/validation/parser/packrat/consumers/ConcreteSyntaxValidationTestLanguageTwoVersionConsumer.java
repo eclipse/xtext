@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess.TwoVersionElements;
 
+@SuppressWarnings("all")
 public final class ConcreteSyntaxValidationTestLanguageTwoVersionConsumer extends NonTerminalConsumer {
 
 	private TwoVersionElements rule;	

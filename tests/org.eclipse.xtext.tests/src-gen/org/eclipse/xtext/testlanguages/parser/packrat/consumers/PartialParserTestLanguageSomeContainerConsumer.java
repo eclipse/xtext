@@ -22,6 +22,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammarAccess.SomeContainerElements;
 
+@SuppressWarnings("all")
 public final class PartialParserTestLanguageSomeContainerConsumer extends NonTerminalConsumer {
 
 	private SomeContainerElements rule;	

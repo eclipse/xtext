@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parsetree.impl.services.Bug305397GrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class Bug305397ModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

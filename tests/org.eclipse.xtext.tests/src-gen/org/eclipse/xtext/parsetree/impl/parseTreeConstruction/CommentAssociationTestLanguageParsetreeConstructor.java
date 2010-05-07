@@ -12,6 +12,7 @@ import org.eclipse.xtext.parsetree.impl.services.CommentAssociationTestLanguageG
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class CommentAssociationTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

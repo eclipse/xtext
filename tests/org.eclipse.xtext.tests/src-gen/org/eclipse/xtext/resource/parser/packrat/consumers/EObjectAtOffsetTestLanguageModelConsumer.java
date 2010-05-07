@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.resource.services.EObjectAtOffsetTestLanguageGrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class EObjectAtOffsetTestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

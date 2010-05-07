@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess.AltList1Elements;
 
+@SuppressWarnings("all")
 public final class ConcreteSyntaxValidationTestLanguageAltList1Consumer extends NonTerminalConsumer {
 
 	private AltList1Elements rule;	

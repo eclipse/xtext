@@ -12,6 +12,7 @@ import org.eclipse.xtext.ui.tests.editor.bracketmatching.services.BmTestLanguage
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class BmTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

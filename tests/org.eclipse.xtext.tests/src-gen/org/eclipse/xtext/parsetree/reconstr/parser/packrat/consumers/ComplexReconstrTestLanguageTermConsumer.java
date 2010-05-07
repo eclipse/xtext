@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess.TermElements;
 
+@SuppressWarnings("all")
 public final class ComplexReconstrTestLanguageTermConsumer extends NonTerminalConsumer {
 
 	private TermElements rule;	

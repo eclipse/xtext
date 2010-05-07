@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SerializationErrorTestLanguageGrammarAccess.ParenthesisElements;
 
+@SuppressWarnings("all")
 public final class SerializationErrorTestLanguageParenthesisConsumer extends NonTerminalConsumer {
 
 	private ParenthesisElements rule;	

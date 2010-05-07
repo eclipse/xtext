@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess.SimpleGroupElements;
 
+@SuppressWarnings("all")
 public final class ConcreteSyntaxValidationTestLanguageSimpleGroupConsumer extends NonTerminalConsumer {
 
 	private SimpleGroupElements rule;	

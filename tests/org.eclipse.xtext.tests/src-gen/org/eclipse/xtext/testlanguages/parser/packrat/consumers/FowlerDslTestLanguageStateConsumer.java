@@ -22,6 +22,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAccess.StateElements;
 
+@SuppressWarnings("all")
 public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsumer {
 
 	private StateElements rule;	

@@ -12,6 +12,7 @@ import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageG
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class SimpleReconstrTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

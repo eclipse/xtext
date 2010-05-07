@@ -12,6 +12,7 @@ import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguag
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class ConcreteSyntaxValidationTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
@@ -8247,7 +8248,7 @@ protected class TwoVersion_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getTwoVersionNo2Rule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getTwoVersionNo1Rule().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}

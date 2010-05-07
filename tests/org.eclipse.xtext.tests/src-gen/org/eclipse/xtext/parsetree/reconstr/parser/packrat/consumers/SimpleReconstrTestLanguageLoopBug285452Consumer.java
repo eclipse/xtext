@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.LoopBug285452Elements;
 
+@SuppressWarnings("all")
 public final class SimpleReconstrTestLanguageLoopBug285452Consumer extends NonTerminalConsumer {
 
 	private LoopBug285452Elements rule;	

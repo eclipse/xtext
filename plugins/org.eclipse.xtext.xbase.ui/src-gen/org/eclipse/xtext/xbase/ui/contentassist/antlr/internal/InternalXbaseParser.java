@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+@SuppressWarnings("all")
 public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_RICH_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'='", "'+='", "'=='", "'!='", "'>='", "'<='", "'>'", "'<'", "'->'", "'..'", "'+'", "'-'", "'*'", "'**'", "'/'", "'%'", "'!'", "'def'", "'import'", "'.'", "'class'", "'{'", "'}'", "'extends'", "'implements'", "'('", "')'", "','", "':'", "';'", "'instanceof'", "'|'", "'if'", "'else'", "'switch'", "'default'", "'while'", "'case'", "'new'", "'false'", "'null'", "'=>'", "'?'", "'super'", "'&'", "'private'", "'||'", "'&&'", "'true'"

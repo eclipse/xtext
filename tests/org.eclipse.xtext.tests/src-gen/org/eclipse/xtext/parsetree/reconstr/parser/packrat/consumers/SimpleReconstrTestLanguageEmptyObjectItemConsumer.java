@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.EmptyObjectItemElements;
 
+@SuppressWarnings("all")
 public final class SimpleReconstrTestLanguageEmptyObjectItemConsumer extends NonTerminalConsumer {
 
 	private EmptyObjectItemElements rule;	

@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess.SequenceElements;
 
+@SuppressWarnings("all")
 public final class SimpleExpressionsTestLanguageSequenceConsumer extends NonTerminalConsumer {
 
 	private SequenceElements rule;	

@@ -12,6 +12,7 @@ import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGra
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class SimpleExpressionsTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

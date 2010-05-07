@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.unassignedtext.services.UnassignedTextTestLanguageGrammarAccess.MultiRuleElements;
 
+@SuppressWarnings("all")
 public final class UnassignedTextTestLanguageMultiRuleConsumer extends NonTerminalConsumer {
 
 	private MultiRuleElements rule;	

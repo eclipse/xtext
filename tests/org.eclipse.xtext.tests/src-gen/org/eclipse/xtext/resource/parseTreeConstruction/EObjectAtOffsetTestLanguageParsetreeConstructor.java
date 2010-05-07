@@ -12,6 +12,7 @@ import org.eclipse.xtext.resource.services.EObjectAtOffsetTestLanguageGrammarAcc
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class EObjectAtOffsetTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

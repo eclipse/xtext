@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammarAccess.AbstractChildrenElements;
 
+@SuppressWarnings("all")
 public final class PartialParserTestLanguageAbstractChildrenConsumer extends NonTerminalConsumer {
 
 	private AbstractChildrenElements rule;	

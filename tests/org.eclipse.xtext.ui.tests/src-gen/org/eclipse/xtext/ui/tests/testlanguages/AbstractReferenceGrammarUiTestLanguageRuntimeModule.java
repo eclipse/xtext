@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractReferenceGrammarUiTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

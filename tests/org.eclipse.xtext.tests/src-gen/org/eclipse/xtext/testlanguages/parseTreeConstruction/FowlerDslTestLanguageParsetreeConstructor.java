@@ -12,6 +12,7 @@ import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAcce
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class FowlerDslTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

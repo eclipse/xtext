@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.PartialSerializationTestLanguageGrammarAccess.NodeElements;
 
+@SuppressWarnings("all")
 public final class PartialSerializationTestLanguageNodeConsumer extends NonTerminalConsumer {
 
 	private NodeElements rule;	

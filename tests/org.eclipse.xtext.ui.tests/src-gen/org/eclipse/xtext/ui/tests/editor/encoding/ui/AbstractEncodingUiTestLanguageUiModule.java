@@ -10,6 +10,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingUiTestLanguageUiModule}
  */
+@SuppressWarnings("all")
 public abstract class AbstractEncodingUiTestLanguageUiModule extends DefaultUiModule {
 	
 	public AbstractEncodingUiTestLanguageUiModule(AbstractUIPlugin plugin) {

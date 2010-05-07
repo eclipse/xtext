@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.impl.services.CommentAssociationTestLanguageGrammarAccess.ElementElements;
 
+@SuppressWarnings("all")
 public final class CommentAssociationTestLanguageElementConsumer extends NonTerminalConsumer {
 
 	private ElementElements rule;	

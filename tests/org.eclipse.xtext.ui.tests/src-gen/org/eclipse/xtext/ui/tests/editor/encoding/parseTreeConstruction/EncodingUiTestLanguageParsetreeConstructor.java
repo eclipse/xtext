@@ -12,6 +12,7 @@ import org.eclipse.xtext.ui.tests.editor.encoding.services.EncodingUiTestLanguag
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class EncodingUiTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

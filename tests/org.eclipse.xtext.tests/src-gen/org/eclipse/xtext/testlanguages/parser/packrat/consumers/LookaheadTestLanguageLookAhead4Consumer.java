@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess.LookAhead4Elements;
 
+@SuppressWarnings("all")
 public final class LookaheadTestLanguageLookAhead4Consumer extends NonTerminalConsumer {
 
 	private LookAhead4Elements rule;	

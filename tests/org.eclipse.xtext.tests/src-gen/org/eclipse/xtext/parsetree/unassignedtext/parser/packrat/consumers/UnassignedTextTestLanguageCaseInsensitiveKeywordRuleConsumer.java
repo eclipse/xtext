@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.unassignedtext.services.UnassignedTextTestLanguageGrammarAccess.CaseInsensitiveKeywordRuleElements;
 
+@SuppressWarnings("all")
 public final class UnassignedTextTestLanguageCaseInsensitiveKeywordRuleConsumer extends NonTerminalConsumer {
 
 	private CaseInsensitiveKeywordRuleElements rule;	

@@ -12,6 +12,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.DomainModelTestL
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class DomainModelTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

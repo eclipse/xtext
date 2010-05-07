@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess.GroupMultiplicitiesElements;
 
+@SuppressWarnings("all")
 public final class ConcreteSyntaxValidationTestLanguageGroupMultiplicitiesConsumer extends NonTerminalConsumer {
 
 	private GroupMultiplicitiesElements rule;	

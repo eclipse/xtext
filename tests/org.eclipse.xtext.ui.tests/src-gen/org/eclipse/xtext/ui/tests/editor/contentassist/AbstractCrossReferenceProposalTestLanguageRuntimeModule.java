@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractCrossReferenceProposalTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

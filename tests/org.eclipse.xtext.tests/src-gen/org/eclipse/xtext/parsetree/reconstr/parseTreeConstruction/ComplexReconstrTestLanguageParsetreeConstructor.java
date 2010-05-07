@@ -12,6 +12,7 @@ import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguage
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class ComplexReconstrTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

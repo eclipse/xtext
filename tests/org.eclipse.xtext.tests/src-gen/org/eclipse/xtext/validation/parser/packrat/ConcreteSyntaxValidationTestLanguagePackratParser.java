@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess;
 
+@SuppressWarnings("all")
 public class ConcreteSyntaxValidationTestLanguagePackratParser extends AbstractPackratParser {
 	
 	@Inject

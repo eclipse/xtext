@@ -12,6 +12,7 @@ import org.eclipse.xtext.parsetree.reconstr.services.Bug299395TestLanguageGramma
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class Bug299395TestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractSimpleReconstrTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

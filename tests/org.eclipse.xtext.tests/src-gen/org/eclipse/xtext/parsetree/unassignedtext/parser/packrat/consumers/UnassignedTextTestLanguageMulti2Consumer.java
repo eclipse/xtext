@@ -8,6 +8,7 @@ import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsu
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 
 
+@SuppressWarnings("all")
 public final class UnassignedTextTestLanguageMulti2Consumer extends AbstractRuleAwareTerminalConsumer {
 
 	public UnassignedTextTestLanguageMulti2Consumer(ITerminalConsumerConfiguration configuration) {

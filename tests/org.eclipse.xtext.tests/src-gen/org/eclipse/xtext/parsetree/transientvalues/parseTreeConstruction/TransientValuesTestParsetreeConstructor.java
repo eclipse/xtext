@@ -12,6 +12,7 @@ import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestG
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class TransientValuesTestParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

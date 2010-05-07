@@ -15,6 +15,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess.UnassignedRuleCall2SubElements;
 
+@SuppressWarnings("all")
 public final class ConcreteSyntaxValidationTestLanguageUnassignedRuleCall2SubConsumer extends NonTerminalConsumer {
 
 	private UnassignedRuleCall2SubElements rule;	

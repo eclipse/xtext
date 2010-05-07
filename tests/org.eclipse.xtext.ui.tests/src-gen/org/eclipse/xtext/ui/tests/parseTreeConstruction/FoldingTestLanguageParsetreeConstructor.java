@@ -12,6 +12,7 @@ import org.eclipse.xtext.ui.tests.services.FoldingTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class FoldingTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

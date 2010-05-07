@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess.ReducibleRuleElements;
 
+@SuppressWarnings("all")
 public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer {
 
 	private ReducibleRuleElements rule;	

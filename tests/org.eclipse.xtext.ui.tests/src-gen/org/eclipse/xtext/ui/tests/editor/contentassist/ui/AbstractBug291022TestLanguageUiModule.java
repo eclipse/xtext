@@ -10,6 +10,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug291022TestLanguageUiModule}
  */
+@SuppressWarnings("all")
 public abstract class AbstractBug291022TestLanguageUiModule extends DefaultUiModule {
 	
 	public AbstractBug291022TestLanguageUiModule(AbstractUIPlugin plugin) {

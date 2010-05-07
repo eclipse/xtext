@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.unassignedtext.services.UnassignedTextTestLanguageGrammarAccess.DatatypeElements;
 
+@SuppressWarnings("all")
 public final class UnassignedTextTestLanguageDatatypeConsumer extends NonTerminalConsumer {
 
 	private DatatypeElements rule;	

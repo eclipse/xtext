@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parsetree.reconstr.services.HiddenTokensMergerTestLanguageGrammarAccess.CommentableElements;
 
+@SuppressWarnings("all")
 public final class HiddenTokensMergerTestLanguageCommentableConsumer extends NonTerminalConsumer {
 
 	private CommentableElements rule;	

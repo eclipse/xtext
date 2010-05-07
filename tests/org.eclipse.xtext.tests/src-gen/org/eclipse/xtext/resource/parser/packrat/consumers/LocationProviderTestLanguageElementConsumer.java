@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.resource.services.LocationProviderTestLanguageGrammarAccess.ElementElements;
 
+@SuppressWarnings("all")
 public final class LocationProviderTestLanguageElementConsumer extends NonTerminalConsumer {
 
 	private ElementElements rule;	

@@ -12,6 +12,7 @@ import org.eclipse.xtext.ui.tests.enumrules.services.EnumRulesUiTestLanguageGram
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class EnumRulesUiTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

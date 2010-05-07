@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess.SimpleAlternativeElements;
 
+@SuppressWarnings("all")
 public final class ConcreteSyntaxValidationTestLanguageSimpleAlternativeConsumer extends NonTerminalConsumer {
 
 	private SimpleAlternativeElements rule;	

@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess.ChildElements;
 
+@SuppressWarnings("all")
 public final class Bug250313ChildConsumer extends NonTerminalConsumer {
 
 	private ChildElements rule;	

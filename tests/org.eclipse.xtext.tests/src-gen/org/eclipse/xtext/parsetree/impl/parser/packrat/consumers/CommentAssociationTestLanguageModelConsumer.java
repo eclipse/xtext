@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parsetree.impl.services.CommentAssociationTestLanguageGrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class CommentAssociationTestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

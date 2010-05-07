@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess.TrickyG1Elements;
 
+@SuppressWarnings("all")
 public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTerminalConsumer {
 
 	private TrickyG1Elements rule;	

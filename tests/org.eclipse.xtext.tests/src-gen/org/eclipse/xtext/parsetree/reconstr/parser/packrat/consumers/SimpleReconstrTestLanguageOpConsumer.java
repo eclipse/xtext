@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.OpElements;
 
+@SuppressWarnings("all")
 public final class SimpleReconstrTestLanguageOpConsumer extends NonTerminalConsumer {
 
 	private OpElements rule;	

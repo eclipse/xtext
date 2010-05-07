@@ -10,6 +10,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * Manual modifications go to {org.eclipse.xtext.xbase.ui.XbaseUiModule}
  */
+@SuppressWarnings("all")
 public abstract class AbstractXbaseUiModule extends DefaultUiModule {
 	
 	public AbstractXbaseUiModule(AbstractUIPlugin plugin) {

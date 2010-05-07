@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parsetree.unassignedtext.services.UnassignedTextTestLanguageGrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class UnassignedTextTestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

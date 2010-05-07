@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.Loop1Elements;
 
+@SuppressWarnings("all")
 public final class SimpleReconstrTestLanguageLoop1Consumer extends NonTerminalConsumer {
 
 	private Loop1Elements rule;	

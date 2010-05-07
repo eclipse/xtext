@@ -12,6 +12,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.TwoContextsTestL
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class TwoContextsTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

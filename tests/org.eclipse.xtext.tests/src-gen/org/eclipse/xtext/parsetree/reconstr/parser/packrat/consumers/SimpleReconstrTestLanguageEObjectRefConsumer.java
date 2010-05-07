@@ -22,6 +22,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.EObjectRefElements;
 
+@SuppressWarnings("all")
 public final class SimpleReconstrTestLanguageEObjectRefConsumer extends NonTerminalConsumer {
 
 	private EObjectRefElements rule;	

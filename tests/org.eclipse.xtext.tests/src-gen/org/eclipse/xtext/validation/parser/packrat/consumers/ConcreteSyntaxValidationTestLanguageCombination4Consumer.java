@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess.Combination4Elements;
 
+@SuppressWarnings("all")
 public final class ConcreteSyntaxValidationTestLanguageCombination4Consumer extends NonTerminalConsumer {
 
 	private Combination4Elements rule;	

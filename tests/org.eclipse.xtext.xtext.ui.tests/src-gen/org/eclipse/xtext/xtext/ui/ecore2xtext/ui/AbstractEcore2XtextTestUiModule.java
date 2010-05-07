@@ -10,6 +10,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * Manual modifications go to {org.eclipse.xtext.xtext.ui.ecore2xtext.ui.Ecore2XtextTestUiModule}
  */
+@SuppressWarnings("all")
 public abstract class AbstractEcore2XtextTestUiModule extends DefaultUiModule {
 	
 	public AbstractEcore2XtextTestUiModule(AbstractUIPlugin plugin) {

@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.unassignedtext.services.UnassignedTextTestLanguageGrammarAccess.CommonTerminalsRuleElements;
 
+@SuppressWarnings("all")
 public final class UnassignedTextTestLanguageCommonTerminalsRuleConsumer extends NonTerminalConsumer {
 
 	private CommonTerminalsRuleElements rule;	

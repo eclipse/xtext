@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess.ParensElements;
 
+@SuppressWarnings("all")
 public final class SimpleExpressionsTestLanguageParensConsumer extends NonTerminalConsumer {
 
 	private ParensElements rule;	

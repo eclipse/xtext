@@ -22,6 +22,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.Bug299395TestLanguageGrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class Bug299395TestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

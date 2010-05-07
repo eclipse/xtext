@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.resource.services.EObjectAtOffsetTestLanguageGrammarAccess.BarElements;
 
+@SuppressWarnings("all")
 public final class EObjectAtOffsetTestLanguageBarConsumer extends NonTerminalConsumer {
 
 	private BarElements rule;	

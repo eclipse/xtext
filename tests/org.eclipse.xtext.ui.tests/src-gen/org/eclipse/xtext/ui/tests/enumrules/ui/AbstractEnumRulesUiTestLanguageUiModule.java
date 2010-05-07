@@ -10,6 +10,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.enumrules.ui.EnumRulesUiTestLanguageUiModule}
  */
+@SuppressWarnings("all")
 public abstract class AbstractEnumRulesUiTestLanguageUiModule extends DefaultUiModule {
 	
 	public AbstractEnumRulesUiTestLanguageUiModule(AbstractUIPlugin plugin) {

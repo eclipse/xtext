@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractDatatypeRuleTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parsetree.reconstr.services.HiddenTokensMergerTestLanguageGrammarAccess.Action1Sub1Elements;
 
+@SuppressWarnings("all")
 public final class HiddenTokensMergerTestLanguageAction1Sub1Consumer extends NonTerminalConsumer {
 
 	private Action1Sub1Elements rule;	
