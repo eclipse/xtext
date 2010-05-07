@@ -10,6 +10,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * Manual modifications go to {org.eclipse.xtext.xtend.ui.TreeTestLanguageUiModule}
  */
+@SuppressWarnings("all")
 public abstract class AbstractTreeTestLanguageUiModule extends DefaultUiModule {
 	
 	public AbstractTreeTestLanguageUiModule(AbstractUIPlugin plugin) {

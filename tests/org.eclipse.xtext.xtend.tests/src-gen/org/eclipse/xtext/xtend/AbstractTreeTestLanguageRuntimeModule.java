@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.xtend.TreeTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractTreeTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override
