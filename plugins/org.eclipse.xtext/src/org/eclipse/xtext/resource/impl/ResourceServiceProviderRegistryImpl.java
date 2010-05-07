@@ -32,7 +32,7 @@ public class ResourceServiceProviderRegistryImpl implements IResourceServiceProv
 	 */
 	public static class InternalData extends ResourceFactoryRegistryImpl {
 
-		@SuppressWarnings({ "unchecked", "rawtypes" })
+		@SuppressWarnings({ "unchecked" })
 		public IResourceServiceProvider getServiceProvider(URI uri, String contentType) {
 			Object object = getFactory(uri, protocolToFactoryMap, extensionToFactoryMap,
 					contentTypeIdentifierToFactoryMap, contentType, false);

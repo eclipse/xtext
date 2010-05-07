@@ -10,7 +10,6 @@ package org.eclipse.xtext.parser.datatyperules;
 import java.io.InputStream;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.junit.AbstractXtextTests.Keys;
 import org.eclipse.xtext.parser.ParserTestHelper;
 import org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguagePackratParser;
 import org.eclipse.xtext.parser.packrat.ParseResultFactory;
