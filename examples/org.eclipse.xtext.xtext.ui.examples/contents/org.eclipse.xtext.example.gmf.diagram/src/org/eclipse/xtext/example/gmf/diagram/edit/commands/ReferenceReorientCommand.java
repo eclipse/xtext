@@ -65,8 +65,8 @@ public class ReferenceReorientCommand extends EditElementCommand {
 			return false;
 		}
 		Entity target = getLink().getType();
-		return EntitiesBaseItemSemanticEditPolicy.LinkConstraints
-				.canExistReference_3001(getNewSource(), target);
+		return EntitiesBaseItemSemanticEditPolicy.getLinkConstraints()
+				.canExistReference_3001(getLink(), getNewSource(), target);
 	}
 
 	/**
@@ -80,8 +80,8 @@ public class ReferenceReorientCommand extends EditElementCommand {
 			return false;
 		}
 		Entity source = (Entity) getLink().eContainer();
-		return EntitiesBaseItemSemanticEditPolicy.LinkConstraints
-				.canExistReference_3001(source, getNewTarget());
+		return EntitiesBaseItemSemanticEditPolicy.getLinkConstraints()
+				.canExistReference_3001(getLink(), source, getNewTarget());
 	}
 
 	/**

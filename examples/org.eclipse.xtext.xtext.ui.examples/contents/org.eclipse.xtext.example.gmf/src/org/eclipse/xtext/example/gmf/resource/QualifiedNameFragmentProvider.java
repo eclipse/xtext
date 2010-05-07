@@ -26,22 +26,24 @@ public class QualifiedNameFragmentProvider implements IFragmentProvider {
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;
 
-	public EObject getEObject(Resource resource, String fragment) {
+	public String getFragment(EObject obj, Fallback fallback) {
+		String qualifiedName = qualifiedNameProvider.getQualifiedName(obj);
+		return qualifiedName != null ? qualifiedName : fallback.getFragment(obj);
+	}
+
+	public EObject getEObject(Resource resource, String fragment,
+			Fallback fallback) {
 		if (fragment != null) {
 			for (Iterator<EObject> i = EcoreUtil.getAllContents(resource, false); i.hasNext();) {
 				EObject eObject = i.next();
 				String candidateFragment = (eObject.eIsProxy()) ? ((InternalEObject) eObject).eProxyURI().fragment()
-						: getFragment(eObject);
+						: getFragment(eObject, fallback);
 				if (fragment.equals(candidateFragment)) {
 					return eObject;
 				}
 			}
 		}
-		return null;
-	}
-
-	public String getFragment(EObject obj) {
-		return qualifiedNameProvider.getQualifiedName(obj);
+		return fallback.getEObject(fragment);
 	}
 
 }

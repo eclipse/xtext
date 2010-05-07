@@ -12,27 +12,17 @@ import org.eclipse.xtext.example.gmf.entities.SimpleType;
  * @generated
  */
 public class ElementInitializers {
-	/**
-	 * @generated
-	 */
-	public static void init_Entity_1001(Entity instance) {
-		try {
-			Object value_0 = EntitiesOCLFactory.getExpression("\'default\'",
-					EntitiesPackage.eINSTANCE.getEntity()).evaluate(instance);
-			instance.setName((String) value_0);
-		} catch (RuntimeException e) {
-			EntitiesDiagramEditorPlugin.getInstance().logError(
-					"Element initialization failed", e); //$NON-NLS-1$						
-		}
+	protected ElementInitializers() {
+		// use #getInstance to access cached instance
 	}
 
 	/**
 	 * @generated
 	 */
-	public static void init_SimpleType_1002(SimpleType instance) {
+	public void init_Entity_1001(Entity instance) {
 		try {
-			Object value_0 = EntitiesOCLFactory.getExpression("\'default\'",
-					EntitiesPackage.eINSTANCE.getSimpleType()).evaluate(
+			Object value_0 = EntitiesOCLFactory.getExpression(0,
+					EntitiesPackage.eINSTANCE.getEntity(), null).evaluate(
 					instance);
 			instance.setName((String) value_0);
 		} catch (RuntimeException e) {
@@ -44,10 +34,10 @@ public class ElementInitializers {
 	/**
 	 * @generated
 	 */
-	public static void init_SimpleProperty_2001(SimpleProperty instance) {
+	public void init_SimpleType_1002(SimpleType instance) {
 		try {
-			Object value_0 = EntitiesOCLFactory.getExpression("\'default\'",
-					EntitiesPackage.eINSTANCE.getSimpleProperty()).evaluate(
+			Object value_0 = EntitiesOCLFactory.getExpression(2,
+					EntitiesPackage.eINSTANCE.getSimpleType(), null).evaluate(
 					instance);
 			instance.setName((String) value_0);
 		} catch (RuntimeException e) {
@@ -59,16 +49,44 @@ public class ElementInitializers {
 	/**
 	 * @generated
 	 */
-	public static void init_Reference_3001(Reference instance) {
+	public void init_SimpleProperty_2001(SimpleProperty instance) {
 		try {
-			Object value_0 = EntitiesOCLFactory.getExpression("\'ref\'",
-					EntitiesPackage.eINSTANCE.getReference())
+			Object value_0 = EntitiesOCLFactory.getExpression(1,
+					EntitiesPackage.eINSTANCE.getSimpleProperty(), null)
 					.evaluate(instance);
 			instance.setName((String) value_0);
 		} catch (RuntimeException e) {
 			EntitiesDiagramEditorPlugin.getInstance().logError(
 					"Element initialization failed", e); //$NON-NLS-1$						
 		}
+	}
+
+	/**
+	 * @generated
+	 */
+	public void init_Reference_3001(Reference instance) {
+		try {
+			Object value_0 = EntitiesOCLFactory.getExpression(3,
+					EntitiesPackage.eINSTANCE.getReference(), null).evaluate(
+					instance);
+			instance.setName((String) value_0);
+		} catch (RuntimeException e) {
+			EntitiesDiagramEditorPlugin.getInstance().logError(
+					"Element initialization failed", e); //$NON-NLS-1$						
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	public static ElementInitializers getInstance() {
+		ElementInitializers cached = EntitiesDiagramEditorPlugin.getInstance()
+				.getElementInitializers();
+		if (cached == null) {
+			EntitiesDiagramEditorPlugin.getInstance().setElementInitializers(
+					cached = new ElementInitializers());
+		}
+		return cached;
 	}
 
 }

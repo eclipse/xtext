@@ -34,31 +34,31 @@ public class EntitiesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getSemanticChildren(View view) {
+	public static List<EntitiesNodeDescriptor> getSemanticChildren(View view) {
 		switch (EntitiesVisualIDRegistry.getVisualID(view)) {
-		case EntitySimpleNameCompartmentEditPart.VISUAL_ID:
-			return getEntitySimpleNameCompartment_5001SemanticChildren(view);
 		case ModelEditPart.VISUAL_ID:
 			return getModel_79SemanticChildren(view);
+		case EntitySimpleNameCompartmentEditPart.VISUAL_ID:
+			return getEntitySimpleNameCompartment_5001SemanticChildren(view);
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getEntitySimpleNameCompartment_5001SemanticChildren(
+	public static List<EntitiesNodeDescriptor> getEntitySimpleNameCompartment_5001SemanticChildren(
 			View view) {
 		if (false == view.eContainer() instanceof View) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 		View containerView = (View) view.eContainer();
 		if (!containerView.isSetElement()) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 		Entity modelElement = (Entity) containerView.getElement();
-		List result = new LinkedList();
-		for (Iterator it = modelElement.getProperties().iterator(); it
+		LinkedList<EntitiesNodeDescriptor> result = new LinkedList<EntitiesNodeDescriptor>();
+		for (Iterator<?> it = modelElement.getProperties().iterator(); it
 				.hasNext();) {
 			Property childElement = (Property) it.next();
 			int visualID = EntitiesVisualIDRegistry.getNodeVisualID(view,
@@ -74,13 +74,15 @@ public class EntitiesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getModel_79SemanticChildren(View view) {
+	public static List<EntitiesNodeDescriptor> getModel_79SemanticChildren(
+			View view) {
 		if (!view.isSetElement()) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 		Model modelElement = (Model) view.getElement();
-		List result = new LinkedList();
-		for (Iterator it = modelElement.getElements().iterator(); it.hasNext();) {
+		LinkedList<EntitiesNodeDescriptor> result = new LinkedList<EntitiesNodeDescriptor>();
+		for (Iterator<?> it = modelElement.getElements().iterator(); it
+				.hasNext();) {
 			Type childElement = (Type) it.next();
 			int visualID = EntitiesVisualIDRegistry.getNodeVisualID(view,
 					childElement);
@@ -99,7 +101,7 @@ public class EntitiesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getContainedLinks(View view) {
+	public static List<EntitiesLinkDescriptor> getContainedLinks(View view) {
 		switch (EntitiesVisualIDRegistry.getVisualID(view)) {
 		case ModelEditPart.VISUAL_ID:
 			return getModel_79ContainedLinks(view);
@@ -112,13 +114,13 @@ public class EntitiesDiagramUpdater {
 		case ReferenceEditPart.VISUAL_ID:
 			return getReference_3001ContainedLinks(view);
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getIncomingLinks(View view) {
+	public static List<EntitiesLinkDescriptor> getIncomingLinks(View view) {
 		switch (EntitiesVisualIDRegistry.getVisualID(view)) {
 		case EntityEditPart.VISUAL_ID:
 			return getEntity_1001IncomingLinks(view);
@@ -129,13 +131,13 @@ public class EntitiesDiagramUpdater {
 		case ReferenceEditPart.VISUAL_ID:
 			return getReference_3001IncomingLinks(view);
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getOutgoingLinks(View view) {
+	public static List<EntitiesLinkDescriptor> getOutgoingLinks(View view) {
 		switch (EntitiesVisualIDRegistry.getVisualID(view)) {
 		case EntityEditPart.VISUAL_ID:
 			return getEntity_1001OutgoingLinks(view);
@@ -146,58 +148,62 @@ public class EntitiesDiagramUpdater {
 		case ReferenceEditPart.VISUAL_ID:
 			return getReference_3001OutgoingLinks(view);
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getModel_79ContainedLinks(View view) {
-		return Collections.EMPTY_LIST;
+	public static List<EntitiesLinkDescriptor> getModel_79ContainedLinks(
+			View view) {
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getEntity_1001ContainedLinks(View view) {
+	public static List<EntitiesLinkDescriptor> getEntity_1001ContainedLinks(
+			View view) {
 		Entity modelElement = (Entity) view.getElement();
-		List result = new LinkedList();
-		result
-				.addAll(getContainedTypeModelFacetLinks_Reference_3001(modelElement));
-		result
-				.addAll(getOutgoingFeatureModelFacetLinks_Entity_Extends_3002(modelElement));
+		LinkedList<EntitiesLinkDescriptor> result = new LinkedList<EntitiesLinkDescriptor>();
+		result.addAll(getContainedTypeModelFacetLinks_Reference_3001(modelElement));
+		result.addAll(getOutgoingFeatureModelFacetLinks_Entity_Extends_3002(modelElement));
 		return result;
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getSimpleType_1002ContainedLinks(View view) {
-		return Collections.EMPTY_LIST;
+	public static List<EntitiesLinkDescriptor> getSimpleType_1002ContainedLinks(
+			View view) {
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getSimpleProperty_2001ContainedLinks(View view) {
-		return Collections.EMPTY_LIST;
+	public static List<EntitiesLinkDescriptor> getSimpleProperty_2001ContainedLinks(
+			View view) {
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getReference_3001ContainedLinks(View view) {
-		return Collections.EMPTY_LIST;
+	public static List<EntitiesLinkDescriptor> getReference_3001ContainedLinks(
+			View view) {
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getEntity_1001IncomingLinks(View view) {
+	public static List<EntitiesLinkDescriptor> getEntity_1001IncomingLinks(
+			View view) {
 		Entity modelElement = (Entity) view.getElement();
-		Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
-				.getResourceSet().getResources());
-		List result = new LinkedList();
+		Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences = EcoreUtil.CrossReferencer
+				.find(view.eResource().getResourceSet().getResources());
+		LinkedList<EntitiesLinkDescriptor> result = new LinkedList<EntitiesLinkDescriptor>();
 		result.addAll(getIncomingTypeModelFacetLinks_Reference_3001(
 				modelElement, crossReferences));
 		result.addAll(getIncomingFeatureModelFacetLinks_Entity_Extends_3002(
@@ -208,65 +214,70 @@ public class EntitiesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getSimpleType_1002IncomingLinks(View view) {
-		return Collections.EMPTY_LIST;
+	public static List<EntitiesLinkDescriptor> getSimpleType_1002IncomingLinks(
+			View view) {
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getSimpleProperty_2001IncomingLinks(View view) {
-		return Collections.EMPTY_LIST;
+	public static List<EntitiesLinkDescriptor> getSimpleProperty_2001IncomingLinks(
+			View view) {
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getReference_3001IncomingLinks(View view) {
-		return Collections.EMPTY_LIST;
+	public static List<EntitiesLinkDescriptor> getReference_3001IncomingLinks(
+			View view) {
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getEntity_1001OutgoingLinks(View view) {
+	public static List<EntitiesLinkDescriptor> getEntity_1001OutgoingLinks(
+			View view) {
 		Entity modelElement = (Entity) view.getElement();
-		List result = new LinkedList();
-		result
-				.addAll(getContainedTypeModelFacetLinks_Reference_3001(modelElement));
-		result
-				.addAll(getOutgoingFeatureModelFacetLinks_Entity_Extends_3002(modelElement));
+		LinkedList<EntitiesLinkDescriptor> result = new LinkedList<EntitiesLinkDescriptor>();
+		result.addAll(getContainedTypeModelFacetLinks_Reference_3001(modelElement));
+		result.addAll(getOutgoingFeatureModelFacetLinks_Entity_Extends_3002(modelElement));
 		return result;
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getSimpleType_1002OutgoingLinks(View view) {
-		return Collections.EMPTY_LIST;
+	public static List<EntitiesLinkDescriptor> getSimpleType_1002OutgoingLinks(
+			View view) {
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getSimpleProperty_2001OutgoingLinks(View view) {
-		return Collections.EMPTY_LIST;
+	public static List<EntitiesLinkDescriptor> getSimpleProperty_2001OutgoingLinks(
+			View view) {
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	public static List getReference_3001OutgoingLinks(View view) {
-		return Collections.EMPTY_LIST;
+	public static List<EntitiesLinkDescriptor> getReference_3001OutgoingLinks(
+			View view) {
+		return Collections.emptyList();
 	}
 
 	/**
 	 * @generated
 	 */
-	private static Collection getContainedTypeModelFacetLinks_Reference_3001(
+	private static Collection<EntitiesLinkDescriptor> getContainedTypeModelFacetLinks_Reference_3001(
 			Entity container) {
-		Collection result = new LinkedList();
-		for (Iterator links = container.getProperties().iterator(); links
+		LinkedList<EntitiesLinkDescriptor> result = new LinkedList<EntitiesLinkDescriptor>();
+		for (Iterator<?> links = container.getProperties().iterator(); links
 				.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof Reference) {
@@ -288,13 +299,13 @@ public class EntitiesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	private static Collection getIncomingTypeModelFacetLinks_Reference_3001(
-			Entity target, Map crossReferences) {
-		Collection result = new LinkedList();
-		Collection settings = (Collection) crossReferences.get(target);
-		for (Iterator it = settings.iterator(); it.hasNext();) {
-			EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
-					.next();
+	private static Collection<EntitiesLinkDescriptor> getIncomingTypeModelFacetLinks_Reference_3001(
+			Entity target,
+			Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences) {
+		LinkedList<EntitiesLinkDescriptor> result = new LinkedList<EntitiesLinkDescriptor>();
+		Collection<EStructuralFeature.Setting> settings = crossReferences
+				.get(target);
+		for (EStructuralFeature.Setting setting : settings) {
 			if (setting.getEStructuralFeature() != EntitiesPackage.eINSTANCE
 					.getReference_Type()
 					|| false == setting.getEObject() instanceof Reference) {
@@ -320,13 +331,13 @@ public class EntitiesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	private static Collection getIncomingFeatureModelFacetLinks_Entity_Extends_3002(
-			Entity target, Map crossReferences) {
-		Collection result = new LinkedList();
-		Collection settings = (Collection) crossReferences.get(target);
-		for (Iterator it = settings.iterator(); it.hasNext();) {
-			EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
-					.next();
+	private static Collection<EntitiesLinkDescriptor> getIncomingFeatureModelFacetLinks_Entity_Extends_3002(
+			Entity target,
+			Map<EObject, Collection<EStructuralFeature.Setting>> crossReferences) {
+		LinkedList<EntitiesLinkDescriptor> result = new LinkedList<EntitiesLinkDescriptor>();
+		Collection<EStructuralFeature.Setting> settings = crossReferences
+				.get(target);
+		for (EStructuralFeature.Setting setting : settings) {
 			if (setting.getEStructuralFeature() == EntitiesPackage.eINSTANCE
 					.getEntity_Extends()) {
 				result.add(new EntitiesLinkDescriptor(setting.getEObject(),
@@ -340,9 +351,9 @@ public class EntitiesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	private static Collection getOutgoingFeatureModelFacetLinks_Entity_Extends_3002(
+	private static Collection<EntitiesLinkDescriptor> getOutgoingFeatureModelFacetLinks_Entity_Extends_3002(
 			Entity source) {
-		Collection result = new LinkedList();
+		LinkedList<EntitiesLinkDescriptor> result = new LinkedList<EntitiesLinkDescriptor>();
 		Entity destination = source.getExtends();
 		if (destination == null) {
 			return result;

@@ -12,6 +12,7 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
 import org.eclipse.xtext.example.gmf.diagram.edit.policies.EntitiesBaseItemSemanticEditPolicy;
+import org.eclipse.xtext.example.gmf.diagram.providers.ElementInitializers;
 import org.eclipse.xtext.example.gmf.diagram.providers.EntitiesElementTypes;
 import org.eclipse.xtext.example.gmf.entities.EntitiesFactory;
 import org.eclipse.xtext.example.gmf.entities.Entity;
@@ -59,7 +60,7 @@ public class ReferenceCreateCommand extends EditElementCommand {
 			return true; // link creation is in progress; source is not defined yet
 		}
 		// target may be null here but it's possible to check constraint
-		return EntitiesBaseItemSemanticEditPolicy.LinkConstraints
+		return EntitiesBaseItemSemanticEditPolicy.getLinkConstraints()
 				.canCreateReference_3001(getSource(), getTarget());
 	}
 
@@ -76,7 +77,7 @@ public class ReferenceCreateCommand extends EditElementCommand {
 		Reference newElement = EntitiesFactory.eINSTANCE.createReference();
 		getSource().getProperties().add(newElement);
 		newElement.setType(getTarget());
-		EntitiesElementTypes.init_Reference_3001(newElement);
+		ElementInitializers.getInstance().init_Reference_3001(newElement);
 		doConfigure(newElement, monitor, info);
 		((CreateElementRequest) getRequest()).setNewElement(newElement);
 		return CommandResult.newOKCommandResult(newElement);

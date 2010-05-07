@@ -18,6 +18,9 @@ import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.example.gmf.diagram.edit.policies.EntitiesBaseItemSemanticEditPolicy;
+import org.eclipse.xtext.example.gmf.diagram.expressions.EntitiesOCLFactory;
+import org.eclipse.xtext.example.gmf.diagram.providers.ElementInitializers;
 import org.eclipse.xtext.example.gmf.entities.provider.EntitiesItemProviderAdapterFactory;
 import org.osgi.framework.BundleContext;
 
@@ -55,6 +58,21 @@ public class EntitiesDiagramEditorPlugin extends AbstractUIPlugin {
 	/**
 	 * @generated
 	 */
+	private EntitiesBaseItemSemanticEditPolicy.LinkConstraints linkConstraints;
+
+	/**
+	 * @generated
+	 */
+	private ElementInitializers initializers;
+
+	/**
+	 * @generated
+	 */
+	private EntitiesOCLFactory oclFactory;
+
+	/**
+	 * @generated
+	 */
 	public EntitiesDiagramEditorPlugin() {
 	}
 
@@ -75,6 +93,9 @@ public class EntitiesDiagramEditorPlugin extends AbstractUIPlugin {
 	public void stop(BundleContext context) throws Exception {
 		adapterFactory.dispose();
 		adapterFactory = null;
+		linkConstraints = null;
+		initializers = null;
+		oclFactory = null;
 		instance = null;
 		super.stop(context);
 	}
@@ -90,7 +111,7 @@ public class EntitiesDiagramEditorPlugin extends AbstractUIPlugin {
 	 * @generated
 	 */
 	protected ComposedAdapterFactory createAdapterFactory() {
-		List factories = new ArrayList();
+		ArrayList<AdapterFactory> factories = new ArrayList<AdapterFactory>();
 		fillItemProviderFactories(factories);
 		return new ComposedAdapterFactory(factories);
 	}
@@ -98,7 +119,7 @@ public class EntitiesDiagramEditorPlugin extends AbstractUIPlugin {
 	/**
 	 * @generated
 	 */
-	protected void fillItemProviderFactories(List factories) {
+	protected void fillItemProviderFactories(List<AdapterFactory> factories) {
 		factories.add(new EntitiesItemProviderAdapterFactory());
 		factories.add(new ResourceItemProviderAdapterFactory());
 		factories.add(new ReflectiveItemProviderAdapterFactory());
@@ -189,6 +210,49 @@ public class EntitiesDiagramEditorPlugin extends AbstractUIPlugin {
 			documentProvider = new EntitiesDocumentProvider();
 		}
 		return documentProvider;
+	}
+
+	/**
+	 * @generated
+	 */
+	public EntitiesBaseItemSemanticEditPolicy.LinkConstraints getLinkConstraints() {
+		return linkConstraints;
+	}
+
+	/**
+	 * @generated
+	 */
+	public void setLinkConstraints(
+			EntitiesBaseItemSemanticEditPolicy.LinkConstraints lc) {
+		this.linkConstraints = lc;
+	}
+
+	/**
+	 * @generated
+	 */
+	public ElementInitializers getElementInitializers() {
+		return initializers;
+	}
+
+	/**
+	 * @generated
+	 */
+	public void setElementInitializers(ElementInitializers i) {
+		this.initializers = i;
+	}
+
+	/**
+	 * @generated
+	 */
+	public EntitiesOCLFactory getEntitiesOCLFactory() {
+		return oclFactory;
+	}
+
+	/**
+	 * @generated
+	 */
+	public void setEntitiesOCLFactory(EntitiesOCLFactory f) {
+		this.oclFactory = f;
 	}
 
 	/**

@@ -173,8 +173,7 @@ public class EntitiesValidationDecoratorProvider extends AbstractProvider
 
 							public void run() {
 								StatusDecorator.this.viewId = view != null ? ViewUtil
-										.getIdStr(view)
-										: null;
+										.getIdStr(view) : null;
 							}
 						});
 			} catch (Exception e) {
@@ -294,8 +293,8 @@ public class EntitiesValidationDecoratorProvider extends AbstractProvider
 			default:
 				imageName = ISharedImages.IMG_OBJS_INFO_TSK;
 			}
-			return PlatformUI.getWorkbench().getSharedImages().getImage(
-					imageName);
+			return PlatformUI.getWorkbench().getSharedImages()
+					.getImage(imageName);
 		}
 
 		/**

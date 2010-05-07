@@ -49,7 +49,7 @@ public class EntityItemSemanticEditPolicy extends
 		CompositeTransactionalCommand cmd = new CompositeTransactionalCommand(
 				getEditingDomain(), null);
 		cmd.setTransactionNestingEnabled(false);
-		for (Iterator it = view.getTargetEdges().iterator(); it.hasNext();) {
+		for (Iterator<?> it = view.getTargetEdges().iterator(); it.hasNext();) {
 			Edge incomingLink = (Edge) it.next();
 			if (EntitiesVisualIDRegistry.getVisualID(incomingLink) == ReferenceEditPart.VISUAL_ID) {
 				DestroyElementRequest r = new DestroyElementRequest(
@@ -67,7 +67,7 @@ public class EntityItemSemanticEditPolicy extends
 				continue;
 			}
 		}
-		for (Iterator it = view.getSourceEdges().iterator(); it.hasNext();) {
+		for (Iterator<?> it = view.getSourceEdges().iterator(); it.hasNext();) {
 			Edge outgoingLink = (Edge) it.next();
 			if (EntitiesVisualIDRegistry.getVisualID(outgoingLink) == ReferenceEditPart.VISUAL_ID) {
 				DestroyElementRequest r = new DestroyElementRequest(
@@ -103,11 +103,11 @@ public class EntityItemSemanticEditPolicy extends
 	 */
 	private void addDestroyChildNodesCommand(ICompositeCommand cmd) {
 		View view = (View) getHost().getModel();
-		for (Iterator nit = view.getChildren().iterator(); nit.hasNext();) {
+		for (Iterator<?> nit = view.getChildren().iterator(); nit.hasNext();) {
 			Node node = (Node) nit.next();
 			switch (EntitiesVisualIDRegistry.getVisualID(node)) {
 			case EntitySimpleNameCompartmentEditPart.VISUAL_ID:
-				for (Iterator cit = node.getChildren().iterator(); cit
+				for (Iterator<?> cit = node.getChildren().iterator(); cit
 						.hasNext();) {
 					Node cnode = (Node) cit.next();
 					switch (EntitiesVisualIDRegistry.getVisualID(cnode)) {
@@ -141,12 +141,12 @@ public class EntityItemSemanticEditPolicy extends
 	protected Command getStartCreateRelationshipCommand(
 			CreateRelationshipRequest req) {
 		if (EntitiesElementTypes.Reference_3001 == req.getElementType()) {
-			return getGEFWrapper(new ReferenceCreateCommand(req, req
-					.getSource(), req.getTarget()));
+			return getGEFWrapper(new ReferenceCreateCommand(req,
+					req.getSource(), req.getTarget()));
 		}
 		if (EntitiesElementTypes.EntityExtends_3002 == req.getElementType()) {
-			return getGEFWrapper(new EntityExtendsCreateCommand(req, req
-					.getSource(), req.getTarget()));
+			return getGEFWrapper(new EntityExtendsCreateCommand(req,
+					req.getSource(), req.getTarget()));
 		}
 		return null;
 	}
@@ -157,12 +157,12 @@ public class EntityItemSemanticEditPolicy extends
 	protected Command getCompleteCreateRelationshipCommand(
 			CreateRelationshipRequest req) {
 		if (EntitiesElementTypes.Reference_3001 == req.getElementType()) {
-			return getGEFWrapper(new ReferenceCreateCommand(req, req
-					.getSource(), req.getTarget()));
+			return getGEFWrapper(new ReferenceCreateCommand(req,
+					req.getSource(), req.getTarget()));
 		}
 		if (EntitiesElementTypes.EntityExtends_3002 == req.getElementType()) {
-			return getGEFWrapper(new EntityExtendsCreateCommand(req, req
-					.getSource(), req.getTarget()));
+			return getGEFWrapper(new EntityExtendsCreateCommand(req,
+					req.getSource(), req.getTarget()));
 		}
 		return null;
 	}

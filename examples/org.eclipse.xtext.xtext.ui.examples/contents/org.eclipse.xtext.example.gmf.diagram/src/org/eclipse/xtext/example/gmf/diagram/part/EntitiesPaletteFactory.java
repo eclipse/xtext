@@ -1,6 +1,7 @@
 package org.eclipse.xtext.example.gmf.diagram.part;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.gef.Tool;
@@ -10,6 +11,7 @@ import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.palette.ToolEntry;
 import org.eclipse.gmf.runtime.diagram.ui.tools.UnspecifiedTypeConnectionTool;
 import org.eclipse.gmf.runtime.diagram.ui.tools.UnspecifiedTypeCreationTool;
+import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.xtext.example.gmf.diagram.providers.EntitiesElementTypes;
 
 /**
@@ -44,11 +46,10 @@ public class EntitiesPaletteFactory {
 	 * @generated
 	 */
 	private ToolEntry createEntity1CreationTool() {
-		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(EntitiesElementTypes.Entity_1001);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.Entity1CreationTool_title,
-				Messages.Entity1CreationTool_desc, types);
+				Messages.Entity1CreationTool_desc,
+				Collections.singletonList(EntitiesElementTypes.Entity_1001));
 		entry.setId("createEntity1CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(EntitiesElementTypes
 				.getImageDescriptor(EntitiesElementTypes.Entity_1001));
@@ -60,11 +61,10 @@ public class EntitiesPaletteFactory {
 	 * @generated
 	 */
 	private ToolEntry createSimpleType2CreationTool() {
-		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(EntitiesElementTypes.SimpleType_1002);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.SimpleType2CreationTool_title,
-				Messages.SimpleType2CreationTool_desc, types);
+				Messages.SimpleType2CreationTool_desc,
+				Collections.singletonList(EntitiesElementTypes.SimpleType_1002));
 		entry.setId("createSimpleType2CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(EntitiesElementTypes
 				.getImageDescriptor(EntitiesElementTypes.SimpleType_1002));
@@ -76,18 +76,16 @@ public class EntitiesPaletteFactory {
 	 * @generated
 	 */
 	private ToolEntry createSuperType3CreationTool() {
-		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(EntitiesElementTypes.EntityExtends_3002);
 		LinkToolEntry entry = new LinkToolEntry(
 				Messages.SuperType3CreationTool_title,
-				Messages.SuperType3CreationTool_desc, types);
+				Messages.SuperType3CreationTool_desc,
+				Collections
+						.singletonList(EntitiesElementTypes.EntityExtends_3002));
 		entry.setId("createSuperType3CreationTool"); //$NON-NLS-1$
-		entry
-				.setSmallIcon(EntitiesDiagramEditorPlugin
-						.findImageDescriptor("/org.eclipse.xtext.example.gmf.edit/icons/full/obj16/Generalization.gif")); //$NON-NLS-1$
-		entry
-				.setLargeIcon(EntitiesDiagramEditorPlugin
-						.findImageDescriptor("/org.eclipse.xtext.example.gmf.edit/icons/full/obj16/Generalization.gif")); //$NON-NLS-1$
+		entry.setSmallIcon(EntitiesDiagramEditorPlugin
+				.findImageDescriptor("/org.eclipse.xtext.example.gmf.edit/icons/full/obj16/Generalization.gif")); //$NON-NLS-1$
+		entry.setLargeIcon(EntitiesDiagramEditorPlugin
+				.findImageDescriptor("/org.eclipse.xtext.example.gmf.edit/icons/full/obj16/Generalization.gif")); //$NON-NLS-1$
 		return entry;
 	}
 
@@ -95,11 +93,11 @@ public class EntitiesPaletteFactory {
 	 * @generated
 	 */
 	private ToolEntry createSimpleProperty4CreationTool() {
-		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(EntitiesElementTypes.SimpleProperty_2001);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.SimpleProperty4CreationTool_title,
-				Messages.SimpleProperty4CreationTool_desc, types);
+				Messages.SimpleProperty4CreationTool_desc,
+				Collections
+						.singletonList(EntitiesElementTypes.SimpleProperty_2001));
 		entry.setId("createSimpleProperty4CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(EntitiesElementTypes
 				.getImageDescriptor(EntitiesElementTypes.SimpleProperty_2001));
@@ -111,11 +109,10 @@ public class EntitiesPaletteFactory {
 	 * @generated
 	 */
 	private ToolEntry createReferenceProperty5CreationTool() {
-		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(EntitiesElementTypes.Reference_3001);
 		LinkToolEntry entry = new LinkToolEntry(
 				Messages.ReferenceProperty5CreationTool_title,
-				Messages.ReferenceProperty5CreationTool_desc, types);
+				Messages.ReferenceProperty5CreationTool_desc,
+				Collections.singletonList(EntitiesElementTypes.Reference_3001));
 		entry.setId("createReferenceProperty5CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(EntitiesElementTypes
 				.getImageDescriptor(EntitiesElementTypes.Reference_3001));
@@ -131,13 +128,13 @@ public class EntitiesPaletteFactory {
 		/**
 		 * @generated
 		 */
-		private final List elementTypes;
+		private final List<IElementType> elementTypes;
 
 		/**
 		 * @generated
 		 */
 		private NodeToolEntry(String title, String description,
-				List elementTypes) {
+				List<IElementType> elementTypes) {
 			super(title, description, null, null);
 			this.elementTypes = elementTypes;
 		}
@@ -160,13 +157,13 @@ public class EntitiesPaletteFactory {
 		/**
 		 * @generated
 		 */
-		private final List relationshipTypes;
+		private final List<IElementType> relationshipTypes;
 
 		/**
 		 * @generated
 		 */
 		private LinkToolEntry(String title, String description,
-				List relationshipTypes) {
+				List<IElementType> relationshipTypes) {
 			super(title, description, null, null);
 			this.relationshipTypes = relationshipTypes;
 		}

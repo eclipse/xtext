@@ -27,7 +27,7 @@ import org.eclipse.xtext.example.gmf.entities.EntitiesPackage;
 /**
  * @generated
  */
-public class EntitiesElementTypes extends ElementInitializers {
+public class EntitiesElementTypes {
 
 	/**
 	 * @generated
@@ -38,7 +38,7 @@ public class EntitiesElementTypes extends ElementInitializers {
 	/**
 	 * @generated
 	 */
-	private static Map elements;
+	private static Map<IElementType, ENamedElement> elements;
 
 	/**
 	 * @generated
@@ -48,7 +48,7 @@ public class EntitiesElementTypes extends ElementInitializers {
 	/**
 	 * @generated
 	 */
-	private static Set KNOWN_ELEMENT_TYPES;
+	private static Set<IElementType> KNOWN_ELEMENT_TYPES;
 
 	/**
 	 * @generated
@@ -184,23 +184,23 @@ public class EntitiesElementTypes extends ElementInitializers {
 	public static ENamedElement getElement(IAdaptable hint) {
 		Object type = hint.getAdapter(IElementType.class);
 		if (elements == null) {
-			elements = new IdentityHashMap();
+			elements = new IdentityHashMap<IElementType, ENamedElement>();
 
 			elements.put(Model_79, EntitiesPackage.eINSTANCE.getModel());
 
 			elements.put(Entity_1001, EntitiesPackage.eINSTANCE.getEntity());
 
-			elements.put(SimpleType_1002, EntitiesPackage.eINSTANCE
-					.getSimpleType());
+			elements.put(SimpleType_1002,
+					EntitiesPackage.eINSTANCE.getSimpleType());
 
-			elements.put(SimpleProperty_2001, EntitiesPackage.eINSTANCE
-					.getSimpleProperty());
+			elements.put(SimpleProperty_2001,
+					EntitiesPackage.eINSTANCE.getSimpleProperty());
 
-			elements.put(Reference_3001, EntitiesPackage.eINSTANCE
-					.getReference());
+			elements.put(Reference_3001,
+					EntitiesPackage.eINSTANCE.getReference());
 
-			elements.put(EntityExtends_3002, EntitiesPackage.eINSTANCE
-					.getEntity_Extends());
+			elements.put(EntityExtends_3002,
+					EntitiesPackage.eINSTANCE.getEntity_Extends());
 		}
 		return (ENamedElement) elements.get(type);
 	}
@@ -217,7 +217,7 @@ public class EntitiesElementTypes extends ElementInitializers {
 	 */
 	public static boolean isKnownElementType(IElementType elementType) {
 		if (KNOWN_ELEMENT_TYPES == null) {
-			KNOWN_ELEMENT_TYPES = new HashSet();
+			KNOWN_ELEMENT_TYPES = new HashSet<IElementType>();
 			KNOWN_ELEMENT_TYPES.add(Model_79);
 			KNOWN_ELEMENT_TYPES.add(Entity_1001);
 			KNOWN_ELEMENT_TYPES.add(SimpleType_1002);

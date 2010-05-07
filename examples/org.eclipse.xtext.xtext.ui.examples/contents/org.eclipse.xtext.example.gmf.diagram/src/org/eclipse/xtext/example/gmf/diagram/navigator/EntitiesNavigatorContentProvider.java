@@ -6,8 +6,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import java.util.LinkedList;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -15,6 +17,7 @@ import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Edge;
+import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.ui.IMemento;
@@ -63,6 +66,7 @@ public class EntitiesNavigatorContentProvider implements ICommonContentProvider 
 	/**
 	 * @generated
 	 */
+	@SuppressWarnings({ "unchecked", "serial", "rawtypes" })
 	public EntitiesNavigatorContentProvider() {
 		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE
 				.createEditingDomain();
@@ -88,42 +92,21 @@ public class EntitiesNavigatorContentProvider implements ICommonContentProvider 
 					}
 
 					public boolean handleResourceChanged(final Resource resource) {
-						for (Iterator it = myEditingDomain.getResourceSet()
-								.getResources().iterator(); it.hasNext();) {
-							Resource nextResource = (Resource) it.next();
-							nextResource.unload();
-						}
-						if (myViewer != null) {
-							myViewer.getControl().getDisplay().asyncExec(
-									myViewerRefreshRunnable);
-						}
+						unloadAllResources();
+						asyncRefresh();
 						return true;
 					}
 
 					public boolean handleResourceDeleted(Resource resource) {
-						for (Iterator it = myEditingDomain.getResourceSet()
-								.getResources().iterator(); it.hasNext();) {
-							Resource nextResource = (Resource) it.next();
-							nextResource.unload();
-						}
-						if (myViewer != null) {
-							myViewer.getControl().getDisplay().asyncExec(
-									myViewerRefreshRunnable);
-						}
+						unloadAllResources();
+						asyncRefresh();
 						return true;
 					}
 
 					public boolean handleResourceMoved(Resource resource,
 							final URI newURI) {
-						for (Iterator it = myEditingDomain.getResourceSet()
-								.getResources().iterator(); it.hasNext();) {
-							Resource nextResource = (Resource) it.next();
-							nextResource.unload();
-						}
-						if (myViewer != null) {
-							myViewer.getControl().getDisplay().asyncExec(
-									myViewerRefreshRunnable);
-						}
+						unloadAllResources();
+						asyncRefresh();
 						return true;
 					}
 				});
@@ -136,11 +119,8 @@ public class EntitiesNavigatorContentProvider implements ICommonContentProvider 
 		myWorkspaceSynchronizer.dispose();
 		myWorkspaceSynchronizer = null;
 		myViewerRefreshRunnable = null;
-		for (Iterator it = myEditingDomain.getResourceSet().getResources()
-				.iterator(); it.hasNext();) {
-			Resource resource = (Resource) it.next();
-			resource.unload();
-		}
+		myViewer = null;
+		unloadAllResources();
 		((TransactionalEditingDomain) myEditingDomain).dispose();
 		myEditingDomain = null;
 	}
@@ -150,6 +130,26 @@ public class EntitiesNavigatorContentProvider implements ICommonContentProvider 
 	 */
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		myViewer = viewer;
+	}
+
+	/**
+	 * @generated
+	 */
+	void unloadAllResources() {
+		for (Resource nextResource : myEditingDomain.getResourceSet()
+				.getResources()) {
+			nextResource.unload();
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	void asyncRefresh() {
+		if (myViewer != null && !myViewer.getControl().isDisposed()) {
+			myViewer.getControl().getDisplay()
+					.asyncExec(myViewerRefreshRunnable);
+		}
 	}
 
 	/**
@@ -187,9 +187,17 @@ public class EntitiesNavigatorContentProvider implements ICommonContentProvider 
 					.toString(), true);
 			Resource resource = myEditingDomain.getResourceSet().getResource(
 					fileURI, true);
-			Collection result = new ArrayList();
-			result.addAll(createNavigatorItems(selectViewsByType(resource
-					.getContents(), ModelEditPart.MODEL_ID), file, false));
+			ArrayList<EntitiesNavigatorItem> result = new ArrayList<EntitiesNavigatorItem>();
+			ArrayList<View> topViews = new ArrayList<View>(resource
+					.getContents().size());
+			for (EObject o : resource.getContents()) {
+				if (o instanceof View) {
+					topViews.add((View) o);
+				}
+			}
+			result.addAll(createNavigatorItems(
+					selectViewsByType(topViews, ModelEditPart.MODEL_ID), file,
+					false));
 			return result.toArray();
 		}
 
@@ -215,98 +223,21 @@ public class EntitiesNavigatorContentProvider implements ICommonContentProvider 
 	private Object[] getViewChildren(View view, Object parentElement) {
 		switch (EntitiesVisualIDRegistry.getVisualID(view)) {
 
-		case ModelEditPart.VISUAL_ID: {
-			Collection result = new ArrayList();
-			EntitiesNavigatorGroup links = new EntitiesNavigatorGroup(
-					Messages.NavigatorGroupName_Model_79_links,
-					"icons/linksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection connectedViews = getChildrenByType(Collections
-					.singleton(view), EntitiesVisualIDRegistry
-					.getType(EntityEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getChildrenByType(Collections.singleton(view),
-					EntitiesVisualIDRegistry
-							.getType(SimpleTypeEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getDiagramLinksByType(Collections.singleton(view),
-					EntitiesVisualIDRegistry
-							.getType(ReferenceEditPart.VISUAL_ID));
-			links
-					.addChildren(createNavigatorItems(connectedViews, links,
-							false));
-			connectedViews = getDiagramLinksByType(Collections.singleton(view),
-					EntitiesVisualIDRegistry
-							.getType(EntityExtendsEditPart.VISUAL_ID));
-			links
-					.addChildren(createNavigatorItems(connectedViews, links,
-							false));
-			if (!links.isEmpty()) {
-				result.add(links);
-			}
-			return result.toArray();
-		}
-
-		case EntityEditPart.VISUAL_ID: {
-			Collection result = new ArrayList();
-			EntitiesNavigatorGroup incominglinks = new EntitiesNavigatorGroup(
-					Messages.NavigatorGroupName_Entity_1001_incominglinks,
-					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			EntitiesNavigatorGroup outgoinglinks = new EntitiesNavigatorGroup(
-					Messages.NavigatorGroupName_Entity_1001_outgoinglinks,
-					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection connectedViews = getChildrenByType(Collections
-					.singleton(view), EntitiesVisualIDRegistry
-					.getType(EntitySimpleNameCompartmentEditPart.VISUAL_ID));
-			connectedViews = getChildrenByType(connectedViews,
-					EntitiesVisualIDRegistry
-							.getType(SimplePropertyEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getIncomingLinksByType(
-					Collections.singleton(view), EntitiesVisualIDRegistry
-							.getType(ReferenceEditPart.VISUAL_ID));
-			incominglinks.addChildren(createNavigatorItems(connectedViews,
-					incominglinks, true));
-			connectedViews = getOutgoingLinksByType(
-					Collections.singleton(view), EntitiesVisualIDRegistry
-							.getType(ReferenceEditPart.VISUAL_ID));
-			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
-					outgoinglinks, true));
-			connectedViews = getIncomingLinksByType(
-					Collections.singleton(view), EntitiesVisualIDRegistry
-							.getType(EntityExtendsEditPart.VISUAL_ID));
-			incominglinks.addChildren(createNavigatorItems(connectedViews,
-					incominglinks, true));
-			connectedViews = getOutgoingLinksByType(
-					Collections.singleton(view), EntitiesVisualIDRegistry
-							.getType(EntityExtendsEditPart.VISUAL_ID));
-			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
-					outgoinglinks, true));
-			if (!incominglinks.isEmpty()) {
-				result.add(incominglinks);
-			}
-			if (!outgoinglinks.isEmpty()) {
-				result.add(outgoinglinks);
-			}
-			return result.toArray();
-		}
-
 		case ReferenceEditPart.VISUAL_ID: {
-			Collection result = new ArrayList();
+			LinkedList<EntitiesAbstractNavigatorItem> result = new LinkedList<EntitiesAbstractNavigatorItem>();
+			Edge sv = (Edge) view;
 			EntitiesNavigatorGroup target = new EntitiesNavigatorGroup(
 					Messages.NavigatorGroupName_Reference_3001_target,
 					"icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			EntitiesNavigatorGroup source = new EntitiesNavigatorGroup(
 					Messages.NavigatorGroupName_Reference_3001_source,
 					"icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection connectedViews = getLinksTargetByType(Collections
-					.singleton(view), EntitiesVisualIDRegistry
-					.getType(EntityEditPart.VISUAL_ID));
+			Collection<View> connectedViews;
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
+					EntitiesVisualIDRegistry.getType(EntityEditPart.VISUAL_ID));
 			target.addChildren(createNavigatorItems(connectedViews, target,
 					true));
-			connectedViews = getLinksSourceByType(Collections.singleton(view),
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
 					EntitiesVisualIDRegistry.getType(EntityEditPart.VISUAL_ID));
 			source.addChildren(createNavigatorItems(connectedViews, source,
 					true));
@@ -320,19 +251,20 @@ public class EntitiesNavigatorContentProvider implements ICommonContentProvider 
 		}
 
 		case EntityExtendsEditPart.VISUAL_ID: {
-			Collection result = new ArrayList();
+			LinkedList<EntitiesAbstractNavigatorItem> result = new LinkedList<EntitiesAbstractNavigatorItem>();
+			Edge sv = (Edge) view;
 			EntitiesNavigatorGroup target = new EntitiesNavigatorGroup(
 					Messages.NavigatorGroupName_EntityExtends_3002_target,
 					"icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			EntitiesNavigatorGroup source = new EntitiesNavigatorGroup(
 					Messages.NavigatorGroupName_EntityExtends_3002_source,
 					"icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection connectedViews = getLinksTargetByType(Collections
-					.singleton(view), EntitiesVisualIDRegistry
-					.getType(EntityEditPart.VISUAL_ID));
+			Collection<View> connectedViews;
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
+					EntitiesVisualIDRegistry.getType(EntityEditPart.VISUAL_ID));
 			target.addChildren(createNavigatorItems(connectedViews, target,
 					true));
-			connectedViews = getLinksSourceByType(Collections.singleton(view),
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
 					EntitiesVisualIDRegistry.getType(EntityEditPart.VISUAL_ID));
 			source.addChildren(createNavigatorItems(connectedViews, source,
 					true));
@@ -344,6 +276,84 @@ public class EntitiesNavigatorContentProvider implements ICommonContentProvider 
 			}
 			return result.toArray();
 		}
+
+		case EntityEditPart.VISUAL_ID: {
+			LinkedList<EntitiesAbstractNavigatorItem> result = new LinkedList<EntitiesAbstractNavigatorItem>();
+			Node sv = (Node) view;
+			EntitiesNavigatorGroup incominglinks = new EntitiesNavigatorGroup(
+					Messages.NavigatorGroupName_Entity_1001_incominglinks,
+					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			EntitiesNavigatorGroup outgoinglinks = new EntitiesNavigatorGroup(
+					Messages.NavigatorGroupName_Entity_1001_outgoinglinks,
+					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			Collection<View> connectedViews;
+			connectedViews = getChildrenByType(
+					Collections.singleton(sv),
+					EntitiesVisualIDRegistry
+							.getType(EntitySimpleNameCompartmentEditPart.VISUAL_ID));
+			connectedViews = getChildrenByType(connectedViews,
+					EntitiesVisualIDRegistry
+							.getType(SimplePropertyEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
+					EntitiesVisualIDRegistry
+							.getType(ReferenceEditPart.VISUAL_ID));
+			incominglinks.addChildren(createNavigatorItems(connectedViews,
+					incominglinks, true));
+			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
+					EntitiesVisualIDRegistry
+							.getType(ReferenceEditPart.VISUAL_ID));
+			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
+					outgoinglinks, true));
+			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
+					EntitiesVisualIDRegistry
+							.getType(EntityExtendsEditPart.VISUAL_ID));
+			incominglinks.addChildren(createNavigatorItems(connectedViews,
+					incominglinks, true));
+			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
+					EntitiesVisualIDRegistry
+							.getType(EntityExtendsEditPart.VISUAL_ID));
+			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
+					outgoinglinks, true));
+			if (!incominglinks.isEmpty()) {
+				result.add(incominglinks);
+			}
+			if (!outgoinglinks.isEmpty()) {
+				result.add(outgoinglinks);
+			}
+			return result.toArray();
+		}
+
+		case ModelEditPart.VISUAL_ID: {
+			LinkedList<EntitiesAbstractNavigatorItem> result = new LinkedList<EntitiesAbstractNavigatorItem>();
+			Diagram sv = (Diagram) view;
+			EntitiesNavigatorGroup links = new EntitiesNavigatorGroup(
+					Messages.NavigatorGroupName_Model_79_links,
+					"icons/linksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			Collection<View> connectedViews;
+			connectedViews = getChildrenByType(Collections.singleton(sv),
+					EntitiesVisualIDRegistry.getType(EntityEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getChildrenByType(Collections.singleton(sv),
+					EntitiesVisualIDRegistry
+							.getType(SimpleTypeEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getDiagramLinksByType(Collections.singleton(sv),
+					EntitiesVisualIDRegistry
+							.getType(ReferenceEditPart.VISUAL_ID));
+			links.addChildren(createNavigatorItems(connectedViews, links, false));
+			connectedViews = getDiagramLinksByType(Collections.singleton(sv),
+					EntitiesVisualIDRegistry
+							.getType(EntityExtendsEditPart.VISUAL_ID));
+			links.addChildren(createNavigatorItems(connectedViews, links, false));
+			if (!links.isEmpty()) {
+				result.add(links);
+			}
+			return result.toArray();
+		}
 		}
 		return EMPTY_ARRAY;
 	}
@@ -351,10 +361,10 @@ public class EntitiesNavigatorContentProvider implements ICommonContentProvider 
 	/**
 	 * @generated
 	 */
-	private Collection getLinksSourceByType(Collection edges, String type) {
-		Collection result = new ArrayList();
-		for (Iterator it = edges.iterator(); it.hasNext();) {
-			Edge nextEdge = (Edge) it.next();
+	private Collection<View> getLinksSourceByType(Collection<Edge> edges,
+			String type) {
+		LinkedList<View> result = new LinkedList<View>();
+		for (Edge nextEdge : edges) {
 			View nextEdgeSource = nextEdge.getSource();
 			if (type.equals(nextEdgeSource.getType())
 					&& isOwnView(nextEdgeSource)) {
@@ -367,10 +377,10 @@ public class EntitiesNavigatorContentProvider implements ICommonContentProvider 
 	/**
 	 * @generated
 	 */
-	private Collection getLinksTargetByType(Collection edges, String type) {
-		Collection result = new ArrayList();
-		for (Iterator it = edges.iterator(); it.hasNext();) {
-			Edge nextEdge = (Edge) it.next();
+	private Collection<View> getLinksTargetByType(Collection<Edge> edges,
+			String type) {
+		LinkedList<View> result = new LinkedList<View>();
+		for (Edge nextEdge : edges) {
 			View nextEdgeTarget = nextEdge.getTarget();
 			if (type.equals(nextEdgeTarget.getType())
 					&& isOwnView(nextEdgeTarget)) {
@@ -383,10 +393,10 @@ public class EntitiesNavigatorContentProvider implements ICommonContentProvider 
 	/**
 	 * @generated
 	 */
-	private Collection getOutgoingLinksByType(Collection nodes, String type) {
-		Collection result = new ArrayList();
-		for (Iterator it = nodes.iterator(); it.hasNext();) {
-			View nextNode = (View) it.next();
+	private Collection<View> getOutgoingLinksByType(
+			Collection<? extends View> nodes, String type) {
+		LinkedList<View> result = new LinkedList<View>();
+		for (View nextNode : nodes) {
 			result.addAll(selectViewsByType(nextNode.getSourceEdges(), type));
 		}
 		return result;
@@ -395,10 +405,10 @@ public class EntitiesNavigatorContentProvider implements ICommonContentProvider 
 	/**
 	 * @generated
 	 */
-	private Collection getIncomingLinksByType(Collection nodes, String type) {
-		Collection result = new ArrayList();
-		for (Iterator it = nodes.iterator(); it.hasNext();) {
-			View nextNode = (View) it.next();
+	private Collection<View> getIncomingLinksByType(
+			Collection<? extends View> nodes, String type) {
+		LinkedList<View> result = new LinkedList<View>();
+		for (View nextNode : nodes) {
 			result.addAll(selectViewsByType(nextNode.getTargetEdges(), type));
 		}
 		return result;
@@ -407,10 +417,10 @@ public class EntitiesNavigatorContentProvider implements ICommonContentProvider 
 	/**
 	 * @generated
 	 */
-	private Collection getChildrenByType(Collection nodes, String type) {
-		Collection result = new ArrayList();
-		for (Iterator it = nodes.iterator(); it.hasNext();) {
-			View nextNode = (View) it.next();
+	private Collection<View> getChildrenByType(
+			Collection<? extends View> nodes, String type) {
+		LinkedList<View> result = new LinkedList<View>();
+		for (View nextNode : nodes) {
 			result.addAll(selectViewsByType(nextNode.getChildren(), type));
 		}
 		return result;
@@ -419,10 +429,10 @@ public class EntitiesNavigatorContentProvider implements ICommonContentProvider 
 	/**
 	 * @generated
 	 */
-	private Collection getDiagramLinksByType(Collection diagrams, String type) {
-		Collection result = new ArrayList();
-		for (Iterator it = diagrams.iterator(); it.hasNext();) {
-			Diagram nextDiagram = (Diagram) it.next();
+	private Collection<View> getDiagramLinksByType(
+			Collection<Diagram> diagrams, String type) {
+		ArrayList<View> result = new ArrayList<View>();
+		for (Diagram nextDiagram : diagrams) {
 			result.addAll(selectViewsByType(nextDiagram.getEdges(), type));
 		}
 		return result;
@@ -431,10 +441,10 @@ public class EntitiesNavigatorContentProvider implements ICommonContentProvider 
 	/**
 	 * @generated
 	 */
-	private Collection selectViewsByType(Collection views, String type) {
-		Collection result = new ArrayList();
-		for (Iterator it = views.iterator(); it.hasNext();) {
-			View nextView = (View) it.next();
+	private Collection<View> selectViewsByType(Collection<View> views,
+			String type) {
+		ArrayList<View> result = new ArrayList<View>();
+		for (View nextView : views) {
 			if (type.equals(nextView.getType()) && isOwnView(nextView)) {
 				result.add(nextView);
 			}
@@ -453,12 +463,12 @@ public class EntitiesNavigatorContentProvider implements ICommonContentProvider 
 	/**
 	 * @generated
 	 */
-	private Collection createNavigatorItems(Collection views, Object parent,
-			boolean isLeafs) {
-		Collection result = new ArrayList();
-		for (Iterator it = views.iterator(); it.hasNext();) {
-			result.add(new EntitiesNavigatorItem((View) it.next(), parent,
-					isLeafs));
+	private Collection<EntitiesNavigatorItem> createNavigatorItems(
+			Collection<View> views, Object parent, boolean isLeafs) {
+		ArrayList<EntitiesNavigatorItem> result = new ArrayList<EntitiesNavigatorItem>(
+				views.size());
+		for (View nextView : views) {
+			result.add(new EntitiesNavigatorItem(nextView, parent, isLeafs));
 		}
 		return result;
 	}
