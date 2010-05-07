@@ -32,6 +32,9 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 	}
 	
 	public <T> T get(Object key, Resource cache, Provider<T> provider) {
+		if(cache == null) {
+			return provider.get();
+		}
 		CacheAdapter adapter = getOrCreate(cache);
 		T element = adapter.<T>get(key);
 		if (element==null) {
