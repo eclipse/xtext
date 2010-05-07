@@ -9,26 +9,30 @@ package org.eclipse.xtext.common.services;
 
 import java.util.Set;
 
-import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.AbstractDeclarativeValueConverterService;
+import org.eclipse.xtext.conversion.impl.AbstractIDValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractValueConverter;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.Function;
 import com.google.common.base.Join;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 
 /**
- * Simple converters for Strings, Integers and IDs.
+ * Default converters for Strings, Integers and IDs.
  */
 public class DefaultTerminalConverters extends AbstractDeclarativeValueConverterService {
 
+	/**
+	 * @deprecated use {@link IDValueConverter} instead.
+	 */
+	@Deprecated
 	public static class IDValueConverter extends AbstractValueConverter<String> {
 
 		private Set<String> toEscape;
@@ -82,6 +86,10 @@ public class DefaultTerminalConverters extends AbstractDeclarativeValueConverter
 		}
 	}
 
+	/**
+	 * @deprecated use {@link INTValueConverter} instead.
+	 */
+	@Deprecated
 	public static class INTValueConverter extends AbstractValueConverter<Integer> {
 
 		public String toString(Integer value) {
@@ -104,6 +112,10 @@ public class DefaultTerminalConverters extends AbstractDeclarativeValueConverter
 
 	}
 
+	/**
+	 * @deprecated use {@link STRINGValueConverter} instead.
+	 */
+	@Deprecated
 	public static class STRINGValueConverter extends AbstractValueConverter<String> {
 		public String toString(String value) {
 			if (value == null)
@@ -121,20 +133,29 @@ public class DefaultTerminalConverters extends AbstractDeclarativeValueConverter
 			}
 		}
 	}
+	
+	@Inject
+	private AbstractIDValueConverter idValueConverter;
 
 	@ValueConverter(rule = "ID")
 	public IValueConverter<String> ID() {
-		return new IDValueConverter(ImmutableSet.copyOf(GrammarUtil.getAllKeywords(getGrammar())));
+		return idValueConverter;
 	}
 
+	@Inject
+	private INTValueConverter intValueConverter;
+	
 	@ValueConverter(rule = "INT")
 	public IValueConverter<Integer> INT() {
-		return new INTValueConverter();
+		return intValueConverter;
 	}
 
+	@Inject
+	private STRINGValueConverter stringValueConverter;
+	
 	@ValueConverter(rule = "STRING")
 	public IValueConverter<String> STRING() {
-		return new STRINGValueConverter();
+		return stringValueConverter;
 	}
 
 }
