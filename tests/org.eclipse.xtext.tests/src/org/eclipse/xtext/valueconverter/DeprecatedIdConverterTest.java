@@ -7,38 +7,46 @@
  *******************************************************************************/
 package org.eclipse.xtext.valueconverter;
 
-import org.eclipse.xtext.XtextStandaloneSetup;
+import junit.framework.TestCase;
+
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
-import org.eclipse.xtext.conversion.IValueConverter;
+import org.eclipse.xtext.common.services.DefaultTerminalConverters.IDValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+
+import com.google.common.collect.ImmutableSet;
 
 /**
- * @author Moritz Eysholdt - Initial contribution and API
+ * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class IdConverterTest extends AbstractXtextTests {
+@SuppressWarnings("deprecation")
+public class DeprecatedIdConverterTest extends TestCase {
+	
+	private IDValueConverter idConverter;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(XtextStandaloneSetup.class);
-		conv = (DefaultTerminalConverters) getValueConverterService();
+		idConverter = new DefaultTerminalConverters.IDValueConverter(ImmutableSet.of("zonk", "foo"));
 	}
 
-	protected DefaultTerminalConverters conv;
 
 	public void testSimple() throws Exception {
-		IValueConverter<String> valueConverter = conv.ID();
 		String s = "abc";
-		String value = valueConverter.toValue(s, null);
+		String value = idConverter.toValue(s, null);
 		assertEquals("abc", value);
-		assertEquals(s, valueConverter.toString(value));
+		assertEquals(s, idConverter.toString(value));
 	}
 
+	public void testEscaped() throws Exception {
+		String s = "zonk";
+		String value = idConverter.toString(s);
+		assertEquals("^zonk", value);
+		assertEquals(s, idConverter.toValue(value, null));
+	}
+	
 	public void testNull() throws Exception {
-		IValueConverter<String> valueConverter = conv.ID();
 		try {
-			valueConverter.toString(null);
+			idConverter.toString(null);
 			fail("Null value not detected.");
 		} catch (ValueConverterException e) {
 			// normal operation
@@ -47,9 +55,8 @@ public class IdConverterTest extends AbstractXtextTests {
 	}
 
 	public void testEmpty() throws Exception {
-		IValueConverter<String> valueConverter = conv.ID();
 		try {
-			valueConverter.toString("");
+			idConverter.toString("");
 			fail("Empty value not detected.");
 		} catch (ValueConverterException e) {
 			// normal operation
@@ -58,9 +65,8 @@ public class IdConverterTest extends AbstractXtextTests {
 	}
 
 	public void testInvalidChar1() throws Exception {
-		IValueConverter<String> valueConverter = conv.ID();
 		try {
-			valueConverter.toString("^foo");
+			idConverter.toString("^foo");
 			fail("invalid char not detected..");
 		} catch (ValueConverterException e) {
 			// normal operation
@@ -69,9 +75,8 @@ public class IdConverterTest extends AbstractXtextTests {
 	}
 
 	public void testInvalidChar2() throws Exception {
-		IValueConverter<String> valueConverter = conv.ID();
 		try {
-			valueConverter.toString("foo%bar[]");
+			idConverter.toString("foo%bar[]");
 			fail("Empty value not detected.");
 		} catch (ValueConverterException e) {
 			// normal operation
@@ -80,9 +85,8 @@ public class IdConverterTest extends AbstractXtextTests {
 	}
 
 	public void testInvalidChar3() throws Exception {
-		IValueConverter<String> valueConverter = conv.ID();
 		try {
-			valueConverter.toString("0foo");
+			idConverter.toString("0foo");
 			fail("Empty value not detected.");
 		} catch (ValueConverterException e) {
 			// normal operation

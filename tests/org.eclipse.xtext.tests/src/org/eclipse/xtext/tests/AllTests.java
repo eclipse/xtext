@@ -149,6 +149,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.Bug302128Test.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.PartialSerializationTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.SerializationBug269362Test.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.SerializationErrorTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest.class);
@@ -212,10 +213,14 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.validation.ValidatorTestingTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.Bug250313AntlrTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.Bug250313PackratTest.class);
-      suite.addTestSuite(org.eclipse.xtext.valueconverter.IdConverterTest.class);
-      suite.addTestSuite(org.eclipse.xtext.valueconverter.IntConverterTest.class);
+      suite.addTestSuite(org.eclipse.xtext.valueconverter.DeprecatedIdConverterTest.class);
+      suite.addTestSuite(org.eclipse.xtext.valueconverter.DeprecatedIntConverterTest.class);
+      suite.addTestSuite(org.eclipse.xtext.valueconverter.DeprecatedStringConverterTest.class);
+      suite.addTestSuite(org.eclipse.xtext.valueconverter.IDValueConverterTest.class);
+      suite.addTestSuite(org.eclipse.xtext.valueconverter.IgnoreCaseIDValueConverterTest.class);
+      suite.addTestSuite(org.eclipse.xtext.valueconverter.INTValueConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.ParserComparingTest.class);
-      suite.addTestSuite(org.eclipse.xtext.valueconverter.StringConverterTest.class);
+      suite.addTestSuite(org.eclipse.xtext.valueconverter.STRINGConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.Bug285605Test.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.Bug290919Test.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.ExceptionTest.class);

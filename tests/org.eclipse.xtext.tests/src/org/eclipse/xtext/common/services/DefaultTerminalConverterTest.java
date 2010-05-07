@@ -18,8 +18,9 @@ import org.eclipse.xtext.conversion.ValueConverterException;
  *
  */
 public class DefaultTerminalConverterTest extends TestCase {
+	@SuppressWarnings("deprecation")
 	public void testINT() throws Exception {
-		IValueConverter<Integer> valueConverter = new DefaultTerminalConverters().INT();
+		IValueConverter<Integer> valueConverter = new DefaultTerminalConverters.INTValueConverter();
 		try {
 			valueConverter.toValue("", null);
 			fail("exception epxected");

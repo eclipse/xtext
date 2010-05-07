@@ -7,18 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.valueconverter;
 
-import org.eclipse.xtext.common.services.DefaultTerminalConverters;
-import org.eclipse.xtext.conversion.IValueConverter;
+import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.conversion.impl.STRINGValueConverter;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class StringConverterTest extends AbstractXtextTests {
+public class STRINGConverterTest extends AbstractXtextTests {
+
+	private STRINGValueConverter valueConverter;
+	
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		with(XtextStandaloneSetup.class);
+		valueConverter = get(STRINGValueConverter.class);
+	}
 
 	public void testEscapeChars() throws Exception {
-		IValueConverter<String> valueConverter = new DefaultTerminalConverters().STRING();
 		String s = "\"\\t\\n\\r\\f\\b\"";
 		String value = valueConverter.toValue(s, null);
 		assertEquals("\t\n\r\f\b", value);
@@ -26,7 +34,6 @@ public class StringConverterTest extends AbstractXtextTests {
 	}
 
 	public void testUnicode() throws Exception {
-		IValueConverter<String> valueConverter = new DefaultTerminalConverters().STRING();
 		try {
 			valueConverter.toValue("'\\u0000'", null);
 			fail("Illegal escape chr not detected");
@@ -38,9 +45,18 @@ public class StringConverterTest extends AbstractXtextTests {
 		assertEquals("\\u0000", value);
 		assertEquals(legalString, valueConverter.toString(value));
 	}
+	
+	public void testUnicode_02() throws Exception {
+		String value = "\u1234";
+		String string = valueConverter.toString(value);
+		assertEquals(value, valueConverter.toValue(string, null));
+	}
+	
+	public void testEmpty() throws Exception {
+		assertEquals("\"\"", valueConverter.toString(""));
+	}
 
 	public void testNull() throws Exception {
-		IValueConverter<String> valueConverter = new DefaultTerminalConverters().STRING();
 		try {
 			valueConverter.toString(null);
 			fail("Null value not detected.");
@@ -49,5 +65,6 @@ public class StringConverterTest extends AbstractXtextTests {
 //			System.out.println(e.getMessage());
 		}
 	}
+
 
 }
