@@ -38,6 +38,7 @@ import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 «ENDIF-»
 
+@SuppressWarnings("all")
 public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalConsumer {
 «FOREACH allCalledRules() AS calledRule-»
 

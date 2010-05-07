@@ -36,6 +36,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {«guiceModuleRt()»}
  */
+ @SuppressWarnings("all")
 public abstract class «guiceModuleRtGenerated().toSimpleName()» extends DefaultRuntimeModule {
 	
 	@Override
