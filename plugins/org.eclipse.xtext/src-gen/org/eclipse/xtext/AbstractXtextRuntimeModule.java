@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.XtextRuntimeModule}
  */
+@SuppressWarnings("all")
 public abstract class AbstractXtextRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override
@@ -49,6 +50,7 @@ public abstract class AbstractXtextRuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	@Override
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
@@ -74,6 +76,7 @@ public abstract class AbstractXtextRuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	@Override
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}

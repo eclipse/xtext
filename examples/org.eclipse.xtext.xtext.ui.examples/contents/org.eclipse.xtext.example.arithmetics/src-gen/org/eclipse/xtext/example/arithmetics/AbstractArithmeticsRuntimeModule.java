@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.example.arithmetics.ArithmeticsRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractArithmeticsRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

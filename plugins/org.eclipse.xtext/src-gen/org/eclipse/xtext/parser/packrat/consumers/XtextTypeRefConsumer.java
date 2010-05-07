@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.services.XtextGrammarAccess.TypeRefElements;
 
+@SuppressWarnings("all")
 public final class XtextTypeRefConsumer extends NonTerminalConsumer {
 
 	private TypeRefElements rule;	

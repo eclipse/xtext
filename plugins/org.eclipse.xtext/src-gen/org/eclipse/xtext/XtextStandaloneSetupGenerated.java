@@ -1,8 +1,6 @@
 
 package org.eclipse.xtext;
 
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.ISetup;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import com.google.inject.Guice;

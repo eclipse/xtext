@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.junit.AbstractXtextTests.Keys;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParserTestHelper;
 import org.eclipse.xtext.parser.keywords.keywordsTestLanguage.KeywordsTestLanguagePackage;

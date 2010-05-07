@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.example.DomainmodelRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

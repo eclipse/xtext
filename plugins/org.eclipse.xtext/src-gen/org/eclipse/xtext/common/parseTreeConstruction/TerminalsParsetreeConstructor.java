@@ -12,6 +12,7 @@ import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class TerminalsParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

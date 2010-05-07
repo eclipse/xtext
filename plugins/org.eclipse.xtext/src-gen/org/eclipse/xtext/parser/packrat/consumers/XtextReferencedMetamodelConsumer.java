@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.services.XtextGrammarAccess.ReferencedMetamodelElements;
 
+@SuppressWarnings("all")
 public final class XtextReferencedMetamodelConsumer extends NonTerminalConsumer {
 
 	private ReferencedMetamodelElements rule;	

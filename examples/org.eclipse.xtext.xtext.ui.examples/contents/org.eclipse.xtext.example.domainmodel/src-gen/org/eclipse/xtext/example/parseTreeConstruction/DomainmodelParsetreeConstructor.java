@@ -12,6 +12,7 @@ import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class DomainmodelParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

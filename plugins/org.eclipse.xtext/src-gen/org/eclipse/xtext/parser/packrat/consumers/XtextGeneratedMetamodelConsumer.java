@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.services.XtextGrammarAccess.GeneratedMetamodelElements;
 
+@SuppressWarnings("all")
 public final class XtextGeneratedMetamodelConsumer extends NonTerminalConsumer {
 
 	private GeneratedMetamodelElements rule;	

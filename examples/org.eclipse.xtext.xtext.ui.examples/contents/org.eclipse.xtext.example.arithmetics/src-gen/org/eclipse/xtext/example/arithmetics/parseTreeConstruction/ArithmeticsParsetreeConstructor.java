@@ -12,6 +12,7 @@ import org.eclipse.xtext.example.arithmetics.services.ArithmeticsGrammarAccess;
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class ArithmeticsParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

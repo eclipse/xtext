@@ -10,6 +10,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * Manual modifications go to {org.eclipse.xtext.example.arithmetics.ui.ArithmeticsUiModule}
  */
+@SuppressWarnings("all")
 public abstract class AbstractArithmeticsUiModule extends DefaultUiModule {
 	
 	public AbstractArithmeticsUiModule(AbstractUIPlugin plugin) {
