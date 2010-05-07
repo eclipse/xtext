@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.linking.services.Bug287988TestLanguageGrammarAccess.MasterElements;
 
+@SuppressWarnings("all")
 public final class Bug287988TestLanguageMasterConsumer extends NonTerminalConsumer {
 
 	private MasterElements rule;	

@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.enumrules.services.EnumAndReferenceTestLanguageGrammarAccess.KindOfKeywordElements;
 
+@SuppressWarnings("all")
 public final class EnumAndReferenceTestLanguageKindOfKeywordConsumer extends NonTerminalConsumer {
 
 	private KindOfKeywordElements rule;	

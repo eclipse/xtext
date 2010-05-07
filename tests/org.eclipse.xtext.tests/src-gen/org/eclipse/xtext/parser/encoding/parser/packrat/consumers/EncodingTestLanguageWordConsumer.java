@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.encoding.services.EncodingTestLanguageGrammarAccess.WordElements;
 
+@SuppressWarnings("all")
 public final class EncodingTestLanguageWordConsumer extends NonTerminalConsumer {
 
 	private WordElements rule;	

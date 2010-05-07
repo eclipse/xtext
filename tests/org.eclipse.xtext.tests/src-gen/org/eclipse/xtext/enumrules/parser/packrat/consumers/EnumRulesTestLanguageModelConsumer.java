@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.enumrules.services.EnumRulesTestLanguageGrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class EnumRulesTestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess.ConcreteParserRuleElements;
 
+@SuppressWarnings("all")
 public final class ConcreteTestLanguageConcreteParserRuleConsumer extends NonTerminalConsumer {
 
 	private ConcreteParserRuleElements rule;	

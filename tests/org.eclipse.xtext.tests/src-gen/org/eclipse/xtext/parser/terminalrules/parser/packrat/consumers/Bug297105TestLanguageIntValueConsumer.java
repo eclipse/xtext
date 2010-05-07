@@ -16,6 +16,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.terminalrules.services.Bug297105TestLanguageGrammarAccess.IntValueElements;
 
+@SuppressWarnings("all")
 public final class Bug297105TestLanguageIntValueConsumer extends NonTerminalConsumer {
 
 	private IntValueElements rule;	

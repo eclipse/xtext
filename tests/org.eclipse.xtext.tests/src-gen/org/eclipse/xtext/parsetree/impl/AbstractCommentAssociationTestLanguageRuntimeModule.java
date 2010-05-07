@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.parsetree.impl.CommentAssociationTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractCommentAssociationTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

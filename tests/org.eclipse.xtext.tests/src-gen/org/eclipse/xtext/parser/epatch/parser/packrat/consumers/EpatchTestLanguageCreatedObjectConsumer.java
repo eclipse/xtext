@@ -22,6 +22,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess.CreatedObjectElements;
 
+@SuppressWarnings("all")
 public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalConsumer {
 
 	private CreatedObjectElements rule;	

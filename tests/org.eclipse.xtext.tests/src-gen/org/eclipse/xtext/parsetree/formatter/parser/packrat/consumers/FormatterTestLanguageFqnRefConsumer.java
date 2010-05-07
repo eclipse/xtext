@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess.FqnRefElements;
 
+@SuppressWarnings("all")
 public final class FormatterTestLanguageFqnRefConsumer extends NonTerminalConsumer {
 
 	private FqnRefElements rule;	

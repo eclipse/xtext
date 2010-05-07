@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.assignments.services.Bug288432TestLanguageGrammarAccess.ContentElements;
 
+@SuppressWarnings("all")
 public final class Bug288432TestLanguageContentConsumer extends NonTerminalConsumer {
 
 	private ContentElements rule;	

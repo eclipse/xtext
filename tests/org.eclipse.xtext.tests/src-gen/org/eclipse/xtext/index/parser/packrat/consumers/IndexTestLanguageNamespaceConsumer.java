@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.index.services.IndexTestLanguageGrammarAccess.NamespaceElements;
 
+@SuppressWarnings("all")
 public final class IndexTestLanguageNamespaceConsumer extends NonTerminalConsumer {
 
 	private NamespaceElements rule;	

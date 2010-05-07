@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.grammarinheritance.InheritanceTest2LanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractInheritanceTest2LanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

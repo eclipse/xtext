@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.linking.services.Bug287988TestLanguageGrammarAccess.AttributeElements;
 
+@SuppressWarnings("all")
 public final class Bug287988TestLanguageAttributeConsumer extends NonTerminalConsumer {
 
 	private AttributeElements rule;	

@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.terminalrules.services.Bug292245TestLanguageGrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class Bug292245TestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

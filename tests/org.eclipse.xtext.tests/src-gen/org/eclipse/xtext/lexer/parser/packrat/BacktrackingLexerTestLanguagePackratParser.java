@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import org.eclipse.xtext.lexer.services.BacktrackingLexerTestLanguageGrammarAccess;
 
+@SuppressWarnings("all")
 public class BacktrackingLexerTestLanguagePackratParser extends AbstractPackratParser {
 	
 	@Inject

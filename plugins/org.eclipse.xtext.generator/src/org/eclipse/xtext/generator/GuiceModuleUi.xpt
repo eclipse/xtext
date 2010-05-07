@@ -28,6 +28,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * Manual modifications go to {«guiceModuleUi()»}
  */
+@SuppressWarnings("all")
 public abstract class «guiceModuleUiGenerated().toSimpleName()» extends DefaultUiModule {
 	
 	public «guiceModuleUiGenerated().toSimpleName()»(AbstractUIPlugin plugin) {

@@ -8,6 +8,7 @@ import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsu
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 
 
+@SuppressWarnings("all")
 public final class Bug292245TestLanguageAPOSTROPHE_CHARConsumer extends AbstractRuleAwareTerminalConsumer {
 
 	public Bug292245TestLanguageAPOSTROPHE_CHARConsumer(ITerminalConsumerConfiguration configuration) {

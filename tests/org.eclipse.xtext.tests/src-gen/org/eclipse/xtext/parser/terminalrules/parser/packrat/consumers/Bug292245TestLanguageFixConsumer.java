@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.terminalrules.services.Bug292245TestLanguageGrammarAccess.FixElements;
 
+@SuppressWarnings("all")
 public final class Bug292245TestLanguageFixConsumer extends NonTerminalConsumer {
 
 	private FixElements rule;	

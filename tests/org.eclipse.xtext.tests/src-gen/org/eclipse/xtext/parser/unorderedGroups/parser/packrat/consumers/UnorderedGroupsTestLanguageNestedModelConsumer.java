@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.unorderedGroups.services.UnorderedGroupsTestLanguageGrammarAccess.NestedModelElements;
 
+@SuppressWarnings("all")
 public final class UnorderedGroupsTestLanguageNestedModelConsumer extends NonTerminalConsumer {
 
 	private NestedModelElements rule;	

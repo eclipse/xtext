@@ -12,6 +12,7 @@ import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGramm
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class FormatterTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

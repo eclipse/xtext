@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.terminalrules.services.XtextTerminalsTestLanguageGrammarAccess.ParenthesizedTerminalElementElements;
 
+@SuppressWarnings("all")
 public final class XtextTerminalsTestLanguageParenthesizedTerminalElementConsumer extends NonTerminalConsumer {
 
 	private ParenthesizedTerminalElementElements rule;	

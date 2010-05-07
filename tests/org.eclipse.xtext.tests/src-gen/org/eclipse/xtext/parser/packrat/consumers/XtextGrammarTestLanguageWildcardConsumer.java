@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.WildcardElements;
 
+@SuppressWarnings("all")
 public final class XtextGrammarTestLanguageWildcardConsumer extends NonTerminalConsumer {
 
 	private WildcardElements rule;	

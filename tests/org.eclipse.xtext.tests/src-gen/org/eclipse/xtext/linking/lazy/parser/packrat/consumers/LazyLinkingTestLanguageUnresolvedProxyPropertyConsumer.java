@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.linking.lazy.services.LazyLinkingTestLanguageGrammarAccess.UnresolvedProxyPropertyElements;
 
+@SuppressWarnings("all")
 public final class LazyLinkingTestLanguageUnresolvedProxyPropertyConsumer extends NonTerminalConsumer {
 
 	private UnresolvedProxyPropertyElements rule;	

@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.lexer.BacktrackingLexerTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractBacktrackingLexerTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

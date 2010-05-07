@@ -16,6 +16,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.antlr.services.Bug296889ExTestLanguageGrammarAccess.DataTypeVariableElements;
 
+@SuppressWarnings("all")
 public final class Bug296889ExTestLanguageDataTypeVariableConsumer extends NonTerminalConsumer {
 
 	private DataTypeVariableElements rule;	

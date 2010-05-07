@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.index.services.IndexTestLanguageGrammarAccess.ElementElements;
 
+@SuppressWarnings("all")
 public final class IndexTestLanguageElementConsumer extends NonTerminalConsumer {
 
 	private ElementElements rule;	

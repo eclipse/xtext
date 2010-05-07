@@ -39,6 +39,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import «gaFQName()»;
 
+@SuppressWarnings("all")
 public class «getParserClassName().toSimpleName()» extends AbstractPackratParser {
 	
 	@Inject

@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess.ParamElements;
 
+@SuppressWarnings("all")
 public final class FormatterTestLanguageParamConsumer extends NonTerminalConsumer {
 
 	private ParamElements rule;	

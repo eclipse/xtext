@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.CrossReferenceableAlternativesElements;
 
+@SuppressWarnings("all")
 public final class XtextGrammarTestLanguageCrossReferenceableAlternativesConsumer extends NonTerminalConsumer {
 
 	private CrossReferenceableAlternativesElements rule;	

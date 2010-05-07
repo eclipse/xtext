@@ -12,6 +12,7 @@ import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguage
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class DatatypeRulesTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

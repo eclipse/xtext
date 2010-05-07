@@ -16,6 +16,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parser.antlr.services.Bug301935ExTestLanguageGrammarAccess.DelegateModelElements;
 
+@SuppressWarnings("all")
 public final class Bug301935ExTestLanguageDelegateModelConsumer extends NonTerminalConsumer {
 
 	private DelegateModelElements rule;	

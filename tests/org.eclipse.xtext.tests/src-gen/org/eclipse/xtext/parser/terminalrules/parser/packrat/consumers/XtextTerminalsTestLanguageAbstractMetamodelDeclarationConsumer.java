@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parser.terminalrules.services.XtextTerminalsTestLanguageGrammarAccess.AbstractMetamodelDeclarationElements;
 
+@SuppressWarnings("all")
 public final class XtextTerminalsTestLanguageAbstractMetamodelDeclarationConsumer extends NonTerminalConsumer {
 
 	private AbstractMetamodelDeclarationElements rule;	

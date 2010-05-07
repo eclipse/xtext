@@ -12,6 +12,7 @@ import org.eclipse.xtext.parser.unorderedGroups.services.SimpleUnorderedGroupsTe
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class SimpleUnorderedGroupsTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

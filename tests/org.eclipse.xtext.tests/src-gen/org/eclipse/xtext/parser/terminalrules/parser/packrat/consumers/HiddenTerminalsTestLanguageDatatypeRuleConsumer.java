@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLanguageGrammarAccess.DatatypeRuleElements;
 
+@SuppressWarnings("all")
 public final class HiddenTerminalsTestLanguageDatatypeRuleConsumer extends NonTerminalConsumer {
 
 	private DatatypeRuleElements rule;	

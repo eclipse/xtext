@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLanguageGrammarAccess.NameRefElements;
 
+@SuppressWarnings("all")
 public final class MultiGenMMTestLanguageNameRefConsumer extends NonTerminalConsumer {
 
 	private NameRefElements rule;	

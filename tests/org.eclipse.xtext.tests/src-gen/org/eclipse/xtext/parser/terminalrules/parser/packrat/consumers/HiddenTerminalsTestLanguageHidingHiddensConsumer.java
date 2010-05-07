@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLanguageGrammarAccess.HidingHiddensElements;
 
+@SuppressWarnings("all")
 public final class HiddenTerminalsTestLanguageHidingHiddensConsumer extends NonTerminalConsumer {
 
 	private HidingHiddensElements rule;	

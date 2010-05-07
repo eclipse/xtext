@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.assignments.services.Bug288432TestLanguageGrammarAccess.ParameterRefElements;
 
+@SuppressWarnings("all")
 public final class Bug288432TestLanguageParameterRefConsumer extends NonTerminalConsumer {
 
 	private ParameterRefElements rule;	

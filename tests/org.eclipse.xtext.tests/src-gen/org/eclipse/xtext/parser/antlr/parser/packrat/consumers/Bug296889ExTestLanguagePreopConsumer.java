@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.antlr.services.Bug296889ExTestLanguageGrammarAccess.PreopElements;
 
+@SuppressWarnings("all")
 public final class Bug296889ExTestLanguagePreopConsumer extends NonTerminalConsumer {
 
 	private PreopElements rule;	

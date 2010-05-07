@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.unorderedGroups.services.UnorderedGroupsTestLanguageGrammarAccess.UnorderedSerializationElements;
 
+@SuppressWarnings("all")
 public final class UnorderedGroupsTestLanguageUnorderedSerializationConsumer extends NonTerminalConsumer {
 
 	private UnorderedSerializationElements rule;	

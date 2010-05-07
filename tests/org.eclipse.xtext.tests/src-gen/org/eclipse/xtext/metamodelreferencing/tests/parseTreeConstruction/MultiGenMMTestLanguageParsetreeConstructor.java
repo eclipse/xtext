@@ -12,6 +12,7 @@ import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLangu
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class MultiGenMMTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

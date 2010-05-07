@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.antlr.services.Bug289524ExTestLanguageGrammarAccess.ContainedElements;
 
+@SuppressWarnings("all")
 public final class Bug289524ExTestLanguageContainedConsumer extends NonTerminalConsumer {
 
 	private ContainedElements rule;	

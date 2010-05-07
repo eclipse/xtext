@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess.OverridableParserRuleElements;
 
+@SuppressWarnings("all")
 public final class ConcreteTestLanguageOverridableParserRuleConsumer extends NonTerminalConsumer {
 
 	private OverridableParserRuleElements rule;	

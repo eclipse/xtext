@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parser.terminalrules.services.Bug297105TestLanguageGrammarAccess.RealLiteralElements;
 
+@SuppressWarnings("all")
 public final class Bug297105TestLanguageRealLiteralConsumer extends NonTerminalConsumer {
 
 	private RealLiteralElements rule;	

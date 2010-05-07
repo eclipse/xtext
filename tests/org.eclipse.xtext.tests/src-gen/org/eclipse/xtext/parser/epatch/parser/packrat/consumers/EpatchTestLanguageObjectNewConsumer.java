@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess.ObjectNewElements;
 
+@SuppressWarnings("all")
 public final class EpatchTestLanguageObjectNewConsumer extends NonTerminalConsumer {
 
 	private ObjectNewElements rule;	

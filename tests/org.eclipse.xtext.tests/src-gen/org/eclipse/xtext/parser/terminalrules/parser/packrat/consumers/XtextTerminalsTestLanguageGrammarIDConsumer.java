@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.terminalrules.services.XtextTerminalsTestLanguageGrammarAccess.GrammarIDElements;
 
+@SuppressWarnings("all")
 public final class XtextTerminalsTestLanguageGrammarIDConsumer extends NonTerminalConsumer {
 
 	private GrammarIDElements rule;	

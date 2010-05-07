@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.terminalrules.services.XtextTerminalsTestLanguageGrammarAccess.CrossReferenceElements;
 
+@SuppressWarnings("all")
 public final class XtextTerminalsTestLanguageCrossReferenceConsumer extends NonTerminalConsumer {
 
 	private CrossReferenceElements rule;	

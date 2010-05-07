@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.ParenthesizedCrossReferenceableElementElements;
 
+@SuppressWarnings("all")
 public final class XtextGrammarTestLanguageParenthesizedCrossReferenceableElementConsumer extends NonTerminalConsumer {
 
 	private ParenthesizedCrossReferenceableElementElements rule;	

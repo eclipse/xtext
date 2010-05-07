@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.generator.ecore.services.SubTestLanguageGrammarAccess.SubMainElements;
 
+@SuppressWarnings("all")
 public final class SubTestLanguageSubMainConsumer extends NonTerminalConsumer {
 
 	private SubMainElements rule;	

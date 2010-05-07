@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.linking.lazy.LazyLinkingTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractLazyLinkingTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

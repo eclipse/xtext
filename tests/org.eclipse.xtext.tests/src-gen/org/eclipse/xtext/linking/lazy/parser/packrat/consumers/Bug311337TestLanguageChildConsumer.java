@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.linking.lazy.services.Bug311337TestLanguageGrammarAccess.ChildElements;
 
+@SuppressWarnings("all")
 public final class Bug311337TestLanguageChildConsumer extends NonTerminalConsumer {
 
 	private ChildElements rule;	

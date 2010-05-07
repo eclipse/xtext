@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.assignments.services.AssignmentsTestLanguageGrammarAccess.MultiDatatypeElements;
 
+@SuppressWarnings("all")
 public final class AssignmentsTestLanguageMultiDatatypeConsumer extends NonTerminalConsumer {
 
 	private MultiDatatypeElements rule;	

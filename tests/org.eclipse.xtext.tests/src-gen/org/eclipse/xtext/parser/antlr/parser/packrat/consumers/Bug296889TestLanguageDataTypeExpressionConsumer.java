@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parser.antlr.services.Bug296889TestLanguageGrammarAccess.DataTypeExpressionElements;
 
+@SuppressWarnings("all")
 public final class Bug296889TestLanguageDataTypeExpressionConsumer extends NonTerminalConsumer {
 
 	private DataTypeExpressionElements rule;	

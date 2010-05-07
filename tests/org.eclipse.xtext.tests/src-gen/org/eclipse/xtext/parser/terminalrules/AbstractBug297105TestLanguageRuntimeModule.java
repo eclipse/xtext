@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.parser.terminalrules.Bug297105TestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractBug297105TestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

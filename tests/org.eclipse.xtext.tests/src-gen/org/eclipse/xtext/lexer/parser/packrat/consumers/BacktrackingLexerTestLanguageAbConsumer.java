@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.lexer.services.BacktrackingLexerTestLanguageGrammarAccess.AbElements;
 
+@SuppressWarnings("all")
 public final class BacktrackingLexerTestLanguageAbConsumer extends NonTerminalConsumer {
 
 	private AbElements rule;	

@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.terminalrules.services.Bug297105TestLanguageGrammarAccess.RealElements;
 
+@SuppressWarnings("all")
 public final class Bug297105TestLanguageRealConsumer extends NonTerminalConsumer {
 
 	private RealElements rule;	

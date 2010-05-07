@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.AbstractTerminalElements;
 
+@SuppressWarnings("all")
 public final class XtextGrammarTestLanguageAbstractTerminalConsumer extends NonTerminalConsumer {
 
 	private AbstractTerminalElements rule;	

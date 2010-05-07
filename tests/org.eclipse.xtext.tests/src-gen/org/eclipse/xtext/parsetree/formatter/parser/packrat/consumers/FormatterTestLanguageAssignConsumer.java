@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess.AssignElements;
 
+@SuppressWarnings("all")
 public final class FormatterTestLanguageAssignConsumer extends NonTerminalConsumer {
 
 	private AssignElements rule;	

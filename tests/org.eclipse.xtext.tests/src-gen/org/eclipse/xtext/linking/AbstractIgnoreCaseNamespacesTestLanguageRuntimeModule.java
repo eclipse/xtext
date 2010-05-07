@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.linking.IgnoreCaseNamespacesTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractIgnoreCaseNamespacesTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

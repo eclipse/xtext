@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess.ExpressionExecutableElements;
 
+@SuppressWarnings("all")
 public final class EpatchTestLanguageExpressionExecutableConsumer extends NonTerminalConsumer {
 
 	private ExpressionExecutableElements rule;	

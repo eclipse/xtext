@@ -12,6 +12,7 @@ import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLan
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class MetamodelRefTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

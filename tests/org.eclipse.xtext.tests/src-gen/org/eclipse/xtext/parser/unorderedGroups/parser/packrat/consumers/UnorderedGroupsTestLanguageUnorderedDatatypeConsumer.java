@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.unorderedGroups.services.UnorderedGroupsTestLanguageGrammarAccess.UnorderedDatatypeElements;
 
+@SuppressWarnings("all")
 public final class UnorderedGroupsTestLanguageUnorderedDatatypeConsumer extends NonTerminalConsumer {
 
 	private UnorderedDatatypeElements rule;	

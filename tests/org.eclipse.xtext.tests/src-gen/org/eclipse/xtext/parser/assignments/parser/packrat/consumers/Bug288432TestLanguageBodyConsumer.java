@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.assignments.services.Bug288432TestLanguageGrammarAccess.BodyElements;
 
+@SuppressWarnings("all")
 public final class Bug288432TestLanguageBodyConsumer extends NonTerminalConsumer {
 
 	private BodyElements rule;	

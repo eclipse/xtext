@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguageGrammarAccess;
 
+@SuppressWarnings("all")
 public class TerminalRulesTestLanguagePackratParser extends AbstractPackratParser {
 	
 	@Inject

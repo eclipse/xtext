@@ -9,6 +9,7 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 
+@SuppressWarnings("all")
 public final class AbstractTestLanguageREALConsumer extends AbstractRuleAwareTerminalConsumer {
 
 	private ITerminalConsumer intConsumer;

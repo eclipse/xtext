@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.generator.grammarAccess.services.GrammarAccessTestLanguageGrammarAccess.TypeElements;
 
+@SuppressWarnings("all")
 public final class GrammarAccessTestLanguageTypeConsumer extends NonTerminalConsumer {
 
 	private TypeElements rule;	

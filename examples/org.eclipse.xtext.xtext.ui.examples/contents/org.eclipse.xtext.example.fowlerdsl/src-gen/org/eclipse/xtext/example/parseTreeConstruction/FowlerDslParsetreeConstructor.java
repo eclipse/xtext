@@ -12,6 +12,7 @@ import org.eclipse.xtext.example.services.FowlerDslGrammarAccess;
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class FowlerDslParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

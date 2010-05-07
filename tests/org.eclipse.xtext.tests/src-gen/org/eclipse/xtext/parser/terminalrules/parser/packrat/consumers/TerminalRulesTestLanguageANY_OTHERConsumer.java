@@ -8,6 +8,7 @@ import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsu
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 
 
+@SuppressWarnings("all")
 public final class TerminalRulesTestLanguageANY_OTHERConsumer extends AbstractRuleAwareTerminalConsumer {
 
 	public TerminalRulesTestLanguageANY_OTHERConsumer(ITerminalConsumerConfiguration configuration) {

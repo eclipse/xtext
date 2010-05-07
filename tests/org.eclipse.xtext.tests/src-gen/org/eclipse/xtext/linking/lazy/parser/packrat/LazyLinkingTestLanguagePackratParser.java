@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import org.eclipse.xtext.linking.lazy.services.LazyLinkingTestLanguageGrammarAccess;
 
+@SuppressWarnings("all")
 public class LazyLinkingTestLanguagePackratParser extends AbstractPackratParser {
 	
 	@Inject

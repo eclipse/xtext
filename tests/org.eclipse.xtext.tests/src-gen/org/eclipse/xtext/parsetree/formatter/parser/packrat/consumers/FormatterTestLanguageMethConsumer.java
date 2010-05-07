@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess.MethElements;
 
+@SuppressWarnings("all")
 public final class FormatterTestLanguageMethConsumer extends NonTerminalConsumer {
 
 	private MethElements rule;	

@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess.ModelImportElements;
 
+@SuppressWarnings("all")
 public final class EpatchTestLanguageModelImportConsumer extends NonTerminalConsumer {
 
 	private ModelImportElements rule;	

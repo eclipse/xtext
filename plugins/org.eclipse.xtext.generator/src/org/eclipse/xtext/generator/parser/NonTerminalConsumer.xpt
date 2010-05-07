@@ -51,6 +51,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import «this.containingGrammar().grammarAccess()».«name»Elements;
 
+@SuppressWarnings("all")
 public final class «this.consumerClassName().toSimpleName()» extends NonTerminalConsumer {
 
 	private «this.name»Elements rule;	

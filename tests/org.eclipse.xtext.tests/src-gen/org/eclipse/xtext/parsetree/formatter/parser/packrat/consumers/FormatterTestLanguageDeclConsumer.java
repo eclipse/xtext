@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess.DeclElements;
 
+@SuppressWarnings("all")
 public final class FormatterTestLanguageDeclConsumer extends NonTerminalConsumer {
 
 	private DeclElements rule;	

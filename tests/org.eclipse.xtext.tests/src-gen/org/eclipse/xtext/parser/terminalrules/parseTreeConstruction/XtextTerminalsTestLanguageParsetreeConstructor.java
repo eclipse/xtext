@@ -12,6 +12,7 @@ import org.eclipse.xtext.parser.terminalrules.services.XtextTerminalsTestLanguag
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class XtextTerminalsTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

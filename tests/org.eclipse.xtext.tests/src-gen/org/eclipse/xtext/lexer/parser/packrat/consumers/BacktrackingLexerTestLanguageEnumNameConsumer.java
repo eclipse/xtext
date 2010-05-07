@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.lexer.services.BacktrackingLexerTestLanguageGrammarAccess.EnumNameElements;
 
+@SuppressWarnings("all")
 public final class BacktrackingLexerTestLanguageEnumNameConsumer extends NonTerminalConsumer {
 
 	private EnumNameElements rule;	

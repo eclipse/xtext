@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import org.eclipse.xtext.linking.services.IgnoreCaseNamespacesTestLanguageGrammarAccess;
 
+@SuppressWarnings("all")
 public class IgnoreCaseNamespacesTestLanguagePackratParser extends AbstractPackratParser {
 	
 	@Inject

@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.parsetree.formatter.FormatterTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractFormatterTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

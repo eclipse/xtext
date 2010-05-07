@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.linking.services.Bug289059TestLanguageGrammarAccess.UnassignedActionElements;
 
+@SuppressWarnings("all")
 public final class Bug289059TestLanguageUnassignedActionConsumer extends NonTerminalConsumer {
 
 	private UnassignedActionElements rule;	

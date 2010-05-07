@@ -22,6 +22,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.enumrules.services.EnumAndReferenceTestLanguageGrammarAccess.EntityWithEnumAndReferenceElements;
 
+@SuppressWarnings("all")
 public final class EnumAndReferenceTestLanguageEntityWithEnumAndReferenceConsumer extends NonTerminalConsumer {
 
 	private EntityWithEnumAndReferenceElements rule;	

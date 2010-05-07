@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.assignments.services.AssignmentsTestLanguageGrammarAccess.SingleValueElements;
 
+@SuppressWarnings("all")
 public final class AssignmentsTestLanguageSingleValueConsumer extends NonTerminalConsumer {
 
 	private SingleValueElements rule;	

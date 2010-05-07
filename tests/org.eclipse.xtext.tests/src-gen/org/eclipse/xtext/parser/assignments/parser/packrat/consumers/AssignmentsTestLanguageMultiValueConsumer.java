@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.assignments.services.AssignmentsTestLanguageGrammarAccess.MultiValueElements;
 
+@SuppressWarnings("all")
 public final class AssignmentsTestLanguageMultiValueConsumer extends NonTerminalConsumer {
 
 	private MultiValueElements rule;	

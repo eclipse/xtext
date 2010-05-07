@@ -12,6 +12,7 @@ import org.eclipse.xtext.lexer.services.IgnoreCaseLexerTestLanguageGrammarAccess
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class IgnoreCaseLexerTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

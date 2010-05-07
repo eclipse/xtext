@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess.AssignmentElements;
 
+@SuppressWarnings("all")
 public final class EpatchTestLanguageAssignmentConsumer extends NonTerminalConsumer {
 
 	private AssignmentElements rule;	

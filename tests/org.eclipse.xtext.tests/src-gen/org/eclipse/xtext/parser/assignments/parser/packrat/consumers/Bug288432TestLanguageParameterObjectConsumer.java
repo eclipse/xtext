@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parser.assignments.services.Bug288432TestLanguageGrammarAccess.ParameterObjectElements;
 
+@SuppressWarnings("all")
 public final class Bug288432TestLanguageParameterObjectConsumer extends NonTerminalConsumer {
 
 	private ParameterObjectElements rule;	

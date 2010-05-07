@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLanguageGrammarAccess.OverridingHiddensCallElements;
 
+@SuppressWarnings("all")
 public final class HiddenTerminalsTestLanguageOverridingHiddensCallConsumer extends NonTerminalConsumer {
 
 	private OverridingHiddensCallElements rule;	

@@ -22,6 +22,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.linking.services.AbstractIgnoreCaseLinkingTestLanguageGrammarAccess.ElementElements;
 
+@SuppressWarnings("all")
 public final class AbstractIgnoreCaseLinkingTestLanguageElementConsumer extends NonTerminalConsumer {
 
 	private ElementElements rule;	

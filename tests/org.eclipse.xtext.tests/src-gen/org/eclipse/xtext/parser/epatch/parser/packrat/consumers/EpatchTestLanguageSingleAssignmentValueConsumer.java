@@ -23,6 +23,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess.SingleAssignmentValueElements;
 
+@SuppressWarnings("all")
 public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTerminalConsumer {
 
 	private SingleAssignmentValueElements rule;	

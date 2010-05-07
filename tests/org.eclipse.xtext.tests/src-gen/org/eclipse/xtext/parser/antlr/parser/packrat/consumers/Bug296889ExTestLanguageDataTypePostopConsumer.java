@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.antlr.services.Bug296889ExTestLanguageGrammarAccess.DataTypePostopElements;
 
+@SuppressWarnings("all")
 public final class Bug296889ExTestLanguageDataTypePostopConsumer extends NonTerminalConsumer {
 
 	private DataTypePostopElements rule;	

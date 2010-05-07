@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess.VectorElements;
 
+@SuppressWarnings("all")
 public final class DatatypeRulesTestLanguageVectorConsumer extends NonTerminalConsumer {
 
 	private VectorElements rule;	

@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess.ExtendableParserRuleElements;
 
+@SuppressWarnings("all")
 public final class AbstractTestLanguageExtendableParserRuleConsumer extends NonTerminalConsumer {
 
 	private ExtendableParserRuleElements rule;	

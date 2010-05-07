@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.linking.services.AbstractIgnoreCaseLinkingTestLanguageGrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class AbstractIgnoreCaseLinkingTestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

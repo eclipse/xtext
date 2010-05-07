@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess.MonoListAssignmentElements;
 
+@SuppressWarnings("all")
 public final class EpatchTestLanguageMonoListAssignmentConsumer extends NonTerminalConsumer {
 
 	private MonoListAssignmentElements rule;	

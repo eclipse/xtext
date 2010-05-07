@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess.CallOverridenParserRuleElements;
 
+@SuppressWarnings("all")
 public final class ConcreteTestLanguageCallOverridenParserRuleConsumer extends NonTerminalConsumer {
 
 	private CallOverridenParserRuleElements rule;	

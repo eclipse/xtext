@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.NegatedTokenElements;
 
+@SuppressWarnings("all")
 public final class XtextGrammarTestLanguageNegatedTokenConsumer extends NonTerminalConsumer {
 
 	private NegatedTokenElements rule;	

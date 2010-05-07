@@ -22,6 +22,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess.NamedResourceElements;
 
+@SuppressWarnings("all")
 public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalConsumer {
 
 	private NamedResourceElements rule;	

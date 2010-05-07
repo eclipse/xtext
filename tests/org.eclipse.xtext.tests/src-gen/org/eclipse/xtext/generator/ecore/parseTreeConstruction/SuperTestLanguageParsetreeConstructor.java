@@ -12,6 +12,7 @@ import org.eclipse.xtext.generator.ecore.services.SuperTestLanguageGrammarAccess
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class SuperTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

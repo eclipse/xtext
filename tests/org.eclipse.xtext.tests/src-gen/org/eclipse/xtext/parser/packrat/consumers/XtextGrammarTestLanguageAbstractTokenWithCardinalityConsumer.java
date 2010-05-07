@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.AbstractTokenWithCardinalityElements;
 
+@SuppressWarnings("all")
 public final class XtextGrammarTestLanguageAbstractTokenWithCardinalityConsumer extends NonTerminalConsumer {
 
 	private AbstractTokenWithCardinalityElements rule;	

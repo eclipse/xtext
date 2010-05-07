@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.index.services.IndexTestLanguageGrammarAccess.PropertyElements;
 
+@SuppressWarnings("all")
 public final class IndexTestLanguagePropertyConsumer extends NonTerminalConsumer {
 
 	private PropertyElements rule;	

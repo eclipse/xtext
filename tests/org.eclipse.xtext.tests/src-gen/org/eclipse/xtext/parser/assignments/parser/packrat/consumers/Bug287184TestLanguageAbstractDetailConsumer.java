@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parser.assignments.services.Bug287184TestLanguageGrammarAccess.AbstractDetailElements;
 
+@SuppressWarnings("all")
 public final class Bug287184TestLanguageAbstractDetailConsumer extends NonTerminalConsumer {
 
 	private AbstractDetailElements rule;	

@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess.ModelIdElements;
 
+@SuppressWarnings("all")
 public final class DatatypeRulesTestLanguageModelIdConsumer extends NonTerminalConsumer {
 
 	private ModelIdElements rule;	

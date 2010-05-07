@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import org.eclipse.xtext.enumrules.services.EnumRulesTestLanguageGrammarAccess;
 
+@SuppressWarnings("all")
 public class EnumRulesTestLanguagePackratParser extends AbstractPackratParser {
 	
 	@Inject

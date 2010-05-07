@@ -10,6 +10,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * Manual modifications go to {org.eclipse.xtext.example.ui.EcoreDslUiModule}
  */
+@SuppressWarnings("all")
 public abstract class AbstractEcoreDslUiModule extends DefaultUiModule {
 	
 	public AbstractEcoreDslUiModule(AbstractUIPlugin plugin) {

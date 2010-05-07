@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.CharacterRangeElements;
 
+@SuppressWarnings("all")
 public final class XtextGrammarTestLanguageCharacterRangeConsumer extends NonTerminalConsumer {
 
 	private CharacterRangeElements rule;	

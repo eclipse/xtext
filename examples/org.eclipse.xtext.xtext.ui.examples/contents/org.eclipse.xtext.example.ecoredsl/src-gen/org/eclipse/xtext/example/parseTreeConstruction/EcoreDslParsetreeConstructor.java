@@ -12,6 +12,7 @@ import org.eclipse.xtext.example.services.EcoreDslGrammarAccess;
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class EcoreDslParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

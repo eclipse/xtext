@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLanguageGrammarAccess.MyRuleElements;
 
+@SuppressWarnings("all")
 public final class MetamodelRefTestLanguageMyRuleConsumer extends NonTerminalConsumer {
 
 	private MyRuleElements rule;	

@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLanguageGrammarAccess.OverridingHiddensElements;
 
+@SuppressWarnings("all")
 public final class HiddenTerminalsTestLanguageOverridingHiddensConsumer extends NonTerminalConsumer {
 
 	private OverridingHiddensElements rule;	

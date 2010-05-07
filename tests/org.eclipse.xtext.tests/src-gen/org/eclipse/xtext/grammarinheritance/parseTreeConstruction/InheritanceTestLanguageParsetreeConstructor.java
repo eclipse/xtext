@@ -12,6 +12,7 @@ import org.eclipse.xtext.grammarinheritance.services.InheritanceTestLanguageGram
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class InheritanceTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

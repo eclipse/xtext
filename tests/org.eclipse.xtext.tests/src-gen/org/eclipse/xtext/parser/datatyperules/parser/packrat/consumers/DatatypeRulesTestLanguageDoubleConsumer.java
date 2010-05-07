@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess.DoubleElements;
 
+@SuppressWarnings("all")
 public final class DatatypeRulesTestLanguageDoubleConsumer extends NonTerminalConsumer {
 
 	private DoubleElements rule;	

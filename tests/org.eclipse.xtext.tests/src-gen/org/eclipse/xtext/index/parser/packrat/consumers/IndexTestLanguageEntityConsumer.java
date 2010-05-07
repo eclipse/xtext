@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.index.services.IndexTestLanguageGrammarAccess.EntityElements;
 
+@SuppressWarnings("all")
 public final class IndexTestLanguageEntityConsumer extends NonTerminalConsumer {
 
 	private EntityElements rule;	

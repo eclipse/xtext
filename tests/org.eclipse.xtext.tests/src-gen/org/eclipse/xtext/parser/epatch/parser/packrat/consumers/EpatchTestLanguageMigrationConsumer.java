@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess.MigrationElements;
 
+@SuppressWarnings("all")
 public final class EpatchTestLanguageMigrationConsumer extends NonTerminalConsumer {
 
 	private MigrationElements rule;	

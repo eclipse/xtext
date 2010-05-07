@@ -16,6 +16,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.terminalrules.services.Bug292245TestLanguageGrammarAccess.ApostropheElements;
 
+@SuppressWarnings("all")
 public final class Bug292245TestLanguageApostropheConsumer extends NonTerminalConsumer {
 
 	private ApostropheElements rule;	

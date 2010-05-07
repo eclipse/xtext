@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.GroupElements;
 
+@SuppressWarnings("all")
 public final class XtextGrammarTestLanguageGroupConsumer extends NonTerminalConsumer {
 
 	private GroupElements rule;	

@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess.FqnObjElements;
 
+@SuppressWarnings("all")
 public final class FormatterTestLanguageFqnObjConsumer extends NonTerminalConsumer {
 
 	private FqnObjElements rule;	

@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess.NamedObjectElements;
 
+@SuppressWarnings("all")
 public final class EpatchTestLanguageNamedObjectConsumer extends NonTerminalConsumer {
 
 	private NamedObjectElements rule;	

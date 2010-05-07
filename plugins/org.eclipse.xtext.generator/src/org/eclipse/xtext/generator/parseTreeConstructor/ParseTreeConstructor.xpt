@@ -35,6 +35,7 @@ import «gaFQName()»;
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class «getParseTreeConstructorName().toSimpleName()» extends AbstractParseTreeConstructor {
 		
 	@Inject

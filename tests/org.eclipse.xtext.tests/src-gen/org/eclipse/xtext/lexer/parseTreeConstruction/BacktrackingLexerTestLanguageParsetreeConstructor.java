@@ -12,6 +12,7 @@ import org.eclipse.xtext.lexer.services.BacktrackingLexerTestLanguageGrammarAcce
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class BacktrackingLexerTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.terminalrules.services.XtextTerminalsTestLanguageGrammarAccess.KeywordElements;
 
+@SuppressWarnings("all")
 public final class XtextTerminalsTestLanguageKeywordConsumer extends NonTerminalConsumer {
 
 	private KeywordElements rule;	

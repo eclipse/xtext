@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractMetamodelRefTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

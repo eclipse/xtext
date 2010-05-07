@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.parser.unorderedGroups.SimpleUnorderedGroupsTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractSimpleUnorderedGroupsTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

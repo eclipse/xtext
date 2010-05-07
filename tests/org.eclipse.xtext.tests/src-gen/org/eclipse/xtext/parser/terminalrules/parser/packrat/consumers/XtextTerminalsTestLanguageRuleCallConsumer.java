@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.terminalrules.services.XtextTerminalsTestLanguageGrammarAccess.RuleCallElements;
 
+@SuppressWarnings("all")
 public final class XtextTerminalsTestLanguageRuleCallConsumer extends NonTerminalConsumer {
 
 	private RuleCallElements rule;	

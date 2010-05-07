@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.generator.grammarAccess.services.GrammarAccessTestLanguageGrammarAccess.ATypeElements;
 
+@SuppressWarnings("all")
 public final class GrammarAccessTestLanguageATypeConsumer extends NonTerminalConsumer {
 
 	private ATypeElements rule;	

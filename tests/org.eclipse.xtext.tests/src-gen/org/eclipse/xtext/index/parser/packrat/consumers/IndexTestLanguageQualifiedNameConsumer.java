@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.index.services.IndexTestLanguageGrammarAccess.QualifiedNameElements;
 
+@SuppressWarnings("all")
 public final class IndexTestLanguageQualifiedNameConsumer extends NonTerminalConsumer {
 
 	private QualifiedNameElements rule;	

@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess.FQNElements;
 
+@SuppressWarnings("all")
 public final class FormatterTestLanguageFQNConsumer extends NonTerminalConsumer {
 
 	private FQNElements rule;	

@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.generator.ecore.SubTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractSubTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

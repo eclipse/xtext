@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.index.services.IndexTestLanguageGrammarAccess.ImportElements;
 
+@SuppressWarnings("all")
 public final class IndexTestLanguageImportConsumer extends NonTerminalConsumer {
 
 	private ImportElements rule;	

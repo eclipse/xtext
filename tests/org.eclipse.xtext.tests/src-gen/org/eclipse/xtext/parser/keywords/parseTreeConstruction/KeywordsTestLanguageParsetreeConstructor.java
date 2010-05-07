@@ -12,6 +12,7 @@ import org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAcc
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class KeywordsTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

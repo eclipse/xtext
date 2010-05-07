@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.terminalrules.services.Bug292245TestLanguageGrammarAccess.ErrorElements;
 
+@SuppressWarnings("all")
 public final class Bug292245TestLanguageErrorConsumer extends NonTerminalConsumer {
 
 	private ErrorElements rule;	

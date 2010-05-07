@@ -12,6 +12,7 @@ import org.eclipse.xtext.linking.services.AbstractIgnoreCaseLinkingTestLanguageG
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class AbstractIgnoreCaseLinkingTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

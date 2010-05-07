@@ -16,6 +16,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parser.unorderedGroups.services.SimpleUnorderedGroupsTestLanguageGrammarAccess.DelegateModelElements;
 
+@SuppressWarnings("all")
 public final class SimpleUnorderedGroupsTestLanguageDelegateModelConsumer extends NonTerminalConsumer {
 
 	private DelegateModelElements rule;	

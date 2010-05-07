@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess.EPackageImportElements;
 
+@SuppressWarnings("all")
 public final class EpatchTestLanguageEPackageImportConsumer extends NonTerminalConsumer {
 
 	private EPackageImportElements rule;	

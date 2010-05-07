@@ -12,6 +12,7 @@ import org.eclipse.xtext.linking.services.IgnoreCaseNamespacesTestLanguageGramma
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class IgnoreCaseNamespacesTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

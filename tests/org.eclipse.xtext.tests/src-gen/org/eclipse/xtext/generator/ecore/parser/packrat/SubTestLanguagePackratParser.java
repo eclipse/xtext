@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import org.eclipse.xtext.generator.ecore.services.SubTestLanguageGrammarAccess;
 
+@SuppressWarnings("all")
 public class SubTestLanguagePackratParser extends AbstractPackratParser {
 	
 	@Inject

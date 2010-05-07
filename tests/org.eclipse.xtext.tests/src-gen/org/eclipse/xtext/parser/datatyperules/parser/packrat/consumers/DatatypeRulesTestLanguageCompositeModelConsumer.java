@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess.CompositeModelElements;
 
+@SuppressWarnings("all")
 public final class DatatypeRulesTestLanguageCompositeModelConsumer extends NonTerminalConsumer {
 
 	private CompositeModelElements rule;	

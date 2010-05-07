@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.dummy.DummyTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractDummyTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess.DotsElements;
 
+@SuppressWarnings("all")
 public final class DatatypeRulesTestLanguageDotsConsumer extends NonTerminalConsumer {
 
 	private DotsElements rule;	

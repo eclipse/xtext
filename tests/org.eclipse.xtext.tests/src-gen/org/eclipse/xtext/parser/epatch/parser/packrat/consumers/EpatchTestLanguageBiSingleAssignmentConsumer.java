@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess.BiSingleAssignmentElements;
 
+@SuppressWarnings("all")
 public final class EpatchTestLanguageBiSingleAssignmentConsumer extends NonTerminalConsumer {
 
 	private BiSingleAssignmentElements rule;	

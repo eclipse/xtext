@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import org.eclipse.xtext.parser.encoding.services.EncodingTestLanguageGrammarAccess;
 
+@SuppressWarnings("all")
 public class EncodingTestLanguagePackratParser extends AbstractPackratParser {
 	
 	@Inject

@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.generator.ecore.services.SuperTestLanguageGrammarAccess.AnotherSuperMainElements;
 
+@SuppressWarnings("all")
 public final class SuperTestLanguageAnotherSuperMainConsumer extends NonTerminalConsumer {
 
 	private AnotherSuperMainElements rule;	

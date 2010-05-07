@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import org.eclipse.xtext.parser.antlr.services.Bug296889ExTestLanguageGrammarAccess;
 
+@SuppressWarnings("all")
 public class Bug296889ExTestLanguagePackratParser extends AbstractPackratParser {
 	
 	@Inject

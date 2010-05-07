@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.linking.lazy.services.Bug311337TestLanguageGrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class Bug311337TestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

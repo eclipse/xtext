@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.linking.services.LangATestLanguageGrammarAccess.MainElements;
 
+@SuppressWarnings("all")
 public final class LangATestLanguageMainConsumer extends NonTerminalConsumer {
 
 	private MainElements rule;	

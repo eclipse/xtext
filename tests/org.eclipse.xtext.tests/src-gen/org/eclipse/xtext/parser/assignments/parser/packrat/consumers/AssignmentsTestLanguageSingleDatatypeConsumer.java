@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.assignments.services.AssignmentsTestLanguageGrammarAccess.SingleDatatypeElements;
 
+@SuppressWarnings("all")
 public final class AssignmentsTestLanguageSingleDatatypeConsumer extends NonTerminalConsumer {
 
 	private SingleDatatypeElements rule;	

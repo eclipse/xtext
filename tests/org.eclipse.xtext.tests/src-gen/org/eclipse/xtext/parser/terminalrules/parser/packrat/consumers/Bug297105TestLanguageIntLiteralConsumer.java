@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parser.terminalrules.services.Bug297105TestLanguageGrammarAccess.IntLiteralElements;
 
+@SuppressWarnings("all")
 public final class Bug297105TestLanguageIntLiteralConsumer extends NonTerminalConsumer {
 
 	private IntLiteralElements rule;	

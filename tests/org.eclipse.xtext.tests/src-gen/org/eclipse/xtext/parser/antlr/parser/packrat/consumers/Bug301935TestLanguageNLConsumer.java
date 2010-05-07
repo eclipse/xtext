@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.antlr.services.Bug301935TestLanguageGrammarAccess.NLElements;
 
+@SuppressWarnings("all")
 public final class Bug301935TestLanguageNLConsumer extends NonTerminalConsumer {
 
 	private NLElements rule;	

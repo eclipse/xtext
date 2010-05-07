@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.lexer.services.BacktrackingLexerTestLanguageGrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class BacktrackingLexerTestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

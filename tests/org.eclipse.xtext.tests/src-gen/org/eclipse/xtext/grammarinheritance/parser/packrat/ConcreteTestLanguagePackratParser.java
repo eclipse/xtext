@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess;
 
+@SuppressWarnings("all")
 public class ConcreteTestLanguagePackratParser extends AbstractPackratParser {
 	
 	@Inject

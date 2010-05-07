@@ -22,6 +22,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.EnumLiteralDeclarationElements;
 
+@SuppressWarnings("all")
 public final class XtextGrammarTestLanguageEnumLiteralDeclarationConsumer extends NonTerminalConsumer {
 
 	private EnumLiteralDeclarationElements rule;	

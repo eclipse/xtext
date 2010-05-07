@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class KeywordsTestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

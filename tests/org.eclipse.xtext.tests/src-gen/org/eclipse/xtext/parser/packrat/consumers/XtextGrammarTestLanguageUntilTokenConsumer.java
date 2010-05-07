@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.UntilTokenElements;
 
+@SuppressWarnings("all")
 public final class XtextGrammarTestLanguageUntilTokenConsumer extends NonTerminalConsumer {
 
 	private UntilTokenElements rule;	

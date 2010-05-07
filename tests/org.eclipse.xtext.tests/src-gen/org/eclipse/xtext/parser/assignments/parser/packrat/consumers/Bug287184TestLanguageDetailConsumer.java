@@ -22,6 +22,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.assignments.services.Bug287184TestLanguageGrammarAccess.DetailElements;
 
+@SuppressWarnings("all")
 public final class Bug287184TestLanguageDetailConsumer extends NonTerminalConsumer {
 
 	private DetailElements rule;	

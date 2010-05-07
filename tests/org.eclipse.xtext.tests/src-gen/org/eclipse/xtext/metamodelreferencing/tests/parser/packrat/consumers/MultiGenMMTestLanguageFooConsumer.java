@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLanguageGrammarAccess.FooElements;
 
+@SuppressWarnings("all")
 public final class MultiGenMMTestLanguageFooConsumer extends NonTerminalConsumer {
 
 	private FooElements rule;	

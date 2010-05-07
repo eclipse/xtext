@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLanguageGrammarAccess;
 
+@SuppressWarnings("all")
 public class MultiGenMMTestLanguagePackratParser extends AbstractPackratParser {
 	
 	@Inject

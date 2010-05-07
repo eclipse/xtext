@@ -10,6 +10,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * Manual modifications go to {org.eclipse.xtext.example.ui.FowlerDslUiModule}
  */
+@SuppressWarnings("all")
 public abstract class AbstractFowlerDslUiModule extends DefaultUiModule {
 	
 	public AbstractFowlerDslUiModule(AbstractUIPlugin plugin) {

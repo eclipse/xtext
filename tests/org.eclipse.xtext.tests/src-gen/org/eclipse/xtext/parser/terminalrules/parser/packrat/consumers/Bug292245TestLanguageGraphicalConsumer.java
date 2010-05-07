@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.terminalrules.services.Bug292245TestLanguageGrammarAccess.GraphicalElements;
 
+@SuppressWarnings("all")
 public final class Bug292245TestLanguageGraphicalConsumer extends NonTerminalConsumer {
 
 	private GraphicalElements rule;	

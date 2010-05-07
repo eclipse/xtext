@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess.EPatchElements;
 
+@SuppressWarnings("all")
 public final class EpatchTestLanguageEPatchConsumer extends NonTerminalConsumer {
 
 	private EPatchElements rule;	

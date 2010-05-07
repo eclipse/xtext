@@ -23,6 +23,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess.ListAssignmentValueElements;
 
+@SuppressWarnings("all")
 public final class EpatchTestLanguageListAssignmentValueConsumer extends NonTerminalConsumer {
 
 	private ListAssignmentValueElements rule;	

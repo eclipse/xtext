@@ -23,6 +23,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.linking.services.Bug287988TestLanguageGrammarAccess.RuleCallAttribute2Elements;
 
+@SuppressWarnings("all")
 public final class Bug287988TestLanguageRuleCallAttribute2Consumer extends NonTerminalConsumer {
 
 	private RuleCallAttribute2Elements rule;	

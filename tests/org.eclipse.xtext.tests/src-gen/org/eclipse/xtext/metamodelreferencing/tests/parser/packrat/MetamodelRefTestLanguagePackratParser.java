@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLanguageGrammarAccess;
 
+@SuppressWarnings("all")
 public class MetamodelRefTestLanguagePackratParser extends AbstractPackratParser {
 	
 	@Inject

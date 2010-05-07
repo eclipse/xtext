@@ -12,6 +12,7 @@ import org.eclipse.xtext.linking.lazy.services.LazyLinkingTestLanguageGrammarAcc
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class LazyLinkingTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import org.eclipse.xtext.parser.unorderedGroups.services.UnorderedGroupsTestLanguageGrammarAccess;
 
+@SuppressWarnings("all")
 public class UnorderedGroupsTestLanguagePackratParser extends AbstractPackratParser {
 	
 	@Inject

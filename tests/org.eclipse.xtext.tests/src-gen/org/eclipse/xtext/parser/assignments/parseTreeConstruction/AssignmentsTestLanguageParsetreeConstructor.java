@@ -12,6 +12,7 @@ import org.eclipse.xtext.parser.assignments.services.AssignmentsTestLanguageGram
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class AssignmentsTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

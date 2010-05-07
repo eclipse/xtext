@@ -12,6 +12,7 @@ import org.eclipse.xtext.generator.ecore.services.EcoreFragmentTestLanguageGramm
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class EcoreFragmentTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

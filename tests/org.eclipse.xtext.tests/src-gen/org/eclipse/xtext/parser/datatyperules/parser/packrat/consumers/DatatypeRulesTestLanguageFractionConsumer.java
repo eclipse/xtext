@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess.FractionElements;
 
+@SuppressWarnings("all")
 public final class DatatypeRulesTestLanguageFractionConsumer extends NonTerminalConsumer {
 
 	private FractionElements rule;	

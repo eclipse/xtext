@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.dummy.services.DummyTestLanguageGrammarAccess.ElementElements;
 
+@SuppressWarnings("all")
 public final class DummyTestLanguageElementConsumer extends NonTerminalConsumer {
 
 	private ElementElements rule;	

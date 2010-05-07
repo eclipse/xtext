@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parser.antlr.services.Bug296889ExTestLanguageGrammarAccess.ExpressionElements;
 
+@SuppressWarnings("all")
 public final class Bug296889ExTestLanguageExpressionConsumer extends NonTerminalConsumer {
 
 	private ExpressionElements rule;	

@@ -16,6 +16,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.assignments.services.AssignmentsTestLanguageGrammarAccess.StringDatatypeElements;
 
+@SuppressWarnings("all")
 public final class AssignmentsTestLanguageStringDatatypeConsumer extends NonTerminalConsumer {
 
 	private StringDatatypeElements rule;	

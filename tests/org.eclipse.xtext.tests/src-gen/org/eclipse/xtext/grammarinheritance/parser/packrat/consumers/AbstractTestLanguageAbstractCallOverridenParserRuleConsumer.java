@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess.AbstractCallOverridenParserRuleElements;
 
+@SuppressWarnings("all")
 public final class AbstractTestLanguageAbstractCallOverridenParserRuleConsumer extends NonTerminalConsumer {
 
 	private AbstractCallOverridenParserRuleElements rule;	

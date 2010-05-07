@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.lexer.services.IgnoreCaseLexerTestLanguageGrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class IgnoreCaseLexerTestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

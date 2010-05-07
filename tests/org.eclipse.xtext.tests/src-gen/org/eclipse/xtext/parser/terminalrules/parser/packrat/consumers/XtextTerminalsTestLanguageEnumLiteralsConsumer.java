@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.terminalrules.services.XtextTerminalsTestLanguageGrammarAccess.EnumLiteralsElements;
 
+@SuppressWarnings("all")
 public final class XtextTerminalsTestLanguageEnumLiteralsConsumer extends NonTerminalConsumer {
 
 	private EnumLiteralsElements rule;	

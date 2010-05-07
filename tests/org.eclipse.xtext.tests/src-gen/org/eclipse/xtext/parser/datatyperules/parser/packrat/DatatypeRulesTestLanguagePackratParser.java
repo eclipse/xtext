@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess;
 
+@SuppressWarnings("all")
 public class DatatypeRulesTestLanguagePackratParser extends AbstractPackratParser {
 	
 	@Inject

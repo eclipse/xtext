@@ -23,6 +23,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.linking.services.Bug287988TestLanguageGrammarAccess.BaseAttributeElements;
 
+@SuppressWarnings("all")
 public final class Bug287988TestLanguageBaseAttributeConsumer extends NonTerminalConsumer {
 
 	private BaseAttributeElements rule;	

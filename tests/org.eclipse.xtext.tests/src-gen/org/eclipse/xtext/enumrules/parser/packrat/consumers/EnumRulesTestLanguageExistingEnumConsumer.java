@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.enumrules.services.EnumRulesTestLanguageGrammarAccess.ExistingEnumElements;
 
+@SuppressWarnings("all")
 public final class EnumRulesTestLanguageExistingEnumConsumer extends NonTerminalConsumer {
 
 	private ExistingEnumElements rule;	

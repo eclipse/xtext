@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.index.services.IndexTestLanguageGrammarAccess.QualifiedNameWithWildCardElements;
 
+@SuppressWarnings("all")
 public final class IndexTestLanguageQualifiedNameWithWildCardConsumer extends NonTerminalConsumer {
 
 	private QualifiedNameWithWildCardElements rule;	

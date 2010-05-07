@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.generator.ecore.services.EcoreFragmentTestLanguageGrammarAccess.SecondElements;
 
+@SuppressWarnings("all")
 public final class EcoreFragmentTestLanguageSecondConsumer extends NonTerminalConsumer {
 
 	private SecondElements rule;	

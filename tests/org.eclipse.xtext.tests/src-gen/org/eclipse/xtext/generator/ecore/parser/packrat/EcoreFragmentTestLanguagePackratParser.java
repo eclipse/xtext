@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import org.eclipse.xtext.generator.ecore.services.EcoreFragmentTestLanguageGrammarAccess;
 
+@SuppressWarnings("all")
 public class EcoreFragmentTestLanguagePackratParser extends AbstractPackratParser {
 	
 	@Inject

@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.linking.services.IgnoreCaseNamespacesTestLanguageGrammarAccess.ImportElements;
 
+@SuppressWarnings("all")
 public final class IgnoreCaseNamespacesTestLanguageImportConsumer extends NonTerminalConsumer {
 
 	private ImportElements rule;	

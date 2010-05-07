@@ -16,6 +16,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.terminalrules.services.Bug292245TestLanguageGrammarAccess.RehideElements;
 
+@SuppressWarnings("all")
 public final class Bug292245TestLanguageRehideConsumer extends NonTerminalConsumer {
 
 	private RehideElements rule;	

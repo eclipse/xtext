@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.linking.services.Bug287988TestLanguageGrammarAccess.CallMe2Elements;
 
+@SuppressWarnings("all")
 public final class Bug287988TestLanguageCallMe2Consumer extends NonTerminalConsumer {
 
 	private CallMe2Elements rule;	

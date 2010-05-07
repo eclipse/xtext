@@ -12,6 +12,7 @@ import org.eclipse.xtext.linking.services.ImportUriTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class ImportUriTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject

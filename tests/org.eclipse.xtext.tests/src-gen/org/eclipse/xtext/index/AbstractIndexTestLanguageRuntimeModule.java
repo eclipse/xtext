@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.index.IndexTestLanguageRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractIndexTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override

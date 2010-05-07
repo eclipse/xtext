@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.linking.services.Bug287988TestLanguageGrammarAccess.CallMe3Elements;
 
+@SuppressWarnings("all")
 public final class Bug287988TestLanguageCallMe3Consumer extends NonTerminalConsumer {
 
 	private CallMe3Elements rule;	

@@ -22,6 +22,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.ActionElements;
 
+@SuppressWarnings("all")
 public final class XtextGrammarTestLanguageActionConsumer extends NonTerminalConsumer {
 
 	private ActionElements rule;	

@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.linking.services.ImportUriTestLanguageGrammarAccess.TypeElements;
 
+@SuppressWarnings("all")
 public final class ImportUriTestLanguageTypeConsumer extends NonTerminalConsumer {
 
 	private TypeElements rule;	

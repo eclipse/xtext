@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess.LineElements;
 
+@SuppressWarnings("all")
 public final class FormatterTestLanguageLineConsumer extends NonTerminalConsumer {
 
 	private LineElements rule;	

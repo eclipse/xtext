@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.assignments.services.Bug288432TestLanguageGrammarAccess.FooElements;
 
+@SuppressWarnings("all")
 public final class Bug288432TestLanguageFooConsumer extends NonTerminalConsumer {
 
 	private FooElements rule;	

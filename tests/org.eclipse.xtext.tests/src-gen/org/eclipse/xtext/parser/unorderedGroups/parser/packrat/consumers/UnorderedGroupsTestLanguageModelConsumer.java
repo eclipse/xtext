@@ -23,6 +23,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.unorderedGroups.services.UnorderedGroupsTestLanguageGrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class UnorderedGroupsTestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

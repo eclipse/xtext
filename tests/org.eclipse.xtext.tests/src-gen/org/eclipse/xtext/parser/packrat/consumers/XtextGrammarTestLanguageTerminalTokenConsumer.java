@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.TerminalTokenElements;
 
+@SuppressWarnings("all")
 public final class XtextGrammarTestLanguageTerminalTokenConsumer extends NonTerminalConsumer {
 
 	private TerminalTokenElements rule;	

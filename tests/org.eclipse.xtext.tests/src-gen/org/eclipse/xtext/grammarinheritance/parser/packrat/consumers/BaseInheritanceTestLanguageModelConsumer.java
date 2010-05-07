@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.grammarinheritance.services.BaseInheritanceTestLanguageGrammarAccess.ModelElements;
 
+@SuppressWarnings("all")
 public final class BaseInheritanceTestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	

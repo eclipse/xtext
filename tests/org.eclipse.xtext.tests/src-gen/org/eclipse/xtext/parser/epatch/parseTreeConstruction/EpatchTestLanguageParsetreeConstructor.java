@@ -12,6 +12,7 @@ import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class EpatchTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
@@ -2796,8 +2797,8 @@ protected class Assignment_Alternatives extends AlternativesToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getMonoListAssignmentRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getMonoSingleAssignmentRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getBiListAssignmentRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getBiSingleAssignmentRule().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}

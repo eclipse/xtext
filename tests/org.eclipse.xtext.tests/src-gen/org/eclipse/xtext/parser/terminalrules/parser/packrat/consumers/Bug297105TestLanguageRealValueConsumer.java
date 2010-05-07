@@ -16,6 +16,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parser.terminalrules.services.Bug297105TestLanguageGrammarAccess.RealValueElements;
 
+@SuppressWarnings("all")
 public final class Bug297105TestLanguageRealValueConsumer extends NonTerminalConsumer {
 
 	private RealValueElements rule;	

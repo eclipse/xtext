@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.grammarinheritance.services.BaseInheritanceTestLanguageGrammarAccess.FQNElements;
 
+@SuppressWarnings("all")
 public final class BaseInheritanceTestLanguageFQNConsumer extends NonTerminalConsumer {
 
 	private FQNElements rule;	

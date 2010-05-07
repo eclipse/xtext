@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.terminalrules.services.Bug297105TestLanguageGrammarAccess.ExpressionElements;
 
+@SuppressWarnings("all")
 public final class Bug297105TestLanguageExpressionConsumer extends NonTerminalConsumer {
 
 	private ExpressionElements rule;	

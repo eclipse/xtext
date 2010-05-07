@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess.NestedModelIdElements;
 
+@SuppressWarnings("all")
 public final class DatatypeRulesTestLanguageNestedModelIdConsumer extends NonTerminalConsumer {
 
 	private NestedModelIdElements rule;	

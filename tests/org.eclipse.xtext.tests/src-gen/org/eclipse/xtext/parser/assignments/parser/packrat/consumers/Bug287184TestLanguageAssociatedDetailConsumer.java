@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.assignments.services.Bug287184TestLanguageGrammarAccess.AssociatedDetailElements;
 
+@SuppressWarnings("all")
 public final class Bug287184TestLanguageAssociatedDetailConsumer extends NonTerminalConsumer {
 
 	private AssociatedDetailElements rule;	

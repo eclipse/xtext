@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.linking.lazy.services.LazyLinkingTestLanguageGrammarAccess.PropertyElements;
 
+@SuppressWarnings("all")
 public final class LazyLinkingTestLanguagePropertyConsumer extends NonTerminalConsumer {
 
 	private PropertyElements rule;	
