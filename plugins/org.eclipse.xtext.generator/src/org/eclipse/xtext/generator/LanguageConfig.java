@@ -109,7 +109,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 			throw new IllegalArgumentException("Couldn't load grammar for '" + uri + "'.");
 		}
 		if (!resource.getErrors().isEmpty()) {
-			throw new IllegalStateException(resource.getErrors().toString());
+			throw new IllegalStateException("Problem parsing '"+uri+"':"+resource.getErrors().toString());
 		}
 
 		final Grammar grammar = (Grammar) resource.getContents().get(0);
