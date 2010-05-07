@@ -1,0 +1,16 @@
+grammar org.eclipse.xtext.linking.lazy.Bug311337TestLanguage 
+	with org.eclipse.xtext.common.Terminals
+
+generate bug311337 "http://xtext.org/testlanguages/bug311337"
+
+Model:
+  (def+=Definition)+;
+
+Definition:
+  '(def)' name=ID ':' (child+=Child) (ref+=Reference)?;
+
+Child:
+  '(child)' name=ID ':' link=[Definition]?;
+
+Reference:
+  '(ref)' refChild=[Child] (':' {NestedRef.left=current} refChild=[Child])*;

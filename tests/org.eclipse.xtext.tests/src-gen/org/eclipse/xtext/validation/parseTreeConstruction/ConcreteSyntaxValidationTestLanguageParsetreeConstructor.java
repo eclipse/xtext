@@ -8247,7 +8247,7 @@ protected class TwoVersion_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getTwoVersionNo1Rule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getTwoVersionNo2Rule().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
