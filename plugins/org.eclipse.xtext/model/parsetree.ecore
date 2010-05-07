@@ -12,17 +12,17 @@
   <eClassifiers xsi:type="ecore:EClass" name="AbstractNode" abstract="true">
     <eOperations name="serialize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.serialize((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.serialize((LeafNodeImpl) this);} else {return ParsetreeUtil.serialize((AbstractNodeImpl) this);}"/>
+        <details key="body" value="ParsetreeUtil.serialize(this)"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getLeafNodes" upperBound="-1" eType="#//LeafNode">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.getLeafNodes((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.getLeafNodes((LeafNodeImpl) this);} else {return ParsetreeUtil.getLeafNodes((AbstractNodeImpl) this);}"/>
+        <details key="body" value="ParsetreeUtil.getLeafNodes(this)"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getLeafNodes" upperBound="-1" eType="#//LeafNode">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.getLeafNodes((CompositeNodeImpl) this, to);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.getLeafNodes((LeafNodeImpl) this, to);} else {return ParsetreeUtil.getLeafNodes((AbstractNodeImpl) this, to);}"/>
+        <details key="body" value="ParsetreeUtil.getLeafNodes(this, to)"/>
       </eAnnotations>
       <eParameters name="to" lowerBound="1" eType="#//AbstractNode"/>
     </eOperations>
@@ -33,7 +33,7 @@
     </eOperations>
     <eOperations name="totalEndLine" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.totalEndLine((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.totalEndLine((LeafNodeImpl) this);} else {return ParsetreeUtil.totalEndLine((AbstractNodeImpl) this);}"/>
+        <details key="body" value="ParsetreeUtil.totalEndLine(this)"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getOffset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">

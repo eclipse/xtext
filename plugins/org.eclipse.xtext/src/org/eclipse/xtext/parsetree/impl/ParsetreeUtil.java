@@ -84,6 +84,8 @@ public class ParsetreeUtil {
 	}
 
 	public static String serialize(AbstractNodeImpl _this) {
+		if (_this instanceof LeafNodeImpl)
+			return serialize((LeafNodeImpl)_this);
 		checkArgument(_this);
 		StringBuffer buff = new StringBuffer();
 		EList<LeafNode> leafNodes = _this.getLeafNodes();
