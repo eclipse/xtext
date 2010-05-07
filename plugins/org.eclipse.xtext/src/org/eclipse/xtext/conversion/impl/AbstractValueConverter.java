@@ -12,7 +12,6 @@ import org.eclipse.xtext.conversion.IValueConverter;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
  */
 public abstract class AbstractValueConverter<Type> implements IValueConverter<Type> {
 
