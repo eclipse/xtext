@@ -1,0 +1,51 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/grammar
+org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage with org.eclipse.xtext.
+common.Terminals
+
+generate elementmatchertestlanguage 'http://simple/elementmatchertestlanguage'
+
+Model:
+  Simple | RuleCalls | OptionalCalls | Recursion;
+
+Simple:
+  '#1' name=ID ('kw1' optional=ID)? datatype=FQN;
+
+FQN:
+  ID ('.' ID);
+
+RuleCalls:
+	'#2' RuleCallsSub name=ID call1=RuleCallsAss1? call2=RuleCallsAss2?;
+	
+RuleCallsSub:
+	sub='sub';
+	
+RuleCallsAss1:
+	'ass1' name=ID;
+	
+RuleCallsAss2:
+	'ass2' name=ID;
+	
+OptionalCalls:
+	'#3' {OptionalCalls} opt1=OptionalCallsSub1? name=ID;
+	
+OptionalCallsSub1:
+	{OptionalCallsSub1} opt2=OptionalCallsSub2? 'sub' opt3=OptionalCallsSub3?;
+	
+OptionalCallsSub2:
+	'sub2' name=ID;
+	
+OptionalCallsSub3:
+	'sub3' name=ID;
+	
+Recursion:
+	'#4' RecursionSub;
+	 
+RecursionSub:
+	{RecursionSub} '{' (sub+=RecursionSub | vals+=ID)* '}' semi?=';'?;
