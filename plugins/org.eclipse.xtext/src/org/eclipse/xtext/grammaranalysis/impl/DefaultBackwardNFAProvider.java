@@ -13,8 +13,7 @@ import org.eclipse.xtext.AbstractElement;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class DefaultBackwardNFAProvider extends
-		AbstractNFAProvider<DefaultNFAState, DefaultNFATransition> {
+public class DefaultBackwardNFAProvider extends AbstractNFAProvider<DefaultNFAState, DefaultNFATransition> {
 
 	public static class DefaultBackwardsNFABuilder extends
 			AbstractCachingNFABuilder<DefaultNFAState, DefaultNFATransition> {
@@ -25,8 +24,8 @@ public class DefaultBackwardNFAProvider extends
 		}
 
 		@Override
-		protected DefaultNFATransition createTransition(DefaultNFAState source,
-				DefaultNFAState target, boolean isRuleCall) {
+		protected DefaultNFATransition createTransition(DefaultNFAState source, DefaultNFAState target,
+				boolean isRuleCall) {
 			return new DefaultNFATransition(source, target, isRuleCall);
 		}
 

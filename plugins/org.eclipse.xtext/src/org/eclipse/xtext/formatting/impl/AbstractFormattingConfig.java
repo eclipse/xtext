@@ -7,85 +7,117 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting.impl;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.formatting.IElementMatcherProvider.IAfterElement;
+import org.eclipse.xtext.formatting.IElementMatcherProvider.IBeforeElement;
+import org.eclipse.xtext.formatting.IElementMatcherProvider.IBetweenElements;
+import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
+
+import com.google.common.collect.Lists;
+import com.google.inject.internal.Maps;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public abstract class AbstractFormattingConfig {
 
-	public class ElementLocator {
-		private EObject left;
-		private EObject right;
-		private LocatorType type;
+	public class ElementLocator implements IAfterElement, IBeforeElement, IBetweenElements {
+		protected EObject after;
+		protected EObject before;
+		protected LocatorType type;
 
-		protected void after(EObject left) {
+		protected void after(EObject after) {
 			this.type = LocatorType.AFTER;
-			this.left = left;
-			this.right = null;
-			list(after, left).add(this);
-		}
-
-		@Override
-		public String toString() {
-			return getClass().getSimpleName() + "-" + type.name();
+			this.after = after;
+			this.before = null;
+			addLocator(this);
 		}
 
 		protected void around(EObject ele) {
 			this.type = LocatorType.AROUND;
-			this.left = ele;
-			this.right = ele;
-			list(after, ele).add(this);
-			list(before, ele).add(this);
+			this.after = ele;
+			this.before = ele;
+			addLocator(this);
 		}
 
 		protected void before(EObject right) {
 			this.type = LocatorType.BEFORE;
-			this.right = right;
-			this.left = null;
-			list(before, right).add(this);
+			this.before = right;
+			this.after = null;
+			addLocator(this);
 		}
 
 		protected void between(EObject left, EObject right) {
 			this.type = LocatorType.BETWEEN;
-			this.left = left;
-			this.right = right;
-			list(after, left).add(this);
-			list(before, right).add(this);
+			this.after = left;
+			this.before = right;
+			addLocator(this);
 		}
 
 		protected void bounds(EObject left, EObject right) {
 			this.type = LocatorType.BOUNDS;
-			this.left = left;
-			this.right = right;
-			list(after, left).add(this);
-			list(before, right).add(this);
+			this.after = left;
+			this.before = right;
+			addLocator(this);
+		}
+
+		protected AbstractElement getAbstractElement(EObject obj) {
+			if (obj instanceof AbstractElement)
+				return (AbstractElement) obj;
+			if (obj instanceof AbstractRule)
+				return ((AbstractRule) obj).getAlternatives();
+			return null;
 		}
 
 		public EObject getLeft() {
-			return left;
+			return after;
 		}
 
 		public EObject getRight() {
-			return right;
+			return before;
 		}
 
 		public LocatorType getType() {
 			return type;
 		}
 
+		public AbstractElement matchAfter() {
+			if (type == LocatorType.BETWEEN)
+				return null;
+			return getAbstractElement(after);
+		}
+
+		public AbstractElement matchBefore() {
+			if (type == LocatorType.BETWEEN)
+				return null;
+			return getAbstractElement(before);
+		}
+
+		public Pair<AbstractElement, AbstractElement> matchBetween() {
+			if (type == LocatorType.BETWEEN)
+				return Tuples.create(getAbstractElement(after), getAbstractElement(before));
+			return null;
+		}
+
 		protected void range(EObject left, EObject right) {
 			type = LocatorType.RANGE;
-			this.left = left;
-			this.right = right;
-			list(after, left).add(this);
-			list(before, right).add(this);
+			this.after = left;
+			this.before = right;
+			addLocator(this);
+
+		}
+
+		@Override
+		public String toString() {
+			return getClass().getSimpleName() + "-" + type.name();
 		}
 	}
 
@@ -96,31 +128,52 @@ public abstract class AbstractFormattingConfig {
 		BETWEEN, // matches, if two elements follow each other
 		BOUNDS, // after(left) + before(right)
 		RANGE, // matches always between left and right
-	} // FIXME: write tests for this!
-
-	private static List<ElementLocator> list(
-			Map<EObject, List<ElementLocator>> map, EObject ele) {
-		List<ElementLocator> l = map.get(ele);
-		if (l == null)
-			map.put(ele, l = new ArrayList<ElementLocator>());
-		return l;
 	}
 
-	private Map<EObject, List<ElementLocator>> after = new HashMap<EObject, List<ElementLocator>>();
+	protected IHiddenTokenHelper hiddenTokenHelper;
 
-	private Map<EObject, List<ElementLocator>> before = new HashMap<EObject, List<ElementLocator>>();
+	protected Map<EObject, List<ElementLocator>> locatorsCommentAfter = Maps.newHashMap();
 
-	public List<ElementLocator> getAfter(EObject element) {
-		List<ElementLocator> r = after.get(element);
-		if (r != null)
-			return r;
-		return Collections.emptyList();
+	protected Map<EObject, List<ElementLocator>> locatorsCommentBefore = Maps.newHashMap();
+
+	protected List<ElementLocator> locatorsSemantic = Lists.newArrayList();
+
+	public AbstractFormattingConfig(IHiddenTokenHelper hiddenTokenHelper) {
+		super();
+		this.hiddenTokenHelper = hiddenTokenHelper;
 	}
 
-	public List<ElementLocator> getBefore(EObject element) {
-		List<ElementLocator> r = before.get(element);
-		if (r != null)
-			return r;
-		return Collections.emptyList();
+	protected void addLocator(ElementLocator locator) {
+		if ((locator.before instanceof AbstractRule && hiddenTokenHelper.isComment((AbstractRule) locator.before))
+				|| (locator.after instanceof AbstractRule && hiddenTokenHelper.isComment((AbstractRule) locator.after))) {
+			if (locator.before != null) {
+				List<ElementLocator> loc = locatorsCommentBefore.get(locator.before);
+				if (loc == null)
+					locatorsCommentBefore.put(locator.before, loc = Lists.newArrayList());
+				loc.add(locator);
+			}
+			if (locator.after != null) {
+				List<ElementLocator> loc = locatorsCommentAfter.get(locator.after);
+				if (loc == null)
+					locatorsCommentAfter.put(locator.after, loc = Lists.newArrayList());
+				loc.add(locator);
+			}
+		} else
+			locatorsSemantic.add(locator);
+
+	}
+
+	public List<ElementLocator> getLocatorsForCommentTokensAfter(EObject ctx) {
+		List<ElementLocator> result = locatorsCommentAfter.get(ctx);
+		return result != null ? result : Collections.<ElementLocator> emptyList();
+	}
+
+	public List<ElementLocator> getLocatorsForCommentTokensBefore(EObject ctx) {
+		List<ElementLocator> result = locatorsCommentBefore.get(ctx);
+		return result != null ? result : Collections.<ElementLocator> emptyList();
+	}
+
+	public List<ElementLocator> getLocatorsForSemanticTokens() {
+		return locatorsSemantic;
 	}
 }

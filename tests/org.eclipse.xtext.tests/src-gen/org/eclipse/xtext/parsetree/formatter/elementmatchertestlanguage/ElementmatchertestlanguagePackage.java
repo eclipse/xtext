@@ -1,0 +1,1060 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ */
+package org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+
+/**
+ * <!-- begin-user-doc -->
+ * The <b>Package</b> for the model.
+ * It contains accessors for the meta objects to represent
+ * <ul>
+ *   <li>each class,</li>
+ *   <li>each feature of each class,</li>
+ *   <li>each enum,</li>
+ *   <li>and each data type</li>
+ * </ul>
+ * <!-- end-user-doc -->
+ * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.ElementmatchertestlanguageFactory
+ * @model kind="package"
+ * @generated
+ */
+public interface ElementmatchertestlanguagePackage extends EPackage
+{
+  /**
+   * The package name.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  String eNAME = "elementmatchertestlanguage";
+
+  /**
+   * The package namespace URI.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  String eNS_URI = "http://simple/elementmatchertestlanguage";
+
+  /**
+   * The package namespace name.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  String eNS_PREFIX = "elementmatchertestlanguage";
+
+  /**
+   * The singleton instance of the package.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  ElementmatchertestlanguagePackage eINSTANCE = org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl.init();
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ModelImpl <em>Model</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ModelImpl
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getModel()
+   * @generated
+   */
+  int MODEL = 0;
+
+  /**
+   * The number of structural features of the '<em>Model</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.SimpleImpl <em>Simple</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.SimpleImpl
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getSimple()
+   * @generated
+   */
+  int SIMPLE = 1;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLE__NAME = MODEL_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Optional</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLE__OPTIONAL = MODEL_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Datatype</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLE__DATATYPE = MODEL_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Simple</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLE_FEATURE_COUNT = MODEL_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCallsImpl <em>Rule Calls</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCallsImpl
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getRuleCalls()
+   * @generated
+   */
+  int RULE_CALLS = 2;
+
+  /**
+   * The number of structural features of the '<em>Rule Calls</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALLS_FEATURE_COUNT = MODEL_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCallsSubImpl <em>Rule Calls Sub</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCallsSubImpl
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getRuleCallsSub()
+   * @generated
+   */
+  int RULE_CALLS_SUB = 3;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALLS_SUB__NAME = RULE_CALLS_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Call1</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALLS_SUB__CALL1 = RULE_CALLS_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Call2</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALLS_SUB__CALL2 = RULE_CALLS_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Sub</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALLS_SUB__SUB = RULE_CALLS_FEATURE_COUNT + 3;
+
+  /**
+   * The number of structural features of the '<em>Rule Calls Sub</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALLS_SUB_FEATURE_COUNT = RULE_CALLS_FEATURE_COUNT + 4;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCallsAss1Impl <em>Rule Calls Ass1</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCallsAss1Impl
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getRuleCallsAss1()
+   * @generated
+   */
+  int RULE_CALLS_ASS1 = 4;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALLS_ASS1__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Rule Calls Ass1</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALLS_ASS1_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCallsAss2Impl <em>Rule Calls Ass2</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCallsAss2Impl
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getRuleCallsAss2()
+   * @generated
+   */
+  int RULE_CALLS_ASS2 = 5;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALLS_ASS2__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Rule Calls Ass2</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALLS_ASS2_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.OptionalCallsImpl <em>Optional Calls</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.OptionalCallsImpl
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getOptionalCalls()
+   * @generated
+   */
+  int OPTIONAL_CALLS = 6;
+
+  /**
+   * The feature id for the '<em><b>Opt1</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIONAL_CALLS__OPT1 = MODEL_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIONAL_CALLS__NAME = MODEL_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Optional Calls</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIONAL_CALLS_FEATURE_COUNT = MODEL_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.OptionalCallsSub1Impl <em>Optional Calls Sub1</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.OptionalCallsSub1Impl
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getOptionalCallsSub1()
+   * @generated
+   */
+  int OPTIONAL_CALLS_SUB1 = 7;
+
+  /**
+   * The feature id for the '<em><b>Opt2</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIONAL_CALLS_SUB1__OPT2 = 0;
+
+  /**
+   * The feature id for the '<em><b>Opt3</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIONAL_CALLS_SUB1__OPT3 = 1;
+
+  /**
+   * The number of structural features of the '<em>Optional Calls Sub1</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIONAL_CALLS_SUB1_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.OptionalCallsSub2Impl <em>Optional Calls Sub2</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.OptionalCallsSub2Impl
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getOptionalCallsSub2()
+   * @generated
+   */
+  int OPTIONAL_CALLS_SUB2 = 8;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIONAL_CALLS_SUB2__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Optional Calls Sub2</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIONAL_CALLS_SUB2_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.OptionalCallsSub3Impl <em>Optional Calls Sub3</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.OptionalCallsSub3Impl
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getOptionalCallsSub3()
+   * @generated
+   */
+  int OPTIONAL_CALLS_SUB3 = 9;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIONAL_CALLS_SUB3__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Optional Calls Sub3</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIONAL_CALLS_SUB3_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RecursionImpl <em>Recursion</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RecursionImpl
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getRecursion()
+   * @generated
+   */
+  int RECURSION = 10;
+
+  /**
+   * The number of structural features of the '<em>Recursion</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RECURSION_FEATURE_COUNT = MODEL_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RecursionSubImpl <em>Recursion Sub</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RecursionSubImpl
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getRecursionSub()
+   * @generated
+   */
+  int RECURSION_SUB = 11;
+
+  /**
+   * The feature id for the '<em><b>Sub</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RECURSION_SUB__SUB = RECURSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Vals</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RECURSION_SUB__VALS = RECURSION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Semi</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RECURSION_SUB__SEMI = RECURSION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Recursion Sub</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RECURSION_SUB_FEATURE_COUNT = RECURSION_FEATURE_COUNT + 3;
+
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Model <em>Model</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Model</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Model
+   * @generated
+   */
+  EClass getModel();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Simple <em>Simple</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Simple</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Simple
+   * @generated
+   */
+  EClass getSimple();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Simple#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Simple#getName()
+   * @see #getSimple()
+   * @generated
+   */
+  EAttribute getSimple_Name();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Simple#getOptional <em>Optional</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Optional</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Simple#getOptional()
+   * @see #getSimple()
+   * @generated
+   */
+  EAttribute getSimple_Optional();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Simple#getDatatype <em>Datatype</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Datatype</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Simple#getDatatype()
+   * @see #getSimple()
+   * @generated
+   */
+  EAttribute getSimple_Datatype();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCalls <em>Rule Calls</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Rule Calls</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCalls
+   * @generated
+   */
+  EClass getRuleCalls();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsSub <em>Rule Calls Sub</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Rule Calls Sub</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsSub
+   * @generated
+   */
+  EClass getRuleCallsSub();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsSub#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsSub#getName()
+   * @see #getRuleCallsSub()
+   * @generated
+   */
+  EAttribute getRuleCallsSub_Name();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsSub#getCall1 <em>Call1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Call1</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsSub#getCall1()
+   * @see #getRuleCallsSub()
+   * @generated
+   */
+  EReference getRuleCallsSub_Call1();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsSub#getCall2 <em>Call2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Call2</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsSub#getCall2()
+   * @see #getRuleCallsSub()
+   * @generated
+   */
+  EReference getRuleCallsSub_Call2();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsSub#getSub <em>Sub</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Sub</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsSub#getSub()
+   * @see #getRuleCallsSub()
+   * @generated
+   */
+  EAttribute getRuleCallsSub_Sub();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsAss1 <em>Rule Calls Ass1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Rule Calls Ass1</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsAss1
+   * @generated
+   */
+  EClass getRuleCallsAss1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsAss1#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsAss1#getName()
+   * @see #getRuleCallsAss1()
+   * @generated
+   */
+  EAttribute getRuleCallsAss1_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsAss2 <em>Rule Calls Ass2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Rule Calls Ass2</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsAss2
+   * @generated
+   */
+  EClass getRuleCallsAss2();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsAss2#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCallsAss2#getName()
+   * @see #getRuleCallsAss2()
+   * @generated
+   */
+  EAttribute getRuleCallsAss2_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCalls <em>Optional Calls</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Optional Calls</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCalls
+   * @generated
+   */
+  EClass getOptionalCalls();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCalls#getOpt1 <em>Opt1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Opt1</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCalls#getOpt1()
+   * @see #getOptionalCalls()
+   * @generated
+   */
+  EReference getOptionalCalls_Opt1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCalls#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCalls#getName()
+   * @see #getOptionalCalls()
+   * @generated
+   */
+  EAttribute getOptionalCalls_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCallsSub1 <em>Optional Calls Sub1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Optional Calls Sub1</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCallsSub1
+   * @generated
+   */
+  EClass getOptionalCallsSub1();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCallsSub1#getOpt2 <em>Opt2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Opt2</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCallsSub1#getOpt2()
+   * @see #getOptionalCallsSub1()
+   * @generated
+   */
+  EReference getOptionalCallsSub1_Opt2();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCallsSub1#getOpt3 <em>Opt3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Opt3</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCallsSub1#getOpt3()
+   * @see #getOptionalCallsSub1()
+   * @generated
+   */
+  EReference getOptionalCallsSub1_Opt3();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCallsSub2 <em>Optional Calls Sub2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Optional Calls Sub2</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCallsSub2
+   * @generated
+   */
+  EClass getOptionalCallsSub2();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCallsSub2#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCallsSub2#getName()
+   * @see #getOptionalCallsSub2()
+   * @generated
+   */
+  EAttribute getOptionalCallsSub2_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCallsSub3 <em>Optional Calls Sub3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Optional Calls Sub3</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCallsSub3
+   * @generated
+   */
+  EClass getOptionalCallsSub3();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCallsSub3#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCallsSub3#getName()
+   * @see #getOptionalCallsSub3()
+   * @generated
+   */
+  EAttribute getOptionalCallsSub3_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Recursion <em>Recursion</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Recursion</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Recursion
+   * @generated
+   */
+  EClass getRecursion();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RecursionSub <em>Recursion Sub</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Recursion Sub</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RecursionSub
+   * @generated
+   */
+  EClass getRecursionSub();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RecursionSub#getSub <em>Sub</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Sub</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RecursionSub#getSub()
+   * @see #getRecursionSub()
+   * @generated
+   */
+  EReference getRecursionSub_Sub();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RecursionSub#getVals <em>Vals</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Vals</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RecursionSub#getVals()
+   * @see #getRecursionSub()
+   * @generated
+   */
+  EAttribute getRecursionSub_Vals();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RecursionSub#isSemi <em>Semi</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Semi</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RecursionSub#isSemi()
+   * @see #getRecursionSub()
+   * @generated
+   */
+  EAttribute getRecursionSub_Semi();
+
+  /**
+   * Returns the factory that creates the instances of the model.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the factory that creates the instances of the model.
+   * @generated
+   */
+  ElementmatchertestlanguageFactory getElementmatchertestlanguageFactory();
+
+  /**
+   * <!-- begin-user-doc -->
+   * Defines literals for the meta objects that represent
+   * <ul>
+   *   <li>each class,</li>
+   *   <li>each feature of each class,</li>
+   *   <li>each enum,</li>
+   *   <li>and each data type</li>
+   * </ul>
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  interface Literals
+  {
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ModelImpl <em>Model</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ModelImpl
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getModel()
+     * @generated
+     */
+    EClass MODEL = eINSTANCE.getModel();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.SimpleImpl <em>Simple</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.SimpleImpl
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getSimple()
+     * @generated
+     */
+    EClass SIMPLE = eINSTANCE.getSimple();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SIMPLE__NAME = eINSTANCE.getSimple_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Optional</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SIMPLE__OPTIONAL = eINSTANCE.getSimple_Optional();
+
+    /**
+     * The meta object literal for the '<em><b>Datatype</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SIMPLE__DATATYPE = eINSTANCE.getSimple_Datatype();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCallsImpl <em>Rule Calls</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCallsImpl
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getRuleCalls()
+     * @generated
+     */
+    EClass RULE_CALLS = eINSTANCE.getRuleCalls();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCallsSubImpl <em>Rule Calls Sub</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCallsSubImpl
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getRuleCallsSub()
+     * @generated
+     */
+    EClass RULE_CALLS_SUB = eINSTANCE.getRuleCallsSub();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RULE_CALLS_SUB__NAME = eINSTANCE.getRuleCallsSub_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Call1</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RULE_CALLS_SUB__CALL1 = eINSTANCE.getRuleCallsSub_Call1();
+
+    /**
+     * The meta object literal for the '<em><b>Call2</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RULE_CALLS_SUB__CALL2 = eINSTANCE.getRuleCallsSub_Call2();
+
+    /**
+     * The meta object literal for the '<em><b>Sub</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RULE_CALLS_SUB__SUB = eINSTANCE.getRuleCallsSub_Sub();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCallsAss1Impl <em>Rule Calls Ass1</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCallsAss1Impl
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getRuleCallsAss1()
+     * @generated
+     */
+    EClass RULE_CALLS_ASS1 = eINSTANCE.getRuleCallsAss1();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RULE_CALLS_ASS1__NAME = eINSTANCE.getRuleCallsAss1_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCallsAss2Impl <em>Rule Calls Ass2</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCallsAss2Impl
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getRuleCallsAss2()
+     * @generated
+     */
+    EClass RULE_CALLS_ASS2 = eINSTANCE.getRuleCallsAss2();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RULE_CALLS_ASS2__NAME = eINSTANCE.getRuleCallsAss2_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.OptionalCallsImpl <em>Optional Calls</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.OptionalCallsImpl
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getOptionalCalls()
+     * @generated
+     */
+    EClass OPTIONAL_CALLS = eINSTANCE.getOptionalCalls();
+
+    /**
+     * The meta object literal for the '<em><b>Opt1</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OPTIONAL_CALLS__OPT1 = eINSTANCE.getOptionalCalls_Opt1();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute OPTIONAL_CALLS__NAME = eINSTANCE.getOptionalCalls_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.OptionalCallsSub1Impl <em>Optional Calls Sub1</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.OptionalCallsSub1Impl
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getOptionalCallsSub1()
+     * @generated
+     */
+    EClass OPTIONAL_CALLS_SUB1 = eINSTANCE.getOptionalCallsSub1();
+
+    /**
+     * The meta object literal for the '<em><b>Opt2</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OPTIONAL_CALLS_SUB1__OPT2 = eINSTANCE.getOptionalCallsSub1_Opt2();
+
+    /**
+     * The meta object literal for the '<em><b>Opt3</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OPTIONAL_CALLS_SUB1__OPT3 = eINSTANCE.getOptionalCallsSub1_Opt3();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.OptionalCallsSub2Impl <em>Optional Calls Sub2</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.OptionalCallsSub2Impl
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getOptionalCallsSub2()
+     * @generated
+     */
+    EClass OPTIONAL_CALLS_SUB2 = eINSTANCE.getOptionalCallsSub2();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute OPTIONAL_CALLS_SUB2__NAME = eINSTANCE.getOptionalCallsSub2_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.OptionalCallsSub3Impl <em>Optional Calls Sub3</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.OptionalCallsSub3Impl
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getOptionalCallsSub3()
+     * @generated
+     */
+    EClass OPTIONAL_CALLS_SUB3 = eINSTANCE.getOptionalCallsSub3();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute OPTIONAL_CALLS_SUB3__NAME = eINSTANCE.getOptionalCallsSub3_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RecursionImpl <em>Recursion</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RecursionImpl
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getRecursion()
+     * @generated
+     */
+    EClass RECURSION = eINSTANCE.getRecursion();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RecursionSubImpl <em>Recursion Sub</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RecursionSubImpl
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getRecursionSub()
+     * @generated
+     */
+    EClass RECURSION_SUB = eINSTANCE.getRecursionSub();
+
+    /**
+     * The meta object literal for the '<em><b>Sub</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RECURSION_SUB__SUB = eINSTANCE.getRecursionSub_Sub();
+
+    /**
+     * The meta object literal for the '<em><b>Vals</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RECURSION_SUB__VALS = eINSTANCE.getRecursionSub_Vals();
+
+    /**
+     * The meta object literal for the '<em><b>Semi</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RECURSION_SUB__SEMI = eINSTANCE.getRecursionSub_Semi();
+
+  }
+
+} //ElementmatchertestlanguagePackage

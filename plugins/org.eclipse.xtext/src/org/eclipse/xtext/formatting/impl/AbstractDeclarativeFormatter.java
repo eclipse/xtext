@@ -8,6 +8,10 @@
 package org.eclipse.xtext.formatting.impl;
 
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.formatting.IElementMatcherProvider;
+import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementMatcher;
+import org.eclipse.xtext.formatting.impl.AbstractFormattingConfig.ElementLocator;
+import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 
 import com.google.inject.Inject;
@@ -21,17 +25,25 @@ public abstract class AbstractDeclarativeFormatter extends BaseFormatter {
 
 	private IGrammarAccess grammarAccess;
 
+	@Inject
+	private IHiddenTokenHelper hiddenTokenHelper;
+
+	@Inject
+	private IElementMatcherProvider matcherProvider;
+
 	protected abstract void configureFormatting(FormattingConfig config);
 
 	@Override
-	public ITokenStream createFormatterStream(String indent, ITokenStream out,
-			boolean preserveWhitespaces) {
-		return new FormattingConfigBasedStream(out, indent, getConfig(),
+	public ITokenStream createFormatterStream(String indent, ITokenStream out, boolean preserveWhitespaces) {
+		IElementMatcher<ElementLocator> matcher = matcherProvider.createMatcher(getConfig()
+				.getLocatorsForSemanticTokens());
+		return new FormattingConfigBasedStream(out, indent, getConfig(), matcher, hiddenTokenHelper,
 				preserveWhitespaces);
 	}
 
+	@SuppressWarnings("deprecation")
 	protected FormattingConfig createFormattingConfig() {
-		FormattingConfig cfg = new FormattingConfig();
+		FormattingConfig cfg = new FormattingConfig(hiddenTokenHelper);
 		cfg.setWhitespaceRule(getWSRule());
 		return cfg;
 	}

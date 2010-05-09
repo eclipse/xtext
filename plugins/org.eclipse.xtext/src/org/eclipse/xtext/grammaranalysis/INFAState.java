@@ -18,6 +18,10 @@ import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider.NFABuilder;
  */
 @SuppressWarnings("rawtypes")
 public interface INFAState<S extends INFAState, T extends INFATransition> {
+	List<T> getAllIncoming();
+
+	List<T> getAllOutgoing();
+
 	NFABuilder<S, T> getBuilder();
 
 	AbstractElement getGrammarElement();

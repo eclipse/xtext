@@ -10,6 +10,7 @@ package org.eclipse.xtext.formatting.impl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -71,13 +72,13 @@ public class FormattingConfig extends AbstractFormattingConfig {
 	public class NoLinewrapLocator extends ElementLocator {
 
 		@Override
-		public void around(EObject ele) {
-			super.around(ele);
+		public void after(EObject left) {
+			super.after(left);
 		}
 
 		@Override
-		public void after(EObject left) {
-			super.after(left);
+		public void around(EObject ele) {
+			super.around(ele);
 		}
 
 		@Override
@@ -132,6 +133,10 @@ public class FormattingConfig extends AbstractFormattingConfig {
 
 	protected TerminalRule whitespaceRule = null;
 
+	public FormattingConfig(IHiddenTokenHelper hiddenTokenHelper) {
+		super(hiddenTokenHelper);
+	}
+
 	public int getCharsPerLine() {
 		return charsPerLine;
 	}
@@ -140,6 +145,7 @@ public class FormattingConfig extends AbstractFormattingConfig {
 		return indentationSpace;
 	}
 
+	@Deprecated
 	public TerminalRule getWhitespaceRule() {
 		return whitespaceRule;
 	}
@@ -148,8 +154,7 @@ public class FormattingConfig extends AbstractFormattingConfig {
 		this.charsPerLine = charsPerLine;
 	}
 
-	public void setIndentation(AbstractElement beginElement,
-			AbstractElement endElement) {
+	public void setIndentation(AbstractElement beginElement, AbstractElement endElement) {
 		new IndentationLocatorStart(beginElement);
 		new IndentationLocatorEnd(endElement);
 	}
@@ -174,6 +179,7 @@ public class FormattingConfig extends AbstractFormattingConfig {
 		return new NoSpaceLocator();
 	}
 
+	@Deprecated
 	public void setWhitespaceRule(TerminalRule rule) {
 		whitespaceRule = rule;
 	}

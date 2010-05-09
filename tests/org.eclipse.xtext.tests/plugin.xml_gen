@@ -419,6 +419,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://simple/elementmatchertestlanguage" 
+       class = "org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.ElementmatchertestlanguagePackage"
+       genModel = "org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.xtext.org/tests/bug305397" 
        class = "org.eclipse.xtext.parsetree.impl.bug305397.Bug305397Package"
        genModel = "org/eclipse/xtext/parsetree/impl/Bug305397.genmodel" /> 
