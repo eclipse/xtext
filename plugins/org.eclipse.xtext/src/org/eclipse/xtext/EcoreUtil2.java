@@ -123,6 +123,21 @@ public class EcoreUtil2 extends EcoreUtil {
 		}
 		return result;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T extends EObject> List<T> eAllOfType(EObject ele, Class<T> type) {
+		List<T> result = new ArrayList<T>();
+		if (type.isAssignableFrom(ele.getClass()))
+			result.add((T) ele);
+		TreeIterator<EObject> allContents = ele.eAllContents();
+		while (allContents.hasNext()) {
+			EObject object = allContents.next();
+			if (type.isAssignableFrom(object.getClass())) {
+				result.add((T) object);
+			}
+		}
+		return result;
+	}
 
 	public static TreeIterator<EObject> eAll(final EObject obj) {
 		return new TreeIterator<EObject>() {

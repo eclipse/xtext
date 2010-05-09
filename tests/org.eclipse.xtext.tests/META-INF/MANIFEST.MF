@@ -442,5 +442,11 @@ Export-Package: org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.parser.encoding.parseTreeConstruction,
  org.eclipse.xtext.parsetree.impl.commentAssociation,
  org.eclipse.xtext.parsetree.impl.commentAssociation.impl,
- org.eclipse.xtext.parsetree.impl.commentAssociation.util
+ org.eclipse.xtext.parsetree.impl.commentAssociation.util,
+ org.eclipse.xtext.parsetree.reconstr.partialserializationtest,
+ org.eclipse.xtext.parsetree.reconstr.partialserializationtest.impl,
+ org.eclipse.xtext.parsetree.reconstr.partialserializationtest.util,
+ org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage,
+ org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl,
+ org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.util
 

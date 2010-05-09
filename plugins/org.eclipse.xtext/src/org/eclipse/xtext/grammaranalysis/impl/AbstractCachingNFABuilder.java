@@ -10,14 +10,13 @@ package org.eclipse.xtext.grammaranalysis.impl;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.grammaranalysis.INFAState;
 import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider.NFABuilder;
+import org.eclipse.xtext.grammaranalysis.INFAState;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public abstract class AbstractCachingNFABuilder<S, T> implements
-		NFABuilder<S, T> {
+public abstract class AbstractCachingNFABuilder<S, T> implements NFABuilder<S, T> {
 
 	protected abstract S createState(AbstractElement ele);
 
