@@ -34,7 +34,7 @@ public abstract class AbstractGuiceAwareExecutableExtensionFactory implements IE
 		throws CoreException {
 		if (data instanceof String) {
 			clazzName = (String) data;
-		} else if (data instanceof Map) {
+		} else if (data instanceof Map<?, ?>) {
 			clazzName = ((Map<String, String>)data).get(GUICEKEY);
 		}
 		if (clazzName == null) {

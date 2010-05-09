@@ -36,7 +36,7 @@ public class ResourceServiceProviderRegistryImpl implements IResourceServiceProv
 		public IResourceServiceProvider getServiceProvider(URI uri, String contentType) {
 			Object object = getFactory(uri, protocolToFactoryMap, extensionToFactoryMap,
 					contentTypeIdentifierToFactoryMap, contentType, false);
-			if (object instanceof Provider) {
+			if (object instanceof Provider<?>) {
 				return ((Provider<IResourceServiceProvider>) object).get();
 			}
 			return (IResourceServiceProvider) object;
