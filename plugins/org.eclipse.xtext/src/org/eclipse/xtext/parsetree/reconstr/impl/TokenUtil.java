@@ -22,15 +22,30 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
- * @author meysholdt - Initial contribution and API
+ * @author Moritz Eysholdt - Initial contribution and API
  */
 public class TokenUtil {
 	@Inject
 	protected IHiddenTokenHelper hiddenTokenHelper;
+
+	public Pair<List<LeafNode>, List<LeafNode>> getLeadingAndTrainingHiddenTokens(AbstractNode node) {
+		Pair<List<LeafNode>, List<LeafNode>> result = Tuples.<List<LeafNode>, List<LeafNode>> create(Lists
+				.<LeafNode> newArrayList(), Lists.<LeafNode> newArrayList());
+		List<LeafNode> leafNodes = node.getLeafNodes();
+		int begin = 0, end = leafNodes.size() - 1;
+		while (begin <= end && leafNodes.get(begin).isHidden())
+			result.getFirst().add(leafNodes.get(begin++));
+		while (begin <= end && leafNodes.get(end).isHidden())
+			result.getSecond().add(0, leafNodes.get(end--));
+		return result;
+	}
 
 	public EObject getTokenOwner(AbstractNode node) {
 		if (node.getElement() != null)
@@ -46,6 +61,19 @@ public class TokenUtil {
 					return sibling.getElement();
 		}
 		return NodeUtil.findASTElement(node);
+	}
+
+	public AbstractRule getTokenRule(AbstractNode node) {
+		if (node == null)
+			return null;
+		EObject element = node.getGrammarElement();
+		if (element instanceof AbstractRule)
+			return (AbstractRule) element;
+		if (element instanceof CrossReference)
+			element = ((CrossReference) element).getTerminal();
+		if (element instanceof RuleCall)
+			return ((RuleCall) element).getRule();
+		return null;
 	}
 
 	public boolean isCommentNode(AbstractNode node) {

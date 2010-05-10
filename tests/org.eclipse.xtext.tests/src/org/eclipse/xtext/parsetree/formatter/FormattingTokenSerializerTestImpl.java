@@ -51,6 +51,10 @@ public class FormattingTokenSerializerTestImpl extends AbstractDeclarativeFormat
 		// FqnRef
 		c.setLinewrap().before(f.getFqnRefAccess().getRefAssignment_1());
 		
+		// Enumeration
+		c.setNoSpace().between(f.getEnumerationAccess().getValAssignment_2_1(), f.getEnumerationAccess().getCommaKeyword_2_0());
+		c.setLinewrap().before(f.getEnumerationAccess().getValEnum1EnumRuleCall_2_1_0());
+		
 		// comments
 		c.setNoLinewrap().before(f.getSL_COMMENTRule());
 	}
