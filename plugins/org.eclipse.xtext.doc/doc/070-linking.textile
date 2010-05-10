@@ -5,7 +5,7 @@ The linking feature allows for specification of cross references within an Xtext
 The following things are needed for the linking:
 
 # declaration of a crosslink in the grammar (at least in the Ecore model)
-# specification of linking semantics
+# specification of linking semantics (usually provided via the "scoping API":#scoping)
 
 h3. Declaration of crosslinks
 
@@ -21,111 +21,19 @@ bc.. ReferringType :
   'ref' referencedObject=[Entity|(ID|STRING)]
 ;
 
-p. The "Ecore model inference":#metamodelInference would create an @EClass@ 'ReferringType' with an @EReference@ 'referencedObject' of type 'Entity' (containment=false). The referenced object would be identified either by an ID or a STRING and the surrounding information in the current context (see "scoping":#scoping). 
+p. The "Ecore model inference":#metamodelInference would create an @EClass@ 'ReferringType' with an @EReference@ 'referencedObject' of type 'Entity' (containment=false). The referenced object would be identified either by an ID or a STRING and the surrounding information in the current context (see "scoping":#scoping). If you do not use "generate" but "import" an existing ecore model, the class @ReferringType@ (or one of its super types) would need to have an EReference of type Entity (or one of its super types) declared. Also the EReference's containment property needs to be set to @false@. 
 
-Example: While parsing a given input string, say
+
+h3. Default runtime behavior / lazy linking
+
+Xtext uses lazy linking by default and we encourage users to stick to this, because it provides a lot of advantages. One is improved performance in all scenarios where you don't have to load the whole closure of all transitively referenced resources. Also it automatically solves situation where one link relies on other links. Though cyclic linking dependencies are not supported by Xtext at all. 
+
+When parsing a given input string, say
 
 bc. ref Entity01
 
-Xtext produces an instance of 'ReferringType'. After this parsing step it enters the linking phase and tries to find an instance of ''Entity'' using the parsed text 'Entity01'. The input 
+The ${org.eclipse.xtext/src/org.eclipse.xtext.linking.lazy.LazyLinker} first creates an EMF proxy and sets on the corresponding EReference. In EMF a proxy is described by a URI, which points to the real EObject. In the case of lazy linking the stored URI comprises of the context information given at parse time, which is the EObject containing the cross reference, the actual EReference, the index (in case it's a multi-valued cross reference) and the string which represented the cross link in the concrete syntax. The latter usually corresponds to the name of the referenced EObject. 
+In EMF a URI consists of information about the resource the EObject is contained in as well as a so called fragment part, which is used to find the EObject within that resource. When an  EMF proxy is resolved, the current ResourceSet is asked. The resource set uses the first part to obtain (i.e. load if it is not already loaded) the resource. Then the resource is asked to return the EObject based on the fragment in the URI. The actual cross reference resolution is done by @LazyLinkingResource.getEObject(String)@ which receives the fragment and delegates to the implementation of the @ILinkingService@.  The default implementation in turn delegates to the "scopes API"#scoping.
 
-bc. ref "EntityWithƒ÷‹"
+A simple implementation of the linking service (the ${org.eclipse.xtext/src/org.eclipse.xtext.linking.impl.DefaultLinkingService}) is shipped with Xtext and used for any grammar per default. Usually any necessary customization of the linking behavior can best be described using the "scopes API"#scoping.
 
-would work analogously. This is not an ID (umlauts are not allowed), but a STRING (as it is apparent from the quotation marks).
-
-
-h3. Specification of linking semantics
-
-The @ILinker@ implementation that is used by default is the ${org.eclipse.xtext/src/org.eclipse.xtext.linking.lazy.LazyLinker}. It installs @EObject@ proxies for all crosslinks, which are then resolved on demand.
-The actual cross reference resolution is done by @LazyLinkingResource.getEObject(String)@ and delegates to an implementation of the @ILinkingService@.
-Although the default linking behavior is appropriate in many cases there might be scenarios where this is not sufficient. For each grammar a custom linking service can be implemented and configured. It fulfills the following interface:
-
-bc.. public interface ILinkingService {
-
-  /**
-   * Returns all {@link EObject}s referenced by the given link text in the
-   * given context. But does not set the references or modifies the passed
-   * information somehow
-   */
-  List<EObject> getLinkedObjects(
-    EObject context, EReference reference, 
-    AbstractNode node) throws IllegalNodeException;
-
-  /**
-   * Returns the textual representation of a given object as it would be
-   * serialized in the given context.
-   * @return the text representation.
-   */
-  String getLinkText(EObject object, 
-    EReference reference, EObject context);
-}
-
-p. The method @getLinkedObjects@ is directly related to this topic whereas @getLinkText@ addresses complementary functionality: it is used for serialization.
-
-A simple implementation of the linking service (the ${org.eclipse.xtext/src/org.eclipse.xtext.linking.impl.DefaultLinkingService}) is shipped with Xtext and used for any grammar per default. It uses the default implementation of @IScopeProvider@ to compute the linking candidates.
-
-h3. Default linking semantics
-
-The default implementation for all languages looks within the current file for an EObject of the respective type. In the example above this would be an "Entity" which by convention has a @name@ attribute set to 'Entity01'. 
-
-Given the grammar :
-
-bc.. Model : 
-  (stuff+=(Ref|Entity))*
-;
-
-Ref : 
-  'ref' referencedObject=[Entity|ID] ';'
-;
-
-Entity : 
-  'entity' name=ID ';'
-;
-
-p. In the following model:
-
-bc.. ref Entity01;
-entity Entity01;
-
-p. the @ref@ would be linked to the declared entity (@entity Entity01;@). Nearly any aspect is configurable, especially the name of the identifying attribute may be overridden for a particular type.
-
-h4(#defaultImports). Default Imports
-
-There is a default implementation for inter-resource references, which as well uses convention.
-Each string in a model which is assigned to an EAttribute with the name @importURI@, will be interpreted as an URI and used to be loaded using the @ResourceSet@ of the current resource.
-
-For example, given the following grammar :
-
-bc.. Model : 
-  (imports+=Import)*
-  (stuff+=(Ref|Entity))*
-;
-
-Import :
-  'import' importURI=STRING ';'
-;
-
-Ref : 
-  'ref' referencedObject=[Entity|ID] ';'
-;
-
-Entity : 
-  'entity' name=ID ';'
-;
-
-p. It would be possible to write three files in that language where the first references the other two, like this:
-
-bc.. //file model.dsl
-import "model1.dsl";
-import "model2.dsl";
- 
-ref Foo;
-entity Bar;
-
-bc.. //file model1.dsl 
-entity Stuff;
-
-bc.. //file model2.dsl
-entity Foo;
-
-p. The linking candidates for the reference @Foo@ will be @Bar@, @Stuff@ and @Foo@ in that order. They will be computed by the "ScopeProvider":#scoping. 
