@@ -59,7 +59,7 @@
 <p>First, we need to import the meta model, as we&rsquo;re going to be working with the concepts from the meta model:</p>
 <div class="literallayout">
 <p>
-<code class="code">&laquo;IMPORT&nbsp;entities&raquo;<br>
+<code class="code">&#65533;IMPORT&nbsp;entities&#65533;<br>
 
 </code>
 </p>
@@ -70,10 +70,10 @@
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&raquo;<br>
-&nbsp;&nbsp;&laquo;EXPAND&nbsp;DAO::dao&nbsp;FOREACH&nbsp;this.elements.typeSelect(Entity)&raquo;<br>
-&nbsp;&nbsp;&laquo;EXPAND&nbsp;Entity::entity&nbsp;FOREACH&nbsp;this.elements.typeSelect(Entity)&raquo;<br>
-&laquo;ENDDEFINE&raquo;<br>
+<code class="code">&#65533;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&#65533;<br>
+&nbsp;&nbsp;&#65533;EXPAND&nbsp;DAO::dao&nbsp;FOREACH&nbsp;this.elements.typeSelect(Entity)&#65533;<br>
+&nbsp;&nbsp;&#65533;EXPAND&nbsp;Entity::entity&nbsp;FOREACH&nbsp;this.elements.typeSelect(Entity)&#65533;<br>
+&#65533;ENDDEFINE&#65533;<br>
 
 <br>
 
@@ -90,11 +90,11 @@
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">&laquo;IMPORT&nbsp;entities&raquo;<br>
-&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&raquo;<br>
-&nbsp;&nbsp;&laquo;EXPAND&nbsp;DAO::dao&nbsp;FOREACH&nbsp;this.elements.typeSelect(Entity)&raquo;<br>
-&nbsp;&nbsp;&laquo;EXPAND&nbsp;Entity::entity&nbsp;FOREACH&nbsp;this.elements.typeSelect(Entity)&raquo;<br>
-&laquo;ENDDEFINE&raquo;<br>
+<code class="code">&#65533;IMPORT&nbsp;entities&#65533;<br>
+&#65533;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&#65533;<br>
+&nbsp;&nbsp;&#65533;EXPAND&nbsp;DAO::dao&nbsp;FOREACH&nbsp;this.elements.typeSelect(Entity)&#65533;<br>
+&nbsp;&nbsp;&#65533;EXPAND&nbsp;Entity::entity&nbsp;FOREACH&nbsp;this.elements.typeSelect(Entity)&#65533;<br>
+&#65533;ENDDEFINE&#65533;<br>
 
 <br>
 
@@ -124,31 +124,31 @@
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">&laquo;IMPORT&nbsp;entities&raquo;<br>
+<code class="code">&#65533;IMPORT&nbsp;entities&#65533;<br>
 
 <br>
-&laquo;DEFINE&nbsp;entity&nbsp;FOR&nbsp;Entity&raquo;<br>
-&nbsp;&nbsp;&laquo;FILE&nbsp;this.name&nbsp;+&nbsp;".java"&raquo;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;this.name&raquo;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;EXPAND&nbsp;property&nbsp;FOREACH&nbsp;this.properties&raquo;<br>
+&#65533;DEFINE&nbsp;entity&nbsp;FOR&nbsp;Entity&#65533;<br>
+&nbsp;&nbsp;&#65533;FILE&nbsp;this.name&nbsp;+&nbsp;".java"&#65533;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&#65533;this.name&#65533;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#65533;EXPAND&nbsp;property&nbsp;FOREACH&nbsp;this.properties&#65533;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;&laquo;ENDFILE&raquo;<br>
-&laquo;ENDDEFINE&raquo;<br>
+&nbsp;&nbsp;&#65533;ENDFILE&#65533;<br>
+&#65533;ENDDEFINE&#65533;<br>
 
 <br>
-&laquo;DEFINE&nbsp;property&nbsp;FOR&nbsp;Property&raquo;<br>
-&nbsp;&nbsp;private&nbsp;&laquo;this.type.name&raquo;&nbsp;&laquo;this.name&raquo;;<br>
+&#65533;DEFINE&nbsp;property&nbsp;FOR&nbsp;Property&#65533;<br>
+&nbsp;&nbsp;private&nbsp;&#65533;this.type.name&#65533;&nbsp;&#65533;this.name&#65533;;<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;this.name.toFirstUpper()&raquo;(&laquo;this.type.name&raquo;&nbsp;&laquo;this.name&raquo;)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;this.name&raquo;&nbsp;=&nbsp;&laquo;this.name&raquo;;<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;set&#65533;this.name.toFirstUpper()&#65533;(&#65533;this.type.name&#65533;&nbsp;&#65533;this.name&#65533;)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.&#65533;this.name&#65533;&nbsp;=&nbsp;&#65533;this.name&#65533;;<br>
 &nbsp;&nbsp;}<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;&laquo;this.type.name&raquo;&nbsp;get&laquo;this.name.toFirstUpper()&raquo;()&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;this.&laquo;this.name&raquo;;<br>
+&nbsp;&nbsp;public&nbsp;&#65533;this.type.name&#65533;&nbsp;get&#65533;this.name.toFirstUpper()&#65533;()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;this.&#65533;this.name&#65533;;<br>
 &nbsp;&nbsp;}<br>
-&laquo;ENDDEFINE&raquo;<br>
+&#65533;ENDDEFINE&#65533;<br>
 
 <br>
 
@@ -171,47 +171,47 @@
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">&laquo;IMPORT&nbsp;entities&raquo;<br>
+<code class="code">&#65533;IMPORT&nbsp;entities&#65533;<br>
 
 <br>
-&laquo;DEFINE&nbsp;dao&nbsp;FOR&nbsp;Entity&raquo;<br>
-&nbsp;&nbsp;&laquo;FILE&nbsp;this.name&nbsp;+&nbsp;"DAO.java"&raquo;<br>
+&#65533;DEFINE&nbsp;dao&nbsp;FOR&nbsp;Entity&#65533;<br>
+&nbsp;&nbsp;&#65533;FILE&nbsp;this.name&nbsp;+&nbsp;"DAO.java"&#65533;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;java.util.Collection;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;org.springframework.orm.hibernate3.support.HibernateDaoSupport;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;this.name&raquo;DAO<br>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&#65533;this.name&#65533;DAO<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;HibernateDaoSupport&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;EXPAND&nbsp;crud&nbsp;FOR&nbsp;this&raquo;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#65533;EXPAND&nbsp;crud&nbsp;FOR&nbsp;this&#65533;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;&laquo;ENDFILE&raquo;<br>
-&laquo;ENDDEFINE&raquo;<br>
+&nbsp;&nbsp;&#65533;ENDFILE&#65533;<br>
+&#65533;ENDDEFINE&#65533;<br>
 
 <br>
-&laquo;DEFINE&nbsp;crud&nbsp;FOR&nbsp;Entity&raquo;<br>
-&nbsp;&nbsp;public&nbsp;&laquo;this.name&raquo;&nbsp;load(Long&nbsp;id)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(&laquo;this.name&raquo;)getHibernateTemplate().get(&laquo;this.name&raquo;.class,&nbsp;id);<br>
+&#65533;DEFINE&nbsp;crud&nbsp;FOR&nbsp;Entity&#65533;<br>
+&nbsp;&nbsp;public&nbsp;&#65533;this.name&#65533;&nbsp;load(Long&nbsp;id)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(&#65533;this.name&#65533;)getHibernateTemplate().get(&#65533;this.name&#65533;.class,&nbsp;id);<br>
 &nbsp;&nbsp;}<br>
 
 <br>
 &nbsp;&nbsp;@SuppressWarnings("unchecked")<br>
-&nbsp;&nbsp;public&nbsp;Collection&lt;&laquo;this.name&raquo;&gt;&nbsp;loadAll()&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;getHibernateTemplate().loadAll(&laquo;this.name&raquo;.class);<br>
+&nbsp;&nbsp;public&nbsp;Collection&lt;&#65533;this.name&#65533;&gt;&nbsp;loadAll()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;getHibernateTemplate().loadAll(&#65533;this.name&#65533;.class);<br>
 &nbsp;&nbsp;}&nbsp;&nbsp;<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;&laquo;this.name&raquo;&nbsp;create(&laquo;this.name&raquo;&nbsp;entity)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(&laquo;this.name&raquo;)&nbsp;getHibernateTemplate().save(entity);<br>
+&nbsp;&nbsp;public&nbsp;&#65533;this.name&#65533;&nbsp;create(&#65533;this.name&#65533;&nbsp;entity)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(&#65533;this.name&#65533;)&nbsp;getHibernateTemplate().save(entity);<br>
 &nbsp;&nbsp;}<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;void&nbsp;update(&laquo;this.name&raquo;&nbsp;entity)&nbsp;{<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;update(&#65533;this.name&#65533;&nbsp;entity)&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;getHibernateTemplate().update(entity);<br>
 &nbsp;&nbsp;}<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;void&nbsp;remove(&laquo;this.name&raquo;&nbsp;entity)&nbsp;{<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;remove(&#65533;this.name&#65533;&nbsp;entity)&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;getHibernateTemplate().delete(entity);<br>
 &nbsp;&nbsp;}<br>
-&laquo;ENDDEFINE&raquo;<br>
+&#65533;ENDDEFINE&#65533;<br>
 
 <br>
 

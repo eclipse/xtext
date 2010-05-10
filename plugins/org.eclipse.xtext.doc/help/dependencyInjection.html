@@ -50,7 +50,7 @@
 					<a class="link" href="configuration.html#generator" title="The Generator">generator fragments</a> to automatically generate service implementations for a grammar. Thereby, Xtext strives to provide meaningful implementations out of the box and to allow customization wherever needed. Developers are encouraged to subclass existing services and configure them for their languages in their 
 					<a class="link" href="dependencyInjection.html#guicemodules" title="Modules">modules</a>.  
 				</p>
-<p>When Guice instantiates an object, it also supplies this instance with all its dependent services. All a service does is to request &bdquo;some implementation for a certain interface&rdquo; using the <code class="code">@Inject</code>-annotation. Based on the 
+<p>When Guice instantiates an object, it also supplies this instance with all its dependent services. All a service does is to request &ldquo;some implementation for a certain interface&rdquo; using the <code class="code">@Inject</code>-annotation. Based on the 
 					<a class="link" href="dependencyInjection.html#guicemodules" title="Modules">modules configuration</a> Guice decides which class to instantiate or which object to reuse. 
 				</p>
 <p>For example, Guice can automatically initialize member variables with the needed services. </p>

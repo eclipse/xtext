@@ -150,7 +150,7 @@
 		</condition>
 	</target>
 		
-	<target name="get-docbook-xsl" description="Downloads docbook xsl" depends="check-docbook" unless="hasDocbook">
+	<target name="get-docbook-xsl" description="Downloads docbook xsl" ><!--depends="check-docbook" unless="hasDocbook"-->
 		<echo>Downloading DocBook XSL...</echo>
 		<get dest="${download.dir}${file.separator}docbook.zip" src="${docbookxsl.url}"/>
 		<unzip src="${download.dir}${file.separator}docbook.zip" dest="${download.dir}"/>

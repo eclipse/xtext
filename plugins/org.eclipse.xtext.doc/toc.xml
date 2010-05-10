@@ -105,12 +105,19 @@
 </topic>
 <topic href="help/linking.html" label="Linking">
 <topic href="help/linking.html#Declarationofcrosslinks" label="Declaration of crosslinks"></topic>
-<topic href="help/linking.html#Specificationoflinkingsemantics" label="Specification of linking semantics"></topic>
-<topic href="help/linking.html#Defaultlinkingsemantics" label="Default linking semantics">
-<topic href="help/linking.html#defaultImports" label="Default Imports"></topic>
-</topic>
+<topic href="help/linking.html#Defaultruntimebehaviorlazylinking" label="Default runtime behavior / lazy linking"></topic>
 </topic>
 <topic href="help/scoping.html" label="Scoping">
+<topic href="help/scoping.html#global_scopes" label="Global Scopes and IResourceDescriptions">
+<topic href="help/scoping.html#resourcedescriptions" label="Resource and EObject Descriptions ( IResourceDescription, IEObjectDescription)"></topic>
+<topic href="help/scoping.html#import_uri" label="Global Scopes &ndash; Importing resources explicitly (ImportURI mechanism)"></topic>
+<topic href="help/scoping.html#index_based" label="Global Scopes based on external configuration (e.g. classpath-based)">
+<topic href="help/scoping.html#containers" label="Of containers its manager"></topic>
+</topic>
+</topic>
+<topic href="help/scoping.html#Defaultlinkingsemantics" label="Default linking semantics">
+<topic href="help/scoping.html#defaultImports" label="Default Imports"></topic>
+</topic>
 <topic href="help/scoping.html#org.eclipse.xtextsrcorg.eclipse.xtext.scoping.impl.DeclarativeScopeProvider" label="DeclarativeScopeProvider"></topic>
 <topic href="help/scoping.html#org.eclipse.xtextsrcorg.eclipse.xtext.scoping.impl.QualifiedNameScopeProvider" label="QualifiedNameScopeProvider">
 <topic href="help/scoping.html#org.eclipse.xtextsrcorg.eclipse.xtext.scoping.IQualifiedNameProvider" label="IQualifiedNameProvider"></topic>

@@ -19,7 +19,9 @@
 <p>declaration of a crosslink in the grammar (at least in the Ecore model)</p>
 </li>
 <li class="listitem">
-<p>specification of linking semantics</p>
+<p>specification of linking semantics (usually provided via the 
+						<a class="link" href="scoping.html" title="Scoping">scoping API</a>)
+					</p>
 </li>
 </ol>
 </div>
@@ -58,11 +60,24 @@
 </div>
 <p>The 
 					<a class="link" href="metamodelInference.html" title="Ecore model inference">Ecore model inference</a> would create an 
-					<code class="code">EClass</code> &sbquo;ReferringType&rsquo; with an 
-					<code class="code">EReference</code> &sbquo;referencedObject&rsquo; of type &sbquo;Entity&rsquo; (containment=false). The referenced object would be identified either by an ID or a STRING and the surrounding information in the current context (see 
-					<a class="link" href="scoping.html" title="Scoping">scoping</a>). 
+					<code class="code">EClass</code> &lsquo;ReferringType&rsquo; with an 
+					<code class="code">EReference</code> &lsquo;referencedObject&rsquo; of type &lsquo;Entity&rsquo; (containment=false). The referenced object would be identified either by an ID or a STRING and the surrounding information in the current context (see 
+					<a class="link" href="scoping.html" title="Scoping">scoping</a>). If you do not use &ldquo;generate&rdquo; but &ldquo;import&rdquo; an existing ecore model, the class 
+					<code class="code">ReferringType</code> (or one of its super types) would need to have an EReference of type Entity (or one of its super types) declared. Also the EReference&rsquo;s containment property needs to be set to 
+					<code class="code">false</code>. 
 				</p>
-<p>Example: While parsing a given input string, say</p>
+</div>
+<div class="section" title="Default runtime behavior / lazy linking">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Defaultruntimebehaviorlazylinking"></a>Default runtime behavior / lazy linking</h3>
+</div>
+</div>
+</div>
+<p>Xtext uses lazy linking by default and we encourage users to stick to this, because it provides a lot of advantages. One is improved performance in all scenarios where you don&rsquo;t have to load the whole closure of all transitively referenced resources. Also it automatically solves situation where one link relies on other links. Though cyclic linking dependencies are not supported by Xtext at all. </p>
+<p>When parsing a given input string, say</p>
 <div class="literallayout">
 <p>
 <code class="code">ref&nbsp;Entity01<br>
@@ -70,206 +85,15 @@
 </code>
 </p>
 </div>
-<p>Xtext produces an instance of &sbquo;ReferringType&rsquo;. After this parsing step it enters the linking phase and tries to find an instance of '&sbquo;Entity&rsquo;' using the parsed text &sbquo;Entity01&rsquo;. The input </p>
-<div class="literallayout">
-<p>
-<code class="code">ref&nbsp;"EntityWith&Auml;&Ouml;&Uuml;"<br>
-
-</code>
-</p>
-</div>
-<p>would work analogously. This is not an ID (umlauts are not allowed), but a STRING (as it is apparent from the quotation marks).</p>
-</div>
-<div class="section" title="Specification of linking semantics">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-<a name="Specificationoflinkingsemantics"></a>Specification of linking semantics</h3>
-</div>
-</div>
-</div>
 <p>The 
-					<code class="code">ILinker</code> implementation that is used by default is the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinker.java?root=Modeling_Project&view=co" target="_new">LazyLinker</a>. It installs 
-					<code class="code">EObject</code> proxies for all crosslinks, which are then resolved on demand.
-					The actual cross reference resolution is done by 
-					<code class="code">LazyLinkingResource.getEObject(String)</code> and delegates to an implementation of the 
-					<code class="code">ILinkingService</code>.
-					Although the default linking behavior is appropriate in many cases there might be scenarios where this is not sufficient. For each grammar a custom linking service can be implemented and configured. It fulfills the following interface:
-				</p>
-<div class="literallayout">
-<p>
-<code class="code">public&nbsp;interface&nbsp;ILinkingService&nbsp;{<br>
-
-<br>
-&nbsp;&nbsp;/**<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;all&nbsp;{@link&nbsp;EObject}s&nbsp;referenced&nbsp;by&nbsp;the&nbsp;given&nbsp;link&nbsp;text&nbsp;in&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;given&nbsp;context.&nbsp;But&nbsp;does&nbsp;not&nbsp;set&nbsp;the&nbsp;references&nbsp;or&nbsp;modifies&nbsp;the&nbsp;passed<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;information&nbsp;somehow<br>
-&nbsp;&nbsp;&nbsp;*/<br>
-&nbsp;&nbsp;List&lt;EObject&gt;&nbsp;getLinkedObjects(<br>
-&nbsp;&nbsp;&nbsp;&nbsp;EObject&nbsp;context,&nbsp;EReference&nbsp;reference,&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;AbstractNode&nbsp;node)&nbsp;throws&nbsp;IllegalNodeException;<br>
-
-<br>
-&nbsp;&nbsp;/**<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;the&nbsp;textual&nbsp;representation&nbsp;of&nbsp;a&nbsp;given&nbsp;object&nbsp;as&nbsp;it&nbsp;would&nbsp;be<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;serialized&nbsp;in&nbsp;the&nbsp;given&nbsp;context.<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;the&nbsp;text&nbsp;representation.<br>
-&nbsp;&nbsp;&nbsp;*/<br>
-&nbsp;&nbsp;String&nbsp;getLinkText(EObject&nbsp;object,&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;EReference&nbsp;reference,&nbsp;EObject&nbsp;context);<br>
-}<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<p>The method 
-					<code class="code">getLinkedObjects</code> is directly related to this topic whereas 
-					<code class="code">getLinkText</code> addresses complementary functionality: it is used for serialization.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinker.java?root=Modeling_Project&view=co" target="_new">LazyLinker</a> first creates an EMF proxy and sets on the corresponding EReference. In EMF a proxy is described by a URI, which points to the real EObject. In the case of lazy linking the stored URI comprises of the context information given at parse time, which is the EObject containing the cross reference, the actual EReference, the index (in case it&rsquo;s a multi-valued cross reference) and the string which represented the cross link in the concrete syntax. The latter usually corresponds to the name of the referenced EObject. 
+					In EMF a URI consists of information about the resource the EObject is contained in as well as a so called fragment part, which is used to find the EObject within that resource. When an  EMF proxy is resolved, the current ResourceSet is asked. The resource set uses the first part to obtain (i.e. load if it is not already loaded) the resource. Then the resource is asked to return the EObject based on the fragment in the URI. The actual cross reference resolution is done by 
+					<code class="code">LazyLinkingResource.getEObject(String)</code> which receives the fragment and delegates to the implementation of the 
+					<code class="code">ILinkingService</code>.  The default implementation in turn delegates to the &ldquo;scopes API&rdquo;#scoping.
 				</p>
 <p>A simple implementation of the linking service (the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/DefaultLinkingService.java?root=Modeling_Project&view=co" target="_new">DefaultLinkingService</a>) is shipped with Xtext and used for any grammar per default. It uses the default implementation of 
-					<code class="code">IScopeProvider</code> to compute the linking candidates.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/DefaultLinkingService.java?root=Modeling_Project&view=co" target="_new">DefaultLinkingService</a>) is shipped with Xtext and used for any grammar per default. Usually any necessary customization of the linking behavior can best be described using the &ldquo;scopes API&rdquo;#scoping.
 				</p>
-</div>
-<div class="section" title="Default linking semantics">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-<a name="Defaultlinkingsemantics"></a>Default linking semantics</h3>
-</div>
-</div>
-</div>
-<p>The default implementation for all languages looks within the current file for an EObject of the respective type. In the example above this would be an &bdquo;Entity&rdquo; which by convention has a 
-					<code class="code">name</code> attribute set to &sbquo;Entity01&rsquo;. 
-				</p>
-<p>Given the grammar :</p>
-<div class="literallayout">
-<p>
-<code class="code">Model&nbsp;:&nbsp;<br>
-&nbsp;&nbsp;(stuff+=(Ref|Entity))*<br>
-;<br>
-
-<br>
-Ref&nbsp;:&nbsp;<br>
-&nbsp;&nbsp;'ref'&nbsp;referencedObject=[Entity|ID]&nbsp;';'<br>
-;<br>
-
-<br>
-Entity&nbsp;:&nbsp;<br>
-&nbsp;&nbsp;'entity'&nbsp;name=ID&nbsp;';'<br>
-;<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<p>In the following model:</p>
-<div class="literallayout">
-<p>
-<code class="code">ref&nbsp;Entity01;<br>
-entity&nbsp;Entity01;<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<p>the 
-					<code class="code">ref</code> would be linked to the declared entity (
-					<code class="code">entity Entity01;</code>). Nearly any aspect is configurable, especially the name of the identifying attribute may be overridden for a particular type.
-				</p>
-<div class="section" title="Default Imports">
-<div class="titlepage">
-<div>
-<div>
-<h4 class="title">
-<a name="defaultImports"></a>Default Imports</h4>
-</div>
-</div>
-</div>
-<p>There is a default implementation for inter-resource references, which as well uses convention.
-						Each string in a model which is assigned to an EAttribute with the name 
-						<code class="code">importURI</code>, will be interpreted as an URI and used to be loaded using the 
-						<code class="code">ResourceSet</code> of the current resource.
-					</p>
-<p>For example, given the following grammar :</p>
-<div class="literallayout">
-<p>
-<code class="code">Model&nbsp;:&nbsp;<br>
-&nbsp;&nbsp;(imports+=Import)*<br>
-&nbsp;&nbsp;(stuff+=(Ref|Entity))*<br>
-;<br>
-
-<br>
-Import&nbsp;:<br>
-&nbsp;&nbsp;'import'&nbsp;importURI=STRING&nbsp;';'<br>
-;<br>
-
-<br>
-Ref&nbsp;:&nbsp;<br>
-&nbsp;&nbsp;'ref'&nbsp;referencedObject=[Entity|ID]&nbsp;';'<br>
-;<br>
-
-<br>
-Entity&nbsp;:&nbsp;<br>
-&nbsp;&nbsp;'entity'&nbsp;name=ID&nbsp;';'<br>
-;<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<p>It would be possible to write three files in that language where the first references the other two, like this:</p>
-<div class="literallayout">
-<p>
-<code class="code">//file&nbsp;model.dsl<br>
-import&nbsp;"model1.dsl";<br>
-import&nbsp;"model2.dsl";<br>
-&nbsp;<br>
-ref&nbsp;Foo;<br>
-entity&nbsp;Bar;<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<div class="literallayout">
-<p>
-<code class="code">//file&nbsp;model1.dsl&nbsp;<br>
-entity&nbsp;Stuff;<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<div class="literallayout">
-<p>
-<code class="code">//file&nbsp;model2.dsl<br>
-entity&nbsp;Foo;<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<p>The linking candidates for the reference 
-						<code class="code">Foo</code> will be 
-						<code class="code">Bar</code>, 
-						<code class="code">Stuff</code> and 
-						<code class="code">Foo</code> in that order. They will be computed by the 
-						<a class="link" href="scoping.html" title="Scoping">ScopeProvider</a>. 
-					</p>
-</div>
 </div>
 </body>
 </html>

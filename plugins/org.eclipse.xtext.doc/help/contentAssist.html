@@ -73,7 +73,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 <p>Clients who want to customize the behavior may override the methods from the 
 					<code class="code">AbstractProposalProvider</code> or introduce new methods with specialized parameters. The framework dispatches method calls according to the current context to the most concrete implementation, that can be found.
 				</p>
-<p>It is important to know, that for a given offset in a model file, many possible grammar elements exist. The framework dispatches to the method declarations for any valid element. That means, that a bunch of '&sbquo;complete.*&rsquo;' methods may be called.</p>
+<p>It is important to know, that for a given offset in a model file, many possible grammar elements exist. The framework dispatches to the method declarations for any valid element. That means, that a bunch of '&lsquo;complete.*&rsquo;' methods may be called.</p>
 </div>
 <div class="section" title="Sample Implementation">
 <div class="titlepage">
@@ -84,7 +84,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 </div>
-<p>To provide a dummy proposal for the description of a model object, you may introduce a specialization of the generated method and implement it as follows. This will give &sbquo;Description for model #7&rsquo; for a model with the intAttribute '7'</p>
+<p>To provide a dummy proposal for the description of a model object, you may introduce a specialization of the generated method and implement it as follows. This will give &lsquo;Description for model #7&rsquo; for a model with the intAttribute '7'</p>
 <div class="literallayout">
 <p>
 <code class="code">public&nbsp;void&nbsp;completeModel_StringDescription&nbsp;(<br>

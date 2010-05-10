@@ -48,7 +48,7 @@
 </div>
 </div>
 </div>
-<p>The very handy String rules are still present in TMF Xtext but we generalized them so that you don&rsquo;t need to write the &sbquo;String&rsquo; keyword in front of them and at the same time these rules can not only produce EStrings but (as the name suggests) any kind of EDataType. Every parser rule that neither includes assignments nor calls any other that does, returns an EDataType containing the consumed data. Per default this is an EString but you can now simply create a parser rule returning other EDataTypes as well (see 
+<p>The very handy String rules are still present in TMF Xtext but we generalized them so that you don&rsquo;t need to write the &lsquo;String&rsquo; keyword in front of them and at the same time these rules can not only produce EStrings but (as the name suggests) any kind of EDataType. Every parser rule that neither includes assignments nor calls any other that does, returns an EDataType containing the consumed data. Per default this is an EString but you can now simply create a parser rule returning other EDataTypes as well (see 
 						<a class="link" href="syntax.html#datatypeRules" title="Data type rules">Datatype rules</a>).
 					</p>
 <div class="literallayout">
@@ -68,7 +68,7 @@
 </div>
 </div>
 </div>
-<p>Enum rules have not changed significantly. The keyword has changed to be all lower case (&sbquo;enum&rsquo; instead of &sbquo;Enum&rsquo;).
+<p>Enum rules have not changed significantly. The keyword has changed to be all lower case (&lsquo;enum&rsquo; instead of &lsquo;Enum&rsquo;).
 						Also the right-hand side of the assignment is now optional. That is in oAW Xtext:</p>
 <div class="literallayout">
 <p>
@@ -139,7 +139,7 @@
 </div>
 </div>
 <p>We decided to remove the URI terminal. The only reason for the existence was to mark the model somehow so that the framework knows what information to use in order to load referenced models. Instead we decided to solve this similar to how we imply other defaults: by convention.</p>
-<p>So instead of using a special token which is syntactically a STRING token, the default import mechanism now looks for EAttributes of type EString with the name &sbquo;importURI&rsquo;.
+<p>So instead of using a special token which is syntactically a STRING token, the default import mechanism now looks for EAttributes of type EString with the name &lsquo;importURI&rsquo;.
 						That is if you&rsquo;ve used the URI token like this:</p>
 <div class="literallayout">
 <p>
@@ -167,7 +167,7 @@
 </div>
 </div>
 </div>
-<p>The syntax to explicitly declare the return type of a rule has changed. In oAW Xtext (where this was marked as &sbquo;experimental&rsquo;) the syntax was:</p>
+<p>The syntax to explicitly declare the return type of a rule has changed. In oAW Xtext (where this was marked as &lsquo;experimental&rsquo;) the syntax was:</p>
 <div class="literallayout">
 <p>
 <code class="code">&nbsp;&nbsp;MyRule&nbsp;[MyType]&nbsp;:&nbsp;foo=ID;&nbsp;&nbsp;<br>
@@ -195,7 +195,7 @@
 </div>
 </div>
 </div>
-<p>The linking has been completely redesigned. In oAW Xtext linking was done in a very naive way: To find an element one queries a list of all &sbquo;visible&rsquo; EObjects, then filters out what is not needed and tries to find a match by comparing the text written for the crosslink with the value returned by the 
+<p>The linking has been completely redesigned. In oAW Xtext linking was done in a very naive way: To find an element one queries a list of all &lsquo;visible&rsquo; EObjects, then filters out what is not needed and tries to find a match by comparing the text written for the crosslink with the value returned by the 
 					<code class="code">id()</code> extension. As a side-effect of 
 					<code class="code">link_feature()</code> the reference is set.
 				</p>
@@ -223,7 +223,7 @@
 </div>
 </div>
 </div>
-<p>In TMF Xtext we&rsquo;ve introduced scopes and scope providers that are responsible for creating scopes. A scope is basically a set of name-&gt;value pairs. Scopes are implemented upon Iterables and are nested to build a hierarchy. With scopes we declare &bdquo;visible&rdquo; objects in a lazy and cost-saving way where the linker only navigates as far as necessary to find matching objects. The content assist reuses this set of visible objects to offer only reachable objects. </p>
+<p>In TMF Xtext we&rsquo;ve introduced scopes and scope providers that are responsible for creating scopes. A scope is basically a set of name-&gt;value pairs. Scopes are implemented upon Iterables and are nested to build a hierarchy. With scopes we declare &ldquo;visible&rdquo; objects in a lazy and cost-saving way where the linker only navigates as far as necessary to find matching objects. The content assist reuses this set of visible objects to offer only reachable objects. </p>
 <p>When the linking has to be customized scoping is where most of the semantics typically goes into. By implementing an 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java?root=Modeling_Project&view=co" target="_new">IScopeProvider</a> for your language linking and content assist will automatically be kept in sync since both use the scope provider.
 					</p>
@@ -231,10 +231,10 @@
 <div class="orderedlist">
 <ol class="orderedlist" type="1">
 <li class="listitem">
-<p>Elements which have an attribute &sbquo;name&rsquo; will be made visible by their name</p>
+<p>Elements which have an attribute &lsquo;name&rsquo; will be made visible by their name</p>
 </li>
 <li class="listitem">
-<p>Referenced resources will be put on the (outer) scope by using the &sbquo;importURI&rsquo;- naming convention and will only be loaded if necessary</p>
+<p>Referenced resources will be put on the (outer) scope by using the &lsquo;importURI&rsquo;- naming convention and will only be loaded if necessary</p>
 </li>
 <li class="listitem">
 <p>The available elements are filtered by the expected type (i.e. the type of the reference to be linked)</p>
