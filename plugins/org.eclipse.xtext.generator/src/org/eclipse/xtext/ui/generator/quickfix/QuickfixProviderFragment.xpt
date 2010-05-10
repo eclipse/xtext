@@ -20,9 +20,6 @@
 package «getQuickfixProviderName().toJavaPackage()»;
 
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
-import org.eclipse.xtext.ui.editor.quickfix.Fix;
-import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
-import org.eclipse.xtext.validation.Issue;
 
 public class «getQuickfixProviderName().toSimpleName()» extends DefaultQuickfixProvider {
 

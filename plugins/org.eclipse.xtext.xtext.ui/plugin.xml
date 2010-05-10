@@ -253,8 +253,15 @@
 				fileExtensions = file.extensions
 			}
 				
-			// the following fragment tries to use the Antlr Generator fragment which can be installed via update manager from http://download.itemis.com/updates/
-			fragment = AntlrDelegatingFragment {}
+			/* 
+			 * The antlr parser generator fragment.
+			 * If you don't already have it get it from http://download.itemis.com/updates/
+			 */ 
+			fragment = de.itemis.xtext.antlr.XtextAntlrGeneratorFragment {
+//				options = {
+//					backtrack = true
+//				}
+			}
 			
 			// java-based API for validation 
 			fragment = validation.JavaValidatorFragment {
@@ -264,14 +271,13 @@
             }
             
 			// scoping and exporting API
-			/*
-			fragment = scoping.ImportURIScopingFragment {}
-			fragment = exporting.SimpleNamesFragment {}
-			*/
+//			fragment = scoping.ImportURIScopingFragment {}
+//			fragment = exporting.SimpleNamesFragment {}
 			
 			// scoping and exporting API 
 			fragment = scoping.ImportNamespacesScopingFragment {}
 			fragment = exporting.QualifiedNamesFragment {}
+			fragment = builder.BuilderIntegrationFragment {}	
 			
 			// formatter API 
 			fragment = formatting.FormatterFragment {}
@@ -283,30 +289,21 @@
 			fragment = outline.TransformerFragment {}
 			fragment = outline.OutlineNodeAdapterFactoryFragment {}
 			fragment = outline.QuickOutlineFragment {}
-
-			// java-based API for content assistance 
-			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			
-			// the following fragment tries to use the Antlr based content assist 
-			//     fragment which can be downloaded from http://www.itemis.com 
-			//     and will be ignored if it's not available. 
-			fragment = DelegatingGeneratorFragment { 
-				delegate = "de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"
-				message="You are generating without ANTLR. It is highly recommended to download and use the plugin \'de.itemis.xtext.antlr\' \n\t using the update site http:\//download.itemis.com/updates/."
-			}
-
-			fragment = builder.BuilderIntegrationFragment {}
-
-			// project wizard (optional) 
-			/*
-			fragment = projectWizard.SimpleProjectWizardFragment {
-				generatorProjectName = "${projectName}.generator" 
-				modelFileExtension = file.extensions
-			}
-			*/
 			
 			// quickfix API 
-			fragment = quickfix.QuickfixProviderFragment {}			
+			fragment = quickfix.QuickfixProviderFragment {}
+					
+			// content assist API  
+			fragment = contentAssist.JavaBasedContentAssistFragment {}
+			
+			// generates a more lightweight antlr parser and lexer for content assist  
+			fragment =  de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment {}
+
+			// project wizard (optional) 
+//			fragment = projectWizard.SimpleProjectWizardFragment {
+//				generatorProjectName = "${projectName}.generator" 
+//				modelFileExtension = file.extensions
+//			}		
 		}
 	}]]>
          </MweSnippet>
