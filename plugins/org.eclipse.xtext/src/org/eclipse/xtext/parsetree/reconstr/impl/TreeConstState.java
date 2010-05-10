@@ -220,19 +220,18 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 		return types;
 	}
 
-	public List<TypeRef> getTypesToCheck() {
-		Map<EClassifier, TypeRef> localTypes = Maps.newHashMap();
-		for (TypeRef t : getTypes())
+	public Collection<TypeRef> getTypesToCheck() {
+		Map<EClassifier, TypeRef> localTypes = Maps.newLinkedHashMap();
+		for (TypeRef t : sortTypes(getTypes()))
 			if (t != null)
 				localTypes.put(t.getClassifier(), t);
-
 		List<TreeConstTransition> incomming = getIncommingWithoutRuleCalls();
 		if (incomming.isEmpty())
-			return sortTypes(localTypes.values());
+			return localTypes.values();
 		for (TreeConstTransition t : incomming)
 			for (TypeRef r : t.getSource().getTypes())
 				if (r != null && !localTypes.containsKey(r.getClassifier()))
-					return sortTypes(localTypes.values());
+					return localTypes.values();
 		return Collections.emptyList();
 	}
 
@@ -317,6 +316,10 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 		List<TypeRef> result = Lists.newArrayList(types);
 		Collections.sort(result, new Comparator<TypeRef>() {
 			public int compare(TypeRef o1, TypeRef o2) {
+				if (o1 == null)
+					return 1;
+				if (o2 == null)
+					return -1;
 				return o1.getClassifier().getName().compareTo(o2.getClassifier().getName());
 			}
 		});
