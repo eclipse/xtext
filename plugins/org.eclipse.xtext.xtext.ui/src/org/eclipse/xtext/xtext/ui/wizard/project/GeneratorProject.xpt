@@ -15,6 +15,10 @@
 
 «DEFINE main FOR XtextProjectInfo»
 
+«FILE "../plugin.xml"»<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+«ENDFILE»
+
 «FILE "model/Person."+fileExtension-»
 /*
  * This is an example model
@@ -34,6 +38,7 @@ namespace entities {
 	}
 }
 «ENDFILE»
+
 «FILE "model/Datatypes."+fileExtension-»
 /*
  * This is an example model
