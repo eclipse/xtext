@@ -145,7 +145,7 @@ public class FormatterTest extends AbstractXtextTests {
 
 	public void testLinewrapDatatypeRulePartial1() throws Exception {
 		final String model = "test linewrap fqn ab . xx .yy   .zz;";
-		final String expected = "test linewrap fqn ab.xx.yy.zz;";
+		final String expected = "test linewrap fqn \nab.xx.yy.zz;";
 		assertFormattedNM(expected, model, 22, 2);
 	}
 
@@ -157,7 +157,7 @@ public class FormatterTest extends AbstractXtextTests {
 
 	public void testLinewrapDatatypeRulePartial3() throws Exception {
 		final String model = "test linewrap fqn ab . xx .yy   .zz;fqn xxx;";
-		final String expected = "test linewrap fqn ab.xx.yy.zz;\nfqn xxx;";
+		final String expected = "test linewrap fqn \nab.xx.yy.zz;\nfqn xxx;";
 		assertFormattedNM(expected, model, 25, 12);
 	}
 
