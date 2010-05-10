@@ -205,4 +205,10 @@ public class ConcreteSyntaxConstraintProviderTest extends AbstractXtextTests {
 		assertNull(constraint);
 	}
 
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=312220
+	public void testUnassignedRuleCall() throws Exception {
+		String constraint = parseRule("WithoutHidden hidden(): '[' 'kw' WS x=INT '.' y=INT ']';");
+		assertEquals("<WithoutHidden>(x y)", constraint);
+	}
+
 }
