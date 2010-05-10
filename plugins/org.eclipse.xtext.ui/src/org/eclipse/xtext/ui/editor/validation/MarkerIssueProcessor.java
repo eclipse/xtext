@@ -14,8 +14,10 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.validation.Issue;
+
+import com.google.common.collect.ImmutableSet;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -36,7 +38,10 @@ public class MarkerIssueProcessor implements IValidationIssueProcessor {
 
 	public void processIssues(List<Issue> issues, IProgressMonitor monitor) {
 		try {
-			new AddMarkersOperation(resource, issues, EValidator.MARKER, true, markerCreator).run(monitor);
+			new AddMarkersOperation(resource, issues, 
+					ImmutableSet.of(MarkerTypes.FAST_VALIDATION, MarkerTypes.NORMAL_VALIDATION), 
+					true, // delete existing markers 
+					markerCreator).run(monitor);
 		} catch (InvocationTargetException e) {
 			log.error("Could not create marker.", e);
 		} catch (InterruptedException e) {
