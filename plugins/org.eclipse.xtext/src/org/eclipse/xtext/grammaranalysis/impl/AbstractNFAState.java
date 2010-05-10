@@ -46,7 +46,7 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 
 	protected List<T> allIncoming;
 
-	protected NFABuilder<S, T> builder;
+	protected final NFABuilder<S, T> builder;
 
 	protected final AbstractElement element;
 
@@ -63,16 +63,17 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 	}
 
 	@SuppressWarnings("unchecked")
-	protected void addOutgoing(AbstractElement ele, Set<AbstractElement> visited, boolean isRuleCall) {
+	protected void addOutgoing(AbstractElement ele, Set<AbstractElement> visited, boolean isRuleCall,
+			AbstractElement loopCenter) {
 		if (!visited.add(ele))
 			return;
 		if (filter(ele))
-			collectOutgoing(ele, visited, isRuleCall);
+			collectOutgoing(ele, visited, isRuleCall, loopCenter);
 		else {
 			if (isRuleCall)
-				outgoingRuleCalls.add(builder.getTransition((S) this, builder.getState(ele), true));
+				outgoingRuleCalls.add(builder.getTransition((S) this, builder.getState(ele), true, loopCenter));
 			else
-				outgoing.add(builder.getTransition((S) this, builder.getState(ele), false));
+				outgoing.add(builder.getTransition((S) this, builder.getState(ele), false, loopCenter));
 		}
 	}
 
@@ -82,60 +83,62 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 		else {
 			outgoing = new ArrayList<T>();
 			outgoingRuleCalls = new ArrayList<T>();
-			collectOutgoing(element, Sets.<AbstractElement> newHashSet(), false);
+			collectOutgoing(element, Sets.<AbstractElement> newHashSet(), false, null);
 			removeDuplicates(outgoing);
 			removeDuplicates(outgoingRuleCalls);
 		}
 	}
 
-	protected void collectOutgoing(AbstractElement element, Set<AbstractElement> visited, boolean isRuleCall) {
+	protected void collectOutgoing(AbstractElement element, Set<AbstractElement> visited, boolean isRuleCall,
+			AbstractElement loopCenter) {
 		if (element instanceof Group || element instanceof UnorderedGroup) {
 			List<AbstractElement> elements = ((CompoundElement) element).getElements();
 			switch (builder.getDirection()) {
 				case FORWARD:
 					int j = 0;
 					while (j < elements.size()) {
-						addOutgoing(elements.get(j), visited, isRuleCall);
+						addOutgoing(elements.get(j), visited, isRuleCall, loopCenter);
 						if (!GrammarUtil.isOptionalCardinality(elements.get(j)))
 							break;
 						j++;
 					}
 					// add transitions to the next sibling of this element if all children are optional
 					if (j >= elements.size())
-						collectOutgoingByContainer(element, visited, isRuleCall);
+						collectOutgoingByContainer(element, visited, isRuleCall, loopCenter);
 					break;
 				case BACKWARD:
 					int i = elements.size() - 1;
 					while (i >= 0) {
-						addOutgoing(elements.get(i), visited, isRuleCall);
+						addOutgoing(elements.get(i), visited, isRuleCall, loopCenter);
 						if (!GrammarUtil.isOptionalCardinality(elements.get(i)))
 							break;
 						i--;
 					}
 					// add transitions to the next sibling of this element if all children are optional
 					if (i < 0)
-						collectOutgoingByContainer(element, visited, isRuleCall);
+						collectOutgoingByContainer(element, visited, isRuleCall, loopCenter);
 					break;
 			}
 		} else if (element instanceof Alternatives)
 			for (AbstractElement e : ((Alternatives) element).getElements())
-				addOutgoing(e, visited, isRuleCall);
+				addOutgoing(e, visited, isRuleCall, loopCenter);
 		else if (element instanceof Assignment)
-			addOutgoing(((Assignment) element).getTerminal(), visited, isRuleCall);
+			addOutgoing(((Assignment) element).getTerminal(), visited, isRuleCall, loopCenter);
 		else if (element instanceof CrossReference)
-			addOutgoing(((CrossReference) element).getTerminal(), visited, isRuleCall);
+			addOutgoing(((CrossReference) element).getTerminal(), visited, isRuleCall, loopCenter);
 		else if (element instanceof RuleCall
 				&& ((RuleCall) element).getRule().getType().getClassifier() instanceof EClass) {
-			addOutgoing(((RuleCall) element).getRule().getAlternatives(), visited, true);
-			collectOutgoingByContainer(element, visited, isRuleCall);
+			addOutgoing(((RuleCall) element).getRule().getAlternatives(), visited, true, loopCenter);
+			collectOutgoingByContainer(element, visited, isRuleCall, loopCenter);
 		} else {
 			if (GrammarUtil.isMultipleCardinality(element) && !filter(element))
-				addOutgoing(element, visited, isRuleCall);
-			collectOutgoingByContainer(element, visited, isRuleCall);
+				addOutgoing(element, visited, isRuleCall, element);
+			collectOutgoingByContainer(element, visited, isRuleCall, loopCenter);
 		}
 	}
 
-	protected void collectOutgoingByContainer(AbstractElement element, Set<AbstractElement> visited, boolean isRuleCall) {
+	protected void collectOutgoingByContainer(AbstractElement element, Set<AbstractElement> visited,
+			boolean isRuleCall, AbstractElement loopCenter) {
 		EObject container = element.eContainer();
 		if (container instanceof Group || container instanceof UnorderedGroup) {
 			CompoundElement compoundContainer = (CompoundElement) container;
@@ -145,25 +148,25 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 				case FORWARD:
 					if ((i + 1) >= siblings.size()) {
 						if (GrammarUtil.isMultipleCardinality(compoundContainer))
-							addOutgoing(compoundContainer, visited, isRuleCall);
-						collectOutgoingByContainer(compoundContainer, visited, isRuleCall);
+							addOutgoing(compoundContainer, visited, isRuleCall, compoundContainer);
+						collectOutgoingByContainer(compoundContainer, visited, isRuleCall, loopCenter);
 					} else {
 						AbstractElement next = siblings.get(i + 1);
-						addOutgoing(next, visited, isRuleCall);
+						addOutgoing(next, visited, isRuleCall, loopCenter);
 						if (GrammarUtil.isOptionalCardinality(next))
-							collectOutgoingByContainer(next, visited, isRuleCall);
+							collectOutgoingByContainer(next, visited, isRuleCall, loopCenter);
 					}
 					break;
 				case BACKWARD:
 					if (i <= 0) {
 						if (GrammarUtil.isMultipleCardinality(compoundContainer))
-							addOutgoing(compoundContainer, visited, isRuleCall);
-						collectOutgoingByContainer(compoundContainer, visited, isRuleCall);
+							addOutgoing(compoundContainer, visited, isRuleCall, compoundContainer);
+						collectOutgoingByContainer(compoundContainer, visited, isRuleCall, loopCenter);
 					} else {
 						AbstractElement next = siblings.get(i - 1);
-						addOutgoing(next, visited, isRuleCall);
+						addOutgoing(next, visited, isRuleCall, loopCenter);
 						if (GrammarUtil.isOptionalCardinality(next))
-							collectOutgoingByContainer(next, visited, isRuleCall);
+							collectOutgoingByContainer(next, visited, isRuleCall, loopCenter);
 					}
 					break;
 			}
@@ -172,8 +175,8 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 		else if (container instanceof AbstractElement) {
 			AbstractElement elementContainer = (AbstractElement) container;
 			if (GrammarUtil.isMultipleCardinality(elementContainer))
-				addOutgoing(elementContainer, visited, isRuleCall);
-			collectOutgoingByContainer(elementContainer, visited, isRuleCall);
+				addOutgoing(elementContainer, visited, isRuleCall, elementContainer);
+			collectOutgoingByContainer(elementContainer, visited, isRuleCall, loopCenter);
 		} else
 			throw new IllegalStateException("Unknown container: " + container);
 	}

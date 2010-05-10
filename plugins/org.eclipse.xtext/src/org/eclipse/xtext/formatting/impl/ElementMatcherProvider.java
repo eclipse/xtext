@@ -100,7 +100,7 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 			for (MatcherState state : states) {
 				state.getAfterPatterns().add(pattern);
 				for (MatcherTransition outgoing : state.getAllOutgoing())
-					if (state == outgoing.getTarget() || !states.contains(outgoing.getTarget()))
+					if (pattern.matchAfter() == outgoing.getLoopCenter() || !states.contains(outgoing.getTarget()))
 						outgoing.getPatterns().add(pattern);
 			}
 		}
@@ -121,16 +121,35 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 			for (MatcherState state : states) {
 				state.getBeforePatterns().add(pattern);
 				for (MatcherTransition incoming : state.getAllIncoming())
-					if (state == incoming.getSource() || !states.contains(incoming.getSource()))
+					if (pattern.matchBefore() == incoming.getLoopCenter() || !states.contains(incoming.getSource()))
 						incoming.getPatterns().add(pattern);
 			}
 		}
 
 		protected void installBetween(IBetweenElements pattern) {
-			Set<MatcherState> targets = getAllStates(pattern.matchBetween().getSecond());
+			if (pattern.matchBetween().getFirst() == pattern.matchBetween().getSecond())
+				installBetween(pattern, pattern.matchBetween().getFirst());
+			else
+				installBetween(pattern, pattern.matchBetween().getFirst(), pattern.matchBetween().getSecond());
+		}
+
+		protected void installBetween(IBetweenElements pattern, AbstractElement loopCenter) {
+			Set<MatcherState> states = getAllStates(loopCenter);
+			for (MatcherState state : states) {
+				state.getBeforeBetweenElements().add(pattern);
+				state.getAfterBetweenElements().add(pattern);
+				for (MatcherTransition transition : state.getAllOutgoing())
+					if (transition.getLoopCenter() == loopCenter && states.contains(transition.getTarget()))
+						transition.getPatterns().add(pattern);
+			}
+		}
+
+		protected void installBetween(IBetweenElements pattern, AbstractElement first, AbstractElement second) {
+			Set<MatcherState> sources = getAllStates(first);
+			Set<MatcherState> targets = getAllStates(second);
 			for (MatcherState target : targets)
 				target.getBeforeBetweenElements().add(pattern);
-			for (MatcherState source : getAllStates(pattern.matchBetween().getFirst())) {
+			for (MatcherState source : sources) {
 				source.getAfterBetweenElements().add(pattern);
 				for (MatcherTransition transition : source.getAllOutgoing())
 					if (targets.contains(transition.getTarget()))

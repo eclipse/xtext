@@ -9,6 +9,7 @@ package org.eclipse.xtext.formatting.impl;
 
 import java.util.Set;
 
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementPattern;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractNFATransition;
 
@@ -21,8 +22,8 @@ public class MatcherTransition extends AbstractNFATransition<MatcherState, Match
 
 	protected Set<IElementPattern> patterns;
 
-	public MatcherTransition(MatcherState source, MatcherState target, boolean ruleCall) {
-		super(source, target, ruleCall);
+	public MatcherTransition(MatcherState source, MatcherState target, boolean ruleCall, AbstractElement loopCenter) {
+		super(source, target, ruleCall, loopCenter);
 	}
 
 	public Set<IElementPattern> getPatterns() {

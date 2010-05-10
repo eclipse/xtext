@@ -8,24 +8,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractNFATransition;
 import org.eclipse.xtext.parsetree.reconstr.impl.TreeConstState.Status;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class TreeConstTransition extends
-		AbstractNFATransition<TreeConstState, TreeConstTransition> {
+public class TreeConstTransition extends AbstractNFATransition<TreeConstState, TreeConstTransition> {
 
 	protected int precedence = -1;
 
 	protected Status status = Status.UNKNOWN;
 
-	public TreeConstTransition(TreeConstState source, TreeConstState target,
-			boolean ruleCall) {
-		super(source, target, ruleCall);
+	public TreeConstTransition(TreeConstState source, TreeConstState target, boolean ruleCall,
+			AbstractElement loopCenter) {
+		super(source, target, ruleCall, loopCenter);
 	}
-	
+
 	@Override
 	public int getPrecedence() {
 		if (getStatus() != Status.ENABLED)

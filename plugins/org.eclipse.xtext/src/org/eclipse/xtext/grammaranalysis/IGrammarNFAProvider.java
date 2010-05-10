@@ -23,7 +23,7 @@ public interface IGrammarNFAProvider<S, T> {
 
 		S getState(AbstractElement ele);
 
-		T getTransition(S source, S target, boolean isRuleCall);
+		T getTransition(S source, S target, boolean isRuleCall, AbstractElement loopCenter);
 	}
 
 	enum NFADirection {

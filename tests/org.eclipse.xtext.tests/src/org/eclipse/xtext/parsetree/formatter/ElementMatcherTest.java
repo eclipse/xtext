@@ -21,6 +21,7 @@ import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementPattern;
 import org.eclipse.xtext.formatting.impl.AbstractTokenStream;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguageGrammarAccess;
+import org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguageGrammarAccess.LoopElements;
 import org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguageGrammarAccess.OptionalCallsElements;
 import org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguageGrammarAccess.RuleCallsElements;
 import org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguageGrammarAccess.SimpleElements;
@@ -216,5 +217,57 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		p.after(g.getRecursionSubAccess().getLeftCurlyBracketKeyword_1());
 		p.before(g.getRecursionSubAccess().getRightCurlyBracketKeyword_3());
 		assertEquals("#4 { ! bar { ! foo ! } { ! { ! zonk ! } ! } ! }", match("#4 { { foo } bar { { zonk } } }", p));
+	}
+
+	public void testLoop() throws Exception {
+		LoopElements le = g.getLoopAccess();
+		Patterns p = new Patterns();
+		p.before(le.getNamesAssignment_1());
+		assertEquals("#5 ! foo ! bar ! baz", match("#5 foo bar baz", p));
+
+		p = new Patterns();
+		p.after(le.getNamesAssignment_1());
+		assertEquals("#5 foo ! bar ! baz !", match("#5 foo bar baz", p));
+
+		p = new Patterns();
+		p.between(le.getNamesAssignment_1(), le.getNamesAssignment_1());
+		assertEquals("#5 foo ! bar ! baz", match("#5 foo bar baz", p));
+
+		p = new Patterns();
+		p.before(le.getGroup_2());
+		assertEquals("#5 foo bar ! gr grfoo ! gr grbar", match("#5 foo bar gr grfoo gr grbar", p));
+
+		p = new Patterns();
+		p.after(le.getGroup_2());
+		assertEquals("#5 foo bar gr grfoo ! gr grbar !", match("#5 foo bar gr grfoo gr grbar", p));
+
+		p = new Patterns();
+		p.between(le.getGroup_2(), le.getGroup_2());
+		assertEquals("#5 foo bar gr grfoo ! gr grbar", match("#5 foo bar gr grfoo gr grbar", p));
+
+		p = new Patterns();
+		p.between(le.getNamesAssignment_1(), le.getGroup_2());
+		assertEquals("#5 foo bar ! gr grfoo gr grbar", match("#5 foo bar gr grfoo gr grbar", p));
+
+		p = new Patterns();
+		p.before(le.getAlternatives_3());
+		assertEquals("#5 x gr gf gr gb ! '1' ! '2' ! 1 ! 2", match("#5 x gr gf gr gb '1' '2' 1 2", p));
+
+		p = new Patterns();
+		p.after(le.getAlternatives_3());
+		assertEquals("#5 x gr gf gr gb '1' ! '2' ! 1 ! 2 !", match("#5 x gr gf gr gb '1' '2' 1 2", p));
+
+		p = new Patterns();
+		p.between(le.getAlternatives_3(), le.getAlternatives_3());
+		assertEquals("#5 x gr gf gr gb '1' ! '2' ! 1 ! 2", match("#5 x gr gf gr gb '1' '2' 1 2", p));
+
+		p = new Patterns();
+		p.between(le.getGroup_2(), le.getAlternatives_3());
+		assertEquals("#5 x gr gf gr gb ! '1' '2' 1 2", match("#5 x gr gf gr gb '1' '2' 1 2", p));
+
+		p = new Patterns();
+		p.between(le.getNamesAssignment_1(), le.getAlternatives_3());
+		assertEquals("#5 x gr gf gr gb '1' '2' 1 2", match("#5 x gr gf gr gb '1' '2' 1 2", p));
+		assertEquals("#5 x ! '1' '2' 1 2", match("#5 x '1' '2' 1 2", p));
 	}
 }
