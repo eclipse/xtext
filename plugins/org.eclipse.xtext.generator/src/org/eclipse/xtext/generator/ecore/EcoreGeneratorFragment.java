@@ -147,24 +147,24 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		try {
 			// create a defensive clone
-			ResourceSet rs = EcoreUtil2.clone(new XtextResourceSet(), grammar.eResource().getResourceSet());
-			grammar = (Grammar) rs.getResource(grammar.eResource().getURI(), true).getContents().get(0);
+			ResourceSet copiedResourceSet = EcoreUtil2.clone(new XtextResourceSet(), grammar.eResource().getResourceSet());
+			Grammar copiedGrammar = (Grammar) copiedResourceSet.getResource(grammar.eResource().getURI(), true).getContents().get(0);
 
-			List<EPackage> packs = getGeneratedEPackages(grammar);
+			List<EPackage> packs = getGeneratedEPackages(copiedGrammar);
 			if (!packs.isEmpty()) {
 				removeFromResource(packs);
 				proxifyExternalReferences(packs);
 				XtextResourceSet resourceSet = getNsUriMappingResourceSet();
 
-				Resource ePackages = createResourceForEPackages(grammar, ctx, packs, resourceSet);
+				Resource ePackages = createResourceForEPackages(copiedGrammar, ctx, packs, resourceSet);
 				List<GenPackage> genPackages = loadReferencedGenModels(resourceSet);
 				if (!skipGenerate) {
-					GenModel genModel = getSaveAndReconcileGenModel(resourceSet, grammar, ctx, packs, genPackages);
+					GenModel genModel = getSaveAndReconcileGenModel(resourceSet, copiedGrammar, ctx, packs, genPackages);
 					genModel.reconcile();
 					doGenerate(genModel);
 					if (basePackage == null)
 						basePackage = genModel.getGenPackages().get(0).getBasePackage();
-					super.generate(grammar, ctx);
+					super.generate(copiedGrammar, ctx);
 				}
 				resolveAll(resourceSet);
 				ePackages.save(null);

@@ -55,14 +55,14 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		super.generate(grammar, ctx);
 		// create a defensive clone
-		ResourceSet setImpl = EcoreUtil2.clone(new ResourceSetImpl(),grammar.eResource().getResourceSet());
-		grammar = (Grammar) setImpl.getResource(grammar.eResource().getURI(), true).getContents().get(0);
+		ResourceSet copiedResourceSet = EcoreUtil2.clone(new ResourceSetImpl(),grammar.eResource().getResourceSet());
+		Grammar copiedGrammar = (Grammar) copiedResourceSet.getResource(grammar.eResource().getURI(), true).getContents().get(0);
 		
 		// save grammar model
-		String xmiPath = GrammarUtil.getClasspathRelativePathToXmi(grammar);
-		Resource resource = setImpl.createResource(URI.createURI(ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath()
+		String xmiPath = GrammarUtil.getClasspathRelativePathToXmi(copiedGrammar);
+		Resource resource = copiedResourceSet.createResource(URI.createURI(ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath()
 				+ "/" + xmiPath), ContentHandler.UNSPECIFIED_CONTENT_TYPE);
-		addAllGrammarsToResource(resource, grammar, new HashSet<Grammar>());
+		addAllGrammarsToResource(resource, copiedGrammar, new HashSet<Grammar>());
 		try {
 			resource.save(null);
 		} catch (IOException e) {
