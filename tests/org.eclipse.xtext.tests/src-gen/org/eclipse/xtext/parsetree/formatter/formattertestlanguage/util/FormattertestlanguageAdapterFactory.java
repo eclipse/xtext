@@ -128,6 +128,11 @@ public class FormattertestlanguageAdapterFactory extends AdapterFactoryImpl
         return createFqnRefAdapter();
       }
       @Override
+      public Adapter caseEnumeration(Enumeration object)
+      {
+        return createEnumerationAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -295,6 +300,21 @@ public class FormattertestlanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createFqnRefAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enumeration <em>Enumeration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enumeration
+   * @generated
+   */
+  public Adapter createEnumerationAdapter()
   {
     return null;
   }

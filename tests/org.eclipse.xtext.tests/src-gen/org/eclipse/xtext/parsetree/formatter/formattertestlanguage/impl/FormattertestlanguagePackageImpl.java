@@ -7,6 +7,7 @@ package org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -14,6 +15,8 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Assign;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Decl;
+import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enum1;
+import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enumeration;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguageFactory;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguagePackage;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FqnObj;
@@ -102,6 +105,20 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * @generated
    */
   private EClass fqnRefEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass enumerationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum enum1EEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -411,6 +428,36 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getEnumeration()
+  {
+    return enumerationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEnumeration_Val()
+  {
+    return (EAttribute)enumerationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EEnum getEnum1()
+  {
+    return enum1EEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public FormattertestlanguageFactory getFormattertestlanguageFactory()
   {
     return (FormattertestlanguageFactory)getEFactoryInstance();
@@ -469,6 +516,12 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
 
     fqnRefEClass = createEClass(FQN_REF);
     createEReference(fqnRefEClass, FQN_REF__REF);
+
+    enumerationEClass = createEClass(ENUMERATION);
+    createEAttribute(enumerationEClass, ENUMERATION__VAL);
+
+    // Create enums
+    enum1EEnum = createEEnum(ENUM1);
   }
 
   /**
@@ -507,6 +560,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     testIndentationEClass.getESuperTypes().add(this.getRoot());
     fqnObjEClass.getESuperTypes().add(this.getLine());
     fqnRefEClass.getESuperTypes().add(this.getLine());
+    enumerationEClass.getESuperTypes().add(this.getLine());
 
     // Initialize classes and features; add operations and parameters
     initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -542,6 +596,15 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
 
     initEClass(fqnRefEClass, FqnRef.class, "FqnRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getFqnRef_Ref(), this.getFqnObj(), null, "ref", null, 0, 1, FqnRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(enumerationEClass, Enumeration.class, "Enumeration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEnumeration_Val(), this.getEnum1(), "val", null, 0, -1, Enumeration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    // Initialize enums and add enum literals
+    initEEnum(enum1EEnum, Enum1.class, "Enum1");
+    addEEnumLiteral(enum1EEnum, Enum1.LIT1);
+    addEEnumLiteral(enum1EEnum, Enum1.LIT2);
+    addEEnumLiteral(enum1EEnum, Enum1.LIT3);
 
     // Create resource
     createResource(eNS_URI);

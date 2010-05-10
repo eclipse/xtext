@@ -9,6 +9,11 @@
     editorPluginID="org.eclipse.xtext.tests.editor">
   <genPackages prefix="Formattertestlanguage" basePackage="org.eclipse.xtext.parsetree.formatter"
       disposableProviderFactory="true" ecorePackage="FormatterTestLanguage.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="FormatterTestLanguage.ecore#//Enum1">
+      <genEnumLiterals ecoreEnumLiteral="FormatterTestLanguage.ecore#//Enum1/lit1"/>
+      <genEnumLiterals ecoreEnumLiteral="FormatterTestLanguage.ecore#//Enum1/lit2"/>
+      <genEnumLiterals ecoreEnumLiteral="FormatterTestLanguage.ecore#//Enum1/lit3"/>
+    </genEnums>
     <genClasses ecoreClass="FormatterTestLanguage.ecore#//Root">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FormatterTestLanguage.ecore#//Root/items"/>
     </genClasses>
@@ -40,6 +45,9 @@
     </genClasses>
     <genClasses ecoreClass="FormatterTestLanguage.ecore#//FqnRef">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FormatterTestLanguage.ecore#//FqnRef/ref"/>
+    </genClasses>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//Enumeration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Enumeration/val"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

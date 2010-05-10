@@ -54,16 +54,17 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cMethParserRuleCall_0_2 = (RuleCall)cAlternatives_0.eContents().get(2);
 		private final RuleCall cFqnObjParserRuleCall_0_3 = (RuleCall)cAlternatives_0.eContents().get(3);
 		private final RuleCall cFqnRefParserRuleCall_0_4 = (RuleCall)cAlternatives_0.eContents().get(4);
+		private final RuleCall cEnumerationParserRuleCall_0_5 = (RuleCall)cAlternatives_0.eContents().get(5);
 		private final Keyword cSemicolonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Line:
-		//  (Decl|Assign|Meth|FqnObj|FqnRef) ";";
+		//  (Decl|Assign|Meth|FqnObj|FqnRef|Enumeration) ";";
 		public ParserRule getRule() { return rule; }
 
-		//(Decl|Assign|Meth|FqnObj|FqnRef) ";"
+		//(Decl|Assign|Meth|FqnObj|FqnRef|Enumeration) ";"
 		public Group getGroup() { return cGroup; }
 
-		//Decl|Assign|Meth|FqnObj|FqnRef
+		//Decl|Assign|Meth|FqnObj|FqnRef|Enumeration
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//Decl
@@ -80,6 +81,9 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 		//FqnRef
 		public RuleCall getFqnRefParserRuleCall_0_4() { return cFqnRefParserRuleCall_0_4; }
+
+		//Enumeration
+		public RuleCall getEnumerationParserRuleCall_0_5() { return cEnumerationParserRuleCall_0_5; }
 
 		//";"
 		public Keyword getSemicolonKeyword_1() { return cSemicolonKeyword_1; }
@@ -432,7 +436,83 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//FQN
 		public RuleCall getRefFqnObjFQNParserRuleCall_1_0_1() { return cRefFqnObjFQNParserRuleCall_1_0_1; }
 	}
+
+	public class EnumerationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Enumeration");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cEnumKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cValEnum1EnumRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cValAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cValEnum1EnumRuleCall_2_1_0 = (RuleCall)cValAssignment_2_1.eContents().get(0);
+		
+		//Enumeration:
+		//  "enum" val+=Enum1+ ("," val+=Enum1)*;
+		public ParserRule getRule() { return rule; }
+
+		//"enum" val+=Enum1+ ("," val+=Enum1)*
+		public Group getGroup() { return cGroup; }
+
+		//"enum"
+		public Keyword getEnumKeyword_0() { return cEnumKeyword_0; }
+
+		//val+=Enum1+
+		public Assignment getValAssignment_1() { return cValAssignment_1; }
+
+		//Enum1
+		public RuleCall getValEnum1EnumRuleCall_1_0() { return cValEnum1EnumRuleCall_1_0; }
+
+		//("," val+=Enum1)*
+		public Group getGroup_2() { return cGroup_2; }
+
+		//","
+		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
+
+		//val+=Enum1
+		public Assignment getValAssignment_2_1() { return cValAssignment_2_1; }
+
+		//Enum1
+		public RuleCall getValEnum1EnumRuleCall_2_1_0() { return cValEnum1EnumRuleCall_2_1_0; }
+	}
 	
+	
+	public class Enum1Elements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "Enum1");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cLit1EnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cLit1Lit1Keyword_0_0 = (Keyword)cLit1EnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cLit2EnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cLit2Lit2Keyword_1_0 = (Keyword)cLit2EnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cLit3EnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cLit3Lit3Keyword_2_0 = (Keyword)cLit3EnumLiteralDeclaration_2.eContents().get(0);
+		
+		//enum Enum1:
+		//  lit1 | lit2 | lit3;
+		public EnumRule getRule() { return rule; }
+
+		//lit1 | lit2 | lit3
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//lit1
+		public EnumLiteralDeclaration getLit1EnumLiteralDeclaration_0() { return cLit1EnumLiteralDeclaration_0; }
+
+		//"lit1"
+		public Keyword getLit1Lit1Keyword_0_0() { return cLit1Lit1Keyword_0_0; }
+
+		//lit2
+		public EnumLiteralDeclaration getLit2EnumLiteralDeclaration_1() { return cLit2EnumLiteralDeclaration_1; }
+
+		//"lit2"
+		public Keyword getLit2Lit2Keyword_1_0() { return cLit2Lit2Keyword_1_0; }
+
+		//lit3
+		public EnumLiteralDeclaration getLit3EnumLiteralDeclaration_2() { return cLit3EnumLiteralDeclaration_2; }
+
+		//"lit3"
+		public Keyword getLit3Lit3Keyword_2_0() { return cLit3Lit3Keyword_2_0; }
+	}
 	
 	private RootElements pRoot;
 	private LineElements pLine;
@@ -445,6 +525,8 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private FqnObjElements pFqnObj;
 	private FQNElements pFQN;
 	private FqnRefElements pFqnRef;
+	private EnumerationElements pEnumeration;
+	private Enum1Elements unknownRuleEnum1;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -478,7 +560,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Line:
-	//  (Decl|Assign|Meth|FqnObj|FqnRef) ";";
+	//  (Decl|Assign|Meth|FqnObj|FqnRef|Enumeration) ";";
 	public LineElements getLineAccess() {
 		return (pLine != null) ? pLine : (pLine = new LineElements());
 	}
@@ -575,6 +657,26 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	public ParserRule getFqnRefRule() {
 		return getFqnRefAccess().getRule();
+	}
+
+	//Enumeration:
+	//  "enum" val+=Enum1+ ("," val+=Enum1)*;
+	public EnumerationElements getEnumerationAccess() {
+		return (pEnumeration != null) ? pEnumeration : (pEnumeration = new EnumerationElements());
+	}
+	
+	public ParserRule getEnumerationRule() {
+		return getEnumerationAccess().getRule();
+	}
+
+	//enum Enum1:
+	//  lit1 | lit2 | lit3;
+	public Enum1Elements getEnum1Access() {
+		return (unknownRuleEnum1 != null) ? unknownRuleEnum1 : (unknownRuleEnum1 = new Enum1Elements());
+	}
+	
+	public EnumRule getEnum1Rule() {
+		return getEnum1Access().getRule();
 	}
 
 	//terminal ID:

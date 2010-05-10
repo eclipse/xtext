@@ -6,6 +6,7 @@
 package org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -77,8 +78,43 @@ public class FormattertestlanguageFactoryImpl extends EFactoryImpl implements Fo
       case FormattertestlanguagePackage.TEST_INDENTATION: return createTestIndentation();
       case FormattertestlanguagePackage.FQN_OBJ: return createFqnObj();
       case FormattertestlanguagePackage.FQN_REF: return createFqnRef();
+      case FormattertestlanguagePackage.ENUMERATION: return createEnumeration();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Object createFromString(EDataType eDataType, String initialValue)
+  {
+    switch (eDataType.getClassifierID())
+    {
+      case FormattertestlanguagePackage.ENUM1:
+        return createEnum1FromString(eDataType, initialValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String convertToString(EDataType eDataType, Object instanceValue)
+  {
+    switch (eDataType.getClassifierID())
+    {
+      case FormattertestlanguagePackage.ENUM1:
+        return convertEnum1ToString(eDataType, instanceValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
   }
 
@@ -190,6 +226,39 @@ public class FormattertestlanguageFactoryImpl extends EFactoryImpl implements Fo
   {
     FqnRefImpl fqnRef = new FqnRefImpl();
     return fqnRef;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Enumeration createEnumeration()
+  {
+    EnumerationImpl enumeration = new EnumerationImpl();
+    return enumeration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Enum1 createEnum1FromString(EDataType eDataType, String initialValue)
+  {
+    Enum1 result = Enum1.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertEnum1ToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

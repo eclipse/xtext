@@ -26,6 +26,7 @@ import org.eclipse.xtext.parser.impl.*;
 import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
@@ -182,6 +183,16 @@ ruleLine returns [EObject current=null]
     this_FqnRef_4=ruleFqnRef
     { 
         $current = $this_FqnRef_4.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getLineAccess().getEnumerationParserRuleCall_0_5(), currentNode); 
+    }
+    this_Enumeration_5=ruleEnumeration
+    { 
+        $current = $this_Enumeration_5.current; 
         currentNode = currentNode.getParent();
     }
 )	';' 
@@ -891,6 +902,112 @@ ruleFqnRef returns [EObject current=null]
 ;
 
 
+
+
+
+// Entry rule entryRuleEnumeration
+entryRuleEnumeration returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getEnumerationRule(), currentNode); }
+	 iv_ruleEnumeration=ruleEnumeration 
+	 { $current=$iv_ruleEnumeration.current; } 
+	 EOF 
+;
+
+// Rule Enumeration
+ruleEnumeration returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(	'enum' 
+    {
+        createLeafNode(grammarAccess.getEnumerationAccess().getEnumKeyword_0(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getEnumerationAccess().getValEnum1EnumRuleCall_1_0(), currentNode); 
+	    }
+		lv_val_1_0=ruleEnum1		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getEnumerationRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"val",
+	        		lv_val_1_0, 
+	        		"Enum1", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)+(	',' 
+    {
+        createLeafNode(grammarAccess.getEnumerationAccess().getCommaKeyword_2_0(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getEnumerationAccess().getValEnum1EnumRuleCall_2_1_0(), currentNode); 
+	    }
+		lv_val_3_0=ruleEnum1		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getEnumerationRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"val",
+	        		lv_val_3_0, 
+	        		"Enum1", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+))*)
+;
+
+
+
+
+
+// Rule Enum1
+ruleEnum1 returns [Enumerator current=null] 
+    @init { setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+((	'lit1' 
+	{
+        $current = grammarAccess.getEnum1Access().getLit1EnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getEnum1Access().getLit1EnumLiteralDeclaration_0(), null); 
+    }
+)
+    |(	'lit2' 
+	{
+        $current = grammarAccess.getEnum1Access().getLit2EnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getEnum1Access().getLit2EnumLiteralDeclaration_1(), null); 
+    }
+)
+    |(	'lit3' 
+	{
+        $current = grammarAccess.getEnum1Access().getLit3EnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getEnum1Access().getLit3EnumLiteralDeclaration_2(), null); 
+    }
+));
 
 
 

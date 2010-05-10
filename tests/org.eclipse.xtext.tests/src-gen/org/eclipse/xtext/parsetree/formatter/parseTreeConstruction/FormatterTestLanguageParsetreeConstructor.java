@@ -41,6 +41,7 @@ protected class ThisRootNode extends RootToken {
 			case 7: return new TestIndentation_Group(this, this, 7, inst);
 			case 8: return new FqnObj_Group(this, this, 8, inst);
 			case 9: return new FqnRef_Group(this, this, 9, inst);
+			case 10: return new Enumeration_Group(this, this, 10, inst);
 			default: return null;
 		}	
 	}	
@@ -210,11 +211,11 @@ protected class Root_TestIndentationParserRuleCall_1_1 extends RuleCallToken {
 /************ begin Rule Line ****************
  *
  * Line:
- *   (Decl|Assign|Meth|FqnObj|FqnRef) ";";
+ *   (Decl|Assign|Meth|FqnObj|FqnRef|Enumeration) ";";
  *
  **/
 
-// (Decl|Assign|Meth|FqnObj|FqnRef) ";"
+// (Decl|Assign|Meth|FqnObj|FqnRef|Enumeration) ";"
 protected class Line_Group extends GroupToken {
 	
 	public Line_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -238,6 +239,7 @@ protected class Line_Group extends GroupToken {
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getAssignRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getDeclRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getEnumerationRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getFqnObjRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getFqnRefRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getMethRule().getType().getClassifier())
@@ -247,7 +249,7 @@ protected class Line_Group extends GroupToken {
 
 }
 
-// Decl|Assign|Meth|FqnObj|FqnRef
+// Decl|Assign|Meth|FqnObj|FqnRef|Enumeration
 protected class Line_Alternatives_0 extends AlternativesToken {
 
 	public Line_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -267,6 +269,7 @@ protected class Line_Alternatives_0 extends AlternativesToken {
 			case 2: return new Line_MethParserRuleCall_0_2(lastRuleCallOrigin, this, 2, inst);
 			case 3: return new Line_FqnObjParserRuleCall_0_3(lastRuleCallOrigin, this, 3, inst);
 			case 4: return new Line_FqnRefParserRuleCall_0_4(lastRuleCallOrigin, this, 4, inst);
+			case 5: return new Line_EnumerationParserRuleCall_0_5(lastRuleCallOrigin, this, 5, inst);
 			default: return null;
 		}	
 	}
@@ -442,6 +445,42 @@ protected class Line_FqnRefParserRuleCall_0_4 extends RuleCallToken {
 		if(getEObject().eClass() != grammarAccess.getFqnRefRule().getType().getClassifier())
 			return null;
 		if(checkForRecursion(FqnRef_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// Enumeration
+protected class Line_EnumerationParserRuleCall_0_5 extends RuleCallToken {
+	
+	public Line_EnumerationParserRuleCall_0_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getLineAccess().getEnumerationParserRuleCall_0_5();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Enumeration_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getEnumerationRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(Enumeration_Group.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
 	}
 	
@@ -1873,5 +1912,182 @@ protected class FqnRef_RefAssignment_1 extends AssignmentToken  {
 
 
 /************ end Rule FqnRef ****************/
+
+
+/************ begin Rule Enumeration ****************
+ *
+ * Enumeration:
+ *   "enum" val+=Enum1+ ("," val+=Enum1)*;
+ *
+ **/
+
+// "enum" val+=Enum1+ ("," val+=Enum1)*
+protected class Enumeration_Group extends GroupToken {
+	
+	public Enumeration_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getEnumerationAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Enumeration_Group_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Enumeration_ValAssignment_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getEnumerationRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "enum"
+protected class Enumeration_EnumKeyword_0 extends KeywordToken  {
+	
+	public Enumeration_EnumKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEnumerationAccess().getEnumKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// val+=Enum1+
+protected class Enumeration_ValAssignment_1 extends AssignmentToken  {
+	
+	public Enumeration_ValAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEnumerationAccess().getValAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Enumeration_ValAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Enumeration_EnumKeyword_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("val",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("val");
+		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getEnumerationAccess().getValEnum1EnumRuleCall_1_0(), value, null)) { 
+			type = AssignmentType.ENUM_RULE_CALL;
+			element = grammarAccess.getEnumerationAccess().getValEnum1EnumRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ("," val+=Enum1)*
+protected class Enumeration_Group_2 extends GroupToken {
+	
+	public Enumeration_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getEnumerationAccess().getGroup_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Enumeration_ValAssignment_2_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// ","
+protected class Enumeration_CommaKeyword_2_0 extends KeywordToken  {
+	
+	public Enumeration_CommaKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEnumerationAccess().getCommaKeyword_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Enumeration_Group_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Enumeration_ValAssignment_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// val+=Enum1
+protected class Enumeration_ValAssignment_2_1 extends AssignmentToken  {
+	
+	public Enumeration_ValAssignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEnumerationAccess().getValAssignment_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Enumeration_CommaKeyword_2_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("val",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("val");
+		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getEnumerationAccess().getValEnum1EnumRuleCall_2_1_0(), value, null)) { 
+			type = AssignmentType.ENUM_RULE_CALL;
+			element = grammarAccess.getEnumerationAccess().getValEnum1EnumRuleCall_2_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+
+/************ end Rule Enumeration ****************/
 
 }

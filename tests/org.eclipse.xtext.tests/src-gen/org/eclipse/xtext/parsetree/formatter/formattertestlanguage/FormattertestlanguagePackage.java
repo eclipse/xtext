@@ -7,6 +7,7 @@ package org.eclipse.xtext.parsetree.formatter.formattertestlanguage;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -393,6 +394,44 @@ public interface FormattertestlanguagePackage extends EPackage
    */
   int FQN_REF_FEATURE_COUNT = LINE_FEATURE_COUNT + 1;
 
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.EnumerationImpl <em>Enumeration</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.EnumerationImpl
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getEnumeration()
+   * @generated
+   */
+  int ENUMERATION = 10;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUMERATION__VAL = LINE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Enumeration</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUMERATION_FEATURE_COUNT = LINE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enum1 <em>Enum1</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enum1
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getEnum1()
+   * @generated
+   */
+  int ENUM1 = 11;
+
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Root <em>Root</em>}'.
@@ -649,6 +688,37 @@ public interface FormattertestlanguagePackage extends EPackage
   EReference getFqnRef_Ref();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enumeration <em>Enumeration</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Enumeration</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enumeration
+   * @generated
+   */
+  EClass getEnumeration();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enumeration#getVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Val</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enumeration#getVal()
+   * @see #getEnumeration()
+   * @generated
+   */
+  EAttribute getEnumeration_Val();
+
+  /**
+   * Returns the meta object for enum '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enum1 <em>Enum1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>Enum1</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enum1
+   * @generated
+   */
+  EEnum getEnum1();
+
+  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -882,6 +952,34 @@ public interface FormattertestlanguagePackage extends EPackage
      * @generated
      */
     EReference FQN_REF__REF = eINSTANCE.getFqnRef_Ref();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.EnumerationImpl <em>Enumeration</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.EnumerationImpl
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getEnumeration()
+     * @generated
+     */
+    EClass ENUMERATION = eINSTANCE.getEnumeration();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ENUMERATION__VAL = eINSTANCE.getEnumeration_Val();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enum1 <em>Enum1</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enum1
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getEnum1()
+     * @generated
+     */
+    EEnum ENUM1 = eINSTANCE.getEnum1();
 
   }
 

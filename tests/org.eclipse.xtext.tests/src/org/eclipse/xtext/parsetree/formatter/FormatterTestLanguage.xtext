@@ -14,7 +14,7 @@ Root:
 	"test" (TestLinewrap | TestIndentation);
 	
 Line:
-	(Decl | Assign | Meth | FqnObj | FqnRef) ";";
+	(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration) ";";
 	
 Decl:	
 	type+=ID name+=ID;
@@ -43,3 +43,8 @@ FQN:
 FqnRef:
 	"fqnref" ref=[FqnObj|FQN];
 	
+Enumeration:
+	"enum" val+=Enum1+ (',' val+=Enum1)*;
+	
+enum Enum1: 
+	lit1 | lit2 | lit3;
