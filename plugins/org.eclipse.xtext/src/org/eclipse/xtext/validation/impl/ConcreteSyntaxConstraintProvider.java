@@ -373,8 +373,11 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 				semanticType = (EClass) ((Action) ele).getType().getClassifier();
 				return createElement(ConstraintType.ACTION, ele, semanticType, multiple, optional);
 			} else if (ele instanceof RuleCall) {
-				ele = ((RuleCall) ele).getRule().getAlternatives();
-				continue;
+				AbstractRule rule = ((RuleCall) ele).getRule();
+				if (rule.getType().getClassifier() instanceof EClass) {
+					ele = rule.getAlternatives();
+					continue;
+				}
 			}
 			return null;
 		}
@@ -394,7 +397,7 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 					Set<String> names = Sets.newHashSet();
 					for (Assignment ass : EcoreUtil2.getAllContentsOfType(obj, Assignment.class))
 						names.add(ass.getFeature());
-					if (names.size() > 1) 
+					if (names.size() > 1)
 						i.prune();
 				} else if (obj instanceof Assignment) {
 					Assignment a = (Assignment) obj;
