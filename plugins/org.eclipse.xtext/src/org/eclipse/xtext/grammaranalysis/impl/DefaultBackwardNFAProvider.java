@@ -25,8 +25,8 @@ public class DefaultBackwardNFAProvider extends AbstractNFAProvider<DefaultNFASt
 
 		@Override
 		protected DefaultNFATransition createTransition(DefaultNFAState source, DefaultNFAState target,
-				boolean isRuleCall) {
-			return new DefaultNFATransition(source, target, isRuleCall);
+				boolean isRuleCall, AbstractElement loopCenter) {
+			return new DefaultNFATransition(source, target, isRuleCall, loopCenter);
 		}
 
 		@Override

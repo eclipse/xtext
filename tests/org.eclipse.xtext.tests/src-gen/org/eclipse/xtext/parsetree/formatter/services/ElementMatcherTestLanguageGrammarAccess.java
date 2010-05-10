@@ -24,12 +24,13 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cRuleCallsParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cOptionalCallsParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cRecursionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cLoopParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//Model:
-		//  Simple|RuleCalls|OptionalCalls|Recursion;
+		//  Simple|RuleCalls|OptionalCalls|Recursion|Loop;
 		public ParserRule getRule() { return rule; }
 
-		//Simple|RuleCalls|OptionalCalls|Recursion
+		//Simple|RuleCalls|OptionalCalls|Recursion|Loop
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Simple
@@ -43,6 +44,9 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 
 		//Recursion
 		public RuleCall getRecursionParserRuleCall_3() { return cRecursionParserRuleCall_3; }
+
+		//Loop
+		public RuleCall getLoopParserRuleCall_4() { return cLoopParserRuleCall_4; }
 	}
 
 	public class SimpleElements extends AbstractParserRuleElementFinder {
@@ -420,6 +424,66 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		//";"
 		public Keyword getSemiSemicolonKeyword_4_0() { return cSemiSemicolonKeyword_4_0; }
 	}
+
+	public class LoopElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Loop");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitFiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNamesAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNamesIDTerminalRuleCall_1_0 = (RuleCall)cNamesAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cGrKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cGrAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cGrIDTerminalRuleCall_2_1_0 = (RuleCall)cGrAssignment_2_1.eContents().get(0);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Assignment cIntsAssignment_3_0 = (Assignment)cAlternatives_3.eContents().get(0);
+		private final RuleCall cIntsINTTerminalRuleCall_3_0_0 = (RuleCall)cIntsAssignment_3_0.eContents().get(0);
+		private final Assignment cStringsAssignment_3_1 = (Assignment)cAlternatives_3.eContents().get(1);
+		private final RuleCall cStringsSTRINGTerminalRuleCall_3_1_0 = (RuleCall)cStringsAssignment_3_1.eContents().get(0);
+		
+		//Loop:
+		//  "#5" names+=ID+ ("gr" gr+=ID)* (ints+=INT|strings+=STRING)*;
+		public ParserRule getRule() { return rule; }
+
+		//"#5" names+=ID+ ("gr" gr+=ID)* (ints+=INT|strings+=STRING)*
+		public Group getGroup() { return cGroup; }
+
+		//"#5"
+		public Keyword getNumberSignDigitFiveKeyword_0() { return cNumberSignDigitFiveKeyword_0; }
+
+		//names+=ID+
+		public Assignment getNamesAssignment_1() { return cNamesAssignment_1; }
+
+		//ID
+		public RuleCall getNamesIDTerminalRuleCall_1_0() { return cNamesIDTerminalRuleCall_1_0; }
+
+		//("gr" gr+=ID)*
+		public Group getGroup_2() { return cGroup_2; }
+
+		//"gr"
+		public Keyword getGrKeyword_2_0() { return cGrKeyword_2_0; }
+
+		//gr+=ID
+		public Assignment getGrAssignment_2_1() { return cGrAssignment_2_1; }
+
+		//ID
+		public RuleCall getGrIDTerminalRuleCall_2_1_0() { return cGrIDTerminalRuleCall_2_1_0; }
+
+		//(ints+=INT|strings+=STRING)*
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
+
+		//ints+=INT
+		public Assignment getIntsAssignment_3_0() { return cIntsAssignment_3_0; }
+
+		//INT
+		public RuleCall getIntsINTTerminalRuleCall_3_0_0() { return cIntsINTTerminalRuleCall_3_0_0; }
+
+		//strings+=STRING
+		public Assignment getStringsAssignment_3_1() { return cStringsAssignment_3_1; }
+
+		//STRING
+		public RuleCall getStringsSTRINGTerminalRuleCall_3_1_0() { return cStringsSTRINGTerminalRuleCall_3_1_0; }
+	}
 	
 	
 	private ModelElements pModel;
@@ -435,6 +499,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	private OptionalCallsSub3Elements pOptionalCallsSub3;
 	private RecursionElements pRecursion;
 	private RecursionSubElements pRecursionSub;
+	private LoopElements pLoop;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -458,7 +523,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 
 	
 	//Model:
-	//  Simple|RuleCalls|OptionalCalls|Recursion;
+	//  Simple|RuleCalls|OptionalCalls|Recursion|Loop;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -585,6 +650,16 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	
 	public ParserRule getRecursionSubRule() {
 		return getRecursionSubAccess().getRule();
+	}
+
+	//Loop:
+	//  "#5" names+=ID+ ("gr" gr+=ID)* (ints+=INT|strings+=STRING)*;
+	public LoopElements getLoopAccess() {
+		return (pLoop != null) ? pLoop : (pLoop = new LoopElements());
+	}
+	
+	public ParserRule getLoopRule() {
+		return getLoopAccess().getRule();
 	}
 
 	//terminal ID:

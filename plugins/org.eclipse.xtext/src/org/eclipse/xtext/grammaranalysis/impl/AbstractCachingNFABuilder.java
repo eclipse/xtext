@@ -20,7 +20,7 @@ public abstract class AbstractCachingNFABuilder<S, T> implements NFABuilder<S, T
 
 	protected abstract S createState(AbstractElement ele);
 
-	protected abstract T createTransition(S source, S target, boolean isRuleCall);
+	protected abstract T createTransition(S source, S target, boolean isRuleCall, AbstractElement loopCenter);
 
 	public boolean filter(AbstractElement ele) {
 		return false;
@@ -41,7 +41,7 @@ public abstract class AbstractCachingNFABuilder<S, T> implements NFABuilder<S, T
 		return t;
 	}
 
-	public final T getTransition(S source, S target, boolean isRuleCall) {
-		return createTransition(source, target, isRuleCall);
+	public final T getTransition(S source, S target, boolean isRuleCall, AbstractElement loopCenter) {
+		return createTransition(source, target, isRuleCall, loopCenter);
 	}
 }

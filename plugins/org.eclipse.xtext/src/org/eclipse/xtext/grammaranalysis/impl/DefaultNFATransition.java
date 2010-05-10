@@ -8,15 +8,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.grammaranalysis.impl;
 
+import org.eclipse.xtext.AbstractElement;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class DefaultNFATransition extends
-		AbstractNFATransition<DefaultNFAState, DefaultNFATransition> {
+public class DefaultNFATransition extends AbstractNFATransition<DefaultNFAState, DefaultNFATransition> {
 
-	public DefaultNFATransition(DefaultNFAState source, DefaultNFAState target,
-			boolean ruleCall) {
-		super(source, target, ruleCall);
+	public DefaultNFATransition(DefaultNFAState source, DefaultNFAState target, boolean ruleCall,
+			AbstractElement loopCenter) {
+		super(source, target, ruleCall, loopCenter);
 	}
 }

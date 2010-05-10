@@ -13,17 +13,19 @@ public final class ElementMatcherTestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	public static final ICharacterClass keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
 
     
-	public static final ICharacterClass keyword$15$Delimiter = ICharacterClass.Factory.join(
+	public static final ICharacterClass keyword$16$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static final ISequenceMatcher ruleCall$13$Delimiter = new SetBasedKeywordMatcher(
-		"kw1", "sub", "ass1", "ass2", "sub2", "sub3");
+	public static final ISequenceMatcher ruleCall$14$Delimiter = new SetBasedKeywordMatcher(
+		"kw1", "sub", "ass1", "ass2", "sub2", "sub3", "gr");
+
+	public static final ISequenceMatcher ruleCall$118$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 }

@@ -22,6 +22,7 @@ import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.ElementMat
 import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.ElementMatcherTestLanguageOptionalCallsSub3Consumer;
 import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.ElementMatcherTestLanguageRecursionConsumer;
 import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.ElementMatcherTestLanguageRecursionSubConsumer;
+import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.ElementMatcherTestLanguageLoopConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
@@ -46,6 +47,7 @@ public class ElementMatcherTestLanguageParserConfiguration extends AbstractParse
     private ElementMatcherTestLanguageOptionalCallsSub3Consumer optionalCallsSub3Consumer;
     private ElementMatcherTestLanguageRecursionConsumer recursionConsumer;
     private ElementMatcherTestLanguageRecursionSubConsumer recursionSubConsumer;
+    private ElementMatcherTestLanguageLoopConsumer loopConsumer;
 
 	private ElementMatcherTestLanguageGrammarAccess grammarAccess;
 
@@ -100,6 +102,9 @@ public class ElementMatcherTestLanguageParserConfiguration extends AbstractParse
 		recursionSubConsumer = new ElementMatcherTestLanguageRecursionSubConsumer(
     		this, null
     	);
+		loopConsumer = new ElementMatcherTestLanguageLoopConsumer(
+    		this, null
+    	);
 	}
 	
 	public void createTerminalConsumers() {
@@ -122,6 +127,7 @@ public class ElementMatcherTestLanguageParserConfiguration extends AbstractParse
 		getOptionalCallsSub3Consumer().setRule(grammarAccess.getOptionalCallsSub3Access());
 		getRecursionConsumer().setRule(grammarAccess.getRecursionAccess());
 		getRecursionSubConsumer().setRule(grammarAccess.getRecursionSubAccess());
+		getLoopConsumer().setRule(grammarAccess.getLoopAccess());
 		getIdConsumer().setRule(grammarAccess.getIDRule());
 		getIntConsumer().setRule(grammarAccess.getINTRule());
 		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
@@ -131,6 +137,7 @@ public class ElementMatcherTestLanguageParserConfiguration extends AbstractParse
 		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
 
+		getModelConsumer().setLoopConsumer(getLoopConsumer());
 		getModelConsumer().setOptionalCallsConsumer(getOptionalCallsConsumer());
 		getModelConsumer().setRecursionConsumer(getRecursionConsumer());
 		getModelConsumer().setRuleCallsConsumer(getRuleCallsConsumer());
@@ -165,32 +172,42 @@ public class ElementMatcherTestLanguageParserConfiguration extends AbstractParse
 		getRecursionSubConsumer().setIdConsumer(getIdConsumer());
 		getRecursionSubConsumer().setRecursionSubConsumer(getRecursionSubConsumer());
 
-		getSimpleConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$11$Delimiter);
-		getSimpleConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$15$Delimiter);
-		getSimpleConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$13$Delimiter);
-		getSimpleConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$13$Delimiter);
-		getFqnConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$11$Delimiter);
-		getFqnConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$13$Delimiter);
-		getFqnConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$13$Delimiter);
-		getRuleCallsConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$11$Delimiter);
-		getRuleCallsConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$13$Delimiter);
-		getRuleCallsSubConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$15$Delimiter);
-		getRuleCallsAss1Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$15$Delimiter);
-		getRuleCallsAss1Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$13$Delimiter);
-		getRuleCallsAss2Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$15$Delimiter);
-		getRuleCallsAss2Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$13$Delimiter);
-		getOptionalCallsConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$11$Delimiter);
-		getOptionalCallsConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$13$Delimiter);
-		getOptionalCallsSub1Consumer().setKeyword$6$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$15$Delimiter);
-		getOptionalCallsSub2Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$15$Delimiter);
-		getOptionalCallsSub2Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$13$Delimiter);
-		getOptionalCallsSub3Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$15$Delimiter);
-		getOptionalCallsSub3Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$13$Delimiter);
-		getRecursionConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$11$Delimiter);
-		getRecursionSubConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$11$Delimiter);
-		getRecursionSubConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$11$Delimiter);
-		getRecursionSubConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$11$Delimiter);
-		getRecursionSubConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$13$Delimiter);
+		getLoopConsumer().setIdConsumer(getIdConsumer());
+		getLoopConsumer().setIntConsumer(getIntConsumer());
+		getLoopConsumer().setStringConsumer(getStringConsumer());
+
+		getSimpleConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$12$Delimiter);
+		getSimpleConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$16$Delimiter);
+		getSimpleConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getSimpleConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getFqnConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$12$Delimiter);
+		getFqnConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getFqnConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getRuleCallsConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$12$Delimiter);
+		getRuleCallsConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getRuleCallsSubConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$16$Delimiter);
+		getRuleCallsAss1Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$16$Delimiter);
+		getRuleCallsAss1Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getRuleCallsAss2Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$16$Delimiter);
+		getRuleCallsAss2Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getOptionalCallsConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$12$Delimiter);
+		getOptionalCallsConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getOptionalCallsSub1Consumer().setKeyword$6$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$16$Delimiter);
+		getOptionalCallsSub2Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$16$Delimiter);
+		getOptionalCallsSub2Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getOptionalCallsSub3Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$16$Delimiter);
+		getOptionalCallsSub3Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getRecursionConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$12$Delimiter);
+		getRecursionSubConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$12$Delimiter);
+		getRecursionSubConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$12$Delimiter);
+		getRecursionSubConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$12$Delimiter);
+		getRecursionSubConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getLoopConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$12$Delimiter);
+		getLoopConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.keyword$16$Delimiter);
+		getLoopConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getLoopConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getLoopConsumer().setRuleCall$11$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$118$Delimiter);
+		getLoopConsumer().setRuleCall$13$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguageDelimiters.ruleCall$118$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
@@ -247,6 +264,10 @@ public class ElementMatcherTestLanguageParserConfiguration extends AbstractParse
 
     public ElementMatcherTestLanguageRecursionSubConsumer getRecursionSubConsumer() {
     	return recursionSubConsumer;
+    }
+
+    public ElementMatcherTestLanguageLoopConsumer getLoopConsumer() {
+    	return loopConsumer;
     }
 
     public TerminalsIDConsumer getIdConsumer() {

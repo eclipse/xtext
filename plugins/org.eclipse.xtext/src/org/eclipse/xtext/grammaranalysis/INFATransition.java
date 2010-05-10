@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.grammaranalysis;
 
+import org.eclipse.xtext.AbstractElement;
+
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
@@ -20,4 +22,6 @@ public interface INFATransition<S extends INFAState, T extends INFATransition> {
 	S getTarget();
 
 	boolean isRuleCall();
+
+	AbstractElement getLoopCenter();
 }

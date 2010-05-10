@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.ElementmatchertestlanguageFactory;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.ElementmatchertestlanguagePackage;
+import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Loop;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Model;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCalls;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCallsSub1;
@@ -118,6 +119,13 @@ public class ElementmatchertestlanguagePackageImpl extends EPackageImpl implemen
    * @generated
    */
   private EClass recursionSubEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass loopEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -487,6 +495,56 @@ public class ElementmatchertestlanguagePackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getLoop()
+  {
+    return loopEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoop_Names()
+  {
+    return (EAttribute)loopEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoop_Gr()
+  {
+    return (EAttribute)loopEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoop_Ints()
+  {
+    return (EAttribute)loopEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoop_Strings()
+  {
+    return (EAttribute)loopEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public ElementmatchertestlanguageFactory getElementmatchertestlanguageFactory()
   {
     return (ElementmatchertestlanguageFactory)getEFactoryInstance();
@@ -553,6 +611,12 @@ public class ElementmatchertestlanguagePackageImpl extends EPackageImpl implemen
     createEReference(recursionSubEClass, RECURSION_SUB__SUB);
     createEAttribute(recursionSubEClass, RECURSION_SUB__VALS);
     createEAttribute(recursionSubEClass, RECURSION_SUB__SEMI);
+
+    loopEClass = createEClass(LOOP);
+    createEAttribute(loopEClass, LOOP__NAMES);
+    createEAttribute(loopEClass, LOOP__GR);
+    createEAttribute(loopEClass, LOOP__INTS);
+    createEAttribute(loopEClass, LOOP__STRINGS);
   }
 
   /**
@@ -590,6 +654,7 @@ public class ElementmatchertestlanguagePackageImpl extends EPackageImpl implemen
     optionalCallsEClass.getESuperTypes().add(this.getModel());
     recursionEClass.getESuperTypes().add(this.getModel());
     recursionSubEClass.getESuperTypes().add(this.getRecursion());
+    loopEClass.getESuperTypes().add(this.getModel());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -633,6 +698,12 @@ public class ElementmatchertestlanguagePackageImpl extends EPackageImpl implemen
     initEReference(getRecursionSub_Sub(), this.getRecursionSub(), null, "sub", null, 0, -1, RecursionSub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRecursionSub_Vals(), ecorePackage.getEString(), "vals", null, 0, -1, RecursionSub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRecursionSub_Semi(), ecorePackage.getEBoolean(), "semi", null, 0, 1, RecursionSub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(loopEClass, Loop.class, "Loop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLoop_Names(), ecorePackage.getEString(), "names", null, 0, -1, Loop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoop_Gr(), ecorePackage.getEString(), "gr", null, 0, -1, Loop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoop_Ints(), ecorePackage.getEInt(), "ints", null, 0, -1, Loop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoop_Strings(), ecorePackage.getEString(), "strings", null, 0, -1, Loop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

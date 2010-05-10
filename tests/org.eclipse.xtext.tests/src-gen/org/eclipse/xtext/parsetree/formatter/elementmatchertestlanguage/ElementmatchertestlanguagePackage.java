@@ -449,6 +449,61 @@ public interface ElementmatchertestlanguagePackage extends EPackage
    */
   int RECURSION_SUB_FEATURE_COUNT = RECURSION_FEATURE_COUNT + 3;
 
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.LoopImpl <em>Loop</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.LoopImpl
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getLoop()
+   * @generated
+   */
+  int LOOP = 12;
+
+  /**
+   * The feature id for the '<em><b>Names</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP__NAMES = MODEL_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Gr</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP__GR = MODEL_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Ints</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP__INTS = MODEL_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Strings</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP__STRINGS = MODEL_FEATURE_COUNT + 3;
+
+  /**
+   * The number of structural features of the '<em>Loop</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOP_FEATURE_COUNT = MODEL_FEATURE_COUNT + 4;
+
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Model <em>Model</em>}'.
@@ -769,6 +824,60 @@ public interface ElementmatchertestlanguagePackage extends EPackage
   EAttribute getRecursionSub_Semi();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Loop <em>Loop</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Loop</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Loop
+   * @generated
+   */
+  EClass getLoop();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Loop#getNames <em>Names</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Names</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Loop#getNames()
+   * @see #getLoop()
+   * @generated
+   */
+  EAttribute getLoop_Names();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Loop#getGr <em>Gr</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Gr</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Loop#getGr()
+   * @see #getLoop()
+   * @generated
+   */
+  EAttribute getLoop_Gr();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Loop#getInts <em>Ints</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Ints</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Loop#getInts()
+   * @see #getLoop()
+   * @generated
+   */
+  EAttribute getLoop_Ints();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Loop#getStrings <em>Strings</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Strings</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Loop#getStrings()
+   * @see #getLoop()
+   * @generated
+   */
+  EAttribute getLoop_Strings();
+
+  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1054,6 +1163,48 @@ public interface ElementmatchertestlanguagePackage extends EPackage
      * @generated
      */
     EAttribute RECURSION_SUB__SEMI = eINSTANCE.getRecursionSub_Semi();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.LoopImpl <em>Loop</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.LoopImpl
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getLoop()
+     * @generated
+     */
+    EClass LOOP = eINSTANCE.getLoop();
+
+    /**
+     * The meta object literal for the '<em><b>Names</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOP__NAMES = eINSTANCE.getLoop_Names();
+
+    /**
+     * The meta object literal for the '<em><b>Gr</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOP__GR = eINSTANCE.getLoop_Gr();
+
+    /**
+     * The meta object literal for the '<em><b>Ints</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOP__INTS = eINSTANCE.getLoop_Ints();
+
+    /**
+     * The meta object literal for the '<em><b>Strings</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOP__STRINGS = eINSTANCE.getLoop_Strings();
 
   }
 

@@ -22,6 +22,8 @@ public final class ElementMatcherTestLanguageModelConsumer extends NonTerminalCo
 
 	private ModelElements rule;	
 
+	private INonTerminalConsumer loopConsumer;
+
 	private INonTerminalConsumer optionalCallsConsumer;
 
 	private INonTerminalConsumer recursionConsumer;
@@ -40,6 +42,8 @@ public final class ElementMatcherTestLanguageModelConsumer extends NonTerminalCo
 
 	private IElementConsumer ruleCall$5$Consumer;
 
+	private IElementConsumer ruleCall$6$Consumer;
+
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
 		protected Alternatives$1$Consumer(final Alternatives alternatives) {
@@ -52,6 +56,7 @@ public final class ElementMatcherTestLanguageModelConsumer extends NonTerminalCo
 			acceptor.accept(ruleCall$3$Consumer);
 			acceptor.accept(ruleCall$4$Consumer);
 			acceptor.accept(ruleCall$5$Consumer);
+			acceptor.accept(ruleCall$6$Consumer);
 		}
 	}
 
@@ -103,6 +108,18 @@ public final class ElementMatcherTestLanguageModelConsumer extends NonTerminalCo
 		}
 	}
 
+	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(loopConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
 	public ElementMatcherTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
@@ -124,6 +141,7 @@ public final class ElementMatcherTestLanguageModelConsumer extends NonTerminalCo
 		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getRuleCallsParserRuleCall_1());
 		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getOptionalCallsParserRuleCall_2());
 		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getRecursionParserRuleCall_3());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getLoopParserRuleCall_4());
 	}
 	
 	@Override
@@ -134,6 +152,10 @@ public final class ElementMatcherTestLanguageModelConsumer extends NonTerminalCo
 	@Override
 	protected EClassifier getDefaultType() {
 		return getGrammarElement().getType().getClassifier();
+	}
+	
+	public void setLoopConsumer(INonTerminalConsumer loopConsumer) {
+		this.loopConsumer = loopConsumer;
 	}
 	
 	public void setOptionalCallsConsumer(INonTerminalConsumer optionalCallsConsumer) {

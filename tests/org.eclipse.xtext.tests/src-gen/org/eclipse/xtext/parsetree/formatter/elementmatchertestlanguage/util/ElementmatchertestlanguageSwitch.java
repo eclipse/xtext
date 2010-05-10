@@ -187,6 +187,14 @@ public class ElementmatchertestlanguageSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case ElementmatchertestlanguagePackage.LOOP:
+      {
+        Loop loop = (Loop)theEObject;
+        T result = caseLoop(loop);
+        if (result == null) result = caseModel(loop);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -379,6 +387,22 @@ public class ElementmatchertestlanguageSwitch<T>
    * @generated
    */
   public T caseRecursionSub(RecursionSub object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Loop</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Loop</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLoop(Loop object)
   {
     return null;
   }

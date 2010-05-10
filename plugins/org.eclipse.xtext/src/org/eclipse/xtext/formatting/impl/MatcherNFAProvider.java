@@ -26,8 +26,9 @@ public class MatcherNFAProvider extends AbstractNFAProvider<MatcherState, Matche
 		}
 
 		@Override
-		protected MatcherTransition createTransition(MatcherState source, MatcherState target, boolean isRuleCall) {
-			return new MatcherTransition(source, target, isRuleCall);
+		protected MatcherTransition createTransition(MatcherState source, MatcherState target, boolean isRuleCall,
+				AbstractElement loopCenter) {
+			return new MatcherTransition(source, target, isRuleCall, loopCenter);
 		}
 
 		@Override

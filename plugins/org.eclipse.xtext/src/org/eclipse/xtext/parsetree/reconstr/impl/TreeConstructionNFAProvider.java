@@ -14,11 +14,9 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractCachingNFABuilder;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractNFAProvider;
 
-public class TreeConstructionNFAProvider extends
-		AbstractNFAProvider<TreeConstState, TreeConstTransition> {
+public class TreeConstructionNFAProvider extends AbstractNFAProvider<TreeConstState, TreeConstTransition> {
 
-	protected static class TreeConstNFABuilder extends
-			AbstractCachingNFABuilder<TreeConstState, TreeConstTransition> {
+	protected static class TreeConstNFABuilder extends AbstractCachingNFABuilder<TreeConstState, TreeConstTransition> {
 
 		@Override
 		protected TreeConstState createState(AbstractElement grammarElement) {
@@ -26,9 +24,9 @@ public class TreeConstructionNFAProvider extends
 		}
 
 		@Override
-		protected TreeConstTransition createTransition(TreeConstState source,
-				TreeConstState target, boolean isRuleCall) {
-			return new TreeConstTransition(source, target, isRuleCall);
+		protected TreeConstTransition createTransition(TreeConstState source, TreeConstState target,
+				boolean isRuleCall, AbstractElement loopCenter) {
+			return new TreeConstTransition(source, target, isRuleCall, loopCenter);
 		}
 
 		@Override

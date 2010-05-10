@@ -8,36 +8,44 @@
  *******************************************************************************/
 package org.eclipse.xtext.grammaranalysis.impl;
 
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.grammaranalysis.INFAState;
 import org.eclipse.xtext.grammaranalysis.INFATransition;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class AbstractNFATransition<S extends INFAState<S, T>, T extends INFATransition<S, T>> implements INFATransition<S,T> {
+public class AbstractNFATransition<S extends INFAState<S, T>, T extends INFATransition<S, T>> implements
+		INFATransition<S, T> {
 
-	protected boolean ruleCall;
+	final protected AbstractElement loopCenter;
 
-	protected S source;
+	final protected boolean ruleCall;
 
-	protected S target;
+	final protected S source;
 
-	public AbstractNFATransition(S source, S target,
-			boolean ruleCall) {
+	final protected S target;
+
+	public AbstractNFATransition(S source, S target, boolean ruleCall, AbstractElement loopCenter) {
 		super();
 		this.source = source;
 		this.target = target;
 		this.ruleCall = ruleCall;
+		this.loopCenter = loopCenter;
 	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof AbstractNFATransition) {
-			AbstractNFATransition a = (AbstractNFATransition)obj;
+		if (obj instanceof AbstractNFATransition) {
+			AbstractNFATransition a = (AbstractNFATransition) obj;
 			return a.source == source && a.target == target;
 		}
 		return false;
+	}
+
+	public AbstractElement getLoopCenter() {
+		return loopCenter;
 	}
 
 	public int getPrecedence() {

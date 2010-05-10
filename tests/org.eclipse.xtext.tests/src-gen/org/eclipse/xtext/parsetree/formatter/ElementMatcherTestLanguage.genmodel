@@ -48,5 +48,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//RecursionSub/vals"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//RecursionSub/semi"/>
     </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Loop">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Loop/names"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Loop/gr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Loop/ints"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Loop/strings"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

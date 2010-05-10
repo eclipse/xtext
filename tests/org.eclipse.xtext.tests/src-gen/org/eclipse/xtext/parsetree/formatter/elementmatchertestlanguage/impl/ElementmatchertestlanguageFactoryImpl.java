@@ -79,6 +79,7 @@ public class ElementmatchertestlanguageFactoryImpl extends EFactoryImpl implemen
       case ElementmatchertestlanguagePackage.OPTIONAL_CALLS_SUB3: return createOptionalCallsSub3();
       case ElementmatchertestlanguagePackage.RECURSION: return createRecursion();
       case ElementmatchertestlanguagePackage.RECURSION_SUB: return createRecursionSub();
+      case ElementmatchertestlanguagePackage.LOOP: return createLoop();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -214,6 +215,17 @@ public class ElementmatchertestlanguageFactoryImpl extends EFactoryImpl implemen
   {
     RecursionSubImpl recursionSub = new RecursionSubImpl();
     return recursionSub;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Loop createLoop()
+  {
+    LoopImpl loop = new LoopImpl();
+    return loop;
   }
 
   /**
