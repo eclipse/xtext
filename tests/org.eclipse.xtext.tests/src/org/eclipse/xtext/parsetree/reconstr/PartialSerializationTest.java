@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EObject;
@@ -5,6 +12,10 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.partialserializationtest.NodeRoot;
 import org.eclipse.xtext.resource.SaveOptions;
 
+/**
+ * @author Moritz Eysholdt 
+ * @author Jan Koehnlein
+ */
 public class PartialSerializationTest extends AbstractXtextTests {
 
 	@Override
@@ -32,7 +43,7 @@ public class PartialSerializationTest extends AbstractXtextTests {
 	public void testSimpleSurroundComments2() throws Exception {
 		String model = "/* x1 */ #1 /* x2 */ node /* x3 */ test  (  node  subnode /* x4 */ ) /* x5 */";
 		NodeRoot root = (NodeRoot) getModel(model);
-		assertEquals("/* x2 */ node /* x3 */ test  (  node  subnode /* x4 */ ) ", ser(root.getNode()));
+		assertEquals("/* x2 */ node /* x3 */ test  (  node  subnode /* x4 */ ) /* x5 */", ser(root.getNode()));
 	}
 
 	public void testSimpleSurroundComments3() throws Exception {
