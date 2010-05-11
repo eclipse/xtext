@@ -67,7 +67,7 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 		} catch(ValueConverterException e) {
 			throw e;
 		} catch(NullPointerException e) {
-			log.error(e.getMessage(), e);
+			log.warn(e.getMessage(), e);
 			throw new ValueConverterException("A NullPointerException occured. This indicates a missing value converter or a bug in its implementation.", node, e);
 		} catch(Exception e) {
 			throw new ValueConverterException(null, node, e);

@@ -23,12 +23,12 @@ import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.SimpleNameProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
-import org.eclipse.xtext.parser.SwitchingParser;
+import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
+import org.eclipse.xtext.parser.antlr.IAntlrParser;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.NullTokenDefProvider;
 import org.eclipse.xtext.parser.impl.PartialParsingHelper;
-import org.eclipse.xtext.parser.packrat.ParseResultFactory;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
@@ -155,16 +155,12 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		return AntlrTokenToStringConverter.class;
 	}
 
-	public Class<? extends org.eclipse.xtext.parser.packrat.IParseResultFactory> bindIParseResultFactory() {
-		return ParseResultFactory.class;
-	}
-
-	public Class<? extends org.eclipse.xtext.parser.ISwitchingParser> bindISwitchingParser() {
-		return SwitchingParser.class;
-	}
-	
 	public Class<? extends org.eclipse.xtext.parser.antlr.IPartialParsingHelper> bindIPartialParserHelper() {
 		return PartialParsingHelper.class;
+	}
+	
+	public Class<? extends IParser> bindIParser() {
+		return IAntlrParser.class;
 	}
 
 	public Class<? extends ITokenDefProvider> bindITokenDefProvider() {
