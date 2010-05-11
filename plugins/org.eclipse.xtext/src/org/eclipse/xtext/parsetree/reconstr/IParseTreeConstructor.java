@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.util.TextLocation;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -29,7 +30,10 @@ public interface IParseTreeConstructor {
 		List<TreeConstructionDiagnostic> getDiagnostics();
 
 		boolean isSuccess();
+		
+		TextLocation getPreviousLocation();
 	}
 
 	TreeConstructionReport serializeSubtree(EObject object, ITokenStream out) throws IOException;
+	
 }

@@ -19,6 +19,7 @@ import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.TreeConstructionReport;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
 import org.eclipse.xtext.parsetree.reconstr.impl.WriterTokenStream;
+import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 
@@ -87,6 +88,27 @@ public class Serializer {
 	@Deprecated
 	public String serialize(EObject obj, SerializerOptions options) {
 		return serialize(obj, options.toSaveOptions());
+	}
+
+	@Deprecated
+	public ReplaceRegion serializeReplacement(EObject obj, SerializerOptions options) {
+		TokenStringBuffer tokenStringBuffer = new TokenStringBuffer();
+		try {
+			TreeConstructionReport report = serialize(obj, tokenStringBuffer, options);
+			return new ReplaceRegion(report.getPreviousLocation(), tokenStringBuffer.toString());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public ReplaceRegion serializeReplacement(EObject obj, SaveOptions options) {
+		TokenStringBuffer tokenStringBuffer = new TokenStringBuffer();
+		try {
+			TreeConstructionReport report = serialize(obj, tokenStringBuffer, options);
+			return new ReplaceRegion(report.getPreviousLocation(), tokenStringBuffer.toString());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	protected IParseTreeConstructor getParseTreeReconstructor() {

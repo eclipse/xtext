@@ -15,15 +15,16 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.util.Pair;
 
 import com.google.inject.Inject;
 
 /**
  * @author meysholdt - Initial contribution and API
+ * @author Jan Koehnlein
  */
 public class DefaultCommentAssociater extends AbstractCommentAssociater {
 
@@ -34,7 +35,9 @@ public class DefaultCommentAssociater extends AbstractCommentAssociater {
 		Map<LeafNode, EObject> mapping = new HashMap<LeafNode, EObject>();
 		for (CompositeNode rootNode : roots)
 			associateCommentsWithSemanticEObjects(mapping, rootNode);
-		//		System.out.println(mapping);
+//		for (Map.Entry<LeafNode, EObject> entry : mapping.entrySet()) {
+//			System.out.println(entry.getKey().getText() + " " + entry.getValue());
+//		}
 		return mapping;
 	}
 
@@ -47,38 +50,64 @@ public class DefaultCommentAssociater extends AbstractCommentAssociater {
 		//		System.out.println(EmfFormatter.objToStr(rootNode));
 		EObject currentEObject = null;
 		List<LeafNode> currentComments = new ArrayList<LeafNode>();
-		TreeIterator<EObject> i = EcoreUtil2.eAll(rootNode);
-		while (i.hasNext()) {
-			EObject o = i.next();
+
+		NodeIterator nodeIterator = new NodeIterator(rootNode);
+		// rewind to previous token with token owner 
+		while (nodeIterator.hasPrevious() && currentEObject == null) {
+			AbstractNode node = nodeIterator.previous();
+			if (tokenUtil.isToken(node)) {
+				currentEObject = tokenUtil.getTokenOwner(node);
+			}
+		}
+		while (nodeIterator.hasNext()) {
+			EObject o = nodeIterator.next();
 			if (o instanceof AbstractNode) {
 				AbstractNode node = (AbstractNode) o;
 				if (tokenUtil.isCommentNode(node)) {
 					currentComments.add((LeafNode) node);
 				}
 				boolean isToken = tokenUtil.isToken(node);
-				if ((node instanceof LeafNode || isToken) && node.serialize().contains("\n") && currentEObject != null) {
-					for (LeafNode l : currentComments)
-						mapping.put(l, currentEObject);
-					currentComments.clear();
+				if ((node instanceof LeafNode || isToken) && node.getLine() != node.endLine() && currentEObject != null) {
+					// found a newline -> associating existing comments with currentEObject
+					addMapping(mapping, currentComments, currentEObject);
 					currentEObject = null;
 				}
 				if (isToken) {
-					i.prune();
+					Pair<List<LeafNode>, List<LeafNode>> leadingAndTrailingHiddenTokens = tokenUtil
+							.getLeadingAndTrailingHiddenTokens(node);
+					for (LeafNode leadingHiddenNode : leadingAndTrailingHiddenTokens.getFirst()) {
+						if (tokenUtil.isCommentNode(leadingHiddenNode)) {
+							currentComments.add(leadingHiddenNode);
+						}
+					}
+					nodeIterator.prune();
 					currentEObject = tokenUtil.getTokenOwner(node);
 					if (currentEObject != null) {
-						for (LeafNode l : currentComments)
-							mapping.put(l, currentEObject);
-						currentComments.clear();
+						addMapping(mapping, currentComments, currentEObject);
+						if (node.getOffset() > rootNode.getOffset() + rootNode.getLength()) {
+							// found next EObject outside rootNode
+							break;
+						}
 					}
 				}
 			}
 		}
 		if (!currentComments.isEmpty()) {
-			EObject obj = getEObjectForRemainingComments(rootNode);
-			if (obj != null)
-				for (LeafNode l : currentComments)
-					mapping.put(l, obj);
+			if (currentEObject != null) {
+				addMapping(mapping, currentComments, currentEObject);
+			} else {
+				EObject objectForRemainingComments = getEObjectForRemainingComments(rootNode);
+				if (objectForRemainingComments != null) {
+					addMapping(mapping, currentComments, objectForRemainingComments);
+				}
+			}
 		}
+	}
+
+	protected void addMapping(Map<LeafNode, EObject> mapping, List<LeafNode> currentComments, EObject currentEObject) {
+		for (LeafNode l : currentComments)
+			mapping.put(l, currentEObject);
+		currentComments.clear();
 	}
 
 	protected EObject getEObjectForRemainingComments(CompositeNode rootNode) {

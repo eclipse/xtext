@@ -10,53 +10,28 @@ package org.eclipse.xtext.util;
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class TextLocation {
+public class ReplaceRegion {
 
 	private int offset;
-
 	private int length;
+	private String text;
 
-	private boolean isEmpty;
-	
-	public TextLocation() {
-		isEmpty = true;
-	}
-
-	public TextLocation(int offset, int length) {
-		this.offset = offset;
-		this.length = length;
-		isEmpty = false;
+	public ReplaceRegion(TextLocation location, String text) {
+		this.offset = location.getOffset();
+		this.length = location.getLength();
+		this.text = text;
 	}
 
 	public int getOffset() {
 		return offset;
 	}
 
-	public void setOffset(int offset) {
-		this.offset = offset;
-		isEmpty = false;
-	}
-
 	public int getLength() {
 		return length;
 	}
 
-	public void setLength(int length) {
-		this.length = length;
-		isEmpty = false;
-	}
-
-	public void merge(int newOffset, int newLength) {
-		if (isEmpty) {
-			offset = newOffset;
-			length = newLength;
-			isEmpty = false;
-			return;
-		}
-		int end = offset + length;
-		int newEnd = newOffset + newLength;
-		offset = Math.min(offset, newOffset);
-		length = Math.max(end, newEnd) - offset;
+	public String getText() {
+		return text;
 	}
 
 }
