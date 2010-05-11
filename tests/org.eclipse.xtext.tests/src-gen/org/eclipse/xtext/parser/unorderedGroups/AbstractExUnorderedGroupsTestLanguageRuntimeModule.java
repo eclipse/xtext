@@ -74,11 +74,6 @@ public abstract class AbstractExUnorderedGroupsTestLanguageRuntimeModule extends
 		return org.eclipse.xtext.parser.unorderedGroups.services.ExUnorderedGroupsTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.parser.unorderedGroups.parser.packrat.ExUnorderedGroupsTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.parser.unorderedGroups.parseTreeConstruction.ExUnorderedGroupsTestLanguageParsetreeConstructor.class;

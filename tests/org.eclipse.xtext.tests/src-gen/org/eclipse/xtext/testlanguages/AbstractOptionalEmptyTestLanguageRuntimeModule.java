@@ -69,11 +69,6 @@ public abstract class AbstractOptionalEmptyTestLanguageRuntimeModule extends Def
 		return org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.testlanguages.parser.packrat.OptionalEmptyTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.testlanguages.parseTreeConstruction.OptionalEmptyTestLanguageParsetreeConstructor.class;

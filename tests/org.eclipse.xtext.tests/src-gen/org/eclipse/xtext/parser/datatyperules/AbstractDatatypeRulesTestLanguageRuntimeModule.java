@@ -69,11 +69,6 @@ public abstract class AbstractDatatypeRulesTestLanguageRuntimeModule extends Def
 		return org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.parser.datatyperules.parseTreeConstruction.DatatypeRulesTestLanguageParsetreeConstructor.class;

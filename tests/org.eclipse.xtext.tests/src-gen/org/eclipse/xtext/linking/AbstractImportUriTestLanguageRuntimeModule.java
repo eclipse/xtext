@@ -69,11 +69,6 @@ public abstract class AbstractImportUriTestLanguageRuntimeModule extends Default
 		return org.eclipse.xtext.linking.services.ImportUriTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.linking.parser.packrat.ImportUriTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.linking.parseTreeConstruction.ImportUriTestLanguageParsetreeConstructor.class;

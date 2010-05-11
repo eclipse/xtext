@@ -69,11 +69,6 @@ public abstract class AbstractMultiValueFeatureTestLanguageRuntimeModule extends
 		return org.eclipse.xtext.xtext.ecoreInference.services.MultiValueFeatureTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.xtext.ecoreInference.parser.packrat.MultiValueFeatureTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.xtext.ecoreInference.parseTreeConstruction.MultiValueFeatureTestLanguageParsetreeConstructor.class;

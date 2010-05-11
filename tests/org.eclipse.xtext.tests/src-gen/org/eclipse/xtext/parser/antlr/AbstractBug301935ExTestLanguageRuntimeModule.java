@@ -79,11 +79,6 @@ public abstract class AbstractBug301935ExTestLanguageRuntimeModule extends Defau
 		return org.eclipse.xtext.parser.antlr.services.Bug301935ExTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.parser.antlr.parser.packrat.Bug301935ExTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.parser.antlr.parseTreeConstruction.Bug301935ExTestLanguageParsetreeConstructor.class;

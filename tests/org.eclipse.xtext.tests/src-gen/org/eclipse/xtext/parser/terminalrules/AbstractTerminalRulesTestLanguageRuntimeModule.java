@@ -69,11 +69,6 @@ public abstract class AbstractTerminalRulesTestLanguageRuntimeModule extends Def
 		return org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.parser.terminalrules.parser.packrat.TerminalRulesTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.parser.terminalrules.parseTreeConstruction.TerminalRulesTestLanguageParsetreeConstructor.class;

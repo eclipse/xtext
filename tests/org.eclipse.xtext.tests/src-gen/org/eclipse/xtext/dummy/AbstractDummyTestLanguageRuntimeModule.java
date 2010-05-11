@@ -69,11 +69,6 @@ public abstract class AbstractDummyTestLanguageRuntimeModule extends DefaultRunt
 		return org.eclipse.xtext.dummy.services.DummyTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.dummy.parser.packrat.DummyTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.dummy.parseTreeConstruction.DummyTestLanguageParsetreeConstructor.class;

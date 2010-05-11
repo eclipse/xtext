@@ -69,11 +69,6 @@ public abstract class AbstractAssignmentsTestLanguageRuntimeModule extends Defau
 		return org.eclipse.xtext.parser.assignments.services.AssignmentsTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.parser.assignments.parser.packrat.AssignmentsTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.parser.assignments.parseTreeConstruction.AssignmentsTestLanguageParsetreeConstructor.class;

@@ -69,11 +69,6 @@ public abstract class AbstractMultiGenMMTestLanguageRuntimeModule extends Defaul
 		return org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.MultiGenMMTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.metamodelreferencing.tests.parseTreeConstruction.MultiGenMMTestLanguageParsetreeConstructor.class;

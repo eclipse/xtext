@@ -69,11 +69,6 @@ public abstract class AbstractSerializationErrorTestLanguageRuntimeModule extend
 		return org.eclipse.xtext.parsetree.reconstr.services.SerializationErrorTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.parsetree.reconstr.parser.packrat.SerializationErrorTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.parsetree.reconstr.parseTreeConstruction.SerializationErrorTestLanguageParsetreeConstructor.class;

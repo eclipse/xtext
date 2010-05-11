@@ -69,11 +69,6 @@ public abstract class AbstractTreeTestLanguageRuntimeModule extends DefaultRunti
 		return org.eclipse.xtext.testlanguages.services.TreeTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.testlanguages.parser.packrat.TreeTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.testlanguages.parseTreeConstruction.TreeTestLanguageParsetreeConstructor.class;

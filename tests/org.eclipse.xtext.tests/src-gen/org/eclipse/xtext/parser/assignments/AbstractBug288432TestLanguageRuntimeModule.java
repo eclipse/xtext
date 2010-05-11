@@ -69,11 +69,6 @@ public abstract class AbstractBug288432TestLanguageRuntimeModule extends Default
 		return org.eclipse.xtext.parser.assignments.services.Bug288432TestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.parser.assignments.parser.packrat.Bug288432TestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.parser.assignments.parseTreeConstruction.Bug288432TestLanguageParsetreeConstructor.class;

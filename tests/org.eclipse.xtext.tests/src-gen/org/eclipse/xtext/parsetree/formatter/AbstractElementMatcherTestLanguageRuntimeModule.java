@@ -69,11 +69,6 @@ public abstract class AbstractElementMatcherTestLanguageRuntimeModule extends De
 		return org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.parsetree.formatter.parser.packrat.ElementMatcherTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.parsetree.formatter.parseTreeConstruction.ElementMatcherTestLanguageParsetreeConstructor.class;

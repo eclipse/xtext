@@ -69,11 +69,6 @@ public abstract class AbstractIndexTestLanguageRuntimeModule extends DefaultRunt
 		return org.eclipse.xtext.index.services.IndexTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.index.parser.packrat.IndexTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.index.parseTreeConstruction.IndexTestLanguageParsetreeConstructor.class;

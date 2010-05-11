@@ -27,15 +27,9 @@ public abstract class AbstractTerminalsRuntimeModule extends DefaultRuntimeModul
 		bindProperties(binder, "org/eclipse/xtext/common/Terminals.properties");
 	}
 	
-	
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.common.services.TerminalsGrammarAccess.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.common.parser.packrat.TerminalsPackratParser.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment

@@ -69,11 +69,6 @@ public abstract class AbstractAbstractIgnoreCaseLinkingTestLanguageRuntimeModule
 		return org.eclipse.xtext.linking.services.AbstractIgnoreCaseLinkingTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.linking.parser.packrat.AbstractIgnoreCaseLinkingTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.linking.parseTreeConstruction.AbstractIgnoreCaseLinkingTestLanguageParsetreeConstructor.class;

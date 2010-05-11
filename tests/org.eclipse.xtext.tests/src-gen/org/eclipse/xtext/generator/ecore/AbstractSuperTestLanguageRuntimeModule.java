@@ -69,11 +69,6 @@ public abstract class AbstractSuperTestLanguageRuntimeModule extends DefaultRunt
 		return org.eclipse.xtext.generator.ecore.services.SuperTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.generator.ecore.parser.packrat.SuperTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.generator.ecore.parseTreeConstruction.SuperTestLanguageParsetreeConstructor.class;

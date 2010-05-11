@@ -69,11 +69,6 @@ public abstract class AbstractTransientValuesTestRuntimeModule extends DefaultRu
 		return org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestPackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.parsetree.transientvalues.parseTreeConstruction.TransientValuesTestParsetreeConstructor.class;

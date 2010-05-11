@@ -79,11 +79,6 @@ public abstract class AbstractIgnoreCaseLexerTestLanguageRuntimeModule extends D
 		return org.eclipse.xtext.lexer.services.IgnoreCaseLexerTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.lexer.parser.packrat.IgnoreCaseLexerTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.lexer.parseTreeConstruction.IgnoreCaseLexerTestLanguageParsetreeConstructor.class;

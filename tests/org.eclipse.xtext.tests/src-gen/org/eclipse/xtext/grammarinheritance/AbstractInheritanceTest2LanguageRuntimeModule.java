@@ -69,11 +69,6 @@ public abstract class AbstractInheritanceTest2LanguageRuntimeModule extends Defa
 		return org.eclipse.xtext.grammarinheritance.services.InheritanceTest2LanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTest2LanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.grammarinheritance.parseTreeConstruction.InheritanceTest2LanguageParsetreeConstructor.class;

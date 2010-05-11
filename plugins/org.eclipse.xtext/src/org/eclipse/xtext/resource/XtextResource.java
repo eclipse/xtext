@@ -28,13 +28,13 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.parser.ISwitchingParser;
+import org.eclipse.xtext.parser.antlr.IAntlrParser;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeContentAdapter;
 import org.eclipse.xtext.parsetree.SyntaxError;
-import org.eclipse.xtext.parsetree.reconstr.SerializerOptions;
 import org.eclipse.xtext.parsetree.reconstr.Serializer;
+import org.eclipse.xtext.parsetree.reconstr.SerializerOptions;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.StringInputStream;
@@ -124,7 +124,7 @@ public class XtextResource extends ResourceImpl {
 	private IParseResult parseResult;
 
 	@Inject
-	protected void setInjectedParser(ISwitchingParser parser) {
+	protected void setInjectedParser(IAntlrParser parser) {
 		this.parser = parser;
 	}
 

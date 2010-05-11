@@ -69,11 +69,6 @@ public abstract class AbstractKeywordsTestLanguageRuntimeModule extends DefaultR
 		return org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.parser.keywords.parser.packrat.KeywordsTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.parser.keywords.parseTreeConstruction.KeywordsTestLanguageParsetreeConstructor.class;

@@ -24,6 +24,5 @@ CompositeGeneratorFragment {
 	}
 	fragment = grammarAccess.GrammarAccessFragment {}
 	fragment = ecore.EcoreGeneratorFragment auto-inject {}
-	fragment = parser.PackratParserFragment {}
 	fragment = parseTreeConstructor.ParseTreeConstructorFragment auto-inject {}
 }

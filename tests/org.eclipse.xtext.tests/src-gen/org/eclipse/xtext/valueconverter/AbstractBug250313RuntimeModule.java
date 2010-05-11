@@ -69,11 +69,6 @@ public abstract class AbstractBug250313RuntimeModule extends DefaultRuntimeModul
 		return org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.valueconverter.parser.packrat.Bug250313PackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.valueconverter.parseTreeConstruction.Bug250313ParsetreeConstructor.class;
