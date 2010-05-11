@@ -19,11 +19,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.resource.SaveOptions;
+import org.eclipse.xtext.util.ReplaceRegion;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -32,6 +31,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Knut Wannheden - Initial contribution and API
+ * @author Jan Koehnlein
  */
 public class DefaultTextEditComposer extends EContentAdapter implements ITextEditComposer {
 
@@ -55,8 +55,7 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 
 		if (notification.getNotifier() instanceof EObject) {
 			recordObjectModification((EObject) notification.getNotifier());
-		}
-		else if (notification.getNotifier() instanceof Resource) {
+		} else if (notification.getNotifier() instanceof Resource) {
 			recordResourceModification((Resource) notification.getNotifier());
 		}
 	}
@@ -110,8 +109,7 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 		}
 		if (resource.getContents().isEmpty()) {
 			resourceSize = 0;
-		}
-		else {
+		} else {
 			final EObject root = resource.getContents().get(0);
 			resourceSize = NodeUtil.getNodeAdapter(root).getParserNode().getTotalLength();
 		}
@@ -133,8 +131,7 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 			String text = resource.getContents().isEmpty() ? "" : serializerUtil.serialize(
 					resource.getContents().get(0)).trim();
 			result = new ReplaceEdit(0, resourceSize, text);
-		}
-		else {
+		} else {
 			final Collection<EObject> modifiedObjects = getModifiedObjects();
 			if (!modifiedObjects.isEmpty()) {
 				List<TextEdit> edits = getObjectEdits();
@@ -155,26 +152,21 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 	private List<TextEdit> getObjectEdits() {
 		final Collection<EObject> modifiedObjects = getModifiedObjects();
 		Collection<EObject> topLevelObjects = EcoreUtil.filterDescendants(modifiedObjects);
-		Iterable<EObject> containedObjects = Iterables.filter(topLevelObjects, new Predicate<EObject>() {
+		Iterable<EObject> containedModifiedObjects = Iterables.filter(topLevelObjects, new Predicate<EObject>() {
 			public boolean apply(EObject input) {
 				return input.eResource() == resource;
 			}
 		});
-		List<TextEdit> edits = Lists.newArrayListWithExpectedSize(Iterables.size(containedObjects));
-
-		for (EObject eObject : containedObjects) {
-			NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(eObject);
-			CompositeNode node = nodeAdapter.getParserNode();
-
-			String text = serializerUtil.serialize(eObject, SaveOptions.defaultOptions());
-			
-			TextEdit edit = new ReplaceEdit(node.getOffset(), node.getLength(), text);
+		List<TextEdit> edits = Lists.newArrayListWithExpectedSize(Iterables.size(containedModifiedObjects));
+		for (EObject modifiedObject : containedModifiedObjects) {
+			ReplaceRegion replaceRegion = serializerUtil.serializeReplacement(modifiedObject, SaveOptions.defaultOptions());
+			TextEdit edit = new ReplaceEdit(replaceRegion.getOffset(), replaceRegion.getLength(), replaceRegion.getText());
 			edits.add(edit);
 		}
 		return edits;
 	}
-	
-	/** 
+
+	/**
 	 * If used in a non-Guice environment, we need to be able to set this.
 	 */
 	public void setSerializerUtil(Serializer serializerUtil) {
