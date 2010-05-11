@@ -10,7 +10,6 @@ Export-Package: org.eclipse.xtext.generator,
  org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.generator.grammarAccess,
  org.eclipse.xtext.generator.parseTreeConstructor,
- org.eclipse.xtext.generator.parser,
  org.eclipse.xtext.generator.resourceFactory,
  org.eclipse.xtext.generator.validation
 Require-Bundle: org.eclipse.xtext.util;resolution:=optional,

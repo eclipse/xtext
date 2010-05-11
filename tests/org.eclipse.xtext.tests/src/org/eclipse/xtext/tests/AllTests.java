@@ -17,14 +17,11 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.MweReaderTest.class);
       suite.addTestSuite(org.eclipse.xtext.XtextGrammarTest.class);
       suite.addTestSuite(org.eclipse.xtext.actions.AntlrParserTest.class);
-      suite.addTestSuite(org.eclipse.xtext.actions.PackratParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.services.DefaultTerminalConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.concurrent.StateAccessTest.class);
       suite.addTestSuite(org.eclipse.xtext.enumrules.AntlrEnumAndReferenceTest.class);
       suite.addTestSuite(org.eclipse.xtext.enumrules.AntlrParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.enumrules.GrammarParserTest.class);
-      suite.addTestSuite(org.eclipse.xtext.enumrules.PackratEnumAndReferenceTest.class);
-      suite.addTestSuite(org.eclipse.xtext.enumrules.PackratParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.enumrules.SerializationTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.ManifestMergerTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.ecore.Bug283278Test.class);
@@ -75,7 +72,6 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parser.PartialParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.PartialParsingPerformanceTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.PartialParsingPointerTest.class);
-      suite.addTestSuite(org.eclipse.xtext.parser.XtextGrammarComparingTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.XtextParserBugsTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.XtextParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.antlr.Bug289515Test.class);
@@ -96,25 +92,17 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.MetamodelTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.MetamodelTransformationErrorTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.MetamodelTransformationTest.class);
-      suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.PackratParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.ParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.PartialParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.SerializationTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.ValueConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.encoding.EncodingTest.class);
-      suite.addTestSuite(org.eclipse.xtext.parser.epatch.EpatchComparingTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.keywords.AntlrParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.keywords.GrammarAccessTest.class);
-      suite.addTestSuite(org.eclipse.xtext.parser.keywords.PackratParserTest.class);
-      suite.addTestSuite(org.eclipse.xtext.parser.packrat.PackratParserGenUtilTest.class);
-      suite.addTestSuite(org.eclipse.xtext.parser.packrat.PerformanceTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.Bug292245Test.class);
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.Bug297105Test.class);
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.DynamicChannelTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.HiddensTest.class);
-      suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.InterpreterTest.class);
-      suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.PackratHiddensTest.class);
-      suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.PackratParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.ParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.ConcreteSyntaxValidatorTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.ErrorMessagesTest.class);
@@ -212,14 +200,12 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.validation.ResourceValidatorImplTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.ValidatorTestingTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.Bug250313AntlrTest.class);
-      suite.addTestSuite(org.eclipse.xtext.valueconverter.Bug250313PackratTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.DeprecatedIdConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.DeprecatedIntConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.DeprecatedStringConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.IDValueConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.IgnoreCaseIDValueConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.INTValueConverterTest.class);
-      suite.addTestSuite(org.eclipse.xtext.valueconverter.ParserComparingTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.STRINGConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.Bug285605Test.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.Bug290919Test.class);
@@ -238,7 +224,6 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.TypeHierarchyHelperTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.UnassignedRuleCallTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformerTest.class);
-      suite.addTestSuite(org.eclipse.xtext.xtext.parser.packrat.XtextPackratParserTest.class);
       return suite;
    }
 }
