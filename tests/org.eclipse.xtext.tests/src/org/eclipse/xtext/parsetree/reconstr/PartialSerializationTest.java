@@ -3,6 +3,7 @@ package org.eclipse.xtext.parsetree.reconstr;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.partialserializationtest.NodeRoot;
+import org.eclipse.xtext.resource.SaveOptions;
 
 public class PartialSerializationTest extends AbstractXtextTests {
 
@@ -13,10 +14,7 @@ public class PartialSerializationTest extends AbstractXtextTests {
 	}
 
 	private String ser(EObject obj) {
-		SerializerOptions opt = new SerializerOptions();
-		opt.setFormatting(false);
-		opt.setValidateConcreteSyntax(true);
-		return getSerializer().serialize(obj, opt);
+		return getSerializer().serialize(obj, SaveOptions.defaultOptions());
 	}
 
 	public void testSimple() throws Exception {

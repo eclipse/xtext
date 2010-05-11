@@ -12,6 +12,7 @@ import java.io.ByteArrayOutputStream;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.bug302128.Model;
+import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -43,6 +44,6 @@ public class Bug302128Test extends AbstractXtextTests {
 	}
 
 	protected String noFormatSerialize(EObject model) {
-		return getSerializer().serialize(model, new SerializerOptions().setFormatting(false));
+		return getSerializer().serialize(model, SaveOptions.defaultOptions());
 	}
 }
