@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.EmfAssert;
 import org.eclipse.xtext.util.EmfFormatter;
@@ -58,9 +59,7 @@ public class ComplexReconstrTest extends AbstractXtextTests {
 		EObject result = getModel(model);
 		if (logger.isTraceEnabled())
 			logger.trace(EmfFormatter.objToStr(result));
-		SerializerOptions opt = new SerializerOptions();
-		opt.setFormatting(false);
-		return getSerializer().serialize(result, opt);
+		return getSerializer().serialize(result, SaveOptions.defaultOptions());
 	}
 
 	public void testNormalizableCompositeNodesIncluded() throws Exception {

@@ -19,6 +19,7 @@ import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.TreeConstructionReport;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
 import org.eclipse.xtext.parsetree.reconstr.impl.WriterTokenStream;
+import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 
 import com.google.inject.Inject;
@@ -39,9 +40,9 @@ public class Serializer {
 		this.validator = val;
 	}
 
-	public TreeConstructionReport serialize(EObject obj, ITokenStream tokenStream, SerializerOptions options)
+	public TreeConstructionReport serialize(EObject obj, ITokenStream tokenStream, SaveOptions options)
 			throws IOException {
-		if (options.isValidateConcreteSyntax()) {
+		if (options.isValidating()) {
 			List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
 			validator.validateRecursive(obj, new IConcreteSyntaxValidator.DiagnosticListAcceptor(diagnostics),
 					new HashMap<Object, Object>());
@@ -54,16 +55,16 @@ public class Serializer {
 		formatterTokenStream.flush();
 		return report;
 	}
-
-	public TreeConstructionReport serialize(EObject obj, Writer writer, SerializerOptions options) throws IOException {
+	
+	public TreeConstructionReport serialize(EObject obj, Writer writer, SaveOptions options) throws IOException {
 		return serialize(obj, new WriterTokenStream(writer), options);
 	}
 
 	public String serialize(EObject obj) {
-		return serialize(obj, new SerializerOptions());
+		return serialize(obj, SaveOptions.defaultOptions());
 	}
 
-	public String serialize(EObject obj, SerializerOptions options) {
+	public String serialize(EObject obj, SaveOptions options) {
 		TokenStringBuffer tokenStringBuffer = new TokenStringBuffer();
 		try {
 			serialize(obj, tokenStringBuffer, options);
@@ -71,6 +72,21 @@ public class Serializer {
 			throw new RuntimeException(e);
 		}
 		return tokenStringBuffer.toString();
+	}
+	
+	@Deprecated
+	public TreeConstructionReport serialize(EObject obj, ITokenStream tokenStream, SerializerOptions options) throws IOException {
+		return serialize(obj, tokenStream, options.toSaveOptions());
+	}
+	
+	@Deprecated
+	public TreeConstructionReport serialize(EObject obj, Writer writer, SerializerOptions options) throws IOException {
+		return serialize(obj, new WriterTokenStream(writer), options.toSaveOptions());
+	}
+	
+	@Deprecated
+	public String serialize(EObject obj, SerializerOptions options) {
+		return serialize(obj, options.toSaveOptions());
 	}
 
 	protected IParseTreeConstructor getParseTreeReconstructor() {

@@ -10,6 +10,7 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
+import org.eclipse.xtext.resource.SaveOptions;
 
 public class FormatterTest extends AbstractXtextTests {
 
@@ -43,10 +44,10 @@ public class FormatterTest extends AbstractXtextTests {
 	// test formatting based on the ParseTreeConstructor
 	private void assertFormattedPTC(String expected, String model) throws Exception {
 		EObject m = getModel(model);
-		String res = serialize(m);
+		String res = getSerializer().serialize(m, SaveOptions.newBuilder().format().getOptions());
 		assertEquals(expected, res);
 	}
-
+	
 	// test formatting based on the NodeModel
 	private void assertFormattedNM(String expected, String model, int offset, int lengt) throws Exception {
 		CompositeNode node = NodeUtil.getRootNode(getModel(model));
