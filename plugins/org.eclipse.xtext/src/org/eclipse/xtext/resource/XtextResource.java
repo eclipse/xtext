@@ -34,7 +34,6 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeContentAdapter;
 import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.parsetree.reconstr.Serializer;
-import org.eclipse.xtext.parsetree.reconstr.SerializerOptions;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.StringInputStream;
@@ -60,14 +59,15 @@ public class XtextResource extends ResourceImpl {
 	public static String OPTION_RESOLVE_ALL = XtextResource.class.getName() + ".RESOLVE_ALL";
 
 	/**
-	 * @deprecated use OPTION_SERIALIZATION_OPTIONS
+	 * @deprecated use {@link SaveOptions#configure(Map)} instead.
 	 */
 	@Deprecated
 	public static String OPTION_FORMAT = XtextResource.class.getName() + ".FORMAT";
 
 	/**
-	 * Configure an instance of {@link org.eclipse.xtext.parsetree.reconstr.SerializerUtil.SerializationOptions}
+	 * @deprecated use {@link SaveOptions#configure(Map)} instead.
 	 */
+	@Deprecated
 	public static String OPTION_SERIALIZATION_OPTIONS = XtextResource.class.getName() + ".SERIALIZATION_OPTIONS";
 
 	public static String OPTION_ENCODING = XtextResource.class.getName() + ".DEFAULT_ENCODING";
@@ -278,15 +278,9 @@ public class XtextResource extends ResourceImpl {
 	public void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
 		if (contents.size() != 1)
 			throw new IllegalStateException("The Xtext resource must contain exactly one root element");
-		SerializerOptions serializerOptions;
-		if (options != null && options.containsKey(OPTION_SERIALIZATION_OPTIONS))
-			serializerOptions = (SerializerOptions) options.get(OPTION_SERIALIZATION_OPTIONS);
-		else {
-			serializerOptions = new SerializerOptions();
-			serializerOptions.setFormatting(options != null && Boolean.TRUE.equals(options.get(OPTION_FORMAT)));
-		}
+		SaveOptions saveOptions = SaveOptions.getOptions(options);
 		setEncodingFromOptions(options);
-		serializer.serialize(contents.get(0), new OutputStreamWriter(outputStream, getEncoding()), serializerOptions);
+		serializer.serialize(contents.get(0), new OutputStreamWriter(outputStream, getEncoding()), saveOptions);
 	}
 
 	/**

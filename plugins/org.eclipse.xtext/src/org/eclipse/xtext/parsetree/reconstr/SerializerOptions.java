@@ -7,6 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr;
 
+import org.eclipse.xtext.resource.SaveOptions;
+
+/**
+ * @deprecated use the immutable {@link SaveOptions} instead.
+ */
+@Deprecated
 public class SerializerOptions {
 
 	private boolean formatting = true;
@@ -37,5 +43,14 @@ public class SerializerOptions {
 	public SerializerOptions setValidateConcreteSyntax(boolean validateConcreteSyntax) {
 		this.validateConcreteSyntax = validateConcreteSyntax;
 		return this;
+	}
+	
+	public SaveOptions toSaveOptions() {
+		SaveOptions.Builder builder = SaveOptions.newBuilder();
+		if (!isValidateConcreteSyntax())
+			builder.noValidation();
+		if (isFormatting())
+			builder.format();
+		return builder.getOptions();
 	}
 }

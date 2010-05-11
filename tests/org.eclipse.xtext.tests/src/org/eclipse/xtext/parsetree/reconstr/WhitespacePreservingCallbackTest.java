@@ -2,6 +2,7 @@ package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.resource.SaveOptions;
 
 public class WhitespacePreservingCallbackTest extends AbstractXtextTests {
 	@Override
@@ -57,9 +58,7 @@ public class WhitespacePreservingCallbackTest extends AbstractXtextTests {
 
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = getModel(model);
-		SerializerOptions opt = new SerializerOptions();
-		opt.setFormatting(false);
-		return getSerializer().serialize(result, opt);
+		return getSerializer().serialize(result, SaveOptions.defaultOptions());
 	}
 
 	@SuppressWarnings("unused")
