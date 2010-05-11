@@ -30,6 +30,7 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AssignmentToken;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.TextLocation;
 import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.base.Join;
@@ -118,6 +119,8 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 	protected EObject root;
 
 	protected AbstractToken success;
+
+	private TextLocation previousLocation;
 
 	public TreeConstructionReportImpl(EObject root) {
 		super();
@@ -267,5 +270,13 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		b.append("  -> <possible reasons for not continuing>\n");
 		b.append(Join.join("\n", getDiagnostics()));
 		return b.toString();
+	}
+
+	public TextLocation getPreviousLocation() {
+		return previousLocation;
+	}
+	
+	public void setPreviousLocation(TextLocation previousLocation) {
+		this.previousLocation = previousLocation;
 	}
 }

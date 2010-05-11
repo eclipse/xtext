@@ -20,6 +20,9 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.impl.commentAssociation.Element;
 import org.eclipse.xtext.parsetree.impl.commentAssociation.Model;
 import org.eclipse.xtext.parsetree.reconstr.ICommentAssociater;
+import org.eclipse.xtext.parsetree.reconstr.Serializer;
+import org.eclipse.xtext.resource.SaveOptions;
+import org.eclipse.xtext.util.ReplaceRegion;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
@@ -27,7 +30,7 @@ import com.google.common.collect.Multimaps;
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class CommentAssociaterTest extends AbstractXtextTests {
+public class CommentAssociationTest extends AbstractXtextTests {
 
 	@Override
 	protected void setUp() throws Exception {
@@ -86,6 +89,32 @@ public class CommentAssociaterTest extends AbstractXtextTests {
 		checkComments(multimap, z, "// comment pre z\n");
 	}
 
+	public void testSerializeReplacement() throws Exception {
+		String xBlock = "// comment pre x\n" 
+					+ "element /* comment inside x */ x // comment post x\n";
+		String yBlock = "// comment pre y\n" + "element /* comment inside y */ y // comment post y\n";
+		String zBlock = "// comment pre z\n" + "element z";
+		String textModel = xBlock + yBlock + zBlock;
+		System.out.println(textModel);
+
+		Model model = (Model) getModel(textModel);
+		EList<Element> elements = model.getElements();
+		Element x = elements.get(0);
+		Element y = elements.get(1);
+		Element z = elements.get(2);
+		checkReplaceRegion(x, xBlock, textModel);
+		checkReplaceRegion(y, yBlock, textModel);
+		checkReplaceRegion(z, zBlock, textModel);
+	}
+
+	protected void checkReplaceRegion(Element element, String expectedText, String completeModel) {
+		Serializer serializer = get(Serializer.class);
+		ReplaceRegion replacement = serializer.serializeReplacement(element, SaveOptions.defaultOptions());
+		assertEquals(expectedText, replacement.getText());
+		assertEquals(completeModel.indexOf(expectedText), replacement.getOffset());
+		assertEquals(expectedText.length(), replacement.getLength());
+	}
+	
 	private void checkComments(Multimap<EObject, String> multimap, EObject element, String... expectedComments) {
 		Collection<String> comments = multimap.get(element);
 		assertEquals(expectedComments.length, comments.size());

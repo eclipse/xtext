@@ -35,7 +35,7 @@ public class TokenUtil {
 	@Inject
 	protected IHiddenTokenHelper hiddenTokenHelper;
 
-	public Pair<List<LeafNode>, List<LeafNode>> getLeadingAndTrainingHiddenTokens(AbstractNode node) {
+	public Pair<List<LeafNode>, List<LeafNode>> getLeadingAndTrailingHiddenTokens(AbstractNode node) {
 		Pair<List<LeafNode>, List<LeafNode>> result = Tuples.<List<LeafNode>, List<LeafNode>> create(Lists
 				.<LeafNode> newArrayList(), Lists.<LeafNode> newArrayList());
 		List<LeafNode> leafNodes = node.getLeafNodes();
@@ -109,18 +109,22 @@ public class TokenUtil {
 			return hiddenTokenHelper.isWhitespace((AbstractRule) node.getGrammarElement());
 		return false;
 	}
+	
+	public boolean isWhitespaceOrCommentNode(AbstractNode node) {
+		return isWhitespaceNode(node) || isCommentNode(node);
+	}
 
 	public String serializeNode(AbstractNode node) {
 		if (node instanceof LeafNode)
 			return ((LeafNode) node).getText();
 		List<LeafNode> leafNodes = node.getLeafNodes();
 		int begin = 0, end = leafNodes.size() - 1;
-		while (begin <= end && isWhitespaceNode(leafNodes.get(begin)))
+		while (begin <= end && isWhitespaceOrCommentNode(leafNodes.get(begin)))
 			begin++;
-		while (begin <= end && isWhitespaceNode(leafNodes.get(end)))
+		while (begin <= end && isWhitespaceOrCommentNode(leafNodes.get(end)))
 			end--;
 		if (begin == end)
-			return isWhitespaceNode(leafNodes.get(begin)) ? "" : leafNodes.get(begin).getText();
+			return isWhitespaceOrCommentNode(leafNodes.get(begin)) ? "" : leafNodes.get(begin).getText();
 		StringBuilder b = new StringBuilder();
 		for (int i = begin; i <= end; i++)
 			b.append(leafNodes.get(i).getText());

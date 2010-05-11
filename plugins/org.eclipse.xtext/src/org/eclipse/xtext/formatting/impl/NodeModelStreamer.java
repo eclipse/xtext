@@ -100,7 +100,7 @@ public class NodeModelStreamer implements INodeModelStreamer {
 						else {
 							it.prune();
 							Pair<List<LeafNode>, List<LeafNode>> surround = tokenUtil
-									.getLeadingAndTrainingHiddenTokens(node);
+									.getLeadingAndTrailingHiddenTokens(node);
 							result.addAll(surround.getFirst());
 							result.add(node);
 							result.addAll(surround.getSecond());
