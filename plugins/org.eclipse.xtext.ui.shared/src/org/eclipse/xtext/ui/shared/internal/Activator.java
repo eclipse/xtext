@@ -85,7 +85,7 @@ public class Activator extends Plugin {
 			JavaCore.initializeAfterLoad(new NullProgressMonitor());
 			return true;
 		} catch (Throwable e) {
-			log.warn("Disabling JDT use.");
+			log.warn("Disabling JDT use. : "+e.getMessage());
 			log.debug(e.getMessage(), e);
 		}
 		return false;
