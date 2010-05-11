@@ -18,6 +18,7 @@ import org.eclipse.xtext.parsetree.reconstr.serializationerror.Indent;
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.Model;
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.TwoOptions;
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.TwoRequired;
+import org.eclipse.xtext.resource.SaveOptions;
 
 public class SerializationErrorTest extends AbstractXtextTests {
 
@@ -31,10 +32,7 @@ public class SerializationErrorTest extends AbstractXtextTests {
 		TokenStringBuffer b = new TokenStringBuffer();
 		TreeConstructionReport r;
 		try {
-			SerializerOptions opt = new SerializerOptions();
-			opt.setFormatting(true);
-			opt.setValidateConcreteSyntax(false);
-			r = getSerializer().serialize(obj, b, opt);
+			r = getSerializer().serialize(obj, b, SaveOptions.newBuilder().format().noValidation().getOptions());
 		} catch (XtextSerializationException e) {
 			r = e.getReport();
 		}

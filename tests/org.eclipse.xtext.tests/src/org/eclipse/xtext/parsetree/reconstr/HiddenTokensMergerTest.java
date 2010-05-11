@@ -9,6 +9,7 @@ import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.CommentableIte
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.HiddentokenmergertestFactory;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.RefList;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.ValueList;
+import org.eclipse.xtext.resource.SaveOptions;
 
 public class HiddenTokensMergerTest extends AbstractXtextTests {
 
@@ -21,10 +22,8 @@ public class HiddenTokensMergerTest extends AbstractXtextTests {
 	private void assertRoundtrip(String model) throws Exception {
 		EObject o = getModel(model);
 		//System.out.println(EmfFormatter.objToStr(((XtextResource) o.eResource()).getParseResult().getRootNode()));
-		SerializerOptions opt = new SerializerOptions();
-		opt.setFormatting(false);
 		//		System.out.println(EmfFormatter.objToStr(((XtextResource) o.eResource()).getParseResult().getRootNode()));
-		String r = getSerializer().serialize(o, opt);
+		String r = getSerializer().serialize(o, SaveOptions.defaultOptions());
 		assertEquals(model, r);
 	}
 
@@ -107,10 +106,7 @@ public class HiddenTokensMergerTest extends AbstractXtextTests {
 
 	@Override
 	public String serialize(EObject obj) {
-		SerializerOptions opt = new SerializerOptions();
-		opt.setFormatting(false);
-		opt.setValidateConcreteSyntax(true);
-		return getSerializer().serialize(obj, opt);
+		return getSerializer().serialize(obj, SaveOptions.defaultOptions());
 	}
 
 }

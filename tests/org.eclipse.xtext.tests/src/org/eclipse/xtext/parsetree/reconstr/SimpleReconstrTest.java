@@ -11,6 +11,7 @@ package org.eclipse.xtext.parsetree.reconstr;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectBug284850;
+import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
 
 public class SimpleReconstrTest extends AbstractXtextTests {
@@ -47,9 +48,7 @@ public class SimpleReconstrTest extends AbstractXtextTests {
 		//			System.out.println(EmfFormatter.objToStr(NodeUtil.getRootNode(result)));
 		//			logger.trace(EmfFormatter.objToStr(NodeUtil.getRootNode(result).getLeafNodes()));
 		//		}
-		SerializerOptions opt = new SerializerOptions();
-		opt.setFormatting(false);
-		return getSerializer().serialize(result, opt);
+		return getSerializer().serialize(result, SaveOptions.defaultOptions());
 	}
 
 	public void testSimpleExpressions5() throws Exception {
@@ -253,26 +252,20 @@ public class SimpleReconstrTest extends AbstractXtextTests {
 		EmptyObjectBug284850 result = (EmptyObjectBug284850) getModel(model);
 		result.getItems().getList().clear();
 		//		System.out.println(EmfFormatter.objToStr(result));
-		SerializerOptions opt = new SerializerOptions();
-		opt.setFormatting(false);
-		String actual = getSerializer().serialize(result, opt);
+		String actual = getSerializer().serialize(result, SaveOptions.defaultOptions());
 		assertEquals(model, actual);
 	}
 
 	public void testMultiInheritanceBug280439() throws Exception {
 		String model = "#15 a b";
 		EObject result = getModel(model);
-		SerializerOptions opt = new SerializerOptions();
-		opt.setFormatting(false);
-		assertEquals(model, getSerializer().serialize(result, opt));
+		assertEquals(model, getSerializer().serialize(result, SaveOptions.defaultOptions()));
 	}
 
 	public void testEObjectRef() throws Exception {
 		String model = "#16 obj refs obj";
 		EObject result = getModel(model);
-		SerializerOptions opt = new SerializerOptions();
-		opt.setFormatting(false);
-		assertEquals(model, getSerializer().serialize(result, opt));
+		assertEquals(model, getSerializer().serialize(result, SaveOptions.defaultOptions()));
 	}
 
 	public void testTypeBug305577a() throws Exception {

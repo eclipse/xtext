@@ -1,8 +1,6 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import java.io.ByteArrayOutputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ContentHandler;
@@ -11,7 +9,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -38,9 +36,7 @@ public class XtextGrammarReconcilationTest extends AbstractXtextTests {
 
 		// save
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		Map<String,Object> opt = new HashMap<String,Object>();
-		opt.put(XtextResource.OPTION_SERIALIZATION_OPTIONS, new SerializerOptions(true, true));
-		resource.save(out, opt);
+		resource.save(out, SaveOptions.newBuilder().format().getOptions().toOptionsMap());
 		String result = new String(out.toByteArray());
 
 		// check
