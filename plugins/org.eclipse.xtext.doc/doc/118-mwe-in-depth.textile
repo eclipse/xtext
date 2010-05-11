@@ -1,0 +1,80 @@
+h1(#MWE2). MWE2
+
+The Modeling Workflow Engine 2 (MWE2) is a rewritten backwards compatible implementation of the Modeling Workflow Engine (MWE). It is a declarative, externally configurable generator engine. Users can describe arbitrary objects compositions by means of a simple, concise syntax that allows to declare object instances, attribute values and references. One use case - that's where the name had its origins - is the definition of workflows. Such a workflow consists usually of a number of components that interact with each other. There are components available, that read EMF resources, perform operations (transformations) on them and write them back or generate any number of other artifacts out of the information. Workflows are typically executed in a single JVM. However there are no constraints the prevent implementors to provide components that spawn multiple threads or new processes.
+
+h2(#MWE2Exampe). Examples
+
+Let's start with a couple of examples to demonstrate some usage scenarios for MWE2. The first examples is a simple @HelloWorld@ module that does nothing but print a message to standard out. The second module is assembled of three components that read an ecore file, transform the contained classifier-names to upper-case and serialize the resource back to a new file. The last examples uses the life-cycle methods to print the execution time of the workflow.
+
+h3(#MWE2HelloWorld). The simplest Workflow
+
+The arguably shortest MWE2 module may look like the following snippet.
+
+bc.. module HelloWorld 
+
+SayHello {
+	message = "Hello World!"
+}
+
+p. It configures a very simple workflow component with a message that should be printed to @System.out@ when the workflow is executed. The module begins with a declaration of its name. It must fulfill the Java conventions for fully qualified class-names. That's why the module @HelloWorld@ has to be placed into the default package of a Java source folder. The second element in the module is the class-name @SayHello@ which introduces the root element of the module. The interpreter will create an instance of the referenced type and configure it as declared between the curly braces. E.g. the assignment @message = "Hello World!"@ in the module will be interpreted as an invocation of the @setMessage(String)@ on the instantiated object. As one can easily imagine, the implementation of the class @SayHello@ looks straight forward:
+
+bc.. import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent;
+import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;
+
+public class SayHello implements IWorkflowComponent {
+
+	private String message = "Hello World!";
+	
+	public void invoke(IWorkflowContext ctx) {
+		System.out.println(getMessage());
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void postInvoke() {}
+
+	public void preInvoke() {}
+	
+}
+
+p. It looks like a simple POJO and that's the philosophy behind MWE2. It is easily possible to assemble completely independent objects in a declarative manner. To make the workflow executable with the @WorkflowRunner@, the component @SayHello@ must be nested in a root workflow:
+
+bc.. module HelloWorld 
+
+Workflow {
+	component = SayHello {
+		message = "Hello World!"
+	}
+}
+
+p. The class @Workflow@ is actually @org.eclipse.emf.mwe2.runtime.workflow.Workflow@ but its package is implicitly imported in MWE2 modules to make the the modules more concise. The execution result of this workflow will be revealed after a quick @Run As .. -> MWE2 Workflow@ in the console as 
+
+bc.. Hello World!
+
+h2(#MWE2Syntax). Syntax Reference
+
+h3(#MWE2Literals). String Literals
+
+h3(#MWE2ClassReferences). Class References
+
+h3(#MWE2ModuleReferences). Module References
+
+h2(#MWE2Syntax). Language Features
+
+h3(#MWE2Properties). Properties
+
+h3(#MWE2Mandatory). Mandatory Properties
+
+h3(#MWE2AutoInject). Auto Injection
+
+h3(#MWE2Factories). Factory Support
+
+h2(#MWE2RuntimeAPI). Workflow API
+
+h2(#MWE2RuntimeSPI). Workflow SPI
