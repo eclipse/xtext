@@ -90,17 +90,6 @@ public class Serializer {
 		return serialize(obj, options.toSaveOptions());
 	}
 
-	@Deprecated
-	public ReplaceRegion serializeReplacement(EObject obj, SerializerOptions options) {
-		TokenStringBuffer tokenStringBuffer = new TokenStringBuffer();
-		try {
-			TreeConstructionReport report = serialize(obj, tokenStringBuffer, options);
-			return new ReplaceRegion(report.getPreviousLocation(), tokenStringBuffer.toString());
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
 	public ReplaceRegion serializeReplacement(EObject obj, SaveOptions options) {
 		TokenStringBuffer tokenStringBuffer = new TokenStringBuffer();
 		try {
