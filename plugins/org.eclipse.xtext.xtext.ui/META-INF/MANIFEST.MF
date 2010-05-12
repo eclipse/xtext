@@ -32,6 +32,6 @@ Export-Package: org.eclipse.xtext.ui,
  org.eclipse.xtext.xtext.ui.editor.folding,
  org.eclipse.xtext.xtext.ui.editor.outline,
  org.eclipse.xtext.xtext.ui.editor.syntaxcoloring,
- org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;x-friends:="org.eclipse.xtext.xtext.ui.tests",
- org.eclipse.xtext.xtext.ui.wizard.project;x-friends:="org.eclipse.xtext.xtext.ui.tests"
+ org.eclipse.xtext.xtext.ui.wizard.ecore2xtext,
+ org.eclipse.xtext.xtext.ui.wizard.project
 Import-Package: org.apache.log4j
