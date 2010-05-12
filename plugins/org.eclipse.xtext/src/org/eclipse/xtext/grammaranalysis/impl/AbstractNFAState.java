@@ -274,4 +274,9 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 		}
 	}
 
+	@Override
+	public String toString() {
+		return new GrammarElementTitleSwitch().doSwitch(element);
+	}
+
 }

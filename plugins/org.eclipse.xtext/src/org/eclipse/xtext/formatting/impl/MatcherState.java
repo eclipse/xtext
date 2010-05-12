@@ -9,7 +9,9 @@ package org.eclipse.xtext.formatting.impl;
 
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IAfterElement;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IBeforeElement;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IBetweenElements;
@@ -57,6 +59,15 @@ public class MatcherState extends AbstractNFAState<MatcherState, MatcherTransiti
 		if (beforePatterns == null)
 			beforePatterns = Sets.newHashSet();
 		return beforePatterns;
+	}
+
+	public boolean hasTransitions() {
+		return isEndState() || !getOutgoing().isEmpty();
+	}
+
+	public boolean isParserRuleCall() {
+		return element instanceof RuleCall
+				&& ((RuleCall) element).getRule().getType().getClassifier() instanceof EClass;
 	}
 
 }

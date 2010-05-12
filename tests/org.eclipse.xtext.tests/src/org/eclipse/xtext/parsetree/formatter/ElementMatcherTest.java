@@ -36,10 +36,14 @@ import com.google.common.collect.Lists;
 public class ElementMatcherTest extends AbstractXtextTests {
 	private ElementMatcherTestLanguageGrammarAccess g;
 
-	private class Patterns {
+	private static class Patterns {
 		private List<IElementPattern> patterns = Lists.newArrayList();
 
 		public void after(final AbstractElement ele) {
+			after("!", ele);
+		}
+
+		public void after(final String name, final AbstractElement ele) {
 			patterns.add(new IAfterElement() {
 				public AbstractElement matchAfter() {
 					return ele;
@@ -47,12 +51,16 @@ public class ElementMatcherTest extends AbstractXtextTests {
 
 				@Override
 				public String toString() {
-					return "!";
+					return name;
 				}
 			});
 		}
 
 		public void before(final AbstractElement ele) {
+			before("!", ele);
+		}
+
+		public void before(final String name, final AbstractElement ele) {
 			patterns.add(new IBeforeElement() {
 				public AbstractElement matchBefore() {
 					return ele;
@@ -60,12 +68,16 @@ public class ElementMatcherTest extends AbstractXtextTests {
 
 				@Override
 				public String toString() {
-					return "!";
+					return name;
 				}
 			});
 		}
 
 		public void between(final AbstractElement first, final AbstractElement second) {
+			between("!", first, second);
+		}
+
+		public void between(final String name, final AbstractElement first, final AbstractElement second) {
 			patterns.add(new IBetweenElements() {
 				public Pair<AbstractElement, AbstractElement> matchBetween() {
 					return Tuples.create(first, second);
@@ -73,7 +85,7 @@ public class ElementMatcherTest extends AbstractXtextTests {
 
 				@Override
 				public String toString() {
-					return "!";
+					return name;
 				}
 			});
 		}
@@ -100,8 +112,8 @@ public class ElementMatcherTest extends AbstractXtextTests {
 			result.append(" ");
 			result.append(m2.toString());
 		}
-		//		String file = "src-gen/" + getClass().getName().replace('.', '/') + "-" + getName() + ".pdf";
-		//		new TransitionMatcherToDot().draw(matcher, file, "-T pdf");
+//		String file = "src/" + getClass().getName().replace('.', '/') + "-" + getName() + ".pdf";
+//		new ElementMatcherToDot().draw(matcher, file, "-T pdf");
 		return result.toString().trim();
 	}
 
@@ -193,6 +205,16 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		pattern.before(g.getRuleCallsAss2Access().getGroup());
 		pattern.after(g.getRuleCallsAss2Access().getGroup());
 		assertEquals("#2 sub foo ass1 bar ! ass2 zonk !", match("#2 sub foo ass1 bar ass2 zonk", pattern));
+
+		pattern = new Patterns();
+		pattern.before(g.getRuleCallsAccess().getCall1Assignment_3());
+		pattern.after(g.getRuleCallsAccess().getCall1Assignment_3());
+		assertEquals("#2 sub foo ! ass1 bar ! ass2 zonk", match("#2 sub foo ass1 bar ass2 zonk", pattern));
+
+		pattern = new Patterns();
+		pattern.before(g.getRuleCallsAccess().getCall2Assignment_4());
+		pattern.after(g.getRuleCallsAccess().getCall2Assignment_4());
+		assertEquals("#2 sub foo ass1 bar ! ass2 zonk !", match("#2 sub foo ass1 bar ass2 zonk", pattern));
 	}
 
 	public void testOptionalCalls() throws Exception {
@@ -269,5 +291,43 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		p.between(le.getNamesAssignment_1(), le.getAlternatives_3());
 		assertEquals("#5 x gr gf gr gb '1' '2' 1 2", match("#5 x gr gf gr gb '1' '2' 1 2", p));
 		assertEquals("#5 x ! '1' '2' 1 2", match("#5 x '1' '2' 1 2", p));
+	}
+
+	public void testExpression() throws Exception {
+		Patterns p = new Patterns();
+		p.before("<p", g.getAddAccess().getPlusSignKeyword_1_1());
+		p.after("p>", g.getAddAccess().getPlusSignKeyword_1_1());
+		p.before("<f", g.getPrimAccess().getLeftParenthesisKeyword_1_2());
+		p.after("f>", g.getPrimAccess().getRightParenthesisKeyword_1_5());
+		String expected1 = "#6 1 <p + p> 2 * 4 * ( 3 <p + p> 4 <p + p> foo <f ( 4 , 6 <p + p> 7 ) f> )";
+		assertEquals(expected1, match("#6 1 + 2 * 4 * ((3 + 4) + foo(4, 6 +7))", p));
+
+		p = new Patterns();
+		p.before("<", g.getPrimAccess().getValAssignment_0_1());
+		p.after(">", g.getPrimAccess().getValAssignment_0_1());
+		String expected2 = "#6 < 1 > + < 2 > * < 4 > * ( < 3 > + < 4 > + foo ( < 4 > , < 6 > + < 7 > ) )";
+		assertEquals(expected2, match("#6 1 + 2 * 4 * ((3 + 4) + foo(4, 6 +7))", p));
+
+		p = new Patterns();
+		p.before("<", g.getPrimAccess().getAddParserRuleCall_3_1());
+		p.after(">", g.getPrimAccess().getAddParserRuleCall_3_1());
+		String expected3 = "#6 ( < 1 + 2 > ) * 4 * ( < 3 + 4 * ( < 5 + 5 > ) + foo ( 4 , 6 * ( < 7 + 9 > ) ) > )";
+		assertEquals(expected3, match("#6 (1 + 2) * 4 * ((3 + 4 * (5 + 5)) + foo(4, 6 * (7 + 9)))", p));
+
+		p = new Patterns();
+		p.before("(", g.getPrimAccess().getTargetAssignment_2_2());
+		p.after(")", g.getPrimAccess().getTargetAssignment_2_2());
+		String expected4 = "#6 => ( => ( => ( => ( 5 ) ) ) )";
+		assertEquals(expected4, match("#6 => => => => 5", p));
+
+		p = new Patterns();
+		p.before("<", g.getAddAccess().getRightAssignment_1_2());
+		p.after(">", g.getAddAccess().getRightAssignment_1_2());
+		String expected5 = "#6 1 + < 2 * ( 3 + < 4 * ( 5 + < 6 * 7 > ) > ) >";
+		assertEquals(expected5, match("#6 1 + 2 * (3 + 4 * (5 + 6 * 7))", p));
+		String expected6 = "#6 4 * ( 3 + < 4 * 5 > + < 6 > )";
+		assertEquals(expected6, match("#6 4 * ((3 + 4 * 5) + 6)", p));
+		String expected = "#6 ( 1 + < 2 > ) * 4 * ( 3 + < 4 * ( 5 + < 5 > ) > + < foo ( 4 , 6 * ( 7 + < 9 > ) ) > )";
+		assertEquals(expected, match("#6 (1 + 2) * 4 * ((3 + 4 * (5 + 5)) + foo(4, 6 * (7 + 9)))", p));
 	}
 }

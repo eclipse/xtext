@@ -71,4 +71,9 @@ public class AbstractNFATransition<S extends INFAState<S, T>, T extends INFATran
 		return ruleCall;
 	}
 
+	@Override
+	public String toString() {
+		return source + " -> " + target;
+	}
+
 }

@@ -8,93 +8,25 @@
  *******************************************************************************/
 package org.eclipse.xtext;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.util.GraphvizDotBuilder;
-import org.eclipse.xtext.util.XtextSwitch;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class GrammarToDot extends GraphvizDotBuilder {
 
-	protected class AESwitch extends XtextSwitch<Node> {
-
-		private String card(AbstractElement ele) {
-			return ele.getCardinality() == null ? "" : ele.getCardinality();
-		}
-
-		@Override
-		public Node caseAbstractElement(AbstractElement object) {
-			return newNode(object, object.eClass().getName() + card(object));
-		}
-
-		@Override
-		public Node caseAction(Action object) {
-			String o = object.getOperator();
-			String t = object.getType().getClassifier().getName();
-			String f = object.getFeature();
-			o = (o == null) ? "" : o;
-			t = (t == null) ? "" : t;
-			f = (f == null) ? "" : "." + f;
-			return newNode(object, "{" + t + f + o + "}" + card(object));
-		}
-
-		@Override
-		public Node caseAlternatives(Alternatives object) {
-			return newNode(object, "\\|" + card(object));
-		}
-		
-		@Override
-		public Node caseUnorderedGroup(UnorderedGroup object) {
-			return newNode(object, "\\&" + card(object));
-		}
-
-		@Override
-		public Node caseAssignment(Assignment object) {
-			return newNode(object, object.getFeature() + object.getOperator()
-					+ " " + card(object));
-		}
-
-		@Override
-		public Node caseCrossReference(CrossReference object) {
-			return newNode(object, "["
-					+ object.getType().getClassifier().getName() + "]"
-					+ card(object));
-		}
-
-		@Override
-		public Node caseGroup(Group object) {
-			return newNode(object, "( )" + card(object));
-		}
-
-		@Override
-		public Node caseKeyword(Keyword object) {
-			return newNode(object, "\"" + object.getValue() + "\""
-					+ card(object));
-		}
-
-		@Override
-		public Node caseRuleCall(RuleCall object) {
-			return newNode(object, "=>" + object.getRule().getName()
-					+ card(object));
-		}
-
-		@Override
-		public Node defaultCase(EObject object) {
-			return newNode(object, object.eClass().getName());
-		}
-
-	}
-
-	protected AESwitch aeSwitch = new AESwitch();
+	protected GrammarElementTitleSwitch aeSwitch = new GrammarElementTitleSwitch();
 
 	protected Node drawAbstractElementTree(AbstractElement ele, Digraph d) {
-		Node n = aeSwitch.doSwitch(ele);
+		Node n = newNode(ele, aeSwitch.doSwitch(ele));
 		d.add(n);
 		for (EObject c : ele.eContents())
 			if (c instanceof AbstractElement) {
 				drawAbstractElementTree((AbstractElement) c, d);
-				d.add(new Edge(ele, c));
+				d.add(drawGrammarContainementEdge(ele, (AbstractElement) c));
 			}
 		return n;
 	}
@@ -103,6 +35,10 @@ public class GrammarToDot extends GraphvizDotBuilder {
 		for (AbstractRule r : g.getRules())
 			drawRule(r, d);
 		return d;
+	}
+
+	protected Props drawGrammarContainementEdge(AbstractElement container, AbstractElement child) {
+		return new Edge(container, child);
 	}
 
 	@Override
@@ -116,8 +52,9 @@ public class GrammarToDot extends GraphvizDotBuilder {
 		throw new RuntimeException("Unknown type: " + obj.getClass().getName());
 	}
 
-	protected Digraph drawRule(AbstractRule r, Digraph d) {
-		drawAbstractElementTree(r.getAlternatives(), d);
+	protected Digraph drawRule(AbstractRule rule, Digraph d) {
+		if (rule.getType().getClassifier() instanceof EClass)
+			drawAbstractElementTree(rule.getAlternatives(), d);
 		return d;
 	}
 

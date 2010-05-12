@@ -80,6 +80,12 @@ public class ElementmatchertestlanguageFactoryImpl extends EFactoryImpl implemen
       case ElementmatchertestlanguagePackage.RECURSION: return createRecursion();
       case ElementmatchertestlanguagePackage.RECURSION_SUB: return createRecursionSub();
       case ElementmatchertestlanguagePackage.LOOP: return createLoop();
+      case ElementmatchertestlanguagePackage.EXPRESSION: return createExpression();
+      case ElementmatchertestlanguagePackage.ADD: return createAdd();
+      case ElementmatchertestlanguagePackage.MULT: return createMult();
+      case ElementmatchertestlanguagePackage.VALUE: return createValue();
+      case ElementmatchertestlanguagePackage.FUNCTION: return createFunction();
+      case ElementmatchertestlanguagePackage.POINTER: return createPointer();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -226,6 +232,72 @@ public class ElementmatchertestlanguageFactoryImpl extends EFactoryImpl implemen
   {
     LoopImpl loop = new LoopImpl();
     return loop;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Expression createExpression()
+  {
+    ExpressionImpl expression = new ExpressionImpl();
+    return expression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Add createAdd()
+  {
+    AddImpl add = new AddImpl();
+    return add;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Mult createMult()
+  {
+    MultImpl mult = new MultImpl();
+    return mult;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Value createValue()
+  {
+    ValueImpl value = new ValueImpl();
+    return value;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Function createFunction()
+  {
+    FunctionImpl function = new FunctionImpl();
+    return function;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Pointer createPointer()
+  {
+    PointerImpl pointer = new PointerImpl();
+    return pointer;
   }
 
   /**

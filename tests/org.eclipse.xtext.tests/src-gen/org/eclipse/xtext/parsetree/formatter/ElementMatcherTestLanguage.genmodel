@@ -54,5 +54,24 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Loop/ints"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Loop/strings"/>
     </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Expression"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Add">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//Add/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//Add/right"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Mult">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//Mult/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//Mult/right"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Value">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Value/val"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Function">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Function/func"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//Function/param"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Pointer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//Pointer/target"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

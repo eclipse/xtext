@@ -8,10 +8,9 @@
 package org.eclipse.xtext.formatting.impl;
 
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractCachingNFABuilder;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractNFAProvider;
@@ -33,16 +32,14 @@ public class MatcherNFAProvider extends AbstractNFAProvider<MatcherState, Matche
 
 		@Override
 		public boolean filter(AbstractElement grammarElement) {
+			if (grammarElement instanceof CrossReference)
+				return false;
+			if (EcoreUtil2.getContainerOfType(grammarElement, CrossReference.class) != null)
+				return true;
 			if (grammarElement instanceof Keyword)
 				return false;
 			if (grammarElement instanceof RuleCall)
 				return false;
-			if (grammarElement instanceof RuleCall) {
-				AbstractRule rule = ((RuleCall) grammarElement).getRule();
-				if (rule instanceof ParserRule)
-					return !GrammarUtil.isDatatypeRule((ParserRule) rule);
-				return false;
-			}
 			return true;
 		}
 
