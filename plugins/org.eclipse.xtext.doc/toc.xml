@@ -74,7 +74,7 @@
 </topic>
 <topic href="help/configuration.html" label="Configuration">
 <topic href="help/configuration.html#generator" label="The Generator">
-<topic href="help/configuration.html#short_intro_to_mwe" label="A short introduction to MWE"></topic>
+<topic href="help/configuration.html#short_intro_to_mwe" label="A short introduction to MWE2"></topic>
 <topic href="help/configuration.html#GeneralArchitecture" label="General Architecture">
 <topic href="help/configuration.html#generator_fragment" label="Generator Fragments"></topic>
 <topic href="help/configuration.html#Configuration" label="Configuration"></topic>
@@ -110,11 +110,13 @@
 <topic href="help/scoping.html" label="Scoping">
 <topic href="help/scoping.html#global_scopes" label="Global Scopes and IResourceDescriptions">
 <topic href="help/scoping.html#resourcedescriptions" label="Resource and EObject Descriptions ( IResourceDescription, IEObjectDescription)"></topic>
-<topic href="help/scoping.html#import_uri" label="Global Scopes &ndash; Importing resources explicitly (ImportURI mechanism)"></topic>
+<topic href="help/scoping.html#import_uri" label="Global Scopes based on explicit imports (ImportURI mechanism)"></topic>
 <topic href="help/scoping.html#index_based" label="Global Scopes based on external configuration (e.g. classpath-based)">
-<topic href="help/scoping.html#containers" label="Of containers its manager"></topic>
+<topic href="help/scoping.html#containers" label="Of containers and its manager"></topic>
+<topic href="help/scoping.html#java_based_containers" label="Java based container manager"></topic>
 </topic>
 </topic>
+<topic href="help/scoping.html#local_scoping" label="Local Scoping"></topic>
 <topic href="help/scoping.html#Defaultlinkingsemantics" label="Default linking semantics">
 <topic href="help/scoping.html#defaultImports" label="Default Imports"></topic>
 </topic>
@@ -152,6 +154,24 @@
 <topic href="help/encoding.html#EncodinginNewModelProjects" label="Encoding in New Model Projects"></topic>
 <topic href="help/encoding.html#EncodingofXtextsourcecode" label="Encoding of Xtext source code"></topic>
 </topic>
+</topic>
+<topic href="help/MWE2.html" label="MWE2">
+<topic href="help/MWE2.html#MWE2Exampe" label="Examples">
+<topic href="help/MWE2.html#MWE2HelloWorld" label="The simplest Workflow"></topic>
+</topic>
+<topic href="help/MWE2SyntaxReference.html" label="Syntax Reference">
+<topic href="help/MWE2SyntaxReference.html#MWE2Literals" label="String Literals"></topic>
+<topic href="help/MWE2SyntaxReference.html#MWE2ClassReferences" label="Class References"></topic>
+<topic href="help/MWE2SyntaxReference.html#MWE2ModuleReferences" label="Module References"></topic>
+</topic>
+<topic href="help/MWE2Syntax.html" label="Language Features">
+<topic href="help/MWE2Syntax.html#MWE2Properties" label="Properties"></topic>
+<topic href="help/MWE2Syntax.html#MWE2Mandatory" label="Mandatory Properties"></topic>
+<topic href="help/MWE2Syntax.html#MWE2AutoInject" label="Auto Injection"></topic>
+<topic href="help/MWE2Syntax.html#MWE2Factories" label="Factory Support"></topic>
+</topic>
+<topic href="help/MWE2RuntimeAPI.html" label="Workflow API"></topic>
+<topic href="help/MWE2RuntimeSPI.html" label="Workflow SPI"></topic>
 </topic>
 <topic href="help/IDEconcepts.html" label="IDE concepts">
 <topic href="help/IDEconcepts.html#labelProvider" label="Label Provider">
@@ -221,6 +241,17 @@
 <topic href="help/NewFeatures.html#differences_validation" label="Fine-grained control for validation"></topic>
 </topic>
 <topic href="help/MigrationSupport.html" label="Migration Support"></topic>
+</topic>
+<topic href="help/migrating_from_0_7.html" label="Migrating from TMF Xtext 0.7.x">
+<topic href="help/migrating_from_0_7.html#Taketheshortcut" label="Take the shortcut?"></topic>
+<topic href="help/Gothehardway....html" label="Go the hard way...">
+<topic href="help/Gothehardway....html#Changesinthegrammar" label="Changes in the grammar"></topic>
+<topic href="help/Gothehardway....html#Changesintheworkflow" label="Changes in the workflow"></topic>
+<topic href="help/Gothehardway....html#Changesinthegeneratedcode" label="Changes in the generated code"></topic>
+<topic href="help/Gothehardway....html#ChangesintheMANIFEST.MFandplugin.xml" label="Changes in the MANIFEST.MF and plugin.xml"></topic>
+<topic href="help/Gothehardway....html#Changesinthesrcfolders" label="Changes in the src folders"></topic>
+</topic>
+<topic href="help/Nowgoforthenewfeatures.html" label="Now go for the new features"></topic>
 </topic>
 <topic href="help/antlr_ip_issue.html" label="The ANTLR IP issue (or which parser to use?)">
 <topic href="help/antlr_ip_issue.html#WhatifIdonotwanttousenonIPapprovedcode" label="What if I do not want to use non IP-approved code"></topic>

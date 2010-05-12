@@ -23,29 +23,29 @@
 <p>Xtext provides lots of generic implementations for your language&rsquo;s
 				infrastructure but also uses code generation to generate some of the 
 				components. Those generated components are for instance the parser, the 
-				serializer, the Ecore model and a couple of convenient base classes for 
-				content assist etc.</p>
+				serializer, the inferred Ecore model (if any) and a couple of convenient base classes for 
+				content assist, etc.</p>
 <p>The generator also contributes to shared project resources such as the 
 				plugin.xml, Manifest.MF and the 
 				<a class="link" href="dependencyInjection.html#guicemodules" title="Modules">Guice modules</a>.
 			</p>
-<p>Xtext&rsquo;s generator leverages the 
-				<a class="ulink" href="http://www.eclipse.org/modeling/emft/?project=mwe" target="_new">modeling workflow engine (MWE)</a> from EMFT.
+<p>Xtext&rsquo;s generator leverages 
+				<a class="ulink" href="http://www.eclipse.org/modeling/emft/?project=mwe" target="_new">MWE2 &ndash; the modeling workflow engine</a> from EMFT to configure the generator.
 			</p>
-<div class="section" title="A short introduction to MWE">
+<div class="section" title="A short introduction to MWE2">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="short_intro_to_mwe"></a>A short introduction to MWE</h3>
+<a name="short_intro_to_mwe"></a>A short introduction to MWE2</h3>
 </div>
 </div>
 </div>
-<p>The nice thing about MWE is that it just instantiates Java classes and the configuration is done through setter and adder methods.
-					Given the following Java class :</p>
+<p>MWE2 allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just instantiates Java classes and the configuration is done through public setter and adder methods as one is used to from Java Beans encapsulation principles. An in-depth documentation can be found in the chapter &bdquo;MWE2&rdquo;#MWE2.</p>
+<p>Given the following simple Java class (POJO):</p>
 <div class="literallayout">
 <p>
-<code class="code">package&nbsp;foo;<br>
+<code class="code">package&nbsp;com.mycompany;<br>
 &nbsp;&nbsp;<br>
 public&nbsp;class&nbsp;Person&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -66,105 +66,110 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>one can create a family tree this way:</p>
+<p>One can create a family tree with MWE2 easily by describing it in a declarative manner without writing a single line of Java code and without the need to compile classes:</p>
 <div class="literallayout">
 <p>
-<code class="code">&lt;x&nbsp;class="foo.Person"&gt;<br>
-&nbsp;&nbsp;&lt;name&nbsp;value="Grandpa"/&gt;<br>
-&nbsp;&nbsp;&lt;child&nbsp;class="foo.Person"&nbsp;name="Father"&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;child&nbsp;name="Son"/&gt;<br>
-&nbsp;&nbsp;&lt;/child&gt;<br>
-&lt;/x&gt;<br>
+<code class="code">module&nbsp;com.mycompany.CreatePersons<br>
+
+<br>
+Person&nbsp;{<br>
+	name&nbsp;=&nbsp;"Grandpa"<br>
+	child&nbsp;=&nbsp;com.mycompany.Person&nbsp;{<br>
+		name&nbsp;=&nbsp;"Father"<br>
+		child&nbsp;=&nbsp;{<br>
+			name&nbsp;=&nbsp;"Son"<br>
+		}<br>
+	}<br>
+}<br>
 
 <br>
 
 </code>
 </p>
 </div>
-<p>These couple of lines will, when interpreted by MWE, result in an 
+<p>These couple of lines will, when interpreted by MWE2, result in an 
 					object tree consisting of three instances of 
-					<code class="code">foo.Person</code>:
+					<code class="code">com.mycompany.Person</code>.
+					The interpreter will basically do the same as the following 
+					<code class="code">main</code> method: 
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">package&nbsp;com.mycompany;<br>
 
-					</p>
+<br>
+public&nbsp;class&nbsp;CreatePersons&nbsp;{<br>
+	public&nbsp;static&nbsp;void&nbsp;main(String[]&nbsp;args)&nbsp;{<br>
+		Person&nbsp;grandpa&nbsp;=&nbsp;new&nbsp;Person();<br>
+		grandpa.setName("Grandpa");<br>
+		Person&nbsp;father&nbsp;=&nbsp;new&nbsp;Person();<br>
+		father.setName("Father");<br>
+		grandpa.addChild(father);<br>
+		Person&nbsp;son&nbsp;=&nbsp;new&nbsp;Person();<br>
+		son.setName("Son");<br>
+		father.addChild(son);<br>
+	}<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>
+					
+</p>
 <div class="mediaobject">
 <img src="images/family_tree.png"></div>
-<p>
+<p> 
 				
 </p>
-<p>The root element can have an arbitrary name, with one exception: If the
-					name is 
-					<code class="code">workflow</code> and no class attribute is provided, it is assumed 
-					that an instance of 
-					<code class="code">org.eclipse.emf.mwe.internal.core.Workflow</code> shall 
-					be instantiated. This instance will be the root of a workflow model used 
-					in generator workflow configurations. However, as you can see in the example
-					above one can instantiate arbitrary Java object models. This is 
-					conceptually very close to the dependency injection and the XML language 
+<p>The root element is a class-name following the Java class-path visibility rules. As the module is a sibling to the class
+
+					<code class="code">com.mycompany.Person</code> it is not necessary to use use fully qualified name. There are other packages implicitly imported
+					into this workflow as well to make it convenient to instantiate actual workflows and components, but these ones are covered 
+					in depth in the appropriate 
+					<a class="link" href="MWE2.html" title="MWE2">chapther</a>. The constructed objects are furthermore configured according to the declaration 
+					in the module, e.g. a second instance of Person will be created and added to the list of children of &bdquo;Grandpa&rdquo; while the third person 
+					- the class is inferred from the assigned feature &ndash; becomes a child of &bdquo;Father&rdquo;. All three instances will have their respective 
+					<code class="code">name</code>
+					assigned via a reflective invocation 
+					<code class="code">setName</code>. If one wants to add another child to &bdquo;Father&rdquo;, she
+					can simply repeat the child assignment:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">child&nbsp;=&nbsp;com.mycompany.Person&nbsp;{<br>
+	name&nbsp;=&nbsp;"Father"<br>
+	child&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;	name&nbsp;=&nbsp;"Son"<br>
+	}<br>
+	child&nbsp;=&nbsp;{<br>
+		name&nbsp;=&nbsp;..<br>
+	}<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>As you can see in the example above MWE2 can be used to instantiate arbitrary Java object models without any depedency or
+					limitation to MWE2 specific implementations. This is 
+					conceptually very close to the dependency injection mechanism and the XML language 
 					in the 
 					<a class="ulink" href="http://www.springframework.org" target="_new">Spring Framework</a>. 
-				</p>
-<p>As explained above the element 
-					<span class="emphasis"><em>name</em></span> '
-					<code class="code">x</code>' is ignored in this case. The attribute 
-					<code class="code">class</code>
-					tells MWE which class to use in order to create the object node. The 
-					created object is populated according to the XML description: 
-					For each XML attribute MWE calls a corresponding setter or adder method 
-					passing in the value (there are configurable value 
-					converters, but usually Boolean and String is all you need). The same 
-					procedure is applied for each child element. In the case of XML elements 
-					a single attribute 
-					<code class="code">value</code> is used and interpreted as if it was an 
-					attribute in the parent element. That is:
-				</p>
-<div class="literallayout">
-<p>
-<code class="code">&lt;foo&gt;&lt;name&nbsp;value="bar"/&gt;&lt;/foo&gt;<br>
-
-</code>
-</p>
-</div>
-<p>means the same as</p>
-<div class="literallayout">
-<p>
-<code class="code">&lt;foo&nbsp;name="bar"/&gt;<br>
-
-</code>
-</p>
-</div>
-<p>Obviously the latter is far more readable and should be preferred. However, 
-					as soon as you want to add multiple values to the same &lsquo;adder&rsquo; method you 
-					will need to use the first syntax because you cannot define the same 
-					attribute twice in XML.</p>
-<p>If an element does not have an attribute 
-					<code class="code">value</code>, the engine looks for an 
-					attribute called 
-					<code class="code">class</code>. If it finds one, the class is instantiated by means 
-					of the default constructor (there is no support for factories as of now.). 
-					If not, the class is inferred by looking at the argument&rsquo;s type of the current 
-					setter method.
-				</p>
-<p>Due to this shortcut it is valid to write:</p>
-<div class="literallayout">
-<p>
-<code class="code">&lt;child&nbsp;name="Son"/&gt;<br>
-
-</code>
-</p>
-</div>
-<p>The 
-					<code class="code">addChild</code> method takes a 
-					<code class="code">foo.Person</code> as an argument. As this is a 
-					concrete class which has a default constructor it can be instantiated.
 				</p>
 <p>
 					
 <span class="bold"><strong>Tip</strong></span>
 
-					<span class="italic">Whenever you are in an *.mwe file and wonder what kind of configuration the underlying component may accept: Just use JDT&rsquo;s open type action (CTRL+Shift+T) open the source file of the class in question, use the quick outline view (CTRL+O, use CTRL+O twice to see inherited members as well) and type &lsquo;set&rsquo; or &lsquo;add&rsquo; and you will see the available modifiers. Note that we plan to replace the XML syntax with an Xtext-based implementation as soon as possible.</span>
+					<span class="italic">Whenever you are in an *.mwe2 file and wonder what kind of configuration the underlying component may accept: Just use the Content Assist in the MWE2 Editor or navigate directly to the declaration of the underlying Java implemenation by means of F3 (Go To Declaration).</span>
 				
 </p>
-<p>This is the basic idea of the MWE language. There are of course a couple of additional concepts and features in the language and we also have not yet talked about the runtime workflow model. Please consult the MWE reference documentation (available through Eclipse help) for additional information.</p>
+<p>This is the basic idea of the MWE2 language. There are of course a couple of additional concepts and features in the language and we also have not yet talked about the runtime workflow model. Please refer to the dedicated MWE2 
+					<a class="link" href="MWE2.html" title="MWE2">reference documentation</a> for additional information.
+				</p>
 </div>
 <div class="section" title="General Architecture">
 <div class="titlepage">
@@ -175,7 +180,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 </div>
 </div>
 </div>
-<p>Now that you know a bit about MWE, you are ready to learn about the concepts and architecture of Xtext&rsquo;s language generator. 
+<p>Now that you know a bit about MWE2, you are ready to learn about the concepts and architecture of Xtext&rsquo;s language generator. 
 					An instance of Xtext&rsquo;s generator is configured with general information about source folders and projects and consists of any number of language configurations. 
 					For each language configuration a URI pointing to its grammar file and the file extensions for the DSL must be provided. 
 					In addition, a language is configured with a list of 
@@ -202,7 +207,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/AbstractGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">AbstractGeneratorFragment</a>, which by default delegates to an Xpand template with the same qualified name as the class and delegates some of the calls to Xpand template definitions.
 					</p>
 <p>We suggest to have a look at the fragment we have written for label providers (
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java?root=Modeling_Project&view=co" target="_new">LabelProviderFragment</a>). It is pretty trivial and at the same time uses the most important call backs. In addition, the structure is not cluttered with too much extra noise so that the whole package (as of Xtext 0.7.0) can serve as a template to write your own fragment.
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java?root=Modeling_Project&view=co" target="_new">LabelProviderFragment</a>). It is pretty trivial and at the same time uses the most important call backs. In addition, the structure is not cluttered with too much extra noise so that the whole package can serve as a template to write your own fragment.
 					</p>
 </div>
 <div class="section" title="Configuration">
@@ -214,82 +219,93 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 </div>
 </div>
 </div>
-<p>As already explained we use MWE from EMFT in order to instantiate, configure and execute this structure of components. 
-						In the following we see an exemplary Xtext generator configuration written in MWE configuration code:  </p>
+<p>As already explained we use MWE2 from EMFT in order to instantiate, configure and execute this structure of components. 
+						In the following we see an exemplary Xtext generator configuration written in MWE2 configuration code:  </p>
 <div class="literallayout">
 <p>
-<code class="code">&lt;workflow&gt;<br>
-	&lt;property&nbsp;file="org/xtext/example/GenerateMyDsl.properties"/&gt;<br>
-	
+<code class="code">module&nbsp;org.xtext.example.MyDsl<br>
+
 <br>
-	&lt;property&nbsp;name="runtimeProject"&nbsp;value="../${projectName}"/&gt;<br>
-	
+import&nbsp;org.eclipse.emf.mwe.utils.*<br>
+import&nbsp;org.eclipse.xtext.generator.*<br>
+import&nbsp;org.eclipse.xtext.ui.generator.*<br>
+
 <br>
-	&lt;bean&nbsp;class="org.eclipse.emf.mwe.utils.StandaloneSetup"<br>
-		platformUri="${runtimeProject}/.."/&gt;<br>
-	
+var&nbsp;grammarURI&nbsp;=&nbsp;"classpath:/org/xtext/example/MyDsl.xtext"<br>
+var&nbsp;file.extensions&nbsp;=&nbsp;"mydsl"<br>
+var&nbsp;projectName&nbsp;=&nbsp;"org.xtext.example.mydsl"<br>
+var&nbsp;runtimeProject&nbsp;=&nbsp;"../${projectName}"<br>
+
 <br>
-	&lt;component&nbsp;class="org.eclipse.emf.mwe.utils.DirectoryCleaner"<br>
-		directory="${runtimeProject}/src-gen"/&gt;<br>
-	&lt;component&nbsp;class="org.eclipse.emf.mwe.utils.DirectoryCleaner"<br>
-		directory="${runtimeProject}.ui/src-gen"/&gt;<br>
-	
+Workflow&nbsp;{<br>
+	bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br>
+		platformUri&nbsp;=&nbsp;"${runtimeProject}/.."<br>
+	}<br>
+
 <br>
-	&lt;component&nbsp;class="org.eclipse.xtext.generator.Generator"&gt;<br>
-		&lt;pathRtProject&nbsp;value="${runtimeProject}"/&gt;<br>
-		&lt;pathUiProject&nbsp;value="${runtimeProject}.ui"/&gt;<br>
-		&lt;projectNameRt&nbsp;value="${projectName}"/&gt;<br>
-		&lt;projectNameUi&nbsp;value="${projectName}.ui"/&gt;<br>
-		
+	component&nbsp;=&nbsp;DirectoryCleaner&nbsp;{<br>
+		directory&nbsp;=&nbsp;"${runtimeProject}/src-gen"<br>
+	}<br>
+
 <br>
-		&lt;language&nbsp;uri="${grammarURI}"&nbsp;fileExtensions="${file.extensions}"&gt;<br>
-			&lt;!--&nbsp;Java&nbsp;API&nbsp;to&nbsp;access&nbsp;grammar&nbsp;elements&nbsp;<br>
-				(required&nbsp;by&nbsp;several&nbsp;other&nbsp;fragments)&nbsp;--&gt;<br>
-			&lt;fragment&nbsp;class=<br>
-				"org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/&gt;<br>
-			
+	component&nbsp;=&nbsp;DirectoryCleaner&nbsp;{<br>
+		directory&nbsp;=&nbsp;"${runtimeProject}.ui/src-gen"<br>
+	}<br>
+
 <br>
-			&lt;!--&nbsp;a&nbsp;lot&nbsp;more&nbsp;simple&nbsp;fragments&nbsp;--&gt;<br>
-			&lt;!--&nbsp;...&nbsp;&nbsp;--&gt;<br>
-		
+	component&nbsp;=&nbsp;Generator&nbsp;{<br>
+		pathRtProject&nbsp;=&nbsp;runtimeProject<br>
+		pathUiProject&nbsp;=&nbsp;"${runtimeProject}.ui"<br>
+		projectNameRt&nbsp;=&nbsp;projectName<br>
+		projectNameUi&nbsp;=&nbsp;"${projectName}.ui"<br>
+
 <br>
-			&lt;!--&nbsp;a&nbsp;sample&nbsp;fragment&nbsp;with&nbsp;a&nbsp;property&nbsp;--&gt;<br>
-			&lt;fragment&nbsp;class=<br>
-				"org.eclipse.xtext.generator.validation.JavaValidatorFragment"&gt;<br>
-				&lt;composedCheck&nbsp;value="org.eclipse.xtext.validation.ImportUriValidator"/&gt;<br>
-			&lt;/fragment&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;more&nbsp;simple&nbsp;fragments&nbsp;--&gt;<br>
-			&lt;!--&nbsp;...&nbsp;&nbsp;--&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-		&lt;/language&gt;<br>
-	&lt;/component&gt;<br>
-&lt;/workflow&gt;<br>
+		language&nbsp;=&nbsp;{<br>
+			uri&nbsp;=&nbsp;grammarURI<br>
+			fileExtensions&nbsp;=&nbsp;file.extensions<br>
+
+<br>
+			//&nbsp;Java&nbsp;API&nbsp;to&nbsp;access&nbsp;grammar&nbsp;elements&nbsp;(required&nbsp;by&nbsp;several&nbsp;other&nbsp;fragments)<br>
+			fragment&nbsp;=&nbsp;grammarAccess.GrammarAccessFragment&nbsp;{}<br>
+
+<br>
+			/*&nbsp;more&nbsp;fragments&nbsp;to&nbsp;configure&nbsp;the&nbsp;language&nbsp;*/<br>
+			...<br>
+		}<br>
+	}<br>
+}<br>
 
 <br>
 
 </code>
 </p>
 </div>
-<p>Here the root element is a workflow which accepts 
+<p>Here the root element is 
+						<code class="code">Workflow</code> which accepts 
 						<span class="italic">bean</span> s and 
 						<span class="italic">component</span> s. The 
-						<code class="code">&lt;property/&gt;</code> element is a first class concept of MWE&rsquo;s configuration language and essentially acts as a preprocessor, which replaces all occurrences of 
-						<code class="code">${propertyName}</code> with the given value. Property declarations can be defined in-line (
-						<code class="code">&lt;property name="foo" value="bar"/&gt;</code>) or by means of a property file import (
-						<code class="code">&lt;property file="foo.properties"/&gt;</code>) which is performed before the actual tree is created. In this example we first import a properties file and after that declare a property 
-						<code class="code">runtimeProject</code> which already uses a property imported from the previously imported file. 
+						<code class="code">var</code> declaration is a 
+						first class concept of MWE2&rsquo;s configuration language and defines the interface of the module. They allow to externalize
+						some common configuration parameters. This comes especially handy in String variables where one can easily use 
+
+						<code class="code">${variable}</code> to concatenate values. 
 					</p>
 <p>The method 
-						<code class="code">Workflow.setBean()</code> does nothing but provides a means to apply global side-effects, which unfortunately is required by some projects. In this example we do a so called 
-						<span class="italic">EMF stand alone setup</span>. This class initializes a bunch of things for a non-OSGi environment that are otherwise configured by means of extension points, e.g. EMF&rsquo;s 
+						<code class="code">Workflow.addBean(Object)</code> does nothing but provides a means to apply global side-effects, which 
+						unfortunately is required by some projects. In this example we do a so called 
+						<span class="italic">EMF stand-alone setup</span>. This class 
+						initializes a bunch of things for a non-OSGi environment that are otherwise configured by means of extension points, 
+						e.g. it allows to populate EMF&rsquo;s singletons like the 
 						<code class="code">EPackage.Registry</code>.
 					</p>
 <p>Following the 
-						<code class="code">&lt;bean/&gt;</code> element there are three 
-						<code class="code">&lt;component/&gt;</code> elements. The 
-						<code class="code">Workflow.addComponent()</code> method awaits instances of 
-						<code class="code">IWorkflowComponent</code>, which is the primary concept of MWE&rsquo;s workflow model. Xtext&rsquo;s generator is an instance of 
-						<code class="code">IWorkflowComponent</code> and can therefore be used within MWE workflows. 
+						<code class="code">bean</code> assignment there are three 
+						<code class="code">component</code> elements. The 
+						<code class="code">Workflow.addComponent()</code> method 
+						accepts instances of 
+						<code class="code">IWorkflowComponent</code>, which is the primary concept of MWE2&rsquo;s workflow model. Xtext&rsquo;s generator 
+						itself is an instance of 
+						<code class="code">IWorkflowComponent</code> and can therefore be used within MWE2 workflows. 
 					</p>
 </div>
 </div>
@@ -303,7 +319,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 </div>
 </div>
 <p>In the following table the most important standard generator fragments are listed. Please refer to the Javadocs for more detailed documentation.</p>
-<table id="N107EA">
+<table id="N107CF">
 <tr>
 						
 <th>Class</th>

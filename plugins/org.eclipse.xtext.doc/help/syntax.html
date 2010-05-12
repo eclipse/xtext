@@ -29,7 +29,7 @@
 </code>
 </p>
 </div>
-<p>declares the name of the grammar. Xtext leverages Java&rsquo;s class path mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond to the grammar name and have the file extension &lsquo;xtext&rsquo;. This means that the name has to be 
+<p>declares the name of the grammar. Xtext leverages Java&rsquo;s class path mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond to the grammar name and have the file extension &sbquo;xtext&rsquo;. This means that the name has to be 
 					<code class="code">SecretCompartments.xtext</code> and must be placed in a package 
 					<code class="code">my.pack</code> somewhere on your project&rsquo;s class path.
 				</p>
@@ -183,7 +183,7 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 <p>When referring to a type somewhere in the grammar you need to qualify the reference using that alias (example 
 						<code class="code">another::CoolType</code>). We&rsquo;ll see later where such type references occur.
 					</p>
-<p>It is also supported to put multiple EPackage imports into one alias. This is no problem as long as there are not any two EClassifiers with the same name. In such cases none of them can be referenced. It is even possible to &lsquo;import&rsquo; multiple and &lsquo;generate&rsquo; one Ecore model and all of them are declared for the same alias. If you do so, for a reference to an EClassifier first the imported EPackages are scanned before it is assumed that a type needs to by generated into the to-be-generated package.</p>
+<p>It is also supported to put multiple EPackage imports into one alias. This is no problem as long as there are not any two EClassifiers with the same name. In such cases none of them can be referenced. It is even possible to &sbquo;import&rsquo; multiple and &sbquo;generate&rsquo; one Ecore model and all of them are declared for the same alias. If you do so, for a reference to an EClassifier first the imported EPackages are scanned before it is assumed that a type needs to by generated into the to-be-generated package.</p>
 <p>Example:</p>
 <div class="literallayout">
 <p>
@@ -282,7 +282,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>It says that a Token ID starts with an optional &lsquo;^&rsquo; character (caret), followed by a letter (&lsquo;a&rsquo;..&lsquo;z&rsquo;|&lsquo;A&rsquo;..&lsquo;Z&rsquo;) or underscore (&lsquo;_&rsquo;) followed by any number of letters, underscores and numbers (&lsquo;0&rsquo;..&lsquo;9&rsquo;). </p>
+<p>It says that a Token ID starts with an optional &sbquo;^&rsquo; character (caret), followed by a letter (&sbquo;a&rsquo;..&sbquo;z&rsquo;|&sbquo;A&rsquo;..&sbquo;Z&rsquo;) or underscore (&sbquo;_&rsquo;) followed by any number of letters, underscores and numbers (&sbquo;0&rsquo;..&sbquo;9&rsquo;). </p>
 <p>The caret is used to escape an identifier for cases where there are conflicts with keywords. It is removed by the ID rule&rsquo;s 
 						<a class="link" href="valueconverter.html" title="Value Converter">ValueConverter</a>. 
 					</p>
@@ -316,7 +316,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 <p>A terminal rule returns a value, which is a string (type 
 							<code class="code">ecore::EString</code>) by default.
-							However, if you want to have a different type you can specify it. For instance, the rule &lsquo;INT&rsquo; is defined as:
+							However, if you want to have a different type you can specify it. For instance, the rule &sbquo;INT&rsquo; is defined as:
 						</p>
 <div class="literallayout">
 <p>
@@ -328,12 +328,12 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>This means that the terminal rule &lsquo;INT&rsquo; returns instances of 
+<p>This means that the terminal rule &sbquo;INT&rsquo; returns instances of 
 							<code class="code">ecore::EInt</code>. It is possible to define any kind of data type here, which just needs to be an instance of 
 							<code class="code">ecore::EDataType</code>.
 							In order to tell the parser how to convert the parsed string to a value of the declared data type, you need to provide your own implementation of 
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java?root=Modeling_Project&view=co" target="_new">IValueConverterService</a> (cf. 
-							<a class="link" href="valueconverter.html" title="Value Converter">value converters</a>). The value converter is also the point where you can remove things like quotes from string literals or the caret (&lsquo;^&rsquo;) from identifiers. Its implementation needs to be registered as a service (cf. 
+							<a class="link" href="valueconverter.html" title="Value Converter">value converters</a>). The value converter is also the point where you can remove things like quotes from string literals or the caret (&sbquo;^&rsquo;) from identifiers. Its implementation needs to be registered as a service (cf. 
 							<a class="link" href="dependencyInjection.html" title="Dependency Injection in Xtext with Google Guice">Service Framework</a>).
 						</p>
 </div>
@@ -347,7 +347,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 </div>
-<p>Token rules are described using &ldquo;Extended Backus-Naur Form&rdquo;-like (EBNF) expressions. The different expressions are described in the following.
+<p>Token rules are described using &bdquo;Extended Backus-Naur Form&rdquo;-like (EBNF) expressions. The different expressions are described in the following.
 						The one thing all of these expressions have in common is the cardinality operator.
 						There are four different possible cardinalities</p>
 <div class="orderedlist">
@@ -356,13 +356,13 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 <p>exactly one (the default, no operator)</p>
 </li>
 <li class="listitem">
-<p>one or none (operator &ldquo;?&rdquo;)</p>
+<p>one or none (operator &bdquo;?&rdquo;)</p>
 </li>
 <li class="listitem">
-<p>any (zero or more, operator &ldquo;*&rdquo;)</p>
+<p>any (zero or more, operator &bdquo;*&rdquo;)</p>
 </li>
 <li class="listitem">
-<p>one or more (operator &ldquo;+&rdquo;)</p>
+<p>one or more (operator &bdquo;+&rdquo;)</p>
 </li>
 </ol>
 </div>
@@ -376,7 +376,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 <p>Keywords are a kind of token rule literals. 
-							The &lsquo;ID&rsquo; rule in 
+							The &sbquo;ID&rsquo; rule in 
 							<code class="code">org.eclipse.xtext.common.Terminals</code> for instance starts with a keyword:
 						</p>
 <div class="literallayout">
@@ -386,7 +386,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>The question mark sets the cardinality to &ldquo;none or one&rdquo; (i.e. optional) like explained above.</p>
+<p>The question mark sets the cardinality to &bdquo;none or one&rdquo; (i.e. optional) like explained above.</p>
 <p>Note that a keyword can have any length and contain arbitrary characters.</p>
 </div>
 <div class="section" title="Character Ranges">
@@ -398,7 +398,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 </div>
-<p>A character range can be declared using the &lsquo;..&rsquo; operator.</p>
+<p>A character range can be declared using the &sbquo;..&rsquo; operator.</p>
 <p>Example:</p>
 <div class="literallayout">
 <p>
@@ -407,7 +407,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>In this case an INT is comprised of one or more (note the &lsquo;+&rsquo; operator) characters between (and including) &lsquo;0&rsquo; and &lsquo;9&rsquo;.</p>
+<p>In this case an INT is comprised of one or more (note the &sbquo;+&rsquo; operator) characters between (and including) &sbquo;0&rsquo; and &sbquo;9&rsquo;.</p>
 </div>
 <div class="section" title="Wildcard">
 <div class="titlepage">
@@ -418,7 +418,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 </div>
-<p>If you want to allow any character you can simple write the wildcard operator &lsquo;.&rsquo; (dot):
+<p>If you want to allow any character you can simple write the wildcard operator &sbquo;.&rsquo; (dot):
 							Example:</p>
 <div class="literallayout">
 <p>
@@ -427,7 +427,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>The rule above would allow expressions like &lsquo;foo&rsquo;, &lsquo;f0o&rsquo; or even &lsquo;f\no&rsquo;.</p>
+<p>The rule above would allow expressions like &sbquo;foo&rsquo;, &sbquo;f0o&rsquo; or even &sbquo;f\no&rsquo;.</p>
 </div>
 <div class="section" title="Until Token">
 <div class="titlepage">
@@ -447,7 +447,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>This is the rule for Java-style comments that begin with &lsquo;/*&rsquo; and end with &lsquo;*/&rsquo;.</p>
+<p>This is the rule for Java-style comments that begin with &sbquo;/*&rsquo; and end with &sbquo;*/&rsquo;.</p>
 </div>
 <div class="section" title="Negated Token">
 <div class="titlepage">
@@ -505,7 +505,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>That is a WS can be made of one or more whitespace characters (including &lsquo; &rsquo;,&lsquo;\t&rsquo;,&lsquo;\r&rsquo;,&lsquo;\n&rsquo;).</p>
+<p>That is a WS can be made of one or more whitespace characters (including &sbquo; &rsquo;,&sbquo;\t&rsquo;,&sbquo;\r&rsquo;,&sbquo;\n&rsquo;).</p>
 </div>
 <div class="section" title="Groups">
 <div class="titlepage">
@@ -604,7 +604,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>The syntactic declaration for states in the state machine example starts with a keyword &lsquo;state&rsquo; followed by an assignment:</p>
+<p>The syntactic declaration for states in the state machine example starts with a keyword &sbquo;state&rsquo; followed by an assignment:</p>
 <div class="literallayout">
 <p>
 <code class="code">name=ID<br>
@@ -613,7 +613,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </p>
 </div>
 <p>The left hand side refers to a feature '
-							<code class="code">name</code>' of the current object (which has the EClass &lsquo;State&rsquo; in this case). 
+							<code class="code">name</code>' of the current object (which has the EClass &sbquo;State&rsquo; in this case). 
 							The right hand side can be a rule call, a keyword, a cross reference (explained later) or even an alternative comprised by the former.
 							The type of the feature needs to be compatible with the type of the expression on the right. As ID returns an EString in this case, the feature '
 							<code class="code">name</code>' needs to be of type EString as well.
@@ -627,13 +627,13 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 <div class="orderedlist">
 <ol class="orderedlist" type="1">
 <li class="listitem">
-<p>The simple equal sign &ldquo;=&rdquo; is the straight forward assignment, and used for features which take only one element.</p>
+<p>The simple equal sign &bdquo;=&rdquo; is the straight forward assignment, and used for features which take only one element.</p>
 </li>
 <li class="listitem">
-<p>The &ldquo;+=&rdquo; sign (the add operator) expects a multi valued feature and adds the value on the right hand to that feature, which is a list feature.</p>
+<p>The &bdquo;+=&rdquo; sign (the add operator) expects a multi valued feature and adds the value on the right hand to that feature, which is a list feature.</p>
 </li>
 <li class="listitem">
-<p>The &ldquo;?=&rdquo; sign (boolean assignment operator) expects a feature of type EBoolean and sets it to true if the right hand side was consumed independently from the concrete value of the right hand side.</p>
+<p>The &bdquo;?=&rdquo; sign (boolean assignment operator) expects a feature of type EBoolean and sets it to true if the right hand side was consumed independently from the concrete value of the right hand side.</p>
 </li>
 </ol>
 </div>
@@ -689,7 +689,7 @@ Event&nbsp;returns&nbsp;MyEvent&nbsp;:&nbsp;....;<br>
 </code>
 </p>
 </div>
-<p>Looking at the syntax definition of cross references, there is an optional part starting with a vertical bar (pipe) followed by &lsquo;CrossReferenceableTerminal&rsquo;. This is the part describing the concrete text, from which the crosslink later should be established.
+<p>Looking at the syntax definition of cross references, there is an optional part starting with a vertical bar (pipe) followed by &sbquo;CrossReferenceableTerminal&rsquo;. This is the part describing the concrete text, from which the crosslink later should be established.
 							If the terminal is omitted, it is expected to be an ID.</p>
 <p>You may even use alternatives as the referencable terminal. This way, either an ID or a STRING may be used as the referencable terminal, as it is possible in many SQL dialects.</p>
 <div class="literallayout">
@@ -772,8 +772,8 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 </div>
 </div>
 </div>
-<p>We previously explained, that the EObject to be returned is created lazily when the first assignment occurs or when a simple action is evaluated. There is another way one can set the EObject to be returned, which we call an &ldquo;unassigned rule call&rdquo;.</p>
-<p>Unassigned rule calls (the name suggests it) are rule calls to other parser rules, which are not used within an assignment. If there is no feature the returned value shall be assigned to, the value is assigned to the &ldquo;to-be-returned&rdquo; result of the calling rule.</p>
+<p>We previously explained, that the EObject to be returned is created lazily when the first assignment occurs or when a simple action is evaluated. There is another way one can set the EObject to be returned, which we call an &bdquo;unassigned rule call&rdquo;.</p>
+<p>Unassigned rule calls (the name suggests it) are rule calls to other parser rules, which are not used within an assignment. If there is no feature the returned value shall be assigned to, the value is assigned to the &bdquo;to-be-returned&rdquo; result of the calling rule.</p>
 <p>With unassigned rule calls one can, for instance, create rules which just dispatch between several other rules:</p>
 <div class="literallayout">
 <p>
@@ -809,7 +809,7 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 </code>
 </p>
 </div>
-<p>This way the &lsquo;cardinality&rsquo; is optional (last question mark) and can be represented by a question mark, a plus, or an asterisk. It will be assigned to either an EObject of type 
+<p>This way the &sbquo;cardinality&rsquo; is optional (last question mark) and can be represented by a question mark, a plus, or an asterisk. It will be assigned to either an EObject of type 
 							<code class="code">TokenA</code>,  
 							<code class="code">TokenB</code>, or 
 							<code class="code">TokenC</code> which are all subtypes of 
@@ -828,7 +828,7 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 </div>
 <p>LL parsing has some significant advantages over LR algorithms. The most important ones for Xtext are, that the generated code is much simpler to understand and debug and that it is easier to recover from errors. Especially ANTLR has a very nice generic error recovery mechanism. This allows to construct an AST even if there are syntactic errors in the text. You wouldn&rsquo;t get any of the nice IDE features as soon as there is one little error, if we hadn&rsquo;t error recovery.</p>
 <p>However, LL also has some drawbacks. The most important one is that it does not allow left recursive grammars.
-							For instance, the following is not allowed in LL based grammars, because &ldquo;Expression '+' Expression&rdquo; is left recursive:</p>
+							For instance, the following is not allowed in LL based grammars, because &bdquo;Expression '+' Expression&rdquo; is left recursive:</p>
 <div class="literallayout">
 <p>
 <code class="code">Expression&nbsp;:<br>
@@ -842,7 +842,7 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 </code>
 </p>
 </div>
-<p>Instead one has to rewrite such things by &ldquo;left-factoring&rdquo; it:</p>
+<p>Instead one has to rewrite such things by &bdquo;left-factoring&rdquo; it:</p>
 <div class="literallayout">
 <p>
 <code class="code">Expression&nbsp;:<br>
@@ -878,7 +878,7 @@ TerminalExpression&nbsp;returns&nbsp;Expression:<br>
 </p>
 </div>
 <p>... would result in unwanted elements in the AST.
-							For instance the expression &ldquo; ( 42 ) &rdquo; would result in a tree like this:</p>
+							For instance the expression &bdquo; ( 42 ) &rdquo; would result in a tree like this:</p>
 <div class="literallayout">
 <p>
 <code class="code">Operation&nbsp;{<br>
@@ -917,7 +917,7 @@ TerminalExpression&nbsp;returns&nbsp;Expression:<br>
 </div>
 <p>In the example above 
 							<code class="code">{Operation.left=current}</code> is a so called tree rewrite action, which creates a new instance of the stated EClass (Operation in this case) and assigns the element currently to-be-returned (
-							<code class="code">current</code> variable) to a feature of the newly created object (in this case feature &lsquo;left&rsquo; of the Operation instance).
+							<code class="code">current</code> variable) to a feature of the newly created object (in this case feature &sbquo;left&rsquo; of the Operation instance).
 							In Java these semantics could be expressed as:
 						</p>
 <div class="literallayout">
@@ -965,7 +965,7 @@ Fullname:&nbsp;<br>
 </code>
 </p>
 </div>
-<p>The sample rule &ldquo;Person&rdquo; defines multiline comments (ML_COMMENT), single-line comments (SL_COMMENT), and whitespace (WS) to be allowed between the &lsquo;Fullname&rsquo; and the &lsquo;age&rsquo;. Because the rule &lsquo;Fullname&rsquo; does not introduce another set of hidden terminals, it allows the same symbols to appear between &lsquo;firstname&rsquo; and &lsquo;lastname&rsquo; as the calling rule &lsquo;Person&rsquo;. Thus, the following input is perfectly valid for the given grammar snippet:</p>
+<p>The sample rule &bdquo;Person&rdquo; defines multiline comments (ML_COMMENT), single-line comments (SL_COMMENT), and whitespace (WS) to be allowed between the &sbquo;Fullname&rsquo; and the &sbquo;age&rsquo;. Because the rule &sbquo;Fullname&rsquo; does not introduce another set of hidden terminals, it allows the same symbols to appear between &sbquo;firstname&rsquo; and &sbquo;lastname&rsquo; as the calling rule &sbquo;Person&rsquo;. Thus, the following input is perfectly valid for the given grammar snippet:</p>
 <div class="literallayout">
 <p>
 <code class="code">John&nbsp;/*&nbsp;comment&nbsp;*/&nbsp;Smith&nbsp;//&nbsp;line&nbsp;comment<br>
@@ -1002,7 +1002,7 @@ Fullname:&nbsp;<br>
 </li>
 </ol>
 </div>
-<p>If you, for instance, want to define a rule to consume Java-like qualified names (e.g. &ldquo;foo.bar.Baz&rdquo;)
+<p>If you, for instance, want to define a rule to consume Java-like qualified names (e.g. &bdquo;foo.bar.Baz&rdquo;)
 					you could write:</p>
 <div class="literallayout">
 <p>
@@ -1018,7 +1018,7 @@ Fullname:&nbsp;<br>
 <p>This looks similar to the terminal rule we&rsquo;ve defined above in order to explain rule calls.
 					However, the difference is that because it is a parser rule and therefore only valid in certain contexts, it won&rsquo;t conflict with the rule ID.
 					If you had defined it as a terminal rule, it would possibly hide the ID rule.</p>
-<p>In addition when this has been defined as a data type rule, it is allowed to use hidden tokens (e.g. &ldquo;/* comment **/&rdquo;) between the IDs and dots (e.g. 
+<p>In addition when this has been defined as a data type rule, it is allowed to use hidden tokens (e.g. &bdquo;/* comment **/&rdquo;) between the IDs and dots (e.g. 
 					<code class="code">foo/* comment */. bar . Baz"</code>)
 				</p>
 <p>Return types can be specified in the same way as in terminal rules:</p>
@@ -1052,7 +1052,7 @@ Fullname:&nbsp;<br>
 <p>Enum rules return enumeration literals from strings. They can be seen as a shortcut for data type rules with specific value converters.
 					The main advantage of enum rules is their simplicity, type safety and therefore nice validation. Furthermore it is possible to infer enums and their respective literals during the Ecore model transformation.</p>
 <p>If you want to define a ChangeKind 
-					<a class="ulink" href="http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.emf.doc/references/javadoc/org/eclipse/emf/ecore/change/impl/package-summary.html" target="_new">org.eclipse.emf.ecore.change/model/Change.ecore</a> with &lsquo;ADD&rsquo;, &lsquo;MOVE&rsquo; and &lsquo;REMOVE&rsquo; you could write:
+					<a class="ulink" href="http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.emf.doc/references/javadoc/org/eclipse/emf/ecore/change/impl/package-summary.html" target="_new">org.eclipse.emf.ecore.change/model/Change.ecore</a> with &sbquo;ADD&rsquo;, &sbquo;MOVE&rsquo; and &sbquo;REMOVE&rsquo; you could write:
 				</p>
 <div class="literallayout">
 <p>
@@ -1096,7 +1096,7 @@ Fullname:&nbsp;<br>
 </p>
 </div>
 <p>the resulting value of the element 
-					<code class="code">Foo</code> will hold the enum value with the internal representation of &lsquo;0&rsquo; (zero). When generating the EPackage from your grammar this will be the first literal you define. As a workaround you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define an enum literal with an empty textual representation.
+					<code class="code">Foo</code> will hold the enum value with the internal representation of &sbquo;0&rsquo; (zero). When generating the EPackage from your grammar this will be the first literal you define. As a workaround you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define an enum literal with an empty textual representation.
 				</p>
 <div class="literallayout">
 <p>

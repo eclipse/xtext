@@ -1,0 +1,235 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Go the hard way...</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="migrating_from_0_7.html" title="Migrating from TMF Xtext 0.7.x">
+<link rel="prev" href="migrating_from_0_7.html" title="Migrating from TMF Xtext 0.7.x">
+<link rel="next" href="Nowgoforthenewfeatures.html" title="Now go for the new features">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Go the hard way...</h1>
+<div class="section" title="Changes in the grammar">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Changesinthegrammar"></a>Changes in the grammar</h3>
+</div>
+</div>
+</div>
+<p>The grammar language is fully backward compatible. You should not have to apply any changes here. </p>
+</div>
+<div class="section" title="Changes in the workflow">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Changesintheworkflow"></a>Changes in the workflow</h3>
+</div>
+</div>
+</div>
+<p>Xtext 1.0 introduces MWE2 to describe the workflow to build the Xtext infrastructure. MWE2 is a domain-specific language developed with Xtext that completely replaces the original XML based MWE and offers far better tooling. MWE workflows will still work but are considered legacy. For a more detailed description see the 
+					<a class="link" href="MWE2.html" title="MWE2">section on MWE2</a>.
+				</p>
+<p>The following generator fragments have changed:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>The packrat parser has been abandoned. Please use the AntLR parser now. With that change, the generator fragments 
+							<code class="code">AntlrDelegatingFragment</code>,  
+							<code class="code">DelegatingGeneratorFragment</code>, and 
+							<code class="code">PackratParserFragment</code> have vanished and should be replaced by 
+							<code class="code">de.itemis.xtext.antlr.XtextAntlrGeneratorFragment</code>.
+						</p>
+</li>
+<li class="listitem">
+<p>The 
+							<code class="code">JavaScopingFragment</code> should be replaced by 
+							<code class="code">ImportURIScopingFragment</code>. 
+						</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" title="Changes in the generated code">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Changesinthegeneratedcode"></a>Changes in the generated code </h3>
+</div>
+</div>
+</div>
+<p>After adapting your workflow, you must rerun the code generator. Note that it will delete all existing code in 
+					<code class="code">src-gen</code> folders, so make sure you haven&rsquo;t got any manual changes there. 
+				</p>
+<p>We have appended 
+					<code class="code">.ui</code> to the name of the base package in the generated UI plug-in to comply with Eclipse naming conventions. The initial package&rsquo;s content in the 
+					<code class="code">src</code> folder will therefore coexist with the newer version. Even though that was not the primary purpose, this can help you copying your manual customizations one by one. Don&rsquo;t forget to delete the old packages when you&rsquo;re finished. This package renaming has consequences in the UI plug-ins 
+					<code class="code">MANIFEST.MF</code> and 
+					<code class="code">plugin.xml</code>, too. 
+				</p>
+</div>
+<div class="section" title="Changes in the MANIFEST.MF and plugin.xml">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="ChangesintheMANIFEST.MFandplugin.xml"></a>Changes in the MANIFEST.MF and plugin.xml</h3>
+</div>
+</div>
+</div>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>In the generated UI plug-in&rsquo;s 
+							<code class="code">MANIFEST.MF</code>, remove the package exports of no longer existing packages and make sure the bundle activator points to the newly generated one (with 
+							<code class="code">.ui.</code> in its package name).  
+						</p>
+</li>
+<li class="listitem">
+<p>The plug-ins 
+							<code class="code">org.eclipse.xtext.ui.core</code> and 
+							<code class="code">org.eclipse.xtext.ui.common</code> have been merged into a new single plug-in 
+							<code class="code">org.eclipse.xtext.ui</code>. The same happened to the respective Java packages. Change the dependencies in all manifests. 
+						</p>
+</li>
+<li class="listitem">
+<p>The plug-in 
+							<code class="code">org.eclipse.xtext.log4j</code> no longer exists. We use a package import of 
+							<code class="code">org.apache.log4j</code> instead. Also remove the buddy registration. 
+						</p>
+</li>
+<li class="listitem">
+<p>To run MWE2 workflows, you must change the plug-in dependencies from 
+							<code class="code">org.eclipse.emf.mwe.core</code> to 
+							<code class="code">org.eclipse.emf.mwe2.launch</code>. Optional resolution is fine.
+						</p>
+</li>
+<li class="listitem">
+<p>Due package renamings, you have to fix all references to classes therein in the 
+							<code class="code">plugin.xml</code>. A diff with  
+							<code class="code">plugin.xml_gen</code> will be a great help. If you haven&rsquo;t added a lot manually, consider merging these into the generated version instead of going the other way around. Note that warnings in 
+							<code class="code">plugin.xml</code> can be considered real errors most of the time. Make sure
+						</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="circle">
+<li class="listitem">
+<p>the 
+									<code class="code">XExecutableExtensionFactory</code> has the 
+									<code class="code">.ui.</code> package prefix
+								</p>
+</li>
+<li class="listitem">
+<p>classes from 
+									<code class="code">org.eclipse.xtext.ui.common</code> and 
+									<code class="code">org.eclipse.xtext.ui.core</code> are now usually somewhere in 
+									<code class="code">org.eclipse.xtext.ui</code>. The are also referenced by the 
+									<code class="code">XExecutableExtensionFactory</code> and thus not covered by the editor&rsquo;s validation. 
+								</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="listitem">
+<p>A number of new features are being registered in the 
+							<code class="code">plugin.xml</code>, e.g. 
+							<span class="emphasis"><em>Find references</em></span>, 
+							<span class="emphasis"><em>Quick Outline</em></span>, and 
+							<span class="emphasis"><em>Quickfixes</em></span>. You can enable them by manually copying the respective entries from 
+							<code class="code">plugin.xml_gen</code> to  
+							<code class="code">plugin.xml</code>.
+						</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" title="Changes in the src folders">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Changesinthesrcfolders"></a>Changes in the src folders </h3>
+</div>
+</div>
+</div>
+<p>The 
+					<code class="code">src</code> folders are generated once, so existing code will not be overwritten. 
+				</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>After re-generation, there will now be a 
+							<code class="code">XStandaloneSetup</code> inheriting form the generated 
+							<code class="code">AbstractXStandaloneSetup</code> to allow customization. Make sure to call the super constructor.
+						</p>
+</li>
+</ul>
+</div>
+<p>You will face a couple of compilation problems due to changes in the API. Here&rsquo;s a list of the most prominent changes:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>The method 
+							<code class="code">IScopeProvider.getScope(EObject,EClass)</code> has been deleted. Use  
+							<code class="code">IScopeProvider.getScope(EObject,EReference)</code> instead. 
+						</p>
+</li>
+<li class="listitem">
+<p>Renamed 
+							<code class="code">DefaultScopeProvider</code> to 
+							<code class="code">SimpleNameScopeProvider</code>. There have been further significant changes in the scoping API. Consult the 
+							<a class="link" href="scoping.html" title="Scoping">section on scoping</a> for details.
+						</p>
+</li>
+<li class="listitem">
+<p>The return type of 
+							<code class="code">AbstractInjectableValidator.getEPackages()</code> has changed form 
+							<code class="code">List&lt;? extends EPackage&gt;</code> to 
+							<code class="code">List&lt;EPackage&gt;</code>.
+						</p>
+</li>
+<li class="listitem">
+<p>The parser interfaces now use 
+							<code class="code">java.io.Reader</code> instead of 
+							<code class="code">java.io.InputStream</code> to explicitly address encoding.
+						</p>
+</li>
+<li class="listitem">
+<p>The handling of 
+							<code class="code">ILabelProvider</code> in various contexts has been refactored. The former base class 
+							<code class="code">DefaultLabelProvider</code> no longer exists. See the 
+							<a class="link" href="IDEconcepts.html#labelProvider" title="Label Provider">section on label providers</a> for details. 
+						</p>
+</li>
+<li class="listitem">
+<p>We have introduced a couple of new packages to better separate concerns. Most classes should be easy to relocate. </p>
+</li>
+<li class="listitem">
+<p>The runtime and UI modules have separate base classes 
+							<code class="code">DefaultRuntimeModule</code> and 
+							<code class="code">DefaultUiModule</code> now. We use Guice&rsquo;s module overrides to combine them and the new 
+							<code class="code">SharedModule</code>.  
+						</p>
+</li>
+<li class="listitem">
+<p>The interfaces 
+							<code class="code">ILexicalHighlightigConfiguration</code> and 
+							<code class="code">ISemanticHighlightingConfiguration</code> have been merged into 
+							<code class="code">IHighlightingConfiguration</code>. 
+						</p>
+</li>
+<li class="listitem">
+<p>Some more interfaces have changed, e.g. 
+							<code class="code">IFragmentProvider</code>, 
+							<code class="code">ITransientValueService</code>... Their JavaDocs will point you into the right direction. 
+						</p>
+</li>
+</ul>
+</div>
+</div>
+</body>
+</html>
