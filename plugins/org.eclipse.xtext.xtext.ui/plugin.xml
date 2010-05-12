@@ -215,6 +215,10 @@
       <generatorConfiguration name="Standard">
          <MweSnippet>
 <![CDATA[
+	bean = StandaloneSetup {
+		platformUri = "${runtimeProject}/.."
+	}
+
 	component = DirectoryCleaner {
 		directory = "${runtimeProject}/src-gen"
 	}
