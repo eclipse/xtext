@@ -1,0 +1,64 @@
+
+h1(#migrating_from_0_7). Migrating from TMF Xtext 0.7.x
+
+h2. Shortcut
+
+If you haven't made too many customizations to the generated defaults and if you're not referencing many classes of your Xtext language from the outside, you might consider starting with a new Xtext project, copying your grammar and then manually restoring your changes step by step. If that does not work for you, go on reading!
+
+h2. Changes in the grammar
+
+The grammar language is fully backward compatible. You should not have to apply any changes here. 
+
+h2. Changes in the workflow
+
+Xtext 1.0 introduces MWE2 to describe the workflow to build the Xtext infrastructure. MWE2 is a domain-specific language developed with Xtext that completely replaces the original XML based MWE. MWE workflows will still work but are considered legacy. For a more detailed description see the "section on MWE2":#MWE2.
+
+The packrat parser has been abandoned. Please use the AntLR version now. With that change, the generator fragments @AntlrDelegatingFragment@,  @DelegatingGeneratorFragment@, and @PackratParserFragment@ have vanished and should be replaced by @de.itemis.xtext.antlr.XtextAntlrGeneratorFragment@.
+
+The @org.eclipse.xtext.generator.scoping.JavaScopingFragment@ should be replaced by @ImportURIScopingFragment@. 
+
+h2. Changes in the generated code 
+
+After adapting your workflow, you must rerun the code generator. Note that it will delete all existing code in @src-gen@ folders, so make sure you haven't got any manual changes there. 
+
+We have appended @.ui@ to the base package of the generated UI plug-in to comply with Eclipse naming conventions. The initial package's content in the @src@ folder will therefore not be deleted automatically. Even though that was not the primary purpose, this can help you copying your manual customizations one by one. Don't forget to delete the old packages when you're finished. After that, you will have to fix the UI plug-ins @MANIFEST.MF@ and @plugin.xml@. 
+
+h2. Changes in the MANIFEST.MF and plugin.xml
+
+* In the generated UI plug-in, remove the package exports of no longer existing packages and make sure the bundle activator points to the newly generated one.  
+* The plug-ins @org.eclipse.xtext.ui.core@ and @org.eclipse.xtext.ui.common@ have been merged into a new single plug-in @org.eclipse.xtext.ui@. The same happened to the respective Java packages. 
+* The plug-in @org.eclipse.xtext.log4j@ no longer exists. We use a package import of @org.apache.log4j@ instead. Also remove the buddy registration. 
+* To run MWE2 workflows, you must change the plug-in dependencies from @org.eclipse.emf.mwe.core@ to @org.eclipse.emf.mwe2.launch@. Optional resolution is fine.
+* Due package renamings, you have to fix all references to classes therein in the @plugin.xml@. A diff with  @plugin.xml_gen@ will be a great help. If you haven't added a lot manually, consider merging these into the generated version.Note that warnings in @plugin.xml@ can be considered real errors most of the time. Make sure
+** the @XExecutableExtensionFactory@ has the @.ui.@ package prefix
+** classes from @org.eclipse.xtext.ui.common@ and @org.eclipse.xtext.ui.core@ are now usually somewhere in @org.eclipse.xtext.ui@. The are also referenced by the @XExecutableExtensionFactory@ and thus not covered by the editor's validation. 
+* A number of new features are being registered in the @plugin.xml@, e.g. _Find references_, _Quick Outline_, and _Quickfixes_. You can enable them by manually copying the respective entries from @plugin.xml_gen@ to  @plugin.xml@.
+
+h2. Changes in the src folders 
+
+The @src@ folders are generated once, so existing code will not be overwritten. 
+
+After re-generation, there will now be a @XStandaloneSetup@ inheriting form the generated @AbstractXStandaloneSetup@ to allow customization. 
+
+You will face a couple of compilation problems due to changes in the API. Here's a list of the most prominent changes:
+* The method @IScopeProvider.getScope(EObject,EClass)@ has been deleted. Use  @IScopeProvider.getScope(EObject,EReference)@ instead. 
+* Renamed @DefaultScopeProvider@ to @SimpleNameScopeProvider@. There have been further significant changes in the scoping API. Consult the "section on scoping":#scoping for details.
+* The return type of @AbstractInjectableValidator.getEPackages()@ has changed form @List<? extends EPackage>@ to @List<EPackage>@.
+* The parser interfaces now use @java.io.Reader@ instead of @java.io.InputStream@ to explicitly address encoding.
+* The handling of @ILabelProvider@ in various contexts has been refactored. The former base class @DefaultLabelProvider@ no longer exists. See the "section on label providers":#labelProvider for details. 
+* We have introduced a couple of new packages to better separate concerns. Most classes should be easy to relocate. 
+* The runtime and UI modules have separate base classes @DefaultRuntimeModule@ and @DefaultUiModule@ now. We use Guice's module overrides to combine them and the new @SharedModule@.  
+* The interfaces @ILexicalHighlightigConfiguration@ and @ISemanticHighlightingConfiguration@ have been merged into @IHighlightingConfiguration@. 
+
+h2. New features
+
+After migrating, some of the new features in Xtext 1.0 will be automatically available. Others require further configuration.
+After having migrated, you might want to use some of the new features. We recommend reading the sections about
+* qualified names and namespace imports
+* the builder infrastructure
+* quick fixes
+* unordered groups
+* quick outline
+* MWE2
+* referencing Java elements
+For an overview over the new features consult our "New and Noteworthy":http://www.eclipse.org/Xtext/documentation/helios/new_and_noteworthy.php online. 

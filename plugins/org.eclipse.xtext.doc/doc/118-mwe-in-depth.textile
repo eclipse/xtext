@@ -57,7 +57,7 @@ p. The class @Workflow@ is actually @org.eclipse.emf.mwe2.runtime.workflow.Workf
 
 bc.. Hello World!
 
-h2(#MWE2Syntax). Syntax Reference
+h2(#MWE2SyntaxReference). Syntax Reference
 
 h3(#MWE2Literals). String Literals
 
