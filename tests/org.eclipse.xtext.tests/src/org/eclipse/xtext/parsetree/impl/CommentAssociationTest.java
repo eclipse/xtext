@@ -17,6 +17,7 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.parsetree.impl.commentAssociation.CommentAssociationFactory;
 import org.eclipse.xtext.parsetree.impl.commentAssociation.Element;
 import org.eclipse.xtext.parsetree.impl.commentAssociation.Model;
 import org.eclipse.xtext.parsetree.reconstr.ICommentAssociater;
@@ -54,7 +55,16 @@ public class CommentAssociationTest extends AbstractXtextTests {
 		checkComments(multimap, x, "// comment post x\n");
 		checkComments(multimap, y, "// comment pre y\n", "/* comment inside y */", "// comment post y\n");
 		checkComments(multimap, z, "// comment pre z\n");
+	}
+	
+	public void testCommentAssociationAtEndOfFile() throws Exception {
+		String textModel = "element x // comment post x";
+		Model model = (Model) getModel(textModel);
+		Multimap<EObject, String> multimap = createModel2CommentMap(model);
+		EList<Element> elements = model.getElements();
+		Element x = elements.get(0);
 
+		checkComments(multimap, x, "// comment post x");
 	}
 
 	protected Multimap<EObject, String> createModel2CommentMap(Model model) {
@@ -122,4 +132,26 @@ public class CommentAssociationTest extends AbstractXtextTests {
 			assertTrue("missing comment " + expectedComment, comments.contains(expectedComment));
 		}
 	}
+	
+	public void testCommentsAtEndOfFile() throws Exception {
+		// the text-model without a trailing LB does not work
+		// since the serializer does not know something about the terminal rules
+//		String textModel = "element x // comment post x";
+		String textModel = "element x // comment post x\n";
+		Model model = (Model) getModel(textModel);
+		EList<Element> elements = model.getElements();
+		Element x = elements.get(0);
+		Element y = CommentAssociationFactory.eINSTANCE.createElement();
+		y.setName("y");
+		y.setChild(x);
+		Element z = CommentAssociationFactory.eINSTANCE.createElement();
+		z.setName("z");
+		model.getElements().add(y);
+		model.getElements().add(z);
+		String serialized = serialize(model);
+		// One would usually not expect a WS before parent but the current
+		// implementation adds WS between each token by default
+		assertEquals("element x // comment post x\n parent y element z", serialized);
+	}
 }
+
