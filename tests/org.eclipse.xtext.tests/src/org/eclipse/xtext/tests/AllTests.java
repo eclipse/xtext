@@ -52,6 +52,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.linking.lazy.BasicLazyLinkingTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.lazy.Bug281990Test.class);
       suite.addTestSuite(org.eclipse.xtext.linking.lazy.Bug289059Test.class);
+      suite.addTestSuite(org.eclipse.xtext.linking.lazy.Bug311337Test.class);
       suite.addTestSuite(org.eclipse.xtext.linking.lazy.LazyLinkerTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.lazy.LazyLinkingResourceTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.lazy.LazyURIEncoderTest.class);
@@ -124,6 +125,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parsetree.NodeUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.ParseTreeUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.SerializeTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parsetree.formatter.ElementMatcherTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.formatter.FormatterTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.formatter.XtextFormatterTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.impl.Bug305397Test.class);
@@ -136,7 +138,9 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.Bug299395Test.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.Bug302128Test.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.HiddenAndTokenNodeIteratorTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.NodeIteratorTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.PartialSerializationTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.SerializationBug269362Test.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.SerializationErrorTest.class);
@@ -204,8 +208,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.valueconverter.DeprecatedIntConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.DeprecatedStringConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.IDValueConverterTest.class);
-      suite.addTestSuite(org.eclipse.xtext.valueconverter.IgnoreCaseIDValueConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.INTValueConverterTest.class);
+      suite.addTestSuite(org.eclipse.xtext.valueconverter.IgnoreCaseIDValueConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.STRINGConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.Bug285605Test.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.Bug290919Test.class);
