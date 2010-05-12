@@ -36,7 +36,7 @@ import com.google.inject.Inject;
 public class DefaultTextEditComposer extends EContentAdapter implements ITextEditComposer {
 
 	@Inject
-	private Serializer serializerUtil;
+	private Serializer serializer;
 
 	private Resource resource;
 	private int resourceSize;
@@ -128,8 +128,8 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 		TextEdit result = null;
 
 		if (resourceChanged) {
-			String text = resource.getContents().isEmpty() ? "" : serializerUtil.serialize(
-					resource.getContents().get(0)).trim();
+			String text = resource.getContents().isEmpty() ? "" : serializer.serialize(
+					resource.getContents().get(0));
 			result = new ReplaceEdit(0, resourceSize, text);
 		} else {
 			final Collection<EObject> modifiedObjects = getModifiedObjects();
@@ -159,7 +159,7 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 		});
 		List<TextEdit> edits = Lists.newArrayListWithExpectedSize(Iterables.size(containedModifiedObjects));
 		for (EObject modifiedObject : containedModifiedObjects) {
-			ReplaceRegion replaceRegion = serializerUtil.serializeReplacement(modifiedObject, SaveOptions.defaultOptions());
+			ReplaceRegion replaceRegion = serializer.serializeReplacement(modifiedObject, SaveOptions.defaultOptions());
 			TextEdit edit = new ReplaceEdit(replaceRegion.getOffset(), replaceRegion.getLength(), replaceRegion.getText());
 			edits.add(edit);
 		}
@@ -170,6 +170,6 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 	 * If used in a non-Guice environment, we need to be able to set this.
 	 */
 	public void setSerializerUtil(Serializer serializerUtil) {
-		this.serializerUtil = serializerUtil;
+		this.serializer = serializerUtil;
 	}
 }
