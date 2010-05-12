@@ -105,7 +105,7 @@ public class CommentAssociationTest extends AbstractXtextTests {
 		String yBlock = "// comment pre y\n" + "element /* comment inside y */ y // comment post y\n";
 		String zBlock = "// comment pre z\n" + "element z";
 		String textModel = xBlock + yBlock + zBlock;
-		System.out.println(textModel);
+//		System.out.println(textModel);
 
 		Model model = (Model) getModel(textModel);
 		EList<Element> elements = model.getElements();
