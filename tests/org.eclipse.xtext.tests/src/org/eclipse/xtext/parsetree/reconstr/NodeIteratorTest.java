@@ -37,7 +37,7 @@ public class NodeIteratorTest extends TestCase {
 		nodes[8] = ParsetreeFactory.eINSTANCE.createLeafNode();
 		nodes[9] = ParsetreeFactory.eINSTANCE.createLeafNode();
 		nodes[10] = ParsetreeFactory.eINSTANCE.createCompositeNode();
-		
+
 		((CompositeNode) nodes[0]).getChildren().add(nodes[1]);
 		((CompositeNode) nodes[0]).getChildren().add(nodes[2]);
 		((CompositeNode) nodes[2]).getChildren().add(nodes[3]);
@@ -51,15 +51,34 @@ public class NodeIteratorTest extends TestCase {
 	}
 
 	public void testForward() throws Exception {
-		for (int i=0; i<NUM_NODES; ++i) {
+		for (int i = 0; i < NUM_NODES; ++i) {
 			checkAscending(i);
 		}
 	}
 
 	public void testBackward() throws Exception {
-		for (int i=0; i<NUM_NODES; ++i) {
+		for (int i = 0; i < NUM_NODES; ++i) {
 			checkDescending(i);
 		}
+	}
+
+	public void testPruneComposite() throws Exception {
+		NodeIterator nodeIterator = new NodeIterator(nodes[3]);
+		nodeIterator.prune();
+		assertEquals(nodes[6], nodeIterator.next());
+		assertEquals(nodes[6], nodeIterator.previous());
+		assertEquals(nodes[3], nodeIterator.previous());
+		assertEquals(nodes[2], nodeIterator.previous());
+	}
+	
+	public void testPruneLeaf() throws Exception {
+		// pruning a leaf should not have any effect
+		NodeIterator nodeIterator = new NodeIterator(nodes[8]);
+		nodeIterator.prune();
+		assertEquals(nodes[9], nodeIterator.next());
+		assertEquals(nodes[9], nodeIterator.previous());
+		assertEquals(nodes[8], nodeIterator.previous());
+		assertEquals(nodes[7], nodeIterator.previous());
 	}
 
 	protected void checkAscending(int index) {
@@ -69,7 +88,7 @@ public class NodeIteratorTest extends TestCase {
 			assertEquals("Ascending " + i, nodes[++i], nodeIterator.next());
 		}
 	}
-	
+
 	protected void checkDescending(int index) {
 		int i = index;
 		NodeIterator nodeIterator = new NodeIterator(nodes[i]);
