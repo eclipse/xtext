@@ -7,6 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting.impl;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.formatting.IElementMatcherProvider;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementMatcher;
@@ -35,9 +41,7 @@ public abstract class AbstractDeclarativeFormatter extends BaseFormatter {
 
 	@Override
 	public ITokenStream createFormatterStream(String indent, ITokenStream out, boolean preserveWhitespaces) {
-		IElementMatcher<ElementLocator> matcher = matcherProvider.createMatcher(getConfig()
-				.getLocatorsForSemanticTokens());
-		return new FormattingConfigBasedStream(out, indent, getConfig(), matcher, hiddenTokenHelper,
+		return new FormattingConfigBasedStream(out, indent, getConfig(), createMatcher(), hiddenTokenHelper,
 				preserveWhitespaces);
 	}
 
@@ -46,6 +50,10 @@ public abstract class AbstractDeclarativeFormatter extends BaseFormatter {
 		FormattingConfig cfg = new FormattingConfig(hiddenTokenHelper);
 		cfg.setWhitespaceRule(getWSRule());
 		return cfg;
+	}
+
+	protected IElementMatcher<ElementLocator> createMatcher() {
+		return matcherProvider.createMatcher(getConfig().getLocatorsForSemanticTokens());
 	}
 
 	protected synchronized FormattingConfig getConfig() {
@@ -58,6 +66,23 @@ public abstract class AbstractDeclarativeFormatter extends BaseFormatter {
 
 	protected IGrammarAccess getGrammarAccess() {
 		return grammarAccess;
+	}
+
+	protected void saveDebugGraphvizDiagram(String filename) {
+		try {
+			File file = new File(filename).getCanonicalFile();
+			System.out.println("Saving Graphviz diagram to " + file);
+			FileOutputStream fos = new FileOutputStream(file);
+			PrintStream ps = new PrintStream(fos);
+			new ElementMatcherToDot().draw(createMatcher(), ps);
+			ps.flush();
+			fos.flush();
+			fos.close();
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Inject

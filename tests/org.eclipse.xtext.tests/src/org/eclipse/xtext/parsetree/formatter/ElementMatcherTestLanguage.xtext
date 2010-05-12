@@ -12,7 +12,7 @@ common.Terminals
 generate elementmatchertestlanguage 'http://simple/elementmatchertestlanguage'
 
 Model:
-  Simple | RuleCalls | OptionalCalls | Recursion | Loop;
+  Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression;
 
 Simple:
   '#1' name=ID ('kw1' optional=ID)? datatype=FQN;
@@ -52,3 +52,18 @@ RecursionSub:
 	
 Loop:
 	'#5' names+=ID+ ('gr' gr+=ID)* (ints+=INT | strings+=STRING)*;
+	
+Expression:
+	'#6' Add;
+	
+Add returns Expression:
+	Mult ({Add.left=current} '+' right=Mult)*;
+	
+Mult returns Expression:
+	Prim ({Mult.left=current} '*' right=Prim)*;
+
+Prim returns Expression:
+	{Value} val=INT | 
+	{Function} func=ID '(' param+=Add (',' param+=Add)* ')' |
+	{Pointer} '=>' target=Prim |
+	'(' Add ')';	

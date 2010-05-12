@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting.impl;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -16,17 +18,19 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GrammarToDot;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.formatting.IElementMatcherProvider;
+import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementPattern;
 import org.eclipse.xtext.formatting.impl.ElementMatcherProvider.TransitionMatcher;
 import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider;
 
-import com.google.common.collect.Sets;
+import com.google.common.base.Join;
+import com.google.common.collect.Lists;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class ElementMatcherToDot extends GrammarToDot {
 
-	protected IGrammarNFAProvider<MatcherState, MatcherTransition> nfaProvider = new MatcherNFAProvider();
+	protected IGrammarNFAProvider<MatcherState, MatcherTransition> nfaProvider;
 
 	@Override
 	protected Node drawAbstractElementTree(AbstractElement grammarElement, Digraph digraph) {
@@ -42,15 +46,26 @@ public class ElementMatcherToDot extends GrammarToDot {
 
 		if (nfas.isEndState())
 			node.put("peripheries", "2");
-		//		node.setLabel(nfas + node.get("label"));
+
+		if (!nfas.hasTransitions())
+			node.setStyle("dotted");
 		return node;
 	}
 
 	protected Edge drawFollowerEdge(AbstractElement grammarElement, MatcherTransition transition, boolean isParent) {
 		Edge edge = new Edge(grammarElement, transition.getTarget().getGrammarElement());
-		if (transition.getPrecedence() > -1)
-			edge.setLabel(String.valueOf(transition.getPrecedence()));
-		edge.setStyle("dotted");
+		//		if (transition.getPrecedence() > -1)
+		//			edge.setLabel(String.valueOf(transition.getPrecedence()));
+		List<String> label = Lists.newArrayList();
+		if (!transition.getCommonPatterns().isEmpty())
+			label.add("{" + Join.join(", ", transition.getCommonPatterns()).replace("\\n", "\\\\n") + "}");
+		//		for (Map.Entry<AbstractRule, Set<IElementPattern>> e : transition.getExitPatterns().entrySet())
+		//			label.add(e.getKey().getName() + ":{" + Join.join(", ", e.getValue()).replace("\\n", "\\\\n") + "}");
+		for (Map.Entry<MatcherState, Set<IElementPattern>> e : transition.getGuardPatterns().entrySet())
+			label.add(GrammarUtil.containingRule(e.getKey().getGrammarElement()).getName() + "-" + e.getKey() + ":{"
+					+ Join.join(", ", e.getValue()).replace("\\n", "\\\\n") + "}");
+		if (label.size() > 0)
+			edge.setLabel(Join.join("\\n", label));
 		if (isParent)
 			edge.put("arrowtail", "odot");
 		if (transition.isRuleCall())
@@ -61,32 +76,24 @@ public class ElementMatcherToDot extends GrammarToDot {
 	}
 
 	@Override
+	protected Props drawGrammarContainementEdge(AbstractElement container, AbstractElement child) {
+		Edge edge = new Edge(container, child);
+		edge.setStyle("dotted");
+		//		edge.put("color", "darkgray");
+		return edge;
+	}
+
+	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected Props drawObject(Object obj) {
 		if (obj == null)
 			throw new NullPointerException("Obj null");
-		if (obj instanceof TransitionMatcher)
-			return drawTransitionMatcher((TransitionMatcher<IElementMatcherProvider.IElementPattern>) obj,
-					new Digraph());
-		throw new RuntimeException("Unknown type: " + obj.getClass().getName());
-	}
-
-	protected Edge drawOutgoingToNextRuel(MatcherTransition transition) {
-		Edge edge = new Edge(transition.getSource().getGrammarElement(), transition.getTarget().getGrammarElement());
-		edge.setStyle("dotted");
-		edge.put("color", "red");
-		edge.put("arrowhead", "onormal");
-		return edge;
-	}
-
-	protected Props drawTransitionMatcher(TransitionMatcher<IElementMatcherProvider.IElementPattern> matcher,
-			Digraph graph) {
-		Set<AbstractRule> seenRules = Sets.newHashSet();
-		for (AbstractElement e : matcher.getSeenTokens())
-			seenRules.add(GrammarUtil.containingRule(e));
-		for (AbstractRule r : seenRules)
-			drawRule(r, graph);
-		return graph;
+		if (obj instanceof TransitionMatcher) {
+			TransitionMatcher<IElementMatcherProvider.IElementPattern> m = (TransitionMatcher<IElementMatcherProvider.IElementPattern>) obj;
+			nfaProvider = m.nfaProvider;
+			return super.drawObject(m.getGrammar().getGrammar());
+		}
+		return super.drawObject(obj);
 	}
 
 	@Override

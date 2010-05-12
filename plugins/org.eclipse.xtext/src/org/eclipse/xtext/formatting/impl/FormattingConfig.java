@@ -24,6 +24,11 @@ public class FormattingConfig extends AbstractFormattingConfig {
 			before(ele);
 		}
 
+		@Override
+		public String toString() {
+			return "<<";
+		}
+
 	}
 
 	public class IndentationLocatorStart extends ElementLocator {
@@ -31,6 +36,11 @@ public class FormattingConfig extends AbstractFormattingConfig {
 		public IndentationLocatorStart(AbstractElement ele) {
 			super();
 			after(ele);
+		}
+
+		@Override
+		public String toString() {
+			return ">>";
 		}
 
 	}
@@ -67,10 +77,17 @@ public class FormattingConfig extends AbstractFormattingConfig {
 			return lines;
 		}
 
+		@Override
+		public String toString() {
+			StringBuilder b = new StringBuilder();
+			for (int i = 0; i < lines; i++)
+				b.append("\\n");
+			return b.toString();
+		}
+
 	}
 
 	public class NoLinewrapLocator extends ElementLocator {
-
 		@Override
 		public void after(EObject left) {
 			super.after(left);
@@ -94,6 +111,11 @@ public class FormattingConfig extends AbstractFormattingConfig {
 		@Override
 		public void range(EObject left, EObject right) {
 			super.range(left, right);
+		}
+
+		@Override
+		public String toString() {
+			return "!\\n";
 		}
 
 	}
@@ -123,6 +145,11 @@ public class FormattingConfig extends AbstractFormattingConfig {
 		@Override
 		public void range(EObject left, EObject right) {
 			super.range(left, right);
+		}
+
+		@Override
+		public String toString() {
+			return "-";
 		}
 
 	}
