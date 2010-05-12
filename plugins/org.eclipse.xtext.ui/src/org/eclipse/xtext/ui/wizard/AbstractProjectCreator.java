@@ -92,18 +92,26 @@ public abstract class AbstractProjectCreator extends WorkspaceModifyOperation im
 	}
 	
 	protected IProject createProject(IProgressMonitor monitor) {
-		ProjectFactory builder = createProjectFactory();
-		configureProjectBuilder(builder);
-		return builder.createProject(monitor, null);
+		ProjectFactory factory = createProjectFactory();
+		configureProjectBuilder(factory);
+		return factory.createProject(monitor, null);
+	}
+	
+	/**
+	 * @deprecated use {@link #configureProjectFactory(ProjectFactory)} instead.
+	 */
+	@Deprecated
+	protected ProjectFactory configureProjectBuilder(ProjectFactory factory) {
+		return configureProjectFactory(factory);
 	}
 
-	protected ProjectFactory configureProjectBuilder(ProjectFactory builder) {
-		builder.setProjectName(getProjectInfo().getProjectName());
-		builder.addFolders(getAllFolders());
-		builder.addReferencedProjects(getReferencedProjects());
-		builder.addProjectNatures(getProjectNatures());
-		builder.addBuilderIds(getBuilders());
-		return builder;
+	protected ProjectFactory configureProjectFactory(ProjectFactory factory) {
+		factory.setProjectName(getProjectInfo().getProjectName());
+		factory.addFolders(getAllFolders());
+		factory.addReferencedProjects(getReferencedProjects());
+		factory.addProjectNatures(getProjectNatures());
+		factory.addBuilderIds(getBuilders());
+		return factory;
 	}
 	
 	protected abstract ProjectFactory createProjectFactory();
