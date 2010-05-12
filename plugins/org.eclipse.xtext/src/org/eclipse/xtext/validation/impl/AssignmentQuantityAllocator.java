@@ -13,14 +13,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer;
+import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.IAssignmentQuantityAllocator;
 import org.eclipse.xtext.validation.IAssignmentQuantityIntervalProvider;
@@ -176,7 +177,8 @@ public class AssignmentQuantityAllocator implements IAssignmentQuantityAllocator
 			Collection<ISyntaxConstraint> ass = assignments.get(f.getKey());
 			if (ass.isEmpty())
 				continue;
-			boolean allowTransient = !f.getKey().isMany() && f.getValue() == 0 && allowTransient(obj, f.getKey(), ass);
+			boolean allowTransient = f.getKey() instanceof EAttribute && !f.getKey().isMany() && f.getValue() == 0
+					&& allowTransient(obj, f.getKey(), ass);
 			boolean multiNeeded = ass.size() > 1 && f.getValue() != 0;
 			if (allowTransient)
 				allowTransients.putAll(f.getKey(), ass);
