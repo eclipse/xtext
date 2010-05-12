@@ -26,15 +26,15 @@ public abstract class AbstractPluginProjectCreator extends AbstractProjectCreato
 	private Provider<PluginProjectFactory> projectFactoryProvider;
 	
 	@Override
-	protected ProjectFactory configureProjectBuilder(ProjectFactory builder) {
-		PluginProjectFactory result = (PluginProjectFactory) super.configureProjectBuilder(builder);
+	protected ProjectFactory configureProjectFactory(ProjectFactory factory) {
+		PluginProjectFactory result = (PluginProjectFactory) super.configureProjectFactory(factory);
 		
 		result.addRequiredBundles(getRequiredBundles());
 		result.addExportedPackages(getExportedPackages());
 		result.addImportedPackages(getImportedPackages());
 		result.setActivatorClassName(getActivatorClassName());
 		
-		return builder;
+		return result;
 	}
 	
 	@Override

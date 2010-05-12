@@ -40,7 +40,7 @@ import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
  * @author KD - Initial contribution and API
  * @author Knut Wannheden
  */
-public final class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationPage {
+public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationPage {
 	private Text languageNameField;
 	private final IStructuredSelection selection;
 	private Text extensionsField;

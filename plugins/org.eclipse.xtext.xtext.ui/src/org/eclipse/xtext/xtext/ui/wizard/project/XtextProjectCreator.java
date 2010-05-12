@@ -48,28 +48,28 @@ import com.google.inject.Provider;
  */
 public class XtextProjectCreator extends AbstractProjectCreator {
 
-	private static final String[] DSL_PROJECT_NATURES = new String[] { 
+	protected static final String[] DSL_PROJECT_NATURES = new String[] { 
 			JavaCore.NATURE_ID,
 			"org.eclipse.pde.PluginNature", //$NON-NLS-1$
 			XtextProjectHelper.NATURE_ID //$NON-NLS-1$
 	};
 
-	private static final String[] DSL_UI_PROJECT_NATURES = new String[] { 
+	protected static final String[] DSL_UI_PROJECT_NATURES = new String[] { 
 			JavaCore.NATURE_ID,
 			"org.eclipse.pde.PluginNature" //$NON-NLS-1$
 	};
 	
-	private static final String[] BUILDERS = new String[]{
+	protected static final String[] BUILDERS = new String[]{
 			JavaCore.BUILDER_ID, 
 			"org.eclipse.pde.ManifestBuilder", //$NON-NLS-1$
 			"org.eclipse.pde.SchemaBuilder" //$NON-NLS-1$
 	};
 
-	private static final String[] GENERATOR_PROJECT_NATURES = DSL_UI_PROJECT_NATURES;
+	protected static final String[] GENERATOR_PROJECT_NATURES = DSL_UI_PROJECT_NATURES;
 
-	private static final String SRC_GEN_ROOT = "src-gen"; //$NON-NLS-1$
-	private static final String SRC_ROOT = "src"; //$NON-NLS-1$
-	private final List<String> SRC_FOLDER_LIST = ImmutableList.of(SRC_ROOT, SRC_GEN_ROOT);
+	protected static final String SRC_GEN_ROOT = "src-gen"; //$NON-NLS-1$
+	protected static final String SRC_ROOT = "src"; //$NON-NLS-1$
+	protected static final List<String> SRC_FOLDER_LIST = ImmutableList.of(SRC_ROOT, SRC_GEN_ROOT);
 
 	@Inject
 	private Provider<PluginProjectFactory> projectFactoryProvider;
@@ -93,7 +93,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 			createGeneratorProject(subMonitor.newChild(1));
 		}
 
-		IFile dslGrammarFile = project.getFile(new Path(SRC_ROOT
+		IFile dslGrammarFile = project.getFile(new Path(getModelFolderName()
 				+ "/" + getXtextProjectInfo().getLanguageName().replace('.', '/') //$NON-NLS-1$
 				+ ".xtext")); //$NON-NLS-1$
 		BasicNewResourceWizard.selectAndReveal(dslGrammarFile, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
@@ -110,25 +110,50 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		return Messages.XtextProjectCreator_CreatingProjectsMessage2 + getXtextProjectInfo().getProjectName();
 	}
 	
-	private IProject createDslUiProject(final IProgressMonitor monitor) throws CoreException {
+	protected IProject createDslUiProject(final IProgressMonitor monitor) throws CoreException {
+		PluginProjectFactory factory = createProjectFactory();
+		configureDslUiProjectFactory(factory);
+		return createProject(factory, getDslUiProjectTemplateName(), monitor);
+	}
+
+	protected void configureDslUiProjectFactory(PluginProjectFactory factory) {
+		configureProjectFactory(factory);
+		List<String> requiredBundles = getDslUiProjectRequiredBundles();
+		factory.setProjectName(getXtextProjectInfo().getUiProjectName());
+		factory.addProjectNatures(getDslUiProjectNatures());
+		factory.addRequiredBundles(requiredBundles);
+		factory.setLocation(getXtextProjectInfo().getUiProjectLocation());
+	}
+
+	protected List<String> getDslUiProjectRequiredBundles() {
 		List<String> requiredBundles = Lists.newArrayList(getXtextProjectInfo().getProjectName()
 				+ ";visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.xtext.ui", //$NON-NLS-1$
 				"org.eclipse.ui.editors;bundle-version=\"3.5.0\"", //$NON-NLS-1$
 				"org.eclipse.ui.ide;bundle-version=\"3.5.0\""); //$NON-NLS-1$
-
-		PluginProjectFactory builder = createProjectFactory();
-		configureProjectBuilder(builder);
-		
-		builder.setProjectName(getXtextProjectInfo().getUiProjectName());
-		builder.addProjectNatures(DSL_UI_PROJECT_NATURES);
-		builder.addRequiredBundles(requiredBundles);
-		builder.setLocation(getXtextProjectInfo().getUiProjectLocation());
-		
-		return createProject(builder, getDslUiProjectTemplateName(), monitor);
+		return requiredBundles;
 	}
 
-	private IProject createDslProject(final IProgressMonitor monitor) throws CoreException {
+	protected String[] getDslUiProjectNatures() {
+		return DSL_UI_PROJECT_NATURES;
+	}
+
+	protected IProject createDslProject(final IProgressMonitor monitor) throws CoreException {
+		PluginProjectFactory factory = createProjectFactory();
+		configureDslProjectFactory(factory);
+		return createProject(factory, getDslProjectTemplateName(), monitor);
+	}
+
+	protected void configureDslProjectFactory(PluginProjectFactory factory) {
+		configureProjectFactory(factory);
+		List<String> requiredBundles = getDslProjectRequiredBundles();
+		factory.setProjectName(getXtextProjectInfo().getProjectName());
+		factory.addProjectNatures(getDslProjectNatures());
+		factory.addRequiredBundles(requiredBundles);
+		factory.setLocation(getXtextProjectInfo().getProjectLocation());
+	}
+
+	protected List<String> getDslProjectRequiredBundles() {
 		List<String> requiredBundles = Lists.newArrayList("org.eclipse.xtext", //$NON-NLS-1$
 				"org.eclipse.xtext.generator;resolution:=optional", //$NON-NLS-1$
 				"de.itemis.xtext.antlr;resolution:=optional", //$NON-NLS-1$
@@ -146,29 +171,43 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		for(String bundleId: getAdditionalRequiredBundles()) {
 			requiredBundles.add(bundleId.trim());
 		}
-		
-		PluginProjectFactory builder = createProjectFactory();
-		configureProjectBuilder(builder);
-		
-		builder.setProjectName(getXtextProjectInfo().getProjectName());
-		builder.addProjectNatures(DSL_PROJECT_NATURES);
-		builder.addRequiredBundles(requiredBundles);
-		builder.setLocation(getXtextProjectInfo().getProjectLocation());
+		return requiredBundles;
+	}
 
-		return createProject(builder, getDslProjectTemplateName(), monitor);
+	protected String[] getDslProjectNatures() {
+		return DSL_PROJECT_NATURES;
 	}
 	
 	@Override
-	protected ProjectFactory configureProjectBuilder(ProjectFactory projectBuilder) {
-		PluginProjectFactory builder = (PluginProjectFactory) projectBuilder;
-		builder.addWorkingSets(Arrays.asList(getXtextProjectInfo().getWorkingSets()));
-		builder.addBuilderIds(BUILDERS);
-		builder.addImportedPackages(getImportedPackages());
-		builder.addFolders(SRC_FOLDER_LIST);
-		return builder;
+	protected PluginProjectFactory configureProjectFactory(ProjectFactory factory) {
+		PluginProjectFactory result = (PluginProjectFactory) factory;
+		result.addWorkingSets(Arrays.asList(getXtextProjectInfo().getWorkingSets()));
+		result.addBuilderIds(getBuilderIDs());
+		result.addImportedPackages(getImportedPackages());
+		result.addFolders(getAllFolders());
+		return result;
 	}
 
-	private IProject createGeneratorProject(final IProgressMonitor monitor) throws CoreException {
+	protected String[] getBuilderIDs() {
+		return BUILDERS;
+	}
+
+	protected IProject createGeneratorProject(final IProgressMonitor monitor) throws CoreException {
+		PluginProjectFactory factory = createProjectFactory();
+		configureGeneratorProjectBuilder(factory);
+		return createProject(factory, getGeneratorProjectTemplateName(), monitor);
+	}
+
+	protected void configureGeneratorProjectBuilder(PluginProjectFactory factory) {
+		configureProjectFactory(factory);
+		List<String> requiredBundles = getGeneratorProjectRequiredBundles();
+		factory.setProjectName(getXtextProjectInfo().getGeneratorProjectName());
+		factory.addProjectNatures(getGeneratorProjectNatures());
+		factory.addRequiredBundles(requiredBundles);
+		factory.setLocation(getXtextProjectInfo().getGeneratorProjectLocation());
+	}
+
+	protected List<String> getGeneratorProjectRequiredBundles() {
 		List<String> requiredBundles = Lists.newArrayList(
 				getXtextProjectInfo().getProjectName() + ";visibility:=reexport", 
 				"org.eclipse.xpand;visibility:=reexport", //$NON-NLS-1$
@@ -177,26 +216,21 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 				"org.eclipse.emf.mwe2.launch;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.emf.mwe.utils;visibility:=reexport",//$NON-NLS-1$
 				"org.eclipse.xtend.typesystem.emf;visibility:=reexport"); //$NON-NLS-1$
-		
-		PluginProjectFactory builder = createProjectFactory();
-		configureProjectBuilder(builder);
-		
-		builder.setProjectName(getXtextProjectInfo().getGeneratorProjectName());
-		builder.addProjectNatures(GENERATOR_PROJECT_NATURES);
-		builder.addRequiredBundles(requiredBundles);
-		builder.setLocation(getXtextProjectInfo().getGeneratorProjectLocation());
-		
-		return createProject(builder, getGeneratorProjectTemplateName(), monitor);
+		return requiredBundles;
 	}
 
-	private IProject createProject(ProjectFactory builder, String templateName,
+	protected String[] getGeneratorProjectNatures() {
+		return GENERATOR_PROJECT_NATURES;
+	}
+
+	protected IProject createProject(ProjectFactory factory, String templateName,
 			final IProgressMonitor monitor) throws CoreException {
-		IProject result = builder.createProject(monitor, null);
+		IProject result = factory.createProject(monitor, null);
 		if (result == null) {
 			return null;
 		}
 
-		IFolder srcFolder = (IFolder) result.findMember(SRC_ROOT);
+		IFolder srcFolder = (IFolder) result.findMember(getModelFolderName());
 
 		OutputImpl output = new OutputImpl();
 		output.addOutlet(new Outlet(false, getEncoding(), null, true, srcFolder.getLocation().makeAbsolute()
@@ -215,7 +249,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		return result;
 	}
 
-	private String pathToTemplates() {
+	protected String pathToTemplates() {
 		return "org::eclipse::xtext::xtext::ui::wizard::project::"; //$NON-NLS-1$
 	}
 
