@@ -47,7 +47,7 @@ public class FormatterTest extends AbstractXtextTests {
 		String res = getSerializer().serialize(m, SaveOptions.newBuilder().format().getOptions());
 		assertEquals(expected, res);
 	}
-	
+
 	// test formatting based on the NodeModel
 	private void assertFormattedNM(String expected, String model, int offset, int lengt) throws Exception {
 		CompositeNode node = NodeUtil.getRootNode(getModel(model));
@@ -173,6 +173,14 @@ public class FormatterTest extends AbstractXtextTests {
 	public void testLinewrapDatatypeRuleRef2() throws Exception {
 		final String model = "test linewrap fqn ab.cd.ef; fqnref ab.cd.ef;";
 		final String expected = "test linewrap\nfqn\nab.cd.ef;\nfqnref\nab.cd.ef;";
+		assertFormattedPTC(expected, model);
+		assertFormattedNM(expected, model, 0, model.length());
+		assertEqualTokenStreams(model);
+	}
+
+	public void testLinewrapDatatypeRuleComments() throws Exception {
+		final String model = "test linewrap/* 1 */fqn/* 2 */ab.cd.ef/* 3 */;/* 4 */fqnref/* 5 */ab.cd.ef/* 6 */;/* 7 */";
+		final String expected = "test linewrap /* 1 */ fqn\n/* 2 */\nab.cd.ef /* 3 */; /* 4 */\nfqnref /* 5 */ ab.cd.ef\n/* 6 */; /* 7 */";
 		assertFormattedPTC(expected, model);
 		assertFormattedNM(expected, model, 0, model.length());
 		assertEqualTokenStreams(model);
