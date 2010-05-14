@@ -32,6 +32,9 @@ public class ProblemHover extends AbstractHover {
 	protected String getHoverInfoInternal(final int lineNumber,
 			final int offset) {
 		final IAnnotationModel model = sourceViewer.getAnnotationModel();
+		if(model == null) {
+			return null;
+		}
 		final Set<String> messages = new LinkedHashSet<String>();
 
 		final Iterator<?> iterator = model.getAnnotationIterator();
