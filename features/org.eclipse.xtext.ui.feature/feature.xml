@@ -18,12 +18,15 @@ v1.0 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
 
-   <license url="http://www.eclipse.org/legal/epl-v10.html">%license</license>
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      %license
+   </license>
 
    <requires>
       <import feature="org.eclipse.xtext.runtime" version="1.0.0.qualifier"/>
       <import feature="org.eclipse.emf.mwe.ui" version="1.0.0" match="greaterOrEqual"/>
       <import feature="org.eclipse.xpand.ui" version="1.0.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.emf.mwe2.language.sdk" version="1.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -68,10 +71,11 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          version="0.0.0"
          unpack="false"/>
 
-	<plugin
+   <plugin
          id="org.eclipse.xtext.ui.ecore"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+
 </feature>
