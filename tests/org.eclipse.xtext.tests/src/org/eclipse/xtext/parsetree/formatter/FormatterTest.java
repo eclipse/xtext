@@ -193,4 +193,22 @@ public class FormatterTest extends AbstractXtextTests {
 		assertFormattedNM(expected, model, 0, model.length());
 		assertEqualTokenStreams(model);
 	}
+
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=312559
+	public void testSuppressedWhitespace() throws Exception {
+		final String model = "test linewrap `f%<b>%a` post;";
+		final String expected = "test linewrap\n`f%< b >%a` post;";
+		assertFormattedPTC(expected, model);
+		assertFormattedNM(expected, model, 0, model.length());
+		assertEqualTokenStreams(model);
+	}
+
+	public void testSuppressedLinewrap() throws Exception {
+		final String model = "test linewrap\n`foo%abcd%foo%< b\n>%abcd%foo%abcd%foo%abcd%"
+				+ "foo%abcd%foo%abcd%foo%abcd%foo%abcd%foo%abcd%foo%xx%foo%abcd%foo%abcd%"
+				+ "foo%abcd%foo%<\nb >%foo%abcd` post;";
+		assertFormattedPTC(model, model);
+		assertFormattedNM(model, model, 0, model.length());
+		assertEqualTokenStreams(model);
+	}
 }
