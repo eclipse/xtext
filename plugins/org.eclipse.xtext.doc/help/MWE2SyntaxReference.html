@@ -6,40 +6,247 @@
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="MWE2.html" title="MWE2">
-<link rel="prev" href="MWE2.html" title="MWE2">
-<link rel="next" href="MWE2Syntax.html" title="Language Features">
+<link rel="prev" href="MWE2LanguageReference.html" title="Language Reference">
+<link rel="next" href="MWE2RuntimeAPI.html" title="Workflow API">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Syntax Reference</h1>
+<p>The following chapter serves as a reference for the concrete syntax of 
+				MWE2. The building blocks of a module will be described in a few words.</p>
+<p>MWE2 is not sensitive to white-space and allows to define line-comments
+				and block comments everywhere. The syntax is the same as one is used 
+				to from the Java language:</p>
+<div class="literallayout">
+<p>
+<code class="code">//&nbsp;This&nbsp;is&nbsp;a&nbsp;comment<br>
+/*&nbsp;<br>
+&nbsp;&nbsp;This&nbsp;is&nbsp;another&nbsp;one.<br>
+*/<br>
+
+</code>
+</p>
+</div>
+<p>Every name in MWE2 can be a fully qualified identifier and must follow 
+				the Java conventions. However, in contrast to Java identifiers it is 
+				not allowed to use German umlauts or Unicode escape sequences in 
+				identifiers. A valid id-segment in MWE2 starts with a letter or an 
+				underscore and is followed by any number of letters, numbers or underscores.
+				An identifier is composed from one or more segments which are delimited
+				by a &lsquo;.&rsquo; dot.</p>
+<div class="literallayout">
+<p>
+<code class="code">Name:&nbsp;ID&nbsp;('.'&nbsp;ID)*;<br>
+ID:&nbsp;('a'..'z'|'A'..'Z'|'_')&nbsp;('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;&nbsp;<br>
+
+</code>
+</p>
+</div>
+<p>MWE2 does not use a semicolon as statement delimiter at any place.</p>
+<div class="section" title="Module">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="MWE2ModuleSyntax"></a>Module</h3>
+</div>
+</div>
+</div>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/mwe2/module.png"></div>
+<p>
+				
+</p>
+<p>A 
+					<code class="code">module</code> consists of four parts. The very first statement in a 
+
+					<code class="code">*.mwe2</code> file is the module declaration. The name of the module must 
+					follow the naming convention for Java classes. That MWE2 file&rsquo;s name 
+					must therefore be the same as the last segment of the module-name 
+					and it has to be placed in the appropriate package of a Java source 
+					path.
+				</p>
+<p>It is allowed to define any number of import statements in a module.
+					Imports are either suffixed by a wild-card or concrete for a class 
+					or module. MWE2 can handle relative imports in case one uses the 
+					wild-card notation:</p>
+<div class="literallayout">
+<p>
+<code class="code">'import'&nbsp;name&nbsp;'.*'?&nbsp;&nbsp;&nbsp;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Property">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="MWE2PropertySyntax"></a>Property</h3>
+</div>
+</div>
+</div>
+<p>The list of declared properties follows the optional import section.
+					It is allowed to define modules without any properties. </p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/mwe2/property.png"></div>
+<p>
+				
+</p>
+<p>Each declared property is locally visible in the module. It 
+					furthermore defines an assignable feature of the module in case one 
+					refers to it from another module. Properties may either have a 
+					default value or they are considered to be mandatory. If the type
+					of property is omitted it will be inferred from the default value. The
+					default type of a property is 
+					<code class="code">java.lang.String</code> so if no default
+					value is available, the property is mandatory and of type 
+					<code class="code">String</code>.
+				</p>
+<p>There are four types of values available in MWE2. One may either
+					define a string, boolean or component literal or a reference to a
+					previously defined property. </p>
+</div>
+<div class="section" title="Component">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="MWE2ComponentSyntax"></a>Component</h3>
+</div>
+</div>
+</div>
+<p>The last part of a module is the root component. It defines the externally
+					visible type of the module and may either be created from a Java 
+					type or from another module.</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/mwe2/component.png"></div>
+<p>
+				
+</p>
+<p>The type of the component can be derived in many cases except for 
+					the root component. That&rsquo;s why it&rsquo;s optional in the component literal.
+					If no type is given, it will be inferred from the left side of the
+					assignment. The assigned feature can either be a declared property
+					of the module or a 
+					<code class="code">set</code>- or 
+					<code class="code">add</code>-method of a Java class.
+				</p>
+<p>Components can be named to make them referable in subsequent assignments.
+					Following the &lsquo;:&rsquo; keyword, one can define an identifier for the 
+					instantiated component. The identifier is locally visible in the module
+					and any assignment that is defined after the named component can refer
+					to this identifier and thereby point to exactly the instantiated object.</p>
+<p>The next option for a component is 
+					<code class="code">auto-inject</code>. If this modifier
+					is set on a component, any available feature of the component that has
+					the same name as a property or previously created named component will
+					be automatically assigned.
+				</p>
+<p>The core of a component is the list of assignments between the curly 
+					braces. An arbitrary number of values can be set on the component by
+					means of feature-to-value pairs. </p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/mwe2/assignment.png"></div>
+<p> 
+				
+</p>
+<p>The available constructs on the right hand side of the assignment
+					are the same as for default values for properties. </p>
+</div>
 <div class="section" title="String Literals">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="MWE2Literals"></a>String Literals</h3>
+<a name="MWE2StringLiteralsSyntax"></a>String Literals</h3>
 </div>
 </div>
 </div>
+<p>String values are likely to be the most used literals in MWE2. There 
+					is a convenient syntax for string concatenation available due to
+					the high relevance in a description object composition and configuration 
+					language. MWE2 strings are multi-line strings and can be composed of
+					several parts.</p>
+<div class="literallayout">
+<p>
+<code class="code">var&nbsp;aString&nbsp;=&nbsp;'a&nbsp;value'<br>
+var&nbsp;anotherString&nbsp;=&nbsp;'It&nbsp;is&nbsp;possible&nbsp;to&nbsp;embed&nbsp;${aString}&nbsp;into<br>
+&nbsp;a&nbsp;multi-line&nbsp;string'<br>
+
+</code>
+</p>
 </div>
-<div class="section" title="Class References">
+<p>This is especially convenient for path-substitution if one defines
+					e.g. a common root directory and wants to specify other paths relative
+					to the base. </p>
+<p>There are two different delimiters available for strings. Users 
+					are free to either use single- or double-quotes to start and end strings. 
+					If a certain string contains a lot of single-quotes one would better
+					choose double-quotes as delimiter and vice versa. There is no semantic 
+					difference between both notations.</p>
+<p>The escape character in MWE2 is the back-slash 
+					<code class="code">"\"</code>. It can be used
+					to write line-breaks or tabular characters explicitly and to escape
+					the beginning of substitution variables 
+					<code class="code">${</code> and the quotes itself. Allowed
+					escape sequences are:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">\n&nbsp;&nbsp;..&nbsp;line&nbsp;break<br>
+\r&nbsp;&nbsp;..&nbsp;carriage&nbsp;return<br>
+\t&nbsp;&nbsp;..&nbsp;tabular&nbsp;character<br>
+\'&nbsp;&nbsp;..&nbsp;single-quote&nbsp;(can&nbsp;be&nbsp;omitted&nbsp;in&nbsp;double-quoted&nbsp;strings)<br>
+\"&nbsp;&nbsp;..&nbsp;double-quote&nbsp;(can&nbsp;be&nbsp;omitted&nbsp;in&nbsp;single-quoted&nbsp;strings)<br>
+\${&nbsp;..&nbsp;escape&nbsp;the&nbsp;substitution&nbsp;variable&nbsp;start&nbsp;${<br>
+\\&nbsp;&nbsp;..&nbsp;the&nbsp;back-slash&nbsp;itself<br>
+
+</code>
+</p>
+</div>
+<p>Other escape sequence are illegal in MWE2 strings.</p>
+</div>
+<div class="section" title="Boolean Literals">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="MWE2ClassReferences"></a>Class References</h3>
+<a name="MWE2BooleanLiterals"></a>Boolean Literals</h3>
 </div>
 </div>
 </div>
+<p>MWE2 has native support for the boolean type. The literals are 
+					<code class="code">true</code> and 
+					<code class="code">false</code>.
+				</p>
 </div>
-<div class="section" title="Module References">
+<div class="section" title="References">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="MWE2ModuleReferences"></a>Module References</h3>
+<a name="MWE2References"></a>References</h3>
 </div>
 </div>
 </div>
+<p>Each assigned value in MWE2 either as default for properties or in a
+					component assignment can be a reference to a previously declared property
+					or named component. The can be referenced intuitively by their name.</p>
 </div>
 </body>
 </html>

@@ -134,10 +134,10 @@
 <span class="section"><a href="#MWE2Exampe">Examples</a></span>
 </dt>
 <dt>
-<span class="section"><a href="#MWE2SyntaxReference">Syntax Reference</a></span>
+<span class="section"><a href="#MWE2LanguageReference">Language Reference</a></span>
 </dt>
 <dt>
-<span class="section"><a href="#MWE2Syntax">Language Features</a></span>
+<span class="section"><a href="#MWE2SyntaxReference">Syntax Reference</a></span>
 </dt>
 <dt>
 <span class="section"><a href="#MWE2RuntimeAPI">Workflow API</a></span>
@@ -358,7 +358,7 @@
 </div>
 <p>
 				
-<a class="ulink" href="http://www.eclipse.org/Xtext/download/" target="_new">Download and install the latest version of Xtext</a>, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our &bdquo;target syntax&rdquo; later on:
+<a class="ulink" href="http://www.eclipse.org/Xtext/download/" target="_new">Download and install the latest version of Xtext</a>, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our &ldquo;target syntax&rdquo; later on:
 			</p>
 <div class="literallayout">
 <p>
@@ -435,7 +435,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 					
 </tr>
 </table>
-<p>Keep &bdquo;Create generator project&rdquo; checked, as we will also create a code generator in a second step.</p>
+<p>Keep &ldquo;Create generator project&rdquo; checked, as we will also create a code generator in a second step.</p>
 <p>Click on 
 					<span class="emphasis"><em>Finish</em></span> to create the projects. 
 				</p>
@@ -493,7 +493,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 					<code class="code">Model</code> consists of one or more 
 					<code class="code">Entity</code> entries, this rule delegates to another rule named 
 					<code class="code">Entity</code>, which will be defined later on.
-					As we can have one ore more entities within a model, the cardinality is &bdquo;+&rdquo;. Each rule is terminated with a semicolon. So our first rule reads as
+					As we can have one ore more entities within a model, the cardinality is &ldquo;+&rdquo;. Each rule is terminated with a semicolon. So our first rule reads as
 				</p>
 <div class="literallayout">
 <p>
@@ -508,7 +508,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 <p>
 					
 <span class="italic">
-						<span class="bold"><strong>Please note</strong></span>: If you encounter strange errors while copying and pasting these snippets to your Eclipse editor your documentation viewer most likely has inserted characters different from {space} into your clipboard. Reenter these &bdquo;fillers&rdquo; or type the text by hand to be sure everything works fine.
+						<span class="bold"><strong>Please note</strong></span>: If you encounter strange errors while copying and pasting these snippets to your Eclipse editor your documentation viewer most likely has inserted characters different from {space} into your clipboard. Reenter these &ldquo;fillers&rdquo; or type the text by hand to be sure everything works fine.
 					</span> 
 				
 </p>
@@ -557,7 +557,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 					<code class="code">ID</code>, which results in a string. The assignment operator "
 					<code class="code">=</code>" denotes a single valued feature, and the asterisk a cardinality of 0..n.
 					In our target syntax, some entities refer to an existing entity as their super type after the keyword 
-					<code class="code">extends</code>. Note that this is a cross-reference, as the super type itself must be defined somewhere else. To define a cross-reference we use square brackets. Optional parts have the cardinality &bdquo;?&rdquo;. The complete rule now reads:
+					<code class="code">extends</code>. Note that this is a cross-reference, as the super type itself must be defined somewhere else. To define a cross-reference we use square brackets. Optional parts have the cardinality &ldquo;?&rdquo;. The complete rule now reads:
 				</p>
 <div class="literallayout">
 <p>
@@ -573,7 +573,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </p>
 </div>
 <p>We have not specified the rule 
-					<code class="code">Property</code>, yet. In our target syntax, properties can refer to simple types such as &bdquo;String&rdquo; or &bdquo;Bool&rdquo; as well as entities. To make this easy we will first introduce a common supertype 
+					<code class="code">Property</code>, yet. In our target syntax, properties can refer to simple types such as &ldquo;String&rdquo; or &ldquo;Bool&rdquo; as well as entities. To make this easy we will first introduce a common supertype 
 					<code class="code">Type</code> each 
 					<code class="code">Property</code> can refer to.
 				</p>
@@ -611,7 +611,7 @@ SimpleType:<br>
 				</p>
 <p>A 
 					<code class="code">Property</code> consist of a keyword, a name, a colon and a cross-reference to an arbitrary 
-					<code class="code">Type</code>. The multiplicity is either many or one. The presence of the postfix &bdquo;[]&rdquo; (technically a keyword) should trigger a boolean flag in the AST model. This is the purpose of the assignment operator "
+					<code class="code">Type</code>. The multiplicity is either many or one. The presence of the postfix &ldquo;[]&rdquo; (technically a keyword) should trigger a boolean flag in the AST model. This is the purpose of the assignment operator "
 					<code class="code">?=</code>". Our last parser rule is:
 				</p>
 <div class="literallayout">
@@ -953,7 +953,7 @@ SimpleType:<br>
 </div>
 </div>
 </div>
-<p>This is the end of the &bdquo;Getting Started&rdquo; chapter of this documentation. The next part of this document is more detailed and compact at he same time. It discusses technical topics not always in an introductory way but acts as a comprehensive reference. You will find more material that introduces Xtext at the 
+<p>This is the end of the &ldquo;Getting Started&rdquo; chapter of this documentation. The next part of this document is more detailed and compact at he same time. It discusses technical topics not always in an introductory way but acts as a comprehensive reference. You will find more material that introduces Xtext at the 
 				<a class="ulink" href="http://www.xtext.org" target="_new">Xtext website</a> .
 			</p>
 </div>
@@ -1111,7 +1111,7 @@ Transition&nbsp;:<br>
 </code>
 </p>
 </div>
-<p>declares the name of the grammar. Xtext leverages Java&rsquo;s class path mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond to the grammar name and have the file extension &sbquo;xtext&rsquo;. This means that the name has to be 
+<p>declares the name of the grammar. Xtext leverages Java&rsquo;s class path mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond to the grammar name and have the file extension &lsquo;xtext&rsquo;. This means that the name has to be 
 					<code class="code">SecretCompartments.xtext</code> and must be placed in a package 
 					<code class="code">my.pack</code> somewhere on your project&rsquo;s class path.
 				</p>
@@ -1265,7 +1265,7 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 <p>When referring to a type somewhere in the grammar you need to qualify the reference using that alias (example 
 						<code class="code">another::CoolType</code>). We&rsquo;ll see later where such type references occur.
 					</p>
-<p>It is also supported to put multiple EPackage imports into one alias. This is no problem as long as there are not any two EClassifiers with the same name. In such cases none of them can be referenced. It is even possible to &sbquo;import&rsquo; multiple and &sbquo;generate&rsquo; one Ecore model and all of them are declared for the same alias. If you do so, for a reference to an EClassifier first the imported EPackages are scanned before it is assumed that a type needs to by generated into the to-be-generated package.</p>
+<p>It is also supported to put multiple EPackage imports into one alias. This is no problem as long as there are not any two EClassifiers with the same name. In such cases none of them can be referenced. It is even possible to &lsquo;import&rsquo; multiple and &lsquo;generate&rsquo; one Ecore model and all of them are declared for the same alias. If you do so, for a reference to an EClassifier first the imported EPackages are scanned before it is assumed that a type needs to by generated into the to-be-generated package.</p>
 <p>Example:</p>
 <div class="literallayout">
 <p>
@@ -1364,7 +1364,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>It says that a Token ID starts with an optional &sbquo;^&rsquo; character (caret), followed by a letter (&sbquo;a&rsquo;..&sbquo;z&rsquo;|&sbquo;A&rsquo;..&sbquo;Z&rsquo;) or underscore (&sbquo;_&rsquo;) followed by any number of letters, underscores and numbers (&sbquo;0&rsquo;..&sbquo;9&rsquo;). </p>
+<p>It says that a Token ID starts with an optional &lsquo;^&rsquo; character (caret), followed by a letter (&lsquo;a&rsquo;..&lsquo;z&rsquo;|&lsquo;A&rsquo;..&lsquo;Z&rsquo;) or underscore (&lsquo;_&rsquo;) followed by any number of letters, underscores and numbers (&lsquo;0&rsquo;..&lsquo;9&rsquo;). </p>
 <p>The caret is used to escape an identifier for cases where there are conflicts with keywords. It is removed by the ID rule&rsquo;s 
 						<a class="link" href="#valueconverter" title="Value Converter">ValueConverter</a>. 
 					</p>
@@ -1398,7 +1398,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 <p>A terminal rule returns a value, which is a string (type 
 							<code class="code">ecore::EString</code>) by default.
-							However, if you want to have a different type you can specify it. For instance, the rule &sbquo;INT&rsquo; is defined as:
+							However, if you want to have a different type you can specify it. For instance, the rule &lsquo;INT&rsquo; is defined as:
 						</p>
 <div class="literallayout">
 <p>
@@ -1410,12 +1410,12 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>This means that the terminal rule &sbquo;INT&rsquo; returns instances of 
+<p>This means that the terminal rule &lsquo;INT&rsquo; returns instances of 
 							<code class="code">ecore::EInt</code>. It is possible to define any kind of data type here, which just needs to be an instance of 
 							<code class="code">ecore::EDataType</code>.
 							In order to tell the parser how to convert the parsed string to a value of the declared data type, you need to provide your own implementation of 
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java?root=Modeling_Project&view=co" target="_new">IValueConverterService</a> (cf. 
-							<a class="link" href="#valueconverter" title="Value Converter">value converters</a>). The value converter is also the point where you can remove things like quotes from string literals or the caret (&sbquo;^&rsquo;) from identifiers. Its implementation needs to be registered as a service (cf. 
+							<a class="link" href="#valueconverter" title="Value Converter">value converters</a>). The value converter is also the point where you can remove things like quotes from string literals or the caret (&lsquo;^&rsquo;) from identifiers. Its implementation needs to be registered as a service (cf. 
 							<a class="link" href="#dependencyInjection" title="Dependency Injection in Xtext with Google Guice">Service Framework</a>).
 						</p>
 </div>
@@ -1429,7 +1429,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 </div>
-<p>Token rules are described using &bdquo;Extended Backus-Naur Form&rdquo;-like (EBNF) expressions. The different expressions are described in the following.
+<p>Token rules are described using &ldquo;Extended Backus-Naur Form&rdquo;-like (EBNF) expressions. The different expressions are described in the following.
 						The one thing all of these expressions have in common is the cardinality operator.
 						There are four different possible cardinalities</p>
 <div class="orderedlist">
@@ -1438,13 +1438,13 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 <p>exactly one (the default, no operator)</p>
 </li>
 <li class="listitem">
-<p>one or none (operator &bdquo;?&rdquo;)</p>
+<p>one or none (operator &ldquo;?&rdquo;)</p>
 </li>
 <li class="listitem">
-<p>any (zero or more, operator &bdquo;*&rdquo;)</p>
+<p>any (zero or more, operator &ldquo;*&rdquo;)</p>
 </li>
 <li class="listitem">
-<p>one or more (operator &bdquo;+&rdquo;)</p>
+<p>one or more (operator &ldquo;+&rdquo;)</p>
 </li>
 </ol>
 </div>
@@ -1458,7 +1458,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 <p>Keywords are a kind of token rule literals. 
-							The &sbquo;ID&rsquo; rule in 
+							The &lsquo;ID&rsquo; rule in 
 							<code class="code">org.eclipse.xtext.common.Terminals</code> for instance starts with a keyword:
 						</p>
 <div class="literallayout">
@@ -1468,7 +1468,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>The question mark sets the cardinality to &bdquo;none or one&rdquo; (i.e. optional) like explained above.</p>
+<p>The question mark sets the cardinality to &ldquo;none or one&rdquo; (i.e. optional) like explained above.</p>
 <p>Note that a keyword can have any length and contain arbitrary characters.</p>
 </div>
 <div class="section" title="Character Ranges">
@@ -1480,7 +1480,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 </div>
-<p>A character range can be declared using the &sbquo;..&rsquo; operator.</p>
+<p>A character range can be declared using the &lsquo;..&rsquo; operator.</p>
 <p>Example:</p>
 <div class="literallayout">
 <p>
@@ -1489,7 +1489,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>In this case an INT is comprised of one or more (note the &sbquo;+&rsquo; operator) characters between (and including) &sbquo;0&rsquo; and &sbquo;9&rsquo;.</p>
+<p>In this case an INT is comprised of one or more (note the &lsquo;+&rsquo; operator) characters between (and including) &lsquo;0&rsquo; and &lsquo;9&rsquo;.</p>
 </div>
 <div class="section" title="Wildcard">
 <div class="titlepage">
@@ -1500,7 +1500,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 </div>
-<p>If you want to allow any character you can simple write the wildcard operator &sbquo;.&rsquo; (dot):
+<p>If you want to allow any character you can simple write the wildcard operator &lsquo;.&rsquo; (dot):
 							Example:</p>
 <div class="literallayout">
 <p>
@@ -1509,7 +1509,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>The rule above would allow expressions like &sbquo;foo&rsquo;, &sbquo;f0o&rsquo; or even &sbquo;f\no&rsquo;.</p>
+<p>The rule above would allow expressions like &lsquo;foo&rsquo;, &lsquo;f0o&rsquo; or even &lsquo;f\no&rsquo;.</p>
 </div>
 <div class="section" title="Until Token">
 <div class="titlepage">
@@ -1529,7 +1529,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>This is the rule for Java-style comments that begin with &sbquo;/*&rsquo; and end with &sbquo;*/&rsquo;.</p>
+<p>This is the rule for Java-style comments that begin with &lsquo;/*&rsquo; and end with &lsquo;*/&rsquo;.</p>
 </div>
 <div class="section" title="Negated Token">
 <div class="titlepage">
@@ -1587,7 +1587,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>That is a WS can be made of one or more whitespace characters (including &sbquo; &rsquo;,&sbquo;\t&rsquo;,&sbquo;\r&rsquo;,&sbquo;\n&rsquo;).</p>
+<p>That is a WS can be made of one or more whitespace characters (including &lsquo; &rsquo;,&lsquo;\t&rsquo;,&lsquo;\r&rsquo;,&lsquo;\n&rsquo;).</p>
 </div>
 <div class="section" title="Groups">
 <div class="titlepage">
@@ -1686,7 +1686,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>The syntactic declaration for states in the state machine example starts with a keyword &sbquo;state&rsquo; followed by an assignment:</p>
+<p>The syntactic declaration for states in the state machine example starts with a keyword &lsquo;state&rsquo; followed by an assignment:</p>
 <div class="literallayout">
 <p>
 <code class="code">name=ID<br>
@@ -1695,7 +1695,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </p>
 </div>
 <p>The left hand side refers to a feature '
-							<code class="code">name</code>' of the current object (which has the EClass &sbquo;State&rsquo; in this case). 
+							<code class="code">name</code>' of the current object (which has the EClass &lsquo;State&rsquo; in this case). 
 							The right hand side can be a rule call, a keyword, a cross reference (explained later) or even an alternative comprised by the former.
 							The type of the feature needs to be compatible with the type of the expression on the right. As ID returns an EString in this case, the feature '
 							<code class="code">name</code>' needs to be of type EString as well.
@@ -1709,13 +1709,13 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 <div class="orderedlist">
 <ol class="orderedlist" type="1">
 <li class="listitem">
-<p>The simple equal sign &bdquo;=&rdquo; is the straight forward assignment, and used for features which take only one element.</p>
+<p>The simple equal sign &ldquo;=&rdquo; is the straight forward assignment, and used for features which take only one element.</p>
 </li>
 <li class="listitem">
-<p>The &bdquo;+=&rdquo; sign (the add operator) expects a multi valued feature and adds the value on the right hand to that feature, which is a list feature.</p>
+<p>The &ldquo;+=&rdquo; sign (the add operator) expects a multi valued feature and adds the value on the right hand to that feature, which is a list feature.</p>
 </li>
 <li class="listitem">
-<p>The &bdquo;?=&rdquo; sign (boolean assignment operator) expects a feature of type EBoolean and sets it to true if the right hand side was consumed independently from the concrete value of the right hand side.</p>
+<p>The &ldquo;?=&rdquo; sign (boolean assignment operator) expects a feature of type EBoolean and sets it to true if the right hand side was consumed independently from the concrete value of the right hand side.</p>
 </li>
 </ol>
 </div>
@@ -1771,7 +1771,7 @@ Event&nbsp;returns&nbsp;MyEvent&nbsp;:&nbsp;....;<br>
 </code>
 </p>
 </div>
-<p>Looking at the syntax definition of cross references, there is an optional part starting with a vertical bar (pipe) followed by &sbquo;CrossReferenceableTerminal&rsquo;. This is the part describing the concrete text, from which the crosslink later should be established.
+<p>Looking at the syntax definition of cross references, there is an optional part starting with a vertical bar (pipe) followed by &lsquo;CrossReferenceableTerminal&rsquo;. This is the part describing the concrete text, from which the crosslink later should be established.
 							If the terminal is omitted, it is expected to be an ID.</p>
 <p>You may even use alternatives as the referencable terminal. This way, either an ID or a STRING may be used as the referencable terminal, as it is possible in many SQL dialects.</p>
 <div class="literallayout">
@@ -1854,8 +1854,8 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 </div>
 </div>
 </div>
-<p>We previously explained, that the EObject to be returned is created lazily when the first assignment occurs or when a simple action is evaluated. There is another way one can set the EObject to be returned, which we call an &bdquo;unassigned rule call&rdquo;.</p>
-<p>Unassigned rule calls (the name suggests it) are rule calls to other parser rules, which are not used within an assignment. If there is no feature the returned value shall be assigned to, the value is assigned to the &bdquo;to-be-returned&rdquo; result of the calling rule.</p>
+<p>We previously explained, that the EObject to be returned is created lazily when the first assignment occurs or when a simple action is evaluated. There is another way one can set the EObject to be returned, which we call an &ldquo;unassigned rule call&rdquo;.</p>
+<p>Unassigned rule calls (the name suggests it) are rule calls to other parser rules, which are not used within an assignment. If there is no feature the returned value shall be assigned to, the value is assigned to the &ldquo;to-be-returned&rdquo; result of the calling rule.</p>
 <p>With unassigned rule calls one can, for instance, create rules which just dispatch between several other rules:</p>
 <div class="literallayout">
 <p>
@@ -1891,7 +1891,7 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 </code>
 </p>
 </div>
-<p>This way the &sbquo;cardinality&rsquo; is optional (last question mark) and can be represented by a question mark, a plus, or an asterisk. It will be assigned to either an EObject of type 
+<p>This way the &lsquo;cardinality&rsquo; is optional (last question mark) and can be represented by a question mark, a plus, or an asterisk. It will be assigned to either an EObject of type 
 							<code class="code">TokenA</code>,  
 							<code class="code">TokenB</code>, or 
 							<code class="code">TokenC</code> which are all subtypes of 
@@ -1910,7 +1910,7 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 </div>
 <p>LL parsing has some significant advantages over LR algorithms. The most important ones for Xtext are, that the generated code is much simpler to understand and debug and that it is easier to recover from errors. Especially ANTLR has a very nice generic error recovery mechanism. This allows to construct an AST even if there are syntactic errors in the text. You wouldn&rsquo;t get any of the nice IDE features as soon as there is one little error, if we hadn&rsquo;t error recovery.</p>
 <p>However, LL also has some drawbacks. The most important one is that it does not allow left recursive grammars.
-							For instance, the following is not allowed in LL based grammars, because &bdquo;Expression '+' Expression&rdquo; is left recursive:</p>
+							For instance, the following is not allowed in LL based grammars, because &ldquo;Expression '+' Expression&rdquo; is left recursive:</p>
 <div class="literallayout">
 <p>
 <code class="code">Expression&nbsp;:<br>
@@ -1924,7 +1924,7 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 </code>
 </p>
 </div>
-<p>Instead one has to rewrite such things by &bdquo;left-factoring&rdquo; it:</p>
+<p>Instead one has to rewrite such things by &ldquo;left-factoring&rdquo; it:</p>
 <div class="literallayout">
 <p>
 <code class="code">Expression&nbsp;:<br>
@@ -1960,7 +1960,7 @@ TerminalExpression&nbsp;returns&nbsp;Expression:<br>
 </p>
 </div>
 <p>... would result in unwanted elements in the AST.
-							For instance the expression &bdquo; ( 42 ) &rdquo; would result in a tree like this:</p>
+							For instance the expression &ldquo; ( 42 ) &rdquo; would result in a tree like this:</p>
 <div class="literallayout">
 <p>
 <code class="code">Operation&nbsp;{<br>
@@ -1999,7 +1999,7 @@ TerminalExpression&nbsp;returns&nbsp;Expression:<br>
 </div>
 <p>In the example above 
 							<code class="code">{Operation.left=current}</code> is a so called tree rewrite action, which creates a new instance of the stated EClass (Operation in this case) and assigns the element currently to-be-returned (
-							<code class="code">current</code> variable) to a feature of the newly created object (in this case feature &sbquo;left&rsquo; of the Operation instance).
+							<code class="code">current</code> variable) to a feature of the newly created object (in this case feature &lsquo;left&rsquo; of the Operation instance).
 							In Java these semantics could be expressed as:
 						</p>
 <div class="literallayout">
@@ -2047,7 +2047,7 @@ Fullname:&nbsp;<br>
 </code>
 </p>
 </div>
-<p>The sample rule &bdquo;Person&rdquo; defines multiline comments (ML_COMMENT), single-line comments (SL_COMMENT), and whitespace (WS) to be allowed between the &sbquo;Fullname&rsquo; and the &sbquo;age&rsquo;. Because the rule &sbquo;Fullname&rsquo; does not introduce another set of hidden terminals, it allows the same symbols to appear between &sbquo;firstname&rsquo; and &sbquo;lastname&rsquo; as the calling rule &sbquo;Person&rsquo;. Thus, the following input is perfectly valid for the given grammar snippet:</p>
+<p>The sample rule &ldquo;Person&rdquo; defines multiline comments (ML_COMMENT), single-line comments (SL_COMMENT), and whitespace (WS) to be allowed between the &lsquo;Fullname&rsquo; and the &lsquo;age&rsquo;. Because the rule &lsquo;Fullname&rsquo; does not introduce another set of hidden terminals, it allows the same symbols to appear between &lsquo;firstname&rsquo; and &lsquo;lastname&rsquo; as the calling rule &lsquo;Person&rsquo;. Thus, the following input is perfectly valid for the given grammar snippet:</p>
 <div class="literallayout">
 <p>
 <code class="code">John&nbsp;/*&nbsp;comment&nbsp;*/&nbsp;Smith&nbsp;//&nbsp;line&nbsp;comment<br>
@@ -2084,7 +2084,7 @@ Fullname:&nbsp;<br>
 </li>
 </ol>
 </div>
-<p>If you, for instance, want to define a rule to consume Java-like qualified names (e.g. &bdquo;foo.bar.Baz&rdquo;)
+<p>If you, for instance, want to define a rule to consume Java-like qualified names (e.g. &ldquo;foo.bar.Baz&rdquo;)
 					you could write:</p>
 <div class="literallayout">
 <p>
@@ -2100,7 +2100,7 @@ Fullname:&nbsp;<br>
 <p>This looks similar to the terminal rule we&rsquo;ve defined above in order to explain rule calls.
 					However, the difference is that because it is a parser rule and therefore only valid in certain contexts, it won&rsquo;t conflict with the rule ID.
 					If you had defined it as a terminal rule, it would possibly hide the ID rule.</p>
-<p>In addition when this has been defined as a data type rule, it is allowed to use hidden tokens (e.g. &bdquo;/* comment **/&rdquo;) between the IDs and dots (e.g. 
+<p>In addition when this has been defined as a data type rule, it is allowed to use hidden tokens (e.g. &ldquo;/* comment **/&rdquo;) between the IDs and dots (e.g. 
 					<code class="code">foo/* comment */. bar . Baz"</code>)
 				</p>
 <p>Return types can be specified in the same way as in terminal rules:</p>
@@ -2134,7 +2134,7 @@ Fullname:&nbsp;<br>
 <p>Enum rules return enumeration literals from strings. They can be seen as a shortcut for data type rules with specific value converters.
 					The main advantage of enum rules is their simplicity, type safety and therefore nice validation. Furthermore it is possible to infer enums and their respective literals during the Ecore model transformation.</p>
 <p>If you want to define a ChangeKind 
-					<a class="ulink" href="http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.emf.doc/references/javadoc/org/eclipse/emf/ecore/change/impl/package-summary.html" target="_new">org.eclipse.emf.ecore.change/model/Change.ecore</a> with &sbquo;ADD&rsquo;, &sbquo;MOVE&rsquo; and &sbquo;REMOVE&rsquo; you could write:
+					<a class="ulink" href="http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.emf.doc/references/javadoc/org/eclipse/emf/ecore/change/impl/package-summary.html" target="_new">org.eclipse.emf.ecore.change/model/Change.ecore</a> with &lsquo;ADD&rsquo;, &lsquo;MOVE&rsquo; and &lsquo;REMOVE&rsquo; you could write:
 				</p>
 <div class="literallayout">
 <p>
@@ -2178,7 +2178,7 @@ Fullname:&nbsp;<br>
 </p>
 </div>
 <p>the resulting value of the element 
-					<code class="code">Foo</code> will hold the enum value with the internal representation of &sbquo;0&rsquo; (zero). When generating the EPackage from your grammar this will be the first literal you define. As a workaround you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define an enum literal with an empty textual representation.
+					<code class="code">Foo</code> will hold the enum value with the internal representation of &lsquo;0&rsquo; (zero). When generating the EPackage from your grammar this will be the first literal you define. As a workaround you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define an enum literal with an empty textual representation.
 				</p>
 <div class="literallayout">
 <p>
@@ -2206,7 +2206,7 @@ Fullname:&nbsp;<br>
 </div>
 <p>The Ecore model (or meta model) of a textual language describes the structure of its abstract syntax trees (AST). </p>
 <p>Xtext uses Ecore&rsquo;s EPackages to define Ecore models. Ecore models are declared to be either inferred (generated) from the grammar or imported. 
-				By using the &sbquo;generate&rsquo; directive, one tells Xtext to derive an EPackage from the grammar. </p>
+				By using the &lsquo;generate&rsquo; directive, one tells Xtext to derive an EPackage from the grammar. </p>
 <div class="section" title="Type and Package Generation">
 <div class="titlepage">
 <div>
@@ -2224,7 +2224,7 @@ Fullname:&nbsp;<br>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
 <li class="listitem">
-<p>for each generate-package declaration. After the directive &sbquo;generate&rsquo; a list of parameters follows. The &sbquo;name&rsquo; of the EPackage will be set to the first parameter, its &sbquo;nsURI&rsquo; to the second parameter. An optional alias as the third parameter allows to distinguish generated EPackages later. Only one generated package declaration per alias is allowed.</p>
+<p>for each generate-package declaration. After the directive &lsquo;generate&rsquo; a list of parameters follows. The &lsquo;name&rsquo; of the EPackage will be set to the first parameter, its &lsquo;nsURI&rsquo; to the second parameter. An optional alias as the third parameter allows to distinguish generated EPackages later. Only one generated package declaration per alias is allowed.</p>
 </li>
 </ul>
 </div>
@@ -2297,7 +2297,7 @@ Fullname:&nbsp;<br>
 <p>An optional rule call does not modify the set.</p>
 </li>
 <li class="listitem">
-<p>A rule call is optional, if its cardinality is &sbquo;?&rsquo; or &sbquo;*&rsquo;.</p>
+<p>A rule call is optional, if its cardinality is &lsquo;?&rsquo; or &lsquo;*&rsquo;.</p>
 </li>
 </ul>
 </div>
@@ -2309,10 +2309,10 @@ Fullname:&nbsp;<br>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
 <li class="listitem">
-<p>of type EBoolean for each feature assignment using the &sbquo;?=&rsquo; operator. No further EReferences or EAttributes will be generated from this assignment.</p>
+<p>of type EBoolean for each feature assignment using the &lsquo;?=&rsquo; operator. No further EReferences or EAttributes will be generated from this assignment.</p>
 </li>
 <li class="listitem">
-<p>for each assignment with the &sbquo;=&rsquo; or &sbquo;+=&rsquo; operator calling a terminal rule. Its type will be the return type of the called rule.</p>
+<p>for each assignment with the &lsquo;=&rsquo; or &lsquo;+=&rsquo; operator calling a terminal rule. Its type will be the return type of the called rule.</p>
 </li>
 </ul>
 </div>
@@ -2322,7 +2322,7 @@ Fullname:&nbsp;<br>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
 <li class="listitem">
-<p>for each assignment with the &sbquo;=&rsquo; or &sbquo;+=&rsquo; operator in a parser rule calling a parser rule. The EReference&rsquo;s type will be the return type of the called parser rule.</p>
+<p>for each assignment with the &lsquo;=&rsquo; or &lsquo;+=&rsquo; operator in a parser rule calling a parser rule. The EReference&rsquo;s type will be the return type of the called parser rule.</p>
 </li>
 <li class="listitem">
 <p>for each assigned action. The reference&rsquo;s type will be set to the return type of the current calling rule. </p>
@@ -2332,8 +2332,8 @@ Fullname:&nbsp;<br>
 </li>
 </ul>
 </div>
-<p>Each EAttribute or EReference takes its name from the assignment or action that caused it. Multiplicities will be 0...1 for assignments with the &sbquo;=&rsquo; operator and 0...* for assignments with the &sbquo;+=&rsquo; operator. </p>
-<p>Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of &bdquo;artificial&rdquo; parser rules, that are never called, e.g.</p>
+<p>Each EAttribute or EReference takes its name from the assignment or action that caused it. Multiplicities will be 0...1 for assignments with the &lsquo;=&rsquo; operator and 0...* for assignments with the &lsquo;+=&rsquo; operator. </p>
+<p>Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of &ldquo;artificial&rdquo; parser rules, that are never called, e.g.</p>
 <div class="literallayout">
 <p>
 <code class="code">CommonSuperType:<br>
@@ -2354,7 +2354,7 @@ Fullname:&nbsp;<br>
 </div>
 </div>
 </div>
-<p>For each alternative defined in an enum rule, the transformer creates an enum literal, when another literal with the same name cannot be found. The &sbquo;literal&rsquo; property of the generated enum literal is set to the right hand side of the declaration. If it is omitted, you will get an enum literal with equal &sbquo;name&rsquo; and &sbquo;literal&rsquo; attributes.</p>
+<p>For each alternative defined in an enum rule, the transformer creates an enum literal, when another literal with the same name cannot be found. The &lsquo;literal&rsquo; property of the generated enum literal is set to the right hand side of the declaration. If it is omitted, you will get an enum literal with equal &lsquo;name&rsquo; and &lsquo;literal&rsquo; attributes.</p>
 <div class="literallayout">
 <p>
 <code class="code">enum&nbsp;MyGeneratedEnum:<br>
@@ -2610,7 +2610,7 @@ terminal&nbsp;ANY_OTHER:	.&nbsp;;<br>
 </div>
 </div>
 </div>
-<p>MWE2 allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just instantiates Java classes and the configuration is done through public setter and adder methods as one is used to from Java Beans encapsulation principles. An in-depth documentation can be found in the chapter &bdquo;MWE2&rdquo;#MWE2.</p>
+<p>MWE2 allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just instantiates Java classes and the configuration is done through public setter and adder methods as one is used to from Java Beans encapsulation principles. An in-depth documentation can be found in the chapter &ldquo;MWE2&rdquo;#MWE2.</p>
 <p>Given the following simple Java class (POJO):</p>
 <div class="literallayout">
 <p>
@@ -2699,11 +2699,11 @@ public&nbsp;class&nbsp;CreatePersons&nbsp;{<br>
 					into this workflow as well to make it convenient to instantiate actual workflows and components, but these ones are covered 
 					in depth in the appropriate 
 					<a class="link" href="#MWE2" title="Chapter&nbsp;6.&nbsp;MWE2">chapther</a>. The constructed objects are furthermore configured according to the declaration 
-					in the module, e.g. a second instance of Person will be created and added to the list of children of &bdquo;Grandpa&rdquo; while the third person 
-					- the class is inferred from the assigned feature &ndash; becomes a child of &bdquo;Father&rdquo;. All three instances will have their respective 
+					in the module, e.g. a second instance of Person will be created and added to the list of children of &ldquo;Grandpa&rdquo; while the third person 
+					- the class is inferred from the assigned feature &ndash; becomes a child of &ldquo;Father&rdquo;. All three instances will have their respective 
 					<code class="code">name</code>
 					assigned via a reflective invocation 
-					<code class="code">setName</code>. If one wants to add another child to &bdquo;Father&rdquo;, she
+					<code class="code">setName</code>. If one wants to add another child to &ldquo;Father&rdquo;, she
 					can simply repeat the child assignment:
 				</p>
 <div class="literallayout">
@@ -3110,7 +3110,7 @@ Workflow&nbsp;{<br>
 					<a class="link" href="#generator" title="The Generator">generator fragments</a> to automatically generate service implementations for a grammar. Thereby, Xtext strives to provide meaningful implementations out of the box and to allow customization wherever needed. Developers are encouraged to subclass existing services and configure them for their languages in their 
 					<a class="link" href="#guicemodules" title="Modules">modules</a>.  
 				</p>
-<p>When Guice instantiates an object, it also supplies this instance with all its dependent services. All a service does is to request &bdquo;some implementation for a certain interface&rdquo; using the <code class="code">@Inject</code>-annotation. Based on the 
+<p>When Guice instantiates an object, it also supplies this instance with all its dependent services. All a service does is to request &ldquo;some implementation for a certain interface&rdquo; using the <code class="code">@Inject</code>-annotation. Based on the 
 					<a class="link" href="#guicemodules" title="Modules">modules configuration</a> Guice decides which class to instantiate or which object to reuse. 
 				</p>
 <p>For example, Guice can automatically initialize member variables with the needed services. </p>
@@ -3672,7 +3672,7 @@ public&nbsp;void&nbsp;fixName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueResolutionA
 </code>
 </p>
 </div>
-<p>After regenerating your language artifacts you will find three new files &bdquo;YourLanguageChecks.chk&rdquo;, &bdquo;YourLanguageFastChecks.chk&rdquo; and &bdquo;YourLanguageExpensiveChecks.chk&rdquo; in the 
+<p>After regenerating your language artifacts you will find three new files &ldquo;YourLanguageChecks.chk&rdquo;, &ldquo;YourLanguageFastChecks.chk&rdquo; and &ldquo;YourLanguageExpensiveChecks.chk&rdquo; in the 
 					<code class="code">src/</code> folder in the sub-package 
 					<code class="code">validation</code>.  The checks in these files will be executed when saving a file, while typing (FastChecks) or when triggering the validation explicitly (ExpensiveChecks). When using Check the example of the previous chapter could be written like this.
 				</p>
@@ -3919,9 +3919,9 @@ public&nbsp;void&nbsp;fixName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueResolutionA
 </div>
 <p>The 
 					<a class="link" href="#metamodelInference" title="Ecore model inference">Ecore model inference</a> would create an 
-					<code class="code">EClass</code> &sbquo;ReferringType&rsquo; with an 
-					<code class="code">EReference</code> &sbquo;referencedObject&rsquo; of type &sbquo;Entity&rsquo; (containment=false). The referenced object would be identified either by an ID or a STRING and the surrounding information in the current context (see 
-					<a class="link" href="#scoping" title="Scoping">scoping</a>). If you do not use &bdquo;generate&rdquo; but &bdquo;import&rdquo; an existing ecore model, the class 
+					<code class="code">EClass</code> &lsquo;ReferringType&rsquo; with an 
+					<code class="code">EReference</code> &lsquo;referencedObject&rsquo; of type &lsquo;Entity&rsquo; (containment=false). The referenced object would be identified either by an ID or a STRING and the surrounding information in the current context (see 
+					<a class="link" href="#scoping" title="Scoping">scoping</a>). If you do not use &ldquo;generate&rdquo; but &ldquo;import&rdquo; an existing ecore model, the class 
 					<code class="code">ReferringType</code> (or one of its super types) would need to have an EReference of type Entity (or one of its super types) declared. Also the EReference&rsquo;s containment property needs to be set to 
 					<code class="code">false</code>. 
 				</p>
@@ -3948,10 +3948,10 @@ public&nbsp;void&nbsp;fixName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueResolutionA
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinker.java?root=Modeling_Project&view=co" target="_new">LazyLinker</a> first creates an EMF proxy and sets on the corresponding EReference. In EMF a proxy is described by a URI, which points to the real EObject. In the case of lazy linking the stored URI comprises of the context information given at parse time, which is the EObject containing the cross reference, the actual EReference, the index (in case it&rsquo;s a multi-valued cross reference) and the string which represented the cross link in the concrete syntax. The latter usually corresponds to the name of the referenced EObject. 
 					In EMF a URI consists of information about the resource the EObject is contained in as well as a so called fragment part, which is used to find the EObject within that resource. When an  EMF proxy is resolved, the current ResourceSet is asked. The resource set uses the first part to obtain (i.e. load if it is not already loaded) the resource. Then the resource is asked to return the EObject based on the fragment in the URI. The actual cross reference resolution is done by 
 					<code class="code">LazyLinkingResource.getEObject(String)</code> which receives the fragment and delegates to the implementation of the 
-					<code class="code">ILinkingService</code>.  The default implementation in turn delegates to the &bdquo;scopes API&rdquo;#scoping.
+					<code class="code">ILinkingService</code>.  The default implementation in turn delegates to the &ldquo;scopes API&rdquo;#scoping.
 				</p>
 <p>A simple implementation of the linking service (the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/DefaultLinkingService.java?root=Modeling_Project&view=co" target="_new">DefaultLinkingService</a>) is shipped with Xtext and used for any grammar per default. Usually any necessary customization of the linking behavior can best be described using the &bdquo;scopes API&rdquo;#scoping.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/DefaultLinkingService.java?root=Modeling_Project&view=co" target="_new">DefaultLinkingService</a>) is shipped with Xtext and used for any grammar per default. Usually any necessary customization of the linking behavior can best be described using the &ldquo;scopes API&rdquo;#scoping.
 				</p>
 </div>
 </div>
@@ -4090,7 +4090,7 @@ end<br>
 					</p>
 <p>There are also two different implementations of 
 						<code class="code">IQualifiedNameProvider</code>. Both work by looking up an 
-						<code class="code">EAttribute</code> with the name &sbquo;name&rsquo;. The 
+						<code class="code">EAttribute</code> with the name &lsquo;name&rsquo;. The 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/SimpleNameProvider.java?root=Modeling_Project&view=co" target="_new">SimpleNameProvider</a> just returns the plain value, while the 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.java?root=Modeling_Project&view=co" target="_new">DefaultDeclarativeQualifiedNameProvider</a> concats the simple name with the qualified name of its parent exported 
 						<code class="code">EObject</code>. This effectively simulates the qualified name computation of most name space based languages (like e.g. Java). 
@@ -4193,7 +4193,7 @@ Import&nbsp;:&nbsp;<br>
 <p>This effectively allows import statements to be declared before the events section. In addition you&rsquo;ll have to make sure that you have bound the 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportUriGlobalScopeProvider.java?root=Modeling_Project&view=co" target="_new">ImportUriGlobalScopeProvider</a> for the type 
 						<code class="code">IGlobalScopeProvider</code> by the means of Guice:#dependencyInjection. That implementation looks up any 
-						<code class="code">EAttributes</code> named &sbquo;importURI&rsquo; in your model and interprets their values as imports. That is it adds the corresponding resources to the current resource&rsquo;s resource set. In addition the scope provider uses the 
+						<code class="code">EAttributes</code> named &lsquo;importURI&rsquo; in your model and interprets their values as imports. That is it adds the corresponding resources to the current resource&rsquo;s resource set. In addition the scope provider uses the 
 						<code class="code">IResourceDescription.Manager</code>#resource_descriptions of that imported resource to compute all the 
 						<code class="code">IEObjectDescriptions</code> returned by the 
 						<code class="code">IScope</code>.  
@@ -4210,7 +4210,7 @@ Import&nbsp;:&nbsp;<br>
 </div>
 <p>The other possibility is to have some kind of external configuration in order to define what is visible outside a resource. Java for instances uses the notion of classpaths to define containers (jars and class folders) which contain any referenceable elements. In the case of Java also the order of such entries is important. 
 						Since version 1.0.0 Xtext provides support for this kind of global scoping. Actually by default Xtext leverages the classpath mechanism since it is well designed and already understood by most of our users. Also the available tooling provided by JDT and PDE to configure the classpath is of high value. However it is just a default you can reuse the infrastructure without reusing Java and therefore depending on JDT.</p>
-<p>In order to know what is available in the &bdquo;world&rdquo; a global scope provider which relies on external configuration needs to read that configuration in and be able to find all candidates for a certain EReference in those containers. If you don&rsquo;t want to force users to have a folder and file name structure reflecting the actual qualified names of the referenceable 
+<p>In order to know what is available in the &ldquo;world&rdquo; a global scope provider which relies on external configuration needs to read that configuration in and be able to find all candidates for a certain EReference in those containers. If you don&rsquo;t want to force users to have a folder and file name structure reflecting the actual qualified names of the referenceable 
 						<code class="code">EObjects</code>, you&rsquo;ll have to load all resources up front and either keep holding them in memory or remembering all information which is needed for reference resolution. In Xtext that information is provided by a so called 
 						<code class="code">IEObjectDescription</code>#resource_descriptions. 
 					</p>
@@ -4388,8 +4388,8 @@ entity&nbsp;Foo;<br>
 </div>
 </div>
 </div>
-<p>The default implementation for all languages looks within the current file for an EObject of the respective type. In the example above this would be an &bdquo;Entity&rdquo; which by convention has a 
-					<code class="code">name</code> attribute set to &sbquo;Entity01&rsquo;. 
+<p>The default implementation for all languages looks within the current file for an EObject of the respective type. In the example above this would be an &ldquo;Entity&rdquo; which by convention has a 
+					<code class="code">name</code> attribute set to &lsquo;Entity01&rsquo;. 
 				</p>
 <p>Given the grammar :</p>
 <div class="literallayout">
@@ -4650,7 +4650,7 @@ entity&nbsp;Foo;<br>
 </div>
 </div>
 </div>
-<p>The QualifiedNameScopeProvider looks up EAttributes with name &sbquo;importNamespace&rsquo; and interprets such as import statements.
+<p>The QualifiedNameScopeProvider looks up EAttributes with name &lsquo;importNamespace&rsquo; and interprets such as import statements.
 						By default qualified names with or without a wildcard at the end are supported. For an import of a qualified name the simple name is made available as we know from e.g. Java, where</p>
 <div class="literallayout">
 <p>
@@ -4659,7 +4659,7 @@ entity&nbsp;Foo;<br>
 </code>
 </p>
 </div>
-<p>makes it possible to refer to &sbquo;java.util.Set&rsquo; by its simple name &sbquo;Set&rsquo;.
+<p>makes it possible to refer to &lsquo;java.util.Set&rsquo; by its simple name &lsquo;Set&rsquo;.
 						Contrary to Java the import is not active for the whole file but only for the namespace it is declared in and its child namespaces. That is why you can write the following in the example DSL:</p>
 <div class="literallayout">
 <p>
@@ -5414,7 +5414,7 @@ terminal&nbsp;Plural:&nbsp;<br>
 				
 <span class="emphasis"><em>Encoding</em></span>, AKA 
 				<span class="emphasis"><em>character set</em></span>, describes the way characters are encoded into bytes and vice versa. 
-				Famous standard encodings are &bdquo;UTF-8&rdquo; or &bdquo;ISO-8859-1&rdquo;. The list of available encodings can be determined
+				Famous standard encodings are &ldquo;UTF-8&rdquo; or &ldquo;ISO-8859-1&rdquo;. The list of available encodings can be determined
 				by calling 
 				<code class="code">java.nio.Charset.availableCharsets()</code>. There is also a list of encodings and their 
 				canonical Java names in the 
@@ -5559,7 +5559,7 @@ myXtextResource.save(options);<br>
 </div>
 </div>
 </div>
-<p>The source code of the Xtext framework itself is completely encoded in &bdquo;ISO 8859-1&rdquo;, which is necessary 
+<p>The source code of the Xtext framework itself is completely encoded in &ldquo;ISO 8859-1&rdquo;, which is necessary 
 					to make the Xpand templates work everywhere (they use french quotation markup). That encoding is hard 
 					coded into the Xtext generator code. You are likely never going to change that. </p>
 </div>
@@ -5574,7 +5574,20 @@ myXtextResource.save(options);<br>
 </div>
 </div>
 </div>
-<p>The Modeling Workflow Engine 2 (MWE2) is a rewritten backwards compatible implementation of the Modeling Workflow Engine (MWE). It is a declarative, externally configurable generator engine. Users can describe arbitrary objects compositions by means of a simple, concise syntax that allows to declare object instances, attribute values and references. One use case &ndash; that&rsquo;s where the name had its origins &ndash; is the definition of workflows. Such a workflow consists usually of a number of components that interact with each other. There are components available, that read EMF resources, perform operations (transformations) on them and write them back or generate any number of other artifacts out of the information. Workflows are typically executed in a single JVM. However there are no constraints the prevent implementors to provide components that spawn multiple threads or new processes.</p>
+<p>The Modeling Workflow Engine 2 (MWE2) is a rewritten backwards 
+			compatible implementation of the Modeling Workflow Engine (MWE). It 
+			is a declarative, externally configurable generator engine. Users 
+			can describe arbitrary objects compositions by means of a simple, 
+			concise syntax that allows to declare object instances, attribute 
+			values and references. One use case &ndash; that&rsquo;s where the name had its 
+			origins &ndash; is the definition of workflows. Such a workflow consists 
+			usually of a number of components that interact with each other. 
+			There are components available, that read EMF resources, perform 
+			operations (transformations) on them and write them back or generate 
+			any number of other artifacts out of the information. Workflows are 
+			typically executed in a single JVM. However there are no constraints 
+			the prevent implementors to provide components that spawn multiple 
+			threads or new processes.</p>
 <div class="section" title="Examples">
 <div class="titlepage">
 <div>
@@ -5584,8 +5597,14 @@ myXtextResource.save(options);<br>
 </div>
 </div>
 </div>
-<p>Let&rsquo;s start with a couple of examples to demonstrate some usage scenarios for MWE2. The first examples is a simple 
-				<code class="code">HelloWorld</code> module that does nothing but print a message to standard out. The second module is assembled of three components that read an ecore file, transform the contained classifier-names to upper-case and serialize the resource back to a new file. The last examples uses the life-cycle methods to print the execution time of the workflow.
+<p>Let&rsquo;s start with a couple of examples to demonstrate some usage 
+				scenarios for MWE2. The first examples is a simple 
+				<code class="code">HelloWorld</code> 
+				module that does nothing but print a message to standard out. The 
+				second module is assembled of three components that read an ecore 
+				file, transform the contained classifier-names to upper-case and 
+				serialize the resource back to a new file. The last examples uses 
+				the life-cycle methods to print the execution time of the workflow.
 			</p>
 <div class="section" title="The simplest Workflow">
 <div class="titlepage">
@@ -5596,27 +5615,38 @@ myXtextResource.save(options);<br>
 </div>
 </div>
 </div>
-<p>The arguably shortest MWE2 module may look like the following snippet.</p>
+<p>The arguably shortest MWE2 module may look like the following 
+					snippet.</p>
 <div class="literallayout">
 <p>
 <code class="code">module&nbsp;HelloWorld&nbsp;<br>
 
 <br>
 SayHello&nbsp;{<br>
-	message&nbsp;=&nbsp;"Hello&nbsp;World!"<br>
+&nbsp;&nbsp;message&nbsp;=&nbsp;"Hello&nbsp;World!"<br>
 }<br>
-
-<br>
 
 </code>
 </p>
 </div>
-<p>It configures a very simple workflow component with a message that should be printed to 
-					<code class="code">System.out</code> when the workflow is executed. The module begins with a declaration of its name. It must fulfill the Java conventions for fully qualified class-names. That&rsquo;s why the module 
-					<code class="code">HelloWorld</code> has to be placed into the default package of a Java source folder. The second element in the module is the class-name 
-					<code class="code">SayHello</code> which introduces the root element of the module. The interpreter will create an instance of the referenced type and configure it as declared between the curly braces. E.g. the assignment 
-					<code class="code">message = "Hello World!"</code> in the module will be interpreted as an invocation of the 
-					<code class="code">setMessage(String)</code> on the instantiated object. As one can easily imagine, the implementation of the class 
+<p>It configures a very simple workflow component with a message 
+					that should be printed to 
+					<code class="code">System.out</code> when the workflow is 
+					executed. The module begins with a declaration of its name. It must 
+					fulfill the Java conventions for fully qualified class-names. That&rsquo;s 
+					why the module 
+					<code class="code">HelloWorld</code> has to be placed into the default 
+					package of a Java source folder. The second element in the module is 
+					the class-name 
+					<code class="code">SayHello</code> which introduces the root element of the 
+					module. The interpreter will create an instance of the referenced 
+					type and configure it as declared between the curly braces. E.g. the 
+					assignment 
+					<code class="code">message = "Hello World!"</code> in the module will be 
+					interpreted as an invocation of the 
+					<code class="code">setMessage(String)</code> on the 
+					instantiated object. As one can easily imagine, the implementation 
+					of the class 
 					<code class="code">SayHello</code> looks straight forward:
 				</p>
 <div class="literallayout">
@@ -5628,40 +5658,34 @@ import&nbsp;org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;<br>
 public&nbsp;class&nbsp;SayHello&nbsp;implements&nbsp;IWorkflowComponent&nbsp;{<br>
 
 <br>
-	private&nbsp;String&nbsp;message&nbsp;=&nbsp;"Hello&nbsp;World!";<br>
-	
-<br>
-	public&nbsp;void&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{<br>
-		System.out.println(getMessage());<br>
-	}<br>
+&nbsp;&nbsp;private&nbsp;String&nbsp;message&nbsp;=&nbsp;"Hello&nbsp;World!";<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;setMessage(String&nbsp;message)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.message&nbsp;=&nbsp;message;<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;public&nbsp;String&nbsp;getMessage()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;message;<br>
+&nbsp;&nbsp;}<br>
 
 <br>
-	public&nbsp;void&nbsp;setMessage(String&nbsp;message)&nbsp;{<br>
-		this.message&nbsp;=&nbsp;message;<br>
-	}<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(getMessage());<br>
+&nbsp;&nbsp;}<br>
 
 <br>
-	public&nbsp;String&nbsp;getMessage()&nbsp;{<br>
-		return&nbsp;message;<br>
-	}<br>
-
-<br>
-	public&nbsp;void&nbsp;postInvoke()&nbsp;{}<br>
-
-<br>
-	public&nbsp;void&nbsp;preInvoke()&nbsp;{}<br>
-	
-<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;postInvoke()&nbsp;{}<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;preInvoke()&nbsp;{}<br>
 }<br>
-
-<br>
 
 </code>
 </p>
 </div>
-<p>It looks like a simple POJO and that&rsquo;s the philosophy behind MWE2. It is easily possible to assemble completely independent objects in a declarative manner. To make the workflow executable with the 
+<p>It looks like a simple POJO and that&rsquo;s the philosophy behind MWE2. 
+					It is easily possible to assemble completely independent objects in 
+					a declarative manner. To make the workflow executable with the 
+
 					<code class="code">WorkflowRunner</code>, the component 
-					<code class="code">SayHello</code> must be nested in a root workflow:
+					<code class="code">SayHello</code> must be nested in a root 
+					workflow:
 				</p>
 <div class="literallayout">
 <p>
@@ -5674,24 +5698,456 @@ Workflow&nbsp;{<br>
 	}<br>
 }<br>
 
-<br>
-
 </code>
 </p>
 </div>
 <p>The class 
 					<code class="code">Workflow</code> is actually 
-					<code class="code">org.eclipse.emf.mwe2.runtime.workflow.Workflow</code> but its package is implicitly imported in MWE2 modules to make the the modules more concise. The execution result of this workflow will be revealed after a quick 
+
+					<code class="code">org.eclipse.emf.mwe2.runtime.workflow.Workflow</code> but its package is 
+					implicitly imported in MWE2 modules to make the the modules more 
+					concise. The execution result of this workflow will be revealed 
+					after a quick 
 					<code class="code">Run As .. -&gt; MWE2 Workflow</code> in the console as 
 				</p>
 <div class="literallayout">
 <p>
 <code class="code">Hello&nbsp;World!<br>
 
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="A simple Transformation">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="MWE2SimpleTransformation"></a>A simple Transformation</h3>
+</div>
+</div>
+</div>
+</div>
+<div class="section" title="A Stop-watch">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="MWE2Stopwatch"></a>A Stop-watch</h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" title="Language Reference">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="MWE2LanguageReference"></a>Language Reference</h2>
+</div>
+</div>
+</div>
+<p>MWE2 has a few well defined concepts which can be combined to 
+				assemble arbitrary object graphs in a compact and declarative 
+				manner.</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>A MWE2 file defines a 
+						<span class="emphasis"><em>module</em></span> which exposes its root 
+						<span class="emphasis"><em>component</em></span> as reusable artifact.
+					</p>
+</li>
+<li class="listitem">
+<p>
+						
+<span class="emphasis"><em>Properties</em></span> can be used to extract reusable, configurable parts of the workflow.
+					</p>
+</li>
+<li class="listitem">
+<p>Components are mapped to plain vanilla 
+						<span class="emphasis"><em>Java objects</em></span>. Arbitrary 
+						<span class="emphasis"><em>set- and add-methods</em></span> are used to configure them.
+					</p>
+</li>
+</ul>
+</div>
+<p>Let&rsquo;s consider the follow short example module and 
+				<code class="code">SampleClass</code> to 
+				explain these concepts.
+			</p>
+<div class="literallayout">
+<p>
+<code class="code">module&nbsp;com.mycompany.Example<br>
+
 <br>
+import&nbsp;java.util.*<br>
+
+<br>
+SampleClass&nbsp;{<br>
+&nbsp;&nbsp;singleValue&nbsp;=&nbsp;'a&nbsp;string'<br>
+&nbsp;&nbsp;multiValue&nbsp;=&nbsp;ArrayList&nbsp;{}<br>
+&nbsp;&nbsp;child&nbsp;=&nbsp;{}<br>
+}&nbsp;<br>
 
 </code>
 </p>
+</div>
+<div class="literallayout">
+<p>
+<code class="code">package&nbsp;com.mycompany;<br>
+
+<br>
+import&nbsp;java.util.List;<br>
+
+<br>
+public&nbsp;class&nbsp;SampleClass&nbsp;{<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;setSingleValue(String&nbsp;value)&nbsp;{..}<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;addMultiValue(List&lt;?&gt;&nbsp;value)&nbsp;{..}<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;addChild(SampleClass&nbsp;value)&nbsp;{..}<br>
+}<br>
+
+</code>
+</p>
+</div>
+<div class="section" title="Mapping to Java Classes">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="MWE2JavaReferences"></a>Mapping to Java Classes</h3>
+</div>
+</div>
+</div>
+<p>The module 
+					<code class="code">com.mycompany.Example</code> defines a root component of 
+					type 
+					<code class="code">com.mycompany.SampleClass</code>. It is possible to use the simple 
+					class-name because MWE2 uses the very same visibility rules as the 
+					Java compiler. Classes that are in the same package as the module 
+					can be referenced by their simple name. The same rule applies for 
+					classes from the 
+					<code class="code">java.lang</code> package. For convenience reasons is the 
+					package 
+					<code class="code">org.eclipse.emf.mwe2.runtime.workflow</code> implicitly imported 
+					as well as it exposes some library workflow components. However, the
+					imports are more flexible since MWE2-imports can be relative, e.g. 
+					the 
+					<code class="code">import java.*</code> resolves the reference 
+					<code class="code">util.ArrayList</code> to 
+
+					<code class="code">java.util.ArrayList</code>.  
+				</p>
+<p>The root instance of type 
+					<code class="code">SampleClass</code> has to be configured 
+					after it has been created. Therefore the method 
+					<code class="code">setSingleValue</code> 
+					will be called at first. The parameter given parameter is 
+
+					<code class="code">'a string'</code>. The method is identified by its name which starts with 
+
+					<code class="code">set</code>. To allow to assign multi-value properties, MWE provides 
+					access to methods call 
+					<code class="code">add*</code> as well. 
+				</p>
+<p>If the right side of the assignment in the workflow file does not 
+					define an explicit class, its type is inferred from the method 
+					parameter. The line 
+					<code class="code">child = {}</code> is equivalent to 
+
+					<code class="code">child = SampleClass {}</code> and creates a new instance of 
+					<code class="code">SampleClass</code>.
+				</p>
+<p>MWE2 ships with a nice tool support. The editor will provide 
+					content assist for the allowed types and highlight incompatible 
+					assignments. The available properties for Java classes will be 
+					proposed as well.</p>
+</div>
+<div class="section" title="Module">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="MWE2Module"></a>Module </h3>
+</div>
+</div>
+</div>
+<p>As MWE2 modules have a fully qualified name, it is possible to refer
+					to them from other modules. The type of the module is derived from
+					the type of its root component. The 
+					<code class="code">com.mycompany.Example</code> can be
+					assigned at any place where a 
+					<code class="code">com.mycompany.SampleClass</code> is expected.
+				</p>
+<p>Let&rsquo;s create a second module 
+					<code class="code">com.mycompany.Second</code> like this:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">module&nbsp;com.mycompany.sub.Second<br>
+
+<br>
+import&nbsp;com.mycompany.*<br>
+
+<br>
+SampleClass&nbsp;{<br>
+&nbsp;&nbsp;child&nbsp;=&nbsp;@Example&nbsp;{}<br>
+}&nbsp;<br>
+
+</code>
+</p>
+</div>
+<p>The 
+					<code class="code">child</code> value will be assigned to an instance of 
+					<code class="code">SampleClass</code> 
+					that is configured as in the first example workflow. This enables
+					nice composition and a very focused, reusable component design. 
+				</p>
+<p>As the same rules apply in MWE2 like in Java, the module 
+
+					<code class="code">com.mycompany.sub.Second</code> has to be defined in a file called 
+
+					<code class="code">Second.mwe2</code> in the package 
+					<code class="code">com.mycompany.sub</code>. The import semantic
+					for other modules is the same as for classes. The import statement
+					allows to refer to 
+					<code class="code">com.mycompany.Example</code> with a shortened name.
+				</p>
+</div>
+<div class="section" title="Properties">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="MWE2Properties"></a>Properties</h3>
+</div>
+</div>
+</div>
+<p>MWE2 allows to extract arbitrary information into properties to 
+					ensure that these pieces are not cluttered around the workflow and 
+					to allow for easier external customization. The exemplary component 
+					definition was only changed slightly by introducing a property 
+
+					<code class="code">value</code>.
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">module&nbsp;com.mycompany.Example<br>
+
+<br>
+var&nbsp;value&nbsp;=&nbsp;'a&nbsp;string'<br>
+
+<br>
+SampleClass&nbsp;{<br>
+&nbsp;&nbsp;singleValue&nbsp;=&nbsp;value<br>
+}<br>
+
+</code>
+</p>
+</div>
+<p>The type of the property will be derived from the default value 
+					similar to the mechanism that is already known from 
+					<code class="code">set</code>- and 
+
+					<code class="code">add</code>-methods. If no default value is given, 
+					<code class="code">java.lang.String</code> will
+					be assumed. However, properties are not limited to strings. The 
+					second built in type is boolean via the familiar literals 
+					<code class="code">true</code> and
+
+					<code class="code">false</code>. More flexibility is available via actual component literals.
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">module&nbsp;com.mycompany.Example<br>
+
+<br>
+var&nbsp;childInstance&nbsp;=&nbsp;SampleClass&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;singleValue&nbsp;=&nbsp;"child"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+
+<br>
+SampleClass&nbsp;{<br>
+&nbsp;&nbsp;child&nbsp;=&nbsp;childInstance<br>
+}<br>
+
+</code>
+</p>
+</div>
+<p>If one wants to define string properties that are actual reusable
+					parts for other properties, she may use defined variables inside other
+					literals like this: </p>
+<div class="literallayout">
+<p>
+<code class="code">var&nbsp;aString&nbsp;=&nbsp;"part"<br>
+var&nbsp;anotherString&nbsp;=&nbsp;"reuse&nbsp;the&nbsp;${part}&nbsp;here"<br>
+
+</code>
+</p>
+</div>
+<p>This is especially useful for file paths in workflows as one would
+					usually want to define some common root directories only ones in the
+					workflow and reuse this fragment across certain other file locations.</p>
+</div>
+<div class="section" title="Mandatory Properties">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="MWE2Mandatory"></a>Mandatory Properties</h3>
+</div>
+</div>
+</div>
+<p>It is not always feasible to define default values for properties. 
+					That is where mandatory properties come into play. Modules define their
+					interface not only via their fully qualified name and the type of the
+					root component but also by means of the defined properties.    </p>
+<div class="literallayout">
+<p>
+<code class="code">module&nbsp;com.mycompany.Example<br>
+
+<br>
+var&nbsp;optional&nbsp;=&nbsp;'a&nbsp;string'<br>
+var&nbsp;mandatory<br>
+
+<br>
+SampleClass&nbsp;{<br>
+&nbsp;&nbsp;singleValue&nbsp;=&nbsp;optional<br>
+&nbsp;&nbsp;child&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;singleValue&nbsp;=&nbsp;mandatory<br>
+&nbsp;&nbsp;}<br>
+}<br>
+
+</code>
+</p>
+</div>
+<p>This version of the example module exposes two externally assignable
+					properties. The second one has no default value assigned and is 
+					thereby considered to be mandatory. The mandatory value must be assigned
+					if we reuse 
+					<code class="code">org.mycompany.Example</code> in another module like this:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">module&nbsp;com.mycompany.Second<br>
+
+<br>
+var&nbsp;newMandatory<br>
+
+<br>
+@Example&nbsp;{<br>
+&nbsp;&nbsp;mandatory&nbsp;=&nbsp;"mandatoryValue"<br>
+&nbsp;&nbsp;optional&nbsp;=&nbsp;newMandatory<br>
+}&nbsp;<br>
+
+</code>
+</p>
+</div>
+<p>Note that it is even possible to reuse another module as the root
+					component of a new module. In this case we set the mandatory 
+					property of 
+					<code class="code">Example</code> to a specific constant value while the previously
+					optional value is now redefined as mandatory by means of a new property
+					without a default value.
+				</p>
+<p>It is not only possible to define mandatory properties for MWE2 
+					modules but for classes as well. Therefore MWE2 ships with the 
+
+					<code class="code">Mandatory</code> annotation. If a 
+					<code class="code">set</code>- or 
+					<code class="code">add</code>-method is marked as
+
+					<code class="code">mandatory</code>, the module validation will fail if no value was assigned
+					to that feature.
+				</p>
+</div>
+<div class="section" title="Named Components">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="MWE2NamedComponents"></a>Named Components</h3>
+</div>
+</div>
+</div>
+<p>Properties are not the only way to define something that can be reused.
+					It is possible to assign a name to any instantiated component being
+					it created from a class literal or from another component. This allows
+					to refer to previously created and configured instances. Named instances
+					can come handy for notification and call-back mechanisms or more general
+					in terms of defined life-cylce events. </p>
+<p>If we wanted to assign the created instance to a property of itself,
+					we could use the following syntax:</p>
+<div class="literallayout">
+<p>
+<code class="code">module&nbsp;com.mycompany.Example<br>
+
+<br>
+SampleClass&nbsp;:&nbsp;self&nbsp;{<br>
+&nbsp;&nbsp;child&nbsp;=&nbsp;self<br>
+}<br>
+
+</code>
+</p>
+</div>
+<p>A named component can be referenced immediately after its creation but
+					it is not possible to define forward references in a MWE2 file.</p>
+</div>
+<div class="section" title="Auto Injection">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="MWE2AutoInject"></a>Auto Injection</h3>
+</div>
+</div>
+</div>
+<p>Existing modules or classes often expose a set of properties that 
+					will be assigned to features of its root component or set- and add- 
+					methods respectively. In many cases its quite hard to come up with 
+					yet another name for the very same concept which leads to the situation
+					where the properties itself have the very same name as the component&rsquo;s
+					feature. To avoid the overall repetition of assignments, MWE2 offers
+					the possibility to use the 
+					<code class="code">auto-inject</code> modifier on the component 
+					literal:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">module&nbsp;com.mycompany.Example<br>
+
+<br>
+var&nbsp;child&nbsp;=&nbsp;SampleClass&nbsp;{}<br>
+
+<br>
+SampleClass&nbsp;auto-inject&nbsp;{<br>
+}<br>
+
+</code>
+</p>
+</div>
+<p>This example will implicitly assign the value of the property
+
+					<code class="code">child</code> to the feature 
+					<code class="code">child</code> of the root component. This is especially
+					useful for highly configurable workflows that expose dozens of optional
+					parameters each of which can be assigned to one or more components.
+				</p>
+<p>The 
+					<code class="code">auto-inject</code> modifier can be used for a subset of the available
+					features as well. It will suppressed for the explicitly set values
+					of a component.        
+				</p>
+</div>
+<div class="section" title="Factory Support">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="MWE2Factories"></a>Factory Support</h3>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -5704,85 +6160,242 @@ Workflow&nbsp;{<br>
 </div>
 </div>
 </div>
+<p>The following chapter serves as a reference for the concrete syntax of 
+				MWE2. The building blocks of a module will be described in a few words.</p>
+<p>MWE2 is not sensitive to white-space and allows to define line-comments
+				and block comments everywhere. The syntax is the same as one is used 
+				to from the Java language:</p>
+<div class="literallayout">
+<p>
+<code class="code">//&nbsp;This&nbsp;is&nbsp;a&nbsp;comment<br>
+/*&nbsp;<br>
+&nbsp;&nbsp;This&nbsp;is&nbsp;another&nbsp;one.<br>
+*/<br>
+
+</code>
+</p>
+</div>
+<p>Every name in MWE2 can be a fully qualified identifier and must follow 
+				the Java conventions. However, in contrast to Java identifiers it is 
+				not allowed to use German umlauts or Unicode escape sequences in 
+				identifiers. A valid id-segment in MWE2 starts with a letter or an 
+				underscore and is followed by any number of letters, numbers or underscores.
+				An identifier is composed from one or more segments which are delimited
+				by a &lsquo;.&rsquo; dot.</p>
+<div class="literallayout">
+<p>
+<code class="code">Name:&nbsp;ID&nbsp;('.'&nbsp;ID)*;<br>
+ID:&nbsp;('a'..'z'|'A'..'Z'|'_')&nbsp;('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;&nbsp;<br>
+
+</code>
+</p>
+</div>
+<p>MWE2 does not use a semicolon as statement delimiter at any place.</p>
+<div class="section" title="Module">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="MWE2ModuleSyntax"></a>Module</h3>
+</div>
+</div>
+</div>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/mwe2/module.png"></div>
+<p>
+				
+</p>
+<p>A 
+					<code class="code">module</code> consists of four parts. The very first statement in a 
+
+					<code class="code">*.mwe2</code> file is the module declaration. The name of the module must 
+					follow the naming convention for Java classes. That MWE2 file&rsquo;s name 
+					must therefore be the same as the last segment of the module-name 
+					and it has to be placed in the appropriate package of a Java source 
+					path.
+				</p>
+<p>It is allowed to define any number of import statements in a module.
+					Imports are either suffixed by a wild-card or concrete for a class 
+					or module. MWE2 can handle relative imports in case one uses the 
+					wild-card notation:</p>
+<div class="literallayout">
+<p>
+<code class="code">'import'&nbsp;name&nbsp;'.*'?&nbsp;&nbsp;&nbsp;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Property">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="MWE2PropertySyntax"></a>Property</h3>
+</div>
+</div>
+</div>
+<p>The list of declared properties follows the optional import section.
+					It is allowed to define modules without any properties. </p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/mwe2/property.png"></div>
+<p>
+				
+</p>
+<p>Each declared property is locally visible in the module. It 
+					furthermore defines an assignable feature of the module in case one 
+					refers to it from another module. Properties may either have a 
+					default value or they are considered to be mandatory. If the type
+					of property is omitted it will be inferred from the default value. The
+					default type of a property is 
+					<code class="code">java.lang.String</code> so if no default
+					value is available, the property is mandatory and of type 
+					<code class="code">String</code>.
+				</p>
+<p>There are four types of values available in MWE2. One may either
+					define a string, boolean or component literal or a reference to a
+					previously defined property. </p>
+</div>
+<div class="section" title="Component">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="MWE2ComponentSyntax"></a>Component</h3>
+</div>
+</div>
+</div>
+<p>The last part of a module is the root component. It defines the externally
+					visible type of the module and may either be created from a Java 
+					type or from another module.</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/mwe2/component.png"></div>
+<p>
+				
+</p>
+<p>The type of the component can be derived in many cases except for 
+					the root component. That&rsquo;s why it&rsquo;s optional in the component literal.
+					If no type is given, it will be inferred from the left side of the
+					assignment. The assigned feature can either be a declared property
+					of the module or a 
+					<code class="code">set</code>- or 
+					<code class="code">add</code>-method of a Java class.
+				</p>
+<p>Components can be named to make them referable in subsequent assignments.
+					Following the &lsquo;:&rsquo; keyword, one can define an identifier for the 
+					instantiated component. The identifier is locally visible in the module
+					and any assignment that is defined after the named component can refer
+					to this identifier and thereby point to exactly the instantiated object.</p>
+<p>The next option for a component is 
+					<code class="code">auto-inject</code>. If this modifier
+					is set on a component, any available feature of the component that has
+					the same name as a property or previously created named component will
+					be automatically assigned.
+				</p>
+<p>The core of a component is the list of assignments between the curly 
+					braces. An arbitrary number of values can be set on the component by
+					means of feature-to-value pairs. </p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/mwe2/assignment.png"></div>
+<p> 
+				
+</p>
+<p>The available constructs on the right hand side of the assignment
+					are the same as for default values for properties. </p>
+</div>
 <div class="section" title="String Literals">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="MWE2Literals"></a>String Literals</h3>
+<a name="MWE2StringLiteralsSyntax"></a>String Literals</h3>
 </div>
 </div>
 </div>
+<p>String values are likely to be the most used literals in MWE2. There 
+					is a convenient syntax for string concatenation available due to
+					the high relevance in a description object composition and configuration 
+					language. MWE2 strings are multi-line strings and can be composed of
+					several parts.</p>
+<div class="literallayout">
+<p>
+<code class="code">var&nbsp;aString&nbsp;=&nbsp;'a&nbsp;value'<br>
+var&nbsp;anotherString&nbsp;=&nbsp;'It&nbsp;is&nbsp;possible&nbsp;to&nbsp;embed&nbsp;${aString}&nbsp;into<br>
+&nbsp;a&nbsp;multi-line&nbsp;string'<br>
+
+</code>
+</p>
 </div>
-<div class="section" title="Class References">
+<p>This is especially convenient for path-substitution if one defines
+					e.g. a common root directory and wants to specify other paths relative
+					to the base. </p>
+<p>There are two different delimiters available for strings. Users 
+					are free to either use single- or double-quotes to start and end strings. 
+					If a certain string contains a lot of single-quotes one would better
+					choose double-quotes as delimiter and vice versa. There is no semantic 
+					difference between both notations.</p>
+<p>The escape character in MWE2 is the back-slash 
+					<code class="code">"\"</code>. It can be used
+					to write line-breaks or tabular characters explicitly and to escape
+					the beginning of substitution variables 
+					<code class="code">${</code> and the quotes itself. Allowed
+					escape sequences are:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">\n&nbsp;&nbsp;..&nbsp;line&nbsp;break<br>
+\r&nbsp;&nbsp;..&nbsp;carriage&nbsp;return<br>
+\t&nbsp;&nbsp;..&nbsp;tabular&nbsp;character<br>
+\'&nbsp;&nbsp;..&nbsp;single-quote&nbsp;(can&nbsp;be&nbsp;omitted&nbsp;in&nbsp;double-quoted&nbsp;strings)<br>
+\"&nbsp;&nbsp;..&nbsp;double-quote&nbsp;(can&nbsp;be&nbsp;omitted&nbsp;in&nbsp;single-quoted&nbsp;strings)<br>
+\${&nbsp;..&nbsp;escape&nbsp;the&nbsp;substitution&nbsp;variable&nbsp;start&nbsp;${<br>
+\\&nbsp;&nbsp;..&nbsp;the&nbsp;back-slash&nbsp;itself<br>
+
+</code>
+</p>
+</div>
+<p>Other escape sequence are illegal in MWE2 strings.</p>
+</div>
+<div class="section" title="Boolean Literals">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="MWE2ClassReferences"></a>Class References</h3>
+<a name="MWE2BooleanLiterals"></a>Boolean Literals</h3>
 </div>
 </div>
 </div>
+<p>MWE2 has native support for the boolean type. The literals are 
+					<code class="code">true</code> and 
+					<code class="code">false</code>.
+				</p>
 </div>
-<div class="section" title="Module References">
+<div class="section" title="References">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="MWE2ModuleReferences"></a>Module References</h3>
+<a name="MWE2References"></a>References</h3>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" title="Language Features">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title" style="clear: both">
-<a name="MWE2Syntax"></a>Language Features</h2>
-</div>
-</div>
-</div>
-<div class="section" title="Properties">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-<a name="MWE2Properties"></a>Properties</h3>
-</div>
-</div>
-</div>
-</div>
-<div class="section" title="Mandatory Properties">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-<a name="MWE2Mandatory"></a>Mandatory Properties</h3>
-</div>
-</div>
-</div>
-</div>
-<div class="section" title="Auto Injection">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-<a name="MWE2AutoInject"></a>Auto Injection</h3>
-</div>
-</div>
-</div>
-</div>
-<div class="section" title="Factory Support">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-<a name="MWE2Factories"></a>Factory Support</h3>
-</div>
-</div>
-</div>
+<p>Each assigned value in MWE2 either as default for properties or in a
+					component assignment can be a reference to a previously declared property
+					or named component. The can be referenced intuitively by their name.</p>
 </div>
 </div>
 <div class="section" title="Workflow API">
@@ -5993,7 +6606,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 <p>Clients who want to customize the behavior may override the methods from the 
 					<code class="code">AbstractProposalProvider</code> or introduce new methods with specialized parameters. The framework dispatches method calls according to the current context to the most concrete implementation, that can be found.
 				</p>
-<p>It is important to know, that for a given offset in a model file, many possible grammar elements exist. The framework dispatches to the method declarations for any valid element. That means, that a bunch of '&sbquo;complete.*&rsquo;' methods may be called.</p>
+<p>It is important to know, that for a given offset in a model file, many possible grammar elements exist. The framework dispatches to the method declarations for any valid element. That means, that a bunch of '&lsquo;complete.*&rsquo;' methods may be called.</p>
 </div>
 <div class="section" title="Sample Implementation">
 <div class="titlepage">
@@ -6004,7 +6617,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 </div>
-<p>To provide a dummy proposal for the description of a model object, you may introduce a specialization of the generated method and implement it as follows. This will give &sbquo;Description for model #7&rsquo; for a model with the intAttribute '7'</p>
+<p>To provide a dummy proposal for the description of a model object, you may introduce a specialization of the generated method and implement it as follows. This will give &lsquo;Description for model #7&rsquo; for a model with the intAttribute '7'</p>
 <div class="literallayout">
 <p>
 <code class="code">public&nbsp;void&nbsp;completeModel_StringDescription&nbsp;(<br>
@@ -6171,8 +6784,8 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </p>
 </div>
 <p>yields the text 
-					<code class="code">public op name(): type</code> where the display text &sbquo;public&rsquo; is replaced with a drop down filled with the literal values as defined in the Visibility 
-					<code class="code">EENumeration</code>. Also, &sbquo;name&rsquo; and &sbquo;type&rsquo; are placeholders.
+					<code class="code">public op name(): type</code> where the display text &lsquo;public&rsquo; is replaced with a drop down filled with the literal values as defined in the Visibility 
+					<code class="code">EENumeration</code>. Also, &lsquo;name&rsquo; and &lsquo;type&rsquo; are placeholders.
 				</p>
 <p>
 					
@@ -6793,13 +7406,13 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 <p>
 								
 <code class="code">after(ele)</code>: The rule is executed after the grammar element 
-								<code class="code">ele</code> has been matched. For example, if your grammar uses the keyword &bdquo;;&rdquo; to end lines, this can instruct the formatter to insert a line-break after the semicolon.  
+								<code class="code">ele</code> has been matched. For example, if your grammar uses the keyword &ldquo;;&rdquo; to end lines, this can instruct the formatter to insert a line-break after the semicolon.  
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">before(ele)</code>: The rule is executed before the matched element. For example, if your grammar contains lists which separate its values with keyword &bdquo;,&rdquo;, you can instruct the formatter to suppress the whitespace before the comma.
+<code class="code">before(ele)</code>: The rule is executed before the matched element. For example, if your grammar contains lists which separate its values with keyword &ldquo;,&rdquo;, you can instruct the formatter to suppress the whitespace before the comma.
 							</p>
 </li>
 <li class="listitem">
@@ -7177,7 +7790,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 			</p>
 <p>We&rsquo;ve developed and reviewed a lot of oAW Xtext projects and saw that most of the work was done in the grammar and in the validation view point. 
 				Other aspects such as outline view, label provider or content assist have been customized too, but they usually do not contain complicated Xtend code.
-				In some projects the exception was linking and content assist which in oAW Xtext usually forces one to write a lot of duplicated code. While working on this we came up with a new concept called &bdquo;scopes&rdquo; that not only streamlines implementation in terms of redundancy. Scopes also increase the overall performance of Xtext.
+				In some projects the exception was linking and content assist which in oAW Xtext usually forces one to write a lot of duplicated code. While working on this we came up with a new concept called &ldquo;scopes&rdquo; that not only streamlines implementation in terms of redundancy. Scopes also increase the overall performance of Xtext.
 				But since the concept of scopes was not carved out in oAW Xtext one usually implemented a cluttered and duplicated poor copy through linking and content assist. For obvious reasons, we didn&rsquo;t manage to come up with a good compatibility layer.
 				So this is where most of the migration effort will go into if implemented customized linking. But we think the notion of scopes is such a valuable addition that it is worth the refactoring. Also, when looking at existing oAW Xtext projects we found that most projects either didn&rsquo;t change the default linking that much or they came up with their own linking framework anyway.</p>
 <p>However, if we have completely misunderstood the situation and your oAW Xtext project cannot be migrated in a reasonable amount of time, please tell us. We want to help you!</p>
@@ -7217,7 +7830,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 </div>
-<p>But the problematic debugging in the context of Xtext was not the main reason why there are no Xtend-based APIs beside Check in TMF Xtext. The main reason is that Xtend is too slow to be evaluated &bdquo;inside&rdquo; the editor again and again while you type. 
+<p>But the problematic debugging in the context of Xtext was not the main reason why there are no Xtend-based APIs beside Check in TMF Xtext. The main reason is that Xtend is too slow to be evaluated &ldquo;inside&rdquo; the editor again and again while you type. 
 					While Xtend&rsquo;s performance is sufficient when run in a code generator, it is just too slow to be executed on keystroke (or 500ms after the last keystroke, which is when the reconciler reparses, links and validates the model). Xtend is relatively slow, because it supports polymorphic dispatch (the cool feature mentioned above), which means that for each invocation it matches at runtime which function is the best match and it has to do so on each call. Also Xtend supports a pluggable typesystem, where you can adapt to other existing type systems such as JavaBeans or Ecore. This is very powerful and flexible but introduces another indirection layer. Last but not least the code is interpreted and not compiled. The price we pay for all these nice features is reduced performance.</p>
 <p>In addition to these scalability problems we have designed some core APIs (e.g. scopes) around the idea of Iterables, which allows for lazy resolution of elements. As Xtend does not know the concept of Iterators you would have to work with lists all the time. Copying collections over and over again is far more expensive than chaining Iterables through filters and transformers like we do with Google Collections in TMF Xtext.</p>
 </div>
@@ -7327,7 +7940,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 </div>
-<p>The very handy String rules are still present in TMF Xtext but we generalized them so that you don&rsquo;t need to write the &sbquo;String&rsquo; keyword in front of them and at the same time these rules can not only produce EStrings but (as the name suggests) any kind of EDataType. Every parser rule that neither includes assignments nor calls any other that does, returns an EDataType containing the consumed data. Per default this is an EString but you can now simply create a parser rule returning other EDataTypes as well (see 
+<p>The very handy String rules are still present in TMF Xtext but we generalized them so that you don&rsquo;t need to write the &lsquo;String&rsquo; keyword in front of them and at the same time these rules can not only produce EStrings but (as the name suggests) any kind of EDataType. Every parser rule that neither includes assignments nor calls any other that does, returns an EDataType containing the consumed data. Per default this is an EString but you can now simply create a parser rule returning other EDataTypes as well (see 
 						<a class="link" href="#datatypeRules" title="Data type rules">Datatype rules</a>).
 					</p>
 <div class="literallayout">
@@ -7347,7 +7960,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 </div>
-<p>Enum rules have not changed significantly. The keyword has changed to be all lower case (&sbquo;enum&rsquo; instead of &sbquo;Enum&rsquo;).
+<p>Enum rules have not changed significantly. The keyword has changed to be all lower case (&lsquo;enum&rsquo; instead of &lsquo;Enum&rsquo;).
 						Also the right-hand side of the assignment is now optional. That is in oAW Xtext:</p>
 <div class="literallayout">
 <p>
@@ -7418,7 +8031,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 <p>We decided to remove the URI terminal. The only reason for the existence was to mark the model somehow so that the framework knows what information to use in order to load referenced models. Instead we decided to solve this similar to how we imply other defaults: by convention.</p>
-<p>So instead of using a special token which is syntactically a STRING token, the default import mechanism now looks for EAttributes of type EString with the name &sbquo;importURI&rsquo;.
+<p>So instead of using a special token which is syntactically a STRING token, the default import mechanism now looks for EAttributes of type EString with the name &lsquo;importURI&rsquo;.
 						That is if you&rsquo;ve used the URI token like this:</p>
 <div class="literallayout">
 <p>
@@ -7446,7 +8059,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 </div>
-<p>The syntax to explicitly declare the return type of a rule has changed. In oAW Xtext (where this was marked as &sbquo;experimental&rsquo;) the syntax was:</p>
+<p>The syntax to explicitly declare the return type of a rule has changed. In oAW Xtext (where this was marked as &lsquo;experimental&rsquo;) the syntax was:</p>
 <div class="literallayout">
 <p>
 <code class="code">&nbsp;&nbsp;MyRule&nbsp;[MyType]&nbsp;:&nbsp;foo=ID;&nbsp;&nbsp;<br>
@@ -7474,7 +8087,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 </div>
-<p>The linking has been completely redesigned. In oAW Xtext linking was done in a very naive way: To find an element one queries a list of all &sbquo;visible&rsquo; EObjects, then filters out what is not needed and tries to find a match by comparing the text written for the crosslink with the value returned by the 
+<p>The linking has been completely redesigned. In oAW Xtext linking was done in a very naive way: To find an element one queries a list of all &lsquo;visible&rsquo; EObjects, then filters out what is not needed and tries to find a match by comparing the text written for the crosslink with the value returned by the 
 					<code class="code">id()</code> extension. As a side-effect of 
 					<code class="code">link_feature()</code> the reference is set.
 				</p>
@@ -7502,7 +8115,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 </div>
-<p>In TMF Xtext we&rsquo;ve introduced scopes and scope providers that are responsible for creating scopes. A scope is basically a set of name-&gt;value pairs. Scopes are implemented upon Iterables and are nested to build a hierarchy. With scopes we declare &bdquo;visible&rdquo; objects in a lazy and cost-saving way where the linker only navigates as far as necessary to find matching objects. The content assist reuses this set of visible objects to offer only reachable objects. </p>
+<p>In TMF Xtext we&rsquo;ve introduced scopes and scope providers that are responsible for creating scopes. A scope is basically a set of name-&gt;value pairs. Scopes are implemented upon Iterables and are nested to build a hierarchy. With scopes we declare &ldquo;visible&rdquo; objects in a lazy and cost-saving way where the linker only navigates as far as necessary to find matching objects. The content assist reuses this set of visible objects to offer only reachable objects. </p>
 <p>When the linking has to be customized scoping is where most of the semantics typically goes into. By implementing an 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java?root=Modeling_Project&view=co" target="_new">IScopeProvider</a> for your language linking and content assist will automatically be kept in sync since both use the scope provider.
 					</p>
@@ -7510,10 +8123,10 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 <div class="orderedlist">
 <ol class="orderedlist" type="1">
 <li class="listitem">
-<p>Elements which have an attribute &sbquo;name&rsquo; will be made visible by their name</p>
+<p>Elements which have an attribute &lsquo;name&rsquo; will be made visible by their name</p>
 </li>
 <li class="listitem">
-<p>Referenced resources will be put on the (outer) scope by using the &sbquo;importURI&rsquo;- naming convention and will only be loaded if necessary</p>
+<p>Referenced resources will be put on the (outer) scope by using the &lsquo;importURI&rsquo;- naming convention and will only be loaded if necessary</p>
 </li>
 <li class="listitem">
 <p>The available elements are filtered by the expected type (i.e. the type of the reference to be linked)</p>
@@ -7591,7 +8204,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 				</p>
 <p>
 					
-<a class="link" href="#grammarImport" title="Importing existing Ecore models">Reusing existing Ecore models</a> in oAW Xtext didn&rsquo;t work well and we communicated this by flagging this feature as &sbquo;experimental&rsquo;. In TMF Xtext importing existing Ecore models is fully supported. Moreover, it is possible to import a couple of different EPackages and generate some at the same time, so that the generated Ecore models extend or refer to the existing Ecore models.
+<a class="link" href="#grammarImport" title="Importing existing Ecore models">Reusing existing Ecore models</a> in oAW Xtext didn&rsquo;t work well and we communicated this by flagging this feature as &lsquo;experimental&rsquo;. In TMF Xtext importing existing Ecore models is fully supported. Moreover, it is possible to import a couple of different EPackages and generate some at the same time, so that the generated Ecore models extend or refer to the existing Ecore models.
 				</p>
 <p>The grammar language gained one new concept that is of great value when writing left-factored grammars (e.g. expressions). With actions one can do minor AST rewritings within a rule to overcome degenerated ASTs. You will find an 
 					<a class="link" href="#grammarActions" title="Assigned Actions">in-depth explanation of actions</a> in the dedicated chapter in the reference documentation.
@@ -7630,7 +8243,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </code>
 </p>
 </div>
-<p>If you add the name of a feature prepended by a hash (&sbquo;#&rsquo;) in Check, the editor will only mark the value of the feature (name), not the whole object (Entity). Both concepts, control over validation time as well as pointing to a specific feature, complement one another in Check and Java based validation.</p>
+<p>If you add the name of a feature prepended by a hash (&lsquo;#&rsquo;) in Check, the editor will only mark the value of the feature (name), not the whole object (Entity). Both concepts, control over validation time as well as pointing to a specific feature, complement one another in Check and Java based validation.</p>
 </div>
 </div>
 <div class="section" title="Migration Support">

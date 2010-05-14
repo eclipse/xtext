@@ -23,7 +23,7 @@
 </div>
 <p>
 				
-<a class="ulink" href="http://www.eclipse.org/Xtext/download/" target="_new">Download and install the latest version of Xtext</a>, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our &bdquo;target syntax&rdquo; later on:
+<a class="ulink" href="http://www.eclipse.org/Xtext/download/" target="_new">Download and install the latest version of Xtext</a>, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our &ldquo;target syntax&rdquo; later on:
 			</p>
 <div class="literallayout">
 <p>
@@ -100,7 +100,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 					
 </tr>
 </table>
-<p>Keep &bdquo;Create generator project&rdquo; checked, as we will also create a code generator in a second step.</p>
+<p>Keep &ldquo;Create generator project&rdquo; checked, as we will also create a code generator in a second step.</p>
 <p>Click on 
 					<span class="emphasis"><em>Finish</em></span> to create the projects. 
 				</p>
@@ -158,7 +158,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 					<code class="code">Model</code> consists of one or more 
 					<code class="code">Entity</code> entries, this rule delegates to another rule named 
 					<code class="code">Entity</code>, which will be defined later on.
-					As we can have one ore more entities within a model, the cardinality is &bdquo;+&rdquo;. Each rule is terminated with a semicolon. So our first rule reads as
+					As we can have one ore more entities within a model, the cardinality is &ldquo;+&rdquo;. Each rule is terminated with a semicolon. So our first rule reads as
 				</p>
 <div class="literallayout">
 <p>
@@ -173,7 +173,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 <p>
 					
 <span class="italic">
-						<span class="bold"><strong>Please note</strong></span>: If you encounter strange errors while copying and pasting these snippets to your Eclipse editor your documentation viewer most likely has inserted characters different from {space} into your clipboard. Reenter these &bdquo;fillers&rdquo; or type the text by hand to be sure everything works fine.
+						<span class="bold"><strong>Please note</strong></span>: If you encounter strange errors while copying and pasting these snippets to your Eclipse editor your documentation viewer most likely has inserted characters different from {space} into your clipboard. Reenter these &ldquo;fillers&rdquo; or type the text by hand to be sure everything works fine.
 					</span> 
 				
 </p>
@@ -222,7 +222,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 					<code class="code">ID</code>, which results in a string. The assignment operator "
 					<code class="code">=</code>" denotes a single valued feature, and the asterisk a cardinality of 0..n.
 					In our target syntax, some entities refer to an existing entity as their super type after the keyword 
-					<code class="code">extends</code>. Note that this is a cross-reference, as the super type itself must be defined somewhere else. To define a cross-reference we use square brackets. Optional parts have the cardinality &bdquo;?&rdquo;. The complete rule now reads:
+					<code class="code">extends</code>. Note that this is a cross-reference, as the super type itself must be defined somewhere else. To define a cross-reference we use square brackets. Optional parts have the cardinality &ldquo;?&rdquo;. The complete rule now reads:
 				</p>
 <div class="literallayout">
 <p>
@@ -238,7 +238,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </p>
 </div>
 <p>We have not specified the rule 
-					<code class="code">Property</code>, yet. In our target syntax, properties can refer to simple types such as &bdquo;String&rdquo; or &bdquo;Bool&rdquo; as well as entities. To make this easy we will first introduce a common supertype 
+					<code class="code">Property</code>, yet. In our target syntax, properties can refer to simple types such as &ldquo;String&rdquo; or &ldquo;Bool&rdquo; as well as entities. To make this easy we will first introduce a common supertype 
 					<code class="code">Type</code> each 
 					<code class="code">Property</code> can refer to.
 				</p>
@@ -276,7 +276,7 @@ SimpleType:<br>
 				</p>
 <p>A 
 					<code class="code">Property</code> consist of a keyword, a name, a colon and a cross-reference to an arbitrary 
-					<code class="code">Type</code>. The multiplicity is either many or one. The presence of the postfix &bdquo;[]&rdquo; (technically a keyword) should trigger a boolean flag in the AST model. This is the purpose of the assignment operator "
+					<code class="code">Type</code>. The multiplicity is either many or one. The presence of the postfix &ldquo;[]&rdquo; (technically a keyword) should trigger a boolean flag in the AST model. This is the purpose of the assignment operator "
 					<code class="code">?=</code>". Our last parser rule is:
 				</p>
 <div class="literallayout">

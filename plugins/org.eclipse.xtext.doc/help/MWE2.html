@@ -7,11 +7,24 @@
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="index.html" title="Xtext User Guide">
 <link rel="prev" href="encoding.html" title="Encoding in Xtext">
-<link rel="next" href="MWE2SyntaxReference.html" title="Syntax Reference">
+<link rel="next" href="MWE2LanguageReference.html" title="Language Reference">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">MWE2</h1>
-<p>The Modeling Workflow Engine 2 (MWE2) is a rewritten backwards compatible implementation of the Modeling Workflow Engine (MWE). It is a declarative, externally configurable generator engine. Users can describe arbitrary objects compositions by means of a simple, concise syntax that allows to declare object instances, attribute values and references. One use case &ndash; that&rsquo;s where the name had its origins &ndash; is the definition of workflows. Such a workflow consists usually of a number of components that interact with each other. There are components available, that read EMF resources, perform operations (transformations) on them and write them back or generate any number of other artifacts out of the information. Workflows are typically executed in a single JVM. However there are no constraints the prevent implementors to provide components that spawn multiple threads or new processes.</p>
+<p>The Modeling Workflow Engine 2 (MWE2) is a rewritten backwards 
+			compatible implementation of the Modeling Workflow Engine (MWE). It 
+			is a declarative, externally configurable generator engine. Users 
+			can describe arbitrary objects compositions by means of a simple, 
+			concise syntax that allows to declare object instances, attribute 
+			values and references. One use case &ndash; that&rsquo;s where the name had its 
+			origins &ndash; is the definition of workflows. Such a workflow consists 
+			usually of a number of components that interact with each other. 
+			There are components available, that read EMF resources, perform 
+			operations (transformations) on them and write them back or generate 
+			any number of other artifacts out of the information. Workflows are 
+			typically executed in a single JVM. However there are no constraints 
+			the prevent implementors to provide components that spawn multiple 
+			threads or new processes.</p>
 <div class="section" title="Examples">
 <div class="titlepage">
 <div>
@@ -21,8 +34,14 @@
 </div>
 </div>
 </div>
-<p>Let&rsquo;s start with a couple of examples to demonstrate some usage scenarios for MWE2. The first examples is a simple 
-				<code class="code">HelloWorld</code> module that does nothing but print a message to standard out. The second module is assembled of three components that read an ecore file, transform the contained classifier-names to upper-case and serialize the resource back to a new file. The last examples uses the life-cycle methods to print the execution time of the workflow.
+<p>Let&rsquo;s start with a couple of examples to demonstrate some usage 
+				scenarios for MWE2. The first examples is a simple 
+				<code class="code">HelloWorld</code> 
+				module that does nothing but print a message to standard out. The 
+				second module is assembled of three components that read an ecore 
+				file, transform the contained classifier-names to upper-case and 
+				serialize the resource back to a new file. The last examples uses 
+				the life-cycle methods to print the execution time of the workflow.
 			</p>
 <div class="section" title="The simplest Workflow">
 <div class="titlepage">
@@ -33,27 +52,38 @@
 </div>
 </div>
 </div>
-<p>The arguably shortest MWE2 module may look like the following snippet.</p>
+<p>The arguably shortest MWE2 module may look like the following 
+					snippet.</p>
 <div class="literallayout">
 <p>
 <code class="code">module&nbsp;HelloWorld&nbsp;<br>
 
 <br>
 SayHello&nbsp;{<br>
-	message&nbsp;=&nbsp;"Hello&nbsp;World!"<br>
+&nbsp;&nbsp;message&nbsp;=&nbsp;"Hello&nbsp;World!"<br>
 }<br>
-
-<br>
 
 </code>
 </p>
 </div>
-<p>It configures a very simple workflow component with a message that should be printed to 
-					<code class="code">System.out</code> when the workflow is executed. The module begins with a declaration of its name. It must fulfill the Java conventions for fully qualified class-names. That&rsquo;s why the module 
-					<code class="code">HelloWorld</code> has to be placed into the default package of a Java source folder. The second element in the module is the class-name 
-					<code class="code">SayHello</code> which introduces the root element of the module. The interpreter will create an instance of the referenced type and configure it as declared between the curly braces. E.g. the assignment 
-					<code class="code">message = "Hello World!"</code> in the module will be interpreted as an invocation of the 
-					<code class="code">setMessage(String)</code> on the instantiated object. As one can easily imagine, the implementation of the class 
+<p>It configures a very simple workflow component with a message 
+					that should be printed to 
+					<code class="code">System.out</code> when the workflow is 
+					executed. The module begins with a declaration of its name. It must 
+					fulfill the Java conventions for fully qualified class-names. That&rsquo;s 
+					why the module 
+					<code class="code">HelloWorld</code> has to be placed into the default 
+					package of a Java source folder. The second element in the module is 
+					the class-name 
+					<code class="code">SayHello</code> which introduces the root element of the 
+					module. The interpreter will create an instance of the referenced 
+					type and configure it as declared between the curly braces. E.g. the 
+					assignment 
+					<code class="code">message = "Hello World!"</code> in the module will be 
+					interpreted as an invocation of the 
+					<code class="code">setMessage(String)</code> on the 
+					instantiated object. As one can easily imagine, the implementation 
+					of the class 
 					<code class="code">SayHello</code> looks straight forward:
 				</p>
 <div class="literallayout">
@@ -65,40 +95,34 @@ import&nbsp;org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;<br>
 public&nbsp;class&nbsp;SayHello&nbsp;implements&nbsp;IWorkflowComponent&nbsp;{<br>
 
 <br>
-	private&nbsp;String&nbsp;message&nbsp;=&nbsp;"Hello&nbsp;World!";<br>
-	
-<br>
-	public&nbsp;void&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{<br>
-		System.out.println(getMessage());<br>
-	}<br>
+&nbsp;&nbsp;private&nbsp;String&nbsp;message&nbsp;=&nbsp;"Hello&nbsp;World!";<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;setMessage(String&nbsp;message)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.message&nbsp;=&nbsp;message;<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;public&nbsp;String&nbsp;getMessage()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;message;<br>
+&nbsp;&nbsp;}<br>
 
 <br>
-	public&nbsp;void&nbsp;setMessage(String&nbsp;message)&nbsp;{<br>
-		this.message&nbsp;=&nbsp;message;<br>
-	}<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(getMessage());<br>
+&nbsp;&nbsp;}<br>
 
 <br>
-	public&nbsp;String&nbsp;getMessage()&nbsp;{<br>
-		return&nbsp;message;<br>
-	}<br>
-
-<br>
-	public&nbsp;void&nbsp;postInvoke()&nbsp;{}<br>
-
-<br>
-	public&nbsp;void&nbsp;preInvoke()&nbsp;{}<br>
-	
-<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;postInvoke()&nbsp;{}<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;preInvoke()&nbsp;{}<br>
 }<br>
-
-<br>
 
 </code>
 </p>
 </div>
-<p>It looks like a simple POJO and that&rsquo;s the philosophy behind MWE2. It is easily possible to assemble completely independent objects in a declarative manner. To make the workflow executable with the 
+<p>It looks like a simple POJO and that&rsquo;s the philosophy behind MWE2. 
+					It is easily possible to assemble completely independent objects in 
+					a declarative manner. To make the workflow executable with the 
+
 					<code class="code">WorkflowRunner</code>, the component 
-					<code class="code">SayHello</code> must be nested in a root workflow:
+					<code class="code">SayHello</code> must be nested in a root 
+					workflow:
 				</p>
 <div class="literallayout">
 <p>
@@ -111,24 +135,44 @@ Workflow&nbsp;{<br>
 	}<br>
 }<br>
 
-<br>
-
 </code>
 </p>
 </div>
 <p>The class 
 					<code class="code">Workflow</code> is actually 
-					<code class="code">org.eclipse.emf.mwe2.runtime.workflow.Workflow</code> but its package is implicitly imported in MWE2 modules to make the the modules more concise. The execution result of this workflow will be revealed after a quick 
+
+					<code class="code">org.eclipse.emf.mwe2.runtime.workflow.Workflow</code> but its package is 
+					implicitly imported in MWE2 modules to make the the modules more 
+					concise. The execution result of this workflow will be revealed 
+					after a quick 
 					<code class="code">Run As .. -&gt; MWE2 Workflow</code> in the console as 
 				</p>
 <div class="literallayout">
 <p>
 <code class="code">Hello&nbsp;World!<br>
 
-<br>
-
 </code>
 </p>
+</div>
+</div>
+<div class="section" title="A simple Transformation">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="MWE2SimpleTransformation"></a>A simple Transformation</h3>
+</div>
+</div>
+</div>
+</div>
+<div class="section" title="A Stop-watch">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="MWE2Stopwatch"></a>A Stop-watch</h3>
+</div>
+</div>
 </div>
 </div>
 </div>

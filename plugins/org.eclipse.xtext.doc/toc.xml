@@ -158,17 +158,25 @@
 <topic href="help/MWE2.html" label="MWE2">
 <topic href="help/MWE2.html#MWE2Exampe" label="Examples">
 <topic href="help/MWE2.html#MWE2HelloWorld" label="The simplest Workflow"></topic>
+<topic href="help/MWE2.html#MWE2SimpleTransformation" label="A simple Transformation"></topic>
+<topic href="help/MWE2.html#MWE2Stopwatch" label="A Stop-watch"></topic>
+</topic>
+<topic href="help/MWE2LanguageReference.html" label="Language Reference">
+<topic href="help/MWE2LanguageReference.html#MWE2JavaReferences" label="Mapping to Java Classes"></topic>
+<topic href="help/MWE2LanguageReference.html#MWE2Module" label="Module"></topic>
+<topic href="help/MWE2LanguageReference.html#MWE2Properties" label="Properties"></topic>
+<topic href="help/MWE2LanguageReference.html#MWE2Mandatory" label="Mandatory Properties"></topic>
+<topic href="help/MWE2LanguageReference.html#MWE2NamedComponents" label="Named Components"></topic>
+<topic href="help/MWE2LanguageReference.html#MWE2AutoInject" label="Auto Injection"></topic>
+<topic href="help/MWE2LanguageReference.html#MWE2Factories" label="Factory Support"></topic>
 </topic>
 <topic href="help/MWE2SyntaxReference.html" label="Syntax Reference">
-<topic href="help/MWE2SyntaxReference.html#MWE2Literals" label="String Literals"></topic>
-<topic href="help/MWE2SyntaxReference.html#MWE2ClassReferences" label="Class References"></topic>
-<topic href="help/MWE2SyntaxReference.html#MWE2ModuleReferences" label="Module References"></topic>
-</topic>
-<topic href="help/MWE2Syntax.html" label="Language Features">
-<topic href="help/MWE2Syntax.html#MWE2Properties" label="Properties"></topic>
-<topic href="help/MWE2Syntax.html#MWE2Mandatory" label="Mandatory Properties"></topic>
-<topic href="help/MWE2Syntax.html#MWE2AutoInject" label="Auto Injection"></topic>
-<topic href="help/MWE2Syntax.html#MWE2Factories" label="Factory Support"></topic>
+<topic href="help/MWE2SyntaxReference.html#MWE2ModuleSyntax" label="Module"></topic>
+<topic href="help/MWE2SyntaxReference.html#MWE2PropertySyntax" label="Property"></topic>
+<topic href="help/MWE2SyntaxReference.html#MWE2ComponentSyntax" label="Component"></topic>
+<topic href="help/MWE2SyntaxReference.html#MWE2StringLiteralsSyntax" label="String Literals"></topic>
+<topic href="help/MWE2SyntaxReference.html#MWE2BooleanLiterals" label="Boolean Literals"></topic>
+<topic href="help/MWE2SyntaxReference.html#MWE2References" label="References"></topic>
 </topic>
 <topic href="help/MWE2RuntimeAPI.html" label="Workflow API"></topic>
 <topic href="help/MWE2RuntimeSPI.html" label="Workflow SPI"></topic>
