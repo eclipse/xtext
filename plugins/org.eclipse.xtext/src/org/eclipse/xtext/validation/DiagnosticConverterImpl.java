@@ -80,6 +80,9 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 			issue.setType(diagnosticImpl.getCheckType());
 			issue.setCode(diagnosticImpl.getIssueCode());
 			issue.setData(diagnosticImpl.getIssueData());
+		} else {
+			// default to FAST
+			issue.setType(CheckType.FAST);
 		}
 		
 		//		marker.put(IXtextResourceChecker.DIAGNOSTIC_KEY, diagnostic);

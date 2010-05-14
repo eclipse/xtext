@@ -11,6 +11,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.ui.texteditor.MarkerUtilities;
+import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.MarkerUtil;
 import org.eclipse.xtext.ui.editor.validation.XtextAnnotation;
 import org.eclipse.xtext.validation.Issue;
@@ -41,6 +42,8 @@ public class IssueUtil {
 		issue.setData(markerUtil.getIssueData(marker));
 		issue.setUriToProblem(markerUtil.getUriToProblem(marker));
 		issue.setSeverity(markerUtil.getSeverity(marker));
+		
+		issue.setType(MarkerTypes.toCheckType(MarkerUtilities.getMarkerType(marker)));
 		// Note, isSyntaxError is unset, but currently the api does not allow fixing
 		// syntax errors anyway.
 		return issue;
