@@ -111,14 +111,53 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 	}
 
 	/**
-	 * List<? super String> <= List<? super CharSequence> (but not vice versa)
+	 * List <= List<? super CharSequence>
+	 * and
+	 * List<? super CharSequence> <= List
 	 */
-	public void testRawTypes() throws Exception {
+	public void testRawTypes_super() throws Exception {
+//		List<? super String> foo = null;
+//		List zonk = null;
+//		foo = zonk; // ok
+//		zonk = foo; // ok
 		JvmTypeReference rawList = ref(List.class);
 		JvmTypeReference List_of_super_String = ref(List.class, wc_super(ref(String.class)));
 		assertTrue(computer.isAssignableFrom(rawList, List_of_super_String));
-		assertFalse(computer.isAssignableFrom(List_of_super_String, rawList));
+		assertTrue(computer.isAssignableFrom(List_of_super_String, rawList));
 	}
+	
+	/**
+	 * List<String> <= List
+	 * and
+	 * List <= List<String>
+	 */
+	public void testRawtype_generics() throws Exception {
+//		List<String> foo = null;
+//		List zonk = null;
+//		foo = zonk; // ok
+//		zonk = foo; // ok
+		JvmTypeReference List_String = ref(List.class, arg(String.class));
+		JvmTypeReference List_rawtype = ref(List.class);
+		assertTrue(computer.isAssignableFrom(List_String, List_rawtype));
+		assertTrue(computer.isAssignableFrom(List_rawtype, List_String));
+	}
+	
+	/**
+	 * List<? extends String> <= List
+	 * and
+	 * List <= List<String>
+	 */
+	public void testRawType_extends() throws Exception {
+//		List<? extends String> foo = null;
+//		List zonk = null;
+//		foo = zonk; // ok
+//		zonk = foo; // ok
+		JvmTypeReference List_String = ref(List.class, wc_extends(ref(String.class)));
+		JvmTypeReference List_rawtype = ref(List.class);
+		assertTrue(computer.isAssignableFrom(List_String, List_rawtype));
+		assertTrue(computer.isAssignableFrom(List_rawtype, List_String));
+	}
+	
 	/**
 	 * List<? super String> <= List<? super CharSequence> (but not vice versa)
 	 */
@@ -138,6 +177,7 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 		assertTrue(computer.isAssignableFrom(List_of_wildcard, List_CharSequence));
 		assertFalse(computer.isAssignableFrom(List_CharSequence, List_of_wildcard));
 	}
+	
 	/**
 	 * List<?> <= List<? super CharSequence> 
 	 */
