@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -65,6 +66,20 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 						}
 					}
 				} else {
+					Iterable<IStorage> storages = mapper.getStorages(delta.getOld().getURI());
+					for (IStorage storage : storages) {
+						if (storage instanceof IFile) {
+							IFile file = (IFile) storage;
+							if (!file.isReadOnly() && file.isAccessible()) {
+								try {
+									file.deleteMarkers(MarkerTypes.FAST_VALIDATION, true, IResource.DEPTH_ZERO);
+									file.deleteMarkers(MarkerTypes.NORMAL_VALIDATION, true, IResource.DEPTH_ZERO);
+								} catch(CoreException ex) {
+									log.error(ex.getMessage(), ex);
+								}
+							}
+						}
+					}
 					subMonitor.worked(1);
 				}
 			}
@@ -85,8 +100,8 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 			if (monitor.isCanceled())
 				return;
 			subMonitor.worked(1);
-			file.deleteMarkers(MarkerTypes.FAST_VALIDATION, true, 1);
-			file.deleteMarkers(MarkerTypes.NORMAL_VALIDATION, true, 1);
+			file.deleteMarkers(MarkerTypes.FAST_VALIDATION, true, IResource.DEPTH_ZERO);
+			file.deleteMarkers(MarkerTypes.NORMAL_VALIDATION, true, IResource.DEPTH_ZERO);
 			for (Issue issue : list) {
 				markerCreator.createMarker(issue, file, MarkerTypes.forCheckType(issue.getType()));
 			}

@@ -107,6 +107,25 @@ public class ResourceDescriptionsUpdater {
 			subMonitor.done();
 		}
 	}
+	
+	public Collection<IResourceDescription.Delta> clean(IResourceDescriptions oldState, Set<URI> toBeDeleted, IProgressMonitor monitor) {
+		SubMonitor subMonitor = SubMonitor.convert(monitor, "Clean resources", 2);
+		subMonitor.subTask("Clean resources");
+		try {
+			Set<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted);
+			Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
+			// add deleted
+			for (URI toDelete : toBeDeletedAsSet) {
+				IResourceDescription resourceDescription = oldState.getResourceDescription(toDelete);
+				if (resourceDescription != null)
+					result.put(toDelete, new DefaultResourceDescriptionDelta(resourceDescription, null));
+			}
+	
+			return result.values();
+		} finally {
+			subMonitor.done();
+		}
+	}
 
 	protected Map<URI, IResourceDescription.Delta> update(IResourceDescriptions oldState, final ResourceSet set,
 			Set<URI> toBeUpdated, IProgressMonitor monitor) {

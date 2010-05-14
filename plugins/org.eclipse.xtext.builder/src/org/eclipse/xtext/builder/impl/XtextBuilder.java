@@ -155,7 +155,19 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
 		try {
 			ToBeBuilt toBeBuilt = toBeBuiltComputer.removeProject(getProject(), subMonitor.newChild(1));
-			doBuild(toBeBuilt, subMonitor.newChild(1));
+			doClean(toBeBuilt, subMonitor.newChild(1));
+		} finally {
+			subMonitor.done();
+		}
+	}
+	
+	protected void doClean(ToBeBuilt toBeBuilt, IProgressMonitor monitor) throws CoreException {
+		SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
+		try {
+			ImmutableList<Delta> deltas = builderState.clean(toBeBuilt.toBeDeleted, subMonitor.newChild(1));
+			if (participant != null)
+				participant.build(new IXtextBuilderParticipant.BuildContext(this, getResourceSetProvider().get(getProject()), deltas), subMonitor
+						.newChild(1));
 		} finally {
 			subMonitor.done();
 		}

@@ -368,6 +368,30 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertNotNull(getEvents().get(1).getDeltas().get(0).getNew());
 	}
 	
+	public void testCleanIsNotTransitive() throws Exception {
+		createTwoFilesInTwoReferencedProjects();
+		waitForAutoBuild();
+		assertTrue(indexContainsElement(foo_file.getFullPath().toString(),"Foo"));
+		assertTrue(indexContainsElement(bar_file.getFullPath().toString(),"Bar"));
+		foo_project.getProject().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor());
+		assertFalse(indexContainsElement(foo_file.getFullPath().toString(),"Foo"));
+		assertTrue(indexContainsElement(bar_file.getFullPath().toString(),"Bar"));
+		waitForAutoBuild();
+		assertTrue(indexContainsElement(foo_file.getFullPath().toString(),"Foo"));
+		assertTrue(indexContainsElement(bar_file.getFullPath().toString(),"Bar"));
+	}
+	
+	public void testCleanRemovesMarkers() throws Exception {
+		IJavaProject javaProject = createJavaProjectWithRootSrc("foo");
+		IFile file = createFile("foo/src/bar"+F_EXT, "object Bar references Foo");
+		waitForAutoBuild();
+		assertEquals(printMarkers(file), 1, countMarkers(file));
+		javaProject.getProject().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor());
+		assertEquals(printMarkers(file), 0, countMarkers(file));
+		waitForAutoBuild();
+		assertEquals(printMarkers(file), 1, countMarkers(file));
+	}
+	
 	public void testFileInJar() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
