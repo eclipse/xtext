@@ -67,7 +67,7 @@ public class AssignabilityComputer implements IAssignabilityComputer{
 
 	protected boolean areArgumentsAssignableFrom(JvmParameterizedTypeReference left, JvmParameterizedTypeReference right) {
 		// raw type
-		if (left.getArguments().size() == 0) {
+		if (left.getArguments().size() == 0 || right.getArguments().size() == 0) {
 			return true;
 		}
 		if (left.getArguments().size() != right.getArguments().size()) {
