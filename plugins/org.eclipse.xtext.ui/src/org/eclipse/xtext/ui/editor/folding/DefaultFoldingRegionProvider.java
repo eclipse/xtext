@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.folding;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -35,6 +36,8 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 	public List<IFoldingRegion> getFoldingRegions(final IXtextDocument xtextDocument) {
 		return xtextDocument.readOnly(new IUnitOfWork<List<IFoldingRegion>, XtextResource>() {
 			public List<IFoldingRegion> exec(XtextResource xtextResource) throws Exception {
+				if (xtextResource == null)
+					return Collections.emptyList();
 				return doGetFoldingRegions(xtextDocument, xtextResource);
 			}
 		});
