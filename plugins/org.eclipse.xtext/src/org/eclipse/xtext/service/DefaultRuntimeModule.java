@@ -40,6 +40,7 @@ import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceFactory;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -177,6 +178,10 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	
 	public Class<? extends ResourceSet> bindResourceSet() {
 		return XtextResourceSet.class;
+	}
+	
+	public Class<? extends XtextResourceSet> bindXtextResourceSet() {
+		return SynchronizedXtextResourceSet.class;
 	}
 	
 	public Class<? extends IContainer.Manager> bindIContainer$Manager() {
