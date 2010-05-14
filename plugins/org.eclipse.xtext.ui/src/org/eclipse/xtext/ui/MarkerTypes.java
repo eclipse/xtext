@@ -29,4 +29,15 @@ public final class MarkerTypes {
 			default: return ANY_VALIDATION;
 		}
 	}
+	
+	public static CheckType toCheckType(String markerType) {
+		if (FAST_VALIDATION.equals(markerType))
+			return CheckType.FAST;
+		if (NORMAL_VALIDATION.equals(markerType))
+			return CheckType.NORMAL;
+		if (EXPENSIVE_VALIDATION.equals(markerType))
+			return CheckType.EXPENSIVE;
+		// default
+		return CheckType.FAST;
+	}
 }

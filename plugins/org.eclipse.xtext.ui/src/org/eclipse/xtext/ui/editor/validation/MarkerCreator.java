@@ -18,8 +18,8 @@ import org.eclipse.xtext.validation.Issue;
  */
 public class MarkerCreator {
 	
-	public void createMarker(Issue issue, IResource resource, String markerId) throws CoreException {
-		IMarker marker = resource.createMarker(markerId);
+	public void createMarker(Issue issue, IResource resource, String markerType) throws CoreException {
+		IMarker marker = resource.createMarker(markerType);
 		String lineNR = "";
 		if (issue.getLineNumber() != null) {
 			lineNR = "line: " + issue.getLineNumber() + " ";
