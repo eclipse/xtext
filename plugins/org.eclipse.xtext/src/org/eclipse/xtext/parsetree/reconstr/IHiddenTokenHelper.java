@@ -8,6 +8,7 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultHiddenTokenHelper;
 
 import com.google.inject.ImplementedBy;
@@ -22,6 +23,12 @@ public interface IHiddenTokenHelper {
 
 	boolean isComment(AbstractRule rule);
 
-	// is called when the formatter inserts whitespace
+	/**
+	 * see {@link #getWhitespaceRuleFor(ParserRule, String)}
+	 */
+	@Deprecated
 	AbstractRule getWhitespaceRuleFor(String whitespace);
+
+	// is called when the formatter inserts whitespace
+	AbstractRule getWhitespaceRuleFor(ParserRule context, String whitespace);
 }

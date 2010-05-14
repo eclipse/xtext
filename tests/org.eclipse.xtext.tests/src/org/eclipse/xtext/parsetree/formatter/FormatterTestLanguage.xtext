@@ -14,7 +14,7 @@ Root:
 	"test" (TestLinewrap | TestIndentation);
 	
 Line:
-	(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration) ";";
+	(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post") ";";
 	
 Decl:	
 	type+=ID name+=ID;
@@ -48,3 +48,15 @@ Enumeration:
 	
 enum Enum1: 
 	lit1 | lit2 | lit3;
+
+SuppressedHidden hidden():
+	{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ('%' vals+=SuppressedHiddenSub)*)? "`";
+	
+SuppressedHiddenSub:
+	SuppressedHiddenSubSub | SuppressedHiddenSubID;
+
+SuppressedHiddenSubSub hidden(WS):
+	'<' idval=ID '>';
+	
+SuppressedHiddenSubID:
+	idval=ID;

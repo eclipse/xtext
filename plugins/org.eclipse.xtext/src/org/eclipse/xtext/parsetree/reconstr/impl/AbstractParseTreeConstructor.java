@@ -400,7 +400,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 				}
 			}
 			for (LeafNode l : whitespaces) {
-//				System.out.println("WS: '" + l.getText() + "'");
+				//				System.out.println("WS: '" + l.getText() + "'");
 				out.writeHidden(l.getGrammarElement(), l.getText());
 			}
 			out.flush();
@@ -409,13 +409,13 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 
 		public void writeComment(LeafNode comment) throws IOException {
 			writeWhitespacesSince(comment);
-//			System.out.println("CM: '" + comment.getText() + "'");
+			//			System.out.println("CM: '" + comment.getText() + "'");
 			out.writeHidden(comment.getGrammarElement(), comment.getText());
 		}
 
 		public void writeSemantic(AbstractElement grammarElement, String value, AbstractNode node) throws IOException {
 			writeWhitespacesSince(node);
-//			System.out.println("S:  '" + value + "'");
+			//			System.out.println("S:  '" + value + "'");
 			out.writeSemantic(grammarElement, value);
 		}
 
@@ -431,16 +431,16 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			List<LeafNode> whitespaces = Lists.newArrayList();
 			while (nodeIterator.hasNext()) {
 				AbstractNode nextNode = nodeIterator.next();
-				if(tokenUtil.isWhitespaceNode(nextNode)) {
+				if (tokenUtil.isWhitespaceNode(nextNode)) {
 					whitespaces.add((LeafNode) nextNode);
 				} else if (nextNode == node) {
 					if (whitespaces.isEmpty()) {
 						// signal to the formatter not to insert a whitespace
-						out.writeHidden(hiddenTokenHelper.getWhitespaceRuleFor(""), "");
-//						System.out.println("WS: -nothing-");
+						out.writeHidden(hiddenTokenHelper.getWhitespaceRuleFor(null, ""), "");
+						//						System.out.println("WS: -nothing-");
 					}
 					for (LeafNode whitespace : whitespaces) {
-//						System.out.println("WS: '" + whitespace.getText() + "'");
+						//						System.out.println("WS: '" + whitespace.getText() + "'");
 						out.writeHidden(whitespace.getGrammarElement(), whitespace.getText());
 					}
 					return;
@@ -503,7 +503,8 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		while (contents.hasNext()) {
 			AbstractNode containedNode = contents.next();
 			AbstractRule rule = containedNode.getGrammarElement() instanceof AbstractRule ? (AbstractRule) containedNode
-					.getGrammarElement() : null;
+					.getGrammarElement()
+					: null;
 			if (hiddenTokenHelper.isWhitespace(rule))
 				continue;
 			else if (containedNode instanceof LeafNode && hiddenTokenHelper.isComment(rule))
@@ -705,11 +706,11 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		for (CompositeNode r : roots)
 			assignNodesByMatching(obj2token, r, comments);
 		WsMergerStream wsout = new WsMergerStream(out);
-//		dump("", root);
-//		System.out.println(EmfFormatter.objToStr(roots.iterator().next(),
-//				ParsetreePackage.Literals.ABSTRACT_NODE__TOTAL_LENGTH,
-//				ParsetreePackage.Literals.ABSTRACT_NODE__TOTAL_OFFSET,
-//				ParsetreePackage.Literals.ABSTRACT_NODE__TOTAL_LINE, ParsetreePackage.Literals.ABSTRACT_NODE__PARENT));
+		//		dump("", root);
+		//		System.out.println(EmfFormatter.objToStr(roots.iterator().next(),
+		//				ParsetreePackage.Literals.ABSTRACT_NODE__TOTAL_LENGTH,
+		//				ParsetreePackage.Literals.ABSTRACT_NODE__TOTAL_OFFSET,
+		//				ParsetreePackage.Literals.ABSTRACT_NODE__TOTAL_LINE, ParsetreePackage.Literals.ABSTRACT_NODE__PARENT));
 		TextLocation previousLocation = new TextLocation();
 		write(root, wsout, previousLocation);
 		wsout.flush();
