@@ -205,6 +205,22 @@ public class ConcreteSyntaxConstraintProviderTest extends AbstractXtextTests {
 		assertNull(constraint);
 	}
 
+	public void testAssignedActions() throws Exception {
+		StringBuilder b = new StringBuilder();
+		b.append("Model: 'y' val=ID ({Evil.left=current} ',' right=ID)?; ");
+		String constraint = parseRule(b.toString());
+		assertNull(constraint);
+	}
+
+	public void testNestedAssignedActions() throws Exception {
+		StringBuilder b = new StringBuilder();
+		b.append("Model: Foo | Bar; ");
+		b.append("Foo: 'x' val=ID; ");
+		b.append("Bar: 'y' val=ID ({Evil.left=current} ',' right=ID)?; ");
+		String constraint = parseRule(b.toString());
+		assertNull(constraint);
+	}
+
 	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=312220
 	public void testUnassignedRuleCall() throws Exception {
 		String constraint = parseRule("WithoutHidden hidden(): '[' 'kw' WS x=INT '.' y=INT ']';");

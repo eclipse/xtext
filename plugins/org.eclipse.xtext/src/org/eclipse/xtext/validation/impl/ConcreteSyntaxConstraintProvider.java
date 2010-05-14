@@ -494,16 +494,26 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 	}
 
 	protected boolean isValidateableRule(ParserRule rule) {
-		return !ruleContainsAssignedAction(rule)
+		return !ruleContainsAssignedAction(rule, new HashSet<AbstractRule>())
 				&& !ruleContainsRecursiveUnassignedRuleCall(rule, new HashSet<AbstractRule>());
 	}
 
-	protected boolean ruleContainsAssignedAction(AbstractRule rule) {
-		return Iterables.any(containedActions(rule), new Predicate<Action>() {
-			public boolean apply(Action action) {
-				return action.getFeature() != null;
+	protected boolean ruleContainsAssignedAction(AbstractRule rule, Set<AbstractRule> visited) {
+		if (!visited.add(rule))
+			return false;
+		TreeIterator<EObject> i = rule.eAllContents();
+		while (i.hasNext()) {
+			EObject o = i.next();
+			if (o instanceof Action && ((Action) o).getFeature() != null)
+				return true;
+			else if (o instanceof Assignment)
+				i.prune();
+			else if (o instanceof RuleCall && isParserRule(((RuleCall) o).getRule())) {
+				if (ruleContainsAssignedAction(((RuleCall) o).getRule(), visited))
+					return true;
 			}
-		});
+		}
+		return false;
 	}
 
 	protected boolean ruleContainsRecursiveUnassignedRuleCall(AbstractRule rule, Set<AbstractRule> visited) {
