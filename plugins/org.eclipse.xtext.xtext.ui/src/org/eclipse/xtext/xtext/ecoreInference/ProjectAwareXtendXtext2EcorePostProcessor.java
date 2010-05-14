@@ -26,6 +26,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.mwe.core.resources.ResourceLoader;
 import org.eclipse.emf.mwe.core.resources.ResourceLoaderImpl;
 import org.eclipse.jdt.core.IClasspathEntry;
@@ -33,6 +34,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.expression.Resource;
 import org.eclipse.xtext.GeneratedMetamodel;
+import org.eclipse.xtext.resource.ClasspathUriUtil;
 
 import com.google.common.collect.Lists;
 
@@ -67,8 +69,12 @@ public class ProjectAwareXtendXtext2EcorePostProcessor extends XtendXtext2EcoreP
 		if (resourceLoader != null)
 			return resourceLoader;
 
-		IFile grammarFile = getWorkspace().getRoot().getFile(
-				new Path(metamodel.eResource().getURI().toPlatformString(true)));
+		URI uri = metamodel.eResource().getURI();
+		if (ClasspathUriUtil.isClasspathUri(uri)) {
+			ResourceSet resourceSet = metamodel.eResource().getResourceSet();
+			uri = resourceSet.getURIConverter().normalize(uri);
+		}
+		IFile grammarFile = getWorkspace().getRoot().getFile(new Path(uri.toPlatformString(true)));
 		IJavaProject javaProject = JavaCore.create(grammarFile.getProject());
 		try {
 			if (javaProject.exists()) {
