@@ -58,7 +58,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          id="org.apache.log4j"
          download-size="0"
          install-size="0"
-         version="1.2.15.v200910021404"
+         version="1.2.15.v201005080500"
          unpack="false"/>
 
    <plugin
