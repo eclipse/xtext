@@ -55,16 +55,19 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cFqnObjParserRuleCall_0_3 = (RuleCall)cAlternatives_0.eContents().get(3);
 		private final RuleCall cFqnRefParserRuleCall_0_4 = (RuleCall)cAlternatives_0.eContents().get(4);
 		private final RuleCall cEnumerationParserRuleCall_0_5 = (RuleCall)cAlternatives_0.eContents().get(5);
+		private final Group cGroup_0_6 = (Group)cAlternatives_0.eContents().get(6);
+		private final RuleCall cSuppressedHiddenParserRuleCall_0_6_0 = (RuleCall)cGroup_0_6.eContents().get(0);
+		private final Keyword cPostKeyword_0_6_1 = (Keyword)cGroup_0_6.eContents().get(1);
 		private final Keyword cSemicolonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Line:
-		//  (Decl|Assign|Meth|FqnObj|FqnRef|Enumeration) ";";
+		//  (Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post") ";";
 		public ParserRule getRule() { return rule; }
 
-		//(Decl|Assign|Meth|FqnObj|FqnRef|Enumeration) ";"
+		//(Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post") ";"
 		public Group getGroup() { return cGroup; }
 
-		//Decl|Assign|Meth|FqnObj|FqnRef|Enumeration
+		//Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//Decl
@@ -84,6 +87,15 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 		//Enumeration
 		public RuleCall getEnumerationParserRuleCall_0_5() { return cEnumerationParserRuleCall_0_5; }
+
+		//SuppressedHidden "post"
+		public Group getGroup_0_6() { return cGroup_0_6; }
+
+		//SuppressedHidden
+		public RuleCall getSuppressedHiddenParserRuleCall_0_6_0() { return cSuppressedHiddenParserRuleCall_0_6_0; }
+
+		//"post"
+		public Keyword getPostKeyword_0_6_1() { return cPostKeyword_0_6_1; }
 
 		//";"
 		public Keyword getSemicolonKeyword_1() { return cSemicolonKeyword_1; }
@@ -476,6 +488,124 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Enum1
 		public RuleCall getValEnum1EnumRuleCall_2_1_0() { return cValEnum1EnumRuleCall_2_1_0; }
 	}
+
+	public class SuppressedHiddenElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SuppressedHidden");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cSuppressedHiddenAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cGraveAccentKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cValsAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cValsSuppressedHiddenSubParserRuleCall_2_0_0 = (RuleCall)cValsAssignment_2_0.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
+		private final Keyword cPercentSignKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Assignment cValsAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final RuleCall cValsSuppressedHiddenSubParserRuleCall_2_1_1_0 = (RuleCall)cValsAssignment_2_1_1.eContents().get(0);
+		private final Keyword cGraveAccentKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//SuppressedHidden hidden ( ):
+		//  {SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%"
+		//  vals+=SuppressedHiddenSub)*)? "`";
+		public ParserRule getRule() { return rule; }
+
+		//{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%" vals+=SuppressedHiddenSub
+		//)*)? "`"
+		public Group getGroup() { return cGroup; }
+
+		//{SuppressedHidden}
+		public Action getSuppressedHiddenAction_0() { return cSuppressedHiddenAction_0; }
+
+		//"`"
+		public Keyword getGraveAccentKeyword_1() { return cGraveAccentKeyword_1; }
+
+		//(vals+=SuppressedHiddenSub ("%" vals+=SuppressedHiddenSub)*)?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//vals+=SuppressedHiddenSub
+		public Assignment getValsAssignment_2_0() { return cValsAssignment_2_0; }
+
+		//SuppressedHiddenSub
+		public RuleCall getValsSuppressedHiddenSubParserRuleCall_2_0_0() { return cValsSuppressedHiddenSubParserRuleCall_2_0_0; }
+
+		//("%" vals+=SuppressedHiddenSub)*
+		public Group getGroup_2_1() { return cGroup_2_1; }
+
+		//"%"
+		public Keyword getPercentSignKeyword_2_1_0() { return cPercentSignKeyword_2_1_0; }
+
+		//vals+=SuppressedHiddenSub
+		public Assignment getValsAssignment_2_1_1() { return cValsAssignment_2_1_1; }
+
+		//SuppressedHiddenSub
+		public RuleCall getValsSuppressedHiddenSubParserRuleCall_2_1_1_0() { return cValsSuppressedHiddenSubParserRuleCall_2_1_1_0; }
+
+		//"`"
+		public Keyword getGraveAccentKeyword_3() { return cGraveAccentKeyword_3; }
+	}
+
+	public class SuppressedHiddenSubElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SuppressedHiddenSub");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cSuppressedHiddenSubSubParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cSuppressedHiddenSubIDParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//SuppressedHiddenSub:
+		//  SuppressedHiddenSubSub|SuppressedHiddenSubID;
+		public ParserRule getRule() { return rule; }
+
+		//SuppressedHiddenSubSub|SuppressedHiddenSubID
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//SuppressedHiddenSubSub
+		public RuleCall getSuppressedHiddenSubSubParserRuleCall_0() { return cSuppressedHiddenSubSubParserRuleCall_0; }
+
+		//SuppressedHiddenSubID
+		public RuleCall getSuppressedHiddenSubIDParserRuleCall_1() { return cSuppressedHiddenSubIDParserRuleCall_1; }
+	}
+
+	public class SuppressedHiddenSubSubElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SuppressedHiddenSubSub");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLessThanSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cIdvalAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cIdvalIDTerminalRuleCall_1_0 = (RuleCall)cIdvalAssignment_1.eContents().get(0);
+		private final Keyword cGreaterThanSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//SuppressedHiddenSubSub hidden ( WS ):
+		//  "<" idval=ID ">";
+		public ParserRule getRule() { return rule; }
+
+		//"<" idval=ID ">"
+		public Group getGroup() { return cGroup; }
+
+		//"<"
+		public Keyword getLessThanSignKeyword_0() { return cLessThanSignKeyword_0; }
+
+		//idval=ID
+		public Assignment getIdvalAssignment_1() { return cIdvalAssignment_1; }
+
+		//ID
+		public RuleCall getIdvalIDTerminalRuleCall_1_0() { return cIdvalIDTerminalRuleCall_1_0; }
+
+		//">"
+		public Keyword getGreaterThanSignKeyword_2() { return cGreaterThanSignKeyword_2; }
+	}
+
+	public class SuppressedHiddenSubIDElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SuppressedHiddenSubID");
+		private final Assignment cIdvalAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cIdvalIDTerminalRuleCall_0 = (RuleCall)cIdvalAssignment.eContents().get(0);
+		
+		//SuppressedHiddenSubID:
+		//  idval=ID;
+		public ParserRule getRule() { return rule; }
+
+		//idval=ID
+		public Assignment getIdvalAssignment() { return cIdvalAssignment; }
+
+		//ID
+		public RuleCall getIdvalIDTerminalRuleCall_0() { return cIdvalIDTerminalRuleCall_0; }
+	}
 	
 	
 	public class Enum1Elements extends AbstractEnumRuleElementFinder {
@@ -527,6 +657,10 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private FqnRefElements pFqnRef;
 	private EnumerationElements pEnumeration;
 	private Enum1Elements unknownRuleEnum1;
+	private SuppressedHiddenElements pSuppressedHidden;
+	private SuppressedHiddenSubElements pSuppressedHiddenSub;
+	private SuppressedHiddenSubSubElements pSuppressedHiddenSubSub;
+	private SuppressedHiddenSubIDElements pSuppressedHiddenSubID;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -560,7 +694,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Line:
-	//  (Decl|Assign|Meth|FqnObj|FqnRef|Enumeration) ";";
+	//  (Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post") ";";
 	public LineElements getLineAccess() {
 		return (pLine != null) ? pLine : (pLine = new LineElements());
 	}
@@ -677,6 +811,47 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	public EnumRule getEnum1Rule() {
 		return getEnum1Access().getRule();
+	}
+
+	//SuppressedHidden hidden ( ):
+	//  {SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%"
+	//  vals+=SuppressedHiddenSub)*)? "`";
+	public SuppressedHiddenElements getSuppressedHiddenAccess() {
+		return (pSuppressedHidden != null) ? pSuppressedHidden : (pSuppressedHidden = new SuppressedHiddenElements());
+	}
+	
+	public ParserRule getSuppressedHiddenRule() {
+		return getSuppressedHiddenAccess().getRule();
+	}
+
+	//SuppressedHiddenSub:
+	//  SuppressedHiddenSubSub|SuppressedHiddenSubID;
+	public SuppressedHiddenSubElements getSuppressedHiddenSubAccess() {
+		return (pSuppressedHiddenSub != null) ? pSuppressedHiddenSub : (pSuppressedHiddenSub = new SuppressedHiddenSubElements());
+	}
+	
+	public ParserRule getSuppressedHiddenSubRule() {
+		return getSuppressedHiddenSubAccess().getRule();
+	}
+
+	//SuppressedHiddenSubSub hidden ( WS ):
+	//  "<" idval=ID ">";
+	public SuppressedHiddenSubSubElements getSuppressedHiddenSubSubAccess() {
+		return (pSuppressedHiddenSubSub != null) ? pSuppressedHiddenSubSub : (pSuppressedHiddenSubSub = new SuppressedHiddenSubSubElements());
+	}
+	
+	public ParserRule getSuppressedHiddenSubSubRule() {
+		return getSuppressedHiddenSubSubAccess().getRule();
+	}
+
+	//SuppressedHiddenSubID:
+	//  idval=ID;
+	public SuppressedHiddenSubIDElements getSuppressedHiddenSubIDAccess() {
+		return (pSuppressedHiddenSubID != null) ? pSuppressedHiddenSubID : (pSuppressedHiddenSubID = new SuppressedHiddenSubIDElements());
+	}
+	
+	public ParserRule getSuppressedHiddenSubIDRule() {
+		return getSuppressedHiddenSubIDAccess().getRule();
 	}
 
 	//terminal ID:

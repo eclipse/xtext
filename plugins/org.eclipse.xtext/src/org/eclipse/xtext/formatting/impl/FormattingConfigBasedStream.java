@@ -17,6 +17,8 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementMatcher;
 import org.eclipse.xtext.formatting.impl.AbstractFormattingConfig.ElementLocator;
 import org.eclipse.xtext.formatting.impl.AbstractFormattingConfig.LocatorType;
@@ -28,7 +30,10 @@ import org.eclipse.xtext.formatting.impl.FormattingConfig.NoSpaceLocator;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -102,13 +107,13 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 		}
 
 		protected void addSpacesToTotalLength(LineEntry lineEntry, boolean first) {
-			String spaces = getSpaces(lineEntry, first);
+			Pair<AbstractRule, String> spaces = getSpaces(lineEntry, first);
 			if (spaces != null) {
-				int lastIndexOfNL = spaces.lastIndexOf('\n');
+				int lastIndexOfNL = spaces.getSecond().lastIndexOf('\n');
 				if (lastIndexOfNL >= 0)
-					totalLength += spaces.length() - lastIndexOfNL;
+					totalLength += spaces.getSecond().length() - lastIndexOfNL;
 				else
-					totalLength += spaces.length();
+					totalLength += spaces.getSecond().length();
 			}
 		}
 
@@ -126,11 +131,11 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 		protected void flush(ITokenStream intoStream, int endIndex) throws IOException {
 			for (int i = 0; i < endIndex; i++) {
 				LineEntry e = this.entries.get(i);
-				String sp = getSpaces(e, i == 0);
+				Pair<AbstractRule, String> spaces = getSpaces(e, i == 0);
 				// System.out.println("Spaces: '" + sp + "' before '" + e.val
 				// + "'");
-				if (sp != null)
-					intoStream.writeHidden(hiddenTokenHelper.getWhitespaceRuleFor(sp), sp);
+				if (spaces != null)
+					intoStream.writeHidden(spaces.getFirst(), spaces.getSecond());
 				if (e.isHidden)
 					intoStream.writeHidden(e.grammarElement, e.value);
 				else
@@ -159,7 +164,17 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 			return result.toString();
 		}
 
-		public String getSpaces(LineEntry entry, boolean isLineStart) {
+		public Pair<AbstractRule, String> getSpaces(LineEntry entry, boolean isLineStart) {
+			String space = getSpacesStr(entry, isLineStart);
+			if (space == null)
+				return null;
+			AbstractRule rule = hiddenTokenHelper.getWhitespaceRuleFor(entry.hiddenTokenDefinition, space);
+			if (rule == null)
+				return null;
+			return Tuples.create(rule, space);
+		}
+
+		public String getSpacesStr(LineEntry entry, boolean isLineStart) {
 			if (entry.leadingWS != null)
 				return entry.leadingWS;
 			if (entry.leadingLocators == null)
@@ -214,16 +229,17 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 
 	}
 
-	protected static class LineEntry {
+	protected class LineEntry {
 		protected EObject grammarElement;
 		protected int indent;
 		protected boolean isHidden;
 		protected Set<ElementLocator> leadingLocators;
 		protected String leadingWS;
 		protected String value;
+		protected ParserRule hiddenTokenDefinition;
 
 		public LineEntry(EObject grammarElement, String value, boolean isHidden, Set<ElementLocator> beforeLocators,
-				String leadingWS, int indent) {
+				String leadingWS, int indent, ParserRule hiddenTokenDefition) {
 			super();
 			this.grammarElement = grammarElement;
 			this.value = value;
@@ -231,6 +247,7 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 			this.leadingLocators = beforeLocators;
 			this.indent = indent;
 			this.leadingWS = leadingWS;
+			this.hiddenTokenDefinition = hiddenTokenDefition;
 		}
 
 		protected int countCharactersInLastLine() {
@@ -251,7 +268,7 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 			for (ElementLocator e : leadingLocators)
 				if (e instanceof NoLinewrapLocator)
 					return false;
-			return true;
+			return hiddenTokenHelper.getWhitespaceRuleFor(hiddenTokenDefinition, "\n") != null;
 		}
 
 		@Override
@@ -290,10 +307,28 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 		this.indentationPrefix = indentation == null ? "" : indentation;
 	}
 
+	protected Pair<Integer, RuleCall> findTopmostHiddenTokenDef() {
+		return matcher.findTopmostRuleCall(new Predicate<RuleCall>() {
+			public boolean apply(RuleCall input) {
+				return ((ParserRule) input.getRule()).isDefinesHiddenTokens();
+			}
+		});
+	}
+
 	protected void addLineEntry(EObject grammarElement, String value, boolean isHidden) throws IOException {
+		Pair<Integer, RuleCall> hiddenTokenDefCall1 = findTopmostHiddenTokenDef();
 		Set<ElementLocator> locators = collectLocators(grammarElement);
 		//		System.out.println(locators + " --> " + value.replaceAll("\n", "\\n"));
-		LineEntry e = new LineEntry(grammarElement, value, true, locators, preservedWS, indentationLevel);
+		Pair<Integer, RuleCall> hiddenTokenDefCall2 = findTopmostHiddenTokenDef();
+		ParserRule hiddenTokenDef = null;
+		if (hiddenTokenDefCall1 != null && hiddenTokenDefCall2 != null) {
+			if (hiddenTokenDefCall1.getFirst() < hiddenTokenDefCall2.getFirst())
+				hiddenTokenDef = (ParserRule) hiddenTokenDefCall1.getSecond().getRule();
+			else
+				hiddenTokenDef = (ParserRule) hiddenTokenDefCall2.getSecond().getRule();
+		}
+		LineEntry e = new LineEntry(grammarElement, value, true, locators, preservedWS, indentationLevel,
+				hiddenTokenDef);
 		preservedWS = null;
 		if (currentLine == null)
 			currentLine = new Line();

@@ -423,6 +423,118 @@ public interface FormattertestlanguagePackage extends EPackage
   int ENUMERATION_FEATURE_COUNT = LINE_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.SuppressedHiddenImpl <em>Suppressed Hidden</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.SuppressedHiddenImpl
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getSuppressedHidden()
+   * @generated
+   */
+  int SUPPRESSED_HIDDEN = 11;
+
+  /**
+   * The feature id for the '<em><b>Vals</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUPPRESSED_HIDDEN__VALS = LINE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Suppressed Hidden</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUPPRESSED_HIDDEN_FEATURE_COUNT = LINE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.SuppressedHiddenSubImpl <em>Suppressed Hidden Sub</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.SuppressedHiddenSubImpl
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getSuppressedHiddenSub()
+   * @generated
+   */
+  int SUPPRESSED_HIDDEN_SUB = 12;
+
+  /**
+   * The feature id for the '<em><b>Idval</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUPPRESSED_HIDDEN_SUB__IDVAL = 0;
+
+  /**
+   * The number of structural features of the '<em>Suppressed Hidden Sub</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUPPRESSED_HIDDEN_SUB_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.SuppressedHiddenSubSubImpl <em>Suppressed Hidden Sub Sub</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.SuppressedHiddenSubSubImpl
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getSuppressedHiddenSubSub()
+   * @generated
+   */
+  int SUPPRESSED_HIDDEN_SUB_SUB = 13;
+
+  /**
+   * The feature id for the '<em><b>Idval</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUPPRESSED_HIDDEN_SUB_SUB__IDVAL = SUPPRESSED_HIDDEN_SUB__IDVAL;
+
+  /**
+   * The number of structural features of the '<em>Suppressed Hidden Sub Sub</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUPPRESSED_HIDDEN_SUB_SUB_FEATURE_COUNT = SUPPRESSED_HIDDEN_SUB_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.SuppressedHiddenSubIDImpl <em>Suppressed Hidden Sub ID</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.SuppressedHiddenSubIDImpl
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getSuppressedHiddenSubID()
+   * @generated
+   */
+  int SUPPRESSED_HIDDEN_SUB_ID = 14;
+
+  /**
+   * The feature id for the '<em><b>Idval</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUPPRESSED_HIDDEN_SUB_ID__IDVAL = SUPPRESSED_HIDDEN_SUB__IDVAL;
+
+  /**
+   * The number of structural features of the '<em>Suppressed Hidden Sub ID</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUPPRESSED_HIDDEN_SUB_ID_FEATURE_COUNT = SUPPRESSED_HIDDEN_SUB_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enum1 <em>Enum1</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -430,7 +542,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getEnum1()
    * @generated
    */
-  int ENUM1 = 11;
+  int ENUM1 = 15;
 
 
   /**
@@ -709,6 +821,68 @@ public interface FormattertestlanguagePackage extends EPackage
   EAttribute getEnumeration_Val();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHidden <em>Suppressed Hidden</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Suppressed Hidden</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHidden
+   * @generated
+   */
+  EClass getSuppressedHidden();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHidden#getVals <em>Vals</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Vals</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHidden#getVals()
+   * @see #getSuppressedHidden()
+   * @generated
+   */
+  EReference getSuppressedHidden_Vals();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSub <em>Suppressed Hidden Sub</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Suppressed Hidden Sub</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSub
+   * @generated
+   */
+  EClass getSuppressedHiddenSub();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSub#getIdval <em>Idval</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Idval</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSub#getIdval()
+   * @see #getSuppressedHiddenSub()
+   * @generated
+   */
+  EAttribute getSuppressedHiddenSub_Idval();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSubSub <em>Suppressed Hidden Sub Sub</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Suppressed Hidden Sub Sub</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSubSub
+   * @generated
+   */
+  EClass getSuppressedHiddenSubSub();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSubID <em>Suppressed Hidden Sub ID</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Suppressed Hidden Sub ID</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSubID
+   * @generated
+   */
+  EClass getSuppressedHiddenSubID();
+
+  /**
    * Returns the meta object for enum '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enum1 <em>Enum1</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -970,6 +1144,62 @@ public interface FormattertestlanguagePackage extends EPackage
      * @generated
      */
     EAttribute ENUMERATION__VAL = eINSTANCE.getEnumeration_Val();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.SuppressedHiddenImpl <em>Suppressed Hidden</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.SuppressedHiddenImpl
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getSuppressedHidden()
+     * @generated
+     */
+    EClass SUPPRESSED_HIDDEN = eINSTANCE.getSuppressedHidden();
+
+    /**
+     * The meta object literal for the '<em><b>Vals</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SUPPRESSED_HIDDEN__VALS = eINSTANCE.getSuppressedHidden_Vals();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.SuppressedHiddenSubImpl <em>Suppressed Hidden Sub</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.SuppressedHiddenSubImpl
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getSuppressedHiddenSub()
+     * @generated
+     */
+    EClass SUPPRESSED_HIDDEN_SUB = eINSTANCE.getSuppressedHiddenSub();
+
+    /**
+     * The meta object literal for the '<em><b>Idval</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SUPPRESSED_HIDDEN_SUB__IDVAL = eINSTANCE.getSuppressedHiddenSub_Idval();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.SuppressedHiddenSubSubImpl <em>Suppressed Hidden Sub Sub</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.SuppressedHiddenSubSubImpl
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getSuppressedHiddenSubSub()
+     * @generated
+     */
+    EClass SUPPRESSED_HIDDEN_SUB_SUB = eINSTANCE.getSuppressedHiddenSubSub();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.SuppressedHiddenSubIDImpl <em>Suppressed Hidden Sub ID</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.SuppressedHiddenSubIDImpl
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getSuppressedHiddenSubID()
+     * @generated
+     */
+    EClass SUPPRESSED_HIDDEN_SUB_ID = eINSTANCE.getSuppressedHiddenSubID();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enum1 <em>Enum1</em>}' enum.

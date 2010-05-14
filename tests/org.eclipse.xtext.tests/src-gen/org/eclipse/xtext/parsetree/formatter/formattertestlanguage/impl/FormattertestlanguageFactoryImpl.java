@@ -79,6 +79,10 @@ public class FormattertestlanguageFactoryImpl extends EFactoryImpl implements Fo
       case FormattertestlanguagePackage.FQN_OBJ: return createFqnObj();
       case FormattertestlanguagePackage.FQN_REF: return createFqnRef();
       case FormattertestlanguagePackage.ENUMERATION: return createEnumeration();
+      case FormattertestlanguagePackage.SUPPRESSED_HIDDEN: return createSuppressedHidden();
+      case FormattertestlanguagePackage.SUPPRESSED_HIDDEN_SUB: return createSuppressedHiddenSub();
+      case FormattertestlanguagePackage.SUPPRESSED_HIDDEN_SUB_SUB: return createSuppressedHiddenSubSub();
+      case FormattertestlanguagePackage.SUPPRESSED_HIDDEN_SUB_ID: return createSuppressedHiddenSubID();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -237,6 +241,50 @@ public class FormattertestlanguageFactoryImpl extends EFactoryImpl implements Fo
   {
     EnumerationImpl enumeration = new EnumerationImpl();
     return enumeration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SuppressedHidden createSuppressedHidden()
+  {
+    SuppressedHiddenImpl suppressedHidden = new SuppressedHiddenImpl();
+    return suppressedHidden;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SuppressedHiddenSub createSuppressedHiddenSub()
+  {
+    SuppressedHiddenSubImpl suppressedHiddenSub = new SuppressedHiddenSubImpl();
+    return suppressedHiddenSub;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SuppressedHiddenSubSub createSuppressedHiddenSubSub()
+  {
+    SuppressedHiddenSubSubImpl suppressedHiddenSubSub = new SuppressedHiddenSubSubImpl();
+    return suppressedHiddenSubSub;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SuppressedHiddenSubID createSuppressedHiddenSubID()
+  {
+    SuppressedHiddenSubIDImpl suppressedHiddenSubID = new SuppressedHiddenSubIDImpl();
+    return suppressedHiddenSubID;
   }
 
   /**

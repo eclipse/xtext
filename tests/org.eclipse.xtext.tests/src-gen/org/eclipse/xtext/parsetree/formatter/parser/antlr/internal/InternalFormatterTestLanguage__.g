@@ -8,47 +8,52 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 T11 : 'test' ;
-T12 : ';' ;
-T13 : '=' ;
-T14 : '+=' ;
-T15 : '[' ;
-T16 : ',' ;
-T17 : ']' ;
-T18 : 'void' ;
-T19 : '(' ;
-T20 : ')' ;
-T21 : ':' ;
-T22 : 'linewrap' ;
-T23 : 'indentation' ;
-T24 : '{' ;
-T25 : '}' ;
-T26 : 'fqn' ;
-T27 : '.' ;
-T28 : 'fqnref' ;
-T29 : 'enum' ;
-T30 : 'lit1' ;
-T31 : 'lit2' ;
-T32 : 'lit3' ;
+T12 : 'post' ;
+T13 : ';' ;
+T14 : '=' ;
+T15 : '+=' ;
+T16 : '[' ;
+T17 : ',' ;
+T18 : ']' ;
+T19 : 'void' ;
+T20 : '(' ;
+T21 : ')' ;
+T22 : ':' ;
+T23 : 'linewrap' ;
+T24 : 'indentation' ;
+T25 : '{' ;
+T26 : '}' ;
+T27 : 'fqn' ;
+T28 : '.' ;
+T29 : 'fqnref' ;
+T30 : 'enum' ;
+T31 : '`' ;
+T32 : '%' ;
+T33 : '<' ;
+T34 : '>' ;
+T35 : 'lit1' ;
+T36 : 'lit2' ;
+T37 : 'lit3' ;
 
-// $ANTLR src "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g" 1014
+// $ANTLR src "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g" 1286
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g" 1016
+// $ANTLR src "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g" 1288
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g" 1018
+// $ANTLR src "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g" 1290
 RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
-// $ANTLR src "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g" 1020
+// $ANTLR src "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g" 1292
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-// $ANTLR src "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g" 1022
+// $ANTLR src "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g" 1294
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-// $ANTLR src "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g" 1024
+// $ANTLR src "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g" 1296
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g" 1026
+// $ANTLR src "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g" 1298
 RULE_ANY_OTHER : .;
 
 

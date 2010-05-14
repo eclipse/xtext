@@ -22,10 +22,12 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting.IElementMatcherProvider;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -70,6 +72,13 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 				}
 			}
 			return result;
+		}
+
+		public Pair<Integer, RuleCall> findTopmostRuleCall(Predicate<RuleCall> predicate) {
+			for (int i = ruleCallStack.size() - 1; i >= 0; i--)
+				if (predicate.apply((RuleCall) ruleCallStack.get(i).getGrammarElement()))
+					return Tuples.create(i, (RuleCall) ruleCallStack.get(i).getGrammarElement());
+			return null;
 		}
 
 		protected Pair<List<MatcherTransition>, List<MatcherState>> findTransitionPath(MatcherState from,

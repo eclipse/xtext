@@ -124,7 +124,7 @@ public class NodeModelStreamer implements INodeModelStreamer {
 	}
 
 	protected void writeHiddenEmpty(ITokenStream out) throws IOException {
-		out.writeHidden(hiddenTokenHelper.getWhitespaceRuleFor(""), "");
+		out.writeHidden(hiddenTokenHelper.getWhitespaceRuleFor(null, ""), "");
 	}
 
 	protected void writeSemantic(ITokenStream out, CompositeNode node) throws IOException {

@@ -10,11 +10,12 @@ package org.eclipse.xtext.parsetree.reconstr.impl;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.ParserRule;
 
 import com.google.inject.Inject;
 
 /**
- * @author meysholdt - Initial contribution and API
+ * @author Moritz Eysholdt - Initial contribution and API
  */
 public class DefaultHiddenTokenHelper extends AbstractHiddenTokenHelper {
 
@@ -28,8 +29,18 @@ public class DefaultHiddenTokenHelper extends AbstractHiddenTokenHelper {
 		return rule != null && ("ML_COMMENT".equals(rule.getName()) || "SL_COMMENT".equals(rule.getName()));
 	}
 
+	@SuppressWarnings("deprecation")
 	public AbstractRule getWhitespaceRuleFor(String whitespace) {
 		return wsRule;
+	}
+
+	@Override
+	public AbstractRule getWhitespaceRuleFor(ParserRule context, String whitespace) {
+		if (context == null || !context.isDefinesHiddenTokens())
+			return wsRule;
+		if (context.getHiddenTokens().contains(wsRule))
+			return wsRule;
+		return null;
 	}
 
 	@Inject

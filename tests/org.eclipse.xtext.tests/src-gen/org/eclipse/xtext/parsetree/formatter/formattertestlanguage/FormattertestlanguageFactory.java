@@ -125,6 +125,42 @@ public interface FormattertestlanguageFactory extends EFactory
   Enumeration createEnumeration();
 
   /**
+   * Returns a new object of class '<em>Suppressed Hidden</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Suppressed Hidden</em>'.
+   * @generated
+   */
+  SuppressedHidden createSuppressedHidden();
+
+  /**
+   * Returns a new object of class '<em>Suppressed Hidden Sub</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Suppressed Hidden Sub</em>'.
+   * @generated
+   */
+  SuppressedHiddenSub createSuppressedHiddenSub();
+
+  /**
+   * Returns a new object of class '<em>Suppressed Hidden Sub Sub</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Suppressed Hidden Sub Sub</em>'.
+   * @generated
+   */
+  SuppressedHiddenSubSub createSuppressedHiddenSubSub();
+
+  /**
+   * Returns a new object of class '<em>Suppressed Hidden Sub ID</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Suppressed Hidden Sub ID</em>'.
+   * @generated
+   */
+  SuppressedHiddenSubID createSuppressedHiddenSubID();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

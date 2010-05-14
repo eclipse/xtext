@@ -52,4 +52,13 @@
     <eLiterals name="lit2" value="1" literal="lit2"/>
     <eLiterals name="lit3" value="2" literal="lit3"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SuppressedHidden" eSuperTypes="#//Line">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vals" upperBound="-1" eType="#//SuppressedHiddenSub"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SuppressedHiddenSub">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="idval" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SuppressedHiddenSubSub" eSuperTypes="#//SuppressedHiddenSub"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SuppressedHiddenSubID" eSuperTypes="#//SuppressedHiddenSub"/>
 </ecore:EPackage>

@@ -25,6 +25,10 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Line;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Meth;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Param;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Root;
+import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHidden;
+import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSub;
+import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSubID;
+import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSubSub;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentation;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrap;
 
@@ -112,6 +116,34 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * @generated
    */
   private EClass enumerationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass suppressedHiddenEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass suppressedHiddenSubEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass suppressedHiddenSubSubEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass suppressedHiddenSubIDEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -448,6 +480,66 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getSuppressedHidden()
+  {
+    return suppressedHiddenEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSuppressedHidden_Vals()
+  {
+    return (EReference)suppressedHiddenEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getSuppressedHiddenSub()
+  {
+    return suppressedHiddenSubEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSuppressedHiddenSub_Idval()
+  {
+    return (EAttribute)suppressedHiddenSubEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getSuppressedHiddenSubSub()
+  {
+    return suppressedHiddenSubSubEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getSuppressedHiddenSubID()
+  {
+    return suppressedHiddenSubIDEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getEnum1()
   {
     return enum1EEnum;
@@ -520,6 +612,16 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     enumerationEClass = createEClass(ENUMERATION);
     createEAttribute(enumerationEClass, ENUMERATION__VAL);
 
+    suppressedHiddenEClass = createEClass(SUPPRESSED_HIDDEN);
+    createEReference(suppressedHiddenEClass, SUPPRESSED_HIDDEN__VALS);
+
+    suppressedHiddenSubEClass = createEClass(SUPPRESSED_HIDDEN_SUB);
+    createEAttribute(suppressedHiddenSubEClass, SUPPRESSED_HIDDEN_SUB__IDVAL);
+
+    suppressedHiddenSubSubEClass = createEClass(SUPPRESSED_HIDDEN_SUB_SUB);
+
+    suppressedHiddenSubIDEClass = createEClass(SUPPRESSED_HIDDEN_SUB_ID);
+
     // Create enums
     enum1EEnum = createEEnum(ENUM1);
   }
@@ -561,6 +663,9 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     fqnObjEClass.getESuperTypes().add(this.getLine());
     fqnRefEClass.getESuperTypes().add(this.getLine());
     enumerationEClass.getESuperTypes().add(this.getLine());
+    suppressedHiddenEClass.getESuperTypes().add(this.getLine());
+    suppressedHiddenSubSubEClass.getESuperTypes().add(this.getSuppressedHiddenSub());
+    suppressedHiddenSubIDEClass.getESuperTypes().add(this.getSuppressedHiddenSub());
 
     // Initialize classes and features; add operations and parameters
     initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -599,6 +704,16 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
 
     initEClass(enumerationEClass, Enumeration.class, "Enumeration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEnumeration_Val(), this.getEnum1(), "val", null, 0, -1, Enumeration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(suppressedHiddenEClass, SuppressedHidden.class, "SuppressedHidden", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getSuppressedHidden_Vals(), this.getSuppressedHiddenSub(), null, "vals", null, 0, -1, SuppressedHidden.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(suppressedHiddenSubEClass, SuppressedHiddenSub.class, "SuppressedHiddenSub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSuppressedHiddenSub_Idval(), ecorePackage.getEString(), "idval", null, 0, 1, SuppressedHiddenSub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(suppressedHiddenSubSubEClass, SuppressedHiddenSubSub.class, "SuppressedHiddenSubSub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(suppressedHiddenSubIDEClass, SuppressedHiddenSubID.class, "SuppressedHiddenSubID", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     // Initialize enums and add enum literals
     initEEnum(enum1EEnum, Enum1.class, "Enum1");

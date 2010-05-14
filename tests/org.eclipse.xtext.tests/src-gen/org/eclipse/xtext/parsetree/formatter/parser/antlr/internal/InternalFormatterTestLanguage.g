@@ -195,7 +195,21 @@ ruleLine returns [EObject current=null]
         $current = $this_Enumeration_5.current; 
         currentNode = currentNode.getParent();
     }
-)	';' 
+
+    |(
+    { 
+        currentNode=createCompositeNode(grammarAccess.getLineAccess().getSuppressedHiddenParserRuleCall_0_6_0(), currentNode); 
+    }
+    this_SuppressedHidden_6=ruleSuppressedHidden
+    { 
+        $current = $this_SuppressedHidden_6.current; 
+        currentNode = currentNode.getParent();
+    }
+	'post' 
+    {
+        createLeafNode(grammarAccess.getLineAccess().getPostKeyword_0_6_1(), null); 
+    }
+))	';' 
     {
         createLeafNode(grammarAccess.getLineAccess().getSemicolonKeyword_1(), null); 
     }
@@ -978,6 +992,264 @@ ruleEnumeration returns [EObject current=null]
 
 )
 ))*)
+;
+
+
+
+
+
+// Entry rule entryRuleSuppressedHidden
+entryRuleSuppressedHidden returns [EObject current=null] 
+	@init { 
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+	}
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getSuppressedHiddenRule(), currentNode); }
+	 iv_ruleSuppressedHidden=ruleSuppressedHidden 
+	 { $current=$iv_ruleSuppressedHidden.current; } 
+	 EOF 
+;
+finally {
+	myHiddenTokenState.restore();
+}
+
+// Rule SuppressedHidden
+ruleSuppressedHidden returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+((
+    { 
+        temp=factory.create(grammarAccess.getSuppressedHiddenAccess().getSuppressedHiddenAction_0().getType().getClassifier());
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getSuppressedHiddenAccess().getSuppressedHiddenAction_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)	'`' 
+    {
+        createLeafNode(grammarAccess.getSuppressedHiddenAccess().getGraveAccentKeyword_1(), null); 
+    }
+((
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getSuppressedHiddenAccess().getValsSuppressedHiddenSubParserRuleCall_2_0_0(), currentNode); 
+	    }
+		lv_vals_2_0=ruleSuppressedHiddenSub		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getSuppressedHiddenRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"vals",
+	        		lv_vals_2_0, 
+	        		"SuppressedHiddenSub", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)(	'%' 
+    {
+        createLeafNode(grammarAccess.getSuppressedHiddenAccess().getPercentSignKeyword_2_1_0(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getSuppressedHiddenAccess().getValsSuppressedHiddenSubParserRuleCall_2_1_1_0(), currentNode); 
+	    }
+		lv_vals_4_0=ruleSuppressedHiddenSub		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getSuppressedHiddenRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"vals",
+	        		lv_vals_4_0, 
+	        		"SuppressedHiddenSub", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+))*)?	'`' 
+    {
+        createLeafNode(grammarAccess.getSuppressedHiddenAccess().getGraveAccentKeyword_3(), null); 
+    }
+)
+;
+finally {
+	myHiddenTokenState.restore();
+}
+
+
+
+
+
+// Entry rule entryRuleSuppressedHiddenSub
+entryRuleSuppressedHiddenSub returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getSuppressedHiddenSubRule(), currentNode); }
+	 iv_ruleSuppressedHiddenSub=ruleSuppressedHiddenSub 
+	 { $current=$iv_ruleSuppressedHiddenSub.current; } 
+	 EOF 
+;
+
+// Rule SuppressedHiddenSub
+ruleSuppressedHiddenSub returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(
+    { 
+        currentNode=createCompositeNode(grammarAccess.getSuppressedHiddenSubAccess().getSuppressedHiddenSubSubParserRuleCall_0(), currentNode); 
+    }
+    this_SuppressedHiddenSubSub_0=ruleSuppressedHiddenSubSub
+    { 
+        $current = $this_SuppressedHiddenSubSub_0.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getSuppressedHiddenSubAccess().getSuppressedHiddenSubIDParserRuleCall_1(), currentNode); 
+    }
+    this_SuppressedHiddenSubID_1=ruleSuppressedHiddenSubID
+    { 
+        $current = $this_SuppressedHiddenSubID_1.current; 
+        currentNode = currentNode.getParent();
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleSuppressedHiddenSubSub
+entryRuleSuppressedHiddenSubSub returns [EObject current=null] 
+	@init { 
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
+	}
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getSuppressedHiddenSubSubRule(), currentNode); }
+	 iv_ruleSuppressedHiddenSubSub=ruleSuppressedHiddenSubSub 
+	 { $current=$iv_ruleSuppressedHiddenSubSub.current; } 
+	 EOF 
+;
+finally {
+	myHiddenTokenState.restore();
+}
+
+// Rule SuppressedHiddenSubSub
+ruleSuppressedHiddenSubSub returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(	'<' 
+    {
+        createLeafNode(grammarAccess.getSuppressedHiddenSubSubAccess().getLessThanSignKeyword_0(), null); 
+    }
+(
+(
+		lv_idval_1_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getSuppressedHiddenSubSubAccess().getIdvalIDTerminalRuleCall_1_0(), "idval"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getSuppressedHiddenSubSubRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"idval",
+	        		lv_idval_1_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)	'>' 
+    {
+        createLeafNode(grammarAccess.getSuppressedHiddenSubSubAccess().getGreaterThanSignKeyword_2(), null); 
+    }
+)
+;
+finally {
+	myHiddenTokenState.restore();
+}
+
+
+
+
+
+// Entry rule entryRuleSuppressedHiddenSubID
+entryRuleSuppressedHiddenSubID returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getSuppressedHiddenSubIDRule(), currentNode); }
+	 iv_ruleSuppressedHiddenSubID=ruleSuppressedHiddenSubID 
+	 { $current=$iv_ruleSuppressedHiddenSubID.current; } 
+	 EOF 
+;
+
+// Rule SuppressedHiddenSubID
+ruleSuppressedHiddenSubID returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(
+(
+		lv_idval_0_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getSuppressedHiddenSubIDAccess().getIdvalIDTerminalRuleCall_0(), "idval"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getSuppressedHiddenSubIDRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"idval",
+	        		lv_idval_0_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)
 ;
 
 

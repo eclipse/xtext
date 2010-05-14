@@ -180,6 +180,37 @@ public class FormattertestlanguageSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case FormattertestlanguagePackage.SUPPRESSED_HIDDEN:
+      {
+        SuppressedHidden suppressedHidden = (SuppressedHidden)theEObject;
+        T result = caseSuppressedHidden(suppressedHidden);
+        if (result == null) result = caseLine(suppressedHidden);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FormattertestlanguagePackage.SUPPRESSED_HIDDEN_SUB:
+      {
+        SuppressedHiddenSub suppressedHiddenSub = (SuppressedHiddenSub)theEObject;
+        T result = caseSuppressedHiddenSub(suppressedHiddenSub);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FormattertestlanguagePackage.SUPPRESSED_HIDDEN_SUB_SUB:
+      {
+        SuppressedHiddenSubSub suppressedHiddenSubSub = (SuppressedHiddenSubSub)theEObject;
+        T result = caseSuppressedHiddenSubSub(suppressedHiddenSubSub);
+        if (result == null) result = caseSuppressedHiddenSub(suppressedHiddenSubSub);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FormattertestlanguagePackage.SUPPRESSED_HIDDEN_SUB_ID:
+      {
+        SuppressedHiddenSubID suppressedHiddenSubID = (SuppressedHiddenSubID)theEObject;
+        T result = caseSuppressedHiddenSubID(suppressedHiddenSubID);
+        if (result == null) result = caseSuppressedHiddenSub(suppressedHiddenSubID);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -356,6 +387,70 @@ public class FormattertestlanguageSwitch<T>
    * @generated
    */
   public T caseEnumeration(Enumeration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Suppressed Hidden</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Suppressed Hidden</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSuppressedHidden(SuppressedHidden object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Suppressed Hidden Sub</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Suppressed Hidden Sub</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSuppressedHiddenSub(SuppressedHiddenSub object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Suppressed Hidden Sub Sub</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Suppressed Hidden Sub Sub</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSuppressedHiddenSubSub(SuppressedHiddenSubSub object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Suppressed Hidden Sub ID</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Suppressed Hidden Sub ID</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSuppressedHiddenSubID(SuppressedHiddenSubID object)
   {
     return null;
   }

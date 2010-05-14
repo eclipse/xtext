@@ -133,6 +133,26 @@ public class FormattertestlanguageAdapterFactory extends AdapterFactoryImpl
         return createEnumerationAdapter();
       }
       @Override
+      public Adapter caseSuppressedHidden(SuppressedHidden object)
+      {
+        return createSuppressedHiddenAdapter();
+      }
+      @Override
+      public Adapter caseSuppressedHiddenSub(SuppressedHiddenSub object)
+      {
+        return createSuppressedHiddenSubAdapter();
+      }
+      @Override
+      public Adapter caseSuppressedHiddenSubSub(SuppressedHiddenSubSub object)
+      {
+        return createSuppressedHiddenSubSubAdapter();
+      }
+      @Override
+      public Adapter caseSuppressedHiddenSubID(SuppressedHiddenSubID object)
+      {
+        return createSuppressedHiddenSubIDAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -315,6 +335,66 @@ public class FormattertestlanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEnumerationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHidden <em>Suppressed Hidden</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHidden
+   * @generated
+   */
+  public Adapter createSuppressedHiddenAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSub <em>Suppressed Hidden Sub</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSub
+   * @generated
+   */
+  public Adapter createSuppressedHiddenSubAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSubSub <em>Suppressed Hidden Sub Sub</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSubSub
+   * @generated
+   */
+  public Adapter createSuppressedHiddenSubSubAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSubID <em>Suppressed Hidden Sub ID</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSubID
+   * @generated
+   */
+  public Adapter createSuppressedHiddenSubIDAdapter()
   {
     return null;
   }

@@ -10,9 +10,11 @@ package org.eclipse.xtext.formatting;
 import java.util.Collection;
 
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting.impl.ElementMatcherProvider;
 import org.eclipse.xtext.util.Pair;
 
+import com.google.common.base.Predicate;
 import com.google.inject.ImplementedBy;
 
 /**
@@ -34,6 +36,8 @@ public interface IElementMatcherProvider {
 	}
 
 	interface IElementMatcher<T extends IElementPattern> {
+		Pair<Integer, RuleCall> findTopmostRuleCall(Predicate<RuleCall> predicate);
+
 		Collection<T> finish();
 
 		Collection<T> matchNext(AbstractElement nextElement);

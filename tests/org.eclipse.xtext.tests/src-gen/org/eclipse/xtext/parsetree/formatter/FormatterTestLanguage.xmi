@@ -28,6 +28,10 @@
           <elements xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
           <elements xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
           <elements xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
+            <elements xsi:type="xtext:Keyword" value="post"/>
+          </elements>
         </elements>
         <elements xsi:type="xtext:Keyword" value=";"/>
       </alternatives>
@@ -217,6 +221,60 @@
           <enumLiteral href="http://simple/formattertestlanguage#//Enum1/lit3"/>
           <literal value="lit3"/>
         </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="SuppressedHidden" definesHiddenTokens="true">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://simple/formattertestlanguage#//SuppressedHidden"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://simple/formattertestlanguage#//SuppressedHidden"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="`"/>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Assignment" feature="vals" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
+          </elements>
+          <elements xsi:type="xtext:Group" cardinality="*">
+            <elements xsi:type="xtext:Keyword" value="%"/>
+            <elements xsi:type="xtext:Assignment" feature="vals" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
+            </elements>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="`"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="SuppressedHiddenSub">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://simple/formattertestlanguage#//SuppressedHiddenSub"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="SuppressedHiddenSubSub" definesHiddenTokens="true" hiddenTokens="/1/@rules.5">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://simple/formattertestlanguage#//SuppressedHiddenSubSub"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="&lt;"/>
+        <elements xsi:type="xtext:Assignment" feature="idval" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value=">"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="SuppressedHiddenSubID">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://simple/formattertestlanguage#//SuppressedHiddenSubID"/>
+      </type>
+      <alternatives xsi:type="xtext:Assignment" feature="idval" operator="=">
+        <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
       </alternatives>
     </rules>
   </xtext:Grammar>

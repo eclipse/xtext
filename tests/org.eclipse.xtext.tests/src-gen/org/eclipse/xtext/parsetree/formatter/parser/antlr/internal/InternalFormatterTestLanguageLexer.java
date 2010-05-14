@@ -17,15 +17,20 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public static final int T14=14;
     public static final int T29=29;
     public static final int RULE_ID=4;
+    public static final int T33=33;
     public static final int T22=22;
     public static final int T11=11;
+    public static final int T36=36;
     public static final int RULE_STRING=6;
     public static final int T12=12;
     public static final int T28=28;
     public static final int T23=23;
+    public static final int T35=35;
     public static final int T13=13;
+    public static final int T34=34;
     public static final int T20=20;
     public static final int T25=25;
+    public static final int T37=37;
     public static final int T18=18;
     public static final int RULE_WS=9;
     public static final int T26=26;
@@ -34,7 +39,7 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public static final int EOF=-1;
     public static final int T32=32;
     public static final int T17=17;
-    public static final int Tokens=33;
+    public static final int Tokens=38;
     public static final int T31=31;
     public static final int RULE_ANY_OTHER=10;
     public static final int T16=16;
@@ -72,10 +77,11 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT12() throws RecognitionException {
         try {
             int _type = T12;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:11:5: ( ';' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:11:7: ';'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:11:5: ( 'post' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:11:7: 'post'
             {
-            match(';'); 
+            match("post"); 
+
 
             }
 
@@ -90,10 +96,10 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT13() throws RecognitionException {
         try {
             int _type = T13;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:12:5: ( '=' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:12:7: '='
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:12:5: ( ';' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:12:7: ';'
             {
-            match('='); 
+            match(';'); 
 
             }
 
@@ -108,11 +114,10 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT14() throws RecognitionException {
         try {
             int _type = T14;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:13:5: ( '+=' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:13:7: '+='
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:13:5: ( '=' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:13:7: '='
             {
-            match("+="); 
-
+            match('='); 
 
             }
 
@@ -127,10 +132,11 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT15() throws RecognitionException {
         try {
             int _type = T15;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:14:5: ( '[' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:14:7: '['
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:14:5: ( '+=' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:14:7: '+='
             {
-            match('['); 
+            match("+="); 
+
 
             }
 
@@ -145,10 +151,10 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT16() throws RecognitionException {
         try {
             int _type = T16;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:15:5: ( ',' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:15:7: ','
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:15:5: ( '[' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:15:7: '['
             {
-            match(','); 
+            match('['); 
 
             }
 
@@ -163,10 +169,10 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT17() throws RecognitionException {
         try {
             int _type = T17;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:16:5: ( ']' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:16:7: ']'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:16:5: ( ',' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:16:7: ','
             {
-            match(']'); 
+            match(','); 
 
             }
 
@@ -181,11 +187,10 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT18() throws RecognitionException {
         try {
             int _type = T18;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:17:5: ( 'void' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:17:7: 'void'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:17:5: ( ']' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:17:7: ']'
             {
-            match("void"); 
-
+            match(']'); 
 
             }
 
@@ -200,10 +205,11 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT19() throws RecognitionException {
         try {
             int _type = T19;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:18:5: ( '(' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:18:7: '('
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:18:5: ( 'void' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:18:7: 'void'
             {
-            match('('); 
+            match("void"); 
+
 
             }
 
@@ -218,10 +224,10 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT20() throws RecognitionException {
         try {
             int _type = T20;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:19:5: ( ')' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:19:7: ')'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:19:5: ( '(' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:19:7: '('
             {
-            match(')'); 
+            match('('); 
 
             }
 
@@ -236,10 +242,10 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT21() throws RecognitionException {
         try {
             int _type = T21;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:20:5: ( ':' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:20:7: ':'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:20:5: ( ')' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:20:7: ')'
             {
-            match(':'); 
+            match(')'); 
 
             }
 
@@ -254,11 +260,10 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT22() throws RecognitionException {
         try {
             int _type = T22;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:21:5: ( 'linewrap' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:21:7: 'linewrap'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:21:5: ( ':' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:21:7: ':'
             {
-            match("linewrap"); 
-
+            match(':'); 
 
             }
 
@@ -273,10 +278,10 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT23() throws RecognitionException {
         try {
             int _type = T23;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:22:5: ( 'indentation' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:22:7: 'indentation'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:22:5: ( 'linewrap' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:22:7: 'linewrap'
             {
-            match("indentation"); 
+            match("linewrap"); 
 
 
             }
@@ -292,10 +297,11 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT24() throws RecognitionException {
         try {
             int _type = T24;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:23:5: ( '{' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:23:7: '{'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:23:5: ( 'indentation' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:23:7: 'indentation'
             {
-            match('{'); 
+            match("indentation"); 
+
 
             }
 
@@ -310,10 +316,10 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT25() throws RecognitionException {
         try {
             int _type = T25;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:24:5: ( '}' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:24:7: '}'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:24:5: ( '{' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:24:7: '{'
             {
-            match('}'); 
+            match('{'); 
 
             }
 
@@ -328,11 +334,10 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT26() throws RecognitionException {
         try {
             int _type = T26;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:25:5: ( 'fqn' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:25:7: 'fqn'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:25:5: ( '}' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:25:7: '}'
             {
-            match("fqn"); 
-
+            match('}'); 
 
             }
 
@@ -347,10 +352,11 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT27() throws RecognitionException {
         try {
             int _type = T27;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:26:5: ( '.' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:26:7: '.'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:26:5: ( 'fqn' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:26:7: 'fqn'
             {
-            match('.'); 
+            match("fqn"); 
+
 
             }
 
@@ -365,11 +371,10 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT28() throws RecognitionException {
         try {
             int _type = T28;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:27:5: ( 'fqnref' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:27:7: 'fqnref'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:27:5: ( '.' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:27:7: '.'
             {
-            match("fqnref"); 
-
+            match('.'); 
 
             }
 
@@ -384,10 +389,10 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT29() throws RecognitionException {
         try {
             int _type = T29;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:28:5: ( 'enum' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:28:7: 'enum'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:28:5: ( 'fqnref' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:28:7: 'fqnref'
             {
-            match("enum"); 
+            match("fqnref"); 
 
 
             }
@@ -403,10 +408,10 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT30() throws RecognitionException {
         try {
             int _type = T30;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:29:5: ( 'lit1' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:29:7: 'lit1'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:29:5: ( 'enum' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:29:7: 'enum'
             {
-            match("lit1"); 
+            match("enum"); 
 
 
             }
@@ -422,11 +427,10 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT31() throws RecognitionException {
         try {
             int _type = T31;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:30:5: ( 'lit2' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:30:7: 'lit2'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:30:5: ( '`' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:30:7: '`'
             {
-            match("lit2"); 
-
+            match('`'); 
 
             }
 
@@ -441,8 +445,100 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mT32() throws RecognitionException {
         try {
             int _type = T32;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:31:5: ( 'lit3' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:31:7: 'lit3'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:31:5: ( '%' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:31:7: '%'
+            {
+            match('%'); 
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T32
+
+    // $ANTLR start T33
+    public final void mT33() throws RecognitionException {
+        try {
+            int _type = T33;
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:32:5: ( '<' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:32:7: '<'
+            {
+            match('<'); 
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T33
+
+    // $ANTLR start T34
+    public final void mT34() throws RecognitionException {
+        try {
+            int _type = T34;
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:33:5: ( '>' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:33:7: '>'
+            {
+            match('>'); 
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T34
+
+    // $ANTLR start T35
+    public final void mT35() throws RecognitionException {
+        try {
+            int _type = T35;
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:34:5: ( 'lit1' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:34:7: 'lit1'
+            {
+            match("lit1"); 
+
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T35
+
+    // $ANTLR start T36
+    public final void mT36() throws RecognitionException {
+        try {
+            int _type = T36;
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:35:5: ( 'lit2' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:35:7: 'lit2'
+            {
+            match("lit2"); 
+
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T36
+
+    // $ANTLR start T37
+    public final void mT37() throws RecognitionException {
+        try {
+            int _type = T37;
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:36:5: ( 'lit3' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:36:7: 'lit3'
             {
             match("lit3"); 
 
@@ -454,16 +550,16 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end T32
+    // $ANTLR end T37
 
     // $ANTLR start RULE_ID
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1014:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1014:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1286:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1286:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1014:11: ( '^' )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1286:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -472,7 +568,7 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1014:11: '^'
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1286:11: '^'
                     {
                     match('^'); 
 
@@ -491,7 +587,7 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1014:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1286:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -539,10 +635,10 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1016:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1016:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1288:10: ( ( '0' .. '9' )+ )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1288:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1016:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1288:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -556,7 +652,7 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1016:13: '0' .. '9'
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1288:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -586,10 +682,10 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1018:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1018:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1290:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1290:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1018:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1290:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -601,16 +697,16 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1018:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )", 6, 0, input);
+                    new NoViableAltException("1290:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1018:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1290:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1018:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1290:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -626,7 +722,7 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1018:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1290:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -643,7 +739,7 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1018:62: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1290:62: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -669,10 +765,10 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1018:82: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1290:82: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1018:87: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1290:87: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -688,7 +784,7 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1018:88: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1290:88: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -705,7 +801,7 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1018:129: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1290:129: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -747,12 +843,12 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1020:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1020:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1292:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1292:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1020:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1292:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -777,7 +873,7 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1020:52: .
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1292:52: .
             	    {
             	    matchAny(); 
 
@@ -805,12 +901,12 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1022:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1022:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1294:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1294:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1022:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1294:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -823,7 +919,7 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1022:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1294:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -844,7 +940,7 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1022:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1294:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -853,9 +949,9 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1022:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1294:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1022:41: ( '\\r' )?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1294:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -864,7 +960,7 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1022:41: '\\r'
+                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1294:41: '\\r'
                             {
                             match('\r'); 
 
@@ -894,10 +990,10 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1024:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1024:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1296:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1296:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1024:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1296:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -950,8 +1046,8 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1026:16: ( . )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1026:18: .
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1298:16: ( . )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1298:18: .
             {
             matchAny(); 
 
@@ -965,90 +1061,105 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt12=29;
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | T36 | T37 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt12=34;
         int LA12_0 = input.LA(1);
 
         if ( (LA12_0=='t') ) {
             alt12 = mTokensHelper001();
         }
-        else if ( (LA12_0==';') ) {
+        else if ( (LA12_0=='p') ) {
             alt12 = mTokensHelper002();
         }
-        else if ( (LA12_0=='=') ) {
+        else if ( (LA12_0==';') ) {
             alt12 = mTokensHelper003();
         }
-        else if ( (LA12_0=='+') ) {
+        else if ( (LA12_0=='=') ) {
             alt12 = mTokensHelper004();
         }
-        else if ( (LA12_0=='[') ) {
+        else if ( (LA12_0=='+') ) {
             alt12 = mTokensHelper005();
         }
-        else if ( (LA12_0==',') ) {
+        else if ( (LA12_0=='[') ) {
             alt12 = mTokensHelper006();
         }
-        else if ( (LA12_0==']') ) {
+        else if ( (LA12_0==',') ) {
             alt12 = mTokensHelper007();
         }
-        else if ( (LA12_0=='v') ) {
+        else if ( (LA12_0==']') ) {
             alt12 = mTokensHelper008();
         }
-        else if ( (LA12_0=='(') ) {
+        else if ( (LA12_0=='v') ) {
             alt12 = mTokensHelper009();
         }
-        else if ( (LA12_0==')') ) {
+        else if ( (LA12_0=='(') ) {
             alt12 = mTokensHelper010();
         }
-        else if ( (LA12_0==':') ) {
+        else if ( (LA12_0==')') ) {
             alt12 = mTokensHelper011();
         }
-        else if ( (LA12_0=='l') ) {
+        else if ( (LA12_0==':') ) {
             alt12 = mTokensHelper012();
         }
-        else if ( (LA12_0=='i') ) {
+        else if ( (LA12_0=='l') ) {
             alt12 = mTokensHelper013();
         }
-        else if ( (LA12_0=='{') ) {
+        else if ( (LA12_0=='i') ) {
             alt12 = mTokensHelper014();
         }
-        else if ( (LA12_0=='}') ) {
+        else if ( (LA12_0=='{') ) {
             alt12 = mTokensHelper015();
         }
-        else if ( (LA12_0=='f') ) {
+        else if ( (LA12_0=='}') ) {
             alt12 = mTokensHelper016();
         }
-        else if ( (LA12_0=='.') ) {
+        else if ( (LA12_0=='f') ) {
             alt12 = mTokensHelper017();
         }
-        else if ( (LA12_0=='e') ) {
+        else if ( (LA12_0=='.') ) {
             alt12 = mTokensHelper018();
         }
-        else if ( (LA12_0=='^') ) {
+        else if ( (LA12_0=='e') ) {
             alt12 = mTokensHelper019();
         }
-        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='d')||(LA12_0>='g' && LA12_0<='h')||(LA12_0>='j' && LA12_0<='k')||(LA12_0>='m' && LA12_0<='s')||LA12_0=='u'||(LA12_0>='w' && LA12_0<='z')) ) {
+        else if ( (LA12_0=='`') ) {
             alt12 = mTokensHelper020();
         }
-        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {
+        else if ( (LA12_0=='%') ) {
             alt12 = mTokensHelper021();
         }
-        else if ( (LA12_0=='\"') ) {
+        else if ( (LA12_0=='<') ) {
             alt12 = mTokensHelper022();
         }
-        else if ( (LA12_0=='\'') ) {
+        else if ( (LA12_0=='>') ) {
             alt12 = mTokensHelper023();
         }
-        else if ( (LA12_0=='/') ) {
+        else if ( (LA12_0=='^') ) {
             alt12 = mTokensHelper024();
         }
-        else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {
+        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='d')||(LA12_0>='g' && LA12_0<='h')||(LA12_0>='j' && LA12_0<='k')||(LA12_0>='m' && LA12_0<='o')||(LA12_0>='q' && LA12_0<='s')||LA12_0=='u'||(LA12_0>='w' && LA12_0<='z')) ) {
             alt12 = mTokensHelper025();
         }
-        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||LA12_0=='*'||LA12_0=='-'||LA12_0=='<'||(LA12_0>='>' && LA12_0<='@')||LA12_0=='\\'||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFE')) ) {
+        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {
             alt12 = mTokensHelper026();
         }
-        else {
+        else if ( (LA12_0=='\"') ) {
             alt12 = mTokensHelper027();
+        }
+        else if ( (LA12_0=='\'') ) {
+            alt12 = mTokensHelper028();
+        }
+        else if ( (LA12_0=='/') ) {
+            alt12 = mTokensHelper029();
+        }
+        else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {
+            alt12 = mTokensHelper030();
+        }
+        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='$')||LA12_0=='&'||LA12_0=='*'||LA12_0=='-'||(LA12_0>='?' && LA12_0<='@')||LA12_0=='\\'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFE')) ) {
+            alt12 = mTokensHelper031();
+        }
+        else {
+            alt12 = mTokensHelper032();
         }
         switch (alt12) {
             case 1 :
@@ -1206,49 +1317,84 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
                 }
                 break;
             case 23 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:98: RULE_ID
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:98: T33
+                {
+                mT33(); 
+
+                }
+                break;
+            case 24 :
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:102: T34
+                {
+                mT34(); 
+
+                }
+                break;
+            case 25 :
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:106: T35
+                {
+                mT35(); 
+
+                }
+                break;
+            case 26 :
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:110: T36
+                {
+                mT36(); 
+
+                }
+                break;
+            case 27 :
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:114: T37
+                {
+                mT37(); 
+
+                }
+                break;
+            case 28 :
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:118: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 24 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:106: RULE_INT
+            case 29 :
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:126: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 25 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:115: RULE_STRING
+            case 30 :
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:135: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 26 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:127: RULE_ML_COMMENT
+            case 31 :
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:147: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 27 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:143: RULE_SL_COMMENT
+            case 32 :
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:163: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 28 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:159: RULE_WS
+            case 33 :
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:179: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 29 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:167: RULE_ANY_OTHER
+            case 34 :
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:1:187: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -1262,32 +1408,56 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
         int LA12_1 = input.LA(2);
 
         if ( (LA12_1=='e') ) {
-            int LA12_27 = input.LA(3);
+            int LA12_32 = input.LA(3);
 
-            if ( (LA12_27=='s') ) {
-                int LA12_51 = input.LA(4);
+            if ( (LA12_32=='s') ) {
+                int LA12_61 = input.LA(4);
 
-                if ( (LA12_51=='t') ) {
-                    int LA12_58 = input.LA(5);
+                if ( (LA12_61=='t') ) {
+                    int LA12_69 = input.LA(5);
 
-                    if ( ((LA12_58>='0' && LA12_58<='9')||(LA12_58>='A' && LA12_58<='Z')||LA12_58=='_'||(LA12_58>='a' && LA12_58<='z')) ) {
-                        return 23;
+                    if ( ((LA12_69>='0' && LA12_69<='9')||(LA12_69>='A' && LA12_69<='Z')||LA12_69=='_'||(LA12_69>='a' && LA12_69<='z')) ) {
+                        return 28;
                     }
                     else {
                         return 1;}
                 }
                 else {
-                    return 23;}
+                    return 28;}
             }
             else {
-                return 23;}
+                return 28;}
         }
         else {
-            return 23;}
+            return 28;}
     }
 
     private int mTokensHelper002() throws RecognitionException {
-        return 2;
+        int LA12_2 = input.LA(2);
+
+        if ( (LA12_2=='o') ) {
+            int LA12_34 = input.LA(3);
+
+            if ( (LA12_34=='s') ) {
+                int LA12_62 = input.LA(4);
+
+                if ( (LA12_62=='t') ) {
+                    int LA12_70 = input.LA(5);
+
+                    if ( ((LA12_70>='0' && LA12_70<='9')||(LA12_70>='A' && LA12_70<='Z')||LA12_70=='_'||(LA12_70>='a' && LA12_70<='z')) ) {
+                        return 28;
+                    }
+                    else {
+                        return 2;}
+                }
+                else {
+                    return 28;}
+            }
+            else {
+                return 28;}
+        }
+        else {
+            return 28;}
     }
 
     private int mTokensHelper003() throws RecognitionException {
@@ -1295,17 +1465,17 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     }
 
     private int mTokensHelper004() throws RecognitionException {
-        int LA12_4 = input.LA(2);
-
-        if ( (LA12_4=='=') ) {
-            return 4;
-        }
-        else {
-            return 29;}
+        return 4;
     }
 
     private int mTokensHelper005() throws RecognitionException {
-        return 5;
+        int LA12_5 = input.LA(2);
+
+        if ( (LA12_5=='=') ) {
+            return 5;
+        }
+        else {
+            return 34;}
     }
 
     private int mTokensHelper006() throws RecognitionException {
@@ -1317,35 +1487,35 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     }
 
     private int mTokensHelper008() throws RecognitionException {
-        int LA12_8 = input.LA(2);
-
-        if ( (LA12_8=='o') ) {
-            int LA12_35 = input.LA(3);
-
-            if ( (LA12_35=='i') ) {
-                int LA12_52 = input.LA(4);
-
-                if ( (LA12_52=='d') ) {
-                    int LA12_59 = input.LA(5);
-
-                    if ( ((LA12_59>='0' && LA12_59<='9')||(LA12_59>='A' && LA12_59<='Z')||LA12_59=='_'||(LA12_59>='a' && LA12_59<='z')) ) {
-                        return 23;
-                    }
-                    else {
-                        return 8;}
-                }
-                else {
-                    return 23;}
-            }
-            else {
-                return 23;}
-        }
-        else {
-            return 23;}
+        return 8;
     }
 
     private int mTokensHelper009() throws RecognitionException {
-        return 9;
+        int LA12_9 = input.LA(2);
+
+        if ( (LA12_9=='o') ) {
+            int LA12_41 = input.LA(3);
+
+            if ( (LA12_41=='i') ) {
+                int LA12_63 = input.LA(4);
+
+                if ( (LA12_63=='d') ) {
+                    int LA12_71 = input.LA(5);
+
+                    if ( ((LA12_71>='0' && LA12_71<='9')||(LA12_71>='A' && LA12_71<='Z')||LA12_71=='_'||(LA12_71>='a' && LA12_71<='z')) ) {
+                        return 28;
+                    }
+                    else {
+                        return 9;}
+                }
+                else {
+                    return 28;}
+            }
+            else {
+                return 28;}
+        }
+        else {
+            return 28;}
     }
 
     private int mTokensHelper010() throws RecognitionException {
@@ -1357,167 +1527,167 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     }
 
     private int mTokensHelper012() throws RecognitionException {
-        int LA12_12 = input.LA(2);
-
-        if ( (LA12_12=='i') ) {
-            switch ( input.LA(3) ) {
-            case 'n':
-                {
-                int LA12_53 = input.LA(4);
-
-                if ( (LA12_53=='e') ) {
-                    int LA12_60 = input.LA(5);
-
-                    if ( (LA12_60=='w') ) {
-                        int LA12_70 = input.LA(6);
-
-                        if ( (LA12_70=='r') ) {
-                            int LA12_77 = input.LA(7);
-
-                            if ( (LA12_77=='a') ) {
-                                int LA12_80 = input.LA(8);
-
-                                if ( (LA12_80=='p') ) {
-                                    int LA12_83 = input.LA(9);
-
-                                    if ( ((LA12_83>='0' && LA12_83<='9')||(LA12_83>='A' && LA12_83<='Z')||LA12_83=='_'||(LA12_83>='a' && LA12_83<='z')) ) {
-                                        return 23;
-                                    }
-                                    else {
-                                        return 12;}
-                                }
-                                else {
-                                    return 23;}
-                            }
-                            else {
-                                return 23;}
-                        }
-                        else {
-                            return 23;}
-                    }
-                    else {
-                        return 23;}
-                }
-                else {
-                    return 23;}
-                }
-            case 't':
-                {
-                switch ( input.LA(4) ) {
-                case '3':
-                    {
-                    int LA12_61 = input.LA(5);
-
-                    if ( ((LA12_61>='0' && LA12_61<='9')||(LA12_61>='A' && LA12_61<='Z')||LA12_61=='_'||(LA12_61>='a' && LA12_61<='z')) ) {
-                        return 23;
-                    }
-                    else {
-                        return 22;}
-                    }
-                case '2':
-                    {
-                    int LA12_62 = input.LA(5);
-
-                    if ( ((LA12_62>='0' && LA12_62<='9')||(LA12_62>='A' && LA12_62<='Z')||LA12_62=='_'||(LA12_62>='a' && LA12_62<='z')) ) {
-                        return 23;
-                    }
-                    else {
-                        return 21;}
-                    }
-                case '1':
-                    {
-                    int LA12_63 = input.LA(5);
-
-                    if ( ((LA12_63>='0' && LA12_63<='9')||(LA12_63>='A' && LA12_63<='Z')||LA12_63=='_'||(LA12_63>='a' && LA12_63<='z')) ) {
-                        return 23;
-                    }
-                    else {
-                        return 20;}
-                    }
-                default:
-                    return 23;}
-
-                }
-            default:
-                return 23;}
-
-        }
-        else {
-            return 23;}
+        return 12;
     }
 
     private int mTokensHelper013() throws RecognitionException {
         int LA12_13 = input.LA(2);
 
-        if ( (LA12_13=='n') ) {
-            int LA12_40 = input.LA(3);
+        if ( (LA12_13=='i') ) {
+            switch ( input.LA(3) ) {
+            case 't':
+                {
+                switch ( input.LA(4) ) {
+                case '1':
+                    {
+                    int LA12_72 = input.LA(5);
 
-            if ( (LA12_40=='d') ) {
-                int LA12_55 = input.LA(4);
-
-                if ( (LA12_55=='e') ) {
-                    int LA12_64 = input.LA(5);
-
-                    if ( (LA12_64=='n') ) {
-                        int LA12_74 = input.LA(6);
-
-                        if ( (LA12_74=='t') ) {
-                            int LA12_78 = input.LA(7);
-
-                            if ( (LA12_78=='a') ) {
-                                int LA12_81 = input.LA(8);
-
-                                if ( (LA12_81=='t') ) {
-                                    int LA12_84 = input.LA(9);
-
-                                    if ( (LA12_84=='i') ) {
-                                        int LA12_86 = input.LA(10);
-
-                                        if ( (LA12_86=='o') ) {
-                                            int LA12_87 = input.LA(11);
-
-                                            if ( (LA12_87=='n') ) {
-                                                int LA12_88 = input.LA(12);
-
-                                                if ( ((LA12_88>='0' && LA12_88<='9')||(LA12_88>='A' && LA12_88<='Z')||LA12_88=='_'||(LA12_88>='a' && LA12_88<='z')) ) {
-                                                    return 23;
-                                                }
-                                                else {
-                                                    return 13;}
-                                            }
-                                            else {
-                                                return 23;}
-                                        }
-                                        else {
-                                            return 23;}
-                                    }
-                                    else {
-                                        return 23;}
-                                }
-                                else {
-                                    return 23;}
-                            }
-                            else {
-                                return 23;}
-                        }
-                        else {
-                            return 23;}
+                    if ( ((LA12_72>='0' && LA12_72<='9')||(LA12_72>='A' && LA12_72<='Z')||LA12_72=='_'||(LA12_72>='a' && LA12_72<='z')) ) {
+                        return 28;
                     }
                     else {
-                        return 23;}
+                        return 25;}
+                    }
+                case '2':
+                    {
+                    int LA12_73 = input.LA(5);
+
+                    if ( ((LA12_73>='0' && LA12_73<='9')||(LA12_73>='A' && LA12_73<='Z')||LA12_73=='_'||(LA12_73>='a' && LA12_73<='z')) ) {
+                        return 28;
+                    }
+                    else {
+                        return 26;}
+                    }
+                case '3':
+                    {
+                    int LA12_74 = input.LA(5);
+
+                    if ( ((LA12_74>='0' && LA12_74<='9')||(LA12_74>='A' && LA12_74<='Z')||LA12_74=='_'||(LA12_74>='a' && LA12_74<='z')) ) {
+                        return 28;
+                    }
+                    else {
+                        return 27;}
+                    }
+                default:
+                    return 28;}
+
+                }
+            case 'n':
+                {
+                int LA12_65 = input.LA(4);
+
+                if ( (LA12_65=='e') ) {
+                    int LA12_75 = input.LA(5);
+
+                    if ( (LA12_75=='w') ) {
+                        int LA12_86 = input.LA(6);
+
+                        if ( (LA12_86=='r') ) {
+                            int LA12_90 = input.LA(7);
+
+                            if ( (LA12_90=='a') ) {
+                                int LA12_93 = input.LA(8);
+
+                                if ( (LA12_93=='p') ) {
+                                    int LA12_96 = input.LA(9);
+
+                                    if ( ((LA12_96>='0' && LA12_96<='9')||(LA12_96>='A' && LA12_96<='Z')||LA12_96=='_'||(LA12_96>='a' && LA12_96<='z')) ) {
+                                        return 28;
+                                    }
+                                    else {
+                                        return 13;}
+                                }
+                                else {
+                                    return 28;}
+                            }
+                            else {
+                                return 28;}
+                        }
+                        else {
+                            return 28;}
+                    }
+                    else {
+                        return 28;}
                 }
                 else {
-                    return 23;}
-            }
-            else {
-                return 23;}
+                    return 28;}
+                }
+            default:
+                return 28;}
+
         }
         else {
-            return 23;}
+            return 28;}
     }
 
     private int mTokensHelper014() throws RecognitionException {
-        return 14;
+        int LA12_14 = input.LA(2);
+
+        if ( (LA12_14=='n') ) {
+            int LA12_46 = input.LA(3);
+
+            if ( (LA12_46=='d') ) {
+                int LA12_66 = input.LA(4);
+
+                if ( (LA12_66=='e') ) {
+                    int LA12_76 = input.LA(5);
+
+                    if ( (LA12_76=='n') ) {
+                        int LA12_87 = input.LA(6);
+
+                        if ( (LA12_87=='t') ) {
+                            int LA12_91 = input.LA(7);
+
+                            if ( (LA12_91=='a') ) {
+                                int LA12_94 = input.LA(8);
+
+                                if ( (LA12_94=='t') ) {
+                                    int LA12_97 = input.LA(9);
+
+                                    if ( (LA12_97=='i') ) {
+                                        int LA12_99 = input.LA(10);
+
+                                        if ( (LA12_99=='o') ) {
+                                            int LA12_100 = input.LA(11);
+
+                                            if ( (LA12_100=='n') ) {
+                                                int LA12_101 = input.LA(12);
+
+                                                if ( ((LA12_101>='0' && LA12_101<='9')||(LA12_101>='A' && LA12_101<='Z')||LA12_101=='_'||(LA12_101>='a' && LA12_101<='z')) ) {
+                                                    return 28;
+                                                }
+                                                else {
+                                                    return 14;}
+                                            }
+                                            else {
+                                                return 28;}
+                                        }
+                                        else {
+                                            return 28;}
+                                    }
+                                    else {
+                                        return 28;}
+                                }
+                                else {
+                                    return 28;}
+                            }
+                            else {
+                                return 28;}
+                        }
+                        else {
+                            return 28;}
+                    }
+                    else {
+                        return 28;}
+                }
+                else {
+                    return 28;}
+            }
+            else {
+                return 28;}
+        }
+        else {
+            return 28;}
     }
 
     private int mTokensHelper015() throws RecognitionException {
@@ -1525,34 +1695,38 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     }
 
     private int mTokensHelper016() throws RecognitionException {
-        int LA12_16 = input.LA(2);
+        return 16;
+    }
 
-        if ( (LA12_16=='q') ) {
-            int LA12_43 = input.LA(3);
+    private int mTokensHelper017() throws RecognitionException {
+        int LA12_17 = input.LA(2);
 
-            if ( (LA12_43=='n') ) {
+        if ( (LA12_17=='q') ) {
+            int LA12_49 = input.LA(3);
+
+            if ( (LA12_49=='n') ) {
                 switch ( input.LA(4) ) {
                 case 'r':
                     {
-                    int LA12_65 = input.LA(5);
+                    int LA12_77 = input.LA(5);
 
-                    if ( (LA12_65=='e') ) {
-                        int LA12_75 = input.LA(6);
+                    if ( (LA12_77=='e') ) {
+                        int LA12_88 = input.LA(6);
 
-                        if ( (LA12_75=='f') ) {
-                            int LA12_79 = input.LA(7);
+                        if ( (LA12_88=='f') ) {
+                            int LA12_92 = input.LA(7);
 
-                            if ( ((LA12_79>='0' && LA12_79<='9')||(LA12_79>='A' && LA12_79<='Z')||LA12_79=='_'||(LA12_79>='a' && LA12_79<='z')) ) {
-                                return 23;
+                            if ( ((LA12_92>='0' && LA12_92<='9')||(LA12_92>='A' && LA12_92<='Z')||LA12_92=='_'||(LA12_92>='a' && LA12_92<='z')) ) {
+                                return 28;
                             }
                             else {
-                                return 18;}
+                                return 19;}
                         }
                         else {
-                            return 23;}
+                            return 28;}
                     }
                     else {
-                        return 23;}
+                        return 28;}
                     }
                 case '0':
                 case '1':
@@ -1617,102 +1791,75 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
                 case 'y':
                 case 'z':
                     {
-                    return 23;
+                    return 28;
                     }
                 default:
-                    return 16;}
+                    return 17;}
 
             }
             else {
-                return 23;}
+                return 28;}
         }
         else {
-            return 23;}
-    }
-
-    private int mTokensHelper017() throws RecognitionException {
-        return 17;
+            return 28;}
     }
 
     private int mTokensHelper018() throws RecognitionException {
-        int LA12_18 = input.LA(2);
-
-        if ( (LA12_18=='n') ) {
-            int LA12_45 = input.LA(3);
-
-            if ( (LA12_45=='u') ) {
-                int LA12_57 = input.LA(4);
-
-                if ( (LA12_57=='m') ) {
-                    int LA12_67 = input.LA(5);
-
-                    if ( ((LA12_67>='0' && LA12_67<='9')||(LA12_67>='A' && LA12_67<='Z')||LA12_67=='_'||(LA12_67>='a' && LA12_67<='z')) ) {
-                        return 23;
-                    }
-                    else {
-                        return 19;}
-                }
-                else {
-                    return 23;}
-            }
-            else {
-                return 23;}
-        }
-        else {
-            return 23;}
+        return 18;
     }
 
     private int mTokensHelper019() throws RecognitionException {
         int LA12_19 = input.LA(2);
 
-        if ( ((LA12_19>='A' && LA12_19<='Z')||LA12_19=='_'||(LA12_19>='a' && LA12_19<='z')) ) {
-            return 23;
+        if ( (LA12_19=='n') ) {
+            int LA12_51 = input.LA(3);
+
+            if ( (LA12_51=='u') ) {
+                int LA12_68 = input.LA(4);
+
+                if ( (LA12_68=='m') ) {
+                    int LA12_79 = input.LA(5);
+
+                    if ( ((LA12_79>='0' && LA12_79<='9')||(LA12_79>='A' && LA12_79<='Z')||LA12_79=='_'||(LA12_79>='a' && LA12_79<='z')) ) {
+                        return 28;
+                    }
+                    else {
+                        return 20;}
+                }
+                else {
+                    return 28;}
+            }
+            else {
+                return 28;}
         }
         else {
-            return 29;}
+            return 28;}
     }
 
     private int mTokensHelper020() throws RecognitionException {
-        return 23;
+        return 21;
     }
 
     private int mTokensHelper021() throws RecognitionException {
-        return 24;
+        return 22;
     }
 
     private int mTokensHelper022() throws RecognitionException {
-        int LA12_22 = input.LA(2);
-
-        if ( ((LA12_22>='\u0000' && LA12_22<='\uFFFE')) ) {
-            return 25;
-        }
-        else {
-            return 29;}
+        return 23;
     }
 
     private int mTokensHelper023() throws RecognitionException {
-        int LA12_23 = input.LA(2);
-
-        if ( ((LA12_23>='\u0000' && LA12_23<='\uFFFE')) ) {
-            return 25;
-        }
-        else {
-            return 29;}
+        return 24;
     }
 
     private int mTokensHelper024() throws RecognitionException {
-        switch ( input.LA(2) ) {
-        case '*':
-            {
-            return 26;
-            }
-        case '/':
-            {
-            return 27;
-            }
-        default:
-            return 29;}
+        int LA12_24 = input.LA(2);
 
+        if ( ((LA12_24>='A' && LA12_24<='Z')||LA12_24=='_'||(LA12_24>='a' && LA12_24<='z')) ) {
+            return 28;
+        }
+        else {
+            return 34;}
     }
 
     private int mTokensHelper025() throws RecognitionException {
@@ -1724,8 +1871,51 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
     }
 
     private int mTokensHelper027() throws RecognitionException {
+        int LA12_27 = input.LA(2);
+
+        if ( ((LA12_27>='\u0000' && LA12_27<='\uFFFE')) ) {
+            return 30;
+        }
+        else {
+            return 34;}
+    }
+
+    private int mTokensHelper028() throws RecognitionException {
+        int LA12_28 = input.LA(2);
+
+        if ( ((LA12_28>='\u0000' && LA12_28<='\uFFFE')) ) {
+            return 30;
+        }
+        else {
+            return 34;}
+    }
+
+    private int mTokensHelper029() throws RecognitionException {
+        switch ( input.LA(2) ) {
+        case '*':
+            {
+            return 31;
+            }
+        case '/':
+            {
+            return 32;
+            }
+        default:
+            return 34;}
+
+    }
+
+    private int mTokensHelper030() throws RecognitionException {
+        return 33;
+    }
+
+    private int mTokensHelper031() throws RecognitionException {
+        return 34;
+    }
+
+    private int mTokensHelper032() throws RecognitionException {
         NoViableAltException nvae =
-            new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
+            new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | T36 | T37 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
 
         throw nvae;
     }

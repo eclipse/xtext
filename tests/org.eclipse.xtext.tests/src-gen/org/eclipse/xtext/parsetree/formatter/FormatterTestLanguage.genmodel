@@ -49,5 +49,13 @@
     <genClasses ecoreClass="FormatterTestLanguage.ecore#//Enumeration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Enumeration/val"/>
     </genClasses>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//SuppressedHidden">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FormatterTestLanguage.ecore#//SuppressedHidden/vals"/>
+    </genClasses>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//SuppressedHiddenSub">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//SuppressedHiddenSub/idval"/>
+    </genClasses>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//SuppressedHiddenSubSub"/>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//SuppressedHiddenSubID"/>
   </genPackages>
 </genmodel:GenModel>
