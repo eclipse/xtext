@@ -150,7 +150,8 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 				mandatory.clear();
 			}
 			if (semanticType != null) {
-				if (mandatory.isEmpty() && optional.isEmpty())
+				if (mandatory.isEmpty()
+						&& (optional.isEmpty() || (optional.size() == 1 && optional.contains(semanticType))))
 					mandatory.add(semanticType);
 				else
 					optional.add(semanticType);
@@ -194,7 +195,7 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 		protected Set<EClass> getSemanticTypeByParent(Set<ISyntaxConstraint> exclude) {
 			if (type == ConstraintType.ALTERNATIVE) {
 				exclude.addAll(getContents());
-				if (isRoot())
+				if (semanticType != null)
 					return Sets.newHashSet(semanticType);
 			} else {
 				Pair<Set<EClass>, Set<EClass>> types = getAllSemanticTypesPairs(exclude);
