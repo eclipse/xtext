@@ -154,6 +154,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.reference.LeafNodeBug_234132_Test.class);
       suite.addTestSuite(org.eclipse.xtext.resource.Bug306325Test.class);
       suite.addTestSuite(org.eclipse.xtext.resource.ClassloaderClasspathUriResolverTest.class);
+      suite.addTestSuite(org.eclipse.xtext.resource.ConcurrentAccessTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.EObjectAtOffsetTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.EObjectHandleImplTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.ExternalContentSupportTest.class);
