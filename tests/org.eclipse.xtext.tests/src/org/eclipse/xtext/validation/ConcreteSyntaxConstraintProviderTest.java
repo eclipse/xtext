@@ -211,4 +211,12 @@ public class ConcreteSyntaxConstraintProviderTest extends AbstractXtextTests {
 		assertEquals("<WithoutHidden>(x y)", constraint);
 	}
 
+	public void testNestedAlternative() throws Exception {
+		StringBuilder b = new StringBuilder();
+		b.append("Model: (SE | Decl) ';'; ");
+		b.append("Decl:	type+=ID name+=ID; ");
+		b.append("SE: '`' (ids+=(WS|ID|ANY_OTHER)|ints+=INT)+ '`'; ");
+		String constraint = parseRule(b.toString());
+		assertEquals("<Decl, SE>(<SE>(ids|ints)+|<Decl>(type name))", constraint);
+	}
 }
