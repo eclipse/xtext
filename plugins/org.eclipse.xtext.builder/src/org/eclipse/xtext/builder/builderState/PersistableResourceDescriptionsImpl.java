@@ -119,6 +119,36 @@ public class PersistableResourceDescriptionsImpl extends AbstractResourceDescrip
 			subMonitor.done();
 		}
 	}
+	
+	public synchronized ImmutableList<IResourceDescription.Delta> clean(Set<URI> toBeRemoved, IProgressMonitor monitor) {
+		if (!isLoaded)
+			load();
+		toBeRemoved = toBeRemoved != null ? toBeRemoved : Collections.<URI> emptySet();
+		SubMonitor subMonitor = SubMonitor.convert(monitor, "Create resource descriptions", 3);
+		subMonitor.subTask("Create resource descriptions");
+		try {
+			if (subMonitor.isCanceled() || toBeRemoved.isEmpty())
+				return ImmutableList.of();
+			Collection<Delta> deltas = updater.clean(this, toBeRemoved, subMonitor.newChild(1));
+
+			Map<URI, IResourceDescription> newMap = Maps.newHashMap(resourceDescriptionMap);
+			if (subMonitor.isCanceled())
+				return ImmutableList.of();
+			for(Delta delta: deltas) {
+				newMap.remove(delta.getOld().getURI());
+			}
+			ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(deltas, this);
+			if (subMonitor.isCanceled())
+				return ImmutableList.of();
+			markerUpdater.updateMarker(null, event.getDeltas(), subMonitor);
+			// update the reference
+			resourceDescriptionMap = Collections.unmodifiableMap(newMap);
+			notifyListeners(event);
+			return event.getDeltas();
+		} finally {
+			subMonitor.done();
+		}
+	}
 
 	protected void doValidate(ResourceSet rs, ImmutableList<Delta> deltas, IProgressMonitor monitor) {
 		markerUpdater.updateMarker(rs, deltas, monitor);
