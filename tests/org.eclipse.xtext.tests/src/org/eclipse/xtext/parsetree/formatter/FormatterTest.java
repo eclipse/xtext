@@ -9,6 +9,9 @@ import org.eclipse.xtext.formatting.impl.AbstractTokenStream;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Decl;
+import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguageFactory;
+import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrapMinMax;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.resource.SaveOptions;
 
@@ -48,6 +51,12 @@ public class FormatterTest extends AbstractXtextTests {
 		assertEquals(expected, res);
 	}
 
+	private void assertPreserved(String model) throws Exception {
+		EObject m = getModel(model);
+		String res = getSerializer().serialize(m, SaveOptions.newBuilder().getOptions());
+		assertEquals(model, res);
+	}
+
 	// test formatting based on the NodeModel
 	private void assertFormattedNM(String expected, String model, int offset, int lengt) throws Exception {
 		CompositeNode node = NodeUtil.getRootNode(getModel(model));
@@ -75,6 +84,7 @@ public class FormatterTest extends AbstractXtextTests {
 		assertFormattedPTC(expected, model);
 		assertFormattedNM(expected, model, 0, model.length());
 		assertEqualTokenStreams(model);
+		assertPreserved(model);
 	}
 
 	public void testKeepComments() throws Exception {
@@ -86,54 +96,61 @@ public class FormatterTest extends AbstractXtextTests {
 		assertFormattedPTC(exp, model);
 		assertFormattedNM(exp, model, 0, model.length());
 		assertEqualTokenStreams(model);
+		assertPreserved(model);
 	}
 
 	public void testIndentation() throws Exception {
 		final String model = "test indentation { float val; double y; indentation { int x; } }";
-		final String expected = "test indentation {\n  float val;\n  double y;\n  indentation {\n    int x;\n  }\n}";
+		final String expected = "test indentation {\n	float val;\n	double y;\n	indentation {\n		int x;\n	}\n}";
 		assertFormattedPTC(expected, model);
 		assertFormattedNM(expected, model, 0, model.length());
 		assertEqualTokenStreams(model);
+		assertPreserved(model);
 	}
 
 	public void testAssociation() throws Exception {
 		final String model = "test indentation { var = [0,1,2,3,4]; }";
-		final String expected = "test indentation {\n  var=[ 0, 1, 2, 3, 4 ];\n}";
+		final String expected = "test indentation {\n	var=[ 0, 1, 2, 3, 4 ];\n}";
 		assertFormattedPTC(expected, model);
 		assertFormattedNM(expected, model, 0, model.length());
 		assertEqualTokenStreams(model);
+		assertPreserved(model);
 	}
 
 	public void testIndentationAndComments() throws Exception {
 		final String model = "test /* xxx */ indentation { float val; // some float\n double /* oo */ y; indentation { // some block\n int x; // xxx\n } } // final comment";
-		final String expected = "test /* xxx */ indentation {\n  float val; // some float\n  double /* oo */ y;\n  indentation { // some block\n    int x; // xxx\n  }\n} // final comment";
+		final String expected = "test /* xxx */ indentation {\n	float val; // some float\n	double /* oo */ y;\n	indentation { // some block\n		int x; // xxx\n	}\n} // final comment";
 		assertFormattedPTC(expected, model);
 		assertFormattedNM(expected, model, 0, model.length());
 		assertEqualTokenStreams(model);
+		assertPreserved(model);
 	}
 
 	public void testIndentationAndLineWrap() throws Exception {
 		final String model = "test indentation { void func(x:int,y:int,s:javalangString, foo:javasqlDate, blupp:mylongtype,  msads:adshdjkhsakdasdkslajdlsask, x:x, a:b, c:d ); }";
-		final String expected = "test indentation {\n  void func(x:int, y:int,\n    s:javalangString,\n    foo:javasqlDate,\n    blupp:mylongtype,\n    msads:adshdjkhsakdasdkslajdlsask,\n    x:x, a:b, c:d);\n}";
+		final String expected = "test indentation {\n	void func(x:int, y:int,\n		s:javalangString,\n		foo:javasqlDate,\n		blupp:mylongtype,\n		msads:adshdjkhsakdasdkslajdlsask,\n		x:x, a:b, c:d);\n}";
 		assertFormattedPTC(expected, model);
 		assertFormattedNM(expected, model, 0, model.length());
 		assertEqualTokenStreams(model);
+		assertPreserved(model);
 	}
 
 	public void testBetween1() throws Exception {
 		final String model = "test indentation { indentation { x x; }; }";
-		final String expected = "test indentation {\n  indentation {\n    x x;\n  };\n}";
+		final String expected = "test indentation {\n	indentation {\n		x x;\n	};\n}";
 		assertFormattedPTC(expected, model);
 		assertFormattedNM(expected, model, 0, model.length());
 		assertEqualTokenStreams(model);
+		assertPreserved(model);
 	}
 
 	public void testBetween2() throws Exception {
 		final String model = "test indentation { indentation { x x; } }";
-		final String expected = "test indentation {\n  indentation {\n    x x;\n  }\n}";
+		final String expected = "test indentation {\n	indentation {\n		x x;\n	}\n}";
 		assertFormattedPTC(expected, model);
 		assertFormattedNM(expected, model, 0, model.length());
 		assertEqualTokenStreams(model);
+		assertPreserved(model);
 	}
 
 	public void testLinewrapDatatypeRule() throws Exception {
@@ -142,6 +159,7 @@ public class FormatterTest extends AbstractXtextTests {
 		assertFormattedPTC(expected, model);
 		assertFormattedNM(expected, model, 0, model.length());
 		assertEqualTokenStreams(model);
+		assertPreserved(model);
 	}
 
 	public void testLinewrapDatatypeRulePartial1() throws Exception {
@@ -176,6 +194,7 @@ public class FormatterTest extends AbstractXtextTests {
 		assertFormattedPTC(expected, model);
 		assertFormattedNM(expected, model, 0, model.length());
 		assertEqualTokenStreams(model);
+		assertPreserved(model);
 	}
 
 	public void testLinewrapDatatypeRuleComments() throws Exception {
@@ -184,6 +203,7 @@ public class FormatterTest extends AbstractXtextTests {
 		assertFormattedPTC(expected, model);
 		assertFormattedNM(expected, model, 0, model.length());
 		assertEqualTokenStreams(model);
+		assertPreserved(model);
 	}
 
 	public void testEnumeration() throws Exception {
@@ -192,6 +212,7 @@ public class FormatterTest extends AbstractXtextTests {
 		assertFormattedPTC(expected, model);
 		assertFormattedNM(expected, model, 0, model.length());
 		assertEqualTokenStreams(model);
+		assertPreserved(model);
 	}
 
 	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=312559
@@ -201,6 +222,7 @@ public class FormatterTest extends AbstractXtextTests {
 		assertFormattedPTC(expected, model);
 		assertFormattedNM(expected, model, 0, model.length());
 		assertEqualTokenStreams(model);
+		assertPreserved(model);
 	}
 
 	public void testSuppressedLinewrap() throws Exception {
@@ -210,5 +232,54 @@ public class FormatterTest extends AbstractXtextTests {
 		assertFormattedPTC(model, model);
 		assertFormattedNM(model, model, 0, model.length());
 		assertEqualTokenStreams(model);
+		assertPreserved(model);
 	}
+
+	public void testLinewrapMin() throws Exception {
+		final String model = "test wrapminmax foo bar;";
+		final String expected = "test wrapminmax\n\nfoo bar;";
+		assertFormattedPTC(expected, model);
+		assertFormattedNM(expected, model, 0, model.length());
+		assertEqualTokenStreams(model);
+		assertPreserved(model);
+	}
+
+	public void testLinewrapMax() throws Exception {
+		final String model = "test wrapminmax\n\n\n\n\n\n\n\n\n\n\n\n\nfoo bar;";
+		final String expected = "test wrapminmax\n\n\n\n\nfoo bar;";
+		assertFormattedPTC(expected, model);
+		assertFormattedNM(expected, model, 0, model.length());
+		assertEqualTokenStreams(model);
+		assertPreserved(model);
+	}
+
+	public void testLinewrapKeep() throws Exception {
+		final String model = "test wrapminmax\n\n\n\nfoo bar;";
+		assertFormattedPTC(model, model);
+		assertFormattedNM(model, model, 0, model.length());
+		assertEqualTokenStreams(model);
+		assertPreserved(model);
+	}
+
+	public void testLinewrapDefault() throws Exception {
+		FormattertestlanguageFactory f = FormattertestlanguageFactory.eINSTANCE;
+		TestLinewrapMinMax m = f.createTestLinewrapMinMax();
+		Decl d = f.createDecl();
+		d.getType().add("xxx");
+		d.getName().add("yyy");
+		m.getItems().add(d);
+		String actual = getSerializer().serialize(m, SaveOptions.newBuilder().format().getOptions());
+		final String expected = "test wrapminmax\n\n\nxxx yyy;";
+		assertEquals(expected, actual);
+	}
+
+	public void testSpace() throws Exception {
+		final String model = "test linewrap space foo;";
+		final String expected = "test linewrap\nspace     foo;";
+		assertFormattedPTC(expected, model);
+		assertFormattedNM(expected, model, 0, model.length());
+		assertEqualTokenStreams(model);
+		assertPreserved(model);
+	}
+
 }

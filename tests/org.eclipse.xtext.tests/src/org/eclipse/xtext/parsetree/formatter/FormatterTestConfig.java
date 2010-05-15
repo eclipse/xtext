@@ -4,7 +4,7 @@ import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess;
 
-public class FormattingTokenSerializerTestImpl extends AbstractDeclarativeFormatter {
+public class FormatterTestConfig extends AbstractDeclarativeFormatter {
 
 	@Override
 	protected void configureFormatting(FormattingConfig c) {
@@ -44,6 +44,12 @@ public class FormattingTokenSerializerTestImpl extends AbstractDeclarativeFormat
 		// Param
 		c.setNoLinewrap().around(f.getParamAccess().getColonKeyword_1());
 		c.setNoSpace().around(f.getParamAccess().getColonKeyword_1());
+		
+		// Space
+		c.setSpace("     ").after(f.getSpaceAccess().getSpaceKeyword_0());
+		
+		// TestLinewrapMinMax
+		c.setLinewrap(2, 3, 5).after(f.getTestLinewrapMinMaxAccess().getWrapminmaxKeyword_0());
 		
 		// FqnObj
 		c.setLinewrap().before(f.getFqnObjAccess().getNameFQNParserRuleCall_1_0());
