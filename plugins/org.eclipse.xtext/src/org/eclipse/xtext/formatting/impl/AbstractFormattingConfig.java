@@ -34,42 +34,42 @@ public abstract class AbstractFormattingConfig {
 		protected EObject before;
 		protected LocatorType type;
 
-		protected void after(EObject after) {
+		public void after(EObject after) {
 			this.type = LocatorType.AFTER;
 			this.after = after;
 			this.before = null;
 			addLocator(this);
 		}
 
-		protected void around(EObject ele) {
+		public void around(EObject ele) {
 			this.type = LocatorType.AROUND;
 			this.after = ele;
 			this.before = ele;
 			addLocator(this);
 		}
 
-		protected void before(EObject right) {
+		public void before(EObject right) {
 			this.type = LocatorType.BEFORE;
 			this.before = right;
 			this.after = null;
 			addLocator(this);
 		}
 
-		protected void between(EObject left, EObject right) {
+		public void between(EObject left, EObject right) {
 			this.type = LocatorType.BETWEEN;
 			this.after = left;
 			this.before = right;
 			addLocator(this);
 		}
 
-		protected void bounds(EObject left, EObject right) {
+		public void bounds(EObject left, EObject right) {
 			this.type = LocatorType.BOUNDS;
 			this.after = left;
 			this.before = right;
 			addLocator(this);
 		}
 
-		protected AbstractElement getAbstractElement(EObject obj) {
+		public AbstractElement getAbstractElement(EObject obj) {
 			if (obj instanceof AbstractElement)
 				return (AbstractElement) obj;
 			if (obj instanceof AbstractRule)
@@ -107,7 +107,7 @@ public abstract class AbstractFormattingConfig {
 			return null;
 		}
 
-		protected void range(EObject left, EObject right) {
+		public void range(EObject left, EObject right) {
 			type = LocatorType.RANGE;
 			this.after = left;
 			this.before = right;
@@ -119,6 +119,30 @@ public abstract class AbstractFormattingConfig {
 		public String toString() {
 			return getClass().getSimpleName() + "-" + type.name();
 		}
+	}
+
+	public interface IAfterLocator {
+		void after(EObject after);
+	}
+
+	public interface IAroundLocator {
+		void around(EObject ele);
+	}
+
+	public interface IBeforeLocator {
+		void before(EObject right);
+	}
+
+	public interface IBetweenLocator {
+		void between(EObject left, EObject right);
+	}
+
+	public interface IBoundsLocator {
+		void bounds(EObject left, EObject right);
+	}
+
+	public interface IRangeLocator {
+		void range(EObject left, EObject right);
 	}
 
 	public enum LocatorType {

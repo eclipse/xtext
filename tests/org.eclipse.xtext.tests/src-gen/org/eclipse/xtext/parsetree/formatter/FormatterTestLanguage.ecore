@@ -31,7 +31,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Space" eSuperTypes="#//Line">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TestLinewrap" eSuperTypes="#//Root"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TestLinewrapMinMax" eSuperTypes="#//Root"/>
   <eClassifiers xsi:type="ecore:EClass" name="TestIndentation" eSuperTypes="#//Root">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sub" upperBound="-1" eType="#//TestIndentation"
         containment="true"/>

@@ -2678,13 +2678,11 @@ protected class Mult_RightAssignment_1_2 extends AssignmentToken  {
 /************ begin Rule Prim ****************
  *
  * Prim returns Expression:
- *   {Value} val=INT|{Function} func=ID "(" param+=Add ("," param+=Add)* ")"|{
- *   Pointer} "=>" target=Prim|"(" Add ")";
+ *   {Value} val=INT|{Function} func=ID "(" param+=Add ("," param+=Add)* ")"|{Pointer} "=>" target=Prim|"(" Add ")";
  *
  **/
 
-// {Value} val=INT|{Function} func=ID "(" param+=Add ("," param+=Add)* ")"|{Pointer
-// } "=>" target=Prim|"(" Add ")"
+// {Value} val=INT|{Function} func=ID "(" param+=Add ("," param+=Add)* ")"|{Pointer} "=>" target=Prim|"(" Add ")"
 protected class Prim_Alternatives extends AlternativesToken {
 
 	public Prim_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

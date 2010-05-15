@@ -140,11 +140,27 @@ public class FormattertestlanguageSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case FormattertestlanguagePackage.SPACE:
+      {
+        Space space = (Space)theEObject;
+        T result = caseSpace(space);
+        if (result == null) result = caseLine(space);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case FormattertestlanguagePackage.TEST_LINEWRAP:
       {
         TestLinewrap testLinewrap = (TestLinewrap)theEObject;
         T result = caseTestLinewrap(testLinewrap);
         if (result == null) result = caseRoot(testLinewrap);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FormattertestlanguagePackage.TEST_LINEWRAP_MIN_MAX:
+      {
+        TestLinewrapMinMax testLinewrapMinMax = (TestLinewrapMinMax)theEObject;
+        T result = caseTestLinewrapMinMax(testLinewrapMinMax);
+        if (result == null) result = caseRoot(testLinewrapMinMax);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -312,6 +328,22 @@ public class FormattertestlanguageSwitch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Space</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Space</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSpace(Space object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Test Linewrap</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -323,6 +355,22 @@ public class FormattertestlanguageSwitch<T>
    * @generated
    */
   public T caseTestLinewrap(TestLinewrap object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Test Linewrap Min Max</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Test Linewrap Min Max</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTestLinewrapMinMax(TestLinewrapMinMax object)
   {
     return null;
   }

@@ -25,12 +25,14 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Line;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Meth;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Param;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Root;
+import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Space;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHidden;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSub;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSubID;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSubSub;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentation;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrap;
+import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrapMinMax;
 
 /**
  * <!-- begin-user-doc -->
@@ -87,7 +89,21 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass spaceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass testLinewrapEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass testLinewrapMinMaxEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -380,9 +396,39 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getSpace()
+  {
+    return spaceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSpace_Val()
+  {
+    return (EAttribute)spaceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getTestLinewrap()
   {
     return testLinewrapEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTestLinewrapMinMax()
+  {
+    return testLinewrapMinMaxEClass;
   }
 
   /**
@@ -597,7 +643,12 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     createEAttribute(paramEClass, PARAM__NAME);
     createEAttribute(paramEClass, PARAM__TYPE);
 
+    spaceEClass = createEClass(SPACE);
+    createEAttribute(spaceEClass, SPACE__VAL);
+
     testLinewrapEClass = createEClass(TEST_LINEWRAP);
+
+    testLinewrapMinMaxEClass = createEClass(TEST_LINEWRAP_MIN_MAX);
 
     testIndentationEClass = createEClass(TEST_INDENTATION);
     createEReference(testIndentationEClass, TEST_INDENTATION__SUB);
@@ -658,7 +709,9 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     declEClass.getESuperTypes().add(this.getLine());
     assignEClass.getESuperTypes().add(this.getLine());
     methEClass.getESuperTypes().add(this.getLine());
+    spaceEClass.getESuperTypes().add(this.getLine());
     testLinewrapEClass.getESuperTypes().add(this.getRoot());
+    testLinewrapMinMaxEClass.getESuperTypes().add(this.getRoot());
     testIndentationEClass.getESuperTypes().add(this.getRoot());
     fqnObjEClass.getESuperTypes().add(this.getLine());
     fqnRefEClass.getESuperTypes().add(this.getLine());
@@ -690,7 +743,12 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     initEAttribute(getParam_Name(), ecorePackage.getEString(), "name", null, 0, -1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getParam_Type(), ecorePackage.getEString(), "type", null, 0, -1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(spaceEClass, Space.class, "Space", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSpace_Val(), ecorePackage.getEString(), "val", null, 0, 1, Space.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(testLinewrapEClass, TestLinewrap.class, "TestLinewrap", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(testLinewrapMinMaxEClass, TestLinewrapMinMax.class, "TestLinewrapMinMax", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(testIndentationEClass, TestIndentation.class, "TestIndentation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTestIndentation_Sub(), this.getTestIndentation(), null, "sub", null, 0, -1, TestIndentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

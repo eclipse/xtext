@@ -80,6 +80,15 @@ public interface FormattertestlanguageFactory extends EFactory
   Param createParam();
 
   /**
+   * Returns a new object of class '<em>Space</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Space</em>'.
+   * @generated
+   */
+  Space createSpace();
+
+  /**
    * Returns a new object of class '<em>Test Linewrap</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -87,6 +96,15 @@ public interface FormattertestlanguageFactory extends EFactory
    * @generated
    */
   TestLinewrap createTestLinewrap();
+
+  /**
+   * Returns a new object of class '<em>Test Linewrap Min Max</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Test Linewrap Min Max</em>'.
+   * @generated
+   */
+  TestLinewrapMinMax createTestLinewrapMinMax();
 
   /**
    * Returns a new object of class '<em>Test Indentation</em>'.

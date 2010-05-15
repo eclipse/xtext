@@ -113,6 +113,16 @@ ruleRoot returns [EObject current=null]
         $current = $this_TestIndentation_2.current; 
         currentNode = currentNode.getParent();
     }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getRootAccess().getTestLinewrapMinMaxParserRuleCall_1_2(), currentNode); 
+    }
+    this_TestLinewrapMinMax_3=ruleTestLinewrapMinMax
+    { 
+        $current = $this_TestLinewrapMinMax_3.current; 
+        currentNode = currentNode.getParent();
+    }
 ))
 ;
 
@@ -209,7 +219,17 @@ ruleLine returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getLineAccess().getPostKeyword_0_6_1(), null); 
     }
-))	';' 
+)
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getLineAccess().getSpaceParserRuleCall_0_7(), currentNode); 
+    }
+    this_Space_8=ruleSpace
+    { 
+        $current = $this_Space_8.current; 
+        currentNode = currentNode.getParent();
+    }
+)	';' 
     {
         createLeafNode(grammarAccess.getLineAccess().getSemicolonKeyword_1(), null); 
     }
@@ -626,6 +646,57 @@ ruleParam returns [EObject current=null]
 
 
 
+// Entry rule entryRuleSpace
+entryRuleSpace returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getSpaceRule(), currentNode); }
+	 iv_ruleSpace=ruleSpace 
+	 { $current=$iv_ruleSpace.current; } 
+	 EOF 
+;
+
+// Rule Space
+ruleSpace returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(	'space' 
+    {
+        createLeafNode(grammarAccess.getSpaceAccess().getSpaceKeyword_0(), null); 
+    }
+(
+(
+		lv_val_1_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getSpaceAccess().getValIDTerminalRuleCall_1_0(), "val"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getSpaceRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"val",
+	        		lv_val_1_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+))
+;
+
+
+
+
+
 // Entry rule entryRuleTestLinewrap
 entryRuleTestLinewrap returns [EObject current=null] 
 	:
@@ -654,6 +725,57 @@ ruleTestLinewrap returns [EObject current=null]
 		lv_items_1_0=ruleLine		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getTestLinewrapRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"items",
+	        		lv_items_1_0, 
+	        		"Line", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)*)
+;
+
+
+
+
+
+// Entry rule entryRuleTestLinewrapMinMax
+entryRuleTestLinewrapMinMax returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getTestLinewrapMinMaxRule(), currentNode); }
+	 iv_ruleTestLinewrapMinMax=ruleTestLinewrapMinMax 
+	 { $current=$iv_ruleTestLinewrapMinMax.current; } 
+	 EOF 
+;
+
+// Rule TestLinewrapMinMax
+ruleTestLinewrapMinMax returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(	'wrapminmax' 
+    {
+        createLeafNode(grammarAccess.getTestLinewrapMinMaxAccess().getWrapminmaxKeyword_0(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getTestLinewrapMinMaxAccess().getItemsLineParserRuleCall_1_0(), currentNode); 
+	    }
+		lv_items_1_0=ruleLine		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTestLinewrapMinMaxRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {

@@ -13,7 +13,7 @@ public class FormatterTestLanguageRuntimeModule extends
 
 	@Override
 	public Class<? extends IFormatter> bindIFormatter() {
-		return FormattingTokenSerializerTestImpl.class;
+		return FormatterTestConfig.class;
 	}
 
 	@Override

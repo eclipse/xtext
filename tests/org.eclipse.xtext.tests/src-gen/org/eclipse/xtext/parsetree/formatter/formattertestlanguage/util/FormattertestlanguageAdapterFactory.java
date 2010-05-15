@@ -108,9 +108,19 @@ public class FormattertestlanguageAdapterFactory extends AdapterFactoryImpl
         return createParamAdapter();
       }
       @Override
+      public Adapter caseSpace(Space object)
+      {
+        return createSpaceAdapter();
+      }
+      @Override
       public Adapter caseTestLinewrap(TestLinewrap object)
       {
         return createTestLinewrapAdapter();
+      }
+      @Override
+      public Adapter caseTestLinewrapMinMax(TestLinewrapMinMax object)
+      {
+        return createTestLinewrapMinMaxAdapter();
       }
       @Override
       public Adapter caseTestIndentation(TestIndentation object)
@@ -265,6 +275,21 @@ public class FormattertestlanguageAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Space <em>Space</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Space
+   * @generated
+   */
+  public Adapter createSpaceAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrap <em>Test Linewrap</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -275,6 +300,21 @@ public class FormattertestlanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createTestLinewrapAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrapMinMax <em>Test Linewrap Min Max</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrapMinMax
+   * @generated
+   */
+  public Adapter createTestLinewrapMinMaxAdapter()
   {
     return null;
   }

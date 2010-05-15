@@ -24,18 +24,19 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
 		private final RuleCall cTestLinewrapParserRuleCall_1_0 = (RuleCall)cAlternatives_1.eContents().get(0);
 		private final RuleCall cTestIndentationParserRuleCall_1_1 = (RuleCall)cAlternatives_1.eContents().get(1);
+		private final RuleCall cTestLinewrapMinMaxParserRuleCall_1_2 = (RuleCall)cAlternatives_1.eContents().get(2);
 		
 		//Root:
-		//  "test" (TestLinewrap|TestIndentation);
+		//  "test" (TestLinewrap|TestIndentation|TestLinewrapMinMax);
 		public ParserRule getRule() { return rule; }
 
-		//"test" (TestLinewrap|TestIndentation)
+		//"test" (TestLinewrap|TestIndentation|TestLinewrapMinMax)
 		public Group getGroup() { return cGroup; }
 
 		//"test"
 		public Keyword getTestKeyword_0() { return cTestKeyword_0; }
 
-		//TestLinewrap|TestIndentation
+		//TestLinewrap|TestIndentation|TestLinewrapMinMax
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//TestLinewrap
@@ -43,6 +44,9 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 		//TestIndentation
 		public RuleCall getTestIndentationParserRuleCall_1_1() { return cTestIndentationParserRuleCall_1_1; }
+
+		//TestLinewrapMinMax
+		public RuleCall getTestLinewrapMinMaxParserRuleCall_1_2() { return cTestLinewrapMinMaxParserRuleCall_1_2; }
 	}
 
 	public class LineElements extends AbstractParserRuleElementFinder {
@@ -58,16 +62,18 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Group cGroup_0_6 = (Group)cAlternatives_0.eContents().get(6);
 		private final RuleCall cSuppressedHiddenParserRuleCall_0_6_0 = (RuleCall)cGroup_0_6.eContents().get(0);
 		private final Keyword cPostKeyword_0_6_1 = (Keyword)cGroup_0_6.eContents().get(1);
+		private final RuleCall cSpaceParserRuleCall_0_7 = (RuleCall)cAlternatives_0.eContents().get(7);
 		private final Keyword cSemicolonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Line:
-		//  (Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post") ";";
+		//  (Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space)
+		//  ";";
 		public ParserRule getRule() { return rule; }
 
-		//(Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post") ";"
+		//(Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space) ";"
 		public Group getGroup() { return cGroup; }
 
-		//Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"
+		//Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//Decl
@@ -96,6 +102,9 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 		//"post"
 		public Keyword getPostKeyword_0_6_1() { return cPostKeyword_0_6_1; }
+
+		//Space
+		public RuleCall getSpaceParserRuleCall_0_7() { return cSpaceParserRuleCall_0_7; }
 
 		//";"
 		public Keyword getSemicolonKeyword_1() { return cSemicolonKeyword_1; }
@@ -293,6 +302,30 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		public RuleCall getTypeIDTerminalRuleCall_2_0() { return cTypeIDTerminalRuleCall_2_0; }
 	}
 
+	public class SpaceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Space");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cSpaceKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cValIDTerminalRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
+		
+		//Space:
+		//  "space" val=ID;
+		public ParserRule getRule() { return rule; }
+
+		//"space" val=ID
+		public Group getGroup() { return cGroup; }
+
+		//"space"
+		public Keyword getSpaceKeyword_0() { return cSpaceKeyword_0; }
+
+		//val=ID
+		public Assignment getValAssignment_1() { return cValAssignment_1; }
+
+		//ID
+		public RuleCall getValIDTerminalRuleCall_1_0() { return cValIDTerminalRuleCall_1_0; }
+	}
+
 	public class TestLinewrapElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestLinewrap");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -309,6 +342,30 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 		//"linewrap"
 		public Keyword getLinewrapKeyword_0() { return cLinewrapKeyword_0; }
+
+		//items+=Line*
+		public Assignment getItemsAssignment_1() { return cItemsAssignment_1; }
+
+		//Line
+		public RuleCall getItemsLineParserRuleCall_1_0() { return cItemsLineParserRuleCall_1_0; }
+	}
+
+	public class TestLinewrapMinMaxElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestLinewrapMinMax");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cWrapminmaxKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cItemsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cItemsLineParserRuleCall_1_0 = (RuleCall)cItemsAssignment_1.eContents().get(0);
+		
+		//TestLinewrapMinMax:
+		//  "wrapminmax" items+=Line*;
+		public ParserRule getRule() { return rule; }
+
+		//"wrapminmax" items+=Line*
+		public Group getGroup() { return cGroup; }
+
+		//"wrapminmax"
+		public Keyword getWrapminmaxKeyword_0() { return cWrapminmaxKeyword_0; }
 
 		//items+=Line*
 		public Assignment getItemsAssignment_1() { return cItemsAssignment_1; }
@@ -508,8 +565,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//  vals+=SuppressedHiddenSub)*)? "`";
 		public ParserRule getRule() { return rule; }
 
-		//{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%" vals+=SuppressedHiddenSub
-		//)*)? "`"
+		//{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%" vals+=SuppressedHiddenSub)*)? "`"
 		public Group getGroup() { return cGroup; }
 
 		//{SuppressedHidden}
@@ -650,7 +706,9 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private AssignElements pAssign;
 	private MethElements pMeth;
 	private ParamElements pParam;
+	private SpaceElements pSpace;
 	private TestLinewrapElements pTestLinewrap;
+	private TestLinewrapMinMaxElements pTestLinewrapMinMax;
 	private TestIndentationElements pTestIndentation;
 	private FqnObjElements pFqnObj;
 	private FQNElements pFQN;
@@ -684,7 +742,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Root:
-	//  "test" (TestLinewrap|TestIndentation);
+	//  "test" (TestLinewrap|TestIndentation|TestLinewrapMinMax);
 	public RootElements getRootAccess() {
 		return (pRoot != null) ? pRoot : (pRoot = new RootElements());
 	}
@@ -694,7 +752,8 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Line:
-	//  (Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post") ";";
+	//  (Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space)
+	//  ";";
 	public LineElements getLineAccess() {
 		return (pLine != null) ? pLine : (pLine = new LineElements());
 	}
@@ -743,6 +802,16 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getParamAccess().getRule();
 	}
 
+	//Space:
+	//  "space" val=ID;
+	public SpaceElements getSpaceAccess() {
+		return (pSpace != null) ? pSpace : (pSpace = new SpaceElements());
+	}
+	
+	public ParserRule getSpaceRule() {
+		return getSpaceAccess().getRule();
+	}
+
 	//TestLinewrap:
 	//  "linewrap" items+=Line*;
 	public TestLinewrapElements getTestLinewrapAccess() {
@@ -751,6 +820,16 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	public ParserRule getTestLinewrapRule() {
 		return getTestLinewrapAccess().getRule();
+	}
+
+	//TestLinewrapMinMax:
+	//  "wrapminmax" items+=Line*;
+	public TestLinewrapMinMaxElements getTestLinewrapMinMaxAccess() {
+		return (pTestLinewrapMinMax != null) ? pTestLinewrapMinMax : (pTestLinewrapMinMax = new TestLinewrapMinMaxElements());
+	}
+	
+	public ParserRule getTestLinewrapMinMaxRule() {
+		return getTestLinewrapMinMaxAccess().getRule();
 	}
 
 	//TestIndentation:
@@ -867,9 +946,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

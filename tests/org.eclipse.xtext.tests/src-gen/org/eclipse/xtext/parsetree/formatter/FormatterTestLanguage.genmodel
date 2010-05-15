@@ -35,7 +35,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Param/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Param/type"/>
     </genClasses>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//Space">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Space/val"/>
+    </genClasses>
     <genClasses ecoreClass="FormatterTestLanguage.ecore#//TestLinewrap"/>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//TestLinewrapMinMax"/>
     <genClasses ecoreClass="FormatterTestLanguage.ecore#//TestIndentation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FormatterTestLanguage.ecore#//TestIndentation/sub"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//TestIndentation/semi"/>

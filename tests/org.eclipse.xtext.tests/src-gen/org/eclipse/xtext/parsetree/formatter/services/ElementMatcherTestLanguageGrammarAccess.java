@@ -611,12 +611,10 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cRightParenthesisKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//Prim returns Expression:
-		//  {Value} val=INT|{Function} func=ID "(" param+=Add ("," param+=Add)* ")"|{
-		//  Pointer} "=>" target=Prim|"(" Add ")";
+		//  {Value} val=INT|{Function} func=ID "(" param+=Add ("," param+=Add)* ")"|{Pointer} "=>" target=Prim|"(" Add ")";
 		public ParserRule getRule() { return rule; }
 
-		//{Value} val=INT|{Function} func=ID "(" param+=Add ("," param+=Add)* ")"|{Pointer
-		//} "=>" target=Prim|"(" Add ")"
+		//{Value} val=INT|{Function} func=ID "(" param+=Add ("," param+=Add)* ")"|{Pointer} "=>" target=Prim|"(" Add ")"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//{Value} val=INT
@@ -907,8 +905,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Prim returns Expression:
-	//  {Value} val=INT|{Function} func=ID "(" param+=Add ("," param+=Add)* ")"|{
-	//  Pointer} "=>" target=Prim|"(" Add ")";
+	//  {Value} val=INT|{Function} func=ID "(" param+=Add ("," param+=Add)* ")"|{Pointer} "=>" target=Prim|"(" Add ")";
 	public PrimElements getPrimAccess() {
 		return (pPrim != null) ? pPrim : (pPrim = new PrimElements());
 	}
@@ -930,9 +927,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

@@ -265,6 +265,34 @@ public interface FormattertestlanguagePackage extends EPackage
   int PARAM_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.SpaceImpl <em>Space</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.SpaceImpl
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getSpace()
+   * @generated
+   */
+  int SPACE = 6;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SPACE__VAL = LINE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Space</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SPACE_FEATURE_COUNT = LINE_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestLinewrapImpl <em>Test Linewrap</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -272,7 +300,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getTestLinewrap()
    * @generated
    */
-  int TEST_LINEWRAP = 6;
+  int TEST_LINEWRAP = 7;
 
   /**
    * The feature id for the '<em><b>Items</b></em>' containment reference list.
@@ -293,6 +321,34 @@ public interface FormattertestlanguagePackage extends EPackage
   int TEST_LINEWRAP_FEATURE_COUNT = ROOT_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestLinewrapMinMaxImpl <em>Test Linewrap Min Max</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestLinewrapMinMaxImpl
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getTestLinewrapMinMax()
+   * @generated
+   */
+  int TEST_LINEWRAP_MIN_MAX = 8;
+
+  /**
+   * The feature id for the '<em><b>Items</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEST_LINEWRAP_MIN_MAX__ITEMS = ROOT__ITEMS;
+
+  /**
+   * The number of structural features of the '<em>Test Linewrap Min Max</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEST_LINEWRAP_MIN_MAX_FEATURE_COUNT = ROOT_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestIndentationImpl <em>Test Indentation</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -300,7 +356,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getTestIndentation()
    * @generated
    */
-  int TEST_INDENTATION = 7;
+  int TEST_INDENTATION = 9;
 
   /**
    * The feature id for the '<em><b>Items</b></em>' containment reference list.
@@ -346,7 +402,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getFqnObj()
    * @generated
    */
-  int FQN_OBJ = 8;
+  int FQN_OBJ = 10;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -374,7 +430,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getFqnRef()
    * @generated
    */
-  int FQN_REF = 9;
+  int FQN_REF = 11;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -402,7 +458,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getEnumeration()
    * @generated
    */
-  int ENUMERATION = 10;
+  int ENUMERATION = 12;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' attribute list.
@@ -430,7 +486,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getSuppressedHidden()
    * @generated
    */
-  int SUPPRESSED_HIDDEN = 11;
+  int SUPPRESSED_HIDDEN = 13;
 
   /**
    * The feature id for the '<em><b>Vals</b></em>' containment reference list.
@@ -458,7 +514,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getSuppressedHiddenSub()
    * @generated
    */
-  int SUPPRESSED_HIDDEN_SUB = 12;
+  int SUPPRESSED_HIDDEN_SUB = 14;
 
   /**
    * The feature id for the '<em><b>Idval</b></em>' attribute.
@@ -486,7 +542,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getSuppressedHiddenSubSub()
    * @generated
    */
-  int SUPPRESSED_HIDDEN_SUB_SUB = 13;
+  int SUPPRESSED_HIDDEN_SUB_SUB = 15;
 
   /**
    * The feature id for the '<em><b>Idval</b></em>' attribute.
@@ -514,7 +570,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getSuppressedHiddenSubID()
    * @generated
    */
-  int SUPPRESSED_HIDDEN_SUB_ID = 14;
+  int SUPPRESSED_HIDDEN_SUB_ID = 16;
 
   /**
    * The feature id for the '<em><b>Idval</b></em>' attribute.
@@ -542,7 +598,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getEnum1()
    * @generated
    */
-  int ENUM1 = 15;
+  int ENUM1 = 17;
 
 
   /**
@@ -716,6 +772,27 @@ public interface FormattertestlanguagePackage extends EPackage
   EAttribute getParam_Type();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Space <em>Space</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Space</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Space
+   * @generated
+   */
+  EClass getSpace();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Space#getVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Space#getVal()
+   * @see #getSpace()
+   * @generated
+   */
+  EAttribute getSpace_Val();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrap <em>Test Linewrap</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -724,6 +801,16 @@ public interface FormattertestlanguagePackage extends EPackage
    * @generated
    */
   EClass getTestLinewrap();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrapMinMax <em>Test Linewrap Min Max</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Test Linewrap Min Max</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrapMinMax
+   * @generated
+   */
+  EClass getTestLinewrapMinMax();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentation <em>Test Indentation</em>}'.
@@ -1056,6 +1143,24 @@ public interface FormattertestlanguagePackage extends EPackage
     EAttribute PARAM__TYPE = eINSTANCE.getParam_Type();
 
     /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.SpaceImpl <em>Space</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.SpaceImpl
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getSpace()
+     * @generated
+     */
+    EClass SPACE = eINSTANCE.getSpace();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SPACE__VAL = eINSTANCE.getSpace_Val();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestLinewrapImpl <em>Test Linewrap</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1064,6 +1169,16 @@ public interface FormattertestlanguagePackage extends EPackage
      * @generated
      */
     EClass TEST_LINEWRAP = eINSTANCE.getTestLinewrap();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestLinewrapMinMaxImpl <em>Test Linewrap Min Max</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestLinewrapMinMaxImpl
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getTestLinewrapMinMax()
+     * @generated
+     */
+    EClass TEST_LINEWRAP_MIN_MAX = eINSTANCE.getTestLinewrapMinMax();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestIndentationImpl <em>Test Indentation</em>}' class.

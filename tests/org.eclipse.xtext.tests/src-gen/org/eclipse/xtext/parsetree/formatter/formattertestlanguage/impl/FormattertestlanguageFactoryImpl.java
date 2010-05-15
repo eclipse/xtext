@@ -74,7 +74,9 @@ public class FormattertestlanguageFactoryImpl extends EFactoryImpl implements Fo
       case FormattertestlanguagePackage.ASSIGN: return createAssign();
       case FormattertestlanguagePackage.METH: return createMeth();
       case FormattertestlanguagePackage.PARAM: return createParam();
+      case FormattertestlanguagePackage.SPACE: return createSpace();
       case FormattertestlanguagePackage.TEST_LINEWRAP: return createTestLinewrap();
+      case FormattertestlanguagePackage.TEST_LINEWRAP_MIN_MAX: return createTestLinewrapMinMax();
       case FormattertestlanguagePackage.TEST_INDENTATION: return createTestIndentation();
       case FormattertestlanguagePackage.FQN_OBJ: return createFqnObj();
       case FormattertestlanguagePackage.FQN_REF: return createFqnRef();
@@ -193,10 +195,32 @@ public class FormattertestlanguageFactoryImpl extends EFactoryImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  public Space createSpace()
+  {
+    SpaceImpl space = new SpaceImpl();
+    return space;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public TestLinewrap createTestLinewrap()
   {
     TestLinewrapImpl testLinewrap = new TestLinewrapImpl();
     return testLinewrap;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TestLinewrapMinMax createTestLinewrapMinMax()
+  {
+    TestLinewrapMinMaxImpl testLinewrapMinMax = new TestLinewrapMinMaxImpl();
+    return testLinewrapMinMax;
   }
 
   /**
