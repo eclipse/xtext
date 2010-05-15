@@ -11,10 +11,10 @@ grammar org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage with org.ecl
 generate formattertestlanguage "http://simple/formattertestlanguage"
 
 Root:
-	"test" (TestLinewrap | TestIndentation);
+	"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax);
 	
 Line:
-	(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post") ";";
+	(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space) ";";
 	
 Decl:	
 	type+=ID name+=ID;
@@ -28,8 +28,13 @@ Meth:
 Param:
 	name+=ID ":" type+=ID;
 	
+Space: "space" val=ID;
+	
 TestLinewrap:
 	"linewrap" items+=Line*;
+	
+TestLinewrapMinMax:
+	"wrapminmax" items+=Line*;
 	
 TestIndentation:
 	"indentation" "{" (sub+=TestIndentation | items+=Line)* "}" semi?=";"?;
