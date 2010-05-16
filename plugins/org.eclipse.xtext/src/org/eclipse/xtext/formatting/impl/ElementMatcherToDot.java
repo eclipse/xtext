@@ -52,18 +52,24 @@ public class ElementMatcherToDot extends GrammarToDot {
 		return node;
 	}
 
+	protected String toStr(Iterable<IElementPattern> list) {
+		String s1 = Join.join(", ", list);
+		String s2 = s1.replaceAll("\\\\n|\\n", "\\\\\\\\n");
+		return s2;
+	}
+
 	protected Edge drawFollowerEdge(AbstractElement grammarElement, MatcherTransition transition, boolean isParent) {
 		Edge edge = new Edge(grammarElement, transition.getTarget().getGrammarElement());
 		//		if (transition.getPrecedence() > -1)
 		//			edge.setLabel(String.valueOf(transition.getPrecedence()));
 		List<String> label = Lists.newArrayList();
 		if (!transition.getCommonPatterns().isEmpty())
-			label.add("{" + Join.join(", ", transition.getCommonPatterns()).replace("\\n", "\\\\n") + "}");
+			label.add("{" + toStr(transition.getCommonPatterns()) + "}");
 		//		for (Map.Entry<AbstractRule, Set<IElementPattern>> e : transition.getExitPatterns().entrySet())
 		//			label.add(e.getKey().getName() + ":{" + Join.join(", ", e.getValue()).replace("\\n", "\\\\n") + "}");
 		for (Map.Entry<MatcherState, Set<IElementPattern>> e : transition.getGuardPatterns().entrySet())
 			label.add(GrammarUtil.containingRule(e.getKey().getGrammarElement()).getName() + "-" + e.getKey() + ":{"
-					+ Join.join(", ", e.getValue()).replace("\\n", "\\\\n") + "}");
+					+ toStr(e.getValue()) + "}");
 		if (label.size() > 0)
 			edge.setLabel(Join.join("\\n", label));
 		if (isParent)

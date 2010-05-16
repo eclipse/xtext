@@ -117,20 +117,20 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 		}
 
 		protected List<MatcherTransition> findTransitionsToToken(MatcherState from, Set<MatcherState> targets,
-				boolean entering) {
+				boolean returning, boolean canReturn) {
 			if (targets != null && targets.contains(from))
 				targets = null;
 			List<MatcherTransition> result = Lists.newArrayList();
-			for (MatcherTransition transition : entering ? from.getOutgoing() : from.getOutgoingAfterReturn()) {
+			for (MatcherTransition transition : returning ? from.getOutgoingAfterReturn() : from.getOutgoing()) {
 				if (transition.getTarget().isParserRuleCall())
-					result.addAll(findTransitionsToToken(transition.getTarget(), targets, true));
+					result.addAll(findTransitionsToToken(transition.getTarget(), targets, false, false));
 				else if (targets == null || targets.contains(transition.getTarget()))
 					result.add(transition);
 			}
-			if (from.isEndState())
+			if (canReturn && from.isEndState())
 				for (MatcherState caller : findRuleCallsTo(GrammarUtil.containingRule(from.getGrammarElement()), Sets
 						.<AbstractRule> newHashSet()))
-					result.addAll(findTransitionsToToken(caller, targets, false));
+					result.addAll(findTransitionsToToken(caller, targets, true, true));
 			return result;
 		}
 
@@ -236,7 +236,7 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 				target.getBeforeBetweenElements().add(pattern);
 			for (MatcherState source : sources) {
 				source.getAfterBetweenElements().add(pattern);
-				for (MatcherTransition transition : findTransitionsToToken(source, targets, !source.isParserRuleCall())) {
+				for (MatcherTransition transition : findTransitionsToToken(source, targets, source.isParserRuleCall(), true)) {
 					if (transition.getSource() == source)
 						transition.addPattern(pattern);
 					else

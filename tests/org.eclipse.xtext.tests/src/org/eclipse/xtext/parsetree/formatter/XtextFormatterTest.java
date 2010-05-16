@@ -5,8 +5,10 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -15,14 +17,13 @@ public class XtextFormatterTest extends AbstractXtextTests {
 
 	@Override
 	protected void setUp() throws Exception {
-		XtextStandaloneSetup.doSetup();
 		super.setUp();
+		with(XtextStandaloneSetup.class);
 	}
-  
+
 	public void testXtextFormatting() throws IOException {
 		String path = getClass().getPackage().getName().replace('.', '/');
-		URI u = URI.createURI("classpath:/" + path
-				+ "/XtextFormatterMessy.xtext");
+		URI u = URI.createURI("classpath:/" + path + "/XtextFormatterMessy.xtext");
 		XtextResourceSet resourceSet = new XtextResourceSet();
 		resourceSet.setClasspathURIContext(getClass());
 		Resource r = resourceSet.getResource(u, true);
@@ -37,6 +38,13 @@ public class XtextFormatterTest extends AbstractXtextTests {
 		XtextResource expectedResource = (XtextResource) resourceSet.getResource(expectedURI, true);
 		String expected = expectedResource.getParseResult().getRootNode().serialize();
 		assertEquals(expected, formatted.toString());
+	}
+
+	public void _testXtextXtext() {
+		Serializer serializer = get(Serializer.class);
+		IGrammarAccess grammar = get(IGrammarAccess.class);
+		SaveOptions opt = SaveOptions.newBuilder().format().getOptions();
+		System.out.println(serializer.serialize(grammar.getGrammar(), opt));
 	}
 
 }
