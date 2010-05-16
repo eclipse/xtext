@@ -289,9 +289,12 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 		protected boolean isBreakable() {
 			if (leadingLocators == null)
 				return false;
-			for (ElementLocator e : leadingLocators)
+			for (ElementLocator e : leadingLocators) {
 				if (e instanceof LinewrapLocator && ((LinewrapLocator) e).getMaxWrap() == 0)
 					return false;
+				if (e instanceof SpaceLocator)
+					return false;
+			}
 			return hiddenTokenHelper.getWhitespaceRuleFor(hiddenTokenDefinition, "\n") != null;
 		}
 
@@ -317,7 +320,7 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 
 	protected IElementMatcher<ElementPattern> matcher;
 
-	protected String preservedWS = null;
+	protected String preservedWS = "";
 
 	protected boolean preserveSpaces;
 
