@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Assign;
+import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Datatypes;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Decl;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enum1;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enumeration;
@@ -160,6 +161,13 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * @generated
    */
   private EClass suppressedHiddenSubIDEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass datatypesEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -586,6 +594,46 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getDatatypes()
+  {
+    return datatypesEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDatatypes_Val1()
+  {
+    return (EAttribute)datatypesEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDatatypes_Val2()
+  {
+    return (EAttribute)datatypesEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDatatypes_Val3()
+  {
+    return (EAttribute)datatypesEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getEnum1()
   {
     return enum1EEnum;
@@ -673,6 +721,11 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
 
     suppressedHiddenSubIDEClass = createEClass(SUPPRESSED_HIDDEN_SUB_ID);
 
+    datatypesEClass = createEClass(DATATYPES);
+    createEAttribute(datatypesEClass, DATATYPES__VAL1);
+    createEAttribute(datatypesEClass, DATATYPES__VAL2);
+    createEAttribute(datatypesEClass, DATATYPES__VAL3);
+
     // Create enums
     enum1EEnum = createEEnum(ENUM1);
   }
@@ -719,6 +772,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     suppressedHiddenEClass.getESuperTypes().add(this.getLine());
     suppressedHiddenSubSubEClass.getESuperTypes().add(this.getSuppressedHiddenSub());
     suppressedHiddenSubIDEClass.getESuperTypes().add(this.getSuppressedHiddenSub());
+    datatypesEClass.getESuperTypes().add(this.getLine());
 
     // Initialize classes and features; add operations and parameters
     initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -772,6 +826,11 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     initEClass(suppressedHiddenSubSubEClass, SuppressedHiddenSubSub.class, "SuppressedHiddenSubSub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(suppressedHiddenSubIDEClass, SuppressedHiddenSubID.class, "SuppressedHiddenSubID", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(datatypesEClass, Datatypes.class, "Datatypes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDatatypes_Val1(), ecorePackage.getEString(), "val1", null, 0, 1, Datatypes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDatatypes_Val2(), ecorePackage.getEString(), "val2", null, 0, 1, Datatypes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDatatypes_Val3(), ecorePackage.getEString(), "val3", null, 0, 1, Datatypes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(enum1EEnum, Enum1.class, "Enum1");

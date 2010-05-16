@@ -85,6 +85,7 @@ public class FormattertestlanguageFactoryImpl extends EFactoryImpl implements Fo
       case FormattertestlanguagePackage.SUPPRESSED_HIDDEN_SUB: return createSuppressedHiddenSub();
       case FormattertestlanguagePackage.SUPPRESSED_HIDDEN_SUB_SUB: return createSuppressedHiddenSubSub();
       case FormattertestlanguagePackage.SUPPRESSED_HIDDEN_SUB_ID: return createSuppressedHiddenSubID();
+      case FormattertestlanguagePackage.DATATYPES: return createDatatypes();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -309,6 +310,17 @@ public class FormattertestlanguageFactoryImpl extends EFactoryImpl implements Fo
   {
     SuppressedHiddenSubIDImpl suppressedHiddenSubID = new SuppressedHiddenSubIDImpl();
     return suppressedHiddenSubID;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Datatypes createDatatypes()
+  {
+    DatatypesImpl datatypes = new DatatypesImpl();
+    return datatypes;
   }
 
   /**

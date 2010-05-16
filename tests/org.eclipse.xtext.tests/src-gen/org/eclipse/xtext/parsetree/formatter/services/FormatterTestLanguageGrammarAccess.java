@@ -27,7 +27,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cTestLinewrapMinMaxParserRuleCall_1_2 = (RuleCall)cAlternatives_1.eContents().get(2);
 		
 		//Root:
-		//  "test" (TestLinewrap|TestIndentation|TestLinewrapMinMax);
+		//	"test" (TestLinewrap|TestIndentation|TestLinewrapMinMax);
 		public ParserRule getRule() { return rule; }
 
 		//"test" (TestLinewrap|TestIndentation|TestLinewrapMinMax)
@@ -63,17 +63,17 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cSuppressedHiddenParserRuleCall_0_6_0 = (RuleCall)cGroup_0_6.eContents().get(0);
 		private final Keyword cPostKeyword_0_6_1 = (Keyword)cGroup_0_6.eContents().get(1);
 		private final RuleCall cSpaceParserRuleCall_0_7 = (RuleCall)cAlternatives_0.eContents().get(7);
+		private final RuleCall cDatatypesParserRuleCall_0_8 = (RuleCall)cAlternatives_0.eContents().get(8);
 		private final Keyword cSemicolonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Line:
-		//  (Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space)
-		//  ";";
+		//	(Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space|Datatypes) ";";
 		public ParserRule getRule() { return rule; }
 
-		//(Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space) ";"
+		//(Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space|Datatypes) ";"
 		public Group getGroup() { return cGroup; }
 
-		//Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space
+		//Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space|Datatypes
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//Decl
@@ -106,6 +106,9 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Space
 		public RuleCall getSpaceParserRuleCall_0_7() { return cSpaceParserRuleCall_0_7; }
 
+		//Datatypes
+		public RuleCall getDatatypesParserRuleCall_0_8() { return cDatatypesParserRuleCall_0_8; }
+
 		//";"
 		public Keyword getSemicolonKeyword_1() { return cSemicolonKeyword_1; }
 	}
@@ -119,7 +122,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Decl:
-		//  type+=ID name+=ID;
+		//	type+=ID name+=ID;
 		public ParserRule getRule() { return rule; }
 
 		//type+=ID name+=ID
@@ -158,7 +161,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightSquareBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Assign:
-		//  var=ID op=( "=" | "+=" ) "[" (val+=INT ("," val+=INT)*)? "]";
+		//	var=ID op=( "=" | "+=" ) "[" (val+=INT ("," val+=INT)*)? "]";
 		public ParserRule getRule() { return rule; }
 
 		//var=ID op=( "=" | "+=" ) "[" (val+=INT ("," val+=INT)*)? "]"
@@ -227,7 +230,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Meth:
-		//  "void" name=ID "(" (param+=Param ("," param+=Param)*)? ")";
+		//	"void" name=ID "(" (param+=Param ("," param+=Param)*)? ")";
 		public ParserRule getRule() { return rule; }
 
 		//"void" name=ID "(" (param+=Param ("," param+=Param)*)? ")"
@@ -280,7 +283,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cTypeIDTerminalRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
 		
 		//Param:
-		//  name+=ID ":" type+=ID;
+		//	name+=ID ":" type+=ID;
 		public ParserRule getRule() { return rule; }
 
 		//name+=ID ":" type+=ID
@@ -310,7 +313,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cValIDTerminalRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
 		
 		//Space:
-		//  "space" val=ID;
+		//	"space" val=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"space" val=ID
@@ -334,7 +337,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cItemsLineParserRuleCall_1_0 = (RuleCall)cItemsAssignment_1.eContents().get(0);
 		
 		//TestLinewrap:
-		//  "linewrap" items+=Line*;
+		//	"linewrap" items+=Line*;
 		public ParserRule getRule() { return rule; }
 
 		//"linewrap" items+=Line*
@@ -358,7 +361,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cItemsLineParserRuleCall_1_0 = (RuleCall)cItemsAssignment_1.eContents().get(0);
 		
 		//TestLinewrapMinMax:
-		//  "wrapminmax" items+=Line*;
+		//	"wrapminmax" items+=Line*;
 		public ParserRule getRule() { return rule; }
 
 		//"wrapminmax" items+=Line*
@@ -389,7 +392,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cSemiSemicolonKeyword_4_0 = (Keyword)cSemiAssignment_4.eContents().get(0);
 		
 		//TestIndentation:
-		//  "indentation" "{" (sub+=TestIndentation|items+=Line)* "}" semi?=";"?;
+		//	"indentation" "{" (sub+=TestIndentation|items+=Line)* "}" semi?=";"?;
 		public ParserRule getRule() { return rule; }
 
 		//"indentation" "{" (sub+=TestIndentation|items+=Line)* "}" semi?=";"?
@@ -434,7 +437,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameFQNParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//FqnObj:
-		//  "fqn" name=FQN;
+		//	"fqn" name=FQN;
 		public ParserRule getRule() { return rule; }
 
 		//"fqn" name=FQN
@@ -459,7 +462,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//FQN returns ecore::EString:
-		//  ID ("." ID)*;
+		//	ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
@@ -487,7 +490,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cRefFqnObjFQNParserRuleCall_1_0_1 = (RuleCall)cRefFqnObjCrossReference_1_0.eContents().get(1);
 		
 		//FqnRef:
-		//  "fqnref" ref=[FqnObj|FQN];
+		//	"fqnref" ref=[FqnObj|FQN];
 		public ParserRule getRule() { return rule; }
 
 		//"fqnref" ref=[FqnObj|FQN]
@@ -518,7 +521,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cValEnum1EnumRuleCall_2_1_0 = (RuleCall)cValAssignment_2_1.eContents().get(0);
 		
 		//Enumeration:
-		//  "enum" val+=Enum1+ ("," val+=Enum1)*;
+		//	"enum" val+=Enum1+ ("," val+=Enum1)*;
 		public ParserRule getRule() { return rule; }
 
 		//"enum" val+=Enum1+ ("," val+=Enum1)*
@@ -561,8 +564,8 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cGraveAccentKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//SuppressedHidden hidden ( ):
-		//  {SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%"
-		//  vals+=SuppressedHiddenSub)*)? "`";
+		//	{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%"
+		//	vals+=SuppressedHiddenSub)*)? "`";
 		public ParserRule getRule() { return rule; }
 
 		//{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%" vals+=SuppressedHiddenSub)*)? "`"
@@ -606,7 +609,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cSuppressedHiddenSubIDParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//SuppressedHiddenSub:
-		//  SuppressedHiddenSubSub|SuppressedHiddenSubID;
+		//	SuppressedHiddenSubSub|SuppressedHiddenSubID;
 		public ParserRule getRule() { return rule; }
 
 		//SuppressedHiddenSubSub|SuppressedHiddenSubID
@@ -628,7 +631,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cGreaterThanSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//SuppressedHiddenSubSub hidden ( WS ):
-		//  "<" idval=ID ">";
+		//	"<" idval=ID ">";
 		public ParserRule getRule() { return rule; }
 
 		//"<" idval=ID ">"
@@ -653,7 +656,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cIdvalIDTerminalRuleCall_0 = (RuleCall)cIdvalAssignment.eContents().get(0);
 		
 		//SuppressedHiddenSubID:
-		//  idval=ID;
+		//	idval=ID;
 		public ParserRule getRule() { return rule; }
 
 		//idval=ID
@@ -661,6 +664,90 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 		//ID
 		public RuleCall getIdvalIDTerminalRuleCall_0() { return cIdvalIDTerminalRuleCall_0; }
+	}
+
+	public class Datatype1Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatype1");
+		private final RuleCall cFQNParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//Datatype1 returns ecore::EString:
+		//	FQN;
+		public ParserRule getRule() { return rule; }
+
+		//FQN
+		public RuleCall getFQNParserRuleCall() { return cFQNParserRuleCall; }
+	}
+
+	public class Datatype2Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatype2");
+		private final RuleCall cFQNParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//Datatype2 returns ecore::EString:
+		//	FQN;
+		public ParserRule getRule() { return rule; }
+
+		//FQN
+		public RuleCall getFQNParserRuleCall() { return cFQNParserRuleCall; }
+	}
+
+	public class Datatype3Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatype3");
+		private final RuleCall cFQNParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//Datatype3 returns ecore::EString:
+		//	FQN;
+		public ParserRule getRule() { return rule; }
+
+		//FQN
+		public RuleCall getFQNParserRuleCall() { return cFQNParserRuleCall; }
+	}
+
+	public class DatatypesElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatypes");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cDatatypesKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cVal1Assignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cVal1Datatype1ParserRuleCall_1_0 = (RuleCall)cVal1Assignment_1.eContents().get(0);
+		private final Keyword cKw1Keyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cVal2Assignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cVal2Datatype2ParserRuleCall_3_0 = (RuleCall)cVal2Assignment_3.eContents().get(0);
+		private final Assignment cVal3Assignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cVal3Datatype3ParserRuleCall_4_0 = (RuleCall)cVal3Assignment_4.eContents().get(0);
+		private final Keyword cKw3Keyword_5 = (Keyword)cGroup.eContents().get(5);
+		
+		//Datatypes:
+		//	"datatypes" val1=Datatype1 "kw1" val2=Datatype2 val3=Datatype3 "kw3";
+		public ParserRule getRule() { return rule; }
+
+		//"datatypes" val1=Datatype1 "kw1" val2=Datatype2 val3=Datatype3 "kw3"
+		public Group getGroup() { return cGroup; }
+
+		//"datatypes"
+		public Keyword getDatatypesKeyword_0() { return cDatatypesKeyword_0; }
+
+		//val1=Datatype1
+		public Assignment getVal1Assignment_1() { return cVal1Assignment_1; }
+
+		//Datatype1
+		public RuleCall getVal1Datatype1ParserRuleCall_1_0() { return cVal1Datatype1ParserRuleCall_1_0; }
+
+		//"kw1"
+		public Keyword getKw1Keyword_2() { return cKw1Keyword_2; }
+
+		//val2=Datatype2
+		public Assignment getVal2Assignment_3() { return cVal2Assignment_3; }
+
+		//Datatype2
+		public RuleCall getVal2Datatype2ParserRuleCall_3_0() { return cVal2Datatype2ParserRuleCall_3_0; }
+
+		//val3=Datatype3
+		public Assignment getVal3Assignment_4() { return cVal3Assignment_4; }
+
+		//Datatype3
+		public RuleCall getVal3Datatype3ParserRuleCall_4_0() { return cVal3Datatype3ParserRuleCall_4_0; }
+
+		//"kw3"
+		public Keyword getKw3Keyword_5() { return cKw3Keyword_5; }
 	}
 	
 	
@@ -675,7 +762,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cLit3Lit3Keyword_2_0 = (Keyword)cLit3EnumLiteralDeclaration_2.eContents().get(0);
 		
 		//enum Enum1:
-		//  lit1 | lit2 | lit3;
+		//	lit1 | lit2 | lit3;
 		public EnumRule getRule() { return rule; }
 
 		//lit1 | lit2 | lit3
@@ -719,6 +806,10 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private SuppressedHiddenSubElements pSuppressedHiddenSub;
 	private SuppressedHiddenSubSubElements pSuppressedHiddenSubSub;
 	private SuppressedHiddenSubIDElements pSuppressedHiddenSubID;
+	private Datatype1Elements pDatatype1;
+	private Datatype2Elements pDatatype2;
+	private Datatype3Elements pDatatype3;
+	private DatatypesElements pDatatypes;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -742,7 +833,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Root:
-	//  "test" (TestLinewrap|TestIndentation|TestLinewrapMinMax);
+	//	"test" (TestLinewrap|TestIndentation|TestLinewrapMinMax);
 	public RootElements getRootAccess() {
 		return (pRoot != null) ? pRoot : (pRoot = new RootElements());
 	}
@@ -752,8 +843,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Line:
-	//  (Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space)
-	//  ";";
+	//	(Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space|Datatypes) ";";
 	public LineElements getLineAccess() {
 		return (pLine != null) ? pLine : (pLine = new LineElements());
 	}
@@ -763,7 +853,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Decl:
-	//  type+=ID name+=ID;
+	//	type+=ID name+=ID;
 	public DeclElements getDeclAccess() {
 		return (pDecl != null) ? pDecl : (pDecl = new DeclElements());
 	}
@@ -773,7 +863,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Assign:
-	//  var=ID op=( "=" | "+=" ) "[" (val+=INT ("," val+=INT)*)? "]";
+	//	var=ID op=( "=" | "+=" ) "[" (val+=INT ("," val+=INT)*)? "]";
 	public AssignElements getAssignAccess() {
 		return (pAssign != null) ? pAssign : (pAssign = new AssignElements());
 	}
@@ -783,7 +873,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Meth:
-	//  "void" name=ID "(" (param+=Param ("," param+=Param)*)? ")";
+	//	"void" name=ID "(" (param+=Param ("," param+=Param)*)? ")";
 	public MethElements getMethAccess() {
 		return (pMeth != null) ? pMeth : (pMeth = new MethElements());
 	}
@@ -793,7 +883,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Param:
-	//  name+=ID ":" type+=ID;
+	//	name+=ID ":" type+=ID;
 	public ParamElements getParamAccess() {
 		return (pParam != null) ? pParam : (pParam = new ParamElements());
 	}
@@ -803,7 +893,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Space:
-	//  "space" val=ID;
+	//	"space" val=ID;
 	public SpaceElements getSpaceAccess() {
 		return (pSpace != null) ? pSpace : (pSpace = new SpaceElements());
 	}
@@ -813,7 +903,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//TestLinewrap:
-	//  "linewrap" items+=Line*;
+	//	"linewrap" items+=Line*;
 	public TestLinewrapElements getTestLinewrapAccess() {
 		return (pTestLinewrap != null) ? pTestLinewrap : (pTestLinewrap = new TestLinewrapElements());
 	}
@@ -823,7 +913,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//TestLinewrapMinMax:
-	//  "wrapminmax" items+=Line*;
+	//	"wrapminmax" items+=Line*;
 	public TestLinewrapMinMaxElements getTestLinewrapMinMaxAccess() {
 		return (pTestLinewrapMinMax != null) ? pTestLinewrapMinMax : (pTestLinewrapMinMax = new TestLinewrapMinMaxElements());
 	}
@@ -833,7 +923,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//TestIndentation:
-	//  "indentation" "{" (sub+=TestIndentation|items+=Line)* "}" semi?=";"?;
+	//	"indentation" "{" (sub+=TestIndentation|items+=Line)* "}" semi?=";"?;
 	public TestIndentationElements getTestIndentationAccess() {
 		return (pTestIndentation != null) ? pTestIndentation : (pTestIndentation = new TestIndentationElements());
 	}
@@ -843,7 +933,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//FqnObj:
-	//  "fqn" name=FQN;
+	//	"fqn" name=FQN;
 	public FqnObjElements getFqnObjAccess() {
 		return (pFqnObj != null) ? pFqnObj : (pFqnObj = new FqnObjElements());
 	}
@@ -853,7 +943,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//FQN returns ecore::EString:
-	//  ID ("." ID)*;
+	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
 		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
 	}
@@ -863,7 +953,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//FqnRef:
-	//  "fqnref" ref=[FqnObj|FQN];
+	//	"fqnref" ref=[FqnObj|FQN];
 	public FqnRefElements getFqnRefAccess() {
 		return (pFqnRef != null) ? pFqnRef : (pFqnRef = new FqnRefElements());
 	}
@@ -873,7 +963,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Enumeration:
-	//  "enum" val+=Enum1+ ("," val+=Enum1)*;
+	//	"enum" val+=Enum1+ ("," val+=Enum1)*;
 	public EnumerationElements getEnumerationAccess() {
 		return (pEnumeration != null) ? pEnumeration : (pEnumeration = new EnumerationElements());
 	}
@@ -883,7 +973,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//enum Enum1:
-	//  lit1 | lit2 | lit3;
+	//	lit1 | lit2 | lit3;
 	public Enum1Elements getEnum1Access() {
 		return (unknownRuleEnum1 != null) ? unknownRuleEnum1 : (unknownRuleEnum1 = new Enum1Elements());
 	}
@@ -893,8 +983,8 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//SuppressedHidden hidden ( ):
-	//  {SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%"
-	//  vals+=SuppressedHiddenSub)*)? "`";
+	//	{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%"
+	//	vals+=SuppressedHiddenSub)*)? "`";
 	public SuppressedHiddenElements getSuppressedHiddenAccess() {
 		return (pSuppressedHidden != null) ? pSuppressedHidden : (pSuppressedHidden = new SuppressedHiddenElements());
 	}
@@ -904,7 +994,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//SuppressedHiddenSub:
-	//  SuppressedHiddenSubSub|SuppressedHiddenSubID;
+	//	SuppressedHiddenSubSub|SuppressedHiddenSubID;
 	public SuppressedHiddenSubElements getSuppressedHiddenSubAccess() {
 		return (pSuppressedHiddenSub != null) ? pSuppressedHiddenSub : (pSuppressedHiddenSub = new SuppressedHiddenSubElements());
 	}
@@ -914,7 +1004,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//SuppressedHiddenSubSub hidden ( WS ):
-	//  "<" idval=ID ">";
+	//	"<" idval=ID ">";
 	public SuppressedHiddenSubSubElements getSuppressedHiddenSubSubAccess() {
 		return (pSuppressedHiddenSubSub != null) ? pSuppressedHiddenSubSub : (pSuppressedHiddenSubSub = new SuppressedHiddenSubSubElements());
 	}
@@ -924,7 +1014,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//SuppressedHiddenSubID:
-	//  idval=ID;
+	//	idval=ID;
 	public SuppressedHiddenSubIDElements getSuppressedHiddenSubIDAccess() {
 		return (pSuppressedHiddenSubID != null) ? pSuppressedHiddenSubID : (pSuppressedHiddenSubID = new SuppressedHiddenSubIDElements());
 	}
@@ -933,44 +1023,85 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getSuppressedHiddenSubIDAccess().getRule();
 	}
 
+	//Datatype1 returns ecore::EString:
+	//	FQN;
+	public Datatype1Elements getDatatype1Access() {
+		return (pDatatype1 != null) ? pDatatype1 : (pDatatype1 = new Datatype1Elements());
+	}
+	
+	public ParserRule getDatatype1Rule() {
+		return getDatatype1Access().getRule();
+	}
+
+	//Datatype2 returns ecore::EString:
+	//	FQN;
+	public Datatype2Elements getDatatype2Access() {
+		return (pDatatype2 != null) ? pDatatype2 : (pDatatype2 = new Datatype2Elements());
+	}
+	
+	public ParserRule getDatatype2Rule() {
+		return getDatatype2Access().getRule();
+	}
+
+	//Datatype3 returns ecore::EString:
+	//	FQN;
+	public Datatype3Elements getDatatype3Access() {
+		return (pDatatype3 != null) ? pDatatype3 : (pDatatype3 = new Datatype3Elements());
+	}
+	
+	public ParserRule getDatatype3Rule() {
+		return getDatatype3Access().getRule();
+	}
+
+	//Datatypes:
+	//	"datatypes" val1=Datatype1 "kw1" val2=Datatype2 val3=Datatype3 "kw3";
+	public DatatypesElements getDatatypesAccess() {
+		return (pDatatypes != null) ? pDatatypes : (pDatatypes = new DatatypesElements());
+	}
+	
+	public ParserRule getDatatypesRule() {
+		return getDatatypesAccess().getRule();
+	}
+
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\"
+	//	| "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

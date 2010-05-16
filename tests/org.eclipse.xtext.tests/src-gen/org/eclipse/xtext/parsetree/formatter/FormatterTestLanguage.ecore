@@ -65,4 +65,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SuppressedHiddenSubSub" eSuperTypes="#//SuppressedHiddenSub"/>
   <eClassifiers xsi:type="ecore:EClass" name="SuppressedHiddenSubID" eSuperTypes="#//SuppressedHiddenSub"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Datatypes" eSuperTypes="#//Line">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val3" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
 </ecore:EPackage>

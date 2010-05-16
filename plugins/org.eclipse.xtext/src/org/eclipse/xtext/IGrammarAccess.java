@@ -23,15 +23,19 @@ public interface IGrammarAccess {
 		AbstractRule getRule();
 	}
 
-	interface IParserRuleAccess extends IAbstractRuleAccess {
-		ParserRule getRule();
-	}
-
 	interface IEnumRuleAccess extends IAbstractRuleAccess {
 		EnumRule getRule();
 	}
 
+	interface IParserRuleAccess extends IAbstractRuleAccess {
+		ParserRule getRule();
+	}
+
 	List<Pair<Keyword, Keyword>> findKeywordPairs(String leftKw, String rightKw);
+
+	List<Keyword> findKeywords(String... keywords);
+	
+	List<RuleCall> findRuleCalls(AbstractRule... rules);
 
 	Grammar getGrammar();
 

@@ -28,7 +28,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cExpressionParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		
 		//Model:
-		//  Simple|RuleCalls|OptionalCalls|Recursion|Loop|Expression;
+		//	Simple|RuleCalls|OptionalCalls|Recursion|Loop|Expression;
 		public ParserRule getRule() { return rule; }
 
 		//Simple|RuleCalls|OptionalCalls|Recursion|Loop|Expression
@@ -67,7 +67,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cDatatypeFQNParserRuleCall_3_0 = (RuleCall)cDatatypeAssignment_3.eContents().get(0);
 		
 		//Simple:
-		//  "#1" name=ID ("kw1" optional=ID)? datatype=FQN;
+		//	"#1" name=ID ("kw1" optional=ID)? datatype=FQN;
 		public ParserRule getRule() { return rule; }
 
 		//"#1" name=ID ("kw1" optional=ID)? datatype=FQN
@@ -110,7 +110,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//FQN returns ecore::EString:
-		//  ID ("." ID);
+		//	ID ("." ID);
 		public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)
@@ -142,7 +142,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cCall2RuleCallsAss2ParserRuleCall_4_0 = (RuleCall)cCall2Assignment_4.eContents().get(0);
 		
 		//RuleCalls:
-		//  "#2" RuleCallsSub name=ID call1=RuleCallsAss1? call2=RuleCallsAss2?;
+		//	"#2" RuleCallsSub name=ID call1=RuleCallsAss1? call2=RuleCallsAss2?;
 		public ParserRule getRule() { return rule; }
 
 		//"#2" RuleCallsSub name=ID call1=RuleCallsAss1? call2=RuleCallsAss2?
@@ -179,7 +179,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cSubSubKeyword_0 = (Keyword)cSubAssignment.eContents().get(0);
 		
 		//RuleCallsSub:
-		//  sub="sub";
+		//	sub="sub";
 		public ParserRule getRule() { return rule; }
 
 		//sub="sub"
@@ -197,7 +197,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//RuleCallsAss1:
-		//  "ass1" name=ID;
+		//	"ass1" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"ass1" name=ID
@@ -221,7 +221,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//RuleCallsAss2:
-		//  "ass2" name=ID;
+		//	"ass2" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"ass2" name=ID
@@ -248,7 +248,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
 		
 		//OptionalCalls:
-		//  "#3" {OptionalCalls} opt1=OptionalCallsSub1? name=ID;
+		//	"#3" {OptionalCalls} opt1=OptionalCallsSub1? name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"#3" {OptionalCalls} opt1=OptionalCallsSub1? name=ID
@@ -284,7 +284,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cOpt3OptionalCallsSub3ParserRuleCall_3_0 = (RuleCall)cOpt3Assignment_3.eContents().get(0);
 		
 		//OptionalCallsSub1:
-		//  {OptionalCallsSub1} opt2=OptionalCallsSub2? "sub" opt3=OptionalCallsSub3?;
+		//	{OptionalCallsSub1} opt2=OptionalCallsSub2? "sub" opt3=OptionalCallsSub3?;
 		public ParserRule getRule() { return rule; }
 
 		//{OptionalCallsSub1} opt2=OptionalCallsSub2? "sub" opt3=OptionalCallsSub3?
@@ -317,7 +317,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//OptionalCallsSub2:
-		//  "sub2" name=ID;
+		//	"sub2" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"sub2" name=ID
@@ -341,7 +341,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//OptionalCallsSub3:
-		//  "sub3" name=ID;
+		//	"sub3" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"sub3" name=ID
@@ -364,7 +364,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cRecursionSubParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
 		//Recursion:
-		//  "#4" RecursionSub;
+		//	"#4" RecursionSub;
 		public ParserRule getRule() { return rule; }
 
 		//"#4" RecursionSub
@@ -392,7 +392,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cSemiSemicolonKeyword_4_0 = (Keyword)cSemiAssignment_4.eContents().get(0);
 		
 		//RecursionSub:
-		//  {RecursionSub} "{" (sub+=RecursionSub|vals+=ID)* "}" semi?=";"?;
+		//	{RecursionSub} "{" (sub+=RecursionSub|vals+=ID)* "}" semi?=";"?;
 		public ParserRule getRule() { return rule; }
 
 		//{RecursionSub} "{" (sub+=RecursionSub|vals+=ID)* "}" semi?=";"?
@@ -446,7 +446,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cStringsSTRINGTerminalRuleCall_3_1_0 = (RuleCall)cStringsAssignment_3_1.eContents().get(0);
 		
 		//Loop:
-		//  "#5" names+=ID+ ("gr" gr+=ID)* (ints+=INT|strings+=STRING)*;
+		//	"#5" names+=ID+ ("gr" gr+=ID)* (ints+=INT|strings+=STRING)*;
 		public ParserRule getRule() { return rule; }
 
 		//"#5" names+=ID+ ("gr" gr+=ID)* (ints+=INT|strings+=STRING)*
@@ -496,7 +496,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cAddParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
 		//Expression:
-		//  "#6" Add;
+		//	"#6" Add;
 		public ParserRule getRule() { return rule; }
 
 		//"#6" Add
@@ -520,7 +520,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cRightMultParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
 		//Add returns Expression:
-		//  Mult ({Add.left=current} "+" right=Mult)*;
+		//	Mult ({Add.left=current} "+" right=Mult)*;
 		public ParserRule getRule() { return rule; }
 
 		//Mult ({Add.left=current} "+" right=Mult)*
@@ -556,7 +556,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cRightPrimParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
 		//Mult returns Expression:
-		//  Prim ({Mult.left=current} "*" right=Prim)*;
+		//	Prim ({Mult.left=current} "*" right=Prim)*;
 		public ParserRule getRule() { return rule; }
 
 		//Prim ({Mult.left=current} "*" right=Prim)*
@@ -611,7 +611,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cRightParenthesisKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//Prim returns Expression:
-		//  {Value} val=INT|{Function} func=ID "(" param+=Add ("," param+=Add)* ")"|{Pointer} "=>" target=Prim|"(" Add ")";
+		//	{Value} val=INT|{Function} func=ID "(" param+=Add ("," param+=Add)* ")"|{Pointer} "=>" target=Prim|"(" Add ")";
 		public ParserRule getRule() { return rule; }
 
 		//{Value} val=INT|{Function} func=ID "(" param+=Add ("," param+=Add)* ")"|{Pointer} "=>" target=Prim|"(" Add ")"
@@ -735,7 +735,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 
 	
 	//Model:
-	//  Simple|RuleCalls|OptionalCalls|Recursion|Loop|Expression;
+	//	Simple|RuleCalls|OptionalCalls|Recursion|Loop|Expression;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -745,7 +745,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Simple:
-	//  "#1" name=ID ("kw1" optional=ID)? datatype=FQN;
+	//	"#1" name=ID ("kw1" optional=ID)? datatype=FQN;
 	public SimpleElements getSimpleAccess() {
 		return (pSimple != null) ? pSimple : (pSimple = new SimpleElements());
 	}
@@ -755,7 +755,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//FQN returns ecore::EString:
-	//  ID ("." ID);
+	//	ID ("." ID);
 	public FQNElements getFQNAccess() {
 		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
 	}
@@ -765,7 +765,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//RuleCalls:
-	//  "#2" RuleCallsSub name=ID call1=RuleCallsAss1? call2=RuleCallsAss2?;
+	//	"#2" RuleCallsSub name=ID call1=RuleCallsAss1? call2=RuleCallsAss2?;
 	public RuleCallsElements getRuleCallsAccess() {
 		return (pRuleCalls != null) ? pRuleCalls : (pRuleCalls = new RuleCallsElements());
 	}
@@ -775,7 +775,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//RuleCallsSub:
-	//  sub="sub";
+	//	sub="sub";
 	public RuleCallsSubElements getRuleCallsSubAccess() {
 		return (pRuleCallsSub != null) ? pRuleCallsSub : (pRuleCallsSub = new RuleCallsSubElements());
 	}
@@ -785,7 +785,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//RuleCallsAss1:
-	//  "ass1" name=ID;
+	//	"ass1" name=ID;
 	public RuleCallsAss1Elements getRuleCallsAss1Access() {
 		return (pRuleCallsAss1 != null) ? pRuleCallsAss1 : (pRuleCallsAss1 = new RuleCallsAss1Elements());
 	}
@@ -795,7 +795,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//RuleCallsAss2:
-	//  "ass2" name=ID;
+	//	"ass2" name=ID;
 	public RuleCallsAss2Elements getRuleCallsAss2Access() {
 		return (pRuleCallsAss2 != null) ? pRuleCallsAss2 : (pRuleCallsAss2 = new RuleCallsAss2Elements());
 	}
@@ -805,7 +805,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//OptionalCalls:
-	//  "#3" {OptionalCalls} opt1=OptionalCallsSub1? name=ID;
+	//	"#3" {OptionalCalls} opt1=OptionalCallsSub1? name=ID;
 	public OptionalCallsElements getOptionalCallsAccess() {
 		return (pOptionalCalls != null) ? pOptionalCalls : (pOptionalCalls = new OptionalCallsElements());
 	}
@@ -815,7 +815,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//OptionalCallsSub1:
-	//  {OptionalCallsSub1} opt2=OptionalCallsSub2? "sub" opt3=OptionalCallsSub3?;
+	//	{OptionalCallsSub1} opt2=OptionalCallsSub2? "sub" opt3=OptionalCallsSub3?;
 	public OptionalCallsSub1Elements getOptionalCallsSub1Access() {
 		return (pOptionalCallsSub1 != null) ? pOptionalCallsSub1 : (pOptionalCallsSub1 = new OptionalCallsSub1Elements());
 	}
@@ -825,7 +825,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//OptionalCallsSub2:
-	//  "sub2" name=ID;
+	//	"sub2" name=ID;
 	public OptionalCallsSub2Elements getOptionalCallsSub2Access() {
 		return (pOptionalCallsSub2 != null) ? pOptionalCallsSub2 : (pOptionalCallsSub2 = new OptionalCallsSub2Elements());
 	}
@@ -835,7 +835,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//OptionalCallsSub3:
-	//  "sub3" name=ID;
+	//	"sub3" name=ID;
 	public OptionalCallsSub3Elements getOptionalCallsSub3Access() {
 		return (pOptionalCallsSub3 != null) ? pOptionalCallsSub3 : (pOptionalCallsSub3 = new OptionalCallsSub3Elements());
 	}
@@ -845,7 +845,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Recursion:
-	//  "#4" RecursionSub;
+	//	"#4" RecursionSub;
 	public RecursionElements getRecursionAccess() {
 		return (pRecursion != null) ? pRecursion : (pRecursion = new RecursionElements());
 	}
@@ -855,7 +855,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//RecursionSub:
-	//  {RecursionSub} "{" (sub+=RecursionSub|vals+=ID)* "}" semi?=";"?;
+	//	{RecursionSub} "{" (sub+=RecursionSub|vals+=ID)* "}" semi?=";"?;
 	public RecursionSubElements getRecursionSubAccess() {
 		return (pRecursionSub != null) ? pRecursionSub : (pRecursionSub = new RecursionSubElements());
 	}
@@ -865,7 +865,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Loop:
-	//  "#5" names+=ID+ ("gr" gr+=ID)* (ints+=INT|strings+=STRING)*;
+	//	"#5" names+=ID+ ("gr" gr+=ID)* (ints+=INT|strings+=STRING)*;
 	public LoopElements getLoopAccess() {
 		return (pLoop != null) ? pLoop : (pLoop = new LoopElements());
 	}
@@ -875,7 +875,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Expression:
-	//  "#6" Add;
+	//	"#6" Add;
 	public ExpressionElements getExpressionAccess() {
 		return (pExpression != null) ? pExpression : (pExpression = new ExpressionElements());
 	}
@@ -885,7 +885,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Add returns Expression:
-	//  Mult ({Add.left=current} "+" right=Mult)*;
+	//	Mult ({Add.left=current} "+" right=Mult)*;
 	public AddElements getAddAccess() {
 		return (pAdd != null) ? pAdd : (pAdd = new AddElements());
 	}
@@ -895,7 +895,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Mult returns Expression:
-	//  Prim ({Mult.left=current} "*" right=Prim)*;
+	//	Prim ({Mult.left=current} "*" right=Prim)*;
 	public MultElements getMultAccess() {
 		return (pMult != null) ? pMult : (pMult = new MultElements());
 	}
@@ -905,7 +905,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Prim returns Expression:
-	//  {Value} val=INT|{Function} func=ID "(" param+=Add ("," param+=Add)* ")"|{Pointer} "=>" target=Prim|"(" Add ")";
+	//	{Value} val=INT|{Function} func=ID "(" param+=Add ("," param+=Add)* ")"|{Pointer} "=>" target=Prim|"(" Add ")";
 	public PrimElements getPrimAccess() {
 		return (pPrim != null) ? pPrim : (pPrim = new PrimElements());
 	}
@@ -915,43 +915,44 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\"
+	//	| "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

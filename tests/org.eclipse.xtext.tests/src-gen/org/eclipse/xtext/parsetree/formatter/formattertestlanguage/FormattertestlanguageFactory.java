@@ -179,6 +179,15 @@ public interface FormattertestlanguageFactory extends EFactory
   SuppressedHiddenSubID createSuppressedHiddenSubID();
 
   /**
+   * Returns a new object of class '<em>Datatypes</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Datatypes</em>'.
+   * @generated
+   */
+  Datatypes createDatatypes();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

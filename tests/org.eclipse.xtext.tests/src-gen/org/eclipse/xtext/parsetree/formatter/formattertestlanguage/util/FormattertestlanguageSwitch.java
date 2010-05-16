@@ -227,6 +227,14 @@ public class FormattertestlanguageSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case FormattertestlanguagePackage.DATATYPES:
+      {
+        Datatypes datatypes = (Datatypes)theEObject;
+        T result = caseDatatypes(datatypes);
+        if (result == null) result = caseLine(datatypes);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -499,6 +507,22 @@ public class FormattertestlanguageSwitch<T>
    * @generated
    */
   public T caseSuppressedHiddenSubID(SuppressedHiddenSubID object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Datatypes</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Datatypes</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDatatypes(Datatypes object)
   {
     return null;
   }

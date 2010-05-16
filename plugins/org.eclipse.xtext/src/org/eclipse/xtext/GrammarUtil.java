@@ -90,6 +90,10 @@ public class GrammarUtil {
 	public static Group containingGroup(EObject e) {
 		return getContainerOfType(e, Group.class);
 	}
+	
+	public static CrossReference containingCrossReference(EObject e) {
+		return getContainerOfType(e, CrossReference.class);
+	}
 
 	public static List<Action> containedActions(EObject e) {
 		List<Action> allContentsOfType = getAllContentsOfType(e, Action.class);

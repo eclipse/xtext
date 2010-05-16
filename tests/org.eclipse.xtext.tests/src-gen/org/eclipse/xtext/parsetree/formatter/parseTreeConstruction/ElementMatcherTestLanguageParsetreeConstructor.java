@@ -57,7 +57,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   Simple|RuleCalls|OptionalCalls|Recursion|Loop|Expression;
+ * 	Simple|RuleCalls|OptionalCalls|Recursion|Loop|Expression;
  *
  **/
 
@@ -331,7 +331,7 @@ protected class Model_ExpressionParserRuleCall_5 extends RuleCallToken {
 /************ begin Rule Simple ****************
  *
  * Simple:
- *   "#1" name=ID ("kw1" optional=ID)? datatype=FQN;
+ * 	"#1" name=ID ("kw1" optional=ID)? datatype=FQN;
  *
  **/
 
@@ -541,7 +541,7 @@ protected class Simple_DatatypeAssignment_3 extends AssignmentToken  {
 /************ begin Rule RuleCalls ****************
  *
  * RuleCalls:
- *   "#2" RuleCallsSub name=ID call1=RuleCallsAss1? call2=RuleCallsAss2?;
+ * 	"#2" RuleCallsSub name=ID call1=RuleCallsAss1? call2=RuleCallsAss2?;
  *
  **/
 
@@ -766,7 +766,7 @@ protected class RuleCalls_Call2Assignment_4 extends AssignmentToken  {
 /************ begin Rule RuleCallsSub ****************
  *
  * RuleCallsSub:
- *   sub="sub";
+ * 	sub="sub";
  *
  **/
 
@@ -811,7 +811,7 @@ protected class RuleCallsSub_SubAssignment extends AssignmentToken  {
 /************ begin Rule RuleCallsAss1 ****************
  *
  * RuleCallsAss1:
- *   "ass1" name=ID;
+ * 	"ass1" name=ID;
  *
  **/
 
@@ -906,7 +906,7 @@ protected class RuleCallsAss1_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule RuleCallsAss2 ****************
  *
  * RuleCallsAss2:
- *   "ass2" name=ID;
+ * 	"ass2" name=ID;
  *
  **/
 
@@ -1001,7 +1001,7 @@ protected class RuleCallsAss2_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule OptionalCalls ****************
  *
  * OptionalCalls:
- *   "#3" {OptionalCalls} opt1=OptionalCallsSub1? name=ID;
+ * 	"#3" {OptionalCalls} opt1=OptionalCallsSub1? name=ID;
  *
  **/
 
@@ -1170,7 +1170,7 @@ protected class OptionalCalls_NameAssignment_3 extends AssignmentToken  {
 /************ begin Rule OptionalCallsSub1 ****************
  *
  * OptionalCallsSub1:
- *   {OptionalCallsSub1} opt2=OptionalCallsSub2? "sub" opt3=OptionalCallsSub3?;
+ * 	{OptionalCallsSub1} opt2=OptionalCallsSub2? "sub" opt3=OptionalCallsSub3?;
  *
  **/
 
@@ -1352,7 +1352,7 @@ protected class OptionalCallsSub1_Opt3Assignment_3 extends AssignmentToken  {
 /************ begin Rule OptionalCallsSub2 ****************
  *
  * OptionalCallsSub2:
- *   "sub2" name=ID;
+ * 	"sub2" name=ID;
  *
  **/
 
@@ -1447,7 +1447,7 @@ protected class OptionalCallsSub2_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule OptionalCallsSub3 ****************
  *
  * OptionalCallsSub3:
- *   "sub3" name=ID;
+ * 	"sub3" name=ID;
  *
  **/
 
@@ -1542,7 +1542,7 @@ protected class OptionalCallsSub3_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule Recursion ****************
  *
  * Recursion:
- *   "#4" RecursionSub;
+ * 	"#4" RecursionSub;
  *
  **/
 
@@ -1638,7 +1638,7 @@ protected class Recursion_RecursionSubParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule RecursionSub ****************
  *
  * RecursionSub:
- *   {RecursionSub} "{" (sub+=RecursionSub|vals+=ID)* "}" semi?=";"?;
+ * 	{RecursionSub} "{" (sub+=RecursionSub|vals+=ID)* "}" semi?=";"?;
  *
  **/
 
@@ -1890,7 +1890,7 @@ protected class RecursionSub_SemiAssignment_4 extends AssignmentToken  {
 /************ begin Rule Loop ****************
  *
  * Loop:
- *   "#5" names+=ID+ ("gr" gr+=ID)* (ints+=INT|strings+=STRING)*;
+ * 	"#5" names+=ID+ ("gr" gr+=ID)* (ints+=INT|strings+=STRING)*;
  *
  **/
 
@@ -2164,7 +2164,7 @@ protected class Loop_StringsAssignment_3_1 extends AssignmentToken  {
 /************ begin Rule Expression ****************
  *
  * Expression:
- *   "#6" Add;
+ * 	"#6" Add;
  *
  **/
 
@@ -2264,7 +2264,7 @@ protected class Expression_AddParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Add ****************
  *
  * Add returns Expression:
- *   Mult ({Add.left=current} "+" right=Mult)*;
+ * 	Mult ({Add.left=current} "+" right=Mult)*;
  *
  **/
 
@@ -2471,7 +2471,7 @@ protected class Add_RightAssignment_1_2 extends AssignmentToken  {
 /************ begin Rule Mult ****************
  *
  * Mult returns Expression:
- *   Prim ({Mult.left=current} "*" right=Prim)*;
+ * 	Prim ({Mult.left=current} "*" right=Prim)*;
  *
  **/
 
@@ -2678,7 +2678,7 @@ protected class Mult_RightAssignment_1_2 extends AssignmentToken  {
 /************ begin Rule Prim ****************
  *
  * Prim returns Expression:
- *   {Value} val=INT|{Function} func=ID "(" param+=Add ("," param+=Add)* ")"|{Pointer} "=>" target=Prim|"(" Add ")";
+ * 	{Value} val=INT|{Function} func=ID "(" param+=Add ("," param+=Add)* ")"|{Pointer} "=>" target=Prim|"(" Add ")";
  *
  **/
 

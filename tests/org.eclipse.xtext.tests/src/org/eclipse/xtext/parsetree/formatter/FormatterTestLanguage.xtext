@@ -14,7 +14,7 @@ Root:
 	"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax);
 	
 Line:
-	(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space) ";";
+	(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes) ";";
 	
 Decl:	
 	type+=ID name+=ID;
@@ -65,3 +65,9 @@ SuppressedHiddenSubSub hidden(WS):
 	
 SuppressedHiddenSubID:
 	idval=ID;
+	
+Datatype1: FQN;
+Datatype2: FQN;
+Datatype3: FQN;
+
+Datatypes: "datatypes" val1=Datatype1 "kw1" val2=Datatype2 val3=Datatype3 "kw3";

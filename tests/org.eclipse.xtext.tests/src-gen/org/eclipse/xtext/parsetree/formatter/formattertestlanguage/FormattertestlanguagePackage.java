@@ -591,6 +591,52 @@ public interface FormattertestlanguagePackage extends EPackage
   int SUPPRESSED_HIDDEN_SUB_ID_FEATURE_COUNT = SUPPRESSED_HIDDEN_SUB_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.DatatypesImpl <em>Datatypes</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.DatatypesImpl
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getDatatypes()
+   * @generated
+   */
+  int DATATYPES = 17;
+
+  /**
+   * The feature id for the '<em><b>Val1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DATATYPES__VAL1 = LINE_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Val2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DATATYPES__VAL2 = LINE_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Val3</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DATATYPES__VAL3 = LINE_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Datatypes</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DATATYPES_FEATURE_COUNT = LINE_FEATURE_COUNT + 3;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enum1 <em>Enum1</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -598,7 +644,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getEnum1()
    * @generated
    */
-  int ENUM1 = 17;
+  int ENUM1 = 18;
 
 
   /**
@@ -970,6 +1016,49 @@ public interface FormattertestlanguagePackage extends EPackage
   EClass getSuppressedHiddenSubID();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Datatypes <em>Datatypes</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Datatypes</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Datatypes
+   * @generated
+   */
+  EClass getDatatypes();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Datatypes#getVal1 <em>Val1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val1</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Datatypes#getVal1()
+   * @see #getDatatypes()
+   * @generated
+   */
+  EAttribute getDatatypes_Val1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Datatypes#getVal2 <em>Val2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val2</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Datatypes#getVal2()
+   * @see #getDatatypes()
+   * @generated
+   */
+  EAttribute getDatatypes_Val2();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Datatypes#getVal3 <em>Val3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val3</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Datatypes#getVal3()
+   * @see #getDatatypes()
+   * @generated
+   */
+  EAttribute getDatatypes_Val3();
+
+  /**
    * Returns the meta object for enum '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enum1 <em>Enum1</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1315,6 +1404,40 @@ public interface FormattertestlanguagePackage extends EPackage
      * @generated
      */
     EClass SUPPRESSED_HIDDEN_SUB_ID = eINSTANCE.getSuppressedHiddenSubID();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.DatatypesImpl <em>Datatypes</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.DatatypesImpl
+     * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FormattertestlanguagePackageImpl#getDatatypes()
+     * @generated
+     */
+    EClass DATATYPES = eINSTANCE.getDatatypes();
+
+    /**
+     * The meta object literal for the '<em><b>Val1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DATATYPES__VAL1 = eINSTANCE.getDatatypes_Val1();
+
+    /**
+     * The meta object literal for the '<em><b>Val2</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DATATYPES__VAL2 = eINSTANCE.getDatatypes_Val2();
+
+    /**
+     * The meta object literal for the '<em><b>Val3</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DATATYPES__VAL3 = eINSTANCE.getDatatypes_Val3();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enum1 <em>Enum1</em>}' enum.

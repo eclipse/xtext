@@ -61,5 +61,10 @@
     </genClasses>
     <genClasses ecoreClass="FormatterTestLanguage.ecore#//SuppressedHiddenSubSub"/>
     <genClasses ecoreClass="FormatterTestLanguage.ecore#//SuppressedHiddenSubID"/>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//Datatypes">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Datatypes/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Datatypes/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Datatypes/val3"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

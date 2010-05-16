@@ -48,6 +48,7 @@ protected class ThisRootNode extends RootToken {
 			case 14: return new SuppressedHiddenSub_Alternatives(this, this, 14, inst);
 			case 15: return new SuppressedHiddenSubSub_Group(this, this, 15, inst);
 			case 16: return new SuppressedHiddenSubID_IdvalAssignment(this, this, 16, inst);
+			case 17: return new Datatypes_Group(this, this, 17, inst);
 			default: return null;
 		}	
 	}	
@@ -57,7 +58,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Root ****************
  *
  * Root:
- *   "test" (TestLinewrap|TestIndentation|TestLinewrapMinMax);
+ * 	"test" (TestLinewrap|TestIndentation|TestLinewrapMinMax);
  *
  **/
 
@@ -256,12 +257,11 @@ protected class Root_TestLinewrapMinMaxParserRuleCall_1_2 extends RuleCallToken 
 /************ begin Rule Line ****************
  *
  * Line:
- *   (Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space)
- *   ";";
+ * 	(Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space|Datatypes) ";";
  *
  **/
 
-// (Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space) ";"
+// (Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space|Datatypes) ";"
 protected class Line_Group extends GroupToken {
 	
 	public Line_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -284,6 +284,7 @@ protected class Line_Group extends GroupToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getAssignRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getDatatypesRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getDeclRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getEnumerationRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getFqnObjRule().getType().getClassifier() && 
@@ -297,7 +298,7 @@ protected class Line_Group extends GroupToken {
 
 }
 
-// Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space
+// Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space|Datatypes
 protected class Line_Alternatives_0 extends AlternativesToken {
 
 	public Line_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -320,6 +321,7 @@ protected class Line_Alternatives_0 extends AlternativesToken {
 			case 5: return new Line_EnumerationParserRuleCall_0_5(lastRuleCallOrigin, this, 5, inst);
 			case 6: return new Line_Group_0_6(lastRuleCallOrigin, this, 6, inst);
 			case 7: return new Line_SpaceParserRuleCall_0_7(lastRuleCallOrigin, this, 7, inst);
+			case 8: return new Line_DatatypesParserRuleCall_0_8(lastRuleCallOrigin, this, 8, inst);
 			default: return null;
 		}	
 	}
@@ -664,6 +666,42 @@ protected class Line_SpaceParserRuleCall_0_7 extends RuleCallToken {
 	}	
 }
 
+// Datatypes
+protected class Line_DatatypesParserRuleCall_0_8 extends RuleCallToken {
+	
+	public Line_DatatypesParserRuleCall_0_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getLineAccess().getDatatypesParserRuleCall_0_8();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Datatypes_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getDatatypesRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(Datatypes_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
 
 // ";"
 protected class Line_SemicolonKeyword_1 extends KeywordToken  {
@@ -694,7 +732,7 @@ protected class Line_SemicolonKeyword_1 extends KeywordToken  {
 /************ begin Rule Decl ****************
  *
  * Decl:
- *   type+=ID name+=ID;
+ * 	type+=ID name+=ID;
  *
  **/
 
@@ -801,7 +839,7 @@ protected class Decl_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule Assign ****************
  *
  * Assign:
- *   var=ID op=( "=" | "+=" ) "[" (val+=INT ("," val+=INT)*)? "]";
+ * 	var=ID op=( "=" | "+=" ) "[" (val+=INT ("," val+=INT)*)? "]";
  *
  **/
 
@@ -1096,7 +1134,7 @@ protected class Assign_RightSquareBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule Meth ****************
  *
  * Meth:
- *   "void" name=ID "(" (param+=Param ("," param+=Param)*)? ")";
+ * 	"void" name=ID "(" (param+=Param ("," param+=Param)*)? ")";
  *
  **/
 
@@ -1398,7 +1436,7 @@ protected class Meth_RightParenthesisKeyword_4 extends KeywordToken  {
 /************ begin Rule Param ****************
  *
  * Param:
- *   name+=ID ":" type+=ID;
+ * 	name+=ID ":" type+=ID;
  *
  **/
 
@@ -1527,7 +1565,7 @@ protected class Param_TypeAssignment_2 extends AssignmentToken  {
 /************ begin Rule Space ****************
  *
  * Space:
- *   "space" val=ID;
+ * 	"space" val=ID;
  *
  **/
 
@@ -1622,7 +1660,7 @@ protected class Space_ValAssignment_1 extends AssignmentToken  {
 /************ begin Rule TestLinewrap ****************
  *
  * TestLinewrap:
- *   "linewrap" items+=Line*;
+ * 	"linewrap" items+=Line*;
  *
  **/
 
@@ -1731,7 +1769,7 @@ protected class TestLinewrap_ItemsAssignment_1 extends AssignmentToken  {
 /************ begin Rule TestLinewrapMinMax ****************
  *
  * TestLinewrapMinMax:
- *   "wrapminmax" items+=Line*;
+ * 	"wrapminmax" items+=Line*;
  *
  **/
 
@@ -1840,7 +1878,7 @@ protected class TestLinewrapMinMax_ItemsAssignment_1 extends AssignmentToken  {
 /************ begin Rule TestIndentation ****************
  *
  * TestIndentation:
- *   "indentation" "{" (sub+=TestIndentation|items+=Line)* "}" semi?=";"?;
+ * 	"indentation" "{" (sub+=TestIndentation|items+=Line)* "}" semi?=";"?;
  *
  **/
 
@@ -2099,7 +2137,7 @@ protected class TestIndentation_SemiAssignment_4 extends AssignmentToken  {
 /************ begin Rule FqnObj ****************
  *
  * FqnObj:
- *   "fqn" name=FQN;
+ * 	"fqn" name=FQN;
  *
  **/
 
@@ -2195,7 +2233,7 @@ protected class FqnObj_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule FqnRef ****************
  *
  * FqnRef:
- *   "fqnref" ref=[FqnObj|FQN];
+ * 	"fqnref" ref=[FqnObj|FQN];
  *
  **/
 
@@ -2293,7 +2331,7 @@ protected class FqnRef_RefAssignment_1 extends AssignmentToken  {
 /************ begin Rule Enumeration ****************
  *
  * Enumeration:
- *   "enum" val+=Enum1+ ("," val+=Enum1)*;
+ * 	"enum" val+=Enum1+ ("," val+=Enum1)*;
  *
  **/
 
@@ -2470,8 +2508,8 @@ protected class Enumeration_ValAssignment_2_1 extends AssignmentToken  {
 /************ begin Rule SuppressedHidden ****************
  *
  * SuppressedHidden hidden ( ):
- *   {SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%"
- *   vals+=SuppressedHiddenSub)*)? "`";
+ * 	{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%"
+ * 	vals+=SuppressedHiddenSub)*)? "`";
  *
  **/
 
@@ -2744,7 +2782,7 @@ protected class SuppressedHidden_GraveAccentKeyword_3 extends KeywordToken  {
 /************ begin Rule SuppressedHiddenSub ****************
  *
  * SuppressedHiddenSub:
- *   SuppressedHiddenSubSub|SuppressedHiddenSubID;
+ * 	SuppressedHiddenSubSub|SuppressedHiddenSubID;
  *
  **/
 
@@ -2858,7 +2896,7 @@ protected class SuppressedHiddenSub_SuppressedHiddenSubIDParserRuleCall_1 extend
 /************ begin Rule SuppressedHiddenSubSub ****************
  *
  * SuppressedHiddenSubSub hidden ( WS ):
- *   "<" idval=ID ">";
+ * 	"<" idval=ID ">";
  *
  **/
 
@@ -2975,7 +3013,7 @@ protected class SuppressedHiddenSubSub_GreaterThanSignKeyword_2 extends KeywordT
 /************ begin Rule SuppressedHiddenSubID ****************
  *
  * SuppressedHiddenSubID:
- *   idval=ID;
+ * 	idval=ID;
  *
  **/
 
@@ -3015,5 +3053,215 @@ protected class SuppressedHiddenSubID_IdvalAssignment extends AssignmentToken  {
 }
 
 /************ end Rule SuppressedHiddenSubID ****************/
+
+
+
+
+
+/************ begin Rule Datatypes ****************
+ *
+ * Datatypes:
+ * 	"datatypes" val1=Datatype1 "kw1" val2=Datatype2 val3=Datatype3 "kw3";
+ *
+ **/
+
+// "datatypes" val1=Datatype1 "kw1" val2=Datatype2 val3=Datatype3 "kw3"
+protected class Datatypes_Group extends GroupToken {
+	
+	public Datatypes_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getDatatypesAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Datatypes_Kw3Keyword_5(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getDatatypesRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "datatypes"
+protected class Datatypes_DatatypesKeyword_0 extends KeywordToken  {
+	
+	public Datatypes_DatatypesKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getDatatypesAccess().getDatatypesKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// val1=Datatype1
+protected class Datatypes_Val1Assignment_1 extends AssignmentToken  {
+	
+	public Datatypes_Val1Assignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getDatatypesAccess().getVal1Assignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Datatypes_DatatypesKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("val1",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("val1");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getDatatypesAccess().getVal1Datatype1ParserRuleCall_1_0(), value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
+			element = grammarAccess.getDatatypesAccess().getVal1Datatype1ParserRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "kw1"
+protected class Datatypes_Kw1Keyword_2 extends KeywordToken  {
+	
+	public Datatypes_Kw1Keyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getDatatypesAccess().getKw1Keyword_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Datatypes_Val1Assignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// val2=Datatype2
+protected class Datatypes_Val2Assignment_3 extends AssignmentToken  {
+	
+	public Datatypes_Val2Assignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getDatatypesAccess().getVal2Assignment_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Datatypes_Kw1Keyword_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("val2",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("val2");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getDatatypesAccess().getVal2Datatype2ParserRuleCall_3_0(), value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
+			element = grammarAccess.getDatatypesAccess().getVal2Datatype2ParserRuleCall_3_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// val3=Datatype3
+protected class Datatypes_Val3Assignment_4 extends AssignmentToken  {
+	
+	public Datatypes_Val3Assignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getDatatypesAccess().getVal3Assignment_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Datatypes_Val2Assignment_3(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("val3",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("val3");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getDatatypesAccess().getVal3Datatype3ParserRuleCall_4_0(), value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
+			element = grammarAccess.getDatatypesAccess().getVal3Datatype3ParserRuleCall_4_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "kw3"
+protected class Datatypes_Kw3Keyword_5 extends KeywordToken  {
+	
+	public Datatypes_Kw3Keyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getDatatypesAccess().getKw3Keyword_5();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Datatypes_Val3Assignment_4(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+
+/************ end Rule Datatypes ****************/
 
 }
