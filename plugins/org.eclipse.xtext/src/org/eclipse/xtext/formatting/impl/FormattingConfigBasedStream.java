@@ -21,6 +21,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementMatcher;
 import org.eclipse.xtext.formatting.impl.AbstractFormattingConfig.ElementLocator;
+import org.eclipse.xtext.formatting.impl.AbstractFormattingConfig.ElementPattern;
 import org.eclipse.xtext.formatting.impl.AbstractFormattingConfig.LocatorType;
 import org.eclipse.xtext.formatting.impl.FormattingConfig.IndentationLocatorEnd;
 import org.eclipse.xtext.formatting.impl.FormattingConfig.IndentationLocatorStart;
@@ -314,14 +315,14 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 
 	protected EObject last = null;
 
-	protected IElementMatcher<ElementLocator> matcher;
+	protected IElementMatcher<ElementPattern> matcher;
 
 	protected String preservedWS = null;
 
 	protected boolean preserveSpaces;
 
 	public FormattingConfigBasedStream(ITokenStream out, String indentation, FormattingConfig cfg,
-			IElementMatcher<ElementLocator> matcher, IHiddenTokenHelper hiddenTokenHelper, boolean preserveSpaces) {
+			IElementMatcher<ElementPattern> matcher, IHiddenTokenHelper hiddenTokenHelper, boolean preserveSpaces) {
 		super(out);
 		this.cfg = cfg;
 		this.matcher = matcher;
@@ -354,8 +355,10 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 
 	protected Set<ElementLocator> collectLocators(EObject ele) {
 		Set<ElementLocator> result = Sets.newHashSet(activeRangeLocators);
-		Collection<ElementLocator> loc = ele instanceof AbstractElement ? matcher.matchNext((AbstractElement) ele)
-				: Sets.<ElementLocator> newHashSet();
+		Collection<ElementLocator> loc = Sets.newHashSet();
+		if (ele instanceof AbstractElement)
+			for (ElementPattern pattern : matcher.matchNext((AbstractElement) ele))
+				loc.add(pattern.getLocator());
 		if ((last instanceof AbstractRule && hiddenTokenHelper.isComment((AbstractRule) last))
 				|| (ele instanceof AbstractRule && hiddenTokenHelper.isComment((AbstractRule) ele)))
 			loc = collectLocatorsForComments(loc, last, ele);
@@ -378,8 +381,8 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 		Set<ElementLocator> result = Sets.newHashSet();
 		for (ElementLocator semantic : semanticLocators)
 			if (semantic instanceof IndentationLocatorStart || semantic instanceof IndentationLocatorEnd
-					|| (semantic.matchBefore() != null && semantic.matchBefore() == right)
-					|| (semantic.matchAfter() != null && semantic.matchAfter() == left))
+					|| (semantic.getRight() != null && semantic.getRight() == right)
+					|| (semantic.getLeft() != null && semantic.getLeft() == left))
 				result.add(semantic);
 		if (left != null)
 			result.addAll(cfg.getLocatorsForCommentTokensAfter(left));

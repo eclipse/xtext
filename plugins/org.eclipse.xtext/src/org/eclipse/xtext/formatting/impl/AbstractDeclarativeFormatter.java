@@ -15,9 +15,9 @@ import java.io.PrintStream;
 
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.formatting.IElementMatcherProvider;
-import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementMatcher;
-import org.eclipse.xtext.formatting.impl.AbstractFormattingConfig.ElementLocator;
+import org.eclipse.xtext.formatting.IIndentationInformation;
+import org.eclipse.xtext.formatting.impl.AbstractFormattingConfig.ElementPattern;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 
@@ -55,12 +55,12 @@ public abstract class AbstractDeclarativeFormatter extends BaseFormatter {
 
 	@SuppressWarnings("deprecation")
 	protected FormattingConfig createFormattingConfig() {
-		FormattingConfig cfg = new FormattingConfig(hiddenTokenHelper, indentInfo);
+		FormattingConfig cfg = new FormattingConfig(grammarAccess, hiddenTokenHelper, indentInfo);
 		cfg.setWhitespaceRule(getWSRule());
 		return cfg;
 	}
 
-	protected IElementMatcher<ElementLocator> createMatcher() {
+	protected IElementMatcher<ElementPattern> createMatcher() {
 		return matcherProvider.createMatcher(getConfig().getLocatorsForSemanticTokens());
 	}
 

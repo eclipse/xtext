@@ -281,5 +281,14 @@ public class FormatterTest extends AbstractXtextTests {
 		assertEqualTokenStreams(model);
 		assertPreserved(model);
 	}
+	
+	public void testDatatypeRules() throws Exception {
+		final String model = "test linewrap datatypes abc kw1 bcd def kw3;";
+		final String expected = "test linewrap\ndatatypes abc\nkw1\nbcd\ndef\nkw3;";
+		assertFormattedPTC(expected, model);
+		assertFormattedNM(expected, model, 0, model.length());
+		assertEqualTokenStreams(model);
+		assertPreserved(model);
+	}
 
 }

@@ -11,12 +11,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IAfterElement;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IBeforeElement;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IBetweenElements;
+import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementPattern;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -29,7 +35,31 @@ import com.google.inject.internal.Maps;
  */
 public abstract class AbstractFormattingConfig {
 
-	public class ElementLocator implements IAfterElement, IBeforeElement, IBetweenElements {
+	public static class ElementBeforeAfterPattern extends ElementPattern implements IAfterElement, IBeforeElement {
+		public ElementBeforeAfterPattern(ElementLocator locator, AbstractElement before, AbstractElement after) {
+			super(locator, before, after);
+		}
+
+		public AbstractElement matchAfter() {
+			return after;
+		}
+
+		public AbstractElement matchBefore() {
+			return before;
+		}
+	}
+
+	public static class ElementBetweenPattern extends ElementPattern implements IBetweenElements {
+		public ElementBetweenPattern(ElementLocator locator, AbstractElement before, AbstractElement after) {
+			super(locator, before, after);
+		}
+
+		public Pair<AbstractElement, AbstractElement> matchBetween() {
+			return Tuples.create(after, before);
+		}
+	}
+
+	public class ElementLocator {
 		protected EObject after;
 		protected EObject before;
 		protected LocatorType type;
@@ -69,14 +99,6 @@ public abstract class AbstractFormattingConfig {
 			addLocator(this);
 		}
 
-		public AbstractElement getAbstractElement(EObject obj) {
-			if (obj instanceof AbstractElement)
-				return (AbstractElement) obj;
-			if (obj instanceof AbstractRule)
-				return ((AbstractRule) obj).getAlternatives();
-			return null;
-		}
-
 		public EObject getLeft() {
 			return after;
 		}
@@ -89,35 +111,38 @@ public abstract class AbstractFormattingConfig {
 			return type;
 		}
 
-		public AbstractElement matchAfter() {
-			if (type == LocatorType.BETWEEN)
-				return null;
-			return getAbstractElement(after);
-		}
-
-		public AbstractElement matchBefore() {
-			if (type == LocatorType.BETWEEN)
-				return null;
-			return getAbstractElement(before);
-		}
-
-		public Pair<AbstractElement, AbstractElement> matchBetween() {
-			if (type == LocatorType.BETWEEN)
-				return Tuples.create(getAbstractElement(after), getAbstractElement(before));
-			return null;
-		}
-
 		public void range(EObject left, EObject right) {
 			type = LocatorType.RANGE;
 			this.after = left;
 			this.before = right;
 			addLocator(this);
-
 		}
 
 		@Override
 		public String toString() {
 			return getClass().getSimpleName() + "-" + type.name();
+		}
+	}
+
+	public static class ElementPattern implements IElementPattern {
+		protected AbstractElement after;
+		protected AbstractElement before;
+		protected ElementLocator locator;
+
+		public ElementPattern(ElementLocator locator, AbstractElement before, AbstractElement after) {
+			super();
+			this.locator = locator;
+			this.before = before;
+			this.after = after;
+		}
+
+		public ElementLocator getLocator() {
+			return locator;
+		}
+
+		@Override
+		public String toString() {
+			return locator.toString();
 		}
 	}
 
@@ -154,37 +179,83 @@ public abstract class AbstractFormattingConfig {
 		RANGE, // matches always between left and right
 	}
 
+	protected IGrammarAccess grammarAccess;
+
 	protected IHiddenTokenHelper hiddenTokenHelper;
 
 	protected Map<EObject, List<ElementLocator>> locatorsCommentAfter = Maps.newHashMap();
 
 	protected Map<EObject, List<ElementLocator>> locatorsCommentBefore = Maps.newHashMap();
 
-	protected List<ElementLocator> locatorsSemantic = Lists.newArrayList();
+	protected List<ElementPattern> locatorsSemantic = Lists.newArrayList();
 
-	public AbstractFormattingConfig(IHiddenTokenHelper hiddenTokenHelper) {
+	public AbstractFormattingConfig(IGrammarAccess grammarAccess, IHiddenTokenHelper hiddenTokenHelper) {
 		super();
+		this.grammarAccess = grammarAccess;
 		this.hiddenTokenHelper = hiddenTokenHelper;
 	}
 
 	protected void addLocator(ElementLocator locator) {
 		if ((locator.before instanceof AbstractRule && hiddenTokenHelper.isComment((AbstractRule) locator.before))
-				|| (locator.after instanceof AbstractRule && hiddenTokenHelper.isComment((AbstractRule) locator.after))) {
-			if (locator.before != null) {
-				List<ElementLocator> loc = locatorsCommentBefore.get(locator.before);
-				if (loc == null)
-					locatorsCommentBefore.put(locator.before, loc = Lists.newArrayList());
-				loc.add(locator);
-			}
-			if (locator.after != null) {
-				List<ElementLocator> loc = locatorsCommentAfter.get(locator.after);
-				if (loc == null)
-					locatorsCommentAfter.put(locator.after, loc = Lists.newArrayList());
-				loc.add(locator);
-			}
-		} else
-			locatorsSemantic.add(locator);
+				|| (locator.after instanceof AbstractRule && hiddenTokenHelper.isComment((AbstractRule) locator.after)))
+			addLocatorComment(locator);
+		else
+			addLocatorSemantic(locator);
 
+	}
+
+	protected void addLocatorComment(ElementLocator locator) {
+		if (locator.before != null) {
+			List<ElementLocator> loc = locatorsCommentBefore.get(locator.before);
+			if (loc == null)
+				locatorsCommentBefore.put(locator.before, loc = Lists.newArrayList());
+			loc.add(locator);
+		}
+		if (locator.after != null) {
+			List<ElementLocator> loc = locatorsCommentAfter.get(locator.after);
+			if (loc == null)
+				locatorsCommentAfter.put(locator.after, loc = Lists.newArrayList());
+			loc.add(locator);
+		}
+	}
+
+	protected void addLocatorSemantic(ElementLocator locator) {
+		List<AbstractElement> before = getAbstractElements(locator.before);
+		List<AbstractElement> after = getAbstractElements(locator.after);
+		if (before != null && after != null)
+			for (AbstractElement b : before)
+				for (AbstractElement a : after)
+					addLocatorSemantic(locator, b, a);
+		else if (before != null)
+			for (AbstractElement b : before)
+				addLocatorSemantic(locator, b, null);
+		else if (after != null)
+			for (AbstractElement a : after)
+				addLocatorSemantic(locator, null, a);
+	}
+
+	protected void addLocatorSemantic(ElementLocator locator, AbstractElement before, AbstractElement after) {
+		if (locator.type == LocatorType.BETWEEN)
+			locatorsSemantic.add(new ElementBetweenPattern(locator, before, after));
+		else
+			locatorsSemantic.add(new ElementBeforeAfterPattern(locator, before, after));
+	}
+
+	protected List<AbstractElement> getAbstractElements(EObject obj) {
+		if (obj instanceof AbstractElement)
+			return Collections.singletonList((AbstractElement) obj);
+		if (obj instanceof AbstractRule) {
+			AbstractRule rule = (AbstractRule) obj;
+			if (rule.getType().getClassifier() instanceof EClass)
+				return Collections.singletonList(rule.getAlternatives());
+			List<AbstractElement> result = Lists.newArrayList();
+			for (RuleCall rc : grammarAccess.findRuleCalls(rule)) {
+				CrossReference cr = GrammarUtil.containingCrossReference(rc);
+				result.add(cr == null ? rc : cr);
+			}
+			return result;
+		}
+		return null;
 	}
 
 	public List<ElementLocator> getLocatorsForCommentTokensAfter(EObject ctx) {
@@ -197,7 +268,7 @@ public abstract class AbstractFormattingConfig {
 		return result != null ? result : Collections.<ElementLocator> emptyList();
 	}
 
-	public List<ElementLocator> getLocatorsForSemanticTokens() {
+	public List<ElementPattern> getLocatorsForSemanticTokens() {
 		return locatorsSemantic;
 	}
 }

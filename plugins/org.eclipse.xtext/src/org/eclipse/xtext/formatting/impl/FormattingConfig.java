@@ -8,6 +8,7 @@
 package org.eclipse.xtext.formatting.impl;
 
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
@@ -20,8 +21,8 @@ public class FormattingConfig extends AbstractFormattingConfig {
 	public interface IDoLinewrapLocator extends IAfterLocator, IBeforeLocator, IBetweenLocator {
 	}
 
-	public interface IDoSpaceLocator extends IAfterLocator, IAroundLocator, IBeforeLocator, IBetweenLocator, IBoundsLocator,
-			IRangeLocator {
+	public interface IDoSpaceLocator extends IAfterLocator, IAroundLocator, IBeforeLocator, IBetweenLocator,
+			IBoundsLocator, IRangeLocator {
 	}
 
 	public class IndentationLocatorEnd extends ElementLocator {
@@ -54,8 +55,8 @@ public class FormattingConfig extends AbstractFormattingConfig {
 			IRangeLocator {
 	}
 
-	public interface INoSpaceLocator extends IAfterLocator, IAroundLocator, IBeforeLocator, IBetweenLocator, IBoundsLocator,
-			IRangeLocator {
+	public interface INoSpaceLocator extends IAfterLocator, IAroundLocator, IBeforeLocator, IBetweenLocator,
+			IBoundsLocator, IRangeLocator {
 	}
 
 	public class LinewrapLocator extends ElementLocator implements IDoLinewrapLocator, INoLinewrapLocator {
@@ -138,8 +139,9 @@ public class FormattingConfig extends AbstractFormattingConfig {
 
 	protected TerminalRule whitespaceRule = null;
 
-	public FormattingConfig(IHiddenTokenHelper hiddenTokenHelper, IIndentationInformation indentInfo) {
-		super(hiddenTokenHelper);
+	public FormattingConfig(IGrammarAccess grammarAccess, IHiddenTokenHelper hiddenTokenHelper,
+			IIndentationInformation indentInfo) {
+		super(grammarAccess, hiddenTokenHelper);
 		this.indentInfo = indentInfo;
 	}
 
