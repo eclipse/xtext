@@ -91,12 +91,12 @@ public class EntitiesNavigatorLabelProvider extends LabelProvider implements
 		case ReferenceEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?Link?http://www.eclipse.org/xtext/example/gmf/Entities?Reference", EntitiesElementTypes.Reference_3001); //$NON-NLS-1$
-		case EntityExtendsEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?Link?http://www.eclipse.org/xtext/example/gmf/Entities?Entity?extends", EntitiesElementTypes.EntityExtends_3002); //$NON-NLS-1$
 		case SimplePropertyEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?Node?http://www.eclipse.org/xtext/example/gmf/Entities?SimpleProperty", EntitiesElementTypes.SimpleProperty_2001); //$NON-NLS-1$
+		case EntityExtendsEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Link?http://www.eclipse.org/xtext/example/gmf/Entities?Entity?extends", EntitiesElementTypes.EntityExtends_3002); //$NON-NLS-1$
 		case EntityEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?TopLevelNode?http://www.eclipse.org/xtext/example/gmf/Entities?Entity", EntitiesElementTypes.Entity_1001); //$NON-NLS-1$
@@ -160,10 +160,10 @@ public class EntitiesNavigatorLabelProvider extends LabelProvider implements
 		switch (EntitiesVisualIDRegistry.getVisualID(view)) {
 		case ReferenceEditPart.VISUAL_ID:
 			return getReference_3001Text(view);
-		case EntityExtendsEditPart.VISUAL_ID:
-			return getEntityExtends_3002Text(view);
 		case SimplePropertyEditPart.VISUAL_ID:
 			return getSimpleProperty_2001Text(view);
+		case EntityExtendsEditPart.VISUAL_ID:
+			return getEntityExtends_3002Text(view);
 		case EntityEditPart.VISUAL_ID:
 			return getEntity_1001Text(view);
 		case ModelEditPart.VISUAL_ID:

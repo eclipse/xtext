@@ -370,5 +370,9 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 			IResourceDescriptions descriptions) throws IllegalArgumentException {
 		return false;
 	}
+
+	public boolean isDirty() {
+		return true;
+	}
 	
 }

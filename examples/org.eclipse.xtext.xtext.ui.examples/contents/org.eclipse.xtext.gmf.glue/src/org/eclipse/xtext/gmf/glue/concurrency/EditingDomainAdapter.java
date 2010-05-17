@@ -98,10 +98,6 @@ public class EditingDomainAdapter extends AdapterImpl implements ResourceSetList
 	}
 
 	public void resourceSetChanged(ResourceSetChangeEvent event) {
-		if(event.getTransaction() == null) {
-			// only unload can cause notifications outside an transaction
-			return;
-		}
 		List<URI> remainingURIs = Lists.newArrayList(uri2dirtyResource.keySet());
 		for (Resource resource : editingDomain.getResourceSet().getResources()) {
 			if (resource instanceof XtextResource) {

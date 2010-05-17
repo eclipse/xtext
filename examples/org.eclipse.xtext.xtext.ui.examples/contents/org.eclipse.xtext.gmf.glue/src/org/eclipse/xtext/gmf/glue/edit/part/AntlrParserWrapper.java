@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.gmf.glue.edit.part;
 
+import java.io.StringReader;
+
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
@@ -26,7 +28,6 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
-import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -73,7 +74,7 @@ public class AntlrParserWrapper implements IParser {
 	public ICommand getParseCommand(IAdaptable element, final String newString, int flags) {
 		EObject semanticElement = (EObject) element.getAdapter(EObject.class);
 		if (semanticElement != null) {
-			IParseResult parseResult = xtextParser.parse(parserRuleName, new StringInputStream(newString));
+			IParseResult parseResult = xtextParser.parse(parserRuleName, new StringReader(newString));
 			if (isValidParseResult(parseResult, semanticElement)) {
 				NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(semanticElement);
 				if (nodeAdapter != null) {
@@ -98,7 +99,7 @@ public class AntlrParserWrapper implements IParser {
 
 	public IParserEditStatus isValidEditString(IAdaptable element, String editString) {
 		try {
-			IParseResult parseResult = xtextParser.parse(parserRuleName, new StringInputStream(editString));
+			IParseResult parseResult = xtextParser.parse(parserRuleName, new StringReader(editString));
 			if (isValidParseResult(parseResult, (EObject) element.getAdapter(EObject.class))) {
 				return new ParserEditStatus(IStatus.OK, Activator.PLUGIN_ID, IParserEditStatus.EDITABLE, "OK", null);
 			} else {
