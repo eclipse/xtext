@@ -63,8 +63,8 @@ import com.google.common.collect.Sets;
  */
 public class Reader extends AbstractReader {
 
-	final static Logger log = Logger.getLogger(Reader.class.getName());
-	List<String> pathes = Lists.newArrayList();
+	protected final static Logger log = Logger.getLogger(Reader.class.getName());
+	protected List<String> pathes = Lists.newArrayList();
 
 	/**
 	 * <p>
