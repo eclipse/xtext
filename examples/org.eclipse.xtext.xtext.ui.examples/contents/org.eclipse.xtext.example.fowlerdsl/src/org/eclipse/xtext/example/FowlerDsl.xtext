@@ -9,26 +9,23 @@ grammar org.eclipse.xtext.example.FowlerDsl with org.eclipse.xtext.common.Termin
 
 generate fowlerdsl "http://example.xtext.org/FowlerDsl"
 
-Statemachine :
-  'events'
-     (events+=Event)*
-  'end'
-  'commands'
-     (commands+=Command)*
-  'end'
-  (states+=State)*;
- 
-Event :
-  (resetting?='resetting')? name=ID code=ID;
- 
-Command :
-  name=ID code=ID;
- 
-State :
-  'state' name=ID
-     ('actions' '{' (actions+=[Command])+ '}')?
-     (transitions+=Transition)*
-  'end';
- 
-Transition :
-  event=[Event] '=>' state=[State];
+Statemachine:
+	{Statemachine}
+	'events' (events+=Event)* 'end'
+	'commands' (commands+=Command)* 'end'
+	(states+=State)*;
+
+Event:
+	(resetting?='resetting')? name=ID code=ID;
+
+Command:
+	name=ID code=ID;
+
+State:
+	'state' name=ID
+	('actions' '{' (actions+=[Command])+ '}')?
+	(transitions+=Transition)*
+	'end';
+
+Transition:
+	event=[Event] '=>' state=[State];

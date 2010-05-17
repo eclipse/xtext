@@ -2,22 +2,22 @@ grammar org.eclipse.xtext.example.gmf.Entities with org.eclipse.xtext.common.Ter
 
 generate entities "http://www.eclipse.org/xtext/example/gmf/Entities"
 
-Model :
+Model:
 	{Model} (imports+=Import)*
 	(elements+=Type)*;
-	
-Import :
+
+Import:
 	'import' importURI=STRING;
-	
+
 Type:
 	SimpleType | Entity;
-	
+
 SimpleType:
 	'type' name=ID;
-	
-Entity :
+
+Entity:
 	'entity' name=ID ('extends' extends=[Entity])? '{'
-		properties+=Property*
+	properties+=Property*
 	'}';
 
 Property:
@@ -25,6 +25,6 @@ Property:
 
 SimpleProperty:
 	'property' name=ID (':' type=[SimpleType] (many?='[]')?)?;
-	
+
 Reference:
 	'reference' name=ID ':' type=[Entity] (many?='[]')?;

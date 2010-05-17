@@ -9,59 +9,60 @@ grammar org.eclipse.xtext.example.Domainmodel with org.eclipse.xtext.common.Term
 
 generate domainmodel "http://www.example.xtext/Domainmodel"
 
-Model :
+Model:
 	(elements+=AbstractElement)*;
 
-AbstractElement : PackageDeclaration | Type | Import;
+AbstractElement:
+	PackageDeclaration | Type | Import;
 
-Import :
+Import:
 	'import' importedNamespace=QualifiedNameWithWildCard;
-		
-PackageDeclaration :
+
+PackageDeclaration:
 	'package' name=QualifiedName '{'
-		(elements+=AbstractElement)*
+	(elements+=AbstractElement)*
 	'}';
-	
-Type :
-  Entity | DataType;
-  
-DataType :
-  'datatype' name=ID;
-  
-Entity :
-  'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
-    (features+=Feature)*	
-  '}';
-  
-Feature :
-  StructuralFeature | Operation;
-  
-StructuralFeature :
-  Attribute | Reference;
-  
-Attribute :
-  'attr' name=ID ':' type=TypeRef;
-  
-Reference :
-  'ref' name=ID ':' type=TypeRef ('opposite' opposite=[Reference])?;
-  
-Operation :
-  (visibility=Visibility)? 'op' name=ID'('(params+=Parameter (',' params+=Parameter)*)?')' ':' type=TypeRef;
-  
-Parameter :
-  name=ID type=TypeRef;
-  
-TypedElement :
-  Feature | Parameter;
-  
-TypeRef :
+
+Type:
+	Entity | DataType;
+
+DataType:
+	'datatype' name=ID;
+
+Entity:
+	'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
+	(features+=Feature)*
+	'}';
+
+Feature:
+	StructuralFeature | Operation;
+
+StructuralFeature:
+	Attribute | Reference;
+
+Attribute:
+	'attr' name=ID ':' type=TypeRef;
+
+Reference:
+	'ref' name=ID ':' type=TypeRef ('opposite' opposite=[Reference])?;
+
+Operation:
+	(visibility=Visibility)? 'op' name=ID '(' (params+=Parameter (',' params+=Parameter)*)? ')' ':' type=TypeRef;
+
+Parameter:
+	name=ID type=TypeRef;
+
+TypedElement:
+	Feature | Parameter;
+
+TypeRef:
 	referenced=[Type|QualifiedName];
-	
-enum Visibility: public = "public" | private = "private" | protected = "protected";
 
-QualifiedNameWithWildCard :
+enum Visibility:
+	public="public" | private="private" | protected="protected";
+
+QualifiedNameWithWildCard:
 	QualifiedName '.*'?;
-	
-QualifiedName :
-	ID ('.' ID)*;
 
+QualifiedName:
+	ID ('.' ID)*;

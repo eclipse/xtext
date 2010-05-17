@@ -53,20 +53,20 @@ generate «this.languageNameAbbreviation.toFirstLower()» "«this.nsURI»"
 Model returns Namespace:
 	(imports+=Import)*
 	(elements+=ModelElement)*;
-	
+
 ModelElement:
 	Namespace | Type;
-	
+
 Namespace:
 	'namespace' name=FQN '{'
-		(imports+=Import)*
-		(elements+=ModelElement)*
+	(imports+=Import)*
+	(elements+=ModelElement)*
 	'}';
 
 FQN:
 	ID ('.' ID)*;
 
-Import :
+Import:
 	'import' importedNamespace=ImportedFQN;
 
 ImportedFQN:
@@ -74,13 +74,13 @@ ImportedFQN:
 
 Type:
 	SimpleType | Entity;
-	
+
 SimpleType:
 	'type' name=ID;
-	
-Entity :
+
+Entity:
 	'entity' name=ID ('extends' extends=[Entity|FQN])? '{'
-		properties+=Property*
+	(properties+=Property)*
 	'}';
 
 Property:

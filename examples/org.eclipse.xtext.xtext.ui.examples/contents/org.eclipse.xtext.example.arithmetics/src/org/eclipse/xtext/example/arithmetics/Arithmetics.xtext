@@ -10,48 +10,49 @@ grammar org.eclipse.xtext.example.arithmetics.Arithmetics with org.eclipse.xtext
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 generate arithmetics "http://www.eclipse.org/Xtext/example/Arithmetics"
 
-Module :
+Module:
 	'module' name=ID
 	(imports+=Import)*
 	(statements+=Statement)*;
-	
-Import :
+
+Import:
 	'import' importedNamespace=ImportName;
-	
-ImportName : ID ('.''*')?;
+
+ImportName:
+	ID ('.' '*')?;
 
 Statement:
 	Definition | Evaluation;
-	
+
 Definition:
-	'def' name=ID ('('args+=DeclaredParameter (',' args+=DeclaredParameter)*')')?
-		':' expr=Expression ';';
-		
+	'def' name=ID ('(' args+=DeclaredParameter (',' args+=DeclaredParameter)* ')')?
+	':' expr=Expression ';';
+
 DeclaredParameter:
 	name=ID;
-	
-AbstractDefinition : 
+
+AbstractDefinition:
 	Definition | DeclaredParameter;
-		
-Evaluation :
+
+Evaluation:
 	expression=Expression ';';
 
 Expression:
 	Addition;
-	
+
 Addition returns Expression:
-	Multiplication (({Plus.left=current}'+'|{Minus.left=current}'-') right=Multiplication)*;
+	Multiplication (({Plus.left=current} '+' | {Minus.left=current} '-') right=Multiplication)*;
 
 Multiplication returns Expression:
-	PrimaryExpression (({Multi.left=current}'*'|{Div.left=current}'/') right=PrimaryExpression)*;
+	PrimaryExpression (({Multi.left=current} '*' | {Div.left=current} '/') right=PrimaryExpression)*;
 
 PrimaryExpression returns Expression:
-	'('Expression')'|
+	'(' Expression ')' |
 	{NumberLiteral} value=NUMBER |
-	{FunctionCall} func=[AbstractDefinition]('('args+=Expression (',' args+=Expression)*')')?
-;
+	{FunctionCall} func=[AbstractDefinition] ('(' args+=Expression (',' args+=Expression)* ')')?;
 
-terminal NUMBER returns ecore::EBigDecimal : ('0'..'9')*('.'('0'..'9')+)?;
+terminal NUMBER returns ecore::EBigDecimal:
+	('0'..'9')* ('.' ('0'..'9')+)?;
 
-terminal INT returns ecore::EInt : 'this one has been deactivated';
-	
+terminal INT returns ecore::EInt:
+	'this one has been deactivated';
