@@ -42,7 +42,6 @@ import org.eclipse.xtext.validation.IConcreteSyntaxConstraintProvider;
 
 import com.google.common.base.Function;
 import com.google.common.base.Join;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
