@@ -52,16 +52,17 @@ public class XtextFormatter extends AbstractDeclarativeFormatter {
 		}
 		for (Pair<Keyword, Keyword> pair : g.findKeywordPairs(":", ";")) {
 			cfg.setNoSpace().before(pair.getFirst());
-			cfg.setLinewrap().before(pair.getSecond());
+			cfg.setNoSpace().before(pair.getSecond());
 			cfg.setLinewrap().after(pair.getFirst());
 			cfg.setLinewrap().after(pair.getSecond());
 			cfg.setIndentation(pair.getFirst(), pair.getSecond());
+			cfg.setLinewrap(0, 0, 1).range(pair.getFirst(), pair.getSecond());
 		}
 
 		// Grammar
 		GrammarElements gr = g.getGrammarAccess();
-		cfg.setSpace("\n   ").before(gr.getWithKeyword_2_0());
-		cfg.setSpace("\n ").before(gr.getDefinesHiddenTokensAssignment_3_0());
+		cfg.setNoLinewrap().between(gr.getWithKeyword_2_0(), gr.getUsedGrammarsAssignment_2_1());
+		cfg.setNoSpace().between(gr.getDefinesHiddenTokensAssignment_3_0(), gr.getLeftParenthesisKeyword_3_1());
 		cfg.setLinewrap(2).between(gr.getNameAssignment_1(), gr.getMetamodelDeclarationsAssignment_4());
 		cfg.setLinewrap(2).between(gr.getGroup_2(), gr.getMetamodelDeclarationsAssignment_4());
 		cfg.setLinewrap(2).between(gr.getGroup_3(), gr.getMetamodelDeclarationsAssignment_4());
@@ -71,7 +72,7 @@ public class XtextFormatter extends AbstractDeclarativeFormatter {
 
 		// ParserRule
 		ParserRuleElements pr = g.getParserRuleAccess();
-		cfg.setNoSpace().after(pr.getDefinesHiddenTokensAssignment_2_0());
+		cfg.setNoSpace().before(pr.getLeftParenthesisKeyword_2_1());
 
 		// TypeRef
 		TypeRefElements typeRef = g.getTypeRefAccess();

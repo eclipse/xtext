@@ -94,13 +94,10 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 			if (lineEntry.isBreakable())
 				lastBreakableEntryIndex = entries.size() - 1;
 			totalLength += lineEntry.value.length();
-			if (lineEntry.leadingLocators != null)
-				for (ElementLocator l : lineEntry.leadingLocators) {
-					if (l instanceof LinewrapLocator && ((LinewrapLocator) l).getMaxWrap() > 0) {
-						lastBreakableEntryIndex = entries.size() - 1;
-						return flushLine();
-					}
-				}
+			if (lineEntry.isBreak()) {
+				lastBreakableEntryIndex = entries.size() - 1;
+				return flushLine();
+			}
 			if (totalLength > cfg.getCharsPerLine() && lastBreakableEntryIndex > 0)
 				return flushLine();
 			return null;
@@ -132,6 +129,12 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 			for (int i = 0; i < endIndex; i++) {
 				LineEntry e = this.entries.get(i);
 				Pair<AbstractRule, String> spaces = getSpaces(e, i == 0);
+				//				if (i == 0 && startWithNL && !e.isBreakable())
+				//					throw new IllegalStateException("break for non-breakable item");
+				//				else if (i != 0 && e.isBreak())
+				//					throw new IllegalStateException("break within line");
+				//				if (i == 0 && startWithNL && spaces.getSecond().indexOf('\n') < 0)
+				//					throw new IllegalStateException("missing newline before " + e.value);
 				// System.out.println("Spaces: '" + sp + "' before '" + e.val
 				// + "'");
 				if (spaces != null)
@@ -298,6 +301,20 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 			return hiddenTokenHelper.getWhitespaceRuleFor(hiddenTokenDefinition, "\n") != null;
 		}
 
+		protected boolean isBreak() {
+			if (!isBreakable())
+				return false;
+			for (ElementLocator e : leadingLocators) {
+				if (e instanceof LinewrapLocator) {
+					if (((LinewrapLocator) e).getMinWrap() > 0)
+						return true;
+					if (countExistingLeadingNewlines() > 0)
+						return true;
+				}
+			}
+			return false;
+		}
+
 		@Override
 		public String toString() {
 			return leadingLocators + " --> " + (leadingWS != null ? "[" + leadingWS + "] " : "") + value;
@@ -337,7 +354,8 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 	protected void addLineEntry(EObject grammarElement, String value, boolean isHidden) throws IOException {
 		Pair<Integer, RuleCall> hiddenTokenDefCall1 = findTopmostHiddenTokenDef();
 		Set<ElementLocator> locators = collectLocators(grammarElement);
-		//		System.out.println(locators + " --> " + value.replaceAll("\n", "\\n"));
+		//		System.out.println(locators + " --> " + value.replaceAll("\n", "\\n") + " -> '"
+		//				+ (preservedWS != null ? preservedWS.replaceAll("\n", "\\n") : "") + "'");
 		Pair<Integer, RuleCall> hiddenTokenDefCall2 = findTopmostHiddenTokenDef();
 		ParserRule hiddenTokenDef = null;
 		if (hiddenTokenDefCall1 != null && hiddenTokenDefCall2 != null) {
