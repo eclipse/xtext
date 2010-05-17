@@ -12,7 +12,11 @@ import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
+import org.eclipse.xtext.parsetree.AbstractNode;
 
 /**
  * @author Sebastian Zarnekow
@@ -29,7 +33,7 @@ public abstract class AbstractCleaningLinker extends AbstractLinker {
 		// clients may override
 	}
 
-	protected abstract void doLinkModel(EObject model,	IDiagnosticConsumer diagnosticsConsumer);
+	protected abstract void doLinkModel(EObject model, IDiagnosticConsumer diagnosticsConsumer);
 
 	protected void beforeModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
 		clearAllReferences(model);
@@ -41,9 +45,9 @@ public abstract class AbstractCleaningLinker extends AbstractLinker {
 		while (iter.hasNext())
 			clearReferences(iter.next());
 	}
-	
+
 	protected void clearReferences(EObject obj) {
-		for(EReference ref: obj.eClass().getEAllReferences())
+		for (EReference ref : obj.eClass().getEAllReferences())
 			clearReference(obj, ref);
 	}
 
@@ -51,4 +55,19 @@ public abstract class AbstractCleaningLinker extends AbstractLinker {
 		if (!ref.isContainment() && !ref.isContainer() && !ref.isDerived() && ref.isChangeable() && !ref.isTransient())
 			obj.eUnset(ref);
 	}
+
+	/**
+	 * @return true, if the parent node could contain cross references to the same semantic element as the given node.
+	 */
+	protected boolean shouldCheckParentNode(AbstractNode node) {
+		if (node.getGrammarElement() instanceof AbstractElement) {
+			AbstractElement grammarElement = (AbstractElement) node.getGrammarElement();
+			Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
+			if (assignment == null && node.getParent() != null && node.getParent().getElement() == null) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

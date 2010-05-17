@@ -19,16 +19,14 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
-import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext;
+import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
@@ -45,7 +43,7 @@ public class Linker extends AbstractCleaningLinker {
 
 	@Inject
 	private ILinkingService linkingService;
-	
+
 	@Inject
 	private ILinkingDiagnosticMessageProvider.Extended diagnosticMessageProvider;
 
@@ -70,12 +68,8 @@ public class Linker extends AbstractCleaningLinker {
 				ensureIsLinked(obj, abstractNode, ref, handledReferences, producer);
 			}
 		}
-		if (node.getGrammarElement() instanceof AbstractElement) {
-			AbstractElement grammarElement = (AbstractElement) node.getGrammarElement();
-			Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
-			if (assignment == null && node.getParent() != null) {
-				ensureLinked(obj, producer, node.getParent(), handledReferences);
-			}
+		if (shouldCheckParentNode(node)) {
+			ensureLinked(obj, producer, node.getParent(), handledReferences);
 		}
 	}
 
@@ -84,7 +78,7 @@ public class Linker extends AbstractCleaningLinker {
 	}
 
 	private void setDefaultValues(EObject obj, Set<EReference> references, IDiagnosticProducer producer) {
-		for(EReference ref: obj.eClass().getEAllReferences())
+		for (EReference ref : obj.eClass().getEAllReferences())
 			if (canSetDefaultValues(ref) && !references.contains(ref) && !obj.eIsSet(ref) && !ref.isDerived()) {
 				setDefaultValue(obj, ref, producer);
 			}
@@ -112,7 +106,8 @@ public class Linker extends AbstractCleaningLinker {
 			Set<EReference> handledReferences, IDiagnosticProducer producer) {
 		final EReference eRef = GrammarUtil.getReference(ref, obj.eClass());
 		if (eRef == null) {
-			ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticContext(obj, eRef, node);
+			ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticContext(obj, eRef,
+					node);
 			DiagnosticMessage message = diagnosticMessageProvider.getIllegalCrossReferenceMessage(context, ref);
 			producer.addDiagnostic(message);
 			return;
@@ -124,7 +119,8 @@ public class Linker extends AbstractCleaningLinker {
 			final List<EObject> links = getLinkedObject(obj, eRef, node);
 			if (links == null || links.isEmpty()) {
 				if (!isNullValidResult(obj, eRef, node)) {
-					ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticContext(obj, eRef, node);
+					ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticContext(obj,
+							eRef, node);
 					DiagnosticMessage message = diagnosticMessageProvider.getUnresolvedProxyMessage(context);
 					producer.addDiagnostic(message);
 				}
@@ -132,18 +128,19 @@ public class Linker extends AbstractCleaningLinker {
 			}
 
 			if (eRef.getUpperBound() >= 0 && links.size() > eRef.getUpperBound()) {
-				ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticContext(obj, eRef, node);
-				DiagnosticMessage message = diagnosticMessageProvider.getViolatedBoundsConstraintMessage(context, links.size());
+				ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticContext(obj,
+						eRef, node);
+				DiagnosticMessage message = diagnosticMessageProvider.getViolatedBoundsConstraintMessage(context,
+						links.size());
 				producer.addDiagnostic(message);
 				return;
 			}
 
 			if (eRef.getUpperBound() == 1) {
 				obj.eSet(eRef, links.get(0));
-			}
-			else { // eRef.getUpperBound() == -1 ||
-				// eRef.getUpperBound() < links.size
-				// TODO extract and check weather equals or identity is used by list
+			} else { // eRef.getUpperBound() == -1 ||
+						// eRef.getUpperBound() < links.size
+						// TODO extract and check weather equals or identity is used by list
 				final List<EObject> list = (List<EObject>) obj.eGet(eRef);
 				if (links.size() > 1 && eRef.isUnique() && (list instanceof BasicEList)) {
 					final Set<EObject> addUs = new LinkedHashSet<EObject>(links);
@@ -151,20 +148,23 @@ public class Linker extends AbstractCleaningLinker {
 					for (int i = 0; i < list.size(); i++)
 						addUs.remove(list.get(i));
 					if (!((BasicEList) list).addAllUnique(addUs)) {
-						ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticContext(obj, eRef, node);
-						DiagnosticMessage message = diagnosticMessageProvider.getViolatedBoundsConstraintMessage(context, links.size());
+						ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticContext(
+								obj, eRef, node);
+						DiagnosticMessage message = diagnosticMessageProvider.getViolatedBoundsConstraintMessage(
+								context, links.size());
 						producer.addDiagnostic(message);
 					}
+				} else if (!list.addAll(links)) {
+					ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticContext(obj,
+							eRef, node);
+					DiagnosticMessage message = diagnosticMessageProvider.getViolatedBoundsConstraintMessage(context,
+							links.size());
+					producer.addDiagnostic(message);
 				}
-				else
-					if (!list.addAll(links)) {
-						ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticContext(obj, eRef, node);
-						DiagnosticMessage message = diagnosticMessageProvider.getViolatedBoundsConstraintMessage(context, links.size());
-						producer.addDiagnostic(message);
-					}
 			}
 		} catch (IllegalNodeException e) {
-			ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticContext(obj, eRef, node);
+			ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticContext(obj, eRef,
+					node);
 			DiagnosticMessage message = diagnosticMessageProvider.getIllegalNodeMessage(context, e);
 			producer.addDiagnostic(message);
 			if (log.isDebugEnabled()) {
@@ -184,7 +184,7 @@ public class Linker extends AbstractCleaningLinker {
 			this.eRef = eRef;
 			this.node = node;
 		}
-		
+
 		public EObject getContext() {
 			return obj;
 		}
@@ -199,14 +199,15 @@ public class Linker extends AbstractCleaningLinker {
 				return serialize.trim();
 			return null;
 		}
-		
+
 	}
-	
+
 	protected ILinkingDiagnosticContext createDiagnosticContext(EObject obj, EReference eRef, AbstractNode node) {
 		return new LinkingDiagnosticContext(obj, eRef, node);
 	}
 
-	protected List<EObject> getLinkedObject(EObject obj, EReference eRef, AbstractNode node) throws IllegalNodeException {
+	protected List<EObject> getLinkedObject(EObject obj, EReference eRef, AbstractNode node)
+			throws IllegalNodeException {
 		return linkingService.getLinkedObjects(obj, eRef, node);
 	}
 

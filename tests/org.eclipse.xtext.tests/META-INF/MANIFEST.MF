@@ -392,5 +392,11 @@ Export-Package: org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.parsetree.reconstr.partialserializationtest.util,
  org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage,
  org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl,
- org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.util
+ org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.util,
+ org.eclipse.xtext.linking.bug313089,
+ org.eclipse.xtext.linking.bug313089.impl,
+ org.eclipse.xtext.linking.bug313089.util,
+ org.eclipse.xtext.linking.lazy.bug311337,
+ org.eclipse.xtext.linking.lazy.bug311337.impl,
+ org.eclipse.xtext.linking.lazy.bug311337.util
 
