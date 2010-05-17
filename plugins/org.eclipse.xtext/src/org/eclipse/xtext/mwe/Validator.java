@@ -8,18 +8,29 @@
 package org.eclipse.xtext.mwe;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.mwe.core.WorkflowInterruptedException;
 import org.eclipse.emf.mwe.core.issues.Issues;
+import org.eclipse.emf.mwe.core.issues.MWEDiagnostic;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider.Registry;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
 
+import com.google.common.base.Function;
+import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
+import com.google.common.collect.Sets;
+import com.google.inject.internal.Maps;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -73,8 +84,87 @@ public class Validator {
 			}
 		}
 		if (isStopOnError() && issues.hasErrors()) {
-			throw new WorkflowInterruptedException("Validation errors.");
+			String errorMessage = toString(issues);
+			throw new WorkflowInterruptedException("Validation problems: \n" + errorMessage);
 		}
+	}
+	
+	public String toString(Issues issues) {
+		if (!issues.hasErrors() && !issues.hasWarnings())
+			return "No issues.";
+		StringBuilder result = new StringBuilder();
+		if (issues.hasErrors()) {
+			MWEDiagnostic[] errors = issues.getErrors();
+			if (errors.length == 1) {
+				result.append("1 error:\n");
+			} else {
+				result.append(errors.length).append(" errors:\n");
+			}
+			appendMessages(result, errors);
+		}
+		if (issues.hasWarnings()) {
+			MWEDiagnostic[] warnings = issues.getWarnings();
+			if (issues.hasErrors())
+				result.append('\n');
+			if (warnings.length == 1) {
+				result.append("1 warning:\n");
+			} else {
+				result.append(warnings.length).append(" warnings:\n");
+			}
+			appendMessages(result, warnings);
+		}
+		return result.toString();
+	}
+
+	protected void appendMessages(StringBuilder result, MWEDiagnostic[] diagnostics) {
+		Multimap<URI, MWEDiagnostic> issuesPerURI = groupByURI(diagnostics);
+		boolean first = true;
+		for(URI uri: issuesPerURI.keySet()) {
+			if (!first)
+				result.append('\n');
+			first = false;
+			result
+				.append('\t')
+				.append(uri.lastSegment())
+				.append(" - ");
+			if (uri.isFile())
+				result.append(uri.toFileString());
+			else
+				result.append(uri);
+			for(MWEDiagnostic diagnostic: issuesPerURI.get(uri)) {
+				Issue issue = (Issue) diagnostic.getElement();
+				result.append("\n\t\t").append(issue.getLineNumber()).append(": ").append(diagnostic.getMessage());
+			}
+		}
+	}
+	
+	protected Multimap<URI, MWEDiagnostic> groupByURI(MWEDiagnostic[] diagnostic) {
+		Multimap<URI, MWEDiagnostic> result = Multimaps.newMultimap(Maps.<URI, Collection<MWEDiagnostic>> newLinkedHashMap(), new Supplier<Collection<MWEDiagnostic>>() {
+			public Collection<MWEDiagnostic> get() {
+				return Sets.newTreeSet(new Comparator<MWEDiagnostic>() {
+					public int compare(MWEDiagnostic o1, MWEDiagnostic o2) {
+						Issue issue1 = (Issue) o1.getElement();
+						Issue issue2 = (Issue) o2.getElement();
+						if (issue1.getLineNumber() < issue2.getLineNumber())
+							return -1;
+						if (issue1.getLineNumber() > issue2.getLineNumber())
+							return 1;
+						if (issue1.getOffset() < issue2.getOffset())
+							return -1;
+						if (issue1.getOffset() > issue2.getOffset())
+							return 1;
+						return o1.getMessage().compareTo(o2.getMessage());
+					}
+				});
+			}
+		});
+		Multimaps.index(Arrays.asList(diagnostic), new Function<MWEDiagnostic, URI>() {
+			public URI apply(MWEDiagnostic from) {
+				Issue issue = (Issue) from.getElement();
+				return issue.getUriToProblem().trimFragment();
+			}
+		}, result);
+		return result;
 	}
 	
 	public static class Disabled extends Validator {

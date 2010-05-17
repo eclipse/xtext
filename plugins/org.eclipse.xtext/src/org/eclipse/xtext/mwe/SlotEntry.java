@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.WorkflowInterruptedException;
@@ -116,7 +117,7 @@ public class SlotEntry {
 		boolean valid = eclasses.isEmpty();
 		for (Iterator<EClass> iterator = eclasses.iterator(); !valid && iterator.hasNext();) {
 			EClass eClass = iterator.next();
-			valid = valid || eClass.isSuperTypeOf(desc.getEClass());
+			valid = valid || EcorePackage.Literals.EOBJECT == eClass || eClass.isSuperTypeOf(desc.getEClass());
 		}
 		return valid && (name == null || name.equals(desc.getName()));
 	}

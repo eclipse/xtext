@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.mwe;
 
 import java.util.List;
@@ -17,51 +24,49 @@ import com.google.inject.Provider;
 
 public class RuntimeResourceSetInitializer {
 
-  @Inject
-  private Provider<ResourceSet> resourceSetProvider;
-  @Inject
-  private ResourceDescriptionsProvider provider;
-  @Inject
-  private ContainersStateFactory factory;
-  @Inject
-  private PathTraverser traverser;
-  @Inject
-  private IResourceServiceProvider.Registry registry;
+	@Inject
+	private Provider<ResourceSet> resourceSetProvider;
+	@Inject
+	private ResourceDescriptionsProvider provider;
+	@Inject
+	private ContainersStateFactory factory;
+	@Inject
+	private PathTraverser traverser;
+	@Inject
+	private IResourceServiceProvider.Registry registry;
 
-  public List<String> getClassPathEntries() {
-    List<String> pathes = Lists.newArrayList();
-    String classPath = System.getProperty("java.class.path");
-    String separator = System.getProperty("path.separator");
-    String[] strings = classPath.split(separator);
-    for (String path : strings) {
-      pathes.add(path);
-    }
-    return pathes;
-  }
+	public List<String> getClassPathEntries() {
+		List<String> pathes = Lists.newArrayList();
+		String classPath = System.getProperty("java.class.path");
+		String separator = System.getProperty("path.separator");
+		String[] strings = classPath.split(separator);
+		for (String path : strings) {
+			pathes.add(path);
+		}
+		return pathes;
+	}
 
-  protected Multimap<String, URI> getPathToUriMap(List<String> pathes) {
-    return traverser.resolvePathes(pathes, new Predicate<URI>() {
-      public boolean apply(URI input) {
-        return registry.getResourceServiceProvider(input) != null;
-      }
-    });
-  }
+	protected Multimap<String, URI> getPathToUriMap(List<String> pathes) {
+		return traverser.resolvePathes(pathes, new Predicate<URI>() {
+			public boolean apply(URI input) {
+				return registry.getResourceServiceProvider(input) != null;
+			}
+		});
+	}
 
-  public ResourceSet getInitializedResourceSet(List<String> pathes) {
-    ResourceSet resourceSet = resourceSetProvider.get();
-    Multimap<String, URI> pathToUriMap = getPathToUriMap(pathes);
-    IAllContainersState containersState = factory.getContainersState(pathes,
-        pathToUriMap);
-    resourceSet.eAdapters().add(
-        new DelegatingIAllContainerAdapter(containersState));
-    for (URI uri : pathToUriMap.values()) {
-      resourceSet.createResource(uri);
-    }
-    return resourceSet;
-  }
+	public ResourceSet getInitializedResourceSet(List<String> pathes) {
+		ResourceSet resourceSet = resourceSetProvider.get();
+		Multimap<String, URI> pathToUriMap = getPathToUriMap(pathes);
+		IAllContainersState containersState = factory.getContainersState(pathes, pathToUriMap);
+		resourceSet.eAdapters().add(new DelegatingIAllContainerAdapter(containersState));
+		for (URI uri : pathToUriMap.values()) {
+			resourceSet.createResource(uri);
+		}
+		return resourceSet;
+	}
 
-  public IResourceDescriptions getDescriptions(ResourceSet resourceSet) {
-    return provider.get(resourceSet);
-  }
+	public IResourceDescriptions getDescriptions(ResourceSet resourceSet) {
+		return provider.get(resourceSet);
+	}
 
 }
