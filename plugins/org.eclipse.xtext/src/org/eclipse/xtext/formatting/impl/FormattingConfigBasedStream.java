@@ -289,18 +289,6 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 			return c;
 		}
 
-		protected boolean isBreakable() {
-			if (leadingLocators == null)
-				return false;
-			for (ElementLocator e : leadingLocators) {
-				if (e instanceof LinewrapLocator && ((LinewrapLocator) e).getMaxWrap() == 0)
-					return false;
-				if (e instanceof SpaceLocator)
-					return false;
-			}
-			return hiddenTokenHelper.getWhitespaceRuleFor(hiddenTokenDefinition, "\n") != null;
-		}
-
 		protected boolean isBreak() {
 			if (!isBreakable())
 				return false;
@@ -313,6 +301,18 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 				}
 			}
 			return false;
+		}
+
+		protected boolean isBreakable() {
+			if (leadingLocators == null)
+				return false;
+			for (ElementLocator e : leadingLocators) {
+				if (e instanceof LinewrapLocator && ((LinewrapLocator) e).getMaxWrap() == 0)
+					return false;
+				if (e instanceof SpaceLocator)
+					return false;
+			}
+			return hiddenTokenHelper.getWhitespaceRuleFor(hiddenTokenDefinition, "\n") != null;
 		}
 
 		@Override

@@ -18,13 +18,6 @@ import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
  */
 public class FormattingConfig extends AbstractFormattingConfig {
 
-	public interface IDoLinewrapLocator extends IAfterLocator, IBeforeLocator, IBetweenLocator, IRangeLocator {
-	}
-
-	public interface IDoSpaceLocator extends IAfterLocator, IAroundLocator, IBeforeLocator, IBetweenLocator,
-			IBoundsLocator, IRangeLocator {
-	}
-
 	public class IndentationLocatorEnd extends ElementLocator {
 
 		public IndentationLocatorEnd(AbstractElement ele) {
@@ -51,15 +44,7 @@ public class FormattingConfig extends AbstractFormattingConfig {
 		}
 	}
 
-	public interface INoLinewrapLocator extends IAfterLocator, IAroundLocator, IBeforeLocator, IBetweenLocator,
-			IRangeLocator {
-	}
-
-	public interface INoSpaceLocator extends IAfterLocator, IAroundLocator, IBeforeLocator, IBetweenLocator,
-			IBoundsLocator, IRangeLocator {
-	}
-
-	public class LinewrapLocator extends ElementLocator implements IDoLinewrapLocator, INoLinewrapLocator {
+	public class LinewrapLocator extends ElementLocator {
 
 		protected final int defaultWrap;
 		protected final int maxWrap;
@@ -105,7 +90,18 @@ public class FormattingConfig extends AbstractFormattingConfig {
 		}
 	}
 
-	public class SpaceLocator extends ElementLocator implements IDoSpaceLocator, INoSpaceLocator {
+	public class NoLinewrapLocator extends LinewrapLocator {
+
+		public NoLinewrapLocator(int wrap) {
+			super(wrap);
+		}
+	}
+
+	public class NoSpaceLocator extends SpaceLocator {
+
+	}
+
+	public class SpaceLocator extends ElementLocator {
 
 		protected String space;
 
@@ -177,27 +173,27 @@ public class FormattingConfig extends AbstractFormattingConfig {
 		this.indentationSpace = indentationSpace;
 	}
 
-	public IDoLinewrapLocator setLinewrap() {
+	public LinewrapLocator setLinewrap() {
 		return new LinewrapLocator(1);
 	}
 
-	public IDoLinewrapLocator setLinewrap(int lines) {
+	public LinewrapLocator setLinewrap(int lines) {
 		return new LinewrapLocator(lines);
 	}
 
-	public IDoLinewrapLocator setLinewrap(int minWraps, int defaultWraps, int maxWraps) {
+	public LinewrapLocator setLinewrap(int minWraps, int defaultWraps, int maxWraps) {
 		return new LinewrapLocator(minWraps, defaultWraps, maxWraps);
 	}
 
-	public INoLinewrapLocator setNoLinewrap() {
-		return new LinewrapLocator(0);
+	public NoLinewrapLocator setNoLinewrap() {
+		return new NoLinewrapLocator(0);
 	}
 
-	public INoSpaceLocator setNoSpace() {
-		return new SpaceLocator();
+	public NoSpaceLocator setNoSpace() {
+		return new NoSpaceLocator();
 	}
 
-	public IDoSpaceLocator setSpace(String space) {
+	public SpaceLocator setSpace(String space) {
 		return new SpaceLocator(space);
 	}
 
