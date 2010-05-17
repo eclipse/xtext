@@ -146,30 +146,6 @@ public abstract class AbstractFormattingConfig {
 		}
 	}
 
-	public interface IAfterLocator {
-		void after(EObject after);
-	}
-
-	public interface IAroundLocator {
-		void around(EObject ele);
-	}
-
-	public interface IBeforeLocator {
-		void before(EObject right);
-	}
-
-	public interface IBetweenLocator {
-		void between(EObject left, EObject right);
-	}
-
-	public interface IBoundsLocator {
-		void bounds(EObject left, EObject right);
-	}
-
-	public interface IRangeLocator {
-		void range(EObject left, EObject right);
-	}
-
 	public enum LocatorType {
 		AFTER, //
 		AROUND, // before + after
