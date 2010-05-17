@@ -8,12 +8,9 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import java.io.ByteArrayOutputStream;
-import java.util.Collections;
-import java.util.Map;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.bug302128.Model;
-import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.StringInputStream;
 
