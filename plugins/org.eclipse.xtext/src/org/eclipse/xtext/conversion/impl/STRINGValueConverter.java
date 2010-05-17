@@ -9,21 +9,25 @@ package org.eclipse.xtext.conversion.impl;
 
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.util.Strings;
 
-import com.google.inject.Inject;
-
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 public class STRINGValueConverter extends AbstractLexerBasedConverter<String> {
 	
-	@Inject
-	public STRINGValueConverter(IGrammarAccess grammarAccess) {
-		this(grammarAccess.getGrammar(), "STRING");
+	public STRINGValueConverter() {
+		super();
 	}
 	
-	protected STRINGValueConverter(Grammar grammar, String ruleName) {
+	/**
+	 * @deprecated this implementation is {@link IValueConverter.RuleSpecific} thus {@link #setRule(AbstractRule)}
+	 * will be used to initialize this converter.
+	 */
+	@Deprecated
+	public STRINGValueConverter(Grammar grammar, String ruleName) {
 		super(GrammarUtil.findRuleForName(grammar, ruleName));
 	}
 	

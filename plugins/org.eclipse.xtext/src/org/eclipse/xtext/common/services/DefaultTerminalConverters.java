@@ -143,7 +143,7 @@ public class DefaultTerminalConverters extends AbstractDeclarativeValueConverter
 	}
 
 	@Inject
-	private INTValueConverter intValueConverter;
+	private org.eclipse.xtext.conversion.impl.INTValueConverter intValueConverter;
 	
 	@ValueConverter(rule = "INT")
 	public IValueConverter<Integer> INT() {
@@ -151,7 +151,7 @@ public class DefaultTerminalConverters extends AbstractDeclarativeValueConverter
 	}
 
 	@Inject
-	private STRINGValueConverter stringValueConverter;
+	private org.eclipse.xtext.conversion.impl.STRINGValueConverter stringValueConverter;
 	
 	@ValueConverter(rule = "STRING")
 	public IValueConverter<String> STRING() {

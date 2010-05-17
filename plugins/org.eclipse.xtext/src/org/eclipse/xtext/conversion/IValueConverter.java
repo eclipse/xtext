@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.conversion;
 
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
 /**
@@ -39,4 +40,15 @@ public interface IValueConverter<Type> {
 	 * @return
 	 */
 	String toString(Type value);
+	
+	/**
+	 * Value converters that rely on information about the actual rule
+	 * that is converted, may implement this interface. The framework will
+	 * set the rule according to the annotation of the method that provides
+	 * the value converter.
+	 * @author Sebastian Zarnekow - Initial contribution and API
+	 */
+	interface RuleSpecific {
+		void setRule(AbstractRule rule);
+	}
 }

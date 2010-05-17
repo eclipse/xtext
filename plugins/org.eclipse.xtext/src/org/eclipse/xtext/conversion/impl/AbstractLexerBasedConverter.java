@@ -13,6 +13,7 @@ import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
@@ -25,7 +26,7 @@ import com.google.inject.name.Named;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractLexerBasedConverter<T> extends AbstractValueConverter<T> {
+public abstract class AbstractLexerBasedConverter<T> extends AbstractValueConverter<T> implements IValueConverter.RuleSpecific {
 
 	@Inject(optional=true)
 	@Named(LexerBindings.RUNTIME)
@@ -36,8 +37,16 @@ public abstract class AbstractLexerBasedConverter<T> extends AbstractValueConver
 
 	private AbstractRule rule;
 	
+	/**
+	 * @deprecated this implementation is {@link IValueConverter.RuleSpecific} thus {@link #setRule(AbstractRule)}
+	 * will be used to initialize this converter.
+	 */
+	@Deprecated
 	protected AbstractLexerBasedConverter(AbstractRule rule) {
 		this.rule = rule;
+	}
+	
+	protected AbstractLexerBasedConverter() {
 	}
 	
 	public String toString(T value) {
@@ -111,6 +120,26 @@ public abstract class AbstractLexerBasedConverter<T> extends AbstractValueConver
 	
 	protected AbstractRule getRule() {
 		return rule;
+	}
+	
+	public void setRule(AbstractRule rule) {
+		this.rule = rule;
+	}
+	
+	public void setLexerProvider(Provider<Lexer> lexerProvider) {
+		this.lexerProvider = lexerProvider;
+	}
+	
+	public void setTokenDefProvider(ITokenDefProvider tokenDefProvider) {
+		this.tokenDefProvider = tokenDefProvider;
+	}
+	
+	protected ITokenDefProvider getTokenDefProvider() {
+		return tokenDefProvider;
+	}
+	
+	protected Provider<Lexer> getLexerProvider() {
+		return lexerProvider;
 	}
 	
 }
