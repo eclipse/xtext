@@ -24,8 +24,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
@@ -64,7 +62,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 
 	@Inject
 	private Registry registry;
-	
+
 	@Inject
 	private EcoreGenericsUtil ecoreGenericsUtil;
 
@@ -110,12 +108,8 @@ public class LazyLinker extends AbstractCleaningLinker {
 				}
 			}
 		}
-		if (node.getGrammarElement() instanceof AbstractElement) {
-			AbstractElement grammarElement = (AbstractElement) node.getGrammarElement();
-			Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
-			if (assignment == null && node.getParent() != null && node.getParent().getElement() == null) {
-				installProxies(obj, producer, settingsToLink, node.getParent());
-			}
+		if (shouldCheckParentNode(node)) {
+			installProxies(obj, producer, settingsToLink, node.getParent());
 		}
 	}
 

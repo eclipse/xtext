@@ -76,6 +76,10 @@ Workflow {
 			uri = "classpath:/org/eclipse/xtext/linking/Bug289059TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/linking/Bug313089TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/linking/ImportUriTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
