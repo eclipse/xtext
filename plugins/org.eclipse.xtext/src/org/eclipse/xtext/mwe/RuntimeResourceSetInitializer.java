@@ -47,16 +47,29 @@ public class RuntimeResourceSetInitializer {
 	}
 
 	protected Multimap<String, URI> getPathToUriMap(List<String> pathes) {
+		return getPathToUriMap(pathes, null);
+	}
+	
+	protected Multimap<String, URI> getPathToUriMap(List<String> pathes, final UriFilter filter) {
 		return traverser.resolvePathes(pathes, new Predicate<URI>() {
 			public boolean apply(URI input) {
-				return registry.getResourceServiceProvider(input) != null;
+				boolean result = true;
+				if (filter != null)
+					result = filter.matches(input);
+				if (result)
+					result = registry.getResourceServiceProvider(input) != null;
+				return result;
 			}
 		});
 	}
 
 	public ResourceSet getInitializedResourceSet(List<String> pathes) {
+		return getInitializedResourceSet(pathes, null);
+	}
+	
+	public ResourceSet getInitializedResourceSet(List<String> pathes, UriFilter filter) {
 		ResourceSet resourceSet = resourceSetProvider.get();
-		Multimap<String, URI> pathToUriMap = getPathToUriMap(pathes);
+		Multimap<String, URI> pathToUriMap = getPathToUriMap(pathes, filter);
 		IAllContainersState containersState = factory.getContainersState(pathes, pathToUriMap);
 		resourceSet.eAdapters().add(new DelegatingIAllContainerAdapter(containersState));
 		for (URI uri : pathToUriMap.values()) {

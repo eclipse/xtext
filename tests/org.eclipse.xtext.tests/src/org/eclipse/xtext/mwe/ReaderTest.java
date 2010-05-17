@@ -10,6 +10,7 @@ package org.eclipse.xtext.mwe;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.net.URL;
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
@@ -51,6 +52,51 @@ public class ReaderTest extends AbstractXtextTests {
 		assertEquals("Person", ((Entity) ctx.get("model")).getName());
 	}
 
+	public void testLoadMatchNone() throws Exception {
+		Reader reader = getReader();
+		reader.addPath(pathTo("emptyFolder"));
+		reader.addPath(pathTo("nonemptyFolder"));
+		reader.addRegister(new IndexTestLanguageStandaloneSetup());
+
+		SlotEntry entry = new SlotEntry();
+		entry.setType("Type");
+		reader.addLoad(entry);
+		
+		reader.setUriFilter(new UriFilter() {
+			public boolean matches(URI uri) {
+				return false;
+			}
+		});
+		WorkflowContext ctx = ctx();
+		reader.invoke(ctx, monitor(), issues());
+		Collection<?> slotContent = (Collection<?>) ctx.get("model");
+		assertNotNull(slotContent);
+		assertTrue(slotContent.isEmpty());
+	}
+	
+	public void testLoadMatchAll() throws Exception {
+		Reader reader = getReader();
+		reader.addPath(pathTo("emptyFolder"));
+		reader.addPath(pathTo("nonemptyFolder"));
+		reader.addRegister(new IndexTestLanguageStandaloneSetup());
+
+		SlotEntry entry = new SlotEntry();
+		entry.setType("Type");
+		reader.addLoad(entry);
+		
+		reader.setUriFilter(new UriFilter() {
+			public boolean matches(URI uri) {
+				return true;
+			}
+		});
+		WorkflowContext ctx = ctx();
+		reader.invoke(ctx, monitor(), issues());
+		Collection<?> slotContent = (Collection<?>) ctx.get("model");
+		assertNotNull(slotContent);
+		// Foo, Person, String
+		assertEquals(3, slotContent.size());
+	}
+	
 	private Reader getReader() {
 		Reader reader = new Reader();
 		reader.setValidate(new Validator.Disabled());
