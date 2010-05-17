@@ -43,6 +43,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.linking.Bug266082Test.class);
       suite.addTestSuite(org.eclipse.xtext.linking.Bug287988Test.class);
       suite.addTestSuite(org.eclipse.xtext.linking.Bug287988WithEagerLinkingTest.class);
+      suite.addTestSuite(org.eclipse.xtext.linking.Bug313089Test.class);
       suite.addTestSuite(org.eclipse.xtext.linking.CrossRefTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.IgnoreCaseLinkingWithNamespaceImportsTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.IgnoreCaseLinkingWithURIImportsTest.class);
