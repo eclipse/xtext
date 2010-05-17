@@ -89,7 +89,7 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 							((IValueConverter.RuleSpecific) valueConverter).setRule(rule);
 						converters.put(ruleName, valueConverter);
 					} else
-						log.debug("Tried to register value converter for rule '" + ruleName + 
+						log.trace("Tried to register value converter for rule '" + ruleName + 
 								"' which is not available in the grammar.");
 
 				} catch (Exception e) {
