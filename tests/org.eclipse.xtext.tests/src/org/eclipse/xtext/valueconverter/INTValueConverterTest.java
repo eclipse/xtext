@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.valueconverter;
 
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.INTValueConverter;
@@ -24,6 +25,7 @@ public class INTValueConverterTest extends AbstractXtextTests {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 		valueConverter = get(INTValueConverter.class);
+		valueConverter.setRule(GrammarUtil.findRuleForName(getGrammarAccess().getGrammar(), "INT"));
 	}
 	
 	public void testSimple() throws Exception {
