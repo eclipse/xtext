@@ -41,7 +41,7 @@ public class XtextGrammarReconcilationTest extends AbstractXtextTests {
 
 		// check
 		assertFalse(model.equals(result));
-		String expectedModel = "grammar foo\n   with org.eclipse.xtext.common.Terminals\n\nHONOLULU:\n	name=ID\n;";
+		String expectedModel = "grammar foo with org.eclipse.xtext.common.Terminals\n\nHONOLULU:\n	name=ID;";
 		assertEquals(expectedModel, result);
 	}
 

@@ -21,7 +21,9 @@ TestLinewrap:
 	"linewrap" items+=STRING*;
 	
 TestIndentation:
-	"indentation" "{" (sub+=TestIndentation | items+=STRING)* "}"?;
+	"indentation" "{" 
+		(sub+=TestIndentation | 
+		items+=STRING)* "}"?;
 	
 enum enum1:
 	a | b | c | d;

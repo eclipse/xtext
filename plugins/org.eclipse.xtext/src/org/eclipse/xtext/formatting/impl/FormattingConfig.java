@@ -18,7 +18,7 @@ import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
  */
 public class FormattingConfig extends AbstractFormattingConfig {
 
-	public interface IDoLinewrapLocator extends IAfterLocator, IBeforeLocator, IBetweenLocator {
+	public interface IDoLinewrapLocator extends IAfterLocator, IBeforeLocator, IBetweenLocator, IRangeLocator {
 	}
 
 	public interface IDoSpaceLocator extends IAfterLocator, IAroundLocator, IBeforeLocator, IBetweenLocator,

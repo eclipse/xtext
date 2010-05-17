@@ -36,8 +36,8 @@ public class XtextGrammarSerializationTest extends AbstractXtextTests {
 	public void testSimpleSerialization() throws Exception {
 		final String model = "grammar foo with org.eclipse.xtext.common.Terminals\n"
 				+ "generate mm \"http://bar\" as fooMM\n" + "StartRule returns fooMM::T: name=ID;";
-		final String expectedModel = "grammar foo\n   with org.eclipse.xtext.common.Terminals\n\n"
-				+ "generate mm \"http://bar\" as fooMM\n\nStartRule returns fooMM::T:\n	name=ID\n;";
+		final String expectedModel = "grammar foo with org.eclipse.xtext.common.Terminals\n\ngenerate "
+				+ "mm \"http://bar\" as fooMM\n\nStartRule returns fooMM::T:\n	name=ID;";
 		doTestSerialization(model, expectedModel);
 	}
 
@@ -58,11 +58,11 @@ public class XtextGrammarSerializationTest extends AbstractXtextTests {
 				+ "Foo returns fooMM::Foo: name=ID (nameRefs+=NameRef)*;\n"
 				+ "NameRef returns xtext::RuleCall : rule=[xtext::ParserRule];\n"
 				+ "MyRule returns xtext::ParserRule : name=ID;";
-		final String expectedModel = "grammar foo\n   with org.eclipse.xtext.common.Terminals\n\n"
+		final String expectedModel = "grammar foo with org.eclipse.xtext.common.Terminals\n\n"
 				+ "import \"http://www.eclipse.org/2008/Xtext\" as xtext\n" + "generate mm \"http://bar\" as fooMM\n\n"
-				+ "Foo returns fooMM::Foo:\n	name=ID nameRefs+=NameRef*\n;\n\n"
-				+ "NameRef returns xtext::RuleCall:\n	rule=[xtext::ParserRule]\n;\n\n"
-				+ "MyRule returns xtext::ParserRule:\n	name=ID\n;";
+				+ "Foo returns fooMM::Foo:\n	name=ID nameRefs+=NameRef*;\n\n"
+				+ "NameRef returns xtext::RuleCall:\n	rule=[xtext::ParserRule];\n\n"
+				+ "MyRule returns xtext::ParserRule:\n	name=ID;";
 		doTestSerialization(model, expectedModel);
 	}
 
