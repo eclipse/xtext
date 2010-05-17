@@ -60,6 +60,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.metamodelreferencing.tests.ExceptionTest.class);
       suite.addTestSuite(org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest.class);
       suite.addTestSuite(org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTest.class);
+      suite.addTestSuite(org.eclipse.xtext.mwe.NameBasedFilterTest.class);
       suite.addTestSuite(org.eclipse.xtext.mwe.PathTraverserTest.class);
       suite.addTestSuite(org.eclipse.xtext.mwe.ReaderTest.class);
       suite.addTestSuite(org.eclipse.xtext.mwe.UriBasedReaderTest.class);

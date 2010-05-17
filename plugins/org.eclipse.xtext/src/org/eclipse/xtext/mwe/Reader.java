@@ -104,6 +104,21 @@ public class Reader extends AbstractReader {
 			}
 		}
 	}
+	
+	private UriFilter filter;
+	
+	/**
+	 * Optionally set a filter that specifies which URIs are valid to be read.
+	 * A common use-case for filters is a file-name based selection of valid
+	 * URIs.
+	 */
+	public void setUriFilter(UriFilter filter) {
+		this.filter = filter;
+	}
+	
+	public UriFilter getUriFilter() {
+		return filter;
+	}
 
 	private ContainersStateFactory containersStateFactory = new ContainersStateFactory();
 
@@ -136,7 +151,12 @@ public class Reader extends AbstractReader {
 		ResourceSet resourceSet = getResourceSet();
 		Multimap<String, URI> uris = getPathTraverser().resolvePathes(pathes, new Predicate<URI>() {
 			public boolean apply(URI input) {
-				return getRegistry().getResourceServiceProvider(input) != null;
+				boolean result = true;
+				if (getUriFilter() != null)
+					result = getUriFilter().matches(input);
+				if (result)
+					result = getRegistry().getResourceServiceProvider(input) != null;
+				return result;
 			}
 		});
 		IAllContainersState containersState = containersStateFactory.getContainersState(pathes, uris);
