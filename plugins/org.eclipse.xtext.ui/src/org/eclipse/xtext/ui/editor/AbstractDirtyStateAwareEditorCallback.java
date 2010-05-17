@@ -67,6 +67,10 @@ public abstract class AbstractDirtyStateAwareEditorCallback implements IXtextEdi
 		}
 	}
 	
+	public boolean isDirty() {
+		return currentEditor.isDirty();
+	}
+	
 	public IXtextDocument getDocument() {
 		return currentEditor.getDocument();
 	}
