@@ -37,6 +37,10 @@ Workflow {
 			fragment = @TestLanguagesFragments {}
 		}
 		language = {
+			uri = "classpath:/org/eclipse/xtext/linking/Bug313089TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
 			uri = "classpath:/org/eclipse/xtext/linking/ImportUriTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
@@ -70,6 +74,10 @@ Workflow {
 					ignoreCase = true
 				}
 			}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/linking/lazy/Bug311337TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.xtext"
