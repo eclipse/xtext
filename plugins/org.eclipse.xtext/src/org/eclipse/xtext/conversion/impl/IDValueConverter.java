@@ -11,22 +11,24 @@ import java.util.Set;
 
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.IGrammarAccess;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class IDValueConverter extends AbstractIDValueConverter {
 	
-	@Inject
-	public IDValueConverter(IGrammarAccess grammarAccess) {
-		this(grammarAccess.getGrammar(), "ID");
+	public IDValueConverter() {
+		super();
 	}
 	
-	protected IDValueConverter(Grammar grammar, String ruleName) {
+	/**
+	 * @deprecated this implementation is {@link IValueConverter.RuleSpecific} thus {@link #setRule(AbstractRule)}
+	 * will be used to initialize this converter.
+	 */
+	@Deprecated
+	public IDValueConverter(Grammar grammar, String ruleName) {
 		super(grammar, ruleName);
 	}
 	

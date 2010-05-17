@@ -16,7 +16,9 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.conversion.IValueConverter;
@@ -32,7 +34,7 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractDeclarativeValueConverterService extends AbstractValueConverterService {
 
-	private static Logger log = Logger.getLogger(AbstractDeclarativeValueConverterService.class);
+	private static final Logger log = Logger.getLogger(AbstractDeclarativeValueConverterService.class);
 
 	private Grammar grammar;
 
@@ -79,8 +81,16 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 		for (Method method : methods) {
 			if (isConfigurationMethod(method)) {
 				try {
-					String lexerRule = method.getAnnotation(ValueConverter.class).rule();
-					converters.put(lexerRule, (IValueConverter<Object>) method.invoke(this));
+					String ruleName = method.getAnnotation(ValueConverter.class).rule();
+					AbstractRule rule = GrammarUtil.findRuleForName(grammar, ruleName);
+					if (rule != null) {
+						IValueConverter<Object> valueConverter = (IValueConverter<Object>) method.invoke(this);
+						if (valueConverter instanceof IValueConverter.RuleSpecific)
+							((IValueConverter.RuleSpecific) valueConverter).setRule(rule);
+						converters.put(ruleName, valueConverter);
+					} else
+						log.debug("Tried to register value converter for rule '" + ruleName + 
+								"' which is not available in the grammar.");
 
 				} catch (Exception e) {
 					log.error(e.getMessage(), e);

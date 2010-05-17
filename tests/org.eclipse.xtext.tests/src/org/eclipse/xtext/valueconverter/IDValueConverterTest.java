@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.valueconverter;
 
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.IDValueConverter;
@@ -25,6 +26,7 @@ public class IDValueConverterTest extends AbstractXtextTests {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 		idConverter = get(IDValueConverter.class);
+		idConverter.setRule(GrammarUtil.findRuleForName(getGrammarAccess().getGrammar(), "ID"));
 	}
 
 	public void testSimple() throws Exception {

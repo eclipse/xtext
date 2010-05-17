@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.valueconverter;
 
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.STRINGValueConverter;
@@ -24,6 +25,7 @@ public class STRINGConverterTest extends AbstractXtextTests {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 		valueConverter = get(STRINGValueConverter.class);
+		valueConverter.setRule(GrammarUtil.findRuleForName(getGrammarAccess().getGrammar(), "STRING"));
 	}
 
 	public void testEscapeChars() throws Exception {
