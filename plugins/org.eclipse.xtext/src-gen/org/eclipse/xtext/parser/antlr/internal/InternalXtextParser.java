@@ -21,7 +21,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
-@SuppressWarnings({"all"})
+@SuppressWarnings("all")
 public class InternalXtextParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'grammar'", "'with'", "','", "'hidden'", "'('", "')'", "'.'", "'generate'", "'as'", "'import'", "'returns'", "':'", "';'", "'::'", "'|'", "'&'", "'?'", "'*'", "'+'", "'{'", "'='", "'+='", "'current'", "'}'", "'?='", "'['", "']'", "'terminal'", "'!'", "'->'", "'..'", "'enum'"
@@ -40,10 +40,8 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         }
         
 
-    @Override
-	public String[] getTokenNames() { return tokenNames; }
-    @Override
-	public String getGrammarFileName() { return "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g"; }
+    public String[] getTokenNames() { return tokenNames; }
+    public String getGrammarFileName() { return "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g"; }
 
 
 
@@ -722,7 +720,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject this_EnumRule_2 = null;
 
 
-          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:334:6: ( (this_ParserRule_0= ruleParserRule | this_TerminalRule_1= ruleTerminalRule | this_EnumRule_2= ruleEnumRule ) )
@@ -872,7 +870,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject this_ReferencedMetamodel_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:386:6: ( (this_GeneratedMetamodel_0= ruleGeneratedMetamodel | this_ReferencedMetamodel_1= ruleReferencedMetamodel ) )
@@ -994,7 +992,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         Token lv_name_1_0=null;
         Token lv_alias_4_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:428:6: ( ( 'generate' ( (lv_name_1_0= RULE_ID ) ) ( ( RULE_STRING ) ) ( 'as' ( (lv_alias_4_0= RULE_ID ) ) )? ) )
@@ -1180,7 +1178,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
         Token lv_alias_3_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:521:6: ( ( 'import' ( ( RULE_STRING ) ) ( 'as' ( (lv_alias_3_0= RULE_ID ) ) )? ) )
@@ -1338,7 +1336,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject lv_alternatives_10_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:590:6: ( ( ( (lv_name_0_0= RULE_ID ) ) ( 'returns' ( (lv_type_2_0= ruleTypeRef ) ) )? ( ( (lv_definesHiddenTokens_3_0= 'hidden' ) ) '(' ( ( ( RULE_ID ) ) ( ',' ( ( RULE_ID ) ) )* )? ')' )? ':' ( (lv_alternatives_10_0= ruleAlternatives ) ) ';' ) )
@@ -1686,7 +1684,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
     public final EObject ruleTypeRef() throws RecognitionException {
         EObject current = null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:758:6: ( ( ( ( ( RULE_ID ) ) '::' )? ( ( RULE_ID ) ) ) )
@@ -1831,7 +1829,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject lv_elements_3_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:813:6: ( (this_UnorderedGroup_0= ruleUnorderedGroup ( () ( '|' ( (lv_elements_3_0= ruleUnorderedGroup ) ) )+ )? ) )
@@ -2025,7 +2023,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject lv_elements_3_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:889:6: ( (this_Group_0= ruleGroup ( () ( '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )? ) )
@@ -2219,7 +2217,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject lv_elements_2_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:965:6: ( (this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )? ) )
@@ -2403,7 +2401,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject this_Action_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1037:6: ( (this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality | this_Action_1= ruleAction ) )
@@ -2530,7 +2528,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject this_AbstractTerminal_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1079:6: ( ( (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) ( ( (lv_cardinality_2_1= '?' | lv_cardinality_2_2= '*' | lv_cardinality_2_3= '+' ) ) )? ) )
@@ -2795,7 +2793,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject lv_type_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1181:6: ( ( '{' ( (lv_type_1_0= ruleTypeRef ) ) ( '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) 'current' )? '}' ) )
@@ -3053,7 +3051,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject this_ParenthesizedElement_2 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1310:6: ( (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedElement_2= ruleParenthesizedElement ) )
@@ -3200,7 +3198,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
         Token lv_value_0_0=null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1362:6: ( ( (lv_value_0_0= RULE_STRING ) ) )
@@ -3298,7 +3296,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
     public final EObject ruleRuleCall() throws RecognitionException {
         EObject current = null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1409:6: ( ( ( RULE_ID ) ) )
@@ -3392,7 +3390,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject lv_terminal_2_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1446:6: ( ( ( (lv_feature_0_0= RULE_ID ) ) ( ( (lv_operator_1_1= '+=' | lv_operator_1_2= '=' | lv_operator_1_3= '?=' ) ) ) ( (lv_terminal_2_0= ruleAssignableTerminal ) ) ) )
@@ -3651,7 +3649,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject this_CrossReference_3 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1577:6: ( (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement | this_CrossReference_3= ruleCrossReference ) )
@@ -3821,7 +3819,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject this_AssignableAlternatives_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1639:6: ( ( '(' this_AssignableAlternatives_1= ruleAssignableAlternatives ')' ) )
@@ -3916,7 +3914,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject lv_elements_3_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1679:6: ( (this_AssignableTerminal_0= ruleAssignableTerminal ( () ( '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )? ) )
@@ -4110,7 +4108,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject lv_terminal_3_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1755:6: ( ( '[' ( (lv_type_1_0= ruleTypeRef ) ) ( '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? ']' ) )
@@ -4287,7 +4285,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject this_RuleCall_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1838:6: ( (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall ) )
@@ -4409,7 +4407,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject this_Alternatives_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1880:6: ( ( '(' this_Alternatives_1= ruleAlternatives ')' ) )
@@ -4505,7 +4503,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject lv_alternatives_5_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1920:6: ( ( 'terminal' ( (lv_name_1_0= RULE_ID ) ) ( 'returns' ( (lv_type_3_0= ruleTypeRef ) ) )? ':' ( (lv_alternatives_5_0= ruleTerminalAlternatives ) ) ';' ) )
@@ -4719,7 +4717,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject lv_elements_3_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2031:6: ( (this_TerminalGroup_0= ruleTerminalGroup ( () ( '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )? ) )
@@ -4913,7 +4911,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject lv_elements_2_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2107:6: ( (this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )? ) )
@@ -5098,7 +5096,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject this_TerminalTokenElement_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2179:6: ( (this_TerminalTokenElement_0= ruleTerminalTokenElement ( ( (lv_cardinality_1_1= '?' | lv_cardinality_1_2= '*' | lv_cardinality_1_3= '+' ) ) )? ) )
@@ -5312,7 +5310,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject this_Wildcard_4 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2271:6: ( (this_CharacterRange_0= ruleCharacterRange | this_RuleCall_1= ruleRuleCall | this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement | this_AbstractNegatedToken_3= ruleAbstractNegatedToken | this_Wildcard_4= ruleWildcard ) )
@@ -5505,7 +5503,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject this_TerminalAlternatives_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2343:6: ( ( '(' this_TerminalAlternatives_1= ruleTerminalAlternatives ')' ) )
@@ -5600,7 +5598,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject this_UntilToken_1 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2383:6: ( (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken ) )
@@ -5722,7 +5720,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject lv_terminal_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2425:6: ( ( '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) ) )
@@ -5836,7 +5834,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject lv_terminal_1_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2476:6: ( ( '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) ) )
@@ -5947,7 +5945,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
     public final EObject ruleWildcard() throws RecognitionException {
         EObject current = null;
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2527:6: ( ( () '.' ) )
@@ -6043,7 +6041,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject lv_right_3_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2565:6: ( (this_Keyword_0= ruleKeyword ( () '..' ( (lv_right_3_0= ruleKeyword ) ) )? ) )
@@ -6209,7 +6207,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject lv_alternatives_5_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2641:6: ( ( 'enum' ( (lv_name_1_0= RULE_ID ) ) ( 'returns' ( (lv_type_3_0= ruleTypeRef ) ) )? ':' ( (lv_alternatives_5_0= ruleEnumLiterals ) ) ';' ) )
@@ -6423,7 +6421,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject lv_elements_3_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2752:6: ( (this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () ( '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )? ) )
@@ -6615,7 +6613,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         EObject lv_literal_2_0 = null;
 
 
-         @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2828:6: ( ( ( ( RULE_ID ) ) ( '=' ( (lv_literal_2_0= ruleKeyword ) ) )? ) )

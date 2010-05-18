@@ -40,7 +40,6 @@ Workflow {
 			uri = "platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext" 
 			fileExtensions="${file.extensions}"
 			fragment = grammarAccess.GrammarAccessFragment {}
-			fragment = parser.PackratParserFragment {}
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 			fragment = XtextAntlrGeneratorFragment {
 				options = {
@@ -66,7 +65,6 @@ Workflow {
 		language = {
 			uri = "platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/common/Terminals.xtext" 
 			fragment = grammarAccess.GrammarAccessFragment {}
-			fragment = parser.PackratParserFragment {}
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 		}
 	}

@@ -12,6 +12,7 @@ import org.eclipse.xtext.services.XtextGrammarAccess;
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class XtextParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
@@ -76,16 +77,14 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Grammar ****************
  *
  * Grammar:
- *   "grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] (","
- *   usedGrammars+=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (
- *   hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
- *   metamodelDeclarations+=AbstractMetamodelDeclaration* rules+=AbstractRule+;
+ * 	"grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)?
+ * 	(definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
+ * 	metamodelDeclarations+=AbstractMetamodelDeclaration* rules+=AbstractRule+;
  *
  **/
 
-// "grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] (","
-// usedGrammars+=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (
-// hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
+// "grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)?
+// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
 // metamodelDeclarations+=AbstractMetamodelDeclaration* rules+=AbstractRule+
 protected class Grammar_Group extends GroupToken {
 	
@@ -170,8 +169,7 @@ protected class Grammar_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID]
-// )*)?
+// ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)?
 protected class Grammar_Group_2 extends GroupToken {
 	
 	public Grammar_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -337,8 +335,7 @@ protected class Grammar_UsedGrammarsAssignment_2_2_1 extends AssignmentToken  {
 
 
 
-// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] (","
-// hiddenTokens+=[AbstractRule])*)? ")")?
+// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
 protected class Grammar_Group_3 extends GroupToken {
 	
 	public Grammar_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -692,11 +689,11 @@ protected class Grammar_RulesAssignment_5 extends AssignmentToken  {
 /************ begin Rule AbstractRule ****************
  *
  * AbstractRule:
- *   ParserRule|TerminalRule|EnumRule;
+ * 	ParserRule | TerminalRule | EnumRule;
  *
  **/
 
-// ParserRule|TerminalRule|EnumRule
+// ParserRule | TerminalRule | EnumRule
 protected class AbstractRule_Alternatives extends AlternativesToken {
 
 	public AbstractRule_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -844,11 +841,11 @@ protected class AbstractRule_EnumRuleParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule AbstractMetamodelDeclaration ****************
  *
  * AbstractMetamodelDeclaration:
- *   GeneratedMetamodel|ReferencedMetamodel;
+ * 	GeneratedMetamodel | ReferencedMetamodel;
  *
  **/
 
-// GeneratedMetamodel|ReferencedMetamodel
+// GeneratedMetamodel | ReferencedMetamodel
 protected class AbstractMetamodelDeclaration_Alternatives extends AlternativesToken {
 
 	public AbstractMetamodelDeclaration_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -959,10 +956,8 @@ protected class AbstractMetamodelDeclaration_ReferencedMetamodelParserRuleCall_1
  *
  * // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
  * // generated metamodels have to have different aliases
- * 
- * 
  * GeneratedMetamodel:
- *   "generate" name=ID ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?;
+ * 	"generate" name=ID ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?;
  *
  **/
 
@@ -1175,10 +1170,8 @@ protected class GeneratedMetamodel_AliasAssignment_3_1 extends AssignmentToken  
  *
  * // referenced metamodels may share aliases with other referenced metamodels
  * // and with generated metamodels
- * 
- * 
  * ReferencedMetamodel:
- *   "import" ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?;
+ * 	"import" ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?;
  *
  **/
 
@@ -1356,15 +1349,13 @@ protected class ReferencedMetamodel_AliasAssignment_2_1 extends AssignmentToken 
 /************ begin Rule ParserRule ****************
  *
  * ParserRule:
- *   name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (
- *   hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":"
- *   alternatives=Alternatives ";";
+ * 	name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] (","
+ * 	hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives ";";
  *
  **/
 
-// name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (
-// hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? ":"
-// alternatives=Alternatives ";"
+// name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] (","
+// hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives ";"
 protected class ParserRule_Group extends GroupToken {
 	
 	public ParserRule_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1517,8 +1508,7 @@ protected class ParserRule_TypeAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] (","
-// hiddenTokens+=[AbstractRule])*)? ")")?
+// (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
 protected class ParserRule_Group_2 extends GroupToken {
 	
 	public ParserRule_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1864,8 +1854,7 @@ protected class ParserRule_SemicolonKeyword_5 extends KeywordToken  {
 /************ begin Rule TypeRef ****************
  *
  * TypeRef:
- *   (metamodel=[AbstractMetamodelDeclaration] "::")? classifier=[ecore::
- *   EClassifier];
+ * 	(metamodel=[AbstractMetamodelDeclaration] "::")? classifier=[ecore::EClassifier];
  *
  **/
 
@@ -2023,13 +2012,11 @@ protected class TypeRef_ClassifierAssignment_1 extends AssignmentToken  {
 /************ begin Rule Alternatives ****************
  *
  * Alternatives returns AbstractElement:
- *   UnorderedGroup ({Alternatives.elements+=current} ("|" elements+=
- *   UnorderedGroup)+)?;
+ * 	UnorderedGroup ({Alternatives.elements+=current} ("|" elements+=UnorderedGroup)+)?;
  *
  **/
 
-// UnorderedGroup ({Alternatives.elements+=current} ("|" elements+=UnorderedGroup)+
-// )?
+// UnorderedGroup ({Alternatives.elements+=current} ("|" elements+=UnorderedGroup)+)?
 protected class Alternatives_Group extends GroupToken {
 	
 	public Alternatives_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2257,7 +2244,7 @@ protected class Alternatives_ElementsAssignment_1_1_1 extends AssignmentToken  {
 /************ begin Rule UnorderedGroup ****************
  *
  * UnorderedGroup returns AbstractElement:
- *   Group ({UnorderedGroup.elements+=current} ("&" elements+=Group)+)?;
+ * 	Group ({UnorderedGroup.elements+=current} ("&" elements+=Group)+)?;
  *
  **/
 
@@ -2489,7 +2476,7 @@ protected class UnorderedGroup_ElementsAssignment_1_1_1 extends AssignmentToken 
 /************ begin Rule Group ****************
  *
  * Group returns AbstractElement:
- *   AbstractToken ({Group.elements+=current} elements+=AbstractToken+)?;
+ * 	AbstractToken ({Group.elements+=current} elements+=AbstractToken+)?;
  *
  **/
 
@@ -2676,11 +2663,11 @@ protected class Group_ElementsAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule AbstractToken ****************
  *
  * AbstractToken returns AbstractElement:
- *   AbstractTokenWithCardinality|Action;
+ * 	AbstractTokenWithCardinality | Action;
  *
  **/
 
-// AbstractTokenWithCardinality|Action
+// AbstractTokenWithCardinality | Action
 protected class AbstractToken_Alternatives extends AlternativesToken {
 
 	public AbstractToken_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2793,11 +2780,11 @@ protected class AbstractToken_ActionParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule AbstractTokenWithCardinality ****************
  *
  * AbstractTokenWithCardinality returns AbstractElement:
- *   (Assignment|AbstractTerminal) cardinality=( "?" | "*" | "+" )?;
+ * 	(Assignment | AbstractTerminal) cardinality=("?" | "*" | "+")?;
  *
  **/
 
-// (Assignment|AbstractTerminal) cardinality=( "?" | "*" | "+" )?
+// (Assignment | AbstractTerminal) cardinality=("?" | "*" | "+")?
 protected class AbstractTokenWithCardinality_Group extends GroupToken {
 	
 	public AbstractTokenWithCardinality_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2833,7 +2820,7 @@ protected class AbstractTokenWithCardinality_Group extends GroupToken {
 
 }
 
-// Assignment|AbstractTerminal
+// Assignment | AbstractTerminal
 protected class AbstractTokenWithCardinality_Alternatives_0 extends AlternativesToken {
 
 	public AbstractTokenWithCardinality_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2927,7 +2914,7 @@ protected class AbstractTokenWithCardinality_AbstractTerminalParserRuleCall_0_1 
 }
 
 
-// cardinality=( "?" | "*" | "+" )?
+// cardinality=("?" | "*" | "+")?
 protected class AbstractTokenWithCardinality_CardinalityAssignment_1 extends AssignmentToken  {
 	
 	public AbstractTokenWithCardinality_CardinalityAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2951,17 +2938,17 @@ protected class AbstractTokenWithCardinality_CardinalityAssignment_1 extends Ass
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("cardinality",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("cardinality");
-		if("?".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityQuestionMarkKeyword_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityQuestionMarkKeyword_1_0_0();
 			return obj;
 		}
-		if("*".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityAsteriskKeyword_1_0_1(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityAsteriskKeyword_1_0_1();
 			return obj;
 		}
-		if("+".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityPlusSignKeyword_1_0_2(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityPlusSignKeyword_1_0_2();
 			return obj;
@@ -2978,11 +2965,11 @@ protected class AbstractTokenWithCardinality_CardinalityAssignment_1 extends Ass
 /************ begin Rule Action ****************
  *
  * Action:
- *   "{" type=TypeRef ("." feature=ID operator=( "=" | "+=" ) "current")? "}";
+ * 	"{" type=TypeRef ("." feature=ID operator=("=" | "+=") "current")? "}";
  *
  **/
 
-// "{" type=TypeRef ("." feature=ID operator=( "=" | "+=" ) "current")? "}"
+// "{" type=TypeRef ("." feature=ID operator=("=" | "+=") "current")? "}"
 protected class Action_Group extends GroupToken {
 	
 	public Action_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3078,7 +3065,7 @@ protected class Action_TypeAssignment_1 extends AssignmentToken  {
 	}	
 }
 
-// ("." feature=ID operator=( "=" | "+=" ) "current")?
+// ("." feature=ID operator=("=" | "+=") "current")?
 protected class Action_Group_2 extends GroupToken {
 	
 	public Action_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3156,7 +3143,7 @@ protected class Action_FeatureAssignment_2_1 extends AssignmentToken  {
 
 }
 
-// operator=( "=" | "+=" )
+// operator=("=" | "+=")
 protected class Action_OperatorAssignment_2_2 extends AssignmentToken  {
 	
 	public Action_OperatorAssignment_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3180,12 +3167,12 @@ protected class Action_OperatorAssignment_2_2 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("operator",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("operator");
-		if("=".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getActionAccess().getOperatorEqualsSignKeyword_2_2_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getActionAccess().getOperatorEqualsSignKeyword_2_2_0_0();
 			return obj;
 		}
-		if("+=".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getActionAccess().getOperatorPlusSignEqualsSignKeyword_2_2_0_1(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getActionAccess().getOperatorPlusSignEqualsSignKeyword_2_2_0_1();
 			return obj;
@@ -3248,11 +3235,11 @@ protected class Action_RightCurlyBracketKeyword_3 extends KeywordToken  {
 /************ begin Rule AbstractTerminal ****************
  *
  * AbstractTerminal returns AbstractElement:
- *   Keyword|RuleCall|ParenthesizedElement;
+ * 	Keyword | RuleCall | ParenthesizedElement;
  *
  **/
 
-// Keyword|RuleCall|ParenthesizedElement
+// Keyword | RuleCall | ParenthesizedElement
 protected class AbstractTerminal_Alternatives extends AlternativesToken {
 
 	public AbstractTerminal_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3402,7 +3389,7 @@ protected class AbstractTerminal_ParenthesizedElementParserRuleCall_2 extends Ru
 /************ begin Rule Keyword ****************
  *
  * Keyword:
- *   value=STRING;
+ * 	value=STRING;
  *
  **/
 
@@ -3447,7 +3434,7 @@ protected class Keyword_ValueAssignment extends AssignmentToken  {
 /************ begin Rule RuleCall ****************
  *
  * RuleCall:
- *   rule=[AbstractRule];
+ * 	rule=[AbstractRule];
  *
  **/
 
@@ -3495,11 +3482,11 @@ protected class RuleCall_RuleAssignment extends AssignmentToken  {
 /************ begin Rule Assignment ****************
  *
  * Assignment:
- *   feature=ID operator=( "+=" | "=" | "?=" ) ^terminal=AssignableTerminal;
+ * 	feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal;
  *
  **/
 
-// feature=ID operator=( "+=" | "=" | "?=" ) ^terminal=AssignableTerminal
+// feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal
 protected class Assignment_Group extends GroupToken {
 	
 	public Assignment_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3561,7 +3548,7 @@ protected class Assignment_FeatureAssignment_0 extends AssignmentToken  {
 
 }
 
-// operator=( "+=" | "=" | "?=" )
+// operator=("+=" | "=" | "?=")
 protected class Assignment_OperatorAssignment_1 extends AssignmentToken  {
 	
 	public Assignment_OperatorAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3585,17 +3572,17 @@ protected class Assignment_OperatorAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("operator",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("operator");
-		if("+=".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getAssignmentAccess().getOperatorPlusSignEqualsSignKeyword_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getAssignmentAccess().getOperatorPlusSignEqualsSignKeyword_1_0_0();
 			return obj;
 		}
-		if("=".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getAssignmentAccess().getOperatorEqualsSignKeyword_1_0_1(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getAssignmentAccess().getOperatorEqualsSignKeyword_1_0_1();
 			return obj;
 		}
-		if("?=".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getAssignmentAccess().getOperatorQuestionMarkEqualsSignKeyword_1_0_2(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getAssignmentAccess().getOperatorQuestionMarkEqualsSignKeyword_1_0_2();
 			return obj;
@@ -3658,11 +3645,11 @@ protected class Assignment_TerminalAssignment_2 extends AssignmentToken  {
 /************ begin Rule AssignableTerminal ****************
  *
  * AssignableTerminal returns AbstractElement:
- *   Keyword|RuleCall|ParenthesizedAssignableElement|CrossReference;
+ * 	Keyword | RuleCall | ParenthesizedAssignableElement | CrossReference;
  *
  **/
 
-// Keyword|RuleCall|ParenthesizedAssignableElement|CrossReference
+// Keyword | RuleCall | ParenthesizedAssignableElement | CrossReference
 protected class AssignableTerminal_Alternatives extends AlternativesToken {
 
 	public AssignableTerminal_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3846,7 +3833,7 @@ protected class AssignableTerminal_CrossReferenceParserRuleCall_3 extends RuleCa
 /************ begin Rule ParenthesizedAssignableElement ****************
  *
  * ParenthesizedAssignableElement returns AbstractElement:
- *   "(" AssignableAlternatives ")";
+ * 	"(" AssignableAlternatives ")";
  *
  **/
 
@@ -3967,13 +3954,11 @@ protected class ParenthesizedAssignableElement_RightParenthesisKeyword_2 extends
 /************ begin Rule AssignableAlternatives ****************
  *
  * AssignableAlternatives returns AbstractElement:
- *   AssignableTerminal ({Alternatives.elements+=current} ("|" elements+=
- *   AssignableTerminal)+)?;
+ * 	AssignableTerminal ({Alternatives.elements+=current} ("|" elements+=AssignableTerminal)+)?;
  *
  **/
 
-// AssignableTerminal ({Alternatives.elements+=current} ("|" elements+=
-// AssignableTerminal)+)?
+// AssignableTerminal ({Alternatives.elements+=current} ("|" elements+=AssignableTerminal)+)?
 protected class AssignableAlternatives_Group extends GroupToken {
 	
 	public AssignableAlternatives_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4198,7 +4183,7 @@ protected class AssignableAlternatives_ElementsAssignment_1_1_1 extends Assignme
 /************ begin Rule CrossReference ****************
  *
  * CrossReference:
- *   "[" type=TypeRef ("|" ^terminal=CrossReferenceableTerminal)? "]";
+ * 	"[" type=TypeRef ("|" ^terminal=CrossReferenceableTerminal)? "]";
  *
  **/
 
@@ -4419,11 +4404,11 @@ protected class CrossReference_RightSquareBracketKeyword_3 extends KeywordToken 
 /************ begin Rule CrossReferenceableTerminal ****************
  *
  * CrossReferenceableTerminal returns AbstractElement:
- *   Keyword|RuleCall;
+ * 	Keyword | RuleCall;
  *
  **/
 
-// Keyword|RuleCall
+// Keyword | RuleCall
 protected class CrossReferenceableTerminal_Alternatives extends AlternativesToken {
 
 	public CrossReferenceableTerminal_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4533,7 +4518,7 @@ protected class CrossReferenceableTerminal_RuleCallParserRuleCall_1 extends Rule
 /************ begin Rule ParenthesizedElement ****************
  *
  * ParenthesizedElement returns AbstractElement:
- *   "(" Alternatives ")";
+ * 	"(" Alternatives ")";
  *
  **/
 
@@ -4657,13 +4642,11 @@ protected class ParenthesizedElement_RightParenthesisKeyword_2 extends KeywordTo
 /************ begin Rule TerminalRule ****************
  *
  * TerminalRule:
- *   "terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=
- *   TerminalAlternatives ";";
+ * 	"terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";";
  *
  **/
 
-// "terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=
-// TerminalAlternatives ";"
+// "terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";"
 protected class TerminalRule_Group extends GroupToken {
 	
 	public TerminalRule_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4936,8 +4919,7 @@ protected class TerminalRule_SemicolonKeyword_5 extends KeywordToken  {
 /************ begin Rule TerminalAlternatives ****************
  *
  * TerminalAlternatives returns AbstractElement:
- *   TerminalGroup ({Alternatives.elements+=current} ("|" elements+=TerminalGroup)
- *   +)?;
+ * 	TerminalGroup ({Alternatives.elements+=current} ("|" elements+=TerminalGroup)+)?;
  *
  **/
 
@@ -5170,7 +5152,7 @@ protected class TerminalAlternatives_ElementsAssignment_1_1_1 extends Assignment
 /************ begin Rule TerminalGroup ****************
  *
  * TerminalGroup returns AbstractElement:
- *   TerminalToken ({Group.elements+=current} elements+=TerminalToken+)?;
+ * 	TerminalToken ({Group.elements+=current} elements+=TerminalToken+)?;
  *
  **/
 
@@ -5358,11 +5340,11 @@ protected class TerminalGroup_ElementsAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule TerminalToken ****************
  *
  * TerminalToken returns AbstractElement:
- *   TerminalTokenElement cardinality=( "?" | "*" | "+" )?;
+ * 	TerminalTokenElement cardinality=("?" | "*" | "+")?;
  *
  **/
 
-// TerminalTokenElement cardinality=( "?" | "*" | "+" )?
+// TerminalTokenElement cardinality=("?" | "*" | "+")?
 protected class TerminalToken_Group extends GroupToken {
 	
 	public TerminalToken_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5433,7 +5415,7 @@ protected class TerminalToken_TerminalTokenElementParserRuleCall_0 extends RuleC
 	}	
 }
 
-// cardinality=( "?" | "*" | "+" )?
+// cardinality=("?" | "*" | "+")?
 protected class TerminalToken_CardinalityAssignment_1 extends AssignmentToken  {
 	
 	public TerminalToken_CardinalityAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5457,17 +5439,17 @@ protected class TerminalToken_CardinalityAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("cardinality",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("cardinality");
-		if("?".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getTerminalTokenAccess().getCardinalityQuestionMarkKeyword_1_0_0(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getTerminalTokenAccess().getCardinalityQuestionMarkKeyword_1_0_0();
 			return obj;
 		}
-		if("*".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getTerminalTokenAccess().getCardinalityAsteriskKeyword_1_0_1(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getTerminalTokenAccess().getCardinalityAsteriskKeyword_1_0_1();
 			return obj;
 		}
-		if("+".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getTerminalTokenAccess().getCardinalityPlusSignKeyword_1_0_2(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getTerminalTokenAccess().getCardinalityPlusSignKeyword_1_0_2();
 			return obj;
@@ -5484,13 +5466,11 @@ protected class TerminalToken_CardinalityAssignment_1 extends AssignmentToken  {
 /************ begin Rule TerminalTokenElement ****************
  *
  * TerminalTokenElement returns AbstractElement:
- *   CharacterRange|RuleCall|ParenthesizedTerminalElement|AbstractNegatedToken|
- *   Wildcard;
+ * 	CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard;
  *
  **/
 
-// CharacterRange|RuleCall|ParenthesizedTerminalElement|AbstractNegatedToken|
-// Wildcard
+// CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard
 protected class TerminalTokenElement_Alternatives extends AlternativesToken {
 
 	public TerminalTokenElement_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5717,7 +5697,7 @@ protected class TerminalTokenElement_WildcardParserRuleCall_4 extends RuleCallTo
 /************ begin Rule ParenthesizedTerminalElement ****************
  *
  * ParenthesizedTerminalElement returns AbstractElement:
- *   "(" TerminalAlternatives ")";
+ * 	"(" TerminalAlternatives ")";
  *
  **/
 
@@ -5842,11 +5822,11 @@ protected class ParenthesizedTerminalElement_RightParenthesisKeyword_2 extends K
 /************ begin Rule AbstractNegatedToken ****************
  *
  * AbstractNegatedToken:
- *   NegatedToken|UntilToken;
+ * 	NegatedToken | UntilToken;
  *
  **/
 
-// NegatedToken|UntilToken
+// NegatedToken | UntilToken
 protected class AbstractNegatedToken_Alternatives extends AlternativesToken {
 
 	public AbstractNegatedToken_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5956,7 +5936,7 @@ protected class AbstractNegatedToken_UntilTokenParserRuleCall_1 extends RuleCall
 /************ begin Rule NegatedToken ****************
  *
  * NegatedToken:
- *   "!" ^terminal=TerminalTokenElement;
+ * 	"!" ^terminal=TerminalTokenElement;
  *
  **/
 
@@ -6063,7 +6043,7 @@ protected class NegatedToken_TerminalAssignment_1 extends AssignmentToken  {
 /************ begin Rule UntilToken ****************
  *
  * UntilToken:
- *   "->" ^terminal=TerminalTokenElement;
+ * 	"->" ^terminal=TerminalTokenElement;
  *
  **/
 
@@ -6170,7 +6150,7 @@ protected class UntilToken_TerminalAssignment_1 extends AssignmentToken  {
 /************ begin Rule Wildcard ****************
  *
  * Wildcard:
- *   {Wildcard} ".";
+ * 	{Wildcard} ".";
  *
  **/
 
@@ -6258,7 +6238,7 @@ protected class Wildcard_FullStopKeyword_1 extends KeywordToken  {
 /************ begin Rule CharacterRange ****************
  *
  * CharacterRange returns AbstractElement:
- *   Keyword ({CharacterRange.left=current} ".." right=Keyword)?;
+ * 	Keyword ({CharacterRange.left=current} ".." right=Keyword)?;
  *
  **/
 
@@ -6463,7 +6443,7 @@ protected class CharacterRange_RightAssignment_1_2 extends AssignmentToken  {
 /************ begin Rule EnumRule ****************
  *
  * EnumRule:
- *   "enum" name=ID ("returns" type=TypeRef)? ":" alternatives=EnumLiterals ";";
+ * 	"enum" name=ID ("returns" type=TypeRef)? ":" alternatives=EnumLiterals ";";
  *
  **/
 
@@ -6740,13 +6720,11 @@ protected class EnumRule_SemicolonKeyword_5 extends KeywordToken  {
 /************ begin Rule EnumLiterals ****************
  *
  * EnumLiterals returns AbstractElement:
- *   EnumLiteralDeclaration ({Alternatives.elements+=current} ("|" elements+=
- *   EnumLiteralDeclaration)+)?;
+ * 	EnumLiteralDeclaration ({Alternatives.elements+=current} ("|" elements+=EnumLiteralDeclaration)+)?;
  *
  **/
 
-// EnumLiteralDeclaration ({Alternatives.elements+=current} ("|" elements+=
-// EnumLiteralDeclaration)+)?
+// EnumLiteralDeclaration ({Alternatives.elements+=current} ("|" elements+=EnumLiteralDeclaration)+)?
 protected class EnumLiterals_Group extends GroupToken {
 	
 	public EnumLiterals_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6971,7 +6949,7 @@ protected class EnumLiterals_ElementsAssignment_1_1_1 extends AssignmentToken  {
 /************ begin Rule EnumLiteralDeclaration ****************
  *
  * EnumLiteralDeclaration:
- *   enumLiteral=[ecore::EEnumLiteral] ("=" literal=Keyword)?;
+ * 	enumLiteral=[ecore::EEnumLiteral] ("=" literal=Keyword)?;
  *
  **/
 

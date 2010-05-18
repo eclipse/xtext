@@ -13,6 +13,7 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.xtext.common.TerminalsRuntimeModule}
  */
+ @SuppressWarnings("all")
 public abstract class AbstractTerminalsRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override
@@ -26,6 +27,7 @@ public abstract class AbstractTerminalsRuntimeModule extends DefaultRuntimeModul
 	protected void bindProperties(Binder binder) {
 		bindProperties(binder, "org/eclipse/xtext/common/Terminals.properties");
 	}
+	
 	
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {

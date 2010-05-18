@@ -84,7 +84,7 @@ entryRuleGrammar returns [EObject current=null]
 
 // Rule Grammar
 ruleGrammar returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -327,7 +327,7 @@ entryRuleAbstractRule returns [EObject current=null]
 
 // Rule AbstractRule
 ruleAbstractRule returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -379,7 +379,7 @@ entryRuleAbstractMetamodelDeclaration returns [EObject current=null]
 
 // Rule AbstractMetamodelDeclaration
 ruleAbstractMetamodelDeclaration returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -421,7 +421,7 @@ entryRuleGeneratedMetamodel returns [EObject current=null]
 
 // Rule GeneratedMetamodel
 ruleGeneratedMetamodel returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -514,7 +514,7 @@ entryRuleReferencedMetamodel returns [EObject current=null]
 
 // Rule ReferencedMetamodel
 ruleReferencedMetamodel returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -583,7 +583,7 @@ entryRuleParserRule returns [EObject current=null]
 
 // Rule ParserRule
 ruleParserRule returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -751,7 +751,7 @@ entryRuleTypeRef returns [EObject current=null]
 
 // Rule TypeRef
 ruleTypeRef returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -806,7 +806,7 @@ entryRuleAlternatives returns [EObject current=null]
 
 // Rule Alternatives
 ruleAlternatives returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -882,7 +882,7 @@ entryRuleUnorderedGroup returns [EObject current=null]
 
 // Rule UnorderedGroup
 ruleUnorderedGroup returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -958,7 +958,7 @@ entryRuleGroup returns [EObject current=null]
 
 // Rule Group
 ruleGroup returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1030,7 +1030,7 @@ entryRuleAbstractToken returns [EObject current=null]
 
 // Rule AbstractToken
 ruleAbstractToken returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1072,7 +1072,7 @@ entryRuleAbstractTokenWithCardinality returns [EObject current=null]
 
 // Rule AbstractTokenWithCardinality
 ruleAbstractTokenWithCardinality returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1174,7 +1174,7 @@ entryRuleAction returns [EObject current=null]
 
 // Rule Action
 ruleAction returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1303,7 +1303,7 @@ entryRuleAbstractTerminal returns [EObject current=null]
 
 // Rule AbstractTerminal
 ruleAbstractTerminal returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1355,7 +1355,7 @@ entryRuleKeyword returns [EObject current=null]
 
 // Rule Keyword
 ruleKeyword returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1402,7 +1402,7 @@ entryRuleRuleCall returns [EObject current=null]
 
 // Rule RuleCall
 ruleRuleCall returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1439,7 +1439,7 @@ entryRuleAssignment returns [EObject current=null]
 
 // Rule Assignment
 ruleAssignment returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1570,7 +1570,7 @@ entryRuleAssignableTerminal returns [EObject current=null]
 
 // Rule AssignableTerminal
 ruleAssignableTerminal returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1632,7 +1632,7 @@ entryRuleParenthesizedAssignableElement returns [EObject current=null]
 
 // Rule ParenthesizedAssignableElement
 ruleParenthesizedAssignableElement returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1672,7 +1672,7 @@ entryRuleAssignableAlternatives returns [EObject current=null]
 
 // Rule AssignableAlternatives
 ruleAssignableAlternatives returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1748,7 +1748,7 @@ entryRuleCrossReference returns [EObject current=null]
 
 // Rule CrossReference
 ruleCrossReference returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1831,7 +1831,7 @@ entryRuleCrossReferenceableTerminal returns [EObject current=null]
 
 // Rule CrossReferenceableTerminal
 ruleCrossReferenceableTerminal returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1873,7 +1873,7 @@ entryRuleParenthesizedElement returns [EObject current=null]
 
 // Rule ParenthesizedElement
 ruleParenthesizedElement returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1913,7 +1913,7 @@ entryRuleTerminalRule returns [EObject current=null]
 
 // Rule TerminalRule
 ruleTerminalRule returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2024,7 +2024,7 @@ entryRuleTerminalAlternatives returns [EObject current=null]
 
 // Rule TerminalAlternatives
 ruleTerminalAlternatives returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2100,7 +2100,7 @@ entryRuleTerminalGroup returns [EObject current=null]
 
 // Rule TerminalGroup
 ruleTerminalGroup returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2172,7 +2172,7 @@ entryRuleTerminalToken returns [EObject current=null]
 
 // Rule TerminalToken
 ruleTerminalToken returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2264,7 +2264,7 @@ entryRuleTerminalTokenElement returns [EObject current=null]
 
 // Rule TerminalTokenElement
 ruleTerminalTokenElement returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2336,7 +2336,7 @@ entryRuleParenthesizedTerminalElement returns [EObject current=null]
 
 // Rule ParenthesizedTerminalElement
 ruleParenthesizedTerminalElement returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2376,7 +2376,7 @@ entryRuleAbstractNegatedToken returns [EObject current=null]
 
 // Rule AbstractNegatedToken
 ruleAbstractNegatedToken returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2418,7 +2418,7 @@ entryRuleNegatedToken returns [EObject current=null]
 
 // Rule NegatedToken
 ruleNegatedToken returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2469,7 +2469,7 @@ entryRuleUntilToken returns [EObject current=null]
 
 // Rule UntilToken
 ruleUntilToken returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2520,7 +2520,7 @@ entryRuleWildcard returns [EObject current=null]
 
 // Rule Wildcard
 ruleWildcard returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2558,7 +2558,7 @@ entryRuleCharacterRange returns [EObject current=null]
 
 // Rule CharacterRange
 ruleCharacterRange returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2634,7 +2634,7 @@ entryRuleEnumRule returns [EObject current=null]
 
 // Rule EnumRule
 ruleEnumRule returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2745,7 +2745,7 @@ entryRuleEnumLiterals returns [EObject current=null]
 
 // Rule EnumLiterals
 ruleEnumLiterals returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -2821,7 +2821,7 @@ entryRuleEnumLiteralDeclaration returns [EObject current=null]
 
 // Rule EnumLiteralDeclaration
 ruleEnumLiteralDeclaration returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
