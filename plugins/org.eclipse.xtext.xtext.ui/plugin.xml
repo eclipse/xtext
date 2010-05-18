@@ -232,7 +232,6 @@
 		pathUiProject = "${runtimeProject}.ui"
 		projectNameRt = projectName
 		projectNameUi = "${projectName}.ui"
-
 		language = {
 			uri = grammarURI
 			fileExtensions = file.extensions
@@ -242,7 +241,7 @@
 
 			// generates Java API for the generated EPackages 
 			fragment = ecore.EcoreGeneratorFragment {
-//				referencedGenModels = "uri to genmodel, uri to next genmodel"
+			// referencedGenModels = "uri to genmodel, uri to next genmodel"
 			}
 
 			// the serialization component
@@ -252,32 +251,30 @@
 			fragment = resourceFactory.ResourceFactoryFragment {
 				fileExtensions = file.extensions
 			}
-				
-			/* 
-			 * The antlr parser generator fragment.
-			 * If you don't already have it get it from http://download.itemis.com/updates/
-			 */ 
+
+			// The antlr parser generator fragment.
+			// If you don't already have it get it from http://download.itemis.com/updates/
 			fragment = de.itemis.xtext.antlr.XtextAntlrGeneratorFragment {
-//				options = {
-//					backtrack = true
-//				}
+			//  options = {
+			//		backtrack = true
+			//	}
 			}
 
 			// java-based API for validation 
 			fragment = validation.JavaValidatorFragment {
 				composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
 				composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
-//				registerForImportedPackages = true
+				// registerForImportedPackages = true
 			}
-            
+
 			// scoping and exporting API
-//			fragment = scoping.ImportURIScopingFragment {}
-//			fragment = exporting.SimpleNamesFragment {}
+			// fragment = scoping.ImportURIScopingFragment {}
+			// fragment = exporting.SimpleNamesFragment {}
 
 			// scoping and exporting API 
 			fragment = scoping.ImportNamespacesScopingFragment {}
 			fragment = exporting.QualifiedNamesFragment {}
-			fragment = builder.BuilderIntegrationFragment {}	
+			fragment = builder.BuilderIntegrationFragment {}
 
 			// formatter API 
 			fragment = formatting.FormatterFragment {}
@@ -297,13 +294,13 @@
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
 
 			// generates a more lightweight Antlr parser and lexer for tailored content assist  
-			fragment =  de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment {}
+			fragment = de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment {}
 
 			// project wizard (optional) 
-//			fragment = projectWizard.SimpleProjectWizardFragment {
-//				generatorProjectName = "${projectName}.generator" 
-//				modelFileExtension = file.extensions
-//			}
+			// fragment = projectWizard.SimpleProjectWizardFragment {
+			// 		generatorProjectName = "${projectName}.generator" 
+			//		modelFileExtension = file.extensions
+			// }
 		}
 	}]]>
          </MweSnippet>

@@ -17,44 +17,43 @@ var projectName = "org.eclipse.xtext.example.domainmodel"
 var runtimeProject = "../${projectName}"
 
 Workflow {
-	
+
 	bean = StandaloneSetup {
 		platformUri = "${runtimeProject}/.."
 	}
-	
+
 	component = DirectoryCleaner {
 		directory = "${runtimeProject}/src-gen"
 	}
-	
+
 	component = DirectoryCleaner {
 		directory = "${runtimeProject}.ui/src-gen"
 	}
-	
+
 	component = Generator {
 		pathRtProject = runtimeProject
 		pathUiProject = "${runtimeProject}.ui"
 		projectNameRt = projectName
 		projectNameUi = "${projectName}.ui"
 		activator = "org.eclipse.xtext.example.ui.internal.DomainmodelActivator"
-		
 		language = {
 			uri = grammarURI
 			fileExtensions = file.extensions
 
 			// Java API to access grammar elements (required by several other fragments)
 			fragment = grammarAccess.GrammarAccessFragment {}
-			
+
 			// Generate java classes for Ecore models
 			fragment = ecore.EcoreGeneratorFragment {}
-			
+
 			// the serialization component
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
-			
+
 			// a custom ResourceFactory for use with EMF 
 			fragment = resourceFactory.ResourceFactoryFragment {
 				fileExtensions = file.extensions
 			}
-				
+
 			// the following fragment tries to use the Antlr Generator fragment which can be installed via update manager from http://download.itemis.com/updates/ -->
 			fragment = de.itemis.xtext.antlr.XtextAntlrGeneratorFragment {
 				options = {
@@ -62,20 +61,20 @@ Workflow {
 					classSplitting = true
 				}
 			}
-			
+
 			// java-based API for validation 
 			fragment = validation.JavaValidatorFragment {}
-            
+
 			// scoping API 
 			fragment = scoping.ImportNamespacesScopingFragment {}
 			fragment = exporting.QualifiedNamesFragment {}
-			
+
 			// formatter API 
 			fragment = formatting.FormatterFragment {}
 
 			// labeling API 
 			fragment = labeling.LabelProviderFragment {}
-			
+
 			// outline API
 			fragment = outline.OutlineNodeAdapterFactoryFragment {}
 			fragment = outline.TransformerFragment {}
@@ -83,7 +82,7 @@ Workflow {
 
 			// java-based API for content assistance 
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			fragment = de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment { 
+			fragment = de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment {
 				options = {
 					backtrack = true
 					classSplitting = true
@@ -93,7 +92,7 @@ Workflow {
 			fragment = builder.BuilderIntegrationFragment {}
 
 			// quickfix API 
-			fragment = quickfix.QuickfixProviderFragment {}			
+			fragment = quickfix.QuickfixProviderFragment {}
 		}
 	}
 }
