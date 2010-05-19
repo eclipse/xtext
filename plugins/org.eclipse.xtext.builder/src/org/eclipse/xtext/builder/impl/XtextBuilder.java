@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
 import com.google.common.collect.ImmutableList;
@@ -39,7 +40,7 @@ import com.google.inject.Inject;
 public class XtextBuilder extends IncrementalProjectBuilder {
 	public static Logger log = Logger.getLogger(XtextBuilder.class);
 
-	public static final String BUILDER_ID = "org.eclipse.xtext.ui.shared.xtextBuilder";
+	public static final String BUILDER_ID = XtextProjectHelper.BUILDER_ID;
 
 	@Inject
 	private ToBeBuiltComputer toBeBuiltComputer;

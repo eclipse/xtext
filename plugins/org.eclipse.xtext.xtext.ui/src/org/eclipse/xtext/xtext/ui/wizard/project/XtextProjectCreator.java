@@ -62,7 +62,8 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	protected static final String[] BUILDERS = new String[]{
 			JavaCore.BUILDER_ID, 
 			"org.eclipse.pde.ManifestBuilder", //$NON-NLS-1$
-			"org.eclipse.pde.SchemaBuilder" //$NON-NLS-1$
+			"org.eclipse.pde.SchemaBuilder", //$NON-NLS-1$
+			XtextProjectHelper.BUILDER_ID
 	};
 
 	protected static final String[] GENERATOR_PROJECT_NATURES = DSL_UI_PROJECT_NATURES;

@@ -108,12 +108,15 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 			Iterator<Annotation> iterator = model.getAnnotationIterator();
 			boolean hasWarnings = false;
 			while (iterator.hasNext()) {
-				Issue issue = issueUtil.getIssueFromAnnotation(iterator.next());
-				if (issue != null) {
-					if (issue.getSeverity() == Severity.ERROR) {
-						return Severity.ERROR;
-					} else if (issue.getSeverity() == Severity.WARNING) {
-						hasWarnings = true;
+				Annotation annotation = iterator.next();
+				if (!annotation.isMarkedDeleted()) {
+					Issue issue = issueUtil.getIssueFromAnnotation(annotation);
+					if (issue != null) {
+						if (issue.getSeverity() == Severity.ERROR) {
+							return Severity.ERROR;
+						} else if (issue.getSeverity() == Severity.WARNING) {
+							hasWarnings = true;
+						}
 					}
 				}
 			}
