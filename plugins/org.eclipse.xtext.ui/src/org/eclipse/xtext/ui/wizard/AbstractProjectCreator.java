@@ -146,9 +146,10 @@ public abstract class AbstractProjectCreator extends WorkspaceModifyOperation im
     
     protected String[] getBuilders() {
     	return new String[]{
-			"org.eclipse.jdt.core.javabuilder", 
+    		JavaCore.BUILDER_ID,
 			"org.eclipse.pde.ManifestBuilder", 
-			"org.eclipse.pde.SchemaBuilder"
+			"org.eclipse.pde.SchemaBuilder",
+			XtextProjectHelper.BUILDER_ID
 		};
 	}
     
