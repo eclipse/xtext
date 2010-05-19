@@ -312,10 +312,12 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 		getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
 			public void process(XtextResource resource) throws Exception {
-				Point selection = getSourceViewer().getTextWidget().getSelection();
-				EObject eObject = EObjectAtOffsetHelper.resolveContainedElementAt(resource, selection.x,
-						new TextLocation());
-				synchronizeOutlinePage(eObject);
+				if (resource != null) {
+					Point selection = getSourceViewer().getTextWidget().getSelection();
+					EObject eObject = EObjectAtOffsetHelper.resolveContainedElementAt(resource, selection.x,
+							new TextLocation());
+					synchronizeOutlinePage(eObject);
+				}
 			}
 		});
 	}
