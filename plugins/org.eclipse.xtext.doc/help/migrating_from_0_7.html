@@ -7,16 +7,25 @@
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="index.html" title="Xtext User Guide">
 <link rel="prev" href="MigrationSupport.html" title="Migration Support">
-<link rel="next" href="Gothehardway....html" title="Go the hard way...">
+<link rel="next" href="MigratingStepByStep.html" title="Migrating Step By Step">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Migrating from TMF Xtext 0.7.x</h1>
-<div class="section" title="Take the shortcut?">
+<p>Most of the tasks when migrating to Xtext 1.0 can be automated. Some changes will be necessary in the manually written code where you have to carefully
+			verify that your implemention is still working with Xtext 1.0. A relyable test-suite helps a lot. </p>
+<p>The grammar language is fully backward compatible. You should not have to apply any changes in the primary artifact. However, we introduced some additional
+			validation rules that mark inconsistencies in your grammar. If you get any warnings in the grammar editor, it should be straight forward to fix them.</p>
+<p>
+			
+<span class="emphasis"><em>Tip: You&rsquo;ll learn something about the new features if you compare a freshly created Xtext project based on 0.7.x with a new Xtext project based on 1.0. Especially the new fragments in the workflow are a good indicator for useful new features.</em></span> 
+		
+</p>
+<div class="section" title="Take the Shortcut">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title" style="clear: both">
-<a name="Taketheshortcut"></a>Take the shortcut?</h2>
+<a name="TaketheShortcut"></a>Take the Shortcut</h2>
 </div>
 </div>
 </div>

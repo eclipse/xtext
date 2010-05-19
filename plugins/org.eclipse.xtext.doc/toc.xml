@@ -251,13 +251,13 @@
 <topic href="help/MigrationSupport.html" label="Migration Support"></topic>
 </topic>
 <topic href="help/migrating_from_0_7.html" label="Migrating from TMF Xtext 0.7.x">
-<topic href="help/migrating_from_0_7.html#Taketheshortcut" label="Take the shortcut?"></topic>
-<topic href="help/Gothehardway....html" label="Go the hard way...">
-<topic href="help/Gothehardway....html#Changesinthegrammar" label="Changes in the grammar"></topic>
-<topic href="help/Gothehardway....html#Changesintheworkflow" label="Changes in the workflow"></topic>
-<topic href="help/Gothehardway....html#Changesinthegeneratedcode" label="Changes in the generated code"></topic>
-<topic href="help/Gothehardway....html#ChangesintheMANIFEST.MFandplugin.xml" label="Changes in the MANIFEST.MF and plugin.xml"></topic>
-<topic href="help/Gothehardway....html#Changesinthesrcfolders" label="Changes in the src folders"></topic>
+<topic href="help/migrating_from_0_7.html#TaketheShortcut" label="Take the Shortcut"></topic>
+<topic href="help/MigratingStepByStep.html" label="Migrating Step By Step">
+<topic href="help/MigratingStepByStep.html#UpdatethePluginDependenciesandImportStatements" label="Update the Plug-in Dependencies and Import Statements"></topic>
+<topic href="help/MigratingStepByStep.html#RenamethePackagesinthedsl.uiPlugin" label="Rename the Packages in the dsl.ui-Plug-in"></topic>
+<topic href="help/MigratingStepByStep.html#UpdatetheWorkflow" label="Update the Workflow"></topic>
+<topic href="help/MigratingStepByStep.html#MANIFEST.MFandplugin.xml" label="MANIFEST.MF and plugin.xml"></topic>
+<topic href="help/MigratingStepByStep.html#NoteworthyAPIchanges" label="Noteworthy API changes"></topic>
 </topic>
 <topic href="help/Nowgoforthenewfeatures.html" label="Now go for the new features"></topic>
 </topic>

@@ -1,57 +1,92 @@
-
 h1(#migrating_from_0_7). Migrating from TMF Xtext 0.7.x
 
-h2. Take the shortcut?
+Most of the tasks when migrating to Xtext 1.0 can be automated. Some changes will be necessary in the manually written code where you have to carefully
+verify that your implemention is still working with Xtext 1.0. A relyable test-suite helps a lot. 
+
+The grammar language is fully backward compatible. You should not have to apply any changes in the primary artifact. However, we introduced some additional
+validation rules that mark inconsistencies in your grammar. If you get any warnings in the grammar editor, it should be straight forward to fix them.
+
+_Tip: You'll learn something about the new features if you compare a freshly created Xtext project based on 0.7.x with a new Xtext project based on 1.0. Especially the new fragments in the workflow are a good indicator for useful new features._ 
+
+h2. Take the Shortcut
 
 If you haven't made too many customizations to the generated defaults and if you're not referencing many classes of your Xtext language from the outside, you might consider starting with a new Xtext project, copying your grammar and then manually restoring your changes step by step. If that does not work for you, go on reading!
 
-h2. Go the hard way...
+h2. Migrating Step By Step
 
-h3. Changes in the grammar
+Before you start the migration to Xtext 1.0, you should make sure that no old plug-ins are in your target platform. Some plug-ins from Xtext 0.7.x have been merged and 
+do no longer exist. 
 
-The grammar language is fully backward compatible. You should not have to apply any changes here. 
+_Tip: The following steps try to use the Eclipse compiler to spot any source-incompatible changes while fixing them with only a few well described user actions. Doing these steps in another order causes most likely a higher effort._
 
-h3. Changes in the workflow
+h3. Update the Plug-in Dependencies and Import Statements
 
-Xtext 1.0 introduces MWE2 to describe the workflow to build the Xtext infrastructure. MWE2 is a domain-specific language developed with Xtext that completely replaces the original XML based MWE and offers far better tooling. MWE workflows will still work but are considered legacy. For a more detailed description see the "section on MWE2":#MWE2.
+You should update the constraints from version @0.7.x@ to @[1.0.0,2.0.0)@ in your manifest files if you specified any concrete versions.
+Make sure that your @dsl.ui@-projects do not refer to the plug-in @org.eclipse.xtext.ui.common@ or @org.eclipse.xtext.ui.core@ but to @org.eclipse.xtext.ui@ instead. The arguably easiest way is a global text-based search and replace across the manifest files. The bundle @org.eclipse.xtext.log4j@ is obsolete as well. The generator will create @import-package@ entries in the manifests later on.
+ 
+p. The next step is to fix the import statements in your classes to match the refactored naming scheme in Xtext. Perform a global search for "@import org.eclipse.xtext.ui.common.@" and 
+"@import org.eclipse.xtext.ui.core.@" and replace the matches with "@import org.eclipse.xtext.ui.@". This fixes most of the problems in the manually written code. 
 
-The following generator fragments have changed:
-* The packrat parser has been abandoned. Please use the AntLR parser now. With that change, the generator fragments @AntlrDelegatingFragment@,  @DelegatingGeneratorFragment@, and @PackratParserFragment@ have vanished and should be replaced by @de.itemis.xtext.antlr.XtextAntlrGeneratorFragment@.
-* The @JavaScopingFragment@ should be replaced by @ImportURIScopingFragment@. 
+h3. Rename the Packages in the dsl.ui-Plug-in
 
-h3. Changes in the generated code 
+We changed the naming pattern for artifacts in the @dsl.ui@-plug-in to match the OSGI conventions. The easiest way to update your existing projects is to apply a 
+"Rename Package" refactoring on the packages in the @src@- and @src-gen@ folder *before* you re-run the workflow that regenerates your language. Make sure you ticked "Rename sub-packages" in the dialog. It is error-prone to enable the search in non-java files as this will perform incompatible changes in the manifest files. Furthermore, it is important to perform the rename operation in the @src-gen@ folder, too. This ensures that the references in your manually written code are properly updated.
 
-After adapting your workflow, you must rerun the code generator. Note that it will delete all existing code in @src-gen@ folders, so make sure you haven't got any manual changes there. 
+h3. Update the Workflow
 
-We have appended @.ui@ to the name of the base package in the generated UI plug-in to comply with Eclipse naming conventions. The initial package's content in the @src@ folder will therefore coexist with the newer version. Even though that was not the primary purpose, this can help you copying your manual customizations one by one. Don't forget to delete the old packages when you're finished. This package renaming has consequences in the UI plug-ins @MANIFEST.MF@ and @plugin.xml@, too. 
+The @JavaScopingFragment@ does no longer exist. It has been superseded by the @ImportURIScopingFragment@ in combination with the @SimpleNamesFragment@.
+Please replace  
 
-h3. Changes in the MANIFEST.MF and plugin.xml
+bc.. <fragment class="org.eclipse.xtext.generator.scoping.JavaScopingFragment"/>
+p. with
+
+bc.. <fragment class="org.eclipse.xtext.generator.scoping.ImportURIScopingFragment"/>
+<fragment class="org.eclipse.xtext.generator.exporting.SimpleNamesFragment"/>
+
+p. The @PackratParserFragment@ has been abandoned as well. It is save to remove the reference to that one if it is activated in your workflow. After you've changed your workflow, it should be possible to regenerate your language without any errors in the console. It is ok to have compilation errors prior to executing the workflow.
+
+h3. MANIFEST.MF and plugin.xml
+
+The previous rename package refactoring updated most of the entries in the @MANIFEST.MF@ and and some entries in the @plugin.xml@. Others have to be fixed manually. The Eclipse compiler will point to many of the remaining problems in the manifest files but it is unlikely that it will spot the erroneous references in the @plugin.xml@.
 
 * In the generated UI plug-in's @MANIFEST.MF@, remove the package exports of no longer existing packages and make sure the bundle activator points to the newly generated one (with @.ui.@ in its package name).  
-* The plug-ins @org.eclipse.xtext.ui.core@ and @org.eclipse.xtext.ui.common@ have been merged into a new single plug-in @org.eclipse.xtext.ui@. The same happened to the respective Java packages. Change the dependencies in all manifests. 
+* It was already mentioned that the plug-ins @org.eclipse.xtext.ui.core@ and @org.eclipse.xtext.ui.common@ have been merged into a new single plug-in @org.eclipse.xtext.ui@. The same happened to the respective Java packages. Change eventually remaining bundle-dependencies in all manifests. 
 * The plug-in @org.eclipse.xtext.log4j@ no longer exists. We use a package import of @org.apache.log4j@ instead. Also remove the buddy registration. 
-* To run MWE2 workflows, you must change the plug-in dependencies from @org.eclipse.emf.mwe.core@ to @org.eclipse.emf.mwe2.launch@. Optional resolution is fine.
-* Due package renamings, you have to fix all references to classes therein in the @plugin.xml@. A diff with  @plugin.xml_gen@ will be a great help. If you haven't added a lot manually, consider merging these into the generated version instead of going the other way around. Note that warnings in @plugin.xml@ can be considered real errors most of the time. Make sure
-** the @XExecutableExtensionFactory@ has the @.ui.@ package prefix
-** classes from @org.eclipse.xtext.ui.common@ and @org.eclipse.xtext.ui.core@ are now usually somewhere in @org.eclipse.xtext.ui@. The are also referenced by the @XExecutableExtensionFactory@ and thus not covered by the editor's validation. 
+* Due to renamed packages, you have to fix all references to classes therein in the @plugin.xml@. A diff with the @plugin.xml_gen@ will be a great help. If you haven't added a lot manually, consider merging these into the generated version instead of going the other way around. Note that warnings in the @plugin.xml@ can be considered to be real errors most of the time. Make sure
+** the @<MyDsl>ExecutableExtensionFactory@ has the @.ui.@ package prefix
+** classes from @org.eclipse.xtext.ui.common@ and @org.eclipse.xtext.ui.core@ are now usually somewhere in @org.eclipse.xtext.ui@. They are also referenced by the @<MyDsl>ExecutableExtensionFactory@ and thus not covered by the editor's validation. 
 * A number of new features are being registered in the @plugin.xml@, e.g. _Find references_, _Quick Outline_, and _Quickfixes_. You can enable them by manually copying the respective entries from @plugin.xml_gen@ to  @plugin.xml@.
+* To run MWE2 workflows later on, you must change the plug-in dependencies from @org.eclipse.emf.mwe.core@ to @org.eclipse.emf.mwe2.launch@ in your manifest. Optional resolution is fine.
 
-h3. Changes in the src folders 
+h3. Noteworthy API changes 
 
-The @src@ folders are generated once, so existing code will not be overwritten. 
+The @src@ folders are generated once, so existing code will not be overwritten but has to be updated manually. At least one new class has appeared in your @src@-folder of the @ui@ plug-in. there will now be a @<MyDsl>StandaloneSetup@ inheriting form the generated @<MyDsl>StandaloneSetupGenerated@ to allow customization.
 
-* After re-generation, there will now be a @XStandaloneSetup@ inheriting form the generated @AbstractXStandaloneSetup@ to allow customization. Make sure to call the super constructor.
-
-You will face a couple of compilation problems due to changes in the API. Here's a list of the most prominent changes:
-* The method @IScopeProvider.getScope(EObject,EClass)@ has been deleted. Use  @IScopeProvider.getScope(EObject,EReference)@ instead. 
-* Renamed @DefaultScopeProvider@ to @SimpleNameScopeProvider@. There have been further significant changes in the scoping API. Consult the "section on scoping":#scoping for details.
-* The return type of @AbstractInjectableValidator.getEPackages()@ has changed form @List<? extends EPackage>@ to @List<EPackage>@.
-* The parser interfaces now use @java.io.Reader@ instead of @java.io.InputStream@ to explicitly address encoding.
-* The handling of @ILabelProvider@ in various contexts has been refactored. The former base class @DefaultLabelProvider@ no longer exists. See the "section on label providers":#labelProvider for details. 
+You will face a couple of compilation problems due to changes in the API. Here's a list of the most prominent changes. It is usually only necessary to change your code, if you face any compilation problems.
+* The method @IScopeProvider.getScope(EObject,EClass)@ has been removed. Use  @IScopeProvider.getScope(EObject,EReference)@ instead. 
+* Renamed @DefaultScopeProvider@ to @SimpleNameScopeProvider@. There have been further significant changes in the scoping API that allow for optimized implementations. Consult the "section on scoping":#scoping for details.
+* The return type of @AbstractInjectableValidator.getEPackages()@ was changed from @List<? extends EPackage>@ to @List<EPackage>@.
+* The parser interfaces now use @java.io.Reader@ instead of @java.io.InputStream@ to explicitly address encoding. Have a look at the @IEncodingProvider@ for details.
+* The handling of @ILabelProvider@ in various contexts has been refactored. The former base class @DefaultLabelProvider@ no longer exists. Use the @DefaultEObjectLabelProvider@ instead. See the "section on label providers":#labelProvider for details. 
 * We have introduced a couple of new packages to better separate concerns. Most classes should be easy to relocate. 
-* The runtime and UI modules have separate base classes @DefaultRuntimeModule@ and @DefaultUiModule@ now. We use Guice's module overrides to combine them and the new @SharedModule@.  
-* The interfaces @ILexicalHighlightigConfiguration@ and @ISemanticHighlightingConfiguration@ have been merged into @IHighlightingConfiguration@. 
-* Some more interfaces have changed, e.g. @IFragmentProvider@, @ITransientValueService@... Their JavaDocs will point you into the right direction. 
+* The runtime and UI modules have separate base classes @DefaultRuntimeModule@ and @DefaultUiModule@ now. We use Guice's module overrides to combine them with the newly introduced @SharedModule@.  You have to add a constructor the your @<MyDsl>UiModule@ that takes an @AbstractUiPlugin@ as argument and pass that one to the super constructor. _Tip: There is an Eclipse quick-fix available for that one._
+* The interfaces @ILexicalHighlightigConfiguration@ and @ISemanticHighlightingConfiguration@ have been merged into @IHighlightingConfiguration@.
+* The @DefaultTemplateProposalProvider@ takes an additional, injectable constructor parameter of type @ContextTypeIdHelper@.
+* The @HyperlinkHelper@ uses field injection instead of constructor injection. The method @createHyperlinksByOffset@ should be overridden instead of the former @findCrossLinkedEObject@.
+* The API to skip a node in the outline has changed. Instead of returning the @HIDDEN_NODE@ you'll have to implement @boolean consumeNode(MyType)@ and return @false@.
+* The @Readonly*Storage@ implementations have been removed. There is a new API to open editors for objects with a given URI. Please use the @IURIEditorOpener@ to create an editor or the @IStorage2UriMapper@ to obtain an @IStorage@ for a given URI.
+* The interfaces @IStateAccess@ and @IEObjectHandle@ have been moved along with the @IUnitOfWork@ to the package @org.eclipse.xtext.util.concurrent@.
+* The @ValidationJobFactory@ is gone. Please implement a custom @IResourceValidator@ instead.
+* The grammar elements @Alternatives@ and @Group@ have a new common super type @CompoundElement@. The methods @getGroups@ and @getTokens@ have been refactored to @getElements@.
+* Completion proposals take a @StyledString@ instead of a plain string as display string.
+* The AbstractLabelProvider does no longer expose its @IImageHelper@. Use @convertToImage@ instead or inject your own @IImageHelper@.
+* The implementation-classes from @org.eclipse.xtext.index@ were superseded by the builder infrastructure. Use the @QualifiedNamesFragment@ and the @ImportNamespacesScopingFragment@ instead of the @ImportedNamespacesScopingFragment@. Please refer to the section about the builder infrastructure for details.
+* All the Xtend based fragments were removed. 
+* @ILinkingService.getLinkText@ was removed. Have a look at the @LinkingHelper@ and the @CrossReferenceSerializer@ if you relied on this method.
+* The @SerializerUtil@ was renamed to @Serializer@. There were other heavy refactorings that involved the serializer and its components (like e.g. the @ITransientValueService@) but it should be pretty straight forward to migrate existing client code.
+* The method-signatures of the @IFragmentProvider@ have changed. The documentation will give a clue on how to update existing implementations.
+* Some static methods were removed from utility classes such as @EcoreUtil2@ and @ParsetreeUtil@ in favor of more sophisticated implementations.
+
 
 h2. Now go for the new features
 
