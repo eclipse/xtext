@@ -30,7 +30,6 @@ import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
  */
 public abstract class AbstractDeclarativeValueConverterService extends AbstractValueConverterService {
 
@@ -82,7 +81,7 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 			if (isConfigurationMethod(method)) {
 				try {
 					String ruleName = method.getAnnotation(ValueConverter.class).rule();
-					AbstractRule rule = GrammarUtil.findRuleForName(grammar, ruleName);
+					AbstractRule rule = GrammarUtil.findRuleForName(getGrammar(), ruleName);
 					if (rule != null) {
 						IValueConverter<Object> valueConverter = (IValueConverter<Object>) method.invoke(this);
 						if (valueConverter instanceof IValueConverter.RuleSpecific)
