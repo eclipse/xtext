@@ -72,38 +72,5 @@ public class XtextUIMessages extends NLS {
 	 */
 	public static String AbstractHover_MultipleMarkers;
 
-	/**
-	 * messages for tasktag preferences page
-	 */
-	public static String TodoTaskPreferencePage_title;
-	public static String TaskTagPreferencePage_description;
-	public static String TaskTagConfigurationBlock_markers_tasks_high_priority;
-	public static String TaskTagConfigurationBlock_markers_tasks_normal_priority;
-	public static String TaskTagConfigurationBlock_markers_tasks_low_priority;
-	public static String TaskTagConfigurationBlock_markers_tasks_add_button;
-	public static String TaskTagConfigurationBlock_markers_tasks_remove_button;
-	public static String TaskTagConfigurationBlock_markers_tasks_edit_button;
-	public static String TaskTagConfigurationBlock_markers_tasks_name_column;
-	public static String TaskTagConfigurationBlock_markers_tasks_priority_column;
-	public static String TaskTagConfigurationBlock_markers_tasks_setdefault_button;
-	public static String TaskTagConfigurationBlock_casesensitive_label;
-	public static String TaskTagConfigurationBlock_needsbuild_title;
-	public static String TaskTagConfigurationBlock_tasks_default;
-	public static String TaskTagConfigurationBlock_needsfullbuild_message;
-	public static String TaskTagConfigurationBlock_needsprojectbuild_message;
-	public static String TaskTagInputDialog_new_title;
-	public static String TaskTagInputDialog_edit_title;
-	public static String TaskTagInputDialog_name_label;
-	public static String TaskTagInputDialog_priority_label;
-	public static String TaskTagInputDialog_priority_high;
-	public static String TaskTagInputDialog_priority_normal;
-	public static String TaskTagInputDialog_priority_low;
-	public static String TaskTagInputDialog_error_enterName;
-	public static String TaskTagInputDialog_error_comma;
-	public static String TaskTagInputDialog_error_entryExists;
-	public static String TaskTagInputDialog_error_noSpace;
-	
-	public static String ProblemMarkerManager_problem_marker_update_job_description;
-	
 	public static String Editor_FoldingMenu_name;
 }
