@@ -13,7 +13,7 @@ import org.eclipse.xtext.parsetree.AbstractNode;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("serial")
-public final class ValueConverterException extends RuntimeException {
+public class ValueConverterException extends RuntimeException {
 
 	private final AbstractNode node;
 	
