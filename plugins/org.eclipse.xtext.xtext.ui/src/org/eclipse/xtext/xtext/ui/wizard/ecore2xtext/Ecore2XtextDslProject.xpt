@@ -81,7 +81,7 @@ Workflow {
 			}
 
 			// the Antlr parser
-			fragment = de.itemis.xtext.antlr.XtextAntlrGeneratorFragment {
+			fragment = parser.antlr.XtextAntlrGeneratorFragment {
 				options = {
 					classSplitting = true
 				}
@@ -120,10 +120,8 @@ Workflow {
 			// java-based API for content assistance 
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
 
-			// the following fragment tries to use the Antlr based content assist 
-			// fragment which can be downloaded from http://www.itemis.com 
-			// and will be ignored if it's not available. 
-			fragment = de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment {
+			// antlr parser generator tailored for content assist 
+			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {
 				options = {
 					classSplitting = true
 				}

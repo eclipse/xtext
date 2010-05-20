@@ -46,13 +46,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Root ****************
  *
  * Root:
- *   {Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract (","
- *   classes+=Abstract)* "}")? ("concrete0" concrete0=Concrete0)? "}";
+ * 	{Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract ("," classes+=Abstract)* "}")? ("concrete0"
+ * 	concrete0=Concrete0)? "}";
  *
  **/
 
-// {Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract (","
-// classes+=Abstract)* "}")? ("concrete0" concrete0=Concrete0)? "}"
+// {Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract ("," classes+=Abstract)* "}")? ("concrete0"
+// concrete0=Concrete0)? "}"
 protected class Root_Group extends GroupToken {
 	
 	public Root_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -536,11 +536,11 @@ protected class Root_RightCurlyBracketKeyword_6 extends KeywordToken  {
 /************ begin Rule Abstract ****************
  *
  * Abstract:
- *   Concrete0_Impl|Concrete1_Impl|DiamondInheritance;
+ * 	Concrete0_Impl | Concrete1_Impl | DiamondInheritance;
  *
  **/
 
-// Concrete0_Impl|Concrete1_Impl|DiamondInheritance
+// Concrete0_Impl | Concrete1_Impl | DiamondInheritance
 protected class Abstract_Alternatives extends AlternativesToken {
 
 	public Abstract_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -688,11 +688,11 @@ protected class Abstract_DiamondInheritanceParserRuleCall_2 extends RuleCallToke
 /************ begin Rule Concrete0 ****************
  *
  * Concrete0:
- *   Concrete0_Impl|DiamondInheritance;
+ * 	Concrete0_Impl | DiamondInheritance;
  *
  **/
 
-// Concrete0_Impl|DiamondInheritance
+// Concrete0_Impl | DiamondInheritance
 protected class Concrete0_Alternatives extends AlternativesToken {
 
 	public Concrete0_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -803,7 +803,7 @@ protected class Concrete0_DiamondInheritanceParserRuleCall_1 extends RuleCallTok
 /************ begin Rule Concrete0_Impl ****************
  *
  * Concrete0_Impl returns Concrete0:
- *   {Concrete0} "Concrete0" name=EString;
+ * 	{Concrete0} "Concrete0" name=EString;
  *
  **/
 
@@ -926,7 +926,7 @@ protected class Concrete0_Impl_NameAssignment_2 extends AssignmentToken  {
 /************ begin Rule Concrete1_Impl ****************
  *
  * Concrete1_Impl returns Concrete1:
- *   {Concrete1} "Concrete1" name=EString;
+ * 	{Concrete1} "Concrete1" name=EString;
  *
  **/
 
@@ -1048,7 +1048,7 @@ protected class Concrete1_Impl_NameAssignment_2 extends AssignmentToken  {
 /************ begin Rule DiamondInheritance ****************
  *
  * DiamondInheritance:
- *   {DiamondInheritance} "DiamondInheritance" name=EString;
+ * 	{DiamondInheritance} "DiamondInheritance" name=EString;
  *
  **/
 

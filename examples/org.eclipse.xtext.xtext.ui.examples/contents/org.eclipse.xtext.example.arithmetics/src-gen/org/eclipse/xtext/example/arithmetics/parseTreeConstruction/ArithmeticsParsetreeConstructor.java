@@ -51,7 +51,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Module ****************
  *
  * Module:
- *   "module" name=ID imports+=Import* statements+=Statement*;
+ * 	"module" name=ID imports+=Import* statements+=Statement*;
  *
  **/
 
@@ -243,7 +243,7 @@ protected class Module_StatementsAssignment_3 extends AssignmentToken  {
 /************ begin Rule Import ****************
  *
  * Import:
- *   "import" importedNamespace=ImportName;
+ * 	"import" importedNamespace=ImportName;
  *
  **/
 
@@ -339,11 +339,11 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 /************ begin Rule Statement ****************
  *
  * Statement:
- *   Definition|Evaluation;
+ * 	Definition | Evaluation;
  *
  **/
 
-// Definition|Evaluation
+// Definition | Evaluation
 protected class Statement_Alternatives extends AlternativesToken {
 
 	public Statement_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -453,13 +453,11 @@ protected class Statement_EvaluationParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Definition ****************
  *
  * Definition:
- *   "def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")"
- *   )? ":" expr=Expression ";";
+ * 	"def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")")? ":" expr=Expression ";";
  *
  **/
 
-// "def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")")?
-// ":" expr=Expression ";"
+// "def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")")? ":" expr=Expression ";"
 protected class Definition_Group extends GroupToken {
 	
 	public Definition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -847,7 +845,7 @@ protected class Definition_SemicolonKeyword_5 extends KeywordToken  {
 /************ begin Rule DeclaredParameter ****************
  *
  * DeclaredParameter:
- *   name=ID;
+ * 	name=ID;
  *
  **/
 
@@ -892,11 +890,11 @@ protected class DeclaredParameter_NameAssignment extends AssignmentToken  {
 /************ begin Rule AbstractDefinition ****************
  *
  * AbstractDefinition:
- *   Definition|DeclaredParameter;
+ * 	Definition | DeclaredParameter;
  *
  **/
 
-// Definition|DeclaredParameter
+// Definition | DeclaredParameter
 protected class AbstractDefinition_Alternatives extends AlternativesToken {
 
 	public AbstractDefinition_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1006,7 +1004,7 @@ protected class AbstractDefinition_DeclaredParameterParserRuleCall_1 extends Rul
 /************ begin Rule Evaluation ****************
  *
  * Evaluation:
- *   expression=Expression ";";
+ * 	expression=Expression ";";
  *
  **/
 
@@ -1113,7 +1111,7 @@ protected class Evaluation_SemicolonKeyword_1 extends KeywordToken  {
 /************ begin Rule Expression ****************
  *
  * Expression:
- *   Addition;
+ * 	Addition;
  *
  **/
 
@@ -1164,13 +1162,11 @@ protected class Expression_AdditionParserRuleCall extends RuleCallToken {
 /************ begin Rule Addition ****************
  *
  * Addition returns Expression:
- *   Multiplication (({Plus.left=current} "+"|{Minus.left=current} "-")
- *   right=Multiplication)*;
+ * 	Multiplication (({Plus.left=current} "+" | {Minus.left=current} "-") right=Multiplication)*;
  *
  **/
 
-// Multiplication (({Plus.left=current} "+"|{Minus.left=current} "-")
-// right=Multiplication)*
+// Multiplication (({Plus.left=current} "+" | {Minus.left=current} "-") right=Multiplication)*
 protected class Addition_Group extends GroupToken {
 	
 	public Addition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1239,7 +1235,7 @@ protected class Addition_MultiplicationParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// (({Plus.left=current} "+"|{Minus.left=current} "-") right=Multiplication)*
+// (({Plus.left=current} "+" | {Minus.left=current} "-") right=Multiplication)*
 protected class Addition_Group_1 extends GroupToken {
 	
 	public Addition_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1269,7 +1265,7 @@ protected class Addition_Group_1 extends GroupToken {
 
 }
 
-// {Plus.left=current} "+"|{Minus.left=current} "-"
+// {Plus.left=current} "+" | {Minus.left=current} "-"
 protected class Addition_Alternatives_1_0 extends AlternativesToken {
 
 	public Addition_Alternatives_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1511,13 +1507,11 @@ protected class Addition_RightAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule Multiplication ****************
  *
  * Multiplication returns Expression:
- *   PrimaryExpression (({Multi.left=current} "*"|{Div.left=current} "/")
- *   right=PrimaryExpression)*;
+ * 	PrimaryExpression (({Multi.left=current} "*" | {Div.left=current} "/") right=PrimaryExpression)*;
  *
  **/
 
-// PrimaryExpression (({Multi.left=current} "*"|{Div.left=current} "/")
-// right=PrimaryExpression)*
+// PrimaryExpression (({Multi.left=current} "*" | {Div.left=current} "/") right=PrimaryExpression)*
 protected class Multiplication_Group extends GroupToken {
 	
 	public Multiplication_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1586,7 +1580,7 @@ protected class Multiplication_PrimaryExpressionParserRuleCall_0 extends RuleCal
 	}	
 }
 
-// (({Multi.left=current} "*"|{Div.left=current} "/") right=PrimaryExpression)*
+// (({Multi.left=current} "*" | {Div.left=current} "/") right=PrimaryExpression)*
 protected class Multiplication_Group_1 extends GroupToken {
 	
 	public Multiplication_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1616,7 +1610,7 @@ protected class Multiplication_Group_1 extends GroupToken {
 
 }
 
-// {Multi.left=current} "*"|{Div.left=current} "/"
+// {Multi.left=current} "*" | {Div.left=current} "/"
 protected class Multiplication_Alternatives_1_0 extends AlternativesToken {
 
 	public Multiplication_Alternatives_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1858,13 +1852,13 @@ protected class Multiplication_RightAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule PrimaryExpression ****************
  *
  * PrimaryExpression returns Expression:
- *   "(" Expression ")"|{NumberLiteral} value=NUMBER|{FunctionCall} func=[
- *   AbstractDefinition] ("(" args+=Expression ("," args+=Expression)* ")")?;
+ * 	"(" Expression ")" | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ("(" args+=Expression
+ * 	("," args+=Expression)* ")")?;
  *
  **/
 
-// "(" Expression ")"|{NumberLiteral} value=NUMBER|{FunctionCall} func=[
-// AbstractDefinition] ("(" args+=Expression ("," args+=Expression)* ")")?
+// "(" Expression ")" | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ("(" args+=Expression (","
+// args+=Expression)* ")")?
 protected class PrimaryExpression_Alternatives extends AlternativesToken {
 
 	public PrimaryExpression_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2091,8 +2085,7 @@ protected class PrimaryExpression_ValueAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// {FunctionCall} func=[AbstractDefinition] ("(" args+=Expression (","
-// args+=Expression)* ")")?
+// {FunctionCall} func=[AbstractDefinition] ("(" args+=Expression ("," args+=Expression)* ")")?
 protected class PrimaryExpression_Group_2 extends GroupToken {
 	
 	public PrimaryExpression_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

@@ -253,8 +253,7 @@
 			}
 
 			// The antlr parser generator fragment.
-			// If you don't already have it get it from http://download.itemis.com/updates/
-			fragment = de.itemis.xtext.antlr.XtextAntlrGeneratorFragment {
+			fragment = parser.antlr.XtextAntlrGeneratorFragment {
 			//  options = {
 			//		backtrack = true
 			//	}
@@ -293,8 +292,8 @@
 			// content assist API  
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
 
-			// generates a more lightweight Antlr parser and lexer for tailored content assist  
-			fragment = de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment {}
+			// generates a more lightweight Antlr parser and lexer tailored for content assist  
+			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {}
 
 			// project wizard (optional) 
 			// fragment = projectWizard.SimpleProjectWizardFragment {

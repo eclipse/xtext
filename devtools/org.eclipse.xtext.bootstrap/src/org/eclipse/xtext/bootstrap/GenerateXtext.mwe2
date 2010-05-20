@@ -68,5 +68,6 @@ Workflow {
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 		}
 	}
+	
+	component = @org.eclipse.xtext.generator.parser.antlr.splitting.SimpleExpressions {}
 }
-

@@ -59,7 +59,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule EcoreDsl ****************
  *
  * EcoreDsl:
- *   metamodelDeclarations+=ReferencedMetamodel* package=EPackageDecl;
+ * 	metamodelDeclarations+=ReferencedMetamodel* package=EPackageDecl;
  *
  **/
 
@@ -191,7 +191,7 @@ protected class EcoreDsl_PackageAssignment_1 extends AssignmentToken  {
 /************ begin Rule ReferencedMetamodel ****************
  *
  * ReferencedMetamodel:
- *   "import" (alias=ID "=")? ePackage=[ecore::EPackage|STRING] ";";
+ * 	"import" (alias=ID "=")? ePackage=[ecore::EPackage|STRING] ";";
  *
  **/
 
@@ -391,15 +391,13 @@ protected class ReferencedMetamodel_SemicolonKeyword_3 extends KeywordToken  {
 /************ begin Rule EPackageDecl ****************
  *
  * EPackageDecl returns ecore::EPackage:
- *   eAnnotations+=EAnnotationDecl* "package" name=QID "nsURI" "=" nsURI=STRING
- *   "nsPrefix" "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|
- *   eClassifiers+=EClassifierDecl)* "}";
+ * 	eAnnotations+=EAnnotationDecl* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix" "=" nsPrefix=QID "{"
+ * 	(eSubpackages+=SubEPackageDecl | eClassifiers+=EClassifierDecl)* "}";
  *
  **/
 
-// eAnnotations+=EAnnotationDecl* "package" name=QID "nsURI" "=" nsURI=STRING
-// "nsPrefix" "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|
-// eClassifiers+=EClassifierDecl)* "}"
+// eAnnotations+=EAnnotationDecl* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix" "=" nsPrefix=QID "{"
+// (eSubpackages+=SubEPackageDecl | eClassifiers+=EClassifierDecl)* "}"
 protected class EPackageDecl_Group extends GroupToken {
 	
 	public EPackageDecl_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -708,7 +706,7 @@ protected class EPackageDecl_LeftCurlyBracketKeyword_9 extends KeywordToken  {
 
 }
 
-// (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)*
+// (eSubpackages+=SubEPackageDecl | eClassifiers+=EClassifierDecl)*
 protected class EPackageDecl_Alternatives_10 extends AlternativesToken {
 
 	public EPackageDecl_Alternatives_10(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -856,13 +854,13 @@ protected class EPackageDecl_RightCurlyBracketKeyword_11 extends KeywordToken  {
 /************ begin Rule SubEPackageDecl ****************
  *
  * SubEPackageDecl returns ecore::EPackage:
- *   eAnnotations+=EAnnotationDecl* "package" name=ID "{" (
- *   eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}";
+ * 	eAnnotations+=EAnnotationDecl* "package" name=ID "{" (eSubpackages+=SubEPackageDecl | eClassifiers+=EClassifierDecl)*
+ * 	"}";
  *
  **/
 
-// eAnnotations+=EAnnotationDecl* "package" name=ID "{" (
-// eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}"
+// eAnnotations+=EAnnotationDecl* "package" name=ID "{" (eSubpackages+=SubEPackageDecl | eClassifiers+=EClassifierDecl)*
+// "}"
 protected class SubEPackageDecl_Group extends GroupToken {
 	
 	public SubEPackageDecl_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1015,7 +1013,7 @@ protected class SubEPackageDecl_LeftCurlyBracketKeyword_3 extends KeywordToken  
 
 }
 
-// (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)*
+// (eSubpackages+=SubEPackageDecl | eClassifiers+=EClassifierDecl)*
 protected class SubEPackageDecl_Alternatives_4 extends AlternativesToken {
 
 	public SubEPackageDecl_Alternatives_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1163,11 +1161,11 @@ protected class SubEPackageDecl_RightCurlyBracketKeyword_5 extends KeywordToken 
 /************ begin Rule EClassifierDecl ****************
  *
  * EClassifierDecl returns ecore::EClassifier:
- *   EClassDecl|EDataTypeDecl;
+ * 	EClassDecl | EDataTypeDecl;
  *
  **/
 
-// EClassDecl|EDataTypeDecl
+// EClassDecl | EDataTypeDecl
 protected class EClassifierDecl_Alternatives extends AlternativesToken {
 
 	public EClassifierDecl_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1279,13 +1277,13 @@ protected class EClassifierDecl_EDataTypeDeclParserRuleCall_1 extends RuleCallTo
 /************ begin Rule EDataTypeDecl ****************
  *
  * EDataTypeDecl returns ecore::EDataType:
- *   eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID
- *   ":" instanceClassName=STRING_OR_QID ";")|EEnumDecl;
+ * 	eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";")
+ * 	| EEnumDecl;
  *
  **/
 
-// eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID
-// ":" instanceClassName=STRING_OR_QID ";")|EEnumDecl
+// eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";") |
+// EEnumDecl
 protected class EDataTypeDecl_Alternatives extends AlternativesToken {
 
 	public EDataTypeDecl_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1316,8 +1314,7 @@ protected class EDataTypeDecl_Alternatives extends AlternativesToken {
 
 }
 
-// eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID
-// ":" instanceClassName=STRING_OR_QID ";")
+// eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";")
 protected class EDataTypeDecl_Group_0 extends GroupToken {
 	
 	public EDataTypeDecl_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1628,8 +1625,7 @@ protected class EDataTypeDecl_EEnumDeclParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule EAnnotationDecl ****************
  *
  * EAnnotationDecl returns ecore::EAnnotation:
- *   "@" source=STRING_OR_QID ("(" details+=MapEntry ("," details+=MapEntry)* ")")
- *   ?;
+ * 	"@" source=STRING_OR_QID ("(" details+=MapEntry ("," details+=MapEntry)* ")")?;
  *
  **/
 
@@ -1931,24 +1927,18 @@ protected class EAnnotationDecl_RightParenthesisKeyword_2_3 extends KeywordToken
 /************ begin Rule EClassDecl ****************
  *
  * EClassDecl returns ecore::EClass:
- *   eAnnotations+=EAnnotationDecl* abstract?="abstract"? (interface?="interface"|
- *   "class") name=ID ("<" eTypeParameters+=ETypeParameterDecl (","
- *   eTypeParameters+=ETypeParameterDecl)* ">")? ("extends"
- *   eGenericSuperTypes+=EGenericTypeReferenceDecl (","
- *   eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":"
- *   instanceClassName=STRING_OR_QID)? "{" (
- *   eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=EOperationDecl)* "}"
- * ;
+ * 	eAnnotations+=EAnnotationDecl* abstract?="abstract"? (interface?="interface" | "class") name=ID ("<"
+ * 	eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? ("extends"
+ * 	eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":"
+ * 	instanceClassName=STRING_OR_QID)? "{" (eStructuralFeatures+=EStructuralFeatureDecl | eOperations+=EOperationDecl)*
+ * 	"}";
  *
  **/
 
-// eAnnotations+=EAnnotationDecl* abstract?="abstract"? (interface?="interface"|
-// "class") name=ID ("<" eTypeParameters+=ETypeParameterDecl (","
-// eTypeParameters+=ETypeParameterDecl)* ">")? ("extends"
-// eGenericSuperTypes+=EGenericTypeReferenceDecl (","
-// eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":"
-// instanceClassName=STRING_OR_QID)? "{" (
-// eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=EOperationDecl)* "}"
+// eAnnotations+=EAnnotationDecl* abstract?="abstract"? (interface?="interface" | "class") name=ID ("<"
+// eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? ("extends"
+// eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":"
+// instanceClassName=STRING_OR_QID)? "{" (eStructuralFeatures+=EStructuralFeatureDecl | eOperations+=EOperationDecl)* "}"
 protected class EClassDecl_Group extends GroupToken {
 	
 	public EClassDecl_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2057,7 +2047,7 @@ protected class EClassDecl_AbstractAssignment_1 extends AssignmentToken  {
 
 }
 
-// interface?="interface"|"class"
+// interface?="interface" | "class"
 protected class EClassDecl_Alternatives_2 extends AlternativesToken {
 
 	public EClassDecl_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2173,8 +2163,7 @@ protected class EClassDecl_NameAssignment_3 extends AssignmentToken  {
 
 }
 
-// ("<" eTypeParameters+=ETypeParameterDecl (","
-// eTypeParameters+=ETypeParameterDecl)* ">")?
+// ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")?
 protected class EClassDecl_Group_4 extends GroupToken {
 	
 	public EClassDecl_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2380,8 +2369,7 @@ protected class EClassDecl_GreaterThanSignKeyword_4_3 extends KeywordToken  {
 }
 
 
-// ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl (","
-// eGenericSuperTypes+=EGenericTypeReferenceDecl)*)?
+// ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)?
 protected class EClassDecl_Group_5 extends GroupToken {
 	
 	public EClassDecl_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2672,7 +2660,7 @@ protected class EClassDecl_LeftCurlyBracketKeyword_7 extends KeywordToken  {
 
 }
 
-// (eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=EOperationDecl)*
+// (eStructuralFeatures+=EStructuralFeatureDecl | eOperations+=EOperationDecl)*
 protected class EClassDecl_Alternatives_8 extends AlternativesToken {
 
 	public EClassDecl_Alternatives_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2820,11 +2808,11 @@ protected class EClassDecl_RightCurlyBracketKeyword_9 extends KeywordToken  {
 /************ begin Rule EStructuralFeatureDecl ****************
  *
  * EStructuralFeatureDecl returns ecore::EStructuralFeature:
- *   EAttributeDecl|EReferenceDecl;
+ * 	EAttributeDecl | EReferenceDecl;
  *
  **/
 
-// EAttributeDecl|EReferenceDecl
+// EAttributeDecl | EReferenceDecl
 protected class EStructuralFeatureDecl_Alternatives extends AlternativesToken {
 
 	public EStructuralFeatureDecl_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2934,19 +2922,15 @@ protected class EStructuralFeatureDecl_EReferenceDeclParserRuleCall_1 extends Ru
 /************ begin Rule EAttributeDecl ****************
  *
  * EAttributeDecl returns ecore::EAttribute:
- *   eAnnotations+=EAnnotationDecl* (iD?="ID"|unique=Bag|ordered=Random|
- *   changeable=Readonly|volatile?="volatile"|transient?="transient"|
- *   unsettable?="unsettable"|derived?="derived")* "attr"
- *   eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".."
- *   upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";";
+ * 	eAnnotations+=EAnnotationDecl* (iD?="ID" | unique=Bag | ordered=Random | changeable=Readonly | volatile?="volatile" |
+ * 	transient?="transient" | unsettable?="unsettable" | derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl
+ * 	("[" lowerBound=INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";";
  *
  **/
 
-// eAnnotations+=EAnnotationDecl* (iD?="ID"|unique=Bag|ordered=Random|
-// changeable=Readonly|volatile?="volatile"|transient?="transient"|
-// unsettable?="unsettable"|derived?="derived")* "attr"
-// eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".."
-// upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";"
+// eAnnotations+=EAnnotationDecl* (iD?="ID" | unique=Bag | ordered=Random | changeable=Readonly | volatile?="volatile" |
+// transient?="transient" | unsettable?="unsettable" | derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl
+// ("[" lowerBound=INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";"
 protected class EAttributeDecl_Group extends GroupToken {
 	
 	public EAttributeDecl_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3021,8 +3005,8 @@ protected class EAttributeDecl_EAnnotationsAssignment_0 extends AssignmentToken 
 	}	
 }
 
-// (iD?="ID"|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|
-// transient?="transient"|unsettable?="unsettable"|derived?="derived")*
+// (iD?="ID" | unique=Bag | ordered=Random | changeable=Readonly | volatile?="volatile" | transient?="transient" |
+// unsettable?="unsettable" | derived?="derived")*
 protected class EAttributeDecl_Alternatives_1 extends AlternativesToken {
 
 	public EAttributeDecl_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3726,20 +3710,17 @@ protected class EAttributeDecl_SemicolonKeyword_7 extends KeywordToken  {
 /************ begin Rule EReferenceDecl ****************
  *
  * EReferenceDecl returns ecore::EReference:
- *   eAnnotations+=EAnnotationDecl* (resolveProxies=Local|unique=Bag|
- *   ordered=Random|changeable=Readonly|volatile?="volatile"|
- *   transient?="transient"|unsettable?="unsettable"|derived?="derived")* (
- *   containment?="val"|"ref") eGenericType=EGenericTypeReferenceDecl ("["
- *   lowerBound=INT (".." upperBound=SINT)? "]")? ("#" eOpposite=[ecore::
- *   EReference])? name=ID ";";
+ * 	eAnnotations+=EAnnotationDecl* (resolveProxies=Local | unique=Bag | ordered=Random | changeable=Readonly |
+ * 	volatile?="volatile" | transient?="transient" | unsettable?="unsettable" | derived?="derived")* (containment?="val" |
+ * 	"ref") eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#"
+ * 	eOpposite=[ecore::EReference])? name=ID ";";
  *
  **/
 
-// eAnnotations+=EAnnotationDecl* (resolveProxies=Local|unique=Bag|ordered=Random|
-// changeable=Readonly|volatile?="volatile"|transient?="transient"|
-// unsettable?="unsettable"|derived?="derived")* (containment?="val"|"ref")
-// eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".."
-// upperBound=SINT)? "]")? ("#" eOpposite=[ecore::EReference])? name=ID ";"
+// eAnnotations+=EAnnotationDecl* (resolveProxies=Local | unique=Bag | ordered=Random | changeable=Readonly |
+// volatile?="volatile" | transient?="transient" | unsettable?="unsettable" | derived?="derived")* (containment?="val" |
+// "ref") eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#"
+// eOpposite=[ecore::EReference])? name=ID ";"
 protected class EReferenceDecl_Group extends GroupToken {
 	
 	public EReferenceDecl_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3814,9 +3795,8 @@ protected class EReferenceDecl_EAnnotationsAssignment_0 extends AssignmentToken 
 	}	
 }
 
-// (resolveProxies=Local|unique=Bag|ordered=Random|changeable=Readonly|
-// volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|
-// derived?="derived")*
+// (resolveProxies=Local | unique=Bag | ordered=Random | changeable=Readonly | volatile?="volatile" |
+// transient?="transient" | unsettable?="unsettable" | derived?="derived")*
 protected class EReferenceDecl_Alternatives_1 extends AlternativesToken {
 
 	public EReferenceDecl_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4126,7 +4106,7 @@ protected class EReferenceDecl_DerivedAssignment_1_7 extends AssignmentToken  {
 }
 
 
-// containment?="val"|"ref"
+// containment?="val" | "ref"
 protected class EReferenceDecl_Alternatives_2 extends AlternativesToken {
 
 	public EReferenceDecl_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4583,13 +4563,11 @@ protected class EReferenceDecl_SemicolonKeyword_7 extends KeywordToken  {
 /************ begin Rule EEnumDecl ****************
  *
  * EEnumDecl returns ecore::EEnum:
- *   eAnnotations+=EAnnotationDecl* "enum" name=ID "{" eLiterals+=EEnumLiteralDecl
- *   + "}";
+ * 	eAnnotations+=EAnnotationDecl* "enum" name=ID "{" eLiterals+=EEnumLiteralDecl+ "}";
  *
  **/
 
-// eAnnotations+=EAnnotationDecl* "enum" name=ID "{" eLiterals+=EEnumLiteralDecl+
-// "}"
+// eAnnotations+=EAnnotationDecl* "enum" name=ID "{" eLiterals+=EEnumLiteralDecl+ "}"
 protected class EEnumDecl_Group extends GroupToken {
 	
 	public EEnumDecl_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4818,7 +4796,7 @@ protected class EEnumDecl_RightCurlyBracketKeyword_5 extends KeywordToken  {
 /************ begin Rule EEnumLiteralDecl ****************
  *
  * EEnumLiteralDecl returns ecore::EEnumLiteral:
- *   eAnnotations+=EAnnotationDecl* name=ID ("=" value=INT)? literal=STRING? ";";
+ * 	eAnnotations+=EAnnotationDecl* name=ID ("=" value=INT)? literal=STRING? ";";
  *
  **/
 
@@ -5076,7 +5054,7 @@ protected class EEnumLiteralDecl_SemicolonKeyword_4 extends KeywordToken  {
 /************ begin Rule ETypeParameterDecl ****************
  *
  * ETypeParameterDecl returns ecore::ETypeParameter:
- *   name=ID ("extends" eBounds+=EGenericTypeDecl)?;
+ * 	name=ID ("extends" eBounds+=EGenericTypeDecl)?;
  *
  **/
 
@@ -5241,15 +5219,13 @@ protected class ETypeParameterDecl_EBoundsAssignment_1_1 extends AssignmentToken
 /************ begin Rule EGenericTypeReferenceDecl ****************
  *
  * EGenericTypeReferenceDecl returns ecore::EGenericType:
- *   eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl (","
- *   eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::
- *   ETypeParameter];
+ * 	eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")? |
+ * 	"#" eTypeParameter=[ecore::ETypeParameter];
  *
  **/
 
-// eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl (","
-// eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::
-// ETypeParameter]
+// eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")? |
+// "#" eTypeParameter=[ecore::ETypeParameter]
 protected class EGenericTypeReferenceDecl_Alternatives extends AlternativesToken {
 
 	public EGenericTypeReferenceDecl_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5279,8 +5255,7 @@ protected class EGenericTypeReferenceDecl_Alternatives extends AlternativesToken
 
 }
 
-// eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl (","
-// eTypeArguments+=EGenericTypeDecl)* ">")?
+// eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?
 protected class EGenericTypeReferenceDecl_Group_0 extends GroupToken {
 	
 	public EGenericTypeReferenceDecl_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5339,8 +5314,7 @@ protected class EGenericTypeReferenceDecl_EClassifierAssignment_0_0 extends Assi
 
 }
 
-// ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)*
-// ">")?
+// ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?
 protected class EGenericTypeReferenceDecl_Group_0_1 extends GroupToken {
 	
 	public EGenericTypeReferenceDecl_Group_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5635,16 +5609,14 @@ protected class EGenericTypeReferenceDecl_ETypeParameterAssignment_1_1 extends A
 /************ begin Rule EGenericTypeDecl ****************
  *
  * EGenericTypeDecl returns ecore::EGenericType:
- *   eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl (","
- *   eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::
- *   ETypeParameter]|"?" ("extends" eUpperBound=EGenericTypeDecl|"super"
- *   eLowerBound=EGenericTypeDecl);
+ * 	eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")? |
+ * 	"#" eTypeParameter=[ecore::ETypeParameter] | "?" ("extends" eUpperBound=EGenericTypeDecl | "super"
+ * 	eLowerBound=EGenericTypeDecl);
  *
  **/
 
-// eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl (","
-// eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::
-// ETypeParameter]|"?" ("extends" eUpperBound=EGenericTypeDecl|"super"
+// eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")? |
+// "#" eTypeParameter=[ecore::ETypeParameter] | "?" ("extends" eUpperBound=EGenericTypeDecl | "super"
 // eLowerBound=EGenericTypeDecl)
 protected class EGenericTypeDecl_Alternatives extends AlternativesToken {
 
@@ -5676,8 +5648,7 @@ protected class EGenericTypeDecl_Alternatives extends AlternativesToken {
 
 }
 
-// eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl (","
-// eTypeArguments+=EGenericTypeDecl)* ">")?
+// eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?
 protected class EGenericTypeDecl_Group_0 extends GroupToken {
 	
 	public EGenericTypeDecl_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5736,8 +5707,7 @@ protected class EGenericTypeDecl_EClassifierAssignment_0_0 extends AssignmentTok
 
 }
 
-// ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)*
-// ">")?
+// ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?
 protected class EGenericTypeDecl_Group_0_1 extends GroupToken {
 	
 	public EGenericTypeDecl_Group_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6025,8 +5995,7 @@ protected class EGenericTypeDecl_ETypeParameterAssignment_1_1 extends Assignment
 }
 
 
-// "?" ("extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl
-// )
+// "?" ("extends" eUpperBound=EGenericTypeDecl | "super" eLowerBound=EGenericTypeDecl)
 protected class EGenericTypeDecl_Group_2 extends GroupToken {
 	
 	public EGenericTypeDecl_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6069,7 +6038,7 @@ protected class EGenericTypeDecl_QuestionMarkKeyword_2_0 extends KeywordToken  {
 
 }
 
-// "extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl
+// "extends" eUpperBound=EGenericTypeDecl | "super" eLowerBound=EGenericTypeDecl
 protected class EGenericTypeDecl_Alternatives_2_1 extends AlternativesToken {
 
 	public EGenericTypeDecl_Alternatives_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6283,21 +6252,17 @@ protected class EGenericTypeDecl_ELowerBoundAssignment_2_1_1_1 extends Assignmen
 /************ begin Rule EOperationDecl ****************
  *
  * EOperationDecl returns ecore::EOperation:
- *   eAnnotations+=EAnnotationDecl* (unique?=Bag|ordered?=Random)* "op" (
- *   eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<"
- *   eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)
- *   * ">")? "(" (eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)?
- *   ")" ("throws" eGenericExceptions+=EGenericTypeReferenceDecl (","
- *   eGenericExceptions+=EGenericTypeReferenceDecl)*)? ";";
+ * 	eAnnotations+=EAnnotationDecl* (unique?=Bag | ordered?=Random)* "op" (eGenericType=EGenericTypeReferenceDecl | "void")
+ * 	name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "("
+ * 	(eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws"
+ * 	eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)? ";";
  *
  **/
 
-// eAnnotations+=EAnnotationDecl* (unique?=Bag|ordered?=Random)* "op" (
-// eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<"
-// eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)*
-// ">")? "(" (eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")"
-// ("throws" eGenericExceptions+=EGenericTypeReferenceDecl (","
-// eGenericExceptions+=EGenericTypeReferenceDecl)*)? ";"
+// eAnnotations+=EAnnotationDecl* (unique?=Bag | ordered?=Random)* "op" (eGenericType=EGenericTypeReferenceDecl | "void")
+// name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "("
+// (eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws"
+// eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)? ";"
 protected class EOperationDecl_Group extends GroupToken {
 	
 	public EOperationDecl_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6372,7 +6337,7 @@ protected class EOperationDecl_EAnnotationsAssignment_0 extends AssignmentToken 
 	}	
 }
 
-// (unique?=Bag|ordered?=Random)*
+// (unique?=Bag | ordered?=Random)*
 protected class EOperationDecl_Alternatives_1 extends AlternativesToken {
 
 	public EOperationDecl_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6489,7 +6454,7 @@ protected class EOperationDecl_OpKeyword_2 extends KeywordToken  {
 
 }
 
-// eGenericType=EGenericTypeReferenceDecl|"void"
+// eGenericType=EGenericTypeReferenceDecl | "void"
 protected class EOperationDecl_Alternatives_3 extends AlternativesToken {
 
 	public EOperationDecl_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6615,8 +6580,7 @@ protected class EOperationDecl_NameAssignment_4 extends AssignmentToken  {
 
 }
 
-// ("<" eTypeParameters+=ETypeParameterDecl (","
-// eTypeParameters+=ETypeParameterDecl)* ">")?
+// ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")?
 protected class EOperationDecl_Group_5 extends GroupToken {
 	
 	public EOperationDecl_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7030,8 +6994,7 @@ protected class EOperationDecl_RightParenthesisKeyword_8 extends KeywordToken  {
 
 }
 
-// ("throws" eGenericExceptions+=EGenericTypeReferenceDecl (","
-// eGenericExceptions+=EGenericTypeReferenceDecl)*)?
+// ("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)?
 protected class EOperationDecl_Group_9 extends GroupToken {
 	
 	public EOperationDecl_Group_9(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7245,8 +7208,7 @@ protected class EOperationDecl_SemicolonKeyword_10 extends KeywordToken  {
 /************ begin Rule EParameterDecl ****************
  *
  * EParameterDecl returns ecore::EParameter:
- *   eAnnotations+=EAnnotationDecl* eGenericType=EGenericTypeReferenceDecl name=ID
- * ;
+ * 	eAnnotations+=EAnnotationDecl* eGenericType=EGenericTypeReferenceDecl name=ID;
  *
  **/
 
@@ -7412,7 +7374,7 @@ protected class EParameterDecl_NameAssignment_2 extends AssignmentToken  {
 /************ begin Rule MapEntry ****************
  *
  * MapEntry returns ecore::EStringToStringMapEntry:
- *   key=ID "=" value=STRING;
+ * 	key=ID "=" value=STRING;
  *
  **/
 

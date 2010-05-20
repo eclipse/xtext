@@ -29,7 +29,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cStatementsStatementParserRuleCall_3_0 = (RuleCall)cStatementsAssignment_3.eContents().get(0);
 		
 		//Module:
-		//  "module" name=ID imports+=Import* statements+=Statement*;
+		//	"module" name=ID imports+=Import* statements+=Statement*;
 		public ParserRule getRule() { return rule; }
 
 		//"module" name=ID imports+=Import* statements+=Statement*
@@ -65,7 +65,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cImportedNamespaceImportNameParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
 		
 		//Import:
-		//  "import" importedNamespace=ImportName;
+		//	"import" importedNamespace=ImportName;
 		public ParserRule getRule() { return rule; }
 
 		//"import" importedNamespace=ImportName
@@ -90,7 +90,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cAsteriskKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		
 		//ImportName returns ecore::EString:
-		//  ID ("." "*")?;
+		//	ID ("." "*")?;
 		public ParserRule getRule() { return rule; }
 
 		//ID ("." "*")?
@@ -116,10 +116,10 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cEvaluationParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Statement:
-		//  Definition|Evaluation;
+		//	Definition | Evaluation;
 		public ParserRule getRule() { return rule; }
 
-		//Definition|Evaluation
+		//Definition | Evaluation
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Definition
@@ -150,12 +150,10 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Definition:
-		//  "def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")"
-		//  )? ":" expr=Expression ";";
+		//	"def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")")? ":" expr=Expression ";";
 		public ParserRule getRule() { return rule; }
 
-		//"def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")")?
-		//":" expr=Expression ";"
+		//"def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")")? ":" expr=Expression ";"
 		public Group getGroup() { return cGroup; }
 
 		//"def"
@@ -213,7 +211,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//DeclaredParameter:
-		//  name=ID;
+		//	name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//name=ID
@@ -230,10 +228,10 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDeclaredParameterParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//AbstractDefinition:
-		//  Definition|DeclaredParameter;
+		//	Definition | DeclaredParameter;
 		public ParserRule getRule() { return rule; }
 
-		//Definition|DeclaredParameter
+		//Definition | DeclaredParameter
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Definition
@@ -251,7 +249,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Evaluation:
-		//  expression=Expression ";";
+		//	expression=Expression ";";
 		public ParserRule getRule() { return rule; }
 
 		//expression=Expression ";"
@@ -272,7 +270,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAdditionParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//Expression:
-		//  Addition;
+		//	Addition;
 		public ParserRule getRule() { return rule; }
 
 		//Addition
@@ -295,21 +293,19 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRightMultiplicationParserRuleCall_1_1_0 = (RuleCall)cRightAssignment_1_1.eContents().get(0);
 		
 		//Addition returns Expression:
-		//  Multiplication (({Plus.left=current} "+"|{Minus.left=current} "-")
-		//  right=Multiplication)*;
+		//	Multiplication (({Plus.left=current} "+" | {Minus.left=current} "-") right=Multiplication)*;
 		public ParserRule getRule() { return rule; }
 
-		//Multiplication (({Plus.left=current} "+"|{Minus.left=current} "-")
-		//right=Multiplication)*
+		//Multiplication (({Plus.left=current} "+" | {Minus.left=current} "-") right=Multiplication)*
 		public Group getGroup() { return cGroup; }
 
 		//Multiplication
 		public RuleCall getMultiplicationParserRuleCall_0() { return cMultiplicationParserRuleCall_0; }
 
-		//(({Plus.left=current} "+"|{Minus.left=current} "-") right=Multiplication)*
+		//(({Plus.left=current} "+" | {Minus.left=current} "-") right=Multiplication)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{Plus.left=current} "+"|{Minus.left=current} "-"
+		//{Plus.left=current} "+" | {Minus.left=current} "-"
 		public Alternatives getAlternatives_1_0() { return cAlternatives_1_0; }
 
 		//{Plus.left=current} "+"
@@ -353,21 +349,19 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRightPrimaryExpressionParserRuleCall_1_1_0 = (RuleCall)cRightAssignment_1_1.eContents().get(0);
 		
 		//Multiplication returns Expression:
-		//  PrimaryExpression (({Multi.left=current} "*"|{Div.left=current} "/")
-		//  right=PrimaryExpression)*;
+		//	PrimaryExpression (({Multi.left=current} "*" | {Div.left=current} "/") right=PrimaryExpression)*;
 		public ParserRule getRule() { return rule; }
 
-		//PrimaryExpression (({Multi.left=current} "*"|{Div.left=current} "/")
-		//right=PrimaryExpression)*
+		//PrimaryExpression (({Multi.left=current} "*" | {Div.left=current} "/") right=PrimaryExpression)*
 		public Group getGroup() { return cGroup; }
 
 		//PrimaryExpression
 		public RuleCall getPrimaryExpressionParserRuleCall_0() { return cPrimaryExpressionParserRuleCall_0; }
 
-		//(({Multi.left=current} "*"|{Div.left=current} "/") right=PrimaryExpression)*
+		//(({Multi.left=current} "*" | {Div.left=current} "/") right=PrimaryExpression)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{Multi.left=current} "*"|{Div.left=current} "/"
+		//{Multi.left=current} "*" | {Div.left=current} "/"
 		public Alternatives getAlternatives_1_0() { return cAlternatives_1_0; }
 
 		//{Multi.left=current} "*"
@@ -422,12 +416,12 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_2_2_3 = (Keyword)cGroup_2_2.eContents().get(3);
 		
 		//PrimaryExpression returns Expression:
-		//  "(" Expression ")"|{NumberLiteral} value=NUMBER|{FunctionCall} func=[
-		//  AbstractDefinition] ("(" args+=Expression ("," args+=Expression)* ")")?;
+		//	"(" Expression ")" | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ("(" args+=Expression
+		//	("," args+=Expression)* ")")?;
 		public ParserRule getRule() { return rule; }
 
-		//"(" Expression ")"|{NumberLiteral} value=NUMBER|{FunctionCall} func=[
-		//AbstractDefinition] ("(" args+=Expression ("," args+=Expression)* ")")?
+		//"(" Expression ")" | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ("(" args+=Expression (","
+		//args+=Expression)* ")")?
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"(" Expression ")"
@@ -454,8 +448,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		//NUMBER
 		public RuleCall getValueNUMBERTerminalRuleCall_1_1_0() { return cValueNUMBERTerminalRuleCall_1_1_0; }
 
-		//{FunctionCall} func=[AbstractDefinition] ("(" args+=Expression (","
-		//args+=Expression)* ")")?
+		//{FunctionCall} func=[AbstractDefinition] ("(" args+=Expression ("," args+=Expression)* ")")?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//{FunctionCall}
@@ -536,7 +529,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Module:
-	//  "module" name=ID imports+=Import* statements+=Statement*;
+	//	"module" name=ID imports+=Import* statements+=Statement*;
 	public ModuleElements getModuleAccess() {
 		return (pModule != null) ? pModule : (pModule = new ModuleElements());
 	}
@@ -546,7 +539,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Import:
-	//  "import" importedNamespace=ImportName;
+	//	"import" importedNamespace=ImportName;
 	public ImportElements getImportAccess() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
 	}
@@ -556,7 +549,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ImportName returns ecore::EString:
-	//  ID ("." "*")?;
+	//	ID ("." "*")?;
 	public ImportNameElements getImportNameAccess() {
 		return (pImportName != null) ? pImportName : (pImportName = new ImportNameElements());
 	}
@@ -566,7 +559,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Statement:
-	//  Definition|Evaluation;
+	//	Definition | Evaluation;
 	public StatementElements getStatementAccess() {
 		return (pStatement != null) ? pStatement : (pStatement = new StatementElements());
 	}
@@ -576,8 +569,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Definition:
-	//  "def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")"
-	//  )? ":" expr=Expression ";";
+	//	"def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")")? ":" expr=Expression ";";
 	public DefinitionElements getDefinitionAccess() {
 		return (pDefinition != null) ? pDefinition : (pDefinition = new DefinitionElements());
 	}
@@ -587,7 +579,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DeclaredParameter:
-	//  name=ID;
+	//	name=ID;
 	public DeclaredParameterElements getDeclaredParameterAccess() {
 		return (pDeclaredParameter != null) ? pDeclaredParameter : (pDeclaredParameter = new DeclaredParameterElements());
 	}
@@ -597,7 +589,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AbstractDefinition:
-	//  Definition|DeclaredParameter;
+	//	Definition | DeclaredParameter;
 	public AbstractDefinitionElements getAbstractDefinitionAccess() {
 		return (pAbstractDefinition != null) ? pAbstractDefinition : (pAbstractDefinition = new AbstractDefinitionElements());
 	}
@@ -607,7 +599,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Evaluation:
-	//  expression=Expression ";";
+	//	expression=Expression ";";
 	public EvaluationElements getEvaluationAccess() {
 		return (pEvaluation != null) ? pEvaluation : (pEvaluation = new EvaluationElements());
 	}
@@ -617,7 +609,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Expression:
-	//  Addition;
+	//	Addition;
 	public ExpressionElements getExpressionAccess() {
 		return (pExpression != null) ? pExpression : (pExpression = new ExpressionElements());
 	}
@@ -627,8 +619,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Addition returns Expression:
-	//  Multiplication (({Plus.left=current} "+"|{Minus.left=current} "-")
-	//  right=Multiplication)*;
+	//	Multiplication (({Plus.left=current} "+" | {Minus.left=current} "-") right=Multiplication)*;
 	public AdditionElements getAdditionAccess() {
 		return (pAddition != null) ? pAddition : (pAddition = new AdditionElements());
 	}
@@ -638,8 +629,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Multiplication returns Expression:
-	//  PrimaryExpression (({Multi.left=current} "*"|{Div.left=current} "/")
-	//  right=PrimaryExpression)*;
+	//	PrimaryExpression (({Multi.left=current} "*" | {Div.left=current} "/") right=PrimaryExpression)*;
 	public MultiplicationElements getMultiplicationAccess() {
 		return (pMultiplication != null) ? pMultiplication : (pMultiplication = new MultiplicationElements());
 	}
@@ -649,8 +639,8 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PrimaryExpression returns Expression:
-	//  "(" Expression ")"|{NumberLiteral} value=NUMBER|{FunctionCall} func=[
-	//  AbstractDefinition] ("(" args+=Expression ("," args+=Expression)* ")")?;
+	//	"(" Expression ")" | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ("(" args+=Expression
+	//	("," args+=Expression)* ")")?;
 	public PrimaryExpressionElements getPrimaryExpressionAccess() {
 		return (pPrimaryExpression != null) ? pPrimaryExpression : (pPrimaryExpression = new PrimaryExpressionElements());
 	}
@@ -660,51 +650,50 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal NUMBER returns ecore::EBigDecimal:
-	//  "0".."9"* ("." "0".."9"+)?;
+	//	"0".."9"* ("." "0".."9"+)?;
 	public TerminalRule getNUMBERRule() {
 		return (tNUMBER != null) ? tNUMBER : (tNUMBER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NUMBER"));
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "this one has been deactivated";
+	//	"this one has been deactivated";
 	public TerminalRule getINTRule() {
 		return (tINT != null) ? tINT : (tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
 	} 
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

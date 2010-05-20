@@ -55,7 +55,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   elements+=AbstractElement*;
+ * 	elements+=AbstractElement*;
  *
  **/
 
@@ -111,11 +111,11 @@ protected class Model_ElementsAssignment extends AssignmentToken  {
 /************ begin Rule AbstractElement ****************
  *
  * AbstractElement:
- *   PackageDeclaration|Type|Import;
+ * 	PackageDeclaration | Type | Import;
  *
  **/
 
-// PackageDeclaration|Type|Import
+// PackageDeclaration | Type | Import
 protected class AbstractElement_Alternatives extends AlternativesToken {
 
 	public AbstractElement_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -265,7 +265,7 @@ protected class AbstractElement_ImportParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule Import ****************
  *
  * Import:
- *   "import" importedNamespace=QualifiedNameWithWildCard;
+ * 	"import" importedNamespace=QualifiedNameWithWildCard;
  *
  **/
 
@@ -360,7 +360,7 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 /************ begin Rule PackageDeclaration ****************
  *
  * PackageDeclaration:
- *   "package" name=QualifiedName "{" elements+=AbstractElement* "}";
+ * 	"package" name=QualifiedName "{" elements+=AbstractElement* "}";
  *
  **/
 
@@ -547,11 +547,11 @@ protected class PackageDeclaration_RightCurlyBracketKeyword_4 extends KeywordTok
 /************ begin Rule Type ****************
  *
  * Type:
- *   Entity|DataType;
+ * 	Entity | DataType;
  *
  **/
 
-// Entity|DataType
+// Entity | DataType
 protected class Type_Alternatives extends AlternativesToken {
 
 	public Type_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -661,7 +661,7 @@ protected class Type_DataTypeParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule DataType ****************
  *
  * DataType:
- *   "datatype" name=ID;
+ * 	"datatype" name=ID;
  *
  **/
 
@@ -756,13 +756,11 @@ protected class DataType_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule Entity ****************
  *
  * Entity:
- *   "entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{"
- *   features+=Feature* "}";
+ * 	"entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{" features+=Feature* "}";
  *
  **/
 
-// "entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{"
-// features+=Feature* "}"
+// "entity" name=ID ("extends" superType=[Entity|QualifiedName])? "{" features+=Feature* "}"
 protected class Entity_Group extends GroupToken {
 	
 	public Entity_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1028,11 +1026,11 @@ protected class Entity_RightCurlyBracketKeyword_5 extends KeywordToken  {
 /************ begin Rule Feature ****************
  *
  * Feature:
- *   StructuralFeature|Operation;
+ * 	StructuralFeature | Operation;
  *
  **/
 
-// StructuralFeature|Operation
+// StructuralFeature | Operation
 protected class Feature_Alternatives extends AlternativesToken {
 
 	public Feature_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1144,11 +1142,11 @@ protected class Feature_OperationParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule StructuralFeature ****************
  *
  * StructuralFeature:
- *   Attribute|Reference;
+ * 	Attribute | Reference;
  *
  **/
 
-// Attribute|Reference
+// Attribute | Reference
 protected class StructuralFeature_Alternatives extends AlternativesToken {
 
 	public StructuralFeature_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1258,7 +1256,7 @@ protected class StructuralFeature_ReferenceParserRuleCall_1 extends RuleCallToke
 /************ begin Rule Attribute ****************
  *
  * Attribute:
- *   "attr" name=ID ":" type=TypeRef;
+ * 	"attr" name=ID ":" type=TypeRef;
  *
  **/
 
@@ -1421,7 +1419,7 @@ protected class Attribute_TypeAssignment_3 extends AssignmentToken  {
 /************ begin Rule Reference ****************
  *
  * Reference:
- *   "ref" name=ID ":" type=TypeRef ("opposite" opposite=[Reference])?;
+ * 	"ref" name=ID ":" type=TypeRef ("opposite" opposite=[Reference])?;
  *
  **/
 
@@ -1667,13 +1665,11 @@ protected class Reference_OppositeAssignment_4_1 extends AssignmentToken  {
 /************ begin Rule Operation ****************
  *
  * Operation:
- *   visibility=Visibility? "op" name=ID "(" (params+=Parameter (","
- *   params+=Parameter)*)? ")" ":" type=TypeRef;
+ * 	visibility=Visibility? "op" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" ":" type=TypeRef;
  *
  **/
 
-// visibility=Visibility? "op" name=ID "(" (params+=Parameter (","
-// params+=Parameter)*)? ")" ":" type=TypeRef
+// visibility=Visibility? "op" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" ":" type=TypeRef
 protected class Operation_Group extends GroupToken {
 	
 	public Operation_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2073,7 +2069,7 @@ protected class Operation_TypeAssignment_7 extends AssignmentToken  {
 /************ begin Rule Parameter ****************
  *
  * Parameter:
- *   name=ID type=TypeRef;
+ * 	name=ID type=TypeRef;
  *
  **/
 
@@ -2192,11 +2188,11 @@ protected class Parameter_TypeAssignment_1 extends AssignmentToken  {
 /************ begin Rule TypedElement ****************
  *
  * TypedElement:
- *   Feature|Parameter;
+ * 	Feature | Parameter;
  *
  **/
 
-// Feature|Parameter
+// Feature | Parameter
 protected class TypedElement_Alternatives extends AlternativesToken {
 
 	public TypedElement_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2310,7 +2306,7 @@ protected class TypedElement_ParameterParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule TypeRef ****************
  *
  * TypeRef:
- *   referenced=[Type|QualifiedName];
+ * 	referenced=[Type|QualifiedName];
  *
  **/
 

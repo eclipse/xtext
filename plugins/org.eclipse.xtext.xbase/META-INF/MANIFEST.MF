@@ -20,8 +20,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.antlr.runtime,
- org.eclipse.emf.mwe2.launch;bundle-version="1.0.0";resolution:=optional,
- org.eclipse.emf.mwe2.language.ui;bundle-version="1.0.0";resolution:=optional
+ org.eclipse.emf.mwe2.launch;bundle-version="1.0.0";resolution:=optional
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.xbase,
  org.eclipse.xtext.xbase.parseTreeConstruction,
