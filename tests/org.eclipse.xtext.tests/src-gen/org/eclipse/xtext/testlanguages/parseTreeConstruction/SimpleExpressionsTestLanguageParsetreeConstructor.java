@@ -46,7 +46,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Sequence ****************
  *
  * Sequence:
- *   Addition ({Sequence.expressions+=current} expressions+=Addition)*;
+ * 	Addition ({Sequence.expressions+=current} expressions+=Addition)*;
  *
  **/
 
@@ -74,7 +74,7 @@ protected class Sequence_Group extends GroupToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getAtomRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
@@ -105,7 +105,7 @@ protected class Sequence_AdditionParserRuleCall_0 extends RuleCallToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getAtomRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
+		   getEObject().eClass() != grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())
 			return null;
 		if(checkForRecursion(Addition_Group.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
@@ -232,13 +232,11 @@ protected class Sequence_ExpressionsAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule Addition ****************
  *
  * Addition returns Expression:
- *   Multiplication ({Op.values+=current} operator=( "+" | "-" )
- *   values+=Multiplication)*;
+ * 	Multiplication ({Op.values+=current} operator=("+" | "-") values+=Multiplication)*;
  *
  **/
 
-// Multiplication ({Op.values+=current} operator=( "+" | "-" )
-// values+=Multiplication)*
+// Multiplication ({Op.values+=current} operator=("+" | "-") values+=Multiplication)*
 protected class Addition_Group extends GroupToken {
 	
 	public Addition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -262,7 +260,7 @@ protected class Addition_Group extends GroupToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getAtomRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
+		   getEObject().eClass() != grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -303,7 +301,7 @@ protected class Addition_MultiplicationParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// ({Op.values+=current} operator=( "+" | "-" ) values+=Multiplication)*
+// ({Op.values+=current} operator=("+" | "-") values+=Multiplication)*
 protected class Addition_Group_1 extends GroupToken {
 	
 	public Addition_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -362,7 +360,7 @@ protected class Addition_OpValuesAction_1_0 extends ActionToken  {
 	}
 }
 
-// operator=( "+" | "-" )
+// operator=("+" | "-")
 protected class Addition_OperatorAssignment_1_1 extends AssignmentToken  {
 	
 	public Addition_OperatorAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -455,11 +453,11 @@ protected class Addition_ValuesAssignment_1_2 extends AssignmentToken  {
 /************ begin Rule Multiplication ****************
  *
  * Multiplication returns Expression:
- *   Term ({Op.values+=current} operator=( "*" | "/" ) values+=Term)*;
+ * 	Term ({Op.values+=current} operator=("*" | "/") values+=Term)*;
  *
  **/
 
-// Term ({Op.values+=current} operator=( "*" | "/" ) values+=Term)*
+// Term ({Op.values+=current} operator=("*" | "/") values+=Term)*
 protected class Multiplication_Group extends GroupToken {
 	
 	public Multiplication_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -483,7 +481,7 @@ protected class Multiplication_Group extends GroupToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getAtomRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
+		   getEObject().eClass() != grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -524,7 +522,7 @@ protected class Multiplication_TermParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// ({Op.values+=current} operator=( "*" | "/" ) values+=Term)*
+// ({Op.values+=current} operator=("*" | "/") values+=Term)*
 protected class Multiplication_Group_1 extends GroupToken {
 	
 	public Multiplication_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -583,7 +581,7 @@ protected class Multiplication_OpValuesAction_1_0 extends ActionToken  {
 	}
 }
 
-// operator=( "*" | "/" )
+// operator=("*" | "/")
 protected class Multiplication_OperatorAssignment_1_1 extends AssignmentToken  {
 	
 	public Multiplication_OperatorAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -676,11 +674,11 @@ protected class Multiplication_ValuesAssignment_1_2 extends AssignmentToken  {
 /************ begin Rule Term ****************
  *
  * Term returns Expression:
- *   Atom|Parens;
+ * 	Atom | Parens;
  *
  **/
 
-// Atom|Parens
+// Atom | Parens
 protected class Term_Alternatives extends AlternativesToken {
 
 	public Term_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -704,7 +702,7 @@ protected class Term_Alternatives extends AlternativesToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getAtomRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
+		   getEObject().eClass() != grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -788,7 +786,7 @@ protected class Term_ParensParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Atom ****************
  *
  * Atom:
- *   name=ID;
+ * 	name=ID;
  *
  **/
 
@@ -833,7 +831,7 @@ protected class Atom_NameAssignment extends AssignmentToken  {
 /************ begin Rule Parens ****************
  *
  * Parens returns Expression:
- *   "(" Addition ")";
+ * 	"(" Addition ")";
  *
  **/
 
@@ -860,7 +858,7 @@ protected class Parens_Group extends GroupToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getAtomRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())
+		   getEObject().eClass() != grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}

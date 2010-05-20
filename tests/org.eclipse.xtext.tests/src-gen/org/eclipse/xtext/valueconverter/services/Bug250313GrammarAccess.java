@@ -77,30 +77,28 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRefChild2IDTerminalRuleCall_8_1_1_0_1_1 = (RuleCall)cRefChild2CrossReference_8_1_1_0_1.eContents().get(1);
 		
 		//Model:
-		//  "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+"
-		//  multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2"
-		//  value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+"
-		//  multiValue+=Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype
-		//  |("content" children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?;
+		//	"1"? value=("mykeyword1" | STRING | NestedDatatype | Datatype | ID) | "1+" multiValue+=("mykeyword1" | STRING |
+		//	NestedDatatype | Datatype | ID) | "2" value=STRING | "2+" multiValue+=STRING | "3" value=Datatype | "3+"
+		//	multiValue+=Datatype | "4" value=NestedDatatype | "4+" multiValue+=NestedDatatype | ("content" children=Child) ("ref"
+		//	ref=([Child1|STRING] | [Child2]))?;
 		public ParserRule getRule() { return rule; }
 
-		//"1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+"
-		//multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2"
-		//value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+"
-		//multiValue+=Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|(
-		//"content" children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?
+		//"1"? value=("mykeyword1" | STRING | NestedDatatype | Datatype | ID) | "1+" multiValue+=("mykeyword1" | STRING |
+		//NestedDatatype | Datatype | ID) | "2" value=STRING | "2+" multiValue+=STRING | "3" value=Datatype | "3+"
+		//multiValue+=Datatype | "4" value=NestedDatatype | "4+" multiValue+=NestedDatatype | ("content" children=Child) ("ref"
+		//ref=([Child1|STRING] | [Child2]))?
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )
+		//"1"? value=("mykeyword1" | STRING | NestedDatatype | Datatype | ID)
 		public Group getGroup_0() { return cGroup_0; }
 
 		//"1"?
 		public Keyword getDigitOneKeyword_0_0() { return cDigitOneKeyword_0_0; }
 
-		//value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )
+		//value=("mykeyword1" | STRING | NestedDatatype | Datatype | ID)
 		public Assignment getValueAssignment_0_1() { return cValueAssignment_0_1; }
 
-		//"mykeyword1"|STRING|NestedDatatype|Datatype|ID
+		//"mykeyword1" | STRING | NestedDatatype | Datatype | ID
 		public Alternatives getValueAlternatives_0_1_0() { return cValueAlternatives_0_1_0; }
 
 		//"mykeyword1"
@@ -118,16 +116,16 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getValueIDTerminalRuleCall_0_1_0_4() { return cValueIDTerminalRuleCall_0_1_0_4; }
 
-		//"1+" multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )
+		//"1+" multiValue+=("mykeyword1" | STRING | NestedDatatype | Datatype | ID)
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"1+"
 		public Keyword getDigitOnePlusSignKeyword_1_0() { return cDigitOnePlusSignKeyword_1_0; }
 
-		//multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )
+		//multiValue+=("mykeyword1" | STRING | NestedDatatype | Datatype | ID)
 		public Assignment getMultiValueAssignment_1_1() { return cMultiValueAssignment_1_1; }
 
-		//"mykeyword1"|STRING|NestedDatatype|Datatype|ID
+		//"mykeyword1" | STRING | NestedDatatype | Datatype | ID
 		public Alternatives getMultiValueAlternatives_1_1_0() { return cMultiValueAlternatives_1_1_0; }
 
 		//"mykeyword1"
@@ -217,7 +215,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		//NestedDatatype
 		public RuleCall getMultiValueNestedDatatypeParserRuleCall_7_1_0() { return cMultiValueNestedDatatypeParserRuleCall_7_1_0; }
 
-		//("content" children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?
+		//("content" children=Child) ("ref" ref=([Child1|STRING] | [Child2]))?
 		public Group getGroup_8() { return cGroup_8; }
 
 		//"content" children=Child
@@ -232,16 +230,16 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		//Child
 		public RuleCall getChildrenChildParserRuleCall_8_0_1_0() { return cChildrenChildParserRuleCall_8_0_1_0; }
 
-		//("ref" ref=( [Child1|STRING] | [Child2] ))?
+		//("ref" ref=([Child1|STRING] | [Child2]))?
 		public Group getGroup_8_1() { return cGroup_8_1; }
 
 		//"ref"
 		public Keyword getRefKeyword_8_1_0() { return cRefKeyword_8_1_0; }
 
-		//ref=( [Child1|STRING] | [Child2] )
+		//ref=([Child1|STRING] | [Child2])
 		public Assignment getRefAssignment_8_1_1() { return cRefAssignment_8_1_1; }
 
-		//( [Child1|STRING] | [Child2] )
+		//([Child1|STRING] | [Child2])
 		public Alternatives getRefAlternatives_8_1_1_0() { return cRefAlternatives_8_1_1_0; }
 
 		//[Child1|STRING]
@@ -265,7 +263,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cIDTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//Datatype returns ecore::EString:
-		//  ID "-" ID;
+		//	ID "-" ID;
 		public ParserRule getRule() { return rule; }
 
 		//ID "-" ID
@@ -289,7 +287,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDatatypeParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//NestedDatatype returns ecore::EString:
-		//  ID "+" Datatype?;
+		//	ID "+" Datatype?;
 		public ParserRule getRule() { return rule; }
 
 		//ID "+" Datatype?
@@ -312,10 +310,10 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cChild2ParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Child:
-		//  Child1|Child2;
+		//	Child1 | Child2;
 		public ParserRule getRule() { return rule; }
 
-		//Child1|Child2
+		//Child1 | Child2
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Child1
@@ -331,7 +329,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//Child1:
-		//  name=ID;
+		//	name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//name=ID
@@ -346,13 +344,19 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameSTRINGTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
+		//// TODO rename test language to ValueConverterTestLanguage
+		//// TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
 		//Child2:
-		//  name=STRING;
+		//	name=STRING;
 		public ParserRule getRule() { return rule; }
 
+		//// TODO rename test language to ValueConverterTestLanguage
+		//// TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
 		//name=STRING
 		public Assignment getNameAssignment() { return cNameAssignment; }
 
+		//// TODO rename test language to ValueConverterTestLanguage
+		//// TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
 		//STRING
 		public RuleCall getNameSTRINGTerminalRuleCall_0() { return cNameSTRINGTerminalRuleCall_0; }
 	}
@@ -387,11 +391,10 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Model:
-	//  "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+"
-	//  multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2"
-	//  value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+"
-	//  multiValue+=Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype
-	//  |("content" children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?;
+	//	"1"? value=("mykeyword1" | STRING | NestedDatatype | Datatype | ID) | "1+" multiValue+=("mykeyword1" | STRING |
+	//	NestedDatatype | Datatype | ID) | "2" value=STRING | "2+" multiValue+=STRING | "3" value=Datatype | "3+"
+	//	multiValue+=Datatype | "4" value=NestedDatatype | "4+" multiValue+=NestedDatatype | ("content" children=Child) ("ref"
+	//	ref=([Child1|STRING] | [Child2]))?;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -401,7 +404,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Datatype returns ecore::EString:
-	//  ID "-" ID;
+	//	ID "-" ID;
 	public DatatypeElements getDatatypeAccess() {
 		return (pDatatype != null) ? pDatatype : (pDatatype = new DatatypeElements());
 	}
@@ -411,7 +414,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NestedDatatype returns ecore::EString:
-	//  ID "+" Datatype?;
+	//	ID "+" Datatype?;
 	public NestedDatatypeElements getNestedDatatypeAccess() {
 		return (pNestedDatatype != null) ? pNestedDatatype : (pNestedDatatype = new NestedDatatypeElements());
 	}
@@ -421,7 +424,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Child:
-	//  Child1|Child2;
+	//	Child1 | Child2;
 	public ChildElements getChildAccess() {
 		return (pChild != null) ? pChild : (pChild = new ChildElements());
 	}
@@ -431,7 +434,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Child1:
-	//  name=ID;
+	//	name=ID;
 	public Child1Elements getChild1Access() {
 		return (pChild1 != null) ? pChild1 : (pChild1 = new Child1Elements());
 	}
@@ -440,8 +443,10 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		return getChild1Access().getRule();
 	}
 
+	//// TODO rename test language to ValueConverterTestLanguage
+	//// TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
 	//Child2:
-	//  name=STRING;
+	//	name=STRING;
 	public Child2Elements getChild2Access() {
 		return (pChild2 != null) ? pChild2 : (pChild2 = new Child2Elements());
 	}
@@ -451,45 +456,44 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

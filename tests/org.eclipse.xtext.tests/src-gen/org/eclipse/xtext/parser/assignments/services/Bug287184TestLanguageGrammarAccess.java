@@ -29,10 +29,10 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cDetailAssociatedDetailParserRuleCall_2_0_1 = (RuleCall)cDetailAlternatives_2_0.eContents().get(1);
 		
 		//Model:
-		//  "model" name=FQN detail+=( Detail | AssociatedDetail )+;
+		//	"model" name=FQN detail+=(Detail | AssociatedDetail)+;
 		public ParserRule getRule() { return rule; }
 
-		//"model" name=FQN detail+=( Detail | AssociatedDetail )+
+		//"model" name=FQN detail+=(Detail | AssociatedDetail)+
 		public Group getGroup() { return cGroup; }
 
 		//"model"
@@ -44,10 +44,10 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//FQN
 		public RuleCall getNameFQNParserRuleCall_1_0() { return cNameFQNParserRuleCall_1_0; }
 
-		//detail+=( Detail | AssociatedDetail )+
+		//detail+=(Detail | AssociatedDetail)+
 		public Assignment getDetailAssignment_2() { return cDetailAssignment_2; }
 
-		//Detail|AssociatedDetail
+		//Detail | AssociatedDetail
 		public Alternatives getDetailAlternatives_2_0() { return cDetailAlternatives_2_0; }
 
 		//Detail
@@ -64,10 +64,10 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cAssociatedDetailParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//AbstractDetail:
-		//  Detail|AssociatedDetail;
+		//	Detail | AssociatedDetail;
 		public ParserRule getRule() { return rule; }
 
-		//Detail|AssociatedDetail
+		//Detail | AssociatedDetail
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Detail
@@ -91,21 +91,19 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cDetailClassModelFQNParserRuleCall_2_0_1 = (RuleCall)cDetailClassModelCrossReference_2_0.eContents().get(1);
 		
 		//Detail:
-		//  "detail" visibility=( "private" | "protected" | "public" )? detailClass=[
-		//  Model|FQN];
+		//	"detail" visibility=("private" | "protected" | "public")? detailClass=[Model|FQN];
 		public ParserRule getRule() { return rule; }
 
-		//"detail" visibility=( "private" | "protected" | "public" )? detailClass=[Model|
-		//FQN]
+		//"detail" visibility=("private" | "protected" | "public")? detailClass=[Model|FQN]
 		public Group getGroup() { return cGroup; }
 
 		//"detail"
 		public Keyword getDetailKeyword_0() { return cDetailKeyword_0; }
 
-		//visibility=( "private" | "protected" | "public" )?
+		//visibility=("private" | "protected" | "public")?
 		public Assignment getVisibilityAssignment_1() { return cVisibilityAssignment_1; }
 
-		//"private"|"protected"|"public"
+		//"private" | "protected" | "public"
 		public Alternatives getVisibilityAlternatives_1_0() { return cVisibilityAlternatives_1_0; }
 
 		//"private"
@@ -137,7 +135,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//AssociatedDetail:
-		//  "associated" detailClass=[Model|FQN] ";";
+		//	"associated" detailClass=[Model|FQN] ";";
 		public ParserRule getRule() { return rule; }
 
 		//"associated" detailClass=[Model|FQN] ";"
@@ -168,7 +166,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//FQN returns ecore::EString:
-		//  ID ("." ID)*;
+		//	ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
@@ -216,7 +214,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//  "model" name=FQN detail+=( Detail | AssociatedDetail )+;
+	//	"model" name=FQN detail+=(Detail | AssociatedDetail)+;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -226,7 +224,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//AbstractDetail:
-	//  Detail|AssociatedDetail;
+	//	Detail | AssociatedDetail;
 	public AbstractDetailElements getAbstractDetailAccess() {
 		return (pAbstractDetail != null) ? pAbstractDetail : (pAbstractDetail = new AbstractDetailElements());
 	}
@@ -236,8 +234,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Detail:
-	//  "detail" visibility=( "private" | "protected" | "public" )? detailClass=[
-	//  Model|FQN];
+	//	"detail" visibility=("private" | "protected" | "public")? detailClass=[Model|FQN];
 	public DetailElements getDetailAccess() {
 		return (pDetail != null) ? pDetail : (pDetail = new DetailElements());
 	}
@@ -247,7 +244,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//AssociatedDetail:
-	//  "associated" detailClass=[Model|FQN] ";";
+	//	"associated" detailClass=[Model|FQN] ";";
 	public AssociatedDetailElements getAssociatedDetailAccess() {
 		return (pAssociatedDetail != null) ? pAssociatedDetail : (pAssociatedDetail = new AssociatedDetailElements());
 	}
@@ -257,7 +254,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//FQN returns ecore::EString:
-	//  ID ("." ID)*;
+	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
 		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
 	}
@@ -267,45 +264,44 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

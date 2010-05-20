@@ -27,7 +27,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cLTTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//Program:
-		//  {Program} (LT* directives+=ProgramDirective)* LT*;
+		//	{Program} (LT* directives+=ProgramDirective)* LT*;
 		public ParserRule getRule() { return rule; }
 
 		//{Program} (LT* directives+=ProgramDirective)* LT*
@@ -59,10 +59,10 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cStatementParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//ProgramDirective:
-		//  FunctionDefinition|Statement;
+		//	FunctionDefinition | Statement;
 		public ParserRule getRule() { return rule; }
 
-		//FunctionDefinition|Statement
+		//FunctionDefinition | Statement
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//FunctionDefinition
@@ -89,12 +89,10 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cBodyBlockParserRuleCall_7_0 = (RuleCall)cBodyAssignment_7.eContents().get(0);
 		
 		//FunctionDefinition:
-		//  attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT*
-		//  body=Block;
+		//	attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=Block;
 		public ParserRule getRule() { return rule; }
 
-		//attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT*
-		//body=Block
+		//attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=Block
 		public Group getGroup() { return cGroup; }
 
 		//attributes+=Attribute*
@@ -149,10 +147,10 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightSquareBracketKeyword_1_5 = (Keyword)cGroup_1.eContents().get(5);
 		
 		//Attribute:
-		//  ident=ID|{BracketAttribute} "[" LT* expression=PostfixExpression LT* "]";
+		//	ident=ID | {BracketAttribute} "[" LT* expression=PostfixExpression LT* "]";
 		public ParserRule getRule() { return rule; }
 
-		//ident=ID|{BracketAttribute} "[" LT* expression=PostfixExpression LT* "]"
+		//ident=ID | {BracketAttribute} "[" LT* expression=PostfixExpression LT* "]"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//ident=ID
@@ -205,7 +203,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Parameters:
-		//  {Parameters} "(" LT* (params+=ID LT* ("," LT* params+=ID LT*)*)? ")";
+		//	{Parameters} "(" LT* (params+=ID LT* ("," LT* params+=ID LT*)*)? ")";
 		public ParserRule getRule() { return rule; }
 
 		//{Parameters} "(" LT* (params+=ID LT* ("," LT* params+=ID LT*)*)? ")"
@@ -267,7 +265,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Block:
-		//  {Block} "{" (LT* directives+=Statement)* LT* "}";
+		//	{Block} "{" (LT* directives+=Statement)* LT* "}";
 		public ParserRule getRule() { return rule; }
 
 		//{Block} "{" (LT* directives+=Statement)* LT* "}"
@@ -311,16 +309,16 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cLTTerminalRuleCall_1_2_1 = (RuleCall)cAlternatives_1_2.eContents().get(1);
 		
 		//Statement:
-		//  Block|{ExpressionStatement} expression=PostfixExpression (";"|LT);
+		//	Block | {ExpressionStatement} expression=PostfixExpression (";" | LT);
 		public ParserRule getRule() { return rule; }
 
-		//Block|{ExpressionStatement} expression=PostfixExpression (";"|LT)
+		//Block | {ExpressionStatement} expression=PostfixExpression (";" | LT)
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Block
 		public RuleCall getBlockParserRuleCall_0() { return cBlockParserRuleCall_0; }
 
-		//{ExpressionStatement} expression=PostfixExpression (";"|LT)
+		//{ExpressionStatement} expression=PostfixExpression (";" | LT)
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{ExpressionStatement}
@@ -332,7 +330,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//PostfixExpression
 		public RuleCall getExpressionPostfixExpressionParserRuleCall_1_1_0() { return cExpressionPostfixExpressionParserRuleCall_1_1_0; }
 
-		//";"|LT
+		//";" | LT
 		public Alternatives getAlternatives_1_2() { return cAlternatives_1_2; }
 
 		//";"
@@ -364,22 +362,19 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightParenthesisKeyword_1_1_5 = (Keyword)cGroup_1_1.eContents().get(5);
 		
 		//PostfixExpression:
-		//  PrimaryExpression ({PostfixExpression.expression=current} LT*
-		//  property=PropertyOperator|{Invocation.expression=current} LT* "(" LT* (
-		//  arguments=ListExpression LT*)? ")")*;
+		//	PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator |
+		//	{Invocation.expression=current} LT* "(" LT* (arguments=ListExpression LT*)? ")")*;
 		public ParserRule getRule() { return rule; }
 
-		//PrimaryExpression ({PostfixExpression.expression=current} LT*
-		//property=PropertyOperator|{Invocation.expression=current} LT* "(" LT* (
-		//arguments=ListExpression LT*)? ")")*
+		//PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator |
+		//{Invocation.expression=current} LT* "(" LT* (arguments=ListExpression LT*)? ")")*
 		public Group getGroup() { return cGroup; }
 
 		//PrimaryExpression
 		public RuleCall getPrimaryExpressionParserRuleCall_0() { return cPrimaryExpressionParserRuleCall_0; }
 
-		//({PostfixExpression.expression=current} LT* property=PropertyOperator|{
-		//Invocation.expression=current} LT* "(" LT* (arguments=ListExpression LT*)? ")")
-		// *
+		//({PostfixExpression.expression=current} LT* property=PropertyOperator | {Invocation.expression=current} LT* "(" LT*
+		//(arguments=ListExpression LT*)? ")")*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//{PostfixExpression.expression=current} LT* property=PropertyOperator
@@ -441,7 +436,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cExpressionsPostfixExpressionParserRuleCall_1_3_0 = (RuleCall)cExpressionsAssignment_1_3.eContents().get(0);
 		
 		//ListExpression:
-		//  expressions+=PostfixExpression (LT* "," LT* expressions+=PostfixExpression)*;
+		//	expressions+=PostfixExpression (LT* "," LT* expressions+=PostfixExpression)*;
 		public ParserRule getRule() { return rule; }
 
 		//expressions+=PostfixExpression (LT* "," LT* expressions+=PostfixExpression)*
@@ -489,10 +484,10 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightSquareBracketKeyword_1_4 = (Keyword)cGroup_1.eContents().get(4);
 		
 		//PropertyOperator:
-		//  "." LT* name=ID|"[" LT* expressions=ListExpression LT* "]";
+		//	"." LT* name=ID | "[" LT* expressions=ListExpression LT* "]";
 		public ParserRule getRule() { return rule; }
 
-		//"." LT* name=ID|"[" LT* expressions=ListExpression LT* "]"
+		//"." LT* name=ID | "[" LT* expressions=ListExpression LT* "]"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"." LT* name=ID
@@ -550,12 +545,10 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cBodyBlockParserRuleCall_1_5_0 = (RuleCall)cBodyAssignment_1_5.eContents().get(0);
 		
 		//PrimaryExpression:
-		//  {Identifier} name=ID|{FunctionExpression} "function" LT* params=Parameters LT
-		//  * body=Block;
+		//	{Identifier} name=ID | {FunctionExpression} "function" LT* params=Parameters LT* body=Block;
 		public ParserRule getRule() { return rule; }
 
-		//{Identifier} name=ID|{FunctionExpression} "function" LT* params=Parameters LT*
-		//body=Block
+		//{Identifier} name=ID | {FunctionExpression} "function" LT* params=Parameters LT* body=Block
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//{Identifier} name=ID
@@ -628,7 +621,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Program:
-	//  {Program} (LT* directives+=ProgramDirective)* LT*;
+	//	{Program} (LT* directives+=ProgramDirective)* LT*;
 	public ProgramElements getProgramAccess() {
 		return (pProgram != null) ? pProgram : (pProgram = new ProgramElements());
 	}
@@ -638,7 +631,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//ProgramDirective:
-	//  FunctionDefinition|Statement;
+	//	FunctionDefinition | Statement;
 	public ProgramDirectiveElements getProgramDirectiveAccess() {
 		return (pProgramDirective != null) ? pProgramDirective : (pProgramDirective = new ProgramDirectiveElements());
 	}
@@ -648,8 +641,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//FunctionDefinition:
-	//  attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT*
-	//  body=Block;
+	//	attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=Block;
 	public FunctionDefinitionElements getFunctionDefinitionAccess() {
 		return (pFunctionDefinition != null) ? pFunctionDefinition : (pFunctionDefinition = new FunctionDefinitionElements());
 	}
@@ -659,7 +651,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Attribute:
-	//  ident=ID|{BracketAttribute} "[" LT* expression=PostfixExpression LT* "]";
+	//	ident=ID | {BracketAttribute} "[" LT* expression=PostfixExpression LT* "]";
 	public AttributeElements getAttributeAccess() {
 		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
 	}
@@ -669,7 +661,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Parameters:
-	//  {Parameters} "(" LT* (params+=ID LT* ("," LT* params+=ID LT*)*)? ")";
+	//	{Parameters} "(" LT* (params+=ID LT* ("," LT* params+=ID LT*)*)? ")";
 	public ParametersElements getParametersAccess() {
 		return (pParameters != null) ? pParameters : (pParameters = new ParametersElements());
 	}
@@ -679,7 +671,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Block:
-	//  {Block} "{" (LT* directives+=Statement)* LT* "}";
+	//	{Block} "{" (LT* directives+=Statement)* LT* "}";
 	public BlockElements getBlockAccess() {
 		return (pBlock != null) ? pBlock : (pBlock = new BlockElements());
 	}
@@ -689,7 +681,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Statement:
-	//  Block|{ExpressionStatement} expression=PostfixExpression (";"|LT);
+	//	Block | {ExpressionStatement} expression=PostfixExpression (";" | LT);
 	public StatementElements getStatementAccess() {
 		return (pStatement != null) ? pStatement : (pStatement = new StatementElements());
 	}
@@ -699,9 +691,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//PostfixExpression:
-	//  PrimaryExpression ({PostfixExpression.expression=current} LT*
-	//  property=PropertyOperator|{Invocation.expression=current} LT* "(" LT* (
-	//  arguments=ListExpression LT*)? ")")*;
+	//	PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator |
+	//	{Invocation.expression=current} LT* "(" LT* (arguments=ListExpression LT*)? ")")*;
 	public PostfixExpressionElements getPostfixExpressionAccess() {
 		return (pPostfixExpression != null) ? pPostfixExpression : (pPostfixExpression = new PostfixExpressionElements());
 	}
@@ -711,7 +702,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//ListExpression:
-	//  expressions+=PostfixExpression (LT* "," LT* expressions+=PostfixExpression)*;
+	//	expressions+=PostfixExpression (LT* "," LT* expressions+=PostfixExpression)*;
 	public ListExpressionElements getListExpressionAccess() {
 		return (pListExpression != null) ? pListExpression : (pListExpression = new ListExpressionElements());
 	}
@@ -721,7 +712,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//PropertyOperator:
-	//  "." LT* name=ID|"[" LT* expressions=ListExpression LT* "]";
+	//	"." LT* name=ID | "[" LT* expressions=ListExpression LT* "]";
 	public PropertyOperatorElements getPropertyOperatorAccess() {
 		return (pPropertyOperator != null) ? pPropertyOperator : (pPropertyOperator = new PropertyOperatorElements());
 	}
@@ -731,8 +722,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//PrimaryExpression:
-	//  {Identifier} name=ID|{FunctionExpression} "function" LT* params=Parameters LT
-	//  * body=Block;
+	//	{Identifier} name=ID | {FunctionExpression} "function" LT* params=Parameters LT* body=Block;
 	public PrimaryExpressionElements getPrimaryExpressionAccess() {
 		return (pPrimaryExpression != null) ? pPrimaryExpression : (pPrimaryExpression = new PrimaryExpressionElements());
 	}
@@ -742,19 +732,19 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//  ("a".."z" | "A".."Z")+;
+	//	("a".."z" | "A".."Z")+;
 	public TerminalRule getIDRule() {
 		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
 	} 
 
 	//terminal WS:
-	//  (" " | "\t")+;
+	//	(" " | "\t")+;
 	public TerminalRule getWSRule() {
 		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
 	} 
 
 	//terminal LT:
-	//  "\r" | "\n";
+	//	"\r" | "\n";
 	public TerminalRule getLTRule() {
 		return (tLT != null) ? tLT : (tLT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "LT"));
 	} 

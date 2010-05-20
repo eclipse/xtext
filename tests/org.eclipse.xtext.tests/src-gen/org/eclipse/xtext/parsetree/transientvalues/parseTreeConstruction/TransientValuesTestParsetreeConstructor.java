@@ -44,11 +44,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Root ****************
  *
  * Root:
- *   "test" (TestRequired|TestOptional|TestList);
+ * 	"test" (TestRequired | TestOptional | TestList);
  *
  **/
 
-// "test" (TestRequired|TestOptional|TestList)
+// "test" (TestRequired | TestOptional | TestList)
 protected class Root_Group extends GroupToken {
 	
 	public Root_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -100,7 +100,7 @@ protected class Root_TestKeyword_0 extends KeywordToken  {
 
 }
 
-// TestRequired|TestOptional|TestList
+// TestRequired | TestOptional | TestList
 protected class Root_Alternatives_1 extends AlternativesToken {
 
 	public Root_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -243,7 +243,7 @@ protected class Root_TestListParserRuleCall_1_2 extends RuleCallToken {
 /************ begin Rule TestRequired ****************
  *
  * TestRequired:
- *   "required" required1=INT required2=INT;
+ * 	"required" required1=INT required2=INT;
  *
  **/
 
@@ -372,7 +372,7 @@ protected class TestRequired_Required2Assignment_2 extends AssignmentToken  {
 /************ begin Rule TestOptional ****************
  *
  * TestOptional:
- *   "optional" opt1=INT? (":" opt2=INT)?;
+ * 	"optional" opt1=INT? (":" opt2=INT)?;
  *
  **/
 
@@ -549,7 +549,7 @@ protected class TestOptional_Opt2Assignment_2_1 extends AssignmentToken  {
 /************ begin Rule TestList ****************
  *
  * TestList:
- *   "list" item+=INT*;
+ * 	"list" item+=INT*;
  *
  **/
 

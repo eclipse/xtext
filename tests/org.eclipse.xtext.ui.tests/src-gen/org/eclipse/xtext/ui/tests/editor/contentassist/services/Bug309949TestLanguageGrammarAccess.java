@@ -118,43 +118,31 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_1_9_5 = (Keyword)cGroup_1_9.eContents().get(5);
 		
 		//Model:
-		//  {Model} ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}"|"#1+" "{"
-		//  errors+=Error_1+ operations+=Operation_1+ "}"|"#2*" "{" errors+=Error_2*
-		//  operations+=Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+
-		//  operations+=Operation_2+ "}"|"#3*" name=ID "{" errors+=Error_3*
-		//  operations+=Operation_3* "}"|"#3+" name=ID "{" errors+=Error_3+
-		//  operations+=Operation_3+ "}"|"#4*" name=ID "{" errors+=Error_4*
-		//  operations+=Operation_4* "}"|"#4+" name=ID "{" errors+=Error_4+
-		//  operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=Error_5*
-		//  operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+
-		//  operations+=Operation_5+ "}");
+		//	{Model} ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}" | "#1+" "{" errors+=Error_1+ operations+=Operation_1+
+		//	"}" | "#2*" "{" errors+=Error_2* operations+=Operation_2* "}" | "#2+" name=ID "{" errors+=Error_2+
+		//	operations+=Operation_2+ "}" | "#3*" name=ID "{" errors+=Error_3* operations+=Operation_3* "}" | "#3+" name=ID "{"
+		//	errors+=Error_3+ operations+=Operation_3+ "}" | "#4*" name=ID "{" errors+=Error_4* operations+=Operation_4* "}" |
+		//	"#4+" name=ID "{" errors+=Error_4+ operations+=Operation_4+ "}" | "#5*" name=ID "{" errors+=Error_5*
+		//	operations+=Operation_5* "}" | "#5+" name=ID "{" errors+=Error_5+ operations+=Operation_5+ "}");
 		public ParserRule getRule() { return rule; }
 
-		//{Model} ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}"|"#1+" "{"
-		//errors+=Error_1+ operations+=Operation_1+ "}"|"#2*" "{" errors+=Error_2*
-		//operations+=Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+
-		//operations+=Operation_2+ "}"|"#3*" name=ID "{" errors+=Error_3*
-		//operations+=Operation_3* "}"|"#3+" name=ID "{" errors+=Error_3+
-		//operations+=Operation_3+ "}"|"#4*" name=ID "{" errors+=Error_4*
-		//operations+=Operation_4* "}"|"#4+" name=ID "{" errors+=Error_4+
-		//operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=Error_5*
-		//operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+
-		//operations+=Operation_5+ "}")
+		//{Model} ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}" | "#1+" "{" errors+=Error_1+ operations+=Operation_1+
+		//"}" | "#2*" "{" errors+=Error_2* operations+=Operation_2* "}" | "#2+" name=ID "{" errors+=Error_2+
+		//operations+=Operation_2+ "}" | "#3*" name=ID "{" errors+=Error_3* operations+=Operation_3* "}" | "#3+" name=ID "{"
+		//errors+=Error_3+ operations+=Operation_3+ "}" | "#4*" name=ID "{" errors+=Error_4* operations+=Operation_4* "}" | "#4+"
+		//name=ID "{" errors+=Error_4+ operations+=Operation_4+ "}" | "#5*" name=ID "{" errors+=Error_5* operations+=Operation_5*
+		//"}" | "#5+" name=ID "{" errors+=Error_5+ operations+=Operation_5+ "}")
 		public Group getGroup() { return cGroup; }
 
 		//{Model}
 		public Action getModelAction_0() { return cModelAction_0; }
 
-		//"#1*" "{" errors+=Error_1* operations+=Operation_1* "}"|"#1+" "{"
-		//errors+=Error_1+ operations+=Operation_1+ "}"|"#2*" "{" errors+=Error_2*
-		//operations+=Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+
-		//operations+=Operation_2+ "}"|"#3*" name=ID "{" errors+=Error_3*
-		//operations+=Operation_3* "}"|"#3+" name=ID "{" errors+=Error_3+
-		//operations+=Operation_3+ "}"|"#4*" name=ID "{" errors+=Error_4*
-		//operations+=Operation_4* "}"|"#4+" name=ID "{" errors+=Error_4+
-		//operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=Error_5*
-		//operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+
-		//operations+=Operation_5+ "}"
+		//"#1*" "{" errors+=Error_1* operations+=Operation_1* "}" | "#1+" "{" errors+=Error_1+ operations+=Operation_1+ "}" |
+		//"#2*" "{" errors+=Error_2* operations+=Operation_2* "}" | "#2+" name=ID "{" errors+=Error_2+ operations+=Operation_2+
+		//"}" | "#3*" name=ID "{" errors+=Error_3* operations+=Operation_3* "}" | "#3+" name=ID "{" errors+=Error_3+
+		//operations+=Operation_3+ "}" | "#4*" name=ID "{" errors+=Error_4* operations+=Operation_4* "}" | "#4+" name=ID "{"
+		//errors+=Error_4+ operations+=Operation_4+ "}" | "#5*" name=ID "{" errors+=Error_5* operations+=Operation_5* "}" | "#5+"
+		//name=ID "{" errors+=Error_5+ operations+=Operation_5+ "}"
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"#1*" "{" errors+=Error_1* operations+=Operation_1* "}"
@@ -450,7 +438,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//Error_1 returns Error:
-		//  annotations+=Annotation* "error" name=ID;
+		//	annotations+=Annotation* "error" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//annotations+=Annotation* "error" name=ID
@@ -482,7 +470,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//Operation_1 returns Operation:
-		//  annotations+=Annotation* "operation" name=ID;
+		//	annotations+=Annotation* "operation" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//annotations+=Annotation* "operation" name=ID
@@ -514,7 +502,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//Error_2 returns Error:
-		//  annotations+=Annotation+ "error" name=ID;
+		//	annotations+=Annotation+ "error" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//annotations+=Annotation+ "error" name=ID
@@ -546,7 +534,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//Operation_2 returns Operation:
-		//  annotations+=Annotation+ "operation" name=ID;
+		//	annotations+=Annotation+ "operation" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//annotations+=Annotation+ "operation" name=ID
@@ -578,7 +566,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//Error_3 returns Error:
-		//  annotations+=Annotation? "error" name=ID;
+		//	annotations+=Annotation? "error" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//annotations+=Annotation? "error" name=ID
@@ -610,7 +598,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//Operation_3 returns Operation:
-		//  annotations+=Annotation? "operation" name=ID;
+		//	annotations+=Annotation? "operation" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//annotations+=Annotation? "operation" name=ID
@@ -642,7 +630,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//Error_4 returns Error:
-		//  annotations+=Annotation "error" name=ID;
+		//	annotations+=Annotation "error" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//annotations+=Annotation "error" name=ID
@@ -674,7 +662,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//Operation_4 returns Operation:
-		//  annotations+=Annotation "operation" name=ID;
+		//	annotations+=Annotation "operation" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//annotations+=Annotation "operation" name=ID
@@ -704,7 +692,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Error_5 returns Error:
-		//  "error" name=ID;
+		//	"error" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"error" name=ID
@@ -728,7 +716,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Operation_5 returns Operation:
-		//  "operation" name=ID;
+		//	"operation" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"operation" name=ID
@@ -752,7 +740,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Annotation:
-		//  "@uuid" name=ID;
+		//	"@uuid" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"@uuid" name=ID
@@ -804,16 +792,12 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//  {Model} ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}"|"#1+" "{"
-	//  errors+=Error_1+ operations+=Operation_1+ "}"|"#2*" "{" errors+=Error_2*
-	//  operations+=Operation_2* "}"|"#2+" name=ID "{" errors+=Error_2+
-	//  operations+=Operation_2+ "}"|"#3*" name=ID "{" errors+=Error_3*
-	//  operations+=Operation_3* "}"|"#3+" name=ID "{" errors+=Error_3+
-	//  operations+=Operation_3+ "}"|"#4*" name=ID "{" errors+=Error_4*
-	//  operations+=Operation_4* "}"|"#4+" name=ID "{" errors+=Error_4+
-	//  operations+=Operation_4+ "}"|"#5*" name=ID "{" errors+=Error_5*
-	//  operations+=Operation_5* "}"|"#5+" name=ID "{" errors+=Error_5+
-	//  operations+=Operation_5+ "}");
+	//	{Model} ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}" | "#1+" "{" errors+=Error_1+ operations+=Operation_1+
+	//	"}" | "#2*" "{" errors+=Error_2* operations+=Operation_2* "}" | "#2+" name=ID "{" errors+=Error_2+
+	//	operations+=Operation_2+ "}" | "#3*" name=ID "{" errors+=Error_3* operations+=Operation_3* "}" | "#3+" name=ID "{"
+	//	errors+=Error_3+ operations+=Operation_3+ "}" | "#4*" name=ID "{" errors+=Error_4* operations+=Operation_4* "}" |
+	//	"#4+" name=ID "{" errors+=Error_4+ operations+=Operation_4+ "}" | "#5*" name=ID "{" errors+=Error_5*
+	//	operations+=Operation_5* "}" | "#5+" name=ID "{" errors+=Error_5+ operations+=Operation_5+ "}");
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -823,7 +807,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Error_1 returns Error:
-	//  annotations+=Annotation* "error" name=ID;
+	//	annotations+=Annotation* "error" name=ID;
 	public Error_1Elements getError_1Access() {
 		return (pError_1 != null) ? pError_1 : (pError_1 = new Error_1Elements());
 	}
@@ -833,7 +817,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Operation_1 returns Operation:
-	//  annotations+=Annotation* "operation" name=ID;
+	//	annotations+=Annotation* "operation" name=ID;
 	public Operation_1Elements getOperation_1Access() {
 		return (pOperation_1 != null) ? pOperation_1 : (pOperation_1 = new Operation_1Elements());
 	}
@@ -843,7 +827,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Error_2 returns Error:
-	//  annotations+=Annotation+ "error" name=ID;
+	//	annotations+=Annotation+ "error" name=ID;
 	public Error_2Elements getError_2Access() {
 		return (pError_2 != null) ? pError_2 : (pError_2 = new Error_2Elements());
 	}
@@ -853,7 +837,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Operation_2 returns Operation:
-	//  annotations+=Annotation+ "operation" name=ID;
+	//	annotations+=Annotation+ "operation" name=ID;
 	public Operation_2Elements getOperation_2Access() {
 		return (pOperation_2 != null) ? pOperation_2 : (pOperation_2 = new Operation_2Elements());
 	}
@@ -863,7 +847,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Error_3 returns Error:
-	//  annotations+=Annotation? "error" name=ID;
+	//	annotations+=Annotation? "error" name=ID;
 	public Error_3Elements getError_3Access() {
 		return (pError_3 != null) ? pError_3 : (pError_3 = new Error_3Elements());
 	}
@@ -873,7 +857,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Operation_3 returns Operation:
-	//  annotations+=Annotation? "operation" name=ID;
+	//	annotations+=Annotation? "operation" name=ID;
 	public Operation_3Elements getOperation_3Access() {
 		return (pOperation_3 != null) ? pOperation_3 : (pOperation_3 = new Operation_3Elements());
 	}
@@ -883,7 +867,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Error_4 returns Error:
-	//  annotations+=Annotation "error" name=ID;
+	//	annotations+=Annotation "error" name=ID;
 	public Error_4Elements getError_4Access() {
 		return (pError_4 != null) ? pError_4 : (pError_4 = new Error_4Elements());
 	}
@@ -893,7 +877,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Operation_4 returns Operation:
-	//  annotations+=Annotation "operation" name=ID;
+	//	annotations+=Annotation "operation" name=ID;
 	public Operation_4Elements getOperation_4Access() {
 		return (pOperation_4 != null) ? pOperation_4 : (pOperation_4 = new Operation_4Elements());
 	}
@@ -903,7 +887,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Error_5 returns Error:
-	//  "error" name=ID;
+	//	"error" name=ID;
 	public Error_5Elements getError_5Access() {
 		return (pError_5 != null) ? pError_5 : (pError_5 = new Error_5Elements());
 	}
@@ -913,7 +897,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Operation_5 returns Operation:
-	//  "operation" name=ID;
+	//	"operation" name=ID;
 	public Operation_5Elements getOperation_5Access() {
 		return (pOperation_5 != null) ? pOperation_5 : (pOperation_5 = new Operation_5Elements());
 	}
@@ -923,7 +907,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Annotation:
-	//  "@uuid" name=ID;
+	//	"@uuid" name=ID;
 	public AnnotationElements getAnnotationAccess() {
 		return (pAnnotation != null) ? pAnnotation : (pAnnotation = new AnnotationElements());
 	}
@@ -933,45 +917,44 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

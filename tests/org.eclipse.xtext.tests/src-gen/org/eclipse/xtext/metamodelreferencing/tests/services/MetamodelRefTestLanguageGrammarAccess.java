@@ -26,7 +26,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cNameRefsNameRefParserRuleCall_1_0 = (RuleCall)cNameRefsAssignment_1.eContents().get(0);
 		
 		//Foo:
-		//  name=ID nameRefs+=NameRef*;
+		//	name=ID nameRefs+=NameRef*;
 		public ParserRule getRule() { return rule; }
 
 		//name=ID nameRefs+=NameRef*
@@ -52,7 +52,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cRuleParserRuleIDTerminalRuleCall_0_1 = (RuleCall)cRuleParserRuleCrossReference_0.eContents().get(1);
 		
 		//NameRef returns xtext::RuleCall:
-		//  rule=[xtext::ParserRule];
+		//	rule=[xtext::ParserRule];
 		public ParserRule getRule() { return rule; }
 
 		//rule=[xtext::ParserRule]
@@ -71,7 +71,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//MyRule returns xtext::ParserRule:
-		//  name=ID;
+		//	name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//name=ID
@@ -108,7 +108,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 
 	
 	//Foo:
-	//  name=ID nameRefs+=NameRef*;
+	//	name=ID nameRefs+=NameRef*;
 	public FooElements getFooAccess() {
 		return (pFoo != null) ? pFoo : (pFoo = new FooElements());
 	}
@@ -118,7 +118,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	//NameRef returns xtext::RuleCall:
-	//  rule=[xtext::ParserRule];
+	//	rule=[xtext::ParserRule];
 	public NameRefElements getNameRefAccess() {
 		return (pNameRef != null) ? pNameRef : (pNameRef = new NameRefElements());
 	}
@@ -128,7 +128,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	//MyRule returns xtext::ParserRule:
-	//  name=ID;
+	//	name=ID;
 	public MyRuleElements getMyRuleAccess() {
 		return (pMyRule != null) ? pMyRule : (pMyRule = new MyRuleElements());
 	}
@@ -138,45 +138,44 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

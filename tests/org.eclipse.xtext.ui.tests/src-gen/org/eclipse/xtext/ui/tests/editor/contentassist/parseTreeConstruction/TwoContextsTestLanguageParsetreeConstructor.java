@@ -42,7 +42,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule MainModel ****************
  *
  * MainModel:
- *   elements+=AnElement*;
+ * 	elements+=AnElement*;
  *
  **/
 
@@ -98,7 +98,7 @@ protected class MainModel_ElementsAssignment extends AssignmentToken  {
 /************ begin Rule AnElement ****************
  *
  * AnElement:
- *   name=ID ("refersTo" referred=[AnElement])? ";";
+ * 	name=ID ("refersTo" referred=[AnElement])? ";";
  *
  **/
 

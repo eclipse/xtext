@@ -23,7 +23,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 		private final RuleCall cTypesTypeParserRuleCall_0 = (RuleCall)cTypesAssignment.eContents().get(0);
 		
 		//Model:
-		//  types+=Type*;
+		//	types+=Type*;
 		public ParserRule getRule() { return rule; }
 
 		//types+=Type*
@@ -45,7 +45,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Type:
-		//  name=FQN ("extends" superType=TypeRef)? ";";
+		//	name=FQN ("extends" superType=TypeRef)? ";";
 		public ParserRule getRule() { return rule; }
 
 		//name=FQN ("extends" superType=TypeRef)? ";"
@@ -80,7 +80,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 		private final RuleCall cTypeTypeFQNParserRuleCall_0_1 = (RuleCall)cTypeTypeCrossReference_0.eContents().get(1);
 		
 		//TypeRef:
-		//  type=[Type|FQN];
+		//	type=[Type|FQN];
 		public ParserRule getRule() { return rule; }
 
 		//type=[Type|FQN]
@@ -102,7 +102,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//FQN returns ecore::EString:
-		//  ID ("." ID)*;
+		//	ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
@@ -149,7 +149,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 
 	
 	//Model:
-	//  types+=Type*;
+	//	types+=Type*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -159,7 +159,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 	}
 
 	//Type:
-	//  name=FQN ("extends" superType=TypeRef)? ";";
+	//	name=FQN ("extends" superType=TypeRef)? ";";
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}
@@ -169,7 +169,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 	}
 
 	//TypeRef:
-	//  type=[Type|FQN];
+	//	type=[Type|FQN];
 	public TypeRefElements getTypeRefAccess() {
 		return (pTypeRef != null) ? pTypeRef : (pTypeRef = new TypeRefElements());
 	}
@@ -179,7 +179,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 	}
 
 	//FQN returns ecore::EString:
-	//  ID ("." ID)*;
+	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
 		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
 	}
@@ -189,45 +189,44 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

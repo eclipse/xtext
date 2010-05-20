@@ -27,16 +27,16 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 		private final RuleCall cTestListParserRuleCall_1_2 = (RuleCall)cAlternatives_1.eContents().get(2);
 		
 		//Root:
-		//  "test" (TestRequired|TestOptional|TestList);
+		//	"test" (TestRequired | TestOptional | TestList);
 		public ParserRule getRule() { return rule; }
 
-		//"test" (TestRequired|TestOptional|TestList)
+		//"test" (TestRequired | TestOptional | TestList)
 		public Group getGroup() { return cGroup; }
 
 		//"test"
 		public Keyword getTestKeyword_0() { return cTestKeyword_0; }
 
-		//TestRequired|TestOptional|TestList
+		//TestRequired | TestOptional | TestList
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//TestRequired
@@ -59,7 +59,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 		private final RuleCall cRequired2INTTerminalRuleCall_2_0 = (RuleCall)cRequired2Assignment_2.eContents().get(0);
 		
 		//TestRequired:
-		//  "required" required1=INT required2=INT;
+		//	"required" required1=INT required2=INT;
 		public ParserRule getRule() { return rule; }
 
 		//"required" required1=INT required2=INT
@@ -93,7 +93,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 		private final RuleCall cOpt2INTTerminalRuleCall_2_1_0 = (RuleCall)cOpt2Assignment_2_1.eContents().get(0);
 		
 		//TestOptional:
-		//  "optional" opt1=INT? (":" opt2=INT)?;
+		//	"optional" opt1=INT? (":" opt2=INT)?;
 		public ParserRule getRule() { return rule; }
 
 		//"optional" opt1=INT? (":" opt2=INT)?
@@ -129,7 +129,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 		private final RuleCall cItemINTTerminalRuleCall_1_0 = (RuleCall)cItemAssignment_1.eContents().get(0);
 		
 		//TestList:
-		//  "list" item+=INT*;
+		//	"list" item+=INT*;
 		public ParserRule getRule() { return rule; }
 
 		//"list" item+=INT*
@@ -173,7 +173,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 
 	
 	//Root:
-	//  "test" (TestRequired|TestOptional|TestList);
+	//	"test" (TestRequired | TestOptional | TestList);
 	public RootElements getRootAccess() {
 		return (pRoot != null) ? pRoot : (pRoot = new RootElements());
 	}
@@ -183,7 +183,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//TestRequired:
-	//  "required" required1=INT required2=INT;
+	//	"required" required1=INT required2=INT;
 	public TestRequiredElements getTestRequiredAccess() {
 		return (pTestRequired != null) ? pTestRequired : (pTestRequired = new TestRequiredElements());
 	}
@@ -193,7 +193,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//TestOptional:
-	//  "optional" opt1=INT? (":" opt2=INT)?;
+	//	"optional" opt1=INT? (":" opt2=INT)?;
 	public TestOptionalElements getTestOptionalAccess() {
 		return (pTestOptional != null) ? pTestOptional : (pTestOptional = new TestOptionalElements());
 	}
@@ -203,7 +203,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//TestList:
-	//  "list" item+=INT*;
+	//	"list" item+=INT*;
 	public TestListElements getTestListAccess() {
 		return (pTestList != null) ? pTestList : (pTestList = new TestListElements());
 	}
@@ -213,45 +213,44 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

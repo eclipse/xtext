@@ -23,7 +23,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final RuleCall cElementsElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
 		//Model:
-		//  elements+=Element*;
+		//	elements+=Element*;
 		public ParserRule getRule() { return rule; }
 
 		//elements+=Element*
@@ -51,12 +51,10 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final RuleCall cMultirefsElementIDTerminalRuleCall_3_1_0_1 = (RuleCall)cMultirefsElementCrossReference_3_1_0.eContents().get(1);
 		
 		//Element:
-		//  "element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[
-		//  Element])*;
+		//	"element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[Element])*;
 		public ParserRule getRule() { return rule; }
 
-		//"element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[
-		//Element])*
+		//"element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[Element])*
 		public Group getGroup() { return cGroup; }
 
 		//"element"
@@ -125,7 +123,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 
 	
 	//Model:
-	//  elements+=Element*;
+	//	elements+=Element*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -135,8 +133,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 
 	//Element:
-	//  "element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[
-	//  Element])*;
+	//	"element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[Element])*;
 	public ElementElements getElementAccess() {
 		return (pElement != null) ? pElement : (pElement = new ElementElements());
 	}
@@ -146,45 +143,44 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

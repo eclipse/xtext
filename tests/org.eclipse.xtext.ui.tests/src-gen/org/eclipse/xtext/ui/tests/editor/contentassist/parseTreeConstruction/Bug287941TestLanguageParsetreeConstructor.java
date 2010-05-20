@@ -64,7 +64,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   imports+=Import* query=MQLquery;
+ * 	imports+=Import* query=MQLquery;
  *
  **/
 
@@ -196,7 +196,7 @@ protected class Model_QueryAssignment_1 extends AssignmentToken  {
 /************ begin Rule Import ****************
  *
  * Import:
- *   "import" importURI=STRING;
+ * 	"import" importURI=STRING;
  *
  **/
 
@@ -291,15 +291,13 @@ protected class Import_ImportURIAssignment_1 extends AssignmentToken  {
 /************ begin Rule MQLquery ****************
  *
  * MQLquery:
- *   "select" selectEntries+=SelectEntry ("," selectEntries+=SelectEntry)* "from"
- *   fromEntries+=FromEntry ("," fromEntries+=FromEntry)* ("where"
- *   whereEntries+=WhereEntry+)?;
+ * 	"select" selectEntries+=SelectEntry ("," selectEntries+=SelectEntry)* "from" fromEntries+=FromEntry (","
+ * 	fromEntries+=FromEntry)* ("where" whereEntries+=WhereEntry+)?;
  *
  **/
 
-// "select" selectEntries+=SelectEntry ("," selectEntries+=SelectEntry)* "from"
-// fromEntries+=FromEntry ("," fromEntries+=FromEntry)* ("where"
-// whereEntries+=WhereEntry+)?
+// "select" selectEntries+=SelectEntry ("," selectEntries+=SelectEntry)* "from" fromEntries+=FromEntry (","
+// fromEntries+=FromEntry)* ("where" whereEntries+=WhereEntry+)?
 protected class MQLquery_Group extends GroupToken {
 	
 	public MQLquery_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -750,7 +748,7 @@ protected class MQLquery_WhereEntriesAssignment_6_1 extends AssignmentToken  {
 /************ begin Rule SelectEntry ****************
  *
  * SelectEntry:
- *   select=[FromEntry] ("." attribute=[ecore::EAttribute])?;
+ * 	select=[FromEntry] ("." attribute=[ecore::EAttribute])?;
  *
  **/
 
@@ -909,13 +907,11 @@ protected class SelectEntry_AttributeAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule FromEntry ****************
  *
  * FromEntry:
- *   type=[ecore::EClass] withoutsubtypes?="withoutsubtypes"? "as" alias=ID
- *   scopeClause=ScopeClause?;
+ * 	type=[ecore::EClass] withoutsubtypes?="withoutsubtypes"? "as" alias=ID scopeClause=ScopeClause?;
  *
  **/
 
-// type=[ecore::EClass] withoutsubtypes?="withoutsubtypes"? "as" alias=ID
-// scopeClause=ScopeClause?
+// type=[ecore::EClass] withoutsubtypes?="withoutsubtypes"? "as" alias=ID scopeClause=ScopeClause?
 protected class FromEntry_Group extends GroupToken {
 	
 	public FromEntry_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1125,7 +1121,7 @@ protected class FromEntry_ScopeClauseAssignment_4 extends AssignmentToken  {
 /************ begin Rule ScopeClause ****************
  *
  * ScopeClause:
- *   notIn?="not"? "in" scope=Scope;
+ * 	notIn?="not"? "in" scope=Scope;
  *
  **/
 
@@ -1266,11 +1262,11 @@ protected class ScopeClause_ScopeAssignment_2 extends AssignmentToken  {
 /************ begin Rule Scope ****************
  *
  * Scope:
- *   ResourceScope|ElementScope;
+ * 	ResourceScope | ElementScope;
  *
  **/
 
-// ResourceScope|ElementScope
+// ResourceScope | ElementScope
 protected class Scope_Alternatives extends AlternativesToken {
 
 	public Scope_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1380,7 +1376,7 @@ protected class Scope_ElementScopeParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule ResourceScope ****************
  *
  * ResourceScope:
- *   "resources" "{" uris+=STRING ("," uris+=STRING)* "}";
+ * 	"resources" "{" uris+=STRING ("," uris+=STRING)* "}";
  *
  **/
 
@@ -1600,7 +1596,7 @@ protected class ResourceScope_RightCurlyBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule ElementScope ****************
  *
  * ElementScope:
- *   "elements" "{" uris+=STRING ("," uris+=STRING)* "}";
+ * 	"elements" "{" uris+=STRING ("," uris+=STRING)* "}";
  *
  **/
 
@@ -1820,8 +1816,7 @@ protected class ElementScope_RightCurlyBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule WhereEntry ****************
  *
  * WhereEntry:
- *   AndWhereEntry ({OrWhereEntry.entries+=current} ("or" entries+=AndWhereEntry)+
- *   )?;
+ * 	AndWhereEntry ({OrWhereEntry.entries+=current} ("or" entries+=AndWhereEntry)+)?;
  *
  **/
 
@@ -2057,13 +2052,11 @@ protected class WhereEntry_EntriesAssignment_1_1_1 extends AssignmentToken  {
 /************ begin Rule AndWhereEntry ****************
  *
  * AndWhereEntry returns WhereEntry:
- *   ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and"
- *   entries+=ConcreteWhereEntry)+)?;
+ * 	ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?;
  *
  **/
 
-// ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and"
-// entries+=ConcreteWhereEntry)+)?
+// ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?
 protected class AndWhereEntry_Group extends GroupToken {
 	
 	public AndWhereEntry_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2295,13 +2288,12 @@ protected class AndWhereEntry_EntriesAssignment_1_1_1 extends AssignmentToken  {
 /************ begin Rule ConcreteWhereEntry ****************
  *
  * ConcreteWhereEntry returns WhereEntry:
- *   ParWhereEntry|AttributeWhereEntry|NullWhereEntry|ReferenceAliasWhereEntry|
- *   AliasWhereEntry|SubselectWhereEntry;
+ * 	ParWhereEntry | AttributeWhereEntry | NullWhereEntry | ReferenceAliasWhereEntry | AliasWhereEntry |
+ * 	SubselectWhereEntry;
  *
  **/
 
-// ParWhereEntry|AttributeWhereEntry|NullWhereEntry|ReferenceAliasWhereEntry|
-// AliasWhereEntry|SubselectWhereEntry
+// ParWhereEntry | AttributeWhereEntry | NullWhereEntry | ReferenceAliasWhereEntry | AliasWhereEntry | SubselectWhereEntry
 protected class ConcreteWhereEntry_Alternatives extends AlternativesToken {
 
 	public ConcreteWhereEntry_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2570,7 +2562,7 @@ protected class ConcreteWhereEntry_SubselectWhereEntryParserRuleCall_5 extends R
 /************ begin Rule ParWhereEntry ****************
  *
  * ParWhereEntry returns WhereEntry:
- *   "(" WhereEntry ")";
+ * 	"(" WhereEntry ")";
  *
  **/
 
@@ -2698,13 +2690,11 @@ protected class ParWhereEntry_RightParenthesisKeyword_2 extends KeywordToken  {
 /************ begin Rule AttributeWhereEntry ****************
  *
  * AttributeWhereEntry:
- *   NumericAttributeWhereEntry|StringAttributeWhereEntry|
- *   BooleanAttributeWhereEntry|VariableWhereEntry;
+ * 	NumericAttributeWhereEntry | StringAttributeWhereEntry | BooleanAttributeWhereEntry | VariableWhereEntry;
  *
  **/
 
-// NumericAttributeWhereEntry|StringAttributeWhereEntry|BooleanAttributeWhereEntry|
-// VariableWhereEntry
+// NumericAttributeWhereEntry | StringAttributeWhereEntry | BooleanAttributeWhereEntry | VariableWhereEntry
 protected class AttributeWhereEntry_Alternatives extends AlternativesToken {
 
 	public AttributeWhereEntry_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2892,11 +2882,11 @@ protected class AttributeWhereEntry_VariableWhereEntryParserRuleCall_3 extends R
 /************ begin Rule NumericAttributeWhereEntry ****************
  *
  * NumericAttributeWhereEntry:
- *   DoubleWhereEntry|LongWhereEntry;
+ * 	DoubleWhereEntry | LongWhereEntry;
  *
  **/
 
-// DoubleWhereEntry|LongWhereEntry
+// DoubleWhereEntry | LongWhereEntry
 protected class NumericAttributeWhereEntry_Alternatives extends AlternativesToken {
 
 	public NumericAttributeWhereEntry_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3006,13 +2996,11 @@ protected class NumericAttributeWhereEntry_LongWhereEntryParserRuleCall_1 extend
 /************ begin Rule DoubleWhereEntry ****************
  *
  * DoubleWhereEntry:
- *   alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator
- *   value=SIGNED_DOUBLE;
+ * 	alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator value=SIGNED_DOUBLE;
  *
  **/
 
-// alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator
-// value=SIGNED_DOUBLE
+// alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator value=SIGNED_DOUBLE
 protected class DoubleWhereEntry_Group extends GroupToken {
 	
 	public DoubleWhereEntry_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3211,13 +3199,11 @@ protected class DoubleWhereEntry_ValueAssignment_4 extends AssignmentToken  {
 /************ begin Rule LongWhereEntry ****************
  *
  * LongWhereEntry:
- *   alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator
- *   value=SINGED_LONG;
+ * 	alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator value=SINGED_LONG;
  *
  **/
 
-// alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator
-// value=SINGED_LONG
+// alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator value=SINGED_LONG
 protected class LongWhereEntry_Group extends GroupToken {
 	
 	public LongWhereEntry_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3416,13 +3402,13 @@ protected class LongWhereEntry_ValueAssignment_4 extends AssignmentToken  {
 /************ begin Rule VariableWhereEntry ****************
  *
  * VariableWhereEntry:
- *   alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator
- *   rightAlias=[FromEntry] "." rightAttribute=[ecore::EAttribute];
+ * 	alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator rightAlias=[FromEntry] "."
+ * 	rightAttribute=[ecore::EAttribute];
  *
  **/
 
-// alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator
-// rightAlias=[FromEntry] "." rightAttribute=[ecore::EAttribute]
+// alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator rightAlias=[FromEntry] "."
+// rightAttribute=[ecore::EAttribute]
 protected class VariableWhereEntry_Group extends GroupToken {
 	
 	public VariableWhereEntry_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3683,13 +3669,11 @@ protected class VariableWhereEntry_RightAttributeAssignment_6 extends Assignment
 /************ begin Rule StringAttributeWhereEntry ****************
  *
  * StringAttributeWhereEntry:
- *   alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=StringOperator
- *   pattern=STRING;
+ * 	alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=StringOperator pattern=STRING;
  *
  **/
 
-// alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=StringOperator
-// pattern=STRING
+// alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=StringOperator pattern=STRING
 protected class StringAttributeWhereEntry_Group extends GroupToken {
 	
 	public StringAttributeWhereEntry_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3888,13 +3872,11 @@ protected class StringAttributeWhereEntry_PatternAssignment_4 extends Assignment
 /************ begin Rule BooleanAttributeWhereEntry ****************
  *
  * BooleanAttributeWhereEntry:
- *   alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=BooleanOperator
- *   (isTrue?="true"|"false");
+ * 	alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=BooleanOperator (isTrue?="true" | "false");
  *
  **/
 
-// alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=BooleanOperator (
-// isTrue?="true"|"false")
+// alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=BooleanOperator (isTrue?="true" | "false")
 protected class BooleanAttributeWhereEntry_Group extends GroupToken {
 	
 	public BooleanAttributeWhereEntry_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4052,7 +4034,7 @@ protected class BooleanAttributeWhereEntry_OperatorAssignment_3 extends Assignme
 
 }
 
-// isTrue?="true"|"false"
+// isTrue?="true" | "false"
 protected class BooleanAttributeWhereEntry_Alternatives_4 extends AlternativesToken {
 
 	public BooleanAttributeWhereEntry_Alternatives_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4139,13 +4121,11 @@ protected class BooleanAttributeWhereEntry_FalseKeyword_4_1 extends KeywordToken
 /************ begin Rule NullWhereEntry ****************
  *
  * NullWhereEntry:
- *   alias=[FromEntry] "." feature=[ecore::EStructuralFeature]
- *   operator=BooleanOperator "null";
+ * 	alias=[FromEntry] "." feature=[ecore::EStructuralFeature] operator=BooleanOperator "null";
  *
  **/
 
-// alias=[FromEntry] "." feature=[ecore::EStructuralFeature]
-// operator=BooleanOperator "null"
+// alias=[FromEntry] "." feature=[ecore::EStructuralFeature] operator=BooleanOperator "null"
 protected class NullWhereEntry_Group extends GroupToken {
 	
 	public NullWhereEntry_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4332,8 +4312,7 @@ protected class NullWhereEntry_NullKeyword_4 extends KeywordToken  {
 /************ begin Rule ReferenceAliasWhereEntry ****************
  *
  * ReferenceAliasWhereEntry:
- *   alias=[FromEntry] "." reference=[ecore::EReference] "=" rightAlias=[FromEntry
- *   ];
+ * 	alias=[FromEntry] "." reference=[ecore::EReference] "=" rightAlias=[FromEntry];
  *
  **/
 
@@ -4527,13 +4506,11 @@ protected class ReferenceAliasWhereEntry_RightAliasAssignment_4 extends Assignme
 /************ begin Rule SubselectWhereEntry ****************
  *
  * SubselectWhereEntry:
- *   alias=[FromEntry] "." reference=[ecore::EReference] notIn?="not"? "in" "("
- *   subQuery=MQLquery ")";
+ * 	alias=[FromEntry] "." reference=[ecore::EReference] notIn?="not"? "in" "(" subQuery=MQLquery ")";
  *
  **/
 
-// alias=[FromEntry] "." reference=[ecore::EReference] notIn?="not"? "in" "("
-// subQuery=MQLquery ")"
+// alias=[FromEntry] "." reference=[ecore::EReference] notIn?="not"? "in" "(" subQuery=MQLquery ")"
 protected class SubselectWhereEntry_Group extends GroupToken {
 	
 	public SubselectWhereEntry_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4811,7 +4788,7 @@ protected class SubselectWhereEntry_RightParenthesisKeyword_7 extends KeywordTok
 /************ begin Rule AliasWhereEntry ****************
  *
  * AliasWhereEntry:
- *   alias=[FromEntry] "=" rightAlias=[FromEntry];
+ * 	alias=[FromEntry] "=" rightAlias=[FromEntry];
  *
  **/
 

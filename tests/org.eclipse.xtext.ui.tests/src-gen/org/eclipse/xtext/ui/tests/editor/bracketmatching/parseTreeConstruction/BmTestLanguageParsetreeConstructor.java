@@ -44,7 +44,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule File ****************
  *
  * File:
- *   expression+=Expression*;
+ * 	expression+=Expression*;
  *
  **/
 
@@ -100,11 +100,11 @@ protected class File_ExpressionAssignment extends AssignmentToken  {
 /************ begin Rule Expression ****************
  *
  * Expression:
- *   SExpression|Atom|"[" Expression "]";
+ * 	SExpression | Atom | "[" Expression "]";
  *
  **/
 
-// SExpression|Atom|"[" Expression "]"
+// SExpression | Atom | "[" Expression "]"
 protected class Expression_Alternatives extends AlternativesToken {
 
 	public Expression_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -316,12 +316,11 @@ protected class Expression_RightSquareBracketKeyword_2_2 extends KeywordToken  {
 /************ begin Rule SExpression ****************
  *
  * SExpression:
- *   {SExpression} ("(" element+=Expression* ")"|"begin" element+=Expression*
- *   "end");
+ * 	{SExpression} ("(" element+=Expression* ")" | "begin" element+=Expression* "end");
  *
  **/
 
-// {SExpression} ("(" element+=Expression* ")"|"begin" element+=Expression* "end")
+// {SExpression} ("(" element+=Expression* ")" | "begin" element+=Expression* "end")
 protected class SExpression_Group extends GroupToken {
 	
 	public SExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -376,7 +375,7 @@ protected class SExpression_SExpressionAction_0 extends ActionToken  {
 	}
 }
 
-// "(" element+=Expression* ")"|"begin" element+=Expression* "end"
+// "(" element+=Expression* ")" | "begin" element+=Expression* "end"
 protected class SExpression_Alternatives_1 extends AlternativesToken {
 
 	public SExpression_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -637,7 +636,7 @@ protected class SExpression_EndKeyword_1_1_2 extends KeywordToken  {
 /************ begin Rule Atom ****************
  *
  * Atom:
- *   value=VALUE;
+ * 	value=VALUE;
  *
  **/
 

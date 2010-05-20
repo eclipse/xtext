@@ -41,7 +41,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule EntityWithEnumAndReference ****************
  *
  * EntityWithEnumAndReference:
- *   type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference];
+ * 	type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference];
  *
  **/
 

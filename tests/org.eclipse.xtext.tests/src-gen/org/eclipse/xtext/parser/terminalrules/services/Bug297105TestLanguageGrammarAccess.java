@@ -23,7 +23,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cExpressionsExpressionParserRuleCall_0 = (RuleCall)cExpressionsAssignment.eContents().get(0);
 		
 		//Model:
-		//  expressions+=Expression*;
+		//	expressions+=Expression*;
 		public ParserRule getRule() { return rule; }
 
 		//expressions+=Expression*
@@ -43,7 +43,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cRightLiteralParserRuleCall_2_0 = (RuleCall)cRightAssignment_2.eContents().get(0);
 		
 		//Expression:
-		//  left=Literal "+" right=Literal;
+		//	left=Literal "+" right=Literal;
 		public ParserRule getRule() { return rule; }
 
 		//left=Literal "+" right=Literal
@@ -72,10 +72,10 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cIntLiteralParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Literal:
-		//  RealLiteral|IntLiteral;
+		//	RealLiteral | IntLiteral;
 		public ParserRule getRule() { return rule; }
 
-		//RealLiteral|IntLiteral
+		//RealLiteral | IntLiteral
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//RealLiteral
@@ -91,7 +91,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cValueIntValueParserRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
 		//IntLiteral:
-		//  value=IntValue;
+		//	value=IntValue;
 		public ParserRule getRule() { return rule; }
 
 		//value=IntValue
@@ -107,7 +107,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cValueRealValueParserRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
 		//RealLiteral:
-		//  value=RealValue;
+		//	value=RealValue;
 		public ParserRule getRule() { return rule; }
 
 		//value=RealValue
@@ -122,7 +122,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cINTTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//IntValue returns ecore::EString:
-		//  INT;
+		//	INT;
 		public ParserRule getRule() { return rule; }
 
 		//INT
@@ -134,7 +134,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cRealParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//RealValue returns ecore::EString:
-		//  Real;
+		//	Real;
 		public ParserRule getRule() { return rule; }
 
 		//Real
@@ -150,11 +150,11 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cEXT_INTTerminalRuleCall_2_0 = (RuleCall)cAlternatives_2.eContents().get(0);
 		private final RuleCall cINTTerminalRuleCall_2_1 = (RuleCall)cAlternatives_2.eContents().get(1);
 		
-		//Real returns ecore::EString hidden ( ):
-		//  INT? "." (EXT_INT|INT);
+		//Real returns ecore::EString hidden():
+		//	INT? "." (EXT_INT | INT);
 		public ParserRule getRule() { return rule; }
 
-		//INT? "." (EXT_INT|INT)
+		//INT? "." (EXT_INT | INT)
 		public Group getGroup() { return cGroup; }
 
 		//INT?
@@ -163,7 +163,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"."
 		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
 
-		//EXT_INT|INT
+		//EXT_INT | INT
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//EXT_INT
@@ -206,7 +206,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//  expressions+=Expression*;
+	//	expressions+=Expression*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -216,7 +216,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Expression:
-	//  left=Literal "+" right=Literal;
+	//	left=Literal "+" right=Literal;
 	public ExpressionElements getExpressionAccess() {
 		return (pExpression != null) ? pExpression : (pExpression = new ExpressionElements());
 	}
@@ -226,7 +226,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Literal:
-	//  RealLiteral|IntLiteral;
+	//	RealLiteral | IntLiteral;
 	public LiteralElements getLiteralAccess() {
 		return (pLiteral != null) ? pLiteral : (pLiteral = new LiteralElements());
 	}
@@ -236,7 +236,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//IntLiteral:
-	//  value=IntValue;
+	//	value=IntValue;
 	public IntLiteralElements getIntLiteralAccess() {
 		return (pIntLiteral != null) ? pIntLiteral : (pIntLiteral = new IntLiteralElements());
 	}
@@ -246,7 +246,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//RealLiteral:
-	//  value=RealValue;
+	//	value=RealValue;
 	public RealLiteralElements getRealLiteralAccess() {
 		return (pRealLiteral != null) ? pRealLiteral : (pRealLiteral = new RealLiteralElements());
 	}
@@ -256,7 +256,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//IntValue returns ecore::EString:
-	//  INT;
+	//	INT;
 	public IntValueElements getIntValueAccess() {
 		return (pIntValue != null) ? pIntValue : (pIntValue = new IntValueElements());
 	}
@@ -266,7 +266,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//RealValue returns ecore::EString:
-	//  Real;
+	//	Real;
 	public RealValueElements getRealValueAccess() {
 		return (pRealValue != null) ? pRealValue : (pRealValue = new RealValueElements());
 	}
@@ -275,8 +275,8 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getRealValueAccess().getRule();
 	}
 
-	//Real returns ecore::EString hidden ( ):
-	//  INT? "." (EXT_INT|INT);
+	//Real returns ecore::EString hidden():
+	//	INT? "." (EXT_INT | INT);
 	public RealElements getRealAccess() {
 		return (pReal != null) ? pReal : (pReal = new RealElements());
 	}
@@ -286,51 +286,50 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal EXT_INT:
-	//  INT ("e" | "E") ("-" | "+") INT;
+	//	INT ("e" | "E") ("-" | "+") INT;
 	public TerminalRule getEXT_INTRule() {
 		return (tEXT_INT != null) ? tEXT_INT : (tEXT_INT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EXT_INT"));
 	} 
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

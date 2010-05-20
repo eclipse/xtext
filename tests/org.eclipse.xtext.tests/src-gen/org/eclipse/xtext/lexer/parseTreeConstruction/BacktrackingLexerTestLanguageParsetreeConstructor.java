@@ -43,7 +43,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   enums+=EnumName* abs+=Ab* xbs+=Xb*;
+ * 	enums+=EnumName* abs+=Ab* xbs+=Xb*;
  *
  **/
 
@@ -214,7 +214,7 @@ protected class Model_XbsAssignment_2 extends AssignmentToken  {
 /************ begin Rule Ab ****************
  *
  * Ab:
- *   x=CharA y=Charb;
+ * 	x=CharA y=Charb;
  *
  **/
 
@@ -321,7 +321,7 @@ protected class Ab_YAssignment_1 extends AssignmentToken  {
 /************ begin Rule Xb ****************
  *
  * Xb:
- *   x=CharX y=Charb;
+ * 	x=CharX y=Charb;
  *
  **/
 

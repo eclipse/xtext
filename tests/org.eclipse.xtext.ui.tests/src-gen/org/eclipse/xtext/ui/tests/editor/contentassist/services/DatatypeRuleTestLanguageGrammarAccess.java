@@ -22,7 +22,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cTypesParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//Model:
-		//  Types;
+		//	Types;
 		public ParserRule getRule() { return rule; }
 
 		//Types
@@ -37,7 +37,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cTypesTypeParserRuleCall_1_0 = (RuleCall)cTypesAssignment_1.eContents().get(0);
 		
 		//Types:
-		//  "Types" types+=Type*;
+		//	"Types" types+=Type*;
 		public ParserRule getRule() { return rule; }
 
 		//"Types" types+=Type*
@@ -60,10 +60,10 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cCompositeTypeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Type:
-		//  SimpleType|CompositeType;
+		//	SimpleType | CompositeType;
 		public ParserRule getRule() { return rule; }
 
-		//SimpleType|CompositeType
+		//SimpleType | CompositeType
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//SimpleType
@@ -82,7 +82,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//SimpleType:
-		//  "Type" name=ID ";";
+		//	"Type" name=ID ";";
 		public ParserRule getRule() { return rule; }
 
 		//"Type" name=ID ";"
@@ -113,7 +113,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//CompositeType:
-		//  "Composite" name=ID "base" baseType=CompositeTypeEntry ";";
+		//	"Composite" name=ID "base" baseType=CompositeTypeEntry ";";
 		public ParserRule getRule() { return rule; }
 
 		//"Composite" name=ID "base" baseType=CompositeTypeEntry ";"
@@ -148,7 +148,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cDataTypeTypeTypeIdParserRuleCall_0_1 = (RuleCall)cDataTypeTypeCrossReference_0.eContents().get(1);
 		
 		//CompositeTypeEntry:
-		//  dataType=[Type|TypeId];
+		//	dataType=[Type|TypeId];
 		public ParserRule getRule() { return rule; }
 
 		//dataType=[Type|TypeId]
@@ -174,7 +174,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cGreaterThanSignKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
 		
 		//TypeId returns ecore::EString:
-		//  ID ("<" TypeId ("," TypeId)* ">")?;
+		//	ID ("<" TypeId ("," TypeId)* ">")?;
 		public ParserRule getRule() { return rule; }
 
 		//ID ("<" TypeId ("," TypeId)* ">")?
@@ -236,7 +236,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 
 	
 	//Model:
-	//  Types;
+	//	Types;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -246,7 +246,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	//Types:
-	//  "Types" types+=Type*;
+	//	"Types" types+=Type*;
 	public TypesElements getTypesAccess() {
 		return (pTypes != null) ? pTypes : (pTypes = new TypesElements());
 	}
@@ -256,7 +256,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	//Type:
-	//  SimpleType|CompositeType;
+	//	SimpleType | CompositeType;
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}
@@ -266,7 +266,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	//SimpleType:
-	//  "Type" name=ID ";";
+	//	"Type" name=ID ";";
 	public SimpleTypeElements getSimpleTypeAccess() {
 		return (pSimpleType != null) ? pSimpleType : (pSimpleType = new SimpleTypeElements());
 	}
@@ -276,7 +276,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	//CompositeType:
-	//  "Composite" name=ID "base" baseType=CompositeTypeEntry ";";
+	//	"Composite" name=ID "base" baseType=CompositeTypeEntry ";";
 	public CompositeTypeElements getCompositeTypeAccess() {
 		return (pCompositeType != null) ? pCompositeType : (pCompositeType = new CompositeTypeElements());
 	}
@@ -286,7 +286,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	//CompositeTypeEntry:
-	//  dataType=[Type|TypeId];
+	//	dataType=[Type|TypeId];
 	public CompositeTypeEntryElements getCompositeTypeEntryAccess() {
 		return (pCompositeTypeEntry != null) ? pCompositeTypeEntry : (pCompositeTypeEntry = new CompositeTypeEntryElements());
 	}
@@ -296,7 +296,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	//TypeId returns ecore::EString:
-	//  ID ("<" TypeId ("," TypeId)* ">")?;
+	//	ID ("<" TypeId ("," TypeId)* ">")?;
 	public TypeIdElements getTypeIdAccess() {
 		return (pTypeId != null) ? pTypeId : (pTypeId = new TypeIdElements());
 	}
@@ -306,45 +306,44 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

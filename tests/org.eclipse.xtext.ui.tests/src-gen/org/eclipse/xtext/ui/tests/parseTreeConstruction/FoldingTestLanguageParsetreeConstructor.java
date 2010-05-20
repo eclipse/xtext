@@ -42,7 +42,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule FoldingModel ****************
  *
  * FoldingModel:
- *   elements+=Element*;
+ * 	elements+=Element*;
  *
  **/
 
@@ -98,7 +98,7 @@ protected class FoldingModel_ElementsAssignment extends AssignmentToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- *   "element" name=ID subelements+=Element* "end";
+ * 	"element" name=ID subelements+=Element* "end";
  *
  **/
 

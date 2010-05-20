@@ -41,24 +41,21 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cObjectMultiDatatypeParserRuleCall_1_1_0_3 = (RuleCall)cObjectAlternatives_1_1_0.eContents().get(3);
 		
 		//Model:
-		//  "simple" (single=SingleValue|multi=MultiValue|single=SingleDatatype|
-		//  multi=MultiDatatype)|"complex" object=( SingleValue | MultiValue |
-		//  SingleDatatype | MultiDatatype );
+		//	"simple" (single=SingleValue | multi=MultiValue | single=SingleDatatype | multi=MultiDatatype) | "complex"
+		//	object=(SingleValue | MultiValue | SingleDatatype | MultiDatatype);
 		public ParserRule getRule() { return rule; }
 
-		//"simple" (single=SingleValue|multi=MultiValue|single=SingleDatatype|
-		//multi=MultiDatatype)|"complex" object=( SingleValue | MultiValue |
-		//SingleDatatype | MultiDatatype )
+		//"simple" (single=SingleValue | multi=MultiValue | single=SingleDatatype | multi=MultiDatatype) | "complex"
+		//object=(SingleValue | MultiValue | SingleDatatype | MultiDatatype)
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"simple" (single=SingleValue|multi=MultiValue|single=SingleDatatype|
-		//multi=MultiDatatype)
+		//"simple" (single=SingleValue | multi=MultiValue | single=SingleDatatype | multi=MultiDatatype)
 		public Group getGroup_0() { return cGroup_0; }
 
 		//"simple"
 		public Keyword getSimpleKeyword_0_0() { return cSimpleKeyword_0_0; }
 
-		//single=SingleValue|multi=MultiValue|single=SingleDatatype|multi=MultiDatatype
+		//single=SingleValue | multi=MultiValue | single=SingleDatatype | multi=MultiDatatype
 		public Alternatives getAlternatives_0_1() { return cAlternatives_0_1; }
 
 		//single=SingleValue
@@ -85,16 +82,16 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		//MultiDatatype
 		public RuleCall getMultiMultiDatatypeParserRuleCall_0_1_3_0() { return cMultiMultiDatatypeParserRuleCall_0_1_3_0; }
 
-		//"complex" object=( SingleValue | MultiValue | SingleDatatype | MultiDatatype )
+		//"complex" object=(SingleValue | MultiValue | SingleDatatype | MultiDatatype)
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"complex"
 		public Keyword getComplexKeyword_1_0() { return cComplexKeyword_1_0; }
 
-		//object=( SingleValue | MultiValue | SingleDatatype | MultiDatatype )
+		//object=(SingleValue | MultiValue | SingleDatatype | MultiDatatype)
 		public Assignment getObjectAssignment_1_1() { return cObjectAssignment_1_1; }
 
-		//SingleValue|MultiValue|SingleDatatype|MultiDatatype
+		//SingleValue | MultiValue | SingleDatatype | MultiDatatype
 		public Alternatives getObjectAlternatives_1_1_0() { return cObjectAlternatives_1_1_0; }
 
 		//SingleValue
@@ -129,10 +126,10 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cValueSTRINGTerminalRuleCall_2_1_0 = (RuleCall)cValueAssignment_2_1.eContents().get(0);
 		
 		//SingleValue:
-		//  "id" value=ID|"alternative" value=( ID | STRING )|"string" value=STRING;
+		//	"id" value=ID | "alternative" value=(ID | STRING) | "string" value=STRING;
 		public ParserRule getRule() { return rule; }
 
-		//"id" value=ID|"alternative" value=( ID | STRING )|"string" value=STRING
+		//"id" value=ID | "alternative" value=(ID | STRING) | "string" value=STRING
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"id" value=ID
@@ -147,16 +144,16 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		//ID
 		public RuleCall getValueIDTerminalRuleCall_0_1_0() { return cValueIDTerminalRuleCall_0_1_0; }
 
-		//"alternative" value=( ID | STRING )
+		//"alternative" value=(ID | STRING)
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"alternative"
 		public Keyword getAlternativeKeyword_1_0() { return cAlternativeKeyword_1_0; }
 
-		//value=( ID | STRING )
+		//value=(ID | STRING)
 		public Assignment getValueAssignment_1_1() { return cValueAssignment_1_1; }
 
-		//ID|STRING
+		//ID | STRING
 		public Alternatives getValueAlternatives_1_1_0() { return cValueAlternatives_1_1_0; }
 
 		//ID
@@ -197,11 +194,10 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cValueSTRINGTerminalRuleCall_2_1_0 = (RuleCall)cValueAssignment_2_1.eContents().get(0);
 		
 		//MultiValue:
-		//  "ids" value+=ID|"alternatives" value+=( ID | STRING )|"strings" value+=STRING
-		//;
+		//	"ids" value+=ID | "alternatives" value+=(ID | STRING) | "strings" value+=STRING;
 		public ParserRule getRule() { return rule; }
 
-		//"ids" value+=ID|"alternatives" value+=( ID | STRING )|"strings" value+=STRING
+		//"ids" value+=ID | "alternatives" value+=(ID | STRING) | "strings" value+=STRING
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"ids" value+=ID
@@ -216,16 +212,16 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		//ID
 		public RuleCall getValueIDTerminalRuleCall_0_1_0() { return cValueIDTerminalRuleCall_0_1_0; }
 
-		//"alternatives" value+=( ID | STRING )
+		//"alternatives" value+=(ID | STRING)
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"alternatives"
 		public Keyword getAlternativesKeyword_1_0() { return cAlternativesKeyword_1_0; }
 
-		//value+=( ID | STRING )
+		//value+=(ID | STRING)
 		public Assignment getValueAssignment_1_1() { return cValueAssignment_1_1; }
 
-		//ID|STRING
+		//ID | STRING
 		public Alternatives getValueAlternatives_1_1_0() { return cValueAlternatives_1_1_0; }
 
 		//ID
@@ -266,12 +262,12 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cValueStringDatatypeParserRuleCall_2_1_0 = (RuleCall)cValueAssignment_2_1.eContents().get(0);
 		
 		//SingleDatatype returns SingleValue:
-		//  "datatypeid" value=IdDatatype|"datatypealternative" value=( IdDatatype |
-		//  StringDatatype )|"datatypestring" value=StringDatatype;
+		//	"datatypeid" value=IdDatatype | "datatypealternative" value=(IdDatatype | StringDatatype) | "datatypestring"
+		//	value=StringDatatype;
 		public ParserRule getRule() { return rule; }
 
-		//"datatypeid" value=IdDatatype|"datatypealternative" value=( IdDatatype |
-		//StringDatatype )|"datatypestring" value=StringDatatype
+		//"datatypeid" value=IdDatatype | "datatypealternative" value=(IdDatatype | StringDatatype) | "datatypestring"
+		//value=StringDatatype
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"datatypeid" value=IdDatatype
@@ -286,16 +282,16 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		//IdDatatype
 		public RuleCall getValueIdDatatypeParserRuleCall_0_1_0() { return cValueIdDatatypeParserRuleCall_0_1_0; }
 
-		//"datatypealternative" value=( IdDatatype | StringDatatype )
+		//"datatypealternative" value=(IdDatatype | StringDatatype)
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"datatypealternative"
 		public Keyword getDatatypealternativeKeyword_1_0() { return cDatatypealternativeKeyword_1_0; }
 
-		//value=( IdDatatype | StringDatatype )
+		//value=(IdDatatype | StringDatatype)
 		public Assignment getValueAssignment_1_1() { return cValueAssignment_1_1; }
 
-		//IdDatatype|StringDatatype
+		//IdDatatype | StringDatatype
 		public Alternatives getValueAlternatives_1_1_0() { return cValueAlternatives_1_1_0; }
 
 		//IdDatatype
@@ -336,12 +332,12 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cValueStringDatatypeParserRuleCall_2_1_0 = (RuleCall)cValueAssignment_2_1.eContents().get(0);
 		
 		//MultiDatatype returns MultiValue:
-		//  "datatypeids" value+=IdDatatype|"datatypealternatives" value+=( IdDatatype |
-		//  StringDatatype )|"datatypestrings" value+=StringDatatype;
+		//	"datatypeids" value+=IdDatatype | "datatypealternatives" value+=(IdDatatype | StringDatatype) | "datatypestrings"
+		//	value+=StringDatatype;
 		public ParserRule getRule() { return rule; }
 
-		//"datatypeids" value+=IdDatatype|"datatypealternatives" value+=( IdDatatype |
-		//StringDatatype )|"datatypestrings" value+=StringDatatype
+		//"datatypeids" value+=IdDatatype | "datatypealternatives" value+=(IdDatatype | StringDatatype) | "datatypestrings"
+		//value+=StringDatatype
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"datatypeids" value+=IdDatatype
@@ -356,16 +352,16 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		//IdDatatype
 		public RuleCall getValueIdDatatypeParserRuleCall_0_1_0() { return cValueIdDatatypeParserRuleCall_0_1_0; }
 
-		//"datatypealternatives" value+=( IdDatatype | StringDatatype )
+		//"datatypealternatives" value+=(IdDatatype | StringDatatype)
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"datatypealternatives"
 		public Keyword getDatatypealternativesKeyword_1_0() { return cDatatypealternativesKeyword_1_0; }
 
-		//value+=( IdDatatype | StringDatatype )
+		//value+=(IdDatatype | StringDatatype)
 		public Assignment getValueAssignment_1_1() { return cValueAssignment_1_1; }
 
-		//IdDatatype|StringDatatype
+		//IdDatatype | StringDatatype
 		public Alternatives getValueAlternatives_1_1_0() { return cValueAlternatives_1_1_0; }
 
 		//IdDatatype
@@ -392,7 +388,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//IdDatatype returns ecore::EString:
-		//  ID;
+		//	ID;
 		public ParserRule getRule() { return rule; }
 
 		//ID
@@ -404,7 +400,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cSTRINGTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//StringDatatype returns ecore::EString:
-		//  STRING;
+		//	STRING;
 		public ParserRule getRule() { return rule; }
 
 		//STRING
@@ -442,9 +438,8 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 
 	
 	//Model:
-	//  "simple" (single=SingleValue|multi=MultiValue|single=SingleDatatype|
-	//  multi=MultiDatatype)|"complex" object=( SingleValue | MultiValue |
-	//  SingleDatatype | MultiDatatype );
+	//	"simple" (single=SingleValue | multi=MultiValue | single=SingleDatatype | multi=MultiDatatype) | "complex"
+	//	object=(SingleValue | MultiValue | SingleDatatype | MultiDatatype);
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -454,7 +449,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//SingleValue:
-	//  "id" value=ID|"alternative" value=( ID | STRING )|"string" value=STRING;
+	//	"id" value=ID | "alternative" value=(ID | STRING) | "string" value=STRING;
 	public SingleValueElements getSingleValueAccess() {
 		return (pSingleValue != null) ? pSingleValue : (pSingleValue = new SingleValueElements());
 	}
@@ -464,8 +459,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//MultiValue:
-	//  "ids" value+=ID|"alternatives" value+=( ID | STRING )|"strings" value+=STRING
-	//;
+	//	"ids" value+=ID | "alternatives" value+=(ID | STRING) | "strings" value+=STRING;
 	public MultiValueElements getMultiValueAccess() {
 		return (pMultiValue != null) ? pMultiValue : (pMultiValue = new MultiValueElements());
 	}
@@ -475,8 +469,8 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//SingleDatatype returns SingleValue:
-	//  "datatypeid" value=IdDatatype|"datatypealternative" value=( IdDatatype |
-	//  StringDatatype )|"datatypestring" value=StringDatatype;
+	//	"datatypeid" value=IdDatatype | "datatypealternative" value=(IdDatatype | StringDatatype) | "datatypestring"
+	//	value=StringDatatype;
 	public SingleDatatypeElements getSingleDatatypeAccess() {
 		return (pSingleDatatype != null) ? pSingleDatatype : (pSingleDatatype = new SingleDatatypeElements());
 	}
@@ -486,8 +480,8 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//MultiDatatype returns MultiValue:
-	//  "datatypeids" value+=IdDatatype|"datatypealternatives" value+=( IdDatatype |
-	//  StringDatatype )|"datatypestrings" value+=StringDatatype;
+	//	"datatypeids" value+=IdDatatype | "datatypealternatives" value+=(IdDatatype | StringDatatype) | "datatypestrings"
+	//	value+=StringDatatype;
 	public MultiDatatypeElements getMultiDatatypeAccess() {
 		return (pMultiDatatype != null) ? pMultiDatatype : (pMultiDatatype = new MultiDatatypeElements());
 	}
@@ -497,7 +491,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//IdDatatype returns ecore::EString:
-	//  ID;
+	//	ID;
 	public IdDatatypeElements getIdDatatypeAccess() {
 		return (pIdDatatype != null) ? pIdDatatype : (pIdDatatype = new IdDatatypeElements());
 	}
@@ -507,7 +501,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//StringDatatype returns ecore::EString:
-	//  STRING;
+	//	STRING;
 	public StringDatatypeElements getStringDatatypeAccess() {
 		return (pStringDatatype != null) ? pStringDatatype : (pStringDatatype = new StringDatatypeElements());
 	}
@@ -517,45 +511,44 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

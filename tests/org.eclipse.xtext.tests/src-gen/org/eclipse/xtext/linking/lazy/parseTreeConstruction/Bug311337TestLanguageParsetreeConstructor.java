@@ -44,7 +44,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   def+=Definition+;
+ * 	def+=Definition+;
  *
  **/
 
@@ -100,7 +100,7 @@ protected class Model_DefAssignment extends AssignmentToken  {
 /************ begin Rule Definition ****************
  *
  * Definition:
- *   "(def)" name=ID ":" child+=Child ref+=Reference?;
+ * 	"(def)" name=ID ":" child+=Child ref+=Reference?;
  *
  **/
 
@@ -310,7 +310,7 @@ protected class Definition_RefAssignment_4 extends AssignmentToken  {
 /************ begin Rule Child ****************
  *
  * Child:
- *   "(child)" name=ID ":" link=[Definition]?;
+ * 	"(child)" name=ID ":" link=[Definition]?;
  *
  **/
 
@@ -465,7 +465,7 @@ protected class Child_LinkAssignment_3 extends AssignmentToken  {
 /************ begin Rule Reference ****************
  *
  * Reference:
- *   "(ref)" refChild=[Child] (":" {NestedRef.left=current} refChild=[Child])*;
+ * 	"(ref)" refChild=[Child] (":" {NestedRef.left=current} refChild=[Child])*;
  *
  **/
 

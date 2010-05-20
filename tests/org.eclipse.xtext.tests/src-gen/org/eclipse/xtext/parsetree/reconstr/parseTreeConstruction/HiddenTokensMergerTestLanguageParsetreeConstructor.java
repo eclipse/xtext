@@ -54,13 +54,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   DatatypeBug286557|EnumBug|Commentable|ValueList|RefList|SingleRef|
- *   AppendToFileEnd|Action1;
+ * 	DatatypeBug286557 | EnumBug | Commentable | ValueList | RefList | SingleRef | AppendToFileEnd | Action1;
  *
  **/
 
-// DatatypeBug286557|EnumBug|Commentable|ValueList|RefList|SingleRef|
-// AppendToFileEnd|Action1
+// DatatypeBug286557 | EnumBug | Commentable | ValueList | RefList | SingleRef | AppendToFileEnd | Action1
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -398,7 +396,7 @@ protected class Model_Action1ParserRuleCall_7 extends RuleCallToken {
 /************ begin Rule DatatypeBug286557 ****************
  *
  * DatatypeBug286557:
- *   "#1" name=FQN ("ref" ref=[DatatypeBug286557|FQN])? ";";
+ * 	"#1" name=FQN ("ref" ref=[DatatypeBug286557|FQN])? ";";
  *
  **/
 
@@ -599,7 +597,7 @@ protected class DatatypeBug286557_SemicolonKeyword_3 extends KeywordToken  {
 /************ begin Rule EnumBug ****************
  *
  * EnumBug:
- *   "#2" "kw1" return=EnumBugEnum name=ID;
+ * 	"#2" "kw1" return=EnumBugEnum name=ID;
  *
  **/
 
@@ -750,7 +748,7 @@ protected class EnumBug_NameAssignment_3 extends AssignmentToken  {
 /************ begin Rule Commentable ****************
  *
  * Commentable:
- *   "#3" item+=CommentableItem*;
+ * 	"#3" item+=CommentableItem*;
  *
  **/
 
@@ -859,7 +857,7 @@ protected class Commentable_ItemAssignment_1 extends AssignmentToken  {
 /************ begin Rule CommentableItem ****************
  *
  * CommentableItem:
- *   "item" id=ID;
+ * 	"item" id=ID;
  *
  **/
 
@@ -954,7 +952,7 @@ protected class CommentableItem_IdAssignment_1 extends AssignmentToken  {
 /************ begin Rule ValueList ****************
  *
  * ValueList:
- *   "#4" ids+=FQN*;
+ * 	"#4" ids+=FQN*;
  *
  **/
 
@@ -1051,7 +1049,7 @@ protected class ValueList_IdsAssignment_1 extends AssignmentToken  {
 /************ begin Rule RefList ****************
  *
  * RefList:
- *   "#5" objs+=RefObj* "refs" refs+=[RefObj|FQN]*;
+ * 	"#5" objs+=RefObj* "refs" refs+=[RefObj|FQN]*;
  *
  **/
 
@@ -1221,7 +1219,7 @@ protected class RefList_RefsAssignment_3 extends AssignmentToken  {
 /************ begin Rule RefObj ****************
  *
  * RefObj:
- *   name=FQN;
+ * 	name=FQN;
  *
  **/
 
@@ -1266,7 +1264,7 @@ protected class RefObj_NameAssignment extends AssignmentToken  {
 /************ begin Rule SingleRef ****************
  *
  * SingleRef:
- *   "#6" obj=RefObj "ref" ref=[RefObj|FQN];
+ * 	"#6" obj=RefObj "ref" ref=[RefObj|FQN];
  *
  **/
 
@@ -1432,10 +1430,8 @@ protected class SingleRef_RefAssignment_3 extends AssignmentToken  {
 /************ begin Rule AppendToFileEnd ****************
  *
  * // see https://bugs.eclipse.org/bugs/show_bug.cgi?id=297938
- * 
- * 
  * AppendToFileEnd:
- *   "#7" items+=AppendToFileEndItem*;
+ * 	"#7" items+=AppendToFileEndItem*;
  *
  **/
 
@@ -1544,7 +1540,7 @@ protected class AppendToFileEnd_ItemsAssignment_1 extends AssignmentToken  {
 /************ begin Rule AppendToFileEndItem ****************
  *
  * AppendToFileEndItem:
- *   "class" name=ID "endclass";
+ * 	"class" name=ID "endclass";
  *
  **/
 
@@ -1661,7 +1657,7 @@ protected class AppendToFileEndItem_EndclassKeyword_2 extends KeywordToken  {
 /************ begin Rule Action1 ****************
  *
  * Action1:
- *   "#8" {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2;
+ * 	"#8" {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2;
  *
  **/
 
@@ -1875,7 +1871,7 @@ protected class Action1_Actions2Assignment_4 extends AssignmentToken  {
 /************ begin Rule Action1Sub1 ****************
  *
  * Action1Sub1:
- *   {Action1Sub} "sub1";
+ * 	{Action1Sub} "sub1";
  *
  **/
 
@@ -1963,7 +1959,7 @@ protected class Action1Sub1_Sub1Keyword_1 extends KeywordToken  {
 /************ begin Rule Action1Sub2 ****************
  *
  * Action1Sub2:
- *   {Action1SubClass} "sub2";
+ * 	{Action1SubClass} "sub2";
  *
  **/
 

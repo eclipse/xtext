@@ -42,7 +42,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule File ****************
  *
  * File:
- *   stuff+=Stuff*;
+ * 	stuff+=Stuff*;
  *
  **/
 
@@ -98,7 +98,7 @@ protected class File_StuffAssignment extends AssignmentToken  {
 /************ begin Rule Stuff ****************
  *
  * Stuff:
- *   "stuff" name=ID ("refs" refs=[Stuff])?;
+ * 	"stuff" name=ID ("refs" refs=[Stuff])?;
  *
  **/
 

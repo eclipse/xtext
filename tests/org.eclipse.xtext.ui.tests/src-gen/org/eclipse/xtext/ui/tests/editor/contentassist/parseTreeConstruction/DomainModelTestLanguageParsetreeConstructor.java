@@ -48,7 +48,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   imports+=Import* elements+=Type*;
+ * 	imports+=Import* elements+=Type*;
  *
  **/
 
@@ -182,7 +182,7 @@ protected class Model_ElementsAssignment_1 extends AssignmentToken  {
 /************ begin Rule Import ****************
  *
  * Import:
- *   "import" importURI=STRING;
+ * 	"import" importURI=STRING;
  *
  **/
 
@@ -277,11 +277,11 @@ protected class Import_ImportURIAssignment_1 extends AssignmentToken  {
 /************ begin Rule Type ****************
  *
  * Type:
- *   DataType|Class;
+ * 	DataType | Class;
  *
  **/
 
-// DataType|Class
+// DataType | Class
 protected class Type_Alternatives extends AlternativesToken {
 
 	public Type_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -391,7 +391,7 @@ protected class Type_ClassParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule DataType ****************
  *
  * DataType:
- *   "datatype" name=ID ";"?;
+ * 	"datatype" name=ID ";"?;
  *
  **/
 
@@ -486,13 +486,11 @@ protected class DataType_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule Class ****************
  *
  * Class:
- *   "class" name=ID ("extends" superClass=[Class])? "{" properties+=Property*
- *   subClasses+=Class* "}";
+ * 	"class" name=ID ("extends" superClass=[Class])? "{" properties+=Property* subClasses+=Class* "}";
  *
  **/
 
-// "class" name=ID ("extends" superClass=[Class])? "{" properties+=Property*
-// subClasses+=Class* "}"
+// "class" name=ID ("extends" superClass=[Class])? "{" properties+=Property* subClasses+=Class* "}"
 protected class Class_Group extends GroupToken {
 	
 	public Class_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -807,11 +805,11 @@ protected class Class_RightCurlyBracketKeyword_6 extends KeywordToken  {
 /************ begin Rule Property ****************
  *
  * Property:
- *   Attribute|Reference;
+ * 	Attribute | Reference;
  *
  **/
 
-// Attribute|Reference
+// Attribute | Reference
 protected class Property_Alternatives extends AlternativesToken {
 
 	public Property_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -921,7 +919,7 @@ protected class Property_ReferenceParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Attribute ****************
  *
  * Attribute:
- *   "attr" name=ID ":" type=[DataType] ";"?;
+ * 	"attr" name=ID ":" type=[DataType] ";"?;
  *
  **/
 
@@ -1075,7 +1073,7 @@ protected class Attribute_TypeAssignment_3 extends AssignmentToken  {
 /************ begin Rule Reference ****************
  *
  * Reference:
- *   "ref" name=ID ":" type=[Class] ";"?;
+ * 	"ref" name=ID ":" type=[Class] ";"?;
  *
  **/
 

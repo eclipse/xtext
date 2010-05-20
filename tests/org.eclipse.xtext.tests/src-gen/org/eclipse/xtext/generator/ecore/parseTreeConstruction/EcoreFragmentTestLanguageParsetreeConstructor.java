@@ -41,7 +41,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Second ****************
  *
  * Second returns second::Second:
- *   name=ID "first" first=[first::First];
+ * 	name=ID "first" first=[first::First];
  *
  **/
 

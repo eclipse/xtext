@@ -23,7 +23,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cClassesClassParserRuleCall_0 = (RuleCall)cClassesAssignment.eContents().get(0);
 		
 		//Model:
-		//  classes+=Class*;
+		//	classes+=Class*;
 		public ParserRule getRule() { return rule; }
 
 		//classes+=Class*
@@ -82,18 +82,16 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_12 = (Keyword)cGroup.eContents().get(12);
 		
 		//Class:
-		//  abstract?="abstract"? transient?="transient"? "class" name=ID ("extends"
-		//  superClass=[Class])? ("implements" implementedInterfaces+=[Class] (","
-		//  "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
-		//  classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "="
-		//  documentation=STRING)? attributes+=Attribute* operations+=Operation* "}";
+		//	abstract?="abstract"? transient?="transient"? "class" name=ID ("extends" superClass=[Class])? ("implements"
+		//	implementedInterfaces+=[Class] ("," "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
+		//	classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "=" documentation=STRING)? attributes+=Attribute*
+		//	operations+=Operation* "}";
 		public ParserRule getRule() { return rule; }
 
-		//abstract?="abstract"? transient?="transient"? "class" name=ID ("extends"
-		//superClass=[Class])? ("implements" implementedInterfaces+=[Class] (","
-		//"implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
-		//classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "="
-		//documentation=STRING)? attributes+=Attribute* operations+=Operation* "}"
+		//abstract?="abstract"? transient?="transient"? "class" name=ID ("extends" superClass=[Class])? ("implements"
+		//implementedInterfaces+=[Class] ("," "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
+		//classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "=" documentation=STRING)? attributes+=Attribute*
+		//operations+=Operation* "}"
 		public Group getGroup() { return cGroup; }
 
 		//abstract?="abstract"?
@@ -132,8 +130,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getSuperClassClassIDTerminalRuleCall_4_1_0_1() { return cSuperClassClassIDTerminalRuleCall_4_1_0_1; }
 
-		//("implements" implementedInterfaces+=[Class] ("," "implements"
-		//implementedInterfaces+=[Class])*)?
+		//("implements" implementedInterfaces+=[Class] ("," "implements" implementedInterfaces+=[Class])*)?
 		public Group getGroup_5() { return cGroup_5; }
 
 		//"implements"
@@ -240,7 +237,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//Attribute:
-		//  visibility=Visibility? "attribute" name=ID;
+		//	visibility=Visibility? "attribute" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//visibility=Visibility? "attribute" name=ID
@@ -272,7 +269,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//Operation:
-		//  visibility=Visibility? "operation" name=ID;
+		//	visibility=Visibility? "operation" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//visibility=Visibility? "operation" name=ID
@@ -308,7 +305,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cPUBLICPUBLICKeyword_3_0 = (Keyword)cPUBLICEnumLiteralDeclaration_3.eContents().get(0);
 		
 		//enum Visibility:
-		//  PRIVATE | PROTECTED | PACKAGE_PRIVATE | PUBLIC;
+		//	PRIVATE | PROTECTED | PACKAGE_PRIVATE | PUBLIC;
 		public EnumRule getRule() { return rule; }
 
 		//PRIVATE | PROTECTED | PACKAGE_PRIVATE | PUBLIC
@@ -367,7 +364,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//  classes+=Class*;
+	//	classes+=Class*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -377,11 +374,10 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Class:
-	//  abstract?="abstract"? transient?="transient"? "class" name=ID ("extends"
-	//  superClass=[Class])? ("implements" implementedInterfaces+=[Class] (","
-	//  "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
-	//  classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "="
-	//  documentation=STRING)? attributes+=Attribute* operations+=Operation* "}";
+	//	abstract?="abstract"? transient?="transient"? "class" name=ID ("extends" superClass=[Class])? ("implements"
+	//	implementedInterfaces+=[Class] ("," "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
+	//	classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "=" documentation=STRING)? attributes+=Attribute*
+	//	operations+=Operation* "}";
 	public ClassElements getClassAccess() {
 		return (pClass != null) ? pClass : (pClass = new ClassElements());
 	}
@@ -391,7 +387,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Attribute:
-	//  visibility=Visibility? "attribute" name=ID;
+	//	visibility=Visibility? "attribute" name=ID;
 	public AttributeElements getAttributeAccess() {
 		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
 	}
@@ -401,7 +397,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Operation:
-	//  visibility=Visibility? "operation" name=ID;
+	//	visibility=Visibility? "operation" name=ID;
 	public OperationElements getOperationAccess() {
 		return (pOperation != null) ? pOperation : (pOperation = new OperationElements());
 	}
@@ -411,7 +407,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//enum Visibility:
-	//  PRIVATE | PROTECTED | PACKAGE_PRIVATE | PUBLIC;
+	//	PRIVATE | PROTECTED | PACKAGE_PRIVATE | PUBLIC;
 	public VisibilityElements getVisibilityAccess() {
 		return (unknownRuleVisibility != null) ? unknownRuleVisibility : (unknownRuleVisibility = new VisibilityElements());
 	}
@@ -421,45 +417,44 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

@@ -46,12 +46,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   CaseInsensitiveKeywordRule|PluralRule|MultiRule|DatatypeRule|
- *   CommonTerminalsRule;
+ * 	CaseInsensitiveKeywordRule | PluralRule | MultiRule | DatatypeRule | CommonTerminalsRule;
  *
  **/
 
-// CaseInsensitiveKeywordRule|PluralRule|MultiRule|DatatypeRule|CommonTerminalsRule
+// CaseInsensitiveKeywordRule | PluralRule | MultiRule | DatatypeRule | CommonTerminalsRule
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -275,7 +274,7 @@ protected class Model_CommonTerminalsRuleParserRuleCall_4 extends RuleCallToken 
 /************ begin Rule CaseInsensitiveKeywordRule ****************
  *
  * CaseInsensitiveKeywordRule:
- *   CaseInsensitiveKeyword val=INT;
+ * 	CaseInsensitiveKeyword val=INT;
  *
  **/
 
@@ -370,7 +369,7 @@ protected class CaseInsensitiveKeywordRule_ValAssignment_1 extends AssignmentTok
 /************ begin Rule PluralRule ****************
  *
  * PluralRule:
- *   "contents:" count=INT Plural;
+ * 	"contents:" count=INT Plural;
  *
  **/
 
@@ -487,7 +486,7 @@ protected class PluralRule_PluralTerminalRuleCall_2 extends UnassignedTextToken 
 /************ begin Rule MultiRule ****************
  *
  * MultiRule:
- *   "multi" val=INT Multi Multi Multi;
+ * 	"multi" val=INT Multi Multi Multi;
  *
  **/
 
@@ -648,7 +647,7 @@ protected class MultiRule_MultiTerminalRuleCall_4 extends UnassignedTextToken {
 /************ begin Rule DatatypeRule ****************
  *
  * DatatypeRule:
- *   "datatype" val=INT Datatype;
+ * 	"datatype" val=INT Datatype;
  *
  **/
 
@@ -767,7 +766,7 @@ protected class DatatypeRule_DatatypeParserRuleCall_2 extends UnassignedTextToke
 /************ begin Rule CommonTerminalsRule ****************
  *
  * CommonTerminalsRule:
- *   "terminals" ID INT STRING val=ID;
+ * 	"terminals" ID INT STRING val=ID;
  *
  **/
 

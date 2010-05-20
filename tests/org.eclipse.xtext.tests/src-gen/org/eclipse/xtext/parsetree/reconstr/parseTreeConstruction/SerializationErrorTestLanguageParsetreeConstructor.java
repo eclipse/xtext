@@ -46,11 +46,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   test=Test|test=Parenthesis;
+ * 	test=Test | test=Parenthesis;
  *
  **/
 
-// test=Test|test=Parenthesis
+// test=Test | test=Parenthesis
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -177,7 +177,7 @@ protected class Model_TestAssignment_1 extends AssignmentToken  {
 /************ begin Rule Parenthesis ****************
  *
  * Parenthesis returns Test:
- *   "(" Test ")";
+ * 	"(" Test ")";
  *
  **/
 
@@ -297,11 +297,11 @@ protected class Parenthesis_RightParenthesisKeyword_2 extends KeywordToken  {
 /************ begin Rule Test ****************
  *
  * Test:
- *   TwoRequired|TwoOptions|Indent;
+ * 	TwoRequired | TwoOptions | Indent;
  *
  **/
 
-// TwoRequired|TwoOptions|Indent
+// TwoRequired | TwoOptions | Indent
 protected class Test_Alternatives extends AlternativesToken {
 
 	public Test_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -449,7 +449,7 @@ protected class Test_IndentParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule TwoRequired ****************
  *
  * TwoRequired:
- *   "tworequired" one=ID two=ID;
+ * 	"tworequired" one=ID two=ID;
  *
  **/
 
@@ -578,11 +578,11 @@ protected class TwoRequired_TwoAssignment_2 extends AssignmentToken  {
 /************ begin Rule TwoOptions ****************
  *
  * TwoOptions:
- *   "twooptions" ("one" one=ID|"two" two=ID);
+ * 	"twooptions" ("one" one=ID | "two" two=ID);
  *
  **/
 
-// "twooptions" ("one" one=ID|"two" two=ID)
+// "twooptions" ("one" one=ID | "two" two=ID)
 protected class TwoOptions_Group extends GroupToken {
 	
 	public TwoOptions_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -632,7 +632,7 @@ protected class TwoOptions_TwooptionsKeyword_0 extends KeywordToken  {
 
 }
 
-// "one" one=ID|"two" two=ID
+// "one" one=ID | "two" two=ID
 protected class TwoOptions_Alternatives_1 extends AlternativesToken {
 
 	public TwoOptions_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -821,7 +821,7 @@ protected class TwoOptions_TwoAssignment_1_1_1 extends AssignmentToken  {
 /************ begin Rule Indent ****************
  *
  * Indent:
- *   "{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}";
+ * 	"{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}";
  *
  **/
 

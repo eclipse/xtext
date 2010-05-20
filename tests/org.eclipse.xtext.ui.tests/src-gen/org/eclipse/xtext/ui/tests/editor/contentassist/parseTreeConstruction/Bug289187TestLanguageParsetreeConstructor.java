@@ -44,7 +44,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   classes+=Class*;
+ * 	classes+=Class*;
  *
  **/
 
@@ -100,19 +100,17 @@ protected class Model_ClassesAssignment extends AssignmentToken  {
 /************ begin Rule Class ****************
  *
  * Class:
- *   abstract?="abstract"? transient?="transient"? "class" name=ID ("extends"
- *   superClass=[Class])? ("implements" implementedInterfaces+=[Class] (","
- *   "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
- *   classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "="
- *   documentation=STRING)? attributes+=Attribute* operations+=Operation* "}";
+ * 	abstract?="abstract"? transient?="transient"? "class" name=ID ("extends" superClass=[Class])? ("implements"
+ * 	implementedInterfaces+=[Class] ("," "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
+ * 	classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "=" documentation=STRING)? attributes+=Attribute*
+ * 	operations+=Operation* "}";
  *
  **/
 
-// abstract?="abstract"? transient?="transient"? "class" name=ID ("extends"
-// superClass=[Class])? ("implements" implementedInterfaces+=[Class] (","
-// "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
-// classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "="
-// documentation=STRING)? attributes+=Attribute* operations+=Operation* "}"
+// abstract?="abstract"? transient?="transient"? "class" name=ID ("extends" superClass=[Class])? ("implements"
+// implementedInterfaces+=[Class] ("," "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
+// classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "=" documentation=STRING)? attributes+=Attribute*
+// operations+=Operation* "}"
 protected class Class_Group extends GroupToken {
 	
 	public Class_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -347,8 +345,7 @@ protected class Class_SuperClassAssignment_4_1 extends AssignmentToken  {
 }
 
 
-// ("implements" implementedInterfaces+=[Class] ("," "implements"
-// implementedInterfaces+=[Class])*)?
+// ("implements" implementedInterfaces+=[Class] ("," "implements" implementedInterfaces+=[Class])*)?
 protected class Class_Group_5 extends GroupToken {
 	
 	public Class_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1002,7 +999,7 @@ protected class Class_RightCurlyBracketKeyword_12 extends KeywordToken  {
 /************ begin Rule Attribute ****************
  *
  * Attribute:
- *   visibility=Visibility? "attribute" name=ID;
+ * 	visibility=Visibility? "attribute" name=ID;
  *
  **/
 
@@ -1131,7 +1128,7 @@ protected class Attribute_NameAssignment_2 extends AssignmentToken  {
 /************ begin Rule Operation ****************
  *
  * Operation:
- *   visibility=Visibility? "operation" name=ID;
+ * 	visibility=Visibility? "operation" name=ID;
  *
  **/
 

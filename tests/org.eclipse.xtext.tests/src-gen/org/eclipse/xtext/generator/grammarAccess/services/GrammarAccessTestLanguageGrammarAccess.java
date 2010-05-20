@@ -23,7 +23,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cElementsTypeParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
 		//Root returns root::AModel:
-		//  elements+=Type*;
+		//	elements+=Type*;
 		public ParserRule getRule() { return rule; }
 
 		//elements+=Type*
@@ -40,10 +40,10 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cAnotherTypeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Type returns root::AType:
-		//  AType|AnotherType;
+		//	AType | AnotherType;
 		public ParserRule getRule() { return rule; }
 
-		//AType|AnotherType
+		//AType | AnotherType
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//AType
@@ -60,7 +60,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Action cATypeAction_1 = (Action)cGroup.eContents().get(1);
 		
 		//AType returns root::AType:
-		//  "foo" {root::AType};
+		//	"foo" {root::AType};
 		public ParserRule getRule() { return rule; }
 
 		//"foo" {root::AType}
@@ -80,7 +80,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Action cAnotherTypeAction_1 = (Action)cGroup.eContents().get(1);
 		
 		//AnotherType returns sub::AnotherType:
-		//  "bar" {sub::AnotherType};
+		//	"bar" {sub::AnotherType};
 		public ParserRule getRule() { return rule; }
 
 		//"bar" {sub::AnotherType}
@@ -121,7 +121,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 
 	
 	//Root returns root::AModel:
-	//  elements+=Type*;
+	//	elements+=Type*;
 	public RootElements getRootAccess() {
 		return (pRoot != null) ? pRoot : (pRoot = new RootElements());
 	}
@@ -131,7 +131,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//Type returns root::AType:
-	//  AType|AnotherType;
+	//	AType | AnotherType;
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}
@@ -141,7 +141,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//AType returns root::AType:
-	//  "foo" {root::AType};
+	//	"foo" {root::AType};
 	public ATypeElements getATypeAccess() {
 		return (pAType != null) ? pAType : (pAType = new ATypeElements());
 	}
@@ -151,7 +151,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//AnotherType returns sub::AnotherType:
-	//  "bar" {sub::AnotherType};
+	//	"bar" {sub::AnotherType};
 	public AnotherTypeElements getAnotherTypeAccess() {
 		return (pAnotherType != null) ? pAnotherType : (pAnotherType = new AnotherTypeElements());
 	}
@@ -161,45 +161,44 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

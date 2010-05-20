@@ -33,8 +33,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//RootModel returns ModelElement:
-		//  ({RootModel} name=ID type=[ModelElement]? ("{" elements+=ModelAttribute* "}")
-		//  ?)?;
+		//	({RootModel} name=ID type=[ModelElement]? ("{" elements+=ModelAttribute* "}")?)?;
 		public ParserRule getRule() { return rule; }
 
 		//({RootModel} name=ID type=[ModelElement]? ("{" elements+=ModelAttribute* "}")?)?
@@ -96,12 +95,11 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_3_1_2 = (Keyword)cGroup_3_1.eContents().get(2);
 		
 		//ModelElement:
-		//  firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]?
-		//  (";"|"{" elements+=ModelAttribute* "}");
+		//	firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]? (";" | "{" elements+=ModelAttribute*
+		//	"}");
 		public ParserRule getRule() { return rule; }
 
-		//firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]? (
-		//";"|"{" elements+=ModelAttribute* "}")
+		//firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]? (";" | "{" elements+=ModelAttribute* "}")
 		public Group getGroup() { return cGroup; }
 
 		//firstReference=[ModelElement]
@@ -134,7 +132,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getSecondReferenceModelElementIDTerminalRuleCall_2_0_1() { return cSecondReferenceModelElementIDTerminalRuleCall_2_0_1; }
 
-		//";"|"{" elements+=ModelAttribute* "}"
+		//";" | "{" elements+=ModelAttribute* "}"
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
 		//";"
@@ -163,10 +161,10 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cAttributeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//ModelAttribute:
-		//  ModelElement|Attribute;
+		//	ModelElement | Attribute;
 		public ParserRule getRule() { return rule; }
 
-		//ModelElement|Attribute
+		//ModelElement | Attribute
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//ModelElement
@@ -187,7 +185,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cValueSTRINGTerminalRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		
 		//Attribute:
-		//  feature=[ModelElement] "=" value=STRING;
+		//	feature=[ModelElement] "=" value=STRING;
 		public ParserRule getRule() { return rule; }
 
 		//feature=[ModelElement] "=" value=STRING
@@ -240,8 +238,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//RootModel returns ModelElement:
-	//  ({RootModel} name=ID type=[ModelElement]? ("{" elements+=ModelAttribute* "}")
-	//  ?)?;
+	//	({RootModel} name=ID type=[ModelElement]? ("{" elements+=ModelAttribute* "}")?)?;
 	public RootModelElements getRootModelAccess() {
 		return (pRootModel != null) ? pRootModel : (pRootModel = new RootModelElements());
 	}
@@ -251,8 +248,8 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//ModelElement:
-	//  firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]?
-	//  (";"|"{" elements+=ModelAttribute* "}");
+	//	firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]? (";" | "{" elements+=ModelAttribute*
+	//	"}");
 	public ModelElementElements getModelElementAccess() {
 		return (pModelElement != null) ? pModelElement : (pModelElement = new ModelElementElements());
 	}
@@ -262,7 +259,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//ModelAttribute:
-	//  ModelElement|Attribute;
+	//	ModelElement | Attribute;
 	public ModelAttributeElements getModelAttributeAccess() {
 		return (pModelAttribute != null) ? pModelAttribute : (pModelAttribute = new ModelAttributeElements());
 	}
@@ -272,7 +269,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Attribute:
-	//  feature=[ModelElement] "=" value=STRING;
+	//	feature=[ModelElement] "=" value=STRING;
 	public AttributeElements getAttributeAccess() {
 		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
 	}
@@ -282,45 +279,44 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

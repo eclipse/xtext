@@ -48,13 +48,12 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Body ****************
  *
  * Body:
- *   ("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=(
- *   Content | ParameterRef ) foo+=Foo+ "end body";
+ * 	("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=(Content | ParameterRef) foo+=Foo+
+ * 	"end body";
  *
  **/
 
-// ("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=(
-// Content | ParameterRef ) foo+=Foo+ "end body"
+// ("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=(Content | ParameterRef) foo+=Foo+ "end body"
 protected class Body_Group extends GroupToken {
 	
 	public Body_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -310,7 +309,7 @@ protected class Body_BodyKeyword_1 extends KeywordToken  {
 
 }
 
-// content=( Content | ParameterRef )
+// content=(Content | ParameterRef)
 protected class Body_ContentAssignment_2 extends AssignmentToken  {
 	
 	public Body_ContentAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -442,7 +441,7 @@ protected class Body_EndBodyKeyword_4 extends KeywordToken  {
 /************ begin Rule Foo ****************
  *
  * Foo:
- *   fooValue=STRING;
+ * 	fooValue=STRING;
  *
  **/
 
@@ -487,7 +486,7 @@ protected class Foo_FooValueAssignment extends AssignmentToken  {
 /************ begin Rule Content ****************
  *
  * Content:
- *   "content" MyElement "end content";
+ * 	"content" MyElement "end content";
  *
  **/
 
@@ -605,11 +604,11 @@ protected class Content_EndContentKeyword_2 extends KeywordToken  {
 /************ begin Rule MyElement ****************
  *
  * MyElement:
- *   "element" bar=( MyInt | ParameterRef );
+ * 	"element" bar=(MyInt | ParameterRef);
  *
  **/
 
-// "element" bar=( MyInt | ParameterRef )
+// "element" bar=(MyInt | ParameterRef)
 protected class MyElement_Group extends GroupToken {
 	
 	public MyElement_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -659,7 +658,7 @@ protected class MyElement_ElementKeyword_0 extends KeywordToken  {
 
 }
 
-// bar=( MyInt | ParameterRef )
+// bar=(MyInt | ParameterRef)
 protected class MyElement_BarAssignment_1 extends AssignmentToken  {
 	
 	public MyElement_BarAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -722,11 +721,11 @@ protected class MyElement_BarAssignment_1 extends AssignmentToken  {
 /************ begin Rule ParameterObject ****************
  *
  * ParameterObject:
- *   MyInt|Content|ParameterRef;
+ * 	MyInt | Content | ParameterRef;
  *
  **/
 
-// MyInt|Content|ParameterRef
+// MyInt | Content | ParameterRef
 protected class ParameterObject_Alternatives extends AlternativesToken {
 
 	public ParameterObject_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -874,7 +873,7 @@ protected class ParameterObject_ParameterRefParserRuleCall_2 extends RuleCallTok
 /************ begin Rule Parameter ****************
  *
  * Parameter:
- *   name=ID value=[ParameterObject]?;
+ * 	name=ID value=[ParameterObject]?;
  *
  **/
 
@@ -985,7 +984,7 @@ protected class Parameter_ValueAssignment_1 extends AssignmentToken  {
 /************ begin Rule ParameterRef ****************
  *
  * ParameterRef:
- *   parameter=[Parameter];
+ * 	parameter=[Parameter];
  *
  **/
 
@@ -1033,7 +1032,7 @@ protected class ParameterRef_ParameterAssignment extends AssignmentToken  {
 /************ begin Rule MyInt ****************
  *
  * MyInt:
- *   int=INT;
+ * 	int=INT;
  *
  **/
 

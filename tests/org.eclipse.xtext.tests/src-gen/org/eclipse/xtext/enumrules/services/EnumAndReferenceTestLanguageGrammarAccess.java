@@ -30,7 +30,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final RuleCall cRefEntityWithEnumAndReferenceIDTerminalRuleCall_3_0_1 = (RuleCall)cRefEntityWithEnumAndReferenceCrossReference_3_0.eContents().get(1);
 		
 		//EntityWithEnumAndReference:
-		//  type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference];
+		//	type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference];
 		public ParserRule getRule() { return rule; }
 
 		//type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference]
@@ -71,7 +71,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final Keyword cAnotherEnumLiteralAnotherEnumLiteralKeyword_1_0 = (Keyword)cAnotherEnumLiteralEnumLiteralDeclaration_1.eContents().get(0);
 		
 		//enum KindOfKeyword:
-		//  kindOfKeyword | anotherEnumLiteral;
+		//	kindOfKeyword | anotherEnumLiteral;
 		public EnumRule getRule() { return rule; }
 
 		//kindOfKeyword | anotherEnumLiteral
@@ -115,7 +115,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarEl
 
 	
 	//EntityWithEnumAndReference:
-	//  type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference];
+	//	type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference];
 	public EntityWithEnumAndReferenceElements getEntityWithEnumAndReferenceAccess() {
 		return (pEntityWithEnumAndReference != null) ? pEntityWithEnumAndReference : (pEntityWithEnumAndReference = new EntityWithEnumAndReferenceElements());
 	}
@@ -125,7 +125,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 
 	//enum KindOfKeyword:
-	//  kindOfKeyword | anotherEnumLiteral;
+	//	kindOfKeyword | anotherEnumLiteral;
 	public KindOfKeywordElements getKindOfKeywordAccess() {
 		return (unknownRuleKindOfKeyword != null) ? unknownRuleKindOfKeyword : (unknownRuleKindOfKeyword = new KindOfKeywordElements());
 	}
@@ -135,45 +135,44 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

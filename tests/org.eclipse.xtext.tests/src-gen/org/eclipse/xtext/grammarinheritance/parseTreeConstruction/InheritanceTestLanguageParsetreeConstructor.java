@@ -42,7 +42,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   "model" name=ID "{" elements+=Element* "}";
+ * 	"model" name=ID "{" elements+=Element* "}";
  *
  **/
 
@@ -229,7 +229,7 @@ protected class Model_RightCurlyBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- *   "element" name=ID;
+ * 	"element" name=ID;
  *
  **/
 

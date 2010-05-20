@@ -50,11 +50,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule SomeContainer ****************
  *
  * SomeContainer:
- *   "container" name=ID "{" (nested+=Nested|content+=Content)* "}";
+ * 	"container" name=ID "{" (nested+=Nested | content+=Content)* "}";
  *
  **/
 
-// "container" name=ID "{" (nested+=Nested|content+=Content)* "}"
+// "container" name=ID "{" (nested+=Nested | content+=Content)* "}"
 protected class SomeContainer_Group extends GroupToken {
 	
 	public SomeContainer_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -160,7 +160,7 @@ protected class SomeContainer_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 
 }
 
-// (nested+=Nested|content+=Content)*
+// (nested+=Nested | content+=Content)*
 protected class SomeContainer_Alternatives_3 extends AlternativesToken {
 
 	public SomeContainer_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -308,7 +308,7 @@ protected class SomeContainer_RightCurlyBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule Nested ****************
  *
  * Nested:
- *   "nested" "{" nested+=SomeContainer+ "}";
+ * 	"nested" "{" nested+=SomeContainer+ "}";
  *
  **/
 
@@ -460,11 +460,11 @@ protected class Nested_RightCurlyBracketKeyword_3 extends KeywordToken  {
 /************ begin Rule Content ****************
  *
  * Content:
- *   Children|AbstractChildren;
+ * 	Children | AbstractChildren;
  *
  **/
 
-// Children|AbstractChildren
+// Children | AbstractChildren
 protected class Content_Alternatives extends AlternativesToken {
 
 	public Content_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -574,7 +574,7 @@ protected class Content_AbstractChildrenParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Children ****************
  *
  * Children:
- *   "children" "{" children+=Child ("," children+=Child)* "}";
+ * 	"children" "{" children+=Child ("," children+=Child)* "}";
  *
  **/
 
@@ -818,7 +818,7 @@ protected class Children_RightCurlyBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule Child ****************
  *
  * Child:
- *   "->" "C" "(" value=Named ")";
+ * 	"->" "C" "(" value=Named ")";
  *
  **/
 
@@ -991,7 +991,7 @@ protected class Child_RightParenthesisKeyword_4 extends KeywordToken  {
 /************ begin Rule AbstractChildren ****************
  *
  * AbstractChildren:
- *   "abstract children" "{" abstractChildren+=AbstractChild+ "}";
+ * 	"abstract children" "{" abstractChildren+=AbstractChild+ "}";
  *
  **/
 
@@ -1143,11 +1143,11 @@ protected class AbstractChildren_RightCurlyBracketKeyword_3 extends KeywordToken
 /************ begin Rule AbstractChild ****************
  *
  * AbstractChild:
- *   FirstConcrete|SecondConcrete;
+ * 	FirstConcrete | SecondConcrete;
  *
  **/
 
-// FirstConcrete|SecondConcrete
+// FirstConcrete | SecondConcrete
 protected class AbstractChild_Alternatives extends AlternativesToken {
 
 	public AbstractChild_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1257,7 +1257,7 @@ protected class AbstractChild_SecondConcreteParserRuleCall_1 extends RuleCallTok
 /************ begin Rule FirstConcrete ****************
  *
  * FirstConcrete:
- *   "->" "F" "(" value=Named referencedContainer=[SomeContainer]? ")";
+ * 	"->" "F" "(" value=Named referencedContainer=[SomeContainer]? ")";
  *
  **/
 
@@ -1468,7 +1468,7 @@ protected class FirstConcrete_RightParenthesisKeyword_5 extends KeywordToken  {
 /************ begin Rule SecondConcrete ****************
  *
  * SecondConcrete:
- *   "->" "F" "S" "(" value=Named referencedChildren+=[Child]? ")";
+ * 	"->" "F" "S" "(" value=Named referencedChildren+=[Child]? ")";
  *
  **/
 
@@ -1701,7 +1701,7 @@ protected class SecondConcrete_RightParenthesisKeyword_6 extends KeywordToken  {
 /************ begin Rule Named ****************
  *
  * Named:
- *   name=ID;
+ * 	name=ID;
  *
  **/
 

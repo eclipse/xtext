@@ -23,7 +23,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cConstantsTConstantParserRuleCall_0 = (RuleCall)cConstantsAssignment.eContents().get(0);
 		
 		//Model:
-		//  constants+=TConstant;
+		//	constants+=TConstant;
 		public ParserRule getRule() { return rule; }
 
 		//constants+=TConstant
@@ -41,10 +41,10 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cTBooleanConstantParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//TConstant:
-		//  TStringConstant|TIntegerConstant|TBooleanConstant;
+		//	TStringConstant | TIntegerConstant | TBooleanConstant;
 		public ParserRule getRule() { return rule; }
 
-		//TStringConstant|TIntegerConstant|TBooleanConstant
+		//TStringConstant | TIntegerConstant | TBooleanConstant
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//TStringConstant
@@ -68,7 +68,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
 		
 		//TStringConstant:
-		//  annotations+=TAnnotation* "constant" "string" name=ID;
+		//	annotations+=TAnnotation* "constant" "string" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//annotations+=TAnnotation* "constant" "string" name=ID
@@ -104,7 +104,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
 		
 		//TIntegerConstant:
-		//  annotations+=TAnnotation* "constant" "integer" name=ID;
+		//	annotations+=TAnnotation* "constant" "integer" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//annotations+=TAnnotation* "constant" "integer" name=ID
@@ -140,7 +140,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
 		
 		//TBooleanConstant:
-		//  annotations+=TAnnotation* "constant" "boolean" name=ID;
+		//	annotations+=TAnnotation* "constant" "boolean" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//annotations+=TAnnotation* "constant" "boolean" name=ID
@@ -173,7 +173,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cDescriptionSTRINGTerminalRuleCall_1_0 = (RuleCall)cDescriptionAssignment_1.eContents().get(0);
 		
 		//TAnnotation:
-		//  "@desc" description=STRING;
+		//	"@desc" description=STRING;
 		public ParserRule getRule() { return rule; }
 
 		//"@desc" description=STRING
@@ -219,7 +219,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//  constants+=TConstant;
+	//	constants+=TConstant;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -229,7 +229,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//TConstant:
-	//  TStringConstant|TIntegerConstant|TBooleanConstant;
+	//	TStringConstant | TIntegerConstant | TBooleanConstant;
 	public TConstantElements getTConstantAccess() {
 		return (pTConstant != null) ? pTConstant : (pTConstant = new TConstantElements());
 	}
@@ -239,7 +239,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//TStringConstant:
-	//  annotations+=TAnnotation* "constant" "string" name=ID;
+	//	annotations+=TAnnotation* "constant" "string" name=ID;
 	public TStringConstantElements getTStringConstantAccess() {
 		return (pTStringConstant != null) ? pTStringConstant : (pTStringConstant = new TStringConstantElements());
 	}
@@ -249,7 +249,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//TIntegerConstant:
-	//  annotations+=TAnnotation* "constant" "integer" name=ID;
+	//	annotations+=TAnnotation* "constant" "integer" name=ID;
 	public TIntegerConstantElements getTIntegerConstantAccess() {
 		return (pTIntegerConstant != null) ? pTIntegerConstant : (pTIntegerConstant = new TIntegerConstantElements());
 	}
@@ -259,7 +259,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//TBooleanConstant:
-	//  annotations+=TAnnotation* "constant" "boolean" name=ID;
+	//	annotations+=TAnnotation* "constant" "boolean" name=ID;
 	public TBooleanConstantElements getTBooleanConstantAccess() {
 		return (pTBooleanConstant != null) ? pTBooleanConstant : (pTBooleanConstant = new TBooleanConstantElements());
 	}
@@ -269,7 +269,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//TAnnotation:
-	//  "@desc" description=STRING;
+	//	"@desc" description=STRING;
 	public TAnnotationElements getTAnnotationAccess() {
 		return (pTAnnotation != null) ? pTAnnotation : (pTAnnotation = new TAnnotationElements());
 	}
@@ -279,45 +279,44 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

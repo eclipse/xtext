@@ -43,15 +43,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   "(" attribute+=Attribute* attribute+=Pair* ")"|"[" attribute+=Attribute+
- *   attribute+=Pair* "]"|"<" attribute+=Attribute* attribute+=Pair+ ">"|"{"
- *   attribute+=Attribute+ attribute+=Pair+ "}";
+ * 	"(" attribute+=Attribute* attribute+=Pair* ")" | "[" attribute+=Attribute+ attribute+=Pair* "]" | "<"
+ * 	attribute+=Attribute* attribute+=Pair+ ">" | "{" attribute+=Attribute+ attribute+=Pair+ "}";
  *
  **/
 
-// "(" attribute+=Attribute* attribute+=Pair* ")"|"[" attribute+=Attribute+
-// attribute+=Pair* "]"|"<" attribute+=Attribute* attribute+=Pair+ ">"|"{"
-// attribute+=Attribute+ attribute+=Pair+ "}"
+// "(" attribute+=Attribute* attribute+=Pair* ")" | "[" attribute+=Attribute+ attribute+=Pair* "]" | "<"
+// attribute+=Attribute* attribute+=Pair+ ">" | "{" attribute+=Attribute+ attribute+=Pair+ "}"
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -735,7 +733,7 @@ protected class Model_RightCurlyBracketKeyword_3_3 extends KeywordToken  {
 /************ begin Rule Attribute ****************
  *
  * Attribute:
- *   value=ID;
+ * 	value=ID;
  *
  **/
 
@@ -779,12 +777,37 @@ protected class Attribute_ValueAssignment extends AssignmentToken  {
 
 /************ begin Rule Pair ****************
  *
+ * //Model : '(' (attribute+=IdAttribute* | attribute+=StringAttribute*) (attribute+=Pair)* ')';
+ * //
+ * //Attribute:
+ * //		IdAttribute | StringAttribute;
+ * //	
+ * //IdAttribute:
+ * //        value=ID;
+ * //
+ * //StringAttribute:
+ * //        value=STRING;
+ * //        
+ * //Pair:
+ * //        name=ID "=" value=ID;
  * Pair:
- *   name=ID "=" value=ID;
+ * 	name=ID "=" value=ID;
  *
  **/
 
-// name=ID "=" value=ID
+// name=ID "=" value=ID //Model : '(' (attribute+=IdAttribute* | attribute+=StringAttribute*) (attribute+=Pair)* ')';
+// //
+// //Attribute:
+// //		IdAttribute | StringAttribute;
+// //	
+// //IdAttribute:
+// //        value=ID;
+// //
+// //StringAttribute:
+// //        value=STRING;
+// //        
+// //Pair:
+// //        name=ID "=" value=ID;
 protected class Pair_Group extends GroupToken {
 	
 	public Pair_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -868,6 +891,19 @@ protected class Pair_EqualsSignKeyword_1 extends KeywordToken  {
 
 }
 
+// //Model : '(' (attribute+=IdAttribute* | attribute+=StringAttribute*) (attribute+=Pair)* ')';
+// //
+// //Attribute:
+// //		IdAttribute | StringAttribute;
+// //	
+// //IdAttribute:
+// //        value=ID;
+// //
+// //StringAttribute:
+// //        value=STRING;
+// //        
+// //Pair:
+// //        name=ID "=" value=ID;
 // value=ID
 protected class Pair_ValueAssignment_2 extends AssignmentToken  {
 	

@@ -27,7 +27,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cValuesTermParserRuleCall_1_1_0 = (RuleCall)cValuesAssignment_1_1.eContents().get(0);
 		
 		//Op returns Expression:
-		//  Term ({Op.values+=current} values+=Term)*;
+		//	Term ({Op.values+=current} values+=Term)*;
 		public ParserRule getRule() { return rule; }
 
 		//Term ({Op.values+=current} values+=Term)*
@@ -79,16 +79,14 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cBug310435EnumParserRuleCall_24 = (RuleCall)cAlternatives.eContents().get(24);
 		
 		//Term returns Expression:
-		//  Atom|TwoNumbers|ManyStrings|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
-		//  Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
-		//  EmptyObjectBug284850|MultiInheritanceBug280439|EObjectRef|TypeBug305577_1|
-		//  TypeBug305577_2|Parens|Bug305171|Bug310435Val|Bug310435Enum;
+		//	Atom | TwoNumbers | ManyStrings | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2 | Loop1 | Loop2 |
+		//	Loop3 | Loop4 | LoopBug285452 | DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439 | EObjectRef |
+		//	TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum;
 		public ParserRule getRule() { return rule; }
 
-		//Atom|TwoNumbers|ManyStrings|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
-		//Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
-		//EmptyObjectBug284850|MultiInheritanceBug280439|EObjectRef|TypeBug305577_1|
-		//TypeBug305577_2|Parens|Bug305171|Bug310435Val|Bug310435Enum
+		//Atom | TwoNumbers | ManyStrings | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2 | Loop1 | Loop2 |
+		//Loop3 | Loop4 | LoopBug285452 | DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439 | EObjectRef |
+		//TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Atom
@@ -173,7 +171,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//Atom:
-		//  name=ID;
+		//	name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//name=ID
@@ -193,7 +191,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cEmExclamationMarkKeyword_3_0 = (Keyword)cEmAssignment_3.eContents().get(0);
 		
 		//Parens returns Expression:
-		//  "(" Op ")" em="!"?;
+		//	"(" Op ")" em="!"?;
 		public ParserRule getRule() { return rule; }
 
 		//"(" Op ")" em="!"?
@@ -228,7 +226,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNum3INTTerminalRuleCall_2_1_0 = (RuleCall)cNum3Assignment_2_1.eContents().get(0);
 		
 		//TwoNumbers:
-		//  num1=INT num2=INT ("#" num3+=INT)*;
+		//	num1=INT num2=INT ("#" num3+=INT)*;
 		public ParserRule getRule() { return rule; }
 
 		//num1=INT num2=INT ("#" num3+=INT)*
@@ -269,7 +267,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cStr2STRINGTerminalRuleCall_2_0 = (RuleCall)cStr2Assignment_2.eContents().get(0);
 		
 		//ManyStrings:
-		//  "=" str1+=STRING* str2+=STRING;
+		//	"=" str1+=STRING* str2+=STRING;
 		public ParserRule getRule() { return rule; }
 
 		//"=" str1+=STRING* str2+=STRING
@@ -303,7 +301,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cExtendsTypeIDTerminalRuleCall_3_0_1 = (RuleCall)cExtendsTypeCrossReference_3_0.eContents().get(1);
 		
 		//Type:
-		//  "type" name=ID "extends" extends=[Type];
+		//	"type" name=ID "extends" extends=[Type];
 		public ParserRule getRule() { return rule; }
 
 		//"type" name=ID "extends" extends=[Type]
@@ -342,19 +340,19 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cRef2Mykeyword2Keyword_1_0_2 = (Keyword)cRef2Alternatives_1_0.eContents().get(2);
 		
 		//Ref2:
-		//  "#2" ref2=( "mykeyword1" | STRING | "mykeyword2" );
+		//	"#2" ref2=("mykeyword1" | STRING | "mykeyword2");
 		public ParserRule getRule() { return rule; }
 
-		//"#2" ref2=( "mykeyword1" | STRING | "mykeyword2" )
+		//"#2" ref2=("mykeyword1" | STRING | "mykeyword2")
 		public Group getGroup() { return cGroup; }
 
 		//"#2"
 		public Keyword getNumberSignDigitTwoKeyword_0() { return cNumberSignDigitTwoKeyword_0; }
 
-		//ref2=( "mykeyword1" | STRING | "mykeyword2" )
+		//ref2=("mykeyword1" | STRING | "mykeyword2")
 		public Assignment getRef2Assignment_1() { return cRef2Assignment_1; }
 
-		//"mykeyword1"|STRING|"mykeyword2"
+		//"mykeyword1" | STRING | "mykeyword2"
 		public Alternatives getRef2Alternatives_1_0() { return cRef2Alternatives_1_0; }
 
 		//"mykeyword1"
@@ -379,7 +377,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cIdIDTerminalRuleCall_2_1_0 = (RuleCall)cIdAssignment_2_1.eContents().get(0);
 		
 		//Spare:
-		//  "#3" id+=ID ("." id+=ID)*;
+		//	"#3" id+=ID ("." id+=ID)*;
 		public ParserRule getRule() { return rule; }
 
 		//"#3" id+=ID ("." id+=ID)*
@@ -418,7 +416,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cValueIDTerminalRuleCall_3_0 = (RuleCall)cValueAssignment_3.eContents().get(0);
 		
 		//Boolean:
-		//  "#4" bool?="myoption"? "kw" value=ID;
+		//	"#4" bool?="myoption"? "kw" value=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"#4" bool?="myoption"? "kw" value=ID
@@ -461,16 +459,16 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cScaleINTTerminalRuleCall_2_1_1_0 = (RuleCall)cScaleAssignment_2_1_1.eContents().get(0);
 		
 		//Transient1:
-		//  "#5" (precStar?="*"|prec=INT) ("," (scaleStar?="*"|scale=INT))?;
+		//	"#5" (precStar?="*" | prec=INT) ("," (scaleStar?="*" | scale=INT))?;
 		public ParserRule getRule() { return rule; }
 
-		//"#5" (precStar?="*"|prec=INT) ("," (scaleStar?="*"|scale=INT))?
+		//"#5" (precStar?="*" | prec=INT) ("," (scaleStar?="*" | scale=INT))?
 		public Group getGroup() { return cGroup; }
 
 		//"#5"
 		public Keyword getNumberSignDigitFiveKeyword_0() { return cNumberSignDigitFiveKeyword_0; }
 
-		//precStar?="*"|prec=INT
+		//precStar?="*" | prec=INT
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//precStar?="*"
@@ -485,13 +483,13 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//INT
 		public RuleCall getPrecINTTerminalRuleCall_1_1_0() { return cPrecINTTerminalRuleCall_1_1_0; }
 
-		//("," (scaleStar?="*"|scale=INT))?
+		//("," (scaleStar?="*" | scale=INT))?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//","
 		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
 
-		//scaleStar?="*"|scale=INT
+		//scaleStar?="*" | scale=INT
 		public Alternatives getAlternatives_2_1() { return cAlternatives_2_1; }
 
 		//scaleStar?="*"
@@ -526,16 +524,16 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cV1INTTerminalRuleCall_1_1_2_0 = (RuleCall)cV1Assignment_1_1_2.eContents().get(0);
 		
 		//Consumed1:
-		//  "#6" ("v1" v1+=INT* v2+=ID|"v2" v2+=ID* v1+=INT);
+		//	"#6" ("v1" v1+=INT* v2+=ID | "v2" v2+=ID* v1+=INT);
 		public ParserRule getRule() { return rule; }
 
-		//"#6" ("v1" v1+=INT* v2+=ID|"v2" v2+=ID* v1+=INT)
+		//"#6" ("v1" v1+=INT* v2+=ID | "v2" v2+=ID* v1+=INT)
 		public Group getGroup() { return cGroup; }
 
 		//"#6"
 		public Keyword getNumberSignDigitSixKeyword_0() { return cNumberSignDigitSixKeyword_0; }
 
-		//"v1" v1+=INT* v2+=ID|"v2" v2+=ID* v1+=INT
+		//"v1" v1+=INT* v2+=ID | "v2" v2+=ID* v1+=INT
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"v1" v1+=INT* v2+=ID
@@ -583,7 +581,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cChildConsumed1ParserRuleCall_1_0 = (RuleCall)cChildAssignment_1.eContents().get(0);
 		
 		//Consumed2:
-		//  "#7" child=Consumed1;
+		//	"#7" child=Consumed1;
 		public ParserRule getRule() { return rule; }
 
 		//"#7" child=Consumed1
@@ -614,7 +612,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cKw30Keyword_5_1 = (Keyword)cGroup_5.eContents().get(1);
 		
 		//Loop1:
-		//  "kw0"? "#8" id+=ID "kw1"? id+=ID ("kw2"* "kw30")+;
+		//	"kw0"? "#8" id+=ID "kw1"? id+=ID ("kw2"* "kw30")+;
 		public ParserRule getRule() { return rule; }
 
 		//"kw0"? "#8" id+=ID "kw1"? id+=ID ("kw2"* "kw30")+
@@ -674,10 +672,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cKw6Keyword_4_1 = (Keyword)cAlternatives_4.eContents().get(1);
 		
 		//Loop2:
-		//  "#9" id+=ID ("kw1"|id+=ID "kw2") ("kw3"|id+=ID "kw4")? ("kw5"|"kw6");
+		//	"#9" id+=ID ("kw1" | id+=ID "kw2") ("kw3" | id+=ID "kw4")? ("kw5" | "kw6");
 		public ParserRule getRule() { return rule; }
 
-		//"#9" id+=ID ("kw1"|id+=ID "kw2") ("kw3"|id+=ID "kw4")? ("kw5"|"kw6")
+		//"#9" id+=ID ("kw1" | id+=ID "kw2") ("kw3" | id+=ID "kw4")? ("kw5" | "kw6")
 		public Group getGroup() { return cGroup; }
 
 		//"#9"
@@ -689,7 +687,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getIdIDTerminalRuleCall_1_0() { return cIdIDTerminalRuleCall_1_0; }
 
-		//"kw1"|id+=ID "kw2"
+		//"kw1" | id+=ID "kw2"
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//"kw1"
@@ -707,7 +705,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//"kw2"
 		public Keyword getKw2Keyword_2_1_1() { return cKw2Keyword_2_1_1; }
 
-		//("kw3"|id+=ID "kw4")?
+		//("kw3" | id+=ID "kw4")?
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
 		//"kw3"
@@ -725,7 +723,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//"kw4"
 		public Keyword getKw4Keyword_3_1_1() { return cKw4Keyword_3_1_1; }
 
-		//"kw5"|"kw6"
+		//"kw5" | "kw6"
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 
 		//"kw5"
@@ -752,13 +750,13 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cKw5Keyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//Loop3:
-		//  ("kw1"|"kw2"|"kw3") "#10" id+=ID ("kw4" id+=ID "kw5")*;
+		//	("kw1" | "kw2" | "kw3") "#10" id+=ID ("kw4" id+=ID "kw5")*;
 		public ParserRule getRule() { return rule; }
 
-		//("kw1"|"kw2"|"kw3") "#10" id+=ID ("kw4" id+=ID "kw5")*
+		//("kw1" | "kw2" | "kw3") "#10" id+=ID ("kw4" id+=ID "kw5")*
 		public Group getGroup() { return cGroup; }
 
-		//"kw1"|"kw2"|"kw3"
+		//"kw1" | "kw2" | "kw3"
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//"kw1"
@@ -814,16 +812,16 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cKw7Keyword_3_1_1 = (Keyword)cGroup_3_1.eContents().get(1);
 		
 		//Loop4:
-		//  "#11" ("kw1"|"kw2"|"kw3" "kw4") id+=ID ("kw5" ("kw6" "kw7"?)?)+;
+		//	"#11" ("kw1" | "kw2" | "kw3" "kw4") id+=ID ("kw5" ("kw6" "kw7"?)?)+;
 		public ParserRule getRule() { return rule; }
 
-		//"#11" ("kw1"|"kw2"|"kw3" "kw4") id+=ID ("kw5" ("kw6" "kw7"?)?)+
+		//"#11" ("kw1" | "kw2" | "kw3" "kw4") id+=ID ("kw5" ("kw6" "kw7"?)?)+
 		public Group getGroup() { return cGroup; }
 
 		//"#11"
 		public Keyword getNumberSignDigitOneDigitOneKeyword_0() { return cNumberSignDigitOneDigitOneKeyword_0; }
 
-		//"kw1"|"kw2"|"kw3" "kw4"
+		//"kw1" | "kw2" | "kw3" "kw4"
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"kw1"
@@ -875,16 +873,16 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//LoopBug285452:
-		//  "#12" (interface?="interface"|"class") name=ID;
+		//	"#12" (interface?="interface" | "class") name=ID;
 		public ParserRule getRule() { return rule; }
 
-		//"#12" (interface?="interface"|"class") name=ID
+		//"#12" (interface?="interface" | "class") name=ID
 		public Group getGroup() { return cGroup; }
 
 		//"#12"
 		public Keyword getNumberSignDigitOneDigitTwoKeyword_0() { return cNumberSignDigitOneDigitTwoKeyword_0; }
 
-		//interface?="interface"|"class"
+		//interface?="interface" | "class"
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//interface?="interface"
@@ -916,16 +914,16 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cTransientTransientKeyword_1_2_0 = (Keyword)cTransientAssignment_1_2.eContents().get(0);
 		
 		//DuplicateBug284491:
-		//  "#13" (static?="static"|final?="final"|transient?="transient")*;
+		//	"#13" (static?="static" | final?="final" | transient?="transient")*;
 		public ParserRule getRule() { return rule; }
 
-		//"#13" (static?="static"|final?="final"|transient?="transient")*
+		//"#13" (static?="static" | final?="final" | transient?="transient")*
 		public Group getGroup() { return cGroup; }
 
 		//"#13"
 		public Keyword getNumberSignDigitOneDigitThreeKeyword_0() { return cNumberSignDigitOneDigitThreeKeyword_0; }
 
-		//(static?="static"|final?="final"|transient?="transient")*
+		//(static?="static" | final?="final" | transient?="transient")*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//static?="static"
@@ -955,7 +953,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cItemsEmptyObjectItemsParserRuleCall_1_0 = (RuleCall)cItemsAssignment_1.eContents().get(0);
 		
 		//EmptyObjectBug284850:
-		//  "#14" items=EmptyObjectItems;
+		//	"#14" items=EmptyObjectItems;
 		public ParserRule getRule() { return rule; }
 
 		//"#14" items=EmptyObjectItems
@@ -977,7 +975,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cListEmptyObjectItemParserRuleCall_0 = (RuleCall)cListAssignment.eContents().get(0);
 		
 		//EmptyObjectItems:
-		//  list+=EmptyObjectItem*;
+		//	list+=EmptyObjectItem*;
 		public ParserRule getRule() { return rule; }
 
 		//list+=EmptyObjectItem*
@@ -995,7 +993,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//EmptyObjectItem:
-		//  "item" name=ID;
+		//	"item" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"item" name=ID
@@ -1019,7 +1017,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cValConcreteMultiParserRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
 		
 		//MultiInheritanceBug280439:
-		//  "#15" val=ConcreteMulti;
+		//	"#15" val=ConcreteMulti;
 		public ParserRule getRule() { return rule; }
 
 		//"#15" val=ConcreteMulti
@@ -1043,10 +1041,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cM1IDTerminalRuleCall_1_0 = (RuleCall)cM1Assignment_1.eContents().get(0);
 		
 		//AbstractMulti1:
-		//  ConcreteMulti|m1=ID;
+		//	ConcreteMulti | m1=ID;
 		public ParserRule getRule() { return rule; }
 
-		//ConcreteMulti|m1=ID
+		//ConcreteMulti | m1=ID
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//ConcreteMulti
@@ -1067,10 +1065,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cM2IDTerminalRuleCall_1_0 = (RuleCall)cM2Assignment_1.eContents().get(0);
 		
 		//AbstractMulti2:
-		//  ConcreteMulti|m2=ID;
+		//	ConcreteMulti | m2=ID;
 		public ParserRule getRule() { return rule; }
 
-		//ConcreteMulti|m2=ID
+		//ConcreteMulti | m2=ID
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//ConcreteMulti
@@ -1092,7 +1090,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cM2IDTerminalRuleCall_1_0 = (RuleCall)cM2Assignment_1.eContents().get(0);
 		
 		//ConcreteMulti:
-		//  m1=ID m2=ID;
+		//	m1=ID m2=ID;
 		public ParserRule getRule() { return rule; }
 
 		//m1=ID m2=ID
@@ -1123,7 +1121,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cRefEObjectIDTerminalRuleCall_3_0_1 = (RuleCall)cRefEObjectCrossReference_3_0.eContents().get(1);
 		
 		//EObjectRef:
-		//  "#16" obj=EObjectElement "refs" ref=[ecore::EObject];
+		//	"#16" obj=EObjectElement "refs" ref=[ecore::EObject];
 		public ParserRule getRule() { return rule; }
 
 		//"#16" obj=EObjectElement "refs" ref=[ecore::EObject]
@@ -1157,7 +1155,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//EObjectElement:
-		//  name=ID;
+		//	name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//name=ID
@@ -1176,16 +1174,16 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cTypeBug1BParserRuleCall_1_1 = (RuleCall)cAlternatives_1.eContents().get(1);
 		
 		//TypeBug305577_1:
-		//  "#17" (TypeBug1A|TypeBug1B);
+		//	"#17" (TypeBug1A | TypeBug1B);
 		public ParserRule getRule() { return rule; }
 
-		//"#17" (TypeBug1A|TypeBug1B)
+		//"#17" (TypeBug1A | TypeBug1B)
 		public Group getGroup() { return cGroup; }
 
 		//"#17"
 		public Keyword getNumberSignDigitOneDigitSevenKeyword_0() { return cNumberSignDigitOneDigitSevenKeyword_0; }
 
-		//TypeBug1A|TypeBug1B
+		//TypeBug1A | TypeBug1B
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//TypeBug1A
@@ -1204,16 +1202,16 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cTypeBug2AParserRuleCall_1_1 = (RuleCall)cAlternatives_1.eContents().get(1);
 		
 		//TypeBug305577_2:
-		//  "#18" (TypeBug2B|TypeBug2A);
+		//	"#18" (TypeBug2B | TypeBug2A);
 		public ParserRule getRule() { return rule; }
 
-		//"#18" (TypeBug2B|TypeBug2A)
+		//"#18" (TypeBug2B | TypeBug2A)
 		public Group getGroup() { return cGroup; }
 
 		//"#18"
 		public Keyword getNumberSignDigitOneDigitEightKeyword_0() { return cNumberSignDigitOneDigitEightKeyword_0; }
 
-		//TypeBug2B|TypeBug2A
+		//TypeBug2B | TypeBug2A
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//TypeBug2B
@@ -1228,7 +1226,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cTypeBug1BParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//TypeBug1AInh returns TypeBug1A:
-		//  TypeBug1B;
+		//	TypeBug1B;
 		public ParserRule getRule() { return rule; }
 
 		//TypeBug1B
@@ -1244,7 +1242,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//TypeBug1A:
-		//  {TypeBug1A} "ka" name=ID;
+		//	{TypeBug1A} "ka" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//{TypeBug1A} "ka" name=ID
@@ -1272,7 +1270,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//TypeBug1B:
-		//  {TypeBug1B} "kb" name=ID;
+		//	{TypeBug1B} "kb" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//{TypeBug1B} "kb" name=ID
@@ -1296,7 +1294,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cTypeBug2BParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//TypeBug2AInh returns TypeBug2A:
-		//  TypeBug2B;
+		//	TypeBug2B;
 		public ParserRule getRule() { return rule; }
 
 		//TypeBug2B
@@ -1312,7 +1310,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//TypeBug2A:
-		//  {TypeBug2A} "ka" name=ID;
+		//	{TypeBug2A} "ka" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//{TypeBug2A} "ka" name=ID
@@ -1340,7 +1338,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//TypeBug2B:
-		//  {TypeBug2B} "kb" name=ID;
+		//	{TypeBug2B} "kb" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//{TypeBug2B} "kb" name=ID
@@ -1393,19 +1391,16 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//Bug305171:
-		//  "#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID (
-		//  "," z+=ID)*)?)) name=ID;
+		//	"#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z+=ID)*)?)) name=ID;
 		public ParserRule getRule() { return rule; }
 
-		//"#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID (","
-		//z+=ID)*)?)) name=ID
+		//"#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z+=ID)*)?)) name=ID
 		public Group getGroup() { return cGroup; }
 
 		//"#19"
 		public Keyword getNumberSignDigitOneDigitNineKeyword_0() { return cNumberSignDigitOneDigitNineKeyword_0; }
 
-		//("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z+=ID)*)
-		//?)
+		//("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z+=ID)*)?)
 		public Group getGroup_1() { return cGroup_1; }
 
 		//("kx" x+=ID ("," x+=ID)*)?
@@ -1505,16 +1500,16 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cLitsEnumBug310435Lit2EnumRuleCall_1_1_1_0 = (RuleCall)cLitsAssignment_1_1_1.eContents().get(0);
 		
 		//Bug310435Enum:
-		//  "#20" ("kw1" lits+=EnumBug310435Lit1|"kw2" lits+=EnumBug310435Lit2)*;
+		//	"#20" ("kw1" lits+=EnumBug310435Lit1 | "kw2" lits+=EnumBug310435Lit2)*;
 		public ParserRule getRule() { return rule; }
 
-		//"#20" ("kw1" lits+=EnumBug310435Lit1|"kw2" lits+=EnumBug310435Lit2)*
+		//"#20" ("kw1" lits+=EnumBug310435Lit1 | "kw2" lits+=EnumBug310435Lit2)*
 		public Group getGroup() { return cGroup; }
 
 		//"#20"
 		public Keyword getNumberSignDigitTwoDigitZeroKeyword_0() { return cNumberSignDigitTwoDigitZeroKeyword_0; }
 
-		//("kw1" lits+=EnumBug310435Lit1|"kw2" lits+=EnumBug310435Lit2)*
+		//("kw1" lits+=EnumBug310435Lit1 | "kw2" lits+=EnumBug310435Lit2)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"kw1" lits+=EnumBug310435Lit1
@@ -1557,16 +1552,16 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cLitsSTRINGTerminalRuleCall_1_1_1_0 = (RuleCall)cLitsAssignment_1_1_1.eContents().get(0);
 		
 		//Bug310435Val:
-		//  "#21" ("kw1" lits+=ID|"kw2" lits+=STRING)*;
+		//	"#21" ("kw1" lits+=ID | "kw2" lits+=STRING)*;
 		public ParserRule getRule() { return rule; }
 
-		//"#21" ("kw1" lits+=ID|"kw2" lits+=STRING)*
+		//"#21" ("kw1" lits+=ID | "kw2" lits+=STRING)*
 		public Group getGroup() { return cGroup; }
 
 		//"#21"
 		public Keyword getNumberSignDigitTwoDigitOneKeyword_0() { return cNumberSignDigitTwoDigitOneKeyword_0; }
 
-		//("kw1" lits+=ID|"kw2" lits+=STRING)*
+		//("kw1" lits+=ID | "kw2" lits+=STRING)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"kw1" lits+=ID
@@ -1601,7 +1596,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cLit1Lit1Keyword_0 = (Keyword)cLit1EnumLiteralDeclaration.eContents().get(0);
 		
 		//enum EnumBug310435Lit1 returns EnumBug310435Enum:
-		//  lit1;
+		//	lit1;
 		public EnumRule getRule() { return rule; }
 
 		//lit1
@@ -1617,7 +1612,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cLit2Lit2Keyword_0 = (Keyword)cLit2EnumLiteralDeclaration.eContents().get(0);
 		
 		//enum EnumBug310435Lit2 returns EnumBug310435Enum:
-		//  lit2;
+		//	lit2;
 		public EnumRule getRule() { return rule; }
 
 		//lit2
@@ -1691,7 +1686,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 
 	
 	//Op returns Expression:
-	//  Term ({Op.values+=current} values+=Term)*;
+	//	Term ({Op.values+=current} values+=Term)*;
 	public OpElements getOpAccess() {
 		return (pOp != null) ? pOp : (pOp = new OpElements());
 	}
@@ -1701,10 +1696,9 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Term returns Expression:
-	//  Atom|TwoNumbers|ManyStrings|Type|Ref2|Spare|Boolean|Transient1|Consumed1|
-	//  Consumed2|Loop1|Loop2|Loop3|Loop4|LoopBug285452|DuplicateBug284491|
-	//  EmptyObjectBug284850|MultiInheritanceBug280439|EObjectRef|TypeBug305577_1|
-	//  TypeBug305577_2|Parens|Bug305171|Bug310435Val|Bug310435Enum;
+	//	Atom | TwoNumbers | ManyStrings | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2 | Loop1 | Loop2 |
+	//	Loop3 | Loop4 | LoopBug285452 | DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439 | EObjectRef |
+	//	TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum;
 	public TermElements getTermAccess() {
 		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
 	}
@@ -1714,7 +1708,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Atom:
-	//  name=ID;
+	//	name=ID;
 	public AtomElements getAtomAccess() {
 		return (pAtom != null) ? pAtom : (pAtom = new AtomElements());
 	}
@@ -1724,7 +1718,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Parens returns Expression:
-	//  "(" Op ")" em="!"?;
+	//	"(" Op ")" em="!"?;
 	public ParensElements getParensAccess() {
 		return (pParens != null) ? pParens : (pParens = new ParensElements());
 	}
@@ -1734,7 +1728,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//TwoNumbers:
-	//  num1=INT num2=INT ("#" num3+=INT)*;
+	//	num1=INT num2=INT ("#" num3+=INT)*;
 	public TwoNumbersElements getTwoNumbersAccess() {
 		return (pTwoNumbers != null) ? pTwoNumbers : (pTwoNumbers = new TwoNumbersElements());
 	}
@@ -1744,7 +1738,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//ManyStrings:
-	//  "=" str1+=STRING* str2+=STRING;
+	//	"=" str1+=STRING* str2+=STRING;
 	public ManyStringsElements getManyStringsAccess() {
 		return (pManyStrings != null) ? pManyStrings : (pManyStrings = new ManyStringsElements());
 	}
@@ -1754,7 +1748,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Type:
-	//  "type" name=ID "extends" extends=[Type];
+	//	"type" name=ID "extends" extends=[Type];
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}
@@ -1764,7 +1758,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Ref2:
-	//  "#2" ref2=( "mykeyword1" | STRING | "mykeyword2" );
+	//	"#2" ref2=("mykeyword1" | STRING | "mykeyword2");
 	public Ref2Elements getRef2Access() {
 		return (pRef2 != null) ? pRef2 : (pRef2 = new Ref2Elements());
 	}
@@ -1774,7 +1768,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Spare:
-	//  "#3" id+=ID ("." id+=ID)*;
+	//	"#3" id+=ID ("." id+=ID)*;
 	public SpareElements getSpareAccess() {
 		return (pSpare != null) ? pSpare : (pSpare = new SpareElements());
 	}
@@ -1784,7 +1778,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Boolean:
-	//  "#4" bool?="myoption"? "kw" value=ID;
+	//	"#4" bool?="myoption"? "kw" value=ID;
 	public BooleanElements getBooleanAccess() {
 		return (pBoolean != null) ? pBoolean : (pBoolean = new BooleanElements());
 	}
@@ -1794,7 +1788,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Transient1:
-	//  "#5" (precStar?="*"|prec=INT) ("," (scaleStar?="*"|scale=INT))?;
+	//	"#5" (precStar?="*" | prec=INT) ("," (scaleStar?="*" | scale=INT))?;
 	public Transient1Elements getTransient1Access() {
 		return (pTransient1 != null) ? pTransient1 : (pTransient1 = new Transient1Elements());
 	}
@@ -1804,7 +1798,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Consumed1:
-	//  "#6" ("v1" v1+=INT* v2+=ID|"v2" v2+=ID* v1+=INT);
+	//	"#6" ("v1" v1+=INT* v2+=ID | "v2" v2+=ID* v1+=INT);
 	public Consumed1Elements getConsumed1Access() {
 		return (pConsumed1 != null) ? pConsumed1 : (pConsumed1 = new Consumed1Elements());
 	}
@@ -1814,7 +1808,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Consumed2:
-	//  "#7" child=Consumed1;
+	//	"#7" child=Consumed1;
 	public Consumed2Elements getConsumed2Access() {
 		return (pConsumed2 != null) ? pConsumed2 : (pConsumed2 = new Consumed2Elements());
 	}
@@ -1824,7 +1818,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Loop1:
-	//  "kw0"? "#8" id+=ID "kw1"? id+=ID ("kw2"* "kw30")+;
+	//	"kw0"? "#8" id+=ID "kw1"? id+=ID ("kw2"* "kw30")+;
 	public Loop1Elements getLoop1Access() {
 		return (pLoop1 != null) ? pLoop1 : (pLoop1 = new Loop1Elements());
 	}
@@ -1834,7 +1828,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Loop2:
-	//  "#9" id+=ID ("kw1"|id+=ID "kw2") ("kw3"|id+=ID "kw4")? ("kw5"|"kw6");
+	//	"#9" id+=ID ("kw1" | id+=ID "kw2") ("kw3" | id+=ID "kw4")? ("kw5" | "kw6");
 	public Loop2Elements getLoop2Access() {
 		return (pLoop2 != null) ? pLoop2 : (pLoop2 = new Loop2Elements());
 	}
@@ -1844,7 +1838,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Loop3:
-	//  ("kw1"|"kw2"|"kw3") "#10" id+=ID ("kw4" id+=ID "kw5")*;
+	//	("kw1" | "kw2" | "kw3") "#10" id+=ID ("kw4" id+=ID "kw5")*;
 	public Loop3Elements getLoop3Access() {
 		return (pLoop3 != null) ? pLoop3 : (pLoop3 = new Loop3Elements());
 	}
@@ -1854,7 +1848,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Loop4:
-	//  "#11" ("kw1"|"kw2"|"kw3" "kw4") id+=ID ("kw5" ("kw6" "kw7"?)?)+;
+	//	"#11" ("kw1" | "kw2" | "kw3" "kw4") id+=ID ("kw5" ("kw6" "kw7"?)?)+;
 	public Loop4Elements getLoop4Access() {
 		return (pLoop4 != null) ? pLoop4 : (pLoop4 = new Loop4Elements());
 	}
@@ -1864,7 +1858,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//LoopBug285452:
-	//  "#12" (interface?="interface"|"class") name=ID;
+	//	"#12" (interface?="interface" | "class") name=ID;
 	public LoopBug285452Elements getLoopBug285452Access() {
 		return (pLoopBug285452 != null) ? pLoopBug285452 : (pLoopBug285452 = new LoopBug285452Elements());
 	}
@@ -1874,7 +1868,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//DuplicateBug284491:
-	//  "#13" (static?="static"|final?="final"|transient?="transient")*;
+	//	"#13" (static?="static" | final?="final" | transient?="transient")*;
 	public DuplicateBug284491Elements getDuplicateBug284491Access() {
 		return (pDuplicateBug284491 != null) ? pDuplicateBug284491 : (pDuplicateBug284491 = new DuplicateBug284491Elements());
 	}
@@ -1884,7 +1878,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//EmptyObjectBug284850:
-	//  "#14" items=EmptyObjectItems;
+	//	"#14" items=EmptyObjectItems;
 	public EmptyObjectBug284850Elements getEmptyObjectBug284850Access() {
 		return (pEmptyObjectBug284850 != null) ? pEmptyObjectBug284850 : (pEmptyObjectBug284850 = new EmptyObjectBug284850Elements());
 	}
@@ -1894,7 +1888,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//EmptyObjectItems:
-	//  list+=EmptyObjectItem*;
+	//	list+=EmptyObjectItem*;
 	public EmptyObjectItemsElements getEmptyObjectItemsAccess() {
 		return (pEmptyObjectItems != null) ? pEmptyObjectItems : (pEmptyObjectItems = new EmptyObjectItemsElements());
 	}
@@ -1904,7 +1898,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//EmptyObjectItem:
-	//  "item" name=ID;
+	//	"item" name=ID;
 	public EmptyObjectItemElements getEmptyObjectItemAccess() {
 		return (pEmptyObjectItem != null) ? pEmptyObjectItem : (pEmptyObjectItem = new EmptyObjectItemElements());
 	}
@@ -1914,7 +1908,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//MultiInheritanceBug280439:
-	//  "#15" val=ConcreteMulti;
+	//	"#15" val=ConcreteMulti;
 	public MultiInheritanceBug280439Elements getMultiInheritanceBug280439Access() {
 		return (pMultiInheritanceBug280439 != null) ? pMultiInheritanceBug280439 : (pMultiInheritanceBug280439 = new MultiInheritanceBug280439Elements());
 	}
@@ -1924,7 +1918,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//AbstractMulti1:
-	//  ConcreteMulti|m1=ID;
+	//	ConcreteMulti | m1=ID;
 	public AbstractMulti1Elements getAbstractMulti1Access() {
 		return (pAbstractMulti1 != null) ? pAbstractMulti1 : (pAbstractMulti1 = new AbstractMulti1Elements());
 	}
@@ -1934,7 +1928,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//AbstractMulti2:
-	//  ConcreteMulti|m2=ID;
+	//	ConcreteMulti | m2=ID;
 	public AbstractMulti2Elements getAbstractMulti2Access() {
 		return (pAbstractMulti2 != null) ? pAbstractMulti2 : (pAbstractMulti2 = new AbstractMulti2Elements());
 	}
@@ -1944,7 +1938,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//ConcreteMulti:
-	//  m1=ID m2=ID;
+	//	m1=ID m2=ID;
 	public ConcreteMultiElements getConcreteMultiAccess() {
 		return (pConcreteMulti != null) ? pConcreteMulti : (pConcreteMulti = new ConcreteMultiElements());
 	}
@@ -1954,7 +1948,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//EObjectRef:
-	//  "#16" obj=EObjectElement "refs" ref=[ecore::EObject];
+	//	"#16" obj=EObjectElement "refs" ref=[ecore::EObject];
 	public EObjectRefElements getEObjectRefAccess() {
 		return (pEObjectRef != null) ? pEObjectRef : (pEObjectRef = new EObjectRefElements());
 	}
@@ -1964,7 +1958,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//EObjectElement:
-	//  name=ID;
+	//	name=ID;
 	public EObjectElementElements getEObjectElementAccess() {
 		return (pEObjectElement != null) ? pEObjectElement : (pEObjectElement = new EObjectElementElements());
 	}
@@ -1974,7 +1968,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//TypeBug305577_1:
-	//  "#17" (TypeBug1A|TypeBug1B);
+	//	"#17" (TypeBug1A | TypeBug1B);
 	public TypeBug305577_1Elements getTypeBug305577_1Access() {
 		return (pTypeBug305577_1 != null) ? pTypeBug305577_1 : (pTypeBug305577_1 = new TypeBug305577_1Elements());
 	}
@@ -1984,7 +1978,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//TypeBug305577_2:
-	//  "#18" (TypeBug2B|TypeBug2A);
+	//	"#18" (TypeBug2B | TypeBug2A);
 	public TypeBug305577_2Elements getTypeBug305577_2Access() {
 		return (pTypeBug305577_2 != null) ? pTypeBug305577_2 : (pTypeBug305577_2 = new TypeBug305577_2Elements());
 	}
@@ -1994,7 +1988,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//TypeBug1AInh returns TypeBug1A:
-	//  TypeBug1B;
+	//	TypeBug1B;
 	public TypeBug1AInhElements getTypeBug1AInhAccess() {
 		return (pTypeBug1AInh != null) ? pTypeBug1AInh : (pTypeBug1AInh = new TypeBug1AInhElements());
 	}
@@ -2004,7 +1998,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//TypeBug1A:
-	//  {TypeBug1A} "ka" name=ID;
+	//	{TypeBug1A} "ka" name=ID;
 	public TypeBug1AElements getTypeBug1AAccess() {
 		return (pTypeBug1A != null) ? pTypeBug1A : (pTypeBug1A = new TypeBug1AElements());
 	}
@@ -2014,7 +2008,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//TypeBug1B:
-	//  {TypeBug1B} "kb" name=ID;
+	//	{TypeBug1B} "kb" name=ID;
 	public TypeBug1BElements getTypeBug1BAccess() {
 		return (pTypeBug1B != null) ? pTypeBug1B : (pTypeBug1B = new TypeBug1BElements());
 	}
@@ -2024,7 +2018,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//TypeBug2AInh returns TypeBug2A:
-	//  TypeBug2B;
+	//	TypeBug2B;
 	public TypeBug2AInhElements getTypeBug2AInhAccess() {
 		return (pTypeBug2AInh != null) ? pTypeBug2AInh : (pTypeBug2AInh = new TypeBug2AInhElements());
 	}
@@ -2034,7 +2028,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//TypeBug2A:
-	//  {TypeBug2A} "ka" name=ID;
+	//	{TypeBug2A} "ka" name=ID;
 	public TypeBug2AElements getTypeBug2AAccess() {
 		return (pTypeBug2A != null) ? pTypeBug2A : (pTypeBug2A = new TypeBug2AElements());
 	}
@@ -2044,7 +2038,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//TypeBug2B:
-	//  {TypeBug2B} "kb" name=ID;
+	//	{TypeBug2B} "kb" name=ID;
 	public TypeBug2BElements getTypeBug2BAccess() {
 		return (pTypeBug2B != null) ? pTypeBug2B : (pTypeBug2B = new TypeBug2BElements());
 	}
@@ -2054,8 +2048,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Bug305171:
-	//  "#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID (
-	//  "," z+=ID)*)?)) name=ID;
+	//	"#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z+=ID)*)?)) name=ID;
 	public Bug305171Elements getBug305171Access() {
 		return (pBug305171 != null) ? pBug305171 : (pBug305171 = new Bug305171Elements());
 	}
@@ -2065,7 +2058,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Bug310435Enum:
-	//  "#20" ("kw1" lits+=EnumBug310435Lit1|"kw2" lits+=EnumBug310435Lit2)*;
+	//	"#20" ("kw1" lits+=EnumBug310435Lit1 | "kw2" lits+=EnumBug310435Lit2)*;
 	public Bug310435EnumElements getBug310435EnumAccess() {
 		return (pBug310435Enum != null) ? pBug310435Enum : (pBug310435Enum = new Bug310435EnumElements());
 	}
@@ -2075,7 +2068,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Bug310435Val:
-	//  "#21" ("kw1" lits+=ID|"kw2" lits+=STRING)*;
+	//	"#21" ("kw1" lits+=ID | "kw2" lits+=STRING)*;
 	public Bug310435ValElements getBug310435ValAccess() {
 		return (pBug310435Val != null) ? pBug310435Val : (pBug310435Val = new Bug310435ValElements());
 	}
@@ -2085,7 +2078,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//enum EnumBug310435Lit1 returns EnumBug310435Enum:
-	//  lit1;
+	//	lit1;
 	public EnumBug310435Lit1Elements getEnumBug310435Lit1Access() {
 		return (unknownRuleEnumBug310435Lit1 != null) ? unknownRuleEnumBug310435Lit1 : (unknownRuleEnumBug310435Lit1 = new EnumBug310435Lit1Elements());
 	}
@@ -2095,7 +2088,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//enum EnumBug310435Lit2 returns EnumBug310435Enum:
-	//  lit2;
+	//	lit2;
 	public EnumBug310435Lit2Elements getEnumBug310435Lit2Access() {
 		return (unknownRuleEnumBug310435Lit2 != null) ? unknownRuleEnumBug310435Lit2 : (unknownRuleEnumBug310435Lit2 = new EnumBug310435Lit2Elements());
 	}
@@ -2105,45 +2098,44 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

@@ -32,10 +32,10 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cRefFooIDTerminalRuleCall_2_0_1 = (RuleCall)cRefFooCrossReference_2_0.eContents().get(1);
 		
 		//Foo:
-		//  name=ID (bar=Bar|baz=Baz) ref=[Foo];
+		//	name=ID (bar=Bar | baz=Baz) ref=[Foo];
 		public ParserRule getRule() { return rule; }
 
-		//name=ID (bar=Bar|baz=Baz) ref=[Foo]
+		//name=ID (bar=Bar | baz=Baz) ref=[Foo]
 		public Group getGroup() { return cGroup; }
 
 		//name=ID
@@ -44,7 +44,7 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		//bar=Bar|baz=Baz
+		//bar=Bar | baz=Baz
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//bar=Bar
@@ -77,7 +77,7 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Bar:
-		//  {Bar} name=ID;
+		//	{Bar} name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//{Bar} name=ID
@@ -106,7 +106,7 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_2_2_0 = (RuleCall)cNameAssignment_2_2.eContents().get(0);
 		
 		//Baz:
-		//  "baz" name=ID ({Baz.child=current} "baz" name=ID)*;
+		//	"baz" name=ID ({Baz.child=current} "baz" name=ID)*;
 		public ParserRule getRule() { return rule; }
 
 		//"baz" name=ID ({Baz.child=current} "baz" name=ID)*
@@ -164,7 +164,7 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Foo:
-	//  name=ID (bar=Bar|baz=Baz) ref=[Foo];
+	//	name=ID (bar=Bar | baz=Baz) ref=[Foo];
 	public FooElements getFooAccess() {
 		return (pFoo != null) ? pFoo : (pFoo = new FooElements());
 	}
@@ -174,7 +174,7 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Bar:
-	//  {Bar} name=ID;
+	//	{Bar} name=ID;
 	public BarElements getBarAccess() {
 		return (pBar != null) ? pBar : (pBar = new BarElements());
 	}
@@ -184,7 +184,7 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Baz:
-	//  "baz" name=ID ({Baz.child=current} "baz" name=ID)*;
+	//	"baz" name=ID ({Baz.child=current} "baz" name=ID)*;
 	public BazElements getBazAccess() {
 		return (pBaz != null) ? pBaz : (pBaz = new BazElements());
 	}
@@ -194,45 +194,44 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

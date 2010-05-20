@@ -47,13 +47,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Spielplatz ****************
  *
  * Spielplatz:
- *   ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|
- *   erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie)* "}")?;
+ * 	("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug |
+ * 	familie+=Familie)* "}")?;
  *
  **/
 
-// ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|
-// erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie)* "}")?
+// ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug |
+// familie+=Familie)* "}")?
 protected class Spielplatz_Group extends GroupToken {
 	
 	public Spielplatz_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -194,7 +194,7 @@ protected class Spielplatz_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 
 }
 
-// (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie)*
+// (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug | familie+=Familie)*
 protected class Spielplatz_Alternatives_4 extends AlternativesToken {
 
 	public Spielplatz_Alternatives_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -438,11 +438,11 @@ protected class Spielplatz_RightCurlyBracketKeyword_5 extends KeywordToken  {
 /************ begin Rule Person ****************
  *
  * Person:
- *   Kind|Erwachsener;
+ * 	Kind | Erwachsener;
  *
  **/
 
-// Kind|Erwachsener
+// Kind | Erwachsener
 protected class Person_Alternatives extends AlternativesToken {
 
 	public Person_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -552,7 +552,7 @@ protected class Person_ErwachsenerParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Kind ****************
  *
  * Kind:
- *   "kind" "(" name=ID age=INT ")";
+ * 	"kind" "(" name=ID age=INT ")";
  *
  **/
 
@@ -725,7 +725,7 @@ protected class Kind_RightParenthesisKeyword_4 extends KeywordToken  {
 /************ begin Rule Erwachsener ****************
  *
  * Erwachsener:
- *   "erwachsener" "(" name=ID age=INT ")";
+ * 	"erwachsener" "(" name=ID age=INT ")";
  *
  **/
 
@@ -898,7 +898,7 @@ protected class Erwachsener_RightParenthesisKeyword_4 extends KeywordToken  {
 /************ begin Rule Spielzeug ****************
  *
  * Spielzeug:
- *   "spielzeug" "(" name=ID farbe=Farbe ")";
+ * 	"spielzeug" "(" name=ID farbe=Farbe ")";
  *
  **/
 
@@ -1083,11 +1083,11 @@ protected class Spielzeug_RightParenthesisKeyword_4 extends KeywordToken  {
 /************ begin Rule Farbe ****************
  *
  * Farbe:
- *   wert=( "ROT" | "BLAU" | "GELB" | "GRÜN" );
+ * 	wert=("ROT" | "BLAU" | "GELB" | "GRÜN");
  *
  **/
 
-// wert=( "ROT" | "BLAU" | "GELB" | "GRÜN" )
+// wert=("ROT" | "BLAU" | "GELB" | "GRÜN")
 protected class Farbe_WertAssignment extends AssignmentToken  {
 	
 	public Farbe_WertAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1143,13 +1143,13 @@ protected class Farbe_WertAssignment extends AssignmentToken  {
 /************ begin Rule Familie ****************
  *
  * Familie:
- *   "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[
- *   Erwachsener] kinder+=[Kind] ("," kinder+=[Kind])* ")";
+ * 	"familie" "(" name=("keyword" | STRING | ID) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] (","
+ * 	kinder+=[Kind])* ")";
  *
  **/
 
-// "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[
-// Erwachsener] kinder+=[Kind] ("," kinder+=[Kind])* ")"
+// "familie" "(" name=("keyword" | STRING | ID) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] (","
+// kinder+=[Kind])* ")"
 protected class Familie_Group extends GroupToken {
 	
 	public Familie_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1221,7 +1221,7 @@ protected class Familie_LeftParenthesisKeyword_1 extends KeywordToken  {
 
 }
 
-// name=( "keyword" | STRING | ID )
+// name=("keyword" | STRING | ID)
 protected class Familie_NameAssignment_2 extends AssignmentToken  {
 	
 	public Familie_NameAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

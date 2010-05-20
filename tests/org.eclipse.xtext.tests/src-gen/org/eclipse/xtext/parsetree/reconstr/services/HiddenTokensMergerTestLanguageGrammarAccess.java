@@ -30,12 +30,10 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cAction1ParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
 		
 		//Model:
-		//  DatatypeBug286557|EnumBug|Commentable|ValueList|RefList|SingleRef|
-		//  AppendToFileEnd|Action1;
+		//	DatatypeBug286557 | EnumBug | Commentable | ValueList | RefList | SingleRef | AppendToFileEnd | Action1;
 		public ParserRule getRule() { return rule; }
 
-		//DatatypeBug286557|EnumBug|Commentable|ValueList|RefList|SingleRef|
-		//AppendToFileEnd|Action1
+		//DatatypeBug286557 | EnumBug | Commentable | ValueList | RefList | SingleRef | AppendToFileEnd | Action1
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//DatatypeBug286557
@@ -77,7 +75,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//DatatypeBug286557:
-		//  "#1" name=FQN ("ref" ref=[DatatypeBug286557|FQN])? ";";
+		//	"#1" name=FQN ("ref" ref=[DatatypeBug286557|FQN])? ";";
 		public ParserRule getRule() { return rule; }
 
 		//"#1" name=FQN ("ref" ref=[DatatypeBug286557|FQN])? ";"
@@ -120,7 +118,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//FQN returns ecore::EString:
-		//  ID ("." ID)*;
+		//	ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
@@ -150,7 +148,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
 		
 		//EnumBug:
-		//  "#2" "kw1" return=EnumBugEnum name=ID;
+		//	"#2" "kw1" return=EnumBugEnum name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"#2" "kw1" return=EnumBugEnum name=ID
@@ -183,7 +181,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cItemCommentableItemParserRuleCall_1_0 = (RuleCall)cItemAssignment_1.eContents().get(0);
 		
 		//Commentable:
-		//  "#3" item+=CommentableItem*;
+		//	"#3" item+=CommentableItem*;
 		public ParserRule getRule() { return rule; }
 
 		//"#3" item+=CommentableItem*
@@ -207,7 +205,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cIdIDTerminalRuleCall_1_0 = (RuleCall)cIdAssignment_1.eContents().get(0);
 		
 		//CommentableItem:
-		//  "item" id=ID;
+		//	"item" id=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"item" id=ID
@@ -231,7 +229,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cIdsFQNParserRuleCall_1_0 = (RuleCall)cIdsAssignment_1.eContents().get(0);
 		
 		//ValueList:
-		//  "#4" ids+=FQN*;
+		//	"#4" ids+=FQN*;
 		public ParserRule getRule() { return rule; }
 
 		//"#4" ids+=FQN*
@@ -259,7 +257,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cRefsRefObjFQNParserRuleCall_3_0_1 = (RuleCall)cRefsRefObjCrossReference_3_0.eContents().get(1);
 		
 		//RefList:
-		//  "#5" objs+=RefObj* "refs" refs+=[RefObj|FQN]*;
+		//	"#5" objs+=RefObj* "refs" refs+=[RefObj|FQN]*;
 		public ParserRule getRule() { return rule; }
 
 		//"#5" objs+=RefObj* "refs" refs+=[RefObj|FQN]*
@@ -293,7 +291,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cNameFQNParserRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//RefObj:
-		//  name=FQN;
+		//	name=FQN;
 		public ParserRule getRule() { return rule; }
 
 		//name=FQN
@@ -315,7 +313,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cRefRefObjFQNParserRuleCall_3_0_1 = (RuleCall)cRefRefObjCrossReference_3_0.eContents().get(1);
 		
 		//SingleRef:
-		//  "#6" obj=RefObj "ref" ref=[RefObj|FQN];
+		//	"#6" obj=RefObj "ref" ref=[RefObj|FQN];
 		public ParserRule getRule() { return rule; }
 
 		//"#6" obj=RefObj "ref" ref=[RefObj|FQN]
@@ -351,10 +349,8 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cItemsAppendToFileEndItemParserRuleCall_1_0 = (RuleCall)cItemsAssignment_1.eContents().get(0);
 		
 		//// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=297938
-		//
-		//
 		//AppendToFileEnd:
-		//  "#7" items+=AppendToFileEndItem*;
+		//	"#7" items+=AppendToFileEndItem*;
 		public ParserRule getRule() { return rule; }
 
 		//"#7" items+=AppendToFileEndItem*
@@ -379,7 +375,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final Keyword cEndclassKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//AppendToFileEndItem:
-		//  "class" name=ID "endclass";
+		//	"class" name=ID "endclass";
 		public ParserRule getRule() { return rule; }
 
 		//"class" name=ID "endclass"
@@ -411,7 +407,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cActions2Action1Sub2ParserRuleCall_4_0 = (RuleCall)cActions2Assignment_4.eContents().get(0);
 		
 		//Action1:
-		//  "#8" {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2;
+		//	"#8" {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2;
 		public ParserRule getRule() { return rule; }
 
 		//"#8" {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2
@@ -449,7 +445,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final Keyword cSub1Keyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Action1Sub1:
-		//  {Action1Sub} "sub1";
+		//	{Action1Sub} "sub1";
 		public ParserRule getRule() { return rule; }
 
 		//{Action1Sub} "sub1"
@@ -469,7 +465,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final Keyword cSub2Keyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Action1Sub2:
-		//  {Action1SubClass} "sub2";
+		//	{Action1SubClass} "sub2";
 		public ParserRule getRule() { return rule; }
 
 		//{Action1SubClass} "sub2"
@@ -496,7 +492,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final Keyword cIteratorIteratorKeyword_3_0 = (Keyword)cIteratorEnumLiteralDeclaration_3.eContents().get(0);
 		
 		//enum EnumBugEnum:
-		//  array | object | resultSet | iterator;
+		//	array | object | resultSet | iterator;
 		public EnumRule getRule() { return rule; }
 
 		//array | object | resultSet | iterator
@@ -566,8 +562,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 
 	
 	//Model:
-	//  DatatypeBug286557|EnumBug|Commentable|ValueList|RefList|SingleRef|
-	//  AppendToFileEnd|Action1;
+	//	DatatypeBug286557 | EnumBug | Commentable | ValueList | RefList | SingleRef | AppendToFileEnd | Action1;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -577,7 +572,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//DatatypeBug286557:
-	//  "#1" name=FQN ("ref" ref=[DatatypeBug286557|FQN])? ";";
+	//	"#1" name=FQN ("ref" ref=[DatatypeBug286557|FQN])? ";";
 	public DatatypeBug286557Elements getDatatypeBug286557Access() {
 		return (pDatatypeBug286557 != null) ? pDatatypeBug286557 : (pDatatypeBug286557 = new DatatypeBug286557Elements());
 	}
@@ -587,7 +582,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//FQN returns ecore::EString:
-	//  ID ("." ID)*;
+	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
 		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
 	}
@@ -597,7 +592,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//EnumBug:
-	//  "#2" "kw1" return=EnumBugEnum name=ID;
+	//	"#2" "kw1" return=EnumBugEnum name=ID;
 	public EnumBugElements getEnumBugAccess() {
 		return (pEnumBug != null) ? pEnumBug : (pEnumBug = new EnumBugElements());
 	}
@@ -607,7 +602,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//enum EnumBugEnum:
-	//  array | object | resultSet | iterator;
+	//	array | object | resultSet | iterator;
 	public EnumBugEnumElements getEnumBugEnumAccess() {
 		return (unknownRuleEnumBugEnum != null) ? unknownRuleEnumBugEnum : (unknownRuleEnumBugEnum = new EnumBugEnumElements());
 	}
@@ -617,7 +612,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//Commentable:
-	//  "#3" item+=CommentableItem*;
+	//	"#3" item+=CommentableItem*;
 	public CommentableElements getCommentableAccess() {
 		return (pCommentable != null) ? pCommentable : (pCommentable = new CommentableElements());
 	}
@@ -627,7 +622,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//CommentableItem:
-	//  "item" id=ID;
+	//	"item" id=ID;
 	public CommentableItemElements getCommentableItemAccess() {
 		return (pCommentableItem != null) ? pCommentableItem : (pCommentableItem = new CommentableItemElements());
 	}
@@ -637,7 +632,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//ValueList:
-	//  "#4" ids+=FQN*;
+	//	"#4" ids+=FQN*;
 	public ValueListElements getValueListAccess() {
 		return (pValueList != null) ? pValueList : (pValueList = new ValueListElements());
 	}
@@ -647,7 +642,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//RefList:
-	//  "#5" objs+=RefObj* "refs" refs+=[RefObj|FQN]*;
+	//	"#5" objs+=RefObj* "refs" refs+=[RefObj|FQN]*;
 	public RefListElements getRefListAccess() {
 		return (pRefList != null) ? pRefList : (pRefList = new RefListElements());
 	}
@@ -657,7 +652,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//RefObj:
-	//  name=FQN;
+	//	name=FQN;
 	public RefObjElements getRefObjAccess() {
 		return (pRefObj != null) ? pRefObj : (pRefObj = new RefObjElements());
 	}
@@ -667,7 +662,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//SingleRef:
-	//  "#6" obj=RefObj "ref" ref=[RefObj|FQN];
+	//	"#6" obj=RefObj "ref" ref=[RefObj|FQN];
 	public SingleRefElements getSingleRefAccess() {
 		return (pSingleRef != null) ? pSingleRef : (pSingleRef = new SingleRefElements());
 	}
@@ -677,10 +672,8 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=297938
-	//
-	//
 	//AppendToFileEnd:
-	//  "#7" items+=AppendToFileEndItem*;
+	//	"#7" items+=AppendToFileEndItem*;
 	public AppendToFileEndElements getAppendToFileEndAccess() {
 		return (pAppendToFileEnd != null) ? pAppendToFileEnd : (pAppendToFileEnd = new AppendToFileEndElements());
 	}
@@ -690,7 +683,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//AppendToFileEndItem:
-	//  "class" name=ID "endclass";
+	//	"class" name=ID "endclass";
 	public AppendToFileEndItemElements getAppendToFileEndItemAccess() {
 		return (pAppendToFileEndItem != null) ? pAppendToFileEndItem : (pAppendToFileEndItem = new AppendToFileEndItemElements());
 	}
@@ -700,7 +693,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//Action1:
-	//  "#8" {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2;
+	//	"#8" {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2;
 	public Action1Elements getAction1Access() {
 		return (pAction1 != null) ? pAction1 : (pAction1 = new Action1Elements());
 	}
@@ -710,7 +703,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//Action1Sub1:
-	//  {Action1Sub} "sub1";
+	//	{Action1Sub} "sub1";
 	public Action1Sub1Elements getAction1Sub1Access() {
 		return (pAction1Sub1 != null) ? pAction1Sub1 : (pAction1Sub1 = new Action1Sub1Elements());
 	}
@@ -720,7 +713,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//Action1Sub2:
-	//  {Action1SubClass} "sub2";
+	//	{Action1SubClass} "sub2";
 	public Action1Sub2Elements getAction1Sub2Access() {
 		return (pAction1Sub2 != null) ? pAction1Sub2 : (pAction1Sub2 = new Action1Sub2Elements());
 	}
@@ -730,45 +723,44 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

@@ -45,7 +45,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Start ****************
  *
  * Start:
- *   "abstract rules" rules+=AbstractRule+ "end";
+ * 	"abstract rules" rules+=AbstractRule+ "end";
  *
  **/
 
@@ -175,11 +175,11 @@ protected class Start_EndKeyword_2 extends KeywordToken  {
 /************ begin Rule AbstractRule ****************
  *
  * AbstractRule:
- *   FirstAbstractRuleChild|SecondAbstractRuleChild;
+ * 	FirstAbstractRuleChild | SecondAbstractRuleChild;
  *
  **/
 
-// FirstAbstractRuleChild|SecondAbstractRuleChild
+// FirstAbstractRuleChild | SecondAbstractRuleChild
 protected class AbstractRule_Alternatives extends AlternativesToken {
 
 	public AbstractRule_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -289,7 +289,7 @@ protected class AbstractRule_SecondAbstractRuleChildParserRuleCall_1 extends Rul
 /************ begin Rule FirstAbstractRuleChild ****************
  *
  * FirstAbstractRuleChild:
- *   name=ID "(" elements+=AbstractRule+ ")" ";";
+ * 	name=ID "(" elements+=AbstractRule+ ")" ";";
  *
  **/
 
@@ -475,7 +475,7 @@ protected class FirstAbstractRuleChild_SemicolonKeyword_4 extends KeywordToken  
 /************ begin Rule SecondAbstractRuleChild ****************
  *
  * SecondAbstractRuleChild:
- *   name=ID "rule" ":" rule=AbstractRuleCall ";";
+ * 	name=ID "rule" ":" rule=AbstractRuleCall ";";
  *
  **/
 
@@ -660,7 +660,7 @@ protected class SecondAbstractRuleChild_SemicolonKeyword_4 extends KeywordToken 
 /************ begin Rule AbstractRuleCall ****************
  *
  * AbstractRuleCall:
- *   rule=[AbstractRule];
+ * 	rule=[AbstractRule];
  *
  **/
 

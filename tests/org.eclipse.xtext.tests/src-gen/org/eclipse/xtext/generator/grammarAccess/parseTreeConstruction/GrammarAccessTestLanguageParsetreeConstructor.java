@@ -44,7 +44,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Root ****************
  *
  * Root returns root::AModel:
- *   elements+=Type*;
+ * 	elements+=Type*;
  *
  **/
 
@@ -100,11 +100,11 @@ protected class Root_ElementsAssignment extends AssignmentToken  {
 /************ begin Rule Type ****************
  *
  * Type returns root::AType:
- *   AType|AnotherType;
+ * 	AType | AnotherType;
  *
  **/
 
-// AType|AnotherType
+// AType | AnotherType
 protected class Type_Alternatives extends AlternativesToken {
 
 	public Type_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -214,7 +214,7 @@ protected class Type_AnotherTypeParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule AType ****************
  *
  * AType returns root::AType:
- *   "foo" {root::AType};
+ * 	"foo" {root::AType};
  *
  **/
 
@@ -302,7 +302,7 @@ protected class AType_ATypeAction_1 extends ActionToken  {
 /************ begin Rule AnotherType ****************
  *
  * AnotherType returns sub::AnotherType:
- *   "bar" {sub::AnotherType};
+ * 	"bar" {sub::AnotherType};
  *
  **/
 

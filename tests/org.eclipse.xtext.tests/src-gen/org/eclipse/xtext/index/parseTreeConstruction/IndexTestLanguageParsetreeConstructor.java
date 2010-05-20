@@ -48,7 +48,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule File ****************
  *
  * File:
- *   elements+=Element*;
+ * 	elements+=Element*;
  *
  **/
 
@@ -104,7 +104,7 @@ protected class File_ElementsAssignment extends AssignmentToken  {
 /************ begin Rule Import ****************
  *
  * Import:
- *   "import" importedNamespace=QualifiedNameWithWildCard;
+ * 	"import" importedNamespace=QualifiedNameWithWildCard;
  *
  **/
 
@@ -201,7 +201,7 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 /************ begin Rule Namespace ****************
  *
  * Namespace:
- *   name=QualifiedName "{" elements+=Element* "}";
+ * 	name=QualifiedName "{" elements+=Element* "}";
  *
  **/
 
@@ -366,11 +366,11 @@ protected class Namespace_RightCurlyBracketKeyword_3 extends KeywordToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- *   Namespace|Type|Import;
+ * 	Namespace | Type | Import;
  *
  **/
 
-// Namespace|Type|Import
+// Namespace | Type | Import
 protected class Element_Alternatives extends AlternativesToken {
 
 	public Element_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -520,11 +520,11 @@ protected class Element_ImportParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule Type ****************
  *
  * Type:
- *   Entity|Datatype;
+ * 	Entity | Datatype;
  *
  **/
 
-// Entity|Datatype
+// Entity | Datatype
 protected class Type_Alternatives extends AlternativesToken {
 
 	public Type_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -634,7 +634,7 @@ protected class Type_DatatypeParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Entity ****************
  *
  * Entity:
- *   "entity" name=ID "{" properties+=Property* "}";
+ * 	"entity" name=ID "{" properties+=Property* "}";
  *
  **/
 
@@ -821,7 +821,7 @@ protected class Entity_RightCurlyBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule Datatype ****************
  *
  * Datatype:
- *   "datatype" name=ID;
+ * 	"datatype" name=ID;
  *
  **/
 
@@ -916,7 +916,7 @@ protected class Datatype_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule Property ****************
  *
  * Property:
- *   type=[Type|QualifiedName] name=ID;
+ * 	type=[Type|QualifiedName] name=ID;
  *
  **/
 

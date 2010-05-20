@@ -47,7 +47,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule FirstLevel ****************
  *
  * FirstLevel:
- *   secondLevelA+=SecondLevelA* secondLevelB+=SecondLevelB*;
+ * 	secondLevelA+=SecondLevelA* secondLevelB+=SecondLevelB*;
  *
  **/
 
@@ -181,7 +181,7 @@ protected class FirstLevel_SecondLevelBAssignment_1 extends AssignmentToken  {
 /************ begin Rule SecondLevelA ****************
  *
  * SecondLevelA:
- *   thirdLevelA1+=ThirdLevelA1+ thirdLevelA2+=ThirdLevelA2+;
+ * 	thirdLevelA1+=ThirdLevelA1+ thirdLevelA2+=ThirdLevelA2+;
  *
  **/
 
@@ -314,7 +314,7 @@ protected class SecondLevelA_ThirdLevelA2Assignment_1 extends AssignmentToken  {
 /************ begin Rule SecondLevelB ****************
  *
  * SecondLevelB:
- *   thirdLevelB1+=ThirdLevelB1+ thirdLevelB2+=ThirdLevelB2+;
+ * 	thirdLevelB1+=ThirdLevelB1+ thirdLevelB2+=ThirdLevelB2+;
  *
  **/
 
@@ -447,7 +447,7 @@ protected class SecondLevelB_ThirdLevelB2Assignment_1 extends AssignmentToken  {
 /************ begin Rule ThirdLevelA1 ****************
  *
  * ThirdLevelA1:
- *   "A1" {ThirdLevelA1} name=ID?;
+ * 	"A1" {ThirdLevelA1} name=ID?;
  *
  **/
 
@@ -570,7 +570,7 @@ protected class ThirdLevelA1_NameAssignment_2 extends AssignmentToken  {
 /************ begin Rule ThirdLevelA2 ****************
  *
  * ThirdLevelA2:
- *   "A2" {ThirdLevelA2} name=ID?;
+ * 	"A2" {ThirdLevelA2} name=ID?;
  *
  **/
 
@@ -693,7 +693,7 @@ protected class ThirdLevelA2_NameAssignment_2 extends AssignmentToken  {
 /************ begin Rule ThirdLevelB1 ****************
  *
  * ThirdLevelB1:
- *   "B1" {ThirdLevelB1} name=ID?;
+ * 	"B1" {ThirdLevelB1} name=ID?;
  *
  **/
 
@@ -816,7 +816,7 @@ protected class ThirdLevelB1_NameAssignment_2 extends AssignmentToken  {
 /************ begin Rule ThirdLevelB2 ****************
  *
  * ThirdLevelB2:
- *   "B2" {ThirdLevelB2} name=ID?;
+ * 	"B2" {ThirdLevelB2} name=ID?;
  *
  **/
 

@@ -42,7 +42,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Main ****************
  *
  * Main:
- *   elements+=Element*;
+ * 	elements+=Element*;
  *
  **/
 
@@ -98,7 +98,7 @@ protected class Main_ElementsAssignment extends AssignmentToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- *   name=ID "{" contained+=Element* ("ref" referenced+=[Element])* "}";
+ * 	name=ID "{" contained+=Element* ("ref" referenced+=[Element])* "}";
  *
  **/
 

@@ -43,7 +43,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   imports+=Import* elements+=Element+;
+ * 	imports+=Import* elements+=Element+;
  *
  **/
 
@@ -176,7 +176,7 @@ protected class Model_ElementsAssignment_1 extends AssignmentToken  {
 /************ begin Rule Import ****************
  *
  * Import:
- *   importedNamespace=STRING;
+ * 	importedNamespace=STRING;
  *
  **/
 
@@ -221,7 +221,7 @@ protected class Import_ImportedNamespaceAssignment extends AssignmentToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- *   name=ID reference=[Element]? "{" elements+=Element* "}";
+ * 	name=ID reference=[Element]? "{" elements+=Element* "}";
  *
  **/
 

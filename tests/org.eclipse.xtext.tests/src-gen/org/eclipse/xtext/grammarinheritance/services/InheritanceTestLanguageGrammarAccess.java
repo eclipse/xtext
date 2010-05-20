@@ -29,7 +29,7 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Model:
-		//  "model" name=ID "{" elements+=Element* "}";
+		//	"model" name=ID "{" elements+=Element* "}";
 		public ParserRule getRule() { return rule; }
 
 		//"model" name=ID "{" elements+=Element* "}"
@@ -65,7 +65,7 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Element:
-		//  "element" name=ID;
+		//	"element" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"element" name=ID
@@ -107,7 +107,7 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractGrammarElement
 
 	
 	//Model:
-	//  "model" name=ID "{" elements+=Element* "}";
+	//	"model" name=ID "{" elements+=Element* "}";
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -117,7 +117,7 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Element:
-	//  "element" name=ID;
+	//	"element" name=ID;
 	public ElementElements getElementAccess() {
 		return (pElement != null) ? pElement : (pElement = new ElementElements());
 	}
@@ -127,7 +127,7 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//FQN returns ecore::EString:
-	//  ID ("." ID)*;
+	//	ID ("." ID)*;
 	public BaseInheritanceTestLanguageGrammarAccess.FQNElements getFQNAccess() {
 		return gaBaseInheritanceTestLanguage.getFQNAccess();
 	}
@@ -137,45 +137,44 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaBaseInheritanceTestLanguage.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaBaseInheritanceTestLanguage.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaBaseInheritanceTestLanguage.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaBaseInheritanceTestLanguage.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaBaseInheritanceTestLanguage.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaBaseInheritanceTestLanguage.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaBaseInheritanceTestLanguage.getANY_OTHERRule();
 	} 

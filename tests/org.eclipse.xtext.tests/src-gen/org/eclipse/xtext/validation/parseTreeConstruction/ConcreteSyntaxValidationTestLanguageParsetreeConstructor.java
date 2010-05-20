@@ -74,25 +74,20 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   x1=SimpleGroup|x2=SimpleAlternative|x3=SimpleMultiplicities|
- *   x4=GroupMultiplicities|x5=AlternativeMultiplicities|x6=AssignedAction|
- *   x7=AssignedActionSecond|x8=UnassignedAction1|x9=UnassignedAction2|
- *   x10=UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|
- *   x13=Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1
- *   |x18=List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|
- *   x24=TransientObject|x25=TransientSerializeables1|x26=StaticSimplification|
- *   x27=TwoVersion|x28=Heuristic1;
+ * 	x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities |
+ * 	x5=AlternativeMultiplicities | x6=AssignedAction | x7=AssignedActionSecond | x8=UnassignedAction1 |
+ * 	x9=UnassignedAction2 | x10=UnassignedAction3 | x11=UnassignedRuleCall1 | x12=UnassignedRuleCall2 | x13=Combination1 |
+ * 	x14=Combination2 | x15=Combination3 | x16=Combination4 | x17=List1 | x18=List2 | x19=List3 | x20=List4 | x21=List5 |
+ * 	x22=AltList1 | x23=AltList2 | x24=TransientObject | x25=TransientSerializeables1 | x26=StaticSimplification |
+ * 	x27=TwoVersion | x28=Heuristic1;
  *
  **/
 
-// x1=SimpleGroup|x2=SimpleAlternative|x3=SimpleMultiplicities|
-// x4=GroupMultiplicities|x5=AlternativeMultiplicities|x6=AssignedAction|
-// x7=AssignedActionSecond|x8=UnassignedAction1|x9=UnassignedAction2|
-// x10=UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|
-// x13=Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|
-// x18=List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|
-// x24=TransientObject|x25=TransientSerializeables1|x26=StaticSimplification|
-// x27=TwoVersion|x28=Heuristic1
+// x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities | x5=AlternativeMultiplicities
+// | x6=AssignedAction | x7=AssignedActionSecond | x8=UnassignedAction1 | x9=UnassignedAction2 | x10=UnassignedAction3 |
+// x11=UnassignedRuleCall1 | x12=UnassignedRuleCall2 | x13=Combination1 | x14=Combination2 | x15=Combination3 |
+// x16=Combination4 | x17=List1 | x18=List2 | x19=List3 | x20=List4 | x21=List5 | x22=AltList1 | x23=AltList2 |
+// x24=TransientObject | x25=TransientSerializeables1 | x26=StaticSimplification | x27=TwoVersion | x28=Heuristic1
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1415,7 +1410,7 @@ protected class Model_X28Assignment_27 extends AssignmentToken  {
 /************ begin Rule SimpleGroup ****************
  *
  * SimpleGroup:
- *   "#1" val1=ID val2=ID;
+ * 	"#1" val1=ID val2=ID;
  *
  **/
 
@@ -1544,11 +1539,11 @@ protected class SimpleGroup_Val2Assignment_2 extends AssignmentToken  {
 /************ begin Rule SimpleAlternative ****************
  *
  * SimpleAlternative:
- *   "#2" ("kw1" val1=ID|"kw2" val2=ID);
+ * 	"#2" ("kw1" val1=ID | "kw2" val2=ID);
  *
  **/
 
-// "#2" ("kw1" val1=ID|"kw2" val2=ID)
+// "#2" ("kw1" val1=ID | "kw2" val2=ID)
 protected class SimpleAlternative_Group extends GroupToken {
 	
 	public SimpleAlternative_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1598,7 +1593,7 @@ protected class SimpleAlternative_NumberSignDigitTwoKeyword_0 extends KeywordTok
 
 }
 
-// "kw1" val1=ID|"kw2" val2=ID
+// "kw1" val1=ID | "kw2" val2=ID
 protected class SimpleAlternative_Alternatives_1 extends AlternativesToken {
 
 	public SimpleAlternative_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1787,7 +1782,7 @@ protected class SimpleAlternative_Val2Assignment_1_1_1 extends AssignmentToken  
 /************ begin Rule SimpleMultiplicities ****************
  *
  * SimpleMultiplicities:
- *   "#3" val1=ID "kw1" val2=ID? "kw2" val3+=ID+ "kw3" val4+=ID*;
+ * 	"#3" val1=ID "kw1" val2=ID? "kw2" val3+=ID+ "kw3" val4+=ID*;
  *
  **/
 
@@ -2054,13 +2049,11 @@ protected class SimpleMultiplicities_Val4Assignment_7 extends AssignmentToken  {
 /************ begin Rule GroupMultiplicities ****************
  *
  * GroupMultiplicities:
- *   "#4" val1=ID "kw1" (val2=ID val3=ID)? "kw2" (val4+=ID val5+=ID)+ "kw3" (
- *   val6+=ID val7+=ID)*;
+ * 	"#4" val1=ID "kw1" (val2=ID val3=ID)? "kw2" (val4+=ID val5+=ID)+ "kw3" (val6+=ID val7+=ID)*;
  *
  **/
 
-// "#4" val1=ID "kw1" (val2=ID val3=ID)? "kw2" (val4+=ID val5+=ID)+ "kw3" (val6+=ID
-// val7+=ID)*
+// "#4" val1=ID "kw1" (val2=ID val3=ID)? "kw2" (val4+=ID val5+=ID)+ "kw3" (val6+=ID val7+=ID)*
 protected class GroupMultiplicities_Group extends GroupToken {
 	
 	public GroupMultiplicities_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2494,13 +2487,11 @@ protected class GroupMultiplicities_Val7Assignment_7_1 extends AssignmentToken  
 /************ begin Rule AlternativeMultiplicities ****************
  *
  * AlternativeMultiplicities:
- *   "#5" (val2=ID|"kw1" val3=ID)? "kw2" (val4+=ID|"kw3" val5+=ID)+ "kw4" (
- *   val6+=ID|"kw5" val7+=ID)*;
+ * 	"#5" (val2=ID | "kw1" val3=ID)? "kw2" (val4+=ID | "kw3" val5+=ID)+ "kw4" (val6+=ID | "kw5" val7+=ID)*;
  *
  **/
 
-// "#5" (val2=ID|"kw1" val3=ID)? "kw2" (val4+=ID|"kw3" val5+=ID)+ "kw4" (val6+=ID|
-// "kw5" val7+=ID)*
+// "#5" (val2=ID | "kw1" val3=ID)? "kw2" (val4+=ID | "kw3" val5+=ID)+ "kw4" (val6+=ID | "kw5" val7+=ID)*
 protected class AlternativeMultiplicities_Group extends GroupToken {
 	
 	public AlternativeMultiplicities_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2551,7 +2542,7 @@ protected class AlternativeMultiplicities_NumberSignDigitFiveKeyword_0 extends K
 
 }
 
-// (val2=ID|"kw1" val3=ID)?
+// (val2=ID | "kw1" val3=ID)?
 protected class AlternativeMultiplicities_Alternatives_1 extends AlternativesToken {
 
 	public AlternativeMultiplicities_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2711,7 +2702,7 @@ protected class AlternativeMultiplicities_Kw2Keyword_2 extends KeywordToken  {
 
 }
 
-// (val4+=ID|"kw3" val5+=ID)+
+// (val4+=ID | "kw3" val5+=ID)+
 protected class AlternativeMultiplicities_Alternatives_3 extends AlternativesToken {
 
 	public AlternativeMultiplicities_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2872,7 +2863,7 @@ protected class AlternativeMultiplicities_Kw4Keyword_4 extends KeywordToken  {
 
 }
 
-// (val6+=ID|"kw5" val7+=ID)*
+// (val6+=ID | "kw5" val7+=ID)*
 protected class AlternativeMultiplicities_Alternatives_5 extends AlternativesToken {
 
 	public AlternativeMultiplicities_Alternatives_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3018,7 +3009,7 @@ protected class AlternativeMultiplicities_Val7Assignment_5_1_1 extends Assignmen
 /************ begin Rule AssignedAction ****************
  *
  * AssignedAction:
- *   "#6" val1=ID ({AssignedAction.child=current} val1=ID)+;
+ * 	"#6" val1=ID ({AssignedAction.child=current} val1=ID)+;
  *
  **/
 
@@ -3200,7 +3191,7 @@ protected class AssignedAction_Val1Assignment_2_1 extends AssignmentToken  {
 /************ begin Rule AssignedActionSecond ****************
  *
  * AssignedActionSecond returns AssignedAction:
- *   "#7" val1=ID "kw1" val2=ID;
+ * 	"#7" val1=ID "kw1" val2=ID;
  *
  **/
 
@@ -3351,7 +3342,7 @@ protected class AssignedActionSecond_Val2Assignment_3 extends AssignmentToken  {
 /************ begin Rule UnassignedAction1 ****************
  *
  * UnassignedAction1:
- *   {UnassignedAction1} "#8" val1=ID val2=ID?;
+ * 	{UnassignedAction1} "#8" val1=ID val2=ID?;
  *
  **/
 
@@ -3508,7 +3499,7 @@ protected class UnassignedAction1_Val2Assignment_3 extends AssignmentToken  {
 /************ begin Rule UnassignedAction2 ****************
  *
  * UnassignedAction2:
- *   {UnassignedAction2Sub} "#9" val1=ID val2=ID?;
+ * 	{UnassignedAction2Sub} "#9" val1=ID val2=ID?;
  *
  **/
 
@@ -3665,13 +3656,11 @@ protected class UnassignedAction2_Val2Assignment_3 extends AssignmentToken  {
 /************ begin Rule UnassignedAction3 ****************
  *
  * UnassignedAction3:
- *   "#10" ("kw1" {UnassignedAction2Sub1}|"kw2" {UnassignedAction2Sub2}) val1=ID
- *   val2=ID?;
+ * 	"#10" ("kw1" {UnassignedAction2Sub1} | "kw2" {UnassignedAction2Sub2}) val1=ID val2=ID?;
  *
  **/
 
-// "#10" ("kw1" {UnassignedAction2Sub1}|"kw2" {UnassignedAction2Sub2}) val1=ID
-// val2=ID?
+// "#10" ("kw1" {UnassignedAction2Sub1} | "kw2" {UnassignedAction2Sub2}) val1=ID val2=ID?
 protected class UnassignedAction3_Group extends GroupToken {
 	
 	public UnassignedAction3_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3723,7 +3712,7 @@ protected class UnassignedAction3_NumberSignDigitOneDigitZeroKeyword_0 extends K
 
 }
 
-// "kw1" {UnassignedAction2Sub1}|"kw2" {UnassignedAction2Sub2}
+// "kw1" {UnassignedAction2Sub1} | "kw2" {UnassignedAction2Sub2}
 protected class UnassignedAction3_Alternatives_1 extends AlternativesToken {
 
 	public UnassignedAction3_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3980,7 +3969,7 @@ protected class UnassignedAction3_Val2Assignment_3 extends AssignmentToken  {
 /************ begin Rule UnassignedRuleCall1 ****************
  *
  * UnassignedRuleCall1:
- *   "#11" UnassignedRuleCall1Sub val2=ID;
+ * 	"#11" UnassignedRuleCall1Sub val2=ID;
  *
  **/
 
@@ -4110,7 +4099,7 @@ protected class UnassignedRuleCall1_Val2Assignment_2 extends AssignmentToken  {
 /************ begin Rule UnassignedRuleCall1Sub ****************
  *
  * UnassignedRuleCall1Sub:
- *   val1=ID;
+ * 	val1=ID;
  *
  **/
 
@@ -4155,7 +4144,7 @@ protected class UnassignedRuleCall1Sub_Val1Assignment extends AssignmentToken  {
 /************ begin Rule UnassignedRuleCall2 ****************
  *
  * UnassignedRuleCall2:
- *   "#12" UnassignedRuleCall2Sub val2=ID;
+ * 	"#12" UnassignedRuleCall2Sub val2=ID;
  *
  **/
 
@@ -4285,7 +4274,7 @@ protected class UnassignedRuleCall2_Val2Assignment_2 extends AssignmentToken  {
 /************ begin Rule UnassignedRuleCall2Sub ****************
  *
  * UnassignedRuleCall2Sub:
- *   {UnassignedRuleCall2SubAction};
+ * 	{UnassignedRuleCall2SubAction};
  *
  **/
 
@@ -4323,11 +4312,11 @@ protected class UnassignedRuleCall2Sub_UnassignedRuleCall2SubActionAction extend
 /************ begin Rule Combination1 ****************
  *
  * Combination1:
- *   "#13" val1=ID ("kw1" val2=ID ("kw2" val3=ID|val4=ID))?;
+ * 	"#13" val1=ID ("kw1" val2=ID ("kw2" val3=ID | val4=ID))?;
  *
  **/
 
-// "#13" val1=ID ("kw1" val2=ID ("kw2" val3=ID|val4=ID))?
+// "#13" val1=ID ("kw1" val2=ID ("kw2" val3=ID | val4=ID))?
 protected class Combination1_Group extends GroupToken {
 	
 	public Combination1_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4412,7 +4401,7 @@ protected class Combination1_Val1Assignment_1 extends AssignmentToken  {
 
 }
 
-// ("kw1" val2=ID ("kw2" val3=ID|val4=ID))?
+// ("kw1" val2=ID ("kw2" val3=ID | val4=ID))?
 protected class Combination1_Group_2 extends GroupToken {
 	
 	public Combination1_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4490,7 +4479,7 @@ protected class Combination1_Val2Assignment_2_1 extends AssignmentToken  {
 
 }
 
-// "kw2" val3=ID|val4=ID
+// "kw2" val3=ID | val4=ID
 protected class Combination1_Alternatives_2_2 extends AlternativesToken {
 
 	public Combination1_Alternatives_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4635,11 +4624,11 @@ protected class Combination1_Val4Assignment_2_2_1 extends AssignmentToken  {
 /************ begin Rule Combination2 ****************
  *
  * Combination2:
- *   "#14" val1=ID ("kw1" val2=ID|(val3+=ID val4+=ID)*);
+ * 	"#14" val1=ID ("kw1" val2=ID | (val3+=ID val4+=ID)*);
  *
  **/
 
-// "#14" val1=ID ("kw1" val2=ID|(val3+=ID val4+=ID)*)
+// "#14" val1=ID ("kw1" val2=ID | (val3+=ID val4+=ID)*)
 protected class Combination2_Group extends GroupToken {
 	
 	public Combination2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4723,7 +4712,7 @@ protected class Combination2_Val1Assignment_1 extends AssignmentToken  {
 
 }
 
-// "kw1" val2=ID|(val3+=ID val4+=ID)*
+// "kw1" val2=ID | (val3+=ID val4+=ID)*
 protected class Combination2_Alternatives_2 extends AlternativesToken {
 
 	public Combination2_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4925,11 +4914,11 @@ protected class Combination2_Val4Assignment_2_1_1 extends AssignmentToken  {
 /************ begin Rule Combination3 ****************
  *
  * Combination3:
- *   "#15" (val1=ID|val2=INT|val3=STRING)*;
+ * 	"#15" (val1=ID | val2=INT | val3=STRING)*;
  *
  **/
 
-// "#15" (val1=ID|val2=INT|val3=STRING)*
+// "#15" (val1=ID | val2=INT | val3=STRING)*
 protected class Combination3_Group extends GroupToken {
 	
 	public Combination3_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4980,7 +4969,7 @@ protected class Combination3_NumberSignDigitOneDigitFiveKeyword_0 extends Keywor
 
 }
 
-// (val1=ID|val2=INT|val3=STRING)*
+// (val1=ID | val2=INT | val3=STRING)*
 protected class Combination3_Alternatives_1 extends AlternativesToken {
 
 	public Combination3_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5117,7 +5106,7 @@ protected class Combination3_Val3Assignment_1_2 extends AssignmentToken  {
 /************ begin Rule Combination4 ****************
  *
  * Combination4:
- *   "#16" ("group" val1+=ID val2+=ID val3+=ID)+;
+ * 	"#16" ("group" val1+=ID val2+=ID val3+=ID)+;
  *
  **/
 
@@ -5326,7 +5315,7 @@ protected class Combination4_Val3Assignment_1_3 extends AssignmentToken  {
 /************ begin Rule List1 ****************
  *
  * List1:
- *   "#17" val1+=ID ("," val1+=ID)*;
+ * 	"#17" val1+=ID ("," val1+=ID)*;
  *
  **/
 
@@ -5502,7 +5491,7 @@ protected class List1_Val1Assignment_2_1 extends AssignmentToken  {
 /************ begin Rule List2 ****************
  *
  * List2:
- *   "#18" (val1+=ID ("," val1+=ID)*)?;
+ * 	"#18" (val1+=ID ("," val1+=ID)*)?;
  *
  **/
 
@@ -5702,11 +5691,11 @@ protected class List2_Val1Assignment_1_1_1 extends AssignmentToken  {
 /************ begin Rule List3 ****************
  *
  * List3:
- *   "#19" (val1+=ID ("," val1+=ID)*)|"kw3" val2=ID;
+ * 	"#19" (val1+=ID ("," val1+=ID)*) | "kw3" val2=ID;
  *
  **/
 
-// "#19" (val1+=ID ("," val1+=ID)*)|"kw3" val2=ID
+// "#19" (val1+=ID ("," val1+=ID)*) | "kw3" val2=ID
 protected class List3_Alternatives extends AlternativesToken {
 
 	public List3_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6003,7 +5992,7 @@ protected class List3_Val2Assignment_1_1 extends AssignmentToken  {
 /************ begin Rule List4 ****************
  *
  * List4:
- *   "#20" val1+=ID ("," val1+=ID)* "kw3" val2=ID;
+ * 	"#20" val1+=ID ("," val1+=ID)* "kw3" val2=ID;
  *
  **/
 
@@ -6235,11 +6224,11 @@ protected class List4_Val2Assignment_4 extends AssignmentToken  {
 /************ begin Rule List5 ****************
  *
  * List5:
- *   "#21" (val1+=ID ("," val1+=ID)* "kw3" val2=ID|val3=ID);
+ * 	"#21" (val1+=ID ("," val1+=ID)* "kw3" val2=ID | val3=ID);
  *
  **/
 
-// "#21" (val1+=ID ("," val1+=ID)* "kw3" val2=ID|val3=ID)
+// "#21" (val1+=ID ("," val1+=ID)* "kw3" val2=ID | val3=ID)
 protected class List5_Group extends GroupToken {
 	
 	public List5_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6289,7 +6278,7 @@ protected class List5_NumberSignDigitTwoDigitOneKeyword_0 extends KeywordToken  
 
 }
 
-// val1+=ID ("," val1+=ID)* "kw3" val2=ID|val3=ID
+// val1+=ID ("," val1+=ID)* "kw3" val2=ID | val3=ID
 protected class List5_Alternatives_1 extends AlternativesToken {
 
 	public List5_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6548,11 +6537,11 @@ protected class List5_Val3Assignment_1_1 extends AssignmentToken  {
 /************ begin Rule AltList1 ****************
  *
  * AltList1:
- *   "#22" (val1=ID val2=ID|"kw1" val1=ID val3=ID|"kw2" val1=ID val4=ID?);
+ * 	"#22" (val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?);
  *
  **/
 
-// "#22" (val1=ID val2=ID|"kw1" val1=ID val3=ID|"kw2" val1=ID val4=ID?)
+// "#22" (val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?)
 protected class AltList1_Group extends GroupToken {
 	
 	public AltList1_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6602,7 +6591,7 @@ protected class AltList1_NumberSignDigitTwoDigitTwoKeyword_0 extends KeywordToke
 
 }
 
-// val1=ID val2=ID|"kw1" val1=ID val3=ID|"kw2" val1=ID val4=ID?
+// val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?
 protected class AltList1_Alternatives_1 extends AlternativesToken {
 
 	public AltList1_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6952,11 +6941,11 @@ protected class AltList1_Val4Assignment_1_2_2 extends AssignmentToken  {
 /************ begin Rule AltList2 ****************
  *
  * AltList2:
- *   "#23" (val1+=ID val2=ID|"kw" val1+=ID ("," val1+=ID)* val3=ID);
+ * 	"#23" (val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID);
  *
  **/
 
-// "#23" (val1+=ID val2=ID|"kw" val1+=ID ("," val1+=ID)* val3=ID)
+// "#23" (val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID)
 protected class AltList2_Group extends GroupToken {
 	
 	public AltList2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7006,7 +6995,7 @@ protected class AltList2_NumberSignDigitTwoDigitThreeKeyword_0 extends KeywordTo
 
 }
 
-// val1+=ID val2=ID|"kw" val1+=ID ("," val1+=ID)* val3=ID
+// val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID
 protected class AltList2_Alternatives_1 extends AlternativesToken {
 
 	public AltList2_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7322,7 +7311,7 @@ protected class AltList2_Val3Assignment_1_1_3 extends AssignmentToken  {
 /************ begin Rule TransientObject ****************
  *
  * TransientObject:
- *   "#24" (val1=ID nested=TransientObjectSub)?;
+ * 	"#24" (val1=ID nested=TransientObjectSub)?;
  *
  **/
 
@@ -7487,7 +7476,7 @@ protected class TransientObject_NestedAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule TransientObjectSub ****************
  *
  * TransientObjectSub:
- *   val2=ID val3=ID;
+ * 	val2=ID val3=ID;
  *
  **/
 
@@ -7594,7 +7583,7 @@ protected class TransientObjectSub_Val3Assignment_1 extends AssignmentToken  {
 /************ begin Rule TransientSerializeables1 ****************
  *
  * TransientSerializeables1:
- *   "#25" (val1=ID enum1=TransientSerializeables1Enum)? (val2=ID int1=INT)?;
+ * 	"#25" (val1=ID enum1=TransientSerializeables1Enum)? (val2=ID int1=INT)?;
  *
  **/
 
@@ -7840,13 +7829,11 @@ protected class TransientSerializeables1_Int1Assignment_2_1 extends AssignmentTo
 /************ begin Rule StaticSimplification ****************
  *
  * StaticSimplification:
- *   "#26" ("kw1"|{EmptyAlternativeSub}|val1=ID) ("kw2"|val2=ID) ("kw3" ("kw4"
- *   val3=ID+)?);
+ * 	"#26" ("kw1" | {EmptyAlternativeSub} | val1=ID) ("kw2" | val2=ID) ("kw3" ("kw4" val3=ID+)?);
  *
  **/
 
-// "#26" ("kw1"|{EmptyAlternativeSub}|val1=ID) ("kw2"|val2=ID) ("kw3" ("kw4"
-// val3=ID+)?)
+// "#26" ("kw1" | {EmptyAlternativeSub} | val1=ID) ("kw2" | val2=ID) ("kw3" ("kw4" val3=ID+)?)
 protected class StaticSimplification_Group extends GroupToken {
 	
 	public StaticSimplification_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7897,7 +7884,7 @@ protected class StaticSimplification_NumberSignDigitTwoDigitSixKeyword_0 extends
 
 }
 
-// "kw1"|{EmptyAlternativeSub}|val1=ID
+// "kw1" | {EmptyAlternativeSub} | val1=ID
 protected class StaticSimplification_Alternatives_1 extends AlternativesToken {
 
 	public StaticSimplification_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8009,7 +7996,7 @@ protected class StaticSimplification_Val1Assignment_1_2 extends AssignmentToken 
 }
 
 
-// "kw2"|val2=ID
+// "kw2" | val2=ID
 protected class StaticSimplification_Alternatives_2 extends AlternativesToken {
 
 	public StaticSimplification_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8222,11 +8209,11 @@ protected class StaticSimplification_Val3Assignment_3_1_1 extends AssignmentToke
 /************ begin Rule TwoVersion ****************
  *
  * TwoVersion:
- *   "#27" (TwoVersionNo1|TwoVersionNo2);
+ * 	"#27" (TwoVersionNo1 | TwoVersionNo2);
  *
  **/
 
-// "#27" (TwoVersionNo1|TwoVersionNo2)
+// "#27" (TwoVersionNo1 | TwoVersionNo2)
 protected class TwoVersion_Group extends GroupToken {
 	
 	public TwoVersion_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8248,7 +8235,7 @@ protected class TwoVersion_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getTwoVersionNo1Rule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getTwoVersionNo2Rule().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -8276,7 +8263,7 @@ protected class TwoVersion_NumberSignDigitTwoDigitSevenKeyword_0 extends Keyword
 
 }
 
-// TwoVersionNo1|TwoVersionNo2
+// TwoVersionNo1 | TwoVersionNo2
 protected class TwoVersion_Alternatives_1 extends AlternativesToken {
 
 	public TwoVersion_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8377,8 +8364,7 @@ protected class TwoVersion_TwoVersionNo2ParserRuleCall_1_1 extends RuleCallToken
 /************ begin Rule TwoVersionNo1 ****************
  *
  * TwoVersionNo1 returns TwoVersion:
- *   shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?
- * ;
+ * 	shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?;
  *
  **/
 
@@ -8658,13 +8644,11 @@ protected class TwoVersionNo1_Version1Assignment_5 extends AssignmentToken  {
 /************ begin Rule TwoVersionNo2 ****************
  *
  * TwoVersionNo2 returns TwoVersion:
- *   shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)? "extra" extra1=ID?
- *   (extra2=ID extra3=ID|"two" extra4=ID)?;
+ * 	shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)? "extra" extra1=ID? (extra2=ID extra3=ID | "two" extra4=ID)?;
  *
  **/
 
-// shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)? "extra" extra1=ID? (
-// extra2=ID extra3=ID|"two" extra4=ID)?
+// shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)? "extra" extra1=ID? (extra2=ID extra3=ID | "two" extra4=ID)?
 protected class TwoVersionNo2_Group extends GroupToken {
 	
 	public TwoVersionNo2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8934,7 +8918,7 @@ protected class TwoVersionNo2_Extra1Assignment_5 extends AssignmentToken  {
 
 }
 
-// (extra2=ID extra3=ID|"two" extra4=ID)?
+// (extra2=ID extra3=ID | "two" extra4=ID)?
 protected class TwoVersionNo2_Alternatives_6 extends AlternativesToken {
 
 	public TwoVersionNo2_Alternatives_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9137,7 +9121,7 @@ protected class TwoVersionNo2_Extra4Assignment_6_1_1 extends AssignmentToken  {
 /************ begin Rule Heuristic1 ****************
  *
  * Heuristic1:
- *   "#28" ("kw1" a+=ID b+=ID)* ("kw2" a+=ID c+=ID)* ("kw3" b+=ID c+=ID)*;
+ * 	"#28" ("kw1" a+=ID b+=ID)* ("kw2" a+=ID c+=ID)* ("kw3" b+=ID c+=ID)*;
  *
  **/
 

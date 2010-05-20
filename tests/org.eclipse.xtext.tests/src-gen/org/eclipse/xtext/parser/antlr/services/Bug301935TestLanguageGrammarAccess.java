@@ -30,7 +30,7 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cWSTerminalRuleCall_5 = (RuleCall)cGroup.eContents().get(5);
 		
 		//Model:
-		//  name=ID WS value=ID NL value2=ID WS;
+		//	name=ID WS value=ID NL value2=ID WS;
 		public ParserRule getRule() { return rule; }
 
 		//name=ID WS value=ID NL value2=ID WS
@@ -74,7 +74,7 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cWSTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//NL returns EString:
-		//  WS* ("\r"? "\n") WS*;
+		//	WS* ("\r"? "\n") WS*;
 		public ParserRule getRule() { return rule; }
 
 		//WS* ("\r"? "\n") WS*
@@ -117,7 +117,7 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//  name=ID WS value=ID NL value2=ID WS;
+	//	name=ID WS value=ID NL value2=ID WS;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -127,7 +127,7 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//NL returns EString:
-	//  WS* ("\r"? "\n") WS*;
+	//	WS* ("\r"? "\n") WS*;
 	public NLElements getNLAccess() {
 		return (pNL != null) ? pNL : (pNL = new NLElements());
 	}
@@ -137,19 +137,19 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
 	} 
 
 	//terminal WS:
-	//  (" " | "\t")+;
+	//	(" " | "\t")+;
 	public TerminalRule getWSRule() {
 		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return (tANY_OTHER != null) ? tANY_OTHER : (tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
 	} 

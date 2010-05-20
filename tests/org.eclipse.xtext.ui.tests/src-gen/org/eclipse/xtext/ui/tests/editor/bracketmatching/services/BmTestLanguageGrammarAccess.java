@@ -23,7 +23,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cExpressionExpressionParserRuleCall_0 = (RuleCall)cExpressionAssignment.eContents().get(0);
 		
 		//File:
-		//  expression+=Expression*;
+		//	expression+=Expression*;
 		public ParserRule getRule() { return rule; }
 
 		//expression+=Expression*
@@ -44,10 +44,10 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightSquareBracketKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
 		
 		//Expression:
-		//  SExpression|Atom|"[" Expression "]";
+		//	SExpression | Atom | "[" Expression "]";
 		public ParserRule getRule() { return rule; }
 
-		//SExpression|Atom|"[" Expression "]"
+		//SExpression | Atom | "[" Expression "]"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//SExpression
@@ -86,17 +86,16 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cEndKeyword_1_1_2 = (Keyword)cGroup_1_1.eContents().get(2);
 		
 		//SExpression:
-		//  {SExpression} ("(" element+=Expression* ")"|"begin" element+=Expression*
-		//  "end");
+		//	{SExpression} ("(" element+=Expression* ")" | "begin" element+=Expression* "end");
 		public ParserRule getRule() { return rule; }
 
-		//{SExpression} ("(" element+=Expression* ")"|"begin" element+=Expression* "end")
+		//{SExpression} ("(" element+=Expression* ")" | "begin" element+=Expression* "end")
 		public Group getGroup() { return cGroup; }
 
 		//{SExpression}
 		public Action getSExpressionAction_0() { return cSExpressionAction_0; }
 
-		//"(" element+=Expression* ")"|"begin" element+=Expression* "end"
+		//"(" element+=Expression* ")" | "begin" element+=Expression* "end"
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"(" element+=Expression* ")"
@@ -136,7 +135,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cValueVALUEParserRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
 		//Atom:
-		//  value=VALUE;
+		//	value=VALUE;
 		public ParserRule getRule() { return rule; }
 
 		//value=VALUE
@@ -154,10 +153,10 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSTRINGTerminalRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//VALUE returns ecore::EString:
-		//  ID|INT|STRING;
+		//	ID | INT | STRING;
 		public ParserRule getRule() { return rule; }
 
-		//ID|INT|STRING
+		//ID | INT | STRING
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//ID
@@ -199,7 +198,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//File:
-	//  expression+=Expression*;
+	//	expression+=Expression*;
 	public FileElements getFileAccess() {
 		return (pFile != null) ? pFile : (pFile = new FileElements());
 	}
@@ -209,7 +208,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Expression:
-	//  SExpression|Atom|"[" Expression "]";
+	//	SExpression | Atom | "[" Expression "]";
 	public ExpressionElements getExpressionAccess() {
 		return (pExpression != null) ? pExpression : (pExpression = new ExpressionElements());
 	}
@@ -219,8 +218,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SExpression:
-	//  {SExpression} ("(" element+=Expression* ")"|"begin" element+=Expression*
-	//  "end");
+	//	{SExpression} ("(" element+=Expression* ")" | "begin" element+=Expression* "end");
 	public SExpressionElements getSExpressionAccess() {
 		return (pSExpression != null) ? pSExpression : (pSExpression = new SExpressionElements());
 	}
@@ -230,7 +228,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Atom:
-	//  value=VALUE;
+	//	value=VALUE;
 	public AtomElements getAtomAccess() {
 		return (pAtom != null) ? pAtom : (pAtom = new AtomElements());
 	}
@@ -240,7 +238,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//VALUE returns ecore::EString:
-	//  ID|INT|STRING;
+	//	ID | INT | STRING;
 	public VALUEElements getVALUEAccess() {
 		return (pVALUE != null) ? pVALUE : (pVALUE = new VALUEElements());
 	}
@@ -250,45 +248,44 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

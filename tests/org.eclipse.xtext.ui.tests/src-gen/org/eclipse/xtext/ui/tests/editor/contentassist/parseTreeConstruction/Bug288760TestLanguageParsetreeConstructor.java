@@ -42,13 +42,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule WorkflowElement ****************
  *
  * WorkflowElement:
- *   name=START_TAG attributes+=Attribute* END_TAG_SHORT|name=START_TAG
- *   attributes+=Attribute* GT children+=WorkflowElement* end=END_TAG;
+ * 	name=START_TAG attributes+=Attribute* END_TAG_SHORT | name=START_TAG attributes+=Attribute* GT
+ * 	children+=WorkflowElement* end=END_TAG;
  *
  **/
 
-// name=START_TAG attributes+=Attribute* END_TAG_SHORT|name=START_TAG
-// attributes+=Attribute* GT children+=WorkflowElement* end=END_TAG
+// name=START_TAG attributes+=Attribute* END_TAG_SHORT | name=START_TAG attributes+=Attribute* GT
+// children+=WorkflowElement* end=END_TAG
 protected class WorkflowElement_Alternatives extends AlternativesToken {
 
 	public WorkflowElement_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -419,7 +419,7 @@ protected class WorkflowElement_EndAssignment_1_4 extends AssignmentToken  {
 /************ begin Rule Attribute ****************
  *
  * Attribute:
- *   name=ID EQ value=STRING;
+ * 	name=ID EQ value=STRING;
  *
  **/
 

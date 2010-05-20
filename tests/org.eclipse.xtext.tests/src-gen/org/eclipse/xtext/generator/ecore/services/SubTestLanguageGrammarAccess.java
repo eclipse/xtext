@@ -28,7 +28,7 @@ public class SubTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAnotherAnotherSuperMainParserRuleCall_3_0 = (RuleCall)cAnotherAssignment_3.eContents().get(0);
 		
 		//SubMain:
-		//  "{" superMains+=SuperMain "}" another=AnotherSuperMain?;
+		//	"{" superMains+=SuperMain "}" another=AnotherSuperMain?;
 		public ParserRule getRule() { return rule; }
 
 		//"{" superMains+=SuperMain "}" another=AnotherSuperMain?
@@ -61,7 +61,7 @@ public class SubTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//AnotherSuperMain:
-		//  "ups" name=ID;
+		//	"ups" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"ups" name=ID
@@ -103,7 +103,7 @@ public class SubTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//SubMain:
-	//  "{" superMains+=SuperMain "}" another=AnotherSuperMain?;
+	//	"{" superMains+=SuperMain "}" another=AnotherSuperMain?;
 	public SubMainElements getSubMainAccess() {
 		return (pSubMain != null) ? pSubMain : (pSubMain = new SubMainElements());
 	}
@@ -113,7 +113,7 @@ public class SubTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AnotherSuperMain:
-	//  "ups" name=ID;
+	//	"ups" name=ID;
 	public AnotherSuperMainElements getAnotherSuperMainAccess() {
 		return (pAnotherSuperMain != null) ? pAnotherSuperMain : (pAnotherSuperMain = new AnotherSuperMainElements());
 	}
@@ -123,7 +123,7 @@ public class SubTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SuperMain:
-	//  "super" name=ID;
+	//	"super" name=ID;
 	public SuperTestLanguageGrammarAccess.SuperMainElements getSuperMainAccess() {
 		return gaSuperTestLanguage.getSuperMainAccess();
 	}
@@ -133,45 +133,44 @@ public class SubTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaSuperTestLanguage.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaSuperTestLanguage.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaSuperTestLanguage.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaSuperTestLanguage.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaSuperTestLanguage.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaSuperTestLanguage.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaSuperTestLanguage.getANY_OTHERRule();
 	} 

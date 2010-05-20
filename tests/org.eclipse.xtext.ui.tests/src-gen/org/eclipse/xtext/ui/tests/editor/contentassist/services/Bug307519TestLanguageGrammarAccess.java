@@ -26,10 +26,10 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cE2Elem2ParserRuleCall_1_0 = (RuleCall)cE2Assignment_1.eContents().get(0);
 		
 		//Model:
-		//  (e1+=Elem1|e2+=Elem2)+;
+		//	(e1+=Elem1 | e2+=Elem2)+;
 		public ParserRule getRule() { return rule; }
 
-		//(e1+=Elem1|e2+=Elem2)+
+		//(e1+=Elem1 | e2+=Elem2)+
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//e1+=Elem1
@@ -51,7 +51,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cValueEnumTEnumRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
 		//Elem1:
-		//  value=EnumT;
+		//	value=EnumT;
 		public ParserRule getRule() { return rule; }
 
 		//value=EnumT
@@ -71,7 +71,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cDollarSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Elem2:
-		//  value=EnumT "foo" "%" "$";
+		//	value=EnumT "foo" "%" "$";
 		public ParserRule getRule() { return rule; }
 
 		//value=EnumT "foo" "%" "$"
@@ -103,7 +103,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cT2T2Keyword_1_0 = (Keyword)cT2EnumLiteralDeclaration_1.eContents().get(0);
 		
 		//enum EnumT:
-		//  T1 | T2;
+		//	T1 | T2;
 		public EnumRule getRule() { return rule; }
 
 		//T1 | T2
@@ -149,7 +149,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//  (e1+=Elem1|e2+=Elem2)+;
+	//	(e1+=Elem1 | e2+=Elem2)+;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -159,7 +159,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//enum EnumT:
-	//  T1 | T2;
+	//	T1 | T2;
 	public EnumTElements getEnumTAccess() {
 		return (unknownRuleEnumT != null) ? unknownRuleEnumT : (unknownRuleEnumT = new EnumTElements());
 	}
@@ -169,7 +169,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Elem1:
-	//  value=EnumT;
+	//	value=EnumT;
 	public Elem1Elements getElem1Access() {
 		return (pElem1 != null) ? pElem1 : (pElem1 = new Elem1Elements());
 	}
@@ -179,7 +179,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Elem2:
-	//  value=EnumT "foo" "%" "$";
+	//	value=EnumT "foo" "%" "$";
 	public Elem2Elements getElem2Access() {
 		return (pElem2 != null) ? pElem2 : (pElem2 = new Elem2Elements());
 	}
@@ -189,45 +189,44 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

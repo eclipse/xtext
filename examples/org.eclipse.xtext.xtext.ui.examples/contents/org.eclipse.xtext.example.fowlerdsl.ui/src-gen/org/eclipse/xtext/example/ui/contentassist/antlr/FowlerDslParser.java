@@ -43,9 +43,9 @@ public class FowlerDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getStateAccess().getGroup(), "rule__State__Group__0");
 					put(grammarAccess.getStateAccess().getGroup_2(), "rule__State__Group_2__0");
 					put(grammarAccess.getTransitionAccess().getGroup(), "rule__Transition__Group__0");
-					put(grammarAccess.getStatemachineAccess().getEventsAssignment_1(), "rule__Statemachine__EventsAssignment_1");
-					put(grammarAccess.getStatemachineAccess().getCommandsAssignment_4(), "rule__Statemachine__CommandsAssignment_4");
-					put(grammarAccess.getStatemachineAccess().getStatesAssignment_6(), "rule__Statemachine__StatesAssignment_6");
+					put(grammarAccess.getStatemachineAccess().getEventsAssignment_2(), "rule__Statemachine__EventsAssignment_2");
+					put(grammarAccess.getStatemachineAccess().getCommandsAssignment_5(), "rule__Statemachine__CommandsAssignment_5");
+					put(grammarAccess.getStatemachineAccess().getStatesAssignment_7(), "rule__Statemachine__StatesAssignment_7");
 					put(grammarAccess.getEventAccess().getResettingAssignment_0(), "rule__Event__ResettingAssignment_0");
 					put(grammarAccess.getEventAccess().getNameAssignment_1(), "rule__Event__NameAssignment_1");
 					put(grammarAccess.getEventAccess().getCodeAssignment_2(), "rule__Event__CodeAssignment_2");

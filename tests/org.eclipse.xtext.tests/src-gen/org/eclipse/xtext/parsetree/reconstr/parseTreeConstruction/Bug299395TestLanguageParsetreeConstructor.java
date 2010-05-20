@@ -42,13 +42,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   {Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")*
- *   ("subModel" subModel=SubModel)?;
+ * 	{Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")* ("subModel" subModel=SubModel)?;
  *
  **/
 
-// {Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")* (
-// "subModel" subModel=SubModel)?
+// {Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")* ("subModel" subModel=SubModel)?
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -468,7 +466,7 @@ protected class Model_SubModelAssignment_3_1 extends AssignmentToken  {
 /************ begin Rule SubModel ****************
  *
  * SubModel:
- *   {SubModel} ("1" "2" strings+=STRING?)*;
+ * 	{SubModel} ("1" "2" strings+=STRING?)*;
  *
  **/
 

@@ -43,7 +43,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   {Model} "Model" refs+=ModelElement*;
+ * 	{Model} "Model" refs+=ModelElement*;
  *
  **/
 
@@ -179,13 +179,11 @@ protected class Model_RefsAssignment_2 extends AssignmentToken  {
 /************ begin Rule ModelElement ****************
  *
  * ModelElement:
- *   {ModelElement} (containments+=Contained|"reference" refs+=[Contained] ("$"
- *   refs+=[Contained])*)+;
+ * 	{ModelElement} (containments+=Contained | "reference" refs+=[Contained] ("$" refs+=[Contained])*)+;
  *
  **/
 
-// {ModelElement} (containments+=Contained|"reference" refs+=[Contained] ("$"
-// refs+=[Contained])*)+
+// {ModelElement} (containments+=Contained | "reference" refs+=[Contained] ("$" refs+=[Contained])*)+
 protected class ModelElement_Group extends GroupToken {
 	
 	public ModelElement_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -240,8 +238,7 @@ protected class ModelElement_ModelElementAction_0 extends ActionToken  {
 	}
 }
 
-// (containments+=Contained|"reference" refs+=[Contained] ("$" refs+=[Contained])*)
-// +
+// (containments+=Contained | "reference" refs+=[Contained] ("$" refs+=[Contained])*)+
 protected class ModelElement_Alternatives_1 extends AlternativesToken {
 
 	public ModelElement_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -486,7 +483,7 @@ protected class ModelElement_RefsAssignment_1_1_2_1 extends AssignmentToken  {
 /************ begin Rule Contained ****************
  *
  * Contained:
- *   "containment" name=ID;
+ * 	"containment" name=ID;
  *
  **/
 

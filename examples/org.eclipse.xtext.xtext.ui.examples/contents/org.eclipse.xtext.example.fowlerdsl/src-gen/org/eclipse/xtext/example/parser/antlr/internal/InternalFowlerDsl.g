@@ -89,16 +89,27 @@ ruleStatemachine returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'events' 
+((
+    { 
+        temp=factory.create(grammarAccess.getStatemachineAccess().getStatemachineAction_0().getType().getClassifier());
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getStatemachineAccess().getStatemachineAction_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)	'events' 
     {
-        createLeafNode(grammarAccess.getStatemachineAccess().getEventsKeyword_0(), null); 
+        createLeafNode(grammarAccess.getStatemachineAccess().getEventsKeyword_1(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getStatemachineAccess().getEventsEventParserRuleCall_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getStatemachineAccess().getEventsEventParserRuleCall_2_0(), currentNode); 
 	    }
-		lv_events_1_0=ruleEvent		{
+		lv_events_2_0=ruleEvent		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getStatemachineRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -107,7 +118,7 @@ ruleStatemachine returns [EObject current=null]
 	       		add(
 	       			$current, 
 	       			"events",
-	        		lv_events_1_0, 
+	        		lv_events_2_0, 
 	        		"Event", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -119,18 +130,18 @@ ruleStatemachine returns [EObject current=null]
 )
 )*	'end' 
     {
-        createLeafNode(grammarAccess.getStatemachineAccess().getEndKeyword_2(), null); 
+        createLeafNode(grammarAccess.getStatemachineAccess().getEndKeyword_3(), null); 
     }
 	'commands' 
     {
-        createLeafNode(grammarAccess.getStatemachineAccess().getCommandsKeyword_3(), null); 
+        createLeafNode(grammarAccess.getStatemachineAccess().getCommandsKeyword_4(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getStatemachineAccess().getCommandsCommandParserRuleCall_4_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getStatemachineAccess().getCommandsCommandParserRuleCall_5_0(), currentNode); 
 	    }
-		lv_commands_4_0=ruleCommand		{
+		lv_commands_5_0=ruleCommand		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getStatemachineRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -139,7 +150,7 @@ ruleStatemachine returns [EObject current=null]
 	       		add(
 	       			$current, 
 	       			"commands",
-	        		lv_commands_4_0, 
+	        		lv_commands_5_0, 
 	        		"Command", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -151,14 +162,14 @@ ruleStatemachine returns [EObject current=null]
 )
 )*	'end' 
     {
-        createLeafNode(grammarAccess.getStatemachineAccess().getEndKeyword_5(), null); 
+        createLeafNode(grammarAccess.getStatemachineAccess().getEndKeyword_6(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getStatemachineAccess().getStatesStateParserRuleCall_6_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getStatemachineAccess().getStatesStateParserRuleCall_7_0(), currentNode); 
 	    }
-		lv_states_6_0=ruleState		{
+		lv_states_7_0=ruleState		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getStatemachineRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -167,7 +178,7 @@ ruleStatemachine returns [EObject current=null]
 	       		add(
 	       			$current, 
 	       			"states",
-	        		lv_states_6_0, 
+	        		lv_states_7_0, 
 	        		"State", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {

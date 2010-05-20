@@ -41,7 +41,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Start ****************
  *
  * Start:
- *   featureA+=ID+;
+ * 	featureA+=ID+;
  *
  **/
 

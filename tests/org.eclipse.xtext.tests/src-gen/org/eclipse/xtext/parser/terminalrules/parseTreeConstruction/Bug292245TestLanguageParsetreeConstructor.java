@@ -40,12 +40,12 @@ protected class ThisRootNode extends RootToken {
 
 /************ begin Rule Model ****************
  *
- * Model hidden ( WS ):
- *   ("FIX" fix+=Fix+|"ERROR" error+=Error+|"TICK" tick+=Apostrophe+)*;
+ * Model hidden(WS):
+ * 	("FIX" fix+=Fix+ | "ERROR" error+=Error+ | "TICK" tick+=Apostrophe+)*;
  *
  **/
 
-// ("FIX" fix+=Fix+|"ERROR" error+=Error+|"TICK" tick+=Apostrophe+)*
+// ("FIX" fix+=Fix+ | "ERROR" error+=Error+ | "TICK" tick+=Apostrophe+)*
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

@@ -46,7 +46,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   constants+=TConstant;
+ * 	constants+=TConstant;
  *
  **/
 
@@ -103,11 +103,11 @@ protected class Model_ConstantsAssignment extends AssignmentToken  {
 /************ begin Rule TConstant ****************
  *
  * TConstant:
- *   TStringConstant|TIntegerConstant|TBooleanConstant;
+ * 	TStringConstant | TIntegerConstant | TBooleanConstant;
  *
  **/
 
-// TStringConstant|TIntegerConstant|TBooleanConstant
+// TStringConstant | TIntegerConstant | TBooleanConstant
 protected class TConstant_Alternatives extends AlternativesToken {
 
 	public TConstant_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -255,7 +255,7 @@ protected class TConstant_TBooleanConstantParserRuleCall_2 extends RuleCallToken
 /************ begin Rule TStringConstant ****************
  *
  * TStringConstant:
- *   annotations+=TAnnotation* "constant" "string" name=ID;
+ * 	annotations+=TAnnotation* "constant" "string" name=ID;
  *
  **/
 
@@ -419,7 +419,7 @@ protected class TStringConstant_NameAssignment_3 extends AssignmentToken  {
 /************ begin Rule TIntegerConstant ****************
  *
  * TIntegerConstant:
- *   annotations+=TAnnotation* "constant" "integer" name=ID;
+ * 	annotations+=TAnnotation* "constant" "integer" name=ID;
  *
  **/
 
@@ -583,7 +583,7 @@ protected class TIntegerConstant_NameAssignment_3 extends AssignmentToken  {
 /************ begin Rule TBooleanConstant ****************
  *
  * TBooleanConstant:
- *   annotations+=TAnnotation* "constant" "boolean" name=ID;
+ * 	annotations+=TAnnotation* "constant" "boolean" name=ID;
  *
  **/
 
@@ -747,7 +747,7 @@ protected class TBooleanConstant_NameAssignment_3 extends AssignmentToken  {
 /************ begin Rule TAnnotation ****************
  *
  * TAnnotation:
- *   "@desc" description=STRING;
+ * 	"@desc" description=STRING;
  *
  **/
 

@@ -32,8 +32,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cStatesStateParserRuleCall_6_0 = (RuleCall)cStatesAssignment_6.eContents().get(0);
 		
 		//Statemachine:
-		//  "events" events+=Event* "end" "commands" commands+=Command* "end"
-		//  states+=State*;
+		//	"events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*;
 		public ParserRule getRule() { return rule; }
 
 		//"events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*
@@ -81,7 +80,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cCodeIDTerminalRuleCall_2_0 = (RuleCall)cCodeAssignment_2.eContents().get(0);
 		
 		//Event:
-		//  resetting?="resetting"? name=ID code=ID;
+		//	resetting?="resetting"? name=ID code=ID;
 		public ParserRule getRule() { return rule; }
 
 		//resetting?="resetting"? name=ID code=ID
@@ -115,7 +114,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cCodeIDTerminalRuleCall_1_0 = (RuleCall)cCodeAssignment_1.eContents().get(0);
 		
 		//Command:
-		//  name=ID code=ID;
+		//	name=ID code=ID;
 		public ParserRule getRule() { return rule; }
 
 		//name=ID code=ID
@@ -152,12 +151,10 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cEndKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//State:
-		//  "state" name=ID ("actions" "{" actions+=[Command]+ "}")?
-		//  transitions+=Transition* "end";
+		//	"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end";
 		public ParserRule getRule() { return rule; }
 
-		//"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition
-		// * "end"
+		//"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end"
 		public Group getGroup() { return cGroup; }
 
 		//"state"
@@ -212,7 +209,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cStateStateIDTerminalRuleCall_2_0_1 = (RuleCall)cStateStateCrossReference_2_0.eContents().get(1);
 		
 		//Transition:
-		//  event=[Event] "=>" state=[State];
+		//	event=[Event] "=>" state=[State];
 		public ParserRule getRule() { return rule; }
 
 		//event=[Event] "=>" state=[State]
@@ -269,8 +266,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Statemachine:
-	//  "events" events+=Event* "end" "commands" commands+=Command* "end"
-	//  states+=State*;
+	//	"events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*;
 	public StatemachineElements getStatemachineAccess() {
 		return (pStatemachine != null) ? pStatemachine : (pStatemachine = new StatemachineElements());
 	}
@@ -280,7 +276,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Event:
-	//  resetting?="resetting"? name=ID code=ID;
+	//	resetting?="resetting"? name=ID code=ID;
 	public EventElements getEventAccess() {
 		return (pEvent != null) ? pEvent : (pEvent = new EventElements());
 	}
@@ -290,7 +286,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Command:
-	//  name=ID code=ID;
+	//	name=ID code=ID;
 	public CommandElements getCommandAccess() {
 		return (pCommand != null) ? pCommand : (pCommand = new CommandElements());
 	}
@@ -300,8 +296,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//State:
-	//  "state" name=ID ("actions" "{" actions+=[Command]+ "}")?
-	//  transitions+=Transition* "end";
+	//	"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end";
 	public StateElements getStateAccess() {
 		return (pState != null) ? pState : (pState = new StateElements());
 	}
@@ -311,7 +306,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Transition:
-	//  event=[Event] "=>" state=[State];
+	//	event=[Event] "=>" state=[State];
 	public TransitionElements getTransitionAccess() {
 		return (pTransition != null) ? pTransition : (pTransition = new TransitionElements());
 	}
@@ -321,45 +316,44 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

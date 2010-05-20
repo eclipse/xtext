@@ -23,7 +23,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cDefDefinitionParserRuleCall_0 = (RuleCall)cDefAssignment.eContents().get(0);
 		
 		//Model:
-		//  def+=Definition+;
+		//	def+=Definition+;
 		public ParserRule getRule() { return rule; }
 
 		//def+=Definition+
@@ -46,7 +46,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cRefReferenceParserRuleCall_4_0 = (RuleCall)cRefAssignment_4.eContents().get(0);
 		
 		//Definition:
-		//  "(def)" name=ID ":" child+=Child ref+=Reference?;
+		//	"(def)" name=ID ":" child+=Child ref+=Reference?;
 		public ParserRule getRule() { return rule; }
 
 		//"(def)" name=ID ":" child+=Child ref+=Reference?
@@ -89,7 +89,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cLinkDefinitionIDTerminalRuleCall_3_0_1 = (RuleCall)cLinkDefinitionCrossReference_3_0.eContents().get(1);
 		
 		//Child:
-		//  "(child)" name=ID ":" link=[Definition]?;
+		//	"(child)" name=ID ":" link=[Definition]?;
 		public ParserRule getRule() { return rule; }
 
 		//"(child)" name=ID ":" link=[Definition]?
@@ -132,7 +132,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cRefChildChildIDTerminalRuleCall_2_2_0_1 = (RuleCall)cRefChildChildCrossReference_2_2_0.eContents().get(1);
 		
 		//Reference:
-		//  "(ref)" refChild=[Child] (":" {NestedRef.left=current} refChild=[Child])*;
+		//	"(ref)" refChild=[Child] (":" {NestedRef.left=current} refChild=[Child])*;
 		public ParserRule getRule() { return rule; }
 
 		//"(ref)" refChild=[Child] (":" {NestedRef.left=current} refChild=[Child])*
@@ -197,7 +197,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//  def+=Definition+;
+	//	def+=Definition+;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -207,7 +207,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Definition:
-	//  "(def)" name=ID ":" child+=Child ref+=Reference?;
+	//	"(def)" name=ID ":" child+=Child ref+=Reference?;
 	public DefinitionElements getDefinitionAccess() {
 		return (pDefinition != null) ? pDefinition : (pDefinition = new DefinitionElements());
 	}
@@ -217,7 +217,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Child:
-	//  "(child)" name=ID ":" link=[Definition]?;
+	//	"(child)" name=ID ":" link=[Definition]?;
 	public ChildElements getChildAccess() {
 		return (pChild != null) ? pChild : (pChild = new ChildElements());
 	}
@@ -227,7 +227,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Reference:
-	//  "(ref)" refChild=[Child] (":" {NestedRef.left=current} refChild=[Child])*;
+	//	"(ref)" refChild=[Child] (":" {NestedRef.left=current} refChild=[Child])*;
 	public ReferenceElements getReferenceAccess() {
 		return (pReference != null) ? pReference : (pReference = new ReferenceElements());
 	}
@@ -237,45 +237,44 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

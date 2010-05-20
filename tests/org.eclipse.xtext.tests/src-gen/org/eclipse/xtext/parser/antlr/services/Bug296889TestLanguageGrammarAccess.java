@@ -30,10 +30,10 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cValuesDataTypeExpressionParserRuleCall_1_1_0 = (RuleCall)cValuesAssignment_1_1.eContents().get(0);
 		
 		//Model:
-		//  "Model" expressions+=Expression*|"DataType" values+=DataTypeExpression*;
+		//	"Model" expressions+=Expression* | "DataType" values+=DataTypeExpression*;
 		public ParserRule getRule() { return rule; }
 
-		//"Model" expressions+=Expression*|"DataType" values+=DataTypeExpression*
+		//"Model" expressions+=Expression* | "DataType" values+=DataTypeExpression*
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"Model" expressions+=Expression*
@@ -68,10 +68,10 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cPreopParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Expression:
-		//  Postop|Preop;
+		//	Postop | Preop;
 		public ParserRule getRule() { return rule; }
 
-		//Postop|Preop
+		//Postop | Preop
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Postop
@@ -91,7 +91,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cExprVariableParserRuleCall_2_0 = (RuleCall)cExprAssignment_2.eContents().get(0);
 		
 		//Preop returns Expression:
-		//  {Preop} functionName="--" expr=Variable;
+		//	{Preop} functionName="--" expr=Variable;
 		public ParserRule getRule() { return rule; }
 
 		//{Preop} functionName="--" expr=Variable
@@ -123,7 +123,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cFunctionNameHyphenMinusHyphenMinusKeyword_1_1_0 = (Keyword)cFunctionNameAssignment_1_1.eContents().get(0);
 		
 		//Postop returns Expression:
-		//  Variable ({Postop.expr=current} functionName="--")?;
+		//	Variable ({Postop.expr=current} functionName="--")?;
 		public ParserRule getRule() { return rule; }
 
 		//Variable ({Postop.expr=current} functionName="--")?
@@ -153,7 +153,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Variable returns Expression:
-		//  {Variable} name=ID;
+		//	{Variable} name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//{Variable} name=ID
@@ -176,10 +176,10 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cDataTypePreopParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//DataTypeExpression returns ecore::EString:
-		//  DataTypePostop|DataTypePreop;
+		//	DataTypePostop | DataTypePreop;
 		public ParserRule getRule() { return rule; }
 
-		//DataTypePostop|DataTypePreop
+		//DataTypePostop | DataTypePreop
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//DataTypePostop
@@ -196,7 +196,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cDataTypeVariableParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
 		//DataTypePreop returns ecore::EString:
-		//  "--" DataTypeVariable;
+		//	"--" DataTypeVariable;
 		public ParserRule getRule() { return rule; }
 
 		//"--" DataTypeVariable
@@ -216,7 +216,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cHyphenMinusHyphenMinusKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//DataTypePostop returns ecore::EString:
-		//  DataTypeVariable "--"?;
+		//	DataTypeVariable "--"?;
 		public ParserRule getRule() { return rule; }
 
 		//DataTypeVariable "--"?
@@ -234,7 +234,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//DataTypeVariable returns ecore::EString:
-		//  ID;
+		//	ID;
 		public ParserRule getRule() { return rule; }
 
 		//ID
@@ -274,7 +274,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//  "Model" expressions+=Expression*|"DataType" values+=DataTypeExpression*;
+	//	"Model" expressions+=Expression* | "DataType" values+=DataTypeExpression*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -284,7 +284,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Expression:
-	//  Postop|Preop;
+	//	Postop | Preop;
 	public ExpressionElements getExpressionAccess() {
 		return (pExpression != null) ? pExpression : (pExpression = new ExpressionElements());
 	}
@@ -294,7 +294,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Preop returns Expression:
-	//  {Preop} functionName="--" expr=Variable;
+	//	{Preop} functionName="--" expr=Variable;
 	public PreopElements getPreopAccess() {
 		return (pPreop != null) ? pPreop : (pPreop = new PreopElements());
 	}
@@ -304,7 +304,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Postop returns Expression:
-	//  Variable ({Postop.expr=current} functionName="--")?;
+	//	Variable ({Postop.expr=current} functionName="--")?;
 	public PostopElements getPostopAccess() {
 		return (pPostop != null) ? pPostop : (pPostop = new PostopElements());
 	}
@@ -314,7 +314,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Variable returns Expression:
-	//  {Variable} name=ID;
+	//	{Variable} name=ID;
 	public VariableElements getVariableAccess() {
 		return (pVariable != null) ? pVariable : (pVariable = new VariableElements());
 	}
@@ -324,7 +324,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//DataTypeExpression returns ecore::EString:
-	//  DataTypePostop|DataTypePreop;
+	//	DataTypePostop | DataTypePreop;
 	public DataTypeExpressionElements getDataTypeExpressionAccess() {
 		return (pDataTypeExpression != null) ? pDataTypeExpression : (pDataTypeExpression = new DataTypeExpressionElements());
 	}
@@ -334,7 +334,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//DataTypePreop returns ecore::EString:
-	//  "--" DataTypeVariable;
+	//	"--" DataTypeVariable;
 	public DataTypePreopElements getDataTypePreopAccess() {
 		return (pDataTypePreop != null) ? pDataTypePreop : (pDataTypePreop = new DataTypePreopElements());
 	}
@@ -344,7 +344,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//DataTypePostop returns ecore::EString:
-	//  DataTypeVariable "--"?;
+	//	DataTypeVariable "--"?;
 	public DataTypePostopElements getDataTypePostopAccess() {
 		return (pDataTypePostop != null) ? pDataTypePostop : (pDataTypePostop = new DataTypePostopElements());
 	}
@@ -354,7 +354,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//DataTypeVariable returns ecore::EString:
-	//  ID;
+	//	ID;
 	public DataTypeVariableElements getDataTypeVariableAccess() {
 		return (pDataTypeVariable != null) ? pDataTypeVariable : (pDataTypeVariable = new DataTypeVariableElements());
 	}
@@ -364,45 +364,44 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

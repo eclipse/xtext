@@ -44,19 +44,17 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+"
- *   multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2"
- *   value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+"
- *   multiValue+=Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype
- *   |("content" children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?;
+ * 	"1"? value=("mykeyword1" | STRING | NestedDatatype | Datatype | ID) | "1+" multiValue+=("mykeyword1" | STRING |
+ * 	NestedDatatype | Datatype | ID) | "2" value=STRING | "2+" multiValue+=STRING | "3" value=Datatype | "3+"
+ * 	multiValue+=Datatype | "4" value=NestedDatatype | "4+" multiValue+=NestedDatatype | ("content" children=Child) ("ref"
+ * 	ref=([Child1|STRING] | [Child2]))?;
  *
  **/
 
-// "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"1+"
-// multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )|"2"
-// value=STRING|"2+" multiValue+=STRING|"3" value=Datatype|"3+"
-// multiValue+=Datatype|"4" value=NestedDatatype|"4+" multiValue+=NestedDatatype|(
-// "content" children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?
+// "1"? value=("mykeyword1" | STRING | NestedDatatype | Datatype | ID) | "1+" multiValue+=("mykeyword1" | STRING |
+// NestedDatatype | Datatype | ID) | "2" value=STRING | "2+" multiValue+=STRING | "3" value=Datatype | "3+"
+// multiValue+=Datatype | "4" value=NestedDatatype | "4+" multiValue+=NestedDatatype | ("content" children=Child) ("ref"
+// ref=([Child1|STRING] | [Child2]))?
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -93,7 +91,7 @@ protected class Model_Alternatives extends AlternativesToken {
 
 }
 
-// "1"? value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )
+// "1"? value=("mykeyword1" | STRING | NestedDatatype | Datatype | ID)
 protected class Model_Group_0 extends GroupToken {
 	
 	public Model_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -115,7 +113,7 @@ protected class Model_Group_0 extends GroupToken {
 
 }
 
-// value=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )
+// value=("mykeyword1" | STRING | NestedDatatype | Datatype | ID)
 protected class Model_ValueAssignment_0_1 extends AssignmentToken  {
 	
 	public Model_ValueAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -169,7 +167,7 @@ protected class Model_ValueAssignment_0_1 extends AssignmentToken  {
 }
 
 
-// "1+" multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )
+// "1+" multiValue+=("mykeyword1" | STRING | NestedDatatype | Datatype | ID)
 protected class Model_Group_1 extends GroupToken {
 	
 	public Model_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -212,7 +210,7 @@ protected class Model_DigitOnePlusSignKeyword_1_0 extends KeywordToken  {
 
 }
 
-// multiValue+=( "mykeyword1" | STRING | NestedDatatype | Datatype | ID )
+// multiValue+=("mykeyword1" | STRING | NestedDatatype | Datatype | ID)
 protected class Model_MultiValueAssignment_1_1 extends AssignmentToken  {
 	
 	public Model_MultiValueAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -735,7 +733,7 @@ protected class Model_MultiValueAssignment_7_1 extends AssignmentToken  {
 }
 
 
-// ("content" children=Child) ("ref" ref=( [Child1|STRING] | [Child2] ))?
+// ("content" children=Child) ("ref" ref=([Child1|STRING] | [Child2]))?
 protected class Model_Group_8 extends GroupToken {
 	
 	public Model_Group_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -848,7 +846,7 @@ protected class Model_ChildrenAssignment_8_0_1 extends AssignmentToken  {
 }
 
 
-// ("ref" ref=( [Child1|STRING] | [Child2] ))?
+// ("ref" ref=([Child1|STRING] | [Child2]))?
 protected class Model_Group_8_1 extends GroupToken {
 	
 	public Model_Group_8_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -892,7 +890,7 @@ protected class Model_RefKeyword_8_1_0 extends KeywordToken  {
 
 }
 
-// ref=( [Child1|STRING] | [Child2] )
+// ref=([Child1|STRING] | [Child2])
 protected class Model_RefAssignment_8_1_1 extends AssignmentToken  {
 	
 	public Model_RefAssignment_8_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -958,11 +956,11 @@ protected class Model_RefAssignment_8_1_1 extends AssignmentToken  {
 /************ begin Rule Child ****************
  *
  * Child:
- *   Child1|Child2;
+ * 	Child1 | Child2;
  *
  **/
 
-// Child1|Child2
+// Child1 | Child2
 protected class Child_Alternatives extends AlternativesToken {
 
 	public Child_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1072,7 +1070,7 @@ protected class Child_Child2ParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Child1 ****************
  *
  * Child1:
- *   name=ID;
+ * 	name=ID;
  *
  **/
 
@@ -1116,11 +1114,15 @@ protected class Child1_NameAssignment extends AssignmentToken  {
 
 /************ begin Rule Child2 ****************
  *
+ * // TODO rename test language to ValueConverterTestLanguage
+ * // TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
  * Child2:
- *   name=STRING;
+ * 	name=STRING;
  *
  **/
 
+// // TODO rename test language to ValueConverterTestLanguage
+// // TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
 // name=STRING
 protected class Child2_NameAssignment extends AssignmentToken  {
 	

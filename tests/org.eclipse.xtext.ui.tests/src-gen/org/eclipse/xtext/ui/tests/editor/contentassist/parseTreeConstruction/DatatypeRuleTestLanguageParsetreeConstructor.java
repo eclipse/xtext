@@ -46,7 +46,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   Types;
+ * 	Types;
  *
  **/
 
@@ -92,7 +92,7 @@ protected class Model_TypesParserRuleCall extends RuleCallToken {
 /************ begin Rule Types ****************
  *
  * Types:
- *   "Types" types+=Type*;
+ * 	"Types" types+=Type*;
  *
  **/
 
@@ -201,11 +201,11 @@ protected class Types_TypesAssignment_1 extends AssignmentToken  {
 /************ begin Rule Type ****************
  *
  * Type:
- *   SimpleType|CompositeType;
+ * 	SimpleType | CompositeType;
  *
  **/
 
-// SimpleType|CompositeType
+// SimpleType | CompositeType
 protected class Type_Alternatives extends AlternativesToken {
 
 	public Type_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -315,7 +315,7 @@ protected class Type_CompositeTypeParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule SimpleType ****************
  *
  * SimpleType:
- *   "Type" name=ID ";";
+ * 	"Type" name=ID ";";
  *
  **/
 
@@ -432,7 +432,7 @@ protected class SimpleType_SemicolonKeyword_2 extends KeywordToken  {
 /************ begin Rule CompositeType ****************
  *
  * CompositeType:
- *   "Composite" name=ID "base" baseType=CompositeTypeEntry ";";
+ * 	"Composite" name=ID "base" baseType=CompositeTypeEntry ";";
  *
  **/
 
@@ -617,7 +617,7 @@ protected class CompositeType_SemicolonKeyword_4 extends KeywordToken  {
 /************ begin Rule CompositeTypeEntry ****************
  *
  * CompositeTypeEntry:
- *   dataType=[Type|TypeId];
+ * 	dataType=[Type|TypeId];
  *
  **/
 

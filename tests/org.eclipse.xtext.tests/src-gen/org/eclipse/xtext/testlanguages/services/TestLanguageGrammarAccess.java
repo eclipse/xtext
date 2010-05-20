@@ -23,7 +23,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cMultiFeatureAbstractRuleParserRuleCall_0 = (RuleCall)cMultiFeatureAssignment.eContents().get(0);
 		
 		//EntryRule returns Model:
-		//  multiFeature+=AbstractRule*;
+		//	multiFeature+=AbstractRule*;
 		public ParserRule getRule() { return rule; }
 
 		//multiFeature+=AbstractRule*
@@ -40,10 +40,10 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cReducibleRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//AbstractRule returns AbstractElement:
-		//  ChoiceRule|ReducibleRule;
+		//	ChoiceRule | ReducibleRule;
 		public ParserRule getRule() { return rule; }
 
-		//ChoiceRule|ReducibleRule
+		//ChoiceRule | ReducibleRule
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//ChoiceRule
@@ -63,7 +63,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//ChoiceRule returns ChoiceElement:
-		//  "choice" optionalKeyword?="optional"? name=ID;
+		//	"choice" optionalKeyword?="optional"? name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"choice" optionalKeyword?="optional"? name=ID
@@ -96,12 +96,10 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cActionFeatureTerminalRuleParserRuleCall_2_1_0 = (RuleCall)cActionFeatureAssignment_2_1.eContents().get(0);
 		
 		//ReducibleRule returns ReducibleElement:
-		//  "reducible" TerminalRule ({ReducibleComposite.actionFeature+=current}
-		//  actionFeature+=TerminalRule)?;
+		//	"reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?;
 		public ParserRule getRule() { return rule; }
 
-		//"reducible" TerminalRule ({ReducibleComposite.actionFeature+=current}
-		//actionFeature+=TerminalRule)?
+		//"reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?
 		public Group getGroup() { return cGroup; }
 
 		//"reducible"
@@ -129,7 +127,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cStringFeatureSTRINGTerminalRuleCall_0 = (RuleCall)cStringFeatureAssignment.eContents().get(0);
 		
 		//TerminalRule returns TerminalElement:
-		//  stringFeature=STRING;
+		//	stringFeature=STRING;
 		public ParserRule getRule() { return rule; }
 
 		//stringFeature=STRING
@@ -168,7 +166,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//EntryRule returns Model:
-	//  multiFeature+=AbstractRule*;
+	//	multiFeature+=AbstractRule*;
 	public EntryRuleElements getEntryRuleAccess() {
 		return (pEntryRule != null) ? pEntryRule : (pEntryRule = new EntryRuleElements());
 	}
@@ -178,7 +176,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AbstractRule returns AbstractElement:
-	//  ChoiceRule|ReducibleRule;
+	//	ChoiceRule | ReducibleRule;
 	public AbstractRuleElements getAbstractRuleAccess() {
 		return (pAbstractRule != null) ? pAbstractRule : (pAbstractRule = new AbstractRuleElements());
 	}
@@ -188,7 +186,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ChoiceRule returns ChoiceElement:
-	//  "choice" optionalKeyword?="optional"? name=ID;
+	//	"choice" optionalKeyword?="optional"? name=ID;
 	public ChoiceRuleElements getChoiceRuleAccess() {
 		return (pChoiceRule != null) ? pChoiceRule : (pChoiceRule = new ChoiceRuleElements());
 	}
@@ -198,8 +196,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ReducibleRule returns ReducibleElement:
-	//  "reducible" TerminalRule ({ReducibleComposite.actionFeature+=current}
-	//  actionFeature+=TerminalRule)?;
+	//	"reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?;
 	public ReducibleRuleElements getReducibleRuleAccess() {
 		return (pReducibleRule != null) ? pReducibleRule : (pReducibleRule = new ReducibleRuleElements());
 	}
@@ -209,7 +206,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TerminalRule returns TerminalElement:
-	//  stringFeature=STRING;
+	//	stringFeature=STRING;
 	public TerminalRuleElements getTerminalRuleAccess() {
 		return (pTerminalRule != null) ? pTerminalRule : (pTerminalRule = new TerminalRuleElements());
 	}
@@ -219,45 +216,44 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

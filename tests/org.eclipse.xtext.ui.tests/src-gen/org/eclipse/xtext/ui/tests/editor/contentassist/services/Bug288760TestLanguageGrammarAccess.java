@@ -37,12 +37,12 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cEndEND_TAGTerminalRuleCall_1_4_0 = (RuleCall)cEndAssignment_1_4.eContents().get(0);
 		
 		//WorkflowElement:
-		//  name=START_TAG attributes+=Attribute* END_TAG_SHORT|name=START_TAG
-		//  attributes+=Attribute* GT children+=WorkflowElement* end=END_TAG;
+		//	name=START_TAG attributes+=Attribute* END_TAG_SHORT | name=START_TAG attributes+=Attribute* GT
+		//	children+=WorkflowElement* end=END_TAG;
 		public ParserRule getRule() { return rule; }
 
-		//name=START_TAG attributes+=Attribute* END_TAG_SHORT|name=START_TAG
-		//attributes+=Attribute* GT children+=WorkflowElement* end=END_TAG
+		//name=START_TAG attributes+=Attribute* END_TAG_SHORT | name=START_TAG attributes+=Attribute* GT
+		//children+=WorkflowElement* end=END_TAG
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//name=START_TAG attributes+=Attribute* END_TAG_SHORT
@@ -104,7 +104,7 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cValueSTRINGTerminalRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		
 		//Attribute:
-		//  name=ID EQ value=STRING;
+		//	name=ID EQ value=STRING;
 		public ParserRule getRule() { return rule; }
 
 		//name=ID EQ value=STRING
@@ -157,8 +157,8 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//WorkflowElement:
-	//  name=START_TAG attributes+=Attribute* END_TAG_SHORT|name=START_TAG
-	//  attributes+=Attribute* GT children+=WorkflowElement* end=END_TAG;
+	//	name=START_TAG attributes+=Attribute* END_TAG_SHORT | name=START_TAG attributes+=Attribute* GT
+	//	children+=WorkflowElement* end=END_TAG;
 	public WorkflowElementElements getWorkflowElementAccess() {
 		return (pWorkflowElement != null) ? pWorkflowElement : (pWorkflowElement = new WorkflowElementElements());
 	}
@@ -168,7 +168,7 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Attribute:
-	//  name=ID EQ value=STRING;
+	//	name=ID EQ value=STRING;
 	public AttributeElements getAttributeAccess() {
 		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
 	}
@@ -178,81 +178,80 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ML_COMMENT:
-	//  "<!--"->"-->";
+	//	"<!--"->"-->";
 	public TerminalRule getML_COMMENTRule() {
 		return (tML_COMMENT != null) ? tML_COMMENT : (tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
 	} 
 
 	//terminal START_TAG:
-	//  LT ID;
+	//	LT ID;
 	public TerminalRule getSTART_TAGRule() {
 		return (tSTART_TAG != null) ? tSTART_TAG : (tSTART_TAG = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "START_TAG"));
 	} 
 
 	//terminal LT:
-	//  "<";
+	//	"<";
 	public TerminalRule getLTRule() {
 		return (tLT != null) ? tLT : (tLT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "LT"));
 	} 
 
 	//terminal GT:
-	//  ">";
+	//	">";
 	public TerminalRule getGTRule() {
 		return (tGT != null) ? tGT : (tGT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "GT"));
 	} 
 
 	//terminal EQ:
-	//  "=";
+	//	"=";
 	public TerminalRule getEQRule() {
 		return (tEQ != null) ? tEQ : (tEQ = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EQ"));
 	} 
 
 	//terminal END_TAG_SHORT:
-	//  "/>";
+	//	"/>";
 	public TerminalRule getEND_TAG_SHORTRule() {
 		return (tEND_TAG_SHORT != null) ? tEND_TAG_SHORT : (tEND_TAG_SHORT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "END_TAG_SHORT"));
 	} 
 
 	//terminal END_TAG_START:
-	//  "</";
+	//	"</";
 	public TerminalRule getEND_TAG_STARTRule() {
 		return (tEND_TAG_START != null) ? tEND_TAG_START : (tEND_TAG_START = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "END_TAG_START"));
 	} 
 
 	//terminal END_TAG:
-	//  END_TAG_START ID GT;
+	//	END_TAG_START ID GT;
 	public TerminalRule getEND_TAGRule() {
 		return (tEND_TAG != null) ? tEND_TAG : (tEND_TAG = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "END_TAG"));
 	} 
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return (tINT != null) ? tINT : (tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return (tSTRING != null) ? tSTRING : (tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return (tANY_OTHER != null) ? tANY_OTHER : (tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
 	} 

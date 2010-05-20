@@ -45,8 +45,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Statemachine ****************
  *
  * Statemachine:
- *   "events" events+=Event* "end" "commands" commands+=Command* "end"
- *   states+=State*;
+ * 	"events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*;
  *
  **/
 
@@ -317,7 +316,7 @@ protected class Statemachine_StatesAssignment_6 extends AssignmentToken  {
 /************ begin Rule Event ****************
  *
  * Event:
- *   resetting?="resetting"? name=ID code=ID;
+ * 	resetting?="resetting"? name=ID code=ID;
  *
  **/
 
@@ -458,7 +457,7 @@ protected class Event_CodeAssignment_2 extends AssignmentToken  {
 /************ begin Rule Command ****************
  *
  * Command:
- *   name=ID code=ID;
+ * 	name=ID code=ID;
  *
  **/
 
@@ -565,13 +564,11 @@ protected class Command_CodeAssignment_1 extends AssignmentToken  {
 /************ begin Rule State ****************
  *
  * State:
- *   "state" name=ID ("actions" "{" actions+=[Command]+ "}")?
- *   transitions+=Transition* "end";
+ * 	"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end";
  *
  **/
 
-// "state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition
-// * "end"
+// "state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end"
 protected class State_Group extends GroupToken {
 	
 	public State_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -861,7 +858,7 @@ protected class State_EndKeyword_4 extends KeywordToken  {
 /************ begin Rule Transition ****************
  *
  * Transition:
- *   event=[Event] "=>" state=[State];
+ * 	event=[Event] "=>" state=[State];
  *
  **/
 

@@ -26,7 +26,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cElementsTypeParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
 		
 		//Model:
-		//  imports+=Import* elements+=Type*;
+		//	imports+=Import* elements+=Type*;
 		public ParserRule getRule() { return rule; }
 
 		//imports+=Import* elements+=Type*
@@ -53,7 +53,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cImportURISTRINGTerminalRuleCall_1_0 = (RuleCall)cImportURIAssignment_1.eContents().get(0);
 		
 		//Import:
-		//  "import" importURI=STRING;
+		//	"import" importURI=STRING;
 		public ParserRule getRule() { return rule; }
 
 		//"import" importURI=STRING
@@ -76,10 +76,10 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cClassParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Type:
-		//  DataType|Class;
+		//	DataType | Class;
 		public ParserRule getRule() { return rule; }
 
-		//DataType|Class
+		//DataType | Class
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//DataType
@@ -98,7 +98,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//DataType:
-		//  "datatype" name=ID ";"?;
+		//	"datatype" name=ID ";"?;
 		public ParserRule getRule() { return rule; }
 
 		//"datatype" name=ID ";"?
@@ -136,12 +136,10 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//Class:
-		//  "class" name=ID ("extends" superClass=[Class])? "{" properties+=Property*
-		//  subClasses+=Class* "}";
+		//	"class" name=ID ("extends" superClass=[Class])? "{" properties+=Property* subClasses+=Class* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"class" name=ID ("extends" superClass=[Class])? "{" properties+=Property*
-		//subClasses+=Class* "}"
+		//"class" name=ID ("extends" superClass=[Class])? "{" properties+=Property* subClasses+=Class* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"class"
@@ -194,10 +192,10 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cReferenceParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Property:
-		//  Attribute|Reference;
+		//	Attribute | Reference;
 		public ParserRule getRule() { return rule; }
 
-		//Attribute|Reference
+		//Attribute | Reference
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Attribute
@@ -220,7 +218,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Attribute:
-		//  "attr" name=ID ":" type=[DataType] ";"?;
+		//	"attr" name=ID ":" type=[DataType] ";"?;
 		public ParserRule getRule() { return rule; }
 
 		//"attr" name=ID ":" type=[DataType] ";"?
@@ -264,7 +262,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Reference:
-		//  "ref" name=ID ":" type=[Class] ";"?;
+		//	"ref" name=ID ":" type=[Class] ";"?;
 		public ParserRule getRule() { return rule; }
 
 		//"ref" name=ID ":" type=[Class] ";"?
@@ -327,7 +325,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 
 	
 	//Model:
-	//  imports+=Import* elements+=Type*;
+	//	imports+=Import* elements+=Type*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -337,7 +335,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Import:
-	//  "import" importURI=STRING;
+	//	"import" importURI=STRING;
 	public ImportElements getImportAccess() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
 	}
@@ -347,7 +345,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Type:
-	//  DataType|Class;
+	//	DataType | Class;
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}
@@ -357,7 +355,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//DataType:
-	//  "datatype" name=ID ";"?;
+	//	"datatype" name=ID ";"?;
 	public DataTypeElements getDataTypeAccess() {
 		return (pDataType != null) ? pDataType : (pDataType = new DataTypeElements());
 	}
@@ -367,8 +365,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Class:
-	//  "class" name=ID ("extends" superClass=[Class])? "{" properties+=Property*
-	//  subClasses+=Class* "}";
+	//	"class" name=ID ("extends" superClass=[Class])? "{" properties+=Property* subClasses+=Class* "}";
 	public ClassElements getClassAccess() {
 		return (pClass != null) ? pClass : (pClass = new ClassElements());
 	}
@@ -378,7 +375,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Property:
-	//  Attribute|Reference;
+	//	Attribute | Reference;
 	public PropertyElements getPropertyAccess() {
 		return (pProperty != null) ? pProperty : (pProperty = new PropertyElements());
 	}
@@ -388,7 +385,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Attribute:
-	//  "attr" name=ID ":" type=[DataType] ";"?;
+	//	"attr" name=ID ":" type=[DataType] ";"?;
 	public AttributeElements getAttributeAccess() {
 		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
 	}
@@ -398,7 +395,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Reference:
-	//  "ref" name=ID ":" type=[Class] ";"?;
+	//	"ref" name=ID ":" type=[Class] ";"?;
 	public ReferenceElements getReferenceAccess() {
 		return (pReference != null) ? pReference : (pReference = new ReferenceElements());
 	}
@@ -408,45 +405,44 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

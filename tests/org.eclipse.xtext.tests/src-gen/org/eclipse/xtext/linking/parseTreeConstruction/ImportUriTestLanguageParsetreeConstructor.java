@@ -43,7 +43,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Main ****************
  *
  * Main:
- *   imports+=Import* types+=Type*;
+ * 	imports+=Import* types+=Type*;
  *
  **/
 
@@ -177,7 +177,7 @@ protected class Main_TypesAssignment_1 extends AssignmentToken  {
 /************ begin Rule Import ****************
  *
  * Import:
- *   "import" importURI=STRING;
+ * 	"import" importURI=STRING;
  *
  **/
 
@@ -272,7 +272,7 @@ protected class Import_ImportURIAssignment_1 extends AssignmentToken  {
 /************ begin Rule Type ****************
  *
  * Type:
- *   "type" name=ID "extends" extends=[Type];
+ * 	"type" name=ID "extends" extends=[Type];
  *
  **/
 

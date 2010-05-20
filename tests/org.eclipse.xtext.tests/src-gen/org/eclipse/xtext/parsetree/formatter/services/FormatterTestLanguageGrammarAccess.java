@@ -27,16 +27,16 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cTestLinewrapMinMaxParserRuleCall_1_2 = (RuleCall)cAlternatives_1.eContents().get(2);
 		
 		//Root:
-		//	"test" (TestLinewrap|TestIndentation|TestLinewrapMinMax);
+		//	"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax);
 		public ParserRule getRule() { return rule; }
 
-		//"test" (TestLinewrap|TestIndentation|TestLinewrapMinMax)
+		//"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax)
 		public Group getGroup() { return cGroup; }
 
 		//"test"
 		public Keyword getTestKeyword_0() { return cTestKeyword_0; }
 
-		//TestLinewrap|TestIndentation|TestLinewrapMinMax
+		//TestLinewrap | TestIndentation | TestLinewrapMinMax
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//TestLinewrap
@@ -67,13 +67,13 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cSemicolonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Line:
-		//	(Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space|Datatypes) ";";
+		//	(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes) ";";
 		public ParserRule getRule() { return rule; }
 
-		//(Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space|Datatypes) ";"
+		//(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes) ";"
 		public Group getGroup() { return cGroup; }
 
-		//Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space|Datatypes
+		//Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//Decl
@@ -161,10 +161,10 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightSquareBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Assign:
-		//	var=ID op=( "=" | "+=" ) "[" (val+=INT ("," val+=INT)*)? "]";
+		//	var=ID op=("=" | "+=") "[" (val+=INT ("," val+=INT)*)? "]";
 		public ParserRule getRule() { return rule; }
 
-		//var=ID op=( "=" | "+=" ) "[" (val+=INT ("," val+=INT)*)? "]"
+		//var=ID op=("=" | "+=") "[" (val+=INT ("," val+=INT)*)? "]"
 		public Group getGroup() { return cGroup; }
 
 		//var=ID
@@ -173,10 +173,10 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getVarIDTerminalRuleCall_0_0() { return cVarIDTerminalRuleCall_0_0; }
 
-		//op=( "=" | "+=" )
+		//op=("=" | "+=")
 		public Assignment getOpAssignment_1() { return cOpAssignment_1; }
 
-		//"="|"+="
+		//"=" | "+="
 		public Alternatives getOpAlternatives_1_0() { return cOpAlternatives_1_0; }
 
 		//"="
@@ -392,10 +392,10 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cSemiSemicolonKeyword_4_0 = (Keyword)cSemiAssignment_4.eContents().get(0);
 		
 		//TestIndentation:
-		//	"indentation" "{" (sub+=TestIndentation|items+=Line)* "}" semi?=";"?;
+		//	"indentation" "{" (sub+=TestIndentation | items+=Line)* "}" semi?=";"?;
 		public ParserRule getRule() { return rule; }
 
-		//"indentation" "{" (sub+=TestIndentation|items+=Line)* "}" semi?=";"?
+		//"indentation" "{" (sub+=TestIndentation | items+=Line)* "}" semi?=";"?
 		public Group getGroup() { return cGroup; }
 
 		//"indentation"
@@ -404,7 +404,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		//(sub+=TestIndentation|items+=Line)*
+		//(sub+=TestIndentation | items+=Line)*
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//sub+=TestIndentation
@@ -563,9 +563,8 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cValsSuppressedHiddenSubParserRuleCall_2_1_1_0 = (RuleCall)cValsAssignment_2_1_1.eContents().get(0);
 		private final Keyword cGraveAccentKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//SuppressedHidden hidden ( ):
-		//	{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%"
-		//	vals+=SuppressedHiddenSub)*)? "`";
+		//SuppressedHidden hidden():
+		//	{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%" vals+=SuppressedHiddenSub)*)? "`";
 		public ParserRule getRule() { return rule; }
 
 		//{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%" vals+=SuppressedHiddenSub)*)? "`"
@@ -609,10 +608,10 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cSuppressedHiddenSubIDParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//SuppressedHiddenSub:
-		//	SuppressedHiddenSubSub|SuppressedHiddenSubID;
+		//	SuppressedHiddenSubSub | SuppressedHiddenSubID;
 		public ParserRule getRule() { return rule; }
 
-		//SuppressedHiddenSubSub|SuppressedHiddenSubID
+		//SuppressedHiddenSubSub | SuppressedHiddenSubID
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//SuppressedHiddenSubSub
@@ -630,7 +629,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cIdvalIDTerminalRuleCall_1_0 = (RuleCall)cIdvalAssignment_1.eContents().get(0);
 		private final Keyword cGreaterThanSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//SuppressedHiddenSubSub hidden ( WS ):
+		//SuppressedHiddenSubSub hidden(WS):
 		//	"<" idval=ID ">";
 		public ParserRule getRule() { return rule; }
 
@@ -833,7 +832,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Root:
-	//	"test" (TestLinewrap|TestIndentation|TestLinewrapMinMax);
+	//	"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax);
 	public RootElements getRootAccess() {
 		return (pRoot != null) ? pRoot : (pRoot = new RootElements());
 	}
@@ -843,7 +842,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Line:
-	//	(Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space|Datatypes) ";";
+	//	(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes) ";";
 	public LineElements getLineAccess() {
 		return (pLine != null) ? pLine : (pLine = new LineElements());
 	}
@@ -863,7 +862,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Assign:
-	//	var=ID op=( "=" | "+=" ) "[" (val+=INT ("," val+=INT)*)? "]";
+	//	var=ID op=("=" | "+=") "[" (val+=INT ("," val+=INT)*)? "]";
 	public AssignElements getAssignAccess() {
 		return (pAssign != null) ? pAssign : (pAssign = new AssignElements());
 	}
@@ -923,7 +922,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//TestIndentation:
-	//	"indentation" "{" (sub+=TestIndentation|items+=Line)* "}" semi?=";"?;
+	//	"indentation" "{" (sub+=TestIndentation | items+=Line)* "}" semi?=";"?;
 	public TestIndentationElements getTestIndentationAccess() {
 		return (pTestIndentation != null) ? pTestIndentation : (pTestIndentation = new TestIndentationElements());
 	}
@@ -982,9 +981,8 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getEnum1Access().getRule();
 	}
 
-	//SuppressedHidden hidden ( ):
-	//	{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%"
-	//	vals+=SuppressedHiddenSub)*)? "`";
+	//SuppressedHidden hidden():
+	//	{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%" vals+=SuppressedHiddenSub)*)? "`";
 	public SuppressedHiddenElements getSuppressedHiddenAccess() {
 		return (pSuppressedHidden != null) ? pSuppressedHidden : (pSuppressedHidden = new SuppressedHiddenElements());
 	}
@@ -994,7 +992,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//SuppressedHiddenSub:
-	//	SuppressedHiddenSubSub|SuppressedHiddenSubID;
+	//	SuppressedHiddenSubSub | SuppressedHiddenSubID;
 	public SuppressedHiddenSubElements getSuppressedHiddenSubAccess() {
 		return (pSuppressedHiddenSub != null) ? pSuppressedHiddenSub : (pSuppressedHiddenSub = new SuppressedHiddenSubElements());
 	}
@@ -1003,7 +1001,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getSuppressedHiddenSubAccess().getRule();
 	}
 
-	//SuppressedHiddenSubSub hidden ( WS ):
+	//SuppressedHiddenSubSub hidden(WS):
 	//	"<" idval=ID ">";
 	public SuppressedHiddenSubSubElements getSuppressedHiddenSubSubAccess() {
 		return (pSuppressedHiddenSubSub != null) ? pSuppressedHiddenSubSub : (pSuppressedHiddenSubSub = new SuppressedHiddenSubSubElements());
@@ -1076,8 +1074,8 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\"
-	//	| "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

@@ -42,7 +42,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   Child ({Parent.left=current} right=Child)?;
+ * 	Child ({Parent.left=current} right=Child)?;
  *
  **/
 
@@ -225,7 +225,7 @@ protected class Model_RightAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule Child ****************
  *
  * Child:
- *   name=ID;
+ * 	name=ID;
  *
  **/
 

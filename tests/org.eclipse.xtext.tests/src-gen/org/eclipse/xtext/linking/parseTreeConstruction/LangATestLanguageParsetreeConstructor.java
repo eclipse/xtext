@@ -43,7 +43,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Main ****************
  *
  * Main:
- *   imports+=Import* types+=Type*;
+ * 	imports+=Import* types+=Type*;
  *
  **/
 
@@ -177,7 +177,7 @@ protected class Main_TypesAssignment_1 extends AssignmentToken  {
 /************ begin Rule Import ****************
  *
  * Import:
- *   "import" uri=STRING;
+ * 	"import" uri=STRING;
  *
  **/
 
@@ -272,13 +272,11 @@ protected class Import_UriAssignment_1 extends AssignmentToken  {
 /************ begin Rule Type ****************
  *
  * Type:
- *   "type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] (
- *   "," implements+=[Type])*)?;
+ * 	"type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] ("," implements+=[Type])*)?;
  *
  **/
 
-// "type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] (","
-// implements+=[Type])*)?
+// "type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] ("," implements+=[Type])*)?
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

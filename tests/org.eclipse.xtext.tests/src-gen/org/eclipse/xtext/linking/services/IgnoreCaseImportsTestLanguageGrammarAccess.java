@@ -26,7 +26,7 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 		private final RuleCall cElementsElementParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
 		
 		//Model:
-		//  imports+=Import* elements+=Element+;
+		//	imports+=Import* elements+=Element+;
 		public ParserRule getRule() { return rule; }
 
 		//imports+=Import* elements+=Element+
@@ -51,7 +51,7 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 		private final RuleCall cImportURISTRINGTerminalRuleCall_0 = (RuleCall)cImportURIAssignment.eContents().get(0);
 		
 		//Import:
-		//  importURI=STRING;
+		//	importURI=STRING;
 		public ParserRule getRule() { return rule; }
 
 		//importURI=STRING
@@ -87,7 +87,7 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 
 	
 	//Model:
-	//  imports+=Import* elements+=Element+;
+	//	imports+=Import* elements+=Element+;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -97,7 +97,7 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 
 	//Import:
-	//  importURI=STRING;
+	//	importURI=STRING;
 	public ImportElements getImportAccess() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
 	}
@@ -107,7 +107,7 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 
 	//Element:
-	//  name=ID reference=[Element]? "{" elements+=Element* "}";
+	//	name=ID reference=[Element]? "{" elements+=Element* "}";
 	public AbstractIgnoreCaseLinkingTestLanguageGrammarAccess.ElementElements getElementAccess() {
 		return gaAbstractIgnoreCaseLinkingTestLanguage.getElementAccess();
 	}
@@ -117,45 +117,44 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaAbstractIgnoreCaseLinkingTestLanguage.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaAbstractIgnoreCaseLinkingTestLanguage.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaAbstractIgnoreCaseLinkingTestLanguage.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaAbstractIgnoreCaseLinkingTestLanguage.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaAbstractIgnoreCaseLinkingTestLanguage.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaAbstractIgnoreCaseLinkingTestLanguage.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaAbstractIgnoreCaseLinkingTestLanguage.getANY_OTHERRule();
 	} 

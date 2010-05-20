@@ -22,7 +22,7 @@ public class EncodingTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final RuleCall cWordsWordParserRuleCall_0 = (RuleCall)cWordsAssignment.eContents().get(0);
 		
 		//Model:
-		//  words+=Word*;
+		//	words+=Word*;
 		public ParserRule getRule() { return rule; }
 
 		//words+=Word*
@@ -38,7 +38,7 @@ public class EncodingTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final RuleCall cValueLEXEMETerminalRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
 		//Word:
-		//  value=LEXEME;
+		//	value=LEXEME;
 		public ParserRule getRule() { return rule; }
 
 		//value=LEXEME
@@ -69,7 +69,7 @@ public class EncodingTestLanguageGrammarAccess extends AbstractGrammarElementFin
 
 	
 	//Model:
-	//  words+=Word*;
+	//	words+=Word*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -79,7 +79,7 @@ public class EncodingTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//Word:
-	//  value=LEXEME;
+	//	value=LEXEME;
 	public WordElements getWordAccess() {
 		return (pWord != null) ? pWord : (pWord = new WordElements());
 	}
@@ -89,19 +89,19 @@ public class EncodingTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//terminal LEXEME:
-	//  ("a".."z" | "A".."Z" | "0".."9" | "ä" | "ö" | "ü" | "ß" | "Ä" | "Ö" | "Ü")*;
+	//	("a".."z" | "A".."Z" | "0".."9" | "ä" | "ö" | "ü" | "ß" | "Ä" | "Ö" | "Ü")*;
 	public TerminalRule getLEXEMERule() {
 		return (tLEXEME != null) ? tLEXEME : (tLEXEME = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "LEXEME"));
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return (tANY_OTHER != null) ? tANY_OTHER : (tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
 	} 

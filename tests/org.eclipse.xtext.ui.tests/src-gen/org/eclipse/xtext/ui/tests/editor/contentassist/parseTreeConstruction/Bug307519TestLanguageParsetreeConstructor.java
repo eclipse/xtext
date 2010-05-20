@@ -43,11 +43,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   (e1+=Elem1|e2+=Elem2)+;
+ * 	(e1+=Elem1 | e2+=Elem2)+;
  *
  **/
 
-// (e1+=Elem1|e2+=Elem2)+
+// (e1+=Elem1 | e2+=Elem2)+
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -169,7 +169,7 @@ protected class Model_E2Assignment_1 extends AssignmentToken  {
 /************ begin Rule Elem1 ****************
  *
  * Elem1:
- *   value=EnumT;
+ * 	value=EnumT;
  *
  **/
 
@@ -214,7 +214,7 @@ protected class Elem1_ValueAssignment extends AssignmentToken  {
 /************ begin Rule Elem2 ****************
  *
  * Elem2:
- *   value=EnumT "foo" "%" "$";
+ * 	value=EnumT "foo" "%" "$";
  *
  **/
 

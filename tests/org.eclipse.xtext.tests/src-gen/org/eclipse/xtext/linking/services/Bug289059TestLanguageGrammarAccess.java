@@ -29,7 +29,7 @@ public class Bug289059TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cReferenceModelIDTerminalRuleCall_2_0_1 = (RuleCall)cReferenceModelCrossReference_2_0.eContents().get(1);
 		
 		//Model:
-		//  name=ID enabled=UnassignedAction? reference=[Model]?;
+		//	name=ID enabled=UnassignedAction? reference=[Model]?;
 		public ParserRule getRule() { return rule; }
 
 		//name=ID enabled=UnassignedAction? reference=[Model]?
@@ -64,7 +64,7 @@ public class Bug289059TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cEnabledKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//UnassignedAction:
-		//  {UnassignedAction} "enabled";
+		//	{UnassignedAction} "enabled";
 		public ParserRule getRule() { return rule; }
 
 		//{UnassignedAction} "enabled"
@@ -103,7 +103,7 @@ public class Bug289059TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//  name=ID enabled=UnassignedAction? reference=[Model]?;
+	//	name=ID enabled=UnassignedAction? reference=[Model]?;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -113,7 +113,7 @@ public class Bug289059TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//UnassignedAction:
-	//  {UnassignedAction} "enabled";
+	//	{UnassignedAction} "enabled";
 	public UnassignedActionElements getUnassignedActionAccess() {
 		return (pUnassignedAction != null) ? pUnassignedAction : (pUnassignedAction = new UnassignedActionElements());
 	}
@@ -123,45 +123,44 @@ public class Bug289059TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

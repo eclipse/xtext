@@ -45,7 +45,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   expressions+=Expression*;
+ * 	expressions+=Expression*;
  *
  **/
 
@@ -101,7 +101,7 @@ protected class Model_ExpressionsAssignment extends AssignmentToken  {
 /************ begin Rule Expression ****************
  *
  * Expression:
- *   left=Literal "+" right=Literal;
+ * 	left=Literal "+" right=Literal;
  *
  **/
 
@@ -254,11 +254,11 @@ protected class Expression_RightAssignment_2 extends AssignmentToken  {
 /************ begin Rule Literal ****************
  *
  * Literal:
- *   RealLiteral|IntLiteral;
+ * 	RealLiteral | IntLiteral;
  *
  **/
 
-// RealLiteral|IntLiteral
+// RealLiteral | IntLiteral
 protected class Literal_Alternatives extends AlternativesToken {
 
 	public Literal_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -368,7 +368,7 @@ protected class Literal_IntLiteralParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule IntLiteral ****************
  *
  * IntLiteral:
- *   value=IntValue;
+ * 	value=IntValue;
  *
  **/
 
@@ -413,7 +413,7 @@ protected class IntLiteral_ValueAssignment extends AssignmentToken  {
 /************ begin Rule RealLiteral ****************
  *
  * RealLiteral:
- *   value=RealValue;
+ * 	value=RealValue;
  *
  **/
 

@@ -27,11 +27,10 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cCommonTerminalsRuleParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//Model:
-		//  CaseInsensitiveKeywordRule|PluralRule|MultiRule|DatatypeRule|
-		//  CommonTerminalsRule;
+		//	CaseInsensitiveKeywordRule | PluralRule | MultiRule | DatatypeRule | CommonTerminalsRule;
 		public ParserRule getRule() { return rule; }
 
-		//CaseInsensitiveKeywordRule|PluralRule|MultiRule|DatatypeRule|CommonTerminalsRule
+		//CaseInsensitiveKeywordRule | PluralRule | MultiRule | DatatypeRule | CommonTerminalsRule
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//CaseInsensitiveKeywordRule
@@ -58,7 +57,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cValINTTerminalRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
 		
 		//CaseInsensitiveKeywordRule:
-		//  CaseInsensitiveKeyword val=INT;
+		//	CaseInsensitiveKeyword val=INT;
 		public ParserRule getRule() { return rule; }
 
 		//CaseInsensitiveKeyword val=INT
@@ -83,7 +82,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cPluralTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//PluralRule:
-		//  "contents:" count=INT Plural;
+		//	"contents:" count=INT Plural;
 		public ParserRule getRule() { return rule; }
 
 		//"contents:" count=INT Plural
@@ -113,7 +112,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cMultiTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
 		
 		//MultiRule:
-		//  "multi" val=INT Multi Multi Multi;
+		//	"multi" val=INT Multi Multi Multi;
 		public ParserRule getRule() { return rule; }
 
 		//"multi" val=INT Multi Multi Multi
@@ -147,7 +146,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cDatatypeParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//DatatypeRule:
-		//  "datatype" val=INT Datatype;
+		//	"datatype" val=INT Datatype;
 		public ParserRule getRule() { return rule; }
 
 		//"datatype" val=INT Datatype
@@ -174,10 +173,10 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cDatatype2ParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//Datatype returns ecore::EString:
-		//  "str"|INT|Datatype2;
+		//	"str" | INT | Datatype2;
 		public ParserRule getRule() { return rule; }
 
-		//"str"|INT|Datatype2
+		//"str" | INT | Datatype2
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"str"
@@ -195,7 +194,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cSTRINGTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//Datatype2 returns ecore::EString:
-		//  STRING;
+		//	STRING;
 		public ParserRule getRule() { return rule; }
 
 		//STRING
@@ -213,7 +212,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cValIDTerminalRuleCall_4_0 = (RuleCall)cValAssignment_4.eContents().get(0);
 		
 		//CommonTerminalsRule:
-		//  "terminals" ID INT STRING val=ID;
+		//	"terminals" ID INT STRING val=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"terminals" ID INT STRING val=ID
@@ -274,8 +273,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 
 	
 	//Model:
-	//  CaseInsensitiveKeywordRule|PluralRule|MultiRule|DatatypeRule|
-	//  CommonTerminalsRule;
+	//	CaseInsensitiveKeywordRule | PluralRule | MultiRule | DatatypeRule | CommonTerminalsRule;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -285,7 +283,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//CaseInsensitiveKeywordRule:
-	//  CaseInsensitiveKeyword val=INT;
+	//	CaseInsensitiveKeyword val=INT;
 	public CaseInsensitiveKeywordRuleElements getCaseInsensitiveKeywordRuleAccess() {
 		return (pCaseInsensitiveKeywordRule != null) ? pCaseInsensitiveKeywordRule : (pCaseInsensitiveKeywordRule = new CaseInsensitiveKeywordRuleElements());
 	}
@@ -295,14 +293,13 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//terminal CaseInsensitiveKeyword:
-	//  ("k" | "K") ("e" | "E") ("y" | "Y") ("w" | "W") ("o" | "O") ("r" | "R") ("d"
-	//  | "D");
+	//	("k" | "K") ("e" | "E") ("y" | "Y") ("w" | "W") ("o" | "O") ("r" | "R") ("d" | "D");
 	public TerminalRule getCaseInsensitiveKeywordRule() {
 		return (tCaseInsensitiveKeyword != null) ? tCaseInsensitiveKeyword : (tCaseInsensitiveKeyword = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CaseInsensitiveKeyword"));
 	} 
 
 	//PluralRule:
-	//  "contents:" count=INT Plural;
+	//	"contents:" count=INT Plural;
 	public PluralRuleElements getPluralRuleAccess() {
 		return (pPluralRule != null) ? pPluralRule : (pPluralRule = new PluralRuleElements());
 	}
@@ -312,13 +309,13 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//terminal Plural:
-	//  "item" | "items";
+	//	"item" | "items";
 	public TerminalRule getPluralRule() {
 		return (tPlural != null) ? tPlural : (tPlural = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Plural"));
 	} 
 
 	//MultiRule:
-	//  "multi" val=INT Multi Multi Multi;
+	//	"multi" val=INT Multi Multi Multi;
 	public MultiRuleElements getMultiRuleAccess() {
 		return (pMultiRule != null) ? pMultiRule : (pMultiRule = new MultiRuleElements());
 	}
@@ -328,20 +325,19 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//terminal Multi:
-	//  "a" "b"? "c"+ "d"* ("e" | "f") (("g" | "h") | "i"+) Multi2 "0".."9" "0".."9"+
-	//;
+	//	"a" "b"? "c"+ "d"* ("e" | "f") (("g" | "h") | "i"+) Multi2 "0".."9" "0".."9"+;
 	public TerminalRule getMultiRule() {
 		return (tMulti != null) ? tMulti : (tMulti = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Multi"));
 	} 
 
 	//terminal Multi2:
-	//  "j";
+	//	"j";
 	public TerminalRule getMulti2Rule() {
 		return (tMulti2 != null) ? tMulti2 : (tMulti2 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Multi2"));
 	} 
 
 	//DatatypeRule:
-	//  "datatype" val=INT Datatype;
+	//	"datatype" val=INT Datatype;
 	public DatatypeRuleElements getDatatypeRuleAccess() {
 		return (pDatatypeRule != null) ? pDatatypeRule : (pDatatypeRule = new DatatypeRuleElements());
 	}
@@ -351,7 +347,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Datatype returns ecore::EString:
-	//  "str"|INT|Datatype2;
+	//	"str" | INT | Datatype2;
 	public DatatypeElements getDatatypeAccess() {
 		return (pDatatype != null) ? pDatatype : (pDatatype = new DatatypeElements());
 	}
@@ -361,7 +357,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Datatype2 returns ecore::EString:
-	//  STRING;
+	//	STRING;
 	public Datatype2Elements getDatatype2Access() {
 		return (pDatatype2 != null) ? pDatatype2 : (pDatatype2 = new Datatype2Elements());
 	}
@@ -371,7 +367,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//CommonTerminalsRule:
-	//  "terminals" ID INT STRING val=ID;
+	//	"terminals" ID INT STRING val=ID;
 	public CommonTerminalsRuleElements getCommonTerminalsRuleAccess() {
 		return (pCommonTerminalsRule != null) ? pCommonTerminalsRule : (pCommonTerminalsRule = new CommonTerminalsRuleElements());
 	}
@@ -381,45 +377,44 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

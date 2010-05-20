@@ -46,16 +46,14 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cAttributesActionAttributeParserRuleCall_5_1_0 = (RuleCall)cAttributesAssignment_5_1.eContents().get(0);
 		
 		//Model:
-		//  "actions" attributes+=BaseAttribute*|"simple" attributes+=SimpleAttribute*|
-		//  "rulecall" attributes+=RuleCallAttribute*|"rulecall2"
-		//  attributes+=RuleCallAttribute2*|"rulecall3" attributes+=RuleCallAttribute3*|
-		//  "inlinedActions" attributes+=ActionAttribute*;
+		//	"actions" attributes+=BaseAttribute* | "simple" attributes+=SimpleAttribute* | "rulecall"
+		//	attributes+=RuleCallAttribute* | "rulecall2" attributes+=RuleCallAttribute2* | "rulecall3"
+		//	attributes+=RuleCallAttribute3* | "inlinedActions" attributes+=ActionAttribute*;
 		public ParserRule getRule() { return rule; }
 
-		//"actions" attributes+=BaseAttribute*|"simple" attributes+=SimpleAttribute*|
-		//"rulecall" attributes+=RuleCallAttribute*|"rulecall2"
-		//attributes+=RuleCallAttribute2*|"rulecall3" attributes+=RuleCallAttribute3*|
-		//"inlinedActions" attributes+=ActionAttribute*
+		//"actions" attributes+=BaseAttribute* | "simple" attributes+=SimpleAttribute* | "rulecall" attributes+=RuleCallAttribute*
+		//| "rulecall2" attributes+=RuleCallAttribute2* | "rulecall3" attributes+=RuleCallAttribute3* | "inlinedActions"
+		//attributes+=ActionAttribute*
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"actions" attributes+=BaseAttribute*
@@ -150,13 +148,13 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//BaseAttribute:
-		//  (Attribute|Master) ("ref" typeRef=[BaseAttribute]|type=ID) name=ID ";";
+		//	(Attribute | Master) ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
 		public ParserRule getRule() { return rule; }
 
-		//(Attribute|Master) ("ref" typeRef=[BaseAttribute]|type=ID) name=ID ";"
+		//(Attribute | Master) ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";"
 		public Group getGroup() { return cGroup; }
 
-		//Attribute|Master
+		//Attribute | Master
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//Attribute
@@ -165,7 +163,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Master
 		public RuleCall getMasterParserRuleCall_0_1() { return cMasterParserRuleCall_0_1; }
 
-		//"ref" typeRef=[BaseAttribute]|type=ID
+		//"ref" typeRef=[BaseAttribute] | type=ID
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"ref" typeRef=[BaseAttribute]
@@ -206,7 +204,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cAttributeKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Attribute:
-		//  {Attribute} "attribute";
+		//	{Attribute} "attribute";
 		public ParserRule getRule() { return rule; }
 
 		//{Attribute} "attribute"
@@ -226,7 +224,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cMasterKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Master:
-		//  {Master} "master";
+		//	{Master} "master";
 		public ParserRule getRule() { return rule; }
 
 		//{Master} "master"
@@ -262,15 +260,13 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//ActionAttribute returns BaseAttribute:
-		//  ({Attribute} "attribute"|{Master} "master") ("ref" typeRef=[BaseAttribute]|
-		//  type=ID) name=ID ";";
+		//	({Attribute} "attribute" | {Master} "master") ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
 		public ParserRule getRule() { return rule; }
 
-		//({Attribute} "attribute"|{Master} "master") ("ref" typeRef=[BaseAttribute]|
-		//type=ID) name=ID ";"
+		//({Attribute} "attribute" | {Master} "master") ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";"
 		public Group getGroup() { return cGroup; }
 
-		//{Attribute} "attribute"|{Master} "master"
+		//{Attribute} "attribute" | {Master} "master"
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//{Attribute} "attribute"
@@ -291,7 +287,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"master"
 		public Keyword getMasterKeyword_0_1_1() { return cMasterKeyword_0_1_1; }
 
-		//"ref" typeRef=[BaseAttribute]|type=ID
+		//"ref" typeRef=[BaseAttribute] | type=ID
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"ref" typeRef=[BaseAttribute]
@@ -341,13 +337,13 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//SimpleAttribute returns Attribute:
-		//  ("ref" typeRef=[BaseAttribute]|type=ID) name=ID ";";
+		//	("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
 		public ParserRule getRule() { return rule; }
 
-		//("ref" typeRef=[BaseAttribute]|type=ID) name=ID ";"
+		//("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";"
 		public Group getGroup() { return cGroup; }
 
-		//"ref" typeRef=[BaseAttribute]|type=ID
+		//"ref" typeRef=[BaseAttribute] | type=ID
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//"ref" typeRef=[BaseAttribute]
@@ -390,7 +386,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//RuleCallAttribute returns Attribute:
-		//  CallMe name=ID ";";
+		//	CallMe name=ID ";";
 		public ParserRule getRule() { return rule; }
 
 		//CallMe name=ID ";"
@@ -421,10 +417,10 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cTypeIDTerminalRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
 		
 		//CallMe returns Attribute:
-		//  "ref" typeRef=[BaseAttribute]|type=ID;
+		//	"ref" typeRef=[BaseAttribute] | type=ID;
 		public ParserRule getRule() { return rule; }
 
-		//"ref" typeRef=[BaseAttribute]|type=ID
+		//"ref" typeRef=[BaseAttribute] | type=ID
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"ref" typeRef=[BaseAttribute]
@@ -464,16 +460,16 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//RuleCallAttribute2 returns Attribute:
-		//  CallMe2 ("ref" typeRef=[BaseAttribute]|type=ID) ";";
+		//	CallMe2 ("ref" typeRef=[BaseAttribute] | type=ID) ";";
 		public ParserRule getRule() { return rule; }
 
-		//CallMe2 ("ref" typeRef=[BaseAttribute]|type=ID) ";"
+		//CallMe2 ("ref" typeRef=[BaseAttribute] | type=ID) ";"
 		public Group getGroup() { return cGroup; }
 
 		//CallMe2
 		public RuleCall getCallMe2ParserRuleCall_0() { return cCallMe2ParserRuleCall_0; }
 
-		//"ref" typeRef=[BaseAttribute]|type=ID
+		//"ref" typeRef=[BaseAttribute] | type=ID
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"ref" typeRef=[BaseAttribute]
@@ -507,7 +503,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//CallMe2 returns Attribute:
-		//  name=ID;
+		//	name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//name=ID
@@ -532,16 +528,16 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//RuleCallAttribute3 returns Attribute:
-		//  CallMe3 ("ref" typeRef=[BaseAttribute]|type=ID) ";";
+		//	CallMe3 ("ref" typeRef=[BaseAttribute] | type=ID) ";";
 		public ParserRule getRule() { return rule; }
 
-		//CallMe3 ("ref" typeRef=[BaseAttribute]|type=ID) ";"
+		//CallMe3 ("ref" typeRef=[BaseAttribute] | type=ID) ";"
 		public Group getGroup() { return cGroup; }
 
 		//CallMe3
 		public RuleCall getCallMe3ParserRuleCall_0() { return cCallMe3ParserRuleCall_0; }
 
-		//"ref" typeRef=[BaseAttribute]|type=ID
+		//"ref" typeRef=[BaseAttribute] | type=ID
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"ref" typeRef=[BaseAttribute]
@@ -577,7 +573,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cCallMe4ParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//CallMe3 returns Attribute:
-		//  "call" "me" CallMe4;
+		//	"call" "me" CallMe4;
 		public ParserRule getRule() { return rule; }
 
 		//"call" "me" CallMe4
@@ -599,7 +595,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//CallMe4 returns Attribute:
-		//  name=ID;
+		//	name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//name=ID
@@ -646,10 +642,9 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//  "actions" attributes+=BaseAttribute*|"simple" attributes+=SimpleAttribute*|
-	//  "rulecall" attributes+=RuleCallAttribute*|"rulecall2"
-	//  attributes+=RuleCallAttribute2*|"rulecall3" attributes+=RuleCallAttribute3*|
-	//  "inlinedActions" attributes+=ActionAttribute*;
+	//	"actions" attributes+=BaseAttribute* | "simple" attributes+=SimpleAttribute* | "rulecall"
+	//	attributes+=RuleCallAttribute* | "rulecall2" attributes+=RuleCallAttribute2* | "rulecall3"
+	//	attributes+=RuleCallAttribute3* | "inlinedActions" attributes+=ActionAttribute*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -659,7 +654,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//BaseAttribute:
-	//  (Attribute|Master) ("ref" typeRef=[BaseAttribute]|type=ID) name=ID ";";
+	//	(Attribute | Master) ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
 	public BaseAttributeElements getBaseAttributeAccess() {
 		return (pBaseAttribute != null) ? pBaseAttribute : (pBaseAttribute = new BaseAttributeElements());
 	}
@@ -669,7 +664,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Attribute:
-	//  {Attribute} "attribute";
+	//	{Attribute} "attribute";
 	public AttributeElements getAttributeAccess() {
 		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
 	}
@@ -679,7 +674,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Master:
-	//  {Master} "master";
+	//	{Master} "master";
 	public MasterElements getMasterAccess() {
 		return (pMaster != null) ? pMaster : (pMaster = new MasterElements());
 	}
@@ -689,8 +684,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//ActionAttribute returns BaseAttribute:
-	//  ({Attribute} "attribute"|{Master} "master") ("ref" typeRef=[BaseAttribute]|
-	//  type=ID) name=ID ";";
+	//	({Attribute} "attribute" | {Master} "master") ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
 	public ActionAttributeElements getActionAttributeAccess() {
 		return (pActionAttribute != null) ? pActionAttribute : (pActionAttribute = new ActionAttributeElements());
 	}
@@ -700,7 +694,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//SimpleAttribute returns Attribute:
-	//  ("ref" typeRef=[BaseAttribute]|type=ID) name=ID ";";
+	//	("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
 	public SimpleAttributeElements getSimpleAttributeAccess() {
 		return (pSimpleAttribute != null) ? pSimpleAttribute : (pSimpleAttribute = new SimpleAttributeElements());
 	}
@@ -710,7 +704,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//RuleCallAttribute returns Attribute:
-	//  CallMe name=ID ";";
+	//	CallMe name=ID ";";
 	public RuleCallAttributeElements getRuleCallAttributeAccess() {
 		return (pRuleCallAttribute != null) ? pRuleCallAttribute : (pRuleCallAttribute = new RuleCallAttributeElements());
 	}
@@ -720,7 +714,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//CallMe returns Attribute:
-	//  "ref" typeRef=[BaseAttribute]|type=ID;
+	//	"ref" typeRef=[BaseAttribute] | type=ID;
 	public CallMeElements getCallMeAccess() {
 		return (pCallMe != null) ? pCallMe : (pCallMe = new CallMeElements());
 	}
@@ -730,7 +724,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//RuleCallAttribute2 returns Attribute:
-	//  CallMe2 ("ref" typeRef=[BaseAttribute]|type=ID) ";";
+	//	CallMe2 ("ref" typeRef=[BaseAttribute] | type=ID) ";";
 	public RuleCallAttribute2Elements getRuleCallAttribute2Access() {
 		return (pRuleCallAttribute2 != null) ? pRuleCallAttribute2 : (pRuleCallAttribute2 = new RuleCallAttribute2Elements());
 	}
@@ -740,7 +734,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//CallMe2 returns Attribute:
-	//  name=ID;
+	//	name=ID;
 	public CallMe2Elements getCallMe2Access() {
 		return (pCallMe2 != null) ? pCallMe2 : (pCallMe2 = new CallMe2Elements());
 	}
@@ -750,7 +744,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//RuleCallAttribute3 returns Attribute:
-	//  CallMe3 ("ref" typeRef=[BaseAttribute]|type=ID) ";";
+	//	CallMe3 ("ref" typeRef=[BaseAttribute] | type=ID) ";";
 	public RuleCallAttribute3Elements getRuleCallAttribute3Access() {
 		return (pRuleCallAttribute3 != null) ? pRuleCallAttribute3 : (pRuleCallAttribute3 = new RuleCallAttribute3Elements());
 	}
@@ -760,7 +754,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//CallMe3 returns Attribute:
-	//  "call" "me" CallMe4;
+	//	"call" "me" CallMe4;
 	public CallMe3Elements getCallMe3Access() {
 		return (pCallMe3 != null) ? pCallMe3 : (pCallMe3 = new CallMe3Elements());
 	}
@@ -770,7 +764,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//CallMe4 returns Attribute:
-	//  name=ID;
+	//	name=ID;
 	public CallMe4Elements getCallMe4Access() {
 		return (pCallMe4 != null) ? pCallMe4 : (pCallMe4 = new CallMe4Elements());
 	}
@@ -780,45 +774,44 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

@@ -42,7 +42,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   name=ID enabled=UnassignedAction? reference=[Model]?;
+ * 	name=ID enabled=UnassignedAction? reference=[Model]?;
  *
  **/
 
@@ -201,7 +201,7 @@ protected class Model_ReferenceAssignment_2 extends AssignmentToken  {
 /************ begin Rule UnassignedAction ****************
  *
  * UnassignedAction:
- *   {UnassignedAction} "enabled";
+ * 	{UnassignedAction} "enabled";
  *
  **/
 

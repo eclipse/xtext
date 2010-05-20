@@ -26,11 +26,10 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final RuleCall cDatatypeHiddensParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//Model:
-		//  WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|
-		//  DatatypeHiddens;
+		//	WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens | DatatypeHiddens;
 		public ParserRule getRule() { return rule; }
 
-		//WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|DatatypeHiddens
+		//WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens | DatatypeHiddens
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//WithoutHiddens
@@ -62,7 +61,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Keyword cValidSemicolonKeyword_4_0 = (Keyword)cValidAssignment_4.eContents().get(0);
 		
 		//WithoutHiddens:
-		//  "without" spaces+=WS "hiddens" spaces+=WS? valid?=";";
+		//	"without" spaces+=WS "hiddens" spaces+=WS? valid?=";";
 		public ParserRule getRule() { return rule; }
 
 		//"without" spaces+=WS "hiddens" spaces+=WS? valid?=";"
@@ -101,8 +100,8 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Assignment cValidAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final Keyword cValidSemicolonKeyword_2_0 = (Keyword)cValidAssignment_2.eContents().get(0);
 		
-		//WithHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
-		//  "with" "hiddens" valid?=";";
+		//WithHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
+		//	"with" "hiddens" valid?=";";
 		public ParserRule getRule() { return rule; }
 
 		//"with" "hiddens" valid?=";"
@@ -133,8 +132,8 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Assignment cValidAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final Keyword cValidSemicolonKeyword_5_0 = (Keyword)cValidAssignment_5.eContents().get(0);
 		
-		//OverridingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
-		//  "overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";";
+		//OverridingHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
+		//	"overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";";
 		public ParserRule getRule() { return rule; }
 
 		//"overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";"
@@ -174,8 +173,8 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Assignment cValidAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final Keyword cValidSemicolonKeyword_2_0 = (Keyword)cValidAssignment_2.eContents().get(0);
 		
-		//OverridingHiddensCall hidden ( ):
-		//  "call" spaces+=WS? valid?=";";
+		//OverridingHiddensCall hidden():
+		//	"call" spaces+=WS? valid?=";";
 		public ParserRule getRule() { return rule; }
 
 		//"call" spaces+=WS? valid?=";"
@@ -212,13 +211,11 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Assignment cValidAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final Keyword cValidSemicolonKeyword_5_0 = (Keyword)cValidAssignment_5.eContents().get(0);
 		
-		//InheritingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
-		//  "inheriting" "hiddens" "(" (called=InheritingHiddensCall|
-		//  hidingCalled=HidingHiddens) ")" valid?=";";
+		//InheritingHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
+		//	"inheriting" "hiddens" "(" (called=InheritingHiddensCall | hidingCalled=HidingHiddens) ")" valid?=";";
 		public ParserRule getRule() { return rule; }
 
-		//"inheriting" "hiddens" "(" (called=InheritingHiddensCall|
-		//hidingCalled=HidingHiddens) ")" valid?=";"
+		//"inheriting" "hiddens" "(" (called=InheritingHiddensCall | hidingCalled=HidingHiddens) ")" valid?=";"
 		public Group getGroup() { return cGroup; }
 
 		//"inheriting"
@@ -230,7 +227,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//"("
 		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 
-		//called=InheritingHiddensCall|hidingCalled=HidingHiddens
+		//called=InheritingHiddensCall | hidingCalled=HidingHiddens
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
 		//called=InheritingHiddensCall
@@ -263,7 +260,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final RuleCall cValidDatatypeRuleParserRuleCall_1_0 = (RuleCall)cValidAssignment_1.eContents().get(0);
 		
 		//DatatypeHiddens:
-		//  "datatype" valid?=DatatypeRule;
+		//	"datatype" valid?=DatatypeRule;
 		public ParserRule getRule() { return rule; }
 
 		//"datatype" valid?=DatatypeRule
@@ -285,8 +282,8 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Keyword cRuleKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cSemicolonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
-		//DatatypeRule returns ecore::EString hidden ( WS ):
-		//  "rule" ";";
+		//DatatypeRule returns ecore::EString hidden(WS):
+		//	"rule" ";";
 		public ParserRule getRule() { return rule; }
 
 		//"rule" ";"
@@ -308,8 +305,8 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Assignment cCalledAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cCalledInheritingHiddensCallParserRuleCall_2_0 = (RuleCall)cCalledAssignment_2.eContents().get(0);
 		
-		//HidingHiddens hidden ( ):
-		//  "hiding" space=WS called=InheritingHiddensCall;
+		//HidingHiddens hidden():
+		//	"hiding" space=WS called=InheritingHiddensCall;
 		public ParserRule getRule() { return rule; }
 
 		//"hiding" space=WS called=InheritingHiddensCall
@@ -339,7 +336,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Keyword cValidSemicolonKeyword_1_0 = (Keyword)cValidAssignment_1.eContents().get(0);
 		
 		//InheritingHiddensCall:
-		//  "call" valid?=";";
+		//	"call" valid?=";";
 		public ParserRule getRule() { return rule; }
 
 		//"call" valid?=";"
@@ -385,8 +382,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 
 	
 	//Model:
-	//  WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|
-	//  DatatypeHiddens;
+	//	WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens | DatatypeHiddens;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -396,7 +392,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//WithoutHiddens:
-	//  "without" spaces+=WS "hiddens" spaces+=WS? valid?=";";
+	//	"without" spaces+=WS "hiddens" spaces+=WS? valid?=";";
 	public WithoutHiddensElements getWithoutHiddensAccess() {
 		return (pWithoutHiddens != null) ? pWithoutHiddens : (pWithoutHiddens = new WithoutHiddensElements());
 	}
@@ -405,8 +401,8 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		return getWithoutHiddensAccess().getRule();
 	}
 
-	//WithHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
-	//  "with" "hiddens" valid?=";";
+	//WithHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
+	//	"with" "hiddens" valid?=";";
 	public WithHiddensElements getWithHiddensAccess() {
 		return (pWithHiddens != null) ? pWithHiddens : (pWithHiddens = new WithHiddensElements());
 	}
@@ -415,8 +411,8 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		return getWithHiddensAccess().getRule();
 	}
 
-	//OverridingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
-	//  "overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";";
+	//OverridingHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
+	//	"overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";";
 	public OverridingHiddensElements getOverridingHiddensAccess() {
 		return (pOverridingHiddens != null) ? pOverridingHiddens : (pOverridingHiddens = new OverridingHiddensElements());
 	}
@@ -425,8 +421,8 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		return getOverridingHiddensAccess().getRule();
 	}
 
-	//OverridingHiddensCall hidden ( ):
-	//  "call" spaces+=WS? valid?=";";
+	//OverridingHiddensCall hidden():
+	//	"call" spaces+=WS? valid?=";";
 	public OverridingHiddensCallElements getOverridingHiddensCallAccess() {
 		return (pOverridingHiddensCall != null) ? pOverridingHiddensCall : (pOverridingHiddensCall = new OverridingHiddensCallElements());
 	}
@@ -435,9 +431,8 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		return getOverridingHiddensCallAccess().getRule();
 	}
 
-	//InheritingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
-	//  "inheriting" "hiddens" "(" (called=InheritingHiddensCall|
-	//  hidingCalled=HidingHiddens) ")" valid?=";";
+	//InheritingHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
+	//	"inheriting" "hiddens" "(" (called=InheritingHiddensCall | hidingCalled=HidingHiddens) ")" valid?=";";
 	public InheritingHiddensElements getInheritingHiddensAccess() {
 		return (pInheritingHiddens != null) ? pInheritingHiddens : (pInheritingHiddens = new InheritingHiddensElements());
 	}
@@ -447,7 +442,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//DatatypeHiddens:
-	//  "datatype" valid?=DatatypeRule;
+	//	"datatype" valid?=DatatypeRule;
 	public DatatypeHiddensElements getDatatypeHiddensAccess() {
 		return (pDatatypeHiddens != null) ? pDatatypeHiddens : (pDatatypeHiddens = new DatatypeHiddensElements());
 	}
@@ -456,8 +451,8 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		return getDatatypeHiddensAccess().getRule();
 	}
 
-	//DatatypeRule returns ecore::EString hidden ( WS ):
-	//  "rule" ";";
+	//DatatypeRule returns ecore::EString hidden(WS):
+	//	"rule" ";";
 	public DatatypeRuleElements getDatatypeRuleAccess() {
 		return (pDatatypeRule != null) ? pDatatypeRule : (pDatatypeRule = new DatatypeRuleElements());
 	}
@@ -466,8 +461,8 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		return getDatatypeRuleAccess().getRule();
 	}
 
-	//HidingHiddens hidden ( ):
-	//  "hiding" space=WS called=InheritingHiddensCall;
+	//HidingHiddens hidden():
+	//	"hiding" space=WS called=InheritingHiddensCall;
 	public HidingHiddensElements getHidingHiddensAccess() {
 		return (pHidingHiddens != null) ? pHidingHiddens : (pHidingHiddens = new HidingHiddensElements());
 	}
@@ -477,7 +472,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//InheritingHiddensCall:
-	//  "call" valid?=";";
+	//	"call" valid?=";";
 	public InheritingHiddensCallElements getInheritingHiddensCallAccess() {
 		return (pInheritingHiddensCall != null) ? pInheritingHiddensCall : (pInheritingHiddensCall = new InheritingHiddensCallElements());
 	}
@@ -487,25 +482,25 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return (tML_COMMENT != null) ? tML_COMMENT : (tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return (tSL_COMMENT != null) ? tSL_COMMENT : (tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return (tANY_OTHER != null) ? tANY_OTHER : (tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
 	} 

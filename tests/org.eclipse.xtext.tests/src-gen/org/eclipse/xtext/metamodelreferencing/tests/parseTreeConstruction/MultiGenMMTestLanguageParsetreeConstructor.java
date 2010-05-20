@@ -42,7 +42,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Foo ****************
  *
  * Foo:
- *   name=ID nameRefs+=NameRef*;
+ * 	name=ID nameRefs+=NameRef*;
  *
  **/
 
@@ -163,7 +163,7 @@ protected class Foo_NameRefsAssignment_1 extends AssignmentToken  {
 /************ begin Rule NameRef ****************
  *
  * NameRef returns other::FooBar:
- *   name=STRING;
+ * 	name=STRING;
  *
  **/
 

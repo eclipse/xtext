@@ -26,7 +26,7 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cRefsModelElementParserRuleCall_2_0 = (RuleCall)cRefsAssignment_2.eContents().get(0);
 		
 		//Model:
-		//  {Model} "Model" refs+=ModelElement*;
+		//	{Model} "Model" refs+=ModelElement*;
 		public ParserRule getRule() { return rule; }
 
 		//{Model} "Model" refs+=ModelElement*
@@ -64,19 +64,16 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cRefsContainedIDTerminalRuleCall_1_1_2_1_0_1 = (RuleCall)cRefsContainedCrossReference_1_1_2_1_0.eContents().get(1);
 		
 		//ModelElement:
-		//  {ModelElement} (containments+=Contained|"reference" refs+=[Contained] ("$"
-		//  refs+=[Contained])*)+;
+		//	{ModelElement} (containments+=Contained | "reference" refs+=[Contained] ("$" refs+=[Contained])*)+;
 		public ParserRule getRule() { return rule; }
 
-		//{ModelElement} (containments+=Contained|"reference" refs+=[Contained] ("$"
-		//refs+=[Contained])*)+
+		//{ModelElement} (containments+=Contained | "reference" refs+=[Contained] ("$" refs+=[Contained])*)+
 		public Group getGroup() { return cGroup; }
 
 		//{ModelElement}
 		public Action getModelElementAction_0() { return cModelElementAction_0; }
 
-		//(containments+=Contained|"reference" refs+=[Contained] ("$" refs+=[Contained])*)
-		//+
+		//(containments+=Contained | "reference" refs+=[Contained] ("$" refs+=[Contained])*)+
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//containments+=Contained
@@ -124,7 +121,7 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Contained:
-		//  "containment" name=ID;
+		//	"containment" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"containment" name=ID
@@ -167,7 +164,7 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 
 	
 	//Model:
-	//  {Model} "Model" refs+=ModelElement*;
+	//	{Model} "Model" refs+=ModelElement*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -177,8 +174,7 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//ModelElement:
-	//  {ModelElement} (containments+=Contained|"reference" refs+=[Contained] ("$"
-	//  refs+=[Contained])*)+;
+	//	{ModelElement} (containments+=Contained | "reference" refs+=[Contained] ("$" refs+=[Contained])*)+;
 	public ModelElementElements getModelElementAccess() {
 		return (pModelElement != null) ? pModelElement : (pModelElement = new ModelElementElements());
 	}
@@ -188,7 +184,7 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Contained:
-	//  "containment" name=ID;
+	//	"containment" name=ID;
 	public ContainedElements getContainedAccess() {
 		return (pContained != null) ? pContained : (pContained = new ContainedElements());
 	}
@@ -198,45 +194,44 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

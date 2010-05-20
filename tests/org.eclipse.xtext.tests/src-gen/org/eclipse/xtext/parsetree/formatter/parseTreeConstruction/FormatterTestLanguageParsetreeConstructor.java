@@ -58,11 +58,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Root ****************
  *
  * Root:
- * 	"test" (TestLinewrap|TestIndentation|TestLinewrapMinMax);
+ * 	"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax);
  *
  **/
 
-// "test" (TestLinewrap|TestIndentation|TestLinewrapMinMax)
+// "test" (TestLinewrap | TestIndentation | TestLinewrapMinMax)
 protected class Root_Group extends GroupToken {
 	
 	public Root_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -114,7 +114,7 @@ protected class Root_TestKeyword_0 extends KeywordToken  {
 
 }
 
-// TestLinewrap|TestIndentation|TestLinewrapMinMax
+// TestLinewrap | TestIndentation | TestLinewrapMinMax
 protected class Root_Alternatives_1 extends AlternativesToken {
 
 	public Root_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -257,11 +257,11 @@ protected class Root_TestLinewrapMinMaxParserRuleCall_1_2 extends RuleCallToken 
 /************ begin Rule Line ****************
  *
  * Line:
- * 	(Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space|Datatypes) ";";
+ * 	(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes) ";";
  *
  **/
 
-// (Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space|Datatypes) ";"
+// (Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes) ";"
 protected class Line_Group extends GroupToken {
 	
 	public Line_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -298,7 +298,7 @@ protected class Line_Group extends GroupToken {
 
 }
 
-// Decl|Assign|Meth|FqnObj|FqnRef|Enumeration|SuppressedHidden "post"|Space|Datatypes
+// Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes
 protected class Line_Alternatives_0 extends AlternativesToken {
 
 	public Line_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -839,11 +839,11 @@ protected class Decl_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule Assign ****************
  *
  * Assign:
- * 	var=ID op=( "=" | "+=" ) "[" (val+=INT ("," val+=INT)*)? "]";
+ * 	var=ID op=("=" | "+=") "[" (val+=INT ("," val+=INT)*)? "]";
  *
  **/
 
-// var=ID op=( "=" | "+=" ) "[" (val+=INT ("," val+=INT)*)? "]"
+// var=ID op=("=" | "+=") "[" (val+=INT ("," val+=INT)*)? "]"
 protected class Assign_Group extends GroupToken {
 	
 	public Assign_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -905,7 +905,7 @@ protected class Assign_VarAssignment_0 extends AssignmentToken  {
 
 }
 
-// op=( "=" | "+=" )
+// op=("=" | "+=")
 protected class Assign_OpAssignment_1 extends AssignmentToken  {
 	
 	public Assign_OpAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1878,11 +1878,11 @@ protected class TestLinewrapMinMax_ItemsAssignment_1 extends AssignmentToken  {
 /************ begin Rule TestIndentation ****************
  *
  * TestIndentation:
- * 	"indentation" "{" (sub+=TestIndentation|items+=Line)* "}" semi?=";"?;
+ * 	"indentation" "{" (sub+=TestIndentation | items+=Line)* "}" semi?=";"?;
  *
  **/
 
-// "indentation" "{" (sub+=TestIndentation|items+=Line)* "}" semi?=";"?
+// "indentation" "{" (sub+=TestIndentation | items+=Line)* "}" semi?=";"?
 protected class TestIndentation_Group extends GroupToken {
 	
 	public TestIndentation_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1955,7 +1955,7 @@ protected class TestIndentation_LeftCurlyBracketKeyword_1 extends KeywordToken  
 
 }
 
-// (sub+=TestIndentation|items+=Line)*
+// (sub+=TestIndentation | items+=Line)*
 protected class TestIndentation_Alternatives_2 extends AlternativesToken {
 
 	public TestIndentation_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2507,9 +2507,8 @@ protected class Enumeration_ValAssignment_2_1 extends AssignmentToken  {
 
 /************ begin Rule SuppressedHidden ****************
  *
- * SuppressedHidden hidden ( ):
- * 	{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%"
- * 	vals+=SuppressedHiddenSub)*)? "`";
+ * SuppressedHidden hidden():
+ * 	{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%" vals+=SuppressedHiddenSub)*)? "`";
  *
  **/
 
@@ -2782,11 +2781,11 @@ protected class SuppressedHidden_GraveAccentKeyword_3 extends KeywordToken  {
 /************ begin Rule SuppressedHiddenSub ****************
  *
  * SuppressedHiddenSub:
- * 	SuppressedHiddenSubSub|SuppressedHiddenSubID;
+ * 	SuppressedHiddenSubSub | SuppressedHiddenSubID;
  *
  **/
 
-// SuppressedHiddenSubSub|SuppressedHiddenSubID
+// SuppressedHiddenSubSub | SuppressedHiddenSubID
 protected class SuppressedHiddenSub_Alternatives extends AlternativesToken {
 
 	public SuppressedHiddenSub_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2895,7 +2894,7 @@ protected class SuppressedHiddenSub_SuppressedHiddenSubIDParserRuleCall_1 extend
 
 /************ begin Rule SuppressedHiddenSubSub ****************
  *
- * SuppressedHiddenSubSub hidden ( WS ):
+ * SuppressedHiddenSubSub hidden(WS):
  * 	"<" idval=ID ">";
  *
  **/

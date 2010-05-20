@@ -40,12 +40,10 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cSubModelSubModelParserRuleCall_3_1_0 = (RuleCall)cSubModelAssignment_3_1.eContents().get(0);
 		
 		//Model:
-		//  {Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")*
-		//  ("subModel" subModel=SubModel)?;
+		//	{Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")* ("subModel" subModel=SubModel)?;
 		public ParserRule getRule() { return rule; }
 
-		//{Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")* (
-		//"subModel" subModel=SubModel)?
+		//{Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")* ("subModel" subModel=SubModel)?
 		public Group getGroup() { return cGroup; }
 
 		//{Model}
@@ -114,7 +112,7 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cStringsSTRINGTerminalRuleCall_1_2_0 = (RuleCall)cStringsAssignment_1_2.eContents().get(0);
 		
 		//SubModel:
-		//  {SubModel} ("1" "2" strings+=STRING?)*;
+		//	{SubModel} ("1" "2" strings+=STRING?)*;
 		public ParserRule getRule() { return rule; }
 
 		//{SubModel} ("1" "2" strings+=STRING?)*
@@ -165,8 +163,7 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//  {Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")*
-	//  ("subModel" subModel=SubModel)?;
+	//	{Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")* ("subModel" subModel=SubModel)?;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -176,7 +173,7 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//SubModel:
-	//  {SubModel} ("1" "2" strings+=STRING?)*;
+	//	{SubModel} ("1" "2" strings+=STRING?)*;
 	public SubModelElements getSubModelAccess() {
 		return (pSubModel != null) ? pSubModel : (pSubModel = new SubModelElements());
 	}
@@ -186,45 +183,44 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

@@ -23,7 +23,7 @@ public class LexerTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final RuleCall cChildrenElementParserRuleCall_0 = (RuleCall)cChildrenAssignment.eContents().get(0);
 		
 		//Model:
-		//  children+=Element*;
+		//	children+=Element*;
 		public ParserRule getRule() { return rule; }
 
 		//children+=Element*
@@ -42,7 +42,7 @@ public class LexerTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final RuleCall cHSTRINGTerminalRuleCall_1_0 = (RuleCall)cHAssignment_1.eContents().get(0);
 		
 		//Element:
-		//  name=ID h=STRING;
+		//	name=ID h=STRING;
 		public ParserRule getRule() { return rule; }
 
 		//name=ID h=STRING
@@ -88,7 +88,7 @@ public class LexerTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 
 	
 	//Model:
-	//  children+=Element*;
+	//	children+=Element*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -98,7 +98,7 @@ public class LexerTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//Element:
-	//  name=ID h=STRING;
+	//	name=ID h=STRING;
 	public ElementElements getElementAccess() {
 		return (pElement != null) ? pElement : (pElement = new ElementElements());
 	}
@@ -108,43 +108,43 @@ public class LexerTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//terminal STRING:
-	//  "#" "B"+;
+	//	"#" "B"+;
 	public TerminalRule getSTRINGRule() {
 		return (tSTRING != null) ? tSTRING : (tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
 	} 
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

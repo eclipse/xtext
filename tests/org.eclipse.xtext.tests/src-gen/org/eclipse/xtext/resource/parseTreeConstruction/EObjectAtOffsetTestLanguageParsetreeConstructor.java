@@ -44,11 +44,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   (foos+=Foo|bars+=AbstractBar)*;
+ * 	(foos+=Foo | bars+=AbstractBar)*;
  *
  **/
 
-// (foos+=Foo|bars+=AbstractBar)*
+// (foos+=Foo | bars+=AbstractBar)*
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -170,7 +170,7 @@ protected class Model_BarsAssignment_1 extends AssignmentToken  {
 /************ begin Rule AbstractBar ****************
  *
  * AbstractBar:
- *   Bar ({FooBar.bar=current} "foobar" foo+=[Foo])?;
+ * 	Bar ({FooBar.bar=current} "foobar" foo+=[Foo])?;
  *
  **/
 
@@ -366,7 +366,7 @@ protected class AbstractBar_FooAssignment_1_2 extends AssignmentToken  {
 /************ begin Rule Bar ****************
  *
  * Bar:
- *   "bar" name=ID foo+=[Foo] ("," foo+=[Foo])*;
+ * 	"bar" name=ID foo+=[Foo] ("," foo+=[Foo])*;
  *
  **/
 
@@ -582,7 +582,7 @@ protected class Bar_FooAssignment_3_1 extends AssignmentToken  {
 /************ begin Rule Foo ****************
  *
  * Foo:
- *   "foo" name=ID;
+ * 	"foo" name=ID;
  *
  **/
 

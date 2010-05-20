@@ -42,7 +42,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule CompositeModel ****************
  *
  * CompositeModel:
- *   model+=Model+;
+ * 	model+=Model+;
  *
  **/
 
@@ -98,13 +98,11 @@ protected class CompositeModel_ModelAssignment extends AssignmentToken  {
 /************ begin Rule Model ****************
  *
  * Model:
- *   id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)?
- *   ("*" double=Double)? ";";
+ * 	id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ("*" double=Double)? ";";
  *
  **/
 
-// id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? (
-// "*" double=Double)? ";"
+// id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ("*" double=Double)? ";"
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

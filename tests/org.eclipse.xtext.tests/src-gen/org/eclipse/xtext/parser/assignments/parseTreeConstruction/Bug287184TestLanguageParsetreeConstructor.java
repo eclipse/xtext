@@ -44,11 +44,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   "model" name=FQN detail+=( Detail | AssociatedDetail )+;
+ * 	"model" name=FQN detail+=(Detail | AssociatedDetail)+;
  *
  **/
 
-// "model" name=FQN detail+=( Detail | AssociatedDetail )+
+// "model" name=FQN detail+=(Detail | AssociatedDetail)+
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -132,7 +132,7 @@ protected class Model_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// detail+=( Detail | AssociatedDetail )+
+// detail+=(Detail | AssociatedDetail)+
 protected class Model_DetailAssignment_2 extends AssignmentToken  {
 	
 	public Model_DetailAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -196,11 +196,11 @@ protected class Model_DetailAssignment_2 extends AssignmentToken  {
 /************ begin Rule AbstractDetail ****************
  *
  * AbstractDetail:
- *   Detail|AssociatedDetail;
+ * 	Detail | AssociatedDetail;
  *
  **/
 
-// Detail|AssociatedDetail
+// Detail | AssociatedDetail
 protected class AbstractDetail_Alternatives extends AlternativesToken {
 
 	public AbstractDetail_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -310,13 +310,11 @@ protected class AbstractDetail_AssociatedDetailParserRuleCall_1 extends RuleCall
 /************ begin Rule Detail ****************
  *
  * Detail:
- *   "detail" visibility=( "private" | "protected" | "public" )? detailClass=[
- *   Model|FQN];
+ * 	"detail" visibility=("private" | "protected" | "public")? detailClass=[Model|FQN];
  *
  **/
 
-// "detail" visibility=( "private" | "protected" | "public" )? detailClass=[Model|
-// FQN]
+// "detail" visibility=("private" | "protected" | "public")? detailClass=[Model|FQN]
 protected class Detail_Group extends GroupToken {
 	
 	public Detail_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -366,7 +364,7 @@ protected class Detail_DetailKeyword_0 extends KeywordToken  {
 
 }
 
-// visibility=( "private" | "protected" | "public" )?
+// visibility=("private" | "protected" | "public")?
 protected class Detail_VisibilityAssignment_1 extends AssignmentToken  {
 	
 	public Detail_VisibilityAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -455,7 +453,7 @@ protected class Detail_DetailClassAssignment_2 extends AssignmentToken  {
 /************ begin Rule AssociatedDetail ****************
  *
  * AssociatedDetail:
- *   "associated" detailClass=[Model|FQN] ";";
+ * 	"associated" detailClass=[Model|FQN] ";";
  *
  **/
 

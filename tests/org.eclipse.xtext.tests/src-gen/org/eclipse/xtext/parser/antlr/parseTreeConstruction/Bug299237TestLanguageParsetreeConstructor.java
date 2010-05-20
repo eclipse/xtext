@@ -41,7 +41,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   "model" name=ID ";";
+ * 	"model" name=ID ";";
  *
  **/
 

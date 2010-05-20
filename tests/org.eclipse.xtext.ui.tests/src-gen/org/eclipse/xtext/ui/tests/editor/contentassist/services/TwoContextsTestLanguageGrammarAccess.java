@@ -23,7 +23,7 @@ public class TwoContextsTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cElementsAnElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
 		//MainModel:
-		//  elements+=AnElement*;
+		//	elements+=AnElement*;
 		public ParserRule getRule() { return rule; }
 
 		//elements+=AnElement*
@@ -46,7 +46,7 @@ public class TwoContextsTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//AnElement:
-		//  name=ID ("refersTo" referred=[AnElement])? ";";
+		//	name=ID ("refersTo" referred=[AnElement])? ";";
 		public ParserRule getRule() { return rule; }
 
 		//name=ID ("refersTo" referred=[AnElement])? ";"
@@ -103,7 +103,7 @@ public class TwoContextsTestLanguageGrammarAccess extends AbstractGrammarElement
 
 	
 	//MainModel:
-	//  elements+=AnElement*;
+	//	elements+=AnElement*;
 	public MainModelElements getMainModelAccess() {
 		return (pMainModel != null) ? pMainModel : (pMainModel = new MainModelElements());
 	}
@@ -113,7 +113,7 @@ public class TwoContextsTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//AnElement:
-	//  name=ID ("refersTo" referred=[AnElement])? ";";
+	//	name=ID ("refersTo" referred=[AnElement])? ";";
 	public AnElementElements getAnElementAccess() {
 		return (pAnElement != null) ? pAnElement : (pAnElement = new AnElementElements());
 	}
@@ -123,45 +123,44 @@ public class TwoContextsTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

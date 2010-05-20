@@ -27,7 +27,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 		private final RuleCall cXbsXbParserRuleCall_2_0 = (RuleCall)cXbsAssignment_2.eContents().get(0);
 		
 		//Model:
-		//  enums+=EnumName* abs+=Ab* xbs+=Xb*;
+		//	enums+=EnumName* abs+=Ab* xbs+=Xb*;
 		public ParserRule getRule() { return rule; }
 
 		//enums+=EnumName* abs+=Ab* xbs+=Xb*
@@ -61,7 +61,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 		private final RuleCall cYCharbTerminalRuleCall_1_0 = (RuleCall)cYAssignment_1.eContents().get(0);
 		
 		//Ab:
-		//  x=CharA y=Charb;
+		//	x=CharA y=Charb;
 		public ParserRule getRule() { return rule; }
 
 		//x=CharA y=Charb
@@ -89,7 +89,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 		private final RuleCall cYCharbTerminalRuleCall_1_0 = (RuleCall)cYAssignment_1.eContents().get(0);
 		
 		//Xb:
-		//  x=CharX y=Charb;
+		//	x=CharX y=Charb;
 		public ParserRule getRule() { return rule; }
 
 		//x=CharX y=Charb
@@ -118,7 +118,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 		private final Keyword cEfgEfgKeyword_1_0 = (Keyword)cEfgEnumLiteralDeclaration_1.eContents().get(0);
 		
 		//enum EnumName:
-		//  abc="Abc" | efg="Efg";
+		//	abc="Abc" | efg="Efg";
 		public EnumRule getRule() { return rule; }
 
 		//abc="Abc" | efg="Efg"
@@ -161,7 +161,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 
 	
 	//Model:
-	//  enums+=EnumName* abs+=Ab* xbs+=Xb*;
+	//	enums+=EnumName* abs+=Ab* xbs+=Xb*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -171,7 +171,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 
 	//Ab:
-	//  x=CharA y=Charb;
+	//	x=CharA y=Charb;
 	public AbElements getAbAccess() {
 		return (pAb != null) ? pAb : (pAb = new AbElements());
 	}
@@ -181,7 +181,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 
 	//Xb:
-	//  x=CharX y=Charb;
+	//	x=CharX y=Charb;
 	public XbElements getXbAccess() {
 		return (pXb != null) ? pXb : (pXb = new XbElements());
 	}
@@ -191,25 +191,25 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 
 	//terminal CharA:
-	//  "A";
+	//	"A";
 	public TerminalRule getCharARule() {
 		return (tCharA != null) ? tCharA : (tCharA = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CharA"));
 	} 
 
 	//terminal Charb:
-	//  "b";
+	//	"b";
 	public TerminalRule getCharbRule() {
 		return (tCharb != null) ? tCharb : (tCharb = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Charb"));
 	} 
 
 	//terminal CharX:
-	//  "X";
+	//	"X";
 	public TerminalRule getCharXRule() {
 		return (tCharX != null) ? tCharX : (tCharX = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CharX"));
 	} 
 
 	//enum EnumName:
-	//  abc="Abc" | efg="Efg";
+	//	abc="Abc" | efg="Efg";
 	public EnumNameElements getEnumNameAccess() {
 		return (unknownRuleEnumName != null) ? unknownRuleEnumName : (unknownRuleEnumName = new EnumNameElements());
 	}
@@ -219,13 +219,13 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return (tSL_COMMENT != null) ? tSL_COMMENT : (tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
 	} 

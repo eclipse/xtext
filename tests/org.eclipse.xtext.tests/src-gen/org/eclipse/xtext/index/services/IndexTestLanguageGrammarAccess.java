@@ -23,7 +23,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final RuleCall cElementsElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
 		//File:
-		//  elements+=Element*;
+		//	elements+=Element*;
 		public ParserRule getRule() { return rule; }
 
 		//elements+=Element*
@@ -41,7 +41,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final RuleCall cImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
 		
 		//Import:
-		//  "import" importedNamespace=QualifiedNameWithWildCard;
+		//	"import" importedNamespace=QualifiedNameWithWildCard;
 		public ParserRule getRule() { return rule; }
 
 		//"import" importedNamespace=QualifiedNameWithWildCard
@@ -64,7 +64,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final Keyword cFullStopAsteriskKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//QualifiedNameWithWildCard returns ecore::EString:
-		//  QualifiedName ".*"?;
+		//	QualifiedName ".*"?;
 		public ParserRule getRule() { return rule; }
 
 		//QualifiedName ".*"?
@@ -86,7 +86,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//QualifiedName returns ecore::EString:
-		//  ID ("." ID)*;
+		//	ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
@@ -116,7 +116,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Namespace:
-		//  name=QualifiedName "{" elements+=Element* "}";
+		//	name=QualifiedName "{" elements+=Element* "}";
 		public ParserRule getRule() { return rule; }
 
 		//name=QualifiedName "{" elements+=Element* "}"
@@ -149,10 +149,10 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final RuleCall cImportParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//Element:
-		//  Namespace|Type|Import;
+		//	Namespace | Type | Import;
 		public ParserRule getRule() { return rule; }
 
-		//Namespace|Type|Import
+		//Namespace | Type | Import
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Namespace
@@ -172,10 +172,10 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final RuleCall cDatatypeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Type:
-		//  Entity|Datatype;
+		//	Entity | Datatype;
 		public ParserRule getRule() { return rule; }
 
-		//Entity|Datatype
+		//Entity | Datatype
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Entity
@@ -197,7 +197,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Entity:
-		//  "entity" name=ID "{" properties+=Property* "}";
+		//	"entity" name=ID "{" properties+=Property* "}";
 		public ParserRule getRule() { return rule; }
 
 		//"entity" name=ID "{" properties+=Property* "}"
@@ -233,7 +233,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Datatype:
-		//  "datatype" name=ID;
+		//	"datatype" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"datatype" name=ID
@@ -259,7 +259,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Property:
-		//  type=[Type|QualifiedName] name=ID;
+		//	type=[Type|QualifiedName] name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//type=[Type|QualifiedName] name=ID
@@ -315,7 +315,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 
 	
 	//File:
-	//  elements+=Element*;
+	//	elements+=Element*;
 	public FileElements getFileAccess() {
 		return (pFile != null) ? pFile : (pFile = new FileElements());
 	}
@@ -325,7 +325,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//Import:
-	//  "import" importedNamespace=QualifiedNameWithWildCard;
+	//	"import" importedNamespace=QualifiedNameWithWildCard;
 	public ImportElements getImportAccess() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
 	}
@@ -335,7 +335,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//QualifiedNameWithWildCard returns ecore::EString:
-	//  QualifiedName ".*"?;
+	//	QualifiedName ".*"?;
 	public QualifiedNameWithWildCardElements getQualifiedNameWithWildCardAccess() {
 		return (pQualifiedNameWithWildCard != null) ? pQualifiedNameWithWildCard : (pQualifiedNameWithWildCard = new QualifiedNameWithWildCardElements());
 	}
@@ -345,7 +345,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//QualifiedName returns ecore::EString:
-	//  ID ("." ID)*;
+	//	ID ("." ID)*;
 	public QualifiedNameElements getQualifiedNameAccess() {
 		return (pQualifiedName != null) ? pQualifiedName : (pQualifiedName = new QualifiedNameElements());
 	}
@@ -355,7 +355,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//Namespace:
-	//  name=QualifiedName "{" elements+=Element* "}";
+	//	name=QualifiedName "{" elements+=Element* "}";
 	public NamespaceElements getNamespaceAccess() {
 		return (pNamespace != null) ? pNamespace : (pNamespace = new NamespaceElements());
 	}
@@ -365,7 +365,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//Element:
-	//  Namespace|Type|Import;
+	//	Namespace | Type | Import;
 	public ElementElements getElementAccess() {
 		return (pElement != null) ? pElement : (pElement = new ElementElements());
 	}
@@ -375,7 +375,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//Type:
-	//  Entity|Datatype;
+	//	Entity | Datatype;
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}
@@ -385,7 +385,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//Entity:
-	//  "entity" name=ID "{" properties+=Property* "}";
+	//	"entity" name=ID "{" properties+=Property* "}";
 	public EntityElements getEntityAccess() {
 		return (pEntity != null) ? pEntity : (pEntity = new EntityElements());
 	}
@@ -395,7 +395,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//Datatype:
-	//  "datatype" name=ID;
+	//	"datatype" name=ID;
 	public DatatypeElements getDatatypeAccess() {
 		return (pDatatype != null) ? pDatatype : (pDatatype = new DatatypeElements());
 	}
@@ -405,7 +405,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//Property:
-	//  type=[Type|QualifiedName] name=ID;
+	//	type=[Type|QualifiedName] name=ID;
 	public PropertyElements getPropertyAccess() {
 		return (pProperty != null) ? pProperty : (pProperty = new PropertyElements());
 	}
@@ -415,45 +415,44 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

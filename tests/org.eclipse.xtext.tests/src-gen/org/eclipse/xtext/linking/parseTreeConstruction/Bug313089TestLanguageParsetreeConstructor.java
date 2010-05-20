@@ -43,11 +43,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Foo ****************
  *
  * Foo:
- *   name=ID (bar=Bar|baz=Baz) ref=[Foo];
+ * 	name=ID (bar=Bar | baz=Baz) ref=[Foo];
  *
  **/
 
-// name=ID (bar=Bar|baz=Baz) ref=[Foo]
+// name=ID (bar=Bar | baz=Baz) ref=[Foo]
 protected class Foo_Group extends GroupToken {
 	
 	public Foo_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -109,7 +109,7 @@ protected class Foo_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// bar=Bar|baz=Baz
+// bar=Bar | baz=Baz
 protected class Foo_Alternatives_1 extends AlternativesToken {
 
 	public Foo_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -269,7 +269,7 @@ protected class Foo_RefAssignment_2 extends AssignmentToken  {
 /************ begin Rule Bar ****************
  *
  * Bar:
- *   {Bar} name=ID;
+ * 	{Bar} name=ID;
  *
  **/
 
@@ -369,7 +369,7 @@ protected class Bar_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule Baz ****************
  *
  * Baz:
- *   "baz" name=ID ({Baz.child=current} "baz" name=ID)*;
+ * 	"baz" name=ID ({Baz.child=current} "baz" name=ID)*;
  *
  **/
 
@@ -396,7 +396,7 @@ protected class Baz_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getBazAccess().getBazChildAction_2_0().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getBazRule().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}

@@ -9,6 +9,11 @@
         <classifier xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDsl#//Statemachine"/>
       </type>
       <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://example.xtext.org/FowlerDsl#//Statemachine"/>
+          </type>
+        </elements>
         <elements xsi:type="xtext:Keyword" value="events"/>
         <elements xsi:type="xtext:Assignment" cardinality="*" feature="events" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>

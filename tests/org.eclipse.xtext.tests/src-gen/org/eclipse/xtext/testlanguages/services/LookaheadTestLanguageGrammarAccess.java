@@ -23,7 +23,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cContentsAltsParserRuleCall_0 = (RuleCall)cContentsAssignment.eContents().get(0);
 		
 		//Entry:
-		//  contents+=Alts*;
+		//	contents+=Alts*;
 		public ParserRule getRule() { return rule; }
 
 		//contents+=Alts*
@@ -41,10 +41,10 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cLookAhead3ParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//Alts:
-		//  LookAhead0|LookAhead1|LookAhead3;
+		//	LookAhead0 | LookAhead1 | LookAhead3;
 		public ParserRule getRule() { return rule; }
 
-		//LookAhead0|LookAhead1|LookAhead3
+		//LookAhead0 | LookAhead1 | LookAhead3
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//LookAhead0
@@ -65,7 +65,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cXAKeyword_1_0 = (Keyword)cXAssignment_1.eContents().get(0);
 		
 		//LookAhead0:
-		//  "bar" x="a";
+		//	"bar" x="a";
 		public ParserRule getRule() { return rule; }
 
 		//"bar" x="a"
@@ -93,7 +93,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cXDKeyword_3_0 = (Keyword)cXAssignment_3.eContents().get(0);
 		
 		//LookAhead1:
-		//  "foo" y=LookAhead2 x="b" x="d";
+		//	"foo" y=LookAhead2 x="b" x="d";
 		public ParserRule getRule() { return rule; }
 
 		//"foo" y=LookAhead2 x="b" x="d"
@@ -132,13 +132,13 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cCKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//LookAhead2:
-		//  (z="foo"|z="bar") "c";
+		//	(z="foo" | z="bar") "c";
 		public ParserRule getRule() { return rule; }
 
-		//(z="foo"|z="bar") "c"
+		//(z="foo" | z="bar") "c"
 		public Group getGroup() { return cGroup; }
 
-		//z="foo"|z="bar"
+		//z="foo" | z="bar"
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//z="foo"
@@ -168,7 +168,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cZLookAhead4ParserRuleCall_3_0 = (RuleCall)cZAssignment_3.eContents().get(0);
 		
 		//LookAhead3:
-		//  "foo" "bar" x="b" z=LookAhead4;
+		//	"foo" "bar" x="b" z=LookAhead4;
 		public ParserRule getRule() { return rule; }
 
 		//"foo" "bar" x="b" z=LookAhead4
@@ -202,10 +202,10 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cXDKeyword_1_0 = (Keyword)cXAssignment_1.eContents().get(0);
 		
 		//LookAhead4:
-		//  x="c"|x="d";
+		//	x="c" | x="d";
 		public ParserRule getRule() { return rule; }
 
-		//x="c"|x="d"
+		//x="c" | x="d"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//x="c"
@@ -252,7 +252,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Entry:
-	//  contents+=Alts*;
+	//	contents+=Alts*;
 	public EntryElements getEntryAccess() {
 		return (pEntry != null) ? pEntry : (pEntry = new EntryElements());
 	}
@@ -262,7 +262,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Alts:
-	//  LookAhead0|LookAhead1|LookAhead3;
+	//	LookAhead0 | LookAhead1 | LookAhead3;
 	public AltsElements getAltsAccess() {
 		return (pAlts != null) ? pAlts : (pAlts = new AltsElements());
 	}
@@ -272,7 +272,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//LookAhead0:
-	//  "bar" x="a";
+	//	"bar" x="a";
 	public LookAhead0Elements getLookAhead0Access() {
 		return (pLookAhead0 != null) ? pLookAhead0 : (pLookAhead0 = new LookAhead0Elements());
 	}
@@ -282,7 +282,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//LookAhead1:
-	//  "foo" y=LookAhead2 x="b" x="d";
+	//	"foo" y=LookAhead2 x="b" x="d";
 	public LookAhead1Elements getLookAhead1Access() {
 		return (pLookAhead1 != null) ? pLookAhead1 : (pLookAhead1 = new LookAhead1Elements());
 	}
@@ -292,7 +292,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//LookAhead2:
-	//  (z="foo"|z="bar") "c";
+	//	(z="foo" | z="bar") "c";
 	public LookAhead2Elements getLookAhead2Access() {
 		return (pLookAhead2 != null) ? pLookAhead2 : (pLookAhead2 = new LookAhead2Elements());
 	}
@@ -302,7 +302,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//LookAhead3:
-	//  "foo" "bar" x="b" z=LookAhead4;
+	//	"foo" "bar" x="b" z=LookAhead4;
 	public LookAhead3Elements getLookAhead3Access() {
 		return (pLookAhead3 != null) ? pLookAhead3 : (pLookAhead3 = new LookAhead3Elements());
 	}
@@ -312,7 +312,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//LookAhead4:
-	//  x="c"|x="d";
+	//	x="c" | x="d";
 	public LookAhead4Elements getLookAhead4Access() {
 		return (pLookAhead4 != null) ? pLookAhead4 : (pLookAhead4 = new LookAhead4Elements());
 	}
@@ -322,45 +322,44 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

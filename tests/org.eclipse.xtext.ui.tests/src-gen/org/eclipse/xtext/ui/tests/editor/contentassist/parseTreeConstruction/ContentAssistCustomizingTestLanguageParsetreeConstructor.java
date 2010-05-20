@@ -43,7 +43,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   types+=Type*;
+ * 	types+=Type*;
  *
  **/
 
@@ -99,7 +99,7 @@ protected class Model_TypesAssignment extends AssignmentToken  {
 /************ begin Rule Type ****************
  *
  * Type:
- *   name=FQN ("extends" superType=TypeRef)? ";";
+ * 	name=FQN ("extends" superType=TypeRef)? ";";
  *
  **/
 
@@ -286,7 +286,7 @@ protected class Type_SemicolonKeyword_2 extends KeywordToken  {
 /************ begin Rule TypeRef ****************
  *
  * TypeRef:
- *   type=[Type|FQN];
+ * 	type=[Type|FQN];
  *
  **/
 

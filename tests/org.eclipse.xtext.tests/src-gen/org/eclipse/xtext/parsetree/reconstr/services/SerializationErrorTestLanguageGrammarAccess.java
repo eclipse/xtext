@@ -26,10 +26,10 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cTestParenthesisParserRuleCall_1_0 = (RuleCall)cTestAssignment_1.eContents().get(0);
 		
 		//Model:
-		//  test=Test|test=Parenthesis;
+		//	test=Test | test=Parenthesis;
 		public ParserRule getRule() { return rule; }
 
-		//test=Test|test=Parenthesis
+		//test=Test | test=Parenthesis
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//test=Test
@@ -53,7 +53,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Parenthesis returns Test:
-		//  "(" Test ")";
+		//	"(" Test ")";
 		public ParserRule getRule() { return rule; }
 
 		//"(" Test ")"
@@ -77,10 +77,10 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cIndentParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//Test:
-		//  TwoRequired|TwoOptions|Indent;
+		//	TwoRequired | TwoOptions | Indent;
 		public ParserRule getRule() { return rule; }
 
-		//TwoRequired|TwoOptions|Indent
+		//TwoRequired | TwoOptions | Indent
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//TwoRequired
@@ -103,7 +103,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cTwoIDTerminalRuleCall_2_0 = (RuleCall)cTwoAssignment_2.eContents().get(0);
 		
 		//TwoRequired:
-		//  "tworequired" one=ID two=ID;
+		//	"tworequired" one=ID two=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"tworequired" one=ID two=ID
@@ -140,16 +140,16 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cTwoIDTerminalRuleCall_1_1_1_0 = (RuleCall)cTwoAssignment_1_1_1.eContents().get(0);
 		
 		//TwoOptions:
-		//  "twooptions" ("one" one=ID|"two" two=ID);
+		//	"twooptions" ("one" one=ID | "two" two=ID);
 		public ParserRule getRule() { return rule; }
 
-		//"twooptions" ("one" one=ID|"two" two=ID)
+		//"twooptions" ("one" one=ID | "two" two=ID)
 		public Group getGroup() { return cGroup; }
 
 		//"twooptions"
 		public Keyword getTwooptionsKeyword_0() { return cTwooptionsKeyword_0; }
 
-		//"one" one=ID|"two" two=ID
+		//"one" one=ID | "two" two=ID
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"one" one=ID
@@ -190,7 +190,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Indent:
-		//  "{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}";
+		//	"{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}";
 		public ParserRule getRule() { return rule; }
 
 		//"{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}"
@@ -251,7 +251,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 
 	
 	//Model:
-	//  test=Test|test=Parenthesis;
+	//	test=Test | test=Parenthesis;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -261,7 +261,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//Parenthesis returns Test:
-	//  "(" Test ")";
+	//	"(" Test ")";
 	public ParenthesisElements getParenthesisAccess() {
 		return (pParenthesis != null) ? pParenthesis : (pParenthesis = new ParenthesisElements());
 	}
@@ -271,7 +271,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//Test:
-	//  TwoRequired|TwoOptions|Indent;
+	//	TwoRequired | TwoOptions | Indent;
 	public TestElements getTestAccess() {
 		return (pTest != null) ? pTest : (pTest = new TestElements());
 	}
@@ -281,7 +281,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//TwoRequired:
-	//  "tworequired" one=ID two=ID;
+	//	"tworequired" one=ID two=ID;
 	public TwoRequiredElements getTwoRequiredAccess() {
 		return (pTwoRequired != null) ? pTwoRequired : (pTwoRequired = new TwoRequiredElements());
 	}
@@ -291,7 +291,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//TwoOptions:
-	//  "twooptions" ("one" one=ID|"two" two=ID);
+	//	"twooptions" ("one" one=ID | "two" two=ID);
 	public TwoOptionsElements getTwoOptionsAccess() {
 		return (pTwoOptions != null) ? pTwoOptions : (pTwoOptions = new TwoOptionsElements());
 	}
@@ -301,7 +301,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//Indent:
-	//  "{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}";
+	//	"{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}";
 	public IndentElements getIndentAccess() {
 		return (pIndent != null) ? pIndent : (pIndent = new IndentElements());
 	}
@@ -311,45 +311,44 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

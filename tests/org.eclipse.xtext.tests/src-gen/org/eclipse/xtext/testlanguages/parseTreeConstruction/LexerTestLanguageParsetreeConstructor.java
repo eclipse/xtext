@@ -42,7 +42,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   children+=Element*;
+ * 	children+=Element*;
  *
  **/
 
@@ -98,7 +98,7 @@ protected class Model_ChildrenAssignment extends AssignmentToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- *   name=ID h=STRING;
+ * 	name=ID h=STRING;
  *
  **/
 

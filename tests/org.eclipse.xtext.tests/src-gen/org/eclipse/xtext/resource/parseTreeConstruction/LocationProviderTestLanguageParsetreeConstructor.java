@@ -42,7 +42,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   elements+=Element*;
+ * 	elements+=Element*;
  *
  **/
 
@@ -98,13 +98,11 @@ protected class Model_ElementsAssignment extends AssignmentToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- *   "element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[
- *   Element])*;
+ * 	"element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[Element])*;
  *
  **/
 
-// "element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[
-// Element])*
+// "element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[Element])*
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

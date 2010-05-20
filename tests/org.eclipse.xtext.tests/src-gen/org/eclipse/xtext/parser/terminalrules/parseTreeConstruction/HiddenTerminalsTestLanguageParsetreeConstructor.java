@@ -49,12 +49,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|
- *   DatatypeHiddens;
+ * 	WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens | DatatypeHiddens;
  *
  **/
 
-// WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|DatatypeHiddens
+// WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens | DatatypeHiddens
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -278,7 +277,7 @@ protected class Model_DatatypeHiddensParserRuleCall_4 extends RuleCallToken {
 /************ begin Rule WithoutHiddens ****************
  *
  * WithoutHiddens:
- *   "without" spaces+=WS "hiddens" spaces+=WS? valid?=";";
+ * 	"without" spaces+=WS "hiddens" spaces+=WS? valid?=";";
  *
  **/
 
@@ -463,8 +462,8 @@ protected class WithoutHiddens_ValidAssignment_4 extends AssignmentToken  {
 
 /************ begin Rule WithHiddens ****************
  *
- * WithHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
- *   "with" "hiddens" valid?=";";
+ * WithHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
+ * 	"with" "hiddens" valid?=";";
  *
  **/
 
@@ -580,8 +579,8 @@ protected class WithHiddens_ValidAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule OverridingHiddens ****************
  *
- * OverridingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
- *   "overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";";
+ * OverridingHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
+ * 	"overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";";
  *
  **/
 
@@ -787,8 +786,8 @@ protected class OverridingHiddens_ValidAssignment_5 extends AssignmentToken  {
 
 /************ begin Rule OverridingHiddensCall ****************
  *
- * OverridingHiddensCall hidden ( ):
- *   "call" spaces+=WS? valid?=";";
+ * OverridingHiddensCall hidden():
+ * 	"call" spaces+=WS? valid?=";";
  *
  **/
 
@@ -917,14 +916,12 @@ protected class OverridingHiddensCall_ValidAssignment_2 extends AssignmentToken 
 
 /************ begin Rule InheritingHiddens ****************
  *
- * InheritingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
- *   "inheriting" "hiddens" "(" (called=InheritingHiddensCall|
- *   hidingCalled=HidingHiddens) ")" valid?=";";
+ * InheritingHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
+ * 	"inheriting" "hiddens" "(" (called=InheritingHiddensCall | hidingCalled=HidingHiddens) ")" valid?=";";
  *
  **/
 
-// "inheriting" "hiddens" "(" (called=InheritingHiddensCall|
-// hidingCalled=HidingHiddens) ")" valid?=";"
+// "inheriting" "hiddens" "(" (called=InheritingHiddensCall | hidingCalled=HidingHiddens) ")" valid?=";"
 protected class InheritingHiddens_Group extends GroupToken {
 	
 	public InheritingHiddens_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1018,7 +1015,7 @@ protected class InheritingHiddens_LeftParenthesisKeyword_2 extends KeywordToken 
 
 }
 
-// called=InheritingHiddensCall|hidingCalled=HidingHiddens
+// called=InheritingHiddensCall | hidingCalled=HidingHiddens
 protected class InheritingHiddens_Alternatives_3 extends AlternativesToken {
 
 	public InheritingHiddens_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1197,7 +1194,7 @@ protected class InheritingHiddens_ValidAssignment_5 extends AssignmentToken  {
 /************ begin Rule DatatypeHiddens ****************
  *
  * DatatypeHiddens:
- *   "datatype" valid?=DatatypeRule;
+ * 	"datatype" valid?=DatatypeRule;
  *
  **/
 
@@ -1292,8 +1289,8 @@ protected class DatatypeHiddens_ValidAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule HidingHiddens ****************
  *
- * HidingHiddens hidden ( ):
- *   "hiding" space=WS called=InheritingHiddensCall;
+ * HidingHiddens hidden():
+ * 	"hiding" space=WS called=InheritingHiddensCall;
  *
  **/
 
@@ -1434,7 +1431,7 @@ protected class HidingHiddens_CalledAssignment_2 extends AssignmentToken  {
 /************ begin Rule InheritingHiddensCall ****************
  *
  * InheritingHiddensCall:
- *   "call" valid?=";";
+ * 	"call" valid?=";";
  *
  **/
 

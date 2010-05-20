@@ -34,10 +34,10 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractGra
 		private final RuleCall cBarIDTerminalRuleCall_1_1_0 = (RuleCall)cBarAssignment_1_1.eContents().get(0);
 		
 		//Model:
-		//  "foo" foo=ID ("bar" bar=ID)?|"bar" bar=ID;
+		//	"foo" foo=ID ("bar" bar=ID)? | "bar" bar=ID;
 		public ParserRule getRule() { return rule; }
 
-		//"foo" foo=ID ("bar" bar=ID)?|"bar" bar=ID
+		//"foo" foo=ID ("bar" bar=ID)? | "bar" bar=ID
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"foo" foo=ID ("bar" bar=ID)?
@@ -102,7 +102,7 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractGra
 
 	
 	//Model:
-	//  "foo" foo=ID ("bar" bar=ID)?|"bar" bar=ID;
+	//	"foo" foo=ID ("bar" bar=ID)? | "bar" bar=ID;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -112,45 +112,44 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractGra
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

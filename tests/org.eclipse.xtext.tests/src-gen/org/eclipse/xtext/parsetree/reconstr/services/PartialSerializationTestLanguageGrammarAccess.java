@@ -22,7 +22,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		private final RuleCall cNodeRootParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//Model:
-		//  NodeRoot;
+		//	NodeRoot;
 		public ParserRule getRule() { return rule; }
 
 		//NodeRoot
@@ -37,7 +37,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		private final RuleCall cNodeNodeParserRuleCall_1_0 = (RuleCall)cNodeAssignment_1.eContents().get(0);
 		
 		//NodeRoot:
-		//  "#1" node=Node;
+		//	"#1" node=Node;
 		public ParserRule getRule() { return rule; }
 
 		//"#1" node=Node
@@ -66,7 +66,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		private final Keyword cRightParenthesisKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
 		
 		//Node:
-		//  "node" name=ID ("(" children+=Node+ ")")?;
+		//	"node" name=ID ("(" children+=Node+ ")")?;
 		public ParserRule getRule() { return rule; }
 
 		//"node" name=ID ("(" children+=Node+ ")")?
@@ -124,7 +124,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 
 	
 	//Model:
-	//  NodeRoot;
+	//	NodeRoot;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -134,7 +134,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	//NodeRoot:
-	//  "#1" node=Node;
+	//	"#1" node=Node;
 	public NodeRootElements getNodeRootAccess() {
 		return (pNodeRoot != null) ? pNodeRoot : (pNodeRoot = new NodeRootElements());
 	}
@@ -144,7 +144,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	//Node:
-	//  "node" name=ID ("(" children+=Node+ ")")?;
+	//	"node" name=ID ("(" children+=Node+ ")")?;
 	public NodeElements getNodeAccess() {
 		return (pNode != null) ? pNode : (pNode = new NodeElements());
 	}
@@ -154,45 +154,44 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

@@ -44,7 +44,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   types+=Type*;
+ * 	types+=Type*;
  *
  **/
 
@@ -100,15 +100,13 @@ protected class Model_TypesAssignment extends AssignmentToken  {
 /************ begin Rule Type ****************
  *
  * Type:
- *   "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for"
- *   parentId=[Property] "in" extends=[Type])? "{" properties+=Property*
- *   unresolvedProxyProperty+=UnresolvedProxyProperty* "}";
+ * 	"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])?
+ * 	"{" properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* "}";
  *
  **/
 
-// "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for"
-// parentId=[Property] "in" extends=[Type])? "{" properties+=Property*
-// unresolvedProxyProperty+=UnresolvedProxyProperty* "}"
+// "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])? "{"
+// properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* "}"
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -625,7 +623,7 @@ protected class Type_RightCurlyBracketKeyword_7 extends KeywordToken  {
 /************ begin Rule Property ****************
  *
  * Property:
- *   type+=[Type]+ name=ID ";";
+ * 	type+=[Type]+ name=ID ";";
  *
  **/
 
@@ -758,7 +756,7 @@ protected class Property_SemicolonKeyword_2 extends KeywordToken  {
 /************ begin Rule UnresolvedProxyProperty ****************
  *
  * UnresolvedProxyProperty:
- *   "unresolved" type+=[Type]+ name=ID ";";
+ * 	"unresolved" type+=[Type]+ name=ID ";";
  *
  **/
 

@@ -23,7 +23,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cElementsElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
 		//Model:
-		//  elements+=Element*;
+		//	elements+=Element*;
 		public ParserRule getRule() { return rule; }
 
 		//elements+=Element*
@@ -42,7 +42,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cValueValueTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		
 		//Element:
-		//  name=Variable value=Value?;
+		//	name=Variable value=Value?;
 		public ParserRule getRule() { return rule; }
 
 		//name=Variable value=Value?
@@ -72,19 +72,19 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//Variable returns ecore::EString:
-		//  ID (("."|"-") ID)*;
+		//	ID (("." | "-") ID)*;
 		public ParserRule getRule() { return rule; }
 
-		//ID (("."|"-") ID)*
+		//ID (("." | "-") ID)*
 		public Group getGroup() { return cGroup; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//(("."|"-") ID)*
+		//(("." | "-") ID)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"."|"-"
+		//"." | "-"
 		public Alternatives getAlternatives_1_0() { return cAlternatives_1_0; }
 
 		//"."
@@ -126,7 +126,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//  elements+=Element*;
+	//	elements+=Element*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -136,7 +136,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Element:
-	//  name=Variable value=Value?;
+	//	name=Variable value=Value?;
 	public ElementElements getElementAccess() {
 		return (pElement != null) ? pElement : (pElement = new ElementElements());
 	}
@@ -146,7 +146,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Variable returns ecore::EString:
-	//  ID (("."|"-") ID)*;
+	//	ID (("." | "-") ID)*;
 	public VariableElements getVariableAccess() {
 		return (pVariable != null) ? pVariable : (pVariable = new VariableElements());
 	}
@@ -156,51 +156,50 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal Value:
-	//  ("=" | "+=" | "-=")->"\n";
+	//	("=" | "+=" | "-=")->"\n";
 	public TerminalRule getValueRule() {
 		return (tValue != null) ? tValue : (tValue = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Value"));
 	} 
 
 	//terminal SL_COMMENT:
-	//  "#" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"#" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return (tSL_COMMENT != null) ? tSL_COMMENT : (tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
 	} 
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

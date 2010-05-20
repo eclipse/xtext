@@ -57,11 +57,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	Simple|RuleCalls|OptionalCalls|Recursion|Loop|Expression;
+ * 	Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression;
  *
  **/
 
-// Simple|RuleCalls|OptionalCalls|Recursion|Loop|Expression
+// Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1638,11 +1638,11 @@ protected class Recursion_RecursionSubParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule RecursionSub ****************
  *
  * RecursionSub:
- * 	{RecursionSub} "{" (sub+=RecursionSub|vals+=ID)* "}" semi?=";"?;
+ * 	{RecursionSub} "{" (sub+=RecursionSub | vals+=ID)* "}" semi?=";"?;
  *
  **/
 
-// {RecursionSub} "{" (sub+=RecursionSub|vals+=ID)* "}" semi?=";"?
+// {RecursionSub} "{" (sub+=RecursionSub | vals+=ID)* "}" semi?=";"?
 protected class RecursionSub_Group extends GroupToken {
 	
 	public RecursionSub_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1720,7 +1720,7 @@ protected class RecursionSub_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 
 }
 
-// (sub+=RecursionSub|vals+=ID)*
+// (sub+=RecursionSub | vals+=ID)*
 protected class RecursionSub_Alternatives_2 extends AlternativesToken {
 
 	public RecursionSub_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1890,11 +1890,11 @@ protected class RecursionSub_SemiAssignment_4 extends AssignmentToken  {
 /************ begin Rule Loop ****************
  *
  * Loop:
- * 	"#5" names+=ID+ ("gr" gr+=ID)* (ints+=INT|strings+=STRING)*;
+ * 	"#5" names+=ID+ ("gr" gr+=ID)* (ints+=INT | strings+=STRING)*;
  *
  **/
 
-// "#5" names+=ID+ ("gr" gr+=ID)* (ints+=INT|strings+=STRING)*
+// "#5" names+=ID+ ("gr" gr+=ID)* (ints+=INT | strings+=STRING)*
 protected class Loop_Group extends GroupToken {
 	
 	public Loop_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2061,7 +2061,7 @@ protected class Loop_GrAssignment_2_1 extends AssignmentToken  {
 }
 
 
-// (ints+=INT|strings+=STRING)*
+// (ints+=INT | strings+=STRING)*
 protected class Loop_Alternatives_3 extends AlternativesToken {
 
 	public Loop_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2678,11 +2678,11 @@ protected class Mult_RightAssignment_1_2 extends AssignmentToken  {
 /************ begin Rule Prim ****************
  *
  * Prim returns Expression:
- * 	{Value} val=INT|{Function} func=ID "(" param+=Add ("," param+=Add)* ")"|{Pointer} "=>" target=Prim|"(" Add ")";
+ * 	{Value} val=INT | {Function} func=ID "(" param+=Add ("," param+=Add)* ")" | {Pointer} "=>" target=Prim | "(" Add ")";
  *
  **/
 
-// {Value} val=INT|{Function} func=ID "(" param+=Add ("," param+=Add)* ")"|{Pointer} "=>" target=Prim|"(" Add ")"
+// {Value} val=INT | {Function} func=ID "(" param+=Add ("," param+=Add)* ")" | {Pointer} "=>" target=Prim | "(" Add ")"
 protected class Prim_Alternatives extends AlternativesToken {
 
 	public Prim_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

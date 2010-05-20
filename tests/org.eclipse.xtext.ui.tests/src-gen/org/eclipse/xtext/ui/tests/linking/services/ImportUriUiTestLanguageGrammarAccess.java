@@ -26,7 +26,7 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cTypesTypeParserRuleCall_1_0 = (RuleCall)cTypesAssignment_1.eContents().get(0);
 		
 		//Main:
-		//  imports+=Import* types+=Type*;
+		//	imports+=Import* types+=Type*;
 		public ParserRule getRule() { return rule; }
 
 		//imports+=Import* types+=Type*
@@ -53,7 +53,7 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cImportURISTRINGTerminalRuleCall_1_0 = (RuleCall)cImportURIAssignment_1.eContents().get(0);
 		
 		//Import:
-		//  "import" importURI=STRING;
+		//	"import" importURI=STRING;
 		public ParserRule getRule() { return rule; }
 
 		//"import" importURI=STRING
@@ -81,7 +81,7 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cExtendsTypeIDTerminalRuleCall_3_0_1 = (RuleCall)cExtendsTypeCrossReference_3_0.eContents().get(1);
 		
 		//Type:
-		//  "type" name=ID "extends" extends=[Type];
+		//	"type" name=ID "extends" extends=[Type];
 		public ParserRule getRule() { return rule; }
 
 		//"type" name=ID "extends" extends=[Type]
@@ -136,7 +136,7 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 
 	
 	//Main:
-	//  imports+=Import* types+=Type*;
+	//	imports+=Import* types+=Type*;
 	public MainElements getMainAccess() {
 		return (pMain != null) ? pMain : (pMain = new MainElements());
 	}
@@ -146,7 +146,7 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Import:
-	//  "import" importURI=STRING;
+	//	"import" importURI=STRING;
 	public ImportElements getImportAccess() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
 	}
@@ -156,7 +156,7 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Type:
-	//  "type" name=ID "extends" extends=[Type];
+	//	"type" name=ID "extends" extends=[Type];
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}
@@ -166,45 +166,44 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

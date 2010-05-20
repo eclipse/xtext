@@ -43,7 +43,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Foo ****************
  *
  * Foo:
- *   name=ID nameRefs+=NameRef*;
+ * 	name=ID nameRefs+=NameRef*;
  *
  **/
 
@@ -164,7 +164,7 @@ protected class Foo_NameRefsAssignment_1 extends AssignmentToken  {
 /************ begin Rule NameRef ****************
  *
  * NameRef returns xtext::RuleCall:
- *   rule=[xtext::ParserRule];
+ * 	rule=[xtext::ParserRule];
  *
  **/
 
@@ -212,7 +212,7 @@ protected class NameRef_RuleAssignment extends AssignmentToken  {
 /************ begin Rule MyRule ****************
  *
  * MyRule returns xtext::ParserRule:
- *   name=ID;
+ * 	name=ID;
  *
  **/
 

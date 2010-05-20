@@ -23,7 +23,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cTypesTypeParserRuleCall_0 = (RuleCall)cTypesAssignment.eContents().get(0);
 		
 		//Model:
-		//  types+=Type*;
+		//	types+=Type*;
 		public ParserRule getRule() { return rule; }
 
 		//types+=Type*
@@ -65,14 +65,12 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//Type:
-		//  "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for"
-		//  parentId=[Property] "in" extends=[Type])? "{" properties+=Property*
-		//  unresolvedProxyProperty+=UnresolvedProxyProperty* "}";
+		//	"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])?
+		//	"{" properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for"
-		//parentId=[Property] "in" extends=[Type])? "{" properties+=Property*
-		//unresolvedProxyProperty+=UnresolvedProxyProperty* "}"
+		//"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])? "{"
+		//properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"type"
@@ -168,7 +166,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Property:
-		//  type+=[Type]+ name=ID ";";
+		//	type+=[Type]+ name=ID ";";
 		public ParserRule getRule() { return rule; }
 
 		//type+=[Type]+ name=ID ";"
@@ -205,7 +203,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//UnresolvedProxyProperty:
-		//  "unresolved" type+=[Type]+ name=ID ";";
+		//	"unresolved" type+=[Type]+ name=ID ";";
 		public ParserRule getRule() { return rule; }
 
 		//"unresolved" type+=[Type]+ name=ID ";"
@@ -261,7 +259,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 
 	
 	//Model:
-	//  types+=Type*;
+	//	types+=Type*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -271,9 +269,8 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Type:
-	//  "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for"
-	//  parentId=[Property] "in" extends=[Type])? "{" properties+=Property*
-	//  unresolvedProxyProperty+=UnresolvedProxyProperty* "}";
+	//	"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])?
+	//	"{" properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* "}";
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}
@@ -283,7 +280,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Property:
-	//  type+=[Type]+ name=ID ";";
+	//	type+=[Type]+ name=ID ";";
 	public PropertyElements getPropertyAccess() {
 		return (pProperty != null) ? pProperty : (pProperty = new PropertyElements());
 	}
@@ -293,7 +290,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//UnresolvedProxyProperty:
-	//  "unresolved" type+=[Type]+ name=ID ";";
+	//	"unresolved" type+=[Type]+ name=ID ";";
 	public UnresolvedProxyPropertyElements getUnresolvedProxyPropertyAccess() {
 		return (pUnresolvedProxyProperty != null) ? pUnresolvedProxyProperty : (pUnresolvedProxyProperty = new UnresolvedProxyPropertyElements());
 	}
@@ -303,45 +300,44 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

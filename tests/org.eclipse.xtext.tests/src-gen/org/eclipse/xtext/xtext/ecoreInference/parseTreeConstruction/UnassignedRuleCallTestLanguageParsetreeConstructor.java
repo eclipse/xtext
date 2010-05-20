@@ -42,7 +42,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   "model" INT+ modelFeatures=ModelFeatures;
+ * 	"model" INT+ modelFeatures=ModelFeatures;
  *
  **/
 
@@ -171,7 +171,7 @@ protected class Model_ModelFeaturesAssignment_2 extends AssignmentToken  {
 /************ begin Rule ModelFeatures ****************
  *
  * ModelFeatures:
- *   "feature" name=ID DataTypeRule ";";
+ * 	"feature" name=ID DataTypeRule ";";
  *
  **/
 

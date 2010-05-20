@@ -41,13 +41,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   "1" value="%"|"2" value="%"|"3" value="\\%"|"4" value="\\%"|"5" value="%%"|
- *   "6" value="%%";
+ * 	"1" value="%" | "2" value="%" | "3" value="\\%" | "4" value="\\%" | "5" value="%%" | "6" value="%%";
  *
  **/
 
-// "1" value="%"|"2" value="%"|"3" value="\\%"|"4" value="\\%"|"5" value="%%"|"6"
-// value="%%"
+// "1" value="%" | "2" value="%" | "3" value="\\%" | "4" value="\\%" | "5" value="%%" | "6" value="%%"
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

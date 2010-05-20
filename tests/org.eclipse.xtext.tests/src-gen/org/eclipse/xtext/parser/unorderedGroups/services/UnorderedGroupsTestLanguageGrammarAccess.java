@@ -159,48 +159,37 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final RuleCall cNestedModelNestedModelParserRuleCall_1_16_1_0 = (RuleCall)cNestedModelAssignment_1_16_1.eContents().get(0);
 		
 		//Model:
-		//  {Model} ("1" (first?="a" & second?="b")|"2" (first?="a" & second?="b" &
-		//  third?="c" & forth?="d")|"3" (first?="a"? & second?="b"?)|"4" (first?="a" &
-		//  second?="b"?)|"5" (first?="a"? & second?="b")|"6" (firstAsList+="a"+ &
-		//  secondAsList+="b"*)|"7" (firstAsList+="a"* & secondAsList+="b"+)|"8" ("a" "b"
-		//  first?="c" & "a" "b" second?="d")|"9" (firstAsList+="a" & secondAsList+="b")+
-		//  |"10" (firstAsList+="a" & secondAsList+="b")*|"11" (first?="a" & second?="b")
-		//  ?|"12" (firstAsList+="a" & secondAsList+="b") (firstAsList+="a" &
-		//  secondAsList+="b")|"13" (firstAsList+="a" & secondAsList+="b")?
-		//  firstAsList+="a" secondAsList+="b"|"14" ((firstAsList+="a" &
-		//  secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))+|"datatypes"
-		//  value=UnorderedDatatype|"serialization" serialized=UnorderedSerialization|
-		//  "bug302585" nestedModel+=NestedModel*);
+		//	{Model} ("1" (first?="a" & second?="b") | "2" (first?="a" & second?="b" & third?="c" & forth?="d") | "3" (first?="a"?
+		//	& second?="b"?) | "4" (first?="a" & second?="b"?) | "5" (first?="a"? & second?="b") | "6" (firstAsList+="a"+ &
+		//	secondAsList+="b"*) | "7" (firstAsList+="a"* & secondAsList+="b"+) | "8" ("a" "b" first?="c" & "a" "b" second?="d") |
+		//	"9" (firstAsList+="a" & secondAsList+="b")+ | "10" (firstAsList+="a" & secondAsList+="b")* | "11" (first?="a" &
+		//	second?="b")? | "12" (firstAsList+="a" & secondAsList+="b") (firstAsList+="a" & secondAsList+="b") | "13"
+		//	(firstAsList+="a" & secondAsList+="b")? firstAsList+="a" secondAsList+="b" | "14" ((firstAsList+="a" &
+		//	secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))+ | "datatypes" value=UnorderedDatatype | "serialization"
+		//	serialized=UnorderedSerialization | "bug302585" nestedModel+=NestedModel*);
 		public ParserRule getRule() { return rule; }
 
-		//{Model} ("1" (first?="a" & second?="b")|"2" (first?="a" & second?="b" &
-		//third?="c" & forth?="d")|"3" (first?="a"? & second?="b"?)|"4" (first?="a" &
-		//second?="b"?)|"5" (first?="a"? & second?="b")|"6" (firstAsList+="a"+ &
-		//secondAsList+="b"*)|"7" (firstAsList+="a"* & secondAsList+="b"+)|"8" ("a" "b"
-		//first?="c" & "a" "b" second?="d")|"9" (firstAsList+="a" & secondAsList+="b")+|
-		//"10" (firstAsList+="a" & secondAsList+="b")*|"11" (first?="a" & second?="b")?|
-		//"12" (firstAsList+="a" & secondAsList+="b") (firstAsList+="a" &
-		//secondAsList+="b")|"13" (firstAsList+="a" & secondAsList+="b")?
-		//firstAsList+="a" secondAsList+="b"|"14" ((firstAsList+="a" & secondAsList+="b")
-		//& (thirdAsList+="c" & forthAsList+="d"))+|"datatypes" value=UnorderedDatatype|
-		//"serialization" serialized=UnorderedSerialization|"bug302585"
-		//nestedModel+=NestedModel*)
+		//{Model} ("1" (first?="a" & second?="b") | "2" (first?="a" & second?="b" & third?="c" & forth?="d") | "3" (first?="a"? &
+		//second?="b"?) | "4" (first?="a" & second?="b"?) | "5" (first?="a"? & second?="b") | "6" (firstAsList+="a"+ &
+		//secondAsList+="b"*) | "7" (firstAsList+="a"* & secondAsList+="b"+) | "8" ("a" "b" first?="c" & "a" "b" second?="d") |
+		//"9" (firstAsList+="a" & secondAsList+="b")+ | "10" (firstAsList+="a" & secondAsList+="b")* | "11" (first?="a" &
+		//second?="b")? | "12" (firstAsList+="a" & secondAsList+="b") (firstAsList+="a" & secondAsList+="b") | "13"
+		//(firstAsList+="a" & secondAsList+="b")? firstAsList+="a" secondAsList+="b" | "14" ((firstAsList+="a" &
+		//secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))+ | "datatypes" value=UnorderedDatatype | "serialization"
+		//serialized=UnorderedSerialization | "bug302585" nestedModel+=NestedModel*)
 		public Group getGroup() { return cGroup; }
 
 		//{Model}
 		public Action getModelAction_0() { return cModelAction_0; }
 
-		//"1" (first?="a" & second?="b")|"2" (first?="a" & second?="b" & third?="c" &
-		//forth?="d")|"3" (first?="a"? & second?="b"?)|"4" (first?="a" & second?="b"?)|
-		//"5" (first?="a"? & second?="b")|"6" (firstAsList+="a"+ & secondAsList+="b"*)|
-		//"7" (firstAsList+="a"* & secondAsList+="b"+)|"8" ("a" "b" first?="c" & "a" "b"
-		//second?="d")|"9" (firstAsList+="a" & secondAsList+="b")+|"10" (firstAsList+="a"
-		//& secondAsList+="b")*|"11" (first?="a" & second?="b")?|"12" (firstAsList+="a" &
-		//secondAsList+="b") (firstAsList+="a" & secondAsList+="b")|"13" (
-		//firstAsList+="a" & secondAsList+="b")? firstAsList+="a" secondAsList+="b"|"14"
-		//((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d")
-		//)+|"datatypes" value=UnorderedDatatype|"serialization"
-		//serialized=UnorderedSerialization|"bug302585" nestedModel+=NestedModel*
+		//"1" (first?="a" & second?="b") | "2" (first?="a" & second?="b" & third?="c" & forth?="d") | "3" (first?="a"? &
+		//second?="b"?) | "4" (first?="a" & second?="b"?) | "5" (first?="a"? & second?="b") | "6" (firstAsList+="a"+ &
+		//secondAsList+="b"*) | "7" (firstAsList+="a"* & secondAsList+="b"+) | "8" ("a" "b" first?="c" & "a" "b" second?="d") |
+		//"9" (firstAsList+="a" & secondAsList+="b")+ | "10" (firstAsList+="a" & secondAsList+="b")* | "11" (first?="a" &
+		//second?="b")? | "12" (firstAsList+="a" & secondAsList+="b") (firstAsList+="a" & secondAsList+="b") | "13"
+		//(firstAsList+="a" & secondAsList+="b")? firstAsList+="a" secondAsList+="b" | "14" ((firstAsList+="a" &
+		//secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))+ | "datatypes" value=UnorderedDatatype | "serialization"
+		//serialized=UnorderedSerialization | "bug302585" nestedModel+=NestedModel*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"1" (first?="a" & second?="b")
@@ -464,8 +453,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//"b"
 		public Keyword getSecondBKeyword_1_10_1_1_0() { return cSecondBKeyword_1_10_1_1_0; }
 
-		//"12" (firstAsList+="a" & secondAsList+="b") (firstAsList+="a" &
-		//secondAsList+="b")
+		//"12" (firstAsList+="a" & secondAsList+="b") (firstAsList+="a" & secondAsList+="b")
 		public Group getGroup_1_11() { return cGroup_1_11; }
 
 		//"12"
@@ -534,15 +522,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//"b"
 		public Keyword getSecondAsListBKeyword_1_12_3_0() { return cSecondAsListBKeyword_1_12_3_0; }
 
-		//"14" ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" &
-		//forthAsList+="d"))+
+		//"14" ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))+
 		public Group getGroup_1_13() { return cGroup_1_13; }
 
 		//"14"
 		public Keyword getDigitOneDigitFourKeyword_1_13_0() { return cDigitOneDigitFourKeyword_1_13_0; }
 
-		//((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))
-		//+
+		//((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))+
 		public UnorderedGroup getUnorderedGroup_1_13_1() { return cUnorderedGroup_1_13_1; }
 
 		//firstAsList+="a" & secondAsList+="b"
@@ -624,7 +610,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Keyword cNestedKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//NestedModel:
-		//  {NestedModel} (first?="a" & second?="b")? "nested";
+		//	{NestedModel} (first?="a" & second?="b")? "nested";
 		public ParserRule getRule() { return rule; }
 
 		//{NestedModel} (first?="a" & second?="b")? "nested"
@@ -744,16 +730,14 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Keyword cDKeyword_13_1_1_1 = (Keyword)cUnorderedGroup_13_1_1.eContents().get(1);
 		
 		//UnorderedDatatype returns ecore::EString:
-		//  "1" ("a" & "b")|"2" ("a" & "b" & "c" & "d")|"3" ("a"? & "b"?)|"4" ("a" & "b"?
-		//  )|"5" ("a"? & "b")|"6" ("a"+ & "b"*)|"7" ("a"* & "b"+)|"8" ("a" "b" "c" & "a"
-		//  "b" "d")|"9" ("a" & "b")+|"10" ("a" & "b")*|"11" ("a" & "b")?|"12" ("a" & "b"
-		//  ) ("a" & "b")|"13" ("a" & "b")? "a" "b"|"14" (("a" & "b") & ("c" & "d"))+;
+		//	"1" ("a" & "b") | "2" ("a" & "b" & "c" & "d") | "3" ("a"? & "b"?) | "4" ("a" & "b"?) | "5" ("a"? & "b") | "6" ("a"+ &
+		//	"b"*) | "7" ("a"* & "b"+) | "8" ("a" "b" "c" & "a" "b" "d") | "9" ("a" & "b")+ | "10" ("a" & "b")* | "11" ("a" & "b")?
+		//	| "12" ("a" & "b") ("a" & "b") | "13" ("a" & "b")? "a" "b" | "14" (("a" & "b") & ("c" & "d"))+;
 		public ParserRule getRule() { return rule; }
 
-		//"1" ("a" & "b")|"2" ("a" & "b" & "c" & "d")|"3" ("a"? & "b"?)|"4" ("a" & "b"?)|
-		//"5" ("a"? & "b")|"6" ("a"+ & "b"*)|"7" ("a"* & "b"+)|"8" ("a" "b" "c" & "a" "b"
-		//"d")|"9" ("a" & "b")+|"10" ("a" & "b")*|"11" ("a" & "b")?|"12" ("a" & "b") ("a"
-		//& "b")|"13" ("a" & "b")? "a" "b"|"14" (("a" & "b") & ("c" & "d"))+
+		//"1" ("a" & "b") | "2" ("a" & "b" & "c" & "d") | "3" ("a"? & "b"?) | "4" ("a" & "b"?) | "5" ("a"? & "b") | "6" ("a"+ &
+		//"b"*) | "7" ("a"* & "b"+) | "8" ("a" "b" "c" & "a" "b" "d") | "9" ("a" & "b")+ | "10" ("a" & "b")* | "11" ("a" & "b")?
+		//| "12" ("a" & "b") ("a" & "b") | "13" ("a" & "b")? "a" "b" | "14" (("a" & "b") & ("c" & "d"))+
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"1" ("a" & "b")
@@ -1050,21 +1034,19 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Keyword cSecondBKeyword_1_2_1_1_0 = (Keyword)cSecondAssignment_1_2_1_1.eContents().get(0);
 		
 		//UnorderedSerialization:
-		//  {UnorderedSerialization} ("1" first?="a"? & second?="b"? & third?="c"? &
-		//  forth?="d"?|"2" (firstAsList+="a" & secondAsList+="b")*|"3" (firstAsList+="a"
-		//  + & second?="b")*);
+		//	{UnorderedSerialization} ("1" first?="a"? & second?="b"? & third?="c"? & forth?="d"? | "2" (firstAsList+="a" &
+		//	secondAsList+="b")* | "3" (firstAsList+="a"+ & second?="b")*);
 		public ParserRule getRule() { return rule; }
 
-		//{UnorderedSerialization} ("1" first?="a"? & second?="b"? & third?="c"? &
-		//forth?="d"?|"2" (firstAsList+="a" & secondAsList+="b")*|"3" (firstAsList+="a"+
-		//& second?="b")*)
+		//{UnorderedSerialization} ("1" first?="a"? & second?="b"? & third?="c"? & forth?="d"? | "2" (firstAsList+="a" &
+		//secondAsList+="b")* | "3" (firstAsList+="a"+ & second?="b")*)
 		public Group getGroup() { return cGroup; }
 
 		//{UnorderedSerialization}
 		public Action getUnorderedSerializationAction_0() { return cUnorderedSerializationAction_0; }
 
-		//"1" first?="a"? & second?="b"? & third?="c"? & forth?="d"?|"2" (firstAsList+="a"
-		//& secondAsList+="b")*|"3" (firstAsList+="a"+ & second?="b")*
+		//"1" first?="a"? & second?="b"? & third?="c"? & forth?="d"? | "2" (firstAsList+="a" & secondAsList+="b")* | "3"
+		//(firstAsList+="a"+ & second?="b")*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"1" first?="a"? & second?="b"? & third?="c"? & forth?="d"?
@@ -1171,18 +1153,14 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 
 	
 	//Model:
-	//  {Model} ("1" (first?="a" & second?="b")|"2" (first?="a" & second?="b" &
-	//  third?="c" & forth?="d")|"3" (first?="a"? & second?="b"?)|"4" (first?="a" &
-	//  second?="b"?)|"5" (first?="a"? & second?="b")|"6" (firstAsList+="a"+ &
-	//  secondAsList+="b"*)|"7" (firstAsList+="a"* & secondAsList+="b"+)|"8" ("a" "b"
-	//  first?="c" & "a" "b" second?="d")|"9" (firstAsList+="a" & secondAsList+="b")+
-	//  |"10" (firstAsList+="a" & secondAsList+="b")*|"11" (first?="a" & second?="b")
-	//  ?|"12" (firstAsList+="a" & secondAsList+="b") (firstAsList+="a" &
-	//  secondAsList+="b")|"13" (firstAsList+="a" & secondAsList+="b")?
-	//  firstAsList+="a" secondAsList+="b"|"14" ((firstAsList+="a" &
-	//  secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))+|"datatypes"
-	//  value=UnorderedDatatype|"serialization" serialized=UnorderedSerialization|
-	//  "bug302585" nestedModel+=NestedModel*);
+	//	{Model} ("1" (first?="a" & second?="b") | "2" (first?="a" & second?="b" & third?="c" & forth?="d") | "3" (first?="a"?
+	//	& second?="b"?) | "4" (first?="a" & second?="b"?) | "5" (first?="a"? & second?="b") | "6" (firstAsList+="a"+ &
+	//	secondAsList+="b"*) | "7" (firstAsList+="a"* & secondAsList+="b"+) | "8" ("a" "b" first?="c" & "a" "b" second?="d") |
+	//	"9" (firstAsList+="a" & secondAsList+="b")+ | "10" (firstAsList+="a" & secondAsList+="b")* | "11" (first?="a" &
+	//	second?="b")? | "12" (firstAsList+="a" & secondAsList+="b") (firstAsList+="a" & secondAsList+="b") | "13"
+	//	(firstAsList+="a" & secondAsList+="b")? firstAsList+="a" secondAsList+="b" | "14" ((firstAsList+="a" &
+	//	secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))+ | "datatypes" value=UnorderedDatatype | "serialization"
+	//	serialized=UnorderedSerialization | "bug302585" nestedModel+=NestedModel*);
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -1192,7 +1170,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//NestedModel:
-	//  {NestedModel} (first?="a" & second?="b")? "nested";
+	//	{NestedModel} (first?="a" & second?="b")? "nested";
 	public NestedModelElements getNestedModelAccess() {
 		return (pNestedModel != null) ? pNestedModel : (pNestedModel = new NestedModelElements());
 	}
@@ -1202,10 +1180,9 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//UnorderedDatatype returns ecore::EString:
-	//  "1" ("a" & "b")|"2" ("a" & "b" & "c" & "d")|"3" ("a"? & "b"?)|"4" ("a" & "b"?
-	//  )|"5" ("a"? & "b")|"6" ("a"+ & "b"*)|"7" ("a"* & "b"+)|"8" ("a" "b" "c" & "a"
-	//  "b" "d")|"9" ("a" & "b")+|"10" ("a" & "b")*|"11" ("a" & "b")?|"12" ("a" & "b"
-	//  ) ("a" & "b")|"13" ("a" & "b")? "a" "b"|"14" (("a" & "b") & ("c" & "d"))+;
+	//	"1" ("a" & "b") | "2" ("a" & "b" & "c" & "d") | "3" ("a"? & "b"?) | "4" ("a" & "b"?) | "5" ("a"? & "b") | "6" ("a"+ &
+	//	"b"*) | "7" ("a"* & "b"+) | "8" ("a" "b" "c" & "a" "b" "d") | "9" ("a" & "b")+ | "10" ("a" & "b")* | "11" ("a" & "b")?
+	//	| "12" ("a" & "b") ("a" & "b") | "13" ("a" & "b")? "a" "b" | "14" (("a" & "b") & ("c" & "d"))+;
 	public UnorderedDatatypeElements getUnorderedDatatypeAccess() {
 		return (pUnorderedDatatype != null) ? pUnorderedDatatype : (pUnorderedDatatype = new UnorderedDatatypeElements());
 	}
@@ -1215,9 +1192,8 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//UnorderedSerialization:
-	//  {UnorderedSerialization} ("1" first?="a"? & second?="b"? & third?="c"? &
-	//  forth?="d"?|"2" (firstAsList+="a" & secondAsList+="b")*|"3" (firstAsList+="a"
-	//  + & second?="b")*);
+	//	{UnorderedSerialization} ("1" first?="a"? & second?="b"? & third?="c"? & forth?="d"? | "2" (firstAsList+="a" &
+	//	secondAsList+="b")* | "3" (firstAsList+="a"+ & second?="b")*);
 	public UnorderedSerializationElements getUnorderedSerializationAccess() {
 		return (pUnorderedSerialization != null) ? pUnorderedSerialization : (pUnorderedSerialization = new UnorderedSerializationElements());
 	}
@@ -1227,45 +1203,44 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

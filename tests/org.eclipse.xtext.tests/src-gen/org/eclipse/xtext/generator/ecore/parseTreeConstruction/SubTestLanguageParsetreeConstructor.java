@@ -43,7 +43,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule SubMain ****************
  *
  * SubMain:
- *   "{" superMains+=SuperMain "}" another=AnotherSuperMain?;
+ * 	"{" superMains+=SuperMain "}" another=AnotherSuperMain?;
  *
  **/
 
@@ -219,7 +219,7 @@ protected class SubMain_AnotherAssignment_3 extends AssignmentToken  {
 /************ begin Rule AnotherSuperMain ****************
  *
  * AnotherSuperMain:
- *   "ups" name=ID;
+ * 	"ups" name=ID;
  *
  **/
 
@@ -314,7 +314,7 @@ protected class AnotherSuperMain_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule SuperMain ****************
  *
  * SuperMain:
- *   "super" name=ID;
+ * 	"super" name=ID;
  *
  **/
 

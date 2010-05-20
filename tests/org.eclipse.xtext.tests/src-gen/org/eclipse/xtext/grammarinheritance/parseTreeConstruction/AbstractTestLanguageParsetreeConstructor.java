@@ -46,7 +46,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule InheritedParserRule ****************
  *
  * InheritedParserRule returns mm::AType:
- *   "element" name=ID;
+ * 	"element" name=ID;
  *
  **/
 
@@ -141,7 +141,7 @@ protected class InheritedParserRule_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule AbstractCallOverridenParserRule ****************
  *
  * AbstractCallOverridenParserRule returns mm::AModel:
- *   "overridemodel" elements+=OverridableParserRule*;
+ * 	"overridemodel" elements+=OverridableParserRule*;
  *
  **/
 
@@ -250,7 +250,7 @@ protected class AbstractCallOverridenParserRule_ElementsAssignment_1 extends Ass
 /************ begin Rule OverridableParserRule ****************
  *
  * OverridableParserRule returns mm::AType:
- *   "element" name=ID;
+ * 	"element" name=ID;
  *
  **/
 
@@ -345,7 +345,7 @@ protected class OverridableParserRule_NameAssignment_1 extends AssignmentToken  
 /************ begin Rule OverridableParserRule2 ****************
  *
  * OverridableParserRule2 returns mm::AType:
- *   "other element" name=STRING;
+ * 	"other element" name=STRING;
  *
  **/
 
@@ -440,7 +440,7 @@ protected class OverridableParserRule2_NameAssignment_1 extends AssignmentToken 
 /************ begin Rule AbstractCallExtendedParserRule ****************
  *
  * AbstractCallExtendedParserRule returns mm::AModel:
- *   "extendedmodel" elements+=ExtendableParserRule*;
+ * 	"extendedmodel" elements+=ExtendableParserRule*;
  *
  **/
 
@@ -549,7 +549,7 @@ protected class AbstractCallExtendedParserRule_ElementsAssignment_1 extends Assi
 /************ begin Rule ExtendableParserRule ****************
  *
  * ExtendableParserRule returns mm::AType:
- *   "element" name=ID;
+ * 	"element" name=ID;
  *
  **/
 

@@ -23,7 +23,7 @@ public class TreeTestLanguageGrammarAccess extends AbstractGrammarElementFinder 
 		private final RuleCall cChildrenNodeParserRuleCall_0 = (RuleCall)cChildrenAssignment.eContents().get(0);
 		
 		//Model:
-		//  children+=Node*;
+		//	children+=Node*;
 		public ParserRule getRule() { return rule; }
 
 		//children+=Node*
@@ -48,7 +48,7 @@ public class TreeTestLanguageGrammarAccess extends AbstractGrammarElementFinder 
 		private final Keyword cRightCurlyBracketSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//Node:
-		//  name=ID "(" attrib=STRING ")" "{" children+=Node* "};";
+		//	name=ID "(" attrib=STRING ")" "{" children+=Node* "};";
 		public ParserRule getRule() { return rule; }
 
 		//name=ID "(" attrib=STRING ")" "{" children+=Node* "};"
@@ -111,7 +111,7 @@ public class TreeTestLanguageGrammarAccess extends AbstractGrammarElementFinder 
 
 	
 	//Model:
-	//  children+=Node*;
+	//	children+=Node*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -121,7 +121,7 @@ public class TreeTestLanguageGrammarAccess extends AbstractGrammarElementFinder 
 	}
 
 	//Node:
-	//  name=ID "(" attrib=STRING ")" "{" children+=Node* "};";
+	//	name=ID "(" attrib=STRING ")" "{" children+=Node* "};";
 	public NodeElements getNodeAccess() {
 		return (pNode != null) ? pNode : (pNode = new NodeElements());
 	}
@@ -131,45 +131,44 @@ public class TreeTestLanguageGrammarAccess extends AbstractGrammarElementFinder 
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

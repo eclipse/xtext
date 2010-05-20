@@ -26,7 +26,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cModelFeaturesModelFeaturesParserRuleCall_2_0 = (RuleCall)cModelFeaturesAssignment_2.eContents().get(0);
 		
 		//Model:
-		//  "model" INT+ modelFeatures=ModelFeatures;
+		//	"model" INT+ modelFeatures=ModelFeatures;
 		public ParserRule getRule() { return rule; }
 
 		//"model" INT+ modelFeatures=ModelFeatures
@@ -55,7 +55,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//ModelFeatures:
-		//  "feature" name=ID DataTypeRule ";";
+		//	"feature" name=ID DataTypeRule ";";
 		public ParserRule getRule() { return rule; }
 
 		//"feature" name=ID DataTypeRule ";"
@@ -86,7 +86,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cSTRINGTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//DataTypeRule returns ecore::EString:
-		//  INT "keyword" INT STRING?;
+		//	INT "keyword" INT STRING?;
 		public ParserRule getRule() { return rule; }
 
 		//INT "keyword" INT STRING?
@@ -132,7 +132,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 
 	
 	//Model:
-	//  "model" INT+ modelFeatures=ModelFeatures;
+	//	"model" INT+ modelFeatures=ModelFeatures;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -142,7 +142,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//ModelFeatures:
-	//  "feature" name=ID DataTypeRule ";";
+	//	"feature" name=ID DataTypeRule ";";
 	public ModelFeaturesElements getModelFeaturesAccess() {
 		return (pModelFeatures != null) ? pModelFeatures : (pModelFeatures = new ModelFeaturesElements());
 	}
@@ -152,7 +152,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//DataTypeRule returns ecore::EString:
-	//  INT "keyword" INT STRING?;
+	//	INT "keyword" INT STRING?;
 	public DataTypeRuleElements getDataTypeRuleAccess() {
 		return (pDataTypeRule != null) ? pDataTypeRule : (pDataTypeRule = new DataTypeRuleElements());
 	}
@@ -162,45 +162,44 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

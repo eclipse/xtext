@@ -35,12 +35,12 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cAnyValueANY_OTHERTerminalRuleCall_6_0 = (RuleCall)cAnyValueAssignment_6.eContents().get(0);
 		
 		//Model:
-		//  idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|
-		//  slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER;
+		//	idValue=ID | intValue=INT | stringValue=STRING | mlCommentValue=ML_COMMENT | slCommentValue=SL_COMMENT | wsValue=WS |
+		//	anyValue=ANY_OTHER;
 		public ParserRule getRule() { return rule; }
 
-		//idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|
-		//slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER
+		//idValue=ID | intValue=INT | stringValue=STRING | mlCommentValue=ML_COMMENT | slCommentValue=SL_COMMENT | wsValue=WS |
+		//anyValue=ANY_OTHER
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//idValue=ID
@@ -110,8 +110,8 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 
 	
 	//Model:
-	//  idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|
-	//  slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER;
+	//	idValue=ID | intValue=INT | stringValue=STRING | mlCommentValue=ML_COMMENT | slCommentValue=SL_COMMENT | wsValue=WS |
+	//	anyValue=ANY_OTHER;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -121,45 +121,44 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
 	} 
 
 	//terminal INT:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return (tINT != null) ? tINT : (tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return (tSTRING != null) ? tSTRING : (tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return (tML_COMMENT != null) ? tML_COMMENT : (tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return (tSL_COMMENT != null) ? tSL_COMMENT : (tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return (tANY_OTHER != null) ? tANY_OTHER : (tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
 	} 

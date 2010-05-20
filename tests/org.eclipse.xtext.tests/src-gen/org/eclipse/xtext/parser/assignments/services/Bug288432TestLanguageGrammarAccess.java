@@ -39,12 +39,11 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cEndBodyKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Body:
-		//  ("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=(
-		//  Content | ParameterRef ) foo+=Foo+ "end body";
+		//	("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=(Content | ParameterRef) foo+=Foo+
+		//	"end body";
 		public ParserRule getRule() { return rule; }
 
-		//("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=(
-		//Content | ParameterRef ) foo+=Foo+ "end body"
+		//("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=(Content | ParameterRef) foo+=Foo+ "end body"
 		public Group getGroup() { return cGroup; }
 
 		//("(" parameter+=Parameter ("," parameter+=Parameter)* ")")?
@@ -77,10 +76,10 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"body"
 		public Keyword getBodyKeyword_1() { return cBodyKeyword_1; }
 
-		//content=( Content | ParameterRef )
+		//content=(Content | ParameterRef)
 		public Assignment getContentAssignment_2() { return cContentAssignment_2; }
 
-		//Content|ParameterRef
+		//Content | ParameterRef
 		public Alternatives getContentAlternatives_2_0() { return cContentAlternatives_2_0; }
 
 		//Content
@@ -105,7 +104,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cFooValueSTRINGTerminalRuleCall_0 = (RuleCall)cFooValueAssignment.eContents().get(0);
 		
 		//Foo:
-		//  fooValue=STRING;
+		//	fooValue=STRING;
 		public ParserRule getRule() { return rule; }
 
 		//fooValue=STRING
@@ -123,7 +122,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cEndContentKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Content:
-		//  "content" MyElement "end content";
+		//	"content" MyElement "end content";
 		public ParserRule getRule() { return rule; }
 
 		//"content" MyElement "end content"
@@ -149,19 +148,19 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cBarParameterRefParserRuleCall_1_0_1 = (RuleCall)cBarAlternatives_1_0.eContents().get(1);
 		
 		//MyElement:
-		//  "element" bar=( MyInt | ParameterRef );
+		//	"element" bar=(MyInt | ParameterRef);
 		public ParserRule getRule() { return rule; }
 
-		//"element" bar=( MyInt | ParameterRef )
+		//"element" bar=(MyInt | ParameterRef)
 		public Group getGroup() { return cGroup; }
 
 		//"element"
 		public Keyword getElementKeyword_0() { return cElementKeyword_0; }
 
-		//bar=( MyInt | ParameterRef )
+		//bar=(MyInt | ParameterRef)
 		public Assignment getBarAssignment_1() { return cBarAssignment_1; }
 
-		//MyInt|ParameterRef
+		//MyInt | ParameterRef
 		public Alternatives getBarAlternatives_1_0() { return cBarAlternatives_1_0; }
 
 		//MyInt
@@ -179,10 +178,10 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cParameterRefParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//ParameterObject:
-		//  MyInt|Content|ParameterRef;
+		//	MyInt | Content | ParameterRef;
 		public ParserRule getRule() { return rule; }
 
-		//MyInt|Content|ParameterRef
+		//MyInt | Content | ParameterRef
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//MyInt
@@ -205,7 +204,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cValueParameterObjectIDTerminalRuleCall_1_0_1 = (RuleCall)cValueParameterObjectCrossReference_1_0.eContents().get(1);
 		
 		//Parameter:
-		//  name=ID value=[ParameterObject]?;
+		//	name=ID value=[ParameterObject]?;
 		public ParserRule getRule() { return rule; }
 
 		//name=ID value=[ParameterObject]?
@@ -234,7 +233,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cParameterParameterIDTerminalRuleCall_0_1 = (RuleCall)cParameterParameterCrossReference_0.eContents().get(1);
 		
 		//ParameterRef:
-		//  parameter=[Parameter];
+		//	parameter=[Parameter];
 		public ParserRule getRule() { return rule; }
 
 		//parameter=[Parameter]
@@ -253,7 +252,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cIntINTTerminalRuleCall_0 = (RuleCall)cIntAssignment.eContents().get(0);
 		
 		//MyInt:
-		//  int=INT;
+		//	int=INT;
 		public ParserRule getRule() { return rule; }
 
 		//int=INT
@@ -295,8 +294,8 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Body:
-	//  ("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=(
-	//  Content | ParameterRef ) foo+=Foo+ "end body";
+	//	("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=(Content | ParameterRef) foo+=Foo+
+	//	"end body";
 	public BodyElements getBodyAccess() {
 		return (pBody != null) ? pBody : (pBody = new BodyElements());
 	}
@@ -306,7 +305,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Foo:
-	//  fooValue=STRING;
+	//	fooValue=STRING;
 	public FooElements getFooAccess() {
 		return (pFoo != null) ? pFoo : (pFoo = new FooElements());
 	}
@@ -316,7 +315,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Content:
-	//  "content" MyElement "end content";
+	//	"content" MyElement "end content";
 	public ContentElements getContentAccess() {
 		return (pContent != null) ? pContent : (pContent = new ContentElements());
 	}
@@ -326,7 +325,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//MyElement:
-	//  "element" bar=( MyInt | ParameterRef );
+	//	"element" bar=(MyInt | ParameterRef);
 	public MyElementElements getMyElementAccess() {
 		return (pMyElement != null) ? pMyElement : (pMyElement = new MyElementElements());
 	}
@@ -336,7 +335,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//ParameterObject:
-	//  MyInt|Content|ParameterRef;
+	//	MyInt | Content | ParameterRef;
 	public ParameterObjectElements getParameterObjectAccess() {
 		return (pParameterObject != null) ? pParameterObject : (pParameterObject = new ParameterObjectElements());
 	}
@@ -346,7 +345,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Parameter:
-	//  name=ID value=[ParameterObject]?;
+	//	name=ID value=[ParameterObject]?;
 	public ParameterElements getParameterAccess() {
 		return (pParameter != null) ? pParameter : (pParameter = new ParameterElements());
 	}
@@ -356,7 +355,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//ParameterRef:
-	//  parameter=[Parameter];
+	//	parameter=[Parameter];
 	public ParameterRefElements getParameterRefAccess() {
 		return (pParameterRef != null) ? pParameterRef : (pParameterRef = new ParameterRefElements());
 	}
@@ -366,7 +365,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//MyInt:
-	//  int=INT;
+	//	int=INT;
 	public MyIntElements getMyIntAccess() {
 		return (pMyInt != null) ? pMyInt : (pMyInt = new MyIntElements());
 	}
@@ -376,45 +375,44 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

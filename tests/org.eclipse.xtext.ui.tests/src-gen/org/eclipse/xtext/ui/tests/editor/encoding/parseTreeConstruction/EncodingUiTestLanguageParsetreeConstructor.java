@@ -42,7 +42,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   words+=Word*;
+ * 	words+=Word*;
  *
  **/
 
@@ -98,7 +98,7 @@ protected class Model_WordsAssignment extends AssignmentToken  {
 /************ begin Rule Word ****************
  *
  * Word:
- *   value=LEXEME;
+ * 	value=LEXEME;
  *
  **/
 

@@ -41,13 +41,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\"|fifth?="\"a\""|
- *   sixth?="\'b\'"|seventh?="\'c\'"|eighth?="\"d\"";
+ * 	first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?="\'b\'" |
+ * 	seventh?="\'c\'" | eighth?="\"d\"";
  *
  **/
 
-// first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\"|fifth?="\"a\""|
-// sixth?="\'b\'"|seventh?="\'c\'"|eighth?="\"d\""
+// first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?="\'b\'" | seventh?="\'c\'"
+// | eighth?="\"d\""
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

@@ -41,15 +41,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule State ****************
  *
  * State:
- *   (isInitial?="init"|isFinal?="final"|stateKind=StateType|isInitial?="init"
- *   stateKind=StateType|isInitial?="init" stateKind=StateType isFinal?="final")?
- *   "state"? stateName=ID? label=STRING?;
+ * 	(isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType |
+ * 	isInitial?="init" stateKind=StateType isFinal?="final")? "state"? stateName=ID? label=STRING?;
  *
  **/
 
-// (isInitial?="init"|isFinal?="final"|stateKind=StateType|isInitial?="init"
-// stateKind=StateType|isInitial?="init" stateKind=StateType isFinal?="final")?
-// "state"? stateName=ID? label=STRING?
+// (isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType | isInitial?="init"
+// stateKind=StateType isFinal?="final")? "state"? stateName=ID? label=STRING?
 protected class State_Group extends GroupToken {
 	
 	public State_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -80,8 +78,8 @@ protected class State_Group extends GroupToken {
 
 }
 
-// (isInitial?="init"|isFinal?="final"|stateKind=StateType|isInitial?="init"
-// stateKind=StateType|isInitial?="init" stateKind=StateType isFinal?="final")?
+// (isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType | isInitial?="init"
+// stateKind=StateType isFinal?="final")?
 protected class State_Alternatives_0 extends AlternativesToken {
 
 	public State_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

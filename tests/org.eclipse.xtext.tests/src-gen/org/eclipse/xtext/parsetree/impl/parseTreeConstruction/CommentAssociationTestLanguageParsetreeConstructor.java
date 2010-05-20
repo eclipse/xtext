@@ -42,7 +42,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   elements+=Element*;
+ * 	elements+=Element*;
  *
  **/
 
@@ -98,7 +98,7 @@ protected class Model_ElementsAssignment extends AssignmentToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- *   "element" name=ID ({Element.child=current} "parent" name=ID)?;
+ * 	"element" name=ID ({Element.child=current} "parent" name=ID)?;
  *
  **/
 
@@ -125,7 +125,7 @@ protected class Element_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getElementAccess().getElementChildAction_2_0().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getElementRule().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}

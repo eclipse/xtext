@@ -51,7 +51,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Program ****************
  *
  * Program:
- *   {Program} (LT* directives+=ProgramDirective)* LT*;
+ * 	{Program} (LT* directives+=ProgramDirective)* LT*;
  *
  **/
 
@@ -188,11 +188,11 @@ protected class Program_DirectivesAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule ProgramDirective ****************
  *
  * ProgramDirective:
- *   FunctionDefinition|Statement;
+ * 	FunctionDefinition | Statement;
  *
  **/
 
-// FunctionDefinition|Statement
+// FunctionDefinition | Statement
 protected class ProgramDirective_Alternatives extends AlternativesToken {
 
 	public ProgramDirective_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -304,13 +304,11 @@ protected class ProgramDirective_StatementParserRuleCall_1 extends RuleCallToken
 /************ begin Rule FunctionDefinition ****************
  *
  * FunctionDefinition:
- *   attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT*
- *   body=Block;
+ * 	attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=Block;
  *
  **/
 
-// attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT*
-// body=Block
+// attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=Block
 protected class FunctionDefinition_Group extends GroupToken {
 	
 	public FunctionDefinition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -540,11 +538,11 @@ protected class FunctionDefinition_BodyAssignment_7 extends AssignmentToken  {
 /************ begin Rule Attribute ****************
  *
  * Attribute:
- *   ident=ID|{BracketAttribute} "[" LT* expression=PostfixExpression LT* "]";
+ * 	ident=ID | {BracketAttribute} "[" LT* expression=PostfixExpression LT* "]";
  *
  **/
 
-// ident=ID|{BracketAttribute} "[" LT* expression=PostfixExpression LT* "]"
+// ident=ID | {BracketAttribute} "[" LT* expression=PostfixExpression LT* "]"
 protected class Attribute_Alternatives extends AlternativesToken {
 
 	public Attribute_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -763,7 +761,7 @@ protected class Attribute_RightSquareBracketKeyword_1_5 extends KeywordToken  {
 /************ begin Rule Parameters ****************
  *
  * Parameters:
- *   {Parameters} "(" LT* (params+=ID LT* ("," LT* params+=ID LT*)*)? ")";
+ * 	{Parameters} "(" LT* (params+=ID LT* ("," LT* params+=ID LT*)*)? ")";
  *
  **/
 
@@ -1012,7 +1010,7 @@ protected class Parameters_RightParenthesisKeyword_4 extends KeywordToken  {
 /************ begin Rule Block ****************
  *
  * Block:
- *   {Block} "{" (LT* directives+=Statement)* LT* "}";
+ * 	{Block} "{" (LT* directives+=Statement)* LT* "}";
  *
  **/
 
@@ -1193,11 +1191,11 @@ protected class Block_RightCurlyBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule Statement ****************
  *
  * Statement:
- *   Block|{ExpressionStatement} expression=PostfixExpression (";"|LT);
+ * 	Block | {ExpressionStatement} expression=PostfixExpression (";" | LT);
  *
  **/
 
-// Block|{ExpressionStatement} expression=PostfixExpression (";"|LT)
+// Block | {ExpressionStatement} expression=PostfixExpression (";" | LT)
 protected class Statement_Alternatives extends AlternativesToken {
 
 	public Statement_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1264,7 +1262,7 @@ protected class Statement_BlockParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// {ExpressionStatement} expression=PostfixExpression (";"|LT)
+// {ExpressionStatement} expression=PostfixExpression (";" | LT)
 protected class Statement_Group_1 extends GroupToken {
 	
 	public Statement_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1365,7 +1363,7 @@ protected class Statement_ExpressionAssignment_1_1 extends AssignmentToken  {
 	}	
 }
 
-// ";"|LT
+// ";" | LT
 protected class Statement_Alternatives_1_2 extends AlternativesToken {
 
 	public Statement_Alternatives_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1418,15 +1416,13 @@ protected class Statement_SemicolonKeyword_1_2_0 extends KeywordToken  {
 /************ begin Rule PostfixExpression ****************
  *
  * PostfixExpression:
- *   PrimaryExpression ({PostfixExpression.expression=current} LT*
- *   property=PropertyOperator|{Invocation.expression=current} LT* "(" LT* (
- *   arguments=ListExpression LT*)? ")")*;
+ * 	PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator |
+ * 	{Invocation.expression=current} LT* "(" LT* (arguments=ListExpression LT*)? ")")*;
  *
  **/
 
-// PrimaryExpression ({PostfixExpression.expression=current} LT*
-// property=PropertyOperator|{Invocation.expression=current} LT* "(" LT* (
-// arguments=ListExpression LT*)? ")")*
+// PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator |
+// {Invocation.expression=current} LT* "(" LT* (arguments=ListExpression LT*)? ")")*
 protected class PostfixExpression_Group extends GroupToken {
 	
 	public PostfixExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1496,9 +1492,8 @@ protected class PostfixExpression_PrimaryExpressionParserRuleCall_0 extends Rule
 	}	
 }
 
-// ({PostfixExpression.expression=current} LT* property=PropertyOperator|{
-// Invocation.expression=current} LT* "(" LT* (arguments=ListExpression LT*)? ")")
-// *
+// ({PostfixExpression.expression=current} LT* property=PropertyOperator | {Invocation.expression=current} LT* "(" LT*
+// (arguments=ListExpression LT*)? ")")*
 protected class PostfixExpression_Alternatives_1 extends AlternativesToken {
 
 	public PostfixExpression_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1817,7 +1812,7 @@ protected class PostfixExpression_RightParenthesisKeyword_1_1_5 extends KeywordT
 /************ begin Rule ListExpression ****************
  *
  * ListExpression:
- *   expressions+=PostfixExpression (LT* "," LT* expressions+=PostfixExpression)*;
+ * 	expressions+=PostfixExpression (LT* "," LT* expressions+=PostfixExpression)*;
  *
  **/
 
@@ -1995,11 +1990,11 @@ protected class ListExpression_ExpressionsAssignment_1_3 extends AssignmentToken
 /************ begin Rule PropertyOperator ****************
  *
  * PropertyOperator:
- *   "." LT* name=ID|"[" LT* expressions=ListExpression LT* "]";
+ * 	"." LT* name=ID | "[" LT* expressions=ListExpression LT* "]";
  *
  **/
 
-// "." LT* name=ID|"[" LT* expressions=ListExpression LT* "]"
+// "." LT* name=ID | "[" LT* expressions=ListExpression LT* "]"
 protected class PropertyOperator_Alternatives extends AlternativesToken {
 
 	public PropertyOperator_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2226,13 +2221,11 @@ protected class PropertyOperator_RightSquareBracketKeyword_1_4 extends KeywordTo
 /************ begin Rule PrimaryExpression ****************
  *
  * PrimaryExpression:
- *   {Identifier} name=ID|{FunctionExpression} "function" LT* params=Parameters LT
- *   * body=Block;
+ * 	{Identifier} name=ID | {FunctionExpression} "function" LT* params=Parameters LT* body=Block;
  *
  **/
 
-// {Identifier} name=ID|{FunctionExpression} "function" LT* params=Parameters LT*
-// body=Block
+// {Identifier} name=ID | {FunctionExpression} "function" LT* params=Parameters LT* body=Block
 protected class PrimaryExpression_Alternatives extends AlternativesToken {
 
 	public PrimaryExpression_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

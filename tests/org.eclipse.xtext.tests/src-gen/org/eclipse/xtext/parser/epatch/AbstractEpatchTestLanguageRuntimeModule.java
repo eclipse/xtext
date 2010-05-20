@@ -29,37 +29,37 @@ public abstract class AbstractEpatchTestLanguageRuntimeModule extends DefaultRun
 	}
 	
 	
-	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.parser.epatch.parser.antlr.EpatchTestLanguageParser.class;
 	}
 
-	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
 
-	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
 		return org.eclipse.xtext.parser.epatch.parser.antlr.EpatchTestLanguageAntlrTokenFileProvider.class;
 	}
 
-	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.parser.epatch.parser.antlr.internal.InternalEpatchTestLanguageLexer.class;
 	}
 
-	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public com.google.inject.Provider<org.eclipse.xtext.parser.epatch.parser.antlr.internal.InternalEpatchTestLanguageLexer> provideInternalEpatchTestLanguageLexer() {
 		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.parser.epatch.parser.antlr.internal.InternalEpatchTestLanguageLexer.class);
 	}
 
-	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public void configureRuntimeLexer(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(org.eclipse.xtext.parser.epatch.parser.antlr.internal.InternalEpatchTestLanguageLexer.class);
 	}
 
-	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}

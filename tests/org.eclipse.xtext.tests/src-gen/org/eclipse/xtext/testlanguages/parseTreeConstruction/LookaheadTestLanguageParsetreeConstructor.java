@@ -47,7 +47,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Entry ****************
  *
  * Entry:
- *   contents+=Alts*;
+ * 	contents+=Alts*;
  *
  **/
 
@@ -103,11 +103,11 @@ protected class Entry_ContentsAssignment extends AssignmentToken  {
 /************ begin Rule Alts ****************
  *
  * Alts:
- *   LookAhead0|LookAhead1|LookAhead3;
+ * 	LookAhead0 | LookAhead1 | LookAhead3;
  *
  **/
 
-// LookAhead0|LookAhead1|LookAhead3
+// LookAhead0 | LookAhead1 | LookAhead3
 protected class Alts_Alternatives extends AlternativesToken {
 
 	public Alts_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -255,7 +255,7 @@ protected class Alts_LookAhead3ParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule LookAhead0 ****************
  *
  * LookAhead0:
- *   "bar" x="a";
+ * 	"bar" x="a";
  *
  **/
 
@@ -350,7 +350,7 @@ protected class LookAhead0_XAssignment_1 extends AssignmentToken  {
 /************ begin Rule LookAhead1 ****************
  *
  * LookAhead1:
- *   "foo" y=LookAhead2 x="b" x="d";
+ * 	"foo" y=LookAhead2 x="b" x="d";
  *
  **/
 
@@ -525,11 +525,11 @@ protected class LookAhead1_XAssignment_3 extends AssignmentToken  {
 /************ begin Rule LookAhead2 ****************
  *
  * LookAhead2:
- *   (z="foo"|z="bar") "c";
+ * 	(z="foo" | z="bar") "c";
  *
  **/
 
-// (z="foo"|z="bar") "c"
+// (z="foo" | z="bar") "c"
 protected class LookAhead2_Group extends GroupToken {
 	
 	public LookAhead2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -558,7 +558,7 @@ protected class LookAhead2_Group extends GroupToken {
 
 }
 
-// z="foo"|z="bar"
+// z="foo" | z="bar"
 protected class LookAhead2_Alternatives_0 extends AlternativesToken {
 
 	public LookAhead2_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -677,7 +677,7 @@ protected class LookAhead2_CKeyword_1 extends KeywordToken  {
 /************ begin Rule LookAhead3 ****************
  *
  * LookAhead3:
- *   "foo" "bar" x="b" z=LookAhead4;
+ * 	"foo" "bar" x="b" z=LookAhead4;
  *
  **/
 
@@ -840,11 +840,11 @@ protected class LookAhead3_ZAssignment_3 extends AssignmentToken  {
 /************ begin Rule LookAhead4 ****************
  *
  * LookAhead4:
- *   x="c"|x="d";
+ * 	x="c" | x="d";
  *
  **/
 
-// x="c"|x="d"
+// x="c" | x="d"
 protected class LookAhead4_Alternatives extends AlternativesToken {
 
 	public LookAhead4_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

@@ -43,7 +43,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   NodeRoot;
+ * 	NodeRoot;
  *
  **/
 
@@ -89,7 +89,7 @@ protected class Model_NodeRootParserRuleCall extends RuleCallToken {
 /************ begin Rule NodeRoot ****************
  *
  * NodeRoot:
- *   "#1" node=Node;
+ * 	"#1" node=Node;
  *
  **/
 
@@ -196,7 +196,7 @@ protected class NodeRoot_NodeAssignment_1 extends AssignmentToken  {
 /************ begin Rule Node ****************
  *
  * Node:
- *   "node" name=ID ("(" children+=Node+ ")")?;
+ * 	"node" name=ID ("(" children+=Node+ ")")?;
  *
  **/
 

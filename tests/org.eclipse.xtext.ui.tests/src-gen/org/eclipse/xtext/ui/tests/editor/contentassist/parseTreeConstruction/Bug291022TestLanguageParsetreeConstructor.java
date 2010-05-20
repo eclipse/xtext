@@ -44,8 +44,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule RootModel ****************
  *
  * RootModel returns ModelElement:
- *   ({RootModel} name=ID type=[ModelElement]? ("{" elements+=ModelAttribute* "}")
- *   ?)?;
+ * 	({RootModel} name=ID type=[ModelElement]? ("{" elements+=ModelAttribute* "}")?)?;
  *
  **/
 
@@ -299,13 +298,12 @@ protected class RootModel_RightCurlyBracketKeyword_3_2 extends KeywordToken  {
 /************ begin Rule ModelElement ****************
  *
  * ModelElement:
- *   firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]?
- *   (";"|"{" elements+=ModelAttribute* "}");
+ * 	firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]? (";" | "{" elements+=ModelAttribute*
+ * 	"}");
  *
  **/
 
-// firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]? (
-// ";"|"{" elements+=ModelAttribute* "}")
+// firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]? (";" | "{" elements+=ModelAttribute* "}")
 protected class ModelElement_Group extends GroupToken {
 	
 	public ModelElement_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -487,7 +485,7 @@ protected class ModelElement_SecondReferenceAssignment_2 extends AssignmentToken
 
 }
 
-// ";"|"{" elements+=ModelAttribute* "}"
+// ";" | "{" elements+=ModelAttribute* "}"
 protected class ModelElement_Alternatives_3 extends AlternativesToken {
 
 	public ModelElement_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -658,11 +656,11 @@ protected class ModelElement_RightCurlyBracketKeyword_3_1_2 extends KeywordToken
 /************ begin Rule ModelAttribute ****************
  *
  * ModelAttribute:
- *   ModelElement|Attribute;
+ * 	ModelElement | Attribute;
  *
  **/
 
-// ModelElement|Attribute
+// ModelElement | Attribute
 protected class ModelAttribute_Alternatives extends AlternativesToken {
 
 	public ModelAttribute_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -772,7 +770,7 @@ protected class ModelAttribute_AttributeParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Attribute ****************
  *
  * Attribute:
- *   feature=[ModelElement] "=" value=STRING;
+ * 	feature=[ModelElement] "=" value=STRING;
  *
  **/
 

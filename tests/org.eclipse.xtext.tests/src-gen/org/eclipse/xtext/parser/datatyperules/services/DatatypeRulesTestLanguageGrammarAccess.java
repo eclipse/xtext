@@ -23,7 +23,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cModelModelParserRuleCall_0 = (RuleCall)cModelAssignment.eContents().get(0);
 		
 		//CompositeModel:
-		//  model+=Model+;
+		//	model+=Model+;
 		public ParserRule getRule() { return rule; }
 
 		//model+=Model+
@@ -57,12 +57,10 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Model:
-		//  id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)?
-		//  ("*" double=Double)? ";";
+		//	id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ("*" double=Double)? ";";
 		public ParserRule getRule() { return rule; }
 
-		//id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? (
-		//"*" double=Double)? ";"
+		//id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ("*" double=Double)? ";"
 		public Group getGroup() { return cGroup; }
 
 		//id=NestedModelId
@@ -131,7 +129,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cIDTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//ModelId returns ecore::EString:
-		//  ID "." ID;
+		//	ID "." ID;
 		public ParserRule getRule() { return rule; }
 
 		//ID "." ID
@@ -155,7 +153,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cModelIdParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//NestedModelId returns ecore::EString:
-		//  ModelId "." ModelId;
+		//	ModelId "." ModelId;
 		public ParserRule getRule() { return rule; }
 
 		//ModelId "." ModelId
@@ -180,7 +178,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cINTTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//Fraction returns ecore::EBigDecimal:
-		//  INT ("/" INT)?;
+		//	INT ("/" INT)?;
 		public ParserRule getRule() { return rule; }
 
 		//INT ("/" INT)?
@@ -208,7 +206,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Vector returns ecore::EString:
-		//  "(" INT INT ")";
+		//	"(" INT INT ")";
 		public ParserRule getRule() { return rule; }
 
 		//"(" INT INT ")"
@@ -236,10 +234,10 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Keyword cFullStopFullStopKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		
 		//Dots returns ecore::EString:
-		//  "." "."|"..";
+		//	"." "." | "..";
 		public ParserRule getRule() { return rule; }
 
-		//"." "."|".."
+		//"." "." | ".."
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"." "."
@@ -268,7 +266,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cINTTerminalRuleCall_4_2 = (RuleCall)cGroup_4.eContents().get(2);
 		
 		//Double returns ecore::EDouble:
-		//  "-"? INT? "." INT ("E" "-"? INT)?;
+		//	"-"? INT? "." INT ("E" "-"? INT)?;
 		public ParserRule getRule() { return rule; }
 
 		//"-"? INT? "." INT ("E" "-"? INT)?
@@ -331,7 +329,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 
 	
 	//CompositeModel:
-	//  model+=Model+;
+	//	model+=Model+;
 	public CompositeModelElements getCompositeModelAccess() {
 		return (pCompositeModel != null) ? pCompositeModel : (pCompositeModel = new CompositeModelElements());
 	}
@@ -341,8 +339,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//Model:
-	//  id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)?
-	//  ("*" double=Double)? ";";
+	//	id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ("*" double=Double)? ";";
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -352,7 +349,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//ModelId returns ecore::EString:
-	//  ID "." ID;
+	//	ID "." ID;
 	public ModelIdElements getModelIdAccess() {
 		return (pModelId != null) ? pModelId : (pModelId = new ModelIdElements());
 	}
@@ -362,7 +359,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//NestedModelId returns ecore::EString:
-	//  ModelId "." ModelId;
+	//	ModelId "." ModelId;
 	public NestedModelIdElements getNestedModelIdAccess() {
 		return (pNestedModelId != null) ? pNestedModelId : (pNestedModelId = new NestedModelIdElements());
 	}
@@ -372,7 +369,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//Fraction returns ecore::EBigDecimal:
-	//  INT ("/" INT)?;
+	//	INT ("/" INT)?;
 	public FractionElements getFractionAccess() {
 		return (pFraction != null) ? pFraction : (pFraction = new FractionElements());
 	}
@@ -382,7 +379,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//Vector returns ecore::EString:
-	//  "(" INT INT ")";
+	//	"(" INT INT ")";
 	public VectorElements getVectorAccess() {
 		return (pVector != null) ? pVector : (pVector = new VectorElements());
 	}
@@ -392,7 +389,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//Dots returns ecore::EString:
-	//  "." "."|"..";
+	//	"." "." | "..";
 	public DotsElements getDotsAccess() {
 		return (pDots != null) ? pDots : (pDots = new DotsElements());
 	}
@@ -402,7 +399,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//Double returns ecore::EDouble:
-	//  "-"? INT? "." INT ("E" "-"? INT)?;
+	//	"-"? INT? "." INT ("E" "-"? INT)?;
 	public DoubleElements getDoubleAccess() {
 		return (pDouble != null) ? pDouble : (pDouble = new DoubleElements());
 	}
@@ -412,45 +409,44 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

@@ -45,11 +45,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   "Model" expressions+=Expression*|"DataType" values+=DataTypeExpression*;
+ * 	"Model" expressions+=Expression* | "DataType" values+=DataTypeExpression*;
  *
  **/
 
-// "Model" expressions+=Expression*|"DataType" values+=DataTypeExpression*
+// "Model" expressions+=Expression* | "DataType" values+=DataTypeExpression*
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -258,11 +258,11 @@ protected class Model_ValuesAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule Expression ****************
  *
  * Expression:
- *   Postop|Preop;
+ * 	Postop | Preop;
  *
  **/
 
-// Postop|Preop
+// Postop | Preop
 protected class Expression_Alternatives extends AlternativesToken {
 
 	public Expression_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -374,7 +374,7 @@ protected class Expression_PreopParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Preop ****************
  *
  * Preop returns Expression:
- *   {Preop} functionName="--" expr=Variable;
+ * 	{Preop} functionName="--" expr=Variable;
  *
  **/
 
@@ -520,7 +520,7 @@ protected class Preop_ExprAssignment_2 extends AssignmentToken  {
 /************ begin Rule Postop ****************
  *
  * Postop returns Expression:
- *   Variable ({Postop.expr=current} functionName="--")?;
+ * 	Variable ({Postop.expr=current} functionName="--")?;
  *
  **/
 
@@ -691,7 +691,7 @@ protected class Postop_FunctionNameAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule Variable ****************
  *
  * Variable returns Expression:
- *   {Variable} name=ID;
+ * 	{Variable} name=ID;
  *
  **/
 

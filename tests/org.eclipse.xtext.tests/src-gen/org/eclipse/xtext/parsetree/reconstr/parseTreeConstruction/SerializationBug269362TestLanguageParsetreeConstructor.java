@@ -41,11 +41,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   "foo" foo=ID ("bar" bar=ID)?|"bar" bar=ID;
+ * 	"foo" foo=ID ("bar" bar=ID)? | "bar" bar=ID;
  *
  **/
 
-// "foo" foo=ID ("bar" bar=ID)?|"bar" bar=ID
+// "foo" foo=ID ("bar" bar=ID)? | "bar" bar=ID
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

@@ -44,11 +44,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule NamedElement ****************
  *
  * NamedElement:
- *   Namespace|Element;
+ * 	Namespace | Element;
  *
  **/
 
-// Namespace|Element
+// Namespace | Element
 protected class NamedElement_Alternatives extends AlternativesToken {
 
 	public NamedElement_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -158,8 +158,7 @@ protected class NamedElement_ElementParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Namespace ****************
  *
  * Namespace:
- *   "namespace" name=QualifiedName "{" imports+=Import* elements+=NamedElement*
- *   "}";
+ * 	"namespace" name=QualifiedName "{" imports+=Import* elements+=NamedElement* "}";
  *
  **/
 
@@ -395,7 +394,7 @@ protected class Namespace_RightCurlyBracketKeyword_5 extends KeywordToken  {
 /************ begin Rule Import ****************
  *
  * Import:
- *   "import" importedNamespace=QualifiedName;
+ * 	"import" importedNamespace=QualifiedName;
  *
  **/
 
@@ -490,14 +489,13 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- *   "object" name=ID ("references" references=[Element|QualifiedName])? (
- *   "otherRefs" otherRefs+=[Element|QualifiedName] ("," otherRefs+=[Element|
- *   QualifiedName])*)?;
+ * 	"object" name=ID ("references" references=[Element|QualifiedName])? ("otherRefs" otherRefs+=[Element|QualifiedName]
+ * 	("," otherRefs+=[Element|QualifiedName])*)?;
  *
  **/
 
-// "object" name=ID ("references" references=[Element|QualifiedName])? ("otherRefs"
-// otherRefs+=[Element|QualifiedName] ("," otherRefs+=[Element|QualifiedName])*)?
+// "object" name=ID ("references" references=[Element|QualifiedName])? ("otherRefs" otherRefs+=[Element|QualifiedName] (","
+// otherRefs+=[Element|QualifiedName])*)?
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -665,8 +663,7 @@ protected class Element_ReferencesAssignment_2_1 extends AssignmentToken  {
 }
 
 
-// ("otherRefs" otherRefs+=[Element|QualifiedName] ("," otherRefs+=[Element|
-// QualifiedName])*)?
+// ("otherRefs" otherRefs+=[Element|QualifiedName] ("," otherRefs+=[Element|QualifiedName])*)?
 protected class Element_Group_3 extends GroupToken {
 	
 	public Element_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

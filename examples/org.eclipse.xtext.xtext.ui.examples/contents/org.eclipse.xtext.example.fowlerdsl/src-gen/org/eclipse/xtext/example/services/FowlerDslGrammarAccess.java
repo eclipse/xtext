@@ -20,54 +20,57 @@ public class FowlerDslGrammarAccess extends AbstractGrammarElementFinder {
 	public class StatemachineElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Statemachine");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cEventsKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cEventsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cEventsEventParserRuleCall_1_0 = (RuleCall)cEventsAssignment_1.eContents().get(0);
-		private final Keyword cEndKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Keyword cCommandsKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cCommandsAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cCommandsCommandParserRuleCall_4_0 = (RuleCall)cCommandsAssignment_4.eContents().get(0);
-		private final Keyword cEndKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cStatesAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cStatesStateParserRuleCall_6_0 = (RuleCall)cStatesAssignment_6.eContents().get(0);
+		private final Action cStatemachineAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cEventsKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cEventsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cEventsEventParserRuleCall_2_0 = (RuleCall)cEventsAssignment_2.eContents().get(0);
+		private final Keyword cEndKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cCommandsKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cCommandsAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cCommandsCommandParserRuleCall_5_0 = (RuleCall)cCommandsAssignment_5.eContents().get(0);
+		private final Keyword cEndKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cStatesAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cStatesStateParserRuleCall_7_0 = (RuleCall)cStatesAssignment_7.eContents().get(0);
 		
 		//Statemachine:
-		//  "events" events+=Event* "end" "commands" commands+=Command* "end"
-		//  states+=State*;
+		//	{Statemachine} "events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*;
 		public ParserRule getRule() { return rule; }
 
-		//"events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*
+		//{Statemachine} "events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*
 		public Group getGroup() { return cGroup; }
 
+		//{Statemachine}
+		public Action getStatemachineAction_0() { return cStatemachineAction_0; }
+
 		//"events"
-		public Keyword getEventsKeyword_0() { return cEventsKeyword_0; }
+		public Keyword getEventsKeyword_1() { return cEventsKeyword_1; }
 
 		//events+=Event*
-		public Assignment getEventsAssignment_1() { return cEventsAssignment_1; }
+		public Assignment getEventsAssignment_2() { return cEventsAssignment_2; }
 
 		//Event
-		public RuleCall getEventsEventParserRuleCall_1_0() { return cEventsEventParserRuleCall_1_0; }
+		public RuleCall getEventsEventParserRuleCall_2_0() { return cEventsEventParserRuleCall_2_0; }
 
 		//"end"
-		public Keyword getEndKeyword_2() { return cEndKeyword_2; }
+		public Keyword getEndKeyword_3() { return cEndKeyword_3; }
 
 		//"commands"
-		public Keyword getCommandsKeyword_3() { return cCommandsKeyword_3; }
+		public Keyword getCommandsKeyword_4() { return cCommandsKeyword_4; }
 
 		//commands+=Command*
-		public Assignment getCommandsAssignment_4() { return cCommandsAssignment_4; }
+		public Assignment getCommandsAssignment_5() { return cCommandsAssignment_5; }
 
 		//Command
-		public RuleCall getCommandsCommandParserRuleCall_4_0() { return cCommandsCommandParserRuleCall_4_0; }
+		public RuleCall getCommandsCommandParserRuleCall_5_0() { return cCommandsCommandParserRuleCall_5_0; }
 
 		//"end"
-		public Keyword getEndKeyword_5() { return cEndKeyword_5; }
+		public Keyword getEndKeyword_6() { return cEndKeyword_6; }
 
 		//states+=State*
-		public Assignment getStatesAssignment_6() { return cStatesAssignment_6; }
+		public Assignment getStatesAssignment_7() { return cStatesAssignment_7; }
 
 		//State
-		public RuleCall getStatesStateParserRuleCall_6_0() { return cStatesStateParserRuleCall_6_0; }
+		public RuleCall getStatesStateParserRuleCall_7_0() { return cStatesStateParserRuleCall_7_0; }
 	}
 
 	public class EventElements extends AbstractParserRuleElementFinder {
@@ -81,7 +84,7 @@ public class FowlerDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cCodeIDTerminalRuleCall_2_0 = (RuleCall)cCodeAssignment_2.eContents().get(0);
 		
 		//Event:
-		//  resetting?="resetting"? name=ID code=ID;
+		//	resetting?="resetting"? name=ID code=ID;
 		public ParserRule getRule() { return rule; }
 
 		//resetting?="resetting"? name=ID code=ID
@@ -115,7 +118,7 @@ public class FowlerDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cCodeIDTerminalRuleCall_1_0 = (RuleCall)cCodeAssignment_1.eContents().get(0);
 		
 		//Command:
-		//  name=ID code=ID;
+		//	name=ID code=ID;
 		public ParserRule getRule() { return rule; }
 
 		//name=ID code=ID
@@ -152,12 +155,10 @@ public class FowlerDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cEndKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//State:
-		//  "state" name=ID ("actions" "{" actions+=[Command]+ "}")?
-		//  transitions+=Transition* "end";
+		//	"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end";
 		public ParserRule getRule() { return rule; }
 
-		//"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition
-		// * "end"
+		//"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end"
 		public Group getGroup() { return cGroup; }
 
 		//"state"
@@ -212,7 +213,7 @@ public class FowlerDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cStateStateIDTerminalRuleCall_2_0_1 = (RuleCall)cStateStateCrossReference_2_0.eContents().get(1);
 		
 		//Transition:
-		//  event=[Event] "=>" state=[State];
+		//	event=[Event] "=>" state=[State];
 		public ParserRule getRule() { return rule; }
 
 		//event=[Event] "=>" state=[State]
@@ -269,8 +270,7 @@ public class FowlerDslGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Statemachine:
-	//  "events" events+=Event* "end" "commands" commands+=Command* "end"
-	//  states+=State*;
+	//	{Statemachine} "events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*;
 	public StatemachineElements getStatemachineAccess() {
 		return (pStatemachine != null) ? pStatemachine : (pStatemachine = new StatemachineElements());
 	}
@@ -280,7 +280,7 @@ public class FowlerDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Event:
-	//  resetting?="resetting"? name=ID code=ID;
+	//	resetting?="resetting"? name=ID code=ID;
 	public EventElements getEventAccess() {
 		return (pEvent != null) ? pEvent : (pEvent = new EventElements());
 	}
@@ -290,7 +290,7 @@ public class FowlerDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Command:
-	//  name=ID code=ID;
+	//	name=ID code=ID;
 	public CommandElements getCommandAccess() {
 		return (pCommand != null) ? pCommand : (pCommand = new CommandElements());
 	}
@@ -300,8 +300,7 @@ public class FowlerDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//State:
-	//  "state" name=ID ("actions" "{" actions+=[Command]+ "}")?
-	//  transitions+=Transition* "end";
+	//	"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end";
 	public StateElements getStateAccess() {
 		return (pState != null) ? pState : (pState = new StateElements());
 	}
@@ -311,7 +310,7 @@ public class FowlerDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Transition:
-	//  event=[Event] "=>" state=[State];
+	//	event=[Event] "=>" state=[State];
 	public TransitionElements getTransitionAccess() {
 		return (pTransition != null) ? pTransition : (pTransition = new TransitionElements());
 	}
@@ -321,45 +320,44 @@ public class FowlerDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 
