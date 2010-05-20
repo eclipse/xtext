@@ -49,6 +49,14 @@ public class ResourceDescriptionUpdaterTest extends AbstractBuilderTest {
 		IXtextBuilderParticipant instance = Activator.getInstance().getInjector(
 				"org.eclipse.xtext.builder.tests.BuilderTestLanguage").getInstance(IXtextBuilderParticipant.class);
 		participant = (LoggingBuilderParticipant) instance;
+		participant.startLogging();
+	}
+	
+	@Override
+	protected void tearDown() throws Exception {
+		participant.stopLogging();
+		participant = null;
+		super.tearDown();
 	}
 
 	public void testIndependentProjects() throws Exception {
