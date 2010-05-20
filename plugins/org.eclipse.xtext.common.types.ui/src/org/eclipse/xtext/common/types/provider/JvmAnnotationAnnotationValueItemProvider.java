@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JvmAnnotationAnnotationValueItemProvider.java,v 1.1 2010/03/04 10:26:33 szarnekow Exp $
+ * $Id: JvmAnnotationAnnotationValueItemProvider.java,v 1.2 2010/05/20 08:54:21 szarnekow Exp $
  */
 package org.eclipse.xtext.common.types.provider;
 
@@ -15,6 +15,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -62,8 +63,31 @@ public class JvmAnnotationAnnotationValueItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addValuesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Values feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addValuesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_JvmAnnotationAnnotationValue_values_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmAnnotationAnnotationValue_values_feature", "_UI_JvmAnnotationAnnotationValue_type"),
+				 TypesPackage.Literals.JVM_ANNOTATION_ANNOTATION_VALUE__VALUES,
+				 false,
+				 false,
+				 false,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -78,7 +102,7 @@ public class JvmAnnotationAnnotationValueItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.JVM_ANNOTATION_ANNOTATION_VALUE__VALUES);
+			childrenFeatures.add(TypesPackage.Literals.JVM_ANNOTATION_TARGET__ANNOTATIONS);
 		}
 		return childrenFeatures;
 	}
@@ -130,7 +154,7 @@ public class JvmAnnotationAnnotationValueItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(JvmAnnotationAnnotationValue.class)) {
-			case TypesPackage.JVM_ANNOTATION_ANNOTATION_VALUE__VALUES:
+			case TypesPackage.JVM_ANNOTATION_ANNOTATION_VALUE__ANNOTATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -150,7 +174,7 @@ public class JvmAnnotationAnnotationValueItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_ANNOTATION_ANNOTATION_VALUE__VALUES,
+				(TypesPackage.Literals.JVM_ANNOTATION_TARGET__ANNOTATIONS,
 				 TypesFactory.eINSTANCE.createJvmAnnotationReference()));
 	}
 
