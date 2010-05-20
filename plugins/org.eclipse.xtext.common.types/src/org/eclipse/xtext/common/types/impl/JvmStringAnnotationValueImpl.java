@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -68,7 +68,7 @@ public class JvmStringAnnotationValueImpl extends JvmAnnotationValueImpl impleme
 	 */
 	public EList<String> getValues() {
 		if (values == null) {
-			values = new EDataTypeUniqueEList<String>(String.class, this, TypesPackage.JVM_STRING_ANNOTATION_VALUE__VALUES);
+			values = new EDataTypeEList<String>(String.class, this, TypesPackage.JVM_STRING_ANNOTATION_VALUE__VALUES);
 		}
 		return values;
 	}

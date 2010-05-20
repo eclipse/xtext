@@ -144,7 +144,7 @@ class JvmOperation extends JvmExecutable, JvmFeature {
   val JvmTypeReference returnType;
 }
 
-class JvmFormalParameter extends JvmIdentifyableElement {
+class JvmFormalParameter extends JvmIdentifyableElement, JvmAnnotationTarget {
   attr String name;
   val JvmTypeReference parameterType;
 }
@@ -165,43 +165,43 @@ abstract class JvmAnnotationValue {
 }
 
 class JvmIntAnnotationValue extends JvmAnnotationValue {
-  attr int[*] values;   
+  !unique attr int[*] values;   
 }
 
 class JvmBooleanAnnotationValue extends JvmAnnotationValue {
-  attr boolean[*] values;   
+  !unique attr boolean[*] values;   
 }
 
 class JvmByteAnnotationValue extends JvmAnnotationValue {
-  attr byte[*] values;   
+  !unique attr byte[*] values;   
 }
 
 class JvmShortAnnotationValue extends JvmAnnotationValue {
-  attr short[*] values;   
+  !unique attr short[*] values;   
 }
 
 class JvmLongAnnotationValue extends JvmAnnotationValue {
-  attr long[*] values;   
+  !unique attr long[*] values;   
 }
 
 class JvmDoubleAnnotationValue extends JvmAnnotationValue {
-  attr double[*] values;   
+  !unique attr double[*] values;   
 }
 
 class JvmFloatAnnotationValue extends JvmAnnotationValue {
-  attr float[*] values;   
+  !unique attr float[*] values;   
 }
 
 class JvmCharAnnotationValue extends JvmAnnotationValue {
-  attr char[*] values;   
+  !unique attr char[*] values;   
 }
 
 class JvmStringAnnotationValue extends JvmAnnotationValue {
-  attr String[*] values;   
+  !unique attr String[*] values;   
 }
 
 class JvmTypeAnnotationValue extends JvmAnnotationValue {
-  ref JvmType[*] values;   
+  !unique val JvmTypeReference[*] values;   
 }
 
 class JvmAnnotationAnnotationValue extends JvmAnnotationValue, JvmAnnotationTarget {
@@ -209,7 +209,7 @@ class JvmAnnotationAnnotationValue extends JvmAnnotationValue, JvmAnnotationTarg
 }
 
 class JvmEnumAnnotationValue extends JvmAnnotationValue {
-  ref JvmEnumerationLiteral[*] values;   
+  !unique ref JvmEnumerationLiteral[*] values;   
 }
 
 // important note: unfortunatly, emfatic does not support 

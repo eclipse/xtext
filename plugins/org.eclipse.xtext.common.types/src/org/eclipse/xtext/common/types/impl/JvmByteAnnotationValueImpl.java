@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 import org.eclipse.xtext.common.types.JvmByteAnnotationValue;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -68,7 +68,7 @@ public class JvmByteAnnotationValueImpl extends JvmAnnotationValueImpl implement
 	 */
 	public EList<Byte> getValues() {
 		if (values == null) {
-			values = new EDataTypeUniqueEList<Byte>(Byte.class, this, TypesPackage.JVM_BYTE_ANNOTATION_VALUE__VALUES);
+			values = new EDataTypeEList<Byte>(Byte.class, this, TypesPackage.JVM_BYTE_ANNOTATION_VALUE__VALUES);
 		}
 		return values;
 	}

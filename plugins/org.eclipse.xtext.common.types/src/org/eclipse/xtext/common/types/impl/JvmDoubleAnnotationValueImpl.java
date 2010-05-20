@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 import org.eclipse.xtext.common.types.JvmDoubleAnnotationValue;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -68,7 +68,7 @@ public class JvmDoubleAnnotationValueImpl extends JvmAnnotationValueImpl impleme
 	 */
 	public EList<Double> getValues() {
 		if (values == null) {
-			values = new EDataTypeUniqueEList<Double>(Double.class, this, TypesPackage.JVM_DOUBLE_ANNOTATION_VALUE__VALUES);
+			values = new EDataTypeEList<Double>(Double.class, this, TypesPackage.JVM_DOUBLE_ANNOTATION_VALUE__VALUES);
 		}
 		return values;
 	}

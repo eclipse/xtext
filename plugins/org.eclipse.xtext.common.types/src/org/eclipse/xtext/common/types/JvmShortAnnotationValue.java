@@ -37,7 +37,7 @@ public interface JvmShortAnnotationValue extends JvmAnnotationValue {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Values</em>' attribute list.
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmShortAnnotationValue_Values()
-	 * @model
+	 * @model unique="false"
 	 * @generated
 	 */
 	EList<Short> getValues();

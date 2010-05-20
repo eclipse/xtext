@@ -37,7 +37,7 @@ public interface JvmIntAnnotationValue extends JvmAnnotationValue {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Values</em>' attribute list.
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmIntAnnotationValue_Values()
-	 * @model
+	 * @model unique="false"
 	 * @generated
 	 */
 	EList<Integer> getValues();

@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -68,7 +68,7 @@ public class JvmBooleanAnnotationValueImpl extends JvmAnnotationValueImpl implem
 	 */
 	public EList<Boolean> getValues() {
 		if (values == null) {
-			values = new EDataTypeUniqueEList<Boolean>(Boolean.class, this, TypesPackage.JVM_BOOLEAN_ANNOTATION_VALUE__VALUES);
+			values = new EDataTypeEList<Boolean>(Boolean.class, this, TypesPackage.JVM_BOOLEAN_ANNOTATION_VALUE__VALUES);
 		}
 		return values;
 	}

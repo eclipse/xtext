@@ -163,8 +163,8 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			if (result instanceof JvmTypeAnnotationValue) {
 				for (int i = 0; i < length; i++) {
 					ITypeBinding referencedType = (ITypeBinding) (valueIsArray ? Array.get(value, i) : value);
-					JvmType proxy = createProxy(referencedType);
-					valuesAsList.add(proxy);
+					JvmTypeReference typeReference = createTypeReference(referencedType);
+					valuesAsList.add(typeReference);
 				}
 			} else if (result instanceof JvmAnnotationAnnotationValue) {
 				for (int i = 0; i < length; i++) {
@@ -215,8 +215,8 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		Object value = memberValuePair.getValue();
 		if (result instanceof JvmTypeAnnotationValue) {
 			ITypeBinding referencedType = (ITypeBinding) value;
-			JvmType proxy = createProxy(referencedType);
-			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(proxy));
+			JvmTypeReference typeReference = createTypeReference(referencedType);
+			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(typeReference));
 		} else if (result instanceof JvmAnnotationAnnotationValue) {
 			IAnnotationBinding nestedAnnotation = (IAnnotationBinding) value;
 			createAnnotationReference((JvmAnnotationTarget) result, nestedAnnotation);
@@ -476,10 +476,10 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 					log.warn("IMethod.getParameterNames failed", ex);
 			}
 		}
-
 		for (int i = 0; i < parameterTypes.length; i++) {
 			String parameterName = parameterNames != null ? parameterNames[i] : "p" + i;
-			result.getParameters().add(createFormalParameter(parameterTypes[i], parameterName));
+			IAnnotationBinding[] parameterAnnotations = method.getParameterAnnotations(i);
+			result.getParameters().add(createFormalParameter(parameterTypes[i], parameterName, parameterAnnotations));
 		}
 		for (ITypeBinding exceptionType : method.getExceptionTypes()) {
 			result.getExceptions().add(createTypeReference(exceptionType));
@@ -503,10 +503,13 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		return result;
 	}
 
-	public JvmFormalParameter createFormalParameter(ITypeBinding parameterType, String paramName) {
+	public JvmFormalParameter createFormalParameter(ITypeBinding parameterType, String paramName, IAnnotationBinding[] annotations) {
 		JvmFormalParameter result = TypesFactory.eINSTANCE.createJvmFormalParameter();
 		result.setName(paramName);
 		result.setParameterType(createTypeReference(parameterType));
+		for (IAnnotationBinding annotation : annotations) {
+			createAnnotationReference(result, annotation);
+		}
 		return result;
 	}
 
