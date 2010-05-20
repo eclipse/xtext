@@ -31,6 +31,12 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.ParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.UnicodeCharacterDatabaseNamesTest.class);
+      suite.addTestSuite(org.eclipse.xtext.generator.parser.AntlrGrammarGenUtilTest.class);
+      suite.addTestSuite(org.eclipse.xtext.generator.parser.TerminalRuleToLexerBodyTest.class);
+      suite.addTestSuite(org.eclipse.xtext.generator.parser.ex.common.KeywordHelperTest.class);
+      suite.addTestSuite(org.eclipse.xtext.generator.parser.splitting.AntlrLexerSplitterTest.class);
+      suite.addTestSuite(org.eclipse.xtext.generator.parser.splitting.AntlrParserSplitterTest.class);
+      suite.addTestSuite(org.eclipse.xtext.generator.parser.splitting.CondititionSimplifierTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.resource.ResourceTest.class);
       suite.addTestSuite(org.eclipse.xtext.grammarinheritance.AnotherInheritanceTest.class);
       suite.addTestSuite(org.eclipse.xtext.grammarinheritance.Bug265111Test.class);

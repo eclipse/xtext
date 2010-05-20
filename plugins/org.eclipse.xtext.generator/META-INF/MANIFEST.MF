@@ -6,12 +6,32 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.xtext.generator,
+Export-Package: de.itemis.xtext.antlr,
+ de.itemis.xtext.antlr.ex,
+ de.itemis.xtext.antlr.ex.ca,
+ de.itemis.xtext.antlr.ex.rt,
+ de.itemis.xtext.antlr.ex.wsAware,
+ org.eclipse.xtext.generator,
  org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.generator.grammarAccess,
  org.eclipse.xtext.generator.parseTreeConstructor,
+ org.eclipse.xtext.generator.parser.antlr,
+ org.eclipse.xtext.generator.parser.antlr.ex,
+ org.eclipse.xtext.generator.parser.antlr.ex.ca,
+ org.eclipse.xtext.generator.parser.antlr.ex.common,
+ org.eclipse.xtext.generator.parser.antlr.ex.rt,
+ org.eclipse.xtext.generator.parser.antlr.ex.wsAware,
+ org.eclipse.xtext.generator.parser.antlr.splitting,
+ org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions,
  org.eclipse.xtext.generator.resourceFactory,
- org.eclipse.xtext.generator.validation
+ org.eclipse.xtext.generator.validation,
+ org.eclipse.xtext.generator.parser.antlr.splitting.services,
+ org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl,
+ org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.util,
+ org.eclipse.xtext.generator.parser.antlr.splitting.parseTreeConstruction,
+ org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr,
+ org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.internal,
+ org.eclipse.xtext.generator.parser.antlr.splitting.validation
 Require-Bundle: org.eclipse.xtext.util;resolution:=optional,
  org.eclipse.xtend;visibility:=reexport,
  org.eclipse.xpand;visibility:=reexport,
@@ -19,7 +39,10 @@ Require-Bundle: org.eclipse.xtext.util;resolution:=optional,
  org.eclipse.emf.codegen.ecore;resolution:=optional;visibility:=reexport,
  org.eclipse.xtext;bundle-version="1.0.0";resolution:=optional,
  org.eclipse.xtext.common.types;bundle-version="1.0.0";resolution:=optional,
- com.ibm.icu
+ com.ibm.icu,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Import-Package: org.apache.log4j;version="1.2.15"
