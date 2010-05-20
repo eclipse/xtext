@@ -235,4 +235,9 @@ public class ConcreteSyntaxConstraintProviderTest extends AbstractXtextTests {
 		String constraint = parseRule(b.toString());
 		assertEquals("<Decl, SE>(<SE>(ids|ints)+|<Decl>(type name))", constraint);
 	}
+
+	public void testEmptyAlternative() throws Exception {
+		String constraint = parseRule("Import: ('import' | 'imp') foo=ID?;");
+		assertEquals("<Import>foo?", constraint);
+	}
 }
