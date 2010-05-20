@@ -367,6 +367,8 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 					optional = true;
 				if (relevantChildren > 1)
 					return createElement(ConstraintType.ALTERNATIVE, ele, semanticType, multiple, optional);
+				if (lastChild == null)
+					return null;
 				ele = lastChild;
 				continue;
 			} else if (ele instanceof Action) {
