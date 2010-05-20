@@ -90,7 +90,7 @@ public class ElementMatcherToDot extends GrammarToDot {
 	}
 
 	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "unchecked" })
 	protected Props drawObject(Object obj) {
 		if (obj == null)
 			throw new NullPointerException("Obj null");

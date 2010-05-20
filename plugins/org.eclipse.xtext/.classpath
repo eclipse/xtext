@@ -7,5 +7,6 @@
 	<classpathentry kind="src" path="src-gen"/>
 	<classpathentry kind="src" path="model"/>
 	<classpathentry kind="src" path="deprecated"/>
+	<classpathentry kind="src" path="packrat"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
