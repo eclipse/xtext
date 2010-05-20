@@ -1,0 +1,95 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+import org::eclipse::xtext;
+import org::eclipse::emf::ecore;
+
+extension org::eclipse::xtext::generator::grammarAccess::GrammarAccess reexport;
+extension org::eclipse::xtext::Extensions reexport;
+extension org::eclipse::xtext::GrammarUtil reexport;
+extension org::eclipse::xtext::Utilities;
+extension org::eclipse::xtext::EcoreUtils;
+
+ruleName(ParserRule this) : 'rule'+name;
+ruleName(EnumRule this) : 'rule'+name;
+ruleName(TerminalRule this) : 'RULE_'+name.toUpperCase();
+ruleName(AbstractRule this) : "Unsupported";
+
+entryRuleName(ParserRule this) : 'entryRule'+name;
+
+setOrAdd(Action this) : if operator=='+=' then 'add' else 'set';
+
+
+setOrAdd(Assignment this) : if operator=='+=' then 'add' else 'set';
+
+isCalled(Grammar grammar, AbstractRule this) :
+	let x = grammar.allRules() :
+		x.indexOf(this)==0 || 
+		x.allContents().flatten().typeSelect(RuleCall).select(call|call.rule!=null).rule.contains(this);
+
+localVar(Assignment this, AbstractElement terminal) : 
+	'lv_'+feature + '_' + containingParserRule().contentsAsList().indexOf(this) + '_' + this.allContents().indexOf(terminal);
+	
+localVar(RuleCall this) : 'this_'+rule.name + '_' + containingParserRule().contentsAsList().indexOf(this);
+
+List[AbstractElement] contentsAsList(ParserRule this):
+	alternatives.contentsAsList();
+	
+List[AbstractElement] contentsAsList(AbstractElement this):
+	{this};
+	
+List[AbstractElement] contentsAsList(CompoundElement this):
+	this.elements.contentsAsList();
+
+List[AbstractElement] contentsAsList(UnorderedGroup this):
+	{this}.addAll(this.elements.contentsAsList());
+	
+toStringLiteral(AbstractElement this) :
+	"null";
+	
+String toAntlrString(String this):
+	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.toAntlrString(java.lang.String);
+
+String toJavaStringImpl(String this):
+	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.toStringInAntlrAction(java.lang.String);
+	
+toStringLiteral(RuleCall this) :
+	rule!=null ? '"'+this.rule.name+'"' :  "null";
+
+toStringLiteral(Keyword this) :
+	'"'+this.value.toJavaStringImpl()+'"';
+	
+String toLexerBody(TerminalRule this):
+	JAVA org.eclipse.xtext.generator.parser.antlr.TerminalRuleToLexerBody.toLexerBody(org.eclipse.xtext.TerminalRule);
+	
+String objectURI(Grammar grammar, EObject object) :
+	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getClasspathURI(org.eclipse.xtext.Grammar, org.eclipse.emf.ecore.EObject);
+
+mustBeParenthesized(AbstractElement this) : true;
+mustBeParenthesized(Group this) : true;
+mustBeParenthesized(UnorderedGroup this) : true;
+mustBeParenthesized(Alternatives this) : true;
+mustBeParenthesized(EnumLiteralDeclaration this) : true;
+mustBeParenthesized(Keyword this) : cardinality!=null;
+mustBeParenthesized(RuleCall this) : cardinality!=null;
+
+String grammarElementAccess(EObject object):
+	"Unsupported : grammarElementAccess for: " + object.toString(); 
+	
+String grammarElementAccess(AbstractRule this):
+	gaRuleAccessor(); 
+
+String grammarElementAccess(AbstractElement element):
+	gaRuleElementAccessor(element);
+
+List[String] initialHiddenTokens(Grammar this):
+  if (definesHiddenTokens) then 
+  	hiddenTokens.ruleName() 
+  else if (usedGrammars.size == 1) then 
+  	initialHiddenTokens(usedGrammars.first()) 
+  else {};

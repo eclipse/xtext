@@ -5,6 +5,5 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="src-gen"/>
 	<classpathentry kind="src" path="packrat"/>
-	<classpathentry kind="src" path="dummy-classes"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
