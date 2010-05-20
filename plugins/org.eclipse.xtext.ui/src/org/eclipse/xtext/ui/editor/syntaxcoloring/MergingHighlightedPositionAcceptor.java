@@ -50,7 +50,7 @@ public class MergingHighlightedPositionAcceptor implements IHighlightedPositionA
 	}
 
 	private void initialize() {
-		if (positions.isEmpty())
+		if (!positions.isEmpty())
 			positions.clear();
 		timestamp = 0;
 		expectedOffset = 0;
