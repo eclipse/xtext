@@ -33,7 +33,14 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		IXtextBuilderParticipant instance = Activator.getInstance().getInjector(
 				"org.eclipse.xtext.builder.tests.BuilderTestLanguage").getInstance(IXtextBuilderParticipant.class);
 		participant = (LoggingBuilderParticipant) instance;
-		participant.reset();
+		participant.startLogging();
+	}
+	
+	@Override
+	protected void tearDown() throws Exception {
+		participant.stopLogging();
+		participant = null;
+		super.tearDown();
 	}
 	
 	public void testParticipantInvoked() throws Exception {

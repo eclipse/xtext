@@ -21,16 +21,28 @@ public class LoggingBuilderParticipant implements IXtextBuilderParticipant {
 
 	private int invocationCount = 0;
 	private IBuildContext context;
+	private boolean logging = false;
 
 	public void build(IXtextBuilderParticipant.IBuildContext context, IProgressMonitor monitor)
 			throws CoreException {
-		invocationCount++;	
-		this.context = context;
+		if (logging) {
+			invocationCount++;	
+			this.context = context;
+		}
 	}
 	
 	public void reset() {
 		invocationCount = 0;
 		context = null;
+	}
+	
+	public void startLogging() {
+		logging = true;
+	}
+	
+	public void stopLogging() {
+		reset();
+		logging = false;
 	}
 	
 	public int getInvocationCount() {
