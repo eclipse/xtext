@@ -374,6 +374,7 @@ public class TypesSwitch<T> {
 				JvmFormalParameter jvmFormalParameter = (JvmFormalParameter)theEObject;
 				T result = caseJvmFormalParameter(jvmFormalParameter);
 				if (result == null) result = caseJvmIdentifyableElement(jvmFormalParameter);
+				if (result == null) result = caseJvmAnnotationTarget(jvmFormalParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

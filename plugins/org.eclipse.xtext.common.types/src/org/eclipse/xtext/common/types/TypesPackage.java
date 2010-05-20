@@ -1597,13 +1597,22 @@ public interface TypesPackage extends EPackage {
 	int JVM_FORMAL_PARAMETER = 29;
 
 	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FORMAL_PARAMETER__ANNOTATIONS = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_FORMAL_PARAMETER__NAME = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
+	int JVM_FORMAL_PARAMETER__NAME = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Type</b></em>' containment reference.
@@ -1612,7 +1621,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_FORMAL_PARAMETER__PARAMETER_TYPE = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
+	int JVM_FORMAL_PARAMETER__PARAMETER_TYPE = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Formal Parameter</em>' class.
@@ -1621,7 +1630,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_FORMAL_PARAMETER_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 2;
+	int JVM_FORMAL_PARAMETER_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmAnnotationReferenceImpl <em>Jvm Annotation Reference</em>}' class.
@@ -2050,7 +2059,7 @@ public interface TypesPackage extends EPackage {
 	int JVM_TYPE_ANNOTATION_VALUE__OPERATION = JVM_ANNOTATION_VALUE__OPERATION;
 
 	/**
-	 * The feature id for the '<em><b>Values</b></em>' reference list.
+	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3152,10 +3161,10 @@ public interface TypesPackage extends EPackage {
 	EClass getJvmTypeAnnotationValue();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.xtext.common.types.JvmTypeAnnotationValue#getValues <em>Values</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmTypeAnnotationValue#getValues <em>Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Values</em>'.
+	 * @return the meta object for the containment reference list '<em>Values</em>'.
 	 * @see org.eclipse.xtext.common.types.JvmTypeAnnotationValue#getValues()
 	 * @see #getJvmTypeAnnotationValue()
 	 * @generated
@@ -4078,7 +4087,7 @@ public interface TypesPackage extends EPackage {
 		EClass JVM_TYPE_ANNOTATION_VALUE = eINSTANCE.getJvmTypeAnnotationValue();
 
 		/**
-		 * The meta object literal for the '<em><b>Values</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

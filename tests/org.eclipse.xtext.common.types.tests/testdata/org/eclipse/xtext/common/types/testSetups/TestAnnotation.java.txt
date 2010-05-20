@@ -49,7 +49,7 @@ public @interface TestAnnotation  {
 			floatValue = 0.8f, 
 			longValue = { 6 , 5 + 2}, 
 			shortValue = 4, 
-			stringArrayValue = { "array", "value" }, 
+			stringArrayValue = { "array", "value", "duplicate", "duplicate" }, 
 			stringValue = "stringValue")
 	public static class Annotated {
 		
@@ -82,6 +82,22 @@ public @interface TestAnnotation  {
 			});
 		}
 		
+		public Annotated(@TestAnnotation(
+				annotationValue = @NestedAnnotation, 
+				booleanValue = false, 
+				byteValue = 1 + 1, 
+				charSequenceClass = String.class, 
+				charValue = 'a', 
+				classArray = { Annotated.class, Annotated.class }, 
+				doubleValue = 0.5, 
+				enumValue = TestEnum.FirstValue, 
+				floatValue = 0.8f, 
+				longValue = { 6 , 5 + 2}, 
+				shortValue = 4, 
+				stringArrayValue = { "array", "value" }, 
+				stringValue = "stringValue") @NestedAnnotation String s1, String s2, @NestedAnnotation("thirdParameter") String s3) {
+		}
+		
 		private void method(CharSequence charSequence) {
 		}
 
@@ -91,6 +107,22 @@ public @interface TestAnnotation  {
 		
 		@NestedAnnotation("method")
 		public void method() {
+		}
+		
+		public void method(@TestAnnotation(
+				annotationValue = @NestedAnnotation, 
+				booleanValue = false, 
+				byteValue = 1 + 1, 
+				charSequenceClass = String.class, 
+				charValue = 'a', 
+				classArray = { Annotated.class, Annotated.class }, 
+				doubleValue = 0.5, 
+				enumValue = TestEnum.FirstValue, 
+				floatValue = 0.8f, 
+				longValue = { 6 , 5 + 2}, 
+				shortValue = 4, 
+				stringArrayValue = { "array", "value" }, 
+				stringValue = "stringValue") @NestedAnnotation String s1, String s2, @NestedAnnotation("thirdParameter") String s3) {
 		}
 		
 		

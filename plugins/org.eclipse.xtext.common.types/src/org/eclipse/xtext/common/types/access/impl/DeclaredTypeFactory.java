@@ -42,7 +42,6 @@ import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeArgument;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
@@ -142,7 +141,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			} else if(componentType.equals(Class.class)) {
 				for(int i = 0; i < length; i++) {
 					Class<?> referencedClass = (Class<?>) Array.get(value, i);
-					valuesAsList.add(createProxy(referencedClass));
+					valuesAsList.add(createTypeReference(referencedClass));
 				}
 			} else if(componentType.isAnnotation()) {
 				for(int i = 0; i < length; i++) {
@@ -162,8 +161,8 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(value));
 		} else if(type.equals(Class.class)) {
 			Class<?> referencedClass = (Class<?>) value;
-			JvmType proxy = createProxy(referencedClass);
-			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(proxy));
+			JvmTypeReference reference = createTypeReference(referencedClass);
+			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(reference));
 		} else if(type.isAnnotation()) {
 			Annotation nestedAnnotation = (Annotation) value;
 			createAnnotationReference((JvmAnnotationTarget) result, nestedAnnotation);
@@ -369,7 +368,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 
 	public <T> org.eclipse.xtext.common.types.JvmConstructor createConstructor(Constructor<T> constructor) {
 		org.eclipse.xtext.common.types.JvmConstructor result = TypesFactory.eINSTANCE.createJvmConstructor();
-		enhanceExecutable(result, constructor, constructor.getDeclaringClass().getSimpleName(), constructor.getGenericParameterTypes());
+		enhanceExecutable(result, constructor, constructor.getDeclaringClass().getSimpleName(), constructor.getGenericParameterTypes(), constructor.getParameterAnnotations());
 		enhanceGenericDeclaration(result, constructor);
 		for (Type parameterType : constructor.getGenericExceptionTypes()) {
 			result.getExceptions().add(createTypeReference(parameterType));
@@ -389,7 +388,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			result.setVisibility(JvmVisibility.DEFAULT);
 	}
 
-	public void enhanceExecutable(JvmExecutable result, Member member, String simpleName, Type[] parameterTypes) {
+	public void enhanceExecutable(JvmExecutable result, Member member, String simpleName, Type[] parameterTypes, Annotation[][] annotations) {
 		StringBuilder fqName = new StringBuilder(48);
 		fqName.append(member.getDeclaringClass().getName());
 		fqName.append('.');
@@ -405,7 +404,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		setVisibility(result, member.getModifiers());
 		int i = 0;
 		for (Type parameterType : parameterTypes) {
-			result.getParameters().add(createFormalParameter(parameterType, "p" + i, result));
+			result.getParameters().add(createFormalParameter(parameterType, "p" + i, result, annotations[i]));
 			i++;
 		}
 	}
@@ -418,7 +417,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 
 	public JvmOperation createOperation(Method method) {
 		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
-		enhanceExecutable(result, method, method.getName(), method.getGenericParameterTypes());
+		enhanceExecutable(result, method, method.getName(), method.getGenericParameterTypes(), method.getParameterAnnotations());
 		enhanceGenericDeclaration(result, method);
 		result.setFinal(Modifier.isFinal(method.getModifiers()));
 		result.setStatic(Modifier.isStatic(method.getModifiers()));
@@ -431,10 +430,13 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 	}
 
 	public JvmFormalParameter createFormalParameter(Type parameterType, String paramName,
-			org.eclipse.xtext.common.types.JvmMember container) {
+			org.eclipse.xtext.common.types.JvmMember container, Annotation[] annotations) {
 		JvmFormalParameter result = TypesFactory.eINSTANCE.createJvmFormalParameter();
 		result.setName(paramName);
 		result.setParameterType(createTypeReference(parameterType));
+		for(Annotation annotation: annotations) {
+			createAnnotationReference(result, annotation);
+		}
 		return result;
 	}
 

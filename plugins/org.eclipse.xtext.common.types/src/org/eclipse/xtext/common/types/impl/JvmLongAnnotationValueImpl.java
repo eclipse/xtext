@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 import org.eclipse.xtext.common.types.JvmLongAnnotationValue;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -68,7 +68,7 @@ public class JvmLongAnnotationValueImpl extends JvmAnnotationValueImpl implement
 	 */
 	public EList<Long> getValues() {
 		if (values == null) {
-			values = new EDataTypeUniqueEList<Long>(Long.class, this, TypesPackage.JVM_LONG_ANNOTATION_VALUE__VALUES);
+			values = new EDataTypeEList<Long>(Long.class, this, TypesPackage.JVM_LONG_ANNOTATION_VALUE__VALUES);
 		}
 		return values;
 	}

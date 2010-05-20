@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 import org.eclipse.xtext.common.types.JvmShortAnnotationValue;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -68,7 +68,7 @@ public class JvmShortAnnotationValueImpl extends JvmAnnotationValueImpl implemen
 	 */
 	public EList<Short> getValues() {
 		if (values == null) {
-			values = new EDataTypeUniqueEList<Short>(Short.class, this, TypesPackage.JVM_SHORT_ANNOTATION_VALUE__VALUES);
+			values = new EDataTypeEList<Short>(Short.class, this, TypesPackage.JVM_SHORT_ANNOTATION_VALUE__VALUES);
 		}
 		return values;
 	}

@@ -24,7 +24,7 @@ package org.eclipse.xtext.common.types;
  * @model
  * @generated
  */
-public interface JvmFormalParameter extends JvmIdentifyableElement {
+public interface JvmFormalParameter extends JvmIdentifyableElement, JvmAnnotationTarget {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
