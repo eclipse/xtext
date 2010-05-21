@@ -157,7 +157,6 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	protected List<String> getDslProjectRequiredBundles() {
 		List<String> requiredBundles = Lists.newArrayList("org.eclipse.xtext", //$NON-NLS-1$
 				"org.eclipse.xtext.generator;resolution:=optional", //$NON-NLS-1$
-				"de.itemis.xtext.antlr;resolution:=optional", //$NON-NLS-1$
 				"org.apache.commons.logging;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.emf.codegen.ecore;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.emf.mwe.utils;resolution:=optional", //$NON-NLS-1$
