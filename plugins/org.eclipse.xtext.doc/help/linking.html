@@ -60,9 +60,9 @@
 </div>
 <p>The 
 					<a class="link" href="metamodelInference.html" title="Ecore model inference">Ecore model inference</a> would create an 
-					<code class="code">EClass</code> &lsquo;ReferringType&rsquo; with an 
-					<code class="code">EReference</code> &lsquo;referencedObject&rsquo; of type &lsquo;Entity&rsquo; (containment=false). The referenced object would be identified either by an ID or a STRING and the surrounding information in the current context (see 
-					<a class="link" href="scoping.html" title="Scoping">scoping</a>). If you do not use &ldquo;generate&rdquo; but &ldquo;import&rdquo; an existing ecore model, the class 
+					<code class="code">EClass</code> &sbquo;ReferringType&rsquo; with an 
+					<code class="code">EReference</code> &sbquo;referencedObject&rsquo; of type &sbquo;Entity&rsquo; (containment=false). The referenced object would be identified either by an ID or a STRING and the surrounding information in the current context (see 
+					<a class="link" href="scoping.html" title="Scoping">scoping</a>). If you do not use &bdquo;generate&rdquo; but &bdquo;import&rdquo; an existing ecore model, the class 
 					<code class="code">ReferringType</code> (or one of its super types) would need to have an EReference of type Entity (or one of its super types) declared. Also the EReference&rsquo;s containment property needs to be set to 
 					<code class="code">false</code>. 
 				</p>
@@ -89,10 +89,10 @@
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinker.java?root=Modeling_Project&view=co" target="_new">LazyLinker</a> first creates an EMF proxy and sets on the corresponding EReference. In EMF a proxy is described by a URI, which points to the real EObject. In the case of lazy linking the stored URI comprises of the context information given at parse time, which is the EObject containing the cross reference, the actual EReference, the index (in case it&rsquo;s a multi-valued cross reference) and the string which represented the cross link in the concrete syntax. The latter usually corresponds to the name of the referenced EObject. 
 					In EMF a URI consists of information about the resource the EObject is contained in as well as a so called fragment part, which is used to find the EObject within that resource. When an  EMF proxy is resolved, the current ResourceSet is asked. The resource set uses the first part to obtain (i.e. load if it is not already loaded) the resource. Then the resource is asked to return the EObject based on the fragment in the URI. The actual cross reference resolution is done by 
 					<code class="code">LazyLinkingResource.getEObject(String)</code> which receives the fragment and delegates to the implementation of the 
-					<code class="code">ILinkingService</code>.  The default implementation in turn delegates to the &ldquo;scopes API&rdquo;#scoping.
+					<code class="code">ILinkingService</code>.  The default implementation in turn delegates to the &bdquo;scopes API&rdquo;#scoping.
 				</p>
 <p>A simple implementation of the linking service (the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/DefaultLinkingService.java?root=Modeling_Project&view=co" target="_new">DefaultLinkingService</a>) is shipped with Xtext and used for any grammar per default. Usually any necessary customization of the linking behavior can best be described using the &ldquo;scopes API&rdquo;#scoping.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/DefaultLinkingService.java?root=Modeling_Project&view=co" target="_new">DefaultLinkingService</a>) is shipped with Xtext and used for any grammar per default. Usually any necessary customization of the linking behavior can best be described using the &bdquo;scopes API&rdquo;#scoping.
 				</p>
 </div>
 </body>

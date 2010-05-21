@@ -229,19 +229,21 @@
 </div>
 </div>
 <p>You might have noticed the generator workflow 
-					<code class="code">org.xtext.example.start.generator/src/workflow/EntitiesGenerator.mwe</code> will invoke a template named 
+					<code class="code">org.xtext.example.start.generator/src/workflow/EntitiesGenerator.mwe2</code> will invoke a template named 
 					<code class="code">Template.xpt</code>, so we need to change this to make sure the right templates get invoked. Open 
 					<code class="code">/org.xtext.example.start.generator/src/workflow/EntitiesGenerator.mwe</code> and make sure it invokes 
 					<code class="code">Main.xpt</code>:
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">	&lt;component&nbsp;class="org.eclipse.xpand2.Generator"&gt;<br>
-		&lt;metaModel&nbsp;class="org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel"/&gt;<br>
-		&lt;fileEncoding&nbsp;value="ISO-8859-1"/&gt;<br>
-		&lt;expand&nbsp;value="templates::Main::main&nbsp;FOR&nbsp;model"/&gt;<br>
-		&lt;genPath&nbsp;value="${targetDir}"/&gt;<br>
-	&lt;/component&gt;<br>
+<code class="code">	component&nbsp;=&nbsp;org.eclipse.xpand2.Generator&nbsp;{<br>
+		metaModel&nbsp;=&nbsp;org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel&nbsp;{}<br>
+		expand&nbsp;=&nbsp;"templates::Main::main&nbsp;FOREACH&nbsp;model"<br>
+		outlet&nbsp;=&nbsp;{<br>
+			path&nbsp;=&nbsp;targetDir<br>
+		}<br>
+		fileEncoding&nbsp;=&nbsp;fileEncoding<br>
+	}<br>
 
 <br>
 

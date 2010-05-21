@@ -1,0 +1,110 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Xtext and EMF</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="index.html" title="Xtext User Guide">
+<link rel="prev" href="Wherenext.html" title="Where next?">
+<link rel="next" href="emf_codegen.html" title="EMF code generation">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Xtext and EMF</h1>
+<p>In this section we try to introduce the basic features of the 
+			<a class="link" href="">Eclipse Modeling Framework (EMF)</a> in the context of Xtext. As EMF provides the base infrastructure for Xtext, it is useful to have a basic understanding of EMF, so we give a rough outline here.  
+			If you want to learn more about EMF, we recommend reading the 
+			<a class="link" href="">EMF book</a>.
+		</p>
+<div class="section" title="Model, AST, Meta Model, and Ecore">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="model_metamodel"></a>Model, AST, Meta Model, and Ecore </h2>
+</div>
+</div>
+</div>
+<p>When you run the workflow in your Xtext project, Xtext will generate a bunch of artifacts that make up the infrastructure for your language. Among other useful things, it will create a parser. This parser takes models, i.e. files in your language, as an input and produce a graph of objects as output. This graph is called the 
+				<span class="emphasis"><em>Abstract Syntax Tree</em></span> (AST). Given the example model from the 
+				<a class="link" href="">introduction</a>, the AST should look like this
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/ast.png"></div>
+<p>
+			
+</p>
+<p>In terms of modeling, we also refer to the AST tree as the 
+				<span class="emphasis"><em>semantic model</em></span>, as it does no longer carry any additional syntactical information. Usually it is only the semantic model that is processed by later processing steps, i.e. in the execution by a code generator or interpreter.
+			</p>
+<p>The structure of the semantic model is defined by the so called 
+				<span class="emphasis"><em>meta model</em></span>. You can think of the meta model as the schema for the models. In Xtext, meta models are either inferred from the grammar or predefined by the user (see the section on 
+				<a class="link" href="syntax.html#package_declarations" title="EPackage declarations">package declarations</a> for details). The next diagram shows the meta model of our example:
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/metamodel.png"></div>
+<p> 
+			
+</p>
+<p>The language in which the meta model is defined is called 
+				<span class="emphasis"><em>Ecore</em></span>. In other words, the meta model is the Ecore model of your language. Ecore an essential part of EMF. Your your models instantiate the meta model, and your meta model instantiates Ecore. To put an end to this recursion, Ecore is defined in itself (an instance of itself). 
+			</p>
+<p>The meta model defines the types of the semantic nodes as Ecore 
+				<span class="emphasis"><em>EClasses</em></span>. EClasses are shown as boxes in the meta mode diagram, so in our example, 
+				<span class="emphasis"><em>Model</em></span>, 
+				<span class="emphasis"><em>Type</em></span>, 
+				<span class="emphasis"><em>SimpleType</em></span>, 
+				<span class="emphasis"><em>Entity</em></span>, and 
+				<span class="emphasis"><em>Property</em></span> are EClasses. An EClass can inherit from other EClasses. Multiple inheritance is allowed in Ecore, but of course cycles are forbidden.  
+			</p>
+<p>EClasses can have 
+				<span class="emphasis"><em>EAttributes</em></span> for their simple properties. These are shown inside the EClasses nodes. The example contains two EAttributes 
+				<span class="emphasis"><em>name</em></span> and one EAttribute 
+				<span class="emphasis"><em>isMulti</em></span>. The domain of values for an EAttribute is defined by its 
+				<span class="emphasis"><em>EDataType</em></span>. Ecore ships with some predefined 
+				<span class="emphasis"><em>EDataTypes</em></span>, which essentially refer to Java primitive types and other immutable classes like String. To make a distinction from the Java types, the EDataTypes are prefixed with an 
+				<code class="code">E</code>. In our example, that&rsquo;s 
+				<span class="emphasis"><em>EString</em></span> and 
+				<span class="emphasis"><em>EBoolean</em></span>.  
+			</p>
+<p>In contrast to EAttributes, 
+				<span class="emphasis"><em>EReferences</em></span> point to other EClasses. The 
+				<code class="code">containment</code> flag indicates whether an EReference is a 
+				<span class="emphasis"><em>containment reference</em></span> or a 
+				<span class="emphasis"><em>cross reference</em></span>. In the diagram, references are edges and containment references are marked with a diamond. At the model level, each element can have at most one container, i.e. another element referring to it with a containment reference. This infers a tree structure to the models, as can be seen in the sample model diagram. On the other hand, 
+				<span class="emphasis"><em>cross references</em></span> refer to elements that can be contained anywhere else. In the example, 
+				<code class="code">elements</code> and 
+				<code class="code">properties</code> are containment references, while 
+				<code class="code">type</code> and 
+				<code class="code">extends</code> are cross references. For reasons of readability, we skipped the cross references in the sample model diagram. Note that in contrast to other parser generators, Xtext creates ASTs with linked cross references. 
+			</p>
+<p>Other than associations in UML, EReferences in Ecore are always owned by one EClass and only navigable in the direction form the owner to the type. Bi-directional associations must be modeled as two references, being 
+				<code class="code">eOpposite</code> of each other and owned by either end of the associations.
+			</p>
+<p>The superclass of EAttibutes and EReferences is 
+				<span class="emphasis"><em>EStructuralFeature</em></span> and allows to define a name and a cardinality by setting 
+				<code class="code">lowerBound</code> and 
+				<code class="code">upperBound</code>. Setting the latter to -1 means &sbquo;unbounded&rsquo;. 
+			</p>
+<p>The common supertype of EDataType and EClass is 
+				<span class="emphasis"><em>EClassifier</em></span>. An 
+				<span class="emphasis"><em>EPackage</em></span> acts as a namespace and container of EClassifiers. 
+			</p>
+<p>We have summarized these most relevant concepts of Ecore in the following diagram:  </p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/ecore.png"></div>
+<p>
+			
+</p>
+</div>
+</body>
+</html>

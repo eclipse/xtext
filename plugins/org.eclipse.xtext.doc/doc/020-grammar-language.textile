@@ -105,9 +105,9 @@ declares the name of the grammar. Xtext leverages Java's class path mechanism. T
 
 The first line is also used to declare any used language (for mechanism details see "Grammar Mixins":#grammarMixins).
 
-h3. EPackage declarations
+h3(#package_declarations). EPackage declarations
 
-Xtext parsers instantiate Ecore models (aka meta model). An Ecore model basically consists of an EPackage containing EClasses, EDatatypes and EEnums.
+Xtext parsers instantiate Ecore models (aka meta models). An Ecore model basically consists of an EPackage containing EClasses, EDatatypes and EEnums.
 Xtext can infer Ecore models from a grammar (see "Ecore model inference":#metamodelInference) but it is also possible to instantiate existing Ecore models. You can even mix this and use multiple existing Ecore models and infer some others from one grammar. 
 
 h4. EPackage generation
@@ -151,9 +151,10 @@ bc. import 'platform:/resource/project/src/my/pack/SecretCompartments.ecore'
 If you want to mix generated and imported Ecore models you'll have to configure the generator fragment in your MWE file responsible for generating the Ecore classes (${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment}) with resource URIs that point to the genmodels for the referenced Ecore models.
 Example:
 
-bc.. <fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"
-  genModels=
-    "platform:/resource/project/src/my/pack/SecretCompartments.genmodel"/>
+bc.. fragment = org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment {
+  genModels =
+    "platform:/resource/project/src/my/pack/SecretCompartments.genmodel"
+}
 
 h4. Ecore model aliases for packages
 
@@ -516,7 +517,7 @@ bc.. Operation temp = new Operation();
 temp.setLeft(current);
 current = temp;
 
-h3. Hidden terminal symbols
+h3.(#hidden_terminals) Hidden terminal symbols
 
 Because parser rules describe not a single token, but a sequence of patterns in the input, it is necessary to define the interesting parts of the input. Xtext introduces the concept of hidden tokens to handle semantically unimportant things like whitespaces, comments, etc. in the input sequence gracefully. It is possible to define a set of terminal symbols, that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they are transparently woven into the node model, but not relevant for the semantic model. 
 

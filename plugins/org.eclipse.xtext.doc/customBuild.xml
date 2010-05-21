@@ -249,7 +249,7 @@
 	 </target>
 	
 	<target name="docbook2eclipsehelp">
-		<echo>Converting article to Eclipe Help...</echo>
+		<echo>Converting article to Eclipse Help...</echo>
 		<delete dir="${basedir}/help"
 		        failonerror="false"
 		        excludes="CVS" 

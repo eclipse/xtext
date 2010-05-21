@@ -3,6 +3,7 @@
 
 015-getting-started.textile
 017-getting-started-xpand.textile
+019-emf.textile
 
 020-grammar-language.textile
 

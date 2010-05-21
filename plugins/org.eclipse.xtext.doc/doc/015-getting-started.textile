@@ -37,7 +37,7 @@ Use the Xtext wizard to create a new project
 Choose a meaningful project name, language name and file extension, e.g.
 
 | *Main project name:* 	|	org.xtext.example.start	|
-| *Language name:* 		|	org.xtext.example.Entities	|
+| *Language name:* 		|	org.xtext.example.start.Entities	|
 | *DSL-File extension:* 	|	entity	|
 
 Keep "Create generator project" checked, as we will also create a code generator in a second step.
@@ -52,13 +52,13 @@ In the Package Explorer you can see three new projects. In @org.xtext.example.st
 
 !images/getting-started-project-layout.png!
 
-It is good to be clear and unambiguous whether the code is generated or is to be manipulated by the developer. Thus, the generated code should be held separately from the manual code. We follow this pattern by having a folder src/ and a folder src-gen/ in each project. Keep in mind not to make changes in the src-gen/ folder. They will be overwritten by the generator.
+It is good to be clear and unambiguous whether the code is generated or is to be manipulated by the developer. Thus, the generated code should be held separately from the manually written code. We follow this pattern by having a folder _src/_ and a folder _src-gen/_ in each project. Keep in mind not to make changes in the _src-gen/_ folder. They will be overwritten by the generator.
 
 A third project, @org.xtext.example.start.generator@ will later contain a code generator that leverages the model created with the DSL editor.
 
 h3. Build your own grammar
 
-The wizard will automatically open the example grammar file @Entities.xtext@ from the first project in the editor. A grammar has two purposes. First, it is used to describe the concrete syntax of your language. Second, it contains information about how a parser shall create a model during parsing.
+The wizard will automatically open the example grammar file @Entities.xtext@ from the first project in the editor. A grammar has two purposes: First, it is used to describe the concrete syntax of your language. Second, it contains information about how the parser shall create a model during parsing.
 
 Ignore the generated sample grammar, delete everything after "@Model :@" to the end. 
 The entry rule for the parser will be called @Model@. As a @Model@ consists of one or more @Entity@ entries, this rule delegates to another rule named @Entity@, which will be defined later on.
@@ -110,7 +110,7 @@ SimpleType:
  
 p. Models new consist of types where a @Type@ can either be a @SimpleType@  or the @Entity@ you already know. Our rule @Type@ will just delegate to either of them, using the "@|@" alternatives operator. The combination of simple data types and entites this way introduces a common super type @Type@ both @Entity@ and @SimpleType@ derive from. This allows you to refer to both types of elements with a single cross-reference.
 
-A @Property@ consist of a keyword, a name, a colon and a cross-reference to an arbitrary @Type@. The multiplicity is either many or one. The presence of the postfix "[]" (technically a keyword) should trigger a boolean flag in the AST model. This is the purpose of the assignment operator "@?=@". Our last parser rule is:
+A @Property@ consists of a keyword, a name, a colon and a cross-reference to an arbitrary @Type@. The multiplicity is either many or one. The presence of the postfix "[]" (technically a keyword) should trigger a boolean flag in the AST model. This is the purpose of the assignment operator "@?=@". Our last parser rule is:
 
 bc.. Property:
   'property' name=ID ':' type=[Type] (many?='[]')?;

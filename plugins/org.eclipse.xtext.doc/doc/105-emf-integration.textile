@@ -1,4 +1,5 @@
-h2(#emf_integration). Integration with EMF
+
+h2(#emf_integration). Integration with other EMF editors
 
 Xtext relies heavily on EMF internally, but it can also be used as the serialization back-end of other EMF-based tools.
 
@@ -24,7 +25,7 @@ Xtext targets easy to use and naturally feeling languages. It focuses on the lex
 * Implement an @IQualifiedNameProvider@ and an @IScopeProvider@:#scoping to make the names of all linkable elements in cross-references unique. 
 * Provide an @IFormatter@:#formatting to improve the readability of the generated textual models.  
 * Register an @IReferableElementsUnloader@ to turn deleted/replaced model elements into EMF proxies. Design the rest of your application such that it does never keep references to  @EObjects@ or to cope with proxies. That will improve the stability of your application drastically.
-* Xtext will register an EMF @ResourceFatory@, so resources with the file extension you entered when generating the Xtext plug-ins will be automatically loaded in an @XtextResource@ when you use EMF's @ResourceSet@ API to load it.
+* Xtext will register an EMF @ResourceFactory@, so resources with the file extension you entered when generating the Xtext plug-ins will be automatically loaded in an @XtextResource@ when you use EMF's @ResourceSet@ API to load it.
 
 h3(#gmf_integration). Integration with GMF
 

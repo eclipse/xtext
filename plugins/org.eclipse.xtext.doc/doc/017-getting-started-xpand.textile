@@ -116,15 +116,17 @@ bc..
 
 h3. Adjusting the generator workflow
 
-You might have noticed the generator workflow @org.xtext.example.start.generator/src/workflow/EntitiesGenerator.mwe@ will invoke a template named @Template.xpt@, so we need to change this to make sure the right templates get invoked. Open @/org.xtext.example.start.generator/src/workflow/EntitiesGenerator.mwe@ and make sure it invokes @Main.xpt@:
+You might have noticed the generator workflow @org.xtext.example.start.generator/src/workflow/EntitiesGenerator.mwe2@ will invoke a template named @Template.xpt@, so we need to change this to make sure the right templates get invoked. Open @/org.xtext.example.start.generator/src/workflow/EntitiesGenerator.mwe@ and make sure it invokes @Main.xpt@:
 
 bc.. 
-	<component class="org.eclipse.xpand2.Generator">
-		<metaModel class="org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel"/>
-		<fileEncoding value="ISO-8859-1"/>
-		<expand value="templates::Main::main FOR model"/>
-		<genPath value="${targetDir}"/>
-	</component>
+	component = org.eclipse.xpand2.Generator {
+		metaModel = org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel {}
+		expand = "templates::Main::main FOREACH model"
+		outlet = {
+			path = targetDir
+		}
+		fileEncoding = fileEncoding
+	}
 
 h3. Running the generator
 

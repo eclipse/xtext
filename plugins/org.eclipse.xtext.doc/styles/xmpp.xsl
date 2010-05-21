@@ -39,7 +39,7 @@
                       <xsl:text>Xtext </xsl:text><xsl:value-of select="//releaseinfo"/>
               </xsl:when>
               <xsl:otherwise>
-                  Xtext 0.7
+                  Xtext 1.0
               </xsl:otherwise>
           </xsl:choose>
       </xsl:variable>

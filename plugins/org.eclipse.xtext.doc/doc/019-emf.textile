@@ -1,0 +1,100 @@
+
+h1(#concepts). Xtext and EMF
+
+In this section we try to introduce the basic features of the "Eclipse Modeling Framework (EMF)":#http://www.eclipse.org/emf in the context of Xtext. As EMF provides the base infrastructure for Xtext, it is useful to have a basic understanding of EMF, so we give a rough outline here.  
+If you want to learn more about EMF, we recommend reading the "EMF book":#http://www.eclipse.org/emf.
+
+h2(#model_metamodel). Model, AST, Meta Model, and Ecore 
+ 
+When you run the workflow in your Xtext project, Xtext will generate a bunch of artifacts that make up the infrastructure for your language. Among other useful things, it will create a parser. This parser takes models, i.e. files in your language, as an input and produce a graph of objects as output. This graph is called the _Abstract Syntax Tree_ (AST). Given the example model from the "introduction":#getting_started_xtext, the AST should look like this
+
+!images/ast.png(Sample AST)!
+
+In terms of modeling, we also refer to the AST tree as the _semantic model_, as it does no longer carry any additional syntactical information. Usually it is only the semantic model that is processed by later processing steps, i.e. in the execution by a code generator or interpreter.
+
+The structure of the semantic model is defined by the so called _meta model_. You can think of the meta model as the schema for the models. In Xtext, meta models are either inferred from the grammar or predefined by the user (see the section on "package declarations":#package_declarations for details). The next diagram shows the meta model of our example:
+
+!images/metamodel.png(Sample meta model)! 
+
+The language in which the meta model is defined is called _Ecore_. In other words, the meta model is the Ecore model of your language. Ecore an essential part of EMF. Your your models instantiate the meta model, and your meta model instantiates Ecore. To put an end to this recursion, Ecore is defined in itself (an instance of itself). 
+
+The meta model defines the types of the semantic nodes as Ecore _EClasses_. EClasses are shown as boxes in the meta mode diagram, so in our example, _Model_, _Type_, _SimpleType_, _Entity_, and _Property_ are EClasses. An EClass can inherit from other EClasses. Multiple inheritance is allowed in Ecore, but of course cycles are forbidden.  
+
+EClasses can have _EAttributes_ for their simple properties. These are shown inside the EClasses nodes. The example contains two EAttributes _name_ and one EAttribute _isMulti_. The domain of values for an EAttribute is defined by its _EDataType_. Ecore ships with some predefined _EDataTypes_, which essentially refer to Java primitive types and other immutable classes like String. To make a distinction from the Java types, the EDataTypes are prefixed with an @E@. In our example, that's _EString_ and _EBoolean_.  
+
+In contrast to EAttributes, _EReferences_ point to other EClasses. The @containment@ flag indicates whether an EReference is a _containment reference_ or a _cross reference_. In the diagram, references are edges and containment references are marked with a diamond. At the model level, each element can have at most one container, i.e. another element referring to it with a containment reference. This infers a tree structure to the models, as can be seen in the sample model diagram. On the other hand, _cross references_ refer to elements that can be contained anywhere else. In the example, @elements@ and @properties@ are containment references, while @type@ and @extends@ are cross references. For reasons of readability, we skipped the cross references in the sample model diagram. Note that in contrast to other parser generators, Xtext creates ASTs with linked cross references. 
+
+Other than associations in UML, EReferences in Ecore are always owned by one EClass and only navigable in the direction form the owner to the type. Bi-directional associations must be modeled as two references, being @eOpposite@ of each other and owned by either end of the associations.
+
+The superclass of EAttibutes and EReferences is _EStructuralFeature_ and allows to define a name and a cardinality by setting @lowerBound@ and @upperBound@. Setting the latter to -1 means 'unbounded'. 
+
+The common supertype of EDataType and EClass is _EClassifier_. An _EPackage_ acts as a namespace and container of EClassifiers. 
+
+We have summarized these most relevant concepts of Ecore in the following diagram:  
+
+!images/ecore.png(Ecore concepts)!
+
+h2(#emf_codegen). EMF code generation
+
+EMF also ships with a code generator that generates Java classes from your Ecore model. The code generators input is the so called _EMF generator model_. It decorates (references) the Ecore model and adds additional information for the Ecore -> Java transformation. Xtext will automatically generate a generator model with reasonable defaults for all generated metamodels, and run the EMF code generator on them. 
+
+The generated classes are based on the EMF runtime library, which offers a lot of infrastructure and tools to work with your models, such as persistence, reflection, referential integrity, lazy loading etc.
+
+Among other things, the code generator will generate
+* A Java interface and a Java class for each EClassifier in your ecore model. By default, all classes will implement the interface @org.eclipse.emf.ecore.EObject@, linking a lot of runtime functionality. 
+* A Java bean property for each EStructuralFeature (member variable, accessor methods)
+* A package interface and class, holding singleton objects for all elements of your Ecore model, allowing reflection. EPackages are also registered to the @EPackage.Registry@ to be usable at runtime.
+* A factory interface and class for creating instances
+* An abstract switch class implementing a visitor pattern to avoid if-instanceof cascades in your code.
+
+h2(#emf_resource). EMF Resources
+
+EMF offers RESTful (REpresentational State Transfer) persistence of your models. 
+
+An @org.eclipse.emf.ecore.Resource@ is a container for a model that adds support for persistence. When working with files, you can assume that a resource is the in-memory representation of a model file. There are different implementations of the resource interface, e.g. for XMI, XML or binary serialization of models. The ${org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource} encapsulates the parser and "serializer":#serialization of your DSL, thus transparently reading and writing your models in the syntax according to your grammar while offering an EMF view on the semantic model.     
+
+Each EMF resource has a "_Uniform Resource Identifier (URI)_":http://www.ietf.org/rfc/rfc2396.txt defining where and how the resource can be accessed. Resource URIs are of the form 
+
+bc. [scheme]:[authority][path]
+
+where each segment is optional. Authority and path segments are separated by slashes. URIs can be absolute or relative and are represented by the class @org.eclipse.emf.common.util.URI@. 
+
+Resources are usually created by a @org.eclipse.emf.ecore.Resource.Factory@.  Xtext will register a resource factory that creates an @XtextReosurce@ for your language if the given URI ends with the file extension you provided in the @.properties@ file of your language.
+
+In addition to the standard schemes like @http:@ or @file:@, EMF introduces two new types of URIs, useful when operating inside an Eclipse workbench
+* @platform:/resource/<project>/<path>@ refers to files in the workspace
+* @platform:/plugin/<plugin>/path@ uses the class loader of an installed plug-in's to load a file.
+
+Model elements (EObjects) within a resource are referred to by a so called _fragment_. The fragment must be unique inside the resource. The URI of an EObject consists of the URI of its resource followed by a hash mark '#' and its fragment. The default EMF strategy for calculating fragments is to build a path expression, similar to XPath. In Xtext, you can override that by binding a new @IFragmentProvider@.
+
+As the name suggests, a _ResourceSet_ is a set of resources. The model elements in these resources can have cross references across the resource boundaries. EMF supports lazy loading, i.e. when you navigate a reference to a resource that has not been loaded yet, the resource will be transparently loaded into the same ResourceSet as the referring resource. A ResourceSet also allows to override several global registries and services. 
+
+Xtext offers two additional ResourceSet implementations: 
+* ${org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResourceSet.java} supports a new URI scheme @classpath:@ to load resources with a classloader. As there can be multiple classloader inside the same Java process, the XtextResourceSet must be configured with a context.
+* ${org.eclipse.xtext/src/org/eclipse/xtext/resource/SynchronizedXtextResourceSet.java} guards the list of resources for concurrent access.  
+
+h2(#grammar_model). Grammar model
+
+Xtext is bootstrapped: The Xtext grammar language has been built with Xtext. You can find the grammar of the Xtext grammar language is ${org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext}. Consequently, there is an Ecore model for Xtext grammars. When you write your own grammars, the Xtext grammar parser will instantiate this Xtext grammar model. If you're curious, you can find this model as an @XMI@ file in the @src_gen@ folder of our language plug-in, but the textual version - the grammar itself - is far easier to read. That's why we use Xtext anyway, don't we ;-).
+
+h2(#parsetree_model). Parse tree model
+
+In addition to the AST, the Xtext parser creates another model, the _Parse Tree Model_. This model represents the trace of the parsing process and keeps syntactic information, such as @offset@ and @length@ of the text range describing an element. The parser is the only component modifying the parse tree model. All parse tree models conform to the same meta model, that is shown in the following diagram:    
+
+!images/node-model.png(Parse tree model)!
+
+There are two concrete types of nodes: _CompositeNodes_ act as containers for other nodes, while _LeafNodes_ cannot have children, but describe to terminals via the @text@ attribute. A LeafNode is @hidden@ if its terminal is "defined as hidden":#hidden_terminals in the grammar, which usually means it is a whitespace or a comment. With exception to the last node, the parser will put hidden terminals as children in the composite node belonging to the following region. 
+
+Both concrete node classes inherit from the abstract class _AbstractNode_. Each node knows the text location (@totalOffset@, @totalLength@ , and @totalLine@) it represents. For CompositeNodes, that includes their children's ranges. As opposed to the total location, the derived operations @getOffset()@, @getLength()@, and @getLine()@ describe the location without surrounding hidden terminals. @endLine()@ calculates the last line of the location. 
+
+The method @serialize()@ will concatenate all texts of contained leaf nodes as a string, thus yielding the text segment of the node when it was parsed. Note that it will not call the "serializer":#serialization. 
+
+Finally, the parser stores _SyntaxErrors_ in the parse tree model, which allows error recovery and partially parsed models.  
+
+h3(#node_semantic_grammar). Connection of AST, parse tree and grammar 
+
+A parse tree node directly refers to the AST node it belongs to via the @element@ reference. As stated above, the AST nodes don't offer any syntactical information themselves. Instead, the parser attaches @org.eclipse.parsetree.NodeAdapter@ as EMF adapter to each semantic element it creates. That adapter has a reference to the corresponding parse tree node. The ${org.eclipse.xtext/src/org/eclipse/xtext/parsetree/NodeUtil.java} offers a collection of utility methods to manage node adapters. 
+
+By means of the @grammarElement@ reference, a node points to the element of the "grammar model":#grammar_model that caused the parser to consume its content.
+
+Neither the parse tree model nor the grammar model appear in the @contents@ of the resource. As an alternative to the node adapter, you reach the node model by calling @XtextResource.getParseResult().getRootNode()@.
