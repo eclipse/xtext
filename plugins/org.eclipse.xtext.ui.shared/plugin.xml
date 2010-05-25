@@ -4,7 +4,7 @@
    <extension-point id="overridingGuiceModule" name="overridingGuiceModule" schema="schema/overridingGuiceModule.exsd"/>
    <extension
         id="xtextBuilder"
-        name="Xtext Project Builder"
+        name="%XtextBuilder.name"
         point="org.eclipse.core.resources.builders">
      <builder
            hasNature="true">
@@ -16,7 +16,7 @@
   </extension>
   <extension
         id="xtextNature"
-        name="Xtext Project Nature"
+        name="%XtextNature.name"
         point="org.eclipse.core.resources.natures">
      <runtime>
         	<run
@@ -27,6 +27,12 @@
            id="org.eclipse.xtext.ui.shared.xtextBuilder">
      </builder>
   </extension>
+  <extension point="org.eclipse.ui.menus">
+       <menuContribution
+            locationURI="menu:navigate?after=open.ext4">
+         <command commandId="org.eclipse.xtext.ui.shared.OpenXtextElementCommand"/>
+      </menuContribution>
+   </extension>
   <extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution
@@ -36,7 +42,7 @@
          <action
                class="org.eclipse.xtext.builder.nature.ToggleXtextNatureAction"
                id="org.eclipse.xtext.builder.action.AddXtextNatureAction"
-               label="Add Xtext Nature"
+               label="%XtextNatureAddAction.label"
                menubarPath="org.eclipse.ui.projectConfigure/additions"
                >
          </action>
@@ -56,7 +62,7 @@
          <action
                class="org.eclipse.xtext.builder.nature.ToggleXtextNatureAction"
                id="org.eclipse.xtext.builder.action.RemoveXtextNatureAction"
-               label="Remove Xtext Nature"
+               label="%XtextNatureRemoveAction.label"
                menubarPath="org.eclipse.ui.projectConfigure/additions"
                >
          </action>
@@ -91,9 +97,9 @@
          point="org.eclipse.ui.commands">
       <command
             categoryId="org.eclipse.ui.category.window"
-            description="Open the declaration of an Xtext element"
+            description="%OpenModelElementCommand.description"
             id="org.eclipse.xtext.ui.shared.OpenXtextElementCommand"
-            name="Open Xtext Element">
+            name="%OpenModelElementCommand.name">
       </command>
    </extension>
    <extension

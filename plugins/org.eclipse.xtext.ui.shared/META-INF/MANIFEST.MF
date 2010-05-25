@@ -3,6 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xtext UI Shared
 Bundle-SymbolicName: org.eclipse.xtext.ui.shared;singleton:=true
 Bundle-Version: 1.0.0.qualifier
+Bundle-Localization: plugin
 Bundle-Activator: org.eclipse.xtext.ui.shared.internal.Activator
 Bundle-Vendor: Eclipse Modeling Project
 Require-Bundle: org.eclipse.xtext.ui;bundle-version="1.0.0";resolution:=optional,
