@@ -439,7 +439,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 
 	public static class DiagnosticImpl implements Diagnostic {
 
-		private DiagnosticImpl(int severity, String message, EObject source, Integer feature, CheckType checkType, String issueCode, String... issueData) {
+		public DiagnosticImpl(int severity, String message, EObject source, Integer feature, CheckType checkType, String issueCode, String... issueData) {
 			super();
 			this.severity = severity;
 			this.message = message;
