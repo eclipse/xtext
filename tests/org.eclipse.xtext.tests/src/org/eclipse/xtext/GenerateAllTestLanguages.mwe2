@@ -266,6 +266,10 @@ Workflow {
 				backtrack = true
 			}
 		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/EcoreTerminalsTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
