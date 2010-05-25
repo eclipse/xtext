@@ -12,8 +12,8 @@ package org.eclipse.xtext.common.types.access.impl;
  */
 public interface URIHelperConstants {
 
-	String PRIMITIVES = "/Primitives";
-	String OBJECTS = "/Objects/";
-	String PROTOCOL = "java";
+	String PRIMITIVES = "/Primitives"; //$NON-NLS-1$
+	String OBJECTS = "/Objects/"; //$NON-NLS-1$
+	String PROTOCOL = "java"; //$NON-NLS-1$
 	
 }
