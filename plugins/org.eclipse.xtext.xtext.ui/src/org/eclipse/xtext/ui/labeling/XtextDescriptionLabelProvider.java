@@ -25,26 +25,26 @@ public class XtextDescriptionLabelProvider extends DefaultDescriptionLabelProvid
 	}
 	
 	public String image(Grammar grammar) {
-		return "language.gif";
+		return "language.gif"; //$NON-NLS-1$
 	}
 
 	public String image(GeneratedMetamodel metamodel) {
-		return "export.gif";
+		return "export.gif"; //$NON-NLS-1$
 	}
 
 	public String image(ReferencedMetamodel metamodel) {
-		return "import.gif";
+		return "import.gif"; //$NON-NLS-1$
 	}
 
 	public String image(AbstractRule rule) {
-		return "rule.gif";
+		return "rule.gif"; //$NON-NLS-1$
 	}
 
 	public String image(RuleCall ruleCall) {
-		return "rule.gif";
+		return "rule.gif"; //$NON-NLS-1$
 	}
 
 	public String image(Keyword keyword) {
-		return "keyword.gif";
+		return "keyword.gif"; //$NON-NLS-1$
 	}
 }

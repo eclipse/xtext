@@ -18,7 +18,6 @@ public class Messages extends NLS {
 	public static String EPackageChooser_ErrorFindingGenModels;
 	public static String NewXtextProjectFromEcoreWizard_WindowTitle;
 	public static String WizardSelectImportedEPackagePage_AddButtonText;
-	public static String WizardSelectImportedEPackagePage_CheckButtonText;
 	public static String WizardSelectImportedEPackagePage_ListTitle;
 	public static String WizardSelectImportedEPackagePage_RemoveButtonText;
 	public static String WizardSelectImportedEPackagePage_WindowTitle;
