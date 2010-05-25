@@ -64,7 +64,7 @@ public abstract class AbstractLexerBasedConverter<T> extends AbstractValueConver
 		if (!escapedString.equals(token.getText())) {
 			throw createTokenContentMismatchException(value, escapedString, token);
 		}
-		if (!getRuleName().equals(getRuleName(token))) {
+		if (!getRuleName().toUpperCase().equals(getRuleName(token))) {
 			throw createTokenTypeMismatchException(value, escapedString, token);
 		}
 		T reparsedValue = toValue(token.getText(), null);
@@ -109,6 +109,7 @@ public abstract class AbstractLexerBasedConverter<T> extends AbstractValueConver
 		return null;
 	}
 	
+	// TODO: rename to getLexerRuleName() on next API change
 	protected String getRuleName(Token token) {
 		String result = getTokenDefMap().get(token.getType());
 		return result.substring("RULE_".length());
