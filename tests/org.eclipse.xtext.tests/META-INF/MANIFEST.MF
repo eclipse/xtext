@@ -397,5 +397,8 @@ Export-Package: org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.linking.bug313089.util,
  org.eclipse.xtext.linking.lazy.bug311337,
  org.eclipse.xtext.linking.lazy.bug311337.impl,
- org.eclipse.xtext.linking.lazy.bug311337.util
+ org.eclipse.xtext.linking.lazy.bug311337.util,
+ org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage,
+ org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.impl,
+ org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.util
 

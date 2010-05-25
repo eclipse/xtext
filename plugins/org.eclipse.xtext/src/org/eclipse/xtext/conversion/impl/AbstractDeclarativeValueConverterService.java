@@ -21,6 +21,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
@@ -38,6 +39,9 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 	private Grammar grammar;
 
 	private Map<String, IValueConverter<Object>> converters;
+
+	@Inject 
+	protected DefaultTerminalConverter.Factory defaultTerminalConverterFactory;
 	
 	@Inject
 	public void setGrammar(IGrammarAccess grammarAccess) {
@@ -65,7 +69,6 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 		return (IValueConverter<Object>) IValueConverter.NO_OP_CONVERTER;
 	}
 
-
 	protected Map<String, IValueConverter<Object>> getConverters() {
 		if (converters == null) {
 			converters = new HashMap<String, IValueConverter<Object>>();
@@ -88,8 +91,8 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 							((IValueConverter.RuleSpecific) valueConverter).setRule(rule);
 						converters.put(ruleName, valueConverter);
 					} else
-						log.trace("Tried to register value converter for rule '" + ruleName + 
-								"' which is not available in the grammar.");
+						log.trace("Tried to register value converter for rule '" + ruleName
+								+ "' which is not available in the grammar.");
 
 				} catch (Exception e) {
 					log.error(e.getMessage(), e);
@@ -109,12 +112,17 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 
 	protected void registerEFactoryConverters() {
 		for (ParserRule parserRule : allParserRules(getGrammar())) {
-			if(isDatatypeRule(parserRule) && !converters.containsKey(parserRule.getName())) {
+			if (isDatatypeRule(parserRule) && !converters.containsKey(parserRule.getName())) {
 				EDataType datatype = (EDataType) parserRule.getType().getClassifier();
 				converters.put(parserRule.getName(), new EFactoryValueConverter(datatype));
 			}
 		}
+		for (TerminalRule terminalRule : allTerminalRules(getGrammar())) {
+			String terminalRuleName = terminalRule.getName();
+			if (!converters.containsKey(terminalRuleName)) {
+				converters.put(terminalRuleName, defaultTerminalConverterFactory.create(terminalRule));
+			}
+		}
 	}
-
 
 }
