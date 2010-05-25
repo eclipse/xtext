@@ -22,7 +22,7 @@
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="org.eclipse.xtext.examples.NewDomainModelExampleWizard" pageImage="icons/genproject.gif">
 		 <projectDescriptor name="org.eclipse.xtext.example.domainmodel" contentURI="contents/org.eclipse.xtext.example.domainmodel.zip" description="Parser, Serializer, Linker, etc."/>
-		 <projectDescriptor name="org.eclipse.xtext.example.domainmodel.ui" contentURI="contents/org.eclipse.xtext.example.domainmodel.zip" description="A smart editor for the language."/>
+		 <projectDescriptor name="org.eclipse.xtext.example.domainmodel.ui" contentURI="contents/org.eclipse.xtext.example.domainmodel.ui.zip" description="A smart editor for the language."/>
 		 <projectDescriptor name="org.eclipse.xtext.example.domainmodel.ui.tests" contentURI="contents/org.eclipse.xtext.example.domainmodel.ui.tests.zip" description="JUnit test cases"/>
 	  </example>
 	</extension>   
