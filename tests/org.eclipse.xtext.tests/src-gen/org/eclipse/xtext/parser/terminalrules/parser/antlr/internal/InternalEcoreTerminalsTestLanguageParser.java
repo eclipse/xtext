@@ -38,7 +38,7 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
         
 
     public String[] getTokenNames() { return tokenNames; }
-    public String getGrammarFileName() { return "/Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g"; }
+    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g"; }
 
 
 
@@ -70,7 +70,7 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start entryRuleModel
-    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:77:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:77:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -78,8 +78,8 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:78:2: (iv_ruleModel= ruleModel EOF )
-            // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:79:2: iv_ruleModel= ruleModel EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:78:2: (iv_ruleModel= ruleModel EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:79:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel75);
@@ -105,7 +105,7 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start ruleModel
-    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:86:1: ruleModel returns [EObject current=null] : ( ( 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | ( 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | ( 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )* ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:86:1: ruleModel returns [EObject current=null] : ( ( 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | ( 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | ( 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )* ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -116,10 +116,10 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:91:6: ( ( ( 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | ( 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | ( 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )* )
-            // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:92:1: ( ( 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | ( 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | ( 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:91:6: ( ( ( 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | ( 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | ( 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:92:1: ( ( 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | ( 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | ( 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )*
             {
-            // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:92:1: ( ( 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | ( 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | ( 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:92:1: ( ( 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | ( 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | ( 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )*
             loop1:
             do {
                 int alt1=4;
@@ -144,20 +144,20 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
 
                 switch (alt1) {
             	case 1 :
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:92:2: ( 'int' ( (lv_intValues_1_0= RULE_EINT ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:92:2: ( 'int' ( (lv_intValues_1_0= RULE_EINT ) ) )
             	    {
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:92:2: ( 'int' ( (lv_intValues_1_0= RULE_EINT ) ) )
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:92:4: 'int' ( (lv_intValues_1_0= RULE_EINT ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:92:2: ( 'int' ( (lv_intValues_1_0= RULE_EINT ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:92:4: 'int' ( (lv_intValues_1_0= RULE_EINT ) )
             	    {
             	    match(input,8,FollowSets000.FOLLOW_8_in_ruleModel121); 
 
             	            createLeafNode(grammarAccess.getModelAccess().getIntKeyword_0_0(), null); 
             	        
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:96:1: ( (lv_intValues_1_0= RULE_EINT ) )
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:97:1: (lv_intValues_1_0= RULE_EINT )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:96:1: ( (lv_intValues_1_0= RULE_EINT ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:97:1: (lv_intValues_1_0= RULE_EINT )
             	    {
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:97:1: (lv_intValues_1_0= RULE_EINT )
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:98:3: lv_intValues_1_0= RULE_EINT
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:97:1: (lv_intValues_1_0= RULE_EINT )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:98:3: lv_intValues_1_0= RULE_EINT
             	    {
             	    lv_intValues_1_0=(Token)input.LT(1);
             	    match(input,RULE_EINT,FollowSets000.FOLLOW_RULE_EINT_in_ruleModel138); 
@@ -193,20 +193,20 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
             	    }
             	    break;
             	case 2 :
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:121:6: ( 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:121:6: ( 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) )
             	    {
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:121:6: ( 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) )
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:121:8: 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:121:6: ( 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:121:8: 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) )
             	    {
             	    match(input,9,FollowSets000.FOLLOW_9_in_ruleModel161); 
 
             	            createLeafNode(grammarAccess.getModelAccess().getDoubleKeyword_1_0(), null); 
             	        
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:125:1: ( (lv_doubleValues_3_0= RULE_EDOUBLE ) )
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:126:1: (lv_doubleValues_3_0= RULE_EDOUBLE )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:125:1: ( (lv_doubleValues_3_0= RULE_EDOUBLE ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:126:1: (lv_doubleValues_3_0= RULE_EDOUBLE )
             	    {
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:126:1: (lv_doubleValues_3_0= RULE_EDOUBLE )
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:127:3: lv_doubleValues_3_0= RULE_EDOUBLE
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:126:1: (lv_doubleValues_3_0= RULE_EDOUBLE )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:127:3: lv_doubleValues_3_0= RULE_EDOUBLE
             	    {
             	    lv_doubleValues_3_0=(Token)input.LT(1);
             	    match(input,RULE_EDOUBLE,FollowSets000.FOLLOW_RULE_EDOUBLE_in_ruleModel178); 
@@ -242,20 +242,20 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
             	    }
             	    break;
             	case 3 :
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:150:6: ( 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:150:6: ( 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) )
             	    {
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:150:6: ( 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) )
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:150:8: 'date' ( (lv_dateValues_5_0= RULE_EDATE ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:150:6: ( 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:150:8: 'date' ( (lv_dateValues_5_0= RULE_EDATE ) )
             	    {
             	    match(input,10,FollowSets000.FOLLOW_10_in_ruleModel201); 
 
             	            createLeafNode(grammarAccess.getModelAccess().getDateKeyword_2_0(), null); 
             	        
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:154:1: ( (lv_dateValues_5_0= RULE_EDATE ) )
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:1: (lv_dateValues_5_0= RULE_EDATE )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:154:1: ( (lv_dateValues_5_0= RULE_EDATE ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:1: (lv_dateValues_5_0= RULE_EDATE )
             	    {
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:1: (lv_dateValues_5_0= RULE_EDATE )
-            	    // /Users/koehnlein/Documents/devel/xtext/workspace/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:156:3: lv_dateValues_5_0= RULE_EDATE
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:1: (lv_dateValues_5_0= RULE_EDATE )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:156:3: lv_dateValues_5_0= RULE_EDATE
             	    {
             	    lv_dateValues_5_0=(Token)input.LT(1);
             	    match(input,RULE_EDATE,FollowSets000.FOLLOW_RULE_EDATE_in_ruleModel218); 
