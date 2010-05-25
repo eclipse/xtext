@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.arithmetics;
 
-import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.example.arithmetics.scoping.NameProvider;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -25,8 +24,4 @@ public class ArithmeticsRuntimeModule extends AbstractArithmeticsRuntimeModule {
 		return org.eclipse.xtext.example.arithmetics.scoping.LinkingService.class;
 	}
 	
-	@Override
-	public Class<? extends IValueConverterService> bindIValueConverterService() {
-		return MyValueConverterService.class;
-	}
 }
