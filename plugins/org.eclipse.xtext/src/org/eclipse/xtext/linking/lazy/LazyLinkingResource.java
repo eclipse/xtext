@@ -10,6 +10,7 @@ package org.eclipse.xtext.linking.lazy;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -22,10 +23,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
-import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext;
+import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Triple;
 
@@ -140,12 +142,13 @@ public class LazyLinkingResource extends XtextResource {
 		}
 
 		public String getLinkText() {
-			String serialized = triple.getThird().serialize();
-			if (serialized != null)
-				return serialized.trim();
-			return null;
+			StringWriter writer = new StringWriter();
+			for(LeafNode leafNode: triple.getThird().getLeafNodes()) {
+				if(!leafNode.isHidden()) 
+					writer.append(leafNode.getText());
+			}
+			return writer.toString();
 		}
-		
 	}
 	
 	protected void createAndAddDiagnostic(Triple<EObject, EReference, AbstractNode> triple) {
