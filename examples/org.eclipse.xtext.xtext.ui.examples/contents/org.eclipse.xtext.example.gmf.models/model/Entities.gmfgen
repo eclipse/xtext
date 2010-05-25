@@ -474,9 +474,4 @@
     <items
         xsi:type="gmfgen:LoadResourceAction"/>
   </contextMenus>
-  <contextMenus
-      context="//@diagram">
-    <items
-        xsi:type="gmfgen:LoadResourceAction"/>
-  </contextMenus>
 </gmfgen:GenEditorGenerator>

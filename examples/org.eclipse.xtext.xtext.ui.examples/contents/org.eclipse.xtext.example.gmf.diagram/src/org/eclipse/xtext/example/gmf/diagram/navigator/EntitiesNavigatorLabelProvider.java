@@ -88,24 +88,24 @@ public class EntitiesNavigatorLabelProvider extends LabelProvider implements
 	 */
 	public Image getImage(View view) {
 		switch (EntitiesVisualIDRegistry.getVisualID(view)) {
-		case ReferenceEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?Link?http://www.eclipse.org/xtext/example/gmf/Entities?Reference", EntitiesElementTypes.Reference_3001); //$NON-NLS-1$
-		case SimplePropertyEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?Node?http://www.eclipse.org/xtext/example/gmf/Entities?SimpleProperty", EntitiesElementTypes.SimpleProperty_2001); //$NON-NLS-1$
 		case EntityExtendsEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?Link?http://www.eclipse.org/xtext/example/gmf/Entities?Entity?extends", EntitiesElementTypes.EntityExtends_3002); //$NON-NLS-1$
-		case EntityEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?TopLevelNode?http://www.eclipse.org/xtext/example/gmf/Entities?Entity", EntitiesElementTypes.Entity_1001); //$NON-NLS-1$
 		case ModelEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?Diagram?http://www.eclipse.org/xtext/example/gmf/Entities?Model", EntitiesElementTypes.Model_79); //$NON-NLS-1$
 		case SimpleTypeEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?TopLevelNode?http://www.eclipse.org/xtext/example/gmf/Entities?SimpleType", EntitiesElementTypes.SimpleType_1002); //$NON-NLS-1$
+		case ReferenceEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Link?http://www.eclipse.org/xtext/example/gmf/Entities?Reference", EntitiesElementTypes.Reference_3001); //$NON-NLS-1$
+		case SimplePropertyEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Node?http://www.eclipse.org/xtext/example/gmf/Entities?SimpleProperty", EntitiesElementTypes.SimpleProperty_2001); //$NON-NLS-1$
+		case EntityEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?TopLevelNode?http://www.eclipse.org/xtext/example/gmf/Entities?Entity", EntitiesElementTypes.Entity_1001); //$NON-NLS-1$
 		}
 		return getImage("Navigator?UnknownElement", null); //$NON-NLS-1$
 	}
@@ -158,18 +158,18 @@ public class EntitiesNavigatorLabelProvider extends LabelProvider implements
 			return getUnresolvedDomainElementProxyText(view);
 		}
 		switch (EntitiesVisualIDRegistry.getVisualID(view)) {
-		case ReferenceEditPart.VISUAL_ID:
-			return getReference_3001Text(view);
-		case SimplePropertyEditPart.VISUAL_ID:
-			return getSimpleProperty_2001Text(view);
 		case EntityExtendsEditPart.VISUAL_ID:
 			return getEntityExtends_3002Text(view);
-		case EntityEditPart.VISUAL_ID:
-			return getEntity_1001Text(view);
 		case ModelEditPart.VISUAL_ID:
 			return getModel_79Text(view);
 		case SimpleTypeEditPart.VISUAL_ID:
 			return getSimpleType_1002Text(view);
+		case ReferenceEditPart.VISUAL_ID:
+			return getReference_3001Text(view);
+		case SimplePropertyEditPart.VISUAL_ID:
+			return getSimpleProperty_2001Text(view);
+		case EntityEditPart.VISUAL_ID:
+			return getEntity_1001Text(view);
 		}
 		return getUnknownElementText(view);
 	}

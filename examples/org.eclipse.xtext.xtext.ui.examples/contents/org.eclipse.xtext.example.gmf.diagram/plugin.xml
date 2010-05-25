@@ -532,27 +532,11 @@
             </visibleWhen>
          </command>
       </menuContribution>
-      <menuContribution locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
-         <command commandId="org.eclipse.xtext.example.gmf.diagram.LoadResourceAction">
-            <visibleWhen>
-               <and>
-                  <with variable="activePartId"><equals value="org.eclipse.xtext.example.gmf.diagram.part.EntitiesDiagramEditorID"/></with>
-                  <with variable="selection"><iterate ifEmpty="false"> 
-                     <instanceof value="org.eclipse.xtext.example.gmf.diagram.edit.parts.ModelEditPart"/>
-                  </iterate></with>
-               </and>
-            </visibleWhen>
-         </command>
-      </menuContribution>
    </extension>
 
    <extension point="org.eclipse.ui.commands" id="menu-commands">
       <?gmfgen generated="true"?>
       <category id="org.eclipse.xtext.example.gmf.diagram.part.EntitiesDiagramEditorID" name="%cmdcategory.name" description="%cmdcategory.desc"/>
-      <command id="org.eclipse.xtext.example.gmf.diagram.LoadResourceAction"
-         name="Load Resource"
-         categoryId="org.eclipse.xtext.example.gmf.diagram.part.EntitiesDiagramEditorID"
-         defaultHandler="org.eclipse.xtext.example.gmf.diagram.part.LoadResourceAction"/>
       <command id="org.eclipse.xtext.example.gmf.diagram.LoadResourceAction"
          name="Load Resource"
          categoryId="org.eclipse.xtext.example.gmf.diagram.part.EntitiesDiagramEditorID"
