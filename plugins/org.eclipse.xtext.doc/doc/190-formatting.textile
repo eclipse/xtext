@@ -9,9 +9,9 @@ Xtext ships with two formatters:
 * The ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter} simply writes one whitespace between all tokens.
 * The ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter} allows advanced configuration using a ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.FormattingConfig}. Both are explained in the "next chapter":#declarativeformatter.
 
-h3(#declarativeformatter). Declarative Formatter   
+h3(#declarativeformatter). Declarative Formatter
 
-p. A declarative formatter can be implemented by sub-classing {org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter}, as shown in the following example:
+p. A declarative formatter can be implemented by sub-classing ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter}, as shown in the following example:
 
 bc.. 
 public class ExampleFormatter extends AbstractDeclarativeFormatter {
@@ -21,59 +21,81 @@ public class ExampleFormatter extends AbstractDeclarativeFormatter {
     ExampleLanguageGrammarAccess f = getGrammarAccess();
     
     c.setAutoLinewrap(120);
+    
+    // find common keywords an specify formatting for them
+    for (Pair<Keyword, Keyword> pair : f.findKeywordPairs("(", ")")) {
+      c.setNoSpace().after(pair.getFirst());
+      c.setNoSpace().before(pair.getSecond());
+    }
+    for (Keyword comma : f.findKeywords(",")) {
+      c.setNoSpace().before(comma);
+    }
 
-    // Line
+    // formatting for grammar rule Line
     c.setLinewrap(2).after(f.getLineAccess().getSemicolonKeyword_1());
     c.setNoSpace().before(f.getLineAccess().getSemicolonKeyword_1());
     
-    // TestIndentation
-    c.setIndentation(
-    		f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1(),
+    // formatting for grammar rule TestIndentation
+    c.setIndentationIncrement().after(
+        f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());
+    c.setIndentationDecrement().before(
         f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());
     c.setLinewrap().after(
-    		f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());
+        f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());
     c.setLinewrap().after(
-    		f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());
+        f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());
     
-    // Param
+    // formatting for grammar rule Param
     c.setNoLinewrap().around(f.getParamAccess().getColonKeyword_1());
     c.setNoSpace().around(f.getParamAccess().getColonKeyword_1());
     
-    // comments
-    c.setNoLinewrap().before(f.getSL_COMMENTRule());
+    // formatting for Comments 
+    cfg.setLinewrap(0, 1, 2).before(g.getSL_COMMENTRule());
+    cfg.setLinewrap(0, 1, 2).before(g.getML_COMMENTRule());
+    cfg.setLinewrap(0, 1, 1).after(g.getML_COMMENTRule());
   }
 }
 
-p. The formatter has to implement the method @configureFormatting(...)@ which is supposed to declaratively set up a ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.FormattingConfig}.
+p. The formatter has to implement the method @configureFormatting(...)@ which declaratively sets up a ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.FormattingConfig}.
 
-The ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.FormattingConfig} consist general settings and a set of rules:
+The ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.FormattingConfig} consist general settings and a set of formatting instructions:
 
 h4. General FormattingConfig Settings
 
-* @setAutoLinewrap(int)@  defines the amount of characters after which a line-break should be dynamically inserted between two tokens. The rule @setNoLinewrap()@ can be used to suppress this behavior locally. The default is 80.
-* @setIndentationSpace(String)@ defines the string which is used for a single degree of indentation. The default is two whitespace.
-* @setWhitespaceRule(AbstractRule)@ defines the grammar rule which is used to match whitespace. This is needed by the formatter to identify whitespace and to insert whitespace. The default is the rule named @WS@.
-* @setIndentation(start, end)@ increases the level of indentation when the element @start@ is matched and decreases the level when element @end@ is matched. The matching of elements happens in the same way as it does for formatting rules.
+* @setAutoLinewrap(int)@ defines the amount of characters after which a line-break should be dynamically inserted between two tokens. The instructions @setNoLinewrap().???()@,  @setNoSpace().???()@ and @setSpace(space).???()@ suppress this behavior locally. The default is 80.
 
-h4. FormattingConfig Rules
+h4. FormattingConfig Instructions
 
-p. Per default, the "Declarative Formatter":#declarativeformatter inserts one whitespace between two tokens. Rules can be used to specify a different behavior. They consist of two parts: _When_ to apply the rule and _what_ to do.
+p. Per default, the "Declarative Formatter":#declarativeformatter inserts one whitespace between two tokens. Instructions can be used to specify a different behavior. They consist of two parts: _When_ to apply the instruction and _what_ to do.
 
-To understand _when_ a rule is applied think of a stream of tokens whereas each token is associated with the corresponding grammar element. The rules are matched against these grammar elements. The following matching criteria exist.
-* @after(ele)@: The rule is executed after the grammar element @ele@ has been matched. For example, if your grammar uses the keyword ";" to end lines, this can instruct the formatter to insert a line-break after the semicolon.  
-* @before(ele)@: The rule is executed before the matched element. For example, if your grammar contains lists which separate its values with keyword ",", you can instruct the formatter to suppress the whitespace before the comma.
+To understand _when_ an instruction is applied think of a stream of tokens whereas each token is associated with the corresponding grammar element. The instructions are matched against these grammar elements. The following matching criteria exist:
+* @after(ele)@: The instruction is applied after the grammar element @ele@ has been matched. For example, if your grammar uses the keyword ";" to end lines, this can instruct the formatter to insert a line break after the semicolon.  
+* @before(ele)@: The instruction is executed before the matched element. For example, if your grammar contains lists which separate its values with keyword ",", you can instruct the formatter to suppress the whitespace before the comma.
 * @around(ele)@: This is the same as @before(ele)@ combined with  @after(ele)@.  
-* @between(ele1, ele2)@: This matches if @ele2@ directly follows @ele1@. There may be no other elements in between.
-* @bounds(ele1, ele2)@: This is the same as @before(ele1)@ combined with  @after(ele2)@.
-* @range(ele1, ele2)@: The rule is enabled when @ele1@ is matched, and disabled when @ele2@ is matched. Thereby, the rule is active for the complete region which is surrounded by @ele1@ and @ele2@. 
+* @between(ele1, ele2)@: This matches if @ele2@ directly follows @ele1@ in the document. There may be no other tokens in between @ele1@ and @ele2@.
+* @bounds(ele1, ele2)@: This is the same as @after(ele1)@ combined with  @before(ele2)@.
+* @range(ele1, ele2)@: The rule is enabled when @ele1@ is matched, and disabled when @ele2@ is matched. Thereby, the rule is active for the complete region which is surrounded by @ele1@ and @ele2@.
 
-p. The parameter @ele@ can be a grammar's @AbstractElement@ or a grammar's @AbstractRule@. However, only elements which represent a token in the textual representation can be matched. This are:
-* terminal rules for comments.
-* keywords, assignments, call to terminal or data-type rules.
+p. The term _tokens_ is used slightly different here compared to the parser/lexer. Here, a token is a keyword or the string that is matched by a terminal rule, datatype rule or cross reference. In the terminology of the lexer a datatype rule can match a composition of multiple tokens.
+
+p. The parameter @ele@ can be a grammar's @AbstractElement@ or a grammar's @AbstractRule@. All grammar rules and almost all abstract elements can be matched. This includes rule calls, parser rules, groups and alternatives. The semantic of @before(ele)@, @after(ele)@, etc. for rule calls and parser rules is identical to when the parser would "pass" this part of the grammar. The stack of called rules is taken into account. The following abstract elements can *not* have assigned formatting instructions:
+* Actions. E.g. @{MyAction}@ or @{MyAction.myFeature=current}@.
+* Grammar elements nested in datatype rules. This is due to to the fact that tokens matched by a data type rule are treated as atomic by the serializer. To format the tokens themselfs, please implement a "ValueConverter":#valueconverter. 
+* Grammar elements nested in @CrossReferences@.
 
 After having explained how rules can be activated, this is what they can do:
-* @setLinewrap()@: Inserts a line-break at this position.
-* @setLinewrap(int)@: Inserts the specified number of line-breaks at this position.
+* @setIndentationIncrement()@ increments indentation by one unit at this position. Whether one unit consists of one tab-character or spaces is defined by ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.IIndentationInformation}. The default implementation consults Eclipse's @PreferenceStore@.
+* @setIndentationDecrement()@ decrements indentation by one unit.
+* @setLinewrap()@: Inserts a line-wrap at this position.
+* @setLinewrap(int count)@: Inserts @count@ numbers of line-wrap at this position.
+* @setLinewrap(int min, int default, int max)@: If the amount of line-wraps that have been at this position before formatting can be determined (i.g. when a node model is present), then the amount of of line-wraps is adjusted to be within the interval [@min@, @max@] and is then reused. In all other cases @default@ line-wraps are inserted. Example: @setLinewrap(0, 0, 1)@ will preserve existing line-wraps, but won't allow more than one line-wrap between two tokens.    
 * @setNoLinewrap()@: Suppresses automatic line wrap, which may occur when the line's length exceeds the defined limit.
+* @setSpace(String space)@: Inserts the string @space@ at this position. If you use this to insert something else than whitespace, tabs or newlines, a small puppy will die somewhere in this world.
 * @setNoSpace()@: Suppresses the whitespace between tokens at this position. Be aware that between some tokens a whitespace is required to maintain a valid concrete syntax. 
- 
+
+h4. Grammar Element Finders
+
+Sometimes, if a grammar contains many similar elements for which the same formatting instructions ought to apply, it can be tedious to specify them for each grammar element individually. The ${org.eclipse.xtext/src/org.eclipse.xtext.IGrammarAccess} provides convenience methods for this. The find methods are available for the grammar and for each parser rule.
+
+* @List<Keyword> findKeywords(String... keywords)@ returns all keywords that equal one of the parameters.
+* @List<Pair<Keyword, Keyword>> findKeywordPairs(String leftKw, String rightKw)@: returns tuples of keywords from the same grammar rule. Pairs are matched nested and sequentially.  Example: for @Rule: '(' name=ID ('(' foo=ID ')') ')' | '(' bar=ID ')'@ @findKeywordPairs("(", ")")@ returns three pairs.
