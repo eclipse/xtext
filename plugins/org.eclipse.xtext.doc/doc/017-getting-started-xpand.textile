@@ -28,13 +28,11 @@ bc..
   «EXPAND Entity::entity»
 «ENDDEFINE»
 
-p. Your template @Main.xpt@ should now look like this: 
-
 bc.. 
 «IMPORT domainmodel»
-«DEFINE main FOR Model»
-  «EXPAND DAO::dao FOREACH this.elements.typeSelect(Entity)»
-  «EXPAND Entity::entity FOREACH this.elements.typeSelect(Entity)»
+«DEFINE main FOR Entity»
+  «EXPAND DAO::dao»
+  «EXPAND Entity::entity»
 «ENDDEFINE»
 
 
