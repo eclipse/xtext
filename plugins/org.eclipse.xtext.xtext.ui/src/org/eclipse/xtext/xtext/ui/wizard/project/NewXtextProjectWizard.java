@@ -60,7 +60,7 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 		projectInfo.setWorkingSets(mainPage.getSelectedWorkingSets());
 		Map<String, WizardContribution> contributions = WizardContribution.getFromRegistry();
 		projectInfo.setWizardContribution(contributions.get(mainPage.getGeneratorConfig()));
-		projectInfo.setProjectLocation(new Path(mainPage.getLocationURI().getRawPath()));
+		projectInfo.setProjectLocation(new Path(mainPage.getLocationURI().getPath()));
 		projectInfo.setWorkbench(getWorkbench());
 		String encoding = null;
 		try {
