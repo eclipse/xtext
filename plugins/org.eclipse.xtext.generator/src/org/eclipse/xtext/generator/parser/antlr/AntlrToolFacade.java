@@ -53,7 +53,8 @@ public class AntlrToolFacade {
 			}
 			if (file().exists()) {
 				try {
-					loader = new URLClassLoader(new URL[] { file().toURL() }, loader);
+					URL url = file().toURI().toURL();
+					loader = new URLClassLoader(new URL[] { url }, loader);
 					ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
 					try {
 						Thread.currentThread().setContextClassLoader(loader);
@@ -64,7 +65,7 @@ public class AntlrToolFacade {
 				} catch (MalformedURLException e1) {
 					log.error(e1.getMessage());
 				} catch (ClassNotFoundException e1) {
-					log.error(e1.getMessage());
+					log.error(e1.getMessage(),e1);
 				}
 			}
 			return null;
@@ -98,11 +99,11 @@ public class AntlrToolFacade {
 			out.close();
 			log.info("finished downloading.");
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.getMessage(),e);
 			return false;
 		}
 		if (getToolClass() == null) {
-			log.error("Loaded jar doesn't contain");
+			log.error("Loaded jar doesn't contain "+className);
 			return false;
 		}
 		return true;
