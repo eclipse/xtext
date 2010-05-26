@@ -34,9 +34,11 @@ public class InterpreterAutoEdit implements IAutoEditStrategy {
 	public void customizeDocumentCommand(IDocument document,
 			DocumentCommand command) {
 		if (command.text.equals("\n")) {
+			int line;
 			int lineStart;
 			try {
-				lineStart = document.getLineOfOffset(command.offset);
+				line = document.getLineOfOffset(command.offset);
+				lineStart = document.getLineOffset(line);
 				if (!document.get(lineStart, 3).equals("def")) {
 					BigDecimal computedResult = computeResult(document, command);
 					if (computedResult != null)
