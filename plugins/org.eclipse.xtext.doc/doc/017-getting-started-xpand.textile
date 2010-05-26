@@ -1,6 +1,6 @@
 h2(#getting-started-xpand). Writing a code generator
 
-In this part of the tutorial, we will write a code generator that is capable of processing the models created with the DSL editor you developed  in the previous section.
+In this part of the tutorial, we will write a code generator that is capable of processing the models created with the DSL editor you developed in the previous section.
 
 h3. Creating the main template 
 
@@ -13,27 +13,25 @@ To provide for a better overview and to easier manage our code templates, we wil
 * DAO.xpt - will generate the _DAO_ class
 * Entity.xpt - will generate the _Entity_ class
 
-In the project navigator, right click on _org.xtext.example.start.generator/src/templates_ and select _New -> Other... -> Xpand Template_. Name the new template @Main.xpt@ and click on _Finish_.
+In the project navigator, open the  folder _org.eclipse.xtext.example.domainmodel.generator/src/templates_ and delete the files _Template.xpt_ and _Extensions.ext_. Then right click on the same folder and select _New -> Other... -> Xpand Template_. Name the new template @Main.xpt@ and click on _Finish_.
 
 First, we need to import the meta model, as we're going to be working with the concepts from the meta model:
 
 bc. 
-«IMPORT entities»
+«IMPORT domainmodel»
 
 Next, we need to define a main template which will be invoked by the code generator. This template will then dispatch to two sub templates, @DAO::dao@ and @Entity::entity@: 
 
 bc.. 
-«DEFINE main FOR Model»
-  «EXPAND DAO::dao FOREACH this.elements.typeSelect(Entity)»
-  «EXPAND Entity::entity FOREACH this.elements.typeSelect(Entity)»
+«DEFINE main FOR Entity»
+  «EXPAND DAO::dao»
+  «EXPAND Entity::entity»
 «ENDDEFINE»
-
-p. By using the expression @this.elements.typeSelect(Entity)@, we make sure we only iterate over @Entity@ elements, and skip @SimpleType@ elements.
 
 p. Your template @Main.xpt@ should now look like this: 
 
 bc.. 
-«IMPORT entities»
+«IMPORT domainmodel»
 «DEFINE main FOR Model»
   «EXPAND DAO::dao FOREACH this.elements.typeSelect(Entity)»
   «EXPAND Entity::entity FOREACH this.elements.typeSelect(Entity)»
@@ -49,24 +47,24 @@ Please add another Xpand template to your project by selecting _File -> New -> O
 Add the following code to @Entity.xpt@:
 
 bc.. 
-«IMPORT entities»
+«IMPORT domainmodel»
 
 «DEFINE entity FOR Entity»
   «FILE this.name + ".java"»
     public class «this.name» {
-      «EXPAND property FOREACH this.properties»
+      «EXPAND feature FOREACH this.features»
     }
   «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE property FOR Property»
-  private «this.type.name» «this.name»;
+«DEFINE feature FOR Feature»
+  private «this.type.referenced.name» «this.name»;
 
-  public void set«this.name.toFirstUpper()»(«this.type.name» «this.name») {
+  public void set«this.name.toFirstUpper()»(«this.type.referenced.name» «this.name») {
     this.«this.name» = «this.name»;
   }
 
-  public «this.type.name» get«this.name.toFirstUpper()»() {
+  public «this.type.referenced.name» get«this.name.toFirstUpper()»() {
     return this.«this.name»;
   }
 «ENDDEFINE»
@@ -78,7 +76,7 @@ To load entities from a database and save them back, we will need to write some 
 Create a template @DAO.xpt@ and insert this text:
 
 bc.. 
-«IMPORT entities»
+«IMPORT domainmodel»
 
 «DEFINE dao FOR Entity»
   «FILE this.name + "DAO.java"»
@@ -116,7 +114,14 @@ bc..
 
 h3. Adjusting the generator workflow
 
-You might have noticed the generator workflow @org.xtext.example.start.generator/src/workflow/EntitiesGenerator.mwe2@ will invoke a template named @Template.xpt@, so we need to change this to make sure the right templates get invoked. Open @/org.xtext.example.start.generator/src/workflow/EntitiesGenerator.mwe@ and make sure it invokes @Main.xpt@:
+The generator workflow @org.eclipse.xtext.example.domainmodel.generator/src/workflow/EntitiesGenerator.mwe2@  needs some adjustment to suit our language. First, make sure the Reader offers @Entity@ objects, by changing the @type@ assignment in the @SlotEntry@ configuration: 
+
+bc.. load = {
+			slot = "model"
+			type = "Entity"
+		}
+
+p. Second, invoke the right template @Main.xpt@ by changing the @expand@ assignment:
 
 bc.. 
 	component = org.eclipse.xpand2.Generator {
@@ -128,9 +133,11 @@ bc..
 		fileEncoding = fileEncoding
 	}
 
+p. In this configuration, the generator will generate code form all models in the _src/model_ folder. Delete everything in there and create a new file @Example.dmodel@, fill it with the contents of the "example model":#getting-started-xtext and save.    
+
 h3. Running the generator
 
-In order to invoke the generator, select @EntitiesGenerator.mwe@ (in @org.xtext.example.start.generator/src/workflow/@) and choose _Run As -> MWE Workflow_ from the context menu. You'll see a bunch of log messages in the console view, and after a few seconds, you'll find a number of just generated files in @org.xtext.example.entity.generator/src-gen@.
+In order to invoke the generator, select @DomainmodelGenerator.mwe@ (in @org.eclipse.xtext.example.domainmodel.generator/src/workflow/@) and choose _Run As -> MWE Workflow_ from the context menu. You'll see a bunch of log messages in the console view, and after a few seconds, you'll find a number of just generated files in @org.eclipse.xtext.example.domainmodel.generator/src-gen@.
 
 Please note that you'll get a number of compile-time errors now, as the DAO classes depend on Hibernate. To get rid of them, just download Hibernate from http://www.hibernate.org and add it to the build class path of the project.
 
