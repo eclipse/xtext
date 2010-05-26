@@ -18,8 +18,8 @@ Some of the IDE features, that are either derived from the grammar or easily imp
 * "syntax coloring":#highlighting,
 * "model navigation (F3, etc.)":#hyperlinking,
 * "code completion":#contentAssist,
-* "quick fixes":#quickfixes
-* "code formatting":#formatting
+* "quick fixes":#quickfixes,
+* "code formatting":#formatting,
 * "outline view":#outline, and
 * "code templates":#templates.
 
