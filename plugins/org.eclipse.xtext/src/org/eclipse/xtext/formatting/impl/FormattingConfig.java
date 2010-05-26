@@ -20,6 +20,9 @@ public class FormattingConfig extends AbstractFormattingConfig {
 
 	public class IndentationLocatorEnd extends ElementLocator {
 
+		public IndentationLocatorEnd() {
+		}
+
 		public IndentationLocatorEnd(AbstractElement ele) {
 			super();
 			before(ele);
@@ -32,6 +35,9 @@ public class FormattingConfig extends AbstractFormattingConfig {
 	}
 
 	public class IndentationLocatorStart extends ElementLocator {
+
+		public IndentationLocatorStart() {
+		}
 
 		public IndentationLocatorStart(AbstractElement ele) {
 			super();
@@ -163,6 +169,14 @@ public class FormattingConfig extends AbstractFormattingConfig {
 	public void setIndentation(AbstractElement beginElement, AbstractElement endElement) {
 		new IndentationLocatorStart(beginElement);
 		new IndentationLocatorEnd(endElement);
+	}
+
+	public IndentationLocatorStart incrementIndentation() {
+		return new IndentationLocatorStart();
+	}
+
+	public IndentationLocatorEnd decrementIndentation() {
+		return new IndentationLocatorEnd();
 	}
 
 	/**
