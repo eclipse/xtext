@@ -171,11 +171,11 @@ public class FormattingConfig extends AbstractFormattingConfig {
 		new IndentationLocatorEnd(endElement);
 	}
 
-	public IndentationLocatorStart incrementIndentation() {
+	public IndentationLocatorStart setIndentationIncrement() {
 		return new IndentationLocatorStart();
 	}
 
-	public IndentationLocatorEnd decrementIndentation() {
+	public IndentationLocatorEnd setIndentationDecrement() {
 		return new IndentationLocatorEnd();
 	}
 
