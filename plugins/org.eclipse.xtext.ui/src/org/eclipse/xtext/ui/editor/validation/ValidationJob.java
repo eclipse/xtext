@@ -34,6 +34,7 @@ import com.google.common.collect.ImmutableMap;
 public class ValidationJob extends Job {
 	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(ValidationJob.class);
+	public static final Object XTEXT_VALIDATION_FAMILY = new Object();
 	protected static final Map<?, ?> DEFAULT_VALIDATION_CONTEXT = ImmutableMap.of(CheckMode.KEY, CheckMode.FAST_ONLY);
 	private final IResourceValidator resourceValidator;
 	private final IStateAccess<XtextResource> xtextDocument;
@@ -47,6 +48,12 @@ public class ValidationJob extends Job {
 		this.resourceValidator = xtextResourceChecker;
 		this.validationIssueProcessor = validationIssueProcessor;
 		this.checkMode = checkMode;
+	}
+	
+	
+	@Override
+	public boolean belongsTo(Object family) {
+		return family == XTEXT_VALIDATION_FAMILY;
 	}
 	
 	@Override
