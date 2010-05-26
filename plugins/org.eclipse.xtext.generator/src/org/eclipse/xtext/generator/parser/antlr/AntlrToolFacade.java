@@ -15,7 +15,7 @@ public class AntlrToolFacade {
 
 	private final static Logger log = Logger.getLogger(AntlrToolFacade.class);
 
-	public final static String className = "de.itemis.xtext.antlr.AntlrToolRunner";
+	public final static String className = "de.itemis.xtext.antlr.toolrunner.AntlrToolRunner";
 
 	private ClassLoader loader = AntlrToolFacade.class.getClassLoader();
 
