@@ -6,27 +6,29 @@ h2(#getting-started-xtext). Creating a DSL
 
 "Download and install the latest version of Xtext":http://www.eclipse.org/Xtext/download/, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our "target syntax" later on:
 
-bc.. type String
-type Bool
+bc.. datatype String
+datatype Bool
 
 entity Session {
-  property Title: String
-  property IsTutorial : Bool
+  attr Title: String
+  attr IsTutorial : Bool
 }
 
 entity Conference {
-  property Name : String
-  property Attendees : Person[]
-  property Speakers : Speaker[]
+  attr Name : String
+  ref Attendees : Person*
+  ref Speakers : Speaker*
 }
 
 entity Person {
-  property Name : String
+  attr Name : String
 }
 
 entity Speaker extends Person {
-  property Sessions : Session[]
+  ref Sessions : Session*
 }
+
+p. This tutorial is based on the _Xtext Domain-Model Example_. The complete example is available via _New->Example->Xtext->Xtext Domain-Model Example_.
 
 h3. Create an Xtext project
 
@@ -36,9 +38,9 @@ Use the Xtext wizard to create a new project
 
 Choose a meaningful project name, language name and file extension, e.g.
 
-| *Main project name:* 	|	org.xtext.example.start	|
-| *Language name:* 		|	org.xtext.example.start.Entities	|
-| *DSL-File extension:* 	|	entity	|
+| *Main project name:* 	|	org.eclipse.xtext.example.domainmodel	|
+| *Language name:* 		|	org.eclipse.xtext.example.Domainmodel	|
+| *DSL-File extension:* 	|	dmodel	|
 
 Keep "Create generator project" checked, as we will also create a code generator in a second step.
 
@@ -48,72 +50,85 @@ Click on _Finish_ to create the projects.
 
 h3. Project layout
 
-In the Package Explorer you can see three new projects. In @org.xtext.example.start@ you can define the grammar and configure the runtime aspects of your language. The editor, outline view and code completion goes into @org.xtext.example.start.ui@. Both projects consist of generated classes derived from your grammar and manual code such as the grammar itself or further classes to differentiate from the default behavior.
+In the Package Explorer you can see three new projects. In @org.eclipse.xtext.example.domainmodel@ you can define the grammar and configure the runtime aspects of your language. The editor, outline view and code completion goes into @org.eclipse.xtext.example.domainmodel.ui@. Both projects consist of generated classes derived from your grammar and manual code such as the grammar itself or further classes to differentiate from the default behavior.
 
 !images/getting-started-project-layout.png!
 
 It is good to be clear and unambiguous whether the code is generated or is to be manipulated by the developer. Thus, the generated code should be held separately from the manually written code. We follow this pattern by having a folder _src/_ and a folder _src-gen/_ in each project. Keep in mind not to make changes in the _src-gen/_ folder. They will be overwritten by the generator.
 
-A third project, @org.xtext.example.start.generator@ will later contain a code generator that leverages the model created with the DSL editor.
+A third project, @org.eclipse.xtext.example.domainmodel.generator@ will later contain a code generator that leverages the model created with the DSL editor.
 
 h3. Build your own grammar
 
-The wizard will automatically open the example grammar file @Entities.xtext@ from the first project in the editor. A grammar has two purposes: First, it is used to describe the concrete syntax of your language. Second, it contains information about how the parser shall create a model during parsing.
+The wizard will automatically open the example grammar file @Domainmodel.xtext@ from the first project in the editor. A grammar has two purposes: First, it is used to describe the concrete syntax of your language. Second, it contains information about how the parser shall create a model during parsing.
 
 Ignore the generated sample grammar, delete everything after "@Model :@" to the end. 
 The entry rule for the parser will be called @Model@. As a @Model@ consists of one or more @Entity@ entries, this rule delegates to another rule named @Entity@, which will be defined later on.
-As we can have one ore more entities within a model, the cardinality is "+". Each rule is terminated with a semicolon. So our first rule reads as
+As we can have an arbitrary number of entities within a model, the cardinality is "*". Each rule is terminated with a semicolon. So our first rule reads as
 
 bc.. Model :
-  Entity+; 
+  Entity*; 
 
 p. __*Please note*: If you encounter strange errors while copying and pasting these snippets to your Eclipse editor your documentation viewer most likely has inserted characters different from {space} into your clipboard. Reenter these "fillers" or type the text by hand to be sure everything works fine.__ 
 
 An Xtext grammar does not only describe rules for the parser but also the structure of the resulting abstract syntax tree. Usually, each parser rule will create a new node in that tree. The type of that node can be specified after the rule name using the keyword @returns@. If the type's name is the same as the rule name, it can be omitted as in our case.
 
-The parser will create a new element of type @Model@ when it enters the rule @Model@, and a new element of type @Entity@ every time it enters the rule @Entity@. To connect these AST elements, we have to define the name of a reference. In our case, we call that reference _entities_. We specify it using the assignment operator "@+=@", which denotes a multi valued feature. 
+The parser will create a new element of type @Model@ when it enters the rule @Model@, and a new element of type @Entity@ every time it enters the rule @Entity@. To connect these AST elements, we have to define the name of a reference. In our case, we call that reference _elements_. We specify it using the assignment operator "@+=@", which denotes a multi-valued feature. 
 
 As a result, we modify the first rule to
 
 bc.. Model :
-  (elements += Entity)+;
+  (elements+=Entity)*;
 	
-p. The next rule on our list is the rule @Entity@. Looking at our target syntax, each entity begins with the keyword @entity@ followed by the entity's name and an opening curly brace (we will handle the @extends@ clause in a second step). Then, an entity defines a number of properties and ends with a closing curly brace. 
+p. The next rule on our list is the rule @Entity@. Looking at our target syntax, each entity begins with the keyword @entity@ followed by the entity's name and an opening curly brace (we will handle the @extends@ clause in a second step). Then, an entity defines a number of features and ends with a closing curly brace. 
 
 bc.. Entity returns Entity:
   'entity' name=ID '{'
-    (properties+=Property)*
+    (features+=Feature)*
   '}'
 ;
 	
-p. Instead of creating a new AST node for the name, we rather want the name to be an attribute of the @Entity@ class. Therefore we use the terminal rule @ID@, which results in a string. The assignment operator "@=@" denotes a single valued feature, and the asterisk a cardinality of 0..n.
+p. Instead of creating a new AST node for the name, we rather want the name to be an attribute of the @Entity@ class. Therefore we use the terminal rule @ID@, which results in a string. The assignment operator "@=@" denotes a single valued feature.
 In our target syntax, some entities refer to an existing entity as their super type after the keyword @extends@. Note that this is a cross-reference, as the super type itself must be defined somewhere else. To define a cross-reference we use square brackets. Optional parts have the cardinality "?". The complete rule now reads:
 
 bc.. Entity returns Entity:
-  'entity' name=ID ('extends' extends=[Entity])? '{'
-    (properties+=Property)*
-  '}'
+  'entity' name=ID ('extends' superType=[Entity])? '{'
+		(features+=Feature)*
+	'}';
 ;
 	
-p. We have not specified the rule @Property@, yet. In our target syntax, properties can refer to simple types such as "String" or "Bool" as well as entities. To make this easy we will first introduce a common supertype @Type@ each @Property@ can refer to.
+p. We have not specified the rule @Feature@, yet. In our target syntax, properties can refer to simple types such as "String" or "Bool" as well as entities. To make this easy we will first introduce a common supertype @Type@ each @Feature@ can refer to.
 
-Change  the rule @Model@ and introduce a new rule @Type@ and @SimpleType@:
+Change  the rule @Model@ and introduce a new rule @Type@ and @DataType@:
 
 bc.. Model :
   (elements+=Type)*;
 
 Type:
-  SimpleType | Entity;
+  DataType | Entity;
 	
-SimpleType:
-  'type' name=ID;
+DataType:
+  'datatype' name=ID;
  
-p. Models new consist of types where a @Type@ can either be a @SimpleType@  or the @Entity@ you already know. Our rule @Type@ will just delegate to either of them, using the "@|@" alternatives operator. The combination of simple data types and entites this way introduces a common super type @Type@ both @Entity@ and @SimpleType@ derive from. This allows you to refer to both types of elements with a single cross-reference.
+p. Models new consist of types where a @Type@ can either be a @DataType@  or the @Entity@ you already know. Our rule @Type@ will just delegate to either of them, using the "@|@" alternatives operator. The combination of simple data types and entities this way introduces a common super type @Type@ both @Entity@ and @DataType@ derive from. This allows you to refer to both types of elements with a single cross-reference.
 
-A @Property@ consists of a keyword, a name, a colon and a cross-reference to an arbitrary @Type@. The multiplicity is either many or one. The presence of the postfix "[]" (technically a keyword) should trigger a boolean flag in the AST model. This is the purpose of the assignment operator "@?=@". Our last parser rule is:
+A @Feature@ is either an @Attribute@ or a @Reference@. 
 
-bc.. Property:
-  'property' name=ID ':' type=[Type] (many?='[]')?;
+bc.. Feature:
+	Attribute | Reference;
+
+p. @Attributes@ and @References@ consist of a keyword, a name, a colon and a cross-reference to a @Type@. 
+
+bc.. Attribute:
+	'attr' name=ID ':' type=TypeRef;
+
+Reference:
+	'ref' name=ID ':' type=TypeRef;
+	
+p. As the type reference has an additional property for the multiplicity (many or one), we make it a separate model element and parser rule @TypeRef@. The presence of the postfix "*" (technically a keyword) should trigger a boolean flag in the AST model. This is the purpose of the assignment operator "@?=@". Our last parser rule is:
+
+bc.. TypeRef:
+	referenced=[Type] (multi?='*')?;
 	
 p. In the end your grammar editor should look like this:
 
@@ -123,7 +138,7 @@ h3. Generate language artifacts
 
 Save the grammar and make sure that no error markers appear. Then, locate the file GenerateEntities.mwe next to the grammar file in the package explorer view. From its context menu, choose
 
-	_Run As -> MWE Workflow_.
+	_Run As -> MWE2 Workflow_.
 	
 That will trigger the Xtext language generator. You will see its logging messages in the Console view.
 
@@ -140,3 +155,111 @@ To get some hands-on experience with your new DSL editor, type in the following 
 
 !images/getting-started-editor.png!
 
+h3. Adding namespace
+
+At the current stage, our language puts all types into the same scope. As cross-references are specified by means of names, this can easily yield collisions as the model size increases. That's why we will now extend the language by the concept of a _package_. 
+
+A package is a group of elements. Within a package, elements must have unique names, at least if they are of the same type. Packages can also be nested. The _fully qualified name_ (FQN) of an element consists of the FQN of its package, a separator '@.@' and its own name. Elements refer to each other using their _qualified names_ which are relative to the common namespaces. By means of import statements, these names can be further abbreviated.
+
+In analogy with Java we define packages implicitly: Rather than introducing a model element for packages in our language, we let elements declare which package they belong to by a statement. That way, elements of the same package can be declared in distinct places, even in different files.  
+
+Let's start to modify our grammar now. First we introduce the rule @AbstractElement@:
+
+bc.. AbstractElement:
+	PackageDeclaration | Type;
+
+p.  @Model@ should now call @AbstractElement@ instead of @Type@:  
+	
+bc.. Model:
+	(elements+=AbstractElement)*;
+
+p. To allow qualified names, we need a new rule @QualifiedName@. This rule returns a string. Ecore considers strings to be values rather than objects (see the section on "Ecore":#model_metamodel). A rule that returns such a value is called a _datatype rule_ in Xtext. As datatypes don't have properties, a datatype rule must not contain any assignments.       
+
+bc.. QualifiedName:
+	ID ('.' ID)*;
+	
+p. (Note that the return type of this rule is derived to be Ecore's @EString@. If you wanted to make this explicit, you would have to import the @EcorePackage@ first.) Given the @QualifiedName@ rule, we can now define the rule for @PackageDeclaration@ choosing curly braces as delimiters:
+
+bc.. PackageDeclaration:
+	'package' name=QualifiedName '{'
+		(elements+=AbstractElement)*
+	'}';
+	
+p. Having qualified names at hand, we want to specify cross references that way, too. By default, Xtext assumes the rule @ID@ as the syntax for cross references, which has been fully sufficient so far. You can specify a different rule using the '|' character in the cross reference definition:  
+
+bc.. Entity:
+	'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
+		(features+=Feature)*
+	'}';
+
+p. and
+
+bc.. TypeRef:
+	referenced=[Type|QualifiedName] (multi?='*')?;
+
+p. As the last step, we introduce imports. An @Import@ is an @AbstractElement@, too
+
+bc.. AbstractElement:
+	PackageDeclaration | Type | Import;
+
+p. An import statement refers to a qualified name. By means of the wildcard characer '@*@', multiple names can be imported with one statement. That requires a new datatype rule @QualifiedNameWithWildCard@:
+
+bc.. QualifiedNameWithWildCard:
+	QualifiedName '.*'?;
+
+Import:
+	'import' importedNamespace=QualifiedNameWithWildCard;
+
+p. Using the feature @importedNamespace@ in the assignment signals that the specified string describes a namespace. This information will be picked up by the so called "scope provider":#scoping at runtime. Xtext has just a few such naming conventions, i.e. to look for a feature called @name@ when resolving cross-references.  
+
+That's all for the grammar. It should now read as 
+
+bc.. grammar org.eclipse.xtext.example.Domainmodel 
+   with org.eclipse.xtext.common.Terminals
+
+generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"
+
+Model:
+	(elements+=AbstractElement)*;
+
+AbstractElement:
+	PackageDeclaration | Type | Import;
+	
+Import:
+	'import' importedNamespace=QualifiedNameWithWildCard;
+
+PackageDeclaration:
+	'package' name=QualifiedName '{'
+		(elements+=AbstractElement)*
+	'}';
+
+Type:
+	Entity | DataType;
+
+DataType:
+	'datatype' name=ID;
+
+Entity:
+	'entity' name=ID ('extends' superType=[Entity])? '{'
+		(features+=Feature)*
+	'}';
+
+Feature:
+	Attribute | Reference;
+
+Attribute:
+	'attr' name=ID ':' type=TypeRef;
+
+Reference:
+	'ref' name=ID ':' type=TypeRef;
+
+TypeRef:
+	referenced=[Type] (multi?='*')?;
+
+QualifiedName:
+	ID ('.' ID)*;
+	
+QualifiedNameWithWildCard:
+	QualifiedName '.*'?;
+
+p. Now Regenerate the language infrastructure as described in the previous section, and give the editor a try. You can even split up your model into smaller parts and have cross-references across file boundaries, as long as the referenced models are on the classpath.  
