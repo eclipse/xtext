@@ -20,8 +20,8 @@ public class FormatterTestConfig extends AbstractDeclarativeFormatter {
 		c.setNoSpace().before(f.getLineAccess().getSemicolonKeyword_1());
 
 		// TestIndentation
-		c.setIndentation(f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1(), f.getTestIndentationAccess()
-				.getRightCurlyBracketKeyword_3());
+		c.incrementIndentation().after(f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());
+		c.decrementIndentation().before(f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());
 		c.setLinewrap().after(f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());
 		c.setLinewrap().after(f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());
 		c.setLinewrap().after(f.getTestIndentationAccess().getSemiAssignment_4());
