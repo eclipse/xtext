@@ -11,14 +11,12 @@ package org.eclipse.xtext.ui.editor.handler;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.jface.text.source.IAnnotationModel;
-import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
-import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
-import org.eclipse.xtext.ui.editor.validation.AnnotationIssueProcessor;
+import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
+import org.eclipse.xtext.ui.editor.validation.MarkerIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.ValidationJob;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -33,19 +31,17 @@ import com.google.inject.Inject;
 public class ValidateActionHandler extends AbstractHandler {
 	@Inject
 	private IResourceValidator resourceValidator;
-
-	// TODO use a provider for objects that depend on annotationIssueProcessor when guice2 is available
-	@Inject
-	private IssueResolutionProvider issueResolutionProvider;
-
+	@Inject 
+	private MarkerCreator markerCreator;
+	
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
 		if (xtextEditor != null) {
+			MarkerIssueProcessor markerIssueProcessor = new MarkerIssueProcessor(xtextEditor.getResource(),
+					markerCreator);
 			IXtextDocument xtextDocument = XtextDocumentUtil.get(xtextEditor);
-			IDocumentProvider documentProvider = xtextEditor.getDocumentProvider();
-			IAnnotationModel annotationModel = documentProvider.getAnnotationModel(xtextEditor.getEditorInput());
-			ValidationJob validationJob = new ValidationJob(resourceValidator, xtextDocument,
-					new AnnotationIssueProcessor(xtextDocument, annotationModel, issueResolutionProvider), CheckMode.ALL);
+			ValidationJob validationJob = new ValidationJob(resourceValidator, xtextDocument, markerIssueProcessor,
+					CheckMode.ALL);
 			validationJob.schedule();
 		}
 		return this;
