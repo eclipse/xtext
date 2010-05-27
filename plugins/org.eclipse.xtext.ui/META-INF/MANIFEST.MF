@@ -18,7 +18,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reex
  org.eclipse.xtext.util,
  org.eclipse.jdt.core;bundle-version="3.4.0";resolution:=optional,
  org.eclipse.core.expressions,
- com.ibm.icu;bundle-version="4.0.1",
+ com.ibm.icu,
  org.eclipse.search;bundle-version="3.5.0";resolution:=optional,
  org.apache.commons.lang
 Bundle-Activator: org.eclipse.xtext.ui.internal.Activator
