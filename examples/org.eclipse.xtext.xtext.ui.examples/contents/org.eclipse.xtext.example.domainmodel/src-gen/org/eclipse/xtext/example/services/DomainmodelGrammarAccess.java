@@ -487,22 +487,34 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class TypeRefElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeRef");
-		private final Assignment cReferencedAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cReferencedTypeCrossReference_0 = (CrossReference)cReferencedAssignment.eContents().get(0);
-		private final RuleCall cReferencedTypeQualifiedNameParserRuleCall_0_1 = (RuleCall)cReferencedTypeCrossReference_0.eContents().get(1);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cReferencedAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final CrossReference cReferencedTypeCrossReference_0_0 = (CrossReference)cReferencedAssignment_0.eContents().get(0);
+		private final RuleCall cReferencedTypeQualifiedNameParserRuleCall_0_0_1 = (RuleCall)cReferencedTypeCrossReference_0_0.eContents().get(1);
+		private final Assignment cMultiAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Keyword cMultiAsteriskKeyword_1_0 = (Keyword)cMultiAssignment_1.eContents().get(0);
 		
 		//TypeRef:
-		//	referenced=[Type|QualifiedName];
+		//	referenced=[Type|QualifiedName] multi?="*"?;
 		public ParserRule getRule() { return rule; }
 
+		//referenced=[Type|QualifiedName] multi?="*"?
+		public Group getGroup() { return cGroup; }
+
 		//referenced=[Type|QualifiedName]
-		public Assignment getReferencedAssignment() { return cReferencedAssignment; }
+		public Assignment getReferencedAssignment_0() { return cReferencedAssignment_0; }
 
 		//[Type|QualifiedName]
-		public CrossReference getReferencedTypeCrossReference_0() { return cReferencedTypeCrossReference_0; }
+		public CrossReference getReferencedTypeCrossReference_0_0() { return cReferencedTypeCrossReference_0_0; }
 
 		//QualifiedName
-		public RuleCall getReferencedTypeQualifiedNameParserRuleCall_0_1() { return cReferencedTypeQualifiedNameParserRuleCall_0_1; }
+		public RuleCall getReferencedTypeQualifiedNameParserRuleCall_0_0_1() { return cReferencedTypeQualifiedNameParserRuleCall_0_0_1; }
+
+		//multi?="*"?
+		public Assignment getMultiAssignment_1() { return cMultiAssignment_1; }
+
+		//"*"
+		public Keyword getMultiAsteriskKeyword_1_0() { return cMultiAsteriskKeyword_1_0; }
 	}
 
 	public class QualifiedNameWithWildCardElements extends AbstractParserRuleElementFinder {
@@ -771,7 +783,7 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TypeRef:
-	//	referenced=[Type|QualifiedName];
+	//	referenced=[Type|QualifiedName] multi?="*"?;
 	public TypeRefElements getTypeRefAccess() {
 		return (pTypeRef != null) ? pTypeRef : (pTypeRef = new TypeRefElements());
 	}

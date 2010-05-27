@@ -44,6 +44,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeRef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referenced" eType="#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="multi" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Visibility">
     <eLiterals name="public" literal="public"/>

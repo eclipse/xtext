@@ -1054,7 +1054,7 @@ ruleTypeRef returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(
+((
 (
 		{ 
 		  /* */ 
@@ -1066,14 +1066,35 @@ ruleTypeRef returns [EObject current=null]
 	        }
         }
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getTypeRefAccess().getReferencedTypeCrossReference_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getTypeRefAccess().getReferencedTypeCrossReference_0_0(), currentNode); 
 	    }
 		ruleQualifiedName		{ 
 	        currentNode = currentNode.getParent();
 	    }
 
 )
+)(
+(
+		lv_multi_1_0=	'*' 
+    {
+        createLeafNode(grammarAccess.getTypeRefAccess().getMultiAsteriskKeyword_1_0(), "multi"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTypeRefRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "multi", true, "*", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
 )
+)?)
 ;
 
 

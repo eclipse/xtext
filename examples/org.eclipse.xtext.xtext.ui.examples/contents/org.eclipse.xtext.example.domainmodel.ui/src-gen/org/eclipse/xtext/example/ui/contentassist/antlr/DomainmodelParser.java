@@ -55,6 +55,7 @@ public class DomainmodelParser extends AbstractContentAssistParser {
 					put(grammarAccess.getOperationAccess().getGroup_4(), "rule__Operation__Group_4__0");
 					put(grammarAccess.getOperationAccess().getGroup_4_1(), "rule__Operation__Group_4_1__0");
 					put(grammarAccess.getParameterAccess().getGroup(), "rule__Parameter__Group__0");
+					put(grammarAccess.getTypeRefAccess().getGroup(), "rule__TypeRef__Group__0");
 					put(grammarAccess.getQualifiedNameWithWildCardAccess().getGroup(), "rule__QualifiedNameWithWildCard__Group__0");
 					put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
 					put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
@@ -78,7 +79,8 @@ public class DomainmodelParser extends AbstractContentAssistParser {
 					put(grammarAccess.getOperationAccess().getTypeAssignment_7(), "rule__Operation__TypeAssignment_7");
 					put(grammarAccess.getParameterAccess().getNameAssignment_0(), "rule__Parameter__NameAssignment_0");
 					put(grammarAccess.getParameterAccess().getTypeAssignment_1(), "rule__Parameter__TypeAssignment_1");
-					put(grammarAccess.getTypeRefAccess().getReferencedAssignment(), "rule__TypeRef__ReferencedAssignment");
+					put(grammarAccess.getTypeRefAccess().getReferencedAssignment_0(), "rule__TypeRef__ReferencedAssignment_0");
+					put(grammarAccess.getTypeRefAccess().getMultiAssignment_1(), "rule__TypeRef__MultiAssignment_1");
 				}
 			};
 		}

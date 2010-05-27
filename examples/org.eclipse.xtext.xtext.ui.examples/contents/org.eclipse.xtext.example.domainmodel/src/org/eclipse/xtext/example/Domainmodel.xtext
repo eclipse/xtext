@@ -56,7 +56,7 @@ TypedElement:
 	Feature | Parameter;
 
 TypeRef:
-	referenced=[Type|QualifiedName];
+	referenced=[Type|QualifiedName] (multi?='*')?;
 
 enum Visibility:
 	public="public" | private="private" | protected="protected";

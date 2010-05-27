@@ -580,13 +580,22 @@ public interface DomainmodelPackage extends EPackage
   int TYPE_REF__REFERENCED = 0;
 
   /**
+   * The feature id for the '<em><b>Multi</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_REF__MULTI = 1;
+
+  /**
    * The number of structural features of the '<em>Type Ref</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TYPE_REF_FEATURE_COUNT = 1;
+  int TYPE_REF_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.Visibility <em>Visibility</em>}' enum.
@@ -893,6 +902,17 @@ public interface DomainmodelPackage extends EPackage
   EReference getTypeRef_Referenced();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.domainmodel.TypeRef#isMulti <em>Multi</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Multi</em>'.
+   * @see org.eclipse.xtext.example.domainmodel.TypeRef#isMulti()
+   * @see #getTypeRef()
+   * @generated
+   */
+  EAttribute getTypeRef_Multi();
+
+  /**
    * Returns the meta object for enum '{@link org.eclipse.xtext.example.domainmodel.Visibility <em>Visibility</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1178,6 +1198,14 @@ public interface DomainmodelPackage extends EPackage
      * @generated
      */
     EReference TYPE_REF__REFERENCED = eINSTANCE.getTypeRef_Referenced();
+
+    /**
+     * The meta object literal for the '<em><b>Multi</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TYPE_REF__MULTI = eINSTANCE.getTypeRef_Multi();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.Visibility <em>Visibility</em>}' enum.

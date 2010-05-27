@@ -440,9 +440,9 @@ ruleTypeRef
     }
 	:
 (
-{ before(grammarAccess.getTypeRefAccess().getReferencedAssignment()); }
-(rule__TypeRef__ReferencedAssignment)
-{ after(grammarAccess.getTypeRefAccess().getReferencedAssignment()); }
+{ before(grammarAccess.getTypeRefAccess().getGroup()); }
+(rule__TypeRef__Group__0)
+{ after(grammarAccess.getTypeRefAccess().getGroup()); }
 )
 
 ;
@@ -1984,6 +1984,67 @@ finally {
 
 
 
+rule__TypeRef__Group__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__TypeRef__Group__0__Impl
+	rule__TypeRef__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TypeRef__Group__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getTypeRefAccess().getReferencedAssignment_0()); }
+(rule__TypeRef__ReferencedAssignment_0)
+{ after(grammarAccess.getTypeRefAccess().getReferencedAssignment_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__TypeRef__Group__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__TypeRef__Group__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TypeRef__Group__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getTypeRefAccess().getMultiAssignment_1()); }
+(rule__TypeRef__MultiAssignment_1)?
+{ after(grammarAccess.getTypeRefAccess().getMultiAssignment_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
+
+
 rule__QualifiedNameWithWildCard__Group__0
     @init {
 		int stackSize = keepStackSize();
@@ -2480,18 +2541,41 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__TypeRef__ReferencedAssignment
+rule__TypeRef__ReferencedAssignment_0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getTypeRefAccess().getReferencedTypeCrossReference_0()); }
+{ before(grammarAccess.getTypeRefAccess().getReferencedTypeCrossReference_0_0()); }
 (
-{ before(grammarAccess.getTypeRefAccess().getReferencedTypeQualifiedNameParserRuleCall_0_1()); }
-	ruleQualifiedName{ after(grammarAccess.getTypeRefAccess().getReferencedTypeQualifiedNameParserRuleCall_0_1()); }
+{ before(grammarAccess.getTypeRefAccess().getReferencedTypeQualifiedNameParserRuleCall_0_0_1()); }
+	ruleQualifiedName{ after(grammarAccess.getTypeRefAccess().getReferencedTypeQualifiedNameParserRuleCall_0_0_1()); }
 )
-{ after(grammarAccess.getTypeRefAccess().getReferencedTypeCrossReference_0()); }
+{ after(grammarAccess.getTypeRefAccess().getReferencedTypeCrossReference_0_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TypeRef__MultiAssignment_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getTypeRefAccess().getMultiAsteriskKeyword_1_0()); }
+(
+{ before(grammarAccess.getTypeRefAccess().getMultiAsteriskKeyword_1_0()); }
+
+	'*' 
+
+{ after(grammarAccess.getTypeRefAccess().getMultiAsteriskKeyword_1_0()); }
+)
+
+{ after(grammarAccess.getTypeRefAccess().getMultiAsteriskKeyword_1_0()); }
 )
 
 ;

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.domainmodel.TypeRef#getReferenced <em>Referenced</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.domainmodel.TypeRef#isMulti <em>Multi</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,5 +51,31 @@ public interface TypeRef extends EObject
    * @generated
    */
   void setReferenced(Type value);
+
+  /**
+   * Returns the value of the '<em><b>Multi</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Multi</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Multi</em>' attribute.
+   * @see #setMulti(boolean)
+   * @see org.eclipse.xtext.example.domainmodel.DomainmodelPackage#getTypeRef_Multi()
+   * @model
+   * @generated
+   */
+  boolean isMulti();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.example.domainmodel.TypeRef#isMulti <em>Multi</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Multi</em>' attribute.
+   * @see #isMulti()
+   * @generated
+   */
+  void setMulti(boolean value);
 
 } // TypeRef

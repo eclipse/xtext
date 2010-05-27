@@ -50,6 +50,7 @@
     </genClasses>
     <genClasses ecoreClass="Domainmodel.ecore#//TypeRef">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//TypeRef/referenced"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Domainmodel.ecore#//TypeRef/multi"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

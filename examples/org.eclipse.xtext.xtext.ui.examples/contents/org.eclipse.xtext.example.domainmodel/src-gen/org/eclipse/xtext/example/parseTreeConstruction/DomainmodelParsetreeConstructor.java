@@ -45,7 +45,7 @@ protected class ThisRootNode extends RootToken {
 			case 11: return new Operation_Group(this, this, 11, inst);
 			case 12: return new Parameter_Group(this, this, 12, inst);
 			case 13: return new TypedElement_Alternatives(this, this, 13, inst);
-			case 14: return new TypeRef_ReferencedAssignment(this, this, 14, inst);
+			case 14: return new TypeRef_Group(this, this, 14, inst);
 			default: return null;
 		}	
 	}	
@@ -1381,7 +1381,7 @@ protected class Attribute_TypeAssignment_3 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TypeRef_ReferencedAssignment(this, this, 0, inst);
+			case 0: return new TypeRef_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1545,7 +1545,7 @@ protected class Reference_TypeAssignment_3 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TypeRef_ReferencedAssignment(this, this, 0, inst);
+			case 0: return new TypeRef_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2031,7 +2031,7 @@ protected class Operation_TypeAssignment_7 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TypeRef_ReferencedAssignment(this, this, 0, inst);
+			case 0: return new TypeRef_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2150,7 +2150,7 @@ protected class Parameter_TypeAssignment_1 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TypeRef_ReferencedAssignment(this, this, 0, inst);
+			case 0: return new TypeRef_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2306,20 +2306,50 @@ protected class TypedElement_ParameterParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule TypeRef ****************
  *
  * TypeRef:
- * 	referenced=[Type|QualifiedName];
+ * 	referenced=[Type|QualifiedName] multi?="*"?;
  *
  **/
 
-// referenced=[Type|QualifiedName]
-protected class TypeRef_ReferencedAssignment extends AssignmentToken  {
+// referenced=[Type|QualifiedName] multi?="*"?
+protected class TypeRef_Group extends GroupToken {
 	
-	public TypeRef_ReferencedAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TypeRef_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTypeRefAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TypeRef_MultiAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new TypeRef_ReferencedAssignment_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getTypeRefRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// referenced=[Type|QualifiedName]
+protected class TypeRef_ReferencedAssignment_0 extends AssignmentToken  {
+	
+	public TypeRef_ReferencedAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getTypeRefAccess().getReferencedAssignment();
+		return grammarAccess.getTypeRefAccess().getReferencedAssignment_0();
 	}
 
     @Override
@@ -2331,15 +2361,13 @@ protected class TypeRef_ReferencedAssignment extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getTypeRefRule().getType().getClassifier())
-			return null;
 		if((value = eObjectConsumer.getConsumable("referenced",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("referenced");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getTypeRefAccess().getReferencedTypeCrossReference_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getTypeRefAccess().getReferencedTypeCrossReference_0_0().getType().getClassifier())) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getTypeRefAccess().getReferencedTypeCrossReference_0(); 
+				element = grammarAccess.getTypeRefAccess().getReferencedTypeCrossReference_0_0(); 
 				return obj;
 			}
 		}
@@ -2347,6 +2375,41 @@ protected class TypeRef_ReferencedAssignment extends AssignmentToken  {
 	}
 
 }
+
+// multi?="*"?
+protected class TypeRef_MultiAssignment_1 extends AssignmentToken  {
+	
+	public TypeRef_MultiAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTypeRefAccess().getMultiAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TypeRef_ReferencedAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("multi",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("multi");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getTypeRefAccess().getMultiAsteriskKeyword_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
 
 /************ end Rule TypeRef ****************/
 

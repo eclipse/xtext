@@ -500,6 +500,16 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getTypeRef_Multi()
+  {
+    return (EAttribute)typeRefEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getVisibility()
   {
     return visibilityEEnum;
@@ -577,6 +587,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
 
     typeRefEClass = createEClass(TYPE_REF);
     createEReference(typeRefEClass, TYPE_REF__REFERENCED);
+    createEAttribute(typeRefEClass, TYPE_REF__MULTI);
 
     // Create enums
     visibilityEEnum = createEEnum(VISIBILITY);
@@ -666,6 +677,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
 
     initEClass(typeRefEClass, TypeRef.class, "TypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTypeRef_Referenced(), this.getType(), null, "referenced", null, 0, 1, TypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTypeRef_Multi(), ecorePackage.getEBoolean(), "multi", null, 0, 1, TypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(visibilityEEnum, Visibility.class, "Visibility");

@@ -212,13 +212,18 @@
       <type metamodel="/0/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//TypeRef"/>
       </type>
-      <alternatives xsi:type="xtext:Assignment" feature="referenced" operator="=">
-        <terminal xsi:type="xtext:CrossReference">
-          <type metamodel="/0/@metamodelDeclarations.0">
-            <classifier xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//Type"/>
-          </type>
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.17"/>
-        </terminal>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Assignment" feature="referenced" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//Type"/>
+            </type>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.17"/>
+          </terminal>
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="multi" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="*"/>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:EnumRule" name="Visibility">
