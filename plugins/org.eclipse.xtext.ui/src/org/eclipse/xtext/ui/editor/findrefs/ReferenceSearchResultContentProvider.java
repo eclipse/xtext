@@ -160,7 +160,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 	private class UIUpdater extends UIJob {
 
 		public UIUpdater() {
-			super("ReferenceSearchViewUpdater");
+			super(Messages.ReferenceSearchResultContentProvider_label);
 			setSystem(true);
 		}
 

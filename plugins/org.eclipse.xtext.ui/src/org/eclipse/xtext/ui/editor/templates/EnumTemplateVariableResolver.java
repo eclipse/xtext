@@ -18,8 +18,8 @@ public class EnumTemplateVariableResolver extends
 		AbstractTemplateVariableResolver {
 
 	public EnumTemplateVariableResolver() {
-		super("Enum", "Select a value of an enumeration, e.g." +
-				" ${modifier:Enum('[PackageName.]Visibility')}");
+		super(Messages.EnumTemplateVariableResolver_0, Messages.EnumTemplateVariableResolver_1 +
+				Messages.EnumTemplateVariableResolver_2);
 	}
 	
 	@Override

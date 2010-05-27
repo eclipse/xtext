@@ -107,7 +107,7 @@ public class ProjectFactory {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 10);
 		try {
 			final IProjectDescription description = createProjectDescription();
-			subMonitor.subTask("Creating project " + description.getName());
+			subMonitor.subTask(Messages.ProjectFactory_0 + description.getName());
 			project = workspace.getRoot().getProject(projectName);
 			if (!deleteExistingProject(project, shell, subMonitor)) {
 				return null;
@@ -149,11 +149,11 @@ public class ProjectFactory {
 			final boolean[] result = new boolean[1];
 			workbench.getDisplay().syncExec(new Runnable() {
 				public void run() {
-					result[0] = MessageDialog.openQuestion(theShell, "Do you want to overwrite the project "
+					result[0] = MessageDialog.openQuestion(theShell, Messages.ProjectFactory_1
 							+ projectName,
-							"Note that everything inside the project '"
+							Messages.ProjectFactory_2
 									+ projectName
-									+ "' will be deleted if you confirm this dialog.");
+									+ Messages.ProjectFactory_3);
 				}
 			});
 			if (result[0]) {

@@ -41,6 +41,6 @@ public class ContentOutlineNodeLabelProvider extends AbstractLabelProvider {
 
 	@Override
 	protected Object getDefaultImage() {
-		return Activator.getImageDescriptor("icons/defaultoutlinenode.gif");
+		return Activator.getImageDescriptor("icons/defaultoutlinenode.gif"); //$NON-NLS-1$
 	}
 }

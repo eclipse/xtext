@@ -123,11 +123,11 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 	}
 
 	protected String fixCrossReferenceLabel(String issueString, String replacement) {
-		return "Change to '" + replacement + "'";
+		return Messages.DefaultQuickfixProvider_changeTo + replacement + Messages.DefaultQuickfixProvider_1;
 	}
 
 	protected String fixCrossReferenceImage(String issueString, String replacement) {
-		return "";
+		return ""; //$NON-NLS-1$
 	}
 
 	@Override

@@ -43,7 +43,7 @@ public class ValidationJob extends Job {
 
 	public ValidationJob(IResourceValidator xtextResourceChecker, IStateAccess<XtextResource> xtextDocument,
 			IValidationIssueProcessor validationIssueProcessor,CheckMode checkMode) {
-		super("Xtext validation");
+		super(Messages.ValidationJob_0);
 		this.xtextDocument = xtextDocument;
 		this.resourceValidator = xtextResourceChecker;
 		this.validationIssueProcessor = validationIssueProcessor;

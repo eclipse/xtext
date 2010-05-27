@@ -16,8 +16,8 @@ import org.eclipse.core.runtime.CoreException;
  */
 public class XtextProjectHelper {
 
-	public static final String NATURE_ID = "org.eclipse.xtext.ui.shared.xtextNature";
-	public static final String BUILDER_ID = "org.eclipse.xtext.ui.shared.xtextBuilder";
+	public static final String NATURE_ID = "org.eclipse.xtext.ui.shared.xtextNature"; //$NON-NLS-1$
+	public static final String BUILDER_ID = "org.eclipse.xtext.ui.shared.xtextBuilder"; //$NON-NLS-1$
 
 	private static final Logger log = Logger.getLogger(XtextProjectHelper.class);
 

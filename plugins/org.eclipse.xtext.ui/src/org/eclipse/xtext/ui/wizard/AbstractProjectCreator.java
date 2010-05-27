@@ -78,7 +78,7 @@ public abstract class AbstractProjectCreator extends WorkspaceModifyOperation im
 	}
 
 	protected String getCreateModelProjectMessage() {
-		return "Creating model project " + getProjectInfo().getProjectName();
+		return Messages.AbstractProjectCreator_0 + getProjectInfo().getProjectName();
 	}
 	
 	protected IFile getModelFile(IProject project) throws CoreException {
@@ -139,7 +139,7 @@ public abstract class AbstractProjectCreator extends WorkspaceModifyOperation im
     protected String[] getProjectNatures() {
         return new String[] {
         	JavaCore.NATURE_ID,
-			"org.eclipse.pde.PluginNature",
+			"org.eclipse.pde.PluginNature", //$NON-NLS-1$
 			XtextProjectHelper.NATURE_ID
 		};
     }
@@ -147,8 +147,8 @@ public abstract class AbstractProjectCreator extends WorkspaceModifyOperation im
     protected String[] getBuilders() {
     	return new String[]{
     		JavaCore.BUILDER_ID,
-			"org.eclipse.pde.ManifestBuilder", 
-			"org.eclipse.pde.SchemaBuilder",
+			"org.eclipse.pde.ManifestBuilder",  //$NON-NLS-1$
+			"org.eclipse.pde.SchemaBuilder", //$NON-NLS-1$
 			XtextProjectHelper.BUILDER_ID
 		};
 	}

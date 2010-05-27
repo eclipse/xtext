@@ -31,8 +31,8 @@ public class CrossReferenceTemplateVariableResolver extends AbstractTemplateVari
 	private static final Logger log = Logger.getLogger(CrossReferenceTemplateVariableResolver.class);
 
 	public CrossReferenceTemplateVariableResolver() {
-		super("CrossReference", 
-				"Select one of the available values for a Cross-Reference, e.g. ${value:CrossReference('[MyPackageName.]MyType.myRef')}");
+		super("CrossReference",  //$NON-NLS-1$
+				Messages.CrossReferenceTemplateVariableResolver_1);
 	}
 	
 	@Override
@@ -40,15 +40,15 @@ public class CrossReferenceTemplateVariableResolver extends AbstractTemplateVari
 		String abbreviatedCrossReference = (String) variable.getVariableType().getParams().iterator().next();
 		int dotIndex = abbreviatedCrossReference.lastIndexOf('.');
 		if (dotIndex <= 0) {
-			log.error("CrossReference '" + abbreviatedCrossReference + "' could not be resolved.");
+			log.error("CrossReference '" + abbreviatedCrossReference + "' could not be resolved."); //$NON-NLS-1$ //$NON-NLS-2$
 			return Collections.emptyList();
 		}
 		String[] classReferencePair = new String[] { abbreviatedCrossReference.substring(0, dotIndex),
 				abbreviatedCrossReference.substring(dotIndex + 1) };
 		EReference reference = getReference(classReferencePair[0], classReferencePair[1], getGrammar(castedContext));
 		if (reference == null) {
-			log.error("CrossReference to class '" + classReferencePair[0] + "' and reference '" + classReferencePair[1]
-					+ "' could not be resolved.");
+			log.error("CrossReference to class '" + classReferencePair[0] + "' and reference '" + classReferencePair[1] //$NON-NLS-1$ //$NON-NLS-2$
+					+ "' could not be resolved."); //$NON-NLS-1$
 			return Collections.emptyList();
 		}
 		IScope scope = castedContext.getScopeProvider().getScope(

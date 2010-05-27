@@ -82,7 +82,7 @@ public class DefaultTemplateProposalProvider extends AbstractTemplateProposalPro
 
 	public Image getImage(Template template) {
 		if (image == null) {
-			ImageDescriptor imageDescriptor = Activator.getImageDescriptor("icons/defaultoutlinenode.gif");
+			ImageDescriptor imageDescriptor = Activator.getImageDescriptor("icons/defaultoutlinenode.gif"); //$NON-NLS-1$
 			image = imageDescriptor.createImage();
 		}
 		return image;

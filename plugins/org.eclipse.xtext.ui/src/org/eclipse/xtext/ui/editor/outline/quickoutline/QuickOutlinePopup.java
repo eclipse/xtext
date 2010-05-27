@@ -103,7 +103,7 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 
 	public QuickOutlinePopup(Shell parent) {
 		super(parent, PopupDialog.HOVER_SHELLSTYLE | SWT.RESIZE, true, true, true, true, true, null,
-				"Press 'Esc' to exit the quick outline.");
+				Messages.QuickOutlinePopup_pressESC);
 	}
 
 	@Override
@@ -187,7 +187,7 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 	}
 
 	private void installFilter() {
-		filterText.setText("");
+		filterText.setText(""); //$NON-NLS-1$
 
 		filterText.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
@@ -312,7 +312,7 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 
 	@Override
 	protected IDialogSettings getDialogSettings() {
-		String sectionName = "xtext.quickoutline";
+		String sectionName = "xtext.quickoutline"; //$NON-NLS-1$
 
 		IDialogSettings settings = Activator.getDefault().getDialogSettings().getSection(sectionName);
 		if (settings == null) {
