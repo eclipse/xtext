@@ -103,29 +103,32 @@ public class XtextNodeModelReconciler extends AdapterImpl implements Transaction
 			case OperationHistoryEvent.UNDONE:
 			case OperationHistoryEvent.REDONE:
 				changeAggregator.endRecording();
-				ICommand updateXtextResourceTextCommand = null;
-				for (EObject modificationRoot : changeAggregator.getModificationRoots()) {
-					XtextResource xtextResource = (XtextResource) modificationRoot.eResource();
-					NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(modificationRoot);
-					CompositeNode parserNode = nodeAdapter.getParserNode();
-					Serializer serializer = xtextResource.getSerializer();
-					String newText = serializer.serialize(modificationRoot);
-					ICommand newCommand = UpdateXtextResourceTextCommand.createUpdateCommand(xtextResource, parserNode
-							.getOffset(), parserNode.getLength(), newText);
-					if (updateXtextResourceTextCommand == null) {
-						updateXtextResourceTextCommand = newCommand;
-					} else {
-						updateXtextResourceTextCommand.compose(newCommand);
-					}
-				}
 				try {
-					if (updateXtextResourceTextCommand != null) {
-						updateXtextResourceTextCommand.execute(null, null);
+					ICommand updateXtextResourceTextCommand = null;
+					for (EObject modificationRoot : changeAggregator.getModificationRoots()) {
+						XtextResource xtextResource = (XtextResource) modificationRoot.eResource();
+						NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(modificationRoot);
+						CompositeNode parserNode = nodeAdapter.getParserNode();
+						Serializer serializer = xtextResource.getSerializer();
+						String newText = serializer.serialize(modificationRoot);
+						ICommand newCommand = UpdateXtextResourceTextCommand.createUpdateCommand(xtextResource,
+								parserNode.getOffset(), parserNode.getLength(), newText);
+						if (updateXtextResourceTextCommand == null) {
+							updateXtextResourceTextCommand = newCommand;
+						} else {
+							updateXtextResourceTextCommand.compose(newCommand);
+						}
 					}
-				} catch (ExecutionException exc) {
-					Activator.logError(exc);
+					try {
+						if (updateXtextResourceTextCommand != null) {
+							updateXtextResourceTextCommand.execute(null, null);
+						}
+					} catch (ExecutionException exc) {
+						Activator.logError(exc);
+					}
+				} finally {
+					changeAggregator.beginRecording();
 				}
-				changeAggregator.beginRecording();
 				break;
 			default:
 				// ignore

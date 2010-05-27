@@ -27,7 +27,7 @@ public class EntitiesGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cElementsTypeParserRuleCall_2_0 = (RuleCall)cElementsAssignment_2.eContents().get(0);
 		
 		//Model:
-		//  {Model} imports+=Import* elements+=Type*;
+		//	{Model} imports+=Import* elements+=Type*;
 		public ParserRule getRule() { return rule; }
 
 		//{Model} imports+=Import* elements+=Type*
@@ -57,7 +57,7 @@ public class EntitiesGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cImportURISTRINGTerminalRuleCall_1_0 = (RuleCall)cImportURIAssignment_1.eContents().get(0);
 		
 		//Import:
-		//  "import" importURI=STRING;
+		//	"import" importURI=STRING;
 		public ParserRule getRule() { return rule; }
 
 		//"import" importURI=STRING
@@ -80,10 +80,10 @@ public class EntitiesGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cEntityParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Type:
-		//  SimpleType|Entity;
+		//	SimpleType | Entity;
 		public ParserRule getRule() { return rule; }
 
-		//SimpleType|Entity
+		//SimpleType | Entity
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//SimpleType
@@ -101,7 +101,7 @@ public class EntitiesGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//SimpleType:
-		//  "type" name=ID;
+		//	"type" name=ID;
 		public ParserRule getRule() { return rule; }
 
 		//"type" name=ID
@@ -134,7 +134,7 @@ public class EntitiesGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Entity:
-		//  "entity" name=ID ("extends" extends=[Entity])? "{" properties+=Property* "}";
+		//	"entity" name=ID ("extends" extends=[Entity])? "{" properties+=Property* "}";
 		public ParserRule getRule() { return rule; }
 
 		//"entity" name=ID ("extends" extends=[Entity])? "{" properties+=Property* "}"
@@ -184,10 +184,10 @@ public class EntitiesGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cReferenceParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Property:
-		//  SimpleProperty|Reference;
+		//	SimpleProperty | Reference;
 		public ParserRule getRule() { return rule; }
 
-		//SimpleProperty|Reference
+		//SimpleProperty | Reference
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//SimpleProperty
@@ -212,7 +212,7 @@ public class EntitiesGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cManyLeftSquareBracketRightSquareBracketKeyword_2_2_0 = (Keyword)cManyAssignment_2_2.eContents().get(0);
 		
 		//SimpleProperty:
-		//  "property" name=ID (":" type=[SimpleType] many?="[]"?)?;
+		//	"property" name=ID (":" type=[SimpleType] many?="[]"?)?;
 		public ParserRule getRule() { return rule; }
 
 		//"property" name=ID (":" type=[SimpleType] many?="[]"?)?
@@ -263,7 +263,7 @@ public class EntitiesGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cManyLeftSquareBracketRightSquareBracketKeyword_4_0 = (Keyword)cManyAssignment_4.eContents().get(0);
 		
 		//Reference:
-		//  "reference" name=ID ":" type=[Entity] many?="[]"?;
+		//	"reference" name=ID ":" type=[Entity] many?="[]"?;
 		public ParserRule getRule() { return rule; }
 
 		//"reference" name=ID ":" type=[Entity] many?="[]"?
@@ -329,7 +329,7 @@ public class EntitiesGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Model:
-	//  {Model} imports+=Import* elements+=Type*;
+	//	{Model} imports+=Import* elements+=Type*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -339,7 +339,7 @@ public class EntitiesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Import:
-	//  "import" importURI=STRING;
+	//	"import" importURI=STRING;
 	public ImportElements getImportAccess() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
 	}
@@ -349,7 +349,7 @@ public class EntitiesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Type:
-	//  SimpleType|Entity;
+	//	SimpleType | Entity;
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}
@@ -359,7 +359,7 @@ public class EntitiesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SimpleType:
-	//  "type" name=ID;
+	//	"type" name=ID;
 	public SimpleTypeElements getSimpleTypeAccess() {
 		return (pSimpleType != null) ? pSimpleType : (pSimpleType = new SimpleTypeElements());
 	}
@@ -369,7 +369,7 @@ public class EntitiesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Entity:
-	//  "entity" name=ID ("extends" extends=[Entity])? "{" properties+=Property* "}";
+	//	"entity" name=ID ("extends" extends=[Entity])? "{" properties+=Property* "}";
 	public EntityElements getEntityAccess() {
 		return (pEntity != null) ? pEntity : (pEntity = new EntityElements());
 	}
@@ -379,7 +379,7 @@ public class EntitiesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Property:
-	//  SimpleProperty|Reference;
+	//	SimpleProperty | Reference;
 	public PropertyElements getPropertyAccess() {
 		return (pProperty != null) ? pProperty : (pProperty = new PropertyElements());
 	}
@@ -389,7 +389,7 @@ public class EntitiesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SimpleProperty:
-	//  "property" name=ID (":" type=[SimpleType] many?="[]"?)?;
+	//	"property" name=ID (":" type=[SimpleType] many?="[]"?)?;
 	public SimplePropertyElements getSimplePropertyAccess() {
 		return (pSimpleProperty != null) ? pSimpleProperty : (pSimpleProperty = new SimplePropertyElements());
 	}
@@ -399,7 +399,7 @@ public class EntitiesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Reference:
-	//  "reference" name=ID ":" type=[Entity] many?="[]"?;
+	//	"reference" name=ID ":" type=[Entity] many?="[]"?;
 	public ReferenceElements getReferenceAccess() {
 		return (pReference != null) ? pReference : (pReference = new ReferenceElements());
 	}
@@ -409,45 +409,44 @@ public class EntitiesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal ID:
-	//  "^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//  "0".."9"+;
+	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//  "\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""
-	//  ))* "\"" | "\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !(
-	//  "\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
+	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//  "/ *"->"* /";
+	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//  "//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//  (" " | "\t" | "\r" | "\n")+;
+	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
-	//  .;
+	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

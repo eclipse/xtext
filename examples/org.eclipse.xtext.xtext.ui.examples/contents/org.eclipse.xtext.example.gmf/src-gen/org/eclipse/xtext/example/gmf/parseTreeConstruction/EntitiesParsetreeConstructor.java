@@ -12,6 +12,7 @@ import org.eclipse.xtext.example.gmf.services.EntitiesGrammarAccess;
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("all")
 public class EntitiesParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
@@ -47,7 +48,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   {Model} imports+=Import* elements+=Type*;
+ * 	{Model} imports+=Import* elements+=Type*;
  *
  **/
 
@@ -210,7 +211,7 @@ protected class Model_ElementsAssignment_2 extends AssignmentToken  {
 /************ begin Rule Import ****************
  *
  * Import:
- *   "import" importURI=STRING;
+ * 	"import" importURI=STRING;
  *
  **/
 
@@ -305,11 +306,11 @@ protected class Import_ImportURIAssignment_1 extends AssignmentToken  {
 /************ begin Rule Type ****************
  *
  * Type:
- *   SimpleType|Entity;
+ * 	SimpleType | Entity;
  *
  **/
 
-// SimpleType|Entity
+// SimpleType | Entity
 protected class Type_Alternatives extends AlternativesToken {
 
 	public Type_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -419,7 +420,7 @@ protected class Type_EntityParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule SimpleType ****************
  *
  * SimpleType:
- *   "type" name=ID;
+ * 	"type" name=ID;
  *
  **/
 
@@ -514,7 +515,7 @@ protected class SimpleType_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule Entity ****************
  *
  * Entity:
- *   "entity" name=ID ("extends" extends=[Entity])? "{" properties+=Property* "}";
+ * 	"entity" name=ID ("extends" extends=[Entity])? "{" properties+=Property* "}";
  *
  **/
 
@@ -784,11 +785,11 @@ protected class Entity_RightCurlyBracketKeyword_5 extends KeywordToken  {
 /************ begin Rule Property ****************
  *
  * Property:
- *   SimpleProperty|Reference;
+ * 	SimpleProperty | Reference;
  *
  **/
 
-// SimpleProperty|Reference
+// SimpleProperty | Reference
 protected class Property_Alternatives extends AlternativesToken {
 
 	public Property_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -898,7 +899,7 @@ protected class Property_ReferenceParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule SimpleProperty ****************
  *
  * SimpleProperty:
- *   "property" name=ID (":" type=[SimpleType] many?="[]"?)?;
+ * 	"property" name=ID (":" type=[SimpleType] many?="[]"?)?;
  *
  **/
 
@@ -1111,7 +1112,7 @@ protected class SimpleProperty_ManyAssignment_2_2 extends AssignmentToken  {
 /************ begin Rule Reference ****************
  *
  * Reference:
- *   "reference" name=ID ":" type=[Entity] many?="[]"?;
+ * 	"reference" name=ID ":" type=[Entity] many?="[]"?;
  *
  **/
 

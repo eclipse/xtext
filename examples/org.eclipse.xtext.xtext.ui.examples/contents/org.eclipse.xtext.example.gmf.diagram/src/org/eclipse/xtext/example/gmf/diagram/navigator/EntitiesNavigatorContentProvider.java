@@ -250,36 +250,6 @@ public class EntitiesNavigatorContentProvider implements ICommonContentProvider 
 			return result.toArray();
 		}
 
-		case ModelEditPart.VISUAL_ID: {
-			LinkedList<EntitiesAbstractNavigatorItem> result = new LinkedList<EntitiesAbstractNavigatorItem>();
-			Diagram sv = (Diagram) view;
-			EntitiesNavigatorGroup links = new EntitiesNavigatorGroup(
-					Messages.NavigatorGroupName_Model_79_links,
-					"icons/linksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection<View> connectedViews;
-			connectedViews = getChildrenByType(Collections.singleton(sv),
-					EntitiesVisualIDRegistry.getType(EntityEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getChildrenByType(Collections.singleton(sv),
-					EntitiesVisualIDRegistry
-							.getType(SimpleTypeEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getDiagramLinksByType(Collections.singleton(sv),
-					EntitiesVisualIDRegistry
-							.getType(ReferenceEditPart.VISUAL_ID));
-			links.addChildren(createNavigatorItems(connectedViews, links, false));
-			connectedViews = getDiagramLinksByType(Collections.singleton(sv),
-					EntitiesVisualIDRegistry
-							.getType(EntityExtendsEditPart.VISUAL_ID));
-			links.addChildren(createNavigatorItems(connectedViews, links, false));
-			if (!links.isEmpty()) {
-				result.add(links);
-			}
-			return result.toArray();
-		}
-
 		case ReferenceEditPart.VISUAL_ID: {
 			LinkedList<EntitiesAbstractNavigatorItem> result = new LinkedList<EntitiesAbstractNavigatorItem>();
 			Edge sv = (Edge) view;
@@ -351,6 +321,36 @@ public class EntitiesNavigatorContentProvider implements ICommonContentProvider 
 			}
 			if (!outgoinglinks.isEmpty()) {
 				result.add(outgoinglinks);
+			}
+			return result.toArray();
+		}
+
+		case ModelEditPart.VISUAL_ID: {
+			LinkedList<EntitiesAbstractNavigatorItem> result = new LinkedList<EntitiesAbstractNavigatorItem>();
+			Diagram sv = (Diagram) view;
+			EntitiesNavigatorGroup links = new EntitiesNavigatorGroup(
+					Messages.NavigatorGroupName_Model_79_links,
+					"icons/linksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			Collection<View> connectedViews;
+			connectedViews = getChildrenByType(Collections.singleton(sv),
+					EntitiesVisualIDRegistry.getType(EntityEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getChildrenByType(Collections.singleton(sv),
+					EntitiesVisualIDRegistry
+							.getType(SimpleTypeEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getDiagramLinksByType(Collections.singleton(sv),
+					EntitiesVisualIDRegistry
+							.getType(ReferenceEditPart.VISUAL_ID));
+			links.addChildren(createNavigatorItems(connectedViews, links, false));
+			connectedViews = getDiagramLinksByType(Collections.singleton(sv),
+					EntitiesVisualIDRegistry
+							.getType(EntityExtendsEditPart.VISUAL_ID));
+			links.addChildren(createNavigatorItems(connectedViews, links, false));
+			if (!links.isEmpty()) {
+				result.add(links);
 			}
 			return result.toArray();
 		}
