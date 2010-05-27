@@ -20,7 +20,7 @@
 	    <queryParticipant
 	          class="org.eclipse.xtext.common.types.ui.query.QueryParticipant"
 	          id="org.eclipse.xtext.common.types.ui.query.QueryParticipant"
-	          name="Search references in EMF models"
+	          name="%queryParticipant_name"
 	          nature="org.eclipse.jdt.core.javanature">
 	    </queryParticipant>
 	 </extension>
