@@ -76,36 +76,36 @@
    <extension
          point="org.eclipse.ui.contexts">
       <context
-            description="Editing Xtext Source Context"
+            description="%XtextContext_description"
             id="org.eclipse.xtext.ui.XtextEditorScope"
-            name="Editing Xtext Source"
+            name="%XtextContext_name"
             parentId="org.eclipse.ui.textEditorScope">
       </context>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
       <command
-            name="Format"
-            description="Format text"
+            name="%FormatCommand_name"
+            description="%FormatCommand_description"
             categoryId="org.eclipse.xtext.ui.category.XtextEditor"
             id="org.eclipse.xtext.ui.FormatAction">
       </command>
       <command
-            name="Toggle Comment"
-            description="Toggle comment"
+            name="%ToggleCommentCommand_name"
+            description="%ToggleCommentCommand_description"
             categoryId="org.eclipse.xtext.ui.category.XtextEditor"
             id="org.eclipse.xtext.ui.ToggleCommentAction">
       </command>
       <command
-            name="Go to Matching Bracket"
-            description="Go to Matching Bracket"
+            name="%GoToMatchingBracketCommand_name"
+            description="%GoToMatchingBracketCommand_description"
             categoryId="org.eclipse.xtext.ui.category.XtextEditor"
             id="org.eclipse.xtext.ui.GotToMatchingBracketAction">
       </command>
       <category
-            description="Xtext Editing Commands"
+            description="%XtextCommandCategory_description"
             id="org.eclipse.xtext.ui.category.XtextEditor"
-            name="Source">
+            name="%XtextCommandCategory_name">
       </category>
    </extension>
    <extension point="org.eclipse.core.expressions.propertyTesters">
@@ -208,8 +208,8 @@
 	<extension point="org.eclipse.ui.commands">
 		<command 
 			id="org.eclipse.xtext.ui.editor.FindReferences"
-			name="Find References"
-			description="Finds all references to the selected element">
+			name="%FindReferencesCommand_name"
+			description="%FindReferencesCommand_description">
 		</command>
 	</extension>
 	<extension point="org.eclipse.ui.bindings">
@@ -235,8 +235,8 @@
 		point="org.eclipse.ui.commands">
 		<command
 			id="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration"
-			name="Open Declaration"
-			description="Opens the declaration for the currently selected cross reference">
+			name="%OpenDeclarationCommand_name"
+			description="%OpenDeclarationCommand_description">
 		</command>
 	</extension>
 	<extension

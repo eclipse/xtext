@@ -27,9 +27,9 @@ public class GoToMatchingBracketAction extends Action implements IActionContribu
 	private XtextEditor editor;
 	
 	public GoToMatchingBracketAction() {
-		super("Go to matching bracket.");
+		super(Messages.GoToMatchingBracketAction_label);
 		setId(GoToMatchingBracketAction.class.getName());
-		setActionDefinitionId("org.eclipse.xtext.ui.GotToMatchingBracketAction");
+		setActionDefinitionId("org.eclipse.xtext.ui.GotToMatchingBracketAction"); //$NON-NLS-1$
 	}
 	
 	@Override

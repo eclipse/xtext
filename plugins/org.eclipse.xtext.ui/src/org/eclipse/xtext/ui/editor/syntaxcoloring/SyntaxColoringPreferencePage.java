@@ -59,7 +59,7 @@ public class SyntaxColoringPreferencePage extends AbstractPreferencePage impleme
 	protected void createFieldEditors() {
 		refreshAttributes();
 		addField(new TokenTypeDefMasterDetailFieldEditor(CommonPreferenceConstants.TOKEN_STYLES_PREFERENCE_TAG,
-				"Token Styles", getFieldEditorParent(), getPreferenceStore(), highlightings));
+				Messages.SyntaxColoringPreferencePage_tokenStyles, getFieldEditorParent(), getPreferenceStore(), highlightings));
 	}
 
 	protected void refreshAttributes() {

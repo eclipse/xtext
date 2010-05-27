@@ -18,7 +18,7 @@ public class LanguageRootPreferencePage extends AbstractPreferencePage {
 
 	@Override
 	protected void createFieldEditors() {
-		addField(new LabelFieldEditor("General settings.", getFieldEditorParent()));
+		addField(new LabelFieldEditor(Messages.LanguageRootPreferencePage_generalSettings, getFieldEditorParent()));
 	}
 
 }

@@ -22,7 +22,7 @@ public class ReferenceSearchResultLabelProvider extends org.eclipse.jface.viewer
 		if (element instanceof ReferenceSearchViewTreeNode) {
 			return globalDescriptionProvider.getText(((ReferenceSearchViewTreeNode) element).getLabelDescription());
 		}
-		return "<invalid>";
+		return Messages.ReferenceSearchResultLabelProvider_invalid;
 	}
 
 	@Override

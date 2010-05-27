@@ -89,11 +89,11 @@ public class FindReferencesHandler extends AbstractHandler {
 				IEObjectDescription eObjectDescription = editor.getDocument().readOnly(new EObjectResolver(selection));
 				if (eObjectDescription != null) {
 					ReferenceQuery referenceQuery = queryProvider.get();
-					String label = "Xtext References to " + eObjectDescription.getQualifiedName();
+					String label = Messages.FindReferencesHandler_labelPrefix + eObjectDescription.getQualifiedName();
 					Iterator<IStorage> storages = storage2UriMapper.getStorages(eObjectDescription.getEObjectURI())
 							.iterator();
 					if (storages.hasNext()) {
-						label += " (" + storages.next().getFullPath().toString() + ")";
+						label += Messages.FindReferencesHandler_1 + storages.next().getFullPath().toString() + Messages.FindReferencesHandler_2;
 					}
 					referenceQuery.init(eObjectDescription.getEObjectURI(), label);
 					NewSearchUI.activateSearchResultView();
@@ -101,7 +101,7 @@ public class FindReferencesHandler extends AbstractHandler {
 				}
 			}
 		} catch (Exception e) {
-			LOG.error("Error finding references", e);
+			LOG.error(Messages.FindReferencesHandler_3, e);
 		}
 		return null;
 	}

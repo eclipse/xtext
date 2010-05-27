@@ -94,11 +94,11 @@ public class DefaultUiModule extends AbstractGenericModule {
 	}
 
 	public void configureBracketMatchingAction(Binder binder) {
-		binder.bind(IActionContributor.class).annotatedWith(Names.named("foldingActionGroup")).to(
+		binder.bind(IActionContributor.class).annotatedWith(Names.named("foldingActionGroup")).to( //$NON-NLS-1$
 				org.eclipse.xtext.ui.editor.folding.FoldingActionContributor.class);
-		binder.bind(IActionContributor.class).annotatedWith(Names.named("bracketMatcherAction")).to(
+		binder.bind(IActionContributor.class).annotatedWith(Names.named("bracketMatcherAction")).to( //$NON-NLS-1$
 				org.eclipse.xtext.ui.editor.bracketmatching.GoToMatchingBracketAction.class);
-		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("bracketMatcherPrefernceInitializer"))
+		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("bracketMatcherPrefernceInitializer")) //$NON-NLS-1$
 				.to(org.eclipse.xtext.ui.editor.bracketmatching.BracketMatchingPreferencesInitializer.class);
 	}
 
@@ -188,7 +188,7 @@ public class DefaultUiModule extends AbstractGenericModule {
 
 	public void configureXtextEditorErrorTickUpdater(com.google.inject.Binder binder) {
 		binder.bind(IXtextEditorCallback.class).annotatedWith(
-				Names.named("IXtextEditorCallBack")).to(
+				Names.named("IXtextEditorCallBack")).to( //$NON-NLS-1$
 				XtextEditorErrorTickUpdater.class);
 	}
 

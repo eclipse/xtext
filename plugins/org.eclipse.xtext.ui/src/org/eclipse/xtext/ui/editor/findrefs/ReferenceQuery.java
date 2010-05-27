@@ -64,7 +64,7 @@ public class ReferenceQuery implements ISearchQuery {
 	public IStatus run(IProgressMonitor monitor) throws OperationCanceledException {
 		searchResult.reset();
 		int numResources = Iterables.size(resourceDescriptions.getAllResourceDescriptions());
-		monitor.beginTask("Find Xtext references", numResources);
+		monitor.beginTask(Messages.ReferenceQuery_monitor, numResources);
 		for (IResourceDescription resourceDescription : resourceDescriptions.getAllResourceDescriptions()) {
 			Iterable<IReferenceDescription> matchingReferenceDescriptors = Iterables.filter(resourceDescription
 					.getReferenceDescriptions(), new Predicate<IReferenceDescription>() {

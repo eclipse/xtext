@@ -54,7 +54,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 
 	private static final Logger log = Logger.getLogger(AbstractPreferencePage.class);
 
-	private static final String USE_PROJECT_SETTINGS = "useProjectSettings";
+	private static final String USE_PROJECT_SETTINGS = "useProjectSettings"; //$NON-NLS-1$
 
 	private IWorkbench workbench;
 	private IProject project;
@@ -131,19 +131,19 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 
 		// use project settings button
 		useProjectSettingsButton = new Button(projectSettingsParent, SWT.CHECK);
-		useProjectSettingsButton.setText("Enable pr&oject specific settings");
+		useProjectSettingsButton.setText(Messages.AbstractPreferencePage_useProjectSettings);
 		useProjectSettingsButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				handleUseProjectSettings();
-				log.debug("AbstractPreferencePage.widgetSelected()");
+				log.debug("AbstractPreferencePage.widgetSelected()"); //$NON-NLS-1$
 			}
 		});
 
 		// configure ws settings link
 		link = new Link(projectSettingsParent, SWT.NONE);
 		link.setFont(projectSettingsParent.getFont());
-		link.setText("<A>" + "Configure Workspace Settings..." + "</A>"); //$NON-NLS-1$//$NON-NLS-3$
+		link.setText("<A>" + Messages.AbstractPreferencePage_configureWorkspaceSettings + "</A>"); //$NON-NLS-1$//$NON-NLS-3$
 		link.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -163,14 +163,14 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 					new QualifiedName(qualifiedName(), USE_PROJECT_SETTINGS))));
 		}
 		catch (CoreException e) {
-			log.error("Error", e);
+			log.error("Error", e); //$NON-NLS-1$
 		}
 
 	}
 
 	private IProject currentProject() {
 		if (project == null)
-			throw new IllegalStateException("Not a property page case, but current project was requested.");
+			throw new IllegalStateException("Not a property page case, but current project was requested."); //$NON-NLS-1$
 		return project;
 	}
 
@@ -204,7 +204,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 
 	@Override
 	protected void addField(FieldEditor editor) {
-		editor.setPreferenceName(qualifiedName() + "." + editor.getPreferenceName());
+		editor.setPreferenceName(qualifiedName() + "." + editor.getPreferenceName()); //$NON-NLS-1$
 		editors.add(editor);
 		super.addField(editor);
 	}
@@ -253,7 +253,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 				((IPersistentPreferenceStore) getPreferenceStore()).save();
 			}
 			catch (Exception e) {
-				log.error("Error", e);
+				log.error("Error", e); //$NON-NLS-1$
 				retVal = false;
 			}
 		}

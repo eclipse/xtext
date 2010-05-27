@@ -20,9 +20,9 @@ public interface ReferenceSearchViewPageActions {
 		private ReferenceSearchViewPage page;
 
 		public ShowNext(ReferenceSearchViewPage page) {
-			super("Show Next Match");
+			super(Messages.ReferenceSearchViewPageActions_showNextMatch);
 			setImageDescriptor(XtextPluginImages.DESC_SEARCH_NEXT);
-			setToolTipText("Show Next Match");
+			setToolTipText(Messages.ReferenceSearchViewPageActions_showNextMatch_tooltip);
 			this.page = page;
 		}
 
@@ -37,9 +37,9 @@ public interface ReferenceSearchViewPageActions {
 		private ReferenceSearchViewPage page;
 
 		public ShowPrevious(ReferenceSearchViewPage page) {
-			super("Show Previous Match");
+			super(Messages.ReferenceSearchViewPageActions_showPreviousMatch);
 			setImageDescriptor(XtextPluginImages.DESC_SEARCH_PREVIOUS);
-			setToolTipText("Show Previous Match");
+			setToolTipText(Messages.ReferenceSearchViewPageActions_showPreviousMatch_tooltip);
 			this.page = page;
 		}
 
@@ -53,9 +53,9 @@ public interface ReferenceSearchViewPageActions {
 		private ReferenceSearchViewPage page;
 
 		public ExpandAll(ReferenceSearchViewPage page) {
-			super("Expand All");
+			super(Messages.ReferenceSearchViewPageActions_expandAll);
 			setImageDescriptor(XtextPluginImages.DESC_EXPAND_ALL);
-			setToolTipText("Expand All");
+			setToolTipText(Messages.ReferenceSearchViewPageActions_expandAll_tooltip);
 			this.page = page;
 		}
 
@@ -69,9 +69,9 @@ public interface ReferenceSearchViewPageActions {
 		private ReferenceSearchViewPage page;
 
 		public CollapseAll(ReferenceSearchViewPage page) {
-			super("Collapse All");
+			super(Messages.ReferenceSearchViewPageActions_collapseAll);
 			setImageDescriptor(XtextPluginImages.DESC_COLLAPSE_ALL);
-			setToolTipText("Collapse All");
+			setToolTipText(Messages.ReferenceSearchViewPageActions_collapseAll_tooltip);
 			this.page = page;
 		}
 

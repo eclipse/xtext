@@ -36,7 +36,7 @@ public class GlobalDescriptionLabelProvider extends BaseLabelProvider implements
 
 	public String getText(Object element) {
 		if (element == null) {
-			return "<null>";
+			return Messages.GlobalDescriptionLabelProvider_0;
 		} else {
 			ILabelProvider descriptionLabelProvider = lookupDescriptionLabelProvider(element);
 			if (descriptionLabelProvider != null) {

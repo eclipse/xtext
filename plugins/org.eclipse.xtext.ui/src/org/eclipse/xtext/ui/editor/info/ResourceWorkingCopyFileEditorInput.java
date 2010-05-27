@@ -67,13 +67,13 @@ public class ResourceWorkingCopyFileEditorInput extends FileEditorInput {
 
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 //			System.out.println(method.getName());
-			if(method.getName().equals("getContents")) {
+			if(method.getName().equals("getContents")) { //$NON-NLS-1$
 				return new ByteArrayInputStream(buffer);
 			}
-			if(method.getName().equals("equals")) {
+			if(method.getName().equals("equals")) { //$NON-NLS-1$
 				return proxy == args[0] || file == args[0] || file.equals(args[0]);
 			}
-			if(method.getName().equals("isConflicting")) {
+			if(method.getName().equals("isConflicting")) { //$NON-NLS-1$
 				return proxy == args[0] || file == args[0];
 			}
 			return method.invoke(file, args);

@@ -16,10 +16,10 @@ import org.eclipse.xtext.validation.CheckType;
  *
  */
 public final class MarkerTypes {
-	public final static String ANY_VALIDATION = "org.eclipse.xtext.ui.check";
-	public final static String FAST_VALIDATION = "org.eclipse.xtext.ui.check.fast";
-	public final static String NORMAL_VALIDATION = "org.eclipse.xtext.ui.check.normal";
-	public final static String EXPENSIVE_VALIDATION = "org.eclipse.xtext.ui.check.expensive";
+	public final static String ANY_VALIDATION = "org.eclipse.xtext.ui.check"; //$NON-NLS-1$
+	public final static String FAST_VALIDATION = "org.eclipse.xtext.ui.check.fast"; //$NON-NLS-1$
+	public final static String NORMAL_VALIDATION = "org.eclipse.xtext.ui.check.normal"; //$NON-NLS-1$
+	public final static String EXPENSIVE_VALIDATION = "org.eclipse.xtext.ui.check.expensive"; //$NON-NLS-1$
 	
 	public static String forCheckType(CheckType checkType) {
 		switch(checkType) {

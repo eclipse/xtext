@@ -32,15 +32,15 @@ public class PluginImageHelper implements IImageHelper, BundleListener {
 
 	@Inject(optional = true)
 	@Named("org.eclipse.xtext.ui.PluginImageHelper.pathSuffix")
-	private String pathSuffix = "icons/";
+	private String pathSuffix = "icons/"; //$NON-NLS-1$
 
 	@Inject(optional = true)
 	@Named("org.eclipse.xtext.ui.PluginImageHelper.defaultImage")
-	private String defaultImage = "default.gif";
+	private String defaultImage = "default.gif"; //$NON-NLS-1$
 
 	@Inject(optional = true)
 	@Named("org.eclipse.xtext.ui.PluginImageHelper.notFound")
-	private String notFound = "notFound.gif";
+	private String notFound = "notFound.gif"; //$NON-NLS-1$
 
 	/**
 	 * Returns the image associated with the given image descriptor.
