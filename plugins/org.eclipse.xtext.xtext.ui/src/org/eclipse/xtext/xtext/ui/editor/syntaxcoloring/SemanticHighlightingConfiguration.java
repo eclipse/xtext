@@ -18,20 +18,20 @@ import org.eclipse.xtext.ui.editor.utils.TextStyle;
  */
 public class SemanticHighlightingConfiguration extends DefaultHighlightingConfiguration {
 
-	public static final String RULE_DECLARATION_ID = "RuleDeclaration";
-	public static final String TYPE_REFERENCE_ID = "TypeReference";
-	public static final String DATA_TYPE_RULE_ID = "DataTypeIndicator";
-	public static final String UNUSED_VALUE_ID = "UnusedValue";
-	public static final String NEVER_CALLED_RULE_ID = "NeverCalledRule";
+	public static final String RULE_DECLARATION_ID = "RuleDeclaration"; //$NON-NLS-1$
+	public static final String TYPE_REFERENCE_ID = "TypeReference"; //$NON-NLS-1$
+	public static final String DATA_TYPE_RULE_ID = "DataTypeIndicator"; //$NON-NLS-1$
+	public static final String UNUSED_VALUE_ID = "UnusedValue"; //$NON-NLS-1$
+	public static final String NEVER_CALLED_RULE_ID = "NeverCalledRule"; //$NON-NLS-1$
 	
 	@Override
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
 		super.configure(acceptor);
-		acceptor.acceptDefaultHighlighting(RULE_DECLARATION_ID, "Rule Declaration", defaultTextStyle());
-		acceptor.acceptDefaultHighlighting(TYPE_REFERENCE_ID, "Type Reference", typeReference());
-		acceptor.acceptDefaultHighlighting(DATA_TYPE_RULE_ID, "Data Type Rule", dataTypeRule());
-		acceptor.acceptDefaultHighlighting(UNUSED_VALUE_ID, "Unused Value", unusedValue());
-		acceptor.acceptDefaultHighlighting(NEVER_CALLED_RULE_ID, "Uncalled Rule", unusedRule());
+		acceptor.acceptDefaultHighlighting(RULE_DECLARATION_ID, Messages.SemanticHighlightingConfiguration_5, defaultTextStyle());
+		acceptor.acceptDefaultHighlighting(TYPE_REFERENCE_ID, Messages.SemanticHighlightingConfiguration_6, typeReference());
+		acceptor.acceptDefaultHighlighting(DATA_TYPE_RULE_ID, Messages.SemanticHighlightingConfiguration_7, dataTypeRule());
+		acceptor.acceptDefaultHighlighting(UNUSED_VALUE_ID, Messages.SemanticHighlightingConfiguration_8, unusedValue());
+		acceptor.acceptDefaultHighlighting(NEVER_CALLED_RULE_ID, Messages.SemanticHighlightingConfiguration_9, unusedRule());
 	}
 
 	public TextStyle typeReference() {
