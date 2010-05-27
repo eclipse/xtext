@@ -18,16 +18,16 @@ import org.eclipse.xtext.xtext.ui.Activator;
 public class FilterParserRulesAction extends AbstractFilterAction {
 
 	public FilterParserRulesAction(XtextContentOutlinePage outlinePage) {
-		super("Filter Parser Rules", outlinePage);
-		setToolTipText("Show / hide parser rules");
-		setDescription("Show / hide parser rules");
-		setImageDescriptor(Activator.getImageDescriptor("icons/filter_rule.gif"));
-		setDisabledImageDescriptor(Activator.getImageDescriptor("icons/filter_rule.gif"));
+		super(Messages.FilterParserRulesAction_title, outlinePage);
+		setToolTipText(Messages.FilterParserRulesAction_tooltip);
+		setDescription(Messages.FilterParserRulesAction_description);
+		setImageDescriptor(Activator.getImageDescriptor("icons/filter_rule.gif")); //$NON-NLS-1$
+		setDisabledImageDescriptor(Activator.getImageDescriptor("icons/filter_rule.gif")); //$NON-NLS-1$
 	}
 
 	@Override
 	protected String getToggleId() {
-		return "ParserRulesFilter.isChecked";
+		return "ParserRulesFilter.isChecked"; //$NON-NLS-1$
 	}
 	
 	@Override

@@ -11,7 +11,7 @@
             default="true"
             extensions="xtext,xtext2"
             id="org.eclipse.xtext.Xtext"
-            name="Xtext Editor">
+            name="%Xtext_Editor">
         </editor>
     </extension>
     <extension
@@ -52,21 +52,21 @@
         <page
             class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtext.Xtext"
-            name="Xtext">
+            name="%Xtext_Language_Root_Preferences">
             <keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
         </page>
         <page
             category="org.eclipse.xtext.Xtext"
             class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="org.eclipse.xtext.Xtext.coloring"
-            name="Syntax Coloring">
+            name="%Syntax_Coloring">
             <keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
         </page>
         <page
             category="org.eclipse.xtext.Xtext"
             class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
             id="org.eclipse.xtext.Xtext.templates"
-            name="Templates">
+            name="%Templates">
             <keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
         </page>
     </extension>
@@ -74,14 +74,14 @@
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.keyword_Xtext"
-            label="Xtext"/>
+            label="%Xtext_keyword"/>
     </extension>
     <extension
          point="org.eclipse.ui.commands">
       <command
             description="Trigger expensive validation"
             id="org.eclipse.xtext.Xtext.validate"
-            name="Validate">
+            name="%Validate">
       </command>
     </extension>
     <extension point="org.eclipse.ui.menus">
@@ -90,7 +90,7 @@
              <command
                  commandId="org.eclipse.xtext.Xtext.validate"
                  style="push"
-                 tooltip="Trigger expensive validation">
+                 tooltip="%ExpensiveValidation">
             <visibleWhen checkEnabled="false">
                 <reference
                     definitionId="org.eclipse.xtext.Xtext.Editor.opened">
@@ -155,7 +155,7 @@
 	<extension
 		point="org.eclipse.ui.newWizards">
 		<category
-			name="Xtext"
+			name="%Xtext_Wizard_Category"
 			id="org.eclipse.xtext.projectwiz">
 		</category>
 		<wizard
@@ -383,7 +383,7 @@
 		<command
 			description="Open the quick outline."
 			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
-			name="Quick Outline">
+			name="%QuickOutline">
 		</command>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
@@ -391,7 +391,7 @@
 			locationURI="popup:#TextEditorContext?after=group.open">
 			<command commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline"
 				style="push"
-				tooltip="Open Quick Outline">
+				tooltip="%QuickOutline_tooltip">
 				<visibleWhen checkEnabled="false">
 					<reference definitionId="org.eclipse.xtext.Xtext.Editor.opened"/>
 				</visibleWhen>
