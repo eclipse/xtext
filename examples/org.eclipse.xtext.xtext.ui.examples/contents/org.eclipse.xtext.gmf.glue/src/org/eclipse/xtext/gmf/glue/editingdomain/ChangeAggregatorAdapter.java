@@ -8,9 +8,7 @@
 package org.eclipse.xtext.gmf.glue.editingdomain;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +27,7 @@ import com.google.common.collect.Lists;
  */
 public class ChangeAggregatorAdapter extends EContentAdapter {
 
-	private Collection<EObject> modifiedObjects = new LinkedHashSet<EObject>();
+	private Map<Resource, List<EObject>> resource2modificationRootMap = new HashMap<Resource, List<EObject>>();
 
 	private boolean isRecording = false;
 
@@ -48,10 +46,24 @@ public class ChangeAggregatorAdapter extends EContentAdapter {
 	}
 
 	protected void recordObjectModification(EObject obj) {
-		if (obj.eResource() == null || false == obj.eResource() instanceof XtextResource)
-			modifiedObjects.remove(obj);
-		else
-			modifiedObjects.add(obj);
+		Resource resource = obj.eResource();
+		if(resource instanceof XtextResource) {
+			List<EObject> allContainers = allContainers(obj);
+			if(!resource2modificationRootMap.containsKey(resource)) {
+				resource2modificationRootMap.put(resource, allContainers);
+			} else {
+				List<EObject> existingContainers = resource2modificationRootMap.get(resource);
+				int i=0;
+				while(i<Math.min(allContainers.size(), existingContainers.size()) 
+						&& allContainers.get(i) == existingContainers.get(i) 
+						&& !existingContainers.get(i).eIsProxy()) {
+					++i;
+				}
+				while(i<existingContainers.size()) {
+					existingContainers.remove(i++);
+				}
+			}
+		}
 	}
 
 	protected boolean doRecord(Notification notification) {
@@ -73,7 +85,7 @@ public class ChangeAggregatorAdapter extends EContentAdapter {
 	}
 
 	private void reset() {
-		modifiedObjects.clear();
+		resource2modificationRootMap.clear();
 	}
 
 	public void beginRecording() {
@@ -90,21 +102,8 @@ public class ChangeAggregatorAdapter extends EContentAdapter {
 	}
 
 	public List<EObject> getModificationRoots() {
-		Map<Resource, List<EObject>> resource2ChangePathMap = new HashMap<Resource, List<EObject>>();
-		for (EObject eObject : modifiedObjects) {
-			if (!eObject.eIsProxy()) {
-				Resource resource = eObject.eResource();
-				List<EObject> resourceChangePath = resource2ChangePathMap.get(resource);
-				if (resourceChangePath == null) {
-					resourceChangePath = allContainers(eObject);
-					resource2ChangePathMap.put(resource, resourceChangePath);
-				} else {
-					resourceChangePath.retainAll(allContainers(eObject));
-				}
-			}
-		}
-		List<EObject> modificationRoots = new ArrayList<EObject>(resource2ChangePathMap.size());
-		for (List<EObject> changePath : resource2ChangePathMap.values()) {
+		List<EObject> modificationRoots = new ArrayList<EObject>(resource2modificationRootMap.size());
+		for (List<EObject> changePath : resource2modificationRootMap.values()) {
 			if (!changePath.isEmpty()) {
 				modificationRoots.add(changePath.get(changePath.size() - 1));
 			}
