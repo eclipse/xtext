@@ -3,20 +3,34 @@
 <plugin>
 	<extension point="org.eclipse.ui.newWizards">
 		<category id="org.eclipse.xtext.Examples" 
-				  name="Xtext Examples" 
+				  name="%XtextExamples_category" 
 				  parentCategory="org.eclipse.ui.Examples" />
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.eclipse.xtext.Examples" 
+				  name="%XtextExamples_category2" 
+				  parentCategory="org.eclipse.xtext.projectwiz" />
 	</extension>
 
 	<!-- ========= org.eclipse.xtext.example.domainmodel ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.xtext.examples.NewDomainModelExampleWizard" 
-			name="Xtext Domain-Model Example" 
+			name="%DomainExample_name" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
 			category="org.eclipse.ui.Examples/org.eclipse.xtext.Examples"
 			icon="icons/genproject.gif" 
 			project="true">
-			<description>An example Entity-language with support for full qualified names and an index.
-			</description>
+			<description>%DomainExample_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtext.examples.NewDomainModelExampleWizard" 
+			name="%DomainExample_name" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.xtext.projectwiz/org.eclipse.xtext.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>%DomainExample_description</description>
 		</wizard>
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
@@ -27,36 +41,25 @@
 	  </example>
 	</extension>   
    
-	<!-- ========= org.eclipse.xtext.example.ecoredsl ========= -->
-	<!-- TODO: activate me!
-	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.xtext.examples.NewEcoreDSLExampleWizard" 
-			name="Xtext Ecore DSL Example" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.ui.Examples/org.eclipse.xtext.Examples"
-			icon="icons/genproject.gif" 
-			project="true">
-			<description>An Ecore DSL Example.
-			</description>
-		</wizard>
-	</extension>
-    <extension point="org.eclipse.emf.common.ui.examples">
-	  <example wizardID="org.eclipse.xtext.examples.NewEcoreDSLExampleWizard" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.xtext.example.ecoredsl" contentURI="contents/org.eclipse.xtext.example.ecoredsl/" description="Parser, Serializer, Linker, etc."/>
-		 <projectDescriptor name="org.eclipse.xtext.example.ecoredsl.ui" contentURI="contents/org.eclipse.xtext.example.ecoredsl.ui/"  description="A smart editor for the language."/>
-	  </example>
-    </extension>
-    -->
-   
 	<!-- ========= org.eclipse.xtext.example.fowlerdsl ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.xtext.examples.NewFowlerDSLExampleWizard" 
-			name="Xtext State-Machine Example" 
+			name="%FowlerExample_name" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
 			category="org.eclipse.ui.Examples/org.eclipse.xtext.Examples"
 			icon="icons/genproject.gif" 
 			project="true">
-			<description>An implementation of Martin Fowler's secret compartment state machine (http://martinfowler.com/dslwip/Intro.html).</description>
+			<description>%FowlerExample_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtext.examples.NewFowlerDSLExampleWizard" 
+			name="%FowlerExample_name" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.xtext.projectwiz/org.eclipse.xtext.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>%FowlerExample_description</description>
 		</wizard>
 	</extension>
    <extension point="org.eclipse.emf.common.ui.examples">
@@ -69,15 +72,25 @@
 	<!-- ========= org.eclipse.xtext.example.arithmetics ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.xtext.examples.NewArithmeticsExampleWizard" 
-			name="Xtext Simple Arithmetics Example" 
+			name="%ArithmeticsExample_name" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
 			category="org.eclipse.ui.Examples/org.eclipse.xtext.Examples"
 			icon="icons/genproject.gif" 
 			project="true">
-			<description>A simple language for arithmetic calculations.</description>
+			<description>%ArithmeticsExample_description</description>
 		</wizard>
 	</extension>
-   <extension point="org.eclipse.emf.common.ui.examples">
+    <extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtext.examples.NewArithmeticsExampleWizard" 
+			name="%ArithmeticsExample_name" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.xtext.projectwiz/org.eclipse.xtext.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>%ArithmeticsExample_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
 	  <example wizardID="org.eclipse.xtext.examples.NewArithmeticsExampleWizard" pageImage="icons/genproject.gif">
 		 <projectDescriptor name="org.eclipse.xtext.example.arithmetics" contentURI="contents/org.eclipse.xtext.example.arithmetics.zip" description="Contains the parser, serializer, linker, etc."/>
 		 <projectDescriptor name="org.eclipse.xtext.example.arithmetics.tests" contentURI="contents/org.eclipse.xtext.example.arithmetics.tests.zip" description="The test bundle for the language"/>
@@ -88,13 +101,22 @@
 	<!-- ========= org.eclipse.xtext.gmf.example ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.xtext.examples.NewGMFIntegrationExampleWizard" 
-			name="Xtext GMF Integration Example" 
+			name="%GmfExample_name" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
 			category="org.eclipse.ui.Examples/org.eclipse.xtext.Examples"
 			icon="icons/genproject.gif" 
 			project="true">
-			<description>An example how to integrate Xtext with GMF (experimental).
-			</description>
+			<description>%GmfExample_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtext.examples.NewGMFIntegrationExampleWizard" 
+			name="%GmfExample_name" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.xtext.projectwiz/org.eclipse.xtext.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>%GmfExample_description</description>
 		</wizard>
 	</extension>
    <extension point="org.eclipse.emf.common.ui.examples">
