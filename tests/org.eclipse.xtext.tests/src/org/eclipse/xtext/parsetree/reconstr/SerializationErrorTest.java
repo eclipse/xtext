@@ -56,15 +56,25 @@ public class SerializationErrorTest extends AbstractXtextTests {
 		assertTrue(r.toString(), r.toString().contains("TwoRequired.one is not set"));
 	}
 
+	public void testValueConverterError() throws Exception {
+		Model m = (Model) getModel("tworequired a b");
+		((TwoRequired) m.getTest()).setOne("|nv4l|d");
+		TreeConstructionReport r = ser(m);
+		assertFalse(r.isSuccess());
+		assertTrue(r.toString(), r.toString().contains("invalid characters"));
+	}
+
 	public void testElementTooMuch() throws Exception {
 		Model m = (Model) getModel("twooptions one a");
 		// System.out.println(EmfFormatter.objToStr(m));
 		((TwoOptions) m.getTest()).setTwo("b");
 		TreeConstructionReport r = ser(m);
 		assertFalse(r.isSuccess());
-		assertTrue(r.toString(), r.toString().contains(
-				"Can not leave rule 'Parenthesis' " + "since the current object " + "'TwoOptions' has features with "
-						+ "unconsumed values: 'two':1"));
+		assertTrue(
+				r.toString(),
+				r.toString().contains(
+						"Can not leave rule 'Parenthesis' " + "since the current object "
+								+ "'TwoOptions' has features with " + "unconsumed values: 'two':1"));
 		// assertTrue(r.toString(), r.getLikelyErrorReasons(1).get(0).contains(
 		// "Can not leave rule 'Parenthesis' "
 		// + "since the current object "
@@ -81,7 +91,9 @@ public class SerializationErrorTest extends AbstractXtextTests {
 		TreeConstructionReport r = ser(m);
 		assertFalse(r.isSuccess());
 		String msg = r.toString();
-		assertTrue(msg, msg.contains("Can not leave rule 'TwoOptions' " + "since the current object "
-				+ "'TwoOptions' has features with " + "unconsumed values: 'two':1"));
+		assertTrue(
+				msg,
+				msg.contains("Can not leave rule 'TwoOptions' " + "since the current object "
+						+ "'TwoOptions' has features with " + "unconsumed values: 'two':1"));
 	}
 }
