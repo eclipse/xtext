@@ -12,7 +12,10 @@ import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parsetree.reconstr.impl.TreeConstructionReportImpl;
 import org.eclipse.xtext.util.TextLocation;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -26,14 +29,15 @@ public interface IParseTreeConstructor {
 		String getLikelyErrorReasons();
 	}
 
+	@ImplementedBy(TreeConstructionReportImpl.class)
 	interface TreeConstructionReport {
 		List<TreeConstructionDiagnostic> getDiagnostics();
 
 		boolean isSuccess();
-		
+
 		TextLocation getPreviousLocation();
 	}
 
 	TreeConstructionReport serializeSubtree(EObject object, ITokenStream out) throws IOException;
-	
+
 }
