@@ -50,10 +50,10 @@ public class GlobalDescriptionLabelProvider extends BaseLabelProvider implements
 	private ILabelProvider lookupDescriptionLabelProvider(Object description) {
 		URI uri = uri(description);
 		if (uri != null) {
-			IResourceUIServiceProvider resourceServiceProvider = (IResourceUIServiceProvider) IResourceServiceProvider.Registry.INSTANCE
+			IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE
 					.getResourceServiceProvider(uri);
-			if (resourceServiceProvider != null)
-				return resourceServiceProvider.getLabelProvider();
+			if (resourceServiceProvider instanceof IResourceUIServiceProvider)
+				return ((IResourceUIServiceProvider) resourceServiceProvider).getLabelProvider();
 		}
 		return null;
 	}
