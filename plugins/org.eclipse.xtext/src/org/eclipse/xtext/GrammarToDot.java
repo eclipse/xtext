@@ -32,7 +32,7 @@ public class GrammarToDot extends GraphvizDotBuilder {
 	}
 
 	protected Digraph drawGrammar(Grammar g, Digraph d) {
-		for (AbstractRule r : g.getRules())
+		for (AbstractRule r : GrammarUtil.allRules(g))
 			drawRule(r, d);
 		return d;
 	}
