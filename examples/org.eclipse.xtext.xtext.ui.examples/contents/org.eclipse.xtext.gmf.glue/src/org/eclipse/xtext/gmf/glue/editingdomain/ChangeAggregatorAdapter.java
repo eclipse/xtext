@@ -47,19 +47,18 @@ public class ChangeAggregatorAdapter extends EContentAdapter {
 
 	protected void recordObjectModification(EObject obj) {
 		Resource resource = obj.eResource();
-		if(resource instanceof XtextResource) {
+		if (resource instanceof XtextResource) {
 			List<EObject> allContainers = allContainers(obj);
-			if(!resource2modificationRootMap.containsKey(resource)) {
+			if (!resource2modificationRootMap.containsKey(resource)) {
 				resource2modificationRootMap.put(resource, allContainers);
 			} else {
 				List<EObject> existingContainers = resource2modificationRootMap.get(resource);
-				int i=0;
-				while(i<Math.min(allContainers.size(), existingContainers.size()) 
-						&& allContainers.get(i) == existingContainers.get(i) 
-						&& !existingContainers.get(i).eIsProxy()) {
+				int i = 0;
+				while (i < Math.min(allContainers.size(), existingContainers.size())
+						&& allContainers.get(i) == existingContainers.get(i) && !existingContainers.get(i).eIsProxy()) {
 					++i;
 				}
-				while(i<existingContainers.size()) {
+				while (i < existingContainers.size()) {
 					existingContainers.remove(i++);
 				}
 			}
@@ -105,7 +104,13 @@ public class ChangeAggregatorAdapter extends EContentAdapter {
 		List<EObject> modificationRoots = new ArrayList<EObject>(resource2modificationRootMap.size());
 		for (List<EObject> changePath : resource2modificationRootMap.values()) {
 			if (!changePath.isEmpty()) {
-				modificationRoots.add(changePath.get(changePath.size() - 1));
+				for (int i = changePath.size() - 1; i >= 0; --i) {
+					EObject modificationRoot = changePath.get(i);
+					if (!modificationRoot.eIsProxy()) {
+						modificationRoots.add(modificationRoot);
+						break;
+					}
+				}
 			}
 		}
 		return modificationRoots;
