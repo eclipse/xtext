@@ -52,10 +52,10 @@ public class GlobalDescriptionLabelProvider extends BaseLabelProvider implements
 		if (uri != null) {
 			IResourceUIServiceProvider resourceServiceProvider = (IResourceUIServiceProvider) IResourceServiceProvider.Registry.INSTANCE
 					.getResourceServiceProvider(uri);
-			return resourceServiceProvider.getLabelProvider();
-		} else {
-			return null;
+			if (resourceServiceProvider != null)
+				return resourceServiceProvider.getLabelProvider();
 		}
+		return null;
 	}
 
 	private URI uri(Object description) {
