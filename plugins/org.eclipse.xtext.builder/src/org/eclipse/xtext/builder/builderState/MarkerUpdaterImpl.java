@@ -93,6 +93,8 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 		try {
 			IResourceServiceProvider provider = resourceServiceProviderRegistry.getResourceServiceProvider(resource
 					.getURI());
+			if (provider == null)
+				return;
 
 			IResourceValidator resourceValidator = provider.getResourceValidator();
 			List<Issue> list = resourceValidator
