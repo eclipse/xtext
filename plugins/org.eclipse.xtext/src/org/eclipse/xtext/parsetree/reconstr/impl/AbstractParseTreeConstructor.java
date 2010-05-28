@@ -47,6 +47,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * TODO: Extract WsMergerStream to a different class
@@ -474,6 +475,9 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 	protected TokenUtil tokenUtil;
 
 	@Inject
+	protected Provider<TreeConstructionReportImpl> treeConstructionReportProvider;
+
+	@Inject
 	protected ITransientValueService tvService;
 
 	@Inject
@@ -589,13 +593,15 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			return containsNodeOrAnyParent(nodes, node.getParent());
 		return false;
 	}
-
+	
 	protected IEObjectConsumer createEObjectConsumer(EObject obj) {
 		return new EObjectConsumer(tvService, obj);
 	}
 
 	protected TreeConstructionReportImpl createReport(EObject root) {
-		return new TreeConstructionReportImpl(root);
+		TreeConstructionReportImpl result = treeConstructionReportProvider.get();
+		result.setRoot(root);
+		return result;
 	}
 
 	protected String debug(AbstractToken t, IEObjectConsumer i) {

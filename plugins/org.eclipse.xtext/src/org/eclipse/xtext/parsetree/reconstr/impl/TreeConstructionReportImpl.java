@@ -18,14 +18,20 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.TreeConstructionDiagnostic;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.TreeConstructionReport;
+import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IEnumLiteralSerializer;
+import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IErrorAcceptor;
+import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AssignmentToken;
 import org.eclipse.xtext.util.EmfFormatter;
@@ -36,12 +42,31 @@ import org.eclipse.xtext.util.Tuples;
 import com.google.common.base.Join;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @SuppressWarnings("serial")
 public class TreeConstructionReportImpl implements TreeConstructionReport {
+
+	protected class ErrorAcceptor implements IErrorAcceptor {
+
+		protected StringBuilder builder;
+
+		public void error(String message) {
+			if (builder == null)
+				builder = new StringBuilder();
+			else
+				builder.append(", ");
+			builder.append(message);
+		}
+
+		public String getMessage() {
+			return builder == null ? null : builder.toString();
+		}
+
+	}
 
 	protected class TreeConstructionDiagnosticImpl implements TreeConstructionDiagnostic {
 
@@ -114,18 +139,20 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 
 	protected TreeConstructionDiagnosticImpl diagnostic;
 
-	protected TreeConstructionNFAProvider nfaProvider = new TreeConstructionNFAProvider();
+	@Inject
+	protected IEnumLiteralSerializer enumSerializer;
+
+	@Inject
+	protected TreeConstructionNFAProvider nfaProvider;
+
+	private TextLocation previousLocation;
 
 	protected EObject root;
 
 	protected AbstractToken success;
 
-	private TextLocation previousLocation;
-
-	public TreeConstructionReportImpl(EObject root) {
-		super();
-		this.root = root;
-	}
+	@Inject
+	protected IValueSerializer valueSerializer;
 
 	protected void addDeadEnd(int depth, AbstractToken deadend) {
 		if (deadends.size() >= THRESHOLD && depth < deadends.first().getFirst())
@@ -218,10 +245,10 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 
 	protected String getDiagnosticMessage(AssignmentToken token) {
 		Assignment ass = (Assignment) token.getGrammarElement();
-		boolean consumable = token.getEObjectConsumer().getConsumable(ass.getFeature(), false) != null;
-		if (!consumable) {
-			EStructuralFeature f = token.getEObjectConsumer().getEObject().eClass().getEStructuralFeature(
-					ass.getFeature());
+		Object value = token.getEObjectConsumer().getConsumable(ass.getFeature(), false);
+		if (value == null) {
+			EStructuralFeature f = token.getEObjectConsumer().getEObject().eClass()
+					.getEStructuralFeature(ass.getFeature());
 			if (f == null)
 				return "The current object of type '" + token.getEObjectConsumer().getEObject().eClass().getName()
 						+ "' does not have a feature named '" + ass.getFeature() + "'";
@@ -235,8 +262,19 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 						+ "More are needed to continue here.";
 			} else
 				return feat + " is not set.";
+		} else {
+			ErrorAcceptor err = new ErrorAcceptor();
+			for (RuleCall ruleCall : GrammarUtil.containedRuleCalls(token.getGrammarElement())) {
+				if (ruleCall.getRule() instanceof EnumRule) {
+					if (enumSerializer.isValid(token.getEObject(), ruleCall, value, err))
+						return null;
+				} else if (ruleCall.getRule().getType().getClassifier() instanceof EDataType) {
+					if (valueSerializer.isValid(token.getEObject(), ruleCall, value, err))
+						return null;
+				}
+			}
+			return err.getMessage();
 		}
-		return null;
 	}
 
 	public List<TreeConstructionDiagnostic> getDiagnostics() {
@@ -248,12 +286,24 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		return result;
 	}
 
+	public TextLocation getPreviousLocation() {
+		return previousLocation;
+	}
+
 	public AbstractToken getSuccess() {
 		return success;
 	}
 
 	public boolean isSuccess() {
 		return success != null;
+	}
+
+	public void setPreviousLocation(TextLocation previousLocation) {
+		this.previousLocation = previousLocation;
+	}
+
+	public void setRoot(EObject root) {
+		this.root = root;
 	}
 
 	protected void setSuccess(AbstractToken succes) {
@@ -270,13 +320,5 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		b.append("  -> <possible reasons for not continuing>\n");
 		b.append(Join.join("\n", getDiagnostics()));
 		return b.toString();
-	}
-
-	public TextLocation getPreviousLocation() {
-		return previousLocation;
-	}
-	
-	public void setPreviousLocation(TextLocation previousLocation) {
-		this.previousLocation = previousLocation;
 	}
 }
