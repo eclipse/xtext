@@ -17,11 +17,7 @@
 «DEFINE generate(Set[Binding] bindings, List[String] fileExtensions) FOR Grammar»
 «EXPAND guiceModuleRt»
 
-«FILE name.replaceAll("\\.","/")+".properties" SRC-»
-file.extensions=«fileExtensions.toString(",")»
-«ENDFILE»
-
-«FILE guiceModuleRtGenerated().asPath()+".java" SRC_GEN»
+«FILE guiceModuleRtGenerated().asPath()+".java" SRC_GEN-»
 /*
  «fileHeader()»
  */
@@ -38,19 +34,30 @@ import com.google.inject.name.Names;
  */
  @SuppressWarnings("all")
 public abstract class «guiceModuleRtGenerated().toSimpleName()» extends DefaultRuntimeModule {
-	
+
+	// Support for property files is deprecated. Please use configure...() methods instead. 
+	protected boolean useProperties = getClass().getResource("«name.replaceAll("\\.","/")».properties") != null;
+
 	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
-		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
-			"«name»");
-		bindProperties(binder);
+		if(useProperties)
+			bindProperties(binder);
 	}
 	
 	protected void bindProperties(Binder binder) {
 		bindProperties(binder, "«name.replaceAll("\\.","/")».properties");
 	}
 	
+	public void configureLanguageName(Binder binder) {
+		if(!useProperties)
+			binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("«name»");
+	}
+	
+	public void configureFileExtensions(Binder binder) {
+		if(!useProperties)
+			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("«fileExtensions.toString(",")»");
+	}
 	«EXPAND bindingMethod FOREACH bindings»
 }
 «ENDFILE»	
