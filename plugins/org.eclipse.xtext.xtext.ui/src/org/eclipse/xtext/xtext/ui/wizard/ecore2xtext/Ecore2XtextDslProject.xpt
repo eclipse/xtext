@@ -19,13 +19,6 @@
 «ENDDEFINE»
 
 «DEFINE workflow FOR Ecore2XtextProjectInfo»
-
-«FILE basePackagePath+"/"+languageNameAbbreviation+".properties" -»
-grammarURI=classpath:/«this.basePackagePath»/«this.languageNameAbbreviation».xtext
-file.extensions=«this.firstFileExtension»
-projectName=«this.projectName»
-«ENDFILE»
-
 «FILE basePackagePath+"/Generate"+languageNameAbbreviation+".mwe2" -»
 module «(basePackagePath+"/"+languageNameAbbreviation).replaceAll("/", ".")»
 

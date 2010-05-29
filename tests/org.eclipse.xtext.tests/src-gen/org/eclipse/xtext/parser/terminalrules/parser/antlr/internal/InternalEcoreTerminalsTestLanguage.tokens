@@ -1,7 +1,7 @@
 RULE_EDATE=6
+RULE_WS=7
 RULE_EDOUBLE=5
 RULE_EINT=4
-RULE_WS=7
 'date'=10
 'int'=8
 'double'=9

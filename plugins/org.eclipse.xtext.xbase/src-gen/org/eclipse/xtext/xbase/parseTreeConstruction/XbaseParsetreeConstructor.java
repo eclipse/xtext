@@ -81,7 +81,7 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule XFile ****************
  *
  * XFile:
- *   package=QualifiedName? imports+=XImport* classes+=XClass*;
+ * 	package=QualifiedName? imports+=XImport* classes+=XClass*;
  *
  **/
 
@@ -251,7 +251,7 @@ protected class XFile_ClassesAssignment_2 extends AssignmentToken  {
 /************ begin Rule XImport ****************
  *
  * XImport:
- *   "import" importedNamespace=XQualifiedNameWithWildCard;
+ * 	"import" importedNamespace=XQualifiedNameWithWildCard;
  *
  **/
 
@@ -347,13 +347,11 @@ protected class XImport_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 /************ begin Rule XClass ****************
  *
  * XClass:
- *   "class" name=ID ("extends" extends=XTypeRef)? ("implements"
- *   implements+=XTypeRef)* "{" functions+=XFunction* "}";
+ * 	"class" name=ID ("extends" extends=XTypeRef)? ("implements" implements+=XTypeRef)* "{" functions+=XFunction* "}";
  *
  **/
 
-// "class" name=ID ("extends" extends=XTypeRef)? ("implements" implements+=XTypeRef
-// )* "{" functions+=XFunction* "}"
+// "class" name=ID ("extends" extends=XTypeRef)? ("implements" implements+=XTypeRef)* "{" functions+=XFunction* "}"
 protected class XClass_Group extends GroupToken {
 	
 	public XClass_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -722,17 +720,15 @@ protected class XClass_RightCurlyBracketKeyword_6 extends KeywordToken  {
 /************ begin Rule XFunction ****************
  *
  * XFunction:
- *   private?="private"? ("<" typeParams+=XTypeParamDeclaration (","
- *   typeParams+=XTypeParamDeclaration)* ">")? returnType=XTypeRef? name=ID "(" (
- *   declaredParams+=XDeclaredParameter ("," declaredParams+=XDeclaredParameter)*)
- *   ? ")" (":" expression=XExpression ";"|expression=XBlockExpression);
+ * 	private?="private"? ("<" typeParams+=XTypeParamDeclaration ("," typeParams+=XTypeParamDeclaration)* ">")?
+ * 	returnType=XTypeRef? name=ID "(" (declaredParams+=XDeclaredParameter ("," declaredParams+=XDeclaredParameter)*)? ")"
+ * 	(":" expression=XExpression ";" | expression=XBlockExpression);
  *
  **/
 
-// private?="private"? ("<" typeParams+=XTypeParamDeclaration (","
-// typeParams+=XTypeParamDeclaration)* ">")? returnType=XTypeRef? name=ID "(" (
-// declaredParams+=XDeclaredParameter ("," declaredParams+=XDeclaredParameter)*)?
-// ")" (":" expression=XExpression ";"|expression=XBlockExpression)
+// private?="private"? ("<" typeParams+=XTypeParamDeclaration ("," typeParams+=XTypeParamDeclaration)* ">")?
+// returnType=XTypeRef? name=ID "(" (declaredParams+=XDeclaredParameter ("," declaredParams+=XDeclaredParameter)*)? ")"
+// (":" expression=XExpression ";" | expression=XBlockExpression)
 protected class XFunction_Group extends GroupToken {
 	
 	public XFunction_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -794,8 +790,7 @@ protected class XFunction_PrivateAssignment_0 extends AssignmentToken  {
 
 }
 
-// ("<" typeParams+=XTypeParamDeclaration ("," typeParams+=XTypeParamDeclaration)*
-// ">")?
+// ("<" typeParams+=XTypeParamDeclaration ("," typeParams+=XTypeParamDeclaration)* ">")?
 protected class XFunction_Group_1 extends GroupToken {
 	
 	public XFunction_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1291,7 +1286,7 @@ protected class XFunction_RightParenthesisKeyword_6 extends KeywordToken  {
 
 }
 
-// ":" expression=XExpression ";"|expression=XBlockExpression
+// ":" expression=XExpression ";" | expression=XBlockExpression
 protected class XFunction_Alternatives_7 extends AlternativesToken {
 
 	public XFunction_Alternatives_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1481,7 +1476,7 @@ protected class XFunction_ExpressionAssignment_7_1 extends AssignmentToken  {
 /************ begin Rule XExpression ****************
  *
  * XExpression:
- *   XAssignment;
+ * 	XAssignment;
  *
  **/
 
@@ -1507,13 +1502,13 @@ protected class XExpression_XAssignmentParserRuleCall extends RuleCallToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftAction_1_1_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBooleanLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXUnaryOperationAccess().getXCastedExpressionAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXFeatureCallTargetAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
@@ -1543,13 +1538,11 @@ protected class XExpression_XAssignmentParserRuleCall extends RuleCallToken {
 /************ begin Rule XAssignment ****************
  *
  * XAssignment returns XExpression:
- *   XOrExpression ({XBinaryOperation.left=current} operator=( "=" | "+=" )
- *   right=XOrExpression)?;
+ * 	XOrExpression ({XBinaryOperation.left=current} operator=("=" | "+=") right=XOrExpression)?;
  *
  **/
 
-// XOrExpression ({XBinaryOperation.left=current} operator=( "=" | "+=" )
-// right=XOrExpression)?
+// XOrExpression ({XBinaryOperation.left=current} operator=("=" | "+=") right=XOrExpression)?
 protected class XAssignment_Group extends GroupToken {
 	
 	public XAssignment_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1572,13 +1565,13 @@ protected class XAssignment_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftAction_1_1_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBooleanLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXUnaryOperationAccess().getXCastedExpressionAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXFeatureCallTargetAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
@@ -1629,7 +1622,7 @@ protected class XAssignment_XOrExpressionParserRuleCall_0 extends RuleCallToken 
 	}	
 }
 
-// ({XBinaryOperation.left=current} operator=( "=" | "+=" ) right=XOrExpression)?
+// ({XBinaryOperation.left=current} operator=("=" | "+=") right=XOrExpression)?
 protected class XAssignment_Group_1 extends GroupToken {
 	
 	public XAssignment_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1687,7 +1680,7 @@ protected class XAssignment_XBinaryOperationLeftAction_1_0 extends ActionToken  
 	}
 }
 
-// operator=( "=" | "+=" )
+// operator=("=" | "+=")
 protected class XAssignment_OperatorAssignment_1_1 extends AssignmentToken  {
 	
 	public XAssignment_OperatorAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1780,13 +1773,11 @@ protected class XAssignment_RightAssignment_1_2 extends AssignmentToken  {
 /************ begin Rule XOrExpression ****************
  *
  * XOrExpression returns XExpression:
- *   XAndExpression ({XBinaryOperation.left=current} operator="||"
- *   right=XAndExpression)*;
+ * 	XAndExpression ({XBinaryOperation.left=current} operator="||" right=XAndExpression)*;
  *
  **/
 
-// XAndExpression ({XBinaryOperation.left=current} operator="||"
-// right=XAndExpression)*
+// XAndExpression ({XBinaryOperation.left=current} operator="||" right=XAndExpression)*
 protected class XOrExpression_Group extends GroupToken {
 	
 	public XOrExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1809,13 +1800,13 @@ protected class XOrExpression_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftAction_1_1_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBooleanLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXUnaryOperationAccess().getXCastedExpressionAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXFeatureCallTargetAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
@@ -2013,13 +2004,11 @@ protected class XOrExpression_RightAssignment_1_2 extends AssignmentToken  {
 /************ begin Rule XAndExpression ****************
  *
  * XAndExpression returns XExpression:
- *   XEqualityExpression ({XBinaryOperation.left=current} operator="&&"
- *   right=XEqualityExpression)*;
+ * 	XEqualityExpression ({XBinaryOperation.left=current} operator="&&" right=XEqualityExpression)*;
  *
  **/
 
-// XEqualityExpression ({XBinaryOperation.left=current} operator="&&"
-// right=XEqualityExpression)*
+// XEqualityExpression ({XBinaryOperation.left=current} operator="&&" right=XEqualityExpression)*
 protected class XAndExpression_Group extends GroupToken {
 	
 	public XAndExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2042,13 +2031,13 @@ protected class XAndExpression_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftAction_1_1_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBooleanLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXUnaryOperationAccess().getXCastedExpressionAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXFeatureCallTargetAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
@@ -2246,13 +2235,11 @@ protected class XAndExpression_RightAssignment_1_2 extends AssignmentToken  {
 /************ begin Rule XEqualityExpression ****************
  *
  * XEqualityExpression returns XExpression:
- *   XRelationalExpression ({XBinaryOperation.left=current} operator=( "==" | "!="
- *   ) right=XRelationalExpression)*;
+ * 	XRelationalExpression ({XBinaryOperation.left=current} operator=("==" | "!=") right=XRelationalExpression)*;
  *
  **/
 
-// XRelationalExpression ({XBinaryOperation.left=current} operator=( "==" | "!=" )
-// right=XRelationalExpression)*
+// XRelationalExpression ({XBinaryOperation.left=current} operator=("==" | "!=") right=XRelationalExpression)*
 protected class XEqualityExpression_Group extends GroupToken {
 	
 	public XEqualityExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2275,13 +2262,13 @@ protected class XEqualityExpression_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftAction_1_1_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBooleanLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXUnaryOperationAccess().getXCastedExpressionAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXFeatureCallTargetAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
@@ -2332,8 +2319,7 @@ protected class XEqualityExpression_XRelationalExpressionParserRuleCall_0 extend
 	}	
 }
 
-// ({XBinaryOperation.left=current} operator=( "==" | "!=" )
-// right=XRelationalExpression)*
+// ({XBinaryOperation.left=current} operator=("==" | "!=") right=XRelationalExpression)*
 protected class XEqualityExpression_Group_1 extends GroupToken {
 	
 	public XEqualityExpression_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2392,7 +2378,7 @@ protected class XEqualityExpression_XBinaryOperationLeftAction_1_0 extends Actio
 	}
 }
 
-// operator=( "==" | "!=" )
+// operator=("==" | "!=")
 protected class XEqualityExpression_OperatorAssignment_1_1 extends AssignmentToken  {
 	
 	public XEqualityExpression_OperatorAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2485,16 +2471,13 @@ protected class XEqualityExpression_RightAssignment_1_2 extends AssignmentToken 
 /************ begin Rule XRelationalExpression ****************
  *
  * XRelationalExpression returns XExpression:
- *   XOtherOperatorExpression ({XInstanceOfExpression.expression=current}
- *   "instanceof" type=[types::JvmType|QualifiedName]|{XBinaryOperation.left=
- *   current} operator=( ">=" | "<=" | ">" | "<" ) right=XOtherOperatorExpression)
- *   *;
+ * 	XOtherOperatorExpression ({XInstanceOfExpression.expression=current} "instanceof" type=[types::JvmType|QualifiedName]
+ * 	| {XBinaryOperation.left=current} operator=(">=" | "<=" | ">" | "<") right=XOtherOperatorExpression)*;
  *
  **/
 
-// XOtherOperatorExpression ({XInstanceOfExpression.expression=current}
-// "instanceof" type=[types::JvmType|QualifiedName]|{XBinaryOperation.left=current
-// } operator=( ">=" | "<=" | ">" | "<" ) right=XOtherOperatorExpression)*
+// XOtherOperatorExpression ({XInstanceOfExpression.expression=current} "instanceof" type=[types::JvmType|QualifiedName] |
+// {XBinaryOperation.left=current} operator=(">=" | "<=" | ">" | "<") right=XOtherOperatorExpression)*
 protected class XRelationalExpression_Group extends GroupToken {
 	
 	public XRelationalExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2517,13 +2500,13 @@ protected class XRelationalExpression_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftAction_1_1_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBooleanLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXUnaryOperationAccess().getXCastedExpressionAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXFeatureCallTargetAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
@@ -2574,9 +2557,8 @@ protected class XRelationalExpression_XOtherOperatorExpressionParserRuleCall_0 e
 	}	
 }
 
-// ({XInstanceOfExpression.expression=current} "instanceof" type=[types::JvmType|
-// QualifiedName]|{XBinaryOperation.left=current} operator=( ">=" | "<=" | ">" |
-// "<" ) right=XOtherOperatorExpression)*
+// ({XInstanceOfExpression.expression=current} "instanceof" type=[types::JvmType|QualifiedName] |
+// {XBinaryOperation.left=current} operator=(">=" | "<=" | ">" | "<") right=XOtherOperatorExpression)*
 protected class XRelationalExpression_Alternatives_1 extends AlternativesToken {
 
 	public XRelationalExpression_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2607,8 +2589,7 @@ protected class XRelationalExpression_Alternatives_1 extends AlternativesToken {
 
 }
 
-// {XInstanceOfExpression.expression=current} "instanceof" type=[types::JvmType|
-// QualifiedName]
+// {XInstanceOfExpression.expression=current} "instanceof" type=[types::JvmType|QualifiedName]
 protected class XRelationalExpression_Group_1_0 extends GroupToken {
 	
 	public XRelationalExpression_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2727,8 +2708,7 @@ protected class XRelationalExpression_TypeAssignment_1_0_2 extends AssignmentTok
 }
 
 
-// {XBinaryOperation.left=current} operator=( ">=" | "<=" | ">" | "<" )
-// right=XOtherOperatorExpression
+// {XBinaryOperation.left=current} operator=(">=" | "<=" | ">" | "<") right=XOtherOperatorExpression
 protected class XRelationalExpression_Group_1_1 extends GroupToken {
 	
 	public XRelationalExpression_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2787,7 +2767,7 @@ protected class XRelationalExpression_XBinaryOperationLeftAction_1_1_0 extends A
 	}
 }
 
-// operator=( ">=" | "<=" | ">" | "<" )
+// operator=(">=" | "<=" | ">" | "<")
 protected class XRelationalExpression_OperatorAssignment_1_1_1 extends AssignmentToken  {
 	
 	public XRelationalExpression_OperatorAssignment_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2891,13 +2871,11 @@ protected class XRelationalExpression_RightAssignment_1_1_2 extends AssignmentTo
 /************ begin Rule XOtherOperatorExpression ****************
  *
  * XOtherOperatorExpression returns XExpression:
- *   XAdditiveExpression ({XBinaryOperation.left=current} operator=( "->" | ".." )
- *   right=XAdditiveExpression)*;
+ * 	XAdditiveExpression ({XBinaryOperation.left=current} operator=("->" | "..") right=XAdditiveExpression)*;
  *
  **/
 
-// XAdditiveExpression ({XBinaryOperation.left=current} operator=( "->" | ".." )
-// right=XAdditiveExpression)*
+// XAdditiveExpression ({XBinaryOperation.left=current} operator=("->" | "..") right=XAdditiveExpression)*
 protected class XOtherOperatorExpression_Group extends GroupToken {
 	
 	public XOtherOperatorExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2920,13 +2898,13 @@ protected class XOtherOperatorExpression_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftAction_1_1_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBooleanLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXUnaryOperationAccess().getXCastedExpressionAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXFeatureCallTargetAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
@@ -2977,8 +2955,7 @@ protected class XOtherOperatorExpression_XAdditiveExpressionParserRuleCall_0 ext
 	}	
 }
 
-// ({XBinaryOperation.left=current} operator=( "->" | ".." )
-// right=XAdditiveExpression)*
+// ({XBinaryOperation.left=current} operator=("->" | "..") right=XAdditiveExpression)*
 protected class XOtherOperatorExpression_Group_1 extends GroupToken {
 	
 	public XOtherOperatorExpression_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3037,7 +3014,7 @@ protected class XOtherOperatorExpression_XBinaryOperationLeftAction_1_0 extends 
 	}
 }
 
-// operator=( "->" | ".." )
+// operator=("->" | "..")
 protected class XOtherOperatorExpression_OperatorAssignment_1_1 extends AssignmentToken  {
 	
 	public XOtherOperatorExpression_OperatorAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3130,13 +3107,11 @@ protected class XOtherOperatorExpression_RightAssignment_1_2 extends AssignmentT
 /************ begin Rule XAdditiveExpression ****************
  *
  * XAdditiveExpression returns XExpression:
- *   XMultiplicativeExpression ({XBinaryOperation.left=current} operator=( "+" |
- *   "-" ) right=XMultiplicativeExpression)*;
+ * 	XMultiplicativeExpression ({XBinaryOperation.left=current} operator=("+" | "-") right=XMultiplicativeExpression)*;
  *
  **/
 
-// XMultiplicativeExpression ({XBinaryOperation.left=current} operator=( "+" | "-"
-// ) right=XMultiplicativeExpression)*
+// XMultiplicativeExpression ({XBinaryOperation.left=current} operator=("+" | "-") right=XMultiplicativeExpression)*
 protected class XAdditiveExpression_Group extends GroupToken {
 	
 	public XAdditiveExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3159,13 +3134,13 @@ protected class XAdditiveExpression_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftAction_1_1_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBooleanLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXUnaryOperationAccess().getXCastedExpressionAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXFeatureCallTargetAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
@@ -3216,8 +3191,7 @@ protected class XAdditiveExpression_XMultiplicativeExpressionParserRuleCall_0 ex
 	}	
 }
 
-// ({XBinaryOperation.left=current} operator=( "+" | "-" )
-// right=XMultiplicativeExpression)*
+// ({XBinaryOperation.left=current} operator=("+" | "-") right=XMultiplicativeExpression)*
 protected class XAdditiveExpression_Group_1 extends GroupToken {
 	
 	public XAdditiveExpression_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3276,7 +3250,7 @@ protected class XAdditiveExpression_XBinaryOperationLeftAction_1_0 extends Actio
 	}
 }
 
-// operator=( "+" | "-" )
+// operator=("+" | "-")
 protected class XAdditiveExpression_OperatorAssignment_1_1 extends AssignmentToken  {
 	
 	public XAdditiveExpression_OperatorAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3369,13 +3343,11 @@ protected class XAdditiveExpression_RightAssignment_1_2 extends AssignmentToken 
 /************ begin Rule XMultiplicativeExpression ****************
  *
  * XMultiplicativeExpression returns XExpression:
- *   XUnaryOperation ({XBinaryOperation.left=current} operator=( "*" | "**" | "/"
- *   | "%" ) right=XUnaryOperation)*;
+ * 	XUnaryOperation ({XBinaryOperation.left=current} operator=("*" | "**" | "/" | "%") right=XUnaryOperation)*;
  *
  **/
 
-// XUnaryOperation ({XBinaryOperation.left=current} operator=( "*" | "**" | "/" |
-// "%" ) right=XUnaryOperation)*
+// XUnaryOperation ({XBinaryOperation.left=current} operator=("*" | "**" | "/" | "%") right=XUnaryOperation)*
 protected class XMultiplicativeExpression_Group extends GroupToken {
 	
 	public XMultiplicativeExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3398,13 +3370,13 @@ protected class XMultiplicativeExpression_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftAction_1_1_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBooleanLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXUnaryOperationAccess().getXCastedExpressionAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXFeatureCallTargetAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
@@ -3455,8 +3427,7 @@ protected class XMultiplicativeExpression_XUnaryOperationParserRuleCall_0 extend
 	}	
 }
 
-// ({XBinaryOperation.left=current} operator=( "*" | "**" | "/" | "%" )
-// right=XUnaryOperation)*
+// ({XBinaryOperation.left=current} operator=("*" | "**" | "/" | "%") right=XUnaryOperation)*
 protected class XMultiplicativeExpression_Group_1 extends GroupToken {
 	
 	public XMultiplicativeExpression_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3515,7 +3486,7 @@ protected class XMultiplicativeExpression_XBinaryOperationLeftAction_1_0 extends
 	}
 }
 
-// operator=( "*" | "**" | "/" | "%" )
+// operator=("*" | "**" | "/" | "%")
 protected class XMultiplicativeExpression_OperatorAssignment_1_1 extends AssignmentToken  {
 	
 	public XMultiplicativeExpression_OperatorAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3618,13 +3589,13 @@ protected class XMultiplicativeExpression_RightAssignment_1_2 extends Assignment
 /************ begin Rule XUnaryOperation ****************
  *
  * XUnaryOperation returns XExpression:
- *   {XUnaryOperation} operator=( "!" | "-" | "+" ) target=XFeatureCall|{
- *   XCastedExpression} "(" type=XTypeRef ")" target=XExpression|XFeatureCall;
+ * 	{XUnaryOperation} operator=("!" | "-" | "+") target=XFeatureCall | {XCastedExpression} "(" type=XTypeRef ")"
+ * 	target=XExpression | XFeatureCall;
  *
  **/
 
-// {XUnaryOperation} operator=( "!" | "-" | "+" ) target=XFeatureCall|{
-// XCastedExpression} "(" type=XTypeRef ")" target=XExpression|XFeatureCall
+// {XUnaryOperation} operator=("!" | "-" | "+") target=XFeatureCall | {XCastedExpression} "(" type=XTypeRef ")"
+// target=XExpression | XFeatureCall
 protected class XUnaryOperation_Alternatives extends AlternativesToken {
 
 	public XUnaryOperation_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3648,13 +3619,13 @@ protected class XUnaryOperation_Alternatives extends AlternativesToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftAction_1_1_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBooleanLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXUnaryOperationAccess().getXCastedExpressionAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXFeatureCallTargetAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
@@ -3671,7 +3642,7 @@ protected class XUnaryOperation_Alternatives extends AlternativesToken {
 
 }
 
-// {XUnaryOperation} operator=( "!" | "-" | "+" ) target=XFeatureCall
+// {XUnaryOperation} operator=("!" | "-" | "+") target=XFeatureCall
 protected class XUnaryOperation_Group_0 extends GroupToken {
 	
 	public XUnaryOperation_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3726,7 +3697,7 @@ protected class XUnaryOperation_XUnaryOperationAction_0_0 extends ActionToken  {
 	}
 }
 
-// operator=( "!" | "-" | "+" )
+// operator=("!" | "-" | "+")
 protected class XUnaryOperation_OperatorAssignment_0_1 extends AssignmentToken  {
 	
 	public XUnaryOperation_OperatorAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4050,13 +4021,13 @@ protected class XUnaryOperation_XFeatureCallParserRuleCall_2 extends RuleCallTok
 /************ begin Rule XFeatureCall ****************
  *
  * XFeatureCall returns XExpression:
- *   XPrimaryExpression ({XFeatureCall.target=current} "." name=ID ("(" (
- *   params+=XExpression ("," params+=XExpression)*)? ")")?)*;
+ * 	XPrimaryExpression ({XFeatureCall.target=current} "." name=ID ("(" (params+=XExpression ("," params+=XExpression)*)?
+ * 	")")?)*;
  *
  **/
 
-// XPrimaryExpression ({XFeatureCall.target=current} "." name=ID ("(" (
-// params+=XExpression ("," params+=XExpression)*)? ")")?)*
+// XPrimaryExpression ({XFeatureCall.target=current} "." name=ID ("(" (params+=XExpression ("," params+=XExpression)*)?
+// ")")?)*
 protected class XFeatureCall_Group extends GroupToken {
 	
 	public XFeatureCall_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4079,13 +4050,13 @@ protected class XFeatureCall_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftAction_1_1_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBooleanLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXUnaryOperationAccess().getXCastedExpressionAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXFeatureCallTargetAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
@@ -4136,8 +4107,7 @@ protected class XFeatureCall_XPrimaryExpressionParserRuleCall_0 extends RuleCall
 	}	
 }
 
-// ({XFeatureCall.target=current} "." name=ID ("(" (params+=XExpression (","
-// params+=XExpression)*)? ")")?)*
+// ({XFeatureCall.target=current} "." name=ID ("(" (params+=XExpression ("," params+=XExpression)*)? ")")?)*
 protected class XFeatureCall_Group_1 extends GroupToken {
 	
 	public XFeatureCall_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4490,16 +4460,15 @@ protected class XFeatureCall_RightParenthesisKeyword_1_3_2 extends KeywordToken 
 /************ begin Rule XPrimaryExpression ****************
  *
  * XPrimaryExpression returns XExpression:
- *   XClosure|XBooleanLiteral|XIntLiteral|XNullLiteral|XStringLiteral|XTypeLiteral
- *   |XConstructorCall|XBlockExpression|XRichString|XIfExpression|
- *   XSwitchExpression|XWhileExpression|XSimpleFeatureCall|
- *   XParenthesizedExpression;
+ * 	XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral | XConstructorCall |
+ * 	XBlockExpression | XRichString | XIfExpression | XSwitchExpression | XWhileExpression | XSimpleFeatureCall |
+ * 	XParenthesizedExpression;
  *
  **/
 
-// XClosure|XBooleanLiteral|XIntLiteral|XNullLiteral|XStringLiteral|XTypeLiteral|
-// XConstructorCall|XBlockExpression|XRichString|XIfExpression|XSwitchExpression|
-// XWhileExpression|XSimpleFeatureCall|XParenthesizedExpression
+// XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral | XConstructorCall |
+// XBlockExpression | XRichString | XIfExpression | XSwitchExpression | XWhileExpression | XSimpleFeatureCall |
+// XParenthesizedExpression
 protected class XPrimaryExpression_Alternatives extends AlternativesToken {
 
 	public XPrimaryExpression_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4534,13 +4503,13 @@ protected class XPrimaryExpression_Alternatives extends AlternativesToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftAction_1_1_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBooleanLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXUnaryOperationAccess().getXCastedExpressionAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXFeatureCallTargetAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
@@ -5066,13 +5035,11 @@ protected class XPrimaryExpression_XParenthesizedExpressionParserRuleCall_13 ext
 /************ begin Rule XClosure ****************
  *
  * XClosure returns XExpression:
- *   {XClosure} (params+=XDeclaredParameter ("," params+=XDeclaredParameter)*)?
- *   "|" expression=XExpression;
+ * 	{XClosure} (params+=XDeclaredParameter ("," params+=XDeclaredParameter)*)? "|" expression=XExpression;
  *
  **/
 
-// {XClosure} (params+=XDeclaredParameter ("," params+=XDeclaredParameter)*)? "|"
-// expression=XExpression
+// {XClosure} (params+=XDeclaredParameter ("," params+=XDeclaredParameter)*)? "|" expression=XExpression
 protected class XClosure_Group extends GroupToken {
 	
 	public XClosure_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5365,7 +5332,7 @@ protected class XClosure_ExpressionAssignment_3 extends AssignmentToken  {
 /************ begin Rule XParenthesizedExpression ****************
  *
  * XParenthesizedExpression returns XExpression:
- *   "(" XExpression ")";
+ * 	"(" XExpression ")";
  *
  **/
 
@@ -5391,13 +5358,13 @@ protected class XParenthesizedExpression_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftAction_1_1_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBooleanLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXUnaryOperationAccess().getXCastedExpressionAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXFeatureCallTargetAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
@@ -5499,7 +5466,7 @@ protected class XParenthesizedExpression_RightParenthesisKeyword_2 extends Keywo
 /************ begin Rule XIfExpression ****************
  *
  * XIfExpression:
- *   "if" "(" if=XExpression ")" then=XExpression ("else" else=XExpression)?;
+ * 	"if" "(" if=XExpression ")" then=XExpression ("else" else=XExpression)?;
  *
  **/
 
@@ -5788,13 +5755,11 @@ protected class XIfExpression_ElseAssignment_5_1 extends AssignmentToken  {
 /************ begin Rule XSwitchExpression ****************
  *
  * XSwitchExpression:
- *   "switch" switch=XExpression? "{" cases+=XCasePart+ ("default" ":"
- *   default=XExpression)? "}";
+ * 	"switch" switch=XExpression? "{" cases+=XCasePart+ ("default" ":" default=XExpression)? "}";
  *
  **/
 
-// "switch" switch=XExpression? "{" cases+=XCasePart+ ("default" ":"
-// default=XExpression)? "}"
+// "switch" switch=XExpression? "{" cases+=XCasePart+ ("default" ":" default=XExpression)? "}"
 protected class XSwitchExpression_Group extends GroupToken {
 	
 	public XSwitchExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6103,7 +6068,7 @@ protected class XSwitchExpression_RightCurlyBracketKeyword_5 extends KeywordToke
 /************ begin Rule XWhileExpression ****************
  *
  * XWhileExpression:
- *   "while" predicate=XParenthesizedExpression body=XExpression;
+ * 	"while" predicate=XParenthesizedExpression body=XExpression;
  *
  **/
 
@@ -6256,7 +6221,7 @@ protected class XWhileExpression_BodyAssignment_2 extends AssignmentToken  {
 /************ begin Rule XCasePart ****************
  *
  * XCasePart:
- *   "case" case=XExpression ":" then=XExpression;
+ * 	"case" case=XExpression ":" then=XExpression;
  *
  **/
 
@@ -6431,7 +6396,7 @@ protected class XCasePart_ThenAssignment_3 extends AssignmentToken  {
 /************ begin Rule XBlockExpression ****************
  *
  * XBlockExpression:
- *   "{" (expressions+=XExpressionInsideBlock ";")+ "}";
+ * 	"{" (expressions+=XExpressionInsideBlock ";")+ "}";
  *
  **/
 
@@ -6606,11 +6571,11 @@ protected class XBlockExpression_RightCurlyBracketKeyword_2 extends KeywordToken
 /************ begin Rule XExpressionInsideBlock ****************
  *
  * XExpressionInsideBlock returns XExpression:
- *   XVariableDeclaration|XExpression;
+ * 	XVariableDeclaration | XExpression;
  *
  **/
 
-// XVariableDeclaration|XExpression
+// XVariableDeclaration | XExpression
 protected class XExpressionInsideBlock_Alternatives extends AlternativesToken {
 
 	public XExpressionInsideBlock_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6633,13 +6598,13 @@ protected class XExpressionInsideBlock_Alternatives extends AlternativesToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftAction_1_1_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBooleanLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXUnaryOperationAccess().getXCastedExpressionAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXFeatureCallTargetAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
@@ -6715,13 +6680,13 @@ protected class XExpressionInsideBlock_XExpressionParserRuleCall_1 extends RuleC
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftAction_1_1_0().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBlockExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXBooleanLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXUnaryOperationAccess().getXCastedExpressionAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXFeatureCallTargetAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
@@ -6752,11 +6717,11 @@ protected class XExpressionInsideBlock_XExpressionParserRuleCall_1 extends RuleC
 /************ begin Rule XVariableDeclaration ****************
  *
  * XVariableDeclaration:
- *   ("def"|type=XTypeRef) name=ID "=" right=XExpression;
+ * 	("def" | type=XTypeRef) name=ID "=" right=XExpression;
  *
  **/
 
-// ("def"|type=XTypeRef) name=ID "=" right=XExpression
+// ("def" | type=XTypeRef) name=ID "=" right=XExpression
 protected class XVariableDeclaration_Group extends GroupToken {
 	
 	public XVariableDeclaration_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6785,7 +6750,7 @@ protected class XVariableDeclaration_Group extends GroupToken {
 
 }
 
-// "def"|type=XTypeRef
+// "def" | type=XTypeRef
 protected class XVariableDeclaration_Alternatives_0 extends AlternativesToken {
 
 	public XVariableDeclaration_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6984,7 +6949,7 @@ protected class XVariableDeclaration_RightAssignment_3 extends AssignmentToken  
 /************ begin Rule XDeclaredParameter ****************
  *
  * XDeclaredParameter:
- *   type=XTypeRef? name=ID;
+ * 	type=XTypeRef? name=ID;
  *
  **/
 
@@ -7103,7 +7068,7 @@ protected class XDeclaredParameter_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule XSimpleFeatureCall ****************
  *
  * XSimpleFeatureCall returns XFeatureCall:
- *   name=ID ("(" (params+=XExpression ("," params+=XExpression)*)? ")")?;
+ * 	name=ID ("(" (params+=XExpression ("," params+=XExpression)*)? ")")?;
  *
  **/
 
@@ -7406,13 +7371,11 @@ protected class XSimpleFeatureCall_RightParenthesisKeyword_1_2 extends KeywordTo
 /************ begin Rule XConstructorCall ****************
  *
  * XConstructorCall:
- *   "new" type=XTypeRef ("(" (params+=XExpression ("," params+=XExpression)*)?
- *   ")")? initializer=XBlockExpression?;
+ * 	"new" type=XTypeRef ("(" (params+=XExpression ("," params+=XExpression)*)? ")")? initializer=XBlockExpression?;
  *
  **/
 
-// "new" type=XTypeRef ("(" (params+=XExpression ("," params+=XExpression)*)? ")")?
-// initializer=XBlockExpression?
+// "new" type=XTypeRef ("(" (params+=XExpression ("," params+=XExpression)*)? ")")? initializer=XBlockExpression?
 protected class XConstructorCall_Group extends GroupToken {
 	
 	public XConstructorCall_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7793,11 +7756,11 @@ protected class XConstructorCall_InitializerAssignment_3 extends AssignmentToken
 /************ begin Rule XBooleanLiteral ****************
  *
  * XBooleanLiteral:
- *   {XBooleanLiteral} "false"|isTrue?="true";
+ * 	{XBooleanLiteral} "false" | isTrue?="true";
  *
  **/
 
-// {XBooleanLiteral} "false"|isTrue?="true"
+// {XBooleanLiteral} "false" | isTrue?="true"
 protected class XBooleanLiteral_Alternatives extends AlternativesToken {
 
 	public XBooleanLiteral_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7938,7 +7901,7 @@ protected class XBooleanLiteral_IsTrueAssignment_1 extends AssignmentToken  {
 /************ begin Rule XNullLiteral ****************
  *
  * XNullLiteral:
- *   {XNullLiteral} "null";
+ * 	{XNullLiteral} "null";
  *
  **/
 
@@ -8026,7 +7989,7 @@ protected class XNullLiteral_NullKeyword_1 extends KeywordToken  {
 /************ begin Rule XIntLiteral ****************
  *
  * XIntLiteral:
- *   value=INT;
+ * 	value=INT;
  *
  **/
 
@@ -8071,7 +8034,7 @@ protected class XIntLiteral_ValueAssignment extends AssignmentToken  {
 /************ begin Rule XStringLiteral ****************
  *
  * XStringLiteral:
- *   value=STRING;
+ * 	value=STRING;
  *
  **/
 
@@ -8116,7 +8079,7 @@ protected class XStringLiteral_ValueAssignment extends AssignmentToken  {
 /************ begin Rule XTypeLiteral ****************
  *
  * XTypeLiteral:
- *   type=[types::JvmType|QualifiedName] "." "class";
+ * 	type=[types::JvmType|QualifiedName] "." "class";
  *
  **/
 
@@ -8236,13 +8199,11 @@ protected class XTypeLiteral_ClassKeyword_2 extends KeywordToken  {
 /************ begin Rule XRichString ****************
  *
  * XRichString:
- *   expressions+=XRichStringLiteral (expressions+=XExpression
- *   expressions+=XRichStringLiteral)*;
+ * 	expressions+=XRichStringLiteral (expressions+=XExpression expressions+=XRichStringLiteral)*;
  *
  **/
 
-// expressions+=XRichStringLiteral (expressions+=XExpression
-// expressions+=XRichStringLiteral)*
+// expressions+=XRichStringLiteral (expressions+=XExpression expressions+=XRichStringLiteral)*
 protected class XRichString_Group extends GroupToken {
 	
 	public XRichString_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8440,7 +8401,7 @@ protected class XRichString_ExpressionsAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule XRichStringLiteral ****************
  *
  * XRichStringLiteral:
- *   value=RICH_STRING;
+ * 	value=RICH_STRING;
  *
  **/
 
@@ -8485,11 +8446,11 @@ protected class XRichStringLiteral_ValueAssignment extends AssignmentToken  {
 /************ begin Rule XTypeRef ****************
  *
  * XTypeRef:
- *   XSimpleTypeRef|XFunctionTypeRef;
+ * 	XSimpleTypeRef | XFunctionTypeRef;
  *
  **/
 
-// XSimpleTypeRef|XFunctionTypeRef
+// XSimpleTypeRef | XFunctionTypeRef
 protected class XTypeRef_Alternatives extends AlternativesToken {
 
 	public XTypeRef_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8599,13 +8560,11 @@ protected class XTypeRef_XFunctionTypeRefParserRuleCall_1 extends RuleCallToken 
 /************ begin Rule XFunctionTypeRef ****************
  *
  * XFunctionTypeRef:
- *   ("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")? "=>"
- *   returnType=XTypeRef;
+ * 	("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")? "=>" returnType=XTypeRef;
  *
  **/
 
-// ("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")? "=>"
-// returnType=XTypeRef
+// ("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")? "=>" returnType=XTypeRef
 protected class XFunctionTypeRef_Group extends GroupToken {
 	
 	public XFunctionTypeRef_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8914,13 +8873,11 @@ protected class XFunctionTypeRef_ReturnTypeAssignment_2 extends AssignmentToken 
 /************ begin Rule XSimpleTypeRef ****************
  *
  * XSimpleTypeRef:
- *   type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam (","
- *   typeParams+=XTypeParam)* ">")?;
+ * 	type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=XTypeParam)* ">")?;
  *
  **/
 
-// type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam (","
-// typeParams+=XTypeParam)* ">")?
+// type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=XTypeParam)* ">")?
 protected class XSimpleTypeRef_Group extends GroupToken {
 	
 	public XSimpleTypeRef_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9199,11 +9156,11 @@ protected class XSimpleTypeRef_GreaterThanSignKeyword_1_3 extends KeywordToken  
 /************ begin Rule XTypeParam ****************
  *
  * XTypeParam returns XTypeRef:
- *   XTypeRef|XWildcardParam;
+ * 	XTypeRef | XWildcardParam;
  *
  **/
 
-// XTypeRef|XWildcardParam
+// XTypeRef | XWildcardParam
 protected class XTypeParam_Alternatives extends AlternativesToken {
 
 	public XTypeParam_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9315,11 +9272,11 @@ protected class XTypeParam_XWildcardParamParserRuleCall_1 extends RuleCallToken 
 /************ begin Rule XWildcardParam ****************
  *
  * XWildcardParam returns XTypeRef:
- *   {XWildcardParam} "?" ("extends" extends=XTypeRef|"super" super=XTypeRef)?;
+ * 	{XWildcardParam} "?" ("extends" extends=XTypeRef | "super" super=XTypeRef)?;
  *
  **/
 
-// {XWildcardParam} "?" ("extends" extends=XTypeRef|"super" super=XTypeRef)?
+// {XWildcardParam} "?" ("extends" extends=XTypeRef | "super" super=XTypeRef)?
 protected class XWildcardParam_Group extends GroupToken {
 	
 	public XWildcardParam_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9397,7 +9354,7 @@ protected class XWildcardParam_QuestionMarkKeyword_1 extends KeywordToken  {
 
 }
 
-// ("extends" extends=XTypeRef|"super" super=XTypeRef)?
+// ("extends" extends=XTypeRef | "super" super=XTypeRef)?
 protected class XWildcardParam_Alternatives_2 extends AlternativesToken {
 
 	public XWildcardParam_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9610,13 +9567,11 @@ protected class XWildcardParam_SuperAssignment_2_1_1 extends AssignmentToken  {
 /************ begin Rule XTypeParamDeclaration ****************
  *
  * XTypeParamDeclaration:
- *   name=ID ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super"
- *   super=XTypeRef)?;
+ * 	name=ID ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)* | "super" super=XTypeRef)?;
  *
  **/
 
-// name=ID ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super"
-// super=XTypeRef)?
+// name=ID ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)* | "super" super=XTypeRef)?
 protected class XTypeParamDeclaration_Group extends GroupToken {
 	
 	public XTypeParamDeclaration_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9679,7 +9634,7 @@ protected class XTypeParamDeclaration_NameAssignment_0 extends AssignmentToken  
 
 }
 
-// ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super" super=XTypeRef)?
+// ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)* | "super" super=XTypeRef)?
 protected class XTypeParamDeclaration_Alternatives_1 extends AlternativesToken {
 
 	public XTypeParamDeclaration_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

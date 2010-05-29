@@ -27,10 +27,10 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_EINT", "RULE_EDOUBLE", "RULE_EDATE", "RULE_WS", "'int'", "'double'", "'date'"
     };
     public static final int RULE_EDATE=6;
-    public static final int RULE_EDOUBLE=5;
-    public static final int RULE_EINT=4;
     public static final int RULE_WS=7;
     public static final int EOF=-1;
+    public static final int RULE_EDOUBLE=5;
+    public static final int RULE_EINT=4;
 
         public InternalEcoreTerminalsTestLanguageParser(TokenStream input) {
             super(input);
