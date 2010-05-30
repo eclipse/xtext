@@ -54,8 +54,8 @@ Workflow {
 				fileExtensions = file.extensions
 			}
 
-			// the following fragment tries to use the Antlr Generator fragment which can be installed via update manager from http://download.itemis.com/updates/ -->
-			fragment = de.itemis.xtext.antlr.XtextAntlrGeneratorFragment {
+			// the following fragment generates an Antlr parser -->
+			fragment = parser.antlr.XtextAntlrGeneratorFragment {
 				options = {
 					backtrack = true
 					classSplitting = true
@@ -82,7 +82,7 @@ Workflow {
 
 			// java-based API for content assistance 
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			fragment = de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment {
+			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {
 				options = {
 					backtrack = true
 					classSplitting = true

@@ -54,7 +54,7 @@ Workflow {
 			}
 
 			// the following fragment tries to use the Antlr Generator fragment which can be installed via update manager from http://download.itemis.com/updates/ -->
-			fragment = de.itemis.xtext.antlr.XtextAntlrGeneratorFragment {}
+			fragment = parser.antlr.XtextAntlrGeneratorFragment {}
 
 			// Check based validation 
 			fragment = validation.CheckFragment {}
@@ -69,7 +69,7 @@ Workflow {
 
 			// java-based API for content assistance 
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			fragment = de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment {}
+			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {}
 		}
 	}
 }
