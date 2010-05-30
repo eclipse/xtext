@@ -10,13 +10,16 @@ package org.eclipse.xtext.util;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.WrappedException;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -46,15 +49,12 @@ public class Files {
 						fwr.write(buff, 0, read);
 					}
 					log.debug("Copied " + copy);
-				}
-				catch (IOException e) {
+				} catch (IOException e) {
 					log.error(e);
-				}
-				finally {
+				} finally {
 					try {
 						is.close();
-					}
-					catch (IOException e) {
+					} catch (IOException e) {
 						log.error(e);
 					}
 				}
@@ -81,8 +81,7 @@ public class Files {
 			if (file.isDirectory()) {
 				if (!cleanFolder(file, myFilter, continueOnError, false) && !continueOnError)
 					return false;
-			}
-			else {
+			} else {
 				if (!file.delete()) {
 					log.error("Couldn't delete " + file.getAbsolutePath());
 					if (!continueOnError)
@@ -101,8 +100,7 @@ public class Files {
 
 	/**
 	 * This will completely sweep the given folder. Consider using
-	 * {@link #cleanFolder(File, FileFilter, boolean, boolean)} if you want to
-	 * preserve CVS or SVN information.
+	 * {@link #cleanFolder(File, FileFilter, boolean, boolean)} if you want to preserve CVS or SVN information.
 	 * 
 	 * @param folder
 	 * @return
@@ -114,5 +112,39 @@ public class Files {
 				return true;
 			}
 		}, true, false);
+	}
+
+	public static String readFileIntoString(String filename) {
+		try {
+			FileInputStream inputStream = new FileInputStream(filename);
+			try {
+				byte[] buffer = new byte[2048];
+				int bytesRead = 0;
+				StringBuffer b = new StringBuffer();
+				do {
+					bytesRead = inputStream.read(buffer);
+					if (bytesRead != -1)
+						b.append(new String(buffer, 0, bytesRead));
+				} while (bytesRead != -1);
+				return b.toString();
+			} finally {
+				inputStream.close();
+			}
+		} catch (IOException e) {
+			throw new WrappedException(e);
+		}
+	}
+
+	public static void writeStringIntoFile(String filename, String content) {
+		try {
+			FileWriter writer = new FileWriter(filename);
+			try {
+				writer.append(content);
+			} finally {
+				writer.close();
+			}
+		} catch (IOException e) {
+			throw new WrappedException(e);
+		}
 	}
 }
