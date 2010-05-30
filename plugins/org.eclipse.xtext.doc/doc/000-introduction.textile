@@ -2,30 +2,41 @@ h1. Overview
 
 h2. What is Xtext?
 
-Xtext is a framework for the development of "domain-specific languages":#DSL and other textual programming languages. It is tightly integrated with the "Eclipse Modeling Framework (EMF)":http://www.eclipse.org/emf and leverages the Eclipse Platform in order to provide a language-specific integrated development environment (IDE). 
+No matter if you want to create a small textual domain.specific language or you want to implement a full-blown general purpose programming language. 
+With Xtext you can create textual programming languages in a snap. Also if you already have an existing language but it lacks decent tool support, you can use Xtext to create 
+an Eclipse-based IDE providing editing experience known from modern Java IDEs in a surprisingly short amount of time. We call Xtext a language development framework.  
 
-In contrast to common parser generators (like e.g. JavaCC or ANTLR), Xtext derives much more than just a parser and lexical analyzer (lexer) from an input grammar. 
-The grammar language is used to describe and generate:
+h2. How does it work?
 
-* an incremental, ANTLR 3 based parser and lexer to read your models from text,
-* Ecore models (optional),
-* a serializer to write your models back to text,
-* a linker, to establish cross links between model elements,
-* an implementation of the EMF Resource interface with full support for loading and saving EMF models, and
-* an integration of the language into your Eclipse IDE.
+Xtext provides you with a set of domain-specific languages and modern APIs to describe the different aspects of your programming language. 
+Based on that information it gives you a full implementation of that language running on the JVM. The compiler part can be used in any java environment 
+and includes such things as parser, AST, parse tree, serializer, formatter, scoping framework, linking, compiler checks aka validation and last but not least a 
+code generator or interpreter. The runtime components integrate with and implement the Eclipse Modeling Framework (EMF), which effectively allows you to 
+use Xtext together with other EMF frameworks like for instance the Graphical Modeling Project.
 
-Some of the IDE features, that are either derived from the grammar or easily implementable, are
-* "syntax coloring":#highlighting,
-* "model navigation (F3, etc.)":#hyperlinking,
-* "code completion":#contentAssist,
-* "quick fixes":#quickfixes,
-* "code formatting":#formatting,
-* "outline view":#outline, and
-* "code templates":#templates.
+In addition to this nice runtime architecture, you will get a full blown Eclipse-IDE specific for your language. It already provides great default functionality for 
+all aspects and again comes with DSLs and APIs to let you configure or change the most common things very easily. And if that's not flexible enough there is Guice.
 
-The generated artifacts are wired up through "Google Guice":http://code.google.com/p/google-guice/, a dependency injection framework which makes it easy to exchange certain functionality in a non-invasive manner.
+h2. Xtext is highly configurable
 
-Although Xtext aims at supporting fast iterative development of domain-specific languages, it can be used to implement IDEs for general purpose programming languages as well.
+Xtext uses Google Guice to wire up the whole language as well as the IDE infrastructure. A central, external module is used to configure the dependency injection container. 
+As already mentioned, Xtext comes with decent default implementations and DSLs and APIs for the most often changed aspects. But if you need something completely different, 
+the use of Google Guice gives you the power to exchange every little class in a non-invasive way.
+
+h2. Who uses Xtext?
+
+Xtext is used in many different industries. It is used in the field of mobile devices, automotive development, embedded or Java enterprise software projects and game development. 
+People use Xtext-based languages to generate to Java, C, C++, C#, Objective C, Python, etc. Although the infrastructure runs on the JVM, you can compile Xtext languages to any existing target platform.
+Xtext based languages are developed for well known Open-Source projects, like Maven, B3, the Eclipse Webtools platform or Googles Protocolbuffers and the framework is widely used in research projects.  
+
+h2. Who is behind Xtext?
+
+Xtext is a professional Open-Source project. We, the main developers and the project lead, work for itemis, which is a well known consulting company specialized on model-based development.
+Therefore we are able to work almost full-time on the project. Xtext is an Eclipse.org project. Besides many other advantages this means that you don't have to fear any IP issues, because the Eclipse Foundation 
+has their own layers who take care that no intellectual property is violated. 
+
+Where does the money for Open-Source development come from you ask? Well, we provide professional services around Xtext. Be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs
+for programming langauges. We not only know the framework very well but also are experts in programming and domain.specific language design. Don't hesitate to get in contact : www.itemis.com.
 
 h2(#DSL). What is a domain-specific language
 
