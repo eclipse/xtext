@@ -15,7 +15,6 @@ import com.google.inject.name.Names;
  @SuppressWarnings("all")
 public abstract class AbstractActionTestLanguageRuntimeModule extends DefaultRuntimeModule {
 
-	// Support for property files is deprecated. Please use configure...() methods instead. 
 	protected boolean useProperties = getClass().getResource("org/eclipse/xtext/testlanguages/ActionTestLanguage.properties") != null;
 
 	@Override
@@ -30,8 +29,7 @@ public abstract class AbstractActionTestLanguageRuntimeModule extends DefaultRun
 	}
 	
 	public void configureLanguageName(Binder binder) {
-		if(!useProperties)
-			binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("org.eclipse.xtext.testlanguages.ActionTestLanguage");
+		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("org.eclipse.xtext.testlanguages.ActionTestLanguage");
 	}
 	
 	public void configureFileExtensions(Binder binder) {

@@ -15,7 +15,6 @@ import com.google.inject.name.Names;
  @SuppressWarnings("all")
 public abstract class AbstractFoldingTestLanguageRuntimeModule extends DefaultRuntimeModule {
 
-	// Support for property files is deprecated. Please use configure...() methods instead. 
 	protected boolean useProperties = getClass().getResource("org/eclipse/xtext/ui/tests/FoldingTestLanguage.properties") != null;
 
 	@Override
@@ -30,8 +29,7 @@ public abstract class AbstractFoldingTestLanguageRuntimeModule extends DefaultRu
 	}
 	
 	public void configureLanguageName(Binder binder) {
-		if(!useProperties)
-			binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("org.eclipse.xtext.ui.tests.FoldingTestLanguage");
+		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("org.eclipse.xtext.ui.tests.FoldingTestLanguage");
 	}
 	
 	public void configureFileExtensions(Binder binder) {

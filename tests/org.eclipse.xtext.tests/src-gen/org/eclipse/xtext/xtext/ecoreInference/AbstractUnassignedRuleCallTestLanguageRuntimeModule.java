@@ -15,7 +15,6 @@ import com.google.inject.name.Names;
  @SuppressWarnings("all")
 public abstract class AbstractUnassignedRuleCallTestLanguageRuntimeModule extends DefaultRuntimeModule {
 
-	// Support for property files is deprecated. Please use configure...() methods instead. 
 	protected boolean useProperties = getClass().getResource("org/eclipse/xtext/xtext/ecoreInference/UnassignedRuleCallTestLanguage.properties") != null;
 
 	@Override
@@ -30,8 +29,7 @@ public abstract class AbstractUnassignedRuleCallTestLanguageRuntimeModule extend
 	}
 	
 	public void configureLanguageName(Binder binder) {
-		if(!useProperties)
-			binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("org.eclipse.xtext.xtext.ecoreInference.UnassignedRuleCallTestLanguage");
+		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("org.eclipse.xtext.xtext.ecoreInference.UnassignedRuleCallTestLanguage");
 	}
 	
 	public void configureFileExtensions(Binder binder) {

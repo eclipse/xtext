@@ -15,7 +15,6 @@ import com.google.inject.name.Names;
  @SuppressWarnings("all")
 public abstract class AbstractConcreteTestLanguageRuntimeModule extends DefaultRuntimeModule {
 
-	// Support for property files is deprecated. Please use configure...() methods instead. 
 	protected boolean useProperties = getClass().getResource("org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.properties") != null;
 
 	@Override
@@ -30,8 +29,7 @@ public abstract class AbstractConcreteTestLanguageRuntimeModule extends DefaultR
 	}
 	
 	public void configureLanguageName(Binder binder) {
-		if(!useProperties)
-			binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage");
+		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage");
 	}
 	
 	public void configureFileExtensions(Binder binder) {

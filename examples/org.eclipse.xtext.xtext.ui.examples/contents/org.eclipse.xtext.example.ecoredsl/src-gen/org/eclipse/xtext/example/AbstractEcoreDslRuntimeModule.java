@@ -15,7 +15,6 @@ import com.google.inject.name.Names;
  @SuppressWarnings("all")
 public abstract class AbstractEcoreDslRuntimeModule extends DefaultRuntimeModule {
 
-	// Support for property files is deprecated. Please use configure...() methods instead. 
 	protected boolean useProperties = getClass().getResource("org/eclipse/xtext/example/EcoreDsl.properties") != null;
 
 	@Override
@@ -30,8 +29,7 @@ public abstract class AbstractEcoreDslRuntimeModule extends DefaultRuntimeModule
 	}
 	
 	public void configureLanguageName(Binder binder) {
-		if(!useProperties)
-			binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("org.eclipse.xtext.example.EcoreDsl");
+		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("org.eclipse.xtext.example.EcoreDsl");
 	}
 	
 	public void configureFileExtensions(Binder binder) {
