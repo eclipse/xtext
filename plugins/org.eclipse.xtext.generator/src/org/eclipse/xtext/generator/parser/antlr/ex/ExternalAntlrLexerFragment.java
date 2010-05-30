@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.antlr.ex;
 
+import static org.eclipse.xtext.util.Files.*;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +21,7 @@ import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.DefaultGeneratorFragment;
 import org.eclipse.xtext.generator.Generator;
 import org.eclipse.xtext.generator.parser.antlr.AntlrToolFacade;
+import org.eclipse.xtext.generator.parser.antlr.postProcessing.SuppressWarningsProcessor;
 import org.eclipse.xtext.parser.antlr.Lexer;
 
 import com.google.common.collect.Lists;
@@ -78,6 +81,15 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment {
 		addAntlrParam("-fo");
 		addAntlrParam(generateTo);
 		getAntlrTool().runWithParams(grammarFile, getAntlrParams());
+		
+		String javaFile = srcGenPath+"/"+getLexerGrammar().replace('.', '/')+"Lexer.java";
+		suppressWarningsImpl(javaFile);
+	}
+	
+	protected void suppressWarningsImpl(String javaFile) {
+		String content = readFileIntoString(javaFile);
+		content = new SuppressWarningsProcessor().process(content);
+		writeStringIntoFile(javaFile, content);
 	}
 
 	@Override
