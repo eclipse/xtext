@@ -329,5 +329,9 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		assertEquals(expected6, match("#6 4 * ((3 + 4 * 5) + 6)", p));
 		String expected = "#6 ( 1 + < 2 > ) * 4 * ( 3 + < 4 * ( 5 + < 5 > ) > + < foo ( 4 , 6 * ( 7 + < 9 > ) ) > )";
 		assertEquals(expected, match("#6 (1 + 2) * 4 * ((3 + 4 * (5 + 5)) + foo(4, 6 * (7 + 9)))", p));
+
+		p = new Patterns();
+		p.between(g.getPrimAccess().getRightParenthesisKeyword_3_2(), g.getMultAccess().getAsteriskKeyword_1_1());
+		assertEquals("#6 ( 5 + 4 ) ! * 7", match("#6 (5 + 4) * 7", p));
 	}
 }
