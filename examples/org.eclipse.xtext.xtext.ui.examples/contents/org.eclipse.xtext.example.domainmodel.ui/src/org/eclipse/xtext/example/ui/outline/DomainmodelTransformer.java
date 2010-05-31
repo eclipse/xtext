@@ -3,7 +3,7 @@
 */
 package org.eclipse.xtext.example.ui.outline;
 
-import org.eclipse.xtext.example.domainmodel.Model;
+import org.eclipse.xtext.example.domainmodel.DomainModel;
 import org.eclipse.xtext.ui.editor.outline.transformer.AbstractDeclarativeSemanticModelTransformer;
 
 /**
@@ -12,7 +12,7 @@ import org.eclipse.xtext.ui.editor.outline.transformer.AbstractDeclarativeSemant
  */
 public class DomainmodelTransformer extends AbstractDeclarativeSemanticModelTransformer {
 	
-	public boolean consumeNode(Model model) {
+	public boolean consumeNode(DomainModel model) {
 		return false;
 	}
 	

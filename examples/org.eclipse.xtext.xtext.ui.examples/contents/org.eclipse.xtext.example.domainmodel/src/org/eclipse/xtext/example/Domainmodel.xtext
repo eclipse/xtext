@@ -9,7 +9,7 @@ grammar org.eclipse.xtext.example.Domainmodel with org.eclipse.xtext.common.Term
 
 generate domainmodel "http://www.example.xtext/Domainmodel"
 
-Model:
+DomainModel:
 	(elements+=AbstractElement)*;
 
 AbstractElement:
@@ -20,7 +20,7 @@ Import:
 
 PackageDeclaration:
 	'package' name=QualifiedName '{'
-	(elements+=AbstractElement)*
+		(elements+=AbstractElement)*
 	'}';
 
 Type:
@@ -31,7 +31,7 @@ DataType:
 
 Entity:
 	'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
-	(features+=Feature)*
+		(features+=Feature)*
 	'}';
 
 Feature:
@@ -41,7 +41,7 @@ StructuralFeature:
 	Attribute | Reference;
 
 Attribute:
-	'attr' name=ID ':' type=TypeRef;
+	name=ID ':' type=TypeRef;
 
 Reference:
 	'ref' name=ID ':' type=TypeRef ('opposite' opposite=[Reference])?;

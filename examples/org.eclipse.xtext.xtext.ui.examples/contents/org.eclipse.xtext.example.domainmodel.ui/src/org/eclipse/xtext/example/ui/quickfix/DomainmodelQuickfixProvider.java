@@ -8,7 +8,7 @@ import org.eclipse.xtext.example.domainmodel.DataType;
 import org.eclipse.xtext.example.domainmodel.DomainmodelFactory;
 import org.eclipse.xtext.example.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.Feature;
-import org.eclipse.xtext.example.domainmodel.Model;
+import org.eclipse.xtext.example.domainmodel.DomainModel;
 import org.eclipse.xtext.example.domainmodel.PackageDeclaration;
 import org.eclipse.xtext.example.domainmodel.Type;
 import org.eclipse.xtext.example.ui.linking.DomainmodelLinkingDiagnosticMessageProvider;
@@ -102,8 +102,8 @@ public class DomainmodelQuickfixProvider extends DefaultQuickfixProvider {
 		EList<AbstractElement> elements = null;
 		if (container instanceof PackageDeclaration) {
 			elements = ((PackageDeclaration) container).getElements();
-		} else if (container instanceof Model) {
-			elements = ((Model) container).getElements();
+		} else if (container instanceof DomainModel) {
+			elements = ((DomainModel) container).getElements();
 		} else {
 			return false;
 		}
