@@ -3,6 +3,8 @@
  */
 package org.eclipse.xtext.common;
 
+import java.util.Properties;
+
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.service.DefaultRuntimeModule;
 
@@ -15,27 +17,20 @@ import com.google.inject.name.Names;
  @SuppressWarnings("all")
 public abstract class AbstractTerminalsRuntimeModule extends DefaultRuntimeModule {
 
-	// Support for property files is deprecated. Please use configure...() methods instead. 
-	protected boolean useProperties = getClass().getResource("org/eclipse/xtext/common/Terminals.properties") != null;
+	protected Properties properties = null;
 
 	@Override
 	public void configure(Binder binder) {
+		properties = tryBindProperties(binder, "org/eclipse/xtext/common/Terminals.properties");
 		super.configure(binder);
-		if(useProperties)
-			bindProperties(binder);
-	}
-	
-	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "org/eclipse/xtext/common/Terminals.properties");
 	}
 	
 	public void configureLanguageName(Binder binder) {
-		if(!useProperties)
-			binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("org.eclipse.xtext.common.Terminals");
+		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("org.eclipse.xtext.common.Terminals");
 	}
 	
 	public void configureFileExtensions(Binder binder) {
-		if(!useProperties)
+		if (properties == null || properties.getProperty(Constants.FILE_EXTENSIONS) == null)
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("terminals");
 	}
 	

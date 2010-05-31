@@ -3,6 +3,8 @@
  */
 package org.eclipse.xtext.parser.terminalrules;
 
+import java.util.Properties;
+
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.service.DefaultRuntimeModule;
 
@@ -15,17 +17,12 @@ import com.google.inject.name.Names;
  @SuppressWarnings("all")
 public abstract class AbstractHiddenTerminalsTestLanguageRuntimeModule extends DefaultRuntimeModule {
 
-	protected boolean useProperties = getClass().getResource("org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.properties") != null;
+	protected Properties properties = null;
 
 	@Override
 	public void configure(Binder binder) {
+		properties = tryBindProperties(binder, "org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.properties");
 		super.configure(binder);
-		if(useProperties)
-			bindProperties(binder);
-	}
-	
-	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.properties");
 	}
 	
 	public void configureLanguageName(Binder binder) {
@@ -33,7 +30,7 @@ public abstract class AbstractHiddenTerminalsTestLanguageRuntimeModule extends D
 	}
 	
 	public void configureFileExtensions(Binder binder) {
-		if(!useProperties)
+		if (properties == null || properties.getProperty(Constants.FILE_EXTENSIONS) == null)
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("hiddenterminalstestlanguage");
 	}
 	
