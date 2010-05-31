@@ -747,15 +747,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getJvmEnumerationLiteral_EnumType() {
-		return (EReference)jvmEnumerationLiteralEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getJvmGenericType() {
 		return jvmGenericTypeEClass;
 	}
@@ -1437,7 +1428,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEReference(jvmEnumerationTypeEClass, JVM_ENUMERATION_TYPE__LITERALS);
 
 		jvmEnumerationLiteralEClass = createEClass(JVM_ENUMERATION_LITERAL);
-		createEReference(jvmEnumerationLiteralEClass, JVM_ENUMERATION_LITERAL__ENUM_TYPE);
 
 		jvmGenericTypeEClass = createEClass(JVM_GENERIC_TYPE);
 		createEAttribute(jvmGenericTypeEClass, JVM_GENERIC_TYPE__INTERFACE);
@@ -1585,7 +1575,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		jvmLowerBoundEClass.getESuperTypes().add(this.getJvmTypeConstraint());
 		jvmAnnotationTypeEClass.getESuperTypes().add(this.getJvmDeclaredType());
 		jvmEnumerationTypeEClass.getESuperTypes().add(this.getJvmDeclaredType());
-		jvmEnumerationLiteralEClass.getESuperTypes().add(this.getJvmIdentifyableElement());
+		jvmEnumerationLiteralEClass.getESuperTypes().add(this.getJvmField());
 		jvmGenericTypeEClass.getESuperTypes().add(this.getJvmDeclaredType());
 		jvmGenericTypeEClass.getESuperTypes().add(this.getJvmTypeParameterDeclarator());
 		jvmTypeReferenceEClass.getESuperTypes().add(this.getJvmIdentifyableElement());
@@ -1673,10 +1663,11 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEClass(jvmAnnotationTypeEClass, JvmAnnotationType.class, "JvmAnnotationType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(jvmEnumerationTypeEClass, JvmEnumerationType.class, "JvmEnumerationType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getJvmEnumerationType_Literals(), this.getJvmEnumerationLiteral(), this.getJvmEnumerationLiteral_EnumType(), "literals", null, 0, -1, JvmEnumerationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJvmEnumerationType_Literals(), this.getJvmEnumerationLiteral(), null, "literals", null, 0, -1, JvmEnumerationType.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(jvmEnumerationLiteralEClass, JvmEnumerationLiteral.class, "JvmEnumerationLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getJvmEnumerationLiteral_EnumType(), this.getJvmEnumerationType(), this.getJvmEnumerationType_Literals(), "enumType", null, 0, 1, JvmEnumerationLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(jvmEnumerationLiteralEClass, this.getJvmEnumerationType(), "getEnumType", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(jvmGenericTypeEClass, JvmGenericType.class, "JvmGenericType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getJvmGenericType_Interface(), ecorePackage.getEBoolean(), "interface", null, 0, 1, JvmGenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

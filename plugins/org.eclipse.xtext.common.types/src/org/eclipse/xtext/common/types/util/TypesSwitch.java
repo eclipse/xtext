@@ -248,6 +248,10 @@ public class TypesSwitch<T> {
 			case TypesPackage.JVM_ENUMERATION_LITERAL: {
 				JvmEnumerationLiteral jvmEnumerationLiteral = (JvmEnumerationLiteral)theEObject;
 				T result = caseJvmEnumerationLiteral(jvmEnumerationLiteral);
+				if (result == null) result = caseJvmField(jvmEnumerationLiteral);
+				if (result == null) result = caseJvmMember(jvmEnumerationLiteral);
+				if (result == null) result = caseJvmFeature(jvmEnumerationLiteral);
+				if (result == null) result = caseJvmAnnotationTarget(jvmEnumerationLiteral);
 				if (result == null) result = caseJvmIdentifyableElement(jvmEnumerationLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

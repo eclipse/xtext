@@ -56,11 +56,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="JvmAnnotationType" eSuperTypes="#//JvmDeclaredType"/>
   <eClassifiers xsi:type="ecore:EClass" name="JvmEnumerationType" eSuperTypes="#//JvmDeclaredType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="literals" upperBound="-1"
-        eType="#//JvmEnumerationLiteral" containment="true" eOpposite="#//JvmEnumerationLiteral/enumType"/>
+        eType="#//JvmEnumerationLiteral" changeable="false" transient="true" derived="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmEnumerationLiteral" eSuperTypes="#//JvmIdentifyableElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="enumType" eType="#//JvmEnumerationType"
-        eOpposite="#//JvmEnumerationType/literals"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmEnumerationLiteral" eSuperTypes="#//JvmField">
+    <eOperations name="getEnumType" eType="#//JvmEnumerationType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmGenericType" eSuperTypes="#//JvmDeclaredType #//JvmTypeParameterDeclarator">
     <eOperations name="getExtendedInterfaces">
