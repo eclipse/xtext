@@ -1,0 +1,78 @@
+
+h1(#jvmtypes). Referring Java Types
+
+A common use case when developing languages is the requirement to refer to existing concepts of other 
+languages. Xtext makes this very easy for other self defined languages. However, often it is very useful
+to have access to the available types of the Java Virtual Machine. The JVM types ecore model enables
+clients to do exactly this. It is possible to create cross references to classes, interfaces and their 
+fields and methods. Basically every information about the structural concepts of the Java type system
+is available via the JVM types. This includes annotations and their specific values and enumeration 
+literals as well.
+
+The implementation will be selected transparently to the client code depending on where the code is 
+executed. If the environment is a plain stand-alone Java or OSGi environment, the @java.lang.reflect@ 
+API will be used to deduce the necessary data. On the contrary, the type-model will be created from the 
+live data of the JDT in an interactive Eclipse environment. All this happens behind the scenes via different
+implementations that are bound to specific interfaces with Google Guice. 
+
+h2. How to Use Java Types 
+
+Using the JVM types model is very simple. First of all, the grammar has to import the appropriate ecore model. 
+Thanks to content assist this is easy to spot in the list of proposals.  
+
+bc.. import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
+
+p. The next step is to actually refer to an imported concept. Let's define a mapping to actually available
+JavaTypes for the simple data types in the self defined language. By means of cross references this works
+as one got already used to when dealing with references in Xtext.
+
+bc.. Type:
+	'type' name=ID 'mapped-to' javaType=[types::JvmType|FQN];
+
+p. Last but not least, the _TypesGeneratorFragment_ has to be added to the workflow. The safest way is 
+to add it after the actually used scoping fragments as a specialized version of the _IGlobalScopeProvider_ 
+will be configured. Don't forget to refer to the genmodel of the Java VM types. The shortest possible
+URI is a class-path-URI.    
+
+bc.. fragment = ecore.EcoreGeneratorFragment {
+	referencedGenModels="classpath:/model/JavaVMTypes.genmodel"
+}
+
+...
+// scoping and exporting API 
+...
+
+fragment = types.TypesGeneratorFragment {}
+
+p. After regenerating your language, it will be allowed to define a type _Date_ that maps to the _java.util.Date_
+like this:
+
+bc.. type Date mapped-to java.util.Date
+
+p. This two steps will provide a nice integration into the Eclipse JDT. There is _Find References_ on Java methods, 
+fields and types that will reveal results in your language files. _Go To Declaration_ works as expected
+and content assist will propose the list of available types. 
+
+h2. Customizing Points
+
+There are several customization hooks in the runtime layer and on the editor side as well:
+
+The _AbstractTypeScopeProvider_ can be used to create scopes for members with respect to
+the override semantics of the Java language. Of course it is possible to use this implementation to
+create scopes for types as well.
+
+As the Java VM types expose a lot of information about visibility, parameter- and return types, generic,
+available annotations or enumeration literals, it is very easy to define constraints for the referred types.
+
+The _ITypesProposalProvider_ can be used to provide optimized proposals based on various filter criteria. 
+The most common selector can be used directly via _createSubTypeProposals_. The implementation is optimized
+and uses the JDT Index directly to minimize the effort for object instantiation. The class _TypeMatchFilters_ 
+provides a comprehensive set of reusable filters that can be easily combined to reduce the list of proposals
+to a smaller number of valid entries.
+
+bc.. import static org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters.*; 
+..
+..
+
+  proposalProvider.createSubTypeProposals(factory, context,
+	  and(not(canInstantiate()), isPublic()), acceptor); 

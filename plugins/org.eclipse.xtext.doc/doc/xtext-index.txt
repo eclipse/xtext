@@ -32,6 +32,7 @@
 190-formatting.textile
 195-highlighting.textile
 198-wizards.textile
+199-jvmtypes.textile
 
 200-Appendix.textile
 210-migrating-from-oaw.textile
