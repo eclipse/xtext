@@ -33,6 +33,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -78,14 +79,8 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		result.setFullyQualifiedName(clazz.getName());
 		createNestedTypes(clazz, result);
 		createMethods(clazz, result);
-		for (Constructor<?> constructor : clazz.getDeclaredConstructors()) {
-			if (!constructor.isSynthetic())
-				result.getMembers().add(createConstructor(constructor));
-		}
-		for (Field field : clazz.getDeclaredFields()) {
-			if (!field.isSynthetic())
-				result.getMembers().add(createField(field));
-		}
+		createConstructors(clazz, result);
+		createFields(clazz, result);
 		setSuperTypes(clazz, result);
 		for (TypeVariable<?> variable : clazz.getTypeParameters()) {
 			result.getTypeParameters().add(createTypeParameter(variable, result));
@@ -125,6 +120,20 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		}
 		return annotationReference;
 	}
+	
+	protected JvmEnumerationLiteral createEnumLiteralProxy(Enum<?> e) {
+		JvmEnumerationLiteral enumLiteralProxy = TypesFactory.eINSTANCE.createJvmEnumerationLiteral();
+		InternalEObject internalEObject = (InternalEObject) enumLiteralProxy;
+		Class<?> type = e.getDeclaringClass();
+		try {
+			Field field = type.getDeclaredField(e.toString());
+			internalEObject.eSetProxyURI(uriHelper.getFullURI(field));
+		} catch (Exception exception) {
+			log.error(exception.getMessage(), exception);
+			return null;
+		}
+		return enumLiteralProxy;
+	}
 
 	protected JvmAnnotationValue createArrayAnnotationValue(Object value, Class<?> type) {
 		if (!type.isArray())
@@ -148,6 +157,12 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 					Annotation nestedAnnotation = (Annotation) Array.get(value, i);
 					createAnnotationReference((JvmAnnotationTarget) result, nestedAnnotation);
 				}
+			} else if (componentType.isEnum()) {
+				for(int i = 0; i < length; i++) {
+					Enum<?> e = (Enum<?>) Array.get(value, i);
+					JvmEnumerationLiteral proxy = createEnumLiteralProxy(e);
+					valuesAsList.add(proxy);
+				}
 			}
 			if (!componentType.isAnnotation())
 				result.eSet(result.eClass().getEStructuralFeature("values"), valuesAsList);
@@ -166,6 +181,10 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		} else if(type.isAnnotation()) {
 			Annotation nestedAnnotation = (Annotation) value;
 			createAnnotationReference((JvmAnnotationTarget) result, nestedAnnotation);
+		} else if (type.isEnum()) {
+			Enum<?> e = (Enum<?>) value;
+			JvmEnumerationLiteral proxy = createEnumLiteralProxy(e);
+			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(proxy));
 		}
 		return result;
 	}
@@ -246,6 +265,20 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			result.getSuperTypes().add(createTypeReference(type));
 		}
 	}
+	
+	protected void createFields(Class<?> clazz, JvmDeclaredType result) {
+		for (Field field : clazz.getDeclaredFields()) {
+			if (!field.isSynthetic())
+				result.getMembers().add(createField(field));
+		}
+	}
+
+	protected void createConstructors(Class<?> clazz, JvmDeclaredType result) {
+		for (Constructor<?> constructor : clazz.getDeclaredConstructors()) {
+			if (!constructor.isSynthetic())
+				result.getMembers().add(createConstructor(constructor));
+		}
+	}
 
 	protected void createMethods(Class<?> clazz, JvmDeclaredType result) {
 		for (Method method : clazz.getDeclaredMethods()) {
@@ -258,7 +291,12 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		JvmEnumerationType result = TypesFactory.eINSTANCE.createJvmEnumerationType();
 		result.setFullyQualifiedName(clazz.getName());
 		setVisibility(clazz, result);
-		log.error("Enumeration types are not yet fully supported.");
+		setTypeModifiers(clazz, result);
+		createNestedTypes(clazz, result);
+		createMethods(clazz, result);
+		createFields(clazz, result);
+		createConstructors(clazz, result);
+		setSuperTypes(clazz, result);
 		createAnnotationValues(clazz, result);
 		return result;
 	}
@@ -356,7 +394,11 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 	}
 
 	public org.eclipse.xtext.common.types.JvmField createField(Field field) {
-		org.eclipse.xtext.common.types.JvmField result = TypesFactory.eINSTANCE.createJvmField();
+		org.eclipse.xtext.common.types.JvmField result;
+		if (!field.isEnumConstant())
+			result = TypesFactory.eINSTANCE.createJvmField();
+		else
+			result = TypesFactory.eINSTANCE.createJvmEnumerationLiteral();
 		result.setFullyQualifiedName(field.getDeclaringClass().getName() + "." + field.getName());
 		result.setFinal(Modifier.isFinal(field.getModifiers()));
 		result.setStatic(Modifier.isStatic(field.getModifiers()));

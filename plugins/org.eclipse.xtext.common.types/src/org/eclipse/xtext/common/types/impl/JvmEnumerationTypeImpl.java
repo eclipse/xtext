@@ -7,16 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
-import java.util.Collection;
-import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.DelegatingEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -34,7 +33,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  */
 public class JvmEnumerationTypeImpl extends JvmDeclaredTypeImpl implements JvmEnumerationType {
 	/**
-	 * The cached value of the '{@link #getLiterals() <em>Literals</em>}' containment reference list.
+	 * The cached value of the '{@link #getLiterals() <em>Literals</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getLiterals()
@@ -65,42 +64,37 @@ public class JvmEnumerationTypeImpl extends JvmDeclaredTypeImpl implements JvmEn
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public EList<JvmEnumerationLiteral> getLiterals() {
 		if (literals == null) {
-			literals = new EObjectContainmentWithInverseEList<JvmEnumerationLiteral>(JvmEnumerationLiteral.class, this, TypesPackage.JVM_ENUMERATION_TYPE__LITERALS, TypesPackage.JVM_ENUMERATION_LITERAL__ENUM_TYPE);
+			EObjectResolvingEList<JvmEnumerationLiteral> list = new EObjectResolvingEList<JvmEnumerationLiteral>(JvmEnumerationLiteral.class, this, TypesPackage.JVM_ENUMERATION_TYPE__LITERALS);
+			for(JvmMember member: getMembers()) {
+				if (member instanceof JvmEnumerationLiteral)
+					list.add((JvmEnumerationLiteral) member);
+			}
+			literals = new DelegatingEList.UnmodifiableEList<JvmEnumerationLiteral>(list);
 		}
 		return literals;
 	}
-
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case TypesPackage.JVM_ENUMERATION_TYPE__LITERALS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getLiterals()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case TypesPackage.JVM_ENUMERATION_TYPE__LITERALS:
-				return ((InternalEList<?>)getLiterals()).basicRemove(otherEnd, msgs);
+	public EList<JvmMember> getMembers() {
+		if (members == null) {
+			members = new EObjectContainmentWithInverseEList<JvmMember>(JvmMember.class, this, TypesPackage.JVM_DECLARED_TYPE__MEMBERS, TypesPackage.JVM_MEMBER__DECLARING_TYPE) {
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				protected void didChange() {
+					literals = null;
+					super.didChange();
+				}
+			};
 		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+		return members;
 	}
 
 	/**
@@ -115,38 +109,6 @@ public class JvmEnumerationTypeImpl extends JvmDeclaredTypeImpl implements JvmEn
 				return getLiterals();
 		}
 		return super.eGet(featureID, resolve, coreType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case TypesPackage.JVM_ENUMERATION_TYPE__LITERALS:
-				getLiterals().clear();
-				getLiterals().addAll((Collection<? extends JvmEnumerationLiteral>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case TypesPackage.JVM_ENUMERATION_TYPE__LITERALS:
-				getLiterals().clear();
-				return;
-		}
-		super.eUnset(featureID);
 	}
 
 	/**

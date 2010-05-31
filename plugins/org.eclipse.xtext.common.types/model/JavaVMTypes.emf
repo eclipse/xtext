@@ -67,11 +67,11 @@ class JvmAnnotationType extends JvmDeclaredType {
 }
 
 class JvmEnumerationType extends JvmDeclaredType {
-  val JvmEnumerationLiteral[*]#enumType literals;
+  derived transient readonly ref JvmEnumerationLiteral[*] literals; 
 }
 
-class JvmEnumerationLiteral extends JvmIdentifyableElement {
-  ref JvmEnumerationType#literals enumType;
+class JvmEnumerationLiteral extends JvmField {
+  op JvmEnumerationType getEnumType();
 }
 
 class JvmGenericType extends JvmDeclaredType, JvmTypeParameterDeclarator {

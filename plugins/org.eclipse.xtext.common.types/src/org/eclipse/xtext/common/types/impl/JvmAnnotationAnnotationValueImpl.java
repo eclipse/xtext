@@ -78,11 +78,19 @@ public class JvmAnnotationAnnotationValueImpl extends JvmAnnotationValueImpl imp
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public EList<JvmAnnotationReference> getAnnotations() {
 		if (annotations == null) {
-			annotations = new EObjectContainmentWithInverseEList<JvmAnnotationReference>(JvmAnnotationReference.class, this, TypesPackage.JVM_ANNOTATION_ANNOTATION_VALUE__ANNOTATIONS, TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET);
+			annotations = new EObjectContainmentWithInverseEList<JvmAnnotationReference>(JvmAnnotationReference.class, this, TypesPackage.JVM_ANNOTATION_ANNOTATION_VALUE__ANNOTATIONS, TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET) {
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				protected void didChange() {
+					values = null;
+					super.didChange();
+				}
+			};
 		}
 		return annotations;
 	}

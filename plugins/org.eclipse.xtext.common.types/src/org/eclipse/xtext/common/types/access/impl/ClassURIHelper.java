@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types.access.impl;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
@@ -114,6 +115,8 @@ public class ClassURIHelper implements URIHelperConstants {
 		} else {
 			uriBuilder.append(member.getName());
 		}
+		if (member instanceof Field)
+			return;
 		uriBuilder.append('(');
 		Type[] parameterTypes = null;
 		if (member instanceof java.lang.reflect.Constructor<?>) {

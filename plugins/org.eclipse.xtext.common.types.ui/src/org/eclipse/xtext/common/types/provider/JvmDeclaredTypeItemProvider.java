@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JvmDeclaredTypeItemProvider.java,v 1.2 2010/03/04 10:26:33 szarnekow Exp $
+ * $Id: JvmDeclaredTypeItemProvider.java,v 1.3 2010/05/31 13:09:58 szarnekow Exp $
  */
 package org.eclipse.xtext.common.types.provider;
 
@@ -296,12 +296,17 @@ public class JvmDeclaredTypeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.JVM_DECLARED_TYPE__MEMBERS,
-				 TypesFactory.eINSTANCE.createJvmGenericType()));
+				 TypesFactory.eINSTANCE.createJvmField()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.JVM_DECLARED_TYPE__MEMBERS,
-				 TypesFactory.eINSTANCE.createJvmField()));
+				 TypesFactory.eINSTANCE.createJvmEnumerationLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_DECLARED_TYPE__MEMBERS,
+				 TypesFactory.eINSTANCE.createJvmGenericType()));
 
 		newChildDescriptors.add
 			(createChildParameter

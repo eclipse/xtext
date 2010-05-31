@@ -29,19 +29,17 @@ import org.eclipse.emf.common.util.EList;
 public interface JvmEnumerationType extends JvmDeclaredType {
 
 	/**
-	 * Returns the value of the '<em><b>Literals</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Literals</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmEnumerationLiteral}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.common.types.JvmEnumerationLiteral#getEnumType <em>Enum Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Literals</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Literals</em>' containment reference list.
+	 * @return the value of the '<em>Literals</em>' reference list.
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmEnumerationType_Literals()
-	 * @see org.eclipse.xtext.common.types.JvmEnumerationLiteral#getEnumType
-	 * @model opposite="enumType" containment="true"
+	 * @model transient="true" changeable="false" derived="true"
 	 * @generated
 	 */
 	EList<JvmEnumerationLiteral> getLiterals();

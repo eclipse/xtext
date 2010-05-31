@@ -762,7 +762,7 @@ public interface TypesPackage extends EPackage {
 	int JVM_ENUMERATION_TYPE__FINAL = JVM_DECLARED_TYPE__FINAL;
 
 	/**
-	 * The feature id for the '<em><b>Literals</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Literals</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -790,24 +790,6 @@ public interface TypesPackage extends EPackage {
 	int JVM_ENUMERATION_LITERAL = 15;
 
 	/**
-	 * The feature id for the '<em><b>Enum Type</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_ENUMERATION_LITERAL__ENUM_TYPE = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Jvm Enumeration Literal</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_ENUMERATION_LITERAL_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl <em>Jvm Generic Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -816,6 +798,313 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	int JVM_GENERIC_TYPE = 16;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeReferenceImpl <em>Jvm Type Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmTypeReferenceImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeReference()
+	 * @generated
+	 */
+	int JVM_TYPE_REFERENCE = 17;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmParameterizedTypeReferenceImpl <em>Jvm Parameterized Type Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmParameterizedTypeReferenceImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmParameterizedTypeReference()
+	 * @generated
+	 */
+	int JVM_PARAMETERIZED_TYPE_REFERENCE = 18;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmGenericArrayTypeReferenceImpl <em>Jvm Generic Array Type Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmGenericArrayTypeReferenceImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmGenericArrayTypeReference()
+	 * @generated
+	 */
+	int JVM_GENERIC_ARRAY_TYPE_REFERENCE = 19;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeArgumentImpl <em>Jvm Type Argument</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmTypeArgumentImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeArgument()
+	 * @generated
+	 */
+	int JVM_TYPE_ARGUMENT = 20;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmWildcardTypeArgumentImpl <em>Jvm Wildcard Type Argument</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmWildcardTypeArgumentImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmWildcardTypeArgument()
+	 * @generated
+	 */
+	int JVM_WILDCARD_TYPE_ARGUMENT = 21;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmReferenceTypeArgumentImpl <em>Jvm Reference Type Argument</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmReferenceTypeArgumentImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmReferenceTypeArgument()
+	 * @generated
+	 */
+	int JVM_REFERENCE_TYPE_ARGUMENT = 22;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmAnnotationTargetImpl <em>Jvm Annotation Target</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmAnnotationTargetImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationTarget()
+	 * @generated
+	 */
+	int JVM_ANNOTATION_TARGET = 30;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANNOTATION_TARGET__ANNOTATIONS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Annotation Target</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANNOTATION_TARGET_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl <em>Jvm Member</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmMemberImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmMember()
+	 * @generated
+	 */
+	int JVM_MEMBER = 23;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_MEMBER__ANNOTATIONS = JVM_ANNOTATION_TARGET__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_MEMBER__DECLARING_TYPE = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_MEMBER__VISIBILITY = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_MEMBER__FULLY_QUALIFIED_NAME = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Member</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_MEMBER_FEATURE_COUNT = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmFeatureImpl <em>Jvm Feature</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmFeatureImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmFeature()
+	 * @generated
+	 */
+	int JVM_FEATURE = 24;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl <em>Jvm Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmFieldImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmField()
+	 * @generated
+	 */
+	int JVM_FIELD = 25;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FIELD__ANNOTATIONS = JVM_MEMBER__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FIELD__DECLARING_TYPE = JVM_MEMBER__DECLARING_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FIELD__VISIBILITY = JVM_MEMBER__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FIELD__FULLY_QUALIFIED_NAME = JVM_MEMBER__FULLY_QUALIFIED_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FIELD__STATIC = JVM_MEMBER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Final</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FIELD__FINAL = JVM_MEMBER_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FIELD__TYPE = JVM_MEMBER_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FIELD_FEATURE_COUNT = JVM_MEMBER_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_LITERAL__ANNOTATIONS = JVM_FIELD__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_LITERAL__DECLARING_TYPE = JVM_FIELD__DECLARING_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_LITERAL__VISIBILITY = JVM_FIELD__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_LITERAL__FULLY_QUALIFIED_NAME = JVM_FIELD__FULLY_QUALIFIED_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_LITERAL__STATIC = JVM_FIELD__STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Final</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_LITERAL__FINAL = JVM_FIELD__FINAL;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_LITERAL__TYPE = JVM_FIELD__TYPE;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Enumeration Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_LITERAL_FEATURE_COUNT = JVM_FIELD_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
@@ -935,16 +1224,6 @@ public interface TypesPackage extends EPackage {
 	int JVM_GENERIC_TYPE_FEATURE_COUNT = JVM_DECLARED_TYPE_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeReferenceImpl <em>Jvm Type Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.JvmTypeReferenceImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeReference()
-	 * @generated
-	 */
-	int JVM_TYPE_REFERENCE = 17;
-
-	/**
 	 * The number of structural features of the '<em>Jvm Type Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -952,16 +1231,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int JVM_TYPE_REFERENCE_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmParameterizedTypeReferenceImpl <em>Jvm Parameterized Type Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.JvmParameterizedTypeReferenceImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmParameterizedTypeReference()
-	 * @generated
-	 */
-	int JVM_PARAMETERIZED_TYPE_REFERENCE = 18;
 
 	/**
 	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
@@ -991,16 +1260,6 @@ public interface TypesPackage extends EPackage {
 	int JVM_PARAMETERIZED_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmGenericArrayTypeReferenceImpl <em>Jvm Generic Array Type Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.JvmGenericArrayTypeReferenceImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmGenericArrayTypeReference()
-	 * @generated
-	 */
-	int JVM_GENERIC_ARRAY_TYPE_REFERENCE = 19;
-
-	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1019,16 +1278,6 @@ public interface TypesPackage extends EPackage {
 	int JVM_GENERIC_ARRAY_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeArgumentImpl <em>Jvm Type Argument</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.JvmTypeArgumentImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeArgument()
-	 * @generated
-	 */
-	int JVM_TYPE_ARGUMENT = 20;
-
-	/**
 	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1045,16 +1294,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int JVM_TYPE_ARGUMENT_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmWildcardTypeArgumentImpl <em>Jvm Wildcard Type Argument</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.JvmWildcardTypeArgumentImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmWildcardTypeArgument()
-	 * @generated
-	 */
-	int JVM_WILDCARD_TYPE_ARGUMENT = 21;
 
 	/**
 	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
@@ -1084,16 +1323,6 @@ public interface TypesPackage extends EPackage {
 	int JVM_WILDCARD_TYPE_ARGUMENT_FEATURE_COUNT = JVM_TYPE_ARGUMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmReferenceTypeArgumentImpl <em>Jvm Reference Type Argument</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.JvmReferenceTypeArgumentImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmReferenceTypeArgument()
-	 * @generated
-	 */
-	int JVM_REFERENCE_TYPE_ARGUMENT = 22;
-
-	/**
 	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1121,99 +1350,6 @@ public interface TypesPackage extends EPackage {
 	int JVM_REFERENCE_TYPE_ARGUMENT_FEATURE_COUNT = JVM_TYPE_ARGUMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmAnnotationTargetImpl <em>Jvm Annotation Target</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.JvmAnnotationTargetImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationTarget()
-	 * @generated
-	 */
-	int JVM_ANNOTATION_TARGET = 30;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_ANNOTATION_TARGET__ANNOTATIONS = 0;
-
-	/**
-	 * The number of structural features of the '<em>Jvm Annotation Target</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_ANNOTATION_TARGET_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl <em>Jvm Member</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.JvmMemberImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmMember()
-	 * @generated
-	 */
-	int JVM_MEMBER = 23;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_MEMBER__ANNOTATIONS = JVM_ANNOTATION_TARGET__ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_MEMBER__DECLARING_TYPE = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_MEMBER__VISIBILITY = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_MEMBER__FULLY_QUALIFIED_NAME = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Jvm Member</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_MEMBER_FEATURE_COUNT = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmFeatureImpl <em>Jvm Feature</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.JvmFeatureImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmFeature()
-	 * @generated
-	 */
-	int JVM_FEATURE = 24;
-
-	/**
 	 * The number of structural features of the '<em>Jvm Feature</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1221,88 +1357,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int JVM_FEATURE_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl <em>Jvm Field</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.JvmFieldImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmField()
-	 * @generated
-	 */
-	int JVM_FIELD = 25;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_FIELD__ANNOTATIONS = JVM_MEMBER__ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_FIELD__DECLARING_TYPE = JVM_MEMBER__DECLARING_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_FIELD__VISIBILITY = JVM_MEMBER__VISIBILITY;
-
-	/**
-	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_FIELD__FULLY_QUALIFIED_NAME = JVM_MEMBER__FULLY_QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_FIELD__STATIC = JVM_MEMBER_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Final</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_FIELD__FINAL = JVM_MEMBER_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_FIELD__TYPE = JVM_MEMBER_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Jvm Field</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_FIELD_FEATURE_COUNT = JVM_MEMBER_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmExecutableImpl <em>Jvm Executable</em>}' class.
@@ -2485,10 +2539,10 @@ public interface TypesPackage extends EPackage {
 	EClass getJvmEnumerationType();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmEnumerationType#getLiterals <em>Literals</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.xtext.common.types.JvmEnumerationType#getLiterals <em>Literals</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Literals</em>'.
+	 * @return the meta object for the reference list '<em>Literals</em>'.
 	 * @see org.eclipse.xtext.common.types.JvmEnumerationType#getLiterals()
 	 * @see #getJvmEnumerationType()
 	 * @generated
@@ -2504,17 +2558,6 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getJvmEnumerationLiteral();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.JvmEnumerationLiteral#getEnumType <em>Enum Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Enum Type</em>'.
-	 * @see org.eclipse.xtext.common.types.JvmEnumerationLiteral#getEnumType()
-	 * @see #getJvmEnumerationLiteral()
-	 * @generated
-	 */
-	EReference getJvmEnumerationLiteral_EnumType();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmGenericType <em>Jvm Generic Type</em>}'.
@@ -3519,7 +3562,7 @@ public interface TypesPackage extends EPackage {
 		EClass JVM_ENUMERATION_TYPE = eINSTANCE.getJvmEnumerationType();
 
 		/**
-		 * The meta object literal for the '<em><b>Literals</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Literals</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -3535,14 +3578,6 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass JVM_ENUMERATION_LITERAL = eINSTANCE.getJvmEnumerationLiteral();
-
-		/**
-		 * The meta object literal for the '<em><b>Enum Type</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference JVM_ENUMERATION_LITERAL__ENUM_TYPE = eINSTANCE.getJvmEnumerationLiteral_EnumType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl <em>Jvm Generic Type</em>}' class.
