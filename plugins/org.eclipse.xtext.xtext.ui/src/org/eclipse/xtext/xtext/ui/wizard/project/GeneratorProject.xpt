@@ -15,45 +15,20 @@
 
 «DEFINE main FOR XtextProjectInfo»
 
-«FILE "model/Person."+fileExtension-»
+«FILE "model/Example."+fileExtension-»
 /*
  * This is an example model
  */
-namespace entities {
-	import datatypes.*
-	
-	entity Person {
-		property name: String
-		property address: Address
-	}
-	
-	entity Address {
-		property street: String
-		property zip: String
-		property city: String
-	}
-}
-«ENDFILE»
-
-«FILE "model/Datatypes."+fileExtension-»
-/*
- * This is an example model
- */
-namespace datatypes {
-	type String
-}
+Hello world!
+Hello Xtext!
+Hello Eclipse!
 «ENDFILE»
 
 «FILE "templates/Extensions.ext"-»
 import «languageNameAbbreviation.toFirstLower()»;
 
-listSubclasses(Entity this) :
-	let subclasses = this.eRootContainer.eAllContents.typeSelect(Entity).select(e|e.extends == this).name:
-		switch (subclasses.size) { 
-			case 0: "no subclasses"
-			case 1: "subclass: " + subclasses.toString(", ")
-			default: subclasses.size.toString() + " subclasses: " + subclasses.toString(", ")
-		};
+sortedGreetings(Model this) :
+	this.greetings.sortBy(g|g.name.toLowerCase());
 «ENDFILE»
 
 «FILE "templates/Template.xpt"-»
@@ -61,13 +36,18 @@ listSubclasses(Entity this) :
 
 «OP()»EXTENSION templates::Extensions«CL()»
 
-«OP()»DEFINE main FOR Entity-«CL()»
+«OP()»DEFINE main FOR Greeting-«CL()»
 «OP()»FILE name+".txt"-«CL()»
-The entity : «OP()»name«CL()» contains «OP()»properties.size«CL()» properties:
-«OP()»FOREACH this.properties.sortBy(e|e.name) AS e ITERATOR iter-«CL()»
-«OP()»iter.counter1«CL()») '«OP()»e.name«CL()»' of type '«OP()»e.type.name«CL()»'
-«OP()»ENDFOREACH-«CL()»
+This is an example of a generated file.
+
+The input element was "Hello «OP()»name«CL()»!"
+
+All greetings in the same file:
+«OP()»FOREACH ((Model)eContainer).sortedGreetings() AS g SEPARATOR ', '«CL()»«OP()»g.name«CL()»«OP()»ENDFOREACH«CL()»
 «OP()»ENDFILE-«CL()»
+«OP()»ENDDEFINE«CL()»
+
+«OP()»DEFINE salutation FOR Greeting-«CL()»
 «OP()»ENDDEFINE«CL()»
 «ENDFILE»
 
@@ -93,7 +73,7 @@ Workflow {
 		register = «languageName»StandaloneSetup {}
 		load = {
 			slot = "model"
-			type = "Entity"
+			type = "Greeting"
 		}
 	}
 
