@@ -26,7 +26,7 @@ import com.google.inject.name.Names;
 public abstract class AbstractGenericModule implements Module {
 
 	private static Logger LOGGER = Logger.getLogger(AbstractGenericModule.class);
-	
+
 	public void configure(Binder binder) {
 		Module compound = getBindings();
 		compound.configure(binder);
@@ -42,13 +42,12 @@ public abstract class AbstractGenericModule implements Module {
 				} else if (method.getName().startsWith("provide")) {
 					result.add(new ProviderModule(method, this));
 				} else if (method.getName().startsWith("configure")) {
-					if (!method.getName().equals("configure") && 
-						 method.getParameterTypes().length == 1 &&
-						 method.getParameterTypes()[0].equals(Binder.class)) {
+					if (!method.getName().equals("configure") && method.getParameterTypes().length == 1
+							&& method.getParameterTypes()[0].equals(Binder.class)) {
 						result.add(new FreeModule(method, this));
-						
+
 					}
-				} 
+				}
 			} catch (Exception e) {
 				LOGGER.warn("Trying to use method " + method.toGenericString() + " for configuration failed", e);
 			}
@@ -58,18 +57,31 @@ public abstract class AbstractGenericModule implements Module {
 
 	protected void bindProperties(Binder binder, String propertyFilePath) {
 		try {
-			InputStream in = getClass().getClassLoader().getResourceAsStream(
-					propertyFilePath);
+			InputStream in = getClass().getClassLoader().getResourceAsStream(propertyFilePath);
 			if (in != null) {
 				Properties properties = new Properties();
 				properties.load(in);
 				Names.bindProperties(binder, properties);
 			} else {
-				throw new IllegalStateException("Couldn't find property file : "+propertyFilePath);
+				throw new IllegalStateException("Couldn't find property file : " + propertyFilePath);
 			}
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			throw new RuntimeException(e);
+		}
+	}
+
+	protected Properties tryBindProperties(Binder binder, String propertyFilePath) {
+		try {
+			InputStream in = getClass().getClassLoader().getResourceAsStream(propertyFilePath);
+			if (in != null) {
+				Properties properties = new Properties();
+				properties.load(in);
+				Names.bindProperties(binder, properties);
+				return properties;
+			} else
+				return null;
+		} catch (IOException e) {
+			return null;
 		}
 	}
 
