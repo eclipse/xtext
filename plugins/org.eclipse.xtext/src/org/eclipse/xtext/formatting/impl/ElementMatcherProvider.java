@@ -67,8 +67,8 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 						for (MatcherTransition incoming : state.getAllIncoming())
 							if (incoming.isRuleCall() && result.add(incoming.getSource())
 									&& incoming.getSource().isEndState())
-								result.addAll(findRuleCallsTo(GrammarUtil.containingRule(incoming.getSource()
-										.getGrammarElement()), visited));
+								result.addAll(findRuleCallsTo(
+										GrammarUtil.containingRule(incoming.getSource().getGrammarElement()), visited));
 				}
 			}
 			return result;
@@ -89,8 +89,8 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 						return Tuples.create(Collections.singletonList(transition), Collections.singletonList(from));
 					else if (transition.getTarget().isParserRuleCall()) {
 						ruleCallStack.push(transition.getTarget());
-						Pair<List<MatcherTransition>, List<MatcherState>> next = findTransitionPath(transition
-								.getTarget(), to, false, false);
+						Pair<List<MatcherTransition>, List<MatcherState>> next = findTransitionPath(
+								transition.getTarget(), to, false, false);
 						if (next != null) {
 							List<MatcherTransition> trans = Lists.newArrayList(transition);
 							trans.addAll(next.getFirst());
@@ -117,20 +117,22 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 		}
 
 		protected List<MatcherTransition> findTransitionsToToken(MatcherState from, Set<MatcherState> targets,
-				boolean returning, boolean canReturn) {
+				boolean returning, boolean canReturn, Set<MatcherState> visited) {
+			if (!visited.add(from))
+				return Collections.emptyList();
 			if (targets != null && targets.contains(from))
 				targets = null;
 			List<MatcherTransition> result = Lists.newArrayList();
 			for (MatcherTransition transition : returning ? from.getOutgoingAfterReturn() : from.getOutgoing()) {
 				if (transition.getTarget().isParserRuleCall())
-					result.addAll(findTransitionsToToken(transition.getTarget(), targets, false, false));
+					result.addAll(findTransitionsToToken(transition.getTarget(), targets, false, false, visited));
 				else if (targets == null || targets.contains(transition.getTarget()))
 					result.add(transition);
 			}
 			if (canReturn && from.isEndState())
-				for (MatcherState caller : findRuleCallsTo(GrammarUtil.containingRule(from.getGrammarElement()), Sets
-						.<AbstractRule> newHashSet()))
-					result.addAll(findTransitionsToToken(caller, targets, true, true));
+				for (MatcherState caller : findRuleCallsTo(GrammarUtil.containingRule(from.getGrammarElement()),
+						Sets.<AbstractRule> newHashSet()))
+					result.addAll(findTransitionsToToken(caller, targets, true, true, visited));
 			return result;
 		}
 
@@ -236,7 +238,8 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 				target.getBeforeBetweenElements().add(pattern);
 			for (MatcherState source : sources) {
 				source.getAfterBetweenElements().add(pattern);
-				for (MatcherTransition transition : findTransitionsToToken(source, targets, source.isParserRuleCall(), true)) {
+				for (MatcherTransition transition : findTransitionsToToken(source, targets, source.isParserRuleCall(),
+						true, Sets.<MatcherState> newHashSet())) {
 					if (transition.getSource() == source)
 						transition.addPattern(pattern);
 					else
