@@ -264,16 +264,18 @@ you chose in the beginning (_*.dmodel_). This will open the generated entity edi
 h3. Adding namespace
 
 At the current stage, our language puts all types into the same scope. As cross-references are specified by means of names, this can easily 
-yield collisions as the model size increases. That's why most programming languages invent such things as namespaces or modules. We will now 
-extend the language by the concept of a _Package_, which effectively is a namespace. 
+yield collisions as the model size increases. Avoiding such name clashes is why most programming languages invent concepts like name spaces or modules. We will now 
+extend the language by the concept of a _Package_, which effectively is a name space. 
 
-Our languages's definition of a _Package_ is as follows: A package has a name and contains other named elements. A named element is either another 
+Our languages's definition of a _Package_ is as follows: A package has a name and contains other named elements and name space imports. A named element is either another 
 _Package_ or a _Type_. Within a package, elements must have unique names. The _fully qualified name_ (FQN) of a named element consists of the FQN of its package, 
 a separator '_._' and its own simple name. Elements refer to each other using their _qualified names_ which are relative to the common namespaces. By means 
-of import statements, these names can be further abbreviated. That sounds all a bit complicated but the good thing is that Xtext comes with exactly such a default 
-semantic for namespaces. Though, all aspects of this semantic are adaptable but for this tutorial we will stick with the defaults.
+of import statements, these names can be further abbreviated. 
 
-After we have successfully evolved our language, so that it allows to work with packages and imports, the following example should be valid syntax:
+That might sound a bit complicated at first but the good thing is that Xtext comes with exactly such a default semantic for namespaces, which feels very natural in practice. 
+Although all aspects of this semantic are adaptable, we will stick to the defaults within this tutorial.
+
+Before we extend the grammar, let's have a look at how a the example model would look like when using the newly introduced concepts:
 
 bc.. package my.types {
   datatype String
@@ -314,8 +316,8 @@ p.  _DomainModel_ should now call _AbstractElement_ instead of _Type_:
 bc.. DomainModel:
 	(elements+=AbstractElement)*;
 
-p. To allow qualified names, we need a new rule _QualifiedName_. This rule returns a string. But we do not want this to be a terminal rule, as terminal 
-rules have special semantics (they are used contextless in the lexer) which often cause problems. Instead we want it to be a parser rule, but one which
+p. To allow qualified names, we need a new rule _QualifiedName_. This rule returns a string. But we do not want this to be a _terminal rule_, as terminal 
+rules have special semantics (they are used context less in the lexer, which often cause problems). Instead we want it to be a parser rule, but one which
 doesn't return an instance of an _EClass_ from the referenced _EPackage_ but just return a String. Such rules are called _data type rules_, because they return 
 instances of _EDatatype_ as opposed to instances of _EClass_. String is the most often used _EDataType_ in this context and is therefore the default return 
 type for data type rules. The rule looks like this:
@@ -324,7 +326,7 @@ bc.. QualifiedName:
 	ID ('.' ID)*;
 
 p. Note, that Xtext automatically figures out that the rule is a _data type rule_ rather then a normal parser rule, because it doesn't contain any assignments and all rule 
-calls go to either other _data type rules_ or other _terminal rules_. For a _data type rule_ the parser simply concats all the text it has consumed and returns it as a string.
+calls go to either other _data type rules_ or other _terminal rules_. For a _data type rule_ the parser simply concatenates the consumed text and returns it as a string.
 The transformation to a user defined data type is done by so called _ValueConverters_. But as we use strings we don't need to care about _ValueConverters_ here.
 
 Next up we need to define the syntax of _PackageDeclarations_, which makes use of the _QualifiedName_ rule but doesn't make use of anything we haven't yet talked about.
@@ -335,7 +337,7 @@ bc.. PackageDeclaration:
 	'}';
 	
 p. Having qualified names at hand, we want to specify cross references that way, too. As mentioned by default, Xtext assumes the rule _ID_ as the syntax for cross references, 
-which has been fully sufficient so far. But now we want to allow fully qualified names as well, so we explicitly specifiy the syntax rule after a delimiter '|':
+which has been fully sufficient so far. But now we want to allow fully qualified names as well, so we explicitly specify the syntax rule after a delimiter '|':
 
 fn.. Note, that the '|' has nothing to do with the previously introduced alternative operator. In the context of a cross reference it is simply a delimiter.  
 
@@ -349,13 +351,14 @@ p. and
 bc.. TypeRef:
 	referenced=[Type|QualifiedName] (multi?='*')?;
 
-p. As the last step, we introduce imports. An _Import_ is an _AbstractElement_, too, which means that it can occur as a child of _DomainModel_ as well as of _PackageDeclaration_.
+p. As the last step, we introduce imports. An _Import_ is an instance of _AbstractElement_, too, so that it can occur as a child of _DomainModel_ as well as 
+of _PackageDeclaration_.
 
 bc.. AbstractElement:
 	PackageDeclaration | Type | Import;
 
-p. An imported namesapce is not just a qualified name but it also allows an optional wildcard characer '_*_' at the end, so that multiple names can be imported 
-with one statement. That requires a new datatype rule _QualifiedNameWithWildCard_:
+p. An imported name space is not just a qualified name but it also allows an optional wildcard character '_*_' at the end, so that multiple names can be imported 
+with one statement. That requires a new data type rule which we name _QualifiedNameWithWildCard_:
 
 bc.. QualifiedNameWithWildCard:
 	QualifiedName '.*'?;
@@ -366,9 +369,10 @@ bc.. Import:
 	'import' importedNamespace=QualifiedNameWithWildCard;
 
 p. The default scoping implementation is based on naming conventions. First everything which has a name is referenceable. By default something has a name if it has a property _'name'_.
-If such an _EAttribute_ is available, the default implementation computes a qualified name by asking the container for its name and concatenates the two names separated by a dot.
-The computation of qualified names can be arbitrarily changed by implementing a _IQualifedNameProvider_. The other naming convention is that if some 
-element has an EAttribute 'importedNamespace' that value is used as a namespace import and is automatically prefixed to any simple names used within that namespace.
+If such an _EAttribute_ is available, the default implementation computes a qualified name by asking the container for its name and concatenates the two 
+names separated by a dot. The computation of qualified names can be arbitrarily changed by implementing an _IQualifedNameProvider_. The other naming convention is 
+that if some element has an EAttribute 'importedNamespace' that value is used as a namespace import and is automatically prefixed to any simple names used within 
+that namespace. Also the asterix (_*_) is used as a wildcard by default.
 
 That's all for the grammar. It should now read as 
 
@@ -420,5 +424,5 @@ QualifiedName:
 QualifiedNameWithWildCard:
 	QualifiedName '.*'?;
 
-p. Now Regenerate the language infrastructure as described in the previous section, and give the editor a try. You can even split up 
+p. Now you should regenerate the language infrastructure as described in the previous section, and give the editor a try. You can even split up 
 your model into smaller parts and have cross-references across file boundaries, as long as the referenced models are on the classpath.
