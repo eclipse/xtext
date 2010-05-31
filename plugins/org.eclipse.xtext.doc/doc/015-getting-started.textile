@@ -34,13 +34,13 @@ h3. Create an Xtext project
 
 In order to get started we first need to create some Eclipse projects. Use the Xtext wizard to for that:
 
-	_File -> New -> Project...  -> Xtext -> Xtext project_
+  _File -> New -> Project...  -> Xtext -> Xtext project_
 
 Choose a meaningful project name, language name and file extension, e.g.
 
-| *Main project name:* 	|	org.eclipse.xtext.example.domainmodel	|
-| *Language name:* 		|	org.eclipse.xtext.example.Domainmodel	|
-| *DSL-File extension:* |	dmodel	|
+| *Main project name:*   |  org.eclipse.xtext.example.domainmodel  |
+| *Language name:*     |  org.eclipse.xtext.example.Domainmodel  |
+| *DSL-File extension:* |  dmodel  |
 
 Keep "Create generator project" checked, as we will also create a code generator in a second step.
 
@@ -111,10 +111,10 @@ As a _DomainModel_ consists of one or more _Entity_ entries, this rule delegates
 another rule named _Entity_, which will be defined later on. As we can have an arbitrary number of entities within a model, the 
 cardinality is '*'. There are four different cardinalities available.
 
-| (no operator) |	exactly one	|
-| ? 		|	zero or one	|
-| * 		|	zero or more|
-| + 		|	one or more	|
+| (no operator) |  exactly one  |
+| ?     |  zero or one  |
+| *     |  zero or more|
+| +     |  one or more  |
 
 Each rule terminates with a semicolon. So our first rule reads as
 
@@ -141,10 +141,10 @@ p. The assignment adds (the _+=_ operator) every object returned by the _Entity_
 to be a list (upperBound=-1). In addition to the two mentioned assignment operators there is a third one (*?=*) which is called boolean assignment and which sets a certain feature to true, if 
 the part on the right hand side was parsed. Here's the list of available assignment operators:
 
-| *foo=...* 	|	setFoo(...)	|
-| *foo+=...* 	|	getFoo().add(...)|
-| *foo?=...* 	|	setFoo(true)|
-	
+| *foo=...*   |  setFoo(...)  |
+| *foo+=...*   |  getFoo().add(...)|
+| *foo?=...*   |  setFoo(true)|
+  
 p. The next rule on our list is the rule _Entity_. Looking at our target syntax, each entity begins with the keyword _'entity'_ followed 
 by the entity's name and an opening curly brace (we will handle the _extends_ clause in a second step). Then, an entity defines a number 
 of features and ends with a closing curly brace. The rule looks like this:
@@ -153,7 +153,7 @@ bc.. Entity returns Entity:
   'entity' name=ID '{'
     (features+=Feature)*
   '}';
-	
+  
 p. Keywords are simply declared as string literals within the rules. The name uses the ID rule from the mixed-in grammar *org.eclipse.xtext.common.Terminals*. The ID rule is 
 a so called terminal rule which always returns simple data types, such as String, Date, or Integer. Actually any Java class can be a simple EMF _EDataType_. The ID rule 
 recognizes alphanumeric words similar to identifiers in Java and returns the value as a String. You can navigate to its declaration using _F3_.
@@ -183,7 +183,7 @@ bc.. DomainModel :
 
 Type:
   DataType | Entity;
-	
+  
 DataType:
   'datatype' name=ID;
  
@@ -194,7 +194,7 @@ of elements with a single cross-reference.
 Next up we need to define the syntax of _Feature_, which shouldn't be surprising to you, as we do not use any new concepts here.
 
 bc.. Feature:
-	name=ID ':' type=TypeRef;
+  name=ID ':' type=TypeRef;
 
 p. In many target platforms there is a difference between the notion of a simple attribute and a reference. In relational databases, for instance,
 a table contains the values of attributes directly, but references are "modeled" by the means of foreign keys. In object-relational persistence technologies 
@@ -207,11 +207,11 @@ The presence of the postfix "*" (technically a keyword) should trigger a boolean
 The parser rule looks like this:
 
 bc.. TypeRef:
-	referenced=[Type] (multi?='*')?;
+  referenced=[Type] (multi?='*')?;
 
 p. Again we have specified a cross reference, which this time not only allows to reference entities but all instances of type. So far this only includes data type, 
 but you may want to introduce additional concepts in future version, like for instance a Value Object as proposed in Eric Evan's great book _Domain Driven Design_.
-	
+  
 p. In the end your grammar editor should look like this:
 
 bc.. grammar org.eclipse.xtext.example.Domainmodel 
@@ -224,7 +224,7 @@ DomainModel :
   
 Type:
   DataType | Entity;
-	
+  
 DataType:
   'datatype' name=ID;
  
@@ -234,18 +234,18 @@ Entity returns Entity:
   '}';
  
 Feature:
-	name=ID ':' type=TypeRef;
-	
+  name=ID ':' type=TypeRef;
+  
 TypeRef:
-	referenced=[Type] (multi?='*')?;
-	
+  referenced=[Type] (multi?='*')?;
+  
 h3. Generate language artifacts
 
 Now that we have the grammar in place and defined we need to run the generator. To do so locate the file _GenerateDomainModel.mwe2_ file next to the grammar file 
 in the package explorer view. From its context menu, choose
 
-	_Run As -> MWE2 Workflow_.
-	
+  _Run As -> MWE2 Workflow_.
+  
 That will trigger the Xtext language generator. It generates the parser and serializer and some additional infrastructure code. 
 You will see its logging messages in the Console view. 
 
@@ -253,8 +253,8 @@ h3. Run the generated IDE plugin
 
 If code generation succeeded, we are now able to test the IDE integration. Right-click on the Xtext project and choose
  
-	_Run As -> Eclipse Application_.
-	
+  _Run As -> Eclipse Application_.
+  
 This will spawn a new Eclipse workbench with your projects as plug-ins installed. 
 In the new workbench, create a new project (_File -> New -> Project...  -> General -> Project_) and therein a new file with the file extension 
 you chose in the beginning (_*.dmodel_). This will open the generated entity editor.
@@ -309,12 +309,12 @@ package my.entities {
 p. Let's start to modify our grammar now. First we introduce the rule _AbstractElement_:
 
 bc.. AbstractElement:
-	PackageDeclaration | Type;
+  PackageDeclaration | Type;
 
 p.  _DomainModel_ should now call _AbstractElement_ instead of _Type_:  
-	
+  
 bc.. DomainModel:
-	(elements+=AbstractElement)*;
+  (elements+=AbstractElement)*;
 
 p. To allow qualified names, we need a new rule _QualifiedName_. This rule returns a string. But we do not want this to be a _terminal rule_, as terminal 
 rules have special semantics (they are used context less in the lexer, which often cause problems). Instead we want it to be a parser rule, but one which
@@ -323,7 +323,7 @@ instances of _EDatatype_ as opposed to instances of _EClass_. String is the most
 type for data type rules. The rule looks like this:
 
 bc.. QualifiedName:
-	ID ('.' ID)*;
+  ID ('.' ID)*;
 
 p. Note, that Xtext automatically figures out that the rule is a _data type rule_ rather then a normal parser rule, because it doesn't contain any assignments and all rule 
 calls go to either other _data type rules_ or other _terminal rules_. For a _data type rule_ the parser simply concatenates the consumed text and returns it as a string.
@@ -332,41 +332,41 @@ The transformation to a user defined data type is done by so called _ValueConver
 Next up we need to define the syntax of _PackageDeclarations_, which makes use of the _QualifiedName_ rule but doesn't make use of anything we haven't yet talked about.
 
 bc.. PackageDeclaration:
-	'package' name=QualifiedName '{'
-		(elements+=AbstractElement)*
-	'}';
-	
+  'package' name=QualifiedName '{'
+    (elements+=AbstractElement)*
+  '}';
+  
 p. Having qualified names at hand, we want to specify cross references that way, too. As mentioned by default, Xtext assumes the rule _ID_ as the syntax for cross references, 
 which has been fully sufficient so far. But now we want to allow fully qualified names as well, so we explicitly specify the syntax rule after a delimiter '|':
 
 fn.. Note, that the '|' has nothing to do with the previously introduced alternative operator. In the context of a cross reference it is simply a delimiter.  
 
 bc.. Entity:
-	'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
-		(features+=Feature)*
-	'}';
+  'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
+    (features+=Feature)*
+  '}';
 
 p. and
 
 bc.. TypeRef:
-	referenced=[Type|QualifiedName] (multi?='*')?;
+  referenced=[Type|QualifiedName] (multi?='*')?;
 
 p. As the last step, we introduce imports. An _Import_ is an instance of _AbstractElement_, too, so that it can occur as a child of _DomainModel_ as well as 
 of _PackageDeclaration_.
 
 bc.. AbstractElement:
-	PackageDeclaration | Type | Import;
+  PackageDeclaration | Type | Import;
 
 p. An imported name space is not just a qualified name but it also allows an optional wildcard character '_*_' at the end, so that multiple names can be imported 
 with one statement. That requires a new data type rule which we name _QualifiedNameWithWildCard_:
 
 bc.. QualifiedNameWithWildCard:
-	QualifiedName '.*'?;
+  QualifiedName '.*'?;
 
 The declaration of the _Import_ rule should look familiar by now:
 
 bc.. Import:
-	'import' importedNamespace=QualifiedNameWithWildCard;
+  'import' importedNamespace=QualifiedNameWithWildCard;
 
 p. The default scoping implementation is based on naming conventions. First everything which has a name is referenceable. By default something has a name if it has a property _'name'_.
 If such an _EAttribute_ is available, the default implementation computes a qualified name by asking the container for its name and concatenates the two 
@@ -381,48 +381,42 @@ bc.. grammar org.eclipse.xtext.example.Domainmodel
 
 generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"
 
-Model:
-	(elements+=AbstractElement)*;
+DomainModel:
+  (elements+=AbstractElement)*;
 
 AbstractElement:
-	PackageDeclaration | Type | Import;
-	
+  PackageDeclaration | Type | Import;
+  
 Import:
-	'import' importedNamespace=QualifiedNameWithWildCard;
+  'import' importedNamespace=QualifiedNameWithWildCard;
 
 PackageDeclaration:
-	'package' name=QualifiedName '{'
-		(elements+=AbstractElement)*
-	'}';
+  'package' name=QualifiedName '{'
+    (elements+=AbstractElement)*
+  '}';
 
 Type:
-	Entity | DataType;
+  Entity | DataType;
 
 DataType:
-	'datatype' name=ID;
+  'datatype' name=ID;
 
 Entity:
-	'entity' name=ID ('extends' superType=[Entity])? '{'
-		(features+=Feature)*
-	'}';
+  'entity' name=ID ('extends' superType=[Entity])? '{'
+    (features+=Feature)*
+  '}';
 
 Feature:
-	Attribute | Reference;
-
-Attribute:
-	'attr' name=ID ':' type=TypeRef;
-
-Reference:
-	'ref' name=ID ':' type=TypeRef;
+  name=ID ':' type=TypeRef;
 
 TypeRef:
-	referenced=[Type] (multi?='*')?;
+  referenced=[Type] (multi?='*')?;
 
 QualifiedName:
-	ID ('.' ID)*;
-	
+  ID ('.' ID)*;
+  
 QualifiedNameWithWildCard:
-	QualifiedName '.*'?;
+  QualifiedName '.*'?;
 
 p. Now you should regenerate the language infrastructure as described in the previous section, and give the editor a try. You can even split up 
 your model into smaller parts and have cross-references across file boundaries, as long as the referenced models are on the classpath.
