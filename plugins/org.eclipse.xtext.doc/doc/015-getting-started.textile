@@ -1,11 +1,12 @@
 h1(#getting-started). Getting Started
 
-In this mini-tutorial you will implement your first language and a corresponding Eclipse IDE integration with Xtext. Later, we will create a code generator that is capable of reading the models you create with the DSL editor and process them, i.e. generate some Java code from it.
+In this mini-tutorial we will implement a small domain-specific language and a corresponding Eclipse IDE integration with Xtext. Later, we will create a code generator 
+that is capable of reading the models you create with the DSL editor and process them, i.e. generate some Java code from it.
 
 h2(#getting-started-xtext). Creating a DSL  
 
 "Download and install the latest version of Xtext":http://www.eclipse.org/Xtext/download/, set up a fresh workspace. We want to develop a small language used to 
-define domain models. It is stripped-down version of the _Xtext Domain-Model Example_ which is shipped with Xtext and can be materialized into your workspace using 
+define domain models. It is a stripped-down version of our _Domain-Model Example_ which is shipped with Xtext and can be materialized into your workspace using 
 the example wizard. The following instance of the domain model DSL should give you an idea about the language.
 
 bc.. datatype String
@@ -141,9 +142,9 @@ p. The assignment adds (the _+=_ operator) every object returned by the _Entity_
 to be a list (upperBound=-1). In addition to the two mentioned assignment operators there is a third one (*?=*) which is called boolean assignment and which sets a certain feature to true, if 
 the part on the right hand side was parsed. Here's the list of available assignment operators:
 
-| *foo=...*   |  setFoo(...)  |
-| *foo+=...*   |  getFoo().add(...)|
-| *foo?=...*   |  setFoo(true)|
+|| *foo=...*   | corresponds to _setFoo(...)_  ||
+|| *foo+=...*  | corresponds to _getFoo().add(...)_||
+|| *foo?=...*  | corresponds to _setFoo(true)_||
   
 p. The next rule on our list is the rule _Entity_. Looking at our target syntax, each entity begins with the keyword _'entity'_ followed 
 by the entity's name and an opening curly brace (we will handle the _extends_ clause in a second step). Then, an entity defines a number 
