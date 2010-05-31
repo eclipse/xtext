@@ -1,38 +1,38 @@
 h1(#getting-started). Getting Started
 
-In this mini-tutorial you will implement your first language with Xtext and create an editor from that. Later, we will create a code generator that is capable of reading the models you create with the DSL editor and process them.
+In this mini-tutorial you will implement your first language and a corresponding Eclipse IDE integration with Xtext. Later, we will create a code generator that is capable of reading the models you create with the DSL editor and process them, i.e. generate some Java code from it.
 
 h2(#getting-started-xtext). Creating a DSL  
 
-"Download and install the latest version of Xtext":http://www.eclipse.org/Xtext/download/, set up a fresh workspace, take a deep breath and follow the instructions.  As soon as you have finished this chapter you will have an editor that understands input files of the following format. We will refer to this snippet as an example of our "target syntax" later on:
+"Download and install the latest version of Xtext":http://www.eclipse.org/Xtext/download/, set up a fresh workspace. We want to develop a small language used to 
+define domain models. It is stripped-down version of the _Xtext Domain-Model Example_ which is shipped with Xtext and can be materialized into your workspace using 
+the example wizard. The following instance of the domain model DSL should give you an idea about the language.
 
 bc.. datatype String
 datatype Bool
 
 entity Session {
-  attr Title: String
-  attr IsTutorial : Bool
+  title: String
+  isTutorial : Bool
 }
 
 entity Conference {
-  attr Name : String
-  ref Attendees : Person*
-  ref Speakers : Speaker*
+  name : String
+  attendees : Person*
+  speakers : Speaker*
 }
 
 entity Person {
-  attr Name : String
+  name : String
 }
 
 entity Speaker extends Person {
-  ref Sessions : Session*
+  sessions : Session*
 }
-
-p. This tutorial is based on the _Xtext Domain-Model Example_. The complete example is available via _New->Example->Xtext->Xtext Domain-Model Example_.
 
 h3. Create an Xtext project
 
-Use the Xtext wizard to create a new project
+In order to get started we first need to create some Eclipse projects. Use the Xtext wizard to for that:
 
 	_File -> New -> Project...  -> Xtext -> Xtext project_
 
@@ -40,7 +40,7 @@ Choose a meaningful project name, language name and file extension, e.g.
 
 | *Main project name:* 	|	org.eclipse.xtext.example.domainmodel	|
 | *Language name:* 		|	org.eclipse.xtext.example.Domainmodel	|
-| *DSL-File extension:* 	|	dmodel	|
+| *DSL-File extension:* |	dmodel	|
 
 Keep "Create generator project" checked, as we will also create a code generator in a second step.
 
@@ -50,58 +50,135 @@ Click on _Finish_ to create the projects.
 
 h3. Project layout
 
-In the Package Explorer you can see three new projects. In @org.eclipse.xtext.example.domainmodel@ you can define the grammar and configure the runtime aspects of your language. The editor, outline view and code completion goes into @org.eclipse.xtext.example.domainmodel.ui@. Both projects consist of generated classes derived from your grammar and manual code such as the grammar itself or further classes to differentiate from the default behavior.
+In the Package Explorer you can see three new projects. In _org.eclipse.xtext.example.domainmodel_ the grammar is defined and all
+runtime aspects, such as linking, scoping and validation are developed. The IDE-aspects such as the editor, any views, and
+incremental project builder go into _org.eclipse.xtext.example.domainmodel.ui_. Both projects consist of generated classes derived 
+from the grammar and manual code such as the grammar itself and further classes to differentiate and adapt from the default behavior. Although
+Xtext makes use of code generation, most of the code is actually written as libraries, which are referenced by the means of OSGi using the Manifest.MF. 
 
 !images/getting-started-project-layout.png!
 
-It is good to be clear and unambiguous whether the code is generated or is to be manipulated by the developer. Thus, the generated code should be held separately from the manually written code. We follow this pattern by having a folder _src/_ and a folder _src-gen/_ in each project. Keep in mind not to make changes in the _src-gen/_ folder. They will be overwritten by the generator.
+It is good to be clear and unambiguous whether the code is generated or is to be manipulated by the developer. Thus, the generated code should be held 
+separately from the manually written code. We follow this pattern by having a folder _src/_ and a folder _src-gen/_ in each project. Keep in mind not to 
+make changes in the _src-gen/_ folder. They will be overwritten by the generator.
 
-A third project, @org.eclipse.xtext.example.domainmodel.generator@ will later contain a code generator that leverages the model created with the DSL editor.
+A third project, _org.eclipse.xtext.example.domainmodel.generator_ will later contain an Xpand code generator that leverages the model created with the DSL editor. 
+This is fully optional and it is also optional to use Xpand. In fact you can use any programming language running on the JVM to implement a code generator for your 
+Xtext models. Also it is of course perfectly ok, to have no code generator at all but use the models dynamically at runtime. We call these kind of model processors 
+_interpreters_.
 
 h3. Build your own grammar
 
-The wizard will automatically open the example grammar file @Domainmodel.xtext@ from the first project in the editor. A grammar has two purposes: First, it is used to describe the concrete syntax of your language. Second, it contains information about how the parser shall create a model during parsing.
+p. *_Please note_* _: If you encounter strange errors while copying and pasting snippets from this document to your Eclipse editor, your documentation_
+ _viewer most likely has inserted characters different from {space} into your clipboard. Reenter these "fillers" or type the text by hand to be sure everything works fine._ 
 
-Ignore the generated sample grammar, delete everything after "@Model :@" to the end. 
-The entry rule for the parser will be called @Model@. As a @Model@ consists of one or more @Entity@ entries, this rule delegates to another rule named @Entity@, which will be defined later on.
-As we can have an arbitrary number of entities within a model, the cardinality is "*". Each rule is terminated with a semicolon. So our first rule reads as
+p. The wizard will automatically open the example grammar file _Domainmodel.xtext_ from the first project in the editor. 
+A grammar has two purposes: First, it is used to describe the concrete syntax of your language. Second, it contains information about 
+how the parser shall create a model during parsing.
 
-bc.. Model :
+The first line of the grammar is the grammar declaration:
+
+bc.. grammar org.eclipse.xtext.example.Domainmodel 
+  with org.eclipse.xtext.common.Terminals
+
+p. In Xtext each grammar has a unique name, which like (most) Java classes needs to reflect 
+the location of the file within the Java class path. In our case the grammar file is located in _/org/eclipse/xtext/example/Domainmodel.xtext_ therefore
+the name of the grammar is _org.eclipse.xtext.example.Domainmodel_. The second part of that statement (_with org.eclipse.xtext.common.Terminals_) states, that 
+this grammar reuses and overrides rules from the specified grammar. The _org.eclipse.xtext.common.Terminals_ is a library grammar shipped with Xtext and predefines the
+most common terminal rules, such as _ID_, _STRING_ and _INT_. It also introduces single-line and multi-line comments as well as rules for whitespace, which are ignore by default.
+You can open that grammar in the editor, so you see which rules. It turns out that these set of rules are often the same and often used, so that most Xtext languages 
+extend this grammar. However, it is just a library, so you won't use it if it doesn't fit your needs. Also you can use the grammar inheritance mechanism for your grammar libraries, of course.
+ 
+The next statement declares an EMF Ecore package, aka EPackage, to be derived from the grammar:
+
+bc.. generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"  
+
+p. Ecore _EPackages_ are effectively a set of classes (in EMF they are called _EClass_) which are used to represent the in memory model of a text file. Instead of _model_ we 
+also sometimes refer to it as _semantic model_ or _abstract syntax tree (AST)*. Note, that in the case of Xtext it's actually a graph rather than a tree, since it also 
+contains cross links. But as the term AST is so commonly used and known we are ignoring this little detail. 
+ 
+In order to tell the parser which _EClasses_ to use when creating the AST, we need to make them available by either importing existing Ecore packages 
+or like in our example let Xtext derive a package from the grammar. An EPackage has a name and namespace URI (short: nsURI), so we have to declare 
+these two values in that statement. 
+
+That's all for the prelude, now we have to define the parser rules which effectively define a bi-directional mapping from text to a constructed AST. Bi-directional because
+Xtext not only derived a parser from the grammar but also a serializer. Anyway, we will mostly talk about parsing in this chapter.
+
+Ignore and delete the parser rules generated by the wizard and start by declaring an entry rule for our language. 
+The entry rule for the parser will be called _DomainModel_. Xtext is fine with any name, it just picks the first rule in a grammar and interprets it as the entry rule.
+
+As a _DomainModel_ consists of one or more _Entity_ entries, this rule delegates to 
+another rule named _Entity_, which will be defined later on. As we can have an arbitrary number of entities within a model, the 
+cardinality is '*'. There are four different cardinalities available.
+
+| (no operator) |	exactly one	|
+| ? 		|	zero or one	|
+| * 		|	zero or more|
+| + 		|	one or more	|
+
+Each rule terminates with a semicolon. So our first rule reads as
+
+bc.. DomainModel :
   Entity*; 
 
-p. __*Please note*: If you encounter strange errors while copying and pasting these snippets to your Eclipse editor your documentation viewer most likely has inserted characters different from {space} into your clipboard. Reenter these "fillers" or type the text by hand to be sure everything works fine.__ 
+p. An Xtext grammar does not only describe rules for the parser but also the structure of the resulting AST. 
+Usually, each parser rule will create a new object in that tree. The type of that element can be specified after the rule name using the keyword _returns_. If the type's name 
+is the same as the rule's name, it can be omitted as in our case. Which effectively means that
 
-An Xtext grammar does not only describe rules for the parser but also the structure of the resulting abstract syntax tree. Usually, each parser rule will create a new node in that tree. The type of that node can be specified after the rule name using the keyword @returns@. If the type's name is the same as the rule name, it can be omitted as in our case.
+bc.. DomainModel returns DomainModel: ...
 
-The parser will create a new element of type @Model@ when it enters the rule @Model@, and a new element of type @Entity@ every time it enters the rule @Entity@. To connect these AST elements, we have to define the name of a reference. In our case, we call that reference _elements_. We specify it using the assignment operator "@+=@", which denotes a multi-valued feature. 
+p. is the same as
 
-As a result, we modify the first rule to
+bc.. DomainModel : ...
 
-bc.. Model :
+p. In order to connect the different objects together, we have to assign the elements returned by called rules to
+some feature of the current rule's object. This is done by using so called assignments. 
+
+bc.. DomainModel :
   (elements+=Entity)*;
+
+p. The assignment adds (the _+=_ operator) every object returned by the _Entity_ rule to the _elements_ referenced of the AST type _Model_. If you use *+=* as opposed to *=* the feature needs
+to be a list (upperBound=-1). In addition to the two mentioned assignment operators there is a third one (*?=*) which is called boolean assignment and which sets a certain feature to true, if 
+the part on the right hand side was parsed. Here's the list of available assignment operators:
+
+| *foo=...* 	|	setFoo(...)	|
+| *foo+=...* 	|	getFoo().add(...)|
+| *foo?=...* 	|	setFoo(true)|
 	
-p. The next rule on our list is the rule @Entity@. Looking at our target syntax, each entity begins with the keyword @entity@ followed by the entity's name and an opening curly brace (we will handle the @extends@ clause in a second step). Then, an entity defines a number of features and ends with a closing curly brace. 
+p. The next rule on our list is the rule _Entity_. Looking at our target syntax, each entity begins with the keyword _'entity'_ followed 
+by the entity's name and an opening curly brace (we will handle the _extends_ clause in a second step). Then, an entity defines a number 
+of features and ends with a closing curly brace. The rule looks like this:
 
 bc.. Entity returns Entity:
   'entity' name=ID '{'
     (features+=Feature)*
-  '}'
-;
+  '}';
 	
-p. Instead of creating a new AST node for the name, we rather want the name to be an attribute of the @Entity@ class. Therefore we use the terminal rule @ID@, which results in a string. The assignment operator "@=@" denotes a single valued feature.
-In our target syntax, some entities refer to an existing entity as their super type after the keyword @extends@. Note that this is a cross-reference, as the super type itself must be defined somewhere else. To define a cross-reference we use square brackets. Optional parts have the cardinality "?". The complete rule now reads:
+p. Keywords are simply declared as string literals within the rules. The name uses the ID rule from the mixed-in grammar *org.eclipse.xtext.common.Terminals*. The ID rule is 
+a so called terminal rule which always returns simple data types, such as String, Date, or Integer. Actually any Java class can be a simple EMF _EDataType_. The ID rule 
+recognizes alphanumeric words similar to identifiers in Java and returns the value as a String. You can navigate to its declaration using _F3_.
+As mentioned before the assignment operator "_=_" denotes a single valued feature.
+
+We want to allow inheritance for entities and therefore now add an optional 'extend' part.
 
 bc.. Entity returns Entity:
   'entity' name=ID ('extends' superType=[Entity])? '{'
-		(features+=Feature)*
-	'}';
-;
-	
-p. We have not specified the rule @Feature@, yet. In our target syntax, properties can refer to simple types such as "String" or "Bool" as well as entities. To make this easy we will first introduce a common supertype @Type@ each @Feature@ can refer to.
+    (features+=Feature)*
+  '}';
 
-Change  the rule @Model@ and introduce a new rule @Type@ and @DataType@:
+p. The question mark marks an element or as in this case an entire group optional. The other new thing is the right hand side of of the assignment *superType=[Entity]*.
+This is a cross-reference literal and states, that a cross reference to an elsewhere declared _Entity_ should be established. So in this case _Entity_ does not point to the 
+corresponding rule but to the _EClass_. As both are named equally this might cause a little confusion at first.
+The full syntax for a cross reference is _[TypeName|RuleCall]_ where _RuleCall_ defaults to _ID_. This means that _('extends' superType=[Entity|ID])?_ would work equally well.
+The parser only parses the name of the cross referenced element using the ID rule and stores it internally. Later on the linker establishes the cross reference using the name
+, the defined cross reference's type (_Entity_ in this case) and the defined scoping rules. Scoping is not covered in this tutorial since the domain model DSL works with 
+the default scoping semantics. By default a namespace based scoping is applied, which means that all entities living in the same namespace are possible candidates for a 
+cross reference. We talk a bit about this later in this chapter when we introduce namespaces.
 
-bc.. Model :
+p. In our introductory example model we had not only defined entities but also two data types. So the _DomainModel_ rule needs to be able to parse data types as well. 
+As both entities and data types will be referenced from the yet to be defined _Feature_ rule, we should introduce a common super type for them.
+
+bc.. DomainModel :
   (elements+=Type)*;
 
 Type:
@@ -110,82 +187,157 @@ Type:
 DataType:
   'datatype' name=ID;
  
-p. Models new consist of types where a @Type@ can either be a @DataType@  or the @Entity@ you already know. Our rule @Type@ will just delegate to either of them, using the "@|@" alternatives operator. The combination of simple data types and entities this way introduces a common super type @Type@ both @Entity@ and @DataType@ derive from. This allows you to refer to both types of elements with a single cross-reference.
+p. A _DomainModel_ now consists of types where a _Type_ can either be a _DataType_ or an _Entity_. Our rule _Type_ will just delegate to either of them, 
+using the "_|_" alternatives operator. Now that we have a common super type for _Entity_ and _DataType_ we are able to refer to both types 
+of elements with a single cross-reference.
 
-A @Feature@ is either an @Attribute@ or a @Reference@. 
+Next up we need to define the syntax of _Feature_, which shouldn't be surprising to you, as we do not use any new concepts here.
 
 bc.. Feature:
-	Attribute | Reference;
+	name=ID ':' type=TypeRef;
 
-p. @Attributes@ and @References@ consist of a keyword, a name, a colon and a cross-reference to a @Type@. 
+p. In many target platforms there is a difference between the notion of a simple attribute and a reference. In relational databases, for instance,
+a table contains the values of attributes directly, but references are "modeled" by the means of foreign keys. In object-relational persistence technologies 
+such as JPA or Hibernate references can have additional life-cycle semantics, which define what to do with referenced objects in certain circumstances. 
+Therefore you typically make a distinction between the two concepts, as we do in the _Domain Model Example_ you can create using the wizard. However, 
+in this small scenario we do not need a separation therefore we stick with one single concept.
 
-bc.. Attribute:
-	'attr' name=ID ':' type=TypeRef;
-
-Reference:
-	'ref' name=ID ':' type=TypeRef;
-	
-p. As the type reference has an additional property for the multiplicity (many or one), we make it a separate model element and parser rule @TypeRef@. The presence of the postfix "*" (technically a keyword) should trigger a boolean flag in the AST model. This is the purpose of the assignment operator "@?=@". Our last parser rule is:
+p. As the type reference has an additional property for the multiplicity (many or one), we make it a separate model element and parser rule _TypeRef_. 
+The presence of the postfix "*" (technically a keyword) should trigger a boolean flag in the AST model. This is the purpose of the assignment operator "_?=_". 
+The parser rule looks like this:
 
 bc.. TypeRef:
 	referenced=[Type] (multi?='*')?;
+
+p. Again we have specified a cross reference, which this time not only allows to reference entities but all instances of type. So far this only includes data type, 
+but you may want to introduce additional concepts in future version, like for instance a Value Object as proposed in Eric Evan's great book _Domain Driven Design_.
 	
 p. In the end your grammar editor should look like this:
 
-!images/getting-started-grammar.png!
+bc.. grammar org.eclipse.xtext.example.Domainmodel 
+  with org.eclipse.xtext.common.Terminals
+  
+generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"  
+
+DomainModel :
+  (elements+=Entity)*;
+  
+Type:
+  DataType | Entity;
+	
+DataType:
+  'datatype' name=ID;
+ 
+Entity returns Entity:
+  'entity' name=ID ('extends' superType=[Entity])? '{'
+    (features+=Feature)*
+  '}';
+ 
+Feature:
+	name=ID ':' type=TypeRef;
+	
+TypeRef:
+	referenced=[Type] (multi?='*')?;
 	
 h3. Generate language artifacts
 
-Save the grammar and make sure that no error markers appear. Then, locate the file GenerateEntities.mwe next to the grammar file in the package explorer view. From its context menu, choose
+Now that we have the grammar in place and defined we need to run the generator. To do so locate the file _GenerateDomainModel.mwe2_ file next to the grammar file 
+in the package explorer view. From its context menu, choose
 
 	_Run As -> MWE2 Workflow_.
 	
-That will trigger the Xtext language generator. You will see its logging messages in the Console view.
+That will trigger the Xtext language generator. It generates the parser and serializer and some additional infrastructure code. 
+You will see its logging messages in the Console view. 
 
-h3. Run the generated editor
+h3. Run the generated IDE plugin
 
-If code generation succeeded, right-click on the Xtext project and choose
+If code generation succeeded, we are now able to test the IDE integration. Right-click on the Xtext project and choose
  
 	_Run As -> Eclipse Application_.
 	
 This will spawn a new Eclipse workbench with your projects as plug-ins installed. 
-In the new workbench, create a new project (_File -> New -> Project...  -> General -> Project_) and therein a new file with the file extension you chose in the beginning. This will open the generated entity editor.
-
-To get some hands-on experience with your new DSL editor, type in the following model:
+In the new workbench, create a new project (_File -> New -> Project...  -> General -> Project_) and therein a new file with the file extension 
+you chose in the beginning (_*.dmodel_). This will open the generated entity editor.
 
 !images/getting-started-editor.png!
 
 h3. Adding namespace
 
-At the current stage, our language puts all types into the same scope. As cross-references are specified by means of names, this can easily yield collisions as the model size increases. That's why we will now extend the language by the concept of a _package_. 
+At the current stage, our language puts all types into the same scope. As cross-references are specified by means of names, this can easily 
+yield collisions as the model size increases. That's why most programming languages invent such things as namespaces or modules. We will now 
+extend the language by the concept of a _Package_, which effectively is a namespace. 
 
-A package is a group of elements. Within a package, elements must have unique names, at least if they are of the same type. Packages can also be nested. The _fully qualified name_ (FQN) of an element consists of the FQN of its package, a separator '@.@' and its own name. Elements refer to each other using their _qualified names_ which are relative to the common namespaces. By means of import statements, these names can be further abbreviated.
+Our languages's definition of a _Package_ is as follows: A package has a name and contains other named elements. A named element is either another 
+_Package_ or a _Type_. Within a package, elements must have unique names. The _fully qualified name_ (FQN) of a named element consists of the FQN of its package, 
+a separator '_._' and its own simple name. Elements refer to each other using their _qualified names_ which are relative to the common namespaces. By means 
+of import statements, these names can be further abbreviated. That sounds all a bit complicated but the good thing is that Xtext comes with exactly such a default 
+semantic for namespaces. Though, all aspects of this semantic are adaptable but for this tutorial we will stick with the defaults.
 
-In analogy with Java we define packages implicitly: Rather than introducing a model element for packages in our language, we let elements declare which package they belong to by a statement. That way, elements of the same package can be declared in distinct places, even in different files.  
+After we have successfully evolved our language, so that it allows to work with packages and imports, the following example should be valid syntax:
 
-Let's start to modify our grammar now. First we introduce the rule @AbstractElement@:
+bc.. package my.types {
+  datatype String
+  datatype Bool
+}
+
+package my.entities {
+  
+  import my.types.*
+  
+  entity Session {
+    title: String
+    isTutorial : Bool
+  }
+
+  entity Conference {
+    name : String
+    attendees : Person*
+    speakers : Speaker*
+  }
+
+  entity Person {
+    name : String
+  }
+
+  entity Speaker extends Person {
+    sessions : Session*
+  }
+}
+
+p. Let's start to modify our grammar now. First we introduce the rule _AbstractElement_:
 
 bc.. AbstractElement:
 	PackageDeclaration | Type;
 
-p.  @Model@ should now call @AbstractElement@ instead of @Type@:  
+p.  _DomainModel_ should now call _AbstractElement_ instead of _Type_:  
 	
-bc.. Model:
+bc.. DomainModel:
 	(elements+=AbstractElement)*;
 
-p. To allow qualified names, we need a new rule @QualifiedName@. This rule returns a string. Ecore considers strings to be values rather than objects (see the section on "Ecore":#model_metamodel). A rule that returns such a value is called a _datatype rule_ in Xtext. As datatypes don't have properties, a datatype rule must not contain any assignments.       
+p. To allow qualified names, we need a new rule _QualifiedName_. This rule returns a string. But we do not want this to be a terminal rule, as terminal 
+rules have special semantics (they are used contextless in the lexer) which often cause problems. Instead we want it to be a parser rule, but one which
+doesn't return an instance of an _EClass_ from the referenced _EPackage_ but just return a String. Such rules are called _data type rules_, because they return 
+instances of _EDatatype_ as opposed to instances of _EClass_. String is the most often used _EDataType_ in this context and is therefore the default return 
+type for data type rules. The rule looks like this:
 
 bc.. QualifiedName:
 	ID ('.' ID)*;
-	
-p. (Note that the return type of this rule is derived to be Ecore's @EString@. If you wanted to make this explicit, you would have to import the @EcorePackage@ first.) Given the @QualifiedName@ rule, we can now define the rule for @PackageDeclaration@ choosing curly braces as delimiters:
+
+p. Note, that Xtext automatically figures out that the rule is a _data type rule_ rather then a normal parser rule, because it doesn't contain any assignments and all rule 
+calls go to either other _data type rules_ or other _terminal rules_. For a _data type rule_ the parser simply concats all the text it has consumed and returns it as a string.
+The transformation to a user defined data type is done by so called _ValueConverters_. But as we use strings we don't need to care about _ValueConverters_ here.
+
+Next up we need to define the syntax of _PackageDeclarations_, which makes use of the _QualifiedName_ rule but doesn't make use of anything we haven't yet talked about.
 
 bc.. PackageDeclaration:
 	'package' name=QualifiedName '{'
 		(elements+=AbstractElement)*
 	'}';
 	
-p. Having qualified names at hand, we want to specify cross references that way, too. By default, Xtext assumes the rule @ID@ as the syntax for cross references, which has been fully sufficient so far. You can specify a different rule using the '|' character in the cross reference definition:  
+p. Having qualified names at hand, we want to specify cross references that way, too. As mentioned by default, Xtext assumes the rule _ID_ as the syntax for cross references, 
+which has been fully sufficient so far. But now we want to allow fully qualified names as well, so we explicitly specifiy the syntax rule after a delimiter '|':
+
+fn.. Note, that the '|' has nothing to do with the previously introduced alternative operator. In the context of a cross reference it is simply a delimiter.  
 
 bc.. Entity:
 	'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
@@ -197,20 +349,26 @@ p. and
 bc.. TypeRef:
 	referenced=[Type|QualifiedName] (multi?='*')?;
 
-p. As the last step, we introduce imports. An @Import@ is an @AbstractElement@, too
+p. As the last step, we introduce imports. An _Import_ is an _AbstractElement_, too, which means that it can occur as a child of _DomainModel_ as well as of _PackageDeclaration_.
 
 bc.. AbstractElement:
 	PackageDeclaration | Type | Import;
 
-p. An import statement refers to a qualified name. By means of the wildcard characer '@*@', multiple names can be imported with one statement. That requires a new datatype rule @QualifiedNameWithWildCard@:
+p. An imported namesapce is not just a qualified name but it also allows an optional wildcard characer '_*_' at the end, so that multiple names can be imported 
+with one statement. That requires a new datatype rule _QualifiedNameWithWildCard_:
 
 bc.. QualifiedNameWithWildCard:
 	QualifiedName '.*'?;
 
-Import:
+The declaration of the _Import_ rule should look familiar by now:
+
+bc.. Import:
 	'import' importedNamespace=QualifiedNameWithWildCard;
 
-p. Using the feature @importedNamespace@ in the assignment signals that the specified string describes a namespace. This information will be picked up by the so called "scope provider":#scoping at runtime. Xtext has just a few such naming conventions, i.e. to look for a feature called @name@ when resolving cross-references.  
+p. The default scoping implementation is based on naming conventions. First everything which has a name is referenceable. By default something has a name if it has a property _'name'_.
+If such an _EAttribute_ is available, the default implementation computes a qualified name by asking the container for its name and concatenates the two names separated by a dot.
+The computation of qualified names can be arbitrarily changed by implementing a _IQualifedNameProvider_. The other naming convention is that if some 
+element has an EAttribute 'importedNamespace' that value is used as a namespace import and is automatically prefixed to any simple names used within that namespace.
 
 That's all for the grammar. It should now read as 
 
@@ -262,4 +420,5 @@ QualifiedName:
 QualifiedNameWithWildCard:
 	QualifiedName '.*'?;
 
-p. Now Regenerate the language infrastructure as described in the previous section, and give the editor a try. You can even split up your model into smaller parts and have cross-references across file boundaries, as long as the referenced models are on the classpath.  
+p. Now Regenerate the language infrastructure as described in the previous section, and give the editor a try. You can even split up 
+your model into smaller parts and have cross-references across file boundaries, as long as the referenced models are on the classpath.
