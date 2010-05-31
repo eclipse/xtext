@@ -7,11 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.testSetups;
 
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public enum TestEnum {
 
-	FirstValue, SecondValue
+	FirstValue("Zonk"),
+	SecondValue("Bla");
 	
+	String string;
+	
+	TestEnum(String string) {
+		this.string = string;
+	}
+
 }
+

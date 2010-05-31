@@ -39,6 +39,7 @@ import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
@@ -108,16 +109,20 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		result.setFullyQualifiedName(getQualifiedName(typeBinding));
 		createNestedTypes(typeBinding, result);
 		createMethods(typeBinding, result);
-		for (IVariableBinding field : typeBinding.getDeclaredFields()) {
-			if (!field.isSynthetic())
-				result.getMembers().add(createField(field));
-		}
+		createFields(typeBinding, result);
 		setSuperTypes(typeBinding, result);
 		for (ITypeBinding variable : typeBinding.getTypeParameters()) {
 			result.getTypeParameters().add(createTypeParameter(variable, result));
 		}
 		createAnnotationValues(typeBinding, result);
 		return result;
+	}
+
+	protected void createFields(ITypeBinding typeBinding, JvmDeclaredType result) {
+		for (IVariableBinding field : typeBinding.getDeclaredFields()) {
+			if (!field.isSynthetic())
+				result.getMembers().add(createField(field));
+		}
 	}
 
 	public String getQualifiedName(ITypeBinding binding) {
@@ -144,9 +149,9 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			}
 			if (typeBinding.isParameterizedType())
 				typeBinding = typeBinding.getErasure();
-			JvmAnnotationValue annotationValue = originalTypeBinding.isArray() ? createArrayAnnotationValue(
-					memberValuePair, createAnnotationValue(typeBinding)) : createAnnotationValue(memberValuePair,
-					createAnnotationValue(typeBinding));
+			JvmAnnotationValue annotationValue = originalTypeBinding.isArray() ? 
+					createArrayAnnotationValue(memberValuePair, createAnnotationValue(typeBinding)) : 
+					createAnnotationValue(memberValuePair, createAnnotationValue(typeBinding));
 			annotationReference.getValues().add(annotationValue);
 			annotationValue.setOperation(createMethodProxy(annotation.getAnnotationType(), memberValuePair.getName()));
 		}
@@ -173,7 +178,11 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 					createAnnotationReference((JvmAnnotationTarget) result, nestedAnnotation);
 				}
 			} else if (result instanceof JvmEnumAnnotationValue) {
-				log.error("Enumeration types are not yet fully supported.");
+				for (int i = 0; i < length; i++) {
+					IVariableBinding variableBinding = (IVariableBinding) (valueIsArray ? Array.get(value, i) : value);
+					JvmEnumerationLiteral proxy = createEnumLiteralProxy(variableBinding);
+					valuesAsList.add(proxy);
+				}
 			} else {
 				for (int i = 0; i < length; i++) {
 					valuesAsList.add(valueIsArray ? Array.get(value, i) : value);
@@ -221,7 +230,9 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			IAnnotationBinding nestedAnnotation = (IAnnotationBinding) value;
 			createAnnotationReference((JvmAnnotationTarget) result, nestedAnnotation);
 		} else if (result instanceof JvmEnumAnnotationValue) {
-			log.error("Enumeration types are not yet fully supported.");
+			IVariableBinding variableBinding = (IVariableBinding) value;
+			JvmEnumerationLiteral proxy = createEnumLiteralProxy(variableBinding);
+			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(proxy));
 		} else {
 			EStructuralFeature structuralFeature = result.eClass().getEStructuralFeature("values");
 			Object convertedValue = EcoreFactory.eINSTANCE.createFromString((EDataType) structuralFeature.getEType(),
@@ -265,6 +276,13 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		URI uri = uriHelper.getFullURI(typeBinding, methodName);
 		proxy.eSetProxyURI(uri);
 		return (JvmOperation) proxy;
+	}
+	
+	public JvmEnumerationLiteral createEnumLiteralProxy(IVariableBinding binding) {
+		InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmEnumerationLiteral();
+		URI uri = uriHelper.getFullURI(binding);
+		proxy.eSetProxyURI(uri);
+		return (JvmEnumerationLiteral) proxy;
 	}
 
 	public JvmAnnotationType createAnnotationProxy(ITypeBinding annotation) {
@@ -329,7 +347,12 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		JvmEnumerationType result = TypesFactory.eINSTANCE.createJvmEnumerationType();
 		result.setFullyQualifiedName(getQualifiedName(binding));
 		setVisibility(result, binding.getModifiers());
-		log.error("Enumeration types are not yet fully supported.");
+		setTypeModifiers(binding, result);
+		createNestedTypes(binding, result);
+		createMethods(binding, result);
+		createFields(binding, result);
+		setSuperTypes(binding, result);
+		createAnnotationValues(binding, result);
 		return result;
 	}
 
@@ -419,7 +442,11 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	}
 
 	public JvmField createField(IVariableBinding field) {
-		JvmField result = TypesFactory.eINSTANCE.createJvmField();
+		JvmField result;
+		if (!field.isEnumConstant())
+			result = TypesFactory.eINSTANCE.createJvmField();
+		else
+			result = TypesFactory.eINSTANCE.createJvmEnumerationLiteral();
 		String typeName = getQualifiedName(field.getDeclaringClass());
 		String fqn = typeName + "." + field.getName();
 		result.setFullyQualifiedName(fqn);

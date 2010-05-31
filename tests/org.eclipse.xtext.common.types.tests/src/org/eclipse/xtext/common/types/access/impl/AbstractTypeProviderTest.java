@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.access.impl;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -35,6 +36,8 @@ import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmDoubleAnnotationValue;
+import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFloatAnnotationValue;
@@ -71,6 +74,7 @@ import org.eclipse.xtext.common.types.testSetups.ParameterizedMethods;
 import org.eclipse.xtext.common.types.testSetups.ParameterizedTypes;
 import org.eclipse.xtext.common.types.testSetups.StaticNestedTypes;
 import org.eclipse.xtext.common.types.testSetups.TestAnnotation;
+import org.eclipse.xtext.common.types.testSetups.TestEnum;
 import org.eclipse.xtext.common.types.testSetups.TypeWithInnerAnnotation;
 import org.eclipse.xtext.common.types.testSetups.TypeWithInnerEnum;
 
@@ -481,6 +485,23 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		int constructorCount = EmptyAbstractClass.class.getDeclaredConstructors().length;
 		assertEquals(1, constructorCount);
 		assertEquals(1, type.getMembers().size());
+	}
+	
+	public void testMemberCount_16() {
+		String typeName = TestEnum.class.getName();
+		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
+		int innerTypesCount = TestEnum.class.getDeclaredClasses().length;
+		assertEquals(0, innerTypesCount);
+		int methodCount = TestEnum.class.getDeclaredMethods().length;
+		// TestEnum.values + TestEnum.valueOf
+		assertEquals(2, methodCount);
+		int constructorCount = TestEnum.class.getDeclaredConstructors().length;
+		assertEquals(1, constructorCount);
+		int fieldCount = TestEnum.class.getDeclaredFields().length;
+		// FirstValue, SecondValue, string, ENUM$VALUES
+		assertEquals(Arrays.toString(TestEnum.class.getDeclaredFields()), 4, fieldCount);
+		// ENUM$VALUES is synthetic
+		assertEquals(type.getMembers().toString(), innerTypesCount + methodCount + constructorCount + fieldCount - 1, type.getMembers().size());
 	}
 
 	public void test_twoListParamsNoResult_01() {
@@ -1357,6 +1378,36 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(Annotation.class.getName(), type.getSuperTypes().get(0).getCanonicalName());
 	}
 	
+	public void testEnum_01() throws Exception {
+		String typeName = TestEnum.class.getName();
+		JvmType type = getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+		assertTrue(type instanceof JvmEnumerationType);
+		diagnose(type);
+	}
+	
+	public void testEnum_02() throws Exception {
+		String typeName = TestEnum.class.getName();
+		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
+		assertEquals(1, type.getSuperTypes().size());
+		assertEquals(Enum.class.getName(), type.getSuperTypes().get(0).getType().getCanonicalName());
+		String superTypeName = Enum.class.getName() + "<" + typeName + ">";
+		assertEquals(superTypeName, type.getSuperTypes().get(0).getCanonicalName());
+	}
+	
+	public void testEnum_03() throws Exception {
+		String typeName = TestEnum.class.getName();
+		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
+		assertEquals(2, type.getLiterals().size());
+		Set<String> expectedLiterals = Sets.newHashSet(TestEnum.FirstValue.toString(), TestEnum.SecondValue.toString());
+		for(JvmEnumerationLiteral literal: type.getLiterals()) {
+			assertTrue(expectedLiterals.remove(literal.getSimpleName()));
+			assertSame(type, literal.getEnumType());
+			assertEquals(JvmVisibility.PUBLIC, literal.getVisibility());
+		}
+		assertTrue(expectedLiterals.toString(), expectedLiterals.isEmpty());
+	}
+	
 	public void testAnnotations_01() throws Exception {
 		String typeName = TestAnnotation.Annotated.class.getName();
 		JvmAnnotationType annotationType = (JvmAnnotationType) getTypeProvider().findTypeByName(TestAnnotation.class.getName());
@@ -1668,7 +1719,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("MyString", nestedValue.getValues().get(0));
 	}
 	
-	public void testAnnotationAnnotationValue_03() throws Exception {
+	public void testAnnotationAnnotationValue_02() throws Exception {
 		JvmAnnotationAnnotationValue value = (JvmAnnotationAnnotationValue) getConstructorParameterAnnotationValue("annotationValue");
 		assertEquals(1, value.getValues().size());
 		assertEquals(1, value.getAnnotations().size());
@@ -1680,7 +1731,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("MyString", nestedValue.getValues().get(0));
 	}
 	
-	public void testAnnotationAnnotationValue_02() throws Exception {
+	public void testAnnotationAnnotationValue_03() throws Exception {
 		JvmAnnotationAnnotationValue value = (JvmAnnotationAnnotationValue) getMethodParameterAnnotationValue("annotationValue");
 		assertEquals(1, value.getValues().size());
 		assertEquals(1, value.getAnnotations().size());
@@ -1690,6 +1741,30 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		JvmStringAnnotationValue nestedValue = (JvmStringAnnotationValue) annotationReference.getValues().get(0);
 		assertEquals(1, nestedValue.getValues().size());
 		assertEquals("MyString", nestedValue.getValues().get(0));
+	}
+	
+	public void testEnumAnnotationValue_01() throws Exception {
+		JvmEnumAnnotationValue value = (JvmEnumAnnotationValue) getAnnotationValue("enumValue");
+		assertEquals(1, value.getValues().size());
+		JvmEnumerationLiteral enumLiteral = value.getValues().get(0);
+		assertFalse(enumLiteral.eIsProxy());
+		assertEquals(TestEnum.FirstValue.toString(), enumLiteral.getSimpleName());
+	}
+	
+	public void testEnumAnnotationValue_02() throws Exception {
+		JvmEnumAnnotationValue value = (JvmEnumAnnotationValue) getConstructorParameterAnnotationValue("enumValue");
+		assertEquals(1, value.getValues().size());
+		JvmEnumerationLiteral enumLiteral = value.getValues().get(0);
+		assertFalse(enumLiteral.eIsProxy());
+		assertEquals(TestEnum.FirstValue.toString(), enumLiteral.getSimpleName());
+	}
+	
+	public void testEnumAnnotationValue_03() throws Exception {
+		JvmEnumAnnotationValue value = (JvmEnumAnnotationValue) getMethodParameterAnnotationValue("enumValue");
+		assertEquals(1, value.getValues().size());
+		JvmEnumerationLiteral enumLiteral = value.getValues().get(0);
+		assertFalse(enumLiteral.eIsProxy());
+		assertEquals(TestEnum.FirstValue.toString(), enumLiteral.getSimpleName());
 	}
 	
 	public JvmAnnotationValue getAnnotationValue(String name) {

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JvmEnumerationLiteralItemProvider.java,v 1.1 2010/03/04 10:26:33 szarnekow Exp $
+ * $Id: JvmEnumerationLiteralItemProvider.java,v 1.2 2010/05/31 13:09:58 szarnekow Exp $
  */
 package org.eclipse.xtext.common.types.provider;
 
@@ -19,6 +19,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.JvmEnumerationLiteral} object.
@@ -27,7 +28,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * @generated
  */
 public class JvmEnumerationLiteralItemProvider
-	extends JvmIdentifyableElementItemProvider
+	extends JvmFieldItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -78,7 +79,10 @@ public class JvmEnumerationLiteralItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_JvmEnumerationLiteral_type");
+		String label = ((JvmEnumerationLiteral)object).getFullyQualifiedName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_JvmEnumerationLiteral_type") :
+			getString("_UI_JvmEnumerationLiteral_type") + " " + label;
 	}
 
 	/**
