@@ -49,10 +49,15 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	private static final String CACHE_KEY = DefaultResourceDescriptionManager.class.getName() + "#getResourceDescription";
 	
 	public IResourceDescription getResourceDescription(final Resource resource) {
-		return cache.get(CACHE_KEY, resource, new Provider<IResourceDescription>(){
+		return cache.get(CACHE_KEY, resource, new Provider<IResourceDescription>() {
 			public IResourceDescription get() {
-				return new DefaultResourceDescription(resource, nameProvider);
-			}});
+				return createResourceDescription(resource, nameProvider);
+			}
+		});
+	}
+
+	protected IResourceDescription createResourceDescription(Resource resource, IQualifiedNameProvider nameProvider) {
+		return new DefaultResourceDescription(resource, nameProvider);
 	}
 	
 	public void setNameProvider(IQualifiedNameProvider nameProvider) {
