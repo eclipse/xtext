@@ -51,12 +51,12 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	public IResourceDescription getResourceDescription(final Resource resource) {
 		return cache.get(CACHE_KEY, resource, new Provider<IResourceDescription>() {
 			public IResourceDescription get() {
-				return createResourceDescription(resource, nameProvider);
+				return internalGetResourceDescription(resource, nameProvider);
 			}
 		});
 	}
 
-	protected IResourceDescription createResourceDescription(Resource resource, IQualifiedNameProvider nameProvider) {
+	protected IResourceDescription internalGetResourceDescription(Resource resource, IQualifiedNameProvider nameProvider) {
 		return new DefaultResourceDescription(resource, nameProvider);
 	}
 	
