@@ -20,23 +20,23 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.example.domainmodel.AbstractElement;
+import org.eclipse.xtext.example.domainmodel.DomainModel;
 import org.eclipse.xtext.example.domainmodel.DomainmodelPackage;
-import org.eclipse.xtext.example.domainmodel.Model;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Model</b></em>'.
+ * An implementation of the model object '<em><b>Domain Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.example.domainmodel.impl.ModelImpl#getElements <em>Elements</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.domainmodel.impl.DomainModelImpl#getElements <em>Elements</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ModelImpl extends MinimalEObjectImpl.Container implements Model
+public class DomainModelImpl extends MinimalEObjectImpl.Container implements DomainModel
 {
   /**
    * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
@@ -53,7 +53,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ModelImpl()
+  protected DomainModelImpl()
   {
     super();
   }
@@ -66,7 +66,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   @Override
   protected EClass eStaticClass()
   {
-    return DomainmodelPackage.Literals.MODEL;
+    return DomainmodelPackage.Literals.DOMAIN_MODEL;
   }
 
   /**
@@ -78,7 +78,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     if (elements == null)
     {
-      elements = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, DomainmodelPackage.MODEL__ELEMENTS);
+      elements = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, DomainmodelPackage.DOMAIN_MODEL__ELEMENTS);
     }
     return elements;
   }
@@ -93,7 +93,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case DomainmodelPackage.MODEL__ELEMENTS:
+      case DomainmodelPackage.DOMAIN_MODEL__ELEMENTS:
         return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -109,7 +109,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case DomainmodelPackage.MODEL__ELEMENTS:
+      case DomainmodelPackage.DOMAIN_MODEL__ELEMENTS:
         return getElements();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -126,7 +126,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case DomainmodelPackage.MODEL__ELEMENTS:
+      case DomainmodelPackage.DOMAIN_MODEL__ELEMENTS:
         getElements().clear();
         getElements().addAll((Collection<? extends AbstractElement>)newValue);
         return;
@@ -144,7 +144,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case DomainmodelPackage.MODEL__ELEMENTS:
+      case DomainmodelPackage.DOMAIN_MODEL__ELEMENTS:
         getElements().clear();
         return;
     }
@@ -161,10 +161,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case DomainmodelPackage.MODEL__ELEMENTS:
+      case DomainmodelPackage.DOMAIN_MODEL__ELEMENTS:
         return elements != null && !elements.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //ModelImpl
+} //DomainModelImpl

@@ -16,12 +16,12 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.xtext.example.domainmodel.AbstractElement;
 import org.eclipse.xtext.example.domainmodel.Attribute;
 import org.eclipse.xtext.example.domainmodel.DataType;
+import org.eclipse.xtext.example.domainmodel.DomainModel;
 import org.eclipse.xtext.example.domainmodel.DomainmodelFactory;
 import org.eclipse.xtext.example.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.Feature;
 import org.eclipse.xtext.example.domainmodel.Import;
-import org.eclipse.xtext.example.domainmodel.Model;
 import org.eclipse.xtext.example.domainmodel.Operation;
 import org.eclipse.xtext.example.domainmodel.PackageDeclaration;
 import org.eclipse.xtext.example.domainmodel.Parameter;
@@ -45,7 +45,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass modelEClass = null;
+  private EClass domainModelEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -220,9 +220,9 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getModel()
+  public EClass getDomainModel()
   {
-    return modelEClass;
+    return domainModelEClass;
   }
 
   /**
@@ -230,9 +230,9 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Elements()
+  public EReference getDomainModel_Elements()
   {
-    return (EReference)modelEClass.getEStructuralFeatures().get(0);
+    return (EReference)domainModelEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -545,8 +545,8 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
     isCreated = true;
 
     // Create classes and their features
-    modelEClass = createEClass(MODEL);
-    createEReference(modelEClass, MODEL__ELEMENTS);
+    domainModelEClass = createEClass(DOMAIN_MODEL);
+    createEReference(domainModelEClass, DOMAIN_MODEL__ELEMENTS);
 
     abstractElementEClass = createEClass(ABSTRACT_ELEMENT);
 
@@ -635,8 +635,8 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
     parameterEClass.getESuperTypes().add(this.getTypedElement());
 
     // Initialize classes and features; add operations and parameters
-    initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getModel_Elements(), this.getAbstractElement(), null, "elements", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(domainModelEClass, DomainModel.class, "DomainModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getDomainModel_Elements(), this.getAbstractElement(), null, "elements", null, 0, -1, DomainModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(abstractElementEClass, AbstractElement.class, "AbstractElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

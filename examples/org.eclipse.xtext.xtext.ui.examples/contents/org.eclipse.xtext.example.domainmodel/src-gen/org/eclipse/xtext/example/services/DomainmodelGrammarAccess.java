@@ -17,12 +17,12 @@ import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+	public class DomainModelElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DomainModel");
 		private final Assignment cElementsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cElementsAbstractElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
-		//Model:
+		//DomainModel:
 		//	elements+=AbstractElement*;
 		public ParserRule getRule() { return rule; }
 
@@ -268,37 +268,33 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 	public class AttributeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Attribute");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cAttrKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cTypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cTypeTypeRefParserRuleCall_3_0 = (RuleCall)cTypeAssignment_3.eContents().get(0);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cTypeTypeRefParserRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
 		
 		//Attribute:
-		//	"attr" name=ID ":" type=TypeRef;
+		//	name=ID ":" type=TypeRef;
 		public ParserRule getRule() { return rule; }
 
-		//"attr" name=ID ":" type=TypeRef
+		//name=ID ":" type=TypeRef
 		public Group getGroup() { return cGroup; }
 
-		//"attr"
-		public Keyword getAttrKeyword_0() { return cAttrKeyword_0; }
-
 		//name=ID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
 		//":"
-		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
+		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 
 		//type=TypeRef
-		public Assignment getTypeAssignment_3() { return cTypeAssignment_3; }
+		public Assignment getTypeAssignment_2() { return cTypeAssignment_2; }
 
 		//TypeRef
-		public RuleCall getTypeTypeRefParserRuleCall_3_0() { return cTypeTypeRefParserRuleCall_3_0; }
+		public RuleCall getTypeTypeRefParserRuleCall_2_0() { return cTypeTypeRefParserRuleCall_2_0; }
 	}
 
 	public class ReferenceElements extends AbstractParserRuleElementFinder {
@@ -602,7 +598,7 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getProtectedProtectedKeyword_2_0() { return cProtectedProtectedKeyword_2_0; }
 	}
 	
-	private ModelElements pModel;
+	private DomainModelElements pDomainModel;
 	private AbstractElementElements pAbstractElement;
 	private ImportElements pImport;
 	private PackageDeclarationElements pPackageDeclaration;
@@ -642,14 +638,14 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	
-	//Model:
+	//DomainModel:
 	//	elements+=AbstractElement*;
-	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+	public DomainModelElements getDomainModelAccess() {
+		return (pDomainModel != null) ? pDomainModel : (pDomainModel = new DomainModelElements());
 	}
 	
-	public ParserRule getModelRule() {
-		return getModelAccess().getRule();
+	public ParserRule getDomainModelRule() {
+		return getDomainModelAccess().getRule();
 	}
 
 	//AbstractElement:
@@ -733,7 +729,7 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Attribute:
-	//	"attr" name=ID ":" type=TypeRef;
+	//	name=ID ":" type=TypeRef;
 	public AttributeElements getAttributeAccess() {
 		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
 	}

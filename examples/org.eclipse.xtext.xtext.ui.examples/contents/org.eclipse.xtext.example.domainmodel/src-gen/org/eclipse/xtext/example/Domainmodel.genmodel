@@ -14,8 +14,8 @@
       <genEnumLiterals ecoreEnumLiteral="Domainmodel.ecore#//Visibility/private"/>
       <genEnumLiterals ecoreEnumLiteral="Domainmodel.ecore#//Visibility/protected"/>
     </genEnums>
-    <genClasses ecoreClass="Domainmodel.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//Model/elements"/>
+    <genClasses ecoreClass="Domainmodel.ecore#//DomainModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//DomainModel/elements"/>
     </genClasses>
     <genClasses ecoreClass="Domainmodel.ecore#//AbstractElement"/>
     <genClasses ecoreClass="Domainmodel.ecore#//Import">

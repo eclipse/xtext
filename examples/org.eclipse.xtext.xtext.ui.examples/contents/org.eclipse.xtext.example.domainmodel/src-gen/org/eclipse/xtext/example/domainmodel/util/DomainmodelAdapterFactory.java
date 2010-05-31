@@ -78,9 +78,9 @@ public class DomainmodelAdapterFactory extends AdapterFactoryImpl
     new DomainmodelSwitch<Adapter>()
     {
       @Override
-      public Adapter caseModel(Model object)
+      public Adapter caseDomainModel(DomainModel object)
       {
-        return createModelAdapter();
+        return createDomainModelAdapter();
       }
       @Override
       public Adapter caseAbstractElement(AbstractElement object)
@@ -175,16 +175,16 @@ public class DomainmodelAdapterFactory extends AdapterFactoryImpl
 
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.domainmodel.Model <em>Model</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.domainmodel.DomainModel <em>Domain Model</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.example.domainmodel.Model
+   * @see org.eclipse.xtext.example.domainmodel.DomainModel
    * @generated
    */
-  public Adapter createModelAdapter()
+  public Adapter createDomainModelAdapter()
   {
     return null;
   }

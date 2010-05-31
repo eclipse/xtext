@@ -58,25 +58,25 @@ import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
 
 
 
-// Entry rule entryRuleModel
-entryRuleModel 
+// Entry rule entryRuleDomainModel
+entryRuleDomainModel 
 :
-{ before(grammarAccess.getModelRule()); }
-	 ruleModel
-{ after(grammarAccess.getModelRule()); } 
+{ before(grammarAccess.getDomainModelRule()); }
+	 ruleDomainModel
+{ after(grammarAccess.getDomainModelRule()); } 
 	 EOF 
 ;
 
-// Rule Model
-ruleModel
+// Rule DomainModel
+ruleDomainModel
     @init {
 		int stackSize = keepStackSize();
     }
 	:
 (
-{ before(grammarAccess.getModelAccess().getElementsAssignment()); }
-(rule__Model__ElementsAssignment)*
-{ after(grammarAccess.getModelAccess().getElementsAssignment()); }
+{ before(grammarAccess.getDomainModelAccess().getElementsAssignment()); }
+(rule__DomainModel__ElementsAssignment)*
+{ after(grammarAccess.getDomainModelAccess().getElementsAssignment()); }
 )
 
 ;
@@ -1214,11 +1214,9 @@ rule__Attribute__Group__0__Impl
     }
 :
 (
-{ before(grammarAccess.getAttributeAccess().getAttrKeyword_0()); }
-
-	'attr' 
-
-{ after(grammarAccess.getAttributeAccess().getAttrKeyword_0()); }
+{ before(grammarAccess.getAttributeAccess().getNameAssignment_0()); }
+(rule__Attribute__NameAssignment_0)
+{ after(grammarAccess.getAttributeAccess().getNameAssignment_0()); }
 )
 
 ;
@@ -1245,9 +1243,11 @@ rule__Attribute__Group__1__Impl
     }
 :
 (
-{ before(grammarAccess.getAttributeAccess().getNameAssignment_1()); }
-(rule__Attribute__NameAssignment_1)
-{ after(grammarAccess.getAttributeAccess().getNameAssignment_1()); }
+{ before(grammarAccess.getAttributeAccess().getColonKeyword_1()); }
+
+	':' 
+
+{ after(grammarAccess.getAttributeAccess().getColonKeyword_1()); }
 )
 
 ;
@@ -1262,7 +1262,6 @@ rule__Attribute__Group__2
     }
 :
 	rule__Attribute__Group__2__Impl
-	rule__Attribute__Group__3
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -1274,47 +1273,15 @@ rule__Attribute__Group__2__Impl
     }
 :
 (
-{ before(grammarAccess.getAttributeAccess().getColonKeyword_2()); }
-
-	':' 
-
-{ after(grammarAccess.getAttributeAccess().getColonKeyword_2()); }
+{ before(grammarAccess.getAttributeAccess().getTypeAssignment_2()); }
+(rule__Attribute__TypeAssignment_2)
+{ after(grammarAccess.getAttributeAccess().getTypeAssignment_2()); }
 )
 
 ;
 finally {
 	restoreStackSize(stackSize);
 }
-
-
-rule__Attribute__Group__3
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-	rule__Attribute__Group__3__Impl
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Attribute__Group__3__Impl
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getAttributeAccess().getTypeAssignment_3()); }
-(rule__Attribute__TypeAssignment_3)
-{ after(grammarAccess.getAttributeAccess().getTypeAssignment_3()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
 
 
 
@@ -2233,14 +2200,14 @@ finally {
 
 
 
-rule__Model__ElementsAssignment
+rule__DomainModel__ElementsAssignment
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getModelAccess().getElementsAbstractElementParserRuleCall_0()); }
-	ruleAbstractElement{ after(grammarAccess.getModelAccess().getElementsAbstractElementParserRuleCall_0()); }
+{ before(grammarAccess.getDomainModelAccess().getElementsAbstractElementParserRuleCall_0()); }
+	ruleAbstractElement{ after(grammarAccess.getDomainModelAccess().getElementsAbstractElementParserRuleCall_0()); }
 )
 
 ;
@@ -2357,14 +2324,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Attribute__NameAssignment_1
+rule__Attribute__NameAssignment_0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_1_0()); }
-	RULE_ID{ after(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_1_0()); }
+{ before(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_0_0()); }
+	RULE_ID{ after(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_0_0()); }
 )
 
 ;
@@ -2372,14 +2339,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Attribute__TypeAssignment_3
+rule__Attribute__TypeAssignment_2
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getAttributeAccess().getTypeTypeRefParserRuleCall_3_0()); }
-	ruleTypeRef{ after(grammarAccess.getAttributeAccess().getTypeTypeRefParserRuleCall_3_0()); }
+{ before(grammarAccess.getAttributeAccess().getTypeTypeRefParserRuleCall_2_0()); }
+	ruleTypeRef{ after(grammarAccess.getAttributeAccess().getTypeTypeRefParserRuleCall_2_0()); }
 )
 
 ;

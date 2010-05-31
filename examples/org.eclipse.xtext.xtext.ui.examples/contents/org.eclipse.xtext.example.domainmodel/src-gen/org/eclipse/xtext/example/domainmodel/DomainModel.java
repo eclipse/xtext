@@ -11,21 +11,21 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Model</b></em>'.
+ * A representation of the model object '<em><b>Domain Model</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.example.domainmodel.Model#getElements <em>Elements</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.domainmodel.DomainModel#getElements <em>Elements</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtext.example.domainmodel.DomainmodelPackage#getModel()
+ * @see org.eclipse.xtext.example.domainmodel.DomainmodelPackage#getDomainModel()
  * @model
  * @generated
  */
-public interface Model extends EObject
+public interface DomainModel extends EObject
 {
   /**
    * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
@@ -37,10 +37,10 @@ public interface Model extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Elements</em>' containment reference list.
-   * @see org.eclipse.xtext.example.domainmodel.DomainmodelPackage#getModel_Elements()
+   * @see org.eclipse.xtext.example.domainmodel.DomainmodelPackage#getDomainModel_Elements()
    * @model containment="true"
    * @generated
    */
   EList<AbstractElement> getElements();
 
-} // Model
+} // DomainModel

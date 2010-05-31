@@ -3,12 +3,12 @@
  */
 package org.eclipse.xtext.example.formatting;
 
-import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
-import org.eclipse.xtext.example.services.DomainmodelGrammarAccess.EntityElements;
-import org.eclipse.xtext.example.services.DomainmodelGrammarAccess.PackageDeclarationElements;
+import java.util.List;
+
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
-
+import org.eclipse.xtext.util.Pair;
 
 /**
  * This class contains custom formatting description.
@@ -22,27 +22,23 @@ public class DomainmodelFormatter extends AbstractDeclarativeFormatter {
 	
 	@Override
 	protected void configureFormatting(FormattingConfig c) {
-		DomainmodelGrammarAccess grammarAccess = (DomainmodelGrammarAccess) getGrammarAccess();
-		c.setAutoLinewrap(80);
+		org.eclipse.xtext.example.services.DomainmodelGrammarAccess f = (org.eclipse.xtext.example.services.DomainmodelGrammarAccess) getGrammarAccess();
+
+		c.setAutoLinewrap(120);
 		
-		PackageDeclarationElements pack = grammarAccess.getPackageDeclarationAccess();
-		c.setLinewrap().before(pack.getPackageKeyword_0());
-		c.setIndentation(pack.getLeftCurlyBracketKeyword_2(), pack.getRightCurlyBracketKeyword_4());
-		c.setLinewrap().before(pack.getRightCurlyBracketKeyword_4());
+		c.setLinewrap(1, 2, 3).around(f.getAbstractElementRule());
+		c.setLinewrap(1, 2, 3).around(f.getPackageDeclarationRule());
+		c.setLinewrap(1, 1, 2).around(f.getFeatureRule());
+		c.setNoSpace().before(f.getTypeRefAccess().getMultiAsteriskKeyword_1_0());
 		
-		c.setLinewrap().before(grammarAccess.getImportAccess().getImportKeyword_0());
+		List<Pair<Keyword,Keyword>> pairs = f.findKeywordPairs("{", "}");
+		for (Pair<Keyword, Keyword> pair : pairs) {
+			c.setIndentation(pair.getFirst(), pair.getSecond());
+		}
 		
-		EntityElements entity = grammarAccess.getEntityAccess();
-		c.setLinewrap(2).before(entity.getEntityKeyword_0());
-		c.setIndentation(entity.getLeftCurlyBracketKeyword_3(), entity.getRightCurlyBracketKeyword_5());
-		c.setLinewrap().before(entity.getRightCurlyBracketKeyword_5());
-		c.setLinewrap().after(entity.getRightCurlyBracketKeyword_5());
+		c.setLinewrap(0, 1, 2).before(f.getSL_COMMENTRule());
+		c.setLinewrap(0, 1, 2).before(f.getML_COMMENTRule());
+		c.setLinewrap(0, 1, 1).after(f.getML_COMMENTRule());
 		
-		c.setLinewrap(2).before(grammarAccess.getDataTypeAccess().getDatatypeKeyword_0());
-		c.setLinewrap().after(grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_1_0());
-		c.setLinewrap().before(grammarAccess.getReferenceAccess().getRefKeyword_0());
-		c.setLinewrap().before(grammarAccess.getAttributeAccess().getAttrKeyword_0());
-		c.setNoSpace().around(grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0());
-		c.setNoSpace().before(grammarAccess.getQualifiedNameWithWildCardAccess().getFullStopAsteriskKeyword_1());
 	}
 }

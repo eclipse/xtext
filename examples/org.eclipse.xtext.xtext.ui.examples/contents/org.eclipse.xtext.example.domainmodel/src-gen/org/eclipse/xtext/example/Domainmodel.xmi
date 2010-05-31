@@ -4,9 +4,9 @@
     <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="domainmodel">
       <ePackage href="http://www.example.xtext/Domainmodel#/"/>
     </metamodelDeclarations>
-    <rules xsi:type="xtext:ParserRule" name="Model">
+    <rules xsi:type="xtext:ParserRule" name="DomainModel">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//Model"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//DomainModel"/>
       </type>
       <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="elements" operator="+=">
         <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
@@ -119,7 +119,6 @@
         <classifier xsi:type="ecore:EClass" href="http://www.example.xtext/Domainmodel#//Attribute"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Keyword" value="attr"/>
         <elements xsi:type="xtext:Assignment" feature="name" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </elements>

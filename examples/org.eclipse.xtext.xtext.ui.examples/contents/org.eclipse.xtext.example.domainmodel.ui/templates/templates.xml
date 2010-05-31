@@ -5,24 +5,22 @@
         context="org.eclipse.xtext.example.Domainmodel.Package"
         enabled="true">package ${name} { 
     ${cursor}   
-}
-    </template>
+}</template>
     <template name="DataType" description="template for a DataType"
         id="org.eclipse.xtext.example.Domainmodel.DataType"
         context="org.eclipse.xtext.example.Domainmodel.DataType"
-        enabled="true">datatype ${name}
-    </template>
+        enabled="true">datatype ${name}</template>
     <template name="Entity" description="template for an Entity"
         id="org.eclipse.xtext.example.Domainmodel.Entity"
         context="org.eclipse.xtext.example.Domainmodel.Entity"
-        enabled="true">entity ${name} {
-        ${cursor} 
-    }
-    </template>
+        enabled="true"
+>entity ${name} {
+		${cursor} 
+	}</template>
     <template name="Attribute" description="template for an Attribute"
         id="org.eclipse.xtext.example.Domainmodel.Attribute"
         context="org.eclipse.xtext.example.Domainmodel.Attribute"
-        enabled="true">attr ${attrName} : ${attrType:CrossReference('TypeRef.referenced')}</template>
+        enabled="true">${attrName} : ${attrType:CrossReference('TypeRef.referenced')}</template>
     <template name="Reference" description="template for a Reference"
         id="org.eclipse.xtext.example.Domainmodel.Reference"
         context="org.eclipse.xtext.example.Domainmodel.Reference"

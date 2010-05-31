@@ -61,14 +61,14 @@ public interface DomainmodelPackage extends EPackage
   DomainmodelPackage eINSTANCE = org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl.init();
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.ModelImpl <em>Model</em>}' class.
+   * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.DomainModelImpl <em>Domain Model</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.domainmodel.impl.ModelImpl
-   * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getModel()
+   * @see org.eclipse.xtext.example.domainmodel.impl.DomainModelImpl
+   * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getDomainModel()
    * @generated
    */
-  int MODEL = 0;
+  int DOMAIN_MODEL = 0;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -77,16 +77,16 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL__ELEMENTS = 0;
+  int DOMAIN_MODEL__ELEMENTS = 0;
 
   /**
-   * The number of structural features of the '<em>Model</em>' class.
+   * The number of structural features of the '<em>Domain Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 1;
+  int DOMAIN_MODEL_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.AbstractElementImpl <em>Abstract Element</em>}' class.
@@ -609,25 +609,25 @@ public interface DomainmodelPackage extends EPackage
 
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.Model <em>Model</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.DomainModel <em>Domain Model</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Model</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.Model
+   * @return the meta object for class '<em>Domain Model</em>'.
+   * @see org.eclipse.xtext.example.domainmodel.DomainModel
    * @generated
    */
-  EClass getModel();
+  EClass getDomainModel();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.example.domainmodel.Model#getElements <em>Elements</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.example.domainmodel.DomainModel#getElements <em>Elements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Elements</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.Model#getElements()
-   * @see #getModel()
+   * @see org.eclipse.xtext.example.domainmodel.DomainModel#getElements()
+   * @see #getDomainModel()
    * @generated
    */
-  EReference getModel_Elements();
+  EReference getDomainModel_Elements();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.AbstractElement <em>Abstract Element</em>}'.
@@ -946,14 +946,14 @@ public interface DomainmodelPackage extends EPackage
   interface Literals
   {
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.ModelImpl <em>Model</em>}' class.
+     * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.DomainModelImpl <em>Domain Model</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.domainmodel.impl.ModelImpl
-     * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getModel()
+     * @see org.eclipse.xtext.example.domainmodel.impl.DomainModelImpl
+     * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getDomainModel()
      * @generated
      */
-    EClass MODEL = eINSTANCE.getModel();
+    EClass DOMAIN_MODEL = eINSTANCE.getDomainModel();
 
     /**
      * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
@@ -961,7 +961,7 @@ public interface DomainmodelPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference MODEL__ELEMENTS = eINSTANCE.getModel_Elements();
+    EReference DOMAIN_MODEL__ELEMENTS = eINSTANCE.getDomainModel_Elements();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.AbstractElementImpl <em>Abstract Element</em>}' class.
