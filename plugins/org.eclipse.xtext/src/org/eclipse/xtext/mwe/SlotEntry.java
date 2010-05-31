@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -33,6 +34,8 @@ public class SlotEntry {
 	private String nsURI;
 	private String type;
 	private boolean firstOnly = false;
+	
+	private static final Logger log = Logger.getLogger(SlotEntry.class);
 
 	public void setType(String typeName) {
 		this.type = typeName;
@@ -52,7 +55,7 @@ public class SlotEntry {
 	public String getSlot() {
 		return slot;
 	}
-
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -70,24 +73,32 @@ public class SlotEntry {
 	}
 
 	public void put(WorkflowContext ctx, IResourceDescriptions resourceDescriptions, ResourceSet resourceSet) {
-		Set<EClass> eclasses = findEClasses(resourceSet, nsURI, type);
-
-		List<EObject> elements = Lists.newArrayList();
-		Iterable<IResourceDescription> descriptions = resourceDescriptions.getAllResourceDescriptions();
-		for (IResourceDescription resDesc : descriptions) {
-			Iterable<IEObjectDescription> objects = resDesc.getExportedObjects();
-			for (IEObjectDescription description : objects) {
-				if (matches(eclasses, description))
-					elements.add(resourceSet.getEObject(description.getEObjectURI(), true));
-			}
-		}
-		if (firstOnly) {
-			ctx.set(slot, elements.isEmpty() ? null : elements.get(0));
+		Set<EClass> eClasses = findEClasses(resourceSet, nsURI, type);
+		List<EObject> elements = findEObjectsOfType(eClasses, resourceDescriptions, resourceSet);
+		if(elements.isEmpty()) {
+			log.warn("Could not find any exported element of type '" + type + "' -> Slot '" + slot + "' is empty.");
+			ctx.set(slot, Collections.emptyList());
+		} else if (firstOnly) {
+			ctx.set(slot, elements.get(0));
 		} else {
 			ctx.set(slot, elements);
 		}
 	}
 
+	protected List<EObject> findEObjectsOfType(Set<EClass> eClasses, IResourceDescriptions resourceDescriptions,
+			ResourceSet resourceSet) {
+		List<EObject> elements = Lists.newArrayList();
+		Iterable<IResourceDescription> descriptions = resourceDescriptions.getAllResourceDescriptions();
+		for (IResourceDescription resDesc : descriptions) {
+			Iterable<IEObjectDescription> objects = resDesc.getExportedObjects();
+			for (IEObjectDescription description : objects) {
+				if (matches(eClasses, description))
+					elements.add(resourceSet.getEObject(description.getEObjectURI(), true));
+			}
+		}
+		return elements;
+	}
+	
 	protected Set<EClass> findEClasses(ResourceSet resourceSet, String nsURI2, String typeName2) {
 		if (typeName2 == null)
 			return Collections.emptySet();
