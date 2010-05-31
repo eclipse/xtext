@@ -69,6 +69,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.mwe.NameBasedFilterTest.class);
       suite.addTestSuite(org.eclipse.xtext.mwe.PathTraverserTest.class);
       suite.addTestSuite(org.eclipse.xtext.mwe.ReaderTest.class);
+      suite.addTestSuite(org.eclipse.xtext.mwe.ResourceSetBasedSlotEntryReaderTest.class);
       suite.addTestSuite(org.eclipse.xtext.mwe.UriBasedReaderTest.class);
       suite.addTestSuite(org.eclipse.xtext.parseerrorhandling.ParseErrorHandlingTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.AntlrDatatypeRuleTokenTest.class);
