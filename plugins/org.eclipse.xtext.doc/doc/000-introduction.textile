@@ -2,7 +2,7 @@ h1. Overview
 
 h2. What is Xtext?
 
-No matter if you want to create a small textual domain.specific language or you want to implement a full-blown general purpose programming language. 
+No matter if you want to create a small textual domain-specific language (DSL) or you want to implement a full-blown general purpose programming language. 
 With Xtext you can create textual programming languages in a snap. Also if you already have an existing language but it lacks decent tool support, you can use Xtext to create 
 an Eclipse-based IDE providing editing experience known from modern Java IDEs in a surprisingly short amount of time. We call Xtext a language development framework.  
 
@@ -26,8 +26,8 @@ the use of Google Guice gives you the power to exchange every little class in a 
 h2. Who uses Xtext?
 
 Xtext is used in many different industries. It is used in the field of mobile devices, automotive development, embedded or Java enterprise software projects and game development. 
-People use Xtext-based languages to generate to Java, C, C++, C#, Objective C, Python, etc. Although the infrastructure runs on the JVM, you can compile Xtext languages to any existing target platform.
-Xtext based languages are developed for well known Open-Source projects, like Maven, B3, the Eclipse Webtools platform or Googles Protocolbuffers and the framework is widely used in research projects.  
+People use Xtext-based languages to generateJava, C, C++, C#, Objective C, Python, or Ruby code. Although the infrastructure runs on the JVM, you can compile Xtext languages to any existing target platform.
+Xtext based languages are developed for well known Open-Source projects such as Maven, Eclipse B3, the Eclipse Webtools platform or Google's Protocol Buffers and the framework is also widely used in research projects.  
 
 h2. Who is behind Xtext?
 
@@ -35,8 +35,7 @@ Xtext is a professional Open-Source project. We, the main developers and the pro
 Therefore we are able to work almost full-time on the project. Xtext is an Eclipse.org project. Besides many other advantages this means that you don't have to fear any IP issues, because the Eclipse Foundation 
 has their own layers who take care that no intellectual property is violated. 
 
-Where does the money for Open-Source development come from you ask? Well, we provide professional services around Xtext. Be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs
-for programming langauges. We not only know the framework very well but also are experts in programming and domain.specific language design. Don't hesitate to get in contact : www.itemis.com.
+Where does the money for Open-Source development come from you ask? Well, we provide professional services around Xtext. Be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages. We not only know the framework very well but also are experts in programming and domain-specific language design. Don't hesitate to get in contact with us (www.itemis.com).
 
 h2(#DSL). What is a domain-specific language
 
