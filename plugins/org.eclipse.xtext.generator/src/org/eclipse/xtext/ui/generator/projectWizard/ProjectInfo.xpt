@@ -15,7 +15,7 @@
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
 «DEFINE root FOR Grammar»
-«FILE projectInfoClassName().asPath()+".java" SRC_GEN_UI-»
+«FILE projectInfoClassName().asPath()+".java" SRC_UI-»
 package «projectInfoClassName().toJavaPackage()»;
 
 import org.eclipse.xtext.ui.wizard.DefaultProjectInfo;
