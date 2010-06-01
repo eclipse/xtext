@@ -1,24 +1,43 @@
 
 h2(#highlighting). Syntax Coloring
 
-Besides the already mentioned advanced features like content assist and code formatting the powerful editor for your DSL is capable to mark-up your model-code to improve the overall readability. It is possible to use different colors and fonts according to the meaning of the different parts of your input file. One may want to use some decent colors for large blocks of comment while identifiers, keywords and strings should be colored differently to make it easier to distinguish between them. This kind of text decorating mark-up does not influence the semantics of the various sections but helps to understand the meaning and to find errors in the source code.
+Besides the already mentioned advanced features like content assist and code formatting the powerful 
+editor for your DSL is capable to mark-up your model-code to improve the overall readability. It is 
+possible to use different colors and fonts according to the meaning of the different parts of your 
+input file. One may want to use some decent colors for large blocks of comments while identifiers, 
+keywords and strings should be colored differently to make it easier to distinguish between them. 
+This kind of text decorating mark-up does not influence the semantics of the various sections but 
+helps to understand the meaning and to find errors in the source code.
 
 !{width:100%}images/highlighting.png!
 
-The highlighting is done in two stages. This allows for sophisticated algorithms that are executed asynchronously to provide advanced coloring while simple pattern matching may be used to highlight parts of the text instantaneously. The latter is called lexical highlighting while the first is based on the meaning of your different model elements and therefore called semantic highlighting.
+The highlighting is done in two stages. This allows for sophisticated algorithms that are executed 
+asynchronously to provide advanced coloring while simple pattern matching may be used to highlight 
+parts of the text instantaneously. The latter is called lexical highlighting while the first is based 
+on the meaning of your different model elements and therefore called semantic highlighting.
 
-When you introduce new highlighting styles, the preference page for your DSL is automatically configured and allows the customization of any registered highlighting setting. They are automatically persisted and reloaded on startup.
+When you introduce new highlighting styles, the preference page for your DSL is automatically 
+configured and allows the customization of any registered highlighting setting. They are automatically 
+persisted and reloaded on startup.
 
 !{width:50%}images/preferences_syntax.png!
 
 h3. Lexical Highlighting
 
-The lexical highlighting can be customized by providing implementations of the interface ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.syntaxcoloring.ILexicalHighlightingConfiguration} and the abstract class ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.syntaxcoloring.AbstractTokenScanner}. The latter fulfills the interface @ITokenScanner@ from the underlying JFace Framework, which may be implemented by clients directly.
+The lexical highlighting can be customized by providing implementations of the interface 
+${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration} and 
+the abstract class ${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractTokenScanner}. 
+The latter fulfills the interface _ITokenScanner_ from the underlying JFace Framework, which may be 
+implemented by clients directly.
 
-The @ILexicalHighlightingConfiguration@ is used to register any default style without a specific binding to a pattern in the model file. It is used to populate the preferences page and to initialize the @ITextAttributeProvider@, which in turn is the component that is used to obtain the actual settings for a style's id. An implementation will usually be very similar to the ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultLexicalHighlightingConfiguration} and read like this: 
+The @IHighlightingConfiguration@ is used to register any default style without a specific binding to 
+a pattern in the model file. It is used to populate the preferences page and to initialize the 
+_ITextAttributeProvider_, which in turn is the component that is used to obtain the actual settings 
+for a style's id. An implementation will usually be very similar to the 
+${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration} and read like this: 
 
-bc.. public class DefaultLexicalHighlightingConfiguration 
-    implements ILexicalHighlightingConfiguration {
+bc.. public class DefaultHighlightingConfiguration 
+    implements IHighlightingConfiguration {
 
 	public static final String KEYWORD_ID = "keyword";
 	public static final String COMMENT_ID = "comment";
@@ -40,19 +59,37 @@ bc.. public class DefaultLexicalHighlightingConfiguration
 	// ...
 }
 
-p. Implementations of the @ITokenScanner@ are responsible for splitting the content of a document into various parts, the so called tokens, and return the highlighting information for each identified range. It is critical that this is done very efficiently because this component is used on each keystroke. Xtext ships with a default implementation that is based on the lexer that is generated by ANTLR which is very lightweight and fast. This default implementation can be customized by clients easily. They simply have to bind another implementation of the 
-${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.AbstractAntlrTokenToAttributeIdMapper}. To get an idea about it, have a look at the ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.DefaultAntlrTokenToAttributeIdMapper}.
+p. Implementations of the @ITokenScanner@ are responsible for splitting the content of a document into 
+various parts, the so called tokens, and return the highlighting information for each identified range. 
+It is critical that this is done very fast because this component is used on each keystroke. Xtext 
+ships with a default implementation that is based on the lexer that is generated by ANTLR which is very 
+lightweight and fast. This default implementation can be customized by clients easily. They simply have 
+to bind another implementation of the 
+${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.syntaxcoloring.antlr.AbstractAntlrTokenToAttributeIdMapper}. 
+To get an idea about it, have a look at the 
+${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.syntaxcoloring.antlr.DefaultAntlrTokenToAttributeIdMapper}.
 
 h3. Semantic Highlighting
 
-The semantic highlighting stage is executed asynchronously in the background and can be used to calculated highlighting states based on the meaning of the different model elements. Users of the editor will notice a very short delay after they have edited the text until the styles are actually applied to the document. This keeps the editor responsive while providing aid when reading and writing your model.
+The semantic highlighting stage is executed asynchronously in the background and can be used to calculated 
+highlighting states based on the meaning of the different model elements. Users of the editor will 
+notice a very short delay after they have edited the text until the styles are actually applied to the 
+document. This keeps the editor responsive while providing aid when reading and writing your model.
 
-As for the lexical highlighting there exist two interfaces whose implementations work closely together and allow the customization of the semantic highlighting. Namely these are the 
-${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingConfiguration} and ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingCalculator}. While the configuration for the semantic highlighting works the same way as the @ILexicalHighlightingConfiguration@, the @ISemanticHighlightingCalculator@ is the primary hook to implement the logic that will compute to-be-highlighted ranges based on the model elements. 
+As for the lexical highlighting the interface to register the available styles is the 
+${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration}. 
+The ${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator} 
+is the primary hook to implement the logic that will compute to-be-highlighted ranges based on the model 
+elements. 
 
-The framework will pass the XtextResource and an ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.syntaxcoloring.IHighlightedPositionAcceptor} to the calculator. It is ensured, that the resource will not be altered externally until the called method @provideHighlightingsFor@ returns. The task is to navigate your semantic model and compute various ranges based on the node information and associate styles with them. This may read similar to the following snippet:
+The framework will pass the current XtextResource and an 
+${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor} to 
+the calculator. It is ensured, that the resource will not be altered externally until the called method 
+@provideHighlightingFor@ returns. However, the resource may be null. The implementor's task is to 
+navigate your semantic model and compute various ranges based on the attached node information and 
+associate styles with them. This may read similar to the following snippet:
 
-bc.. 	public void provideHighlightingFor(XtextResource resource, 
+bc.. public void provideHighlightingFor(XtextResource resource, 
     IHighlightedPositionAcceptor acceptor) {
 	if (resource == null)
 		return;
@@ -62,19 +99,25 @@ bc.. 	public void provideHighlightingFor(XtextResource resource,
 	for (AbstractNode abstractNode : allNodes) {
 		if (abstractNode.getGrammarElement() instanceof CrossReference) {
 		  acceptor.addPosition(node.getOffset(), node.getLength(), 
-		    SemanticHighlightingConfiguration.CROSS_REF);
+		    MyHighlightingConfiguration.CROSS_REF);
 		}
 	}
 }
 
-p. This example refers to an implementation of the @ISemanticHighlightingConfiguration@ that registers a style for a cross reference. It is pretty much the same implementation as for the previously mentioned sample of an @ILexicalHighlightingConfiguration@.
+p. This example refers to an implementation of the @IHighlightingConfiguration@ that registers a style 
+for a cross reference. It is pretty much the same implementation as for the previously mentioned sample 
+of a lexical @IHighlightingConfiguration@.
 
-bc.. public class SemanticHighlightingConfiguration 
-    implements ISemanticHighlightingConfiguration {
+bc.. public class HighlightingConfiguration 
+    implements IHighlightingConfiguration {
 	
+	// lexical stuff goes here 
+	// ..
 	public final static String CROSS_REF = "CrossReference"; 
 
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
+		// lexical stuff goes here 
+		// ..
 		acceptor.acceptDefaultHighlighting(CROSS_REF, 
 		  "Cross References", crossReferenceTextStyle());
 	}
@@ -86,7 +129,14 @@ bc.. public class SemanticHighlightingConfiguration
 	}
 }
 
-p. The implementor of an @ISemanticHighlightingCalculator@ should be aware of performance to ensure a good user experience. It is probably not a good idea to traverse everything of your model when you will only register a few highlighted ranges that can be found easier with some typed method calls. It is strongly advised to use purposeful ways to navigate your model. The parts of Xtext's core that are responsible for the semantic highlighting are pretty optimized in this regard as well. The framework will only update the ranges that actually have been altered, for example. This optimizes the redraw process. It will even move, shrink or enlarge previously announced regions based on a best guess before the next semantic highlighting pass has been triggered after the user has changed the document.
+p. The implementor of an @IHighlightingCalculator@ should be aware of performance to ensure a good user 
+experience. It is probably not a good idea to traverse everything of your model when you will only 
+register a few highlighted ranges that can be found easier with some typed method calls. It is strongly 
+advised to use purposeful ways to navigate your model. The parts of Xtext's core that are responsible 
+for the semantic highlighting are pretty optimized in this regard as well. The framework will only 
+update the ranges that actually have been altered, for example. This speeds up the redraw process. It 
+will even move, shrink or enlarge previously announced regions based on a best guess before the next 
+semantic highlighting pass has been triggered after the user has changed the document.
 
 
 
