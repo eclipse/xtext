@@ -33,7 +33,7 @@ entity Speaker extends Person {
 
 h3. Create an Xtext project
 
-In order to get started we first need to create some Eclipse projects. Use the Xtext wizard to for that:
+In order to get started we first need to create some Eclipse projects. Use the Xtext wizard to do so:
 
   _File -> New -> Project...  -> Xtext -> Xtext project_
 
