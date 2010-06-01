@@ -1,6 +1,10 @@
 <toc topic="help/index.html" label="Xtext User Guide">
 <topic href="help/Overview.html" label="Overview">
 <topic href="help/Overview.html#WhatisXtext" label="What is Xtext?"></topic>
+<topic href="help/Howdoesitwork.html" label="How does it work?"></topic>
+<topic href="help/Xtextishighlyconfigurable.html" label="Xtext is highly configurable"></topic>
+<topic href="help/WhousesXtext.html" label="Who uses Xtext?"></topic>
+<topic href="help/WhoisbehindXtext.html" label="Who is behind Xtext?"></topic>
 <topic href="help/DSL.html" label="What is a domain-specific language"></topic>
 </topic>
 <topic href="help/getting-started.html" label="Getting Started">
@@ -9,7 +13,15 @@
 <topic href="help/getting-started.html#Projectlayout" label="Project layout"></topic>
 <topic href="help/getting-started.html#Buildyourowngrammar" label="Build your own grammar"></topic>
 <topic href="help/getting-started.html#Generatelanguageartifacts" label="Generate language artifacts"></topic>
-<topic href="help/getting-started.html#Runthegeneratededitor" label="Run the generated editor"></topic>
+<topic href="help/getting-started.html#RunthegeneratedIDEplugin" label="Run the generated IDE plugin"></topic>
+<topic href="help/getting-started.html#Addingnamespace" label="Adding namespace"></topic>
+</topic>
+<topic href="help/processing_Xtext_models.html" label="Processing Xtext models">
+<topic href="help/processing_Xtext_models.html#resource" label="Loading Xtext models"></topic>
+<topic href="help/processing_Xtext_models.html#EMF_reflection" label="Working with EMF models"></topic>
+<topic href="help/processing_Xtext_models.html#node_model" label="Working with the parse tree (aka node model)"></topic>
+<topic href="help/processing_Xtext_models.html#working_with_grammar_model" label="Working with the grammar"></topic>
+<topic href="help/processing_Xtext_models.html#Summary" label="Summary"></topic>
 </topic>
 <topic href="help/getting-started-xpand.html" label="Writing a code generator">
 <topic href="help/getting-started-xpand.html#Creatingthemaintemplate" label="Creating the main template"></topic>
@@ -21,7 +33,7 @@
 <topic href="help/Wherenext.html" label="Where next?"></topic>
 </topic>
 <topic href="help/concepts.html" label="Xtext and EMF">
-<topic href="help/concepts.html#model_metamodel" label="Model, AST, Meta Model, and Ecore"></topic>
+<topic href="help/concepts.html#model_metamodel" label="Model, Ecore Model, and Ecore"></topic>
 <topic href="help/emf_codegen.html" label="EMF code generation"></topic>
 <topic href="help/emf_resource.html" label="EMF Resources"></topic>
 <topic href="help/grammar_model.html" label="Grammar model"></topic>
@@ -104,8 +116,11 @@
 <topic href="help/SetupwithinEclipseEquinoxOSGi.html" label="Setup within Eclipse-Equinox (OSGi)"></topic>
 <topic href="help/Logging.html" label="Logging"></topic>
 <topic href="help/validation.html" label="Validation">
-<topic href="help/validation.html#syntactical_validation" label="Syntactical Validation"></topic>
-<topic href="help/validation.html#linking_validation" label="Crosslink Validation"></topic>
+<topic href="help/validation.html#AutomaticValidation" label="Automatic Validation">
+<topic href="help/validation.html#syntactical_validation" label="Lexer/Parser: Syntactical Validation"></topic>
+<topic href="help/validation.html#linking_validation" label="Linker: Crosslink Validation"></topic>
+<topic href="help/validation.html#concrete_syntax_validation" label="Serializer: Concrete Syntax Validation"></topic>
+</topic>
 <topic href="help/validation.html#custom_validation" label="Custom Validation"></topic>
 <topic href="help/validation.html#quickfixes" label="Quickfixes"></topic>
 <topic href="help/validation.html#check_based_validation" label="Validation with the Check language"></topic>
@@ -139,14 +154,17 @@
 </topic>
 <topic href="help/serialization.html" label="Serialization">
 <topic href="help/serialization.html#serializationcontract" label="The Contract"></topic>
+<topic href="help/serialization.html#RolesoftheSemanticModelandtheNodeModelDuringSerialization" label="Roles of the Semantic Model and the Node Model During Serialization"></topic>
 <topic href="help/serialization.html#parsetreeconstructor" label="Parse Tree Constructor"></topic>
+<topic href="help/serialization.html#saveoptions" label="Options"></topic>
+<topic href="help/serialization.html#commentassociater" label="Preserving Comments from the Node Model"></topic>
 <topic href="help/serialization.html#transientvalues" label="Transient Values"></topic>
 <topic href="help/serialization.html#unassignedtext" label="Unassigned Text"></topic>
 <topic href="help/serialization.html#crossreferenceserializer" label="Cross Reference Serializer"></topic>
-<topic href="help/serialization.html#hiddentokenmerger" label="Hidden Token Merger"></topic>
+<topic href="help/serialization.html#hiddentokenmerger" label="Merge Whitespaces"></topic>
 <topic href="help/serialization.html#tokenstream" label="Token Stream"></topic>
 </topic>
-<topic href="help/emf_integration.html" label="Integration with EMF">
+<topic href="help/emf_integration.html" label="Integration with other EMF editors">
 <topic href="help/emf_integration.html#XtextResourceImplementation" label="XtextResource Implementation"></topic>
 <topic href="help/emf_integration.html#gmf_integration" label="Integration with GMF">
 <topic href="help/emf_integration.html#gmf_integration_stage_1" label="Stage 1: Make GMF read and write the semantic model as text"></topic>
@@ -217,7 +235,8 @@
 <topic href="help/formatting.html" label="Formatting (Pretty Printing)">
 <topic href="help/formatting.html#declarativeformatter" label="Declarative Formatter">
 <topic href="help/formatting.html#GeneralFormattingConfigSettings" label="General FormattingConfig Settings"></topic>
-<topic href="help/formatting.html#FormattingConfigRules" label="FormattingConfig Rules"></topic>
+<topic href="help/formatting.html#FormattingConfigInstructions" label="FormattingConfig Instructions"></topic>
+<topic href="help/formatting.html#GrammarElementFinders" label="Grammar Element Finders"></topic>
 </topic>
 </topic>
 <topic href="help/highlighting.html" label="Syntax Coloring">
@@ -228,35 +247,9 @@
 <topic href="help/projectwizard.html#Customizingtheprojectwizard" label="Customizing the project wizard"></topic>
 </topic>
 </topic>
-<topic href="help/from_oaw_to_tmf.html" label="From oAW to TMF">
-<topic href="help/from_oaw_to_tmf.html#why_rewrite" label="Why a rewrite?"></topic>
-<topic href="help/migration_overview.html" label="Migration overview"></topic>
-<topic href="help/Xtend_based_apis.html" label="Where are the Xtend-based APIs?">
-<topic href="help/Xtend_based_apis.html#Xtend_is_hard_to_debug" label="Xtend is hard to debug"></topic>
-<topic href="help/Xtend_based_apis.html#Xtend_is_slow" label="Xtend is slow"></topic>
-<topic href="help/Xtend_based_apis.html#Convenient_Java" label="Convenient Java"></topic>
-<topic href="help/Xtend_based_apis.html#conclusion" label="Conclusion"></topic>
-</topic>
-<topic href="help/differences.html" label="Differences">
-<topic href="help/differences.html#differenced_grammar_language" label="Differences in the grammar language">
-<topic href="help/differences.html#differences_datatype_rules" label="String rules become Datatype rules"></topic>
-<topic href="help/differences.html#differences_enum_rules" label="Enum rules"></topic>
-<topic href="help/differences.html#differences_native_rules" label="Native rules"></topic>
-<topic href="help/differences.html#differences_no_URI_token" label="No URI terminal rule anymore"></topic>
-<topic href="help/differences.html#differences_return_types" label="Return types"></topic>
-</topic>
-<topic href="help/differences.html#differences_linking" label="Differences in Linking">
-<topic href="help/differences.html#differences_linking_sopes" label="The idea of scopes"></topic>
-<topic href="help/differences.html#differences_linking_migration" label="Migration"></topic>
-</topic>
-<topic href="help/differences.html#differences_ui" label="Differences in UI customizing"></topic>
-</topic>
-<topic href="help/NewFeatures.html" label="New Features">
-<topic href="help/NewFeatures.html#DependencyInjectionwithGoogleGuice" label="Dependency Injection with Google Guice"></topic>
-<topic href="help/NewFeatures.html#ImprovementsonGrammarLevel" label="Improvements on Grammar Level"></topic>
-<topic href="help/NewFeatures.html#differences_validation" label="Fine-grained control for validation"></topic>
-</topic>
-<topic href="help/MigrationSupport.html" label="Migration Support"></topic>
+<topic href="help/jvmtypes.html" label="Referring Java Types">
+<topic href="help/jvmtypes.html#HowtoUseJavaTypes" label="How to Use Java Types"></topic>
+<topic href="help/CustomizingPoints.html" label="Customizing Points"></topic>
 </topic>
 <topic href="help/migrating_from_0_7.html" label="Migrating from TMF Xtext 0.7.x">
 <topic href="help/migrating_from_0_7.html#TaketheShortcut" label="Take the Shortcut"></topic>

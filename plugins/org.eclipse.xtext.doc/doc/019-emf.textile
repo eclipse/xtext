@@ -1,18 +1,23 @@
 
 h1(#concepts). Xtext and EMF
 
-In this section we try to introduce the basic features of the "Eclipse Modeling Framework (EMF)":#http://www.eclipse.org/emf in the context of Xtext. As EMF provides the base infrastructure for Xtext, it is useful to have a basic understanding of EMF, so we give a rough outline here.  
+In this section we introduce the basic concepts of the "Eclipse Modeling Framework (EMF)":#http://www.eclipse.org/emf in the context of Xtext. 
+As Xtext integrates with and uses EMF, it is important to have a basic understanding of EMF.  
 If you want to learn more about EMF, we recommend reading the "EMF book":#http://www.eclipse.org/emf.
 
-h2(#model_metamodel). Model, AST, Meta Model, and Ecore 
+h2(#model_metamodel). Model, Ecore Model, and Ecore 
  
-When you run the workflow in your Xtext project, Xtext will generate a bunch of artifacts that make up the infrastructure for your language. Among other useful things, it will create a parser. This parser takes models, i.e. files in your language, as an input and produce a graph of objects as output. This graph is called the _Abstract Syntax Tree_ (AST). Given the example model from the "introduction":#getting_started_xtext, the AST should look like this
+When Xtext uses EMF models as the in-memory representation of any parsed text files. This in-memory object graph is called the _Abstract Syntax Tree_ (AST). 
+Depending on the community this concepts is also called _document object graph (DOM)_, _semantic model_, or simply _model_. We use _model_ and _AST_ interchangeably. 
+Given the example model from the "introduction":#getting_started_xtext, the AST looks similar to this
 
 !images/ast.png(Sample AST)!
 
-In terms of modeling, we also refer to the AST tree as the _semantic model_, as it does no longer carry any additional syntactical information. Usually it is only the semantic model that is processed by later processing steps, i.e. in the execution by a code generator or interpreter.
-
-The structure of the semantic model is defined by the so called _meta model_. You can think of the meta model as the schema for the models. In Xtext, meta models are either inferred from the grammar or predefined by the user (see the section on "package declarations":#package_declarations for details). The next diagram shows the meta model of our example:
+The _AST_ should contain the essence of your textual models and abstract over syntactical information. It is used by later processing steps, 
+such as validation, compilation or interpretation. In EMF a model is made up of instances of _EObjects_ which are connected 
+and an _EObject_ is an instance of an _EClass_. 
+A set of _EClasses_ if contained in a so called _EPackage_, which are both concepts of _Ecore_ 
+In Xtext, meta models are either inferred from the grammar or predefined by the user (see the section on "package declarations":#package_declarations for details). The next diagram shows the meta model of our example:
 
 !images/metamodel.png(Sample meta model)! 
 

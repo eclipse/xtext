@@ -1,0 +1,258 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Processing Xtext models</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="getting-started.html" title="Getting Started">
+<link rel="prev" href="getting-started.html" title="Getting Started">
+<link rel="next" href="getting-started-xpand.html" title="Writing a code generator">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Processing Xtext models</h1>
+<p>Now that we know how to create a language we should talk about processing the parsed models somehow. Text files parsed by Xtext are represented as 
+				object graphs in memory. We call these object graphs 
+				<span class="emphasis"><em>Abstract Syntax Tree (AST)</em></span>, 
+				<span class="emphasis"><em>semantic model</em></span> or simply 
+				<span class="emphasis"><em>model</em></span> interchangeably. In Xtext
+				models are implemented using the 
+				<span class="emphasis"><em>Eclipse Modeling Framework (EMF)</em></span>, which can be seen as a very powerful version of JavaBeans. It not only provides
+				the typical getter and setter methods for the different features of a model element but also comes with an long list of advanced concepts and semantics.
+			</p>
+<div class="section" title="Loading Xtext models">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="resource"></a>Loading Xtext models </h3>
+</div>
+</div>
+</div>
+<p>For instance, EMF models can be persisted by the means of a so called 
+					<span class="emphasis"><em>Resource</em></span>. Xtext languages implement 
+					<span class="emphasis"><em>Resource</em></span> which is why you can use the EMF API to
+					load a model into memory:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">new&nbsp;DomainmodelStandaloneSetup().createInjectorAndDoEMFRegistration();<br>
+
+<br>
+ResourceSet&nbsp;rs&nbsp;=&nbsp;new&nbsp;ResourceSetImpl();<br>
+Resource&nbsp;resource&nbsp;=&nbsp;rs.getResource(URI.createURI("./mymodel.dmodel"),&nbsp;true);<br>
+EObject&nbsp;eobject&nbsp;=&nbsp;resource.getContents().get(0);<br>
+&nbsp;<br>
+
+</code>
+</p>
+</div>
+<p>The first line initializes the language infrastructure to run in 
+					<span class="emphasis"><em>standalone</em></span> mode. That is EMF is designed to work in Eclipse and therefore makes use of 
+					Equinox extension points, in order to register factories and the like. In a vanilla Java project there is no Equinox, hence we need to do the registrartion programmatically.
+					The generated 
+					<span class="emphasis"><em>MyLanguageStandaloneSetup</em></span> class does that. You don&rsquo;t need to do this kind of initialization when you run your plugins within Eclipse, since in that case 
+					the extension point declarations are used.
+				</p>
+<p>The other thing the StandaloneSetup takes care of is creating a Guice 
+					<span class="emphasis"><em>injector</em></span>. The use of Guice and Dependency Injection is explained here [TODO]. 
+				</p>
+<p>Now that the language infrastructure is intialized and the different contributions to EMF are registered, we want to load a 
+					<span class="emphasis"><em>Resource</em></span>. To do so we first create a 
+
+					<span class="emphasis"><em>ResourceSet</em></span>, which as the name suggests represents a set of Resources. If one 
+					<span class="emphasis"><em>Resource</em></span> references another 
+					<span class="emphasis"><em>Resource</em></span>, EMF will automatically load that other 
+					<span class="emphasis"><em>Resource</em></span>
+					into the same 
+					<span class="emphasis"><em>ResourceSet</em></span> as soon as the cross reference is resolved. Resolution of cross references is done lazy, i.e. on first access.
+				</p>
+<p>The 4th line loads the 
+					<span class="emphasis"><em>Resource</em></span> using the resource set. We pass in a URI which points to the file in the file system. 
+					EMF&rsquo;s URI is a very important concept since, it supports a lot of different schemes like loading resources from file system, web sites, jars, OSGi bundles or even 
+					the class path. And if that is not enough you can come up with your own schemes. Also a URI not only can point to a resource but also to any 
+					<span class="emphasis"><em>EObject</em></span> in a resource.
+					This is done by appending a so called 
+					<span class="emphasis"><em>URI fragment</em></span> to the URI. 
+				</p>
+<p>The second parameter denotes whether the resource should automatically be loaded if it wasn&rsquo;t before. Alternatively we could have written</p>
+<div class="literallayout">
+<p>
+<code class="code">Resource&nbsp;resource&nbsp;=&nbsp;rs.getResource(URI.createURI("./mymodel.dmodel"),&nbsp;false);<br>
+resource.load(null);<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>The load method optionally takes a map of properties, which allows to define a contract between a client and the specific implementation. In Xtext, for instance, we use 
+					the map to state whether cross references should be eagerly resolved.</p>
+<p>The last line (
+					<span class="emphasis"><em>EObject eobject = resource.getContents().get(0);</em></span>) assigns the root element to a local variable.
+					Actually it is the first element from the contents list of a 
+					<span class="emphasis"><em>Resource</em></span>, but in Xtext a 
+					<span class="emphasis"><em>Resource</em></span> always has just one root element.
+				</p>
+</div>
+<div class="section" title="Working with EMF models">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="EMF_reflection"></a>Working with EMF models</h3>
+</div>
+</div>
+</div>
+<p>We have previously talked about Ecore models, which effectively is an 
+					<span class="emphasis"><em>EPackage</em></span> containing a any number of 
+					<span class="emphasis"><em>EClasses</em></span> with 
+					<span class="emphasis"><em>EAttributes</em></span> and 
+					<span class="emphasis"><em>EReferences</em></span>. 
+					Ecore defines additional concepts but they are not so important here. An 
+					<span class="emphasis"><em>EObject</em></span> is an instance of an 
+					<span class="emphasis"><em>EClass</em></span>. For instance, the root element
+					of a domain model would be an instance of the EClass 
+					<span class="emphasis"><em>DomainModel</em></span>, as defined in the grammar in the last chapter. EMF provides a reflection layer to work
+					with EObjects in a generic way. 
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">assertEquals("DomainModel",&nbsp;eobject.eClass().getName());<br>
+&nbsp;<br>
+
+</code>
+</p>
+</div>
+<p>It is also possible to create new instances or get and set values using the reflection layer. That reflection layer very helpful when creating generic libraries for EMF models
+					but if you know what kind of model you are working with, it&rsquo;s much nicer to program against the generated Java classes. As we know that the root element
+					is an instance of DomainModel we can just cast it to the Java interface generated by EMF:</p>
+<div class="literallayout">
+<p>
+<code class="code">DomainModel&nbsp;dm&nbsp;=&nbsp;(DomainModel)&nbsp;eobject;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>The generated Java types provide getter and setter for the 
+					<span class="emphasis"><em>EAttributes</em></span> and 
+					<span class="emphasis"><em>EReferences</em></span>, so that you can easily navigate the model using Java:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">EList&lt;AbstractElement&gt;&nbsp;elements&nbsp;=&nbsp;domainModel.getElements();<br>
+for&nbsp;(AbstractElement&nbsp;abstractElement&nbsp;:&nbsp;elements)&nbsp;{<br>
+&nbsp;&nbsp;if&nbsp;(abstractElement&nbsp;instanceof&nbsp;Entity)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Entity&nbsp;entity&nbsp;=&nbsp;((Entity)abstractElement);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("entity&nbsp;"+entity.getName()+"&nbsp;extends&nbsp;"+entity.getSuperType().getName());<br>
+&nbsp;&nbsp;}<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>You&rsquo;ll find a lot of convenience API in EMF&rsquo;s EcoreUtil and Xtext&rsquo;s EcoreUtil2. </p>
+</div>
+<div class="section" title="Working with the parse tree (aka node model)">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="node_model"></a>Working with the parse tree (aka node model)</h3>
+</div>
+</div>
+</div>
+<p>In many situations the information from the 
+					<span class="emphasis"><em>AST</em></span> is sufficient, but in some situations you need the additional syntactical information. In Xtext not only
+					an 
+					<span class="emphasis"><em>AST</em></span> is constructed while parsing but also a so called 
+					<span class="emphasis"><em>parse tree</em></span>, which contains all the textual information chunked in so called tokens. The 
+					<span class="emphasis"><em>parse tree</em></span> in Xtext is
+					also called 
+					<span class="emphasis"><em>node model</em></span> and consists of two different kinds of nodes. 
+					<span class="emphasis"><em>LeafNodes</em></span> as the name suggests represent the leafs of the parse tree. Each leaf node represents one 
+					token, the lexer has scanned. If you go through all leaf nodes of a parse tree and concatenate all the tokens to one string, you&rsquo;ll end up with the whole textual representation 
+					of the model, including all hidden tokens such as whitespace and comments. The following code does exactly that:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">CompositeNode&nbsp;node&nbsp;=&nbsp;NodeUtil.getNode(domainModel);<br>
+Iterable&lt;AbstractNode&gt;&nbsp;contents&nbsp;=&nbsp;NodeUtil.getAllContents(node);<br>
+StringBuffer&nbsp;text&nbsp;=&nbsp;new&nbsp;StringBuffer();<br>
+for&nbsp;(AbstractNode&nbsp;abstractNode&nbsp;:&nbsp;contents)&nbsp;{<br>
+&nbsp;&nbsp;if&nbsp;(abstractNode&nbsp;instanceof&nbsp;LeafNode)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;text.append(((LeafNode)abstractNode).getText());<br>
+}<br>
+System.out.println(text);<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>In addition to the text 
+					<span class="emphasis"><em>LeafNodes</em></span> also holds information about the line, the offset and the length of that token.
+				</p>
+<p>The other node type is called 
+					<span class="emphasis"><em>CompositeNode</em></span> and is created by the parser for a grammar element. A composite node can contain other composite nodes and leaf nodes.
+					The super type of both node types is 
+					<span class="emphasis"><em>AbstractNode</em></span>. 
+				</p>
+</div>
+<div class="section" title="Working with the grammar">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="working_with_grammar_model"></a>Working with the grammar</h3>
+</div>
+</div>
+</div>
+<p>Also the grammar previously defined in Xtext&rsquo;s grammar language is represented as an EMF model and can be used in Java. In fact each node of the 
+					<span class="emphasis"><em>node model</em></span> references
+					the element from the grammar which was responsible for parsing or lexing that node:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">DomainModel&nbsp;domainModel&nbsp;=&nbsp;(DomainModel)&nbsp;eObject;<br>
+CompositeNode&nbsp;node&nbsp;=&nbsp;NodeUtil.getNode(domainModel);<br>
+ParserRule&nbsp;parserRule&nbsp;=&nbsp;(ParserRule)&nbsp;node.getGrammarElement();<br>
+assertEquals("DomainModel",&nbsp;parserRule.getName());<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Summary">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Summary"></a>Summary</h3>
+</div>
+</div>
+</div>
+<p>Let&rsquo;s summarize what we have learned. An Xtext model is loaded by an EMF Resource. The main model is represented as an instance of so called 
+					<span class="emphasis"><em>EClasses</em></span>, which are themselves
+					declared within Ecore models. A 
+					<span class="emphasis"><em>parse tree</em></span> is created as well, which effectively acts as a tracing model between the text, the 
+					<span class="emphasis"><em>AST</em></span> and the grammar. The following
+					diagram illustrates the four different kinds of models.
+				</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/xtext_data_structures.png"></div>
+<p>
+				
+</p>
+</div>
+</body>
+</html>

@@ -11,23 +11,31 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Xtext and EMF</h1>
-<p>In this section we try to introduce the basic features of the 
-			<a class="link" href="">Eclipse Modeling Framework (EMF)</a> in the context of Xtext. As EMF provides the base infrastructure for Xtext, it is useful to have a basic understanding of EMF, so we give a rough outline here.  
+<p>In this section we introduce the basic concepts of the 
+			<a class="link" href="">Eclipse Modeling Framework (EMF)</a> in the context of Xtext. 
+			As Xtext integrates with and uses EMF, it is important to have a basic understanding of EMF.  
 			If you want to learn more about EMF, we recommend reading the 
 			<a class="link" href="">EMF book</a>.
 		</p>
-<div class="section" title="Model, AST, Meta Model, and Ecore">
+<div class="section" title="Model, Ecore Model, and Ecore">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title" style="clear: both">
-<a name="model_metamodel"></a>Model, AST, Meta Model, and Ecore </h2>
+<a name="model_metamodel"></a>Model, Ecore Model, and Ecore </h2>
 </div>
 </div>
 </div>
-<p>When you run the workflow in your Xtext project, Xtext will generate a bunch of artifacts that make up the infrastructure for your language. Among other useful things, it will create a parser. This parser takes models, i.e. files in your language, as an input and produce a graph of objects as output. This graph is called the 
-				<span class="emphasis"><em>Abstract Syntax Tree</em></span> (AST). Given the example model from the 
-				<a class="link" href="">introduction</a>, the AST should look like this
+<p>When Xtext uses EMF models as the in-memory representation of any parsed text files. This in-memory object graph is called the 
+				<span class="emphasis"><em>Abstract Syntax Tree</em></span> (AST). 
+				Depending on the community this concepts is also called 
+				<span class="emphasis"><em>document object graph (DOM)</em></span>, 
+				<span class="emphasis"><em>semantic model</em></span>, or simply 
+				<span class="emphasis"><em>model</em></span>. We use 
+				<span class="emphasis"><em>model</em></span> and 
+				<span class="emphasis"><em>AST</em></span> interchangeably. 
+				Given the example model from the 
+				<a class="link" href="">introduction</a>, the AST looks similar to this
 			</p>
 <p>
 				
@@ -37,11 +45,18 @@
 <p>
 			
 </p>
-<p>In terms of modeling, we also refer to the AST tree as the 
-				<span class="emphasis"><em>semantic model</em></span>, as it does no longer carry any additional syntactical information. Usually it is only the semantic model that is processed by later processing steps, i.e. in the execution by a code generator or interpreter.
-			</p>
-<p>The structure of the semantic model is defined by the so called 
-				<span class="emphasis"><em>meta model</em></span>. You can think of the meta model as the schema for the models. In Xtext, meta models are either inferred from the grammar or predefined by the user (see the section on 
+<p>The 
+				<span class="emphasis"><em>AST</em></span> should contain the essence of your textual models and abstract over syntactical information. It is used by later processing steps, 
+				such as validation, compilation or interpretation. In EMF a model is made up of instances of 
+				<span class="emphasis"><em>EObjects</em></span> which are connected 
+				and an 
+				<span class="emphasis"><em>EObject</em></span> is an instance of an 
+				<span class="emphasis"><em>EClass</em></span>. 
+				A set of 
+				<span class="emphasis"><em>EClasses</em></span> if contained in a so called 
+				<span class="emphasis"><em>EPackage</em></span>, which are both concepts of 
+				<span class="emphasis"><em>Ecore</em></span> 
+				In Xtext, meta models are either inferred from the grammar or predefined by the user (see the section on 
 				<a class="link" href="syntax.html#package_declarations" title="EPackage declarations">package declarations</a> for details). The next diagram shows the meta model of our example:
 			</p>
 <p>
@@ -90,7 +105,7 @@
 <p>The superclass of EAttibutes and EReferences is 
 				<span class="emphasis"><em>EStructuralFeature</em></span> and allows to define a name and a cardinality by setting 
 				<code class="code">lowerBound</code> and 
-				<code class="code">upperBound</code>. Setting the latter to -1 means &sbquo;unbounded&rsquo;. 
+				<code class="code">upperBound</code>. Setting the latter to -1 means &lsquo;unbounded&rsquo;. 
 			</p>
 <p>The common supertype of EDataType and EClass is 
 				<span class="emphasis"><em>EClassifier</em></span>. An 

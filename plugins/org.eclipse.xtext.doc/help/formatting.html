@@ -40,11 +40,13 @@
 <div>
 <div>
 <h3 class="title">
-<a name="declarativeformatter"></a>Declarative Formatter   </h3>
+<a name="declarativeformatter"></a>Declarative Formatter</h3>
 </div>
 </div>
 </div>
-<p>A declarative formatter can be implemented by sub-classing {org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter}, as shown in the following example:</p>
+<p>A declarative formatter can be implemented by sub-classing 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeFormatter</a>, as shown in the following example:
+				</p>
 <div class="literallayout">
 <p>
 <code class="code">public&nbsp;class&nbsp;ExampleFormatter&nbsp;extends&nbsp;AbstractDeclarativeFormatter&nbsp;{<br>
@@ -55,27 +57,39 @@
 &nbsp;&nbsp;&nbsp;&nbsp;ExampleLanguageGrammarAccess&nbsp;f&nbsp;=&nbsp;getGrammarAccess();<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;c.setAutoLinewrap(120);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;find&nbsp;common&nbsp;keywords&nbsp;an&nbsp;specify&nbsp;formatting&nbsp;for&nbsp;them<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(Pair&lt;Keyword,&nbsp;Keyword&gt;&nbsp;pair&nbsp;:&nbsp;f.findKeywordPairs("(",&nbsp;")"))&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().after(pair.getFirst());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(pair.getSecond());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(Keyword&nbsp;comma&nbsp;:&nbsp;f.findKeywords(","))&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(comma);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
 
 <br>
-&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Line<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;formatting&nbsp;for&nbsp;grammar&nbsp;rule&nbsp;Line<br>
 &nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap(2).after(f.getLineAccess().getSemicolonKeyword_1());<br>
 &nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(f.getLineAccess().getSemicolonKeyword_1());<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;TestIndentation<br>
-&nbsp;&nbsp;&nbsp;&nbsp;c.setIndentation(<br>
-&nbsp;&nbsp;&nbsp;&nbsp;		f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1(),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;formatting&nbsp;for&nbsp;grammar&nbsp;rule&nbsp;TestIndentation<br>
+&nbsp;&nbsp;&nbsp;&nbsp;c.setIndentationIncrement().after(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;c.setIndentationDecrement().before(<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());<br>
 &nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap().after(<br>
-&nbsp;&nbsp;&nbsp;&nbsp;		f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());<br>
 &nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap().after(<br>
-&nbsp;&nbsp;&nbsp;&nbsp;		f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Param<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;formatting&nbsp;for&nbsp;grammar&nbsp;rule&nbsp;Param<br>
 &nbsp;&nbsp;&nbsp;&nbsp;c.setNoLinewrap().around(f.getParamAccess().getColonKeyword_1());<br>
 &nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().around(f.getParamAccess().getColonKeyword_1());<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;comments<br>
-&nbsp;&nbsp;&nbsp;&nbsp;c.setNoLinewrap().before(f.getSL_COMMENTRule());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;formatting&nbsp;for&nbsp;Comments&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;2).before(g.getSL_COMMENTRule());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;2).before(g.getML_COMMENTRule());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;1).after(g.getML_COMMENTRule());<br>
 &nbsp;&nbsp;}<br>
 }<br>
 
@@ -85,11 +99,11 @@
 </p>
 </div>
 <p>The formatter has to implement the method 
-					<code class="code">configureFormatting(...)</code> which is supposed to declaratively set up a 
+					<code class="code">configureFormatting(...)</code> which declaratively sets up a 
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java?root=Modeling_Project&view=co" target="_new">FormattingConfig</a>.
 				</p>
 <p>The 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java?root=Modeling_Project&view=co" target="_new">FormattingConfig</a> consist general settings and a set of rules:
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java?root=Modeling_Project&view=co" target="_new">FormattingConfig</a> consist general settings and a set of formatting instructions:
 				</p>
 <div class="section" title="General FormattingConfig Settings">
 <div class="titlepage">
@@ -105,64 +119,45 @@
 <li class="listitem">
 <p>
 								
-<code class="code">setAutoLinewrap(int)</code>  defines the amount of characters after which a line-break should be dynamically inserted between two tokens. The rule 
-								<code class="code">setNoLinewrap()</code> can be used to suppress this behavior locally. The default is 80.
-							</p>
-</li>
-<li class="listitem">
-<p>
-								
-<code class="code">setIndentationSpace(String)</code> defines the string which is used for a single degree of indentation. The default is two whitespace.
-							</p>
-</li>
-<li class="listitem">
-<p>
-								
-<code class="code">setWhitespaceRule(AbstractRule)</code> defines the grammar rule which is used to match whitespace. This is needed by the formatter to identify whitespace and to insert whitespace. The default is the rule named 
-								<code class="code">WS</code>.
-							</p>
-</li>
-<li class="listitem">
-<p>
-								
-<code class="code">setIndentation(start, end)</code> increases the level of indentation when the element 
-								<code class="code">start</code> is matched and decreases the level when element 
-								<code class="code">end</code> is matched. The matching of elements happens in the same way as it does for formatting rules.
+<code class="code">setAutoLinewrap(int)</code> defines the amount of characters after which a line-break should be dynamically inserted between two tokens. The instructions 
+								<code class="code">setNoLinewrap().???()</code>,  
+								<code class="code">setNoSpace().???()</code> and 
+								<code class="code">setSpace(space).???()</code> suppress this behavior locally. The default is 80.
 							</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="section" title="FormattingConfig Rules">
+<div class="section" title="FormattingConfig Instructions">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="FormattingConfigRules"></a>FormattingConfig Rules</h4>
+<a name="FormattingConfigInstructions"></a>FormattingConfig Instructions</h4>
 </div>
 </div>
 </div>
 <p>Per default, the 
-						<a class="link" href="formatting.html#declarativeformatter" title="Declarative Formatter">Declarative Formatter</a> inserts one whitespace between two tokens. Rules can be used to specify a different behavior. They consist of two parts: 
-						<span class="emphasis"><em>When</em></span> to apply the rule and 
+						<a class="link" href="formatting.html#declarativeformatter" title="Declarative Formatter">Declarative Formatter</a> inserts one whitespace between two tokens. Instructions can be used to specify a different behavior. They consist of two parts: 
+						<span class="emphasis"><em>When</em></span> to apply the instruction and 
 						<span class="emphasis"><em>what</em></span> to do.
 					</p>
 <p>To understand 
-						<span class="emphasis"><em>when</em></span> a rule is applied think of a stream of tokens whereas each token is associated with the corresponding grammar element. The rules are matched against these grammar elements. The following matching criteria exist.
+						<span class="emphasis"><em>when</em></span> an instruction is applied think of a stream of tokens whereas each token is associated with the corresponding grammar element. The instructions are matched against these grammar elements. The following matching criteria exist:
 					</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
 <p>
 								
-<code class="code">after(ele)</code>: The rule is executed after the grammar element 
-								<code class="code">ele</code> has been matched. For example, if your grammar uses the keyword &bdquo;;&rdquo; to end lines, this can instruct the formatter to insert a line-break after the semicolon.  
+<code class="code">after(ele)</code>: The instruction is applied after the grammar element 
+								<code class="code">ele</code> has been matched. For example, if your grammar uses the keyword &ldquo;;&rdquo; to end lines, this can instruct the formatter to insert a line break after the semicolon.  
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">before(ele)</code>: The rule is executed before the matched element. For example, if your grammar contains lists which separate its values with keyword &bdquo;,&rdquo;, you can instruct the formatter to suppress the whitespace before the comma.
+<code class="code">before(ele)</code>: The instruction is executed before the matched element. For example, if your grammar contains lists which separate its values with keyword &ldquo;,&rdquo;, you can instruct the formatter to suppress the whitespace before the comma.
 							</p>
 </li>
 <li class="listitem">
@@ -178,15 +173,17 @@
 								
 <code class="code">between(ele1, ele2)</code>: This matches if 
 								<code class="code">ele2</code> directly follows 
-								<code class="code">ele1</code>. There may be no other elements in between.
+								<code class="code">ele1</code> in the document. There may be no other tokens in between 
+								<code class="code">ele1</code> and 
+								<code class="code">ele2</code>.
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
 <code class="code">bounds(ele1, ele2)</code>: This is the same as 
-								<code class="code">before(ele1)</code> combined with  
-								<code class="code">after(ele2)</code>.
+								<code class="code">after(ele1)</code> combined with  
+								<code class="code">before(ele2)</code>.
 							</p>
 </li>
 <li class="listitem">
@@ -196,23 +193,39 @@
 								<code class="code">ele1</code> is matched, and disabled when 
 								<code class="code">ele2</code> is matched. Thereby, the rule is active for the complete region which is surrounded by 
 								<code class="code">ele1</code> and 
-								<code class="code">ele2</code>. 
+								<code class="code">ele2</code>.
 							</p>
 </li>
 </ul>
 </div>
+<p>The term 
+						<span class="emphasis"><em>tokens</em></span> is used slightly different here compared to the parser/lexer. Here, a token is a keyword or the string that is matched by a terminal rule, datatype rule or cross reference. In the terminology of the lexer a datatype rule can match a composition of multiple tokens.
+					</p>
 <p>The parameter 
 						<code class="code">ele</code> can be a grammar&rsquo;s 
 						<code class="code">AbstractElement</code> or a grammar&rsquo;s 
-						<code class="code">AbstractRule</code>. However, only elements which represent a token in the textual representation can be matched. This are:
+						<code class="code">AbstractRule</code>. All grammar rules and almost all abstract elements can be matched. This includes rule calls, parser rules, groups and alternatives. The semantic of 
+						<code class="code">before(ele)</code>, 
+						<code class="code">after(ele)</code>, etc. for rule calls and parser rules is identical to when the parser would &ldquo;pass&rdquo; this part of the grammar. The stack of called rules is taken into account. The following abstract elements can 
+						<span class="bold"><strong>not</strong></span> have assigned formatting instructions:
 					</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
-<p>terminal rules for comments.</p>
+<p>Actions. E.g. 
+								<code class="code">{MyAction}</code> or 
+								<code class="code">{MyAction.myFeature=current}</code>.
+							</p>
 </li>
 <li class="listitem">
-<p>keywords, assignments, call to terminal or data-type rules.</p>
+<p>Grammar elements nested in datatype rules. This is due to to the fact that tokens matched by a data type rule are treated as atomic by the serializer. To format the tokens themselfs, please implement a 
+								<a class="link" href="valueconverter.html" title="Value Converter">ValueConverter</a>. 
+							</p>
+</li>
+<li class="listitem">
+<p>Grammar elements nested in 
+								<code class="code">CrossReferences</code>.
+							</p>
 </li>
 </ul>
 </div>
@@ -222,13 +235,38 @@
 <li class="listitem">
 <p>
 								
-<code class="code">setLinewrap()</code>: Inserts a line-break at this position.
+<code class="code">setIndentationIncrement()</code> increments indentation by one unit at this position. Whether one unit consists of one tab-character or spaces is defined by 
+								<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IIndentationInformation.java?root=Modeling_Project&view=co" target="_new">IIndentationInformation</a>. The default implementation consults Eclipse&rsquo;s 
+								<code class="code">PreferenceStore</code>.
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">setLinewrap(int)</code>: Inserts the specified number of line-breaks at this position.
+<code class="code">setIndentationDecrement()</code> decrements indentation by one unit.
+							</p>
+</li>
+<li class="listitem">
+<p>
+								
+<code class="code">setLinewrap()</code>: Inserts a line-wrap at this position.
+							</p>
+</li>
+<li class="listitem">
+<p>
+								
+<code class="code">setLinewrap(int count)</code>: Inserts 
+								<code class="code">count</code> numbers of line-wrap at this position.
+							</p>
+</li>
+<li class="listitem">
+<p>
+								
+<code class="code">setLinewrap(int min, int default, int max)</code>: If the amount of line-wraps that have been at this position before formatting can be determined (i.g. when a node model is present), then the amount of of line-wraps is adjusted to be within the interval [
+								<code class="code">min</code>, 
+								<code class="code">max</code>] and is then reused. In all other cases 
+								<code class="code">default</code> line-wraps are inserted. Example: 
+								<code class="code">setLinewrap(0, 0, 1)</code> will preserve existing line-wraps, but won&rsquo;t allow more than one line-wrap between two tokens.    
 							</p>
 </li>
 <li class="listitem">
@@ -240,7 +278,45 @@
 <li class="listitem">
 <p>
 								
+<code class="code">setSpace(String space)</code>: Inserts the string 
+								<code class="code">space</code> at this position. If you use this to insert something else than whitespace, tabs or newlines, a small puppy will die somewhere in this world.
+							</p>
+</li>
+<li class="listitem">
+<p>
+								
 <code class="code">setNoSpace()</code>: Suppresses the whitespace between tokens at this position. Be aware that between some tokens a whitespace is required to maintain a valid concrete syntax. 
+							</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" title="Grammar Element Finders">
+<div class="titlepage">
+<div>
+<div>
+<h4 class="title">
+<a name="GrammarElementFinders"></a>Grammar Element Finders</h4>
+</div>
+</div>
+</div>
+<p>Sometimes, if a grammar contains many similar elements for which the same formatting instructions ought to apply, it can be tedious to specify them for each grammar element individually. The 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/IGrammarAccess.java?root=Modeling_Project&view=co" target="_new">IGrammarAccess</a> provides convenience methods for this. The find methods are available for the grammar and for each parser rule.
+					</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>
+								
+<code class="code">List&lt;Keyword&gt; findKeywords(String... keywords)</code> returns all keywords that equal one of the parameters.
+							</p>
+</li>
+<li class="listitem">
+<p>
+								
+<code class="code">List&lt;Pair&lt;Keyword, Keyword&gt;&gt; findKeywordPairs(String leftKw, String rightKw)</code>: returns tuples of keywords from the same grammar rule. Pairs are matched nested and sequentially.  Example: for 
+								<code class="code">Rule: '(' name=ID ('(' foo=ID ')') ')' | '(' bar=ID ')'</code> 
+								<code class="code">findKeywordPairs("(", ")")</code> returns three pairs.
 							</p>
 </li>
 </ul>

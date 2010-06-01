@@ -7,7 +7,7 @@
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="index.html" title="Xtext User Guide">
 <link rel="prev" href="index.html" title="Xtext User Guide">
-<link rel="next" href="DSL.html" title="What is a domain-specific language">
+<link rel="next" href="Howdoesitwork.html" title="How does it work?">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Overview</h1>
@@ -20,87 +20,9 @@
 </div>
 </div>
 </div>
-<p>Xtext is a framework for the development of 
-				<a class="link" href="DSL.html" title="What is a domain-specific language">domain-specific languages</a> and other textual programming languages. It is tightly integrated with the 
-				<a class="ulink" href="http://www.eclipse.org/emf" target="_new">Eclipse Modeling Framework (EMF)</a> and leverages the Eclipse Platform in order to provide a language-specific integrated development environment (IDE). 
-			</p>
-<p>In contrast to common parser generators (like e.g. JavaCC or ANTLR), Xtext derives much more than just a parser and lexical analyzer (lexer) from an input grammar. 
-				The grammar language is used to describe and generate:</p>
-<div class="itemizedlist">
-<ul class="itemizedlist" type="disc">
-<li class="listitem">
-<p>an incremental, ANTLR 3 based parser and lexer to read your models from text,</p>
-</li>
-<li class="listitem">
-<p>Ecore models (optional),</p>
-</li>
-<li class="listitem">
-<p>a serializer to write your models back to text,</p>
-</li>
-<li class="listitem">
-<p>a linker, to establish cross links between model elements,</p>
-</li>
-<li class="listitem">
-<p>an implementation of the EMF Resource interface with full support for loading and saving EMF models, and</p>
-</li>
-<li class="listitem">
-<p>an integration of the language into your Eclipse IDE.</p>
-</li>
-</ul>
-</div>
-<p>Some of the IDE features, that are either derived from the grammar or easily implementable, are</p>
-<div class="itemizedlist">
-<ul class="itemizedlist" type="disc">
-<li class="listitem">
-<p>
-						
-<a class="link" href="highlighting.html" title="Syntax Coloring">syntax coloring</a>,
-					</p>
-</li>
-<li class="listitem">
-<p>
-						
-<a class="link" href="hyperlinking.html" title="Hyperlinking">model navigation (F3, etc.)</a>,
-					</p>
-</li>
-<li class="listitem">
-<p>
-						
-<a class="link" href="contentAssist.html" title="Content Assist">code completion</a>,
-					</p>
-</li>
-<li class="listitem">
-<p>
-						
-<a class="link" href="validation.html#quickfixes" title="Quickfixes">quick fixes</a>
-					
-</p>
-</li>
-<li class="listitem">
-<p>
-						
-<a class="link" href="formatting.html" title="Formatting (Pretty Printing)">code formatting</a>
-					
-</p>
-</li>
-<li class="listitem">
-<p>
-						
-<a class="link" href="outline.html" title="Outline View">outline view</a>, and
-					</p>
-</li>
-<li class="listitem">
-<p>
-						
-<a class="link" href="templates.html" title="Template Proposals">code templates</a>.
-					</p>
-</li>
-</ul>
-</div>
-<p>The generated artifacts are wired up through 
-				<a class="ulink" href="http://code.google.com/p/google-guice/" target="_new">Google Guice</a>, a dependency injection framework which makes it easy to exchange certain functionality in a non-invasive manner.
-			</p>
-<p>Although Xtext aims at supporting fast iterative development of domain-specific languages, it can be used to implement IDEs for general purpose programming languages as well.</p>
+<p>No matter if you want to create a small textual domain-specific language (DSL) or you want to implement a full-blown general purpose programming language. 
+				With Xtext you can create textual programming languages in a snap. Also if you already have an existing language but it lacks decent tool support, you can use Xtext to create 
+				an Eclipse-based IDE providing editing experience known from modern Java IDEs in a surprisingly short amount of time. We call Xtext a language development framework.  </p>
 </div>
 </body>
 </html>

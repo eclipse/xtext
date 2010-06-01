@@ -2,6 +2,7 @@
 010-concepts.textile
 
 015-getting-started.textile
+016-working-with-Xtext-models.textile
 017-getting-started-xpand.textile
 019-emf.textile
 
@@ -35,6 +36,6 @@
 199-jvmtypes.textile
 
 200-Appendix.textile
-210-migrating-from-oaw.textile
 215-migrating-from-0.7.textile
 230-antlr-ip-issue.textile
+

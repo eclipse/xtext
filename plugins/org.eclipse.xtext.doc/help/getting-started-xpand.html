@@ -6,12 +6,12 @@
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="getting-started.html" title="Getting Started">
-<link rel="prev" href="getting-started.html" title="Getting Started">
+<link rel="prev" href="processing_Xtext_models.html" title="Processing Xtext models">
 <link rel="next" href="Wherenext.html" title="Where next?">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Writing a code generator</h1>
-<p>In this part of the tutorial, we will write a code generator that is capable of processing the models created with the DSL editor you developed  in the previous section.</p>
+<p>In this part of the tutorial, we will write a code generator that is capable of processing the models created with the DSL editor you developed in the previous section.</p>
 <div class="section" title="Creating the main template">
 <div class="titlepage">
 <div>
@@ -50,8 +50,10 @@
 </li>
 </ul>
 </div>
-<p>In the project navigator, right click on 
-					<span class="emphasis"><em>org.xtext.example.start.generator/src/templates</em></span> and select 
+<p>In the project navigator, open the  folder 
+					<span class="emphasis"><em>org.eclipse.xtext.example.domainmodel.generator/src/templates</em></span> and delete the files 
+					<span class="emphasis"><em>Template.xpt</em></span> and 
+					<span class="emphasis"><em>Extensions.ext</em></span>. Then right click on the same folder and select 
 					<span class="emphasis"><em>New -&gt; Other... -&gt; Xpand Template</em></span>. Name the new template 
 					<code class="code">Main.xpt</code> and click on 
 					<span class="emphasis"><em>Finish</em></span>.
@@ -59,7 +61,7 @@
 <p>First, we need to import the meta model, as we&rsquo;re going to be working with the concepts from the meta model:</p>
 <div class="literallayout">
 <p>
-<code class="code">&laquo;IMPORT&nbsp;entities&raquo;<br>
+<code class="code">&laquo;IMPORT&nbsp;domainmodel&raquo;<br>
 
 </code>
 </p>
@@ -70,9 +72,9 @@
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&raquo;<br>
-&nbsp;&nbsp;&laquo;EXPAND&nbsp;DAO::dao&nbsp;FOREACH&nbsp;this.elements.typeSelect(Entity)&raquo;<br>
-&nbsp;&nbsp;&laquo;EXPAND&nbsp;Entity::entity&nbsp;FOREACH&nbsp;this.elements.typeSelect(Entity)&raquo;<br>
+<code class="code">&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Entity&raquo;<br>
+&nbsp;&nbsp;&laquo;EXPAND&nbsp;DAO::dao&raquo;<br>
+&nbsp;&nbsp;&laquo;EXPAND&nbsp;Entity::entity&raquo;<br>
 &laquo;ENDDEFINE&raquo;<br>
 
 <br>
@@ -80,20 +82,12 @@
 </code>
 </p>
 </div>
-<p>By using the expression 
-					<code class="code">this.elements.typeSelect(Entity)</code>, we make sure we only iterate over 
-					<code class="code">Entity</code> elements, and skip 
-					<code class="code">SimpleType</code> elements.
-				</p>
-<p>Your template 
-					<code class="code">Main.xpt</code> should now look like this: 
-				</p>
 <div class="literallayout">
 <p>
-<code class="code">&laquo;IMPORT&nbsp;entities&raquo;<br>
-&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&raquo;<br>
-&nbsp;&nbsp;&laquo;EXPAND&nbsp;DAO::dao&nbsp;FOREACH&nbsp;this.elements.typeSelect(Entity)&raquo;<br>
-&nbsp;&nbsp;&laquo;EXPAND&nbsp;Entity::entity&nbsp;FOREACH&nbsp;this.elements.typeSelect(Entity)&raquo;<br>
+<code class="code">&laquo;IMPORT&nbsp;domainmodel&raquo;<br>
+&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Entity&raquo;<br>
+&nbsp;&nbsp;&laquo;EXPAND&nbsp;DAO::dao&raquo;<br>
+&nbsp;&nbsp;&laquo;EXPAND&nbsp;Entity::entity&raquo;<br>
 &laquo;ENDDEFINE&raquo;<br>
 
 <br>
@@ -124,28 +118,28 @@
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">&laquo;IMPORT&nbsp;entities&raquo;<br>
+<code class="code">&laquo;IMPORT&nbsp;domainmodel&raquo;<br>
 
 <br>
 &laquo;DEFINE&nbsp;entity&nbsp;FOR&nbsp;Entity&raquo;<br>
 &nbsp;&nbsp;&laquo;FILE&nbsp;this.name&nbsp;+&nbsp;".java"&raquo;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;this.name&raquo;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;EXPAND&nbsp;property&nbsp;FOREACH&nbsp;this.properties&raquo;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;EXPAND&nbsp;feature&nbsp;FOREACH&nbsp;this.features&raquo;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;&laquo;ENDFILE&raquo;<br>
 &laquo;ENDDEFINE&raquo;<br>
 
 <br>
-&laquo;DEFINE&nbsp;property&nbsp;FOR&nbsp;Property&raquo;<br>
-&nbsp;&nbsp;private&nbsp;&laquo;this.type.name&raquo;&nbsp;&laquo;this.name&raquo;;<br>
+&laquo;DEFINE&nbsp;feature&nbsp;FOR&nbsp;Feature&raquo;<br>
+&nbsp;&nbsp;private&nbsp;&laquo;this.type.referenced.name&raquo;&nbsp;&laquo;this.name&raquo;;<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;this.name.toFirstUpper()&raquo;(&laquo;this.type.name&raquo;&nbsp;&laquo;this.name&raquo;)&nbsp;{<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;this.name.toFirstUpper()&raquo;(&laquo;this.type.referenced.name&raquo;&nbsp;&laquo;this.name&raquo;)&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;this.name&raquo;&nbsp;=&nbsp;&laquo;this.name&raquo;;<br>
 &nbsp;&nbsp;}<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;&laquo;this.type.name&raquo;&nbsp;get&laquo;this.name.toFirstUpper()&raquo;()&nbsp;{<br>
+&nbsp;&nbsp;public&nbsp;&laquo;this.type.referenced.name&raquo;&nbsp;get&laquo;this.name.toFirstUpper()&raquo;()&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;this.&laquo;this.name&raquo;;<br>
 &nbsp;&nbsp;}<br>
 &laquo;ENDDEFINE&raquo;<br>
@@ -171,7 +165,7 @@
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">&laquo;IMPORT&nbsp;entities&raquo;<br>
+<code class="code">&laquo;IMPORT&nbsp;domainmodel&raquo;<br>
 
 <br>
 &laquo;DEFINE&nbsp;dao&nbsp;FOR&nbsp;Entity&raquo;<br>
@@ -228,11 +222,27 @@
 </div>
 </div>
 </div>
-<p>You might have noticed the generator workflow 
-					<code class="code">org.xtext.example.start.generator/src/workflow/EntitiesGenerator.mwe2</code> will invoke a template named 
-					<code class="code">Template.xpt</code>, so we need to change this to make sure the right templates get invoked. Open 
-					<code class="code">/org.xtext.example.start.generator/src/workflow/EntitiesGenerator.mwe</code> and make sure it invokes 
-					<code class="code">Main.xpt</code>:
+<p>The generator workflow 
+					<code class="code">org.eclipse.xtext.example.domainmodel.generator/src/workflow/EntitiesGenerator.mwe2</code>  needs some adjustment to suit our language. First, make sure the Reader offers 
+					<code class="code">Entity</code> objects, by changing the 
+					<code class="code">type</code> assignment in the 
+					<code class="code">SlotEntry</code> configuration: 
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">load&nbsp;=&nbsp;{<br>
+			slot&nbsp;=&nbsp;"model"<br>
+			type&nbsp;=&nbsp;"Entity"<br>
+		}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>Second, invoke the right template 
+					<code class="code">Main.xpt</code> by changing the 
+					<code class="code">expand</code> assignment:
 				</p>
 <div class="literallayout">
 <p>
@@ -250,6 +260,11 @@
 </code>
 </p>
 </div>
+<p>In this configuration, the generator will generate code form all models in the 
+					<span class="emphasis"><em>src/model</em></span> folder. Delete everything in there and create a new file 
+					<code class="code">Example.dmodel</code>, fill it with the contents of the 
+					<a class="link" href="getting-started.html#getting-started-xtext" title="Creating a DSL">example model</a> and save.    
+				</p>
 </div>
 <div class="section" title="Running the generator">
 <div class="titlepage">
@@ -261,10 +276,10 @@
 </div>
 </div>
 <p>In order to invoke the generator, select 
-					<code class="code">EntitiesGenerator.mwe</code> (in 
-					<code class="code">org.xtext.example.start.generator/src/workflow/</code>) and choose 
+					<code class="code">DomainmodelGenerator.mwe</code> (in 
+					<code class="code">org.eclipse.xtext.example.domainmodel.generator/src/workflow/</code>) and choose 
 					<span class="emphasis"><em>Run As -&gt; MWE Workflow</em></span> from the context menu. You&rsquo;ll see a bunch of log messages in the console view, and after a few seconds, you&rsquo;ll find a number of just generated files in 
-					<code class="code">org.xtext.example.entity.generator/src-gen</code>.
+					<code class="code">org.eclipse.xtext.example.domainmodel.generator/src-gen</code>.
 				</p>
 <p>Please note that you&rsquo;ll get a number of compile-time errors now, as the DAO classes depend on Hibernate. To get rid of them, just download Hibernate from http://www.hibernate.org and add it to the build class path of the project.</p>
 </div>

@@ -1,0 +1,109 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Referring Java Types</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="index.html" title="Xtext User Guide">
+<link rel="prev" href="projectwizard.html" title="Project Wizard">
+<link rel="next" href="CustomizingPoints.html" title="Customizing Points">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Referring Java Types</h1>
+<p>A common use case when developing languages is the requirement to refer to existing concepts of other 
+			languages. Xtext makes this very easy for other self defined languages. However, often it is very useful
+			to have access to the available types of the Java Virtual Machine. The JVM types ecore model enables
+			clients to do exactly this. It is possible to create cross references to classes, interfaces and their 
+			fields and methods. Basically every information about the structural concepts of the Java type system
+			is available via the JVM types. This includes annotations and their specific values and enumeration 
+			literals as well.</p>
+<p>The implementation will be selected transparently to the client code depending on where the code is 
+			executed. If the environment is a plain stand-alone Java or OSGi environment, the 
+			<code class="code">java.lang.reflect</code> 
+			API will be used to deduce the necessary data. On the contrary, the type-model will be created from the 
+			live data of the JDT in an interactive Eclipse environment. All this happens behind the scenes via different
+			implementations that are bound to specific interfaces with Google Guice. 
+		</p>
+<div class="section" title="How to Use Java Types">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="HowtoUseJavaTypes"></a>How to Use Java Types </h2>
+</div>
+</div>
+</div>
+<p>Using the JVM types model is very simple. First of all, the grammar has to import the appropriate ecore model. 
+				Thanks to content assist this is easy to spot in the list of proposals.  </p>
+<div class="literallayout">
+<p>
+<code class="code">import&nbsp;"http://www.eclipse.org/xtext/common/JavaVMTypes"&nbsp;as&nbsp;types<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>The next step is to actually refer to an imported concept. Let&rsquo;s define a mapping to actually available
+				JavaTypes for the simple data types in the self defined language. By means of cross references this works
+				as one got already used to when dealing with references in Xtext.</p>
+<div class="literallayout">
+<p>
+<code class="code">Type:<br>
+	'type'&nbsp;name=ID&nbsp;'mapped-to'&nbsp;javaType=[types::JvmType|FQN];<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>Last but not least, the 
+				<span class="emphasis"><em>TypesGeneratorFragment</em></span> has to be added to the workflow. The safest way is 
+				to add it after the actually used scoping fragments as a specialized version of the 
+				<span class="emphasis"><em>IGlobalScopeProvider</em></span> 
+				will be configured. Don&rsquo;t forget to refer to the genmodel of the Java VM types. The shortest possible
+				URI is a class-path-URI.    
+			</p>
+<div class="literallayout">
+<p>
+<code class="code">fragment&nbsp;=&nbsp;ecore.EcoreGeneratorFragment&nbsp;{<br>
+	referencedGenModels="classpath:/model/JavaVMTypes.genmodel"<br>
+}<br>
+
+<br>
+...<br>
+//&nbsp;scoping&nbsp;and&nbsp;exporting&nbsp;API&nbsp;<br>
+...<br>
+
+<br>
+fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>After regenerating your language, it will be allowed to define a type 
+				<span class="emphasis"><em>Date</em></span> that maps to the 
+				<span class="emphasis"><em>java.util.Date</em></span>
+				like this:
+			</p>
+<div class="literallayout">
+<p>
+<code class="code">type&nbsp;Date&nbsp;mapped-to&nbsp;java.util.Date<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>This two steps will provide a nice integration into the Eclipse JDT. There is 
+				<span class="emphasis"><em>Find References</em></span> on Java methods, 
+				fields and types that will reveal results in your language files. 
+				<span class="emphasis"><em>Go To Declaration</em></span> works as expected
+				and content assist will propose the list of available types. 
+			</p>
+</div>
+</body>
+</html>

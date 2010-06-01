@@ -137,7 +137,7 @@ end<br>
 					</p>
 <p>There are also two different implementations of 
 						<code class="code">IQualifiedNameProvider</code>. Both work by looking up an 
-						<code class="code">EAttribute</code> with the name &sbquo;name&rsquo;. The 
+						<code class="code">EAttribute</code> with the name &lsquo;name&rsquo;. The 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/SimpleNameProvider.java?root=Modeling_Project&view=co" target="_new">SimpleNameProvider</a> just returns the plain value, while the 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.java?root=Modeling_Project&view=co" target="_new">DefaultDeclarativeQualifiedNameProvider</a> concats the simple name with the qualified name of its parent exported 
 						<code class="code">EObject</code>. This effectively simulates the qualified name computation of most name space based languages (like e.g. Java). 
@@ -240,7 +240,7 @@ Import&nbsp;:&nbsp;<br>
 <p>This effectively allows import statements to be declared before the events section. In addition you&rsquo;ll have to make sure that you have bound the 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportUriGlobalScopeProvider.java?root=Modeling_Project&view=co" target="_new">ImportUriGlobalScopeProvider</a> for the type 
 						<code class="code">IGlobalScopeProvider</code> by the means of Guice:#dependencyInjection. That implementation looks up any 
-						<code class="code">EAttributes</code> named &sbquo;importURI&rsquo; in your model and interprets their values as imports. That is it adds the corresponding resources to the current resource&rsquo;s resource set. In addition the scope provider uses the 
+						<code class="code">EAttributes</code> named &lsquo;importURI&rsquo; in your model and interprets their values as imports. That is it adds the corresponding resources to the current resource&rsquo;s resource set. In addition the scope provider uses the 
 						<code class="code">IResourceDescription.Manager</code>#resource_descriptions of that imported resource to compute all the 
 						<code class="code">IEObjectDescriptions</code> returned by the 
 						<code class="code">IScope</code>.  
@@ -257,7 +257,7 @@ Import&nbsp;:&nbsp;<br>
 </div>
 <p>The other possibility is to have some kind of external configuration in order to define what is visible outside a resource. Java for instances uses the notion of classpaths to define containers (jars and class folders) which contain any referenceable elements. In the case of Java also the order of such entries is important. 
 						Since version 1.0.0 Xtext provides support for this kind of global scoping. Actually by default Xtext leverages the classpath mechanism since it is well designed and already understood by most of our users. Also the available tooling provided by JDT and PDE to configure the classpath is of high value. However it is just a default you can reuse the infrastructure without reusing Java and therefore depending on JDT.</p>
-<p>In order to know what is available in the &bdquo;world&rdquo; a global scope provider which relies on external configuration needs to read that configuration in and be able to find all candidates for a certain EReference in those containers. If you don&rsquo;t want to force users to have a folder and file name structure reflecting the actual qualified names of the referenceable 
+<p>In order to know what is available in the &ldquo;world&rdquo; a global scope provider which relies on external configuration needs to read that configuration in and be able to find all candidates for a certain EReference in those containers. If you don&rsquo;t want to force users to have a folder and file name structure reflecting the actual qualified names of the referenceable 
 						<code class="code">EObjects</code>, you&rsquo;ll have to load all resources up front and either keep holding them in memory or remembering all information which is needed for reference resolution. In Xtext that information is provided by a so called 
 						<code class="code">IEObjectDescription</code>#resource_descriptions. 
 					</p>
@@ -435,8 +435,8 @@ entity&nbsp;Foo;<br>
 </div>
 </div>
 </div>
-<p>The default implementation for all languages looks within the current file for an EObject of the respective type. In the example above this would be an &bdquo;Entity&rdquo; which by convention has a 
-					<code class="code">name</code> attribute set to &sbquo;Entity01&rsquo;. 
+<p>The default implementation for all languages looks within the current file for an EObject of the respective type. In the example above this would be an &ldquo;Entity&rdquo; which by convention has a 
+					<code class="code">name</code> attribute set to &lsquo;Entity01&rsquo;. 
 				</p>
 <p>Given the grammar :</p>
 <div class="literallayout">
@@ -697,7 +697,7 @@ entity&nbsp;Foo;<br>
 </div>
 </div>
 </div>
-<p>The QualifiedNameScopeProvider looks up EAttributes with name &sbquo;importNamespace&rsquo; and interprets such as import statements.
+<p>The QualifiedNameScopeProvider looks up EAttributes with name &lsquo;importNamespace&rsquo; and interprets such as import statements.
 						By default qualified names with or without a wildcard at the end are supported. For an import of a qualified name the simple name is made available as we know from e.g. Java, where</p>
 <div class="literallayout">
 <p>
@@ -706,7 +706,7 @@ entity&nbsp;Foo;<br>
 </code>
 </p>
 </div>
-<p>makes it possible to refer to &sbquo;java.util.Set&rsquo; by its simple name &sbquo;Set&rsquo;.
+<p>makes it possible to refer to &lsquo;java.util.Set&rsquo; by its simple name &lsquo;Set&rsquo;.
 						Contrary to Java the import is not active for the whole file but only for the namespace it is declared in and its child namespaces. That is why you can write the following in the example DSL:</p>
 <div class="literallayout">
 <p>
