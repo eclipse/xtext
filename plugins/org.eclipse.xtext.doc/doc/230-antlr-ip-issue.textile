@@ -1,25 +1,32 @@
 
 h1(#antlr_ip_issue). The ANTLR IP issue (or which parser to use?)
 
-In order to be able to parse models written in your language, Xtext needs to provide a special parser for it.
-The parser is generated from the language grammar. 
+In order to be able to parse models written in your language, Xtext needs to provide a special parser 
+for it. The parser is generated from the self defined language grammar. 
 
-Currently it is recommended to use the "ANTLR-based":http://www.antlr.org parser.
-ANTLR is a very sophisticated parser generator framework based on a so called LL(*) algorithm.
+It is recommended to use the "ANTLR":http://www.antlr.org based parser.
+ANTLR is a very sophisticated parser generator framework which implements a so called LL(*) algorithm.
 It is fast, simple and at the same time has some very nice and sophisticated features. Especially its 
 support for error recovery is much better than what other parser generators provide.
 
-ANTLR comes in two parts: the runtime and the generator.
+Xtext uses ANTLR 3 which comes in two parts: the runtime and the generator.
 Both are shipped under the BSD license and have a clean intellectual property history. 
-However the generator is still implemented in an older version of ANTLR (v 2.x), where it was not possible for the Eclipse Foundation 
-to be sure where exactly every line of code originated. Therefore ANTLR v 2.x didn't get the required approval.
-Eclipse has a strict IP policy, which makes sure that everything provided by Eclipse can be consumed under the terms of the Eclipse Public License.
-The details are described in "this document":http://www.eclipse.org/org/documents/Eclipse_IP_Policy.pdf.
+However the ANTLR parser generator is unfortunately still implemented in an older version of itself 
+(v 2.x), where it was not possible for the Eclipse Foundation to ensure where exactly every line of 
+code originated. Therefore ANTLR 2 didn't get the required IP approval. Eclipse has a strict IP policy, 
+which makes sure that everything provided by Eclipse can be consumed under the terms of the Eclipse 
+Public License. The details are described in 
+"this document":http://www.eclipse.org/org/documents/Eclipse_IP_Policy.pdf. That is why we are not 
+allowed to ship Xtext with the ANTLR generator but only with the IP approvied runtime components. We 
+have to provide it separately and for your convenience you'll be asked to download the ANTLR generator 
+when you run your language generator for the first time. You can even download it directly or install 
+an additional plugin into Eclipse: 
 
-Unfortunately as the generator of ANTLR V3 needs ANTLR V2 it is as well not yet IP approved.
-That is why we are not allowed to ship Xtext with the ANTLR generator (the runtime is IP approved), but have to provide it separately via update-site at:
+* "http://download.itemis.com/antlr-generator-3.0.1.jar":http://download.itemis.com/antlr-generator-3.0.1.jar
+* or use the update site at "http://download.itemis.com/updates":http://download.itemis.com/updates
 
-* "http://download.itemis.com/updates/":http://download.itemis.com/updates/
+The workflow will not bother you with this issue on subsequent executions as the archive will be stored
+in your workspace root directory and can thereby be reused during the next run. 
 
 **IMPORTANT** :
 __Although if you use the non-IP approved ANTLR generator, you can still ship any languages and the IDEs you've developed with Xtext without any worrying, because the *ANTLR runtime is IP approved*__
