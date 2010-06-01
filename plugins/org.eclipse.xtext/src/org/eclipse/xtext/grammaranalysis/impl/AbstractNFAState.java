@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -44,6 +45,15 @@ import com.google.common.collect.Sets;
 public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransition<S, T>> extends AdapterImpl implements
 		INFAState<S, T> {
 
+	protected static class IsInitializedMarker extends AdapterImpl {
+		protected final Object builder;
+
+		public IsInitializedMarker(Object builder) {
+			super();
+			this.builder = builder;
+		}
+	}
+
 	protected List<T> allIncoming;
 
 	protected final NFABuilder<S, T> builder;
@@ -62,7 +72,7 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 		this.builder = builder;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected void addOutgoing(AbstractElement ele, Set<AbstractElement> visited, boolean isRuleCall,
 			AbstractElement loopCenter) {
 		if (!visited.add(ele))
@@ -70,10 +80,13 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 		if (filter(ele))
 			collectOutgoing(ele, visited, isRuleCall, loopCenter);
 		else {
+			S target = builder.getState(ele);
+			T transition = builder.getTransition((S) this, target, isRuleCall, loopCenter);
 			if (isRuleCall)
-				outgoingRuleCalls.add(builder.getTransition((S) this, builder.getState(ele), true, loopCenter));
+				outgoingRuleCalls.add(transition);
 			else
-				outgoing.add(builder.getTransition((S) this, builder.getState(ele), false, loopCenter));
+				outgoing.add(transition);
+			((AbstractNFAState) target).getIncoming().add(transition);
 		}
 	}
 
@@ -201,19 +214,18 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 	}
 
 	public List<T> getAllIncoming() {
-		if (allIncoming != null)
-			return allIncoming;
-		allIncoming = Lists.newArrayList();
+		for (Adapter a : element.eResource().eAdapters())
+			if (a instanceof IsInitializedMarker && ((IsInitializedMarker) a).builder == builder)
+				return getIncoming();
+		element.eResource().eAdapters().add(new IsInitializedMarker(builder));
 		for (EObject root : element.eResource().getContents())
 			if (root instanceof Grammar)
 				for (AbstractRule rule : ((Grammar) root).getRules())
 					if (rule.getType().getClassifier() instanceof EClass)
 						for (AbstractElement ele : EcoreUtil2.eAllOfType(rule, AbstractElement.class))
 							if (!builder.filter(ele))
-								for (T t : builder.getState(ele).getAllOutgoing())
-									if (t.getTarget() == this)
-										allIncoming.add(t);
-		return allIncoming;
+								builder.getState(ele).getOutgoing();
+		return getIncoming();
 	}
 
 	public List<T> getAllOutgoing() {
@@ -231,6 +243,12 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 
 	public AbstractElement getGrammarElement() {
 		return element;
+	}
+
+	protected List<T> getIncoming() {
+		if (allIncoming == null)
+			allIncoming = Lists.newArrayList();
+		return allIncoming;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

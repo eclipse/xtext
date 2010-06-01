@@ -10,9 +10,12 @@ package org.eclipse.xtext.grammaranalysis.impl;
 
 import org.eclipse.xtext.AbstractElement;
 
+import com.google.inject.Singleton;
+
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Singleton
 public class DefaultForwardNFAProvider extends AbstractNFAProvider<DefaultNFAState, DefaultNFATransition> {
 
 	public static class DefaultForwardsNFABuilder extends

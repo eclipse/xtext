@@ -22,14 +22,22 @@ import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public abstract class AbstractDeclarativeFormatter extends BaseFormatter {
 
-	private FormattingConfig config;
+	@Singleton
+	protected static class ConfigStore {
+		protected FormattingConfig config;
+	}
 
+	@Inject
+	private ConfigStore config;
+
+	@Inject
 	private IGrammarAccess grammarAccess;
 
 	@Inject
@@ -65,15 +73,27 @@ public abstract class AbstractDeclarativeFormatter extends BaseFormatter {
 	}
 
 	protected synchronized FormattingConfig getConfig() {
-		if (config == null) {
-			config = createFormattingConfig();
-			configureFormatting(config);
+		if (config.config == null) {
+			config.config = createFormattingConfig();
+			configureFormatting(config.config);
 		}
-		return config;
+		return config.config;
 	}
 
 	protected IGrammarAccess getGrammarAccess() {
 		return grammarAccess;
+	}
+
+	protected IHiddenTokenHelper getHiddenTokenHelper() {
+		return hiddenTokenHelper;
+	}
+
+	protected IIndentationInformation getIndentInfo() {
+		return indentInfo;
+	}
+
+	protected IElementMatcherProvider getMatcherProvider() {
+		return matcherProvider;
 	}
 
 	protected void saveDebugGraphvizDiagram(String filename) {
@@ -93,7 +113,7 @@ public abstract class AbstractDeclarativeFormatter extends BaseFormatter {
 		}
 	}
 
-	@Inject
+	@Deprecated
 	public void setGrammarAccess(IGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}

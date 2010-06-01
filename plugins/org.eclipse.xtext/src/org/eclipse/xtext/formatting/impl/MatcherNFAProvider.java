@@ -7,14 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting.impl;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractCachingNFABuilder;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractNFAProvider;
 
+import com.google.inject.Singleton;
+
+@Singleton
 public class MatcherNFAProvider extends AbstractNFAProvider<MatcherState, MatcherTransition> {
 
 	protected static class MatcherNFABuilder extends AbstractCachingNFABuilder<MatcherState, MatcherTransition> {
@@ -34,7 +38,7 @@ public class MatcherNFAProvider extends AbstractNFAProvider<MatcherState, Matche
 		public boolean filter(AbstractElement grammarElement) {
 			if (grammarElement instanceof CrossReference)
 				return false;
-			if (EcoreUtil2.getContainerOfType(grammarElement, CrossReference.class) != null)
+			if (isContainedInCrossReference(grammarElement))
 				return true;
 			if (grammarElement instanceof Keyword)
 				return false;
@@ -45,6 +49,17 @@ public class MatcherNFAProvider extends AbstractNFAProvider<MatcherState, Matche
 
 		public NFADirection getDirection() {
 			return NFADirection.FORWARD;
+		}
+
+		protected boolean isContainedInCrossReference(EObject obj) {
+			EObject cnt = obj.eContainer();
+			if (cnt == null)
+				return false;
+			if (cnt instanceof CrossReference)
+				return true;
+			if (cnt instanceof Group)
+				return false;
+			return isContainedInCrossReference(cnt);
 		}
 	}
 
