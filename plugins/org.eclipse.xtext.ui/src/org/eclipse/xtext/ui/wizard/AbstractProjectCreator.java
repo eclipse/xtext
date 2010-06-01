@@ -15,6 +15,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -29,6 +30,7 @@ import com.google.inject.name.Named;
 
 /**
  * @author Peter Friese - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
 public abstract class AbstractProjectCreator extends WorkspaceModifyOperation implements IProjectCreator {
 	
@@ -83,12 +85,18 @@ public abstract class AbstractProjectCreator extends WorkspaceModifyOperation im
 	
 	protected IFile getModelFile(IProject project) throws CoreException {
 		IFolder srcFolder = project.getFolder(getModelFolderName());
-		for (IResource resource : srcFolder.members()) {
-			if (IResource.FILE == resource.getType() && getPrimaryModelFileExtension().equals(resource.getFileExtension())) {
-				return (IFile) resource;
+		final String expectedExtension = getPrimaryModelFileExtension();
+		final IFile[] result = new IFile[1];
+		srcFolder.accept(new IResourceVisitor() {
+			public boolean visit(IResource resource) throws CoreException {
+				if (IResource.FILE == resource.getType() && expectedExtension.equals(resource.getFileExtension())) {
+					result[0] = (IFile) resource;
+					return false;
+				}
+				return IResource.FOLDER == resource.getType();
 			}
-		}
-		return null;
+		});
+		return result[0];
 	}
 	
 	protected IProject createProject(IProgressMonitor monitor) {
