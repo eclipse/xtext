@@ -1,15 +1,19 @@
 
 h2(#processing_Xtext_models). Processing Xtext models
 
-p. Now that we know how to create a language we should talk about processing the parsed models somehow. Text files parsed by Xtext are represented as 
-object graphs in memory. We call these object graphs _Abstract Syntax Tree (AST)_, _semantic model_ or simply _model_ interchangeably. In Xtext
-models are implemented using the _Eclipse Modeling Framework (EMF)_, which can be seen as a very powerful version of JavaBeans. It not only provides
-the typical getter and setter methods for the different features of a model element but also comes with an long list of advanced concepts and semantics.
+p. Now that we know how to create a language we should talk about processing the parsed models somehow. There are typically two useful things one can do with
+Xtext models. One is translating them to another programming language, i.e. writing a code generator. The other is loading them at runtime and use them
+dynamically. We'll later talk about code generation. In this chapter we want to see how to interact with Xtext models programmatically. 
 
-h3(#resource). Loading Xtext models 
+Text files parsed by Xtext are represented as object graphs in memory. We call these object graphs _Abstract Syntax Tree (AST)_, _semantic model_ or 
+simply _model_ interchangeably. In Xtext models are implemented using the _Eclipse Modeling Framework (EMF)_, which can be seen as a very powerful version 
+of JavaBeans. It not only provides the typical getter and setter methods for the different features of a model element but also comes with an long list of 
+advanced concepts and semantics, which are extremely useful in the context of Xtext.
+
+h3(#resource). Loading a _Resource_ 
   
-For instance, EMF models can be persisted by the means of a so called _Resource_. Xtext languages implement _Resource_ which is why you can use the EMF API to
-load a model into memory:
+EMF models can be persisted by the means of a so called _Resource_. Xtext languages implement the _Resource_ interface which is why you can use the EMF API to
+load a model into memory (and also save them):
 
 bc.. new DomainmodelStandaloneSetup().createInjectorAndDoEMFRegistration();
 
@@ -18,33 +22,36 @@ Resource resource = rs.getResource(URI.createURI("./mymodel.dmodel"), true);
 EObject eobject = resource.getContents().get(0);
  
 p. The first line initializes the language infrastructure to run in _standalone_ mode. That is EMF is designed to work in Eclipse and therefore makes use of 
-Equinox extension points, in order to register factories and the like. In a vanilla Java project there is no Equinox, hence we need to do the registrartion programmatically.
-The generated _MyLanguageStandaloneSetup_ class does that. You don't need to do this kind of initialization when you run your plugins within Eclipse, since in that case 
+Equinox extension points in order to register factories and the like. In a vanilla Java project there is no Equinox, hence we do the registration programmatically.
+The generated _MyLanguageStandaloneSetup_ class does just that. You don't need to do this kind of initialization when you run your plugins within Eclipse, since in that case 
 the extension point declarations are used.
 
-The other thing the StandaloneSetup takes care of is creating a Guice _injector_. The use of Guice and Dependency Injection is explained here [TODO]. 
+The other thing the StandaloneSetup takes care of is creating a Guice _injector_. The use of Guice and Dependency Injection is explained here:#dependencyInjection. 
 
-Now that the language infrastructure is intialized and the different contributions to EMF are registered, we want to load a _Resource_. To do so we first create a 
+Now that the language infrastructure is initialized and the different contributions to EMF are registered, we want to load a _Resource_. To do so we first create a 
 _ResourceSet_, which as the name suggests represents a set of Resources. If one _Resource_ references another _Resource_, EMF will automatically load that other _Resource_
 into the same _ResourceSet_ as soon as the cross reference is resolved. Resolution of cross references is done lazy, i.e. on first access.
 
 The 4th line loads the _Resource_ using the resource set. We pass in a URI which points to the file in the file system. 
-EMF's URI is a very important concept since, it supports a lot of different schemes like loading resources from file system, web sites, jars, OSGi bundles or even 
-the class path. And if that is not enough you can come up with your own schemes. Also a URI not only can point to a resource but also to any _EObject_ in a resource.
+EMF's URI is a powerful concept. It supports a lot of different schemes to load resources from file system, web sites, jars, OSGi bundles or even 
+Java's class path. And if that is not enough you can come up with your own schemes. Also a URI can not only point to a resource but also to any _EObject_ in a resource.
 This is done by appending a so called _URI fragment_ to the URI. 
 
-The second parameter denotes whether the resource should automatically be loaded if it wasn't before. Alternatively we could have written
+The second parameter denotes whether the resource should automatically be loaded if it wasn't already before. Alternatively we could have written
 
 bc..  Resource resource = rs.getResource(URI.createURI("./mymodel.dmodel"), false);
 resource.load(null);
 
 p. The load method optionally takes a map of properties, which allows to define a contract between a client and the specific implementation. In Xtext, for instance, we use 
-the map to state whether cross references should be eagerly resolved.
+the map to state whether cross references should be eagerly resolved. In order to find out what properties are supported, it's usually best to look into 
+the concrete implementations. That said, in most cases you don't need to pass any properties at all.
 
-The last line (_EObject eobject = resource.getContents().get(0);_) assigns the root element to a local variable.
+The last line 
+bc.. EObject eobject = resource.getContents().get(0);
+p. assigns the root element to a local variable.
 Actually it is the first element from the contents list of a _Resource_, but in Xtext a _Resource_ always has just one root element.
 
-h3(#EMF_reflection). Working with EMF models
+h3(#programmatic_EMF). Working with EMF models
 
 p. We have previously talked about Ecore models, which effectively is an _EPackage_ containing a any number of _EClasses_ with _EAttributes_ and _EReferences_. 
 Ecore defines additional concepts but they are not so important here. An _EObject_ is an instance of an _EClass_. For instance, the root element
@@ -53,13 +60,13 @@ with EObjects in a generic way.
 
 bc.. assertEquals("DomainModel", eobject.eClass().getName());
  
-p. It is also possible to create new instances or get and set values using the reflection layer. That reflection layer very helpful when creating generic libraries for EMF models
-but if you know what kind of model you are working with, it's much nicer to program against the generated Java classes. As we know that the root element
-is an instance of DomainModel we can just cast it to the Java interface generated by EMF:
+p. It is also possible to create new instances or get and set values using the reflection layer. That reflection layer is very helpful when creating generic 
+libraries for EMF models, however if you know what kind of model you are working with it's much nicer to program against the generated Java classes. 
+As we know that the root element is an instance of DomainModel we can just cast it to the Java interface generated by EMF:
 
 bc.. DomainModel dm = (DomainModel) eobject;
 
-p. The generated Java types provide getter and setter for the _EAttributes_ and _EReferences_, so that you can easily navigate the model using Java:
+p. The generated Java types provide getter and setter methods for each _EAttribute_ and _EReference_, so that you can easily navigate the model using Java:
 
 bc.. EList<AbstractElement> elements = domainModel.getElements();
 for (AbstractElement abstractElement : elements) {
@@ -69,14 +76,16 @@ for (AbstractElement abstractElement : elements) {
   }
 }
 
-p. You'll find a lot of convenience API in EMF's EcoreUtil and Xtext's EcoreUtil2. 
+p. Note that you'll find a lot of convenience API in EMF's EcoreUtil and Xtext's EcoreUtil2. 
   
 h3(#node_model). Working with the parse tree (aka node model)
 
-p. In many situations the information from the _AST_ is sufficient, but in some situations you need the additional syntactical information. In Xtext not only
-an _AST_ is constructed while parsing but also a so called _parse tree_, which contains all the textual information chunked in so called tokens. The _parse tree_ in Xtext is
-also called _node model_ and consists of two different kinds of nodes. _LeafNodes_ as the name suggests represent the leafs of the parse tree. Each leaf node represents one 
-token, the lexer has scanned. If you go through all leaf nodes of a parse tree and concatenate all the tokens to one string, you'll end up with the whole textual representation 
+p. In many situations the information from the _AST_ is sufficient, but in some situations you need additional syntactical information. In Xtext not only
+an _AST_ is constructed while parsing but also a so called _parse tree_, which contains all the textual information chunked in so called tokens. The _parse tree_, also 
+called _node model_, consists of two different kinds of nodes. 
+
+_LeafNodes_ as the name suggests represent the leafs of the parse tree. Each leaf node represents one 
+token. If you go through all leaf nodes of a parse tree and concatenate all the tokens to one string, you'll end up with the whole textual representation 
 of the model, including all hidden tokens such as whitespace and comments. The following code does exactly that:
 
 bc.. CompositeNode node = NodeUtil.getNode(domainModel);
@@ -88,14 +97,14 @@ for (AbstractNode abstractNode : contents) {
 }
 System.out.println(text);
 
-p. In addition to the text _LeafNodes_ also holds information about the line, the offset and the length of that token.
+p. In addition to the text _LeafNodes_ also hold information about the line, the offset and the length of that token.
 
-The other node type is called _CompositeNode_ and is created by the parser for a grammar element. A composite node can contain other composite nodes and leaf nodes.
-The super type of both node types is _AbstractNode_. 
+The other node type is called _CompositeNode_ and is created for almost each grammar element. A composite node can contain other composite nodes and leaf nodes.
+The super type of both node types is _AbstractNode_. One can find a couple of convenience methods in _NodeUtil_ and _ParseTreeUtil_.
 
 h3(#working_with_grammar_model). Working with the grammar
 
-p. Also the grammar previously defined in Xtext's grammar language is represented as an EMF model and can be used in Java. In fact each node of the _node model_ references
+p. Also the grammar is represented as an EMF model and can be used in Java. In fact each node of the _node model_ references
 the element from the grammar which was responsible for parsing or lexing that node:
 
 bc.. DomainModel domainModel = (DomainModel) eObject;
