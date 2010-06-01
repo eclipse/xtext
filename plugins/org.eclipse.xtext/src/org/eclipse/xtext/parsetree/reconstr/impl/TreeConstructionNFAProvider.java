@@ -14,6 +14,9 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractCachingNFABuilder;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractNFAProvider;
 
+import com.google.inject.Singleton;
+
+@Singleton
 public class TreeConstructionNFAProvider extends AbstractNFAProvider<TreeConstState, TreeConstTransition> {
 
 	protected static class TreeConstNFABuilder extends AbstractCachingNFABuilder<TreeConstState, TreeConstTransition> {
