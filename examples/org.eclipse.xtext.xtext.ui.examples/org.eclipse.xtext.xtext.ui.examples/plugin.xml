@@ -2,12 +2,12 @@
 <?eclipse version="3.0"?>
 <plugin>
 	<extension point="org.eclipse.ui.newWizards">
-		<category id="org.eclipse.xtext.Examples" 
+		<category id="org.eclipse.xtext.ui.Examples" 
 				  name="%XtextExamples_category" 
 				  parentCategory="org.eclipse.ui.Examples" />
 	</extension>
 	<extension point="org.eclipse.ui.newWizards">
-		<category id="org.eclipse.xtext.Examples" 
+		<category id="org.eclipse.xtext.project.Examples" 
 				  name="%XtextExamples_category2" 
 				  parentCategory="org.eclipse.xtext.projectwiz" />
 	</extension>
@@ -17,7 +17,7 @@
 		<wizard	id="org.eclipse.xtext.examples.NewDomainModelExampleWizard" 
 			name="%DomainExample_name" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.ui.Examples/org.eclipse.xtext.Examples"
+			category="org.eclipse.ui.Examples/org.eclipse.xtext.ui.Examples"
 			icon="icons/genproject.gif" 
 			project="true">
 			<description>%DomainExample_description</description>
@@ -27,7 +27,7 @@
 		<wizard	id="org.eclipse.xtext.examples.NewDomainModelExampleWizard" 
 			name="%DomainExample_name" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.xtext.projectwiz/org.eclipse.xtext.Examples"
+			category="org.eclipse.xtext.projectwiz/org.eclipse.xtext.project.Examples"
 			icon="icons/genproject.gif" 
 			project="true">
 			<description>%DomainExample_description</description>
@@ -46,7 +46,7 @@
 		<wizard	id="org.eclipse.xtext.examples.NewFowlerDSLExampleWizard" 
 			name="%FowlerExample_name" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.ui.Examples/org.eclipse.xtext.Examples"
+			category="org.eclipse.ui.Examples/org.eclipse.xtext.ui.Examples"
 			icon="icons/genproject.gif" 
 			project="true">
 			<description>%FowlerExample_description</description>
@@ -56,7 +56,7 @@
 		<wizard	id="org.eclipse.xtext.examples.NewFowlerDSLExampleWizard" 
 			name="%FowlerExample_name" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.xtext.projectwiz/org.eclipse.xtext.Examples"
+			category="org.eclipse.xtext.projectwiz/org.eclipse.xtext.project.Examples"
 			icon="icons/genproject.gif" 
 			project="true">
 			<description>%FowlerExample_description</description>
@@ -74,7 +74,7 @@
 		<wizard	id="org.eclipse.xtext.examples.NewArithmeticsExampleWizard" 
 			name="%ArithmeticsExample_name" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.ui.Examples/org.eclipse.xtext.Examples"
+			category="org.eclipse.ui.Examples/org.eclipse.xtext.ui.Examples"
 			icon="icons/genproject.gif" 
 			project="true">
 			<description>%ArithmeticsExample_description</description>
@@ -84,7 +84,7 @@
 		<wizard	id="org.eclipse.xtext.examples.NewArithmeticsExampleWizard" 
 			name="%ArithmeticsExample_name" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.xtext.projectwiz/org.eclipse.xtext.Examples"
+			category="org.eclipse.xtext.projectwiz/org.eclipse.xtext.project.Examples"
 			icon="icons/genproject.gif" 
 			project="true">
 			<description>%ArithmeticsExample_description</description>
@@ -103,7 +103,7 @@
 		<wizard	id="org.eclipse.xtext.examples.NewGMFIntegrationExampleWizard" 
 			name="%GmfExample_name" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.ui.Examples/org.eclipse.xtext.Examples"
+			category="org.eclipse.ui.Examples/org.eclipse.xtext.ui.Examples"
 			icon="icons/genproject.gif" 
 			project="true">
 			<description>%GmfExample_description</description>
@@ -113,7 +113,7 @@
 		<wizard	id="org.eclipse.xtext.examples.NewGMFIntegrationExampleWizard" 
 			name="%GmfExample_name" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.xtext.projectwiz/org.eclipse.xtext.Examples"
+			category="org.eclipse.xtext.projectwiz/org.eclipse.xtext.project.Examples"
 			icon="icons/genproject.gif" 
 			project="true">
 			<description>%GmfExample_description</description>
