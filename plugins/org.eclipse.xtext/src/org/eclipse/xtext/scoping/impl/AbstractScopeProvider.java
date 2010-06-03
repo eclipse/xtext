@@ -10,6 +10,8 @@ package org.eclipse.xtext.scoping.impl;
 import org.eclipse.xtext.scoping.IScopeProvider;
 
 /**
+ * Base class for all scope providers. Clients can inherit from this class.
+ * 
  * @author Heiko Behrens - Initial contribution and API
  * @author Sebastian Zarnekow
  */

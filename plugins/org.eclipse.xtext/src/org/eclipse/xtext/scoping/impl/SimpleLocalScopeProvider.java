@@ -24,6 +24,9 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
+ * A local scope that uses the qualified names of all elements of an {@link org.eclipse.emf.ecore.resource.Resource} and
+ * delegates to a global scope.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
 public class SimpleLocalScopeProvider extends AbstractGlobalScopeDelegatingScopeProvider {
@@ -41,7 +44,7 @@ public class SimpleLocalScopeProvider extends AbstractGlobalScopeDelegatingScope
 	public void setNameProvider(IQualifiedNameProvider nameProvider) {
 		this.nameProvider = nameProvider;
 	}
-	
+
 	protected IQualifiedNameProvider getNameProvider() {
 		return nameProvider;
 	}
@@ -59,7 +62,7 @@ public class SimpleLocalScopeProvider extends AbstractGlobalScopeDelegatingScope
 		return createMapBasedScope(globalScope, map);
 	}
 
-	protected IScope createMapBasedScope(IScope parent,	Map<String, IEObjectDescription> map) {
+	protected IScope createMapBasedScope(IScope parent, Map<String, IEObjectDescription> map) {
 		return new MapBasedScope(parent, map);
 	}
 

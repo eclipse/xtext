@@ -11,10 +11,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 
 /**
- * An IScopeProvider can be used, to get access to a set of visible elements.
- * Basically the are retrieved by type, but the API allows for more sophisticated
- * implementations as it is possible to ask for a scope for a given reference.
- *
+ * An IScopeProvider can be used, to get access to a set of visible elements. Basically the are retrieved by type, but
+ * the API allows for more sophisticated implementations as it is possible to ask for a scope for a given reference.
+ * 
+ * Implementations should inherit from {@link org.eclipse.xtext.scoping.impl.AbstractScopeProvider}.
+ * 
  * @author Heiko Behrens - Initial contribution and API
  * @author Sven Efftinge
  * @author Sebastian Zarnekow

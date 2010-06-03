@@ -14,13 +14,16 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import com.google.inject.Inject;
 
 /**
+ * Abstract super class of all scope providers that are capable of creating {@link IResourceDescription}s for
+ * {@link Resource}s.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractExportedObjectsAwareScopeProvider extends AbstractScopeProvider {
 
 	@Inject
 	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
-	
+
 	public IResourceServiceProvider.Registry getResourceServiceProviderRegistry() {
 		return resourceServiceProviderRegistry;
 	}
@@ -28,7 +31,7 @@ public abstract class AbstractExportedObjectsAwareScopeProvider extends Abstract
 	public void setResourceServiceProviderRegistry(IResourceServiceProvider.Registry resourceDescriptionManagerRegistry) {
 		this.resourceServiceProviderRegistry = resourceDescriptionManagerRegistry;
 	}
-	
+
 	protected IResourceDescription getResourceDescription(Resource resource) {
 		IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(resource.getURI());
 		if (resourceServiceProvider == null)
@@ -39,5 +42,5 @@ public abstract class AbstractExportedObjectsAwareScopeProvider extends Abstract
 		IResourceDescription description = manager.getResourceDescription(resource);
 		return description;
 	}
-	
+
 }

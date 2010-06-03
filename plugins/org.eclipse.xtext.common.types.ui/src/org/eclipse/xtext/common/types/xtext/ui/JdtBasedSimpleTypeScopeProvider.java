@@ -15,6 +15,8 @@ import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
 import com.google.inject.Inject;
 
 /**
+ * A local scope provider for Java types based on Java projects.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class JdtBasedSimpleTypeScopeProvider extends AbstractTypeScopeProvider {

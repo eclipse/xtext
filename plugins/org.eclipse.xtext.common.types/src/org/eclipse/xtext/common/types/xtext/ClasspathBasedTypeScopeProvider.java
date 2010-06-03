@@ -14,6 +14,8 @@ import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import com.google.inject.Inject;
 
 /**
+ * A local scope provider for Java types on the classpath.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ClasspathBasedTypeScopeProvider extends AbstractTypeScopeProvider {

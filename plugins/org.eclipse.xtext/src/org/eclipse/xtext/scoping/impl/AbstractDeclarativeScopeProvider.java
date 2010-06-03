@@ -24,7 +24,7 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 /**
- * Invokes methods reflectively.
+ * A scope provider that invokes methods reflectively.
  * 
  * At first it looks for methods of the following signature:
  * <code>
