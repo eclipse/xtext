@@ -2,7 +2,7 @@
 h2(#dependencyInjection). Dependency Injection in Xtext with Google Guice
 
 In Xtext, there are many Java classes which implement logic, behavior, or supply configuration. These classes implement Java interfaces and are typically only supposed to be accessed through these interfaces, which makes their implementations interchangeable. This is where Xtext utilizes "Google Guice":http://code.google.com/p/google-guice/: 
-* Guice manages the instantiation of the classes: instead of constructing a class with @new@, the <code>@Inject</code> annotation instructs Guice to supply an object for a certain interface. Such an object is called "Service":#guiceservice.
+* Guice manages the instantiation of the classes: instead of constructing a class with _new_, the _@Inject_ annotation instructs Guice to supply an object for a certain interface. Such an object is called "Service":#guiceservice.
 * Guice allows to configure which implementations are to be supplied for which interface. This configuration consists of so-called "modules":#guicemodules.
 
 h3(#guiceservice). Services
@@ -63,13 +63,13 @@ In total, this leads to five modules for a typical Xtext Language. They are visu
 
 h4(#guicemanualmodules). Modules intended for customization
 
-When the "generator":#generator runs the first time, it creates two modules named @<MyLanguage>RuntimeModule@ and @<MyLanguage>UIModule@. They are placed in the language's root-package in the @src/@-folder of the language's runtime-project and the language's UI-project. Both are initially empty and will never be overwritten by the generator. They are "intended for customization":#guicecustomize. By default, they extend a "generated module":#guicegeneratedmodule.  
+When the "generator":#generator runs the first time, it creates two modules named _<MyLanguage>RuntimeModule_ and _<MyLanguage>UIModule_. They are placed in the language's root-package in the _src/_-folder of the language's runtime-project and the language's UI-project. Both are initially empty and will never be overwritten by the generator. They are "intended for customization":#guicecustomize. By default, they extend a "generated module":#guicegeneratedmodule.  
 
 h4(#guicegeneratedmodule). Generated Modules
 
-The fully generated modules are called @Abstract<MyLanguage>RuntimeModule@ and @Abstract<MyLanguage>UiModule@ respectively. They contain all components which have been generated specifically for the language at hand. What goes into these modules depends on the fragments you use in the generator.
+The fully generated modules are called _Abstract<MyLanguage>RuntimeModule_ and _Abstract<MyLanguage>UiModule_ respectively. They contain all components which have been generated specifically for the language at hand. What goes into these modules depends on the fragments you use in the generator.
 
-*Note*: _This modules are replaced on every subsequent execution of the generator. Don't put any custom code into them. Manually written code has go into the "concrete subclasses":#guicemanualmodules._
+*Note*: This modules are replaced on every subsequent execution of the generator. Don't put any custom code into them. Manually written code has go into the "concrete subclasses":#guicemanualmodules.
 
 h4(#guicedefaultmodule). Default Module
 
@@ -77,7 +77,7 @@ Finally the fully generated modules extend the ${org.eclipse.xtext/src/org.eclip
 
 h4(#guicecustomize). Changing Configuration
 
-We use the primary modules (@<MyLanguage>RuntimeModule@ and @<MyLanguage>UiModule@) in order to change the configuration. 
+We use the primary modules (_<MyLanguage>RuntimeModule_ and _<MyLanguage>UiModule_) in order to change the configuration. 
 These classes are initially empty and have been generated to allow customization.
 
 In order to provide a simple and convenient way, the default module extends the ${org.eclipse.xtext/src/org.eclipse.xtext.service.AbstractGenericModule}. 
@@ -89,7 +89,7 @@ bc.. public Class<? extends IFooService> bindIFooService() {
      return MyFooServiceImpl.class;
 }
 
-p. Such a method will be interpreted as a binding from @IFooService@ to @MyFooServiceImpl.class@. Note that you simply have to override a method from a super class (e.g. from the generated or default module) in order to change the respective binding. For example, in the picture above, the @DefaultRuntimeModule@ configures the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.IFormatter} to be implemented by the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter}. The @AbstractMyLanguageModule@ overrides this binding by mapping the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.IFormatter} to @MyLanguageFormatter@.
+p. Such a method will be interpreted as a binding from _IFooService_ to _MyFooServiceImpl.class_. Note that you simply have to override a method from a super class (e.g. from the generated or default module) in order to change the respective binding. For example, in the picture above, the _DefaultRuntimeModule_ configures the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.IFormatter} to be implemented by the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter}. The _AbstractMyLanguageModule_ overrides this binding by mapping the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.IFormatter} to _MyLanguageFormatter_.
 The type to type binding will create a new instance of the given target type for each dependency. If you want to make it a singleton and thereby ensure only one instance to be created and reused for all dependencies you can add the following annotation:
 
 bc.. @SingletonBinding
@@ -97,7 +97,7 @@ public Class<? extends IFooService> bindIFooService() {
   return MyFooServiceImpl.class;
 }
 
-p. In addition if the creation of the type causes any necessary side effects, so you want it to be instantiated eagerly, you can set the @eager@ property to true. This is shown in the following snippet:
+p. In addition if the creation of the type causes any necessary side effects, so you want it to be instantiated eagerly, you can set the _eager_ property to true. This is shown in the following snippet:
 
 bc.. @SingletonBinding(eager=true)
 public Class<? extends IFooService> bindIFooService() {
@@ -110,4 +110,4 @@ bc.. public IFooService bindIFooService() {
   return new MyFooServiceImpl();
 }
 
-p. __Note that, although this is a convenient and simple way, you have of course also the full power of Guice, i.e. you can override the Guice method @void configure(Binder)@ and use the afore mentioned fluent API to do whatever you want.__
+p. *Note*: Although this is a convenient and simple way, you have of course also the full power of Guice, i.e. you can override the Guice method _void configure(Binder)_ and use the afore mentioned fluent API to do whatever you want.
