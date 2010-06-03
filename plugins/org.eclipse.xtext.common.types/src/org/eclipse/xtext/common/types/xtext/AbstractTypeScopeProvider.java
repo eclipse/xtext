@@ -29,6 +29,8 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 /**
+ * Abstract super class of all local scope providers that allow references to Java types.
+ *  
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractTypeScopeProvider extends AbstractScopeProvider {
