@@ -15,6 +15,8 @@ import org.eclipse.xtext.scoping.IScope;
 import com.google.inject.Inject;
 
 /**
+ * A local scope provider that can delegate to a global scope.
+ *  
  * @author Sven Efftinge - Initial contribution and API
  */
 public abstract class AbstractGlobalScopeDelegatingScopeProvider extends AbstractExportedObjectsAwareScopeProvider {

@@ -42,6 +42,15 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
+ * A local scope provider that understands namespace imports.
+ * 
+ * It scans model elements for an EAttribute <code>importedNamespace</code>. The value of this attribute is interpreted
+ * as qualified name to be imported. Wildcards are supported (see {@link QualifiedName} for details). 
+ * 
+ * Imports are valid for all elements in the same container and their children.  
+ * 
+ * See http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping for details.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
 public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScopeDelegatingScopeProvider {
@@ -100,7 +109,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 
 	@Inject
 	private IResourceScopeCache cache = IResourceScopeCache.NullImpl.INSTANCE;
-	
+
 	public void setCache(IResourceScopeCache cache) {
 		this.cache = cache;
 	}
@@ -155,7 +164,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 			}
 		});
 	}
-	
+
 	protected Map<String, IEObjectDescription> internalGetResourceScopeMap(IScope parent, final EObject context,
 			final EReference reference) {
 		Iterable<EObject> contents = new Iterable<EObject>() {
@@ -171,13 +180,14 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	}
 
 	protected IScope getLocalElements(final IScope parent, final EObject context, final EReference reference) {
-		return getScope(getKey(context,reference),context,parent, new Provider<Map<String,IEObjectDescription>>(){
+		return getScope(getKey(context, reference), context, parent, new Provider<Map<String, IEObjectDescription>>() {
 			public Map<String, IEObjectDescription> get() {
 				return internalGetLocalElementsMap(parent, context, reference);
-			}});
+			}
+		});
 	}
-	
-	protected Map<String, IEObjectDescription> internalGetLocalElementsMap(final IScope parent,final EObject context,
+
+	protected Map<String, IEObjectDescription> internalGetLocalElementsMap(final IScope parent, final EObject context,
 			final EReference reference) {
 		final String commonPrefix = nameProvider.getQualifiedName(context) + ".";
 
@@ -212,7 +222,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	}
 
 	protected Object getKey(Notifier context, EReference reference) {
-		return Tuples.create(ImportedNamespaceAwareLocalScopeProvider.class,context, reference);
+		return Tuples.create(ImportedNamespaceAwareLocalScopeProvider.class, context, reference);
 	}
 
 	private Predicate<EObject> typeFilter(final EClass type) {
@@ -229,13 +239,14 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 
 			public Set<ImportNormalizer> get() {
 				return internalGetImportNormalizers(context);
-			}});
+			}
+		});
 	}
-	
+
 	protected Set<ImportNormalizer> internalGetImportNormalizers(final EObject context) {
 		Set<ImportNormalizer> namespaceImports = new HashSet<ImportNormalizer>();
 		SimpleAttributeResolver<EObject, String> importResolver = SimpleAttributeResolver.newResolver(String.class,
-		"importedNamespace");
+				"importedNamespace");
 		for (EObject child : context.eContents()) {
 			String value = importResolver.getValue(child);
 			if (value != null) {
@@ -305,17 +316,16 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 
 		};
 	}
-	
-	
+
 	protected IScope getScope(Object cacheKey, EObject eobject, IScope parentScope, Provider<Map<String, IEObjectDescription>> mapProvider) {
 		Map<String, IEObjectDescription> map = cache.get(cacheKey, eobject.eResource(), mapProvider);
-		return map.isEmpty()?parentScope:createMapBasedScope(parentScope, map);
+		return map.isEmpty() ? parentScope : createMapBasedScope(parentScope, map);
 	}
 
 	protected IScope createMapBasedScope(IScope parentScope, Map<String, IEObjectDescription> map) {
-		return new MapBasedScope(parentScope,map);
+		return new MapBasedScope(parentScope, map);
 	}
-	
+
 	protected Map<String, IEObjectDescription> toMap(Iterable<IEObjectDescription> scopedElementsFor) {
 		Map<String, IEObjectDescription> result = Maps.newHashMap();
 		for (IEObjectDescription ieObjectDescription : scopedElementsFor) {
