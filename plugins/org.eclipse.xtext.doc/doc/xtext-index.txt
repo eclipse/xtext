@@ -25,6 +25,7 @@
 130-managing-concurrency.textile
 140-labelprovider.textile
 150-contentassist.textile
+155-quickfix.textile
 160-templates.textile
 170-outline.textile
 180-hyperlinking.textile
