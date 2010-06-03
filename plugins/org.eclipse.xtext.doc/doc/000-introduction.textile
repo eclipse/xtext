@@ -9,7 +9,7 @@ an Eclipse-based IDE providing editing experience known from modern Java IDEs in
 h2. How does it work?
 
 Xtext provides you with a set of domain-specific languages and modern APIs to describe the different aspects of your programming language. 
-Based on that information it gives you a full implementation of that language running on the JVM. The compiler part can be used in any java environment 
+Based on that information it gives you a full implementation of that language running on the JVM. The compiler part can be used in any Java environment 
 and includes such things as parser, AST, parse tree, serializer, formatter, scoping framework, linking, compiler checks aka validation and last but not least a 
 code generator or interpreter. The runtime components integrate with and implement the Eclipse Modeling Framework (EMF), which effectively allows you to 
 use Xtext together with other EMF frameworks like for instance the Graphical Modeling Project.
@@ -33,18 +33,18 @@ h2. Who is behind Xtext?
 
 Xtext is a professional Open-Source project. We, the main developers and the project lead, work for itemis, which is a well known consulting company specialized on model-based development.
 Therefore we are able to work almost full-time on the project. Xtext is an Eclipse.org project. Besides many other advantages this means that you don't have to fear any IP issues, because the Eclipse Foundation 
-has their own layers who take care that no intellectual property is violated. 
+has their own lawyers who take care that no intellectual property is violated. 
 
-Where does the money for Open-Source development come from you ask? Well, we provide professional services around Xtext. Be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages. We not only know the framework very well but also are experts in programming and domain-specific language design. Don't hesitate to get in contact with us (www.itemis.com).
+You may ask: Where does the money for Open-Source development come from? Well, we provide professional services around Xtext. Be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages. We do not only know the framework very well but we are also experts in programming and domain-specific language design. Don't hesitate to get in contact with us (www.itemis.com).
 
 h2(#DSL). What is a domain-specific language
 
-A domain-specific language (DSL) is a small programming language, which focuses on a particular domain.
+A _Domain-Specific Language (DSL)_ is a small programming language, which focuses on a particular domain.
 Such a domain can be more or less anything. The idea is that its concepts and notation is as close as possible to
 what you have in mind when you think about a solution in that domain. Of course we are talking about problems which can
 be solved or processed by computers somehow.
 
-The opposite of a DSL is a so called GPL, a General Purpose Language such as Java or any other common programming language.
+The opposite of a DSL is a so called _GPL_, a _General Purpose Language_ such as Java or any other common programming language.
 With a GPL you can solve every computer problem, but it might not always be the best way to solve it.
 
 Imagine you want to remove the core from an apple. You could of course use a Swiss army knife to cut it out, and this is reasonable if you have to do it just once or twice. But if you need to do that on a regular basis it might be more efficient to use an apple corer.

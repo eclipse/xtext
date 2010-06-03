@@ -95,7 +95,7 @@ The next statement declares an EMF Ecore package, aka EPackage, to be derived fr
 bc.. generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"  
 
 p. Ecore _EPackages_ are effectively a set of classes (in EMF they are called _EClass_) which are used to represent the in memory model of a text file. Instead of _model_ we 
-also sometimes refer to it as _semantic model_ or _abstract syntax tree (AST)*. Note, that in the case of Xtext it's actually a graph rather than a tree, since it also 
+also sometimes refer to it as _semantic model_ or _Abstract Syntax Tree (AST)_. Note, that in the case of Xtext it's actually a graph rather than a tree, since it also 
 contains cross links. But as the term AST is so commonly used and known we are ignoring this little detail. 
  
 In order to tell the parser which _EClasses_ to use when creating the AST, we need to make them available by either importing existing Ecore packages 
@@ -160,7 +160,7 @@ a so called terminal rule which always returns simple data types, such as String
 recognizes alphanumeric words similar to identifiers in Java and returns the value as a String. You can navigate to its declaration using _F3_.
 As mentioned before the assignment operator "_=_" denotes a single valued feature.
 
-We want to allow inheritance for entities and therefore now add an optional 'extend' part.
+We want to allow inheritance for entities and therefore now add an optional 'extends' part.
 
 bc.. Entity returns Entity:
   'entity' name=ID ('extends' superType=[Entity])? '{'
@@ -171,10 +171,9 @@ p. The question mark marks an element or as in this case an entire group optiona
 This is a cross-reference literal and states, that a cross reference to an elsewhere declared _Entity_ should be established. So in this case _Entity_ does not point to the 
 corresponding rule but to the _EClass_. As both are named equally this might cause a little confusion at first.
 The full syntax for a cross reference is _[TypeName|RuleCall]_ where _RuleCall_ defaults to _ID_. This means that _('extends' superType=[Entity|ID])?_ would work equally well.
-The parser only parses the name of the cross referenced element using the ID rule and stores it internally. Later on the linker establishes the cross reference using the name
-, the defined cross reference's type (_Entity_ in this case) and the defined scoping rules. Scoping is not covered in this tutorial since the domain model DSL works with 
+The parser only parses the name of the cross referenced element using the ID rule and stores it internally. Later on the linker establishes the cross reference using the name, the defined cross reference's type (_Entity_ in this case) and the defined scoping rules. Scoping is not covered in this tutorial since the domain model DSL works with 
 the default scoping semantics. By default a namespace based scoping is applied, which means that all entities living in the same namespace are possible candidates for a 
-cross reference. We talk a bit about this later in this chapter when we introduce namespaces.
+cross reference. We talk a bit about this later on in this chapter when we introduce namespaces.
 
 p. In our introductory example model we had not only defined entities but also two data types. So the _DomainModel_ rule needs to be able to parse data types as well. 
 As both entities and data types will be referenced from the yet to be defined _Feature_ rule, we should introduce a common super type for them.
@@ -258,7 +257,7 @@ If code generation succeeded, we are now able to test the IDE integration. Right
   
 This will spawn a new Eclipse workbench with your projects as plug-ins installed. 
 In the new workbench, create a new project (_File -> New -> Project...  -> General -> Project_) and therein a new file with the file extension 
-you chose in the beginning (_*.dmodel_). This will open the generated entity editor.
+you chose in the beginning (_*.dmodel_). This will open the generated entity editor. Try it a bit and discover the default functionality for code completion (_CTRL SPACE_ even for cross references), syntax highlighting, syntactic validation, linking errors, outline, find references etc.
 
 !images/getting-started-editor.png!
 
@@ -318,7 +317,7 @@ bc.. DomainModel:
   (elements+=AbstractElement)*;
 
 p. To allow qualified names, we need a new rule _QualifiedName_. This rule returns a string. But we do not want this to be a _terminal rule_, as terminal 
-rules have special semantics (they are used context less in the lexer, which often cause problems). Instead we want it to be a parser rule, but one which
+rules have special semantics (they are used context-less in the lexer, which often cause problems). Instead we want it to be a parser rule, but one which
 doesn't return an instance of an _EClass_ from the referenced _EPackage_ but just return a String. Such rules are called _data type rules_, because they return 
 instances of _EDatatype_ as opposed to instances of _EClass_. String is the most often used _EDataType_ in this context and is therefore the default return 
 type for data type rules. The rule looks like this:
@@ -373,7 +372,7 @@ p. The default scoping implementation is based on naming conventions. First ever
 If such an _EAttribute_ is available, the default implementation computes a qualified name by asking the container for its name and concatenates the two 
 names separated by a dot. The computation of qualified names can be arbitrarily changed by implementing an _IQualifedNameProvider_. The other naming convention is 
 that if some element has an EAttribute 'importedNamespace' that value is used as a namespace import and is automatically prefixed to any simple names used within 
-that namespace. Also the asterix (_*_) is used as a wildcard by default.
+that namespace. Also the asterisk (_*_) is used as a wildcard by default.
 
 That's all for the grammar. It should now read as 
 

@@ -2,8 +2,8 @@
 h2(#processing_Xtext_models). Processing Xtext models
 
 p. Now that we know how to create a language we should talk about processing the parsed models somehow. There are typically two useful things one can do with
-Xtext models. One is translating them to another programming language, i.e. writing a code generator. The other is loading them at runtime and use them
-dynamically. We'll later talk about code generation. In this chapter we want to see how to interact with Xtext models programmatically. 
+Xtext models: One is translating them to another programming language, i.e. writing a code generator, the other is loading them at runtime and use them
+dynamically. We'll talk about code generation later. In this chapter we want to see how to interact with Xtext models programmatically. 
 
 Text files parsed by Xtext are represented as object graphs in memory. We call these object graphs _Abstract Syntax Tree (AST)_, _semantic model_ or 
 simply _model_ interchangeably. In Xtext models are implemented using the _Eclipse Modeling Framework (EMF)_, which can be seen as a very powerful version 
@@ -26,7 +26,7 @@ Equinox extension points in order to register factories and the like. In a vanil
 The generated _MyLanguageStandaloneSetup_ class does just that. You don't need to do this kind of initialization when you run your plugins within Eclipse, since in that case 
 the extension point declarations are used.
 
-The other thing the StandaloneSetup takes care of is creating a Guice _injector_. The use of Guice and Dependency Injection is explained here:#dependencyInjection. 
+The other thing the StandaloneSetup takes care of is creating a Guice _injector_. The use of Guice and Dependency Injection is explained "here":#dependencyInjection. 
 
 Now that the language infrastructure is initialized and the different contributions to EMF are registered, we want to load a _Resource_. To do so we first create a 
 _ResourceSet_, which as the name suggests represents a set of Resources. If one _Resource_ references another _Resource_, EMF will automatically load that other _Resource_
@@ -47,7 +47,9 @@ the map to state whether cross references should be eagerly resolved. In order t
 the concrete implementations. That said, in most cases you don't need to pass any properties at all.
 
 The last line 
+
 bc.. EObject eobject = resource.getContents().get(0);
+
 p. assigns the root element to a local variable.
 Actually it is the first element from the contents list of a _Resource_, but in Xtext a _Resource_ always has just one root element.
 
@@ -72,11 +74,14 @@ bc.. EList<AbstractElement> elements = domainModel.getElements();
 for (AbstractElement abstractElement : elements) {
   if (abstractElement instanceof Entity) {
     Entity entity = ((Entity)abstractElement);
-    System.out.println("entity "+entity.getName()+" extends "+entity.getSuperType().getName());
+    System.out.println("entity "
+    	+ entity.getName()
+    	+ " extends "
+    	+ entity.getSuperType().getName());
   }
 }
 
-p. Note that you'll find a lot of convenience API in EMF's EcoreUtil and Xtext's EcoreUtil2. 
+p. Note that you'll find a lot of convenience API in EMF's _EcoreUtil_ and Xtext's ${org.eclipse.xtext/src/org/eclipse/xtext/EcoreUtil2}. 
   
 h3(#node_model). Working with the parse tree (aka node model)
 
@@ -100,7 +105,7 @@ System.out.println(text);
 p. In addition to the text _LeafNodes_ also hold information about the line, the offset and the length of that token.
 
 The other node type is called _CompositeNode_ and is created for almost each grammar element. A composite node can contain other composite nodes and leaf nodes.
-The super type of both node types is _AbstractNode_. One can find a couple of convenience methods in _NodeUtil_ and _ParseTreeUtil_.
+The super type of both node types is _AbstractNode_. One can find a couple of convenience methods in ${org.eclipse.xtext/src/org/eclipse/xtext/parsetree/NodeUtil} and ${org.eclipse.xtext/src/org/eclipse/xtext/parsetree/ParseTreeUtil}.
 
 h3(#working_with_grammar_model). Working with the grammar
 
