@@ -1,21 +1,21 @@
 
 h1. Runtime Concepts
 
-TMF Xtext itself and every language infrastructure developed with Xtext is configured and wired-up using "dependency injection":#dependencyInjection. Xtext may be used in different environments which introduce different constraints. Especially important is the difference between OSGi managed containers and plain vanilla Java programs. To honor these differences Xtext uses the concept of @ISetup@-implementations in normal mode and uses Eclipse's extension mechanism when it should be configured in an OSGi environment.   
+TMF Xtext itself and every language infrastructure developed with Xtext is configured and wired-up using "dependency injection":#dependencyInjection. Xtext may be used in different environments which introduce different constraints. Especially important is the difference between OSGi managed containers and plain vanilla Java programs. To honor these differences Xtext uses the concept of ${org.eclipse.xtext/src/org/eclipse/xtext/ISetup}-implementations in normal mode and uses Eclipse's extension mechanism when it should be configured in an OSGi environment.   
 
 h2. Runtime setup (ISetup)
 
-For each language there is an implementation of @ISetup@ generated. It implements a method called @doSetup()@, which can be called to do the initialization of the language infrastructure. This class is intended to be used for runtime and unit testing, only.
+For each language there is an implementation of ${org.eclipse.xtext/src/org/eclipse/xtext/ISetup} generated. It implements a method called _createInjectorAndDoEMFRegistration()_, which can be called to do the initialization of the language infrastructure. This class is intended to be used for runtime and for unit testing, only.
 
-The setup method returns an @Injector@, which can further be used to obtain a parser, etc. It also registers the ResourceFactory and generated EPackages at the respective global registries provided by EMF. So basically you can just run the setup and start using EMF API to load and store models of your language.
+The setup method returns an _Injector_, which can further be used to obtain a parser, etc. It also registers the ResourceFactory and generated EPackages at the respective global registries provided by EMF. So basically you can just run the setup and start using EMF API to load and store models of your language.
 
 h2. Setup within Eclipse-Equinox (OSGi)
 
-Within Eclipse we have a generated @Activator@, which creates a Guice injector using the "modules":guicemodules.
-In addition an @IExecutableExtensionFactory@ is generated for each language, which is used to create @ExecutableExtensions@.
+Within Eclipse we have a generated _Activator_, which creates a Guice injector using the "modules":guicemodules.
+In addition an _IExecutableExtensionFactory_ is generated for each language, which is used to create _ExecutableExtensions_.
 This means that everything which is created via extension points is managed by Guice as well, i.e. you can declare dependencies and get them injected upon creation. 
 
-The only thing you have to do in order to use this factory is to prefix the class with the factory @<MyLanguageName>ExecutableExtensionFactory@ name followed by a colon.
+The only thing you have to do in order to use this factory is to prefix the class with the factory _<MyLanguageName>ExecutableExtensionFactory_ name followed by a colon.
 
 bc.. <extension
   point="org.eclipse.ui.editors">
@@ -33,7 +33,6 @@ bc.. <extension
 
 h2. Logging
 
-Xtext uses Apache's log4j for logging. It is configured using a so called log4j.properties, which is looked up in the root of the Java classpath. If you want to change or provide configuration at runtime (i.e. non-OSGI), all you have to do is putting such a log4j.properties in place and make sure that it is not overridden by other log4j.properties in previous class path entries.
+Xtext uses Apache's log4j for logging. It is configured using a so called _log4j.properties_, which is looked up in the root of the Java class path. If you want to change or provide configuration at runtime (i.e. non-OSGI), all you have to do is putting such a _log4j.properties_ in place and make sure that it is not overridden by other _log4j.properties_ in previous class path entries.
 
-In OSGi you provide configuration by creating a fragment for org.apache.log4j. In this case you need to make sure that there's no second fragment contributing a log4j.properties file.
-
+In OSGi you provide configuration by creating a fragment for _org.apache.log4j_. In this case you need to make sure that there's no second fragment contributing a _log4j.properties_ file.
