@@ -256,9 +256,9 @@ bc. IScope scope_<RefDeclaringEClass>_<Reference>(<ContextType> ctx, EReference 
 
 bc. IScope scope_<TypeToReturn>(<ContextType> ctx, EReference ref)
 
-The former is used when evaluating the scope for a specific cross reference and here _<ContextReference>_ corresponds to the name of this reference (prefixed with the name of the reference's declaring type and separated by an underscore). The _ref_ parameter represents this cross reference.
+The former is used when evaluating the scope for a specific cross reference and here _ContextReference_ corresponds to the name of this reference (prefixed with the name of the reference's declaring type and separated by an underscore). The _ref_ parameter represents this cross reference.
 
-The latter method signature is used when computing the scope for a given element type and is applicable to all cross references of that type. Here _<TypeToReturn>_ is the name of that type which also corresponds to the _type_ parameter. 
+The latter method signature is used when computing the scope for a given element type and is applicable to all cross references of that type. Here _TypeToReturn_ is the name of that type which also corresponds to the _type_ parameter. 
 
 So if you for example have a state machine with a  _Transition_ object owned by its source _State_ and you want to compute all reachable states (i.e. potential target states), the corresponding method could be declared as follows (assuming the cross reference is declared by the _Transition_ type and is called _target_):
 

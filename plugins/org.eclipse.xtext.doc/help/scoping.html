@@ -11,7 +11,7 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Scoping</h1>
-<p>Using the scoping API one defines which elements are referable from a certain reference. For instance, using the introductory example (fowler&rsquo;s state machine language)
+<p>Using the scoping API one defines which elements are referable by a certain reference. For instance, using the introductory example (fowler&rsquo;s state machine language)
 				a transition contains two cross reference one to a declared event and one to a declared state.</p>
 <p>Example:</p>
 <div class="literallayout">
@@ -39,18 +39,16 @@ end<br>
 </code>
 </p>
 </div>
-<p>The grammar only states that for the reference 
-				<code class="code">event</code> only instances of the type 
-				<code class="code">Event</code> are allowed and that for the EReference 
-				<code class="code">state</code> only instances of type 
-				<code class="code">State</code> can be referenced. However, this simple declaration doesn&rsquo;t say anything about where to find the states or events. That is the duty of scopes.  
+<p>The grammar states that for the reference 
+				<span class="emphasis"><em>event</em></span> only instances of the type 
+				<span class="emphasis"><em>Event</em></span> are allowed and that for the EReference 
+				<span class="emphasis"><em>state</em></span> only instances of type 
+				<span class="emphasis"><em>State</em></span> can be referenced. However, this simple declaration doesn&rsquo;t say anything about where to find the states or events. That is the duty of scopes.  
 			</p>
-<p>An 
-				<code class="code">IScopeProvider</code> is responsible for providing an 
-				<code class="code">IScope</code> for a given context 
-				<code class="code">EObject</code> and 
-				<code class="code">EReference</code>. The returned 
-				<code class="code">IScope</code> should contain all target candidates for the given object and cross reference.
+<p>An ${org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider} is responsible for providing an ${org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScope} for a given context 
+				<span class="emphasis"><em>EObject</em></span> and 
+				<span class="emphasis"><em>EReference</em></span>. The returned 
+				<span class="emphasis"><em>IScope</em></span> should contain all target candidates for the given object and cross reference.
 			</p>
 <div class="literallayout">
 <p>
@@ -78,73 +76,84 @@ end<br>
 </p>
 </div>
 <p>A single 
-				<code class="code">IScope</code> represents an element of a linked list of scopes. That means that a scope can be nested within an outer scope. Each scope works like a symbol table or a map where the keys are strings and the values are so called IEObjectDescription, which is effectively an abstract description of a real EObject. 
+				<span class="emphasis"><em>IScope</em></span> represents an element of a linked list of scopes. That means that a scope can be nested within an outer scope. Each scope works like a symbol table or a map where the keys are strings and the values are so called ${org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription}, which is effectively an abstract description of a real 
+				<span class="emphasis"><em>EObject</em></span>. 
 			</p>
 <div class="section" title="Global Scopes and IResourceDescriptions">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="global_scopes"></a>Global Scopes and IResourceDescriptions</h3>
+<a name="global_scopes"></a>Global Scopes and 
+					<span class="emphasis"><em>IResourceDescriptions</em></span>
+				
+</h3>
 </div>
 </div>
 </div>
-<p>In the state machine example we don&rsquo;t have cross file references. Also there is no such thing as name spaces or other concepts which make scoping a bit more complicated. Basically every 
-					<code class="code">State</code> and every 
-					<code class="code">Event</code> declared in the same resource is visible by their name. However in the real world things are most likely not that simple. What if you want to reuse certain declared states and events across different state machines and you want to share those as library between different users? You would want to introduce some kind of cross resource reference. Defining what is visible from outside the current resource is the responsibility of global scopes. Defining what things of the current resource can be seen from outside (i.e. is publicly referenceable) is the duty of the so called 
-					<code class="code">IResourceDescriptions.Manager</code>. 
+<p>In the state machine example we don&rsquo;t have references across model files. Also there is no concept like a name space which would make scoping a bit more complicated. Basically, every 
+					<span class="emphasis"><em>State</em></span> and every 
+					<span class="emphasis"><em>Event</em></span> declared in the same resource is visible by their name. However in the real world things are most likely not that simple: What if you want to reuse certain declared states and events across different state machines and you want to share those as library between different users? You would want to introduce some kind of cross resource reference. 
 				</p>
+<p>Defining what is visible from outside the current resource is the responsibility of global scopes. As the name suggests, global scopes are provided by instances of the ${org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider}. The data structures used to store its elements are described in the next section.</p>
 <div class="section" title="Resource and EObject Descriptions ( IResourceDescription, IEObjectDescription)">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
 <a name="resourcedescriptions"></a>
-						<code class="code">Resource</code> and 
-						<code class="code">EObject</code> Descriptions (
-						<code class="code">IResourceDescription</code>, 
-						<code class="code">IEObjectDescription</code>)
+						<span class="emphasis"><em>Resource</em></span> and 
+						<span class="emphasis"><em>EObject</em></span> Descriptions (
+						<span class="emphasis"><em>IResourceDescription</em></span>, 
+						<span class="emphasis"><em>IEObjectDescription</em></span>)
 					</h4>
 </div>
 </div>
 </div>
-<p>In order to make states and events of one file referenceable from another file you need to export them as part of a so called 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java?root=Modeling_Project&view=co" target="_new">IResourceDescription</a>. Such a description can be obtained by an implementation of 
-						<code class="code">IResourceDescription.Manager</code> which is provided by the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java?root=Modeling_Project&view=co" target="_new">IResourceServiceProvider</a> for your language. 
+<p>In order to make states and events of one file referable from another file you need to export them as part of a so called 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java?root=Modeling_Project&view=co" target="_new">IResourceDescription</a>. 
 					</p>
 <p>A 
-						<code class="code">IResourceDescription</code> contains information about the resource itself (primarily a 
-						<code class="code">URI</code>), a list of exported 
-						<code class="code">EObjects</code> (in the form of 
+						<span class="emphasis"><em>IResourceDescription</em></span> contains information about the resource itself (primarily its 
+						<span class="emphasis"><em>URI</em></span>), a list of exported 
+						<span class="emphasis"><em>EObjects</em></span> (in the form of 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java?root=Modeling_Project&view=co" target="_new">IEObjectDescription</a>) as well as information about outgoing cross references and qualified names it references. The cross references contain only resolved references, while the list of imported qualified names also contain those names, which couldn&rsquo;t be resolved. This information is important in order to compute the transitive hull of dependent resources, which the shipped index infrastructure automatically does for you.
 					</p>
 <p>For users and especially in the context of scoping the most important information is the list of exported 
-						<code class="code">EObjects</code>. An 
-						<code class="code">IEObjectDescription</code> contains information about the 
-						<code class="code">URI</code> to the actual 
-						<code class="code">EObject</code> and the qualified name of that element as well as the corresponding 
-						<code class="code">EClass</code>. In addition one can export arbitrary information using the so called user data map.
+						<span class="emphasis"><em>EObjects</em></span>. An ${org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription} contains information about the 
+						<span class="emphasis"><em>URI</em></span> to the actual 
+						<span class="emphasis"><em>EObject</em></span> and the qualified name of that element as well as the corresponding 
+						<span class="emphasis"><em>EClass</em></span>. In addition one can export arbitrary information using the 
+						<span class="emphasis"><em>user data</em></span> map. The following diagram gives an overview on the description classes and their relationships.
 					</p>
+<p>
+						
+</p>
+<div class="mediaobject">
+<img src="images/index_datamodel.png"></div>
+<p>
+					
+</p>
 <p>A language is configured with a default implementation of 
-						<code class="code">IResourceDescription.Manager</code> which computes the list of exported 
-						<code class="code">IEObjectDescription</code> s by iterating the whole EMF model and applying the 
-						<code class="code">getQualifiedName(EObject obj)</code> from 
+						<span class="emphasis"><em>IResourceDescription.Manager</em></span> which computes the list of exported 
+						<span class="emphasis"><em>IEObjectDescriptions</em></span> by iterating the whole EMF model and applying the 
+						<span class="emphasis"><em>getQualifiedName(EObject obj)</em></span> from 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java?root=Modeling_Project&view=co" target="_new">IQualifiedNameProvider</a> on each 
-						<code class="code">EObject</code>. If it returns a name an 
-						<code class="code">IEObjectDescription</code> is created and exported (i.e. added to the list). If an 
-						<code class="code">EObject</code> doesn&rsquo;t have a qualified name, the element is considered to be not referenceable from outside the resource. 
+						<span class="emphasis"><em>EObject</em></span>. If it returns a name an 
+						<span class="emphasis"><em>IEObjectDescription</em></span> is created and exported (i.e. added to the list). If an 
+						<span class="emphasis"><em>EObject</em></span> doesn&rsquo;t have a qualified name, the element is considered to be not referable from outside the resource and consequently not indexed. If you don&rsquo;t like this behavior, you can implement and bind your own implementation of 
+						<span class="emphasis"><em>IResourceDescription.Manager</em></span>.  
 					</p>
 <p>There are also two different implementations of 
-						<code class="code">IQualifiedNameProvider</code>. Both work by looking up an 
-						<code class="code">EAttribute</code> with the name &lsquo;name&rsquo;. The 
+						<span class="emphasis"><em>IQualifiedNameProvider</em></span>. Both work by looking up an 
+						<span class="emphasis"><em>EAttribute</em></span> with the name &lsquo;name&rsquo;. The 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/SimpleNameProvider.java?root=Modeling_Project&view=co" target="_new">SimpleNameProvider</a> just returns the plain value, while the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.java?root=Modeling_Project&view=co" target="_new">DefaultDeclarativeQualifiedNameProvider</a> concats the simple name with the qualified name of its parent exported 
-						<code class="code">EObject</code>. This effectively simulates the qualified name computation of most name space based languages (like e.g. Java). 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.java?root=Modeling_Project&view=co" target="_new">DefaultDeclarativeQualifiedNameProvider</a> concatenates the simple name with the qualified name of its parent exported 
+						<span class="emphasis"><em>EObject</em></span>. This effectively simulates the qualified name computation of most name space based languages (like e.g. Java). 
 					</p>
-<p>As mentioned above, in order to obtain an 
-						<code class="code">IResourceDescription</code> for a resource you need to ask the 
-						<code class="code">IResourceDescription.Manager</code>. Here&rsquo;s some Java code showing how to do that:
+<p>As mentioned above, in order to calculate an 
+						<span class="emphasis"><em>IResourceDescription</em></span> for a resource the framework asks the 
+						<span class="emphasis"><em>IResourceDescription.Manager</em></span>. Here&rsquo;s some Java code showing how to do that:
 					</p>
 <div class="literallayout">
 <p>
@@ -159,12 +168,12 @@ end<br>
 </p>
 </div>
 <p>In order to obtain an 
-						<code class="code">IResourceDescription.Manager</code> it is best to ask the corresponding 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java?root=Modeling_Project&view=co" target="_new">IResourceServiceProvider</a>. That is because each language might have a totally different implementation and as you might refer to from your language to a different language you can&rsquo;t reuse your language&rsquo;s 
-						<code class="code">IResourceDescription.Manager</code>. One basically asks the 
-						<code class="code">IResourceServiceProvider.Registry</code> (there is usually one global instance) for an 
-						<code class="code">IResourceServiceProvider</code>, which in turn provides an 
-						<code class="code">IResourceDescription.Manager</code> along other useful services.
+						<span class="emphasis"><em>IResourceDescription.Manager</em></span> it is best to ask the corresponding 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java?root=Modeling_Project&view=co" target="_new">IResourceServiceProvider</a>. That is because each language might have a totally different implementation and as you might refer from your language to a different language you can&rsquo;t reuse your language&rsquo;s 
+						<span class="emphasis"><em>IResourceDescription.Manager</em></span>. One basically asks the 
+						<span class="emphasis"><em>IResourceServiceProvider.Registry</em></span> (there is usually one global instance) for an 
+						<span class="emphasis"><em>IResourceServiceProvider</em></span>, which in turn provides an 
+						<span class="emphasis"><em>IResourceDescription.Manager</em></span> along other useful services.
 					</p>
 <p>If you&rsquo;re running in a Guice enabled scenario, the code looks like this:</p>
 <div class="literallayout">
@@ -194,7 +203,7 @@ end<br>
 </div>
 <p>However, we strongly encourage you to use dependency injection.
 						Now, that we know how to export elements to be referenceable from other resources, we need to learn how those exported 
-						<code class="code">IEObjectDescriptions</code> can be made available to the referencing resources. That is the responsibility of global scoping (i.e. 
+						<span class="emphasis"><em>IEObjectDescriptions</em></span> can be made available to the referencing resources. That is the responsibility of global scoping (i.e. 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java?root=Modeling_Project&view=co" target="_new">IGlobalScopeProvider</a>) which is described in the following.
 					</p>
 </div>
@@ -208,10 +217,10 @@ end<br>
 </div>
 </div>
 <p>A simple and straight forward solution is to have explicit references to other resources in your file by explicitly listing pathes (or 
-						<code class="code">URIs</code>) to all referenced resources in your model file. That is for instance what most include mechanisms use. In Xtext we provide a handy implementation of an 
-						<code class="code">IGlobalScopeProvider</code> which is based on naming convention and makes this semantics very easy to use. Talking of the introductory example and given you would want to add support for referencing external 
-						<code class="code">States</code> and 
-						<code class="code">Events</code> from within your state machine, all you&rsquo;ld had to do is add something like the following to the grammar definition:
+						<span class="emphasis"><em>URIs</em></span>) to all referenced resources in your model file. That is for instance what most include mechanisms use. In Xtext we provide a handy implementation of an 
+						<span class="emphasis"><em>IGlobalScopeProvider</em></span> which is based on a naming convention and makes this semantics very easy to use. Talking of the introductory example and given you would want to add support for referencing external 
+						<span class="emphasis"><em>States</em></span> and 
+						<span class="emphasis"><em>Events</em></span> from within your state machine, all you had to do is add something like the following to the grammar definition:
 					</p>
 <div class="literallayout">
 <p>
@@ -230,7 +239,7 @@ end<br>
 
 <br>
 Import&nbsp;:&nbsp;<br>
-&nbsp;&nbsp;'import'&nbsp;importURI=STRING;<br>
+&nbsp;&nbsp;'import'&nbsp;importURI=STRING;&nbsp;//&nbsp;feature&nbsp;must&nbsp;be&nbsp;named&nbsp;importURI<br>
 
 <br>
 
@@ -239,69 +248,238 @@ Import&nbsp;:&nbsp;<br>
 </div>
 <p>This effectively allows import statements to be declared before the events section. In addition you&rsquo;ll have to make sure that you have bound the 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportUriGlobalScopeProvider.java?root=Modeling_Project&view=co" target="_new">ImportUriGlobalScopeProvider</a> for the type 
-						<code class="code">IGlobalScopeProvider</code> by the means of Guice:#dependencyInjection. That implementation looks up any 
-						<code class="code">EAttributes</code> named &lsquo;importURI&rsquo; in your model and interprets their values as imports. That is it adds the corresponding resources to the current resource&rsquo;s resource set. In addition the scope provider uses the 
-						<code class="code">IResourceDescription.Manager</code>#resource_descriptions of that imported resource to compute all the 
-						<code class="code">IEObjectDescriptions</code> returned by the 
-						<code class="code">IScope</code>.  
+						<span class="emphasis"><em>IGlobalScopeProvider</em></span> by the means of Guice:#dependencyInjection. That implementation looks up any 
+						<span class="emphasis"><em>EAttributes</em></span> named &lsquo;importURI&rsquo; in your model and interprets their values as imports. That is it adds the corresponding resources to the current resource&rsquo;s resource set. In addition the scope provider uses the 
+						<span class="emphasis"><em>IResourceDescription.Manager</em></span>#resource_descriptions of that imported resource to compute all the 
+						<span class="emphasis"><em>IEObjectDescriptions</em></span> returned by the 
+						<span class="emphasis"><em>IScope</em></span>.  
+					</p>
+<p>Global scopes based on import URIs are available if you use the ${org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportURIScopingFragment} in the workflow of your language. It will bind an ${org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportUriGlobalScopeProvider} (${org.eclipse.xtext/src/org/eclipse/xtext/resource/ignorecase/IgnoreCaseImportUriGlobalScopeProvider} if the 
+						<span class="emphasis"><em>caseInsensitve</em></span> flag is set) that handles 
+						<span class="emphasis"><em>importURI</em></span> features.
 					</p>
 </div>
-<div class="section" title="Global Scopes based on external configuration (e.g. classpath-based)">
+<div class="section" title="Global Scopes based on external configuration (e.g. class path-based)">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="index_based"></a>Global Scopes based on external configuration (e.g. classpath-based)</h4>
+<a name="index_based"></a>Global Scopes based on external configuration (e.g. class path-based)</h4>
 </div>
 </div>
 </div>
-<p>The other possibility is to have some kind of external configuration in order to define what is visible outside a resource. Java for instances uses the notion of classpaths to define containers (jars and class folders) which contain any referenceable elements. In the case of Java also the order of such entries is important. 
-						Since version 1.0.0 Xtext provides support for this kind of global scoping. Actually by default Xtext leverages the classpath mechanism since it is well designed and already understood by most of our users. Also the available tooling provided by JDT and PDE to configure the classpath is of high value. However it is just a default you can reuse the infrastructure without reusing Java and therefore depending on JDT.</p>
-<p>In order to know what is available in the &ldquo;world&rdquo; a global scope provider which relies on external configuration needs to read that configuration in and be able to find all candidates for a certain EReference in those containers. If you don&rsquo;t want to force users to have a folder and file name structure reflecting the actual qualified names of the referenceable 
-						<code class="code">EObjects</code>, you&rsquo;ll have to load all resources up front and either keep holding them in memory or remembering all information which is needed for reference resolution. In Xtext that information is provided by a so called 
-						<code class="code">IEObjectDescription</code>#resource_descriptions. 
+<p>Instead of explicitly referring to imported resources, the other possibility is to have some kind of external configuration in order to define what is visible from outside a resource. Java for instances uses the notion of class paths to define containers (jars and class folders) which contain any referenceable elements. In the case of Java also the order of such entries is important. </p>
+<p>Since version 1.0.0 Xtext provides support for this kind of global scoping. To enable it, a ${org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/DefaultGlobalScopeProvider} has to be bound to the 
+						<span class="emphasis"><em>IGlobalScopeProvider</em></span> interface. If your klanguage 
+						<a class="link" href="jvmtypes.html" title="Referring Java Types">references Java</a>, use ${org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/xtext/TypesAwareDefaultGlobalScopeProvider}. For case insensitve names use the ${org.eclipse.xtext/src/org/eclipse/xtext/resource/ignorecase/IgnoreCaseDefaultGlobalScopeProvider}.
 					</p>
+<p>By default Xtext leverages the class path mechanism since it is well designed and already understood by most of our users. The available tooling provided by JDT and PDE to configure the class path adds even more value. However, it is just a default: You can reuse the infrastructure without using Java and depending on JDT.</p>
+<p>In order to know what is available in the &ldquo;world&rdquo; a global scope provider which relies on external configuration needs to read that configuration in and be able to find all candidates for a certain 
+						<span class="emphasis"><em>EReference</em></span> in those containers. If you don&rsquo;t want to force users to have a folder and file name structure reflecting the actual qualified names of the referenceable 
+						<span class="emphasis"><em>EObjects</em></span>, you&rsquo;ll have to load all resources up front and either keep holding them in memory or remembering all information which is needed for the resolution of cross references. In Xtext that information is provided by a so called 
+						<span class="emphasis"><em>IEObjectDescription</em></span>#resource_descriptions. 
+					</p>
+<div class="section" title="About the index, containers and their manager">
+<div class="titlepage">
+<div>
+<div>
+<h5 class="title">
+<a name="containers"></a>About the index, containers and their manager </h5>
+</div>
+</div>
+</div>
 <p>Xtext ships with an index which remembers all 
-						<code class="code">IResourceDescriptions</code> and its 
-						<code class="code">IEObjectDescriptions</code>. In the IDE-context (i.e. when running the editor, etc.) the index is updated incrementally by an incremental project builder. At runtime however, you typically do not have to deal with changes so that the infrastructure can be much simpler. In both situations the global index state is hold by an implementation of
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescriptions.java?root=Modeling_Project&view=co" target="_new">IResourceDescriptions</a> (Note the plural form!). 
-					</p>
-<div class="section" title="Of containers and its manager">
+							<span class="emphasis"><em>IResourceDescription</em></span> and their 
+							<span class="emphasis"><em>IEObjectDescription</em></span> objects. In the IDE-context (i.e. when running the editor, etc.) the index is updated by an incremental project builder. As opposed to that, in a non-UI context you typically do not have to deal with changes such that the infrastructure can be much simpler. In both situations the global index state is held by an implementation of 
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescriptions.java?root=Modeling_Project&view=co" target="_new">IResourceDescriptions</a> (Note the plural form!). The bound singleton in the UI scenario is even aware of unsaved editor changes, such that all linking happens to the latest maybe unsaved version of the resources. You will find the Guice configuration of the global index in the UI scenario in ${org.eclipse.xtext.ui.shared/src/org/eclipse/xtext/ui/shared/internal/SharedModule.java}.
+						</p>
+<p>The index is just a flat list of instances of 
+							<span class="emphasis"><em>IResourceDescription</em></span>. The index itself doesn&rsquo;t know about containers. Rather than that, the notion of containers is defined by the referencing language: While Java might load a resource via 
+							<span class="emphasis"><em>ClassLoader.loadResource()</em></span> (i.e. using the class path mechanism), another language could load the same resource using the file system paths. 
+						</p>
+<p>Consequently, the information which container a resource belongs to depends on the referencing context. Therefore an 
+							<span class="emphasis"><em>IResourceServiceProvider</em></span> provides another interesting service, which is called 
+							<span class="emphasis"><em>IContainer.Manager</em></span>. For a given 
+							<span class="emphasis"><em>IResourceDescription</em></span>, the 
+							<span class="emphasis"><em>IContainer.Manager</em></span> provides you with the 
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java?root=Modeling_Project&view=co" target="_new">IContainer</a> as well as with a list of all 
+							<span class="emphasis"><em>IContainers</em></span> which are visible from there. Note that the index (
+							<span class="emphasis"><em>IResourceDesciptions</em></span>) is globally shared between all languages while the 
+							<span class="emphasis"><em>IContainer.Manager</em></span> that adds the semantics of containers can be very different depending on the language. The following method lists all resources visible from a given 
+							<span class="emphasis"><em>Resource</em></span>:  
+						</p>
+<div class="literallayout">
+<p>
+<code class="code">@Inject<br>
+IContainer.Manager&nbsp;containerManager;<br>
+
+<br>
+public&nbsp;void&nbsp;listVisibleResources(Resource&nbsp;myResource,&nbsp;IResourceDescriptions&nbsp;index)&nbsp;{<br>
+	IResourceDescription&nbsp;myResourceDesc&nbsp;=&nbsp;index.getResourceDescription<br>
+&nbsp;&nbsp;																							(myResource.getURI());<br>
+	for(IContainer&nbsp;visibleContainer:&nbsp;manager.getVisibleContainers(myResourceDesc))&nbsp;<br>
+		for(IResourceDescription&nbsp;visibleResourceDesc:<br>
+					visibleContainer.getResourceDescription())&nbsp;<br>
+			System.out.println(visibleResourceDesc.getURI());<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>Xtext ships two implementations of 
+							<span class="emphasis"><em>IContainer.Manager</em></span> which are as usual bound with Guice: The default binding is to ${org.eclipse.xtext/src/org/eclipse/xtext/resource/impl/SimpleResourceDescriptionsBasedContainerManager}, which assumes all 
+							<span class="emphasis"><em>IResourceDescription</em></span> to be in a single common container. If you don&rsquo;t care about container support, you&rsquo;ll be fine with this one. Alternatively, you can bind ${org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/StateBasedContainerManager} and an additional ${org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/IAllContainersState} which keeps track of the set of available containers and their visibility releationships.  
+						</p>
+<p>Xtext offers a couple of strategies for managing containers: If you&rsquo;re running an Eclipse workbench, you can define containers based on Java projects and their class paths or based on plain Eclipse projects. Outside Eclipse, you can provide a set of file system paths to be scanned for models. All of these only differ in the bound instance of 
+							<span class="emphasis"><em>IAllContainerState</em></span> of the referring language. These will be described in detail in the following sections.
+						</p>
+<p>
+							
+</p>
+<div class="mediaobject">
+<img src="images/index_container.png"></div>
+<p>
+						
+</p>
+</div>
+<div class="section" title="JDT based container manager">
 <div class="titlepage">
 <div>
 <div>
 <h5 class="title">
-<a name="containers"></a>Of containers and its manager </h5>
+<a name="jdt_based_containers"></a>JDT based container manager </h5>
 </div>
 </div>
 </div>
-<p>As mentioned above all this stuff is best explained along Java&rsquo;s class path mechanism, because we assume that you have an idea of its concepts and how it works. At least if not and we haven&rsquo;t written enough information down, there are other resources you could consult. The index is just a flat list of instances of 
-							<code class="code">IResourceDescription</code> the index itself doesn&rsquo;t know about containers. That is because we think the notion of containers is something which is defined by the referencing language. The very same resource could be loaded from Java by the means of ClassLoader.loadResource() (i.e. using the classpath mechanism) but could be loaded from some other language by using the file system paths. 
+<p>As JDT is an Eclipse feature, this JDT based container management is only available in the UI scenario. It assumes so called 
+							<span class="emphasis"><em>IPackageFragmentRoots</em></span> as containers. An 
+							<span class="emphasis"><em>IPackageFragmentRoot</em></span> in JDT is the root of a tree of  Java model elements. It usually refers to 
 						</p>
-<p>This means that the information about to what container a resource belongs depends on the context. Therefore an 
-							<code class="code">IResourceServiceProvider</code> provides another interesting service, which is called 
-							<code class="code">IContainer.Manager</code>. An 
-							<code class="code">IContainer.Manager</code> provides you with the 
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java?root=Modeling_Project&view=co" target="_new">IContainer</a> a certain 
-							<code class="code">IResourceDescripition</code> belongs to as well as with a list of all 
-							<code class="code">IContainers</code> which are visible from a certain 
-							<code class="code">IResourceDescription</code>. Note that while the index (
-							<code class="code">IResourceDesciptions</code>) is globally shared (between all languages) the 
-							<code class="code">IContainer.Manager</code> adds the semantic of containers and its implementation can be very different depending on the language.
-						</p>
-<p>By default Xtext provides either leveraging the Java class path mechanism, which allows to reuse a lot of nice Java things (jars, OSGi, maven, etc.) or define containers based on Eclipse projects. At runtime the only alternative is configured with a list of pathes to scan. Such pathes can either point to folders or archives.</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>in a source folder of a Java project,</p>
+</li>
+<li class="listitem">
+<p>in a referenced jar, </p>
+</li>
+<li class="listitem">
+<p>on the class path of a referenced Java project, or</p>
+</li>
+<li class="listitem">
+<p>in the exported packages of a required PDE plug-in.</p>
+</li>
+</ul>
 </div>
-<div class="section" title="Java based container manager">
+<p>So for an element to be referable, its resource must be on the class path of the caller&rsquo;s Java project and it must be exported (as described above). </p>
+<p>As this strategy allows to reuse a lot of nice Java things like jars, OSGi, maven, etc. it is part of the default: You should not have to reconfigure anything to make it work. Nevertheless, if you messed something up, make sure you bind</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;Class&lt;?&nbsp;extends&nbsp;org.eclipse.xtext.resource.IContainer.Manager&gt;&nbsp;bindIContainer$Manager()&nbsp;{<br>
+&nbsp;&nbsp;return&nbsp;org.eclipse.xtext.resource.containers.StateBasedContainerManager.class;<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>in the runtime module and </p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;com.google.inject.Provider&lt;org.eclipse.xtext.resource.containers.IAllContainersState&gt;&nbsp;<br>
+		provideIAllContainersState()&nbsp;{<br>
+	return&nbsp;org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();<br>
+	//&nbsp;return&nbsp;org.eclipse.xtext.ui.shared.Access.getStrictJavaProjectsState();<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>in the UI module of the referencing language. The latter looks a bit more difficult than a common binding, as we have to bind a global singleton to a Guice provider. The 
+							<span class="emphasis"><em>StrictJavaProjectsState</em></span> requires all elements to be on the class path, while the default 
+							<span class="emphasis"><em>JavaProjectsState</em></span> also allows models in non-source folders. 
+						</p>
+</div>
+<div class="section" title="Eclipse project based containers">
 <div class="titlepage">
 <div>
 <div>
 <h5 class="title">
-<a name="java_based_containers"></a>Java based container manager </h5>
+<a name="project_based_containers"></a>Eclipse project based containers</h5>
 </div>
 </div>
 </div>
-<p>TODO Explain how to setup Java and project based container state in the ui. 
-							TODO Explain how to setup a resourcesetbased IResourceDescriptions for runtime.</p>
+<p>If the class path based mechanism doesn&rsquo;t work for your case, Xtext offers an alternative container manager based on plain Eclipse projects: Each project acts as a container and the project references 
+							<span class="emphasis"><em>Properties-&gt;Project References</em></span> are the visible containers. 
+						</p>
+<p>In this case, your runtime module should define</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;Class&lt;?&nbsp;extends&nbsp;org.eclipse.xtext.resource.IContainer.Manager&gt;&nbsp;bindIContainer$Manager()&nbsp;{<br>
+&nbsp;&nbsp;return&nbsp;org.eclipse.xtext.resource.containers.StateBasedContainerManager.class;<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>and the UI module should bind </p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;com.google.inject.Provider&lt;org.eclipse.xtext.resource.containers.IAllContainersState&gt;&nbsp;<br>
+		provideIAllContainersState()&nbsp;{<br>
+	return&nbsp;org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="ResourceSet based containers">
+<div class="titlepage">
+<div>
+<div>
+<h5 class="title">
+<a name="resource_set_containers"></a>
+							<span class="emphasis"><em>ResourceSet</em></span> based containers
+						</h5>
+</div>
+</div>
+</div>
+<p>If you need an 
+							<span class="emphasis"><em>IContainer.Manager</em></span> that is independent of Eclipse projects, you can use the ${org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/ResourceSetBasedAllContainersState}. This one can be configured with a mapping of container handles to resource URIs.
+						</p>
+<p>It is unlikely you want to use this strategy directly in your own code, but it is used in the backend of the MWE2 workflow component ${org.eclipse.xtext/src/org/eclipse/xtext/mwe/Reader}. This is responsible for reading in models in a workflow, e.g. for later code generation. The 
+							<span class="emphasis"><em>Reader</em></span> allows to either scan the whole classpath or a set of paths for all models therein. When paths are given, each path entry becomes an 
+							<span class="emphasis"><em>IContainer</em></span> of its own. In the following snippet,
+						</p>
+<div class="literallayout">
+<p>
+<code class="code">component&nbsp;=&nbsp;org.eclipse.xtext.mwe.Reader&nbsp;{<br>
+	//&nbsp;lookup&nbsp;all&nbsp;resources&nbsp;on&nbsp;the&nbsp;classpath<br>
+	//&nbsp;useJavaClassPath&nbsp;=&nbsp;true<br>
+	
+<br>
+	//&nbsp;or&nbsp;define&nbsp;search&nbsp;scope&nbsp;explicitly<br>
+	path&nbsp;=&nbsp;"src/models"<br>
+	path&nbsp;=&nbsp;"src/further-models"<br>
+
+<br>
+	...<br>
+}<br>
+&nbsp;<br>
+
+</code>
+</p>
+</div>
 </div>
 </div>
 </div>
@@ -314,10 +492,10 @@ Import&nbsp;:&nbsp;<br>
 </div>
 </div>
 </div>
-<p>TODO TODO TODO
-					We now know how the outer world of referenceable elements can be defined in Xtext. </p>
-<p>For instance Java has multiple kinds of scopes (object scope, type scope, etc.).</p>
-<p>For Java one would create the scope hierarchy as commented in the following example:</p>
+<p>We now know how the outer world of referenceable elements can be defined in Xtext. Nevertheless, not everything is available in any context and with a global name. Rather than that, each context can usually have a different scope. As already stated, scopes can be nested, i.e. a scope can in addition to its own elements contain elements of a parent scope. When parent and child scope contain different elements with the same name, the parent scope&rsquo;s element will usually be 
+					<span class="emphasis"><em>shadowed</em></span> by the element from the child scope.      
+				</p>
+<p>To illustrate that, let&rsquo;s have a look at Java: Java defines multiple kinds of scopes (object scope, type scope, etc.). For Java one would create the scope hierarchy as commented in the following example:</p>
 <div class="literallayout">
 <p>
 <code class="code">//&nbsp;file&nbsp;contents&nbsp;scope<br>
@@ -336,7 +514,7 @@ public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;sco
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;the&nbsp;scope&nbsp;hierarchy&nbsp;at&nbsp;this&nbsp;point&nbsp;would&nbsp;look&nbsp;like&nbsp;this:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;blockScope{field,innerScopeVar}-&gt;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;methodScope{localVar,&nbsp;param}-&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;classScope{field}-&gt;&nbsp;('field'&nbsp;is&nbsp;overlayed)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;classScope{field}-&gt;&nbsp;('field'&nbsp;is&nbsp;shadowed)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;fileScope{STATIC}-&gt;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;classpathScope{'all&nbsp;qualified&nbsp;names&nbsp;of&nbsp;accessible&nbsp;static&nbsp;fields'}&nbsp;-&gt;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;NULLSCOPE{}<br>
@@ -369,211 +547,16 @@ public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;sco
 <p>Please find the motivation behind this and some additional details in 
 					<a class="ulink" href="http://blog.efftinge.de/2009/01/xtext-scopes-and-emf-index.html" target="_new">this blog post</a> .
 				</p>
-<p>The default implementation would produce this hierarchy of scopes for the model from the last example in the 
-					<a class="link" href="scoping.html#defaultImports" title="Default Imports">previous chapter</a>:
-				</p>
-<div class="literallayout">
-<p>
-<code class="code">//file&nbsp;model.dsl<br>
-import&nbsp;"model1.dsl";<br>
-import&nbsp;"model2.dsl";<br>
-&nbsp;<br>
-ref&nbsp;Foo;<br>
-entity&nbsp;Bar;<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<div class="literallayout">
-<p>
-<code class="code">//file&nbsp;model1.dsl&nbsp;<br>
-entity&nbsp;Stuff;<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<div class="literallayout">
-<p>
-<code class="code">//file&nbsp;model2.dsl<br>
-entity&nbsp;Foo;<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<div class="literallayout">
-<p>
-<code class="code">Scope&nbsp;(model.dsl)&nbsp;{<br>
-&nbsp;&nbsp;parent&nbsp;:&nbsp;Scope&nbsp;(model1.dsl)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;parent&nbsp;:&nbsp;Scope&nbsp;(model2.dsl)&nbsp;{}<br>
-&nbsp;&nbsp;}<br>
-}<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<p>When enumerating the scope&rsquo;s content, the first, most specialized scope would return 
-					<code class="code">Bar</code>, its parent would provide 
-					<code class="code">Stuff</code> and the outermost scope adds 
-					<code class="code">Foo</code>. The linker will iterate the scope in that order and abort when it finds a matching 
-					<code class="code">ScopedElement</code>. 
-				</p>
-</div>
-<div class="section" title="Default linking semantics">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-<a name="Defaultlinkingsemantics"></a>Default linking semantics</h3>
-</div>
-</div>
-</div>
-<p>The default implementation for all languages looks within the current file for an EObject of the respective type. In the example above this would be an &ldquo;Entity&rdquo; which by convention has a 
-					<code class="code">name</code> attribute set to &lsquo;Entity01&rsquo;. 
-				</p>
-<p>Given the grammar :</p>
-<div class="literallayout">
-<p>
-<code class="code">Model&nbsp;:&nbsp;<br>
-&nbsp;&nbsp;(stuff+=(Ref|Entity))*<br>
-;<br>
-
-<br>
-Ref&nbsp;:&nbsp;<br>
-&nbsp;&nbsp;'ref'&nbsp;referencedObject=[Entity|ID]&nbsp;';'<br>
-;<br>
-
-<br>
-Entity&nbsp;:&nbsp;<br>
-&nbsp;&nbsp;'entity'&nbsp;name=ID&nbsp;';'<br>
-;<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<p>In the following model:</p>
-<div class="literallayout">
-<p>
-<code class="code">ref&nbsp;Entity01;<br>
-entity&nbsp;Entity01;<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<p>the 
-					<code class="code">ref</code> would be linked to the declared entity (
-					<code class="code">entity Entity01;</code>). Nearly any aspect is configurable, especially the name of the identifying attribute may be overridden for a particular type.
-				</p>
-<div class="section" title="Default Imports">
+<div class="section" title="Declarative scoping">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="defaultImports"></a>Default Imports</h4>
+<a name="Declarativescoping"></a>Declarative scoping</h4>
 </div>
 </div>
 </div>
-<p>There is a default implementation for inter-resource references, which as well uses convention.
-						Each string in a model which is assigned to an EAttribute with the name 
-						<code class="code">importURI</code>, will be interpreted as an URI and used to be loaded using the 
-						<code class="code">ResourceSet</code> of the current resource.
-					</p>
-<p>For example, given the following grammar :</p>
-<div class="literallayout">
-<p>
-<code class="code">Model&nbsp;:&nbsp;<br>
-&nbsp;&nbsp;(imports+=Import)*<br>
-&nbsp;&nbsp;(stuff+=(Ref|Entity))*<br>
-;<br>
-
-<br>
-Import&nbsp;:<br>
-&nbsp;&nbsp;'import'&nbsp;importURI=STRING&nbsp;';'<br>
-;<br>
-
-<br>
-Ref&nbsp;:&nbsp;<br>
-&nbsp;&nbsp;'ref'&nbsp;referencedObject=[Entity|ID]&nbsp;';'<br>
-;<br>
-
-<br>
-Entity&nbsp;:&nbsp;<br>
-&nbsp;&nbsp;'entity'&nbsp;name=ID&nbsp;';'<br>
-;<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<p>It would be possible to write three files in that language where the first references the other two, like this:</p>
-<div class="literallayout">
-<p>
-<code class="code">//file&nbsp;model.dsl<br>
-import&nbsp;"model1.dsl";<br>
-import&nbsp;"model2.dsl";<br>
-&nbsp;<br>
-ref&nbsp;Foo;<br>
-entity&nbsp;Bar;<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<div class="literallayout">
-<p>
-<code class="code">//file&nbsp;model1.dsl&nbsp;<br>
-entity&nbsp;Stuff;<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<div class="literallayout">
-<p>
-<code class="code">//file&nbsp;model2.dsl<br>
-entity&nbsp;Foo;<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<p>The linking candidates for the reference 
-						<code class="code">Foo</code> will be 
-						<code class="code">Bar</code>, 
-						<code class="code">Stuff</code> and 
-						<code class="code">Foo</code> in that order. They will be computed by the 
-						<a class="link" href="scoping.html" title="Scoping">ScopeProvider</a>. 
-					</p>
-</div>
-</div>
-<div class="section" title="DeclarativeScopeProvider">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-<a name="org.eclipse.xtextsrcorg.eclipse.xtext.scoping.impl.DeclarativeScopeProvider"></a>
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/DeclarativeScopeProvider.java?root=Modeling_Project&view=co" target="_new">DeclarativeScopeProvider</a>
-				
-</h3>
-</div>
-</div>
-</div>
-<p>As always there is an implementation that allows to specify scoping in a declarative way. It looks up methods which have either of the following two signatures:</p>
+<p>If you have to define scopes for certain contexts, the base class ${org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/AbstractDeclarativeScopeProvider} allows to do that in a declarative way. It looks up methods which have either of the following two signatures:</p>
 <div class="literallayout">
 <p>
 <code class="code">IScope&nbsp;scope_&lt;RefDeclaringEClass&gt;_&lt;Reference&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br>
@@ -589,19 +572,19 @@ entity&nbsp;Foo;<br>
 </p>
 </div>
 <p>The former is used when evaluating the scope for a specific cross reference and here 
-					<code class="code">&lt;ContextReference&gt;</code> corresponds to the name of this reference (prefixed with the name of the reference&rsquo;s declaring type and separated by an underscore). The 
-					<code class="code">ref</code> parameter represents this cross reference.
-				</p>
+						<span class="emphasis"><em>ContextReference</em></span> corresponds to the name of this reference (prefixed with the name of the reference&rsquo;s declaring type and separated by an underscore). The 
+						<span class="emphasis"><em>ref</em></span> parameter represents this cross reference.
+					</p>
 <p>The latter method signature is used when computing the scope for a given element type and is applicable to all cross references of that type. Here 
-					<code class="code">&lt;TypeToReturn&gt;</code> is the name of that type which also corresponds to the 
-					<code class="code">type</code> parameter. 
-				</p>
+						<span class="emphasis"><em>TypeToReturn</em></span> is the name of that type which also corresponds to the 
+						<span class="emphasis"><em>type</em></span> parameter. 
+					</p>
 <p>So if you for example have a state machine with a  
-					<span class="emphasis"><em>Transition</em></span> object owned by its source 
-					<span class="emphasis"><em>State</em></span> and you want to compute all reachable states (i.e. potential target states), the corresponding method could be declared as follows (assuming the cross reference is declared by the 
-					<span class="emphasis"><em>Transition</em></span> type and is called 
-					<span class="emphasis"><em>target</em></span>):
-				</p>
+						<span class="emphasis"><em>Transition</em></span> object owned by its source 
+						<span class="emphasis"><em>State</em></span> and you want to compute all reachable states (i.e. potential target states), the corresponding method could be declared as follows (assuming the cross reference is declared by the 
+						<span class="emphasis"><em>Transition</em></span> type and is called 
+						<span class="emphasis"><em>target</em></span>):
+					</p>
 <div class="literallayout">
 <p>
 <code class="code">IScope&nbsp;scope_Transition_target(Transition&nbsp;this,&nbsp;EReference&nbsp;ref)<br>
@@ -610,13 +593,13 @@ entity&nbsp;Foo;<br>
 </p>
 </div>
 <p>If such a method does not exist, the implementation will try to find one for the context object&rsquo;s container. Thus in the example this would match a method with the same name but 
-					<span class="emphasis"><em>State</em></span> as the type of the first parameter. It will keep on walking the containment hierarchy until a matching method is found. This container delegation allows to reuse the same scope definition for elements in different places of the containment hierarchy. Also it may make the method easier to implement as the elements comprising the scope are quite often owned or referenced by a container of the context object. In the example the 
-					<span class="emphasis"><em>State</em></span> objects could for instance be owned by a containing 
-					<span class="emphasis"><em>StateMachine</em></span> object.
-				</p>
+						<span class="emphasis"><em>State</em></span> as the type of the first parameter. It will keep on walking the containment hierarchy until a matching method is found. This container delegation allows to reuse the same scope definition for elements in different places of the containment hierarchy. Also it may make the method easier to implement as the elements comprising the scope are quite often owned or referenced by a container of the context object. In the example the 
+						<span class="emphasis"><em>State</em></span> objects could for instance be owned by a containing 
+						<span class="emphasis"><em>StateMachine</em></span> object.
+					</p>
 <p>If no method specific to the cross reference in question was found for any of the objects in the containment hierarchy, the implementation will start looking for methods matching the other signature (with the 
-					<span class="emphasis"><em>EClass</em></span> parameter). Again it will first attempt to match the context object. Thus in the example the signature first matched would be:
-				</p>
+						<span class="emphasis"><em>EClass</em></span> parameter). Again it will first attempt to match the context object. Thus in the example the signature first matched would be:
+					</p>
 <div class="literallayout">
 <p>
 <code class="code">IScope&nbsp;scope_State(Transition&nbsp;this,&nbsp;EReference&nbsp;ref)<br>
@@ -633,43 +616,20 @@ entity&nbsp;Foo;<br>
 </p>
 </div>
 <p>This scope can now be used for any cross references of type 
-					<span class="emphasis"><em>State</em></span> for context objects owned by the state machine.
-				</p>
-<p>There are currently two different scope provider implmentations available which support these semantics:</p>
-<div class="orderedlist">
-<ol class="orderedlist" type="1">
-<li class="listitem">
-<p> 
-							
-<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/AbstractDeclarativeScopeProvider.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeScopeProvider</a> 
-						
-</p>
-</li>
-<li class="listitem">
-<p> 
-							
-<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/AbstractDeclarativeQualifiedNameScopeProvider.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeQualifiedNameScopeProvider</a>
-						
-</p>
-</li>
-</ol>
+						<span class="emphasis"><em>State</em></span> for context objects owned by the state machine.
+					</p>
 </div>
 </div>
-<div class="section" title="QualifiedNameScopeProvider">
+<div class="section" title="Imported namespace aware scoping">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="org.eclipse.xtextsrcorg.eclipse.xtext.scoping.impl.QualifiedNameScopeProvider"></a>
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/QualifiedNameScopeProvider.java?root=Modeling_Project&view=co" target="_new">QualifiedNameScopeProvider</a>
-				
-</h3>
+<a name="Importednamespaceawarescoping"></a>Imported namespace aware scoping</h3>
 </div>
 </div>
 </div>
-<p>The qualified name scoping is based on qualified names and name spaces. It adds name space support to your language, which is comparable and similar to the one in Scala and C#. Scala and C# both allow to have multiple nested packages within one file and you can put imports per namespace, so that imported names are only visible within that namespace. See the domain model example its scope provider extends  
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/AbstractDeclarativeQualifiedNameScopeProvider.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeQualifiedNameScopeProvider</a>.
-				</p>
+<p>The imported namesapce aware scoping is based on qualified names and name spaces. It adds name space support to your language, which is comparable and similar to the one in Scala and C#. Scala and C# both allow to have multiple nested packages within one file and you can put imports per namespace, so that imported names are only visible within that namespace. See the domain model example: its scope provider extends ${org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider}.</p>
 <div class="section" title="IQualifiedNameProvider">
 <div class="titlepage">
 <div>
@@ -682,11 +642,29 @@ entity&nbsp;Foo;<br>
 </div>
 </div>
 </div>
-<p>The 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/QualifiedNameScopeProvider.java?root=Modeling_Project&view=co" target="_new">QualifiedNameScopeProvider</a> makes use of the so called 
+<p>The ${org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider} makes use of the so called 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IQualifiedNameProvider.java?root=Modeling_Project&view=co" target="_new">IQualifiedNameProvider</a> service. It computes qualified names for EObjects. The default implementation (
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/DefaultDeclarativeQualifiedNameProvider.java?root=Modeling_Project&view=co" target="_new">DefaultDeclarativeQualifiedNameProvider</a>) uses a simple name look up and concats the result to the qualified name of its parent object. See its JavaDoc and the code for more details.
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/DefaultDeclarativeQualifiedNameProvider.java?root=Modeling_Project&view=co" target="_new">DefaultDeclarativeQualifiedNameProvider</a>) uses a simple name look up and concats the result to the qualified name of its parent object. 
 					</p>
+<p>It also allows to override the name computation declaratively. The following snippet shows how you could make 
+						<span class="emphasis"><em>Transitions</em></span> in the statemachine example referable by giving them a name. Don&rsquo;t forget to bind your implementation in your runtime module. 
+					</p>
+<div class="literallayout">
+<p>
+<code class="code">FowlerDslQualifiedNameProvider&nbsp;extends&nbsp;DefaultDeclarativeQualifiedNameProvider&nbsp;{<br>
+	public&nbsp;String&nbsp;qualifiedName(Transition&nbsp;t)&nbsp;{<br>
+		if(t.getEvent()&nbsp;==&nbsp;null&nbsp;||&nbsp;!(t.eContainer()&nbsp;instanceof&nbsp;State))&nbsp;<br>
+			return&nbsp;null;<br>
+		else&nbsp;<br>
+			return&nbsp;((State)&nbsp;t.eContainer()).getName()&nbsp;+&nbsp;"."&nbsp;t.getEvent().getName();<br>
+	}<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
 </div>
 <div class="section" title="Importing name spaces">
 <div class="titlepage">
@@ -697,8 +675,10 @@ entity&nbsp;Foo;<br>
 </div>
 </div>
 </div>
-<p>The QualifiedNameScopeProvider looks up EAttributes with name &lsquo;importNamespace&rsquo; and interprets such as import statements.
-						By default qualified names with or without a wildcard at the end are supported. For an import of a qualified name the simple name is made available as we know from e.g. Java, where</p>
+<p>The 
+						<span class="emphasis"><em>ImportedNamespaceAwareLocalScopeProvider</em></span> looks up 
+						<span class="emphasis"><em>EAttributes</em></span> with name &lsquo;importNamespace&rsquo; and interprets such as import statements. By default qualified names with or without a wildcard at the end are supported. For an import of a qualified name the simple name is made available as we know from e.g. Java, where
+					</p>
 <div class="literallayout">
 <p>
 <code class="code">import&nbsp;java.util.Set;<br>
@@ -752,11 +732,6 @@ package&nbsp;bar&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>As the name suggests it uses the EMF index to find any EObjects which are not located in the current resource. 
-						The 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/index/IndexBasedScopeProvider.java?root=Modeling_Project&view=co" target="_new">IndexBasedScopeProvider</a> supports nested namespaces (similar to C# and Scala) and is used in the Domainmodel example (project org.eclipse.xtext.example.domainmodel). There is support for declarative overwriting of the default semantics if you subclass 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/index/AbstractDeclarativeIndexBasedScopeProvider.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeIndexBasedScopeProvider</a>.
-					</p>
 <p>See the JavaDocs and 
 						<a class="ulink" href="http://blog.efftinge.de/2009/07/xtext-scopes-and-emf-index-in-action.html" target="_new">this blog post</a> for details.
 					</p>

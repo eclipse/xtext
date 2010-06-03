@@ -17,8 +17,8 @@
 <topic href="help/getting-started.html#Addingnamespace" label="Adding namespace"></topic>
 </topic>
 <topic href="help/processing_Xtext_models.html" label="Processing Xtext models">
-<topic href="help/processing_Xtext_models.html#resource" label="Loading Xtext models"></topic>
-<topic href="help/processing_Xtext_models.html#EMF_reflection" label="Working with EMF models"></topic>
+<topic href="help/processing_Xtext_models.html#resource" label="Loading a Resource"></topic>
+<topic href="help/processing_Xtext_models.html#programmatic_EMF" label="Working with EMF models"></topic>
 <topic href="help/processing_Xtext_models.html#node_model" label="Working with the parse tree (aka node model)"></topic>
 <topic href="help/processing_Xtext_models.html#working_with_grammar_model" label="Working with the grammar"></topic>
 <topic href="help/processing_Xtext_models.html#Summary" label="Summary"></topic>
@@ -134,17 +134,17 @@
 <topic href="help/scoping.html#global_scopes" label="Global Scopes and IResourceDescriptions">
 <topic href="help/scoping.html#resourcedescriptions" label="Resource and EObject Descriptions ( IResourceDescription, IEObjectDescription)"></topic>
 <topic href="help/scoping.html#import_uri" label="Global Scopes based on explicit imports (ImportURI mechanism)"></topic>
-<topic href="help/scoping.html#index_based" label="Global Scopes based on external configuration (e.g. classpath-based)">
-<topic href="help/scoping.html#containers" label="Of containers and its manager"></topic>
-<topic href="help/scoping.html#java_based_containers" label="Java based container manager"></topic>
+<topic href="help/scoping.html#index_based" label="Global Scopes based on external configuration (e.g. class path-based)">
+<topic href="help/scoping.html#containers" label="About the index, containers and their manager"></topic>
+<topic href="help/scoping.html#jdt_based_containers" label="JDT based container manager"></topic>
+<topic href="help/scoping.html#project_based_containers" label="Eclipse project based containers"></topic>
+<topic href="help/scoping.html#resource_set_containers" label="ResourceSet based containers"></topic>
 </topic>
 </topic>
-<topic href="help/scoping.html#local_scoping" label="Local Scoping"></topic>
-<topic href="help/scoping.html#Defaultlinkingsemantics" label="Default linking semantics">
-<topic href="help/scoping.html#defaultImports" label="Default Imports"></topic>
+<topic href="help/scoping.html#local_scoping" label="Local Scoping">
+<topic href="help/scoping.html#Declarativescoping" label="Declarative scoping"></topic>
 </topic>
-<topic href="help/scoping.html#org.eclipse.xtextsrcorg.eclipse.xtext.scoping.impl.DeclarativeScopeProvider" label="DeclarativeScopeProvider"></topic>
-<topic href="help/scoping.html#org.eclipse.xtextsrcorg.eclipse.xtext.scoping.impl.QualifiedNameScopeProvider" label="QualifiedNameScopeProvider">
+<topic href="help/scoping.html#Importednamespaceawarescoping" label="Imported namespace aware scoping">
 <topic href="help/scoping.html#org.eclipse.xtextsrcorg.eclipse.xtext.scoping.IQualifiedNameProvider" label="IQualifiedNameProvider"></topic>
 <topic href="help/scoping.html#Importingnamespaces" label="Importing name spaces"></topic>
 </topic>

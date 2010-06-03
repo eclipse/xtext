@@ -11,7 +11,13 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Syntax Coloring</h1>
-<p>Besides the already mentioned advanced features like content assist and code formatting the powerful editor for your DSL is capable to mark-up your model-code to improve the overall readability. It is possible to use different colors and fonts according to the meaning of the different parts of your input file. One may want to use some decent colors for large blocks of comment while identifiers, keywords and strings should be colored differently to make it easier to distinguish between them. This kind of text decorating mark-up does not influence the semantics of the various sections but helps to understand the meaning and to find errors in the source code.</p>
+<p>Besides the already mentioned advanced features like content assist and code formatting the powerful 
+				editor for your DSL is capable to mark-up your model-code to improve the overall readability. It is 
+				possible to use different colors and fonts according to the meaning of the different parts of your 
+				input file. One may want to use some decent colors for large blocks of comments while identifiers, 
+				keywords and strings should be colored differently to make it easier to distinguish between them. 
+				This kind of text decorating mark-up does not influence the semantics of the various sections but 
+				helps to understand the meaning and to find errors in the source code.</p>
 <p>
 				
 </p>
@@ -20,8 +26,13 @@
 <p>
 			
 </p>
-<p>The highlighting is done in two stages. This allows for sophisticated algorithms that are executed asynchronously to provide advanced coloring while simple pattern matching may be used to highlight parts of the text instantaneously. The latter is called lexical highlighting while the first is based on the meaning of your different model elements and therefore called semantic highlighting.</p>
-<p>When you introduce new highlighting styles, the preference page for your DSL is automatically configured and allows the customization of any registered highlighting setting. They are automatically persisted and reloaded on startup.</p>
+<p>The highlighting is done in two stages. This allows for sophisticated algorithms that are executed 
+				asynchronously to provide advanced coloring while simple pattern matching may be used to highlight 
+				parts of the text instantaneously. The latter is called lexical highlighting while the first is based 
+				on the meaning of your different model elements and therefore called semantic highlighting.</p>
+<p>When you introduce new highlighting styles, the preference page for your DSL is automatically 
+				configured and allows the customization of any registered highlighting setting. They are automatically 
+				persisted and reloaded on startup.</p>
 <p>
 				
 </p>
@@ -40,19 +51,27 @@
 </div>
 </div>
 <p>The lexical highlighting can be customized by providing implementations of the interface 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/ILexicalHighlightingConfiguration.java?root=Modeling_Project&view=co" target="_new">ILexicalHighlightingConfiguration</a> and the abstract class 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/AbstractTokenScanner.java?root=Modeling_Project&view=co" target="_new">AbstractTokenScanner</a>. The latter fulfills the interface 
-					<code class="code">ITokenScanner</code> from the underlying JFace Framework, which may be implemented by clients directly.
+
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java?root=Modeling_Project&view=co" target="_new">IHighlightingConfiguration</a> and 
+					the abstract class 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/AbstractTokenScanner.java?root=Modeling_Project&view=co" target="_new">AbstractTokenScanner</a>. 
+					The latter fulfills the interface 
+					<span class="emphasis"><em>ITokenScanner</em></span> from the underlying JFace Framework, which may be 
+					implemented by clients directly.
 				</p>
 <p>The 
-					<code class="code">ILexicalHighlightingConfiguration</code> is used to register any default style without a specific binding to a pattern in the model file. It is used to populate the preferences page and to initialize the 
-					<code class="code">ITextAttributeProvider</code>, which in turn is the component that is used to obtain the actual settings for a style&rsquo;s id. An implementation will usually be very similar to the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/DefaultLexicalHighlightingConfiguration.java?root=Modeling_Project&view=co" target="_new">DefaultLexicalHighlightingConfiguration</a> and read like this: 
+					<code class="code">IHighlightingConfiguration</code> is used to register any default style without a specific binding to 
+					a pattern in the model file. It is used to populate the preferences page and to initialize the 
+
+					<span class="emphasis"><em>ITextAttributeProvider</em></span>, which in turn is the component that is used to obtain the actual settings 
+					for a style&rsquo;s id. An implementation will usually be very similar to the 
+
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/DefaultHighlightingConfiguration.java?root=Modeling_Project&view=co" target="_new">DefaultHighlightingConfiguration</a> and read like this: 
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">public&nbsp;class&nbsp;DefaultLexicalHighlightingConfiguration&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;implements&nbsp;ILexicalHighlightingConfiguration&nbsp;{<br>
+<code class="code">public&nbsp;class&nbsp;DefaultHighlightingConfiguration&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;implements&nbsp;IHighlightingConfiguration&nbsp;{<br>
 
 <br>
 	public&nbsp;static&nbsp;final&nbsp;String&nbsp;KEYWORD_ID&nbsp;=&nbsp;"keyword";<br>
@@ -84,10 +103,17 @@
 </p>
 </div>
 <p>Implementations of the 
-					<code class="code">ITokenScanner</code> are responsible for splitting the content of a document into various parts, the so called tokens, and return the highlighting information for each identified range. It is critical that this is done very efficiently because this component is used on each keystroke. Xtext ships with a default implementation that is based on the lexer that is generated by ANTLR which is very lightweight and fast. This default implementation can be customized by clients easily. They simply have to bind another implementation of the 
+					<code class="code">ITokenScanner</code> are responsible for splitting the content of a document into 
+					various parts, the so called tokens, and return the highlighting information for each identified range. 
+					It is critical that this is done very fast because this component is used on each keystroke. Xtext 
+					ships with a default implementation that is based on the lexer that is generated by ANTLR which is very 
+					lightweight and fast. This default implementation can be customized by clients easily. They simply have 
+					to bind another implementation of the 
 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/antlr/AbstractAntlrTokenToAttributeIdMapper.java?root=Modeling_Project&view=co" target="_new">AbstractAntlrTokenToAttributeIdMapper</a>. To get an idea about it, have a look at the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/antlr/DefaultAntlrTokenToAttributeIdMapper.java?root=Modeling_Project&view=co" target="_new">DefaultAntlrTokenToAttributeIdMapper</a>.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/antlr/AbstractAntlrTokenToAttributeIdMapper.java?root=Modeling_Project&view=co" target="_new">AbstractAntlrTokenToAttributeIdMapper</a>. 
+					To get an idea about it, have a look at the 
+
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/antlr/DefaultAntlrTokenToAttributeIdMapper.java?root=Modeling_Project&view=co" target="_new">DefaultAntlrTokenToAttributeIdMapper</a>.
 				</p>
 </div>
 <div class="section" title="Semantic Highlighting">
@@ -99,17 +125,26 @@
 </div>
 </div>
 </div>
-<p>The semantic highlighting stage is executed asynchronously in the background and can be used to calculated highlighting states based on the meaning of the different model elements. Users of the editor will notice a very short delay after they have edited the text until the styles are actually applied to the document. This keeps the editor responsive while providing aid when reading and writing your model.</p>
-<p>As for the lexical highlighting there exist two interfaces whose implementations work closely together and allow the customization of the semantic highlighting. Namely these are the 
+<p>The semantic highlighting stage is executed asynchronously in the background and can be used to calculated 
+					highlighting states based on the meaning of the different model elements. Users of the editor will 
+					notice a very short delay after they have edited the text until the styles are actually applied to the 
+					document. This keeps the editor responsive while providing aid when reading and writing your model.</p>
+<p>As for the lexical highlighting the interface to register the available styles is the 
 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/ISemanticHighlightingConfiguration.java?root=Modeling_Project&view=co" target="_new">ISemanticHighlightingConfiguration</a> and 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/ISemanticHighlightingCalculator.java?root=Modeling_Project&view=co" target="_new">ISemanticHighlightingCalculator</a>. While the configuration for the semantic highlighting works the same way as the 
-					<code class="code">ILexicalHighlightingConfiguration</code>, the 
-					<code class="code">ISemanticHighlightingCalculator</code> is the primary hook to implement the logic that will compute to-be-highlighted ranges based on the model elements. 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java?root=Modeling_Project&view=co" target="_new">IHighlightingConfiguration</a>. 
+					The 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/ISemanticHighlightingCalculator.java?root=Modeling_Project&view=co" target="_new">ISemanticHighlightingCalculator</a> 
+					is the primary hook to implement the logic that will compute to-be-highlighted ranges based on the model 
+					elements. 
 				</p>
-<p>The framework will pass the XtextResource and an 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/syntaxcoloring/IHighlightedPositionAcceptor.java?root=Modeling_Project&view=co" target="_new">IHighlightedPositionAcceptor</a> to the calculator. It is ensured, that the resource will not be altered externally until the called method 
-					<code class="code">provideHighlightingsFor</code> returns. The task is to navigate your semantic model and compute various ranges based on the node information and associate styles with them. This may read similar to the following snippet:
+<p>The framework will pass the current XtextResource and an 
+
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightedPositionAcceptor.java?root=Modeling_Project&view=co" target="_new">IHighlightedPositionAcceptor</a> to 
+					the calculator. It is ensured, that the resource will not be altered externally until the called method 
+
+					<code class="code">provideHighlightingFor</code> returns. However, the resource may be null. The implementor&rsquo;s task is to 
+					navigate your semantic model and compute various ranges based on the attached node information and 
+					associate styles with them. This may read similar to the following snippet:
 				</p>
 <div class="literallayout">
 <p>
@@ -124,7 +159,7 @@
 	for&nbsp;(AbstractNode&nbsp;abstractNode&nbsp;:&nbsp;allNodes)&nbsp;{<br>
 		if&nbsp;(abstractNode.getGrammarElement()&nbsp;instanceof&nbsp;CrossReference)&nbsp;{<br>
 		&nbsp;&nbsp;acceptor.addPosition(node.getOffset(),&nbsp;node.getLength(),&nbsp;<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;SemanticHighlightingConfiguration.CROSS_REF);<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;MyHighlightingConfiguration.CROSS_REF);<br>
 		}<br>
 	}<br>
 }<br>
@@ -135,19 +170,25 @@
 </p>
 </div>
 <p>This example refers to an implementation of the 
-					<code class="code">ISemanticHighlightingConfiguration</code> that registers a style for a cross reference. It is pretty much the same implementation as for the previously mentioned sample of an 
-					<code class="code">ILexicalHighlightingConfiguration</code>.
+					<code class="code">IHighlightingConfiguration</code> that registers a style 
+					for a cross reference. It is pretty much the same implementation as for the previously mentioned sample 
+					of a lexical 
+					<code class="code">IHighlightingConfiguration</code>.
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">public&nbsp;class&nbsp;SemanticHighlightingConfiguration&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;implements&nbsp;ISemanticHighlightingConfiguration&nbsp;{<br>
+<code class="code">public&nbsp;class&nbsp;HighlightingConfiguration&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;implements&nbsp;IHighlightingConfiguration&nbsp;{<br>
 	
 <br>
+	//&nbsp;lexical&nbsp;stuff&nbsp;goes&nbsp;here&nbsp;<br>
+	//&nbsp;..<br>
 	public&nbsp;final&nbsp;static&nbsp;String&nbsp;CROSS_REF&nbsp;=&nbsp;"CrossReference";&nbsp;<br>
 
 <br>
 	public&nbsp;void&nbsp;configure(IHighlightingConfigurationAcceptor&nbsp;acceptor)&nbsp;{<br>
+		//&nbsp;lexical&nbsp;stuff&nbsp;goes&nbsp;here&nbsp;<br>
+		//&nbsp;..<br>
 		acceptor.acceptDefaultHighlighting(CROSS_REF,&nbsp;<br>
 		&nbsp;&nbsp;"Cross&nbsp;References",&nbsp;crossReferenceTextStyle());<br>
 	}<br>
@@ -166,7 +207,14 @@
 </p>
 </div>
 <p>The implementor of an 
-					<code class="code">ISemanticHighlightingCalculator</code> should be aware of performance to ensure a good user experience. It is probably not a good idea to traverse everything of your model when you will only register a few highlighted ranges that can be found easier with some typed method calls. It is strongly advised to use purposeful ways to navigate your model. The parts of Xtext&rsquo;s core that are responsible for the semantic highlighting are pretty optimized in this regard as well. The framework will only update the ranges that actually have been altered, for example. This optimizes the redraw process. It will even move, shrink or enlarge previously announced regions based on a best guess before the next semantic highlighting pass has been triggered after the user has changed the document.
+					<code class="code">IHighlightingCalculator</code> should be aware of performance to ensure a good user 
+					experience. It is probably not a good idea to traverse everything of your model when you will only 
+					register a few highlighted ranges that can be found easier with some typed method calls. It is strongly 
+					advised to use purposeful ways to navigate your model. The parts of Xtext&rsquo;s core that are responsible 
+					for the semantic highlighting are pretty optimized in this regard as well. The framework will only 
+					update the ranges that actually have been altered, for example. This speeds up the redraw process. It 
+					will even move, shrink or enlarge previously announced regions based on a best guess before the next 
+					semantic highlighting pass has been triggered after the user has changed the document.
 				</p>
 </div>
 </body>
