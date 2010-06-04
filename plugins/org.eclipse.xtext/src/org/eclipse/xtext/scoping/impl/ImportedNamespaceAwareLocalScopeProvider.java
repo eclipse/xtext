@@ -282,14 +282,15 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 			@Override
 			public IEObjectDescription getContentByEObject(EObject object) {
 				IEObjectDescription candidate = localElements.getContentByEObject(object);
-				for (ImportNormalizer normalizer : normalizers) {
-					String longToShortName = normalizer.longToShortName(candidate.getQualifiedName());
-					if (longToShortName != null) {
-						IEObjectDescription element = getContentByName(longToShortName);
-						if (element != null && element.getEObjectOrProxy() == object)
-							return new AliasedEObjectDescription(longToShortName, candidate);
+				if (candidate != null)
+					for (ImportNormalizer normalizer : normalizers) {
+						String longToShortName = normalizer.longToShortName(candidate.getQualifiedName());
+						if (longToShortName != null) {
+							IEObjectDescription element = getContentByName(longToShortName);
+							if (element != null && element.getEObjectOrProxy() == object)
+								return new AliasedEObjectDescription(longToShortName, candidate);
+						}
 					}
-				}
 				return getOuterScope().getContentByEObject(object);
 			}
 
