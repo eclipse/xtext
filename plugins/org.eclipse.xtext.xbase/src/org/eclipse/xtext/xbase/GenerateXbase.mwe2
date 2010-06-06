@@ -10,8 +10,7 @@ module org.eclipse.xtext.xbase.GenerateXbase
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
-import de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
-import de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
+import org.eclipse.xtext.generator.parser.antlr.*
 
 var projectName = "org.eclipse.xtext.xbase"
 var runtimeProject = "../${projectName}"
