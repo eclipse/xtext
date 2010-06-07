@@ -16,6 +16,7 @@
 080-scoping.textile
 090-valueconverter.textile
 100-serialization.textile
+105-formatting.textile
 110-fragmentprovider.textile
 115-encoding.textile
 
@@ -29,7 +30,6 @@
 160-templates.textile
 170-outline.textile
 180-hyperlinking.textile
-190-formatting.textile
 195-highlighting.textile
 198-wizards.textile
 199-jvmtypes.textile
