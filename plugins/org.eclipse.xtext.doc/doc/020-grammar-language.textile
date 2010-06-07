@@ -2,7 +2,7 @@
 h1(#grammarLanguage). The Grammar Language
 
 The "grammar language":http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext?root=Modeling_Project&view=markup 
-is the corner stone of Xtext and is defined in itself. Actually it is a DSL to create DSLs, so what would be more helpful than developing the Xtext language with Xtext?
+is the corner stone of Xtext and is defined in itself. Actually it is a DSL to create languages, so what would be more helpful than developing the Xtext language with Xtext?
 
 The grammar language is a domain-specific language, carefully designed for the description of textual languages based on "LL(*)-Parsing":http://en.wikipedia.org/wiki/LL_parser that is like "ANTLR3's parsing strategy":http://www.artima.com/lejava/articles/antlr_3.html.
 The main idea is to describe the concrete syntax and how an EMF-based in-memory model is created during parsing. 
@@ -101,13 +101,13 @@ The first line
 
 bc. grammar my.pack.SecretCompartments with org.eclipse.xtext.common.Terminals
 
-declares the name of the grammar. Xtext leverages Java's class path mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond to the grammar name and have the file extension 'xtext'. This means that the name has to be @SecretCompartments.xtext@ and must be placed in a package @my.pack@ somewhere on your project's class path.
+declares the name of the grammar. Xtext leverages Java's class path mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond to the grammar name and have the file extension '_.xtext_'. This means that the name has to be _SecretCompartments.xtext_ and must be placed in a package _my.pack_ somewhere on your project's class path.
 
 The first line is also used to declare any used language (for mechanism details see "Grammar Mixins":#grammarMixins).
 
 h3(#package_declarations). EPackage declarations
 
-Xtext parsers instantiate Ecore models (aka meta models). An Ecore model basically consists of an EPackage containing EClasses, EDatatypes and EEnums.
+Xtext parsers instantiate Ecore models (aka meta models). An Ecore model basically consists of an _EPackage_ containing _EClasses_, _EDatatypes_ and _EEnums_. See the "section on EMF":#model_metamodel for more details.
 Xtext can infer Ecore models from a grammar (see "Ecore model inference":#metamodelInference) but it is also possible to instantiate existing Ecore models. You can even mix this and use multiple existing Ecore models and infer some others from one grammar. 
 
 h4. EPackage generation
@@ -116,39 +116,39 @@ The easiest way to get started is to let Xtext infer the Ecore model from your g
 
 bc. generate secretcompartment 'http://www.eclipse.org/secretcompartment'
 
-That statement means: generate an EPackage with the name @secretcompartment@ and the nsURI @http://www.eclipse.org/secretcompartment@. Actually these are the properties that are required to create an EPackage. 
+That statement means: generate an _EPackage_ with the name _secretcompartment_ and the nsURI _http://www.eclipse.org/secretcompartment_. Actually these are the properties that are required to create an _EPackage_. 
 The whole algorithm used to derive complete Ecore models from Xtext grammars is described in the section "Ecore model inference":#metamodelInference.
 
 h4. EPackage import
 
-If you already have an existing EPackage, you can import it using either a namespace URI or a resource URI. An "URI":http://www.ietf.org/rfc/rfc2396.txt (Uniform Resource Identifier) provides a simple and extensible means for identifying an abstract or physical resource. For details about the EMF implementation of this concept, please see its "documentation":http://help.eclipse.org/help32/topic/org.eclipse.emf.doc/references/javadoc/org/eclipse/emf/common/util/URI.html.
+If you already have an existing _EPackage_, you can import it using either a namespace URI or a resource URI. An "URI":http://www.ietf.org/rfc/rfc2396.txt (Uniform Resource Identifier) provides a simple and extensible means for identifying an abstract or physical resource. For details about the EMF implementation of this concept, please see its "documentation":http://help.eclipse.org/help32/topic/org.eclipse.emf.doc/references/javadoc/org/eclipse/emf/common/util/URI.html.
 
 h5. Using namespace URIs to import existing EPackages
 
-You can import an existing EPackage with the following statement:
+You can import an existing _EPackage_ with the following statement:
 
 bc. import 'http://www.eclipse.org/secretcompartment'
 
-Note that if you use a namespace URI, the corresponding EPackage needs to be installed into the workbench. Otherwise the editor cannot find it.
-At runtime (i.e. when starting the generator) you need to make sure that the corresponding EPackage is registered in the @EPackage.Registry.INSTANCE@. If you use MWE to drive your code generator, you need to add the following lines to your workflow file:
+Note that if you use a namespace URI, the corresponding _EPackage_ needs to be installed into the workbench. Otherwise the editor cannot find it.
+At runtime (i.e. when starting the generator) you need to make sure that the corresponding _EPackage_ is registered in the _EPackage.Registry.INSTANCE_. If you use MWE to drive your code generator, you need to add the following lines to your workflow file:
 
 bc.. <bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" 
   platformUri="${runtimeProject}/..">
   <registerGeneratedEPackage value="my.pack.SecretcompartmentPackage"/>
 </bean>
 
-p. Using namespace URIs is typically only interesting when common Ecore models are used, such as Ecore itself or the UML meta model. If you're developing the EPackage together with the DSL but don't want to have it derived from the grammar for some reason, we suggest to use a resource URI.
+p. Using namespace URIs is typically only interesting when common Ecore models are used, such as Ecore itself. If you're developing the _EPackage_ together with the DSL but don't want to have it derived from the grammar for some reason, we suggest to use a resource URI.
 
 h5. Using resource URIs to import existing EPackages
 
-If the EPackage you want to use is somewhere in your workspace you should refer to it by a @platform:/resource/@-URI.
+If the _EPackage_ you want to use is somewhere in your workspace you should refer to it by a _platform:/resource/_-URI.
 Platform URIs are a special EMF concept, which allow for some kind of transparency between workspace projects and installed bundles. Consult the EMF documentation (we recommend the book) for details.
 
-An import statement referring to an Ecore file by a platform:/resource/ URI looks like this: 
+An import statement referring to an Ecore file by a _platform:/resource/_-URI looks like this: 
 
 bc. import 'platform:/resource/project/src/my/pack/SecretCompartments.ecore'
 
-If you want to mix generated and imported Ecore models you'll have to configure the generator fragment in your MWE file responsible for generating the Ecore classes (${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment}) with resource URIs that point to the genmodels for the referenced Ecore models.
+If you want to mix generated and imported Ecore models you'll have to configure the generator fragment in your MWE file responsible for generating the Ecore classes (${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment}) with resource URIs that point to the "generator models":#emf_codegen of the referenced Ecore models.
 Example:
 
 bc.. fragment = org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment {
@@ -158,14 +158,14 @@ bc.. fragment = org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment {
 
 h4. Ecore model aliases for packages
 
-If you want to use multiple EPackages you need to specify aliases in the following way:
+If you want to use multiple _EPackages_ you need to specify aliases in the following way:
 
 bc.. generate secretcompartment 'http://www.eclipse.org/secretcompartment'
 import 'http://www.eclipse.org/anotherPackage' as another
 
-p. When referring to a type somewhere in the grammar you need to qualify the reference using that alias (example @another::CoolType@). We'll see later where such type references occur.
+p. When referring to a type somewhere in the grammar you need to qualify the reference using that alias (example _another::CoolType_). We'll see later where such type references occur.
 
-It is also supported to put multiple EPackage imports into one alias. This is no problem as long as there are not any two EClassifiers with the same name. In such cases none of them can be referenced. It is even possible to 'import' multiple and 'generate' one Ecore model and all of them are declared for the same alias. If you do so, for a reference to an EClassifier first the imported EPackages are scanned before it is assumed that a type needs to by generated into the to-be-generated package.
+It is also supported to put multiple _EPackage_ imports into one alias. This is no problem as long as there are not any two _EClassifiers_ with the same name. In such cases none of them can be referenced. It is even possible to _import_ multiple and _generate_ one Ecore model and all of them are declared for the same alias. If you do so, for a reference to an _EClassifier_ first the imported _EPackages_ are scanned before it is assumed that a type needs to by generated into the to-be-generated package.
 
 Example:
 
@@ -175,16 +175,14 @@ import 'http://www.eclipse.org/packContainingClassB'
 
 p. With the declaration above 
 
-# a reference to type @ClassA@ would be linked to the EClass contained in @http://www.eclipse.org/packContainingClassA@, 
-# a reference to type @ClassB@ would be linked to the EClass contained in @http://www.eclipse.org/packContainingClassB@, 
-# a reference to type @NotYetDefined@ would be linked to a newly created EClass in @http://www.eclipse.org/toBeGenerated@.
+# a reference to type _ClassA_ would be linked to the _EClass_ contained in _http://www.eclipse.org/packContainingClassA_, 
+# a reference to type _ClassB_ would be linked to the _EClass_ contained in _http://www.eclipse.org/packContainingClassB_, 
+# a reference to type _NotYetDefined_ would be linked to a newly created _EClass_ in _http://www.eclipse.org/toBeGenerated_.
 
 Note, that using this feature is not recommended, because it might cause problems, which are hard to track down.
-For instance, a reference to @classA@ would as well be linked to a newly created EClass, because the corresponding type in @http://www.eclipse.org/packContainingClassA@ is spelled with a capital letter.
+For instance, a reference to _classA_ would as well be linked to a newly created _EClass_, because the corresponding type in _http://www.eclipse.org/packContainingClassA_ is spelled with a capital letter.
 
 h3. Rules
-
-The default parsing is based on a home-grown packrat parser. It is advised to substitute it by an ANTLR parser through the Xtext service mechanism. ANTLR is a sophisticated parser generator framework based on an LL(*) "parsing algorithm":http://bit.ly/ANTLR_LL_star_algorithm, that works quite well for Xtext. Please download the plugin de.itemis.xtext.antlr (from update site @http://download.itemis.com/updates/@) and use the ANTLR Parser instead of the packrat parser (cf. "Xtext Workspace Setup":http://www.eclipse.org/Xtext/developers/workspaceSetup.php).
 
 Basically parsing can be separated in the following phases. 
 # lexing
@@ -194,18 +192,18 @@ Basically parsing can be separated in the following phases.
 
 h4. Terminal Rules
 
-In the first stage, i.e. lexing, a sequence of characters (the text input) is transformed into a sequence of so called tokens. In this context, a token is sort of a strongly typed part of the input sequence. It consists of one or more characters and was matched by a particular terminal rule or keyword and therefore represents an atomic symbol.
-Terminal rules are also referred to as token rules or lexer rules. There is an informal naming convention that names of terminal rules are all upper-case.
+In the first stage called _lexing_, a sequence of characters (the text input) is transformed into a sequence of so called tokens. In this context, a token is sort of a strongly typed part of the input sequence. It consists of one or more characters and was matched by a particular terminal rule or keyword and therefore represents an atomic symbol.
+Terminal rules are also referred to as _token rules_ or _lexer rules_. There is an informal naming convention that names of terminal rules are all upper-case.
 
-In the secret compartments example there are no explicitly defined terminal rules, since it only uses the ID rule which is inherited from the grammar @org.eclipse.xtext.common.Terminals@ (cf. "Grammar Mixins":#grammarMixins).
-Therein the ID rule is defined as follows:
+In the secret compartments example there are no explicitly defined terminal rules, since it only uses the _ID_ rule which is inherited from the grammar _org.eclipse.xtext.common.Terminals_ (cf. "Grammar Mixins":#grammarMixins).
+Therein the _ID_ rule is defined as follows:
 
 bc.. terminal ID : 
   ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*; 
     
-p. It says that a Token ID starts with an optional '^' character (caret), followed by a letter ('a'..'z'|'A'..'Z') or underscore ('_') followed by any number of letters, underscores and numbers ('0'..'9'). 
+p. It says that a token _ID_ starts with an optional _'^'_ character (caret), followed by a letter _('a'..'z'|'A'..'Z')_ or underscore ('_') followed by any number of letters, underscores and numbers _('0'..'9')_. 
 
-The caret is used to escape an identifier for cases where there are conflicts with keywords. It is removed by the ID rule's "ValueConverter":#valueconverter. 
+The caret is used to escape an identifier for cases where there are conflicts with keywords. It is removed by the _ID_ rule's "ValueConverter":#valueconverter. 
 
 This is the formal definition of terminal rules:
 
@@ -220,29 +218,29 @@ If you for instance want to add a rule to allow fully qualified names in additio
 
 h5. Return types
 
-A terminal rule returns a value, which is a string (type @ecore::EString@) by default.
-However, if you want to have a different type you can specify it. For instance, the rule 'INT' is defined as:
+A terminal rule returns a value, which is a string (type _ecore::EString_) by default.
+However, if you want to have a different type you can specify it. For instance, the rule _INT_ is defined as:
 
 bc.. terminal INT returns ecore::EInt : 
   ('0'..'9')+;
 
-p. This means that the terminal rule 'INT' returns instances of @ecore::EInt@. It is possible to define any kind of data type here, which just needs to be an instance of @ecore::EDataType@.
+p. This means that the terminal rule _INT_ returns instances of _ecore::EInt_. It is possible to define any kind of data type here, which just needs to be an instance of _ecore::EDataType_.
 In order to tell the parser how to convert the parsed string to a value of the declared data type, you need to provide your own implementation of ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.IValueConverterService} (cf. "value converters":#valueconverter). The value converter is also the point where you can remove things like quotes from string literals or the caret ('^') from identifiers. Its implementation needs to be registered as a service (cf. "Service Framework":#dependencyInjection).
 
-h4. Extended Backus-Naur form expressions
+h4. Extended Backus-Naur Form expressions
 
 Token rules are described using "Extended Backus-Naur Form"-like (EBNF) expressions. The different expressions are described in the following.
 The one thing all of these expressions have in common is the cardinality operator.
 There are four different possible cardinalities
 # exactly one (the default, no operator)
-# one or none (operator "?")
-# any (zero or more, operator "*")
-# one or more (operator "+")
+# one or none (operator _?_)
+# any (zero or more, operator _*_)
+# one or more (operator _+_)
 
 h5(#Keywords). Keywords / Characters
 
 Keywords are a kind of token rule literals. 
-The 'ID' rule in @org.eclipse.xtext.common.Terminals@ for instance starts with a keyword:
+The _ID_ rule in _org.eclipse.xtext.common.Terminals_ for instance starts with a keyword:
 
 bc. terminal ID : '^'? .... ;
 
@@ -258,11 +256,11 @@ Example:
 
 bc. terminal INT returns ecore::EInt: ('0'..'9')+;
 
-In this case an INT is comprised of one or more (note the '+' operator) characters between (and including) '0' and '9'.
+In this case an _INT_ is comprised of one or more (note the _+_ operator) characters between (and including) _'0'_ and _'9'_.
 
 h5. Wildcard
 
-If you want to allow any character you can simple write the wildcard operator '.' (dot):
+If you want to allow any character you can simple write the wildcard operator '_._' (dot):
 Example:
 
 bc. FOO : 'f' . 'o';
@@ -272,11 +270,11 @@ The rule above would allow expressions like 'foo', 'f0o' or even 'f\no'.
 h5. Until Token
 
 With the until token it is possible to state that everything should be consumed until a certain token occurs.
-The multiline comment is implemented this way:
+The multi-line comment is implemented this way:
 
 bc. terminal ML_COMMENT	: '/*' -> '*/';
 
-This is the rule for Java-style comments that begin with '/*' and end with '*/'.
+This is the rule for Java-style comments that begin with '_/*_' and end with '_*/_'.
 
 h5. Negated Token
 
@@ -300,7 +298,7 @@ For instance, the whitespace rule uses alternatives like this:
 
 bc. terminal WS : (' '|'\t'|'\r'|'\n')+;
 
-That is a WS can be made of one or more whitespace characters (including ' ','\t','\r','\n').
+That is a WS can be made of one or more whitespace characters (including ' ', '_\t_', '_\r_', '_\n_').
 
 h5. Groups
 
@@ -309,11 +307,11 @@ Example:
 
 bc. terminal ASCII : '0x' ('0'..'7') ('0'..'9'|'A'..'F');
 
-That is the 2-digit hexadecimal code of ascii characters.
+That is the 2-digit hexadecimal code of ASCII characters.
 
 h3(#parser_rules). Parser Rules
 
-The parser reads a sequence of terminals and walks through the parser rules. Hence a parser rule - contrary to a terminal rule - does not produce a single terminal token but a tree of non-terminal and terminal tokens. They lead to a so called parse tree (in Xtext it is also referred as node model). Furthermore, parser rules are handled as kind of a building plan for the creation of the EObjects that form the semantic model (the linked abstract syntax graph or AST). Due to this fact, parser rules are even called production rules. The different constructs like actions and assignments are used to derive types and initialize the semantic objects accordingly. 
+The parser reads a sequence of terminals and walks through the parser rules. Hence a parser rule - contrary to a terminal rule - does not produce a single terminal token but a tree of non-terminal and terminal tokens. They lead to a so called "parse tree":#node_model (in Xtext it is also referred as node model). Furthermore, parser rules are handled as kind of a building plan for the creation of the _EObjects_ that form the semantic model (the linked abstract syntax graph or AST). Due to this fact, parser rules are even called production rules. The different constructs like actions and assignments are used to derive types and initialize the semantic objects accordingly. 
 
 h4. Extended Backus-Naur Form expressions
 
@@ -329,7 +327,7 @@ In addition to these elements, there are some expressions used to direct how the
 
 h5(#assignments). Assignments 
 
-Assignments are used to assign the parsed information to a feature of the current object. The type of the current object, its EClass, is specified by the return type of the parser rule. If it is not explicitly stated it is implied that the type's name equals the rule's name. The type of the feature is infered from the right hand side of the assignment.
+Assignments are used to assign the parsed information to a feature of the current object. The type of the current object, its _EClass_, is specified by the return type of the parser rule. If it is not explicitly stated it is implied that the type's name equals the rule's name. The type of the feature is inferred from the right hand side of the assignment.
 
 Example:
 
@@ -340,21 +338,21 @@ bc.. State :
   'end'
 ;
 
-p. The syntactic declaration for states in the state machine example starts with a keyword 'state' followed by an assignment:
+p. The syntactic declaration for states in the state machine example starts with a keyword _state_ followed by an assignment:
 
 bc. name=ID
 
-The left hand side refers to a feature '@name@' of the current object (which has the EClass 'State' in this case). 
+The left hand side refers to a feature '_name_' of the current object (which has the _EClass_ '_State_' in this case). 
 The right hand side can be a rule call, a keyword, a cross reference (explained later) or even an alternative comprised by the former.
-The type of the feature needs to be compatible with the type of the expression on the right. As ID returns an EString in this case, the feature '@name@' needs to be of type EString as well.
+The type of the feature needs to be compatible with the type of the expression on the right. As _ID_ returns an _EString_ in this case, the feature '_name_' needs to be of type _EString_ as well.
 
 *Assignment Operators*
 
 There are three different assignment operators, each with different semantics.
 
-# The simple equal sign "=" is the straight forward assignment, and used for features which take only one element.
-# The "+=" sign (the add operator) expects a multi valued feature and adds the value on the right hand to that feature, which is a list feature.
-# The "?=" sign (boolean assignment operator) expects a feature of type EBoolean and sets it to true if the right hand side was consumed independently from the concrete value of the right hand side.
+# The simple equal sign '_=_' is the straight forward assignment, and used for features which take only one element.
+# The '_+=_' sign (the add operator) expects a multi-valued feature and adds the value on the right hand to that feature, which is a list feature.
+# The '_?=_' sign (boolean assignment operator) expects a feature of type _EBoolean_ and sets it to true if the right hand side was consumed independently from the concrete value of the right hand side.
 
 The used assignment operator does not effect the cardinality of the expected symbols on the right hand side. 
 
@@ -383,24 +381,45 @@ bc.. Transition :
  
 Event returns MyEvent : ....;
 
-p. Looking at the syntax definition of cross references, there is an optional part starting with a vertical bar (pipe) followed by 'CrossReferenceableTerminal'. This is the part describing the concrete text, from which the crosslink later should be established.
-If the terminal is omitted, it is expected to be an ID.
+p. Looking at the syntax definition of cross references, there is an optional part starting with a vertical bar (pipe) followed by _CrossReferenceableTerminal_. This is the part describing the concrete text, from which the crosslink later should be established.
+If the terminal is omitted, it is expected to be _ID_.
 
-You may even use alternatives as the referencable terminal. This way, either an ID or a STRING may be used as the referencable terminal, as it is possible in many SQL dialects.
+You may even use alternatives as the referencable terminal. This way, either an _ID_ or a _STRING_ may be used as the referencable terminal, as it is possible in many SQL dialects.
 
 bc. TableRef: table=[Table|(ID|STRING)];
 
 Have a look at the "linking section":#linking in order to understand how linking is done.
 
+h5(#unordered_groups). Unordered Groups
+
+The elements of an unordered group can occur in any order but each element can occur at most once. Unordered groups are separated with '_&_', e.g.
+
+bc.. Modifier: 
+	static?='static' & final?='final' & visibility=Visibility;
+
+enum Visibility:
+	PUBLIC='public' | PRIVATE='private' | PROTECTED='protected';
+	
+p. allows
+
+bc.. public static final
+static final 
+final private static
+
+p. but not
+
+bc.. static final static // ERROR: static appears twice
+public static final private // ERROR: visibility appears twice
+
 h5. Simple Actions 
 
-By default the object to be returned by a parser rule is created lazily on the first assignment. Then the type of the EObject to be created is determined from the specified return type or the rule name if no explicit return type is specified.
-With Actions however, the creation of returned EObject can be made explicit. Xtext supports two kinds of Actions:
+By default the object to be returned by a parser rule is created lazily on the first assignment. Then the type of the _EObject_ to be created is determined from the specified return type or the rule name if no explicit return type is specified.
+With Actions however, the creation of returned _EObject_ can be made explicit. Xtext supports two kinds of Actions:
 # simple actions, and
 # assigned actions.
 
 If at some point you want to enforce the creation of a specific type you can use alternatives or simple actions.
-In the following example TypeB must be a subtype of TypeA. An expression @A ident@ should create an instance of TypeA, whereas @B ident@ should instantiate TypeB.
+In the following example _TypeB_ must be a subtype of _TypeA_. An expression _A ident_ should create an instance of _TypeA_, whereas _B ident_ should instantiate _TypeB_.
 
 Example with alternatives:
 
@@ -420,11 +439,11 @@ bc.. MyRule returns TypeA :
   "B" {TypeB} name=ID
 ; 
 
-p. Generally speaking, the instance is created as soon as the parser hits the first assignment. However, actions allow to explicitly instantiate any EObject. The notation @{TypeB}@ will create an instance of TypeB and assign it to the result of the parser rule. This allows parser rules without any assignment and object creation without the need to introduce unnecessary rules.
+p. Generally speaking, the instance is created as soon as the parser hits the first assignment. However, actions allow to explicitly instantiate any _EObject_. The notation _{TypeB}_ will create an instance of TypeB and assign it to the result of the parser rule. This allows parser rules without any assignment and object creation without the need to introduce unnecessary rules.
 
 h5. Unassigned rule calls 
 
-We previously explained, that the EObject to be returned is created lazily when the first assignment occurs or when a simple action is evaluated. There is another way one can set the EObject to be returned, which we call an "unassigned rule call".
+We previously explained, that the _EObject_ to be returned is created lazily when the first assignment occurs or when a simple action is evaluated. There is another way one can set the _EObject_ to be returned, which we call an "unassigned rule call".
 
 Unassigned rule calls (the name suggests it) are rule calls to other parser rules, which are not used within an assignment. If there is no feature the returned value shall be assigned to, the value is assigned to the "to-be-returned" result of the calling rule.
 
@@ -436,7 +455,7 @@ bc.. AbstractToken :
   TokenC
 ;
 
-p. As @AbstractToken@ could possibly return an instance of @TokenA@, @TokenB@ or @TokenC@ its type must by a super type of these types.
+p. As _AbstractToken_ could possibly return an instance of _TokenA_, _TokenB_ or _TokenC_ its type must by a super type of these types.
 It is now for instance as well possible to further change the state of the AST element by assigning additional things.
 
 Example:
@@ -447,14 +466,14 @@ bc.. AbstractToken :
     TokenC ) (cardinality=('?'|'+'|'*'))?
 ;
 
-p. This way the 'cardinality' is optional (last question mark) and can be represented by a question mark, a plus, or an asterisk. It will be assigned to either an EObject of type @TokenA@,  @TokenB@, or @TokenC@ which are all subtypes of @AbstractToken@. The rule in this example will never create an instance of @AbstractToken@ directly.
+p. This way the _cardinality_ is optional (last question mark) and can be represented by a question mark, a plus, or an asterisk. It will be assigned to either an _EObject_ of type _TokenA_,  _TokenB_, or _TokenC_ which are all subtypes of _AbstractToken_. The rule in this example will never create an instance of _AbstractToken_ directly.
 
 h5(#grammarActions). Assigned Actions 
 
-LL parsing has some significant advantages over LR algorithms. The most important ones for Xtext are, that the generated code is much simpler to understand and debug and that it is easier to recover from errors. Especially ANTLR has a very nice generic error recovery mechanism. This allows to construct an AST even if there are syntactic errors in the text. You wouldn't get any of the nice IDE features as soon as there is one little error, if we hadn't error recovery.
+LL-parsing has some significant advantages over LR algorithms. The most important ones for Xtext are, that the generated code is much simpler to understand and debug and that it is easier to recover from errors. Especially ANTLR has a very nice generic error recovery mechanism. This allows to construct an AST even if there are syntactic errors in the text. You wouldn't get any of the nice IDE features as soon as there is one little error, if we hadn't error recovery.
 
 However, LL also has some drawbacks. The most important one is that it does not allow left recursive grammars.
-For instance, the following is not allowed in LL based grammars, because "Expression '+' Expression" is left recursive:
+For instance, the following is not allowed in LL-based grammars, because _Expression '+' Expression_ is left recursive:
 
 bc.. Expression :
   Expression '+' Expression |
@@ -486,7 +505,7 @@ TerminalExpression returns Expression:
 ;
 
 p. ... would result in unwanted elements in the AST.
-For instance the expression " ( 42 ) " would result in a tree like this:
+For instance the expression _(42)_ would result in a tree like this:
 
 bc.. Operation {
   left=Operation {
@@ -496,7 +515,7 @@ bc.. Operation {
   }
 }
 
-p. Typically one would only want to have one instance of @IntLiteral@ instead.
+p. Typically one would only want to have one instance of _IntLiteral_ instead.
 
 One can solve this problem using a combination of unassigned rule calls and assigned actions:
 
@@ -510,18 +529,18 @@ TerminalExpression returns Expression:
   {IntLiteral} value=INT
 ;
 
-p. In the example above @{Operation.left=current}@ is a so called tree rewrite action, which creates a new instance of the stated EClass (Operation in this case) and assigns the element currently to-be-returned (@current@ variable) to a feature of the newly created object (in this case feature 'left' of the Operation instance).
+p. In the example above _{Operation.left=current}_ is a so called tree rewrite action, which creates a new instance of the stated _EClass_ (_Operation_ in this case) and assigns the element currently to-be-returned (_current_ variable) to a feature of the newly created object (in this case feature _left_ of the _Operation_ instance).
 In Java these semantics could be expressed as:
 
 bc.. Operation temp = new Operation();
 temp.setLeft(current);
 current = temp;
 
-h3.(#hidden_terminals) Hidden terminal symbols
+h3(#hidden_terminals). Hidden terminal symbols
 
 Because parser rules describe not a single token, but a sequence of patterns in the input, it is necessary to define the interesting parts of the input. Xtext introduces the concept of hidden tokens to handle semantically unimportant things like whitespaces, comments, etc. in the input sequence gracefully. It is possible to define a set of terminal symbols, that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they are transparently woven into the node model, but not relevant for the semantic model. 
 
-Hidden terminals may (or may not) appear between any other terminals in any cardinality. They can be described per rule or for the whole grammar. When "reusing a single grammar":#grammarMixins its definition of hidden tokens is reused as well. The grammar @org.eclipse.xtext.common.Terminals@ comes with a reasonable default and hides all comments and whitespace from the parser rules.
+Hidden terminals may (or may not) appear between any other terminals in any cardinality. They can be described per rule or for the whole grammar. When "reusing a single grammar":#grammarMixins its definition of hidden tokens is reused as well. The grammar _org.eclipse.xtext.common.Terminals_ comes with a reasonable default and hides all comments and whitespace from the parser rules.
 
 If a rule defines hidden symbols, you can think of a kind of scope that is automatically introduced. Any rule that is called from the declaring rule uses the same hidden terminals as the calling rule, unless it defines other hidden tokens itself.
   
@@ -533,17 +552,17 @@ Fullname:
   (firstname=ID)? lastname=ID
 ;
 
-p. The sample rule "Person" defines multiline comments (ML_COMMENT), single-line comments (SL_COMMENT), and whitespace (WS) to be allowed between the 'Fullname' and the 'age'. Because the rule 'Fullname' does not introduce another set of hidden terminals, it allows the same symbols to appear between 'firstname' and 'lastname' as the calling rule 'Person'. Thus, the following input is perfectly valid for the given grammar snippet:
+p. The sample rule "Person" defines multiline comments (_ML_COMMENT_), single-line comments (_SL_COMMENT_), and whitespace (_WS_) to be allowed between the _Fullname_ and the _age_. Because the rule _Fullname_ does not introduce another set of hidden terminals, it allows the same symbols to appear between _firstname_ and _lastname_ as the calling rule _Person_. Thus, the following input is perfectly valid for the given grammar snippet:
 
 bc.. John /* comment */ Smith // line comment
 /* comment */
       42      ; // line comment
 
-p. A list of all default terminals like WS can be found in section "Grammar Mixins":#grammarMixins.
+p. A list of all default terminals like _WS_ can be found in section "Grammar Mixins":#grammarMixins.
 
 h3(#datatypeRules). Data type rules
 
-Data type rules are parsing-phase rules, which create instances of EDataType instead of EClass. Thinking about it, one may discover that they are quite similar to terminal rules.
+Data type rules are parsing-phase rules, which create instances of _EDataType_ instead of _EClass_. Thinking about it, one may discover that they are quite similar to terminal rules.
 However, the nice thing about data type rules is that they are actually parser rules and are therefore 
 
 # context sensitive and 
@@ -557,10 +576,10 @@ bc.. QualifiedName :
 ;
 
 p. This looks similar to the terminal rule we've defined above in order to explain rule calls.
-However, the difference is that because it is a parser rule and therefore only valid in certain contexts, it won't conflict with the rule ID.
-If you had defined it as a terminal rule, it would possibly hide the ID rule.
+However, the difference is that because it is a parser rule and therefore only valid in certain contexts, it won't conflict with the rule _ID_.
+If you had defined it as a terminal rule, it would possibly hide the _ID_ rule.
 
-In addition when this has been defined as a data type rule, it is allowed to use hidden tokens (e.g. "/* comment **/") between the IDs and dots (e.g. @foo/* comment */. bar . Baz"@)
+In addition when this has been defined as a data type rule, it is allowed to use hidden tokens (e.g. "/* comment **/") between the IDs and dots (e.g. _foo/* comment */. bar . Baz"_)
 
 Return types can be specified in the same way as in terminal rules:
 
@@ -568,7 +587,7 @@ bc.. QualifiedName returns ecore::EString :
   ID ('.' ID)*
 ;
 
-p. Note that if a rule does not call another parser rule and does neither contain any actions nor "assignments":#assignments, it is considered to be a data type rule and the data type EString is implied if none has been explicitly declared.
+p. Note that if a rule does not call another parser rule and does neither contain any actions nor "assignments":#assignments, it is considered to be a data type rule and the data type _EString_ is implied if none has been explicitly declared. You have to import Ecore with the alias _ecore_ in this case.
 
 For conversion again value converters are responsible (cf. "value converters":#valueconverter).
 
@@ -577,7 +596,7 @@ h3. Enum Rules
 Enum rules return enumeration literals from strings. They can be seen as a shortcut for data type rules with specific value converters.
 The main advantage of enum rules is their simplicity, type safety and therefore nice validation. Furthermore it is possible to infer enums and their respective literals during the Ecore model transformation.
 
-If you want to define a ChangeKind "org.eclipse.emf.ecore.change/model/Change.ecore":http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.emf.doc/references/javadoc/org/eclipse/emf/ecore/change/impl/package-summary.html with 'ADD', 'MOVE' and 'REMOVE' you could write:
+If you want to define a _ChangeKind_ "org.eclipse.emf.ecore.change/model/Change.ecore":http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.emf.doc/references/javadoc/org/eclipse/emf/ecore/change/impl/package-summary.html with _ADD_, _MOVE_ and _REMOVE_ you could write:
 
 bc.. enum ChangeKind :
   ADD | MOVE | REMOVE
@@ -599,7 +618,7 @@ p. with the input of
 
 bc. element Foo
 
-the resulting value of the element @Foo@ will hold the enum value with the internal representation of '0' (zero). When generating the EPackage from your grammar this will be the first literal you define. As a workaround you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define an enum literal with an empty textual representation.
+the resulting value of the element _Foo_ will hold the enum value with the internal representation of '0' (zero). When generating the _EPackage_ from your grammar this will be the first literal you define. As a workaround you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define an enum literal with an empty textual representation.
 
 bc.. enum Visibility: 
   package | private | protected | public
@@ -611,24 +630,24 @@ h2(#metamodelInference). Ecore model inference
 
 The Ecore model (or meta model) of a textual language describes the structure of its abstract syntax trees (AST). 
 
-Xtext uses Ecore's EPackages to define Ecore models. Ecore models are declared to be either inferred (generated) from the grammar or imported. 
-By using the 'generate' directive, one tells Xtext to derive an EPackage from the grammar. 
+Xtext uses Ecore's _EPackages_ to define Ecore models. Ecore models are declared to be either inferred (generated) from the grammar or imported. 
+By using the _generate_ directive, one tells Xtext to derive an _EPackage_ from the grammar. 
 
 h3. Type and Package Generation
 
 Xtext creates
 
-* an EPackage
-** for each generate-package declaration. After the directive 'generate' a list of parameters follows. The 'name' of the EPackage will be set to the first parameter, its 'nsURI' to the second parameter. An optional alias as the third parameter allows to distinguish generated EPackages later. Only one generated package declaration per alias is allowed.
-* an EClass
-** for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same name as the rule itself is assumed. You can specify more than one rule that return the same type but only one EClass will be generated.
+* an _EPackage_
+** for each generate-package declaration. After the directive _generate_ a list of parameters follows. The _name_ of the _EPackage_ will be set to the first parameter, its _nsURI_ to the second parameter. An optional alias as the third parameter allows to distinguish generated _EPackages_ later. Only one generated package declaration per alias is allowed.
+* an _EClass_
+** for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same name as the rule itself is assumed. You can specify more than one rule that return the same type but only one _EClass_ will be generated.
 ** for each type defined in an action or a cross reference.
-* an EEnum
+* an _EEnum_
 ** for each return type of an enum rule.
-* an EDatatype
+* an _EDataType_
 ** for each return type of a terminal rule or a data type rule.
 
-All EClasses, EEnums and EDatatypes are added to the EPackage referred to by the alias provided in the type reference they were created from.
+All _EClasses_, _EEnums_, and _EDatatypes_ are added to the _EPackage_ referred to by the alias provided in the type reference they were created from.
 
 h3. Feature and Type Hierarchy Generation
 
@@ -639,17 +658,17 @@ While walking through the grammar, the algorithm keeps track of a set of the cur
 * After an optional element, the set is reset to the same state it was before entering it. 
 * After a mandatory (non-optional) rule call or mandatory action the set contains only the return type of the called rule or action. 
 * An optional rule call does not modify the set.
-* A rule call is optional, if its cardinality is '?' or '*'.
+* A rule call is optional, if its cardinality is '_?_' or '_*_'.
 
 While iterating the parser rules Xtext creates
-* an EAttribute in each current return type
-** of type EBoolean for each feature assignment using the '?=' operator. No further EReferences or EAttributes will be generated from this assignment.
-** for each assignment with the '=' or '+=' operator calling a terminal rule. Its type will be the return type of the called rule.
-* an EReference in each current return type
-** for each assignment with the '=' or '+=' operator in a parser rule calling a parser rule. The EReference's type will be the return type of the called parser rule.
+* an _EAttribute_ in each current return type
+** of type _EBoolean_ for each feature assignment using the '_?=_' operator. No further _EReferences_ or _EAttributes_ will be generated from this assignment.
+** for each assignment with the '_=_' or '_+=_' operator calling a terminal rule. Its type will be the return type of the called rule.
+* an _EReference_ in each current return type
+** for each assignment with the '_=_' or '_+=_' operator in a parser rule calling a parser rule. The _EReference_'s type will be the return type of the called parser rule.
 ** for each assigned action. The reference's type will be set to the return type of the current calling rule. 
 
-Each EAttribute or EReference takes its name from the assignment or action that caused it. Multiplicities will be 0...1 for assignments with the '=' operator and 0...* for assignments with the '+=' operator. 
+Each _EAttribute_ or _EReference_ takes its name from the assignment or action that caused it. Multiplicities will be 0...1 for assignments with the '_=_' operator and 0...* for assignments with the '_+=_' operator. 
 
 Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of "artificial" parser rules, that are never called, e.g.
 
@@ -658,18 +677,18 @@ bc.. CommonSuperType:
 
 h3. Enum Literal Generation
 
-For each alternative defined in an enum rule, the transformer creates an enum literal, when another literal with the same name cannot be found. The 'literal' property of the generated enum literal is set to the right hand side of the declaration. If it is omitted, you will get an enum literal with equal 'name' and 'literal' attributes.
+For each alternative defined in an enum rule, the transformer creates an enum literal, when another literal with the same name cannot be found. The _literal_ property of the generated enum literal is set to the right hand side of the declaration. If it is omitted, you will get an enum literal with equal _name_ and _literal_ attributes.
 
 bc.. enum MyGeneratedEnum:
   NAME = 'literal' | EQUAL_NAME_AND_LITERAL;
 
 h3. Feature Normalization
 
-In the next step the generator examines all generated EClasses and lifts up similar features to super types if there is more than one subtype and the feature is defined in every subtypes. This does even work for multiple super types.
+In the next step the generator examines all generated _EClasses_ and lifts up similar features to super types if there is more than one subtype and the feature is defined in every subtypes. This does even work for multiple super types.
 
 h3(#customPostProcessing). Customized Post Processing
 
-As a last step, the generator invokes the post processor for every generated Ecore model. The post processor expects an Xtend file with name @<MyDsl>PostProcessor.ext@ (if the name of the grammar file is @MyDsl.xtext@) in the same folder as the grammar file. Further, for a successful invocation, the Xtend file must declare an extension with signature @process(xtext::GeneratedMetamodel)@. E.g.
+As a last step, the generator invokes the post processor for every generated Ecore model. The post processor expects an Xtend file with name _<MyDsl>PostProcessor.ext_ (if the name of the grammar file is _MyDsl.xtext_) in the same folder as the grammar file. Further, for a successful invocation, the Xtend file must declare an extension with signature _process(xtext::GeneratedMetamodel)_. E.g.
 
 bc.. process(xtext::GeneratedMetamodel this) :
   process(ePackage)
@@ -689,17 +708,17 @@ Great care must be taken to not modify the Ecore model in a way preventing the X
 h3. Error Conditions
 
 The following conditions cause an error
-* An EAttribute or EReference has two different types or different cardinality.
-* There is an EAttribute and an EReference with the same name in the same EClass.
+* An _EAttribute_ or _EReference_ has two different types or different cardinality.
+* There is an _EAttribute_ and an _EReference_ with the same name in the same _EClass_.
 * There is a cycle in the type hierarchy.
-* An new EAttribute, EReference or super type is added to an imported type.
-* An EClass is added to an imported EPackage.
+* An new _EAttribute_, _EReference_ or super type is added to an imported type.
+* An _EClass_ is added to an imported _EPackage_.
 * An undeclared alias is used. 
 * An imported Ecore model cannot be loaded.
 
 h2(#grammarImport). Importing existing Ecore models
 
-With the import directive in Xtext you can refer to existing Ecore models and reuse the types that are declared in an EPackage. Xtext uses this technique itself to leverage Ecore data types.
+With the import directive in Xtext you can refer to existing Ecore models and reuse the types that are declared in an _EPackage_. Xtext uses this technique itself to leverage Ecore data types.
 
 bc. import 'http://www.eclipse.org/emf/2002/Ecore' as ecore
 
@@ -709,7 +728,7 @@ bc. terminal INT returns ecore::EInt : ('0'..'9')+;
 
 h2(#grammarMixins). Grammar Mixins
 
-Xtext supports the reuse of existing grammars. Grammars that are created via the Xtext wizard use @org.eclipse.xtext.common.Terminals@ by default which introduces a common set of terminal rules and defines reasonable defaults for hidden terminals.
+Xtext supports the reuse of existing grammars. Grammars that are created via the Xtext wizard use _org.eclipse.xtext.common.Terminals_ by default which introduces a common set of terminal rules and defines reasonable defaults for hidden terminals.
 
 bc.. grammar org.xtext.example.MyDsl with org.eclipse.xtext.common.Terminals
  
