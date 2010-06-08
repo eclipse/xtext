@@ -36,7 +36,7 @@ import com.google.inject.internal.Maps;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class Validator {
-	
+
 	private boolean validateAll = true;
 
 	public void setValidateAll(boolean validateAll) {
@@ -48,39 +48,39 @@ public class Validator {
 	public void setStopOnError(boolean stopOnError) {
 		this.stopOnError = stopOnError;
 	}
-	
+
 	public boolean isStopOnError() {
 		return stopOnError;
 	}
-	
+
 	public boolean isValidateAll() {
 		return validateAll;
 	}
-	
+
 	public void validate(ResourceSet resourceSet, IResourceServiceProvider.Registry registry, Issues issues) {
 		List<Resource> resources = Lists.newArrayList(resourceSet.getResources());
 		for (Resource resource : resources) {
 			try {
 				resource.load(null);
 				IResourceServiceProvider provider = registry.getResourceServiceProvider(resource.getURI());
-				if (provider!=null) {
+				if (provider != null) {
 					List<Issue> result = provider.getResourceValidator().validate(resource, CheckMode.ALL, null);
 					for (Issue issue : result) {
 						switch (issue.getSeverity()) {
-							case ERROR :
+							case ERROR:
 								issues.addError(issue.getMessage(), issue);
 								break;
-							case WARNING :
+							case WARNING:
 								issues.addWarning(issue.getMessage(), issue);
 								break;
-							case INFO :
+							case INFO:
 								issues.addInfo(issue.getMessage(), issue);
 								break;
 						}
 					}
 				}
 			} catch (IOException e) {
-				throw new WorkflowInterruptedException("Couldn't load resource ("+resource.getURI()+")",e);
+				throw new WorkflowInterruptedException("Couldn't load resource (" + resource.getURI() + ")", e);
 			}
 		}
 		if (isStopOnError() && issues.hasErrors()) {
@@ -88,7 +88,7 @@ public class Validator {
 			throw new WorkflowInterruptedException("Validation problems: \n" + errorMessage);
 		}
 	}
-	
+
 	public String toString(Issues issues) {
 		if (!issues.hasErrors() && !issues.hasWarnings())
 			return "No issues.";
@@ -119,59 +119,60 @@ public class Validator {
 	protected void appendMessages(StringBuilder result, MWEDiagnostic[] diagnostics) {
 		Multimap<URI, MWEDiagnostic> issuesPerURI = groupByURI(diagnostics);
 		boolean first = true;
-		for(URI uri: issuesPerURI.keySet()) {
+		for (URI uri : issuesPerURI.keySet()) {
 			if (!first)
 				result.append('\n');
 			first = false;
-			result
-				.append('\t')
-				.append(uri.lastSegment())
-				.append(" - ");
-			if (uri.isFile())
-				result.append(uri.toFileString());
-			else
-				result.append(uri);
-			for(MWEDiagnostic diagnostic: issuesPerURI.get(uri)) {
+			if (uri != null) {
+				result.append('\t').append(uri.lastSegment()).append(" - ");
+				if (uri.isFile())
+					result.append(uri.toFileString());
+				else
+					result.append(uri);
+			}
+			for (MWEDiagnostic diagnostic : issuesPerURI.get(uri)) {
 				Issue issue = (Issue) diagnostic.getElement();
 				result.append("\n\t\t").append(issue.getLineNumber()).append(": ").append(diagnostic.getMessage());
 			}
 		}
 	}
-	
+
 	protected Multimap<URI, MWEDiagnostic> groupByURI(MWEDiagnostic[] diagnostic) {
-		Multimap<URI, MWEDiagnostic> result = Multimaps.newMultimap(Maps.<URI, Collection<MWEDiagnostic>> newLinkedHashMap(), new Supplier<Collection<MWEDiagnostic>>() {
-			public Collection<MWEDiagnostic> get() {
-				return Sets.newTreeSet(new Comparator<MWEDiagnostic>() {
-					public int compare(MWEDiagnostic o1, MWEDiagnostic o2) {
-						Issue issue1 = (Issue) o1.getElement();
-						Issue issue2 = (Issue) o2.getElement();
-						if (issue1.getLineNumber() < issue2.getLineNumber())
-							return -1;
-						if (issue1.getLineNumber() > issue2.getLineNumber())
-							return 1;
-						if (issue1.getOffset() < issue2.getOffset())
-							return -1;
-						if (issue1.getOffset() > issue2.getOffset())
-							return 1;
-						return o1.getMessage().compareTo(o2.getMessage());
+		Multimap<URI, MWEDiagnostic> result = Multimaps.newMultimap(
+				Maps.<URI, Collection<MWEDiagnostic>> newLinkedHashMap(), new Supplier<Collection<MWEDiagnostic>>() {
+					public Collection<MWEDiagnostic> get() {
+						return Sets.newTreeSet(new Comparator<MWEDiagnostic>() {
+							public int compare(MWEDiagnostic o1, MWEDiagnostic o2) {
+								Issue issue1 = (Issue) o1.getElement();
+								Issue issue2 = (Issue) o2.getElement();
+								if (issue1.getLineNumber() < issue2.getLineNumber())
+									return -1;
+								if (issue1.getLineNumber() > issue2.getLineNumber())
+									return 1;
+								if (issue1.getOffset() < issue2.getOffset())
+									return -1;
+								if (issue1.getOffset() > issue2.getOffset())
+									return 1;
+								return o1.getMessage().compareTo(o2.getMessage());
+							}
+						});
 					}
 				});
-			}
-		});
 		Multimaps.index(Arrays.asList(diagnostic), new Function<MWEDiagnostic, URI>() {
 			public URI apply(MWEDiagnostic from) {
 				Issue issue = (Issue) from.getElement();
-				return issue.getUriToProblem().trimFragment();
+				URI uriToProblem = issue.getUriToProblem();
+				return uriToProblem != null ? uriToProblem.trimFragment() : null;
 			}
 		}, result);
 		return result;
 	}
-	
+
 	public static class Disabled extends Validator {
 		@Override
 		public void validate(ResourceSet resourceSet, Registry registry, Issues issues) {
 			// do nothing
 		}
 	}
-	
+
 }
