@@ -6,6 +6,10 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
+import org::eclipse::xtext::xtext::ui::wizard::project;
 
 OP() : "«";
 CL() : "»";
+
+javaPackageForEmfClasses(XtextProjectInfo this) : 
+	this.basePackage.replaceAll('\\.','::')+'::'+languageNameAbbreviation.toFirstLower();
