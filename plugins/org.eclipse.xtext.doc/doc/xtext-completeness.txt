@@ -1,11 +1,11 @@
 -------- File --------------------------- | -- content complete? -- | -- proofread by ------------------- | 
 666-world-domination-in-6-steps.textile   | yes (meysholdt)         | sefftinge, dhuebner                 |  
-000-introduction.textile                  | ?                       |                                     |  
-010-concepts.textile                      | ?                       |                                     |
+000-introduction.textile                  | yes (se)                |                                     |  
+010-concepts.textile                      | yes (se)                |                                     |
 
-015-getting-started.textile               | ?                       |                                     |
-016-working-with-Xtext-models.textile     | ?                       |                                     |
-017-getting-started-xpand.textile         | ?                       |                                     |
+015-getting-started.textile               | yes (se)                |                                     |
+016-working-with-Xtext-models.textile     | yes (se)                |                                     |
+017-getting-started-xpand.textile         | yes (se)                |                                     |
 
 020-grammar-language.textile              | ?                       |                                     |
 
