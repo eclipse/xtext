@@ -40,14 +40,14 @@
 <li class="listitem">
 <p>
 								
-<code class="code">org.eclipse.emf.ecore.resource.Resource.getErrors()</code>
+<span class="emphasis"><em>org.eclipse.emf.ecore.resource.Resource.getErrors()</em></span>
 							
 </p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">org.eclipse.emf.ecore.resource.Resource.getWarnings()</code>
+<span class="emphasis"><em>org.eclipse.emf.ecore.resource.Resource.getWarnings()</em></span>
 							
 </p>
 </li>
@@ -73,14 +73,14 @@
 <li class="listitem">
 <p>
 								
-<code class="code">org.eclipse.emf.ecore.resource.Resource.getErrors()</code>
+<span class="emphasis"><em>org.eclipse.emf.ecore.resource.Resource.getErrors()</em></span>
 							
 </p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">org.eclipse.emf.ecore.resource.Resource.getWarnings()</code>
+<span class="emphasis"><em>org.eclipse.emf.ecore.resource.Resource.getWarnings()</em></span>
 							
 </p>
 </li>
@@ -115,39 +115,39 @@
 <ol class="orderedlist" type="1">
 <li class="listitem">
 <p>Types: only instances of 
-								<code class="code">MyRule</code> and 
-								<code class="code">MySubRule</code> are allowed for this rule. Sub-types are prohibited, since the parser never instantiates unknown sub-types.
+								<span class="emphasis"><em>MyRule</em></span> and 
+								<span class="emphasis"><em>MySubRule</em></span> are allowed for this rule. Sub-types are prohibited, since the parser never instantiates unknown sub-types.
 							</p>
 </li>
 <li class="listitem">
 <p>Features: In case the 
-								<code class="code">MyRule</code> and 
-								<code class="code">MySubRule</code> have 
-								<code class="code">EStructuralFeatures</code> besides 
-								<code class="code">strVal</code> and 
-								<code class="code">intVal</code>, only 
-								<code class="code">strVal</code> and 
-								<code class="code">intVal</code> may have 
+								<span class="emphasis"><em>MyRule</em></span> and 
+								<span class="emphasis"><em>MySubRule</em></span> have 
+								<span class="emphasis"><em>EStructuralFeatures</em></span> besides 
+								<span class="emphasis"><em>strVal</em></span> and 
+								<span class="emphasis"><em>intVal</em></span>, only 
+								<span class="emphasis"><em>strVal</em></span> and 
+								<span class="emphasis"><em>intVal</em></span> may have 
 								<a class="link" href="serialization.html#transientvalues" title="Transient Values">non-transient values</a>.
 							</p>
 </li>
 <li class="listitem">
 <p>Quantities: The following condition must be true: 
-								<code class="code">strVal.size() == intVal.size()</code>.
+								<span class="emphasis"><em>strVal.size() == intVal.size()</em></span>.
 							</p>
 </li>
 <li class="listitem">
 <p>Values: It must be possible to 
 								<a class="link" href="valueconverter.html" title="Value Converter">convert all values</a> to valid tokens for terminal rule 
-								<code class="code">STRING</code>.  The same is true for 
-								<code class="code">intVal</code> and 
-								<code class="code">INT</code>.
+								<span class="emphasis"><em>STRING</em></span>.  The same is true for 
+								<span class="emphasis"><em>intVal</em></span> and 
+								<span class="emphasis"><em>INT</em></span>.
 							</p>
 </li>
 </ol>
 </div>
 <p>The typical use cases for the concrete syntax validator are validation in non-Xtext-editors that, however, use an 
-						<code class="code">XtextResource</code>. This is, for example, the case when combining GMF and Xtext. Another use case is when the semantic model is modified &ldquo;manually&rdquo; (not by the parser) and then serialized again. Since it is very difficult for the serializer to provide 
+						<span class="emphasis"><em>XtextResource</em></span>. This is, for example, the case when combining GMF and Xtext. Another use case is when the semantic model is modified &ldquo;manually&rdquo; (not by the parser) and then serialized again. Since it is very difficult for the serializer to provide 
 						<a class="link" href="serialization.html#parsetreeconstructor" title="Parse Tree Constructor">meaningful error messages</a>, the concrete syntax validator is executed by default before serialization. A textual Xtext editor itself, however, is 
 						<span class="emphasis"><em>not</em></span> a valid use case. Here, the parser ensures that all syntactical constraints are met. Therefore, the is no value in additionally running the concrete syntax validator.  
 					</p>
@@ -156,8 +156,8 @@
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
 <p>Grammar rules containing assigned actions (e.g. 
-								<code class="code">{MyType.myFeature=current}</code> are ignored. Unassigned actions (e.g. 
-								<code class="code">{MyType}</code>), however, are supported. 
+								<span class="emphasis"><em>{MyType.myFeature=current}</em></span> are ignored. Unassigned actions (e.g. 
+								<span class="emphasis"><em>{MyType}</em></span>), however, are supported. 
 							</p>
 </li>
 <li class="listitem">
@@ -165,10 +165,10 @@
 </li>
 <li class="listitem">
 <p>Orders within list-features can not be validated. e.g. 
-								<code class="code">Rule: (foo+=R1 foo+=R2)*</code> implies that 
-								<code class="code">foo</code> is expected to contain instances of 
-								<code class="code">R1</code> and 
-								<code class="code">R1</code> in an alternating order. 
+								<span class="emphasis"><em>Rule: (foo+=R1 foo+=R2)*</em></span> implies that 
+								<span class="emphasis"><em>foo</em></span> is expected to contain instances of 
+								<span class="emphasis"><em>R1</em></span> and 
+								<span class="emphasis"><em>R1</em></span> in an alternating order. 
 							</p>
 </li>
 </ul>
@@ -176,7 +176,7 @@
 <p>To use concrete syntax validation you can let Guice inject an instance of 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/IConcreteSyntaxValidator.java?root=Modeling_Project&view=co" target="_new">IConcreteSyntaxValidator</a> and use it directly. Furthermore, there is an adapter (
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/impl/ConcreteSyntaxEValidator.java?root=Modeling_Project&view=co" target="_new">ConcreteSyntaxEValidator</a>) allows integrating of the concrete syntax validator as an 
-						<code class="code">EValidator</code>. You can, for example, enable it in your runtime module, by adding:
+						<span class="emphasis"><em>EValidator</em></span>. You can, for example, enable it in your runtime module, by adding:
 					</p>
 <div class="literallayout">
 <p>
@@ -205,18 +205,18 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;ConcreteSyntaxEValidator&gt;&nbsp;bindC
 </div>
 <p>In addition to the afore mentioned kinds of validation, which are more or less done automatically, you can specify additional constraints specific for your Ecore model.
 					We leverage existing EMF API (mainly 
-					<code class="code">EValidator</code>) and have put some convenience stuff on top. 
+					<span class="emphasis"><em>EValidator</em></span>) and have put some convenience stuff on top. 
 					Basically all you need to do is to make sure that an 
-					<code class="code">EValidator</code> is registered for your 
-					<code class="code">EPackage</code>. The registry for 
-					<code class="code">EValidators</code> (
-					<code class="code">EValidator.Registry.INSTANCE</code>) can only be filled programmatically.
+					<span class="emphasis"><em>EValidator</em></span> is registered for your 
+					<span class="emphasis"><em>EPackage</em></span>. The registry for 
+					<span class="emphasis"><em>EValidators</em></span> (
+					<span class="emphasis"><em>EValidator.Registry.INSTANCE</em></span>) can only be filled programmatically.
 					That means contrary to the EPackage and 
-					<code class="code">Resource.Factory</code> registries there is no Equinox extension point to populate the validator registry.
+					<span class="emphasis"><em>Resource.Factory</em></span> registries there is no Equinox extension point to populate the validator registry.
 				</p>
 <p>For Xtext we provide a 
 					<a class="link" href="configuration.html#generator_fragment" title="Generator Fragments">generator fragment</a> for the convenient Java-based 
-					<code class="code">EValidator</code> API. Just add the following fragment to your generator configuration and you are good to go:
+					<span class="emphasis"><em>EValidator</em></span> API. Just add the following fragment to your generator configuration and you are good to go:
 				</p>
 <div class="literallayout">
 <p>
@@ -229,16 +229,17 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;ConcreteSyntaxEValidator&gt;&nbsp;bindC
 </p>
 </div>
 <p>The generator will provide you with two Java classes. An abstract class generated to 
-					<code class="code">src-gen/</code> which extends the library class 
-					<code class="code">AbstractDeclarativeValidator</code>. This one just registers the EPackages for which this validator introduces constraints.
+					<span class="emphasis"><em>src-gen/</em></span> which extends the library class 
+					<span class="emphasis"><em>AbstractDeclarativeValidator</em></span>. This one just registers the EPackages for which this validator introduces constraints.
 					The other class is a subclass of that abstract class and is generated to the 
-					<code class="code">src/</code> folder in order to be edited by you. That&rsquo;s where you put the constraints in.
+					<span class="emphasis"><em>src/</em></span> folder in order to be edited by you. That&rsquo;s where you put the constraints in.
 				</p>
 <p>The purpose of the 
-					<code class="code">AbstractDeclarativeValidator</code> is to allow you to write constraints in a declarative way &ndash; as the class name already suggests. That is instead of writing exhaustive if-else constructs or extending the generated EMF switch you just have to add the <code class="code">@Check</code> annotation to any method and it will be invoked automatically when validation takes place.
+					<span class="emphasis"><em>AbstractDeclarativeValidator</em></span> is to allow you to write constraints in a declarative way &ndash; as the class name already suggests. That is instead of writing exhaustive if-else constructs or extending the generated EMF switch you just have to add the 
+					<span class="emphasis"><em>@Check</em></span> annotation to any method and it will be invoked automatically when validation takes place.
 					Moreover you can state for what type the respective constraint method is, just by declaring a typed parameter. This also lets you avoid any type casts.  
 					In addition to the reflective invocation of validation methods the 
-					<code class="code">AbstractDeclarativeValidator</code> provides a couple of convenient assertions.
+					<span class="emphasis"><em>AbstractDeclarativeValidator</em></span> provides a couple of convenient assertions.
 				</p>
 <p>All in all this is very similar to how JUnit works. Here is an example:</p>
 <div class="literallayout">
@@ -259,73 +260,8 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;ConcreteSyntaxEValidator&gt;&nbsp;bindC
 </code>
 </p>
 </div>
-</div>
-<div class="section" title="Quickfixes">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-<a name="quickfixes"></a>Quickfixes</h3>
-</div>
-</div>
-</div>
-<p>For validations written using the 
-					<code class="code">AbstractDeclarativeValidator</code> it is possible to provide corresponding quickfixes in the editor. To be able to implement a quickfix for a given diagnostic (a warning or error) the underlying 
-					<span class="emphasis"><em>cause</em></span> of the diagnostic must be known (i.e. what actual problem does the diagnostic represent?), otherwise the fix doesn&rsquo;t know what needs to be done. As we don&rsquo;t want to deduce this from the diagnostic&rsquo;s error message we associate a problem specific 
-					<span class="emphasis"><em>code</em></span> with the diagnostic.
-				</p>
-<p>In the following example (from 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.example.domainmodel/src/org/eclipse/xtext/example/validation/DomainmodelJavaValidator.java?root=Modeling_Project&view=co" target="_new">DomainmodelJavaValidator</a>) the diagnostic&rsquo;s 
-					<span class="emphasis"><em>code</em></span> is given by the last argument to the 
-					<code class="code">warning()</code> method and it is a reference to the static 
-					<code class="code">String</code> field 
-					<code class="code">INVALID_TYPE_NAME</code> in the validator class.
-				</p>
-<div class="literallayout">
-<p>
-<code class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning("Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital",&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.TYPE__NAME,&nbsp;INVALID_TYPE_NAME,&nbsp;type.getName());<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<p>Now that the validation has a unique code identifying the problem we can register quickfixes against it. We start by adding the 
-					<code class="code">org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment</code> to our workflow and after regenerating the code we should find an empty class 
-					<code class="code">MyDslQuickfixProvider</code> in our DSL&rsquo;s UI project.
-				</p>
-<p>Continuing with the 
-					<code class="code">INVALID_TYPE_NAME</code> problem from the Domainmodel example we add a method with which the problem can be fixed (see also 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.example.domainmodel.ui/src/org/eclipse/xtext/example/quickfix/DomainmodelQuickfixProvider.java?root=Modeling_Project&view=co" target="_new">DomainmodelQuickfixProvider</a>):
-				</p>
-<div class="literallayout">
-<p>
-<code class="code">@Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)<br>
-public&nbsp;void&nbsp;fixName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{<br>
-		acceptor.accept(issue,&nbsp;"Capitalize&nbsp;name",&nbsp;"Capitalize&nbsp;name&nbsp;&nbsp;of&nbsp;'"&nbsp;+&nbsp;issue.getData()[0]&nbsp;+&nbsp;"'",&nbsp;"upcase.png",&nbsp;new&nbsp;IModification()&nbsp;{<br>
-		public&nbsp;void&nbsp;apply(IModificationContext&nbsp;context)&nbsp;throws&nbsp;BadLocationException&nbsp;{<br>
-			IXtextDocument&nbsp;xtextDocument&nbsp;=&nbsp;context.getXtextDocument();<br>
-			String&nbsp;firstLetter&nbsp;=&nbsp;xtextDocument.get(issue.getOffset(),&nbsp;1);<br>
-			xtextDocument.replace(issue.getOffset(),&nbsp;1,&nbsp;Strings.toFirstUpper(firstLetter));<br>
-	}<br>
-	});<br>
-}<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<p>By using the correct signature (see below) and annotating the method with the 
-					<code class="code">Fix</code> annotation referencing the code we specified in the validator, Xtext knows that this method implements a fix for the problem. This also allows us to annotate multiple methods as fixes for the same problem.
-				</p>
-<p>The first three parameters given to the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/quickfix/IssueResolutionAcceptor.java?root=Modeling_Project&view=co" target="_new">IssueResolutionAcceptor</a> define the UI representation of the quickfix. As the document is not necessarily loaded when the quickfix is offered, we need to provide any additional data from the model that we want to refer to in the UI when creating the issue in the validator above. In this case, we provided the existing type name.
-				</p>
-<p>The actual model modification is implemented in the ${org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModification}. The ${org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModificationContext} provides access to the erroneous document.  </p>
-<p>If you prefer to implement the quickfix in terms of the semantic model use a ${org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/ISemanticModification.java} instead. Its 
-					<code class="code">apply(EObject, IModificationContext)</code> method will be invoked inside a modification transaction and the first argument will be the erroneous semantic element. This makes it very easy for the fix method to modify the model as necessary. After the method returns the model as well as the Xtext editor&rsquo;s content will be updated accordingly. If the method fails (throws an exception) the change will not be committed.
+<p>You can also implement quick fixes for individual validation errors and warnings. See the 
+					<a class="link" href="quickfixes.html" title="Quick fixes">chapter on quickfixes</a> for details.
 				</p>
 </div>
 <div class="section" title="Validation with the Check language">
@@ -353,8 +289,8 @@ public&nbsp;void&nbsp;fixName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueResolutionA
 </p>
 </div>
 <p>After regenerating your language artifacts you will find three new files &ldquo;YourLanguageChecks.chk&rdquo;, &ldquo;YourLanguageFastChecks.chk&rdquo; and &ldquo;YourLanguageExpensiveChecks.chk&rdquo; in the 
-					<code class="code">src/</code> folder in the sub-package 
-					<code class="code">validation</code>.  The checks in these files will be executed when saving a file, while typing (FastChecks) or when triggering the validation explicitly (ExpensiveChecks). When using Check the example of the previous chapter could be written like this.
+					<span class="emphasis"><em>src/</em></span> folder in the sub-package 
+					<span class="emphasis"><em>validation</em></span>.  The checks in these files will be executed when saving a file, while typing (FastChecks) or when triggering the validation explicitly (ExpensiveChecks). When using Check the example of the previous chapter could be written like this.
 				</p>
 <div class="literallayout">
 <p>
@@ -367,10 +303,10 @@ public&nbsp;void&nbsp;fixName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueResolutionA
 </p>
 </div>
 <p>Each check works in a specific context (here: 
-					<code class="code">Type</code>) and can further denote a feature to which a warning or error should be attached to (here: 
-					<code class="code">name</code>). Each check could either be a 
-					<code class="code">WARNING</code> or an 
-					<code class="code">ERROR</code> with a given string to explain the situation. The essential part of each check is an invariant that must hold true for the given context. If it fails the check will produce an issue with the provided explanation.
+					<span class="emphasis"><em>Type</em></span>) and can further denote a feature to which a warning or error should be attached to (here: 
+					<span class="emphasis"><em>name</em></span>). Each check could either be a 
+					<span class="emphasis"><em>WARNING</em></span> or an 
+					<span class="emphasis"><em>ERROR</em></span> with a given string to explain the situation. The essential part of each check is an invariant that must hold true for the given context. If it fails the check will produce an issue with the provided explanation.
 				</p>Please read more about the Check language as well as the underlying expression language in Xpand&rsquo;s reference documentation which is shipped as Eclipse help. 
 			</div>
 <div class="section" title="Test Validators">
@@ -400,9 +336,9 @@ public&nbsp;void&nbsp;fixName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueResolutionA
 </ol>
 </div>
 <p>To create models, you can either use EMF&rsquo;s 
-					<code class="code">ResourceSet</code> to load models from your hard disk or you can utilize the 
-					<code class="code">&lt;MyLanguage&gt;Factory</code> (which EMF generates for each 
-					<code class="code">EPackage</code>) to construct the needed model elements manually. While the fist option has the advantages that you can edit your models in your textual concrete syntax, the second option has the advantage that you can create partial models.
+					<span class="emphasis"><em>ResourceSet</em></span> to load models from your hard disk or you can utilize the 
+					<span class="emphasis"><em>Factory</em></span> (which EMF generates for each 
+					<span class="emphasis"><em>EPackage</em></span>) to construct the needed model elements manually. While the fist option has the advantages that you can edit your models in your textual concrete syntax, the second option has the advantage that you can create partial models.
 				</p>
 <p>To run the @Check-methods and ensure they raise the intended errors and warnings, you can utilize 
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/ValidatorTester.java?root=Modeling_Project&view=co" target="_new">ValidatorTester</a> as shown by the following example:
@@ -462,79 +398,79 @@ public&nbsp;void&nbsp;fixName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueResolutionA
 </p>
 </div>
 <p>This example uses JUnit 3, but since the involved classes from Xtext have no dependency on JUnit whatsoever, JUnit 4 and other testing frameworks will work as well.  JUnit runs the 
-					<code class="code">setUp()</code>-method before each testcase and thereby helps to create some common state. In this example, the validator (
-					<code class="code">MyLanguageValidator</code>) is instantiated manually and initialized via Google Guice&rsquo;s dependency injection. Then the 
-					<code class="code">ValidatorTester</code> is created. It acts as a wrapper for the validator, ensures that the validator has a valid state and provides convenient access to the validator itself (
-					<code class="code">tester.validator()</code>) as well as to the utility classes which assert diagnostics created by the validator (
-					<code class="code">tester.diagnose()</code>). Please be aware that you have to call 
-					<code class="code">validator()</code> before you can call 
-					<code class="code">diagnose()</code>. However, you can call 
-					<code class="code">validator()</code> multiple times in a row.
+					<span class="emphasis"><em>setUp()</em></span>-method before each testcase and thereby helps to create some common state. In this example, the validator (
+					<span class="emphasis"><em>MyLanguageValidator</em></span>) is instantiated manually and initialized via Google Guice&rsquo;s dependency injection. Then the 
+					<span class="emphasis"><em>ValidatorTester</em></span> is created. It acts as a wrapper for the validator, ensures that the validator has a valid state and provides convenient access to the validator itself (
+					<span class="emphasis"><em>tester.validator()</em></span>) as well as to the utility classes which assert diagnostics created by the validator (
+					<span class="emphasis"><em>tester.diagnose()</em></span>). Please be aware that you have to call 
+					<span class="emphasis"><em>validator()</em></span> before you can call 
+					<span class="emphasis"><em>diagnose()</em></span>. However, you can call 
+					<span class="emphasis"><em>validator()</em></span> multiple times in a row.
 				</p>
 <p>While 
-					<code class="code">validator()</code> allows to call the validator&rsquo;s @Check-methods directly, 
-					<code class="code">validate(model)</code> leaves it to the framework to call the applicable @Check-methods. However, to avoid side-effects between tests, it is recommended to call the @Check-methods directly.
+					<span class="emphasis"><em>validator()</em></span> allows to call the validator&rsquo;s @Check-methods directly, 
+					<span class="emphasis"><em>validate(model)</em></span> leaves it to the framework to call the applicable @Check-methods. However, to avoid side-effects between tests, it is recommended to call the @Check-methods directly.
 				</p>
 <p>
 					
-<code class="code">diagnose()</code> and 
-					<code class="code">validate(model)</code> return an object of type @{org.eclipse.xtext/src/org/eclipse/xtext/validation/AssertableDiagnostics} which provides several 
-					<code class="code">assert</code>-methods to verify whether the expected diagnostics are present:
+<span class="emphasis"><em>diagnose()</em></span> and 
+					<span class="emphasis"><em>validate(model)</em></span> return an object of type ${org.eclipse.xtext/src/org/eclipse/xtext/validation/AssertableDiagnostics} which provides several 
+					<span class="emphasis"><em>assert</em></span>-methods to verify whether the expected diagnostics are present:
 				</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
 <p>
 							
-<code class="code">assertError(int code)</code>: There must be one diagnostic with severity ERROR and the supplied error code.
+<span class="emphasis"><em>assertError(int code)</em></span>: There must be one diagnostic with severity ERROR and the supplied error code.
 						</p>
 </li>
 <li class="listitem">
 <p>
 							
-<code class="code">assertErrorContains(String messageFragment)</code>:  There must be one diagnostic with severity ERROR and its message must contain 
-							<code class="code">messageFragment</code>.
+<span class="emphasis"><em>assertErrorContains(String messageFragment)</em></span>:  There must be one diagnostic with severity ERROR and its message must contain 
+							<span class="emphasis"><em>messageFragment</em></span>.
 						</p>
 </li>
 <li class="listitem">
 <p>
 							
-<code class="code">assertError(int code, String messageFragment)</code>: Verifies severity, error code and messageFragment.
+<span class="emphasis"><em>assertError(int code, String messageFragment)</em></span>: Verifies severity, error code and messageFragment.
 						</p>
 </li>
 <li class="listitem">
 <p>
 							
-<code class="code">assertWarning(...)</code>: This method is available for the same combination of parameters as 
-							<code class="code">assertError()</code>.
+<span class="emphasis"><em>assertWarning(...)</em></span>: This method is available for the same combination of parameters as 
+							<span class="emphasis"><em>assertError()</em></span>.
 						</p>
 </li>
 <li class="listitem">
 <p>
 							
-<code class="code">assertOK()</code>: Expects that no diagnostics (errors, warnings etc.) have been raised.   
+<span class="emphasis"><em>assertOK()</em></span>: Expects that no diagnostics (errors, warnings etc.) have been raised.   
 						</p>
 </li>
 <li class="listitem">
 <p>
 							
-<code class="code">assertDiagnostics(int severity, int code, String messageFragment)</code>: Verifies severity, error code and messageFragment.
+<span class="emphasis"><em>assertDiagnostics(int severity, int code, String messageFragment)</em></span>: Verifies severity, error code and messageFragment.
 						</p>
 </li>
 <li class="listitem">
 <p>
 							
-<code class="code">assertAll(DiagnosticPredicate... predicates)</code>: Allows to describe multiple diagnostics at the same time and verifies that all of them are present. Class @{org.eclipse.xtext/src/org/eclipse/xtext/validation/AssertableDiagnostics} contains static 
-							<code class="code">error()</code> and 
-							<code class="code">warning()</code>-methods which help to create the needed 
-							<code class="code">DiagnosticPredicate</code>. Example: 
-							<code class="code">assertAll(error(123), warning("some part of the message"))</code>. 
+<span class="emphasis"><em>assertAll(DiagnosticPredicate... predicates)</em></span>: Allows to describe multiple diagnostics at the same time and verifies that all of them are present. Class ${org.eclipse.xtext/src/org/eclipse/xtext/validation/AssertableDiagnostics} contains static 
+							<span class="emphasis"><em>error()</em></span> and 
+							<span class="emphasis"><em>warning()</em></span>-methods which help to create the needed 
+							<span class="emphasis"><em>DiagnosticPredicate</em></span>. Example: 
+							<span class="emphasis"><em>assertAll(error(123), warning(&ldquo;some part of the message&rdquo;))</em></span>. 
 						</p>
 </li>
 <li class="listitem">
 <p>
 							
-<code class="code">assertAny(DiagnosticPredicate predicate)</code>: Asserts that a diagnostic exists which matches the predicate. 
+<span class="emphasis"><em>assertAny(DiagnosticPredicate predicate)</em></span>: Asserts that a diagnostic exists which matches the predicate. 
 						</p>
 </li>
 </ul>

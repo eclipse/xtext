@@ -5,9 +5,9 @@
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
-<link rel="up" href="IDEconcepts.html" title="IDE concepts">
-<link rel="prev" href="hyperlinking.html" title="Hyperlinking">
-<link rel="next" href="highlighting.html" title="Syntax Coloring">
+<link rel="up" href="RuntimeConcepts.html" title="Runtime Concepts">
+<link rel="prev" href="serialization.html" title="Serialization">
+<link rel="next" href="encoding.html" title="Encoding in Xtext">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Formatting (Pretty Printing)</h1>
@@ -99,7 +99,7 @@
 </p>
 </div>
 <p>The formatter has to implement the method 
-					<code class="code">configureFormatting(...)</code> which declaratively sets up a 
+					<span class="emphasis"><em>configureFormatting(...)</em></span> which declaratively sets up a 
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java?root=Modeling_Project&view=co" target="_new">FormattingConfig</a>.
 				</p>
 <p>The 
@@ -119,10 +119,10 @@
 <li class="listitem">
 <p>
 								
-<code class="code">setAutoLinewrap(int)</code> defines the amount of characters after which a line-break should be dynamically inserted between two tokens. The instructions 
-								<code class="code">setNoLinewrap().???()</code>,  
-								<code class="code">setNoSpace().???()</code> and 
-								<code class="code">setSpace(space).???()</code> suppress this behavior locally. The default is 80.
+<span class="emphasis"><em>setAutoLinewrap(int)</em></span> defines the amount of characters after which a line-break should be dynamically inserted between two tokens. The instructions 
+								<span class="emphasis"><em>setNoLinewrap().???()</em></span>,  
+								<span class="emphasis"><em>setNoSpace().???()</em></span> and 
+								<span class="emphasis"><em>setSpace(space).???()</em></span> suppress this behavior locally. The default is 80.
 							</p>
 </li>
 </ul>
@@ -150,50 +150,50 @@
 <li class="listitem">
 <p>
 								
-<code class="code">after(ele)</code>: The instruction is applied after the grammar element 
-								<code class="code">ele</code> has been matched. For example, if your grammar uses the keyword &ldquo;;&rdquo; to end lines, this can instruct the formatter to insert a line break after the semicolon.  
+<span class="emphasis"><em>after(ele)</em></span>: The instruction is applied after the grammar element 
+								<span class="emphasis"><em>ele</em></span> has been matched. For example, if your grammar uses the keyword &ldquo;;&rdquo; to end lines, this can instruct the formatter to insert a line break after the semicolon.  
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">before(ele)</code>: The instruction is executed before the matched element. For example, if your grammar contains lists which separate its values with keyword &ldquo;,&rdquo;, you can instruct the formatter to suppress the whitespace before the comma.
+<span class="emphasis"><em>before(ele)</em></span>: The instruction is executed before the matched element. For example, if your grammar contains lists which separate its values with keyword &ldquo;,&rdquo;, you can instruct the formatter to suppress the whitespace before the comma.
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">around(ele)</code>: This is the same as 
-								<code class="code">before(ele)</code> combined with  
-								<code class="code">after(ele)</code>.  
+<span class="emphasis"><em>around(ele)</em></span>: This is the same as 
+								<span class="emphasis"><em>before(ele)</em></span> combined with  
+								<span class="emphasis"><em>after(ele)</em></span>.  
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">between(ele1, ele2)</code>: This matches if 
-								<code class="code">ele2</code> directly follows 
-								<code class="code">ele1</code> in the document. There may be no other tokens in between 
-								<code class="code">ele1</code> and 
-								<code class="code">ele2</code>.
+<span class="emphasis"><em>between(ele1, ele2)</em></span>: This matches if 
+								<span class="emphasis"><em>ele2</em></span> directly follows 
+								<span class="emphasis"><em>ele1</em></span> in the document. There may be no other tokens in between 
+								<span class="emphasis"><em>ele1</em></span> and 
+								<span class="emphasis"><em>ele2</em></span>.
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">bounds(ele1, ele2)</code>: This is the same as 
-								<code class="code">after(ele1)</code> combined with  
-								<code class="code">before(ele2)</code>.
+<span class="emphasis"><em>bounds(ele1, ele2)</em></span>: This is the same as 
+								<span class="emphasis"><em>after(ele1)</em></span> combined with  
+								<span class="emphasis"><em>before(ele2)</em></span>.
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">range(ele1, ele2)</code>: The rule is enabled when 
-								<code class="code">ele1</code> is matched, and disabled when 
-								<code class="code">ele2</code> is matched. Thereby, the rule is active for the complete region which is surrounded by 
-								<code class="code">ele1</code> and 
-								<code class="code">ele2</code>.
+<span class="emphasis"><em>range(ele1, ele2)</em></span>: The rule is enabled when 
+								<span class="emphasis"><em>ele1</em></span> is matched, and disabled when 
+								<span class="emphasis"><em>ele2</em></span> is matched. Thereby, the rule is active for the complete region which is surrounded by 
+								<span class="emphasis"><em>ele1</em></span> and 
+								<span class="emphasis"><em>ele2</em></span>.
 							</p>
 </li>
 </ul>
@@ -202,19 +202,19 @@
 						<span class="emphasis"><em>tokens</em></span> is used slightly different here compared to the parser/lexer. Here, a token is a keyword or the string that is matched by a terminal rule, datatype rule or cross reference. In the terminology of the lexer a datatype rule can match a composition of multiple tokens.
 					</p>
 <p>The parameter 
-						<code class="code">ele</code> can be a grammar&rsquo;s 
-						<code class="code">AbstractElement</code> or a grammar&rsquo;s 
-						<code class="code">AbstractRule</code>. All grammar rules and almost all abstract elements can be matched. This includes rule calls, parser rules, groups and alternatives. The semantic of 
-						<code class="code">before(ele)</code>, 
-						<code class="code">after(ele)</code>, etc. for rule calls and parser rules is identical to when the parser would &ldquo;pass&rdquo; this part of the grammar. The stack of called rules is taken into account. The following abstract elements can 
+						<span class="emphasis"><em>ele</em></span> can be a grammar&rsquo;s 
+						<span class="emphasis"><em>AbstractElement</em></span> or a grammar&rsquo;s 
+						<span class="emphasis"><em>AbstractRule</em></span>. All grammar rules and almost all abstract elements can be matched. This includes rule calls, parser rules, groups and alternatives. The semantic of 
+						<span class="emphasis"><em>before(ele)</em></span>, 
+						<span class="emphasis"><em>after(ele)</em></span>, etc. for rule calls and parser rules is identical to when the parser would &ldquo;pass&rdquo; this part of the grammar. The stack of called rules is taken into account. The following abstract elements can 
 						<span class="bold"><strong>not</strong></span> have assigned formatting instructions:
 					</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
 <p>Actions. E.g. 
-								<code class="code">{MyAction}</code> or 
-								<code class="code">{MyAction.myFeature=current}</code>.
+								<span class="emphasis"><em>{MyAction}</em></span> or 
+								<span class="emphasis"><em>{MyAction.myFeature=current}</em></span>.
 							</p>
 </li>
 <li class="listitem">
@@ -224,7 +224,7 @@
 </li>
 <li class="listitem">
 <p>Grammar elements nested in 
-								<code class="code">CrossReferences</code>.
+								<span class="emphasis"><em>CrossReferences</em></span>.
 							</p>
 </li>
 </ul>
@@ -235,57 +235,57 @@
 <li class="listitem">
 <p>
 								
-<code class="code">setIndentationIncrement()</code> increments indentation by one unit at this position. Whether one unit consists of one tab-character or spaces is defined by 
+<span class="emphasis"><em>setIndentationIncrement()</em></span> increments indentation by one unit at this position. Whether one unit consists of one tab-character or spaces is defined by 
 								<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IIndentationInformation.java?root=Modeling_Project&view=co" target="_new">IIndentationInformation</a>. The default implementation consults Eclipse&rsquo;s 
-								<code class="code">PreferenceStore</code>.
+								<span class="emphasis"><em>PreferenceStore</em></span>.
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">setIndentationDecrement()</code> decrements indentation by one unit.
+<span class="emphasis"><em>setIndentationDecrement()</em></span> decrements indentation by one unit.
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">setLinewrap()</code>: Inserts a line-wrap at this position.
+<span class="emphasis"><em>setLinewrap()</em></span>: Inserts a line-wrap at this position.
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">setLinewrap(int count)</code>: Inserts 
-								<code class="code">count</code> numbers of line-wrap at this position.
+<span class="emphasis"><em>setLinewrap(int count)</em></span>: Inserts 
+								<span class="emphasis"><em>count</em></span> numbers of line-wrap at this position.
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">setLinewrap(int min, int default, int max)</code>: If the amount of line-wraps that have been at this position before formatting can be determined (i.g. when a node model is present), then the amount of of line-wraps is adjusted to be within the interval [
-								<code class="code">min</code>, 
-								<code class="code">max</code>] and is then reused. In all other cases 
-								<code class="code">default</code> line-wraps are inserted. Example: 
-								<code class="code">setLinewrap(0, 0, 1)</code> will preserve existing line-wraps, but won&rsquo;t allow more than one line-wrap between two tokens.    
+<span class="emphasis"><em>setLinewrap(int min, int default, int max)</em></span>: If the amount of line-wraps that have been at this position before formatting can be determined (i.g. when a node model is present), then the amount of of line-wraps is adjusted to be within the interval [
+								<span class="emphasis"><em>min</em></span>, 
+								<span class="emphasis"><em>max</em></span>] and is then reused. In all other cases 
+								<span class="emphasis"><em>default</em></span> line-wraps are inserted. Example: 
+								<span class="emphasis"><em>setLinewrap(0, 0, 1)</em></span> will preserve existing line-wraps, but won&rsquo;t allow more than one line-wrap between two tokens.    
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">setNoLinewrap()</code>: Suppresses automatic line wrap, which may occur when the line&rsquo;s length exceeds the defined limit.
+<span class="emphasis"><em>setNoLinewrap()</em></span>: Suppresses automatic line wrap, which may occur when the line&rsquo;s length exceeds the defined limit.
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">setSpace(String space)</code>: Inserts the string 
-								<code class="code">space</code> at this position. If you use this to insert something else than whitespace, tabs or newlines, a small puppy will die somewhere in this world.
+<span class="emphasis"><em>setSpace(String space)</em></span>: Inserts the string 
+								<span class="emphasis"><em>space</em></span> at this position. If you use this to insert something else than whitespace, tabs or newlines, a small puppy will die somewhere in this world.
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">setNoSpace()</code>: Suppresses the whitespace between tokens at this position. Be aware that between some tokens a whitespace is required to maintain a valid concrete syntax. 
+<span class="emphasis"><em>setNoSpace()</em></span>: Suppresses the whitespace between tokens at this position. Be aware that between some tokens a whitespace is required to maintain a valid concrete syntax. 
 							</p>
 </li>
 </ul>
@@ -308,20 +308,71 @@
 <li class="listitem">
 <p>
 								
-<code class="code">List&lt;Keyword&gt; findKeywords(String... keywords)</code> returns all keywords that equal one of the parameters.
+<span class="emphasis"><em>findKeywords(String... keywords)</em></span> returns all keywords that equal one of the parameters.
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<code class="code">List&lt;Pair&lt;Keyword, Keyword&gt;&gt; findKeywordPairs(String leftKw, String rightKw)</code>: returns tuples of keywords from the same grammar rule. Pairs are matched nested and sequentially.  Example: for 
-								<code class="code">Rule: '(' name=ID ('(' foo=ID ')') ')' | '(' bar=ID ')'</code> 
-								<code class="code">findKeywordPairs("(", ")")</code> returns three pairs.
+<span class="emphasis"><em>findKeywordPairs(String leftKw, String rightKw)</em></span>: returns tuples of keywords from the same grammar rule. Pairs are matched nested and sequentially.  Example: for 
+								<span class="emphasis"><em>Rule: &lsquo;(&rsquo; name=ID (&lsquo;(&rsquo; foo=ID &lsquo;)&rsquo;) &lsquo;)&rsquo; | &lsquo;(&rsquo; bar=ID ')'</em></span> 
+								<span class="emphasis"><em>findKeywordPairs(&ldquo;(&rdquo;, &ldquo;)&rdquo;)</em></span> returns three pairs.
 							</p>
 </li>
 </ul>
 </div>
 </div>
+</div>
+<div class="section" title="Fragment Provider (referencing Xtext models from other EMF artifacts)">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="fragmentProvider"></a>Fragment Provider (referencing Xtext models from other EMF artifacts)</h3>
+</div>
+</div>
+</div>
+<p>Although inter-Xtext linking is not done by URIs, you may want to be able to reference your 
+					<code class="code">EObject</code> from non-Xtext models.
+					In those cases URIs are used, which are made up of a part identifying the resource. Each 
+					<code class="code">EObject</code> contained in a resource can be identified by a so called 
+					<span class="emphasis"><em>fragment</em></span>.
+				</p>
+<p>A fragment is a part of an EMF URI and needs to be unique per resource.</p>
+<p>The generic XMI resource shipped with EMF provides a generic path-like computation of fragments. With an XMI or other binary-like serialization it is also common and possible to use UUIDs.</p>
+<p>However with a textual concrete syntax we want to be able to compute fragments out of the given information. We don&rsquo;t want to force people to use UUIDs (i.e. synthetic identifiers) or relative generic paths (very fragile), in order to refer to 
+					<code class="code">EObjects</code>.
+				</p>
+<p>Therefore one can contribute a so called 
+					<code class="code">IFragmentProvider</code> per language.
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;interface&nbsp;IFragmentProvider&nbsp;extends&nbsp;ILanguageService&nbsp;{<br>
+&nbsp;<br>
+&nbsp;&nbsp;/**<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;Computes&nbsp;the&nbsp;local&nbsp;ID&nbsp;of&nbsp;the&nbsp;given&nbsp;object.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;obj<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;EObject&nbsp;to&nbsp;compute&nbsp;the&nbsp;fragment&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;the&nbsp;fragment,&nbsp;which&nbsp;can&nbsp;be&nbsp;an&nbsp;arbitrary&nbsp;string&nbsp;but&nbsp;must&nbsp;be&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unique&nbsp;within&nbsp;a&nbsp;resource.&nbsp;Return&nbsp;null&nbsp;to&nbsp;use&nbsp;default&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;implementation<br>
+&nbsp;&nbsp;&nbsp;*/<br>
+&nbsp;&nbsp;String&nbsp;getFragment(EObject&nbsp;obj);<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;/**<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;Locates&nbsp;an&nbsp;EObject&nbsp;in&nbsp;a&nbsp;resource&nbsp;by&nbsp;its&nbsp;fragment.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;the&nbsp;EObject&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*/<br>
+&nbsp;&nbsp;EObject&nbsp;getEObject(Resource&nbsp;resource,&nbsp;String&nbsp;fragment);<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>Note that the currently available default fragment provider does nothing (i.e. falls back to the default behavior of EMF).</p>
 </div>
 </body>
 </html>

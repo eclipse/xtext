@@ -120,7 +120,7 @@ Testing validators typicallally works as follows:
 # The test runs some choosen @Check-methods from the validator.
 # The test asserts whether the @Check-methods have raised the expected warnings and errors.
 
-To create models, you can either use EMF's _ResourceSet_ to load models from your hard disk or you can utilize the _<MyLanguage>Factory_ (which EMF generates for each _EPackage_) to construct the needed model elements manually. While the fist option has the advantages that you can edit your models in your textual concrete syntax, the second option has the advantage that you can create partial models.
+To create models, you can either use EMF's _ResourceSet_ to load models from your hard disk or you can utilize the _[MyLanguage]Factory_ (which EMF generates for each _EPackage_) to construct the needed model elements manually. While the fist option has the advantages that you can edit your models in your textual concrete syntax, the second option has the advantage that you can create partial models.
 
 To run the @Check-methods and ensure they raise the intended errors and warnings, you can utilize ${org.eclipse.xtext/src/org.eclipse.xtext.validation.ValidatorTester} as shown by the following example:
 

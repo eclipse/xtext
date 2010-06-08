@@ -365,7 +365,7 @@ look like when using the newly introduced concepts:
 
 bc.. package my.types {
   datatype String
-  datatype Bool
+  datatype Boolean
 }
 
 package my.entities {
@@ -374,7 +374,7 @@ package my.entities {
   
   entity Session {
     title: String
-    isTutorial : Bool
+    isTutorial : Boolean
   }
 
   entity Conference {

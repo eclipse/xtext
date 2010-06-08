@@ -12,15 +12,15 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Setup within Eclipse-Equinox (OSGi)</h1>
 <p>Within Eclipse we have a generated 
-				<code class="code">Activator</code>, which creates a Guice injector using the 
+				<span class="emphasis"><em>Activator</em></span>, which creates a Guice injector using the 
 				<a class="ulink" href="guicemodules" target="_new">modules</a>.
 				In addition an 
-				<code class="code">IExecutableExtensionFactory</code> is generated for each language, which is used to create 
-				<code class="code">ExecutableExtensions</code>.
+				<span class="emphasis"><em>IExecutableExtensionFactory</em></span> is generated for each language, which is used to create 
+				<span class="emphasis"><em>ExecutableExtensions</em></span>.
 				This means that everything which is created via extension points is managed by Guice as well, i.e. you can declare dependencies and get them injected upon creation. 
 			</p>
 <p>The only thing you have to do in order to use this factory is to prefix the class with the factory 
-				<code class="code">&lt;MyLanguageName&gt;ExecutableExtensionFactory</code> name followed by a colon.
+				<span class="emphasis"><em>ExecutableExtensionFactory</em></span> name followed by a colon.
 			</p>
 <div class="literallayout">
 <p>

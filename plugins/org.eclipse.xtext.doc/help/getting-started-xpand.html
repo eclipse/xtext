@@ -7,142 +7,105 @@
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="getting-started.html" title="Getting Started">
 <link rel="prev" href="processing_Xtext_models.html" title="Processing Xtext models">
-<link rel="next" href="Wherenext.html" title="Where next?">
+<link rel="next" href="grammarLanguage.html" title="The Grammar Language">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Writing a code generator</h1>
-<p>In this part of the tutorial, we will write a code generator that is capable of processing the models created with the DSL editor you developed in the previous section.</p>
-<div class="section" title="Creating the main template">
+<p>In the previous section we&rsquo;ve seen how to process Xtext files in general (e.g. with Java). 
+				If you need late binding loading models dynamically and interpreting them is a good idea. 
+				If you do not need late binding, code generation is a viable option which is widely used to make models executable. </p>
+<p>You could of course use Java to do the code generation, but unfortunately Java doesn&rsquo;t support this task very well.
+				Therefore we use a language specialized on code generation: M2T Xpand.</p>
+<div class="section" title="Xpand and MWE2">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="Creatingthemaintemplate"></a>Creating the main template </h3>
+<a name="XpandandMWE2"></a>Xpand and MWE2</h3>
 </div>
 </div>
 </div>
-<p>One of the major goals of model driven software development is to raise the level of abstraction. The concepts in your meta model usually map to several artifacts in your source code. In our sample, we will generate the following things for each entity:</p>
-<div class="itemizedlist">
-<ul class="itemizedlist" type="disc">
-<li class="listitem">
-<p>a data access object (DAO), capable of loading and storing the entities</p>
-</li>
-<li class="listitem">
-<p>a class holding all the attributes of the entity, annotated with JPA annotations</p>
-</li>
-</ul>
-</div>
-<p>To provide for a better overview and to easier manage our code templates, we will choose the following template structure:</p>
-<div class="itemizedlist">
-<ul class="itemizedlist" type="disc">
-<li class="listitem">
-<p>Main.xpt &ndash; the main entry point, will dispatch to all other templates</p>
-</li>
-<li class="listitem">
-<p>DAO.xpt &ndash; will generate the 
-							<span class="emphasis"><em>DAO</em></span> class
-						</p>
-</li>
-<li class="listitem">
-<p>Entity.xpt &ndash; will generate the 
-							<span class="emphasis"><em>Entity</em></span> class
-						</p>
-</li>
-</ul>
-</div>
-<p>In the project navigator, open the  folder 
-					<span class="emphasis"><em>org.eclipse.xtext.example.domainmodel.generator/src/templates</em></span> and delete the files 
-					<span class="emphasis"><em>Template.xpt</em></span> and 
-					<span class="emphasis"><em>Extensions.ext</em></span>. Then right click on the same folder and select 
-					<span class="emphasis"><em>New -&gt; Other... -&gt; Xpand Template</em></span>. Name the new template 
-					<code class="code">Main.xpt</code> and click on 
-					<span class="emphasis"><em>Finish</em></span>.
+<p>Xpand is also part of Eclipse and ships with its own documentation, so we don&rsquo;t need to explain all the details here, but
+					rather want to point you to the existing documentation. Instead this chapter is about providing some information about how to
+					 use Xtext and Xpand together. </p>
+<p>The other technology we are going to use here is the 
+					<a class="link" href="MWE2.html" title="MWE2">Modeling Workflow Engine 2</a>. It is used to describe the generation workflow.
+					That is how and which models should be loaded, how they should be validated post-processed and where and how code generation should take place.
 				</p>
-<p>First, we need to import the meta model, as we&rsquo;re going to be working with the concepts from the meta model:</p>
-<div class="literallayout">
-<p>
-<code class="code">&laquo;IMPORT&nbsp;domainmodel&raquo;<br>
-
-</code>
-</p>
-</div>
-<p>Next, we need to define a main template which will be invoked by the code generator. This template will then dispatch to two sub templates, 
-					<code class="code">DAO::dao</code> and 
-					<code class="code">Entity::entity</code>: 
+<p>This section is based on the 
+					<a class="link" href="getting-started.html#getting-started-xtext" title="Creating a DSL">Getting Started</a> section and uses the code generator project which is created by Xtext&rsquo;s project wizard.
 				</p>
-<div class="literallayout">
-<p>
-<code class="code">&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Entity&raquo;<br>
-&nbsp;&nbsp;&laquo;EXPAND&nbsp;DAO::dao&raquo;<br>
-&nbsp;&nbsp;&laquo;EXPAND&nbsp;Entity::entity&raquo;<br>
-&laquo;ENDDEFINE&raquo;<br>
-
-<br>
-
-</code>
-</p>
 </div>
-<div class="literallayout">
-<p>
-<code class="code">&laquo;IMPORT&nbsp;domainmodel&raquo;<br>
-&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Entity&raquo;<br>
-&nbsp;&nbsp;&laquo;EXPAND&nbsp;DAO::dao&raquo;<br>
-&nbsp;&nbsp;&laquo;EXPAND&nbsp;Entity::entity&raquo;<br>
-&laquo;ENDDEFINE&raquo;<br>
-
-<br>
-
-<br>
-
-</code>
-</p>
-</div>
-</div>
-<div class="section" title="Creating the template for the entity">
+<div class="section" title="The empty generator project">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="Creatingthetemplatefortheentity"></a>Creating the template for the entity</h3>
+<a name="Theemptygeneratorproject"></a>The empty generator project</h3>
 </div>
 </div>
 </div>
-<p>Every data-oriented application needs a bunch of classes to hold the data. Usually referred to as entities, these classes are POJOs in our case. So, let&rsquo;s now create a template which helps us to create POJOs from our model.</p>
-<p>Please add another Xpand template to your project by selecting 
-					<span class="emphasis"><em>File -&gt; New -&gt; Other ... -&gt; Xpand Template</em></span>. Name the new file 
-					<code class="code">Entity.xpt</code>, making sure to save it to the same folder as 
-					<code class="code">Main.xpt</code>.
-				</p>
-<p>Add the following code to 
-					<code class="code">Entity.xpt</code>:
+<p>Previously when we created the projects to develop the domain model language, we had checked the option &ldquo;create generator project&rdquo; in the wizard, which as 
+					a result created a third project for us in the workspace. If you&rsquo;ve followed along you should have a project called 
+					&lsquo;org.eclipse.xtext.example.domainmodel.generator&rsquo; in your workspace. It should look like shown in the following screenshot:</p>
+<p>
+					
+</p>
+<div class="mediaobject">
+<img src="images/generator-project.png"></div>
+<p>
+				
+</p>
+</div>
+<div class="section" title="Replacing the example model file (1)">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Replacingtheexamplemodelfile1"></a>Replacing the example model file (1)</h3>
+</div>
+</div>
+</div>
+<p>The four files shown in the image above are very simple stubs generated for the &lsquo;Hello World&rsquo;-language the wizard creates as a starting point. 
+					We&rsquo;ll have to adapt them to match the domain model language we have developed in the 
+					<a class="link" href="getting-started.html#getting-started-xtext" title="Creating a DSL">getting started section</a>. The first 
+					thing we should do is open up the example model file (1) and replce its contents with an instance of the domain model language. To do so 
+					copy and paste the following into the editor:
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">&laquo;IMPORT&nbsp;domainmodel&raquo;<br>
+<code class="code">package&nbsp;java.lang&nbsp;{<br>
+&nbsp;&nbsp;datatype&nbsp;String<br>
+&nbsp;&nbsp;datatype&nbsp;Boolean<br>
+}<br>
 
 <br>
-&laquo;DEFINE&nbsp;entity&nbsp;FOR&nbsp;Entity&raquo;<br>
-&nbsp;&nbsp;&laquo;FILE&nbsp;this.name&nbsp;+&nbsp;".java"&raquo;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;this.name&raquo;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;EXPAND&nbsp;feature&nbsp;FOREACH&nbsp;this.features&raquo;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;&laquo;ENDFILE&raquo;<br>
-&laquo;ENDDEFINE&raquo;<br>
-
-<br>
-&laquo;DEFINE&nbsp;feature&nbsp;FOR&nbsp;Feature&raquo;<br>
-&nbsp;&nbsp;private&nbsp;&laquo;this.type.referenced.name&raquo;&nbsp;&laquo;this.name&raquo;;<br>
-
-<br>
-&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;this.name.toFirstUpper()&raquo;(&laquo;this.type.referenced.name&raquo;&nbsp;&laquo;this.name&raquo;)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;this.name&raquo;&nbsp;=&nbsp;&laquo;this.name&raquo;;<br>
+package&nbsp;my.entities&nbsp;{<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;import&nbsp;java.lang.*<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;entity&nbsp;Session&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br>
+&nbsp;&nbsp;&nbsp;&nbsp;isTutorial&nbsp;:&nbsp;Boolean<br>
 &nbsp;&nbsp;}<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;&laquo;this.type.referenced.name&raquo;&nbsp;get&laquo;this.name.toFirstUpper()&raquo;()&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;this.&laquo;this.name&raquo;;<br>
+&nbsp;&nbsp;entity&nbsp;Conference&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;:&nbsp;String<br>
+&nbsp;&nbsp;&nbsp;&nbsp;attendees&nbsp;:&nbsp;Person*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;speakers&nbsp;:&nbsp;Speaker*<br>
 &nbsp;&nbsp;}<br>
-&laquo;ENDDEFINE&raquo;<br>
+
+<br>
+&nbsp;&nbsp;entity&nbsp;Person&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;:&nbsp;String<br>
+&nbsp;&nbsp;}<br>
+
+<br>
+&nbsp;&nbsp;entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sessions&nbsp;:&nbsp;Session*<br>
+&nbsp;&nbsp;}<br>
+}&nbsp;<br>
 
 <br>
 
@@ -150,138 +113,280 @@
 </p>
 </div>
 </div>
-<div class="section" title="Creating the template for the DAO">
+<div class="section" title="The Modeling Workflow Engine file (2)">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="CreatingthetemplatefortheDAO"></a>Creating the template for the DAO</h3>
+<a name="TheModelingWorkflowEnginefile2"></a>The Modeling Workflow Engine file (2) </h3>
 </div>
 </div>
 </div>
-<p>To load entities from a database and save them back, we will need to write some entities, but again, this is something the generator can do for us.</p>
-<p>Create a template 
-					<code class="code">DAO.xpt</code> and insert this text:
-				</p>
+<p>As mentioned MWE2 is used to define and configure the generator process. Actually it is much more general and can be useful for a lot of other things as well.
+					Let&rsquo;s have a look at the MWE2 file as generated by the wizard:</p>
 <div class="literallayout">
 <p>
-<code class="code">&laquo;IMPORT&nbsp;domainmodel&raquo;<br>
+<code class="code">module&nbsp;workflow.DomainmodelGenerator<br>
 
 <br>
-&laquo;DEFINE&nbsp;dao&nbsp;FOR&nbsp;Entity&raquo;<br>
-&nbsp;&nbsp;&laquo;FILE&nbsp;this.name&nbsp;+&nbsp;"DAO.java"&raquo;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;java.util.Collection;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;org.springframework.orm.hibernate3.support.HibernateDaoSupport;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;this.name&raquo;DAO<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;HibernateDaoSupport&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;EXPAND&nbsp;crud&nbsp;FOR&nbsp;this&raquo;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;&laquo;ENDFILE&raquo;<br>
-&laquo;ENDDEFINE&raquo;<br>
+import&nbsp;org.eclipse.emf.mwe.utils.*<br>
 
 <br>
-&laquo;DEFINE&nbsp;crud&nbsp;FOR&nbsp;Entity&raquo;<br>
-&nbsp;&nbsp;public&nbsp;&laquo;this.name&raquo;&nbsp;load(Long&nbsp;id)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(&laquo;this.name&raquo;)getHibernateTemplate().get(&laquo;this.name&raquo;.class,&nbsp;id);<br>
-&nbsp;&nbsp;}<br>
+var&nbsp;targetDir&nbsp;=&nbsp;"src-gen"<br>
+var&nbsp;fileEncoding&nbsp;=&nbsp;"ISO-8859-1"<br>
+var&nbsp;modelPath&nbsp;=&nbsp;"src/model"<br>
 
 <br>
-&nbsp;&nbsp;@SuppressWarnings("unchecked")<br>
-&nbsp;&nbsp;public&nbsp;Collection&lt;&laquo;this.name&raquo;&gt;&nbsp;loadAll()&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;getHibernateTemplate().loadAll(&laquo;this.name&raquo;.class);<br>
-&nbsp;&nbsp;}&nbsp;&nbsp;<br>
+Workflow&nbsp;{<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;&laquo;this.name&raquo;&nbsp;create(&laquo;this.name&raquo;&nbsp;entity)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(&laquo;this.name&raquo;)&nbsp;getHibernateTemplate().save(entity);<br>
-&nbsp;&nbsp;}<br>
+	component&nbsp;=&nbsp;org.eclipse.xtext.mwe.Reader&nbsp;{<br>
+		//&nbsp;lookup&nbsp;all&nbsp;resources&nbsp;on&nbsp;the&nbsp;classpath<br>
+		//&nbsp;useJavaClassPath&nbsp;=&nbsp;true<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;void&nbsp;update(&laquo;this.name&raquo;&nbsp;entity)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;getHibernateTemplate().update(entity);<br>
-&nbsp;&nbsp;}<br>
+		//&nbsp;or&nbsp;define&nbsp;search&nbsp;scope&nbsp;explicitly<br>
+		path&nbsp;=&nbsp;modelPath<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;void&nbsp;remove(&laquo;this.name&raquo;&nbsp;entity)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;getHibernateTemplate().delete(entity);<br>
-&nbsp;&nbsp;}<br>
-&laquo;ENDDEFINE&raquo;<br>
-
-<br>
-
-</code>
-</p>
-</div>
-</div>
-<div class="section" title="Adjusting the generator workflow">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-<a name="Adjustingthegeneratorworkflow"></a>Adjusting the generator workflow</h3>
-</div>
-</div>
-</div>
-<p>The generator workflow 
-					<code class="code">org.eclipse.xtext.example.domainmodel.generator/src/workflow/EntitiesGenerator.mwe2</code>  needs some adjustment to suit our language. First, make sure the Reader offers 
-					<code class="code">Entity</code> objects, by changing the 
-					<code class="code">type</code> assignment in the 
-					<code class="code">SlotEntry</code> configuration: 
-				</p>
-<div class="literallayout">
-<p>
-<code class="code">load&nbsp;=&nbsp;{<br>
-			slot&nbsp;=&nbsp;"model"<br>
-			type&nbsp;=&nbsp;"Entity"<br>
+		//&nbsp;this&nbsp;class&nbsp;will&nbsp;be&nbsp;generated&nbsp;by&nbsp;the&nbsp;xtext&nbsp;generator&nbsp;<br>
+		register&nbsp;=&nbsp;org.eclipse.xtext.example.DomainmodelStandaloneSetup&nbsp;{}<br>
+		load&nbsp;=&nbsp;{<br>
+			slot&nbsp;=&nbsp;"greetings"<br>
+			type&nbsp;=&nbsp;"Greeting"<br>
 		}<br>
+	}<br>
 
 <br>
-
-</code>
-</p>
-</div>
-<p>Second, invoke the right template 
-					<code class="code">Main.xpt</code> by changing the 
-					<code class="code">expand</code> assignment:
-				</p>
-<div class="literallayout">
-<p>
-<code class="code">	component&nbsp;=&nbsp;org.eclipse.xpand2.Generator&nbsp;{<br>
-		metaModel&nbsp;=&nbsp;org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel&nbsp;{}<br>
-		expand&nbsp;=&nbsp;"templates::Main::main&nbsp;FOREACH&nbsp;model"<br>
+	component&nbsp;=&nbsp;org.eclipse.xpand2.Generator&nbsp;{<br>
+		expand&nbsp;=&nbsp;"templates::Template::main&nbsp;FOREACH&nbsp;greetings"<br>
 		outlet&nbsp;=&nbsp;{<br>
 			path&nbsp;=&nbsp;targetDir<br>
 		}<br>
 		fileEncoding&nbsp;=&nbsp;fileEncoding<br>
 	}<br>
+}<br>
 
 <br>
 
 </code>
 </p>
 </div>
-<p>In this configuration, the generator will generate code form all models in the 
-					<span class="emphasis"><em>src/model</em></span> folder. Delete everything in there and create a new file 
-					<code class="code">Example.dmodel</code>, fill it with the contents of the 
-					<a class="link" href="getting-started.html#getting-started-xtext" title="Creating a DSL">example model</a> and save.    
+<p>The first line just declares a name for this workflow file. Any qualified Java identifier is allowed, but it should 
+					match the file name of the MWE2 file (and in future versions we might make this mandatory). After that you see an import statement.
+					MWE2 references java classes and to make that convenient, you can specify imports after the module declaration. Next up we 
+					see a couple of vars are declared. Such vars can be overridden when invoking a workflow file. </p>
+<p>The important part is the 
+					<span class="emphasis"><em>Workflow</em></span> part. There we declare an instance of 
+					<span class="emphasis"><em>org.eclipse.emf.mwe.utils.Workflow</em></span> and add two instances to the 'component'
+					property. The first one is a 
+					<span class="emphasis"><em>Reader</em></span> which is used to initialize Xtext languages, read in Xtext files, and fetch specific elements from those models in order to
+					make them available to following workflow components (such as the declared Generator). 
 				</p>
+<p>Xtext language initialization is node by specifying any number of IStandaloneSetup implementations. In our case the generated DomainModelStandaloneSetup is
+					registered, which makes sure that the infrastructure of your domain model language is set up properly. IF you have multiple languages just add additional assignments for
+					each language.</p>
+<p>You have to tell the 
+					<span class="emphasis"><em>Reader</em></span> which pathes to scan for model files. In this particular case we just specified one path. Another convenient option is to
+					reuse the Java Classpath, as suggested in the comments.
+				</p>
+<p>The 
+					<span class="emphasis"><em>load</em></span> section specifies which elements to fetch from the loaded resources. In this case we state that we want all elements of type 
+					<span class="emphasis"><em>Greeting</em></span>.
+					Note that this is completely file agnostic, it will provide you with all elements from all files the Reader could find on the specified pathes.
+					The slot name is the name by which other workflow components can access the stored elements.
+				</p>
+<p>The second workflow component is an instance of 
+					<span class="emphasis"><em>org.eclipse.xpand2.Generator</em></span>, which is the MWE2 facade to the Xpand template language. 
+					The Xpand generator needs to know which template to invoke for which models. Qualified names in Xpand are separated by a double colon &lsquo;::&rsquo;. That
+					is the name &lsquo;templates::Template::main&rsquo; points to the definition 
+					<span class="emphasis"><em>main</em></span> in the file 
+					<span class="emphasis"><em>templates/Template.xpt</em></span> on the java class path. The second part
+
+					<span class="emphasis"><em>FOREACH greetings</em></span> references the 
+					<span class="emphasis"><em>greetings</em></span> slot which has previously been populated by the reader component.
+				</p>
+<p>An outlet describes where to put the generated sources. In Xpand there is a file-statement which refers to outlets. If you only have one outlet 
+					you don&rsquo;t have to give it a name, but you need to tell where on teh file system the root folder for that outlet is. I.e. you specifiy where the generated code should go.
+					Oulets allow you to specify a couple of other things as well. As MWE2 just instantiates Java objects, you can go to the Java code of 
+					<span class="emphasis"><em>org.eclipse.xpand2.output.Outlet</em></span>
+					 in order to find out (see the adder and setter methods). 
+					about the different options.
+				</p>
+<p>Now that we understood the most important things in that file we have to adapt it to match our domain model language. We only have to change the type
+					which is used to fetch and filter the elements in the load section. We want to generate code for entities, therefore we change it to Entity. We also should change the slot&rsquo;s 
+					name of course:</p>
+<div class="literallayout">
+<p>
+<code class="code">module&nbsp;workflow.DomainmodelGenerator<br>
+
+<br>
+import&nbsp;org.eclipse.emf.mwe.utils.*<br>
+
+<br>
+var&nbsp;targetDir&nbsp;=&nbsp;"src-gen"<br>
+var&nbsp;fileEncoding&nbsp;=&nbsp;"ISO-8859-1"<br>
+var&nbsp;modelPath&nbsp;=&nbsp;"src/model"<br>
+
+<br>
+Workflow&nbsp;{<br>
+
+<br>
+	component&nbsp;=&nbsp;org.eclipse.xtext.mwe.Reader&nbsp;{<br>
+		//&nbsp;lookup&nbsp;all&nbsp;resources&nbsp;on&nbsp;the&nbsp;classpath<br>
+		//&nbsp;useJavaClassPath&nbsp;=&nbsp;true<br>
+
+<br>
+		//&nbsp;or&nbsp;define&nbsp;search&nbsp;scope&nbsp;explicitly<br>
+		path&nbsp;=&nbsp;modelPath<br>
+
+<br>
+		//&nbsp;this&nbsp;class&nbsp;will&nbsp;be&nbsp;generated&nbsp;by&nbsp;the&nbsp;xtext&nbsp;generator&nbsp;<br>
+		register&nbsp;=&nbsp;org.eclipse.xtext.example.DomainmodelStandaloneSetup&nbsp;{}<br>
+		load&nbsp;=&nbsp;{<br>
+			slot&nbsp;=&nbsp;"entities"&nbsp;//changed&nbsp;to&nbsp;entities<br>
+			type&nbsp;=&nbsp;"Entity"&nbsp;&nbsp;&nbsp;//changed&nbsp;to&nbsp;Entity<br>
+		}<br>
+	}<br>
+
+<br>
+	component&nbsp;=&nbsp;org.eclipse.xpand2.Generator&nbsp;{<br>
+		expand&nbsp;=&nbsp;"templates::Template::main&nbsp;FOREACH&nbsp;entities"&nbsp;//changed&nbsp;to&nbsp;entities<br>
+		outlet&nbsp;=&nbsp;{<br>
+			path&nbsp;=&nbsp;targetDir<br>
+		}<br>
+		fileEncoding&nbsp;=&nbsp;fileEncoding<br>
+	}<br>
+}<br>
+
+<br>
+
+</code>
+</p>
 </div>
-<div class="section" title="Running the generator">
+</div>
+<div class="section" title="Using Xpand (3) and Xtend (4) for code generation">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="Runningthegenerator"></a>Running the generator</h3>
+<a name="UsingXpand3andXtend4forcodegeneration"></a>Using Xpand (3) and Xtend (4) for code generation</h3>
 </div>
 </div>
 </div>
-<p>In order to invoke the generator, select 
-					<code class="code">DomainmodelGenerator.mwe</code> (in 
-					<code class="code">org.eclipse.xtext.example.domainmodel.generator/src/workflow/</code>) and choose 
-					<span class="emphasis"><em>Run As -&gt; MWE Workflow</em></span> from the context menu. You&rsquo;ll see a bunch of log messages in the console view, and after a few seconds, you&rsquo;ll find a number of just generated files in 
-					<code class="code">org.eclipse.xtext.example.domainmodel.generator/src-gen</code>.
+<p>The MWE2 file invokes an Xpand definition called &lsquo;main&rsquo; located in &lsquo;templates/Template.xpt&rsquo;. 
+					Please open that file and replace its contents with the following text:</p>
+<div class="literallayout">
+<p>
+<code class="code">&laquo;IMPORT&nbsp;org::eclipse::xtext::example::domainmodel&raquo;<br>
+&laquo;EXTENSION&nbsp;templates::Extensions&raquo;<br>
+
+<br>
+&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Entity-&raquo;<br>
+&laquo;FILE&nbsp;qualifiedName().replaceAll("\\.","/")+".java"-&raquo;<br>
+package&nbsp;&laquo;packageName()&raquo;;<br>
+
+<br>
+public&nbsp;class&nbsp;&laquo;name&raquo;&nbsp;{<br>
+	&laquo;EXPAND&nbsp;property&nbsp;FOREACH&nbsp;features&raquo;<br>
+}<br>
+&laquo;ENDFILE&raquo;<br>
+&laquo;ENDDEFINE&raquo;<br>
+
+<br>
+&laquo;DEFINE&nbsp;property&nbsp;FOR&nbsp;Feature&raquo;<br>
+	private&nbsp;&laquo;type.referenced.qualifiedName()&raquo;&nbsp;&laquo;name&raquo;;<br>
+	
+<br>
+	public&nbsp;void&nbsp;set&laquo;name.toFirstUpper()&raquo;(&laquo;type.referenced.qualifiedName()&raquo;&nbsp;&laquo;name&raquo;)&nbsp;{<br>
+	&nbsp;&nbsp;this.&laquo;name&raquo;&nbsp;=&nbsp;&laquo;name&raquo;;<br>
+	}&nbsp;<br>
+	public&nbsp;&laquo;type.referenced.qualifiedName()&raquo;&nbsp;get&laquo;name.toFirstUpper()&raquo;()&nbsp;{<br>
+	&nbsp;&nbsp;return&nbsp;&laquo;name&raquo;;<br>
+	}&nbsp;<br>
+&laquo;ENDDEFINE&raquo;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>You might get a couple of error markers, because the Xpand file references another file (
+					<span class="emphasis"><em>Extensions.ext</em></span> (4)) which has not yet been updated. 
+					Let&rsquo;s ignore this for a moment and have a lok at the general structure of an Xpand template file. In the first line we import the namespace (i.e. Java package)
+					of the generated AST classes, that is Entity and Feature, we want to refer to in the generator. Next up the previously mentioned Xtend file is imported. An Xtend file defines 
+					functions which can be used in Xpand. 
 				</p>
-<p>Please note that you&rsquo;ll get a number of compile-time errors now, as the DAO classes depend on Hibernate. To get rid of them, just download Hibernate from http://www.hibernate.org and add it to the build class path of the project.</p>
+<p>The rest of the file contains two so called definitions. A definition in Xpand is similar to a function in that it can be called, it has a name and it is defined
+					for one or more arguments. The general syntax is as follows:</p>
+<div class="literallayout">
+<p>
+<code class="code">&laquo;DEFINE&nbsp;name(ArgType1&nbsp;arg1,&nbsp;ArgType2&nbsp;arg2)&nbsp;FOR&nbsp;MainArgType&raquo;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>Where 
+					<span class="emphasis"><em>MainArgType</em></span> is bound to the variable name 
+					<span class="emphasis"><em>this</em></span> which can like in Java be omitted when referring to.
+				</p>
+<p>The first definition 
+					<span class="emphasis"><em>main</em></span> is defined for 
+					<span class="emphasis"><em>Entity</em></span> and is the one invoked from the previously discussed MWE2 file (2). 
+					The first thing the definition does is opening a file using the 
+					<span class="emphasis"><em>qualifiedName()</em></span> of the given 
+					<span class="emphasis"><em>Entity</em></span>. 
+					The function 
+					<span class="emphasis"><em>qualifiedName()</em></span> should be declared in the referenced Xtend file (4). To do so open that file and replcae its
+					current contents by the following snippet:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">import&nbsp;org::eclipse::xtext::example::domainmodel;<br>
+
+<br>
+packageName(Type&nbsp;this)&nbsp;:<br>
+	qualifiedName(eContainer());<br>
+	
+<br>
+packageName(Void&nbsp;this)&nbsp;:&nbsp;null;<br>
+	
+<br>
+String&nbsp;qualifiedName(Object&nbsp;this)&nbsp;:&nbsp;null;<br>
+	
+<br>
+String&nbsp;qualifiedName(Type&nbsp;this)&nbsp;:&nbsp;<br>
+	packageName()==null?&nbsp;name&nbsp;:&nbsp;packageName()+"."+name;<br>
+	
+<br>
+String&nbsp;qualifiedName(PackageDeclaration&nbsp;this)&nbsp;:<br>
+	if&nbsp;qualifiedName(eContainer())==null&nbsp;<br>
+		then&nbsp;name<br>
+		else&nbsp;qualifiedName(eContainer())+'.'+name;<br>
+	
+<br>
+
+</code>
+</p>
+</div>
+<p>It defines the 
+					<span class="emphasis"><em>qualifiedName</em></span> function not only for 
+					<span class="emphasis"><em>Entity</em></span> but also generally for types. Note how it computes the qualified name by calling
+					qualifiedName() recursively on its eContainer(). Both Xpand and Xtend are based on the same expression language, which is statically typed and 
+					allows for very convenient navigation over object graphs and collections.
+				</p>
+<p>Back to the Xpand file (3) we see some static text which goes directly into the opened file. The EXPAND statement calls the other definition defined in this file.
+					It will effectively generate a java field and two accessor-methods for each 
+					<span class="emphasis"><em>Feature</em></span>. 
+				</p>
+<p>You&rsquo;ll now able able to run the generator by opening the context menu on the *.mwe2 file (2) and choose 
+					<span class="emphasis"><em>Run As-&gt;MWE2 Workflow</em></span>.
+					For more information on Xpand and Xtend see the corresponding language documentation (available through Eclipse Help). MWE2 is explained in detail 
+					in 
+					<a class="link" href="MWE2.html" title="MWE2">a later section</a>. 
+				</p>
 </div>
 </body>
 </html>

@@ -63,11 +63,11 @@ In total, this leads to five modules for a typical Xtext Language. They are visu
 
 h4(#guicemanualmodules). Modules intended for customization
 
-When the "generator":#generator runs the first time, it creates two modules named _<MyLanguage>RuntimeModule_ and _<MyLanguage>UIModule_. They are placed in the language's root-package in the _src/_-folder of the language's runtime-project and the language's UI-project. Both are initially empty and will never be overwritten by the generator. They are "intended for customization":#guicecustomize. By default, they extend a "generated module":#guicegeneratedmodule.  
+When the "generator":#generator runs the first time, it creates two modules named _[MyLanguage]RuntimeModule_ and _[MyLanguage]UIModule_. They are placed in the language's root-package in the _src/_-folder of the language's runtime-project and the language's UI-project. Both are initially empty and will never be overwritten by the generator. They are "intended for customization":#guicecustomize. By default, they extend a "generated module":#guicegeneratedmodule.  
 
 h4(#guicegeneratedmodule). Generated Modules
 
-The fully generated modules are called _Abstract<MyLanguage>RuntimeModule_ and _Abstract<MyLanguage>UiModule_ respectively. They contain all components which have been generated specifically for the language at hand. What goes into these modules depends on the fragments you use in the generator.
+The fully generated modules are called _Abstract[MyLanguage]RuntimeModule_ and _Abstract[MyLanguage]UiModule_ respectively. They contain all components which have been generated specifically for the language at hand. What goes into these modules depends on the fragments you use in the generator.
 
 *Note*: This modules are replaced on every subsequent execution of the generator. Don't put any custom code into them. Manually written code has go into the "concrete subclasses":#guicemanualmodules.
 
@@ -77,7 +77,7 @@ Finally the fully generated modules extend the ${org.eclipse.xtext/src/org.eclip
 
 h4(#guicecustomize). Changing Configuration
 
-We use the primary modules (_<MyLanguage>RuntimeModule_ and _<MyLanguage>UiModule_) in order to change the configuration. 
+We use the primary modules (_[MyLanguage]RuntimeModule_ and _[MyLanguage]UiModule_) in order to change the configuration. 
 These classes are initially empty and have been generated to allow customization.
 
 In order to provide a simple and convenient way, the default module extends the ${org.eclipse.xtext/src/org.eclipse.xtext.service.AbstractGenericModule}. 

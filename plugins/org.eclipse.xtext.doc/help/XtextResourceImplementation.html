@@ -1,0 +1,91 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>XtextResource Implementation</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="emf_integration.html" title="Integration with EMF and other EMF editors">
+<link rel="prev" href="emf_codegen.html" title="EMF code generation">
+<link rel="next" href="gmf_integration.html" title="Integration with GMF editors">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">XtextResource Implementation</h1>
+<p>Xtext provides an implementation of EMF&rsquo;s resource, the 
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&view=co" target="_new">XtextResource</a>. This does not only encapsulate the parser that converts text to an EMF model but also the serializer working the opposite direction. That way, an Xtext model just looks like any other Ecore-based model from the outside, making it amenable for the use by other EMF based tools. In fact, the Xpand templates in the generator plug-in created by the Xtext wizard do not make any assumption on the fact that the model is described in Xtext, and they would work fine with any model based on the same Ecore model of the language. So in the ideal case, you can switch the serialization format of your models to your self-defined DSL by just replacing the resource implementation used by your other modeling tools. 
+			</p>
+<p>
+				
+</p>
+<div class="mediaobject">
+<img src="images/emf-integration.png"></div>
+<p>
+			
+</p>
+<p>The generator fragment 
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java?root=Modeling_Project&view=co" target="_new">ResourceFactoryFragment</a> registers a factory for the 
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&view=co" target="_new">XtextResource</a> to EMF&rsquo;s resource factory registry, such that all tools using the default mechanism to resolve a resource implementation will automatically get that resource implementation.   
+			</p>
+<p>Using a self-defined textual syntax as the primary storage format has a number of advantages over the default XMI serialization, e.g.</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>You can use well-known and easy-to-use tools and techniques for manipulation, such as text editors, regular expressions, or stream editors.</p>
+</li>
+<li class="listitem">
+<p>You can use the same tools for version control as you use for source code. Merging and diffing is performed in a syntax the developer is familiar with. </p>
+</li>
+<li class="listitem">
+<p>It is impossible to break the model such that it cannot be reopened in the editor again. </p>
+</li>
+<li class="listitem">
+<p>Models can be fixed using the same tools, even if they have become incompatible with a new version of the Ecore model.</p>
+</li>
+</ul>
+</div>
+<p>Xtext targets easy to use and naturally feeling languages. It focuses on the lexical aspects of a language a bit more than on the semantic ones. As a consequence, a referenced Ecore model can contain more concepts than are actually covered by the Xtext grammar. As a result, not everything that is possibly expressed in the EMF model can be serialized back into a textual representation with regards to the grammar. So if you want to use Xtext to serialize your models as described above, it is good to have a couple of things in mind:</p>
+<div class="itemizedlist">
+<ul class="itemizedlist" type="disc">
+<li class="listitem">
+<p>Prefer optional rule calls (cardinality 
+						<span class="emphasis"><em>?</em></span> or 
+						<span class="emphasis"><em>*</em></span>) to mandatory ones (cardinality 
+						<span class="emphasis"><em>+</em></span> or default), such that missing references will not obstruct serialization. 
+					</p>
+</li>
+<li class="listitem">
+<p>You should not use an Xtext-Editor on the same model instance as a self-synchronizing other editor, e.g. a canonical GMF editor (see :#gmf_integration_stage_1 for details). The Xtext parser replaces re-parsed subtrees of the AST rather than modifying it, so elements will become stale. As the Xtext editor continuously re-parses the model on changes, this will happen rather often. It is safer to synchronize editors more loosely, e.g. on file changes. </p>
+</li>
+<li class="listitem">
+<p>Implement an 
+						<span class="emphasis"><em>IFragmentProvider</em></span>:#fragmentProvider to make the XtextResource return stable fragments for its contained elements, e.g. based on composite names rather than order of appearance.
+					</p>
+</li>
+<li class="listitem">
+<p>Implement an 
+						<span class="emphasis"><em>IQualifiedNameProvider</em></span> and an 
+						<span class="emphasis"><em>IScopeProvider</em></span>:#scoping to make the names of all linkable elements in cross-references unique. 
+					</p>
+</li>
+<li class="listitem">
+<p>Provide an 
+						<span class="emphasis"><em>IFormatter</em></span>:#formatting to improve the readability of the generated textual models.  
+					</p>
+</li>
+<li class="listitem">
+<p>Register an 
+						<span class="emphasis"><em>IReferableElementsUnloader</em></span> to turn deleted/replaced model elements into EMF proxies. Design the rest of your application such that it does never keep references to  
+						<span class="emphasis"><em>EObjects</em></span> or to cope with proxies. That will improve the stability of your application drastically.
+					</p>
+</li>
+<li class="listitem">
+<p>Xtext will register an EMF 
+						<span class="emphasis"><em>ResourceFactory</em></span>, so resources with the file extension you entered when generating the Xtext plug-ins will be automatically loaded in an 
+						<span class="emphasis"><em>XtextResource</em></span> when you use EMF&rsquo;s 
+						<span class="emphasis"><em>ResourceSet</em></span> API to load it.
+					</p>
+</li>
+</ul>
+</div>
+</body>
+</html>

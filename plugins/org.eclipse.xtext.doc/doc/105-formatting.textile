@@ -97,5 +97,5 @@ h4. Grammar Element Finders
 
 Sometimes, if a grammar contains many similar elements for which the same formatting instructions ought to apply, it can be tedious to specify them for each grammar element individually. The ${org.eclipse.xtext/src/org.eclipse.xtext.IGrammarAccess} provides convenience methods for this. The find methods are available for the grammar and for each parser rule.
 
-* _List<Keyword> findKeywords(String... keywords)_ returns all keywords that equal one of the parameters.
-* _List<Pair<Keyword, Keyword>> findKeywordPairs(String leftKw, String rightKw)_: returns tuples of keywords from the same grammar rule. Pairs are matched nested and sequentially.  Example: for _Rule: '(' name=ID ('(' foo=ID ')') ')' | '(' bar=ID ')'_ _findKeywordPairs("(", ")")_ returns three pairs.
+* _findKeywords(String... keywords)_ returns all keywords that equal one of the parameters.
+* _findKeywordPairs(String leftKw, String rightKw)_: returns tuples of keywords from the same grammar rule. Pairs are matched nested and sequentially.  Example: for _Rule: '(' name=ID ('(' foo=ID ')') ')' | '(' bar=ID ')'_ _findKeywordPairs("(", ")")_ returns three pairs.

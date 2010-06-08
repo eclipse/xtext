@@ -29,9 +29,10 @@
 </code>
 </p>
 </div>
-<p>declares the name of the grammar. Xtext leverages Java&rsquo;s class path mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond to the grammar name and have the file extension &lsquo;xtext&rsquo;. This means that the name has to be 
-					<code class="code">SecretCompartments.xtext</code> and must be placed in a package 
-					<code class="code">my.pack</code> somewhere on your project&rsquo;s class path.
+<p>declares the name of the grammar. Xtext leverages Java&rsquo;s class path mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond to the grammar name and have the file extension '
+					<span class="emphasis"><em>.xtext</em></span>'. This means that the name has to be 
+					<span class="emphasis"><em>SecretCompartments.xtext</em></span> and must be placed in a package 
+					<span class="emphasis"><em>my.pack</em></span> somewhere on your project&rsquo;s class path.
 				</p>
 <p>The first line is also used to declare any used language (for mechanism details see 
 					<a class="link" href="grammarMixins.html" title="Grammar Mixins">Grammar Mixins</a>).
@@ -46,7 +47,12 @@
 </div>
 </div>
 </div>
-<p>Xtext parsers instantiate Ecore models (aka meta models). An Ecore model basically consists of an EPackage containing EClasses, EDatatypes and EEnums.
+<p>Xtext parsers instantiate Ecore models (aka meta models). An Ecore model basically consists of an 
+					<span class="emphasis"><em>EPackage</em></span> containing 
+					<span class="emphasis"><em>EClasses</em></span>, 
+					<span class="emphasis"><em>EDatatypes</em></span> and 
+					<span class="emphasis"><em>EEnums</em></span>. See the 
+					<a class="link" href="emf_integration.html#model_metamodel" title="Model, Ecore Model, and Ecore">section on EMF</a> for more details.
 					Xtext can infer Ecore models from a grammar (see 
 					<a class="link" href="metamodelInference.html" title="Ecore model inference">Ecore model inference</a>) but it is also possible to instantiate existing Ecore models. You can even mix this and use multiple existing Ecore models and infer some others from one grammar. 
 				</p>
@@ -67,9 +73,11 @@
 </code>
 </p>
 </div>
-<p>That statement means: generate an EPackage with the name 
-						<code class="code">secretcompartment</code> and the nsURI 
-						<code class="code">http://www.eclipse.org/secretcompartment</code>. Actually these are the properties that are required to create an EPackage. 
+<p>That statement means: generate an 
+						<span class="emphasis"><em>EPackage</em></span> with the name 
+						<span class="emphasis"><em>secretcompartment</em></span> and the nsURI 
+						<span class="emphasis"><em>http://www.eclipse.org/secretcompartment</em></span>. Actually these are the properties that are required to create an 
+						<span class="emphasis"><em>EPackage</em></span>. 
 						The whole algorithm used to derive complete Ecore models from Xtext grammars is described in the section 
 						<a class="link" href="metamodelInference.html" title="Ecore model inference">Ecore model inference</a>.
 					</p>
@@ -83,7 +91,8 @@
 </div>
 </div>
 </div>
-<p>If you already have an existing EPackage, you can import it using either a namespace URI or a resource URI. An 
+<p>If you already have an existing 
+						<span class="emphasis"><em>EPackage</em></span>, you can import it using either a namespace URI or a resource URI. An 
 						<a class="ulink" href="http://www.ietf.org/rfc/rfc2396.txt" target="_new">URI</a> (Uniform Resource Identifier) provides a simple and extensible means for identifying an abstract or physical resource. For details about the EMF implementation of this concept, please see its 
 						<a class="ulink" href="http://help.eclipse.org/help32/topic/org.eclipse.emf.doc/references/javadoc/org/eclipse/emf/common/util/URI.html" target="_new">documentation</a>.
 					</p>
@@ -96,7 +105,9 @@
 </div>
 </div>
 </div>
-<p>You can import an existing EPackage with the following statement:</p>
+<p>You can import an existing 
+							<span class="emphasis"><em>EPackage</em></span> with the following statement:
+						</p>
 <div class="literallayout">
 <p>
 <code class="code">import&nbsp;'http://www.eclipse.org/secretcompartment'<br>
@@ -104,9 +115,11 @@
 </code>
 </p>
 </div>
-<p>Note that if you use a namespace URI, the corresponding EPackage needs to be installed into the workbench. Otherwise the editor cannot find it.
-							At runtime (i.e. when starting the generator) you need to make sure that the corresponding EPackage is registered in the 
-							<code class="code">EPackage.Registry.INSTANCE</code>. If you use MWE to drive your code generator, you need to add the following lines to your workflow file:
+<p>Note that if you use a namespace URI, the corresponding 
+							<span class="emphasis"><em>EPackage</em></span> needs to be installed into the workbench. Otherwise the editor cannot find it.
+							At runtime (i.e. when starting the generator) you need to make sure that the corresponding 
+							<span class="emphasis"><em>EPackage</em></span> is registered in the 
+							<span class="emphasis"><em>EPackage.Registry.INSTANCE</em></span>. If you use MWE to drive your code generator, you need to add the following lines to your workflow file:
 						</p>
 <div class="literallayout">
 <p>
@@ -120,7 +133,9 @@
 </code>
 </p>
 </div>
-<p>Using namespace URIs is typically only interesting when common Ecore models are used, such as Ecore itself or the UML meta model. If you&rsquo;re developing the EPackage together with the DSL but don&rsquo;t want to have it derived from the grammar for some reason, we suggest to use a resource URI.</p>
+<p>Using namespace URIs is typically only interesting when common Ecore models are used, such as Ecore itself. If you&rsquo;re developing the 
+							<span class="emphasis"><em>EPackage</em></span> together with the DSL but don&rsquo;t want to have it derived from the grammar for some reason, we suggest to use a resource URI.
+						</p>
 </div>
 <div class="section" title="Using resource URIs to import existing EPackages">
 <div class="titlepage">
@@ -131,11 +146,14 @@
 </div>
 </div>
 </div>
-<p>If the EPackage you want to use is somewhere in your workspace you should refer to it by a 
-							<code class="code">platform:/resource/</code>-URI.
+<p>If the 
+							<span class="emphasis"><em>EPackage</em></span> you want to use is somewhere in your workspace you should refer to it by a 
+							<span class="emphasis"><em>platform:/resource/</em></span>-URI.
 							Platform URIs are a special EMF concept, which allow for some kind of transparency between workspace projects and installed bundles. Consult the EMF documentation (we recommend the book) for details.
 						</p>
-<p>An import statement referring to an Ecore file by a platform:/resource/ URI looks like this: </p>
+<p>An import statement referring to an Ecore file by a 
+							<span class="emphasis"><em>platform:/resource/</em></span>-URI looks like this: 
+						</p>
 <div class="literallayout">
 <p>
 <code class="code">import&nbsp;'platform:/resource/project/src/my/pack/SecretCompartments.ecore'<br>
@@ -144,7 +162,8 @@
 </p>
 </div>
 <p>If you want to mix generated and imported Ecore models you&rsquo;ll have to configure the generator fragment in your MWE file responsible for generating the Ecore classes (
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">EcoreGeneratorFragment</a>) with resource URIs that point to the genmodels for the referenced Ecore models.
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">EcoreGeneratorFragment</a>) with resource URIs that point to the 
+							<a class="link" href="emf_codegen.html" title="EMF code generation">generator models</a> of the referenced Ecore models.
 							Example:
 						</p>
 <div class="literallayout">
@@ -170,7 +189,9 @@
 </div>
 </div>
 </div>
-<p>If you want to use multiple EPackages you need to specify aliases in the following way:</p>
+<p>If you want to use multiple 
+						<span class="emphasis"><em>EPackages</em></span> you need to specify aliases in the following way:
+					</p>
 <div class="literallayout">
 <p>
 <code class="code">generate&nbsp;secretcompartment&nbsp;'http://www.eclipse.org/secretcompartment'<br>
@@ -182,9 +203,16 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 </p>
 </div>
 <p>When referring to a type somewhere in the grammar you need to qualify the reference using that alias (example 
-						<code class="code">another::CoolType</code>). We&rsquo;ll see later where such type references occur.
+						<span class="emphasis"><em>another::CoolType</em></span>). We&rsquo;ll see later where such type references occur.
 					</p>
-<p>It is also supported to put multiple EPackage imports into one alias. This is no problem as long as there are not any two EClassifiers with the same name. In such cases none of them can be referenced. It is even possible to &lsquo;import&rsquo; multiple and &lsquo;generate&rsquo; one Ecore model and all of them are declared for the same alias. If you do so, for a reference to an EClassifier first the imported EPackages are scanned before it is assumed that a type needs to by generated into the to-be-generated package.</p>
+<p>It is also supported to put multiple 
+						<span class="emphasis"><em>EPackage</em></span> imports into one alias. This is no problem as long as there are not any two 
+						<span class="emphasis"><em>EClassifiers</em></span> with the same name. In such cases none of them can be referenced. It is even possible to 
+						<span class="emphasis"><em>import</em></span> multiple and 
+						<span class="emphasis"><em>generate</em></span> one Ecore model and all of them are declared for the same alias. If you do so, for a reference to an 
+						<span class="emphasis"><em>EClassifier</em></span> first the imported 
+						<span class="emphasis"><em>EPackages</em></span> are scanned before it is assumed that a type needs to by generated into the to-be-generated package.
+					</p>
 <p>Example:</p>
 <div class="literallayout">
 <p>
@@ -202,28 +230,32 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 <ol class="orderedlist" type="1">
 <li class="listitem">
 <p>a reference to type 
-								<code class="code">ClassA</code> would be linked to the EClass contained in 
-								<code class="code">http://www.eclipse.org/packContainingClassA</code>, 
+								<span class="emphasis"><em>ClassA</em></span> would be linked to the 
+								<span class="emphasis"><em>EClass</em></span> contained in 
+								<span class="emphasis"><em>http://www.eclipse.org/packContainingClassA</em></span>, 
 							</p>
 </li>
 <li class="listitem">
 <p>a reference to type 
-								<code class="code">ClassB</code> would be linked to the EClass contained in 
-								<code class="code">http://www.eclipse.org/packContainingClassB</code>, 
+								<span class="emphasis"><em>ClassB</em></span> would be linked to the 
+								<span class="emphasis"><em>EClass</em></span> contained in 
+								<span class="emphasis"><em>http://www.eclipse.org/packContainingClassB</em></span>, 
 							</p>
 </li>
 <li class="listitem">
 <p>a reference to type 
-								<code class="code">NotYetDefined</code> would be linked to a newly created EClass in 
-								<code class="code">http://www.eclipse.org/toBeGenerated</code>.
+								<span class="emphasis"><em>NotYetDefined</em></span> would be linked to a newly created 
+								<span class="emphasis"><em>EClass</em></span> in 
+								<span class="emphasis"><em>http://www.eclipse.org/toBeGenerated</em></span>.
 							</p>
 </li>
 </ol>
 </div>
 <p>Note, that using this feature is not recommended, because it might cause problems, which are hard to track down.
 						For instance, a reference to 
-						<code class="code">classA</code> would as well be linked to a newly created EClass, because the corresponding type in 
-						<code class="code">http://www.eclipse.org/packContainingClassA</code> is spelled with a capital letter.
+						<span class="emphasis"><em>classA</em></span> would as well be linked to a newly created 
+						<span class="emphasis"><em>EClass</em></span>, because the corresponding type in 
+						<span class="emphasis"><em>http://www.eclipse.org/packContainingClassA</em></span> is spelled with a capital letter.
 					</p>
 </div>
 </div>
@@ -236,11 +268,6 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 </div>
-<p>The default parsing is based on a home-grown packrat parser. It is advised to substitute it by an ANTLR parser through the Xtext service mechanism. ANTLR is a sophisticated parser generator framework based on an LL(*) 
-					<a class="ulink" href="http://bit.ly/ANTLR_LL_star_algorithm" target="_new">parsing algorithm</a>, that works quite well for Xtext. Please download the plugin de.itemis.xtext.antlr (from update site 
-					<code class="code">http://download.itemis.com/updates/</code>) and use the ANTLR Parser instead of the packrat parser (cf. 
-					<a class="ulink" href="http://www.eclipse.org/Xtext/developers/workspaceSetup.php" target="_new">Xtext Workspace Setup</a>).
-				</p>
 <p>Basically parsing can be separated in the following phases. </p>
 <div class="orderedlist">
 <ol class="orderedlist" type="1">
@@ -267,12 +294,18 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 </div>
-<p>In the first stage, i.e. lexing, a sequence of characters (the text input) is transformed into a sequence of so called tokens. In this context, a token is sort of a strongly typed part of the input sequence. It consists of one or more characters and was matched by a particular terminal rule or keyword and therefore represents an atomic symbol.
-						Terminal rules are also referred to as token rules or lexer rules. There is an informal naming convention that names of terminal rules are all upper-case.</p>
-<p>In the secret compartments example there are no explicitly defined terminal rules, since it only uses the ID rule which is inherited from the grammar 
-						<code class="code">org.eclipse.xtext.common.Terminals</code> (cf. 
+<p>In the first stage called 
+						<span class="emphasis"><em>lexing</em></span>, a sequence of characters (the text input) is transformed into a sequence of so called tokens. In this context, a token is sort of a strongly typed part of the input sequence. It consists of one or more characters and was matched by a particular terminal rule or keyword and therefore represents an atomic symbol.
+						Terminal rules are also referred to as 
+						<span class="emphasis"><em>token rules</em></span> or 
+						<span class="emphasis"><em>lexer rules</em></span>. There is an informal naming convention that names of terminal rules are all upper-case.
+					</p>
+<p>In the secret compartments example there are no explicitly defined terminal rules, since it only uses the 
+						<span class="emphasis"><em>ID</em></span> rule which is inherited from the grammar 
+						<span class="emphasis"><em>org.eclipse.xtext.common.Terminals</em></span> (cf. 
 						<a class="link" href="grammarMixins.html" title="Grammar Mixins">Grammar Mixins</a>).
-						Therein the ID rule is defined as follows:
+						Therein the 
+						<span class="emphasis"><em>ID</em></span> rule is defined as follows:
 					</p>
 <div class="literallayout">
 <p>
@@ -283,8 +316,14 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>It says that a Token ID starts with an optional &lsquo;^&rsquo; character (caret), followed by a letter (&lsquo;a&rsquo;..&lsquo;z&rsquo;|&lsquo;A&rsquo;..&lsquo;Z&rsquo;) or underscore (&lsquo;_&rsquo;) followed by any number of letters, underscores and numbers (&lsquo;0&rsquo;..&lsquo;9&rsquo;). </p>
-<p>The caret is used to escape an identifier for cases where there are conflicts with keywords. It is removed by the ID rule&rsquo;s 
+<p>It says that a token 
+						<span class="emphasis"><em>ID</em></span> starts with an optional 
+						<span class="emphasis"><em>'^'</em></span> character (caret), followed by a letter 
+						<span class="emphasis"><em>_ or underscore ('</em></span>') followed by any number of letters, underscores and numbers 
+						<span class="emphasis"><em>(&lsquo;0&rsquo;..&lsquo;9&rsquo;)</em></span>. 
+					</p>
+<p>The caret is used to escape an identifier for cases where there are conflicts with keywords. It is removed by the 
+						<span class="emphasis"><em>ID</em></span> rule&rsquo;s 
 						<a class="link" href="valueconverter.html" title="Value Converter">ValueConverter</a>. 
 					</p>
 <p>This is the formal definition of terminal rules:</p>
@@ -316,8 +355,9 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 <p>A terminal rule returns a value, which is a string (type 
-							<code class="code">ecore::EString</code>) by default.
-							However, if you want to have a different type you can specify it. For instance, the rule &lsquo;INT&rsquo; is defined as:
+							<span class="emphasis"><em>ecore::EString</em></span>) by default.
+							However, if you want to have a different type you can specify it. For instance, the rule 
+							<span class="emphasis"><em>INT</em></span> is defined as:
 						</p>
 <div class="literallayout">
 <p>
@@ -329,9 +369,10 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>This means that the terminal rule &lsquo;INT&rsquo; returns instances of 
-							<code class="code">ecore::EInt</code>. It is possible to define any kind of data type here, which just needs to be an instance of 
-							<code class="code">ecore::EDataType</code>.
+<p>This means that the terminal rule 
+							<span class="emphasis"><em>INT</em></span> returns instances of 
+							<span class="emphasis"><em>ecore::EInt</em></span>. It is possible to define any kind of data type here, which just needs to be an instance of 
+							<span class="emphasis"><em>ecore::EDataType</em></span>.
 							In order to tell the parser how to convert the parsed string to a value of the declared data type, you need to provide your own implementation of 
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java?root=Modeling_Project&view=co" target="_new">IValueConverterService</a> (cf. 
 							<a class="link" href="valueconverter.html" title="Value Converter">value converters</a>). The value converter is also the point where you can remove things like quotes from string literals or the caret (&lsquo;^&rsquo;) from identifiers. Its implementation needs to be registered as a service (cf. 
@@ -339,12 +380,12 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 						</p>
 </div>
 </div>
-<div class="section" title="Extended Backus-Naur form expressions">
+<div class="section" title="Extended Backus-Naur Form expressions">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="ExtendedBackusNaurformexpressions"></a>Extended Backus-Naur form expressions</h4>
+<a name="ExtendedBackusNaurFormexpressions"></a>Extended Backus-Naur Form expressions</h4>
 </div>
 </div>
 </div>
@@ -357,13 +398,19 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 <p>exactly one (the default, no operator)</p>
 </li>
 <li class="listitem">
-<p>one or none (operator &ldquo;?&rdquo;)</p>
+<p>one or none (operator 
+								<span class="emphasis"><em>?</em></span>)
+							</p>
 </li>
 <li class="listitem">
-<p>any (zero or more, operator &ldquo;*&rdquo;)</p>
+<p>any (zero or more, operator 
+								<span class="emphasis"><em>*</em></span>)
+							</p>
 </li>
 <li class="listitem">
-<p>one or more (operator &ldquo;+&rdquo;)</p>
+<p>one or more (operator 
+								<span class="emphasis"><em>+</em></span>)
+							</p>
 </li>
 </ol>
 </div>
@@ -377,8 +424,9 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 <p>Keywords are a kind of token rule literals. 
-							The &lsquo;ID&rsquo; rule in 
-							<code class="code">org.eclipse.xtext.common.Terminals</code> for instance starts with a keyword:
+							The 
+							<span class="emphasis"><em>ID</em></span> rule in 
+							<span class="emphasis"><em>org.eclipse.xtext.common.Terminals</em></span> for instance starts with a keyword:
 						</p>
 <div class="literallayout">
 <p>
@@ -408,7 +456,12 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>In this case an INT is comprised of one or more (note the &lsquo;+&rsquo; operator) characters between (and including) &lsquo;0&rsquo; and &lsquo;9&rsquo;.</p>
+<p>In this case an 
+							<span class="emphasis"><em>INT</em></span> is comprised of one or more (note the 
+							<span class="emphasis"><em>+</em></span> operator) characters between (and including) 
+							<span class="emphasis"><em>'0'</em></span> and 
+							<span class="emphasis"><em>'9'</em></span>.
+						</p>
 </div>
 <div class="section" title="Wildcard">
 <div class="titlepage">
@@ -419,8 +472,10 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 </div>
-<p>If you want to allow any character you can simple write the wildcard operator &lsquo;.&rsquo; (dot):
-							Example:</p>
+<p>If you want to allow any character you can simple write the wildcard operator '
+							<span class="emphasis"><em>.</em></span>' (dot):
+							Example:
+						</p>
 <div class="literallayout">
 <p>
 <code class="code">FOO&nbsp;:&nbsp;'f'&nbsp;.&nbsp;'o';<br>
@@ -440,7 +495,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 <p>With the until token it is possible to state that everything should be consumed until a certain token occurs.
-							The multiline comment is implemented this way:</p>
+							The multi-line comment is implemented this way:</p>
 <div class="literallayout">
 <p>
 <code class="code">terminal&nbsp;ML_COMMENT	:&nbsp;'/*'&nbsp;-&gt;&nbsp;'*/';<br>
@@ -448,7 +503,10 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>This is the rule for Java-style comments that begin with &lsquo;/*&rsquo; and end with &lsquo;*/&rsquo;.</p>
+<p>This is the rule for Java-style comments that begin with '
+							<span class="emphasis"><em>/*</em></span>' and end with '
+							<span class="emphasis"><em>*/</em></span>'.
+						</p>
 </div>
 <div class="section" title="Negated Token">
 <div class="titlepage">
@@ -506,7 +564,11 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>That is a WS can be made of one or more whitespace characters (including &lsquo; &rsquo;,&lsquo;\t&rsquo;,&lsquo;\r&rsquo;,&lsquo;\n&rsquo;).</p>
+<p>That is a WS can be made of one or more whitespace characters (including &lsquo; &rsquo;, '
+							<span class="emphasis"><em>\t</em></span>', '
+							<span class="emphasis"><em>\r</em></span>', '
+							<span class="emphasis"><em>\n</em></span>').
+						</p>
 </div>
 <div class="section" title="Groups">
 <div class="titlepage">
@@ -526,7 +588,7 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>That is the 2-digit hexadecimal code of ascii characters.</p>
+<p>That is the 2-digit hexadecimal code of ASCII characters.</p>
 </div>
 </div>
 </div>
@@ -539,13 +601,16 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 </div>
-<p>The parser reads a sequence of terminals and walks through the parser rules. Hence a parser rule &ndash; contrary to a terminal rule &ndash; does not produce a single terminal token but a tree of non-terminal and terminal tokens. They lead to a so called parse tree (in Xtext it is also referred as node model). Furthermore, parser rules are handled as kind of a building plan for the creation of the EObjects that form the semantic model (the linked abstract syntax graph or AST). Due to this fact, parser rules are even called production rules. The different constructs like actions and assignments are used to derive types and initialize the semantic objects accordingly. </p>
+<p>The parser reads a sequence of terminals and walks through the parser rules. Hence a parser rule &ndash; contrary to a terminal rule &ndash; does not produce a single terminal token but a tree of non-terminal and terminal tokens. They lead to a so called 
+					<a class="link" href="processing_Xtext_models.html#node_model" title="Working with the parse tree (aka node model)">parse tree</a> (in Xtext it is also referred as node model). Furthermore, parser rules are handled as kind of a building plan for the creation of the 
+					<span class="emphasis"><em>EObjects</em></span> that form the semantic model (the linked abstract syntax graph or AST). Due to this fact, parser rules are even called production rules. The different constructs like actions and assignments are used to derive types and initialize the semantic objects accordingly. 
+				</p>
 <div class="section" title="Extended Backus-Naur Form expressions">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="ExtendedBackusNaurFormexpressions"></a>Extended Backus-Naur Form expressions</h4>
+<a name="ExtendedBackusNaurFormexpressions2"></a>Extended Backus-Naur Form expressions</h4>
 </div>
 </div>
 </div>
@@ -589,7 +654,9 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 </div>
-<p>Assignments are used to assign the parsed information to a feature of the current object. The type of the current object, its EClass, is specified by the return type of the parser rule. If it is not explicitly stated it is implied that the type&rsquo;s name equals the rule&rsquo;s name. The type of the feature is infered from the right hand side of the assignment.</p>
+<p>Assignments are used to assign the parsed information to a feature of the current object. The type of the current object, its 
+							<span class="emphasis"><em>EClass</em></span>, is specified by the return type of the parser rule. If it is not explicitly stated it is implied that the type&rsquo;s name equals the rule&rsquo;s name. The type of the feature is inferred from the right hand side of the assignment.
+						</p>
 <p>Example:</p>
 <div class="literallayout">
 <p>
@@ -605,7 +672,9 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </code>
 </p>
 </div>
-<p>The syntactic declaration for states in the state machine example starts with a keyword &lsquo;state&rsquo; followed by an assignment:</p>
+<p>The syntactic declaration for states in the state machine example starts with a keyword 
+							<span class="emphasis"><em>state</em></span> followed by an assignment:
+						</p>
 <div class="literallayout">
 <p>
 <code class="code">name=ID<br>
@@ -614,10 +683,15 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </p>
 </div>
 <p>The left hand side refers to a feature '
-							<code class="code">name</code>' of the current object (which has the EClass &lsquo;State&rsquo; in this case). 
+							<span class="emphasis"><em>name</em></span>' of the current object (which has the 
+							<span class="emphasis"><em>EClass</em></span> '
+							<span class="emphasis"><em>State</em></span>' in this case). 
 							The right hand side can be a rule call, a keyword, a cross reference (explained later) or even an alternative comprised by the former.
-							The type of the feature needs to be compatible with the type of the expression on the right. As ID returns an EString in this case, the feature '
-							<code class="code">name</code>' needs to be of type EString as well.
+							The type of the feature needs to be compatible with the type of the expression on the right. As 
+							<span class="emphasis"><em>ID</em></span> returns an 
+							<span class="emphasis"><em>EString</em></span> in this case, the feature '
+							<span class="emphasis"><em>name</em></span>' needs to be of type 
+							<span class="emphasis"><em>EString</em></span> as well.
 						</p>
 <p>
 							
@@ -628,13 +702,20 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 <div class="orderedlist">
 <ol class="orderedlist" type="1">
 <li class="listitem">
-<p>The simple equal sign &ldquo;=&rdquo; is the straight forward assignment, and used for features which take only one element.</p>
+<p>The simple equal sign '
+									<span class="emphasis"><em>=</em></span>' is the straight forward assignment, and used for features which take only one element.
+								</p>
 </li>
 <li class="listitem">
-<p>The &ldquo;+=&rdquo; sign (the add operator) expects a multi valued feature and adds the value on the right hand to that feature, which is a list feature.</p>
+<p>The '
+									<span class="emphasis"><em>+=</em></span>' sign (the add operator) expects a multi-valued feature and adds the value on the right hand to that feature, which is a list feature.
+								</p>
 </li>
 <li class="listitem">
-<p>The &ldquo;?=&rdquo; sign (boolean assignment operator) expects a feature of type EBoolean and sets it to true if the right hand side was consumed independently from the concrete value of the right hand side.</p>
+<p>The '
+									<span class="emphasis"><em>?=</em></span>' sign (boolean assignment operator) expects a feature of type 
+									<span class="emphasis"><em>EBoolean</em></span> and sets it to true if the right hand side was consumed independently from the concrete value of the right hand side.
+								</p>
 </li>
 </ol>
 </div>
@@ -690,9 +771,15 @@ Event&nbsp;returns&nbsp;MyEvent&nbsp;:&nbsp;....;<br>
 </code>
 </p>
 </div>
-<p>Looking at the syntax definition of cross references, there is an optional part starting with a vertical bar (pipe) followed by &lsquo;CrossReferenceableTerminal&rsquo;. This is the part describing the concrete text, from which the crosslink later should be established.
-							If the terminal is omitted, it is expected to be an ID.</p>
-<p>You may even use alternatives as the referencable terminal. This way, either an ID or a STRING may be used as the referencable terminal, as it is possible in many SQL dialects.</p>
+<p>Looking at the syntax definition of cross references, there is an optional part starting with a vertical bar (pipe) followed by 
+							<span class="emphasis"><em>CrossReferenceableTerminal</em></span>. This is the part describing the concrete text, from which the crosslink later should be established.
+							If the terminal is omitted, it is expected to be 
+							<span class="emphasis"><em>ID</em></span>.
+						</p>
+<p>You may even use alternatives as the referencable terminal. This way, either an 
+							<span class="emphasis"><em>ID</em></span> or a 
+							<span class="emphasis"><em>STRING</em></span> may be used as the referencable terminal, as it is possible in many SQL dialects.
+						</p>
 <div class="literallayout">
 <p>
 <code class="code">TableRef:&nbsp;table=[Table|(ID|STRING)];<br>
@@ -704,6 +791,56 @@ Event&nbsp;returns&nbsp;MyEvent&nbsp;:&nbsp;....;<br>
 							<a class="link" href="linking.html" title="Linking">linking section</a> in order to understand how linking is done.
 						</p>
 </div>
+<div class="section" title="Unordered Groups">
+<div class="titlepage">
+<div>
+<div>
+<h5 class="title">
+<a name="unordered_groups"></a>Unordered Groups</h5>
+</div>
+</div>
+</div>
+<p>The elements of an unordered group can occur in any order but each element can occur at most once. Unordered groups are separated with '
+							<span class="emphasis"><em>&amp;</em></span>', e.g.
+						</p>
+<div class="literallayout">
+<p>
+<code class="code">Modifier:&nbsp;<br>
+	static?='static'&nbsp;&amp;&nbsp;final?='final'&nbsp;&amp;&nbsp;visibility=Visibility;<br>
+
+<br>
+enum&nbsp;Visibility:<br>
+	PUBLIC='public'&nbsp;|&nbsp;PRIVATE='private'&nbsp;|&nbsp;PROTECTED='protected';<br>
+	
+<br>
+
+</code>
+</p>
+</div>
+<p>allows</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;static&nbsp;final<br>
+static&nbsp;final&nbsp;<br>
+final&nbsp;private&nbsp;static<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>but not</p>
+<div class="literallayout">
+<p>
+<code class="code">static&nbsp;final&nbsp;static&nbsp;//&nbsp;ERROR:&nbsp;static&nbsp;appears&nbsp;twice<br>
+public&nbsp;static&nbsp;final&nbsp;private&nbsp;//&nbsp;ERROR:&nbsp;visibility&nbsp;appears&nbsp;twice<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
 <div class="section" title="Simple Actions">
 <div class="titlepage">
 <div>
@@ -713,8 +850,11 @@ Event&nbsp;returns&nbsp;MyEvent&nbsp;:&nbsp;....;<br>
 </div>
 </div>
 </div>
-<p>By default the object to be returned by a parser rule is created lazily on the first assignment. Then the type of the EObject to be created is determined from the specified return type or the rule name if no explicit return type is specified.
-							With Actions however, the creation of returned EObject can be made explicit. Xtext supports two kinds of Actions:</p>
+<p>By default the object to be returned by a parser rule is created lazily on the first assignment. Then the type of the 
+							<span class="emphasis"><em>EObject</em></span> to be created is determined from the specified return type or the rule name if no explicit return type is specified.
+							With Actions however, the creation of returned 
+							<span class="emphasis"><em>EObject</em></span> can be made explicit. Xtext supports two kinds of Actions:
+						</p>
 <div class="orderedlist">
 <ol class="orderedlist" type="1">
 <li class="listitem">
@@ -726,9 +866,13 @@ Event&nbsp;returns&nbsp;MyEvent&nbsp;:&nbsp;....;<br>
 </ol>
 </div>
 <p>If at some point you want to enforce the creation of a specific type you can use alternatives or simple actions.
-							In the following example TypeB must be a subtype of TypeA. An expression 
-							<code class="code">A ident</code> should create an instance of TypeA, whereas 
-							<code class="code">B ident</code> should instantiate TypeB.
+							In the following example 
+							<span class="emphasis"><em>TypeB</em></span> must be a subtype of 
+							<span class="emphasis"><em>TypeA</em></span>. An expression 
+							<span class="emphasis"><em>A ident</em></span> should create an instance of 
+							<span class="emphasis"><em>TypeA</em></span>, whereas 
+							<span class="emphasis"><em>B ident</em></span> should instantiate 
+							<span class="emphasis"><em>TypeB</em></span>.
 						</p>
 <p>Example with alternatives:</p>
 <div class="literallayout">
@@ -760,8 +904,9 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 </code>
 </p>
 </div>
-<p>Generally speaking, the instance is created as soon as the parser hits the first assignment. However, actions allow to explicitly instantiate any EObject. The notation 
-							<code class="code">{TypeB}</code> will create an instance of TypeB and assign it to the result of the parser rule. This allows parser rules without any assignment and object creation without the need to introduce unnecessary rules.
+<p>Generally speaking, the instance is created as soon as the parser hits the first assignment. However, actions allow to explicitly instantiate any 
+							<span class="emphasis"><em>EObject</em></span>. The notation 
+							<span class="emphasis"><em>{TypeB}</em></span> will create an instance of TypeB and assign it to the result of the parser rule. This allows parser rules without any assignment and object creation without the need to introduce unnecessary rules.
 						</p>
 </div>
 <div class="section" title="Unassigned rule calls">
@@ -773,7 +918,10 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 </div>
 </div>
 </div>
-<p>We previously explained, that the EObject to be returned is created lazily when the first assignment occurs or when a simple action is evaluated. There is another way one can set the EObject to be returned, which we call an &ldquo;unassigned rule call&rdquo;.</p>
+<p>We previously explained, that the 
+							<span class="emphasis"><em>EObject</em></span> to be returned is created lazily when the first assignment occurs or when a simple action is evaluated. There is another way one can set the 
+							<span class="emphasis"><em>EObject</em></span> to be returned, which we call an &ldquo;unassigned rule call&rdquo;.
+						</p>
 <p>Unassigned rule calls (the name suggests it) are rule calls to other parser rules, which are not used within an assignment. If there is no feature the returned value shall be assigned to, the value is assigned to the &ldquo;to-be-returned&rdquo; result of the calling rule.</p>
 <p>With unassigned rule calls one can, for instance, create rules which just dispatch between several other rules:</p>
 <div class="literallayout">
@@ -790,10 +938,10 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 </p>
 </div>
 <p>As 
-							<code class="code">AbstractToken</code> could possibly return an instance of 
-							<code class="code">TokenA</code>, 
-							<code class="code">TokenB</code> or 
-							<code class="code">TokenC</code> its type must by a super type of these types.
+							<span class="emphasis"><em>AbstractToken</em></span> could possibly return an instance of 
+							<span class="emphasis"><em>TokenA</em></span>, 
+							<span class="emphasis"><em>TokenB</em></span> or 
+							<span class="emphasis"><em>TokenC</em></span> its type must by a super type of these types.
 							It is now for instance as well possible to further change the state of the AST element by assigning additional things.
 						</p>
 <p>Example:</p>
@@ -810,12 +958,14 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 </code>
 </p>
 </div>
-<p>This way the &lsquo;cardinality&rsquo; is optional (last question mark) and can be represented by a question mark, a plus, or an asterisk. It will be assigned to either an EObject of type 
-							<code class="code">TokenA</code>,  
-							<code class="code">TokenB</code>, or 
-							<code class="code">TokenC</code> which are all subtypes of 
-							<code class="code">AbstractToken</code>. The rule in this example will never create an instance of 
-							<code class="code">AbstractToken</code> directly.
+<p>This way the 
+							<span class="emphasis"><em>cardinality</em></span> is optional (last question mark) and can be represented by a question mark, a plus, or an asterisk. It will be assigned to either an 
+							<span class="emphasis"><em>EObject</em></span> of type 
+							<span class="emphasis"><em>TokenA</em></span>,  
+							<span class="emphasis"><em>TokenB</em></span>, or 
+							<span class="emphasis"><em>TokenC</em></span> which are all subtypes of 
+							<span class="emphasis"><em>AbstractToken</em></span>. The rule in this example will never create an instance of 
+							<span class="emphasis"><em>AbstractToken</em></span> directly.
 						</p>
 </div>
 <div class="section" title="Assigned Actions">
@@ -827,9 +977,11 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 </div>
 </div>
 </div>
-<p>LL parsing has some significant advantages over LR algorithms. The most important ones for Xtext are, that the generated code is much simpler to understand and debug and that it is easier to recover from errors. Especially ANTLR has a very nice generic error recovery mechanism. This allows to construct an AST even if there are syntactic errors in the text. You wouldn&rsquo;t get any of the nice IDE features as soon as there is one little error, if we hadn&rsquo;t error recovery.</p>
+<p>LL-parsing has some significant advantages over LR algorithms. The most important ones for Xtext are, that the generated code is much simpler to understand and debug and that it is easier to recover from errors. Especially ANTLR has a very nice generic error recovery mechanism. This allows to construct an AST even if there are syntactic errors in the text. You wouldn&rsquo;t get any of the nice IDE features as soon as there is one little error, if we hadn&rsquo;t error recovery.</p>
 <p>However, LL also has some drawbacks. The most important one is that it does not allow left recursive grammars.
-							For instance, the following is not allowed in LL based grammars, because &ldquo;Expression '+' Expression&rdquo; is left recursive:</p>
+							For instance, the following is not allowed in LL-based grammars, because 
+							<span class="emphasis"><em>Expression &lsquo;+&rsquo; Expression</em></span> is left recursive:
+						</p>
 <div class="literallayout">
 <p>
 <code class="code">Expression&nbsp;:<br>
@@ -879,7 +1031,9 @@ TerminalExpression&nbsp;returns&nbsp;Expression:<br>
 </p>
 </div>
 <p>... would result in unwanted elements in the AST.
-							For instance the expression &ldquo; ( 42 ) &rdquo; would result in a tree like this:</p>
+							For instance the expression 
+							<span class="emphasis"><em>(42)</em></span> would result in a tree like this:
+						</p>
 <div class="literallayout">
 <p>
 <code class="code">Operation&nbsp;{<br>
@@ -896,7 +1050,7 @@ TerminalExpression&nbsp;returns&nbsp;Expression:<br>
 </p>
 </div>
 <p>Typically one would only want to have one instance of 
-							<code class="code">IntLiteral</code> instead.
+							<span class="emphasis"><em>IntLiteral</em></span> instead.
 						</p>
 <p>One can solve this problem using a combination of unassigned rule calls and assigned actions:</p>
 <div class="literallayout">
@@ -917,8 +1071,12 @@ TerminalExpression&nbsp;returns&nbsp;Expression:<br>
 </p>
 </div>
 <p>In the example above 
-							<code class="code">{Operation.left=current}</code> is a so called tree rewrite action, which creates a new instance of the stated EClass (Operation in this case) and assigns the element currently to-be-returned (
-							<code class="code">current</code> variable) to a feature of the newly created object (in this case feature &lsquo;left&rsquo; of the Operation instance).
+							<span class="emphasis"><em>{Operation.left=current}</em></span> is a so called tree rewrite action, which creates a new instance of the stated 
+							<span class="emphasis"><em>EClass</em></span> (
+							<span class="emphasis"><em>Operation</em></span> in this case) and assigns the element currently to-be-returned (
+							<span class="emphasis"><em>current</em></span> variable) to a feature of the newly created object (in this case feature 
+							<span class="emphasis"><em>left</em></span> of the 
+							<span class="emphasis"><em>Operation</em></span> instance).
 							In Java these semantics could be expressed as:
 						</p>
 <div class="literallayout">
@@ -928,21 +1086,28 @@ temp.setLeft(current);<br>
 current&nbsp;=&nbsp;temp;<br>
 
 <br>
-h3.(#hidden_terminals)&nbsp;Hidden&nbsp;terminal&nbsp;symbols<br>
-
-<br>
-Because&nbsp;parser&nbsp;rules&nbsp;describe&nbsp;not&nbsp;a&nbsp;single&nbsp;token,&nbsp;but&nbsp;a&nbsp;sequence&nbsp;of&nbsp;patterns&nbsp;in&nbsp;the&nbsp;input,&nbsp;it&nbsp;is&nbsp;necessary&nbsp;to&nbsp;define&nbsp;the&nbsp;interesting&nbsp;parts&nbsp;of&nbsp;the&nbsp;input.&nbsp;Xtext&nbsp;introduces&nbsp;the&nbsp;concept&nbsp;of&nbsp;hidden&nbsp;tokens&nbsp;to&nbsp;handle&nbsp;semantically&nbsp;unimportant&nbsp;things&nbsp;like&nbsp;whitespaces,&nbsp;comments,&nbsp;etc.&nbsp;in&nbsp;the&nbsp;input&nbsp;sequence&nbsp;gracefully.&nbsp;It&nbsp;is&nbsp;possible&nbsp;to&nbsp;define&nbsp;a&nbsp;set&nbsp;of&nbsp;terminal&nbsp;symbols,&nbsp;that&nbsp;are&nbsp;hidden&nbsp;from&nbsp;the&nbsp;parser&nbsp;rules&nbsp;and&nbsp;automatically&nbsp;skipped&nbsp;when&nbsp;they&nbsp;are&nbsp;recognized.&nbsp;Nevertheless,&nbsp;they&nbsp;are&nbsp;transparently&nbsp;woven&nbsp;into&nbsp;the&nbsp;node&nbsp;model,&nbsp;but&nbsp;not&nbsp;relevant&nbsp;for&nbsp;the&nbsp;semantic&nbsp;model.&nbsp;<br>
-
-<br>
-Hidden&nbsp;terminals&nbsp;may&nbsp;(or&nbsp;may&nbsp;not)&nbsp;appear&nbsp;between&nbsp;any&nbsp;other&nbsp;terminals&nbsp;in&nbsp;any&nbsp;cardinality.&nbsp;They&nbsp;can&nbsp;be&nbsp;described&nbsp;per&nbsp;rule&nbsp;or&nbsp;for&nbsp;the&nbsp;whole&nbsp;grammar.&nbsp;When&nbsp;"reusing&nbsp;a&nbsp;single&nbsp;grammar":#grammarMixins&nbsp;its&nbsp;definition&nbsp;of&nbsp;hidden&nbsp;tokens&nbsp;is&nbsp;reused&nbsp;as&nbsp;well.&nbsp;The&nbsp;grammar&nbsp;@org.eclipse.xtext.common.Terminals@&nbsp;comes&nbsp;with&nbsp;a&nbsp;reasonable&nbsp;default&nbsp;and&nbsp;hides&nbsp;all&nbsp;comments&nbsp;and&nbsp;whitespace&nbsp;from&nbsp;the&nbsp;parser&nbsp;rules.<br>
-
-<br>
-If&nbsp;a&nbsp;rule&nbsp;defines&nbsp;hidden&nbsp;symbols,&nbsp;you&nbsp;can&nbsp;think&nbsp;of&nbsp;a&nbsp;kind&nbsp;of&nbsp;scope&nbsp;that&nbsp;is&nbsp;automatically&nbsp;introduced.&nbsp;Any&nbsp;rule&nbsp;that&nbsp;is&nbsp;called&nbsp;from&nbsp;the&nbsp;declaring&nbsp;rule&nbsp;uses&nbsp;the&nbsp;same&nbsp;hidden&nbsp;terminals&nbsp;as&nbsp;the&nbsp;calling&nbsp;rule,&nbsp;unless&nbsp;it&nbsp;defines&nbsp;other&nbsp;hidden&nbsp;tokens&nbsp;itself.<br>
-&nbsp;&nbsp;<br>
 
 </code>
 </p>
 </div>
+</div>
+</div>
+</div>
+<div class="section" title="Hidden terminal symbols">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="hidden_terminals"></a>Hidden terminal symbols</h3>
+</div>
+</div>
+</div>
+<p>Because parser rules describe not a single token, but a sequence of patterns in the input, it is necessary to define the interesting parts of the input. Xtext introduces the concept of hidden tokens to handle semantically unimportant things like whitespaces, comments, etc. in the input sequence gracefully. It is possible to define a set of terminal symbols, that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they are transparently woven into the node model, but not relevant for the semantic model. </p>
+<p>Hidden terminals may (or may not) appear between any other terminals in any cardinality. They can be described per rule or for the whole grammar. When 
+					<a class="link" href="grammarMixins.html" title="Grammar Mixins">reusing a single grammar</a> its definition of hidden tokens is reused as well. The grammar 
+					<span class="emphasis"><em>org.eclipse.xtext.common.Terminals</em></span> comes with a reasonable default and hides all comments and whitespace from the parser rules.
+				</p>
+<p>If a rule defines hidden symbols, you can think of a kind of scope that is automatically introduced. Any rule that is called from the declaring rule uses the same hidden terminals as the calling rule, unless it defines other hidden tokens itself.</p>
 <div class="literallayout">
 <p>
 <code class="code">Person&nbsp;hidden(WS,&nbsp;ML_COMMENT,&nbsp;SL_COMMENT):&nbsp;<br>
@@ -959,7 +1124,15 @@ Fullname:&nbsp;<br>
 </code>
 </p>
 </div>
-<p>The sample rule &ldquo;Person&rdquo; defines multiline comments (ML_COMMENT), single-line comments (SL_COMMENT), and whitespace (WS) to be allowed between the &lsquo;Fullname&rsquo; and the &lsquo;age&rsquo;. Because the rule &lsquo;Fullname&rsquo; does not introduce another set of hidden terminals, it allows the same symbols to appear between &lsquo;firstname&rsquo; and &lsquo;lastname&rsquo; as the calling rule &lsquo;Person&rsquo;. Thus, the following input is perfectly valid for the given grammar snippet:</p>
+<p>The sample rule &ldquo;Person&rdquo; defines multiline comments (_ML_COMMENT_), single-line comments (_SL_COMMENT_), and whitespace (
+					<span class="emphasis"><em>WS</em></span>) to be allowed between the 
+					<span class="emphasis"><em>Fullname</em></span> and the 
+					<span class="emphasis"><em>age</em></span>. Because the rule 
+					<span class="emphasis"><em>Fullname</em></span> does not introduce another set of hidden terminals, it allows the same symbols to appear between 
+					<span class="emphasis"><em>firstname</em></span> and 
+					<span class="emphasis"><em>lastname</em></span> as the calling rule 
+					<span class="emphasis"><em>Person</em></span>. Thus, the following input is perfectly valid for the given grammar snippet:
+				</p>
 <div class="literallayout">
 <p>
 <code class="code">John&nbsp;/*&nbsp;comment&nbsp;*/&nbsp;Smith&nbsp;//&nbsp;line&nbsp;comment<br>
@@ -971,11 +1144,10 @@ Fullname:&nbsp;<br>
 </code>
 </p>
 </div>
-<p>A list of all default terminals like WS can be found in section 
-							<a class="link" href="grammarMixins.html" title="Grammar Mixins">Grammar Mixins</a>.
-						</p>
-</div>
-</div>
+<p>A list of all default terminals like 
+					<span class="emphasis"><em>WS</em></span> can be found in section 
+					<a class="link" href="grammarMixins.html" title="Grammar Mixins">Grammar Mixins</a>.
+				</p>
 </div>
 <div class="section" title="Data type rules">
 <div class="titlepage">
@@ -986,8 +1158,11 @@ Fullname:&nbsp;<br>
 </div>
 </div>
 </div>
-<p>Data type rules are parsing-phase rules, which create instances of EDataType instead of EClass. Thinking about it, one may discover that they are quite similar to terminal rules.
-					However, the nice thing about data type rules is that they are actually parser rules and are therefore </p>
+<p>Data type rules are parsing-phase rules, which create instances of 
+					<span class="emphasis"><em>EDataType</em></span> instead of 
+					<span class="emphasis"><em>EClass</em></span>. Thinking about it, one may discover that they are quite similar to terminal rules.
+					However, the nice thing about data type rules is that they are actually parser rules and are therefore 
+				</p>
 <div class="orderedlist">
 <ol class="orderedlist" type="1">
 <li class="listitem">
@@ -1012,10 +1187,13 @@ Fullname:&nbsp;<br>
 </p>
 </div>
 <p>This looks similar to the terminal rule we&rsquo;ve defined above in order to explain rule calls.
-					However, the difference is that because it is a parser rule and therefore only valid in certain contexts, it won&rsquo;t conflict with the rule ID.
-					If you had defined it as a terminal rule, it would possibly hide the ID rule.</p>
+					However, the difference is that because it is a parser rule and therefore only valid in certain contexts, it won&rsquo;t conflict with the rule 
+					<span class="emphasis"><em>ID</em></span>.
+					If you had defined it as a terminal rule, it would possibly hide the 
+					<span class="emphasis"><em>ID</em></span> rule.
+				</p>
 <p>In addition when this has been defined as a data type rule, it is allowed to use hidden tokens (e.g. &ldquo;/* comment **/&rdquo;) between the IDs and dots (e.g. 
-					<code class="code">foo/* comment */. bar . Baz"</code>)
+					<span class="emphasis"><em>foo/* comment */. bar . Baz"</em></span>)
 				</p>
 <p>Return types can be specified in the same way as in terminal rules:</p>
 <div class="literallayout">
@@ -1030,7 +1208,9 @@ Fullname:&nbsp;<br>
 </p>
 </div>
 <p>Note that if a rule does not call another parser rule and does neither contain any actions nor 
-					<a class="link" href="syntax.html#assignments" title="Assignments">assignments</a>, it is considered to be a data type rule and the data type EString is implied if none has been explicitly declared.
+					<a class="link" href="syntax.html#assignments" title="Assignments">assignments</a>, it is considered to be a data type rule and the data type 
+					<span class="emphasis"><em>EString</em></span> is implied if none has been explicitly declared. You have to import Ecore with the alias 
+					<span class="emphasis"><em>ecore</em></span> in this case.
 				</p>
 <p>For conversion again value converters are responsible (cf. 
 					<a class="link" href="valueconverter.html" title="Value Converter">value converters</a>).
@@ -1047,8 +1227,12 @@ Fullname:&nbsp;<br>
 </div>
 <p>Enum rules return enumeration literals from strings. They can be seen as a shortcut for data type rules with specific value converters.
 					The main advantage of enum rules is their simplicity, type safety and therefore nice validation. Furthermore it is possible to infer enums and their respective literals during the Ecore model transformation.</p>
-<p>If you want to define a ChangeKind 
-					<a class="ulink" href="http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.emf.doc/references/javadoc/org/eclipse/emf/ecore/change/impl/package-summary.html" target="_new">org.eclipse.emf.ecore.change/model/Change.ecore</a> with &lsquo;ADD&rsquo;, &lsquo;MOVE&rsquo; and &lsquo;REMOVE&rsquo; you could write:
+<p>If you want to define a 
+					<span class="emphasis"><em>ChangeKind</em></span> 
+					<a class="ulink" href="http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.emf.doc/references/javadoc/org/eclipse/emf/ecore/change/impl/package-summary.html" target="_new">org.eclipse.emf.ecore.change/model/Change.ecore</a> with 
+					<span class="emphasis"><em>ADD</em></span>, 
+					<span class="emphasis"><em>MOVE</em></span> and 
+					<span class="emphasis"><em>REMOVE</em></span> you could write:
 				</p>
 <div class="literallayout">
 <p>
@@ -1092,7 +1276,8 @@ Fullname:&nbsp;<br>
 </p>
 </div>
 <p>the resulting value of the element 
-					<code class="code">Foo</code> will hold the enum value with the internal representation of &lsquo;0&rsquo; (zero). When generating the EPackage from your grammar this will be the first literal you define. As a workaround you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define an enum literal with an empty textual representation.
+					<span class="emphasis"><em>Foo</em></span> will hold the enum value with the internal representation of &lsquo;0&rsquo; (zero). When generating the 
+					<span class="emphasis"><em>EPackage</em></span> from your grammar this will be the first literal you define. As a workaround you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define an enum literal with an empty textual representation.
 				</p>
 <div class="literallayout">
 <p>

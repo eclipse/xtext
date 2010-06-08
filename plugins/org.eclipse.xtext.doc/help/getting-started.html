@@ -11,8 +11,10 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Getting Started</h1>
-<p>In this mini-tutorial we will implement a small domain-specific language and a corresponding Eclipse IDE integration with Xtext. Later, we will create a code generator 
-			that is capable of reading the models you create with the DSL editor and process them, i.e. generate some Java code from it.</p>
+<p>In this mini-tutorial we will implement a small domain-specific language and a 
+			corresponding Eclipse IDE integration with Xtext. Later, we will create a code generator 
+			that is capable of reading the models you create with the DSL editor and process them, i.e. 
+			generate some Java code from it.</p>
 <div class="section" title="Creating a DSL">
 <div class="titlepage">
 <div>
@@ -24,10 +26,12 @@
 </div>
 <p>
 				
-<a class="ulink" href="http://www.eclipse.org/Xtext/download/" target="_new">Download and install the latest version of Xtext</a>, set up a fresh workspace. We want to develop a small language used to 
-				define domain models. It is a stripped-down version of our 
-				<span class="emphasis"><em>Domain-Model Example</em></span> which is shipped with Xtext and can be materialized into your workspace using 
-				the example wizard. The following instance of the domain model DSL should give you an idea about the language.
+<a class="ulink" href="http://www.eclipse.org/Xtext/download/" target="_new">Download and install the latest version of Xtext</a>, 
+				set up a fresh workspace. We want to develop a small language used to define domain models.
+				It is a stripped-down version of our 
+				<span class="emphasis"><em>Domain-Model Example</em></span> which is shipped with Xtext 
+				and can be materialized into your workspace using the example wizard. The following instance 
+				of the domain model DSL should give you an idea about the language.
 			</p>
 <div class="literallayout">
 <p>
@@ -74,7 +78,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 <p>In order to get started we first need to create some Eclipse projects. Use the Xtext wizard to do so:</p>
 <span class="emphasis"><em>File -&gt; New -&gt; Project...  -&gt; Xtext -&gt; Xtext project</em></span>
 <p>Choose a meaningful project name, language name and file extension, e.g.</p>
-<table id="N1005B">
+<table id="N10064">
 <tr>
 						
 <td>
@@ -123,12 +127,16 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </div>
 </div>
 <p>In the Package Explorer you can see three new projects. In 
-					<span class="emphasis"><em>org.eclipse.xtext.example.domainmodel</em></span> the grammar is defined and all
-					runtime aspects, such as linking, scoping and validation are developed. The IDE-aspects such as the editor, any views, and
-					incremental project builder go into 
-					<span class="emphasis"><em>org.eclipse.xtext.example.domainmodel.ui</em></span>. Both projects consist of generated classes derived 
-					from the grammar and manual code such as the grammar itself and further classes to differentiate and adapt from the default behavior. Although
-					Xtext makes use of code generation, most of the code is actually written as libraries, which are referenced by the means of OSGi using the Manifest.MF. 
+
+					<span class="emphasis"><em>org.eclipse.xtext.example.domainmodel</em></span> the grammar is defined and all runtime 
+					aspects, such as linking, scoping and validation are developed. The IDE-aspects 
+					such as the editor, any views, and incremental project builder go into 
+
+					<span class="emphasis"><em>org.eclipse.xtext.example.domainmodel.ui</em></span>. Both projects consist of generated 
+					classes derived from the grammar and manual code such as the grammar itself and 
+					further classes to differentiate and adapt from the default behavior. Although
+					Xtext makes use of code generation, most of the code is actually written as 
+					libraries, which are referenced by the means of OSGi using the Manifest.MF. 
 				</p>
 <p>
 					
@@ -138,18 +146,23 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 <p>
 				
 </p>
-<p>It is good to be clear and unambiguous whether the code is generated or is to be manipulated by the developer. Thus, the generated code should be held 
-					separately from the manually written code. We follow this pattern by having a folder 
+<p>It is good to be clear and unambiguous whether the code is generated or is to 
+					be manipulated by the developer. Thus, the generated code should be held 
+					separately from the manually written code. We follow this pattern by having a 
+					folder 
 					<span class="emphasis"><em>src/</em></span> and a folder 
 					<span class="emphasis"><em>src-gen/</em></span> in each project. Keep in mind not to 
 					make changes in the 
 					<span class="emphasis"><em>src-gen/</em></span> folder. They will be overwritten by the generator.
 				</p>
 <p>A third project, 
-					<span class="emphasis"><em>org.eclipse.xtext.example.domainmodel.generator</em></span> will later contain an Xpand code generator that leverages the model created with the DSL editor. 
-					This is fully optional and it is also optional to use Xpand. In fact you can use any programming language running on the JVM to implement a code generator for your 
-					Xtext models. Also it is of course perfectly ok, to have no code generator at all but use the models dynamically at runtime. We call these kind of model processors 
-
+					<span class="emphasis"><em>org.eclipse.xtext.example.domainmodel.generator</em></span> will later 
+					contain an Xpand code generator that leverages the model created with the DSL 
+					editor. This is fully optional and it is also optional to use Xpand. In fact 
+					you can use any programming language running on the JVM to implement a code 
+					generator for your Xtext models. Also it is of course perfectly ok, to have no 
+					code generator at all but use the models dynamically at runtime. We call these 
+					kind of model processors 
 					<span class="emphasis"><em>interpreters</em></span>.
 				</p>
 </div>
@@ -166,16 +179,18 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 					
 <span class="bold"><strong>
 						<span class="emphasis"><em>Please note</em></span>
-					</strong></span> 
-					<span class="emphasis"><em>: If you encounter strange errors while copying and pasting snippets from this document to your Eclipse editor, your documentation</em></span>
-					 
-					<span class="emphasis"><em>viewer most likely has inserted characters different from {space} into your clipboard. Reenter these &ldquo;fillers&rdquo; or type the text by hand to be sure everything works fine.</em></span> 
-				
-</p>
+					</strong></span>: If you encounter strange errors while copying and pasting
+					snippets from this document to your Eclipse editor, your documentation
+					viewer most likely has inserted characters different from {space} into your 
+					clipboard. Reenter these &ldquo;fillers&rdquo; or type the text by hand to be sure everything
+					works fine. 
+				</p>
 <p>The wizard will automatically open the example grammar file 
-					<span class="emphasis"><em>Domainmodel.xtext</em></span> from the first project in the editor. 
-					A grammar has two purposes: First, it is used to describe the concrete syntax of your language. Second, it contains information about 
-					how the parser shall create a model during parsing.
+
+					<span class="emphasis"><em>Domainmodel.xtext</em></span> from the first project in the editor. A grammar has two 
+					purposes: First, it is used to describe the concrete syntax of your language. 
+					Second, it contains information about how the parser shall create a model during 
+					parsing.
 				</p>
 <p>The first line of the grammar is the grammar declaration:</p>
 <div class="literallayout">
@@ -188,20 +203,29 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>In Xtext each grammar has a unique name, which like (most) Java classes needs to reflect 
-					the location of the file within the Java class path. In our case the grammar file is located in 
-					<span class="emphasis"><em>/org/eclipse/xtext/example/Domainmodel.xtext</em></span> therefore
-					the name of the grammar is 
-					<span class="emphasis"><em>org.eclipse.xtext.example.Domainmodel</em></span>. The second part of that statement (
-					<span class="emphasis"><em>with org.eclipse.xtext.common.Terminals</em></span>) states, that 
-					this grammar reuses and overrides rules from the specified grammar. The 
-					<span class="emphasis"><em>org.eclipse.xtext.common.Terminals</em></span> is a library grammar shipped with Xtext and predefines the
-					most common terminal rules, such as 
+<p>In Xtext each grammar has a unique name, which like (most) Java classes 
+					needs to reflect the location of the file within the Java class path. In our 
+					case the grammar file is located in 
+
+					<span class="emphasis"><em>/org/eclipse/xtext/example/Domainmodel.xtext</em></span> therefore the name of the 
+					grammar is 
+					<span class="emphasis"><em>org.eclipse.xtext.example.Domainmodel</em></span>. The second part of that 
+					statement (
+					<span class="emphasis"><em>with org.eclipse.xtext.common.Terminals</em></span>) states, that this grammar 
+					reuses and overrides rules from the specified grammar. The 
+
+					<span class="emphasis"><em>org.eclipse.xtext.common.Terminals</em></span> is a library grammar shipped with Xtext 
+					and predefines the most common terminal rules, such as 
 					<span class="emphasis"><em>ID</em></span>, 
 					<span class="emphasis"><em>STRING</em></span> and 
-					<span class="emphasis"><em>INT</em></span>. It also introduces single-line and multi-line comments as well as rules for whitespace, which are ignore by default.
-					You can open that grammar in the editor, so you see which rules. It turns out that these set of rules are often the same and often used, so that most Xtext languages 
-					extend this grammar. However, it is just a library, so you won&rsquo;t use it if it doesn&rsquo;t fit your needs. Also you can use the grammar inheritance mechanism for your grammar libraries, of course.
+					<span class="emphasis"><em>INT</em></span>. 
+					It also introduces single-line and multi-line comments as well as rules for 
+					whitespace, which are ignore by default. You can open that grammar in the 
+					editor, so you see which rules. It turns out that these set of rules are often 
+					the same and often used, so that most Xtext languages extend this grammar. 
+					However, it is just a library, so you won&rsquo;t use it if it doesn&rsquo;t fit your needs. 
+					Also you can use the grammar inheritance mechanism for your grammar libraries, 
+					of course.
 				</p>
 <p>The next statement declares an EMF Ecore package, aka EPackage, to be derived from the grammar:</p>
 <div class="literallayout">
@@ -215,31 +239,44 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </div>
 <p>Ecore 
 					<span class="emphasis"><em>EPackages</em></span> are effectively a set of classes (in EMF they are called 
-					<span class="emphasis"><em>EClass</em></span>) which are used to represent the in memory model of a text file. Instead of 
-					<span class="emphasis"><em>model</em></span> we 
-					also sometimes refer to it as 
-					<span class="emphasis"><em>semantic model</em></span> or _abstract syntax tree (AST)*. Note, that in the case of Xtext it&rsquo;s actually a graph rather than a tree, since it also 
-					contains cross links. But as the term AST is so commonly used and known we are ignoring this little detail. 
+
+					<span class="emphasis"><em>EClass</em></span>) which are used to represent the in memory model of a text file. Instead
+					of 
+					<span class="emphasis"><em>model</em></span> we also sometimes refer to it as 
+					<span class="emphasis"><em>semantic model</em></span> or _Abstract Syntax 
+					Tree (AST)_. Note, that in the case of Xtext it&rsquo;s actually a graph rather than a 
+					tree, since it also contains cross links. But as the term AST is so commonly 
+					used and known we are ignoring this little detail. 
 				</p>
 <p>In order to tell the parser which 
-					<span class="emphasis"><em>EClasses</em></span> to use when creating the AST, we need to make them available by either importing existing Ecore packages 
-					or like in our example let Xtext derive a package from the grammar. An EPackage has a name and namespace URI (short: nsURI), so we have to declare 
-					these two values in that statement. 
+					<span class="emphasis"><em>EClasses</em></span> to use when creating the AST, we 
+					need to make them available by either importing existing Ecore packages or like 
+					in our example let Xtext derive a package from the grammar. An 
+					<span class="emphasis"><em>EPackage</em></span> has a 
+					name and namespace URI (short: 
+					<span class="emphasis"><em>nsURI</em></span>), so we have to declare these two values 
+					in that statement. 
 				</p>
-<p>That&rsquo;s all for the prelude, now we have to define the parser rules which effectively define a bi-directional mapping from text to a constructed AST. Bi-directional because
-					Xtext not only derived a parser from the grammar but also a serializer. Anyway, we will mostly talk about parsing in this chapter.</p>
-<p>Ignore and delete the parser rules generated by the wizard and start by declaring an entry rule for our language. 
-					The entry rule for the parser will be called 
-					<span class="emphasis"><em>DomainModel</em></span>. Xtext is fine with any name, it just picks the first rule in a grammar and interprets it as the entry rule.
+<p>That&rsquo;s all for the prelude, now we have to define the parser rules which 
+					effectively define a bi-directional mapping from text to a constructed AST. 
+					Bi-directional because Xtext not only derived a parser from the grammar but also 
+					a serializer. Anyway, we will mostly talk about parsing in this chapter.</p>
+<p>Ignore and delete the parser rules generated by the wizard and start by 
+					declaring an entry rule for our language. The entry rule for the parser will be 
+					called 
+					<span class="emphasis"><em>DomainModel</em></span>. Xtext is fine with any name, it just picks the first rule 
+					in a grammar and interprets it as the entry rule.
 				</p>
 <p>As a 
 					<span class="emphasis"><em>DomainModel</em></span> consists of one or more 
-					<span class="emphasis"><em>Entity</em></span> entries, this rule delegates to 
-					another rule named 
-					<span class="emphasis"><em>Entity</em></span>, which will be defined later on. As we can have an arbitrary number of entities within a model, the 
-					cardinality is &lsquo;*&rsquo;. There are four different cardinalities available.
+					<span class="emphasis"><em>Entity</em></span> entries, this rule delegates 
+					to another rule named 
+					<span class="emphasis"><em>Entity</em></span>, which will be defined later on. As we can have an 
+					arbitrary number of entities within a model, the cardinality is '
+					<span class="emphasis"><em>*</em></span>'. There are 
+					four different cardinalities available.
 				</p>
-<table id="N10122">
+<table id="N1012E">
 <tr>
 						
 <td>(no operator) </td>
@@ -248,19 +285,25 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </tr>
 <tr>
 						
-<td>?     </td>
+<td>
+							<span class="emphasis"><em>?</em></span>     
+						</td>
 						<td> zero or one  </td>
 					
 </tr>
 <tr>
 						
-<td>*     </td>
+<td>
+							<span class="emphasis"><em>*</em></span>     
+						</td>
 						<td> zero or more</td>
 					
 </tr>
 <tr>
 						
-<td>+     </td>
+<td>
+							<span class="emphasis"><em>+</em></span>     
+						</td>
 						<td> one or more  </td>
 					
 </tr>
@@ -276,10 +319,12 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>An Xtext grammar does not only describe rules for the parser but also the structure of the resulting AST. 
-					Usually, each parser rule will create a new object in that tree. The type of that element can be specified after the rule name using the keyword 
-					<span class="emphasis"><em>returns</em></span>. If the type&rsquo;s name 
-					is the same as the rule&rsquo;s name, it can be omitted as in our case. Which effectively means that
+<p>An Xtext grammar does not only describe rules for the parser but also the 
+					structure of the resulting AST. Usually, each parser rule will create a new object 
+					in that tree. The type of that element can be specified after the rule name using 
+					the keyword 
+					<span class="emphasis"><em>returns</em></span>. If the type&rsquo;s name is the same as the rule&rsquo;s name, it can 
+					be omitted as in our case. Which effectively means that
 				</p>
 <div class="literallayout">
 <p>
@@ -300,8 +345,9 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>In order to connect the different objects together, we have to assign the elements returned by called rules to
-					some feature of the current rule&rsquo;s object. This is done by using so called assignments. </p>
+<p>In order to connect the different objects together, we have to assign the 
+					elements returned by called rules to some feature of the current rule&rsquo;s object. 
+					This is done by using so called assignments. </p>
 <div class="literallayout">
 <p>
 <code class="code">DomainModel&nbsp;:<br>
@@ -312,22 +358,25 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>The assignment adds (the 
-					<span class="emphasis"><em>+=</em></span> operator) every object returned by the 
+<p>The assignment adds (the '
+					<span class="emphasis"><em>+=</em></span>' operator) every object returned by the 
+
 					<span class="emphasis"><em>Entity</em></span> rule to the 
 					<span class="emphasis"><em>elements</em></span> referenced of the AST type 
-					<span class="emphasis"><em>Model</em></span>. If you use 
-					<span class="bold"><strong>+=</strong></span> as opposed to 
-					<span class="bold"><strong>=</strong></span> the feature needs
-					to be a list (upperBound=-1). In addition to the two mentioned assignment operators there is a third one (
-					<span class="bold"><strong>?=</strong></span>) which is called boolean assignment and which sets a certain feature to true, if 
-					the part on the right hand side was parsed. Here&rsquo;s the list of available assignment operators:
+					<span class="emphasis"><em>Model</em></span>. If you use '
+					<span class="emphasis"><em>+=</em></span>' 
+					as opposed to '
+					<span class="emphasis"><em>=</em></span>' the feature needs to be a list (upperBound=-1). In addition to the 
+					two mentioned assignment operators there is a third one '
+					<span class="emphasis"><em>?=</em></span>' which is called boolean 
+					assignment and which sets a certain feature to true, if the part on the right hand 
+					side was parsed. Here&rsquo;s the list of available assignment operators:
 				</p>
-<table id="N1018C">
+<table id="N1019E">
 <tr>
 						
 <th>
-							<span class="bold"><strong>foo=...</strong></span>   
+							<span class="emphasis"><em>foo=...</em></span>   
 						</th>
 						<td>corresponds to 
 							<span class="emphasis"><em>setFoo(...)</em></span>  
@@ -337,7 +386,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <th>
-							<span class="bold"><strong>foo+=...</strong></span>  
+							<span class="emphasis"><em>foo+=...</em></span>  
 						</th>
 						<td>corresponds to 
 							<span class="emphasis"><em>getFoo().add(...)</em></span>
@@ -347,7 +396,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 <tr>
 						
 <th>
-							<span class="bold"><strong>foo?=...</strong></span>  
+							<span class="emphasis"><em>foo?=...</em></span>  
 						</th>
 						<td>corresponds to 
 							<span class="emphasis"><em>setFoo(true)</em></span>
@@ -356,11 +405,13 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </tr>
 </table>
 <p>The next rule on our list is the rule 
-					<span class="emphasis"><em>Entity</em></span>. Looking at our target syntax, each entity begins with the keyword 
-					<span class="emphasis"><em>'entity'</em></span> followed 
-					by the entity&rsquo;s name and an opening curly brace (we will handle the 
-					<span class="emphasis"><em>extends</em></span> clause in a second step). Then, an entity defines a number 
-					of features and ends with a closing curly brace. The rule looks like this:
+					<span class="emphasis"><em>Entity</em></span>. Looking at our target syntax, 
+					each entity begins with the keyword 
+					<span class="emphasis"><em>'entity'</em></span> followed by the entity&rsquo;s name and an 
+					opening curly brace (we will handle the 
+					<span class="emphasis"><em>extends</em></span> clause in a second step). Then, 
+					an entity defines a number of features and ends with a closing curly brace. The 
+					rule looks like this:
 				</p>
 <div class="literallayout">
 <p>
@@ -373,16 +424,30 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>Keywords are simply declared as string literals within the rules. The name uses the ID rule from the mixed-in grammar 
-					<span class="bold"><strong>org.eclipse.xtext.common.Terminals</strong></span>. The ID rule is 
-					a so called terminal rule which always returns simple data types, such as String, Date, or Integer. Actually any Java class can be a simple EMF 
-					<span class="emphasis"><em>EDataType</em></span>. The ID rule 
-					recognizes alphanumeric words similar to identifiers in Java and returns the value as a String. You can navigate to its declaration using 
-					<span class="emphasis"><em>F3</em></span>.
-					As mentioned before the assignment operator "
-					<span class="emphasis"><em>=</em></span>" denotes a single valued feature.
+<p>Keywords are simply declared as string literals within the rules. The name 
+					uses the 
+					<span class="emphasis"><em>ID</em></span> rule from the mixed-in grammar 
+					<span class="emphasis"><em>org.eclipse.xtext.common.Terminals</em></span>. 
+					The 
+					<span class="emphasis"><em>ID</em></span> rule is a so called terminal rule which always returns simple data types, 
+					such as 
+					<span class="emphasis"><em>String</em></span>, 
+					<span class="emphasis"><em>Date</em></span>, or 
+					<span class="emphasis"><em>Integer</em></span>. Actually any Java class can be a simple 
+					EMF 
+					<span class="emphasis"><em>EDataType</em></span>. The 
+					<span class="emphasis"><em>ID</em></span> rule recognizes alphanumeric words similar to identifiers 
+					in Java and returns the value as a 
+					<span class="emphasis"><em>String</em></span>. You can navigate to its declaration 
+					using 
+					<span class="emphasis"><em>F3</em></span>. As mentioned before the assignment operator '
+					<span class="emphasis"><em>=</em></span>' denotes a single
+					valued feature.
 				</p>
-<p>We want to allow inheritance for entities and therefore now add an optional &lsquo;extend&rsquo; part.</p>
+<p>We want to allow inheritance for entities and therefore now add an optional 
+					'
+					<span class="emphasis"><em>extends</em></span>' part.
+				</p>
 <div class="literallayout">
 <p>
 <code class="code">Entity&nbsp;returns&nbsp;Entity:<br>
@@ -395,28 +460,39 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>The question mark marks an element or as in this case an entire group optional. The other new thing is the right hand side of of the assignment 
-					<span class="bold"><strong>superType=[Entity]</strong></span>.
-					This is a cross-reference literal and states, that a cross reference to an elsewhere declared 
+<p>The question mark marks an element or as in this case an entire group optional.
+					The other new thing is the right hand side of of the assignment 
+					<span class="emphasis"><em>superType=[Entity]</em></span>.
+					This is a cross-reference literal and states, that a cross reference to an elsewhere 
+					declared 
 					<span class="emphasis"><em>Entity</em></span> should be established. So in this case 
-					<span class="emphasis"><em>Entity</em></span> does not point to the 
-					corresponding rule but to the 
-					<span class="emphasis"><em>EClass</em></span>. As both are named equally this might cause a little confusion at first.
-					The full syntax for a cross reference is 
+					<span class="emphasis"><em>Entity</em></span> does not point to 
+					the corresponding rule but to the 
+					<span class="emphasis"><em>EClass</em></span>. As both are named equally this might 
+					cause a little confusion at first. The full syntax for a cross reference is 
+
 					<span class="emphasis"><em>[TypeName|RuleCall]</em></span> where 
 					<span class="emphasis"><em>RuleCall</em></span> defaults to 
 					<span class="emphasis"><em>ID</em></span>. This means that 
-					<span class="emphasis"><em>?</em></span> would work equally well.
-					The parser only parses the name of the cross referenced element using the ID rule and stores it internally. Later on the linker establishes the cross reference using the name
-					, the defined cross reference&rsquo;s type (
-					<span class="emphasis"><em>Entity</em></span> in this case) and the defined scoping rules. Scoping is not covered in this tutorial since the domain model DSL works with 
-					the default scoping semantics. By default a namespace based scoping is applied, which means that all entities living in the same namespace are possible candidates for a 
-					cross reference. We talk a bit about this later in this chapter when we introduce namespaces.
+
+					<span class="emphasis"><em>?</em></span> would work equally well. The parser only parses 
+					the name of the cross referenced element using the 
+					<span class="emphasis"><em>ID</em></span> rule and stores it 
+					internally. Later on the linker establishes the cross reference using the name, the 
+					defined cross reference&rsquo;s type (
+					<span class="emphasis"><em>Entity</em></span> in this case) and the defined scoping rules. 
+					Scoping is not covered in this tutorial since the domain model DSL works with 
+					the default scoping semantics. By default a namespace based scoping is applied, which 
+					means that all entities living in the same namespace are possible candidates for a 
+					cross reference. We talk a bit about this later on in this chapter when we introduce 
+					namespaces.
 				</p>
-<p>In our introductory example model we had not only defined entities but also two data types. So the 
+<p>In our introductory example model we had not only defined entities but also two 
+					data types. So the 
 					<span class="emphasis"><em>DomainModel</em></span> rule needs to be able to parse data types as well. 
 					As both entities and data types will be referenced from the yet to be defined 
-					<span class="emphasis"><em>Feature</em></span> rule, we should introduce a common super type for them.
+					<span class="emphasis"><em>Feature</em></span> 
+					rule, we should introduce a common super type for them.
 				</p>
 <div class="literallayout">
 <p>
@@ -437,17 +513,19 @@ DataType:<br>
 <p>A 
 					<span class="emphasis"><em>DomainModel</em></span> now consists of types where a 
 					<span class="emphasis"><em>Type</em></span> can either be a 
-					<span class="emphasis"><em>DataType</em></span> or an 
+					<span class="emphasis"><em>DataType</em></span> or 
+					an 
 					<span class="emphasis"><em>Entity</em></span>. Our rule 
-					<span class="emphasis"><em>Type</em></span> will just delegate to either of them, 
-					using the "
-					<span class="emphasis"><em>|</em></span>" alternatives operator. Now that we have a common super type for 
+					<span class="emphasis"><em>Type</em></span> will just delegate to either of them, using the '
+					<span class="emphasis"><em>|</em></span>' 
+					alternatives operator. Now that we have a common super type for 
 					<span class="emphasis"><em>Entity</em></span> and 
-					<span class="emphasis"><em>DataType</em></span> we are able to refer to both types 
-					of elements with a single cross-reference.
+					<span class="emphasis"><em>DataType</em></span> 
+					we are able to refer to both types of elements with a single cross-reference.
 				</p>
 <p>Next up we need to define the syntax of 
-					<span class="emphasis"><em>Feature</em></span>, which shouldn&rsquo;t be surprising to you, as we do not use any new concepts here.
+					<span class="emphasis"><em>Feature</em></span>, which shouldn&rsquo;t be surprising to 
+					you, as we do not use any new concepts here.
 				</p>
 <div class="literallayout">
 <p>
@@ -459,18 +537,23 @@ DataType:<br>
 </code>
 </p>
 </div>
-<p>In many target platforms there is a difference between the notion of a simple attribute and a reference. In relational databases, for instance,
-					a table contains the values of attributes directly, but references are &ldquo;modeled&rdquo; by the means of foreign keys. In object-relational persistence technologies 
-					such as JPA or Hibernate references can have additional life-cycle semantics, which define what to do with referenced objects in certain circumstances. 
-					Therefore you typically make a distinction between the two concepts, as we do in the 
-					<span class="emphasis"><em>Domain Model Example</em></span> you can create using the wizard. However, 
-					in this small scenario we do not need a separation therefore we stick with one single concept.
+<p>In many target platforms there is a difference between the notion of a simple 
+					attribute and a reference. In relational databases, for instance, a table contains 
+					the values of attributes directly, but references are &ldquo;modeled&rdquo; by the means of 
+					foreign keys. In object-relational persistence technologies such as JPA or Hibernate 
+					references can have additional life-cycle semantics, which define what to do with 
+					referenced objects in certain circumstances. Therefore you typically make a distinction 
+					between the two concepts, as we do in the 
+					<span class="emphasis"><em>Domain Model Example</em></span> you can create using 
+					the wizard. However, in this small scenario we do not need a separation therefore we 
+					stick with one single concept.
 				</p>
-<p>As the type reference has an additional property for the multiplicity (many or one), we make it a separate model element and parser rule 
-					<span class="emphasis"><em>TypeRef</em></span>. 
-					The presence of the postfix &ldquo;*&rdquo; (technically a keyword) should trigger a boolean flag in the AST model. This is the purpose of the assignment operator "
-					<span class="emphasis"><em>?=</em></span>". 
-					The parser rule looks like this:
+<p>As the type reference has an additional property for the multiplicity (many or one), 
+					we make it a separate model element and parser rule 
+					<span class="emphasis"><em>TypeRef</em></span>. The presence of the 
+					postfix &lsquo;*&rsquo; (technically a keyword) should trigger a boolean flag in the AST model. 
+					This is the purpose of the assignment operator '
+					<span class="emphasis"><em>?=</em></span>'. The parser rule looks like this:
 				</p>
 <div class="literallayout">
 <p>
@@ -482,8 +565,10 @@ DataType:<br>
 </code>
 </p>
 </div>
-<p>Again we have specified a cross reference, which this time not only allows to reference entities but all instances of type. So far this only includes data type, 
-					but you may want to introduce additional concepts in future version, like for instance a Value Object as proposed in Eric Evan&rsquo;s great book 
+<p>Again we have specified a cross reference, which this time not only allows to 
+					reference entities but all instances of type. So far this only includes data type, but 
+					you may want to introduce additional concepts in future version, like for instance a 
+					Value Object as proposed in Eric Evan&rsquo;s great book 
 					<span class="emphasis"><em>Domain Driven Design</em></span>.
 				</p>
 <p>In the end your grammar editor should look like this:</p>
@@ -529,13 +614,15 @@ TypeRef:<br>
 </div>
 </div>
 </div>
-<p>Now that we have the grammar in place and defined we need to run the generator. To do so locate the file 
-					<span class="emphasis"><em>GenerateDomainModel.mwe2</em></span> file next to the grammar file 
-					in the package explorer view. From its context menu, choose
+<p>Now that we have the grammar in place and defined we need to run the generator. 
+					To do so locate the file 
+					<span class="emphasis"><em>GenerateDomainModel.mwe2</em></span> file next to the grammar 
+					file in the package explorer view. From its context menu, choose
 				</p>
 <span class="emphasis"><em>Run As -&gt; MWE2 Workflow</em></span>.
-				<p>That will trigger the Xtext language generator. It generates the parser and serializer and some additional infrastructure code. 
-					You will see its logging messages in the Console view. </p>
+				<p>That will trigger the Xtext language generator. It generates the parser and 
+					serializer and some additional infrastructure code. You will see its logging 
+					messages in the Console view. </p>
 </div>
 <div class="section" title="Run the generated IDE plugin">
 <div class="titlepage">
@@ -546,13 +633,20 @@ TypeRef:<br>
 </div>
 </div>
 </div>
-<p>If code generation succeeded, we are now able to test the IDE integration. Right-click on the Xtext project and choose</p>
+<p>If code generation succeeded, we are now able to test the IDE integration. 
+					Right-click on the Xtext project and choose</p>
 <span class="emphasis"><em>Run As -&gt; Eclipse Application</em></span>.
 				<p>This will spawn a new Eclipse workbench with your projects as plug-ins installed. 
-					In the new workbench, create a new project (
-					<span class="emphasis"><em>File -&gt; New -&gt; Project...  -&gt; General -&gt; Project</em></span>) and therein a new file with the file extension 
-					you chose in the beginning (
-					<span class="emphasis"><em>*.dmodel</em></span>). This will open the generated entity editor.
+					In the new workbench, create a new project 
+					(
+					<span class="emphasis"><em>File -&gt; New -&gt; Project...  -&gt; General -&gt; Project</em></span>) and therein a new file 
+					with the file extension you chose in the beginning (
+					<span class="emphasis"><em>*.dmodel</em></span>). This will open
+					the generated entity editor. Try it a bit and discover the default 
+					functionality for code completion (
+					<span class="emphasis"><em>CTRL SPACE</em></span> even for cross references), 
+					syntax highlighting, syntactic validation, linking errors, outline, find
+					references etc.
 				</p>
 <p>
 					
@@ -572,30 +666,38 @@ TypeRef:<br>
 </div>
 </div>
 </div>
-<p>At the current stage, our language puts all types into the same scope. As cross-references are specified by means of names, this can easily 
-					yield collisions as the model size increases. Avoiding such name clashes is why most programming languages invent concepts like name spaces or modules. We will now 
-					extend the language by the concept of a 
+<p>At the current stage, our language puts all types into the same scope. As 
+					cross-references are specified by means of names, this can easily yield collisions 
+					as the model size increases. Avoiding such name clashes is why most programming 
+					languages invent concepts like name spaces or modules. We will now extend the language 
+					by the concept of a 
 					<span class="emphasis"><em>Package</em></span>, which effectively is a name space. 
 				</p>
 <p>Our languages&rsquo;s definition of a 
-					<span class="emphasis"><em>Package</em></span> is as follows: A package has a name and contains other named elements and name space imports. A named element is either another 
+					<span class="emphasis"><em>Package</em></span> is as follows: A package has a name and 
+					contains other named elements and name space imports. A named element is either another 
 
 					<span class="emphasis"><em>Package</em></span> or a 
 					<span class="emphasis"><em>Type</em></span>. Within a package, elements must have unique names. The 
+
 					<span class="emphasis"><em>fully qualified name</em></span> (FQN) of a named element consists of the FQN of its package, 
 					a separator '
 					<span class="emphasis"><em>.</em></span>' and its own simple name. Elements refer to each other using their 
+
 					<span class="emphasis"><em>qualified names</em></span> which are relative to the common namespaces. By means 
 					of import statements, these names can be further abbreviated. 
 				</p>
-<p>That might sound a bit complicated at first but the good thing is that Xtext comes with exactly such a default semantic for namespaces, which feels very natural in practice. 
-					Although all aspects of this semantic are adaptable, we will stick to the defaults within this tutorial.</p>
-<p>Before we extend the grammar, let&rsquo;s have a look at how a the example model would look like when using the newly introduced concepts:</p>
+<p>That might sound a bit complicated at first but the good thing is that Xtext 
+					comes with exactly such a default semantic for namespaces, which feels very 
+					natural in practice. Although all aspects of this semantic are adaptable, we 
+					will stick to the defaults within this tutorial.</p>
+<p>Before we extend the grammar, let&rsquo;s have a look at how a the example model would
+					look like when using the newly introduced concepts:</p>
 <div class="literallayout">
 <p>
 <code class="code">package&nbsp;my.types&nbsp;{<br>
 &nbsp;&nbsp;datatype&nbsp;String<br>
-&nbsp;&nbsp;datatype&nbsp;Bool<br>
+&nbsp;&nbsp;datatype&nbsp;Boolean<br>
 }<br>
 
 <br>
@@ -605,7 +707,7 @@ package&nbsp;my.entities&nbsp;{<br>
 &nbsp;&nbsp;<br>
 &nbsp;&nbsp;entity&nbsp;Session&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br>
-&nbsp;&nbsp;&nbsp;&nbsp;isTutorial&nbsp;:&nbsp;Bool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;isTutorial&nbsp;:&nbsp;Boolean<br>
 &nbsp;&nbsp;}<br>
 
 <br>
@@ -661,16 +763,20 @@ package&nbsp;my.entities&nbsp;{<br>
 </p>
 </div>
 <p>To allow qualified names, we need a new rule 
-					<span class="emphasis"><em>QualifiedName</em></span>. This rule returns a string. But we do not want this to be a 
+					<span class="emphasis"><em>QualifiedName</em></span>. This rule 
+					returns a string. But we do not want this to be a 
 					<span class="emphasis"><em>terminal rule</em></span>, as terminal 
-					rules have special semantics (they are used context less in the lexer, which often cause problems). Instead we want it to be a parser rule, but one which
+					rules have special semantics (they are used context-less in the lexer, which 
+					often cause problems). Instead we want it to be a parser rule, but one which
 					doesn&rsquo;t return an instance of an 
 					<span class="emphasis"><em>EClass</em></span> from the referenced 
-					<span class="emphasis"><em>EPackage</em></span> but just return a String. Such rules are called 
+					<span class="emphasis"><em>EPackage</em></span> but 
+					just return a String. Such rules are called 
 					<span class="emphasis"><em>data type rules</em></span>, because they return 
 					instances of 
 					<span class="emphasis"><em>EDatatype</em></span> as opposed to instances of 
-					<span class="emphasis"><em>EClass</em></span>. String is the most often used 
+					<span class="emphasis"><em>EClass</em></span>. String is the most 
+					often used 
 					<span class="emphasis"><em>EDataType</em></span> in this context and is therefore the default return 
 					type for data type rules. The rule looks like this:
 				</p>
@@ -684,18 +790,22 @@ package&nbsp;my.entities&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>Note, that Xtext automatically figures out that the rule is a 
-					<span class="emphasis"><em>data type rule</em></span> rather then a normal parser rule, because it doesn&rsquo;t contain any assignments and all rule 
-					calls go to either other 
+<p>Note, that Xtext automatically figures out that the rule is a _data type 
+					rule_ rather then a normal parser rule, because it doesn&rsquo;t contain any assignments 
+					and all rule calls go to either other 
 					<span class="emphasis"><em>data type rules</em></span> or other 
-					<span class="emphasis"><em>terminal rules</em></span>. For a 
-					<span class="emphasis"><em>data type rule</em></span> the parser simply concatenates the consumed text and returns it as a string.
-					The transformation to a user defined data type is done by so called 
+					<span class="emphasis"><em>terminal rules</em></span>. 
+					For a 
+					<span class="emphasis"><em>data type rule</em></span> the parser simply concatenates the consumed text and returns 
+					it as a string.The transformation to a user defined data type is done by so 
+					called 
 					<span class="emphasis"><em>ValueConverters</em></span>. But as we use strings we don&rsquo;t need to care about 
+
 					<span class="emphasis"><em>ValueConverters</em></span> here.
 				</p>
 <p>Next up we need to define the syntax of 
-					<span class="emphasis"><em>PackageDeclarations</em></span>, which makes use of the 
+					<span class="emphasis"><em>PackageDeclarations</em></span>, which makes use of 
+					the 
 					<span class="emphasis"><em>QualifiedName</em></span> rule but doesn&rsquo;t make use of anything we haven&rsquo;t yet talked about.
 				</p>
 <div class="literallayout">
@@ -709,11 +819,18 @@ package&nbsp;my.entities&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>Having qualified names at hand, we want to specify cross references that way, too. As mentioned by default, Xtext assumes the rule 
-					<span class="emphasis"><em>ID</em></span> as the syntax for cross references, 
-					which has been fully sufficient so far. But now we want to allow fully qualified names as well, so we explicitly specify the syntax rule after a delimiter &lsquo;|&rsquo;:
+<p>Having qualified names at hand, we want to specify cross references that 
+					way, too. As mentioned by default, Xtext assumes the rule 
+					<span class="emphasis"><em>ID</em></span> as the syntax 
+					for cross references, which has been fully sufficient so far. But now we want 
+					to allow fully qualified names as well, so we explicitly specify the syntax rule 
+					after a delimiter '
+					<span class="emphasis"><em>|</em></span>':
 				</p>
-<p>fn.. Note, that the &lsquo;|&rsquo; has nothing to do with the previously introduced alternative operator. In the context of a cross reference it is simply a delimiter.  </p>
+<p>fn.. Note, that the '
+					<span class="emphasis"><em>|</em></span>' has nothing to do with the previously introduced 
+					alternative operator. In the context of a cross reference it is simply a delimiter.  
+				</p>
 <div class="literallayout">
 <p>
 <code class="code">Entity:<br>
@@ -739,9 +856,10 @@ package&nbsp;my.entities&nbsp;{<br>
 </div>
 <p>As the last step, we introduce imports. An 
 					<span class="emphasis"><em>Import</em></span> is an instance of 
+
 					<span class="emphasis"><em>AbstractElement</em></span>, too, so that it can occur as a child of 
-					<span class="emphasis"><em>DomainModel</em></span> as well as 
-					of 
+					<span class="emphasis"><em>DomainModel</em></span> as 
+					well as of 
 					<span class="emphasis"><em>PackageDeclaration</em></span>.
 				</p>
 <div class="literallayout">
@@ -754,9 +872,11 @@ package&nbsp;my.entities&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>An imported name space is not just a qualified name but it also allows an optional wildcard character '
-					<span class="emphasis"><em>*</em></span>' at the end, so that multiple names can be imported 
-					with one statement. That requires a new data type rule which we name 
+<p>An imported name space is not just a qualified name but it also allows an 
+					optional wildcard character '
+					<span class="emphasis"><em>*</em></span>' at the end, so that multiple names can be 
+					imported with one statement. That requires a new data type rule which we 
+					name 
 					<span class="emphasis"><em>QualifiedNameWithWildCard</em></span>:
 				</p>
 <div class="literallayout">
@@ -782,15 +902,20 @@ The&nbsp;declaration&nbsp;of&nbsp;the&nbsp;_Import_&nbsp;rule&nbsp;should&nbsp;l
 </code>
 </p>
 </div>
-<p>The default scoping implementation is based on naming conventions. First everything which has a name is referenceable. By default something has a name if it has a property 
-					<span class="emphasis"><em>'name'</em></span>.
-					If such an 
-					<span class="emphasis"><em>EAttribute</em></span> is available, the default implementation computes a qualified name by asking the container for its name and concatenates the two 
-					names separated by a dot. The computation of qualified names can be arbitrarily changed by implementing an 
-					<span class="emphasis"><em>IQualifedNameProvider</em></span>. The other naming convention is 
-					that if some element has an EAttribute &lsquo;importedNamespace&rsquo; that value is used as a namespace import and is automatically prefixed to any simple names used within 
-					that namespace. Also the asterix (
-					<span class="emphasis"><em>*</em></span>) is used as a wildcard by default.
+<p>The default scoping implementation is based on naming conventions. First 
+					everything which has a name is referenceable. By default something has a name 
+					if it has a property 
+					<span class="emphasis"><em>'name'</em></span>. If such an 
+					<span class="emphasis"><em>EAttribute</em></span> is available, the default 
+					implementation computes a qualified name by asking the container for its name 
+					and concatenates the two names separated by a dot. The computation of qualified
+					names can be arbitrarily changed by implementing an 
+					<span class="emphasis"><em>IQualifedNameProvider</em></span>. 
+					The other naming convention is that if some element has an EAttribute 
+					&lsquo;importedNamespace&rsquo; that value is used as a namespace import and is automatically 
+					prefixed to any simple names used within that namespace. Also the asterisk '
+					<span class="emphasis"><em>*</em></span>' 
+					is used as a wildcard by default.
 				</p>
 <p>That&rsquo;s all for the grammar. It should now read as </p>
 <div class="literallayout">
@@ -852,8 +977,10 @@ QualifiedNameWithWildCard:<br>
 </code>
 </p>
 </div>
-<p>Now you should regenerate the language infrastructure as described in the previous section, and give the editor a try. You can even split up 
-					your model into smaller parts and have cross-references across file boundaries, as long as the referenced models are on the classpath.</p>
+<p>Now you should regenerate the language infrastructure as described in the 
+					previous section, and give the editor a try. You can even split up your model 
+					into smaller parts and have cross-references across file boundaries, as long 
+					as the referenced models are on the classpath.</p>
 </div>
 </div>
 </body>

@@ -688,7 +688,7 @@ In the next step the generator examines all generated _EClasses_ and lifts up si
 
 h3(#customPostProcessing). Customized Post Processing
 
-As a last step, the generator invokes the post processor for every generated Ecore model. The post processor expects an Xtend file with name _<MyDsl>PostProcessor.ext_ (if the name of the grammar file is _MyDsl.xtext_) in the same folder as the grammar file. Further, for a successful invocation, the Xtend file must declare an extension with signature _process(xtext::GeneratedMetamodel)_. E.g.
+As a last step, the generator invokes the post processor for every generated Ecore model. The post processor expects an Xtend file with name _[MyDsl]PostProcessor.ext_ (if the name of the grammar file is _MyDsl.xtext_) in the same folder as the grammar file. Further, for a successful invocation, the Xtend file must declare an extension with signature _process(xtext::GeneratedMetamodel)_. E.g.
 
 bc.. process(xtext::GeneratedMetamodel this) :
   process(ePackage)

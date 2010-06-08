@@ -1,0 +1,88 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Quick fixes</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="IDEconcepts.html" title="IDE concepts">
+<link rel="prev" href="contentAssist.html" title="Content Assist">
+<link rel="next" href="templates.html" title="Template Proposals">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Quick fixes</h1>
+<p>For validations written using the ${org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator}:#custom_validation it is possible to provide corresponding quick fixes in the editor. To be able to implement a quick fix for a given diagnostic (a warning or error) the underlying 
+				<span class="emphasis"><em>cause</em></span> of the diagnostic must be known (i.e. what actual problem does the diagnostic represent?), otherwise the fix doesn&rsquo;t know what needs to be done. As we don&rsquo;t want to deduce this from the diagnostic&rsquo;s error message we associate a problem specific 
+				<span class="emphasis"><em>code</em></span> with the diagnostic.
+			</p>
+<p>In the following example (from 
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.example.domainmodel/src/org/eclipse/xtext/example/validation/DomainmodelJavaValidator.java?root=Modeling_Project&view=co" target="_new">DomainmodelJavaValidator</a>) the diagnostic&rsquo;s 
+				<span class="emphasis"><em>code</em></span> is given by the last argument to the 
+				<span class="emphasis"><em>warning()</em></span> method and it is a reference to the static 
+				<span class="emphasis"><em>String</em></span> field _INVALID_TYPE_NAME_ in the validator class.
+			</p>
+<div class="literallayout">
+<p>
+<code class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning("Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital",&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.TYPE__NAME,&nbsp;INVALID_TYPE_NAME,&nbsp;type.getName());<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>Now that the validation has a unique code identifying the problem we can register quick fixes for it. We start by adding the ${org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/quickfix/QuickfixProviderFragment} to our workflow and after regenerating the code we should find an empty class 
+				<span class="emphasis"><em>MyDslQuickfixProvider</em></span> in our DSL&rsquo;s UI project.
+			</p>
+<p>Continuing with the _INVALID_TYPE_NAME_ problem from the Domainmodel example we add a method with which the problem can be fixed (see also 
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.example.domainmodel.ui/src/org/eclipse/xtext/example/quickfix/DomainmodelQuickfixProvider.java?root=Modeling_Project&view=co" target="_new">DomainmodelQuickfixProvider</a>):
+			</p>
+<div class="literallayout">
+<p>
+<code class="code">@Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)<br>
+public&nbsp;void&nbsp;fixName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{<br>
+		acceptor.accept(issue,&nbsp;"Capitalize&nbsp;name",&nbsp;"Capitalize&nbsp;name&nbsp;&nbsp;of&nbsp;'"&nbsp;+&nbsp;issue.getData()[0]&nbsp;+&nbsp;"'",&nbsp;"upcase.png",&nbsp;new&nbsp;IModification()&nbsp;{<br>
+		public&nbsp;void&nbsp;apply(IModificationContext&nbsp;context)&nbsp;throws&nbsp;BadLocationException&nbsp;{<br>
+			IXtextDocument&nbsp;xtextDocument&nbsp;=&nbsp;context.getXtextDocument();<br>
+			String&nbsp;firstLetter&nbsp;=&nbsp;xtextDocument.get(issue.getOffset(),&nbsp;1);<br>
+			xtextDocument.replace(issue.getOffset(),&nbsp;1,&nbsp;Strings.toFirstUpper(firstLetter));<br>
+	}<br>
+	});<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>By using the correct signature (see below) and annotating the method with the 
+				<span class="emphasis"><em>@Fix</em></span> annotation referencing the code we specified in the validator, Xtext knows that this method implements a fix for the problem. This also allows us to annotate multiple methods as fixes for the same problem.
+			</p>
+<p>The first three parameters given to the 
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/quickfix/IssueResolutionAcceptor.java?root=Modeling_Project&view=co" target="_new">IssueResolutionAcceptor</a> define the UI representation of the quick fix. As the document is not necessarily loaded when the quick fix is offered, we need to provide any additional data from the model that we want to refer to in the UI when creating the issue in the validator above. In this case, we provided the existing type name.
+			</p>
+<p>The actual model modification is implemented in the ${org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModification}. The ${org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModificationContext} provides access to the erroneous document.  </p>
+<p>If you prefer to implement the quick fix in terms of the semantic model use a ${org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/ISemanticModification.java} instead. Its 
+				<span class="emphasis"><em>apply(EObject, IModificationContext)</em></span> method will be invoked inside a modification transaction and the first argument will be the erroneous semantic element. This makes it very easy for the fix method to modify the model as necessary. After the method returns the model as well as the Xtext editor&rsquo;s content will be updated accordingly. If the method fails (throws an exception) the change will not be committed. The following snippet shows a semantic quick fix for a similar problem.
+			</p>
+<div class="literallayout">
+<p>
+<code class="code">@Fix(DomainmodelJavaValidator.INVALID_FEATURE_NAME)<br>
+public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{<br>
+	acceptor.accept(issue,&nbsp;"Uncapitalize&nbsp;name",&nbsp;"Uncapitalize&nbsp;name&nbsp;of&nbsp;'"&nbsp;+&nbsp;issue.getData()[0]&nbsp;+&nbsp;"'",&nbsp;"upcase.png",<br>
+			new&nbsp;ISemanticModification()&nbsp;{<br>
+				public&nbsp;void&nbsp;apply(EObject&nbsp;element,&nbsp;IModificationContext&nbsp;context)&nbsp;{<br>
+					((Feature)&nbsp;element).setName(Strings.toFirstLower(issue.getData()[0]));<br>
+				}<br>
+			});<br>
+}<br>
+
+<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</body>
+</html>

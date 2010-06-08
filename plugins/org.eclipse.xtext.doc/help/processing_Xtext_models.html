@@ -12,8 +12,8 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Processing Xtext models</h1>
 <p>Now that we know how to create a language we should talk about processing the parsed models somehow. There are typically two useful things one can do with
-				Xtext models. One is translating them to another programming language, i.e. writing a code generator. The other is loading them at runtime and use them
-				dynamically. We&rsquo;ll later talk about code generation. In this chapter we want to see how to interact with Xtext models programmatically. </p>
+				Xtext models: One is translating them to another programming language, i.e. writing a code generator, the other is loading them at runtime and use them
+				dynamically. We&rsquo;ll talk about code generation later. In this chapter we want to see how to interact with Xtext models programmatically. </p>
 <p>Text files parsed by Xtext are represented as object graphs in memory. We call these object graphs 
 				<span class="emphasis"><em>Abstract Syntax Tree (AST)</em></span>, 
 				<span class="emphasis"><em>semantic model</em></span> or 
@@ -61,7 +61,8 @@ EObject&nbsp;eobject&nbsp;=&nbsp;resource.getContents().get(0);<br>
 					the extension point declarations are used.
 				</p>
 <p>The other thing the StandaloneSetup takes care of is creating a Guice 
-					<span class="emphasis"><em>injector</em></span>. The use of Guice and Dependency Injection is explained here:#dependencyInjection. 
+					<span class="emphasis"><em>injector</em></span>. The use of Guice and Dependency Injection is explained 
+					<a class="link" href="dependencyInjection.html" title="Dependency Injection in Xtext with Google Guice">here</a>. 
 				</p>
 <p>Now that the language infrastructure is initialized and the different contributions to EMF are registered, we want to load a 
 					<span class="emphasis"><em>Resource</em></span>. To do so we first create a 
@@ -95,9 +96,17 @@ resource.load(null);<br>
 <p>The load method optionally takes a map of properties, which allows to define a contract between a client and the specific implementation. In Xtext, for instance, we use 
 					the map to state whether cross references should be eagerly resolved. In order to find out what properties are supported, it&rsquo;s usually best to look into 
 					the concrete implementations. That said, in most cases you don&rsquo;t need to pass any properties at all.</p>
-<p>The last line 
-					bc.. EObject eobject = resource.getContents().get(0);
-					p. assigns the root element to a local variable.
+<p>The last line </p>
+<div class="literallayout">
+<p>
+<code class="code">EObject&nbsp;eobject&nbsp;=&nbsp;resource.getContents().get(0);<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>assigns the root element to a local variable.
 					Actually it is the first element from the contents list of a 
 					<span class="emphasis"><em>Resource</em></span>, but in Xtext a 
 					<span class="emphasis"><em>Resource</em></span> always has just one root element.
@@ -154,7 +163,10 @@ resource.load(null);<br>
 for&nbsp;(AbstractElement&nbsp;abstractElement&nbsp;:&nbsp;elements)&nbsp;{<br>
 &nbsp;&nbsp;if&nbsp;(abstractElement&nbsp;instanceof&nbsp;Entity)&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Entity&nbsp;entity&nbsp;=&nbsp;((Entity)abstractElement);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("entity&nbsp;"+entity.getName()+"&nbsp;extends&nbsp;"+entity.getSuperType().getName());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("entity&nbsp;"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;	+&nbsp;entity.getName()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;	+&nbsp;"&nbsp;extends&nbsp;"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;	+&nbsp;entity.getSuperType().getName());<br>
 &nbsp;&nbsp;}<br>
 }<br>
 
@@ -163,7 +175,9 @@ for&nbsp;(AbstractElement&nbsp;abstractElement&nbsp;:&nbsp;elements)&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>Note that you&rsquo;ll find a lot of convenience API in EMF&rsquo;s EcoreUtil and Xtext&rsquo;s EcoreUtil2. </p>
+<p>Note that you&rsquo;ll find a lot of convenience API in EMF&rsquo;s 
+					<span class="emphasis"><em>EcoreUtil</em></span> and Xtext&rsquo;s ${org.eclipse.xtext/src/org/eclipse/xtext/EcoreUtil2}. 
+				</p>
 </div>
 <div class="section" title="Working with the parse tree (aka node model)">
 <div class="titlepage">
@@ -211,9 +225,7 @@ System.out.println(text);<br>
 <p>The other node type is called 
 					<span class="emphasis"><em>CompositeNode</em></span> and is created for almost each grammar element. A composite node can contain other composite nodes and leaf nodes.
 					The super type of both node types is 
-					<span class="emphasis"><em>AbstractNode</em></span>. One can find a couple of convenience methods in 
-					<span class="emphasis"><em>NodeUtil</em></span> and 
-					<span class="emphasis"><em>ParseTreeUtil</em></span>.
+					<span class="emphasis"><em>AbstractNode</em></span>. One can find a couple of convenience methods in ${org.eclipse.xtext/src/org/eclipse/xtext/parsetree/NodeUtil} and ${org.eclipse.xtext/src/org/eclipse/xtext/parsetree/ParseTreeUtil}.
 				</p>
 </div>
 <div class="section" title="Working with the grammar">

@@ -15,7 +15,7 @@ Within Eclipse we have a generated _Activator_, which creates a Guice injector u
 In addition an _IExecutableExtensionFactory_ is generated for each language, which is used to create _ExecutableExtensions_.
 This means that everything which is created via extension points is managed by Guice as well, i.e. you can declare dependencies and get them injected upon creation. 
 
-The only thing you have to do in order to use this factory is to prefix the class with the factory _<MyLanguageName>ExecutableExtensionFactory_ name followed by a colon.
+The only thing you have to do in order to use this factory is to prefix the class with the factory _[MyLanguageName]ExecutableExtensionFactory_ name followed by a colon.
 
 bc.. <extension
   point="org.eclipse.ui.editors">

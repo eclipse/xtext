@@ -24,21 +24,11 @@
 <topic href="help/processing_Xtext_models.html#Summary" label="Summary"></topic>
 </topic>
 <topic href="help/getting-started-xpand.html" label="Writing a code generator">
-<topic href="help/getting-started-xpand.html#Creatingthemaintemplate" label="Creating the main template"></topic>
-<topic href="help/getting-started-xpand.html#Creatingthetemplatefortheentity" label="Creating the template for the entity"></topic>
-<topic href="help/getting-started-xpand.html#CreatingthetemplatefortheDAO" label="Creating the template for the DAO"></topic>
-<topic href="help/getting-started-xpand.html#Adjustingthegeneratorworkflow" label="Adjusting the generator workflow"></topic>
-<topic href="help/getting-started-xpand.html#Runningthegenerator" label="Running the generator"></topic>
-</topic>
-<topic href="help/Wherenext.html" label="Where next?"></topic>
-</topic>
-<topic href="help/concepts.html" label="Xtext and EMF">
-<topic href="help/concepts.html#model_metamodel" label="Model, Ecore Model, and Ecore"></topic>
-<topic href="help/emf_codegen.html" label="EMF code generation"></topic>
-<topic href="help/emf_resource.html" label="EMF Resources"></topic>
-<topic href="help/grammar_model.html" label="Grammar model"></topic>
-<topic href="help/parsetree_model.html" label="Parse tree model">
-<topic href="help/parsetree_model.html#node_semantic_grammar" label="Connection of AST, parse tree and grammar"></topic>
+<topic href="help/getting-started-xpand.html#XpandandMWE2" label="Xpand and MWE2"></topic>
+<topic href="help/getting-started-xpand.html#Theemptygeneratorproject" label="The empty generator project"></topic>
+<topic href="help/getting-started-xpand.html#Replacingtheexamplemodelfile1" label="Replacing the example model file (1)"></topic>
+<topic href="help/getting-started-xpand.html#TheModelingWorkflowEnginefile2" label="The Modeling Workflow Engine file (2)"></topic>
+<topic href="help/getting-started-xpand.html#UsingXpand3andXtend4forcodegeneration" label="Using Xpand (3) and Xtend (4) for code generation"></topic>
 </topic>
 </topic>
 <topic href="help/grammarLanguage.html" label="The Grammar Language">
@@ -57,7 +47,7 @@
 <topic href="help/syntax.html#TerminalRules" label="Terminal Rules">
 <topic href="help/syntax.html#Returntypes" label="Return types"></topic>
 </topic>
-<topic href="help/syntax.html#ExtendedBackusNaurformexpressions" label="Extended Backus-Naur form expressions">
+<topic href="help/syntax.html#ExtendedBackusNaurFormexpressions" label="Extended Backus-Naur Form expressions">
 <topic href="help/syntax.html#Keywords" label="Keywords / Characters"></topic>
 <topic href="help/syntax.html#CharacterRanges" label="Character Ranges"></topic>
 <topic href="help/syntax.html#Wildcard" label="Wildcard"></topic>
@@ -69,14 +59,16 @@
 </topic>
 </topic>
 <topic href="help/syntax.html#parser_rules" label="Parser Rules">
-<topic href="help/syntax.html#ExtendedBackusNaurFormexpressions" label="Extended Backus-Naur Form expressions">
+<topic href="help/syntax.html#ExtendedBackusNaurFormexpressions2" label="Extended Backus-Naur Form expressions">
 <topic href="help/syntax.html#assignments" label="Assignments"></topic>
 <topic href="help/syntax.html#CrossReferences" label="Cross References"></topic>
+<topic href="help/syntax.html#unordered_groups" label="Unordered Groups"></topic>
 <topic href="help/syntax.html#SimpleActions" label="Simple Actions"></topic>
 <topic href="help/syntax.html#Unassignedrulecalls" label="Unassigned rule calls"></topic>
 <topic href="help/syntax.html#grammarActions" label="Assigned Actions"></topic>
 </topic>
 </topic>
+<topic href="help/syntax.html#hidden_terminals" label="Hidden terminal symbols"></topic>
 <topic href="help/syntax.html#datatypeRules" label="Data type rules"></topic>
 <topic href="help/syntax.html#EnumRules" label="Enum Rules"></topic>
 </topic>
@@ -122,7 +114,6 @@
 <topic href="help/validation.html#concrete_syntax_validation" label="Serializer: Concrete Syntax Validation"></topic>
 </topic>
 <topic href="help/validation.html#custom_validation" label="Custom Validation"></topic>
-<topic href="help/validation.html#quickfixes" label="Quickfixes"></topic>
 <topic href="help/validation.html#check_based_validation" label="Validation with the Check language"></topic>
 <topic href="help/validation.html#test_validators" label="Test Validators"></topic>
 </topic>
@@ -164,14 +155,13 @@
 <topic href="help/serialization.html#hiddentokenmerger" label="Merge Whitespaces"></topic>
 <topic href="help/serialization.html#tokenstream" label="Token Stream"></topic>
 </topic>
-<topic href="help/emf_integration.html" label="Integration with other EMF editors">
-<topic href="help/emf_integration.html#XtextResourceImplementation" label="XtextResource Implementation"></topic>
-<topic href="help/emf_integration.html#gmf_integration" label="Integration with GMF">
-<topic href="help/emf_integration.html#gmf_integration_stage_1" label="Stage 1: Make GMF read and write the semantic model as text"></topic>
-<topic href="help/emf_integration.html#Stage2CallingtheXtextparsertoparseGMFlabels" label="Stage 2: Calling the Xtext parser to parse GMF labels"></topic>
-<topic href="help/emf_integration.html#Stage3APopupXtextEditorexperimental" label="Stage 3: A Popup Xtext Editor (experimental)"></topic>
+<topic href="help/formatting.html" label="Formatting (Pretty Printing)">
+<topic href="help/formatting.html#declarativeformatter" label="Declarative Formatter">
+<topic href="help/formatting.html#GeneralFormattingConfigSettings" label="General FormattingConfig Settings"></topic>
+<topic href="help/formatting.html#FormattingConfigInstructions" label="FormattingConfig Instructions"></topic>
+<topic href="help/formatting.html#GrammarElementFinders" label="Grammar Element Finders"></topic>
 </topic>
-<topic href="help/emf_integration.html#fragmentProvider" label="Fragment Provider (referencing Xtext models from other EMF artifacts)"></topic>
+<topic href="help/formatting.html#fragmentProvider" label="Fragment Provider (referencing Xtext models from other EMF artifacts)"></topic>
 </topic>
 <topic href="help/encoding.html" label="Encoding in Xtext">
 <topic href="help/encoding.html#EncodingatLanguageDesignTime" label="Encoding at Language Design Time"></topic>
@@ -215,6 +205,7 @@
 <topic href="help/contentAssist.html#ProposalProvider" label="ProposalProvider"></topic>
 <topic href="help/contentAssist.html#SampleImplementation" label="Sample Implementation"></topic>
 </topic>
+<topic href="help/quickfixes.html" label="Quick fixes"></topic>
 <topic href="help/templates.html" label="Template Proposals">
 <topic href="help/templates.html#CrossReferenceTemplateVariableResolver" label="CrossReference TemplateVariableResolver"></topic>
 <topic href="help/templates.html#EnumerationTemplateVariableResolver" label="Enumeration TemplateVariableResolver"></topic>
@@ -232,13 +223,6 @@
 <topic href="help/hyperlinking.html#CustomizedLocationProvider" label="Customized Location Provider"></topic>
 </topic>
 </topic>
-<topic href="help/formatting.html" label="Formatting (Pretty Printing)">
-<topic href="help/formatting.html#declarativeformatter" label="Declarative Formatter">
-<topic href="help/formatting.html#GeneralFormattingConfigSettings" label="General FormattingConfig Settings"></topic>
-<topic href="help/formatting.html#FormattingConfigInstructions" label="FormattingConfig Instructions"></topic>
-<topic href="help/formatting.html#GrammarElementFinders" label="Grammar Element Finders"></topic>
-</topic>
-</topic>
 <topic href="help/highlighting.html" label="Syntax Coloring">
 <topic href="help/highlighting.html#LexicalHighlighting" label="Lexical Highlighting"></topic>
 <topic href="help/highlighting.html#SemanticHighlighting" label="Semantic Highlighting"></topic>
@@ -250,6 +234,17 @@
 <topic href="help/jvmtypes.html" label="Referring Java Types">
 <topic href="help/jvmtypes.html#HowtoUseJavaTypes" label="How to Use Java Types"></topic>
 <topic href="help/CustomizingPoints.html" label="Customizing Points"></topic>
+</topic>
+<topic href="help/emf_integration.html" label="Integration with EMF and other EMF editors">
+<topic href="help/emf_integration.html#model_metamodel" label="Model, Ecore Model, and Ecore"></topic>
+<topic href="help/emf_codegen.html" label="EMF code generation"></topic>
+<topic href="help/XtextResourceImplementation.html" label="XtextResource Implementation"></topic>
+<topic href="help/gmf_integration.html" label="Integration with GMF editors">
+<topic href="help/gmf_integration.html#gmf_integration_stage_1" label="Stage 1: Make GMF read and write the semantic model as text">
+<topic href="help/gmf_integration.html#Stage2CallingtheXtextparsertoparseGMFlabels" label="Stage 2: Calling the Xtext parser to parse GMF labels"></topic>
+<topic href="help/gmf_integration.html#Stage3APopupXtextEditorexperimental" label="Stage 3: A Popup Xtext Editor (experimental)"></topic>
+</topic>
+</topic>
 </topic>
 <topic href="help/migrating_from_0_7.html" label="Migrating from TMF Xtext 0.7.x">
 <topic href="help/migrating_from_0_7.html#TaketheShortcut" label="Take the Shortcut"></topic>

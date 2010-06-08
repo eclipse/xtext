@@ -12,8 +12,12 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Ecore model inference</h1>
 <p>The Ecore model (or meta model) of a textual language describes the structure of its abstract syntax trees (AST). </p>
-<p>Xtext uses Ecore&rsquo;s EPackages to define Ecore models. Ecore models are declared to be either inferred (generated) from the grammar or imported. 
-				By using the &lsquo;generate&rsquo; directive, one tells Xtext to derive an EPackage from the grammar. </p>
+<p>Xtext uses Ecore&rsquo;s 
+				<span class="emphasis"><em>EPackages</em></span> to define Ecore models. Ecore models are declared to be either inferred (generated) from the grammar or imported. 
+				By using the 
+				<span class="emphasis"><em>generate</em></span> directive, one tells Xtext to derive an 
+				<span class="emphasis"><em>EPackage</em></span> from the grammar. 
+			</p>
 <div class="section" title="Type and Package Generation">
 <div class="titlepage">
 <div>
@@ -27,21 +31,35 @@
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
-<p>an EPackage</p>
+<p>an 
+							<span class="emphasis"><em>EPackage</em></span>
+						
+</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
 <li class="listitem">
-<p>for each generate-package declaration. After the directive &lsquo;generate&rsquo; a list of parameters follows. The &lsquo;name&rsquo; of the EPackage will be set to the first parameter, its &lsquo;nsURI&rsquo; to the second parameter. An optional alias as the third parameter allows to distinguish generated EPackages later. Only one generated package declaration per alias is allowed.</p>
+<p>for each generate-package declaration. After the directive 
+									<span class="emphasis"><em>generate</em></span> a list of parameters follows. The 
+									<span class="emphasis"><em>name</em></span> of the 
+									<span class="emphasis"><em>EPackage</em></span> will be set to the first parameter, its 
+									<span class="emphasis"><em>nsURI</em></span> to the second parameter. An optional alias as the third parameter allows to distinguish generated 
+									<span class="emphasis"><em>EPackages</em></span> later. Only one generated package declaration per alias is allowed.
+								</p>
 </li>
 </ul>
 </div>
 </li>
 <li class="listitem">
-<p>an EClass</p>
+<p>an 
+							<span class="emphasis"><em>EClass</em></span>
+						
+</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
 <li class="listitem">
-<p>for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same name as the rule itself is assumed. You can specify more than one rule that return the same type but only one EClass will be generated.</p>
+<p>for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same name as the rule itself is assumed. You can specify more than one rule that return the same type but only one 
+									<span class="emphasis"><em>EClass</em></span> will be generated.
+								</p>
 </li>
 <li class="listitem">
 <p>for each type defined in an action or a cross reference.</p>
@@ -50,7 +68,10 @@
 </div>
 </li>
 <li class="listitem">
-<p>an EEnum</p>
+<p>an 
+							<span class="emphasis"><em>EEnum</em></span>
+						
+</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
 <li class="listitem">
@@ -60,7 +81,10 @@
 </div>
 </li>
 <li class="listitem">
-<p>an EDatatype</p>
+<p>an 
+							<span class="emphasis"><em>EDataType</em></span>
+						
+</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
 <li class="listitem">
@@ -71,7 +95,12 @@
 </li>
 </ul>
 </div>
-<p>All EClasses, EEnums and EDatatypes are added to the EPackage referred to by the alias provided in the type reference they were created from.</p>
+<p>All 
+					<span class="emphasis"><em>EClasses</em></span>, 
+					<span class="emphasis"><em>EEnums</em></span>, and 
+					<span class="emphasis"><em>EDatatypes</em></span> are added to the 
+					<span class="emphasis"><em>EPackage</em></span> referred to by the alias provided in the type reference they were created from.
+				</p>
 </div>
 <div class="section" title="Feature and Type Hierarchy Generation">
 <div class="titlepage">
@@ -104,7 +133,10 @@
 <p>An optional rule call does not modify the set.</p>
 </li>
 <li class="listitem">
-<p>A rule call is optional, if its cardinality is &lsquo;?&rsquo; or &lsquo;*&rsquo;.</p>
+<p>A rule call is optional, if its cardinality is '
+							<span class="emphasis"><em>?</em></span>' or '
+							<span class="emphasis"><em>*</em></span>'.
+						</p>
 </li>
 </ul>
 </div>
@@ -112,24 +144,40 @@
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
-<p>an EAttribute in each current return type</p>
+<p>an 
+							<span class="emphasis"><em>EAttribute</em></span> in each current return type
+						</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
 <li class="listitem">
-<p>of type EBoolean for each feature assignment using the &lsquo;?=&rsquo; operator. No further EReferences or EAttributes will be generated from this assignment.</p>
+<p>of type 
+									<span class="emphasis"><em>EBoolean</em></span> for each feature assignment using the '
+									<span class="emphasis"><em>?=</em></span>' operator. No further 
+									<span class="emphasis"><em>EReferences</em></span> or 
+									<span class="emphasis"><em>EAttributes</em></span> will be generated from this assignment.
+								</p>
 </li>
 <li class="listitem">
-<p>for each assignment with the &lsquo;=&rsquo; or &lsquo;+=&rsquo; operator calling a terminal rule. Its type will be the return type of the called rule.</p>
+<p>for each assignment with the '
+									<span class="emphasis"><em>=</em></span>' or '
+									<span class="emphasis"><em>+=</em></span>' operator calling a terminal rule. Its type will be the return type of the called rule.
+								</p>
 </li>
 </ul>
 </div>
 </li>
 <li class="listitem">
-<p>an EReference in each current return type</p>
+<p>an 
+							<span class="emphasis"><em>EReference</em></span> in each current return type
+						</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
 <li class="listitem">
-<p>for each assignment with the &lsquo;=&rsquo; or &lsquo;+=&rsquo; operator in a parser rule calling a parser rule. The EReference&rsquo;s type will be the return type of the called parser rule.</p>
+<p>for each assignment with the '
+									<span class="emphasis"><em>=</em></span>' or '
+									<span class="emphasis"><em>+=</em></span>' operator in a parser rule calling a parser rule. The 
+									<span class="emphasis"><em>EReference</em></span>'s type will be the return type of the called parser rule.
+								</p>
 </li>
 <li class="listitem">
 <p>for each assigned action. The reference&rsquo;s type will be set to the return type of the current calling rule. </p>
@@ -139,7 +187,12 @@
 </li>
 </ul>
 </div>
-<p>Each EAttribute or EReference takes its name from the assignment or action that caused it. Multiplicities will be 0...1 for assignments with the &lsquo;=&rsquo; operator and 0...* for assignments with the &lsquo;+=&rsquo; operator. </p>
+<p>Each 
+					<span class="emphasis"><em>EAttribute</em></span> or 
+					<span class="emphasis"><em>EReference</em></span> takes its name from the assignment or action that caused it. Multiplicities will be 0...1 for assignments with the '
+					<span class="emphasis"><em>=</em></span>' operator and 0...* for assignments with the '
+					<span class="emphasis"><em>+=</em></span>' operator. 
+				</p>
 <p>Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of &ldquo;artificial&rdquo; parser rules, that are never called, e.g.</p>
 <div class="literallayout">
 <p>
@@ -161,7 +214,11 @@
 </div>
 </div>
 </div>
-<p>For each alternative defined in an enum rule, the transformer creates an enum literal, when another literal with the same name cannot be found. The &lsquo;literal&rsquo; property of the generated enum literal is set to the right hand side of the declaration. If it is omitted, you will get an enum literal with equal &lsquo;name&rsquo; and &lsquo;literal&rsquo; attributes.</p>
+<p>For each alternative defined in an enum rule, the transformer creates an enum literal, when another literal with the same name cannot be found. The 
+					<span class="emphasis"><em>literal</em></span> property of the generated enum literal is set to the right hand side of the declaration. If it is omitted, you will get an enum literal with equal 
+					<span class="emphasis"><em>name</em></span> and 
+					<span class="emphasis"><em>literal</em></span> attributes.
+				</p>
 <div class="literallayout">
 <p>
 <code class="code">enum&nbsp;MyGeneratedEnum:<br>
@@ -182,7 +239,9 @@
 </div>
 </div>
 </div>
-<p>In the next step the generator examines all generated EClasses and lifts up similar features to super types if there is more than one subtype and the feature is defined in every subtypes. This does even work for multiple super types.</p>
+<p>In the next step the generator examines all generated 
+					<span class="emphasis"><em>EClasses</em></span> and lifts up similar features to super types if there is more than one subtype and the feature is defined in every subtypes. This does even work for multiple super types.
+				</p>
 </div>
 <div class="section" title="Customized Post Processing">
 <div class="titlepage">
@@ -194,9 +253,9 @@
 </div>
 </div>
 <p>As a last step, the generator invokes the post processor for every generated Ecore model. The post processor expects an Xtend file with name 
-					<code class="code">&lt;MyDsl&gt;PostProcessor.ext</code> (if the name of the grammar file is 
-					<code class="code">MyDsl.xtext</code>) in the same folder as the grammar file. Further, for a successful invocation, the Xtend file must declare an extension with signature 
-					<code class="code">process(xtext::GeneratedMetamodel)</code>. E.g.
+					<span class="emphasis"><em>PostProcessor.ext</em></span> (if the name of the grammar file is 
+					<span class="emphasis"><em>MyDsl.xtext</em></span>) in the same folder as the grammar file. Further, for a successful invocation, the Xtend file must declare an extension with signature 
+					<span class="emphasis"><em>process(xtext::GeneratedMetamodel)</em></span>. E.g.
 				</p>
 <div class="literallayout">
 <p>
@@ -242,19 +301,32 @@ process(ecore::EPackage&nbsp;this)&nbsp;:<br>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
-<p>An EAttribute or EReference has two different types or different cardinality.</p>
+<p>An 
+							<span class="emphasis"><em>EAttribute</em></span> or 
+							<span class="emphasis"><em>EReference</em></span> has two different types or different cardinality.
+						</p>
 </li>
 <li class="listitem">
-<p>There is an EAttribute and an EReference with the same name in the same EClass.</p>
+<p>There is an 
+							<span class="emphasis"><em>EAttribute</em></span> and an 
+							<span class="emphasis"><em>EReference</em></span> with the same name in the same 
+							<span class="emphasis"><em>EClass</em></span>.
+						</p>
 </li>
 <li class="listitem">
 <p>There is a cycle in the type hierarchy.</p>
 </li>
 <li class="listitem">
-<p>An new EAttribute, EReference or super type is added to an imported type.</p>
+<p>An new 
+							<span class="emphasis"><em>EAttribute</em></span>, 
+							<span class="emphasis"><em>EReference</em></span> or super type is added to an imported type.
+						</p>
 </li>
 <li class="listitem">
-<p>An EClass is added to an imported EPackage.</p>
+<p>An 
+							<span class="emphasis"><em>EClass</em></span> is added to an imported 
+							<span class="emphasis"><em>EPackage</em></span>.
+						</p>
 </li>
 <li class="listitem">
 <p>An undeclared alias is used. </p>
