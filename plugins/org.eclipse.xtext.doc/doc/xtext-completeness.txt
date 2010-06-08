@@ -1,43 +1,43 @@
 -------- File --------------------------- | -- content complete? -- | -- proofread by ------------------- | 
 666-world-domination-in-6-steps.textile   | yes (meysholdt)         | sefftinge, dhuebner                 |  
-000-introduction.textile                  | yes (se)                |                                     |  
-010-concepts.textile                      | yes (se)                |                                     |
+000-introduction.textile                  | yes (se)                |      
+010-concepts.textile                      | yes (se)                |    
 
-015-getting-started.textile               | yes (se)                |                                     |
-016-working-with-Xtext-models.textile     | yes (se)                |                                     |
-017-getting-started-xpand.textile         | yes (se)                |                                     |
+015-getting-started.textile               | yes (se)                |    
+016-working-with-Xtext-models.textile     | yes (se)                |    
+017-getting-started-xpand.textile         | yes (se)                |    
 
-020-grammar-language.textile              | ?                       |                                     |
+020-grammar-language.textile              | ?                       |    
 
-030-generator.textile                     | ?                       |                                     |
-040-dependency-injection.textile          | ?                       |                                     |
+030-generator.textile                     | ?                       |    
+040-dependency-injection.textile          | ?                       |    
 
-050-heading-runtime.textile               | ?                       |                                     |
-060-validation.textile                    | ?                       |                                     |
-070-linking.textile                       | ?                       |                                     |
-080-scoping.textile                       | ?                       |                                     |
-090-valueconverter.textile                | ?                       |                                     |
-100-serialization.textile                 | ?                       |                                     |
-105-formatting.textile                    | ?                       |                                     |
-110-fragmentprovider.textile              | ?                       |                                     |
-115-encoding.textile                      | ?                       |                                     |
+050-heading-runtime.textile               | ?                       |    
+060-validation.textile                    | ?                       |    
+070-linking.textile                       | ?                       |    
+080-scoping.textile                       | ?                       |    
+090-valueconverter.textile                | ?                       |    
+100-serialization.textile                 | ?                       |    
+105-formatting.textile                    | ?                       |    
+110-fragmentprovider.textile              | ?                       |    
+115-encoding.textile                      | ?                       |    
 
-118-mwe-in-depth.textile                  | ?                       |                                     |
+118-mwe-in-depth.textile                  | ?                       |    
 
-120-heading-UI.textile                    | ?                       |                                     |
-130-managing-concurrency.textile          | ?                       |                                     |
-140-labelprovider.textile                 | ?                       |                                     |
-150-contentassist.textile                 | ?                       |                                     |
-155-quickfix.textile                      | ?                       |                                     |
-160-templates.textile                     | ?                       |                                     |
-170-outline.textile                       | ?                       |                                     |
-180-hyperlinking.textile                  | ?                       |                                     |
-195-highlighting.textile                  | ?                       |                                     |
-198-wizards.textile                       | ?                       |                                     |
-199-jvmtypes.textile                      | ?                       |                                     |
+120-heading-UI.textile                    | ?                       |    
+130-managing-concurrency.textile          | ?                       |    
+140-labelprovider.textile                 | ?                       |    
+150-contentassist.textile                 | ?                       |    
+155-quickfix.textile                      | ?                       |    
+160-templates.textile                     | ?                       |    
+170-outline.textile                       | ?                       |    
+180-hyperlinking.textile                  | ?                       |    
+195-highlighting.textile                  | ?                       |    
+198-wizards.textile                       | ?                       |    
+199-jvmtypes.textile                      | ?                       |    
 
-200-Appendix.textile                      | ?                       |                                     |
-210-emf-integration.textile               | ?                       |                                     |
-215-migrating-from-0.7.textile            | ?                       |                                     |
-230-antlr-ip-issue.textile                | ?                       |                                     |
+200-Appendix.textile                      | ?                       |    
+210-emf-integration.textile               | ?                       |    
+215-migrating-from-0.7.textile            | ?                       |    
+230-antlr-ip-issue.textile                | ?                       |  se
 

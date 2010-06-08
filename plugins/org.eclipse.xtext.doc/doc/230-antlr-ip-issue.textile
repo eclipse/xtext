@@ -26,14 +26,7 @@ an additional plugin into Eclipse:
 * or use the update site at "http://download.itemis.com/updates":http://download.itemis.com/updates
 
 The workflow will not bother you with this issue on subsequent executions as the archive will be stored
-in your workspace root directory and can thereby be reused during the next run. 
+in your project's root directory and can thereby be reused during the next run. 
 
 **IMPORTANT** :
-__Although if you use the non-IP approved ANTLR generator, you can still ship any languages and the IDEs you've developed with Xtext without any worrying, because the *ANTLR runtime is IP approved*__
-
-
-h2. What if I do not want to use non IP-approved code
-
-If you, against all recommendations, need to stick to a fully IP approved generator, you can use the parser generator we've developed.
-But be warned, although it's fully functional and equally fast, it does not have any error recovery.
-This makes the editing experience in the editor more or less unacceptable.
+__Although if you use the non-IP approved ANTLR generator, you can still ship any languages and the IDEs you've developed with Xtext without any worrying, because it is not needed at runtime__
