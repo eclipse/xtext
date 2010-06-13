@@ -11,50 +11,10 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Dependency Injection in Xtext with Google Guice</h1>
-<p>In Xtext, there are many Java classes which implement logic, behavior, or supply configuration. These classes implement Java interfaces and are typically only supposed to be accessed through these interfaces, which makes their implementations interchangeable. This is where Xtext utilizes 
-				<a class="ulink" href="http://code.google.com/p/google-guice/" target="_new">Google Guice</a>: 
-			</p>
-<div class="itemizedlist">
-<ul class="itemizedlist" type="disc">
-<li class="listitem">
-<p>Guice manages the instantiation of the classes: instead of constructing a class with 
-						<span class="emphasis"><em>new</em></span>, the 
-						<span class="emphasis"><em>@Inject</em></span> annotation instructs Guice to supply an object for a certain interface. Such an object is called 
-						<a class="link" href="dependencyInjection.html#guiceservice" title="Services">Service</a>.
-					</p>
-</li>
-<li class="listitem">
-<p>Guice allows to configure which implementations are to be supplied for which interface. This configuration consists of so-called 
-						<a class="link" href="dependencyInjection.html#guicemodules" title="Modules">modules</a>.
-					</p>
-</li>
-</ul>
-</div>
-<div class="section" title="Services">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-<a name="guiceservice"></a>Services</h3>
-</div>
-</div>
-</div>
-<p>The most parts of Xtext are implemented as 
-					<span class="emphasis"><em>services</em></span>. A service is an object which implements a certain interface and which is instantiated and provided by Guice. Nearly every concept of the Xtext framework can be understood as this sort of 
-					<span class="emphasis"><em>service</em></span>: The 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/editor/XtextEditor.java?root=Modeling_Project&view=co" target="_new">XtextEditor</a>, the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&view=co" target="_new">XtextResource</a>, the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IParser.java?root=Modeling_Project&view=co" target="_new">IParser</a> and even fine grained concepts as the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/editor/contentassist/PrefixMatcher.java?root=Modeling_Project&view=co" target="_new">PrefixMatcher</a> for the content assist are configured and provided by Guice.
-				</p>
-<p>Xtext ships with generic default implementations for most of the services or uses 
-					<a class="link" href="configuration.html#generator" title="The Generator">generator fragments</a> to automatically generate service implementations for a grammar. Thereby, Xtext strives to provide meaningful implementations out of the box and to allow customization wherever needed. Developers are encouraged to subclass existing services and configure them for their languages in their 
-					<a class="link" href="dependencyInjection.html#guicemodules" title="Modules">modules</a>.  
-				</p>
-<p>When Guice instantiates an object, it also supplies this instance with all its dependent services. All a service does is to request &ldquo;some implementation for a certain interface&rdquo; using the <code class="code">@Inject</code>-annotation. Based on the 
-					<a class="link" href="dependencyInjection.html#guicemodules" title="Modules">modules configuration</a> Guice decides which class to instantiate or which object to reuse. 
-				</p>
-<p>For example, Guice can automatically initialize member variables with the needed services. </p>
+<p>Xtext is based on Dependency Injection. This means basically that whenever some code is in need for functionality (or state) 
+				from another component, one just declares the dependency rather then stating how to resolve it, i.e. obtaining that component.</p>
+<p>For instance when some code wants to use a scope provider, it just declares a field (or method or constructor) and 
+				adds the @Inject annotation: </p>
 <div class="literallayout">
 <p>
 <code class="code">public&nbsp;class&nbsp;MyLanguageLinker&nbsp;extends&nbsp;Linker&nbsp;{<br>
@@ -64,38 +24,32 @@
 &nbsp;&nbsp;private&nbsp;IScopeProvider&nbsp;scopeProvider;<br>
 
 <br>
-&nbsp;&nbsp;@Inject(optional=true)<br>
-&nbsp;&nbsp;private&nbsp;IXtext2EcorePostProcessor&nbsp;postProcessor;<br>
-&nbsp;&nbsp;<br>
-&nbsp;&nbsp;(...)<br>
 }<br>
-
-<br>
+&nbsp;<br>
 
 </code>
 </p>
 </div>
-<p>Furthermore, Guice can pass the needed services as method parameters or event into a constructor call.</p>
+<p>It is not the duty of the code to care about where the 
+				<span class="emphasis"><em>IScopeProvider</em></span> comes from or how it is created. When above&rsquo;s
+				class is instantiated, Guice sees that it needs an instance of IScopeProvider and sets it to the specified field or method.
+				This of course only works, if the object itself is created by Guice. In Xtext almost every object is created that way 
+				and therefore the whole dependency net is controlled and configured by the means of Google Guice.
+			</p>
+<p>Guice of course needs to know how to instantiate real objects for declared dependencies. This is done in so called 
+				<span class="emphasis"><em>Modules</em></span>.
+				A 
+				<span class="emphasis"><em>Module</em></span> defines a set of mappings from types to either concrete instances, so called providers or
+				classes, which have a default constructor. Modules are implemented in Java, here&rsquo;s an example:
+			</p>
 <div class="literallayout">
 <p>
-<code class="code">public&nbsp;class&nbsp;MyLanguageGrammarAccess&nbsp;implements&nbsp;IGrammarAccess&nbsp;{<br>
-	
-<br>
-&nbsp;&nbsp;private&nbsp;final&nbsp;GrammarProvider&nbsp;grammarProvider;<br>
-
-<br>
-&nbsp;&nbsp;private&nbsp;TerminalsGrammarAccess&nbsp;gaTerminals;<br>
-
-<br>
-&nbsp;&nbsp;@Inject<br>
-&nbsp;&nbsp;public&nbsp;MyLanguageGrammarAccess(GrammarProvider&nbsp;grammarProvider,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;TerminalsGrammarAccess&nbsp;gaTerminals)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;this.grammarProvider&nbsp;=&nbsp;grammarProvider;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;this.gaTerminals&nbsp;=&nbsp;gaTerminals;<br>
-&nbsp;&nbsp;}<br>
-	
-<br>
-&nbsp;&nbsp;(...)<br>
+<code class="code">public&nbsp;class&nbsp;MyDslRuntimeModule&nbsp;extends&nbsp;org.xtext.example.mydsl.AbstractMyDslRuntimeModule&nbsp;{<br>
+	@Override<br>
+	public&nbsp;void&nbsp;configure(Binder&nbsp;binder)&nbsp;{<br>
+		super.configure(binder);<br>
+		binder.bind(IScopeProvider.class).to(MyConcreteScopeProvider.class);<br>
+	}<br>
 }<br>
 
 <br>
@@ -103,128 +57,132 @@
 </code>
 </p>
 </div>
-<p>For further details, please refer to the 
-					<a class="ulink" href="http://code.google.com/docreader/#p=google-guice&s=google-guice&t=UsersGuide" target="_new">Google Guice Documentation</a>
-				
-</p>
-</div>
-<div class="section" title="Modules">
+<p>With plain Guice modules one implements a method called configure and gets a so called 
+				<span class="emphasis"><em>Binder</em></span> passed in.
+				That binder provides a fluent API to define the mentioned mappings. This was just a very brief and simplified description,
+				we highly recommend to have a look at 
+				<a class="ulink" href="http://code.google.com/p/google-guice/" target="_new">the website Google Guice</a> to learn more.  
+			</p>
+<div class="section" title="Xtext&rsquo;s module API">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="guicemodules"></a>Modules</h3>
+<a name="XtextsmoduleAPI"></a>Xtext&rsquo;s module API</h3>
 </div>
 </div>
 </div>
-<p>The configuration of services for a language built with  Xtext is done via modules:</p>
-<div class="itemizedlist">
-<ul class="itemizedlist" type="disc">
-<li class="listitem">
-<p>Modules bind arbitrary Java interfaces to their implementation classes or directly to instances of their implementation classes. Such a binding is sort of a configurable mapping.</p>
-</li>
-<li class="listitem">
-<p>A module itself is a plain Java class.</p>
-</li>
-<li class="listitem">
-<p>Modules can inherit from each other and override bindings that are declared in super-modules. This concept is put on top of plain Guice modules by Xtext.</p>
-</li>
-<li class="listitem">
-<p>In Xtext, there is a 
-							<a class="link" href="dependencyInjection.html#guicedefaultmodule" title="Default Module">generic default module</a> for all languages, there are automatically 
-							<a class="link" href="dependencyInjection.html#guicegeneratedmodule" title="Generated Modules">generated modules</a> and there are modules which are 
-							<a class="link" href="dependencyInjection.html#guicemanualmodules" title="Modules intended for customization">intended to be customized manually</a>.  
-						</p>
-</li>
-<li class="listitem">
-<p>Furthermore, Xtext distinguishes between modules for runtime-services and modules related to services needed for the user interface. The UI module extends the runtime module.</p>
-</li>
-</ul>
-</div>
-<p>In total, this leads to five modules for a typical Xtext Language. They are visualized in the image below. The image is further explained in the following subsections. </p>
+<p>Xtext comes with a slightly enhanced module API. For your language you get two different modules, one for the runtime bundle,
+					which is used, when executing your language infrastructure outside of Eclipse, such as on the build server. The other is
+					located in the ui bundle and adds and overrides bindings for running Xtext infrastructure within Eclipse. </p>
+<p>The enhancement we added to Guice&rsquo;s Module API is that we provide an abstract base class, which reflectively looks for certain 
+					methods in order to find declared bindings. The most common kind of method is :</p>
+<div class="literallayout">
 <p>
-					
+<code class="code">public&nbsp;Class&lt;?&nbsp;extends&nbsp;IScopeProvider&gt;&nbsp;bindIScopeProvider()&nbsp;{<br>
+	return&nbsp;MyConcreteScopeProvider.class;<br>
+}<br>
+
+<br>
+
+</code>
 </p>
-<div class="mediaobject">
-<img src="images/modules_hierarchy.png"></div>
+</div>
+<p>which would do the same as the code snippet above, which is declare a binding from 
+					<span class="emphasis"><em>IScopeProvider</em></span> to 
+					<span class="emphasis"><em>MyConcreteScopeProvider</em></span>.
+					That binding will make Guice instantiate and inject a new instance of 
+					<span class="emphasis"><em>MyConcreteScopeProvider</em></span> whenever a dependency 
+					to 
+					<span class="emphasis"><em>IScopeProvider</em></span> is declared.
+				</p>
+<p>Having a method per binding allows to deactivate individual bindings by overriding the corresponding methods and either change 
+					the binding by returning a different target type or removing that binding completely by returning null.</p>
+<p>There are two additional kinds of binding-methods supported. The first one allows to configure a provider. A 
+					<span class="emphasis"><em>Provider</em></span> is
+					an interface with just one method : 
+				</p>
+<div class="literallayout">
 <p>
+<code class="code">public&nbsp;interface&nbsp;Provider&lt;T&gt;&nbsp;{<br>
+
+<br>
+&nbsp;&nbsp;/**<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;Provides&nbsp;an&nbsp;instance&nbsp;of&nbsp;{@code&nbsp;T}.&nbsp;Must&nbsp;never&nbsp;return&nbsp;{@code&nbsp;null}.<br>
+&nbsp;&nbsp;&nbsp;*/<br>
+&nbsp;&nbsp;T&nbsp;get();<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>This one can be used if you need a hook whenever an instance of a certain type is created. For instance if you want to 
+					provide lazy access to a singleton or you need to to some computation each time an instance is created (i.e. factory). IF you want 
+					to point to a provider rather than to a concrete class you can use the following binding method.</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;Class&lt;?&nbsp;extends&nbsp;Provider&lt;IScopeProvider&gt;&gt;&nbsp;provideIEncodingProvider()&nbsp;{<br>
+	return&nbsp;MyConcreteScopeProviderProvider.class;<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>_(Please forgive us the overuse of the term 
+					<span class="emphasis"><em>provider</em></span>. The IScopeProvider is not a Guice 
+					<span class="emphasis"><em>provider</em></span>.)_
+				</p>
+<p>That binding tells Guice to instantiate 
+					<span class="emphasis"><em>MyConcreteTypeProvider</em></span> and invoke get() in order to obtain an instance of 
+					<span class="emphasis"><em>MyType</em></span> 
+					for clients having declared a dependency to that type.
+				</p>
+<p>The last binding method provided by Xtext allows to do anything you can do with Guice&rsquo;s binding API, since it allows you to 
+					use it directly. If your method&rsquo;s name starts with the name &lsquo;configure&rsquo;, has a return type 
+					<span class="emphasis"><em>void</em></span> and accepts one argument of 
+					type 
+					<span class="emphasis"><em>Binder</em></span>
 				
 </p>
-<div class="section" title="Modules intended for customization">
-<div class="titlepage">
-<div>
-<div>
-<h4 class="title">
-<a name="guicemanualmodules"></a>Modules intended for customization</h4>
-</div>
-</div>
-</div>
-<p>When the 
-						<a class="link" href="configuration.html#generator" title="The Generator">generator</a> runs the first time, it creates two modules named 
-						<span class="emphasis"><em>RuntimeModule</em></span> and 
-						<span class="emphasis"><em>UIModule</em></span>. They are placed in the language&rsquo;s root-package in the 
-						<span class="emphasis"><em>src/</em></span>-folder of the language&rsquo;s runtime-project and the language&rsquo;s UI-project. Both are initially empty and will never be overwritten by the generator. They are 
-						<a class="link" href="dependencyInjection.html#guicecustomize" title="Changing Configuration">intended for customization</a>. By default, they extend a 
-						<a class="link" href="dependencyInjection.html#guicegeneratedmodule" title="Generated Modules">generated module</a>.  
-					</p>
-</div>
-<div class="section" title="Generated Modules">
-<div class="titlepage">
-<div>
-<div>
-<h4 class="title">
-<a name="guicegeneratedmodule"></a>Generated Modules</h4>
-</div>
-</div>
-</div>
-<p>The fully generated modules are called 
-						<span class="emphasis"><em>Abstract[MyLanguage]RuntimeModule</em></span> and 
-						<span class="emphasis"><em>Abstract[MyLanguage]UiModule</em></span> respectively. They contain all components which have been generated specifically for the language at hand. What goes into these modules depends on the fragments you use in the generator.
-					</p>
-<p>
-						
-<span class="bold"><strong>Note</strong></span>: This modules are replaced on every subsequent execution of the generator. Don&rsquo;t put any custom code into them. Manually written code has go into the 
-						<a class="link" href="dependencyInjection.html#guicemanualmodules" title="Modules intended for customization">concrete subclasses</a>.
-					</p>
-</div>
-<div class="section" title="Default Module">
-<div class="titlepage">
-<div>
-<div>
-<h4 class="title">
-<a name="guicedefaultmodule"></a>Default Module</h4>
-</div>
-</div>
-</div>
-<p>Finally the fully generated modules extend the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/DefaultRuntimeModule.java?root=Modeling_Project&view=co" target="_new">DefaultRuntimeModule</a>, which contains all the default configuration. The default configuration consists of all components for which we have generic default implementations.
-					</p>
-</div>
-<div class="section" title="Changing Configuration">
-<div class="titlepage">
-<div>
-<div>
-<h4 class="title">
-<a name="guicecustomize"></a>Changing Configuration</h4>
-</div>
-</div>
-</div>
-<p>We use the primary modules (
-						<span class="emphasis"><em>RuntimeModule</em></span> and 
-						<span class="emphasis"><em>UiModule</em></span>) in order to change the configuration. 
-						These classes are initially empty and have been generated to allow customization.
-					</p>
-<p>In order to provide a simple and convenient way, the default module extends the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/AbstractGenericModule.java?root=Modeling_Project&view=co" target="_new">AbstractGenericModule</a>. 
-						It does not provide any bindings itself but comes up with a convenient and declarative way to specify mappings. The default API provided by Guice is based on fluent API and a builder pattern.
-						This is also very readable but does not allow submodules to change any of the bindings.   
-						The 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/AbstractGenericModule.java?root=Modeling_Project&view=co" target="_new">AbstractGenericModule</a> allows to declare and override bindings in all subclasses like this:
-					</p>
 <div class="literallayout">
 <p>
-<code class="code">public&nbsp;Class&lt;?&nbsp;extends&nbsp;IFooService&gt;&nbsp;bindIFooService()&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;MyFooServiceImpl.class;<br>
+<code class="code">public&nbsp;void&nbsp;configureIScopeProvider(Binder&nbsp;binder)&nbsp;{<br>
+	binder.bind(IScopeProvider.class).to(MyConcreteScopeProvider.class);<br>
+}&nbsp;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Obtaining an Injector">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="ObtaininganInjector"></a>Obtaining an 
+					<span class="emphasis"><em>Injector</em></span>
+				
+</h3>
+</div>
+</div>
+</div>
+<p>In every application wired up with Guice there is usually one point where you initialize a so called 
+					<span class="emphasis"><em>Injector</em></span> using the 
+					modules declared and after that using that injector to create the root instance of the whole application. In plain Java environments
+					this something done programmatically in the main method. It could look like this:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;static&nbsp;void&nbsp;main(String[]&nbsp;args)&nbsp;{<br>
+	Injector&nbsp;injector&nbsp;=&nbsp;Guice.createInjector(new&nbsp;MyDslRuntimeModule());<br>
+	MyApplication&nbsp;application&nbsp;=&nbsp;injector.getInstance(MyApplication.class);<br>
+	application.run();<br>
 }<br>
 
 <br>
@@ -232,62 +190,27 @@
 </code>
 </p>
 </div>
-<p>Such a method will be interpreted as a binding from 
-						<span class="emphasis"><em>IFooService</em></span> to 
-						<span class="emphasis"><em>MyFooServiceImpl.class</em></span>. Note that you simply have to override a method from a super class (e.g. from the generated or default module) in order to change the respective binding. For example, in the picture above, the 
-						<span class="emphasis"><em>DefaultRuntimeModule</em></span> configures the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java?root=Modeling_Project&view=co" target="_new">IFormatter</a> to be implemented by the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.java?root=Modeling_Project&view=co" target="_new">OneWhitespaceFormatter</a>. The 
-						<span class="emphasis"><em>AbstractMyLanguageModule</em></span> overrides this binding by mapping the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java?root=Modeling_Project&view=co" target="_new">IFormatter</a> to 
-						<span class="emphasis"><em>MyLanguageFormatter</em></span>.
-						The type to type binding will create a new instance of the given target type for each dependency. If you want to make it a singleton and thereby ensure only one instance to be created and reused for all dependencies you can add the following annotation:
-					</p>
+<p>Xtext uses EMF which makes use of a couple of global registries, which have to be configured on startup. Because we
+					of course want to levarage Guice also for all factories, etc. we put into those registries, we have introduced a so called
+
+					<span class="emphasis"><em>ISetUp</em></span> which provides a method called 
+					<span class="emphasis"><em>Injector createInjectorAndDoEMFRegistration()</em></span>. So instead of using the plain Guice
+					code shown above you rather use the 
+					<span class="emphasis"><em>ISetup</em></span> class generated for your language, which, as the method name suggests, creates
+					an 
+					<span class="emphasis"><em>Injector</em></span> and uses it to initialize a couple of EMF objects and register them in the corresponding registries.
+				</p>
 <div class="literallayout">
 <p>
-<code class="code">@SingletonBinding<br>
-public&nbsp;Class&lt;?&nbsp;extends&nbsp;IFooService&gt;&nbsp;bindIFooService()&nbsp;{<br>
-&nbsp;&nbsp;return&nbsp;MyFooServiceImpl.class;<br>
-}<br>
-
-<br>
+<code class="code">Injector&nbsp;injector&nbsp;=&nbsp;new&nbsp;MyStandaloneSetup().createInjectorAndDoEMFRegistration();&nbsp;<br>
 
 </code>
 </p>
 </div>
-<p>In addition if the creation of the type causes any necessary side effects, so you want it to be instantiated eagerly, you can set the 
-						<span class="emphasis"><em>eager</em></span> property to true. This is shown in the following snippet:
-					</p>
-<div class="literallayout">
-<p>
-<code class="code">@SingletonBinding(eager=true)<br>
-public&nbsp;Class&lt;?&nbsp;extends&nbsp;IFooService&gt;&nbsp;bindIFooService()&nbsp;{<br>
-&nbsp;&nbsp;return&nbsp;MyFooServiceImpl.class;<br>
-}<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<p>One more way of specify a binding is currently supported: If you need to control the way, the instance is created, you can declare a type to object mapping:</p>
-<div class="literallayout">
-<p>
-<code class="code">public&nbsp;IFooService&nbsp;bindIFooService()&nbsp;{<br>
-&nbsp;&nbsp;return&nbsp;new&nbsp;MyFooServiceImpl();<br>
-}<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<p>
-						
-<span class="bold"><strong>Note</strong></span>: Although this is a convenient and simple way, you have of course also the full power of Guice, i.e. you can override the Guice method 
-						<span class="emphasis"><em>void configure(Binder)</em></span> and use the afore mentioned fluent API to do whatever you want.
-					</p>
-</div>
+<p>These are the basic ideas around Guice and the small extension Xtext provides on top. For more information we 
+					strongly encourage you to read through the documentation on 
+					<a class="ulink" href="http://code.google.com/p/google-guice/" target="_new">the website of Google Guice</a>.
+				</p>
 </div>
 </body>
 </html>

@@ -7,10 +7,10 @@
 016-working-with-Xtext-models.textile     | yes (se)                |    
 017-getting-started-xpand.textile         | yes (se)                |    
 
-020-grammar-language.textile              | ?                       |    
+020-grammar-language.textile              | ?                       |  se  
 
-030-generator.textile                     | ?                       |    
-040-dependency-injection.textile          | ?                       |    
+030-generator.textile                     | ?                       |  se  
+040-dependency-injection.textile          | yes (se)                |    
 
 050-heading-runtime.textile               | ?                       |    
 060-validation.textile                    | ?                       |    

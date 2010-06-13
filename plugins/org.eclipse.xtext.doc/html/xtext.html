@@ -241,13 +241,6 @@
 <dt>
 <span class="chapter"><a href="#antlr_ip_issue">11. The ANTLR IP issue (or which parser to use?)</a></span>
 </dt>
-<dd>
-<dl>
-<dt>
-<span class="section"><a href="#WhatifIdonotwanttousenonIPapprovedcode">What if I do not want to use non IP-approved code</a></span>
-</dt>
-</dl>
-</dd>
 </dl>
 </div>
 <div class="chapter" title="Chapter&nbsp;1.&nbsp;Overview">
@@ -2012,12 +2005,8 @@ String&nbsp;qualifiedName(PackageDeclaration&nbsp;this)&nbsp;:<br>
 </div>
 <p>The 
 			<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext?root=Modeling_Project&view=markup" target="_new">grammar language</a> 
-			is the corner stone of Xtext and is defined in itself. Actually it is a DSL to create languages, so what would be more helpful than developing the Xtext language with Xtext?
-		</p>
-<p>The grammar language is a domain-specific language, carefully designed for the description of textual languages based on 
-			<a class="ulink" href="http://en.wikipedia.org/wiki/LL_parser" target="_new">LL(*)-Parsing</a> that is like 
-			<a class="ulink" href="http://www.artima.com/lejava/articles/antlr_3.html" target="_new">ANTLR3&rsquo;s parsing strategy</a>.
-			The main idea is to describe the concrete syntax and how an EMF-based in-memory model is created during parsing. 
+			is the corner stone of Xtext. It is a domain-specific language, carefully designed for the description of textual languages.
+			The main idea is to describe the concrete syntax and how it is mapped to an in-memory model created during parsing. 
 		</p>
 <div class="section" title="A first example">
 <div class="titlepage">
@@ -2029,8 +2018,11 @@ String&nbsp;qualifiedName(PackageDeclaration&nbsp;this)&nbsp;:<br>
 </div>
 </div>
 <p>To get an idea of how it works we&rsquo;ll start by implementing a 
-				<a class="ulink" href="http://martinfowler.com/dslwip/Intro.html" target="_new">simple example</a> introduced by Martin Fowler.
-				It&rsquo;s mainly about describing state machines used as the (un)lock mechanism of secret compartments. People who have secret compartments control their access in a very old-school way, e.g. by opening the door first and turning on the light afterwards. Then the secret compartment, for instance a panel, opens up. One of those state machines could look like this:
+				<a class="ulink" href="http://martinfowler.com/dslwip/Intro.html" target="_new">simple example</a> 
+				introduced by Martin Fowler. It&rsquo;s mainly about describing state machines used as the (un)lock mechanism of secret compartments.
+				People who have secret compartments control their access in a very old-school way, e.g. by opening the door first and 
+				turning on the light afterwards. Then the secret compartment, for instance a panel, opens up. One of those state machines 
+				could look like this:
 			</p>
 <div class="literallayout">
 <p>
@@ -2081,11 +2073,12 @@ end<br>
 </code>
 </p>
 </div>
-<p>So, we have a bunch of declared events, commands and states. Within states there are references to declared actions, which should be executed when entering such a state.
-				Also there are transitions consisting of a reference to an event and a state. Please read 
-				<a class="ulink" href="http://martinfowler.com/dslwip/Intro.html" target="_new">Martin&rsquo;s description</a> if it is not clear enough.
+<p>So, we have a bunch of declared events, commands, and states. Within states there are references to declared actions,
+				which should be executed when entering such a state. Also there are transitions consisting of a reference to an event and 
+				a state. Please read 
+				<a class="ulink" href="http://martinfowler.com/dslwip/Intro.html" target="_new">Martin&rsquo;s description</a> if you want to read the whole story.
 			</p>
-<p>In order to get a complete IDE for this little language from Xtext, you need to write the following grammar:</p>
+<p>In order to implment this little language with Xtext, you need to write the following grammar:</p>
 <div class="literallayout">
 <p>
 <code class="code">grammar&nbsp;my.pack.SecretCompartments&nbsp;<br>
@@ -2120,12 +2113,15 @@ State&nbsp;:<br>
 &nbsp;<br>
 Transition&nbsp;:<br>
 &nbsp;&nbsp;event=[Event]&nbsp;'=&gt;'&nbsp;state=[State];<br>
-
-<br>
+&nbsp;&nbsp;<br>
 
 </code>
 </p>
 </div>
+<p>Martin uses this example throughout his book &ldquo;Domain-Specific Languages&rdquo; to implement external and internal DSLs using
+				different technologies. Note, that non of his implmentations is nearly as readable and concise as the description in
+				Xtext&rsquo;s grammar language above. That is of course because the grammar language is designed to do just that, i.e. it is 
+				specific to the domain of language descriptions.</p>
 </div>
 <div class="section" title="The Syntax">
 <div class="titlepage">
@@ -2136,7 +2132,7 @@ Transition&nbsp;:<br>
 </div>
 </div>
 </div>
-<p>In the following the different concepts of the grammar language are explained. </p>
+<p>In the following the different concepts and syntactical constructs of the grammar language are explained. </p>
 <div class="section" title="Language Declaration">
 <div class="titlepage">
 <div>
@@ -2146,7 +2142,7 @@ Transition&nbsp;:<br>
 </div>
 </div>
 </div>
-<p>The first line  </p>
+<p>The first line in every grammar ... </p>
 <div class="literallayout">
 <p>
 <code class="code">grammar&nbsp;my.pack.SecretCompartments&nbsp;with&nbsp;org.eclipse.xtext.common.Terminals<br>
@@ -2154,9 +2150,12 @@ Transition&nbsp;:<br>
 </code>
 </p>
 </div>
-<p>declares the name of the grammar. Xtext leverages Java&rsquo;s class path mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond to the grammar name and have the file extension '
+<p>declares the name of the grammar. Xtext leverages Java&rsquo;s class path mechanism. This means that the name 
+					can be any valid Java qualifier. The file name needs to correspond to the grammar name and have the file 
+					extension '
 					<span class="emphasis"><em>.xtext</em></span>'. This means that the name has to be 
-					<span class="emphasis"><em>SecretCompartments.xtext</em></span> and must be placed in a package 
+					<span class="emphasis"><em>SecretCompartments.xtext</em></span> and must be placed 
+					in a package 
 					<span class="emphasis"><em>my.pack</em></span> somewhere on your project&rsquo;s class path.
 				</p>
 <p>The first line is also used to declare any used language (for mechanism details see 
@@ -2172,14 +2171,18 @@ Transition&nbsp;:<br>
 </div>
 </div>
 </div>
-<p>Xtext parsers instantiate Ecore models (aka meta models). An Ecore model basically consists of an 
+<p>Xtext parsers create in-memory object graphs while parsing text. Such object-graphs are 
+					instances of EMF Ecore models. An Ecore model basically consists of an 
 					<span class="emphasis"><em>EPackage</em></span> containing 
 					<span class="emphasis"><em>EClasses</em></span>, 
+
 					<span class="emphasis"><em>EDatatypes</em></span> and 
-					<span class="emphasis"><em>EEnums</em></span>. See the 
-					<a class="link" href="#model_metamodel" title="Model, Ecore Model, and Ecore">section on EMF</a> for more details.
+					<span class="emphasis"><em>EEnums</em></span> (See the 
+					<a class="link" href="#model_metamodel" title="Model, Ecore Model, and Ecore">section on EMF</a> for more details).
 					Xtext can infer Ecore models from a grammar (see 
-					<a class="link" href="#metamodelInference" title="Ecore model inference">Ecore model inference</a>) but it is also possible to instantiate existing Ecore models. You can even mix this and use multiple existing Ecore models and infer some others from one grammar. 
+					<a class="link" href="#metamodelInference" title="Ecore model inference">Ecore model inference</a>) but it is also 
+					possible to reuse existing Ecore models. You can even mix this and use multiple existing Ecore models and 
+					infer some others from one grammar. 
 				</p>
 <div class="section" title="EPackage generation">
 <div class="titlepage">
@@ -2190,7 +2193,8 @@ Transition&nbsp;:<br>
 </div>
 </div>
 </div>
-<p>The easiest way to get started is to let Xtext infer the Ecore model from your grammar. This is what is done in the secret compartment example. To do so just state:</p>
+<p>The easiest way to get started is to let Xtext infer the Ecore model from your grammar. This is what is done in the 
+						secret compartment example. To do so just state:</p>
 <div class="literallayout">
 <p>
 <code class="code">generate&nbsp;secretcompartment&nbsp;'http://www.eclipse.org/secretcompartment'<br>
@@ -2199,12 +2203,17 @@ Transition&nbsp;:<br>
 </p>
 </div>
 <p>That statement means: generate an 
-						<span class="emphasis"><em>EPackage</em></span> with the name 
-						<span class="emphasis"><em>secretcompartment</em></span> and the nsURI 
-						<span class="emphasis"><em>http://www.eclipse.org/secretcompartment</em></span>. Actually these are the properties that are required to create an 
-						<span class="emphasis"><em>EPackage</em></span>. 
-						The whole algorithm used to derive complete Ecore models from Xtext grammars is described in the section 
-						<a class="link" href="#metamodelInference" title="Ecore model inference">Ecore model inference</a>.
+						<span class="emphasis"><em>EPackage</em></span> with the 
+						<span class="emphasis"><em>name</em></span> &ldquo;secretcompartment&rdquo; and the 
+						<span class="emphasis"><em>nsURI</em></span> &ldquo;http://www.eclipse.org/secretcompartment&rdquo;. 
+						Actually these are the properties that are required to create an 
+						<span class="emphasis"><em>EPackage</em></span>.
+						Xtext will then add 
+						<span class="emphasis"><em>EClasses</em></span> with properties (
+						<span class="emphasis"><em>EAttributes</em></span> and 
+						<span class="emphasis"><em>EReferences</em></span>) for the different rules, as described in
+
+						<a class="link" href="#metamodelInference" title="Ecore model inference">Ecore model inference</a>. 
 					</p>
 </div>
 <div class="section" title="EPackage import">
@@ -2217,51 +2226,13 @@ Transition&nbsp;:<br>
 </div>
 </div>
 <p>If you already have an existing 
-						<span class="emphasis"><em>EPackage</em></span>, you can import it using either a namespace URI or a resource URI. An 
-						<a class="ulink" href="http://www.ietf.org/rfc/rfc2396.txt" target="_new">URI</a> (Uniform Resource Identifier) provides a simple and extensible means for identifying an abstract or physical resource. For details about the EMF implementation of this concept, please see its 
+						<span class="emphasis"><em>EPackage</em></span>, you can import it using either a namespace URI or a resource URI. 
+						An 
+						<a class="ulink" href="http://www.ietf.org/rfc/rfc2396.txt" target="_new">URI</a> (Uniform Resource Identifier) provides a simple and extensible 
+						means for identifying an abstract or physical resource. For all the niftx details about EMF URIs 
+						please see its 
 						<a class="ulink" href="http://help.eclipse.org/help32/topic/org.eclipse.emf.doc/references/javadoc/org/eclipse/emf/common/util/URI.html" target="_new">documentation</a>.
 					</p>
-<div class="section" title="Using namespace URIs to import existing EPackages">
-<div class="titlepage">
-<div>
-<div>
-<h5 class="title">
-<a name="UsingnamespaceURIstoimportexistingEPackages"></a>Using namespace URIs to import existing EPackages</h5>
-</div>
-</div>
-</div>
-<p>You can import an existing 
-							<span class="emphasis"><em>EPackage</em></span> with the following statement:
-						</p>
-<div class="literallayout">
-<p>
-<code class="code">import&nbsp;'http://www.eclipse.org/secretcompartment'<br>
-
-</code>
-</p>
-</div>
-<p>Note that if you use a namespace URI, the corresponding 
-							<span class="emphasis"><em>EPackage</em></span> needs to be installed into the workbench. Otherwise the editor cannot find it.
-							At runtime (i.e. when starting the generator) you need to make sure that the corresponding 
-							<span class="emphasis"><em>EPackage</em></span> is registered in the 
-							<span class="emphasis"><em>EPackage.Registry.INSTANCE</em></span>. If you use MWE to drive your code generator, you need to add the following lines to your workflow file:
-						</p>
-<div class="literallayout">
-<p>
-<code class="code">&lt;bean&nbsp;class="org.eclipse.emf.mwe.utils.StandaloneSetup"&nbsp;<br>
-&nbsp;&nbsp;platformUri="${runtimeProject}/.."&gt;<br>
-&nbsp;&nbsp;&lt;registerGeneratedEPackage&nbsp;value="my.pack.SecretcompartmentPackage"/&gt;<br>
-&lt;/bean&gt;<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<p>Using namespace URIs is typically only interesting when common Ecore models are used, such as Ecore itself. If you&rsquo;re developing the 
-							<span class="emphasis"><em>EPackage</em></span> together with the DSL but don&rsquo;t want to have it derived from the grammar for some reason, we suggest to use a resource URI.
-						</p>
-</div>
 <div class="section" title="Using resource URIs to import existing EPackages">
 <div class="titlepage">
 <div>
@@ -2271,34 +2242,102 @@ Transition&nbsp;:<br>
 </div>
 </div>
 </div>
-<p>If the 
-							<span class="emphasis"><em>EPackage</em></span> you want to use is somewhere in your workspace you should refer to it by a 
-							<span class="emphasis"><em>platform:/resource/</em></span>-URI.
-							Platform URIs are a special EMF concept, which allow for some kind of transparency between workspace projects and installed bundles. Consult the EMF documentation (we recommend the book) for details.
+<p>In order to import an existing Ecore model, you&rsquo;ll have to have the *.ecore file describing the 
+							<span class="emphasis"><em>EPackage</em></span> you want to 
+							use somewhere in your workspace. In order to refer to that file you make use of the platform:/resource scheme.
+							Platform URIs are a special EMF concept, which allow to reference elements in the workspace 
+							independent of the location of the workspace. 
 						</p>
 <p>An import statement referring to an Ecore file by a 
 							<span class="emphasis"><em>platform:/resource/</em></span>-URI looks like this: 
 						</p>
 <div class="literallayout">
 <p>
-<code class="code">import&nbsp;'platform:/resource/project/src/my/pack/SecretCompartments.ecore'<br>
+<code class="code">import&nbsp;'platform:/resource/my.project/src/my/pack/SecretCompartments.ecore'<br>
 
 </code>
 </p>
 </div>
-<p>If you want to mix generated and imported Ecore models you&rsquo;ll have to configure the generator fragment in your MWE file responsible for generating the Ecore classes (
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">EcoreGeneratorFragment</a>) with resource URIs that point to the 
+<p>If you want to mix generated and imported Ecore models you&rsquo;ll have to configure the generator fragment 
+							in your MWE file responsible for generating the Ecore classes 
+							(
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">EcoreGeneratorFragment</a>) 
+							with resource URIs that point to the 
 							<a class="link" href="#emf_codegen" title="EMF code generation">generator models</a> of the referenced Ecore models.
-							Example:
 						</p>
+<p>The *.genmodel provides all kind of generator configuration used by EMF&rsquo;s code generator. Xtext will automatically create
+							a *.genmodel for generated ecore models, but if such a model references an existing imported Ecore model, the code generator 
+							needs to know how that code was generated in order to generate valid references in Java for the new Ecore model. </p>
+<p>Example:</p>
 <div class="literallayout">
 <p>
 <code class="code">fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nbsp;{<br>
 &nbsp;&nbsp;genModels&nbsp;=<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"platform:/resource/project/src/my/pack/SecretCompartments.genmodel"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"platform:/resource/my.project/src/my/pack/SecretCompartments.genmodel"<br>
 }<br>
 
 <br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Using classpath URIs to import existing EPackages">
+<div class="titlepage">
+<div>
+<div>
+<h5 class="title">
+<a name="UsingclasspathURIstoimportexistingEPackages"></a>Using classpath URIs to import existing EPackages</h5>
+</div>
+</div>
+</div>
+<p>We like to leverage Java&rsquo;s classpath mechanism, because besides that it is well understood and designed it allows us to
+							package libraries as jars. If you want to reference an *.ecore file which is contained in a jar, you can make use of the 
+							classpath scheme we&rsquo;ve introduced. For instance if you want to reference Java elements, you can use the JvmType Ecore model 
+							which is shipped as part of Xtext. </p>
+<p>Example:</p>
+<div class="literallayout">
+<p>
+<code class="code">import&nbsp;'classpath:/model/JvmTypes.ecore'&nbsp;as&nbsp;types<br>
+
+</code>
+</p>
+</div>
+<p>As with platform resource URIs you&rsquo;ll also have to tell the generator where the corresponding *.genmodel can be found:</p>
+<div class="literallayout">
+<p>
+<code class="code">fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nbsp;{<br>
+&nbsp;&nbsp;genModels&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"classpath:/model/JvmTypes.genmodel"<br>
+}<br>
+
+<br>
+See&nbsp;the&nbsp;section&nbsp;on&nbsp;"Referring&nbsp;Java&nbsp;Types":#jvmtypes&nbsp;for&nbsp;a&nbsp;full&nbsp;explanation&nbsp;of&nbsp;this&nbsp;useful&nbsp;feature.<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Using namespace URIs to import existing EPackages">
+<div class="titlepage">
+<div>
+<div>
+<h5 class="title">
+<a name="UsingnamespaceURIstoimportexistingEPackages"></a>Using namespace URIs to import existing EPackages</h5>
+</div>
+</div>
+</div>
+<p>You can also use nsURI in order to import existing 
+							<span class="emphasis"><em>EPackage</em></span>. Note that this is generally not
+							preferrable, because you&rsquo;ll have to have the corresponding EPackage installed in the workbench.
+							There&rsquo;s mainly just one exception, that is Ecore itself. So if you refer to Ecore it is best
+							to use its nsURI :
+						</p>
+<div class="literallayout">
+<p>
+<code class="code">import&nbsp;"http://www.eclipse.org/emf/2002/Ecore"&nbsp;as&nbsp;ecore<br>
 
 </code>
 </p>
@@ -2327,59 +2366,27 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 </code>
 </p>
 </div>
-<p>When referring to a type somewhere in the grammar you need to qualify the reference using that alias (example 
+<p>When referring to a type somewhere in the grammar you need to qualify the reference using that 
+						alias (example 
 						<span class="emphasis"><em>another::CoolType</em></span>). We&rsquo;ll see later where such type references occur.
 					</p>
 <p>It is also supported to put multiple 
-						<span class="emphasis"><em>EPackage</em></span> imports into one alias. This is no problem as long as there are not any two 
-						<span class="emphasis"><em>EClassifiers</em></span> with the same name. In such cases none of them can be referenced. It is even possible to 
+						<span class="emphasis"><em>EPackage</em></span> imports into one alias. This is no problem as 
+						long as there are not any two 
+						<span class="emphasis"><em>EClassifiers</em></span> with the same name. In such cases none of them can be referenced. 
+						It is even possible to 
 						<span class="emphasis"><em>import</em></span> multiple and 
-						<span class="emphasis"><em>generate</em></span> one Ecore model and all of them are declared for the same alias. If you do so, for a reference to an 
+						<span class="emphasis"><em>generate</em></span> one Ecore model and all of them are declared for 
+						the same alias. If you do so, for a reference to an 
 						<span class="emphasis"><em>EClassifier</em></span> first the imported 
-						<span class="emphasis"><em>EPackages</em></span> are scanned before it is assumed that a type needs to by generated into the to-be-generated package.
+						<span class="emphasis"><em>EPackages</em></span> are 
+						scanned before it is assumed that a type needs to by generated into the to-be-generated package. 
 					</p>
-<p>Example:</p>
-<div class="literallayout">
-<p>
-<code class="code">generate&nbsp;toBeGenerated&nbsp;'http://www.eclipse.org/toBeGenerated'<br>
-import&nbsp;'http://www.eclipse.org/packContainingClassA'<br>
-import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<p>With the declaration above </p>
-<div class="orderedlist">
-<ol class="orderedlist" type="1">
-<li class="listitem">
-<p>a reference to type 
-								<span class="emphasis"><em>ClassA</em></span> would be linked to the 
-								<span class="emphasis"><em>EClass</em></span> contained in 
-								<span class="emphasis"><em>http://www.eclipse.org/packContainingClassA</em></span>, 
-							</p>
-</li>
-<li class="listitem">
-<p>a reference to type 
-								<span class="emphasis"><em>ClassB</em></span> would be linked to the 
-								<span class="emphasis"><em>EClass</em></span> contained in 
-								<span class="emphasis"><em>http://www.eclipse.org/packContainingClassB</em></span>, 
-							</p>
-</li>
-<li class="listitem">
-<p>a reference to type 
-								<span class="emphasis"><em>NotYetDefined</em></span> would be linked to a newly created 
-								<span class="emphasis"><em>EClass</em></span> in 
-								<span class="emphasis"><em>http://www.eclipse.org/toBeGenerated</em></span>.
-							</p>
-</li>
-</ol>
-</div>
 <p>Note, that using this feature is not recommended, because it might cause problems, which are hard to track down.
 						For instance, a reference to 
 						<span class="emphasis"><em>classA</em></span> would as well be linked to a newly created 
-						<span class="emphasis"><em>EClass</em></span>, because the corresponding type in 
+						<span class="emphasis"><em>EClass</em></span>, because the 
+						corresponding type in 
 						<span class="emphasis"><em>http://www.eclipse.org/packContainingClassA</em></span> is spelled with a capital letter.
 					</p>
 </div>
@@ -2420,13 +2427,17 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 <p>In the first stage called 
-						<span class="emphasis"><em>lexing</em></span>, a sequence of characters (the text input) is transformed into a sequence of so called tokens. In this context, a token is sort of a strongly typed part of the input sequence. It consists of one or more characters and was matched by a particular terminal rule or keyword and therefore represents an atomic symbol.
+						<span class="emphasis"><em>lexing</em></span>, a sequence of characters (the text input) is transformed into a sequence of so 
+						called tokens. In this context, a token is sort of a strongly typed part of the input sequence. It consists of one 
+						or more characters and was matched by a particular terminal rule or keyword and therefore represents an atomic symbol.
 						Terminal rules are also referred to as 
 						<span class="emphasis"><em>token rules</em></span> or 
-						<span class="emphasis"><em>lexer rules</em></span>. There is an informal naming convention that names of terminal rules are all upper-case.
+						<span class="emphasis"><em>lexer rules</em></span>. There is an informal naming convention that 
+						names of terminal rules are all upper-case.
 					</p>
 <p>In the secret compartments example there are no explicitly defined terminal rules, since it only uses the 
-						<span class="emphasis"><em>ID</em></span> rule which is inherited from the grammar 
+						<span class="emphasis"><em>ID</em></span> rule 
+						which is inherited from the grammar 
 						<span class="emphasis"><em>org.eclipse.xtext.common.Terminals</em></span> (cf. 
 						<a class="link" href="#grammarMixins" title="Grammar Mixins">Grammar Mixins</a>).
 						Therein the 
@@ -2444,10 +2455,12 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 <p>It says that a token 
 						<span class="emphasis"><em>ID</em></span> starts with an optional 
 						<span class="emphasis"><em>'^'</em></span> character (caret), followed by a letter 
-						<span class="emphasis"><em>_ or underscore ('</em></span>') followed by any number of letters, underscores and numbers 
+						<span class="emphasis"><em>(&lsquo;a&rsquo;..&lsquo;z&rsquo;|&lsquo;A&rsquo;..&lsquo;Z&rsquo;)</em></span> 
+						or underscore (&lsquo;_&rsquo;) followed by any number of letters, underscores and numbers 
 						<span class="emphasis"><em>(&lsquo;0&rsquo;..&lsquo;9&rsquo;)</em></span>. 
 					</p>
-<p>The caret is used to escape an identifier for cases where there are conflicts with keywords. It is removed by the 
+<p>The caret is used to escape an identifier for cases where there are conflicts with keywords. It is removed 
+						by the 
 						<span class="emphasis"><em>ID</em></span> rule&rsquo;s 
 						<a class="link" href="#valueconverter" title="Value Converter">ValueConverter</a>. 
 					</p>
@@ -2465,9 +2478,11 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </p>
 </div>
 <p>Note, that 
-						<span class="emphasis"><em>the order of terminal rules is crucial for your grammar</em></span>, as they may hide each other. This is especially important for newly introduced rules in connection with mixed rules from used grammars. 
+						<span class="emphasis"><em>the order of terminal rules is crucial for your grammar</em></span>, as they may hide each other. 
+						This is especially important for newly introduced rules in connection with mixed rules from used grammars. 
 					</p>
-<p>If you for instance want to add a rule to allow fully qualified names in addition to simple IDs, you should implement it as a 
+<p>If you for instance want to add a rule to allow fully qualified names in addition to simple IDs, you should 
+						implement it as a 
 						<a class="link" href="#datatypeRules" title="Data type rules">data type rule</a>, instead of adding another terminal rule.
 					</p>
 <div class="section" title="Return types">
@@ -2496,11 +2511,16 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 <p>This means that the terminal rule 
 							<span class="emphasis"><em>INT</em></span> returns instances of 
-							<span class="emphasis"><em>ecore::EInt</em></span>. It is possible to define any kind of data type here, which just needs to be an instance of 
-							<span class="emphasis"><em>ecore::EDataType</em></span>.
-							In order to tell the parser how to convert the parsed string to a value of the declared data type, you need to provide your own implementation of 
+							<span class="emphasis"><em>ecore::EInt</em></span>. It is possible to define any 
+							kind of data type here, which just needs to be an instance of 
+							<span class="emphasis"><em>ecore::EDataType</em></span>. In order to tell the parser 
+							how to convert the parsed string to a value of the declared data type, you need to provide your own 
+							implementation of 
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java?root=Modeling_Project&view=co" target="_new">IValueConverterService</a> (cf. 
-							<a class="link" href="#valueconverter" title="Value Converter">value converters</a>). The value converter is also the point where you can remove things like quotes from string literals or the caret (&lsquo;^&rsquo;) from identifiers. Its implementation needs to be registered as a service (cf. 
+
+							<a class="link" href="#valueconverter" title="Value Converter">value converters</a>). The value converter is also the point where you can remove things 
+							like quotes from string literals or the caret (&lsquo;^&rsquo;) from identifiers. Its implementation needs to be registered 
+							as a service (cf. 
 							<a class="link" href="#dependencyInjection" title="Dependency Injection in Xtext with Google Guice">Service Framework</a>).
 						</p>
 </div>
@@ -2514,8 +2534,8 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 </div>
-<p>Token rules are described using &ldquo;Extended Backus-Naur Form&rdquo;-like (EBNF) expressions. The different expressions are described in the following.
-						The one thing all of these expressions have in common is the cardinality operator.
+<p>Token rules are described using &ldquo;Extended Backus-Naur Form&rdquo;-like (EBNF) expressions. The different expressions 
+						are described in the following. The one thing all of these expressions have in common is the cardinality operator.
 						There are four different possible cardinalities</p>
 <div class="orderedlist">
 <ol class="orderedlist" type="1">
@@ -2583,7 +2603,8 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 <p>In this case an 
 							<span class="emphasis"><em>INT</em></span> is comprised of one or more (note the 
-							<span class="emphasis"><em>+</em></span> operator) characters between (and including) 
+							<span class="emphasis"><em>+</em></span> operator) characters 
+							between (and including) 
 							<span class="emphasis"><em>'0'</em></span> and 
 							<span class="emphasis"><em>'9'</em></span>.
 						</p>
@@ -2726,9 +2747,15 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 </div>
-<p>The parser reads a sequence of terminals and walks through the parser rules. Hence a parser rule &ndash; contrary to a terminal rule &ndash; does not produce a single terminal token but a tree of non-terminal and terminal tokens. They lead to a so called 
-					<a class="link" href="#node_model" title="Working with the parse tree (aka node model)">parse tree</a> (in Xtext it is also referred as node model). Furthermore, parser rules are handled as kind of a building plan for the creation of the 
-					<span class="emphasis"><em>EObjects</em></span> that form the semantic model (the linked abstract syntax graph or AST). Due to this fact, parser rules are even called production rules. The different constructs like actions and assignments are used to derive types and initialize the semantic objects accordingly. 
+<p>The parser reads a sequence of terminals and walks through the parser rules. Hence a parser rule - 
+					contrary to a terminal rule &ndash; does not produce a single terminal token but a tree of non-terminal 
+					and terminal tokens. They lead to a so called 
+					<a class="link" href="#node_model" title="Working with the parse tree (aka node model)">parse tree</a> (in Xtext it is also referred 
+					as node model). Furthermore, parser rules are handled as kind of a building plan for the creation of 
+					the 
+					<span class="emphasis"><em>EObjects</em></span> that form the semantic model (the linked abstract syntax graph or AST). Due to this 
+					fact, parser rules are even called production rules. The different constructs like actions and 
+					assignments are used to derive types and initialize the semantic objects accordingly. 
 				</p>
 <div class="section" title="Extended Backus-Naur Form expressions">
 <div class="titlepage">
@@ -2739,7 +2766,8 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 </div>
-<p>Not all the expressions that are available in terminal rules can be used in parser rules. Character ranges, wildcards, the until token and the negation are only available for terminal rules. </p>
+<p>Not all the expressions that are available in terminal rules can be used in parser rules. Character 
+						ranges, wildcards, the until token and the negation are only available for terminal rules. </p>
 <p>The elements that are available in parser rules as well as in terminal rules are</p>
 <div class="orderedlist">
 <ol class="orderedlist" type="1">
@@ -2769,7 +2797,8 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </li>
 </ol>
 </div>
-<p>In addition to these elements, there are some expressions used to direct how the AST is constructed, which are listed and explained in the following.</p>
+<p>In addition to these elements, there are some expressions used to direct how the AST 
+						is constructed, which are listed and explained in the following.</p>
 <div class="section" title="Assignments">
 <div class="titlepage">
 <div>
@@ -2779,8 +2808,11 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 </div>
-<p>Assignments are used to assign the parsed information to a feature of the current object. The type of the current object, its 
-							<span class="emphasis"><em>EClass</em></span>, is specified by the return type of the parser rule. If it is not explicitly stated it is implied that the type&rsquo;s name equals the rule&rsquo;s name. The type of the feature is inferred from the right hand side of the assignment.
+<p>Assignments are used to assign the parsed information to a feature of the current object. 
+							The type of the current object, its 
+							<span class="emphasis"><em>EClass</em></span>, is specified by the return type of the parser 
+							rule. If it is not explicitly stated it is implied that the type&rsquo;s name equals the rule&rsquo;s name. 
+							The type of the feature is inferred from the right hand side of the assignment.
 						</p>
 <p>Example:</p>
 <div class="literallayout">
@@ -2811,11 +2843,13 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 							<span class="emphasis"><em>name</em></span>' of the current object (which has the 
 							<span class="emphasis"><em>EClass</em></span> '
 							<span class="emphasis"><em>State</em></span>' in this case). 
-							The right hand side can be a rule call, a keyword, a cross reference (explained later) or even an alternative comprised by the former.
-							The type of the feature needs to be compatible with the type of the expression on the right. As 
+							The right hand side can be a rule call, a keyword, a cross reference (explained later) or even an 
+							alternative comprised by the former. The type of the feature needs to be compatible with the type of the
+							 expression on the right. As 
 							<span class="emphasis"><em>ID</em></span> returns an 
 							<span class="emphasis"><em>EString</em></span> in this case, the feature '
-							<span class="emphasis"><em>name</em></span>' needs to be of type 
+							<span class="emphasis"><em>name</em></span>' needs to be 
+							 of type 
 							<span class="emphasis"><em>EString</em></span> as well.
 						</p>
 <p>
@@ -2855,7 +2889,9 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 </div>
 </div>
-<p>A unique feature of Xtext is the ability to declare crosslinks in the grammar. In traditional compiler construction the crosslinks are not established during parsing but in a later linking phase. This is the same in Xtext, but we allow to specify crosslink information in the grammar. This information is used by the linker.
+<p>A unique feature of Xtext is the ability to declare crosslinks in the grammar. In traditional compiler 
+							construction the crosslinks are not established during parsing but in a later linking phase. This is the 
+							same in Xtext, but we allow to specify crosslink information in the grammar. This information is used by the linker.
 							The syntax for crosslinks is:</p>
 <div class="literallayout">
 <p>
@@ -2882,7 +2918,8 @@ import&nbsp;'http://www.eclipse.org/packContainingClassB'<br>
 </div>
 <p>It is important to understand that the text between the square brackets does not refer to another rule, but to a type!
 							This is sometimes confusing, because one usually uses the same name for the rules and the returned types.
-							That is if we had named the type for events differently like in the following the cross reference needs to be adapted as well:</p>
+							That is if we had named the type for events differently like in the following the cross reference needs 
+							to be adapted as well:</p>
 <div class="literallayout">
 <p>
 <code class="code">Transition&nbsp;:<br>
@@ -2896,14 +2933,16 @@ Event&nbsp;returns&nbsp;MyEvent&nbsp;:&nbsp;....;<br>
 </code>
 </p>
 </div>
-<p>Looking at the syntax definition of cross references, there is an optional part starting with a vertical bar (pipe) followed by 
-							<span class="emphasis"><em>CrossReferenceableTerminal</em></span>. This is the part describing the concrete text, from which the crosslink later should be established.
-							If the terminal is omitted, it is expected to be 
+<p>Looking at the syntax definition of cross references, there is an optional part starting with a vertical 
+							bar (pipe) followed by 
+							<span class="emphasis"><em>CrossReferenceableTerminal</em></span>. This is the part describing the concrete text, from 
+							which the crosslink later should be established. If the terminal is omitted, it is expected to be 
 							<span class="emphasis"><em>ID</em></span>.
 						</p>
 <p>You may even use alternatives as the referencable terminal. This way, either an 
 							<span class="emphasis"><em>ID</em></span> or a 
-							<span class="emphasis"><em>STRING</em></span> may be used as the referencable terminal, as it is possible in many SQL dialects.
+							<span class="emphasis"><em>STRING</em></span> may be 
+							used as the referencable terminal, as it is possible in many SQL dialects.
 						</p>
 <div class="literallayout">
 <p>
@@ -2925,7 +2964,8 @@ Event&nbsp;returns&nbsp;MyEvent&nbsp;:&nbsp;....;<br>
 </div>
 </div>
 </div>
-<p>The elements of an unordered group can occur in any order but each element can occur at most once. Unordered groups are separated with '
+<p>The elements of an unordered group can occur in any order but each element can occur at most once. Unordered 
+							groups are separated with '
 							<span class="emphasis"><em>&amp;</em></span>', e.g.
 						</p>
 <div class="literallayout">
@@ -2995,6 +3035,7 @@ public&nbsp;static&nbsp;final&nbsp;private&nbsp;//&nbsp;ERROR:&nbsp;visibility&n
 							<span class="emphasis"><em>TypeB</em></span> must be a subtype of 
 							<span class="emphasis"><em>TypeA</em></span>. An expression 
 							<span class="emphasis"><em>A ident</em></span> should create an instance of 
+
 							<span class="emphasis"><em>TypeA</em></span>, whereas 
 							<span class="emphasis"><em>B ident</em></span> should instantiate 
 							<span class="emphasis"><em>TypeB</em></span>.
@@ -3029,9 +3070,12 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 </code>
 </p>
 </div>
-<p>Generally speaking, the instance is created as soon as the parser hits the first assignment. However, actions allow to explicitly instantiate any 
+<p>Generally speaking, the instance is created as soon as the parser hits the first assignment. However, actions 
+							allow to explicitly instantiate any 
 							<span class="emphasis"><em>EObject</em></span>. The notation 
-							<span class="emphasis"><em>{TypeB}</em></span> will create an instance of TypeB and assign it to the result of the parser rule. This allows parser rules without any assignment and object creation without the need to introduce unnecessary rules.
+							<span class="emphasis"><em>{TypeB}</em></span> will create an instance of TypeB and assign 
+							it to the result of the parser rule. This allows parser rules without any assignment and object creation without 
+							the need to introduce unnecessary rules.
 						</p>
 </div>
 <div class="section" title="Unassigned rule calls">
@@ -3044,10 +3088,14 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 </div>
 </div>
 <p>We previously explained, that the 
-							<span class="emphasis"><em>EObject</em></span> to be returned is created lazily when the first assignment occurs or when a simple action is evaluated. There is another way one can set the 
-							<span class="emphasis"><em>EObject</em></span> to be returned, which we call an &ldquo;unassigned rule call&rdquo;.
+							<span class="emphasis"><em>EObject</em></span> to be returned is created lazily when the first assignment occurs or 
+							when a simple action is evaluated. There is another way one can set the 
+							<span class="emphasis"><em>EObject</em></span> to be returned, which we call 
+							an &ldquo;unassigned rule call&rdquo;.
 						</p>
-<p>Unassigned rule calls (the name suggests it) are rule calls to other parser rules, which are not used within an assignment. If there is no feature the returned value shall be assigned to, the value is assigned to the &ldquo;to-be-returned&rdquo; result of the calling rule.</p>
+<p>Unassigned rule calls (the name suggests it) are rule calls to other parser rules, which are not used within an 
+							assignment. If there is no feature the returned value shall be assigned to, the value is assigned to the 
+							&ldquo;to-be-returned&rdquo; result of the calling rule.</p>
 <p>With unassigned rule calls one can, for instance, create rules which just dispatch between several other rules:</p>
 <div class="literallayout">
 <p>
@@ -3066,8 +3114,9 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 							<span class="emphasis"><em>AbstractToken</em></span> could possibly return an instance of 
 							<span class="emphasis"><em>TokenA</em></span>, 
 							<span class="emphasis"><em>TokenB</em></span> or 
-							<span class="emphasis"><em>TokenC</em></span> its type must by a super type of these types.
-							It is now for instance as well possible to further change the state of the AST element by assigning additional things.
+							<span class="emphasis"><em>TokenC</em></span> its type must by a 
+							super type of these types. It is now for instance as well possible to further change the state of the AST 
+							element by assigning additional things.
 						</p>
 <p>Example:</p>
 <div class="literallayout">
@@ -3896,10 +3945,11 @@ terminal&nbsp;ANY_OTHER:	.&nbsp;;<br>
 
 				<span class="emphasis"><em>plugin.xml</em></span>, 
 				<span class="emphasis"><em>MANIFEST.MF</em></span> and the 
-				<a class="link" href="#guicemodules" title="Modules">Guice modules</a>.
+				<a class="link" href="#">Guice modules</a>.
 			</p>
 <p>Xtext&rsquo;s generator leverages 
-				<a class="ulink" href="http://www.eclipse.org/modeling/emft/?project=mwe" target="_new">MWE2 &ndash; the modeling workflow engine</a> from EMFT to configure the generator.
+				<a class="link" href="#MWE2" title="Chapter&nbsp;6.&nbsp;MWE2">MWE2 &ndash; the modeling workflow engine</a> 
+				from EMFT to configure the generator.
 			</p>
 <div class="section" title="A short introduction to MWE2">
 <div class="titlepage">
@@ -3910,7 +3960,9 @@ terminal&nbsp;ANY_OTHER:	.&nbsp;;<br>
 </div>
 </div>
 </div>
-<p>MWE2 allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just instantiates Java classes and the configuration is done through public setter and adder methods as one is used to from Java Beans encapsulation principles. An in-depth documentation can be found in the chapter &ldquo;MWE2&rdquo;#MWE2.</p>
+<p>MWE2 allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just 
+					instantiates Java classes and the configuration is done through public setter and adder methods as one is used to 
+					from Java Beans encapsulation principles. An in-depth documentation can be found in the chapter &ldquo;MWE2&rdquo;#MWE2.</p>
 <p>Given the following simple Java class (POJO):</p>
 <div class="literallayout">
 <p>
@@ -3935,7 +3987,8 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>One can create a family tree with MWE2 easily by describing it in a declarative manner without writing a single line of Java code and without the need to compile classes:</p>
+<p>One can create a family tree with MWE2 easily by describing it in a declarative manner 
+					without writing a single line of Java code and without the need to compile classes:</p>
 <div class="literallayout">
 <p>
 <code class="code">module&nbsp;com.mycompany.CreatePersons<br>
@@ -3943,7 +3996,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <br>
 Person&nbsp;{<br>
 	name&nbsp;=&nbsp;"Grandpa"<br>
-	child&nbsp;=&nbsp;com.mycompany.Person&nbsp;{<br>
+	child&nbsp;=&nbsp;{<br>
 		name&nbsp;=&nbsp;"Father"<br>
 		child&nbsp;=&nbsp;{<br>
 			name&nbsp;=&nbsp;"Son"<br>
@@ -3999,22 +4052,22 @@ public&nbsp;class&nbsp;CreatePersons&nbsp;{<br>
 					into this workflow as well to make it convenient to instantiate actual workflows and components, but these ones are covered 
 					in depth in the appropriate 
 					<a class="link" href="#MWE2" title="Chapter&nbsp;6.&nbsp;MWE2">chapter</a>. The constructed objects are furthermore configured according to the declaration 
-					in the module, e.g. a second instance of Person will be created and added to the list of children of &ldquo;Grandpa&rdquo; while the third person 
-					- the class is inferred from the assigned feature &ndash; becomes a child of &ldquo;Father&rdquo;. All three instances will have their respective 
-					<span class="emphasis"><em>name</em></span>
-					assigned via a reflective invocation 
+					in the module, e.g. a second instance of Person will be created and added to the list of children of &ldquo;Grandpa&rdquo; while the third 
+					person &ndash; the class is inferred from the assigned feature &ndash; becomes a child of &ldquo;Father&rdquo;. All three instances will have 
+					their respective 
+					<span class="emphasis"><em>name</em></span> assigned via a reflective invocation 
 					<span class="emphasis"><em>setName</em></span>. If one wants to add another child to &ldquo;Father&rdquo;, she
 					can simply repeat the child assignment:
 				</p>
 <div class="literallayout">
 <p>
 <code class="code">child&nbsp;=&nbsp;com.mycompany.Person&nbsp;{<br>
-	name&nbsp;=&nbsp;"Father"<br>
+	name&nbsp;=&nbsp;"Bob"<br>
 	child&nbsp;=&nbsp;{<br>
-&nbsp;&nbsp;	name&nbsp;=&nbsp;"Son"<br>
+		name&nbsp;=&nbsp;"Mary"<br>
 	}<br>
 	child&nbsp;=&nbsp;{<br>
-		name&nbsp;=&nbsp;..<br>
+		name&nbsp;=&nbsp;"Dave"<br>
 	}<br>
 }<br>
 
@@ -4024,19 +4077,22 @@ public&nbsp;class&nbsp;CreatePersons&nbsp;{<br>
 </p>
 </div>
 <p>As you can see in the example above MWE2 can be used to instantiate arbitrary Java object models without any dependency or
-					limitation to MWE2 specific implementations. This is 
-					conceptually very close to the dependency injection mechanism and the XML language 
-					in the 
+					limitation to MWE2 specific implementations. This is conceptually very close to the dependency injection mechanism and 
+					the XML language in the 
 					<a class="ulink" href="http://www.springframework.org" target="_new">Spring Framework</a>. 
 				</p>
 <p>
 					
 <span class="bold"><strong>Tip</strong></span>
+					__Whenever you are in an *.mwe2 file and wonder what kind of configuration the underlying component may accept: __
+					__Just use the Content Assist in the MWE2 Editor or navigate directly to the declaration of the underlying Java __ 
 
-					<span class="italic">Whenever you are in an *.mwe2 file and wonder what kind of configuration the underlying component may accept: Just use the Content Assist in the MWE2 Editor or navigate directly to the declaration of the underlying Java implementation by means of F3 (Go To Declaration).</span>
+					<span class="italic">implementation by means of F3 (Go To Declaration).</span>
 				
 </p>
-<p>This is the basic idea of the MWE2 language. There are of course a couple of additional concepts and features in the language and we also have not yet talked about the runtime workflow model. Please refer to the dedicated MWE2 
+<p>This is the basic idea of the MWE2 language. There are of course a couple of additional concepts and features in the 
+					language and we also have not yet talked about the runtime workflow model. Please refer to the dedicated MWE2 
+
 					<a class="link" href="#MWE2" title="Chapter&nbsp;6.&nbsp;MWE2">reference documentation</a> for additional information.
 				</p>
 </div>
@@ -4049,14 +4105,18 @@ public&nbsp;class&nbsp;CreatePersons&nbsp;{<br>
 </div>
 </div>
 </div>
-<p>Now that you know a bit about MWE2, you are ready to learn about the concepts and architecture of Xtext&rsquo;s language generator. 
-					An instance of Xtext&rsquo;s generator is configured with general information about source folders and projects and consists of any number of language configurations. 
-					For each language configuration a URI pointing to its grammar file and the file extensions for the DSL must be provided. 
+<p>Of course a generator in Xtext is not composed of fathers and sons, but of so called language configurations. 
+					For each language configuration a URI pointing to 
+					its grammar file and the file extensions for the DSL must be provided. 
 					In addition, a language is configured with a list of 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">IGeneratorFragment</a>s.
-					The whole generator is composed of theses fragments. We have fragments for generating parsers, the serializer, the EMF code, the outline view, etc.
 
-					</p>
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">IGeneratorFragment</a>s.
+					The whole generator is composed of theses fragments. We have fragments for generating parsers, the serializer, the EMF code, 
+					the outline view, etc. 
+				</p>
+<p>
+					
+</p>
 <div class="mediaobject">
 <img src="images/generator-structure.png"></div>
 <p>
@@ -4071,9 +4131,14 @@ public&nbsp;class&nbsp;CreatePersons&nbsp;{<br>
 </div>
 </div>
 </div>
-<p>Each fragment gets the grammar of the language as an EMF model passed in. A fragment is able to generate code in one of the configured locations and contribute to several shared artifacts. The main interface 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">IGeneratorFragment</a> is supported by a convenient abstract base class 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/AbstractGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">AbstractGeneratorFragment</a>, which by default delegates to an Xpand template with the same qualified name as the class and delegates some of the calls to Xpand template definitions.
+<p>Each fragment gets the grammar of the language as an EMF model passed in. A fragment is able to generate code in one 
+						of the configured locations and contribute to several shared artifacts. The main interface 
+
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">IGeneratorFragment</a> is supported by a convenient 
+						abstract base class 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/AbstractGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">AbstractGeneratorFragment</a>, which 
+						by default delegates to an Xpand template with the same qualified name as the class and delegates some of the 
+						calls to Xpand template definitions.
 					</p>
 <p>We suggest to have a look at the fragment we have written for label providers (
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java?root=Modeling_Project&view=co" target="_new">LabelProviderFragment</a>). It is pretty trivial and at the same time uses the most important call backs. In addition, the structure is not cluttered with too much extra noise so that the whole package can serve as a template to write your own fragment.
@@ -4150,18 +4215,18 @@ Workflow&nbsp;{<br>
 </p>
 </div>
 <p>Here the root element is 
-						<span class="emphasis"><em>Workflow</em></span> which accepts 
+						<span class="emphasis"><em>Workflow</em></span> and is part of the very slim runtime model shipped with MWE2. It accepts 
+
 						<span class="italic">bean</span> s and 
 						<span class="italic">component</span> s. The 
-						<span class="emphasis"><em>var</em></span> declaration is a 
-						first class concept of MWE2&rsquo;s configuration language and defines the interface of the module. They allow to externalize
-						some common configuration parameters. This comes especially handy in String variables where one can easily use 
-
+						<span class="emphasis"><em>var</em></span> declaration is a first class concept of MWE2&rsquo;s configuration language 
+						and defines the interface of the module. They allow to externalize some common configuration parameters. This 
+						comes especially handy in String variables where one can easily use 
 						<span class="emphasis"><em>${variable}</em></span> to concatenate values. 
 					</p>
 <p>The method 
 						<span class="emphasis"><em>Workflow.addBean(Object)</em></span> does nothing but provides a means to apply global side-effects, which 
-						unfortunately is required by some projects. In this example we do a so called 
+						unfortunately is required sometimes. In this example we do a so called 
 						<span class="italic">EMF stand-alone setup</span>. This class 
 						initializes a bunch of things for a non-OSGi environment that are otherwise configured by means of extension points, 
 						e.g. it allows to populate EMF&rsquo;s singletons like the 
@@ -4176,7 +4241,9 @@ Workflow&nbsp;{<br>
 						itself is an instance of 
 						<span class="emphasis"><em>IWorkflowComponent</em></span> and can therefore be used within MWE2 workflows. 
 					</p>
-<p>There are two fragments ${org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ImplicitRuntimeFragment} and ${org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/ImplicitUiFragment} will be called implicitly if the required paths and project names are set. They take care of common defaults.  </p>
+<p>There are two fragments ${org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ImplicitRuntimeFragment} and 
+						${org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/ImplicitUiFragment} will be called implicitly if 
+						the required paths and project names are set. They take care of common defaults.  </p>
 </div>
 </div>
 <div class="section" title="Standard generator fragments">
@@ -4189,7 +4256,7 @@ Workflow&nbsp;{<br>
 </div>
 </div>
 <p>In the following table the most important standard generator fragments are listed. Please refer to the Javadocs for more detailed documentation.</p>
-<table id="N10C72">
+<table id="N10C45">
 <tr>
 						
 <th>Class</th>
@@ -4359,50 +4426,10 @@ Workflow&nbsp;{<br>
 </div>
 </div>
 </div>
-<p>In Xtext, there are many Java classes which implement logic, behavior, or supply configuration. These classes implement Java interfaces and are typically only supposed to be accessed through these interfaces, which makes their implementations interchangeable. This is where Xtext utilizes 
-				<a class="ulink" href="http://code.google.com/p/google-guice/" target="_new">Google Guice</a>: 
-			</p>
-<div class="itemizedlist">
-<ul class="itemizedlist" type="disc">
-<li class="listitem">
-<p>Guice manages the instantiation of the classes: instead of constructing a class with 
-						<span class="emphasis"><em>new</em></span>, the 
-						<span class="emphasis"><em>@Inject</em></span> annotation instructs Guice to supply an object for a certain interface. Such an object is called 
-						<a class="link" href="#guiceservice" title="Services">Service</a>.
-					</p>
-</li>
-<li class="listitem">
-<p>Guice allows to configure which implementations are to be supplied for which interface. This configuration consists of so-called 
-						<a class="link" href="#guicemodules" title="Modules">modules</a>.
-					</p>
-</li>
-</ul>
-</div>
-<div class="section" title="Services">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-<a name="guiceservice"></a>Services</h3>
-</div>
-</div>
-</div>
-<p>The most parts of Xtext are implemented as 
-					<span class="emphasis"><em>services</em></span>. A service is an object which implements a certain interface and which is instantiated and provided by Guice. Nearly every concept of the Xtext framework can be understood as this sort of 
-					<span class="emphasis"><em>service</em></span>: The 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/editor/XtextEditor.java?root=Modeling_Project&view=co" target="_new">XtextEditor</a>, the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&view=co" target="_new">XtextResource</a>, the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IParser.java?root=Modeling_Project&view=co" target="_new">IParser</a> and even fine grained concepts as the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/editor/contentassist/PrefixMatcher.java?root=Modeling_Project&view=co" target="_new">PrefixMatcher</a> for the content assist are configured and provided by Guice.
-				</p>
-<p>Xtext ships with generic default implementations for most of the services or uses 
-					<a class="link" href="#generator" title="The Generator">generator fragments</a> to automatically generate service implementations for a grammar. Thereby, Xtext strives to provide meaningful implementations out of the box and to allow customization wherever needed. Developers are encouraged to subclass existing services and configure them for their languages in their 
-					<a class="link" href="#guicemodules" title="Modules">modules</a>.  
-				</p>
-<p>When Guice instantiates an object, it also supplies this instance with all its dependent services. All a service does is to request &ldquo;some implementation for a certain interface&rdquo; using the <code class="code">@Inject</code>-annotation. Based on the 
-					<a class="link" href="#guicemodules" title="Modules">modules configuration</a> Guice decides which class to instantiate or which object to reuse. 
-				</p>
-<p>For example, Guice can automatically initialize member variables with the needed services. </p>
+<p>Xtext is based on Dependency Injection. This means basically that whenever some code is in need for functionality (or state) 
+				from another component, one just declares the dependency rather then stating how to resolve it, i.e. obtaining that component.</p>
+<p>For instance when some code wants to use a scope provider, it just declares a field (or method or constructor) and 
+				adds the @Inject annotation: </p>
 <div class="literallayout">
 <p>
 <code class="code">public&nbsp;class&nbsp;MyLanguageLinker&nbsp;extends&nbsp;Linker&nbsp;{<br>
@@ -4412,38 +4439,32 @@ Workflow&nbsp;{<br>
 &nbsp;&nbsp;private&nbsp;IScopeProvider&nbsp;scopeProvider;<br>
 
 <br>
-&nbsp;&nbsp;@Inject(optional=true)<br>
-&nbsp;&nbsp;private&nbsp;IXtext2EcorePostProcessor&nbsp;postProcessor;<br>
-&nbsp;&nbsp;<br>
-&nbsp;&nbsp;(...)<br>
 }<br>
-
-<br>
+&nbsp;<br>
 
 </code>
 </p>
 </div>
-<p>Furthermore, Guice can pass the needed services as method parameters or event into a constructor call.</p>
+<p>It is not the duty of the code to care about where the 
+				<span class="emphasis"><em>IScopeProvider</em></span> comes from or how it is created. When above&rsquo;s
+				class is instantiated, Guice sees that it needs an instance of IScopeProvider and sets it to the specified field or method.
+				This of course only works, if the object itself is created by Guice. In Xtext almost every object is created that way 
+				and therefore the whole dependency net is controlled and configured by the means of Google Guice.
+			</p>
+<p>Guice of course needs to know how to instantiate real objects for declared dependencies. This is done in so called 
+				<span class="emphasis"><em>Modules</em></span>.
+				A 
+				<span class="emphasis"><em>Module</em></span> defines a set of mappings from types to either concrete instances, so called providers or
+				classes, which have a default constructor. Modules are implemented in Java, here&rsquo;s an example:
+			</p>
 <div class="literallayout">
 <p>
-<code class="code">public&nbsp;class&nbsp;MyLanguageGrammarAccess&nbsp;implements&nbsp;IGrammarAccess&nbsp;{<br>
-	
-<br>
-&nbsp;&nbsp;private&nbsp;final&nbsp;GrammarProvider&nbsp;grammarProvider;<br>
-
-<br>
-&nbsp;&nbsp;private&nbsp;TerminalsGrammarAccess&nbsp;gaTerminals;<br>
-
-<br>
-&nbsp;&nbsp;@Inject<br>
-&nbsp;&nbsp;public&nbsp;MyLanguageGrammarAccess(GrammarProvider&nbsp;grammarProvider,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;TerminalsGrammarAccess&nbsp;gaTerminals)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;this.grammarProvider&nbsp;=&nbsp;grammarProvider;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;this.gaTerminals&nbsp;=&nbsp;gaTerminals;<br>
-&nbsp;&nbsp;}<br>
-	
-<br>
-&nbsp;&nbsp;(...)<br>
+<code class="code">public&nbsp;class&nbsp;MyDslRuntimeModule&nbsp;extends&nbsp;org.xtext.example.mydsl.AbstractMyDslRuntimeModule&nbsp;{<br>
+	@Override<br>
+	public&nbsp;void&nbsp;configure(Binder&nbsp;binder)&nbsp;{<br>
+		super.configure(binder);<br>
+		binder.bind(IScopeProvider.class).to(MyConcreteScopeProvider.class);<br>
+	}<br>
 }<br>
 
 <br>
@@ -4451,128 +4472,132 @@ Workflow&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>For further details, please refer to the 
-					<a class="ulink" href="http://code.google.com/docreader/#p=google-guice&s=google-guice&t=UsersGuide" target="_new">Google Guice Documentation</a>
-				
-</p>
-</div>
-<div class="section" title="Modules">
+<p>With plain Guice modules one implements a method called configure and gets a so called 
+				<span class="emphasis"><em>Binder</em></span> passed in.
+				That binder provides a fluent API to define the mentioned mappings. This was just a very brief and simplified description,
+				we highly recommend to have a look at 
+				<a class="ulink" href="http://code.google.com/p/google-guice/" target="_new">the website Google Guice</a> to learn more.  
+			</p>
+<div class="section" title="Xtext&rsquo;s module API">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="guicemodules"></a>Modules</h3>
+<a name="XtextsmoduleAPI"></a>Xtext&rsquo;s module API</h3>
 </div>
 </div>
 </div>
-<p>The configuration of services for a language built with  Xtext is done via modules:</p>
-<div class="itemizedlist">
-<ul class="itemizedlist" type="disc">
-<li class="listitem">
-<p>Modules bind arbitrary Java interfaces to their implementation classes or directly to instances of their implementation classes. Such a binding is sort of a configurable mapping.</p>
-</li>
-<li class="listitem">
-<p>A module itself is a plain Java class.</p>
-</li>
-<li class="listitem">
-<p>Modules can inherit from each other and override bindings that are declared in super-modules. This concept is put on top of plain Guice modules by Xtext.</p>
-</li>
-<li class="listitem">
-<p>In Xtext, there is a 
-							<a class="link" href="#guicedefaultmodule" title="Default Module">generic default module</a> for all languages, there are automatically 
-							<a class="link" href="#guicegeneratedmodule" title="Generated Modules">generated modules</a> and there are modules which are 
-							<a class="link" href="#guicemanualmodules" title="Modules intended for customization">intended to be customized manually</a>.  
-						</p>
-</li>
-<li class="listitem">
-<p>Furthermore, Xtext distinguishes between modules for runtime-services and modules related to services needed for the user interface. The UI module extends the runtime module.</p>
-</li>
-</ul>
-</div>
-<p>In total, this leads to five modules for a typical Xtext Language. They are visualized in the image below. The image is further explained in the following subsections. </p>
+<p>Xtext comes with a slightly enhanced module API. For your language you get two different modules, one for the runtime bundle,
+					which is used, when executing your language infrastructure outside of Eclipse, such as on the build server. The other is
+					located in the ui bundle and adds and overrides bindings for running Xtext infrastructure within Eclipse. </p>
+<p>The enhancement we added to Guice&rsquo;s Module API is that we provide an abstract base class, which reflectively looks for certain 
+					methods in order to find declared bindings. The most common kind of method is :</p>
+<div class="literallayout">
 <p>
-					
+<code class="code">public&nbsp;Class&lt;?&nbsp;extends&nbsp;IScopeProvider&gt;&nbsp;bindIScopeProvider()&nbsp;{<br>
+	return&nbsp;MyConcreteScopeProvider.class;<br>
+}<br>
+
+<br>
+
+</code>
 </p>
-<div class="mediaobject">
-<img src="images/modules_hierarchy.png"></div>
+</div>
+<p>which would do the same as the code snippet above, which is declare a binding from 
+					<span class="emphasis"><em>IScopeProvider</em></span> to 
+					<span class="emphasis"><em>MyConcreteScopeProvider</em></span>.
+					That binding will make Guice instantiate and inject a new instance of 
+					<span class="emphasis"><em>MyConcreteScopeProvider</em></span> whenever a dependency 
+					to 
+					<span class="emphasis"><em>IScopeProvider</em></span> is declared.
+				</p>
+<p>Having a method per binding allows to deactivate individual bindings by overriding the corresponding methods and either change 
+					the binding by returning a different target type or removing that binding completely by returning null.</p>
+<p>There are two additional kinds of binding-methods supported. The first one allows to configure a provider. A 
+					<span class="emphasis"><em>Provider</em></span> is
+					an interface with just one method : 
+				</p>
+<div class="literallayout">
 <p>
+<code class="code">public&nbsp;interface&nbsp;Provider&lt;T&gt;&nbsp;{<br>
+
+<br>
+&nbsp;&nbsp;/**<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;Provides&nbsp;an&nbsp;instance&nbsp;of&nbsp;{@code&nbsp;T}.&nbsp;Must&nbsp;never&nbsp;return&nbsp;{@code&nbsp;null}.<br>
+&nbsp;&nbsp;&nbsp;*/<br>
+&nbsp;&nbsp;T&nbsp;get();<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>This one can be used if you need a hook whenever an instance of a certain type is created. For instance if you want to 
+					provide lazy access to a singleton or you need to to some computation each time an instance is created (i.e. factory). IF you want 
+					to point to a provider rather than to a concrete class you can use the following binding method.</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;Class&lt;?&nbsp;extends&nbsp;Provider&lt;IScopeProvider&gt;&gt;&nbsp;provideIEncodingProvider()&nbsp;{<br>
+	return&nbsp;MyConcreteScopeProviderProvider.class;<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>_(Please forgive us the overuse of the term 
+					<span class="emphasis"><em>provider</em></span>. The IScopeProvider is not a Guice 
+					<span class="emphasis"><em>provider</em></span>.)_
+				</p>
+<p>That binding tells Guice to instantiate 
+					<span class="emphasis"><em>MyConcreteTypeProvider</em></span> and invoke get() in order to obtain an instance of 
+					<span class="emphasis"><em>MyType</em></span> 
+					for clients having declared a dependency to that type.
+				</p>
+<p>The last binding method provided by Xtext allows to do anything you can do with Guice&rsquo;s binding API, since it allows you to 
+					use it directly. If your method&rsquo;s name starts with the name &lsquo;configure&rsquo;, has a return type 
+					<span class="emphasis"><em>void</em></span> and accepts one argument of 
+					type 
+					<span class="emphasis"><em>Binder</em></span>
 				
 </p>
-<div class="section" title="Modules intended for customization">
-<div class="titlepage">
-<div>
-<div>
-<h4 class="title">
-<a name="guicemanualmodules"></a>Modules intended for customization</h4>
-</div>
-</div>
-</div>
-<p>When the 
-						<a class="link" href="#generator" title="The Generator">generator</a> runs the first time, it creates two modules named 
-						<span class="emphasis"><em>RuntimeModule</em></span> and 
-						<span class="emphasis"><em>UIModule</em></span>. They are placed in the language&rsquo;s root-package in the 
-						<span class="emphasis"><em>src/</em></span>-folder of the language&rsquo;s runtime-project and the language&rsquo;s UI-project. Both are initially empty and will never be overwritten by the generator. They are 
-						<a class="link" href="#guicecustomize" title="Changing Configuration">intended for customization</a>. By default, they extend a 
-						<a class="link" href="#guicegeneratedmodule" title="Generated Modules">generated module</a>.  
-					</p>
-</div>
-<div class="section" title="Generated Modules">
-<div class="titlepage">
-<div>
-<div>
-<h4 class="title">
-<a name="guicegeneratedmodule"></a>Generated Modules</h4>
-</div>
-</div>
-</div>
-<p>The fully generated modules are called 
-						<span class="emphasis"><em>Abstract[MyLanguage]RuntimeModule</em></span> and 
-						<span class="emphasis"><em>Abstract[MyLanguage]UiModule</em></span> respectively. They contain all components which have been generated specifically for the language at hand. What goes into these modules depends on the fragments you use in the generator.
-					</p>
-<p>
-						
-<span class="bold"><strong>Note</strong></span>: This modules are replaced on every subsequent execution of the generator. Don&rsquo;t put any custom code into them. Manually written code has go into the 
-						<a class="link" href="#guicemanualmodules" title="Modules intended for customization">concrete subclasses</a>.
-					</p>
-</div>
-<div class="section" title="Default Module">
-<div class="titlepage">
-<div>
-<div>
-<h4 class="title">
-<a name="guicedefaultmodule"></a>Default Module</h4>
-</div>
-</div>
-</div>
-<p>Finally the fully generated modules extend the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/DefaultRuntimeModule.java?root=Modeling_Project&view=co" target="_new">DefaultRuntimeModule</a>, which contains all the default configuration. The default configuration consists of all components for which we have generic default implementations.
-					</p>
-</div>
-<div class="section" title="Changing Configuration">
-<div class="titlepage">
-<div>
-<div>
-<h4 class="title">
-<a name="guicecustomize"></a>Changing Configuration</h4>
-</div>
-</div>
-</div>
-<p>We use the primary modules (
-						<span class="emphasis"><em>RuntimeModule</em></span> and 
-						<span class="emphasis"><em>UiModule</em></span>) in order to change the configuration. 
-						These classes are initially empty and have been generated to allow customization.
-					</p>
-<p>In order to provide a simple and convenient way, the default module extends the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/AbstractGenericModule.java?root=Modeling_Project&view=co" target="_new">AbstractGenericModule</a>. 
-						It does not provide any bindings itself but comes up with a convenient and declarative way to specify mappings. The default API provided by Guice is based on fluent API and a builder pattern.
-						This is also very readable but does not allow submodules to change any of the bindings.   
-						The 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/AbstractGenericModule.java?root=Modeling_Project&view=co" target="_new">AbstractGenericModule</a> allows to declare and override bindings in all subclasses like this:
-					</p>
 <div class="literallayout">
 <p>
-<code class="code">public&nbsp;Class&lt;?&nbsp;extends&nbsp;IFooService&gt;&nbsp;bindIFooService()&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;MyFooServiceImpl.class;<br>
+<code class="code">public&nbsp;void&nbsp;configureIScopeProvider(Binder&nbsp;binder)&nbsp;{<br>
+	binder.bind(IScopeProvider.class).to(MyConcreteScopeProvider.class);<br>
+}&nbsp;<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Obtaining an Injector">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="ObtaininganInjector"></a>Obtaining an 
+					<span class="emphasis"><em>Injector</em></span>
+				
+</h3>
+</div>
+</div>
+</div>
+<p>In every application wired up with Guice there is usually one point where you initialize a so called 
+					<span class="emphasis"><em>Injector</em></span> using the 
+					modules declared and after that using that injector to create the root instance of the whole application. In plain Java environments
+					this something done programmatically in the main method. It could look like this:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;static&nbsp;void&nbsp;main(String[]&nbsp;args)&nbsp;{<br>
+	Injector&nbsp;injector&nbsp;=&nbsp;Guice.createInjector(new&nbsp;MyDslRuntimeModule());<br>
+	MyApplication&nbsp;application&nbsp;=&nbsp;injector.getInstance(MyApplication.class);<br>
+	application.run();<br>
 }<br>
 
 <br>
@@ -4580,62 +4605,27 @@ Workflow&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>Such a method will be interpreted as a binding from 
-						<span class="emphasis"><em>IFooService</em></span> to 
-						<span class="emphasis"><em>MyFooServiceImpl.class</em></span>. Note that you simply have to override a method from a super class (e.g. from the generated or default module) in order to change the respective binding. For example, in the picture above, the 
-						<span class="emphasis"><em>DefaultRuntimeModule</em></span> configures the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java?root=Modeling_Project&view=co" target="_new">IFormatter</a> to be implemented by the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.java?root=Modeling_Project&view=co" target="_new">OneWhitespaceFormatter</a>. The 
-						<span class="emphasis"><em>AbstractMyLanguageModule</em></span> overrides this binding by mapping the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java?root=Modeling_Project&view=co" target="_new">IFormatter</a> to 
-						<span class="emphasis"><em>MyLanguageFormatter</em></span>.
-						The type to type binding will create a new instance of the given target type for each dependency. If you want to make it a singleton and thereby ensure only one instance to be created and reused for all dependencies you can add the following annotation:
-					</p>
+<p>Xtext uses EMF which makes use of a couple of global registries, which have to be configured on startup. Because we
+					of course want to levarage Guice also for all factories, etc. we put into those registries, we have introduced a so called
+
+					<span class="emphasis"><em>ISetUp</em></span> which provides a method called 
+					<span class="emphasis"><em>Injector createInjectorAndDoEMFRegistration()</em></span>. So instead of using the plain Guice
+					code shown above you rather use the 
+					<span class="emphasis"><em>ISetup</em></span> class generated for your language, which, as the method name suggests, creates
+					an 
+					<span class="emphasis"><em>Injector</em></span> and uses it to initialize a couple of EMF objects and register them in the corresponding registries.
+				</p>
 <div class="literallayout">
 <p>
-<code class="code">@SingletonBinding<br>
-public&nbsp;Class&lt;?&nbsp;extends&nbsp;IFooService&gt;&nbsp;bindIFooService()&nbsp;{<br>
-&nbsp;&nbsp;return&nbsp;MyFooServiceImpl.class;<br>
-}<br>
-
-<br>
+<code class="code">Injector&nbsp;injector&nbsp;=&nbsp;new&nbsp;MyStandaloneSetup().createInjectorAndDoEMFRegistration();&nbsp;<br>
 
 </code>
 </p>
 </div>
-<p>In addition if the creation of the type causes any necessary side effects, so you want it to be instantiated eagerly, you can set the 
-						<span class="emphasis"><em>eager</em></span> property to true. This is shown in the following snippet:
-					</p>
-<div class="literallayout">
-<p>
-<code class="code">@SingletonBinding(eager=true)<br>
-public&nbsp;Class&lt;?&nbsp;extends&nbsp;IFooService&gt;&nbsp;bindIFooService()&nbsp;{<br>
-&nbsp;&nbsp;return&nbsp;MyFooServiceImpl.class;<br>
-}<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<p>One more way of specify a binding is currently supported: If you need to control the way, the instance is created, you can declare a type to object mapping:</p>
-<div class="literallayout">
-<p>
-<code class="code">public&nbsp;IFooService&nbsp;bindIFooService()&nbsp;{<br>
-&nbsp;&nbsp;return&nbsp;new&nbsp;MyFooServiceImpl();<br>
-}<br>
-
-<br>
-
-</code>
-</p>
-</div>
-<p>
-						
-<span class="bold"><strong>Note</strong></span>: Although this is a convenient and simple way, you have of course also the full power of Guice, i.e. you can override the Guice method 
-						<span class="emphasis"><em>void configure(Binder)</em></span> and use the afore mentioned fluent API to do whatever you want.
-					</p>
-</div>
+<p>These are the basic ideas around Guice and the small extension Xtext provides on top. For more information we 
+					strongly encourage you to read through the documentation on 
+					<a class="ulink" href="http://code.google.com/p/google-guice/" target="_new">the website of Google Guice</a>.
+				</p>
 </div>
 </div>
 </div>
@@ -6064,7 +6054,7 @@ package&nbsp;bar&nbsp;{<br>
 <p>Value converters are registered to convert the parsed text into a certain data type instance and vice versa.
 				The primary hook is called 
 				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java?root=Modeling_Project&view=co" target="_new">IValueConverterService</a> and the concrete implementation can be registered via the runtime 
-				<a class="link" href="#guicecustomize" title="Changing Configuration">Guice module</a>.
+				<a class="link" href="#">Guice module</a>.
 				To do so override the corresponding binding in your runtime module like shown in this example:
 			</p>
 <div class="literallayout">
@@ -8267,7 +8257,7 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 				<code class="code">.[RuleName]</code>) and for each keyword (
 				<code class="code">.kw_[keyword]</code>), as long as the keywords are valid identifiers. If you don&rsquo;t like these defaults you&rsquo;ll have to subclass 
 				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/templates/XtextTemplateContextTypeRegistry.java?root=Modeling_Project&view=co" target="_new">XtextTemplateContextTypeRegistry</a> and configure it via 
-				<a class="link" href="#guicemanualmodules" title="Modules intended for customization">Guice</a>. 
+				<a class="link" href="#">Guice</a>. 
 			</p>
 <p>In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set of TemplateVariableResolvers to resolve special variable types inside a given template (i.e. TemplateContext). Besides the standard template variables available in 
 				<code class="code">org.eclipse.jface.text.templates.GlobalTemplateVariables</code> like ${user}, ${date}, ${time}, ${cursor}, etc., these TemplateVariableResolver support the automatic resolving of CrossReferences (type 
@@ -8802,7 +8792,7 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 </div>
 </div>
 <p>As the default strategy is a best effort it may not always result in the selection you want. If that&rsquo;s the case you can 
-						<a class="link" href="#guicecustomize" title="Changing Configuration">override</a> the 
+						<a class="link" href="#">override</a> the 
 						<code class="code">ILocationInFileProvider</code> binding in the UI module as in the following example:
 					</p>
 <div class="literallayout">
@@ -9567,7 +9557,7 @@ fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
 				<span class="emphasis"><em>XtextResource</em></span> we have provided an example. You must have the Helios version 2.3 of GMF Notation, Runtime and Tooling and their dependencies installed in your workbench to run the example. With other versions of GMF it might work to regenerate the diagram code. Choose 
 				<span class="emphasis"><em>New-&gt;Examples-&gt;Xtext-&gt;Xtext GMF Integration</em></span> to import it into your workbench. The example consists of a number of plug-ins
 			</p>
-<table id="N11F6F">
+<table id="N11EBF">
 <tr>
 					
 <td>Plug-in</td>
@@ -10204,29 +10194,14 @@ fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
 </ul>
 </div>
 <p>The workflow will not bother you with this issue on subsequent executions as the archive will be stored
-			in your workspace root directory and can thereby be reused during the next run. </p>
+			in your project&rsquo;s root directory and can thereby be reused during the next run. </p>
 <p>
 			
 <span class="bold"><strong>IMPORTANT</strong></span> :
 
-			<span class="italic">Although if you use the non-IP approved ANTLR generator, you can still ship any languages and the IDEs you&rsquo;ve developed with Xtext without any worrying, because the 
-				<span class="bold"><strong>ANTLR runtime is IP approved</strong></span>
-			</span>
+			<span class="italic">Although if you use the non-IP approved ANTLR generator, you can still ship any languages and the IDEs you&rsquo;ve developed with Xtext without any worrying, because it is not needed at runtime</span>
 		
 </p>
-<div class="section" title="What if I do not want to use non IP-approved code">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title" style="clear: both">
-<a name="WhatifIdonotwanttousenonIPapprovedcode"></a>What if I do not want to use non IP-approved code</h2>
-</div>
-</div>
-</div>
-<p>If you, against all recommendations, need to stick to a fully IP approved generator, you can use the parser generator we&rsquo;ve developed.
-				But be warned, although it&rsquo;s fully functional and equally fast, it does not have any error recovery.
-				This makes the editing experience in the editor more or less unacceptable.</p>
-</div>
 </div>
 </div>
 </body>

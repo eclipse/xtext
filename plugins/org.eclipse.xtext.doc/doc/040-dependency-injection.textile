@@ -1,19 +1,11 @@
 
 h2(#dependencyInjection). Dependency Injection in Xtext with Google Guice
 
-In Xtext, there are many Java classes which implement logic, behavior, or supply configuration. These classes implement Java interfaces and are typically only supposed to be accessed through these interfaces, which makes their implementations interchangeable. This is where Xtext utilizes "Google Guice":http://code.google.com/p/google-guice/: 
-* Guice manages the instantiation of the classes: instead of constructing a class with _new_, the _@Inject_ annotation instructs Guice to supply an object for a certain interface. Such an object is called "Service":#guiceservice.
-* Guice allows to configure which implementations are to be supplied for which interface. This configuration consists of so-called "modules":#guicemodules.
+Xtext is based on Dependency Injection. This means basically that whenever some code is in need for functionality (or state) 
+from another component, one just declares the dependency rather then stating how to resolve it, i.e. obtaining that component.
 
-h3(#guiceservice). Services
-
-The most parts of Xtext are implemented as _services_. A service is an object which implements a certain interface and which is instantiated and provided by Guice. Nearly every concept of the Xtext framework can be understood as this sort of _service_: The ${org.eclipse.xtext.ui.core/src/org.eclipse.xtext.ui.core.editor.XtextEditor}, the ${org.eclipse.xtext/src/org.eclipse.xtext.resource.XtextResource}, the ${org.eclipse.xtext/src/org.eclipse.xtext.parser.IParser} and even fine grained concepts as the ${org.eclipse.xtext.ui.core/src/org.eclipse.xtext.ui.core.editor.contentassist.PrefixMatcher} for the content assist are configured and provided by Guice.
-
-Xtext ships with generic default implementations for most of the services or uses "generator fragments":#generator to automatically generate service implementations for a grammar. Thereby, Xtext strives to provide meaningful implementations out of the box and to allow customization wherever needed. Developers are encouraged to subclass existing services and configure them for their languages in their "modules":#guicemodules.  
-
-When Guice instantiates an object, it also supplies this instance with all its dependent services. All a service does is to request "some implementation for a certain interface" using the <code>@Inject</code>-annotation. Based on the "modules configuration":#guicemodules Guice decides which class to instantiate or which object to reuse. 
-
-For example, Guice can automatically initialize member variables with the needed services. 
+For instance when some code wants to use a scope provider, it just declares a field (or method or constructor) and 
+adds the @Inject annotation: 
 
 bc.. 
 public class MyLanguageLinker extends Linker {
@@ -21,93 +13,100 @@ public class MyLanguageLinker extends Linker {
   @Inject
   private IScopeProvider scopeProvider;
 
-  @Inject(optional=true)
-  private IXtext2EcorePostProcessor postProcessor;
-  
-  (...)
+}
+ 
+p. It is not the duty of the code to care about where the _IScopeProvider_ comes from or how it is created. When above's
+class is instantiated, Guice sees that it needs an instance of IScopeProvider and sets it to the specified field or method.
+This of course only works, if the object itself is created by Guice. In Xtext almost every object is created that way 
+and therefore the whole dependency net is controlled and configured by the means of Google Guice.
+
+Guice of course needs to know how to instantiate real objects for declared dependencies. This is done in so called _Modules_.
+A _Module_ defines a set of mappings from types to either concrete instances, so called providers or
+classes, which have a default constructor. Modules are implemented in Java, here's an example:
+
+bc.. public class MyDslRuntimeModule extends org.xtext.example.mydsl.AbstractMyDslRuntimeModule {
+	@Override
+	public void configure(Binder binder) {
+		super.configure(binder);
+		binder.bind(IScopeProvider.class).to(MyConcreteScopeProvider.class);
+	}
 }
 
-p. Furthermore, Guice can pass the needed services as method parameters or event into a constructor call.
+p. With plain Guice modules one implements a method called configure and gets a so called _Binder_ passed in.
+That binder provides a fluent API to define the mentioned mappings. This was just a very brief and simplified description,
+we highly recommend to have a look at "the website Google Guice":http://code.google.com/p/google-guice/ to learn more.  
 
-bc.. 
-public class MyLanguageGrammarAccess implements IGrammarAccess {
-	
-  private final GrammarProvider grammarProvider;
+h3. Xtext's module API
 
-  private TerminalsGrammarAccess gaTerminals;
+p. Xtext comes with a slightly enhanced module API. For your language you get two different modules, one for the runtime bundle,
+which is used, when executing your language infrastructure outside of Eclipse, such as on the build server. The other is
+located in the ui bundle and adds and overrides bindings for running Xtext infrastructure within Eclipse. 
 
-  @Inject
-  public MyLanguageGrammarAccess(GrammarProvider grammarProvider,
-    TerminalsGrammarAccess gaTerminals) {
-    this.grammarProvider = grammarProvider;
-    this.gaTerminals = gaTerminals;
-  }
-	
-  (...)
+The enhancement we added to Guice's Module API is that we provide an abstract base class, which reflectively looks for certain 
+methods in order to find declared bindings. The most common kind of method is :
+
+bc.. public Class<? extends IScopeProvider> bindIScopeProvider() {
+	return MyConcreteScopeProvider.class;
 }
 
-p. For further details, please refer to the "Google Guice Documentation":http://code.google.com/docreader/#p=google-guice&s=google-guice&t=UsersGuide
+p. which would do the same as the code snippet above, which is declare a binding from _IScopeProvider_ to _MyConcreteScopeProvider_.
+That binding will make Guice instantiate and inject a new instance of _MyConcreteScopeProvider_ whenever a dependency 
+to _IScopeProvider_ is declared.
 
-h3(#guicemodules). Modules
+Having a method per binding allows to deactivate individual bindings by overriding the corresponding methods and either change 
+the binding by returning a different target type or removing that binding completely by returning null.
 
-The configuration of services for a language built with  Xtext is done via modules:
-* Modules bind arbitrary Java interfaces to their implementation classes or directly to instances of their implementation classes. Such a binding is sort of a configurable mapping.
-* A module itself is a plain Java class.
-* Modules can inherit from each other and override bindings that are declared in super-modules. This concept is put on top of plain Guice modules by Xtext.
-* In Xtext, there is a "generic default module":#guicedefaultmodule for all languages, there are automatically "generated modules":#guicegeneratedmodule and there are modules which are "intended to be customized manually":#guicemanualmodules.  
-* Furthermore, Xtext distinguishes between modules for runtime-services and modules related to services needed for the user interface. The UI module extends the runtime module.
+There are two additional kinds of binding-methods supported. The first one allows to configure a provider. A _Provider_ is
+an interface with just one method : 
 
-In total, this leads to five modules for a typical Xtext Language. They are visualized in the image below. The image is further explained in the following subsections. 
+bc.. public interface Provider<T> {
 
-!{width:80%}images/modules_hierarchy.png!
-
-h4(#guicemanualmodules). Modules intended for customization
-
-When the "generator":#generator runs the first time, it creates two modules named _[MyLanguage]RuntimeModule_ and _[MyLanguage]UIModule_. They are placed in the language's root-package in the _src/_-folder of the language's runtime-project and the language's UI-project. Both are initially empty and will never be overwritten by the generator. They are "intended for customization":#guicecustomize. By default, they extend a "generated module":#guicegeneratedmodule.  
-
-h4(#guicegeneratedmodule). Generated Modules
-
-The fully generated modules are called _Abstract[MyLanguage]RuntimeModule_ and _Abstract[MyLanguage]UiModule_ respectively. They contain all components which have been generated specifically for the language at hand. What goes into these modules depends on the fragments you use in the generator.
-
-*Note*: This modules are replaced on every subsequent execution of the generator. Don't put any custom code into them. Manually written code has go into the "concrete subclasses":#guicemanualmodules.
-
-h4(#guicedefaultmodule). Default Module
-
-Finally the fully generated modules extend the ${org.eclipse.xtext/src/org.eclipse.xtext.service.DefaultRuntimeModule}, which contains all the default configuration. The default configuration consists of all components for which we have generic default implementations.
-
-h4(#guicecustomize). Changing Configuration
-
-We use the primary modules (_[MyLanguage]RuntimeModule_ and _[MyLanguage]UiModule_) in order to change the configuration. 
-These classes are initially empty and have been generated to allow customization.
-
-In order to provide a simple and convenient way, the default module extends the ${org.eclipse.xtext/src/org.eclipse.xtext.service.AbstractGenericModule}. 
-It does not provide any bindings itself but comes up with a convenient and declarative way to specify mappings. The default API provided by Guice is based on fluent API and a builder pattern.
-This is also very readable but does not allow submodules to change any of the bindings.   
-The ${org.eclipse.xtext/src/org.eclipse.xtext.service.AbstractGenericModule} allows to declare and override bindings in all subclasses like this:
-
-bc.. public Class<? extends IFooService> bindIFooService() {
-     return MyFooServiceImpl.class;
+  /**
+   * Provides an instance of {@code T}. Must never return {@code null}.
+   */
+  T get();
 }
 
-p. Such a method will be interpreted as a binding from _IFooService_ to _MyFooServiceImpl.class_. Note that you simply have to override a method from a super class (e.g. from the generated or default module) in order to change the respective binding. For example, in the picture above, the _DefaultRuntimeModule_ configures the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.IFormatter} to be implemented by the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter}. The _AbstractMyLanguageModule_ overrides this binding by mapping the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.IFormatter} to _MyLanguageFormatter_.
-The type to type binding will create a new instance of the given target type for each dependency. If you want to make it a singleton and thereby ensure only one instance to be created and reused for all dependencies you can add the following annotation:
+p. This one can be used if you need a hook whenever an instance of a certain type is created. For instance if you want to 
+provide lazy access to a singleton or you need to to some computation each time an instance is created (i.e. factory). IF you want 
+to point to a provider rather than to a concrete class you can use the following binding method.
 
-bc.. @SingletonBinding
-public Class<? extends IFooService> bindIFooService() {
-  return MyFooServiceImpl.class;
+bc.. public Class<? extends Provider<IScopeProvider>> provideIEncodingProvider() {
+	return MyConcreteScopeProviderProvider.class;
 }
 
-p. In addition if the creation of the type causes any necessary side effects, so you want it to be instantiated eagerly, you can set the _eager_ property to true. This is shown in the following snippet:
+p. _(Please forgive us the overuse of the term _provider_. The IScopeProvider is not a Guice _provider_.)_
 
-bc.. @SingletonBinding(eager=true)
-public Class<? extends IFooService> bindIFooService() {
-  return MyFooServiceImpl.class;
+p. That binding tells Guice to instantiate _MyConcreteTypeProvider_ and invoke get() in order to obtain an instance of _MyType_ 
+for clients having declared a dependency to that type.
+
+p. The last binding method provided by Xtext allows to do anything you can do with Guice's binding API, since it allows you to 
+use it directly. If your method's name starts with the name 'configure', has a return type _void_ and accepts one argument of 
+type _Binder_
+
+bc.. public void configureIScopeProvider(Binder binder) {
+	binder.bind(IScopeProvider.class).to(MyConcreteScopeProvider.class);
+} 
+
+h3. Obtaining an _Injector_
+
+p. In every application wired up with Guice there is usually one point where you initialize a so called _Injector_ using the 
+modules declared and after that using that injector to create the root instance of the whole application. In plain Java environments
+this something done programmatically in the main method. It could look like this:
+
+bc.. public static void main(String[] args) {
+	Injector injector = Guice.createInjector(new MyDslRuntimeModule());
+	MyApplication application = injector.getInstance(MyApplication.class);
+	application.run();
 }
 
-p. One more way of specify a binding is currently supported: If you need to control the way, the instance is created, you can declare a type to object mapping:
+p. Xtext uses EMF which makes use of a couple of global registries, which have to be configured on startup. Because we
+of course want to levarage Guice also for all factories, etc. we put into those registries, we have introduced a so called
+_ISetUp_ which provides a method called _Injector createInjectorAndDoEMFRegistration()_. So instead of using the plain Guice
+code shown above you rather use the _ISetup_ class generated for your language, which, as the method name suggests, creates
+an _Injector_ and uses it to initialize a couple of EMF objects and register them in the corresponding registries.
+ 
+bc. Injector injector = new MyStandaloneSetup().createInjectorAndDoEMFRegistration(); 
 
-bc.. public IFooService bindIFooService() {
-  return new MyFooServiceImpl();
-}
-
-p. *Note*: Although this is a convenient and simple way, you have of course also the full power of Guice, i.e. you can override the Guice method _void configure(Binder)_ and use the afore mentioned fluent API to do whatever you want.
+p. These are the basic ideas around Guice and the small extension Xtext provides on top. For more information we 
+strongly encourage you to read through the documentation on "the website of Google Guice":http://code.google.com/p/google-guice/.

@@ -38,8 +38,9 @@
 <topic href="help/syntax.html#package_declarations" label="EPackage declarations">
 <topic href="help/syntax.html#EPackagegeneration" label="EPackage generation"></topic>
 <topic href="help/syntax.html#EPackageimport" label="EPackage import">
-<topic href="help/syntax.html#UsingnamespaceURIstoimportexistingEPackages" label="Using namespace URIs to import existing EPackages"></topic>
 <topic href="help/syntax.html#UsingresourceURIstoimportexistingEPackages" label="Using resource URIs to import existing EPackages"></topic>
+<topic href="help/syntax.html#UsingclasspathURIstoimportexistingEPackages" label="Using classpath URIs to import existing EPackages"></topic>
+<topic href="help/syntax.html#UsingnamespaceURIstoimportexistingEPackages" label="Using namespace URIs to import existing EPackages"></topic>
 </topic>
 <topic href="help/syntax.html#Ecoremodelaliasesforpackages" label="Ecore model aliases for packages"></topic>
 </topic>
@@ -94,13 +95,8 @@
 <topic href="help/configuration.html#Standardgeneratorfragments" label="Standard generator fragments"></topic>
 </topic>
 <topic href="help/dependencyInjection.html" label="Dependency Injection in Xtext with Google Guice">
-<topic href="help/dependencyInjection.html#guiceservice" label="Services"></topic>
-<topic href="help/dependencyInjection.html#guicemodules" label="Modules">
-<topic href="help/dependencyInjection.html#guicemanualmodules" label="Modules intended for customization"></topic>
-<topic href="help/dependencyInjection.html#guicegeneratedmodule" label="Generated Modules"></topic>
-<topic href="help/dependencyInjection.html#guicedefaultmodule" label="Default Module"></topic>
-<topic href="help/dependencyInjection.html#guicecustomize" label="Changing Configuration"></topic>
-</topic>
+<topic href="help/dependencyInjection.html#XtextsmoduleAPI" label="Xtext&rsquo;s module API"></topic>
+<topic href="help/dependencyInjection.html#ObtaininganInjector" label="Obtaining an Injector"></topic>
 </topic>
 </topic>
 <topic href="help/RuntimeConcepts.html" label="Runtime Concepts">
@@ -257,7 +253,5 @@
 </topic>
 <topic href="help/Nowgoforthenewfeatures.html" label="Now go for the new features"></topic>
 </topic>
-<topic href="help/antlr_ip_issue.html" label="The ANTLR IP issue (or which parser to use?)">
-<topic href="help/antlr_ip_issue.html#WhatifIdonotwanttousenonIPapprovedcode" label="What if I do not want to use non IP-approved code"></topic>
-</topic>
+<topic href="help/antlr_ip_issue.html" label="The ANTLR IP issue (or which parser to use?)"></topic>
 </toc>

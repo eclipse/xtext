@@ -11,11 +11,14 @@ content assist, etc.
 The generator also contributes to shared project resources such as the 
 _plugin.xml_, _MANIFEST.MF_ and the "Guice modules":#guicemodules.
 
-Xtext's generator leverages "MWE2 - the modeling workflow engine":http://www.eclipse.org/modeling/emft/?project=mwe from EMFT to configure the generator.
+Xtext's generator leverages "MWE2 - the modeling workflow engine":#MWE2 
+from EMFT to configure the generator.
 
 h3(#short_intro_to_mwe). A short introduction to MWE2
 
-MWE2 allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just instantiates Java classes and the configuration is done through public setter and adder methods as one is used to from Java Beans encapsulation principles. An in-depth documentation can be found in the chapter "MWE2"#MWE2.
+MWE2 allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just 
+instantiates Java classes and the configuration is done through public setter and adder methods as one is used to 
+from Java Beans encapsulation principles. An in-depth documentation can be found in the chapter "MWE2"#MWE2.
 
 Given the following simple Java class (POJO):
 
@@ -36,13 +39,14 @@ public class Person {
   }
 }
   
-p. One can create a family tree with MWE2 easily by describing it in a declarative manner without writing a single line of Java code and without the need to compile classes:
+p. One can create a family tree with MWE2 easily by describing it in a declarative manner 
+without writing a single line of Java code and without the need to compile classes:
 
 bc.. module com.mycompany.CreatePersons
 
 Person {
 	name = "Grandpa"
-	child = com.mycompany.Person {
+	child = {
 		name = "Father"
 		child = {
 			name = "Son"
@@ -75,43 +79,54 @@ p. The root element is a class-name following the Java class-path visibility rul
 _com.mycompany.Person_ it is not necessary to use use fully qualified name. There are other packages implicitly imported
 into this workflow as well to make it convenient to instantiate actual workflows and components, but these ones are covered 
 in depth in the appropriate "chapter":#MWE2. The constructed objects are furthermore configured according to the declaration 
-in the module, e.g. a second instance of Person will be created and added to the list of children of "Grandpa" while the third person 
-- the class is inferred from the assigned feature - becomes a child of "Father". All three instances will have their respective _name_
-assigned via a reflective invocation _setName_. If one wants to add another child to "Father", she
+in the module, e.g. a second instance of Person will be created and added to the list of children of "Grandpa" while the third 
+person - the class is inferred from the assigned feature - becomes a child of "Father". All three instances will have 
+their respective _name_ assigned via a reflective invocation _setName_. If one wants to add another child to "Father", she
 can simply repeat the child assignment:
 
 bc.. child = com.mycompany.Person {
-	name = "Father"
+	name = "Bob"
 	child = {
-  	name = "Son"
+		name = "Mary"
 	}
 	child = {
-		name = ..
+		name = "Dave"
 	}
 }
 
 p. As you can see in the example above MWE2 can be used to instantiate arbitrary Java object models without any dependency or
-limitation to MWE2 specific implementations. This is 
-conceptually very close to the dependency injection mechanism and the XML language 
-in the "Spring Framework":http://www.springframework.org. 
+limitation to MWE2 specific implementations. This is conceptually very close to the dependency injection mechanism and 
+the XML language in the "Spring Framework":http://www.springframework.org. 
 
 *Tip*
-__Whenever you are in an *.mwe2 file and wonder what kind of configuration the underlying component may accept: Just use the Content Assist in the MWE2 Editor or navigate directly to the declaration of the underlying Java implementation by means of F3 (Go To Declaration).__
+__Whenever you are in an *.mwe2 file and wonder what kind of configuration the underlying component may accept: __
+__Just use the Content Assist in the MWE2 Editor or navigate directly to the declaration of the underlying Java __ 
+__implementation by means of F3 (Go To Declaration).__
 
-This is the basic idea of the MWE2 language. There are of course a couple of additional concepts and features in the language and we also have not yet talked about the runtime workflow model. Please refer to the dedicated MWE2 "reference documentation":#MWE2 for additional information.
+This is the basic idea of the MWE2 language. There are of course a couple of additional concepts and features in the 
+language and we also have not yet talked about the runtime workflow model. Please refer to the dedicated MWE2 
+"reference documentation":#MWE2 for additional information.
 
 h3. General Architecture 
 
-Now that you know a bit about MWE2, you are ready to learn about the concepts and architecture of Xtext's language generator. 
-An instance of Xtext's generator is configured with general information about source folders and projects and consists of any number of language configurations. 
-For each language configuration a URI pointing to its grammar file and the file extensions for the DSL must be provided. 
-In addition, a language is configured with a list of ${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.IGeneratorFragment}s.
-The whole generator is composed of theses fragments. We have fragments for generating parsers, the serializer, the EMF code, the outline view, etc.
+Of course a generator in Xtext is not composed of fathers and sons, but of so called language configurations. 
+For each language configuration a URI pointing to 
+its grammar file and the file extensions for the DSL must be provided. 
+In addition, a language is configured with a list of 
+${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.IGeneratorFragment}s.
+The whole generator is composed of theses fragments. We have fragments for generating parsers, the serializer, the EMF code, 
+the outline view, etc. 
+
 !{width:50%}images/generator-structure.png!
 
 h4(#generator_fragment). Generator Fragments
 
-Each fragment gets the grammar of the language as an EMF model passed in. A fragment is able to generate code in one of the configured locations and contribute to several shared artifacts. The main interface ${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.IGeneratorFragment} is supported by a convenient abstract base class ${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.AbstractGeneratorFragment}, which by default delegates to an Xpand template with the same qualified name as the class and delegates some of the calls to Xpand template definitions.
+Each fragment gets the grammar of the language as an EMF model passed in. A fragment is able to generate code in one 
+of the configured locations and contribute to several shared artifacts. The main interface 
+${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.IGeneratorFragment} is supported by a convenient 
+abstract base class ${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.AbstractGeneratorFragment}, which 
+by default delegates to an Xpand template with the same qualified name as the class and delegates some of the 
+calls to Xpand template definitions.
 
 We suggest to have a look at the fragment we have written for label providers (${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment}). It is pretty trivial and at the same time uses the most important call backs. In addition, the structure is not cluttered with too much extra noise so that the whole package can serve as a template to write your own fragment.
 
@@ -163,13 +178,13 @@ Workflow {
 	}
 }
 
-p. Here the root element is _Workflow_ which accepts __bean__ s and __component__ s. The _var_ declaration is a 
-first class concept of MWE2's configuration language and defines the interface of the module. They allow to externalize
-some common configuration parameters. This comes especially handy in String variables where one can easily use 
-_${variable}_ to concatenate values. 
+p. Here the root element is _Workflow_ and is part of the very slim runtime model shipped with MWE2. It accepts 
+__bean__ s and __component__ s. The _var_ declaration is a first class concept of MWE2's configuration language 
+and defines the interface of the module. They allow to externalize some common configuration parameters. This 
+comes especially handy in String variables where one can easily use _${variable}_ to concatenate values. 
 
 The method _Workflow.addBean(Object)_ does nothing but provides a means to apply global side-effects, which 
-unfortunately is required by some projects. In this example we do a so called __EMF stand-alone setup__. This class 
+unfortunately is required sometimes. In this example we do a so called __EMF stand-alone setup__. This class 
 initializes a bunch of things for a non-OSGi environment that are otherwise configured by means of extension points, 
 e.g. it allows to populate EMF's singletons like the _EPackage.Registry_.
 
@@ -177,7 +192,9 @@ Following the _bean_ assignment there are three _component_ elements. The _Workf
 accepts instances of _IWorkflowComponent_, which is the primary concept of MWE2's workflow model. Xtext's generator 
 itself is an instance of _IWorkflowComponent_ and can therefore be used within MWE2 workflows. 
 
-There are two fragments ${org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ImplicitRuntimeFragment} and ${org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/ImplicitUiFragment} will be called implicitly if the required paths and project names are set. They take care of common defaults.  
+There are two fragments ${org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ImplicitRuntimeFragment} and 
+${org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/ImplicitUiFragment} will be called implicitly if 
+the required paths and project names are set. They take care of common defaults.  
 
 h3. Standard generator fragments
 

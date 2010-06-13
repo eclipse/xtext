@@ -28,7 +28,7 @@
 				<code class="code">.[RuleName]</code>) and for each keyword (
 				<code class="code">.kw_[keyword]</code>), as long as the keywords are valid identifiers. If you don&rsquo;t like these defaults you&rsquo;ll have to subclass 
 				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/templates/XtextTemplateContextTypeRegistry.java?root=Modeling_Project&view=co" target="_new">XtextTemplateContextTypeRegistry</a> and configure it via 
-				<a class="link" href="dependencyInjection.html#guicemanualmodules" title="Modules intended for customization">Guice</a>. 
+				<a class="link" href="">Guice</a>. 
 			</p>
 <p>In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set of TemplateVariableResolvers to resolve special variable types inside a given template (i.e. TemplateContext). Besides the standard template variables available in 
 				<code class="code">org.eclipse.jface.text.templates.GlobalTemplateVariables</code> like ${user}, ${date}, ${time}, ${cursor}, etc., these TemplateVariableResolver support the automatic resolving of CrossReferences (type 

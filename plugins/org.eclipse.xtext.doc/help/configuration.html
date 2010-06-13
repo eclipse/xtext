@@ -29,10 +29,11 @@
 
 				<span class="emphasis"><em>plugin.xml</em></span>, 
 				<span class="emphasis"><em>MANIFEST.MF</em></span> and the 
-				<a class="link" href="dependencyInjection.html#guicemodules" title="Modules">Guice modules</a>.
+				<a class="link" href="">Guice modules</a>.
 			</p>
 <p>Xtext&rsquo;s generator leverages 
-				<a class="ulink" href="http://www.eclipse.org/modeling/emft/?project=mwe" target="_new">MWE2 &ndash; the modeling workflow engine</a> from EMFT to configure the generator.
+				<a class="link" href="MWE2.html" title="MWE2">MWE2 &ndash; the modeling workflow engine</a> 
+				from EMFT to configure the generator.
 			</p>
 <div class="section" title="A short introduction to MWE2">
 <div class="titlepage">
@@ -43,7 +44,9 @@
 </div>
 </div>
 </div>
-<p>MWE2 allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just instantiates Java classes and the configuration is done through public setter and adder methods as one is used to from Java Beans encapsulation principles. An in-depth documentation can be found in the chapter &ldquo;MWE2&rdquo;#MWE2.</p>
+<p>MWE2 allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just 
+					instantiates Java classes and the configuration is done through public setter and adder methods as one is used to 
+					from Java Beans encapsulation principles. An in-depth documentation can be found in the chapter &ldquo;MWE2&rdquo;#MWE2.</p>
 <p>Given the following simple Java class (POJO):</p>
 <div class="literallayout">
 <p>
@@ -68,7 +71,8 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>One can create a family tree with MWE2 easily by describing it in a declarative manner without writing a single line of Java code and without the need to compile classes:</p>
+<p>One can create a family tree with MWE2 easily by describing it in a declarative manner 
+					without writing a single line of Java code and without the need to compile classes:</p>
 <div class="literallayout">
 <p>
 <code class="code">module&nbsp;com.mycompany.CreatePersons<br>
@@ -76,7 +80,7 @@ public&nbsp;class&nbsp;Person&nbsp;{<br>
 <br>
 Person&nbsp;{<br>
 	name&nbsp;=&nbsp;"Grandpa"<br>
-	child&nbsp;=&nbsp;com.mycompany.Person&nbsp;{<br>
+	child&nbsp;=&nbsp;{<br>
 		name&nbsp;=&nbsp;"Father"<br>
 		child&nbsp;=&nbsp;{<br>
 			name&nbsp;=&nbsp;"Son"<br>
@@ -132,22 +136,22 @@ public&nbsp;class&nbsp;CreatePersons&nbsp;{<br>
 					into this workflow as well to make it convenient to instantiate actual workflows and components, but these ones are covered 
 					in depth in the appropriate 
 					<a class="link" href="MWE2.html" title="MWE2">chapter</a>. The constructed objects are furthermore configured according to the declaration 
-					in the module, e.g. a second instance of Person will be created and added to the list of children of &ldquo;Grandpa&rdquo; while the third person 
-					- the class is inferred from the assigned feature &ndash; becomes a child of &ldquo;Father&rdquo;. All three instances will have their respective 
-					<span class="emphasis"><em>name</em></span>
-					assigned via a reflective invocation 
+					in the module, e.g. a second instance of Person will be created and added to the list of children of &ldquo;Grandpa&rdquo; while the third 
+					person &ndash; the class is inferred from the assigned feature &ndash; becomes a child of &ldquo;Father&rdquo;. All three instances will have 
+					their respective 
+					<span class="emphasis"><em>name</em></span> assigned via a reflective invocation 
 					<span class="emphasis"><em>setName</em></span>. If one wants to add another child to &ldquo;Father&rdquo;, she
 					can simply repeat the child assignment:
 				</p>
 <div class="literallayout">
 <p>
 <code class="code">child&nbsp;=&nbsp;com.mycompany.Person&nbsp;{<br>
-	name&nbsp;=&nbsp;"Father"<br>
+	name&nbsp;=&nbsp;"Bob"<br>
 	child&nbsp;=&nbsp;{<br>
-&nbsp;&nbsp;	name&nbsp;=&nbsp;"Son"<br>
+		name&nbsp;=&nbsp;"Mary"<br>
 	}<br>
 	child&nbsp;=&nbsp;{<br>
-		name&nbsp;=&nbsp;..<br>
+		name&nbsp;=&nbsp;"Dave"<br>
 	}<br>
 }<br>
 
@@ -157,19 +161,22 @@ public&nbsp;class&nbsp;CreatePersons&nbsp;{<br>
 </p>
 </div>
 <p>As you can see in the example above MWE2 can be used to instantiate arbitrary Java object models without any dependency or
-					limitation to MWE2 specific implementations. This is 
-					conceptually very close to the dependency injection mechanism and the XML language 
-					in the 
+					limitation to MWE2 specific implementations. This is conceptually very close to the dependency injection mechanism and 
+					the XML language in the 
 					<a class="ulink" href="http://www.springframework.org" target="_new">Spring Framework</a>. 
 				</p>
 <p>
 					
 <span class="bold"><strong>Tip</strong></span>
+					__Whenever you are in an *.mwe2 file and wonder what kind of configuration the underlying component may accept: __
+					__Just use the Content Assist in the MWE2 Editor or navigate directly to the declaration of the underlying Java __ 
 
-					<span class="italic">Whenever you are in an *.mwe2 file and wonder what kind of configuration the underlying component may accept: Just use the Content Assist in the MWE2 Editor or navigate directly to the declaration of the underlying Java implementation by means of F3 (Go To Declaration).</span>
+					<span class="italic">implementation by means of F3 (Go To Declaration).</span>
 				
 </p>
-<p>This is the basic idea of the MWE2 language. There are of course a couple of additional concepts and features in the language and we also have not yet talked about the runtime workflow model. Please refer to the dedicated MWE2 
+<p>This is the basic idea of the MWE2 language. There are of course a couple of additional concepts and features in the 
+					language and we also have not yet talked about the runtime workflow model. Please refer to the dedicated MWE2 
+
 					<a class="link" href="MWE2.html" title="MWE2">reference documentation</a> for additional information.
 				</p>
 </div>
@@ -182,14 +189,18 @@ public&nbsp;class&nbsp;CreatePersons&nbsp;{<br>
 </div>
 </div>
 </div>
-<p>Now that you know a bit about MWE2, you are ready to learn about the concepts and architecture of Xtext&rsquo;s language generator. 
-					An instance of Xtext&rsquo;s generator is configured with general information about source folders and projects and consists of any number of language configurations. 
-					For each language configuration a URI pointing to its grammar file and the file extensions for the DSL must be provided. 
+<p>Of course a generator in Xtext is not composed of fathers and sons, but of so called language configurations. 
+					For each language configuration a URI pointing to 
+					its grammar file and the file extensions for the DSL must be provided. 
 					In addition, a language is configured with a list of 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">IGeneratorFragment</a>s.
-					The whole generator is composed of theses fragments. We have fragments for generating parsers, the serializer, the EMF code, the outline view, etc.
 
-					</p>
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">IGeneratorFragment</a>s.
+					The whole generator is composed of theses fragments. We have fragments for generating parsers, the serializer, the EMF code, 
+					the outline view, etc. 
+				</p>
+<p>
+					
+</p>
 <div class="mediaobject">
 <img src="images/generator-structure.png"></div>
 <p>
@@ -204,9 +215,14 @@ public&nbsp;class&nbsp;CreatePersons&nbsp;{<br>
 </div>
 </div>
 </div>
-<p>Each fragment gets the grammar of the language as an EMF model passed in. A fragment is able to generate code in one of the configured locations and contribute to several shared artifacts. The main interface 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">IGeneratorFragment</a> is supported by a convenient abstract base class 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/AbstractGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">AbstractGeneratorFragment</a>, which by default delegates to an Xpand template with the same qualified name as the class and delegates some of the calls to Xpand template definitions.
+<p>Each fragment gets the grammar of the language as an EMF model passed in. A fragment is able to generate code in one 
+						of the configured locations and contribute to several shared artifacts. The main interface 
+
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">IGeneratorFragment</a> is supported by a convenient 
+						abstract base class 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/AbstractGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">AbstractGeneratorFragment</a>, which 
+						by default delegates to an Xpand template with the same qualified name as the class and delegates some of the 
+						calls to Xpand template definitions.
 					</p>
 <p>We suggest to have a look at the fragment we have written for label providers (
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java?root=Modeling_Project&view=co" target="_new">LabelProviderFragment</a>). It is pretty trivial and at the same time uses the most important call backs. In addition, the structure is not cluttered with too much extra noise so that the whole package can serve as a template to write your own fragment.
@@ -283,18 +299,18 @@ Workflow&nbsp;{<br>
 </p>
 </div>
 <p>Here the root element is 
-						<span class="emphasis"><em>Workflow</em></span> which accepts 
+						<span class="emphasis"><em>Workflow</em></span> and is part of the very slim runtime model shipped with MWE2. It accepts 
+
 						<span class="italic">bean</span> s and 
 						<span class="italic">component</span> s. The 
-						<span class="emphasis"><em>var</em></span> declaration is a 
-						first class concept of MWE2&rsquo;s configuration language and defines the interface of the module. They allow to externalize
-						some common configuration parameters. This comes especially handy in String variables where one can easily use 
-
+						<span class="emphasis"><em>var</em></span> declaration is a first class concept of MWE2&rsquo;s configuration language 
+						and defines the interface of the module. They allow to externalize some common configuration parameters. This 
+						comes especially handy in String variables where one can easily use 
 						<span class="emphasis"><em>${variable}</em></span> to concatenate values. 
 					</p>
 <p>The method 
 						<span class="emphasis"><em>Workflow.addBean(Object)</em></span> does nothing but provides a means to apply global side-effects, which 
-						unfortunately is required by some projects. In this example we do a so called 
+						unfortunately is required sometimes. In this example we do a so called 
 						<span class="italic">EMF stand-alone setup</span>. This class 
 						initializes a bunch of things for a non-OSGi environment that are otherwise configured by means of extension points, 
 						e.g. it allows to populate EMF&rsquo;s singletons like the 
@@ -309,7 +325,9 @@ Workflow&nbsp;{<br>
 						itself is an instance of 
 						<span class="emphasis"><em>IWorkflowComponent</em></span> and can therefore be used within MWE2 workflows. 
 					</p>
-<p>There are two fragments ${org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ImplicitRuntimeFragment} and ${org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/ImplicitUiFragment} will be called implicitly if the required paths and project names are set. They take care of common defaults.  </p>
+<p>There are two fragments ${org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ImplicitRuntimeFragment} and 
+						${org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/ImplicitUiFragment} will be called implicitly if 
+						the required paths and project names are set. They take care of common defaults.  </p>
 </div>
 </div>
 <div class="section" title="Standard generator fragments">
@@ -322,7 +340,7 @@ Workflow&nbsp;{<br>
 </div>
 </div>
 <p>In the following table the most important standard generator fragments are listed. Please refer to the Javadocs for more detailed documentation.</p>
-<table id="N10C72">
+<table id="N10C45">
 <tr>
 						
 <th>Class</th>
