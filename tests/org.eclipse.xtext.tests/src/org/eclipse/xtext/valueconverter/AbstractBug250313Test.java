@@ -389,7 +389,7 @@ public abstract class AbstractBug250313Test extends AbstractXtextTests {
 		assertWithXtend("org::eclipse::xtext::valueconverter::bug250313::impl::Child1Impl", "this.ref.metaType", model);
 		assertWithXtend("org::eclipse::xtext::valueconverter::bug250313::impl::Child1Impl", "this.children.metaType", model);
 		assertWithXtend("'str'", "this.ref.name", model);
-		assertEquals(lexerRule, 2, convertCallCount);
+		assertEquals(lexerRule, 3, convertCallCount);
 	}
 
 	public void testChild2_01() throws Exception {
@@ -398,6 +398,6 @@ public abstract class AbstractBug250313Test extends AbstractXtextTests {
 		assertWithXtend("org::eclipse::xtext::valueconverter::bug250313::impl::Child2Impl", "this.ref.metaType", model);
 		assertWithXtend("org::eclipse::xtext::valueconverter::bug250313::impl::Child2Impl", "this.children.metaType", model);
 		assertWithXtend("'str'", "this.ref.name", model);
-		assertEquals(lexerRule, 2, convertCallCount);
+		assertEquals(lexerRule, 3, convertCallCount);
 	}
 }
