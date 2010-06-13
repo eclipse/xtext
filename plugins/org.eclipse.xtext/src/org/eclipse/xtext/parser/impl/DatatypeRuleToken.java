@@ -14,9 +14,9 @@ package org.eclipse.xtext.parser.impl;
  * we don't mess some corner cases up, e.g.:
  * <code>
  * <ul>
- * <li>Dots return EString: '.' '.' | '..';</li>
- * <li>Vector return EString: INT INT;</li>
- * <li>NumbersOrReal return EString: INT '.' INT | REAL;</li>
+ * <li>Dots returns EString: '.' '.' | '..';</li>
+ * <li>Vector returns EString: INT INT;</li>
+ * <li>NumbersOrReal returns EString: INT '.' INT | REAL;</li>
  * <li>REAL: "('0'..'9')+'.'('0'..'9')+";</li>
  * </ul>
  * </code>
