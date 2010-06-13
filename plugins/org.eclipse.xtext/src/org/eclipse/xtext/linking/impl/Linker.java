@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking.impl;
 
+import java.io.StringWriter;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -29,6 +30,7 @@ import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider.ILinkingDiagn
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 
@@ -46,6 +48,9 @@ public class Linker extends AbstractCleaningLinker {
 
 	@Inject
 	private ILinkingDiagnosticMessageProvider.Extended diagnosticMessageProvider;
+	
+	@Inject
+	private LinkingHelper linkingHelper;
 
 	public void ensureLinked(EObject obj, IDiagnosticProducer producer) {
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(obj);
@@ -178,11 +183,21 @@ public class Linker extends AbstractCleaningLinker {
 		private final EObject obj;
 		private final EReference eRef;
 		private final AbstractNode node;
+		private final LinkingHelper linkingHelper;
 
+		@Deprecated
 		protected LinkingDiagnosticContext(EObject obj, EReference eRef, AbstractNode node) {
 			this.obj = obj;
 			this.eRef = eRef;
 			this.node = node;
+			this.linkingHelper = null;
+		}
+		
+		protected LinkingDiagnosticContext(EObject obj, EReference eRef, AbstractNode node, LinkingHelper helper) {
+			this.obj = obj;
+			this.eRef = eRef;
+			this.node = node;
+			this.linkingHelper = helper;
 		}
 
 		public EObject getContext() {
@@ -194,16 +209,27 @@ public class Linker extends AbstractCleaningLinker {
 		}
 
 		public String getLinkText() {
-			String serialize = node.serialize();
-			if (serialize != null)
-				return serialize.trim();
-			return null;
+			if (linkingHelper != null)
+				return linkingHelper.getCrossRefNodeAsString(node, true);
+			return deprecatedGetLinkText();
+		}
+		
+		@Deprecated
+		protected String deprecatedGetLinkText() {
+			if (node instanceof LeafNode)
+				return ((LeafNode) node).getText();
+			StringWriter writer = new StringWriter();
+			for(LeafNode leafNode: node.getLeafNodes()) {
+				if(!leafNode.isHidden()) 
+					writer.append(leafNode.getText());
+			}
+			return writer.toString();
 		}
 
 	}
 
 	protected ILinkingDiagnosticContext createDiagnosticContext(EObject obj, EReference eRef, AbstractNode node) {
-		return new LinkingDiagnosticContext(obj, eRef, node);
+		return new LinkingDiagnosticContext(obj, eRef, node, linkingHelper);
 	}
 
 	protected List<EObject> getLinkedObject(EObject obj, EReference eRef, AbstractNode node)
@@ -242,6 +268,14 @@ public class Linker extends AbstractCleaningLinker {
 
 	public ILinkingDiagnosticMessageProvider.Extended getDiagnosticMessageProvider() {
 		return diagnosticMessageProvider;
+	}
+	
+	public LinkingHelper getLinkingHelper() {
+		return linkingHelper;
+	}
+	
+	public void setLinkingHelper(LinkingHelper linkingHelper) {
+		this.linkingHelper = linkingHelper;
 	}
 
 }

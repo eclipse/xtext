@@ -33,7 +33,6 @@ public class LinkingErrorTest extends AbstractXtextTests {
 	public void testNoErrors() throws Exception {
 		XtextResource resource = getResourceFromString(" type A extends B \n type B extends A");
 		EObject model = getModel(resource);
-		logger.debug(invokeWithXtend("types.collect(e|e.name+'->'+e.extends.name).toString(',')", model));
 		assertWithXtend("2", "types.size", model);
 		assertEquals(0, resource.getErrors().size());
 		assertEquals(0, resource.getWarnings().size());
@@ -42,7 +41,6 @@ public class LinkingErrorTest extends AbstractXtextTests {
 	public void testLinkError() throws Exception {
 		XtextResource resource = getResourceFromStringAndExpect(" type A extends B \n type B extends C", 1);
 		EObject model = getModel(resource);
-		logger.debug(invokeWithXtend("types.collect(e|e.name+'->'+e.extends.name).toString(',')", model));
 		assertWithXtend("2", "types.size", model);
 		assertEquals(1, resource.getErrors().size());
 		assertEquals(0, resource.getWarnings().size());
@@ -52,6 +50,14 @@ public class LinkingErrorTest extends AbstractXtextTests {
 		Diagnostic verboseError = error;
 		assertEquals(35, verboseError.getOffset());
 		assertEquals(1, verboseError.getLength());
+	}
+	
+	public void testLinkingErrorMessage() throws Exception {
+		XtextResource resource = getResourceFromStringAndExpect("type A extends B", 1);
+		assertEquals(1, resource.getErrors().size());
+		Diagnostic error = (Diagnostic) resource.getErrors().get(0);
+		assertEquals(1, error.getLine());
+		assertEquals("Couldn't resolve reference to Type 'B'.", error.getMessage());
 	}
 
 	private int getTreeIteratorContentSize(TreeIterator<Object> iterator) {
@@ -77,7 +83,6 @@ public class LinkingErrorTest extends AbstractXtextTests {
 		String modelText = " type A extends B \n type B extends C";
 		XtextResource resource = getResourceFromStringAndExpect(modelText, 1);
 		EObject model = getModel(resource);
-		logger.debug(invokeWithXtend("types.collect(e|e.name+'->'+e.extends.name).toString(',')", model));
 
 		assertWithXtend("2", "types.size", model);
 		assertEquals(4, getContentSize(model));

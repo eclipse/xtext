@@ -25,6 +25,7 @@ import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext;
 import org.eclipse.xtext.linking.ILinkingService;
+import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -49,6 +50,9 @@ public class LazyLinkingResource extends XtextResource {
 	
 	@Inject
 	private ILinkingDiagnosticMessageProvider diagnosticMessageProvider;
+	
+	@Inject
+	private LinkingHelper linkingHelper;
 
 	private boolean eagerLinking = false;
 
@@ -128,9 +132,17 @@ public class LazyLinkingResource extends XtextResource {
 	protected static class DiagnosticMessageContext implements ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext {
 
 		private final Triple<EObject, EReference, AbstractNode> triple;
+		private final LinkingHelper linkingHelper;
 
+		protected DiagnosticMessageContext(Triple<EObject, EReference, AbstractNode> triple, LinkingHelper helper) {
+			this.triple = triple;
+			this.linkingHelper = helper;
+		}
+		
+		@Deprecated
 		protected DiagnosticMessageContext(Triple<EObject, EReference, AbstractNode> triple) {
 			this.triple = triple;
+			this.linkingHelper = null;
 		}
 		
 		public EObject getContext() {
@@ -142,6 +154,15 @@ public class LazyLinkingResource extends XtextResource {
 		}
 
 		public String getLinkText() {
+			if (linkingHelper != null)
+				return linkingHelper.getCrossRefNodeAsString(triple.getThird(), true);
+			return deprecatedGetLinkText();
+		}
+
+		@Deprecated
+		protected String deprecatedGetLinkText() {
+			if (triple.getThird() instanceof LeafNode)
+				return ((LeafNode) triple.getThird()).getText();
 			StringWriter writer = new StringWriter();
 			for(LeafNode leafNode: triple.getThird().getLeafNodes()) {
 				if(!leafNode.isHidden()) 
@@ -196,7 +217,7 @@ public class LazyLinkingResource extends XtextResource {
 	}
 	
 	protected ILinkingDiagnosticContext createDiagnosticMessageContext(Triple<EObject, EReference, AbstractNode> triple) {
-		return new DiagnosticMessageContext(triple);
+		return new DiagnosticMessageContext(triple, linkingHelper);
 	}
 
 	public void setLinkingService(ILinkingService linkingService) {
@@ -229,5 +250,13 @@ public class LazyLinkingResource extends XtextResource {
 	
 	public void setDiagnosticMessageProvider(ILinkingDiagnosticMessageProvider diagnosticMessageProvider) {
 		this.diagnosticMessageProvider = diagnosticMessageProvider;
+	}
+	
+	public LinkingHelper getLinkingHelper() {
+		return linkingHelper;
+	}
+	
+	public void setLinkingHelper(LinkingHelper linkingHelper) {
+		this.linkingHelper = linkingHelper;
 	}
 }
