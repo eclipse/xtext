@@ -19,7 +19,7 @@
 090-valueconverter.textile                | ?                       |    
 100-serialization.textile                 | ?                       |    
 105-formatting.textile                    | ?                       |    
-110-fragmentprovider.textile              | ?                       |    
+110-fragmentprovider.textile              | yes (jk)                |    
 115-encoding.textile                      | yes (jk)                |    
 
 118-mwe-in-depth.textile                  | ?                       |    

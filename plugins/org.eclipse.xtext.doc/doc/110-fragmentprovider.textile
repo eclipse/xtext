@@ -1,35 +1,44 @@
 
 h3(#fragmentProvider). Fragment Provider (referencing Xtext models from other EMF artifacts)
 
-Although inter-Xtext linking is not done by URIs, you may want to be able to reference your @EObject@ from non-Xtext models.
-In those cases URIs are used, which are made up of a part identifying the resource. Each @EObject@ contained in a resource can be identified by a so called _fragment_.
+Although inter-Xtext linking is not done by URIs, you may want to be able to reference your _EObject_ from non-Xtext models.
+In those cases URIs are used, which are made up of a part identifying the resource. Each _EObject_ contained in a resource can be identified by a so called _fragment_.
 
 A fragment is a part of an EMF URI and needs to be unique per resource.
 
-The generic XMI resource shipped with EMF provides a generic path-like computation of fragments. With an XMI or other binary-like serialization it is also common and possible to use UUIDs.
+The generic XMI resource shipped with EMF provides a generic path-like computation of fragments. These fragment paths are unique by default and do not have to be serialized. OTOH, they are can be broken by reordering the elements in a resource. 
 
-However with a textual concrete syntax we want to be able to compute fragments out of the given information. We don't want to force people to use UUIDs (i.e. synthetic identifiers) or relative generic paths (very fragile), in order to refer to @EObjects@.
+With an XMI or other binary-like serialization it is also common and possible to use UUIDs. UUIDs are usually binary and technical, so you don't want them in human readable representations.
 
-Therefore one can contribute a so called @IFragmentProvider@ per language.
+However with a textual concrete syntax we want to be able to compute fragments out of the given information. We don't want to force people to use UUIDs (i.e. synthetic identifiers) or relative generic paths (very fragile), in order to refer to _EObjects_.
 
-bc.. public interface IFragmentProvider extends ILanguageService {
- 
-  /**
-   * Computes the local ID of the given object. 
-   * @param obj
-   *            The EObject to compute the fragment for
-   * @return the fragment, which can be an arbitrary string but must be 
-   *         unique within a resource. Return null to use default 
-   *         implementation
-   */
-  String getFragment(EObject obj);
-  
-  /**
-   * Locates an EObject in a resource by its fragment. 
-   * @return the EObject 
-   */
-  EObject getEObject(Resource resource, String fragment);
+Therefore one can contribute a so called ${org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider} per language. It has two methods: _getFragment(EObject, Fallback)_ to calculate the fragment of an _EObject_  and _getEObject(Resource, String, Fallback)_ to go the opposite direction. The _Fallback_ interface allows to delegate to the default strategy - usually the fragment paths described above. 
+
+The following snippet from the "GMF Example":#gmf_integration shows how to use qualified names as fragments:   
+
+bc.. public QualifiedNameFragmentProvider implements IFragmentProvider {
+
+	@Inject
+	private IQualifiedNameProvider qualifiedNameProvider;
+
+	public String getFragment(EObject obj, Fallback fallback) {
+		String qualifiedName = qualifiedNameProvider.getQualifiedName(obj);
+		return qualifiedName != null ? qualifiedName : fallback.getFragment(obj);
+	}
+
+	public EObject getEObject(Resource resource, String fragment, Fallback fallback) {
+		if (fragment != null) {
+			for (Iterator<EObject> i = EcoreUtil.getAllContents(resource, false); i.hasNext();) {
+				EObject eObject = i.next();
+				String candidateFragment = (eObject.eIsProxy()) 
+						? ((InternalEObject) eObject).eProxyURI().fragment()
+						: getFragment(eObject, fallback);
+				if (fragment.equals(candidateFragment)) 
+					return eObject;
+			}
+		}
+		return fallback.getEObject(fragment);
+	}
 }
 
-p. Note that the currently available default fragment provider does nothing (i.e. falls back to the default behavior of EMF).
 
