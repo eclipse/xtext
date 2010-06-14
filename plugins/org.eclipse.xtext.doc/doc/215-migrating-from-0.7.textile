@@ -1,4 +1,4 @@
-h1(#migrating_from_0_7). Migrating from TMF Xtext 0.7.x
+h1(#migrating_from_0_7). Migrating from Xtext 0.7.x to 1.0
 
 Most of the tasks when migrating to Xtext 1.0 can be automated. Some changes will be necessary in the manually written code where you have to carefully
 verify that your implemention is still working with Xtext 1.0. A relyable test-suite helps a lot. 
