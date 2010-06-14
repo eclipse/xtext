@@ -3,7 +3,7 @@ h1(#MWE2). MWE2
 The Modeling Workflow Engine 2 (MWE2) is a rewritten backwards 
 compatible implementation of the Modeling Workflow Engine (MWE). It 
 is a declarative, externally configurable generator engine. Users 
-can describe arbitrary objects compositions by means of a simple, 
+can describe arbitrary object compositions by means of a simple, 
 concise syntax that allows to declare object instances, attribute 
 values and references. One use case - that's where the name had its 
 origins - is the definition of workflows. Such a workflow consists 
@@ -18,7 +18,7 @@ threads or new processes.
 h2(#MWE2Exampe). Examples
 
 Let's start with a couple of examples to demonstrate some usage 
-scenarios for MWE2. The first examples is a simple @HelloWorld@ 
+scenarios for MWE2. The first examples is a simple _HelloWorld_ 
 module that does nothing but print a message to standard out. The 
 second module is assembled of three components that read an ecore 
 file, transform the contained classifier-names to upper-case and 
@@ -36,18 +36,18 @@ SayHello {
   message = "Hello World!"
 }
 p. It configures a very simple workflow component with a message 
-that should be printed to @System.out@ when the workflow is 
+that should be printed to _System.out_ when the workflow is 
 executed. The module begins with a declaration of its name. It must 
 fulfill the Java conventions for fully qualified class-names. That's 
-why the module @HelloWorld@ has to be placed into the default 
+why the module _HelloWorld_ has to be placed into the default 
 package of a Java source folder. The second element in the module is 
-the class-name @SayHello@ which introduces the root element of the 
+the class-name _SayHello_ which introduces the root element of the 
 module. The interpreter will create an instance of the referenced 
 type and configure it as declared between the curly braces. E.g. the 
-assignment @message = "Hello World!"@ in the module will be 
-interpreted as an invocation of the @setMessage(String)@ on the 
+assignment _message = "Hello World!"_ in the module will be 
+interpreted as an invocation of the _setMessage(String)_ on the 
 instantiated object. As one can easily imagine, the implementation 
-of the class @SayHello@ looks straight forward:
+of the class _SayHello_ looks straight forward:
 
 bc.. import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent;
 import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;
@@ -72,7 +72,7 @@ public class SayHello implements IWorkflowComponent {
 p. It looks like a simple POJO and that's the philosophy behind MWE2. 
 It is easily possible to assemble completely independent objects in 
 a declarative manner. To make the workflow executable with the 
-@WorkflowRunner@, the component @SayHello@ must be nested in a root 
+_WorkflowRunner_, the component _SayHello_ must be nested in a root 
 workflow:
 
 bc.. module HelloWorld 
@@ -82,16 +82,154 @@ Workflow {
 		message = "Hello World!"
 	}
 }
-p. The class @Workflow@ is actually 
-@org.eclipse.emf.mwe2.runtime.workflow.Workflow@ but its package is 
+p. The class _Workflow_ is actually 
+_org.eclipse.emf.mwe2.runtime.workflow.Workflow_ but its package is 
 implicitly imported in MWE2 modules to make the the modules more 
 concise. The execution result of this workflow will be revealed 
-after a quick @Run As .. -> MWE2 Workflow@ in the console as 
+after a quick _Run As .. -> MWE2 Workflow_ in the console as 
 
 bc.. Hello World!
 h3(#MWE2SimpleTransformation). A simple Transformation
 
+The following workflow solves the exemplary task to rename every _EClassifier_ in an _*.ecore_ file.
+It consists of three components that read, modify and write the model file:
+
+bc.. module Renamer
+Workflow {
+  component = ResourceReader {
+        uri = "model.ecore"
+  }
+  component = RenamingTransformer {}
+  component = ResourceWriter {
+        uri = "uppercaseModel.ecore"
+  }
+}
+p. The implementation of these components is surprisingly simple. It is easily possible to create
+own components even for minor operations to automate a process.
+
+p. The _ResourceReader_ simply reads the file with the given _URI_ and stores it in a so called
+_slot_ of the workflow context. A slot can be understood as a dictionary or map-entry.
+
+bc.. public class ResourceReader extends WorkflowComponentWithSlot {
+  private String uri;
+  public void invoke(IWorkflowContext ctx) {
+    ResourceSet resourceSet = new ResourceSetImpl();
+    Resource resource = resourceSet.getResource(URI.createFileURI(uri), true);
+    ctx.put(getSlot(), resource);
+  }
+	
+  public void setUri(String uri) {
+    this.uri = uri;
+  }
+  public String getUri() {
+    return uri;
+  }
+}
+p. The actual transformer takes the model from the slot and modifies it. It simply iterates the content
+of the resource, identifies each _EClassifier_ and sets its name. 
+
+bc.. public class RenamingTransformer extends WorkflowComponentWithSlot {
+  private boolean toLowerCase = false;
+  public void invoke(IWorkflowContext ctx) {
+    Resource resource = (Resource) ctx.get(getSlot());
+    EcoreUtil.resolveAll(resource);
+    Iterator<Object> contents = EcoreUtil.getAllContents(resource, true);
+    Iterator<EClassifier> iter = Iterators.filter(contents, EClassifier.class);
+    while(iter.hasNext()) {
+      EClassifier classifier = (EClassifier) iter.next();
+      classifier.setName(isToLowerCase() 
+          ? classifier.getName().toLowerCase()
+          : classifier.getName().toUpperCase());
+    }
+  }
+
+  public void setToLowerCase(boolean toLowerCase) {
+    this.toLowerCase = toLowerCase;
+  }
+  public boolean isToLowerCase() {
+    return toLowerCase;
+  }
+}
+p. After the model has been modified it should be written to a new file. That's what the 
+_ResourceWriter_ does. It actually takes the resource from the given _slot_ and saves it with
+the configured _URI_:
+
+bc.. public class ResourceWriter extends WorkflowComponentWithSlot {
+  private String uri;
+  public void invoke(IWorkflowContext ctx) {
+    Resource resource = (Resource) ctx.get(getSlot());
+    URI uri = URI.createFileURI(getUri());
+    uri = resource.getResourceSet().getURIConverter().normalize(uri);
+    resource.setURI(uri);
+    try {
+      resource.save(null);
+    } catch (IOException e) {
+      throw new WrappedException(e);
+    }
+  }
+
+  public void setUri(String uri) {
+    this.uri = uri;
+  }
+  public String getUri() {
+    return uri;
+  }
+}
+p. Last but not least, the common super-type for those components looks like this:
+
+bc.. public abstract class WorkflowComponentWithSlot implements IWorkflowComponent {
+  private String slot = "model";
+  public void setSlot(String slot) {
+    this.slot = slot;
+  }
+  public String getSlot() {
+    return slot;
+  }
+	
+  public void postInvoke() {}
+  public void preInvoke() {}
+}
+p. Each of the mentioned implementation is rather simple and can be done in a couple of minutes. 
+This is true for many tedious tasks that developers face in their daily work. MWE2 can be used to
+minimize the effort for them to a minimum by means of automati
+
 h3(#MWE2Stopwatch). A Stop-watch
+
+The last example demonstrates, how to combine the MWE2 concepts to create a simple stopwatch that
+allows to measure the execution time of a set of components. The idea is to add the very same stopwatch
+twice as a component to a workflow. It will measure the time from the first pre-invoke to the last
+post-invoke event and print the elapsed milliseconds to the console.
+
+bc.. public class StopWatch implements IWorkflowComponent {
+  private long start;
+  private boolean shouldStop = false;
+  public void invoke(IWorkflowContext ctx) {}
+
+  public void postInvoke() {
+    if (shouldStop) {
+      long elapsed = System.currentTimeMillis() - start;
+      System.out.println("Time elapsed: " + elapsed + " ms");
+    }
+    shouldStop = true;
+  }
+
+  public void preInvoke() {
+    start = System.currentTimeMillis();
+  }
+}
+p. Clients who want to leverage this kind of stopwatch may use the following pattern. The stopwatch-instance 
+will be added as the first component and the last component to a workflow. Everything in between will
+be measured. In this case, it is another workflow that does not need know about this decoration. The idea
+is to use a local identifier for the instantiated _StopWatch_ and reuse this one at the end to receive
+the post-invoke life-cycle event twice. 
+
+bc.. module MeasuredWorkflow
+
+Workflow {
+  component = StopWatch: stopWatch {}
+  component = @OtherWorkflow {}
+  component = stopWatch
+}
 
 h2(#MWE2LanguageReference). Language Reference
 
@@ -103,7 +241,7 @@ manner.
 * _Properties_ can be used to extract reusable, configurable parts of the workflow.
 * Components are mapped to plain vanilla _Java objects_. Arbitrary _set- and add-methods_ are used to configure them.
 
-Let's consider the follow short example module and @SampleClass@ to 
+Let's consider the follow short example module and _SampleClass_ to 
 explain these concepts.
 
 bc.. module com.mycompany.Example
@@ -126,31 +264,31 @@ public class SampleClass {
 }
 h3(#MWE2JavaReferences). Mapping to Java Classes
 
-p. The module @com.mycompany.Example@ defines a root component of 
-type @com.mycompany.SampleClass@. It is possible to use the simple 
+p. The module _com.mycompany.Example_ defines a root component of 
+type _com.mycompany.SampleClass_. It is possible to use the simple 
 class-name because MWE2 uses the very same visibility rules as the 
 Java compiler. Classes that are in the same package as the module 
 can be referenced by their simple name. The same rule applies for 
-classes from the @java.lang@ package. For convenience reasons is the 
-package @org.eclipse.emf.mwe2.runtime.workflow@ implicitly imported 
+classes from the _java.lang_ package. For convenience reasons is the 
+package _org.eclipse.emf.mwe2.runtime.workflow_ implicitly imported 
 as well as it exposes some library workflow components. However, the
-imports are more flexible since MWE2-imports can be relative, e.g. 
-the @import java.*@ resolves the reference @util.ArrayList@ to 
-@java.util.ArrayList@.  
+imports are more flexible then in Java since MWE2-imports can be relative, e.g. 
+the _import java.*_ resolves the reference _util.ArrayList_ to 
+_java.util.ArrayList_.  
 
-p. The root instance of type @SampleClass@ has to be configured 
-after it has been created. Therefore the method @setSingleValue@ 
-will be called at first. The parameter given parameter is 
-@'a string'@. The method is identified by its name which starts with 
-@set@. To allow to assign multi-value properties, MWE provides 
-access to methods call @add*@ as well. 
+p. The root instance of type _SampleClass_ has to be configured 
+after it has been created. Therefore the method _setSingleValue_ 
+will be called at first. The given parameter is 
+_'a string'_. The method is identified by its name which starts with 
+_set_. To allow to assign multi-value properties, MWE provides 
+access to methods called _add*_ as well. 
 
 p. If the right side of the assignment in the workflow file does not 
 define an explicit class, its type is inferred from the method 
-parameter. The line @child = {}@ is equivalent to 
-@child = SampleClass {}@ and creates a new instance of @SampleClass@.
+parameter. The line _child = {}_ is equivalent to 
+_child = SampleClass {}_ and creates a new instance of _SampleClass_.
 
-p. MWE2 ships with a nice tool support. The editor will provide 
+p. MWE2 ships with nice tool support. The editor will provide 
 content assist for the allowed types and highlight incompatible 
 assignments. The available properties for Java classes will be 
 proposed as well.
@@ -159,10 +297,10 @@ h3(#MWE2Module). Module
 
 As MWE2 modules have a fully qualified name, it is possible to refer
 to them from other modules. The type of the module is derived from
-the type of its root component. The @com.mycompany.Example@ can be
-assigned at any place where a @com.mycompany.SampleClass@ is expected.
+the type of its root component. The _com.mycompany.Example_ can be
+assigned at any place where a _com.mycompany.SampleClass_ is expected.
 
-p. Let's create a second module @com.mycompany.Second@ like this:
+p. Let's create a second module _com.mycompany.Second_ like this:
 
 bc.. module com.mycompany.sub.Second
 
@@ -171,15 +309,15 @@ import com.mycompany.*
 SampleClass {
   child = @Example {}
 } 
-p. The @child@ value will be assigned to an instance of @SampleClass@ 
+p. The _child_ value will be assigned to an instance of _SampleClass_ 
 that is configured as in the first example workflow. This enables
 nice composition and a very focused, reusable component design. 
 
 p. As the same rules apply in MWE2 like in Java, the module 
-@com.mycompany.sub.Second@ has to be defined in a file called 
-@Second.mwe2@ in the package @com.mycompany.sub@. The import semantic
+_com.mycompany.sub.Second_ has to be defined in a file called 
+_Second.mwe2_ in the package _com.mycompany.sub_. The import semantic
 for other modules is the same as for classes. The import statement
-allows to refer to @com.mycompany.Example@ with a shortened name.
+allows to refer to _com.mycompany.Example_ with a shortened name.
 
 h3(#MWE2Properties). Properties
 
@@ -187,7 +325,7 @@ MWE2 allows to extract arbitrary information into properties to
 ensure that these pieces are not cluttered around the workflow and 
 to allow for easier external customization. The exemplary component 
 definition was only changed slightly by introducing a property 
-@value@.
+_value_.
 
 bc.. module com.mycompany.Example
 
@@ -197,11 +335,11 @@ SampleClass {
   singleValue = value
 }
 p. The type of the property will be derived from the default value 
-similar to the mechanism that is already known from @set@- and 
-@add@-methods. If no default value is given, @java.lang.String@ will
+similar to the mechanism that is already known from _set_- and 
+_add_-methods. If no default value is given, _java.lang.String_ will
 be assumed. However, properties are not limited to strings. The 
-second built in type is boolean via the familiar literals @true@ and
-@false@. More flexibility is available via actual component literals.
+second built in type is boolean via the familiar literals _true_ and
+_false_. More flexibility is available via actual component literals.
 
 bc.. module com.mycompany.Example
 
@@ -243,7 +381,7 @@ SampleClass {
 p. This version of the example module exposes two externally assignable
 properties. The second one has no default value assigned and is 
 thereby considered to be mandatory. The mandatory value must be assigned
-if we reuse @org.mycompany.Example@ in another module like this:
+if we reuse _org.mycompany.Example_ in another module like this:
 
 bc.. module com.mycompany.Second
 
@@ -255,14 +393,14 @@ var newMandatory
 } 
 p. Note that it is even possible to reuse another module as the root
 component of a new module. In this case we set the mandatory 
-property of @Example@ to a specific constant value while the previously
+property of _Example_ to a specific constant value while the previously
 optional value is now redefined as mandatory by means of a new property
 without a default value.
 
 p. It is not only possible to define mandatory properties for MWE2 
 modules but for classes as well. Therefore MWE2 ships with the 
-@Mandatory@ annotation. If a @set@- or @add@-method is marked as
-@mandatory@, the module validation will fail if no value was assigned
+_@Mandatory_ annotation. If a _set_- or _add_-method is marked as
+_mandatory_, the module validation will fail if no value was assigned
 to that feature.
 
 h3(#MWE2NamedComponents). Named Components
@@ -272,7 +410,7 @@ It is possible to assign a name to any instantiated component being
 it created from a class literal or from another component. This allows
 to refer to previously created and configured instances. Named instances
 can come handy for notification and call-back mechanisms or more general
-in terms of defined life-cylce events. 
+in terms of defined life-cycle events. 
 
 p. If we wanted to assign the created instance to a property of itself,
 we could use the following syntax:
@@ -293,7 +431,7 @@ methods respectively. In many cases its quite hard to come up with
 yet another name for the very same concept which leads to the situation
 where the properties itself have the very same name as the component's
 feature. To avoid the overall repetition of assignments, MWE2 offers
-the possibility to use the @auto-inject@ modifier on the component 
+the possibility to use the _auto-inject_ modifier on the component 
 literal:
 
 bc.. module com.mycompany.Example
@@ -303,7 +441,7 @@ var child = SampleClass {}
 SampleClass auto-inject {
 }
 p. This example will implicitly assign the value of the property
-@child@ to the feature @child@ of the root component. This is especially
+_child_ to the feature _child_ of the root component. This is especially
 useful for highly configurable workflows that expose dozens of optional
 parameters each of which can be assigned to one or more components.
 
@@ -342,8 +480,8 @@ h3(#MWE2ModuleSyntax). Module
 
 p. !{width:50%}images/mwe2/module.png!
 
-A @module@ consists of four parts. The very first statement in a 
-@*.mwe2@ file is the module declaration. The name of the module must 
+A _module_ consists of four parts. The very first statement in a 
+_*.mwe2_ file is the module declaration. The name of the module must 
 follow the naming convention for Java classes. That MWE2 file's name 
 must therefore be the same as the last segment of the module-name 
 and it has to be placed in the appropriate package of a Java source 
@@ -368,8 +506,8 @@ furthermore defines an assignable feature of the module in case one
 refers to it from another module. Properties may either have a 
 default value or they are considered to be mandatory. If the type
 of property is omitted it will be inferred from the default value. The
-default type of a property is @java.lang.String@ so if no default
-value is available, the property is mandatory and of type @String@.
+default type of a property is _java.lang.String_ so if no default
+value is available, the property is mandatory and of type _String_.
 
 p. There are four types of values available in MWE2. One may either
 define a string, boolean or component literal or a reference to a
@@ -387,7 +525,7 @@ p. The type of the component can be derived in many cases except for
 the root component. That's why it's optional in the component literal.
 If no type is given, it will be inferred from the left side of the
 assignment. The assigned feature can either be a declared property
-of the module or a @set@- or @add@-method of a Java class.
+of the module or a _set_- or _add_-method of a Java class.
 
 p. Components can be named to make them referable in subsequent assignments.
 Following the ':' keyword, one can define an identifier for the 
@@ -395,7 +533,7 @@ instantiated component. The identifier is locally visible in the module
 and any assignment that is defined after the named component can refer
 to this identifier and thereby point to exactly the instantiated object.
 
-p. The next option for a component is @auto-inject@. If this modifier
+p. The next option for a component is _auto-inject_. If this modifier
 is set on a component, any available feature of the component that has
 the same name as a property or previously created named component will
 be automatically assigned.
@@ -430,9 +568,9 @@ If a certain string contains a lot of single-quotes one would better
 choose double-quotes as delimiter and vice versa. There is no semantic 
 difference between both notations.
 
-p. The escape character in MWE2 is the back-slash @"\"@. It can be used
+p. The escape character in MWE2 is the back-slash _"\"_. It can be used
 to write line-breaks or tabular characters explicitly and to escape
-the beginning of substitution variables @${@ and the quotes itself. Allowed
+the beginning of substitution variables _${_ and the quotes itself. Allowed
 escape sequences are:
 
 bc.. \n  .. line break
@@ -446,7 +584,7 @@ p. Other escape sequence are illegal in MWE2 strings.
   
 h3(#MWE2BooleanLiterals). Boolean Literals
 
-MWE2 has native support for the boolean type. The literals are @true@ and @false@.
+MWE2 has native support for the boolean type. The literals are _true_ and _false_.
 
 h3(#MWE2References). References
 
@@ -454,6 +592,3 @@ Each assigned value in MWE2 either as default for properties or in a
 component assignment can be a reference to a previously declared property
 or named component. The can be referenced intuitively by their name.
 
-h2(#MWE2RuntimeAPI). Workflow API
-
-h2(#MWE2RuntimeSPI). Workflow SPI

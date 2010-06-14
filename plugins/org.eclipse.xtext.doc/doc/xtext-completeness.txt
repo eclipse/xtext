@@ -22,7 +22,7 @@
 110-fragmentprovider.textile              | yes (jk)                |  ß  
 115-encoding.textile                      | yes (jk)                |  ß  
 
-118-mwe-in-depth.textile                  | ?                       |    
+118-mwe-in-depth.textile                  | yes (ß)                 |    
 
 120-heading-UI.textile                    | ?                       |    
 130-managing-concurrency.textile          | ?                       |    
