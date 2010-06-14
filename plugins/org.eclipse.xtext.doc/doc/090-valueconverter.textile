@@ -2,7 +2,8 @@
 h2(#valueconverter). Value Converter
 
 Value converters are registered to convert the parsed text into a certain data type instance and vice versa.
-The primary hook is called ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.IValueConverterService} and the concrete implementation can be registered via the runtime "Guice module":#guicecustomize.
+The primary hook is called ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.IValueConverterService} 
+and the concrete implementation can be registered via the runtime "Guice module":#guicecustomize.
 To do so override the corresponding binding in your runtime module like shown in this example:
 
 bc.. @Override
@@ -10,48 +11,22 @@ public Class<? extends IValueConverterService> bindIValueConverterService() {
   return MySpecialValueConverterService.class;
 }
 
-h3. Annotation based value converters
+h3. Annotation-based Value Converters
 
-The most simple way to register additional value converters is to make use of ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.impl.AbstractDeclarativeValueConverterService}, which allows to
-declaratively register an @IValueConverter@ via an annotated method. 
+The most simple way to register additional value converters is to make use of 
+${org.eclipse.xtext/src/org.eclipse.xtext.conversion.impl.AbstractDeclarativeValueConverterService}, 
+which allows to declaratively register an _IValueConverter_ by means of an annotated method. 
 
-The implementation for the default token grammar looks like 
+p. If you use the common terminals grammar _org.eclipse.xtext.common.Terminals_ you should subclass 
+${org.eclipse.xtext/src/org.eclipse.xtext.common.services.DefaultTerminalConverters} and override or 
+add additional value converters by adding the respective methods. In addition to the explicitly 
+defined converters in the default implementation, a delegating converter is registered for each 
+available _EDataType_ that reuses the functionality of the corresponding _EFactory_.
 
-bc.. public class DefaultTerminalConverters 
-    extends AbstractDeclarativeValueConverterService {
-  
-  (..)
-  
-  @ValueConverter(rule = "ID")
-  public IValueConverter<String> ID() {
-    return new AbstractNullSafeConverter<String>() {
-      @Override
-      protected String internalToValue(String string, AbstractNode node) {
-        return string.startsWith("^") ? string.substring(1) : string;
-      }
-  
-      @Override
-      protected String internalToString(String value) {
-        if (GrammarUtil.getAllKeywords(getGrammar()).contains(value)) {
-          return "^" + value;
-        }
-        return value;
-      }
-    };
-  }
-  ...  some other value converter
-}
-
-p. If you use the common terminals grammar @org.eclipse.xtext.common.Terminals@ you should subclass @DefaultTerminalConverters@ and override or add additional value converters by adding the respective methods.
-
-Imagine, you would want to add a rule BIG_DECIMAL creating BigDecimals, it would look like this one:
-
-bc.. @ValueConverter(rule = "BIG_DECIMAL")
-public IValueConverter<BigDecimal> BIG_DECIMAL() {
-  return new AbstractToStringConverter<BigDecimal>() {
-    @Override
-    protected BigDecimal internalToValue(String string, AbstractNode node) {
-      return BigDecimal.valueOf(string);
-    }
-  };
-}
+p. The protocol of an _IValueConverter_ allows to throw a _ValueConverterException_ if something went wrong.
+The exception is propagated as a syntax error by the parser or as a validation problem by the 
+_ConcreteSyntaxValidator_ if the value cannot be converted to a valid string. The 
+${org.eclipse.xtext/src/org.eclipse.xtext.conversion.impl.AbstractLexerBasedConverter} is useful when 
+implementing an own value converter. If the converter needs to know about the rule that it currently 
+works with, it may implement the interface _IValueConverter.RuleSpecific_. The framework will set the
+rule such as the implementation may use it afterwards.

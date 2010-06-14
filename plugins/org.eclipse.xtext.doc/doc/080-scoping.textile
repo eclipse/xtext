@@ -1,8 +1,9 @@
 
 h2(#scoping). Scoping
 
-Using the scoping API one defines which elements are referable by a certain reference. For instance, using the introductory example (fowler's state machine language)
-a transition contains two cross reference one to a declared event and one to a declared state.
+Using the scoping API one defines which elements are referable by a certain reference. For instance, 
+using the introductory example (fowler's state machine language)
+a transition contains two cross references: One to a declared event and one to a declared state.
 
 Example:
 
@@ -19,9 +20,13 @@ p. The grammar rule for transitions looks like this:
 bc.. Transition :
   event=[Event] '=>' state=[State];
 
-p. The grammar states that for the reference _event_ only instances of the type _Event_ are allowed and that for the EReference _state_ only instances of type _State_ can be referenced. However, this simple declaration doesn't say anything about where to find the states or events. That is the duty of scopes.  
+p. The grammar states that for the reference _event_ only instances of the type _Event_ are allowed and 
+that for the EReference _state_ only instances of type _State_ can be referenced. However, this simple 
+declaration doesn't say anything about where to find the states or events. That is the duty of scopes.  
 
-An ${org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider} is responsible for providing an ${org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScope} for a given context _EObject_ and _EReference_. The returned _IScope_ should contain all target candidates for the given object and cross reference.
+An ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.IScopeProvider} is responsible for providing 
+an ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.IScope} for a given context _EObject_ and 
+_EReference_. The returned _IScope_ should contain all target candidates for the given object and cross reference.
 
 bc.. public interface IScopeProvider {
 
@@ -39,57 +44,109 @@ bc.. public interface IScopeProvider {
 
 }
 
-p. A single _IScope_ represents an element of a linked list of scopes. That means that a scope can be nested within an outer scope. Each scope works like a symbol table or a map where the keys are strings and the values are so called ${org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription}, which is effectively an abstract description of a real _EObject_. 
+p. A single _IScope_ represents an element of a linked list of scopes. That means that a scope can be 
+nested within an outer scope. Each scope works like a symbol table or a map where the keys are strings 
+and the values are so called ${org.eclipse.xtext/src/org.eclipse.xtext.resource.IEObjectDescription}, 
+which is effectively an abstract description of a real _EObject_. 
 
 h3(#global_scopes). Global Scopes and _IResourceDescriptions_
 
-In the state machine example we don't have references across model files. Also there is no concept like a name space which would make scoping a bit more complicated. Basically, every _State_ and every _Event_ declared in the same resource is visible by their name. However in the real world things are most likely not that simple: What if you want to reuse certain declared states and events across different state machines and you want to share those as library between different users? You would want to introduce some kind of cross resource reference. 
+In the state machine example we don't have references across model files. Also there is no concept like 
+a namespace which would make scoping a bit more complicated. Basically, every _State_ and every _Event_ 
+declared in the same resource is visible by their name. However in the real world things are most likely 
+not that simple: What if you want to reuse certain declared states and events across different 
+state machines and you want to share those as library between different users? You would want to introduce 
+some kind of cross resource reference. 
 
-Defining what is visible from outside the current resource is the responsibility of global scopes. As the name suggests, global scopes are provided by instances of the ${org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider}. The data structures used to store its elements are described in the next section.
+Defining what is visible from outside the current resource is the responsibility of global scopes. 
+As the name suggests, global scopes are provided by instances of the 
+${org.eclipse.xtext/src/org.eclipse.xtext.scoping.IGlobalScopeProvider}. The data structures used to 
+store its elements are described in the next section.
 
 h4(#resourcedescriptions). _Resource_ and _EObject_ Descriptions (_IResourceDescription_, _IEObjectDescription_)
 
-In order to make states and events of one file referable from another file you need to export them as part of a so called ${org.eclipse.xtext/src/org.eclipse.xtext.resource.IResourceDescription}. 
+In order to make states and events of one file referable from another file you need to export them as 
+part of a so called ${org.eclipse.xtext/src/org.eclipse.xtext.resource.IResourceDescription}. 
 
-A _IResourceDescription_ contains information about the resource itself (primarily its _URI_), a list of exported _EObjects_ (in the form of ${org.eclipse.xtext/src/org.eclipse.xtext.resource.IEObjectDescription}) as well as information about outgoing cross references and qualified names it references. The cross references contain only resolved references, while the list of imported qualified names also contain those names, which couldn't be resolved. This information is important in order to compute the transitive hull of dependent resources, which the shipped index infrastructure automatically does for you.
+A _IResourceDescription_ contains information about the resource itself (primarily its _URI_), a list 
+of exported _EObjects_ (in the form of ${org.eclipse.xtext/src/org.eclipse.xtext.resource.IEObjectDescription}) 
+as well as information about outgoing cross references and qualified names it references. The cross 
+references contain only resolved references, while the list of imported qualified names also contain 
+those names, which couldn't be resolved. This information is important in order to compute the transitive 
+hull of dependent resources, which the shipped index infrastructure automatically does for you.
 
-For users and especially in the context of scoping the most important information is the list of exported _EObjects_. An ${org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription} contains information about the _URI_ to the actual _EObject_ and the qualified name of that element as well as the corresponding _EClass_. In addition one can export arbitrary information using the _user data_ map. The following diagram gives an overview on the description classes and their relationships.
+For users and especially in the context of scoping the most important information is the list of 
+exported _EObjects_. An ${org.eclipse.xtext/src/org.eclipse.xtext.resource.IEObjectDescription} 
+contains information about the _URI_ to the actual _EObject_ and the qualified name of that element 
+as well as the corresponding _EClass_. In addition one can export arbitrary information using the 
+_user data_ map. The following diagram gives an overview on the description classes and their relationships.
 
 !images/index_datamodel.png(Descriptions)!
 
-A language is configured with a default implementation of _IResourceDescription.Manager_ which computes the list of exported _IEObjectDescriptions_ by iterating the whole EMF model and applying the _getQualifiedName(EObject obj)_ from ${org.eclipse.xtext/src/org.eclipse.xtext.naming.IQualifiedNameProvider} on each _EObject_. If it returns a name an _IEObjectDescription_ is created and exported (i.e. added to the list). If an _EObject_ doesn't have a qualified name, the element is considered to be not referable from outside the resource and consequently not indexed. If you don't like this behavior, you can implement and bind your own implementation of _IResourceDescription.Manager_.  
+A language is configured with a default implementation of _IResourceDescription.Manager_ which computes 
+the list of exported _IEObjectDescriptions_ by iterating the whole EMF model and applying the 
+_getQualifiedName(EObject obj)_ from ${org.eclipse.xtext/src/org.eclipse.xtext.naming.IQualifiedNameProvider} 
+on each _EObject_. If the object has a qualified name an _IEObjectDescription_ is created and exported 
+(i.e. added to the list). If an _EObject_ doesn't have a qualified name, the element is considered to 
+be not referable from outside the resource and consequently not indexed. If you don't like this behavior, 
+you can implement and bind your own implementation of _IResourceDescription.Manager_.  
 
-There are also two different implementations of _IQualifiedNameProvider_. Both work by looking up an _EAttribute_ with the name 'name'. The ${org.eclipse.xtext/src/org.eclipse.xtext.naming.SimpleNameProvider} just returns the plain value, while the ${org.eclipse.xtext/src/org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider} concatenates the simple name with the qualified name of its parent exported _EObject_. This effectively simulates the qualified name computation of most name space based languages (like e.g. Java). 
+There are also two different default implementations of _IQualifiedNameProvider_. Both work by looking 
+up an _EAttribute_ 'name'. The ${org.eclipse.xtext/src/org.eclipse.xtext.naming.SimpleNameProvider} 
+simply returns the plain value, while the 
+${org.eclipse.xtext/src/org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider} concatenates 
+the simple name with the qualified name of its parent exported _EObject_. This effectively simulates 
+the qualified name computation of most namespace based languages (like e.g. Java). 
 
-As mentioned above, in order to calculate an _IResourceDescription_ for a resource the framework asks the _IResourceDescription.Manager_. Here's some Java code showing how to do that:
+As mentioned above, in order to calculate an _IResourceDescription_ for a resource the framework asks 
+the _IResourceDescription.Manager_. Here's some Java code showing how to do that:
 
-bc..   Manager manager = // obtain an instance of IResourceDescription.Manager.class
-  IResourceDescription description = manager.getResourceDescription(resource);
-  for (IEObjectDescription eObjDescription : description.getExportedObjects()) {
-    System.out.println(eObjDescription.getQualifiedName());
-  } 
+bc.. Manager manager = // obtain an instance of IResourceDescription.Manager
+IResourceDescription description = manager.getResourceDescription(resource);
+for (IEObjectDescription objDescription : description.getExportedObjects()) {
+  System.out.println(objDescription.getQualifiedName());
+} 
   
-p. In order to obtain an _IResourceDescription.Manager_ it is best to ask the corresponding ${org.eclipse.xtext/src/org.eclipse.xtext.resource.IResourceServiceProvider}. That is because each language might have a totally different implementation and as you might refer from your language to a different language you can't reuse your language's _IResourceDescription.Manager_. One basically asks the _IResourceServiceProvider.Registry_ (there is usually one global instance) for an _IResourceServiceProvider_, which in turn provides an _IResourceDescription.Manager_ along other useful services.
+p. In order to obtain an _IResourceDescription.Manager_ it is best to ask the corresponding 
+${org.eclipse.xtext/src/org.eclipse.xtext.resource.IResourceServiceProvider}. That is because each 
+language might have a totally different implementation and as you might refer from your language to a 
+different language you can't reuse your language's _IResourceDescription.Manager_. One basically asks 
+the _IResourceServiceProvider.Registry_ (there is usually one global instance) for an 
+_IResourceServiceProvider_, which in turn provides an _IResourceDescription.Manager_ along other 
+useful services.
 
 If you're running in a Guice enabled scenario, the code looks like this:
 
-bc..   @Inject private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
+bc.. @Inject 
+private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
 	
-  private IResourceDescription.Manager getManager(Resource res) {
-		IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(res.getURI());
-		return resourceServiceProvider.getResourceDescriptionManager();
-	}
+private IResourceDescription.Manager getManager(Resource res) {
+  IResourceServiceProvider resourceServiceProvider = 
+    resourceServiceProviderRegistry.getResourceServiceProvider(res.getURI());
+  return resourceServiceProvider.getResourceDescriptionManager();
+}
 
 p. If you don't run in a Guice enabled context you will likely have to directly access the singleton:
 
-bc..   private IResourceServiceProvider.Registry resourceServiceProviderRegistry = IResourceServiceProvider.Registry.INSTANCE;
+bc.. private IResourceServiceProvider.Registry resourceServiceProviderRegistry = 
+  IResourceServiceProvider.Registry.INSTANCE;
 
 p. However, we strongly encourage you to use dependency injection.
-Now, that we know how to export elements to be referenceable from other resources, we need to learn how those exported _IEObjectDescriptions_ can be made available to the referencing resources. That is the responsibility of global scoping (i.e. ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.IGlobalScopeProvider}) which is described in the following.
+Now, that we know how to export elements to be referenceable from other resources, we need to learn 
+how those exported _IEObjectDescription_s can be made available to the referencing resources. That is 
+the responsibility of global scoping (i.e. 
+${org.eclipse.xtext/src/org.eclipse.xtext.scoping.IGlobalScopeProvider}) which is described in the 
+following chapter.
 
 h4(#import_uri). Global Scopes based on explicit imports (ImportURI mechanism)
 
-A simple and straight forward solution is to have explicit references to other resources in your file by explicitly listing pathes (or _URIs_) to all referenced resources in your model file. That is for instance what most include mechanisms use. In Xtext we provide a handy implementation of an _IGlobalScopeProvider_ which is based on a naming convention and makes this semantics very easy to use. Talking of the introductory example and given you would want to add support for referencing external _States_ and _Events_ from within your state machine, all you had to do is add something like the following to the grammar definition:
+A simple and straight forward solution is to have explicit references to other resources in your 
+file by explicitly listing pathes (or _URIs_) to all referenced resources in your model file. That is 
+for instance what most include mechanisms use. In Xtext we provide a handy implementation of an 
+_IGlobalScopeProvider_ which is based on a naming convention and makes this semantics very easy to use. 
+Talking of the introductory example and given you would want to add support for referencing external 
+_States_ and _Events_ from within your state machine, all you had to do is add something like the 
+following to the grammar definition:
 
 bc.. Statemachine :
   (imports+=Import)* // allow imports
@@ -107,111 +164,190 @@ bc.. Statemachine :
 Import : 
   'import' importURI=STRING; // feature must be named importURI
 
-p.  This effectively allows import statements to be declared before the events section. In addition you'll have to make sure that you have bound the ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider} for the type _IGlobalScopeProvider_ by the means of Guice:#dependencyInjection. That implementation looks up any _EAttributes_ named 'importURI' in your model and interprets their values as imports. That is it adds the corresponding resources to the current resource's resource set. In addition the scope provider uses the _IResourceDescription.Manager_#resource_descriptions of that imported resource to compute all the _IEObjectDescriptions_ returned by the _IScope_.  
+p.  This effectively allows import statements to be declared before the events section. In addition 
+you'll have to make sure that you have bound the 
+${org.eclipse.xtext/src/org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider} for the type 
+_IGlobalScopeProvider_ by the means of Guice:#dependencyInjection. That implementation looks up any 
+_EAttributes_ named 'importURI' in your model and interprets their values as URIs that point to imported
+resources. That is it adds the corresponding resources to the current resource's resource set. In 
+addition the scope provider uses the "_IResourceDescription.Manager_":#resourcedescriptions of that 
+imported resource to compute all the _IEObjectDescriptions_ returned by the _IScope_.  
 
-Global scopes based on import URIs are available if you use the ${org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportURIScopingFragment} in the workflow of your language. It will bind an ${org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportUriGlobalScopeProvider} (${org.eclipse.xtext/src/org/eclipse/xtext/resource/ignorecase/IgnoreCaseImportUriGlobalScopeProvider} if the _caseInsensitve_ flag is set) that handles _importURI_ features.
+Global scopes based on import URIs are available if you use the 
+${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.scoping.ImportURIScopingFragment} in the 
+workflow of your language. It will bind an 
+${org.eclipse.xtext/src/org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider} 
+(${org.eclipse.xtext/src/org.eclipse.xtext.resource.ignorecase.IgnoreCaseImportUriGlobalScopeProvider} 
+if the _caseInsensitve_ flag is set) that handles _importURI_ features.
 
 h4(#index_based). Global Scopes based on external configuration (e.g. class path-based)
 
-Instead of explicitly referring to imported resources, the other possibility is to have some kind of external configuration in order to define what is visible from outside a resource. Java for instances uses the notion of class paths to define containers (jars and class folders) which contain any referenceable elements. In the case of Java also the order of such entries is important. 
+Instead of explicitly referring to imported resources, the other possibility is to have some kind of 
+external configuration in order to define what is visible from outside a resource. Java for instances 
+uses the notion of class paths to define containers (jars and class folders) which contain any 
+referenceable elements. In the case of Java also the order of such entries is important. 
 
-Since version 1.0.0 Xtext provides support for this kind of global scoping. To enable it, a ${org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/DefaultGlobalScopeProvider} has to be bound to the _IGlobalScopeProvider_ interface. If your klanguage "references Java":#jvmtypes, use ${org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/xtext/TypesAwareDefaultGlobalScopeProvider}. For case insensitve names use the ${org.eclipse.xtext/src/org/eclipse/xtext/resource/ignorecase/IgnoreCaseDefaultGlobalScopeProvider}.
+Since version 1.0.0 Xtext provides support for this kind of global scoping. To enable it, a 
+${org.eclipse.xtext/src/org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider} has to be bound to 
+the _IGlobalScopeProvider_ interface. For case insensitive names use the 
+${org.eclipse.xtext/src/org.eclipse.xtext.resource.ignorecase.IgnoreCaseDefaultGlobalScopeProvider}.
 
-By default Xtext leverages the class path mechanism since it is well designed and already understood by most of our users. The available tooling provided by JDT and PDE to configure the class path adds even more value. However, it is just a default: You can reuse the infrastructure without using Java and depending on JDT.
+By default Xtext leverages the class path mechanism since it is well designed and already understood 
+by most of our users. The available tooling provided by JDT and PDE to configure the class path adds 
+even more value. However, it is just a default: You can reuse the infrastructure without using Java 
+and independent from the JDT.
 
-In order to know what is available in the "world" a global scope provider which relies on external configuration needs to read that configuration in and be able to find all candidates for a certain _EReference_ in those containers. If you don't want to force users to have a folder and file name structure reflecting the actual qualified names of the referenceable _EObjects_, you'll have to load all resources up front and either keep holding them in memory or remembering all information which is needed for the resolution of cross references. In Xtext that information is provided by a so called _IEObjectDescription_#resource_descriptions. 
+In order to know what is available in the "world" a global scope provider which relies on external 
+configuration needs to read that configuration in and be able to find all candidates for a certain 
+_EReference_. If you don't want to force users to have a folder and file name structure reflecting 
+the actual qualified names of the referenceable _EObjects_, you'll have to load all resources up front 
+and either keep holding them in memory or remembering all information which is needed for the 
+resolution of cross references. In Xtext that information is provided by a so called 
+"_IEObjectDescription_":#resourcedescriptions. 
 
 h5(#containers). About the index, containers and their manager 
 
-p. Xtext ships with an index which remembers all _IResourceDescription_ and their _IEObjectDescription_ objects. In the IDE-context (i.e. when running the editor, etc.) the index is updated by an incremental project builder. As opposed to that, in a non-UI context you typically do not have to deal with changes such that the infrastructure can be much simpler. In both situations the global index state is held by an implementation of ${org.eclipse.xtext/src/org.eclipse.xtext.resource.IResourceDescriptions} (Note the plural form!). The bound singleton in the UI scenario is even aware of unsaved editor changes, such that all linking happens to the latest maybe unsaved version of the resources. You will find the Guice configuration of the global index in the UI scenario in ${org.eclipse.xtext.ui.shared/src/org/eclipse/xtext/ui/shared/internal/SharedModule.java}.
+p. Xtext ships with an index which remembers all _IResourceDescription_ and their _IEObjectDescription_ 
+objects. In the IDE-context (i.e. when running the editor, etc.) the index is updated by an incremental 
+project builder. As opposed to that, in a non-UI context you typically do not have to deal with changes 
+such that the infrastructure can be much simpler. In both situations the global index state is held 
+by an implementation of ${org.eclipse.xtext/src/org.eclipse.xtext.resource.IResourceDescriptions} 
+(Note the plural form!). The bound singleton in the UI scenario is even aware of unsaved editor changes, 
+such that all linking happens to the latest maybe unsaved version of the resources. You will find the 
+Guice configuration of the global index in the UI scenario in 
+${org.eclipse.xtext.ui.shared/src/org.eclipse.xtext.ui.shared.internal.SharedModule}.
 
-p. The index is just a flat list of instances of _IResourceDescription_. The index itself doesn't know about containers. Rather than that, the notion of containers is defined by the referencing language: While Java might load a resource via _ClassLoader.loadResource()_ (i.e. using the class path mechanism), another language could load the same resource using the file system paths. 
+p. The index is basically a flat list of instances of _IResourceDescription_. The index itself doesn't 
+know about visibility constraints due to class path restriction. Rather than that, they are defined by 
+the referencing language by means of so called _IContainers_: While Java might load a resource 
+via _ClassLoader.loadResource()_ (i.e. using the class path mechanism), another language could load 
+the same resource using the file system paths. 
  
-p. Consequently, the information which container a resource belongs to depends on the referencing context. Therefore an _IResourceServiceProvider_ provides another interesting service, which is called _IContainer.Manager_. For a given _IResourceDescription_, the _IContainer.Manager_ provides you with the ${org.eclipse.xtext/src/org.eclipse.xtext.resource.IContainer} as well as with a list of all _IContainers_ which are visible from there. Note that the index (_IResourceDesciptions_) is globally shared between all languages while the _IContainer.Manager_ that adds the semantics of containers can be very different depending on the language. The following method lists all resources visible from a given _Resource_:  
+p. Consequently, the information which container a resource belongs to depends on the referencing 
+context. Therefore an _IResourceServiceProvider_ provides another interesting service, which is called
+_IContainer.Manager_. For a given _IResourceDescription_, the _IContainer.Manager_ provides you with 
+the ${org.eclipse.xtext/src/org.eclipse.xtext.resource.IContainer} as well as with a list of all 
+_IContainers_ which are visible from there. Note that the index (_IResourceDesciptions_) is globally 
+shared between all languages while the _IContainer.Manager_ that adds the semantics of containers can 
+be very different depending on the language. The following method lists all resources visible from a 
+given _Resource_:  
 
 bc.. @Inject
 IContainer.Manager containerManager;
 
-public void listVisibleResources(Resource myResource, IResourceDescriptions index) {
-	IResourceDescription myResourceDesc = index.getResourceDescription
-  																							(myResource.getURI());
-	for(IContainer visibleContainer: manager.getVisibleContainers(myResourceDesc)) 
-		for(IResourceDescription visibleResourceDesc:
-					visibleContainer.getResourceDescription()) 
-			System.out.println(visibleResourceDesc.getURI());
+public void listVisibleResources(
+        Resource myResource, IResourceDescriptions index) {
+  IResourceDescription descr = index.getResourceDescription(myResource.getURI());
+  for(IContainer visibleContainer: manager.getVisibleContainers(descr)) { 
+    for(IResourceDescription visibleResourceDesc:
+            visibleContainer.getResourceDescription()) { 
+      System.out.println(visibleResourceDesc.getURI());
+    }
+  }
 }
 
-p. Xtext ships two implementations of _IContainer.Manager_ which are as usual bound with Guice: The default binding is to ${org.eclipse.xtext/src/org/eclipse/xtext/resource/impl/SimpleResourceDescriptionsBasedContainerManager}, which assumes all _IResourceDescription_ to be in a single common container. If you don't care about container support, you'll be fine with this one. Alternatively, you can bind ${org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/StateBasedContainerManager} and an additional ${org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/IAllContainersState} which keeps track of the set of available containers and their visibility releationships.  
+p. Xtext ships two implementations of _IContainer.Manager_ which are as usual bound with Guice: The 
+default binding is to 
+${org.eclipse.xtext/src/org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager}, 
+which assumes all _IResourceDescription_ to be in a single common container. If you don't care about 
+container support, you'll be fine with this one. Alternatively, you can bind 
+${org.eclipse.xtext/src/org.eclipse.xtext.resource.containers.StateBasedContainerManager} and an 
+additional ${org.eclipse.xtext/src/org.eclipse.xtext.resource.containers.IAllContainersState} which 
+keeps track of the set of available containers and their visibility relationships.  
 
-p. Xtext offers a couple of strategies for managing containers: If you're running an Eclipse workbench, you can define containers based on Java projects and their class paths or based on plain Eclipse projects. Outside Eclipse, you can provide a set of file system paths to be scanned for models. All of these only differ in the bound instance of _IAllContainerState_ of the referring language. These will be described in detail in the following sections.
+p. Xtext offers a couple of strategies for managing containers: If you're running an Eclipse workbench, 
+you can define containers based on Java projects and their class paths or based on plain Eclipse projects. 
+Outside Eclipse, you can provide a set of file system paths to be scanned for models. All of these only 
+differ in the bound instance of _IAllContainerState_ of the referring language. These will be described 
+in detail in the following sections.
 
 !images/index_container.png(IContainer Management)!
  
 h5(#jdt_based_containers). JDT based container manager 
 
-As JDT is an Eclipse feature, this JDT based container management is only available in the UI scenario. It assumes so called _IPackageFragmentRoots_ as containers. An _IPackageFragmentRoot_ in JDT is the root of a tree of  Java model elements. It usually refers to 
-* in a source folder of a Java project,
-* in a referenced jar, 
-* on the class path of a referenced Java project, or
-* in the exported packages of a required PDE plug-in.
+As JDT is an Eclipse feature, this JDT based container management is only available in the UI scenario. 
+It assumes so called _IPackageFragmentRoots_ as containers. An _IPackageFragmentRoot_ in JDT is the 
+root of a tree of Java model elements. It usually refers to 
+* a source folder of a Java project,
+* a referenced jar, 
+* a class path entry of a referenced Java project, or
+* the exported packages of a required PDE plug-in.
 
-So for an element to be referable, its resource must be on the class path of the caller's Java project and it must be exported (as described above). 
+So for an element to be referable, its resource must be on the class path of the caller's Java project 
+and it must be exported (as described above). 
 
-As this strategy allows to reuse a lot of nice Java things like jars, OSGi, maven, etc. it is part of the default: You should not have to reconfigure anything to make it work. Nevertheless, if you messed something up, make sure you bind
+As this strategy allows to reuse a lot of nice Java things like jars, OSGi, maven, etc. it is part of 
+the default: You should not have to reconfigure anything to make it work. Nevertheless, if you messed 
+something up, make sure you bind
 
-bc.. public Class<? extends org.eclipse.xtext.resource.IContainer.Manager> bindIContainer$Manager() {
-  return org.eclipse.xtext.resource.containers.StateBasedContainerManager.class;
+bc.. public Class<? extends IContainer.Manager> bindIContainer$Manager() {
+  return StateBasedContainerManager.class;
 }
 
 p. in the runtime module and 
 
-bc.. public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> 
-		provideIAllContainersState() {
-	return org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();
-	// return org.eclipse.xtext.ui.shared.Access.getStrictJavaProjectsState();
+bc.. public Provider<IAllContainersState> provideIAllContainersState() {
+  return org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();
+  // return org.eclipse.xtext.ui.shared.Access.getStrictJavaProjectsState();
 }
 
-p. in the UI module of the referencing language. The latter looks a bit more difficult than a common binding, as we have to bind a global singleton to a Guice provider. The _StrictJavaProjectsState_ requires all elements to be on the class path, while the default _JavaProjectsState_ also allows models in non-source folders. 
+p. in the UI module of the referencing language. The latter looks a bit more difficult than a common 
+binding, as we have to bind a global singleton to a Guice provider. The _StrictJavaProjectsState_ 
+requires all elements to be on the class path, while the default _JavaProjectsState_ also allows models 
+in non-source folders. 
 
 h5(#project_based_containers). Eclipse project based containers
 
-If the class path based mechanism doesn't work for your case, Xtext offers an alternative container manager based on plain Eclipse projects: Each project acts as a container and the project references _Properties->Project References_ are the visible containers. 
+If the class path based mechanism doesn't work for your case, Xtext offers an alternative container 
+manager based on plain Eclipse projects: Each project acts as a container and the project references 
+_Properties->Project References_ are the visible containers. 
 
 In this case, your runtime module should define
 
-bc.. public Class<? extends org.eclipse.xtext.resource.IContainer.Manager> bindIContainer$Manager() {
-  return org.eclipse.xtext.resource.containers.StateBasedContainerManager.class;
+bc.. public Class<? extends IContainer.Manager> bindIContainer$Manager() {
+  return StateBasedContainerManager.class;
 }
 
 p. and the UI module should bind 
 
-bc.. public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> 
-		provideIAllContainersState() {
-	return org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();
+bc.. public Provider<IAllContainersState> provideIAllContainersState() {
+  return org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();
 }
 
 h5(#resource_set_containers). _ResourceSet_ based containers
 
-If you need an _IContainer.Manager_ that is independent of Eclipse projects, you can use the ${org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/ResourceSetBasedAllContainersState}. This one can be configured with a mapping of container handles to resource URIs.
+If you need an _IContainer.Manager_ that is independent of Eclipse projects, you can use the 
+${org.eclipse.xtext/src/org.eclipse.xtext.resource.containers.ResourceSetBasedAllContainersState}. 
+This one can be configured with a mapping of container handles to resource URIs.
 
-It is unlikely you want to use this strategy directly in your own code, but it is used in the backend of the MWE2 workflow component ${org.eclipse.xtext/src/org/eclipse/xtext/mwe/Reader}. This is responsible for reading in models in a workflow, e.g. for later code generation. The _Reader_ allows to either scan the whole classpath or a set of paths for all models therein. When paths are given, each path entry becomes an _IContainer_ of its own. In the following snippet,
+It is unlikely you want to use this strategy directly in your own code, but it is used in the back-end 
+of the MWE2 workflow component ${org.eclipse.xtext/src/org.eclipse.xtext.mwe.Reader}. This is responsible 
+for reading in models in a workflow, e.g. for later code generation. The _Reader_ allows to either scan 
+the whole class path or a set of paths for all models therein. When paths are given, each path entry 
+becomes an _IContainer_ of its own. In the following snippet,
 
 bc.. component = org.eclipse.xtext.mwe.Reader {
-	// lookup all resources on the classpath
-	// useJavaClassPath = true
+  // lookup all resources on the classpath
+  // useJavaClassPath = true
 	
-	// or define search scope explicitly
-	path = "src/models"
-	path = "src/further-models"
+  // or define search scope explicitly
+  path = "src/models"
+  path = "src/further-models"
 
-	...
+  ...
 }
  
 h3(#local_scoping). Local Scoping
 
-We now know how the outer world of referenceable elements can be defined in Xtext. Nevertheless, not everything is available in any context and with a global name. Rather than that, each context can usually have a different scope. As already stated, scopes can be nested, i.e. a scope can in addition to its own elements contain elements of a parent scope. When parent and child scope contain different elements with the same name, the parent scope's element will usually be _shadowed_ by the element from the child scope.      
+We now know how the outer world of referenceable elements can be defined in Xtext. Nevertheless, not 
+everything is available in any context and with a global name. Rather than that, each context can usually 
+have a different scope. As already stated, scopes can be nested, i.e. a scope can in addition to its 
+own elements contain elements of a parent scope. When parent and child scope contain different elements 
+with the same name, the parent scope's element will usually be _shadowed_ by the element from the child scope.      
 
-To illustrate that, let's have a look at Java: Java defines multiple kinds of scopes (object scope, type scope, etc.). For Java one would create the scope hierarchy as commented in the following example:
+To illustrate that, let's have a look at Java: Java defines multiple kinds of scopes 
+(object scope, type scope, etc.). For Java one would create the scope hierarchy as commented in the 
+following example:
 
 bc.. // file contents scope
 import static my.Constants.STATIC;
@@ -246,63 +382,98 @@ bc.. classpathScope{stuff from bin/}
 -> classpathScope{stuff from JRE System Library}
 -> NULLSCOPE{}
 
-p. Please find the motivation behind this and some additional details in "this blog post":http://blog.efftinge.de/2009/01/xtext-scopes-and-emf-index.html .
+p. Please find the motivation behind this and some additional details in 
+"this blog post":http://blog.efftinge.de/2009/01/xtext-scopes-and-emf-index.html .
 
 h4. Declarative scoping
 
-If you have to define scopes for certain contexts, the base class ${org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/AbstractDeclarativeScopeProvider} allows to do that in a declarative way. It looks up methods which have either of the following two signatures:
+If you have to define scopes for certain contexts, the base class 
+${org.eclipse.xtext/src/org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider} allows to do 
+that in a declarative way. It looks up methods which have either of the following two signatures:
 
 bc. IScope scope_<RefDeclaringEClass>_<Reference>(<ContextType> ctx, EReference ref)
 
 bc. IScope scope_<TypeToReturn>(<ContextType> ctx, EReference ref)
 
-The former is used when evaluating the scope for a specific cross reference and here _ContextReference_ corresponds to the name of this reference (prefixed with the name of the reference's declaring type and separated by an underscore). The _ref_ parameter represents this cross reference.
+The former is used when evaluating the scope for a specific cross reference and here _ContextReference_ 
+corresponds to the name of this reference (prefixed with the name of the reference's declaring type and 
+separated by an underscore). The _ref_ parameter represents this cross reference.
 
-The latter method signature is used when computing the scope for a given element type and is applicable to all cross references of that type. Here _TypeToReturn_ is the name of that type which also corresponds to the _type_ parameter. 
+The latter method signature is used when computing the scope for a given element type and is applicable 
+to all cross references of that type. Here _TypeToReturn_ is the name of that type which also corresponds 
+to the _type_ parameter. 
 
-So if you for example have a state machine with a  _Transition_ object owned by its source _State_ and you want to compute all reachable states (i.e. potential target states), the corresponding method could be declared as follows (assuming the cross reference is declared by the _Transition_ type and is called _target_):
+So if you for example have a state machine with a  _Transition_ object owned by its source _State_ and 
+you want to compute all reachable states (i.e. potential target states), the corresponding method could 
+be declared as follows (assuming the cross reference is declared by the _Transition_ type and is called _target_):
 
 bc. IScope scope_Transition_target(Transition this, EReference ref)
 
-If such a method does not exist, the implementation will try to find one for the context object's container. Thus in the example this would match a method with the same name but _State_ as the type of the first parameter. It will keep on walking the containment hierarchy until a matching method is found. This container delegation allows to reuse the same scope definition for elements in different places of the containment hierarchy. Also it may make the method easier to implement as the elements comprising the scope are quite often owned or referenced by a container of the context object. In the example the _State_ objects could for instance be owned by a containing _StateMachine_ object.
+If such a method does not exist, the implementation will try to find one for the context object's container. 
+Thus in the example this would match a method with the same name but _State_ as the type of the first 
+parameter. It will keep on walking the containment hierarchy until a matching method is found. This 
+container delegation allows to reuse the same scope definition for elements in different places of the 
+containment hierarchy. Also it may make the method easier to implement as the elements comprising the 
+scope are quite often owned or referenced by a container of the context object. In the example the 
+_State_ objects could for instance be owned by a containing _StateMachine_ object.
 
-If no method specific to the cross reference in question was found for any of the objects in the containment hierarchy, the implementation will start looking for methods matching the other signature (with the _EClass_ parameter). Again it will first attempt to match the context object. Thus in the example the signature first matched would be:
+If no method specific to the cross reference in question was found for any of the objects in the 
+containment hierarchy, the implementation will start looking for methods matching the other signature 
+(with the _EClass_ parameter). Again it will first attempt to match the context object. Thus in the 
+example the signature first matched would be:
 
 bc. IScope scope_State(Transition this, EReference ref)
 
-If no such method exists, the implementation will again try to find a method matching the context object's container objects. In the case of the state machine example you might want to declare the scope with available states at the state machine level:
+If no such method exists, the implementation will again try to find a method matching the context object's 
+container objects. In the case of the state machine example you might want to declare the scope with 
+available states at the state machine level:
 
 bc. IScope scope_State(StateMachine this, EReference ref)
 
-This scope can now be used for any cross references of type _State_ for context objects owned by the state machine.
+This scope can now be used for any cross references of type _State_ for context objects owned by the 
+state machine.
 
-h3. Imported namespace aware scoping
+h3. Imported Namespace-aware Scoping
 
-The imported namesapce aware scoping is based on qualified names and name spaces. It adds name space support to your language, which is comparable and similar to the one in Scala and C#. Scala and C# both allow to have multiple nested packages within one file and you can put imports per namespace, so that imported names are only visible within that namespace. See the domain model example: its scope provider extends ${org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider}.
+The imported namespace aware scoping is based on qualified names and namespaces. It adds namespace 
+support to your language, which is comparable and similar to the one in Scala and C#. Scala and C# both 
+allow to have multiple nested packages within one file and you can put imports per namespace, so that 
+imported names are only visible within that namespace. See the domain model example: its scope provider 
+extends ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider}.
 
 h4. ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.IQualifiedNameProvider}
 
-The ${org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider} makes use of the so called ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.IQualifiedNameProvider} service. It computes qualified names for EObjects. The default implementation (${org.eclipse.xtext/src/org.eclipse.xtext.scoping.impl.DefaultDeclarativeQualifiedNameProvider}) uses a simple name look up and concats the result to the qualified name of its parent object. 
+The ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider} 
+makes use of the so called ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.IQualifiedNameProvider} 
+service. It computes qualified names for EObjects. The default implementation 
+(${org.eclipse.xtext/src/org.eclipse.xtext.scoping.impl.DefaultDeclarativeQualifiedNameProvider}) uses 
+a simple name look up and concatenates the result to the qualified name of its parent object. 
 
-It also allows to override the name computation declaratively. The following snippet shows how you could make _Transitions_ in the statemachine example referable by giving them a name. Don't forget to bind your implementation in your runtime module. 
+It also allows to override the name computation declaratively. The following snippet shows how you could 
+make _Transitions_ in the state machine example referable by giving them a name. Don't forget to bind 
+your implementation in your runtime module. 
 
 bc.. FowlerDslQualifiedNameProvider extends DefaultDeclarativeQualifiedNameProvider {
-	public String qualifiedName(Transition t) {
-		if(t.getEvent() == null || !(t.eContainer() instanceof State)) 
-			return null;
-		else 
-			return ((State) t.eContainer()).getName() + "." t.getEvent().getName();
-	}
+  public String qualifiedName(Transition t) {
+    if(t.getEvent() == null || !(t.eContainer() instanceof State)) 
+      return null;
+    else 
+      return ((State) t.eContainer()).getName() + "." t.getEvent().getName();
+  }
 }
 
-h4. Importing name spaces
+h4. Importing Namespaces
 
-The _ImportedNamespaceAwareLocalScopeProvider_ looks up _EAttributes_ with name 'importNamespace' and interprets such as import statements. By default qualified names with or without a wildcard at the end are supported. For an import of a qualified name the simple name is made available as we know from e.g. Java, where
+The _ImportedNamespaceAwareLocalScopeProvider_ looks up _EAttributes_ with name 'importNamespace' and 
+interprets them as import statements. By default qualified names with or without a wildcard at the end 
+are supported. For an import of a qualified name the simple name is made available as we know from e.g. 
+Java, where
 
 bc. import java.util.Set;
 
 makes it possible to refer to 'java.util.Set' by its simple name 'Set'.
-Contrary to Java the import is not active for the whole file but only for the namespace it is declared in and its child namespaces. That is why you can write the following in the example DSL:
+Contrary to Java the import is not active for the whole file but only for the namespace it is declared 
+in and its child namespaces. That is why you can write the following in the example DSL:
 
 bc.. 
 package foo {
@@ -323,7 +494,7 @@ package bar {
   entity Foo {}
 }
 
-p. Of course the following would as well be ok:
+p. The following would as well be ok:
 
 bc.. 
 package bar {
@@ -331,5 +502,6 @@ package bar {
   entity Foo {}
 }
 
-p. See the JavaDocs and "this blog post":http://blog.efftinge.de/2009/07/xtext-scopes-and-emf-index-in-action.html for details.
+p. See the JavaDocs and "this blog post":http://blog.efftinge.de/2009/07/xtext-scopes-and-emf-index-in-action.html 
+for details.
 

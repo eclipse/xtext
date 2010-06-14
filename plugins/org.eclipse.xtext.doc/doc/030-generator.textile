@@ -85,12 +85,12 @@ their respective _name_ assigned via a reflective invocation _setName_. If one w
 can simply repeat the child assignment:
 
 bc.. child = com.mycompany.Person {
-	name = "Bob"
+	name = "Father"
 	child = {
-		name = "Mary"
+		name = "Son"
 	}
 	child = {
-		name = "Dave"
+		name = "Daughter"
 	}
 }
 
@@ -99,8 +99,8 @@ limitation to MWE2 specific implementations. This is conceptually very close to 
 the XML language in the "Spring Framework":http://www.springframework.org. 
 
 *Tip*
-__Whenever you are in an *.mwe2 file and wonder what kind of configuration the underlying component may accept: __
-__Just use the Content Assist in the MWE2 Editor or navigate directly to the declaration of the underlying Java __ 
+__Whenever you are in an *.mwe2 file and wonder what kind of configuration the underlying component may accept:__
+__Just use the Content Assist in the MWE2 Editor or navigate directly to the declaration of the underlying Java__ 
 __implementation by means of F3 (Go To Declaration).__
 
 This is the basic idea of the MWE2 language. There are of course a couple of additional concepts and features in the 
@@ -169,7 +169,7 @@ Workflow {
 			uri = grammarURI
 			fileExtensions = file.extensions
 
-			// Java API to access grammar elements (required by several other fragments)
+			// Java API to access grammar elements
 			fragment = grammarAccess.GrammarAccessFragment {}
 
 			/* more fragments to configure the language */
@@ -202,11 +202,11 @@ In the following table the most important standard generator fragments are liste
 
 |_.Class|_.Generated Artifacts|_.Related Documentation|
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment}|EMF code for generated models|"Model inference":#metamodelInference|
-|${org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment}|ANTLR grammar, parser, lexer and related services||
-|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment}|Access to the grammar||
-|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment}|EMF resource factory||
+|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment}|ANTLR grammar, parser, lexer and related services| |
+|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment}|Access to the grammar| |
+|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment}|EMF resource factory| |
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment}|Model-to-text serialization|"Serialization":#serialization|
-|${org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment}|Index-based scoping|"Index-based namespace scoping":#index_based|
+|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment}|Index-based scoping|"Index-based namespace scoping":#index_based|
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.validation.JavaValidatorFragment}|Model validation|"Model validation":#custom_validation|
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.formatting.FormatterFragment}|Code formatter|"Declarative formatter":#declarativeformatter|
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment}|Label provider|"Label provider":#labelProvider|
@@ -217,7 +217,6 @@ In the following table the most important standard generator fragments are liste
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment}|New project wizard|"Project wizard":#projectwizard|
 
 
-__*Important* Due to__ "IP-Problems":#antlr_ip_issue __with the code generator shipped with ANTLR 3 we're not allowed to ship this fragment at Eclipse. Therefore you'll have to download it separately from http://download.itemis.com or use the update site at *http://download.itemis.com/updates/*.__
 
 
 

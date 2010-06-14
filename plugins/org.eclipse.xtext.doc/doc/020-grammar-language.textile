@@ -833,7 +833,7 @@ RuleB : '[' name=ID ']';
 
 p. Note that declared terminal rules always get a higher priority then imported terminal rules.
 
-h2. Default tokens
+h2. Common Terminals
 
 Xtext ships with a default set of predefined, reasonable and often required terminal rules. This grammar is defined as follows:
 
