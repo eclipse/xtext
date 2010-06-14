@@ -11,9 +11,13 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Template Proposals</h1>
-<p>Xtext-based editors automatically support code templates. That means that you get the corresponding preference page where users can add and change template proposals. If you want to ship a couple of default templates, you have to put a file named 
-				<code class="code">templates.xml</code> inside the 
-				<code class="code">templates</code> directory of the generated ui-plugin. This file contains templates in a format as described in the 
+<p>Xtext-based editors automatically support code templates. That means that you get the corresponding 
+				preference page where users can add and change template proposals. If you want to ship a couple of 
+				default templates, you have to put a file named 
+				<span class="emphasis"><em>templates.xml</em></span> inside the 
+				<span class="emphasis"><em>templates</em></span> directory of 
+				the generated ui-plugin. This file contains templates in a format as described in the 
+
 				<a class="ulink" href="http://help.eclipse.org/ganymede/topic/org.eclipse.cdt.doc.user/tasks/cdt_t_imp_code_temp.htm" target="_new">Eclipse online help</a> .
 			</p>
 <p>
@@ -24,20 +28,41 @@
 <p>
 			
 </p>
-<p>By default Xtext registers ContextTypes for each Rule (
-				<code class="code">.[RuleName]</code>) and for each keyword (
-				<code class="code">.kw_[keyword]</code>), as long as the keywords are valid identifiers. If you don&rsquo;t like these defaults you&rsquo;ll have to subclass 
-				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/templates/XtextTemplateContextTypeRegistry.java?root=Modeling_Project&view=co" target="_new">XtextTemplateContextTypeRegistry</a> and configure it via 
-				<a class="link" href="">Guice</a>. 
+<p>By default Xtext registers 
+				<span class="emphasis"><em>ContextTypes</em></span> for each Rule (
+				<span class="emphasis"><em>.[RuleName]</em></span>) and for each 
+				keyword (
+				<span class="emphasis"><em>.kw</em></span>[keyword]_). If you don&rsquo;t 
+				like these defaults you&rsquo;ll have to subclass 
+
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/XtextTemplateContextTypeRegistry.java?root=Modeling_Project&view=co" target="_new">XtextTemplateContextTypeRegistry</a> 
+				and configure it via 
+				<a class="link" href="dependencyInjection.html#guicemodules" title="Xtext&rsquo;s module API">Guice</a>. 
 			</p>
-<p>In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set of TemplateVariableResolvers to resolve special variable types inside a given template (i.e. TemplateContext). Besides the standard template variables available in 
-				<code class="code">org.eclipse.jface.text.templates.GlobalTemplateVariables</code> like ${user}, ${date}, ${time}, ${cursor}, etc., these TemplateVariableResolver support the automatic resolving of CrossReferences (type 
-				<code class="code">CrossReferences</code>) and Enumerations (type 
-				<code class="code">Enum</code>) like it is explained in the following sections.
+<p>In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set 
+				of 
+				<span class="emphasis"><em>TemplateVariableResolvers</em></span> to resolve special variable types inside a given template 
+				(i.e. 
+				<span class="emphasis"><em>TemplateContext</em></span>). Besides the standard template variables available in 
+
+				<span class="emphasis"><em>org.eclipse.jface.text.templates.GlobalTemplateVariables</em></span> like 
+				<span class="emphasis"><em>${user}</em></span>, 
+				<span class="emphasis"><em>${date}</em></span>, 
+				<span class="emphasis"><em>${time}</em></span>, 
+
+				<span class="emphasis"><em>${cursor}</em></span>, etc., these 
+				<span class="emphasis"><em>TemplateVariableResolver</em></span> support the automatic resolving of 
+				CrossReferences (type 
+				<span class="emphasis"><em>CrossReferences</em></span>) and Enumerations (type 
+				<span class="emphasis"><em>Enum</em></span>) like it is explained in the 
+				following sections.
 			</p>
 <p>It is best practice to edit the templates in the preferences page, export them into the 
-				<code class="code">templates.xml</code>-file and put this one into the 
-				<code class="code">templates</code> folder of your ui-plugin. However, these templates will not be visible by default. To fix it, you have to manually edit the xml-file and insert an ID attribute for each template element.
+
+				<span class="emphasis"><em>templates.xml</em></span>-file and put this one into the 
+				<span class="emphasis"><em>templates</em></span> folder of your ui-plugin. However, these 
+				templates will not be visible by default. To fix it, you have to manually edit the xml-file and insert 
+				an ID attribute for each template element.
 			</p>
 <div class="section" title="CrossReference TemplateVariableResolver">
 <div class="titlepage">
@@ -49,13 +74,15 @@
 </div>
 </div>
 <p>Xtext comes with a specific template variable resolver 
-					<code class="code">org.eclipse.jface.text.templates.TemplateVariableResolver</code>) called 
-					<code class="code">CrossReferenceResolver</code>, which can be used to place cross references within a template.
+					<span class="emphasis"><em>TemplateVariableResolver</em></span> called 
+
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/CrossReferenceTemplateVariableResolver.java?root=Modeling_Project&view=co" target="_new">CrossReferenceTemplateVariableResolver</a>, 
+					which can be used to place cross references within a template.
 				</p>
 <p>The syntax is as follows:</p>
 <div class="literallayout">
 <p>
-<code class="code">${displayText:CrossReference('MyType.myRef')}<br>
+<code class="code">${displayText:CrossReference([MyPackageName.]MyType.myRef)}<br>
 
 </code>
 </p>
@@ -64,7 +91,7 @@
 <div class="literallayout">
 <p>
 <code class="code">&lt;template&nbsp;name="transition"&nbsp;description="event&nbsp;transition"&nbsp;id="transition"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;context="org.eclipse.xtext.example.FowlerDsl.Transition"&nbsp;enabled="true"&gt;<br>
+&nbsp;&nbsp;context="org.eclipse.xtext.example.FowlerDsl.Transition"&nbsp;enabled="true"&gt;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;${event:CrossReference('Transition.event')}&nbsp;=&gt;&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;	${state:CrossReference('Transition.state')<br>
 &lt;/template&gt;<br>
@@ -75,7 +102,7 @@
 </p>
 </div>
 <p>yields the text 
-					<code class="code">event =&gt; state</code> and allows selecting any events and states using a drop down.
+					<span class="emphasis"><em>event =&gt; state</em></span> and allows selecting any events and states using a drop down.
 				</p>
 <p>
 					
@@ -96,15 +123,17 @@
 </div>
 </div>
 <p>The 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/templates/EnumTemplateVariableResolver.java?root=Modeling_Project&view=co" target="_new">EnumTemplateVariableResolver</a> resolves a template variable to 
-					<code class="code">EEnumLiteral</code> literals
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.java?root=Modeling_Project&view=co" target="_new">EnumTemplateVariableResolver</a> 
+					resolves a template variable to 
+					<span class="emphasis"><em>EEnumLiteral</em></span> literals
 					which are assignment-compatible to the enumeration type declared as the first parameter of the the 
-					<code class="code">Enum</code> 
-					<code class="code">TemplateVariable</code>. 
-				</p>The syntax is as follows:   
-				<div class="literallayout">
+					<span class="emphasis"><em>Enum</em></span> 
+					<span class="emphasis"><em>TemplateVariable</em></span>. 
+				</p>
+<p>The syntax is as follows:   </p>
+<div class="literallayout">
 <p>
-<code class="code">${displayText:Enum('Visibility')<br>
+<code class="code">${displayText:Enum([MyPackage.]EnumType)<br>
 
 </code>
 </p>
@@ -113,11 +142,11 @@
 <div class="literallayout">
 <p>
 <code class="code">&lt;template&nbsp;name="Operation"&nbsp;description="template&nbsp;for&nbsp;an&nbsp;Operation"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id="org.eclipse.xtext.example.Domainmodel.Operation"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context="org.eclipse.xtext.example.Domainmodel.Operation"&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	enabled="true"&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${visibility:Enum('Visibility')}&nbsp;op&nbsp;${name}(${cursor}):<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${type:CrossReference('Operation.type')}<br>
+&nbsp;&nbsp;id="org.eclipse.xtext.example.Domainmodel.Operation"<br>
+&nbsp;&nbsp;context="org.eclipse.xtext.example.Domainmodel.Operation"<br>
+&nbsp;&nbsp;enabled="true"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;${visibility:Enum('Visibility')}&nbsp;op&nbsp;${name}(${cursor}):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${type:CrossReference('Operation.type')}<br>
 &lt;/template&gt;<br>
 
 <br>
@@ -126,8 +155,10 @@
 </p>
 </div>
 <p>yields the text 
-					<code class="code">public op name(): type</code> where the display text &lsquo;public&rsquo; is replaced with a drop down filled with the literal values as defined in the Visibility 
-					<code class="code">EENumeration</code>. Also, &lsquo;name&rsquo; and &lsquo;type&rsquo; are placeholders.
+					<span class="emphasis"><em>public op name(): type</em></span> where the display text &lsquo;public&rsquo; is replaced with a drop 
+					down filled with the literal values as defined in the Visibility 
+					<span class="emphasis"><em>EEnumeration</em></span>. Also, &lsquo;name&rsquo; and &lsquo;type&rsquo; 
+					are template variables.
 				</p>
 <p>
 					

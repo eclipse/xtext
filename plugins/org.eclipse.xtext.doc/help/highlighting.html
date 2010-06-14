@@ -74,27 +74,25 @@
 &nbsp;&nbsp;&nbsp;&nbsp;implements&nbsp;IHighlightingConfiguration&nbsp;{<br>
 
 <br>
-	public&nbsp;static&nbsp;final&nbsp;String&nbsp;KEYWORD_ID&nbsp;=&nbsp;"keyword";<br>
-	public&nbsp;static&nbsp;final&nbsp;String&nbsp;COMMENT_ID&nbsp;=&nbsp;"comment";<br>
+&nbsp;&nbsp;public&nbsp;static&nbsp;final&nbsp;String&nbsp;KEYWORD_ID&nbsp;=&nbsp;"keyword";<br>
+&nbsp;&nbsp;public&nbsp;static&nbsp;final&nbsp;String&nbsp;COMMENT_ID&nbsp;=&nbsp;"comment";<br>
 
 <br>
-	public&nbsp;void&nbsp;configure(IHighlightingConfigurationAcceptor&nbsp;acceptor)&nbsp;{<br>
-		acceptor.acceptDefaultHighlighting(KEYWORD_ID,&nbsp;"Keyword",&nbsp;<br>
-				keywordTextStyle());<br>
-		acceptor.acceptDefaultHighlighting(COMMENT_ID,&nbsp;"Comment",&nbsp;//&nbsp;...<br>
-		//&nbsp;...<br>
-	}<br>
-	
-<br>
-	public&nbsp;TextStyle&nbsp;keywordTextStyle()&nbsp;{<br>
-		TextStyle&nbsp;textStyle&nbsp;=&nbsp;new&nbsp;TextStyle();<br>
-		textStyle.setColor(new&nbsp;RGB(127,&nbsp;0,&nbsp;85));<br>
-		textStyle.setStyle(SWT.BOLD);<br>
-		return&nbsp;textStyle;<br>
-	}<br>
-	
-<br>
-	//&nbsp;...<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;configure(IHighlightingConfigurationAcceptor&nbsp;acceptor)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(KEYWORD_ID,&nbsp;"Keyword",&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keywordTextStyle());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(COMMENT_ID,&nbsp;"Comment",&nbsp;//&nbsp;...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;...<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;public&nbsp;TextStyle&nbsp;keywordTextStyle()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TextStyle&nbsp;textStyle&nbsp;=&nbsp;new&nbsp;TextStyle();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setColor(new&nbsp;RGB(127,&nbsp;0,&nbsp;85));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setStyle(SWT.BOLD);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;textStyle;<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;//&nbsp;...<br>
 }<br>
 
 <br>
@@ -150,18 +148,17 @@
 <p>
 <code class="code">public&nbsp;void&nbsp;provideHighlightingFor(XtextResource&nbsp;resource,&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;IHighlightedPositionAcceptor&nbsp;acceptor)&nbsp;{<br>
-	if&nbsp;(resource&nbsp;==&nbsp;null)<br>
-		return;<br>
-		
-<br>
-	Iterable&lt;AbstractNode&gt;&nbsp;allNodes&nbsp;=&nbsp;NodeUtil.getAllContents(<br>
-	&nbsp;&nbsp;resource.getParseResult().getRootNode());<br>
-	for&nbsp;(AbstractNode&nbsp;abstractNode&nbsp;:&nbsp;allNodes)&nbsp;{<br>
-		if&nbsp;(abstractNode.getGrammarElement()&nbsp;instanceof&nbsp;CrossReference)&nbsp;{<br>
-		&nbsp;&nbsp;acceptor.addPosition(node.getOffset(),&nbsp;node.getLength(),&nbsp;<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;MyHighlightingConfiguration.CROSS_REF);<br>
-		}<br>
-	}<br>
+&nbsp;&nbsp;if&nbsp;(resource&nbsp;==&nbsp;null)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;Iterable&lt;AbstractNode&gt;&nbsp;allNodes&nbsp;=&nbsp;NodeUtil.getAllContents(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;resource.getParseResult().getRootNode());<br>
+&nbsp;&nbsp;for&nbsp;(AbstractNode&nbsp;abstractNode&nbsp;:&nbsp;allNodes)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(abstractNode.getGrammarElement()&nbsp;instanceof&nbsp;CrossReference)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;acceptor.addPosition(node.getOffset(),&nbsp;node.getLength(),&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyHighlightingConfiguration.CROSS_REF);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
 }<br>
 
 <br>
@@ -179,26 +176,24 @@
 <p>
 <code class="code">public&nbsp;class&nbsp;HighlightingConfiguration&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;implements&nbsp;IHighlightingConfiguration&nbsp;{<br>
-	
-<br>
-	//&nbsp;lexical&nbsp;stuff&nbsp;goes&nbsp;here&nbsp;<br>
-	//&nbsp;..<br>
-	public&nbsp;final&nbsp;static&nbsp;String&nbsp;CROSS_REF&nbsp;=&nbsp;"CrossReference";&nbsp;<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;//&nbsp;lexical&nbsp;stuff&nbsp;goes&nbsp;here&nbsp;<br>
+&nbsp;&nbsp;//&nbsp;..<br>
+&nbsp;&nbsp;public&nbsp;final&nbsp;static&nbsp;String&nbsp;CROSS_REF&nbsp;=&nbsp;"CrossReference";&nbsp;<br>
 
 <br>
-	public&nbsp;void&nbsp;configure(IHighlightingConfigurationAcceptor&nbsp;acceptor)&nbsp;{<br>
-		//&nbsp;lexical&nbsp;stuff&nbsp;goes&nbsp;here&nbsp;<br>
-		//&nbsp;..<br>
-		acceptor.acceptDefaultHighlighting(CROSS_REF,&nbsp;<br>
-		&nbsp;&nbsp;"Cross&nbsp;References",&nbsp;crossReferenceTextStyle());<br>
-	}<br>
-	
-<br>
-	public&nbsp;TextStyle&nbsp;crossReferenceTextStyle()&nbsp;{<br>
-		TextStyle&nbsp;textStyle&nbsp;=&nbsp;new&nbsp;TextStyle();<br>
-		textStyle.setStyle(SWT.ITALIC);<br>
-		return&nbsp;textStyle;<br>
-	}<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;configure(IHighlightingConfigurationAcceptor&nbsp;acceptor)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;lexical&nbsp;stuff&nbsp;goes&nbsp;here&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;..<br>
+&nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(CROSS_REF,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Cross&nbsp;References",&nbsp;crossReferenceTextStyle());<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;public&nbsp;TextStyle&nbsp;crossReferenceTextStyle()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TextStyle&nbsp;textStyle&nbsp;=&nbsp;new&nbsp;TextStyle();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setStyle(SWT.ITALIC);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;textStyle;<br>
+&nbsp;&nbsp;}<br>
 }<br>
 
 <br>

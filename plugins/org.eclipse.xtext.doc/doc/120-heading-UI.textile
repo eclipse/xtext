@@ -1,12 +1,13 @@
 
 h1. IDE concepts
 
-For the following part we will refer to a concrete example grammar in order to explain certain aspect of the UI more clearly. The used example grammar is as follows:
+For the following part we will refer to a concrete example grammar in order to explain certain aspect 
+of the UI more clearly. The used example grammar is as follows:
 
 bc.. grammar org.eclipse.text.documentation.Sample 
     with org.eclipse.xtext.common.Terminals
 
-generate gen 'http://www.eclipse.org/xtext/documentation/Sample' as gen
+generate gen 'http://www.eclipse.org/xtext/documentation/Sample'
 
 Model :
   "model" intAttribute=INT (stringDescription=STRING)? "{" 

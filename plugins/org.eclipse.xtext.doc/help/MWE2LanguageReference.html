@@ -37,7 +37,7 @@
 </ul>
 </div>
 <p>Let&rsquo;s consider the follow short example module and 
-				<code class="code">SampleClass</code> to 
+				<span class="emphasis"><em>SampleClass</em></span> to 
 				explain these concepts.
 			</p>
 <div class="literallayout">
@@ -84,45 +84,45 @@ public&nbsp;class&nbsp;SampleClass&nbsp;{<br>
 </div>
 </div>
 <p>The module 
-					<code class="code">com.mycompany.Example</code> defines a root component of 
+					<span class="emphasis"><em>com.mycompany.Example</em></span> defines a root component of 
 					type 
-					<code class="code">com.mycompany.SampleClass</code>. It is possible to use the simple 
+					<span class="emphasis"><em>com.mycompany.SampleClass</em></span>. It is possible to use the simple 
 					class-name because MWE2 uses the very same visibility rules as the 
 					Java compiler. Classes that are in the same package as the module 
 					can be referenced by their simple name. The same rule applies for 
 					classes from the 
-					<code class="code">java.lang</code> package. For convenience reasons is the 
+					<span class="emphasis"><em>java.lang</em></span> package. For convenience reasons is the 
 					package 
-					<code class="code">org.eclipse.emf.mwe2.runtime.workflow</code> implicitly imported 
+					<span class="emphasis"><em>org.eclipse.emf.mwe2.runtime.workflow</em></span> implicitly imported 
 					as well as it exposes some library workflow components. However, the
-					imports are more flexible since MWE2-imports can be relative, e.g. 
+					imports are more flexible then in Java since MWE2-imports can be relative, e.g. 
 					the 
-					<code class="code">import java.*</code> resolves the reference 
-					<code class="code">util.ArrayList</code> to 
+					<span class="emphasis"><em>import java.*</em></span> resolves the reference 
+					<span class="emphasis"><em>util.ArrayList</em></span> to 
 
-					<code class="code">java.util.ArrayList</code>.  
+					<span class="emphasis"><em>java.util.ArrayList</em></span>.  
 				</p>
 <p>The root instance of type 
-					<code class="code">SampleClass</code> has to be configured 
+					<span class="emphasis"><em>SampleClass</em></span> has to be configured 
 					after it has been created. Therefore the method 
-					<code class="code">setSingleValue</code> 
-					will be called at first. The parameter given parameter is 
+					<span class="emphasis"><em>setSingleValue</em></span> 
+					will be called at first. The given parameter is 
 
-					<code class="code">'a string'</code>. The method is identified by its name which starts with 
+					<span class="emphasis"><em>'a string'</em></span>. The method is identified by its name which starts with 
 
-					<code class="code">set</code>. To allow to assign multi-value properties, MWE provides 
-					access to methods call 
-					<code class="code">add*</code> as well. 
+					<span class="emphasis"><em>set</em></span>. To allow to assign multi-value properties, MWE provides 
+					access to methods called 
+					<span class="emphasis"><em>add*</em></span> as well. 
 				</p>
 <p>If the right side of the assignment in the workflow file does not 
 					define an explicit class, its type is inferred from the method 
 					parameter. The line 
-					<code class="code">child = {}</code> is equivalent to 
+					<span class="emphasis"><em>child = {}</em></span> is equivalent to 
 
-					<code class="code">child = SampleClass {}</code> and creates a new instance of 
-					<code class="code">SampleClass</code>.
+					<span class="emphasis"><em>child = SampleClass {}</em></span> and creates a new instance of 
+					<span class="emphasis"><em>SampleClass</em></span>.
 				</p>
-<p>MWE2 ships with a nice tool support. The editor will provide 
+<p>MWE2 ships with nice tool support. The editor will provide 
 					content assist for the allowed types and highlight incompatible 
 					assignments. The available properties for Java classes will be 
 					proposed as well.</p>
@@ -139,12 +139,12 @@ public&nbsp;class&nbsp;SampleClass&nbsp;{<br>
 <p>As MWE2 modules have a fully qualified name, it is possible to refer
 					to them from other modules. The type of the module is derived from
 					the type of its root component. The 
-					<code class="code">com.mycompany.Example</code> can be
+					<span class="emphasis"><em>com.mycompany.Example</em></span> can be
 					assigned at any place where a 
-					<code class="code">com.mycompany.SampleClass</code> is expected.
+					<span class="emphasis"><em>com.mycompany.SampleClass</em></span> is expected.
 				</p>
 <p>Let&rsquo;s create a second module 
-					<code class="code">com.mycompany.Second</code> like this:
+					<span class="emphasis"><em>com.mycompany.Second</em></span> like this:
 				</p>
 <div class="literallayout">
 <p>
@@ -162,20 +162,20 @@ SampleClass&nbsp;{<br>
 </p>
 </div>
 <p>The 
-					<code class="code">child</code> value will be assigned to an instance of 
-					<code class="code">SampleClass</code> 
+					<span class="emphasis"><em>child</em></span> value will be assigned to an instance of 
+					<span class="emphasis"><em>SampleClass</em></span> 
 					that is configured as in the first example workflow. This enables
 					nice composition and a very focused, reusable component design. 
 				</p>
 <p>As the same rules apply in MWE2 like in Java, the module 
 
-					<code class="code">com.mycompany.sub.Second</code> has to be defined in a file called 
+					<span class="emphasis"><em>com.mycompany.sub.Second</em></span> has to be defined in a file called 
 
-					<code class="code">Second.mwe2</code> in the package 
-					<code class="code">com.mycompany.sub</code>. The import semantic
+					<span class="emphasis"><em>Second.mwe2</em></span> in the package 
+					<span class="emphasis"><em>com.mycompany.sub</em></span>. The import semantic
 					for other modules is the same as for classes. The import statement
 					allows to refer to 
-					<code class="code">com.mycompany.Example</code> with a shortened name.
+					<span class="emphasis"><em>com.mycompany.Example</em></span> with a shortened name.
 				</p>
 </div>
 <div class="section" title="Properties">
@@ -192,7 +192,7 @@ SampleClass&nbsp;{<br>
 					to allow for easier external customization. The exemplary component 
 					definition was only changed slightly by introducing a property 
 
-					<code class="code">value</code>.
+					<span class="emphasis"><em>value</em></span>.
 				</p>
 <div class="literallayout">
 <p>
@@ -211,15 +211,15 @@ SampleClass&nbsp;{<br>
 </div>
 <p>The type of the property will be derived from the default value 
 					similar to the mechanism that is already known from 
-					<code class="code">set</code>- and 
+					<span class="emphasis"><em>set</em></span>- and 
 
-					<code class="code">add</code>-methods. If no default value is given, 
-					<code class="code">java.lang.String</code> will
+					<span class="emphasis"><em>add</em></span>-methods. If no default value is given, 
+					<span class="emphasis"><em>java.lang.String</em></span> will
 					be assumed. However, properties are not limited to strings. The 
 					second built in type is boolean via the familiar literals 
-					<code class="code">true</code> and
+					<span class="emphasis"><em>true</em></span> and
 
-					<code class="code">false</code>. More flexibility is available via actual component literals.
+					<span class="emphasis"><em>false</em></span>. More flexibility is available via actual component literals.
 				</p>
 <div class="literallayout">
 <p>
@@ -289,7 +289,7 @@ SampleClass&nbsp;{<br>
 					properties. The second one has no default value assigned and is 
 					thereby considered to be mandatory. The mandatory value must be assigned
 					if we reuse 
-					<code class="code">org.mycompany.Example</code> in another module like this:
+					<span class="emphasis"><em>org.mycompany.Example</em></span> in another module like this:
 				</p>
 <div class="literallayout">
 <p>
@@ -310,18 +310,18 @@ var&nbsp;newMandatory<br>
 <p>Note that it is even possible to reuse another module as the root
 					component of a new module. In this case we set the mandatory 
 					property of 
-					<code class="code">Example</code> to a specific constant value while the previously
+					<span class="emphasis"><em>Example</em></span> to a specific constant value while the previously
 					optional value is now redefined as mandatory by means of a new property
 					without a default value.
 				</p>
 <p>It is not only possible to define mandatory properties for MWE2 
 					modules but for classes as well. Therefore MWE2 ships with the 
 
-					<code class="code">Mandatory</code> annotation. If a 
-					<code class="code">set</code>- or 
-					<code class="code">add</code>-method is marked as
+					<span class="emphasis"><em>@Mandatory</em></span> annotation. If a 
+					<span class="emphasis"><em>set</em></span>- or 
+					<span class="emphasis"><em>add</em></span>-method is marked as
 
-					<code class="code">mandatory</code>, the module validation will fail if no value was assigned
+					<span class="emphasis"><em>mandatory</em></span>, the module validation will fail if no value was assigned
 					to that feature.
 				</p>
 </div>
@@ -339,7 +339,7 @@ var&nbsp;newMandatory<br>
 					it created from a class literal or from another component. This allows
 					to refer to previously created and configured instances. Named instances
 					can come handy for notification and call-back mechanisms or more general
-					in terms of defined life-cylce events. </p>
+					in terms of defined life-cycle events. </p>
 <p>If we wanted to assign the created instance to a property of itself,
 					we could use the following syntax:</p>
 <div class="literallayout">
@@ -373,7 +373,7 @@ SampleClass&nbsp;:&nbsp;self&nbsp;{<br>
 					where the properties itself have the very same name as the component&rsquo;s
 					feature. To avoid the overall repetition of assignments, MWE2 offers
 					the possibility to use the 
-					<code class="code">auto-inject</code> modifier on the component 
+					<span class="emphasis"><em>auto-inject</em></span> modifier on the component 
 					literal:
 				</p>
 <div class="literallayout">
@@ -392,8 +392,8 @@ SampleClass&nbsp;auto-inject&nbsp;{<br>
 </div>
 <p>This example will implicitly assign the value of the property
 
-					<code class="code">child</code> to the feature 
-					<code class="code">child</code> of the root component. This is especially
+					<span class="emphasis"><em>child</em></span> to the feature 
+					<span class="emphasis"><em>child</em></span> of the root component. This is especially
 					useful for highly configurable workflows that expose dozens of optional
 					parameters each of which can be assigned to one or more components.
 				</p>

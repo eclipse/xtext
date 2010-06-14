@@ -38,7 +38,7 @@
 <div class="literallayout">
 <p>
 <code class="code">CrossReference&nbsp;:<br>
-&nbsp;&nbsp;'['&nbsp;ReferencedEClass&nbsp;('|'&nbsp;terminal=AbstractTerminal)?&nbsp;']'<br>
+&nbsp;&nbsp;'['&nbsp;type=ReferencedEClass&nbsp;('|'&nbsp;terminal=CrossReferenceableTerminal)?&nbsp;']'<br>
 ;<br>
 
 <br>
@@ -50,7 +50,7 @@
 <div class="literallayout">
 <p>
 <code class="code">ReferringType&nbsp;:<br>
-&nbsp;&nbsp;'ref'&nbsp;referencedObject=[Entity|(ID|STRING)]<br>
+&nbsp;&nbsp;'ref'&nbsp;referencedObject=[Entity|STRING]<br>
 ;<br>
 
 <br>
@@ -62,31 +62,41 @@
 					<a class="link" href="metamodelInference.html" title="Ecore model inference">Ecore model inference</a> would create an 
 					<span class="emphasis"><em>EClass</em></span> 
 					<span class="emphasis"><em>ReferringType</em></span> with an 
-					<span class="emphasis"><em>EReference</em></span> _referencedObject of type 
+
+					<span class="emphasis"><em>EReference</em></span> 
+					<span class="emphasis"><em>referencedObject</em></span> of type 
 					<span class="emphasis"><em>Entity</em></span> (
-					<span class="emphasis"><em>containment=false</em></span>). The referenced object would be identified either by an 
-					<span class="emphasis"><em>ID</em></span> or a 
-					<span class="emphasis"><em>STRING</em></span> and the surrounding information in the current context (see 
+					<span class="emphasis"><em>containment=false</em></span>). The referenced object would 
+					be identified either by a 
+					<span class="emphasis"><em>STRING</em></span> and the surrounding information in the current context 
+					(see 
 					<a class="link" href="scoping.html" title="Scoping">scoping</a>). If you do not use 
 					<span class="emphasis"><em>generate</em></span> but 
-					<span class="emphasis"><em>import</em></span> an existing Ecore model, the class 
+					<span class="emphasis"><em>import</em></span> an existing Ecore model, 
+					the class 
 					<span class="emphasis"><em>ReferringType</em></span> (or one of its super types) would need to have an 
 					<span class="emphasis"><em>EReference</em></span> of type 
+
 					<span class="emphasis"><em>Entity</em></span> (or one of its super types) declared. Also the 
-					<span class="emphasis"><em>EReference</em></span>'s containment property needs to be set to 
+					<span class="emphasis"><em>EReference</em></span>'s containment and container 
+					properties needs to be set to 
 					<span class="emphasis"><em>false</em></span>. 
 				</p>
 </div>
-<div class="section" title="Default runtime behavior / lazy linking">
+<div class="section" title="Default runtime behavior &ndash; Lazy Linking">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="Defaultruntimebehaviorlazylinking"></a>Default runtime behavior / lazy linking</h3>
+<a name="DefaultruntimebehaviorLazyLinking"></a>Default runtime behavior &ndash; Lazy Linking</h3>
 </div>
 </div>
 </div>
-<p>Xtext uses lazy linking by default and we encourage users to stick to this, because it provides a lot of advantages. One is improved performance in all scenarios where you don&rsquo;t have to load the whole closure of all transitively referenced resources. Also it automatically solves situation where one link relies on other links. Though cyclic linking dependencies are not supported by Xtext at all. </p>
+<p>Xtext uses lazy linking by default and we encourage users to stick to this because it provides a 
+					many advantages. One of which is improved performance in all scenarios where you don&rsquo;t have to load 
+					the whole closure of all transitively referenced resources. Furthermore it automatically solves 
+					situations where one link relies on other links. Though cyclic linking dependencies are not 
+					supported by Xtext at all. </p>
 <p>When parsing a given input string, say</p>
 <div class="literallayout">
 <p>
@@ -95,23 +105,39 @@
 </code>
 </p>
 </div>
-<p>The 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinker.java?root=Modeling_Project&view=co" target="_new">LazyLinker</a> first creates an EMF proxy and sets on the corresponding 
-					<span class="emphasis"><em>EReference</em></span>. In EMF a proxy is described by a URI, which points to the real 
-					<span class="emphasis"><em>EObject</em></span>. In the case of lazy linking the stored URI comprises of the context information given at parse time, which is the 
+<p>the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinker.java?root=Modeling_Project&view=co" target="_new">LazyLinker</a> first creates an EMF proxy and 
+					assigns it to the corresponding 
+					<span class="emphasis"><em>EReference</em></span>. In EMF a proxy is described by a URI, which points to the 
+					real 
+					<span class="emphasis"><em>EObject</em></span>. In the case of lazy linking the stored URI comprises of the context information given 
+					at parse time, which is the 
 					<span class="emphasis"><em>EObject</em></span> containing the cross reference, the actual 
-					<span class="emphasis"><em>EReference</em></span>, the index (in case it&rsquo;s a multi-valued cross reference) and the string which represented the cross link in the concrete syntax. The latter usually corresponds to the name of the referenced 
+					<span class="emphasis"><em>EReference</em></span>, the 
+					index (in case it&rsquo;s a multi-valued cross reference) and the string which represented the cross link 
+					in the concrete syntax. The latter usually corresponds to the name of the referenced 
 					<span class="emphasis"><em>EObject</em></span>. 
 					In EMF a URI consists of information about the resource the 
-					<span class="emphasis"><em>EObject</em></span> is contained in as well as a so called fragment part, which is used to find the 
-					<span class="emphasis"><em>EObject</em></span> within that resource. When an  EMF proxy is resolved, the current 
-					<span class="emphasis"><em>ResourceSet</em></span> is asked. The resource set uses the first part to obtain (i.e. load if it is not already loaded) the resource. Then the resource is asked to return the 
+					<span class="emphasis"><em>EObject</em></span> is contained in as well as a so 
+					called fragment part, which is used to find the 
+					<span class="emphasis"><em>EObject</em></span> within that resource. When an  EMF proxy 
+					is resolved, the current 
+					<span class="emphasis"><em>ResourceSet</em></span> is asked. The resource set uses the first part to obtain 
+					(i.e. load if it is not already loaded) the resource. Then the resource is asked to return the 
+
 					<span class="emphasis"><em>EObject</em></span> based on the fragment in the URI. The actual cross reference resolution is done by 
-					<span class="emphasis"><em>LazyLinkingResource.getEObject(String)</em></span> which receives the fragment and delegates to the implementation of the 
-					<span class="emphasis"><em>ILinkingService</em></span>.  The default implementation in turn delegates to the &ldquo;scopes API&rdquo;#scoping.
+
+					<span class="emphasis"><em>LazyLinkingResource.getEObject(String)</em></span> which receives the fragment and delegates to the implementation 
+					of the 
+					<span class="emphasis"><em>ILinkingService</em></span>. The default implementation in turn delegates to the 
+					<a class="link" href="scoping.html" title="Scoping">scoping API</a>.
 				</p>
 <p>A simple implementation of the linking service (the 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/DefaultLinkingService.java?root=Modeling_Project&view=co" target="_new">DefaultLinkingService</a>) is shipped with Xtext and used for any grammar per default. Usually any necessary customization of the linking behavior can best be described using the &ldquo;scopes API&rdquo;#scoping.
+
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/DefaultLinkingService.java?root=Modeling_Project&view=co" target="_new">DefaultLinkingService</a>) is shipped with Xtext 
+					and used for any grammar per default. Usually any necessary customization of the linking behavior 
+					can best be described using the 
+					<a class="link" href="scoping.html" title="Scoping">scoping API</a>.
 				</p>
 </div>
 </body>

@@ -6,7 +6,7 @@
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="index.html" title="Xtext User Guide">
-<link rel="prev" href="Defaulttokens.html" title="Default tokens">
+<link rel="prev" href="CommonTerminals.html" title="Common Terminals">
 <link rel="next" href="dependencyInjection.html" title="Dependency Injection in Xtext with Google Guice">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -29,7 +29,7 @@
 
 				<span class="emphasis"><em>plugin.xml</em></span>, 
 				<span class="emphasis"><em>MANIFEST.MF</em></span> and the 
-				<a class="link" href="">Guice modules</a>.
+				<a class="link" href="dependencyInjection.html#guicemodules" title="Xtext&rsquo;s module API">Guice modules</a>.
 			</p>
 <p>Xtext&rsquo;s generator leverages 
 				<a class="link" href="MWE2.html" title="MWE2">MWE2 &ndash; the modeling workflow engine</a> 
@@ -146,12 +146,12 @@ public&nbsp;class&nbsp;CreatePersons&nbsp;{<br>
 <div class="literallayout">
 <p>
 <code class="code">child&nbsp;=&nbsp;com.mycompany.Person&nbsp;{<br>
-	name&nbsp;=&nbsp;"Bob"<br>
+	name&nbsp;=&nbsp;"Father"<br>
 	child&nbsp;=&nbsp;{<br>
-		name&nbsp;=&nbsp;"Mary"<br>
+		name&nbsp;=&nbsp;"Son"<br>
 	}<br>
 	child&nbsp;=&nbsp;{<br>
-		name&nbsp;=&nbsp;"Dave"<br>
+		name&nbsp;=&nbsp;"Daughter"<br>
 	}<br>
 }<br>
 
@@ -168,8 +168,10 @@ public&nbsp;class&nbsp;CreatePersons&nbsp;{<br>
 <p>
 					
 <span class="bold"><strong>Tip</strong></span>
-					__Whenever you are in an *.mwe2 file and wonder what kind of configuration the underlying component may accept: __
-					__Just use the Content Assist in the MWE2 Editor or navigate directly to the declaration of the underlying Java __ 
+
+					<span class="italic">Whenever you are in an *.mwe2 file and wonder what kind of configuration the underlying component may accept:</span>
+
+					<span class="italic">Just use the Content Assist in the MWE2 Editor or navigate directly to the declaration of the underlying Java</span> 
 
 					<span class="italic">implementation by means of F3 (Go To Declaration).</span>
 				
@@ -283,7 +285,7 @@ Workflow&nbsp;{<br>
 			fileExtensions&nbsp;=&nbsp;file.extensions<br>
 
 <br>
-			//&nbsp;Java&nbsp;API&nbsp;to&nbsp;access&nbsp;grammar&nbsp;elements&nbsp;(required&nbsp;by&nbsp;several&nbsp;other&nbsp;fragments)<br>
+			//&nbsp;Java&nbsp;API&nbsp;to&nbsp;access&nbsp;grammar&nbsp;elements<br>
 			fragment&nbsp;=&nbsp;grammarAccess.GrammarAccessFragment&nbsp;{}<br>
 
 <br>
@@ -340,7 +342,7 @@ Workflow&nbsp;{<br>
 </div>
 </div>
 <p>In the following table the most important standard generator fragments are listed. Please refer to the Javadocs for more detailed documentation.</p>
-<table id="N10C45">
+<table id="N10C54">
 <tr>
 						
 <th>Class</th>
@@ -361,8 +363,11 @@ Workflow&nbsp;{<br>
 </tr>
 <tr>
 						
-<td>${org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment}</td>
+<td>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">XtextAntlrGeneratorFragment</a>
+						</td>
 						<td>ANTLR grammar, parser, lexer and related services</td>
+						<td></td>
 					
 </tr>
 <tr>
@@ -371,6 +376,7 @@ Workflow&nbsp;{<br>
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.java?root=Modeling_Project&view=co" target="_new">GrammarAccessFragment</a>
 						</td>
 						<td>Access to the grammar</td>
+						<td></td>
 					
 </tr>
 <tr>
@@ -379,6 +385,7 @@ Workflow&nbsp;{<br>
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java?root=Modeling_Project&view=co" target="_new">ResourceFactoryFragment</a>
 						</td>
 						<td>EMF resource factory</td>
+						<td></td>
 					
 </tr>
 <tr>
@@ -394,7 +401,9 @@ Workflow&nbsp;{<br>
 </tr>
 <tr>
 						
-<td>${org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment}</td>
+<td>
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.java?root=Modeling_Project&view=co" target="_new">ImportNamespacesScopingFragment</a>
+						</td>
 						<td>Index-based scoping</td>
 						<td>
 							<a class="link" href="scoping.html#index_based" title="Global Scopes based on external configuration (e.g. class path-based)">Index-based namespace scoping</a>
@@ -488,17 +497,6 @@ Workflow&nbsp;{<br>
 					
 </tr>
 </table>
-<p>
-					
-<span class="italic">
-						<span class="bold"><strong>Important</strong></span> Due to
-					</span> 
-					<a class="link" href="antlr_ip_issue.html" title="The ANTLR IP issue (or which parser to use?)">IP-Problems</a> 
-					<span class="italic">with the code generator shipped with ANTLR 3 we&rsquo;re not allowed to ship this fragment at Eclipse. Therefore you&rsquo;ll have to download it separately from http://download.itemis.com or use the update site at 
-						<span class="bold"><strong>http://download.itemis.com/updates/</strong></span>.
-					</span>
-				
-</p>
 </div>
 </div>
 </body>

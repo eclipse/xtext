@@ -39,24 +39,24 @@ ${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHig
 bc.. public class DefaultHighlightingConfiguration 
     implements IHighlightingConfiguration {
 
-	public static final String KEYWORD_ID = "keyword";
-	public static final String COMMENT_ID = "comment";
+  public static final String KEYWORD_ID = "keyword";
+  public static final String COMMENT_ID = "comment";
 
-	public void configure(IHighlightingConfigurationAcceptor acceptor) {
-		acceptor.acceptDefaultHighlighting(KEYWORD_ID, "Keyword", 
-				keywordTextStyle());
-		acceptor.acceptDefaultHighlighting(COMMENT_ID, "Comment", // ...
-		// ...
-	}
-	
-	public TextStyle keywordTextStyle() {
-		TextStyle textStyle = new TextStyle();
-		textStyle.setColor(new RGB(127, 0, 85));
-		textStyle.setStyle(SWT.BOLD);
-		return textStyle;
-	}
-	
-	// ...
+  public void configure(IHighlightingConfigurationAcceptor acceptor) {
+    acceptor.acceptDefaultHighlighting(KEYWORD_ID, "Keyword", 
+        keywordTextStyle());
+    acceptor.acceptDefaultHighlighting(COMMENT_ID, "Comment", // ...
+    // ...
+  }
+  
+  public TextStyle keywordTextStyle() {
+    TextStyle textStyle = new TextStyle();
+    textStyle.setColor(new RGB(127, 0, 85));
+    textStyle.setStyle(SWT.BOLD);
+    return textStyle;
+  }
+  
+  // ...
 }
 
 p. Implementations of the @ITokenScanner@ are responsible for splitting the content of a document into 
@@ -91,17 +91,17 @@ associate styles with them. This may read similar to the following snippet:
 
 bc.. public void provideHighlightingFor(XtextResource resource, 
     IHighlightedPositionAcceptor acceptor) {
-	if (resource == null)
-		return;
-		
-	Iterable<AbstractNode> allNodes = NodeUtil.getAllContents(
-	  resource.getParseResult().getRootNode());
-	for (AbstractNode abstractNode : allNodes) {
-		if (abstractNode.getGrammarElement() instanceof CrossReference) {
-		  acceptor.addPosition(node.getOffset(), node.getLength(), 
-		    MyHighlightingConfiguration.CROSS_REF);
-		}
-	}
+  if (resource == null)
+    return;
+    
+  Iterable<AbstractNode> allNodes = NodeUtil.getAllContents(
+    resource.getParseResult().getRootNode());
+  for (AbstractNode abstractNode : allNodes) {
+    if (abstractNode.getGrammarElement() instanceof CrossReference) {
+      acceptor.addPosition(node.getOffset(), node.getLength(), 
+        MyHighlightingConfiguration.CROSS_REF);
+    }
+  }
 }
 
 p. This example refers to an implementation of the @IHighlightingConfiguration@ that registers a style 
@@ -110,23 +110,23 @@ of a lexical @IHighlightingConfiguration@.
 
 bc.. public class HighlightingConfiguration 
     implements IHighlightingConfiguration {
-	
-	// lexical stuff goes here 
-	// ..
-	public final static String CROSS_REF = "CrossReference"; 
+  
+  // lexical stuff goes here 
+  // ..
+  public final static String CROSS_REF = "CrossReference"; 
 
-	public void configure(IHighlightingConfigurationAcceptor acceptor) {
-		// lexical stuff goes here 
-		// ..
-		acceptor.acceptDefaultHighlighting(CROSS_REF, 
-		  "Cross References", crossReferenceTextStyle());
-	}
-	
-	public TextStyle crossReferenceTextStyle() {
-		TextStyle textStyle = new TextStyle();
-		textStyle.setStyle(SWT.ITALIC);
-		return textStyle;
-	}
+  public void configure(IHighlightingConfigurationAcceptor acceptor) {
+    // lexical stuff goes here 
+    // ..
+    acceptor.acceptDefaultHighlighting(CROSS_REF, 
+      "Cross References", crossReferenceTextStyle());
+  }
+  
+  public TextStyle crossReferenceTextStyle() {
+    TextStyle textStyle = new TextStyle();
+    textStyle.setStyle(SWT.ITALIC);
+    return textStyle;
+  }
 }
 
 p. The implementor of an @IHighlightingCalculator@ should be aware of performance to ensure a good user 

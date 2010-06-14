@@ -27,7 +27,7 @@ JavaTypes for the simple data types in the self defined language. By means of cr
 as one got already used to when dealing with references in Xtext.
 
 bc.. Type:
-	'type' name=ID 'mapped-to' javaType=[types::JvmType|FQN];
+  'type' name=ID 'mapped-to' javaType=[types::JvmType|FQN];
 
 p. Last but not least, the _TypesGeneratorFragment_ has to be added to the workflow. The safest way is 
 to add it after the actually used scoping fragments as a specialized version of the _IGlobalScopeProvider_ 
@@ -35,7 +35,7 @@ will be configured. Don't forget to refer to the genmodel of the Java VM types. 
 URI is a class-path-URI.    
 
 bc.. fragment = ecore.EcoreGeneratorFragment {
-	referencedGenModels="classpath:/model/JavaVMTypes.genmodel"
+  referencedGenModels="classpath:/model/JavaVMTypes.genmodel"
 }
 
 ...
@@ -75,4 +75,4 @@ bc.. import static org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters.*;
 ..
 
   proposalProvider.createSubTypeProposals(factory, context,
-	  and(not(canInstantiate()), isPublic()), acceptor); 
+      and(not(canInstantiate()), isPublic()), acceptor); 

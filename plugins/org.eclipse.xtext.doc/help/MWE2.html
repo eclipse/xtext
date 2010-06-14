@@ -14,7 +14,7 @@
 <p>The Modeling Workflow Engine 2 (MWE2) is a rewritten backwards 
 			compatible implementation of the Modeling Workflow Engine (MWE). It 
 			is a declarative, externally configurable generator engine. Users 
-			can describe arbitrary objects compositions by means of a simple, 
+			can describe arbitrary object compositions by means of a simple, 
 			concise syntax that allows to declare object instances, attribute 
 			values and references. One use case &ndash; that&rsquo;s where the name had its 
 			origins &ndash; is the definition of workflows. Such a workflow consists 
@@ -36,7 +36,7 @@
 </div>
 <p>Let&rsquo;s start with a couple of examples to demonstrate some usage 
 				scenarios for MWE2. The first examples is a simple 
-				<code class="code">HelloWorld</code> 
+				<span class="emphasis"><em>HelloWorld</em></span> 
 				module that does nothing but print a message to standard out. The 
 				second module is assembled of three components that read an ecore 
 				file, transform the contained classifier-names to upper-case and 
@@ -68,23 +68,23 @@ SayHello&nbsp;{<br>
 </div>
 <p>It configures a very simple workflow component with a message 
 					that should be printed to 
-					<code class="code">System.out</code> when the workflow is 
+					<span class="emphasis"><em>System.out</em></span> when the workflow is 
 					executed. The module begins with a declaration of its name. It must 
 					fulfill the Java conventions for fully qualified class-names. That&rsquo;s 
 					why the module 
-					<code class="code">HelloWorld</code> has to be placed into the default 
+					<span class="emphasis"><em>HelloWorld</em></span> has to be placed into the default 
 					package of a Java source folder. The second element in the module is 
 					the class-name 
-					<code class="code">SayHello</code> which introduces the root element of the 
+					<span class="emphasis"><em>SayHello</em></span> which introduces the root element of the 
 					module. The interpreter will create an instance of the referenced 
 					type and configure it as declared between the curly braces. E.g. the 
 					assignment 
-					<code class="code">message = "Hello World!"</code> in the module will be 
+					<span class="emphasis"><em>message = "Hello World!"</em></span> in the module will be 
 					interpreted as an invocation of the 
-					<code class="code">setMessage(String)</code> on the 
+					<span class="emphasis"><em>setMessage(String)</em></span> on the 
 					instantiated object. As one can easily imagine, the implementation 
 					of the class 
-					<code class="code">SayHello</code> looks straight forward:
+					<span class="emphasis"><em>SayHello</em></span> looks straight forward:
 				</p>
 <div class="literallayout">
 <p>
@@ -120,8 +120,8 @@ public&nbsp;class&nbsp;SayHello&nbsp;implements&nbsp;IWorkflowComponent&nbsp;{<b
 					It is easily possible to assemble completely independent objects in 
 					a declarative manner. To make the workflow executable with the 
 
-					<code class="code">WorkflowRunner</code>, the component 
-					<code class="code">SayHello</code> must be nested in a root 
+					<span class="emphasis"><em>WorkflowRunner</em></span>, the component 
+					<span class="emphasis"><em>SayHello</em></span> must be nested in a root 
 					workflow:
 				</p>
 <div class="literallayout">
@@ -139,13 +139,13 @@ Workflow&nbsp;{<br>
 </p>
 </div>
 <p>The class 
-					<code class="code">Workflow</code> is actually 
+					<span class="emphasis"><em>Workflow</em></span> is actually 
 
-					<code class="code">org.eclipse.emf.mwe2.runtime.workflow.Workflow</code> but its package is 
+					<span class="emphasis"><em>org.eclipse.emf.mwe2.runtime.workflow.Workflow</em></span> but its package is 
 					implicitly imported in MWE2 modules to make the the modules more 
 					concise. The execution result of this workflow will be revealed 
 					after a quick 
-					<code class="code">Run As .. -&gt; MWE2 Workflow</code> in the console as 
+					<span class="emphasis"><em>Run As .. -&gt; MWE2 Workflow</em></span> in the console as 
 				</p>
 <div class="literallayout">
 <p>
@@ -164,6 +164,148 @@ Workflow&nbsp;{<br>
 </div>
 </div>
 </div>
+<p>The following workflow solves the exemplary task to rename every 
+					<span class="emphasis"><em>EClassifier</em></span> in an 
+					<span class="emphasis"><em>*.ecore</em></span> file.
+					It consists of three components that read, modify and write the model file:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">module&nbsp;Renamer<br>
+Workflow&nbsp;{<br>
+&nbsp;&nbsp;component&nbsp;=&nbsp;ResourceReader&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;"model.ecore"<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;component&nbsp;=&nbsp;RenamingTransformer&nbsp;{}<br>
+&nbsp;&nbsp;component&nbsp;=&nbsp;ResourceWriter&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;"uppercaseModel.ecore"<br>
+&nbsp;&nbsp;}<br>
+}<br>
+
+</code>
+</p>
+</div>
+<p>The implementation of these components is surprisingly simple. It is easily possible to create
+					own components even for minor operations to automate a process.</p>
+<p>The 
+					<span class="emphasis"><em>ResourceReader</em></span> simply reads the file with the given 
+					<span class="emphasis"><em>URI</em></span> and stores it in a so called
+
+					<span class="emphasis"><em>slot</em></span> of the workflow context. A slot can be understood as a dictionary or map-entry.
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;class&nbsp;ResourceReader&nbsp;extends&nbsp;WorkflowComponentWithSlot&nbsp;{<br>
+&nbsp;&nbsp;private&nbsp;String&nbsp;uri;<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ResourceSet&nbsp;resourceSet&nbsp;=&nbsp;new&nbsp;ResourceSetImpl();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;resourceSet.getResource(URI.createFileURI(uri),&nbsp;true);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ctx.put(getSlot(),&nbsp;resource);<br>
+&nbsp;&nbsp;}<br>
+	
+<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;setUri(String&nbsp;uri)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.uri&nbsp;=&nbsp;uri;<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;public&nbsp;String&nbsp;getUri()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;uri;<br>
+&nbsp;&nbsp;}<br>
+}<br>
+
+</code>
+</p>
+</div>
+<p>The actual transformer takes the model from the slot and modifies it. It simply iterates the content
+					of the resource, identifies each 
+					<span class="emphasis"><em>EClassifier</em></span> and sets its name. 
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;class&nbsp;RenamingTransformer&nbsp;extends&nbsp;WorkflowComponentWithSlot&nbsp;{<br>
+&nbsp;&nbsp;private&nbsp;boolean&nbsp;toLowerCase&nbsp;=&nbsp;false;<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;(Resource)&nbsp;ctx.get(getSlot());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;EcoreUtil.resolveAll(resource);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;Object&gt;&nbsp;contents&nbsp;=&nbsp;EcoreUtil.getAllContents(resource,&nbsp;true);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;EClassifier&gt;&nbsp;iter&nbsp;=&nbsp;Iterators.filter(contents,&nbsp;EClassifier.class);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;while(iter.hasNext())&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EClassifier&nbsp;classifier&nbsp;=&nbsp;(EClassifier)&nbsp;iter.next();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classifier.setName(isToLowerCase()&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&nbsp;classifier.getName().toLowerCase()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;classifier.getName().toUpperCase());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+
+<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;setToLowerCase(boolean&nbsp;toLowerCase)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.toLowerCase&nbsp;=&nbsp;toLowerCase;<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;public&nbsp;boolean&nbsp;isToLowerCase()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;toLowerCase;<br>
+&nbsp;&nbsp;}<br>
+}<br>
+
+</code>
+</p>
+</div>
+<p>After the model has been modified it should be written to a new file. That&rsquo;s what the 
+
+					<span class="emphasis"><em>ResourceWriter</em></span> does. It actually takes the resource from the given 
+					<span class="emphasis"><em>slot</em></span> and saves it with
+					the configured 
+					<span class="emphasis"><em>URI</em></span>:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;class&nbsp;ResourceWriter&nbsp;extends&nbsp;WorkflowComponentWithSlot&nbsp;{<br>
+&nbsp;&nbsp;private&nbsp;String&nbsp;uri;<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;(Resource)&nbsp;ctx.get(getSlot());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;URI&nbsp;uri&nbsp;=&nbsp;URI.createFileURI(getUri());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;resource.getResourceSet().getURIConverter().normalize(uri);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;resource.setURI(uri);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;try&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource.save(null);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;catch&nbsp;(IOException&nbsp;e)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;WrappedException(e);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+
+<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;setUri(String&nbsp;uri)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.uri&nbsp;=&nbsp;uri;<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;public&nbsp;String&nbsp;getUri()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;uri;<br>
+&nbsp;&nbsp;}<br>
+}<br>
+
+</code>
+</p>
+</div>
+<p>Last but not least, the common super-type for those components looks like this:</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;abstract&nbsp;class&nbsp;WorkflowComponentWithSlot&nbsp;implements&nbsp;IWorkflowComponent&nbsp;{<br>
+&nbsp;&nbsp;private&nbsp;String&nbsp;slot&nbsp;=&nbsp;"model";<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;setSlot(String&nbsp;slot)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.slot&nbsp;=&nbsp;slot;<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;public&nbsp;String&nbsp;getSlot()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;slot;<br>
+&nbsp;&nbsp;}<br>
+	
+<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;postInvoke()&nbsp;{}<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;preInvoke()&nbsp;{}<br>
+}<br>
+
+</code>
+</p>
+</div>
+<p>Each of the mentioned implementation is rather simple and can be done in a couple of minutes. 
+					This is true for many tedious tasks that developers face in their daily work. MWE2 can be used to
+					minimize the effort for them to a minimum by means of automati</p>
 </div>
 <div class="section" title="A Stop-watch">
 <div class="titlepage">
@@ -173,6 +315,58 @@ Workflow&nbsp;{<br>
 <a name="MWE2Stopwatch"></a>A Stop-watch</h3>
 </div>
 </div>
+</div>
+<p>The last example demonstrates, how to combine the MWE2 concepts to create a simple stopwatch that
+					allows to measure the execution time of a set of components. The idea is to add the very same stopwatch
+					twice as a component to a workflow. It will measure the time from the first pre-invoke to the last
+					post-invoke event and print the elapsed milliseconds to the console.</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;class&nbsp;StopWatch&nbsp;implements&nbsp;IWorkflowComponent&nbsp;{<br>
+&nbsp;&nbsp;private&nbsp;long&nbsp;start;<br>
+&nbsp;&nbsp;private&nbsp;boolean&nbsp;shouldStop&nbsp;=&nbsp;false;<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{}<br>
+
+<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;postInvoke()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(shouldStop)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;elapsed&nbsp;=&nbsp;System.currentTimeMillis()&nbsp;-&nbsp;start;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Time&nbsp;elapsed:&nbsp;"&nbsp;+&nbsp;elapsed&nbsp;+&nbsp;"&nbsp;ms");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;shouldStop&nbsp;=&nbsp;true;<br>
+&nbsp;&nbsp;}<br>
+
+<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;preInvoke()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;=&nbsp;System.currentTimeMillis();<br>
+&nbsp;&nbsp;}<br>
+}<br>
+
+</code>
+</p>
+</div>
+<p>Clients who want to leverage this kind of stopwatch may use the following pattern. The stopwatch-instance 
+					will be added as the first component and the last component to a workflow. Everything in between will
+					be measured. In this case, it is another workflow that does not need know about this decoration. The idea
+					is to use a local identifier for the instantiated 
+					<span class="emphasis"><em>StopWatch</em></span> and reuse this one at the end to receive
+					the post-invoke life-cycle event twice. 
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">module&nbsp;MeasuredWorkflow<br>
+
+<br>
+Workflow&nbsp;{<br>
+&nbsp;&nbsp;component&nbsp;=&nbsp;StopWatch:&nbsp;stopWatch&nbsp;{}<br>
+&nbsp;&nbsp;component&nbsp;=&nbsp;@OtherWorkflow&nbsp;{}<br>
+&nbsp;&nbsp;component&nbsp;=&nbsp;stopWatch<br>
+}<br>
+
+<br>
+
+</code>
+</p>
 </div>
 </div>
 </div>

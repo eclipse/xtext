@@ -1,17 +1,27 @@
 
 h2(#outline). Outline View
 
-Xtext provides an outline view to help you navigate your models. By default, it provides a hierarchical view on your model and allows you to sort tree elements alphabetically. Selecting an element in the outline will highlight the corresponding element in the text editor. Users can choose to synchronize the outline with the editor selection by clicking the _Link with Editor_ button.
+Xtext provides an outline view to help you navigate your models. By default, it provides a hierarchical 
+view on your model and allows you to sort tree elements alphabetically. Selecting an element in the 
+outline will highlight the corresponding element in the text editor. Users can choose to synchronize 
+the outline with the editor selection by clicking the _Link with Editor_ button.
 
 !images/sample_outline.png!
 
-You can customize various aspects of the outline by providing implementation for its various interfaces. The following sections show how to do this.
+You can customize various aspects of the outline by providing implementation for its various interfaces. 
+The following sections show how to do this.
 
 h3. Influencing the outline structure
 
-In its default implementation, the outline view shows the containment hierarchy of your model. This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e., by omitting a certain kind of node or by introducing additional even virtual nodes, you customize the outline by implementing ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTransformer}.
+In its default implementation, the outline view shows the containment hierarchy of your model. 
+This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e., 
+by omitting a certain kind of node or by introducing additional even virtual nodes, you customize 
+the outline by implementing 
+${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.outline.transformer.ISemanticModelTransformer}.
 
-The Xtext wizard creates an empty transformer class (@MyDslTransformer@) for your convenience. To transform the semantic model delivered by the Xtext parser, you need to provide transformation methods for each of the EClasses that are of interest:
+The Xtext wizard creates an empty transformer class (_MyDslTransformer_) for your convenience. To 
+transform the semantic model delivered by the Xtext parser, you need to provide transformation methods 
+for each of the EClasses that are of interest:
 
 bc.. public class MyDslTransformer extends 
     AbstractDeclarativeSemanticModelTransformer { 
@@ -49,7 +59,8 @@ bc.. public class MyDslTransformer extends
   }
 }
 
-p. To make sure Xtext picks up your new outline transformer, you have to register your implementation with your UI module: 
+p. To make sure Xtext picks up your new outline transformer, you have to register your implementation 
+with your UI module. This binding is usually added by the respective generator fragment.
 
 bc.. public class MyDslUiModule extends AbstractMyDslUiModule {
 
@@ -63,9 +74,13 @@ bc.. public class MyDslUiModule extends AbstractMyDslUiModule {
 
 h3. Filtering
 
-Often, you want to allow users to filter the contents of the outline to make it easier to concentrate on the relevant aspects of the model. To add filtering capabilities to your outline, you need to add ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.actions.AbstractFilterAction}s to the outline. Actions can be contributed by implementing and registering a ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.actions.DeclarativeActionBarContributor}.
+Often, you want to allow users to filter the contents of the outline to make it easier to concentrate 
+on the relevant aspects of the model. To add filtering capabilities to your outline, you need to add 
+${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.outline.actions.AbstractFilterAction}s to the 
+outline. Actions can be contributed by implementing and registering a 
+${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.outline.actions.DeclarativeActionBarContributor}.
 
-To register a @DeclarativeActionBarContributor@, add the following lines to your @MyDslUiModule@ class:
+To register a _DeclarativeActionBarContributor_, add the following lines to your _MyDslUiModule_ class:
 
 bc.. public class MyDslUiModule extends AbstractMyDslUiModule {
 
@@ -86,7 +101,8 @@ bc.. public class MyDslActionBarContributor extends
   }
 }
 
-p. Filter actions must extend @AbstractFilterAction@ (this ensures that the action toggle state is handled correctly):
+p. Filter actions must extend _AbstractFilterAction_ (this ensures that the action toggle state is 
+handled correctly):
 
 bc.. public class FilterFooAction extends AbstractFilterAction {
 
@@ -111,7 +127,7 @@ bc.. public class FilterFooAction extends AbstractFilterAction {
 
 }
 
-p. The filtering itself will be performed by @FooOutlineFilter@:
+p. The filtering itself will be performed by _FooOutlineFilter_:
 
 bc.. public class FooOutlineFilter extends ViewerFilter {
 
@@ -133,37 +149,44 @@ bc.. public class FooOutlineFilter extends ViewerFilter {
 
 h3. Context menus
 
-You might want to register context menu actions for specific elements in the outline, e.g. to allow users of your DSL to invoke a generator or to validate the selected element. As all elements in the outline are ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode}s, you cannot easily register an "Object contribution":http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.platform.doc.isv/guide/workbench_basicext_popupMenus.htm. (Besides, using the extension point @org.eclipse.ui.popupMenus@ is regarded somewhat old school - you should rather use the new command and expression framework, as depicted below).
+You might want to register context menu actions for specific elements in the outline, e.g. to allow 
+users of your DSL to invoke a generator or to validate the selected element. As all elements in the 
+outline are ${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.outline.ContentOutlineNode}s, you 
+cannot easily register an "Object contribution":http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.platform.doc.isv/guide/workbench_basicext_popupMenus.htm. 
+(Besides, using the extension point _org.eclipse.ui.popupMenus_ is regarded somewhat old school - 
+you should rather use the new command and expression framework, as depicted below).
 
 To register context menus for specific node types of your Ecore model, we need to:
 
-* implement ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.actions.IContentOutlineNodeAdapterFactory} which will translate ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode}s to their underlying node type
+* implement ${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.outline.actions.IContentOutlineNodeAdapterFactory} which will translate ${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.outline.ContentOutlineNode}s to their underlying node type
 * register a menu contribution to add a command / handler pair to the context menu for the specific node types you're interested in.
 
-h4. Registering an @IContentOutlineNodeAdapterFactory@
+h4. Registering an _IContentOutlineNodeAdapterFactory_
 
-The Xtext code generator creates a subclass of ${org.eclipse.xtext.ui.common/src/org.eclipse.xtext.ui.common.editor.outline.actions.DefaultContentOutlineNodeAdapterFactory}. All we need to do is specify a list of types that we later want to bind context menu contributions to. 
+The Xtext code generator creates a subclass of 
+${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.outline.actions.DefaultContentOutlineNodeAdapterFactory}. 
+All we need to do is specify a list of types that we later want to bind context menu contributions to. 
 
 bc.. public class MyDslContentOutlineNodeAdapterFactory extends 
     DefaultContentOutlineNodeAdapterFactory {
-  @SuppressWarnings("unchecked")
-  private static final Class[] types = { Attribute.class };
+  private static final Class<?>[] types = { Attribute.class };
 
-  @SuppressWarnings("unchecked")
-  public Class[] getAdapterList() {
+  public Class<?>[] getAdapterList() {
     return types;
   }
 }
 
-p. If you want to bind context menu actions to nodes representing @Attribute@ and @Entity@, you need to change the declaration of @type@ as follows:
+p. If you want to bind context menu actions to nodes representing _Attribute_ and _Entity_, you need to 
+change the declaration of _types as follows:
 
-bc. private static final Class[] types = { Attribute.class, Entity.class };
+bc. private static final Class<?>[] types = { Attribute.class, Entity.class };
 
 h4. Registering a menu contribution
 
 You can now add command / handler pairs to the context menu.
 
-First, you need to define a command - it will serve as a handle to glue together the handler and the menu contribution:
+First, you need to define a command - it will serve as a handle to glue together the handler 
+and the menu contribution:
 
 bc.. 
 <extension
@@ -175,7 +198,9 @@ bc..
   </command>
 </extension>
 
-p. Next, you need to define a handler which will eventually execute the code to operate on the selected node. Please pay special attention to the attribute @commandId@ - it must match the @id@ attribute of your command. 
+p. Next, you need to define a handler which will eventually execute the code to operate on the 
+selected node. Please pay special attention to the attribute _commandId_ - it must match the _id_ 
+attribute of your command. 
 
 bc.. 
 <extension
@@ -186,7 +211,7 @@ bc..
   </handler>
 </extension>
 
-p. Finally, define a @menuContribution@ to add the command to the context menu:
+p. Finally, define a _menuContribution_ to add the command to the context menu:
 
 bc.. 
 <extension
@@ -205,4 +230,5 @@ bc..
   </menuContribution>
 </extension>
 
-p. Again, pay attention to the @commandId@ attribute. The connection between your node type(s) and the menu contribution is made by the part @<adapt type="org.example.mydsl.Attribute" />@. 
+p. Again, pay attention to the _commandId_ attribute. The connection between your node type(s) and 
+the menu contribution is made by the part _<adapt type="org.example.mydsl.Attribute" />_. 

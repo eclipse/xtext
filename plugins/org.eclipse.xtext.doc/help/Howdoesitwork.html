@@ -11,12 +11,19 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">How does it work?</h1>
-<p>Xtext provides you with a set of domain-specific languages and modern APIs to describe the different aspects of your programming language. 
-				Based on that information it gives you a full implementation of that language running on the JVM. The compiler part can be used in any Java environment 
-				and includes such things as parser, AST, parse tree, serializer, formatter, scoping framework, linking, compiler checks aka validation and last but not least a 
-				code generator or interpreter. The runtime components integrate with and implement the Eclipse Modeling Framework (EMF), which effectively allows you to 
-				use Xtext together with other EMF frameworks like for instance the Graphical Modeling Project.</p>
-<p>In addition to this nice runtime architecture, you will get a full blown Eclipse-IDE specific for your language. It already provides great default functionality for 
-				all aspects and again comes with DSLs and APIs to let you configure or change the most common things very easily. And if that&rsquo;s not flexible enough there is Guice.</p>
+<p>Xtext provides you with a set of domain-specific languages and modern APIs to describe the different 
+				aspects of your programming language. 
+				Based on that information it gives you a full implementation of that language running on the JVM. 
+				The compiler components of your language are independent of Eclipse or OSGi and can be used in any Java environment.
+				They include such things as the parser, the type-safe abstract syntax tree (AST), the serializer and 
+				code formatter, the scoping framework and the linking, compiler checks and static analysis aka validation 
+				and last but not least a code generator or interpreter. These runtime components integrate with and 
+				are based on the Eclipse Modeling Framework (EMF), which effectively allows you to 
+				use Xtext together with other EMF frameworks like for instance the Graphical Modeling Project GMF.</p>
+<p>In addition to this nice runtime architecture, you will get a full blown Eclipse-IDE specifically tailored 
+				for your language. It already provides great default functionality for 
+				all aspects and again comes with DSLs and APIs that allow to configure or change the most common things 
+				very easily. And if that&rsquo;s not flexible enough there is Guice to replace the default behaviour with
+				your own implementations.</p>
 </body>
 </html>

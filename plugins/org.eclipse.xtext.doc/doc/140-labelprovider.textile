@@ -1,33 +1,58 @@
 
 h2(#labelProvider). Label Provider
 
-There are various places in the UI in which model elements have to be presented to the user: In the "outline view":#outline, in "hyper links":#hyperlinking, in "content proposals":#contentAssist, find dialogs etc. Xtext allows to customize each of these appearances by individual _ILabelProviders_. 
+There are various places in the UI in which model elements have to be presented to the user: In the 
+"outline view":#outline, in "hyper links":#hyperlinking, in "content proposals":#contentAssist, 
+find dialogs etc. Xtext allows to customize each of these appearances by individual _ILabelProviders_. 
 
-An _ILabelProvider_ has two methods: _getText(Object)_ returns the text in an object's label, while _getImage(Object)_ returns the icon. In addition, the Eclipse UI framework offers the _IStyledLabelProvider_, which returns a styled string (i.e. with custom fonts, colors etc.) in the _getStyledText(Object)_ method. 
+An _ILabelProvider_ has two methods: _getText(Object)_ returns the text in an object's label, 
+while _getImage(Object)_ returns the icon. In addition, the Eclipse UI framework offers the 
+_IStyledLabelProvider_, which returns a styled string (i.e. with custom fonts, colors etc.) in the 
+_getStyledText(Object)_ method. 
 
-Almost all label providers in the Xtext framework inherit from the base class ${org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/AbstractLabelProvider} which unifies both approaches. Subclasses can either return a styled string or a string in the _doGetText(Object)_ method. The framework will automatically convert it to a styled text (with default encoding) or to a plain text in the respective methods. 
+Almost all label providers in the Xtext framework inherit from the base class 
+${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.label.AbstractLabelProvider} which unifies both 
+approaches. Subclasses can either return a styled string or a string in the _doGetText(Object)_ method. 
+The framework will automatically convert it to a styled text (with default styles) or to a plain text 
+in the respective methods. 
 
-Dealing with images can be cumbersome, too, as image handles tend to be scarce system resources. The ${org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/AbstractLabelProvider} helps you managing the images: In your implementation of _doGetImage(Object)_ you can as well return an _Image_ or a string, representing  a path in the _icons/_ folder of the containing plug-in. This path is actually configurable by Google Guice. Have a look at the ${org.eclipse.xtext.ui.core/src/org.eclipse.xtext.ui.core.PluginImageHelper} to learn about the customizing possibilities.
+Dealing with images can be cumbersome, too, as image handles tend to be scarce system resources. 
+The ${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.label.AbstractLabelProvider} helps you managing 
+the images: In your implementation of _doGetImage(Object)_ you can as well return an _Image_ or a string, 
+representing a path in the _icons/_ folder of the containing plug-in. This path is actually 
+configurable by Google Guice. Have a look at the 
+${org.eclipse.xtext.ui.core/src/org.eclipse.xtext.ui.core.PluginImageHelper} to learn about the 
+customizing possibilities.
 
-If you have the ${org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment} in the list of generator fragments in the MWE2 workflow for your language, it will automatically create stubs and bindings for an "_{MyLang}EObjectLabelProvider_":#EObjectLabelProvider and an "_{MyLang}DescriptionLabelProvider_":#DescriptionLabelProvider which you can implement by manually. 
+If you have the 
+${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment} in the 
+list of generator fragments in the MWE2 workflow for your language, it will automatically create 
+stubs and bindings for an "_{MyLang}EObjectLabelProvider_":#EObjectLabelProvider and an 
+"_{MyLang}DescriptionLabelProvider_":#DescriptionLabelProvider which you can implement by manually. 
 
 h3(#EObjectLabelProvider). Label providers for EObjects
 
-The first set of label providers refers to (loaded) model elements. By default, Xtext binds the _DefaultEObjectLabelProvider_  to all use cases, but you can change the binding individually. For that purpose, there is a so called _binding annotation_ for each use case. For example, to use a custom _MyContentAssistLabelProvider_ to display elements in the content assist, you have to override
+The first set of label providers refers to actually loaded and thereby available model elements. 
+By default, Xtext binds the _DefaultEObjectLabelProvider_ to all use cases, but you can change the 
+binding individually for the Outline, Content Assist or other places. For that purpose, there is a 
+so called _binding annotation_ for each use case. For example, to use a custom 
+_MyContentAssistLabelProvider_ to display elements in the content assist, you have to override
 
-bc. @Override
-public void configureContentProposalLabelProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)
-					.annotatedWith(org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider.class)
-					.to(MyContentAssistLabelProvider.class);
+bc.. @Override
+public void configureContentProposalLabelProvider(Binder binder) {
+  binder.bind(ILabelProvider.class)
+    .annotatedWith(ContentProposalLabelProvider.class)
+    .to(MyContentAssistLabelProvider.class);
 }
 
 p.in your language's UI module. 
 
-p. If your grammar uses an imported _EPackage_, there may be an existing _.edit_ plug-in generated by EMF that also provides label providers for model elements. To use this as a fallback, your label provider should call the constructor with the 
+p. If your grammar uses an imported _EPackage_, there may be an existing _.edit_ plug-in generated 
+by EMF that also provides label providers for model elements. To use this as a fallback, your label 
+provider should call the constructor with the 
 delegate parameter and use DI for the initialization, e.g.
 
-bc. public class MyLabelProvider {
+bc.. public class MyLabelProvider {
 	@Inject	
 	public MyLabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
@@ -37,39 +62,59 @@ bc. public class MyLabelProvider {
 
 h4(#DefaultEObjectLabelProvider). DefaultEObjectLabelProvider
 
-The default implementation of the _LabelProvider_ interface utilizes the polymorphic dispatcher idiom to implement an external visitor as the requirements of the LabelProvider are kind of a best match for this pattern. It comes down to the fact that the only thing you need to do is to implement a method that matches a specific signature. It either provides a image filename or the text to be used to represent your model element. Have a look at following example to get a more detailed idea about the _DefaultEObjectLabelProvider_.
+The default implementation of the _LabelProvider_ interface utilizes the polymorphic dispatcher idiom 
+to implement an external visitor as the requirements of the LabelProvider are kind of a best match for 
+this pattern. It comes down to the fact that the only thing you need to do is to implement a method 
+that matches a specific signature. It either provides a image filename or the text to be used to 
+represent your model element. Have a look at following example to get a more detailed idea about 
+the _DefaultEObjectLabelProvider_.
 
 bc.. public class SampleLabelProvider extends DefaultLabelProvider {
 
   String text(RuleA rule) {
-		return "Rule: " + rule.getName();
-	}
-	
-	String image(RuleA rule) {
-		return "ruleA.gif";
-	}
-	
-	String image(RuleB rule) {
-		return "ruleB.gif";
-	}
-	
+    return "Rule: " + rule.getName();
+  }
+  
+  String image(RuleA rule) {
+    return "ruleA.gif";
+  }
+  
+  String image(RuleB rule) {
+    return "ruleB.gif";
+  }
 }
 	
-p. What is especially nice about the default implementation is the actual reason for its class name: It provides very reasonable defaults. To compute the label for a certain model element, it will at first have a look for an EAttribute that is called _name_ and try to use this one. If it cannot find a feature like this, it will try to use the first feature, that can be used best as a label. At worst it will return the class name of the model element, which is kind of unlikely to happen.
+p. What is especially nice about the default implementation is the actual reason for its class 
+name: It provides very reasonable defaults. To compute the label for a certain model element, it will 
+at first have a look for an EAttribute _name_ and try to use this one. If it cannot find such a feature, 
+it will try to use the first feature, that can be used best as a label. At worst it will return the 
+class name of the model element, which is kind of unlikely to happen.
 
-p. You can a also customize error handling by overriding the methods _handleTextError()_ or _handleImageError()_.
+p. You can a also customize error handling by overriding the methods _handleTextError()_ or 
+_handleImageError()_.
  
 h3(#DescriptionLabelProvider). Label providers for index entries
 
-Xtext maintains an index of all model elements to allow quick searching and linking without loading the referenced resource #index_based. See the chapter on "index based scopes":#index_based for details. The elements from this index also appear in some UI contexts, e.g. in the _Find model elements_ dialog or in the _Find references_ view. For reasons of scalability, UI should not automatically load resources, so we need another implementation of a label provider that works with the elements from the index, i.e. _IResourceDescription_, IEObjectDescription_, and _IReferenceDescription_.
+Xtext maintains an index of all model elements to allow quick searching and linking without loading 
+the referenced resource (See the chapter on "index based scopes":#index_based for details). The 
+elements from this index also appear in some UI contexts, e.g. in the _Find model elements_ dialog or 
+in the _Find references_ view. For reasons of scalability, the UI should not automatically load 
+resources, so we need another implementation of a label provider that works with the elements from the 
+index, i.e. _IResourceDescription_, IEObjectDescription_, and _IReferenceDescription_.
 
-The default implementation of this service is the ${org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultDescriptionLabelProvider}. It employs the same polymorphic dispatch mechanism as the "DefaultEObjectLabelProvider":#DefaultEObjectLabelProvider. The default text of an _EObjectDescription_ is its indexed name. The image is resolved by dispatching to _image(EClass)_ with the _EClass_ of the object. This is likely the only method you want to override. _IResourceDescriptions_ will be represented with their path and the icon registered for your language's editor. 
+The default implementation of this service is the 
+${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider}. It employs the 
+same polymorphic dispatch mechanism as the "DefaultEObjectLabelProvider":#DefaultEObjectLabelProvider. 
+The default text of an _EObjectDescription_ is its indexed name. The image is resolved by dispatching 
+to _image(EClass)_ with the _EClass_ of the described object. This is likely the only method you want 
+to override. _IResourceDescriptions_ will be represented with their path and the icon registered for 
+your language's editor. 
 
 To have a custom description label provider, make sure it is bound in your UI module:
 
-bc. public void configureResourceUIServiceLabelProvider(com.google.inject.Binder binder) {
-	binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)
-				.annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class)
-				.to(MyCustomDefaultDescriptionLabelProvider.class);
+bc. public void configureResourceUIServiceLabelProvider(Binder binder) {
+  binder.bind(ILabelProvider.class)
+    .annotatedWith(ResourceServiceDescriptionLabelProvider.class)
+    .to(MyCustomDefaultDescriptionLabelProvider.class);
 }
 	

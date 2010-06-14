@@ -12,11 +12,14 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Formatting (Pretty Printing)</h1>
 <p>A formatter can be implemented via the 
-				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java?root=Modeling_Project&view=co" target="_new">IFormatter</a> service. Technically speaking, a formatter is a 
-				<a class="link" href="serialization.html#tokenstream" title="Token Stream">Token Stream</a> which inserts/removes/modifies hidden tokens (whitespace, line-breaks, comments).
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java?root=Modeling_Project&view=co" target="_new">IFormatter</a> 
+				service. Technically speaking, a formatter is a 
+				<a class="link" href="serialization.html#tokenstream" title="Token Stream">Token Stream</a> which 
+				inserts/removes/modifies hidden tokens (whitespace, line-breaks, comments).
 			</p>
 <p>The formatter is invoked during the 
-				<a class="link" href="serialization.html" title="Serialization">serialization phase</a> and when the user triggers formatting in the editor (for example, using the CTRL+SHIFT+F shortcut).
+				<a class="link" href="serialization.html" title="Serialization">serialization phase</a> and when the user triggers 
+				formatting in the editor (for example, using the CTRL+SHIFT+F shortcut).
 			</p>
 <p>Xtext ships with two formatters:</p>
 <div class="itemizedlist">
@@ -45,7 +48,9 @@
 </div>
 </div>
 <p>A declarative formatter can be implemented by sub-classing 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeFormatter</a>, as shown in the following example:
+
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeFormatter</a>, as shown in 
+					the following example:
 				</p>
 <div class="literallayout">
 <p>
@@ -99,11 +104,13 @@
 </p>
 </div>
 <p>The formatter has to implement the method 
-					<span class="emphasis"><em>configureFormatting(...)</em></span> which declaratively sets up a 
+					<span class="emphasis"><em>configureFormatting(...)</em></span> which declaratively sets up 
+					a 
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java?root=Modeling_Project&view=co" target="_new">FormattingConfig</a>.
 				</p>
 <p>The 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java?root=Modeling_Project&view=co" target="_new">FormattingConfig</a> consist general settings and a set of formatting instructions:
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java?root=Modeling_Project&view=co" target="_new">FormattingConfig</a> consist of general 
+					settings and a set of formatting instructions:
 				</p>
 <div class="section" title="General FormattingConfig Settings">
 <div class="titlepage">
@@ -138,12 +145,16 @@
 </div>
 </div>
 <p>Per default, the 
-						<a class="link" href="formatting.html#declarativeformatter" title="Declarative Formatter">Declarative Formatter</a> inserts one whitespace between two tokens. Instructions can be used to specify a different behavior. They consist of two parts: 
-						<span class="emphasis"><em>When</em></span> to apply the instruction and 
+						<a class="link" href="formatting.html#declarativeformatter" title="Declarative Formatter">declarative formatter</a> inserts one whitespace between two 
+						tokens. Instructions can be used to specify a different behavior. They consist of two parts: 
+						<span class="emphasis"><em>When</em></span> 
+						to apply the instruction and 
 						<span class="emphasis"><em>what</em></span> to do.
 					</p>
 <p>To understand 
-						<span class="emphasis"><em>when</em></span> an instruction is applied think of a stream of tokens whereas each token is associated with the corresponding grammar element. The instructions are matched against these grammar elements. The following matching criteria exist:
+						<span class="emphasis"><em>when</em></span> an instruction is applied think of a stream of tokens whereas each token is 
+						associated with the corresponding grammar element. The instructions are matched against these grammar 
+						elements. The following matching criteria exist:
 					</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
@@ -157,7 +168,7 @@
 <li class="listitem">
 <p>
 								
-<span class="emphasis"><em>before(ele)</em></span>: The instruction is executed before the matched element. For example, if your grammar contains lists which separate its values with keyword &ldquo;,&rdquo;, you can instruct the formatter to suppress the whitespace before the comma.
+<span class="emphasis"><em>before(ele)</em></span>: The instruction is executed before the matched element. For example, if your grammar contains lists which separate their values with the keyword &ldquo;,&rdquo;, you can instruct the formatter to suppress the whitespace before the comma.
 							</p>
 </li>
 <li class="listitem">
@@ -199,14 +210,20 @@
 </ul>
 </div>
 <p>The term 
-						<span class="emphasis"><em>tokens</em></span> is used slightly different here compared to the parser/lexer. Here, a token is a keyword or the string that is matched by a terminal rule, datatype rule or cross reference. In the terminology of the lexer a datatype rule can match a composition of multiple tokens.
+						<span class="emphasis"><em>tokens</em></span> is used slightly different here compared to the parser/lexer. Here, a token is a 
+						keyword or the string that is matched by a terminal rule, data type rule or cross reference. In the 
+						terminology of the lexer a data type rule can match a composition of multiple tokens.
 					</p>
 <p>The parameter 
 						<span class="emphasis"><em>ele</em></span> can be a grammar&rsquo;s 
 						<span class="emphasis"><em>AbstractElement</em></span> or a grammar&rsquo;s 
-						<span class="emphasis"><em>AbstractRule</em></span>. All grammar rules and almost all abstract elements can be matched. This includes rule calls, parser rules, groups and alternatives. The semantic of 
+						<span class="emphasis"><em>AbstractRule</em></span>. All grammar 
+						rules and almost all abstract elements can be matched. This includes rule calls, parser rules, groups 
+						and alternatives. The semantic of 
 						<span class="emphasis"><em>before(ele)</em></span>, 
-						<span class="emphasis"><em>after(ele)</em></span>, etc. for rule calls and parser rules is identical to when the parser would &ldquo;pass&rdquo; this part of the grammar. The stack of called rules is taken into account. The following abstract elements can 
+						<span class="emphasis"><em>after(ele)</em></span>, etc. for rule calls and parser rules is 
+						identical to when the parser would &ldquo;pass&rdquo; this part of the grammar. The stack of called rules is taken 
+						into account. The following abstract elements can 
 						<span class="bold"><strong>not</strong></span> have assigned formatting instructions:
 					</p>
 <div class="itemizedlist">
@@ -218,7 +235,7 @@
 							</p>
 </li>
 <li class="listitem">
-<p>Grammar elements nested in datatype rules. This is due to to the fact that tokens matched by a data type rule are treated as atomic by the serializer. To format the tokens themselfs, please implement a 
+<p>Grammar elements nested in data type rules. This is due to to the fact that tokens matched by a data type rule are treated as atomic by the serializer. To format these tokens, please implement a 
 								<a class="link" href="valueconverter.html" title="Value Converter">ValueConverter</a>. 
 							</p>
 </li>
@@ -300,8 +317,11 @@
 </div>
 </div>
 </div>
-<p>Sometimes, if a grammar contains many similar elements for which the same formatting instructions ought to apply, it can be tedious to specify them for each grammar element individually. The 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/IGrammarAccess.java?root=Modeling_Project&view=co" target="_new">IGrammarAccess</a> provides convenience methods for this. The find methods are available for the grammar and for each parser rule.
+<p>Sometimes, if a grammar contains many similar elements for which the same formatting instructions ought 
+						to apply, it can be tedious to specify them for each grammar element individually. The 
+
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/IGrammarAccess.java?root=Modeling_Project&view=co" target="_new">IGrammarAccess</a> provides convenience methods for this. The 
+						find methods are available for the grammar and for each parser rule.
 					</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
@@ -333,46 +353,83 @@
 </div>
 </div>
 <p>Although inter-Xtext linking is not done by URIs, you may want to be able to reference your 
-					<code class="code">EObject</code> from non-Xtext models.
-					In those cases URIs are used, which are made up of a part identifying the resource. Each 
-					<code class="code">EObject</code> contained in a resource can be identified by a so called 
+					<span class="emphasis"><em>EObject</em></span> 
+					from non-Xtext models. In those cases URIs are used, which are made up of a part identifying the resource 
+					and a second part that points to an object. 
+					Each 
+					<span class="emphasis"><em>EObject</em></span> contained in a resource can be identified by a so called 
 					<span class="emphasis"><em>fragment</em></span>.
 				</p>
 <p>A fragment is a part of an EMF URI and needs to be unique per resource.</p>
-<p>The generic XMI resource shipped with EMF provides a generic path-like computation of fragments. With an XMI or other binary-like serialization it is also common and possible to use UUIDs.</p>
-<p>However with a textual concrete syntax we want to be able to compute fragments out of the given information. We don&rsquo;t want to force people to use UUIDs (i.e. synthetic identifiers) or relative generic paths (very fragile), in order to refer to 
-					<code class="code">EObjects</code>.
+<p>The generic resource shipped with EMF provides a generic path-like computation of fragments. These 
+					fragment paths are unique by default and do not have to be serialized. On the other hand, they can be 
+					easily broken by reordering the elements in a resource. </p>
+<p>With an XMI or other binary-like serialization it is also common and possible to use UUIDs. UUIDs 
+					are usually binary and technical, so you don&rsquo;t want them in human readable representations.</p>
+<p>However with a textual concrete syntax we want to be able to compute fragments out of the human readable 
+					information. We don&rsquo;t want to force people to use UUIDs (i.e. synthetic identifiers) or fragile, relative, generic 
+					paths in order to refer to 
+					<span class="emphasis"><em>EObjects</em></span>.
 				</p>
 <p>Therefore one can contribute a so called 
-					<code class="code">IFragmentProvider</code> per language.
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java?root=Modeling_Project&view=co" target="_new">IFragmentProvider</a> 
+					per language. It has two methods: 
+					<span class="emphasis"><em>getFragment(EObject, Fallback)</em></span> to calculate the fragment of an 
+
+					<span class="emphasis"><em>EObject</em></span> and 
+					<span class="emphasis"><em>getEObject(Resource, String, Fallback)</em></span> to go the opposite direction. The 
+					<span class="emphasis"><em>Fallback</em></span> 
+					interface allows to delegate to the default strategy &ndash; usually the fragment paths described above. 
+				</p>
+<p>The following snippet from the 
+					<a class="link" href="gmf_integration.html" title="Integration with GMF editors">GMF Example</a> shows how to use qualified names as fragments:   
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">public&nbsp;interface&nbsp;IFragmentProvider&nbsp;extends&nbsp;ILanguageService&nbsp;{<br>
-&nbsp;<br>
-&nbsp;&nbsp;/**<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;Computes&nbsp;the&nbsp;local&nbsp;ID&nbsp;of&nbsp;the&nbsp;given&nbsp;object.&nbsp;<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;obj<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;EObject&nbsp;to&nbsp;compute&nbsp;the&nbsp;fragment&nbsp;for<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;the&nbsp;fragment,&nbsp;which&nbsp;can&nbsp;be&nbsp;an&nbsp;arbitrary&nbsp;string&nbsp;but&nbsp;must&nbsp;be&nbsp;<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unique&nbsp;within&nbsp;a&nbsp;resource.&nbsp;Return&nbsp;null&nbsp;to&nbsp;use&nbsp;default&nbsp;<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;implementation<br>
-&nbsp;&nbsp;&nbsp;*/<br>
-&nbsp;&nbsp;String&nbsp;getFragment(EObject&nbsp;obj);<br>
-&nbsp;&nbsp;<br>
-&nbsp;&nbsp;/**<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;Locates&nbsp;an&nbsp;EObject&nbsp;in&nbsp;a&nbsp;resource&nbsp;by&nbsp;its&nbsp;fragment.&nbsp;<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;the&nbsp;EObject&nbsp;<br>
-&nbsp;&nbsp;&nbsp;*/<br>
-&nbsp;&nbsp;EObject&nbsp;getEObject(Resource&nbsp;resource,&nbsp;String&nbsp;fragment);<br>
+<code class="code">public&nbsp;QualifiedNameFragmentProvider&nbsp;implements&nbsp;IFragmentProvider&nbsp;{<br>
+
+<br>
+	@Inject<br>
+	private&nbsp;IQualifiedNameProvider&nbsp;qualifiedNameProvider;<br>
+
+<br>
+	public&nbsp;String&nbsp;getFragment(EObject&nbsp;obj,&nbsp;Fallback&nbsp;fallback)&nbsp;{<br>
+		String&nbsp;qualifiedName&nbsp;=&nbsp;qualifiedNameProvider.getQualifiedName(obj);<br>
+		return&nbsp;qualifiedName&nbsp;!=&nbsp;null&nbsp;?&nbsp;qualifiedName&nbsp;:&nbsp;fallback.getFragment(obj);<br>
+	}<br>
+
+<br>
+	public&nbsp;EObject&nbsp;getEObject(Resource&nbsp;resource,&nbsp;String&nbsp;fragment,&nbsp;Fallback&nbsp;fallback)&nbsp;{<br>
+		if&nbsp;(fragment&nbsp;!=&nbsp;null)&nbsp;{<br>
+			for&nbsp;(Iterator&lt;EObject&gt;&nbsp;i&nbsp;=&nbsp;EcoreUtil.getAllContents(resource,&nbsp;false);&nbsp;i.hasNext();)&nbsp;{<br>
+				EObject&nbsp;eObject&nbsp;=&nbsp;i.next();<br>
+				String&nbsp;candidateFragment&nbsp;=&nbsp;(eObject.eIsProxy())&nbsp;<br>
+						?&nbsp;((InternalEObject)&nbsp;eObject).eProxyURI().fragment()<br>
+						:&nbsp;getFragment(eObject,&nbsp;fallback);<br>
+				if&nbsp;(fragment.equals(candidateFragment))&nbsp;<br>
+					return&nbsp;eObject;<br>
+			}<br>
+		}<br>
+		return&nbsp;fallback.getEObject(fragment);<br>
+	}<br>
 }<br>
+
+<br>
+For&nbsp;performance&nbsp;reasons&nbsp;it&nbsp;is&nbsp;usually&nbsp;a&nbsp;good&nbsp;idea&nbsp;to&nbsp;navigate&nbsp;the&nbsp;resource&nbsp;based&nbsp;on&nbsp;the&nbsp;fragment&nbsp;<br>
+information&nbsp;instead&nbsp;of&nbsp;traversing&nbsp;it&nbsp;completely.&nbsp;If&nbsp;you&nbsp;know&nbsp;that&nbsp;your&nbsp;fragment&nbsp;is&nbsp;computed&nbsp;from&nbsp;<br>
+qualified&nbsp;names&nbsp;and&nbsp;your&nbsp;model&nbsp;contains&nbsp;something&nbsp;like&nbsp;_NamedElements_,&nbsp;you&nbsp;should&nbsp;split&nbsp;your&nbsp;fragment<br>
+into&nbsp;those&nbsp;parts&nbsp;and&nbsp;query&nbsp;the&nbsp;root&nbsp;elements,&nbsp;the&nbsp;children&nbsp;of&nbsp;the&nbsp;best&nbsp;match&nbsp;and&nbsp;so&nbsp;on.<br>
+
+<br>
+Furthermore&nbsp;it's&nbsp;a&nbsp;good&nbsp;idea&nbsp;to&nbsp;have&nbsp;some&nbsp;kind&nbsp;of&nbsp;conflict&nbsp;resolution&nbsp;strategy&nbsp;to&nbsp;be&nbsp;able&nbsp;to&nbsp;distinguish<br>
+between&nbsp;equally&nbsp;named&nbsp;elements&nbsp;that&nbsp;actually&nbsp;are&nbsp;different,&nbsp;e.g.&nbsp;properties&nbsp;may&nbsp;have&nbsp;the&nbsp;very&nbsp;same&nbsp;qualified<br>
+name&nbsp;as&nbsp;entities.&nbsp;<br>
 
 <br>
 
 </code>
 </p>
 </div>
-<p>Note that the currently available default fragment provider does nothing (i.e. falls back to the default behavior of EMF).</p>
 </div>
 </body>
 </html>

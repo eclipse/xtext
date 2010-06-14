@@ -17,7 +17,7 @@
 				<span class="emphasis"><em>character set</em></span>, describes the way characters are encoded into bytes and vice versa. 
 				Famous standard encodings are &ldquo;UTF-8&rdquo; or &ldquo;ISO-8859-1&rdquo;. The list of available encodings can be determined
 				by calling 
-				<code class="code">java.nio.Charset.availableCharsets()</code>. There is also a list of encodings and their 
+				<span class="emphasis"><em>java.nio.Charset.availableCharsets()</em></span>. There is also a list of encodings and their 
 				canonical Java names in the 
 				<a class="ulink" href="http://java.sun.com/j2se/1.5.0/docs/guide/intl/encoding.doc.html" target="_new">API docs</a>.
 			</p>
@@ -27,8 +27,8 @@
 				<code class="code">MacIceland</code> on Mac OS X in Icelandic. 
 			</p>
 <p>In an Eclipse workspace, files, folders, projects can have individual encodings, which are stored
-				in the file 
-				<code class="code">.settings/org.eclipse.core.resources.prefs</code> in each project. If a resource does not have an 
+				in the hidden file 
+				<span class="emphasis"><em>.settings/org.eclipse.core.resources.prefs</em></span> in each project. If a resource does not have an 
 				explicit encoding, it inherits the one from its parent recursively. Eclipse chooses the native
 				platform encoding as the default for the workspace root. You can change the default workspace 
 				encoding in the Eclipse preferences 
@@ -85,18 +85,19 @@
 </div>
 </div>
 <p>As each language could handle the encoding problem differently, Xtext offers a service here. 
-					The ${org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider} has a single method 
+					The 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java?root=Modeling_Project&view=co" target="_new">IEncodingProvider</a> has a single method 
 
 					<code class="code">getEncoding(URI)</code> to define the encoding of the resource with the given URI. Users can implement 
 					their own strategy but keep in mind that this is not intended to be a long running method. If the 
 					encoding is stored within the model file itself, it should be extractable in an easy way, like from 
-					then first line in an XML file. The default implementation returns the default Java character set 
+					the first line in an XML file. The default implementation returns the default Java character set 
 					in the runtime scenario. 
 				</p>
 <p>In the UI scenario, when there is a workspace, users will expect the encoding of the model files 
 					to be settable the same way as for other files in the workspace. The default implementation 
 					of the 
-					<code class="code">IEncodingProvider</code> in the UI scenario Xtext therefore returns the file&rsquo;s workspace encoding 
+					<code class="code">IEncodingProvider</code> in the UI scenario therefore returns the file&rsquo;s workspace encoding 
 					for files in the workspace and delegates to the runtime implementation for all other resources, 
 					e.g. models in a jar or from a deployed plug-in. Keep in mind that you are going to loose the 
 					workspace encoding information as soon as you leave this workspace, e.g. deploy your project.
@@ -118,7 +119,8 @@
 </div>
 </div>
 </div>
-<p>An ${org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource} uses the 
+<p>An 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&view=co" target="_new">XtextResource</a> uses the 
 					<code class="code">IEncodingProvider</code> 
 					of your language by default. You can override that by passing an option on load and save, e.g.
 				</p>
@@ -145,11 +147,13 @@ myXtextResource.save(options);<br>
 </div>
 </div>
 </div>
-<p>The ${org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment} 
+<p>The 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.java?root=Modeling_Project&view=co" target="_new">SimpleProjectWizardFragment</a> 
 					generates a wizard that clients of your language can use to create model 
 					projects. This wizard expects its templates to be in the encoding of the Generator that created it 
-					(see above). As every new project wizard, its output will be encoded in the default encoding of the 
-					target workspace. </p>
+					(see above). As for every new project wizard, its output will be encoded in the default encoding of the 
+					target workspace. 
+				</p>
 </div>
 <div class="section" title="Encoding of Xtext source code">
 <div class="titlepage">

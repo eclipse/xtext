@@ -11,23 +11,37 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Runtime Concepts</h1>
-<p>TMF Xtext itself and every language infrastructure developed with Xtext is configured and wired-up using 
-			<a class="link" href="dependencyInjection.html" title="Dependency Injection in Xtext with Google Guice">dependency injection</a>. Xtext may be used in different environments which introduce different constraints. Especially important is the difference between OSGi managed containers and plain vanilla Java programs. To honor these differences Xtext uses the concept of ${org.eclipse.xtext/src/org/eclipse/xtext/ISetup}-implementations in normal mode and uses Eclipse&rsquo;s extension mechanism when it should be configured in an OSGi environment.   
+<p>Xtext itself and every language infrastructure developed with Xtext is configured and wired-up using 
+
+			<a class="link" href="dependencyInjection.html" title="Dependency Injection in Xtext with Google Guice">dependency injection</a>. Xtext may be used in different environments which introduce 
+			different constraints. Especially important is the difference between OSGi managed containers and plain 
+			vanilla Java programs. To honor these differences Xtext uses the concept of 
+
+			<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java?root=Modeling_Project&view=co" target="_new">ISetup</a>-implementations in normal mode and uses Eclipse&rsquo;s 
+			extension mechanism when it should be configured in an OSGi environment.   
 		</p>
-<div class="section" title="Runtime setup (ISetup)">
+<div class="section" title="Runtime Setup (ISetup)">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title" style="clear: both">
-<a name="RuntimesetupISetup"></a>Runtime setup (ISetup)</h2>
+<a name="RuntimeSetupISetup"></a>Runtime Setup (ISetup)</h2>
 </div>
 </div>
 </div>
-<p>For each language there is an implementation of ${org.eclipse.xtext/src/org/eclipse/xtext/ISetup} generated. It implements a method called 
-				<span class="emphasis"><em>createInjectorAndDoEMFRegistration()</em></span>, which can be called to do the initialization of the language infrastructure. This class is intended to be used for runtime and for unit testing, only.
+<p>For each language there is an implementation of 
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java?root=Modeling_Project&view=co" target="_new">ISetup</a> 
+				generated. It implements a method called 
+				<span class="emphasis"><em>createInjectorAndDoEMFRegistration()</em></span>, which can be called 
+				to do the initialization of the language infrastructure. This class is intended to be used for 
+				runtime and for unit testing, only.
 			</p>
 <p>The setup method returns an 
-				<span class="emphasis"><em>Injector</em></span>, which can further be used to obtain a parser, etc. It also registers the ResourceFactory and generated EPackages at the respective global registries provided by EMF. So basically you can just run the setup and start using EMF API to load and store models of your language.
+				<span class="emphasis"><em>Injector</em></span>, which can further be used to obtain a parser, etc. It also 
+				registers the ResourceFactory and generated 
+				<span class="emphasis"><em>EPackages</em></span> at the respective global registries provided 
+				by EMF. So basically you can just run the setup and start using EMF API to load and store models of 
+				your language.
 			</p>
 </div>
 </body>

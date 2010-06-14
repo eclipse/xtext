@@ -7,7 +7,7 @@
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="MWE2.html" title="MWE2">
 <link rel="prev" href="MWE2LanguageReference.html" title="Language Reference">
-<link rel="next" href="MWE2RuntimeAPI.html" title="Workflow API">
+<link rel="next" href="IDEconcepts.html" title="IDE concepts">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Syntax Reference</h1>
@@ -60,9 +60,9 @@ ID:&nbsp;('a'..'z'|'A'..'Z'|'_')&nbsp;('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;&nbsp;<b
 				
 </p>
 <p>A 
-					<code class="code">module</code> consists of four parts. The very first statement in a 
+					<span class="emphasis"><em>module</em></span> consists of four parts. The very first statement in a 
 
-					<code class="code">*.mwe2</code> file is the module declaration. The name of the module must 
+					<span class="emphasis"><em>*.mwe2</em></span> file is the module declaration. The name of the module must 
 					follow the naming convention for Java classes. That MWE2 file&rsquo;s name 
 					must therefore be the same as the last segment of the module-name 
 					and it has to be placed in the appropriate package of a Java source 
@@ -107,9 +107,9 @@ ID:&nbsp;('a'..'z'|'A'..'Z'|'_')&nbsp;('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;&nbsp;<b
 					default value or they are considered to be mandatory. If the type
 					of property is omitted it will be inferred from the default value. The
 					default type of a property is 
-					<code class="code">java.lang.String</code> so if no default
+					<span class="emphasis"><em>java.lang.String</em></span> so if no default
 					value is available, the property is mandatory and of type 
-					<code class="code">String</code>.
+					<span class="emphasis"><em>String</em></span>.
 				</p>
 <p>There are four types of values available in MWE2. One may either
 					define a string, boolean or component literal or a reference to a
@@ -140,8 +140,8 @@ ID:&nbsp;('a'..'z'|'A'..'Z'|'_')&nbsp;('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;&nbsp;<b
 					If no type is given, it will be inferred from the left side of the
 					assignment. The assigned feature can either be a declared property
 					of the module or a 
-					<code class="code">set</code>- or 
-					<code class="code">add</code>-method of a Java class.
+					<span class="emphasis"><em>set</em></span>- or 
+					<span class="emphasis"><em>add</em></span>-method of a Java class.
 				</p>
 <p>Components can be named to make them referable in subsequent assignments.
 					Following the &lsquo;:&rsquo; keyword, one can define an identifier for the 
@@ -149,7 +149,7 @@ ID:&nbsp;('a'..'z'|'A'..'Z'|'_')&nbsp;('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;&nbsp;<b
 					and any assignment that is defined after the named component can refer
 					to this identifier and thereby point to exactly the instantiated object.</p>
 <p>The next option for a component is 
-					<code class="code">auto-inject</code>. If this modifier
+					<span class="emphasis"><em>auto-inject</em></span>. If this modifier
 					is set on a component, any available feature of the component that has
 					the same name as a property or previously created named component will
 					be automatically assigned.
@@ -200,10 +200,10 @@ var&nbsp;anotherString&nbsp;=&nbsp;'It&nbsp;is&nbsp;possible&nbsp;to&nbsp;embed&
 					choose double-quotes as delimiter and vice versa. There is no semantic 
 					difference between both notations.</p>
 <p>The escape character in MWE2 is the back-slash 
-					<code class="code">"\"</code>. It can be used
+					<span class="emphasis"><em>"\"</em></span>. It can be used
 					to write line-breaks or tabular characters explicitly and to escape
 					the beginning of substitution variables 
-					<code class="code">${</code> and the quotes itself. Allowed
+					<span class="emphasis"><em>${</em></span> and the quotes itself. Allowed
 					escape sequences are:
 				</p>
 <div class="literallayout">
@@ -231,8 +231,8 @@ var&nbsp;anotherString&nbsp;=&nbsp;'It&nbsp;is&nbsp;possible&nbsp;to&nbsp;embed&
 </div>
 </div>
 <p>MWE2 has native support for the boolean type. The literals are 
-					<code class="code">true</code> and 
-					<code class="code">false</code>.
+					<span class="emphasis"><em>true</em></span> and 
+					<span class="emphasis"><em>false</em></span>.
 				</p>
 </div>
 <div class="section" title="References">

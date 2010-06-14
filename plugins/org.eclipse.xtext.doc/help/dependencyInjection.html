@@ -11,7 +11,7 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Dependency Injection in Xtext with Google Guice</h1>
-<p>Xtext is based on Dependency Injection. This means basically that whenever some code is in need for functionality (or state) 
+<p>All Xtext components are assembled by means of Dependency Injection (DI). This means basically that whenever some code is in need for functionality (or state) 
 				from another component, one just declares the dependency rather then stating how to resolve it, i.e. obtaining that component.</p>
 <p>For instance when some code wants to use a scope provider, it just declares a field (or method or constructor) and 
 				adds the @Inject annotation: </p>
@@ -32,19 +32,19 @@
 </div>
 <p>It is not the duty of the code to care about where the 
 				<span class="emphasis"><em>IScopeProvider</em></span> comes from or how it is created. When above&rsquo;s
-				class is instantiated, Guice sees that it needs an instance of IScopeProvider and sets it to the specified field or method.
-				This of course only works, if the object itself is created by Guice. In Xtext almost every object is created that way 
+				class is instantiated, Guice sees that it requires an instance of IScopeProvider and assigns it to the specified field or method parameter.
+				This of course only works, if the object itself is created by Guice. In Xtext almost every instance is created that way 
 				and therefore the whole dependency net is controlled and configured by the means of Google Guice.
 			</p>
 <p>Guice of course needs to know how to instantiate real objects for declared dependencies. This is done in so called 
 				<span class="emphasis"><em>Modules</em></span>.
 				A 
-				<span class="emphasis"><em>Module</em></span> defines a set of mappings from types to either concrete instances, so called providers or
-				classes, which have a default constructor. Modules are implemented in Java, here&rsquo;s an example:
+				<span class="emphasis"><em>Module</em></span> defines a set of mappings from types to either existing instances, instance providers or concrete
+				classes. Modules are implemented in Java. Here&rsquo;s an example:
 			</p>
 <div class="literallayout">
 <p>
-<code class="code">public&nbsp;class&nbsp;MyDslRuntimeModule&nbsp;extends&nbsp;org.xtext.example.mydsl.AbstractMyDslRuntimeModule&nbsp;{<br>
+<code class="code">public&nbsp;class&nbsp;MyDslRuntimeModule&nbsp;extends&nbsp;AbstractMyDslRuntimeModule&nbsp;{<br>
 	@Override<br>
 	public&nbsp;void&nbsp;configure(Binder&nbsp;binder)&nbsp;{<br>
 		super.configure(binder);<br>
@@ -59,8 +59,8 @@
 </div>
 <p>With plain Guice modules one implements a method called configure and gets a so called 
 				<span class="emphasis"><em>Binder</em></span> passed in.
-				That binder provides a fluent API to define the mentioned mappings. This was just a very brief and simplified description,
-				we highly recommend to have a look at 
+				That binder provides a fluent API to define the mentioned mappings. This was just a very brief and simplified description.
+				We highly recommend to have a look at 
 				<a class="ulink" href="http://code.google.com/p/google-guice/" target="_new">the website Google Guice</a> to learn more.  
 			</p>
 <div class="section" title="Xtext&rsquo;s module API">
@@ -68,13 +68,13 @@
 <div>
 <div>
 <h3 class="title">
-<a name="XtextsmoduleAPI"></a>Xtext&rsquo;s module API</h3>
+<a name="guicemodules"></a>Xtext&rsquo;s module API</h3>
 </div>
 </div>
 </div>
-<p>Xtext comes with a slightly enhanced module API. For your language you get two different modules, one for the runtime bundle,
-					which is used, when executing your language infrastructure outside of Eclipse, such as on the build server. The other is
-					located in the ui bundle and adds and overrides bindings for running Xtext infrastructure within Eclipse. </p>
+<p>Xtext comes with a slightly enhanced module API. For your language you get two different modules: One for the runtime bundle
+					which is used when executing your language infrastructure outside of Eclipse such as on the build server. The other is
+					located in the UI bundle and adds or overrides bindings when Xtext is used within an Eclipse environment. </p>
 <p>The enhancement we added to Guice&rsquo;s Module API is that we provide an abstract base class, which reflectively looks for certain 
 					methods in order to find declared bindings. The most common kind of method is :</p>
 <div class="literallayout">
@@ -88,7 +88,7 @@
 </code>
 </p>
 </div>
-<p>which would do the same as the code snippet above, which is declare a binding from 
+<p>which would do the same as the code snippet above. It simply declares a binding from 
 					<span class="emphasis"><em>IScopeProvider</em></span> to 
 					<span class="emphasis"><em>MyConcreteScopeProvider</em></span>.
 					That binding will make Guice instantiate and inject a new instance of 
@@ -119,12 +119,12 @@
 </p>
 </div>
 <p>This one can be used if you need a hook whenever an instance of a certain type is created. For instance if you want to 
-					provide lazy access to a singleton or you need to to some computation each time an instance is created (i.e. factory). IF you want 
+					provide lazy access to a singleton or you need to do some computation each time an instance is created (i.e. factory). If you want 
 					to point to a provider rather than to a concrete class you can use the following binding method.</p>
 <div class="literallayout">
 <p>
-<code class="code">public&nbsp;Class&lt;?&nbsp;extends&nbsp;Provider&lt;IScopeProvider&gt;&gt;&nbsp;provideIEncodingProvider()&nbsp;{<br>
-	return&nbsp;MyConcreteScopeProviderProvider.class;<br>
+<code class="code">public&nbsp;Class&lt;?&nbsp;extends&nbsp;Provider&lt;IScopeProvider&gt;&gt;&nbsp;provideIScopeProvider()&nbsp;{<br>
+	return&nbsp;MyConcreteScopeProviderFactory.class;<br>
 }<br>
 
 <br>
@@ -132,15 +132,44 @@
 </code>
 </p>
 </div>
-<p>_(Please forgive us the overuse of the term 
-					<span class="emphasis"><em>provider</em></span>. The IScopeProvider is not a Guice 
-					<span class="emphasis"><em>provider</em></span>.)_
-				</p>
+<p>
+					
+<span class="italic">(Please forgive us the overuse of the term</span> provider. 
+					<span class="italic">The IScopeProvider is not a Guice</span> provider 
+					<span class="italic">.)</span>
+				
+</p>
 <p>That binding tells Guice to instantiate 
-					<span class="emphasis"><em>MyConcreteTypeProvider</em></span> and invoke get() in order to obtain an instance of 
-					<span class="emphasis"><em>MyType</em></span> 
-					for clients having declared a dependency to that type.
+					<span class="emphasis"><em>MyConcreteScopeProviderFactory</em></span> and invoke get() in order to obtain an instance of 
+
+					<span class="emphasis"><em>IScopeProvider</em></span> 
+					for clients having declared a dependency to that type. Both mentioned methods are allowed to return an instance instead of a type. This
+					may be useful if some global state should be shared in the application:
 				</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;Provider&lt;IScopeProvider&gt;&nbsp;provideIScopeProvider()&nbsp;{<br>
+	return&nbsp;new&nbsp;MyConcreteScopeProviderFactory();<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>or</p>
+<div class="literallayout">
+<p>
+<code class="code">public&nbsp;IScopeProvider&nbsp;bindIScopeProvider()&nbsp;{<br>
+	return&nbsp;new&nbsp;MyConcreteScopeProvider();<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>respectively.</p>
 <p>The last binding method provided by Xtext allows to do anything you can do with Guice&rsquo;s binding API, since it allows you to 
 					use it directly. If your method&rsquo;s name starts with the name &lsquo;configure&rsquo;, has a return type 
 					<span class="emphasis"><em>void</em></span> and accepts one argument of 
@@ -175,7 +204,7 @@
 <p>In every application wired up with Guice there is usually one point where you initialize a so called 
 					<span class="emphasis"><em>Injector</em></span> using the 
 					modules declared and after that using that injector to create the root instance of the whole application. In plain Java environments
-					this something done programmatically in the main method. It could look like this:
+					this is something that&rsquo;s done in the main method. It could look like this:
 				</p>
 <div class="literallayout">
 <p>
@@ -191,9 +220,9 @@
 </p>
 </div>
 <p>Xtext uses EMF which makes use of a couple of global registries, which have to be configured on startup. Because we
-					of course want to levarage Guice also for all factories, etc. we put into those registries, we have introduced a so called
+					of course want to leverage Guice also for all factories, etc. that we put into those registries, we have introduced a so called
 
-					<span class="emphasis"><em>ISetUp</em></span> which provides a method called 
+					<span class="emphasis"><em>ISetup</em></span> which provides a method called 
 					<span class="emphasis"><em>Injector createInjectorAndDoEMFRegistration()</em></span>. So instead of using the plain Guice
 					code shown above you rather use the 
 					<span class="emphasis"><em>ISetup</em></span> class generated for your language, which, as the method name suggests, creates

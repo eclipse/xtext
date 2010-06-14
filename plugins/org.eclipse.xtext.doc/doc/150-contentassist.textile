@@ -3,10 +3,10 @@ h2(#contentAssist). Content Assist
 
 The Xtext generator, amongst other things, generates the following two content assist (CA) related artifacts:
 
-* an abstract proposal provider class named @'Abstract[Language]ProposalProvider'@ generated into the @src-gen@ folder within the @ui@ project
-* a concrete descendent in the @src@-folder of the @ui@ project @[Language]ProposalProvider@
+* an abstract proposal provider class named _Abstract[Language]ProposalProvider_ generated into the _src-gen_ folder within the _ui_ project
+* a concrete sub-class in the _src_-folder of the _ui_ project called _[Language]ProposalProvider_
 
-First we will investigate the generated @Abstract[Language]ProposalProvider@ with methods that look like this:
+First we will investigate the generated _Abstract[Language]ProposalProvider_ with methods that look like this:
 
 h3. ProposalProvider
 
@@ -26,15 +26,26 @@ public void complete_[RuleName](
   // clients may override
 }
 
-p. The snippet above indicates that the generated ProposalProvider class contains a @complete*@-method for each assigned feature in the grammar and for each rule. The brackets are place-holders that should give a clue about the naming scheme used to create the various entry points for clients. The generated proposal provider falls back to some default behavior for cross references. Furthermore it inherits the logic that was introduced in reused grammars. 
+p. The snippet above indicates that the generated ProposalProvider class contains a _complete*_-method 
+for each assigned feature in the grammar and for each rule. The brackets are place-holders that should 
+give a clue about the naming scheme used to create the various entry points for clients. The generated 
+proposal provider falls back to some default behavior for cross references and keywords. Furthermore 
+it inherits the logic that was introduced in reused grammars. 
 
-Clients who want to customize the behavior may override the methods from the @AbstractProposalProvider@ or introduce new methods with specialized parameters. The framework dispatches method calls according to the current context to the most concrete implementation, that can be found.
+Clients who want to customize the behavior may override the methods from the 
+_AbstractProposalProvider_ or introduce new methods with a specialized first parameter. The framework 
+dispatches method calls according to the current context to the most concrete implementation, that 
+can be found.
 
-It is important to know, that for a given offset in a model file, many possible grammar elements exist. The framework dispatches to the method declarations for any valid element. That means, that a bunch of ''complete.*'' methods may be called.
+It is important to know, that for a given offset in a model file, many possible grammar elements exist. 
+The framework dispatches to the method declarations for any valid element. That means, that a bunch 
+of _complete*_ methods may be called.
 
 h3. Sample Implementation
 
-To provide a dummy proposal for the description of a model object, you may introduce a specialization of the generated method and implement it as follows. This will give 'Description for model #7' for a model with the intAttribute '7'
+To provide a dummy proposal for the description of a model object, you may introduce a specialization 
+of the generated method and implement it as follows. This will give 'Description for model #7' for a 
+model with the intAttribute '7'
 
 bc.. public void completeModel_StringDescription (
   Model model, 

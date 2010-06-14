@@ -14,7 +14,7 @@
 <topic href="help/getting-started.html#Buildyourowngrammar" label="Build your own grammar"></topic>
 <topic href="help/getting-started.html#Generatelanguageartifacts" label="Generate language artifacts"></topic>
 <topic href="help/getting-started.html#RunthegeneratedIDEplugin" label="Run the generated IDE plugin"></topic>
-<topic href="help/getting-started.html#Addingnamespace" label="Adding namespace"></topic>
+<topic href="help/getting-started.html#Addinganamespaceconcept" label="Adding a namespace concept"></topic>
 </topic>
 <topic href="help/processing_Xtext_models.html" label="Processing Xtext models">
 <topic href="help/processing_Xtext_models.html#resource" label="Loading a Resource"></topic>
@@ -83,7 +83,7 @@
 </topic>
 <topic href="help/grammarImport.html" label="Importing existing Ecore models"></topic>
 <topic href="help/grammarMixins.html" label="Grammar Mixins"></topic>
-<topic href="help/Defaulttokens.html" label="Default tokens"></topic>
+<topic href="help/CommonTerminals.html" label="Common Terminals"></topic>
 </topic>
 <topic href="help/configuration.html" label="Configuration">
 <topic href="help/configuration.html#generator" label="The Generator">
@@ -95,12 +95,12 @@
 <topic href="help/configuration.html#Standardgeneratorfragments" label="Standard generator fragments"></topic>
 </topic>
 <topic href="help/dependencyInjection.html" label="Dependency Injection in Xtext with Google Guice">
-<topic href="help/dependencyInjection.html#XtextsmoduleAPI" label="Xtext&rsquo;s module API"></topic>
+<topic href="help/dependencyInjection.html#guicemodules" label="Xtext&rsquo;s module API"></topic>
 <topic href="help/dependencyInjection.html#ObtaininganInjector" label="Obtaining an Injector"></topic>
 </topic>
 </topic>
 <topic href="help/RuntimeConcepts.html" label="Runtime Concepts">
-<topic href="help/RuntimeConcepts.html#RuntimesetupISetup" label="Runtime setup (ISetup)"></topic>
+<topic href="help/RuntimeConcepts.html#RuntimeSetupISetup" label="Runtime Setup (ISetup)"></topic>
 <topic href="help/SetupwithinEclipseEquinoxOSGi.html" label="Setup within Eclipse-Equinox (OSGi)"></topic>
 <topic href="help/Logging.html" label="Logging"></topic>
 <topic href="help/validation.html" label="Validation">
@@ -115,7 +115,7 @@
 </topic>
 <topic href="help/linking.html" label="Linking">
 <topic href="help/linking.html#Declarationofcrosslinks" label="Declaration of crosslinks"></topic>
-<topic href="help/linking.html#Defaultruntimebehaviorlazylinking" label="Default runtime behavior / lazy linking"></topic>
+<topic href="help/linking.html#DefaultruntimebehaviorLazyLinking" label="Default runtime behavior &ndash; Lazy Linking"></topic>
 </topic>
 <topic href="help/scoping.html" label="Scoping">
 <topic href="help/scoping.html#global_scopes" label="Global Scopes and IResourceDescriptions">
@@ -131,17 +131,17 @@
 <topic href="help/scoping.html#local_scoping" label="Local Scoping">
 <topic href="help/scoping.html#Declarativescoping" label="Declarative scoping"></topic>
 </topic>
-<topic href="help/scoping.html#Importednamespaceawarescoping" label="Imported namespace aware scoping">
+<topic href="help/scoping.html#ImportedNamespaceawareScoping" label="Imported Namespace-aware Scoping">
 <topic href="help/scoping.html#org.eclipse.xtextsrcorg.eclipse.xtext.scoping.IQualifiedNameProvider" label="IQualifiedNameProvider"></topic>
-<topic href="help/scoping.html#Importingnamespaces" label="Importing name spaces"></topic>
+<topic href="help/scoping.html#ImportingNamespaces" label="Importing Namespaces"></topic>
 </topic>
 </topic>
 <topic href="help/valueconverter.html" label="Value Converter">
-<topic href="help/valueconverter.html#Annotationbasedvalueconverters" label="Annotation based value converters"></topic>
+<topic href="help/valueconverter.html#AnnotationbasedValueConverters" label="Annotation-based Value Converters"></topic>
 </topic>
 <topic href="help/serialization.html" label="Serialization">
 <topic href="help/serialization.html#serializationcontract" label="The Contract"></topic>
-<topic href="help/serialization.html#RolesoftheSemanticModelandtheNodeModelDuringSerialization" label="Roles of the Semantic Model and the Node Model During Serialization"></topic>
+<topic href="help/serialization.html#RolesoftheSemanticModelandtheNodeModelduringSerialization" label="Roles of the Semantic Model and the Node Model during Serialization"></topic>
 <topic href="help/serialization.html#parsetreeconstructor" label="Parse Tree Constructor"></topic>
 <topic href="help/serialization.html#saveoptions" label="Options"></topic>
 <topic href="help/serialization.html#commentassociater" label="Preserving Comments from the Node Model"></topic>
@@ -190,12 +190,13 @@
 <topic href="help/MWE2SyntaxReference.html#MWE2BooleanLiterals" label="Boolean Literals"></topic>
 <topic href="help/MWE2SyntaxReference.html#MWE2References" label="References"></topic>
 </topic>
-<topic href="help/MWE2RuntimeAPI.html" label="Workflow API"></topic>
-<topic href="help/MWE2RuntimeSPI.html" label="Workflow SPI"></topic>
 </topic>
 <topic href="help/IDEconcepts.html" label="IDE concepts">
 <topic href="help/IDEconcepts.html#labelProvider" label="Label Provider">
-<topic href="help/IDEconcepts.html#DefaultLabelProvider" label="DefaultLabelProvider"></topic>
+<topic href="help/IDEconcepts.html#EObjectLabelProvider" label="Label providers for EObjects">
+<topic href="help/IDEconcepts.html#DefaultEObjectLabelProvider" label="DefaultEObjectLabelProvider"></topic>
+</topic>
+<topic href="help/IDEconcepts.html#DescriptionLabelProvider" label="Label providers for index entries"></topic>
 </topic>
 <topic href="help/contentAssist.html" label="Content Assist">
 <topic href="help/contentAssist.html#ProposalProvider" label="ProposalProvider"></topic>
@@ -218,6 +219,7 @@
 <topic href="help/hyperlinking.html#locationProvider" label="Location Provider">
 <topic href="help/hyperlinking.html#CustomizedLocationProvider" label="Customized Location Provider"></topic>
 </topic>
+<topic href="help/hyperlinking.html#CustomizingavailableHyperlinks" label="Customizing available Hyperlinks"></topic>
 </topic>
 <topic href="help/highlighting.html" label="Syntax Coloring">
 <topic href="help/highlighting.html#LexicalHighlighting" label="Lexical Highlighting"></topic>
@@ -242,7 +244,7 @@
 </topic>
 </topic>
 </topic>
-<topic href="help/migrating_from_0_7.html" label="Migrating from TMF Xtext 0.7.x">
+<topic href="help/migrating_from_0_7.html" label="Migrating from Xtext 0.7.x to 1.0">
 <topic href="help/migrating_from_0_7.html#TaketheShortcut" label="Take the Shortcut"></topic>
 <topic href="help/MigratingStepByStep.html" label="Migrating Step By Step">
 <topic href="help/MigratingStepByStep.html#UpdatethePluginDependenciesandImportStatements" label="Update the Plug-in Dependencies and Import Statements"></topic>

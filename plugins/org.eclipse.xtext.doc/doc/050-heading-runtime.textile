@@ -22,7 +22,7 @@ your language.
 
 h2. Setup within Eclipse-Equinox (OSGi)
 
-Within Eclipse we have a generated _Activator_, which creates a Guice injector using the "modules":guicemodules.
+Within Eclipse we have a generated _Activator_, which creates a Guice injector using the "modules":#guicemodules.
 In addition an _IExecutableExtensionFactory_ is generated for each language, which is used to create _ExecutableExtensions_.
 This means that everything which is created via extension points is managed by Guice as well, i.e. you can declare dependencies and get them injected upon creation. 
 

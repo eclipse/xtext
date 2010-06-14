@@ -1,9 +1,9 @@
 -------- File --------------------------- | -- content complete? -- | -- proofread by ------------------- | 
 666-world-domination-in-6-steps.textile   | yes (meysholdt)         | sefftinge, dhuebner                 |  
-000-introduction.textile                  | yes (se)                |      
+000-introduction.textile                  | yes (se)                | ß (partly)   
 010-concepts.textile                      | yes (se)                |    
 
-015-getting-started.textile               | yes (se)                |    
+015-getting-started.textile               | yes (se)                | ß (partly)   
 016-working-with-Xtext-models.textile     | yes (se)                |    
 017-getting-started-xpand.textile         | yes (se)                |    
 
@@ -24,17 +24,17 @@
 
 118-mwe-in-depth.textile                  | yes (ß)                 |    
 
-120-heading-UI.textile                    | ?                       |    
-130-managing-concurrency.textile          | ?                       |    
-140-labelprovider.textile                 | yes (jk)                |    
-150-contentassist.textile                 | ?                       |    
-155-quickfix.textile                      | yes (jk)                |    
-160-templates.textile                     | ?                       |    
-170-outline.textile                       | ?                       |    
-180-hyperlinking.textile                  | ?                       |    
-195-highlighting.textile                  | ?                       |    
-198-wizards.textile                       | ?                       |    
-199-jvmtypes.textile                      | ?                       |    
+120-heading-UI.textile                    | ?                       |  ß  
+130-managing-concurrency.textile          | empty                   |    
+140-labelprovider.textile                 | yes (jk)                |  ß  
+150-contentassist.textile                 | ?                       |  ß  
+155-quickfix.textile                      | yes (jk)                |  ß 
+160-templates.textile                     | yes (ß)                 |   
+170-outline.textile                       | ?                       |  ß  
+180-hyperlinking.textile                  | yes (ß)                 |    
+195-highlighting.textile                  | yes (ß)                 |    
+198-wizards.textile                       | yes (ß)                 |    
+199-jvmtypes.textile                      | yes (ß)                 |    
 
 200-Appendix.textile                      | ?                       |    
 210-emf-integration.textile               | yes (jk)                |    

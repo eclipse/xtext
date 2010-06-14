@@ -11,8 +11,8 @@ bc.. import org.eclipse.xtext.ui.generator.*
 
 // project wizard fragment
 fragment = projectWizard.SimpleProjectWizardFragment {
-	generatorProjectName = "${projectName}.generator"
-	modelFileExtension = file.extensions
+  generatorProjectName = "${projectName}.generator"
+  modelFileExtension = file.extensions
 }
 
 p. Here
