@@ -26,7 +26,7 @@
 
 120-heading-UI.textile                    | ?                       |    
 130-managing-concurrency.textile          | ?                       |    
-140-labelprovider.textile                 | ?                       |    
+140-labelprovider.textile                 | yes (jk)                |    
 150-contentassist.textile                 | ?                       |    
 155-quickfix.textile                      | yes (jk)                |    
 160-templates.textile                     | ?                       |    
