@@ -12,10 +12,10 @@
 030-generator.textile                     | ?                       |  se  
 040-dependency-injection.textile          | yes (se)                |    
 
-050-heading-runtime.textile               | ?                       |    
+050-heading-runtime.textile               | ?                       |  jk  
 060-validation.textile                    | ?                       |    
-070-linking.textile                       | ?                       |    
-080-scoping.textile                       | ?                       |    
+070-linking.textile                       | ?                       |  jk
+080-scoping.textile                       | yes (jk)                |    
 090-valueconverter.textile                | ?                       |    
 100-serialization.textile                 | ?                       |    
 105-formatting.textile                    | ?                       |    
@@ -28,7 +28,7 @@
 130-managing-concurrency.textile          | ?                       |    
 140-labelprovider.textile                 | ?                       |    
 150-contentassist.textile                 | ?                       |    
-155-quickfix.textile                      | ?                       |    
+155-quickfix.textile                      | yes (jk)                |    
 160-templates.textile                     | ?                       |    
 170-outline.textile                       | ?                       |    
 180-hyperlinking.textile                  | ?                       |    
@@ -37,7 +37,7 @@
 199-jvmtypes.textile                      | ?                       |    
 
 200-Appendix.textile                      | ?                       |    
-210-emf-integration.textile               | ?                       |    
+210-emf-integration.textile               | yes (jk)                |    
 215-migrating-from-0.7.textile            | ?                       |    
 230-antlr-ip-issue.textile                | ?                       |  se
 

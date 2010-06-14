@@ -7,7 +7,7 @@ h2. Runtime setup (ISetup)
 
 For each language there is an implementation of ${org.eclipse.xtext/src/org/eclipse/xtext/ISetup} generated. It implements a method called _createInjectorAndDoEMFRegistration()_, which can be called to do the initialization of the language infrastructure. This class is intended to be used for runtime and for unit testing, only.
 
-The setup method returns an _Injector_, which can further be used to obtain a parser, etc. It also registers the ResourceFactory and generated EPackages at the respective global registries provided by EMF. So basically you can just run the setup and start using EMF API to load and store models of your language.
+The setup method returns an _Injector_, which can further be used to obtain a parser, etc. It also registers the ResourceFactory and generated _EPackages_ at the respective global registries provided by EMF. So basically you can just run the setup and start using EMF API to load and store models of your language.
 
 h2. Setup within Eclipse-Equinox (OSGi)
 
