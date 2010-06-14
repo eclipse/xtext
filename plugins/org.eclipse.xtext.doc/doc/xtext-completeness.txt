@@ -20,7 +20,7 @@
 100-serialization.textile                 | ?                       |    
 105-formatting.textile                    | ?                       |    
 110-fragmentprovider.textile              | ?                       |    
-115-encoding.textile                      | ?                       |    
+115-encoding.textile                      | yes (jk)                |    
 
 118-mwe-in-depth.textile                  | ?                       |    
 
