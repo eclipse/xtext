@@ -16,10 +16,10 @@
 060-validation.textile                    | ?                       |  ß
 070-linking.textile                       | ?                       |  jk, ß
 080-scoping.textile                       | yes (jk)                |  ß
-090-valueconverter.textile                | ß                      |   
-100-serialization.textile                 | ?                       |    
-105-formatting.textile                    | ?                       |    
-110-fragmentprovider.textile              | yes (jk)                |    
+090-valueconverter.textile                | yes (ß)                 |   
+100-serialization.textile                 | ?                       |  ß    
+105-formatting.textile                    | ?                       |  ß  
+110-fragmentprovider.textile              | yes (jk)                |  ß  
 115-encoding.textile                      | yes (jk)                |    
 
 118-mwe-in-depth.textile                  | ?                       |    
