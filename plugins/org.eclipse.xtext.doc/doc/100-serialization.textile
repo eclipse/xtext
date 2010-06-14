@@ -1,9 +1,10 @@
 
 h2(#serialization). Serialization
 
-p. Serialization is the process of transforming an EMF model into its textual representation. Thereby, serialization complements parsing and lexing.
+p. Serialization is the process of transforming an EMF model into its textual representation. Thereby, 
+serialization complements parsing and lexing.
 
-In Xtext, the process of serialization is into the following steps:
+In Xtext, the process of serialization is split into the following steps:
 
 # Validating the semantic model. This is optional, enabled by default, done by the "concrete syntax validator":#concrete_syntax_validation and can be turned off in the "save options":#saveoptions. 
 # Matching the model elements with the grammar rules and creating a stream of tokens. This is done by the "parse tree constructor":#parsetreeconstructor.
@@ -12,32 +13,51 @@ In Xtext, the process of serialization is into the following steps:
 # "Merging existing whitespace":#hiddentokenmerger and line-wraps into to token stream. 
 # Adding further needed whitespace or replacing all whitespace using a "formatter":#formatting.  
 
-p. Serialization is invoked when calling ${org.eclipse.xtext/src/org.eclipse.xtext.resource.XtextResource}@.save(...)@. Furthermore, ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.Serializer} provides resource-independent support for serialization. Serialization is _not_ called when a textual editors contents is saved to disk. Another situation that triggers serialization is applying QuickFixes:#quickfixes with semantic modifications.
+p. Serialization is invoked when calling 
+${org.eclipse.xtext/src/org.eclipse.xtext.resource.XtextResource}.save(...). Furthermore, 
+${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.Serializer} provides resource-independent 
+support for serialization. Serialization is _not_ called when a textual editors contents is saved to disk. 
+Another situation that triggers serialization is applying "QuickFixes":#quickfixes with semantic modifications.
 
 h3(#serializationcontract). The Contract
 
-p. The contract of serialization says that a model that is serialized to its textual representation and then loaded (parsed) again should yield a loaded model that equals the original model. Please be aware that this does _not_ imply, that loading a textual representation and serializing it back produces identical textual representations. For example, this is the case when a default value is used in a textual representation and the assignment is optional. Another example is:
+p. The contract of serialization says that a model that is serialized to its textual representation 
+and then loaded (parsed) again should yield a loaded model that equals the original model. Please be 
+aware that this does _not_ imply, that loading a textual representation and serializing it back produces 
+identical textual representations. For example, this is the case when a default value is used in a 
+textual representation and the assignment is optional. Another example is:
 
 bc.. MyRule:
   (xval+=ID | yval+=INT)*;
   
-p.  @MyRule@ in this example reads @ID@- and @INT@-elements which may occur in an arbitrary order in the textual representation. However, when serializing the model all @ID@-elements will be written first and then all @INT@-elements. If the order is important it can be preserved by storing all elements in the same list - which may require wrapping the @ID@- and @INT@-elements into objects.
+p.  _MyRule_ in this example reads _ID_- and _INT_-elements which may occur in an arbitrary order in 
+the textual representation. However, when serializing the model all _ID_-elements will be written 
+first and then all _INT_-elements. If the order is important it can be preserved by storing all elements 
+in the same list - which may require wrapping the _ID_- and _INT_-elements into objects.
 
-h3. Roles of the Semantic Model and the Node Model During Serialization
+h3. Roles of the Semantic Model and the Node Model during Serialization
 
 A serialized document represents the state of the semantic model. However, if there is a node model available (i.e. the semantic model has been created by the parser), the serializer
 * preserves "existing whitespaces":#hiddentokenmerger from the node model.
 * preserves "existing comments":#commentassociater from the node model.
-* preserves the look of cross references: If a cross-referenced object can be identified by multiple names (i.e. scoping returns multiple EObjectDescriptions for the same object), the serializer tries to keep the previously used name. 
-* preserves the look of values: For values handled by the "value converter":#valueconverter, the serializer checks whether the textual representation converted to a value equals the value from the semantic model. If that is true, the textual representation is kept.  
+* preserves the representation of cross references: If a cross-referenced object can be identified by multiple names (i.e. scoping returns multiple EObjectDescriptions for the same object), the serializer tries to keep the previously used name. 
+* preserves the representation of values: For values handled by the "value converter":#valueconverter, the serializer checks whether the textual representation converted to a value equals the value from the semantic model. If that is true, the textual representation is kept.  
 
 h3(#parsetreeconstructor). Parse Tree Constructor
 
-p. The parse tree constructor usually does not need to be customized since it is automatically derived from the "Xtext Grammar":#grammarLanguage. However, it can be helpful to look into it to understand its error messages and its runtime performance.
+p. The parse tree constructor usually does not need to be customized since it is automatically derived 
+from the "Xtext Grammar":#grammarLanguage. However, it can be helpful to look into it to understand 
+its error messages and its runtime performance.
 
-For serialization to succeed, the parse tree constructor must be able to _consume_ every non-transient element of the to-be-serialized EMF model. To _consume_ means, in this context, to write the element to the textual representation of the model. This can turn out to be a not-so-easy to fulfill requirement, since a grammar usually introduces implicit constraints to the EMF model as explained for the "concrete syntax validator":#concrete_syntax_validation.
+For serialization to succeed, the parse tree constructor must be able to _consume_ every non-transient 
+element of the to-be-serialized EMF model. To _consume_ means, in this context, to write the element to 
+the textual representation of the model. This can turn out to be a not-so-easy-to-fulfill requirement, 
+since a grammar usually introduces implicit constraints to the EMF model as explained for the 
+"concrete syntax validator":#concrete_syntax_validation.
 
-If a model can not be serialized, an ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.XtextSerializationException} is thrown. Possible reasons are listed below:
+If a model can not be serialized, an 
+${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.XtextSerializationException} is thrown. 
+Possible reasons are listed below:
 
 * A model element can not be consumed. This can have the following reasons/solutions:
 ** The model element should not be stored in the model.
@@ -50,31 +70,54 @@ If a model can not be serialized, an ${org.eclipse.xtext/src/org.eclipse.xtext.p
 * "Value conversion":#valueconverter fails. The value converter can indicate that a value is not serializeable by throwing a ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.ValueConverterException}.
 * An enum literal is not allowed at this position. This can happen if the referenced enum rule only lists a subset of the literals of the actual enumeration.
 
-To understand error messages and performance issues of the parse tree constructor it is important to know that it implements a backtracking algorithm. This basically means that the grammar is used to specify the structure of a tree in which one path (from the root node to a leaf node) is a valid serialization of a specific model. The parse tree constructor's task is to find this path - with the condition, that all model elements are consumed while walking this path. The parse tree constructor's strategy is to take the most promising branch first (the one that would consume the most model elements). If the branch leads to a dead end (for example, if a model element needs to be consumed that is not present in the model), the parse tree constructor goes back the path until a different branch can be taken. This behavior has two consequences:
+To understand error messages and performance issues of the parse tree constructor it is important to 
+know that it implements a backtracking algorithm. This basically means that the grammar is used to 
+specify the structure of a tree in which one path (from the root node to a leaf node) is a valid 
+serialization of a specific model. The parse tree constructor's task is to find this path - with the 
+condition, that all model elements are consumed while walking this path. The parse tree constructor's 
+strategy is to take the most promising branch first (the one that would consume the most model elements). 
+If the branch leads to a dead end (for example, if a model element needs to be consumed that is not 
+present in the model), the parse tree constructor goes back the path until a different branch can be 
+taken. This behavior has two consequences:
 * In case of an error, the parse tree constructor has found only dead ends but no leaf. It cannot tell which dead end is actually erroneous. Therefore, the error message lists dead ends of the longest paths, a fragment of their serialization and the reason why the path could not be continued at this point. The developer has to judge on his own which reason is the actual error.
 *  For reasons of performance, it is critical that the parse tree constructor takes the most promising branch first and detects wrong branches early. One way to achieve this is to avoid having many rules which return the same type and which are called from within the same alternative in the grammar.
 
 h3(#saveoptions). Options
 
-${org.eclipse.xtext/src/org.eclipse.xtext.resource.SaveOptions} can be passed to ${org.eclipse.xtext/src/org.eclipse.xtext.resource.XtextResource}.save(options) and to ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.Serializer}. Available options are:
+${org.eclipse.xtext/src/org.eclipse.xtext.resource.SaveOptions} can be passed to 
+${org.eclipse.xtext/src/org.eclipse.xtext.resource.XtextResource}.save(options) and to 
+${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.Serializer}.serialize(..). 
+Available options are:
 * *Formatting*. Default: _false_. If enabled, it is the "formatters":#formatting job to determine all whitespace information during serialization. If disabled, the formatter only defines whitespace information for the places in which no whitespace information can be preserved from the node model. E.g. When new model elements are inserted or there is no node model.
 * *Validating*. Default: _true_: Run the "concrete syntax validator":#concrete_syntax_validation before serializing the model.
 
 h3(#commentassociater). Preserving Comments from the Node Model
 
-p. The ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.ICommentAssociater} associates comments with semantic objects. This is important in case an element in the semantic model is moved to a different position and the model is serialized, one expects the comments to be moved to the new position in the document as well.
+p. The ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.ICommentAssociater} associates 
+comments with semantic objects. This is important in case an element in the semantic model is moved 
+to a different position and the model is serialized, one expects the comments to be moved to the 
+new position in the document as well.
 
-p. Which comment belongs to which semantic object is surely a very subjective issue. The default implementation (${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.impl.DefaultCommentAssociater}) behaves as follows, but can be customized:
+p. Which comment belongs to which semantic object is surely a very subjective issue. The default 
+implementation (${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.impl.DefaultCommentAssociater}) 
+behaves as follows, but can be customized:
 * If there is a semantic token before a comment and in the same line, the comment is associated with this token's semantic object.
 * In all other cases, the comment is associated with the semantic object of the next following object.
 
 h3(#transientvalues). Transient Values
 
-p. Transient values are values or model elements which are not persisted (written to the textual representation in the serialization phase). If a model contains model elements which can not be serialized with the current grammar, it is critical to mark them transient using the ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.ITransientValueService}, or serialization will fail. The default implementation marks all model elements transient, for which @eStructuralFeature.isTransient() == true@ or @eObject.eIsSet(eStructuralFeature) == false@. By default, EMF returns @false@ for @eIsSet(...)@ if the value equals the default value.    
+p. Transient values are values or model elements which are not persisted (written to the textual 
+representation in the serialization phase). If a model contains model elements which can not be serialized 
+with the current grammar, it is critical to mark them transient using the 
+${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.ITransientValueService}, or serialization 
+will fail. The default implementation marks all model elements transient, which are _eStructuralFeature.isTransient()_ 
+or not _eObject.eIsSet(eStructuralFeature)_. By default, EMF returns _false_ for _eIsSet(...)_ if the 
+value equals the default value.    
 
 h3(#unassignedtext). Unassigned Text
 
-p. If there are calls of data type rules or terminal rules that do not reside in an assignment, the serializer by default doesn't know which value to use for serialization.  
+p. If there are calls of data type rules or terminal rules that do not reside in an assignment, 
+the serializer by default doesn't know which value to use for serialization.  
 
 p. . Example:
 
@@ -84,21 +127,37 @@ bc.. PluralRule:
 terminal Plural: 
   'item' | 'items';
   
-p. Valid models for this example are @contents 1 item@ or @contents 5 items@. However, it is not stored in the semantic model whether the keyword @item@ or @items@ has been parsed. This is due to the fact that the rule call @Plural@ is unassigned. However, the "parse tree constructor":#parsetreeconstructor needs to decide which value to write during serialization. This decision can be be made by customizing the ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer} @.serializeUnassignedValue(EObject, RuleCall, AbstractNode)@.  
+p. Valid models for this example are _contents 1 item_ or _contents 5 items_. However, it is not stored 
+in the semantic model whether the keyword _item_ or _items_ has been parsed. This is due to the fact 
+that the rule call _Plural_ is unassigned. However, the "parse tree constructor":#parsetreeconstructor 
+needs to decide which value to write during serialization. This decision can be be made by customizing 
+the _IValueSerializer.serializeUnassignedValue(EObject, RuleCall, AbstractNode)_.  
 
 h3(#crossreferenceserializer). Cross Reference Serializer
 
-p. The cross reference serializer specifies which values are to be written to the textual representation for cross references. This behavior can be customized by implementing ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer}. The default implementation delegates to ${org.eclipse.xtext/src/org.eclipse.xtext.linking.ILinkingService}, which may be the better place for customization.
+p. The cross reference serializer specifies which values are to be written to the textual representation 
+for cross references. This behavior can be customized by implementing 
+_ICrossReferenceSerializer_. 
+The default implementation delegates to various other services such as the _IScopeProvider_ or the 
+_LinkingHelper_ each of which may be the better place for customization.
 
 h3(#hiddentokenmerger). Merge Whitespaces
 
-p. After the "parse tree constructor":#parsetreeconstructor has done its job to create a stream of tokens which are to be written to the textual representation, and the "comment associator":#commentassociater has done its work, existing whitespace form the node model is merged into the stream. 
+p. After the "parse tree constructor":#parsetreeconstructor has done its job to create a stream of 
+tokens which are to be written to the textual representation, and the "comment associator":#commentassociater 
+has done its work, existing whitespace form the node model is merged into the stream. 
 
-p. The strategy is as follows: If two tokens follow each other in the stream and the corresponding nodes in the node model follow each other as well, then the whitespace information in between is kept. In all other cases it is up to the "formatter":formatting to calculate new whitespace information. 
+p. The strategy is as follows: If two tokens follow each other in the stream and the corresponding 
+nodes in the node model follow each other as well, then the whitespace information in between is kept. 
+In all other cases it is up to the "formatter":formatting to calculate new whitespace information. 
 
 h3(#tokenstream). Token Stream
 
-p. The "parse tree constructor":#parsetreeconstructor and the "formatter":#formatting use an ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.ITokenStream} for their output, and the latter for its input as well. This makes them chainable. Token streams can be converted to a @String@ using the ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer} and to an @Writer@ using the ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.impl.WriterTokenStream}. Maybe there will be an implementation to reconstruct a node model as well at some point in the future.
+p. The "parse tree constructor":#parsetreeconstructor and the "formatter":#formatting use an 
+${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.ITokenStream} for their output, and the 
+latter for its input as well. This makes them chainable. Token streams can be converted to a _String_ 
+using the ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer} and to 
+a _Writer_ using the ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.impl.WriterTokenStream}.
 
 bc.. public interface ITokenStream {
   void flush() throws IOException;

@@ -1,9 +1,12 @@
 
 h2(#formatting). Formatting (Pretty Printing)
 
-p. A formatter can be implemented via the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.IFormatter} service. Technically speaking, a formatter is a "Token Stream":#tokenstream which inserts/removes/modifies hidden tokens (whitespace, line-breaks, comments).
+p. A formatter can be implemented via the ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.IFormatter} 
+service. Technically speaking, a formatter is a "Token Stream":#tokenstream which 
+inserts/removes/modifies hidden tokens (whitespace, line-breaks, comments).
 
-The formatter is invoked during the "serialization phase":#serialization and when the user triggers formatting in the editor (for example, using the CTRL+SHIFT+F shortcut).
+The formatter is invoked during the "serialization phase":#serialization and when the user triggers 
+formatting in the editor (for example, using the CTRL+SHIFT+F shortcut).
 
 Xtext ships with two formatters:
 * The ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter} simply writes one whitespace between all tokens.
@@ -11,7 +14,9 @@ Xtext ships with two formatters:
 
 h3(#declarativeformatter). Declarative Formatter
 
-p. A declarative formatter can be implemented by sub-classing ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter}, as shown in the following example:
+p. A declarative formatter can be implemented by sub-classing 
+${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter}, as shown in 
+the following example:
 
 bc.. 
 public class ExampleFormatter extends AbstractDeclarativeFormatter {
@@ -56,9 +61,11 @@ public class ExampleFormatter extends AbstractDeclarativeFormatter {
   }
 }
 
-p. The formatter has to implement the method _configureFormatting(...)_ which declaratively sets up a ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.FormattingConfig}.
+p. The formatter has to implement the method _configureFormatting(...)_ which declaratively sets up 
+a ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.FormattingConfig}.
 
-The ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.FormattingConfig} consist general settings and a set of formatting instructions:
+The ${org.eclipse.xtext/src/org.eclipse.xtext.formatting.impl.FormattingConfig} consist of general 
+settings and a set of formatting instructions:
 
 h4. General FormattingConfig Settings
 
@@ -66,21 +73,31 @@ h4. General FormattingConfig Settings
 
 h4. FormattingConfig Instructions
 
-p. Per default, the "Declarative Formatter":#declarativeformatter inserts one whitespace between two tokens. Instructions can be used to specify a different behavior. They consist of two parts: _When_ to apply the instruction and _what_ to do.
+p. Per default, the "declarative formatter":#declarativeformatter inserts one whitespace between two 
+tokens. Instructions can be used to specify a different behavior. They consist of two parts: _When_ 
+to apply the instruction and _what_ to do.
 
-To understand _when_ an instruction is applied think of a stream of tokens whereas each token is associated with the corresponding grammar element. The instructions are matched against these grammar elements. The following matching criteria exist:
+To understand _when_ an instruction is applied think of a stream of tokens whereas each token is 
+associated with the corresponding grammar element. The instructions are matched against these grammar 
+elements. The following matching criteria exist:
 * _after(ele)_: The instruction is applied after the grammar element _ele_ has been matched. For example, if your grammar uses the keyword ";" to end lines, this can instruct the formatter to insert a line break after the semicolon.  
-* _before(ele)_: The instruction is executed before the matched element. For example, if your grammar contains lists which separate its values with keyword ",", you can instruct the formatter to suppress the whitespace before the comma.
+* _before(ele)_: The instruction is executed before the matched element. For example, if your grammar contains lists which separate their values with the keyword ",", you can instruct the formatter to suppress the whitespace before the comma.
 * _around(ele)_: This is the same as _before(ele)_ combined with  _after(ele)_.  
 * _between(ele1, ele2)_: This matches if _ele2_ directly follows _ele1_ in the document. There may be no other tokens in between _ele1_ and _ele2_.
 * _bounds(ele1, ele2)_: This is the same as _after(ele1)_ combined with  _before(ele2)_.
 * _range(ele1, ele2)_: The rule is enabled when _ele1_ is matched, and disabled when _ele2_ is matched. Thereby, the rule is active for the complete region which is surrounded by _ele1_ and _ele2_.
 
-p. The term _tokens_ is used slightly different here compared to the parser/lexer. Here, a token is a keyword or the string that is matched by a terminal rule, datatype rule or cross reference. In the terminology of the lexer a datatype rule can match a composition of multiple tokens.
+p. The term _tokens_ is used slightly different here compared to the parser/lexer. Here, a token is a 
+keyword or the string that is matched by a terminal rule, data type rule or cross reference. In the 
+terminology of the lexer a data type rule can match a composition of multiple tokens.
 
-p. The parameter _ele_ can be a grammar's _AbstractElement_ or a grammar's _AbstractRule_. All grammar rules and almost all abstract elements can be matched. This includes rule calls, parser rules, groups and alternatives. The semantic of _before(ele)_, _after(ele)_, etc. for rule calls and parser rules is identical to when the parser would "pass" this part of the grammar. The stack of called rules is taken into account. The following abstract elements can *not* have assigned formatting instructions:
+p. The parameter _ele_ can be a grammar's _AbstractElement_ or a grammar's _AbstractRule_. All grammar 
+rules and almost all abstract elements can be matched. This includes rule calls, parser rules, groups 
+and alternatives. The semantic of _before(ele)_, _after(ele)_, etc. for rule calls and parser rules is 
+identical to when the parser would "pass" this part of the grammar. The stack of called rules is taken 
+into account. The following abstract elements can *not* have assigned formatting instructions:
 * Actions. E.g. _{MyAction}_ or _{MyAction.myFeature=current}_.
-* Grammar elements nested in datatype rules. This is due to to the fact that tokens matched by a data type rule are treated as atomic by the serializer. To format the tokens themselfs, please implement a "ValueConverter":#valueconverter. 
+* Grammar elements nested in data type rules. This is due to to the fact that tokens matched by a data type rule are treated as atomic by the serializer. To format these tokens, please implement a "ValueConverter":#valueconverter. 
 * Grammar elements nested in _CrossReferences_.
 
 After having explained how rules can be activated, this is what they can do:
@@ -95,7 +112,10 @@ After having explained how rules can be activated, this is what they can do:
 
 h4. Grammar Element Finders
 
-Sometimes, if a grammar contains many similar elements for which the same formatting instructions ought to apply, it can be tedious to specify them for each grammar element individually. The ${org.eclipse.xtext/src/org.eclipse.xtext.IGrammarAccess} provides convenience methods for this. The find methods are available for the grammar and for each parser rule.
+Sometimes, if a grammar contains many similar elements for which the same formatting instructions ought 
+to apply, it can be tedious to specify them for each grammar element individually. The 
+${org.eclipse.xtext/src/org.eclipse.xtext.IGrammarAccess} provides convenience methods for this. The 
+find methods are available for the grammar and for each parser rule.
 
 * _findKeywords(String... keywords)_ returns all keywords that equal one of the parameters.
 * _findKeywordPairs(String leftKw, String rightKw)_: returns tuples of keywords from the same grammar rule. Pairs are matched nested and sequentially.  Example: for _Rule: '(' name=ID ('(' foo=ID ')') ')' | '(' bar=ID ')'_ _findKeywordPairs("(", ")")_ returns three pairs.

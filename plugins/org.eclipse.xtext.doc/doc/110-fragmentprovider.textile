@@ -1,18 +1,28 @@
 
 h3(#fragmentProvider). Fragment Provider (referencing Xtext models from other EMF artifacts)
 
-Although inter-Xtext linking is not done by URIs, you may want to be able to reference your _EObject_ from non-Xtext models.
-In those cases URIs are used, which are made up of a part identifying the resource. Each _EObject_ contained in a resource can be identified by a so called _fragment_.
+Although inter-Xtext linking is not done by URIs, you may want to be able to reference your _EObject_ 
+from non-Xtext models. In those cases URIs are used, which are made up of a part identifying the resource 
+and a second part that points to an object. 
+Each _EObject_ contained in a resource can be identified by a so called _fragment_.
 
 A fragment is a part of an EMF URI and needs to be unique per resource.
 
-The generic XMI resource shipped with EMF provides a generic path-like computation of fragments. These fragment paths are unique by default and do not have to be serialized. OTOH, they are can be broken by reordering the elements in a resource. 
+The generic resource shipped with EMF provides a generic path-like computation of fragments. These 
+fragment paths are unique by default and do not have to be serialized. On the other hand, they can be 
+easily broken by reordering the elements in a resource. 
 
-With an XMI or other binary-like serialization it is also common and possible to use UUIDs. UUIDs are usually binary and technical, so you don't want them in human readable representations.
+With an XMI or other binary-like serialization it is also common and possible to use UUIDs. UUIDs 
+are usually binary and technical, so you don't want them in human readable representations.
 
-However with a textual concrete syntax we want to be able to compute fragments out of the given information. We don't want to force people to use UUIDs (i.e. synthetic identifiers) or relative generic paths (very fragile), in order to refer to _EObjects_.
+However with a textual concrete syntax we want to be able to compute fragments out of the human readable 
+information. We don't want to force people to use UUIDs (i.e. synthetic identifiers) or fragile, relative, generic 
+paths in order to refer to _EObjects_.
 
-Therefore one can contribute a so called ${org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider} per language. It has two methods: _getFragment(EObject, Fallback)_ to calculate the fragment of an _EObject_  and _getEObject(Resource, String, Fallback)_ to go the opposite direction. The _Fallback_ interface allows to delegate to the default strategy - usually the fragment paths described above. 
+Therefore one can contribute a so called ${org.eclipse.xtext/src/org.eclipse.xtext.resource.IFragmentProvider} 
+per language. It has two methods: _getFragment(EObject, Fallback)_ to calculate the fragment of an 
+_EObject_ and _getEObject(Resource, String, Fallback)_ to go the opposite direction. The _Fallback_ 
+interface allows to delegate to the default strategy - usually the fragment paths described above. 
 
 The following snippet from the "GMF Example":#gmf_integration shows how to use qualified names as fragments:   
 
@@ -41,4 +51,12 @@ bc.. public QualifiedNameFragmentProvider implements IFragmentProvider {
 	}
 }
 
+For performance reasons it is usually a good idea to navigate the resource based on the fragment 
+information instead of traversing it completely. If you know that your fragment is computed from 
+qualified names and your model contains something like _NamedElements_, you should split your fragment
+into those parts and query the root elements, the children of the best match and so on.
+
+Furthermore it's a good idea to have some kind of conflict resolution strategy to be able to distinguish
+between equally named elements that actually are different, e.g. properties may have the very same qualified
+name as entities. 
 
