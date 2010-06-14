@@ -5237,7 +5237,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;ConcreteSyntaxEValidator&gt;&nbsp;bindC
 <span class="emphasis"><em>diagnose()</em></span> and 
 					<span class="emphasis"><em>validate(model)</em></span> return an object of type 
 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.junit/src/org/eclipse/xtext/validation/AssertableDiagnostics.java?root=Modeling_Project&view=co" target="_new">AssertableDiagnostics</a> which provides 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.junit/src/org/eclipse/xtext/junit/validation/AssertableDiagnostics.java?root=Modeling_Project&view=co" target="_new">AssertableDiagnostics</a> which provides 
 					several 
 					<span class="emphasis"><em>assert</em></span>-methods to verify whether the expected diagnostics are present:
 				</p>
@@ -6836,7 +6836,7 @@ terminal&nbsp;Plural:&nbsp;<br>
 <p>The strategy is as follows: If two tokens follow each other in the stream and the corresponding 
 					nodes in the node model follow each other as well, then the whitespace information in between is kept. 
 					In all other cases it is up to the 
-					<a class="ulink" href="formatting" target="_new">formatter</a> to calculate new whitespace information. 
+					<a class="link" href="#formatting" title="Formatting (Pretty Printing)">formatter</a> to calculate new whitespace information. 
 				</p>
 </div>
 <div class="section" title="Token Stream">
@@ -8930,9 +8930,8 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 				specific 
 				<span class="emphasis"><em>code</em></span> with the diagnostic.
 			</p>
-<p>In the following example (from 
-
-				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.example.domainmodel/src/org/eclipse/xtext/example/validation/DomainmodelJavaValidator.java?root=Modeling_Project&view=co" target="_new">DomainmodelJavaValidator</a>) 
+<p>In the following example taken from the 
+				<span class="emphasis"><em>DomainmodelJavaValidator</em></span> 
 				the diagnostic&rsquo;s 
 				<span class="emphasis"><em>code</em></span> is given by the last argument to the 
 				<span class="emphasis"><em>warning()</em></span> method and it is a reference 
@@ -8958,9 +8957,8 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 				in our DSL&rsquo;s UI project and new entries in the _plugin.xml___gen_ file.
 			</p>
 <p>Continuing with the _INVALID_TYPE_NAME_ problem from the Domainmodel example we add a method with which 
-				the problem can be fixed (see also 
-
-				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.example.domainmodel.ui/src/org/eclipse/xtext/example/quickfix/DomainmodelQuickfixProvider.java?root=Modeling_Project&view=co" target="_new">DomainmodelQuickfixProvider</a>):
+				the problem can be fixed (have a look at the 
+				<span class="emphasis"><em>DomainmodelQuickfixProvider</em></span> for details):
 			</p>
 <div class="literallayout">
 <p>
@@ -10454,7 +10452,7 @@ fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
 				<span class="emphasis"><em>XtextResource</em></span> we have provided an example. You must have the Helios version 2.3 of GMF Notation, Runtime and Tooling and their dependencies installed in your workbench to run the example. With other versions of GMF it might work to regenerate the diagram code. Choose 
 				<span class="emphasis"><em>New-&gt;Examples-&gt;Xtext-&gt;Xtext GMF Integration</em></span> to import it into your workbench. The example consists of a number of plug-ins
 			</p>
-<table id="N120AE">
+<table id="N120AC">
 <tr>
 					
 <td>Plug-in</td>

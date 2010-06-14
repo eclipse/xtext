@@ -149,7 +149,7 @@ has done its work, existing whitespace form the node model is merged into the st
 
 p. The strategy is as follows: If two tokens follow each other in the stream and the corresponding 
 nodes in the node model follow each other as well, then the whitespace information in between is kept. 
-In all other cases it is up to the "formatter":formatting to calculate new whitespace information. 
+In all other cases it is up to the "formatter":#formatting to calculate new whitespace information. 
 
 h3(#tokenstream). Token Stream
 

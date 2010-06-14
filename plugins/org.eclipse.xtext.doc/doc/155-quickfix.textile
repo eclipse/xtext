@@ -9,8 +9,7 @@ for a given diagnostic (a warning or error) the underlying _cause_ of the diagno
 to be done. As we don't want to deduce this from the diagnostic's error message we associate a problem 
 specific _code_ with the diagnostic.
 
-In the following example (from 
-${org.eclipse.xtext.example.domainmodel/src/org.eclipse.xtext.example.validation.DomainmodelJavaValidator}) 
+In the following example taken from the _DomainmodelJavaValidator_ 
 the diagnostic's _code_ is given by the last argument to the _warning()_ method and it is a reference 
 to the static _String_ field _INVALID_TYPE_NAME_ in the validator class.
 
@@ -24,8 +23,7 @@ to our workflow and after regenerating the code we should find an empty class _M
 in our DSL's UI project and new entries in the _plugin.xml___gen_ file.
 
 Continuing with the _INVALID_TYPE_NAME_ problem from the Domainmodel example we add a method with which 
-the problem can be fixed (see also 
-${org.eclipse.xtext.example.domainmodel.ui/src/org.eclipse.xtext.example.quickfix.DomainmodelQuickfixProvider}):
+the problem can be fixed (have a look at the _DomainmodelQuickfixProvider_ for details):
 
 bc.. @Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)
 public void fixName(final Issue issue, IssueResolutionAcceptor acceptor) {

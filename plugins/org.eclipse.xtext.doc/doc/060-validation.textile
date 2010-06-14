@@ -187,7 +187,7 @@ to the framework to call the applicable @Check-methods. However, to avoid side-e
 it is recommended to call the @Check-methods directly.
 
 _diagnose()_ and _validate(model)_ return an object of type 
-${org.eclipse.xtext.junit/src/org.eclipse.xtext.validation.AssertableDiagnostics} which provides 
+${org.eclipse.xtext.junit/src/org.eclipse.xtext.junit.validation.AssertableDiagnostics} which provides 
 several _assert_-methods to verify whether the expected diagnostics are present:
 
 * _assertError(int code)_: There must be one diagnostic with severity ERROR and the supplied error code.
