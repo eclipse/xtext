@@ -103,7 +103,8 @@ public&nbsp;void&nbsp;fixName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueResolutionA
 				text region.    
 			</p>
 <p>If you prefer to implement the quick fix in terms of the semantic model use a 
-				${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.model.edit.ISemanticModification.java} instead. 
+
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/ISemanticModification.java?root=Modeling_Project&view=co" target="_new">ISemanticModification</a> instead. 
 				Its 
 				<span class="emphasis"><em>apply(EObject, IModificationContext)</em></span> method will be invoked inside a modify-transaction and the 
 				first argument will be the erroneous semantic element. This makes it very easy for the fix method to 

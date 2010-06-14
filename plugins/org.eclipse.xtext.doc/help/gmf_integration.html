@@ -16,7 +16,7 @@
 				<span class="emphasis"><em>XtextResource</em></span> we have provided an example. You must have the Helios version 2.3 of GMF Notation, Runtime and Tooling and their dependencies installed in your workbench to run the example. With other versions of GMF it might work to regenerate the diagram code. Choose 
 				<span class="emphasis"><em>New-&gt;Examples-&gt;Xtext-&gt;Xtext GMF Integration</em></span> to import it into your workbench. The example consists of a number of plug-ins
 			</p>
-<table id="N12092">
+<table id="N120AE">
 <tr>
 					
 <td>Plug-in</td>
@@ -102,7 +102,9 @@
 <p>Having an Xtext editor and a canonical GMF editor on the same resource can therefore lead to loss of notational information, as a change in the Xtext editor will remove a subtree in the AST, causing the  
 					<span class="emphasis"><em>CanonicalEditPolicy</em></span> to remove all notational elements, even though it was customized by the user. The Xtext rebuilds the AST and the notation model is restored using the default mapping. It is therefore not recommended to let an Xtext editor and a canonical GMF editor work on the same resource.    
 				</p>
-<p>In this example, we let each editor use its own memory instance of the model and synchronize on file changes only. Both frameworks already synchronize with external changes to the edited files out-of-the-box. In the glue code, a ${org.eclipse.xtext.gmf.glue/src/org/eclipse/xtext/gmf/glue/concurrency/ConcurrentModificationObserver} warns the user if she tries to edit the same file with two different model editors concurrently.</p>
+<p>In this example, we let each editor use its own memory instance of the model and synchronize on file changes only. Both frameworks already synchronize with external changes to the edited files out-of-the-box. In the glue code, a 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.gmf.glue/src/org/eclipse/xtext/gmf/glue/concurrency/ConcurrentModificationObserver.java?root=Modeling_Project&view=co" target="_new">ConcurrentModificationObserver</a> warns the user if she tries to edit the same file with two different model editors concurrently.
+				</p>
 <p>In the example, we started with writing an Xtext grammar for an entity language. As explained above, we preferred optional assignments and rather covered mandatory attributes in a validator. Into the bargain, we added some services to improve the EMF integration, namely a formatter, a fragment provider and an unloader. Then we let Xtext generate the language infrastructure. From the derived Ecore model and its generator model, we generated the edit plug-in (needed by GMF) and added some fancier icons. </p>
 <p>From the GMF side, we followed the default procedure and created a gmfgraph model, a gmftool model and a gmfmap model referring to the Ecore model derived form the Xtext grammar. We changed some settings in the gmfgen model derived by GMF from the gmfmap model, namely to enable printing and to enable validation and validation decorators. Then we generated the diagram editor.     </p>
 <p>Voil&agrave;, we now have a diagram editor that reads/writes its semantic model as text. Also note that the validator from Xtext is already integrated in the diagram editor via the menu bar. </p>
@@ -119,11 +121,15 @@
 <p>An 
 						<span class="emphasis"><em>XtextResource</em></span> keeps track of it&rsquo;s concrete syntax representation by means of a so called node model (see :#parser_rules for a more detailed description). The node model represents the parse tree and provides information on the offset, length and text that has been parsed to create a semantic model element. The nodes are attached to their semantic elements by means of a node adapter.    
 					</p>
-<p>We can use the node adapter to access the text block that represents an attribute, and call the Xtext parser to parse the user input. The example code is contained in  ${org.eclipse.xtext.gmf.glue/src/org/eclipse/xtext/gmf/glue/edit/part/AntlrParserWrapper}. ${org.eclipse.xtext.example.gmf.diagram.extensions/src/org/eclipse/xtext/example/gmf/diagram/edit/part/SimplePropertyWrapperEditPartOverride} shows how this is integrated into the generated GMF editor. Use the 
+<p>We can use the node adapter to access the text block that represents an attribute, and call the Xtext parser to parse the user input. The example code is contained in  
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.gmf.glue/src/org/eclipse/xtext/gmf/glue/edit/part/AntlrParserWrapper.java?root=Modeling_Project&view=co" target="_new">AntlrParserWrapper</a>. 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.example.gmf.diagram.extensions/src/org/eclipse/xtext/example/gmf/diagram/edit/part/SimplePropertyWrapperEditPartOverride.java?root=Modeling_Project&view=co" target="_new">SimplePropertyWrapperEditPartOverride</a> shows how this is integrated into the generated GMF editor. Use the 
 						<span class="emphasis"><em>EntitiesEditPartFactoryOverride</em></span> to instantiate it and the 
 						<span class="emphasis"><em>EntitiesEditPartProviderOverride</em></span> to create the overridden factory, and register the latter to the extension point. Note that this is a non-invasive way to extend generated GMF editors.
 					</p>
-<p>When you test the editor, you will note that the node model will be corrupt after editing a few labels. This is because the node model is only updated by the Xtext parser and not by the serializer. So we need a way to automatically call the (partial) parser every time the semantic model is changed. You will find the required classes in the package ${org.eclipse.xtext.gmf.glue/src/org.eclipse.xtext.gmf.glue.editingdomain}. To activate node model reconciling, you have to add a line </p>
+<p>When you test the editor, you will note that the node model will be corrupt after editing a few labels. This is because the node model is only updated by the Xtext parser and not by the serializer. So we need a way to automatically call the (partial) parser every time the semantic model is changed. You will find the required classes in the package 
+						<span class="emphasis"><em>org.eclipse.xtext.gmf.glue.editingdomain</em></span>. To activate node model reconciling, you have to add a line 
+					</p>
 <div class="literallayout">
 <p>
 <code class="code">org.eclipse.xtext.gmf.glue.editingdomain.XtextNodeModelReconciler.adapt(editingDomain);<br>
@@ -171,7 +177,10 @@
 </div>
 </div>
 </div>
-<p>${org.eclipse.xtext.example.gmf.diagram.extensions/src/org/eclipse/xtext/example/gmf/diagram/edit/part/SimplePropertyPopupXtextEditorEditPartOverride} demonstrates how to spawn an Xtext editor to edit a model element. The editor pops up in its control and shows only the section of the selected element. It is a fully fledged Xtext editor, with support of validation, code assist and syntax highlighting. The edited text is only transfered back to the model if it does not have any errors.   </p>
+<p>
+						
+<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.example.gmf.diagram.extensions/src/org/eclipse/xtext/example/gmf/diagram/edit/part/SimplePropertyPopupXtextEditorEditPartOverride.java?root=Modeling_Project&view=co" target="_new">SimplePropertyPopupXtextEditorEditPartOverride</a> demonstrates how to spawn an Xtext editor to edit a model element. The editor pops up in its control and shows only the section of the selected element. It is a fully fledged Xtext editor, with support of validation, code assist and syntax highlighting. The edited text is only transfered back to the model if it does not have any errors.   
+					</p>
 <p>Note that there still are synchronization issues, that&rsquo;s why we keep this one marked as experimental.</p>
 </div>
 </div>

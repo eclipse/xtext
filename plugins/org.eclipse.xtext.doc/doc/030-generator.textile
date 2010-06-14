@@ -192,8 +192,8 @@ Following the _bean_ assignment there are three _component_ elements. The _Workf
 accepts instances of _IWorkflowComponent_, which is the primary concept of MWE2's workflow model. Xtext's generator 
 itself is an instance of _IWorkflowComponent_ and can therefore be used within MWE2 workflows. 
 
-There are two fragments ${org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ImplicitRuntimeFragment} and 
-${org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/ImplicitUiFragment} will be called implicitly if 
+There are two fragments ${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.ImplicitRuntimeFragment} and 
+${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.ImplicitUiFragment} will be called implicitly if 
 the required paths and project names are set. They take care of common defaults.  
 
 h3. Standard generator fragments

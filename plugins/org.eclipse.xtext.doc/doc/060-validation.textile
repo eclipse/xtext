@@ -50,13 +50,19 @@ p. There are some limitations to the concrete syntax validator which result from
 * Grammar rules that delegate to one or more rules containing assigned actions via unassigned rule calls are ignored.
 * Orders within list-features can not be validated. e.g. _Rule: (foo+=R1 foo+=R2)*_ implies that _foo_ is expected to contain instances of _R1_ and _R1_ in an alternating order. 
 
-p. To use concrete syntax validation you can let Guice inject an instance of ${org.eclipse.xtext/src/org.eclipse.xtext.validation.IConcreteSyntaxValidator} and use it directly. Furthermore, there is an adapter (${org.eclipse.xtext/src/org.eclipse.xtext.validation.impl.ConcreteSyntaxEValidator}) allows integrating of the concrete syntax validator as an _EValidator_. You can, for example, enable it in your runtime module, by adding:
+p. To use concrete syntax validation you can let Guice inject an instance of 
+${org.eclipse.xtext/src/org.eclipse.xtext.validation.IConcreteSyntaxValidator} and use it directly. 
+Furthermore, there is an adapter (${org.eclipse.xtext/src/org.eclipse.xtext.validation.impl.ConcreteSyntaxEValidator}) 
+allows integrating of the concrete syntax validator as an _EValidator_. You can, for example, enable it in 
+your runtime module, by adding:
 
 bc.. @SingletonBinding(eager = true)
 public Class<? extends ConcreteSyntaxEValidator> bindConcreteSyntaxEValidator() {
   return ConcreteSyntaxEValidator.class;
 }
-p. To customize error messages please see ${org.eclipse.xtext/src/org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider} and subclass ${org.eclipse.xtext/src/org.eclipse.xtext.validation.impl.ConcreteSyntaxDiagnosticProvider}.
+p. To customize error messages please see 
+${org.eclipse.xtext/src/org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider} and subclass 
+${org.eclipse.xtext/src/org.eclipse.xtext.validation.impl.ConcreteSyntaxDiagnosticProvider}.
 
 
 h3(#custom_validation). Custom Validation
@@ -190,6 +196,6 @@ several _assert_-methods to verify whether the expected diagnostics are present:
 * _assertWarning(...)_: This method is available for the same combination of parameters as _assertError()_.
 * _assertOK()_: Expects that no diagnostics (errors, warnings etc.) have been raised.   
 * _assertDiagnostics(int severity, int code, String messageFragment)_: Verifies severity, error code and messageFragment.
-* _assertAll(DiagnosticPredicate... predicates)_: Allows to describe multiple diagnostics at the same time and verifies that all of them are present. Class ${org.eclipse.xtext/src/org/eclipse/xtext/validation/AssertableDiagnostics} contains static _error()_ and _warning()_-methods which help to create the needed _DiagnosticPredicate_. Example: _assertAll(error(123), warning("some part of the message"))_. 
+* _assertAll(DiagnosticPredicate... predicates)_: Allows to describe multiple diagnostics at the same time and verifies that all of them are present. Class ${org.eclipse.xtext/src/org.eclipse.xtext.validation.AssertableDiagnostics} contains static _error()_ and _warning()_-methods which help to create the needed _DiagnosticPredicate_. Example: _assertAll(error(123), warning("some part of the message"))_. 
 * _assertAny(DiagnosticPredicate predicate)_: Asserts that a diagnostic exists which matches the predicate. 
 

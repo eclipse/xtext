@@ -177,9 +177,13 @@
 </ul>
 </div>
 <p>To use concrete syntax validation you can let Guice inject an instance of 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/IConcreteSyntaxValidator.java?root=Modeling_Project&view=co" target="_new">IConcreteSyntaxValidator</a> and use it directly. Furthermore, there is an adapter (
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/impl/ConcreteSyntaxEValidator.java?root=Modeling_Project&view=co" target="_new">ConcreteSyntaxEValidator</a>) allows integrating of the concrete syntax validator as an 
-						<span class="emphasis"><em>EValidator</em></span>. You can, for example, enable it in your runtime module, by adding:
+
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/IConcreteSyntaxValidator.java?root=Modeling_Project&view=co" target="_new">IConcreteSyntaxValidator</a> and use it directly. 
+						Furthermore, there is an adapter (
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/impl/ConcreteSyntaxEValidator.java?root=Modeling_Project&view=co" target="_new">ConcreteSyntaxEValidator</a>) 
+						allows integrating of the concrete syntax validator as an 
+						<span class="emphasis"><em>EValidator</em></span>. You can, for example, enable it in 
+						your runtime module, by adding:
 					</p>
 <div class="literallayout">
 <p>
@@ -192,7 +196,9 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;ConcreteSyntaxEValidator&gt;&nbsp;bindC
 </p>
 </div>
 <p>To customize error messages please see 
+
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/IConcreteSyntaxDiagnosticProvider.java?root=Modeling_Project&view=co" target="_new">IConcreteSyntaxDiagnosticProvider</a> and subclass 
+
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/impl/ConcreteSyntaxDiagnosticProvider.java?root=Modeling_Project&view=co" target="_new">ConcreteSyntaxDiagnosticProvider</a>.
 					</p>
 </div>
@@ -480,7 +486,8 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;ConcreteSyntaxEValidator&gt;&nbsp;bindC
 <li class="listitem">
 <p>
 							
-<span class="emphasis"><em>assertAll(DiagnosticPredicate... predicates)</em></span>: Allows to describe multiple diagnostics at the same time and verifies that all of them are present. Class ${org.eclipse.xtext/src/org/eclipse/xtext/validation/AssertableDiagnostics} contains static 
+<span class="emphasis"><em>assertAll(DiagnosticPredicate... predicates)</em></span>: Allows to describe multiple diagnostics at the same time and verifies that all of them are present. Class 
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AssertableDiagnostics.java?root=Modeling_Project&view=co" target="_new">AssertableDiagnostics</a> contains static 
 							<span class="emphasis"><em>error()</em></span> and 
 							<span class="emphasis"><em>warning()</em></span>-methods which help to create the needed 
 							<span class="emphasis"><em>DiagnosticPredicate</em></span>. Example: 

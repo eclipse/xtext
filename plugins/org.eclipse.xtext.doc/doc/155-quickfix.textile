@@ -63,7 +63,7 @@ access to the erroneous document. In this case, we're using Eclipse's _IDocument
 text region.    
 
 If you prefer to implement the quick fix in terms of the semantic model use a 
-${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.model.edit.ISemanticModification.java} instead. 
+${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.model.edit.ISemanticModification} instead. 
 Its _apply(EObject, IModificationContext)_ method will be invoked inside a modify-transaction and the 
 first argument will be the erroneous semantic element. This makes it very easy for the fix method to 
 modify the model as necessary. After the method returns the model as well as the Xtext editor's content 

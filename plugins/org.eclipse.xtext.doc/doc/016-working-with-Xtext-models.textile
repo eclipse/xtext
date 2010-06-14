@@ -81,7 +81,7 @@ for (AbstractElement abstractElement : elements) {
   }
 }
 
-p. Note that you'll find a lot of convenience API in EMF's _EcoreUtil_ and Xtext's ${org.eclipse.xtext/src/org/eclipse/xtext/EcoreUtil2}. 
+p. Note that you'll find a lot of convenience API in EMF's _EcoreUtil_ and Xtext's ${org.eclipse.xtext/src/org.eclipse.xtext.EcoreUtil2}. 
   
 h3(#node_model). Working with the parse tree (aka node model)
 
@@ -105,7 +105,7 @@ System.out.println(text);
 p. In addition to the text _LeafNodes_ also hold information about the line, the offset and the length of that token.
 
 The other node type is called _CompositeNode_ and is created for almost each grammar element. A composite node can contain other composite nodes and leaf nodes.
-The super type of both node types is _AbstractNode_. One can find a couple of convenience methods in ${org.eclipse.xtext/src/org/eclipse/xtext/parsetree/NodeUtil} and ${org.eclipse.xtext/src/org/eclipse/xtext/parsetree/ParseTreeUtil}.
+The super type of both node types is _AbstractNode_. One can find a couple of convenience methods in ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.NodeUtil} and ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.ParseTreeUtil}.
 
 h3(#working_with_grammar_model). Working with the grammar
 
