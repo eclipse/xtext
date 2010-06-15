@@ -15,18 +15,19 @@ h3. Annotation-based Value Converters
 
 The most simple way to register additional value converters is to make use of 
 ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.impl.AbstractDeclarativeValueConverterService}, 
-which allows to declaratively register an _IValueConverter_ by means of an annotated method. 
+which allows to declaratively register an ${org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverter}
+by means of an annotated method. 
 
 p. If you use the common terminals grammar _org.eclipse.xtext.common.Terminals_ you should subclass 
 ${org.eclipse.xtext/src/org.eclipse.xtext.common.services.DefaultTerminalConverters} and override or 
 add additional value converters by adding the respective methods. In addition to the explicitly 
 defined converters in the default implementation, a delegating converter is registered for each 
-available _EDataType_ that reuses the functionality of the corresponding _EFactory_.
+available _EDataType_ that reuses the functionality of the corresponding EMF _EFactory_.
 
 p. The protocol of an _IValueConverter_ allows to throw a _ValueConverterException_ if something went wrong.
 The exception is propagated as a syntax error by the parser or as a validation problem by the 
 _ConcreteSyntaxValidator_ if the value cannot be converted to a valid string. The 
 ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.impl.AbstractLexerBasedConverter} is useful when 
-implementing an own value converter. If the converter needs to know about the rule that it currently 
+implementing a custom value converter. If the converter needs to know about the rule that it currently 
 works with, it may implement the interface _IValueConverter.RuleSpecific_. The framework will set the
 rule such as the implementation may use it afterwards.
