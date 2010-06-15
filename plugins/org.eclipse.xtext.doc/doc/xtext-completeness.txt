@@ -34,7 +34,7 @@
 180-hyperlinking.textile                  | yes (ß)                 | jk 
 195-highlighting.textile                  | yes (ß)                 | jk
 198-wizards.textile                       | yes (ß)                 | jk 
-199-jvmtypes.textile                      | yes (ß)                 |    
+199-jvmtypes.textile                      | yes (ß)                 | jk 
 
 200-Appendix.textile                      | ?                       |    
 210-emf-integration.textile               | yes (jk)                |    
