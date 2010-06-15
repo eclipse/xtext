@@ -7,37 +7,37 @@
 016-working-with-Xtext-models.textile     | yes (se)                | jk   
 017-getting-started-xpand.textile         | yes (se)                | jk
 
-020-grammar-language.textile              | ?                       |  se, ß  
+020-grammar-language.textile              | ?                       | se, ß  
 
-030-generator.textile                     | ?                       |  se
-040-dependency-injection.textile          | yes (se)                |  ß
+030-generator.textile                     | ?                       | se
+040-dependency-injection.textile          | yes (se)                | ß
 
-050-heading-runtime.textile               | ?                       |  jk, ß  
-060-validation.textile                    | ?                       |  ß
-070-linking.textile                       | ?                       |  jk, ß
-080-scoping.textile                       | yes (jk)                |  ß
-090-valueconverter.textile                | yes (ß)                 |  jk
-100-serialization.textile                 | ?                       |  ß    
-105-formatting.textile                    | ?                       |  ß  
-110-fragmentprovider.textile              | yes (jk)                |  ß  
-115-encoding.textile                      | yes (jk)                |  ß  
+050-heading-runtime.textile               | ?                       | jk, ß  
+060-validation.textile                    | ?                       | ß
+070-linking.textile                       | ?                       | jk, ß
+080-scoping.textile                       | yes (jk)                | ß
+090-valueconverter.textile                | yes (ß)                 | jk
+100-serialization.textile                 | ?                       | ß    
+105-formatting.textile                    | ?                       | ß  
+110-fragmentprovider.textile              | yes (jk)                | ß  
+115-encoding.textile                      | yes (jk)                | ß  
 
-118-mwe-in-depth.textile                  | yes (ß)                 |  jk  
+118-mwe-in-depth.textile                  | yes (ß)                 | jk  
 
-120-heading-UI.textile                    | ?                       |  ß  
+120-heading-UI.textile                    | ?                       | ß  
 130-managing-concurrency.textile          | empty                   |    
-140-labelprovider.textile                 | yes (jk)                |  ß  
-150-contentassist.textile                 | ?                       |  ß  
-155-quickfix.textile                      | yes (jk)                |  ß 
-160-templates.textile                     | yes (ß)                 |  jk
-170-outline.textile                       | ?                       |  ß  
-180-hyperlinking.textile                  | yes (ß)                 |  jk 
-195-highlighting.textile                  | yes (ß)                 |    
+140-labelprovider.textile                 | yes (jk)                | ß  
+150-contentassist.textile                 | ?                       | ß  
+155-quickfix.textile                      | yes (jk)                | ß 
+160-templates.textile                     | yes (ß)                 | jk
+170-outline.textile                       | ?                       | ß  
+180-hyperlinking.textile                  | yes (ß)                 | jk 
+195-highlighting.textile                  | yes (ß)                 | jk
 198-wizards.textile                       | yes (ß)                 |    
 199-jvmtypes.textile                      | yes (ß)                 |    
 
 200-Appendix.textile                      | ?                       |    
 210-emf-integration.textile               | yes (jk)                |    
 215-migrating-from-0.7.textile            | ?                       |    
-230-antlr-ip-issue.textile                | ?                       |  se
+230-antlr-ip-issue.textile                | ?                       | se
 
