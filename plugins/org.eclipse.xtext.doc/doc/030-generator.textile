@@ -14,7 +14,7 @@ _plugin.xml_, _MANIFEST.MF_ and the "Guice modules":#guicemodules.
 Xtext's generator leverages "MWE2 - the modeling workflow engine":#MWE2 
 from EMFT to configure the generator.
 
-h3(#short_intro_to_mwe). A short introduction to MWE2
+h3(#short_intro_to_mwe). A Short Introduction to MWE2
 
 MWE2 allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just 
 instantiates Java classes and the configuration is done through public setter and adder methods as one is used to 
@@ -196,7 +196,7 @@ There are two fragments ${org.eclipse.xtext.generator/src/org.eclipse.xtext.gene
 ${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.ImplicitUiFragment} will be called implicitly if 
 the required paths and project names are set. They take care of common defaults.  
 
-h3. Standard generator fragments
+h3. Standard Generator Fragments
 
 In the following table the most important standard generator fragments are listed. Please refer to the Javadocs for more detailed documentation.
 

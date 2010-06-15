@@ -5,7 +5,7 @@ The "grammar language":http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/
 is the corner stone of Xtext. It is a domain-specific language, carefully designed for the description of textual languages.
 The main idea is to describe the concrete syntax and how it is mapped to an in-memory model created during parsing. 
 
-h2. A first example
+h2. A First Example
 
 To get an idea of how it works we'll start by implementing a "simple example":http://martinfowler.com/dslwip/Intro.html 
 introduced by Martin Fowler. It's mainly about describing state machines used as the (un)lock mechanism of secret compartments.
@@ -115,7 +115,7 @@ in a package _my.pack_ somewhere on your project's classpath.
 
 The first line is also used to declare any used language (for mechanism details see "Grammar Mixins":#grammarMixins).
 
-h3(#package_declarations). EPackage declarations
+h3(#package_declarations). EPackage Declarations
 
 Xtext parsers create in-memory object graphs while parsing text. Such object-graphs are 
 instances of EMF Ecore models. An Ecore model basically consists of an _EPackage_ containing _EClasses_, 
@@ -124,7 +124,7 @@ Xtext can infer Ecore models from a grammar (see "Ecore model inference":#metamo
 possible to reuse existing Ecore models. You can even mix this and use multiple existing Ecore models and 
 infer some others from one grammar. 
 
-h4. EPackage generation
+h4. EPackage Generation
 
 The easiest way to get started is to let Xtext infer the Ecore model from your grammar. This is what is done in the 
 secret compartment example. To do so just state:
@@ -136,14 +136,14 @@ Actually these are the properties that are required to create an _EPackage_.
 Xtext will then add _EClasses_ with properties (_EAttributes_ and _EReferences_) for the different rules, as described in
 "Ecore model inference":#metamodelInference. 
 
-h4. EPackage import
+h4. EPackage Import
 
 If you already have an existing _EPackage_, you can import it using either a namespace URI or a resource URI. 
 An "URI":http://www.ietf.org/rfc/rfc2396.txt (Uniform Resource Identifier) provides a simple and extensible 
 means for identifying an abstract or physical resource. For all the niftx details about EMF URIs 
 please see its "documentation":http://help.eclipse.org/help32/topic/org.eclipse.emf.doc/references/javadoc/org/eclipse/emf/common/util/URI.html.
 
-h5. Using resource URIs to import existing EPackages
+h5. Using Resource URIs to Import Existing EPackages
 
 In order to import an existing Ecore model, you'll have to have the *.ecore file describing the _EPackage_ you want to 
 use somewhere in your workspace. In order to refer to that file you make use of the platform:/resource scheme.
@@ -170,7 +170,7 @@ bc.. fragment = org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment {
     "platform:/resource/my.project/src/my/pack/SecretCompartments.genmodel"
 }
 
-h5. Using classpath URIs to import existing EPackages
+h5. Using Classpath URIs to Import Existing EPackages
 
 We like to leverage Java's classpath mechanism, because besides that it is well understood and designed it allows us to
 package libraries as jars. If you want to reference an *.ecore file which is contained in a jar, you can make use of the 
@@ -188,9 +188,9 @@ bc.. fragment = org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment {
     "classpath:/model/JvmTypes.genmodel"
 }
 
-See the section on "Referring Java Types":#jvmtypes for a full explanation of this useful feature.
+p. See the section on "Referring Java Types":#jvmtypes for a full explanation of this useful feature.
 
-h5. Using namespace URIs to import existing EPackages
+h5. Using Namespace URIs to Import Existing EPackages
 
 You can also use nsURI in order to import existing _EPackage_. Note that this is generally not
 preferrable, because you'll have to have the corresponding EPackage installed in the workbench.
@@ -199,7 +199,7 @@ to use its nsURI :
 
 bc. import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
-h4. Ecore model aliases for packages
+h4. Ecore Model Aliases for EPackages
 
 If you want to use multiple _EPackages_ you need to specify aliases in the following way:
 
@@ -261,7 +261,7 @@ This is especially important for newly introduced rules in connection with mixed
 If you for instance want to add a rule to allow fully qualified names in addition to simple IDs, you should 
 implement it as a "data type rule":#datatypeRules, instead of adding another terminal rule.
 
-h5. Return types
+h5. Return Types
 
 A terminal rule returns a value, which is a string (type _ecore::EString_) by default.
 However, if you want to have a different type you can specify it. For instance, the rule _INT_ is defined as:
@@ -277,7 +277,7 @@ implementation of ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.IValueCon
 like quotes from string literals or the caret ('^') from identifiers. Its implementation needs to be registered 
 as a service (cf. "Service Framework":#dependencyInjection).
 
-h4. Extended Backus-Naur Form expressions
+h4. Extended Backus-Naur Form Expressions
 
 Token rules are described using "Extended Backus-Naur Form"-like (EBNF) expressions. The different expressions 
 are described in the following. The one thing all of these expressions have in common is the cardinality operator.
@@ -370,7 +370,7 @@ the _EObjects_ that form the semantic model (the linked abstract syntax graph or
 fact, parser rules are even called production rules. The different constructs like actions and 
 assignments are used to derive types and initialize the semantic objects accordingly. 
 
-h4. Extended Backus-Naur Form expressions
+h4. Extended Backus-Naur Form Expressions
 
 Not all the expressions that are available in terminal rules can be used in parser rules. Character 
 ranges, wildcards, the until token and the negation are only available for terminal rules. 
@@ -405,7 +405,7 @@ p. The syntactic declaration for states in the state machine example starts with
 bc. name=ID
 
 The left hand side refers to a feature '_name_' of the current object (which has the _EClass_ '_State_' in this case). 
-The right hand side can be a rule call, a keyword, a cross reference (explained later) or even an 
+The right hand side can be a rule call, a keyword, a cross-reference (explained later) or even an 
 alternative comprised by the former. The type of the feature needs to be compatible with the type of the
  expression on the right. As _ID_ returns an _EString_ in this case, the feature '_name_' needs to be 
  of type _EString_ as well.
@@ -420,7 +420,7 @@ There are three different assignment operators, each with different semantics.
 
 The used assignment operator does not effect the cardinality of the expected symbols on the right hand side. 
 
-h5. Cross References 
+h5. Cross-References 
 
 A unique feature of Xtext is the ability to declare crosslinks in the grammar. In traditional compiler 
 construction the crosslinks are not established during parsing but in a later linking phase. This is the 
@@ -431,7 +431,7 @@ bc.. CrossReference :
   '[' type=TypeRef ('|' ^terminal=CrossReferenceableTerminal )? ']'
 ;
 
-p. For example, the transition is made up of two cross references, pointing to an event and a state:
+p. For example, the transition is made up of two cross-references, pointing to an event and a state:
 
 bc.. Transition :
   event=[Event] '=>' state=[State]
@@ -439,7 +439,7 @@ bc.. Transition :
 
 p. It is important to understand that the text between the square brackets does not refer to another rule, but to a type!
 This is sometimes confusing, because one usually uses the same name for the rules and the returned types.
-That is if we had named the type for events differently like in the following the cross reference needs 
+That is if we had named the type for events differently like in the following the cross-reference needs 
 to be adapted as well:
 
 bc.. Transition :
@@ -448,7 +448,7 @@ bc.. Transition :
  
 Event returns MyEvent : ....;
 
-p. Looking at the syntax definition of cross references, there is an optional part starting with a vertical 
+p. Looking at the syntax definition of cross-references, there is an optional part starting with a vertical 
 bar (pipe) followed by _CrossReferenceableTerminal_. This is the part describing the concrete text, from 
 which the crosslink later should be established. If the terminal is omitted, it is expected to be _ID_.
 
@@ -515,7 +515,7 @@ allow to explicitly instantiate any _EObject_. The notation _{TypeB}_ will creat
 it to the result of the parser rule. This allows parser rules without any assignment and object creation without 
 the need to introduce unnecessary rules.
 
-h5. Unassigned rule calls 
+h5. Unassigned Rule Calls 
 
 We previously explained, that the _EObject_ to be returned is created lazily when the first assignment occurs or 
 when a simple action is evaluated. There is another way one can set the _EObject_ to be returned, which we call 
@@ -615,7 +615,7 @@ bc.. Operation temp = new Operation();
 temp.setLeft(current);
 current = temp;
 
-h3(#hidden_terminals). Hidden terminal symbols
+h3(#hidden_terminals). Hidden Terminal Symbols
 
 Because parser rules describe not a single token, but a sequence of patterns in the input, it is necessary to define the interesting parts of the input. Xtext introduces the concept of hidden tokens to handle semantically unimportant things like whitespaces, comments, etc. in the input sequence gracefully. It is possible to define a set of terminal symbols, that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they are transparently woven into the node model, but not relevant for the semantic model. 
 
@@ -639,7 +639,7 @@ bc.. John /* comment */ Smith // line comment
 
 p. A list of all default terminals like _WS_ can be found in section "Grammar Mixins":#grammarMixins.
 
-h3(#datatypeRules). Data type rules
+h3(#datatypeRules). Data Type Rules
 
 Data type rules are parsing-phase rules, which create instances of _EDataType_ instead of _EClass_. Thinking about it, one may discover that they are quite similar to terminal rules.
 However, the nice thing about data type rules is that they are actually parser rules and are therefore 
@@ -705,7 +705,7 @@ bc.. enum Visibility:
  
 p. You can overcome this by modifying the infered Ecore model through a "model to model transformation":#customPostProcessing.
 
-h2(#metamodelInference). Ecore model inference
+h2(#metamodelInference). Ecore Model Inference
 
 The Ecore model (or meta model) of a textual language describes the structure of its abstract syntax trees (AST). 
 
@@ -720,7 +720,7 @@ Xtext creates
 ** for each generate-package declaration. After the directive _generate_ a list of parameters follows. The _name_ of the _EPackage_ will be set to the first parameter, its _nsURI_ to the second parameter. An optional alias as the third parameter allows to distinguish generated _EPackages_ later. Only one generated package declaration per alias is allowed.
 * an _EClass_
 ** for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same name as the rule itself is assumed. You can specify more than one rule that return the same type but only one _EClass_ will be generated.
-** for each type defined in an action or a cross reference.
+** for each type defined in an action or a cross-reference.
 * an _EEnum_
 ** for each return type of an enum rule.
 * an _EDataType_
@@ -795,7 +795,7 @@ The following conditions cause an error
 * An undeclared alias is used. 
 * An imported Ecore model cannot be loaded.
 
-h2(#grammarImport). Importing existing Ecore models
+h2(#grammarImport). Importing Existing Ecore Models
 
 With the import directive in Xtext you can refer to existing Ecore models and reuse the types that are declared in an _EPackage_. Xtext uses this technique itself to leverage Ecore data types.
 

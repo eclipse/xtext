@@ -7,7 +7,7 @@
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="grammarLanguage.html" title="The Grammar Language">
 <link rel="prev" href="grammarLanguage.html" title="The Grammar Language">
-<link rel="next" href="metamodelInference.html" title="Ecore model inference">
+<link rel="next" href="metamodelInference.html" title="Ecore Model Inference">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">The Syntax</h1>
@@ -41,12 +41,12 @@
 					<a class="link" href="grammarMixins.html" title="Grammar Mixins">Grammar Mixins</a>).
 				</p>
 </div>
-<div class="section" title="EPackage declarations">
+<div class="section" title="EPackage Declarations">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="package_declarations"></a>EPackage declarations</h3>
+<a name="package_declarations"></a>EPackage Declarations</h3>
 </div>
 </div>
 </div>
@@ -59,16 +59,16 @@
 					<span class="emphasis"><em>EEnums</em></span> (See the 
 					<a class="link" href="emf_integration.html#model_metamodel" title="Model, Ecore Model, and Ecore">section on EMF</a> for more details).
 					Xtext can infer Ecore models from a grammar (see 
-					<a class="link" href="metamodelInference.html" title="Ecore model inference">Ecore model inference</a>) but it is also 
+					<a class="link" href="metamodelInference.html" title="Ecore Model Inference">Ecore model inference</a>) but it is also 
 					possible to reuse existing Ecore models. You can even mix this and use multiple existing Ecore models and 
 					infer some others from one grammar. 
 				</p>
-<div class="section" title="EPackage generation">
+<div class="section" title="EPackage Generation">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="EPackagegeneration"></a>EPackage generation</h4>
+<a name="EPackageGeneration"></a>EPackage Generation</h4>
 </div>
 </div>
 </div>
@@ -92,15 +92,15 @@
 						<span class="emphasis"><em>EAttributes</em></span> and 
 						<span class="emphasis"><em>EReferences</em></span>) for the different rules, as described in
 
-						<a class="link" href="metamodelInference.html" title="Ecore model inference">Ecore model inference</a>. 
+						<a class="link" href="metamodelInference.html" title="Ecore Model Inference">Ecore model inference</a>. 
 					</p>
 </div>
-<div class="section" title="EPackage import">
+<div class="section" title="EPackage Import">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="EPackageimport"></a>EPackage import</h4>
+<a name="EPackageImport"></a>EPackage Import</h4>
 </div>
 </div>
 </div>
@@ -112,12 +112,12 @@
 						please see its 
 						<a class="ulink" href="http://help.eclipse.org/help32/topic/org.eclipse.emf.doc/references/javadoc/org/eclipse/emf/common/util/URI.html" target="_new">documentation</a>.
 					</p>
-<div class="section" title="Using resource URIs to import existing EPackages">
+<div class="section" title="Using Resource URIs to Import Existing EPackages">
 <div class="titlepage">
 <div>
 <div>
 <h5 class="title">
-<a name="UsingresourceURIstoimportexistingEPackages"></a>Using resource URIs to import existing EPackages</h5>
+<a name="UsingResourceURIstoImportExistingEPackages"></a>Using Resource URIs to Import Existing EPackages</h5>
 </div>
 </div>
 </div>
@@ -142,7 +142,7 @@
 							(
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">EcoreGeneratorFragment</a>) 
 							with resource URIs that point to the 
-							<a class="link" href="emf_codegen.html" title="EMF code generation">generator models</a> of the referenced Ecore models.
+							<a class="link" href="emf_codegen.html" title="EMF Code Generation">generator models</a> of the referenced Ecore models.
 						</p>
 <p>The *.genmodel provides all kind of generator configuration used by EMF&rsquo;s code generator. Xtext will automatically create
 							a *.genmodel for generated ecore models, but if such a model references an existing imported Ecore model, the code generator 
@@ -161,12 +161,12 @@
 </p>
 </div>
 </div>
-<div class="section" title="Using classpath URIs to import existing EPackages">
+<div class="section" title="Using Classpath URIs to Import Existing EPackages">
 <div class="titlepage">
 <div>
 <div>
 <h5 class="title">
-<a name="UsingclasspathURIstoimportexistingEPackages"></a>Using classpath URIs to import existing EPackages</h5>
+<a name="UsingClasspathURIstoImportExistingEPackages"></a>Using Classpath URIs to Import Existing EPackages</h5>
 </div>
 </div>
 </div>
@@ -191,20 +191,20 @@
 }<br>
 
 <br>
-See&nbsp;the&nbsp;section&nbsp;on&nbsp;"Referring&nbsp;Java&nbsp;Types":#jvmtypes&nbsp;for&nbsp;a&nbsp;full&nbsp;explanation&nbsp;of&nbsp;this&nbsp;useful&nbsp;feature.<br>
-
-<br>
 
 </code>
 </p>
 </div>
+<p>See the section on 
+							<a class="link" href="jvmtypes.html" title="Referring to Java Types">Referring Java Types</a> for a full explanation of this useful feature.
+						</p>
 </div>
-<div class="section" title="Using namespace URIs to import existing EPackages">
+<div class="section" title="Using Namespace URIs to Import Existing EPackages">
 <div class="titlepage">
 <div>
 <div>
 <h5 class="title">
-<a name="UsingnamespaceURIstoimportexistingEPackages"></a>Using namespace URIs to import existing EPackages</h5>
+<a name="UsingNamespaceURIstoImportExistingEPackages"></a>Using Namespace URIs to Import Existing EPackages</h5>
 </div>
 </div>
 </div>
@@ -223,12 +223,12 @@ See&nbsp;the&nbsp;section&nbsp;on&nbsp;"Referring&nbsp;Java&nbsp;Types":#jvmtype
 </div>
 </div>
 </div>
-<div class="section" title="Ecore model aliases for packages">
+<div class="section" title="Ecore Model Aliases for EPackages">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="Ecoremodelaliasesforpackages"></a>Ecore model aliases for packages</h4>
+<a name="EcoreModelAliasesforEPackages"></a>Ecore Model Aliases for EPackages</h4>
 </div>
 </div>
 </div>
@@ -362,14 +362,14 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 					</p>
 <p>If you for instance want to add a rule to allow fully qualified names in addition to simple IDs, you should 
 						implement it as a 
-						<a class="link" href="syntax.html#datatypeRules" title="Data type rules">data type rule</a>, instead of adding another terminal rule.
+						<a class="link" href="syntax.html#datatypeRules" title="Data Type Rules">data type rule</a>, instead of adding another terminal rule.
 					</p>
-<div class="section" title="Return types">
+<div class="section" title="Return Types">
 <div class="titlepage">
 <div>
 <div>
 <h5 class="title">
-<a name="Returntypes"></a>Return types</h5>
+<a name="ReturnTypes"></a>Return Types</h5>
 </div>
 </div>
 </div>
@@ -404,12 +404,12 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 						</p>
 </div>
 </div>
-<div class="section" title="Extended Backus-Naur Form expressions">
+<div class="section" title="Extended Backus-Naur Form Expressions">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="ExtendedBackusNaurFormexpressions"></a>Extended Backus-Naur Form expressions</h4>
+<a name="ExtendedBackusNaurFormExpressions"></a>Extended Backus-Naur Form Expressions</h4>
 </div>
 </div>
 </div>
@@ -629,19 +629,19 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 <p>The parser reads a sequence of terminals and walks through the parser rules. Hence a parser rule - 
 					contrary to a terminal rule &ndash; does not produce a single terminal token but a tree of non-terminal 
 					and terminal tokens. They lead to a so called 
-					<a class="link" href="processing_Xtext_models.html#node_model" title="Working with the parse tree (aka node model)">parse tree</a> (in Xtext it is also referred 
+					<a class="link" href="processing_Xtext_models.html#node_model" title="Working with the Parse Tree (aka Node Model)">parse tree</a> (in Xtext it is also referred 
 					as node model). Furthermore, parser rules are handled as kind of a building plan for the creation of 
 					the 
 					<span class="emphasis"><em>EObjects</em></span> that form the semantic model (the linked abstract syntax graph or AST). Due to this 
 					fact, parser rules are even called production rules. The different constructs like actions and 
 					assignments are used to derive types and initialize the semantic objects accordingly. 
 				</p>
-<div class="section" title="Extended Backus-Naur Form expressions">
+<div class="section" title="Extended Backus-Naur Form Expressions">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="ExtendedBackusNaurFormexpressions2"></a>Extended Backus-Naur Form expressions</h4>
+<a name="ExtendedBackusNaurFormExpressions2"></a>Extended Backus-Naur Form Expressions</h4>
 </div>
 </div>
 </div>
@@ -722,7 +722,7 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 							<span class="emphasis"><em>name</em></span>' of the current object (which has the 
 							<span class="emphasis"><em>EClass</em></span> '
 							<span class="emphasis"><em>State</em></span>' in this case). 
-							The right hand side can be a rule call, a keyword, a cross reference (explained later) or even an 
+							The right hand side can be a rule call, a keyword, a cross-reference (explained later) or even an 
 							alternative comprised by the former. The type of the feature needs to be compatible with the type of the
 							 expression on the right. As 
 							<span class="emphasis"><em>ID</em></span> returns an 
@@ -759,12 +759,12 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 </div>
 <p>The used assignment operator does not effect the cardinality of the expected symbols on the right hand side. </p>
 </div>
-<div class="section" title="Cross References">
+<div class="section" title="Cross-References">
 <div class="titlepage">
 <div>
 <div>
 <h5 class="title">
-<a name="CrossReferences"></a>Cross References </h5>
+<a name="CrossReferences"></a>Cross-References </h5>
 </div>
 </div>
 </div>
@@ -783,7 +783,7 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 </code>
 </p>
 </div>
-<p>For example, the transition is made up of two cross references, pointing to an event and a state:</p>
+<p>For example, the transition is made up of two cross-references, pointing to an event and a state:</p>
 <div class="literallayout">
 <p>
 <code class="code">Transition&nbsp;:<br>
@@ -797,7 +797,7 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 </div>
 <p>It is important to understand that the text between the square brackets does not refer to another rule, but to a type!
 							This is sometimes confusing, because one usually uses the same name for the rules and the returned types.
-							That is if we had named the type for events differently like in the following the cross reference needs 
+							That is if we had named the type for events differently like in the following the cross-reference needs 
 							to be adapted as well:</p>
 <div class="literallayout">
 <p>
@@ -812,7 +812,7 @@ Event&nbsp;returns&nbsp;MyEvent&nbsp;:&nbsp;....;<br>
 </code>
 </p>
 </div>
-<p>Looking at the syntax definition of cross references, there is an optional part starting with a vertical 
+<p>Looking at the syntax definition of cross-references, there is an optional part starting with a vertical 
 							bar (pipe) followed by 
 							<span class="emphasis"><em>CrossReferenceableTerminal</em></span>. This is the part describing the concrete text, from 
 							which the crosslink later should be established. If the terminal is omitted, it is expected to be 
@@ -957,12 +957,12 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 							the need to introduce unnecessary rules.
 						</p>
 </div>
-<div class="section" title="Unassigned rule calls">
+<div class="section" title="Unassigned Rule Calls">
 <div class="titlepage">
 <div>
 <div>
 <h5 class="title">
-<a name="Unassignedrulecalls"></a>Unassigned rule calls </h5>
+<a name="UnassignedRuleCalls"></a>Unassigned Rule Calls </h5>
 </div>
 </div>
 </div>
@@ -1146,12 +1146,12 @@ current&nbsp;=&nbsp;temp;<br>
 </div>
 </div>
 </div>
-<div class="section" title="Hidden terminal symbols">
+<div class="section" title="Hidden Terminal Symbols">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="hidden_terminals"></a>Hidden terminal symbols</h3>
+<a name="hidden_terminals"></a>Hidden Terminal Symbols</h3>
 </div>
 </div>
 </div>
@@ -1202,12 +1202,12 @@ Fullname:&nbsp;<br>
 					<a class="link" href="grammarMixins.html" title="Grammar Mixins">Grammar Mixins</a>.
 				</p>
 </div>
-<div class="section" title="Data type rules">
+<div class="section" title="Data Type Rules">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="datatypeRules"></a>Data type rules</h3>
+<a name="datatypeRules"></a>Data Type Rules</h3>
 </div>
 </div>
 </div>

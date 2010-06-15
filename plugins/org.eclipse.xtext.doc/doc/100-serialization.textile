@@ -17,7 +17,7 @@ p. Serialization is invoked when calling
 ${org.eclipse.xtext/src/org.eclipse.xtext.resource.XtextResource}.save(...). Furthermore, 
 ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.reconstr.Serializer} provides resource-independent 
 support for serialization. Serialization is _not_ called when a textual editors contents is saved to disk. 
-Another situation that triggers serialization is applying "QuickFixes":#quickfixes with semantic modifications.
+Another situation that triggers serialization is applying "Quick Fixes":#quickfixes with semantic modifications.
 
 h3(#serializationcontract). The Contract
 
@@ -35,12 +35,12 @@ the textual representation. However, when serializing the model all _ID_-element
 first and then all _INT_-elements. If the order is important it can be preserved by storing all elements 
 in the same list - which may require wrapping the _ID_- and _INT_-elements into objects.
 
-h3. Roles of the Semantic Model and the Node Model during Serialization
+h3. Roles of the Semantic Model and the Node Model During Serialization
 
 A serialized document represents the state of the semantic model. However, if there is a node model available (i.e. the semantic model has been created by the parser), the serializer
 * preserves "existing whitespaces":#hiddentokenmerger from the node model.
 * preserves "existing comments":#commentassociater from the node model.
-* preserves the representation of cross references: If a cross-referenced object can be identified by multiple names (i.e. scoping returns multiple EObjectDescriptions for the same object), the serializer tries to keep the previously used name. 
+* preserves the representation of cross-references: If a cross-referenced object can be identified by multiple names (i.e. scoping returns multiple EObjectDescriptions for the same object), the serializer tries to keep the previously used name. 
 * preserves the representation of values: For values handled by the "value converter":#valueconverter, the serializer checks whether the textual representation converted to a value equals the value from the semantic model. If that is true, the textual representation is kept.  
 
 h3(#parsetreeconstructor). Parse Tree Constructor
@@ -133,10 +133,10 @@ that the rule call _Plural_ is unassigned. However, the "parse tree constructor"
 needs to decide which value to write during serialization. This decision can be be made by customizing 
 the _IValueSerializer.serializeUnassignedValue(EObject, RuleCall, AbstractNode)_.  
 
-h3(#crossreferenceserializer). Cross Reference Serializer
+h3(#crossreferenceserializer). Cross-Reference Serializer
 
-p. The cross reference serializer specifies which values are to be written to the textual representation 
-for cross references. This behavior can be customized by implementing 
+p. The cross-reference serializer specifies which values are to be written to the textual representation 
+for cross-references. This behavior can be customized by implementing 
 _ICrossReferenceSerializer_. 
 The default implementation delegates to various other services such as the _IScopeProvider_ or the 
 _LinkingHelper_ each of which may be the better place for customization.

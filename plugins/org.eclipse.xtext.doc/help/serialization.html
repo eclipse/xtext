@@ -56,7 +56,7 @@
 				support for serialization. Serialization is 
 				<span class="emphasis"><em>not</em></span> called when a textual editors contents is saved to disk. 
 				Another situation that triggers serialization is applying 
-				<a class="link" href="quickfixes.html" title="Quick fixes">QuickFixes</a> with semantic modifications.
+				<a class="link" href="quickfixes.html" title="Quick Fixes">Quick Fixes</a> with semantic modifications.
 			</p>
 <div class="section" title="The Contract">
 <div class="titlepage">
@@ -97,12 +97,12 @@
 					<span class="emphasis"><em>INT</em></span>-elements into objects.
 				</p>
 </div>
-<div class="section" title="Roles of the Semantic Model and the Node Model during Serialization">
+<div class="section" title="Roles of the Semantic Model and the Node Model During Serialization">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="RolesoftheSemanticModelandtheNodeModelduringSerialization"></a>Roles of the Semantic Model and the Node Model during Serialization</h3>
+<a name="RolesoftheSemanticModelandtheNodeModelDuringSerialization"></a>Roles of the Semantic Model and the Node Model During Serialization</h3>
 </div>
 </div>
 </div>
@@ -120,7 +120,7 @@
 						</p>
 </li>
 <li class="listitem">
-<p>preserves the representation of cross references: If a cross-referenced object can be identified by multiple names (i.e. scoping returns multiple EObjectDescriptions for the same object), the serializer tries to keep the previously used name. </p>
+<p>preserves the representation of cross-references: If a cross-referenced object can be identified by multiple names (i.e. scoping returns multiple EObjectDescriptions for the same object), the serializer tries to keep the previously used name. </p>
 </li>
 <li class="listitem">
 <p>preserves the representation of values: For values handled by the 
@@ -359,17 +359,17 @@ terminal&nbsp;Plural:&nbsp;<br>
 					<span class="emphasis"><em>IValueSerializer.serializeUnassignedValue(EObject, RuleCall, AbstractNode)</em></span>.  
 				</p>
 </div>
-<div class="section" title="Cross Reference Serializer">
+<div class="section" title="Cross-Reference Serializer">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="crossreferenceserializer"></a>Cross Reference Serializer</h3>
+<a name="crossreferenceserializer"></a>Cross-Reference Serializer</h3>
 </div>
 </div>
 </div>
-<p>The cross reference serializer specifies which values are to be written to the textual representation 
-					for cross references. This behavior can be customized by implementing 
+<p>The cross-reference serializer specifies which values are to be written to the textual representation 
+					for cross-references. This behavior can be customized by implementing 
 
 					<span class="emphasis"><em>ICrossReferenceSerializer</em></span>. 
 					The default implementation delegates to various other services such as the 

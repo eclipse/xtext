@@ -1,7 +1,7 @@
 <html>
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>IDE concepts</title>
+<title>IDE Concepts</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
@@ -10,7 +10,7 @@
 <link rel="next" href="contentAssist.html" title="Content Assist">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">IDE concepts</h1>
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">IDE Concepts</h1>
 <p>For the following part we will refer to a concrete example grammar in order to explain certain aspect 
 			of the UI more clearly. The used example grammar is as follows:</p>
 <div class="literallayout">
@@ -100,20 +100,20 @@ RuleB&nbsp;return&nbsp;gen::CustomType:<br>
 				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java?root=Modeling_Project&view=co" target="_new">LabelProviderFragment</a> in the 
 				list of generator fragments in the MWE2 workflow for your language, it will automatically create 
 				stubs and bindings for an 
-				<a class="link" href="IDEconcepts.html#EObjectLabelProvider" title="Label providers for EObjects">
+				<a class="link" href="IDEConcepts.html#EObjectLabelProvider" title="Label Providers For EObjects">
 					<span class="emphasis"><em>EObjectLabelProvider</em></span>
 				</a> and an 
 
-				<a class="link" href="IDEconcepts.html#DescriptionLabelProvider" title="Label providers for index entries">
+				<a class="link" href="IDEConcepts.html#DescriptionLabelProvider" title="Label Providers For Index Entries">
 					<span class="emphasis"><em>DescriptionLabelProvider</em></span>
 				</a> which you can implement by manually. 
 			</p>
-<div class="section" title="Label providers for EObjects">
+<div class="section" title="Label Providers For EObjects">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="EObjectLabelProvider"></a>Label providers for EObjects</h3>
+<a name="EObjectLabelProvider"></a>Label Providers For EObjects</h3>
 </div>
 </div>
 </div>
@@ -220,18 +220,18 @@ p.in&nbsp;your&nbsp;language's&nbsp;UI&nbsp;module.&nbsp;<br>
 					</p>
 </div>
 </div>
-<div class="section" title="Label providers for index entries">
+<div class="section" title="Label Providers For Index Entries">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="DescriptionLabelProvider"></a>Label providers for index entries</h3>
+<a name="DescriptionLabelProvider"></a>Label Providers For Index Entries</h3>
 </div>
 </div>
 </div>
 <p>Xtext maintains an index of all model elements to allow quick searching and linking without loading 
 					the referenced resource (See the chapter on 
-					<a class="link" href="scoping.html#index_based" title="Global Scopes based on external configuration (e.g. classpath-based)">index based scopes</a> for details). The 
+					<a class="link" href="scoping.html#index_based" title="Global Scopes Based On External Configuration (e.g. Classpath-Based)">index-based scopes</a> for details). The 
 					elements from this index also appear in some UI contexts, e.g. in the 
 					<span class="emphasis"><em>Find model elements</em></span> dialog or 
 					in the 
@@ -245,7 +245,7 @@ p.in&nbsp;your&nbsp;language's&nbsp;UI&nbsp;module.&nbsp;<br>
 
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultDescriptionLabelProvider.java?root=Modeling_Project&view=co" target="_new">DefaultDescriptionLabelProvider</a>. It employs the 
 					same polymorphic dispatch mechanism as the 
-					<a class="link" href="IDEconcepts.html#DefaultEObjectLabelProvider" title="DefaultEObjectLabelProvider">DefaultEObjectLabelProvider</a>. 
+					<a class="link" href="IDEConcepts.html#DefaultEObjectLabelProvider" title="DefaultEObjectLabelProvider">DefaultEObjectLabelProvider</a>. 
 					The default text of an 
 					<span class="emphasis"><em>EObjectDescription</em></span> is its indexed name. The image is resolved by dispatching 
 					to 

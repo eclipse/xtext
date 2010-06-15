@@ -36,7 +36,7 @@ entity Speaker extends Person {
   sessions : Session*
 }
 
-h3. Create an Xtext project
+h3. Create an Xtext Project
 
 In order to get started we first need to create some Eclipse projects. Use the Xtext wizard to do so:
 
@@ -56,7 +56,7 @@ Click on _Finish_ to create the projects.
 
 !images/getting-started-wizard.png!
 
-h3. Project layout
+h3. Project Layout
 
 In the Package Explorer you can see three new projects. In 
 _org.eclipse.xtext.example.domainmodel_ the grammar is defined and all runtime 
@@ -85,7 +85,7 @@ generator for your Xtext models. Also it is of course perfectly ok, to have no
 code generator at all but use the models dynamically at runtime. We call these 
 kind of model processors _interpreters_.
 
-h3. Build your own grammar
+h3. Build Your Own Grammar
 
 p. *_Please note_*: If you encounter strange errors while copying and pasting
 a snippet from this document to your Eclipse editor, your documentation
@@ -129,7 +129,7 @@ p. Ecore _EPackages_ are effectively a set of classes (in EMF they are called
 _EClass_) which are used to represent the in-memory-model of a text file. Instead
 of _model_ we also sometimes refer to it as _semantic model_ or _Abstract Syntax 
 Tree (AST)_. Note, that in the case of Xtext it's actually a graph rather than a 
-tree, since it also contains cross links. But as the term AST is so commonly 
+tree, since it also contains crosslinks. But as the term AST is so commonly 
 used and well known we are ignoring this minor detail. 
  
 In order to tell the parser which _EClasses_ to use when creating the AST, we 
@@ -223,19 +223,19 @@ bc.. Entity :
 
 p. The question mark marks an element or as in this case an entire group of elements as optional.
 The other new thing is the right hand side of of the assignment _superType=[Entity]_.
-This is a cross-reference literal and states, that a cross reference to an elsewhere 
+This is a cross-reference literal and states, that a cross-reference to an elsewhere 
 declared _Entity_ should be established. So in this case _Entity_ does not point to 
 the corresponding rule but to the _EClass_. As both are named equally this might 
-cause a little confusion at first. The full syntax for a cross reference is 
+cause a little confusion at first. The full syntax for a cross-reference is 
 _[TypeName|RuleCall]_ where _RuleCall_ defaults to _ID_. This means that 
 _('extends' superType=[Entity|ID])?_ would work equally well. The parser only parses 
-the name of the cross referenced element using the _ID_ rule and stores it 
-internally. Later on the linker establishes the cross reference using the name, the 
-defined cross reference's type (_Entity_ in this case) and the defined scoping rules. 
+the name of the cross-referenced element using the _ID_ rule and stores it 
+internally. Later on the linker establishes the cross-reference using the name, the 
+defined cross-reference's type (_Entity_ in this case) and the defined scoping rules. 
 Scoping is not covered in this tutorial since the domain model DSL works with 
-the default scoping semantics. By default a namespace based scoping is applied, which 
+the default scoping semantics. By default a namespace-based scoping is applied, which 
 means that all entities living in the same namespace are possible candidates for a 
-cross reference. We talk a bit about this later on in this chapter when we introduce 
+cross-reference. We talk a bit about this later on in this chapter when we introduce 
 namespaces.
 
 p. In our introductory example model we had not only defined entities but also two 
@@ -282,7 +282,7 @@ This is the purpose of the assignment operator '_?=_'. The parser rule looks lik
 bc.. TypeRef :
   referenced=[Type] (multi?='*')?;
 
-p. Again we have specified a cross reference, which this time not only allows to 
+p. Again we have specified a cross-reference, which this time not only allows to 
 reference entities but all instances of type. So far this only includes data type and entities, but 
 you may want to introduce additional concepts in a future version, like for instance a 
 Value Object as proposed in Eric Evan's great book _Domain Driven Design_.
@@ -314,7 +314,7 @@ Feature:
 TypeRef:
   referenced=[Type] (multi?='*')?;
   
-h3. Generate language artifacts
+h3. Generate Language Artifacts
 
 Now that we have the grammar in place and defined we need to run the generator that will derive the
 various language components. 
@@ -327,7 +327,7 @@ That will trigger the Xtext language generator. It generates the parser and
 serializer and some additional infrastructure code. You will see its logging 
 messages in the Console View. 
 
-h3. Run the generated IDE plug-in
+h3. Run the Generated IDE Plug-in
 
 If the code generation succeeded, we are now able to test the IDE integration. 
 Right-click on the Xtext project and choose
@@ -339,13 +339,13 @@ In the new workbench, create a new project
 (_File -> New -> Project...  -> General -> Project_) and therein a new file 
 with the file extension you chose in the beginning (_*.dmodel_). This will open
 the generated entity editor. Try it a bit and discover the default 
-functionality for code completion (_CTRL SPACE_ even for cross references), 
+functionality for code completion (_CTRL SPACE_ even for cross-references), 
 syntax highlighting, syntactic validation, linking errors, outline, find
 references etc.
 
-!images/getting-started-editor.png!
+!{width:50%}images/getting-started-editor.png!
 
-h3. Adding a namespace concept
+h3. Adding a Namespace Concept
 
 At the current stage, our language puts all types into the same scope. As 
 cross-references are specified by means of names, this can easily yield collisions 
@@ -437,14 +437,14 @@ bc.. PackageDeclaration:
     (elements+=AbstractElement)*
   '}';
   
-p. Having qualified names at hand, we want to specify cross references that 
+p. Having qualified names at hand, we want to specify cross-references that 
 way, too. As mentioned by default, Xtext assumes the rule _ID_ as the syntax 
-for cross references, which has been fully sufficient so far. But now we want 
+for cross-references, which has been fully sufficient so far. But now we want 
 to allow fully qualified names as well, so we explicitly specify the syntax rule 
 after a delimiter '_|_':
 
 fn.. Note, that the '_|_' has nothing to do with the previously introduced 
-alternative operator. In the context of a cross reference it is simply a delimiter.  
+alternative operator. In the context of a cross-reference it is simply a delimiter.  
 
 bc.. Entity:
   'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'

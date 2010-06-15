@@ -1,5 +1,5 @@
 
-h3(#fragmentProvider). Fragment Provider (referencing Xtext models from other EMF artifacts)
+h3(#fragmentProvider). Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)
 
 Although inter-Xtext linking is not done by URIs, you may want to be able to reference your _EObject_ 
 from non-Xtext models. In those cases URIs are used, which are made up of a part identifying the resource 
@@ -28,30 +28,33 @@ The following snippet from the "GMF Example":#gmf_integration shows how to use q
 
 bc.. public QualifiedNameFragmentProvider implements IFragmentProvider {
 
-	@Inject
-	private IQualifiedNameProvider qualifiedNameProvider;
+  @Inject
+  private IQualifiedNameProvider qualifiedNameProvider;
 
-	public String getFragment(EObject obj, Fallback fallback) {
-		String qualifiedName = qualifiedNameProvider.getQualifiedName(obj);
-		return qualifiedName != null ? qualifiedName : fallback.getFragment(obj);
-	}
+  public String getFragment(EObject obj, Fallback fallback) {
+    String qualifiedName = qualifiedNameProvider.getQualifiedName(obj);
+    return qualifiedName != null ? qualifiedName : fallback.getFragment(obj);
+  }
 
-	public EObject getEObject(Resource resource, String fragment, Fallback fallback) {
-		if (fragment != null) {
-			for (Iterator<EObject> i = EcoreUtil.getAllContents(resource, false); i.hasNext();) {
-				EObject eObject = i.next();
-				String candidateFragment = (eObject.eIsProxy()) 
-						? ((InternalEObject) eObject).eProxyURI().fragment()
-						: getFragment(eObject, fallback);
-				if (fragment.equals(candidateFragment)) 
-					return eObject;
-			}
-		}
-		return fallback.getEObject(fragment);
-	}
+  public EObject getEObject(Resource resource, 
+                            String fragment, 
+                            Fallback fallback) {
+    if (fragment != null) {
+      Iterator<EObject> i = EcoreUtil.getAllContents(resource, false);
+      while(i.hasNext()) {
+        EObject eObject = i.next();
+        String candidateFragment = (eObject.eIsProxy()) 
+            ? ((InternalEObject) eObject).eProxyURI().fragment()
+            : getFragment(eObject, fallback);
+        if (fragment.equals(candidateFragment)) 
+          return eObject;
+      }
+    }
+    return fallback.getEObject(fragment);
+  }
 }
 
-For performance reasons it is usually a good idea to navigate the resource based on the fragment 
+p. For performance reasons it is usually a good idea to navigate the resource based on the fragment 
 information instead of traversing it completely. If you know that your fragment is computed from 
 qualified names and your model contains something like _NamedElements_, you should split your fragment
 into those parts and query the root elements, the children of the best match and so on.

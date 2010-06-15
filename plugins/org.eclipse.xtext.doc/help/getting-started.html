@@ -6,8 +6,8 @@
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="index.html" title="Xtext User Guide">
-<link rel="prev" href="DSL.html" title="What is a domain-specific language">
-<link rel="next" href="processing_Xtext_models.html" title="Processing Xtext models">
+<link rel="prev" href="DSL.html" title="What is a Domain-Specific Language">
+<link rel="next" href="processing_Xtext_models.html" title="Processing Xtext Models">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Getting Started</h1>
@@ -66,12 +66,12 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </code>
 </p>
 </div>
-<div class="section" title="Create an Xtext project">
+<div class="section" title="Create an Xtext Project">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="CreateanXtextproject"></a>Create an Xtext project</h3>
+<a name="CreateanXtextProject"></a>Create an Xtext Project</h3>
 </div>
 </div>
 </div>
@@ -119,12 +119,12 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 				
 </p>
 </div>
-<div class="section" title="Project layout">
+<div class="section" title="Project Layout">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="Projectlayout"></a>Project layout</h3>
+<a name="ProjectLayout"></a>Project Layout</h3>
 </div>
 </div>
 </div>
@@ -169,12 +169,12 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 					<span class="emphasis"><em>interpreters</em></span>.
 				</p>
 </div>
-<div class="section" title="Build your own grammar">
+<div class="section" title="Build Your Own Grammar">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="Buildyourowngrammar"></a>Build your own grammar</h3>
+<a name="BuildYourOwnGrammar"></a>Build Your Own Grammar</h3>
 </div>
 </div>
 </div>
@@ -250,7 +250,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 					<span class="emphasis"><em>model</em></span> we also sometimes refer to it as 
 					<span class="emphasis"><em>semantic model</em></span> or _Abstract Syntax 
 					Tree (AST)_. Note, that in the case of Xtext it&rsquo;s actually a graph rather than a 
-					tree, since it also contains cross links. But as the term AST is so commonly 
+					tree, since it also contains crosslinks. But as the term AST is so commonly 
 					used and well known we are ignoring this minor detail. 
 				</p>
 <p>In order to tell the parser which 
@@ -468,28 +468,28 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 <p>The question mark marks an element or as in this case an entire group of elements as optional.
 					The other new thing is the right hand side of of the assignment 
 					<span class="emphasis"><em>superType=[Entity]</em></span>.
-					This is a cross-reference literal and states, that a cross reference to an elsewhere 
+					This is a cross-reference literal and states, that a cross-reference to an elsewhere 
 					declared 
 					<span class="emphasis"><em>Entity</em></span> should be established. So in this case 
 					<span class="emphasis"><em>Entity</em></span> does not point to 
 					the corresponding rule but to the 
 					<span class="emphasis"><em>EClass</em></span>. As both are named equally this might 
-					cause a little confusion at first. The full syntax for a cross reference is 
+					cause a little confusion at first. The full syntax for a cross-reference is 
 
 					<span class="emphasis"><em>[TypeName|RuleCall]</em></span> where 
 					<span class="emphasis"><em>RuleCall</em></span> defaults to 
 					<span class="emphasis"><em>ID</em></span>. This means that 
 
 					<span class="emphasis"><em>?</em></span> would work equally well. The parser only parses 
-					the name of the cross referenced element using the 
+					the name of the cross-referenced element using the 
 					<span class="emphasis"><em>ID</em></span> rule and stores it 
-					internally. Later on the linker establishes the cross reference using the name, the 
-					defined cross reference&rsquo;s type (
+					internally. Later on the linker establishes the cross-reference using the name, the 
+					defined cross-reference&rsquo;s type (
 					<span class="emphasis"><em>Entity</em></span> in this case) and the defined scoping rules. 
 					Scoping is not covered in this tutorial since the domain model DSL works with 
-					the default scoping semantics. By default a namespace based scoping is applied, which 
+					the default scoping semantics. By default a namespace-based scoping is applied, which 
 					means that all entities living in the same namespace are possible candidates for a 
-					cross reference. We talk a bit about this later on in this chapter when we introduce 
+					cross-reference. We talk a bit about this later on in this chapter when we introduce 
 					namespaces.
 				</p>
 <p>In our introductory example model we had not only defined entities but also two 
@@ -571,7 +571,7 @@ DataType:<br>
 </code>
 </p>
 </div>
-<p>Again we have specified a cross reference, which this time not only allows to 
+<p>Again we have specified a cross-reference, which this time not only allows to 
 					reference entities but all instances of type. So far this only includes data type and entities, but 
 					you may want to introduce additional concepts in a future version, like for instance a 
 					Value Object as proposed in Eric Evan&rsquo;s great book 
@@ -611,12 +611,12 @@ TypeRef:<br>
 </p>
 </div>
 </div>
-<div class="section" title="Generate language artifacts">
+<div class="section" title="Generate Language Artifacts">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="Generatelanguageartifacts"></a>Generate language artifacts</h3>
+<a name="GenerateLanguageArtifacts"></a>Generate Language Artifacts</h3>
 </div>
 </div>
 </div>
@@ -631,12 +631,12 @@ TypeRef:<br>
 					serializer and some additional infrastructure code. You will see its logging 
 					messages in the Console View. </p>
 </div>
-<div class="section" title="Run the generated IDE plug-in">
+<div class="section" title="Run the Generated IDE Plug-in">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="RunthegeneratedIDEplugin"></a>Run the generated IDE plug-in</h3>
+<a name="RuntheGeneratedIDEPlugin"></a>Run the Generated IDE Plug-in</h3>
 </div>
 </div>
 </div>
@@ -651,7 +651,7 @@ TypeRef:<br>
 					<span class="emphasis"><em>*.dmodel</em></span>). This will open
 					the generated entity editor. Try it a bit and discover the default 
 					functionality for code completion (
-					<span class="emphasis"><em>CTRL SPACE</em></span> even for cross references), 
+					<span class="emphasis"><em>CTRL SPACE</em></span> even for cross-references), 
 					syntax highlighting, syntactic validation, linking errors, outline, find
 					references etc.
 				</p>
@@ -664,12 +664,12 @@ TypeRef:<br>
 				
 </p>
 </div>
-<div class="section" title="Adding a namespace concept">
+<div class="section" title="Adding a Namespace Concept">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="Addinganamespaceconcept"></a>Adding a namespace concept</h3>
+<a name="AddingaNamespaceConcept"></a>Adding a Namespace Concept</h3>
 </div>
 </div>
 </div>
@@ -826,17 +826,17 @@ package&nbsp;my.entities&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>Having qualified names at hand, we want to specify cross references that 
+<p>Having qualified names at hand, we want to specify cross-references that 
 					way, too. As mentioned by default, Xtext assumes the rule 
 					<span class="emphasis"><em>ID</em></span> as the syntax 
-					for cross references, which has been fully sufficient so far. But now we want 
+					for cross-references, which has been fully sufficient so far. But now we want 
 					to allow fully qualified names as well, so we explicitly specify the syntax rule 
 					after a delimiter '
 					<span class="emphasis"><em>|</em></span>':
 				</p>
 <p>fn.. Note, that the '
 					<span class="emphasis"><em>|</em></span>' has nothing to do with the previously introduced 
-					alternative operator. In the context of a cross reference it is simply a delimiter.  
+					alternative operator. In the context of a cross-reference it is simply a delimiter.  
 				</p>
 <div class="literallayout">
 <p>

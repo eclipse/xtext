@@ -1,10 +1,10 @@
 
-h1(#antlr_ip_issue). The ANTLR IP issue (or which parser to use?)
+h1(#antlr_ip_issue). The ANTLR IP Issue (Or Which Parser To Use?)
 
 In order to be able to parse models written in your language, Xtext needs to provide a special parser 
 for it. The parser is generated from the self defined language grammar. 
 
-It is recommended to use the "ANTLR":http://www.antlr.org based parser.
+It is recommended to use the "ANTLR":http://www.antlr.org -based parser.
 ANTLR is a very sophisticated parser generator framework which implements a so called LL(*) algorithm.
 It is fast, simple and at the same time has some very nice and sophisticated features. Especially its 
 support for error recovery is much better than what other parser generators provide.

@@ -1,5 +1,5 @@
 
-h2(#processing_Xtext_models). Processing Xtext models
+h2(#processing_Xtext_models). Processing Xtext Models
 
 p. Now that we know how to create a language we should talk about processing the parsed models somehow. 
 There are typically two useful things one can do with
@@ -33,7 +33,7 @@ The other thing the _StandaloneSetup_ takes care of is creating a Guice _injecto
 
 Now that the language infrastructure is initialized and the different contributions to EMF are registered, we want to load a _Resource_. To do so we first create a 
 _ResourceSet_, which as the name suggests represents a set of Resources. If one _Resource_ references another _Resource_, EMF will automatically load that other _Resource_
-into the same _ResourceSet_ as soon as the cross reference is resolved. Resolution of cross references is done lazy, i.e. on first access.
+into the same _ResourceSet_ as soon as the cross-reference is resolved. Resolution of cross-references is done lazy, i.e. on first access.
 
 The 4th line loads the _Resource_ using the resource set. We pass in a URI which points to the file in the file system. 
 EMF's URI is a powerful concept. It supports a lot of different schemes to load resources from file system, web sites, jars, OSGi bundles or even 
@@ -46,7 +46,7 @@ bc..  Resource resource = rs.getResource(URI.createURI("./mymodel.dmodel"), fals
 resource.load(null);
 
 p. The load method optionally takes a map of properties, which allows to define a contract between a client and the specific implementation. In Xtext, for instance, we use 
-the map to state whether cross references should be eagerly resolved. In order to find out what properties are supported, it's usually best to look into 
+the map to state whether cross-references should be eagerly resolved. In order to find out what properties are supported, it's usually best to look into 
 the concrete implementations. That said, in most cases you don't need to pass any properties at all.
 
 The last line 
@@ -56,7 +56,7 @@ bc.. EObject eobject = resource.getContents().get(0);
 p. assigns the root element to a local variable.
 Actually it is the first element from the contents list of a _Resource_, but in Xtext a _Resource_ always has just one root element.
 
-h3(#programmatic_EMF). Working with EMF models
+h3(#programmatic_EMF). Working with EMF Models
 
 p. We have previously talked about Ecore models, which effectively is an _EPackage_ containing a any number of _EClasses_ with _EAttributes_ and _EReferences_. 
 Ecore defines additional concepts but they are not so important here. An _EObject_ is an instance of an _EClass_. For instance, the root element
@@ -86,7 +86,7 @@ for (AbstractElement abstractElement : elements) {
 
 p. Note that you'll find a lot of convenience API in EMF's _EcoreUtil_ and Xtext's ${org.eclipse.xtext/src/org.eclipse.xtext.EcoreUtil2}. 
   
-h3(#node_model). Working with the parse tree (aka node model)
+h3(#node_model). Working with the Parse Tree (aka Node Model)
 
 p. In many situations the information from the _AST_ is sufficient, but in some situations you need additional syntactical information. In Xtext not only
 an _AST_ is constructed while parsing but also a so called _parse tree_, which contains all the textual information chunked in so called tokens. The _parse tree_, also 
@@ -110,7 +110,7 @@ p. In addition to the text _LeafNodes_ also hold information about the line, the
 The other node type is called _CompositeNode_ and is created for almost each grammar element. A composite node can contain other composite nodes and leaf nodes.
 The super type of both node types is _AbstractNode_. One can find a couple of convenience methods in ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.NodeUtil} and ${org.eclipse.xtext/src/org.eclipse.xtext.parsetree.ParseTreeUtil}.
 
-h3(#working_with_grammar_model). Working with the grammar
+h3(#working_with_grammar_model). Working with the Grammar
 
 p. Also the grammar is represented as an EMF model and can be used in Java. In fact each node of the _node model_ references
 the element from the grammar which was responsible for parsing or lexing that node:
@@ -126,6 +126,6 @@ p. Let's summarize what we have learned: An Xtext model is loaded by an EMF Reso
 declared within Ecore models. A _parse tree_ is created as well, which effectively acts as a tracing model between the text, the _AST_ and the grammar. The following
 diagram illustrates the four different kinds of models.
 
-!images/xtext_data_structures.png!
+!{width:50%}images/xtext_data_structures.png!
 
  

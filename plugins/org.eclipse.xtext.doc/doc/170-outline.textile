@@ -11,7 +11,7 @@ the outline with the editor selection by clicking the _Link with Editor_ button.
 You can customize various aspects of the outline by providing implementation for its various interfaces. 
 The following sections show how to do this.
 
-h3. Influencing the outline structure
+h3. Influencing the Outline Structure
 
 In its default implementation, the outline view shows the containment hierarchy of your model. 
 This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e., 
@@ -181,7 +181,7 @@ change the declaration of _types as follows:
 
 bc. private static final Class<?>[] types = { Attribute.class, Entity.class };
 
-h4. Registering a menu contribution
+h4. Registering a Menu Contribution
 
 You can now add command / handler pairs to the context menu.
 

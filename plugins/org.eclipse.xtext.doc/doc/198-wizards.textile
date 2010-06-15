@@ -37,7 +37,7 @@ p. *Note:* To edit the generated Xpand template you should check that the _JavaB
 is enabled under _Preferences > Xtend/Xpand_. Further you should also configure the UI project with the 
 Xpand/Xtend nature using _Configure > Add Xpand/Xtend Nature_ in the context menu.
 
-h3. Customizing the project wizard
+h3. Customizing the Project Wizard
 
 p. To further customize the creation of the project you can implement your own _project creator_. 
 The default project creator is represented by the generated class _MyDslProjectCreator_ in the

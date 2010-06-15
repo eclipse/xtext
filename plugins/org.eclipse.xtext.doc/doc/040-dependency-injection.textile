@@ -36,7 +36,7 @@ p. With plain Guice modules one implements a method called configure and gets a 
 That binder provides a fluent API to define the mentioned mappings. This was just a very brief and simplified description.
 We highly recommend to have a look at "the website Google Guice":http://code.google.com/p/google-guice/ to learn more.  
 
-h3(#guicemodules). Xtext's module API
+h3(#guicemodules). Xtext's Module API
 
 p. Xtext comes with a slightly enhanced module API. For your language you get two different modules: One for the runtime bundle
 which is used when executing your language infrastructure outside of Eclipse such as on the build server. The other is
@@ -120,7 +120,8 @@ _ISetup_ which provides a method called _Injector createInjectorAndDoEMFRegistra
 code shown above you rather use the _ISetup_ class generated for your language, which, as the method name suggests, creates
 an _Injector_ and uses it to initialize a couple of EMF objects and register them in the corresponding registries.
  
-bc. Injector injector = new MyStandaloneSetup().createInjectorAndDoEMFRegistration(); 
+bc.. Injector injector = 
+    new MyStandaloneSetup().createInjectorAndDoEMFRegistration(); 
 
 p. These are the basic ideas around Guice and the small extension Xtext provides on top. For more information we 
 strongly encourage you to read through the documentation on "the website of Google Guice":http://code.google.com/p/google-guice/.

@@ -37,12 +37,14 @@ h3. Update the Workflow
 The _JavaScopingFragment_ does no longer exist. It has been superseded by the _ImportURIScopingFragment_ in combination with the _SimpleNamesFragment_.
 Please replace  
 
-bc.. <fragment class="org.eclipse.xtext.generator.scoping.JavaScopingFragment"/>
+bc.. <fragment 
+    class="org.eclipse.xtext.generator.scoping.JavaScopingFragment"/>
 p. with
 
-bc.. <fragment class="org.eclipse.xtext.generator.scoping.ImportURIScopingFragment"/>
-<fragment class="org.eclipse.xtext.generator.exporting.SimpleNamesFragment"/>
-
+bc.. <fragment 
+    class="org.eclipse.xtext.generator.scoping.ImportURIScopingFragment"/>
+<fragment 
+    class="org.eclipse.xtext.generator.exporting.SimpleNamesFragment"/>
 p. The _PackratParserFragment_ has been abandoned as well. It is save to remove the reference to that one if it is activated in your workflow. After you've changed your workflow, it should be possible to regenerate your language without any errors in the console. It is ok to have compilation errors prior to executing the workflow.
 
 h3. MANIFEST.MF and plugin.xml
@@ -55,10 +57,10 @@ The previous rename package refactoring updated most of the entries in the _MANI
 * Due to renamed packages, you have to fix all references to classes therein in the _plugin.xml_. A diff with the _plugin.xml___gen_ will be a great help. If you haven't added a lot manually, consider merging these into the generated version instead of going the other way around. Note that warnings in the _plugin.xml_ can be considered to be real errors most of the time. Make sure
 ** the _[MyDsl]ExecutableExtensionFactory_ has the _.ui._ package prefix
 ** classes from _org.eclipse.xtext.ui.common_ and _org.eclipse.xtext.ui.core_ are now usually somewhere in _org.eclipse.xtext.ui_. They are also referenced by the _[MyDsl]ExecutableExtensionFactory_ and thus not covered by the editor's validation. 
-* A number of new features are being registered in the _plugin.xml_, e.g. _Find references_, _Quick Outline_, and _Quickfixes_. You can enable them by manually copying the respective entries from _plugin.xml___gen_ to  _plugin.xml_.
+* A number of new features are being registered in the _plugin.xml_, e.g. _Find references_, _Quick Outline_, and _Quick Fixes_. You can enable them by manually copying the respective entries from _plugin.xml___gen_ to  _plugin.xml_.
 * To run MWE2 workflows later on, you must change the plug-in dependencies from _org.eclipse.emf.mwe.core_ to _org.eclipse.emf.mwe2.launch_ in your manifest. Optional resolution is fine.
 
-h3. Noteworthy API changes 
+h3. Noteworthy API Changes 
 
 The _src_ folders are generated once, so existing code will not be overwritten but has to be updated manually. At least one new class has appeared in your _src_-folder of the _ui_ plug-in. there will now be a _[MyDsl]StandaloneSetup_ inheriting form the generated _[MyDsl]StandaloneSetupGenerated_ to allow customization.
 
@@ -69,7 +71,7 @@ You will face a couple of compilation problems due to changes in the API. Here's
 * The parser interfaces now use _java.io.Reader_ instead of _java.io.InputStream_ to explicitly address encoding. Have a look at the "section on encoding":#encoding for details.
 * The handling of _ILabelProvider_ in various contexts has been refactored. The former base class _DefaultLabelProvider_ no longer exists. Use the _DefaultEObjectLabelProvider_ instead. See the "section on label providers":#labelProvider for details. 
 * We have introduced a couple of new packages to better separate concerns. Most classes should be easy to relocate. 
-* The runtime and UI modules have separate base classes _DefaultRuntimeModule_ and _DefaultUiModule_ now. We use Guice's module overrides to combine them with the newly introduced _SharedModule_.  You have to add a constructor the your _[MyDsl]UiModule_ that takes an _AbstractUiPlugin_ as argument and pass that one to the super constructor. _Tip: There is an Eclipse quick-fix available for that one._
+* The runtime and UI modules have separate base classes _DefaultRuntimeModule_ and _DefaultUiModule_ now. We use Guice's module overrides to combine them with the newly introduced _SharedModule_.  You have to add a constructor the your _[MyDsl]UiModule_ that takes an _AbstractUiPlugin_ as argument and pass that one to the super constructor. _Tip: There is an Eclipse quick fix available for that one._
 * The interfaces _ILexicalHighlightigConfiguration_ and _ISemanticHighlightingConfiguration_ have been merged into _IHighlightingConfiguration_.
 * The _DefaultTemplateProposalProvider_ takes an additional, injectable constructor parameter of type _ContextTypeIdHelper_.
 * The _HyperlinkHelper_ uses field injection instead of constructor injection. The method _createHyperlinksByOffset_ should be overridden instead of the former _findCrossLinkedEObject_.
@@ -81,14 +83,14 @@ You will face a couple of compilation problems due to changes in the API. Here's
 * Completion proposals take a _StyledString_ instead of a plain string as display string.
 * The _AbstractLabelProvider_ does no longer expose its _IImageHelper_. Use _convertToImage_ instead or inject your own _IImageHelper_.
 * The implementation-classes from _org.eclipse.xtext.index_ were superseded by the builder infrastructure. Use the _QualifiedNamesFragment_ and the _ImportNamespacesScopingFragment_ instead of the _ImportedNamespacesScopingFragment_. Please refer to the section about the builder infrastructure for details.
-* All the Xtend based fragments were removed. 
+* All the Xtend-based fragments were removed. 
 * _ILinkingService.getLinkText_ was removed. Have a look at the _LinkingHelper_ and the _CrossReferenceSerializer_ if you relied on this method.
 * The _SerializerUtil_ was renamed to _Serializer_. There were other heavy refactorings that involved the serializer and its components (like e.g. the _ITransientValueService_) but it should be pretty straight forward to migrate existing client code.
 * The method-signatures of the _IFragmentProvider_ have changed. The documentation will give a clue on how to update existing implementations.
 * Some static methods were removed from utility classes such as _EcoreUtil2_ and _ParsetreeUtil_ in favor of more sophisticated implementations.
 
 
-h2. Now go for the new features
+h2. Now Go For The New Features
 
 After migrating, some of the new features in Xtext 1.0 will be automatically available. Others require further configuration.
 We recommend reading the sections about

@@ -1,16 +1,16 @@
 <html>
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Processing Xtext models</title>
+<title>Processing Xtext Models</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="getting-started.html" title="Getting Started">
 <link rel="prev" href="getting-started.html" title="Getting Started">
-<link rel="next" href="getting-started-xpand.html" title="Writing a code generator">
+<link rel="next" href="getting-started-xpand.html" title="Writing a Code Generator">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Processing Xtext models</h1>
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Processing Xtext Models</h1>
 <p>Now that we know how to create a language we should talk about processing the parsed models somehow. 
 				There are typically two useful things one can do with
 				Xtext models: One is translating them to another programming language, i.e. writing a code generator, 
@@ -76,7 +76,7 @@ EObject&nbsp;eobject&nbsp;=&nbsp;resource.getContents().get(0);<br>
 					<span class="emphasis"><em>Resource</em></span>, EMF will automatically load that other 
 					<span class="emphasis"><em>Resource</em></span>
 					into the same 
-					<span class="emphasis"><em>ResourceSet</em></span> as soon as the cross reference is resolved. Resolution of cross references is done lazy, i.e. on first access.
+					<span class="emphasis"><em>ResourceSet</em></span> as soon as the cross-reference is resolved. Resolution of cross-references is done lazy, i.e. on first access.
 				</p>
 <p>The 4th line loads the 
 					<span class="emphasis"><em>Resource</em></span> using the resource set. We pass in a URI which points to the file in the file system. 
@@ -98,7 +98,7 @@ resource.load(null);<br>
 </p>
 </div>
 <p>The load method optionally takes a map of properties, which allows to define a contract between a client and the specific implementation. In Xtext, for instance, we use 
-					the map to state whether cross references should be eagerly resolved. In order to find out what properties are supported, it&rsquo;s usually best to look into 
+					the map to state whether cross-references should be eagerly resolved. In order to find out what properties are supported, it&rsquo;s usually best to look into 
 					the concrete implementations. That said, in most cases you don&rsquo;t need to pass any properties at all.</p>
 <p>The last line </p>
 <div class="literallayout">
@@ -116,12 +116,12 @@ resource.load(null);<br>
 					<span class="emphasis"><em>Resource</em></span> always has just one root element.
 				</p>
 </div>
-<div class="section" title="Working with EMF models">
+<div class="section" title="Working with EMF Models">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="programmatic_EMF"></a>Working with EMF models</h3>
+<a name="programmatic_EMF"></a>Working with EMF Models</h3>
 </div>
 </div>
 </div>
@@ -184,12 +184,12 @@ for&nbsp;(AbstractElement&nbsp;abstractElement&nbsp;:&nbsp;elements)&nbsp;{<br>
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/EcoreUtil2.java?root=Modeling_Project&view=co" target="_new">EcoreUtil2</a>. 
 				</p>
 </div>
-<div class="section" title="Working with the parse tree (aka node model)">
+<div class="section" title="Working with the Parse Tree (aka Node Model)">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="node_model"></a>Working with the parse tree (aka node model)</h3>
+<a name="node_model"></a>Working with the Parse Tree (aka Node Model)</h3>
 </div>
 </div>
 </div>
@@ -235,12 +235,12 @@ System.out.println(text);<br>
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/ParseTreeUtil.java?root=Modeling_Project&view=co" target="_new">ParseTreeUtil</a>.
 				</p>
 </div>
-<div class="section" title="Working with the grammar">
+<div class="section" title="Working with the Grammar">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="working_with_grammar_model"></a>Working with the grammar</h3>
+<a name="working_with_grammar_model"></a>Working with the Grammar</h3>
 </div>
 </div>
 </div>

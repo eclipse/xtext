@@ -80,7 +80,7 @@ projects. This wizard expects its templates to be in the encoding of the Generat
 (see above). As for every new project wizard, its output will be encoded in the default encoding of the 
 target workspace. 
 
-h3. Encoding of Xtext source code
+h3. Encoding of Xtext Source Code
 
 p. The source code of the Xtext framework itself is completely encoded in "ISO 8859-1", which is necessary 
 to make the Xpand templates work everywhere (they use french quotation markup). That encoding is hard 

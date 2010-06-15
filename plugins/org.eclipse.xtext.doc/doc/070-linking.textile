@@ -1,15 +1,15 @@
 
 h2(#linking). Linking
 
-The linking feature allows for specification of cross references within an Xtext grammar.
+The linking feature allows for specification of cross-references within an Xtext grammar.
 The following things are needed for the linking:
 
 # declaration of a crosslink in the grammar (at least in the Ecore model)
 # specification of linking semantics (usually provided via the "scoping API":#scoping)
 
-h3. Declaration of crosslinks
+h3. Declaration of Crosslinks
 
-In the grammar a cross reference is specified using square brackets.
+In the grammar a cross-reference is specified using square brackets.
 
 bc.. CrossReference :
   '[' type=ReferencedEClass ('|' terminal=CrossReferenceableTerminal)? ']'
@@ -29,7 +29,7 @@ the class _ReferringType_ (or one of its super types) would need to have an _ERe
 _Entity_ (or one of its super types) declared. Also the _EReference_'s containment and container 
 properties needs to be set to _false_. 
 
-h3. Default runtime behavior - Lazy Linking
+h3. Default Runtime Behavior - Lazy Linking
 
 Xtext uses lazy linking by default and we encourage users to stick to this because it provides a 
 many advantages. One of which is improved performance in all scenarios where you don't have to load 
@@ -44,14 +44,14 @@ bc. ref Entity01
 the ${org.eclipse.xtext/src/org.eclipse.xtext.linking.lazy.LazyLinker} first creates an EMF proxy and 
 assigns it to the corresponding _EReference_. In EMF a proxy is described by a URI, which points to the 
 real _EObject_. In the case of lazy linking the stored URI comprises of the context information given 
-at parse time, which is the _EObject_ containing the cross reference, the actual _EReference_, the 
-index (in case it's a multi-valued cross reference) and the string which represented the cross link 
+at parse time, which is the _EObject_ containing the cross-reference, the actual _EReference_, the 
+index (in case it's a multi-valued cross-reference) and the string which represented the crosslink 
 in the concrete syntax. The latter usually corresponds to the name of the referenced _EObject_. 
 In EMF a URI consists of information about the resource the _EObject_ is contained in as well as a so 
 called fragment part, which is used to find the _EObject_ within that resource. When an  EMF proxy 
 is resolved, the current _ResourceSet_ is asked. The resource set uses the first part to obtain 
 (i.e. load if it is not already loaded) the resource. Then the resource is asked to return the 
-_EObject_ based on the fragment in the URI. The actual cross reference resolution is done by 
+_EObject_ based on the fragment in the URI. The actual cross-reference resolution is done by 
 _LazyLinkingResource.getEObject(String)_ which receives the fragment and delegates to the implementation 
 of the _ILinkingService_. The default implementation in turn delegates to the "scoping API":#scoping.
 

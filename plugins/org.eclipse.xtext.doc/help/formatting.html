@@ -211,7 +211,7 @@
 </div>
 <p>The term 
 						<span class="emphasis"><em>tokens</em></span> is used slightly different here compared to the parser/lexer. Here, a token is a 
-						keyword or the string that is matched by a terminal rule, data type rule or cross reference. In the 
+						keyword or the string that is matched by a terminal rule, data type rule or cross-reference. In the 
 						terminology of the lexer a data type rule can match a composition of multiple tokens.
 					</p>
 <p>The parameter 
@@ -343,12 +343,12 @@
 </div>
 </div>
 </div>
-<div class="section" title="Fragment Provider (referencing Xtext models from other EMF artifacts)">
+<div class="section" title="Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="fragmentProvider"></a>Fragment Provider (referencing Xtext models from other EMF artifacts)</h3>
+<a name="fragmentProvider"></a>Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)</h3>
 </div>
 </div>
 </div>
@@ -382,54 +382,55 @@
 					interface allows to delegate to the default strategy &ndash; usually the fragment paths described above. 
 				</p>
 <p>The following snippet from the 
-					<a class="link" href="gmf_integration.html" title="Integration with GMF editors">GMF Example</a> shows how to use qualified names as fragments:   
+					<a class="link" href="gmf_integration.html" title="Integration with GMF Editors">GMF Example</a> shows how to use qualified names as fragments:   
 				</p>
 <div class="literallayout">
 <p>
 <code class="code">public&nbsp;QualifiedNameFragmentProvider&nbsp;implements&nbsp;IFragmentProvider&nbsp;{<br>
 
 <br>
-	@Inject<br>
-	private&nbsp;IQualifiedNameProvider&nbsp;qualifiedNameProvider;<br>
+&nbsp;&nbsp;@Inject<br>
+&nbsp;&nbsp;private&nbsp;IQualifiedNameProvider&nbsp;qualifiedNameProvider;<br>
 
 <br>
-	public&nbsp;String&nbsp;getFragment(EObject&nbsp;obj,&nbsp;Fallback&nbsp;fallback)&nbsp;{<br>
-		String&nbsp;qualifiedName&nbsp;=&nbsp;qualifiedNameProvider.getQualifiedName(obj);<br>
-		return&nbsp;qualifiedName&nbsp;!=&nbsp;null&nbsp;?&nbsp;qualifiedName&nbsp;:&nbsp;fallback.getFragment(obj);<br>
-	}<br>
+&nbsp;&nbsp;public&nbsp;String&nbsp;getFragment(EObject&nbsp;obj,&nbsp;Fallback&nbsp;fallback)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;qualifiedName&nbsp;=&nbsp;qualifiedNameProvider.getQualifiedName(obj);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;qualifiedName&nbsp;!=&nbsp;null&nbsp;?&nbsp;qualifiedName&nbsp;:&nbsp;fallback.getFragment(obj);<br>
+&nbsp;&nbsp;}<br>
 
 <br>
-	public&nbsp;EObject&nbsp;getEObject(Resource&nbsp;resource,&nbsp;String&nbsp;fragment,&nbsp;Fallback&nbsp;fallback)&nbsp;{<br>
-		if&nbsp;(fragment&nbsp;!=&nbsp;null)&nbsp;{<br>
-			for&nbsp;(Iterator&lt;EObject&gt;&nbsp;i&nbsp;=&nbsp;EcoreUtil.getAllContents(resource,&nbsp;false);&nbsp;i.hasNext();)&nbsp;{<br>
-				EObject&nbsp;eObject&nbsp;=&nbsp;i.next();<br>
-				String&nbsp;candidateFragment&nbsp;=&nbsp;(eObject.eIsProxy())&nbsp;<br>
-						?&nbsp;((InternalEObject)&nbsp;eObject).eProxyURI().fragment()<br>
-						:&nbsp;getFragment(eObject,&nbsp;fallback);<br>
-				if&nbsp;(fragment.equals(candidateFragment))&nbsp;<br>
-					return&nbsp;eObject;<br>
-			}<br>
-		}<br>
-		return&nbsp;fallback.getEObject(fragment);<br>
-	}<br>
+&nbsp;&nbsp;public&nbsp;EObject&nbsp;getEObject(Resource&nbsp;resource,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;fragment,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fallback&nbsp;fallback)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(fragment&nbsp;!=&nbsp;null)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;EObject&gt;&nbsp;i&nbsp;=&nbsp;EcoreUtil.getAllContents(resource,&nbsp;false);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while(i.hasNext())&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EObject&nbsp;eObject&nbsp;=&nbsp;i.next();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;candidateFragment&nbsp;=&nbsp;(eObject.eIsProxy())&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&nbsp;((InternalEObject)&nbsp;eObject).eProxyURI().fragment()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;getFragment(eObject,&nbsp;fallback);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(fragment.equals(candidateFragment))&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;eObject;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;fallback.getEObject(fragment);<br>
+&nbsp;&nbsp;}<br>
 }<br>
-
-<br>
-For&nbsp;performance&nbsp;reasons&nbsp;it&nbsp;is&nbsp;usually&nbsp;a&nbsp;good&nbsp;idea&nbsp;to&nbsp;navigate&nbsp;the&nbsp;resource&nbsp;based&nbsp;on&nbsp;the&nbsp;fragment&nbsp;<br>
-information&nbsp;instead&nbsp;of&nbsp;traversing&nbsp;it&nbsp;completely.&nbsp;If&nbsp;you&nbsp;know&nbsp;that&nbsp;your&nbsp;fragment&nbsp;is&nbsp;computed&nbsp;from&nbsp;<br>
-qualified&nbsp;names&nbsp;and&nbsp;your&nbsp;model&nbsp;contains&nbsp;something&nbsp;like&nbsp;_NamedElements_,&nbsp;you&nbsp;should&nbsp;split&nbsp;your&nbsp;fragment<br>
-into&nbsp;those&nbsp;parts&nbsp;and&nbsp;query&nbsp;the&nbsp;root&nbsp;elements,&nbsp;the&nbsp;children&nbsp;of&nbsp;the&nbsp;best&nbsp;match&nbsp;and&nbsp;so&nbsp;on.<br>
-
-<br>
-Furthermore&nbsp;it's&nbsp;a&nbsp;good&nbsp;idea&nbsp;to&nbsp;have&nbsp;some&nbsp;kind&nbsp;of&nbsp;conflict&nbsp;resolution&nbsp;strategy&nbsp;to&nbsp;be&nbsp;able&nbsp;to&nbsp;distinguish<br>
-between&nbsp;equally&nbsp;named&nbsp;elements&nbsp;that&nbsp;actually&nbsp;are&nbsp;different,&nbsp;e.g.&nbsp;properties&nbsp;may&nbsp;have&nbsp;the&nbsp;very&nbsp;same&nbsp;qualified<br>
-name&nbsp;as&nbsp;entities.&nbsp;<br>
 
 <br>
 
 </code>
 </p>
 </div>
+<p>For performance reasons it is usually a good idea to navigate the resource based on the fragment 
+					information instead of traversing it completely. If you know that your fragment is computed from 
+					qualified names and your model contains something like 
+					<span class="emphasis"><em>NamedElements</em></span>, you should split your fragment
+					into those parts and query the root elements, the children of the best match and so on.
+				</p>
+<p>Furthermore it&rsquo;s a good idea to have some kind of conflict resolution strategy to be able to distinguish
+					between equally named elements that actually are different, e.g. properties may have the very same qualified
+					name as entities. </p>
 </div>
 </body>
 </html>

@@ -11,7 +11,7 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Linking</h1>
-<p>The linking feature allows for specification of cross references within an Xtext grammar.
+<p>The linking feature allows for specification of cross-references within an Xtext grammar.
 				The following things are needed for the linking:</p>
 <div class="orderedlist">
 <ol class="orderedlist" type="1">
@@ -25,16 +25,16 @@
 </li>
 </ol>
 </div>
-<div class="section" title="Declaration of crosslinks">
+<div class="section" title="Declaration of Crosslinks">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="Declarationofcrosslinks"></a>Declaration of crosslinks</h3>
+<a name="DeclarationofCrosslinks"></a>Declaration of Crosslinks</h3>
 </div>
 </div>
 </div>
-<p>In the grammar a cross reference is specified using square brackets.</p>
+<p>In the grammar a cross-reference is specified using square brackets.</p>
 <div class="literallayout">
 <p>
 <code class="code">CrossReference&nbsp;:<br>
@@ -59,7 +59,7 @@
 </p>
 </div>
 <p>The 
-					<a class="link" href="metamodelInference.html" title="Ecore model inference">Ecore model inference</a> would create an 
+					<a class="link" href="metamodelInference.html" title="Ecore Model Inference">Ecore model inference</a> would create an 
 					<span class="emphasis"><em>EClass</em></span> 
 					<span class="emphasis"><em>ReferringType</em></span> with an 
 
@@ -83,12 +83,12 @@
 					<span class="emphasis"><em>false</em></span>. 
 				</p>
 </div>
-<div class="section" title="Default runtime behavior &ndash; Lazy Linking">
+<div class="section" title="Default Runtime Behavior &ndash; Lazy Linking">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="DefaultruntimebehaviorLazyLinking"></a>Default runtime behavior &ndash; Lazy Linking</h3>
+<a name="DefaultRuntimeBehaviorLazyLinking"></a>Default Runtime Behavior &ndash; Lazy Linking</h3>
 </div>
 </div>
 </div>
@@ -112,9 +112,9 @@
 					real 
 					<span class="emphasis"><em>EObject</em></span>. In the case of lazy linking the stored URI comprises of the context information given 
 					at parse time, which is the 
-					<span class="emphasis"><em>EObject</em></span> containing the cross reference, the actual 
+					<span class="emphasis"><em>EObject</em></span> containing the cross-reference, the actual 
 					<span class="emphasis"><em>EReference</em></span>, the 
-					index (in case it&rsquo;s a multi-valued cross reference) and the string which represented the cross link 
+					index (in case it&rsquo;s a multi-valued cross-reference) and the string which represented the crosslink 
 					in the concrete syntax. The latter usually corresponds to the name of the referenced 
 					<span class="emphasis"><em>EObject</em></span>. 
 					In EMF a URI consists of information about the resource the 
@@ -125,7 +125,7 @@
 					<span class="emphasis"><em>ResourceSet</em></span> is asked. The resource set uses the first part to obtain 
 					(i.e. load if it is not already loaded) the resource. Then the resource is asked to return the 
 
-					<span class="emphasis"><em>EObject</em></span> based on the fragment in the URI. The actual cross reference resolution is done by 
+					<span class="emphasis"><em>EObject</em></span> based on the fragment in the URI. The actual cross-reference resolution is done by 
 
 					<span class="emphasis"><em>LazyLinkingResource.getEObject(String)</em></span> which receives the fragment and delegates to the implementation 
 					of the 

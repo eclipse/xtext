@@ -13,7 +13,7 @@
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Scoping</h1>
 <p>Using the scoping API one defines which elements are referable by a certain reference. For instance, 
 				using the introductory example (fowler&rsquo;s state machine language)
-				a transition contains two cross references: One to a declared event and one to a declared state.</p>
+				a transition contains two cross-references: One to a declared event and one to a declared state.</p>
 <p>Example:</p>
 <div class="literallayout">
 <p>
@@ -55,7 +55,7 @@ end<br>
 				<span class="emphasis"><em>EObject</em></span> and 
 
 				<span class="emphasis"><em>EReference</em></span>. The returned 
-				<span class="emphasis"><em>IScope</em></span> should contain all target candidates for the given object and cross reference.
+				<span class="emphasis"><em>IScope</em></span> should contain all target candidates for the given object and cross-reference.
 			</p>
 <div class="literallayout">
 <p>
@@ -63,14 +63,16 @@ end<br>
 
 <br>
 	/**<br>
-	&nbsp;*&nbsp;Returns&nbsp;a&nbsp;scope&nbsp;for&nbsp;the&nbsp;given&nbsp;context.&nbsp;The&nbsp;scope&nbsp;provides&nbsp;access&nbsp;to&nbsp;the&nbsp;compatible<br>
-	&nbsp;*&nbsp;visible&nbsp;EObjects&nbsp;for&nbsp;a&nbsp;given&nbsp;reference.<br>
+	&nbsp;*&nbsp;Returns&nbsp;a&nbsp;scope&nbsp;for&nbsp;the&nbsp;given&nbsp;context.&nbsp;The&nbsp;scope&nbsp;<br>
+	&nbsp;*&nbsp;provides&nbsp;access&nbsp;to&nbsp;the&nbsp;compatible&nbsp;visible&nbsp;EObjects&nbsp;<br>
+	&nbsp;*&nbsp;for&nbsp;a&nbsp;given&nbsp;reference.<br>
 	&nbsp;*<br>
 	&nbsp;*&nbsp;@param&nbsp;context&nbsp;the&nbsp;element&nbsp;from&nbsp;which&nbsp;an&nbsp;element&nbsp;shall&nbsp;be&nbsp;referenced<br>
 	&nbsp;*&nbsp;@param&nbsp;reference&nbsp;the&nbsp;reference&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;filter&nbsp;the&nbsp;elements.<br>
-	&nbsp;*&nbsp;@return&nbsp;{@link&nbsp;IScope}&nbsp;representing&nbsp;the&nbsp;inner&nbsp;most&nbsp;{@link&nbsp;IScope}&nbsp;for&nbsp;the<br>
-	&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;passed&nbsp;context&nbsp;and&nbsp;reference.&nbsp;Note&nbsp;for&nbsp;implementors:&nbsp;The&nbsp;result&nbsp;may&nbsp;not&nbsp;be&nbsp;&lt;code&gt;null&lt;/code&gt;.<br>
-	&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&lt;code&gt;IScope.NULLSCOPE&lt;/code&gt;&nbsp;instead.<br>
+	&nbsp;*&nbsp;@return&nbsp;{@link&nbsp;IScope}&nbsp;representing&nbsp;the&nbsp;inner&nbsp;most&nbsp;{@link&nbsp;IScope}&nbsp;for&nbsp;<br>
+	&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;passed&nbsp;context&nbsp;and&nbsp;reference.&nbsp;Note&nbsp;for&nbsp;implementors:&nbsp;The&nbsp;<br>
+	&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;may&nbsp;not&nbsp;be&nbsp;&lt;code&gt;null&lt;/code&gt;.&nbsp;Return&nbsp;<br>
+	&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;code&gt;IScope.NULLSCOPE&lt;/code&gt;&nbsp;instead.<br>
 	&nbsp;*/<br>
 	IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EReference&nbsp;reference);<br>
 
@@ -141,7 +143,7 @@ end<br>
 						of exported 
 						<span class="emphasis"><em>EObjects</em></span> (in the form of 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java?root=Modeling_Project&view=co" target="_new">IEObjectDescription</a>) 
-						as well as information about outgoing cross references and qualified names it references. The cross 
+						as well as information about outgoing cross-references and qualified names it references. The cross 
 						references contain only resolved references, while the list of imported qualified names also contain 
 						those names, which couldn&rsquo;t be resolved. This information is important in order to compute the transitive 
 						hull of dependent resources, which the shipped index infrastructure automatically does for you.
@@ -192,7 +194,7 @@ end<br>
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.java?root=Modeling_Project&view=co" target="_new">DefaultDeclarativeQualifiedNameProvider</a> concatenates 
 						the simple name with the qualified name of its parent exported 
 						<span class="emphasis"><em>EObject</em></span>. This effectively simulates 
-						the qualified name computation of most namespace based languages (like e.g. Java). 
+						the qualified name computation of most namespace-based languages (like e.g. Java). 
 					</p>
 <p>As mentioned above, in order to calculate an 
 						<span class="emphasis"><em>IResourceDescription</em></span> for a resource the framework asks 
@@ -263,12 +265,12 @@ private&nbsp;IResourceDescription.Manager&nbsp;getManager(Resource&nbsp;res)&nbs
 						following chapter.
 					</p>
 </div>
-<div class="section" title="Global Scopes based on explicit imports (ImportURI mechanism)">
+<div class="section" title="Global Scopes Based On Explicit Imports (ImportURI Mechanism)">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="import_uri"></a>Global Scopes based on explicit imports (ImportURI mechanism)</h4>
+<a name="import_uri"></a>Global Scopes Based On Explicit Imports (ImportURI Mechanism)</h4>
 </div>
 </div>
 </div>
@@ -338,12 +340,12 @@ Import&nbsp;:&nbsp;<br>
 						<span class="emphasis"><em>importURI</em></span> features.
 					</p>
 </div>
-<div class="section" title="Global Scopes based on external configuration (e.g. classpath-based)">
+<div class="section" title="Global Scopes Based On External Configuration (e.g. Classpath-Based)">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="index_based"></a>Global Scopes based on external configuration (e.g. classpath-based)</h4>
+<a name="index_based"></a>Global Scopes Based On External Configuration (e.g. Classpath-Based)</h4>
 </div>
 </div>
 </div>
@@ -370,18 +372,18 @@ Import&nbsp;:&nbsp;<br>
 						the actual qualified names of the referenceable 
 						<span class="emphasis"><em>EObjects</em></span>, you&rsquo;ll have to load all resources up front 
 						and either keep holding them in memory or remembering all information which is needed for the 
-						resolution of cross references. In Xtext that information is provided by a so called 
+						resolution of cross-references. In Xtext that information is provided by a so called 
 
 						<a class="link" href="scoping.html#resourcedescriptions" title="Resource and EObject Descriptions ( IResourceDescription, IEObjectDescription)">
 							<span class="emphasis"><em>IEObjectDescription</em></span>
 						</a>. 
 					</p>
-<div class="section" title="About the index, containers and their manager">
+<div class="section" title="About the Index, Containers and Their Manager">
 <div class="titlepage">
 <div>
 <div>
 <h5 class="title">
-<a name="containers"></a>About the index, containers and their manager </h5>
+<a name="containers"></a>About the Index, Containers and Their Manager </h5>
 </div>
 </div>
 </div>
@@ -434,7 +436,8 @@ IContainer.Manager&nbsp;containerManager;<br>
 <br>
 public&nbsp;void&nbsp;listVisibleResources(<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;myResource,&nbsp;IResourceDescriptions&nbsp;index)&nbsp;{<br>
-&nbsp;&nbsp;IResourceDescription&nbsp;descr&nbsp;=&nbsp;index.getResourceDescription(myResource.getURI());<br>
+&nbsp;&nbsp;IResourceDescription&nbsp;descr&nbsp;=&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index.getResourceDescription(myResource.getURI());<br>
 &nbsp;&nbsp;for(IContainer&nbsp;visibleContainer:&nbsp;manager.getVisibleContainers(descr))&nbsp;{&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;for(IResourceDescription&nbsp;visibleResourceDesc:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visibleContainer.getResourceDescription())&nbsp;{&nbsp;<br>
@@ -478,16 +481,16 @@ public&nbsp;void&nbsp;listVisibleResources(<br>
 						
 </p>
 </div>
-<div class="section" title="JDT based container manager">
+<div class="section" title="JDT-Based Container Manager">
 <div class="titlepage">
 <div>
 <div>
 <h5 class="title">
-<a name="jdt_based_containers"></a>JDT based container manager </h5>
+<a name="jdt_based_containers"></a>JDT-Based Container Manager </h5>
 </div>
 </div>
 </div>
-<p>As JDT is an Eclipse feature, this JDT based container management is only available in the UI scenario. 
+<p>As JDT is an Eclipse feature, this JDT-based container management is only available in the UI scenario. 
 							It assumes so called 
 							<span class="emphasis"><em>IPackageFragmentRoots</em></span> as containers. An 
 							<span class="emphasis"><em>IPackageFragmentRoot</em></span> in JDT is the 
@@ -546,16 +549,16 @@ public&nbsp;void&nbsp;listVisibleResources(<br>
 							in non-source folders. 
 						</p>
 </div>
-<div class="section" title="Eclipse project based containers">
+<div class="section" title="Eclipse Project-Based Containers">
 <div class="titlepage">
 <div>
 <div>
 <h5 class="title">
-<a name="project_based_containers"></a>Eclipse project based containers</h5>
+<a name="project_based_containers"></a>Eclipse Project-Based Containers</h5>
 </div>
 </div>
 </div>
-<p>If the classpath based mechanism doesn&rsquo;t work for your case, Xtext offers an alternative container 
+<p>If the classpath-based mechanism doesn&rsquo;t work for your case, Xtext offers an alternative container 
 							manager based on plain Eclipse projects: Each project acts as a container and the project references 
 
 							<span class="emphasis"><em>Properties-&gt;Project References</em></span> are the visible containers. 
@@ -585,13 +588,13 @@ public&nbsp;void&nbsp;listVisibleResources(<br>
 </p>
 </div>
 </div>
-<div class="section" title="ResourceSet based containers">
+<div class="section" title="ResourceSet-Based Containers">
 <div class="titlepage">
 <div>
 <div>
 <h5 class="title">
 <a name="resource_set_containers"></a>
-							<span class="emphasis"><em>ResourceSet</em></span> based containers
+							<span class="emphasis"><em>ResourceSet</em></span>-Based Containers
 						</h5>
 </div>
 </div>
@@ -672,7 +675,8 @@ public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;sco
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;methodScope{localVar,&nbsp;param}-&gt;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;classScope{field}-&gt;&nbsp;('field'&nbsp;is&nbsp;shadowed)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;fileScope{STATIC}-&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;classpathScope{'all&nbsp;qualified&nbsp;names&nbsp;of&nbsp;accessible&nbsp;static&nbsp;fields'}&nbsp;-&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;classpathScope{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'all&nbsp;qualified&nbsp;names&nbsp;of&nbsp;accessible&nbsp;static&nbsp;fields'}&nbsp;-&gt;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;NULLSCOPE{}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
@@ -704,12 +708,12 @@ public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;sco
 
 					<a class="ulink" href="http://blog.efftinge.de/2009/01/xtext-scopes-and-emf-index.html" target="_new">this blog post</a> .
 				</p>
-<div class="section" title="Declarative scoping">
+<div class="section" title="Declarative Scoping">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="Declarativescoping"></a>Declarative scoping</h4>
+<a name="DeclarativeScoping"></a>Declarative Scoping</h4>
 </div>
 </div>
 </div>
@@ -720,26 +724,25 @@ public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;sco
 					</p>
 <div class="literallayout">
 <p>
-<code class="code">IScope&nbsp;scope_&lt;RefDeclaringEClass&gt;_&lt;Reference&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br>
+<code class="code">IScope&nbsp;scope_&lt;RefDeclaringEClass&gt;_&lt;Reference&gt;(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br>
+
+<br>
+IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br>
+
+<br>
 
 </code>
 </p>
 </div>
-<div class="literallayout">
-<p>
-<code class="code">IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br>
-
-</code>
-</p>
-</div>
-<p>The former is used when evaluating the scope for a specific cross reference and here 
+<p>The former is used when evaluating the scope for a specific cross-reference and here 
 						<span class="emphasis"><em>ContextReference</em></span> 
 						corresponds to the name of this reference (prefixed with the name of the reference&rsquo;s declaring type and 
 						separated by an underscore). The 
-						<span class="emphasis"><em>ref</em></span> parameter represents this cross reference.
+						<span class="emphasis"><em>ref</em></span> parameter represents this cross-reference.
 					</p>
 <p>The latter method signature is used when computing the scope for a given element type and is applicable 
-						to all cross references of that type. Here 
+						to all cross-references of that type. Here 
 						<span class="emphasis"><em>TypeToReturn</em></span> is the name of that type which also corresponds 
 						to the 
 						<span class="emphasis"><em>type</em></span> parameter. 
@@ -748,7 +751,7 @@ public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;sco
 						<span class="emphasis"><em>Transition</em></span> object owned by its source 
 						<span class="emphasis"><em>State</em></span> and 
 						you want to compute all reachable states (i.e. potential target states), the corresponding method could 
-						be declared as follows (assuming the cross reference is declared by the 
+						be declared as follows (assuming the cross-reference is declared by the 
 						<span class="emphasis"><em>Transition</em></span> type and is called 
 						<span class="emphasis"><em>target</em></span>):
 					</p>
@@ -770,7 +773,7 @@ public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;sco
 						<span class="emphasis"><em>State</em></span> objects could for instance be owned by a containing 
 						<span class="emphasis"><em>StateMachine</em></span> object.
 					</p>
-<p>If no method specific to the cross reference in question was found for any of the objects in the 
+<p>If no method specific to the cross-reference in question was found for any of the objects in the 
 						containment hierarchy, the implementation will start looking for methods matching the other signature 
 						(with the 
 						<span class="emphasis"><em>EClass</em></span> parameter). Again it will first attempt to match the context object. Thus in the 
@@ -793,18 +796,18 @@ public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;sco
 </code>
 </p>
 </div>
-<p>This scope can now be used for any cross references of type 
+<p>This scope can now be used for any cross-references of type 
 						<span class="emphasis"><em>State</em></span> for context objects owned by the 
 						state machine.
 					</p>
 </div>
 </div>
-<div class="section" title="Imported Namespace-aware Scoping">
+<div class="section" title="Imported Namespace-Aware Scoping">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="ImportedNamespaceawareScoping"></a>Imported Namespace-aware Scoping</h3>
+<a name="ImportedNamespaceAwareScoping"></a>Imported Namespace-Aware Scoping</h3>
 </div>
 </div>
 </div>
@@ -843,12 +846,13 @@ public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;sco
 					</p>
 <div class="literallayout">
 <p>
-<code class="code">FowlerDslQualifiedNameProvider&nbsp;extends&nbsp;DefaultDeclarativeQualifiedNameProvider&nbsp;{<br>
+<code class="code">FowlerDslQualifiedNameProvider&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;DefaultDeclarativeQualifiedNameProvider&nbsp;{<br>
 &nbsp;&nbsp;public&nbsp;String&nbsp;qualifiedName(Transition&nbsp;t)&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;if(t.getEvent()&nbsp;==&nbsp;null&nbsp;||&nbsp;!(t.eContainer()&nbsp;instanceof&nbsp;State))&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;((State)&nbsp;t.eContainer()).getName()&nbsp;+&nbsp;"."&nbsp;t.getEvent().getName();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;((State)t.eContainer()).getName()&nbsp;+&nbsp;"."&nbsp;t.getEvent().getName();<br>
 &nbsp;&nbsp;}<br>
 }<br>
 

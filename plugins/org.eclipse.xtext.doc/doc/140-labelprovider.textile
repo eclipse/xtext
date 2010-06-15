@@ -30,7 +30,7 @@ list of generator fragments in the MWE2 workflow for your language, it will auto
 stubs and bindings for an "_{MyLang}EObjectLabelProvider_":#EObjectLabelProvider and an 
 "_{MyLang}DescriptionLabelProvider_":#DescriptionLabelProvider which you can implement by manually. 
 
-h3(#EObjectLabelProvider). Label providers for EObjects
+h3(#EObjectLabelProvider). Label Providers For EObjects
 
 The first set of label providers refers to actually loaded and thereby available model elements. 
 By default, Xtext binds the _DefaultEObjectLabelProvider_ to all use cases, but you can change the 
@@ -93,10 +93,10 @@ class name of the model element, which is kind of unlikely to happen.
 p. You can a also customize error handling by overriding the methods _handleTextError()_ or 
 _handleImageError()_.
  
-h3(#DescriptionLabelProvider). Label providers for index entries
+h3(#DescriptionLabelProvider). Label Providers For Index Entries
 
 Xtext maintains an index of all model elements to allow quick searching and linking without loading 
-the referenced resource (See the chapter on "index based scopes":#index_based for details). The 
+the referenced resource (See the chapter on "index-based scopes":#index_based for details). The 
 elements from this index also appear in some UI contexts, e.g. in the _Find model elements_ dialog or 
 in the _Find references_ view. For reasons of scalability, the UI should not automatically load 
 resources, so we need another implementation of a label provider that works with the elements from the 

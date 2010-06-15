@@ -5,13 +5,13 @@
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
-<link rel="up" href="IDEconcepts.html" title="IDE concepts">
+<link rel="up" href="IDEConcepts.html" title="IDE Concepts">
 <link rel="prev" href="outline.html" title="Outline View">
 <link rel="next" href="highlighting.html" title="Syntax Coloring">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Hyperlinking</h1>
-<p>The Xtext editor provides hyperlinking support for any tokens corresponding to cross references in your 
+<p>The Xtext editor provides hyperlinking support for any tokens corresponding to cross-references in your 
 				grammar definition. You can either CTRL-click on any of these tokens or hit F3 
 				while the cursor position is at the token in question and this will take you to the referenced model 
 				element. As you&rsquo;d expect this works for references to elements in the same resource as well as for 
@@ -64,7 +64,7 @@
 </div>
 <p>As the default strategy is a best effort it may not always result in the selection you want. If that&rsquo;s 
 						the case you can 
-						<a class="link" href="dependencyInjection.html#guicemodules" title="Xtext&rsquo;s module API">override</a> the 
+						<a class="link" href="dependencyInjection.html#guicemodules" title="Xtext&rsquo;s Module API">override</a> the 
 						<span class="emphasis"><em>ILocationInFileProvider</em></span> binding in the UI module as 
 						in the following example:
 					</p>
@@ -99,18 +99,18 @@
 					</p>
 </div>
 </div>
-<div class="section" title="Customizing available Hyperlinks">
+<div class="section" title="Customizing Available Hyperlinks">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="CustomizingavailableHyperlinks"></a>Customizing available Hyperlinks</h3>
+<a name="CustomizingAvailableHyperlinks"></a>Customizing Available Hyperlinks</h3>
 </div>
 </div>
 </div>
 <p>The hyperlinks are provided by the 
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.java?root=Modeling_Project&view=co" target="_new">HyperlinkHelper</a>
-					which will create links for cross referenced objects by default. Clients may want to override 
+					which will create links for cross-referenced objects by default. Clients may want to override 
 
 					<span class="emphasis"><em>createHyperlinksByOffset(XtextResource, int, IHyperlinkAcceptor)</em></span> to provide additional links or 
 					supersede the default implementation. 

@@ -1,16 +1,16 @@
 <html>
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Integration with EMF and other EMF editors</title>
+<title>Integration with EMF and Other EMF Editors</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="index.html" title="Xtext User Guide">
-<link rel="prev" href="CustomizingPoints.html" title="Customizing Points">
-<link rel="next" href="emf_codegen.html" title="EMF code generation">
+<link rel="prev" href="CustomizationPoints.html" title="Customization Points">
+<link rel="next" href="emf_codegen.html" title="EMF Code Generation">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Integration with EMF and other EMF editors</h1>
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Integration with EMF and Other EMF Editors</h1>
 <p>Xtext relies heavily on EMF internally, but it can also be used as the serialization back-end of other EMF-based tools.
 			In this section we introduce the basic concepts of the 
 			<a class="ulink" href="http://www.eclipse.org/emf" target="_new">Eclipse Modeling Framework (EMF)</a> in the context of Xtext.  
@@ -57,7 +57,7 @@
 				<span class="emphasis"><em>EPackage</em></span>, which are both concepts of 
 				<span class="emphasis"><em>Ecore</em></span> 
 				In Xtext, meta models are either inferred from the grammar or predefined by the user (see the section on 
-				<a class="link" href="syntax.html#package_declarations" title="EPackage declarations">package declarations</a> for details). The next diagram shows the meta model of our example:
+				<a class="link" href="syntax.html#package_declarations" title="EPackage Declarations">package declarations</a> for details). The next diagram shows the meta model of our example:
 			</p>
 <p>
 				
@@ -92,12 +92,12 @@
 				<span class="emphasis"><em>EReferences</em></span> point to other EClasses. The 
 				<span class="emphasis"><em>containment</em></span> flag indicates whether an EReference is a 
 				<span class="emphasis"><em>containment reference</em></span> or a 
-				<span class="emphasis"><em>cross reference</em></span>. In the diagram, references are edges and containment references are marked with a diamond. At the model level, each element can have at most one container, i.e. another element referring to it with a containment reference. This infers a tree structure to the models, as can be seen in the sample model diagram. On the other hand, 
-				<span class="emphasis"><em>cross references</em></span> refer to elements that can be contained anywhere else. In the example, 
+				<span class="emphasis"><em>cross-reference</em></span>. In the diagram, references are edges and containment references are marked with a diamond. At the model level, each element can have at most one container, i.e. another element referring to it with a containment reference. This infers a tree structure to the models, as can be seen in the sample model diagram. On the other hand, 
+				<span class="emphasis"><em>cross-references</em></span> refer to elements that can be contained anywhere else. In the example, 
 				<span class="emphasis"><em>elements</em></span> and 
 				<span class="emphasis"><em>properties</em></span> are containment references, while 
 				<span class="emphasis"><em>type</em></span> and 
-				<span class="emphasis"><em>extends</em></span> are cross references. For reasons of readability, we skipped the cross references in the sample model diagram. Note that in contrast to other parser generators, Xtext creates ASTs with linked cross references. 
+				<span class="emphasis"><em>extends</em></span> are cross-references. For reasons of readability, we skipped the cross-references in the sample model diagram. Note that in contrast to other parser generators, Xtext creates ASTs with linked cross-references. 
 			</p>
 <p>Other than associations in UML, EReferences in Ecore are always owned by one EClass and only navigable in the direction form the owner to the type. Bi-directional associations must be modeled as two references, being 
 				<span class="emphasis"><em>eOpposite</em></span> of each other and owned by either end of the associations.

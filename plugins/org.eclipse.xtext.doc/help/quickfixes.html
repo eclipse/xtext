@@ -1,16 +1,16 @@
 <html>
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Quick fixes</title>
+<title>Quick Fixes</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
-<link rel="up" href="IDEconcepts.html" title="IDE concepts">
+<link rel="up" href="IDEConcepts.html" title="IDE Concepts">
 <link rel="prev" href="contentAssist.html" title="Content Assist">
 <link rel="next" href="templates.html" title="Template Proposals">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Quick fixes</h1>
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Quick Fixes</h1>
 <p>For validations written using the 
 
 				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeValidator</a>:#custom_validation 
@@ -57,14 +57,16 @@
 <code class="code">@Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)<br>
 public&nbsp;void&nbsp;fixName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{<br>
 &nbsp;&nbsp;acceptor.accept(issue,&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"Capitalize&nbsp;name",&nbsp;//&nbsp;quickfix&nbsp;label<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"Capitalize&nbsp;name&nbsp;&nbsp;of&nbsp;'"&nbsp;+&nbsp;issue.getData()[0]&nbsp;+&nbsp;"'",&nbsp;&nbsp;//&nbsp;quickfix&nbsp;description&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"upcase.png",&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;quickfix&nbsp;icon<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"Capitalize&nbsp;name",&nbsp;//&nbsp;quick&nbsp;fix&nbsp;label<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"Capitalize&nbsp;name&nbsp;&nbsp;of&nbsp;'"&nbsp;+&nbsp;issue.getData()[0]&nbsp;+&nbsp;"'",&nbsp;&nbsp;//&nbsp;description&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"upcase.png",&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;quick&nbsp;fix&nbsp;icon<br>
 &nbsp;&nbsp;&nbsp;&nbsp;new&nbsp;IModification()&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;apply(IModificationContext&nbsp;context)&nbsp;throws&nbsp;BadLocationException&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;apply(IModificationContext&nbsp;context)&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throws&nbsp;BadLocationException&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IXtextDocument&nbsp;xtextDocument&nbsp;=&nbsp;context.getXtextDocument();<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;firstLetter&nbsp;=&nbsp;xtextDocument.get(issue.getOffset(),&nbsp;1);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtextDocument.replace(issue.getOffset(),&nbsp;1,&nbsp;Strings.toFirstUpper(firstLetter));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtextDocument.replace(issue.getOffset(),&nbsp;1,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings.toFirstUpper(firstLetter));<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;);<br>
@@ -113,14 +115,16 @@ public&nbsp;void&nbsp;fixName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueResolutionA
 <div class="literallayout">
 <p>
 <code class="code">@Fix(DomainmodelJavaValidator.INVALID_FEATURE_NAME)<br>
-public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{<br>
+public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{<br>
 &nbsp;&nbsp;acceptor.accept(issue,&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;"Uncapitalize&nbsp;name",&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;label<br>
 &nbsp;&nbsp;&nbsp;&nbsp;"Uncapitalize&nbsp;name&nbsp;of&nbsp;'"&nbsp;+&nbsp;issue.getData()[0]&nbsp;+&nbsp;"'",&nbsp;//&nbsp;description<br>
 &nbsp;&nbsp;&nbsp;&nbsp;"upcase.png",&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;icon&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;new&nbsp;ISemanticModification()&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;apply(EObject&nbsp;element,&nbsp;IModificationContext&nbsp;context)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((Feature)&nbsp;element).setName(Strings.toFirstLower(issue.getData()[0]));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((Feature)&nbsp;element).setName(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings.toFirstLower(issue.getData()[0]));<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;);<br>

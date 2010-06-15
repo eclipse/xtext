@@ -23,7 +23,7 @@ h4(#linking_validation). Linker: Crosslink Validation
 Any broken crosslinks can be checked generically. As crosslink resolution is done lazily (see "linking":#linking), any broken links are resolved lazily as well.
 If you want to validate whether all links are valid, you will have to navigate through the model so that all installed EMF proxies get resolved. This is done automatically in the editor.
 
-Similar to syntax errors, any unresolvable cross-links will be reported and can be obtained through:
+Similar to syntax errors, any unresolvable crosslinks will be reported and can be obtained through:
 
 * _org.eclipse.emf.ecore.resource.Resource.getErrors()_
 * _org.eclipse.emf.ecore.resource.Resource.getWarnings()_
@@ -57,7 +57,8 @@ allows integrating of the concrete syntax validator as an _EValidator_. You can,
 your runtime module, by adding:
 
 bc.. @SingletonBinding(eager = true)
-public Class<? extends ConcreteSyntaxEValidator> bindConcreteSyntaxEValidator() {
+public Class<? extends ConcreteSyntaxEValidator> 
+      bindConcreteSyntaxEValidator() {
   return ConcreteSyntaxEValidator.class;
 }
 p. To customize error messages please see 
@@ -97,9 +98,9 @@ public class DomainmodelJavaValidator
   }
 }
 
-p. You can also implement quick fixes for individual validation errors and warnings. See the "chapter on quickfixes":#quickfixes for details.
+p. You can also implement quick fixes for individual validation errors and warnings. See the "chapter on quick fixes":#quickfixes for details.
 
-h3(#check_based_validation). Validation with the Check language
+h3(#check_based_validation). Validation with the Check Language
 
 In addition to the Java-based validation code you can use the language Check (from M2T/Xpand) to implement constraint checks against your model. To do so, you have to configure the "generator":#generator with the
 ${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.validation.CheckFragment}.

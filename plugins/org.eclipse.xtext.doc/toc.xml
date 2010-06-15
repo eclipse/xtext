@@ -1,54 +1,54 @@
 <toc topic="help/index.html" label="Xtext User Guide">
 <topic href="help/Overview.html" label="Overview">
 <topic href="help/Overview.html#WhatisXtext" label="What is Xtext?"></topic>
-<topic href="help/Howdoesitwork.html" label="How does it work?"></topic>
-<topic href="help/Xtextishighlyconfigurable.html" label="Xtext is highly configurable"></topic>
-<topic href="help/WhousesXtext.html" label="Who uses Xtext?"></topic>
-<topic href="help/WhoisbehindXtext.html" label="Who is behind Xtext?"></topic>
-<topic href="help/DSL.html" label="What is a domain-specific language"></topic>
+<topic href="help/HowDoesItWork.html" label="How Does It Work?"></topic>
+<topic href="help/XtextisHighlyConfigurable.html" label="Xtext is Highly Configurable"></topic>
+<topic href="help/WhoUsesXtext.html" label="Who Uses Xtext?"></topic>
+<topic href="help/WhoisBehindXtext.html" label="Who is Behind Xtext?"></topic>
+<topic href="help/DSL.html" label="What is a Domain-Specific Language"></topic>
 </topic>
 <topic href="help/getting-started.html" label="Getting Started">
 <topic href="help/getting-started.html#getting-started-xtext" label="Creating a DSL">
-<topic href="help/getting-started.html#CreateanXtextproject" label="Create an Xtext project"></topic>
-<topic href="help/getting-started.html#Projectlayout" label="Project layout"></topic>
-<topic href="help/getting-started.html#Buildyourowngrammar" label="Build your own grammar"></topic>
-<topic href="help/getting-started.html#Generatelanguageartifacts" label="Generate language artifacts"></topic>
-<topic href="help/getting-started.html#RunthegeneratedIDEplugin" label="Run the generated IDE plug-in"></topic>
-<topic href="help/getting-started.html#Addinganamespaceconcept" label="Adding a namespace concept"></topic>
+<topic href="help/getting-started.html#CreateanXtextProject" label="Create an Xtext Project"></topic>
+<topic href="help/getting-started.html#ProjectLayout" label="Project Layout"></topic>
+<topic href="help/getting-started.html#BuildYourOwnGrammar" label="Build Your Own Grammar"></topic>
+<topic href="help/getting-started.html#GenerateLanguageArtifacts" label="Generate Language Artifacts"></topic>
+<topic href="help/getting-started.html#RuntheGeneratedIDEPlugin" label="Run the Generated IDE Plug-in"></topic>
+<topic href="help/getting-started.html#AddingaNamespaceConcept" label="Adding a Namespace Concept"></topic>
 </topic>
-<topic href="help/processing_Xtext_models.html" label="Processing Xtext models">
+<topic href="help/processing_Xtext_models.html" label="Processing Xtext Models">
 <topic href="help/processing_Xtext_models.html#resource" label="Loading a Resource"></topic>
-<topic href="help/processing_Xtext_models.html#programmatic_EMF" label="Working with EMF models"></topic>
-<topic href="help/processing_Xtext_models.html#node_model" label="Working with the parse tree (aka node model)"></topic>
-<topic href="help/processing_Xtext_models.html#working_with_grammar_model" label="Working with the grammar"></topic>
+<topic href="help/processing_Xtext_models.html#programmatic_EMF" label="Working with EMF Models"></topic>
+<topic href="help/processing_Xtext_models.html#node_model" label="Working with the Parse Tree (aka Node Model)"></topic>
+<topic href="help/processing_Xtext_models.html#working_with_grammar_model" label="Working with the Grammar"></topic>
 <topic href="help/processing_Xtext_models.html#Summary" label="Summary"></topic>
 </topic>
-<topic href="help/getting-started-xpand.html" label="Writing a code generator">
+<topic href="help/getting-started-xpand.html" label="Writing a Code Generator">
 <topic href="help/getting-started-xpand.html#XpandandMWE2" label="Xpand and MWE2"></topic>
-<topic href="help/getting-started-xpand.html#Theemptygeneratorproject" label="The empty generator project"></topic>
-<topic href="help/getting-started-xpand.html#Replacingtheexamplemodelfile1" label="Replacing the example model file (1)"></topic>
-<topic href="help/getting-started-xpand.html#TheModelingWorkflowEnginefile2" label="The Modeling Workflow Engine file (2)"></topic>
-<topic href="help/getting-started-xpand.html#UsingXpand3andXtend4forcodegeneration" label="Using Xpand (3) and Xtend (4) for code generation"></topic>
+<topic href="help/getting-started-xpand.html#TheEmptyGeneratorProject" label="The Empty Generator Project"></topic>
+<topic href="help/getting-started-xpand.html#ReplacingtheExampleModelFile1" label="Replacing the Example Model File (1)"></topic>
+<topic href="help/getting-started-xpand.html#TheModelingWorkflowEngineFile2" label="The Modeling Workflow Engine File (2)"></topic>
+<topic href="help/getting-started-xpand.html#UsingXpand3andXtend4forCodeGeneration" label="Using Xpand (3) and Xtend (4) for Code Generation"></topic>
 </topic>
 </topic>
 <topic href="help/grammarLanguage.html" label="The Grammar Language">
-<topic href="help/grammarLanguage.html#Afirstexample" label="A first example"></topic>
+<topic href="help/grammarLanguage.html#AFirstExample" label="A First Example"></topic>
 <topic href="help/syntax.html" label="The Syntax">
 <topic href="help/syntax.html#LanguageDeclaration" label="Language Declaration"></topic>
-<topic href="help/syntax.html#package_declarations" label="EPackage declarations">
-<topic href="help/syntax.html#EPackagegeneration" label="EPackage generation"></topic>
-<topic href="help/syntax.html#EPackageimport" label="EPackage import">
-<topic href="help/syntax.html#UsingresourceURIstoimportexistingEPackages" label="Using resource URIs to import existing EPackages"></topic>
-<topic href="help/syntax.html#UsingclasspathURIstoimportexistingEPackages" label="Using classpath URIs to import existing EPackages"></topic>
-<topic href="help/syntax.html#UsingnamespaceURIstoimportexistingEPackages" label="Using namespace URIs to import existing EPackages"></topic>
+<topic href="help/syntax.html#package_declarations" label="EPackage Declarations">
+<topic href="help/syntax.html#EPackageGeneration" label="EPackage Generation"></topic>
+<topic href="help/syntax.html#EPackageImport" label="EPackage Import">
+<topic href="help/syntax.html#UsingResourceURIstoImportExistingEPackages" label="Using Resource URIs to Import Existing EPackages"></topic>
+<topic href="help/syntax.html#UsingClasspathURIstoImportExistingEPackages" label="Using Classpath URIs to Import Existing EPackages"></topic>
+<topic href="help/syntax.html#UsingNamespaceURIstoImportExistingEPackages" label="Using Namespace URIs to Import Existing EPackages"></topic>
 </topic>
-<topic href="help/syntax.html#Ecoremodelaliasesforpackages" label="Ecore model aliases for packages"></topic>
+<topic href="help/syntax.html#EcoreModelAliasesforEPackages" label="Ecore Model Aliases for EPackages"></topic>
 </topic>
 <topic href="help/syntax.html#Rules" label="Rules">
 <topic href="help/syntax.html#TerminalRules" label="Terminal Rules">
-<topic href="help/syntax.html#Returntypes" label="Return types"></topic>
+<topic href="help/syntax.html#ReturnTypes" label="Return Types"></topic>
 </topic>
-<topic href="help/syntax.html#ExtendedBackusNaurFormexpressions" label="Extended Backus-Naur Form expressions">
+<topic href="help/syntax.html#ExtendedBackusNaurFormExpressions" label="Extended Backus-Naur Form Expressions">
 <topic href="help/syntax.html#Keywords" label="Keywords / Characters"></topic>
 <topic href="help/syntax.html#CharacterRanges" label="Character Ranges"></topic>
 <topic href="help/syntax.html#Wildcard" label="Wildcard"></topic>
@@ -60,20 +60,20 @@
 </topic>
 </topic>
 <topic href="help/syntax.html#parser_rules" label="Parser Rules">
-<topic href="help/syntax.html#ExtendedBackusNaurFormexpressions2" label="Extended Backus-Naur Form expressions">
+<topic href="help/syntax.html#ExtendedBackusNaurFormExpressions2" label="Extended Backus-Naur Form Expressions">
 <topic href="help/syntax.html#assignments" label="Assignments"></topic>
-<topic href="help/syntax.html#CrossReferences" label="Cross References"></topic>
+<topic href="help/syntax.html#CrossReferences" label="Cross-References"></topic>
 <topic href="help/syntax.html#unordered_groups" label="Unordered Groups"></topic>
 <topic href="help/syntax.html#SimpleActions" label="Simple Actions"></topic>
-<topic href="help/syntax.html#Unassignedrulecalls" label="Unassigned rule calls"></topic>
+<topic href="help/syntax.html#UnassignedRuleCalls" label="Unassigned Rule Calls"></topic>
 <topic href="help/syntax.html#grammarActions" label="Assigned Actions"></topic>
 </topic>
 </topic>
-<topic href="help/syntax.html#hidden_terminals" label="Hidden terminal symbols"></topic>
-<topic href="help/syntax.html#datatypeRules" label="Data type rules"></topic>
+<topic href="help/syntax.html#hidden_terminals" label="Hidden Terminal Symbols"></topic>
+<topic href="help/syntax.html#datatypeRules" label="Data Type Rules"></topic>
 <topic href="help/syntax.html#EnumRules" label="Enum Rules"></topic>
 </topic>
-<topic href="help/metamodelInference.html" label="Ecore model inference">
+<topic href="help/metamodelInference.html" label="Ecore Model Inference">
 <topic href="help/metamodelInference.html#TypeandPackageGeneration" label="Type and Package Generation"></topic>
 <topic href="help/metamodelInference.html#FeatureandTypeHierarchyGeneration" label="Feature and Type Hierarchy Generation"></topic>
 <topic href="help/metamodelInference.html#EnumLiteralGeneration" label="Enum Literal Generation"></topic>
@@ -81,21 +81,21 @@
 <topic href="help/metamodelInference.html#customPostProcessing" label="Customized Post Processing"></topic>
 <topic href="help/metamodelInference.html#ErrorConditions" label="Error Conditions"></topic>
 </topic>
-<topic href="help/grammarImport.html" label="Importing existing Ecore models"></topic>
+<topic href="help/grammarImport.html" label="Importing Existing Ecore Models"></topic>
 <topic href="help/grammarMixins.html" label="Grammar Mixins"></topic>
 <topic href="help/CommonTerminals.html" label="Common Terminals"></topic>
 </topic>
 <topic href="help/configuration.html" label="Configuration">
 <topic href="help/configuration.html#generator" label="The Generator">
-<topic href="help/configuration.html#short_intro_to_mwe" label="A short introduction to MWE2"></topic>
+<topic href="help/configuration.html#short_intro_to_mwe" label="A Short Introduction to MWE2"></topic>
 <topic href="help/configuration.html#GeneralArchitecture" label="General Architecture">
 <topic href="help/configuration.html#generator_fragment" label="Generator Fragments"></topic>
 <topic href="help/configuration.html#Configuration" label="Configuration"></topic>
 </topic>
-<topic href="help/configuration.html#Standardgeneratorfragments" label="Standard generator fragments"></topic>
+<topic href="help/configuration.html#StandardGeneratorFragments" label="Standard Generator Fragments"></topic>
 </topic>
 <topic href="help/dependencyInjection.html" label="Dependency Injection in Xtext with Google Guice">
-<topic href="help/dependencyInjection.html#guicemodules" label="Xtext&rsquo;s module API"></topic>
+<topic href="help/dependencyInjection.html#guicemodules" label="Xtext&rsquo;s Module API"></topic>
 <topic href="help/dependencyInjection.html#ObtaininganInjector" label="Obtaining an Injector"></topic>
 </topic>
 </topic>
@@ -110,44 +110,44 @@
 <topic href="help/validation.html#concrete_syntax_validation" label="Serializer: Concrete Syntax Validation"></topic>
 </topic>
 <topic href="help/validation.html#custom_validation" label="Custom Validation"></topic>
-<topic href="help/validation.html#check_based_validation" label="Validation with the Check language"></topic>
+<topic href="help/validation.html#check_based_validation" label="Validation with the Check Language"></topic>
 <topic href="help/validation.html#test_validators" label="Test Validators"></topic>
 </topic>
 <topic href="help/linking.html" label="Linking">
-<topic href="help/linking.html#Declarationofcrosslinks" label="Declaration of crosslinks"></topic>
-<topic href="help/linking.html#DefaultruntimebehaviorLazyLinking" label="Default runtime behavior &ndash; Lazy Linking"></topic>
+<topic href="help/linking.html#DeclarationofCrosslinks" label="Declaration of Crosslinks"></topic>
+<topic href="help/linking.html#DefaultRuntimeBehaviorLazyLinking" label="Default Runtime Behavior &ndash; Lazy Linking"></topic>
 </topic>
 <topic href="help/scoping.html" label="Scoping">
 <topic href="help/scoping.html#global_scopes" label="Global Scopes and IResourceDescriptions">
 <topic href="help/scoping.html#resourcedescriptions" label="Resource and EObject Descriptions ( IResourceDescription, IEObjectDescription)"></topic>
-<topic href="help/scoping.html#import_uri" label="Global Scopes based on explicit imports (ImportURI mechanism)"></topic>
-<topic href="help/scoping.html#index_based" label="Global Scopes based on external configuration (e.g. classpath-based)">
-<topic href="help/scoping.html#containers" label="About the index, containers and their manager"></topic>
-<topic href="help/scoping.html#jdt_based_containers" label="JDT based container manager"></topic>
-<topic href="help/scoping.html#project_based_containers" label="Eclipse project based containers"></topic>
-<topic href="help/scoping.html#resource_set_containers" label="ResourceSet based containers"></topic>
+<topic href="help/scoping.html#import_uri" label="Global Scopes Based On Explicit Imports (ImportURI Mechanism)"></topic>
+<topic href="help/scoping.html#index_based" label="Global Scopes Based On External Configuration (e.g. Classpath-Based)">
+<topic href="help/scoping.html#containers" label="About the Index, Containers and Their Manager"></topic>
+<topic href="help/scoping.html#jdt_based_containers" label="JDT-Based Container Manager"></topic>
+<topic href="help/scoping.html#project_based_containers" label="Eclipse Project-Based Containers"></topic>
+<topic href="help/scoping.html#resource_set_containers" label="ResourceSet-Based Containers"></topic>
 </topic>
 </topic>
 <topic href="help/scoping.html#local_scoping" label="Local Scoping">
-<topic href="help/scoping.html#Declarativescoping" label="Declarative scoping"></topic>
+<topic href="help/scoping.html#DeclarativeScoping" label="Declarative Scoping"></topic>
 </topic>
-<topic href="help/scoping.html#ImportedNamespaceawareScoping" label="Imported Namespace-aware Scoping">
+<topic href="help/scoping.html#ImportedNamespaceAwareScoping" label="Imported Namespace-Aware Scoping">
 <topic href="help/scoping.html#org.eclipse.xtextsrcorg.eclipse.xtext.scoping.IQualifiedNameProvider" label="IQualifiedNameProvider"></topic>
 <topic href="help/scoping.html#ImportingNamespaces" label="Importing Namespaces"></topic>
 </topic>
 </topic>
 <topic href="help/valueconverter.html" label="Value Converter">
-<topic href="help/valueconverter.html#AnnotationbasedValueConverters" label="Annotation-based Value Converters"></topic>
+<topic href="help/valueconverter.html#AnnotationBasedValueConverters" label="Annotation-Based Value Converters"></topic>
 </topic>
 <topic href="help/serialization.html" label="Serialization">
 <topic href="help/serialization.html#serializationcontract" label="The Contract"></topic>
-<topic href="help/serialization.html#RolesoftheSemanticModelandtheNodeModelduringSerialization" label="Roles of the Semantic Model and the Node Model during Serialization"></topic>
+<topic href="help/serialization.html#RolesoftheSemanticModelandtheNodeModelDuringSerialization" label="Roles of the Semantic Model and the Node Model During Serialization"></topic>
 <topic href="help/serialization.html#parsetreeconstructor" label="Parse Tree Constructor"></topic>
 <topic href="help/serialization.html#saveoptions" label="Options"></topic>
 <topic href="help/serialization.html#commentassociater" label="Preserving Comments from the Node Model"></topic>
 <topic href="help/serialization.html#transientvalues" label="Transient Values"></topic>
 <topic href="help/serialization.html#unassignedtext" label="Unassigned Text"></topic>
-<topic href="help/serialization.html#crossreferenceserializer" label="Cross Reference Serializer"></topic>
+<topic href="help/serialization.html#crossreferenceserializer" label="Cross-Reference Serializer"></topic>
 <topic href="help/serialization.html#hiddentokenmerger" label="Merge Whitespaces"></topic>
 <topic href="help/serialization.html#tokenstream" label="Token Stream"></topic>
 </topic>
@@ -157,21 +157,21 @@
 <topic href="help/formatting.html#FormattingConfigInstructions" label="FormattingConfig Instructions"></topic>
 <topic href="help/formatting.html#GrammarElementFinders" label="Grammar Element Finders"></topic>
 </topic>
-<topic href="help/formatting.html#fragmentProvider" label="Fragment Provider (referencing Xtext models from other EMF artifacts)"></topic>
+<topic href="help/formatting.html#fragmentProvider" label="Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)"></topic>
 </topic>
 <topic href="help/encoding.html" label="Encoding in Xtext">
 <topic href="help/encoding.html#EncodingatLanguageDesignTime" label="Encoding at Language Design Time"></topic>
 <topic href="help/encoding.html#EncodingatLanguageRuntime" label="Encoding at Language Runtime"></topic>
 <topic href="help/encoding.html#EncodingofanXtextResource" label="Encoding of an XtextResource"></topic>
 <topic href="help/encoding.html#EncodinginNewModelProjects" label="Encoding in New Model Projects"></topic>
-<topic href="help/encoding.html#EncodingofXtextsourcecode" label="Encoding of Xtext source code"></topic>
+<topic href="help/encoding.html#EncodingofXtextSourceCode" label="Encoding of Xtext Source Code"></topic>
 </topic>
 </topic>
 <topic href="help/MWE2.html" label="MWE2">
 <topic href="help/MWE2.html#MWE2Exampe" label="Examples">
-<topic href="help/MWE2.html#MWE2HelloWorld" label="The simplest Workflow"></topic>
-<topic href="help/MWE2.html#MWE2SimpleTransformation" label="A simple Transformation"></topic>
-<topic href="help/MWE2.html#MWE2Stopwatch" label="A Stop-watch"></topic>
+<topic href="help/MWE2.html#MWE2HelloWorld" label="The Simplest Workflow"></topic>
+<topic href="help/MWE2.html#MWE2SimpleTransformation" label="A Simple Transformation"></topic>
+<topic href="help/MWE2.html#MWE2Stopwatch" label="A Stopwatch"></topic>
 </topic>
 <topic href="help/MWE2LanguageReference.html" label="Language Reference">
 <topic href="help/MWE2LanguageReference.html#MWE2JavaReferences" label="Mapping to Java Classes"></topic>
@@ -190,28 +190,28 @@
 <topic href="help/MWE2SyntaxReference.html#MWE2References" label="References"></topic>
 </topic>
 </topic>
-<topic href="help/IDEconcepts.html" label="IDE concepts">
-<topic href="help/IDEconcepts.html#labelProvider" label="Label Provider">
-<topic href="help/IDEconcepts.html#EObjectLabelProvider" label="Label providers for EObjects">
-<topic href="help/IDEconcepts.html#DefaultEObjectLabelProvider" label="DefaultEObjectLabelProvider"></topic>
+<topic href="help/IDEConcepts.html" label="IDE Concepts">
+<topic href="help/IDEConcepts.html#labelProvider" label="Label Provider">
+<topic href="help/IDEConcepts.html#EObjectLabelProvider" label="Label Providers For EObjects">
+<topic href="help/IDEConcepts.html#DefaultEObjectLabelProvider" label="DefaultEObjectLabelProvider"></topic>
 </topic>
-<topic href="help/IDEconcepts.html#DescriptionLabelProvider" label="Label providers for index entries"></topic>
+<topic href="help/IDEConcepts.html#DescriptionLabelProvider" label="Label Providers For Index Entries"></topic>
 </topic>
 <topic href="help/contentAssist.html" label="Content Assist">
 <topic href="help/contentAssist.html#ProposalProvider" label="ProposalProvider"></topic>
 <topic href="help/contentAssist.html#SampleImplementation" label="Sample Implementation"></topic>
 </topic>
-<topic href="help/quickfixes.html" label="Quick fixes"></topic>
+<topic href="help/quickfixes.html" label="Quick Fixes"></topic>
 <topic href="help/templates.html" label="Template Proposals">
 <topic href="help/templates.html#CrossReferenceTemplateVariableResolver" label="CrossReference TemplateVariableResolver"></topic>
 <topic href="help/templates.html#EnumerationTemplateVariableResolver" label="Enumeration TemplateVariableResolver"></topic>
 </topic>
 <topic href="help/outline.html" label="Outline View">
-<topic href="help/outline.html#Influencingtheoutlinestructure" label="Influencing the outline structure"></topic>
+<topic href="help/outline.html#InfluencingtheOutlineStructure" label="Influencing the Outline Structure"></topic>
 <topic href="help/outline.html#Filtering" label="Filtering"></topic>
 <topic href="help/outline.html#Contextmenus" label="Context menus">
 <topic href="help/outline.html#RegisteringanIContentOutlineNodeAdapterFactory" label="Registering an IContentOutlineNodeAdapterFactory"></topic>
-<topic href="help/outline.html#Registeringamenucontribution" label="Registering a menu contribution"></topic>
+<topic href="help/outline.html#RegisteringaMenuContribution" label="Registering a Menu Contribution"></topic>
 </topic>
 <topic href="help/outline.html#quick_outline" label="Quick Outline"></topic>
 </topic>
@@ -219,27 +219,27 @@
 <topic href="help/hyperlinking.html#locationProvider" label="Location Provider">
 <topic href="help/hyperlinking.html#CustomizedLocationProvider" label="Customized Location Provider"></topic>
 </topic>
-<topic href="help/hyperlinking.html#CustomizingavailableHyperlinks" label="Customizing available Hyperlinks"></topic>
+<topic href="help/hyperlinking.html#CustomizingAvailableHyperlinks" label="Customizing Available Hyperlinks"></topic>
 </topic>
 <topic href="help/highlighting.html" label="Syntax Coloring">
 <topic href="help/highlighting.html#LexicalHighlighting" label="Lexical Highlighting"></topic>
 <topic href="help/highlighting.html#SemanticHighlighting" label="Semantic Highlighting"></topic>
 </topic>
 <topic href="help/projectwizard.html" label="Project Wizard">
-<topic href="help/projectwizard.html#Customizingtheprojectwizard" label="Customizing the project wizard"></topic>
+<topic href="help/projectwizard.html#CustomizingtheProjectWizard" label="Customizing the Project Wizard"></topic>
 </topic>
 </topic>
 <topic href="help/jvmtypes.html" label="Referring to Java Types">
 <topic href="help/jvmtypes.html#HowtoUseJavaTypes" label="How to Use Java Types"></topic>
-<topic href="help/CustomizingPoints.html" label="Customizing Points"></topic>
+<topic href="help/CustomizationPoints.html" label="Customization Points"></topic>
 </topic>
-<topic href="help/emf_integration.html" label="Integration with EMF and other EMF editors">
+<topic href="help/emf_integration.html" label="Integration with EMF and Other EMF Editors">
 <topic href="help/emf_integration.html#model_metamodel" label="Model, Ecore Model, and Ecore"></topic>
-<topic href="help/emf_codegen.html" label="EMF code generation"></topic>
+<topic href="help/emf_codegen.html" label="EMF Code Generation"></topic>
 <topic href="help/XtextResourceImplementation.html" label="XtextResource Implementation"></topic>
-<topic href="help/gmf_integration.html" label="Integration with GMF editors">
-<topic href="help/gmf_integration.html#gmf_integration_stage_1" label="Stage 1: Make GMF read and write the semantic model as text">
-<topic href="help/gmf_integration.html#Stage2CallingtheXtextparsertoparseGMFlabels" label="Stage 2: Calling the Xtext parser to parse GMF labels"></topic>
+<topic href="help/gmf_integration.html" label="Integration with GMF Editors">
+<topic href="help/gmf_integration.html#gmf_integration_stage_1" label="Stage 1: Make GMF Read and Write the Semantic Model As Text">
+<topic href="help/gmf_integration.html#Stage2CallingtheXtextParsertoParseGMFLabels" label="Stage 2: Calling the Xtext Parser to Parse GMF Labels"></topic>
 <topic href="help/gmf_integration.html#Stage3APopupXtextEditorexperimental" label="Stage 3: A Popup Xtext Editor (experimental)"></topic>
 </topic>
 </topic>
@@ -251,9 +251,9 @@
 <topic href="help/MigratingStepByStep.html#RenamethePackagesinthedsl.uiPlugin" label="Rename the Packages in the dsl.ui-Plug-in"></topic>
 <topic href="help/MigratingStepByStep.html#UpdatetheWorkflow" label="Update the Workflow"></topic>
 <topic href="help/MigratingStepByStep.html#MANIFEST.MFandplugin.xml" label="MANIFEST.MF and plugin.xml"></topic>
-<topic href="help/MigratingStepByStep.html#NoteworthyAPIchanges" label="Noteworthy API changes"></topic>
+<topic href="help/MigratingStepByStep.html#NoteworthyAPIChanges" label="Noteworthy API Changes"></topic>
 </topic>
-<topic href="help/Nowgoforthenewfeatures.html" label="Now go for the new features"></topic>
+<topic href="help/NowGoForTheNewFeatures.html" label="Now Go For The New Features"></topic>
 </topic>
-<topic href="help/antlr_ip_issue.html" label="The ANTLR IP issue (or which parser to use?)"></topic>
+<topic href="help/antlr_ip_issue.html" label="The ANTLR IP Issue (Or Which Parser To Use?)"></topic>
 </toc>

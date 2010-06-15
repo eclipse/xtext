@@ -1,7 +1,7 @@
 
 h2(#hyperlinking). Hyperlinking
 
-The Xtext editor provides hyperlinking support for any tokens corresponding to cross references in your 
+The Xtext editor provides hyperlinking support for any tokens corresponding to cross-references in your 
 grammar definition. You can either CTRL-click on any of these tokens or hit F3 
 while the cursor position is at the token in question and this will take you to the referenced model 
 element. As you'd expect this works for references to elements in the same resource as well as for 
@@ -42,9 +42,9 @@ the methods _getIdentifierFeature()_ and / or _useKeyword()_ to guide the first 
 as described above (see ${org.eclipse.xtext.xtext.ui/src/org.eclipse.xtext.xtext.ui.XtextLocationInFileProvider} 
 for an example).
 
-h3. Customizing available Hyperlinks
+h3. Customizing Available Hyperlinks
  
 The hyperlinks are provided by the ${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper}
-which will create links for cross referenced objects by default. Clients may want to override 
+which will create links for cross-referenced objects by default. Clients may want to override 
 _createHyperlinksByOffset(XtextResource, int, IHyperlinkAcceptor)_ to provide additional links or 
 supersede the default implementation. 

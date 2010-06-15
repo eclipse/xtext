@@ -32,7 +32,7 @@ h3. CrossReference TemplateVariableResolver
 
 Xtext comes with a specific template variable resolver _TemplateVariableResolver_ called 
 ${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.templates.CrossReferenceTemplateVariableResolver}, 
-which can be used to place cross references within a template.
+which can be used to place cross-references within a template.
 
 The syntax is as follows:
 

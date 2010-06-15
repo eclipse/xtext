@@ -25,7 +25,7 @@ file, transform the contained classifier-names to upper-case and
 serialize the resource back to a new file. The last examples uses 
 the life-cycle methods to print the execution time of the workflow.
 
-h3(#MWE2HelloWorld). The simplest Workflow
+h3(#MWE2HelloWorld). The Simplest Workflow
 
 The arguably shortest MWE2 module may look like the following 
 snippet.
@@ -89,7 +89,7 @@ concise. The execution result of this workflow will be revealed
 after a quick _Run As .. -> MWE2 Workflow_ in the console as 
 
 bc.. Hello World!
-h3(#MWE2SimpleTransformation). A simple Transformation
+h3(#MWE2SimpleTransformation). A Simple Transformation
 
 The following workflow solves the exemplary task to rename every _EClassifier_ in an _*.ecore_ file.
 It consists of three components that read, modify and write the model file:
@@ -114,7 +114,8 @@ bc.. public class ResourceReader extends WorkflowComponentWithSlot {
   private String uri;
   public void invoke(IWorkflowContext ctx) {
     ResourceSet resourceSet = new ResourceSetImpl();
-    Resource resource = resourceSet.getResource(URI.createFileURI(uri), true);
+    URI fileURI = URI.createFileURI(uri); 
+    Resource resource = resourceSet.getResource(fileURI, true);
     ctx.put(getSlot(), resource);
   }
 	
@@ -134,7 +135,8 @@ bc.. public class RenamingTransformer extends WorkflowComponentWithSlot {
     Resource resource = (Resource) ctx.get(getSlot());
     EcoreUtil.resolveAll(resource);
     Iterator<Object> contents = EcoreUtil.getAllContents(resource, true);
-    Iterator<EClassifier> iter = Iterators.filter(contents, EClassifier.class);
+    Iterator<EClassifier> iter = 
+        Iterators.filter(contents, EClassifier.class);
     while(iter.hasNext()) {
       EClassifier classifier = (EClassifier) iter.next();
       classifier.setName(isToLowerCase() 
@@ -177,7 +179,8 @@ bc.. public class ResourceWriter extends WorkflowComponentWithSlot {
 }
 p. Last but not least, the common super-type for those components looks like this:
 
-bc.. public abstract class WorkflowComponentWithSlot implements IWorkflowComponent {
+bc.. public abstract class WorkflowComponentWithSlot 
+      implements IWorkflowComponent {
   private String slot = "model";
   public void setSlot(String slot) {
     this.slot = slot;
@@ -193,7 +196,7 @@ p. Each of the mentioned implementations is rather simple and can be done in a c
 This is true for many tedious tasks that developers face in their daily work. MWE2 can be used to
 automize these tasks with minimum effort.
 
-h3(#MWE2Stopwatch). A Stop-watch
+h3(#MWE2Stopwatch). A Stopwatch
 
 The last example demonstrates how to combine the MWE2 concepts to create a simple stopwatch that
 allows to measure the execution time of a set of components. The idea is to add the very same stopwatch

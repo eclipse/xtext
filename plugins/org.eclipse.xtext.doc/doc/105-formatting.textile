@@ -88,7 +88,7 @@ elements. The following matching criteria exist:
 * _range(ele1, ele2)_: The rule is enabled when _ele1_ is matched, and disabled when _ele2_ is matched. Thereby, the rule is active for the complete region which is surrounded by _ele1_ and _ele2_.
 
 p. The term _tokens_ is used slightly different here compared to the parser/lexer. Here, a token is a 
-keyword or the string that is matched by a terminal rule, data type rule or cross reference. In the 
+keyword or the string that is matched by a terminal rule, data type rule or cross-reference. In the 
 terminology of the lexer a data type rule can match a composition of multiple tokens.
 
 p. The parameter _ele_ can be a grammar's _AbstractElement_ or a grammar's _AbstractRule_. All grammar 

@@ -29,7 +29,7 @@ public void complete_[RuleName](
 p. The snippet above indicates that the generated ProposalProvider class contains a _complete*_-method 
 for each assigned feature in the grammar and for each rule. The brackets are place-holders that should 
 give a clue about the naming scheme used to create the various entry points for clients. The generated 
-proposal provider falls back to some default behavior for cross references and keywords. Furthermore 
+proposal provider falls back to some default behavior for cross-references and keywords. Furthermore 
 it inherits the logic that was introduced in reused grammars. 
 
 Clients who want to customize the behavior may override the methods from the 

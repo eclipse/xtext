@@ -43,12 +43,12 @@
 				serialize the resource back to a new file. The last examples uses 
 				the life-cycle methods to print the execution time of the workflow.
 			</p>
-<div class="section" title="The simplest Workflow">
+<div class="section" title="The Simplest Workflow">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="MWE2HelloWorld"></a>The simplest Workflow</h3>
+<a name="MWE2HelloWorld"></a>The Simplest Workflow</h3>
 </div>
 </div>
 </div>
@@ -155,12 +155,12 @@ Workflow&nbsp;{<br>
 </p>
 </div>
 </div>
-<div class="section" title="A simple Transformation">
+<div class="section" title="A Simple Transformation">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="MWE2SimpleTransformation"></a>A simple Transformation</h3>
+<a name="MWE2SimpleTransformation"></a>A Simple Transformation</h3>
 </div>
 </div>
 </div>
@@ -199,7 +199,8 @@ Workflow&nbsp;{<br>
 &nbsp;&nbsp;private&nbsp;String&nbsp;uri;<br>
 &nbsp;&nbsp;public&nbsp;void&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;ResourceSet&nbsp;resourceSet&nbsp;=&nbsp;new&nbsp;ResourceSetImpl();<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;resourceSet.getResource(URI.createFileURI(uri),&nbsp;true);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;URI&nbsp;fileURI&nbsp;=&nbsp;URI.createFileURI(uri);&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;resourceSet.getResource(fileURI,&nbsp;true);<br>
 &nbsp;&nbsp;&nbsp;&nbsp;ctx.put(getSlot(),&nbsp;resource);<br>
 &nbsp;&nbsp;}<br>
 	
@@ -227,7 +228,8 @@ Workflow&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;(Resource)&nbsp;ctx.get(getSlot());<br>
 &nbsp;&nbsp;&nbsp;&nbsp;EcoreUtil.resolveAll(resource);<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;Object&gt;&nbsp;contents&nbsp;=&nbsp;EcoreUtil.getAllContents(resource,&nbsp;true);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;EClassifier&gt;&nbsp;iter&nbsp;=&nbsp;Iterators.filter(contents,&nbsp;EClassifier.class);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;EClassifier&gt;&nbsp;iter&nbsp;=&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterators.filter(contents,&nbsp;EClassifier.class);<br>
 &nbsp;&nbsp;&nbsp;&nbsp;while(iter.hasNext())&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EClassifier&nbsp;classifier&nbsp;=&nbsp;(EClassifier)&nbsp;iter.next();<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classifier.setName(isToLowerCase()&nbsp;<br>
@@ -286,7 +288,8 @@ Workflow&nbsp;{<br>
 <p>Last but not least, the common super-type for those components looks like this:</p>
 <div class="literallayout">
 <p>
-<code class="code">public&nbsp;abstract&nbsp;class&nbsp;WorkflowComponentWithSlot&nbsp;implements&nbsp;IWorkflowComponent&nbsp;{<br>
+<code class="code">public&nbsp;abstract&nbsp;class&nbsp;WorkflowComponentWithSlot&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;implements&nbsp;IWorkflowComponent&nbsp;{<br>
 &nbsp;&nbsp;private&nbsp;String&nbsp;slot&nbsp;=&nbsp;"model";<br>
 &nbsp;&nbsp;public&nbsp;void&nbsp;setSlot(String&nbsp;slot)&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;this.slot&nbsp;=&nbsp;slot;<br>
@@ -307,12 +310,12 @@ Workflow&nbsp;{<br>
 					This is true for many tedious tasks that developers face in their daily work. MWE2 can be used to
 					automize these tasks with minimum effort.</p>
 </div>
-<div class="section" title="A Stop-watch">
+<div class="section" title="A Stopwatch">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="MWE2Stopwatch"></a>A Stop-watch</h3>
+<a name="MWE2Stopwatch"></a>A Stopwatch</h3>
 </div>
 </div>
 </div>

@@ -79,7 +79,7 @@
                                 <xsl:text>Heiko Behrens, Michael Clay, Sven Efftinge, Moritz Eysholdt, Peter Friese, Jan Köhnlein, Knut Wannheden, Sebastian Zarnekow and contributors</xsl:text>
                             </fo:block>
                             <fo:block font-family="Helvetica" font-size="12pt" padding="10mm">
-                                <xsl:text>Copyright 2008 - 2009</xsl:text>
+                                <xsl:text>Copyright 2008 - 2010</xsl:text>
                             </fo:block>
                         </fo:table-cell>
                     </fo:table-row>

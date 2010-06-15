@@ -11,7 +11,7 @@ public Class<? extends IValueConverterService> bindIValueConverterService() {
   return MySpecialValueConverterService.class;
 }
 
-h3. Annotation-based Value Converters
+h3. Annotation-Based Value Converters
 
 The most simple way to register additional value converters is to make use of 
 ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.impl.AbstractDeclarativeValueConverterService}, 

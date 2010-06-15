@@ -7,7 +7,7 @@
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="migrating_from_0_7.html" title="Migrating from Xtext 0.7.x to 1.0">
 <link rel="prev" href="migrating_from_0_7.html" title="Migrating from Xtext 0.7.x to 1.0">
-<link rel="next" href="Nowgoforthenewfeatures.html" title="Now go for the new features">
+<link rel="next" href="NowGoForTheNewFeatures.html" title="Now Go For The New Features">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Migrating Step By Step</h1>
@@ -80,7 +80,8 @@
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">&lt;fragment&nbsp;class="org.eclipse.xtext.generator.scoping.JavaScopingFragment"/&gt;<br>
+<code class="code">&lt;fragment&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;class="org.eclipse.xtext.generator.scoping.JavaScopingFragment"/&gt;<br>
 
 </code>
 </p>
@@ -88,10 +89,10 @@
 <p>with</p>
 <div class="literallayout">
 <p>
-<code class="code">&lt;fragment&nbsp;class="org.eclipse.xtext.generator.scoping.ImportURIScopingFragment"/&gt;<br>
-&lt;fragment&nbsp;class="org.eclipse.xtext.generator.exporting.SimpleNamesFragment"/&gt;<br>
-
-<br>
+<code class="code">&lt;fragment&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;class="org.eclipse.xtext.generator.scoping.ImportURIScopingFragment"/&gt;<br>
+&lt;fragment&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;class="org.eclipse.xtext.generator.exporting.SimpleNamesFragment"/&gt;<br>
 
 </code>
 </p>
@@ -164,7 +165,7 @@
 							<span class="emphasis"><em>plugin.xml</em></span>, e.g. 
 							<span class="emphasis"><em>Find references</em></span>, 
 							<span class="emphasis"><em>Quick Outline</em></span>, and 
-							<span class="emphasis"><em>Quickfixes</em></span>. You can enable them by manually copying the respective entries from _plugin.xml___gen_ to  
+							<span class="emphasis"><em>Quick Fixes</em></span>. You can enable them by manually copying the respective entries from _plugin.xml___gen_ to  
 							<span class="emphasis"><em>plugin.xml</em></span>.
 						</p>
 </li>
@@ -177,12 +178,12 @@
 </ul>
 </div>
 </div>
-<div class="section" title="Noteworthy API changes">
+<div class="section" title="Noteworthy API Changes">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="NoteworthyAPIchanges"></a>Noteworthy API changes </h3>
+<a name="NoteworthyAPIChanges"></a>Noteworthy API Changes </h3>
 </div>
 </div>
 </div>
@@ -228,7 +229,7 @@
 							<span class="emphasis"><em>ILabelProvider</em></span> in various contexts has been refactored. The former base class 
 							<span class="emphasis"><em>DefaultLabelProvider</em></span> no longer exists. Use the 
 							<span class="emphasis"><em>DefaultEObjectLabelProvider</em></span> instead. See the 
-							<a class="link" href="IDEconcepts.html#labelProvider" title="Label Provider">section on label providers</a> for details. 
+							<a class="link" href="IDEConcepts.html#labelProvider" title="Label Provider">section on label providers</a> for details. 
 						</p>
 </li>
 <li class="listitem">
@@ -241,7 +242,7 @@
 							<span class="emphasis"><em>SharedModule</em></span>.  You have to add a constructor the your 
 							<span class="emphasis"><em>UiModule</em></span> that takes an 
 							<span class="emphasis"><em>AbstractUiPlugin</em></span> as argument and pass that one to the super constructor. 
-							<span class="emphasis"><em>Tip: There is an Eclipse quick-fix available for that one.</em></span>
+							<span class="emphasis"><em>Tip: There is an Eclipse quick fix available for that one.</em></span>
 						
 </p>
 </li>
@@ -325,7 +326,7 @@
 						</p>
 </li>
 <li class="listitem">
-<p>All the Xtend based fragments were removed. </p>
+<p>All the Xtend-based fragments were removed. </p>
 </li>
 <li class="listitem">
 <p>

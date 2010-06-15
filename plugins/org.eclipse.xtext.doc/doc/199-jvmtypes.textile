@@ -4,7 +4,7 @@ h1(#jvmtypes). Referring to Java Types
 A common use case when developing languages is the requirement to refer to existing concepts of other 
 languages. Xtext makes this very easy for other self defined languages. However, it is often very useful
 to have access to the available types of the Java Virtual Machine. The JVM types Ecore model enables
-clients to do exactly this. It is possible to create cross references to classes, interfaces, and their 
+clients to do exactly this. It is possible to create cross-references to classes, interfaces, and their 
 fields and methods. Basically every information about the structural concepts of the Java type system
 is available via the JVM types. This includes annotations and their specific values and enumeration 
 literals as well.
@@ -23,7 +23,7 @@ Thanks to content assist this is easy to spot in the list of proposals.
 bc.. import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 
 p. The next step is to actually refer to an imported concept. Let's define a mapping to actually available
-Java types for the simple data types in the self defined language. By means of cross references this works
+Java types for the simple data types in the self defined language. By means of cross-references this works
 as one got already used to when dealing with references in Xtext.
 
 bc.. Type:
@@ -54,7 +54,7 @@ p. These two steps will provide a nice integration into the Eclipse JDT. There i
 fields and types that will reveal results in your language files. _Go To Declaration_ works as expected
 and content assist will propose the list of available types. 
 
-h2. Customizing Points
+h2. Customization Points
 
 There are several customization hooks in the runtime layer and on the editor side as well:
 

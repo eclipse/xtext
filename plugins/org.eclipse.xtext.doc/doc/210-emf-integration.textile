@@ -1,5 +1,5 @@
 
-h1(#emf_integration). Integration with EMF and other EMF editors
+h1(#emf_integration). Integration with EMF and Other EMF Editors
 
 Xtext relies heavily on EMF internally, but it can also be used as the serialization back-end of other EMF-based tools.
 In this section we introduce the basic concepts of the "Eclipse Modeling Framework (EMF)":http://www.eclipse.org/emf in the context of Xtext.  
@@ -11,7 +11,7 @@ When Xtext uses EMF models as the in-memory representation of any parsed text fi
 Depending on the community this concepts is also called _document object graph (DOM)_, _semantic model_, or simply _model_. We use _model_ and _AST_ interchangeably. 
 Given the example model from the "introduction":#getting-started-xtext, the AST looks similar to this
 
-!images/ast.png(Sample AST)!
+!{width:50%}images/ast.png(Sample AST)!
 
 The _AST_ should contain the essence of your textual models and abstract over syntactical information. It is used by later processing steps, 
 such as validation, compilation or interpretation. In EMF a model is made up of instances of _EObjects_ which are connected 
@@ -27,7 +27,7 @@ The meta model defines the types of the semantic nodes as Ecore _EClasses_. ECla
 
 EClasses can have _EAttributes_ for their simple properties. These are shown inside the EClasses nodes. The example contains two EAttributes _name_ and one EAttribute _isMulti_. The domain of values for an EAttribute is defined by its _EDataType_. Ecore ships with some predefined _EDataTypes_, which essentially refer to Java primitive types and other immutable classes like String. To make a distinction from the Java types, the EDataTypes are prefixed with an _E_. In our example, that's _EString_ and _EBoolean_.  
 
-In contrast to EAttributes, _EReferences_ point to other EClasses. The _containment_ flag indicates whether an EReference is a _containment reference_ or a _cross reference_. In the diagram, references are edges and containment references are marked with a diamond. At the model level, each element can have at most one container, i.e. another element referring to it with a containment reference. This infers a tree structure to the models, as can be seen in the sample model diagram. On the other hand, _cross references_ refer to elements that can be contained anywhere else. In the example, _elements_ and _properties_ are containment references, while _type_ and _extends_ are cross references. For reasons of readability, we skipped the cross references in the sample model diagram. Note that in contrast to other parser generators, Xtext creates ASTs with linked cross references. 
+In contrast to EAttributes, _EReferences_ point to other EClasses. The _containment_ flag indicates whether an EReference is a _containment reference_ or a _cross-reference_. In the diagram, references are edges and containment references are marked with a diamond. At the model level, each element can have at most one container, i.e. another element referring to it with a containment reference. This infers a tree structure to the models, as can be seen in the sample model diagram. On the other hand, _cross-references_ refer to elements that can be contained anywhere else. In the example, _elements_ and _properties_ are containment references, while _type_ and _extends_ are cross-references. For reasons of readability, we skipped the cross-references in the sample model diagram. Note that in contrast to other parser generators, Xtext creates ASTs with linked cross-references. 
 
 Other than associations in UML, EReferences in Ecore are always owned by one EClass and only navigable in the direction form the owner to the type. Bi-directional associations must be modeled as two references, being _eOpposite_ of each other and owned by either end of the associations.
 
@@ -39,7 +39,7 @@ We have summarized these most relevant concepts of Ecore in the following diagra
 
 !images/ecore.png(Ecore concepts)!
 
-h2(#emf_codegen). EMF code generation
+h2(#emf_codegen). EMF Code Generation
 
 EMF also ships with a code generator that generates Java classes from your Ecore model. The code generators input is the so called _EMF generator model_. It decorates (references) the Ecore model and adds additional information for the Ecore -> Java transformation. Xtext will automatically generate a generator model with reasonable defaults for all generated metamodels, and run the EMF code generator on them. 
 
@@ -76,22 +76,22 @@ Xtext targets easy to use and naturally feeling languages. It focuses on the lex
 * Register an _IReferableElementsUnloader_ to turn deleted/replaced model elements into EMF proxies. Design the rest of your application such that it does never keep references to  _EObjects_ or to cope with proxies. That will improve the stability of your application drastically.
 * Xtext will register an EMF _ResourceFactory_, so resources with the file extension you entered when generating the Xtext plug-ins will be automatically loaded in an _XtextResource_ when you use EMF's _ResourceSet_ API to load it.
 
-h2(#gmf_integration). Integration with GMF editors
+h2(#gmf_integration). Integration with GMF Editors
 
 The "Graphical Modeling Framework (GMF)":http://www.eclipse.org/modeling/gmp/?project=gmf allows to create graphical diagram editors for Ecore models. To illustrate how to build a GMF on top of an _XtextResource_ we have provided an example. You must have the Helios version 2.3 of GMF Notation, Runtime and Tooling and their dependencies installed in your workbench to run the example. With other versions of GMF it might work to regenerate the diagram code. Choose _New->Examples->Xtext->Xtext GMF Integration_ to import it into your workbench. The example consists of a number of plug-ins
 
 |Plug-in|Framework|Purpose|Contents|
-|org.eclipse.xtext.example.gmf|Xtext|Xtext runtime plug-in|Grammar, derived metamodel and language infrastructure| 
-|org.eclipse.xtext.example.gmf.ui|Xtext|Xtext UI plug-in|Xtext editor and services|
-|org.eclipse.xtext.example.gmf.edit|EMF|EMF.edit plug-in|UI services generated from the metamodel|
-|org.eclipse.xtext.example.gmf.models|GMF|GMF design models|Input for the GMF code generator|
-|org.eclipse.xtext.example.gmf.diagram|GMF|GMF diagram editor|Purely generated from the GMF design models|
-|org.eclipse.xtext.example.gmf.diagram.extensions|GMF / Xtext|Manual extensions to the generated GMF editor for integration with Xtext|
-|org.eclipse.xtext.gmf.glue|Xtext/GMF|Glue code|Generic code to integrate Xtext and GMF|
+|o.e.x.example.gmf|Xtext|Xtext runtime plug-in|Grammar, derived metamodel and language infrastructure| 
+|o.e.x.example.gmf.ui|Xtext|Xtext UI plug-in|Xtext editor and services|
+|o.e.x.example.gmf.edit|EMF|EMF.edit plug-in|UI services generated from the metamodel|
+|o.e.x.example.gmf.models|GMF|GMF design models|Input for the GMF code generator|
+|o.e.x.example.gmf.diagram|GMF|GMF diagram editor|Purely generated from the GMF design models|
+|o.e.x.example.gmf.diagram.extensions|GMF and Xtext|Manual extensions to the generated GMF editor for integration with Xtext|
+|o.e.x.gmf.glue|Xtext/GMF|Glue code|Generic code to integrate Xtext and GMF|
 
 We will elaborate the example in three stages.
 
-h3(#gmf_integration_stage_1). Stage 1: Make GMF read and write the semantic model as text
+h3(#gmf_integration_stage_1). Stage 1: Make GMF Read and Write the Semantic Model As Text
  
 A diagram editor in GMF by default manages two resources: One for the semantic model, that is the model we're actually interested in for further processing. In our example it is a model representing entities and datatypes. The second resource holds the notation model. It represents the shapes you see in the diagram and their graphical properties. Notation elements reference their semantic counterparts. An entity's name would be in the semantic model, while the font to draw it in the diagram would be stored the notation model. Note that in the integration example we're only trying to represent the semantic resource as text.
 
@@ -109,17 +109,17 @@ From the GMF side, we followed the default procedure and created a gmfgraph mode
 
 Voilà, we now have a diagram editor that reads/writes its semantic model as text. Also note that the validator from Xtext is already integrated in the diagram editor via the menu bar. 
 
-h4. Stage 2: Calling the Xtext parser to parse GMF labels
+h4. Stage 2: Calling the Xtext Parser to Parse GMF Labels
 
 GMF's generated parser for the labels is a bit poor: It will work on attributes only, and will fail for cross-references, e.g. an attibute's type. So why not use the Xtext parser to process the user's input? 
 
 An _XtextResource_ keeps track of it's concrete syntax representation by means of a so called node model (see :#parser_rules for a more detailed description). The node model represents the parse tree and provides information on the offset, length and text that has been parsed to create a semantic model element. The nodes are attached to their semantic elements by means of a node adapter.    
 
-We can use the node adapter to access the text block that represents an attribute, and call the Xtext parser to parse the user input. The example code is contained in  ${org.eclipse.xtext.gmf.glue/src/org.eclipse.xtext.gmf.glue.edit.part.AntlrParserWrapper}. ${org.eclipse.xtext.example.gmf.diagram.extensions/src/org.eclipse.xtext.example.gmf.diagram.edit.part.SimplePropertyWrapperEditPartOverride} shows how this is integrated into the generated GMF editor. Use the _EntitiesEditPartFactoryOverride_ to instantiate it and the _EntitiesEditPartProviderOverride_ to create the overridden factory, and register the latter to the extension point. Note that this is a non-invasive way to extend generated GMF editors.
+We can use the node adapter to access the text block that represents an attribute, and call the Xtext parser to parse the user input. The example code is contained in  ${org.eclipse.xtext.gmf.glue/src/org.eclipse.xtext.gmf.glue.edit.part.AntlrParserWrapper}. _SimplePropertyWrapperEditPartOverride_ shows how this is integrated into the generated GMF editor. Use the _EntitiesEditPartFactoryOverride_ to instantiate it and the _EntitiesEditPartProviderOverride_ to create the overridden factory, and register the latter to the extension point. Note that this is a non-invasive way to extend generated GMF editors.
 
 When you test the editor, you will note that the node model will be corrupt after editing a few labels. This is because the node model is only updated by the Xtext parser and not by the serializer. So we need a way to automatically call the (partial) parser every time the semantic model is changed. You will find the required classes in the package _org.eclipse.xtext.gmf.glue.editingdomain_. To activate node model reconciling, you have to add a line 
 
-bc.. org.eclipse.xtext.gmf.glue.editingdomain.XtextNodeModelReconciler.adapt(editingDomain);
+bc.. XtextNodeModelReconciler.adapt(editingDomain);
 
 p. in the method _createEditingDomain()_ of the generated _EntitiesDocumentProvider_. To avoid changing the generated code, you can modify the code generation template for that class by setting
 
@@ -134,7 +134,7 @@ p. in the _GenPlugin_ element of the gmfgen before generating the diagram editor
 
 h4. Stage 3: A Popup Xtext Editor (experimental)
 
-${org.eclipse.xtext.example.gmf.diagram.extensions/src/org.eclipse.xtext.example.gmf.diagram.edit.part.SimplePropertyPopupXtextEditorEditPartOverride} demonstrates how to spawn an Xtext editor to edit a model element. The editor pops up in its control and shows only the section of the selected element. It is a fully fledged Xtext editor, with support of validation, code assist and syntax highlighting. The edited text is only transfered back to the model if it does not have any errors.   
+_SimplePropertyPopupXtextEditorEditPartOverride_ demonstrates how to spawn an Xtext editor to edit a model element. The editor pops up in its control and shows only the section of the selected element. It is a fully fledged Xtext editor, with support of validation, code assist and syntax highlighting. The edited text is only transfered back to the model if it does not have any errors.   
 
 Note that there still are synchronization issues, that's why we keep this one marked as experimental.
 

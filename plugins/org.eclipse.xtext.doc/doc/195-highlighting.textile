@@ -106,7 +106,7 @@ bc.. public void provideHighlightingFor(XtextResource resource,
 }
 
 p. This example refers to an implementation of the _IHighlightingConfiguration_ that registers a style 
-for a cross reference. It is pretty much the same implementation as for the previously mentioned sample 
+for a cross-reference. It is pretty much the same implementation as for the previously mentioned sample 
 of a lexical _IHighlightingConfiguration_.
 
 bc.. public class HighlightingConfiguration 
@@ -120,7 +120,7 @@ bc.. public class HighlightingConfiguration
     // lexical stuff goes here 
     // ..
     acceptor.acceptDefaultHighlighting(CROSS_REF, 
-      "Cross References", crossReferenceTextStyle());
+      "Cross-References", crossReferenceTextStyle());
   }
   
   public TextStyle crossReferenceTextStyle() {

@@ -1,16 +1,16 @@
 <html>
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Writing a code generator</title>
+<title>Writing a Code Generator</title>
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="getting-started.html" title="Getting Started">
-<link rel="prev" href="processing_Xtext_models.html" title="Processing Xtext models">
+<link rel="prev" href="processing_Xtext_models.html" title="Processing Xtext Models">
 <link rel="next" href="grammarLanguage.html" title="The Grammar Language">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Writing a code generator</h1>
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Writing a Code Generator</h1>
 <p>In the previous section we&rsquo;ve seen how to process Xtext files in general (e.g. with Java). 
 				If you need late binding, loading models dynamically and interpreting them is a good idea. 
 				If you do not need late binding, code generation is a viable option which is widely used to make models executable. </p>
@@ -36,12 +36,12 @@
 					<a class="link" href="getting-started.html#getting-started-xtext" title="Creating a DSL">Getting Started</a> section and uses the code generator project which is created by Xtext&rsquo;s project wizard.
 				</p>
 </div>
-<div class="section" title="The empty generator project">
+<div class="section" title="The Empty Generator Project">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="Theemptygeneratorproject"></a>The empty generator project</h3>
+<a name="TheEmptyGeneratorProject"></a>The Empty Generator Project</h3>
 </div>
 </div>
 </div>
@@ -59,12 +59,12 @@
 				
 </p>
 </div>
-<div class="section" title="Replacing the example model file (1)">
+<div class="section" title="Replacing the Example Model File (1)">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="Replacingtheexamplemodelfile1"></a>Replacing the example model file (1)</h3>
+<a name="ReplacingtheExampleModelFile1"></a>Replacing the Example Model File (1)</h3>
 </div>
 </div>
 </div>
@@ -115,12 +115,12 @@ package&nbsp;my.entities&nbsp;{<br>
 </p>
 </div>
 </div>
-<div class="section" title="The Modeling Workflow Engine file (2)">
+<div class="section" title="The Modeling Workflow Engine File (2)">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="TheModelingWorkflowEnginefile2"></a>The Modeling Workflow Engine file (2) </h3>
+<a name="TheModelingWorkflowEngineFile2"></a>The Modeling Workflow Engine File (2) </h3>
 </div>
 </div>
 </div>
@@ -278,12 +278,12 @@ Workflow&nbsp;{<br>
 </p>
 </div>
 </div>
-<div class="section" title="Using Xpand (3) and Xtend (4) for code generation">
+<div class="section" title="Using Xpand (3) and Xtend (4) for Code Generation">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="UsingXpand3andXtend4forcodegeneration"></a>Using Xpand (3) and Xtend (4) for code generation</h3>
+<a name="UsingXpand3andXtend4forCodeGeneration"></a>Using Xpand (3) and Xtend (4) for Code Generation</h3>
 </div>
 </div>
 </div>
@@ -304,22 +304,22 @@ package&nbsp;&laquo;packageName()&raquo;;<br>
 
 <br>
 public&nbsp;class&nbsp;&laquo;name&raquo;&nbsp;{<br>
-	&laquo;EXPAND&nbsp;property&nbsp;FOREACH&nbsp;features&raquo;<br>
+&nbsp;&nbsp;&laquo;EXPAND&nbsp;property&nbsp;FOREACH&nbsp;features&raquo;<br>
 }<br>
 &laquo;ENDFILE&raquo;<br>
 &laquo;ENDDEFINE&raquo;<br>
 
 <br>
 &laquo;DEFINE&nbsp;property&nbsp;FOR&nbsp;Feature&raquo;<br>
-	private&nbsp;&laquo;type.referenced.qualifiedName()&raquo;&nbsp;&laquo;name&raquo;;<br>
-	
-<br>
-	public&nbsp;void&nbsp;set&laquo;name.toFirstUpper()&raquo;(&laquo;type.referenced.qualifiedName()&raquo;&nbsp;&laquo;name&raquo;)&nbsp;{<br>
-	&nbsp;&nbsp;this.&laquo;name&raquo;&nbsp;=&nbsp;&laquo;name&raquo;;<br>
-	}&nbsp;<br>
-	public&nbsp;&laquo;type.referenced.qualifiedName()&raquo;&nbsp;get&laquo;name.toFirstUpper()&raquo;()&nbsp;{<br>
-	&nbsp;&nbsp;return&nbsp;&laquo;name&raquo;;<br>
-	}&nbsp;<br>
+&nbsp;&nbsp;private&nbsp;&laquo;type.referenced.qualifiedName()&raquo;&nbsp;&laquo;name&raquo;;<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;name.toFirstUpper()&raquo;(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;type.referenced.qualifiedName()&raquo;&nbsp;&laquo;name&raquo;)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;name&raquo;&nbsp;=&nbsp;&laquo;name&raquo;;<br>
+&nbsp;&nbsp;}&nbsp;<br>
+&nbsp;&nbsp;public&nbsp;&laquo;type.referenced.qualifiedName()&raquo;&nbsp;get&laquo;name.toFirstUpper()&raquo;()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;name&raquo;;<br>
+&nbsp;&nbsp;}&nbsp;<br>
 &laquo;ENDDEFINE&raquo;<br>
 
 <br>

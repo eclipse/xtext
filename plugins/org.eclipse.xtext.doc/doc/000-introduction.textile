@@ -9,7 +9,7 @@ language but it lacks decent tool support, you can use Xtext to create
 a sophisticated Eclipse-based development environment providing editing experience known from modern 
 Java IDEs in a surprisingly short amount of time. We call Xtext a language development framework.  
 
-h2. How does it work?
+h2. How Does It Work?
 
 Xtext provides you with a set of domain-specific languages and modern APIs to describe the different 
 aspects of your programming language. 
@@ -27,7 +27,7 @@ all aspects and again comes with DSLs and APIs that allow to configure or change
 very easily. And if that's not flexible enough there is Guice to replace the default behaviour with
 your own implementations.
 
-h2. Xtext is highly configurable
+h2. Xtext is Highly Configurable
 
 Xtext uses the lightweight dependency injection (DI) framework Google Guice to wire up the whole language 
 as well as the IDE infrastructure. A central, external module is used to configure the DI container. 
@@ -35,17 +35,17 @@ As already mentioned, Xtext comes with decent default implementations and DSLs a
 are common sweet spots for customization. But if you need something completely different, 
 Google Guice gives you the power to exchange every little class in a non-invasive way.
 
-h2. Who uses Xtext?
+h2. Who Uses Xtext?
 
 Xtext is used in many different industries. It is used in the field of mobile devices, automotive development, 
 embedded systems or Java enterprise software projects and game development. 
 People use Xtext-based languages to drive code generators that target Java, C, C++, C#, Objective C, Python, or Ruby code. 
 Although the language infrastructure itself runs on the JVM, you can compile Xtext languages to any 
 existing platform.
-Xtext based languages are developed for well known Open-Source projects such as Maven, Eclipse B3, 
+Xtext-based languages are developed for well known Open-Source projects such as Maven, Eclipse B3, 
 the Eclipse Webtools platform or Google's Protocol Buffers and the framework is also widely used in research projects.  
 
-h2. Who is behind Xtext?
+h2. Who is Behind Xtext?
 
 Xtext is a professional Open-Source project. We, the main developers and the project lead, work for 
 itemis, 
@@ -60,7 +60,7 @@ implementation of full-blown IDEs for programming languages. We do not only know
 but we are also experts in programming and domain-specific language design. Don't hesitate to get in 
 contact with us ("www.itemis.com":http://xtext.itemis.com).
 
-h2(#DSL). What is a domain-specific language
+h2(#DSL). What is a Domain-Specific Language
 
 A _Domain-Specific Language (DSL)_ is a small programming language, which focuses on a particular domain.
 Such a domain can be more or less anything. The idea is that its concepts and notation is as close as possible to

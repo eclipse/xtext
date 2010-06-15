@@ -1,5 +1,5 @@
 
-h2(#quickfixes). Quick fixes
+h2(#quickfixes). Quick Fixes
 
 For validations written using the 
 ${org.eclipse.xtext/src/org.eclipse.xtext.validation.AbstractDeclarativeValidator}:#custom_validation 
@@ -28,14 +28,16 @@ the problem can be fixed (have a look at the _DomainmodelQuickfixProvider_ for d
 bc.. @Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)
 public void fixName(final Issue issue, IssueResolutionAcceptor acceptor) {
   acceptor.accept(issue, 
-    "Capitalize name", // quickfix label
-    "Capitalize name  of '" + issue.getData()[0] + "'",  // quickfix description 
-    "upcase.png",      // quickfix icon
+    "Capitalize name", // quick fix label
+    "Capitalize name  of '" + issue.getData()[0] + "'",  // description 
+    "upcase.png",      // quick fix icon
     new IModification() {
-        public void apply(IModificationContext context) throws BadLocationException {
+      public void apply(IModificationContext context) 
+                                             throws BadLocationException {
         IXtextDocument xtextDocument = context.getXtextDocument();
         String firstLetter = xtextDocument.get(issue.getOffset(), 1);
-        xtextDocument.replace(issue.getOffset(), 1, Strings.toFirstUpper(firstLetter));
+        xtextDocument.replace(issue.getOffset(), 1, 
+                              Strings.toFirstUpper(firstLetter));
       }
     }
   );
@@ -69,14 +71,16 @@ will be updated accordingly. If the method fails (throws an exception) the chang
 The following snippet shows a semantic quick fix for a similar problem.
 
 bc.. @Fix(DomainmodelJavaValidator.INVALID_FEATURE_NAME)
-public void fixFeatureName(final Issue issue, IssueResolutionAcceptor acceptor) {
+public void fixFeatureName(final Issue issue, 
+                           IssueResolutionAcceptor acceptor) {
   acceptor.accept(issue, 
     "Uncapitalize name",    // label
     "Uncapitalize name of '" + issue.getData()[0] + "'", // description
     "upcase.png",           // icon 
     new ISemanticModification() {
       public void apply(EObject element, IModificationContext context) {
-        ((Feature) element).setName(Strings.toFirstLower(issue.getData()[0]));
+        ((Feature) element).setName(
+            Strings.toFirstLower(issue.getData()[0]));
       }
     }
   );
