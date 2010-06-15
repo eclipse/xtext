@@ -5,7 +5,7 @@
 
 015-getting-started.textile               | yes (se)                | ß (partly)   
 016-working-with-Xtext-models.textile     | yes (se)                | jk   
-017-getting-started-xpand.textile         | yes (se)                |    
+017-getting-started-xpand.textile         | yes (se)                | jk
 
 020-grammar-language.textile              | ?                       |  se, ß  
 
