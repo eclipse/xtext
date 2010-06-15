@@ -31,7 +31,7 @@
 155-quickfix.textile                      | yes (jk)                |  ß 
 160-templates.textile                     | yes (ß)                 |  jk
 170-outline.textile                       | ?                       |  ß  
-180-hyperlinking.textile                  | yes (ß)                 |    
+180-hyperlinking.textile                  | yes (ß)                 |  jk 
 195-highlighting.textile                  | yes (ß)                 |    
 198-wizards.textile                       | yes (ß)                 |    
 199-jvmtypes.textile                      | yes (ß)                 |    
