@@ -232,3 +232,12 @@ bc..
 
 p. Again, pay attention to the _commandId_ attribute. The connection between your node type(s) and 
 the menu contribution is made by the part _<adapt type="org.example.mydsl.Attribute" />_. 
+
+h3(#quick_outline). Quick Outline
+
+Xtext also provides a quick outline: If you press CTRL-O in an Xtext editor, the outline of the model is shown 
+in a popup window. The quick outline also supports drill-down search with wildcards. To enable the quick outline,
+you have to put the ${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.outline.QuickOutlineFragment} 
+in your workflow.
+
+

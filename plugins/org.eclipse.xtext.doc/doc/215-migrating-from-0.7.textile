@@ -96,7 +96,7 @@ We recommend reading the sections about
 * "the builder infrastructure":#containers
 * "quick fixes":#quickfixes
 * "unordered groups":#unordered_groups
-* quick outline
+* "quick outline":#quick_outline
 * "MWE2":#MWE2
 * "refering to Java elements":#jvmtypes
 For an overview over the new features consult our "New and Noteworthy":http://www.eclipse.org/Xtext/documentation/helios/new_and_noteworthy.php online. 
