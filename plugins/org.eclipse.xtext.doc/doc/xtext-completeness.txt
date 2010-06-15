@@ -33,7 +33,7 @@
 170-outline.textile                       | ?                       | ß  
 180-hyperlinking.textile                  | yes (ß)                 | jk 
 195-highlighting.textile                  | yes (ß)                 | jk
-198-wizards.textile                       | yes (ß)                 |    
+198-wizards.textile                       | yes (ß)                 | jk 
 199-jvmtypes.textile                      | yes (ß)                 |    
 
 200-Appendix.textile                      | ?                       |    

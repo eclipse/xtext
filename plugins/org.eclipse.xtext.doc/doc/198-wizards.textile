@@ -1,10 +1,10 @@
 
 h2(#projectwizard). Project Wizard
 
-Optionally Xtext can generate a _New Project Wizard_ for your DSL. Using this wizard a user can create a new 
+Optionally, Xtext can generate a _New Project Wizard_ for your DSL. Using this wizard a user can create a new 
 project with only a few clicks that is configured with the right dependencies and natures. By default 
 it contains a sample model file and workflow that serve as a scaffold for the user. Furthermore it 
-has the Xtext Nature and thereby the builder assigned. You enable the project wizard generation by adding the 
+has the Xtext nature and thereby the builder assigned. You enable the generation of the project wizard by adding the 
 _SimpleProjectWizardFragment_ fragment to the "workflow":#generator_fragment:
 
 bc.. import org.eclipse.xtext.ui.generator.* 
@@ -20,8 +20,8 @@ p. Here
 * the _generatorProjectName_ is used to specify the project that contains the workflows and templates used to generate artifacts from your DSL. The generated project wizard uses this to add a corresponding dependency to the created project.
 * and the _modelFileExtension_ specifies the default file extension associated with your DSL. When the user clicks the _Finish_ button the project wizard will look for a file with the given extension in the created project and open a editor. 
 
-p. After running the Xtext generator the DSL's UI project will contain a new Xpand template 
-_MyDslNewProject.xpt_ in the @src@ folder in the package @<base-package>.ui.wizard@. 
+p. After running the Xtext generator, the DSL's UI project will contain a new Xpand template 
+_MyDslNewProject.xpt_ in the _src_ folder in the package _<base-package>.ui.wizard_. 
 Note: It may be necessary to manually merge the new entry in the _plugin.xml___gen_ into your 
 _plugin.xml_ of the UI project to enable the wizard contribution.
 
@@ -29,11 +29,11 @@ p. The generated Xpand template will be expanded by the project wizard when the 
 and it is responsible for initializing the project with some sample content. When finishing the wizard 
 the template will be used to create a sample model file and a simple workflow to run the 
 model through the generator project's _MyDslGenerator.mwe_ workflow. However, this is only a pragmatic default.
-As the Xpand template is in the @src@ source folder you may of course modify it to generate whatever 
-initial content you want for a new project. Just make sure to leave the top-level @main@ definition 
+As the Xpand template is in the _src_ source folder you may of course modify it to generate whatever 
+initial content you want for a new project. Just make sure to leave the top-level _main_ definition 
 in place, as that is the interface for the project wizard.
 
-p. *Note:* To edit the generated Xpand template you shoud check that the _JavaBeans meta model contributor_ 
+p. *Note:* To edit the generated Xpand template you should check that the _JavaBeans meta model contributor_ 
 is enabled under _Preferences > Xtend/Xpand_. Further you should also configure the UI project with the 
 Xpand/Xtend nature using _Configure > Add Xpand/Xtend Nature_ in the context menu.
 
@@ -41,8 +41,8 @@ h3. Customizing the project wizard
 
 p. To further customize the creation of the project you can implement your own _project creator_. 
 The default project creator is represented by the generated class _MyDslProjectCreator_ in the
-_src-gen_ folder. It is highly extensible. Without any changes it will simply create a new plugin project 
-with the Xtext nature assigned. Afterwards it will execute the @main@ definition of the Xpand template 
+_src-gen_ folder. It is highly extensible. Without any changes it will simply create a new plug-in project 
+with the Xtext nature assigned. Afterwards it will execute the _main_ definition of the Xpand template 
 as described above.
 
 p. To add more pages or input fields to the project wizard you should subclass the class 
