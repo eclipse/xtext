@@ -82,12 +82,12 @@ The "Graphical Modeling Framework (GMF)":http://www.eclipse.org/modeling/gmp/?pr
 
 |Plug-in|Framework|Purpose|Contents|
 |o.e.x.example.gmf|Xtext|Xtext runtime plug-in|Grammar, derived metamodel and language infrastructure| 
-|o.e.x.example.gmf.ui|Xtext|Xtext UI plug-in|Xtext editor and services|
-|o.e.x.example.gmf.edit|EMF|EMF.edit plug-in|UI services generated from the metamodel|
-|o.e.x.example.gmf.models|GMF|GMF design models|Input for the GMF code generator|
-|o.e.x.example.gmf.diagram|GMF|GMF diagram editor|Purely generated from the GMF design models|
-|o.e.x.example.gmf.diagram.extensions|GMF and Xtext|Manual extensions to the generated GMF editor for integration with Xtext|
-|o.e.x.gmf.glue|Xtext/GMF|Glue code|Generic code to integrate Xtext and GMF|
+|o.e.x.e.g.ui|Xtext|Xtext UI plug-in|Xtext editor and services|
+|o.e.x.e.g.edit|EMF|EMF.edit plug-in|UI services generated from the metamodel|
+|o.e.x.e.g.models|GMF|GMF design models|Input for the GMF code generator|
+|o.e.x.e.g.diagram|GMF|GMF diagram editor|Purely generated from the GMF design models|
+|o.e.x.e.g.d.extensions|GMF and Xtext|GMF diagram editor extensions|Manual extensions to the generated GMF editor for integration with Xtext|
+|o.e.x.gmf.glue|Xtext and GMF|Glue code|Generic code to integrate Xtext and GMF|
 
 We will elaborate the example in three stages.
 
