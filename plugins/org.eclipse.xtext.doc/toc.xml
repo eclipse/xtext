@@ -95,7 +95,7 @@
 <topic href="help/configuration.html#StandardGeneratorFragments" label="Standard Generator Fragments"></topic>
 </topic>
 <topic href="help/dependencyInjection.html" label="Dependency Injection in Xtext with Google Guice">
-<topic href="help/dependencyInjection.html#guicemodules" label="Xtext&rsquo;s Module API"></topic>
+<topic href="help/dependencyInjection.html#guicemodules" label="The Module API"></topic>
 <topic href="help/dependencyInjection.html#ObtaininganInjector" label="Obtaining an Injector"></topic>
 </topic>
 </topic>
@@ -115,7 +115,7 @@
 </topic>
 <topic href="help/linking.html" label="Linking">
 <topic href="help/linking.html#DeclarationofCrosslinks" label="Declaration of Crosslinks"></topic>
-<topic href="help/linking.html#DefaultRuntimeBehaviorLazyLinking" label="Default Runtime Behavior &ndash; Lazy Linking"></topic>
+<topic href="help/linking.html#DefaultRuntimeBehaviorLazyLinking" label="Default Runtime Behavior (Lazy Linking)"></topic>
 </topic>
 <topic href="help/scoping.html" label="Scoping">
 <topic href="help/scoping.html#global_scopes" label="Global Scopes and IResourceDescriptions">

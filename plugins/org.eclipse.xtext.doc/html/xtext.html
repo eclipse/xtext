@@ -4007,7 +4007,7 @@ terminal&nbsp;ANY_OTHER:	.&nbsp;;<br>
 
 				<span class="emphasis"><em>plugin.xml</em></span>, 
 				<span class="emphasis"><em>MANIFEST.MF</em></span> and the 
-				<a class="link" href="#guicemodules" title="Xtext&rsquo;s Module API">Guice modules</a>.
+				<a class="link" href="#guicemodules" title="The Module API">Guice modules</a>.
 			</p>
 <p>Xtext&rsquo;s generator leverages 
 				<a class="link" href="#MWE2" title="Chapter&nbsp;6.&nbsp;MWE2">MWE2 &ndash; the modeling workflow engine</a> 
@@ -4541,12 +4541,12 @@ Workflow&nbsp;{<br>
 				We highly recommend to have a look at 
 				<a class="ulink" href="http://code.google.com/p/google-guice/" target="_new">the website Google Guice</a> to learn more.  
 			</p>
-<div class="section" title="Xtext&rsquo;s Module API">
+<div class="section" title="The Module API">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="guicemodules"></a>Xtext&rsquo;s Module API</h3>
+<a name="guicemodules"></a>The Module API</h3>
 </div>
 </div>
 </div>
@@ -4777,7 +4777,7 @@ Workflow&nbsp;{<br>
 </div>
 <p>Within Eclipse we have a generated 
 				<span class="emphasis"><em>Activator</em></span>, which creates a Guice injector using the 
-				<a class="link" href="#guicemodules" title="Xtext&rsquo;s Module API">modules</a>.
+				<a class="link" href="#guicemodules" title="The Module API">modules</a>.
 				In addition an 
 				<span class="emphasis"><em>IExecutableExtensionFactory</em></span> is generated for each language, which is used to create 
 				<span class="emphasis"><em>ExecutableExtensions</em></span>.
@@ -5411,12 +5411,12 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;ConcreteSyntaxEValidator&gt;&nbsp;<br>
 					<span class="emphasis"><em>false</em></span>. 
 				</p>
 </div>
-<div class="section" title="Default Runtime Behavior &ndash; Lazy Linking">
+<div class="section" title="Default Runtime Behavior (Lazy Linking)">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="DefaultRuntimeBehaviorLazyLinking"></a>Default Runtime Behavior &ndash; Lazy Linking</h3>
+<a name="DefaultRuntimeBehaviorLazyLinking"></a>Default Runtime Behavior (Lazy Linking)</h3>
 </div>
 </div>
 </div>
@@ -6419,7 +6419,7 @@ package&nbsp;bar&nbsp;{<br>
 				The primary hook is called 
 				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java?root=Modeling_Project&view=co" target="_new">IValueConverterService</a> 
 				and the concrete implementation can be registered via the runtime 
-				<a class="link" href="#guicemodules" title="Xtext&rsquo;s Module API">Guice module</a>.
+				<a class="link" href="#guicemodules" title="The Module API">Guice module</a>.
 				To do so override the corresponding binding in your runtime module like shown in this example:
 			</p>
 <div class="literallayout">
@@ -9110,7 +9110,7 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;<br>
 
 				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/XtextTemplateContextTypeRegistry.java?root=Modeling_Project&view=co" target="_new">XtextTemplateContextTypeRegistry</a> 
 				and configure it via 
-				<a class="link" href="#guicemodules" title="Xtext&rsquo;s Module API">Guice</a>. 
+				<a class="link" href="#guicemodules" title="The Module API">Guice</a>. 
 			</p>
 <p>In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set 
 				of 
@@ -9722,7 +9722,7 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;<br>
 </div>
 <p>As the default strategy is a best effort it may not always result in the selection you want. If that&rsquo;s 
 						the case you can 
-						<a class="link" href="#guicemodules" title="Xtext&rsquo;s Module API">override</a> the 
+						<a class="link" href="#guicemodules" title="The Module API">override</a> the 
 						<span class="emphasis"><em>ILocationInFileProvider</em></span> binding in the UI module as 
 						in the following example:
 					</p>

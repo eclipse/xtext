@@ -29,7 +29,7 @@ the class _ReferringType_ (or one of its super types) would need to have an _ERe
 _Entity_ (or one of its super types) declared. Also the _EReference_'s containment and container 
 properties needs to be set to _false_. 
 
-h3. Default Runtime Behavior - Lazy Linking
+h3. Default Runtime Behavior (Lazy Linking)
 
 Xtext uses lazy linking by default and we encourage users to stick to this because it provides a 
 many advantages. One of which is improved performance in all scenarios where you don't have to load 
