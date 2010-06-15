@@ -22,11 +22,11 @@ Resource resource = rs.getResource(URI.createURI("./mymodel.dmodel"), true);
 EObject eobject = resource.getContents().get(0);
  
 p. The first line initializes the language infrastructure to run in _standalone_ mode. That is EMF is designed to work in Eclipse and therefore makes use of 
-Equinox extension points in order to register factories and the like. In a vanilla Java project there is no Equinox, hence we do the registration programmatically.
-The generated _MyLanguageStandaloneSetup_ class does just that. You don't need to do this kind of initialization when you run your plugins within Eclipse, since in that case 
+Equinox extension points in order to register factories and the like. In a vanilla Java project there is no Equinox, hence we do the registration programmaticly.
+The generated _MyLanguageStandaloneSetup_ class does just that. You don't have to do this kind of initialization when you run your plug-ins within Eclipse, since in that case 
 the extension point declarations are used.
 
-The other thing the StandaloneSetup takes care of is creating a Guice _injector_. The use of Guice and Dependency Injection is explained "here":#dependencyInjection. 
+The other thing the _StandaloneSetup_ takes care of is creating a Guice _injector_. The use of Guice and Dependency Injection is explained "here":#dependencyInjection. 
 
 Now that the language infrastructure is initialized and the different contributions to EMF are registered, we want to load a _Resource_. To do so we first create a 
 _ResourceSet_, which as the name suggests represents a set of Resources. If one _Resource_ references another _Resource_, EMF will automatically load that other _Resource_
@@ -34,7 +34,7 @@ into the same _ResourceSet_ as soon as the cross reference is resolved. Resoluti
 
 The 4th line loads the _Resource_ using the resource set. We pass in a URI which points to the file in the file system. 
 EMF's URI is a powerful concept. It supports a lot of different schemes to load resources from file system, web sites, jars, OSGi bundles or even 
-Java's class path. And if that is not enough you can come up with your own schemes. Also a URI can not only point to a resource but also to any _EObject_ in a resource.
+from Java's class path. And if that is not enough you can come up with your own schemes. Also a URI can not only point to a resource but also to any _EObject_ in a resource.
 This is done by appending a so called _URI fragment_ to the URI. 
 
 The second parameter denotes whether the resource should automatically be loaded if it wasn't already before. Alternatively we could have written
@@ -119,7 +119,7 @@ assertEquals("DomainModel", parserRule.getName());
 
 h3. Summary
 
-p. Let's summarize what we have learned. An Xtext model is loaded by an EMF Resource. The main model is represented as an instance of so called _EClasses_, which are themselves
+p. Let's summarize what we have learned: An Xtext model is loaded by an EMF Resource. The main model is represented as an instance of so called _EClasses_ which are themselves
 declared within Ecore models. A _parse tree_ is created as well, which effectively acts as a tracing model between the text, the _AST_ and the grammar. The following
 diagram illustrates the four different kinds of models.
 
