@@ -338,18 +338,18 @@ Import&nbsp;:&nbsp;<br>
 						<span class="emphasis"><em>importURI</em></span> features.
 					</p>
 </div>
-<div class="section" title="Global Scopes based on external configuration (e.g. class path-based)">
+<div class="section" title="Global Scopes based on external configuration (e.g. classpath-based)">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="index_based"></a>Global Scopes based on external configuration (e.g. class path-based)</h4>
+<a name="index_based"></a>Global Scopes based on external configuration (e.g. classpath-based)</h4>
 </div>
 </div>
 </div>
 <p>Instead of explicitly referring to imported resources, the other possibility is to have some kind of 
 						external configuration in order to define what is visible from outside a resource. Java for instances 
-						uses the notion of class paths to define containers (jars and class folders) which contain any 
+						uses the notion of classpaths to define containers (jars and class folders) which contain any 
 						referenceable elements. In the case of Java also the order of such entries is important. </p>
 <p>Since version 1.0.0 Xtext provides support for this kind of global scoping. To enable it, a 
 
@@ -359,8 +359,8 @@ Import&nbsp;:&nbsp;<br>
 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ignorecase/IgnoreCaseDefaultGlobalScopeProvider.java?root=Modeling_Project&view=co" target="_new">IgnoreCaseDefaultGlobalScopeProvider</a>.
 					</p>
-<p>By default Xtext leverages the class path mechanism since it is well designed and already understood 
-						by most of our users. The available tooling provided by JDT and PDE to configure the class path adds 
+<p>By default Xtext leverages the classpath mechanism since it is well designed and already understood 
+						by most of our users. The available tooling provided by JDT and PDE to configure the classpath adds 
 						even more value. However, it is just a default: You can reuse the infrastructure without using Java 
 						and independent from the JDT.</p>
 <p>In order to know what is available in the &ldquo;world&rdquo; a global scope provider which relies on external 
@@ -401,11 +401,11 @@ Import&nbsp;:&nbsp;<br>
 						</p>
 <p>The index is basically a flat list of instances of 
 							<span class="emphasis"><em>IResourceDescription</em></span>. The index itself doesn&rsquo;t 
-							know about visibility constraints due to class path restriction. Rather than that, they are defined by 
+							know about visibility constraints due to classpath restriction. Rather than that, they are defined by 
 							the referencing language by means of so called 
 							<span class="emphasis"><em>IContainers</em></span>: While Java might load a resource 
 							via 
-							<span class="emphasis"><em>ClassLoader.loadResource()</em></span> (i.e. using the class path mechanism), another language could load 
+							<span class="emphasis"><em>ClassLoader.loadResource()</em></span> (i.e. using the classpath mechanism), another language could load 
 							the same resource using the file system paths. 
 						</p>
 <p>Consequently, the information which container a resource belongs to depends on the referencing 
@@ -463,7 +463,7 @@ public&nbsp;void&nbsp;listVisibleResources(<br>
 							keeps track of the set of available containers and their visibility relationships.  
 						</p>
 <p>Xtext offers a couple of strategies for managing containers: If you&rsquo;re running an Eclipse workbench, 
-							you can define containers based on Java projects and their class paths or based on plain Eclipse projects. 
+							you can define containers based on Java projects and their classpaths or based on plain Eclipse projects. 
 							Outside Eclipse, you can provide a set of file system paths to be scanned for models. All of these only 
 							differ in the bound instance of 
 							<span class="emphasis"><em>IAllContainerState</em></span> of the referring language. These will be described 
@@ -502,14 +502,14 @@ public&nbsp;void&nbsp;listVisibleResources(<br>
 <p>a referenced jar, </p>
 </li>
 <li class="listitem">
-<p>a class path entry of a referenced Java project, or</p>
+<p>a classpath entry of a referenced Java project, or</p>
 </li>
 <li class="listitem">
 <p>the exported packages of a required PDE plug-in.</p>
 </li>
 </ul>
 </div>
-<p>So for an element to be referable, its resource must be on the class path of the caller&rsquo;s Java project 
+<p>So for an element to be referable, its resource must be on the classpath of the caller&rsquo;s Java project 
 							and it must be exported (as described above). </p>
 <p>As this strategy allows to reuse a lot of nice Java things like jars, OSGi, maven, etc. it is part of 
 							the default: You should not have to reconfigure anything to make it work. Nevertheless, if you messed 
@@ -541,7 +541,7 @@ public&nbsp;void&nbsp;listVisibleResources(<br>
 <p>in the UI module of the referencing language. The latter looks a bit more difficult than a common 
 							binding, as we have to bind a global singleton to a Guice provider. The 
 							<span class="emphasis"><em>StrictJavaProjectsState</em></span> 
-							requires all elements to be on the class path, while the default 
+							requires all elements to be on the classpath, while the default 
 							<span class="emphasis"><em>JavaProjectsState</em></span> also allows models 
 							in non-source folders. 
 						</p>
@@ -555,7 +555,7 @@ public&nbsp;void&nbsp;listVisibleResources(<br>
 </div>
 </div>
 </div>
-<p>If the class path based mechanism doesn&rsquo;t work for your case, Xtext offers an alternative container 
+<p>If the classpath based mechanism doesn&rsquo;t work for your case, Xtext offers an alternative container 
 							manager based on plain Eclipse projects: Each project acts as a container and the project references 
 
 							<span class="emphasis"><em>Properties-&gt;Project References</em></span> are the visible containers. 
@@ -607,7 +607,7 @@ public&nbsp;void&nbsp;listVisibleResources(<br>
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mwe/Reader.java?root=Modeling_Project&view=co" target="_new">Reader</a>. This is responsible 
 							for reading in models in a workflow, e.g. for later code generation. The 
 							<span class="emphasis"><em>Reader</em></span> allows to either scan 
-							the whole class path or a set of paths for all models therein. When paths are given, each path entry 
+							the whole classpath or a set of paths for all models therein. When paths are given, each path entry 
 							becomes an 
 							<span class="emphasis"><em>IContainer</em></span> of its own. In the following snippet,
 						</p>
@@ -685,7 +685,7 @@ public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;sco
 </code>
 </p>
 </div>
-<p>In fact the class path scope should also reflect the order of class path entries.
+<p>In fact the classpath scope should also reflect the order of classpath entries.
 					For instance:</p>
 <div class="literallayout">
 <p>

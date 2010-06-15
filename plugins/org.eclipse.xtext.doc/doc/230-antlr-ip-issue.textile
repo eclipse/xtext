@@ -20,7 +20,7 @@ Public License. The details are described in
 allowed to ship Xtext with the ANTLR generator but only with the IP approvied runtime components. We 
 have to provide it separately and for your convenience you'll be asked to download the ANTLR generator 
 when you run your language generator for the first time. You can even download it directly or install 
-an additional plugin into Eclipse: 
+an additional plug-in into Eclipse: 
 
 * "http://download.itemis.com/antlr-generator-3.0.1.jar":http://download.itemis.com/antlr-generator-3.0.1.jar
 * or use the update site at "http://download.itemis.com/updates":http://download.itemis.com/updates

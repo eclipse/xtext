@@ -6,7 +6,7 @@ by calling _java.nio.Charset.availableCharsets()_. There is also a list of encod
 canonical Java names in the "API docs":http://java.sun.com/j2se/1.5.0/docs/guide/intl/encoding.doc.html.
 
 p. Unfortunately, each platform and/or spoken language tends to define its own native encoding, 
-e.g. @Cp1258@ on Windows in Vietnamese or @MacIceland@ on Mac OS X in Icelandic. 
+e.g. _Cp1258_ on Windows in Vietnamese or _MacIceland_ on Mac OS X in Icelandic. 
 
 p. In an Eclipse workspace, files, folders, projects can have individual encodings, which are stored
 in the hidden file _.settings/org.eclipse.core.resources.prefs_ in each project. If a resource does not have an 
@@ -21,7 +21,7 @@ Given an arbitrary text file there is no general strategy to tell how it was enc
 an Eclipse project as a jar (even a plug-in), any encoding information not stored in the file itself 
 is lost, too. Some languages define the encoding of a file explicitly, as in the first processing 
 instruction of an XML file. Most languages don't. Others imply a fixed encoding or offer enhanced 
-syntax for character literals, e.g. @\uXXXX@ in Java. 
+syntax for character literals, e.g. _\uXXXX_ in Java. 
 
 p. As Xtext is about textual modeling, it allows to tweak the encoding in various places.
 
@@ -43,7 +43,7 @@ h3. Encoding at Language Runtime
 
 p. As each language could handle the encoding problem differently, Xtext offers a service here. 
 The ${org.eclipse.xtext/src/org.eclipse.xtext.parser.IEncodingProvider} has a single method 
-@getEncoding(URI)@ to define the encoding of the resource with the given URI. Users can implement 
+_getEncoding(URI)_ to define the encoding of the resource with the given URI. Users can implement 
 their own strategy but keep in mind that this is not intended to be a long running method. If the 
 encoding is stored within the model file itself, it should be extractable in an easy way, like from 
 the first line in an XML file. The default implementation returns the default Java character set 
@@ -51,19 +51,19 @@ in the runtime scenario.
 
 p. In the UI scenario, when there is a workspace, users will expect the encoding of the model files 
 to be settable the same way as for other files in the workspace. The default implementation 
-of the @IEncodingProvider@ in the UI scenario therefore returns the file's workspace encoding 
+of the _IEncodingProvider_ in the UI scenario therefore returns the file's workspace encoding 
 for files in the workspace and delegates to the runtime implementation for all other resources, 
 e.g. models in a jar or from a deployed plug-in. Keep in mind that you are going to loose the 
 workspace encoding information as soon as you leave this workspace, e.g. deploy your project.
 
 p. Unless you want to enforce a uniform encoding for all models of your language, we advise to 
 override the runtime service only. It is bound in the runtime module using the binding annotation 
-@Runtime@. For the uniform encoding, bind the plain @IEncodingProvider@ to the same implementation 
+_@Runtime_. For the uniform encoding, bind the plain _IEncodingProvider_ to the same implementation 
 in both modules.
 
 h3. Encoding of an XtextResource
 
-p. An ${org.eclipse.xtext/src/org.eclipse.xtext.resource.XtextResource} uses the @IEncodingProvider@ 
+p. An ${org.eclipse.xtext/src/org.eclipse.xtext.resource.XtextResource} uses the _IEncodingProvider_ 
 of your language by default. You can override that by passing an option on load and save, e.g.
 
 bc.. Map<?,?> options = new HashMap();

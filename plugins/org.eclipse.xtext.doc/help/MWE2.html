@@ -19,8 +19,8 @@
 			values and references. One use case &ndash; that&rsquo;s where the name had its 
 			origins &ndash; is the definition of workflows. Such a workflow consists 
 			usually of a number of components that interact with each other. 
-			There are components available, that read EMF resources, perform 
-			operations (transformations) on them and write them back or generate 
+			There are components to read EMF resources, to perform 
+			operations (transformations) on them and to write them back or to generate 
 			any number of other artifacts out of the information. Workflows are 
 			typically executed in a single JVM. However there are no constraints 
 			the prevent implementors to provide components that spawn multiple 
@@ -38,7 +38,7 @@
 				scenarios for MWE2. The first examples is a simple 
 				<span class="emphasis"><em>HelloWorld</em></span> 
 				module that does nothing but print a message to standard out. The 
-				second module is assembled of three components that read an ecore 
+				second module is assembled of three components that read an Ecore 
 				file, transform the contained classifier-names to upper-case and 
 				serialize the resource back to a new file. The last examples uses 
 				the life-cycle methods to print the execution time of the workflow.
@@ -76,7 +76,7 @@ SayHello&nbsp;{<br>
 					package of a Java source folder. The second element in the module is 
 					the class-name 
 					<span class="emphasis"><em>SayHello</em></span> which introduces the root element of the 
-					module. The interpreter will create an instance of the referenced 
+					module. The interpreter will create an instance of the given 
 					type and configure it as declared between the curly braces. E.g. the 
 					assignment 
 					<span class="emphasis"><em>message = "Hello World!"</em></span> in the module will be 
@@ -303,9 +303,9 @@ Workflow&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>Each of the mentioned implementation is rather simple and can be done in a couple of minutes. 
+<p>Each of the mentioned implementations is rather simple and can be done in a couple of minutes. 
 					This is true for many tedious tasks that developers face in their daily work. MWE2 can be used to
-					minimize the effort for them to a minimum by means of automati</p>
+					automize these tasks with minimum effort.</p>
 </div>
 <div class="section" title="A Stop-watch">
 <div class="titlepage">
@@ -316,7 +316,7 @@ Workflow&nbsp;{<br>
 </div>
 </div>
 </div>
-<p>The last example demonstrates, how to combine the MWE2 concepts to create a simple stopwatch that
+<p>The last example demonstrates how to combine the MWE2 concepts to create a simple stopwatch that
 					allows to measure the execution time of a set of components. The idea is to add the very same stopwatch
 					twice as a component to a workflow. It will measure the time from the first pre-invoke to the last
 					post-invoke event and print the elapsed milliseconds to the console.</p>

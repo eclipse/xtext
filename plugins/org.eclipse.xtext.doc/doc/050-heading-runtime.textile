@@ -32,7 +32,7 @@ bc.. <extension
   point="org.eclipse.ui.editors">
   <editor
     class="<MyLanguageName>ExecutableExtensionFactory:
-      org.eclipse.xtext.ui.core.editor.XtextEditor"
+      org.eclipse.xtext.ui.editor.XtextEditor"
     contributorClass=
       "org.eclipse.ui.editors.text.TextEditorActionContributor"
     default="true"
@@ -44,6 +44,6 @@ bc.. <extension
 
 h2. Logging
 
-Xtext uses Apache's log4j for logging. It is configured using the so called _log4j.properties_, which is looked up in the root of the Java class path. If you want to change or provide configuration at runtime (i.e. non-OSGI), all you have to do is putting such a _log4j.properties_ in place and make sure that it is not overridden by other _log4j.properties_ in previous class path entries.
+Xtext uses Apache's log4j for logging. It is configured using the so called _log4j.properties_, which is looked up in the root of the Java classpath. If you want to change or provide configuration at runtime (i.e. non-OSGI), all you have to do is putting such a _log4j.properties_ in place and make sure that it is not overridden by other _log4j.properties_ in previous classpath entries.
 
 In OSGi you provide configuration by creating a fragment for _org.apache.log4j_. In this case you need to make sure that there's no second fragment contributing a _log4j.properties_ file.

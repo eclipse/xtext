@@ -75,7 +75,7 @@ public class CreatePersons {
 
 p. !{width:50%}images/family_tree.png! 
 
-p. The root element is a class-name following the Java class-path visibility rules. As the module is a sibling to the class
+p. The root element is a class-name following the Java classpath visibility rules. As the module is a sibling to the class
 _com.mycompany.Person_ it is not necessary to use use fully qualified name. There are other packages implicitly imported
 into this workflow as well to make it convenient to instantiate actual workflows and components, but these ones are covered 
 in depth in the appropriate "chapter":#MWE2. The constructed objects are furthermore configured according to the declaration 

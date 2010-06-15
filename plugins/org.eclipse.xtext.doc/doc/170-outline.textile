@@ -217,7 +217,7 @@ bc..
 <extension
   point="org.eclipse.ui.menus">
   <menuContribution
-    locationURI="popup:org.eclipse.xtext.ui.common.outline?after=additions">
+    locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
     <command
       commandId="org.example.mydsl.ui.editor.outline.SampleOutlineCommand"
       label="Sample action registered for Attributes">
@@ -238,6 +238,6 @@ h3(#quick_outline). Quick Outline
 Xtext also provides a quick outline: If you press CTRL-O in an Xtext editor, the outline of the model is shown 
 in a popup window. The quick outline also supports drill-down search with wildcards. To enable the quick outline,
 you have to put the ${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.outline.QuickOutlineFragment} 
-in your workflow.
+into your workflow.
 
 

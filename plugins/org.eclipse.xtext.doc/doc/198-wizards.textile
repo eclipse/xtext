@@ -21,7 +21,7 @@ p. Here
 * and the _modelFileExtension_ specifies the default file extension associated with your DSL. When the user clicks the _Finish_ button the project wizard will look for a file with the given extension in the created project and open a editor. 
 
 p. After running the Xtext generator, the DSL's UI project will contain a new Xpand template 
-_MyDslNewProject.xpt_ in the _src_ folder in the package _<base-package>.ui.wizard_. 
+_MyDslNewProject.xpt_ in the _src_ folder in the package _[base-package].ui.wizard_. 
 Note: It may be necessary to manually merge the new entry in the _plugin.xml___gen_ into your 
 _plugin.xml_ of the UI project to enable the wizard contribution.
 

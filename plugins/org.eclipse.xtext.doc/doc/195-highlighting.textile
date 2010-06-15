@@ -6,7 +6,7 @@ editor for your DSL is capable to mark up your model-code to improve the overall
 possible to use different colors and fonts according to the meaning of the different parts of your 
 input file. One may want to use some decent colors for large blocks of comments while identifiers, 
 keywords and strings should be colored differently to make it easier to distinguish between them. 
-This kind of text decorating mark-up does not influence the semantics of the various sections but 
+This kind of text decorating markup does not influence the semantics of the various sections but 
 helps to understand the meaning and to find errors in the source code.
 
 !{width:100%}images/highlighting.png!
@@ -30,7 +30,7 @@ the abstract class ${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.syntax
 The latter fulfills the interface _ITokenScanner_ from the underlying JFace Framework, which may be 
 implemented by clients directly.
 
-The ${org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration} is used
+The ${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration} is used
 to register any default style without a specific binding to 
 a pattern in the model file. It is used to populate the preferences page and to initialize the 
 _ITextAttributeProvider_, which in turn is the component that is used to obtain the actual settings 

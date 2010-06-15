@@ -12,7 +12,7 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Hyperlinking</h1>
 <p>The Xtext editor provides hyperlinking support for any tokens corresponding to cross references in your 
-				grammar definition. This means that you can either control-click on any of these tokens or hit F3 
+				grammar definition. You can either CTRL-click on any of these tokens or hit F3 
 				while the cursor position is at the token in question and this will take you to the referenced model 
 				element. As you&rsquo;d expect this works for references to elements in the same resource as well as for 
 				references to elements in other resources. In the latter case the referenced resource will first be 
@@ -26,7 +26,7 @@
 </div>
 </div>
 </div>
-<p>When navigating a hyperlink Xtext will also select the text region corresponding to the referenced model 
+<p>When navigating a hyperlink, Xtext will also select the text region corresponding to the referenced model 
 					element. Determining this text region is the responsibility of the 
 
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java?root=Modeling_Project&view=co" target="_new">ILocationInFileProvider</a>. The default implementation 
@@ -37,7 +37,8 @@
 <div class="orderedlist">
 <ol class="orderedlist" type="1">
 <li class="listitem">
-<p>If the model element&rsquo;s type (i.e. EClass) declares a feature 
+<p>If the model element&rsquo;s type (i.e. 
+							<span class="emphasis"><em>EClass</em></span>) declares a feature 
 							<span class="emphasis"><em>name</em></span> then return the region of the corresponding token(s). As a fallback also check for a feature 
 							<span class="emphasis"><em>id</em></span>.
 						</p>
@@ -64,7 +65,7 @@
 <p>As the default strategy is a best effort it may not always result in the selection you want. If that&rsquo;s 
 						the case you can 
 						<a class="link" href="dependencyInjection.html#guicemodules" title="Xtext&rsquo;s module API">override</a> the 
-						<code class="code">ILocationInFileProvider</code> binding in the UI module as 
+						<span class="emphasis"><em>ILocationInFileProvider</em></span> binding in the UI module as 
 						in the following example:
 					</p>
 <div class="literallayout">
@@ -88,10 +89,10 @@
 <p>Often the default strategy only needs some guidance (e.g. selecting the text corresponding to another 
 						feature than 
 						<span class="emphasis"><em>name</em></span>). In that case you can simply subclass 
-						<code class="code">DefaultLocationInFileProvider</code> and override 
+						<span class="emphasis"><em>DefaultLocationInFileProvider</em></span> and override 
 						the methods 
-						<code class="code">getIdentifierFeature</code> and / or 
-						<code class="code">useKeyword</code> to guide the first and last steps of the strategy 
+						<span class="emphasis"><em>getIdentifierFeature()</em></span> and / or 
+						<span class="emphasis"><em>useKeyword()</em></span> to guide the first and last steps of the strategy 
 						as described above (see 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.xtext.ui/src/org/eclipse/xtext/xtext/ui/XtextLocationInFileProvider.java?root=Modeling_Project&view=co" target="_new">XtextLocationInFileProvider</a> 
 						for an example).

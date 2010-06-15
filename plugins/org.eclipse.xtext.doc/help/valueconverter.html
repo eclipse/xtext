@@ -43,7 +43,8 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IValueConverterService&gt;&nbsp;bindIVa
 
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/impl/AbstractDeclarativeValueConverterService.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeValueConverterService</a>, 
 					which allows to declaratively register an 
-					<span class="emphasis"><em>IValueConverter</em></span> by means of an annotated method. 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverter.java?root=Modeling_Project&view=co" target="_new">IValueConverter</a>
+					by means of an annotated method. 
 				</p>
 <p>If you use the common terminals grammar 
 					<span class="emphasis"><em>org.eclipse.xtext.common.Terminals</em></span> you should subclass 
@@ -52,7 +53,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IValueConverterService&gt;&nbsp;bindIVa
 					add additional value converters by adding the respective methods. In addition to the explicitly 
 					defined converters in the default implementation, a delegating converter is registered for each 
 					available 
-					<span class="emphasis"><em>EDataType</em></span> that reuses the functionality of the corresponding 
+					<span class="emphasis"><em>EDataType</em></span> that reuses the functionality of the corresponding EMF 
 					<span class="emphasis"><em>EFactory</em></span>.
 				</p>
 <p>The protocol of an 
@@ -63,7 +64,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IValueConverterService&gt;&nbsp;bindIVa
 					<span class="emphasis"><em>ConcreteSyntaxValidator</em></span> if the value cannot be converted to a valid string. The 
 
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/impl/AbstractLexerBasedConverter.java?root=Modeling_Project&view=co" target="_new">AbstractLexerBasedConverter</a> is useful when 
-					implementing an own value converter. If the converter needs to know about the rule that it currently 
+					implementing a custom value converter. If the converter needs to know about the rule that it currently 
 					works with, it may implement the interface 
 					<span class="emphasis"><em>IValueConverter.RuleSpecific</em></span>. The framework will set the
 					rule such as the implementation may use it afterwards.

@@ -105,7 +105,7 @@ bc.. grammar org.eclipse.xtext.example.Domainmodel
   with org.eclipse.xtext.common.Terminals
 
 p. In Xtext each grammar has a unique name, which like public Java classes 
-needs to reflect the location of the file within the Java class path. In our 
+needs to reflect the location of the file within the Java classpath. In our 
 case the grammar file is located in 
 _/org/eclipse/xtext/example/Domainmodel.xtext_ therefore the name of the 
 grammar is _org.eclipse.xtext.example.Domainmodel_. The second part of that 
@@ -327,7 +327,7 @@ That will trigger the Xtext language generator. It generates the parser and
 serializer and some additional infrastructure code. You will see its logging 
 messages in the Console View. 
 
-h3. Run the generated IDE plugin
+h3. Run the generated IDE plug-in
 
 If the code generation succeeded, we are now able to test the IDE integration. 
 Right-click on the Xtext project and choose
@@ -414,7 +414,7 @@ rules have special semantics (they are used context-less in the lexer, which
 often causes problems). Instead we want it to be a parser rule, but one which
 doesn't return an instance of an _EClass_ from the referenced _EPackage_ but 
 just a plain String. Such rules are called _data type rules_, because they return 
-instances of _EDatatype_ as opposed to instances of _EClass_. String is the most 
+instances of _EDataType_ as opposed to instances of _EClass_. String is the most 
 often used _EDataType_ in this context and is therefore the default return 
 type for data type rules. The rule looks like this:
 
@@ -463,7 +463,7 @@ well as of _PackageDeclaration_.
 bc.. AbstractElement:
   PackageDeclaration | Type | Import;
 
-p. An imported name space is not just a qualified name but it also allows an 
+p. An imported namespace is not just a qualified name but it also allows an 
 optional wildcard character '_*_' at the end, so that multiple names can be 
 imported with one statement. That requires a new data type rule which we 
 name _QualifiedNameWithWildCard_:

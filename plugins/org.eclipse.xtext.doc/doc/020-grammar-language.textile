@@ -108,10 +108,10 @@ The first line in every grammar ...
 
 bc. grammar my.pack.SecretCompartments with org.eclipse.xtext.common.Terminals
 
-declares the name of the grammar. Xtext leverages Java's class path mechanism. This means that the name 
+declares the name of the grammar. Xtext leverages Java's classpath mechanism. This means that the name 
 can be any valid Java qualifier. The file name needs to correspond to the grammar name and have the file 
 extension '_.xtext_'. This means that the name has to be _SecretCompartments.xtext_ and must be placed 
-in a package _my.pack_ somewhere on your project's class path.
+in a package _my.pack_ somewhere on your project's classpath.
 
 The first line is also used to declare any used language (for mechanism details see "Grammar Mixins":#grammarMixins).
 
@@ -119,7 +119,7 @@ h3(#package_declarations). EPackage declarations
 
 Xtext parsers create in-memory object graphs while parsing text. Such object-graphs are 
 instances of EMF Ecore models. An Ecore model basically consists of an _EPackage_ containing _EClasses_, 
-_EDatatypes_ and _EEnums_ (See the "section on EMF":#model_metamodel for more details).
+_EDataTypes_ and _EEnums_ (See the "section on EMF":#model_metamodel for more details).
 Xtext can infer Ecore models from a grammar (see "Ecore model inference":#metamodelInference) but it is also 
 possible to reuse existing Ecore models. You can even mix this and use multiple existing Ecore models and 
 infer some others from one grammar. 
@@ -726,7 +726,7 @@ Xtext creates
 * an _EDataType_
 ** for each return type of a terminal rule or a data type rule.
 
-All _EClasses_, _EEnums_, and _EDatatypes_ are added to the _EPackage_ referred to by the alias provided in the type reference they were created from.
+All _EClasses_, _EEnums_, and _EDataTypes_ are added to the _EPackage_ referred to by the alias provided in the type reference they were created from.
 
 h3. Feature and Type Hierarchy Generation
 

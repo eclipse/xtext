@@ -53,23 +53,23 @@ The previous rename package refactoring updated most of the entries in the _MANI
 * It was already mentioned that the plug-ins _org.eclipse.xtext.ui.core_ and _org.eclipse.xtext.ui.common_ have been merged into a new single plug-in _org.eclipse.xtext.ui_. The same happened to the respective Java packages. Change eventually remaining bundle-dependencies in all manifests. 
 * The plug-in _org.eclipse.xtext.log4j_ no longer exists. We use a package import of _org.apache.log4j_ instead. Also remove the buddy registration. 
 * Due to renamed packages, you have to fix all references to classes therein in the _plugin.xml_. A diff with the _plugin.xml___gen_ will be a great help. If you haven't added a lot manually, consider merging these into the generated version instead of going the other way around. Note that warnings in the _plugin.xml_ can be considered to be real errors most of the time. Make sure
-** the _<MyDsl>ExecutableExtensionFactory_ has the _.ui._ package prefix
-** classes from _org.eclipse.xtext.ui.common_ and _org.eclipse.xtext.ui.core_ are now usually somewhere in _org.eclipse.xtext.ui_. They are also referenced by the _<MyDsl>ExecutableExtensionFactory_ and thus not covered by the editor's validation. 
+** the _[MyDsl]ExecutableExtensionFactory_ has the _.ui._ package prefix
+** classes from _org.eclipse.xtext.ui.common_ and _org.eclipse.xtext.ui.core_ are now usually somewhere in _org.eclipse.xtext.ui_. They are also referenced by the _[MyDsl]ExecutableExtensionFactory_ and thus not covered by the editor's validation. 
 * A number of new features are being registered in the _plugin.xml_, e.g. _Find references_, _Quick Outline_, and _Quickfixes_. You can enable them by manually copying the respective entries from _plugin.xml___gen_ to  _plugin.xml_.
 * To run MWE2 workflows later on, you must change the plug-in dependencies from _org.eclipse.emf.mwe.core_ to _org.eclipse.emf.mwe2.launch_ in your manifest. Optional resolution is fine.
 
 h3. Noteworthy API changes 
 
-The _src_ folders are generated once, so existing code will not be overwritten but has to be updated manually. At least one new class has appeared in your _src_-folder of the _ui_ plug-in. there will now be a _<MyDsl>StandaloneSetup_ inheriting form the generated _<MyDsl>StandaloneSetupGenerated_ to allow customization.
+The _src_ folders are generated once, so existing code will not be overwritten but has to be updated manually. At least one new class has appeared in your _src_-folder of the _ui_ plug-in. there will now be a _[MyDsl]StandaloneSetup_ inheriting form the generated _[MyDsl]StandaloneSetupGenerated_ to allow customization.
 
 You will face a couple of compilation problems due to changes in the API. Here's a list of the most prominent changes. It is usually only necessary to change your code, if you face any compilation problems.
 * The method _IScopeProvider.getScope(EObject,EClass)_ has been removed. Use  _IScopeProvider.getScope(EObject,EReference)_ instead. 
 * Renamed _DefaultScopeProvider_ to _SimpleNameScopeProvider_. There have been further significant changes in the scoping API that allow for optimized implementations. Consult the "section on scoping":#scoping for details.
-* The return type of _AbstractInjectableValidator.getEPackages()_ was changed from _List<? extends EPackage>_ to _List<EPackage>_.
+* The return type of _AbstractInjectableValidator.getEPackages()_ was changed from _List<? extends EPackage>_ to _List&lt;EPackage>_.
 * The parser interfaces now use _java.io.Reader_ instead of _java.io.InputStream_ to explicitly address encoding. Have a look at the "section on encoding":#encoding for details.
 * The handling of _ILabelProvider_ in various contexts has been refactored. The former base class _DefaultLabelProvider_ no longer exists. Use the _DefaultEObjectLabelProvider_ instead. See the "section on label providers":#labelProvider for details. 
 * We have introduced a couple of new packages to better separate concerns. Most classes should be easy to relocate. 
-* The runtime and UI modules have separate base classes _DefaultRuntimeModule_ and _DefaultUiModule_ now. We use Guice's module overrides to combine them with the newly introduced _SharedModule_.  You have to add a constructor the your _<MyDsl>UiModule_ that takes an _AbstractUiPlugin_ as argument and pass that one to the super constructor. _Tip: There is an Eclipse quick-fix available for that one._
+* The runtime and UI modules have separate base classes _DefaultRuntimeModule_ and _DefaultUiModule_ now. We use Guice's module overrides to combine them with the newly introduced _SharedModule_.  You have to add a constructor the your _[MyDsl]UiModule_ that takes an _AbstractUiPlugin_ as argument and pass that one to the super constructor. _Tip: There is an Eclipse quick-fix available for that one._
 * The interfaces _ILexicalHighlightigConfiguration_ and _ISemanticHighlightingConfiguration_ have been merged into _IHighlightingConfiguration_.
 * The _DefaultTemplateProposalProvider_ takes an additional, injectable constructor parameter of type _ContextTypeIdHelper_.
 * The _HyperlinkHelper_ uses field injection instead of constructor injection. The method _createHyperlinksByOffset_ should be overridden instead of the former _findCrossLinkedEObject_.

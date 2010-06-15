@@ -1,9 +1,12 @@
 
 h2(#processing_Xtext_models). Processing Xtext models
 
-p. Now that we know how to create a language we should talk about processing the parsed models somehow. There are typically two useful things one can do with
-Xtext models: One is translating them to another programming language, i.e. writing a code generator, the other is loading them at runtime and use them
-dynamically. We'll talk about code generation later. In this chapter we want to see how to interact with Xtext models programmatically. 
+p. Now that we know how to create a language we should talk about processing the parsed models somehow. 
+There are typically two useful things one can do with
+Xtext models: One is translating them to another programming language, i.e. writing a code generator, 
+the other is loading them at runtime and use them
+dynamically. We'll talk about code generation later. In this chapter we want to see how to interact with 
+Xtext models programmatically. 
 
 Text files parsed by Xtext are represented as object graphs in memory. We call these object graphs _Abstract Syntax Tree (AST)_, _semantic model_ or 
 simply _model_ interchangeably. In Xtext models are implemented using the _Eclipse Modeling Framework (EMF)_, which can be seen as a very powerful version 
@@ -34,7 +37,7 @@ into the same _ResourceSet_ as soon as the cross reference is resolved. Resoluti
 
 The 4th line loads the _Resource_ using the resource set. We pass in a URI which points to the file in the file system. 
 EMF's URI is a powerful concept. It supports a lot of different schemes to load resources from file system, web sites, jars, OSGi bundles or even 
-from Java's class path. And if that is not enough you can come up with your own schemes. Also a URI can not only point to a resource but also to any _EObject_ in a resource.
+from Java's classpath. And if that is not enough you can come up with your own schemes. Also a URI can not only point to a resource but also to any _EObject_ in a resource.
 This is done by appending a so called _URI fragment_ to the URI. 
 
 The second parameter denotes whether the resource should automatically be loaded if it wasn't already before. Alternatively we could have written

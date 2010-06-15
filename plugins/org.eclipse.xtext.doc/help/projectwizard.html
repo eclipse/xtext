@@ -7,15 +7,15 @@
 <link rel="home" href="index.html" title="Xtext User Guide">
 <link rel="up" href="IDEconcepts.html" title="IDE concepts">
 <link rel="prev" href="highlighting.html" title="Syntax Coloring">
-<link rel="next" href="jvmtypes.html" title="Referring Java Types">
+<link rel="next" href="jvmtypes.html" title="Referring to Java Types">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Project Wizard</h1>
-<p>Optionally Xtext can generate a 
+<p>Optionally, Xtext can generate a 
 				<span class="emphasis"><em>New Project Wizard</em></span> for your DSL. Using this wizard a user can create a new 
 				project with only a few clicks that is configured with the right dependencies and natures. By default 
 				it contains a sample model file and workflow that serve as a scaffold for the user. Furthermore it 
-				has the Xtext Nature and thereby the builder assigned. You enable the project wizard generation by adding the 
+				has the Xtext nature and thereby the builder assigned. You enable the generation of the project wizard by adding the 
 
 				<span class="emphasis"><em>SimpleProjectWizardFragment</em></span> fragment to the 
 				<a class="link" href="configuration.html#generator_fragment" title="Generator Fragments">workflow</a>:
@@ -52,11 +52,11 @@ fragment&nbsp;=&nbsp;projectWizard.SimpleProjectWizardFragment&nbsp;{<br>
 </li>
 </ul>
 </div>
-<p>After running the Xtext generator the DSL&rsquo;s UI project will contain a new Xpand template 
+<p>After running the Xtext generator, the DSL&rsquo;s UI project will contain a new Xpand template 
 
 				<span class="emphasis"><em>MyDslNewProject.xpt</em></span> in the 
-				<code class="code">src</code> folder in the package 
-				<code class="code">&lt;base-package&gt;.ui.wizard</code>. 
+				<span class="emphasis"><em>src</em></span> folder in the package 
+				<span class="emphasis"><em>.ui.wizard</em></span>. 
 				Note: It may be necessary to manually merge the new entry in the _plugin.xml___gen_ into your 
 
 				<span class="emphasis"><em>plugin.xml</em></span> of the UI project to enable the wizard contribution.
@@ -68,14 +68,14 @@ fragment&nbsp;=&nbsp;projectWizard.SimpleProjectWizardFragment&nbsp;{<br>
 				model through the generator project&rsquo;s 
 				<span class="emphasis"><em>MyDslGenerator.mwe</em></span> workflow. However, this is only a pragmatic default.
 				As the Xpand template is in the 
-				<code class="code">src</code> source folder you may of course modify it to generate whatever 
+				<span class="emphasis"><em>src</em></span> source folder you may of course modify it to generate whatever 
 				initial content you want for a new project. Just make sure to leave the top-level 
-				<code class="code">main</code> definition 
+				<span class="emphasis"><em>main</em></span> definition 
 				in place, as that is the interface for the project wizard.
 			</p>
 <p>
 				
-<span class="bold"><strong>Note:</strong></span> To edit the generated Xpand template you shoud check that the 
+<span class="bold"><strong>Note:</strong></span> To edit the generated Xpand template you should check that the 
 				<span class="emphasis"><em>JavaBeans meta model contributor</em></span> 
 				is enabled under 
 				<span class="emphasis"><em>Preferences &gt; Xtend/Xpand</em></span>. Further you should also configure the UI project with the 
@@ -96,9 +96,9 @@ fragment&nbsp;=&nbsp;projectWizard.SimpleProjectWizardFragment&nbsp;{<br>
 					The default project creator is represented by the generated class 
 					<span class="emphasis"><em>MyDslProjectCreator</em></span> in the
 
-					<span class="emphasis"><em>src-gen</em></span> folder. It is highly extensible. Without any changes it will simply create a new plugin project 
+					<span class="emphasis"><em>src-gen</em></span> folder. It is highly extensible. Without any changes it will simply create a new plug-in project 
 					with the Xtext nature assigned. Afterwards it will execute the 
-					<code class="code">main</code> definition of the Xpand template 
+					<span class="emphasis"><em>main</em></span> definition of the Xpand template 
 					as described above.
 				</p>
 <p>To add more pages or input fields to the project wizard you should subclass the class 

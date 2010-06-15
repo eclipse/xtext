@@ -13,7 +13,7 @@
 <topic href="help/getting-started.html#Projectlayout" label="Project layout"></topic>
 <topic href="help/getting-started.html#Buildyourowngrammar" label="Build your own grammar"></topic>
 <topic href="help/getting-started.html#Generatelanguageartifacts" label="Generate language artifacts"></topic>
-<topic href="help/getting-started.html#RunthegeneratedIDEplugin" label="Run the generated IDE plugin"></topic>
+<topic href="help/getting-started.html#RunthegeneratedIDEplugin" label="Run the generated IDE plug-in"></topic>
 <topic href="help/getting-started.html#Addinganamespaceconcept" label="Adding a namespace concept"></topic>
 </topic>
 <topic href="help/processing_Xtext_models.html" label="Processing Xtext models">
@@ -121,7 +121,7 @@
 <topic href="help/scoping.html#global_scopes" label="Global Scopes and IResourceDescriptions">
 <topic href="help/scoping.html#resourcedescriptions" label="Resource and EObject Descriptions ( IResourceDescription, IEObjectDescription)"></topic>
 <topic href="help/scoping.html#import_uri" label="Global Scopes based on explicit imports (ImportURI mechanism)"></topic>
-<topic href="help/scoping.html#index_based" label="Global Scopes based on external configuration (e.g. class path-based)">
+<topic href="help/scoping.html#index_based" label="Global Scopes based on external configuration (e.g. classpath-based)">
 <topic href="help/scoping.html#containers" label="About the index, containers and their manager"></topic>
 <topic href="help/scoping.html#jdt_based_containers" label="JDT based container manager"></topic>
 <topic href="help/scoping.html#project_based_containers" label="Eclipse project based containers"></topic>
@@ -180,7 +180,6 @@
 <topic href="help/MWE2LanguageReference.html#MWE2Mandatory" label="Mandatory Properties"></topic>
 <topic href="help/MWE2LanguageReference.html#MWE2NamedComponents" label="Named Components"></topic>
 <topic href="help/MWE2LanguageReference.html#MWE2AutoInject" label="Auto Injection"></topic>
-<topic href="help/MWE2LanguageReference.html#MWE2Factories" label="Factory Support"></topic>
 </topic>
 <topic href="help/MWE2SyntaxReference.html" label="Syntax Reference">
 <topic href="help/MWE2SyntaxReference.html#MWE2ModuleSyntax" label="Module"></topic>
@@ -214,6 +213,7 @@
 <topic href="help/outline.html#RegisteringanIContentOutlineNodeAdapterFactory" label="Registering an IContentOutlineNodeAdapterFactory"></topic>
 <topic href="help/outline.html#Registeringamenucontribution" label="Registering a menu contribution"></topic>
 </topic>
+<topic href="help/outline.html#quick_outline" label="Quick Outline"></topic>
 </topic>
 <topic href="help/hyperlinking.html" label="Hyperlinking">
 <topic href="help/hyperlinking.html#locationProvider" label="Location Provider">
@@ -229,7 +229,7 @@
 <topic href="help/projectwizard.html#Customizingtheprojectwizard" label="Customizing the project wizard"></topic>
 </topic>
 </topic>
-<topic href="help/jvmtypes.html" label="Referring Java Types">
+<topic href="help/jvmtypes.html" label="Referring to Java Types">
 <topic href="help/jvmtypes.html#HowtoUseJavaTypes" label="How to Use Java Types"></topic>
 <topic href="help/CustomizingPoints.html" label="Customizing Points"></topic>
 </topic>

@@ -21,7 +21,7 @@ The ${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.label.AbstractLabelProvider}
 the images: In your implementation of _doGetImage(Object)_ you can as well return an _Image_ or a string, 
 representing a path in the _icons/_ folder of the containing plug-in. This path is actually 
 configurable by Google Guice. Have a look at the 
-${org.eclipse.xtext.ui.core/src/org.eclipse.xtext.ui.core.PluginImageHelper} to learn about the 
+${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.PluginImageHelper} to learn about the 
 customizing possibilities.
 
 If you have the 

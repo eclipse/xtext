@@ -12,9 +12,9 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Logging</h1>
 <p>Xtext uses Apache&rsquo;s log4j for logging. It is configured using the so called 
-				<span class="emphasis"><em>log4j.properties</em></span>, which is looked up in the root of the Java class path. If you want to change or provide configuration at runtime (i.e. non-OSGI), all you have to do is putting such a 
+				<span class="emphasis"><em>log4j.properties</em></span>, which is looked up in the root of the Java classpath. If you want to change or provide configuration at runtime (i.e. non-OSGI), all you have to do is putting such a 
 				<span class="emphasis"><em>log4j.properties</em></span> in place and make sure that it is not overridden by other 
-				<span class="emphasis"><em>log4j.properties</em></span> in previous class path entries.
+				<span class="emphasis"><em>log4j.properties</em></span> in previous classpath entries.
 			</p>
 <p>In OSGi you provide configuration by creating a fragment for 
 				<span class="emphasis"><em>org.apache.log4j</em></span>. In this case you need to make sure that there&rsquo;s no second fragment contributing a 

@@ -180,11 +180,11 @@ ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvi
 (${org.eclipse.xtext/src/org.eclipse.xtext.resource.ignorecase.IgnoreCaseImportUriGlobalScopeProvider} 
 if the _caseInsensitve_ flag is set) that handles _importURI_ features.
 
-h4(#index_based). Global Scopes based on external configuration (e.g. class path-based)
+h4(#index_based). Global Scopes based on external configuration (e.g. classpath-based)
 
 Instead of explicitly referring to imported resources, the other possibility is to have some kind of 
 external configuration in order to define what is visible from outside a resource. Java for instances 
-uses the notion of class paths to define containers (jars and class folders) which contain any 
+uses the notion of classpaths to define containers (jars and class folders) which contain any 
 referenceable elements. In the case of Java also the order of such entries is important. 
 
 Since version 1.0.0 Xtext provides support for this kind of global scoping. To enable it, a 
@@ -192,8 +192,8 @@ ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvide
 the _IGlobalScopeProvider_ interface. For case insensitive names use the 
 ${org.eclipse.xtext/src/org.eclipse.xtext.resource.ignorecase.IgnoreCaseDefaultGlobalScopeProvider}.
 
-By default Xtext leverages the class path mechanism since it is well designed and already understood 
-by most of our users. The available tooling provided by JDT and PDE to configure the class path adds 
+By default Xtext leverages the classpath mechanism since it is well designed and already understood 
+by most of our users. The available tooling provided by JDT and PDE to configure the classpath adds 
 even more value. However, it is just a default: You can reuse the infrastructure without using Java 
 and independent from the JDT.
 
@@ -218,9 +218,9 @@ Guice configuration of the global index in the UI scenario in
 ${org.eclipse.xtext.ui.shared/src/org.eclipse.xtext.ui.shared.internal.SharedModule}.
 
 p. The index is basically a flat list of instances of _IResourceDescription_. The index itself doesn't 
-know about visibility constraints due to class path restriction. Rather than that, they are defined by 
+know about visibility constraints due to classpath restriction. Rather than that, they are defined by 
 the referencing language by means of so called _IContainers_: While Java might load a resource 
-via _ClassLoader.loadResource()_ (i.e. using the class path mechanism), another language could load 
+via _ClassLoader.loadResource()_ (i.e. using the classpath mechanism), another language could load 
 the same resource using the file system paths. 
  
 p. Consequently, the information which container a resource belongs to depends on the referencing 
@@ -256,7 +256,7 @@ additional ${org.eclipse.xtext/src/org.eclipse.xtext.resource.containers.IAllCon
 keeps track of the set of available containers and their visibility relationships.  
 
 p. Xtext offers a couple of strategies for managing containers: If you're running an Eclipse workbench, 
-you can define containers based on Java projects and their class paths or based on plain Eclipse projects. 
+you can define containers based on Java projects and their classpaths or based on plain Eclipse projects. 
 Outside Eclipse, you can provide a set of file system paths to be scanned for models. All of these only 
 differ in the bound instance of _IAllContainerState_ of the referring language. These will be described 
 in detail in the following sections.
@@ -270,10 +270,10 @@ It assumes so called _IPackageFragmentRoots_ as containers. An _IPackageFragment
 root of a tree of Java model elements. It usually refers to 
 * a source folder of a Java project,
 * a referenced jar, 
-* a class path entry of a referenced Java project, or
+* a classpath entry of a referenced Java project, or
 * the exported packages of a required PDE plug-in.
 
-So for an element to be referable, its resource must be on the class path of the caller's Java project 
+So for an element to be referable, its resource must be on the classpath of the caller's Java project 
 and it must be exported (as described above). 
 
 As this strategy allows to reuse a lot of nice Java things like jars, OSGi, maven, etc. it is part of 
@@ -293,12 +293,12 @@ bc.. public Provider<IAllContainersState> provideIAllContainersState() {
 
 p. in the UI module of the referencing language. The latter looks a bit more difficult than a common 
 binding, as we have to bind a global singleton to a Guice provider. The _StrictJavaProjectsState_ 
-requires all elements to be on the class path, while the default _JavaProjectsState_ also allows models 
+requires all elements to be on the classpath, while the default _JavaProjectsState_ also allows models 
 in non-source folders. 
 
 h5(#project_based_containers). Eclipse project based containers
 
-If the class path based mechanism doesn't work for your case, Xtext offers an alternative container 
+If the classpath based mechanism doesn't work for your case, Xtext offers an alternative container 
 manager based on plain Eclipse projects: Each project acts as a container and the project references 
 _Properties->Project References_ are the visible containers. 
 
@@ -323,7 +323,7 @@ This one can be configured with a mapping of container handles to resource URIs.
 It is unlikely you want to use this strategy directly in your own code, but it is used in the back-end 
 of the MWE2 workflow component ${org.eclipse.xtext/src/org.eclipse.xtext.mwe.Reader}. This is responsible 
 for reading in models in a workflow, e.g. for later code generation. The _Reader_ allows to either scan 
-the whole class path or a set of paths for all models therein. When paths are given, each path entry 
+the whole classpath or a set of paths for all models therein. When paths are given, each path entry 
 becomes an _IContainer_ of its own. In the following snippet,
 
 bc.. component = org.eclipse.xtext.mwe.Reader {
@@ -373,7 +373,7 @@ public class ScopeExample { // class body scope
   }
 }
 
-p. In fact the class path scope should also reflect the order of class path entries.
+p. In fact the classpath scope should also reflect the order of classpath entries.
 For instance:
 
 bc.. classpathScope{stuff from bin/}

@@ -28,21 +28,21 @@
 </div>
 </div>
 <p>You should update the constraints from version 
-					<code class="code">0.7.x</code> to 
-					<code class="code">[1.0.0,2.0.0)</code> in your manifest files if you specified any concrete versions.
+					<span class="emphasis"><em>0.7.x</em></span> to 
+					<span class="emphasis"><em>[1.0.0,2.0.0)</em></span> in your manifest files if you specified any concrete versions.
 					Make sure that your 
-					<code class="code">dsl.ui</code>-projects do not refer to the plug-in 
-					<code class="code">org.eclipse.xtext.ui.common</code> or 
-					<code class="code">org.eclipse.xtext.ui.core</code> but to 
-					<code class="code">org.eclipse.xtext.ui</code> instead. The arguably easiest way is a global text-based search and replace across the manifest files. The bundle 
-					<code class="code">org.eclipse.xtext.log4j</code> is obsolete as well. The generator will create 
-					<code class="code">import-package</code> entries in the manifests later on.
+					<span class="emphasis"><em>dsl.ui</em></span>-projects do not refer to the plug-in 
+					<span class="emphasis"><em>org.eclipse.xtext.ui.common</em></span> or 
+					<span class="emphasis"><em>org.eclipse.xtext.ui.core</em></span> but to 
+					<span class="emphasis"><em>org.eclipse.xtext.ui</em></span> instead. The arguably easiest way is a global text-based search and replace across the manifest files. The bundle 
+					<span class="emphasis"><em>org.eclipse.xtext.log4j</em></span> is obsolete as well. The generator will create 
+					<span class="emphasis"><em>import-package</em></span> entries in the manifests later on.
 				</p>
 <p>The next step is to fix the import statements in your classes to match the refactored naming scheme in Xtext. Perform a global search for "
-					<code class="code">import org.eclipse.xtext.ui.common.</code>" and 
+					<span class="emphasis"><em>import org.eclipse.xtext.ui.common.</em></span>" and 
 					"
-					<code class="code">import org.eclipse.xtext.ui.core.</code>" and replace the matches with "
-					<code class="code">import org.eclipse.xtext.ui.</code>". This fixes most of the problems in the manually written code. 
+					<span class="emphasis"><em>import org.eclipse.xtext.ui.core.</em></span>" and replace the matches with "
+					<span class="emphasis"><em>import org.eclipse.xtext.ui.</em></span>". This fixes most of the problems in the manually written code. 
 				</p>
 </div>
 <div class="section" title="Rename the Packages in the dsl.ui-Plug-in">
@@ -55,12 +55,12 @@
 </div>
 </div>
 <p>We changed the naming pattern for artifacts in the 
-					<code class="code">dsl.ui</code>-plug-in to match the OSGI conventions. The easiest way to update your existing projects is to apply a 
+					<span class="emphasis"><em>dsl.ui</em></span>-plug-in to match the OSGI conventions. The easiest way to update your existing projects is to apply a 
 					&ldquo;Rename Package&rdquo; refactoring on the packages in the 
-					<code class="code">src</code>- and 
-					<code class="code">src-gen</code> folder 
-					<span class="bold"><strong>before</strong></span> you re-run the workflow that regenerates your language. Make sure you ticked &ldquo;Rename sub-packages&rdquo; in the dialog. It is error-prone to enable the search in non-java files as this will perform incompatible changes in the manifest files. Furthermore, it is important to perform the rename operation in the 
-					<code class="code">src-gen</code> folder, too. This ensures that the references in your manually written code are properly updated.
+					<span class="emphasis"><em>src</em></span>- and 
+					<span class="emphasis"><em>src-gen</em></span> folder 
+					<span class="bold"><strong>before</strong></span> you re-run the workflow that regenerates your language. Make sure you ticked &ldquo;Rename sub-packages&rdquo; in the dialog. It is error-prone to enable the search in non-Java files as this will perform incompatible changes in the manifest files. Furthermore, it is important to perform the rename operation in the 
+					<span class="emphasis"><em>src-gen</em></span> folder, too. This ensures that the references in your manually written code are properly updated.
 				</p>
 </div>
 <div class="section" title="Update the Workflow">
@@ -73,9 +73,9 @@
 </div>
 </div>
 <p>The 
-					<code class="code">JavaScopingFragment</code> does no longer exist. It has been superseded by the 
-					<code class="code">ImportURIScopingFragment</code> in combination with the 
-					<code class="code">SimpleNamesFragment</code>.
+					<span class="emphasis"><em>JavaScopingFragment</em></span> does no longer exist. It has been superseded by the 
+					<span class="emphasis"><em>ImportURIScopingFragment</em></span> in combination with the 
+					<span class="emphasis"><em>SimpleNamesFragment</em></span>.
 					Please replace  
 				</p>
 <div class="literallayout">
@@ -97,7 +97,7 @@
 </p>
 </div>
 <p>The 
-					<code class="code">PackratParserFragment</code> has been abandoned as well. It is save to remove the reference to that one if it is activated in your workflow. After you&rsquo;ve changed your workflow, it should be possible to regenerate your language without any errors in the console. It is ok to have compilation errors prior to executing the workflow.
+					<span class="emphasis"><em>PackratParserFragment</em></span> has been abandoned as well. It is save to remove the reference to that one if it is activated in your workflow. After you&rsquo;ve changed your workflow, it should be possible to regenerate your language without any errors in the console. It is ok to have compilation errors prior to executing the workflow.
 				</p>
 </div>
 <div class="section" title="MANIFEST.MF and plugin.xml">
@@ -110,51 +110,50 @@
 </div>
 </div>
 <p>The previous rename package refactoring updated most of the entries in the 
-					<code class="code">MANIFEST.MF</code> and and some entries in the 
-					<code class="code">plugin.xml</code>. Others have to be fixed manually. The Eclipse compiler will point to many of the remaining problems in the manifest files but it is unlikely that it will spot the erroneous references in the 
-					<code class="code">plugin.xml</code>.
+					<span class="emphasis"><em>MANIFEST.MF</em></span> and and some entries in the 
+					<span class="emphasis"><em>plugin.xml</em></span>. Others have to be fixed manually. The Eclipse compiler will point to many of the remaining problems in the manifest files but it is unlikely that it will spot the erroneous references in the 
+					<span class="emphasis"><em>plugin.xml</em></span>.
 				</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
 <p>In the generated UI plug-in&rsquo;s 
-							<code class="code">MANIFEST.MF</code>, remove the package exports of no longer existing packages and make sure the bundle activator points to the newly generated one (with 
-							<code class="code">.ui.</code> in its package name).  
+							<span class="emphasis"><em>MANIFEST.MF</em></span>, remove the package exports of no longer existing packages and make sure the bundle activator points to the newly generated one (with 
+							<span class="emphasis"><em>.ui.</em></span> in its package name).  
 						</p>
 </li>
 <li class="listitem">
 <p>It was already mentioned that the plug-ins 
-							<code class="code">org.eclipse.xtext.ui.core</code> and 
-							<code class="code">org.eclipse.xtext.ui.common</code> have been merged into a new single plug-in 
-							<code class="code">org.eclipse.xtext.ui</code>. The same happened to the respective Java packages. Change eventually remaining bundle-dependencies in all manifests. 
+							<span class="emphasis"><em>org.eclipse.xtext.ui.core</em></span> and 
+							<span class="emphasis"><em>org.eclipse.xtext.ui.common</em></span> have been merged into a new single plug-in 
+							<span class="emphasis"><em>org.eclipse.xtext.ui</em></span>. The same happened to the respective Java packages. Change eventually remaining bundle-dependencies in all manifests. 
 						</p>
 </li>
 <li class="listitem">
 <p>The plug-in 
-							<code class="code">org.eclipse.xtext.log4j</code> no longer exists. We use a package import of 
-							<code class="code">org.apache.log4j</code> instead. Also remove the buddy registration. 
+							<span class="emphasis"><em>org.eclipse.xtext.log4j</em></span> no longer exists. We use a package import of 
+							<span class="emphasis"><em>org.apache.log4j</em></span> instead. Also remove the buddy registration. 
 						</p>
 </li>
 <li class="listitem">
 <p>Due to renamed packages, you have to fix all references to classes therein in the 
-							<code class="code">plugin.xml</code>. A diff with the 
-							<code class="code">plugin.xml_gen</code> will be a great help. If you haven&rsquo;t added a lot manually, consider merging these into the generated version instead of going the other way around. Note that warnings in the 
-							<code class="code">plugin.xml</code> can be considered to be real errors most of the time. Make sure
+							<span class="emphasis"><em>plugin.xml</em></span>. A diff with the _plugin.xml___gen_ will be a great help. If you haven&rsquo;t added a lot manually, consider merging these into the generated version instead of going the other way around. Note that warnings in the 
+							<span class="emphasis"><em>plugin.xml</em></span> can be considered to be real errors most of the time. Make sure
 						</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
 <li class="listitem">
 <p>the 
-									<code class="code">&lt;MyDsl&gt;ExecutableExtensionFactory</code> has the 
-									<code class="code">.ui.</code> package prefix
+									<span class="emphasis"><em>ExecutableExtensionFactory</em></span> has the 
+									<span class="emphasis"><em>.ui.</em></span> package prefix
 								</p>
 </li>
 <li class="listitem">
 <p>classes from 
-									<code class="code">org.eclipse.xtext.ui.common</code> and 
-									<code class="code">org.eclipse.xtext.ui.core</code> are now usually somewhere in 
-									<code class="code">org.eclipse.xtext.ui</code>. They are also referenced by the 
-									<code class="code">&lt;MyDsl&gt;ExecutableExtensionFactory</code> and thus not covered by the editor&rsquo;s validation. 
+									<span class="emphasis"><em>org.eclipse.xtext.ui.common</em></span> and 
+									<span class="emphasis"><em>org.eclipse.xtext.ui.core</em></span> are now usually somewhere in 
+									<span class="emphasis"><em>org.eclipse.xtext.ui</em></span>. They are also referenced by the 
+									<span class="emphasis"><em>ExecutableExtensionFactory</em></span> and thus not covered by the editor&rsquo;s validation. 
 								</p>
 </li>
 </ul>
@@ -162,18 +161,17 @@
 </li>
 <li class="listitem">
 <p>A number of new features are being registered in the 
-							<code class="code">plugin.xml</code>, e.g. 
+							<span class="emphasis"><em>plugin.xml</em></span>, e.g. 
 							<span class="emphasis"><em>Find references</em></span>, 
 							<span class="emphasis"><em>Quick Outline</em></span>, and 
-							<span class="emphasis"><em>Quickfixes</em></span>. You can enable them by manually copying the respective entries from 
-							<code class="code">plugin.xml_gen</code> to  
-							<code class="code">plugin.xml</code>.
+							<span class="emphasis"><em>Quickfixes</em></span>. You can enable them by manually copying the respective entries from _plugin.xml___gen_ to  
+							<span class="emphasis"><em>plugin.xml</em></span>.
 						</p>
 </li>
 <li class="listitem">
 <p>To run MWE2 workflows later on, you must change the plug-in dependencies from 
-							<code class="code">org.eclipse.emf.mwe.core</code> to 
-							<code class="code">org.eclipse.emf.mwe2.launch</code> in your manifest. Optional resolution is fine.
+							<span class="emphasis"><em>org.eclipse.emf.mwe.core</em></span> to 
+							<span class="emphasis"><em>org.eclipse.emf.mwe2.launch</em></span> in your manifest. Optional resolution is fine.
 						</p>
 </li>
 </ul>
@@ -189,47 +187,47 @@
 </div>
 </div>
 <p>The 
-					<code class="code">src</code> folders are generated once, so existing code will not be overwritten but has to be updated manually. At least one new class has appeared in your 
-					<code class="code">src</code>-folder of the 
-					<code class="code">ui</code> plug-in. there will now be a 
-					<code class="code">&lt;MyDsl&gt;StandaloneSetup</code> inheriting form the generated 
-					<code class="code">&lt;MyDsl&gt;StandaloneSetupGenerated</code> to allow customization.
+					<span class="emphasis"><em>src</em></span> folders are generated once, so existing code will not be overwritten but has to be updated manually. At least one new class has appeared in your 
+					<span class="emphasis"><em>src</em></span>-folder of the 
+					<span class="emphasis"><em>ui</em></span> plug-in. there will now be a 
+					<span class="emphasis"><em>StandaloneSetup</em></span> inheriting form the generated 
+					<span class="emphasis"><em>StandaloneSetupGenerated</em></span> to allow customization.
 				</p>
 <p>You will face a couple of compilation problems due to changes in the API. Here&rsquo;s a list of the most prominent changes. It is usually only necessary to change your code, if you face any compilation problems.</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
 <p>The method 
-							<code class="code">IScopeProvider.getScope(EObject,EClass)</code> has been removed. Use  
-							<code class="code">IScopeProvider.getScope(EObject,EReference)</code> instead. 
+							<span class="emphasis"><em>IScopeProvider.getScope(EObject,EClass)</em></span> has been removed. Use  
+							<span class="emphasis"><em>IScopeProvider.getScope(EObject,EReference)</em></span> instead. 
 						</p>
 </li>
 <li class="listitem">
 <p>Renamed 
-							<code class="code">DefaultScopeProvider</code> to 
-							<code class="code">SimpleNameScopeProvider</code>. There have been further significant changes in the scoping API that allow for optimized implementations. Consult the 
+							<span class="emphasis"><em>DefaultScopeProvider</em></span> to 
+							<span class="emphasis"><em>SimpleNameScopeProvider</em></span>. There have been further significant changes in the scoping API that allow for optimized implementations. Consult the 
 							<a class="link" href="scoping.html" title="Scoping">section on scoping</a> for details.
 						</p>
 </li>
 <li class="listitem">
 <p>The return type of 
-							<code class="code">AbstractInjectableValidator.getEPackages()</code> was changed from 
-							<code class="code">List&lt;? extends EPackage&gt;</code> to 
-							<code class="code">List&lt;EPackage&gt;</code>.
+							<span class="emphasis"><em>AbstractInjectableValidator.getEPackages()</em></span> was changed from 
+							<span class="emphasis"><em>List&lt;? extends EPackage&gt;</em></span> to 
+							<span class="emphasis"><em>List&amp;lt;EPackage&gt;</em></span>.
 						</p>
 </li>
 <li class="listitem">
 <p>The parser interfaces now use 
-							<code class="code">java.io.Reader</code> instead of 
-							<code class="code">java.io.InputStream</code> to explicitly address encoding. Have a look at the 
-							<code class="code">IEncodingProvider</code> for details.
+							<span class="emphasis"><em>java.io.Reader</em></span> instead of 
+							<span class="emphasis"><em>java.io.InputStream</em></span> to explicitly address encoding. Have a look at the 
+							<a class="link" href="encoding.html" title="Encoding in Xtext">section on encoding</a> for details.
 						</p>
 </li>
 <li class="listitem">
 <p>The handling of 
-							<code class="code">ILabelProvider</code> in various contexts has been refactored. The former base class 
-							<code class="code">DefaultLabelProvider</code> no longer exists. Use the 
-							<code class="code">DefaultEObjectLabelProvider</code> instead. See the 
+							<span class="emphasis"><em>ILabelProvider</em></span> in various contexts has been refactored. The former base class 
+							<span class="emphasis"><em>DefaultLabelProvider</em></span> no longer exists. Use the 
+							<span class="emphasis"><em>DefaultEObjectLabelProvider</em></span> instead. See the 
 							<a class="link" href="IDEconcepts.html#labelProvider" title="Label Provider">section on label providers</a> for details. 
 						</p>
 </li>
@@ -238,92 +236,92 @@
 </li>
 <li class="listitem">
 <p>The runtime and UI modules have separate base classes 
-							<code class="code">DefaultRuntimeModule</code> and 
-							<code class="code">DefaultUiModule</code> now. We use Guice&rsquo;s module overrides to combine them with the newly introduced 
-							<code class="code">SharedModule</code>.  You have to add a constructor the your 
-							<code class="code">&lt;MyDsl&gt;UiModule</code> that takes an 
-							<code class="code">AbstractUiPlugin</code> as argument and pass that one to the super constructor. 
+							<span class="emphasis"><em>DefaultRuntimeModule</em></span> and 
+							<span class="emphasis"><em>DefaultUiModule</em></span> now. We use Guice&rsquo;s module overrides to combine them with the newly introduced 
+							<span class="emphasis"><em>SharedModule</em></span>.  You have to add a constructor the your 
+							<span class="emphasis"><em>UiModule</em></span> that takes an 
+							<span class="emphasis"><em>AbstractUiPlugin</em></span> as argument and pass that one to the super constructor. 
 							<span class="emphasis"><em>Tip: There is an Eclipse quick-fix available for that one.</em></span>
 						
 </p>
 </li>
 <li class="listitem">
 <p>The interfaces 
-							<code class="code">ILexicalHighlightigConfiguration</code> and 
-							<code class="code">ISemanticHighlightingConfiguration</code> have been merged into 
-							<code class="code">IHighlightingConfiguration</code>.
+							<span class="emphasis"><em>ILexicalHighlightigConfiguration</em></span> and 
+							<span class="emphasis"><em>ISemanticHighlightingConfiguration</em></span> have been merged into 
+							<span class="emphasis"><em>IHighlightingConfiguration</em></span>.
 						</p>
 </li>
 <li class="listitem">
 <p>The 
-							<code class="code">DefaultTemplateProposalProvider</code> takes an additional, injectable constructor parameter of type 
-							<code class="code">ContextTypeIdHelper</code>.
+							<span class="emphasis"><em>DefaultTemplateProposalProvider</em></span> takes an additional, injectable constructor parameter of type 
+							<span class="emphasis"><em>ContextTypeIdHelper</em></span>.
 						</p>
 </li>
 <li class="listitem">
 <p>The 
-							<code class="code">HyperlinkHelper</code> uses field injection instead of constructor injection. The method 
-							<code class="code">createHyperlinksByOffset</code> should be overridden instead of the former 
-							<code class="code">findCrossLinkedEObject</code>.
+							<span class="emphasis"><em>HyperlinkHelper</em></span> uses field injection instead of constructor injection. The method 
+							<span class="emphasis"><em>createHyperlinksByOffset</em></span> should be overridden instead of the former 
+							<span class="emphasis"><em>findCrossLinkedEObject</em></span>.
 						</p>
 </li>
 <li class="listitem">
-<p>The API to skip a node in the outline has changed. Instead of returning the 
-							<code class="code">HIDDEN_NODE</code> you&rsquo;ll have to implement 
-							<code class="code">boolean consumeNode(MyType)</code> and return 
-							<code class="code">false</code>.
+<p>The API to skip a node in the outline has changed. Instead of returning the _HIDDEN_NODE_ you&rsquo;ll have to implement 
+							<span class="emphasis"><em>boolean consumeNode(MyType)</em></span> and return 
+							<span class="emphasis"><em>false</em></span>.
 						</p>
 </li>
 <li class="listitem">
 <p>The 
-							<code class="code">Readonly*Storage</code> implementations have been removed. There is a new API to open editors for objects with a given URI. Please use the 
-							<code class="code">IURIEditorOpener</code> to create an editor or the 
-							<code class="code">IStorage2UriMapper</code> to obtain an 
-							<code class="code">IStorage</code> for a given URI.
+							<span class="emphasis"><em>Readonly*Storage</em></span> implementations have been removed. There is a new API to open editors for objects with a given URI. Please use the 
+							<span class="emphasis"><em>IURIEditorOpener</em></span> to create an editor or the 
+							<span class="emphasis"><em>IStorage2UriMapper</em></span> to obtain an 
+							<span class="emphasis"><em>IStorage</em></span> for a given URI.
 						</p>
 </li>
 <li class="listitem">
 <p>The interfaces 
-							<code class="code">IStateAccess</code> and 
-							<code class="code">IEObjectHandle</code> have been moved along with the 
-							<code class="code">IUnitOfWork</code> to the package 
-							<code class="code">org.eclipse.xtext.util.concurrent</code>.
+							<span class="emphasis"><em>IStateAccess</em></span> and 
+							<span class="emphasis"><em>IEObjectHandle</em></span> have been moved along with the 
+							<span class="emphasis"><em>IUnitOfWork</em></span> to the package 
+							<span class="emphasis"><em>org.eclipse.xtext.util.concurrent</em></span>.
 						</p>
 </li>
 <li class="listitem">
 <p>The 
-							<code class="code">ValidationJobFactory</code> is gone. Please implement a custom 
-							<code class="code">IResourceValidator</code> instead.
+							<span class="emphasis"><em>ValidationJobFactory</em></span> is gone. Please implement a custom 
+							<span class="emphasis"><em>IResourceValidator</em></span> instead.
 						</p>
 </li>
 <li class="listitem">
 <p>The grammar elements 
-							<code class="code">Alternatives</code> and 
-							<code class="code">Group</code> have a new common super type 
-							<code class="code">CompoundElement</code>. The methods 
-							<code class="code">getGroups</code> and 
-							<code class="code">getTokens</code> have been refactored to 
-							<code class="code">getElements</code>.
+							<span class="emphasis"><em>Alternatives</em></span> and 
+							<span class="emphasis"><em>Group</em></span> have a new common super type 
+							<span class="emphasis"><em>CompoundElement</em></span>. The methods 
+							<span class="emphasis"><em>getGroups</em></span> and 
+							<span class="emphasis"><em>getTokens</em></span> have been refactored to 
+							<span class="emphasis"><em>getElements</em></span>.
 						</p>
 </li>
 <li class="listitem">
 <p>Completion proposals take a 
-							<code class="code">StyledString</code> instead of a plain string as display string.
+							<span class="emphasis"><em>StyledString</em></span> instead of a plain string as display string.
 						</p>
 </li>
 <li class="listitem">
-<p>The AbstractLabelProvider does no longer expose its 
-							<code class="code">IImageHelper</code>. Use 
-							<code class="code">convertToImage</code> instead or inject your own 
-							<code class="code">IImageHelper</code>.
+<p>The 
+							<span class="emphasis"><em>AbstractLabelProvider</em></span> does no longer expose its 
+							<span class="emphasis"><em>IImageHelper</em></span>. Use 
+							<span class="emphasis"><em>convertToImage</em></span> instead or inject your own 
+							<span class="emphasis"><em>IImageHelper</em></span>.
 						</p>
 </li>
 <li class="listitem">
 <p>The implementation-classes from 
-							<code class="code">org.eclipse.xtext.index</code> were superseded by the builder infrastructure. Use the 
-							<code class="code">QualifiedNamesFragment</code> and the 
-							<code class="code">ImportNamespacesScopingFragment</code> instead of the 
-							<code class="code">ImportedNamespacesScopingFragment</code>. Please refer to the section about the builder infrastructure for details.
+							<span class="emphasis"><em>org.eclipse.xtext.index</em></span> were superseded by the builder infrastructure. Use the 
+							<span class="emphasis"><em>QualifiedNamesFragment</em></span> and the 
+							<span class="emphasis"><em>ImportNamespacesScopingFragment</em></span> instead of the 
+							<span class="emphasis"><em>ImportedNamespacesScopingFragment</em></span>. Please refer to the section about the builder infrastructure for details.
 						</p>
 </li>
 <li class="listitem">
@@ -332,27 +330,27 @@
 <li class="listitem">
 <p>
 							
-<code class="code">ILinkingService.getLinkText</code> was removed. Have a look at the 
-							<code class="code">LinkingHelper</code> and the 
-							<code class="code">CrossReferenceSerializer</code> if you relied on this method.
+<span class="emphasis"><em>ILinkingService.getLinkText</em></span> was removed. Have a look at the 
+							<span class="emphasis"><em>LinkingHelper</em></span> and the 
+							<span class="emphasis"><em>CrossReferenceSerializer</em></span> if you relied on this method.
 						</p>
 </li>
 <li class="listitem">
 <p>The 
-							<code class="code">SerializerUtil</code> was renamed to 
-							<code class="code">Serializer</code>. There were other heavy refactorings that involved the serializer and its components (like e.g. the 
-							<code class="code">ITransientValueService</code>) but it should be pretty straight forward to migrate existing client code.
+							<span class="emphasis"><em>SerializerUtil</em></span> was renamed to 
+							<span class="emphasis"><em>Serializer</em></span>. There were other heavy refactorings that involved the serializer and its components (like e.g. the 
+							<span class="emphasis"><em>ITransientValueService</em></span>) but it should be pretty straight forward to migrate existing client code.
 						</p>
 </li>
 <li class="listitem">
 <p>The method-signatures of the 
-							<code class="code">IFragmentProvider</code> have changed. The documentation will give a clue on how to update existing implementations.
+							<span class="emphasis"><em>IFragmentProvider</em></span> have changed. The documentation will give a clue on how to update existing implementations.
 						</p>
 </li>
 <li class="listitem">
 <p>Some static methods were removed from utility classes such as 
-							<code class="code">EcoreUtil2</code> and 
-							<code class="code">ParsetreeUtil</code> in favor of more sophisticated implementations.
+							<span class="emphasis"><em>EcoreUtil2</em></span> and 
+							<span class="emphasis"><em>ParsetreeUtil</em></span> in favor of more sophisticated implementations.
 						</p>
 </li>
 </ul>

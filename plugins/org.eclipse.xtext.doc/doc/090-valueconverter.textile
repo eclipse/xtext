@@ -15,7 +15,7 @@ h3. Annotation-based Value Converters
 
 The most simple way to register additional value converters is to make use of 
 ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.impl.AbstractDeclarativeValueConverterService}, 
-which allows to declaratively register an ${org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverter}
+which allows to declaratively register an ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.IValueConverter}
 by means of an annotated method. 
 
 p. If you use the common terminals grammar _org.eclipse.xtext.common.Terminals_ you should subclass 

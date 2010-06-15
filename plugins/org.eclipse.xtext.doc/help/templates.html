@@ -16,7 +16,7 @@
 				default templates, you have to put a file named 
 				<span class="emphasis"><em>templates.xml</em></span> inside the 
 				<span class="emphasis"><em>templates</em></span> directory of 
-				the generated ui-plugin. This file contains templates in a format as described in the 
+				the generated UI-plug-in. This file contains templates in a format as described in the 
 
 				<a class="ulink" href="http://help.eclipse.org/ganymede/topic/org.eclipse.cdt.doc.user/tasks/cdt_t_imp_code_temp.htm" target="_new">Eclipse online help</a> .
 			</p>
@@ -29,7 +29,7 @@
 			
 </p>
 <p>By default Xtext registers 
-				<span class="emphasis"><em>ContextTypes</em></span> for each Rule (
+				<span class="emphasis"><em>ContextTypes</em></span> for each rule (
 				<span class="emphasis"><em>.[RuleName]</em></span>) and for each 
 				keyword (
 				<span class="emphasis"><em>.kw</em></span>[keyword]_). If you don&rsquo;t 
@@ -60,7 +60,7 @@
 <p>It is best practice to edit the templates in the preferences page, export them into the 
 
 				<span class="emphasis"><em>templates.xml</em></span>-file and put this one into the 
-				<span class="emphasis"><em>templates</em></span> folder of your ui-plugin. However, these 
+				<span class="emphasis"><em>templates</em></span> folder of your UI-plug-in. However, these 
 				templates will not be visible by default. To fix it, you have to manually edit the xml-file and insert 
 				an ID attribute for each template element.
 			</p>
@@ -82,7 +82,7 @@
 <p>The syntax is as follows:</p>
 <div class="literallayout">
 <p>
-<code class="code">${displayText:CrossReference([MyPackageName.]MyType.myRef)}<br>
+<code class="code">${&lt;displayText&gt;:CrossReference([&lt;MyPackageName&gt;.]&lt;MyType&gt;.&lt;myRef&gt;)}<br>
 
 </code>
 </p>
@@ -133,7 +133,7 @@
 <p>The syntax is as follows:   </p>
 <div class="literallayout">
 <p>
-<code class="code">${displayText:Enum([MyPackage.]EnumType)<br>
+<code class="code">${&lt;displayText&gt;:Enum([&lt;MyPackage&gt;.]&lt;EnumType&gt;)<br>
 
 </code>
 </p>
@@ -156,8 +156,11 @@
 </div>
 <p>yields the text 
 					<span class="emphasis"><em>public op name(): type</em></span> where the display text &lsquo;public&rsquo; is replaced with a drop 
-					down filled with the literal values as defined in the Visibility 
-					<span class="emphasis"><em>EEnumeration</em></span>. Also, &lsquo;name&rsquo; and &lsquo;type&rsquo; 
+					down filled with the literal values as defined in the 
+					<span class="emphasis"><em>EEnum</em></span> 
+					<span class="emphasis"><em>Visibility</em></span>. Also, 
+					<span class="emphasis"><em>name</em></span> and 
+					<span class="emphasis"><em>type</em></span> 
 					are template variables.
 				</p>
 <p>

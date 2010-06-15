@@ -11,9 +11,12 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Processing Xtext models</h1>
-<p>Now that we know how to create a language we should talk about processing the parsed models somehow. There are typically two useful things one can do with
-				Xtext models: One is translating them to another programming language, i.e. writing a code generator, the other is loading them at runtime and use them
-				dynamically. We&rsquo;ll talk about code generation later. In this chapter we want to see how to interact with Xtext models programmatically. </p>
+<p>Now that we know how to create a language we should talk about processing the parsed models somehow. 
+				There are typically two useful things one can do with
+				Xtext models: One is translating them to another programming language, i.e. writing a code generator, 
+				the other is loading them at runtime and use them
+				dynamically. We&rsquo;ll talk about code generation later. In this chapter we want to see how to interact with 
+				Xtext models programmatically. </p>
 <p>Text files parsed by Xtext are represented as object graphs in memory. We call these object graphs 
 				<span class="emphasis"><em>Abstract Syntax Tree (AST)</em></span>, 
 				<span class="emphasis"><em>semantic model</em></span> or 
@@ -55,12 +58,13 @@ EObject&nbsp;eobject&nbsp;=&nbsp;resource.getContents().get(0);<br>
 </div>
 <p>The first line initializes the language infrastructure to run in 
 					<span class="emphasis"><em>standalone</em></span> mode. That is EMF is designed to work in Eclipse and therefore makes use of 
-					Equinox extension points in order to register factories and the like. In a vanilla Java project there is no Equinox, hence we do the registration programmatically.
+					Equinox extension points in order to register factories and the like. In a vanilla Java project there is no Equinox, hence we do the registration programmaticly.
 					The generated 
-					<span class="emphasis"><em>MyLanguageStandaloneSetup</em></span> class does just that. You don&rsquo;t need to do this kind of initialization when you run your plugins within Eclipse, since in that case 
+					<span class="emphasis"><em>MyLanguageStandaloneSetup</em></span> class does just that. You don&rsquo;t have to do this kind of initialization when you run your plug-ins within Eclipse, since in that case 
 					the extension point declarations are used.
 				</p>
-<p>The other thing the StandaloneSetup takes care of is creating a Guice 
+<p>The other thing the 
+					<span class="emphasis"><em>StandaloneSetup</em></span> takes care of is creating a Guice 
 					<span class="emphasis"><em>injector</em></span>. The use of Guice and Dependency Injection is explained 
 					<a class="link" href="dependencyInjection.html" title="Dependency Injection in Xtext with Google Guice">here</a>. 
 				</p>
@@ -77,7 +81,7 @@ EObject&nbsp;eobject&nbsp;=&nbsp;resource.getContents().get(0);<br>
 <p>The 4th line loads the 
 					<span class="emphasis"><em>Resource</em></span> using the resource set. We pass in a URI which points to the file in the file system. 
 					EMF&rsquo;s URI is a powerful concept. It supports a lot of different schemes to load resources from file system, web sites, jars, OSGi bundles or even 
-					Java&rsquo;s class path. And if that is not enough you can come up with your own schemes. Also a URI can not only point to a resource but also to any 
+					from Java&rsquo;s classpath. And if that is not enough you can come up with your own schemes. Also a URI can not only point to a resource but also to any 
 					<span class="emphasis"><em>EObject</em></span> in a resource.
 					This is done by appending a so called 
 					<span class="emphasis"><em>URI fragment</em></span> to the URI. 
@@ -266,8 +270,8 @@ assertEquals("DomainModel",&nbsp;parserRule.getName());<br>
 </div>
 </div>
 </div>
-<p>Let&rsquo;s summarize what we have learned. An Xtext model is loaded by an EMF Resource. The main model is represented as an instance of so called 
-					<span class="emphasis"><em>EClasses</em></span>, which are themselves
+<p>Let&rsquo;s summarize what we have learned: An Xtext model is loaded by an EMF Resource. The main model is represented as an instance of so called 
+					<span class="emphasis"><em>EClasses</em></span> which are themselves
 					declared within Ecore models. A 
 					<span class="emphasis"><em>parse tree</em></span> is created as well, which effectively acts as a tracing model between the text, the 
 					<span class="emphasis"><em>AST</em></span> and the grammar. The following

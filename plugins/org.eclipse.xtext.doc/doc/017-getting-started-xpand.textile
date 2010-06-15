@@ -111,10 +111,10 @@ The important part is the _Workflow_ part. There we declare an instance of _org.
 property. The first one is a _Reader_ which is used to initialize Xtext languages, read in Xtext files, and fetch specific elements from those models in order to
 make them available to following workflow components (such as the declared _Generator_). 
 
-Xtext language initialization is node by specifying any number of ${org.eclipse.xtext/src/org/eclipse/xtext/ISetup} implementations. In our case the generated _DomainModelStandaloneSetup_ is
+Xtext language initialization is done by specifying any number of ${org.eclipse.xtext/src/org.eclipse.xtext.ISetup} implementations. In our case the generated _DomainModelStandaloneSetup_ is
 registered, which makes sure that the infrastructure of your domain model language is set up properly. If you have multiple languages just add additional assignments for each language.
 
-You have to tell the _Reader_ which paths to scan for model files. In this particular case we just specified one path. Another convenient option is to reuse the Java class path, as suggested in the comments.
+You have to tell the _Reader_ which paths to scan for model files. In this particular case we just specified one path. Another convenient option is to reuse the Java classpath, as suggested in the comments.
 
 The _load_ section specifies which elements to fetch from the loaded resources. In this case we state that we want all elements of type _Greeting_.
 Note that this is completely file agnostic, it will provide you with all elements from all files the _Reader_ could find on the specified paths.
@@ -122,7 +122,7 @@ The slot name is the name by which other workflow components can access the stor
 
 The second workflow component is an instance of _org.eclipse.xpand2.Generator_, which is the MWE2 facade to the Xpand template language. 
 The Xpand generator needs to know which template to invoke for which models. Qualified names in Xpand are separated by a double colon _'::'_. That
-is the name _'templates::Template::main'_ points to the definition _main_ in the file _templates/Template.xpt_ on the Java class path. The second part
+is the name _'templates::Template::main'_ points to the definition _main_ in the file _templates/Template.xpt_ on the Java classpath. The second part
 _FOREACH greetings_ references the _greetings_ slot which has previously been populated by the reader component.
 
 An _Outlet_ describes where to put the generated sources. In Xpand there is a file-statement which refers to outlets. If you only have one outlet 

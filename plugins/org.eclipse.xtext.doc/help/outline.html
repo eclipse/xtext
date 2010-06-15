@@ -374,7 +374,7 @@
 <code class="code">&lt;extension<br>
 &nbsp;&nbsp;point="org.eclipse.ui.menus"&gt;<br>
 &nbsp;&nbsp;&lt;menuContribution<br>
-&nbsp;&nbsp;&nbsp;&nbsp;locationURI="popup:org.eclipse.xtext.ui.common.outline?after=additions"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;locationURI="popup:org.eclipse.xtext.ui.outline?after=additions"&gt;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;command<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commandId="org.example.mydsl.ui.editor.outline.SampleOutlineCommand"<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label="Sample&nbsp;action&nbsp;registered&nbsp;for&nbsp;Attributes"&gt;<br>
@@ -398,6 +398,22 @@
 						<span class="emphasis"><em><span style="color: red">&lt;adapt&gt;&lt;/adapt&gt;</span></em></span>. 
 					</p>
 </div>
+</div>
+<div class="section" title="Quick Outline">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="quick_outline"></a>Quick Outline</h3>
+</div>
+</div>
+</div>
+<p>Xtext also provides a quick outline: If you press CTRL-O in an Xtext editor, the outline of the model is shown 
+					in a popup window. The quick outline also supports drill-down search with wildcards. To enable the quick outline,
+					you have to put the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/QuickOutlineFragment.java?root=Modeling_Project&view=co" target="_new">QuickOutlineFragment</a> 
+					into your workflow.
+				</p>
 </div>
 </body>
 </html>

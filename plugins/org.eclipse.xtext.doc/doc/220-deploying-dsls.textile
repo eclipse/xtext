@@ -5,7 +5,7 @@ Deploying a DSL is a straightforward process - all you need to know is how to bu
 
 h2. Prepare your DSL projects
 
-If you use custom icons in your DSL, please make sure to include the @/icons@ folder (or whatever you called the folder with your custom icons) in the binary build of the UI bundle of your DSL. Otherwise, your icons will not show up in the deployed DSL editor.
+If you use custom icons in your DSL, please make sure to include the _/icons_ folder (or whatever you called the folder with your custom icons) in the binary build of the UI bundle of your DSL. Otherwise, your icons will not show up in the deployed DSL editor.
 
 h2. Creating a Feature for your DSL
 

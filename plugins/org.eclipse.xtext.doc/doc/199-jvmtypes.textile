@@ -29,10 +29,11 @@ as one got already used to when dealing with references in Xtext.
 bc.. Type:
   'type' name=ID 'mapped-to' javaType=[types::JvmType|FQN];
 
-p. Last but not least, the ${org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/types/TypesGeneratorFragment} has to be added to the workflow. The safest way is 
+p. Last but not least, the ${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.types.TypesGeneratorFragment} 
+has to be added to the workflow. The safest way is 
 to add it after the actually used scoping fragments as a specialized version of the _IGlobalScopeProvider_ 
 will be configured. Don't forget to refer to the _genmodel_ of the Java VM types. The shortest possible
-URI is a class-path-URI.    
+URI is a classpath-URI.    
 
 bc.. fragment = ecore.EcoreGeneratorFragment {
   referencedGenModels="classpath:/model/JavaVMTypes.genmodel"
@@ -57,7 +58,7 @@ h2. Customizing Points
 
 There are several customization hooks in the runtime layer and on the editor side as well:
 
-The ${org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/xtext/AbstractTypeScopeProvider} 
+The ${org.eclipse.xtext.common.types/src/org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider} 
 can be used to create scopes for members with respect to
 the override semantics of the Java language. Of course it is possible to use this implementation to
 create scopes for types as well.
@@ -65,11 +66,11 @@ create scopes for types as well.
 As the Java VM types expose a lot of information about visibility, parameter- and return types, generic,
 available annotations or enumeration literals, it is very easy to define constraints for the referred types.
 
-The ${org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/contentassist/ITemplateProposalProvider} can be
+The ${org.eclipse.xtext.common.types.ui/src/org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider} can be
 used to provide optimized proposals based on various filter criteria. 
 The most common selector can be used directly via _createSubTypeProposals_. The implementation is optimized
 and uses the JDT Index directly to minimize the effort for object instantiation. The class 
-${org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters}
+${org.eclipse.xtext.common.types.ui/src/org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters}
 provides a comprehensive set of reusable filters that can be easily combined to reduce the list of proposals
 to a smaller number of valid entries.
 

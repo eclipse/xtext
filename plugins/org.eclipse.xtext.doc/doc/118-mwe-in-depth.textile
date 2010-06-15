@@ -20,7 +20,7 @@ h2(#MWE2Exampe). Examples
 Let's start with a couple of examples to demonstrate some usage 
 scenarios for MWE2. The first examples is a simple _HelloWorld_ 
 module that does nothing but print a message to standard out. The 
-second module is assembled of three components that read an ecore 
+second module is assembled of three components that read an Ecore 
 file, transform the contained classifier-names to upper-case and 
 serialize the resource back to a new file. The last examples uses 
 the life-cycle methods to print the execution time of the workflow.
@@ -445,7 +445,7 @@ _child_ to the feature _child_ of the root component. This is especially
 useful for highly configurable workflows that expose dozens of optional
 parameters each of which can be assigned to one or more components.
 
-p. The @auto-inject@ modifier can be used for a subset of the available
+p. The _auto-inject_ modifier can be used for a subset of the available
 features as well. It will suppressed for the explicitly set values
 of a component.        
 

@@ -46,7 +46,7 @@ EMF also ships with a code generator that generates Java classes from your Ecore
 The generated classes are based on the EMF runtime library, which offers a lot of infrastructure and tools to work with your models, such as persistence, reflection, referential integrity, lazy loading etc.
 
 Among other things, the code generator will generate
-* A Java interface and a Java class for each EClassifier in your ecore model. By default, all classes will implement the interface _org.eclipse.emf.ecore.EObject_, linking a lot of runtime functionality. 
+* A Java interface and a Java class for each EClassifier in your Ecore model. By default, all classes will implement the interface _org.eclipse.emf.ecore.EObject_, linking a lot of runtime functionality. 
 * A Java bean property for each EStructuralFeature (member variable, accessor methods)
 * A package interface and class, holding singleton objects for all elements of your Ecore model, allowing reflection. EPackages are also registered to the _EPackage.Registry_ to be usable at runtime.
 * A factory interface and class for creating instances

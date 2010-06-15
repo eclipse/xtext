@@ -115,7 +115,7 @@ public&nbsp;class&nbsp;SampleClass&nbsp;{<br>
 					<span class="emphasis"><em>add*</em></span> as well. 
 				</p>
 <p>If the right side of the assignment in the workflow file does not 
-					define an explicit class, its type is inferred from the method 
+					define a class explicitly, its type is inferred from the method 
 					parameter. The line 
 					<span class="emphasis"><em>child = {}</em></span> is equivalent to 
 
@@ -335,8 +335,8 @@ var&nbsp;newMandatory<br>
 </div>
 </div>
 <p>Properties are not the only way to define something that can be reused.
-					It is possible to assign a name to any instantiated component being
-					it created from a class literal or from another component. This allows
+					It is possible to assign a name to any instantiated component whether it&rsquo;s
+					created from a class literal or from another component. This allows
 					to refer to previously created and configured instances. Named instances
 					can come handy for notification and call-back mechanisms or more general
 					in terms of defined life-cycle events. </p>
@@ -398,20 +398,10 @@ SampleClass&nbsp;auto-inject&nbsp;{<br>
 					parameters each of which can be assigned to one or more components.
 				</p>
 <p>The 
-					<code class="code">auto-inject</code> modifier can be used for a subset of the available
+					<span class="emphasis"><em>auto-inject</em></span> modifier can be used for a subset of the available
 					features as well. It will suppressed for the explicitly set values
 					of a component.        
 				</p>
-</div>
-<div class="section" title="Factory Support">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-<a name="MWE2Factories"></a>Factory Support</h3>
-</div>
-</div>
-</div>
 </div>
 </body>
 </html>

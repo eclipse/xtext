@@ -185,7 +185,7 @@
 </dl>
 </dd>
 <dt>
-<span class="chapter"><a href="#jvmtypes">8. Referring Java Types</a></span>
+<span class="chapter"><a href="#jvmtypes">8. Referring to Java Types</a></span>
 </dt>
 <dd>
 <dl>
@@ -580,7 +580,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 </p>
 </div>
 <p>In Xtext each grammar has a unique name, which like public Java classes 
-					needs to reflect the location of the file within the Java class path. In our 
+					needs to reflect the location of the file within the Java classpath. In our 
 					case the grammar file is located in 
 
 					<span class="emphasis"><em>/org/eclipse/xtext/example/Domainmodel.xtext</em></span> therefore the name of the 
@@ -1004,12 +1004,12 @@ TypeRef:<br>
 					serializer and some additional infrastructure code. You will see its logging 
 					messages in the Console View. </p>
 </div>
-<div class="section" title="Run the generated IDE plugin">
+<div class="section" title="Run the generated IDE plug-in">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-<a name="RunthegeneratedIDEplugin"></a>Run the generated IDE plugin</h3>
+<a name="RunthegeneratedIDEplugin"></a>Run the generated IDE plug-in</h3>
 </div>
 </div>
 </div>
@@ -1154,7 +1154,7 @@ package&nbsp;my.entities&nbsp;{<br>
 					just a plain String. Such rules are called 
 					<span class="emphasis"><em>data type rules</em></span>, because they return 
 					instances of 
-					<span class="emphasis"><em>EDatatype</em></span> as opposed to instances of 
+					<span class="emphasis"><em>EDataType</em></span> as opposed to instances of 
 					<span class="emphasis"><em>EClass</em></span>. String is the most 
 					often used 
 					<span class="emphasis"><em>EDataType</em></span> in this context and is therefore the default return 
@@ -1252,7 +1252,7 @@ package&nbsp;my.entities&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>An imported name space is not just a qualified name but it also allows an 
+<p>An imported namespace is not just a qualified name but it also allows an 
 					optional wildcard character '
 					<span class="emphasis"><em>*</em></span>' at the end, so that multiple names can be 
 					imported with one statement. That requires a new data type rule which we 
@@ -1372,9 +1372,12 @@ QualifiedNameWithWildCard:<br>
 </div>
 </div>
 </div>
-<p>Now that we know how to create a language we should talk about processing the parsed models somehow. There are typically two useful things one can do with
-				Xtext models: One is translating them to another programming language, i.e. writing a code generator, the other is loading them at runtime and use them
-				dynamically. We&rsquo;ll talk about code generation later. In this chapter we want to see how to interact with Xtext models programmatically. </p>
+<p>Now that we know how to create a language we should talk about processing the parsed models somehow. 
+				There are typically two useful things one can do with
+				Xtext models: One is translating them to another programming language, i.e. writing a code generator, 
+				the other is loading them at runtime and use them
+				dynamically. We&rsquo;ll talk about code generation later. In this chapter we want to see how to interact with 
+				Xtext models programmatically. </p>
 <p>Text files parsed by Xtext are represented as object graphs in memory. We call these object graphs 
 				<span class="emphasis"><em>Abstract Syntax Tree (AST)</em></span>, 
 				<span class="emphasis"><em>semantic model</em></span> or 
@@ -1416,12 +1419,13 @@ EObject&nbsp;eobject&nbsp;=&nbsp;resource.getContents().get(0);<br>
 </div>
 <p>The first line initializes the language infrastructure to run in 
 					<span class="emphasis"><em>standalone</em></span> mode. That is EMF is designed to work in Eclipse and therefore makes use of 
-					Equinox extension points in order to register factories and the like. In a vanilla Java project there is no Equinox, hence we do the registration programmatically.
+					Equinox extension points in order to register factories and the like. In a vanilla Java project there is no Equinox, hence we do the registration programmaticly.
 					The generated 
-					<span class="emphasis"><em>MyLanguageStandaloneSetup</em></span> class does just that. You don&rsquo;t need to do this kind of initialization when you run your plugins within Eclipse, since in that case 
+					<span class="emphasis"><em>MyLanguageStandaloneSetup</em></span> class does just that. You don&rsquo;t have to do this kind of initialization when you run your plug-ins within Eclipse, since in that case 
 					the extension point declarations are used.
 				</p>
-<p>The other thing the StandaloneSetup takes care of is creating a Guice 
+<p>The other thing the 
+					<span class="emphasis"><em>StandaloneSetup</em></span> takes care of is creating a Guice 
 					<span class="emphasis"><em>injector</em></span>. The use of Guice and Dependency Injection is explained 
 					<a class="link" href="#dependencyInjection" title="Dependency Injection in Xtext with Google Guice">here</a>. 
 				</p>
@@ -1438,7 +1442,7 @@ EObject&nbsp;eobject&nbsp;=&nbsp;resource.getContents().get(0);<br>
 <p>The 4th line loads the 
 					<span class="emphasis"><em>Resource</em></span> using the resource set. We pass in a URI which points to the file in the file system. 
 					EMF&rsquo;s URI is a powerful concept. It supports a lot of different schemes to load resources from file system, web sites, jars, OSGi bundles or even 
-					Java&rsquo;s class path. And if that is not enough you can come up with your own schemes. Also a URI can not only point to a resource but also to any 
+					from Java&rsquo;s classpath. And if that is not enough you can come up with your own schemes. Also a URI can not only point to a resource but also to any 
 					<span class="emphasis"><em>EObject</em></span> in a resource.
 					This is done by appending a so called 
 					<span class="emphasis"><em>URI fragment</em></span> to the URI. 
@@ -1627,8 +1631,8 @@ assertEquals("DomainModel",&nbsp;parserRule.getName());<br>
 </div>
 </div>
 </div>
-<p>Let&rsquo;s summarize what we have learned. An Xtext model is loaded by an EMF Resource. The main model is represented as an instance of so called 
-					<span class="emphasis"><em>EClasses</em></span>, which are themselves
+<p>Let&rsquo;s summarize what we have learned: An Xtext model is loaded by an EMF Resource. The main model is represented as an instance of so called 
+					<span class="emphasis"><em>EClasses</em></span> which are themselves
 					declared within Ecore models. A 
 					<span class="emphasis"><em>parse tree</em></span> is created as well, which effectively acts as a tracing model between the text, the 
 					<span class="emphasis"><em>AST</em></span> and the grammar. The following
@@ -1654,7 +1658,7 @@ assertEquals("DomainModel",&nbsp;parserRule.getName());<br>
 </div>
 </div>
 <p>In the previous section we&rsquo;ve seen how to process Xtext files in general (e.g. with Java). 
-				If you need late binding loading models dynamically and interpreting them is a good idea. 
+				If you need late binding, loading models dynamically and interpreting them is a good idea. 
 				If you do not need late binding, code generation is a viable option which is widely used to make models executable. </p>
 <p>You could of course use Java to do the code generation, but unfortunately Java doesn&rsquo;t support this task very well.
 				Therefore we use a language specialized on code generation: M2T Xpand.</p>
@@ -1669,10 +1673,10 @@ assertEquals("DomainModel",&nbsp;parserRule.getName());<br>
 </div>
 <p>Xpand is also part of Eclipse and ships with its own documentation, so we don&rsquo;t need to explain all the details here, but
 					rather want to point you to the existing documentation. Instead this chapter is about providing some information about how to
-					 use Xtext and Xpand together. </p>
+					use Xtext and Xpand together. </p>
 <p>The other technology we are going to use here is the 
-					<a class="link" href="#MWE2" title="Chapter&nbsp;6.&nbsp;MWE2">Modeling Workflow Engine 2</a>. It is used to describe the generation workflow.
-					That is how and which models should be loaded, how they should be validated post-processed and where and how code generation should take place.
+					<a class="link" href="#MWE2" title="Chapter&nbsp;6.&nbsp;MWE2">Modeling Workflow Engine 2</a>. It is used to describe the generation workflow,
+					that is how and which models should be loaded, how they should be validated post-processed and where and how code generation should take place.
 				</p>
 <p>This section is based on the 
 					<a class="link" href="#getting-started-xtext" title="Creating a DSL">Getting Started</a> section and uses the code generator project which is created by Xtext&rsquo;s project wizard.
@@ -1687,9 +1691,11 @@ assertEquals("DomainModel",&nbsp;parserRule.getName());<br>
 </div>
 </div>
 </div>
-<p>Previously when we created the projects to develop the domain model language, we had checked the option &ldquo;create generator project&rdquo; in the wizard, which as 
+<p>Previously when we created the projects to develop the domain model language, we had checked the option 
+					<span class="emphasis"><em>Create a generator project</em></span> in the wizard, which as 
 					a result created a third project for us in the workspace. If you&rsquo;ve followed along you should have a project called 
-					&lsquo;org.eclipse.xtext.example.domainmodel.generator&rsquo; in your workspace. It should look like shown in the following screenshot:</p>
+					&lsquo;org.eclipse.xtext.example.domainmodel.generator&rsquo; in your workspace. It should look like shown in the following screenshot:
+				</p>
 <p>
 					
 </p>
@@ -1711,7 +1717,7 @@ assertEquals("DomainModel",&nbsp;parserRule.getName());<br>
 <p>The four files shown in the image above are very simple stubs generated for the &lsquo;Hello World&rsquo;-language the wizard creates as a starting point. 
 					We&rsquo;ll have to adapt them to match the domain model language we have developed in the 
 					<a class="link" href="#getting-started-xtext" title="Creating a DSL">getting started section</a>. The first 
-					thing we should do is open up the example model file (1) and replce its contents with an instance of the domain model language. To do so 
+					thing we should do is open up the example model file (1) and replace its contents with an instance of the domain model language. To do so 
 					copy and paste the following into the editor:
 				</p>
 <div class="literallayout">
@@ -1764,7 +1770,7 @@ package&nbsp;my.entities&nbsp;{<br>
 </div>
 </div>
 </div>
-<p>As mentioned MWE2 is used to define and configure the generator process. Actually it is much more general and can be useful for a lot of other things as well.
+<p>As mentioned MWE2 is used to define and configure the generation process. Actually, it is much more general and can be useful for a lot of other things as well.
 					Let&rsquo;s have a look at the MWE2 file as generated by the wizard:</p>
 <div class="literallayout">
 <p>
@@ -1815,49 +1821,60 @@ Workflow&nbsp;{<br>
 </p>
 </div>
 <p>The first line just declares a name for this workflow file. Any qualified Java identifier is allowed, but it should 
-					match the file name of the MWE2 file (and in future versions we might make this mandatory). After that you see an import statement.
-					MWE2 references java classes and to make that convenient, you can specify imports after the module declaration. Next up we 
-					see a couple of vars are declared. Such vars can be overridden when invoking a workflow file. </p>
+					match the file name of the MWE2 file (and in future versions we might make this mandatory). It is followed by an 
+					<span class="emphasis"><em>import</em></span> statement.
+					MWE2 references Java classes and to make that convenient, you can specify imports after the module declaration. Next up we 
+					see a couple of 
+					<span class="emphasis"><em>vars</em></span> are declared. Such 
+					<span class="emphasis"><em>vars</em></span> can be overridden when invoking a workflow file. 
+				</p>
 <p>The important part is the 
 					<span class="emphasis"><em>Workflow</em></span> part. There we declare an instance of 
-					<span class="emphasis"><em>org.eclipse.emf.mwe.utils.Workflow</em></span> and add two instances to the 'component'
+					<span class="emphasis"><em>org.eclipse.emf.mwe.utils.Workflow</em></span> and add two instances to the 
+					<span class="emphasis"><em>component</em></span>
 					property. The first one is a 
 					<span class="emphasis"><em>Reader</em></span> which is used to initialize Xtext languages, read in Xtext files, and fetch specific elements from those models in order to
-					make them available to following workflow components (such as the declared Generator). 
+					make them available to following workflow components (such as the declared 
+					<span class="emphasis"><em>Generator</em></span>). 
 				</p>
-<p>Xtext language initialization is node by specifying any number of IStandaloneSetup implementations. In our case the generated DomainModelStandaloneSetup is
-					registered, which makes sure that the infrastructure of your domain model language is set up properly. IF you have multiple languages just add additional assignments for
-					each language.</p>
+<p>Xtext language initialization is done by specifying any number of 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java?root=Modeling_Project&view=co" target="_new">ISetup</a> implementations. In our case the generated 
+					<span class="emphasis"><em>DomainModelStandaloneSetup</em></span> is
+					registered, which makes sure that the infrastructure of your domain model language is set up properly. If you have multiple languages just add additional assignments for each language.
+				</p>
 <p>You have to tell the 
-					<span class="emphasis"><em>Reader</em></span> which pathes to scan for model files. In this particular case we just specified one path. Another convenient option is to
-					reuse the Java Classpath, as suggested in the comments.
+					<span class="emphasis"><em>Reader</em></span> which paths to scan for model files. In this particular case we just specified one path. Another convenient option is to reuse the Java classpath, as suggested in the comments.
 				</p>
 <p>The 
 					<span class="emphasis"><em>load</em></span> section specifies which elements to fetch from the loaded resources. In this case we state that we want all elements of type 
 					<span class="emphasis"><em>Greeting</em></span>.
-					Note that this is completely file agnostic, it will provide you with all elements from all files the Reader could find on the specified pathes.
+					Note that this is completely file agnostic, it will provide you with all elements from all files the 
+					<span class="emphasis"><em>Reader</em></span> could find on the specified paths.
 					The slot name is the name by which other workflow components can access the stored elements.
 				</p>
 <p>The second workflow component is an instance of 
 					<span class="emphasis"><em>org.eclipse.xpand2.Generator</em></span>, which is the MWE2 facade to the Xpand template language. 
-					The Xpand generator needs to know which template to invoke for which models. Qualified names in Xpand are separated by a double colon &lsquo;::&rsquo;. That
-					is the name &lsquo;templates::Template::main&rsquo; points to the definition 
+					The Xpand generator needs to know which template to invoke for which models. Qualified names in Xpand are separated by a double colon 
+					<span class="emphasis"><em>'::'</em></span>. That
+					is the name 
+					<span class="emphasis"><em>'templates::Template::main'</em></span> points to the definition 
 					<span class="emphasis"><em>main</em></span> in the file 
-					<span class="emphasis"><em>templates/Template.xpt</em></span> on the java class path. The second part
+					<span class="emphasis"><em>templates/Template.xpt</em></span> on the Java classpath. The second part
 
 					<span class="emphasis"><em>FOREACH greetings</em></span> references the 
 					<span class="emphasis"><em>greetings</em></span> slot which has previously been populated by the reader component.
 				</p>
-<p>An outlet describes where to put the generated sources. In Xpand there is a file-statement which refers to outlets. If you only have one outlet 
-					you don&rsquo;t have to give it a name, but you need to tell where on teh file system the root folder for that outlet is. I.e. you specifiy where the generated code should go.
+<p>An 
+					<span class="emphasis"><em>Outlet</em></span> describes where to put the generated sources. In Xpand there is a file-statement which refers to outlets. If you only have one outlet 
+					you don&rsquo;t have to give it a name, but you need to declare where the root folder for that outlet can be found in the file system. I.e. you specifiy where the generated code should go.
 					Oulets allow you to specify a couple of other things as well. As MWE2 just instantiates Java objects, you can go to the Java code of 
 					<span class="emphasis"><em>org.eclipse.xpand2.output.Outlet</em></span>
 					 in order to find out (see the adder and setter methods). 
 					about the different options.
 				</p>
-<p>Now that we understood the most important things in that file we have to adapt it to match our domain model language. We only have to change the type
-					which is used to fetch and filter the elements in the load section. We want to generate code for entities, therefore we change it to Entity. We also should change the slot&rsquo;s 
-					name of course:</p>
+<p>Now that we understood the most important things in the workflow we have to adapt it to match our domain model language. We only have to change the type
+					which is used to fetch and filter the elements in the load section. We want to generate code for entities, therefore we change it to Entity. We should change the slot&rsquo;s 
+					name, too:</p>
 <div class="literallayout">
 <p>
 <code class="code">module&nbsp;workflow.DomainmodelGenerator<br>
@@ -1916,8 +1933,11 @@ Workflow&nbsp;{<br>
 </div>
 </div>
 </div>
-<p>The MWE2 file invokes an Xpand definition called &lsquo;main&rsquo; located in &lsquo;templates/Template.xpt&rsquo;. 
-					Please open that file and replace its contents with the following text:</p>
+<p>The MWE2 file invokes an Xpand definition called 
+					<span class="emphasis"><em>main</em></span> located in 
+					<span class="emphasis"><em>templates/Template.xpt</em></span>. 
+					Please open that file and replace its contents with the following Xpand code:
+				</p>
 <div class="literallayout">
 <p>
 <code class="code">&laquo;IMPORT&nbsp;org::eclipse::xtext::example::domainmodel&raquo;<br>
@@ -1955,7 +1975,7 @@ public&nbsp;class&nbsp;&laquo;name&raquo;&nbsp;{<br>
 </div>
 <p>You might get a couple of error markers, because the Xpand file references another file (
 					<span class="emphasis"><em>Extensions.ext</em></span> (4)) which has not yet been updated. 
-					Let&rsquo;s ignore this for a moment and have a lok at the general structure of an Xpand template file. In the first line we import the namespace (i.e. Java package)
+					Let&rsquo;s ignore this for a moment and have a look at the general structure of an Xpand template file. In the first line we import the namespace (i.e. Java package)
 					of the generated AST classes, that is Entity and Feature, we want to refer to in the generator. Next up the previously mentioned Xtend file is imported. An Xtend file defines 
 					functions which can be used in Xpand. 
 				</p>
@@ -1981,7 +2001,7 @@ public&nbsp;class&nbsp;&laquo;name&raquo;&nbsp;{<br>
 					<span class="emphasis"><em>qualifiedName()</em></span> of the given 
 					<span class="emphasis"><em>Entity</em></span>. 
 					The function 
-					<span class="emphasis"><em>qualifiedName()</em></span> should be declared in the referenced Xtend file (4). To do so open that file and replcae its
+					<span class="emphasis"><em>qualifiedName()</em></span> should be declared in the referenced Xtend file (4). To do so open that file and replace its
 					current contents by the following snippet:
 				</p>
 <div class="literallayout">
@@ -2014,16 +2034,20 @@ String&nbsp;qualifiedName(PackageDeclaration&nbsp;this)&nbsp;:<br>
 </p>
 </div>
 <p>It defines the 
-					<span class="emphasis"><em>qualifiedName</em></span> function not only for 
+					<span class="emphasis"><em>qualifiedName()</em></span> function not only for 
 					<span class="emphasis"><em>Entity</em></span> but also generally for types. Note how it computes the qualified name by calling
-					qualifiedName() recursively on its eContainer(). Both Xpand and Xtend are based on the same expression language, which is statically typed and 
+
+					<span class="emphasis"><em>qualifiedName()</em></span> recursively on its 
+					<span class="emphasis"><em>eContainer()</em></span>. Both Xpand and Xtend are based on the same expression language, which is statically typed and 
 					allows for very convenient navigation over object graphs and collections.
 				</p>
-<p>Back to the Xpand file (3) we see some static text which goes directly into the opened file. The EXPAND statement calls the other definition defined in this file.
-					It will effectively generate a java field and two accessor-methods for each 
+<p>Back to the Xpand file (3) we see some static text which goes directly into the opened file. The 
+					<span class="emphasis"><em>EXPAND</em></span> statement calls the other definition defined in this file.
+					It will effectively generate a Java field and two accessor-methods for each 
 					<span class="emphasis"><em>Feature</em></span>. 
 				</p>
-<p>You&rsquo;ll now able able to run the generator by opening the context menu on the *.mwe2 file (2) and choose 
+<p>You&rsquo;ll now able able to run the generator by opening the context menu on the 
+					<span class="emphasis"><em>*.mwe2</em></span> file (2) and choose 
 					<span class="emphasis"><em>Run As-&gt;MWE2 Workflow</em></span>.
 					For more information on Xpand and Xtend see the corresponding language documentation (available through Eclipse Help). MWE2 is explained in detail 
 					in 
@@ -2188,13 +2212,13 @@ Transition&nbsp;:<br>
 </code>
 </p>
 </div>
-<p>declares the name of the grammar. Xtext leverages Java&rsquo;s class path mechanism. This means that the name 
+<p>declares the name of the grammar. Xtext leverages Java&rsquo;s classpath mechanism. This means that the name 
 					can be any valid Java qualifier. The file name needs to correspond to the grammar name and have the file 
 					extension '
 					<span class="emphasis"><em>.xtext</em></span>'. This means that the name has to be 
 					<span class="emphasis"><em>SecretCompartments.xtext</em></span> and must be placed 
 					in a package 
-					<span class="emphasis"><em>my.pack</em></span> somewhere on your project&rsquo;s class path.
+					<span class="emphasis"><em>my.pack</em></span> somewhere on your project&rsquo;s classpath.
 				</p>
 <p>The first line is also used to declare any used language (for mechanism details see 
 					<a class="link" href="#grammarMixins" title="Grammar Mixins">Grammar Mixins</a>).
@@ -2214,7 +2238,7 @@ Transition&nbsp;:<br>
 					<span class="emphasis"><em>EPackage</em></span> containing 
 					<span class="emphasis"><em>EClasses</em></span>, 
 
-					<span class="emphasis"><em>EDatatypes</em></span> and 
+					<span class="emphasis"><em>EDataTypes</em></span> and 
 					<span class="emphasis"><em>EEnums</em></span> (See the 
 					<a class="link" href="#model_metamodel" title="Model, Ecore Model, and Ecore">section on EMF</a> for more details).
 					Xtext can infer Ecore models from a grammar (see 
@@ -3602,7 +3626,7 @@ Fullname:&nbsp;<br>
 <p>All 
 					<span class="emphasis"><em>EClasses</em></span>, 
 					<span class="emphasis"><em>EEnums</em></span>, and 
-					<span class="emphasis"><em>EDatatypes</em></span> are added to the 
+					<span class="emphasis"><em>EDataTypes</em></span> are added to the 
 					<span class="emphasis"><em>EPackage</em></span> referred to by the alias provided in the type reference they were created from.
 				</p>
 </div>
@@ -4084,7 +4108,7 @@ public&nbsp;class&nbsp;CreatePersons&nbsp;{<br>
 <p> 
 				
 </p>
-<p>The root element is a class-name following the Java class-path visibility rules. As the module is a sibling to the class
+<p>The root element is a class-name following the Java classpath visibility rules. As the module is a sibling to the class
 
 					<span class="emphasis"><em>com.mycompany.Person</em></span> it is not necessary to use use fully qualified name. There are other packages implicitly imported
 					into this workflow as well to make it convenient to instantiate actual workflows and components, but these ones are covered 
@@ -4299,7 +4323,7 @@ Workflow&nbsp;{<br>
 </div>
 </div>
 <p>In the following table the most important standard generator fragments are listed. Please refer to the Javadocs for more detailed documentation.</p>
-<table id="N10C68">
+<table id="N10CA2">
 <tr>
 						
 <th>Class</th>
@@ -4363,7 +4387,7 @@ Workflow&nbsp;{<br>
 						</td>
 						<td>Index-based scoping</td>
 						<td>
-							<a class="link" href="#index_based" title="Global Scopes based on external configuration (e.g. class path-based)">Index-based namespace scoping</a>
+							<a class="link" href="#index_based" title="Global Scopes based on external configuration (e.g. classpath-based)">Index-based namespace scoping</a>
 						</td>
 					
 </tr>
@@ -4765,7 +4789,7 @@ Workflow&nbsp;{<br>
 &nbsp;&nbsp;point="org.eclipse.ui.editors"&gt;<br>
 &nbsp;&nbsp;&lt;editor<br>
 &nbsp;&nbsp;&nbsp;&nbsp;class="&lt;MyLanguageName&gt;ExecutableExtensionFactory:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.ui.core.editor.XtextEditor"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.ui.editor.XtextEditor"<br>
 &nbsp;&nbsp;&nbsp;&nbsp;contributorClass=<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"org.eclipse.ui.editors.text.TextEditorActionContributor"<br>
 &nbsp;&nbsp;&nbsp;&nbsp;default="true"<br>
@@ -4791,9 +4815,9 @@ Workflow&nbsp;{<br>
 </div>
 </div>
 <p>Xtext uses Apache&rsquo;s log4j for logging. It is configured using the so called 
-				<span class="emphasis"><em>log4j.properties</em></span>, which is looked up in the root of the Java class path. If you want to change or provide configuration at runtime (i.e. non-OSGI), all you have to do is putting such a 
+				<span class="emphasis"><em>log4j.properties</em></span>, which is looked up in the root of the Java classpath. If you want to change or provide configuration at runtime (i.e. non-OSGI), all you have to do is putting such a 
 				<span class="emphasis"><em>log4j.properties</em></span> in place and make sure that it is not overridden by other 
-				<span class="emphasis"><em>log4j.properties</em></span> in previous class path entries.
+				<span class="emphasis"><em>log4j.properties</em></span> in previous classpath entries.
 			</p>
 <p>In OSGi you provide configuration by creating a fragment for 
 				<span class="emphasis"><em>org.apache.log4j</em></span>. In this case you need to make sure that there&rsquo;s no second fragment contributing a 
@@ -5777,18 +5801,18 @@ Import&nbsp;:&nbsp;<br>
 						<span class="emphasis"><em>importURI</em></span> features.
 					</p>
 </div>
-<div class="section" title="Global Scopes based on external configuration (e.g. class path-based)">
+<div class="section" title="Global Scopes based on external configuration (e.g. classpath-based)">
 <div class="titlepage">
 <div>
 <div>
 <h4 class="title">
-<a name="index_based"></a>Global Scopes based on external configuration (e.g. class path-based)</h4>
+<a name="index_based"></a>Global Scopes based on external configuration (e.g. classpath-based)</h4>
 </div>
 </div>
 </div>
 <p>Instead of explicitly referring to imported resources, the other possibility is to have some kind of 
 						external configuration in order to define what is visible from outside a resource. Java for instances 
-						uses the notion of class paths to define containers (jars and class folders) which contain any 
+						uses the notion of classpaths to define containers (jars and class folders) which contain any 
 						referenceable elements. In the case of Java also the order of such entries is important. </p>
 <p>Since version 1.0.0 Xtext provides support for this kind of global scoping. To enable it, a 
 
@@ -5798,8 +5822,8 @@ Import&nbsp;:&nbsp;<br>
 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ignorecase/IgnoreCaseDefaultGlobalScopeProvider.java?root=Modeling_Project&view=co" target="_new">IgnoreCaseDefaultGlobalScopeProvider</a>.
 					</p>
-<p>By default Xtext leverages the class path mechanism since it is well designed and already understood 
-						by most of our users. The available tooling provided by JDT and PDE to configure the class path adds 
+<p>By default Xtext leverages the classpath mechanism since it is well designed and already understood 
+						by most of our users. The available tooling provided by JDT and PDE to configure the classpath adds 
 						even more value. However, it is just a default: You can reuse the infrastructure without using Java 
 						and independent from the JDT.</p>
 <p>In order to know what is available in the &ldquo;world&rdquo; a global scope provider which relies on external 
@@ -5840,11 +5864,11 @@ Import&nbsp;:&nbsp;<br>
 						</p>
 <p>The index is basically a flat list of instances of 
 							<span class="emphasis"><em>IResourceDescription</em></span>. The index itself doesn&rsquo;t 
-							know about visibility constraints due to class path restriction. Rather than that, they are defined by 
+							know about visibility constraints due to classpath restriction. Rather than that, they are defined by 
 							the referencing language by means of so called 
 							<span class="emphasis"><em>IContainers</em></span>: While Java might load a resource 
 							via 
-							<span class="emphasis"><em>ClassLoader.loadResource()</em></span> (i.e. using the class path mechanism), another language could load 
+							<span class="emphasis"><em>ClassLoader.loadResource()</em></span> (i.e. using the classpath mechanism), another language could load 
 							the same resource using the file system paths. 
 						</p>
 <p>Consequently, the information which container a resource belongs to depends on the referencing 
@@ -5902,7 +5926,7 @@ public&nbsp;void&nbsp;listVisibleResources(<br>
 							keeps track of the set of available containers and their visibility relationships.  
 						</p>
 <p>Xtext offers a couple of strategies for managing containers: If you&rsquo;re running an Eclipse workbench, 
-							you can define containers based on Java projects and their class paths or based on plain Eclipse projects. 
+							you can define containers based on Java projects and their classpaths or based on plain Eclipse projects. 
 							Outside Eclipse, you can provide a set of file system paths to be scanned for models. All of these only 
 							differ in the bound instance of 
 							<span class="emphasis"><em>IAllContainerState</em></span> of the referring language. These will be described 
@@ -5941,14 +5965,14 @@ public&nbsp;void&nbsp;listVisibleResources(<br>
 <p>a referenced jar, </p>
 </li>
 <li class="listitem">
-<p>a class path entry of a referenced Java project, or</p>
+<p>a classpath entry of a referenced Java project, or</p>
 </li>
 <li class="listitem">
 <p>the exported packages of a required PDE plug-in.</p>
 </li>
 </ul>
 </div>
-<p>So for an element to be referable, its resource must be on the class path of the caller&rsquo;s Java project 
+<p>So for an element to be referable, its resource must be on the classpath of the caller&rsquo;s Java project 
 							and it must be exported (as described above). </p>
 <p>As this strategy allows to reuse a lot of nice Java things like jars, OSGi, maven, etc. it is part of 
 							the default: You should not have to reconfigure anything to make it work. Nevertheless, if you messed 
@@ -5980,7 +6004,7 @@ public&nbsp;void&nbsp;listVisibleResources(<br>
 <p>in the UI module of the referencing language. The latter looks a bit more difficult than a common 
 							binding, as we have to bind a global singleton to a Guice provider. The 
 							<span class="emphasis"><em>StrictJavaProjectsState</em></span> 
-							requires all elements to be on the class path, while the default 
+							requires all elements to be on the classpath, while the default 
 							<span class="emphasis"><em>JavaProjectsState</em></span> also allows models 
 							in non-source folders. 
 						</p>
@@ -5994,7 +6018,7 @@ public&nbsp;void&nbsp;listVisibleResources(<br>
 </div>
 </div>
 </div>
-<p>If the class path based mechanism doesn&rsquo;t work for your case, Xtext offers an alternative container 
+<p>If the classpath based mechanism doesn&rsquo;t work for your case, Xtext offers an alternative container 
 							manager based on plain Eclipse projects: Each project acts as a container and the project references 
 
 							<span class="emphasis"><em>Properties-&gt;Project References</em></span> are the visible containers. 
@@ -6046,7 +6070,7 @@ public&nbsp;void&nbsp;listVisibleResources(<br>
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mwe/Reader.java?root=Modeling_Project&view=co" target="_new">Reader</a>. This is responsible 
 							for reading in models in a workflow, e.g. for later code generation. The 
 							<span class="emphasis"><em>Reader</em></span> allows to either scan 
-							the whole class path or a set of paths for all models therein. When paths are given, each path entry 
+							the whole classpath or a set of paths for all models therein. When paths are given, each path entry 
 							becomes an 
 							<span class="emphasis"><em>IContainer</em></span> of its own. In the following snippet,
 						</p>
@@ -6124,7 +6148,7 @@ public&nbsp;class&nbsp;ScopeExample&nbsp;{&nbsp;//&nbsp;class&nbsp;body&nbsp;sco
 </code>
 </p>
 </div>
-<p>In fact the class path scope should also reflect the order of class path entries.
+<p>In fact the classpath scope should also reflect the order of classpath entries.
 					For instance:</p>
 <div class="literallayout">
 <p>
@@ -6415,7 +6439,8 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IValueConverterService&gt;&nbsp;bindIVa
 
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/impl/AbstractDeclarativeValueConverterService.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeValueConverterService</a>, 
 					which allows to declaratively register an 
-					<span class="emphasis"><em>IValueConverter</em></span> by means of an annotated method. 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverter.java?root=Modeling_Project&view=co" target="_new">IValueConverter</a>
+					by means of an annotated method. 
 				</p>
 <p>If you use the common terminals grammar 
 					<span class="emphasis"><em>org.eclipse.xtext.common.Terminals</em></span> you should subclass 
@@ -6424,7 +6449,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IValueConverterService&gt;&nbsp;bindIVa
 					add additional value converters by adding the respective methods. In addition to the explicitly 
 					defined converters in the default implementation, a delegating converter is registered for each 
 					available 
-					<span class="emphasis"><em>EDataType</em></span> that reuses the functionality of the corresponding 
+					<span class="emphasis"><em>EDataType</em></span> that reuses the functionality of the corresponding EMF 
 					<span class="emphasis"><em>EFactory</em></span>.
 				</p>
 <p>The protocol of an 
@@ -6435,7 +6460,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IValueConverterService&gt;&nbsp;bindIVa
 					<span class="emphasis"><em>ConcreteSyntaxValidator</em></span> if the value cannot be converted to a valid string. The 
 
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/impl/AbstractLexerBasedConverter.java?root=Modeling_Project&view=co" target="_new">AbstractLexerBasedConverter</a> is useful when 
-					implementing an own value converter. If the converter needs to know about the rule that it currently 
+					implementing a custom value converter. If the converter needs to know about the rule that it currently 
 					works with, it may implement the interface 
 					<span class="emphasis"><em>IValueConverter.RuleSpecific</em></span>. The framework will set the
 					rule such as the implementation may use it afterwards.
@@ -7330,8 +7355,8 @@ name&nbsp;as&nbsp;entities.&nbsp;<br>
 			</p>
 <p>Unfortunately, each platform and/or spoken language tends to define its own native encoding, 
 				e.g. 
-				<code class="code">Cp1258</code> on Windows in Vietnamese or 
-				<code class="code">MacIceland</code> on Mac OS X in Icelandic. 
+				<span class="emphasis"><em>Cp1258</em></span> on Windows in Vietnamese or 
+				<span class="emphasis"><em>MacIceland</em></span> on Mac OS X in Icelandic. 
 			</p>
 <p>In an Eclipse workspace, files, folders, projects can have individual encodings, which are stored
 				in the hidden file 
@@ -7349,7 +7374,7 @@ name&nbsp;as&nbsp;entities.&nbsp;<br>
 				is lost, too. Some languages define the encoding of a file explicitly, as in the first processing 
 				instruction of an XML file. Most languages don&rsquo;t. Others imply a fixed encoding or offer enhanced 
 				syntax for character literals, e.g. 
-				<code class="code">\uXXXX</code> in Java. 
+				<span class="emphasis"><em>\uXXXX</em></span> in Java. 
 			</p>
 <p>As Xtext is about textual modeling, it allows to tweak the encoding in various places.</p>
 <div class="section" title="Encoding at Language Design Time">
@@ -7395,7 +7420,7 @@ name&nbsp;as&nbsp;entities.&nbsp;<br>
 					The 
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java?root=Modeling_Project&view=co" target="_new">IEncodingProvider</a> has a single method 
 
-					<code class="code">getEncoding(URI)</code> to define the encoding of the resource with the given URI. Users can implement 
+					<span class="emphasis"><em>getEncoding(URI)</em></span> to define the encoding of the resource with the given URI. Users can implement 
 					their own strategy but keep in mind that this is not intended to be a long running method. If the 
 					encoding is stored within the model file itself, it should be extractable in an easy way, like from 
 					the first line in an XML file. The default implementation returns the default Java character set 
@@ -7404,7 +7429,7 @@ name&nbsp;as&nbsp;entities.&nbsp;<br>
 <p>In the UI scenario, when there is a workspace, users will expect the encoding of the model files 
 					to be settable the same way as for other files in the workspace. The default implementation 
 					of the 
-					<code class="code">IEncodingProvider</code> in the UI scenario therefore returns the file&rsquo;s workspace encoding 
+					<span class="emphasis"><em>IEncodingProvider</em></span> in the UI scenario therefore returns the file&rsquo;s workspace encoding 
 					for files in the workspace and delegates to the runtime implementation for all other resources, 
 					e.g. models in a jar or from a deployed plug-in. Keep in mind that you are going to loose the 
 					workspace encoding information as soon as you leave this workspace, e.g. deploy your project.
@@ -7412,8 +7437,8 @@ name&nbsp;as&nbsp;entities.&nbsp;<br>
 <p>Unless you want to enforce a uniform encoding for all models of your language, we advise to 
 					override the runtime service only. It is bound in the runtime module using the binding annotation 
 
-					<code class="code">Runtime</code>. For the uniform encoding, bind the plain 
-					<code class="code">IEncodingProvider</code> to the same implementation 
+					<span class="emphasis"><em>@Runtime</em></span>. For the uniform encoding, bind the plain 
+					<span class="emphasis"><em>IEncodingProvider</em></span> to the same implementation 
 					in both modules.
 				</p>
 </div>
@@ -7428,7 +7453,7 @@ name&nbsp;as&nbsp;entities.&nbsp;<br>
 </div>
 <p>An 
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&view=co" target="_new">XtextResource</a> uses the 
-					<code class="code">IEncodingProvider</code> 
+					<span class="emphasis"><em>IEncodingProvider</em></span> 
 					of your language by default. You can override that by passing an option on load and save, e.g.
 				</p>
 <div class="literallayout">
@@ -7494,8 +7519,8 @@ myXtextResource.save(options);<br>
 			values and references. One use case &ndash; that&rsquo;s where the name had its 
 			origins &ndash; is the definition of workflows. Such a workflow consists 
 			usually of a number of components that interact with each other. 
-			There are components available, that read EMF resources, perform 
-			operations (transformations) on them and write them back or generate 
+			There are components to read EMF resources, to perform 
+			operations (transformations) on them and to write them back or to generate 
 			any number of other artifacts out of the information. Workflows are 
 			typically executed in a single JVM. However there are no constraints 
 			the prevent implementors to provide components that spawn multiple 
@@ -7513,7 +7538,7 @@ myXtextResource.save(options);<br>
 				scenarios for MWE2. The first examples is a simple 
 				<span class="emphasis"><em>HelloWorld</em></span> 
 				module that does nothing but print a message to standard out. The 
-				second module is assembled of three components that read an ecore 
+				second module is assembled of three components that read an Ecore 
 				file, transform the contained classifier-names to upper-case and 
 				serialize the resource back to a new file. The last examples uses 
 				the life-cycle methods to print the execution time of the workflow.
@@ -7551,7 +7576,7 @@ SayHello&nbsp;{<br>
 					package of a Java source folder. The second element in the module is 
 					the class-name 
 					<span class="emphasis"><em>SayHello</em></span> which introduces the root element of the 
-					module. The interpreter will create an instance of the referenced 
+					module. The interpreter will create an instance of the given 
 					type and configure it as declared between the curly braces. E.g. the 
 					assignment 
 					<span class="emphasis"><em>message = "Hello World!"</em></span> in the module will be 
@@ -7778,9 +7803,9 @@ Workflow&nbsp;{<br>
 </code>
 </p>
 </div>
-<p>Each of the mentioned implementation is rather simple and can be done in a couple of minutes. 
+<p>Each of the mentioned implementations is rather simple and can be done in a couple of minutes. 
 					This is true for many tedious tasks that developers face in their daily work. MWE2 can be used to
-					minimize the effort for them to a minimum by means of automati</p>
+					automize these tasks with minimum effort.</p>
 </div>
 <div class="section" title="A Stop-watch">
 <div class="titlepage">
@@ -7791,7 +7816,7 @@ Workflow&nbsp;{<br>
 </div>
 </div>
 </div>
-<p>The last example demonstrates, how to combine the MWE2 concepts to create a simple stopwatch that
+<p>The last example demonstrates how to combine the MWE2 concepts to create a simple stopwatch that
 					allows to measure the execution time of a set of components. The idea is to add the very same stopwatch
 					twice as a component to a workflow. It will measure the time from the first pre-invoke to the last
 					post-invoke event and print the elapsed milliseconds to the console.</p>
@@ -7958,7 +7983,7 @@ public&nbsp;class&nbsp;SampleClass&nbsp;{<br>
 					<span class="emphasis"><em>add*</em></span> as well. 
 				</p>
 <p>If the right side of the assignment in the workflow file does not 
-					define an explicit class, its type is inferred from the method 
+					define a class explicitly, its type is inferred from the method 
 					parameter. The line 
 					<span class="emphasis"><em>child = {}</em></span> is equivalent to 
 
@@ -8178,8 +8203,8 @@ var&nbsp;newMandatory<br>
 </div>
 </div>
 <p>Properties are not the only way to define something that can be reused.
-					It is possible to assign a name to any instantiated component being
-					it created from a class literal or from another component. This allows
+					It is possible to assign a name to any instantiated component whether it&rsquo;s
+					created from a class literal or from another component. This allows
 					to refer to previously created and configured instances. Named instances
 					can come handy for notification and call-back mechanisms or more general
 					in terms of defined life-cycle events. </p>
@@ -8241,20 +8266,10 @@ SampleClass&nbsp;auto-inject&nbsp;{<br>
 					parameters each of which can be assigned to one or more components.
 				</p>
 <p>The 
-					<code class="code">auto-inject</code> modifier can be used for a subset of the available
+					<span class="emphasis"><em>auto-inject</em></span> modifier can be used for a subset of the available
 					features as well. It will suppressed for the explicitly set values
 					of a component.        
 				</p>
-</div>
-<div class="section" title="Factory Support">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-<a name="MWE2Factories"></a>Factory Support</h3>
-</div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" title="Syntax Reference">
@@ -8284,7 +8299,7 @@ SampleClass&nbsp;auto-inject&nbsp;{<br>
 <p>Every name in MWE2 can be a fully qualified identifier and must follow 
 				the Java conventions. However, in contrast to Java identifiers it is 
 				not allowed to use German umlauts or Unicode escape sequences in 
-				identifiers. A valid id-segment in MWE2 starts with a letter or an 
+				identifiers. A valid ID-segment in MWE2 starts with a letter or an 
 				underscore and is followed by any number of letters, numbers or underscores.
 				An identifier is composed from one or more segments which are delimited
 				by a &lsquo;.&rsquo; dot.</p>
@@ -8399,10 +8414,12 @@ ID:&nbsp;('a'..'z'|'A'..'Z'|'_')&nbsp;('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;&nbsp;<b
 					<span class="emphasis"><em>add</em></span>-method of a Java class.
 				</p>
 <p>Components can be named to make them referable in subsequent assignments.
-					Following the &lsquo;:&rsquo; keyword, one can define an identifier for the 
+					Following the 
+					<span class="emphasis"><em>':'</em></span> keyword, one can define an identifier for the 
 					instantiated component. The identifier is locally visible in the module
 					and any assignment that is defined after the named component can refer
-					to this identifier and thereby point to exactly the instantiated object.</p>
+					to this identifier and thereby point to exactly the instantiated object.
+				</p>
 <p>The next option for a component is 
 					<span class="emphasis"><em>auto-inject</em></span>. If this modifier
 					is set on a component, any available feature of the component that has
@@ -8595,7 +8612,7 @@ RuleB&nbsp;return&nbsp;gen::CustomType:<br>
 				<span class="emphasis"><em>icons/</em></span> folder of the containing plug-in. This path is actually 
 				configurable by Google Guice. Have a look at the 
 
-				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.core/src/org/eclipse/xtext/ui/core/PluginImageHelper.java?root=Modeling_Project&view=co" target="_new">PluginImageHelper</a> to learn about the 
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/PluginImageHelper.java?root=Modeling_Project&view=co" target="_new">PluginImageHelper</a> to learn about the 
 				customizing possibilities.
 			</p>
 <p>If you have the 
@@ -8734,7 +8751,7 @@ p.in&nbsp;your&nbsp;language's&nbsp;UI&nbsp;module.&nbsp;<br>
 </div>
 <p>Xtext maintains an index of all model elements to allow quick searching and linking without loading 
 					the referenced resource (See the chapter on 
-					<a class="link" href="#index_based" title="Global Scopes based on external configuration (e.g. class path-based)">index based scopes</a> for details). The 
+					<a class="link" href="#index_based" title="Global Scopes based on external configuration (e.g. classpath-based)">index based scopes</a> for details). The 
 					elements from this index also appear in some UI contexts, e.g. in the 
 					<span class="emphasis"><em>Find model elements</em></span> dialog or 
 					in the 
@@ -9056,7 +9073,7 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 				default templates, you have to put a file named 
 				<span class="emphasis"><em>templates.xml</em></span> inside the 
 				<span class="emphasis"><em>templates</em></span> directory of 
-				the generated ui-plugin. This file contains templates in a format as described in the 
+				the generated UI-plug-in. This file contains templates in a format as described in the 
 
 				<a class="ulink" href="http://help.eclipse.org/ganymede/topic/org.eclipse.cdt.doc.user/tasks/cdt_t_imp_code_temp.htm" target="_new">Eclipse online help</a> .
 			</p>
@@ -9069,7 +9086,7 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 			
 </p>
 <p>By default Xtext registers 
-				<span class="emphasis"><em>ContextTypes</em></span> for each Rule (
+				<span class="emphasis"><em>ContextTypes</em></span> for each rule (
 				<span class="emphasis"><em>.[RuleName]</em></span>) and for each 
 				keyword (
 				<span class="emphasis"><em>.kw</em></span>[keyword]_). If you don&rsquo;t 
@@ -9100,7 +9117,7 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 <p>It is best practice to edit the templates in the preferences page, export them into the 
 
 				<span class="emphasis"><em>templates.xml</em></span>-file and put this one into the 
-				<span class="emphasis"><em>templates</em></span> folder of your ui-plugin. However, these 
+				<span class="emphasis"><em>templates</em></span> folder of your UI-plug-in. However, these 
 				templates will not be visible by default. To fix it, you have to manually edit the xml-file and insert 
 				an ID attribute for each template element.
 			</p>
@@ -9122,7 +9139,7 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 <p>The syntax is as follows:</p>
 <div class="literallayout">
 <p>
-<code class="code">${displayText:CrossReference([MyPackageName.]MyType.myRef)}<br>
+<code class="code">${&lt;displayText&gt;:CrossReference([&lt;MyPackageName&gt;.]&lt;MyType&gt;.&lt;myRef&gt;)}<br>
 
 </code>
 </p>
@@ -9173,7 +9190,7 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 <p>The syntax is as follows:   </p>
 <div class="literallayout">
 <p>
-<code class="code">${displayText:Enum([MyPackage.]EnumType)<br>
+<code class="code">${&lt;displayText&gt;:Enum([&lt;MyPackage&gt;.]&lt;EnumType&gt;)<br>
 
 </code>
 </p>
@@ -9196,8 +9213,11 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 </div>
 <p>yields the text 
 					<span class="emphasis"><em>public op name(): type</em></span> where the display text &lsquo;public&rsquo; is replaced with a drop 
-					down filled with the literal values as defined in the Visibility 
-					<span class="emphasis"><em>EEnumeration</em></span>. Also, &lsquo;name&rsquo; and &lsquo;type&rsquo; 
+					down filled with the literal values as defined in the 
+					<span class="emphasis"><em>EEnum</em></span> 
+					<span class="emphasis"><em>Visibility</em></span>. Also, 
+					<span class="emphasis"><em>name</em></span> and 
+					<span class="emphasis"><em>type</em></span> 
 					are template variables.
 				</p>
 <p>
@@ -9582,7 +9602,7 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 <code class="code">&lt;extension<br>
 &nbsp;&nbsp;point="org.eclipse.ui.menus"&gt;<br>
 &nbsp;&nbsp;&lt;menuContribution<br>
-&nbsp;&nbsp;&nbsp;&nbsp;locationURI="popup:org.eclipse.xtext.ui.common.outline?after=additions"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;locationURI="popup:org.eclipse.xtext.ui.outline?after=additions"&gt;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;command<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commandId="org.example.mydsl.ui.editor.outline.SampleOutlineCommand"<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label="Sample&nbsp;action&nbsp;registered&nbsp;for&nbsp;Attributes"&gt;<br>
@@ -9607,6 +9627,22 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 					</p>
 </div>
 </div>
+<div class="section" title="Quick Outline">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="quick_outline"></a>Quick Outline</h3>
+</div>
+</div>
+</div>
+<p>Xtext also provides a quick outline: If you press CTRL-O in an Xtext editor, the outline of the model is shown 
+					in a popup window. The quick outline also supports drill-down search with wildcards. To enable the quick outline,
+					you have to put the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/QuickOutlineFragment.java?root=Modeling_Project&view=co" target="_new">QuickOutlineFragment</a> 
+					into your workflow.
+				</p>
+</div>
 </div>
 <div class="section" title="Hyperlinking">
 <div class="titlepage">
@@ -9618,7 +9654,7 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 </div>
 </div>
 <p>The Xtext editor provides hyperlinking support for any tokens corresponding to cross references in your 
-				grammar definition. This means that you can either control-click on any of these tokens or hit F3 
+				grammar definition. You can either CTRL-click on any of these tokens or hit F3 
 				while the cursor position is at the token in question and this will take you to the referenced model 
 				element. As you&rsquo;d expect this works for references to elements in the same resource as well as for 
 				references to elements in other resources. In the latter case the referenced resource will first be 
@@ -9632,7 +9668,7 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 </div>
 </div>
 </div>
-<p>When navigating a hyperlink Xtext will also select the text region corresponding to the referenced model 
+<p>When navigating a hyperlink, Xtext will also select the text region corresponding to the referenced model 
 					element. Determining this text region is the responsibility of the 
 
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java?root=Modeling_Project&view=co" target="_new">ILocationInFileProvider</a>. The default implementation 
@@ -9643,7 +9679,8 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 <div class="orderedlist">
 <ol class="orderedlist" type="1">
 <li class="listitem">
-<p>If the model element&rsquo;s type (i.e. EClass) declares a feature 
+<p>If the model element&rsquo;s type (i.e. 
+							<span class="emphasis"><em>EClass</em></span>) declares a feature 
 							<span class="emphasis"><em>name</em></span> then return the region of the corresponding token(s). As a fallback also check for a feature 
 							<span class="emphasis"><em>id</em></span>.
 						</p>
@@ -9670,7 +9707,7 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 <p>As the default strategy is a best effort it may not always result in the selection you want. If that&rsquo;s 
 						the case you can 
 						<a class="link" href="#guicemodules" title="Xtext&rsquo;s module API">override</a> the 
-						<code class="code">ILocationInFileProvider</code> binding in the UI module as 
+						<span class="emphasis"><em>ILocationInFileProvider</em></span> binding in the UI module as 
 						in the following example:
 					</p>
 <div class="literallayout">
@@ -9694,10 +9731,10 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 <p>Often the default strategy only needs some guidance (e.g. selecting the text corresponding to another 
 						feature than 
 						<span class="emphasis"><em>name</em></span>). In that case you can simply subclass 
-						<code class="code">DefaultLocationInFileProvider</code> and override 
+						<span class="emphasis"><em>DefaultLocationInFileProvider</em></span> and override 
 						the methods 
-						<code class="code">getIdentifierFeature</code> and / or 
-						<code class="code">useKeyword</code> to guide the first and last steps of the strategy 
+						<span class="emphasis"><em>getIdentifierFeature()</em></span> and / or 
+						<span class="emphasis"><em>useKeyword()</em></span> to guide the first and last steps of the strategy 
 						as described above (see 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.xtext.ui/src/org/eclipse/xtext/xtext/ui/XtextLocationInFileProvider.java?root=Modeling_Project&view=co" target="_new">XtextLocationInFileProvider</a> 
 						for an example).
@@ -9732,11 +9769,11 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 </div>
 </div>
 <p>Besides the already mentioned advanced features like content assist and code formatting the powerful 
-				editor for your DSL is capable to mark-up your model-code to improve the overall readability. It is 
+				editor for your DSL is capable to mark up your model-code to improve the overall readability. It is 
 				possible to use different colors and fonts according to the meaning of the different parts of your 
 				input file. One may want to use some decent colors for large blocks of comments while identifiers, 
 				keywords and strings should be colored differently to make it easier to distinguish between them. 
-				This kind of text decorating mark-up does not influence the semantics of the various sections but 
+				This kind of text decorating markup does not influence the semantics of the various sections but 
 				helps to understand the meaning and to find errors in the source code.</p>
 <p>
 				
@@ -9780,7 +9817,8 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 					implemented by clients directly.
 				</p>
 <p>The 
-					<code class="code">IHighlightingConfiguration</code> is used to register any default style without a specific binding to 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java?root=Modeling_Project&view=co" target="_new">IHighlightingConfiguration</a> is used
+					to register any default style without a specific binding to 
 					a pattern in the model file. It is used to populate the preferences page and to initialize the 
 
 					<span class="emphasis"><em>ITextAttributeProvider</em></span>, which in turn is the component that is used to obtain the actual settings 
@@ -9821,7 +9859,7 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 </p>
 </div>
 <p>Implementations of the 
-					<code class="code">ITokenScanner</code> are responsible for splitting the content of a document into 
+					<span class="emphasis"><em>ITokenScanner</em></span> are responsible for splitting the content of a document into 
 					various parts, the so called tokens, and return the highlighting information for each identified range. 
 					It is critical that this is done very fast because this component is used on each keystroke. Xtext 
 					ships with a default implementation that is based on the lexer that is generated by ANTLR which is very 
@@ -9860,7 +9898,7 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightedPositionAcceptor.java?root=Modeling_Project&view=co" target="_new">IHighlightedPositionAcceptor</a> to 
 					the calculator. It is ensured, that the resource will not be altered externally until the called method 
 
-					<code class="code">provideHighlightingFor</code> returns. However, the resource may be null. The implementor&rsquo;s task is to 
+					<span class="emphasis"><em>provideHighlightingFor()</em></span> returns. However, the resource may be null. The implementor&rsquo;s task is to 
 					navigate your semantic model and compute various ranges based on the attached node information and 
 					associate styles with them. This may read similar to the following snippet:
 				</p>
@@ -9887,10 +9925,10 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 </p>
 </div>
 <p>This example refers to an implementation of the 
-					<code class="code">IHighlightingConfiguration</code> that registers a style 
+					<span class="emphasis"><em>IHighlightingConfiguration</em></span> that registers a style 
 					for a cross reference. It is pretty much the same implementation as for the previously mentioned sample 
 					of a lexical 
-					<code class="code">IHighlightingConfiguration</code>.
+					<span class="emphasis"><em>IHighlightingConfiguration</em></span>.
 				</p>
 <div class="literallayout">
 <p>
@@ -9922,7 +9960,7 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 </p>
 </div>
 <p>The implementor of an 
-					<code class="code">IHighlightingCalculator</code> should be aware of performance to ensure a good user 
+					<span class="emphasis"><em>IHighlightingCalculator</em></span> should be aware of performance to ensure a good user 
 					experience. It is probably not a good idea to traverse everything of your model when you will only 
 					register a few highlighted ranges that can be found easier with some typed method calls. It is strongly 
 					advised to use purposeful ways to navigate your model. The parts of Xtext&rsquo;s core that are responsible 
@@ -9942,11 +9980,11 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;IssueReso
 </div>
 </div>
 </div>
-<p>Optionally Xtext can generate a 
+<p>Optionally, Xtext can generate a 
 				<span class="emphasis"><em>New Project Wizard</em></span> for your DSL. Using this wizard a user can create a new 
 				project with only a few clicks that is configured with the right dependencies and natures. By default 
 				it contains a sample model file and workflow that serve as a scaffold for the user. Furthermore it 
-				has the Xtext Nature and thereby the builder assigned. You enable the project wizard generation by adding the 
+				has the Xtext nature and thereby the builder assigned. You enable the generation of the project wizard by adding the 
 
 				<span class="emphasis"><em>SimpleProjectWizardFragment</em></span> fragment to the 
 				<a class="link" href="#generator_fragment" title="Generator Fragments">workflow</a>:
@@ -9983,11 +10021,11 @@ fragment&nbsp;=&nbsp;projectWizard.SimpleProjectWizardFragment&nbsp;{<br>
 </li>
 </ul>
 </div>
-<p>After running the Xtext generator the DSL&rsquo;s UI project will contain a new Xpand template 
+<p>After running the Xtext generator, the DSL&rsquo;s UI project will contain a new Xpand template 
 
 				<span class="emphasis"><em>MyDslNewProject.xpt</em></span> in the 
-				<code class="code">src</code> folder in the package 
-				<code class="code">&lt;base-package&gt;.ui.wizard</code>. 
+				<span class="emphasis"><em>src</em></span> folder in the package 
+				<span class="emphasis"><em>.ui.wizard</em></span>. 
 				Note: It may be necessary to manually merge the new entry in the _plugin.xml___gen_ into your 
 
 				<span class="emphasis"><em>plugin.xml</em></span> of the UI project to enable the wizard contribution.
@@ -9999,14 +10037,14 @@ fragment&nbsp;=&nbsp;projectWizard.SimpleProjectWizardFragment&nbsp;{<br>
 				model through the generator project&rsquo;s 
 				<span class="emphasis"><em>MyDslGenerator.mwe</em></span> workflow. However, this is only a pragmatic default.
 				As the Xpand template is in the 
-				<code class="code">src</code> source folder you may of course modify it to generate whatever 
+				<span class="emphasis"><em>src</em></span> source folder you may of course modify it to generate whatever 
 				initial content you want for a new project. Just make sure to leave the top-level 
-				<code class="code">main</code> definition 
+				<span class="emphasis"><em>main</em></span> definition 
 				in place, as that is the interface for the project wizard.
 			</p>
 <p>
 				
-<span class="bold"><strong>Note:</strong></span> To edit the generated Xpand template you shoud check that the 
+<span class="bold"><strong>Note:</strong></span> To edit the generated Xpand template you should check that the 
 				<span class="emphasis"><em>JavaBeans meta model contributor</em></span> 
 				is enabled under 
 				<span class="emphasis"><em>Preferences &gt; Xtend/Xpand</em></span>. Further you should also configure the UI project with the 
@@ -10027,9 +10065,9 @@ fragment&nbsp;=&nbsp;projectWizard.SimpleProjectWizardFragment&nbsp;{<br>
 					The default project creator is represented by the generated class 
 					<span class="emphasis"><em>MyDslProjectCreator</em></span> in the
 
-					<span class="emphasis"><em>src-gen</em></span> folder. It is highly extensible. Without any changes it will simply create a new plugin project 
+					<span class="emphasis"><em>src-gen</em></span> folder. It is highly extensible. Without any changes it will simply create a new plug-in project 
 					with the Xtext nature assigned. Afterwards it will execute the 
-					<code class="code">main</code> definition of the Xpand template 
+					<span class="emphasis"><em>main</em></span> definition of the Xpand template 
 					as described above.
 				</p>
 <p>To add more pages or input fields to the project wizard you should subclass the class 
@@ -10047,25 +10085,25 @@ fragment&nbsp;=&nbsp;projectWizard.SimpleProjectWizardFragment&nbsp;{<br>
 </div>
 </div>
 </div>
-<div class="chapter" title="Chapter&nbsp;8.&nbsp;Referring Java Types">
+<div class="chapter" title="Chapter&nbsp;8.&nbsp;Referring to Java Types">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-<a name="jvmtypes"></a>Chapter&nbsp;8.&nbsp;Referring Java Types</h2>
+<a name="jvmtypes"></a>Chapter&nbsp;8.&nbsp;Referring to Java Types</h2>
 </div>
 </div>
 </div>
 <p>A common use case when developing languages is the requirement to refer to existing concepts of other 
-			languages. Xtext makes this very easy for other self defined languages. However, often it is very useful
-			to have access to the available types of the Java Virtual Machine. The JVM types ecore model enables
-			clients to do exactly this. It is possible to create cross references to classes, interfaces and their 
+			languages. Xtext makes this very easy for other self defined languages. However, it is often very useful
+			to have access to the available types of the Java Virtual Machine. The JVM types Ecore model enables
+			clients to do exactly this. It is possible to create cross references to classes, interfaces, and their 
 			fields and methods. Basically every information about the structural concepts of the Java type system
 			is available via the JVM types. This includes annotations and their specific values and enumeration 
 			literals as well.</p>
 <p>The implementation will be selected transparently to the client code depending on where the code is 
 			executed. If the environment is a plain stand-alone Java or OSGi environment, the 
-			<code class="code">java.lang.reflect</code> 
+			<span class="emphasis"><em>java.lang.reflect</em></span> 
 			API will be used to deduce the necessary data. On the contrary, the type-model will be created from the 
 			live data of the JDT in an interactive Eclipse environment. All this happens behind the scenes via different
 			implementations that are bound to specific interfaces with Google Guice. 
@@ -10079,8 +10117,10 @@ fragment&nbsp;=&nbsp;projectWizard.SimpleProjectWizardFragment&nbsp;{<br>
 </div>
 </div>
 </div>
-<p>Using the JVM types model is very simple. First of all, the grammar has to import the appropriate ecore model. 
-				Thanks to content assist this is easy to spot in the list of proposals.  </p>
+<p>Using the JVM types model is very simple. First of all, the grammar has to import the 
+				<span class="emphasis"><em>JavaVMTypes</em></span> Ecore model. 
+				Thanks to content assist this is easy to spot in the list of proposals.  
+			</p>
 <div class="literallayout">
 <p>
 <code class="code">import&nbsp;"http://www.eclipse.org/xtext/common/JavaVMTypes"&nbsp;as&nbsp;types<br>
@@ -10091,7 +10131,7 @@ fragment&nbsp;=&nbsp;projectWizard.SimpleProjectWizardFragment&nbsp;{<br>
 </p>
 </div>
 <p>The next step is to actually refer to an imported concept. Let&rsquo;s define a mapping to actually available
-				JavaTypes for the simple data types in the self defined language. By means of cross references this works
+				Java types for the simple data types in the self defined language. By means of cross references this works
 				as one got already used to when dealing with references in Xtext.</p>
 <div class="literallayout">
 <p>
@@ -10104,11 +10144,13 @@ fragment&nbsp;=&nbsp;projectWizard.SimpleProjectWizardFragment&nbsp;{<br>
 </p>
 </div>
 <p>Last but not least, the 
-				<span class="emphasis"><em>TypesGeneratorFragment</em></span> has to be added to the workflow. The safest way is 
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/types/TypesGeneratorFragment.java?root=Modeling_Project&view=co" target="_new">TypesGeneratorFragment</a> 
+				has to be added to the workflow. The safest way is 
 				to add it after the actually used scoping fragments as a specialized version of the 
 				<span class="emphasis"><em>IGlobalScopeProvider</em></span> 
-				will be configured. Don&rsquo;t forget to refer to the genmodel of the Java VM types. The shortest possible
-				URI is a class-path-URI.    
+				will be configured. Don&rsquo;t forget to refer to the 
+				<span class="emphasis"><em>genmodel</em></span> of the Java VM types. The shortest possible
+				URI is a classpath-URI.    
 			</p>
 <div class="literallayout">
 <p>
@@ -10143,7 +10185,7 @@ fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
 </code>
 </p>
 </div>
-<p>This two steps will provide a nice integration into the Eclipse JDT. There is 
+<p>These two steps will provide a nice integration into the Eclipse JDT. There is 
 				<span class="emphasis"><em>Find References</em></span> on Java methods, 
 				fields and types that will reveal results in your language files. 
 				<span class="emphasis"><em>Go To Declaration</em></span> works as expected
@@ -10161,18 +10203,21 @@ fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
 </div>
 <p>There are several customization hooks in the runtime layer and on the editor side as well:</p>
 <p>The 
-				<span class="emphasis"><em>AbstractTypeScopeProvider</em></span> can be used to create scopes for members with respect to
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/xtext/AbstractTypeScopeProvider.java?root=Modeling_Project&view=co" target="_new">AbstractTypeScopeProvider</a> 
+				can be used to create scopes for members with respect to
 				the override semantics of the Java language. Of course it is possible to use this implementation to
 				create scopes for types as well.
 			</p>
 <p>As the Java VM types expose a lot of information about visibility, parameter- and return types, generic,
 				available annotations or enumeration literals, it is very easy to define constraints for the referred types.</p>
 <p>The 
-				<span class="emphasis"><em>ITypesProposalProvider</em></span> can be used to provide optimized proposals based on various filter criteria. 
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.java?root=Modeling_Project&view=co" target="_new">ITypesProposalProvider</a> can be
+				used to provide optimized proposals based on various filter criteria. 
 				The most common selector can be used directly via 
 				<span class="emphasis"><em>createSubTypeProposals</em></span>. The implementation is optimized
 				and uses the JDT Index directly to minimize the effort for object instantiation. The class 
-				<span class="emphasis"><em>TypeMatchFilters</em></span> 
+
+				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters.java?root=Modeling_Project&view=co" target="_new">TypeMatchFilters</a>
 				provides a comprehensive set of reusable filters that can be easily combined to reduce the list of proposals
 				to a smaller number of valid entries.
 			</p>
@@ -10184,7 +10229,8 @@ fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
 
 <br>
 &nbsp;&nbsp;proposalProvider.createSubTypeProposals(factory,&nbsp;context,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and(not(canInstantiate()),&nbsp;isPublic()),&nbsp;acceptor);&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and(not(canInstantiate()),&nbsp;isPublic()),&nbsp;acceptor);<br>
+&nbsp;<br>
 
 <br>
 
@@ -10331,7 +10377,7 @@ fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
-<p>A Java interface and a Java class for each EClassifier in your ecore model. By default, all classes will implement the interface 
+<p>A Java interface and a Java class for each EClassifier in your Ecore model. By default, all classes will implement the interface 
 						<span class="emphasis"><em>org.eclipse.emf.ecore.EObject</em></span>, linking a lot of runtime functionality. 
 					</p>
 </li>
@@ -10452,7 +10498,7 @@ fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
 				<span class="emphasis"><em>XtextResource</em></span> we have provided an example. You must have the Helios version 2.3 of GMF Notation, Runtime and Tooling and their dependencies installed in your workbench to run the example. With other versions of GMF it might work to regenerate the diagram code. Choose 
 				<span class="emphasis"><em>New-&gt;Examples-&gt;Xtext-&gt;Xtext GMF Integration</em></span> to import it into your workbench. The example consists of a number of plug-ins
 			</p>
-<table id="N120AC">
+<table id="N12107">
 <tr>
 					
 <td>Plug-in</td>
@@ -10632,7 +10678,7 @@ fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
 </div>
 </div>
 <p>Most of the tasks when migrating to Xtext 1.0 can be automated. Some changes will be necessary in the manually written code where you have to carefully
-			verify that your implemention is still working with Xtext 1.0. A relyable test-suite helps a lot. </p>
+			verify that your implementation is still working with Xtext 1.0. A reliable test-suite helps a lot. </p>
 <p>The grammar language is fully backward compatible. You should not have to apply any changes in the primary artifact. However, we introduced some additional
 			validation rules that mark inconsistencies in your grammar. If you get any warnings in the grammar editor, it should be straight forward to fix them.</p>
 <p>
@@ -10677,21 +10723,21 @@ fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
 </div>
 </div>
 <p>You should update the constraints from version 
-					<code class="code">0.7.x</code> to 
-					<code class="code">[1.0.0,2.0.0)</code> in your manifest files if you specified any concrete versions.
+					<span class="emphasis"><em>0.7.x</em></span> to 
+					<span class="emphasis"><em>[1.0.0,2.0.0)</em></span> in your manifest files if you specified any concrete versions.
 					Make sure that your 
-					<code class="code">dsl.ui</code>-projects do not refer to the plug-in 
-					<code class="code">org.eclipse.xtext.ui.common</code> or 
-					<code class="code">org.eclipse.xtext.ui.core</code> but to 
-					<code class="code">org.eclipse.xtext.ui</code> instead. The arguably easiest way is a global text-based search and replace across the manifest files. The bundle 
-					<code class="code">org.eclipse.xtext.log4j</code> is obsolete as well. The generator will create 
-					<code class="code">import-package</code> entries in the manifests later on.
+					<span class="emphasis"><em>dsl.ui</em></span>-projects do not refer to the plug-in 
+					<span class="emphasis"><em>org.eclipse.xtext.ui.common</em></span> or 
+					<span class="emphasis"><em>org.eclipse.xtext.ui.core</em></span> but to 
+					<span class="emphasis"><em>org.eclipse.xtext.ui</em></span> instead. The arguably easiest way is a global text-based search and replace across the manifest files. The bundle 
+					<span class="emphasis"><em>org.eclipse.xtext.log4j</em></span> is obsolete as well. The generator will create 
+					<span class="emphasis"><em>import-package</em></span> entries in the manifests later on.
 				</p>
 <p>The next step is to fix the import statements in your classes to match the refactored naming scheme in Xtext. Perform a global search for "
-					<code class="code">import org.eclipse.xtext.ui.common.</code>" and 
+					<span class="emphasis"><em>import org.eclipse.xtext.ui.common.</em></span>" and 
 					"
-					<code class="code">import org.eclipse.xtext.ui.core.</code>" and replace the matches with "
-					<code class="code">import org.eclipse.xtext.ui.</code>". This fixes most of the problems in the manually written code. 
+					<span class="emphasis"><em>import org.eclipse.xtext.ui.core.</em></span>" and replace the matches with "
+					<span class="emphasis"><em>import org.eclipse.xtext.ui.</em></span>". This fixes most of the problems in the manually written code. 
 				</p>
 </div>
 <div class="section" title="Rename the Packages in the dsl.ui-Plug-in">
@@ -10704,12 +10750,12 @@ fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
 </div>
 </div>
 <p>We changed the naming pattern for artifacts in the 
-					<code class="code">dsl.ui</code>-plug-in to match the OSGI conventions. The easiest way to update your existing projects is to apply a 
+					<span class="emphasis"><em>dsl.ui</em></span>-plug-in to match the OSGI conventions. The easiest way to update your existing projects is to apply a 
 					&ldquo;Rename Package&rdquo; refactoring on the packages in the 
-					<code class="code">src</code>- and 
-					<code class="code">src-gen</code> folder 
-					<span class="bold"><strong>before</strong></span> you re-run the workflow that regenerates your language. Make sure you ticked &ldquo;Rename sub-packages&rdquo; in the dialog. It is error-prone to enable the search in non-java files as this will perform incompatible changes in the manifest files. Furthermore, it is important to perform the rename operation in the 
-					<code class="code">src-gen</code> folder, too. This ensures that the references in your manually written code are properly updated.
+					<span class="emphasis"><em>src</em></span>- and 
+					<span class="emphasis"><em>src-gen</em></span> folder 
+					<span class="bold"><strong>before</strong></span> you re-run the workflow that regenerates your language. Make sure you ticked &ldquo;Rename sub-packages&rdquo; in the dialog. It is error-prone to enable the search in non-Java files as this will perform incompatible changes in the manifest files. Furthermore, it is important to perform the rename operation in the 
+					<span class="emphasis"><em>src-gen</em></span> folder, too. This ensures that the references in your manually written code are properly updated.
 				</p>
 </div>
 <div class="section" title="Update the Workflow">
@@ -10722,9 +10768,9 @@ fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
 </div>
 </div>
 <p>The 
-					<code class="code">JavaScopingFragment</code> does no longer exist. It has been superseded by the 
-					<code class="code">ImportURIScopingFragment</code> in combination with the 
-					<code class="code">SimpleNamesFragment</code>.
+					<span class="emphasis"><em>JavaScopingFragment</em></span> does no longer exist. It has been superseded by the 
+					<span class="emphasis"><em>ImportURIScopingFragment</em></span> in combination with the 
+					<span class="emphasis"><em>SimpleNamesFragment</em></span>.
 					Please replace  
 				</p>
 <div class="literallayout">
@@ -10746,7 +10792,7 @@ fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
 </p>
 </div>
 <p>The 
-					<code class="code">PackratParserFragment</code> has been abandoned as well. It is save to remove the reference to that one if it is activated in your workflow. After you&rsquo;ve changed your workflow, it should be possible to regenerate your language without any errors in the console. It is ok to have compilation errors prior to executing the workflow.
+					<span class="emphasis"><em>PackratParserFragment</em></span> has been abandoned as well. It is save to remove the reference to that one if it is activated in your workflow. After you&rsquo;ve changed your workflow, it should be possible to regenerate your language without any errors in the console. It is ok to have compilation errors prior to executing the workflow.
 				</p>
 </div>
 <div class="section" title="MANIFEST.MF and plugin.xml">
@@ -10759,51 +10805,50 @@ fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
 </div>
 </div>
 <p>The previous rename package refactoring updated most of the entries in the 
-					<code class="code">MANIFEST.MF</code> and and some entries in the 
-					<code class="code">plugin.xml</code>. Others have to be fixed manually. The Eclipse compiler will point to many of the remaining problems in the manifest files but it is unlikely that it will spot the erroneous references in the 
-					<code class="code">plugin.xml</code>.
+					<span class="emphasis"><em>MANIFEST.MF</em></span> and and some entries in the 
+					<span class="emphasis"><em>plugin.xml</em></span>. Others have to be fixed manually. The Eclipse compiler will point to many of the remaining problems in the manifest files but it is unlikely that it will spot the erroneous references in the 
+					<span class="emphasis"><em>plugin.xml</em></span>.
 				</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
 <p>In the generated UI plug-in&rsquo;s 
-							<code class="code">MANIFEST.MF</code>, remove the package exports of no longer existing packages and make sure the bundle activator points to the newly generated one (with 
-							<code class="code">.ui.</code> in its package name).  
+							<span class="emphasis"><em>MANIFEST.MF</em></span>, remove the package exports of no longer existing packages and make sure the bundle activator points to the newly generated one (with 
+							<span class="emphasis"><em>.ui.</em></span> in its package name).  
 						</p>
 </li>
 <li class="listitem">
 <p>It was already mentioned that the plug-ins 
-							<code class="code">org.eclipse.xtext.ui.core</code> and 
-							<code class="code">org.eclipse.xtext.ui.common</code> have been merged into a new single plug-in 
-							<code class="code">org.eclipse.xtext.ui</code>. The same happened to the respective Java packages. Change eventually remaining bundle-dependencies in all manifests. 
+							<span class="emphasis"><em>org.eclipse.xtext.ui.core</em></span> and 
+							<span class="emphasis"><em>org.eclipse.xtext.ui.common</em></span> have been merged into a new single plug-in 
+							<span class="emphasis"><em>org.eclipse.xtext.ui</em></span>. The same happened to the respective Java packages. Change eventually remaining bundle-dependencies in all manifests. 
 						</p>
 </li>
 <li class="listitem">
 <p>The plug-in 
-							<code class="code">org.eclipse.xtext.log4j</code> no longer exists. We use a package import of 
-							<code class="code">org.apache.log4j</code> instead. Also remove the buddy registration. 
+							<span class="emphasis"><em>org.eclipse.xtext.log4j</em></span> no longer exists. We use a package import of 
+							<span class="emphasis"><em>org.apache.log4j</em></span> instead. Also remove the buddy registration. 
 						</p>
 </li>
 <li class="listitem">
 <p>Due to renamed packages, you have to fix all references to classes therein in the 
-							<code class="code">plugin.xml</code>. A diff with the 
-							<code class="code">plugin.xml_gen</code> will be a great help. If you haven&rsquo;t added a lot manually, consider merging these into the generated version instead of going the other way around. Note that warnings in the 
-							<code class="code">plugin.xml</code> can be considered to be real errors most of the time. Make sure
+							<span class="emphasis"><em>plugin.xml</em></span>. A diff with the _plugin.xml___gen_ will be a great help. If you haven&rsquo;t added a lot manually, consider merging these into the generated version instead of going the other way around. Note that warnings in the 
+							<span class="emphasis"><em>plugin.xml</em></span> can be considered to be real errors most of the time. Make sure
 						</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="circle">
 <li class="listitem">
 <p>the 
-									<code class="code">&lt;MyDsl&gt;ExecutableExtensionFactory</code> has the 
-									<code class="code">.ui.</code> package prefix
+									<span class="emphasis"><em>ExecutableExtensionFactory</em></span> has the 
+									<span class="emphasis"><em>.ui.</em></span> package prefix
 								</p>
 </li>
 <li class="listitem">
 <p>classes from 
-									<code class="code">org.eclipse.xtext.ui.common</code> and 
-									<code class="code">org.eclipse.xtext.ui.core</code> are now usually somewhere in 
-									<code class="code">org.eclipse.xtext.ui</code>. They are also referenced by the 
-									<code class="code">&lt;MyDsl&gt;ExecutableExtensionFactory</code> and thus not covered by the editor&rsquo;s validation. 
+									<span class="emphasis"><em>org.eclipse.xtext.ui.common</em></span> and 
+									<span class="emphasis"><em>org.eclipse.xtext.ui.core</em></span> are now usually somewhere in 
+									<span class="emphasis"><em>org.eclipse.xtext.ui</em></span>. They are also referenced by the 
+									<span class="emphasis"><em>ExecutableExtensionFactory</em></span> and thus not covered by the editor&rsquo;s validation. 
 								</p>
 </li>
 </ul>
@@ -10811,18 +10856,17 @@ fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
 </li>
 <li class="listitem">
 <p>A number of new features are being registered in the 
-							<code class="code">plugin.xml</code>, e.g. 
+							<span class="emphasis"><em>plugin.xml</em></span>, e.g. 
 							<span class="emphasis"><em>Find references</em></span>, 
 							<span class="emphasis"><em>Quick Outline</em></span>, and 
-							<span class="emphasis"><em>Quickfixes</em></span>. You can enable them by manually copying the respective entries from 
-							<code class="code">plugin.xml_gen</code> to  
-							<code class="code">plugin.xml</code>.
+							<span class="emphasis"><em>Quickfixes</em></span>. You can enable them by manually copying the respective entries from _plugin.xml___gen_ to  
+							<span class="emphasis"><em>plugin.xml</em></span>.
 						</p>
 </li>
 <li class="listitem">
 <p>To run MWE2 workflows later on, you must change the plug-in dependencies from 
-							<code class="code">org.eclipse.emf.mwe.core</code> to 
-							<code class="code">org.eclipse.emf.mwe2.launch</code> in your manifest. Optional resolution is fine.
+							<span class="emphasis"><em>org.eclipse.emf.mwe.core</em></span> to 
+							<span class="emphasis"><em>org.eclipse.emf.mwe2.launch</em></span> in your manifest. Optional resolution is fine.
 						</p>
 </li>
 </ul>
@@ -10838,47 +10882,47 @@ fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
 </div>
 </div>
 <p>The 
-					<code class="code">src</code> folders are generated once, so existing code will not be overwritten but has to be updated manually. At least one new class has appeared in your 
-					<code class="code">src</code>-folder of the 
-					<code class="code">ui</code> plug-in. there will now be a 
-					<code class="code">&lt;MyDsl&gt;StandaloneSetup</code> inheriting form the generated 
-					<code class="code">&lt;MyDsl&gt;StandaloneSetupGenerated</code> to allow customization.
+					<span class="emphasis"><em>src</em></span> folders are generated once, so existing code will not be overwritten but has to be updated manually. At least one new class has appeared in your 
+					<span class="emphasis"><em>src</em></span>-folder of the 
+					<span class="emphasis"><em>ui</em></span> plug-in. there will now be a 
+					<span class="emphasis"><em>StandaloneSetup</em></span> inheriting form the generated 
+					<span class="emphasis"><em>StandaloneSetupGenerated</em></span> to allow customization.
 				</p>
 <p>You will face a couple of compilation problems due to changes in the API. Here&rsquo;s a list of the most prominent changes. It is usually only necessary to change your code, if you face any compilation problems.</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
 <p>The method 
-							<code class="code">IScopeProvider.getScope(EObject,EClass)</code> has been removed. Use  
-							<code class="code">IScopeProvider.getScope(EObject,EReference)</code> instead. 
+							<span class="emphasis"><em>IScopeProvider.getScope(EObject,EClass)</em></span> has been removed. Use  
+							<span class="emphasis"><em>IScopeProvider.getScope(EObject,EReference)</em></span> instead. 
 						</p>
 </li>
 <li class="listitem">
 <p>Renamed 
-							<code class="code">DefaultScopeProvider</code> to 
-							<code class="code">SimpleNameScopeProvider</code>. There have been further significant changes in the scoping API that allow for optimized implementations. Consult the 
+							<span class="emphasis"><em>DefaultScopeProvider</em></span> to 
+							<span class="emphasis"><em>SimpleNameScopeProvider</em></span>. There have been further significant changes in the scoping API that allow for optimized implementations. Consult the 
 							<a class="link" href="#scoping" title="Scoping">section on scoping</a> for details.
 						</p>
 </li>
 <li class="listitem">
 <p>The return type of 
-							<code class="code">AbstractInjectableValidator.getEPackages()</code> was changed from 
-							<code class="code">List&lt;? extends EPackage&gt;</code> to 
-							<code class="code">List&lt;EPackage&gt;</code>.
+							<span class="emphasis"><em>AbstractInjectableValidator.getEPackages()</em></span> was changed from 
+							<span class="emphasis"><em>List&lt;? extends EPackage&gt;</em></span> to 
+							<span class="emphasis"><em>List&amp;lt;EPackage&gt;</em></span>.
 						</p>
 </li>
 <li class="listitem">
 <p>The parser interfaces now use 
-							<code class="code">java.io.Reader</code> instead of 
-							<code class="code">java.io.InputStream</code> to explicitly address encoding. Have a look at the 
-							<code class="code">IEncodingProvider</code> for details.
+							<span class="emphasis"><em>java.io.Reader</em></span> instead of 
+							<span class="emphasis"><em>java.io.InputStream</em></span> to explicitly address encoding. Have a look at the 
+							<a class="link" href="#encoding" title="Encoding in Xtext">section on encoding</a> for details.
 						</p>
 </li>
 <li class="listitem">
 <p>The handling of 
-							<code class="code">ILabelProvider</code> in various contexts has been refactored. The former base class 
-							<code class="code">DefaultLabelProvider</code> no longer exists. Use the 
-							<code class="code">DefaultEObjectLabelProvider</code> instead. See the 
+							<span class="emphasis"><em>ILabelProvider</em></span> in various contexts has been refactored. The former base class 
+							<span class="emphasis"><em>DefaultLabelProvider</em></span> no longer exists. Use the 
+							<span class="emphasis"><em>DefaultEObjectLabelProvider</em></span> instead. See the 
 							<a class="link" href="#labelProvider" title="Label Provider">section on label providers</a> for details. 
 						</p>
 </li>
@@ -10887,92 +10931,92 @@ fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
 </li>
 <li class="listitem">
 <p>The runtime and UI modules have separate base classes 
-							<code class="code">DefaultRuntimeModule</code> and 
-							<code class="code">DefaultUiModule</code> now. We use Guice&rsquo;s module overrides to combine them with the newly introduced 
-							<code class="code">SharedModule</code>.  You have to add a constructor the your 
-							<code class="code">&lt;MyDsl&gt;UiModule</code> that takes an 
-							<code class="code">AbstractUiPlugin</code> as argument and pass that one to the super constructor. 
+							<span class="emphasis"><em>DefaultRuntimeModule</em></span> and 
+							<span class="emphasis"><em>DefaultUiModule</em></span> now. We use Guice&rsquo;s module overrides to combine them with the newly introduced 
+							<span class="emphasis"><em>SharedModule</em></span>.  You have to add a constructor the your 
+							<span class="emphasis"><em>UiModule</em></span> that takes an 
+							<span class="emphasis"><em>AbstractUiPlugin</em></span> as argument and pass that one to the super constructor. 
 							<span class="emphasis"><em>Tip: There is an Eclipse quick-fix available for that one.</em></span>
 						
 </p>
 </li>
 <li class="listitem">
 <p>The interfaces 
-							<code class="code">ILexicalHighlightigConfiguration</code> and 
-							<code class="code">ISemanticHighlightingConfiguration</code> have been merged into 
-							<code class="code">IHighlightingConfiguration</code>.
+							<span class="emphasis"><em>ILexicalHighlightigConfiguration</em></span> and 
+							<span class="emphasis"><em>ISemanticHighlightingConfiguration</em></span> have been merged into 
+							<span class="emphasis"><em>IHighlightingConfiguration</em></span>.
 						</p>
 </li>
 <li class="listitem">
 <p>The 
-							<code class="code">DefaultTemplateProposalProvider</code> takes an additional, injectable constructor parameter of type 
-							<code class="code">ContextTypeIdHelper</code>.
+							<span class="emphasis"><em>DefaultTemplateProposalProvider</em></span> takes an additional, injectable constructor parameter of type 
+							<span class="emphasis"><em>ContextTypeIdHelper</em></span>.
 						</p>
 </li>
 <li class="listitem">
 <p>The 
-							<code class="code">HyperlinkHelper</code> uses field injection instead of constructor injection. The method 
-							<code class="code">createHyperlinksByOffset</code> should be overridden instead of the former 
-							<code class="code">findCrossLinkedEObject</code>.
+							<span class="emphasis"><em>HyperlinkHelper</em></span> uses field injection instead of constructor injection. The method 
+							<span class="emphasis"><em>createHyperlinksByOffset</em></span> should be overridden instead of the former 
+							<span class="emphasis"><em>findCrossLinkedEObject</em></span>.
 						</p>
 </li>
 <li class="listitem">
-<p>The API to skip a node in the outline has changed. Instead of returning the 
-							<code class="code">HIDDEN_NODE</code> you&rsquo;ll have to implement 
-							<code class="code">boolean consumeNode(MyType)</code> and return 
-							<code class="code">false</code>.
+<p>The API to skip a node in the outline has changed. Instead of returning the _HIDDEN_NODE_ you&rsquo;ll have to implement 
+							<span class="emphasis"><em>boolean consumeNode(MyType)</em></span> and return 
+							<span class="emphasis"><em>false</em></span>.
 						</p>
 </li>
 <li class="listitem">
 <p>The 
-							<code class="code">Readonly*Storage</code> implementations have been removed. There is a new API to open editors for objects with a given URI. Please use the 
-							<code class="code">IURIEditorOpener</code> to create an editor or the 
-							<code class="code">IStorage2UriMapper</code> to obtain an 
-							<code class="code">IStorage</code> for a given URI.
+							<span class="emphasis"><em>Readonly*Storage</em></span> implementations have been removed. There is a new API to open editors for objects with a given URI. Please use the 
+							<span class="emphasis"><em>IURIEditorOpener</em></span> to create an editor or the 
+							<span class="emphasis"><em>IStorage2UriMapper</em></span> to obtain an 
+							<span class="emphasis"><em>IStorage</em></span> for a given URI.
 						</p>
 </li>
 <li class="listitem">
 <p>The interfaces 
-							<code class="code">IStateAccess</code> and 
-							<code class="code">IEObjectHandle</code> have been moved along with the 
-							<code class="code">IUnitOfWork</code> to the package 
-							<code class="code">org.eclipse.xtext.util.concurrent</code>.
+							<span class="emphasis"><em>IStateAccess</em></span> and 
+							<span class="emphasis"><em>IEObjectHandle</em></span> have been moved along with the 
+							<span class="emphasis"><em>IUnitOfWork</em></span> to the package 
+							<span class="emphasis"><em>org.eclipse.xtext.util.concurrent</em></span>.
 						</p>
 </li>
 <li class="listitem">
 <p>The 
-							<code class="code">ValidationJobFactory</code> is gone. Please implement a custom 
-							<code class="code">IResourceValidator</code> instead.
+							<span class="emphasis"><em>ValidationJobFactory</em></span> is gone. Please implement a custom 
+							<span class="emphasis"><em>IResourceValidator</em></span> instead.
 						</p>
 </li>
 <li class="listitem">
 <p>The grammar elements 
-							<code class="code">Alternatives</code> and 
-							<code class="code">Group</code> have a new common super type 
-							<code class="code">CompoundElement</code>. The methods 
-							<code class="code">getGroups</code> and 
-							<code class="code">getTokens</code> have been refactored to 
-							<code class="code">getElements</code>.
+							<span class="emphasis"><em>Alternatives</em></span> and 
+							<span class="emphasis"><em>Group</em></span> have a new common super type 
+							<span class="emphasis"><em>CompoundElement</em></span>. The methods 
+							<span class="emphasis"><em>getGroups</em></span> and 
+							<span class="emphasis"><em>getTokens</em></span> have been refactored to 
+							<span class="emphasis"><em>getElements</em></span>.
 						</p>
 </li>
 <li class="listitem">
 <p>Completion proposals take a 
-							<code class="code">StyledString</code> instead of a plain string as display string.
+							<span class="emphasis"><em>StyledString</em></span> instead of a plain string as display string.
 						</p>
 </li>
 <li class="listitem">
-<p>The AbstractLabelProvider does no longer expose its 
-							<code class="code">IImageHelper</code>. Use 
-							<code class="code">convertToImage</code> instead or inject your own 
-							<code class="code">IImageHelper</code>.
+<p>The 
+							<span class="emphasis"><em>AbstractLabelProvider</em></span> does no longer expose its 
+							<span class="emphasis"><em>IImageHelper</em></span>. Use 
+							<span class="emphasis"><em>convertToImage</em></span> instead or inject your own 
+							<span class="emphasis"><em>IImageHelper</em></span>.
 						</p>
 </li>
 <li class="listitem">
 <p>The implementation-classes from 
-							<code class="code">org.eclipse.xtext.index</code> were superseded by the builder infrastructure. Use the 
-							<code class="code">QualifiedNamesFragment</code> and the 
-							<code class="code">ImportNamespacesScopingFragment</code> instead of the 
-							<code class="code">ImportedNamespacesScopingFragment</code>. Please refer to the section about the builder infrastructure for details.
+							<span class="emphasis"><em>org.eclipse.xtext.index</em></span> were superseded by the builder infrastructure. Use the 
+							<span class="emphasis"><em>QualifiedNamesFragment</em></span> and the 
+							<span class="emphasis"><em>ImportNamespacesScopingFragment</em></span> instead of the 
+							<span class="emphasis"><em>ImportedNamespacesScopingFragment</em></span>. Please refer to the section about the builder infrastructure for details.
 						</p>
 </li>
 <li class="listitem">
@@ -10981,27 +11025,27 @@ fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
 <li class="listitem">
 <p>
 							
-<code class="code">ILinkingService.getLinkText</code> was removed. Have a look at the 
-							<code class="code">LinkingHelper</code> and the 
-							<code class="code">CrossReferenceSerializer</code> if you relied on this method.
+<span class="emphasis"><em>ILinkingService.getLinkText</em></span> was removed. Have a look at the 
+							<span class="emphasis"><em>LinkingHelper</em></span> and the 
+							<span class="emphasis"><em>CrossReferenceSerializer</em></span> if you relied on this method.
 						</p>
 </li>
 <li class="listitem">
 <p>The 
-							<code class="code">SerializerUtil</code> was renamed to 
-							<code class="code">Serializer</code>. There were other heavy refactorings that involved the serializer and its components (like e.g. the 
-							<code class="code">ITransientValueService</code>) but it should be pretty straight forward to migrate existing client code.
+							<span class="emphasis"><em>SerializerUtil</em></span> was renamed to 
+							<span class="emphasis"><em>Serializer</em></span>. There were other heavy refactorings that involved the serializer and its components (like e.g. the 
+							<span class="emphasis"><em>ITransientValueService</em></span>) but it should be pretty straight forward to migrate existing client code.
 						</p>
 </li>
 <li class="listitem">
 <p>The method-signatures of the 
-							<code class="code">IFragmentProvider</code> have changed. The documentation will give a clue on how to update existing implementations.
+							<span class="emphasis"><em>IFragmentProvider</em></span> have changed. The documentation will give a clue on how to update existing implementations.
 						</p>
 </li>
 <li class="listitem">
 <p>Some static methods were removed from utility classes such as 
-							<code class="code">EcoreUtil2</code> and 
-							<code class="code">ParsetreeUtil</code> in favor of more sophisticated implementations.
+							<span class="emphasis"><em>EcoreUtil2</em></span> and 
+							<span class="emphasis"><em>ParsetreeUtil</em></span> in favor of more sophisticated implementations.
 						</p>
 </li>
 </ul>
@@ -11022,25 +11066,53 @@ fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
-<p>qualified names and namespace imports</p>
+<p>
+						
+<a class="link" href="#index_based" title="Global Scopes based on external configuration (e.g. classpath-based)">qualified names and namespace imports</a>
+					
+</p>
 </li>
 <li class="listitem">
-<p>the builder infrastructure</p>
+<p>
+						
+<a class="link" href="#containers" title="About the index, containers and their manager">the builder infrastructure</a>
+					
+</p>
 </li>
 <li class="listitem">
-<p>quick fixes</p>
+<p>
+						
+<a class="link" href="#quickfixes" title="Quick fixes">quick fixes</a>
+					
+</p>
 </li>
 <li class="listitem">
-<p>unordered groups</p>
+<p>
+						
+<a class="link" href="#unordered_groups" title="Unordered Groups">unordered groups</a>
+					
+</p>
 </li>
 <li class="listitem">
-<p>quick outline</p>
+<p>
+						
+<a class="link" href="#quick_outline" title="Quick Outline">quick outline</a>
+					
+</p>
 </li>
 <li class="listitem">
-<p>MWE2</p>
+<p>
+						
+<a class="link" href="#MWE2" title="Chapter&nbsp;6.&nbsp;MWE2">MWE2</a>
+					
+</p>
 </li>
 <li class="listitem">
-<p>referencing Java elements</p>
+<p>
+						
+<a class="link" href="#jvmtypes" title="Chapter&nbsp;8.&nbsp;Referring to Java Types">refering to Java elements</a>
+					
+</p>
 </li>
 </ul>
 </div>
@@ -11078,7 +11150,7 @@ fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br>
 			allowed to ship Xtext with the ANTLR generator but only with the IP approvied runtime components. We 
 			have to provide it separately and for your convenience you&rsquo;ll be asked to download the ANTLR generator 
 			when you run your language generator for the first time. You can even download it directly or install 
-			an additional plugin into Eclipse: 
+			an additional plug-in into Eclipse: 
 		</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
