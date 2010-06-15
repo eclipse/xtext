@@ -39,7 +39,7 @@ public interface IValueConverter<Type> {
 	 * @param value
 	 * @return
 	 */
-	String toString(Type value);
+	String toString(Type value) throws ValueConverterException;
 	
 	/**
 	 * Value converters that rely on information about the actual rule
