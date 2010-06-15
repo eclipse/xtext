@@ -8,8 +8,8 @@ concise syntax that allows to declare object instances, attribute
 values and references. One use case - that's where the name had its 
 origins - is the definition of workflows. Such a workflow consists 
 usually of a number of components that interact with each other. 
-There are components available, that read EMF resources, perform 
-operations (transformations) on them and write them back or generate 
+There are components to read EMF resources, to perform 
+operations (transformations) on them and to write them back or to generate 
 any number of other artifacts out of the information. Workflows are 
 typically executed in a single JVM. However there are no constraints 
 the prevent implementors to provide components that spawn multiple 
@@ -42,7 +42,7 @@ fulfill the Java conventions for fully qualified class-names. That's
 why the module _HelloWorld_ has to be placed into the default 
 package of a Java source folder. The second element in the module is 
 the class-name _SayHello_ which introduces the root element of the 
-module. The interpreter will create an instance of the referenced 
+module. The interpreter will create an instance of the given 
 type and configure it as declared between the curly braces. E.g. the 
 assignment _message = "Hello World!"_ in the module will be 
 interpreted as an invocation of the _setMessage(String)_ on the 
@@ -189,13 +189,13 @@ bc.. public abstract class WorkflowComponentWithSlot implements IWorkflowCompone
   public void postInvoke() {}
   public void preInvoke() {}
 }
-p. Each of the mentioned implementation is rather simple and can be done in a couple of minutes. 
+p. Each of the mentioned implementations is rather simple and can be done in a couple of minutes. 
 This is true for many tedious tasks that developers face in their daily work. MWE2 can be used to
-minimize the effort for them to a minimum by means of automati
+automize these tasks with minimum effort.
 
 h3(#MWE2Stopwatch). A Stop-watch
 
-The last example demonstrates, how to combine the MWE2 concepts to create a simple stopwatch that
+The last example demonstrates how to combine the MWE2 concepts to create a simple stopwatch that
 allows to measure the execution time of a set of components. The idea is to add the very same stopwatch
 twice as a component to a workflow. It will measure the time from the first pre-invoke to the last
 post-invoke event and print the elapsed milliseconds to the console.
@@ -284,7 +284,7 @@ _set_. To allow to assign multi-value properties, MWE provides
 access to methods called _add*_ as well. 
 
 p. If the right side of the assignment in the workflow file does not 
-define an explicit class, its type is inferred from the method 
+define a class explicitly, its type is inferred from the method 
 parameter. The line _child = {}_ is equivalent to 
 _child = SampleClass {}_ and creates a new instance of _SampleClass_.
 
@@ -406,8 +406,8 @@ to that feature.
 h3(#MWE2NamedComponents). Named Components
 
 Properties are not the only way to define something that can be reused.
-It is possible to assign a name to any instantiated component being
-it created from a class literal or from another component. This allows
+It is possible to assign a name to any instantiated component whether it's
+created from a class literal or from another component. This allows
 to refer to previously created and configured instances. Named instances
 can come handy for notification and call-back mechanisms or more general
 in terms of defined life-cycle events. 
@@ -449,8 +449,6 @@ p. The @auto-inject@ modifier can be used for a subset of the available
 features as well. It will suppressed for the explicitly set values
 of a component.        
 
-h3(#MWE2Factories). Factory Support
-
 h2(#MWE2SyntaxReference). Syntax Reference
 
 The following chapter serves as a reference for the concrete syntax of 
@@ -467,7 +465,7 @@ bc.. // This is a comment
 p. Every name in MWE2 can be a fully qualified identifier and must follow 
 the Java conventions. However, in contrast to Java identifiers it is 
 not allowed to use German umlauts or Unicode escape sequences in 
-identifiers. A valid id-segment in MWE2 starts with a letter or an 
+identifiers. A valid ID-segment in MWE2 starts with a letter or an 
 underscore and is followed by any number of letters, numbers or underscores.
 An identifier is composed from one or more segments which are delimited
 by a '.' dot.
@@ -528,7 +526,7 @@ assignment. The assigned feature can either be a declared property
 of the module or a _set_- or _add_-method of a Java class.
 
 p. Components can be named to make them referable in subsequent assignments.
-Following the ':' keyword, one can define an identifier for the 
+Following the _':'_ keyword, one can define an identifier for the 
 instantiated component. The identifier is locally visible in the module
 and any assignment that is defined after the named component can refer
 to this identifier and thereby point to exactly the instantiated object.
