@@ -4,12 +4,12 @@ h2(#templates). Template Proposals
 Xtext-based editors automatically support code templates. That means that you get the corresponding 
 preference page where users can add and change template proposals. If you want to ship a couple of 
 default templates, you have to put a file named _templates.xml_ inside the _templates_ directory of 
-the generated ui-plugin. This file contains templates in a format as described in the 
+the generated UI-plug-in. This file contains templates in a format as described in the 
 "Eclipse online help":http://help.eclipse.org/ganymede/topic/org.eclipse.cdt.doc.user/tasks/cdt_t_imp_code_temp.htm .
 
 !images/preferences_templates.png!
 
-By default Xtext registers _ContextTypes_ for each Rule (_[languageName].[RuleName]_) and for each 
+By default Xtext registers _ContextTypes_ for each rule (_[languageName].[RuleName]_) and for each 
 keyword (_[languageName].kw_[keyword]_). If you don't 
 like these defaults you'll have to subclass 
 ${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.templates.XtextTemplateContextTypeRegistry} 
@@ -24,7 +24,7 @@ CrossReferences (type _CrossReferences_) and Enumerations (type _Enum_) like it 
 following sections.
 
 It is best practice to edit the templates in the preferences page, export them into the 
-_templates.xml_-file and put this one into the _templates_ folder of your ui-plugin. However, these 
+_templates.xml_-file and put this one into the _templates_ folder of your UI-plug-in. However, these 
 templates will not be visible by default. To fix it, you have to manually edit the xml-file and insert 
 an ID attribute for each template element.
 
@@ -36,7 +36,7 @@ which can be used to place cross references within a template.
 
 The syntax is as follows:
 
-bc. ${displayText:CrossReference([MyPackageName.]MyType.myRef)}
+bc. ${<displayText>:CrossReference([<MyPackageName>.]<MyType>.<myRef>)}
 
 For example the following template:
 
@@ -58,7 +58,7 @@ which are assignment-compatible to the enumeration type declared as the first pa
  
 The syntax is as follows:   
  
-bc. ${displayText:Enum([MyPackage.]EnumType)
+bc. ${<displayText>:Enum([<MyPackage>.]<EnumType>)
 
 For example the following template (taken from the domainmodel example):
 
@@ -71,7 +71,7 @@ bc.. <template name="Operation" description="template for an Operation"
 </template>
 
 p. yields the text _public op name(): type_ where the display text 'public' is replaced with a drop 
-down filled with the literal values as defined in the Visibility _EEnumeration_. Also, 'name' and 'type' 
+down filled with the literal values as defined in the _EEnum_ _Visibility_. Also, _name_ and _type_ 
 are template variables.
 
 !images/templates_enum.png!

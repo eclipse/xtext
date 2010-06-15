@@ -29,7 +29,7 @@
 140-labelprovider.textile                 | yes (jk)                |  ß  
 150-contentassist.textile                 | ?                       |  ß  
 155-quickfix.textile                      | yes (jk)                |  ß 
-160-templates.textile                     | yes (ß)                 |   
+160-templates.textile                     | yes (ß)                 |  jk
 170-outline.textile                       | ?                       |  ß  
 180-hyperlinking.textile                  | yes (ß)                 |    
 195-highlighting.textile                  | yes (ß)                 |    
