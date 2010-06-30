@@ -20,7 +20,7 @@ RULE_SL_COMMENT=9
 '||'=58
 '='=12
 'instanceof'=42
-'super'=55
+'super'=56
 '{'=33
 ':'=40
 'new'=50
@@ -35,7 +35,7 @@ RULE_SL_COMMENT=9
 'true'=60
 'false'=51
 ','=39
-'&'=56
+'&'=55
 '&&'=59
 'def'=29
 'while'=48

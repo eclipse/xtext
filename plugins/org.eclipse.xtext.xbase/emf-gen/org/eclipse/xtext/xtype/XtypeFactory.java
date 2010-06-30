@@ -26,15 +26,6 @@ public interface XtypeFactory extends EFactory
   XtypeFactory eINSTANCE = org.eclipse.xtext.xtype.impl.XtypeFactoryImpl.init();
 
   /**
-   * Returns a new object of class '<em>XType Ref</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>XType Ref</em>'.
-   * @generated
-   */
-  XTypeRef createXTypeRef();
-
-  /**
    * Returns a new object of class '<em>XFunction Type Ref</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -42,33 +33,6 @@ public interface XtypeFactory extends EFactory
    * @generated
    */
   XFunctionTypeRef createXFunctionTypeRef();
-
-  /**
-   * Returns a new object of class '<em>XSimple Type Ref</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>XSimple Type Ref</em>'.
-   * @generated
-   */
-  XSimpleTypeRef createXSimpleTypeRef();
-
-  /**
-   * Returns a new object of class '<em>XWildcard Param</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>XWildcard Param</em>'.
-   * @generated
-   */
-  XWildcardParam createXWildcardParam();
-
-  /**
-   * Returns a new object of class '<em>XType Param Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>XType Param Declaration</em>'.
-   * @generated
-   */
-  XTypeParamDeclaration createXTypeParamDeclaration();
 
   /**
    * Returns the package supported by this factory.

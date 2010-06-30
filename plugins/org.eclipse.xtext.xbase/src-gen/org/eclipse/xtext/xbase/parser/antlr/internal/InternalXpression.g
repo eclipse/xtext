@@ -1283,9 +1283,9 @@ ruleXUnaryOperation returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXUnaryOperationAccess().getTypeXTypeRefParserRuleCall_1_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXUnaryOperationAccess().getTypeJvmTypeReferenceParserRuleCall_1_2_0(), currentNode); 
 	    }
-		lv_type_5_0=ruleXTypeRef		{
+		lv_type_5_0=ruleJvmTypeReference		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXUnaryOperationRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -1295,7 +1295,7 @@ ruleXUnaryOperation returns [EObject current=null]
 	       			$current, 
 	       			"type",
 	        		lv_type_5_0, 
-	        		"XTypeRef", 
+	        		"JvmTypeReference", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -2369,9 +2369,9 @@ ruleXVariableDeclaration returns [EObject current=null]
     |(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXVariableDeclarationAccess().getTypeXTypeRefParserRuleCall_0_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXVariableDeclarationAccess().getTypeJvmTypeReferenceParserRuleCall_0_1_0(), currentNode); 
 	    }
-		lv_type_1_0=ruleXTypeRef		{
+		lv_type_1_0=ruleJvmTypeReference		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXVariableDeclarationRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -2381,7 +2381,7 @@ ruleXVariableDeclaration returns [EObject current=null]
 	       			$current, 
 	       			"type",
 	        		lv_type_1_0, 
-	        		"XTypeRef", 
+	        		"JvmTypeReference", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -2468,9 +2468,9 @@ ruleXDeclaredParameter returns [EObject current=null]
 ((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXDeclaredParameterAccess().getTypeXTypeRefParserRuleCall_0_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXDeclaredParameterAccess().getTypeJvmTypeReferenceParserRuleCall_0_0(), currentNode); 
 	    }
-		lv_type_0_0=ruleXTypeRef		{
+		lv_type_0_0=ruleJvmTypeReference		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXDeclaredParameterRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -2480,7 +2480,7 @@ ruleXDeclaredParameter returns [EObject current=null]
 	       			$current, 
 	       			"type",
 	        		lv_type_0_0, 
-	        		"XTypeRef", 
+	        		"JvmTypeReference", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -2650,9 +2650,9 @@ ruleXConstructorCall returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXConstructorCallAccess().getTypeXTypeRefParserRuleCall_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXConstructorCallAccess().getTypeJvmTypeReferenceParserRuleCall_1_0(), currentNode); 
 	    }
-		lv_type_1_0=ruleXTypeRef		{
+		lv_type_1_0=ruleJvmTypeReference		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXConstructorCallRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -2662,7 +2662,7 @@ ruleXConstructorCall returns [EObject current=null]
 	       			$current, 
 	       			"type",
 	        		lv_type_1_0, 
-	        		"XTypeRef", 
+	        		"JvmTypeReference", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -3152,17 +3152,17 @@ ruleXRichStringLiteral returns [EObject current=null]
 
 
 
-// Entry rule entryRuleXTypeRef
-entryRuleXTypeRef returns [EObject current=null] 
+// Entry rule entryRuleJvmTypeReference
+entryRuleJvmTypeReference returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getXTypeRefRule(), currentNode); }
-	 iv_ruleXTypeRef=ruleXTypeRef 
-	 { $current=$iv_ruleXTypeRef.current; } 
+	{ currentNode = createCompositeNode(grammarAccess.getJvmTypeReferenceRule(), currentNode); }
+	 iv_ruleJvmTypeReference=ruleJvmTypeReference 
+	 { $current=$iv_ruleJvmTypeReference.current; } 
 	 EOF 
 ;
 
-// Rule XTypeRef
-ruleXTypeRef returns [EObject current=null] 
+// Rule JvmTypeReference
+ruleJvmTypeReference returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -3173,11 +3173,11 @@ ruleXTypeRef returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getXTypeRefAccess().getXSimpleTypeRefParserRuleCall_0(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getJvmTypeReferenceAccess().getJvmParameterizedTypeReferenceParserRuleCall_0(), currentNode); 
     }
-    this_XSimpleTypeRef_0=ruleXSimpleTypeRef
+    this_JvmParameterizedTypeReference_0=ruleJvmParameterizedTypeReference
     { 
-        $current = $this_XSimpleTypeRef_0.current; 
+        $current = $this_JvmParameterizedTypeReference_0.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -3186,7 +3186,7 @@ ruleXTypeRef returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getXTypeRefAccess().getXFunctionTypeRefParserRuleCall_1(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getJvmTypeReferenceAccess().getXFunctionTypeRefParserRuleCall_1(), currentNode); 
     }
     this_XFunctionTypeRef_1=ruleXFunctionTypeRef
     { 
@@ -3223,9 +3223,9 @@ ruleXFunctionTypeRef returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXFunctionTypeRefAccess().getParamTypesXTypeRefParserRuleCall_0_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXFunctionTypeRefAccess().getArgumentsJvmTypeArgumentParserRuleCall_0_1_0(), currentNode); 
 	    }
-		lv_paramTypes_1_0=ruleXTypeRef		{
+		lv_arguments_1_0=ruleJvmTypeArgument		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXFunctionTypeRefRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -3233,9 +3233,9 @@ ruleXFunctionTypeRef returns [EObject current=null]
 	        try {
 	       		add(
 	       			$current, 
-	       			"paramTypes",
-	        		lv_paramTypes_1_0, 
-	        		"XTypeRef", 
+	       			"arguments",
+	        		lv_arguments_1_0, 
+	        		"JvmTypeArgument", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -3251,9 +3251,9 @@ ruleXFunctionTypeRef returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXFunctionTypeRefAccess().getParamTypesXTypeRefParserRuleCall_0_2_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXFunctionTypeRefAccess().getArgumentsJvmTypeArgumentParserRuleCall_0_2_1_0(), currentNode); 
 	    }
-		lv_paramTypes_3_0=ruleXTypeRef		{
+		lv_arguments_3_0=ruleJvmTypeArgument		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXFunctionTypeRefRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -3261,9 +3261,9 @@ ruleXFunctionTypeRef returns [EObject current=null]
 	        try {
 	       		add(
 	       			$current, 
-	       			"paramTypes",
-	        		lv_paramTypes_3_0, 
-	        		"XTypeRef", 
+	       			"arguments",
+	        		lv_arguments_3_0, 
+	        		"JvmTypeArgument", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -3283,19 +3283,19 @@ ruleXFunctionTypeRef returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXFunctionTypeRefAccess().getReturnTypeXTypeRefParserRuleCall_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXFunctionTypeRefAccess().getArgumentsJvmTypeArgumentParserRuleCall_2_0(), currentNode); 
 	    }
-		lv_returnType_6_0=ruleXTypeRef		{
+		lv_arguments_6_0=ruleJvmTypeArgument		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXFunctionTypeRefRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
-	       		set(
+	       		add(
 	       			$current, 
-	       			"returnType",
-	        		lv_returnType_6_0, 
-	        		"XTypeRef", 
+	       			"arguments",
+	        		lv_arguments_6_0, 
+	        		"JvmTypeArgument", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -3311,17 +3311,17 @@ ruleXFunctionTypeRef returns [EObject current=null]
 
 
 
-// Entry rule entryRuleXSimpleTypeRef
-entryRuleXSimpleTypeRef returns [EObject current=null] 
+// Entry rule entryRuleJvmParameterizedTypeReference
+entryRuleJvmParameterizedTypeReference returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getXSimpleTypeRefRule(), currentNode); }
-	 iv_ruleXSimpleTypeRef=ruleXSimpleTypeRef 
-	 { $current=$iv_ruleXSimpleTypeRef.current; } 
+	{ currentNode = createCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceRule(), currentNode); }
+	 iv_ruleJvmParameterizedTypeReference=ruleJvmParameterizedTypeReference 
+	 { $current=$iv_ruleJvmParameterizedTypeReference.current; } 
 	 EOF 
 ;
 
-// Rule XSimpleTypeRef
-ruleXSimpleTypeRef returns [EObject current=null] 
+// Rule JvmParameterizedTypeReference
+ruleJvmParameterizedTypeReference returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -3334,12 +3334,12 @@ ruleXSimpleTypeRef returns [EObject current=null]
 		}
 		{
 			if ($current==null) {
-	            $current = factory.create(grammarAccess.getXSimpleTypeRefRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getJvmParameterizedTypeReferenceRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXSimpleTypeRefAccess().getTypeJvmTypeCrossReference_0_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeJvmTypeCrossReference_0_0(), currentNode); 
 	    }
 		ruleQualifiedName		{ 
 	        currentNode = currentNode.getParent();
@@ -3348,24 +3348,24 @@ ruleXSimpleTypeRef returns [EObject current=null]
 )
 )(	'<' 
     {
-        createLeafNode(grammarAccess.getXSimpleTypeRefAccess().getLessThanSignKeyword_1_0(), null); 
+        createLeafNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getLessThanSignKeyword_1_0(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXSimpleTypeRefAccess().getTypeParamsXTypeParamParserRuleCall_1_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmTypeArgumentParserRuleCall_1_1_0(), currentNode); 
 	    }
-		lv_typeParams_2_0=ruleXTypeParam		{
+		lv_arguments_2_0=ruleJvmTypeArgument		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getXSimpleTypeRefRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getJvmParameterizedTypeReferenceRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
 	       		add(
 	       			$current, 
-	       			"typeParams",
-	        		lv_typeParams_2_0, 
-	        		"XTypeParam", 
+	       			"arguments",
+	        		lv_arguments_2_0, 
+	        		"JvmTypeArgument", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -3376,24 +3376,24 @@ ruleXSimpleTypeRef returns [EObject current=null]
 )
 )(	',' 
     {
-        createLeafNode(grammarAccess.getXSimpleTypeRefAccess().getCommaKeyword_1_2_0(), null); 
+        createLeafNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getCommaKeyword_1_2_0(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXSimpleTypeRefAccess().getTypeParamsXTypeParamParserRuleCall_1_2_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmTypeArgumentParserRuleCall_1_2_1_0(), currentNode); 
 	    }
-		lv_typeParams_4_0=ruleXTypeParam		{
+		lv_arguments_4_0=ruleJvmTypeArgument		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getXSimpleTypeRefRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getJvmParameterizedTypeReferenceRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
 	       		add(
 	       			$current, 
-	       			"typeParams",
-	        		lv_typeParams_4_0, 
-	        		"XTypeParam", 
+	       			"arguments",
+	        		lv_arguments_4_0, 
+	        		"JvmTypeArgument", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -3404,7 +3404,7 @@ ruleXSimpleTypeRef returns [EObject current=null]
 )
 ))*	'>' 
     {
-        createLeafNode(grammarAccess.getXSimpleTypeRefAccess().getGreaterThanSignKeyword_1_3(), null); 
+        createLeafNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGreaterThanSignKeyword_1_3(), null); 
     }
 )?)
 ;
@@ -3413,17 +3413,17 @@ ruleXSimpleTypeRef returns [EObject current=null]
 
 
 
-// Entry rule entryRuleXTypeParam
-entryRuleXTypeParam returns [EObject current=null] 
+// Entry rule entryRuleJvmTypeArgument
+entryRuleJvmTypeArgument returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getXTypeParamRule(), currentNode); }
-	 iv_ruleXTypeParam=ruleXTypeParam 
-	 { $current=$iv_ruleXTypeParam.current; } 
+	{ currentNode = createCompositeNode(grammarAccess.getJvmTypeArgumentRule(), currentNode); }
+	 iv_ruleJvmTypeArgument=ruleJvmTypeArgument 
+	 { $current=$iv_ruleJvmTypeArgument.current; } 
 	 EOF 
 ;
 
-// Rule XTypeParam
-ruleXTypeParam returns [EObject current=null] 
+// Rule JvmTypeArgument
+ruleJvmTypeArgument returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -3434,11 +3434,11 @@ ruleXTypeParam returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getXTypeParamAccess().getXTypeRefParserRuleCall_0(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getJvmTypeArgumentAccess().getJvmReferenceTypeArgumentParserRuleCall_0(), currentNode); 
     }
-    this_XTypeRef_0=ruleXTypeRef
+    this_JvmReferenceTypeArgument_0=ruleJvmReferenceTypeArgument
     { 
-        $current = $this_XTypeRef_0.current; 
+        $current = $this_JvmReferenceTypeArgument_0.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -3447,11 +3447,11 @@ ruleXTypeParam returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getXTypeParamAccess().getXWildcardParamParserRuleCall_1(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getJvmTypeArgumentAccess().getJvmWildcardTypeArgumentParserRuleCall_1(), currentNode); 
     }
-    this_XWildcardParam_1=ruleXWildcardParam
+    this_JvmWildcardTypeArgument_1=ruleJvmWildcardTypeArgument
     { 
-        $current = $this_XWildcardParam_1.current; 
+        $current = $this_JvmWildcardTypeArgument_1.current; 
         currentNode = currentNode.getParent();
     }
 )
@@ -3461,17 +3461,64 @@ ruleXTypeParam returns [EObject current=null]
 
 
 
-// Entry rule entryRuleXWildcardParam
-entryRuleXWildcardParam returns [EObject current=null] 
+// Entry rule entryRuleJvmReferenceTypeArgument
+entryRuleJvmReferenceTypeArgument returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getXWildcardParamRule(), currentNode); }
-	 iv_ruleXWildcardParam=ruleXWildcardParam 
-	 { $current=$iv_ruleXWildcardParam.current; } 
+	{ currentNode = createCompositeNode(grammarAccess.getJvmReferenceTypeArgumentRule(), currentNode); }
+	 iv_ruleJvmReferenceTypeArgument=ruleJvmReferenceTypeArgument 
+	 { $current=$iv_ruleJvmReferenceTypeArgument.current; } 
 	 EOF 
 ;
 
-// Rule XWildcardParam
-ruleXWildcardParam returns [EObject current=null] 
+// Rule JvmReferenceTypeArgument
+ruleJvmReferenceTypeArgument returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getJvmReferenceTypeArgumentAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_0(), currentNode); 
+	    }
+		lv_typeReference_0_0=ruleJvmTypeReference		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getJvmReferenceTypeArgumentRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"typeReference",
+	        		lv_typeReference_0_0, 
+	        		"JvmTypeReference", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)
+;
+
+
+
+
+
+// Entry rule entryRuleJvmWildcardTypeArgument
+entryRuleJvmWildcardTypeArgument returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getJvmWildcardTypeArgumentRule(), currentNode); }
+	 iv_ruleJvmWildcardTypeArgument=ruleJvmWildcardTypeArgument 
+	 { $current=$iv_ruleJvmWildcardTypeArgument.current; } 
+	 EOF 
+;
+
+// Rule JvmWildcardTypeArgument
+ruleJvmWildcardTypeArgument returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -3482,10 +3529,10 @@ ruleXWildcardParam returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        temp=factory.create(grammarAccess.getXWildcardParamAccess().getXWildcardParamAction_0().getType().getClassifier());
+        temp=factory.create(grammarAccess.getJvmWildcardTypeArgumentAccess().getJvmWildcardTypeArgumentAction_0().getType().getClassifier());
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getXWildcardParamAccess().getXWildcardParamAction_0(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.getJvmWildcardTypeArgumentAccess().getJvmWildcardTypeArgumentAction_0(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -3493,28 +3540,100 @@ ruleXWildcardParam returns [EObject current=null]
     }
 )	'?' 
     {
-        createLeafNode(grammarAccess.getXWildcardParamAccess().getQuestionMarkKeyword_1(), null); 
+        createLeafNode(grammarAccess.getJvmWildcardTypeArgumentAccess().getQuestionMarkKeyword_1(), null); 
     }
-((	'extends' 
+((
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsJvmUpperBoundParserRuleCall_2_0_0(), currentNode); 
+	    }
+		lv_constraints_2_0=ruleJvmUpperBound		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getJvmWildcardTypeArgumentRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"constraints",
+	        		lv_constraints_2_0, 
+	        		"JvmUpperBound", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)
+    |(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsJvmLowerBoundParserRuleCall_2_1_0(), currentNode); 
+	    }
+		lv_constraints_3_0=ruleJvmLowerBound		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getJvmWildcardTypeArgumentRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"constraints",
+	        		lv_constraints_3_0, 
+	        		"JvmLowerBound", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+))?)
+;
+
+
+
+
+
+// Entry rule entryRuleJvmUpperBound
+entryRuleJvmUpperBound returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getJvmUpperBoundRule(), currentNode); }
+	 iv_ruleJvmUpperBound=ruleJvmUpperBound 
+	 { $current=$iv_ruleJvmUpperBound.current; } 
+	 EOF 
+;
+
+// Rule JvmUpperBound
+ruleJvmUpperBound returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(	'extends' 
     {
-        createLeafNode(grammarAccess.getXWildcardParamAccess().getExtendsKeyword_2_0_0(), null); 
+        createLeafNode(grammarAccess.getJvmUpperBoundAccess().getExtendsKeyword_0(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXWildcardParamAccess().getExtendsXTypeRefParserRuleCall_2_0_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getJvmUpperBoundAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0(), currentNode); 
 	    }
-		lv_extends_3_0=ruleXTypeRef		{
+		lv_typeReference_1_0=ruleJvmTypeReference		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getXWildcardParamRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getJvmUpperBoundRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
 	       		set(
 	       			$current, 
-	       			"extends",
-	        		lv_extends_3_0, 
-	        		"XTypeRef", 
+	       			"typeReference",
+	        		lv_typeReference_1_0, 
+	        		"JvmTypeReference", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -3524,26 +3643,48 @@ ruleXWildcardParam returns [EObject current=null]
 
 )
 ))
-    |(	'super' 
+;
+
+
+
+
+
+// Entry rule entryRuleJvmUpperBoundAnded
+entryRuleJvmUpperBoundAnded returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getJvmUpperBoundAndedRule(), currentNode); }
+	 iv_ruleJvmUpperBoundAnded=ruleJvmUpperBoundAnded 
+	 { $current=$iv_ruleJvmUpperBoundAnded.current; } 
+	 EOF 
+;
+
+// Rule JvmUpperBoundAnded
+ruleJvmUpperBoundAnded returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(	'&' 
     {
-        createLeafNode(grammarAccess.getXWildcardParamAccess().getSuperKeyword_2_1_0(), null); 
+        createLeafNode(grammarAccess.getJvmUpperBoundAndedAccess().getAmpersandKeyword_0(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXWildcardParamAccess().getSuperXTypeRefParserRuleCall_2_1_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getJvmUpperBoundAndedAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0(), currentNode); 
 	    }
-		lv_super_5_0=ruleXTypeRef		{
+		lv_typeReference_1_0=ruleJvmTypeReference		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getXWildcardParamRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getJvmUpperBoundAndedRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
 	       		set(
 	       			$current, 
-	       			"super",
-	        		lv_super_5_0, 
-	        		"XTypeRef", 
+	       			"typeReference",
+	        		lv_typeReference_1_0, 
+	        		"JvmTypeReference", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -3552,7 +3693,58 @@ ruleXWildcardParam returns [EObject current=null]
 	    }
 
 )
-)))?)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleJvmLowerBound
+entryRuleJvmLowerBound returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getJvmLowerBoundRule(), currentNode); }
+	 iv_ruleJvmLowerBound=ruleJvmLowerBound 
+	 { $current=$iv_ruleJvmLowerBound.current; } 
+	 EOF 
+;
+
+// Rule JvmLowerBound
+ruleJvmLowerBound returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(	'super' 
+    {
+        createLeafNode(grammarAccess.getJvmLowerBoundAccess().getSuperKeyword_0(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getJvmLowerBoundAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0(), currentNode); 
+	    }
+		lv_typeReference_1_0=ruleJvmTypeReference		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getJvmLowerBoundRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"typeReference",
+	        		lv_typeReference_1_0, 
+	        		"JvmTypeReference", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+))
 ;
 
 

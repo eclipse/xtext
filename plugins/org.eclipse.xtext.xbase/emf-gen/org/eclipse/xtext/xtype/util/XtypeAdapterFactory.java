@@ -13,7 +13,8 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.common.types.JvmIdentifyableElement;
-import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.xtype.*;
 
@@ -81,34 +82,9 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl
     new XtypeSwitch<Adapter>()
     {
       @Override
-      public Adapter caseXTypeRef(XTypeRef object)
-      {
-        return createXTypeRefAdapter();
-      }
-      @Override
       public Adapter caseXFunctionTypeRef(XFunctionTypeRef object)
       {
         return createXFunctionTypeRefAdapter();
-      }
-      @Override
-      public Adapter caseXSimpleTypeRef(XSimpleTypeRef object)
-      {
-        return createXSimpleTypeRefAdapter();
-      }
-      @Override
-      public Adapter caseXWildcardParam(XWildcardParam object)
-      {
-        return createXWildcardParamAdapter();
-      }
-      @Override
-      public Adapter caseXAbstractTypeParamDeclaration(XAbstractTypeParamDeclaration object)
-      {
-        return createXAbstractTypeParamDeclarationAdapter();
-      }
-      @Override
-      public Adapter caseXTypeParamDeclaration(XTypeParamDeclaration object)
-      {
-        return createXTypeParamDeclarationAdapter();
       }
       @Override
       public Adapter caseJvmIdentifyableElement(JvmIdentifyableElement object)
@@ -116,9 +92,14 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl
         return createJvmIdentifyableElementAdapter();
       }
       @Override
-      public Adapter caseJvmType(JvmType object)
+      public Adapter caseJvmTypeReference(JvmTypeReference object)
       {
-        return createJvmTypeAdapter();
+        return createJvmTypeReferenceAdapter();
+      }
+      @Override
+      public Adapter caseJvmParameterizedTypeReference(JvmParameterizedTypeReference object)
+      {
+        return createJvmParameterizedTypeReferenceAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -143,21 +124,6 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl
 
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.XTypeRef <em>XType Ref</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.xtype.XTypeRef
-   * @generated
-   */
-  public Adapter createXTypeRefAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.XFunctionTypeRef <em>XFunction Type Ref</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -168,66 +134,6 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createXFunctionTypeRefAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.XSimpleTypeRef <em>XSimple Type Ref</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.xtype.XSimpleTypeRef
-   * @generated
-   */
-  public Adapter createXSimpleTypeRefAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.XWildcardParam <em>XWildcard Param</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.xtype.XWildcardParam
-   * @generated
-   */
-  public Adapter createXWildcardParamAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.XAbstractTypeParamDeclaration <em>XAbstract Type Param Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.xtype.XAbstractTypeParamDeclaration
-   * @generated
-   */
-  public Adapter createXAbstractTypeParamDeclarationAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.XTypeParamDeclaration <em>XType Param Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.xtype.XTypeParamDeclaration
-   * @generated
-   */
-  public Adapter createXTypeParamDeclarationAdapter()
   {
     return null;
   }
@@ -248,16 +154,31 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmType <em>Jvm Type</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmTypeReference <em>Jvm Type Reference</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.common.types.JvmType
+   * @see org.eclipse.xtext.common.types.JvmTypeReference
    * @generated
    */
-  public Adapter createJvmTypeAdapter()
+  public Adapter createJvmTypeReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmParameterizedTypeReference <em>Jvm Parameterized Type Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.common.types.JvmParameterizedTypeReference
+   * @generated
+   */
+  public Adapter createJvmParameterizedTypeReferenceAdapter()
   {
     return null;
   }

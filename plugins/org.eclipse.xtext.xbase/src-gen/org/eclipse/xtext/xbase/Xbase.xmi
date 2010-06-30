@@ -16,7 +16,7 @@
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" cardinality="?" feature="package" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.6"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.10"/>
         </elements>
         <elements xsi:type="xtext:Assignment" cardinality="*" feature="imports" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
@@ -42,7 +42,7 @@
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:RuleCall" rule="/2/@rules.6"/>
+        <elements xsi:type="xtext:RuleCall" rule="/2/@rules.10"/>
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Keyword" value="."/>
           <elements xsi:type="xtext:Keyword" value="*"/>
@@ -88,12 +88,12 @@
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Keyword" value="&lt;"/>
           <elements xsi:type="xtext:Assignment" feature="typeParams" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.5"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.9"/>
           </elements>
           <elements xsi:type="xtext:Group" cardinality="*">
             <elements xsi:type="xtext:Keyword" value=","/>
             <elements xsi:type="xtext:Assignment" feature="typeParams" operator="+=">
-              <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.5"/>
+              <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.9"/>
             </elements>
           </elements>
           <elements xsi:type="xtext:Keyword" value=">"/>
@@ -254,7 +254,7 @@
                 <type metamodel="/1/@metamodelDeclarations.1">
                   <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmType"/>
                 </type>
-                <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.6"/>
+                <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.10"/>
               </terminal>
             </elements>
           </elements>
@@ -727,7 +727,7 @@
             <type metamodel="/1/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmType"/>
             </type>
-            <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.6"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.10"/>
           </terminal>
         </elements>
         <elements xsi:type="xtext:Keyword" value="."/>
@@ -795,12 +795,12 @@
     <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel">
       <ePackage href="http://www.eclipse.org/xtext/xbase/Xtype#/"/>
     </metamodelDeclarations>
-    <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="types">
+    <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel">
       <ePackage href="http://www.eclipse.org/xtext/common/JavaVMTypes#/"/>
     </metamodelDeclarations>
-    <rules xsi:type="xtext:ParserRule" name="XTypeRef">
-      <type metamodel="/2/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xtype#//XTypeRef"/>
+    <rules xsi:type="xtext:ParserRule" name="JvmTypeReference">
+      <type metamodel="/2/@metamodelDeclarations.1">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmTypeReference"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:RuleCall" rule="/2/@rules.2"/>
@@ -814,26 +814,26 @@
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Keyword" value="("/>
-          <elements xsi:type="xtext:Assignment" feature="paramTypes" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
+          <elements xsi:type="xtext:Assignment" feature="arguments" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.3"/>
           </elements>
           <elements xsi:type="xtext:Group" cardinality="*">
             <elements xsi:type="xtext:Keyword" value=","/>
-            <elements xsi:type="xtext:Assignment" feature="paramTypes" operator="+=">
-              <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
+            <elements xsi:type="xtext:Assignment" feature="arguments" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.3"/>
             </elements>
           </elements>
           <elements xsi:type="xtext:Keyword" value=")"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value="=>"/>
-        <elements xsi:type="xtext:Assignment" feature="returnType" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
+        <elements xsi:type="xtext:Assignment" feature="arguments" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.3"/>
         </elements>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="XSimpleTypeRef">
-      <type metamodel="/2/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xtype#//XSimpleTypeRef"/>
+    <rules xsi:type="xtext:ParserRule" name="JvmParameterizedTypeReference">
+      <type metamodel="/2/@metamodelDeclarations.1">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmParameterizedTypeReference"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="type" operator="=">
@@ -841,17 +841,17 @@
             <type metamodel="/2/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmType"/>
             </type>
-            <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.6"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.10"/>
           </terminal>
         </elements>
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Keyword" value="&lt;"/>
-          <elements xsi:type="xtext:Assignment" feature="typeParams" operator="+=">
+          <elements xsi:type="xtext:Assignment" feature="arguments" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.3"/>
           </elements>
           <elements xsi:type="xtext:Group" cardinality="*">
             <elements xsi:type="xtext:Keyword" value=","/>
-            <elements xsi:type="xtext:Assignment" feature="typeParams" operator="+=">
+            <elements xsi:type="xtext:Assignment" feature="arguments" operator="+=">
               <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.3"/>
             </elements>
           </elements>
@@ -859,45 +859,80 @@
         </elements>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="XTypeParam">
-      <type metamodel="/2/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xtype#//XTypeRef"/>
+    <rules xsi:type="xtext:ParserRule" name="JvmTypeArgument">
+      <type metamodel="/2/@metamodelDeclarations.1">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmTypeArgument"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <elements xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
         <elements xsi:type="xtext:RuleCall" rule="/2/@rules.4"/>
+        <elements xsi:type="xtext:RuleCall" rule="/2/@rules.5"/>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="XWildcardParam">
-      <type metamodel="/2/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xtype#//XTypeRef"/>
+    <rules xsi:type="xtext:ParserRule" name="JvmReferenceTypeArgument">
+      <type metamodel="/2/@metamodelDeclarations.1">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmReferenceTypeArgument"/>
+      </type>
+      <alternatives xsi:type="xtext:Assignment" feature="typeReference" operator="=">
+        <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="JvmWildcardTypeArgument">
+      <type metamodel="/2/@metamodelDeclarations.1">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmWildcardTypeArgument"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Action">
-          <type metamodel="/2/@metamodelDeclarations.0">
-            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xtype#//XWildcardParam"/>
+          <type metamodel="/2/@metamodelDeclarations.1">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmWildcardTypeArgument"/>
           </type>
         </elements>
         <elements xsi:type="xtext:Keyword" value="?"/>
         <elements xsi:type="xtext:Alternatives" cardinality="?">
-          <elements xsi:type="xtext:Group">
-            <elements xsi:type="xtext:Keyword" value="extends"/>
-            <elements xsi:type="xtext:Assignment" feature="extends" operator="=">
-              <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
-            </elements>
+          <elements xsi:type="xtext:Assignment" feature="constraints" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.6"/>
           </elements>
-          <elements xsi:type="xtext:Group">
-            <elements xsi:type="xtext:Keyword" value="super"/>
-            <elements xsi:type="xtext:Assignment" feature="super" operator="=">
-              <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
-            </elements>
+          <elements xsi:type="xtext:Assignment" feature="constraints" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.8"/>
           </elements>
         </elements>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="XTypeParamDeclaration">
-      <type metamodel="/2/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xtype#//XTypeParamDeclaration"/>
+    <rules xsi:type="xtext:ParserRule" name="JvmUpperBound">
+      <type metamodel="/2/@metamodelDeclarations.1">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmUpperBound"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="extends"/>
+        <elements xsi:type="xtext:Assignment" feature="typeReference" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="JvmUpperBoundAnded">
+      <type metamodel="/2/@metamodelDeclarations.1">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmUpperBound"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="&amp;"/>
+        <elements xsi:type="xtext:Assignment" feature="typeReference" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="JvmLowerBound">
+      <type metamodel="/2/@metamodelDeclarations.1">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmLowerBound"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="super"/>
+        <elements xsi:type="xtext:Assignment" feature="typeReference" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="JvmTypeParameter">
+      <type metamodel="/2/@metamodelDeclarations.1">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmTypeParameter"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="name" operator="=">
@@ -905,22 +940,15 @@
         </elements>
         <elements xsi:type="xtext:Alternatives" cardinality="?">
           <elements xsi:type="xtext:Group">
-            <elements xsi:type="xtext:Keyword" value="extends"/>
-            <elements xsi:type="xtext:Assignment" feature="extends" operator="+=">
-              <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
+            <elements xsi:type="xtext:Assignment" feature="constraints" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.6"/>
             </elements>
-            <elements xsi:type="xtext:Group" cardinality="*">
-              <elements xsi:type="xtext:Keyword" value="&amp;"/>
-              <elements xsi:type="xtext:Assignment" feature="extends" operator="+=">
-                <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
-              </elements>
+            <elements xsi:type="xtext:Assignment" cardinality="*" feature="constraints" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.7"/>
             </elements>
           </elements>
-          <elements xsi:type="xtext:Group">
-            <elements xsi:type="xtext:Keyword" value="super"/>
-            <elements xsi:type="xtext:Assignment" feature="super" operator="=">
-              <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
-            </elements>
+          <elements xsi:type="xtext:Assignment" feature="constraints" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.8"/>
           </elements>
         </elements>
       </alternatives>

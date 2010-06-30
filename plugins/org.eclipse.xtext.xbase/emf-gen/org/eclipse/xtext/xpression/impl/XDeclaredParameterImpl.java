@@ -14,10 +14,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.xtext.common.types.JvmTypeReference;
+
 import org.eclipse.xtext.xpression.XDeclaredParameter;
 import org.eclipse.xtext.xpression.XpressionPackage;
-
-import org.eclipse.xtext.xtype.XTypeRef;
 
 /**
  * <!-- begin-user-doc -->
@@ -43,7 +43,7 @@ public class XDeclaredParameterImpl extends MinimalEObjectImpl.Container impleme
    * @generated
    * @ordered
    */
-  protected XTypeRef type;
+  protected JvmTypeReference type;
 
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -91,7 +91,7 @@ public class XDeclaredParameterImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public XTypeRef getType()
+  public JvmTypeReference getType()
   {
     return type;
   }
@@ -101,9 +101,9 @@ public class XDeclaredParameterImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetType(XTypeRef newType, NotificationChain msgs)
+  public NotificationChain basicSetType(JvmTypeReference newType, NotificationChain msgs)
   {
-    XTypeRef oldType = type;
+    JvmTypeReference oldType = type;
     type = newType;
     if (eNotificationRequired())
     {
@@ -118,7 +118,7 @@ public class XDeclaredParameterImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(XTypeRef newType)
+  public void setType(JvmTypeReference newType)
   {
     if (newType != type)
     {
@@ -202,7 +202,7 @@ public class XDeclaredParameterImpl extends MinimalEObjectImpl.Container impleme
     switch (featureID)
     {
       case XpressionPackage.XDECLARED_PARAMETER__TYPE:
-        setType((XTypeRef)newValue);
+        setType((JvmTypeReference)newValue);
         return;
       case XpressionPackage.XDECLARED_PARAMETER__NAME:
         setName((String)newValue);
@@ -222,7 +222,7 @@ public class XDeclaredParameterImpl extends MinimalEObjectImpl.Container impleme
     switch (featureID)
     {
       case XpressionPackage.XDECLARED_PARAMETER__TYPE:
-        setType((XTypeRef)null);
+        setType((JvmTypeReference)null);
         return;
       case XpressionPackage.XDECLARED_PARAMETER__NAME:
         setName(NAME_EDEFAULT);

@@ -7,7 +7,7 @@ package org.eclipse.xtext.xpression;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.xtype.XTypeRef;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,6 +27,6 @@ public interface XExpression extends EObject
    * @model kind="operation"
    * @generated
    */
-  XTypeRef getDerivedReturnType();
+  JvmTypeReference getDerivedReturnType();
 
 } // XExpression

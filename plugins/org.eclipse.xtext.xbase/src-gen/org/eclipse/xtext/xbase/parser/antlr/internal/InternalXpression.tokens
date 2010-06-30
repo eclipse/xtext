@@ -21,6 +21,7 @@ RULE_SL_COMMENT=9
 'default'=41
 'false'=49
 '!='=17
+'&'=56
 ','=35
 '>='=19
 '&&'=15
@@ -34,7 +35,7 @@ RULE_SL_COMMENT=9
 '|'=36
 'instanceof'=18
 ')'=33
-'super'=56
+'super'=57
 '=='=16
 '{'=40
 'if'=37

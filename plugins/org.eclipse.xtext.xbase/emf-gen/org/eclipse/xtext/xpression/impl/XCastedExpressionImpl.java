@@ -13,11 +13,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.xtext.common.types.JvmTypeReference;
+
 import org.eclipse.xtext.xpression.XCastedExpression;
 import org.eclipse.xtext.xpression.XExpression;
 import org.eclipse.xtext.xpression.XpressionPackage;
-
-import org.eclipse.xtext.xtype.XTypeRef;
 
 /**
  * <!-- begin-user-doc -->
@@ -43,7 +43,7 @@ public class XCastedExpressionImpl extends XExpressionImpl implements XCastedExp
    * @generated
    * @ordered
    */
-  protected XTypeRef type;
+  protected JvmTypeReference type;
 
   /**
    * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
@@ -81,7 +81,7 @@ public class XCastedExpressionImpl extends XExpressionImpl implements XCastedExp
    * <!-- end-user-doc -->
    * @generated
    */
-  public XTypeRef getType()
+  public JvmTypeReference getType()
   {
     return type;
   }
@@ -91,9 +91,9 @@ public class XCastedExpressionImpl extends XExpressionImpl implements XCastedExp
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetType(XTypeRef newType, NotificationChain msgs)
+  public NotificationChain basicSetType(JvmTypeReference newType, NotificationChain msgs)
   {
-    XTypeRef oldType = type;
+    JvmTypeReference oldType = type;
     type = newType;
     if (eNotificationRequired())
     {
@@ -108,7 +108,7 @@ public class XCastedExpressionImpl extends XExpressionImpl implements XCastedExp
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(XTypeRef newType)
+  public void setType(JvmTypeReference newType)
   {
     if (newType != type)
     {
@@ -219,7 +219,7 @@ public class XCastedExpressionImpl extends XExpressionImpl implements XCastedExp
     switch (featureID)
     {
       case XpressionPackage.XCASTED_EXPRESSION__TYPE:
-        setType((XTypeRef)newValue);
+        setType((JvmTypeReference)newValue);
         return;
       case XpressionPackage.XCASTED_EXPRESSION__TARGET:
         setTarget((XExpression)newValue);
@@ -239,7 +239,7 @@ public class XCastedExpressionImpl extends XExpressionImpl implements XCastedExp
     switch (featureID)
     {
       case XpressionPackage.XCASTED_EXPRESSION__TYPE:
-        setType((XTypeRef)null);
+        setType((JvmTypeReference)null);
         return;
       case XpressionPackage.XCASTED_EXPRESSION__TARGET:
         setTarget((XExpression)null);

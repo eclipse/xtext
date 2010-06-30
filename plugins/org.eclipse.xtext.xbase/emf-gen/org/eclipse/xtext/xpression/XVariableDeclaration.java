@@ -5,7 +5,7 @@
  */
 package org.eclipse.xtext.xpression;
 
-import org.eclipse.xtext.xtype.XTypeRef;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,12 +36,12 @@ public interface XVariableDeclaration extends XExpression
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' containment reference.
-   * @see #setType(XTypeRef)
+   * @see #setType(JvmTypeReference)
    * @see org.eclipse.xtext.xpression.XpressionPackage#getXVariableDeclaration_Type()
    * @model containment="true"
    * @generated
    */
-  XTypeRef getType();
+  JvmTypeReference getType();
 
   /**
    * Sets the value of the '{@link org.eclipse.xtext.xpression.XVariableDeclaration#getType <em>Type</em>}' containment reference.
@@ -51,7 +51,7 @@ public interface XVariableDeclaration extends XExpression
    * @see #getType()
    * @generated
    */
-  void setType(XTypeRef value);
+  void setType(JvmTypeReference value);
 
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.

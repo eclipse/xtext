@@ -67,11 +67,7 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
   {
     switch (eClass.getClassifierID())
     {
-      case XtypePackage.XTYPE_REF: return createXTypeRef();
       case XtypePackage.XFUNCTION_TYPE_REF: return createXFunctionTypeRef();
-      case XtypePackage.XSIMPLE_TYPE_REF: return createXSimpleTypeRef();
-      case XtypePackage.XWILDCARD_PARAM: return createXWildcardParam();
-      case XtypePackage.XTYPE_PARAM_DECLARATION: return createXTypeParamDeclaration();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -82,54 +78,10 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public XTypeRef createXTypeRef()
-  {
-    XTypeRefImpl xTypeRef = new XTypeRefImpl();
-    return xTypeRef;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public XFunctionTypeRef createXFunctionTypeRef()
   {
-    XFunctionTypeRefImpl xFunctionTypeRef = new XFunctionTypeRefImpl();
+    XFunctionTypeRefImplCustom xFunctionTypeRef = new XFunctionTypeRefImplCustom();
     return xFunctionTypeRef;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public XSimpleTypeRef createXSimpleTypeRef()
-  {
-    XSimpleTypeRefImpl xSimpleTypeRef = new XSimpleTypeRefImpl();
-    return xSimpleTypeRef;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public XWildcardParam createXWildcardParam()
-  {
-    XWildcardParamImpl xWildcardParam = new XWildcardParamImpl();
-    return xWildcardParam;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public XTypeParamDeclaration createXTypeParamDeclaration()
-  {
-    XTypeParamDeclarationImpl xTypeParamDeclaration = new XTypeParamDeclarationImpl();
-    return xTypeParamDeclaration;
   }
 
   /**

@@ -25,14 +25,14 @@ XQualifiedNameWithWildCard :
 	QualifiedName  ('.' '*')?;
 	
 XClass :
-   "class" name=ID ("extends" extends=XTypeRef)? ('implements' implements+=XTypeRef)* '{'
+   "class" name=ID ("extends" extends=JvmTypeReference)? ('implements' implements+=JvmTypeReference)* '{'
 	   (functions+=XFunction)*
-   '}'; 
+   '}';
 
 XFunction  : 
 	( private?='private')? 
-	('<' typeParams+=XTypeParamDeclaration (',' typeParams+=XTypeParamDeclaration )*'>')?
-	(returnType=XTypeRef)? name=ID '(' (declaredParams+=XDeclaredParameter (',' declaredParams+=XDeclaredParameter )*)? ')'
+	('<' typeParams+=JvmTypeParameter (',' typeParams+=JvmTypeParameter )*'>')?
+	(returnType=JvmTypeReference)? name=ID '(' (declaredParams+=XDeclaredParameter (',' declaredParams+=XDeclaredParameter )*)? ')'
 			(':' expression=XExpression ';' | expression=XBlockExpression)
 ;
 

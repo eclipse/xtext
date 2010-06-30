@@ -21,14 +21,14 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+
 import org.eclipse.xtext.xbase.XFunction;
 import org.eclipse.xtext.xbase.XbasePackage;
 
 import org.eclipse.xtext.xpression.XDeclaredParameter;
 import org.eclipse.xtext.xpression.XExpression;
-
-import org.eclipse.xtext.xtype.XTypeParamDeclaration;
-import org.eclipse.xtext.xtype.XTypeRef;
 
 /**
  * <!-- begin-user-doc -->
@@ -78,7 +78,7 @@ public class XFunctionImpl extends MinimalEObjectImpl.Container implements XFunc
    * @generated
    * @ordered
    */
-  protected EList<XTypeParamDeclaration> typeParams;
+  protected EList<JvmTypeParameter> typeParams;
 
   /**
    * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' containment reference.
@@ -88,7 +88,7 @@ public class XFunctionImpl extends MinimalEObjectImpl.Container implements XFunc
    * @generated
    * @ordered
    */
-  protected XTypeRef returnType;
+  protected JvmTypeReference returnType;
 
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -179,11 +179,11 @@ public class XFunctionImpl extends MinimalEObjectImpl.Container implements XFunc
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<XTypeParamDeclaration> getTypeParams()
+  public EList<JvmTypeParameter> getTypeParams()
   {
     if (typeParams == null)
     {
-      typeParams = new EObjectContainmentEList<XTypeParamDeclaration>(XTypeParamDeclaration.class, this, XbasePackage.XFUNCTION__TYPE_PARAMS);
+      typeParams = new EObjectContainmentEList<JvmTypeParameter>(JvmTypeParameter.class, this, XbasePackage.XFUNCTION__TYPE_PARAMS);
     }
     return typeParams;
   }
@@ -193,7 +193,7 @@ public class XFunctionImpl extends MinimalEObjectImpl.Container implements XFunc
    * <!-- end-user-doc -->
    * @generated
    */
-  public XTypeRef getReturnType()
+  public JvmTypeReference getReturnType()
   {
     return returnType;
   }
@@ -203,9 +203,9 @@ public class XFunctionImpl extends MinimalEObjectImpl.Container implements XFunc
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetReturnType(XTypeRef newReturnType, NotificationChain msgs)
+  public NotificationChain basicSetReturnType(JvmTypeReference newReturnType, NotificationChain msgs)
   {
-    XTypeRef oldReturnType = returnType;
+    JvmTypeReference oldReturnType = returnType;
     returnType = newReturnType;
     if (eNotificationRequired())
     {
@@ -220,7 +220,7 @@ public class XFunctionImpl extends MinimalEObjectImpl.Container implements XFunc
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setReturnType(XTypeRef newReturnType)
+  public void setReturnType(JvmTypeReference newReturnType)
   {
     if (newReturnType != returnType)
     {
@@ -385,10 +385,10 @@ public class XFunctionImpl extends MinimalEObjectImpl.Container implements XFunc
         return;
       case XbasePackage.XFUNCTION__TYPE_PARAMS:
         getTypeParams().clear();
-        getTypeParams().addAll((Collection<? extends XTypeParamDeclaration>)newValue);
+        getTypeParams().addAll((Collection<? extends JvmTypeParameter>)newValue);
         return;
       case XbasePackage.XFUNCTION__RETURN_TYPE:
-        setReturnType((XTypeRef)newValue);
+        setReturnType((JvmTypeReference)newValue);
         return;
       case XbasePackage.XFUNCTION__NAME:
         setName((String)newValue);
@@ -421,7 +421,7 @@ public class XFunctionImpl extends MinimalEObjectImpl.Container implements XFunc
         getTypeParams().clear();
         return;
       case XbasePackage.XFUNCTION__RETURN_TYPE:
-        setReturnType((XTypeRef)null);
+        setReturnType((JvmTypeReference)null);
         return;
       case XbasePackage.XFUNCTION__NAME:
         setName(NAME_EDEFAULT);

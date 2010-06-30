@@ -5,10 +5,7 @@
  */
 package org.eclipse.xtext.xtype.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -17,11 +14,13 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+
+import org.eclipse.xtext.common.types.JvmTypeReference;
+
+import org.eclipse.xtext.common.types.impl.JvmParameterizedTypeReferenceImpl;
 
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
-import org.eclipse.xtext.xtype.XTypeRef;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 /**
@@ -38,27 +37,27 @@ import org.eclipse.xtext.xtype.XtypePackage;
  *
  * @generated
  */
-public class XFunctionTypeRefImpl extends XTypeRefImpl implements XFunctionTypeRef
+public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl implements XFunctionTypeRef
 {
   /**
-   * The cached value of the '{@link #getParamTypes() <em>Param Types</em>}' containment reference list.
+   * The cached value of the '{@link #getParamTypes() <em>Param Types</em>}' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getParamTypes()
    * @generated
    * @ordered
    */
-  protected EList<XTypeRef> paramTypes;
+  protected EList<JvmTypeReference> paramTypes;
 
   /**
-   * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' containment reference.
+   * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getReturnType()
    * @generated
    * @ordered
    */
-  protected XTypeRef returnType;
+  protected JvmTypeReference returnType;
 
   /**
    * <!-- begin-user-doc -->
@@ -86,11 +85,11 @@ public class XFunctionTypeRefImpl extends XTypeRefImpl implements XFunctionTypeR
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<XTypeRef> getParamTypes()
+  public EList<JvmTypeReference> getParamTypes()
   {
     if (paramTypes == null)
     {
-      paramTypes = new EObjectContainmentEList<XTypeRef>(XTypeRef.class, this, XtypePackage.XFUNCTION_TYPE_REF__PARAM_TYPES);
+      paramTypes = new EObjectResolvingEList<JvmTypeReference>(JvmTypeReference.class, this, XtypePackage.XFUNCTION_TYPE_REF__PARAM_TYPES);
     }
     return paramTypes;
   }
@@ -100,8 +99,18 @@ public class XFunctionTypeRefImpl extends XTypeRefImpl implements XFunctionTypeR
    * <!-- end-user-doc -->
    * @generated
    */
-  public XTypeRef getReturnType()
+  public JvmTypeReference getReturnType()
   {
+    if (returnType != null && returnType.eIsProxy())
+    {
+      InternalEObject oldReturnType = (InternalEObject)returnType;
+      returnType = (JvmTypeReference)eResolveProxy(oldReturnType);
+      if (returnType != oldReturnType)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE, oldReturnType, returnType));
+      }
+    }
     return returnType;
   }
 
@@ -110,55 +119,9 @@ public class XFunctionTypeRefImpl extends XTypeRefImpl implements XFunctionTypeR
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetReturnType(XTypeRef newReturnType, NotificationChain msgs)
+  public JvmTypeReference basicGetReturnType()
   {
-    XTypeRef oldReturnType = returnType;
-    returnType = newReturnType;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE, oldReturnType, newReturnType);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setReturnType(XTypeRef newReturnType)
-  {
-    if (newReturnType != returnType)
-    {
-      NotificationChain msgs = null;
-      if (returnType != null)
-        msgs = ((InternalEObject)returnType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE, null, msgs);
-      if (newReturnType != null)
-        msgs = ((InternalEObject)newReturnType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE, null, msgs);
-      msgs = basicSetReturnType(newReturnType, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE, newReturnType, newReturnType));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case XtypePackage.XFUNCTION_TYPE_REF__PARAM_TYPES:
-        return ((InternalEList<?>)getParamTypes()).basicRemove(otherEnd, msgs);
-      case XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE:
-        return basicSetReturnType(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    return returnType;
   }
 
   /**
@@ -174,51 +137,10 @@ public class XFunctionTypeRefImpl extends XTypeRefImpl implements XFunctionTypeR
       case XtypePackage.XFUNCTION_TYPE_REF__PARAM_TYPES:
         return getParamTypes();
       case XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE:
-        return getReturnType();
+        if (resolve) return getReturnType();
+        return basicGetReturnType();
     }
     return super.eGet(featureID, resolve, coreType);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @SuppressWarnings("unchecked")
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
-    switch (featureID)
-    {
-      case XtypePackage.XFUNCTION_TYPE_REF__PARAM_TYPES:
-        getParamTypes().clear();
-        getParamTypes().addAll((Collection<? extends XTypeRef>)newValue);
-        return;
-      case XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE:
-        setReturnType((XTypeRef)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID)
-  {
-    switch (featureID)
-    {
-      case XtypePackage.XFUNCTION_TYPE_REF__PARAM_TYPES:
-        getParamTypes().clear();
-        return;
-      case XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE:
-        setReturnType((XTypeRef)null);
-        return;
-    }
-    super.eUnset(featureID);
   }
 
   /**

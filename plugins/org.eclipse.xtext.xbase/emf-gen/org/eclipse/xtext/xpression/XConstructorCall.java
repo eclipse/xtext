@@ -7,7 +7,7 @@ package org.eclipse.xtext.xpression;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.xtext.xtype.XTypeRef;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,12 +38,12 @@ public interface XConstructorCall extends XExpression
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' containment reference.
-   * @see #setType(XTypeRef)
+   * @see #setType(JvmTypeReference)
    * @see org.eclipse.xtext.xpression.XpressionPackage#getXConstructorCall_Type()
    * @model containment="true"
    * @generated
    */
-  XTypeRef getType();
+  JvmTypeReference getType();
 
   /**
    * Sets the value of the '{@link org.eclipse.xtext.xpression.XConstructorCall#getType <em>Type</em>}' containment reference.
@@ -53,7 +53,7 @@ public interface XConstructorCall extends XExpression
    * @see #getType()
    * @generated
    */
-  void setType(XTypeRef value);
+  void setType(JvmTypeReference value);
 
   /**
    * Returns the value of the '<em><b>Params</b></em>' containment reference list.

@@ -9,11 +9,11 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+
 import org.eclipse.xtext.xpression.XDeclaredParameter;
 import org.eclipse.xtext.xpression.XExpression;
-
-import org.eclipse.xtext.xtype.XTypeParamDeclaration;
-import org.eclipse.xtext.xtype.XTypeRef;
 
 /**
  * <!-- begin-user-doc -->
@@ -66,7 +66,7 @@ public interface XFunction extends EObject
 
   /**
    * Returns the value of the '<em><b>Type Params</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.xtext.xtype.XTypeParamDeclaration}.
+   * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeParameter}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Type Params</em>' containment reference list isn't clear,
@@ -78,7 +78,7 @@ public interface XFunction extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<XTypeParamDeclaration> getTypeParams();
+  EList<JvmTypeParameter> getTypeParams();
 
   /**
    * Returns the value of the '<em><b>Return Type</b></em>' containment reference.
@@ -89,12 +89,12 @@ public interface XFunction extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Return Type</em>' containment reference.
-   * @see #setReturnType(XTypeRef)
+   * @see #setReturnType(JvmTypeReference)
    * @see org.eclipse.xtext.xbase.XbasePackage#getXFunction_ReturnType()
    * @model containment="true"
    * @generated
    */
-  XTypeRef getReturnType();
+  JvmTypeReference getReturnType();
 
   /**
    * Sets the value of the '{@link org.eclipse.xtext.xbase.XFunction#getReturnType <em>Return Type</em>}' containment reference.
@@ -104,7 +104,7 @@ public interface XFunction extends EObject
    * @see #getReturnType()
    * @generated
    */
-  void setReturnType(XTypeRef value);
+  void setReturnType(JvmTypeReference value);
 
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.

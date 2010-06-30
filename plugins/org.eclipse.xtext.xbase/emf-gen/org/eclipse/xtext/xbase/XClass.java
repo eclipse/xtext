@@ -9,7 +9,8 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.xtype.XTypeRef;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,6 +24,7 @@ import org.eclipse.xtext.xtype.XTypeRef;
  *   <li>{@link org.eclipse.xtext.xbase.XClass#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XClass#getImplements <em>Implements</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XClass#getFunctions <em>Functions</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XClass#getTypeParams <em>Type Params</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,12 +69,12 @@ public interface XClass extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Extends</em>' containment reference.
-   * @see #setExtends(XTypeRef)
+   * @see #setExtends(JvmTypeReference)
    * @see org.eclipse.xtext.xbase.XbasePackage#getXClass_Extends()
    * @model containment="true"
    * @generated
    */
-  XTypeRef getExtends();
+  JvmTypeReference getExtends();
 
   /**
    * Sets the value of the '{@link org.eclipse.xtext.xbase.XClass#getExtends <em>Extends</em>}' containment reference.
@@ -82,11 +84,11 @@ public interface XClass extends EObject
    * @see #getExtends()
    * @generated
    */
-  void setExtends(XTypeRef value);
+  void setExtends(JvmTypeReference value);
 
   /**
    * Returns the value of the '<em><b>Implements</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.xtext.xtype.XTypeRef}.
+   * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeReference}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Implements</em>' containment reference list isn't clear,
@@ -98,7 +100,7 @@ public interface XClass extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<XTypeRef> getImplements();
+  EList<JvmTypeReference> getImplements();
 
   /**
    * Returns the value of the '<em><b>Functions</b></em>' containment reference list.
@@ -115,5 +117,21 @@ public interface XClass extends EObject
    * @generated
    */
   EList<XFunction> getFunctions();
+
+  /**
+   * Returns the value of the '<em><b>Type Params</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeParameter}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Type Params</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Type Params</em>' containment reference list.
+   * @see org.eclipse.xtext.xbase.XbasePackage#getXClass_TypeParams()
+   * @model containment="true"
+   * @generated
+   */
+  EList<JvmTypeParameter> getTypeParams();
 
 } // XClass

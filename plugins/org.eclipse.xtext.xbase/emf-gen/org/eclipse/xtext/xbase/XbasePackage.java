@@ -262,13 +262,22 @@ public interface XbasePackage extends EPackage
   int XCLASS__FUNCTIONS = 3;
 
   /**
+   * The feature id for the '<em><b>Type Params</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XCLASS__TYPE_PARAMS = 4;
+
+  /**
    * The number of structural features of the '<em>XClass</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int XCLASS_FEATURE_COUNT = 4;
+  int XCLASS_FEATURE_COUNT = 5;
 
 
   /**
@@ -477,6 +486,17 @@ public interface XbasePackage extends EPackage
   EReference getXClass_Functions();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XClass#getTypeParams <em>Type Params</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Type Params</em>'.
+   * @see org.eclipse.xtext.xbase.XClass#getTypeParams()
+   * @see #getXClass()
+   * @generated
+   */
+  EReference getXClass_TypeParams();
+
+  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -658,6 +678,14 @@ public interface XbasePackage extends EPackage
      * @generated
      */
     EReference XCLASS__FUNCTIONS = eINSTANCE.getXClass_Functions();
+
+    /**
+     * The meta object literal for the '<em><b>Type Params</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference XCLASS__TYPE_PARAMS = eINSTANCE.getXClass_TypeParams();
 
   }
 

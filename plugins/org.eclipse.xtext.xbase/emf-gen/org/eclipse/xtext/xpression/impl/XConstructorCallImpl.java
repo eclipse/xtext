@@ -20,12 +20,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.xtext.common.types.JvmTypeReference;
+
 import org.eclipse.xtext.xpression.XBlockExpression;
 import org.eclipse.xtext.xpression.XConstructorCall;
 import org.eclipse.xtext.xpression.XExpression;
 import org.eclipse.xtext.xpression.XpressionPackage;
-
-import org.eclipse.xtext.xtype.XTypeRef;
 
 /**
  * <!-- begin-user-doc -->
@@ -52,7 +52,7 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
    * @generated
    * @ordered
    */
-  protected XTypeRef type;
+  protected JvmTypeReference type;
 
   /**
    * The cached value of the '{@link #getParams() <em>Params</em>}' containment reference list.
@@ -100,7 +100,7 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
    * <!-- end-user-doc -->
    * @generated
    */
-  public XTypeRef getType()
+  public JvmTypeReference getType()
   {
     return type;
   }
@@ -110,9 +110,9 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetType(XTypeRef newType, NotificationChain msgs)
+  public NotificationChain basicSetType(JvmTypeReference newType, NotificationChain msgs)
   {
-    XTypeRef oldType = type;
+    JvmTypeReference oldType = type;
     type = newType;
     if (eNotificationRequired())
     {
@@ -127,7 +127,7 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(XTypeRef newType)
+  public void setType(JvmTypeReference newType)
   {
     if (newType != type)
     {
@@ -257,7 +257,7 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
     switch (featureID)
     {
       case XpressionPackage.XCONSTRUCTOR_CALL__TYPE:
-        setType((XTypeRef)newValue);
+        setType((JvmTypeReference)newValue);
         return;
       case XpressionPackage.XCONSTRUCTOR_CALL__PARAMS:
         getParams().clear();
@@ -281,7 +281,7 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
     switch (featureID)
     {
       case XpressionPackage.XCONSTRUCTOR_CALL__TYPE:
-        setType((XTypeRef)null);
+        setType((JvmTypeReference)null);
         return;
       case XpressionPackage.XCONSTRUCTOR_CALL__PARAMS:
         getParams().clear();

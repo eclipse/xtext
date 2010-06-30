@@ -9,10 +9,10 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.xtext.common.types.JvmTypeReference;
+
 import org.eclipse.xtext.xpression.XExpression;
 import org.eclipse.xtext.xpression.XpressionPackage;
-
-import org.eclipse.xtext.xtype.XTypeRef;
 
 /**
  * <!-- begin-user-doc -->
@@ -51,7 +51,7 @@ public abstract class XExpressionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public XTypeRef getDerivedReturnType()
+  public JvmTypeReference getDerivedReturnType()
   {
     // TODO: implement this method
     // Ensure that you remove @generated or mark it @generated NOT

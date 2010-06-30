@@ -5,7 +5,6 @@
  */
 package org.eclipse.xtext.xtype.impl;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -22,12 +21,7 @@ import org.eclipse.xtext.xpression.XpressionPackage;
 
 import org.eclipse.xtext.xpression.impl.XpressionPackageImpl;
 
-import org.eclipse.xtext.xtype.XAbstractTypeParamDeclaration;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
-import org.eclipse.xtext.xtype.XSimpleTypeRef;
-import org.eclipse.xtext.xtype.XTypeParamDeclaration;
-import org.eclipse.xtext.xtype.XTypeRef;
-import org.eclipse.xtext.xtype.XWildcardParam;
 import org.eclipse.xtext.xtype.XtypeFactory;
 import org.eclipse.xtext.xtype.XtypePackage;
 
@@ -44,42 +38,7 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass xTypeRefEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass xFunctionTypeRefEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass xSimpleTypeRefEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass xWildcardParamEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass xAbstractTypeParamDeclarationEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass xTypeParamDeclarationEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -160,16 +119,6 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getXTypeRef()
-  {
-    return xTypeRefEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getXFunctionTypeRef()
   {
     return xFunctionTypeRefEClass;
@@ -193,116 +142,6 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
   public EReference getXFunctionTypeRef_ReturnType()
   {
     return (EReference)xFunctionTypeRefEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getXSimpleTypeRef()
-  {
-    return xSimpleTypeRefEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getXSimpleTypeRef_Type()
-  {
-    return (EReference)xSimpleTypeRefEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getXSimpleTypeRef_TypeParams()
-  {
-    return (EReference)xSimpleTypeRefEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getXWildcardParam()
-  {
-    return xWildcardParamEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getXWildcardParam_Extends()
-  {
-    return (EReference)xWildcardParamEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getXWildcardParam_Super()
-  {
-    return (EReference)xWildcardParamEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getXAbstractTypeParamDeclaration()
-  {
-    return xAbstractTypeParamDeclarationEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getXAbstractTypeParamDeclaration_Extends()
-  {
-    return (EReference)xAbstractTypeParamDeclarationEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getXAbstractTypeParamDeclaration_Super()
-  {
-    return (EReference)xAbstractTypeParamDeclarationEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getXAbstractTypeParamDeclaration_Name()
-  {
-    return (EAttribute)xAbstractTypeParamDeclarationEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getXTypeParamDeclaration()
-  {
-    return xTypeParamDeclarationEClass;
   }
 
   /**
@@ -335,26 +174,9 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
     isCreated = true;
 
     // Create classes and their features
-    xTypeRefEClass = createEClass(XTYPE_REF);
-
     xFunctionTypeRefEClass = createEClass(XFUNCTION_TYPE_REF);
     createEReference(xFunctionTypeRefEClass, XFUNCTION_TYPE_REF__PARAM_TYPES);
     createEReference(xFunctionTypeRefEClass, XFUNCTION_TYPE_REF__RETURN_TYPE);
-
-    xSimpleTypeRefEClass = createEClass(XSIMPLE_TYPE_REF);
-    createEReference(xSimpleTypeRefEClass, XSIMPLE_TYPE_REF__TYPE);
-    createEReference(xSimpleTypeRefEClass, XSIMPLE_TYPE_REF__TYPE_PARAMS);
-
-    xWildcardParamEClass = createEClass(XWILDCARD_PARAM);
-    createEReference(xWildcardParamEClass, XWILDCARD_PARAM__EXTENDS);
-    createEReference(xWildcardParamEClass, XWILDCARD_PARAM__SUPER);
-
-    xAbstractTypeParamDeclarationEClass = createEClass(XABSTRACT_TYPE_PARAM_DECLARATION);
-    createEReference(xAbstractTypeParamDeclarationEClass, XABSTRACT_TYPE_PARAM_DECLARATION__EXTENDS);
-    createEReference(xAbstractTypeParamDeclarationEClass, XABSTRACT_TYPE_PARAM_DECLARATION__SUPER);
-    createEAttribute(xAbstractTypeParamDeclarationEClass, XABSTRACT_TYPE_PARAM_DECLARATION__NAME);
-
-    xTypeParamDeclarationEClass = createEClass(XTYPE_PARAM_DECLARATION);
   }
 
   /**
@@ -389,33 +211,12 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    xFunctionTypeRefEClass.getESuperTypes().add(this.getXTypeRef());
-    xSimpleTypeRefEClass.getESuperTypes().add(this.getXTypeRef());
-    xWildcardParamEClass.getESuperTypes().add(this.getXTypeRef());
-    xAbstractTypeParamDeclarationEClass.getESuperTypes().add(theTypesPackage.getJvmType());
-    xTypeParamDeclarationEClass.getESuperTypes().add(this.getXAbstractTypeParamDeclaration());
+    xFunctionTypeRefEClass.getESuperTypes().add(theTypesPackage.getJvmParameterizedTypeReference());
 
     // Initialize classes and features; add operations and parameters
-    initEClass(xTypeRefEClass, XTypeRef.class, "XTypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
     initEClass(xFunctionTypeRefEClass, XFunctionTypeRef.class, "XFunctionTypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getXFunctionTypeRef_ParamTypes(), this.getXTypeRef(), null, "paramTypes", null, 0, -1, XFunctionTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getXFunctionTypeRef_ReturnType(), this.getXTypeRef(), null, "returnType", null, 0, 1, XFunctionTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(xSimpleTypeRefEClass, XSimpleTypeRef.class, "XSimpleTypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getXSimpleTypeRef_Type(), theTypesPackage.getJvmType(), null, "type", null, 0, 1, XSimpleTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getXSimpleTypeRef_TypeParams(), this.getXTypeRef(), null, "typeParams", null, 0, -1, XSimpleTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(xWildcardParamEClass, XWildcardParam.class, "XWildcardParam", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getXWildcardParam_Extends(), this.getXTypeRef(), null, "extends", null, 0, 1, XWildcardParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getXWildcardParam_Super(), this.getXTypeRef(), null, "super", null, 0, 1, XWildcardParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(xAbstractTypeParamDeclarationEClass, XAbstractTypeParamDeclaration.class, "XAbstractTypeParamDeclaration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getXAbstractTypeParamDeclaration_Extends(), this.getXTypeRef(), null, "extends", null, 0, -1, XAbstractTypeParamDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getXAbstractTypeParamDeclaration_Super(), this.getXTypeRef(), null, "super", null, 0, 1, XAbstractTypeParamDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getXAbstractTypeParamDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, XAbstractTypeParamDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(xTypeParamDeclarationEClass, XTypeParamDeclaration.class, "XTypeParamDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getXFunctionTypeRef_ParamTypes(), theTypesPackage.getJvmTypeReference(), null, "paramTypes", null, 0, -1, XFunctionTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+    initEReference(getXFunctionTypeRef_ReturnType(), theTypesPackage.getJvmTypeReference(), null, "returnType", null, 0, 1, XFunctionTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);
