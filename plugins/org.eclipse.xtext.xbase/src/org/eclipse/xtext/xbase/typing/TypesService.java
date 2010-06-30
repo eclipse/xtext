@@ -14,14 +14,17 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeArgument;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
-import org.eclipse.xtext.xtype.XSimpleTypeRef;
-import org.eclipse.xtext.xtype.XTypeRef;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
 import com.google.inject.Inject;
@@ -34,7 +37,7 @@ public class TypesService {
 	@Inject
 	private IScopeProvider scopeProvider;
 	
-	private EReference syntheticReference;
+	private final EReference syntheticReference;
 	
 	{
 		syntheticReference = EcoreFactory.eINSTANCE.createEReference();
@@ -45,13 +48,13 @@ public class TypesService {
 		syntheticContainer.getEStructuralFeatures().add(syntheticReference);
 	}
 	
-	public XSimpleTypeRef getTypeForName(String name, EObject context, XTypeRef...params) {
+	public JvmTypeReference getTypeForName(String name, EObject context, JvmTypeReference...params) {
 		IScope scope = scopeProvider.getScope(context, syntheticReference);
 		IEObjectDescription contentByName = scope.getContentByName(name);
 		if (contentByName!=null) {
-			XSimpleTypeRef simpleType = createSimpleTypeRef((JvmType) contentByName.getEObjectOrProxy());
-			for (XTypeRef xTypeRef : params) {
-				simpleType.getTypeParams().add(copy(xTypeRef));
+			JvmParameterizedTypeReference simpleType = createJvmTypeReference((JvmType) contentByName.getEObjectOrProxy());
+			for (JvmTypeReference xTypeRef : params) {
+				simpleType.getArguments().add(createArgument(copy(xTypeRef)));
 			}
 			return simpleType;
 		}
@@ -63,34 +66,40 @@ public class TypesService {
 		return (T) EcoreUtil.copy(xTypeRef);
 	}
 
-	public XSimpleTypeRef createSimpleTypeRef(JvmType eObjectOrProxy) {
-		XSimpleTypeRef typeRef = XtypeFactory.eINSTANCE.createXSimpleTypeRef();
+	public JvmParameterizedTypeReference createJvmTypeReference(JvmType eObjectOrProxy) {
+		JvmParameterizedTypeReference typeRef = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 		typeRef.setType(eObjectOrProxy);
 		return typeRef;
 	}
 
-	public XTypeRef getCommonType(List<XTypeRef> returnTypes) {
-		for (XTypeRef xTypeRef : returnTypes) {
-			for (XTypeRef xTypeRef1 : returnTypes) {
+	public JvmTypeReference getCommonType(List<JvmTypeReference> returnTypes) {
+		for (JvmTypeReference xTypeRef : returnTypes) {
+			for (JvmTypeReference xTypeRef1 : returnTypes) {
 				isAssignableFrom(xTypeRef,xTypeRef1);
 			}
 		}
 		return returnTypes.get(0);
 	}
 
-	public boolean isAssignableFrom(XTypeRef xTypeRef, XTypeRef xTypeRef1) {
+	public boolean isAssignableFrom(JvmTypeReference xTypeRef, JvmTypeReference xTypeRef1) {
 		
 		return false;
 	}
 
-	public XTypeRef createFunctionTypeRef(List<XTypeRef> parameterTypes,
-			XTypeRef returnType) {
+	public XFunctionTypeRef createFunctionTypeRef(List<JvmTypeReference> parameterTypes,
+			JvmTypeReference returnType) {
 		XFunctionTypeRef ref = XtypeFactory.eINSTANCE.createXFunctionTypeRef();
-		ref.setReturnType(copy(returnType));
-		for (XTypeRef xTypeRef : parameterTypes) {
-			ref.getParamTypes().add(copy(xTypeRef));
+		for (JvmTypeReference xTypeRef : parameterTypes) {
+			ref.getArguments().add(createArgument(copy(xTypeRef)));
 		}
+		ref.getArguments().add(createArgument(copy(returnType)));
 		return ref;
+	}
+
+	protected JvmTypeArgument createArgument(JvmTypeReference typeRef) {
+		JvmReferenceTypeArgument argument = TypesFactory.eINSTANCE.createJvmReferenceTypeArgument();
+		argument.setTypeReference(typeRef);
+		return argument;
 	}
 
 }

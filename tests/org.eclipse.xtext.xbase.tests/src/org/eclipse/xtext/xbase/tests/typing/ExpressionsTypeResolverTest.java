@@ -8,12 +8,16 @@
 package org.eclipse.xtext.xbase.tests.typing;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
+import org.eclipse.xtext.common.types.JvmTypeArgument;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ExpressionsTypeResolver;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
-import org.eclipse.xtext.xtype.XSimpleTypeRef;
-import org.eclipse.xtext.xtype.XTypeRef;
-import org.eclipse.xtext.xtype.XWildcardParam;
 
 import com.google.inject.Inject;
 
@@ -72,31 +76,33 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 	
 	
 	public void assertResolvedReturnType(String type, String expression) throws Exception {
-		XTypeRef typeRef = typeResolver.doSwitch(expression(expression));
+		JvmTypeReference typeRef = typeResolver.doSwitch(expression(expression));
 		assertEquals(type,toString(typeRef));
 	}
 	
 	
-	protected String toString(XTypeRef typeref) {
-		if (typeref instanceof XSimpleTypeRef) {
-			XSimpleTypeRef xSimpleTypeRef = (XSimpleTypeRef) typeref;
-			String name = xSimpleTypeRef.getType().getCanonicalName();
-			EList<XTypeRef> typeParams = xSimpleTypeRef.getTypeParams();
-			int size = typeParams.size();
-			for (int i=0;i<size;i++) {
-				if (i==0)
-					name+="<";
-				name+=toString(typeParams.get(i));
-				if (i+1<size) {
-					name+=",";
+	protected String toString(JvmTypeArgument arg) {
+		if (arg instanceof JvmReferenceTypeArgument) {
+			return toString(((JvmReferenceTypeArgument)arg).getTypeReference());
+		} else if (arg instanceof JvmWildcardTypeArgument) {
+			JvmWildcardTypeArgument wcType = (JvmWildcardTypeArgument) arg;
+			String name="?";
+			EList<JvmTypeConstraint> constraints = wcType.getConstraints();
+			for (JvmTypeConstraint jvmTypeConstraint : constraints) {
+				if (jvmTypeConstraint instanceof JvmUpperBound) {
+					name+= " extends "+toString(jvmTypeConstraint.getTypeReference());
 				} else {
-					name+=">";
+					name+= " super "+toString(jvmTypeConstraint.getTypeReference());
 				}
 			}
 			return name;
-		} else if (typeref instanceof XFunctionTypeRef) {
+		}
+		throw new IllegalArgumentException();
+	}
+	protected String toString(JvmTypeReference typeref) {
+		if (typeref instanceof XFunctionTypeRef) {
 			XFunctionTypeRef funcType = (XFunctionTypeRef) typeref;
-			EList<XTypeRef> paramTypes = funcType.getParamTypes();
+			EList<JvmTypeReference> paramTypes = funcType.getParamTypes();
 			String name = "";
 			int size = paramTypes.size();
 			for (int i=0;i<size;i++) {
@@ -110,18 +116,24 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 				}
 			}
 			return name+"=>"+toString(funcType.getReturnType());
-		} else if (typeref instanceof XWildcardParam) {
-			XWildcardParam wcType = (XWildcardParam) typeref;
-			String name="?";
-			if (wcType.getExtends()!=null) {
-				name+= " extends "+toString(wcType.getExtends());
-			}
-			if (wcType.getSuper()!=null) {
-				name+= " super "+toString(wcType.getSuper());
+		} else if (typeref instanceof JvmParameterizedTypeReference) {
+			JvmParameterizedTypeReference xSimpleTypeRef = (JvmParameterizedTypeReference) typeref;
+			String name = xSimpleTypeRef.getType().getCanonicalName();
+			EList<JvmTypeArgument> typeParams = xSimpleTypeRef.getArguments();
+			int size = typeParams.size();
+			for (int i=0;i<size;i++) {
+				if (i==0)
+					name+="<";
+				name+=toString(typeParams.get(i));
+				if (i+1<size) {
+					name+=",";
+				} else {
+					name+=">";
+				}
 			}
 			return name;
-		}
-		throw new IllegalStateException();
+		} 
+		throw new IllegalArgumentException();
 	}
 	
 	

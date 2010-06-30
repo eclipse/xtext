@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.parser;
 
+import org.eclipse.xtext.common.types.JvmLowerBound;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.xbase.XFunction;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xpression.XBinaryOperation;
@@ -29,7 +33,6 @@ import org.eclipse.xtext.xpression.XUnaryOperation;
 import org.eclipse.xtext.xpression.XVariableDeclaration;
 import org.eclipse.xtext.xpression.XWhileExpression;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
-import org.eclipse.xtext.xtype.XTypeParamDeclaration;
 
 /**
  * @author Sven Efftinge
@@ -330,37 +333,38 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	public void testTypeParams_1() throws Exception {
 		XFunction func = function("<T> foo(T t) : bar;");
 		assertEquals(1, func.getTypeParams().size());
-		XTypeParamDeclaration tp = func.getTypeParams().get(0);
+		JvmTypeParameter tp = func.getTypeParams().get(0);
 		assertEquals("T", tp.getName());
-		assertEquals(0, tp.getExtends().size());
-		assertNull(tp.getSuper());
+		assertEquals(0, tp.getConstraints().size());
 	}
 
 	public void testTypeParams_2() throws Exception {
 		XFunction func = function("<T extends Bar> foo(T t) : bar;");
 		assertEquals(1, func.getTypeParams().size());
-		XTypeParamDeclaration tp = func.getTypeParams().get(0);
+		JvmTypeParameter tp = func.getTypeParams().get(0);
 		assertEquals("T", tp.getName());
-		assertEquals(1, tp.getExtends().size());
-		assertNull(tp.getSuper());
+		assertEquals(1, tp.getConstraints().size());
+		assertTrue(tp.getConstraints().get(0) instanceof JvmUpperBound);
 	}
 
 	public void testTypeParams_3() throws Exception {
 		XFunction func = function("<T extends Foo & Bar> foo(T t) : bar;");
 		assertEquals(1, func.getTypeParams().size());
-		XTypeParamDeclaration tp = func.getTypeParams().get(0);
+		JvmTypeParameter tp = func.getTypeParams().get(0);
 		assertEquals("T", tp.getName());
-		assertEquals(2, tp.getExtends().size());
-		assertNull(tp.getSuper());
+		assertEquals(2, tp.getConstraints().size());
+		for (JvmTypeConstraint constraint : tp.getConstraints()) {
+			assertTrue(constraint instanceof JvmUpperBound);
+		}
 	}
 
 	public void testTypeParams_4() throws Exception {
 		XFunction func = function("<T super Foo> foo(T t) : bar;");
 		assertEquals(1, func.getTypeParams().size());
-		XTypeParamDeclaration tp = func.getTypeParams().get(0);
+		JvmTypeParameter tp = func.getTypeParams().get(0);
 		assertEquals("T", tp.getName());
-		assertEquals(0, tp.getExtends().size());
-		assertNotNull(tp.getSuper());
+		assertEquals(1, tp.getConstraints().size());
+		assertTrue(tp.getConstraints().get(0) instanceof JvmLowerBound);
 	}
 	
 	public void testFunctionTypeRef_0() throws Exception {

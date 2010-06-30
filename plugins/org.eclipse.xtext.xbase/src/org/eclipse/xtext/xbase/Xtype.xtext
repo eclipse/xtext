@@ -9,34 +9,39 @@
 grammar org.eclipse.xtext.xbase.Xtype with org.eclipse.xtext.common.Terminals
 
 import "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
-import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore" as types
+import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore"
 
-XTypeRef:
-  XSimpleTypeRef|XFunctionTypeRef;
+JvmTypeReference:
+  JvmParameterizedTypeReference|XFunctionTypeRef;
 
 XFunctionTypeRef:
-  ('(' paramTypes+=XTypeRef (',' paramTypes+=XTypeRef)* ')')? '=>' returnType=XTypeRef;
+  ('(' arguments+=JvmTypeArgument (',' arguments+=JvmTypeArgument)* ')')? '=>' arguments+=JvmTypeArgument;
 
-XSimpleTypeRef:
-  type=[types::JvmType|QualifiedName] ('<' typeParams+=XTypeParam (',' typeParams+=XTypeParam)* '>')?;
+JvmParameterizedTypeReference:
+  type=[JvmType|QualifiedName] ('<' arguments+=JvmTypeArgument (',' arguments+=JvmTypeArgument)* '>')?;
 
-XTypeParam returns XTypeRef:
-  XTypeRef|XWildcardParam;
+JvmTypeArgument:
+  JvmReferenceTypeArgument|JvmWildcardTypeArgument;
+  
+JvmReferenceTypeArgument :
+  typeReference=JvmTypeReference;
 
+JvmWildcardTypeArgument:
+  {JvmWildcardTypeArgument} '?' (constraints+=JvmUpperBound | constraints+=JvmLowerBound)?;
+  
+JvmUpperBound : 
+ 'extends' typeReference=JvmTypeReference;
 
-XWildcardParam returns XTypeRef:
-  {XWildcardParam} '?' 
-  (
-   ('extends' extends=XTypeRef) |
-   ('super' super=XTypeRef)
-  )?;
+JvmUpperBoundAnded returns JvmUpperBound: 
+ '&' typeReference=JvmTypeReference;
 
-XTypeParamDeclaration:
+JvmLowerBound :
+ 'super' typeReference=JvmTypeReference;
+
+JvmTypeParameter :
   name=ID 
-  (
-   ('extends' extends+=XTypeRef ('&' extends+=XTypeRef)*) |
-   ('super' super=XTypeRef)
-  )?;
+  ((constraints+=JvmUpperBound (constraints+=JvmUpperBoundAnded)*) |
+   (constraints+=JvmLowerBound))?;
 
 QualifiedName:
   ID ('.' ID)*;

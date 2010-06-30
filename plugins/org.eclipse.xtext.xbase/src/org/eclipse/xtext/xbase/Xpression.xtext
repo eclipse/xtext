@@ -51,7 +51,7 @@ XMultiplicativeExpression returns XExpression :
 
 XUnaryOperation returns XExpression :
 	{XUnaryOperation} operator=("!"|"-"|"+") target=XFeatureCall |
-	{XCastedExpression} '(' type=XTypeRef ')' target=XExpression |
+	{XCastedExpression} '(' type=JvmTypeReference ')' target=XExpression |
 	XFeatureCall
 ;
   
@@ -115,17 +115,17 @@ XExpressionInsideBlock returns XExpression:
 	XVariableDeclaration | XExpression;
 
 XVariableDeclaration :
-	('def' | type=XTypeRef ) name=ID '=' right=XExpression;
+	('def' | type=JvmTypeReference ) name=ID '=' right=XExpression;
 
 XDeclaredParameter :
-	(type=XTypeRef)? name=ID;
+	(type=JvmTypeReference)? name=ID;
 
 XSimpleFeatureCall returns XFeatureCall  : 
    name=ID ('('(params+=XExpression (',' params+=XExpression )*)?')')?
 ;
 
 XConstructorCall  : 
-	'new' type=XTypeRef ('('(params+=XExpression (','params+=XExpression)*)?')')?
+	'new' type=JvmTypeReference ('('(params+=XExpression (','params+=XExpression)*)?')')?
 	initializer=XBlockExpression?
 ;
 

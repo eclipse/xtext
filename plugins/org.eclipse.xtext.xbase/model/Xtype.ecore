@@ -3,31 +3,11 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xtype"
     nsURI="http://www.eclipse.org/xtext/xbase/Xtype" nsPrefix="xtype">
-  <eClassifiers xsi:type="ecore:EClass" name="XTypeRef"/>
-  <eClassifiers xsi:type="ecore:EClass" name="XFunctionTypeRef" eSuperTypes="#//XTypeRef">
+  <eClassifiers xsi:type="ecore:EClass" name="XFunctionTypeRef" eSuperTypes="../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmParameterizedTypeReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="paramTypes" upperBound="-1"
-        eType="#//XTypeRef" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="#//XTypeRef"
-        containment="true"/>
+        eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
+        changeable="false" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
+        changeable="false" derived="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XSimpleTypeRef" eSuperTypes="#//XTypeRef">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="typeParams" upperBound="-1"
-        eType="#//XTypeRef" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XWildcardParam" eSuperTypes="#//XTypeRef">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="extends" eType="#//XTypeRef"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="super" eType="#//XTypeRef"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XAbstractTypeParamDeclaration" abstract="true"
-      eSuperTypes="../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmType">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="extends" upperBound="-1"
-        eType="#//XTypeRef" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="super" eType="#//XTypeRef"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XTypeParamDeclaration" eSuperTypes="#//XAbstractTypeParamDeclaration"/>
 </ecore:EPackage>
