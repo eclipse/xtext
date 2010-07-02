@@ -515,7 +515,7 @@ DataType:
   'datatype' name=ID;
 
 Entity:
-  'entity' name=ID ('extends' superType=[Entity])? '{'
+  'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
     (features+=Feature)*
   '}';
 
@@ -523,7 +523,7 @@ Feature:
   name=ID ':' type=TypeRef;
 
 TypeRef:
-  referenced=[Type] (multi?='*')?;
+  referenced=[Type|QualifiedName] (multi?='*')?;
 
 QualifiedName:
   ID ('.' ID)*;
