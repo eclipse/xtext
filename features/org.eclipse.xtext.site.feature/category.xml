@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature id="org.eclipse.xtext.docs" version="0.0.0">
+      <category name="XText"/>
+   </feature>
+   <feature id="org.eclipse.xtext.examples" version="0.0.0">
+      <category name="XText"/>
+   </feature>
+   <feature id="org.eclipse.xtext.runtime" version="0.0.0">
+      <category name="XText"/>
+   </feature>
+   <feature id="org.eclipse.xtext.sdk" version="0.0.0">
+      <category name="XText"/>
+   </feature>
+   <feature id="org.eclipse.xtext.site" version="0.0.0">
+      <category name="XText"/>
+   </feature>
+   <feature id="org.eclipse.xtext.ui" version="0.0.0">
+      <category name="XText"/>
+   </feature>
+   <feature id="org.eclipse.xtext.xbase" version="0.0.0">
+      <category name="XText"/>
+   </feature>
+   <category-def name="XText" label="XText"/>
+</site>
