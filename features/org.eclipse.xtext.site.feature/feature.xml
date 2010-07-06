@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.xtext.site"
+      label="Xtext Update Site"
+      version="1.0.0.qualifier"
+      provider-name="Eclipse Modeling Project">
+
+   <includes
+         id="org.eclipse.xtext.docs"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtext.examples"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtext.runtime"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtext.sdk"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtext.ui"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtext.xbase"
+         version="0.0.0"/>
+
+</feature>
