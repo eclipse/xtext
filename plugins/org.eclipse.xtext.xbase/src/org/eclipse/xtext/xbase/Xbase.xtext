@@ -10,9 +10,10 @@ grammar org.eclipse.xtext.xbase.Xbase with org.eclipse.xtext.xbase.Xpression
 import "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore"
 import "platform:/resource/org.eclipse.xtext.xbase/model/Xpression.ecore" as xpression
 import "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore" as xtype
+import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore" as types
 
 XFile  : 	
-    (package=QualifiedName)?
+    ('package' package=QualifiedName)?
 	(imports+=XImport)*
 	(classes+=XClass)*
 ;
@@ -25,15 +26,16 @@ XQualifiedNameWithWildCard :
 	QualifiedName  ('.' '*')?;
 	
 XClass :
-   "class" name=ID ("extends" extends=JvmTypeReference)? ('implements' implements+=JvmTypeReference)* '{'
-	   (functions+=XFunction)*
+   ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')? "class" name=ID ("extends" superTypes+=JvmTypeReference)? ('implements' superTypes+=JvmTypeReference)* '{'
+	   (members+=XMember)*
    '}';
 
-XFunction  : 
-	( private?='private')? 
-	('<' typeParams+=JvmTypeParameter (',' typeParams+=JvmTypeParameter )*'>')?
-	(returnType=JvmTypeReference)? name=ID '(' (declaredParams+=XDeclaredParameter (',' declaredParams+=XDeclaredParameter )*)? ')'
-			(':' expression=XExpression ';' | expression=XBlockExpression)
-;
+XMember returns types::JvmMember:
+	XFunction;
+
+XFunction:
+	('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
+	(returnType=JvmTypeReference)? name=ID '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
+		(':' expression=XExpression ';' | expression=XBlockExpression);
 
 

@@ -42,16 +42,14 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 
 	public void testAddition_1() throws Exception {
 		XBinaryOperation operation = (XBinaryOperation) expression("3 + 4");
-		assertEquals(3, ((XIntLiteral) operation.getLeft()).getValue());
-		assertEquals("+", operation.getOperator());
-		assertEquals(4, ((XIntLiteral) operation.getRight()).getValue());
+		assertEquals(3, ((XIntLiteral) operation.getParams().get(0)).getValue());
+		assertEquals(4, ((XIntLiteral) operation.getParams().get(1)).getValue());
 	}
 
 	public void testAddition_2() throws Exception {
 		XBinaryOperation operation = (XBinaryOperation) expression("foo + 'bar'");
-		assertEquals("foo", ((XFeatureCall) operation.getLeft()).getName());
-		assertEquals("+", operation.getOperator());
-		assertEquals("bar", ((XStringLiteral) operation.getRight()).getValue());
+//TODO		assertEquals("foo", ((XFeatureCall) operation.getParams().get(0)).getFeatureName());
+		assertEquals("bar", ((XStringLiteral) operation.getParams().get(1)).getValue());
 	}
 
 	public void testStringLiteral() throws Exception {
@@ -77,7 +75,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertEquals("foo", ((XStringLiteral) closure.getExpression())
 				.getValue());
 		assertEquals("bar", closure.getParams().get(0).getName());
-		assertNull(closure.getParams().get(0).getType());
+		assertNull(closure.getParams().get(0).getParameterType());
 	}
 
 	public void testClosure_3() throws Exception {
@@ -86,7 +84,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 				.getValue());
 		assertEquals("bar", closure.getParams().get(0).getName());
 		assertEquals(1, closure.getParams().size());
-		assertNotNull(closure.getParams().get(0).getType());
+		assertNotNull(closure.getParams().get(0).getParameterType());
 	}
 
 	public void testClosure_4() throws Exception {
@@ -96,8 +94,8 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertEquals("foo", closure.getParams().get(0).getName());
 		assertEquals("bar", closure.getParams().get(1).getName());
 		assertEquals(2, closure.getParams().size());
-		assertNull(closure.getParams().get(0).getType());
-		assertNotNull(closure.getParams().get(1).getType());
+		assertNull(closure.getParams().get(0).getParameterType());
+		assertNotNull(closure.getParams().get(1).getParameterType());
 	}
 
 	public void testCastedExpression() throws Exception {
@@ -124,22 +122,22 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	public void testFeatureCall_1() throws Exception {
 		XFeatureCall call = (XFeatureCall) expression("foo.bar");
 		assertNotNull(call);
-		assertTrue(call.getTarget() instanceof XFeatureCall);
+		assertTrue(call.getParams().get(0) instanceof XFeatureCall);
 	}
 
 	public void testFeatureCall_2() throws Exception {
 		XFeatureCall call = (XFeatureCall) expression("'holla'.bar()");
 		assertNotNull(call);
-		assertEquals(0, call.getParams().size());
-		assertTrue(call.getTarget() instanceof XStringLiteral);
+		assertEquals(1, call.getParams().size());
+		assertTrue(call.getParams().get(0) instanceof XStringLiteral);
 	}
 
 	public void testFeatureCall_3() throws Exception {
 		XFeatureCall call = (XFeatureCall) expression("'holla'.bar(4)");
 		assertNotNull(call);
-		assertEquals(1, call.getParams().size());
-		assertEquals(4, ((XIntLiteral) call.getParams().get(0)).getValue());
-		assertTrue(call.getTarget() instanceof XStringLiteral);
+		assertEquals(2, call.getParams().size());
+		assertEquals(4, ((XIntLiteral) call.getParams().get(1)).getValue());
+		assertTrue(call.getParams().get(0) instanceof XStringLiteral);
 	}
 
 	public void testFeatureCall_4() throws Exception {
@@ -148,7 +146,6 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertEquals(3, call.getParams().size());
 		for (int i = 0; i < 3; i++)
 			assertEquals(i, ((XIntLiteral) call.getParams().get(i)).getValue());
-		assertNull(call.getTarget());
 	}
 
 	public void testIf_0() throws Exception {
@@ -281,67 +278,67 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		XFunction func = function("foo() : bar;");
 		assertEquals("foo", func.getName());
 		assertTrue(func.getExpression() instanceof XFeatureCall);
-		assertEquals(0, func.getDeclaredParams().size());
+		assertEquals(0, func.getParameters().size());
 		assertNull(func.getReturnType());
-		assertEquals(0, func.getTypeParams().size());
+		assertEquals(0, func.getTypeParameters().size());
 	}
 
 	public void testFunction_1() throws Exception {
 		XFunction func = function("String foo() : bar;");
 		assertEquals("foo", func.getName());
 		assertTrue(func.getExpression() instanceof XFeatureCall);
-		assertEquals(0, func.getDeclaredParams().size());
+		assertEquals(0, func.getParameters().size());
 		assertNotNull(func.getReturnType());
-		assertEquals(0, func.getTypeParams().size());
+		assertEquals(0, func.getTypeParameters().size());
 	}
 
 	public void testFunction_2() throws Exception {
 		XFunction func = function("foo(String s) : bar;");
 		assertEquals("foo", func.getName());
 		assertTrue(func.getExpression() instanceof XFeatureCall);
-		assertEquals(1, func.getDeclaredParams().size());
-		assertEquals("s", func.getDeclaredParams().get(0).getName());
-		assertNotNull(func.getDeclaredParams().get(0).getType());
+		assertEquals(1, func.getParameters().size());
+		assertEquals("s", func.getParameters().get(0).getName());
+		assertNotNull(func.getParameters().get(0).getParameterType());
 		assertNull(func.getReturnType());
-		assertEquals(0, func.getTypeParams().size());
+		assertEquals(0, func.getTypeParameters().size());
 	}
 
 	public void testFunction_3() throws Exception {
 		XFunction func = function("foo(String s, Integer i) : bar;");
 		assertEquals("foo", func.getName());
 		assertTrue(func.getExpression() instanceof XFeatureCall);
-		assertEquals(2, func.getDeclaredParams().size());
-		assertEquals("s", func.getDeclaredParams().get(0).getName());
-		assertNotNull(func.getDeclaredParams().get(0).getType());
-		assertEquals("i", func.getDeclaredParams().get(1).getName());
-		assertNotNull(func.getDeclaredParams().get(1).getType());
+		assertEquals(2, func.getParameters().size());
+		assertEquals("s", func.getParameters().get(0).getName());
+		assertNotNull(func.getParameters().get(0).getParameterType());
+		assertEquals("i", func.getParameters().get(1).getName());
+		assertNotNull(func.getParameters().get(1).getParameterType());
 		assertNull(func.getReturnType());
-		assertEquals(0, func.getTypeParams().size());
+		assertEquals(0, func.getTypeParameters().size());
 	}
 
 	public void testFunction_4() throws Exception {
-		XFunction func = function("private foo() : bar;");
+		XFunction func = function("foo() : bar;");
 		assertEquals("foo", func.getName());
 		assertTrue(func.getExpression() instanceof XFeatureCall);
-		assertEquals(0, func.getDeclaredParams().size());
+		assertEquals(0, func.getParameters().size());
 		assertNull(func.getReturnType());
-		assertTrue(func.isPrivate());
-		assertEquals(0, func.getTypeParams().size());
+//		assertTrue(func.getVisibility() == JvmVisibility.PRIVATE);
+		assertEquals(0, func.getTypeParameters().size());
 	}
 
 
 	public void testTypeParams_1() throws Exception {
 		XFunction func = function("<T> foo(T t) : bar;");
-		assertEquals(1, func.getTypeParams().size());
-		JvmTypeParameter tp = func.getTypeParams().get(0);
+		assertEquals(1, func.getTypeParameters().size());
+		JvmTypeParameter tp = func.getTypeParameters().get(0);
 		assertEquals("T", tp.getName());
 		assertEquals(0, tp.getConstraints().size());
 	}
 
 	public void testTypeParams_2() throws Exception {
 		XFunction func = function("<T extends Bar> foo(T t) : bar;");
-		assertEquals(1, func.getTypeParams().size());
-		JvmTypeParameter tp = func.getTypeParams().get(0);
+		assertEquals(1, func.getTypeParameters().size());
+		JvmTypeParameter tp = func.getTypeParameters().get(0);
 		assertEquals("T", tp.getName());
 		assertEquals(1, tp.getConstraints().size());
 		assertTrue(tp.getConstraints().get(0) instanceof JvmUpperBound);
@@ -349,8 +346,8 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 
 	public void testTypeParams_3() throws Exception {
 		XFunction func = function("<T extends Foo & Bar> foo(T t) : bar;");
-		assertEquals(1, func.getTypeParams().size());
-		JvmTypeParameter tp = func.getTypeParams().get(0);
+		assertEquals(1, func.getTypeParameters().size());
+		JvmTypeParameter tp = func.getTypeParameters().get(0);
 		assertEquals("T", tp.getName());
 		assertEquals(2, tp.getConstraints().size());
 		for (JvmTypeConstraint constraint : tp.getConstraints()) {
@@ -360,8 +357,8 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 
 	public void testTypeParams_4() throws Exception {
 		XFunction func = function("<T super Foo> foo(T t) : bar;");
-		assertEquals(1, func.getTypeParams().size());
-		JvmTypeParameter tp = func.getTypeParams().get(0);
+		assertEquals(1, func.getTypeParameters().size());
+		JvmTypeParameter tp = func.getTypeParameters().get(0);
 		assertEquals("T", tp.getName());
 		assertEquals(1, tp.getConstraints().size());
 		assertTrue(tp.getConstraints().get(0) instanceof JvmLowerBound);

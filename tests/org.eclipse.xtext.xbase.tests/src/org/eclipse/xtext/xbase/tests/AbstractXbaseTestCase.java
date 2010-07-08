@@ -67,7 +67,7 @@ public abstract class AbstractXbaseTestCase extends TestCase {
 	protected XFunction function(String model) throws IOException {
 		String text = "class X {" + model + "}";
 		XFile file = file(text);
-		return file.getClasses().get(0).getFunctions().get(0);
+		return (XFunction) file.getClasses().get(0).getMembers().get(0);
 	}
 	
 	protected XFile file(String model) throws IOException {

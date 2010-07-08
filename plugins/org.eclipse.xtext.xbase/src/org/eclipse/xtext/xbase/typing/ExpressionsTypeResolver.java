@@ -9,19 +9,20 @@ package org.eclipse.xtext.xbase.typing;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xpression.XAssignment;
-import org.eclipse.xtext.xpression.XBinaryOperation;
 import org.eclipse.xtext.xpression.XBlockExpression;
 import org.eclipse.xtext.xpression.XBooleanLiteral;
 import org.eclipse.xtext.xpression.XCasePart;
 import org.eclipse.xtext.xpression.XCastedExpression;
 import org.eclipse.xtext.xpression.XClosure;
 import org.eclipse.xtext.xpression.XConstructorCall;
-import org.eclipse.xtext.xpression.XDeclaredParameter;
-import org.eclipse.xtext.xpression.XExpression;
 import org.eclipse.xtext.xpression.XFeatureCall;
 import org.eclipse.xtext.xpression.XInstanceOfExpression;
 import org.eclipse.xtext.xpression.XIntLiteral;
@@ -30,171 +31,146 @@ import org.eclipse.xtext.xpression.XRichString;
 import org.eclipse.xtext.xpression.XStringLiteral;
 import org.eclipse.xtext.xpression.XSwitchExpression;
 import org.eclipse.xtext.xpression.XTypeLiteral;
-import org.eclipse.xtext.xpression.XUnaryOperation;
 import org.eclipse.xtext.xpression.XVariableDeclaration;
 import org.eclipse.xtext.xpression.XWhileExpression;
-import org.eclipse.xtext.xpression.util.XpressionSwitch;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge
  */
-public class ExpressionsTypeResolver extends XpressionSwitch<JvmTypeReference> {
+public class ExpressionsTypeResolver {
+	
+	static interface ExpectedTypesProvider extends Provider<Set<JvmTypeReference>>{}
+	static final ExpectedTypesProvider NO_EXPECTED_TYPES = new ExpectedTypesProvider() {
+		public Set<JvmTypeReference> get() {
+			return Collections.emptySet();
+		}
+	};
+	
 	public static final String JAVA_LANG_CLASS = Class.class.getName();
 	public static final String INTEGER_TYPE_NAME = Long.class.getName();
 	public static final String VOID_TYPE_NAME = Void.class.getName();
 	public static final String BOOLEAN_TYPE_NAME = Boolean.class.getName();
 	public static final String STRING_TYPE_NAME = String.class.getName();
 	public static final String OBJECT_TYPE_NAME = Object.class.getName();
+	
+	private final PolymorphicDispatcher<JvmTypeReference> dispatcher = PolymorphicDispatcher.createForSingleTarget("_case", 2,2, this);
 
 	@Inject
 	private TypesService typesService;
 	
 	@Inject
-	private OperatorMapping operatorMapping;
+	private ICallableFeatureFacade callableFeatureFacade;
+	
+	/**
+	 * the main dispatching method
+	 * @param exprNode - the Expression AST node for which to compute the return type - never null
+	 * @param expected - the expected return type, used for type inference - can be null
+	 */
+	public JvmTypeReference doSwitch(EObject exprNode, ExpectedTypesProvider expected) {
+		return dispatcher.invoke(exprNode,expected==null?NO_EXPECTED_TYPES:expected);
+	}
 
-	@Override
-	public JvmTypeReference caseXIntLiteral(XIntLiteral object) {
+	
+	protected JvmTypeReference _case(XIntLiteral object, ExpectedTypesProvider expected) {
 		return typesService.getTypeForName(INTEGER_TYPE_NAME, object);
 	}
 
-	@Override
-	public JvmTypeReference caseXBlockExpression(XBlockExpression object) {
+	
+	protected JvmTypeReference _case(XBlockExpression object, ExpectedTypesProvider expected) {
 		return doSwitch(object.getExpressions().get(
-				object.getExpressions().size() - 1));
+				object.getExpressions().size() - 1), expected);
 	}
 
-	@Override
-	public JvmTypeReference caseXSwitchExpression(XSwitchExpression object) {
+	
+	protected JvmTypeReference _case(XSwitchExpression object, ExpectedTypesProvider expected) {
 		List<JvmTypeReference> returnTypes = Lists.newArrayList();
 		EList<XCasePart> cases = object.getCases();
 		for (XCasePart xCasePart : cases) {
-			returnTypes.add(doSwitch(xCasePart));
+			returnTypes.add(doSwitch(xCasePart,expected));
 		}
 		if (object.getDefault() != null)
-			returnTypes.add(doSwitch(object.getDefault()));
+			returnTypes.add(doSwitch(object.getDefault(),expected));
 		return typesService.getCommonType(returnTypes);
 	}
 
-	@Override
-	public JvmTypeReference caseXCasePart(XCasePart object) {
-		return doSwitch(object.getThen());
+	
+	protected JvmTypeReference _case(XCasePart object, ExpectedTypesProvider expected) {
+		return doSwitch(object.getThen(), expected);
 	}
 
-	@Override
-	public JvmTypeReference caseXVariableDeclaration(XVariableDeclaration object) {
+	
+	protected JvmTypeReference _case(XVariableDeclaration object, ExpectedTypesProvider expected) {
 		return typesService.getTypeForName(VOID_TYPE_NAME, object);
 	}
 
-	@Override
-	public JvmTypeReference caseXFeatureCall(XFeatureCall object) {
-		return getReturnType(object.getTarget(), object.getName(), object.getParams(), object);
+	protected JvmTypeReference _case(XFeatureCall object, ExpectedTypesProvider expected) {
+		return callableFeatureFacade.getReturnType(object.getFeature());
 	}
 	
-	private JvmTypeReference getReturnType(XExpression target, String name,
-			List<XExpression> params, XExpression context) {
-		
-		return null;
-	}
-
-	@Override
-	public JvmTypeReference caseXBinaryOperation(XBinaryOperation object) {
-		return getReturnType(object.getLeft(), operatorMapping.getMethodName(object.getOperator()), Collections.singletonList(object.getRight()), object);
-	}
-
-	@Override
-	public JvmTypeReference caseXUnaryOperation(XUnaryOperation object) {
-		return getReturnType(object.getTarget(), operatorMapping.getMethodName(object.getOperator()), Collections.<XExpression>emptyList(), object);
-	}
-
-	@Override
-	public JvmTypeReference caseXConstructorCall(XConstructorCall object) {
+	protected JvmTypeReference _case(XConstructorCall object, ExpectedTypesProvider expected) {
 		return object.getType();
 	}
 
-	@Override
-	public JvmTypeReference caseXBooleanLiteral(XBooleanLiteral object) {
+	protected JvmTypeReference _case(XBooleanLiteral object, ExpectedTypesProvider expected) {
 		return typesService.getTypeForName(BOOLEAN_TYPE_NAME, object);
 	}
 
-	@Override
-	public JvmTypeReference caseXNullLiteral(XNullLiteral object) {
+	
+	protected JvmTypeReference _case(XNullLiteral object, ExpectedTypesProvider expected) {
 		return typesService.getTypeForName(VOID_TYPE_NAME, object);
 	}
 
-	@Override
-	public JvmTypeReference caseXStringLiteral(XStringLiteral object) {
+	
+	protected JvmTypeReference _case(XStringLiteral object, ExpectedTypesProvider expected) {
 		return typesService.getTypeForName(STRING_TYPE_NAME, object);
 	}
 
-	@Override
-	public JvmTypeReference caseXRichString(XRichString object) {
+	
+	protected JvmTypeReference _case(XRichString object, ExpectedTypesProvider expected) {
 		return typesService.getTypeForName(STRING_TYPE_NAME, object);
 	}
 
-	@Override
-	public JvmTypeReference caseXClosure(XClosure object) {
-		JvmTypeReference returnType = doSwitch(object.getExpression());
+	
+	protected JvmTypeReference _case(XClosure object, ExpectedTypesProvider expected) {
+		JvmTypeReference returnType = doSwitch(object.getExpression(), expected);
 		List<JvmTypeReference> parameterTypes = Lists.newArrayList();
-		EList<XDeclaredParameter> params = object.getParams();
-		for (XDeclaredParameter xDeclaredParameter : params) {
-			if (xDeclaredParameter.getType() != null) {
-				parameterTypes.add(xDeclaredParameter.getType());
+		EList<JvmFormalParameter> params = object.getParams();
+		for (JvmFormalParameter param : params) {
+			if (param.getParameterType() != null) {
+				parameterTypes.add(param.getParameterType());
 			} else {
-				parameterTypes.add(inferTypeFromContext(xDeclaredParameter,
-						object));
+				throw new IllegalStateException("Type inference for closure params is not yet supported.");
 			}
 		}
 		return typesService.createFunctionTypeRef(parameterTypes, returnType);
 	}
 
-	protected JvmTypeReference inferTypeFromContext(
-			XDeclaredParameter xDeclaredParameter, XClosure object) {
-		if (object.eContainer() instanceof XBinaryOperation) {
-			//TODO
-		} else if (object.eContainer() instanceof XAssignment) {
-			//TODO
-
-		} else if (object.eContainer() instanceof XVariableDeclaration) {
-			XVariableDeclaration dec = (XVariableDeclaration) object
-					.eContainer();
-			if (dec.getType() != null)
-				return dec.getType();
-		} else if (object.eContainer() instanceof XFeatureCall) {
-			//TODO
-
-		} else if (object.eContainer() instanceof XCastedExpression) {
-			//TODO
-
-		}
-		return typesService.getTypeForName(OBJECT_TYPE_NAME, object);
-	}
-
-	@Override
-	public JvmTypeReference caseXCastedExpression(XCastedExpression object) {
+	protected JvmTypeReference _case(XCastedExpression object) {
 		return object.getType();
 	}
 
-	@Override
-	public JvmTypeReference caseXAssignment(XAssignment object) {
+	
+	protected JvmTypeReference _case(XAssignment object) {
 		return typesService.getTypeForName(VOID_TYPE_NAME, object);
 	}
 
-	@Override
-	public JvmTypeReference caseXWhileExpression(XWhileExpression object) {
+	
+	protected JvmTypeReference _case(XWhileExpression object) {
 		return typesService.getTypeForName(VOID_TYPE_NAME, object);
 	}
 
-	@Override
-	public JvmTypeReference caseXTypeLiteral(XTypeLiteral object) {
+	
+	protected JvmTypeReference _case(XTypeLiteral object) {
 		JvmTypeReference paramType = typesService.createJvmTypeReference(object.getType());
 		return typesService.getTypeForName(JAVA_LANG_CLASS, object,paramType);
 	}
 
-	@Override
-	public JvmTypeReference caseXInstanceOfExpression(XInstanceOfExpression object) {
+	
+	protected JvmTypeReference _case(XInstanceOfExpression object) {
 		return typesService.getTypeForName(BOOLEAN_TYPE_NAME, object);
 	}
 
