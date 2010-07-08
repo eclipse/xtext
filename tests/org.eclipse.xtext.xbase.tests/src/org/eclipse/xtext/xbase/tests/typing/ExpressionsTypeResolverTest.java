@@ -76,7 +76,7 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 	
 	
 	public void assertResolvedReturnType(String type, String expression) throws Exception {
-		JvmTypeReference typeRef = typeResolver.doSwitch(expression(expression));
+		JvmTypeReference typeRef = typeResolver.doSwitch(expression(expression),null);
 		assertEquals(type,toString(typeRef));
 	}
 	

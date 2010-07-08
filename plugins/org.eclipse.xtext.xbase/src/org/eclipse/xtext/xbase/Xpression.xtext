@@ -10,55 +10,74 @@ grammar org.eclipse.xtext.xbase.Xpression with org.eclipse.xtext.xbase.Xtype
 
 import "platform:/resource/org.eclipse.xtext.xbase/model/Xpression.ecore"
 import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore" as types
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 XExpression returns XExpression:
 	XAssignment;	
 
 XAssignment returns XExpression : 
-    XOrExpression  ({XBinaryOperation.left=current} operator=('='|'+=') right=XOrExpression)?
+    XOrExpression  ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpAssign] params+=XOrExpression)?
 ;
+
+OpAssign : '='|'+=';
 
 XOrExpression returns XExpression : 
-	 XAndExpression ({XBinaryOperation.left=current} operator='||'  right=XAndExpression )*
+	 XAndExpression ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpOr]  params+=XAndExpression )*
 ;
+
+OpOr : '||';
 
 XAndExpression returns XExpression : 
-	XEqualityExpression ({XBinaryOperation.left=current} operator='&&' right=XEqualityExpression)*	    
+	XEqualityExpression ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpAnd] params+=XEqualityExpression)*	    
 ;
 
+OpAnd : '&&';
+
 XEqualityExpression returns XExpression : 
-	XRelationalExpression ({XBinaryOperation.left=current} operator=('=='|'!=') right=XRelationalExpression )*
+	XRelationalExpression ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpEquality] params+=XRelationalExpression )*
 ;
+
+OpEquality : '=='|'!=';
 
 XRelationalExpression returns XExpression : 
 	XOtherOperatorExpression 
 		({XInstanceOfExpression.expression=current} 'instanceof' type=[types::JvmType|QualifiedName] |
-		 {XBinaryOperation.left=current} operator=('>='|'<='|'>'|'<' ) right=XOtherOperatorExpression )*
+		 {XBinaryOperation.params+=current} feature=[ecore::EObject|OpCompare] params+=XOtherOperatorExpression )*
 ;
+
+OpCompare : '>='|'<='|'>'|'<';
 
 XOtherOperatorExpression returns XExpression: 
-	XAdditiveExpression ({XBinaryOperation.left=current} operator=('->'|'..') right=XAdditiveExpression )*
+	XAdditiveExpression ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpOther] params+=XAdditiveExpression )*
 ;
+
+OpOther : '->'|'..';
 
 XAdditiveExpression returns XExpression :
-	XMultiplicativeExpression ({XBinaryOperation.left=current} operator=('+'|'-') right=XMultiplicativeExpression )*	    
+	XMultiplicativeExpression ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpAdd] params+=XMultiplicativeExpression )*	    
 ;
 
+OpAdd : '+'|'-';
+
 XMultiplicativeExpression returns XExpression : 
-	XUnaryOperation ({XBinaryOperation.left=current} operator=('*'|'**'|'/'|'%') right=XUnaryOperation )*
+	XUnaryOperation ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpMulti] params+=XUnaryOperation )*
 ;
+
+OpMulti : '*'|'**'|'/'|'%';
 
 
 XUnaryOperation returns XExpression :
-	{XUnaryOperation} operator=("!"|"-"|"+") target=XFeatureCall |
+	{XUnaryOperation} feature=[types::JvmOperation|OpUnary] params+=XFeatureCall |
 	{XCastedExpression} '(' type=JvmTypeReference ')' target=XExpression |
 	XFeatureCall
 ;
+
+OpUnary : "!"|"-"|"+";
   
 
 XFeatureCall returns XExpression : 
 	XPrimaryExpression 
-	  ({XFeatureCall.target=current} "." name=ID ('('(params+=XExpression (','params+=XExpression )*)?')')?)*
+	  ({XMemberFeatureCall.params+=current} "." feature=[ecore::EObject] ('('(params+=XExpression (','params+=XExpression )*)?')')?)*
 ;
 
 XPrimaryExpression returns XExpression : 
@@ -78,7 +97,7 @@ XPrimaryExpression returns XExpression :
   XParenthesizedExpression;
   
 XClosure returns XExpression :
-	{XClosure} (params+=XDeclaredParameter (',' params+=XDeclaredParameter)*)? '|' expression=XExpression
+	{XClosure} (params+=JvmFormalParameter (',' params+=JvmFormalParameter)*)? '|' expression=XExpression
 ;
   
 XParenthesizedExpression returns XExpression: 
@@ -117,11 +136,11 @@ XExpressionInsideBlock returns XExpression:
 XVariableDeclaration :
 	('def' | type=JvmTypeReference ) name=ID '=' right=XExpression;
 
-XDeclaredParameter :
-	(type=JvmTypeReference)? name=ID;
+JvmFormalParameter returns types::JvmFormalParameter :
+	(parameterType=JvmTypeReference)? name=ID;
 
-XSimpleFeatureCall returns XFeatureCall  : 
-   name=ID ('('(params+=XExpression (',' params+=XExpression )*)?')')?
+XSimpleFeatureCall returns XFeatureCall: 
+   feature=[ecore::EObject] ('('(params+=XExpression (',' params+=XExpression )*)?')')?
 ;
 
 XConstructorCall  : 

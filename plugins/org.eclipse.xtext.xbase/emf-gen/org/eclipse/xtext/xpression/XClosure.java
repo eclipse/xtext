@@ -7,6 +7,8 @@ package org.eclipse.xtext.xpression;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>XClosure</b></em>'.
@@ -28,7 +30,7 @@ public interface XClosure extends XExpression
 {
   /**
    * Returns the value of the '<em><b>Params</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.xtext.xpression.XDeclaredParameter}.
+   * The list contents are of type {@link org.eclipse.xtext.common.types.JvmFormalParameter}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Params</em>' containment reference list isn't clear,
@@ -40,7 +42,7 @@ public interface XClosure extends XExpression
    * @model containment="true"
    * @generated
    */
-  EList<XDeclaredParameter> getParams();
+  EList<JvmFormalParameter> getParams();
 
   /**
    * Returns the value of the '<em><b>Expression</b></em>' containment reference.

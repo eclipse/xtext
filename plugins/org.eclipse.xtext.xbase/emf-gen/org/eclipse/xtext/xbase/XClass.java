@@ -7,9 +7,7 @@ package org.eclipse.xtext.xbase;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
@@ -23,8 +21,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *   <li>{@link org.eclipse.xtext.xbase.XClass#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XClass#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XClass#getImplements <em>Implements</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.XClass#getFunctions <em>Functions</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.XClass#getTypeParams <em>Type Params</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,7 +28,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * @model
  * @generated
  */
-public interface XClass extends EObject
+public interface XClass extends JvmGenericType
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -61,77 +57,34 @@ public interface XClass extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Extends</b></em>' containment reference.
+   * Returns the value of the '<em><b>Extends</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Extends</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Extends</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Extends</em>' containment reference.
-   * @see #setExtends(JvmTypeReference)
+   * @return the value of the '<em>Extends</em>' reference.
    * @see org.eclipse.xtext.xbase.XbasePackage#getXClass_Extends()
-   * @model containment="true"
+   * @model changeable="false" derived="true"
    * @generated
    */
   JvmTypeReference getExtends();
 
   /**
-   * Sets the value of the '{@link org.eclipse.xtext.xbase.XClass#getExtends <em>Extends</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Extends</em>' containment reference.
-   * @see #getExtends()
-   * @generated
-   */
-  void setExtends(JvmTypeReference value);
-
-  /**
-   * Returns the value of the '<em><b>Implements</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Implements</b></em>' reference list.
    * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeReference}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Implements</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Implements</em>' reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Implements</em>' containment reference list.
+   * @return the value of the '<em>Implements</em>' reference list.
    * @see org.eclipse.xtext.xbase.XbasePackage#getXClass_Implements()
-   * @model containment="true"
+   * @model changeable="false" derived="true"
    * @generated
    */
   EList<JvmTypeReference> getImplements();
-
-  /**
-   * Returns the value of the '<em><b>Functions</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.xtext.xbase.XFunction}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Functions</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Functions</em>' containment reference list.
-   * @see org.eclipse.xtext.xbase.XbasePackage#getXClass_Functions()
-   * @model containment="true"
-   * @generated
-   */
-  EList<XFunction> getFunctions();
-
-  /**
-   * Returns the value of the '<em><b>Type Params</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeParameter}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type Params</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Type Params</em>' containment reference list.
-   * @see org.eclipse.xtext.xbase.XbasePackage#getXClass_TypeParams()
-   * @model containment="true"
-   * @generated
-   */
-  EList<JvmTypeParameter> getTypeParams();
 
 } // XClass

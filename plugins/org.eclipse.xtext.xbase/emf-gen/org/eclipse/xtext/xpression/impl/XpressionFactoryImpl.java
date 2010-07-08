@@ -72,8 +72,8 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
       case XpressionPackage.XCASE_PART: return createXCasePart();
       case XpressionPackage.XBLOCK_EXPRESSION: return createXBlockExpression();
       case XpressionPackage.XVARIABLE_DECLARATION: return createXVariableDeclaration();
-      case XpressionPackage.XDECLARED_PARAMETER: return createXDeclaredParameter();
       case XpressionPackage.XFEATURE_CALL: return createXFeatureCall();
+      case XpressionPackage.XMEMBER_FEATURE_CALL: return createXMemberFeatureCall();
       case XpressionPackage.XCONSTRUCTOR_CALL: return createXConstructorCall();
       case XpressionPackage.XBOOLEAN_LITERAL: return createXBooleanLiteral();
       case XpressionPackage.XNULL_LITERAL: return createXNullLiteral();
@@ -154,10 +154,10 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
    * <!-- end-user-doc -->
    * @generated
    */
-  public XDeclaredParameter createXDeclaredParameter()
+  public XFeatureCall createXFeatureCall()
   {
-    XDeclaredParameterImpl xDeclaredParameter = new XDeclaredParameterImpl();
-    return xDeclaredParameter;
+    XFeatureCallImpl xFeatureCall = new XFeatureCallImpl();
+    return xFeatureCall;
   }
 
   /**
@@ -165,10 +165,10 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
    * <!-- end-user-doc -->
    * @generated
    */
-  public XFeatureCall createXFeatureCall()
+  public XMemberFeatureCall createXMemberFeatureCall()
   {
-    XFeatureCallImpl xFeatureCall = new XFeatureCallImpl();
-    return xFeatureCall;
+    XMemberFeatureCallImpl xMemberFeatureCall = new XMemberFeatureCallImpl();
+    return xMemberFeatureCall;
   }
 
   /**

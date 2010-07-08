@@ -71,15 +71,6 @@ public interface XpressionFactory extends EFactory
   XVariableDeclaration createXVariableDeclaration();
 
   /**
-   * Returns a new object of class '<em>XDeclared Parameter</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>XDeclared Parameter</em>'.
-   * @generated
-   */
-  XDeclaredParameter createXDeclaredParameter();
-
-  /**
    * Returns a new object of class '<em>XFeature Call</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -87,6 +78,15 @@ public interface XpressionFactory extends EFactory
    * @generated
    */
   XFeatureCall createXFeatureCall();
+
+  /**
+   * Returns a new object of class '<em>XMember Feature Call</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>XMember Feature Call</em>'.
+   * @generated
+   */
+  XMemberFeatureCall createXMemberFeatureCall();
 
   /**
    * Returns a new object of class '<em>XConstructor Call</em>'.

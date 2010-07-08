@@ -105,7 +105,7 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
    */
   public XFunction createXFunction()
   {
-    XFunctionImpl xFunction = new XFunctionImpl();
+    XFunctionImplCustom xFunction = new XFunctionImplCustom();
     return xFunction;
   }
 

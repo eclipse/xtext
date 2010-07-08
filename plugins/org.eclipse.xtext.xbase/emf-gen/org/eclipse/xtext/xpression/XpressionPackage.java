@@ -282,43 +282,6 @@ public interface XpressionPackage extends EPackage
   int XVARIABLE_DECLARATION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.xpression.impl.XDeclaredParameterImpl <em>XDeclared Parameter</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.xpression.impl.XDeclaredParameterImpl
-   * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getXDeclaredParameter()
-   * @generated
-   */
-  int XDECLARED_PARAMETER = 6;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int XDECLARED_PARAMETER__TYPE = 0;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int XDECLARED_PARAMETER__NAME = 1;
-
-  /**
-   * The number of structural features of the '<em>XDeclared Parameter</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int XDECLARED_PARAMETER_FEATURE_COUNT = 2;
-
-  /**
    * The meta object id for the '{@link org.eclipse.xtext.xpression.impl.XFeatureCallImpl <em>XFeature Call</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -326,25 +289,16 @@ public interface XpressionPackage extends EPackage
    * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getXFeatureCall()
    * @generated
    */
-  int XFEATURE_CALL = 7;
+  int XFEATURE_CALL = 6;
 
   /**
-   * The feature id for the '<em><b>Target</b></em>' containment reference.
+   * The feature id for the '<em><b>Feature Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int XFEATURE_CALL__TARGET = XEXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int XFEATURE_CALL__NAME = XEXPRESSION_FEATURE_COUNT + 1;
+  int XFEATURE_CALL__FEATURE_NAME = XEXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Params</b></em>' containment reference list.
@@ -353,7 +307,16 @@ public interface XpressionPackage extends EPackage
    * @generated
    * @ordered
    */
-  int XFEATURE_CALL__PARAMS = XEXPRESSION_FEATURE_COUNT + 2;
+  int XFEATURE_CALL__PARAMS = XEXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Feature</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XFEATURE_CALL__FEATURE = XEXPRESSION_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>XFeature Call</em>' class.
@@ -363,6 +326,52 @@ public interface XpressionPackage extends EPackage
    * @ordered
    */
   int XFEATURE_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.xpression.impl.XMemberFeatureCallImpl <em>XMember Feature Call</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.xpression.impl.XMemberFeatureCallImpl
+   * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getXMemberFeatureCall()
+   * @generated
+   */
+  int XMEMBER_FEATURE_CALL = 7;
+
+  /**
+   * The feature id for the '<em><b>Feature Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XMEMBER_FEATURE_CALL__FEATURE_NAME = XFEATURE_CALL__FEATURE_NAME;
+
+  /**
+   * The feature id for the '<em><b>Params</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XMEMBER_FEATURE_CALL__PARAMS = XFEATURE_CALL__PARAMS;
+
+  /**
+   * The feature id for the '<em><b>Feature</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XMEMBER_FEATURE_CALL__FEATURE = XFEATURE_CALL__FEATURE;
+
+  /**
+   * The number of structural features of the '<em>XMember Feature Call</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XMEMBER_FEATURE_CALL_FEATURE_COUNT = XFEATURE_CALL_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.xpression.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.
@@ -691,31 +700,31 @@ public interface XpressionPackage extends EPackage
   int XBINARY_OPERATION = 18;
 
   /**
-   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * The feature id for the '<em><b>Feature Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int XBINARY_OPERATION__LEFT = XEXPRESSION_FEATURE_COUNT + 0;
+  int XBINARY_OPERATION__FEATURE_NAME = XMEMBER_FEATURE_CALL__FEATURE_NAME;
 
   /**
-   * The feature id for the '<em><b>Operator</b></em>' attribute.
+   * The feature id for the '<em><b>Params</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int XBINARY_OPERATION__OPERATOR = XEXPRESSION_FEATURE_COUNT + 1;
+  int XBINARY_OPERATION__PARAMS = XMEMBER_FEATURE_CALL__PARAMS;
 
   /**
-   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * The feature id for the '<em><b>Feature</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int XBINARY_OPERATION__RIGHT = XEXPRESSION_FEATURE_COUNT + 2;
+  int XBINARY_OPERATION__FEATURE = XMEMBER_FEATURE_CALL__FEATURE;
 
   /**
    * The number of structural features of the '<em>XBinary Operation</em>' class.
@@ -724,7 +733,7 @@ public interface XpressionPackage extends EPackage
    * @generated
    * @ordered
    */
-  int XBINARY_OPERATION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
+  int XBINARY_OPERATION_FEATURE_COUNT = XMEMBER_FEATURE_CALL_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.xpression.impl.XUnaryOperationImpl <em>XUnary Operation</em>}' class.
@@ -737,22 +746,31 @@ public interface XpressionPackage extends EPackage
   int XUNARY_OPERATION = 19;
 
   /**
-   * The feature id for the '<em><b>Operator</b></em>' attribute.
+   * The feature id for the '<em><b>Feature Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int XUNARY_OPERATION__OPERATOR = XEXPRESSION_FEATURE_COUNT + 0;
+  int XUNARY_OPERATION__FEATURE_NAME = XMEMBER_FEATURE_CALL__FEATURE_NAME;
 
   /**
-   * The feature id for the '<em><b>Target</b></em>' containment reference.
+   * The feature id for the '<em><b>Params</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int XUNARY_OPERATION__TARGET = XEXPRESSION_FEATURE_COUNT + 1;
+  int XUNARY_OPERATION__PARAMS = XMEMBER_FEATURE_CALL__PARAMS;
+
+  /**
+   * The feature id for the '<em><b>Feature</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XUNARY_OPERATION__FEATURE = XMEMBER_FEATURE_CALL__FEATURE;
 
   /**
    * The number of structural features of the '<em>XUnary Operation</em>' class.
@@ -761,7 +779,7 @@ public interface XpressionPackage extends EPackage
    * @generated
    * @ordered
    */
-  int XUNARY_OPERATION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 2;
+  int XUNARY_OPERATION_FEATURE_COUNT = XMEMBER_FEATURE_CALL_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.xpression.impl.XWhileExpressionImpl <em>XWhile Expression</em>}' class.
@@ -1059,38 +1077,6 @@ public interface XpressionPackage extends EPackage
   EReference getXVariableDeclaration_Right();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.xpression.XDeclaredParameter <em>XDeclared Parameter</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>XDeclared Parameter</em>'.
-   * @see org.eclipse.xtext.xpression.XDeclaredParameter
-   * @generated
-   */
-  EClass getXDeclaredParameter();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xpression.XDeclaredParameter#getType <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Type</em>'.
-   * @see org.eclipse.xtext.xpression.XDeclaredParameter#getType()
-   * @see #getXDeclaredParameter()
-   * @generated
-   */
-  EReference getXDeclaredParameter_Type();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xpression.XDeclaredParameter#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.xtext.xpression.XDeclaredParameter#getName()
-   * @see #getXDeclaredParameter()
-   * @generated
-   */
-  EAttribute getXDeclaredParameter_Name();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xpression.XFeatureCall <em>XFeature Call</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1101,26 +1087,15 @@ public interface XpressionPackage extends EPackage
   EClass getXFeatureCall();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xpression.XFeatureCall#getTarget <em>Target</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xpression.XFeatureCall#getFeatureName <em>Feature Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Target</em>'.
-   * @see org.eclipse.xtext.xpression.XFeatureCall#getTarget()
+   * @return the meta object for the attribute '<em>Feature Name</em>'.
+   * @see org.eclipse.xtext.xpression.XFeatureCall#getFeatureName()
    * @see #getXFeatureCall()
    * @generated
    */
-  EReference getXFeatureCall_Target();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xpression.XFeatureCall#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.xtext.xpression.XFeatureCall#getName()
-   * @see #getXFeatureCall()
-   * @generated
-   */
-  EAttribute getXFeatureCall_Name();
+  EAttribute getXFeatureCall_FeatureName();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xpression.XFeatureCall#getParams <em>Params</em>}'.
@@ -1132,6 +1107,27 @@ public interface XpressionPackage extends EPackage
    * @generated
    */
   EReference getXFeatureCall_Params();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.xpression.XFeatureCall#getFeature <em>Feature</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Feature</em>'.
+   * @see org.eclipse.xtext.xpression.XFeatureCall#getFeature()
+   * @see #getXFeatureCall()
+   * @generated
+   */
+  EReference getXFeatureCall_Feature();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.xpression.XMemberFeatureCall <em>XMember Feature Call</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>XMember Feature Call</em>'.
+   * @see org.eclipse.xtext.xpression.XMemberFeatureCall
+   * @generated
+   */
+  EClass getXMemberFeatureCall();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xpression.XConstructorCall <em>XConstructor Call</em>}'.
@@ -1398,39 +1394,6 @@ public interface XpressionPackage extends EPackage
   EClass getXBinaryOperation();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xpression.XBinaryOperation#getLeft <em>Left</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Left</em>'.
-   * @see org.eclipse.xtext.xpression.XBinaryOperation#getLeft()
-   * @see #getXBinaryOperation()
-   * @generated
-   */
-  EReference getXBinaryOperation_Left();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xpression.XBinaryOperation#getOperator <em>Operator</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Operator</em>'.
-   * @see org.eclipse.xtext.xpression.XBinaryOperation#getOperator()
-   * @see #getXBinaryOperation()
-   * @generated
-   */
-  EAttribute getXBinaryOperation_Operator();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xpression.XBinaryOperation#getRight <em>Right</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Right</em>'.
-   * @see org.eclipse.xtext.xpression.XBinaryOperation#getRight()
-   * @see #getXBinaryOperation()
-   * @generated
-   */
-  EReference getXBinaryOperation_Right();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xpression.XUnaryOperation <em>XUnary Operation</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1439,28 +1402,6 @@ public interface XpressionPackage extends EPackage
    * @generated
    */
   EClass getXUnaryOperation();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xpression.XUnaryOperation#getOperator <em>Operator</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Operator</em>'.
-   * @see org.eclipse.xtext.xpression.XUnaryOperation#getOperator()
-   * @see #getXUnaryOperation()
-   * @generated
-   */
-  EAttribute getXUnaryOperation_Operator();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xpression.XUnaryOperation#getTarget <em>Target</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Target</em>'.
-   * @see org.eclipse.xtext.xpression.XUnaryOperation#getTarget()
-   * @see #getXUnaryOperation()
-   * @generated
-   */
-  EReference getXUnaryOperation_Target();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xpression.XWhileExpression <em>XWhile Expression</em>}'.
@@ -1727,32 +1668,6 @@ public interface XpressionPackage extends EPackage
     EReference XVARIABLE_DECLARATION__RIGHT = eINSTANCE.getXVariableDeclaration_Right();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.xpression.impl.XDeclaredParameterImpl <em>XDeclared Parameter</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.xpression.impl.XDeclaredParameterImpl
-     * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getXDeclaredParameter()
-     * @generated
-     */
-    EClass XDECLARED_PARAMETER = eINSTANCE.getXDeclaredParameter();
-
-    /**
-     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference XDECLARED_PARAMETER__TYPE = eINSTANCE.getXDeclaredParameter_Type();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute XDECLARED_PARAMETER__NAME = eINSTANCE.getXDeclaredParameter_Name();
-
-    /**
      * The meta object literal for the '{@link org.eclipse.xtext.xpression.impl.XFeatureCallImpl <em>XFeature Call</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1763,20 +1678,12 @@ public interface XpressionPackage extends EPackage
     EClass XFEATURE_CALL = eINSTANCE.getXFeatureCall();
 
     /**
-     * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Feature Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference XFEATURE_CALL__TARGET = eINSTANCE.getXFeatureCall_Target();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute XFEATURE_CALL__NAME = eINSTANCE.getXFeatureCall_Name();
+    EAttribute XFEATURE_CALL__FEATURE_NAME = eINSTANCE.getXFeatureCall_FeatureName();
 
     /**
      * The meta object literal for the '<em><b>Params</b></em>' containment reference list feature.
@@ -1785,6 +1692,24 @@ public interface XpressionPackage extends EPackage
      * @generated
      */
     EReference XFEATURE_CALL__PARAMS = eINSTANCE.getXFeatureCall_Params();
+
+    /**
+     * The meta object literal for the '<em><b>Feature</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference XFEATURE_CALL__FEATURE = eINSTANCE.getXFeatureCall_Feature();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.xpression.impl.XMemberFeatureCallImpl <em>XMember Feature Call</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.xpression.impl.XMemberFeatureCallImpl
+     * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getXMemberFeatureCall()
+     * @generated
+     */
+    EClass XMEMBER_FEATURE_CALL = eINSTANCE.getXMemberFeatureCall();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.xpression.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.
@@ -2009,30 +1934,6 @@ public interface XpressionPackage extends EPackage
     EClass XBINARY_OPERATION = eINSTANCE.getXBinaryOperation();
 
     /**
-     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference XBINARY_OPERATION__LEFT = eINSTANCE.getXBinaryOperation_Left();
-
-    /**
-     * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute XBINARY_OPERATION__OPERATOR = eINSTANCE.getXBinaryOperation_Operator();
-
-    /**
-     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference XBINARY_OPERATION__RIGHT = eINSTANCE.getXBinaryOperation_Right();
-
-    /**
      * The meta object literal for the '{@link org.eclipse.xtext.xpression.impl.XUnaryOperationImpl <em>XUnary Operation</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2041,22 +1942,6 @@ public interface XpressionPackage extends EPackage
      * @generated
      */
     EClass XUNARY_OPERATION = eINSTANCE.getXUnaryOperation();
-
-    /**
-     * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute XUNARY_OPERATION__OPERATOR = eINSTANCE.getXUnaryOperation_Operator();
-
-    /**
-     * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference XUNARY_OPERATION__TARGET = eINSTANCE.getXUnaryOperation_Target();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.xpression.impl.XWhileExpressionImpl <em>XWhile Expression</em>}' class.

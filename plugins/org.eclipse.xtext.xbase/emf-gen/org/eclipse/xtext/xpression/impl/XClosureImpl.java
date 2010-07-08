@@ -20,8 +20,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+
 import org.eclipse.xtext.xpression.XClosure;
-import org.eclipse.xtext.xpression.XDeclaredParameter;
 import org.eclipse.xtext.xpression.XExpression;
 import org.eclipse.xtext.xpression.XpressionPackage;
 
@@ -49,7 +50,7 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
    * @generated
    * @ordered
    */
-  protected EList<XDeclaredParameter> params;
+  protected EList<JvmFormalParameter> params;
 
   /**
    * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
@@ -87,11 +88,11 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<XDeclaredParameter> getParams()
+  public EList<JvmFormalParameter> getParams()
   {
     if (params == null)
     {
-      params = new EObjectContainmentEList<XDeclaredParameter>(XDeclaredParameter.class, this, XpressionPackage.XCLOSURE__PARAMS);
+      params = new EObjectContainmentEList<JvmFormalParameter>(JvmFormalParameter.class, this, XpressionPackage.XCLOSURE__PARAMS);
     }
     return params;
   }
@@ -193,7 +194,7 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
     {
       case XpressionPackage.XCLOSURE__PARAMS:
         getParams().clear();
-        getParams().addAll((Collection<? extends XDeclaredParameter>)newValue);
+        getParams().addAll((Collection<? extends JvmFormalParameter>)newValue);
         return;
       case XpressionPackage.XCLOSURE__EXPRESSION:
         setExpression((XExpression)newValue);

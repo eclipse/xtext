@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmTypeArgument;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.IAssignabilityComputer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -36,6 +37,9 @@ public class TypesService {
 	
 	@Inject
 	private IScopeProvider scopeProvider;
+	
+	@Inject
+	private IAssignabilityComputer assignabilityComputer;
 	
 	private final EReference syntheticReference;
 	
@@ -82,8 +86,7 @@ public class TypesService {
 	}
 
 	public boolean isAssignableFrom(JvmTypeReference xTypeRef, JvmTypeReference xTypeRef1) {
-		
-		return false;
+		return assignabilityComputer.isAssignableFrom(xTypeRef, xTypeRef1);
 	}
 
 	public XFunctionTypeRef createFunctionTypeRef(List<JvmTypeReference> parameterTypes,

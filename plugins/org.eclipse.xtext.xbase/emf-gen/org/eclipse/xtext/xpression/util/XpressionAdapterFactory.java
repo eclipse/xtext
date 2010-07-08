@@ -108,14 +108,14 @@ public class XpressionAdapterFactory extends AdapterFactoryImpl
         return createXVariableDeclarationAdapter();
       }
       @Override
-      public Adapter caseXDeclaredParameter(XDeclaredParameter object)
-      {
-        return createXDeclaredParameterAdapter();
-      }
-      @Override
       public Adapter caseXFeatureCall(XFeatureCall object)
       {
         return createXFeatureCallAdapter();
+      }
+      @Override
+      public Adapter caseXMemberFeatureCall(XMemberFeatureCall object)
+      {
+        return createXMemberFeatureCallAdapter();
       }
       @Override
       public Adapter caseXConstructorCall(XConstructorCall object)
@@ -305,21 +305,6 @@ public class XpressionAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XDeclaredParameter <em>XDeclared Parameter</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.xpression.XDeclaredParameter
-   * @generated
-   */
-  public Adapter createXDeclaredParameterAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XFeatureCall <em>XFeature Call</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -330,6 +315,21 @@ public class XpressionAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createXFeatureCallAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XMemberFeatureCall <em>XMember Feature Call</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.xpression.XMemberFeatureCall
+   * @generated
+   */
+  public Adapter createXMemberFeatureCallAdapter()
   {
     return null;
   }

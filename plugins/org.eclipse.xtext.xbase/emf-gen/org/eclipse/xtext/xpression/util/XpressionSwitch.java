@@ -141,18 +141,20 @@ public class XpressionSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case XpressionPackage.XDECLARED_PARAMETER:
-      {
-        XDeclaredParameter xDeclaredParameter = (XDeclaredParameter)theEObject;
-        T result = caseXDeclaredParameter(xDeclaredParameter);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case XpressionPackage.XFEATURE_CALL:
       {
         XFeatureCall xFeatureCall = (XFeatureCall)theEObject;
         T result = caseXFeatureCall(xFeatureCall);
         if (result == null) result = caseXExpression(xFeatureCall);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XpressionPackage.XMEMBER_FEATURE_CALL:
+      {
+        XMemberFeatureCall xMemberFeatureCall = (XMemberFeatureCall)theEObject;
+        T result = caseXMemberFeatureCall(xMemberFeatureCall);
+        if (result == null) result = caseXFeatureCall(xMemberFeatureCall);
+        if (result == null) result = caseXExpression(xMemberFeatureCall);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -239,6 +241,8 @@ public class XpressionSwitch<T>
       {
         XBinaryOperation xBinaryOperation = (XBinaryOperation)theEObject;
         T result = caseXBinaryOperation(xBinaryOperation);
+        if (result == null) result = caseXMemberFeatureCall(xBinaryOperation);
+        if (result == null) result = caseXFeatureCall(xBinaryOperation);
         if (result == null) result = caseXExpression(xBinaryOperation);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -247,6 +251,8 @@ public class XpressionSwitch<T>
       {
         XUnaryOperation xUnaryOperation = (XUnaryOperation)theEObject;
         T result = caseXUnaryOperation(xUnaryOperation);
+        if (result == null) result = caseXMemberFeatureCall(xUnaryOperation);
+        if (result == null) result = caseXFeatureCall(xUnaryOperation);
         if (result == null) result = caseXExpression(xUnaryOperation);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -376,22 +382,6 @@ public class XpressionSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>XDeclared Parameter</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>XDeclared Parameter</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseXDeclaredParameter(XDeclaredParameter object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>XFeature Call</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -403,6 +393,22 @@ public class XpressionSwitch<T>
    * @generated
    */
   public T caseXFeatureCall(XFeatureCall object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>XMember Feature Call</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>XMember Feature Call</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseXMemberFeatureCall(XMemberFeatureCall object)
   {
     return null;
   }

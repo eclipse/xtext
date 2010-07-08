@@ -10,6 +10,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
+import org.eclipse.xtext.common.types.TypesPackage;
+
 /**
  * <!-- begin-user-doc -->
  * The <b>Package</b> for the model.
@@ -153,22 +155,94 @@ public interface XbasePackage extends EPackage
   int XFUNCTION = 2;
 
   /**
-   * The feature id for the '<em><b>Private</b></em>' attribute.
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int XFUNCTION__PRIVATE = 0;
+  int XFUNCTION__ANNOTATIONS = TypesPackage.JVM_OPERATION__ANNOTATIONS;
 
   /**
-   * The feature id for the '<em><b>Type Params</b></em>' containment reference list.
+   * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int XFUNCTION__TYPE_PARAMS = 1;
+  int XFUNCTION__DECLARING_TYPE = TypesPackage.JVM_OPERATION__DECLARING_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Visibility</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XFUNCTION__VISIBILITY = TypesPackage.JVM_OPERATION__VISIBILITY;
+
+  /**
+   * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XFUNCTION__FULLY_QUALIFIED_NAME = TypesPackage.JVM_OPERATION__FULLY_QUALIFIED_NAME;
+
+  /**
+   * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XFUNCTION__TYPE_PARAMETERS = TypesPackage.JVM_OPERATION__TYPE_PARAMETERS;
+
+  /**
+   * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XFUNCTION__PARAMETERS = TypesPackage.JVM_OPERATION__PARAMETERS;
+
+  /**
+   * The feature id for the '<em><b>Exceptions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XFUNCTION__EXCEPTIONS = TypesPackage.JVM_OPERATION__EXCEPTIONS;
+
+  /**
+   * The feature id for the '<em><b>Static</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XFUNCTION__STATIC = TypesPackage.JVM_OPERATION__STATIC;
+
+  /**
+   * The feature id for the '<em><b>Final</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XFUNCTION__FINAL = TypesPackage.JVM_OPERATION__FINAL;
+
+  /**
+   * The feature id for the '<em><b>Abstract</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XFUNCTION__ABSTRACT = TypesPackage.JVM_OPERATION__ABSTRACT;
 
   /**
    * The feature id for the '<em><b>Return Type</b></em>' containment reference.
@@ -177,7 +251,7 @@ public interface XbasePackage extends EPackage
    * @generated
    * @ordered
    */
-  int XFUNCTION__RETURN_TYPE = 2;
+  int XFUNCTION__RETURN_TYPE = TypesPackage.JVM_OPERATION__RETURN_TYPE;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -186,16 +260,7 @@ public interface XbasePackage extends EPackage
    * @generated
    * @ordered
    */
-  int XFUNCTION__NAME = 3;
-
-  /**
-   * The feature id for the '<em><b>Declared Params</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int XFUNCTION__DECLARED_PARAMS = 4;
+  int XFUNCTION__NAME = TypesPackage.JVM_OPERATION_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -204,7 +269,7 @@ public interface XbasePackage extends EPackage
    * @generated
    * @ordered
    */
-  int XFUNCTION__EXPRESSION = 5;
+  int XFUNCTION__EXPRESSION = TypesPackage.JVM_OPERATION_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>XFunction</em>' class.
@@ -213,7 +278,7 @@ public interface XbasePackage extends EPackage
    * @generated
    * @ordered
    */
-  int XFUNCTION_FEATURE_COUNT = 6;
+  int XFUNCTION_FEATURE_COUNT = TypesPackage.JVM_OPERATION_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XClassImpl <em>XClass</em>}' class.
@@ -226,49 +291,139 @@ public interface XbasePackage extends EPackage
   int XCLASS = 3;
 
   /**
+   * The feature id for the '<em><b>Array Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XCLASS__ARRAY_TYPE = TypesPackage.JVM_GENERIC_TYPE__ARRAY_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XCLASS__ANNOTATIONS = TypesPackage.JVM_GENERIC_TYPE__ANNOTATIONS;
+
+  /**
+   * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XCLASS__DECLARING_TYPE = TypesPackage.JVM_GENERIC_TYPE__DECLARING_TYPE;
+
+  /**
+   * The feature id for the '<em><b>Visibility</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XCLASS__VISIBILITY = TypesPackage.JVM_GENERIC_TYPE__VISIBILITY;
+
+  /**
+   * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XCLASS__FULLY_QUALIFIED_NAME = TypesPackage.JVM_GENERIC_TYPE__FULLY_QUALIFIED_NAME;
+
+  /**
+   * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XCLASS__SUPER_TYPES = TypesPackage.JVM_GENERIC_TYPE__SUPER_TYPES;
+
+  /**
+   * The feature id for the '<em><b>Members</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XCLASS__MEMBERS = TypesPackage.JVM_GENERIC_TYPE__MEMBERS;
+
+  /**
+   * The feature id for the '<em><b>Abstract</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XCLASS__ABSTRACT = TypesPackage.JVM_GENERIC_TYPE__ABSTRACT;
+
+  /**
+   * The feature id for the '<em><b>Static</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XCLASS__STATIC = TypesPackage.JVM_GENERIC_TYPE__STATIC;
+
+  /**
+   * The feature id for the '<em><b>Final</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XCLASS__FINAL = TypesPackage.JVM_GENERIC_TYPE__FINAL;
+
+  /**
+   * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XCLASS__TYPE_PARAMETERS = TypesPackage.JVM_GENERIC_TYPE__TYPE_PARAMETERS;
+
+  /**
+   * The feature id for the '<em><b>Interface</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XCLASS__INTERFACE = TypesPackage.JVM_GENERIC_TYPE__INTERFACE;
+
+  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int XCLASS__NAME = 0;
+  int XCLASS__NAME = TypesPackage.JVM_GENERIC_TYPE_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Extends</b></em>' containment reference.
+   * The feature id for the '<em><b>Extends</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int XCLASS__EXTENDS = 1;
+  int XCLASS__EXTENDS = TypesPackage.JVM_GENERIC_TYPE_FEATURE_COUNT + 1;
 
   /**
-   * The feature id for the '<em><b>Implements</b></em>' containment reference list.
+   * The feature id for the '<em><b>Implements</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int XCLASS__IMPLEMENTS = 2;
-
-  /**
-   * The feature id for the '<em><b>Functions</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int XCLASS__FUNCTIONS = 3;
-
-  /**
-   * The feature id for the '<em><b>Type Params</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int XCLASS__TYPE_PARAMS = 4;
+  int XCLASS__IMPLEMENTS = TypesPackage.JVM_GENERIC_TYPE_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>XClass</em>' class.
@@ -277,7 +432,7 @@ public interface XbasePackage extends EPackage
    * @generated
    * @ordered
    */
-  int XCLASS_FEATURE_COUNT = 5;
+  int XCLASS_FEATURE_COUNT = TypesPackage.JVM_GENERIC_TYPE_FEATURE_COUNT + 3;
 
 
   /**
@@ -366,39 +521,6 @@ public interface XbasePackage extends EPackage
   EClass getXFunction();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XFunction#isPrivate <em>Private</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Private</em>'.
-   * @see org.eclipse.xtext.xbase.XFunction#isPrivate()
-   * @see #getXFunction()
-   * @generated
-   */
-  EAttribute getXFunction_Private();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XFunction#getTypeParams <em>Type Params</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Type Params</em>'.
-   * @see org.eclipse.xtext.xbase.XFunction#getTypeParams()
-   * @see #getXFunction()
-   * @generated
-   */
-  EReference getXFunction_TypeParams();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XFunction#getReturnType <em>Return Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Return Type</em>'.
-   * @see org.eclipse.xtext.xbase.XFunction#getReturnType()
-   * @see #getXFunction()
-   * @generated
-   */
-  EReference getXFunction_ReturnType();
-
-  /**
    * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XFunction#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -408,17 +530,6 @@ public interface XbasePackage extends EPackage
    * @generated
    */
   EAttribute getXFunction_Name();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XFunction#getDeclaredParams <em>Declared Params</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Declared Params</em>'.
-   * @see org.eclipse.xtext.xbase.XFunction#getDeclaredParams()
-   * @see #getXFunction()
-   * @generated
-   */
-  EReference getXFunction_DeclaredParams();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XFunction#getExpression <em>Expression</em>}'.
@@ -453,10 +564,10 @@ public interface XbasePackage extends EPackage
   EAttribute getXClass_Name();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XClass#getExtends <em>Extends</em>}'.
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.xbase.XClass#getExtends <em>Extends</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Extends</em>'.
+   * @return the meta object for the reference '<em>Extends</em>'.
    * @see org.eclipse.xtext.xbase.XClass#getExtends()
    * @see #getXClass()
    * @generated
@@ -464,37 +575,15 @@ public interface XbasePackage extends EPackage
   EReference getXClass_Extends();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XClass#getImplements <em>Implements</em>}'.
+   * Returns the meta object for the reference list '{@link org.eclipse.xtext.xbase.XClass#getImplements <em>Implements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Implements</em>'.
+   * @return the meta object for the reference list '<em>Implements</em>'.
    * @see org.eclipse.xtext.xbase.XClass#getImplements()
    * @see #getXClass()
    * @generated
    */
   EReference getXClass_Implements();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XClass#getFunctions <em>Functions</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Functions</em>'.
-   * @see org.eclipse.xtext.xbase.XClass#getFunctions()
-   * @see #getXClass()
-   * @generated
-   */
-  EReference getXClass_Functions();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XClass#getTypeParams <em>Type Params</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Type Params</em>'.
-   * @see org.eclipse.xtext.xbase.XClass#getTypeParams()
-   * @see #getXClass()
-   * @generated
-   */
-  EReference getXClass_TypeParams();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -590,44 +679,12 @@ public interface XbasePackage extends EPackage
     EClass XFUNCTION = eINSTANCE.getXFunction();
 
     /**
-     * The meta object literal for the '<em><b>Private</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute XFUNCTION__PRIVATE = eINSTANCE.getXFunction_Private();
-
-    /**
-     * The meta object literal for the '<em><b>Type Params</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference XFUNCTION__TYPE_PARAMS = eINSTANCE.getXFunction_TypeParams();
-
-    /**
-     * The meta object literal for the '<em><b>Return Type</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference XFUNCTION__RETURN_TYPE = eINSTANCE.getXFunction_ReturnType();
-
-    /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EAttribute XFUNCTION__NAME = eINSTANCE.getXFunction_Name();
-
-    /**
-     * The meta object literal for the '<em><b>Declared Params</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference XFUNCTION__DECLARED_PARAMS = eINSTANCE.getXFunction_DeclaredParams();
 
     /**
      * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
@@ -656,7 +713,7 @@ public interface XbasePackage extends EPackage
     EAttribute XCLASS__NAME = eINSTANCE.getXClass_Name();
 
     /**
-     * The meta object literal for the '<em><b>Extends</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Extends</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
@@ -664,28 +721,12 @@ public interface XbasePackage extends EPackage
     EReference XCLASS__EXTENDS = eINSTANCE.getXClass_Extends();
 
     /**
-     * The meta object literal for the '<em><b>Implements</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Implements</b></em>' reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference XCLASS__IMPLEMENTS = eINSTANCE.getXClass_Implements();
-
-    /**
-     * The meta object literal for the '<em><b>Functions</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference XCLASS__FUNCTIONS = eINSTANCE.getXClass_Functions();
-
-    /**
-     * The meta object literal for the '<em><b>Type Params</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference XCLASS__TYPE_PARAMS = eINSTANCE.getXClass_TypeParams();
 
   }
 

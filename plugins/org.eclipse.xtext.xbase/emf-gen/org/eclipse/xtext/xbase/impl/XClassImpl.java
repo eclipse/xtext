@@ -5,10 +5,7 @@
  */
 package org.eclipse.xtext.xbase.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -16,16 +13,14 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
+import org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl;
+
 import org.eclipse.xtext.xbase.XClass;
-import org.eclipse.xtext.xbase.XFunction;
 import org.eclipse.xtext.xbase.XbasePackage;
 
 /**
@@ -38,14 +33,12 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XClassImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XClassImpl#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XClassImpl#getImplements <em>Implements</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.impl.XClassImpl#getFunctions <em>Functions</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.impl.XClassImpl#getTypeParams <em>Type Params</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class XClassImpl extends MinimalEObjectImpl.Container implements XClass
+public class XClassImpl extends JvmGenericTypeImpl implements XClass
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -68,7 +61,7 @@ public class XClassImpl extends MinimalEObjectImpl.Container implements XClass
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getExtends() <em>Extends</em>}' containment reference.
+   * The cached value of the '{@link #getExtends() <em>Extends</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getExtends()
@@ -78,7 +71,7 @@ public class XClassImpl extends MinimalEObjectImpl.Container implements XClass
   protected JvmTypeReference extends_;
 
   /**
-   * The cached value of the '{@link #getImplements() <em>Implements</em>}' containment reference list.
+   * The cached value of the '{@link #getImplements() <em>Implements</em>}' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getImplements()
@@ -86,26 +79,6 @@ public class XClassImpl extends MinimalEObjectImpl.Container implements XClass
    * @ordered
    */
   protected EList<JvmTypeReference> implements_;
-
-  /**
-   * The cached value of the '{@link #getFunctions() <em>Functions</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getFunctions()
-   * @generated
-   * @ordered
-   */
-  protected EList<XFunction> functions;
-
-  /**
-   * The cached value of the '{@link #getTypeParams() <em>Type Params</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTypeParams()
-   * @generated
-   * @ordered
-   */
-  protected EList<JvmTypeParameter> typeParams;
 
   /**
    * <!-- begin-user-doc -->
@@ -158,6 +131,16 @@ public class XClassImpl extends MinimalEObjectImpl.Container implements XClass
    */
   public JvmTypeReference getExtends()
   {
+    if (extends_ != null && extends_.eIsProxy())
+    {
+      InternalEObject oldExtends = (InternalEObject)extends_;
+      extends_ = (JvmTypeReference)eResolveProxy(oldExtends);
+      if (extends_ != oldExtends)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, XbasePackage.XCLASS__EXTENDS, oldExtends, extends_));
+      }
+    }
     return extends_;
   }
 
@@ -166,37 +149,9 @@ public class XClassImpl extends MinimalEObjectImpl.Container implements XClass
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetExtends(JvmTypeReference newExtends, NotificationChain msgs)
+  public JvmTypeReference basicGetExtends()
   {
-    JvmTypeReference oldExtends = extends_;
-    extends_ = newExtends;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XbasePackage.XCLASS__EXTENDS, oldExtends, newExtends);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setExtends(JvmTypeReference newExtends)
-  {
-    if (newExtends != extends_)
-    {
-      NotificationChain msgs = null;
-      if (extends_ != null)
-        msgs = ((InternalEObject)extends_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XbasePackage.XCLASS__EXTENDS, null, msgs);
-      if (newExtends != null)
-        msgs = ((InternalEObject)newExtends).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XbasePackage.XCLASS__EXTENDS, null, msgs);
-      msgs = basicSetExtends(newExtends, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XCLASS__EXTENDS, newExtends, newExtends));
+    return extends_;
   }
 
   /**
@@ -208,59 +163,9 @@ public class XClassImpl extends MinimalEObjectImpl.Container implements XClass
   {
     if (implements_ == null)
     {
-      implements_ = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, XbasePackage.XCLASS__IMPLEMENTS);
+      implements_ = new EObjectResolvingEList<JvmTypeReference>(JvmTypeReference.class, this, XbasePackage.XCLASS__IMPLEMENTS);
     }
     return implements_;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<XFunction> getFunctions()
-  {
-    if (functions == null)
-    {
-      functions = new EObjectContainmentEList<XFunction>(XFunction.class, this, XbasePackage.XCLASS__FUNCTIONS);
-    }
-    return functions;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<JvmTypeParameter> getTypeParams()
-  {
-    if (typeParams == null)
-    {
-      typeParams = new EObjectContainmentEList<JvmTypeParameter>(JvmTypeParameter.class, this, XbasePackage.XCLASS__TYPE_PARAMS);
-    }
-    return typeParams;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case XbasePackage.XCLASS__EXTENDS:
-        return basicSetExtends(null, msgs);
-      case XbasePackage.XCLASS__IMPLEMENTS:
-        return ((InternalEList<?>)getImplements()).basicRemove(otherEnd, msgs);
-      case XbasePackage.XCLASS__FUNCTIONS:
-        return ((InternalEList<?>)getFunctions()).basicRemove(otherEnd, msgs);
-      case XbasePackage.XCLASS__TYPE_PARAMS:
-        return ((InternalEList<?>)getTypeParams()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -276,13 +181,10 @@ public class XClassImpl extends MinimalEObjectImpl.Container implements XClass
       case XbasePackage.XCLASS__NAME:
         return getName();
       case XbasePackage.XCLASS__EXTENDS:
-        return getExtends();
+        if (resolve) return getExtends();
+        return basicGetExtends();
       case XbasePackage.XCLASS__IMPLEMENTS:
         return getImplements();
-      case XbasePackage.XCLASS__FUNCTIONS:
-        return getFunctions();
-      case XbasePackage.XCLASS__TYPE_PARAMS:
-        return getTypeParams();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -292,7 +194,6 @@ public class XClassImpl extends MinimalEObjectImpl.Container implements XClass
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -300,21 +201,6 @@ public class XClassImpl extends MinimalEObjectImpl.Container implements XClass
     {
       case XbasePackage.XCLASS__NAME:
         setName((String)newValue);
-        return;
-      case XbasePackage.XCLASS__EXTENDS:
-        setExtends((JvmTypeReference)newValue);
-        return;
-      case XbasePackage.XCLASS__IMPLEMENTS:
-        getImplements().clear();
-        getImplements().addAll((Collection<? extends JvmTypeReference>)newValue);
-        return;
-      case XbasePackage.XCLASS__FUNCTIONS:
-        getFunctions().clear();
-        getFunctions().addAll((Collection<? extends XFunction>)newValue);
-        return;
-      case XbasePackage.XCLASS__TYPE_PARAMS:
-        getTypeParams().clear();
-        getTypeParams().addAll((Collection<? extends JvmTypeParameter>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -332,18 +218,6 @@ public class XClassImpl extends MinimalEObjectImpl.Container implements XClass
     {
       case XbasePackage.XCLASS__NAME:
         setName(NAME_EDEFAULT);
-        return;
-      case XbasePackage.XCLASS__EXTENDS:
-        setExtends((JvmTypeReference)null);
-        return;
-      case XbasePackage.XCLASS__IMPLEMENTS:
-        getImplements().clear();
-        return;
-      case XbasePackage.XCLASS__FUNCTIONS:
-        getFunctions().clear();
-        return;
-      case XbasePackage.XCLASS__TYPE_PARAMS:
-        getTypeParams().clear();
         return;
     }
     super.eUnset(featureID);
@@ -365,10 +239,6 @@ public class XClassImpl extends MinimalEObjectImpl.Container implements XClass
         return extends_ != null;
       case XbasePackage.XCLASS__IMPLEMENTS:
         return implements_ != null && !implements_.isEmpty();
-      case XbasePackage.XCLASS__FUNCTIONS:
-        return functions != null && !functions.isEmpty();
-      case XbasePackage.XCLASS__TYPE_PARAMS:
-        return typeParams != null && !typeParams.isEmpty();
     }
     return super.eIsSet(featureID);
   }

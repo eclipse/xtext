@@ -7,26 +7,26 @@ package org.eclipse.xtext.xpression.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.xtext.xpression.XUnaryOperation;
+import org.eclipse.xtext.xpression.XMemberFeatureCall;
 import org.eclipse.xtext.xpression.XpressionPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>XUnary Operation</b></em>'.
+ * An implementation of the model object '<em><b>XMember Feature Call</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class XUnaryOperationImpl extends XMemberFeatureCallImpl implements XUnaryOperation
+public class XMemberFeatureCallImpl extends XFeatureCallImpl implements XMemberFeatureCall
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected XUnaryOperationImpl()
+  protected XMemberFeatureCallImpl()
   {
     super();
   }
@@ -39,7 +39,7 @@ public class XUnaryOperationImpl extends XMemberFeatureCallImpl implements XUnar
   @Override
   protected EClass eStaticClass()
   {
-    return XpressionPackage.Literals.XUNARY_OPERATION;
+    return XpressionPackage.Literals.XMEMBER_FEATURE_CALL;
   }
 
-} //XUnaryOperationImpl
+} //XMemberFeatureCallImpl

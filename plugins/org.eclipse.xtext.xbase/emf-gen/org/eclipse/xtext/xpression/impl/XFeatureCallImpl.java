@@ -13,6 +13,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -31,9 +32,9 @@ import org.eclipse.xtext.xpression.XpressionPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.xpression.impl.XFeatureCallImpl#getTarget <em>Target</em>}</li>
- *   <li>{@link org.eclipse.xtext.xpression.impl.XFeatureCallImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xpression.impl.XFeatureCallImpl#getFeatureName <em>Feature Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xpression.impl.XFeatureCallImpl#getParams <em>Params</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xpression.impl.XFeatureCallImpl#getFeature <em>Feature</em>}</li>
  * </ul>
  * </p>
  *
@@ -42,34 +43,24 @@ import org.eclipse.xtext.xpression.XpressionPackage;
 public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
 {
   /**
-   * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
+   * The default value of the '{@link #getFeatureName() <em>Feature Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTarget()
+   * @see #getFeatureName()
    * @generated
    * @ordered
    */
-  protected XExpression target;
+  protected static final String FEATURE_NAME_EDEFAULT = null;
 
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getFeatureName() <em>Feature Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getFeatureName()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
+  protected String featureName = FEATURE_NAME_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getParams() <em>Params</em>}' containment reference list.
@@ -80,6 +71,16 @@ public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
    * @ordered
    */
   protected EList<XExpression> params;
+
+  /**
+   * The cached value of the '{@link #getFeature() <em>Feature</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getFeature()
+   * @generated
+   * @ordered
+   */
+  protected EObject feature;
 
   /**
    * <!-- begin-user-doc -->
@@ -107,70 +108,9 @@ public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
    * <!-- end-user-doc -->
    * @generated
    */
-  public XExpression getTarget()
+  public String getFeatureName()
   {
-    return target;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetTarget(XExpression newTarget, NotificationChain msgs)
-  {
-    XExpression oldTarget = target;
-    target = newTarget;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XpressionPackage.XFEATURE_CALL__TARGET, oldTarget, newTarget);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setTarget(XExpression newTarget)
-  {
-    if (newTarget != target)
-    {
-      NotificationChain msgs = null;
-      if (target != null)
-        msgs = ((InternalEObject)target).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XpressionPackage.XFEATURE_CALL__TARGET, null, msgs);
-      if (newTarget != null)
-        msgs = ((InternalEObject)newTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XpressionPackage.XFEATURE_CALL__TARGET, null, msgs);
-      msgs = basicSetTarget(newTarget, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XpressionPackage.XFEATURE_CALL__TARGET, newTarget, newTarget));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XpressionPackage.XFEATURE_CALL__NAME, oldName, name));
+    return featureName;
   }
 
   /**
@@ -192,13 +132,54 @@ public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
    * <!-- end-user-doc -->
    * @generated
    */
+  public EObject getFeature()
+  {
+    if (feature != null && feature.eIsProxy())
+    {
+      InternalEObject oldFeature = (InternalEObject)feature;
+      feature = eResolveProxy(oldFeature);
+      if (feature != oldFeature)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, XpressionPackage.XFEATURE_CALL__FEATURE, oldFeature, feature));
+      }
+    }
+    return feature;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EObject basicGetFeature()
+  {
+    return feature;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setFeature(EObject newFeature)
+  {
+    EObject oldFeature = feature;
+    feature = newFeature;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XpressionPackage.XFEATURE_CALL__FEATURE, oldFeature, feature));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
-      case XpressionPackage.XFEATURE_CALL__TARGET:
-        return basicSetTarget(null, msgs);
       case XpressionPackage.XFEATURE_CALL__PARAMS:
         return ((InternalEList<?>)getParams()).basicRemove(otherEnd, msgs);
     }
@@ -215,12 +196,13 @@ public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
   {
     switch (featureID)
     {
-      case XpressionPackage.XFEATURE_CALL__TARGET:
-        return getTarget();
-      case XpressionPackage.XFEATURE_CALL__NAME:
-        return getName();
+      case XpressionPackage.XFEATURE_CALL__FEATURE_NAME:
+        return getFeatureName();
       case XpressionPackage.XFEATURE_CALL__PARAMS:
         return getParams();
+      case XpressionPackage.XFEATURE_CALL__FEATURE:
+        if (resolve) return getFeature();
+        return basicGetFeature();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -236,15 +218,12 @@ public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
   {
     switch (featureID)
     {
-      case XpressionPackage.XFEATURE_CALL__TARGET:
-        setTarget((XExpression)newValue);
-        return;
-      case XpressionPackage.XFEATURE_CALL__NAME:
-        setName((String)newValue);
-        return;
       case XpressionPackage.XFEATURE_CALL__PARAMS:
         getParams().clear();
         getParams().addAll((Collection<? extends XExpression>)newValue);
+        return;
+      case XpressionPackage.XFEATURE_CALL__FEATURE:
+        setFeature((EObject)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -260,14 +239,11 @@ public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
   {
     switch (featureID)
     {
-      case XpressionPackage.XFEATURE_CALL__TARGET:
-        setTarget((XExpression)null);
-        return;
-      case XpressionPackage.XFEATURE_CALL__NAME:
-        setName(NAME_EDEFAULT);
-        return;
       case XpressionPackage.XFEATURE_CALL__PARAMS:
         getParams().clear();
+        return;
+      case XpressionPackage.XFEATURE_CALL__FEATURE:
+        setFeature((EObject)null);
         return;
     }
     super.eUnset(featureID);
@@ -283,12 +259,12 @@ public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
   {
     switch (featureID)
     {
-      case XpressionPackage.XFEATURE_CALL__TARGET:
-        return target != null;
-      case XpressionPackage.XFEATURE_CALL__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case XpressionPackage.XFEATURE_CALL__FEATURE_NAME:
+        return FEATURE_NAME_EDEFAULT == null ? featureName != null : !FEATURE_NAME_EDEFAULT.equals(featureName);
       case XpressionPackage.XFEATURE_CALL__PARAMS:
         return params != null && !params.isEmpty();
+      case XpressionPackage.XFEATURE_CALL__FEATURE:
+        return feature != null;
     }
     return super.eIsSet(featureID);
   }
@@ -304,8 +280,8 @@ public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
+    result.append(" (featureName: ");
+    result.append(featureName);
     result.append(')');
     return result.toString();
   }

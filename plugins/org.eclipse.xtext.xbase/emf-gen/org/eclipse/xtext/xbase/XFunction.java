@@ -5,14 +5,8 @@
  */
 package org.eclipse.xtext.xbase;
 
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.common.types.JvmOperation;
 
-import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-
-import org.eclipse.xtext.xpression.XDeclaredParameter;
 import org.eclipse.xtext.xpression.XExpression;
 
 /**
@@ -23,11 +17,7 @@ import org.eclipse.xtext.xpression.XExpression;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.xbase.XFunction#isPrivate <em>Private</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.XFunction#getTypeParams <em>Type Params</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.XFunction#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XFunction#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.XFunction#getDeclaredParams <em>Declared Params</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XFunction#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
@@ -36,76 +26,8 @@ import org.eclipse.xtext.xpression.XExpression;
  * @model
  * @generated
  */
-public interface XFunction extends EObject
+public interface XFunction extends JvmOperation
 {
-  /**
-   * Returns the value of the '<em><b>Private</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Private</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Private</em>' attribute.
-   * @see #setPrivate(boolean)
-   * @see org.eclipse.xtext.xbase.XbasePackage#getXFunction_Private()
-   * @model
-   * @generated
-   */
-  boolean isPrivate();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.xtext.xbase.XFunction#isPrivate <em>Private</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Private</em>' attribute.
-   * @see #isPrivate()
-   * @generated
-   */
-  void setPrivate(boolean value);
-
-  /**
-   * Returns the value of the '<em><b>Type Params</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeParameter}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type Params</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Type Params</em>' containment reference list.
-   * @see org.eclipse.xtext.xbase.XbasePackage#getXFunction_TypeParams()
-   * @model containment="true"
-   * @generated
-   */
-  EList<JvmTypeParameter> getTypeParams();
-
-  /**
-   * Returns the value of the '<em><b>Return Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Return Type</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Return Type</em>' containment reference.
-   * @see #setReturnType(JvmTypeReference)
-   * @see org.eclipse.xtext.xbase.XbasePackage#getXFunction_ReturnType()
-   * @model containment="true"
-   * @generated
-   */
-  JvmTypeReference getReturnType();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.xtext.xbase.XFunction#getReturnType <em>Return Type</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Return Type</em>' containment reference.
-   * @see #getReturnType()
-   * @generated
-   */
-  void setReturnType(JvmTypeReference value);
-
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
@@ -131,22 +53,6 @@ public interface XFunction extends EObject
    * @generated
    */
   void setName(String value);
-
-  /**
-   * Returns the value of the '<em><b>Declared Params</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.xtext.xpression.XDeclaredParameter}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Declared Params</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Declared Params</em>' containment reference list.
-   * @see org.eclipse.xtext.xbase.XbasePackage#getXFunction_DeclaredParams()
-   * @model containment="true"
-   * @generated
-   */
-  EList<XDeclaredParameter> getDeclaredParams();
 
   /**
    * Returns the value of the '<em><b>Expression</b></em>' containment reference.
