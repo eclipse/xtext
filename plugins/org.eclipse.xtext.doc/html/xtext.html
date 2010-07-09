@@ -1333,7 +1333,7 @@ DataType:<br>
 
 <br>
 Entity:<br>
-&nbsp;&nbsp;'entity'&nbsp;name=ID&nbsp;('extends'&nbsp;superType=[Entity])?&nbsp;'{'<br>
+&nbsp;&nbsp;'entity'&nbsp;name=ID&nbsp;('extends'&nbsp;superType=[Entity|QualifiedName])?&nbsp;'{'<br>
 &nbsp;&nbsp;&nbsp;&nbsp;(features+=Feature)*<br>
 &nbsp;&nbsp;'}';<br>
 
@@ -1343,7 +1343,7 @@ Feature:<br>
 
 <br>
 TypeRef:<br>
-&nbsp;&nbsp;referenced=[Type]&nbsp;(multi?='*')?;<br>
+&nbsp;&nbsp;referenced=[Type|QualifiedName]&nbsp;(multi?='*')?;<br>
 
 <br>
 QualifiedName:<br>
