@@ -55,7 +55,7 @@
 			</cs:actorProperties>
 			<cs:properties>
 				<cs:property key="content.ius"
-					value="org.eclipse.xtext.xtext.ui.examples.feature.group" />
+					value="org.eclipse.xtext.examples.feature.group" />
 				<cs:property key="prerequisite.ius"
 					value="org.eclipse.xtext.sdk.feature.group" />
 				<cs:property key="package.name" value="tmf-xtext-Examples" />
