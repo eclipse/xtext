@@ -40,7 +40,7 @@
 				<cs:property key="content.ius"
 					value="org.eclipse.xtext.sdk.feature.group" />
 				<cs:property key="prerequisite.ius"
-					value="org.eclipse.m2t.xpand.sdk.feature.group,org.eclipse.emf.mwe.ui.feature.group" />
+					value="org.eclipse.emf.mwe.ui.feature.group" />
 				<cs:property key="package.name" value="tmf-xtext-SDK" />
 			</cs:properties>
 			<cs:prerequisites>
