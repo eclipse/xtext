@@ -4,7 +4,8 @@
 	xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0">
 
 	<cs:dependencies>
-		<cs:dependency name="org.eclipse.xtext.releng" componentType="buckminster" />
+		<!-- <cs:dependency name="org.eclipse.xtext.releng" componentType="buckminster" />
+	 -->
 	</cs:dependencies>
 
 	<cs:actions>
