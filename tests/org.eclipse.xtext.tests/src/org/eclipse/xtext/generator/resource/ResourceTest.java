@@ -45,7 +45,7 @@ public class ResourceTest extends AbstractXtextTests {
 
 	@SuppressWarnings("unused")
 	private Resource loadAsResource(File modelFile, ResourceSet rs0) throws MalformedURLException {
-		Resource resource = rs0.getResource(URI.createURI(modelFile.toURL().toString()), true);
+		Resource resource = rs0.getResource(URI.createURI(modelFile.toURI().toURL().toString()), true);
 		assertNotNull(resource);
 		assertFalse(resource.getContents().isEmpty());
 		EObject rootElement = resource.getContents().get(0);
