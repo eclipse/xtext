@@ -382,4 +382,76 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
 		validateRule(rule);
 		assertTrue(warnings.toString(), warnings.isEmpty());
 	}
+	
+	public void testBug306281_06() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"Model : name=ID (" +
+				"		({Binary.left=current} operator = [Model] | {Binary.left=current} operator = [Model])" +
+				"	right=ID)*;";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "Model");
+		validateRule(rule);
+		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
+	
+	public void testBug306281_07() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"Model : name=ID (" +
+				"		({Binary.left=current} operator = [Model] | {Binary.left=current} operator = [Model])" +
+				"	right=ID)* name=ID;";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "Model");
+		validateRule(rule);
+		assertEquals(warnings.toString(), 2, warnings.size());
+	}
+	
+	public void testBug306281_08() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"Model : name=ID (" +
+				"		({Binary.left=current} operator = [Model] | {Binary.left=current} operator = [Model])" +
+				"	right=ID)+ name=ID;";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "Model");
+		validateRule(rule);
+		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
+	
+	public void testBug306281_09() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"Model : name=ID (" +
+				"		({Binary.left=current} operator = [Model] | {Binary.left=current} operator = [Model])?" +
+				"	name=ID);";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "Model");
+		validateRule(rule);
+		assertEquals(warnings.toString(), 2, warnings.size());
+	}
+	
+	public void testBug306281_10() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"Model : name=ID (" +
+				"		({Binary.left=current} operator = [Model] | {Binary.left=current} operator = [Model])" +
+				"	name=ID);";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "Model");
+		validateRule(rule);
+		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
+	
+	public void testBug306281_11() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"Model returns Model: SubModel " +
+				"		({Binary.params+=current} operator ='+' params+=SubModel)*;\n" +
+				"SubModel returns Model: '('Model')';";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "Model");
+		validateRule(rule);
+		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
 }
