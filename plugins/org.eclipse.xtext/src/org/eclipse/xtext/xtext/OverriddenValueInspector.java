@@ -68,9 +68,9 @@ public class OverriddenValueInspector extends XtextRuleInspector<Boolean, Parser
 
 	@Override
 	public Boolean caseAction(Action object) {
+		assignedFeatures = newMultimap();
 		if (GrammarUtil.isMultipleAssignment(object))
 			return null;
-		assignedFeatures = newMultimap();
 		if (object.getFeature() == null)
 			return Boolean.FALSE;
 		checkAssignment(object, object.getFeature());
@@ -107,12 +107,12 @@ public class OverriddenValueInspector extends XtextRuleInspector<Boolean, Parser
 	public Boolean caseRuleCall(RuleCall object) {
 		AbstractRule calledRule = object.getRule();
 		if (calledRule == null || calledRule instanceof TerminalRule || calledRule instanceof EnumRule)
-			return null;
+			return Boolean.FALSE;
 		ParserRule parserRule = (ParserRule) calledRule;
 		if (GrammarUtil.isDatatypeRule(parserRule))
-			return null;
+			return Boolean.FALSE;
 		if (!addVisited(parserRule))
-			return null;
+			return Boolean.FALSE;
 		Multimap<String, AbstractElement> prevAssignedFeatures = assignedFeatures;
 		assignedFeatures = newMultimap();
 		doSwitch(parserRule.getAlternatives());
