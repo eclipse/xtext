@@ -1,0 +1,407 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+grammar org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage
+ 	with org.eclipse.xtext.common.Terminals
+
+// adopted from CompleteOCL.xtext
+
+generate backtrackingContentAssistTest "http://www.eclipse.org/xtext/ui/common/tests/2010/backtrackingContentAssistTest"
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+Document :
+	(packages+=PackageDeclaration | contexts+=ContextDecl)*
+;
+
+Body:
+	'body' (constraintName=Identifier)? ':' expression=Expression
+;
+
+ClassifierContextDecl:
+	'context' (selfName=Identifier ':' )? classifier=ClassifierRef 
+		(invariants+=Invariant | definitions+=Definition)*
+;
+
+ClassifierRef:
+	QualifiedClassifierRef | SimpleClassifierRef
+;
+
+ContextDecl:
+	PropertyContextDecl
+|	ClassifierContextDecl
+|	OperationContextDecl
+;
+
+Definition:
+	(static?='static')? 'def' (constraintName=Identifier)? ':' constrainedName=Identifier
+	('(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')')?
+	':' (type=TypeExp)? '=' expression=Expression
+;
+
+Der:
+	'derive' ':' expression=Expression
+;
+
+Init:
+	'init' ':' expression=Expression
+;
+
+Invariant:
+	'inv' (constraintName=Identifier)? ':' expression=Expression
+;
+
+OperationContextDecl:
+	'context' operation=OperationRef '('
+	(parameters+=Parameter (',' parameters+=Parameter)*)?
+	')' ':' (type=TypeExp)?
+	((pres+=Pre) | (posts+=Post) | (bodies+=Body))*
+;
+
+OperationRef:
+	QualifiedOperationRef | SimpleOperationRef
+;
+
+PackageDeclaration :
+	'package' package=PackageRef (contexts+=ContextDecl)* 'endpackage'
+;
+
+PackageRef:
+	QualifiedPackageRef | SimplePackageRef
+;
+
+Parameter:
+	(name=Identifier ':')? type=TypeExp
+;
+
+Post:
+	'post' (constraintName=Identifier)? ':' expression=Expression
+;
+
+Pre:
+	'pre' (constraintName=Identifier)? ':' expression=Expression
+;
+
+PropertyContextDecl:
+	'context' property=PropertyRef ':' type=TypeExp
+	((init=Init (der=Der)?)? | (der=Der (init=Init)?))
+;
+
+PropertyRef:
+	QualifiedPropertyRef | SimplePropertyRef
+;
+
+QualifiedClassifierRef:
+	namespace=Identifier
+	'::' element=ClassifierRef
+;
+
+QualifiedOperationRef :
+	namespace=Identifier
+	'::' element=OperationRef
+;
+
+QualifiedPropertyRef :
+	namespace=Identifier
+	'::' element=PropertyRef
+;
+
+QualifiedPackageRef :
+	namespace=Identifier
+	'::' element=PackageRef
+;
+
+SimpleClassifierRef :
+	classifier=Identifier
+;
+
+SimpleOperationRef :
+	operation=Identifier
+;
+
+SimplePackageRef :
+	package=Identifier
+;
+
+SimplePropertyRef :
+	feature=Identifier
+;
+
+//---------------------------------------------------------------------------------
+//	EssentialOCL overrides
+//---------------------------------------------------------------------------------
+NavigationExp returns Expression:
+	SubNavigationExp
+	(
+		({InfixExp.source=current} op=('.'|'->') argument=NavigatingExp)
+	|	({OclMessage.source=current} op=('^^'|'^') messageName=Identifier
+			'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')
+	)?
+;
+
+// Follows ., ->, ^
+NavigatingExp :
+	SubNavigatingExp
+	(
+		({InfixExp.source=current} op=('.'|'->') argument=NavigatingExp)
+	|	({OclMessage.source=current} op=('^^'|'^') messageName=Identifier
+			'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')
+	)?
+;
+
+// FIXME @pre
+
+OclMessageArg :
+	({OclMessageArg}'?' (':' type=TypeExp)?)
+|	Expression
+;
+
+
+
+NUMBER_LITERAL:
+	INT ('.' INT)? (('e'|'E') ('+'|'-')? INT)?
+;
+
+EssentialOCLRestrictedKeywords:
+	'e'
+|	'E'
+;
+
+RestrictedKeywords:					// Intended to be overridden
+	EssentialOCLRestrictedKeywords
+;
+
+Identifier:
+	ID
+|	RestrictedKeywords
+;
+
+StringLiteral:
+	STRING
+;
+    
+SimpleName:
+	Identifier
+;
+    
+PrimitiveTypeIdentifier:
+	'Boolean'
+|	'Integer'
+|	'Real'
+|	'String'
+|	'UnlimitedNatural'
+|	'OclAny'
+|	'OclInvalid'
+|	'OclVoid'
+;
+
+PrimitiveType :
+	name=PrimitiveTypeIdentifier
+;
+    
+CollectionTypeIdentifier:
+	'Set'
+|	'Bag'
+|	'Sequence'
+|	'Collection'
+|	'OrderedSet'
+;
+
+TypeExp:
+	PrimitiveType
+|	NameExp
+|	CollectionType
+|	TupleType
+;
+
+CollectionType:
+	typeIdentifier=CollectionTypeIdentifier ('(' type=TypeExp ')')?
+;
+
+TupleType:
+	name='Tuple' '(' (part+=tuplePart (',' part+=tuplePart)*)? ')'
+;
+        
+tuplePart:
+	name=Identifier ':' type=TypeExp
+;
+
+CollectionLiteralExp :
+	CollectionType
+	({CollectionLiteralExp.type=current} '{' (collectionLiteralParts+=CollectionLiteralPart
+	 (',' collectionLiteralParts+=CollectionLiteralPart)*)?
+	 '}')?
+;
+
+CollectionLiteralPart:
+	expression=Expression ('..' lastExpression=Expression)?
+;
+
+PrimitiveLiteralExp:
+	NumberLiteralExp
+|	StringLiteralExp
+|	BooleanLiteralExp
+|	InvalidLiteralExp
+|	NullLiteralExp
+;
+
+TupleLiteralExp:
+	{TupleLiteralExp} 'Tuple' ('{' part+=TupleLiteralPart (',' part+=TupleLiteralPart)* '}')?
+;
+	
+TupleLiteralPart :
+	name=Identifier (':' type=TypeExp)? '=' initExpression=Expression
+;
+
+NumberLiteralExp:
+	name=NUMBER_LITERAL
+;
+
+StringLiteralExp:
+	values+=StringLiteral+
+;
+
+BooleanLiteralExp:
+	{BooleanLiteralExp}
+		(isTrue?='true'
+	|	'false');
+
+InvalidLiteralExp:
+	{InvalidLiteralExp} 'invalid'
+;
+
+NullLiteralExp:
+	{NullLiteralExp} 'null'
+;
+
+Expression:
+	implies	
+|	LetExp
+;
+
+implies returns Expression:
+	xor
+	({InfixExp.source=current} op='implies' argument=(xor|LetExp))*
+;
+
+xor returns Expression:
+	or
+	({InfixExp.source=current} op='xor' argument=(or|LetExp))*
+;
+
+or returns Expression:
+	and
+	({InfixExp.source=current} op='or' argument=(and|LetExp))*
+;
+
+and returns Expression:
+	equality
+	({InfixExp.source=current} op='and' argument=(equality|LetExp))*
+;
+
+equality returns Expression:
+	relational
+	({InfixExp.source=current} op=('='|'<>') argument=(relational|LetExp))*
+;
+
+relational returns Expression:
+	additive
+	({InfixExp.source=current} op=('>'|'<'|'>='|'<=') argument=(additive|LetExp))*
+;
+
+additive returns Expression:
+	multiplicative
+	({InfixExp.source=current} op=('+'|'-') argument=(multiplicative|LetExp))*
+;
+
+multiplicative returns Expression:
+	unary
+	({InfixExp.source=current} op=('*'|'/') argument=(unary|LetExp))*
+;
+
+unary returns Expression:
+	NavigationExp
+|	({PrefixExp} op=('-'|'not') source=unary)
+;
+
+SubNavigationExp returns Expression:
+	RoundBracketExp
+|	SquareBracketExp
+|	SelfExp
+|	PrimitiveLiteralExp
+|	TupleLiteralExp
+|	CollectionLiteralExp
+|	PreExp
+|	TypeExp
+|	IfExp
+|	'('{NestedExp} source=Expression ')'
+;
+
+SubNavigatingExp returns Expression:
+	RoundBracketExp
+|	SquareBracketExp
+|	PreExp
+|	NameExp
+;
+
+iteratorVariable :
+	name=Identifier (':' type=TypeExp)?
+;
+
+iteratorAccumulator :
+	name=Identifier ':' type=TypeExp '=' initExpression=Expression
+;
+
+RoundBracketExp :
+	name=NameExp ('@' pre?='pre')? '('
+		(variable1=iteratorVariable
+	        ((',' variable2=iteratorVariable)
+	        |(';' variable2=iteratorAccumulator))?
+	        '|')?
+	    (arguments+=Expression (',' arguments+=Expression)*)?
+	')'
+;
+
+SquareBracketExp :
+	name=NameExp '[' arguments+=Expression (',' arguments+=Expression)* ']' ('@' pre?='pre')?
+;
+
+PreExp :
+	name=NameExp '@' 'pre'
+;
+    
+SelfExp :
+	{SelfExp} 'self'
+;
+
+NameExp :
+	PathNameExp | SimpleNameExp
+;
+
+PathNameExp :
+	namespace=Identifier '::' element=NameExp
+;
+
+SimpleNameExp :
+	element=Identifier
+;
+
+IfExp:
+	'if' condition=Expression
+	'then' thenExpression=Expression
+	'else' elseExpression=Expression
+	'endif'
+;
+
+LetExp:
+	'let'
+	variable+=LetVariable (',' variable+=LetVariable)*
+	'in' in=Expression
+;
+
+LetVariable:
+	name=Identifier ':' type=TypeExp '=' initExpression=Expression
+;
