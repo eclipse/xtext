@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cs:cspecExtension
-	xmlns:com="http://www.eclipse.org/buckminster/Common-1.0"
-	xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0">
+<cs:cspecExtension xmlns:com="http://www.eclipse.org/buckminster/Common-1.0" xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0">
 
 	<cs:dependencies>
-		<!-- <cs:dependency name="org.eclipse.xtext.releng" componentType="buckminster" />
-	 -->
+		<cs:dependency name="org.eclipse.xtext.releng" componentType="buckminster" />
+		<cs:dependency name="org.eclipse.xtext.tests" componentType="eclipse.feature" />
 	</cs:dependencies>
 
 	<cs:actions>
@@ -37,10 +35,9 @@
 				<cs:property key="targets" value="package.ius" />
 			</cs:actorProperties>
 			<cs:properties>
-				<cs:property key="content.ius"
-					value="org.eclipse.xtext.sdk.feature.group" />
-				<cs:property key="prerequisite.ius"
-					value="org.eclipse.emf.mwe.ui.feature.group" />
+				<cs:property key="content.ius" value="org.eclipse.xtext.sdk.feature.group" />
+				<cs:property key="prerequisite.ius" value="org.eclipse.xtext.docs.source.feature.group" />
+				<cs:property key="target.platform.ius" value="com.google.inject,org.antlr.runtime,org.apache.log4j" />
 				<cs:property key="package.name" value="tmf-xtext-SDK" />
 			</cs:properties>
 			<cs:prerequisites>
@@ -57,9 +54,8 @@
 			</cs:actorProperties>
 			<cs:properties>
 				<cs:property key="content.ius"
-					value="org.eclipse.xtext.examples.feature.group" />
-				<cs:property key="prerequisite.ius"
-					value="org.eclipse.xtext.sdk.feature.group" />
+					value="org.eclipse.xtext.examples.feature.group,org.eclipse.xtext.examples.source.feature.group" />
+				<cs:property key="prerequisite.ius" value="org.eclipse.xtext.runtime.feature.group,org.eclipse.xtext.ui.feature.group" />
 				<cs:property key="package.name" value="tmf-xtext-Examples" />
 			</cs:properties>
 			<cs:prerequisites>
@@ -68,14 +64,16 @@
 			</cs:prerequisites>
 			<cs:products alias="output" base="${buckminster.output}/zips/" />
 		</cs:public>
-
+		
 		<cs:public name="package.tmf-xtext-runtime" actor="ant">
 			<cs:actorProperties>
 				<cs:property key="buildFile" value="packaging.ant" />
 				<cs:property key="targets" value="package.ius" />
 			</cs:actorProperties>
 			<cs:properties>
-				<cs:property key="content.ius" value="org.eclipse.xtext.runtime.feature.group" />
+				<cs:property key="content.ius"
+					value="org.eclipse.xtext.runtime.feature.group" />
+				<cs:property key="prerequisite.ius" value="com.google.collect" />
 				<cs:property key="package.name" value="tmf-xtext-runtime" />
 			</cs:properties>
 			<cs:prerequisites>
@@ -91,8 +89,8 @@
 				<cs:property key="targets" value="package.ius" />
 			</cs:actorProperties>
 			<cs:properties>
-				<cs:property key="content.ius"
-					value="org.eclipse.xtext.docs.feature.group" />
+				<cs:property key="content.ius" value="org.eclipse.xtext.docs.feature.group" />
+				<cs:property key="prerequisite.ius" value="org.eclipse.xtext.docs.source.feature.group" />
 				<cs:property key="package.name" value="tmf-xtext-sourcedoc" />
 			</cs:properties>
 			<cs:prerequisites>
@@ -102,13 +100,14 @@
 			<cs:products alias="output" base="${buckminster.output}/zips/" />
 		</cs:public>
 
-	<!-- <cs:public name="tag" actor="buckminster.tag">
+
+		<cs:public name="tag" actor="buckminster.tag">
 			<cs:actorProperties>
 				<cs:property key="tag" value="build_${build.id}" />
 				<cs:property key="exclude.0" value="^org\.eclipse\.test$" />
 				<cs:property key="exclude.1" value="^org\.eclipse\.ant\.optional\.junit$" />
 			</cs:actorProperties>
-		</cs:public>  -->	
+		</cs:public>
 	</cs:actions>
 
 	<cs:groups>
