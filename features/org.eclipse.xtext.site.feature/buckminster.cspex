@@ -2,8 +2,9 @@
 <cs:cspecExtension xmlns:com="http://www.eclipse.org/buckminster/Common-1.0" xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0">
 
 	<cs:dependencies>
-		<cs:dependency name="org.eclipse.xtext.releng" componentType="buckminster" />
-		<cs:dependency name="org.eclipse.xtext.tests" componentType="eclipse.feature" />
+		<!-- <cs:dependency name="org.eclipse.xtext.releng" componentType="buckminster" />
+		 -->
+		 <cs:dependency name="org.eclipse.xtext.tests" componentType="eclipse.feature" />
 	</cs:dependencies>
 
 	<cs:actions>
