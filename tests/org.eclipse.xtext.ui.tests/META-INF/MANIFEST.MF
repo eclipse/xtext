@@ -175,5 +175,8 @@ Export-Package: org.eclipse.xtext.ui.tests,
  org.eclipse.xtext.ui.tests.editor.bracketmatching.ui.contentassist.antlr,
  org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage,
  org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.impl,
- org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.util
+ org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.util,
+ org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest,
+ org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl,
+ org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.util
 

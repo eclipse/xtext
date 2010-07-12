@@ -46,6 +46,43 @@ import com.google.common.collect.Multimaps;
 public abstract class AbstractInternalContentAssistParser extends Parser implements
 		ObservableXtextTokenStream.StreamListener, ITokenDefProvider {
 
+	/**
+	 * @author Sebastian Zarnekow - Initial contribution and API
+	 */
+	protected class DefaultFollowElementFactory implements IFollowElementFactory {
+		public FollowElement createFollowElement(AbstractElement current, int lookAhead) {
+			FollowElement result = new FollowElement();
+			result.setLookAhead(lookAhead);
+			if (lookAhead != 1) {
+				int from = input.index();
+				int to = input.size();
+				if (marked) {
+					from = firstMarker;
+				}
+				List<LookAheadTerminal> lookAheadTerminals = Lists
+						.<LookAheadTerminal> newArrayListWithExpectedSize(to - from);
+				for (int tokenIndex = from; tokenIndex < to; tokenIndex++) {
+					Token token = input.get(tokenIndex);
+					
+					if (token != null) {
+						LookAheadTerminal lookAheadTerminal = createLookAheadTerminal(token);
+						lookAheadTerminals.add(lookAheadTerminal);
+					}
+				}
+				result.setLookAheadTerminals(lookAheadTerminals);
+				result.setLookAhead(lookAheadTerminals.size() + 1);
+			}
+			result.setGrammarElement(current);
+			result.setTrace(Lists.newArrayList(Iterators.filter(grammarElements.iterator(), AbstractElement.class)));
+			result.setLocalTrace(Lists.newArrayList(Iterators.filter(localTrace.iterator(), AbstractElement.class)));
+			if (current instanceof UnorderedGroup && indexToHandledElements != null) {
+				int index = grammarElements.lastIndexOf(current);
+				result.setHandledUnorderedGroupElements(Lists.newArrayList(Iterators.filter(indexToHandledElements.get(index).iterator(), AbstractElement.class)));
+			}
+			return result;
+		}
+	}
+
 	public interface RecoveryListener {
 		void beginErrorRecovery();
 		void endErrorRecovery();
@@ -71,46 +108,8 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	protected int firstMarker;
 	protected Multimap<Integer, AbstractElement> indexToHandledElements;
 	protected IUnorderedGroupHelper unorderedGroupHelper;
-	protected IFollowElementFactory followElementFactory = new IFollowElementFactory() {
+	protected IFollowElementFactory followElementFactory = new DefaultFollowElementFactory();
 
-		public FollowElement createFollowElement(AbstractElement current, int lookAhead) {
-			FollowElement result = new FollowElement();
-			result.setLookAhead(lookAhead);
-			if (lookAhead != 1) {
-				List<LookAheadTerminal> lookAheadTerminals = Lists
-						.<LookAheadTerminal> newArrayListWithExpectedSize(lookAhead - 1);
-				for (int i = 1; i < lookAhead; i++) {
-					int tokenIndex = i;
-					if (marked) {
-						tokenIndex -= lookAheadAddOn;
-						if (tokenIndex <= 0)
-							tokenIndex--;
-					}
-					Token token = input.LT(tokenIndex);
-					if (token != null) {
-						if (token == Token.EOF_TOKEN) {
-							result.setLookAhead(i);
-							break;
-						}
-						LookAheadTerminal lookAheadTerminal = createLookAheadTerminal(token);
-						lookAheadTerminals.add(lookAheadTerminal);
-					}
-				}
-				if (!lookAheadTerminals.isEmpty())
-					result.setLookAheadTerminals(lookAheadTerminals);
-			}
-			result.setGrammarElement(current);
-			result.setTrace(Lists.newArrayList(Iterators.filter(grammarElements.iterator(), AbstractElement.class)));
-			result.setLocalTrace(Lists.newArrayList(Iterators.filter(localTrace.iterator(), AbstractElement.class)));
-			if (current instanceof UnorderedGroup && indexToHandledElements != null) {
-				int index = grammarElements.lastIndexOf(current);
-				result.setHandledUnorderedGroupElements(Lists.newArrayList(Iterators.filter(indexToHandledElements.get(index).iterator(), AbstractElement.class)));
-			}
-			return result;
-		}
-	};
-
-	
 	public AbstractInternalContentAssistParser(TokenStream input) {
 		super(input);
 		this.grammarElements = new ArrayList<EObject>();

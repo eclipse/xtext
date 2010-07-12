@@ -27,16 +27,16 @@ public class InternalEncodingUiTestLanguageLexer extends Lexer {
     public final void mRULE_LEXEME() throws RecognitionException {
         try {
             int _type = RULE_LEXEME;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/parser/antlr/internal/InternalEncodingUiTestLanguage.g:170:13: ( ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/parser/antlr/internal/InternalEncodingUiTestLanguage.g:170:15: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/parser/antlr/internal/InternalEncodingUiTestLanguage.g:170:13: ( ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u2030' | '\\u02C6' | '\\u00B8' | '\\uFB02' | '\\u0192' | '\\u00F7' | '\\u2039' )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/parser/antlr/internal/InternalEncodingUiTestLanguage.g:170:15: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u2030' | '\\u02C6' | '\\u00B8' | '\\uFB02' | '\\u0192' | '\\u00F7' | '\\u2039' )*
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/parser/antlr/internal/InternalEncodingUiTestLanguage.g:170:15: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/parser/antlr/internal/InternalEncodingUiTestLanguage.g:170:15: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u2030' | '\\u02C6' | '\\u00B8' | '\\uFB02' | '\\u0192' | '\\u00F7' | '\\u2039' )*
             loop1:
             do {
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( ((LA1_0>='0' && LA1_0<='9')||(LA1_0>='A' && LA1_0<='Z')||(LA1_0>='a' && LA1_0<='z')||LA1_0=='\u00C4'||LA1_0=='\u00D6'||LA1_0=='\u00DC'||LA1_0=='\u00DF'||LA1_0=='\u00E4'||LA1_0=='\u00F6'||LA1_0=='\u00FC') ) {
+                if ( ((LA1_0>='0' && LA1_0<='9')||(LA1_0>='A' && LA1_0<='Z')||(LA1_0>='a' && LA1_0<='z')||LA1_0=='\u00B8'||LA1_0=='\u00F7'||LA1_0=='\u0192'||LA1_0=='\u02C6'||LA1_0=='\u2030'||LA1_0=='\u2039'||LA1_0=='\uFB02') ) {
                     alt1=1;
                 }
 
@@ -45,7 +45,7 @@ public class InternalEncodingUiTestLanguageLexer extends Lexer {
             	case 1 :
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/parser/antlr/internal/InternalEncodingUiTestLanguage.g:
             	    {
-            	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||(input.LA(1)>='a' && input.LA(1)<='z')||input.LA(1)=='\u00C4'||input.LA(1)=='\u00D6'||input.LA(1)=='\u00DC'||input.LA(1)=='\u00DF'||input.LA(1)=='\u00E4'||input.LA(1)=='\u00F6'||input.LA(1)=='\u00FC' ) {
+            	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||(input.LA(1)>='a' && input.LA(1)<='z')||input.LA(1)=='\u00B8'||input.LA(1)=='\u00F7'||input.LA(1)=='\u0192'||input.LA(1)=='\u02C6'||input.LA(1)=='\u2030'||input.LA(1)=='\u2039'||input.LA(1)=='\uFB02' ) {
             	        input.consume();
 
             	    }
@@ -153,13 +153,13 @@ public class InternalEncodingUiTestLanguageLexer extends Lexer {
         int alt3=3;
         int LA3_0 = input.LA(1);
 
-        if ( ((LA3_0>='0' && LA3_0<='9')||(LA3_0>='A' && LA3_0<='Z')||(LA3_0>='a' && LA3_0<='z')||LA3_0=='\u00C4'||LA3_0=='\u00D6'||LA3_0=='\u00DC'||LA3_0=='\u00DF'||LA3_0=='\u00E4'||LA3_0=='\u00F6'||LA3_0=='\u00FC') ) {
+        if ( ((LA3_0>='0' && LA3_0<='9')||(LA3_0>='A' && LA3_0<='Z')||(LA3_0>='a' && LA3_0<='z')||LA3_0=='\u00B8'||LA3_0=='\u00F7'||LA3_0=='\u0192'||LA3_0=='\u02C6'||LA3_0=='\u2030'||LA3_0=='\u2039'||LA3_0=='\uFB02') ) {
             alt3 = mTokensHelper001();
         }
         else if ( ((LA3_0>='\t' && LA3_0<='\n')||LA3_0=='\r'||LA3_0==' ') ) {
             alt3 = mTokensHelper002();
         }
-        else if ( ((LA3_0>='\u0000' && LA3_0<='\b')||(LA3_0>='\u000B' && LA3_0<='\f')||(LA3_0>='\u000E' && LA3_0<='\u001F')||(LA3_0>='!' && LA3_0<='/')||(LA3_0>=':' && LA3_0<='@')||(LA3_0>='[' && LA3_0<='`')||(LA3_0>='{' && LA3_0<='\u00C3')||(LA3_0>='\u00C5' && LA3_0<='\u00D5')||(LA3_0>='\u00D7' && LA3_0<='\u00DB')||(LA3_0>='\u00DD' && LA3_0<='\u00DE')||(LA3_0>='\u00E0' && LA3_0<='\u00E3')||(LA3_0>='\u00E5' && LA3_0<='\u00F5')||(LA3_0>='\u00F7' && LA3_0<='\u00FB')||(LA3_0>='\u00FD' && LA3_0<='\uFFFE')) ) {
+        else if ( ((LA3_0>='\u0000' && LA3_0<='\b')||(LA3_0>='\u000B' && LA3_0<='\f')||(LA3_0>='\u000E' && LA3_0<='\u001F')||(LA3_0>='!' && LA3_0<='/')||(LA3_0>=':' && LA3_0<='@')||(LA3_0>='[' && LA3_0<='`')||(LA3_0>='{' && LA3_0<='\u00B7')||(LA3_0>='\u00B9' && LA3_0<='\u00F6')||(LA3_0>='\u00F8' && LA3_0<='\u0191')||(LA3_0>='\u0193' && LA3_0<='\u02C5')||(LA3_0>='\u02C7' && LA3_0<='\u202F')||(LA3_0>='\u2031' && LA3_0<='\u2038')||(LA3_0>='\u203A' && LA3_0<='\uFB01')||(LA3_0>='\uFB03' && LA3_0<='\uFFFE')) ) {
             alt3 = mTokensHelper003();
         }
         else {

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.ui.tests/src-gen"
+    editDirectory="/org.eclipse.xtext.ui.tests.edit/src" editorDirectory="/org.eclipse.xtext.ui.tests.editor/src"
+    modelPluginID="org.eclipse.xtext.ui.tests" forceOverwrite="true" modelName="BacktrackingContentAssistTestLanguage"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
+    editorPluginID="org.eclipse.xtext.ui.tests.editor">
+  <genPackages prefix="BacktrackingContentAssistTest" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
+      disposableProviderFactory="true" ecorePackage="BacktrackingContentAssistTestLanguage.ecore#/">
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//Document">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//Document/packages"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//Document/contexts"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//Body">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//Body/constraintName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//Body/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//ClassifierContextDecl">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//ClassifierContextDecl/selfName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//ClassifierContextDecl/classifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//ClassifierContextDecl/invariants"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//ClassifierContextDecl/definitions"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//ClassifierRef"/>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//ContextDecl"/>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//Definition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//Definition/static"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//Definition/constraintName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//Definition/constrainedName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//Definition/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//Definition/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//Definition/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//Der">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//Der/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//Init">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//Init/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//Invariant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//Invariant/constraintName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//Invariant/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//OperationContextDecl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//OperationContextDecl/operation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//OperationContextDecl/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//OperationContextDecl/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//OperationContextDecl/pres"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//OperationContextDecl/posts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//OperationContextDecl/bodies"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//OperationRef"/>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//PackageDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//PackageDeclaration/package"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//PackageDeclaration/contexts"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//PackageRef"/>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//Parameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//Parameter/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//Parameter/type"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//Post">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//Post/constraintName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//Post/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//Pre">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//Pre/constraintName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//Pre/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//PropertyContextDecl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//PropertyContextDecl/property"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//PropertyContextDecl/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//PropertyContextDecl/init"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//PropertyContextDecl/der"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//PropertyRef"/>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//QualifiedClassifierRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//QualifiedClassifierRef/namespace"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//QualifiedClassifierRef/element"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//QualifiedOperationRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//QualifiedOperationRef/namespace"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//QualifiedOperationRef/element"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//QualifiedPropertyRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//QualifiedPropertyRef/namespace"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//QualifiedPropertyRef/element"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//QualifiedPackageRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//QualifiedPackageRef/namespace"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//QualifiedPackageRef/element"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//SimpleClassifierRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//SimpleClassifierRef/classifier"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//SimpleOperationRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//SimpleOperationRef/operation"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//SimplePackageRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//SimplePackageRef/package"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//SimplePropertyRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//SimplePropertyRef/feature"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//Expression"/>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//NavigatingExp"/>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//OclMessageArg">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//OclMessageArg/type"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//PrimitiveType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//PrimitiveType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//TypeExp"/>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//CollectionType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//CollectionType/typeIdentifier"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//TupleType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//TupleType/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//TupleType/part"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//tuplePart">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//tuplePart/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//tuplePart/type"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//CollectionLiteralExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//CollectionLiteralExp/collectionLiteralParts"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//CollectionLiteralPart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//CollectionLiteralPart/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//CollectionLiteralPart/lastExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//PrimitiveLiteralExp"/>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//TupleLiteralExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//TupleLiteralExp/part"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//TupleLiteralPart">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//TupleLiteralPart/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//TupleLiteralPart/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//TupleLiteralPart/initExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//NumberLiteralExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//NumberLiteralExp/name"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//StringLiteralExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//StringLiteralExp/values"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//BooleanLiteralExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//BooleanLiteralExp/isTrue"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//InvalidLiteralExp"/>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//NullLiteralExp"/>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//iteratorVariable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//iteratorVariable/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//iteratorVariable/type"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//iteratorAccumulator">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//iteratorAccumulator/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//iteratorAccumulator/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//iteratorAccumulator/initExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//RoundBracketExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//RoundBracketExp/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//RoundBracketExp/pre"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//RoundBracketExp/variable1"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//RoundBracketExp/variable2"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//RoundBracketExp/arguments"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//SquareBracketExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//SquareBracketExp/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//SquareBracketExp/arguments"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//SquareBracketExp/pre"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//PreExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//PreExp/name"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//SelfExp"/>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//NameExp"/>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//PathNameExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//PathNameExp/namespace"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//PathNameExp/element"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//SimpleNameExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//SimpleNameExp/element"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//IfExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//IfExp/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//IfExp/thenExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//IfExp/elseExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//LetExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//LetExp/variable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//LetExp/in"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//LetVariable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//LetVariable/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//LetVariable/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//LetVariable/initExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//InfixExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//InfixExp/source"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//InfixExp/op"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//InfixExp/argument"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//OclMessage">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//OclMessage/source"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//OclMessage/op"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//OclMessage/messageName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//OclMessage/arguments"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//PrefixExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingContentAssistTestLanguage.ecore#//PrefixExp/op"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//PrefixExp/source"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingContentAssistTestLanguage.ecore#//NestedExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingContentAssistTestLanguage.ecore#//NestedExp/source"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

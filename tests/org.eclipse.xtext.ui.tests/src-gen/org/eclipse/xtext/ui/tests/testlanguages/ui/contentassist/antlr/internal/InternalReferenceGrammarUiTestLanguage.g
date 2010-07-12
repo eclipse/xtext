@@ -293,11 +293,11 @@ rule__Farbe__WertAlternatives_0
 )
 
     |(
-{ before(grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3()); }
+{ before(grammarAccess.getFarbeAccess().getWertGRNKeyword_0_3()); }
 
-	'GR\u00DCN' 
+	'GR\u2039N' 
 
-{ after(grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3()); }
+{ after(grammarAccess.getFarbeAccess().getWertGRNKeyword_0_3()); }
 )
 
 ;
