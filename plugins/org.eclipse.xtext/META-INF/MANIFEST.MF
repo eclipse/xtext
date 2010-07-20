@@ -10,6 +10,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.common,
  org.eclipse.xtext.common.parseTreeConstruction,
+ org.eclipse.xtext.common.parser.packrat,
  org.eclipse.xtext.common.parser.packrat.consumers,
  org.eclipse.xtext.common.services,
  org.eclipse.xtext.concurrent,
