@@ -52,6 +52,8 @@ import org.eclipse.xtext.ui.editor.contentassist.AbstractContentAssistContextFac
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.IFollowElementAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.XtextSwitch;
 
 import com.google.common.collect.Iterables;
@@ -475,8 +477,14 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			computeFollowElements(calculator, element);
 		}
 	}
-	
+
 	protected void computeFollowElements(FollowElementCalculator calculator, FollowElement element) {
+		computeFollowElements(calculator, element, Sets.<Pair<Integer, AbstractElement>>newHashSet());
+	}
+	
+	protected void computeFollowElements(FollowElementCalculator calculator, FollowElement element, Set<Pair<Integer, AbstractElement>> handled) {
+		if (!handled.add(Tuples.create(element.getLookAhead(), element.getGrammarElement())))
+			return;
 		if (element.getLookAhead() <= 1) {
 			Iterable<AbstractElement> currentState = Iterables.concat(
 					element.getLocalTrace(), 
@@ -508,7 +516,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		Collection<FollowElement> followElements = parser.getFollowElements(element);
 		for(FollowElement newElement: followElements) {
 			if (newElement.getLookAhead() != element.getLookAhead() || newElement.getGrammarElement() != element.getGrammarElement())
-				computeFollowElements(calculator, newElement);
+				computeFollowElements(calculator, newElement, handled);
 		}
 	}
 
