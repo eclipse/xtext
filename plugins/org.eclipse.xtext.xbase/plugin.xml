@@ -7,7 +7,7 @@
     <package 
        uri = "http://www.eclipse.org/xtext/xbase/Xtype" 
        class = "org.eclipse.xtext.xtype.XtypePackage"
-       genModel = "org/eclipse/xtext/xbase/Xbase.genmodel" /> 
+       genModel = "model/Xbase.genmodel" /> 
 	
   </extension>
 
@@ -16,7 +16,7 @@
     <package 
        uri = "http://www.eclipse.org/xtext/xbase/Xpression" 
        class = "org.eclipse.xtext.xpression.XpressionPackage"
-       genModel = "org/eclipse/xtext/xbase/Xbase.genmodel" /> 
+       genModel = "model/Xbase.genmodel" /> 
 	
   </extension>
 
@@ -25,7 +25,7 @@
     <package 
        uri = "http://www.eclipse.org/xtext/Xbase" 
        class = "org.eclipse.xtext.xbase.XbasePackage"
-       genModel = "org/eclipse/xtext/xbase/Xbase.genmodel" /> 
+       genModel = "model/Xbase.genmodel" /> 
 	
   </extension>
 
