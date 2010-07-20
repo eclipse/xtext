@@ -20,7 +20,7 @@
     <package 
        uri = "http://www.eclipse.org/2008/Xtext" 
        class = "org.eclipse.xtext.XtextPackage"
-       genModel = "model/xtext.genmodel" /> 
+       genModel = "org/eclipse/xtext/Xtext.genmodel" /> 
   </extension>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
