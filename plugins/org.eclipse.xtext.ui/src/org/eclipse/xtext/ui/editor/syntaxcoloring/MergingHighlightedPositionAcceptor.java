@@ -34,10 +34,12 @@ public class MergingHighlightedPositionAcceptor implements IHighlightedPositionA
 	}
 
 	public void addPosition(int offset, int length, String... ids) {
-		this.getPositions().add(new LightweightPosition(offset, length, timestamp, ids));
-		if (offset < expectedOffset)
-			requireMerge = true;
-		expectedOffset = offset + length;
+		if (length > 0) {
+			this.getPositions().add(new LightweightPosition(offset, length, timestamp, ids));
+			if (offset < expectedOffset)
+				requireMerge = true;
+			expectedOffset = offset + length;
+		}
 		timestamp++;
 	}
 
