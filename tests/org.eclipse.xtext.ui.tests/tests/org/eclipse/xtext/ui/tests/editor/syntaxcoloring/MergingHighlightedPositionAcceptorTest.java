@@ -288,6 +288,19 @@ public class MergingHighlightedPositionAcceptorTest extends TestCase {
 		checkPosition(positions.get(5), 5, 1, 3, "4");
 	}
 	
+	public void testMergePositions_Bug318704() {
+		acceptor.addPosition(5, 1, "1");
+		acceptor.addPosition(25, 1, "1");
+		acceptor.addPosition(14, 0, "2");
+		acceptor.addPosition(36, 1, "1");
+		acceptor.mergePositions();
+		List<LightweightPosition> positions = acceptor.getPositions();
+		assertEquals("positions.size", 3, positions.size());
+		checkPosition(positions.get(0), 5, 1, 0, "1");
+		checkPosition(positions.get(1), 25, 1, 1, "1");
+		checkPosition(positions.get(2), 36, 1, 3, "1");
+	}
+	
 	private void checkPosition(LightweightPosition position, int offset, int length, int timestamp, String... ids) {
 		assertNotNull(position);
 		if (timestamp >= 0)
