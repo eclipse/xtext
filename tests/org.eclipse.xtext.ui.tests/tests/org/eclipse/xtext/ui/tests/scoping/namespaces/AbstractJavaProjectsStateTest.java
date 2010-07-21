@@ -11,6 +11,7 @@ import static org.eclipse.xtext.junit.util.JavaProjectSetupUtil.*;
 
 import java.util.Collection;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
@@ -66,6 +67,21 @@ public abstract class AbstractJavaProjectsStateTest extends AbstractAllContainer
 		IResourcesSetupUtil.removeNature(javaProject1.getProject(), XtextProjectHelper.NATURE_ID);
 		containedURIs = projectsState.getContainedURIs(srcRoot.getHandleIdentifier());
 		assertTrue(containedURIs.isEmpty());
+	}
+	
+	public void testGetContainerHandle_Bug316519_01() {
+		IFile file = getFile(project1, "src/doesNotExist");
+		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+		String handleIdent = projectsState.getContainerHandle(uri);
+		assertEquals(srcRoot.getHandleIdentifier(), handleIdent);
+	}
+	
+	public void testGetContainerHandle_Bug316519_02() throws CoreException {
+		IFile file = getFile(project1, "src/doesNotExist");
+		IResourcesSetupUtil.removeNature(file.getProject(), XtextProjectHelper.NATURE_ID);
+		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+		String handleIdent = projectsState.getContainerHandle(uri);
+		assertEquals(srcRoot.getHandleIdentifier(), handleIdent);
 	}
 	
 }

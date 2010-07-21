@@ -41,7 +41,7 @@ public class WorkspaceProjectsStateHelper extends AbstractStorage2UriMapperClien
 		if (!uri.isPlatform())
 			return null;
 		final IFile file = getWorkspaceRoot().getFile(new Path(uri.toPlatformString(true)));
-		if (file == null || !file.exists()) {
+		if (file == null) {
 			return null;
 		}
 		final IProject project = file.getProject();

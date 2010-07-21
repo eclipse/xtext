@@ -145,8 +145,6 @@ public class JavaProjectsStateHelper extends AbstractStorage2UriMapperClient {
 		if (file == null) {
 			return getJarWithEntry(uri);
 		}
-		if (!file.exists())
-			return null;
 		IPackageFragmentRoot root = getJavaElement(file);
 		if (root == null)
 			return getJarWithEntry(uri);

@@ -11,6 +11,7 @@ import junit.framework.TestSuite;
 public class AllTests {
    public static Test suite() {
       TestSuite suite = new TestSuite("Tests for org.eclipse.xtext.ui.tests");
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.RegisteredGenmodelTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.core.builder.impl.PackageFragmentRootWalkerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.core.resource.Storage2UriMapperJdtImplTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.core.resource.Storage2UriMapperTest.class);
@@ -79,6 +80,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.tests.label.DefaultEObjectLabelProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.label.LabelProviderInjectionTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.scoping.namespaces.JavaProjectsStateTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.scoping.namespaces.StateBasedContainerManagerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.scoping.namespaces.StrictJavaProjectsStateTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.scoping.namespaces.WorkspaceProjectsStateTest.class);
       return suite;
