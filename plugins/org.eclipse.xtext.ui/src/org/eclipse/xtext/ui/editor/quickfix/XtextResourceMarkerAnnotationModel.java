@@ -16,6 +16,7 @@ import org.eclipse.xtext.ui.MarkerUtil;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
 public class XtextResourceMarkerAnnotationModel extends ResourceMarkerAnnotationModel {
 
@@ -37,10 +38,17 @@ public class XtextResourceMarkerAnnotationModel extends ResourceMarkerAnnotation
 	}
 	
 	public void fireAnnotationChangedEvent(Annotation annotation) {
+		queueAnnotationChanged(annotation);
+		fireQueuedEvents();
+	}
+	
+	public void queueAnnotationChanged(Annotation annotation) {
 		synchronized (getLockObject()) {
 			getAnnotationModelEvent().annotationChanged(annotation);
 		}
-
+	}
+	
+	public void fireQueuedEvents() {
 		fireModelChanged();
 	}
 
