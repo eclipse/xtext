@@ -371,4 +371,12 @@ public class XtextResource extends ResourceImpl {
 	public IReferableElementsUnloader getUnloader() {
 		return unloader;
 	}
+	
+	public IResourceScopeCache getCache() {
+		return cache;
+	}
+	
+	public void setCache(IResourceScopeCache cache) {
+		this.cache = cache;
+	}
 }

@@ -14,6 +14,7 @@ import java.io.StringWriter;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
@@ -34,6 +35,7 @@ import org.eclipse.xtext.util.Triple;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -81,10 +83,18 @@ public class LazyLinkingResource extends XtextResource {
 					if (!resolving.add(triple))
 						throw new AssertionError("Cyclic resolution of lazy links : "
 								+ getReferences(triple, resolving));
+					Set<String> unresolveableProxies = getCache().get("UNRESOLVEABLE_PROXIES", this, new Provider<Set<String>>() {
+						public Set<String> get() {
+							return Sets.newHashSet();
+						}
+					});
+					if (unresolveableProxies.contains(uriFragment))
+						return null;
 					EReference reference = triple.getSecond();
 					List<EObject> linkedObjects = getLinkingService().getLinkedObjects(triple.getFirst(), reference,
 							triple.getThird());
 					if (linkedObjects.isEmpty()) {
+						unresolveableProxies.add(uriFragment);
 						createAndAddDiagnostic(triple);
 						return null;
 					}
@@ -93,6 +103,7 @@ public class LazyLinkingResource extends XtextResource {
 								+ uriFragment);
 					EObject result = linkedObjects.get(0);
 					if (!EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), result.eClass())) {
+						unresolveableProxies.add(uriFragment);
 						createAndAddDiagnostic(triple);
 						return null;
 					}
