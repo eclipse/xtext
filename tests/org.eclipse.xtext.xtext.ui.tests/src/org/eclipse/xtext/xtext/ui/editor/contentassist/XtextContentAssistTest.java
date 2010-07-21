@@ -440,7 +440,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 			.appendNl("grammar Foo with org.eclipse.xtext.common.Terminals")
 			.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\"") 
 			.append("EPac")
-			.assertText("EPackage returns EPackage: \n;\n", ":");
+			.assertText("EPackage: \n;\n", ":");
     	newBuilder(getXtextSetup())
     		.appendNl("grammar Foo with org.eclipse.xtext.common.Terminals")
     		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\"") 
@@ -461,6 +461,27 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     		.appendNl("FooBar returns ecore::EPackage : 'bar';") 
     		.append("EPac")
     		.assertText(":");
+    }
+    
+    public void testBug317280_01() throws Exception {
+    	newBuilder(getXtextSetup())
+    		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
+	        .appendNl("import 'classpath:/org/eclipse/xtext/Xtext.ecore'")
+	        .append("E")
+	        .assertText("EnumRule: \n;\n", "EnumLiteralDeclaration: \n;\n", 
+	        		"enum", 
+	        		":");
+    }
+    
+    public void testBug317280_02() throws Exception {
+    	newBuilder(getXtextSetup())
+    		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
+	        .appendNl("import 'classpath:/org/eclipse/xtext/Xtext.ecore' as xtext")
+	        .append("E")
+	        .assertText("EnumRule returns xtext::EnumRule: \n;\n", 
+	        		"EnumLiteralDeclaration returns xtext::EnumLiteralDeclaration: \n;\n", 
+	        		"enum",
+	        		":");
     }
 
 }

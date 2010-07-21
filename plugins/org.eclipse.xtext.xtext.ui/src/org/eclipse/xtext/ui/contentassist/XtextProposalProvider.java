@@ -314,17 +314,20 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 
 	private void completeParserRule(EObject model, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		final Grammar grammar = GrammarUtil.getGrammar(model);
-		List<AbstractMetamodelDeclaration> allMetamodelDeclarations = GrammarUtil.allMetamodelDeclarations(grammar);
-		for (AbstractMetamodelDeclaration metamodelDeclaration : allMetamodelDeclarations) {
+		for (AbstractMetamodelDeclaration metamodelDeclaration : grammar.getMetamodelDeclarations()) {
 			if (metamodelDeclaration instanceof ReferencedMetamodel) {
 				ReferencedMetamodel referencedMetamodel = (ReferencedMetamodel) metamodelDeclaration;
 				EPackage ePackage = referencedMetamodel.getEPackage();
 				if (ePackage != null) {
 					for (EClassifier eClassifier : ePackage.getEClassifiers()) {
 						if (isProposeParserRule(eClassifier, grammar)) {
+							String proposal = eClassifier.getName();
 							String metamodelAlias = referencedMetamodel.getAlias();
-							String proposal = eClassifier.getName() + " returns "
-									+ ((metamodelAlias != null) ? (metamodelAlias + "::") : "") + eClassifier.getName() + ": \n;\n";
+							if (metamodelAlias != null) {
+								proposal = proposal + " returns "
+									+ metamodelAlias + "::" + eClassifier.getName();
+							}
+							proposal = proposal + ": \n;\n";
 							ConfigurableCompletionProposal completionProposal = (ConfigurableCompletionProposal) createCompletionProposal(
 									proposal, eClassifier.getName() + " - parser rule", getImage(XtextFactory.eINSTANCE
 											.createParserRule()), context);
