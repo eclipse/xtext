@@ -55,6 +55,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.linking.IgnoreCaseLinkingWithNamespaceImportsTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.IgnoreCaseLinkingWithURIImportsTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.LinkingErrorTest.class);
+      suite.addTestSuite(org.eclipse.xtext.linking.LinkingWarningsTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.PartialLinkingTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.SimpleAttributeResolverTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.lazy.BasicLazyLinkingTest.class);
