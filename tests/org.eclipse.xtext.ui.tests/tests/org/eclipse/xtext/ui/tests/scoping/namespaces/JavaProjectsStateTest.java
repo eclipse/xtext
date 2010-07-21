@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.tests.scoping.namespaces;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
@@ -52,13 +53,39 @@ public class JavaProjectsStateTest extends AbstractJavaProjectsStateTest {
 		return result;
 	}
 	
-	public void testGetContainerHandle() {
+	public void testGetContainerHandle_01() {
 		String uri1ContainerHandle = projectsState.getContainerHandle(uri1);
 		String uri2ContainerHandle = projectsState.getContainerHandle(uri2);
 		String uri3ContainerHandle = projectsState.getContainerHandle(uri3);
 		assertEquals(srcRoot.getHandleIdentifier(), uri1ContainerHandle);
 		assertEquals(srcRoot.getHandleIdentifier(), uri2ContainerHandle);
 		assertEquals(project2.getName(), uri3ContainerHandle);
+	}
+	
+	public void testGetContainerHandle_02() throws CoreException {
+		IResourcesSetupUtil.removeNature(project1, XtextProjectHelper.NATURE_ID);
+		IResourcesSetupUtil.removeNature(project2, XtextProjectHelper.NATURE_ID);
+		String uri1ContainerHandle = projectsState.getContainerHandle(uri1);
+		String uri2ContainerHandle = projectsState.getContainerHandle(uri2);
+		String uri3ContainerHandle = projectsState.getContainerHandle(uri3);
+		assertEquals(srcRoot.getHandleIdentifier(), uri1ContainerHandle);
+		assertEquals(srcRoot.getHandleIdentifier(), uri2ContainerHandle);
+		assertEquals(project2.getName(), uri3ContainerHandle);
+	}
+	
+	public void testGetContainerHandle_Bug316519_03() {
+		IFile file = getFile(project1, "doesNotExist");
+		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+		String handleIdent = projectsState.getContainerHandle(uri);
+		assertEquals(project1.getName(), handleIdent);
+	}
+	
+	public void testGetContainerHandle_Bug316519_04() throws CoreException {
+		IFile file = getFile(project1, "doesNotExist");
+		IResourcesSetupUtil.removeNature(file.getProject(), XtextProjectHelper.NATURE_ID);
+		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+		String handleIdent = projectsState.getContainerHandle(uri);
+		assertEquals(project1.getName(), handleIdent);
 	}
 	
 	public void testGetContainedURIs_01() {

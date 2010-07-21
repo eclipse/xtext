@@ -37,7 +37,12 @@ public class StateBasedContainerManager implements IContainer.Manager {
 				log.debug("Cannot find IContainer for: " + desc.getURI());
 			return IIgnoreCaseContainer.Null;
 		}
-		return createContainer(root, resourceDescriptions);
+		IContainer result = createContainer(root, resourceDescriptions);
+		if (result.getResourceDescription(desc.getURI()) == null) {
+			// desc has not been saved -> merge containers
+			result = new DescriptionAddingContainer(desc, result);
+		}
+		return result;
 	}
 
 	public List<IContainer> getVisibleContainers(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
@@ -48,7 +53,15 @@ public class StateBasedContainerManager implements IContainer.Manager {
 			return Collections.emptyList();
 		}
 		List<String> handles = getState(resourceDescriptions).getVisibleContainerHandles(root);
-		return getVisibleContainers(handles, resourceDescriptions);
+		List<IContainer> result = getVisibleContainers(handles, resourceDescriptions);
+		if (!result.isEmpty()) {
+			IContainer first = result.get(0);
+			if (first.getResourceDescription(desc.getURI()) == null) {
+				first = new DescriptionAddingContainer(desc, first);
+				result.set(0, first);
+			}
+		}
+		return result;
 	}
 
 	private IAllContainersState getState(IResourceDescriptions resourceDescriptions) {
@@ -73,6 +86,14 @@ public class StateBasedContainerManager implements IContainer.Manager {
 
 	protected String internalGetContainerHandle(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
 		return getState(resourceDescriptions).getContainerHandle(desc.getURI());
+	}
+	
+	public IAllContainersState.Provider getStateProvider() {
+		return stateProvider;
+	}
+	
+	public void setStateProvider(IAllContainersState.Provider stateProvider) {
+		this.stateProvider = stateProvider;
 	}
 
 }
