@@ -26,7 +26,7 @@ public class Activator extends AbstractUIPlugin {
 
 	@Override
 	public void stop(BundleContext context) throws Exception {
-		super.stop(context);
 		INSTANCE = null;
+		super.stop(context);
 	}
 }

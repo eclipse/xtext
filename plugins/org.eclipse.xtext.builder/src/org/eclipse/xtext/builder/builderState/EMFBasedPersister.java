@@ -14,6 +14,7 @@ import java.util.Collections;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
@@ -52,15 +53,23 @@ public class EMFBasedPersister implements PersistableResourceDescriptionsImpl.Pe
 	
 	private Resource.Factory factory;
 
+	private IPath cachedPath;
+	
 	public Iterable<IResourceDescription> load() {
 		try {
-			if (getBuilderStateLocation().exists()) {
+			File location = getBuilderStateLocation();
+			if (location != null && location.exists()) {
 				try {
 					Resource resource = createResource();
-					resource.load(null);
-					return loadFromResource(resource);
+					if (resource != null) {
+						resource.load(null);
+						return loadFromResource(resource);
+					}
+					if (workspace != null && workspace.isAutoBuilding()) {
+						scheduleRecoveryBuild();
+					}
 				} finally {
-					getBuilderStateLocation().delete();
+					location.delete();
 				}
 			} else {
 				if (workspace != null && workspace.isAutoBuilding()) {
@@ -95,16 +104,20 @@ public class EMFBasedPersister implements PersistableResourceDescriptionsImpl.Pe
 
 	public void save(Iterable<IResourceDescription> descriptions) {
 		Resource res = createResource();
-		saveToResource(res, descriptions);
-		try {
-			res.save(null);
-		} catch (IOException e) {
-			throw new WrappedException(e);
+		if (res != null) {
+			saveToResource(res, descriptions);
+			try {
+				res.save(null);
+			} catch (IOException e) {
+				throw new WrappedException(e);
+			}
 		}
 	}
 
 	public Resource createResource() {
 		URI fileURI = getBuilderStateURI();
+		if (fileURI == null)
+			return null;
 		Resource res = getFactory().createResource(fileURI);
 		return res;
 	}
@@ -114,12 +127,23 @@ public class EMFBasedPersister implements PersistableResourceDescriptionsImpl.Pe
 	}
 
 	public URI getBuilderStateURI() {
-		URI fileURI = URI.createFileURI(getBuilderStateLocation().getAbsolutePath());
+		File location = getBuilderStateLocation();
+		if (location == null)
+			return null;
+		URI fileURI = URI.createFileURI(location.getAbsolutePath());
 		return fileURI;
 	}
 
 	protected File getBuilderStateLocation() {
-		return Activator.getDefault().getStateLocation().append("builder.state").toFile();
+		Activator activator = Activator.getDefault();
+		if (activator == null) {
+			if (cachedPath != null)
+				return cachedPath.toFile();
+			return null;
+		}
+		IPath path = activator.getStateLocation().append("builder.state");
+		cachedPath = path;
+		return path.toFile();
 	}
 
 	public void setFactory(Resource.Factory factory) {
