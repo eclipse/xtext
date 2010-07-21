@@ -19,6 +19,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.actions.AntlrParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.services.DefaultTerminalConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.concurrent.StateAccessTest.class);
+      suite.addTestSuite(org.eclipse.xtext.conversion.impl.DeclarativeValueConverterServiceTest.class);
       suite.addTestSuite(org.eclipse.xtext.enumrules.AntlrEnumAndReferenceTest.class);
       suite.addTestSuite(org.eclipse.xtext.enumrules.AntlrParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.enumrules.GrammarParserTest.class);
