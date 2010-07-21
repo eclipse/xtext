@@ -208,12 +208,17 @@ public class XtextResource extends ResourceImpl {
 			getContents().add(parseResult.getRootASTElement());
 		addAdapterIfNeccessary(parseResult.getRootNode());
 		reattachModificationTracker(parseResult.getRootASTElement());
+		clearErrorsAndWarnings();
 		addSyntaxErrors();
 		doLinking();
 	}
+	
+	protected void clearErrorsAndWarnings() {
+		getWarnings().clear();
+		getErrors().clear();
+	}
 
 	protected void addSyntaxErrors() {
-		getErrors().clear();
 		getErrors().addAll(createDiagnostics(parseResult));
 	}
 
@@ -228,8 +233,7 @@ public class XtextResource extends ResourceImpl {
 			unload(content);
 		}
 		getContents().clear();
-		getErrors().clear();
-		getWarnings().clear();
+		clearErrorsAndWarnings();
 		this.parseResult = null;
 	}
 
@@ -356,8 +360,7 @@ public class XtextResource extends ResourceImpl {
 	public void setValidationDisabled(boolean validationDisabled) {
 		this.validationDisabled = validationDisabled;
 		if (validationDisabled) {
-			getWarnings().clear();
-			getErrors().clear();
+			clearErrorsAndWarnings();
 		}
 	}
 
