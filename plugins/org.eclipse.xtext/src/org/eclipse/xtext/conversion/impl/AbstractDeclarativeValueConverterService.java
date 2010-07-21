@@ -13,6 +13,7 @@ import static org.eclipse.xtext.GrammarUtil.*;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EDataType;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -80,20 +82,28 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 	@SuppressWarnings("unchecked")
 	protected void internalRegisterForClass(Class<?> clazz) {
 		Method[] methods = clazz.getDeclaredMethods();
+		Set<String> thisConverters = Sets.newHashSet();
 		for (Method method : methods) {
 			if (isConfigurationMethod(method)) {
 				try {
 					String ruleName = method.getAnnotation(ValueConverter.class).rule();
 					AbstractRule rule = GrammarUtil.findRuleForName(getGrammar(), ruleName);
 					if (rule != null) {
-						IValueConverter<Object> valueConverter = (IValueConverter<Object>) method.invoke(this);
-						if (valueConverter instanceof IValueConverter.RuleSpecific)
-							((IValueConverter.RuleSpecific) valueConverter).setRule(rule);
-						converters.put(ruleName, valueConverter);
+						if (!thisConverters.add(ruleName)) {
+							throw new IllegalStateException("Tried to register two value converters for rule '" + ruleName + "'");
+						}
+						if (!converters.containsKey(ruleName)) {
+							IValueConverter<Object> valueConverter = (IValueConverter<Object>) method.invoke(this);
+							if (valueConverter instanceof IValueConverter.RuleSpecific)
+								((IValueConverter.RuleSpecific) valueConverter).setRule(rule);
+							converters.put(ruleName, valueConverter);
+						}
 					} else
 						log.trace("Tried to register value converter for rule '" + ruleName
 								+ "' which is not available in the grammar.");
 
+				} catch(IllegalStateException e) {
+					throw e;
 				} catch (Exception e) {
 					log.error(e.getMessage(), e);
 				}
@@ -123,6 +133,14 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 				converters.put(terminalRuleName, defaultTerminalConverterFactory.create(terminalRule));
 			}
 		}
+	}
+	
+	public void setDefaultTerminalConverterFactory(DefaultTerminalConverter.Factory defaultTerminalConverterFactory) {
+		this.defaultTerminalConverterFactory = defaultTerminalConverterFactory;
+	}
+	
+	public DefaultTerminalConverter.Factory getDefaultTerminalConverterFactory() {
+		return defaultTerminalConverterFactory;
 	}
 
 }
