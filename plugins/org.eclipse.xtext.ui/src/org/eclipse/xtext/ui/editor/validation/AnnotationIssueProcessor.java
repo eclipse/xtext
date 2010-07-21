@@ -42,6 +42,7 @@ import com.google.common.collect.Multimaps;
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
  * @author Heiko Behrens
+ * @author Sebastian Zarnekow
  */
 public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnnotationModelListener {
 	private final IAnnotationModel annotationModel;
@@ -69,7 +70,7 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 		updateMarkersOnModelChange = true;
 	}
 
-	private void updateAnnotations(IProgressMonitor monitor, List<Annotation> toBeRemoved,
+	protected void updateAnnotations(IProgressMonitor monitor, List<Annotation> toBeRemoved,
 			Map<Annotation, Position> annotationToPosition) {
 		if (monitor.isCanceled()) {
 			return;
@@ -93,7 +94,7 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 		}
 	}
 
-	private List<Annotation> getAnnotationsToRemove(IProgressMonitor monitor) {
+	protected List<Annotation> getAnnotationsToRemove(IProgressMonitor monitor) {
 		if (monitor.isCanceled()) {
 			return Lists.newArrayList();
 		}
@@ -115,7 +116,7 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 		return toBeRemoved;
 	}
 
-	private Map<Annotation, Position> getAnnotationsToAdd(Multimap<Position, Annotation> positionToAnnotations,
+	protected Map<Annotation, Position> getAnnotationsToAdd(Multimap<Position, Annotation> positionToAnnotations,
 			List<Issue> issues, IProgressMonitor monitor) {
 		if (monitor.isCanceled()) {
 			return Maps.newHashBiMap();
@@ -137,11 +138,11 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 		return annotationToPosition;
 	}
 
-	private boolean isSet(Integer length) {
+	protected boolean isSet(Integer length) {
 		return length!=null && length!=-1;
 	}
 
-	private int getMarkerSeverity(Severity severity) {
+	protected int getMarkerSeverity(Severity severity) {
 		switch (severity) {
 			case ERROR:
 				return IMarker.SEVERITY_ERROR;
@@ -153,7 +154,7 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 		throw new IllegalArgumentException();
 	}
 
-	private void updateMarkerAnnotations(IProgressMonitor monitor) {
+	protected void updateMarkerAnnotations(IProgressMonitor monitor) {
 		if (monitor.isCanceled()) {
 			return;
 		}
@@ -171,16 +172,29 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 						boolean markAsDeleted = annotation.getMarker().isSubtypeOf(MarkerTypes.FAST_VALIDATION);
 						if(markAsDeleted) {
 							annotation.markDeleted(true);
-							announceAnnotationChanged(annotation);
+							queueOrFireAnnotationChangedEvent(annotation);
 						}
 					}
 				} catch (CoreException e) {
 					// marker type cannot be resolved - keep state of annotation
 				}
 		}
+		fireQueuedEvents();
 	}
 
-	private void announceAnnotationChanged(Annotation annotation) {
+	protected void queueOrFireAnnotationChangedEvent(final MarkerAnnotation annotation) {
+		if (annotationModel instanceof XtextResourceMarkerAnnotationModel)
+			((XtextResourceMarkerAnnotationModel) annotationModel).queueAnnotationChanged(annotation);
+		else
+			announceAnnotationChanged(annotation);
+	}
+
+	protected void fireQueuedEvents() {
+		if (annotationModel instanceof XtextResourceMarkerAnnotationModel)
+			((XtextResourceMarkerAnnotationModel) annotationModel).fireQueuedEvents();
+	}
+
+	protected void announceAnnotationChanged(Annotation annotation) {
 		if (annotationModel instanceof XtextResourceMarkerAnnotationModel)
 			((XtextResourceMarkerAnnotationModel) annotationModel).fireAnnotationChangedEvent(annotation);
 		else {
@@ -194,7 +208,7 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 		}
 	}
 
-	private boolean isRelevantAnnotationType(String type) {
+	protected boolean isRelevantAnnotationType(String type) {
 		return type.equals(XtextEditor.ERROR_ANNOTATION_TYPE) || type.equals(XtextEditor.WARNING_ANNOTATION_TYPE);
 	}
 
