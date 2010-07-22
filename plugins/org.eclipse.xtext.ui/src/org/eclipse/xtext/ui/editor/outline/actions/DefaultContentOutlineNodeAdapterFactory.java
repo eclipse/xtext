@@ -14,6 +14,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.IContentOutlineNode;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 
 /**
@@ -33,7 +34,7 @@ public class DefaultContentOutlineNodeAdapterFactory implements IContentOutlineN
 					+ adaptableObject.getClass().getName());
 		}
 		if (adaptableObject instanceof ContentOutlineNode) {
-			ContentOutlineNode node = (ContentOutlineNode) adaptableObject;
+			IContentOutlineNode node = (IContentOutlineNode) adaptableObject;
 			EClass clazz = node.getClazz();
 			if (clazz != null) {
 				if (clazz.getInstanceClass().equals(adapterType)) {

@@ -153,7 +153,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 		getTreeViewer().getTree().setMenu(contextMenu);
 
 		IPageSite site = getSite();
-		Platform.getAdapterManager().registerAdapters(outlineNodeFactory, ContentOutlineNode.class);
+		Platform.getAdapterManager().registerAdapters(outlineNodeFactory, IContentOutlineNode.class);
 		site.registerContextMenu(Activator.PLUGIN_ID + ".outline", manager, getTreeViewer()); //$NON-NLS-1$
 	}
 	
@@ -324,7 +324,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 
 	public void synchronizeOutlinePage(EObject eObject) {
 		if (isLinkingEnabled()) {
-			ContentOutlineNode mostSignificantOutlineNode = findMostSignificantOutlineNode(eObject);
+			IContentOutlineNode mostSignificantOutlineNode = findMostSignificantOutlineNode(eObject);
 			if (mostSignificantOutlineNode != null) {
 				outlineSelectionChangedListener.uninstall(this);
 				this.setSelection(new StructuredSelection(mostSignificantOutlineNode), true);
@@ -333,12 +333,12 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 		}
 	}
 
-	protected ContentOutlineNode findMostSignificantOutlineNode(EObject eObject) {
+	protected IContentOutlineNode findMostSignificantOutlineNode(EObject eObject) {
 		if (eObject != null) {
 			ContentOutlineNodeAdapter adapter = (ContentOutlineNodeAdapter) EcoreUtil.getAdapter(eObject.eAdapters(),
-					ContentOutlineNode.class);
+					IContentOutlineNode.class);
 			if (adapter != null) {
-				ContentOutlineNode contentOutlineNode = adapter.getContentOutlineNode();
+				IContentOutlineNode contentOutlineNode = adapter.getContentOutlineNode();
 				if (contentOutlineNode != null) {
 					return contentOutlineNode;
 				}

@@ -7,15 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.outline;
 
-import java.util.List;
-
+import org.apache.commons.lang.ArrayUtils;
 import org.eclipse.jface.viewers.IElementComparer;
 import org.eclipse.xtext.util.Strings;
 
 /**
  * A fuzzy comparator used to restore the expansion of the outline tree after a change.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public interface IContentOutlineNodeComparer extends IElementComparer {
 
@@ -24,26 +23,26 @@ public interface IContentOutlineNodeComparer extends IElementComparer {
 		public boolean equals(Object a, Object b) {
 			if (a == b)
 				return true;
-			if (a instanceof ContentOutlineNode && b instanceof ContentOutlineNode) {
-				ContentOutlineNode aNode = (ContentOutlineNode) a;
-				ContentOutlineNode bNode = (ContentOutlineNode) b;
+			if (a instanceof IContentOutlineNode && b instanceof IContentOutlineNode) {
+				IContentOutlineNode aNode = (IContentOutlineNode) a;
+				IContentOutlineNode bNode = (IContentOutlineNode) b;
 				if (aNode.getClazz() != bNode.getClazz())
 					return false;
 				if (!Strings.equal(aNode.getLabel(), bNode.getLabel()))
 					return false;
 				if (aNode.getImage() != bNode.getImage())
 					return false;
-				ContentOutlineNode aParent = aNode.getParent();
-				ContentOutlineNode bParent = bNode.getParent();
+				IContentOutlineNode aParent = aNode.getParent();
+				IContentOutlineNode bParent = bNode.getParent();
 				if (aParent != null) {
 					if (!equals(aParent, bParent))
 						return false;
-					List<ContentOutlineNode> aSiblings = aParent.getChildren();
-					List<ContentOutlineNode> bSiblings = bParent.getChildren();
-					int aIndex = aSiblings.indexOf(aNode);
-					int bIndex = bSiblings.indexOf(bNode);
+					IContentOutlineNode[] aSiblings = aParent.getChildrenAsArray();
+					IContentOutlineNode[] bSiblings = bParent.getChildrenAsArray();
+					int aIndex = ArrayUtils.indexOf(aSiblings, aNode);
+					int bIndex = ArrayUtils.indexOf(bSiblings, bNode);
 					// cope with insertions before and after this node
-					if (aIndex != bIndex && aSiblings.size() - aIndex != bSiblings.size() - bIndex)
+					if (aIndex != bIndex && aSiblings.length - aIndex != bSiblings.length - bIndex)
 						return false;
 				} else if (bParent != null)
 					return false;
@@ -55,8 +54,8 @@ public interface IContentOutlineNodeComparer extends IElementComparer {
 		}
 
 		public int hashCode(Object element) {
-			if (element instanceof ContentOutlineNode) {
-				ContentOutlineNode node = (ContentOutlineNode) element;
+			if (element instanceof IContentOutlineNode) {
+				IContentOutlineNode node = (IContentOutlineNode) element;
 				int hashCode = addHashCode(0, node.getClazz());
 				hashCode = addHashCode(hashCode, node.getLabel());
 				hashCode = addHashCode(hashCode, node.getImage());

@@ -18,8 +18,8 @@ public class ContentOutlineNodeLabelProvider extends AbstractLabelProvider {
 
 	@Override
 	protected Object doGetText(Object element) {
-		if (element instanceof ContentOutlineNode) {
-			ContentOutlineNode contentOutlineNode = (ContentOutlineNode) element;
+		if (element instanceof IContentOutlineNode) {
+			IContentOutlineNode contentOutlineNode = (IContentOutlineNode) element;
 			StyledString styledString = contentOutlineNode.getStyledString();
 			if(styledString != null) {
 				return styledString;
@@ -32,8 +32,8 @@ public class ContentOutlineNodeLabelProvider extends AbstractLabelProvider {
 
 	@Override
 	protected Object doGetImage(Object element) {
-		if (element instanceof ContentOutlineNode) {
-			ContentOutlineNode contentOutlineNode = (ContentOutlineNode) element;
+		if (element instanceof IContentOutlineNode) {
+			IContentOutlineNode contentOutlineNode = (IContentOutlineNode) element;
 			return contentOutlineNode.getImage();
 		}
 		return null;

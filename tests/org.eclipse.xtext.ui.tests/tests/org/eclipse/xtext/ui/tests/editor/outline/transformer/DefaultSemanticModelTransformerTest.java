@@ -22,6 +22,7 @@ public class DefaultSemanticModelTransformerTest extends AbstractContentOutlineT
 	protected void setUp() throws Exception {
 		super.setUp();
 		defaultSemanticModelTransformer = new DefaultSemanticModelTransformer();
+		defaultSemanticModelTransformer.setResourceAccess(this);
 		defaultSemanticModelTransformer.setContentOutlineNodeFactory(contentOutlineNodeFactory);
 	}
 
@@ -62,7 +63,7 @@ public class DefaultSemanticModelTransformerTest extends AbstractContentOutlineT
 		ContentOutlineNode rootNode = defaultSemanticModelTransformer.transformSemanticModel(root);
 		ContentOutlineNode treeRootNode = rootNode.getChildren().get(0);
 		assertEquals("classpath:/org/eclipse/xtext/ui/tests/editor/outline/transformer/simplestructure.xmi#/",
-				treeRootNode.getUri().toString());
+				treeRootNode.getURI().toString());
 	}
 
 }
