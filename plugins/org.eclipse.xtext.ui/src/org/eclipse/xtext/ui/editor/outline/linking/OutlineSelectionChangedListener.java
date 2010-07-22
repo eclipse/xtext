@@ -11,7 +11,7 @@ package org.eclipse.xtext.ui.editor.outline.linking;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
-import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.IContentOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.XtextContentOutlinePage;
 
 /**
@@ -31,8 +31,8 @@ public final class OutlineSelectionChangedListener extends AbstractSelectionChan
 			if (sel instanceof IStructuredSelection) {
 				IStructuredSelection structuredSelection = (IStructuredSelection) sel;
 				Object firstElement = structuredSelection.getFirstElement();
-				if (firstElement instanceof ContentOutlineNode) {
-					ContentOutlineNode outlineNode = (ContentOutlineNode) firstElement;
+				if (firstElement instanceof IContentOutlineNode) {
+					IContentOutlineNode outlineNode = (IContentOutlineNode) firstElement;
 					if (outlineNode.getRegion() != null) {
 						getSourceViewer().setRangeIndication(outlineNode.getSelectionOffset(),
 								outlineNode.getSelectionLength(), true);

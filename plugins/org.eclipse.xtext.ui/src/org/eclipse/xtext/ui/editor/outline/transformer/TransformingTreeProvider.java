@@ -8,8 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.outline.transformer;
 
-import java.util.List;
-
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.preference.JFacePreferences;
@@ -19,6 +17,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.IContentOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -33,9 +32,9 @@ public class TransformingTreeProvider implements IOutlineTreeProvider {
 	@Inject
 	private ISemanticModelTransformer semanticModelTransformer;
 
-	private ContentOutlineNode outlineModel;
+	private IContentOutlineNode outlineModel;
 
-	private ContentOutlineNode transformSemanticModelToOutlineModel(EObject semanticModel) {
+	private IContentOutlineNode transformSemanticModelToOutlineModel(EObject semanticModel) {
 		return semanticModelTransformer.transformSemanticModel(semanticModel);
 	}
 
@@ -45,8 +44,8 @@ public class TransformingTreeProvider implements IOutlineTreeProvider {
 		if (newInput instanceof XtextDocument) {
 			XtextDocument document = (XtextDocument) newInput;
 			semanticModelTransformer.setResourceAccess(document);
-			outlineModel = document.readOnly(new IUnitOfWork<ContentOutlineNode, XtextResource>() {
-				public ContentOutlineNode exec(XtextResource resource) throws Exception {
+			outlineModel = document.readOnly(new IUnitOfWork<IContentOutlineNode, XtextResource>() {
+				public IContentOutlineNode exec(XtextResource resource) throws Exception {
 					if (resource == null || resource.getParseResult() == null
 							|| resource.getParseResult().getRootASTElement() == null)
 						return createErrorNode();
@@ -54,7 +53,7 @@ public class TransformingTreeProvider implements IOutlineTreeProvider {
 					return transformSemanticModelToOutlineModel(semanticModelRoot);
 				}
 
-				private ContentOutlineNode createErrorNode() {
+				private IContentOutlineNode createErrorNode() {
 					return new ContentOutlineNode(new StyledString("Error: No model available.", StyledString
 							.createColorRegistryStyler(JFacePreferences.ERROR_COLOR, null)));
 				}
@@ -62,35 +61,35 @@ public class TransformingTreeProvider implements IOutlineTreeProvider {
 		}
 	}
 
-	public Object[] getChildren(Object parentElement) {
-		if (parentElement instanceof ContentOutlineNode) {
-			ContentOutlineNode node = (ContentOutlineNode) parentElement;
-			List<ContentOutlineNode> children = node.getChildren();
-			return children.toArray();
+	public IContentOutlineNode[] getChildren(Object parentElement) {
+		if (parentElement instanceof IContentOutlineNode) {
+			IContentOutlineNode node = (IContentOutlineNode) parentElement;
+			IContentOutlineNode[] children = node.getChildrenAsArray();
+			return children;
 		}
 		return null;
 	}
 
-	public Object getParent(Object element) {
-		if (element instanceof ContentOutlineNode) {
-			ContentOutlineNode node = (ContentOutlineNode) element;
+	public IContentOutlineNode getParent(Object element) {
+		if (element instanceof IContentOutlineNode) {
+			IContentOutlineNode node = (IContentOutlineNode) element;
 			return node.getParent();
 		}
 		return null;
 	}
 
 	public boolean hasChildren(Object element) {
-		if (element instanceof ContentOutlineNode) {
-			ContentOutlineNode node = (ContentOutlineNode) element;
-			return (node.getChildren() != null && node.getChildren().size() > 0);
+		if (element instanceof IContentOutlineNode) {
+			IContentOutlineNode node = (IContentOutlineNode) element;
+			return node.hasChildren();
 		}
 		return false;
 	}
 
 	public Object[] getElements(Object inputElement) {
 		if (outlineModel != null) {
-			List<ContentOutlineNode> children = outlineModel.getChildren();
-			return children.toArray();
+			IContentOutlineNode[] children = outlineModel.getChildrenAsArray();
+			return children;
 		}
 		return EMPTY_ARRAY;
 	}

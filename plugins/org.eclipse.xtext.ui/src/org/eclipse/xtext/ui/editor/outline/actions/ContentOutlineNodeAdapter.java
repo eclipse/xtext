@@ -11,7 +11,7 @@ package org.eclipse.xtext.ui.editor.outline.actions;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.IContentOutlineNode;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -20,7 +20,7 @@ public class ContentOutlineNodeAdapter implements Adapter {
 
 	private Notifier target;
 	
-	private ContentOutlineNode contentOutlineNode;
+	private IContentOutlineNode contentOutlineNode;
 
 	public void setTarget(Notifier newTarget) {
 		target = newTarget;
@@ -31,17 +31,17 @@ public class ContentOutlineNodeAdapter implements Adapter {
 	}
 
 	public boolean isAdapterForType(Object type) {
-		return type == ContentOutlineNode.class;
+		return type == IContentOutlineNode.class;
 	}
 
 	public void notifyChanged(Notification notification) {
 	}
 
-	public void setContentOutlineNode(ContentOutlineNode contentOutlineNode) {
+	public void setContentOutlineNode(IContentOutlineNode contentOutlineNode) {
 		this.contentOutlineNode = contentOutlineNode;
 	}
 
-	public ContentOutlineNode getContentOutlineNode() {
+	public IContentOutlineNode getContentOutlineNode() {
 		return contentOutlineNode;
 	}
 

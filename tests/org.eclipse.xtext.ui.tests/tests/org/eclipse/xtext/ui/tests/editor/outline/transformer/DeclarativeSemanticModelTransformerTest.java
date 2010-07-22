@@ -18,14 +18,17 @@ import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.B;
 import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.SimplestructureFactory;
 import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.root;
 import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.IContentOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.transformer.AbstractSemanticModelTransformer;
 import org.eclipse.xtext.ui.editor.outline.transformer.ISemanticModelTransformer;
 import org.eclipse.xtext.ui.tests.editor.outline.TestTransformerHelper;
+import org.eclipse.xtext.util.concurrent.IStateAccess;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
  * @author Peter Friese - Initial contribution and API
  */
-public class DeclarativeSemanticModelTransformerTest extends AbstractXtextTests {
+public class DeclarativeSemanticModelTransformerTest extends AbstractXtextTests implements IStateAccess<XtextResource> {
 
 	private root theRoot;
 	private XtextResource resource;
@@ -79,19 +82,20 @@ public class DeclarativeSemanticModelTransformerTest extends AbstractXtextTests 
 
 	public void testWithNamingConventions() {
 		ISemanticModelTransformer transformer = new TestTransformerHelper.TestTransformerWithNamingConvention();
-		ContentOutlineNode treeModel = transformer.transformSemanticModel(theRoot);
+		transformer.setResourceAccess(this);
+		ContentOutlineNode treeModel = (ContentOutlineNode) transformer.transformSemanticModel(theRoot);
 
 		assertEquals(AbstractSemanticModelTransformer.INVISIBLE_ROOT_NODE, treeModel.getLabel());
 
 		List<ContentOutlineNode> children2 = treeModel.getChildren();
 		ContentOutlineNode node1 = children2.get(0);
 		assertEquals("special a1", node1.getLabel());
-		ContentOutlineNode node2 = children2.get(1);
+		IContentOutlineNode node2 = children2.get(1);
 		assertEquals("special a2", node2.getLabel());
 		
 		List<ContentOutlineNode> children3 = node1.getChildren();
-		ContentOutlineNode node3 = children3.get(0);
-		ContentOutlineNode node4 = children3.get(1);
+		IContentOutlineNode node3 = children3.get(0);
+		IContentOutlineNode node4 = children3.get(1);
 		ContentOutlineNode node5 = children3.get(2);
 		assertEquals("pimped b1", node3.getLabel());
 		assertEquals("pimped b2", node4.getLabel());
@@ -103,19 +107,20 @@ public class DeclarativeSemanticModelTransformerTest extends AbstractXtextTests 
 	
 	public void testWithAnnotations() {
 		ISemanticModelTransformer transformer = new TestTransformerHelper.TestTransformerWithAnnotations();
-		ContentOutlineNode treeModel = transformer.transformSemanticModel(theRoot);
+		transformer.setResourceAccess(this);
+		ContentOutlineNode treeModel = (ContentOutlineNode) transformer.transformSemanticModel(theRoot);
 
 		assertEquals(AbstractSemanticModelTransformer.INVISIBLE_ROOT_NODE, treeModel.getLabel());
 
 		List<ContentOutlineNode> children2 = treeModel.getChildren();
 		ContentOutlineNode node1 = children2.get(0);
 		assertEquals("special a1", node1.getLabel());
-		ContentOutlineNode node2 = children2.get(1);
+		IContentOutlineNode node2 = children2.get(1);
 		assertEquals("special a2", node2.getLabel());
 		
 		List<ContentOutlineNode> children3 = node1.getChildren();
-		ContentOutlineNode node3 = children3.get(0);
-		ContentOutlineNode node4 = children3.get(1);
+		IContentOutlineNode node3 = children3.get(0);
+		IContentOutlineNode node4 = children3.get(1);
 		ContentOutlineNode node5 = children3.get(2);
 		assertEquals("pimped b1", node3.getLabel());
 		assertEquals("pimped b2", node4.getLabel());
@@ -123,6 +128,22 @@ public class DeclarativeSemanticModelTransformerTest extends AbstractXtextTests 
 		
 		List<ContentOutlineNode> children4 = node5.getChildren();
 		assertEquals(0, children4.size());
+	}
+
+	public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
+		try {
+			return work.exec(resource);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public <T> T modify(IUnitOfWork<T, XtextResource> work) {
+		try {
+			return work.exec(resource);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	

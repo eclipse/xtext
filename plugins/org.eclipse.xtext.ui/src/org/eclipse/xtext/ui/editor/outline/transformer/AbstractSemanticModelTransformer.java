@@ -12,7 +12,10 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.resource.EObjectHandleImpl;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.util.concurrent.IStateAccess;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -22,6 +25,12 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 	public static final String INVISIBLE_ROOT_NODE = "Invisible Root Node";
 	public static final List<EObject> NO_CHILDREN = Collections.emptyList();
 
+	private IStateAccess<XtextResource> resourceAccess;
+
+	public void setResourceAccess(IStateAccess<XtextResource> resourceAccess) {
+		this.resourceAccess = resourceAccess;
+	}
+	
 	public ContentOutlineNode transformSemanticModel(EObject semanticModel) {
 		ContentOutlineNode outlineModel = new ContentOutlineNode(INVISIBLE_ROOT_NODE);
 		if (semanticModel != null)
@@ -36,11 +45,11 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 		} else {
 			outlineNode = outlineParentNode;
 		}
-		transformSemanticChildNodes(semanticNode, outlineNode);
-
+		outlineNode.setTransformer(this);
+		outlineNode.addHandleForChildren(new EObjectHandleImpl<EObject>(semanticNode, getResourceAccess()));
 	}
 
-	private void transformSemanticChildNodes(EObject semanticNode, ContentOutlineNode outlineNode) {
+	public void transformSemanticChildNodes(EObject semanticNode, ContentOutlineNode outlineNode) {
 		if (consumeSemanticChildNodes(semanticNode)) {
 			List<EObject> list = getChildNodes(semanticNode);
 			for (EObject semanticChildNode : list) {
@@ -63,4 +72,7 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 
 	protected abstract boolean consumeSemanticNode(EObject semanticNode);
 
+	public IStateAccess<XtextResource> getResourceAccess() {
+		return resourceAccess;
+	}
 }

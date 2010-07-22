@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.editor.outline.transformer;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.IContentOutlineNode;
 import org.eclipse.xtext.util.concurrent.IStateAccess;
 
 /**
@@ -18,7 +18,7 @@ import org.eclipse.xtext.util.concurrent.IStateAccess;
  */
 public interface ISemanticModelTransformer {
 
-	ContentOutlineNode transformSemanticModel(EObject semanticModel);
+	IContentOutlineNode transformSemanticModel(EObject semanticModel);
 
 	void setResourceAccess(IStateAccess<XtextResource> document);
 

@@ -10,10 +10,8 @@ package org.eclipse.xtext.ui.editor.outline.transformer;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IContentOutlineNodeFactory;
-import org.eclipse.xtext.util.concurrent.IStateAccess;
 
 import com.google.inject.Inject;
 
@@ -25,12 +23,6 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 	private static final Logger logger = Logger.getLogger(DefaultSemanticModelTransformer.class);
 	@Inject
 	private IContentOutlineNodeFactory contentOutlineNodeFactory;
-
-	private IStateAccess<XtextResource> resourceAccess;
-
-	public void setResourceAccess(IStateAccess<XtextResource> resourceAccess) {
-		this.resourceAccess = resourceAccess;
-	}
 
 	public void setContentOutlineNodeFactory(IContentOutlineNodeFactory contentOutlineNodeFactory) {
 		this.contentOutlineNodeFactory = contentOutlineNodeFactory;
@@ -61,7 +53,7 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 	}
 
 	protected ContentOutlineNode newOutlineNode(EObject semanticModelObject, ContentOutlineNode outlineParentNode) {
-		return contentOutlineNodeFactory.create(resourceAccess, semanticModelObject, outlineParentNode);
+		return contentOutlineNodeFactory.create(getResourceAccess(), semanticModelObject, outlineParentNode);
 	}
 
 	@Override
