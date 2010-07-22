@@ -15,7 +15,6 @@ import java.util.Collections;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
@@ -158,20 +157,6 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 			}
 		}
 		
-	}
-	
-	@Override
-	protected void doSaveDocument(IProgressMonitor monitor, Object element, IDocument document, boolean overwrite)
-			throws CoreException {
-		super.doSaveDocument(monitor, element, document, overwrite);
-		if (listener != null) {
-			if (document instanceof IDocumentExtension4) {
-				IDocumentExtension4 extension = (IDocumentExtension4) document;
-				listener.modificationStamp = extension.getModificationStamp();
-			} else {
-				listener.modificationStamp = IDocumentExtension4.UNKNOWN_MODIFICATION_STAMP;
-			}
-		}
 	}
 	
 	@Override
