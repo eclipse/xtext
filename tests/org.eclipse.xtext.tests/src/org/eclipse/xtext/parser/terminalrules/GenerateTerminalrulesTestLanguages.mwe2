@@ -39,6 +39,10 @@ Workflow {
 			}
 		}
 		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/Bug317840TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
 			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/EcoreTerminalsTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}

@@ -381,6 +381,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/2010/tmf/xtext/Bug317840TestLanguage" 
+       class = "org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.Bug317840TestLanguagePackage"
+       genModel = "org/eclipse/xtext/parser/terminalrules/Bug317840TestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/2008/tmf/xtext/ECoreTerminalsTest" 
        class = "org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.EcoreTerminalsTestLanguagePackage"
        genModel = "org/eclipse/xtext/parser/terminalrules/EcoreTerminalsTestLanguage.genmodel" /> 

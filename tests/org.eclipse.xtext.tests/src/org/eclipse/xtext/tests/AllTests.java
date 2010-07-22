@@ -113,6 +113,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parser.keywords.GrammarAccessTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.Bug292245Test.class);
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.Bug297105Test.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.Bug317840Test.class);
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.DefaultTerminalConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.DynamicChannelTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.HiddensTest.class);
