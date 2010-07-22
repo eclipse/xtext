@@ -396,7 +396,7 @@ protected class Baz_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getBazRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getBazAccess().getBazChildAction_2_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
