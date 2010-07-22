@@ -15,11 +15,15 @@ import java.util.Collections;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IDocumentExtension4;
+import org.eclipse.jface.text.IDocumentListener;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
@@ -122,6 +126,70 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		ValidationJob job = new ValidationJob(resourceValidator, doc, annotationIssueProcessor,CheckMode.FAST_ONLY);
 		doc.setValidationJob(job);
 		return info;
+	}
+	
+	private UnchangedElementListener listener;
+	
+	public class UnchangedElementListener implements IDocumentListener {
+
+		private final ElementInfo element;
+		private long modificationStamp;
+
+		public UnchangedElementListener(ElementInfo element) {
+			this.element = element;
+			if (element.fDocument instanceof IDocumentExtension4) {
+				modificationStamp = ((IDocumentExtension4) element.fDocument).getModificationStamp();
+			} else {
+				modificationStamp = IDocumentExtension4.UNKNOWN_MODIFICATION_STAMP;
+			}
+			
+		}
+		
+		public void documentAboutToBeChanged(DocumentEvent event) {
+		}
+
+		public void documentChanged(DocumentEvent event) {
+			if (element.fCanBeSaved && modificationStamp == event.getModificationStamp()) {
+				element.fCanBeSaved= false;
+				fireElementDirtyStateChanged(element.fElement, element.fCanBeSaved);
+			} else if (!element.fCanBeSaved) {
+				element.fCanBeSaved= true;
+				fireElementDirtyStateChanged(element.fElement, element.fCanBeSaved);
+			}
+		}
+		
+	}
+	
+	@Override
+	protected void doSaveDocument(IProgressMonitor monitor, Object element, IDocument document, boolean overwrite)
+			throws CoreException {
+		super.doSaveDocument(monitor, element, document, overwrite);
+		if (listener != null) {
+			if (document instanceof IDocumentExtension4) {
+				IDocumentExtension4 extension = (IDocumentExtension4) document;
+				listener.modificationStamp = extension.getModificationStamp();
+			} else {
+				listener.modificationStamp = IDocumentExtension4.UNKNOWN_MODIFICATION_STAMP;
+			}
+		}
+	}
+	
+	@Override
+	protected void addUnchangedElementListeners(Object element, ElementInfo info) {
+		if (info.fDocument != null) {
+			if (listener != null)
+				info.fDocument.removeDocumentListener(listener);
+			listener = new UnchangedElementListener(info);
+			info.fDocument.addDocumentListener(new UnchangedElementListener(info));
+		}
+	}
+	
+	@Override
+	protected void removeUnchangedElementListeners(Object element, ElementInfo info) {
+		if (listener != null) {
+			info.fDocument.removeDocumentListener(listener);
+			listener = null;
+		}
 	}
 	
 	@Override
