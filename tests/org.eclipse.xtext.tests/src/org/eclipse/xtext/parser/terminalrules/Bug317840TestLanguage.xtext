@@ -1,0 +1,30 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.parser.terminalrules.Bug317840TestLanguage with org.eclipse.xtext.common.Terminals
+
+generate bug317840TestLanguage "http://www.eclipse.org/2010/tmf/xtext/Bug317840TestLanguage"
+ 
+Model:
+	elements+=Element*
+;
+
+Element:
+	"element" first=Named second=Named? (third+=Named forth+=Named)*
+;
+
+Named:
+	name = NAME
+;
+
+NAME hidden():
+	ID ('.' ID)*
+;
+
+
+ 

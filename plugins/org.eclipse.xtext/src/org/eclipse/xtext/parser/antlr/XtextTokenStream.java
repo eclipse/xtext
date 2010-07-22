@@ -75,22 +75,17 @@ public class XtextTokenStream extends CommonTokenStream {
 	}
 	
 	public HiddenTokens setHiddenTokens(String... lexerRules) {
+		skipHiddenTokens();
 		HiddenTokens result = new MyHiddenTokens(hiddenTokens);
-		BitSet newHiddens = new BitSet();
-		for(String lexerRule: lexerRules) {
-			Integer idxObj = rulenameToTokenType.get(lexerRule);
-			if (idxObj != null) {
-				newHiddens.set(idxObj.intValue());
-			} else {
-				throw new IllegalStateException("unknown rule: " + lexerRule + 
-						" - the rule seems to be hidden by a keyword.");
-			}
-		}
-		hiddenTokens = newHiddens;
+		doSetHiddenTokens(lexerRules);
 		return result;
 	}
 	
 	public void setInitialHiddenTokens(String... lexerRules) {
+		doSetHiddenTokens(lexerRules);
+	}
+
+	protected void doSetHiddenTokens(String... lexerRules) {
 		BitSet newHiddens = new BitSet();
 		for(String lexerRule: lexerRules) {
 			Integer idxObj = rulenameToTokenType.get(lexerRule);
@@ -104,6 +99,16 @@ public class XtextTokenStream extends CommonTokenStream {
 		hiddenTokens = newHiddens;
 	}
 
+	protected void skipHiddenTokens() {
+		if (hiddenTokens.isEmpty())
+			return;
+		Token token = LT(1);
+		while(token.getChannel() == Token.HIDDEN_CHANNEL) {
+			p++;
+			token = LT(1);
+		}
+	}
+	
 	private class MyHiddenTokens implements HiddenTokens {
 
 		private final BitSet prev;
@@ -112,6 +117,7 @@ public class XtextTokenStream extends CommonTokenStream {
 			this. prev = prev;
 		}
 		public void restore() {
+			skipHiddenTokens();
 			XtextTokenStream.this.hiddenTokens = prev;
 		}
 		
