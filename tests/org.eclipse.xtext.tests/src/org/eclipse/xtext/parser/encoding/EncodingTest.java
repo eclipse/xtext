@@ -56,11 +56,11 @@ public class EncodingTest extends AbstractXtextTests {
 		assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
 
 		resource.load(new ByteArrayInputStream(isoBytes), utfOptions);
-		assertFalse(resource.getErrors().isEmpty());
+		assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
 
 		resource = createXtextResource();
 		resource.load(new ByteArrayInputStream(isoBytes), isoOptions);
-		assertTrue(resource.getErrors().isEmpty());
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		ByteArrayOutputStream isoSaveStream = new ByteArrayOutputStream();
 		resource.save(isoSaveStream, null);
 		isoSaveStream.close();
