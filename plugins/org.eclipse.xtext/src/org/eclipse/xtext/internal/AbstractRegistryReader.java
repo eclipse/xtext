@@ -33,7 +33,7 @@ abstract class AbstractRegistryReader extends RegistryReader {
 	@Override
 	protected boolean readElement(IConfigurationElement element, boolean add) {
 		if (element.getName().equals("resourceServiceProvider")) {
-			String contentTypeIdentifier = element.getAttribute(getKeyAttribute());
+			String contentTypeIdentifier = getValueForKeyAttribute(element);
 			if (contentTypeIdentifier == null) {
 				logMissingAttribute(element, getKeyAttribute());
 			} else if (element.getAttribute(ATT_CLASS) == null) {
@@ -54,6 +54,10 @@ abstract class AbstractRegistryReader extends RegistryReader {
 			}
 		}
 		return false;
+	}
+
+	protected String getValueForKeyAttribute(IConfigurationElement element) {
+		return element.getAttribute(getKeyAttribute());
 	}
 
 	protected abstract Map<String, Object> getMap();
