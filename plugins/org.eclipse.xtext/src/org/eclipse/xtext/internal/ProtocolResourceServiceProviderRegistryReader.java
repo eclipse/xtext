@@ -9,6 +9,8 @@ package org.eclipse.xtext.internal;
 
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
@@ -18,9 +20,11 @@ import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
  */
 class ProtocolResourceServiceProviderRegistryReader extends AbstractRegistryReader {
 
+	private final static Logger log = Logger.getLogger(ProtocolResourceServiceProviderRegistryReader.class);
+	
 	@Override
 	protected String getKeyAttribute() {
-		return "protocol";
+		return "protocolName";
 	}
 
 	@Override
@@ -31,5 +35,22 @@ class ProtocolResourceServiceProviderRegistryReader extends AbstractRegistryRead
 
 	public ProtocolResourceServiceProviderRegistryReader(IExtensionRegistry extensionRegistry, String symbolicBundleName) {
 		super(extensionRegistry, symbolicBundleName, "protocol_resourceServiceProvider");
+	}
+	
+	protected String getDeprecatedKeyAttribute() {
+		return "protocol";
+	}
+	
+	@Override
+	protected String getValueForKeyAttribute(IConfigurationElement element) {
+		String result = super.getValueForKeyAttribute(element);
+		if (result == null) {
+			result = element.getAttribute(getDeprecatedKeyAttribute());
+			if (result != null) {
+				log.warn("Attribute name '" + getDeprecatedKeyAttribute()+ "' is deprecated for extension point 'resourceServiceProvider'. " +
+						"Use '" + getKeyAttribute() + "' instead.");
+			}
+		}
+		return result;
 	}
 }
