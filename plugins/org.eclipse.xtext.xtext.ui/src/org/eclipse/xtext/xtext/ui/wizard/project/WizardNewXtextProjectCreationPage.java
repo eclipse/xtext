@@ -39,6 +39,7 @@ import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
  * 
  * @author KD - Initial contribution and API
  * @author Knut Wannheden
+ * @author Sebastian Zarnekow
  */
 public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationPage {
 	private Text languageNameField;
@@ -74,10 +75,17 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		super.createControl(parent);
 		createLanguageSelectionGroup((Composite) getControl());
 		createProjectLayoutGroup((Composite) getControl());
-		createWorkingSetGroup((Composite) getControl(), selection,
-				new String[] { "org.eclipse.ui.resourceWorkingSetPage" }); //$NON-NLS-1$
+		createWorkingSetGroup((Composite) getControl(), selection, getWorkingSetIdents());
 		setDefaults(projectsuffix);
 		Dialog.applyDialogFont(getControl());
+	}
+
+	protected String[] getWorkingSetIdents() {
+		return new String[] { 
+				"org.eclipse.jdt.ui.JavaWorkingSetPage", //$NON-NLS-1$
+				"org.eclipse.pde.ui.pluginWorkingSet", //$NON-NLS-1$
+				"org.eclipse.ui.resourceWorkingSetPage" //$NON-NLS-1$
+		};
 	}
 
 	/**
@@ -86,7 +94,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	 * @param dslName
 	 *            the name of the DSL
 	 */
-	private void setDefaults(String projectSuffix) {
+	protected void setDefaults(String projectSuffix) {
 		languageNameField.setText("org.xtext.example." + projectSuffix+".MyDsl"); //$NON-NLS-1$
 		extensionsField.setText(projectSuffix);
 
@@ -94,7 +102,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		validatePage();
 	}
 
-	private void fillMweSnippet() {
+	protected void fillMweSnippet() {
 		Map<String, WizardContribution> contributions = WizardContribution.getFromRegistry();
 
 		List<String> names = new ArrayList<String>(contributions.keySet());
@@ -106,7 +114,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		}
 	}
 
-	private int indexOfDefault(List<String> contributions) {
+	protected int indexOfDefault(List<String> contributions) {
 		int indexOf = contributions.indexOf(getDefaultConfigName());
 		return indexOf != -1 ? indexOf : 0;
 	}
@@ -118,7 +126,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	/**
 	 * Find the next available (default) DSL name
 	 */
-	private String findNextValidProjectSuffix(final String prefix, final String name) {
+	protected String findNextValidProjectSuffix(final String prefix, final String name) {
 		String candidate = name;
 		int suffix = 1;
 		while (ResourcesPlugin.getWorkspace().getRoot().getProject((prefix + "." + candidate).toLowerCase()).exists()) { //$NON-NLS-1$
