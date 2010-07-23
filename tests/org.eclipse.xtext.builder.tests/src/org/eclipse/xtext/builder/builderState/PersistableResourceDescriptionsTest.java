@@ -272,12 +272,17 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 	}
 
 	private Map<URI, IResourceDescription.Delta> update(Set<URI> toBeUpdated, Set<URI> toBeDeleted) {
-		ImmutableList<Delta> update = builderState.update(createResourceSet(), toBeUpdated, toBeDeleted, new NullProgressMonitor());
-		return Maps.uniqueIndex(update, new Function<IResourceDescription.Delta, URI>() {
-			public URI apply(IResourceDescription.Delta from) {
-				return from.getOld() != null ? from.getOld().getURI() : from.getNew().getURI();
-			}
-		});
+		ResourceSet resourceSet = createResourceSet();
+		try {
+			ImmutableList<Delta> update = builderState.update(resourceSet, toBeUpdated, toBeDeleted, new NullProgressMonitor());
+			return Maps.uniqueIndex(update, new Function<IResourceDescription.Delta, URI>() {
+				public URI apply(IResourceDescription.Delta from) {
+					return from.getOld() != null ? from.getOld().getURI() : from.getNew().getURI();
+				}
+			});
+		} finally {
+			resourceSet.getResources().clear();
+		}
 	}
 
 }

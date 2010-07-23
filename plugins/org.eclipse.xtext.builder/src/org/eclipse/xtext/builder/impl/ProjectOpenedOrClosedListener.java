@@ -25,6 +25,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -125,11 +126,15 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 						@Override
 						protected void execute(IProgressMonitor monitor) throws CoreException,
 								InvocationTargetException, InterruptedException {
-							getBuilderState().update(
-									getResourceSetProvider().get(project),
+							ResourceSet resourceSet = getResourceSetProvider().get(project);
+							
+							getBuilderState().update(resourceSet,
 									toBeBuilt.getToBeUpdated(), 
 									toBeBuilt.getToBeDeleted(), 
 									monitor);
+							
+							resourceSet.getResources().clear();
+							resourceSet.eAdapters().clear();
 						}
 					}.run(monitor);
 				} catch (InvocationTargetException e) {

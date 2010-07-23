@@ -106,6 +106,15 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		return result;
 	}
 	
+	@Override
+	protected void disposeElementInfo(Object element, ElementInfo info) {
+		if (info.fDocument instanceof XtextDocument) {
+			XtextDocument document = (XtextDocument) info.fDocument;
+			document.disposeInput();
+		}
+		super.disposeElementInfo(element, info);
+	}
+	
 	protected void loadResource(XtextResource resource, String document, String encoding) throws CoreException {
 		try {
 			resource.load(new ByteArrayInputStream(document.getBytes(encoding)),

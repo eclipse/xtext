@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.BadPositionCategoryException;
 import org.eclipse.jface.text.Document;
@@ -46,6 +47,17 @@ public class XtextDocument extends Document implements IXtextDocument {
 	public void setInput(XtextResource resource) {
 		Assert.isNotNull(resource);
 		this.resource = resource;
+	}
+	
+	public void disposeInput() {
+		if (resource != null) {
+			ResourceSet resourceSet = resource.getResourceSet();
+			if (resourceSet != null) {
+				resourceSet.getResources().clear();
+				resourceSet.eAdapters().clear();
+			}
+			resource = null;
+		}
 	}
 
 	private final XtextDocumentLocker stateAccess = createDocumentLocker();

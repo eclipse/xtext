@@ -71,7 +71,7 @@ public class JdtTypeMirror extends AbstractClassMirror implements IElementChange
 		return false;
 	}
 
-	private void unloadResource() {
+	protected void unloadResource() {
 		if (typeResource.getResourceSet() != null)
 			typeResource.getResourceSet().eAdapters().remove(this);
 		JavaCore.removeElementChangedListener(this);

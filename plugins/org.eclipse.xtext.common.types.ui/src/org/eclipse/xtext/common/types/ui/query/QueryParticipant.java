@@ -128,11 +128,12 @@ public class QueryParticipant implements IQueryParticipant {
 					if (subMonitor.isCanceled()) {
 						return;
 					}
-					if (subMonitor.isCanceled()) {
-						return;
-					}
 					subMonitor.worked(1);
-				} 
+				}
+				for(ResourceSet resourceSet: projectToResourceSet.values()) {
+					resourceSet.getResources().clear();
+					resourceSet.eAdapters().clear();
+				}
 			} finally {
 				subMonitor.done();
 			}
