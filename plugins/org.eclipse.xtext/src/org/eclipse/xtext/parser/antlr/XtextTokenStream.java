@@ -100,7 +100,7 @@ public class XtextTokenStream extends CommonTokenStream {
 	}
 
 	protected void skipHiddenTokens() {
-		if (hiddenTokens.isEmpty())
+		if (hiddenTokens == null || hiddenTokens.isEmpty())
 			return;
 		Token token = LT(1);
 		while(token.getChannel() == Token.HIDDEN_CHANNEL) {
