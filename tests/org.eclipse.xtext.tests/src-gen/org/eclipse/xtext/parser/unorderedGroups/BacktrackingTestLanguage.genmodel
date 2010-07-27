@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/src-gen"
+    editDirectory="/org.eclipse.xtext.tests.edit/src" editorDirectory="/org.eclipse.xtext.tests.editor/src"
+    modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="BacktrackingTestLanguage"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
+    editorPluginID="org.eclipse.xtext.tests.editor">
+  <genPackages prefix="BacktrackingTestLanguage" basePackage="org.eclipse.xtext.parser.unorderedGroups"
+      disposableProviderFactory="true" ecorePackage="BacktrackingTestLanguage.ecore#/">
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//Model/units"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//Unit">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//Unit/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//Unit/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//Unit/version"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//Unit/implements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//Unit/sourceLocation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//Unit/outputLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//Unit/providedCapabilities"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//Unit/requiredCapabilities"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//Unit/metaRequiredCapabilities"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//Unit/functions"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//ProvidedCapability">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//ProvidedCapability/nameSpace"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//ProvidedCapability/condExpr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//ProvidedCapability/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//ProvidedCapability/version"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//AliasedRequiredCapability">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//AliasedRequiredCapability/nameSpace"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//AliasedRequiredCapability/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//AliasedRequiredCapability/alias"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//AliasedRequiredCapability/condExpr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//AliasedRequiredCapability/greedy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//AliasedRequiredCapability/min"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//AliasedRequiredCapability/max"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//AliasedRequiredCapability/versionRange"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//RequiredCapability">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//RequiredCapability/nameSpace"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//RequiredCapability/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//RequiredCapability/condExpr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//RequiredCapability/greedy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//RequiredCapability/min"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//RequiredCapability/max"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//RequiredCapability/versionRange"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//ParameterList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//ParameterList/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//Parameter">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//Parameter/expr"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//ClosureParameter"/>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//ParameterDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//ParameterDeclaration/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//ParameterDeclaration/name"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//Function">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//Function/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//Function/visibility"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//Function/final"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//Function/returnType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//Function/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//Function/parameters"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//Function/varArgs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//Function/guard"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//Function/funcExpr"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//GuardExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//GuardExpression/guardExpr"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//Expression"/>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//TypeRef"/>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//SimpleTypeRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//SimpleTypeRef/rawType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//SimpleTypeRef/actualArgumentsList"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//ClosureTypeRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//ClosureTypeRef/parameterTypes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//ClosureTypeRef/varArgs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//ClosureTypeRef/returnType"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//WithExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//WithExpression/referencedAdvice"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//WithExpression/funcExpr"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//WithContextExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//WithContextExpression/expr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//WithContextExpression/alias"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//WithContextExpression/contextBlock"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//CallExpression"/>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//ValueLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//ValueLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//AssignmentExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//AssignmentExpression/leftExpr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//AssignmentExpression/functionName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//AssignmentExpression/rightExpr"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//DefValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//DefValue/final"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//DefValue/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//DefValue/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//DefValue/valueExpr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//DefValue/immutable"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//CachedExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//CachedExpression/expr"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//OrExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//OrExpression/leftExpr"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//OrExpression/rightExpr"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//AndExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//AndExpression/leftExpr"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//AndExpression/rightExpr"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//BinaryOpExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//BinaryOpExpression/leftExpr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//BinaryOpExpression/functionName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//BinaryOpExpression/rightExpr"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//UnaryOpExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//UnaryOpExpression/functionName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//UnaryOpExpression/expr"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//UnaryPreOpExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//UnaryPreOpExpression/functionName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//UnaryPreOpExpression/expr"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//UnaryPostOpExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//UnaryPostOpExpression/expr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//UnaryPostOpExpression/functionName"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//CallFeature">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//CallFeature/funcExpr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//CallFeature/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//CallFeature/parameterList"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//AtExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//AtExpression/objExpr"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//AtExpression/indexExpr"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//FeatureExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//FeatureExpression/objExpr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//FeatureExpression/featureName"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//CallFunction">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//CallFunction/funcExpr"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//CallFunction/parameterList"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//ChainedExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//ChainedExpression/expressions"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//VariableExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//VariableExpression/name"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//CallNamedFunction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//CallNamedFunction/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//CallNamedFunction/parameterList"/>
+    </genClasses>
+    <genClasses ecoreClass="BacktrackingTestLanguage.ecore#//CreateExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//CreateExpression/typeExpr"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//CreateExpression/parameterList"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingTestLanguage.ecore#//CreateExpression/alias"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingTestLanguage.ecore#//CreateExpression/contextBlock"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

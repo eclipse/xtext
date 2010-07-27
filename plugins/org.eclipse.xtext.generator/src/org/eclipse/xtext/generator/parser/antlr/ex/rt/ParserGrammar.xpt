@@ -56,7 +56,9 @@ import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
+«IF !allParserRules().allContents().typeSelect(UnorderedGroup).isEmpty && options.backtrack-»
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;
+«ENDIF-»
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import «gaFQName()»;
@@ -135,9 +137,9 @@ import «gaFQName()»;
 «ENDIF-»
 	:
 	{ currentNode = «EXPAND createCompositeNode» }
-	iv_«ruleName()»=«ruleName()» 
-	{ $current=$iv_«ruleName()».current; } 
-	EOF 
+	 iv_«ruleName()»=«ruleName()» 
+	 { $current=$iv_«ruleName()».current; } 
+	 EOF 
 ;
 «IF definesHiddenTokens || (options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty)-»
 finally {
@@ -198,9 +200,9 @@ finally {
 «ENDIF-»
 :
 	{ currentNode = «EXPAND createCompositeNode» } 
-	iv_«ruleName()»=«ruleName()» 
-	{ $current=$iv_«ruleName()».current.getText(); }  
-	EOF 
+	 iv_«ruleName()»=«ruleName()» 
+	 { $current=$iv_«ruleName()».current.getText(); }  
+	 EOF 
 ;
 «IF definesHiddenTokens || (options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty)-»
 finally {

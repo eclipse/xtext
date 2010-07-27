@@ -1,0 +1,80 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ */
+package org.eclipse.xtext.parser.unorderedGroups.backtrackingTestLanguage;
+
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>And Expression</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.backtrackingTestLanguage.AndExpression#getLeftExpr <em>Left Expr</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.backtrackingTestLanguage.AndExpression#getRightExpr <em>Right Expr</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @see org.eclipse.xtext.parser.unorderedGroups.backtrackingTestLanguage.BacktrackingTestLanguagePackage#getAndExpression()
+ * @model
+ * @generated
+ */
+public interface AndExpression extends Expression
+{
+  /**
+   * Returns the value of the '<em><b>Left Expr</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Left Expr</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Left Expr</em>' containment reference.
+   * @see #setLeftExpr(Expression)
+   * @see org.eclipse.xtext.parser.unorderedGroups.backtrackingTestLanguage.BacktrackingTestLanguagePackage#getAndExpression_LeftExpr()
+   * @model containment="true"
+   * @generated
+   */
+  Expression getLeftExpr();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.parser.unorderedGroups.backtrackingTestLanguage.AndExpression#getLeftExpr <em>Left Expr</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Left Expr</em>' containment reference.
+   * @see #getLeftExpr()
+   * @generated
+   */
+  void setLeftExpr(Expression value);
+
+  /**
+   * Returns the value of the '<em><b>Right Expr</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Right Expr</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Right Expr</em>' containment reference.
+   * @see #setRightExpr(Expression)
+   * @see org.eclipse.xtext.parser.unorderedGroups.backtrackingTestLanguage.BacktrackingTestLanguagePackage#getAndExpression_RightExpr()
+   * @model containment="true"
+   * @generated
+   */
+  Expression getRightExpr();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.parser.unorderedGroups.backtrackingTestLanguage.AndExpression#getRightExpr <em>Right Expr</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Right Expr</em>' containment reference.
+   * @see #getRightExpr()
+   * @generated
+   */
+  void setRightExpr(Expression value);
+
+} // AndExpression

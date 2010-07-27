@@ -1,0 +1,1534 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <xtext:Grammar name="org.eclipse.xtext.parser.unorderedGroups.BacktrackingTestLanguage" usedGrammars="/1">
+    <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="backtrackingTestLanguage">
+      <ePackage href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#/"/>
+    </metamodelDeclarations>
+    <rules xsi:type="xtext:ParserRule" name="Model">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Model"/>
+      </type>
+      <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="units" operator="+=">
+        <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Unit">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Unit"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Unit"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="documentation" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.56"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="unit"/>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="version"/>
+          <elements xsi:type="xtext:Assignment" feature="version" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="implements"/>
+          <elements xsi:type="xtext:Assignment" feature="implements" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.21"/>
+          </elements>
+          <elements xsi:type="xtext:Group" cardinality="*">
+            <elements xsi:type="xtext:Keyword" value=","/>
+            <elements xsi:type="xtext:Assignment" feature="implements" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.21"/>
+            </elements>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="{"/>
+        <elements xsi:type="xtext:UnorderedGroup">
+          <elements xsi:type="xtext:Group" cardinality="?">
+            <elements xsi:type="xtext:Keyword" value="source"/>
+            <elements xsi:type="xtext:Keyword" value=":"/>
+            <elements xsi:type="xtext:Assignment" feature="sourceLocation" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value=";"/>
+          </elements>
+          <elements xsi:type="xtext:Group" cardinality="?">
+            <elements xsi:type="xtext:Keyword" value="output"/>
+            <elements xsi:type="xtext:Keyword" value=":"/>
+            <elements xsi:type="xtext:Assignment" feature="outputLocation" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value=";"/>
+          </elements>
+          <elements xsi:type="xtext:Group" cardinality="*">
+            <elements xsi:type="xtext:Keyword" value="provides"/>
+            <elements xsi:type="xtext:Keyword" value=":"/>
+            <elements xsi:type="xtext:Assignment" feature="providedCapabilities" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value=";"/>
+          </elements>
+          <elements xsi:type="xtext:Group" cardinality="*">
+            <elements xsi:type="xtext:Keyword" value="requires"/>
+            <elements xsi:type="xtext:Keyword" value=":"/>
+            <elements xsi:type="xtext:Assignment" feature="requiredCapabilities" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value=";"/>
+          </elements>
+          <elements xsi:type="xtext:Group" cardinality="*">
+            <elements xsi:type="xtext:Keyword" value="requires"/>
+            <elements xsi:type="xtext:Keyword" value="env"/>
+            <elements xsi:type="xtext:Keyword" value=":"/>
+            <elements xsi:type="xtext:Assignment" feature="metaRequiredCapabilities" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value=";"/>
+          </elements>
+          <elements xsi:type="xtext:Assignment" cardinality="*" feature="functions" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="}"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ProvidedCapability">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//ProvidedCapability"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//ProvidedCapability"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Assignment" feature="nameSpace" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="unit"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="{"/>
+          <elements xsi:type="xtext:UnorderedGroup">
+            <elements xsi:type="xtext:Group" cardinality="?">
+              <elements xsi:type="xtext:Keyword" value="when"/>
+              <elements xsi:type="xtext:Keyword" value=":"/>
+              <elements xsi:type="xtext:Assignment" feature="condExpr" operator="=">
+                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+              </elements>
+              <elements xsi:type="xtext:Keyword" value=";"/>
+            </elements>
+            <elements xsi:type="xtext:Group">
+              <elements xsi:type="xtext:Keyword" value="name"/>
+              <elements xsi:type="xtext:Keyword" value=":"/>
+              <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+                <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+              </elements>
+              <elements xsi:type="xtext:Keyword" value=";"/>
+            </elements>
+            <elements xsi:type="xtext:Group" cardinality="?">
+              <elements xsi:type="xtext:Keyword" value="version"/>
+              <elements xsi:type="xtext:Keyword" value=":"/>
+              <elements xsi:type="xtext:Assignment" feature="version" operator="=">
+                <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+              </elements>
+              <elements xsi:type="xtext:Keyword" value=";"/>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="}"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="AliasedRequiredCapability">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//AliasedRequiredCapability"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Assignment" feature="nameSpace" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="unit"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="as"/>
+          <elements xsi:type="xtext:Assignment" feature="alias" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="{"/>
+          <elements xsi:type="xtext:UnorderedGroup">
+            <elements xsi:type="xtext:Group" cardinality="?">
+              <elements xsi:type="xtext:Keyword" value="when"/>
+              <elements xsi:type="xtext:Keyword" value=":"/>
+              <elements xsi:type="xtext:Assignment" feature="condExpr" operator="=">
+                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+              </elements>
+              <elements xsi:type="xtext:Keyword" value=";"/>
+            </elements>
+            <elements xsi:type="xtext:Group" cardinality="?">
+              <elements xsi:type="xtext:Assignment" feature="greedy" operator="?=">
+                <terminal xsi:type="xtext:Keyword" value="greedy"/>
+              </elements>
+              <elements xsi:type="xtext:Keyword" value=";"/>
+            </elements>
+            <elements xsi:type="xtext:Group" cardinality="?">
+              <elements xsi:type="xtext:Keyword" value="requires-min"/>
+              <elements xsi:type="xtext:Keyword" value=":"/>
+              <elements xsi:type="xtext:Assignment" feature="min" operator="=">
+                <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+              </elements>
+              <elements xsi:type="xtext:Keyword" value=";"/>
+            </elements>
+            <elements xsi:type="xtext:Group" cardinality="?">
+              <elements xsi:type="xtext:Keyword" value="requires-max"/>
+              <elements xsi:type="xtext:Keyword" value=":"/>
+              <elements xsi:type="xtext:Assignment" feature="max" operator="=">
+                <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+              </elements>
+              <elements xsi:type="xtext:Keyword" value=";"/>
+            </elements>
+            <elements xsi:type="xtext:Group" cardinality="?">
+              <elements xsi:type="xtext:Keyword" value="version"/>
+              <elements xsi:type="xtext:Keyword" value=":"/>
+              <elements xsi:type="xtext:Assignment" feature="versionRange" operator="=">
+                <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+              </elements>
+              <elements xsi:type="xtext:Keyword" value=";"/>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="}"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="RequiredCapability">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//RequiredCapability"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//RequiredCapability"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Assignment" feature="nameSpace" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="unit"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="{"/>
+          <elements xsi:type="xtext:UnorderedGroup">
+            <elements xsi:type="xtext:Group" cardinality="?">
+              <elements xsi:type="xtext:Keyword" value="when"/>
+              <elements xsi:type="xtext:Keyword" value=":"/>
+              <elements xsi:type="xtext:Assignment" feature="condExpr" operator="=">
+                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+              </elements>
+              <elements xsi:type="xtext:Keyword" value=";"/>
+            </elements>
+            <elements xsi:type="xtext:Group" cardinality="?">
+              <elements xsi:type="xtext:Assignment" feature="greedy" operator="?=">
+                <terminal xsi:type="xtext:Keyword" value="greedy"/>
+              </elements>
+              <elements xsi:type="xtext:Keyword" value=";"/>
+            </elements>
+            <elements xsi:type="xtext:Group" cardinality="?">
+              <elements xsi:type="xtext:Keyword" value="requires-min"/>
+              <elements xsi:type="xtext:Keyword" value=":"/>
+              <elements xsi:type="xtext:Assignment" feature="min" operator="=">
+                <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+              </elements>
+              <elements xsi:type="xtext:Keyword" value=";"/>
+            </elements>
+            <elements xsi:type="xtext:Group" cardinality="?">
+              <elements xsi:type="xtext:Keyword" value="requires-max"/>
+              <elements xsi:type="xtext:Keyword" value=":"/>
+              <elements xsi:type="xtext:Assignment" feature="max" operator="=">
+                <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+              </elements>
+              <elements xsi:type="xtext:Keyword" value=";"/>
+            </elements>
+            <elements xsi:type="xtext:Group" cardinality="?">
+              <elements xsi:type="xtext:Keyword" value="version"/>
+              <elements xsi:type="xtext:Keyword" value=":"/>
+              <elements xsi:type="xtext:Assignment" feature="versionRange" operator="=">
+                <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+              </elements>
+              <elements xsi:type="xtext:Keyword" value=";"/>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="}"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Path" definesHiddenTokens="true">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" cardinality="?" value="/"/>
+          <elements xsi:type="xtext:RuleCall" rule="/0/@rules.55"/>
+          <elements xsi:type="xtext:Group" cardinality="*">
+            <elements xsi:type="xtext:Keyword" value="/"/>
+            <elements xsi:type="xtext:RuleCall" rule="/0/@rules.55"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" cardinality="?" value="/"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ParameterList">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//ParameterList"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Assignment" feature="parameters" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="*">
+          <elements xsi:type="xtext:Keyword" value=","/>
+          <elements xsi:type="xtext:Assignment" feature="parameters" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="FirstParameter">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Parameter"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Parameter">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Parameter"/>
+      </type>
+      <alternatives xsi:type="xtext:Assignment" feature="expr" operator="=">
+        <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ClosureParameter">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//ClosureParameter"/>
+      </type>
+      <alternatives xsi:type="xtext:Assignment" feature="expr" operator="=">
+        <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.50"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ParameterDeclaration">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//ParameterDeclaration"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="type" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.20"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Function">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Function"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="documentation" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.56"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="visibility" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="final" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="final"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="function"/>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="returnType" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.20"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="("/>
+          <elements xsi:type="xtext:Alternatives" cardinality="?">
+            <elements xsi:type="xtext:Group">
+              <elements xsi:type="xtext:Assignment" feature="parameters" operator="+=">
+                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
+              </elements>
+              <elements xsi:type="xtext:Group" cardinality="*">
+                <elements xsi:type="xtext:Keyword" value=","/>
+                <elements xsi:type="xtext:Assignment" feature="parameters" operator="+=">
+                  <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
+                </elements>
+              </elements>
+              <elements xsi:type="xtext:Group" cardinality="?">
+                <elements xsi:type="xtext:Keyword" value=","/>
+                <elements xsi:type="xtext:Assignment" feature="varArgs" operator="?=">
+                  <terminal xsi:type="xtext:Keyword" value="..."/>
+                </elements>
+                <elements xsi:type="xtext:Assignment" feature="parameters" operator="+=">
+                  <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
+                </elements>
+              </elements>
+            </elements>
+            <elements xsi:type="xtext:Group">
+              <elements xsi:type="xtext:Assignment" feature="varArgs" operator="?=">
+                <terminal xsi:type="xtext:Keyword" value="..."/>
+              </elements>
+              <elements xsi:type="xtext:Assignment" feature="parameters" operator="+=">
+                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
+              </elements>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value=")"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="when"/>
+          <elements xsi:type="xtext:Assignment" feature="guard" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" value=":"/>
+            <elements xsi:type="xtext:Assignment" feature="funcExpr" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value=";"/>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="funcExpr" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.39"/>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="GuardExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//GuardExpression"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value=":"/>
+          <elements xsi:type="xtext:Assignment" feature="guardExpr" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value=";"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="guardExpr" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.39"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="AssignmentOperator">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:Keyword" value="="/>
+        <elements xsi:type="xtext:Keyword" value="+="/>
+        <elements xsi:type="xtext:Keyword" value="-="/>
+        <elements xsi:type="xtext:Keyword" value="*="/>
+        <elements xsi:type="xtext:Keyword" value="/="/>
+        <elements xsi:type="xtext:Keyword" value="%="/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="RelationalOperator">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:Keyword" value="~="/>
+        <elements xsi:type="xtext:Keyword" value="=="/>
+        <elements xsi:type="xtext:Keyword" value="==="/>
+        <elements xsi:type="xtext:Keyword" value="!="/>
+        <elements xsi:type="xtext:Keyword" value="!=="/>
+        <elements xsi:type="xtext:Keyword" value=">="/>
+        <elements xsi:type="xtext:Keyword" value="&lt;="/>
+        <elements xsi:type="xtext:Keyword" value=">"/>
+        <elements xsi:type="xtext:Keyword" value="&lt;"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="TopLevelExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.19"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.17"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Expression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.17"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="AssignmentExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.23"/>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Action" feature="leftExpr" operator="=">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//AssignmentExpression"/>
+            </type>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="functionName" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="rightExpr" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.17"/>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="VarDeclaration">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//DefValue"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="final" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="final"/>
+        </elements>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Alternatives">
+            <elements xsi:type="xtext:Keyword" value="var"/>
+            <elements xsi:type="xtext:Assignment" feature="type" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.20"/>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="="/>
+          <elements xsi:type="xtext:Assignment" feature="valueExpr" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ValDeclaration">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//DefValue"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="final" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="final"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="immutable" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="val"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="type" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.20"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="="/>
+        <elements xsi:type="xtext:Assignment" feature="valueExpr" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="TypeRef">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//TypeRef"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.22"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.21"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="SimpleTypeRef">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//SimpleTypeRef"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Assignment" feature="rawType" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="&lt;"/>
+          <elements xsi:type="xtext:Assignment" feature="actualArgumentsList" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </elements>
+          <elements xsi:type="xtext:Group" cardinality="*">
+            <elements xsi:type="xtext:Keyword" value=","/>
+            <elements xsi:type="xtext:Assignment" feature="actualArgumentsList" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value=">"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ClosureTypeRef">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//ClosureTypeRef"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="("/>
+        <elements xsi:type="xtext:Alternatives" cardinality="?">
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Assignment" feature="parameterTypes" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+            </elements>
+            <elements xsi:type="xtext:Group" cardinality="*">
+              <elements xsi:type="xtext:Keyword" value=","/>
+              <elements xsi:type="xtext:Assignment" feature="parameterTypes" operator="+=">
+                <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+              </elements>
+            </elements>
+            <elements xsi:type="xtext:Group" cardinality="?">
+              <elements xsi:type="xtext:Keyword" value=","/>
+              <elements xsi:type="xtext:Assignment" feature="varArgs" operator="?=">
+                <terminal xsi:type="xtext:Keyword" value="..."/>
+              </elements>
+              <elements xsi:type="xtext:Assignment" feature="parameterTypes" operator="+=">
+                <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+              </elements>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Assignment" feature="varArgs" operator="?=">
+              <terminal xsi:type="xtext:Keyword" value="..."/>
+            </elements>
+            <elements xsi:type="xtext:Assignment" feature="parameterTypes" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+            </elements>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value=")"/>
+        <elements xsi:type="xtext:Keyword" value="=>"/>
+        <elements xsi:type="xtext:Assignment" feature="returnType" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="CachedExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Action">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//CachedExpression"/>
+            </type>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="cached"/>
+          <elements xsi:type="xtext:Assignment" feature="expr" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.24"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.24"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="OrExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.25"/>
+        <elements xsi:type="xtext:Group" cardinality="*">
+          <elements xsi:type="xtext:Action" feature="leftExpr" operator="=">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//OrExpression"/>
+            </type>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="||"/>
+          <elements xsi:type="xtext:Assignment" feature="rightExpr" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.25"/>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="AndExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.26"/>
+        <elements xsi:type="xtext:Group" cardinality="*">
+          <elements xsi:type="xtext:Action" feature="leftExpr" operator="=">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//AndExpression"/>
+            </type>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="&amp;&amp;"/>
+          <elements xsi:type="xtext:Assignment" feature="rightExpr" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.26"/>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="RelationalExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.27"/>
+        <elements xsi:type="xtext:Group" cardinality="*">
+          <elements xsi:type="xtext:Action" feature="leftExpr" operator="=">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//BinaryOpExpression"/>
+            </type>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="functionName" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="rightExpr" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.27"/>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="AdditiveExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.28"/>
+        <elements xsi:type="xtext:Group" cardinality="*">
+          <elements xsi:type="xtext:Action" feature="leftExpr" operator="=">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//BinaryOpExpression"/>
+            </type>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="functionName" operator="=">
+            <terminal xsi:type="xtext:Alternatives">
+              <elements xsi:type="xtext:Keyword" value="+"/>
+              <elements xsi:type="xtext:Keyword" value="-"/>
+            </terminal>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="rightExpr" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.28"/>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="MultiplicativeExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.29"/>
+        <elements xsi:type="xtext:Group" cardinality="*">
+          <elements xsi:type="xtext:Action" feature="leftExpr" operator="=">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//BinaryOpExpression"/>
+            </type>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="functionName" operator="=">
+            <terminal xsi:type="xtext:Alternatives">
+              <elements xsi:type="xtext:Keyword" value="*"/>
+              <elements xsi:type="xtext:Keyword" value="/"/>
+              <elements xsi:type="xtext:Keyword" value="%"/>
+            </terminal>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="rightExpr" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.29"/>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="SetExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.30"/>
+        <elements xsi:type="xtext:Group" cardinality="*">
+          <elements xsi:type="xtext:Action" feature="leftExpr" operator="=">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//BinaryOpExpression"/>
+            </type>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="functionName" operator="=">
+            <terminal xsi:type="xtext:Keyword" value=".."/>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="rightExpr" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.30"/>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="UnaryOrInfixExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.33"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.31"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.32"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="UnaryExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//UnaryOpExpression"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="functionName" operator="=">
+          <terminal xsi:type="xtext:Alternatives">
+            <elements xsi:type="xtext:Keyword" value="!"/>
+            <elements xsi:type="xtext:Keyword" value="-"/>
+          </terminal>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="expr" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.34"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="PreopExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//UnaryPreOpExpression"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="functionName" operator="=">
+          <terminal xsi:type="xtext:Alternatives">
+            <elements xsi:type="xtext:Keyword" value="++"/>
+            <elements xsi:type="xtext:Keyword" value="--"/>
+          </terminal>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="expr" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.34"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="PostopExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.34"/>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Action" feature="expr" operator="=">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//UnaryPostOpExpression"/>
+            </type>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="functionName" operator="=">
+            <terminal xsi:type="xtext:Alternatives">
+              <elements xsi:type="xtext:Keyword" value="--"/>
+              <elements xsi:type="xtext:Keyword" value="++"/>
+            </terminal>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="InfixExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.35"/>
+        <elements xsi:type="xtext:Alternatives" cardinality="*">
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Action" feature="funcExpr" operator="=">
+              <type metamodel="/0/@metamodelDeclarations.0">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//CallFeature"/>
+              </type>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value="."/>
+            <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value="("/>
+            <elements xsi:type="xtext:Assignment" cardinality="?" feature="parameterList" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value=")"/>
+          </elements>
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Action" feature="objExpr" operator="=">
+              <type metamodel="/0/@metamodelDeclarations.0">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//AtExpression"/>
+              </type>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value="["/>
+            <elements xsi:type="xtext:Assignment" feature="indexExpr" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value="]"/>
+          </elements>
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Action" feature="objExpr" operator="=">
+              <type metamodel="/0/@metamodelDeclarations.0">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//FeatureExpression"/>
+              </type>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value="."/>
+            <elements xsi:type="xtext:Assignment" feature="featureName" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+            </elements>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="CallExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.36"/>
+        <elements xsi:type="xtext:Group" cardinality="*">
+          <elements xsi:type="xtext:Action" feature="funcExpr" operator="=">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//CallFunction"/>
+            </type>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="("/>
+          <elements xsi:type="xtext:Assignment" cardinality="?" feature="parameterList" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value=")"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="PrimaryExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.42"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.44"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.40"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.48"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.41"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.54"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.39"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.37"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.38"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="WithExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//WithExpression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="with"/>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Assignment" feature="referencedAdvice" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </elements>
+          <elements xsi:type="xtext:Group" cardinality="*">
+            <elements xsi:type="xtext:Keyword" value=","/>
+            <elements xsi:type="xtext:Assignment" feature="referencedAdvice" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+            </elements>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" value=":"/>
+            <elements xsi:type="xtext:Assignment" feature="funcExpr" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" value="{"/>
+            <elements xsi:type="xtext:Assignment" feature="funcExpr" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.52"/>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value="}"/>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="WithContextExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//WithContextExpression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="with"/>
+        <elements xsi:type="xtext:Keyword" value="context"/>
+        <elements xsi:type="xtext:Assignment" feature="expr" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="as"/>
+          <elements xsi:type="xtext:Assignment" feature="alias" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="contextBlock" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.39"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="BlockExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//ChainedExpression"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="{"/>
+        <elements xsi:type="xtext:Group" cardinality="*">
+          <elements xsi:type="xtext:Assignment" feature="expressions" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value=";"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="}"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Value">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//VariableExpression"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="KeywordVariables">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//VariableExpression"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:Alternatives">
+            <elements xsi:type="xtext:Keyword" value="input"/>
+            <elements xsi:type="xtext:Keyword" value="output"/>
+            <elements xsi:type="xtext:Keyword" value="source"/>
+            <elements xsi:type="xtext:Keyword" value="properties"/>
+            <elements xsi:type="xtext:Keyword" value="builder"/>
+            <elements xsi:type="xtext:Keyword" value="unit"/>
+            <elements xsi:type="xtext:Keyword" value="this"/>
+          </terminal>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="FeatureCall">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.43"/>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Action">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//CallFeature"/>
+            </type>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="."/>
+          <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="("/>
+          <elements xsi:type="xtext:Assignment" cardinality="?" feature="parameterList" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value=")"/>
+        </elements>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Action">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//FeatureExpression"/>
+            </type>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="."/>
+          <elements xsi:type="xtext:Assignment" feature="featureName" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="OperationCall">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//CallExpression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//CallNamedFunction"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="("/>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="parameterList" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value=")"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ConstructorCallExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//CreateExpression"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="new"/>
+        <elements xsi:type="xtext:Assignment" feature="typeExpr" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="("/>
+          <elements xsi:type="xtext:Assignment" cardinality="?" feature="parameterList" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value=")"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="as"/>
+          <elements xsi:type="xtext:Assignment" feature="alias" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="contextBlock" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.45"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="InitializationBlockExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//ChainedExpression"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="{"/>
+        <elements xsi:type="xtext:Assignment" feature="expressions" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.46"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value=";"/>
+        <elements xsi:type="xtext:Keyword" value="}"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="InitializationExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//AssignmentExpression"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="leftExpr" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.47"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="functionName" operator="=">
+          <terminal xsi:type="xtext:Keyword" value=":"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="rightExpr" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="FeatureOfThis">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//FeatureExpression"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="featureName" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Literal">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.53"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.49"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="LiteralFunction">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="{"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.50"/>
+        <elements xsi:type="xtext:Keyword" value="}"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ClosureExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Function"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="&lt;"/>
+          <elements xsi:type="xtext:Assignment" feature="returnType" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.20"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value=">"/>
+        </elements>
+        <elements xsi:type="xtext:Alternatives" cardinality="?">
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" cardinality="?" value="|"/>
+            <elements xsi:type="xtext:Group">
+              <elements xsi:type="xtext:Assignment" feature="parameters" operator="+=">
+                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
+              </elements>
+              <elements xsi:type="xtext:Group" cardinality="*">
+                <elements xsi:type="xtext:Keyword" value=","/>
+                <elements xsi:type="xtext:Assignment" feature="parameters" operator="+=">
+                  <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
+                </elements>
+              </elements>
+              <elements xsi:type="xtext:Group" cardinality="?">
+                <elements xsi:type="xtext:Keyword" value=","/>
+                <elements xsi:type="xtext:Assignment" feature="varArgs" operator="?=">
+                  <terminal xsi:type="xtext:Keyword" value="..."/>
+                </elements>
+                <elements xsi:type="xtext:Assignment" feature="parameters" operator="+=">
+                  <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
+                </elements>
+              </elements>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Assignment" feature="varArgs" operator="?=">
+              <terminal xsi:type="xtext:Keyword" value="..."/>
+            </elements>
+            <elements xsi:type="xtext:Assignment" feature="parameters" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
+            </elements>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="|"/>
+        <elements xsi:type="xtext:Assignment" feature="funcExpr" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.51"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="OneOrManyExpressions">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.52"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="BlockExpressionWithoutBrackets">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//ChainedExpression"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="+">
+          <elements xsi:type="xtext:Assignment" feature="expressions" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value=";"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ValueLiteral">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//ValueLiteral"/>
+      </type>
+      <alternatives xsi:type="xtext:Assignment" feature="value" operator="=">
+        <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ParanthesizedExpression">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="("/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+        <elements xsi:type="xtext:Keyword" value=")"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="QID" definesHiddenTokens="true">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        <elements xsi:type="xtext:Alternatives" cardinality="*">
+          <elements xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+          <elements xsi:type="xtext:RuleCall" rule="/0/@rules.57"/>
+          <elements xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="*">
+          <elements xsi:type="xtext:Keyword" value="."/>
+          <elements xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          <elements xsi:type="xtext:Alternatives" cardinality="*">
+            <elements xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+            <elements xsi:type="xtext:RuleCall" rule="/0/@rules.57"/>
+            <elements xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:TerminalRule" name="DOCUMENTATION">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="/**"/>
+        <elements xsi:type="xtext:UntilToken">
+          <terminal xsi:type="xtext:Keyword" value="*/"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:TerminalRule" name="HEX">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="0"/>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Keyword" value="x"/>
+          <elements xsi:type="xtext:Keyword" value="X"/>
+        </elements>
+        <elements xsi:type="xtext:Alternatives" cardinality="+">
+          <elements xsi:type="xtext:CharacterRange">
+            <left value="0"/>
+            <right value="9"/>
+          </elements>
+          <elements xsi:type="xtext:CharacterRange">
+            <left value="a"/>
+            <right value="f"/>
+          </elements>
+          <elements xsi:type="xtext:CharacterRange">
+            <left value="A"/>
+            <right value="F"/>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+  </xtext:Grammar>
+  <xtext:Grammar name="org.eclipse.xtext.common.Terminals" definesHiddenTokens="true" hiddenTokens="/1/@rules.5 /1/@rules.3 /1/@rules.4">
+    <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
+      <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+    </metamodelDeclarations>
+    <rules xsi:type="xtext:TerminalRule" name="ID">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" cardinality="?" value="^"/>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:CharacterRange">
+            <left value="a"/>
+            <right value="z"/>
+          </elements>
+          <elements xsi:type="xtext:CharacterRange">
+            <left value="A"/>
+            <right value="Z"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="_"/>
+        </elements>
+        <elements xsi:type="xtext:Alternatives" cardinality="*">
+          <elements xsi:type="xtext:CharacterRange">
+            <left value="a"/>
+            <right value="z"/>
+          </elements>
+          <elements xsi:type="xtext:CharacterRange">
+            <left value="A"/>
+            <right value="Z"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="_"/>
+          <elements xsi:type="xtext:CharacterRange">
+            <left value="0"/>
+            <right value="9"/>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:TerminalRule" name="INT">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </type>
+      <alternatives xsi:type="xtext:CharacterRange" cardinality="+">
+        <left value="0"/>
+        <right value="9"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:TerminalRule" name="STRING">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="&quot;"/>
+          <elements xsi:type="xtext:Alternatives" cardinality="*">
+            <elements xsi:type="xtext:Group">
+              <elements xsi:type="xtext:Keyword" value="\"/>
+              <elements xsi:type="xtext:Alternatives">
+                <elements xsi:type="xtext:Keyword" value="b"/>
+                <elements xsi:type="xtext:Keyword" value="t"/>
+                <elements xsi:type="xtext:Keyword" value="n"/>
+                <elements xsi:type="xtext:Keyword" value="f"/>
+                <elements xsi:type="xtext:Keyword" value="r"/>
+                <elements xsi:type="xtext:Keyword" value="&quot;"/>
+                <elements xsi:type="xtext:Keyword" value="'"/>
+                <elements xsi:type="xtext:Keyword" value="\"/>
+              </elements>
+            </elements>
+            <elements xsi:type="xtext:NegatedToken">
+              <terminal xsi:type="xtext:Alternatives">
+                <elements xsi:type="xtext:Keyword" value="\"/>
+                <elements xsi:type="xtext:Keyword" value="&quot;"/>
+              </terminal>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="&quot;"/>
+        </elements>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="'"/>
+          <elements xsi:type="xtext:Alternatives" cardinality="*">
+            <elements xsi:type="xtext:Group">
+              <elements xsi:type="xtext:Keyword" value="\"/>
+              <elements xsi:type="xtext:Alternatives">
+                <elements xsi:type="xtext:Keyword" value="b"/>
+                <elements xsi:type="xtext:Keyword" value="t"/>
+                <elements xsi:type="xtext:Keyword" value="n"/>
+                <elements xsi:type="xtext:Keyword" value="f"/>
+                <elements xsi:type="xtext:Keyword" value="r"/>
+                <elements xsi:type="xtext:Keyword" value="&quot;"/>
+                <elements xsi:type="xtext:Keyword" value="'"/>
+                <elements xsi:type="xtext:Keyword" value="\"/>
+              </elements>
+            </elements>
+            <elements xsi:type="xtext:NegatedToken">
+              <terminal xsi:type="xtext:Alternatives">
+                <elements xsi:type="xtext:Keyword" value="\"/>
+                <elements xsi:type="xtext:Keyword" value="'"/>
+              </terminal>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="'"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:TerminalRule" name="ML_COMMENT">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="/*"/>
+        <elements xsi:type="xtext:UntilToken">
+          <terminal xsi:type="xtext:Keyword" value="*/"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:TerminalRule" name="SL_COMMENT">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="//"/>
+        <elements xsi:type="xtext:NegatedToken" cardinality="*">
+          <terminal xsi:type="xtext:Alternatives">
+            <elements xsi:type="xtext:Keyword" value="&#xA;"/>
+            <elements xsi:type="xtext:Keyword" value="&#xD;"/>
+          </terminal>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" cardinality="?" value="&#xD;"/>
+          <elements xsi:type="xtext:Keyword" value="&#xA;"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:TerminalRule" name="WS">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives" cardinality="+">
+        <elements xsi:type="xtext:Keyword" value=" "/>
+        <elements xsi:type="xtext:Keyword" value="&#x9;"/>
+        <elements xsi:type="xtext:Keyword" value="&#xD;"/>
+        <elements xsi:type="xtext:Keyword" value="&#xA;"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:TerminalRule" name="ANY_OTHER">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Wildcard"/>
+    </rules>
+  </xtext:Grammar>
+</xmi:XMI>
