@@ -48,8 +48,20 @@ public interface IUnorderedGroupHelper {
 	 * Query for remaining mandatory alternatives.
 	 */
 	boolean canLeave(UnorderedGroup group);
+	
+	/**
+	 * Obtain the current state to be able to roll-back after backtracking.
+	 */
+	UnorderedGroupState snapShot(UnorderedGroup... groups);
+	
+	public interface UnorderedGroupState {
+		/**
+		 * Restore the state.
+		 */
+		void restore();
+	}
 
-	public static class Null implements IUnorderedGroupHelper {
+	public static class Null implements IUnorderedGroupHelper, UnorderedGroupState {
 
 		public void enter(UnorderedGroup group) {
 			throw new UnsupportedOperationException();
@@ -72,6 +84,14 @@ public interface IUnorderedGroupHelper {
 		}
 
 		public boolean canLeave(UnorderedGroup group) {
+			throw new UnsupportedOperationException();
+		}
+
+		public void restore() {
+			throw new UnsupportedOperationException();
+		}
+
+		public UnorderedGroupState snapShot(UnorderedGroup... group) {
 			throw new UnsupportedOperationException();
 		}
 		

@@ -24,6 +24,7 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.parser.antlr.postProcessing.SuppressWarningsProcessor;
 import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter;
 import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter;
+import org.eclipse.xtext.generator.parser.antlr.splitting.BacktrackingGuardForUnorderedGroupsRemover;
 import org.eclipse.xtext.generator.parser.antlr.splitting.UnorderedGroupsSplitter;
 import org.eclipse.xtext.generator.parser.packrat.PackratParserFragment;
 
@@ -115,7 +116,10 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	protected void simplifyUnorderedGroupPredicates(String javaFile) throws IOException {
 		String content = readFileIntoString(javaFile);
 		UnorderedGroupsSplitter splitter = new UnorderedGroupsSplitter(content);
-		writeStringIntoFile(javaFile, splitter.transform());
+		String transformed = splitter.transform();
+		BacktrackingGuardForUnorderedGroupsRemover remover = new BacktrackingGuardForUnorderedGroupsRemover(transformed);
+		String newContent = remover.transform();
+		writeStringIntoFile(javaFile, newContent);
 	}
 
 	private void suppressWarningsImpl(String javaFile) {
