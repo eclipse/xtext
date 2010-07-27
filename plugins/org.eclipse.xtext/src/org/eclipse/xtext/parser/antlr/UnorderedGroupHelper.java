@@ -104,6 +104,28 @@ public class UnorderedGroupHelper implements IUnorderedGroupHelper {
 		return get(group).canLeave();
 	}
 	
+	public UnorderedGroupState snapShot(UnorderedGroup... groups) {
+		return new UnorderedGroupStateImpl(groups);
+	}
+	
+	protected class UnorderedGroupStateImpl implements UnorderedGroupState {
+
+		private Map<UnorderedGroup, State> groupToState;
+		
+		protected UnorderedGroupStateImpl(UnorderedGroup[] groups) {
+			groupToState = Maps.newHashMap();
+			for(UnorderedGroup group: groups) {
+				State state = UnorderedGroupHelper.this.groupToState.get(group);
+				groupToState.put(group, state.copy());
+			}
+		}
+		
+		public void restore() {
+			UnorderedGroupHelper.this.groupToState.putAll(groupToState);
+		}
+		
+	}
+	
 	private static class State {
 
 		private Stack<Frame> frames;
@@ -131,6 +153,20 @@ public class UnorderedGroupHelper implements IUnorderedGroupHelper {
 					mandatoryAlternativeCount++;
 				}
 			}
+		}
+		
+		protected State(State original) {
+			frames = new Stack<Frame>();
+			Iterator<Frame> iter = original.frames.iterator();
+			while(iter.hasNext()) {
+				Frame copy = new Frame(iter.next());
+				frames.push(copy);
+			}
+			alternatives = original.alternatives;
+			mandatoryAlternativeCount = original.mandatoryAlternativeCount;
+			returnTrue = original.returnTrue;
+			mandatoryAlternatives = original.mandatoryAlternatives.clone();
+			selected = original.selected;
 		}
 		
 		protected void pushFrame() {
@@ -175,11 +211,21 @@ public class UnorderedGroupHelper implements IUnorderedGroupHelper {
 			pushFrame();
 		}
 		
+		public State copy() {
+			return new State(this);
+		}
+		
 	}
 	
-	private static class Frame {
-		boolean[] predicate;
-		int remaining;
+	protected static class Frame {
+		protected Frame() {
+		}
+		protected Frame(Frame original) {
+			this.predicate = original.predicate.clone();
+			this.remaining = original.remaining;
+		}
+		protected boolean[] predicate;
+		protected int remaining;
 	}
 	
 }
