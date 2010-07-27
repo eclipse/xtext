@@ -61,6 +61,7 @@ import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
+import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import «gaFQName()»;
@@ -124,20 +125,34 @@ import «gaFQName()»;
 «IF !isDatatypeRule()»
 // Entry rule «entryRuleName()»
 «entryRuleName()» returns [EObject current=null] 
-«IF definesHiddenTokens-»
+«IF definesHiddenTokens || (options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty)-»
 	@init { 
+«IF definesHiddenTokens-»
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(«FOREACH hiddenTokens AS hidden SEPARATOR ", "»"«hidden.ruleName()»"«ENDFOREACH-»);
+«ENDIF-» 
+«IF options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty-»
+		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+«FOREACH allContents().typeSelect(UnorderedGroup) AS group ITERATOR it-»
+			grammarAccess.«group.gaRuleElementAccessor()»«IF !it.lastIteration», «ENDIF»
+«ENDFOREACH-» 
+		);
+«ENDIF-»
 	}
 «ENDIF-»
 	:
 	{ currentNode = «EXPAND createCompositeNode» }
-	 iv_«ruleName()»=«ruleName()» 
-	 { $current=$iv_«ruleName()».current; } 
-	 EOF 
+	iv_«ruleName()»=«ruleName()» 
+	{ $current=$iv_«ruleName()».current; } 
+	EOF 
 ;
-«IF definesHiddenTokens-»
+«IF definesHiddenTokens || (options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty)-»
 finally {
+«IF definesHiddenTokens-»
 	myHiddenTokenState.restore();
+«ENDIF-»
+«IF options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty-»
+	myUnorderedGroupState.restore();
+«ENDIF-»
 }
 «ENDIF-»
 
@@ -147,34 +162,60 @@ finally {
 «IF definesHiddenTokens-»
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(«FOREACH hiddenTokens AS hidden SEPARATOR ", "»"«hidden.ruleName()»"«ENDFOREACH-»);
 «ENDIF-» 
+«IF options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty-»
+		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+«FOREACH allContents().typeSelect(UnorderedGroup) AS group ITERATOR it-»
+			grammarAccess.«group.gaRuleElementAccessor()»«IF !it.lastIteration», «ENDIF»
+«ENDFOREACH-» 
+		);
+«ENDIF-»
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
     «EXPAND ebnf(options) FOR this.alternatives»
 ;
-«IF definesHiddenTokens-»
+«IF definesHiddenTokens || (options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty)-»
 finally {
+«IF definesHiddenTokens-»
 	myHiddenTokenState.restore();
+«ENDIF-»
+«IF options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty-»
+	myUnorderedGroupState.restore();
+«ENDIF-»
 }
 «ENDIF-»
 «ELSE»
 // Entry rule «entryRuleName()»
 «entryRuleName()» returns [String current=null] 
-«IF definesHiddenTokens-»
+«IF definesHiddenTokens || (options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty)-»
 	@init { 
+«IF definesHiddenTokens-»
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(«FOREACH hiddenTokens AS hidden SEPARATOR ", "»"«hidden.ruleName()»"«ENDFOREACH-»);
+«ENDIF-» 
+«IF options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty-»
+		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+«FOREACH allContents().typeSelect(UnorderedGroup) AS group ITERATOR it-»
+			grammarAccess.«group.gaRuleElementAccessor()»«IF !it.lastIteration», «ENDIF-»
+«ENDFOREACH-» 
+		);
+«ENDIF-»
 	}
 «ENDIF-»
 	:
 	{ currentNode = «EXPAND createCompositeNode» } 
-	 iv_«ruleName()»=«ruleName()» 
-	 { $current=$iv_«ruleName()».current.getText(); }  
-	 EOF 
+	iv_«ruleName()»=«ruleName()» 
+	{ $current=$iv_«ruleName()».current.getText(); }  
+	EOF 
 ;
-«IF definesHiddenTokens-»
+«IF definesHiddenTokens || (options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty)-»
 finally {
+«IF definesHiddenTokens-»
 	myHiddenTokenState.restore();
+«ENDIF-»
+«IF options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty-»
+	myUnorderedGroupState.restore();
+«ENDIF-»
 }
 «ENDIF-»
 
@@ -184,15 +225,27 @@ finally {
 «IF definesHiddenTokens-»
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(«FOREACH hiddenTokens AS hidden SEPARATOR ", "»"«hidden.ruleName()»"«ENDFOREACH-»);
 «ENDIF-» 
+«IF options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty-»
+		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+«FOREACH allContents().typeSelect(UnorderedGroup) AS group ITERATOR it-»
+			grammarAccess.«group.gaRuleElementAccessor()»«IF !it.lastIteration», «ENDIF»
+«ENDFOREACH-» 
+		);
+«ENDIF-»
     }
     @after { resetLookahead(); 
 	    lastConsumedNode = currentNode;
     }:
    «EXPAND dataTypeEbnf FOR this.alternatives»
     ;
-«IF definesHiddenTokens-»
+«IF definesHiddenTokens || (options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty)-»
 finally {
+«IF definesHiddenTokens-»
 	myHiddenTokenState.restore();
+«ENDIF-»
+«IF options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty-»
+	myUnorderedGroupState.restore();
+«ENDIF-»
 }
 «ENDIF-» 
 «ENDIF»
@@ -389,7 +442,7 @@ finally {
 	            $current = factory.create(grammarAccess.«assignment.containingParserRule().grammarElementAccess()».getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        «REM»the use of input.LT(-1) in the following line is a workaroudn for a bug of antlr, where assignements of alternative keywords are ignored when there are actions«ENDREM»
+	        «REM»the use of input.LT(-1) in the following line is a workaround for a bug of antlr, where assignments of alternative keywords are ignored when there are actions«ENDREM»
 	        try {
 	       		«assignment.setOrAdd()»($current, "«assignment.feature»", «
 	        		IF assignment.isBoolean()»true«
