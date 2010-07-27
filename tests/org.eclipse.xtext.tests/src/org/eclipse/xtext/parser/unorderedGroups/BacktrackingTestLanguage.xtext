@@ -1,0 +1,330 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.parser.unorderedGroups.BacktrackingTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate backtrackingTestLanguage "http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage"
+
+// Initially copied from B3.xtext rev 1029
+ 
+Model:
+	(units += Unit)*
+	;
+
+Unit : {Unit}
+	(documentation = DOCUMENTATION)?
+	'unit' (name=ID)? ('version' version = ID)?
+		('implements' implements += SimpleTypeRef (',' implements+=SimpleTypeRef)*)? 
+	'{'
+		( ('source' ':' sourceLocation = Path ';')?
+		& ('output' ':' outputLocation = Path ';')?
+		& ('provides' ':' (providedCapabilities += ProvidedCapability) ';')*
+		& ('requires' ':' (requiredCapabilities += AliasedRequiredCapability) ';')*
+		& ('requires' 'env' ':' (metaRequiredCapabilities += RequiredCapability) ';')*
+		& (functions += Function )*
+		)
+	'}';
+
+ProvidedCapability: {ProvidedCapability}
+	((nameSpace=ID) | "unit") 
+	('{'
+     	( 	
+     	  ('when' ':' condExpr = Expression ';')?
+	    & ("name" ':' name = ID ';')          
+	    & ("version" ':' version = ID ';')?
+	    )
+	'}')?
+;
+
+AliasedRequiredCapability: 
+	((nameSpace=ID) | "unit") name=ID ("as" alias = ID)?
+	('{'
+		( ('when' ':' condExpr=Expression ';')?  
+		& (greedy ?= "greedy" ';')? 
+		& ("requires-min" ':' min = INT ';' )? 
+		& ("requires-max" ':' max  = INT ';')?
+		& ("version" ':' versionRange = ID ';')?
+	  	)
+	'}')
+	;
+	
+RequiredCapability returns RequiredCapability : {RequiredCapability} 
+	((nameSpace=ID) | "unit") name=ID
+	('{'
+		( ('when' ':' condExpr=Expression ';')?  
+		& (greedy ?= "greedy" ';')? 
+		& ("requires-min" ':' min = INT ';' )? 
+		& ("requires-max" ':' max  = INT ';')?
+		& ("version" ':' versionRange = ID ';')?
+	  	)
+	'}')
+	;
+	
+Path hidden()
+	: STRING
+	| ('/')? QID ('/' QID)* ('/')? 
+	;
+
+ParameterList : 
+	parameters += FirstParameter ("," parameters += FirstParameter)*
+	;
+	
+FirstParameter returns Parameter 
+	: ClosureParameter
+	| Parameter
+	;
+	
+Parameter : 
+	expr = Expression 
+	;
+	
+ClosureParameter : 
+	(expr = ClosureExpression) 
+	;
+
+ParameterDeclaration : 
+	((type=TypeRef)? name = ID) 
+	;
+
+Function :
+	(documentation = DOCUMENTATION)?
+   	(visibility = ID)?
+   	(final ?= "final")?
+   	"function"
+   	(returnType = TypeRef)?
+   	name=ID 
+   	('(' (
+   		(parameters += ParameterDeclaration (',' parameters += ParameterDeclaration)* (',' varArgs?="..." parameters += ParameterDeclaration)?)
+   		| (varArgs ?= "..." parameters += ParameterDeclaration)
+   		)? ')' )?
+   	("when" guard = GuardExpression)?
+   	((':' funcExpr=Expression ';') | (funcExpr=BlockExpression))
+	;
+	
+GuardExpression:
+	(':' guardExpr = Expression ';') | (guardExpr = BlockExpression)
+	;
+
+AssignmentOperator 
+	: '=' | '+=' | '-=' | '*='	| '/=' | "%=" 
+	;
+	
+RelationalOperator 
+	: "~=" | "==" | "===" | "!=" | "!=="
+	| ">=" | "<=" | ">" | "<"
+	;
+
+TopLevelExpression returns Expression 
+	: VarDeclaration 
+	| ValDeclaration
+	| AssignmentExpression 
+	;
+
+Expression returns Expression
+	: AssignmentExpression 
+	;
+
+AssignmentExpression returns Expression :
+	  CachedExpression ({AssignmentExpression.leftExpr=current} 
+	 	functionName=AssignmentOperator rightExpr=AssignmentExpression)?
+	;	
+
+VarDeclaration returns Expression : {DefValue} 
+	(final ?= "final")? 
+	(( "var" |  type=TypeRef ) name=ID) 
+	('=' valueExpr = Expression)? 
+	;
+
+ValDeclaration returns Expression : {DefValue}
+	(final ?= "final")? 
+	immutable ?= "val" (type=TypeRef)? name=ID 
+	'=' valueExpr = Expression
+	;
+
+TypeRef  
+	: ClosureTypeRef 
+	| SimpleTypeRef
+	; 
+	
+SimpleTypeRef : 
+	rawType=ID 
+		('<' actualArgumentsList+=ID (',' actualArgumentsList+=ID)* '>' )?
+	;
+
+ClosureTypeRef : 
+	('('(
+		(parameterTypes += ID (',' parameterTypes += ID)* 
+			(',' varArgs ?= "..." parameterTypes += ID )?)
+		| 	(    varArgs ?= "..." parameterTypes += ID)
+		)? 
+	')' '=>' returnType = ID )
+	;
+
+CachedExpression returns Expression  : 
+	({CachedExpression} "cached" expr = OrExpression)
+	| OrExpression
+	;
+	
+OrExpression returns Expression :
+	AndExpression ({OrExpression.leftExpr=current} "||" rightExpr=AndExpression)*
+	;
+	
+AndExpression returns Expression :
+	RelationalExpression ({AndExpression.leftExpr=current} "&&" rightExpr=RelationalExpression)*
+	;
+
+RelationalExpression returns Expression :
+	AdditiveExpression ({BinaryOpExpression.leftExpr=current} 
+		functionName=RelationalOperator rightExpr=AdditiveExpression)*
+	;
+
+AdditiveExpression returns Expression :
+	MultiplicativeExpression ({BinaryOpExpression.leftExpr=current} functionName=("+" | "-") rightExpr=MultiplicativeExpression)*
+	;
+
+MultiplicativeExpression returns Expression :
+	SetExpression ({BinaryOpExpression.leftExpr=current} functionName=("*" | "/" | "%") rightExpr=SetExpression)*
+	;
+
+SetExpression returns Expression:
+	UnaryOrInfixExpression ({BinaryOpExpression.leftExpr=current} functionName=".." rightExpr=UnaryOrInfixExpression)*
+	;
+
+UnaryOrInfixExpression returns Expression
+	: PostopExpression 
+	| UnaryExpression
+	| PreopExpression
+	; 
+	
+UnaryExpression returns Expression : {UnaryOpExpression} 
+	functionName=("!" | "-") expr=InfixExpression
+	;
+
+PreopExpression returns Expression : {UnaryPreOpExpression}
+	functionName=("++" | "--") expr=InfixExpression
+	;
+
+PostopExpression returns Expression :
+	InfixExpression ({UnaryPostOpExpression.expr=current} functionName = ("--" | "++"))?
+	;
+
+InfixExpression returns Expression :
+	CallExpression ( 
+	  	({CallFeature.funcExpr=current} "." name=ID  "(" (parameterList = ParameterList)? ")")
+	  |	({AtExpression.objExpr=current} '[' indexExpr=Expression ']' )
+	  | ({FeatureExpression.objExpr=current} "." featureName=ID)
+	)*;
+	
+CallExpression returns Expression : 
+	PrimaryExpression ({CallFunction.funcExpr=current}"(" (parameterList = ParameterList)? ")")*
+	;
+		
+PrimaryExpression returns Expression
+	: FeatureCall
+	| ConstructorCallExpression
+	| Value
+	| Literal 
+	| KeywordVariables
+	| ParanthesizedExpression
+	| BlockExpression
+	| WithExpression
+	| WithContextExpression
+	;
+
+WithExpression returns WithExpression : 
+		'with'
+		( referencedAdvice += ID (',' referencedAdvice += ID)* )? 
+		( (':' funcExpr = Expression ) | ('{' funcExpr = BlockExpressionWithoutBrackets '}' ) )
+		;
+		
+WithContextExpression returns WithContextExpression :
+	"with" "context" expr = Expression ("as" alias = ID )? contextBlock = BlockExpression
+	;	
+
+BlockExpression returns Expression: {ChainedExpression} 
+	'{' (expressions += TopLevelExpression ';')* '}' 
+	;
+
+Value returns  Expression : {VariableExpression} 
+	name = ID 
+	;
+	
+KeywordVariables returns  Expression : {VariableExpression} 
+	name = ("input" | "output" | "source" | "properties" | "builder" | "unit" | "this"	)
+	;
+
+FeatureCall returns Expression :
+	OperationCall
+	| ({CallFeature} "." name=ID  "(" (parameterList = ParameterList)? ")")
+	| ({FeatureExpression} "." featureName=ID)
+	;
+	
+OperationCall returns CallExpression : {CallNamedFunction}
+	name=ID 
+	'(' (parameterList = ParameterList)? ')' 
+	;
+
+ConstructorCallExpression returns Expression : {CreateExpression} 
+	"new" typeExpr=ID 
+	('(' (parameterList=ParameterList)? ')')?
+	("as" alias=ID)? 
+	(contextBlock = InitializationBlockExpression)?
+	;
+InitializationBlockExpression returns Expression : {ChainedExpression}
+	'{'  expressions += InitializationExpression ';' '}'
+	;
+
+InitializationExpression returns Expression : {AssignmentExpression}
+	leftExpr = FeatureOfThis functionName=":" rightExpr = Expression
+	;
+FeatureOfThis returns Expression : {FeatureExpression}
+	featureName = ID 
+	; 
+
+Literal returns Expression
+	: ValueLiteral
+	| LiteralFunction
+	;
+		
+LiteralFunction returns Expression :
+	'{' ClosureExpression '}'
+	;
+
+ClosureExpression returns Expression: {Function} 
+	('<' returnType=TypeRef '>')?
+	( '|'?
+	(parameters += ParameterDeclaration (',' parameters += ParameterDeclaration)* 
+		(',' varArgs?="..." parameters += ParameterDeclaration)?)
+	| 	(    varArgs?="..." parameters += ParameterDeclaration)
+	)? 
+	'|' funcExpr=OneOrManyExpressions
+	;
+
+OneOrManyExpressions returns Expression
+	: BlockExpressionWithoutBrackets
+	| Expression
+	;
+	
+BlockExpressionWithoutBrackets returns Expression : {ChainedExpression} 
+	(expressions += TopLevelExpression ';')+ 
+	;
+	
+ValueLiteral: 
+	value = STRING
+	;
+	
+ParanthesizedExpression returns Expression : 
+	'(' Expression ')'
+	;	
+
+// Qualified name
+QID hidden(): ID (INT|HEX|ID)* ('.' ID (INT|HEX|ID)*)* ; 
+
+terminal DOCUMENTATION : '/**' -> '*/' ;
+terminal HEX : '0' ('x'|'X')(('0'..'9')|('a'..'f')|('A'..'F'))+ ;
+ 

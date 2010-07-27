@@ -14,13 +14,15 @@ import java.util.regex.Pattern;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class BacktrackingGuardForUnorderedGroupsRemover {
-	
+
+//	if ( backtracking==0 ) {
+//  	getUnorderedGroupHelper().enter(grammarAccess.getModelAccess().getUnorderedGroup_1_0_1());
+//      -(1)--------------------------------------------------------------------------------------
+//	}
 	public static final Pattern GUARDED_GROUP_PATTERN = Pattern.compile(
 			"if\\s*\\(\\s*backtracking\\s*==\\s*0\\s*\\)\\s*\\{\\s*(getUnorderedGroupHelper().\\S+(,\\s*\\S+)?)\\s*\\}");
 	
-//	if ( backtracking==0 ) {
-//        getUnorderedGroupHelper().enter(grammarAccess.getModelAccess().getUnorderedGroup_1_0_1()); 
-//  }
+
 
 	private final String content;
 	

@@ -403,5 +403,9 @@ Export-Package: org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.util,
  org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage,
  org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.impl,
- org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.util
+ org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.util,
+ org.eclipse.xtext.parser.unorderedGroups.parser.antlr.lexer,
+ org.eclipse.xtext.parser.unorderedGroups.backtrackingTestLanguage,
+ org.eclipse.xtext.parser.unorderedGroups.backtrackingTestLanguage.impl,
+ org.eclipse.xtext.parser.unorderedGroups.backtrackingTestLanguage.util
 
