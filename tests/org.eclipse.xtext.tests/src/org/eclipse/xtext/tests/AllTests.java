@@ -118,6 +118,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.DynamicChannelTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.HiddensTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.ParserTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.BacktrackingParserExTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.BacktrackingParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.ConcreteSyntaxValidatorTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.ErrorMessagesTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.GrammarParserTest.class);
