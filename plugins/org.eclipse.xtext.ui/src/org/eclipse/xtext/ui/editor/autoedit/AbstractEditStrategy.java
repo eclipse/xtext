@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor.autoedit;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
 
@@ -18,24 +19,50 @@ import org.eclipse.jface.text.IDocument;
 public abstract class AbstractEditStrategy implements IAutoEditStrategy{
 	
 	private final static Logger log = Logger.getLogger(AbstractEditStrategy.class);
+
+	/**
+	 * @deprecated use {@link #count(String, String)} instead.
+	 */
+	@Deprecated
+	public int count(String toFind, StringBuilder searchMe) throws BadLocationException {
+		return count(toFind, searchMe.toString());
+	}
 	
-	public int count(String toFind, StringBuilder textToSearch) throws BadLocationException {
+	public int count(String toFind, String searchMe) throws BadLocationException {
 		int count = 0;
 		int index = -toFind.length();
 		while (true) {
-			int newIndex = textToSearch.substring(index + toFind.length()).indexOf(toFind);
-			if (newIndex == -1) {
+			index = searchMe.indexOf(toFind, index + toFind.length());
+			if (index == -1) {
 				return count;
 			} else {
-				int absoluteIndex = index + newIndex;
 				count++;
-				index = absoluteIndex + toFind.length();
 			}
 		}
 	}
 	
+	/**
+	 * @deprecated use {@link #getDocumentContent(IDocument)}
+	 */
+	@Deprecated
 	protected StringBuilder getTextToScan(IDocument document) {
 		return new StringBuilder(document.get());
+	}
+	
+	protected String getDocumentContent(IDocument document, DocumentCommand command) {
+		if (command.length == 0)
+			return document.get();
+		try {
+			StringBuilder result = new StringBuilder(document.getLength() + command.length);
+			if (command.offset > 0)
+				result.append(document.get(0, command.offset));
+			if (command.offset + command.length < document.getLength())
+				result.append(document.get(command.offset + command.length, document.getLength() - command.offset + command.length));
+			return result.toString();
+		} catch(BadLocationException ex) {
+			log.error("Exception in AutoEditStrategy", ex);
+			return document.get();
+		}
 	}
 	
 	protected boolean isIdentifierPart(IDocument doc, int offset) {

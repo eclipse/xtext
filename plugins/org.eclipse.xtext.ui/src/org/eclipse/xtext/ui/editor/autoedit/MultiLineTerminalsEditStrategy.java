@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.autoedit;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IDocument;
@@ -20,6 +21,8 @@ import com.google.inject.Inject;
  */
 public class MultiLineTerminalsEditStrategy extends AbstractEditStrategy {
 
+	private final static Logger log = Logger.getLogger(MultiLineTerminalsEditStrategy.class);
+	
 	private String leftTerminal, rightTerminal, indentationString;
 
 	@Inject
@@ -41,14 +44,16 @@ public class MultiLineTerminalsEditStrategy extends AbstractEditStrategy {
 						|| (lineStartsWith(document, command.offset, indentationString))) {
 					command.text = concat(originalText, indentationString);
 					command.caretOffset = command.offset + command.text.length();
-					int opening = count(leftTerminal, getTextToScan(document));
-					int closing = count(rightTerminal, getTextToScan(document));
+					String documentContent = getDocumentContent(document, command);
+					int opening = count(leftTerminal, documentContent);
+					int closing = count(rightTerminal, documentContent);
 					if (opening > closing)
 						command.text = command.text + originalText + rightTerminal;
 					command.shiftsCaret = false;
 				}
 			}
-		} catch (BadLocationException e) {
+		} catch (BadLocationException ex) {
+			log.error("Exception in AutoEditStrategy", ex);
 		}
 	}
 
@@ -75,7 +80,8 @@ public class MultiLineTerminalsEditStrategy extends AbstractEditStrategy {
 	}
 
 	private boolean isAfter(IDocument doc, int offset, String leftTerminal) throws BadLocationException {
-		return doc.get(offset - leftTerminal.length(), leftTerminal.length()).equals(leftTerminal);
+		return doc.getLength() >= offset && offset >= leftTerminal.length() &&
+			doc.get(offset - leftTerminal.length(), leftTerminal.length()).equals(leftTerminal);
 	}
 
 }
