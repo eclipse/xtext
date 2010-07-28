@@ -29,6 +29,9 @@ public class Bug282355Test extends AbstractXtextTests {
 		assertEquals(2, model.getEnums().size());
 		assertEquals(0, model.getAbs().size());
 		assertEquals(1, model.getXbs().size());
+		assertEquals(0, model.getAs().size());
+		assertEquals(0, model.getYs().size());
+		assertEquals(0, model.getYcs().size());
 	}
 
 	public void testBug282355_02() throws Exception {
@@ -38,6 +41,9 @@ public class Bug282355Test extends AbstractXtextTests {
 		assertEquals(0, model.getEnums().size());
 		assertEquals(0, model.getAbs().size());
 		assertEquals(1, model.getXbs().size());
+		assertEquals(0, model.getAs().size());
+		assertEquals(0, model.getYs().size());
+		assertEquals(0, model.getYcs().size());
 	}
 	
 	public void testBug282355_03() throws Exception {
@@ -47,6 +53,9 @@ public class Bug282355Test extends AbstractXtextTests {
 		assertEquals(0, model.getEnums().size());
 		assertEquals(1, model.getAbs().size());
 		assertEquals(0, model.getXbs().size());
+		assertEquals(0, model.getAs().size());
+		assertEquals(0, model.getYs().size());
+		assertEquals(0, model.getYcs().size());
 	}
 	
 	public void testBug282355_04() throws Exception {
@@ -56,6 +65,9 @@ public class Bug282355Test extends AbstractXtextTests {
 		assertEquals(2, model.getEnums().size());
 		assertEquals(1, model.getAbs().size());
 		assertEquals(1, model.getXbs().size());
+		assertEquals(0, model.getAs().size());
+		assertEquals(0, model.getYs().size());
+		assertEquals(0, model.getYcs().size());
 	}
 	
 	public void testBug282355_05() throws Exception {
@@ -65,5 +77,68 @@ public class Bug282355Test extends AbstractXtextTests {
 		assertEquals(2, model.getEnums().size());
 		assertEquals(1, model.getAbs().size());
 		assertEquals(1, model.getXbs().size());
+		assertEquals(0, model.getAs().size());
+		assertEquals(0, model.getYs().size());
+		assertEquals(0, model.getYcs().size());
+	}
+	
+	public void testParse_Yc_01() throws Exception {
+		Resource resource = getResourceFromString("Abc Efg Yc");
+		assertTrue(resource.getErrors().isEmpty());
+		Model model = (Model) resource.getContents().get(0);
+		assertEquals(2, model.getEnums().size());
+		assertEquals(0, model.getAbs().size());
+		assertEquals(0, model.getXbs().size());
+		assertEquals(0, model.getAs().size());
+		assertEquals(0, model.getYs().size());
+		assertEquals(1, model.getYcs().size());
+	}
+	
+	public void testParse_Yc_02() throws Exception {
+		Resource resource = getResourceFromString("YcYc");
+		assertTrue(resource.getErrors().isEmpty());
+		Model model = (Model) resource.getContents().get(0);
+		assertEquals(0, model.getEnums().size());
+		assertEquals(0, model.getAbs().size());
+		assertEquals(0, model.getXbs().size());
+		assertEquals(0, model.getAs().size());
+		assertEquals(0, model.getYs().size());
+		assertEquals(2, model.getYcs().size());
+	}
+	
+	public void testParse_YcAA() throws Exception {
+		Resource resource = getResourceFromString("YcAA");
+		assertTrue(resource.getErrors().isEmpty());
+		Model model = (Model) resource.getContents().get(0);
+		assertEquals(0, model.getEnums().size());
+		assertEquals(0, model.getAbs().size());
+		assertEquals(0, model.getXbs().size());
+		assertEquals(2, model.getAs().size());
+		assertEquals(0, model.getYs().size());
+		assertEquals(1, model.getYcs().size());
+	}
+	
+	public void testParse_YA() throws Exception {
+		Resource resource = getResourceFromString("YA");
+		assertTrue(resource.getErrors().isEmpty());
+		Model model = (Model) resource.getContents().get(0);
+		assertEquals(0, model.getEnums().size());
+		assertEquals(0, model.getAbs().size());
+		assertEquals(0, model.getXbs().size());
+		assertEquals(1, model.getAs().size());
+		assertEquals(1, model.getYs().size());
+		assertEquals(0, model.getYcs().size());
+	}
+	
+	public void testParse_A() throws Exception {
+		Resource resource = getResourceFromString("A");
+		assertTrue(resource.getErrors().isEmpty());
+		Model model = (Model) resource.getContents().get(0);
+		assertEquals(0, model.getEnums().size());
+		assertEquals(0, model.getAbs().size());
+		assertEquals(0, model.getXbs().size());
+		assertEquals(1, model.getAs().size());
+		assertEquals(0, model.getYs().size());
+		assertEquals(0, model.getYcs().size());
 	}
 }

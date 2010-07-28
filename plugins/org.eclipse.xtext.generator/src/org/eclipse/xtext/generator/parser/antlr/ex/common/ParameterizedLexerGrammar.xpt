@@ -29,6 +29,15 @@ options {
 	backtrack=true;
 	memoize=true;
 }
+
+tokens {
+«FOREACH allParserRules().select(e|isCalled(this,e)).union(allEnumRules().select(e|isCalled(this,e))).allContents().typeSelect(Keyword).collect(e|e.value).toSet().sortBy(e|e).sortBy(e|e.length) AS kw-»
+	«getKeywordRuleName(kw)»;
+«ENDFOREACH-»
+«FOREACH allTerminalRules() AS rule-»
+	«rule.ruleName()»;
+«ENDFOREACH-»
+}
 «ENDIF-»
 
 @header {
@@ -66,29 +75,31 @@ fragment «ruleName()» : ;
 «ENDDEFINE»
 
 «DEFINE backtrackingAntlrRules(AntlrFragmentHelper helper) FOR Grammar»
-«EXPAND backtrackingKeywords»
+«EXPAND backtrackingKeywords(helper)»
+// Rules duplicated to allow inter-rule references
 «EXPAND backtrackingRule(helper) FOREACH allTerminalRules()»
 «ENDDEFINE»
 
-«DEFINE backtrackingKeywords FOR Grammar»
+«DEFINE backtrackingKeywords(AntlrFragmentHelper helper) FOR Grammar»
 SYNTHETIC_ALL_KEYWORDS :
-«FOREACH allParserRules().select(e|isCalled(this,e)).union(allEnumRules().select(e|isCalled(this,e))).allContents().typeSelect(Keyword).collect(e|e.value).toSet().sortBy(e|e).sortBy(e|e.length) AS kw ITERATOR it»
+«FOREACH allParserRules().select(e|isCalled(this,e)).union(allEnumRules().select(e|isCalled(this,e))).allContents().typeSelect(Keyword).collect(e|e.value).toSet().sortBy(e|e).sortBy(e|e.length) AS kw ITERATOR it-»
 	(FRAGMENT_«getKeywordRuleName(kw)»)=> FRAGMENT_«getKeywordRuleName(kw)» {$type = «getKeywordRuleName(kw)»; } «IF !it.lastIteration || !allTerminalRules().isEmpty»|
 	«ENDIF-» 
 «ENDFOREACH-»
 «FOREACH allTerminalRules() AS rule ITERATOR  it-»
+«IF !helper.isSyntheticTerminalRule(rule)-»
 	(FRAGMENT_«rule.ruleName()»)=> FRAGMENT_«rule.ruleName()» {$type = «rule.ruleName()»; } «IF !it.lastIteration»|
+«ENDIF-»
 «ENDIF-»
 «ENDFOREACH»;
 «FOREACH allParserRules().select(e|isCalled(this,e)).union(allEnumRules().select(e|isCalled(this,e))).allContents().typeSelect(Keyword).collect(e|e.value).toSet().sortBy(e|e).sortBy(e|e.length) AS kw»
-fragment «getKeywordRuleName(kw)» : '«kw.toAntlrString()»';
 fragment FRAGMENT_«getKeywordRuleName(kw)» : '«kw.toAntlrString()»';
 «ENDFOREACH»
 «ENDDEFINE»
 
 «DEFINE backtrackingRule(AntlrFragmentHelper helper) FOR TerminalRule»
-fragment «ruleName()» : ;
 «IF !helper.isSyntheticTerminalRule(this)-»
+fragment «ruleName()» : FRAGMENT_«ruleName()»;
 fragment FRAGMENT_«ruleName()» : «toLexerBody()»;
 «ENDIF-»
 «ENDDEFINE»
