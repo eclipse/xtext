@@ -6,10 +6,16 @@
   <eClassifiers xsi:type="ecore:EClass" name="Model">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="enums" unique="false" upperBound="-1"
         eType="#//EnumName"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ycs" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="abs" upperBound="-1" eType="#//Ab"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="xbs" upperBound="-1" eType="#//Xb"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ys" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="as" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Ab">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

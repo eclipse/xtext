@@ -13,27 +13,33 @@ import java.util.Map;
 import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
-    public static final int FRAGMENT_RULE_CHARA=6;
-    public static final int FRAGMENT_RULE_CHARX=8;
-    public static final int FRAGMENT_RULE_SL_COMMENT=10;
-    public static final int KEYWORD_1=12;
-    public static final int KEYWORD_2=13;
-    public static final int RULE_CHARA=14;
-    public static final int RULE_CHARX=16;
-    public static final int FRAGMENT_KEYWORD_2=5;
-    public static final int RULE_WS=17;
+    public static final int FRAGMENT_RULE_CHARA=16;
+    public static final int RULE_YC=9;
+    public static final int FRAGMENT_RULE_CHARX=18;
+    public static final int FRAGMENT_RULE_SL_COMMENT=23;
+    public static final int KEYWORD_1=4;
+    public static final int RULE_CHARY=10;
+    public static final int FRAGMENT_RULE_CHARY=20;
+    public static final int KEYWORD_2=5;
+    public static final int FRAGMENT_RULE_YC=19;
+    public static final int FRAGMENT_RULE_CHARC=21;
+    public static final int RULE_CHARA=6;
+    public static final int RULE_CHARX=8;
+    public static final int RULE_CHARC=11;
+    public static final int FRAGMENT_KEYWORD_2=15;
+    public static final int RULE_WS=12;
     public static final int EOF=-1;
-    public static final int Tokens=19;
-    public static final int SYNTHETIC_ALL_KEYWORDS=11;
-    public static final int RULE_SL_COMMENT=18;
-    public static final int FRAGMENT_KEYWORD_1=4;
-    public static final int FRAGMENT_RULE_CHARB=7;
-    public static final int RULE_CHARB=15;
-    public static final int FRAGMENT_RULE_WS=9;
+    public static final int Tokens=25;
+    public static final int SYNTHETIC_ALL_KEYWORDS=24;
+    public static final int RULE_SL_COMMENT=13;
+    public static final int FRAGMENT_KEYWORD_1=14;
+    public static final int FRAGMENT_RULE_CHARB=17;
+    public static final int RULE_CHARB=7;
+    public static final int FRAGMENT_RULE_WS=22;
     public InternalBacktrackingLexerTestLanguageLexer() {;} 
     public InternalBacktrackingLexerTestLanguageLexer(CharStream input) {
         super(input);
-        ruleMemo = new HashMap[32+1];
+        ruleMemo = new HashMap[39+1];
      }
     public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g"; }
 
@@ -43,8 +49,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
         try {
             int _type = SYNTHETIC_ALL_KEYWORDS;
             if ( backtracking>0 && alreadyParsedRule(input, 1) ) { return ; }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:22:24: ( ( FRAGMENT_KEYWORD_1 )=> FRAGMENT_KEYWORD_1 | ( FRAGMENT_KEYWORD_2 )=> FRAGMENT_KEYWORD_2 | ( FRAGMENT_RULE_CHARA )=> FRAGMENT_RULE_CHARA | ( FRAGMENT_RULE_CHARB )=> FRAGMENT_RULE_CHARB | ( FRAGMENT_RULE_CHARX )=> FRAGMENT_RULE_CHARX | ( FRAGMENT_RULE_WS )=> FRAGMENT_RULE_WS | ( FRAGMENT_RULE_SL_COMMENT )=> FRAGMENT_RULE_SL_COMMENT )
-            int alt1=7;
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:35:24: ( ( FRAGMENT_KEYWORD_1 )=> FRAGMENT_KEYWORD_1 | ( FRAGMENT_KEYWORD_2 )=> FRAGMENT_KEYWORD_2 | ( FRAGMENT_RULE_CHARA )=> FRAGMENT_RULE_CHARA | ( FRAGMENT_RULE_CHARB )=> FRAGMENT_RULE_CHARB | ( FRAGMENT_RULE_CHARX )=> FRAGMENT_RULE_CHARX | ( FRAGMENT_RULE_YC )=> FRAGMENT_RULE_YC | ( FRAGMENT_RULE_CHARY )=> FRAGMENT_RULE_CHARY | ( FRAGMENT_RULE_CHARC )=> FRAGMENT_RULE_CHARC | ( FRAGMENT_RULE_WS )=> FRAGMENT_RULE_WS | ( FRAGMENT_RULE_SL_COMMENT )=> FRAGMENT_RULE_SL_COMMENT )
+            int alt1=10;
             int LA1_0 = input.LA(1);
 
             if ( (LA1_0=='A') ) {
@@ -65,22 +71,34 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
             else if ( (LA1_0=='X') && (synpred5())) {
                 alt1=5;
             }
-            else if ( ((LA1_0>='\t' && LA1_0<='\n')||LA1_0=='\r'||LA1_0==' ') && (synpred6())) {
-                alt1=6;
+            else if ( (LA1_0=='Y') ) {
+                int LA1_5 = input.LA(2);
+
+                if ( (LA1_5=='c') && (synpred6())) {
+                    alt1=6;
+                }
+                else {
+                    alt1=7;}
             }
-            else if ( (LA1_0=='/') && (synpred7())) {
-                alt1=7;
+            else if ( (LA1_0=='c') && (synpred8())) {
+                alt1=8;
+            }
+            else if ( ((LA1_0>='\t' && LA1_0<='\n')||LA1_0=='\r'||LA1_0==' ') && (synpred9())) {
+                alt1=9;
+            }
+            else if ( (LA1_0=='/') && (synpred10())) {
+                alt1=10;
             }
             else {
                 if (backtracking>0) {failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("22:1: SYNTHETIC_ALL_KEYWORDS : ( ( FRAGMENT_KEYWORD_1 )=> FRAGMENT_KEYWORD_1 | ( FRAGMENT_KEYWORD_2 )=> FRAGMENT_KEYWORD_2 | ( FRAGMENT_RULE_CHARA )=> FRAGMENT_RULE_CHARA | ( FRAGMENT_RULE_CHARB )=> FRAGMENT_RULE_CHARB | ( FRAGMENT_RULE_CHARX )=> FRAGMENT_RULE_CHARX | ( FRAGMENT_RULE_WS )=> FRAGMENT_RULE_WS | ( FRAGMENT_RULE_SL_COMMENT )=> FRAGMENT_RULE_SL_COMMENT );", 1, 0, input);
+                    new NoViableAltException("35:1: SYNTHETIC_ALL_KEYWORDS : ( ( FRAGMENT_KEYWORD_1 )=> FRAGMENT_KEYWORD_1 | ( FRAGMENT_KEYWORD_2 )=> FRAGMENT_KEYWORD_2 | ( FRAGMENT_RULE_CHARA )=> FRAGMENT_RULE_CHARA | ( FRAGMENT_RULE_CHARB )=> FRAGMENT_RULE_CHARB | ( FRAGMENT_RULE_CHARX )=> FRAGMENT_RULE_CHARX | ( FRAGMENT_RULE_YC )=> FRAGMENT_RULE_YC | ( FRAGMENT_RULE_CHARY )=> FRAGMENT_RULE_CHARY | ( FRAGMENT_RULE_CHARC )=> FRAGMENT_RULE_CHARC | ( FRAGMENT_RULE_WS )=> FRAGMENT_RULE_WS | ( FRAGMENT_RULE_SL_COMMENT )=> FRAGMENT_RULE_SL_COMMENT );", 1, 0, input);
 
                 throw nvae;
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:24:2: ( FRAGMENT_KEYWORD_1 )=> FRAGMENT_KEYWORD_1
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:36:2: ( FRAGMENT_KEYWORD_1 )=> FRAGMENT_KEYWORD_1
                     {
                     mFRAGMENT_KEYWORD_1(); if (failed) return ;
                     if ( backtracking==0 ) {
@@ -90,7 +108,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:26:2: ( FRAGMENT_KEYWORD_2 )=> FRAGMENT_KEYWORD_2
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:37:2: ( FRAGMENT_KEYWORD_2 )=> FRAGMENT_KEYWORD_2
                     {
                     mFRAGMENT_KEYWORD_2(); if (failed) return ;
                     if ( backtracking==0 ) {
@@ -100,7 +118,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:27:2: ( FRAGMENT_RULE_CHARA )=> FRAGMENT_RULE_CHARA
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:38:2: ( FRAGMENT_RULE_CHARA )=> FRAGMENT_RULE_CHARA
                     {
                     mFRAGMENT_RULE_CHARA(); if (failed) return ;
                     if ( backtracking==0 ) {
@@ -110,7 +128,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:28:2: ( FRAGMENT_RULE_CHARB )=> FRAGMENT_RULE_CHARB
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:39:2: ( FRAGMENT_RULE_CHARB )=> FRAGMENT_RULE_CHARB
                     {
                     mFRAGMENT_RULE_CHARB(); if (failed) return ;
                     if ( backtracking==0 ) {
@@ -120,7 +138,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:29:2: ( FRAGMENT_RULE_CHARX )=> FRAGMENT_RULE_CHARX
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:40:2: ( FRAGMENT_RULE_CHARX )=> FRAGMENT_RULE_CHARX
                     {
                     mFRAGMENT_RULE_CHARX(); if (failed) return ;
                     if ( backtracking==0 ) {
@@ -130,7 +148,37 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:30:2: ( FRAGMENT_RULE_WS )=> FRAGMENT_RULE_WS
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:41:2: ( FRAGMENT_RULE_YC )=> FRAGMENT_RULE_YC
+                    {
+                    mFRAGMENT_RULE_YC(); if (failed) return ;
+                    if ( backtracking==0 ) {
+                      _type = RULE_YC; 
+                    }
+
+                    }
+                    break;
+                case 7 :
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:42:2: ( FRAGMENT_RULE_CHARY )=> FRAGMENT_RULE_CHARY
+                    {
+                    mFRAGMENT_RULE_CHARY(); if (failed) return ;
+                    if ( backtracking==0 ) {
+                      _type = RULE_CHARY; 
+                    }
+
+                    }
+                    break;
+                case 8 :
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:43:2: ( FRAGMENT_RULE_CHARC )=> FRAGMENT_RULE_CHARC
+                    {
+                    mFRAGMENT_RULE_CHARC(); if (failed) return ;
+                    if ( backtracking==0 ) {
+                      _type = RULE_CHARC; 
+                    }
+
+                    }
+                    break;
+                case 9 :
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:44:2: ( FRAGMENT_RULE_WS )=> FRAGMENT_RULE_WS
                     {
                     mFRAGMENT_RULE_WS(); if (failed) return ;
                     if ( backtracking==0 ) {
@@ -139,8 +187,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
                     }
                     break;
-                case 7 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:31:2: ( FRAGMENT_RULE_SL_COMMENT )=> FRAGMENT_RULE_SL_COMMENT
+                case 10 :
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:45:2: ( FRAGMENT_RULE_SL_COMMENT )=> FRAGMENT_RULE_SL_COMMENT
                     {
                     mFRAGMENT_RULE_SL_COMMENT(); if (failed) return ;
                     if ( backtracking==0 ) {
@@ -159,33 +207,13 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     }
     // $ANTLR end SYNTHETIC_ALL_KEYWORDS
 
-    // $ANTLR start KEYWORD_1
-    public final void mKEYWORD_1() throws RecognitionException {
-        int KEYWORD_1_StartIndex = input.index();
-        try {
-            if ( backtracking>0 && alreadyParsedRule(input, 2) ) { return ; }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:33:20: ( 'Abc' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:33:22: 'Abc'
-            {
-            match("Abc"); if (failed) return ;
-
-
-            }
-
-        }
-        finally {
-            if ( backtracking>0 ) { memoize(input, 2, KEYWORD_1_StartIndex); }
-        }
-    }
-    // $ANTLR end KEYWORD_1
-
     // $ANTLR start FRAGMENT_KEYWORD_1
     public final void mFRAGMENT_KEYWORD_1() throws RecognitionException {
         int FRAGMENT_KEYWORD_1_StartIndex = input.index();
         try {
-            if ( backtracking>0 && alreadyParsedRule(input, 3) ) { return ; }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:34:29: ( 'Abc' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:34:31: 'Abc'
+            if ( backtracking>0 && alreadyParsedRule(input, 2) ) { return ; }
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:47:29: ( 'Abc' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:47:31: 'Abc'
             {
             match("Abc"); if (failed) return ;
 
@@ -194,38 +222,18 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
         }
         finally {
-            if ( backtracking>0 ) { memoize(input, 3, FRAGMENT_KEYWORD_1_StartIndex); }
+            if ( backtracking>0 ) { memoize(input, 2, FRAGMENT_KEYWORD_1_StartIndex); }
         }
     }
     // $ANTLR end FRAGMENT_KEYWORD_1
-
-    // $ANTLR start KEYWORD_2
-    public final void mKEYWORD_2() throws RecognitionException {
-        int KEYWORD_2_StartIndex = input.index();
-        try {
-            if ( backtracking>0 && alreadyParsedRule(input, 4) ) { return ; }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:36:20: ( 'Efg' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:36:22: 'Efg'
-            {
-            match("Efg"); if (failed) return ;
-
-
-            }
-
-        }
-        finally {
-            if ( backtracking>0 ) { memoize(input, 4, KEYWORD_2_StartIndex); }
-        }
-    }
-    // $ANTLR end KEYWORD_2
 
     // $ANTLR start FRAGMENT_KEYWORD_2
     public final void mFRAGMENT_KEYWORD_2() throws RecognitionException {
         int FRAGMENT_KEYWORD_2_StartIndex = input.index();
         try {
-            if ( backtracking>0 && alreadyParsedRule(input, 5) ) { return ; }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:37:29: ( 'Efg' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:37:31: 'Efg'
+            if ( backtracking>0 && alreadyParsedRule(input, 3) ) { return ; }
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:49:29: ( 'Efg' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:49:31: 'Efg'
             {
             match("Efg"); if (failed) return ;
 
@@ -234,7 +242,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
         }
         finally {
-            if ( backtracking>0 ) { memoize(input, 5, FRAGMENT_KEYWORD_2_StartIndex); }
+            if ( backtracking>0 ) { memoize(input, 3, FRAGMENT_KEYWORD_2_StartIndex); }
         }
     }
     // $ANTLR end FRAGMENT_KEYWORD_2
@@ -243,15 +251,17 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     public final void mRULE_CHARA() throws RecognitionException {
         int RULE_CHARA_StartIndex = input.index();
         try {
-            if ( backtracking>0 && alreadyParsedRule(input, 6) ) { return ; }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:41:21: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:41:23: 
+            if ( backtracking>0 && alreadyParsedRule(input, 4) ) { return ; }
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:54:21: ( FRAGMENT_RULE_CHARA )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:54:23: FRAGMENT_RULE_CHARA
             {
+            mFRAGMENT_RULE_CHARA(); if (failed) return ;
+
             }
 
         }
         finally {
-            if ( backtracking>0 ) { memoize(input, 6, RULE_CHARA_StartIndex); }
+            if ( backtracking>0 ) { memoize(input, 4, RULE_CHARA_StartIndex); }
         }
     }
     // $ANTLR end RULE_CHARA
@@ -260,9 +270,9 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     public final void mFRAGMENT_RULE_CHARA() throws RecognitionException {
         int FRAGMENT_RULE_CHARA_StartIndex = input.index();
         try {
-            if ( backtracking>0 && alreadyParsedRule(input, 7) ) { return ; }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:42:30: ( 'A' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:42:32: 'A'
+            if ( backtracking>0 && alreadyParsedRule(input, 5) ) { return ; }
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:55:30: ( 'A' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:55:32: 'A'
             {
             match('A'); if (failed) return ;
 
@@ -270,7 +280,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
         }
         finally {
-            if ( backtracking>0 ) { memoize(input, 7, FRAGMENT_RULE_CHARA_StartIndex); }
+            if ( backtracking>0 ) { memoize(input, 5, FRAGMENT_RULE_CHARA_StartIndex); }
         }
     }
     // $ANTLR end FRAGMENT_RULE_CHARA
@@ -279,15 +289,17 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     public final void mRULE_CHARB() throws RecognitionException {
         int RULE_CHARB_StartIndex = input.index();
         try {
-            if ( backtracking>0 && alreadyParsedRule(input, 8) ) { return ; }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:44:21: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:44:23: 
+            if ( backtracking>0 && alreadyParsedRule(input, 6) ) { return ; }
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:57:21: ( FRAGMENT_RULE_CHARB )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:57:23: FRAGMENT_RULE_CHARB
             {
+            mFRAGMENT_RULE_CHARB(); if (failed) return ;
+
             }
 
         }
         finally {
-            if ( backtracking>0 ) { memoize(input, 8, RULE_CHARB_StartIndex); }
+            if ( backtracking>0 ) { memoize(input, 6, RULE_CHARB_StartIndex); }
         }
     }
     // $ANTLR end RULE_CHARB
@@ -296,9 +308,9 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     public final void mFRAGMENT_RULE_CHARB() throws RecognitionException {
         int FRAGMENT_RULE_CHARB_StartIndex = input.index();
         try {
-            if ( backtracking>0 && alreadyParsedRule(input, 9) ) { return ; }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:45:30: ( 'b' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:45:32: 'b'
+            if ( backtracking>0 && alreadyParsedRule(input, 7) ) { return ; }
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:58:30: ( 'b' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:58:32: 'b'
             {
             match('b'); if (failed) return ;
 
@@ -306,7 +318,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
         }
         finally {
-            if ( backtracking>0 ) { memoize(input, 9, FRAGMENT_RULE_CHARB_StartIndex); }
+            if ( backtracking>0 ) { memoize(input, 7, FRAGMENT_RULE_CHARB_StartIndex); }
         }
     }
     // $ANTLR end FRAGMENT_RULE_CHARB
@@ -315,15 +327,17 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     public final void mRULE_CHARX() throws RecognitionException {
         int RULE_CHARX_StartIndex = input.index();
         try {
-            if ( backtracking>0 && alreadyParsedRule(input, 10) ) { return ; }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:47:21: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:47:23: 
+            if ( backtracking>0 && alreadyParsedRule(input, 8) ) { return ; }
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:60:21: ( FRAGMENT_RULE_CHARX )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:60:23: FRAGMENT_RULE_CHARX
             {
+            mFRAGMENT_RULE_CHARX(); if (failed) return ;
+
             }
 
         }
         finally {
-            if ( backtracking>0 ) { memoize(input, 10, RULE_CHARX_StartIndex); }
+            if ( backtracking>0 ) { memoize(input, 8, RULE_CHARX_StartIndex); }
         }
     }
     // $ANTLR end RULE_CHARX
@@ -332,9 +346,9 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     public final void mFRAGMENT_RULE_CHARX() throws RecognitionException {
         int FRAGMENT_RULE_CHARX_StartIndex = input.index();
         try {
-            if ( backtracking>0 && alreadyParsedRule(input, 11) ) { return ; }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:48:30: ( 'X' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:48:32: 'X'
+            if ( backtracking>0 && alreadyParsedRule(input, 9) ) { return ; }
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:61:30: ( 'X' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:61:32: 'X'
             {
             match('X'); if (failed) return ;
 
@@ -342,24 +356,141 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
         }
         finally {
-            if ( backtracking>0 ) { memoize(input, 11, FRAGMENT_RULE_CHARX_StartIndex); }
+            if ( backtracking>0 ) { memoize(input, 9, FRAGMENT_RULE_CHARX_StartIndex); }
         }
     }
     // $ANTLR end FRAGMENT_RULE_CHARX
+
+    // $ANTLR start RULE_YC
+    public final void mRULE_YC() throws RecognitionException {
+        int RULE_YC_StartIndex = input.index();
+        try {
+            if ( backtracking>0 && alreadyParsedRule(input, 10) ) { return ; }
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:63:18: ( FRAGMENT_RULE_YC )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:63:20: FRAGMENT_RULE_YC
+            {
+            mFRAGMENT_RULE_YC(); if (failed) return ;
+
+            }
+
+        }
+        finally {
+            if ( backtracking>0 ) { memoize(input, 10, RULE_YC_StartIndex); }
+        }
+    }
+    // $ANTLR end RULE_YC
+
+    // $ANTLR start FRAGMENT_RULE_YC
+    public final void mFRAGMENT_RULE_YC() throws RecognitionException {
+        int FRAGMENT_RULE_YC_StartIndex = input.index();
+        try {
+            if ( backtracking>0 && alreadyParsedRule(input, 11) ) { return ; }
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:64:27: ( RULE_CHARY RULE_CHARC )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:64:29: RULE_CHARY RULE_CHARC
+            {
+            mRULE_CHARY(); if (failed) return ;
+            mRULE_CHARC(); if (failed) return ;
+
+            }
+
+        }
+        finally {
+            if ( backtracking>0 ) { memoize(input, 11, FRAGMENT_RULE_YC_StartIndex); }
+        }
+    }
+    // $ANTLR end FRAGMENT_RULE_YC
+
+    // $ANTLR start RULE_CHARY
+    public final void mRULE_CHARY() throws RecognitionException {
+        int RULE_CHARY_StartIndex = input.index();
+        try {
+            if ( backtracking>0 && alreadyParsedRule(input, 12) ) { return ; }
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:66:21: ( FRAGMENT_RULE_CHARY )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:66:23: FRAGMENT_RULE_CHARY
+            {
+            mFRAGMENT_RULE_CHARY(); if (failed) return ;
+
+            }
+
+        }
+        finally {
+            if ( backtracking>0 ) { memoize(input, 12, RULE_CHARY_StartIndex); }
+        }
+    }
+    // $ANTLR end RULE_CHARY
+
+    // $ANTLR start FRAGMENT_RULE_CHARY
+    public final void mFRAGMENT_RULE_CHARY() throws RecognitionException {
+        int FRAGMENT_RULE_CHARY_StartIndex = input.index();
+        try {
+            if ( backtracking>0 && alreadyParsedRule(input, 13) ) { return ; }
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:67:30: ( 'Y' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:67:32: 'Y'
+            {
+            match('Y'); if (failed) return ;
+
+            }
+
+        }
+        finally {
+            if ( backtracking>0 ) { memoize(input, 13, FRAGMENT_RULE_CHARY_StartIndex); }
+        }
+    }
+    // $ANTLR end FRAGMENT_RULE_CHARY
+
+    // $ANTLR start RULE_CHARC
+    public final void mRULE_CHARC() throws RecognitionException {
+        int RULE_CHARC_StartIndex = input.index();
+        try {
+            if ( backtracking>0 && alreadyParsedRule(input, 14) ) { return ; }
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:69:21: ( FRAGMENT_RULE_CHARC )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:69:23: FRAGMENT_RULE_CHARC
+            {
+            mFRAGMENT_RULE_CHARC(); if (failed) return ;
+
+            }
+
+        }
+        finally {
+            if ( backtracking>0 ) { memoize(input, 14, RULE_CHARC_StartIndex); }
+        }
+    }
+    // $ANTLR end RULE_CHARC
+
+    // $ANTLR start FRAGMENT_RULE_CHARC
+    public final void mFRAGMENT_RULE_CHARC() throws RecognitionException {
+        int FRAGMENT_RULE_CHARC_StartIndex = input.index();
+        try {
+            if ( backtracking>0 && alreadyParsedRule(input, 15) ) { return ; }
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:70:30: ( 'c' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:70:32: 'c'
+            {
+            match('c'); if (failed) return ;
+
+            }
+
+        }
+        finally {
+            if ( backtracking>0 ) { memoize(input, 15, FRAGMENT_RULE_CHARC_StartIndex); }
+        }
+    }
+    // $ANTLR end FRAGMENT_RULE_CHARC
 
     // $ANTLR start RULE_WS
     public final void mRULE_WS() throws RecognitionException {
         int RULE_WS_StartIndex = input.index();
         try {
-            if ( backtracking>0 && alreadyParsedRule(input, 12) ) { return ; }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:50:18: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:50:20: 
+            if ( backtracking>0 && alreadyParsedRule(input, 16) ) { return ; }
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:72:18: ( FRAGMENT_RULE_WS )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:72:20: FRAGMENT_RULE_WS
             {
+            mFRAGMENT_RULE_WS(); if (failed) return ;
+
             }
 
         }
         finally {
-            if ( backtracking>0 ) { memoize(input, 12, RULE_WS_StartIndex); }
+            if ( backtracking>0 ) { memoize(input, 16, RULE_WS_StartIndex); }
         }
     }
     // $ANTLR end RULE_WS
@@ -368,11 +499,11 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     public final void mFRAGMENT_RULE_WS() throws RecognitionException {
         int FRAGMENT_RULE_WS_StartIndex = input.index();
         try {
-            if ( backtracking>0 && alreadyParsedRule(input, 13) ) { return ; }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:51:27: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:51:29: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            if ( backtracking>0 && alreadyParsedRule(input, 17) ) { return ; }
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:73:27: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:73:29: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:51:29: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:73:29: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt2=0;
             loop2:
             do {
@@ -418,7 +549,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
         }
         finally {
-            if ( backtracking>0 ) { memoize(input, 13, FRAGMENT_RULE_WS_StartIndex); }
+            if ( backtracking>0 ) { memoize(input, 17, FRAGMENT_RULE_WS_StartIndex); }
         }
     }
     // $ANTLR end FRAGMENT_RULE_WS
@@ -427,15 +558,17 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         int RULE_SL_COMMENT_StartIndex = input.index();
         try {
-            if ( backtracking>0 && alreadyParsedRule(input, 14) ) { return ; }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:53:26: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:53:28: 
+            if ( backtracking>0 && alreadyParsedRule(input, 18) ) { return ; }
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:75:26: ( FRAGMENT_RULE_SL_COMMENT )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:75:28: FRAGMENT_RULE_SL_COMMENT
             {
+            mFRAGMENT_RULE_SL_COMMENT(); if (failed) return ;
+
             }
 
         }
         finally {
-            if ( backtracking>0 ) { memoize(input, 14, RULE_SL_COMMENT_StartIndex); }
+            if ( backtracking>0 ) { memoize(input, 18, RULE_SL_COMMENT_StartIndex); }
         }
     }
     // $ANTLR end RULE_SL_COMMENT
@@ -444,13 +577,13 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     public final void mFRAGMENT_RULE_SL_COMMENT() throws RecognitionException {
         int FRAGMENT_RULE_SL_COMMENT_StartIndex = input.index();
         try {
-            if ( backtracking>0 && alreadyParsedRule(input, 15) ) { return ; }
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:54:35: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:54:37: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            if ( backtracking>0 && alreadyParsedRule(input, 19) ) { return ; }
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:76:35: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:76:37: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); if (failed) return ;
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:54:42: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:76:42: (~ ( ( '\\n' | '\\r' ) ) )*
             loop3:
             do {
                 int alt3=2;
@@ -485,7 +618,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:54:58: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:76:58: ( ( '\\r' )? '\\n' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -494,9 +627,9 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:54:59: ( '\\r' )? '\\n'
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:76:59: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:54:59: ( '\\r' )?
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:76:59: ( '\\r' )?
                     int alt4=2;
                     int LA4_0 = input.LA(1);
 
@@ -526,7 +659,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
         }
         finally {
-            if ( backtracking>0 ) { memoize(input, 15, FRAGMENT_RULE_SL_COMMENT_StartIndex); }
+            if ( backtracking>0 ) { memoize(input, 19, FRAGMENT_RULE_SL_COMMENT_StartIndex); }
         }
     }
     // $ANTLR end FRAGMENT_RULE_SL_COMMENT
@@ -544,8 +677,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
     // $ANTLR start synpred1
     public final void synpred1_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:24:2: ( FRAGMENT_KEYWORD_1 )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:24:3: FRAGMENT_KEYWORD_1
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:36:2: ( FRAGMENT_KEYWORD_1 )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:36:3: FRAGMENT_KEYWORD_1
         {
         mFRAGMENT_KEYWORD_1(); if (failed) return ;
 
@@ -555,8 +688,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
     // $ANTLR start synpred2
     public final void synpred2_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:26:2: ( FRAGMENT_KEYWORD_2 )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:26:3: FRAGMENT_KEYWORD_2
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:37:2: ( FRAGMENT_KEYWORD_2 )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:37:3: FRAGMENT_KEYWORD_2
         {
         mFRAGMENT_KEYWORD_2(); if (failed) return ;
 
@@ -566,8 +699,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
     // $ANTLR start synpred3
     public final void synpred3_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:27:2: ( FRAGMENT_RULE_CHARA )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:27:3: FRAGMENT_RULE_CHARA
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:38:2: ( FRAGMENT_RULE_CHARA )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:38:3: FRAGMENT_RULE_CHARA
         {
         mFRAGMENT_RULE_CHARA(); if (failed) return ;
 
@@ -577,8 +710,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
     // $ANTLR start synpred4
     public final void synpred4_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:28:2: ( FRAGMENT_RULE_CHARB )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:28:3: FRAGMENT_RULE_CHARB
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:39:2: ( FRAGMENT_RULE_CHARB )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:39:3: FRAGMENT_RULE_CHARB
         {
         mFRAGMENT_RULE_CHARB(); if (failed) return ;
 
@@ -588,8 +721,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
     // $ANTLR start synpred5
     public final void synpred5_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:29:2: ( FRAGMENT_RULE_CHARX )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:29:3: FRAGMENT_RULE_CHARX
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:40:2: ( FRAGMENT_RULE_CHARX )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:40:3: FRAGMENT_RULE_CHARX
         {
         mFRAGMENT_RULE_CHARX(); if (failed) return ;
 
@@ -599,10 +732,10 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
     // $ANTLR start synpred6
     public final void synpred6_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:30:2: ( FRAGMENT_RULE_WS )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:30:3: FRAGMENT_RULE_WS
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:41:2: ( FRAGMENT_RULE_YC )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:41:3: FRAGMENT_RULE_YC
         {
-        mFRAGMENT_RULE_WS(); if (failed) return ;
+        mFRAGMENT_RULE_YC(); if (failed) return ;
 
         }
     }
@@ -610,20 +743,67 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
     // $ANTLR start synpred7
     public final void synpred7_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:31:2: ( FRAGMENT_RULE_SL_COMMENT )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:31:3: FRAGMENT_RULE_SL_COMMENT
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:42:2: ( FRAGMENT_RULE_CHARY )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:42:3: FRAGMENT_RULE_CHARY
+        {
+        mFRAGMENT_RULE_CHARY(); if (failed) return ;
+
+        }
+    }
+    // $ANTLR end synpred7
+
+    // $ANTLR start synpred8
+    public final void synpred8_fragment() throws RecognitionException {   
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:43:2: ( FRAGMENT_RULE_CHARC )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:43:3: FRAGMENT_RULE_CHARC
+        {
+        mFRAGMENT_RULE_CHARC(); if (failed) return ;
+
+        }
+    }
+    // $ANTLR end synpred8
+
+    // $ANTLR start synpred9
+    public final void synpred9_fragment() throws RecognitionException {   
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:44:2: ( FRAGMENT_RULE_WS )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:44:3: FRAGMENT_RULE_WS
+        {
+        mFRAGMENT_RULE_WS(); if (failed) return ;
+
+        }
+    }
+    // $ANTLR end synpred9
+
+    // $ANTLR start synpred10
+    public final void synpred10_fragment() throws RecognitionException {   
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:45:2: ( FRAGMENT_RULE_SL_COMMENT )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalBacktrackingLexerTestLanguage.g:45:3: FRAGMENT_RULE_SL_COMMENT
         {
         mFRAGMENT_RULE_SL_COMMENT(); if (failed) return ;
 
         }
     }
-    // $ANTLR end synpred7
+    // $ANTLR end synpred10
 
     public final boolean synpred4() {
         backtracking++;
         int start = input.mark();
         try {
             synpred4_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred9() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred9_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -708,6 +888,34 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
         int start = input.mark();
         try {
             synpred6_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred8() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred8_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred10() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred10_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }

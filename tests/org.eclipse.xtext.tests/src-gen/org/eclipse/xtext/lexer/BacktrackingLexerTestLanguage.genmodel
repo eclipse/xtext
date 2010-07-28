@@ -15,8 +15,11 @@
     </genEnums>
     <genClasses ecoreClass="BacktrackingLexerTestLanguage.ecore#//Model">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingLexerTestLanguage.ecore#//Model/enums"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingLexerTestLanguage.ecore#//Model/ycs"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingLexerTestLanguage.ecore#//Model/abs"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BacktrackingLexerTestLanguage.ecore#//Model/xbs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingLexerTestLanguage.ecore#//Model/ys"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingLexerTestLanguage.ecore#//Model/as"/>
     </genClasses>
     <genClasses ecoreClass="BacktrackingLexerTestLanguage.ecore#//Ab">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BacktrackingLexerTestLanguage.ecore#//Ab/x"/>

@@ -9,6 +9,19 @@ options {
 	memoize=true;
 }
 
+tokens {
+	KEYWORD_1;
+	KEYWORD_2;
+	RULE_CHARA;
+	RULE_CHARB;
+	RULE_CHARX;
+	RULE_YC;
+	RULE_CHARY;
+	RULE_CHARC;
+	RULE_WS;
+	RULE_SL_COMMENT;
+}
+
 @header {
 package org.eclipse.xtext.lexer.parser.antlr.lexer;
 
@@ -20,37 +33,46 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 
 
 SYNTHETIC_ALL_KEYWORDS :
-
 	(FRAGMENT_KEYWORD_1)=> FRAGMENT_KEYWORD_1 {$type = KEYWORD_1; } |
-
 	(FRAGMENT_KEYWORD_2)=> FRAGMENT_KEYWORD_2 {$type = KEYWORD_2; } |
 	(FRAGMENT_RULE_CHARA)=> FRAGMENT_RULE_CHARA {$type = RULE_CHARA; } |
 	(FRAGMENT_RULE_CHARB)=> FRAGMENT_RULE_CHARB {$type = RULE_CHARB; } |
 	(FRAGMENT_RULE_CHARX)=> FRAGMENT_RULE_CHARX {$type = RULE_CHARX; } |
+	(FRAGMENT_RULE_YC)=> FRAGMENT_RULE_YC {$type = RULE_YC; } |
+	(FRAGMENT_RULE_CHARY)=> FRAGMENT_RULE_CHARY {$type = RULE_CHARY; } |
+	(FRAGMENT_RULE_CHARC)=> FRAGMENT_RULE_CHARC {$type = RULE_CHARC; } |
 	(FRAGMENT_RULE_WS)=> FRAGMENT_RULE_WS {$type = RULE_WS; } |
 	(FRAGMENT_RULE_SL_COMMENT)=> FRAGMENT_RULE_SL_COMMENT {$type = RULE_SL_COMMENT; } ;
 
-fragment KEYWORD_1 : 'Abc';
 fragment FRAGMENT_KEYWORD_1 : 'Abc';
 
-fragment KEYWORD_2 : 'Efg';
 fragment FRAGMENT_KEYWORD_2 : 'Efg';
 
 
+// Rules duplicated to allow inter-rule references
 
-fragment RULE_CHARA : ;
+fragment RULE_CHARA : FRAGMENT_RULE_CHARA;
 fragment FRAGMENT_RULE_CHARA : 'A';
 
-fragment RULE_CHARB : ;
+fragment RULE_CHARB : FRAGMENT_RULE_CHARB;
 fragment FRAGMENT_RULE_CHARB : 'b';
 
-fragment RULE_CHARX : ;
+fragment RULE_CHARX : FRAGMENT_RULE_CHARX;
 fragment FRAGMENT_RULE_CHARX : 'X';
 
-fragment RULE_WS : ;
+fragment RULE_YC : FRAGMENT_RULE_YC;
+fragment FRAGMENT_RULE_YC : RULE_CHARY RULE_CHARC;
+
+fragment RULE_CHARY : FRAGMENT_RULE_CHARY;
+fragment FRAGMENT_RULE_CHARY : 'Y';
+
+fragment RULE_CHARC : FRAGMENT_RULE_CHARC;
+fragment FRAGMENT_RULE_CHARC : 'c';
+
+fragment RULE_WS : FRAGMENT_RULE_WS;
 fragment FRAGMENT_RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-fragment RULE_SL_COMMENT : ;
+fragment RULE_SL_COMMENT : FRAGMENT_RULE_SL_COMMENT;
 fragment FRAGMENT_RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
 

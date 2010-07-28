@@ -144,9 +144,19 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getModel_Ycs()
+  {
+    return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getModel_Abs()
   {
-    return (EReference)modelEClass.getEStructuralFeatures().get(1);
+    return (EReference)modelEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -156,7 +166,27 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
    */
   public EReference getModel_Xbs()
   {
-    return (EReference)modelEClass.getEStructuralFeatures().get(2);
+    return (EReference)modelEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getModel_Ys()
+  {
+    return (EAttribute)modelEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getModel_As()
+  {
+    return (EAttribute)modelEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -261,8 +291,11 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
     // Create classes and their features
     modelEClass = createEClass(MODEL);
     createEAttribute(modelEClass, MODEL__ENUMS);
+    createEAttribute(modelEClass, MODEL__YCS);
     createEReference(modelEClass, MODEL__ABS);
     createEReference(modelEClass, MODEL__XBS);
+    createEAttribute(modelEClass, MODEL__YS);
+    createEAttribute(modelEClass, MODEL__AS);
 
     abEClass = createEClass(AB);
     createEAttribute(abEClass, AB__X);
@@ -309,8 +342,11 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getModel_Enums(), this.getEnumName(), "enums", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_Ycs(), ecorePackage.getEString(), "ycs", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_Abs(), this.getAb(), null, "abs", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_Xbs(), this.getXb(), null, "xbs", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_Ys(), ecorePackage.getEString(), "ys", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_As(), ecorePackage.getEString(), "as", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(abEClass, Ab.class, "Ab", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAb_X(), ecorePackage.getEString(), "x", null, 0, 1, Ab.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

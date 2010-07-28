@@ -117,10 +117,34 @@ ruleModel returns [EObject current=null]
 )
 )*(
 (
-		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getAbsAbParserRuleCall_1_0(), currentNode); 
+		lv_ycs_1_0=RULE_YC
+		{
+			createLeafNode(grammarAccess.getModelAccess().getYcsYcTerminalRuleCall_1_0(), "ycs"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"ycs",
+	        		lv_ycs_1_0, 
+	        		"Yc", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
 	    }
-		lv_abs_1_0=ruleAb		{
+
+)
+)*(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getAbsAbParserRuleCall_2_0(), currentNode); 
+	    }
+		lv_abs_2_0=ruleAb		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -129,7 +153,7 @@ ruleModel returns [EObject current=null]
 	       		add(
 	       			$current, 
 	       			"abs",
-	        		lv_abs_1_0, 
+	        		lv_abs_2_0, 
 	        		"Ab", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -142,9 +166,9 @@ ruleModel returns [EObject current=null]
 )*(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getXbsXbParserRuleCall_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getXbsXbParserRuleCall_3_0(), currentNode); 
 	    }
-		lv_xbs_2_0=ruleXb		{
+		lv_xbs_3_0=ruleXb		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -153,13 +177,61 @@ ruleModel returns [EObject current=null]
 	       		add(
 	       			$current, 
 	       			"xbs",
-	        		lv_xbs_2_0, 
+	        		lv_xbs_3_0, 
 	        		"Xb", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	        currentNode = currentNode.getParent();
+	    }
+
+)
+)*(
+(
+		lv_ys_4_0=RULE_CHARY
+		{
+			createLeafNode(grammarAccess.getModelAccess().getYsCharYTerminalRuleCall_4_0(), "ys"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"ys",
+	        		lv_ys_4_0, 
+	        		"CharY", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)*(
+(
+		lv_as_5_0=RULE_CHARA
+		{
+			createLeafNode(grammarAccess.getModelAccess().getAsCharATerminalRuleCall_5_0(), "as"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"as",
+	        		lv_as_5_0, 
+	        		"CharA", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
 	    }
 
 )

@@ -43,11 +43,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	enums+=EnumName* abs+=Ab* xbs+=Xb*;
+ * 	enums+=EnumName* ycs+=Yc* abs+=Ab* xbs+=Xb* ys+=CharY* ^as+=CharA*;
  *
  **/
 
-// enums+=EnumName* abs+=Ab* xbs+=Xb*
+// enums+=EnumName* ycs+=Yc* abs+=Ab* xbs+=Xb* ys+=CharY* ^as+=CharA*
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -62,10 +62,13 @@ protected class Model_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Model_XbsAssignment_2(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new Model_AbsAssignment_1(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new Model_EnumsAssignment_0(lastRuleCallOrigin, this, 2, inst);
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 3, inst);
+			case 0: return new Model_AsAssignment_5(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_YsAssignment_4(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Model_XbsAssignment_3(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Model_AbsAssignment_2(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new Model_YcsAssignment_1(lastRuleCallOrigin, this, 4, inst);
+			case 5: return new Model_EnumsAssignment_0(lastRuleCallOrigin, this, 5, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 6, inst);
 		}	
 	}
 
@@ -112,16 +115,51 @@ protected class Model_EnumsAssignment_0 extends AssignmentToken  {
 
 }
 
-// abs+=Ab*
-protected class Model_AbsAssignment_1 extends AssignmentToken  {
+// ycs+=Yc*
+protected class Model_YcsAssignment_1 extends AssignmentToken  {
 	
-	public Model_AbsAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Model_YcsAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getModelAccess().getAbsAssignment_1();
+		return grammarAccess.getModelAccess().getYcsAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Model_YcsAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_EnumsAssignment_0(lastRuleCallOrigin, this, 1, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 2, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("ycs",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ycs");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getYcsYcTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getModelAccess().getYcsYcTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// abs+=Ab*
+protected class Model_AbsAssignment_2 extends AssignmentToken  {
+	
+	public Model_AbsAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getAbsAssignment_2();
 	}
 
     @Override
@@ -140,7 +178,7 @@ protected class Model_AbsAssignment_1 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAbRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getModelAccess().getAbsAbParserRuleCall_1_0(); 
+				element = grammarAccess.getModelAccess().getAbsAbParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -152,23 +190,24 @@ protected class Model_AbsAssignment_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Model_AbsAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new Model_EnumsAssignment_0(lastRuleCallOrigin, next, actIndex, consumed);
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 2, consumed);
+			case 0: return new Model_AbsAssignment_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Model_YcsAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 2: return new Model_EnumsAssignment_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 3, consumed);
 		}	
 	}	
 }
 
 // xbs+=Xb*
-protected class Model_XbsAssignment_2 extends AssignmentToken  {
+protected class Model_XbsAssignment_3 extends AssignmentToken  {
 	
-	public Model_XbsAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Model_XbsAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getModelAccess().getXbsAssignment_2();
+		return grammarAccess.getModelAccess().getXbsAssignment_3();
 	}
 
     @Override
@@ -187,7 +226,7 @@ protected class Model_XbsAssignment_2 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getXbRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getModelAccess().getXbsXbParserRuleCall_2_0(); 
+				element = grammarAccess.getModelAccess().getXbsXbParserRuleCall_3_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -199,12 +238,90 @@ protected class Model_XbsAssignment_2 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Model_XbsAssignment_2(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new Model_AbsAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
-			case 2: return new Model_EnumsAssignment_0(lastRuleCallOrigin, next, actIndex, consumed);
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 3, consumed);
+			case 0: return new Model_XbsAssignment_3(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Model_AbsAssignment_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 2: return new Model_YcsAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 3: return new Model_EnumsAssignment_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 4, consumed);
 		}	
 	}	
+}
+
+// ys+=CharY*
+protected class Model_YsAssignment_4 extends AssignmentToken  {
+	
+	public Model_YsAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getYsAssignment_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Model_YsAssignment_4(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_XbsAssignment_3(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Model_AbsAssignment_2(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Model_YcsAssignment_1(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new Model_EnumsAssignment_0(lastRuleCallOrigin, this, 4, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 5, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("ys",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ys");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getYsCharYTerminalRuleCall_4_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getModelAccess().getYsCharYTerminalRuleCall_4_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ^as+=CharA*
+protected class Model_AsAssignment_5 extends AssignmentToken  {
+	
+	public Model_AsAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getAsAssignment_5();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Model_AsAssignment_5(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Model_YsAssignment_4(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Model_XbsAssignment_3(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Model_AbsAssignment_2(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new Model_YcsAssignment_1(lastRuleCallOrigin, this, 4, inst);
+			case 5: return new Model_EnumsAssignment_0(lastRuleCallOrigin, this, 5, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 6, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("as",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("as");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getAsCharATerminalRuleCall_5_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getModelAccess().getAsCharATerminalRuleCall_5_0();
+			return obj;
+		}
+		return null;
+	}
+
 }
 
 

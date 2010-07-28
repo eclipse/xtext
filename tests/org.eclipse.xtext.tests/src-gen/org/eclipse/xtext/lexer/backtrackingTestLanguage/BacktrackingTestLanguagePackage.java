@@ -80,13 +80,22 @@ public interface BacktrackingTestLanguagePackage extends EPackage
   int MODEL__ENUMS = 0;
 
   /**
+   * The feature id for the '<em><b>Ycs</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__YCS = 1;
+
+  /**
    * The feature id for the '<em><b>Abs</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL__ABS = 1;
+  int MODEL__ABS = 2;
 
   /**
    * The feature id for the '<em><b>Xbs</b></em>' containment reference list.
@@ -95,7 +104,25 @@ public interface BacktrackingTestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL__XBS = 2;
+  int MODEL__XBS = 3;
+
+  /**
+   * The feature id for the '<em><b>Ys</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__YS = 4;
+
+  /**
+   * The feature id for the '<em><b>As</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__AS = 5;
 
   /**
    * The number of structural features of the '<em>Model</em>' class.
@@ -104,7 +131,7 @@ public interface BacktrackingTestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 3;
+  int MODEL_FEATURE_COUNT = 6;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.impl.AbImpl <em>Ab</em>}' class.
@@ -213,6 +240,17 @@ public interface BacktrackingTestLanguagePackage extends EPackage
   EAttribute getModel_Enums();
 
   /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.Model#getYcs <em>Ycs</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Ycs</em>'.
+   * @see org.eclipse.xtext.lexer.backtrackingTestLanguage.Model#getYcs()
+   * @see #getModel()
+   * @generated
+   */
+  EAttribute getModel_Ycs();
+
+  /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.Model#getAbs <em>Abs</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -233,6 +271,28 @@ public interface BacktrackingTestLanguagePackage extends EPackage
    * @generated
    */
   EReference getModel_Xbs();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.Model#getYs <em>Ys</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Ys</em>'.
+   * @see org.eclipse.xtext.lexer.backtrackingTestLanguage.Model#getYs()
+   * @see #getModel()
+   * @generated
+   */
+  EAttribute getModel_Ys();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.Model#getAs <em>As</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>As</em>'.
+   * @see org.eclipse.xtext.lexer.backtrackingTestLanguage.Model#getAs()
+   * @see #getModel()
+   * @generated
+   */
+  EAttribute getModel_As();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.Ab <em>Ab</em>}'.
@@ -350,6 +410,14 @@ public interface BacktrackingTestLanguagePackage extends EPackage
     EAttribute MODEL__ENUMS = eINSTANCE.getModel_Enums();
 
     /**
+     * The meta object literal for the '<em><b>Ycs</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MODEL__YCS = eINSTANCE.getModel_Ycs();
+
+    /**
      * The meta object literal for the '<em><b>Abs</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -364,6 +432,22 @@ public interface BacktrackingTestLanguagePackage extends EPackage
      * @generated
      */
     EReference MODEL__XBS = eINSTANCE.getModel_Xbs();
+
+    /**
+     * The meta object literal for the '<em><b>Ys</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MODEL__YS = eINSTANCE.getModel_Ys();
+
+    /**
+     * The meta object literal for the '<em><b>As</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MODEL__AS = eINSTANCE.getModel_As();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.impl.AbImpl <em>Ab</em>}' class.

@@ -18,8 +18,11 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.Model#getEnums <em>Enums</em>}</li>
+ *   <li>{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.Model#getYcs <em>Ycs</em>}</li>
  *   <li>{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.Model#getAbs <em>Abs</em>}</li>
  *   <li>{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.Model#getXbs <em>Xbs</em>}</li>
+ *   <li>{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.Model#getYs <em>Ys</em>}</li>
+ *   <li>{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.Model#getAs <em>As</em>}</li>
  * </ul>
  * </p>
  *
@@ -46,6 +49,22 @@ public interface Model extends EObject
    * @generated
    */
   EList<EnumName> getEnums();
+
+  /**
+   * Returns the value of the '<em><b>Ycs</b></em>' attribute list.
+   * The list contents are of type {@link java.lang.String}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Ycs</em>' attribute list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Ycs</em>' attribute list.
+   * @see org.eclipse.xtext.lexer.backtrackingTestLanguage.BacktrackingTestLanguagePackage#getModel_Ycs()
+   * @model unique="false"
+   * @generated
+   */
+  EList<String> getYcs();
 
   /**
    * Returns the value of the '<em><b>Abs</b></em>' containment reference list.
@@ -78,5 +97,37 @@ public interface Model extends EObject
    * @generated
    */
   EList<Xb> getXbs();
+
+  /**
+   * Returns the value of the '<em><b>Ys</b></em>' attribute list.
+   * The list contents are of type {@link java.lang.String}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Ys</em>' attribute list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Ys</em>' attribute list.
+   * @see org.eclipse.xtext.lexer.backtrackingTestLanguage.BacktrackingTestLanguagePackage#getModel_Ys()
+   * @model unique="false"
+   * @generated
+   */
+  EList<String> getYs();
+
+  /**
+   * Returns the value of the '<em><b>As</b></em>' attribute list.
+   * The list contents are of type {@link java.lang.String}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>As</em>' attribute list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>As</em>' attribute list.
+   * @see org.eclipse.xtext.lexer.backtrackingTestLanguage.BacktrackingTestLanguagePackage#getModel_As()
+   * @model unique="false"
+   * @generated
+   */
+  EList<String> getAs();
 
 } // Model

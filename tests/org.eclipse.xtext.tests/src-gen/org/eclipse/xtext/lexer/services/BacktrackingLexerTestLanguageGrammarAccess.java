@@ -21,16 +21,22 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cEnumsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cEnumsEnumNameEnumRuleCall_0_0 = (RuleCall)cEnumsAssignment_0.eContents().get(0);
-		private final Assignment cAbsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cAbsAbParserRuleCall_1_0 = (RuleCall)cAbsAssignment_1.eContents().get(0);
-		private final Assignment cXbsAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cXbsXbParserRuleCall_2_0 = (RuleCall)cXbsAssignment_2.eContents().get(0);
+		private final Assignment cYcsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cYcsYcTerminalRuleCall_1_0 = (RuleCall)cYcsAssignment_1.eContents().get(0);
+		private final Assignment cAbsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cAbsAbParserRuleCall_2_0 = (RuleCall)cAbsAssignment_2.eContents().get(0);
+		private final Assignment cXbsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cXbsXbParserRuleCall_3_0 = (RuleCall)cXbsAssignment_3.eContents().get(0);
+		private final Assignment cYsAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cYsCharYTerminalRuleCall_4_0 = (RuleCall)cYsAssignment_4.eContents().get(0);
+		private final Assignment cAsAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cAsCharATerminalRuleCall_5_0 = (RuleCall)cAsAssignment_5.eContents().get(0);
 		
 		//Model:
-		//	enums+=EnumName* abs+=Ab* xbs+=Xb*;
+		//	enums+=EnumName* ycs+=Yc* abs+=Ab* xbs+=Xb* ys+=CharY* ^as+=CharA*;
 		public ParserRule getRule() { return rule; }
 
-		//enums+=EnumName* abs+=Ab* xbs+=Xb*
+		//enums+=EnumName* ycs+=Yc* abs+=Ab* xbs+=Xb* ys+=CharY* ^as+=CharA*
 		public Group getGroup() { return cGroup; }
 
 		//enums+=EnumName*
@@ -39,17 +45,35 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 		//EnumName
 		public RuleCall getEnumsEnumNameEnumRuleCall_0_0() { return cEnumsEnumNameEnumRuleCall_0_0; }
 
+		//ycs+=Yc*
+		public Assignment getYcsAssignment_1() { return cYcsAssignment_1; }
+
+		//Yc
+		public RuleCall getYcsYcTerminalRuleCall_1_0() { return cYcsYcTerminalRuleCall_1_0; }
+
 		//abs+=Ab*
-		public Assignment getAbsAssignment_1() { return cAbsAssignment_1; }
+		public Assignment getAbsAssignment_2() { return cAbsAssignment_2; }
 
 		//Ab
-		public RuleCall getAbsAbParserRuleCall_1_0() { return cAbsAbParserRuleCall_1_0; }
+		public RuleCall getAbsAbParserRuleCall_2_0() { return cAbsAbParserRuleCall_2_0; }
 
 		//xbs+=Xb*
-		public Assignment getXbsAssignment_2() { return cXbsAssignment_2; }
+		public Assignment getXbsAssignment_3() { return cXbsAssignment_3; }
 
 		//Xb
-		public RuleCall getXbsXbParserRuleCall_2_0() { return cXbsXbParserRuleCall_2_0; }
+		public RuleCall getXbsXbParserRuleCall_3_0() { return cXbsXbParserRuleCall_3_0; }
+
+		//ys+=CharY*
+		public Assignment getYsAssignment_4() { return cYsAssignment_4; }
+
+		//CharY
+		public RuleCall getYsCharYTerminalRuleCall_4_0() { return cYsCharYTerminalRuleCall_4_0; }
+
+		//^as+=CharA*
+		public Assignment getAsAssignment_5() { return cAsAssignment_5; }
+
+		//CharA
+		public RuleCall getAsCharATerminalRuleCall_5_0() { return cAsCharATerminalRuleCall_5_0; }
 	}
 
 	public class AbElements extends AbstractParserRuleElementFinder {
@@ -143,6 +167,9 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 	private TerminalRule tCharA;
 	private TerminalRule tCharb;
 	private TerminalRule tCharX;
+	private TerminalRule tYc;
+	private TerminalRule tCharY;
+	private TerminalRule tCharC;
 	private EnumNameElements unknownRuleEnumName;
 	private TerminalRule tWS;
 	private TerminalRule tSL_COMMENT;
@@ -161,7 +188,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 
 	
 	//Model:
-	//	enums+=EnumName* abs+=Ab* xbs+=Xb*;
+	//	enums+=EnumName* ycs+=Yc* abs+=Ab* xbs+=Xb* ys+=CharY* ^as+=CharA*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -206,6 +233,24 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 	//	"X";
 	public TerminalRule getCharXRule() {
 		return (tCharX != null) ? tCharX : (tCharX = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CharX"));
+	} 
+
+	//terminal Yc:
+	//	CharY CharC;
+	public TerminalRule getYcRule() {
+		return (tYc != null) ? tYc : (tYc = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Yc"));
+	} 
+
+	//terminal CharY:
+	//	"Y";
+	public TerminalRule getCharYRule() {
+		return (tCharY != null) ? tCharY : (tCharY = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CharY"));
+	} 
+
+	//terminal CharC:
+	//	"c";
+	public TerminalRule getCharCRule() {
+		return (tCharC != null) ? tCharC : (tCharC = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CharC"));
 	} 
 
 	//enum EnumName:
