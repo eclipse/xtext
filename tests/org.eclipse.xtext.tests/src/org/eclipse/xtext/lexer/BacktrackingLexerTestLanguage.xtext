@@ -12,8 +12,11 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 Model :
 	(enums+=EnumName)* 
+	(ycs+=Yc)*
 	(abs+=Ab)* 
-	(xbs+=Xb)*;
+	(xbs+=Xb)*
+	(ys+=CharY)*
+	(^as+=CharA)*;
 
 Ab: x=CharA y=Charb;
 Xb: x=CharX y=Charb;
@@ -21,6 +24,9 @@ Xb: x=CharX y=Charb;
 terminal CharA: 'A';
 terminal Charb: 'b';
 terminal CharX: 'X';
+terminal Yc: CharY CharC;
+terminal CharY: 'Y';
+terminal CharC: 'c';
 
 enum EnumName: abc='Abc'|efg="Efg";
 
