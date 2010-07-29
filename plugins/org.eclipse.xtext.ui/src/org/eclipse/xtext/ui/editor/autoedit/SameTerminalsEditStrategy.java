@@ -65,7 +65,7 @@ public class SameTerminalsEditStrategy extends AbstractEditStrategy {
 		if (documentContent.length() > command.offset) {
 			String leadingContent = documentContent.substring(0, command.offset);
 			int leadingCount = count(terminal, leadingContent);
-			if (leadingCount == occurenceCount / 2)
+			if (leadingCount % 2 == 1)
 				return;
 		}
 		command.text = terminal + terminal;
