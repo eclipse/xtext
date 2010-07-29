@@ -465,7 +465,7 @@ The elements of an unordered group can occur in any order but each element can o
 groups are separated with '_&_', e.g.
 
 bc.. Modifier: 
-	static?='static' & final?='final' & visibility=Visibility;
+	static?='static'? & final?='final'? & visibility=Visibility;
 
 enum Visibility:
 	PUBLIC='public' | PRIVATE='private' | PROTECTED='protected';
@@ -473,13 +473,15 @@ enum Visibility:
 p. allows
 
 bc.. public static final
-static final 
+static protected 
 final private static
+public
 
 p. but not
 
 bc.. static final static // ERROR: static appears twice
 public static final private // ERROR: visibility appears twice
+final // ERROR: visibility is missing
 
 h5. Simple Actions 
 

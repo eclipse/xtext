@@ -850,7 +850,7 @@ Event&nbsp;returns&nbsp;MyEvent&nbsp;:&nbsp;....;<br>
 <div class="literallayout">
 <p>
 <code class="code">Modifier:&nbsp;<br>
-	static?='static'&nbsp;&amp;&nbsp;final?='final'&nbsp;&amp;&nbsp;visibility=Visibility;<br>
+	static?='static'?&nbsp;&amp;&nbsp;final?='final'?&nbsp;&amp;&nbsp;visibility=Visibility;<br>
 
 <br>
 enum&nbsp;Visibility:<br>
@@ -865,8 +865,9 @@ enum&nbsp;Visibility:<br>
 <div class="literallayout">
 <p>
 <code class="code">public&nbsp;static&nbsp;final<br>
-static&nbsp;final&nbsp;<br>
+static&nbsp;protected&nbsp;<br>
 final&nbsp;private&nbsp;static<br>
+public<br>
 
 <br>
 
@@ -878,6 +879,7 @@ final&nbsp;private&nbsp;static<br>
 <p>
 <code class="code">static&nbsp;final&nbsp;static&nbsp;//&nbsp;ERROR:&nbsp;static&nbsp;appears&nbsp;twice<br>
 public&nbsp;static&nbsp;final&nbsp;private&nbsp;//&nbsp;ERROR:&nbsp;visibility&nbsp;appears&nbsp;twice<br>
+final&nbsp;//&nbsp;ERROR:&nbsp;visibility&nbsp;is&nbsp;missing<br>
 
 <br>
 
