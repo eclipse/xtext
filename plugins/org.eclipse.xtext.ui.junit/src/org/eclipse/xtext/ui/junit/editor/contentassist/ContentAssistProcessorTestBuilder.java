@@ -168,7 +168,7 @@ public class ContentAssistProcessorTestBuilder {
 		return this;
 	}
 
-	private String getModel() {
+	protected String getModel() {
 		return this.model == null ? "":model;
 	}
 
@@ -216,6 +216,17 @@ public class ContentAssistProcessorTestBuilder {
 		return this.contentAssistProcessor.computeCompletionProposals(getTextViewer(currentModelToParse, xtextDocument), cursorPosition);
 	}
 
+	public ICompletionProposal[] computeCompletionProposals(int cursorPosition) throws Exception {
+		return computeCompletionProposals(getModel(), cursorPosition);
+	}
+	
+	public ICompletionProposal[] computeCompletionProposals(String cursorPosition) throws Exception {
+		return computeCompletionProposals(getModel(), getModel().indexOf(cursorPosition));
+	}
+	
+	public ICompletionProposal[] computeCompletionProposals() throws Exception {
+		return computeCompletionProposals(getModel(), cursorPosition);
+	}
 
 	@Override
 	public String toString() {
