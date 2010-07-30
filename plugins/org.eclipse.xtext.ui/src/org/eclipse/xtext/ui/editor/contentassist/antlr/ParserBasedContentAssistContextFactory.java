@@ -190,6 +190,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		Set<AbstractElement> followElementAsAbstractElements = Sets.newLinkedHashSet();
 		computeFollowElements(followElements, followElementAsAbstractElements);
 		Multimap<EObject, AbstractElement> contextMap = computeCurrentModel(previousModel, lastCompleteNode, followElementAsAbstractElements);
+		currentNode = getContainingDatatypeRuleNode(currentNode);
 		for (Entry<EObject, Collection<AbstractElement>> entry : contextMap.asMap().entrySet()) {
 			ContentAssistContext context = createContext(viewer, completionOffset, parseResult, rootNode,
 					lastCompleteNode, entry.getKey(), currentNode, prefix);
