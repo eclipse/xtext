@@ -12,12 +12,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Event.Source;
+import org.eclipse.xtext.resource.containers.FilterUriContainer;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
@@ -45,7 +48,7 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 		Iterator<IContainer> iter = containers.iterator();
 		while (iter.hasNext()) {
 			IContainer container = iter.next();
-			result = createContainerScope(result, container, reference);
+			result = createContainerScopeWithContext(context, result, container, reference);
 		}
 		return result;
 	}
@@ -79,6 +82,17 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 			return base + "@" + NAMED_BUILDER_SCOPE;
 		} 
 		return base + "@DEFAULT_SCOPE"; 
+	}
+
+	protected IScope createContainerScopeWithContext(EObject context, IScope result, IContainer container,
+			EReference reference) {
+		Resource eResource = context.eResource();
+		if (eResource != null) {
+			URI uriToFilter = eResource.getURI();
+			if (container.getResourceDescription(uriToFilter) != null)
+				container = new FilterUriContainer(uriToFilter, container);
+		}
+		return createContainerScope(result, container, reference);
 	}
 
 	protected IScope createContainerScope(IScope parent, IContainer container, EReference reference) {
