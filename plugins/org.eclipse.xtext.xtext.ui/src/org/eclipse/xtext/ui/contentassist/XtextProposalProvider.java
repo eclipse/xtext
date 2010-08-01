@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -26,11 +27,14 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -282,20 +286,35 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 		if (!Strings.isEmpty(alias)) {
 			prefix = getValueConverter().toString(alias, "ID") + getQualifiedNameSupport().getDelimiter();
 		}
+		boolean createDatatypeProposals = !(model instanceof AbstractElement) && modelOrContainerIs(model, AbstractRule.class); 
+		boolean createEnumProposals = !(model instanceof AbstractElement) && modelOrContainerIs(model, EnumRule.class);
+		boolean createClassProposals = modelOrContainerIs(model, ParserRule.class, CrossReference.class, Action.class); 
 		Function<IEObjectDescription, ICompletionProposal> factory = getProposalFactory(null, context);
 		for (EClassifier classifier : declaration.getEPackage().getEClassifiers()) {
-			String proposalString = prefix + getValueConverter().toString(classifier.getName(), "ID");
-			IEObjectDescription description = EObjectDescription.create(proposalString, classifier);
-			ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) factory.apply(description);
-			if (proposal != null) {
-				if (!Strings.isEmpty(prefix))
-					proposal.setDisplayString(classifier.getName() + " - " + alias);
-				proposal.setPriority(proposal.getPriority() * 2);
-				proposal.setDisplayString(stylerFactory.createFromXtextStyle(proposal.getDisplayString(),
-						semanticHighlightingConfiguration.typeReference()));
+			if (classifier instanceof EDataType && createDatatypeProposals
+					|| classifier instanceof EEnum && createEnumProposals
+					|| classifier instanceof EClass && createClassProposals) {
+				String proposalString = prefix + getValueConverter().toString(classifier.getName(), "ID");
+				IEObjectDescription description = EObjectDescription.create(proposalString, classifier);
+				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) factory.apply(description);
+				if (proposal != null) {
+					if (!Strings.isEmpty(prefix))
+						proposal.setDisplayString(classifier.getName() + " - " + alias);
+					proposal.setPriority(proposal.getPriority() * 2);
+					proposal.setDisplayString(stylerFactory.createFromXtextStyle(proposal.getDisplayString(),
+							semanticHighlightingConfiguration.typeReference()));
+				}
+				acceptor.accept(proposal);
 			}
-			acceptor.accept(proposal);
 		}
+	}
+	
+	private boolean modelOrContainerIs(EObject model, Class<?>... types) {
+		for(Class<?> type: types) {
+			if (type.isInstance(model) || type.isInstance(model.eContainer()))
+				return true;
+		}
+		return false;
 	}
 
 	@Override
