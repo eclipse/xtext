@@ -207,9 +207,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
      */
     public void testCompleteTypeRefReturnForEnumRule() throws Exception {
         doTestCompleteTypeRefSetup()
-                .appendNl("enum NewEnum returns").assertText(
-                                "Class", "Import","Model","NewEnum"
-                );
+                .appendNl("enum NewEnum returns").assertText("NewEnum");
     }
     
     /**
@@ -227,10 +225,57 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=270116
      * @throws Exception
      */
-    public void testCompleteTypeRefReturnForTerminalRule() throws Exception {
+    public void testCompleteTypeRefReturnForTerminalRule_01() throws Exception {
         doTestCompleteTypeRefSetup()
-                .appendNl("terminal NewType returns").assertText(
-                                "Class", "Import","Model"
+                .appendNl("terminal NewType returns").assertText();
+    }
+    
+    public void testCompleteTypeRefReturnForTerminalRule_02() throws Exception {
+        doTestCompleteTypeRefSetup()
+        		.appendNl("enum NewEnum: Foobar;")
+                .appendNl("terminal NewType returns").assertText("NewEnum");
+    }
+    
+    public void testCompleteTypeRefReturnForTerminalRule_03() throws Exception {
+        doTestCompleteTypeRefSetup()
+                .appendNl("terminal NewType returns X").assertTextAtCursorPosition("X");
+    }
+    
+    public void testCompleteTypeRefReturnForTerminalRule_04() throws Exception {
+        doTestCompleteTypeRefSetup()
+        		.appendNl("enum NewEnum: Foobar;")
+                .appendNl("terminal NewType returns X").assertTextAtCursorPosition("X", "NewEnum");
+    }
+    
+    public void testCompleteTypeRefAction_01() throws Exception {
+        doTestCompleteTypeRefSetup()
+        		.appendNl("enum NewEnum: Foobar;")
+                .appendNl("NewType: {").assertText(
+                                "Class", "Import", "Model", "NewType"
+                );
+    }
+    
+    public void testCompleteTypeRefAction_02() throws Exception {
+    	doTestCompleteTypeRefSetup()
+    	.appendNl("enum NewEnum: Foobar;")
+    	.appendNl("NewType: { X").assertTextAtCursorPosition("X",
+    			"Class", "Import", "Model", "NewType", "X"
+    	);
+    }
+
+    public void testCompleteTypeRefCrossReference_01() throws Exception {
+    	doTestCompleteTypeRefSetup()
+    	.appendNl("enum NewEnum: Foobar;")
+    	.appendNl("NewType: ref=[").assertText(
+    			"Class", "Import", "Model", "NewType"
+    	);
+    }
+    
+    public void testCompleteTypeRefCrossReference_02() throws Exception {
+        doTestCompleteTypeRefSetup()
+        		.appendNl("enum NewEnum: Foobar;")
+                .appendNl("NewType: ref=[ X").assertTextAtCursorPosition("X",
+                                "Class", "Import", "Model", "NewType"
                 );
     }
     
