@@ -862,6 +862,30 @@ public class XtextValidationTest extends AbstractXtextTests implements Validatio
 		messageAcceptor.validate();
 	}
 	
+	public void testBug318424_01() throws Exception {
+		XtextValidator validator = get(XtextValidator.class);
+		CrossReference reference = XtextFactory.eINSTANCE.createCrossReference();
+		TypeRef typeRef = XtextFactory.eINSTANCE.createTypeRef();
+		reference.setType(typeRef);
+		typeRef.setClassifier(EcorePackage.Literals.EBOOLEAN);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(typeRef, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkCrossReferenceType(reference);
+		messageAcceptor.validate();
+	}
+	
+	public void testBug318424_02() throws Exception {
+		XtextValidator validator = get(XtextValidator.class);
+		Action action = XtextFactory.eINSTANCE.createAction();
+		TypeRef typeRef = XtextFactory.eINSTANCE.createTypeRef();
+		action.setType(typeRef);
+		typeRef.setClassifier(EcorePackage.Literals.EBOOLEAN);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(typeRef, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkInstantiatedType(action);
+		messageAcceptor.validate();
+	}
+	
 	public class ValidatingMessageAcceptor implements ValidationMessageAcceptor {
 
 		private final EObject context;

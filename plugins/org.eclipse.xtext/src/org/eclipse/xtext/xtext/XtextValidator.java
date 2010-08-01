@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
@@ -38,6 +39,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.conversion.IValueConverterService;
@@ -604,6 +606,27 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			return;
 		if (EcoreUtil2.getContainerOfType(call, UnorderedGroup.class) != null)
 			error("Unassigned rule calls may not be used in unordered groups.", call, null);
+	}
+
+	@Check
+	public void checkCrossReferenceType(CrossReference reference) {
+		checkTypeIsEClass(reference.getType());
+	}
+
+	private void checkTypeIsEClass(TypeRef type) {
+		if (type != null) {
+			EClassifier classifier = type.getClassifier();
+			if (classifier != null && !classifier.eIsProxy()) {
+				if (!(classifier instanceof EClass)) {
+					error("Type of cross reference must be an EClass.", type, null);
+				}
+			}
+		}
+	}
+
+	@Check
+	public void checkInstantiatedType(Action action) {
+		checkTypeIsEClass(action.getType());
 	}
 	
 }
