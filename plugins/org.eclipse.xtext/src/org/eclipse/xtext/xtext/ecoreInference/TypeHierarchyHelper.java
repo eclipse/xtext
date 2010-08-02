@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ecoreInference;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -22,9 +21,9 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.EcoreUtil2.FindResult;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.TypeRef;
-import org.eclipse.xtext.EcoreUtil2.FindResult;
 import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfo.EClassInfo;
 
 import com.google.common.collect.Maps;
@@ -168,9 +167,18 @@ public class TypeHierarchyHelper {
 	public Collection<EStructuralFeature> getCommonFeatures(EClassInfo info, Collection<EStructuralFeature> features) {
 		Collection<EStructuralFeature> result = new LinkedHashSet<EStructuralFeature>();
 
-		for (EStructuralFeature f : features)
-			if (EcoreUtil2.containsSemanticallyEqualFeature(info.getEClass(), f) == FindResult.FeatureExists)
+		for (EStructuralFeature f : features) {
+			if (EcoreUtil2.containsSemanticallyEqualFeature(info.getEClass(), f) == FindResult.FeatureExists) {
+				EStructuralFeature equalFeature = info.getEClass().getEStructuralFeature(f.getName());
+				SourceAdapter otherAdapter = SourceAdapter.find(equalFeature);
+				if (otherAdapter != null) {
+					for(EObject source: otherAdapter.getSources()) {
+						SourceAdapter.adapt(f, source);
+					}	
+				}
 				result.add(f);
+			}
+		}
 
 		return result;
 	}
@@ -258,15 +266,15 @@ public class TypeHierarchyHelper {
 		return EcoreUtil2.containsSemanticallyEqualFeature(allSupertypesFeatures, feature) == FindResult.FeatureExists;
 	}
 
-	public void detectEClassesWithCyclesInTypeHierachy() {
-		for (EClassInfo info : infos.getAllEClassInfos()) {
-			EClass eClass = info.getEClass();
-			Collection<EClass> allSuperTypes = EcoreUtil2.getAllSuperTypes(eClass);
-			if (allSuperTypes.contains(eClass)) {
-				reportError(info, TransformationErrorCode.TypeWithCycleInHierarchy, "Type with cycle in hierarchy: " + eClass.getName());
-			}
-		}
-	}
+//	public void detectEClassesWithCyclesInTypeHierachy() {
+//		for (EClassInfo info : infos.getAllEClassInfos()) {
+//			EClass eClass = info.getEClass();
+//			Collection<EClass> allSuperTypes = EcoreUtil2.getAllSuperTypes(eClass);
+//			if (allSuperTypes.contains(eClass)) {
+//				reportError(info, TransformationErrorCode.TypeWithCycleInHierarchy, "Type with cycle in hierarchy: " + eClass.getName());
+//			}
+//		}
+//	}
 
 	private void reportError(EClassifierInfo info, TransformationErrorCode errorCode, String message) {
 		if (grammar == null) {
@@ -283,25 +291,6 @@ public class TypeHierarchyHelper {
 
 	private void reportError(TransformationErrorCode errorCode, String message, EObject object) {
 		errorAcceptor.acceptError(errorCode, message, object);
-	}
-
-	public void detectDuplicatedFeatures() {
-		for (EClassInfo info : infos.getAllEClassInfos()) {
-			detectDuplicatedFeature(grammar, info);
-		}
-	}
-
-	private void detectDuplicatedFeature(Grammar grammar, EClassInfo info) {
-		EClass eClass = info.getEClass();
-		Collection<EStructuralFeature> directFeatures = eClass.getEStructuralFeatures();
-		Collection<EStructuralFeature> allFeatures = new ArrayList<EStructuralFeature>(eClass
-				.getEAllStructuralFeatures());
-		for (EStructuralFeature feature : directFeatures) {
-			allFeatures.remove(feature);
-			if (EcoreUtil2.findFeatureByName(allFeatures, feature.getName()) != null)
-				reportError(info, TransformationErrorCode.MoreThanOneFeatureWithSameName, "Feature " + feature.getName()
-						+ " exists more than once in type hierarchy of " + eClass.getName());
-		}
 	}
 
 }

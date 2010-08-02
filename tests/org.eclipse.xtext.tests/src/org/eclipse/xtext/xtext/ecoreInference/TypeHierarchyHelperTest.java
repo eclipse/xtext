@@ -18,7 +18,6 @@ import org.easymock.EasyMock;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -282,43 +281,6 @@ public class TypeHierarchyHelperTest extends TestCase {
 		assertEquals(1, a.getEClass().getEStructuralFeatures().size());
 		assertEquals(0, b.getEClass().getEStructuralFeatures().size());
 		assertEquals(0, c.getEClass().getEStructuralFeatures().size());
-	}
-	
-	public void testCylceInTypeHierarchy() throws Exception {
-		EClassInfo a = addClass("a");
-		EClassInfo b = addClass("b");
-		EClassInfo c = addClass("c");
-		EClassInfo d = addClass("d");
-		a.addSupertype(c);
-		b.addSupertype(a);
-		c.addSupertype(b);
-		d.addSupertype(a);
-		
-		errorAcceptorMock.acceptError(same(TransformationErrorCode.TypeWithCycleInHierarchy), (String) anyObject(),
-				(EObject) anyObject());
-		EasyMock.expectLastCall().times(3);
-		
-		initializeHelper();
-		helper.detectEClassesWithCyclesInTypeHierachy();
-		EasyMock.verify(errorAcceptorMock);
-	}
-	
-	public void testDuplicateFeatures01() throws Exception {
-		EClassInfo a = addClass("a");
-		EClassInfo b = addClass("b");
-		
-		b.addSupertype(a);
-		addAttribute(a, INT, "f1");
-		addAttribute(a, STRING, "f2");
-		addAttribute(b, INT, "f2");
-		
-		errorAcceptorMock.acceptError(same(TransformationErrorCode.MoreThanOneFeatureWithSameName), (String) anyObject(),
-				(EObject) anyObject());
-		
-		
-		initializeHelper();
-		helper.detectDuplicatedFeatures();
-		EasyMock.verify(errorAcceptorMock);
 	}
 
 }

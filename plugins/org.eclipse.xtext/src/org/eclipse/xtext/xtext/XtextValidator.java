@@ -7,19 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
@@ -47,10 +52,14 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.Triple;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.XtextSwitch;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
+import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+import org.eclipse.xtext.xtext.ecoreInference.SourceAdapter;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -159,7 +168,109 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 				warning("Metamodel names should start with a lower case letter.",
 						XtextPackage.GENERATED_METAMODEL__NAME);
 	}
+	
+	@Check
+	public void checkGeneratedPackage(GeneratedMetamodel metamodel) {
+		Diagnostician diagnostician = (Diagnostician) getContext().get(EValidator.class);
+		checkGeneratedPackage(metamodel, diagnostician, getContext());
+	}
 
+	public void checkGeneratedPackage(GeneratedMetamodel metamodel, Diagnostician diagnostician, Map<?,?> params) {
+		EPackage pack = metamodel.getEPackage();
+		if (pack != null) {
+			Diagnostic packageValidationResult = diagnostician.validate(pack, params);
+			
+			ValidationMessageAcceptor filter = new ValidationMessageAcceptor() {
+				Set<Triple<EObject, Integer, String>> accepted = Sets.newHashSet();
+				public void acceptWarning(String message, EObject object, Integer feature, String code, String... issueData) {
+					if (accepted.add(Tuples.create(object, feature, message))) {
+						XtextValidator.this.getMessageAcceptor().acceptWarning(message, object, feature, code, issueData);
+					}
+				}
+				
+				public void acceptError(String message, EObject object, Integer feature, String code, String... issueData) {
+					if (accepted.add(Tuples.create(object, feature, message))) {
+						XtextValidator.this.getMessageAcceptor().acceptError(message, object, feature, code, issueData);
+					}
+				}
+			};
+			propageValidationResult(packageValidationResult, metamodel, filter);
+		}
+	}
+	
+	private void propageValidationResult(Diagnostic diagnostic, GeneratedMetamodel metamodel, ValidationMessageAcceptor acceptor) {
+		if (diagnostic.getSeverity() != Diagnostic.OK && diagnostic.getSeverity() != Diagnostic.INFO) {
+			if (diagnostic.getCode() != 0) {
+				List<?> data = diagnostic.getData();
+				if (!data.isEmpty() && data.get(0) instanceof EObject) {
+					doPropagateValidationResult(diagnostic, metamodel, acceptor);
+				}
+			}
+			for(Diagnostic child: diagnostic.getChildren())
+				propageValidationResult(child, metamodel, acceptor);
+		}
+	}
+	
+	private void doPropagateValidationResult(Diagnostic diagnostic,
+			GeneratedMetamodel metamodel, ValidationMessageAcceptor acceptor) {
+		boolean foundEObject = false;
+		Object firstData = null;
+		for(Object data: diagnostic.getData()) {
+			if (firstData == null) {
+				firstData = diagnostic.getData().get(0);
+			}
+			if (data instanceof EObject) {
+				if (createMessageForSource(diagnostic, (EObject) data, acceptor)) {
+					foundEObject = true;
+				} else if (data instanceof EPackage) {
+					doCreateMessage(diagnostic, metamodel, XtextPackage.GENERATED_METAMODEL__EPACKAGE, acceptor);
+					foundEObject = true;
+				}
+				if (data instanceof EStructuralFeature && ((EStructuralFeature) data).getEContainingClass() != firstData) {
+					EClass containingClass = ((EStructuralFeature) data).getEContainingClass();
+					createMessageForSource(diagnostic, containingClass, acceptor);
+				}
+			}
+		}
+		if (!foundEObject) {
+			doCreateMessage(diagnostic, metamodel, XtextPackage.GENERATED_METAMODEL__EPACKAGE, acceptor);
+		}
+	}
+
+	public boolean createMessageForSource(Diagnostic diagnostic, EObject object, ValidationMessageAcceptor acceptor) {
+		String code = XtextValidator.class.getName() + ".PackageValidation." + diagnostic.getCode();
+		int severity = diagnostic.getSeverity();
+		String message = diagnostic.getMessage();
+		return createMessageForSource(message, code, severity, object, acceptor);
+	}
+	
+	public void doCreateMessage(Diagnostic diagnostic, EObject object, Integer feature, ValidationMessageAcceptor acceptor) {
+		String code = XtextValidator.class.getName() + ".PackageValidation." + diagnostic.getCode();
+		int severity = diagnostic.getSeverity();
+		String message = diagnostic.getMessage();
+		doCreateMessage(message, code, severity, object, feature, acceptor);
+	}
+
+	public boolean createMessageForSource(String message, String code, int severity, EObject object, ValidationMessageAcceptor acceptor) {
+		SourceAdapter sourceAdapter = SourceAdapter.find(object);
+		boolean result = false;
+		if (sourceAdapter != null) {
+			for(EObject source: sourceAdapter.getSources()) {
+				doCreateMessage(message, code, severity, source, null, acceptor);
+				result = true;
+			}
+		}
+		return result;
+	}
+	
+	public void doCreateMessage(String message, String code, int severity, EObject context, Integer feature, ValidationMessageAcceptor acceptor) {
+		if (severity == Diagnostic.WARNING) {
+			acceptor.acceptWarning(message, context, feature, code);
+		} else if (severity == Diagnostic.ERROR) {
+			acceptor.acceptError(message, context, feature, code);
+		}
+	}
+	
 	@Check
 	public void checkReferencedMetamodel(ReferencedMetamodel metamodel) throws ValueConverterException {
 		if (metamodel.getEPackage() == null)

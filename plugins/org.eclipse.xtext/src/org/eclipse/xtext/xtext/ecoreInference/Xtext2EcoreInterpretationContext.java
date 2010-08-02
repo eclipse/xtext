@@ -118,12 +118,11 @@ public class Xtext2EcoreInterpretationContext {
 	}
 
 	public void addFeature(String featureName, EClassifierInfo featureTypeInfo, boolean isMultivalue,
-			boolean isContainment, EObject parserElement) throws TransformationException {
+			boolean isContainment, AbstractElement parserElement) throws TransformationException {
 		for (EClassifierInfo type : currentTypes)
 			type.addFeature(featureName, featureTypeInfo, isMultivalue, isContainment, parserElement);
 	}
-
-
+	
 	private EClassifier getTerminalType(AbstractElement terminal) throws TransformationException {
 		final EClassifier result = classifierCalculator.apply(terminal);
 		if (result == null) {
