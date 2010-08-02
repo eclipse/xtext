@@ -38,6 +38,7 @@ import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.xtext.ModifyableCache;
 import org.eclipse.xtext.xtext.XtextLinker;
 import org.eclipse.xtext.xtext.XtextLinker.PackageRemover;
 
@@ -111,6 +112,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		linker.setLinkingService(((Linker) resource.getLinker()).getLinkingService());
 		linker.setPackageRemover(new PackageRemover());
 		linker.setDiagnosticMessageProvider(new LinkingDiagnosticMessageProvider());
+		linker.setCache(new ModifyableCache());
 		resource.setLinker(linker);
 		resource.load(in, null);
 		return resource;

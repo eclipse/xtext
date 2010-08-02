@@ -70,6 +70,9 @@ public class XtextLinker extends Linker {
 
 	@Inject(optional = true)
 	private IReferableElementsUnloader unloader;
+	
+	@Inject
+	private ModifyableCache cache;
 
 	public IScopeProvider getScopeProvider() {
 		return scopeProvider;
@@ -194,6 +197,13 @@ public class XtextLinker extends Linker {
 			}
 		}
 		super.beforeModelLinked(model, diagnosticsConsumer);
+		cache.getOrCreate(model.eResource()).setIgnoreNotifications(true);
+	}
+	
+	@Override
+	protected void afterModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
+		super.afterModelLinked(model, diagnosticsConsumer);
+		cache.getOrCreate(model.eResource()).setIgnoreNotifications(false);
 	}
 
 	@Override
@@ -405,6 +415,14 @@ public class XtextLinker extends Linker {
 
 	public PackageRemover getPackageRemover() {
 		return packageRemover;
+	}
+
+	public void setCache(ModifyableCache cache) {
+		this.cache = cache;
+	}
+
+	public ModifyableCache getCache() {
+		return cache;
 	}
 
 }
