@@ -17,8 +17,11 @@ import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer;
 import org.eclipse.xtext.resource.IFragmentProvider;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
+import org.eclipse.xtext.xtext.ModifyableCache;
 import org.eclipse.xtext.xtext.XtextCrossReferenceSerializer;
 import org.eclipse.xtext.xtext.XtextDiagnosticConverter;
 import org.eclipse.xtext.xtext.XtextFormatter;
@@ -26,6 +29,7 @@ import org.eclipse.xtext.xtext.XtextFragmentProvider;
 import org.eclipse.xtext.xtext.XtextLinkingService;
 import org.eclipse.xtext.xtext.XtextQualifiedNameSupport;
 import org.eclipse.xtext.xtext.XtextReferableElementsUnloader;
+import org.eclipse.xtext.xtext.XtextResourceDescriptionManager;
 import org.eclipse.xtext.xtext.XtextScopeProvider;
 import org.eclipse.xtext.xtext.XtextTransientValueService;
 import org.eclipse.xtext.xtext.XtextValidator;
@@ -99,5 +103,13 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	
 	public Class<? extends IDiagnosticConverter> bindIDiagnosticConverter() {
 		return XtextDiagnosticConverter.class;
+	}
+	
+	public Class<? extends IResourceScopeCache> bindIResourceScopeCache() {
+		return ModifyableCache.class;
+	}
+	
+	public Class<? extends IResourceDescription.Manager> bindIResourceDescriptionsManager() {
+		return XtextResourceDescriptionManager.class;
 	}
 }
