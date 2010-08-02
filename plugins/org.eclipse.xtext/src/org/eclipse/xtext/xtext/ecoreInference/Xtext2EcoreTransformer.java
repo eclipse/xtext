@@ -334,6 +334,7 @@ public class Xtext2EcoreTransformer {
 							} else {
 								literal = existing;
 							}
+							SourceAdapter.adapt(literal, decl);
 						}
 						if (literal == null) {
 							reportError(new TransformationException(TransformationErrorCode.InvalidFeature, "Enum literal '" + text + "' does not exist.", decl));
@@ -562,14 +563,14 @@ public class Xtext2EcoreTransformer {
 		final TypeHierarchyHelper helper = new TypeHierarchyHelper(grammar, this.eClassifierInfos, this.errorAcceptor);
 		helper.liftUpFeaturesRecursively();
 		helper.removeDuplicateDerivedFeatures();
-		helper.detectEClassesWithCyclesInTypeHierachy();
+//		helper.detectEClassesWithCyclesInTypeHierachy();
 
 		// duplicated features can occur in rare cases when alternatives produce
 		// different types of a feature
 		// If the internal structure (Set) of the underlying algorithm
 		// produces the features for the subtype first the implementation of EClassInfo
 		// wont find a conflict
-		helper.detectDuplicatedFeatures();
+//		helper.detectDuplicatedFeatures();
 	}
 
 	private void deriveTypesAndHierarchy(final ParserRule rule, final EClassifierInfo ruleReturnType,
@@ -880,9 +881,11 @@ public class Xtext2EcoreTransformer {
 
 			if (!eClassifierInfos.addInfo(typeRef, result))
 				throw new IllegalStateException("cannot add type for typeRef twice: '" + classifierName + "'");
+			SourceAdapter.adapt(classifier, typeRef);
 			return result;
 		}
 		typeRef.setClassifier(classifier);
+		SourceAdapter.adapt(classifier, typeRef);
 		return eClassifierInfos.getInfo(classifier);
 	}
 

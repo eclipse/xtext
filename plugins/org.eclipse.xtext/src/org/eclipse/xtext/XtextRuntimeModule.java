@@ -18,7 +18,9 @@ import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.xtext.XtextCrossReferenceSerializer;
+import org.eclipse.xtext.xtext.XtextDiagnosticConverter;
 import org.eclipse.xtext.xtext.XtextFormatter;
 import org.eclipse.xtext.xtext.XtextFragmentProvider;
 import org.eclipse.xtext.xtext.XtextLinkingService;
@@ -93,5 +95,9 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	
 	public Class<? extends IQualifiedNameSupport> bindIQualifiedNameSupport() {
 		return XtextQualifiedNameSupport.class;
+	}
+	
+	public Class<? extends IDiagnosticConverter> bindIDiagnosticConverter() {
+		return XtextDiagnosticConverter.class;
 	}
 }

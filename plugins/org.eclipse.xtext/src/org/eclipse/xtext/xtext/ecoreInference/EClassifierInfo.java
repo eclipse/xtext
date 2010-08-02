@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EcoreUtil2.FindResult;
 import org.eclipse.xtext.util.Strings;
@@ -61,7 +62,7 @@ public abstract class EClassifierInfo {
 	public abstract boolean addSupertype(EClassifierInfo superTypeInfo);
 
 	public abstract boolean addFeature(String featureName, EClassifierInfo featureType, boolean isMultivalue,
-			boolean isContainment, EObject parserElement) throws TransformationException;
+			boolean isContainment, AbstractElement parserElement) throws TransformationException;
 
 	public static class EClassInfo extends EClassifierInfo {
 
@@ -105,7 +106,7 @@ public abstract class EClassifierInfo {
 
 		@Override
 		public boolean addFeature(String featureName, EClassifierInfo featureType, boolean isMultivalue,
-				boolean isContainment, EObject parserElement) throws TransformationException {
+				boolean isContainment, AbstractElement parserElement) throws TransformationException {
 			EClassifier featureClassifier = featureType.getEClassifier();
 			return addFeature(featureName, featureClassifier, isMultivalue, isContainment, parserElement);
 		}
@@ -117,7 +118,16 @@ public abstract class EClassifierInfo {
 					EReference reference = (EReference) prototype;
 					isContainment = reference.isContainment();
 				}
-				return addFeature(prototype.getName(), prototype.getEType(), prototype.isMany(), isContainment, null);
+				boolean result = addFeature(prototype.getName(), prototype.getEType(), prototype.isMany(), isContainment, null);
+				if (result) {
+					EStructuralFeature newFeature = getEClass().getEStructuralFeature(prototype.getName());
+					SourceAdapter oldAdapter = SourceAdapter.find(prototype);
+					if (oldAdapter != null) {
+						for(EObject source: oldAdapter.getSources())
+							SourceAdapter.adapt(newFeature, source);	
+					}
+				}
+				return result;
 			}
 			catch (TransformationException e) {
 				throw new IllegalArgumentException(e.getMessage());
@@ -125,10 +135,10 @@ public abstract class EClassifierInfo {
 		}
 
 		private boolean addFeature(String featureName, EClassifier featureClassifier, boolean isMultivalue,
-				boolean isContainment, EObject parserElement) throws TransformationException {
+				boolean isContainment, AbstractElement grammarElement) throws TransformationException {
 			if (!isGenerated()) {
 				if (!EcoreUtil2.containsCompatibleFeature(getEClass(), featureName, isMultivalue, isContainment, featureClassifier)) {
-					throw new TransformationException(TransformationErrorCode.CannotCreateTypeInSealedMetamodel, "Cannot find compatible feature "+featureName+" in sealed EClass "+getEClass().getName()+" from imported package "+getEClass().getEPackage().getNsURI()+".", parserElement);
+					throw new TransformationException(TransformationErrorCode.CannotCreateTypeInSealedMetamodel, "Cannot find compatible feature "+featureName+" in sealed EClass "+getEClass().getName()+" from imported package "+getEClass().getEPackage().getNsURI()+".", grammarElement);
 				}
 				return true;
 			}
@@ -139,10 +149,16 @@ public abstract class EClassifierInfo {
 			switch (containsSemanticallyEqualFeature) {
 				case FeatureDoesNotExist:
 					if (!isGenerated())
-						throw new TransformationException(TransformationErrorCode.CannotCreateTypeInSealedMetamodel, "Cannot create feature in sealed metamodel.", parserElement);
+						throw new TransformationException(TransformationErrorCode.CannotCreateTypeInSealedMetamodel, "Cannot create feature in sealed metamodel.", grammarElement);
+					if (grammarElement != null)
+						SourceAdapter.adapt(newFeature, grammarElement);
 					return getEClass().getEStructuralFeatures().add(newFeature);
 				case FeatureExists:
-					// do nothing
+					if (isGenerated()) {
+						EStructuralFeature existingFeature = EcoreUtil2.findFeatureByName(getEClass().getEAllStructuralFeatures(), featureName);
+						if (grammarElement != null)
+							SourceAdapter.adapt(existingFeature, grammarElement);
+					}
 					return false;
 				default:
 					// do nothing
@@ -156,18 +172,18 @@ public abstract class EClassifierInfo {
 				throw new TransformationException(TransformationErrorCode.FeatureWithDifferentConfigurationAlreadyExists,
 						"A feature '" + newFeature.getName() + "' with a different cardinality or containment " +
 								"configuration already exists in type '" + getEClass().getName() + "'.",
-						parserElement);
+						grammarElement);
 			
 			EClassifier compatibleType = EcoreUtil2.getCompatibleType(existingFeature.getEType(), newFeature.getEType());
 			if (compatibleType == null)
 				throw new TransformationException(TransformationErrorCode.NoCompatibleFeatureTypeAvailable,
-						"Cannot find compatible type for features", parserElement);
+						"Cannot find compatible type for features", grammarElement);
 			
 			if (isGenerated(existingFeature)) {
 				existingFeature.setEType(compatibleType);
 			} else {
 				throw new TransformationException(TransformationErrorCode.FeatureWithDifferentConfigurationAlreadyExists,
-						"Incompatible return type to existing feature", parserElement);
+						"Incompatible return type to existing feature", grammarElement);
 			}
 			return true;
 		}
@@ -222,7 +238,7 @@ public abstract class EClassifierInfo {
 
 		@Override
 		public boolean addFeature(String featureName, EClassifierInfo featureType, boolean isMultivalue,
-				boolean isContainment, EObject parserElement) throws TransformationException {
+				boolean isContainment, AbstractElement parserElement) throws TransformationException {
 			throw new UnsupportedOperationException("Cannot add feature " + featureName + " to simple datatype "
 					+ Strings.emptyIfNull(this.getEClassifier().getName()));
 		}
