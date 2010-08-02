@@ -8,23 +8,28 @@
 package org.eclipse.xtext.xtext;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.emf.ecore.util.EcoreValidator;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
@@ -198,6 +203,53 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		}
 	}
 	
+	@Check
+	public void checkGeneratedPackageForNameClashes(GeneratedMetamodel metamodel) {
+		EPackage pack = metamodel.getEPackage();
+		Multimap<String, ENamedElement> constantNameToElement = Multimaps.newHashMultimap();
+		Multimap<String, ENamedElement> accessorNameToElement = Multimaps.newHashMultimap();
+		if (pack != null) {
+			for(EClassifier classifier: pack.getEClassifiers()) {
+				String accessorName = classifier.getName();
+				if ("Class".equals(accessorName) || "Name".equals(accessorName))
+					accessorName += "_";
+				accessorNameToElement.put("get" + accessorName, classifier);
+				String classifierConstantName = CodeGenUtil.format(classifier.getName(), '_', null, true, true).toUpperCase();
+				constantNameToElement.put(classifierConstantName, classifier);
+				if (classifier instanceof EClass) {
+					for(EStructuralFeature feature: ((EClass) classifier).getEAllStructuralFeatures()) {
+						String featureConstantPart = CodeGenUtil.format(feature.getName(), '_', null, false, false).toUpperCase();
+						String featureConstantName = classifierConstantName + "__" + featureConstantPart;
+						constantNameToElement.put(featureConstantName, feature);
+						String featureAccessorName = "get" + classifier.getName() + "_" + Strings.toFirstUpper(feature.getName());
+						accessorNameToElement.put(featureAccessorName, feature);
+					}
+				}
+			}
+		}
+		createMessageForNameClashes(constantNameToElement);
+		createMessageForNameClashes(accessorNameToElement);
+	}
+
+	public void createMessageForNameClashes(Multimap<String, ENamedElement> nameToElement) {
+		for(Entry<String, Collection<ENamedElement>> entry: nameToElement.asMap().entrySet()) {
+			if (entry.getValue().size() > 1) {
+				if (!Iterables.isEmpty(Iterables.filter(entry.getValue(), EStructuralFeature.class))
+						&&!Iterables.isEmpty(Iterables.filter(entry.getValue(), EClassifier.class))) {
+					String constantName = entry.getKey();
+					String message = "Name clash in generated code: '" + constantName + "'.";
+					for(ENamedElement element: entry.getValue()) {
+						String myMessage = message;
+						if (element.getName().indexOf('_') >= 0) {
+							myMessage = myMessage + " Try to avoid underscores in names to prevent conflicts.";
+						}
+						createMessageForSource(myMessage, null, Diagnostic.ERROR, element, getMessageAcceptor());
+					}
+				}
+			}
+		}
+	}
+	
 	private void propageValidationResult(Diagnostic diagnostic, GeneratedMetamodel metamodel, ValidationMessageAcceptor acceptor) {
 		if (diagnostic.getSeverity() != Diagnostic.OK && diagnostic.getSeverity() != Diagnostic.INFO) {
 			if (diagnostic.getCode() != 0) {
@@ -222,10 +274,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			if (data instanceof EObject) {
 				if (createMessageForSource(diagnostic, (EObject) data, acceptor)) {
 					foundEObject = true;
-				} else if (data instanceof EPackage) {
-					doCreateMessage(diagnostic, metamodel, XtextPackage.GENERATED_METAMODEL__EPACKAGE, acceptor);
-					foundEObject = true;
-				}
+				} 
 				if (data instanceof EStructuralFeature && ((EStructuralFeature) data).getEContainingClass() != firstData) {
 					EClass containingClass = ((EStructuralFeature) data).getEContainingClass();
 					createMessageForSource(diagnostic, containingClass, acceptor);
@@ -240,6 +289,8 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	public boolean createMessageForSource(Diagnostic diagnostic, EObject object, ValidationMessageAcceptor acceptor) {
 		String code = XtextValidator.class.getName() + ".PackageValidation." + diagnostic.getCode();
 		int severity = diagnostic.getSeverity();
+		if (diagnostic.getCode() == EcoreValidator.UNIQUE_CLASSIFIER_NAMES || diagnostic.getCode() == EcoreValidator.UNIQUE_FEATURE_NAMES)
+			severity = Diagnostic.ERROR;
 		String message = diagnostic.getMessage();
 		return createMessageForSource(message, code, severity, object, acceptor);
 	}
@@ -247,6 +298,8 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	public void doCreateMessage(Diagnostic diagnostic, EObject object, Integer feature, ValidationMessageAcceptor acceptor) {
 		String code = XtextValidator.class.getName() + ".PackageValidation." + diagnostic.getCode();
 		int severity = diagnostic.getSeverity();
+		if (diagnostic.getCode() == EcoreValidator.UNIQUE_CLASSIFIER_NAMES || diagnostic.getCode() == EcoreValidator.UNIQUE_FEATURE_NAMES)
+			severity = Diagnostic.ERROR;
 		String message = diagnostic.getMessage();
 		doCreateMessage(message, code, severity, object, feature, acceptor);
 	}
