@@ -230,6 +230,17 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		createMessageForNameClashes(constantNameToElement);
 		createMessageForNameClashes(accessorNameToElement);
 	}
+	
+	public static final String EMPTY_GENERATED_PACKAGE = "XtextValidator.checkGeneratedPackageNotEmpty";
+	
+	@Check
+	public void checkGeneratedPackageNotEmpty(GeneratedMetamodel metamodel) {
+		EPackage pack = metamodel.getEPackage();
+		if (pack != null && pack.getEClassifiers().isEmpty()) {
+			getMessageAcceptor().acceptError("Generated package '" + metamodel.getName() + "' may not be empty.",
+					metamodel, XtextPackage.GENERATED_METAMODEL__EPACKAGE, EMPTY_GENERATED_PACKAGE);
+		}
+	}
 
 	public void createMessageForNameClashes(Multimap<String, ENamedElement> nameToElement) {
 		for(Entry<String, Collection<ENamedElement>> entry: nameToElement.asMap().entrySet()) {
