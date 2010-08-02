@@ -53,6 +53,8 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 		subMonitor.subTask("Validate resources");
 		try {
 			for (Delta delta : resourceDescriptionDeltas) {
+				if (subMonitor.isCanceled())
+					return;
 				if (delta.getNew() != null) {
 					Iterable<IStorage> storages = mapper.getStorages(delta.getNew().getURI());
 					SubMonitor child = subMonitor.newChild(1);
