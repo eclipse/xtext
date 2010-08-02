@@ -9,6 +9,7 @@ package org.eclipse.xtext.ecore;
 
 import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent;
 import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 
 import com.google.inject.Guice;
@@ -42,9 +43,9 @@ import com.google.inject.name.Named;
  */
 public class EcoreSupport implements IWorkflowComponent {
 
-	@Inject(optional=true)
-	@Named("ecore.fileExtension")
-	private String fileExtension = "ecore";
+	@Inject
+	@Named(Constants.FILE_EXTENSIONS)
+	private String fileExtension;
 
 	@Inject
 	private IResourceServiceProvider resourceServiceProvider;
