@@ -287,7 +287,6 @@ public class XtextValidationTest extends AbstractXtextTests implements Validatio
 	public void testBug_283534_06() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
-				"generate metamodel 'myURI'\n" +
 				"terminal TERMINAL: ID;\n");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
@@ -301,7 +300,6 @@ public class XtextValidationTest extends AbstractXtextTests implements Validatio
 	public void testBug_283534_07() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
-				"generate metamodel 'myURI'\n" +
 				"Model: ID;\n");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
@@ -1038,6 +1036,22 @@ public class XtextValidationTest extends AbstractXtextTests implements Validatio
 		);
 		validator.setMessageAcceptor(messageAcceptor);
 		validator.checkGeneratedPackage((GeneratedMetamodel) metamodelDeclaration, Diagnostician.INSTANCE, Collections.EMPTY_MAP);
+		messageAcceptor.validate();
+	}
+	
+	public void testGeneratedPackageNotEmpty() throws Exception {
+		String grammarAsText =
+				"grammar test with org.eclipse.xtext.common.Terminals\n" +
+				"generate test 'http://test'\n" +
+				"Foo: 'a';\n";
+		
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		AbstractMetamodelDeclaration metamodelDeclaration = grammar.getMetamodelDeclarations().get(0);
+		
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(metamodelDeclaration, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkGeneratedPackageNotEmpty((GeneratedMetamodel) metamodelDeclaration);
 		messageAcceptor.validate();
 	}
 	
