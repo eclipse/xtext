@@ -12,7 +12,6 @@ import static org.easymock.EasyMock.*;
 import java.io.InputStream;
 import java.util.List;
 
-import org.easymock.EasyMock;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
@@ -121,8 +120,6 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		replay(errorAcceptorMock);
 		Grammar grammar = (Grammar) getModelAndExpect(xtextGrammar, expectedErrors);
 		verify(errorAcceptorMock);
-//		xtext2EcoreTransformer.setErrorAcceptor(errorAcceptorMock);
-//		xtext2EcoreTransformer.transform(grammar);
 		List<EPackage> metamodels = Xtext2EcoreTransformer.doGetGeneratedPackages(grammar);
 		assertNotNull(metamodels);
 		return metamodels;
@@ -811,39 +808,6 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		EPackage ePackage = getEPackageFromGrammar(grammar, 1);
 		assertEquals(1, ePackage.getEClassifiers().size());
 		assertEquals("RuleA", ePackage.getEClassifiers().get(0).getName());
-	}
-
-	public void testCycleInTypeHierarchy() throws Exception {
-		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
-				" generate test 'http://test'";
-		grammar += " RuleA: RuleB;";
-		grammar += " RuleB: RuleC;";
-		grammar += " RuleC: RuleA;";
-		grammar += " RuleD: RuleA;";
-
-		errorAcceptorMock.acceptError(same(TransformationErrorCode.TypeWithCycleInHierarchy), (String) anyObject(),
-				(EObject) anyObject());
-		EasyMock.expectLastCall().times(3);
-
-		EPackage ePackage = getEPackageFromGrammar(grammar, 3);
-		assertEquals(4, ePackage.getEClassifiers().size());
-		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
-		assertNotNull(ruleA);
-		EClass ruleB = (EClass) ePackage.getEClassifier("RuleB");
-		assertNotNull(ruleB);
-		EClass ruleC = (EClass) ePackage.getEClassifier("RuleC");
-		assertNotNull(ruleC);
-		EClass ruleD = (EClass) ePackage.getEClassifier("RuleD");
-		assertNotNull(ruleD);
-
-		assertEquals(2, ruleA.getESuperTypes().size());
-		assertSame(ruleC, ruleA.getESuperTypes().get(0));
-		assertSame(ruleD, ruleA.getESuperTypes().get(1));
-		assertEquals(1, ruleB.getESuperTypes().size());
-		assertSame(ruleA, ruleB.getESuperTypes().get(0));
-		assertEquals(1, ruleC.getESuperTypes().size());
-		assertSame(ruleB, ruleC.getESuperTypes().get(0));
-		assertEquals(0, ruleD.getESuperTypes().size());
 	}
 
 	public void testExpressionLikeLangauge() throws Exception {
