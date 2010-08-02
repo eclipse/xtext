@@ -11,10 +11,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.AbstractEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -24,9 +26,11 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
 import org.eclipse.xtext.linking.impl.AbstractCleaningLinker;
@@ -42,6 +46,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -50,6 +55,8 @@ import com.google.inject.Inject;
  */
 public class LazyLinker extends AbstractCleaningLinker {
 
+	private static final Logger log = Logger.getLogger(LazyLinker.class);
+	
 	private SimpleCache<EClass, EClass> instantiableSubTypes = new SimpleCache<EClass, EClass>(
 			new Function<EClass, EClass>() {
 				public EClass apply(EClass from) {
@@ -65,6 +72,9 @@ public class LazyLinker extends AbstractCleaningLinker {
 
 	@Inject
 	private EcoreGenericsUtil ecoreGenericsUtil;
+	
+	@Inject
+	private IGrammarAccess grammarAccess;
 
 	@Override
 	protected void doLinkModel(EObject model, IDiagnosticConsumer consumer) {
@@ -155,24 +165,44 @@ public class LazyLinker extends AbstractCleaningLinker {
 		return proxy;
 	}
 
-	private EClass findInstantiableCompatible(EClass eType) {
+	protected EClass findInstantiableCompatible(EClass eType) {
 		if (!isInstantiatableSubType(eType, eType)) {
 			// check local Package
 			EPackage ePackage = eType.getEPackage();
 			EClass eClass = findSubTypeInEPackage(ePackage, eType);
 			if (eClass != null)
 				return eClass;
-			// check registry
-			for (String nsURI : getRegisteredNsUris()) {
-				if (isLocalPackage(ePackage, nsURI))
-					continue;
-
-				EClass class1 = findSubTypeInEPackage(getRegistry().getEPackage(nsURI), eType);
-				if (class1 != null)
-					return class1;
-			}
+			return globalFindInstantiableCompatible(eType);
 		}
 		return eType;
+	}
+
+	protected EClass globalFindInstantiableCompatible(EClass eType) {
+		Set<String> visitedPackages = Sets.newHashSet(eType.getEPackage().getNsURI());
+		for(AbstractMetamodelDeclaration metamodel: GrammarUtil.allMetamodelDeclarations(grammarAccess.getGrammar())) {
+			if (visitedPackages.add(metamodel.getEPackage().getNsURI())) {
+				EClass result = findSubTypeInEPackage(metamodel.getEPackage(), eType);
+				if (result != null)
+					return result;
+			}
+		}
+		log.warn("Traversing EPackage registry to find instantiable subtype for '" + eType.getName() + "'");
+		log.warn("You may override LazyLinker#globalFindInstantiableCompatible(..) to prevent this.");
+		for (String nsURI : getRegisteredNsUris()) {
+			if (visitedPackages.add(nsURI)) {
+				try {
+					EClass result = findSubTypeInEPackage(getRegistry().getEPackage(nsURI), eType);
+					if (result != null)
+						return result;
+				} catch(WrappedException ex) {
+					log.error("Error when loading EPackage '" + nsURI + "'");
+					log.error("You may override LazyLinker#globalFindInstantiableCompatible(..) to prevent this.");
+					log.error("Error when loading EPackage '" + nsURI + "'", ex);
+				}
+			}
+		}
+		throw new IllegalStateException(
+				"Could not find an instantiable subtype for type: '" + eType.getName() + "' (" + eType.getEPackage().getNsURI() + ").");
 	}
 
 	private List<String> getRegisteredNsUris() {
@@ -182,11 +212,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 		return copy;
 	}
 
-	private boolean isLocalPackage(EPackage ePackage, String nsURI) {
-		return nsURI.equals(ePackage.getNsURI());
-	}
-
-	private EClass findSubTypeInEPackage(EPackage ePackage, EClass superType) {
+	protected EClass findSubTypeInEPackage(EPackage ePackage, EClass superType) {
 		EList<EClassifier> classifiers = ePackage.getEClassifiers();
 		for (EClassifier eClassifier : classifiers) {
 			if (eClassifier instanceof EClass) {
@@ -216,6 +242,14 @@ public class LazyLinker extends AbstractCleaningLinker {
 
 	public void setEncoder(LazyURIEncoder encoder) {
 		this.encoder = encoder;
+	}
+
+	public void setGrammarAccess(IGrammarAccess grammarAccess) {
+		this.grammarAccess = grammarAccess;
+	}
+
+	public IGrammarAccess getGrammarAccess() {
+		return grammarAccess;
 	}
 
 }
