@@ -8,6 +8,7 @@
 package org.eclipse.xtext.linking.lazy;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,8 +20,13 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -30,6 +36,7 @@ import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.ParsetreeFactory;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
+import org.eclipse.xtext.util.Pair;
 
 import com.google.common.collect.Lists;
 import com.google.inject.AbstractModule;
@@ -50,6 +57,23 @@ public class LazyLinkerTest extends AbstractXtextTests {
 			@Override
 			protected void configure() {
 				bind(EPackage.Registry.class).toInstance(EPackage.Registry.INSTANCE);
+				bind(IGrammarAccess.class).toInstance(new IGrammarAccess() {
+					public List<Pair<Keyword, Keyword>> findKeywordPairs(String leftKw, String rightKw) {
+						return Collections.emptyList();
+					}
+
+					public List<Keyword> findKeywords(String... keywords) {
+						return Collections.emptyList();
+					}
+
+					public List<RuleCall> findRuleCalls(AbstractRule... rules) {
+						return Collections.emptyList();
+					}
+
+					public Grammar getGrammar() {
+						return XtextFactory.eINSTANCE.createGrammar();
+					}
+				});
 			}
 		});
 		linker = get(LazyLinker.class);
