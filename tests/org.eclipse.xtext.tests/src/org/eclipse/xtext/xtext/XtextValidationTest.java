@@ -71,7 +71,7 @@ public class XtextValidationTest extends AbstractXtextTests implements Validatio
 
 		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 		assertNotNull("diag", diag);
-		assertEquals(diag.getChildren().toString(), 5, diag.getChildren().size());
+		assertEquals(diag.getChildren().toString(), 4, diag.getChildren().size());
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
@@ -971,6 +971,70 @@ public class XtextValidationTest extends AbstractXtextTests implements Validatio
 				((CompoundElement) grammar.getRules().get(2).getAlternatives()).getElements().get(1),
 				grammar.getRules().get(3).getAlternatives(),
 				((CompoundElement) grammar.getRules().get(5).getAlternatives()).getElements().get(1)
+		);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkGeneratedPackage((GeneratedMetamodel) metamodelDeclaration, Diagnostician.INSTANCE, Collections.EMPTY_MAP);
+		messageAcceptor.validate();
+	}
+	
+	public void testNameClash_01() throws Exception {
+		String grammarAsText =
+				"grammar test with org.eclipse.xtext.common.Terminals\n" +
+				"generate test 'http://test'\n" +
+				"PRINTF: vars=PRINTF_Vars;\n" +
+				"PRINTF_Vars: arg1=ID;";
+		
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		AbstractMetamodelDeclaration metamodelDeclaration = grammar.getMetamodelDeclarations().get(0);
+		
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, true, false);
+		messageAcceptor.expectedContext(
+				grammar.getRules().get(0).getAlternatives(),
+				grammar.getRules().get(1).getType()
+		);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkGeneratedPackageForNameClashes((GeneratedMetamodel) metamodelDeclaration);
+		messageAcceptor.validate();
+	}
+	
+	public void testNameClash_02() throws Exception {
+		String grammarAsText =
+				"grammar test with org.eclipse.xtext.common.Terminals\n" +
+				"generate test 'http://test'\n" +
+				"Class returns Class: {Class_} name=ID;\n";
+		
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		AbstractMetamodelDeclaration metamodelDeclaration = grammar.getMetamodelDeclarations().get(0);
+		
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, true, false);
+		CompoundElement element = (CompoundElement) grammar.getRules().get(0).getAlternatives();
+		messageAcceptor.expectedContext(
+				grammar.getRules().get(0).getType(),
+				((Action) element.getElements().get(0)).getType()
+		);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkGeneratedPackage((GeneratedMetamodel) metamodelDeclaration, Diagnostician.INSTANCE, Collections.EMPTY_MAP);
+		messageAcceptor.validate();
+	}
+	
+	public void testNameClash_03() throws Exception {
+		String grammarAsText =
+				"grammar test with org.eclipse.xtext.common.Terminals\n" +
+				"generate test 'http://test'\n" +
+				"Foo: myVars=ID my_vars=ID;\n";
+		
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		AbstractMetamodelDeclaration metamodelDeclaration = grammar.getMetamodelDeclarations().get(0);
+		
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, true, false);
+		CompoundElement element = (CompoundElement) grammar.getRules().get(0).getAlternatives();
+		messageAcceptor.expectedContext(
+				grammar.getRules().get(0).getType(),
+				element.getElements().get(0),
+				element.getElements().get(1)
 		);
 		validator.setMessageAcceptor(messageAcceptor);
 		validator.checkGeneratedPackage((GeneratedMetamodel) metamodelDeclaration, Diagnostician.INSTANCE, Collections.EMPTY_MAP);
