@@ -7,18 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.emf.ecore.util.EcoreValidator;
+import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumRule;
+import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
@@ -35,6 +43,7 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -48,6 +57,7 @@ public class XtextValidationTest extends AbstractXtextTests implements Validatio
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
+		EValidator.Registry.INSTANCE.put(EcorePackage.eINSTANCE, EcoreValidator.INSTANCE);
 	}
 
 	public void testRulenamesAreNotEqualIgnoreCase() throws Exception {
@@ -61,7 +71,7 @@ public class XtextValidationTest extends AbstractXtextTests implements Validatio
 
 		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 		assertNotNull("diag", diag);
-		assertEquals(diag.getChildren().toString(), 2, diag.getChildren().size());
+		assertEquals(diag.getChildren().toString(), 5, diag.getChildren().size());
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
@@ -812,7 +822,7 @@ public class XtextValidationTest extends AbstractXtextTests implements Validatio
 		parserRule.setType(typeRef);
 		ruleCall.setRule(parserRule);
 		unorderedGroup.getElements().add(ruleCall);
-		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(ruleCall, false, false);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, false, false);
 		validator.setMessageAcceptor(messageAcceptor);
 		validator.checkRuleCallInUnorderedGroup(ruleCall);
 		messageAcceptor.validate();
@@ -825,7 +835,7 @@ public class XtextValidationTest extends AbstractXtextTests implements Validatio
 		EnumRule enumRule = XtextFactory.eINSTANCE.createEnumRule();
 		ruleCall.setRule(enumRule);
 		unorderedGroup.getElements().add(ruleCall);
-		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(ruleCall, false, false);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, false, false);
 		validator.setMessageAcceptor(messageAcceptor);
 		validator.checkRuleCallInUnorderedGroup(ruleCall);
 		messageAcceptor.validate();
@@ -838,7 +848,7 @@ public class XtextValidationTest extends AbstractXtextTests implements Validatio
 		TerminalRule terminalRule = XtextFactory.eINSTANCE.createTerminalRule();
 		ruleCall.setRule(terminalRule);
 		unorderedGroup.getElements().add(ruleCall);
-		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(ruleCall, false, false);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, false, false);
 		validator.setMessageAcceptor(messageAcceptor);
 		validator.checkRuleCallInUnorderedGroup(ruleCall);
 		messageAcceptor.validate();
@@ -856,7 +866,7 @@ public class XtextValidationTest extends AbstractXtextTests implements Validatio
 		Assignment assignment = XtextFactory.eINSTANCE.createAssignment();
 		assignment.setTerminal(ruleCall);
 		unorderedGroup.getElements().add(assignment);
-		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(ruleCall, false, false);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, false, false);
 		validator.setMessageAcceptor(messageAcceptor);
 		validator.checkRuleCallInUnorderedGroup(ruleCall);
 		messageAcceptor.validate();
@@ -886,33 +896,121 @@ public class XtextValidationTest extends AbstractXtextTests implements Validatio
 		messageAcceptor.validate();
 	}
 	
+	public void testCycleInTypeHierarchy() throws Exception {
+		String grammarAsText = "grammar test with org.eclipse.xtext.common.Terminals" +
+				" generate test 'http://test'";
+		grammarAsText += " RuleA: RuleB;";
+		grammarAsText += " RuleB: RuleC;";
+		grammarAsText += " RuleC: RuleA;";
+		grammarAsText += " RuleD: RuleA;";
+
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		AbstractMetamodelDeclaration metamodelDeclaration = grammar.getMetamodelDeclarations().get(0);
+		
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(grammar.getRules().get(0).getType(), true, false);
+		messageAcceptor.expectedContext(
+				grammar.getRules().get(1).getType(),
+				grammar.getRules().get(2).getType()
+		);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkGeneratedPackage((GeneratedMetamodel) metamodelDeclaration, Diagnostician.INSTANCE, Collections.EMPTY_MAP);
+		messageAcceptor.validate();
+	}
+	
+	public void testDuplicateFeatures_01() throws Exception {
+		String grammarAsText =
+				"grammar test with org.eclipse.xtext.common.Terminals\n" +
+				"generate test 'http://test'\n" +
+				"Model: Parent1 | Parent2 | NoParent;\n" + 
+				"NoParent: foo=ID;" +
+				"Parent1: Sub1 | Sub2;\n" + 
+				"Parent2: Sub2 | Sub3;\n" + 
+				"Sub1: x=ID;\n" + 
+				"Sub2: x=ID;\n" + 
+				"Sub3: x=ID;\n";
+		
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		AbstractMetamodelDeclaration metamodelDeclaration = grammar.getMetamodelDeclarations().get(0);
+		
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, true, false);
+		messageAcceptor.expectedContext(
+				grammar.getRules().get(2).getType(),
+				grammar.getRules().get(3).getType(),
+				grammar.getRules().get(5).getType(),
+				grammar.getRules().get(4).getAlternatives(),
+				grammar.getRules().get(5).getAlternatives(),
+				grammar.getRules().get(6).getAlternatives()
+		);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkGeneratedPackage((GeneratedMetamodel) metamodelDeclaration, Diagnostician.INSTANCE, Collections.EMPTY_MAP);
+		messageAcceptor.validate();
+	}
+
+	public void testDuplicateFeatures_02() throws Exception {
+		String grammarAsText =
+				"grammar test with org.eclipse.xtext.common.Terminals\n" +
+				"generate test 'http://test'\n" +
+				"A : (b+=B)*;\n" + 
+				"B : C | D;\n" +
+				"C : 'c' name=ID ('e' e+=E)+;\n" + 
+				"E : name=ID;\n" + 
+				"F : C | E;\n" + 
+				"D : 'd' name=ID 'ref' ref=[F];";
+		
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		AbstractMetamodelDeclaration metamodelDeclaration = grammar.getMetamodelDeclarations().get(0);
+		
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, true, false);
+		messageAcceptor.expectedContext(
+				grammar.getRules().get(1).getType(),
+				grammar.getRules().get(2).getType(),
+				grammar.getRules().get(4).getType(),
+				((CompoundElement) grammar.getRules().get(2).getAlternatives()).getElements().get(1),
+				grammar.getRules().get(3).getAlternatives(),
+				((CompoundElement) grammar.getRules().get(5).getAlternatives()).getElements().get(1)
+		);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkGeneratedPackage((GeneratedMetamodel) metamodelDeclaration, Diagnostician.INSTANCE, Collections.EMPTY_MAP);
+		messageAcceptor.validate();
+	}
+	
 	public class ValidatingMessageAcceptor implements ValidationMessageAcceptor {
 
-		private final EObject context;
+		private final Set<EObject> contexts;
 		private boolean error;
 		private boolean warning;
 
 		public ValidatingMessageAcceptor(EObject context, boolean error, boolean warning) {
-			this.context = context;
+			this.contexts = Sets.newHashSet();
+			if (context != null)
+				contexts.add(context);
 			this.error = error;
 			this.warning = warning;
 		}
 		
+		public void expectedContext(EObject... contexts) {
+			this.contexts.addAll(Arrays.asList(contexts));
+		}
+		
 		public void validate() {
+			assertTrue(contexts.toString(), contexts.isEmpty());
 			assertFalse(warning);
 			assertFalse(error);
 		}
 
 		public void acceptError(String message, EObject object, Integer feature, String code, String... issueData) {
 			assertTrue(error);
-			error = false;
-			assertSame(context, object);
+			assertTrue(String.valueOf(object) + " but expected: " + contexts.toString(), contexts.remove(object));
+			error = contexts.size() > 0;
 		}
 
 		public void acceptWarning(String message, EObject object, Integer feature, String code, String... issueData) {
 			assertTrue(warning);
-			warning = false;
-			assertSame(context, object);
+			assertTrue(object.toString(), contexts.remove(object));
+			warning = contexts.size() > 0;
 		}
 		
 	}
