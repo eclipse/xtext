@@ -21,11 +21,14 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.util.Strings;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
+@Singleton
 public class AntlrTokenDefProvider implements ITokenDefProvider {
 	
 	private static final Logger log = Logger.getLogger(AntlrTokenDefProvider.class);
@@ -33,7 +36,7 @@ public class AntlrTokenDefProvider implements ITokenDefProvider {
 	@Inject
 	private IAntlrTokenFileProvider antlrTokenFileProvider;
 	
-	protected Map<Integer, String> tokenDefMap;
+	protected volatile Map<Integer, String> tokenDefMap;
 	
 	private static final String TOKEN_COUNT = "Tokens";
 	
@@ -44,7 +47,7 @@ public class AntlrTokenDefProvider implements ITokenDefProvider {
 			InputStream tokenFile = antlrTokenFileProvider.getAntlrTokenFile();
 			try {
 				BufferedReader br = new BufferedReader(new InputStreamReader(tokenFile));
-				tokenDefMap = new HashMap<Integer, String>();
+				Map<Integer, String> tokenDefMap = new HashMap<Integer, String>();
 				String line = br.readLine();
 				Pattern pattern = Pattern.compile("(.*)=(\\d+)");
 				while (line != null) {
@@ -65,6 +68,7 @@ public class AntlrTokenDefProvider implements ITokenDefProvider {
 					}
 					line = br.readLine();
 				}
+				this.tokenDefMap = ImmutableMap.copyOf(tokenDefMap);
 			} catch (Exception e) {
 				log.error(e, e);
 				tokenDefMap = null;
