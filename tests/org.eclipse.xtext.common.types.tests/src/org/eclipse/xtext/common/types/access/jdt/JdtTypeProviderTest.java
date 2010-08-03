@@ -41,72 +41,72 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 		projectProvider = new MockJavaProjectProvider();
 		typeProvider = new JdtTypeProvider(projectProvider.getJavaProject(resourceSet), resourceSet);
 	}
-	
+
 	@Override
 	protected void tearDown() throws Exception {
 		resourceSet = null;
 		typeProvider = null;
 		super.tearDown();
 	}
-	
+
 	@Override
 	protected ITypeProvider getTypeProvider() {
 		return typeProvider;
 	}
-	
+
 	public void testSetup_01() {
 		Map<String, Object> map = resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap();
 		assertSame(typeProvider, map.get(URIHelperConstants.PROTOCOL));
 	}
-	
+
 	public void testCreateResource_01() {
-		URI primitivesURI = URI.createURI("java:/Primitives"); 
+		URI primitivesURI = URI.createURI("java:/Primitives");
 		TypeResource resource = typeProvider.createResource(primitivesURI);
 		assertNotNull(resource);
 		assertFalse(resource.isLoaded());
 		assertTrue(resource.getContents().isEmpty());
 	}
-	
+
 	public void testCreateResource_02() {
-		URI primitivesURI = URI.createURI("java:/Primitives"); 
+		URI primitivesURI = URI.createURI("java:/Primitives");
 		TypeResource resource = (TypeResource) resourceSet.createResource(primitivesURI);
 		assertNotNull(resource);
 		assertFalse(resource.isLoaded());
 		assertTrue(resource.getContents().isEmpty());
 	}
-	
+
 	public void testGetResource_01() {
-		URI primitivesURI = URI.createURI("java:/Primitives"); 
+		URI primitivesURI = URI.createURI("java:/Primitives");
 		TypeResource resource = (TypeResource) resourceSet.getResource(primitivesURI, true);
 		assertNotNull(resource);
 		assertTrue(resource.isLoaded());
 		assertEquals(9, resource.getContents().size());
 	}
-	
+
 	public void testGetResource_02() {
-		URI primitivesURI = URI.createURI("java:/Primitives"); 
+		URI primitivesURI = URI.createURI("java:/Primitives");
 		TypeResource resource = (TypeResource) resourceSet.getResource(primitivesURI, false);
 		assertNull(resource);
 	}
-	
+
 	public void testGetResource_03() {
-		URI primitivesURI = URI.createURI("java:/Primitives"); 
+		URI primitivesURI = URI.createURI("java:/Primitives");
 		TypeResource createdResource = (TypeResource) resourceSet.createResource(primitivesURI);
 		TypeResource resource = (TypeResource) resourceSet.getResource(primitivesURI, false);
 		assertSame(createdResource, resource);
 		assertFalse(resource.isLoaded());
 		assertTrue(resource.getContents().isEmpty());
 	}
-	
+
 	public void testGetResource_04() {
-		URI primitivesURI = URI.createURI("java:/Primitives"); 
+		URI primitivesURI = URI.createURI("java:/Primitives");
 		TypeResource createdResource = (TypeResource) resourceSet.createResource(primitivesURI);
 		TypeResource resource = (TypeResource) resourceSet.getResource(primitivesURI, true);
 		assertSame(createdResource, resource);
 		assertTrue(resource.isLoaded());
 		assertEquals(9, resource.getContents().size());
 	}
-	
+
 	public void testCreateMirror_01() {
 		URI uri = URI.createURI("java:/Objects/java.util.Map");
 		IMirror mirror = typeProvider.createMirror(uri);
@@ -114,14 +114,14 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 		assertTrue(mirror instanceof JdtTypeMirror);
 		assertEquals("java.util.Map", ((JdtTypeMirror) mirror).getMirroredType().getFullyQualifiedName());
 	}
-	
+
 	public void testCreateMirror_02() {
 		URI uri = URI.createURI("java:/Primitives");
 		IMirror mirror = typeProvider.createMirror(uri);
 		assertNotNull(mirror);
 		assertTrue(mirror instanceof PrimitiveMirror);
 	}
-	
+
 	public void testCreateMirror_03() {
 		URI uri = URI.createURI("java:/Something");
 		try {
@@ -131,7 +131,7 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 			// ok
 		}
 	}
-	
+
 	public void testCreateMirror_04() {
 		URI uri = URI.createURI("java:/Primitives").appendFragment("int");
 		try {
@@ -141,7 +141,7 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 			// ok
 		}
 	}
-	
+
 	public void testCreateMirror_05() {
 		URI uri = URI.createURI("java:/Objects/java.lang.does.not.exist");
 		try {
@@ -151,7 +151,7 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 			// OK
 		}
 	}
-	
+
 	public void testCreateMirror_06() {
 		URI uri = URI.createURI("java:/Objects/java.lang.does.not.exist");
 		try {
@@ -161,7 +161,7 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 			// OK
 		}
 	}
-	
+
 	public void testBug300216() {
 		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName("java.lang.Object");
 		assertTrue(type.getSuperTypes().isEmpty());
@@ -175,10 +175,24 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 		assertTrue(type.getSuperTypes().get(0).getType().eIsProxy());
 		assertEquals(resources, type.eResource().getResourceSet().getResources().size());
 	}
-	
+
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=319993
+	 */
+	public void testBug319993() {
+		try {
+			getTypeProvider().findTypeByName("interface myAggregation");
+			fail();
+		} catch (IllegalArgumentException e) {
+			fail();
+		} catch (TypeNotFoundException e) {
+			//expected
+		} 
+	}
+
 	@Override
 	protected String getCollectionParamName() {
 		return "c";
 	}
-	
+
 }
