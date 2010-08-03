@@ -7,15 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.outline.actions;
 
+import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.outline.XtextContentOutlinePage;
 import org.eclipse.xtext.ui.internal.XtextPluginImages;
 
 public class LexicalSortingAction extends AbstractOutlineAction {
 
 	public LexicalSortingAction(XtextContentOutlinePage outlinePage) {
-		super("Sort", outlinePage);
-		setToolTipText("Sort");
-		setDescription("Sort");
+		super(XtextUIMessages.LexicalSortingAction_label, outlinePage);
+		setToolTipText(XtextUIMessages.LexicalSortingAction_tooltip);
+		setDescription(XtextUIMessages.LexicalSortingAction_description);
 		setImageDescriptor(XtextPluginImages.DESC_ALPHAB_SORT_CO);
 		setDisabledImageDescriptor(XtextPluginImages.DESC_ALPHAB_SORT_CO_DISABLED);
 	}

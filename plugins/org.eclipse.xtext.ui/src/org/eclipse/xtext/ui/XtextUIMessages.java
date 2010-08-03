@@ -72,5 +72,19 @@ public class XtextUIMessages extends NLS {
 	 */
 	public static String AbstractHover_MultipleMarkers;
 
+	/**
+	 * editor ruler context menu
+	 */
 	public static String Editor_FoldingMenu_name;
+	
+	/**
+	 * messages for outline
+	 */
+	public static String LexicalSortingAction_description;
+	public static String LexicalSortingAction_label;
+	public static String LexicalSortingAction_tooltip;
+
+	public static String ToggleLinkWithEditorAction_description;
+	public static String ToggleLinkWithEditorAction_label;
+	public static String ToggleLinkWithEditorAction_toolTip;
 }
