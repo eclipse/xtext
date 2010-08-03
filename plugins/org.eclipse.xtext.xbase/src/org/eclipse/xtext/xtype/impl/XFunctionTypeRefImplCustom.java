@@ -22,7 +22,7 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 	@Override
 	public EList<JvmTypeReference> getParamTypes() {
 		int numberOfArguments = getArguments().size()-1;
-		if (numberOfArguments==0) {
+		if (numberOfArguments<=0) {
 			return empty;
 		}
 		JvmTypeReference[] args = new JvmTypeReference[numberOfArguments];
