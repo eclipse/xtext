@@ -297,18 +297,58 @@ public class QualifiedNameScopeProviderTest extends AbstractXtextTests {
 		final Resource res2 = rs2.createResource(URI.createURI("file2.indextestlanguage"));
 		res2.load(new StringInputStream("baz {" + "  entity Baz{}" + "}"), null);
 
+		Entity baz = getEntityByName(res2,"Baz");
+
+		IScope scope = scopeProvider.getScope(baz, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
+		assertNotNull(scope.getContentByName("foo.Foo"));
+		assertNull(scope.getContentByName("bar.Bar"));
+	}
+
+	protected Entity getEntityByName(final Resource res2, String name) {
 		Iterable<EObject> allContents = new Iterable<EObject>() {
 			public Iterator<EObject> iterator() {
 				return res2.getAllContents();
 			}
 		};
-		Iterator<Entity> iterator = Iterables.filter(allContents, Entity.class).iterator();
-		Entity baz = iterator.next();
-		assertEquals("Baz", baz.getName());
-
+		Iterable<Entity> iterator = Iterables.filter(allContents, Entity.class);
+		for (Entity entity : iterator) {
+			if (entity.getName().equals(name))
+				return entity;
+		}
+		return null;
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=317971
+	 */
+	public void testBug317971() throws Exception {
+		ResourceSetReferencingResourceSetImpl rs = new ResourceSetReferencingResourceSetImpl();
+		Resource res = rs.createResource(URI.createURI("file2.indextestlanguage"));
+		res.load(new StringInputStream(
+				"bar { " +
+				"  import bar.x.* " +
+				"  import bar.x.y.* " +
+				"  x { " +
+				"    y {" +
+				"      entity Z{}" +
+				"    } " +
+				"  } " +
+				"  entity Bar{}" +
+				"}"), null);
+		assertTrue(res.getErrors().toString(), res.getErrors().isEmpty());
+		
+		Entity baz = getEntityByName(res,"Bar");
 		IScope scope = scopeProvider.getScope(baz, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getContentByName("foo.Foo"));
-		assertNull(scope.getContentByName("bar.Bar"));
+		Iterator<IEObjectDescription> contents = scope.getAllContents().iterator();
+		// local block
+		assertEquals("x.y.Z",contents.next().getName());
+		assertEquals("Bar",contents.next().getName());
+		// imports
+		assertEquals("Z",contents.next().getName());
+		assertEquals("y.Z",contents.next().getName());
+		// global scope
+		assertEquals("bar.x.y.Z",contents.next().getName());
+		assertEquals("bar.Bar",contents.next().getName());
 	}
 
 	private static IQualifiedNameProvider nameProvider = new DefaultDeclarativeQualifiedNameProvider();
