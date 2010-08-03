@@ -20,11 +20,11 @@ public class ToggleLinkWithEditorAction extends Action {
 	private final XtextContentOutlinePage outlinePage;
 
 	public ToggleLinkWithEditorAction(XtextContentOutlinePage outlinePage) {
-		super(XtextUIMessages.getString("ToggleLinkWithEditorAction.label")); //$NON-NLS-1$
+		super(XtextUIMessages.ToggleLinkWithEditorAction_label);
 		this.outlinePage = outlinePage;
 		setChecked(isLinkingEnabled());
-		setToolTipText(XtextUIMessages.getString("ToggleLinkWithEditorAction.toolTip")); //$NON-NLS-1$
-		setDescription(XtextUIMessages.getString("ToggleLinkWithEditorAction.description")); //$NON-NLS-1$
+		setToolTipText(XtextUIMessages.ToggleLinkWithEditorAction_toolTip);
+		setDescription(XtextUIMessages.ToggleLinkWithEditorAction_description); 
 		setImageDescriptor(XtextPluginImages.DESC_LINK_WITH_EDITOR);
 		setDisabledImageDescriptor(XtextPluginImages.DESC_LINK_WITH_EDITOR_DISABLED);
 	}
