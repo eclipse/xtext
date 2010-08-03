@@ -11,13 +11,13 @@ package org.eclipse.xtext.scoping.impl;
 import static com.google.common.collect.Iterables.*;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -37,7 +37,9 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -244,14 +246,18 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	}
 
 	protected Set<ImportNormalizer> internalGetImportNormalizers(final EObject context) {
-		Set<ImportNormalizer> namespaceImports = new HashSet<ImportNormalizer>();
+		Set<ImportNormalizer> namespaceImports = Sets.newLinkedHashSet();
 		SimpleAttributeResolver<EObject, String> importResolver = SimpleAttributeResolver.newResolver(String.class,
 				"importedNamespace");
-		for (EObject child : context.eContents()) {
+		EList<EObject> eContents = context.eContents();
+		// iterate over imports in reverse order see https://bugs.eclipse.org/bugs/show_bug.cgi?id=317971
+		for (int i=eContents.size()-1;i>=0;i--) {
+			EObject child = eContents.get(i);
 			String value = importResolver.getValue(child);
 			if (value != null) {
 				namespaceImports.add(createImportNormalizer(value));
 			}
+			
 		}
 		return namespaceImports;
 	}
@@ -296,19 +302,16 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 
 			@Override
 			protected Iterable<IEObjectDescription> internalGetContents() {
-				return filter(transform(localElements.getAllContents(),
-						new Function<IEObjectDescription, IEObjectDescription>() {
-
-							public IEObjectDescription apply(final IEObjectDescription input) {
-								for (ImportNormalizer normalizer : normalizers) {
-									final String newName = normalizer.longToShortName(input.getName());
-									if (newName != null) {
-										return new AliasedEObjectDescription(newName, input);
-									}
-								}
-								return null;
-							}
-						}), Predicates.notNull());
+				List<IEObjectDescription> importedElements = Lists.newArrayList();
+				for (IEObjectDescription desc : localElements.getAllContents()) {
+					for (ImportNormalizer normalizer : normalizers) {
+						final String newName = normalizer.longToShortName(desc.getName());
+						if (newName != null) {
+							importedElements.add(new AliasedEObjectDescription(newName, desc));
+						}
+					}
+				}
+				return importedElements;
 			}
 
 			public IScope getOuterScope() {
