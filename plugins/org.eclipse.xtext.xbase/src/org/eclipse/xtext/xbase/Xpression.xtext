@@ -13,7 +13,13 @@ import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecor
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 XExpression returns XExpression:
-	XAssignment;	
+	XAssignment
+  | XClosure
+  | XRichString
+  | XIfExpression
+  | XWhileExpression
+  | {XCastedExpression} '(' type=JvmTypeReference ')' target=XExpression
+;
 
 XAssignment returns XExpression : 
     XOrExpression  ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpAssign] params+=XOrExpression)?
@@ -67,13 +73,11 @@ OpMulti : '*'|'**'|'/'|'%';
 
 
 XUnaryOperation returns XExpression :
-	{XUnaryOperation} feature=[types::JvmOperation|OpUnary] params+=XFeatureCall |
-	{XCastedExpression} '(' type=JvmTypeReference ')' target=XExpression |
-	XFeatureCall
+	{XUnaryOperation} feature=[types::JvmOperation|OpUnary] params+=XFeatureCall
+  | XFeatureCall
 ;
 
 OpUnary : "!"|"-"|"+";
-  
 
 XFeatureCall returns XExpression : 
 	XPrimaryExpression 
@@ -81,7 +85,6 @@ XFeatureCall returns XExpression :
 ;
 
 XPrimaryExpression returns XExpression : 
-  XClosure |
   XBooleanLiteral   |  
   XIntLiteral   |  
   XNullLiteral   |  
@@ -89,10 +92,7 @@ XPrimaryExpression returns XExpression :
   XTypeLiteral |
   XConstructorCall   | 
   XBlockExpression   | 
-  XRichString |
-  XIfExpression |
   XSwitchExpression |  
-  XWhileExpression |
   XSimpleFeatureCall   |  
   XParenthesizedExpression;
   
@@ -134,7 +134,7 @@ XExpressionInsideBlock returns XExpression:
 	XVariableDeclaration | XExpression;
 
 XVariableDeclaration :
-	('def' | type=JvmTypeReference ) name=ID '=' right=XExpression;
+	('def' type=JvmTypeReference ) name=ID '=' right=XExpression;
 
 JvmFormalParameter returns types::JvmFormalParameter :
 	(parameterType=JvmTypeReference)? name=ID;
@@ -144,7 +144,7 @@ XSimpleFeatureCall returns XFeatureCall:
 ;
 
 XConstructorCall  : 
-	'new' type=JvmTypeReference ('('(params+=XExpression (','params+=XExpression)*)?')')?
+	'new' type=JvmTypeReference '('(params+=XExpression (','params+=XExpression)*)?')'
 	initializer=XBlockExpression?
 ;
 
@@ -169,15 +169,23 @@ XTypeLiteral :
 	
 XRichString :	
 	expressions+=XRichStringLiteral 
-	(expressions+=XExpression
+	(expressions+=XExpressionInRichString
 	expressions+=XRichStringLiteral)*
+;
+
+XExpressionInRichString returns XExpression:
+	XAssignment
+  |  XClosure
+  | XIfExpression
+  | XWhileExpression
+  | {XCastedExpression} '(' type=JvmTypeReference ')' target=XExpression
 ;
 
 XRichStringLiteral :
 	value=RICH_STRING;
 
 terminal RICH_STRING	: 
-	'»' ( '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\') | !('\\'|'«') )* '«'
+	'»' ( '\\' ('b'|'t'|'n'|'f'|'r'|'«'|'\\') | !('\\'|'«') )* '«'
 ;
 
 	

@@ -15,6 +15,7 @@ import org.eclipse.xtext.generator.parser.antlr.*
 var projectName = "org.eclipse.xtext.xbase"
 var runtimeProject = "../${projectName}"
 var uiProject = "${runtimeProject}.ui"
+var backtrack = false
 
 Workflow {
 	bean = StandaloneSetup { 
@@ -47,8 +48,7 @@ Workflow {
 			fragment = grammarAccess.GrammarAccessFragment {}
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 			fragment = XtextAntlrGeneratorFragment {
-				options = {
-					backtrack = true
+				options = auto-inject {
 				}
 			}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
@@ -60,8 +60,7 @@ Workflow {
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 			fragment = resourceFactory.ResourceFactoryFragment auto-inject {}
 			fragment = XtextAntlrGeneratorFragment {
-				options = {
-					backtrack = true
+				options = auto-inject {
 				}
 			}
 			fragment = validation.JavaValidatorFragment {}
@@ -75,8 +74,7 @@ Workflow {
 			fragment = outline.OutlineNodeAdapterFactoryFragment {}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
 			fragment = XtextAntlrUiGeneratorFragment {
-				options = {
-					backtrack = true
+				options = auto-inject {
 				}
 			}
 		}
