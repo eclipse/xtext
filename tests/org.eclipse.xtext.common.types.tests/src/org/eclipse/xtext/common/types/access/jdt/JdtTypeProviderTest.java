@@ -182,7 +182,6 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 	public void testBug319993() {
 		try {
 			getTypeProvider().findTypeByName("interface myAggregation");
-			fail();
 		} catch (IllegalArgumentException e) {
 			fail();
 		} catch (TypeNotFoundException e) {
