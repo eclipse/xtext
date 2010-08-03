@@ -18,6 +18,7 @@ import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractTypeProvider;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -49,7 +50,14 @@ public class JdtTypeProvider extends AbstractTypeProvider implements IJdtTypePro
 	
 	@Override
 	public JvmType findTypeByName(String name) throws TypeNotFoundException {
-		String signature = name.startsWith("[") ? name : Signature.createTypeSignature(name, true);
+		if (Strings.isEmpty(name))
+			throw new IllegalArgumentException("null");
+		String signature = null;
+		try {
+			signature = name.startsWith("[") ? name : Signature.createTypeSignature(name, true);
+		} catch (IllegalArgumentException e) {
+			throw new TypeNotFoundException(name);
+		}
 		URI resourceURI = typeUriHelper.createResourceURI(signature);
 		TypeResource resource = (TypeResource) getResourceSet().getResource(resourceURI, true);
 		JvmType result = findTypeBySignature(signature, resource);
