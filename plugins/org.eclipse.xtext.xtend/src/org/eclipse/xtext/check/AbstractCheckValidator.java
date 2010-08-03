@@ -83,7 +83,8 @@ public abstract class AbstractCheckValidator extends AbstractInjectableValidator
 
 		@Override
 		public void add(final MWEDiagnostic mweDiagnostic) {
-			EObject eObject = (EObject) mweDiagnostic.getElement();
+			Object element = mweDiagnostic.getElement();
+			EObject eObject = (element instanceof EObject) ? (EObject) element : null;
 			Object property = mweDiagnostic.getData().get(1);
 			Integer feature = null;
 			if (property instanceof String && eObject!=null) {
