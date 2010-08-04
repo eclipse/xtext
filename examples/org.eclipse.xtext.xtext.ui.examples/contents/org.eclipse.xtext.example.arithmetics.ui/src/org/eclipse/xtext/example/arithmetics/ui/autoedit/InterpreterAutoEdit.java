@@ -27,25 +27,28 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 /**
  * @author Sven Efftinge - initial contribution and API
  * 
- * an interactive interpreter as an {@link IAutoEditStrategy}
+ *         an interactive interpreter as an {@link IAutoEditStrategy}
  */
 public class InterpreterAutoEdit implements IAutoEditStrategy {
 
 	public void customizeDocumentCommand(IDocument document,
 			DocumentCommand command) {
-		if (command.text.equals("\n")) {
-			int line;
-			int lineStart;
-			try {
-				line = document.getLineOfOffset(command.offset);
-				lineStart = document.getLineOffset(line);
-				if (!document.get(lineStart, 3).equals("def")) {
-					BigDecimal computedResult = computeResult(document, command);
-					if (computedResult != null)
-						command.text = "\n// = " + computedResult + "\n";
+		for (String lineDelimiter : document.getLegalLineDelimiters()) {
+			if (command.text.equals(lineDelimiter)) {
+				int line;
+				int lineStart;
+				try {
+					line = document.getLineOfOffset(command.offset);
+					lineStart = document.getLineOffset(line);
+					if (!document.get(lineStart, 3).equals("def")) {
+						BigDecimal computedResult = computeResult(document,
+								command);
+						if (computedResult != null)
+							command.text = lineDelimiter + "// = " + computedResult + lineDelimiter;
+					}
+				} catch (BadLocationException e) {
+					e.printStackTrace();
 				}
-			} catch (BadLocationException e) {
-				e.printStackTrace();
 			}
 		}
 	}
@@ -54,7 +57,8 @@ public class InterpreterAutoEdit implements IAutoEditStrategy {
 			final DocumentCommand command) {
 		return ((IXtextDocument) document)
 				.readOnly(new IUnitOfWork<BigDecimal, XtextResource>() {
-					public BigDecimal exec(XtextResource state) throws Exception {
+					public BigDecimal exec(XtextResource state)
+							throws Exception {
 						Evaluation stmt = findEvaluation(command, state);
 						if (stmt == null)
 							return null;
