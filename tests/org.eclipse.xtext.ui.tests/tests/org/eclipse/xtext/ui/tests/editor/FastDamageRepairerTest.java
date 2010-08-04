@@ -10,34 +10,25 @@ package org.eclipse.xtext.ui.tests.editor;
 
 import org.eclipse.jface.text.presentation.IPresentationDamager;
 import org.eclipse.xtext.parser.antlr.Lexer;
-import org.eclipse.xtext.ui.editor.XtextDamagerRepairer;
+import org.eclipse.xtext.ui.editor.FastDamagerRepairer;
 
 import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
-@SuppressWarnings("deprecation")
-public class XtextDamageRepairerTest extends AbstractDamagerRepairerTest {
+public class FastDamageRepairerTest extends AbstractDamagerRepairerTest {
 
 	@Override
 	protected IPresentationDamager createRegionDamager() {
-		XtextDamagerRepairer repairer = new XtextDamagerRepairer(this, new Provider<Lexer>() {
+		FastDamagerRepairer result = new FastDamagerRepairer(this, new Provider<Lexer>() {
 			public Lexer get() {
 				return new org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer();
 			}
 		});
-		return repairer;
-	}
-	
-	@Override
-	public void testAddElement() throws Exception {
-		assertEquals(4,12,check("foo bar",7,0," honolulu"));
-	}
-	
-	@Override
-	public void testChangeInTheMiddleElement() throws Exception {
-		assertEquals(4,4,check("foo bar import",6,1,"z"));
+		result.setCheckInvariant(true);
+		return result;
 	}
 	
 }
