@@ -28,20 +28,20 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalContent
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "KEYWORD_5", "KEYWORD_3", "KEYWORD_4", "KEYWORD_1", "KEYWORD_2", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "Tokens"
     };
-    public static final int RULE_ML_COMMENT=12;
     public static final int RULE_ID=9;
-    public static final int KEYWORD_4=6;
-    public static final int RULE_WS=14;
+    public static final int RULE_STRING=11;
+    public static final int RULE_ANY_OTHER=15;
     public static final int KEYWORD_1=7;
     public static final int RULE_INT=10;
-    public static final int EOF=-1;
-    public static final int RULE_STRING=11;
     public static final int KEYWORD_5=4;
-    public static final int Tokens=16;
-    public static final int RULE_ANY_OTHER=15;
-    public static final int KEYWORD_2=8;
-    public static final int RULE_SL_COMMENT=13;
+    public static final int KEYWORD_4=6;
     public static final int KEYWORD_3=5;
+    public static final int KEYWORD_2=8;
+    public static final int RULE_WS=14;
+    public static final int RULE_SL_COMMENT=13;
+    public static final int Tokens=16;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=12;
 
         public InternalBug307519TestLanguageParser(TokenStream input) {
             super(input);
@@ -411,11 +411,11 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalContent
             if ( (LA2_0==KEYWORD_3) ) {
                 int LA2_1 = input.LA(2);
 
-                if ( (LA2_1==EOF||(LA2_1>=KEYWORD_3 && LA2_1<=KEYWORD_4)) ) {
-                    alt2=1;
-                }
-                else if ( (LA2_1==KEYWORD_5) ) {
+                if ( (LA2_1==KEYWORD_5) ) {
                     alt2=2;
+                }
+                else if ( (LA2_1==EOF||(LA2_1>=KEYWORD_3 && LA2_1<=KEYWORD_4)) ) {
+                    alt2=1;
                 }
                 else {
                     NoViableAltException nvae =

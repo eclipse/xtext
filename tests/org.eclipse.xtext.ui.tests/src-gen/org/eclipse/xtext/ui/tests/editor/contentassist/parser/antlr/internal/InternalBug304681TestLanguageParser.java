@@ -26,14 +26,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'1'", "'2'", "'package'", "';'", "'enabled'", "'abstract'", "'object'", "'extends'", "'{'", "'shortDescription'", "'longDescription'", "'serialUID'", "'cloneable'", "'before'", "'after'", "'optionalLoop'", "'mandatoryLoop'", "'}'", "'Attribute'", "'Reference'", "'*'", "'required'", "'technical'", "'constraint'", "'parameters'", "'message'"
     };
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
-    public static final int EOF=-1;
-    public static final int RULE_INT=6;
     public static final int RULE_STRING=5;
     public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=6;
+    public static final int RULE_WS=9;
     public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
 
         public InternalBug304681TestLanguageParser(TokenStream input) {
             super(input);
@@ -4527,7 +4527,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
     static final String DFA7_acceptS =
         "\1\uffff\5\2\2\uffff\3\2\10\uffff\1\1\11\uffff";
     static final String DFA7_specialS =
-        "\1\1\17\uffff\1\2\1\uffff\1\0\3\uffff\1\5\4\uffff\1\4\1\3}>";
+        "\1\4\17\uffff\1\0\1\uffff\1\5\3\uffff\1\3\4\uffff\1\2\1\1}>";
     static final String[] DFA7_transitionS = {
             "\1\2\1\3\1\4\1\5\1\10\1\uffff\1\11\1\12\1\1\1\6\1\7",
             "",
@@ -4596,10 +4596,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA7_18 = input.LA(1);
+                        int LA7_16 = input.LA(1);
 
                          
-                        int index7_18 = input.index();
+                        int index7_16 = input.index();
                         input.rewind();
                         s = -1;
                         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
@@ -4607,10 +4607,55 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
 
                          
-                        input.seek(index7_18);
+                        input.seek(index7_16);
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
+                        int LA7_28 = input.LA(1);
+
+                         
+                        int index7_28 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
+
+                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
+
+                         
+                        input.seek(index7_28);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA7_27 = input.LA(1);
+
+                         
+                        int index7_27 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
+
+                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
+
+                         
+                        input.seek(index7_27);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 3 : 
+                        int LA7_22 = input.LA(1);
+
+                         
+                        int index7_22 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
+
+                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
+
+                         
+                        input.seek(index7_22);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
                         int LA7_0 = input.LA(1);
 
                          
@@ -4641,56 +4686,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         input.seek(index7_0);
                         if ( s>=0 ) return s;
                         break;
-                    case 2 : 
-                        int LA7_16 = input.LA(1);
-
-                         
-                        int index7_16 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
-
-                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
-
-                         
-                        input.seek(index7_16);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
-                        int LA7_28 = input.LA(1);
-
-                         
-                        int index7_28 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
-
-                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
-
-                         
-                        input.seek(index7_28);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
-                        int LA7_27 = input.LA(1);
-
-                         
-                        int index7_27 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
-
-                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
-
-                         
-                        input.seek(index7_27);
-                        if ( s>=0 ) return s;
-                        break;
                     case 5 : 
-                        int LA7_22 = input.LA(1);
+                        int LA7_18 = input.LA(1);
 
                          
-                        int index7_22 = input.index();
+                        int index7_18 = input.index();
                         input.rewind();
                         s = -1;
                         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
@@ -4698,7 +4698,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
 
                          
-                        input.seek(index7_22);
+                        input.seek(index7_18);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -4709,19 +4709,19 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         }
     }
     static final String DFA8_eotS =
-        "\36\uffff";
+        "\35\uffff";
     static final String DFA8_eofS =
-        "\36\uffff";
+        "\35\uffff";
     static final String DFA8_minS =
         "\1\24\5\uffff\2\4\3\uffff\2\4\1\16\1\4\1\16\1\0\1\24\1\0\1\uffff"+
-        "\2\5\1\0\1\uffff\2\16\2\24\2\0";
+        "\2\5\1\0\2\16\2\24\2\0";
     static final String DFA8_maxS =
         "\1\36\5\uffff\2\4\3\uffff\1\4\1\37\1\16\1\4\1\23\1\0\1\34\1\0\1"+
-        "\uffff\2\5\1\0\1\uffff\2\16\2\34\2\0";
+        "\uffff\2\5\1\0\2\16\2\34\2\0";
     static final String DFA8_acceptS =
-        "\1\uffff\5\2\2\uffff\3\2\10\uffff\1\1\3\uffff\1\1\6\uffff";
+        "\1\uffff\5\2\2\uffff\3\2\10\uffff\1\1\11\uffff";
     static final String DFA8_specialS =
-        "\1\2\17\uffff\1\0\1\uffff\1\1\3\uffff\1\5\5\uffff\1\4\1\3}>";
+        "\1\0\17\uffff\1\1\1\uffff\1\5\3\uffff\1\4\4\uffff\1\3\1\2}>";
     static final String[] DFA8_transitionS = {
             "\1\2\1\3\1\4\1\5\1\10\1\uffff\1\11\1\12\1\1\1\6\1\7",
             "",
@@ -4743,14 +4743,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             "\1\24\1\25\6\uffff\1\26",
             "\1\uffff",
             "",
+            "\1\27",
             "\1\30",
-            "\1\31",
             "\1\uffff",
-            "",
+            "\1\31",
             "\1\32",
-            "\1\33",
+            "\1\24\1\25\6\uffff\1\33",
             "\1\24\1\25\6\uffff\1\34",
-            "\1\24\1\25\6\uffff\1\35",
             "\1\uffff",
             "\1\uffff"
     };
@@ -4791,36 +4790,6 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA8_16 = input.LA(1);
-
-                         
-                        int index8_16 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
-
-                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
-
-                         
-                        input.seek(index8_16);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA8_18 = input.LA(1);
-
-                         
-                        int index8_18 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 23;}
-
-                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
-
-                         
-                        input.seek(index8_18);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
                         int LA8_0 = input.LA(1);
 
                          
@@ -4851,11 +4820,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         input.seek(index8_0);
                         if ( s>=0 ) return s;
                         break;
-                    case 3 : 
-                        int LA8_29 = input.LA(1);
+                    case 1 : 
+                        int LA8_16 = input.LA(1);
 
                          
-                        int index8_29 = input.index();
+                        int index8_16 = input.index();
                         input.rewind();
                         s = -1;
                         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
@@ -4863,10 +4832,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
 
                          
-                        input.seek(index8_29);
+                        input.seek(index8_16);
                         if ( s>=0 ) return s;
                         break;
-                    case 4 : 
+                    case 2 : 
                         int LA8_28 = input.LA(1);
 
                          
@@ -4881,7 +4850,22 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         input.seek(index8_28);
                         if ( s>=0 ) return s;
                         break;
-                    case 5 : 
+                    case 3 : 
+                        int LA8_27 = input.LA(1);
+
+                         
+                        int index8_27 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
+
+                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
+
+                         
+                        input.seek(index8_27);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
                         int LA8_22 = input.LA(1);
 
                          
@@ -4894,6 +4878,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
                          
                         input.seek(index8_22);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
+                        int LA8_18 = input.LA(1);
+
+                         
+                        int index8_18 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 19;}
+
+                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 10;}
+
+                         
+                        input.seek(index8_18);
                         if ( s>=0 ) return s;
                         break;
             }

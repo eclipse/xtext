@@ -12,15 +12,15 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
-    public static final int T10=10;
     public static final int RULE_EDATE=6;
-    public static final int RULE_WS=7;
-    public static final int T9=9;
-    public static final int EOF=-1;
-    public static final int Tokens=11;
     public static final int RULE_EDOUBLE=5;
-    public static final int T8=8;
     public static final int RULE_EINT=4;
+    public static final int T10=10;
+    public static final int T8=8;
+    public static final int T9=9;
+    public static final int RULE_WS=7;
+    public static final int Tokens=11;
+    public static final int EOF=-1;
     public InternalEcoreTerminalsTestLanguageLexer() {;} 
     public InternalEcoreTerminalsTestLanguageLexer(CharStream input) {
         super(input);

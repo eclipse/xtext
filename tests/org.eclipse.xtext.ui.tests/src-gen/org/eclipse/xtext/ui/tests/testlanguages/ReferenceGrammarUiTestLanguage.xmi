@@ -100,7 +100,7 @@
           <elements xsi:type="xtext:Keyword" value="ROT"/>
           <elements xsi:type="xtext:Keyword" value="BLAU"/>
           <elements xsi:type="xtext:Keyword" value="GELB"/>
-          <elements xsi:type="xtext:Keyword" value="GR&#x2039;N"/>
+          <elements xsi:type="xtext:Keyword" value="GR&#xdc;N"/>
         </terminal>
       </alternatives>
     </rules>

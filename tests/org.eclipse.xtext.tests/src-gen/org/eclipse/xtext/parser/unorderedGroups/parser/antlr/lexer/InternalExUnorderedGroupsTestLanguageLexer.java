@@ -12,37 +12,37 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
-    public static final int KEYWORD_7=19;
-    public static final int RULE_ML_COMMENT=29;
     public static final int RULE_ID=26;
-    public static final int KEYWORD_21=6;
-    public static final int KEYWORD_10=22;
-    public static final int KEYWORD_17=11;
-    public static final int KEYWORD_1=13;
-    public static final int KEYWORD_18=12;
-    public static final int RULE_STRING=28;
-    public static final int KEYWORD_9=21;
+    public static final int RULE_ANY_OTHER=32;
     public static final int KEYWORD_19=7;
-    public static final int KEYWORD_2=14;
-    public static final int KEYWORD_22=4;
+    public static final int KEYWORD_1=13;
+    public static final int KEYWORD_17=11;
+    public static final int KEYWORD_18=12;
+    public static final int KEYWORD_15=9;
+    public static final int KEYWORD_5=17;
     public static final int KEYWORD_16=10;
-    public static final int KEYWORD_11=23;
     public static final int KEYWORD_4=16;
+    public static final int KEYWORD_13=25;
+    public static final int KEYWORD_3=15;
+    public static final int KEYWORD_14=8;
+    public static final int KEYWORD_2=14;
+    public static final int KEYWORD_11=23;
+    public static final int Tokens=33;
+    public static final int RULE_SL_COMMENT=30;
+    public static final int KEYWORD_12=24;
+    public static final int EOF=-1;
+    public static final int KEYWORD_10=22;
+    public static final int RULE_ML_COMMENT=29;
+    public static final int RULE_STRING=28;
+    public static final int KEYWORD_6=18;
+    public static final int KEYWORD_7=19;
+    public static final int KEYWORD_8=20;
+    public static final int KEYWORD_9=21;
+    public static final int RULE_INT=27;
     public static final int RULE_WS=31;
     public static final int KEYWORD_20=5;
-    public static final int RULE_INT=27;
-    public static final int KEYWORD_13=25;
-    public static final int EOF=-1;
-    public static final int KEYWORD_14=8;
-    public static final int KEYWORD_5=17;
-    public static final int Tokens=33;
-    public static final int KEYWORD_6=18;
-    public static final int RULE_ANY_OTHER=32;
-    public static final int KEYWORD_12=24;
-    public static final int KEYWORD_15=9;
-    public static final int RULE_SL_COMMENT=30;
-    public static final int KEYWORD_8=20;
-    public static final int KEYWORD_3=15;
+    public static final int KEYWORD_21=6;
+    public static final int KEYWORD_22=4;
     public InternalExUnorderedGroupsTestLanguageLexer() {;} 
     public InternalExUnorderedGroupsTestLanguageLexer(CharStream input) {
         super(input);
@@ -1639,7 +1639,7 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
             else {
                 return 7;}
             }
-        case '4':
+        case '0':
             {
             int LA12_33 = input.LA(3);
 
@@ -1647,7 +1647,7 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
                 return 24;
             }
             else {
-                return 9;}
+                return 5;}
             }
         case '1':
             {
@@ -1659,7 +1659,7 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
             else {
                 return 6;}
             }
-        case '0':
+        case '4':
             {
             int LA12_35 = input.LA(3);
 
@@ -1667,7 +1667,7 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
                 return 24;
             }
             else {
-                return 5;}
+                return 9;}
             }
         case '5':
         case '6':
@@ -1822,13 +1822,13 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
 
     private int mTokensHelper021() throws RecognitionException {
         switch ( input.LA(2) ) {
-        case '/':
-            {
-            return 27;
-            }
         case '*':
             {
             return 26;
+            }
+        case '/':
+            {
+            return 27;
             }
         default:
             return 29;}

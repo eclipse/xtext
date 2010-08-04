@@ -12,17 +12,17 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalFoldingTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
-    public static final int T11=11;
-    public static final int EOF=-1;
-    public static final int RULE_INT=5;
     public static final int RULE_STRING=6;
-    public static final int T12=12;
-    public static final int Tokens=13;
     public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=5;
+    public static final int T11=11;
+    public static final int T12=12;
+    public static final int RULE_WS=9;
+    public static final int Tokens=13;
     public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
     public InternalFoldingTestLanguageLexer() {;} 
     public InternalFoldingTestLanguageLexer(CharStream input) {
         super(input);
@@ -680,33 +680,17 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
     }
     private int mTokensHelper001() throws RecognitionException {
         switch ( input.LA(2) ) {
-        case 'n':
+        case 'l':
             {
             int LA12_10 = input.LA(3);
 
-            if ( (LA12_10=='d') ) {
+            if ( (LA12_10=='e') ) {
                 int LA12_18 = input.LA(4);
 
-                if ( ((LA12_18>='0' && LA12_18<='9')||(LA12_18>='A' && LA12_18<='Z')||LA12_18=='_'||(LA12_18>='a' && LA12_18<='z')) ) {
-                    return 3;
-                }
-                else {
-                    return 2;}
-            }
-            else {
-                return 3;}
-            }
-        case 'l':
-            {
-            int LA12_11 = input.LA(3);
+                if ( (LA12_18=='m') ) {
+                    int LA12_20 = input.LA(5);
 
-            if ( (LA12_11=='e') ) {
-                int LA12_19 = input.LA(4);
-
-                if ( (LA12_19=='m') ) {
-                    int LA12_21 = input.LA(5);
-
-                    if ( (LA12_21=='e') ) {
+                    if ( (LA12_20=='e') ) {
                         int LA12_22 = input.LA(6);
 
                         if ( (LA12_22=='n') ) {
@@ -732,6 +716,22 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
                 }
                 else {
                     return 3;}
+            }
+            else {
+                return 3;}
+            }
+        case 'n':
+            {
+            int LA12_11 = input.LA(3);
+
+            if ( (LA12_11=='d') ) {
+                int LA12_19 = input.LA(4);
+
+                if ( ((LA12_19>='0' && LA12_19<='9')||(LA12_19>='A' && LA12_19<='Z')||LA12_19=='_'||(LA12_19>='a' && LA12_19<='z')) ) {
+                    return 3;
+                }
+                else {
+                    return 2;}
             }
             else {
                 return 3;}
@@ -781,13 +781,13 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
 
     private int mTokensHelper007() throws RecognitionException {
         switch ( input.LA(2) ) {
-        case '*':
-            {
-            return 6;
-            }
         case '/':
             {
             return 7;
+            }
+        case '*':
+            {
+            return 6;
             }
         default:
             return 9;}

@@ -12,21 +12,21 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBug303200TestLanguageLexer extends Lexer {
-    public static final int T10=10;
-    public static final int T14=14;
     public static final int RULE_ID=5;
-    public static final int RULE_WS=6;
+    public static final int T7=7;
+    public static final int T10=10;
     public static final int T11=11;
+    public static final int T12=12;
+    public static final int T13=13;
+    public static final int T8=8;
+    public static final int T14=14;
     public static final int T9=9;
     public static final int T15=15;
-    public static final int EOF=-1;
-    public static final int T12=12;
+    public static final int RULE_WS=6;
     public static final int Tokens=17;
-    public static final int RULE_LT=4;
     public static final int T16=16;
-    public static final int T8=8;
-    public static final int T13=13;
-    public static final int T7=7;
+    public static final int EOF=-1;
+    public static final int RULE_LT=4;
     public InternalBug303200TestLanguageLexer() {;} 
     public InternalBug303200TestLanguageLexer(CharStream input) {
         super(input);

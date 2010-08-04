@@ -26,10 +26,10 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalContent
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_LT", "RULE_ID", "RULE_WS", "';'", "'function'", "'['", "']'", "'('", "')'", "','", "'{'", "'}'", "'.'"
     };
-    public static final int RULE_LT=4;
     public static final int RULE_ID=5;
     public static final int RULE_WS=6;
     public static final int EOF=-1;
+    public static final int RULE_LT=4;
 
         public InternalBug303200TestLanguageParser(TokenStream input) {
             super(input);
@@ -9265,11 +9265,11 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalContent
     }
     // $ANTLR end synpred26
 
-    public final boolean synpred1() {
+    public final boolean synpred26() {
         backtracking++;
         int start = input.mark();
         try {
-            synpred1_fragment(); // can never throw exception
+            synpred26_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -9279,11 +9279,11 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalContent
         failed=false;
         return success;
     }
-    public final boolean synpred26() {
+    public final boolean synpred1() {
         backtracking++;
         int start = input.mark();
         try {
-            synpred26_fragment(); // can never throw exception
+            synpred1_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }

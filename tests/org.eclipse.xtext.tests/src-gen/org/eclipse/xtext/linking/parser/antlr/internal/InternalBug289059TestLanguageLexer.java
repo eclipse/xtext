@@ -12,16 +12,16 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBug289059TestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
-    public static final int T11=11;
-    public static final int EOF=-1;
-    public static final int RULE_INT=5;
     public static final int RULE_STRING=6;
-    public static final int Tokens=12;
     public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=5;
+    public static final int T11=11;
+    public static final int RULE_WS=9;
+    public static final int Tokens=12;
     public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
     public InternalBug289059TestLanguageLexer() {;} 
     public InternalBug289059TestLanguageLexer(CharStream input) {
         super(input);
@@ -737,13 +737,13 @@ public class InternalBug289059TestLanguageLexer extends Lexer {
 
     private int mTokensHelper007() throws RecognitionException {
         switch ( input.LA(2) ) {
-        case '*':
-            {
-            return 5;
-            }
         case '/':
             {
             return 6;
+            }
+        case '*':
+            {
+            return 5;
             }
         default:
             return 8;}

@@ -2791,7 +2791,7 @@ protected class Assignment_Alternatives extends AlternativesToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getMonoListAssignmentRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getBiSingleAssignmentRule().getType().getClassifier())
+		   getEObject().eClass() != grammarAccess.getMonoSingleAssignmentRule().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}

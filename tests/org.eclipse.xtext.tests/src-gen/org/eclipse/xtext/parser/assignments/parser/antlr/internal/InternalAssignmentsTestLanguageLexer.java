@@ -12,28 +12,28 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalAssignmentsTestLanguageLexer extends Lexer {
-    public static final int T21=21;
-    public static final int RULE_ML_COMMENT=7;
-    public static final int T14=14;
     public static final int RULE_ID=4;
-    public static final int T22=22;
-    public static final int T11=11;
-    public static final int RULE_STRING=5;
-    public static final int T12=12;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int Tokens=25;
+    public static final int T24=24;
+    public static final int EOF=-1;
+    public static final int RULE_SL_COMMENT=8;
     public static final int T23=23;
-    public static final int T13=13;
+    public static final int T22=22;
+    public static final int T21=21;
     public static final int T20=20;
-    public static final int T18=18;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int RULE_STRING=5;
+    public static final int RULE_INT=6;
+    public static final int T11=11;
+    public static final int T12=12;
+    public static final int T13=13;
+    public static final int T14=14;
     public static final int RULE_WS=9;
     public static final int T15=15;
-    public static final int RULE_INT=6;
-    public static final int EOF=-1;
-    public static final int T17=17;
-    public static final int Tokens=25;
-    public static final int RULE_ANY_OTHER=10;
     public static final int T16=16;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T24=24;
+    public static final int T17=17;
+    public static final int T18=18;
     public static final int T19=19;
     public InternalAssignmentsTestLanguageLexer() {;} 
     public InternalAssignmentsTestLanguageLexer(CharStream input) {
@@ -1460,32 +1460,144 @@ public class InternalAssignmentsTestLanguageLexer extends Lexer {
 
                                 if ( (LA12_54=='e') ) {
                                     switch ( input.LA(9) ) {
-                                    case 'a':
+                                    case 's':
                                         {
                                         int LA12_60 = input.LA(10);
 
-                                        if ( (LA12_60=='l') ) {
+                                        if ( (LA12_60=='t') ) {
                                             int LA12_64 = input.LA(11);
 
-                                            if ( (LA12_64=='t') ) {
+                                            if ( (LA12_64=='r') ) {
                                                 int LA12_68 = input.LA(12);
 
-                                                if ( (LA12_68=='e') ) {
+                                                if ( (LA12_68=='i') ) {
                                                     int LA12_74 = input.LA(13);
 
-                                                    if ( (LA12_74=='r') ) {
+                                                    if ( (LA12_74=='n') ) {
                                                         int LA12_78 = input.LA(14);
 
-                                                        if ( (LA12_78=='n') ) {
-                                                            int LA12_80 = input.LA(15);
-
-                                                            if ( (LA12_80=='a') ) {
+                                                        if ( (LA12_78=='g') ) {
+                                                            switch ( input.LA(15) ) {
+                                                            case 's':
+                                                                {
                                                                 int LA12_82 = input.LA(16);
 
-                                                                if ( (LA12_82=='t') ) {
-                                                                    int LA12_85 = input.LA(17);
+                                                                if ( ((LA12_82>='0' && LA12_82<='9')||(LA12_82>='A' && LA12_82<='Z')||LA12_82=='_'||(LA12_82>='a' && LA12_82<='z')) ) {
+                                                                    return 15;
+                                                                }
+                                                                else {
+                                                                    return 14;}
+                                                                }
+                                                            case '0':
+                                                            case '1':
+                                                            case '2':
+                                                            case '3':
+                                                            case '4':
+                                                            case '5':
+                                                            case '6':
+                                                            case '7':
+                                                            case '8':
+                                                            case '9':
+                                                            case 'A':
+                                                            case 'B':
+                                                            case 'C':
+                                                            case 'D':
+                                                            case 'E':
+                                                            case 'F':
+                                                            case 'G':
+                                                            case 'H':
+                                                            case 'I':
+                                                            case 'J':
+                                                            case 'K':
+                                                            case 'L':
+                                                            case 'M':
+                                                            case 'N':
+                                                            case 'O':
+                                                            case 'P':
+                                                            case 'Q':
+                                                            case 'R':
+                                                            case 'S':
+                                                            case 'T':
+                                                            case 'U':
+                                                            case 'V':
+                                                            case 'W':
+                                                            case 'X':
+                                                            case 'Y':
+                                                            case 'Z':
+                                                            case '_':
+                                                            case 'a':
+                                                            case 'b':
+                                                            case 'c':
+                                                            case 'd':
+                                                            case 'e':
+                                                            case 'f':
+                                                            case 'g':
+                                                            case 'h':
+                                                            case 'i':
+                                                            case 'j':
+                                                            case 'k':
+                                                            case 'l':
+                                                            case 'm':
+                                                            case 'n':
+                                                            case 'o':
+                                                            case 'p':
+                                                            case 'q':
+                                                            case 'r':
+                                                            case 't':
+                                                            case 'u':
+                                                            case 'v':
+                                                            case 'w':
+                                                            case 'x':
+                                                            case 'y':
+                                                            case 'z':
+                                                                {
+                                                                return 15;
+                                                                }
+                                                            default:
+                                                                return 11;}
 
-                                                                    if ( (LA12_85=='i') ) {
+                                                        }
+                                                        else {
+                                                            return 15;}
+                                                    }
+                                                    else {
+                                                        return 15;}
+                                                }
+                                                else {
+                                                    return 15;}
+                                            }
+                                            else {
+                                                return 15;}
+                                        }
+                                        else {
+                                            return 15;}
+                                        }
+                                    case 'a':
+                                        {
+                                        int LA12_61 = input.LA(10);
+
+                                        if ( (LA12_61=='l') ) {
+                                            int LA12_65 = input.LA(11);
+
+                                            if ( (LA12_65=='t') ) {
+                                                int LA12_69 = input.LA(12);
+
+                                                if ( (LA12_69=='e') ) {
+                                                    int LA12_75 = input.LA(13);
+
+                                                    if ( (LA12_75=='r') ) {
+                                                        int LA12_79 = input.LA(14);
+
+                                                        if ( (LA12_79=='n') ) {
+                                                            int LA12_81 = input.LA(15);
+
+                                                            if ( (LA12_81=='a') ) {
+                                                                int LA12_84 = input.LA(16);
+
+                                                                if ( (LA12_84=='t') ) {
+                                                                    int LA12_86 = input.LA(17);
+
+                                                                    if ( (LA12_86=='i') ) {
                                                                         int LA12_87 = input.LA(18);
 
                                                                         if ( (LA12_87=='v') ) {
@@ -1586,118 +1698,6 @@ public class InternalAssignmentsTestLanguageLexer extends Lexer {
                                                             }
                                                             else {
                                                                 return 15;}
-                                                        }
-                                                        else {
-                                                            return 15;}
-                                                    }
-                                                    else {
-                                                        return 15;}
-                                                }
-                                                else {
-                                                    return 15;}
-                                            }
-                                            else {
-                                                return 15;}
-                                        }
-                                        else {
-                                            return 15;}
-                                        }
-                                    case 's':
-                                        {
-                                        int LA12_61 = input.LA(10);
-
-                                        if ( (LA12_61=='t') ) {
-                                            int LA12_65 = input.LA(11);
-
-                                            if ( (LA12_65=='r') ) {
-                                                int LA12_69 = input.LA(12);
-
-                                                if ( (LA12_69=='i') ) {
-                                                    int LA12_75 = input.LA(13);
-
-                                                    if ( (LA12_75=='n') ) {
-                                                        int LA12_79 = input.LA(14);
-
-                                                        if ( (LA12_79=='g') ) {
-                                                            switch ( input.LA(15) ) {
-                                                            case 's':
-                                                                {
-                                                                int LA12_83 = input.LA(16);
-
-                                                                if ( ((LA12_83>='0' && LA12_83<='9')||(LA12_83>='A' && LA12_83<='Z')||LA12_83=='_'||(LA12_83>='a' && LA12_83<='z')) ) {
-                                                                    return 15;
-                                                                }
-                                                                else {
-                                                                    return 14;}
-                                                                }
-                                                            case '0':
-                                                            case '1':
-                                                            case '2':
-                                                            case '3':
-                                                            case '4':
-                                                            case '5':
-                                                            case '6':
-                                                            case '7':
-                                                            case '8':
-                                                            case '9':
-                                                            case 'A':
-                                                            case 'B':
-                                                            case 'C':
-                                                            case 'D':
-                                                            case 'E':
-                                                            case 'F':
-                                                            case 'G':
-                                                            case 'H':
-                                                            case 'I':
-                                                            case 'J':
-                                                            case 'K':
-                                                            case 'L':
-                                                            case 'M':
-                                                            case 'N':
-                                                            case 'O':
-                                                            case 'P':
-                                                            case 'Q':
-                                                            case 'R':
-                                                            case 'S':
-                                                            case 'T':
-                                                            case 'U':
-                                                            case 'V':
-                                                            case 'W':
-                                                            case 'X':
-                                                            case 'Y':
-                                                            case 'Z':
-                                                            case '_':
-                                                            case 'a':
-                                                            case 'b':
-                                                            case 'c':
-                                                            case 'd':
-                                                            case 'e':
-                                                            case 'f':
-                                                            case 'g':
-                                                            case 'h':
-                                                            case 'i':
-                                                            case 'j':
-                                                            case 'k':
-                                                            case 'l':
-                                                            case 'm':
-                                                            case 'n':
-                                                            case 'o':
-                                                            case 'p':
-                                                            case 'q':
-                                                            case 'r':
-                                                            case 't':
-                                                            case 'u':
-                                                            case 'v':
-                                                            case 'w':
-                                                            case 'x':
-                                                            case 'y':
-                                                            case 'z':
-                                                                {
-                                                                return 15;
-                                                                }
-                                                            default:
-                                                                return 11;}
-
                                                         }
                                                         else {
                                                             return 15;}

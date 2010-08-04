@@ -27,14 +27,14 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'foo'", "'%'", "'$'", "'T1'", "'T2'"
     };
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
-    public static final int EOF=-1;
-    public static final int RULE_INT=5;
     public static final int RULE_STRING=6;
     public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
     public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
 
         public InternalBug307519TestLanguageParser(TokenStream input) {
             super(input);
@@ -134,11 +134,11 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
                 if ( (LA1_0==14) ) {
                     int LA1_2 = input.LA(2);
 
-                    if ( (LA1_2==EOF||(LA1_2>=14 && LA1_2<=15)) ) {
-                        alt1=1;
-                    }
-                    else if ( (LA1_2==11) ) {
+                    if ( (LA1_2==11) ) {
                         alt1=2;
+                    }
+                    else if ( (LA1_2==EOF||(LA1_2>=14 && LA1_2<=15)) ) {
+                        alt1=1;
                     }
 
 

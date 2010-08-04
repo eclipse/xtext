@@ -26,14 +26,14 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'1'", "'a'", "'b'", "'2'", "'c'", "'d'", "'3'", "'4'", "'5'", "'6'", "'7'", "'8'", "'9'", "'10'", "'11'", "'12'", "'13'", "'14'", "'datatypes'", "'serialization'", "'bug302585'", "'nested'"
     };
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
-    public static final int EOF=-1;
-    public static final int RULE_INT=5;
     public static final int RULE_STRING=6;
     public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=9;
     public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
 
         public InternalSimpleUnorderedGroupsTestLanguageParser(TokenStream input) {
             super(input);
@@ -1883,11 +1883,11 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                             if ( LA12_2 ==13 && (getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_7_1(), 0)||getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_7_1(), 1)) ) {
                                 int LA12_3 = input.LA(3);
 
-                                if ( LA12_3 ==16 && getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_7_1(), 1) ) {
-                                    alt12=2;
-                                }
-                                else if ( LA12_3 ==15 && getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_7_1(), 0) ) {
+                                if ( LA12_3 ==15 && getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_7_1(), 0) ) {
                                     alt12=1;
+                                }
+                                else if ( LA12_3 ==16 && getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_7_1(), 1) ) {
+                                    alt12=2;
                                 }
 
 
@@ -5746,10 +5746,10 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
                         int alt42=3;
                         int LA42_0 = input.LA(1);
 
-                        if ( LA42_0 ==12 && (getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 1)||getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 0)) ) {
+                        if ( LA42_0 ==12 && (getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 0)||getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 1)) ) {
                             int LA42_2 = input.LA(2);
 
-                            if ( LA42_2 ==13 && (getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 1)||getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 0)) ) {
+                            if ( LA42_2 ==13 && (getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 0)||getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 1)) ) {
                                 int LA42_3 = input.LA(3);
 
                                 if ( LA42_3 ==16 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_7_1(), 1) ) {
@@ -6472,7 +6472,7 @@ public class InternalSimpleUnorderedGroupsTestLanguageParser extends AbstractInt
 
 
                         }
-                        else if ( LA49_0 ==13 && (getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_1(), 1)||getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_2(), 1)) ) {
+                        else if ( LA49_0 ==13 && (getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_2(), 1)||getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_1(), 1)) ) {
                             int LA49_2 = input.LA(2);
 
                             if ( getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_11_1(), 1) ) {

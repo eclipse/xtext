@@ -12,24 +12,24 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalUnassignedTextTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=11;
     public static final int RULE_ID=9;
+    public static final int RULE_ANY_OTHER=14;
+    public static final int Tokens=20;
+    public static final int EOF=-1;
+    public static final int RULE_SL_COMMENT=12;
+    public static final int RULE_ML_COMMENT=11;
     public static final int RULE_PLURAL=6;
     public static final int RULE_STRING=8;
-    public static final int RULE_MULTI=7;
+    public static final int RULE_CASEINSENSITIVEKEYWORD=4;
     public static final int RULE_MULTI2=10;
-    public static final int T18=18;
+    public static final int RULE_INT=5;
     public static final int RULE_WS=13;
     public static final int T15=15;
-    public static final int EOF=-1;
-    public static final int RULE_INT=5;
-    public static final int T17=17;
-    public static final int Tokens=20;
-    public static final int RULE_ANY_OTHER=14;
-    public static final int RULE_CASEINSENSITIVEKEYWORD=4;
     public static final int T16=16;
-    public static final int RULE_SL_COMMENT=12;
+    public static final int T17=17;
+    public static final int T18=18;
     public static final int T19=19;
+    public static final int RULE_MULTI=7;
     public InternalUnassignedTextTestLanguageLexer() {;} 
     public InternalUnassignedTextTestLanguageLexer(CharStream input) {
         super(input);
@@ -1184,7 +1184,7 @@ public class InternalUnassignedTextTestLanguageLexer extends Lexer {
         "\1\uffff";
     static final String DFA19_acceptS =
         "\13\uffff\1\12\1\13\3\uffff\1\17\1\20\1\uffff\1\12\10\uffff\1\11"+
-        "\1\13\1\14\1\16\1\15\1\17\14\uffff\1\4\13\uffff\1\7\2\uffff\1\2"+
+        "\1\13\1\14\1\15\1\16\1\17\14\uffff\1\4\13\uffff\1\7\2\uffff\1\2"+
         "\14\uffff\1\6\1\10\1\1\1\3\1\uffff\1\5";
     static final String DFA19_specialS =
         "\120\uffff}>";
@@ -1207,7 +1207,7 @@ public class InternalUnassignedTextTestLanguageLexer extends Lexer {
             "",
             "\uffff\36",
             "\uffff\36",
-            "\1\40\4\uffff\1\37",
+            "\1\37\4\uffff\1\40",
             "",
             "",
             "\1\42",

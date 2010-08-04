@@ -27,14 +27,14 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_SIGNED_DOUBLE", "RULE_SINGED_LONG", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "'import'", "'select'", "','", "'from'", "'where'", "'.'", "'withoutsubtypes'", "'as'", "'not'", "'in'", "'resources'", "'{'", "'}'", "'elements'", "'or'", "'and'", "'('", "')'", "'true'", "'false'", "'null'", "'='", "'<'", "'>'", "'<='", "'>='", "'!='", "'like'", "'notlike'"
     };
-    public static final int RULE_ML_COMMENT=8;
     public static final int RULE_ID=5;
-    public static final int RULE_WS=10;
-    public static final int RULE_SIGNED_DOUBLE=6;
-    public static final int EOF=-1;
     public static final int RULE_STRING=4;
-    public static final int RULE_SL_COMMENT=9;
     public static final int RULE_SINGED_LONG=7;
+    public static final int RULE_SIGNED_DOUBLE=6;
+    public static final int RULE_WS=10;
+    public static final int RULE_SL_COMMENT=9;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=8;
 
         public InternalBug287941TestLanguageParser(TokenStream input) {
             super(input);
@@ -2173,10 +2173,13 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
             else if ( (LA17_0==RULE_ID) ) {
                 int LA17_2 = input.LA(2);
 
-                if ( (LA17_2==16) ) {
-                    int LA17_3 = input.LA(3);
+                if ( (LA17_2==32) ) {
+                    alt17=5;
+                }
+                else if ( (LA17_2==16) ) {
+                    int LA17_4 = input.LA(3);
 
-                    if ( (LA17_3==RULE_ID) ) {
+                    if ( (LA17_4==RULE_ID) ) {
                         switch ( input.LA(4) ) {
                         case 32:
                             {
@@ -2266,13 +2269,10 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("983:1: (this_ParWhereEntry_0= ruleParWhereEntry | this_AttributeWhereEntry_1= ruleAttributeWhereEntry | this_NullWhereEntry_2= ruleNullWhereEntry | this_ReferenceAliasWhereEntry_3= ruleReferenceAliasWhereEntry | this_AliasWhereEntry_4= ruleAliasWhereEntry | this_SubselectWhereEntry_5= ruleSubselectWhereEntry )", 17, 3, input);
+                            new NoViableAltException("983:1: (this_ParWhereEntry_0= ruleParWhereEntry | this_AttributeWhereEntry_1= ruleAttributeWhereEntry | this_NullWhereEntry_2= ruleNullWhereEntry | this_ReferenceAliasWhereEntry_3= ruleReferenceAliasWhereEntry | this_AliasWhereEntry_4= ruleAliasWhereEntry | this_SubselectWhereEntry_5= ruleSubselectWhereEntry )", 17, 4, input);
 
                         throw nvae;
                     }
-                }
-                else if ( (LA17_2==32) ) {
-                    alt17=5;
                 }
                 else {
                     NoViableAltException nvae =
@@ -2572,81 +2572,61 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
 
                     if ( (LA18_2==RULE_ID) ) {
                         switch ( input.LA(4) ) {
-                        case 32:
+                        case 33:
                             {
-                            switch ( input.LA(5) ) {
-                            case RULE_STRING:
-                                {
-                                alt18=2;
-                                }
-                                break;
-                            case 29:
-                            case 30:
-                                {
-                                alt18=3;
-                                }
-                                break;
-                            case RULE_SIGNED_DOUBLE:
-                            case RULE_SINGED_LONG:
-                                {
-                                alt18=1;
-                                }
-                                break;
-                            case RULE_ID:
-                                {
+                            int LA18_4 = input.LA(5);
+
+                            if ( (LA18_4==RULE_ID) ) {
                                 alt18=4;
-                                }
-                                break;
-                            default:
+                            }
+                            else if ( ((LA18_4>=RULE_SIGNED_DOUBLE && LA18_4<=RULE_SINGED_LONG)) ) {
+                                alt18=1;
+                            }
+                            else {
                                 NoViableAltException nvae =
                                     new NoViableAltException("1105:1: (this_NumericAttributeWhereEntry_0= ruleNumericAttributeWhereEntry | this_StringAttributeWhereEntry_1= ruleStringAttributeWhereEntry | this_BooleanAttributeWhereEntry_2= ruleBooleanAttributeWhereEntry | this_VariableWhereEntry_3= ruleVariableWhereEntry )", 18, 4, input);
 
                                 throw nvae;
                             }
-
                             }
                             break;
-                        case 37:
+                        case 34:
                             {
-                            switch ( input.LA(5) ) {
-                            case RULE_SIGNED_DOUBLE:
-                            case RULE_SINGED_LONG:
-                                {
-                                alt18=1;
-                                }
-                                break;
-                            case RULE_STRING:
-                                {
-                                alt18=2;
-                                }
-                                break;
-                            case 29:
-                            case 30:
-                                {
-                                alt18=3;
-                                }
-                                break;
-                            case RULE_ID:
-                                {
+                            int LA18_5 = input.LA(5);
+
+                            if ( (LA18_5==RULE_ID) ) {
                                 alt18=4;
-                                }
-                                break;
-                            default:
+                            }
+                            else if ( ((LA18_5>=RULE_SIGNED_DOUBLE && LA18_5<=RULE_SINGED_LONG)) ) {
+                                alt18=1;
+                            }
+                            else {
                                 NoViableAltException nvae =
                                     new NoViableAltException("1105:1: (this_NumericAttributeWhereEntry_0= ruleNumericAttributeWhereEntry | this_StringAttributeWhereEntry_1= ruleStringAttributeWhereEntry | this_BooleanAttributeWhereEntry_2= ruleBooleanAttributeWhereEntry | this_VariableWhereEntry_3= ruleVariableWhereEntry )", 18, 5, input);
 
                                 throw nvae;
                             }
-
                             }
                             break;
-                        case 38:
-                        case 39:
+                        case 35:
                             {
-                            alt18=2;
+                            int LA18_6 = input.LA(5);
+
+                            if ( ((LA18_6>=RULE_SIGNED_DOUBLE && LA18_6<=RULE_SINGED_LONG)) ) {
+                                alt18=1;
+                            }
+                            else if ( (LA18_6==RULE_ID) ) {
+                                alt18=4;
+                            }
+                            else {
+                                NoViableAltException nvae =
+                                    new NoViableAltException("1105:1: (this_NumericAttributeWhereEntry_0= ruleNumericAttributeWhereEntry | this_StringAttributeWhereEntry_1= ruleStringAttributeWhereEntry | this_BooleanAttributeWhereEntry_2= ruleBooleanAttributeWhereEntry | this_VariableWhereEntry_3= ruleVariableWhereEntry )", 18, 6, input);
+
+                                throw nvae;
+                            }
                             }
                             break;
-                        case 33:
+                        case 36:
                             {
                             int LA18_7 = input.LA(5);
 
@@ -2664,58 +2644,78 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                             }
                             }
                             break;
-                        case 34:
+                        case 32:
                             {
-                            int LA18_8 = input.LA(5);
-
-                            if ( ((LA18_8>=RULE_SIGNED_DOUBLE && LA18_8<=RULE_SINGED_LONG)) ) {
-                                alt18=1;
-                            }
-                            else if ( (LA18_8==RULE_ID) ) {
+                            switch ( input.LA(5) ) {
+                            case RULE_ID:
+                                {
                                 alt18=4;
-                            }
-                            else {
+                                }
+                                break;
+                            case RULE_SIGNED_DOUBLE:
+                            case RULE_SINGED_LONG:
+                                {
+                                alt18=1;
+                                }
+                                break;
+                            case RULE_STRING:
+                                {
+                                alt18=2;
+                                }
+                                break;
+                            case 29:
+                            case 30:
+                                {
+                                alt18=3;
+                                }
+                                break;
+                            default:
                                 NoViableAltException nvae =
                                     new NoViableAltException("1105:1: (this_NumericAttributeWhereEntry_0= ruleNumericAttributeWhereEntry | this_StringAttributeWhereEntry_1= ruleStringAttributeWhereEntry | this_BooleanAttributeWhereEntry_2= ruleBooleanAttributeWhereEntry | this_VariableWhereEntry_3= ruleVariableWhereEntry )", 18, 8, input);
 
                                 throw nvae;
                             }
+
                             }
                             break;
-                        case 35:
+                        case 37:
                             {
-                            int LA18_9 = input.LA(5);
-
-                            if ( ((LA18_9>=RULE_SIGNED_DOUBLE && LA18_9<=RULE_SINGED_LONG)) ) {
+                            switch ( input.LA(5) ) {
+                            case 29:
+                            case 30:
+                                {
+                                alt18=3;
+                                }
+                                break;
+                            case RULE_SIGNED_DOUBLE:
+                            case RULE_SINGED_LONG:
+                                {
                                 alt18=1;
-                            }
-                            else if ( (LA18_9==RULE_ID) ) {
+                                }
+                                break;
+                            case RULE_STRING:
+                                {
+                                alt18=2;
+                                }
+                                break;
+                            case RULE_ID:
+                                {
                                 alt18=4;
-                            }
-                            else {
+                                }
+                                break;
+                            default:
                                 NoViableAltException nvae =
                                     new NoViableAltException("1105:1: (this_NumericAttributeWhereEntry_0= ruleNumericAttributeWhereEntry | this_StringAttributeWhereEntry_1= ruleStringAttributeWhereEntry | this_BooleanAttributeWhereEntry_2= ruleBooleanAttributeWhereEntry | this_VariableWhereEntry_3= ruleVariableWhereEntry )", 18, 9, input);
 
                                 throw nvae;
                             }
+
                             }
                             break;
-                        case 36:
+                        case 38:
+                        case 39:
                             {
-                            int LA18_10 = input.LA(5);
-
-                            if ( (LA18_10==RULE_ID) ) {
-                                alt18=4;
-                            }
-                            else if ( ((LA18_10>=RULE_SIGNED_DOUBLE && LA18_10<=RULE_SINGED_LONG)) ) {
-                                alt18=1;
-                            }
-                            else {
-                                NoViableAltException nvae =
-                                    new NoViableAltException("1105:1: (this_NumericAttributeWhereEntry_0= ruleNumericAttributeWhereEntry | this_StringAttributeWhereEntry_1= ruleStringAttributeWhereEntry | this_BooleanAttributeWhereEntry_2= ruleBooleanAttributeWhereEntry | this_VariableWhereEntry_3= ruleVariableWhereEntry )", 18, 10, input);
-
-                                throw nvae;
-                            }
+                            alt18=2;
                             }
                             break;
                         default:
@@ -2976,11 +2976,11 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                             {
                             int LA19_8 = input.LA(5);
 
-                            if ( (LA19_8==RULE_SIGNED_DOUBLE) ) {
-                                alt19=1;
-                            }
-                            else if ( (LA19_8==RULE_SINGED_LONG) ) {
+                            if ( (LA19_8==RULE_SINGED_LONG) ) {
                                 alt19=2;
+                            }
+                            else if ( (LA19_8==RULE_SIGNED_DOUBLE) ) {
+                                alt19=1;
                             }
                             else {
                                 NoViableAltException nvae =

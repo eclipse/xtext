@@ -1,11 +1,11 @@
-RULE_ML_COMMENT=7
 RULE_ID=5
-RULE_WS=9
-RULE_INT=4
 RULE_STRING=6
 RULE_ANY_OTHER=10
+RULE_INT=4
+RULE_WS=9
 RULE_SL_COMMENT=8
-'keyword'=14
-';'=13
-'model'=11
+RULE_ML_COMMENT=7
 'feature'=12
+';'=13
+'keyword'=14
+'model'=11

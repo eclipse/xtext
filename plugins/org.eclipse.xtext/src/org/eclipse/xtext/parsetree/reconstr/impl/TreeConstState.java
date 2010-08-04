@@ -15,8 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -33,8 +32,8 @@ import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider.NFABuilder;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractNFAState;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -65,7 +64,7 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 
 	protected void calculateDistances(TreeConstState root, int dist) {
 		if (distances == null)
-			distances = new HashMap<TreeConstState, Integer>();
+			distances = Maps.newLinkedHashMap();
 		else if (distances.containsKey(root) && distances.get(root) <= dist)
 			return;
 		distances.put(root, dist);
@@ -146,7 +145,7 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 		}
 		if (isConsumingElement() || isEndState())
 			return;
-		Set<TreeConstState> doNotRemove = new HashSet<TreeConstState>();
+		Set<TreeConstState> doNotRemove = Sets.newLinkedHashSet();
 		for (TreeConstTransition t : concat(getOutgoing(), getOutgoingAfterReturn())) {
 			if (!t.isRuleCall()) {
 				TreeConstState target = t.getTarget();
@@ -189,7 +188,7 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 		AbstractElement rootEle = containingRule(element).getAlternatives();
 		TreeConstState root = builder.getState(rootEle);
 		if (root.endDistances == null)
-			root.endDistances = new HashMap<TreeConstState, Integer>();
+			root.endDistances = Maps.newLinkedHashMap();
 		return root.endDistances;
 	}
 
@@ -211,8 +210,8 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 	public Set<TypeRef> getTypes() {
 		if (types == null) {
 			getStatus();
-			Map<TreeConstState, List<TreeConstState>> map = Maps.newHashMap();
-			Set<TreeConstState> endStates = Sets.newHashSet();
+			Map<TreeConstState, List<TreeConstState>> map = Maps.newLinkedHashMap();
+			Set<TreeConstState> endStates = Sets.newLinkedHashSet();
 			initTypes(map, endStates);
 			for (TreeConstState s : endStates)
 				s.populateTypes(map);
@@ -238,9 +237,9 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 	protected void initStatus() {
 		if (distances == null) {
 			calculateDistances(this, 1);
-			discardMisleadingDistances(new HashSet<TreeConstState>());
-			checkForDetoursAndLoops(new HashSet<TreeConstState>());
-			checkForAmbigiousPaths(new HashSet<TreeConstState>());
+			discardMisleadingDistances(new LinkedHashSet<TreeConstState>());
+			checkForDetoursAndLoops(new LinkedHashSet<TreeConstState>());
+			checkForAmbigiousPaths(new LinkedHashSet<TreeConstState>());
 		}
 	}
 
@@ -248,7 +247,7 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 		if (types != null) {
 			endStates.add(this);
 		} else {
-			types = Sets.newHashSet();
+			types = Sets.newLinkedHashSet();
 			typesDirty = true;
 			for (TreeConstTransition t : concat(getOutgoing(), getOutgoingAfterReturn())) {
 				if (t.isDisabled() || (t.isRuleCall() && getGrammarElement() instanceof Assignment))
@@ -302,7 +301,7 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 						&& ((Action) origin.getGrammarElement()).getFeature() != null)
 					t = Collections.emptySet();
 				else if (t.contains(null) && origin.isConsumingElement()) {
-					t = Sets.newHashSet(t);
+					t = Sets.newLinkedHashSet(t);
 					t.remove(null);
 					if (origin.getGrammarElement() instanceof Assignment)
 						t.add(GrammarUtil.containingRule(origin.getGrammarElement()).getType());

@@ -12,20 +12,20 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBug307519TestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=12;
     public static final int RULE_ID=9;
-    public static final int KEYWORD_4=6;
-    public static final int RULE_WS=14;
+    public static final int RULE_STRING=11;
+    public static final int RULE_ANY_OTHER=15;
     public static final int KEYWORD_1=7;
     public static final int RULE_INT=10;
-    public static final int EOF=-1;
-    public static final int RULE_STRING=11;
     public static final int KEYWORD_5=4;
-    public static final int Tokens=16;
-    public static final int RULE_ANY_OTHER=15;
-    public static final int KEYWORD_2=8;
-    public static final int RULE_SL_COMMENT=13;
+    public static final int KEYWORD_4=6;
     public static final int KEYWORD_3=5;
+    public static final int KEYWORD_2=8;
+    public static final int RULE_WS=14;
+    public static final int Tokens=16;
+    public static final int RULE_SL_COMMENT=13;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=12;
     public InternalBug307519TestLanguageLexer() {;} 
     public InternalBug307519TestLanguageLexer(CharStream input) {
         super(input);

@@ -25,14 +25,14 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalContent
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_SIGNED_DOUBLE", "RULE_SINGED_LONG", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "'false'", "'<'", "'>'", "'<='", "'>='", "'='", "'!='", "'like'", "'notlike'", "'import'", "'select'", "'from'", "','", "'where'", "'.'", "'as'", "'in'", "'resources'", "'{'", "'}'", "'elements'", "'or'", "'and'", "'('", "')'", "'null'", "'withoutsubtypes'", "'not'", "'true'"
     };
-    public static final int RULE_ML_COMMENT=8;
     public static final int RULE_ID=5;
-    public static final int RULE_WS=10;
-    public static final int RULE_SIGNED_DOUBLE=6;
-    public static final int EOF=-1;
     public static final int RULE_STRING=4;
-    public static final int RULE_SL_COMMENT=9;
     public static final int RULE_SINGED_LONG=7;
+    public static final int RULE_SIGNED_DOUBLE=6;
+    public static final int RULE_WS=10;
+    public static final int RULE_SL_COMMENT=9;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=8;
 
         public InternalBug287941TestLanguageParser(TokenStream input) {
             super(input);
@@ -2095,14 +2095,21 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalContent
             else if ( (LA2_0==RULE_ID) ) {
                 int LA2_2 = input.LA(2);
 
-                if ( (LA2_2==16) ) {
-                    alt2=5;
-                }
-                else if ( (LA2_2==25) ) {
-                    int LA2_4 = input.LA(3);
+                if ( (LA2_2==25) ) {
+                    int LA2_3 = input.LA(3);
 
-                    if ( (LA2_4==RULE_ID) ) {
+                    if ( (LA2_3==RULE_ID) ) {
                         switch ( input.LA(4) ) {
+                        case 12:
+                        case 13:
+                        case 14:
+                        case 15:
+                        case 18:
+                        case 19:
+                            {
+                            alt2=2;
+                            }
+                            break;
                         case 16:
                             {
                             switch ( input.LA(5) ) {
@@ -2124,11 +2131,11 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalContent
                                 {
                                 int LA2_11 = input.LA(6);
 
-                                if ( (LA2_11==EOF||LA2_11==RULE_ID||(LA2_11>=32 && LA2_11<=35)) ) {
-                                    alt2=4;
-                                }
-                                else if ( (LA2_11==25) ) {
+                                if ( (LA2_11==25) ) {
                                     alt2=2;
+                                }
+                                else if ( (LA2_11==EOF||LA2_11==RULE_ID||(LA2_11>=32 && LA2_11<=35)) ) {
+                                    alt2=4;
                                 }
                                 else {
                                     NoViableAltException nvae =
@@ -2140,7 +2147,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalContent
                                 break;
                             default:
                                 NoViableAltException nvae =
-                                    new NoViableAltException("812:1: rule__ConcreteWhereEntry__Alternatives : ( ( ruleParWhereEntry ) | ( ruleAttributeWhereEntry ) | ( ruleNullWhereEntry ) | ( ruleReferenceAliasWhereEntry ) | ( ruleAliasWhereEntry ) | ( ruleSubselectWhereEntry ) );", 2, 6, input);
+                                    new NoViableAltException("812:1: rule__ConcreteWhereEntry__Alternatives : ( ( ruleParWhereEntry ) | ( ruleAttributeWhereEntry ) | ( ruleNullWhereEntry ) | ( ruleReferenceAliasWhereEntry ) | ( ruleAliasWhereEntry ) | ( ruleSubselectWhereEntry ) );", 2, 7, input);
 
                                 throw nvae;
                             }
@@ -2149,30 +2156,20 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalContent
                             break;
                         case 17:
                             {
-                            int LA2_7 = input.LA(5);
+                            int LA2_8 = input.LA(5);
 
-                            if ( (LA2_7==36) ) {
-                                alt2=3;
-                            }
-                            else if ( ((LA2_7>=RULE_STRING && LA2_7<=RULE_SINGED_LONG)||LA2_7==11||LA2_7==39) ) {
+                            if ( ((LA2_8>=RULE_STRING && LA2_8<=RULE_SINGED_LONG)||LA2_8==11||LA2_8==39) ) {
                                 alt2=2;
+                            }
+                            else if ( (LA2_8==36) ) {
+                                alt2=3;
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("812:1: rule__ConcreteWhereEntry__Alternatives : ( ( ruleParWhereEntry ) | ( ruleAttributeWhereEntry ) | ( ruleNullWhereEntry ) | ( ruleReferenceAliasWhereEntry ) | ( ruleAliasWhereEntry ) | ( ruleSubselectWhereEntry ) );", 2, 7, input);
+                                    new NoViableAltException("812:1: rule__ConcreteWhereEntry__Alternatives : ( ( ruleParWhereEntry ) | ( ruleAttributeWhereEntry ) | ( ruleNullWhereEntry ) | ( ruleReferenceAliasWhereEntry ) | ( ruleAliasWhereEntry ) | ( ruleSubselectWhereEntry ) );", 2, 8, input);
 
                                 throw nvae;
                             }
-                            }
-                            break;
-                        case 12:
-                        case 13:
-                        case 14:
-                        case 15:
-                        case 18:
-                        case 19:
-                            {
-                            alt2=2;
                             }
                             break;
                         case 27:
@@ -2191,10 +2188,13 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalContent
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("812:1: rule__ConcreteWhereEntry__Alternatives : ( ( ruleParWhereEntry ) | ( ruleAttributeWhereEntry ) | ( ruleNullWhereEntry ) | ( ruleReferenceAliasWhereEntry ) | ( ruleAliasWhereEntry ) | ( ruleSubselectWhereEntry ) );", 2, 4, input);
+                            new NoViableAltException("812:1: rule__ConcreteWhereEntry__Alternatives : ( ( ruleParWhereEntry ) | ( ruleAttributeWhereEntry ) | ( ruleNullWhereEntry ) | ( ruleReferenceAliasWhereEntry ) | ( ruleAliasWhereEntry ) | ( ruleSubselectWhereEntry ) );", 2, 3, input);
 
                         throw nvae;
                     }
+                }
+                else if ( (LA2_2==16) ) {
+                    alt2=5;
                 }
                 else {
                     NoViableAltException nvae =
@@ -2358,11 +2358,11 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalContent
                             {
                             int LA3_4 = input.LA(5);
 
-                            if ( (LA3_4==RULE_ID) ) {
-                                alt3=4;
-                            }
-                            else if ( ((LA3_4>=RULE_SIGNED_DOUBLE && LA3_4<=RULE_SINGED_LONG)) ) {
+                            if ( ((LA3_4>=RULE_SIGNED_DOUBLE && LA3_4<=RULE_SINGED_LONG)) ) {
                                 alt3=1;
+                            }
+                            else if ( (LA3_4==RULE_ID) ) {
+                                alt3=4;
                             }
                             else {
                                 NoViableAltException nvae =
@@ -2429,26 +2429,26 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalContent
                         case 16:
                             {
                             switch ( input.LA(5) ) {
-                            case RULE_ID:
-                                {
-                                alt3=4;
-                                }
-                                break;
                             case RULE_SIGNED_DOUBLE:
                             case RULE_SINGED_LONG:
                                 {
                                 alt3=1;
                                 }
                                 break;
-                            case 11:
-                            case 39:
+                            case RULE_ID:
                                 {
-                                alt3=3;
+                                alt3=4;
                                 }
                                 break;
                             case RULE_STRING:
                                 {
                                 alt3=2;
+                                }
+                                break;
+                            case 11:
+                            case 39:
+                                {
+                                alt3=3;
                                 }
                                 break;
                             default:
@@ -2463,14 +2463,10 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalContent
                         case 17:
                             {
                             switch ( input.LA(5) ) {
-                            case RULE_ID:
+                            case 11:
+                            case 39:
                                 {
-                                alt3=4;
-                                }
-                                break;
-                            case RULE_STRING:
-                                {
-                                alt3=2;
+                                alt3=3;
                                 }
                                 break;
                             case RULE_SIGNED_DOUBLE:
@@ -2479,10 +2475,14 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalContent
                                 alt3=1;
                                 }
                                 break;
-                            case 11:
-                            case 39:
+                            case RULE_STRING:
                                 {
-                                alt3=3;
+                                alt3=2;
+                                }
+                                break;
+                            case RULE_ID:
+                                {
+                                alt3=4;
                                 }
                                 break;
                             default:
@@ -2677,11 +2677,11 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalContent
                             {
                             int LA4_6 = input.LA(5);
 
-                            if ( (LA4_6==RULE_SINGED_LONG) ) {
-                                alt4=2;
-                            }
-                            else if ( (LA4_6==RULE_SIGNED_DOUBLE) ) {
+                            if ( (LA4_6==RULE_SIGNED_DOUBLE) ) {
                                 alt4=1;
+                            }
+                            else if ( (LA4_6==RULE_SINGED_LONG) ) {
+                                alt4=2;
                             }
                             else {
                                 NoViableAltException nvae =
@@ -2713,11 +2713,11 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalContent
                             {
                             int LA4_8 = input.LA(5);
 
-                            if ( (LA4_8==RULE_SIGNED_DOUBLE) ) {
-                                alt4=1;
-                            }
-                            else if ( (LA4_8==RULE_SINGED_LONG) ) {
+                            if ( (LA4_8==RULE_SINGED_LONG) ) {
                                 alt4=2;
+                            }
+                            else if ( (LA4_8==RULE_SIGNED_DOUBLE) ) {
+                                alt4=1;
                             }
                             else {
                                 NoViableAltException nvae =
@@ -2731,11 +2731,11 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalContent
                             {
                             int LA4_9 = input.LA(5);
 
-                            if ( (LA4_9==RULE_SIGNED_DOUBLE) ) {
-                                alt4=1;
-                            }
-                            else if ( (LA4_9==RULE_SINGED_LONG) ) {
+                            if ( (LA4_9==RULE_SINGED_LONG) ) {
                                 alt4=2;
+                            }
+                            else if ( (LA4_9==RULE_SIGNED_DOUBLE) ) {
+                                alt4=1;
                             }
                             else {
                                 NoViableAltException nvae =

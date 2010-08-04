@@ -12,37 +12,37 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalSimpleUnorderedGroupsTestLanguageLexer extends Lexer {
-    public static final int T21=21;
-    public static final int RULE_ML_COMMENT=7;
-    public static final int T14=14;
-    public static final int T29=29;
     public static final int RULE_ID=4;
-    public static final int T22=22;
-    public static final int T11=11;
-    public static final int RULE_STRING=6;
-    public static final int T12=12;
-    public static final int T28=28;
-    public static final int T23=23;
-    public static final int T13=13;
-    public static final int T20=20;
-    public static final int T25=25;
-    public static final int T18=18;
-    public static final int RULE_WS=9;
-    public static final int T26=26;
-    public static final int T15=15;
-    public static final int RULE_INT=5;
-    public static final int EOF=-1;
-    public static final int T32=32;
-    public static final int T17=17;
-    public static final int Tokens=33;
-    public static final int T31=31;
     public static final int RULE_ANY_OTHER=10;
-    public static final int T16=16;
+    public static final int T29=29;
+    public static final int T28=28;
     public static final int T27=27;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T30=30;
+    public static final int T26=26;
+    public static final int T25=25;
+    public static final int Tokens=33;
     public static final int T24=24;
+    public static final int EOF=-1;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int T23=23;
+    public static final int T22=22;
+    public static final int T21=21;
+    public static final int T20=20;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int RULE_STRING=6;
+    public static final int RULE_INT=5;
+    public static final int T11=11;
+    public static final int T12=12;
+    public static final int T13=13;
+    public static final int T14=14;
+    public static final int RULE_WS=9;
+    public static final int T15=15;
+    public static final int T16=16;
+    public static final int T17=17;
+    public static final int T18=18;
+    public static final int T30=30;
     public static final int T19=19;
+    public static final int T32=32;
+    public static final int T31=31;
     public InternalSimpleUnorderedGroupsTestLanguageLexer() {;} 
     public InternalSimpleUnorderedGroupsTestLanguageLexer(CharStream input) {
         super(input);
@@ -1249,7 +1249,7 @@ public class InternalSimpleUnorderedGroupsTestLanguageLexer extends Lexer {
     }
     private int mTokensHelper001() throws RecognitionException {
         switch ( input.LA(2) ) {
-        case '2':
+        case '0':
             {
             int LA12_24 = input.LA(3);
 
@@ -1257,9 +1257,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageLexer extends Lexer {
                 return 24;
             }
             else {
-                return 16;}
+                return 14;}
             }
-        case '0':
+        case '4':
             {
             int LA12_25 = input.LA(3);
 
@@ -1267,9 +1267,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageLexer extends Lexer {
                 return 24;
             }
             else {
-                return 14;}
+                return 18;}
             }
-        case '1':
+        case '3':
             {
             int LA12_26 = input.LA(3);
 
@@ -1277,9 +1277,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageLexer extends Lexer {
                 return 24;
             }
             else {
-                return 15;}
+                return 17;}
             }
-        case '4':
+        case '2':
             {
             int LA12_27 = input.LA(3);
 
@@ -1287,9 +1287,9 @@ public class InternalSimpleUnorderedGroupsTestLanguageLexer extends Lexer {
                 return 24;
             }
             else {
-                return 18;}
+                return 16;}
             }
-        case '3':
+        case '1':
             {
             int LA12_28 = input.LA(3);
 
@@ -1297,7 +1297,7 @@ public class InternalSimpleUnorderedGroupsTestLanguageLexer extends Lexer {
                 return 24;
             }
             else {
-                return 17;}
+                return 15;}
             }
         case '5':
         case '6':
@@ -1822,13 +1822,13 @@ public class InternalSimpleUnorderedGroupsTestLanguageLexer extends Lexer {
 
     private int mTokensHelper021() throws RecognitionException {
         switch ( input.LA(2) ) {
-        case '/':
-            {
-            return 27;
-            }
         case '*':
             {
             return 26;
+            }
+        case '/':
+            {
+            return 27;
             }
         default:
             return 29;}

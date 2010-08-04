@@ -25,14 +25,14 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'NORMAL'", "'cond'", "'reference'", "'textual'", "'state'", "'init'", "'final'"
     };
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
-    public static final int EOF=-1;
-    public static final int RULE_INT=6;
     public static final int RULE_STRING=5;
     public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=6;
+    public static final int RULE_WS=9;
     public static final int RULE_SL_COMMENT=8;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=7;
 
         public InternalBug286935TestLanguageParser(TokenStream input) {
             super(input);
@@ -197,33 +197,23 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
             case 16:
                 {
                 switch ( input.LA(2) ) {
-                case 11:
+                case EOF:
+                case RULE_ID:
+                case RULE_STRING:
+                case 15:
                     {
-                    int LA1_4 = input.LA(3);
-
-                    if ( (LA1_4==17) ) {
-                        alt1=5;
-                    }
-                    else if ( (LA1_4==EOF||(LA1_4>=RULE_ID && LA1_4<=RULE_STRING)||LA1_4==15) ) {
-                        alt1=4;
-                    }
-                    else {
-                        NoViableAltException nvae =
-                            new NoViableAltException("108:1: rule__State__Alternatives_0 : ( ( ( rule__State__IsInitialAssignment_0_0 ) ) | ( ( rule__State__IsFinalAssignment_0_1 ) ) | ( ( rule__State__StateKindAssignment_0_2 ) ) | ( ( rule__State__Group_0_3__0 ) ) | ( ( rule__State__Group_0_4__0 ) ) );", 1, 4, input);
-
-                        throw nvae;
-                    }
+                    alt1=1;
                     }
                     break;
-                case 12:
+                case 11:
                     {
                     int LA1_5 = input.LA(3);
 
-                    if ( (LA1_5==EOF||(LA1_5>=RULE_ID && LA1_5<=RULE_STRING)||LA1_5==15) ) {
-                        alt1=4;
-                    }
-                    else if ( (LA1_5==17) ) {
+                    if ( (LA1_5==17) ) {
                         alt1=5;
+                    }
+                    else if ( (LA1_5==EOF||(LA1_5>=RULE_ID && LA1_5<=RULE_STRING)||LA1_5==15) ) {
+                        alt1=4;
                     }
                     else {
                         NoViableAltException nvae =
@@ -233,15 +223,15 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
                     }
                     }
                     break;
-                case 13:
+                case 12:
                     {
                     int LA1_6 = input.LA(3);
 
-                    if ( (LA1_6==EOF||(LA1_6>=RULE_ID && LA1_6<=RULE_STRING)||LA1_6==15) ) {
-                        alt1=4;
-                    }
-                    else if ( (LA1_6==17) ) {
+                    if ( (LA1_6==17) ) {
                         alt1=5;
+                    }
+                    else if ( (LA1_6==EOF||(LA1_6>=RULE_ID && LA1_6<=RULE_STRING)||LA1_6==15) ) {
+                        alt1=4;
                     }
                     else {
                         NoViableAltException nvae =
@@ -251,7 +241,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
                     }
                     }
                     break;
-                case 14:
+                case 13:
                     {
                     int LA1_7 = input.LA(3);
 
@@ -269,12 +259,22 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
                     }
                     }
                     break;
-                case EOF:
-                case RULE_ID:
-                case RULE_STRING:
-                case 15:
+                case 14:
                     {
-                    alt1=1;
+                    int LA1_8 = input.LA(3);
+
+                    if ( (LA1_8==17) ) {
+                        alt1=5;
+                    }
+                    else if ( (LA1_8==EOF||(LA1_8>=RULE_ID && LA1_8<=RULE_STRING)||LA1_8==15) ) {
+                        alt1=4;
+                    }
+                    else {
+                        NoViableAltException nvae =
+                            new NoViableAltException("108:1: rule__State__Alternatives_0 : ( ( ( rule__State__IsInitialAssignment_0_0 ) ) | ( ( rule__State__IsFinalAssignment_0_1 ) ) | ( ( rule__State__StateKindAssignment_0_2 ) ) | ( ( rule__State__Group_0_3__0 ) ) | ( ( rule__State__Group_0_4__0 ) ) );", 1, 8, input);
+
+                        throw nvae;
+                    }
                     }
                     break;
                 default:
