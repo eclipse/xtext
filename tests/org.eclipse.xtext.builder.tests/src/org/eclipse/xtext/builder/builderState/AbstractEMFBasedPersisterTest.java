@@ -8,6 +8,7 @@
 package org.eclipse.xtext.builder.builderState;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -114,5 +115,18 @@ public class AbstractEMFBasedPersisterTest extends TestCase {
 		result.setSourceEObjectUri(URI.createFileURI(idx + "source.uri"));
 		result.setSourceEObjectUri(URI.createFileURI(idx + "target.uri"));
 		return result;
+	}
+	
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=321536
+	 */
+	public void testBug321536() throws Exception {
+		ResourceDescriptionImpl result = (ResourceDescriptionImpl) BuilderStateFactory.eINSTANCE.createResourceDescription();
+		URI uri = URI.createURI("copy of model.uri",true);
+		result.setURI(uri);
+		persister.save(Collections.singleton((IResourceDescription)result));
+		Iterable<IResourceDescription> load = persister.load();
+		URI uriAfterSave = load.iterator().next().getURI();
+		assertEquals(uri,uriAfterSave);
 	}
 }

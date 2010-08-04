@@ -19,4 +19,5 @@ public class XMIBasedPersisterTest extends AbstractEMFBasedPersisterTest {
 		super.setUp();
 		persister.setFactory(new XMIResourceFactoryImpl());
 	}
+	
 }
