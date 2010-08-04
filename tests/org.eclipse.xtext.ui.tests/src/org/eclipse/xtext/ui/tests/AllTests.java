@@ -18,8 +18,10 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.tests.core.util.BundleClasspathUriResolverTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.core.util.JdtClasspathUriResolverTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.core.util.WorkspaceClasspathUriResolverTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.DamagerRepairerPerformanceTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.DirtyStateEditorSupportTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.DocumentBasedDirtyResourceTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.FastDamageRepairerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.SimpleEditorTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.XtextDamageRepairerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.autoedit.AutoEditTest.class);

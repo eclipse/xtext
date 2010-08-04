@@ -33,8 +33,8 @@ import com.google.inject.name.Named;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
- * 
  */
+@Deprecated
 public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 
 	private final static Logger log = Logger.getLogger(XtextDamagerRepairer.class);
