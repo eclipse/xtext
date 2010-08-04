@@ -27,4 +27,9 @@ public class MutableTokenDefProvider extends AntlrTokenDefProvider {
 		out.close();
 	}
 	
+	@Override
+	protected void setTokenDefMap(Map<Integer, String> tokenDefMap) {
+		this.tokenDefMap = tokenDefMap;
+	}
+	
 }
