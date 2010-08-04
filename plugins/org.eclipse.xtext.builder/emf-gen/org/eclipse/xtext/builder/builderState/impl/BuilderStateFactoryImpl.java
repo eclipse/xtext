@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateFactoryImpl.java,v 1.11 2010/04/12 20:19:21 szarnekow Exp $
+ * $Id: BuilderStateFactoryImpl.java,v 1.12 2010/08/04 09:04:36 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -154,7 +154,7 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	 * @generated NOT
 	 */
 	public URI createEURIFromString(EDataType eDataType, String initialValue) {
-		return URI.createURI(initialValue, false);
+		return URI.createURI(initialValue, true);
 	}
 
 	/**
