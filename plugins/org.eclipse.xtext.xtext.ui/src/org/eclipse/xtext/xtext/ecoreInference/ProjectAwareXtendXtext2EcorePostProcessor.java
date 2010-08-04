@@ -107,7 +107,7 @@ public class ProjectAwareXtendXtext2EcorePostProcessor extends XtendXtext2EcoreP
 						break;
 					default:
 						path = entry.getPath();
-						url = path.toFile().toURL();
+						url = path.toFile().toURI().toURL();
 						break;
 				}
 				if (url != null) {
