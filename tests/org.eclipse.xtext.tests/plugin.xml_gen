@@ -673,6 +673,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.xtext.org/tests/QualifiedNametestLanguage" 
+       class = "org.eclipse.xtext.valueconverter.qualifiedName.QualifiedNamePackage"
+       genModel = "org/eclipse/xtext/valueconverter/QualifiedNameTestlanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage" 
        class = "org.eclipse.xtext.xtext.ecoreInference.multiValueFeatureTestLanguage.MultiValueFeatureTestLanguagePackage"
        genModel = "org/eclipse/xtext/xtext/ecoreInference/MultiValueFeatureTestLanguage.genmodel" /> 
