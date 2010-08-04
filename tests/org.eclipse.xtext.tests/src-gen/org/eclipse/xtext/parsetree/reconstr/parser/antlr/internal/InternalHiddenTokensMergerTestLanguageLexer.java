@@ -12,37 +12,37 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
-    public static final int RULE_ID=4;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int T29=29;
-    public static final int T28=28;
-    public static final int T27=27;
-    public static final int T26=26;
-    public static final int T25=25;
-    public static final int Tokens=33;
-    public static final int T24=24;
-    public static final int EOF=-1;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T23=23;
-    public static final int T22=22;
     public static final int T21=21;
-    public static final int T20=20;
     public static final int RULE_ML_COMMENT=7;
-    public static final int RULE_STRING=6;
-    public static final int RULE_INT=5;
-    public static final int T11=11;
-    public static final int T12=12;
-    public static final int T13=13;
     public static final int T14=14;
-    public static final int RULE_WS=9;
-    public static final int T15=15;
-    public static final int T16=16;
-    public static final int T17=17;
+    public static final int T29=29;
+    public static final int RULE_ID=4;
+    public static final int T22=22;
+    public static final int T11=11;
+    public static final int RULE_STRING=6;
+    public static final int T12=12;
+    public static final int T28=28;
+    public static final int T23=23;
+    public static final int T13=13;
+    public static final int T20=20;
+    public static final int T25=25;
     public static final int T18=18;
-    public static final int T30=30;
-    public static final int T19=19;
+    public static final int RULE_WS=9;
+    public static final int T26=26;
+    public static final int T15=15;
+    public static final int RULE_INT=5;
+    public static final int EOF=-1;
     public static final int T32=32;
+    public static final int T17=17;
+    public static final int Tokens=33;
     public static final int T31=31;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T16=16;
+    public static final int T27=27;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int T30=30;
+    public static final int T24=24;
+    public static final int T19=19;
     public InternalHiddenTokensMergerTestLanguageLexer() {;} 
     public InternalHiddenTokensMergerTestLanguageLexer(CharStream input) {
         super(input);
@@ -1248,29 +1248,29 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
     }
     private int mTokensHelper001() throws RecognitionException {
         switch ( input.LA(2) ) {
-        case '2':
+        case '4':
             {
-            return 5;
+            return 9;
+            }
+        case '6':
+            {
+            return 12;
             }
         case '1':
             {
             return 1;
             }
-        case '4':
+        case '2':
             {
-            return 9;
-            }
-        case '3':
-            {
-            return 7;
+            return 5;
             }
         case '7':
             {
             return 13;
             }
-        case '6':
+        case '3':
             {
-            return 12;
+            return 7;
             }
         case '5':
             {
@@ -1290,60 +1290,14 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
 
         if ( (LA12_2=='e') ) {
             switch ( input.LA(3) ) {
-            case 's':
-                {
-                int LA12_44 = input.LA(4);
-
-                if ( (LA12_44=='u') ) {
-                    int LA12_53 = input.LA(5);
-
-                    if ( (LA12_53=='l') ) {
-                        int LA12_65 = input.LA(6);
-
-                        if ( (LA12_65=='t') ) {
-                            int LA12_75 = input.LA(7);
-
-                            if ( (LA12_75=='S') ) {
-                                int LA12_81 = input.LA(8);
-
-                                if ( (LA12_81=='e') ) {
-                                    int LA12_85 = input.LA(9);
-
-                                    if ( (LA12_85=='t') ) {
-                                        int LA12_88 = input.LA(10);
-
-                                        if ( ((LA12_88>='0' && LA12_88<='9')||(LA12_88>='A' && LA12_88<='Z')||LA12_88=='_'||(LA12_88>='a' && LA12_88<='z')) ) {
-                                            return 23;
-                                        }
-                                        else {
-                                            return 21;}
-                                    }
-                                    else {
-                                        return 23;}
-                                }
-                                else {
-                                    return 23;}
-                            }
-                            else {
-                                return 23;}
-                        }
-                        else {
-                            return 23;}
-                    }
-                    else {
-                        return 23;}
-                }
-                else {
-                    return 23;}
-                }
             case 'f':
                 {
                 switch ( input.LA(4) ) {
                 case 's':
                     {
-                    int LA12_54 = input.LA(5);
+                    int LA12_53 = input.LA(5);
 
-                    if ( ((LA12_54>='0' && LA12_54<='9')||(LA12_54>='A' && LA12_54<='Z')||LA12_54=='_'||(LA12_54>='a' && LA12_54<='z')) ) {
+                    if ( ((LA12_53>='0' && LA12_53<='9')||(LA12_53>='A' && LA12_53<='Z')||LA12_53=='_'||(LA12_53>='a' && LA12_53<='z')) ) {
                         return 23;
                     }
                     else {
@@ -1417,6 +1371,52 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
                 default:
                     return 2;}
 
+                }
+            case 's':
+                {
+                int LA12_45 = input.LA(4);
+
+                if ( (LA12_45=='u') ) {
+                    int LA12_55 = input.LA(5);
+
+                    if ( (LA12_55=='l') ) {
+                        int LA12_66 = input.LA(6);
+
+                        if ( (LA12_66=='t') ) {
+                            int LA12_75 = input.LA(7);
+
+                            if ( (LA12_75=='S') ) {
+                                int LA12_81 = input.LA(8);
+
+                                if ( (LA12_81=='e') ) {
+                                    int LA12_85 = input.LA(9);
+
+                                    if ( (LA12_85=='t') ) {
+                                        int LA12_88 = input.LA(10);
+
+                                        if ( ((LA12_88>='0' && LA12_88<='9')||(LA12_88>='A' && LA12_88<='Z')||LA12_88=='_'||(LA12_88>='a' && LA12_88<='z')) ) {
+                                            return 23;
+                                        }
+                                        else {
+                                            return 21;}
+                                    }
+                                    else {
+                                        return 23;}
+                                }
+                                else {
+                                    return 23;}
+                            }
+                            else {
+                                return 23;}
+                        }
+                        else {
+                            return 23;}
+                    }
+                    else {
+                        return 23;}
+                }
+                else {
+                    return 23;}
                 }
             default:
                 return 23;}

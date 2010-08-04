@@ -25,19 +25,19 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_SERIALIZABLE", "RULE_BAG", "RULE_RANDOM", "RULE_READONLY", "RULE_LOCAL", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'class'", "'ref'", "'void'", "'.'", "'$'", "'import'", "';'", "'='", "'package'", "'nsURI'", "'nsPrefix'", "'{'", "'}'", "'datatype'", "':'", "'@'", "'('", "')'", "','", "'<'", "'>'", "'extends'", "'attr'", "'['", "']'", "'..'", "'#'", "'enum'", "'?'", "'super'", "'op'", "'throws'", "'-'", "'abstract'", "'interface'", "'ID'", "'volatile'", "'transient'", "'unsettable'", "'derived'", "'val'"
     };
-    public static final int RULE_BAG=8;
-    public static final int RULE_ID=5;
-    public static final int RULE_STRING=4;
-    public static final int RULE_SERIALIZABLE=7;
-    public static final int RULE_RANDOM=9;
-    public static final int RULE_ANY_OTHER=15;
-    public static final int RULE_INT=6;
-    public static final int RULE_WS=14;
-    public static final int RULE_SL_COMMENT=13;
-    public static final int EOF=-1;
-    public static final int RULE_LOCAL=11;
     public static final int RULE_ML_COMMENT=12;
+    public static final int RULE_ID=5;
+    public static final int RULE_WS=14;
+    public static final int EOF=-1;
+    public static final int RULE_INT=6;
+    public static final int RULE_LOCAL=11;
+    public static final int RULE_STRING=4;
+    public static final int RULE_ANY_OTHER=15;
+    public static final int RULE_RANDOM=9;
+    public static final int RULE_BAG=8;
+    public static final int RULE_SERIALIZABLE=7;
     public static final int RULE_READONLY=10;
+    public static final int RULE_SL_COMMENT=13;
 
         public InternalEcoreDslParser(TokenStream input) {
             super(input);

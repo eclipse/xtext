@@ -12,34 +12,34 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalDomainmodelLexer extends Lexer {
-    public static final int RULE_ID=4;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int T29=29;
-    public static final int T28=28;
-    public static final int T27=27;
-    public static final int T26=26;
-    public static final int T25=25;
-    public static final int Tokens=31;
-    public static final int T24=24;
-    public static final int EOF=-1;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T23=23;
-    public static final int T22=22;
     public static final int T21=21;
-    public static final int T20=20;
     public static final int RULE_ML_COMMENT=7;
-    public static final int RULE_STRING=6;
-    public static final int RULE_INT=5;
-    public static final int T11=11;
-    public static final int T12=12;
-    public static final int T13=13;
     public static final int T14=14;
-    public static final int RULE_WS=9;
-    public static final int T15=15;
-    public static final int T16=16;
-    public static final int T17=17;
+    public static final int T29=29;
+    public static final int RULE_ID=4;
+    public static final int T22=22;
+    public static final int T11=11;
+    public static final int RULE_STRING=6;
+    public static final int T12=12;
+    public static final int T28=28;
+    public static final int T23=23;
+    public static final int T13=13;
+    public static final int T20=20;
+    public static final int T25=25;
     public static final int T18=18;
+    public static final int RULE_WS=9;
+    public static final int T26=26;
+    public static final int T15=15;
+    public static final int RULE_INT=5;
+    public static final int EOF=-1;
+    public static final int T17=17;
+    public static final int Tokens=31;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T16=16;
+    public static final int T27=27;
+    public static final int RULE_SL_COMMENT=8;
     public static final int T30=30;
+    public static final int T24=24;
     public static final int T19=19;
     public InternalDomainmodelLexer() {;} 
     public InternalDomainmodelLexer(CharStream input) {
@@ -1465,33 +1465,27 @@ public class InternalDomainmodelLexer extends Lexer {
 
     private int mTokensHelper006() throws RecognitionException {
         switch ( input.LA(2) ) {
-        case 'x':
+        case 'n':
             {
             int LA12_31 = input.LA(3);
 
             if ( (LA12_31=='t') ) {
                 int LA12_53 = input.LA(4);
 
-                if ( (LA12_53=='e') ) {
+                if ( (LA12_53=='i') ) {
                     int LA12_64 = input.LA(5);
 
-                    if ( (LA12_64=='n') ) {
+                    if ( (LA12_64=='t') ) {
                         int LA12_74 = input.LA(6);
 
-                        if ( (LA12_74=='d') ) {
+                        if ( (LA12_74=='y') ) {
                             int LA12_83 = input.LA(7);
 
-                            if ( (LA12_83=='s') ) {
-                                int LA12_92 = input.LA(8);
-
-                                if ( ((LA12_92>='0' && LA12_92<='9')||(LA12_92>='A' && LA12_92<='Z')||LA12_92=='_'||(LA12_92>='a' && LA12_92<='z')) ) {
-                                    return 21;
-                                }
-                                else {
-                                    return 10;}
+                            if ( ((LA12_83>='0' && LA12_83<='9')||(LA12_83>='A' && LA12_83<='Z')||LA12_83=='_'||(LA12_83>='a' && LA12_83<='z')) ) {
+                                return 21;
                             }
                             else {
-                                return 21;}
+                                return 9;}
                         }
                         else {
                             return 21;}
@@ -1505,27 +1499,33 @@ public class InternalDomainmodelLexer extends Lexer {
             else {
                 return 21;}
             }
-        case 'n':
+        case 'x':
             {
             int LA12_32 = input.LA(3);
 
             if ( (LA12_32=='t') ) {
                 int LA12_54 = input.LA(4);
 
-                if ( (LA12_54=='i') ) {
+                if ( (LA12_54=='e') ) {
                     int LA12_65 = input.LA(5);
 
-                    if ( (LA12_65=='t') ) {
+                    if ( (LA12_65=='n') ) {
                         int LA12_75 = input.LA(6);
 
-                        if ( (LA12_75=='y') ) {
+                        if ( (LA12_75=='d') ) {
                             int LA12_84 = input.LA(7);
 
-                            if ( ((LA12_84>='0' && LA12_84<='9')||(LA12_84>='A' && LA12_84<='Z')||LA12_84=='_'||(LA12_84>='a' && LA12_84<='z')) ) {
-                                return 21;
+                            if ( (LA12_84=='s') ) {
+                                int LA12_93 = input.LA(8);
+
+                                if ( ((LA12_93>='0' && LA12_93<='9')||(LA12_93>='A' && LA12_93<='Z')||LA12_93=='_'||(LA12_93>='a' && LA12_93<='z')) ) {
+                                    return 21;
+                                }
+                                else {
+                                    return 10;}
                             }
                             else {
-                                return 9;}
+                                return 21;}
                         }
                         else {
                             return 21;}
@@ -1754,13 +1754,13 @@ public class InternalDomainmodelLexer extends Lexer {
 
     private int mTokensHelper020() throws RecognitionException {
         switch ( input.LA(2) ) {
-        case '/':
-            {
-            return 25;
-            }
         case '*':
             {
             return 24;
+            }
+        case '/':
+            {
+            return 25;
             }
         default:
             return 27;}

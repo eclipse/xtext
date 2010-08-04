@@ -26,14 +26,14 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'constant'", "'string'", "'integer'", "'boolean'", "'@desc'"
     };
+    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
+    public static final int RULE_WS=9;
+    public static final int EOF=-1;
+    public static final int RULE_INT=6;
     public static final int RULE_STRING=5;
     public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_INT=6;
-    public static final int RULE_WS=9;
     public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
-    public static final int RULE_ML_COMMENT=7;
 
         public InternalBug288734TestLanguageParser(TokenStream input) {
             super(input);
@@ -936,13 +936,13 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalAntlrPa
     static final String DFA1_maxS =
         "\1\17\1\5\1\16\1\17\3\uffff";
     static final String DFA1_acceptS =
-        "\4\uffff\1\2\1\3\1\1";
+        "\4\uffff\1\3\1\1\1\2";
     static final String DFA1_specialS =
         "\7\uffff}>";
     static final String[] DFA1_transitionS = {
             "\1\2\3\uffff\1\1",
             "\1\3",
-            "\1\6\1\4\1\5",
+            "\1\5\1\6\1\4",
             "\1\2\3\uffff\1\1",
             "",
             "",

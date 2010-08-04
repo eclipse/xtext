@@ -27,18 +27,18 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "KEYWORD_3", "KEYWORD_2", "KEYWORD_1", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "Tokens"
     };
+    public static final int RULE_ML_COMMENT=10;
     public static final int RULE_ID=7;
-    public static final int RULE_STRING=9;
-    public static final int RULE_ANY_OTHER=13;
+    public static final int RULE_WS=12;
     public static final int KEYWORD_1=6;
     public static final int RULE_INT=8;
-    public static final int KEYWORD_3=4;
-    public static final int KEYWORD_2=5;
-    public static final int RULE_WS=12;
-    public static final int RULE_SL_COMMENT=11;
-    public static final int Tokens=14;
     public static final int EOF=-1;
-    public static final int RULE_ML_COMMENT=10;
+    public static final int RULE_STRING=9;
+    public static final int Tokens=14;
+    public static final int RULE_ANY_OTHER=13;
+    public static final int KEYWORD_2=5;
+    public static final int RULE_SL_COMMENT=11;
+    public static final int KEYWORD_3=4;
 
         public InternalBug296889ExTestLanguageParser(TokenStream input) {
             super(input);
@@ -743,15 +743,15 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
             if ( (LA5_0==KEYWORD_1) ) {
                 int LA5_1 = input.LA(2);
 
-                if ( (LA5_1==EOF||LA5_1==KEYWORD_1) ) {
-                    alt5=1;
-                }
-                else if ( (LA5_1==RULE_ID) ) {
-                    int LA5_4 = input.LA(3);
+                if ( (LA5_1==RULE_ID) ) {
+                    int LA5_3 = input.LA(3);
 
                     if ( (synpred5()) ) {
                         alt5=1;
                     }
+                }
+                else if ( (LA5_1==EOF||LA5_1==KEYWORD_1) ) {
+                    alt5=1;
                 }
             }
             switch (alt5) {
@@ -1508,11 +1508,11 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
     }
     // $ANTLR end synpred7
 
-    public final boolean synpred5() {
+    public final boolean synpred7() {
         backtracking++;
         int start = input.mark();
         try {
-            synpred5_fragment(); // can never throw exception
+            synpred7_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -1522,11 +1522,11 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
         failed=false;
         return success;
     }
-    public final boolean synpred7() {
+    public final boolean synpred5() {
         backtracking++;
         int start = input.mark();
         try {
-            synpred7_fragment(); // can never throw exception
+            synpred5_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }

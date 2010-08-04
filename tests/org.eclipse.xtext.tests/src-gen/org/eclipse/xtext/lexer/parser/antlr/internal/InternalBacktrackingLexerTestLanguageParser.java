@@ -29,16 +29,16 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "KEYWORD_1", "KEYWORD_2", "RULE_CHARA", "RULE_CHARB", "RULE_CHARX", "RULE_YC", "RULE_CHARY", "RULE_CHARC", "RULE_WS", "RULE_SL_COMMENT"
     };
     public static final int RULE_CHARX=8;
-    public static final int KEYWORD_1=4;
+    public static final int RULE_CHARC=11;
+    public static final int RULE_WS=12;
     public static final int RULE_YC=9;
     public static final int RULE_CHARY=10;
-    public static final int KEYWORD_2=5;
-    public static final int RULE_WS=12;
-    public static final int RULE_CHARA=6;
-    public static final int RULE_SL_COMMENT=13;
+    public static final int KEYWORD_1=4;
     public static final int EOF=-1;
+    public static final int KEYWORD_2=5;
+    public static final int RULE_SL_COMMENT=13;
     public static final int RULE_CHARB=7;
-    public static final int RULE_CHARC=11;
+    public static final int RULE_CHARA=6;
 
         public InternalBacktrackingLexerTestLanguageParser(TokenStream input) {
             super(input);

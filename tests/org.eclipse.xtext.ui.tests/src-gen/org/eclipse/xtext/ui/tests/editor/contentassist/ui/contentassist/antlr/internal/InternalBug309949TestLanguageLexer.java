@@ -12,29 +12,29 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBug309949TestLanguageLexer extends Lexer {
-    public static final int RULE_ID=4;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int T25=25;
-    public static final int Tokens=26;
-    public static final int T24=24;
-    public static final int EOF=-1;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T23=23;
-    public static final int T22=22;
     public static final int T21=21;
-    public static final int T20=20;
     public static final int RULE_ML_COMMENT=7;
-    public static final int RULE_STRING=6;
-    public static final int RULE_INT=5;
-    public static final int T11=11;
-    public static final int T12=12;
-    public static final int T13=13;
     public static final int T14=14;
+    public static final int RULE_ID=4;
+    public static final int T22=22;
+    public static final int T11=11;
+    public static final int RULE_STRING=6;
+    public static final int T12=12;
+    public static final int T23=23;
+    public static final int T13=13;
+    public static final int T20=20;
+    public static final int T25=25;
+    public static final int T18=18;
     public static final int RULE_WS=9;
     public static final int T15=15;
-    public static final int T16=16;
+    public static final int RULE_INT=5;
+    public static final int EOF=-1;
     public static final int T17=17;
-    public static final int T18=18;
+    public static final int Tokens=26;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T16=16;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int T24=24;
     public static final int T19=19;
     public InternalBug309949TestLanguageLexer() {;} 
     public InternalBug309949TestLanguageLexer(CharStream input) {
@@ -1044,15 +1044,15 @@ public class InternalBug309949TestLanguageLexer extends Lexer {
     }
     private int mTokensHelper001() throws RecognitionException {
         switch ( input.LA(2) ) {
-        case '1':
+        case '4':
             {
             int LA12_15 = input.LA(3);
 
-            if ( (LA12_15=='+') ) {
-                return 4;
+            if ( (LA12_15=='*') ) {
+                return 9;
             }
-            else if ( (LA12_15=='*') ) {
-                return 1;
+            else if ( (LA12_15=='+') ) {
+                return 10;
             }
             else {
                 NoViableAltException nvae =
@@ -1061,15 +1061,15 @@ public class InternalBug309949TestLanguageLexer extends Lexer {
                 throw nvae;
             }
             }
-        case '2':
+        case '1':
             {
             int LA12_16 = input.LA(3);
 
-            if ( (LA12_16=='*') ) {
-                return 5;
+            if ( (LA12_16=='+') ) {
+                return 4;
             }
-            else if ( (LA12_16=='+') ) {
-                return 6;
+            else if ( (LA12_16=='*') ) {
+                return 1;
             }
             else {
                 NoViableAltException nvae =
@@ -1078,15 +1078,15 @@ public class InternalBug309949TestLanguageLexer extends Lexer {
                 throw nvae;
             }
             }
-        case '3':
+        case '2':
             {
             int LA12_17 = input.LA(3);
 
-            if ( (LA12_17=='+') ) {
-                return 8;
+            if ( (LA12_17=='*') ) {
+                return 5;
             }
-            else if ( (LA12_17=='*') ) {
-                return 7;
+            else if ( (LA12_17=='+') ) {
+                return 6;
             }
             else {
                 NoViableAltException nvae =
@@ -1095,15 +1095,15 @@ public class InternalBug309949TestLanguageLexer extends Lexer {
                 throw nvae;
             }
             }
-        case '4':
+        case '5':
             {
             int LA12_18 = input.LA(3);
 
-            if ( (LA12_18=='*') ) {
-                return 9;
+            if ( (LA12_18=='+') ) {
+                return 12;
             }
-            else if ( (LA12_18=='+') ) {
-                return 10;
+            else if ( (LA12_18=='*') ) {
+                return 11;
             }
             else {
                 NoViableAltException nvae =
@@ -1112,15 +1112,15 @@ public class InternalBug309949TestLanguageLexer extends Lexer {
                 throw nvae;
             }
             }
-        case '5':
+        case '3':
             {
             int LA12_19 = input.LA(3);
 
             if ( (LA12_19=='+') ) {
-                return 12;
+                return 8;
             }
             else if ( (LA12_19=='*') ) {
-                return 11;
+                return 7;
             }
             else {
                 NoViableAltException nvae =

@@ -26,14 +26,14 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'1'", "'mykeyword1'", "'1+'", "'2'", "'2+'", "'3'", "'3+'", "'4'", "'4+'", "'content'", "'ref'", "'-'", "'+'"
     };
+    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=5;
+    public static final int RULE_WS=9;
+    public static final int EOF=-1;
+    public static final int RULE_INT=6;
     public static final int RULE_STRING=4;
     public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_INT=6;
-    public static final int RULE_WS=9;
     public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
-    public static final int RULE_ML_COMMENT=7;
 
         public InternalBug250313Parser(TokenStream input) {
             super(input);
@@ -253,14 +253,14 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                     case RULE_ID:
                         {
                         switch ( input.LA(2) ) {
-                        case 23:
-                            {
-                            alt2=3;
-                            }
-                            break;
                         case 22:
                             {
                             alt2=4;
+                            }
+                            break;
+                        case 23:
+                            {
+                            alt2=3;
                             }
                             break;
                         case EOF:

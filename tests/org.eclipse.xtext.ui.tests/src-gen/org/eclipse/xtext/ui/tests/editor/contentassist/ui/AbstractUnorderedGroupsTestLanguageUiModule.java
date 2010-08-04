@@ -35,7 +35,7 @@ public abstract class AbstractUnorderedGroupsTestLanguageUiModule extends Defaul
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.IDamagerRepairer> bindIDamagerRepairer() {
-		return org.eclipse.xtext.ui.editor.XtextDamagerRepairer.class;
+		return org.eclipse.xtext.ui.editor.FastDamagerRepairer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment

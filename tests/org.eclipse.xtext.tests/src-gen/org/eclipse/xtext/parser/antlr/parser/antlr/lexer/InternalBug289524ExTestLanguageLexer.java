@@ -12,19 +12,19 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBug289524ExTestLanguageLexer extends Lexer {
+    public static final int RULE_ML_COMMENT=11;
     public static final int RULE_ID=8;
-    public static final int RULE_STRING=10;
-    public static final int RULE_ANY_OTHER=14;
+    public static final int KEYWORD_4=4;
+    public static final int RULE_WS=13;
     public static final int KEYWORD_1=7;
     public static final int RULE_INT=9;
-    public static final int KEYWORD_4=4;
-    public static final int KEYWORD_3=5;
-    public static final int KEYWORD_2=6;
-    public static final int RULE_WS=13;
-    public static final int Tokens=15;
-    public static final int RULE_SL_COMMENT=12;
     public static final int EOF=-1;
-    public static final int RULE_ML_COMMENT=11;
+    public static final int RULE_STRING=10;
+    public static final int Tokens=15;
+    public static final int RULE_ANY_OTHER=14;
+    public static final int KEYWORD_2=6;
+    public static final int RULE_SL_COMMENT=12;
+    public static final int KEYWORD_3=5;
     public InternalBug289524ExTestLanguageLexer() {;} 
     public InternalBug289524ExTestLanguageLexer(CharStream input) {
         super(input);
@@ -946,13 +946,13 @@ public class InternalBug289524ExTestLanguageLexer extends Lexer {
 
     private int mTokensHelper010() throws RecognitionException {
         switch ( input.LA(2) ) {
-        case '*':
-            {
-            return 8;
-            }
         case '/':
             {
             return 9;
+            }
+        case '*':
+            {
+            return 8;
             }
         default:
             return 11;}

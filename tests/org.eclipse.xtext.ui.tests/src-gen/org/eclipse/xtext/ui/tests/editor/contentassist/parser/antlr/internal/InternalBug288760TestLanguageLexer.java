@@ -12,21 +12,21 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBug288760TestLanguageLexer extends Lexer {
-    public static final int RULE_ID=8;
-    public static final int RULE_STRING=10;
-    public static final int RULE_END_TAG=7;
-    public static final int RULE_ANY_OTHER=16;
-    public static final int RULE_GT=6;
-    public static final int RULE_EQ=9;
-    public static final int RULE_INT=14;
-    public static final int RULE_WS=15;
-    public static final int Tokens=17;
-    public static final int EOF=-1;
-    public static final int RULE_END_TAG_START=13;
-    public static final int RULE_END_TAG_SHORT=5;
     public static final int RULE_START_TAG=4;
     public static final int RULE_ML_COMMENT=11;
+    public static final int RULE_ID=8;
+    public static final int RULE_WS=15;
+    public static final int RULE_END_TAG_START=13;
+    public static final int RULE_EQ=9;
+    public static final int RULE_INT=14;
+    public static final int EOF=-1;
+    public static final int RULE_STRING=10;
+    public static final int RULE_END_TAG_SHORT=5;
+    public static final int Tokens=17;
     public static final int RULE_LT=12;
+    public static final int RULE_ANY_OTHER=16;
+    public static final int RULE_GT=6;
+    public static final int RULE_END_TAG=7;
     public InternalBug288760TestLanguageLexer() {;} 
     public InternalBug288760TestLanguageLexer(CharStream input) {
         super(input);
@@ -54,11 +54,11 @@ public class InternalBug288760TestLanguageLexer extends Lexer {
                     if ( (LA1_1=='-') ) {
                         int LA1_3 = input.LA(3);
 
-                        if ( ((LA1_3>='\u0000' && LA1_3<='=')||(LA1_3>='?' && LA1_3<='\uFFFE')) ) {
-                            alt1=1;
-                        }
-                        else if ( (LA1_3=='>') ) {
+                        if ( (LA1_3=='>') ) {
                             alt1=2;
+                        }
+                        else if ( ((LA1_3>='\u0000' && LA1_3<='=')||(LA1_3>='?' && LA1_3<='\uFFFE')) ) {
+                            alt1=1;
                         }
 
 

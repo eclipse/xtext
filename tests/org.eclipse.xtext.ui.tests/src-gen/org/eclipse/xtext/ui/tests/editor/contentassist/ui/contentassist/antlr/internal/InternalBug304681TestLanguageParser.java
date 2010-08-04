@@ -25,14 +25,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "';'", "'1'", "'2'", "'package'", "'object'", "'{'", "'}'", "'extends'", "'shortDescription'", "'longDescription'", "'serialUID'", "'before'", "'after'", "'optionalLoop'", "'mandatoryLoop'", "'Attribute'", "'Reference'", "'constraint'", "'parameters'", "'message'", "'enabled'", "'abstract'", "'cloneable'", "'*'", "'required'", "'technical'"
     };
+    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
+    public static final int RULE_WS=9;
+    public static final int EOF=-1;
+    public static final int RULE_INT=6;
     public static final int RULE_STRING=5;
     public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_INT=6;
-    public static final int RULE_WS=9;
     public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
-    public static final int RULE_ML_COMMENT=7;
 
         public InternalBug304681TestLanguageParser(TokenStream input) {
             super(input);
@@ -4927,40 +4927,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                                         int LA14_20 = input.LA(7);
 
                                         if ( (LA14_20==RULE_STRING) ) {
-                                            int LA14_23 = input.LA(8);
+                                            int LA14_24 = input.LA(8);
 
-                                            if ( (LA14_23==11) ) {
+                                            if ( (LA14_24==11) ) {
                                                 switch ( input.LA(9) ) {
                                                 case 19:
-                                                    {
-                                                    int LA14_27 = input.LA(10);
-
-                                                    if ( (LA14_27==RULE_STRING) ) {
-                                                        int LA14_31 = input.LA(11);
-
-                                                        if ( (LA14_31==11) ) {
-                                                            int LA14_33 = input.LA(12);
-
-                                                            if ( (LA14_33==17) ) {
-                                                                int LA14_35 = input.LA(13);
-
-                                                                if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
-                                                                    alt14=1;
-                                                                }
-
-
-                                                            }
-
-
-                                                        }
-
-
-                                                    }
-
-
-                                                    }
-                                                    break;
-                                                case 20:
                                                     {
                                                     int LA14_28 = input.LA(10);
 
@@ -4989,9 +4960,38 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
                                                     }
                                                     break;
-                                                case 17:
+                                                case 20:
                                                     {
                                                     int LA14_29 = input.LA(10);
+
+                                                    if ( (LA14_29==RULE_STRING) ) {
+                                                        int LA14_33 = input.LA(11);
+
+                                                        if ( (LA14_33==11) ) {
+                                                            int LA14_35 = input.LA(12);
+
+                                                            if ( (LA14_35==17) ) {
+                                                                int LA14_37 = input.LA(13);
+
+                                                                if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
+                                                                    alt14=1;
+                                                                }
+
+
+                                                            }
+
+
+                                                        }
+
+
+                                                    }
+
+
+                                                    }
+                                                    break;
+                                                case 17:
+                                                    {
+                                                    int LA14_30 = input.LA(10);
 
                                                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
                                                         alt14=1;
@@ -5016,40 +5016,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                                         int LA14_21 = input.LA(7);
 
                                         if ( (LA14_21==RULE_STRING) ) {
-                                            int LA14_24 = input.LA(8);
+                                            int LA14_25 = input.LA(8);
 
-                                            if ( (LA14_24==11) ) {
+                                            if ( (LA14_25==11) ) {
                                                 switch ( input.LA(9) ) {
                                                 case 19:
-                                                    {
-                                                    int LA14_27 = input.LA(10);
-
-                                                    if ( (LA14_27==RULE_STRING) ) {
-                                                        int LA14_31 = input.LA(11);
-
-                                                        if ( (LA14_31==11) ) {
-                                                            int LA14_33 = input.LA(12);
-
-                                                            if ( (LA14_33==17) ) {
-                                                                int LA14_35 = input.LA(13);
-
-                                                                if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
-                                                                    alt14=1;
-                                                                }
-
-
-                                                            }
-
-
-                                                        }
-
-
-                                                    }
-
-
-                                                    }
-                                                    break;
-                                                case 20:
                                                     {
                                                     int LA14_28 = input.LA(10);
 
@@ -5078,9 +5049,38 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
                                                     }
                                                     break;
+                                                case 20:
+                                                    {
+                                                    int LA14_29 = input.LA(10);
+
+                                                    if ( (LA14_29==RULE_STRING) ) {
+                                                        int LA14_33 = input.LA(11);
+
+                                                        if ( (LA14_33==11) ) {
+                                                            int LA14_35 = input.LA(12);
+
+                                                            if ( (LA14_35==17) ) {
+                                                                int LA14_37 = input.LA(13);
+
+                                                                if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
+                                                                    alt14=1;
+                                                                }
+
+
+                                                            }
+
+
+                                                        }
+
+
+                                                    }
+
+
+                                                    }
+                                                    break;
                                                 case 17:
                                                     {
-                                                    int LA14_30 = input.LA(10);
+                                                    int LA14_31 = input.LA(10);
 
                                                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
                                                         alt14=1;
@@ -5140,40 +5140,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                                     int LA14_20 = input.LA(6);
 
                                     if ( (LA14_20==RULE_STRING) ) {
-                                        int LA14_23 = input.LA(7);
+                                        int LA14_24 = input.LA(7);
 
-                                        if ( (LA14_23==11) ) {
+                                        if ( (LA14_24==11) ) {
                                             switch ( input.LA(8) ) {
                                             case 19:
-                                                {
-                                                int LA14_27 = input.LA(9);
-
-                                                if ( (LA14_27==RULE_STRING) ) {
-                                                    int LA14_31 = input.LA(10);
-
-                                                    if ( (LA14_31==11) ) {
-                                                        int LA14_33 = input.LA(11);
-
-                                                        if ( (LA14_33==17) ) {
-                                                            int LA14_35 = input.LA(12);
-
-                                                            if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
-                                                                alt14=1;
-                                                            }
-
-
-                                                        }
-
-
-                                                    }
-
-
-                                                }
-
-
-                                                }
-                                                break;
-                                            case 20:
                                                 {
                                                 int LA14_28 = input.LA(9);
 
@@ -5202,9 +5173,38 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
                                                 }
                                                 break;
-                                            case 17:
+                                            case 20:
                                                 {
                                                 int LA14_29 = input.LA(9);
+
+                                                if ( (LA14_29==RULE_STRING) ) {
+                                                    int LA14_33 = input.LA(10);
+
+                                                    if ( (LA14_33==11) ) {
+                                                        int LA14_35 = input.LA(11);
+
+                                                        if ( (LA14_35==17) ) {
+                                                            int LA14_37 = input.LA(12);
+
+                                                            if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
+                                                                alt14=1;
+                                                            }
+
+
+                                                        }
+
+
+                                                    }
+
+
+                                                }
+
+
+                                                }
+                                                break;
+                                            case 17:
+                                                {
+                                                int LA14_30 = input.LA(9);
 
                                                 if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
                                                     alt14=1;
@@ -5229,40 +5229,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                                     int LA14_21 = input.LA(6);
 
                                     if ( (LA14_21==RULE_STRING) ) {
-                                        int LA14_24 = input.LA(7);
+                                        int LA14_25 = input.LA(7);
 
-                                        if ( (LA14_24==11) ) {
+                                        if ( (LA14_25==11) ) {
                                             switch ( input.LA(8) ) {
                                             case 19:
-                                                {
-                                                int LA14_27 = input.LA(9);
-
-                                                if ( (LA14_27==RULE_STRING) ) {
-                                                    int LA14_31 = input.LA(10);
-
-                                                    if ( (LA14_31==11) ) {
-                                                        int LA14_33 = input.LA(11);
-
-                                                        if ( (LA14_33==17) ) {
-                                                            int LA14_35 = input.LA(12);
-
-                                                            if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
-                                                                alt14=1;
-                                                            }
-
-
-                                                        }
-
-
-                                                    }
-
-
-                                                }
-
-
-                                                }
-                                                break;
-                                            case 20:
                                                 {
                                                 int LA14_28 = input.LA(9);
 
@@ -5291,9 +5262,38 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
                                                 }
                                                 break;
+                                            case 20:
+                                                {
+                                                int LA14_29 = input.LA(9);
+
+                                                if ( (LA14_29==RULE_STRING) ) {
+                                                    int LA14_33 = input.LA(10);
+
+                                                    if ( (LA14_33==11) ) {
+                                                        int LA14_35 = input.LA(11);
+
+                                                        if ( (LA14_35==17) ) {
+                                                            int LA14_37 = input.LA(12);
+
+                                                            if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
+                                                                alt14=1;
+                                                            }
+
+
+                                                        }
+
+
+                                                    }
+
+
+                                                }
+
+
+                                                }
+                                                break;
                                             case 17:
                                                 {
-                                                int LA14_30 = input.LA(9);
+                                                int LA14_31 = input.LA(9);
 
                                                 if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
                                                     alt14=1;
@@ -17636,27 +17636,27 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         "\4\1\0\1\5\1\21\1\13\2\21\1\35\2\5\1\4\2\13\2\0\2\5\1\21\1\20\2"+
         "\5\2\21\2\0\2\5\2\13\1\20\2\21\1\5\1\21\1\13\1\35\1\5\1\21\1\13"+
         "\1\4\1\0\1\5\1\21\1\13\2\21\1\35\2\0\2\5\2\21\2\5\1\21\1\20\2\5"+
-        "\2\21\2\0\3\5\1\21\1\13\2\5\1\4\2\13\1\0\1\5\1\21\1\13\1\35\1\5"+
-        "\1\21\1\13\1\4\1\0\1\5\1\21\1\13\1\21\2\13\1\20\2\21\2\5\2\21\2"+
-        "\5\1\21\1\20\2\5\4\21\1\35\2\5\1\4\2\13\2\0\1\5\1\21\1\13\1\4\1"+
-        "\0\1\5\1\21\1\13\1\35\1\5\1\21\1\13\1\4\3\0\2\5\2\13\1\20\3\21\1"+
-        "\20\2\5\2\21\2\5\1\21\1\20\1\5\1\21\1\13\2\21\1\35\2\5\1\4\2\13"+
-        "\2\0\1\35\1\5\1\21\1\13\1\4\1\0\1\5\1\21\1\13\1\35\2\5\2\21\2\0"+
-        "\2\5\2\13\1\20\2\21\2\5\1\21\1\20\2\5\2\21\3\5\1\21\1\13\1\4\2\5"+
-        "\2\13\1\0\1\5\1\21\1\13\2\21\1\35\2\0\1\5\1\21\1\13\1\35\1\5\1\21"+
-        "\1\13\1\4\1\0\1\5\1\21\1\13\1\21\1\20\2\13\2\21\2\5\2\21\2\0\4\5"+
-        "\2\21\2\5\1\21\1\20\2\5\2\21\1\35\2\21\2\5\1\4\2\13\2\0\1\5\1\21"+
-        "\1\13\1\0\1\5\1\21\1\13\1\5\1\21\1\13\1\4\1\0\1\5\1\21\1\13\1\35"+
-        "\1\5\1\21\1\13\1\0\2\5\2\0\2\13\1\20\3\21\2\5\3\21\1\20\2\5\2\21"+
-        "\2\5\1\21\1\5\1\21\1\13\2\21\1\35\2\0\1\5\1\21\1\13\1\0\1\35\1\5"+
-        "\1\21\1\13\1\4\1\0\1\5\1\21\1\13\2\5\2\21\2\0\2\5\1\21\2\5\1\21"+
-        "\1\20\2\5\2\21\1\5\1\21\1\13\2\5\1\4\2\13\1\0\1\5\1\21\1\13\1\5"+
-        "\1\21\1\13\1\35\1\5\1\21\1\13\1\0\1\21\2\13\1\20\2\21\2\5\2\21\2"+
-        "\5\2\21\2\5\3\21\1\35\2\0\1\5\1\21\1\13\1\0\1\5\1\21\1\13\1\4\1"+
-        "\0\1\5\1\21\1\13\2\0\2\5\2\21\1\20\2\5\2\21\1\5\1\21\1\13\1\35\1"+
-        "\5\1\21\1\13\1\0\2\5\2\21\2\5\1\21\1\5\1\21\1\13\1\4\1\0\1\5\1\21"+
-        "\1\13\1\21\1\20\2\5\2\21\1\35\1\5\1\21\1\13\1\0\2\5\1\21\1\5\1\21"+
-        "\1\13\2\5\2\21\1\5\1\21\1\13\1\0\1\21";
+        "\2\21\2\0\3\5\1\21\1\13\1\4\2\5\2\13\1\0\1\5\1\21\1\13\1\35\1\5"+
+        "\1\21\1\13\1\4\1\0\1\5\1\21\1\13\1\21\1\20\2\13\2\21\2\5\2\21\2"+
+        "\5\1\21\1\20\2\5\2\21\1\35\2\21\2\5\1\4\2\13\2\0\1\5\1\21\1\13\1"+
+        "\4\1\0\1\5\1\21\1\13\1\35\1\5\1\21\1\13\1\4\1\0\2\5\2\0\2\13\1\20"+
+        "\3\21\1\20\2\5\2\21\2\5\1\21\1\20\1\5\1\21\1\13\2\21\1\35\2\5\1"+
+        "\4\2\13\2\0\1\35\1\5\1\21\1\13\1\4\1\0\1\5\1\21\1\13\1\35\2\5\2"+
+        "\21\2\0\2\5\2\13\1\20\2\21\2\5\1\21\1\20\2\5\2\21\3\5\1\21\1\13"+
+        "\1\4\2\5\2\13\1\0\1\5\1\21\1\13\2\21\1\35\2\0\1\5\1\21\1\13\1\35"+
+        "\1\5\1\21\1\13\1\4\1\0\1\5\1\21\1\13\1\21\1\20\2\13\2\21\2\5\2\21"+
+        "\2\0\4\5\2\21\2\5\1\21\1\20\2\5\2\21\1\35\2\21\2\5\1\4\2\13\2\0"+
+        "\1\5\1\21\1\13\1\0\1\5\1\21\1\13\1\5\1\21\1\13\1\4\1\0\1\5\1\21"+
+        "\1\13\1\35\1\5\1\21\1\13\1\0\2\5\2\0\2\13\1\20\3\21\2\5\3\21\1\20"+
+        "\2\5\2\21\2\5\1\21\1\5\1\21\1\13\2\21\1\35\2\0\1\5\1\21\1\13\1\0"+
+        "\1\35\1\5\1\21\1\13\1\4\1\0\1\5\1\21\1\13\2\5\2\21\2\0\2\5\1\21"+
+        "\2\5\1\21\1\20\2\5\2\21\1\5\1\21\1\13\2\5\1\4\2\13\1\0\1\5\1\21"+
+        "\1\13\1\5\1\21\1\13\1\35\1\5\1\21\1\13\1\0\1\21\2\13\1\20\2\21\2"+
+        "\5\2\21\2\5\2\21\2\5\3\21\1\35\2\0\1\5\1\21\1\13\1\0\1\5\1\21\1"+
+        "\13\1\4\1\0\1\5\1\21\1\13\2\0\2\5\2\21\1\20\2\5\2\21\1\5\1\21\1"+
+        "\13\1\35\1\5\1\21\1\13\1\0\2\5\2\21\2\5\1\21\1\5\1\21\1\13\1\4\1"+
+        "\0\1\5\1\21\1\13\1\21\1\20\2\5\2\21\1\35\1\5\1\21\1\13\1\0\2\5\1"+
+        "\21\1\5\1\21\1\13\2\5\2\21\1\5\1\21\1\13\1\0\1\21";
     static final String DFA35_maxS =
         "\1\41\4\uffff\2\4\1\uffff\1\4\1\42\1\20\1\4\1\20\1\44\1\0\1\24\1"+
         "\0\2\5\1\4\2\13\1\0\1\uffff\2\5\1\0\2\13\1\20\2\44\2\13\2\44\1\36"+
@@ -17668,11 +17668,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         "\44\1\36\2\5\1\4\2\13\2\0\1\13\1\5\1\21\1\20\1\13\1\5\1\44\1\36"+
         "\2\0\1\13\1\5\2\13\1\20\2\21\1\13\1\36\1\13\1\36\1\13\1\21\1\13"+
         "\1\4\1\0\1\13\1\36\1\13\2\21\1\36\2\0\1\13\1\5\1\44\1\36\1\13\1"+
-        "\5\1\21\1\20\1\13\1\5\1\44\1\36\2\0\1\13\1\5\1\13\1\21\1\13\2\5"+
-        "\1\4\2\13\1\0\1\13\1\36\1\13\1\36\1\13\1\21\1\13\1\4\1\0\1\13\1"+
-        "\36\1\13\1\21\2\13\1\20\2\44\1\13\1\5\1\44\1\36\1\13\1\5\1\21\1"+
-        "\20\1\13\1\5\1\34\1\36\2\44\1\36\2\5\1\4\2\13\2\0\1\13\1\21\1\13"+
-        "\1\4\1\0\1\13\1\36\1\13\1\36\1\13\1\21\1\13\1\4\3\0\1\13\1\5\2\13"+
+        "\5\1\21\1\20\1\13\1\5\1\44\1\36\2\0\1\13\1\5\1\13\1\21\1\13\1\4"+
+        "\2\5\2\13\1\0\1\13\1\36\1\13\1\36\1\13\1\21\1\13\1\4\1\0\1\13\1"+
+        "\36\1\13\1\21\1\20\2\13\2\44\1\13\1\5\1\44\1\36\1\13\1\5\1\21\1"+
+        "\20\1\13\1\5\1\34\2\36\2\44\2\5\1\4\2\13\2\0\1\13\1\21\1\13\1\4"+
+        "\1\0\1\13\1\36\1\13\1\36\1\13\1\21\1\13\1\4\1\0\1\13\1\5\2\0\2\13"+
         "\1\20\2\44\1\21\1\20\1\13\1\5\1\44\1\36\1\13\1\5\1\21\1\20\1\13"+
         "\1\36\1\13\2\44\1\36\2\5\1\4\2\13\2\0\1\36\1\13\1\21\1\13\1\4\1"+
         "\0\1\13\1\36\1\13\1\36\1\13\1\5\1\44\1\36\2\0\1\13\1\5\2\13\1\20"+
@@ -17697,19 +17697,19 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
     static final String DFA35_acceptS =
         "\1\uffff\4\2\2\uffff\1\2\17\uffff\1\1\u022d\uffff";
     static final String DFA35_specialS =
-        "\1\1\15\uffff\1\2\1\uffff\1\0\5\uffff\1\55\3\uffff\1\111\17\uffff"+
-        "\1\54\1\53\2\uffff\1\52\1\51\11\uffff\1\112\1\113\13\uffff\1\56"+
-        "\1\57\6\uffff\1\60\1\61\15\uffff\1\62\13\uffff\1\50\1\47\1\110\1"+
-        "\107\6\uffff\1\46\1\45\14\uffff\1\44\13\uffff\1\43\1\42\10\uffff"+
-        "\1\41\1\40\17\uffff\1\37\6\uffff\1\36\1\35\14\uffff\1\34\1\33\12"+
-        "\uffff\1\63\10\uffff\1\64\35\uffff\1\65\1\66\4\uffff\1\67\10\uffff"+
-        "\1\70\1\71\1\72\34\uffff\1\73\1\74\5\uffff\1\75\10\uffff\1\76\1"+
-        "\77\31\uffff\1\100\6\uffff\1\101\1\102\10\uffff\1\103\15\uffff\1"+
-        "\104\1\105\26\uffff\1\106\1\32\3\uffff\1\31\7\uffff\1\30\7\uffff"+
-        "\1\27\2\uffff\1\26\1\25\31\uffff\1\24\1\23\3\uffff\1\22\5\uffff"+
-        "\1\21\7\uffff\1\20\1\17\23\uffff\1\16\12\uffff\1\15\24\uffff\1\14"+
-        "\1\13\3\uffff\1\12\4\uffff\1\11\3\uffff\1\10\1\7\20\uffff\1\6\13"+
-        "\uffff\1\5\15\uffff\1\4\15\uffff\1\3\1\uffff}>";
+        "\1\0\15\uffff\1\1\1\uffff\1\106\5\uffff\1\54\3\uffff\1\111\17\uffff"+
+        "\1\53\1\52\2\uffff\1\51\1\50\11\uffff\1\112\1\113\13\uffff\1\55"+
+        "\1\56\6\uffff\1\57\1\60\15\uffff\1\61\13\uffff\1\47\1\46\1\110\1"+
+        "\107\6\uffff\1\45\1\44\14\uffff\1\43\13\uffff\1\42\1\41\10\uffff"+
+        "\1\40\1\37\17\uffff\1\36\6\uffff\1\35\1\34\14\uffff\1\33\1\32\12"+
+        "\uffff\1\62\10\uffff\1\63\35\uffff\1\64\1\65\4\uffff\1\66\10\uffff"+
+        "\1\67\2\uffff\1\70\1\71\32\uffff\1\72\1\73\5\uffff\1\74\10\uffff"+
+        "\1\75\1\76\31\uffff\1\77\6\uffff\1\100\1\101\10\uffff\1\102\15\uffff"+
+        "\1\103\1\104\26\uffff\1\105\1\31\3\uffff\1\30\7\uffff\1\27\7\uffff"+
+        "\1\26\2\uffff\1\25\1\24\31\uffff\1\23\1\22\3\uffff\1\21\5\uffff"+
+        "\1\20\7\uffff\1\17\1\16\23\uffff\1\15\12\uffff\1\14\24\uffff\1\13"+
+        "\1\12\3\uffff\1\11\4\uffff\1\10\3\uffff\1\7\1\6\20\uffff\1\5\13"+
+        "\uffff\1\4\15\uffff\1\3\15\uffff\1\2\1\uffff}>";
     static final String[] DFA35_transitionS = {
             "\1\7\1\uffff\1\1\1\2\1\3\4\uffff\1\5\1\6\5\uffff\1\4",
             "",
@@ -17896,7 +17896,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             "\1\uffff",
             "\1\u00c1\5\uffff\1\u00c2",
             "\1\u00c3",
-            "\1\u00c9\1\uffff\1\u00c4\1\u00c5\7\uffff\1\u00c6\6\uffff\1\u00c7"+
+            "\1\u00c9\1\uffff\1\u00c5\1\u00c6\7\uffff\1\u00c4\6\uffff\1\u00c7"+
             "\1\u00c8",
             "\1\u00b3\13\uffff\1\u00b1\1\u00b2",
             "\1\u00ca\5\uffff\1\u00cb",
@@ -17954,11 +17954,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             "\1\u00fd",
             "\1\u00ff\12\uffff\1\u00fe",
             "\1\u00e6\13\uffff\1\u00e4\1\u00e5",
-            "\1\u0100\1\uffff\1\u00eb\1\u00ec\7\uffff\1\u00ed\6\uffff\1\u00ee"+
+            "\1\u0100\1\u0101",
+            "\1\u0102\1\uffff\1\u00eb\1\u00ec\7\uffff\1\u00ed\6\uffff\1\u00ee"+
             "\1\u00ef",
-            "\1\u0101\1\uffff\1\u00eb\1\u00ec\7\uffff\1\u00ed\6\uffff\1\u00ee"+
+            "\1\u0103\1\uffff\1\u00eb\1\u00ec\7\uffff\1\u00ed\6\uffff\1\u00ee"+
             "\1\u00ef",
-            "\1\u0102\1\u0103",
             "\1\u0104",
             "\1\u0105",
             "\1\u0106",
@@ -17980,10 +17980,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             "\1\u0111",
             "\1\u0112",
             "\1\uffff",
-            "\1\uffff",
-            "\1\uffff",
             "\1\u0113\5\uffff\1\u0114",
             "\1\u0115",
+            "\1\uffff",
+            "\1\uffff",
             "\1\u0116",
             "\1\u0117",
             "\1\u0118",
@@ -18378,21 +18378,6 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA35_16 = input.LA(1);
-
-                         
-                        int index35_16 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {s = 23;}
-
-                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {s = 7;}
-
-                         
-                        input.seek(index35_16);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
                         int LA35_0 = input.LA(1);
 
                          
@@ -18417,7 +18402,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_0);
                         if ( s>=0 ) return s;
                         break;
-                    case 2 : 
+                    case 1 : 
                         int LA35_14 = input.LA(1);
 
                          
@@ -18432,7 +18417,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_14);
                         if ( s>=0 ) return s;
                         break;
-                    case 3 : 
+                    case 2 : 
                         int LA35_579 = input.LA(1);
 
                          
@@ -18447,7 +18432,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_579);
                         if ( s>=0 ) return s;
                         break;
-                    case 4 : 
+                    case 3 : 
                         int LA35_565 = input.LA(1);
 
                          
@@ -18462,7 +18447,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_565);
                         if ( s>=0 ) return s;
                         break;
-                    case 5 : 
+                    case 4 : 
                         int LA35_551 = input.LA(1);
 
                          
@@ -18477,7 +18462,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_551);
                         if ( s>=0 ) return s;
                         break;
-                    case 6 : 
+                    case 5 : 
                         int LA35_539 = input.LA(1);
 
                          
@@ -18492,7 +18477,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_539);
                         if ( s>=0 ) return s;
                         break;
-                    case 7 : 
+                    case 6 : 
                         int LA35_522 = input.LA(1);
 
                          
@@ -18507,7 +18492,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_522);
                         if ( s>=0 ) return s;
                         break;
-                    case 8 : 
+                    case 7 : 
                         int LA35_521 = input.LA(1);
 
                          
@@ -18522,7 +18507,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_521);
                         if ( s>=0 ) return s;
                         break;
-                    case 9 : 
+                    case 8 : 
                         int LA35_517 = input.LA(1);
 
                          
@@ -18537,7 +18522,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_517);
                         if ( s>=0 ) return s;
                         break;
-                    case 10 : 
+                    case 9 : 
                         int LA35_512 = input.LA(1);
 
                          
@@ -18552,7 +18537,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_512);
                         if ( s>=0 ) return s;
                         break;
-                    case 11 : 
+                    case 10 : 
                         int LA35_508 = input.LA(1);
 
                          
@@ -18567,7 +18552,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_508);
                         if ( s>=0 ) return s;
                         break;
-                    case 12 : 
+                    case 11 : 
                         int LA35_507 = input.LA(1);
 
                          
@@ -18582,7 +18567,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_507);
                         if ( s>=0 ) return s;
                         break;
-                    case 13 : 
+                    case 12 : 
                         int LA35_486 = input.LA(1);
 
                          
@@ -18597,7 +18582,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_486);
                         if ( s>=0 ) return s;
                         break;
-                    case 14 : 
+                    case 13 : 
                         int LA35_475 = input.LA(1);
 
                          
@@ -18612,7 +18597,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_475);
                         if ( s>=0 ) return s;
                         break;
-                    case 15 : 
+                    case 14 : 
                         int LA35_455 = input.LA(1);
 
                          
@@ -18627,7 +18612,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_455);
                         if ( s>=0 ) return s;
                         break;
-                    case 16 : 
+                    case 15 : 
                         int LA35_454 = input.LA(1);
 
                          
@@ -18642,7 +18627,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_454);
                         if ( s>=0 ) return s;
                         break;
-                    case 17 : 
+                    case 16 : 
                         int LA35_446 = input.LA(1);
 
                          
@@ -18657,7 +18642,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_446);
                         if ( s>=0 ) return s;
                         break;
-                    case 18 : 
+                    case 17 : 
                         int LA35_440 = input.LA(1);
 
                          
@@ -18672,7 +18657,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_440);
                         if ( s>=0 ) return s;
                         break;
-                    case 19 : 
+                    case 18 : 
                         int LA35_436 = input.LA(1);
 
                          
@@ -18687,7 +18672,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_436);
                         if ( s>=0 ) return s;
                         break;
-                    case 20 : 
+                    case 19 : 
                         int LA35_435 = input.LA(1);
 
                          
@@ -18702,7 +18687,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_435);
                         if ( s>=0 ) return s;
                         break;
-                    case 21 : 
+                    case 20 : 
                         int LA35_409 = input.LA(1);
 
                          
@@ -18717,7 +18702,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_409);
                         if ( s>=0 ) return s;
                         break;
-                    case 22 : 
+                    case 21 : 
                         int LA35_408 = input.LA(1);
 
                          
@@ -18732,7 +18717,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_408);
                         if ( s>=0 ) return s;
                         break;
-                    case 23 : 
+                    case 22 : 
                         int LA35_405 = input.LA(1);
 
                          
@@ -18747,7 +18732,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_405);
                         if ( s>=0 ) return s;
                         break;
-                    case 24 : 
+                    case 23 : 
                         int LA35_397 = input.LA(1);
 
                          
@@ -18762,7 +18747,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_397);
                         if ( s>=0 ) return s;
                         break;
-                    case 25 : 
+                    case 24 : 
                         int LA35_389 = input.LA(1);
 
                          
@@ -18777,7 +18762,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_389);
                         if ( s>=0 ) return s;
                         break;
-                    case 26 : 
+                    case 25 : 
                         int LA35_385 = input.LA(1);
 
                          
@@ -18792,7 +18777,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_385);
                         if ( s>=0 ) return s;
                         break;
-                    case 27 : 
+                    case 26 : 
                         int LA35_190 = input.LA(1);
 
                          
@@ -18807,7 +18792,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_190);
                         if ( s>=0 ) return s;
                         break;
-                    case 28 : 
+                    case 27 : 
                         int LA35_189 = input.LA(1);
 
                          
@@ -18822,7 +18807,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_189);
                         if ( s>=0 ) return s;
                         break;
-                    case 29 : 
+                    case 28 : 
                         int LA35_176 = input.LA(1);
 
                          
@@ -18837,7 +18822,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_176);
                         if ( s>=0 ) return s;
                         break;
-                    case 30 : 
+                    case 29 : 
                         int LA35_175 = input.LA(1);
 
                          
@@ -18852,7 +18837,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_175);
                         if ( s>=0 ) return s;
                         break;
-                    case 31 : 
+                    case 30 : 
                         int LA35_168 = input.LA(1);
 
                          
@@ -18867,7 +18852,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_168);
                         if ( s>=0 ) return s;
                         break;
-                    case 32 : 
+                    case 31 : 
                         int LA35_152 = input.LA(1);
 
                          
@@ -18882,7 +18867,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_152);
                         if ( s>=0 ) return s;
                         break;
-                    case 33 : 
+                    case 32 : 
                         int LA35_151 = input.LA(1);
 
                          
@@ -18897,7 +18882,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_151);
                         if ( s>=0 ) return s;
                         break;
-                    case 34 : 
+                    case 33 : 
                         int LA35_142 = input.LA(1);
 
                          
@@ -18912,7 +18897,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_142);
                         if ( s>=0 ) return s;
                         break;
-                    case 35 : 
+                    case 34 : 
                         int LA35_141 = input.LA(1);
 
                          
@@ -18927,7 +18912,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_141);
                         if ( s>=0 ) return s;
                         break;
-                    case 36 : 
+                    case 35 : 
                         int LA35_129 = input.LA(1);
 
                          
@@ -18942,7 +18927,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_129);
                         if ( s>=0 ) return s;
                         break;
-                    case 37 : 
+                    case 36 : 
                         int LA35_116 = input.LA(1);
 
                          
@@ -18957,7 +18942,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_116);
                         if ( s>=0 ) return s;
                         break;
-                    case 38 : 
+                    case 37 : 
                         int LA35_115 = input.LA(1);
 
                          
@@ -18972,7 +18957,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_115);
                         if ( s>=0 ) return s;
                         break;
-                    case 39 : 
+                    case 38 : 
                         int LA35_106 = input.LA(1);
 
                          
@@ -18987,7 +18972,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_106);
                         if ( s>=0 ) return s;
                         break;
-                    case 40 : 
+                    case 39 : 
                         int LA35_105 = input.LA(1);
 
                          
@@ -19002,7 +18987,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_105);
                         if ( s>=0 ) return s;
                         break;
-                    case 41 : 
+                    case 40 : 
                         int LA35_47 = input.LA(1);
 
                          
@@ -19017,7 +19002,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_47);
                         if ( s>=0 ) return s;
                         break;
-                    case 42 : 
+                    case 41 : 
                         int LA35_46 = input.LA(1);
 
                          
@@ -19032,7 +19017,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_46);
                         if ( s>=0 ) return s;
                         break;
-                    case 43 : 
+                    case 42 : 
                         int LA35_43 = input.LA(1);
 
                          
@@ -19047,7 +19032,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_43);
                         if ( s>=0 ) return s;
                         break;
-                    case 44 : 
+                    case 43 : 
                         int LA35_42 = input.LA(1);
 
                          
@@ -19062,7 +19047,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_42);
                         if ( s>=0 ) return s;
                         break;
-                    case 45 : 
+                    case 44 : 
                         int LA35_22 = input.LA(1);
 
                          
@@ -19077,7 +19062,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_22);
                         if ( s>=0 ) return s;
                         break;
-                    case 46 : 
+                    case 45 : 
                         int LA35_70 = input.LA(1);
 
                          
@@ -19092,7 +19077,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_70);
                         if ( s>=0 ) return s;
                         break;
-                    case 47 : 
+                    case 46 : 
                         int LA35_71 = input.LA(1);
 
                          
@@ -19107,7 +19092,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_71);
                         if ( s>=0 ) return s;
                         break;
-                    case 48 : 
+                    case 47 : 
                         int LA35_78 = input.LA(1);
 
                          
@@ -19122,7 +19107,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_78);
                         if ( s>=0 ) return s;
                         break;
-                    case 49 : 
+                    case 48 : 
                         int LA35_79 = input.LA(1);
 
                          
@@ -19137,7 +19122,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_79);
                         if ( s>=0 ) return s;
                         break;
-                    case 50 : 
+                    case 49 : 
                         int LA35_93 = input.LA(1);
 
                          
@@ -19152,7 +19137,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_93);
                         if ( s>=0 ) return s;
                         break;
-                    case 51 : 
+                    case 50 : 
                         int LA35_201 = input.LA(1);
 
                          
@@ -19167,7 +19152,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_201);
                         if ( s>=0 ) return s;
                         break;
-                    case 52 : 
+                    case 51 : 
                         int LA35_210 = input.LA(1);
 
                          
@@ -19182,7 +19167,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_210);
                         if ( s>=0 ) return s;
                         break;
-                    case 53 : 
+                    case 52 : 
                         int LA35_240 = input.LA(1);
 
                          
@@ -19197,7 +19182,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_240);
                         if ( s>=0 ) return s;
                         break;
-                    case 54 : 
+                    case 53 : 
                         int LA35_241 = input.LA(1);
 
                          
@@ -19212,7 +19197,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_241);
                         if ( s>=0 ) return s;
                         break;
-                    case 55 : 
+                    case 54 : 
                         int LA35_246 = input.LA(1);
 
                          
@@ -19227,7 +19212,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_246);
                         if ( s>=0 ) return s;
                         break;
-                    case 56 : 
+                    case 55 : 
                         int LA35_255 = input.LA(1);
 
                          
@@ -19242,11 +19227,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_255);
                         if ( s>=0 ) return s;
                         break;
-                    case 57 : 
-                        int LA35_256 = input.LA(1);
+                    case 56 : 
+                        int LA35_258 = input.LA(1);
 
                          
-                        int index35_256 = input.index();
+                        int index35_258 = input.index();
                         input.rewind();
                         s = -1;
                         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {s = 23;}
@@ -19254,25 +19239,25 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {s = 7;}
 
                          
-                        input.seek(index35_256);
+                        input.seek(index35_258);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 57 : 
+                        int LA35_259 = input.LA(1);
+
+                         
+                        int index35_259 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {s = 23;}
+
+                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {s = 7;}
+
+                         
+                        input.seek(index35_259);
                         if ( s>=0 ) return s;
                         break;
                     case 58 : 
-                        int LA35_257 = input.LA(1);
-
-                         
-                        int index35_257 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {s = 23;}
-
-                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {s = 7;}
-
-                         
-                        input.seek(index35_257);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 59 : 
                         int LA35_286 = input.LA(1);
 
                          
@@ -19287,7 +19272,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_286);
                         if ( s>=0 ) return s;
                         break;
-                    case 60 : 
+                    case 59 : 
                         int LA35_287 = input.LA(1);
 
                          
@@ -19302,7 +19287,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_287);
                         if ( s>=0 ) return s;
                         break;
-                    case 61 : 
+                    case 60 : 
                         int LA35_293 = input.LA(1);
 
                          
@@ -19317,7 +19302,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_293);
                         if ( s>=0 ) return s;
                         break;
-                    case 62 : 
+                    case 61 : 
                         int LA35_302 = input.LA(1);
 
                          
@@ -19332,7 +19317,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_302);
                         if ( s>=0 ) return s;
                         break;
-                    case 63 : 
+                    case 62 : 
                         int LA35_303 = input.LA(1);
 
                          
@@ -19347,7 +19332,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_303);
                         if ( s>=0 ) return s;
                         break;
-                    case 64 : 
+                    case 63 : 
                         int LA35_329 = input.LA(1);
 
                          
@@ -19362,7 +19347,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_329);
                         if ( s>=0 ) return s;
                         break;
-                    case 65 : 
+                    case 64 : 
                         int LA35_336 = input.LA(1);
 
                          
@@ -19377,7 +19362,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_336);
                         if ( s>=0 ) return s;
                         break;
-                    case 66 : 
+                    case 65 : 
                         int LA35_337 = input.LA(1);
 
                          
@@ -19392,7 +19377,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_337);
                         if ( s>=0 ) return s;
                         break;
-                    case 67 : 
+                    case 66 : 
                         int LA35_346 = input.LA(1);
 
                          
@@ -19407,7 +19392,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_346);
                         if ( s>=0 ) return s;
                         break;
-                    case 68 : 
+                    case 67 : 
                         int LA35_360 = input.LA(1);
 
                          
@@ -19422,7 +19407,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_360);
                         if ( s>=0 ) return s;
                         break;
-                    case 69 : 
+                    case 68 : 
                         int LA35_361 = input.LA(1);
 
                          
@@ -19437,7 +19422,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         input.seek(index35_361);
                         if ( s>=0 ) return s;
                         break;
-                    case 70 : 
+                    case 69 : 
                         int LA35_384 = input.LA(1);
 
                          
@@ -19450,6 +19435,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
                          
                         input.seek(index35_384);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 70 : 
+                        int LA35_16 = input.LA(1);
+
+                         
+                        int index35_16 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {s = 23;}
+
+                        else if ( getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {s = 7;}
+
+                         
+                        input.seek(index35_16);
                         if ( s>=0 ) return s;
                         break;
                     case 71 : 

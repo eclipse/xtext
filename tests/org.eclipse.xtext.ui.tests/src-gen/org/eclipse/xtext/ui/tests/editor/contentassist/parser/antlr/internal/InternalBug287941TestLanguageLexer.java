@@ -12,44 +12,44 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBug287941TestLanguageLexer extends Lexer {
-    public static final int RULE_ID=5;
-    public static final int RULE_SINGED_LONG=7;
-    public static final int T29=29;
-    public static final int T28=28;
-    public static final int T27=27;
-    public static final int T26=26;
-    public static final int T25=25;
-    public static final int Tokens=40;
-    public static final int T24=24;
-    public static final int EOF=-1;
-    public static final int RULE_SL_COMMENT=9;
-    public static final int T23=23;
-    public static final int T22=22;
     public static final int T21=21;
-    public static final int T20=20;
     public static final int RULE_ML_COMMENT=8;
-    public static final int RULE_STRING=4;
-    public static final int RULE_SIGNED_DOUBLE=6;
-    public static final int T38=38;
-    public static final int T11=11;
-    public static final int T37=37;
-    public static final int T12=12;
-    public static final int T13=13;
-    public static final int T39=39;
     public static final int T14=14;
-    public static final int T34=34;
-    public static final int RULE_WS=10;
-    public static final int T15=15;
+    public static final int T29=29;
+    public static final int RULE_ID=5;
     public static final int T33=33;
-    public static final int T16=16;
+    public static final int T22=22;
+    public static final int T11=11;
+    public static final int RULE_SIGNED_DOUBLE=6;
     public static final int T36=36;
-    public static final int T17=17;
+    public static final int RULE_STRING=4;
+    public static final int T12=12;
+    public static final int T28=28;
+    public static final int T23=23;
     public static final int T35=35;
+    public static final int RULE_SINGED_LONG=7;
+    public static final int T13=13;
+    public static final int T34=34;
+    public static final int T20=20;
+    public static final int T25=25;
+    public static final int T37=37;
     public static final int T18=18;
-    public static final int T30=30;
-    public static final int T19=19;
+    public static final int RULE_WS=10;
+    public static final int T26=26;
+    public static final int T15=15;
+    public static final int EOF=-1;
     public static final int T32=32;
+    public static final int T17=17;
+    public static final int Tokens=40;
     public static final int T31=31;
+    public static final int T16=16;
+    public static final int T38=38;
+    public static final int T27=27;
+    public static final int RULE_SL_COMMENT=9;
+    public static final int T30=30;
+    public static final int T24=24;
+    public static final int T19=19;
+    public static final int T39=39;
     public InternalBug287941TestLanguageLexer() {;} 
     public InternalBug287941TestLanguageLexer(CharStream input) {
         super(input);
@@ -1485,44 +1485,44 @@ public class InternalBug287941TestLanguageLexer extends Lexer {
     protected DFA17 dfa17 = new DFA17(this);
     static final String DFA17_eotS =
         "\1\uffff\2\30\1\uffff\2\30\1\uffff\3\30\2\uffff\2\30\2\uffff\1\30"+
-        "\1\uffff\1\54\1\56\1\uffff\1\30\1\uffff\1\61\4\uffff\1\64\6\30\1"+
-        "\73\5\30\1\101\1\30\4\uffff\1\30\5\uffff\6\30\1\uffff\1\112\1\114"+
-        "\3\30\1\uffff\5\30\1\125\2\30\1\uffff\1\30\1\uffff\1\131\2\30\1"+
-        "\134\1\135\2\30\1\140\1\uffff\1\30\1\142\1\30\1\uffff\2\30\2\uffff"+
-        "\1\146\1\147\1\uffff\1\30\1\uffff\3\30\2\uffff\1\30\1\155\3\30\1"+
+        "\1\uffff\1\54\1\56\1\uffff\1\30\1\uffff\1\60\4\uffff\1\30\1\65\5"+
+        "\30\1\73\5\30\1\101\1\30\4\uffff\1\30\4\uffff\1\30\1\uffff\5\30"+
+        "\1\uffff\1\112\1\114\3\30\1\uffff\5\30\1\125\2\30\1\uffff\1\30\1"+
+        "\uffff\1\131\2\30\1\134\1\135\2\30\1\140\1\uffff\1\141\2\30\1\uffff"+
+        "\2\30\2\uffff\1\146\1\147\2\uffff\4\30\2\uffff\1\30\1\155\3\30\1"+
         "\uffff\1\30\1\162\1\30\1\164\1\uffff\1\30\1\uffff\4\30\1\172\1\uffff";
     static final String DFA17_eofS =
         "\173\uffff";
     static final String DFA17_minS =
         "\1\11\1\155\1\145\1\uffff\1\141\1\150\1\uffff\1\156\1\157\1\145"+
         "\2\uffff\1\154\1\162\2\uffff\1\162\1\uffff\2\75\1\uffff\1\151\1"+
-        "\60\1\56\2\uffff\1\52\1\uffff\1\60\1\160\2\154\1\157\1\164\1\145"+
-        "\1\60\1\144\1\164\1\154\1\163\1\145\1\60\1\165\4\uffff\1\153\5\uffff"+
-        "\1\157\1\145\1\163\1\155\1\150\1\162\1\uffff\2\60\1\154\1\157\1"+
-        "\155\1\uffff\2\145\1\162\1\143\1\145\1\60\1\157\1\145\1\uffff\1"+
-        "\151\1\uffff\1\60\1\165\1\145\2\60\2\164\1\60\1\uffff\1\165\1\60"+
-        "\1\153\1\uffff\1\162\1\156\2\uffff\2\60\1\uffff\1\164\1\uffff\1"+
+        "\60\1\56\2\uffff\1\52\1\uffff\1\160\1\60\2\154\1\157\1\145\1\164"+
+        "\1\60\1\144\1\164\1\154\1\163\1\145\1\60\1\165\4\uffff\1\153\4\uffff"+
+        "\1\157\1\uffff\1\145\1\163\1\155\1\162\1\150\1\uffff\2\60\1\154"+
+        "\1\157\1\155\1\uffff\2\145\1\162\1\143\1\145\1\60\1\145\1\157\1"+
+        "\uffff\1\151\1\uffff\1\60\1\165\1\145\2\60\2\164\1\60\1\uffff\1"+
+        "\60\1\165\1\153\1\uffff\1\162\1\156\2\uffff\2\60\2\uffff\1\164\1"+
         "\145\1\143\1\164\2\uffff\1\163\1\60\1\145\1\163\1\165\1\uffff\1"+
         "\163\1\60\1\142\1\60\1\uffff\1\164\1\uffff\1\171\1\160\1\145\1\163"+
         "\1\60\1\uffff";
     static final String DFA17_maxS =
         "\1\175\1\156\1\145\1\uffff\1\162\1\151\1\uffff\1\163\1\165\1\145"+
         "\2\uffff\1\154\1\162\2\uffff\1\162\1\uffff\2\75\1\uffff\1\151\2"+
-        "\71\2\uffff\1\57\1\uffff\1\172\1\160\2\154\1\157\1\164\1\145\1\172"+
-        "\1\144\1\164\1\154\1\163\1\145\1\172\1\165\4\uffff\1\153\5\uffff"+
-        "\1\157\1\145\1\163\1\155\1\150\1\162\1\uffff\2\172\1\154\1\157\1"+
-        "\155\1\uffff\2\145\1\162\1\143\1\145\1\172\1\157\1\145\1\uffff\1"+
-        "\151\1\uffff\1\172\1\165\1\145\2\172\2\164\1\172\1\uffff\1\165\1"+
-        "\172\1\153\1\uffff\1\162\1\156\2\uffff\2\172\1\uffff\1\164\1\uffff"+
+        "\71\2\uffff\1\57\1\uffff\1\160\1\172\2\154\1\157\1\145\1\164\1\172"+
+        "\1\144\1\164\1\154\1\163\1\145\1\172\1\165\4\uffff\1\153\4\uffff"+
+        "\1\157\1\uffff\1\145\1\163\1\155\1\162\1\150\1\uffff\2\172\1\154"+
+        "\1\157\1\155\1\uffff\2\145\1\162\1\143\1\145\1\172\1\145\1\157\1"+
+        "\uffff\1\151\1\uffff\1\172\1\165\1\145\2\172\2\164\1\172\1\uffff"+
+        "\1\172\1\165\1\153\1\uffff\1\162\1\156\2\uffff\2\172\2\uffff\1\164"+
         "\1\145\1\143\1\164\2\uffff\1\163\1\172\1\145\1\163\1\165\1\uffff"+
         "\1\163\1\172\1\142\1\172\1\uffff\1\164\1\uffff\1\171\1\160\1\145"+
         "\1\163\1\172\1\uffff";
     static final String DFA17_acceptS =
         "\3\uffff\1\3\2\uffff\1\6\3\uffff\1\14\1\15\2\uffff\1\21\1\22\1\uffff"+
         "\1\26\2\uffff\1\33\3\uffff\1\40\1\41\1\uffff\1\44\17\uffff\1\31"+
-        "\1\27\1\32\1\30\1\uffff\1\37\1\36\1\43\1\42\1\12\6\uffff\1\10\5"+
-        "\uffff\1\17\10\uffff\1\20\1\uffff\1\11\10\uffff\1\4\3\uffff\1\25"+
-        "\2\uffff\1\23\1\34\2\uffff\1\24\1\uffff\1\5\3\uffff\1\1\1\2\5\uffff"+
+        "\1\27\1\32\1\30\1\uffff\1\36\1\37\1\42\1\43\1\uffff\1\12\5\uffff"+
+        "\1\10\5\uffff\1\17\10\uffff\1\20\1\uffff\1\11\10\uffff\1\4\3\uffff"+
+        "\1\25\2\uffff\1\23\1\34\2\uffff\1\24\1\5\4\uffff\1\1\1\2\5\uffff"+
         "\1\35\4\uffff\1\16\1\uffff\1\13\5\uffff\1\7";
     static final String DFA17_specialS =
         "\173\uffff}>";
@@ -1532,11 +1532,11 @@ public class InternalBug287941TestLanguageLexer extends Lexer {
             "\2\uffff\32\30\3\uffff\2\30\1\uffff\1\7\3\30\1\14\1\4\2\30\1"+
             "\1\2\30\1\25\1\30\1\10\1\15\2\30\1\11\1\2\1\20\2\30\1\5\3\30"+
             "\1\12\1\uffff\1\13",
-            "\1\35\1\34",
+            "\1\34\1\35",
             "\1\36",
             "",
             "\1\37\20\uffff\1\40",
-            "\1\42\1\41",
+            "\1\41\1\42",
             "",
             "\1\44\4\uffff\1\43",
             "\1\45\5\uffff\1\46",
@@ -1554,13 +1554,13 @@ public class InternalBug287941TestLanguageLexer extends Lexer {
             "",
             "\1\57",
             "\12\27",
-            "\1\60\1\uffff\12\27",
+            "\1\61\1\uffff\12\27",
             "",
             "",
-            "\1\63\4\uffff\1\62",
+            "\1\62\4\uffff\1\63",
             "",
+            "\1\64",
             "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
-            "\1\65",
             "\1\66",
             "\1\67",
             "\1\70",
@@ -1583,8 +1583,8 @@ public class InternalBug287941TestLanguageLexer extends Lexer {
             "",
             "",
             "",
-            "",
             "\1\104",
+            "",
             "\1\105",
             "\1\106",
             "\1\107",
@@ -1617,8 +1617,8 @@ public class InternalBug287941TestLanguageLexer extends Lexer {
             "\1\137",
             "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "",
-            "\1\141",
             "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\1\142",
             "\1\143",
             "",
             "\1\144",
@@ -1628,8 +1628,8 @@ public class InternalBug287941TestLanguageLexer extends Lexer {
             "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "",
-            "\1\150",
             "",
+            "\1\150",
             "\1\151",
             "\1\152",
             "\1\153",

@@ -12,47 +12,47 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalFormatterTestLanguageLexer extends Lexer {
-    public static final int RULE_ID=4;
-    public static final int RULE_ANY_OTHER=10;
+    public static final int T14=14;
     public static final int T29=29;
-    public static final int T28=28;
-    public static final int T27=27;
-    public static final int T26=26;
-    public static final int T25=25;
-    public static final int EOF=-1;
-    public static final int T24=24;
-    public static final int T23=23;
-    public static final int T22=22;
-    public static final int T21=21;
-    public static final int T20=20;
-    public static final int RULE_INT=5;
-    public static final int T38=38;
-    public static final int T37=37;
-    public static final int T39=39;
-    public static final int T34=34;
-    public static final int T33=33;
     public static final int T36=36;
+    public static final int RULE_STRING=6;
     public static final int T35=35;
-    public static final int T30=30;
+    public static final int T20=20;
+    public static final int T34=34;
+    public static final int T25=25;
+    public static final int T18=18;
+    public static final int T37=37;
+    public static final int T26=26;
+    public static final int RULE_INT=5;
     public static final int T32=32;
+    public static final int T17=17;
+    public static final int T16=16;
+    public static final int T38=38;
+    public static final int T41=41;
+    public static final int T24=24;
+    public static final int T19=19;
+    public static final int T39=39;
+    public static final int T21=21;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int RULE_ID=4;
+    public static final int T33=33;
+    public static final int T11=11;
+    public static final int T22=22;
+    public static final int T12=12;
+    public static final int T23=23;
+    public static final int T28=28;
+    public static final int T42=42;
+    public static final int T40=40;
+    public static final int T13=13;
+    public static final int RULE_WS=9;
+    public static final int T15=15;
+    public static final int EOF=-1;
+    public static final int Tokens=43;
+    public static final int RULE_ANY_OTHER=10;
     public static final int T31=31;
     public static final int RULE_SL_COMMENT=8;
-    public static final int T42=42;
-    public static final int Tokens=43;
-    public static final int T41=41;
-    public static final int T40=40;
-    public static final int RULE_ML_COMMENT=7;
-    public static final int RULE_STRING=6;
-    public static final int T11=11;
-    public static final int T12=12;
-    public static final int T13=13;
-    public static final int T14=14;
-    public static final int T15=15;
-    public static final int RULE_WS=9;
-    public static final int T16=16;
-    public static final int T17=17;
-    public static final int T18=18;
-    public static final int T19=19;
+    public static final int T27=27;
+    public static final int T30=30;
     public InternalFormatterTestLanguageLexer() {;} 
     public InternalFormatterTestLanguageLexer(CharStream input) {
         super(input);
@@ -1719,7 +1719,7 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
             case 't':
                 {
                 switch ( input.LA(4) ) {
-                case '2':
+                case '1':
                     {
                     int LA12_86 = input.LA(5);
 
@@ -1727,9 +1727,9 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
                         return 33;
                     }
                     else {
-                        return 31;}
+                        return 30;}
                     }
-                case '3':
+                case '2':
                     {
                     int LA12_87 = input.LA(5);
 
@@ -1737,9 +1737,9 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
                         return 33;
                     }
                     else {
-                        return 32;}
+                        return 31;}
                     }
-                case '1':
+                case '3':
                     {
                     int LA12_88 = input.LA(5);
 
@@ -1747,7 +1747,7 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
                         return 33;
                     }
                     else {
-                        return 30;}
+                        return 32;}
                     }
                 default:
                     return 33;}
@@ -2160,7 +2160,7 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
 
         if ( (LA12_27=='w') ) {
             switch ( input.LA(3) ) {
-            case '3':
+            case '1':
                 {
                 int LA12_80 = input.LA(4);
 
@@ -2168,9 +2168,9 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
                     return 33;
                 }
                 else {
-                    return 29;}
+                    return 28;}
                 }
-            case '1':
+            case '3':
                 {
                 int LA12_81 = input.LA(4);
 
@@ -2178,7 +2178,7 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
                     return 33;
                 }
                 else {
-                    return 28;}
+                    return 29;}
                 }
             default:
                 return 33;}
@@ -2228,13 +2228,13 @@ public class InternalFormatterTestLanguageLexer extends Lexer {
 
     private int mTokensHelper033() throws RecognitionException {
         switch ( input.LA(2) ) {
-        case '/':
-            {
-            return 37;
-            }
         case '*':
             {
             return 36;
+            }
+        case '/':
+            {
+            return 37;
             }
         default:
             return 39;}

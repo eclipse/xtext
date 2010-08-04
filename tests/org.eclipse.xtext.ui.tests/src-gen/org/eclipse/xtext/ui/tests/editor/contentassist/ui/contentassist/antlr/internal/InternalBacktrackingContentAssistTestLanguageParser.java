@@ -26,14 +26,14 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'.'", "'->'", "'^^'", "'^'", "'e'", "'E'", "'+'", "'-'", "'Boolean'", "'Integer'", "'Real'", "'String'", "'UnlimitedNatural'", "'OclAny'", "'OclInvalid'", "'OclVoid'", "'Set'", "'Bag'", "'Sequence'", "'Collection'", "'OrderedSet'", "'false'", "'='", "'<>'", "'>'", "'<'", "'>='", "'<='", "'*'", "'/'", "'not'", "'body'", "':'", "'context'", "'def'", "'('", "')'", "','", "'derive'", "'init'", "'inv'", "'package'", "'endpackage'", "'post'", "'pre'", "'::'", "'?'", "'{'", "'}'", "'..'", "'Tuple'", "'invalid'", "'null'", "'@'", "'|'", "';'", "'['", "']'", "'self'", "'if'", "'then'", "'else'", "'endif'", "'let'", "'in'", "'static'", "'true'", "'implies'", "'xor'", "'or'", "'and'"
     };
+    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=5;
+    public static final int RULE_WS=9;
+    public static final int EOF=-1;
+    public static final int RULE_INT=6;
     public static final int RULE_STRING=4;
     public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_INT=6;
-    public static final int RULE_WS=9;
     public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
-    public static final int RULE_ML_COMMENT=7;
 
         public InternalBacktrackingContentAssistTestLanguageParser(TokenStream input) {
             super(input);
@@ -6587,11 +6587,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                 {
                 int LA5_3 = input.LA(2);
 
-                if ( (LA5_3==EOF||(LA5_3>=44 && LA5_3<=45)||(LA5_3>=51 && LA5_3<=53)||LA5_3==76) ) {
-                    alt5=2;
-                }
-                else if ( (LA5_3==56) ) {
+                if ( (LA5_3==56) ) {
                     alt5=1;
+                }
+                else if ( (LA5_3==EOF||(LA5_3>=44 && LA5_3<=45)||(LA5_3>=51 && LA5_3<=53)||LA5_3==76) ) {
+                    alt5=2;
                 }
                 else {
                     if (backtracking>0) {failed=true; return ;}
@@ -6962,11 +6962,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                 {
                 int LA8_2 = input.LA(2);
 
-                if ( (LA8_2==EOF||LA8_2==46) ) {
-                    alt8=2;
-                }
-                else if ( (LA8_2==56) ) {
+                if ( (LA8_2==56) ) {
                     alt8=1;
+                }
+                else if ( (LA8_2==EOF||LA8_2==46) ) {
+                    alt8=2;
                 }
                 else {
                     if (backtracking>0) {failed=true; return ;}
@@ -7099,11 +7099,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                 {
                 int LA9_2 = input.LA(2);
 
-                if ( (LA9_2==56) ) {
-                    alt9=1;
-                }
-                else if ( (LA9_2==EOF||LA9_2==44||LA9_2==53) ) {
+                if ( (LA9_2==EOF||LA9_2==44||LA9_2==53) ) {
                     alt9=2;
+                }
+                else if ( (LA9_2==56) ) {
+                    alt9=1;
                 }
                 else {
                     if (backtracking>0) {failed=true; return ;}
@@ -7326,11 +7326,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                 {
                 int LA12_1 = input.LA(2);
 
-                if ( (LA12_1==56) ) {
-                    alt12=1;
-                }
-                else if ( (LA12_1==EOF||LA12_1==43) ) {
+                if ( (LA12_1==EOF||LA12_1==43) ) {
                     alt12=2;
+                }
+                else if ( (LA12_1==56) ) {
+                    alt12=1;
                 }
                 else {
                     if (backtracking>0) {failed=true; return ;}
@@ -7364,11 +7364,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                 {
                 int LA12_3 = input.LA(2);
 
-                if ( (LA12_3==EOF||LA12_3==43) ) {
-                    alt12=2;
-                }
-                else if ( (LA12_3==56) ) {
+                if ( (LA12_3==56) ) {
                     alt12=1;
+                }
+                else if ( (LA12_3==EOF||LA12_3==43) ) {
+                    alt12=2;
                 }
                 else {
                     if (backtracking>0) {failed=true; return ;}
@@ -11299,11 +11299,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                 {
                 int LA47_1 = input.LA(2);
 
-                if ( (LA47_1==56) ) {
-                    alt47=1;
-                }
-                else if ( (LA47_1==EOF||(LA47_1>=11 && LA47_1<=14)||(LA47_1>=17 && LA47_1<=18)||(LA47_1>=33 && LA47_1<=40)||LA47_1==42||(LA47_1>=44 && LA47_1<=55)||(LA47_1>=59 && LA47_1<=60)||(LA47_1>=64 && LA47_1<=68)||(LA47_1>=71 && LA47_1<=73)||(LA47_1>=75 && LA47_1<=76)||(LA47_1>=78 && LA47_1<=81)) ) {
+                if ( (LA47_1==EOF||(LA47_1>=11 && LA47_1<=14)||(LA47_1>=17 && LA47_1<=18)||(LA47_1>=33 && LA47_1<=40)||LA47_1==42||(LA47_1>=44 && LA47_1<=55)||(LA47_1>=59 && LA47_1<=60)||(LA47_1>=64 && LA47_1<=68)||(LA47_1>=71 && LA47_1<=73)||(LA47_1>=75 && LA47_1<=76)||(LA47_1>=78 && LA47_1<=81)) ) {
                     alt47=2;
+                }
+                else if ( (LA47_1==56) ) {
+                    alt47=1;
                 }
                 else {
                     if (backtracking>0) {failed=true; return ;}
@@ -11318,11 +11318,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                 {
                 int LA47_2 = input.LA(2);
 
-                if ( (LA47_2==EOF||(LA47_2>=11 && LA47_2<=14)||(LA47_2>=17 && LA47_2<=18)||(LA47_2>=33 && LA47_2<=40)||LA47_2==42||(LA47_2>=44 && LA47_2<=55)||(LA47_2>=59 && LA47_2<=60)||(LA47_2>=64 && LA47_2<=68)||(LA47_2>=71 && LA47_2<=73)||(LA47_2>=75 && LA47_2<=76)||(LA47_2>=78 && LA47_2<=81)) ) {
-                    alt47=2;
-                }
-                else if ( (LA47_2==56) ) {
+                if ( (LA47_2==56) ) {
                     alt47=1;
+                }
+                else if ( (LA47_2==EOF||(LA47_2>=11 && LA47_2<=14)||(LA47_2>=17 && LA47_2<=18)||(LA47_2>=33 && LA47_2<=40)||LA47_2==42||(LA47_2>=44 && LA47_2<=55)||(LA47_2>=59 && LA47_2<=60)||(LA47_2>=64 && LA47_2<=68)||(LA47_2>=71 && LA47_2<=73)||(LA47_2>=75 && LA47_2<=76)||(LA47_2>=78 && LA47_2<=81)) ) {
+                    alt47=2;
                 }
                 else {
                     if (backtracking>0) {failed=true; return ;}
@@ -31666,10 +31666,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     {
                     int LA98_1 = input.LA(2);
 
-                    if ( (LA98_1==43||(LA98_1>=65 && LA98_1<=66)) ) {
-                        alt98=1;
-                    }
-                    else if ( (LA98_1==48) ) {
+                    if ( (LA98_1==48) ) {
                         switch ( input.LA(3) ) {
                             case RULE_ID:
                                 {
@@ -31700,6 +31697,9 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                                 break;
                         }
 
+                    }
+                    else if ( (LA98_1==43||(LA98_1>=65 && LA98_1<=66)) ) {
+                        alt98=1;
                     }
                     }
                     break;
@@ -31748,7 +31748,10 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     {
                     int LA98_3 = input.LA(2);
 
-                    if ( (LA98_3==48) ) {
+                    if ( (LA98_3==43||(LA98_3>=65 && LA98_3<=66)) ) {
+                        alt98=1;
+                    }
+                    else if ( (LA98_3==48) ) {
                         switch ( input.LA(3) ) {
                             case RULE_ID:
                                 {
@@ -31779,9 +31782,6 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                                 break;
                         }
 
-                    }
-                    else if ( (LA98_3==43||(LA98_3>=65 && LA98_3<=66)) ) {
-                        alt98=1;
                     }
                     }
                     break;
@@ -42499,207 +42499,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
     }
     // $ANTLR end synpred123
 
-    public final boolean synpred117() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred117_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
     public final boolean synpred118() {
         backtracking++;
         int start = input.mark();
         try {
             synpred118_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred69() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred69_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred71() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred71_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred116() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred116_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred122() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred122_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred66() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred66_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred123() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred123_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred68() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred68_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred72() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred72_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred67() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred67_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred73() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred73_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred62() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred62_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred6() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred6_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred120() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred120_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -42723,11 +42527,165 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         failed=false;
         return success;
     }
+    public final boolean synpred69() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred69_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred72() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred72_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred120() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred120_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred116() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred116_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred73() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred73_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred117() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred117_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
     public final boolean synpred121() {
         backtracking++;
         int start = input.mark();
         try {
             synpred121_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred68() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred68_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred62() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred62_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred123() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred123_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred67() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred67_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred122() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred122_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -42751,11 +42709,53 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         failed=false;
         return success;
     }
+    public final boolean synpred6() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred6_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
     public final boolean synpred119() {
         backtracking++;
         int start = input.mark();
         try {
             synpred119_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred66() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred66_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred71() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred71_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }

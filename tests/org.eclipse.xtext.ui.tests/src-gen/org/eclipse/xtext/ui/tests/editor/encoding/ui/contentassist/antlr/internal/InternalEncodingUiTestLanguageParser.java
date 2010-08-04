@@ -25,10 +25,10 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_LEXEME", "RULE_WS", "RULE_ANY_OTHER"
     };
-    public static final int RULE_WS=5;
-    public static final int EOF=-1;
     public static final int RULE_ANY_OTHER=6;
+    public static final int RULE_WS=5;
     public static final int RULE_LEXEME=4;
+    public static final int EOF=-1;
 
         public InternalEncodingUiTestLanguageParser(TokenStream input) {
             super(input);

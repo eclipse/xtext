@@ -26,10 +26,10 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_APOSTROPHE_CHAR", "RULE_CHAR", "RULE_WS", "'FIX'", "'ERROR'", "'TICK'", "'^'"
     };
-    public static final int RULE_CHAR=5;
-    public static final int RULE_APOSTROPHE_CHAR=4;
     public static final int RULE_WS=6;
+    public static final int RULE_CHAR=5;
     public static final int EOF=-1;
+    public static final int RULE_APOSTROPHE_CHAR=4;
 
         public InternalBug292245TestLanguageParser(TokenStream input) {
             super(input);

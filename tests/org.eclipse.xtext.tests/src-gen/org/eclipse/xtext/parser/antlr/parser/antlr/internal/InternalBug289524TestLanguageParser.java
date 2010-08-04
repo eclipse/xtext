@@ -27,14 +27,14 @@ public class InternalBug289524TestLanguageParser extends AbstractInternalAntlrPa
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'Model'", "'reference'", "'$'", "'containment'"
     };
+    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
+    public static final int RULE_WS=9;
+    public static final int EOF=-1;
+    public static final int RULE_INT=5;
     public static final int RULE_STRING=6;
     public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_INT=5;
-    public static final int RULE_WS=9;
     public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
-    public static final int RULE_ML_COMMENT=7;
 
         public InternalBug289524TestLanguageParser(TokenStream input) {
             super(input);
@@ -774,11 +774,11 @@ public class InternalBug289524TestLanguageParser extends AbstractInternalAntlrPa
     }
     // $ANTLR end synpred4
 
-    public final boolean synpred2() {
+    public final boolean synpred4() {
         backtracking++;
         int start = input.mark();
         try {
-            synpred2_fragment(); // can never throw exception
+            synpred4_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -788,11 +788,11 @@ public class InternalBug289524TestLanguageParser extends AbstractInternalAntlrPa
         failed=false;
         return success;
     }
-    public final boolean synpred4() {
+    public final boolean synpred2() {
         backtracking++;
         int start = input.mark();
         try {
-            synpred4_fragment(); // can never throw exception
+            synpred2_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }

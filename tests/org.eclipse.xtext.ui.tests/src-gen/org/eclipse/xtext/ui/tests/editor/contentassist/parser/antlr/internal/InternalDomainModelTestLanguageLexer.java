@@ -12,24 +12,24 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalDomainModelTestLanguageLexer extends Lexer {
-    public static final int RULE_ID=5;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int Tokens=21;
-    public static final int EOF=-1;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T20=20;
     public static final int RULE_ML_COMMENT=7;
-    public static final int RULE_STRING=4;
-    public static final int RULE_INT=6;
+    public static final int T14=14;
+    public static final int RULE_ID=5;
     public static final int T11=11;
+    public static final int RULE_STRING=4;
     public static final int T12=12;
     public static final int T13=13;
-    public static final int T14=14;
+    public static final int T20=20;
+    public static final int T18=18;
     public static final int RULE_WS=9;
     public static final int T15=15;
-    public static final int T16=16;
+    public static final int RULE_INT=6;
+    public static final int EOF=-1;
     public static final int T17=17;
-    public static final int T18=18;
+    public static final int Tokens=21;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T16=16;
+    public static final int RULE_SL_COMMENT=8;
     public static final int T19=19;
     public InternalDomainModelTestLanguageLexer() {;} 
     public InternalDomainModelTestLanguageLexer(CharStream input) {

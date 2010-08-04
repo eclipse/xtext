@@ -27,14 +27,14 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'init'", "'final'", "'state'", "'NORMAL'", "'cond'", "'reference'", "'textual'"
     };
+    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
+    public static final int RULE_WS=9;
+    public static final int EOF=-1;
+    public static final int RULE_INT=6;
     public static final int RULE_STRING=5;
     public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_INT=6;
-    public static final int RULE_WS=9;
     public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
-    public static final int RULE_ML_COMMENT=7;
 
         public InternalBug286935TestLanguageParser(TokenStream input) {
             super(input);
@@ -142,60 +142,60 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                 case 11:
                     {
                     switch ( input.LA(2) ) {
-                        case 14:
-                            {
-                            int LA1_5 = input.LA(3);
-
-                            if ( (LA1_5==EOF||(LA1_5>=RULE_ID && LA1_5<=RULE_STRING)||LA1_5==13) ) {
-                                alt1=4;
-                            }
-                            else if ( (LA1_5==12) ) {
-                                alt1=5;
-                            }
-                            }
-                            break;
-                        case 15:
-                            {
-                            int LA1_6 = input.LA(3);
-
-                            if ( (LA1_6==12) ) {
-                                alt1=5;
-                            }
-                            else if ( (LA1_6==EOF||(LA1_6>=RULE_ID && LA1_6<=RULE_STRING)||LA1_6==13) ) {
-                                alt1=4;
-                            }
-                            }
-                            break;
-                        case 16:
-                            {
-                            int LA1_7 = input.LA(3);
-
-                            if ( (LA1_7==12) ) {
-                                alt1=5;
-                            }
-                            else if ( (LA1_7==EOF||(LA1_7>=RULE_ID && LA1_7<=RULE_STRING)||LA1_7==13) ) {
-                                alt1=4;
-                            }
-                            }
-                            break;
-                        case 17:
-                            {
-                            int LA1_8 = input.LA(3);
-
-                            if ( (LA1_8==EOF||(LA1_8>=RULE_ID && LA1_8<=RULE_STRING)||LA1_8==13) ) {
-                                alt1=4;
-                            }
-                            else if ( (LA1_8==12) ) {
-                                alt1=5;
-                            }
-                            }
-                            break;
                         case EOF:
                         case RULE_ID:
                         case RULE_STRING:
                         case 13:
                             {
                             alt1=1;
+                            }
+                            break;
+                        case 14:
+                            {
+                            int LA1_6 = input.LA(3);
+
+                            if ( (LA1_6==EOF||(LA1_6>=RULE_ID && LA1_6<=RULE_STRING)||LA1_6==13) ) {
+                                alt1=4;
+                            }
+                            else if ( (LA1_6==12) ) {
+                                alt1=5;
+                            }
+                            }
+                            break;
+                        case 15:
+                            {
+                            int LA1_7 = input.LA(3);
+
+                            if ( (LA1_7==EOF||(LA1_7>=RULE_ID && LA1_7<=RULE_STRING)||LA1_7==13) ) {
+                                alt1=4;
+                            }
+                            else if ( (LA1_7==12) ) {
+                                alt1=5;
+                            }
+                            }
+                            break;
+                        case 16:
+                            {
+                            int LA1_8 = input.LA(3);
+
+                            if ( (LA1_8==12) ) {
+                                alt1=5;
+                            }
+                            else if ( (LA1_8==EOF||(LA1_8>=RULE_ID && LA1_8<=RULE_STRING)||LA1_8==13) ) {
+                                alt1=4;
+                            }
+                            }
+                            break;
+                        case 17:
+                            {
+                            int LA1_9 = input.LA(3);
+
+                            if ( (LA1_9==12) ) {
+                                alt1=5;
+                            }
+                            else if ( (LA1_9==EOF||(LA1_9>=RULE_ID && LA1_9<=RULE_STRING)||LA1_9==13) ) {
+                                alt1=4;
+                            }
                             }
                             break;
                     }

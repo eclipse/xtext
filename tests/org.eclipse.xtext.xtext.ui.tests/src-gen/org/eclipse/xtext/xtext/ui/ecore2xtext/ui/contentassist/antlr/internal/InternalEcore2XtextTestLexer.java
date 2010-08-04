@@ -12,24 +12,24 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalEcore2XtextTestLexer extends Lexer {
-    public static final int RULE_ID=5;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int Tokens=21;
-    public static final int EOF=-1;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int T20=20;
     public static final int RULE_ML_COMMENT=7;
-    public static final int RULE_STRING=4;
-    public static final int RULE_INT=6;
+    public static final int T14=14;
+    public static final int RULE_ID=5;
     public static final int T11=11;
+    public static final int RULE_STRING=4;
     public static final int T12=12;
     public static final int T13=13;
-    public static final int T14=14;
+    public static final int T20=20;
+    public static final int T18=18;
     public static final int RULE_WS=9;
     public static final int T15=15;
-    public static final int T16=16;
+    public static final int RULE_INT=6;
+    public static final int EOF=-1;
     public static final int T17=17;
-    public static final int T18=18;
+    public static final int Tokens=21;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T16=16;
+    public static final int RULE_SL_COMMENT=8;
     public static final int T19=19;
     public InternalEcore2XtextTestLexer() {;} 
     public InternalEcore2XtextTestLexer(CharStream input) {
@@ -972,42 +972,30 @@ public class InternalEcore2XtextTestLexer extends Lexer {
 
     private int mTokensHelper005() throws RecognitionException {
         switch ( input.LA(2) ) {
-        case 'o':
+        case 'l':
             {
             int LA12_22 = input.LA(3);
 
-            if ( (LA12_22=='n') ) {
+            if ( (LA12_22=='a') ) {
                 int LA12_34 = input.LA(4);
 
-                if ( (LA12_34=='c') ) {
+                if ( (LA12_34=='s') ) {
                     int LA12_40 = input.LA(5);
 
-                    if ( (LA12_40=='r') ) {
+                    if ( (LA12_40=='s') ) {
                         int LA12_45 = input.LA(6);
 
                         if ( (LA12_45=='e') ) {
                             int LA12_49 = input.LA(7);
 
-                            if ( (LA12_49=='t') ) {
+                            if ( (LA12_49=='s') ) {
                                 int LA12_53 = input.LA(8);
 
-                                if ( (LA12_53=='e') ) {
-                                    int LA12_57 = input.LA(9);
-
-                                    if ( (LA12_57=='0') ) {
-                                        int LA12_61 = input.LA(10);
-
-                                        if ( ((LA12_61>='0' && LA12_61<='9')||(LA12_61>='A' && LA12_61<='Z')||LA12_61=='_'||(LA12_61>='a' && LA12_61<='z')) ) {
-                                            return 11;
-                                        }
-                                        else {
-                                            return 7;}
-                                    }
-                                    else {
-                                        return 11;}
+                                if ( ((LA12_53>='0' && LA12_53<='9')||(LA12_53>='A' && LA12_53<='Z')||LA12_53=='_'||(LA12_53>='a' && LA12_53<='z')) ) {
+                                    return 11;
                                 }
                                 else {
-                                    return 11;}
+                                    return 5;}
                             }
                             else {
                                 return 11;}
@@ -1024,30 +1012,42 @@ public class InternalEcore2XtextTestLexer extends Lexer {
             else {
                 return 11;}
             }
-        case 'l':
+        case 'o':
             {
             int LA12_23 = input.LA(3);
 
-            if ( (LA12_23=='a') ) {
+            if ( (LA12_23=='n') ) {
                 int LA12_35 = input.LA(4);
 
-                if ( (LA12_35=='s') ) {
+                if ( (LA12_35=='c') ) {
                     int LA12_41 = input.LA(5);
 
-                    if ( (LA12_41=='s') ) {
+                    if ( (LA12_41=='r') ) {
                         int LA12_46 = input.LA(6);
 
                         if ( (LA12_46=='e') ) {
                             int LA12_50 = input.LA(7);
 
-                            if ( (LA12_50=='s') ) {
+                            if ( (LA12_50=='t') ) {
                                 int LA12_54 = input.LA(8);
 
-                                if ( ((LA12_54>='0' && LA12_54<='9')||(LA12_54>='A' && LA12_54<='Z')||LA12_54=='_'||(LA12_54>='a' && LA12_54<='z')) ) {
-                                    return 11;
+                                if ( (LA12_54=='e') ) {
+                                    int LA12_58 = input.LA(9);
+
+                                    if ( (LA12_58=='0') ) {
+                                        int LA12_61 = input.LA(10);
+
+                                        if ( ((LA12_61>='0' && LA12_61<='9')||(LA12_61>='A' && LA12_61<='Z')||LA12_61=='_'||(LA12_61>='a' && LA12_61<='z')) ) {
+                                            return 11;
+                                        }
+                                        else {
+                                            return 7;}
+                                    }
+                                    else {
+                                        return 11;}
                                 }
                                 else {
-                                    return 5;}
+                                    return 11;}
                             }
                             else {
                                 return 11;}
@@ -1096,7 +1096,7 @@ public class InternalEcore2XtextTestLexer extends Lexer {
 
                                 if ( (LA12_55=='e') ) {
                                     switch ( input.LA(9) ) {
-                                    case '0':
+                                    case '1':
                                         {
                                         int LA12_62 = input.LA(10);
 
@@ -1104,9 +1104,9 @@ public class InternalEcore2XtextTestLexer extends Lexer {
                                             return 11;
                                         }
                                         else {
-                                            return 8;}
+                                            return 9;}
                                         }
-                                    case '1':
+                                    case '0':
                                         {
                                         int LA12_63 = input.LA(10);
 
@@ -1114,7 +1114,7 @@ public class InternalEcore2XtextTestLexer extends Lexer {
                                             return 11;
                                         }
                                         else {
-                                            return 9;}
+                                            return 8;}
                                         }
                                     default:
                                         return 11;}
@@ -1294,13 +1294,13 @@ public class InternalEcore2XtextTestLexer extends Lexer {
 
     private int mTokensHelper014() throws RecognitionException {
         switch ( input.LA(2) ) {
-        case '/':
-            {
-            return 15;
-            }
         case '*':
             {
             return 14;
+            }
+        case '/':
+            {
+            return 15;
             }
         default:
             return 17;}
