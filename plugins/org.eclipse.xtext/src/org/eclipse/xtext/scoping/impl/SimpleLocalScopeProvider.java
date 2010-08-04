@@ -72,7 +72,7 @@ public class SimpleLocalScopeProvider extends AbstractGlobalScopeDelegatingScope
 
 	protected Map<String, IEObjectDescription> toMap(final EObject context, final EReference reference) {
 		TreeIterator<EObject> iterator = context.eResource().getAllContents();
-		Map<String, IEObjectDescription> result = Maps.newHashMap();
+		Map<String, IEObjectDescription> result = Maps.newLinkedHashMap();
 		while (iterator.hasNext()) {
 			EObject next = iterator.next();
 			if (reference.getEReferenceType().isInstance(next)) {

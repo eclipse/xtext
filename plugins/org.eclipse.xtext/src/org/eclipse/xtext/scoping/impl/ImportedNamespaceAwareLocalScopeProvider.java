@@ -331,7 +331,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	}
 
 	protected Map<String, IEObjectDescription> toMap(Iterable<IEObjectDescription> scopedElementsFor) {
-		Map<String, IEObjectDescription> result = Maps.newHashMap();
+		Map<String, IEObjectDescription> result = Maps.newLinkedHashMap();
 		for (IEObjectDescription ieObjectDescription : scopedElementsFor) {
 			if (!result.containsKey(ieObjectDescription.getName()))
 				result.put(ieObjectDescription.getName(), ieObjectDescription);
