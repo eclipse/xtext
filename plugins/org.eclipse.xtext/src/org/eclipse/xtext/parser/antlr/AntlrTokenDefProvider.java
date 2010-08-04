@@ -68,7 +68,7 @@ public class AntlrTokenDefProvider implements ITokenDefProvider {
 					}
 					line = br.readLine();
 				}
-				this.tokenDefMap = ImmutableMap.copyOf(tokenDefMap);
+				setTokenDefMap(tokenDefMap);
 			} catch (Exception e) {
 				log.error(e, e);
 				tokenDefMap = null;
@@ -82,6 +82,10 @@ public class AntlrTokenDefProvider implements ITokenDefProvider {
 			}
 		}
 		return tokenDefMap;
+	}
+
+	protected void setTokenDefMap(Map<Integer, String> tokenDefMap) {
+		this.tokenDefMap = ImmutableMap.copyOf(tokenDefMap);
 	}
 	
 	public void setAntlrTokenFileProvider(IAntlrTokenFileProvider antlrTokenFileProvider) {
