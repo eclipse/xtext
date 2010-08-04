@@ -97,7 +97,7 @@ public class XtextAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 		return new BindFactory()
 			.addTypeToType("org.eclipse.jface.text.rules.ITokenScanner","org.eclipse.xtext.ui.editor.syntaxcoloring.antlr.AntlrTokenScanner")
 			.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper", "org.eclipse.xtext.ui.editor.contentassist.antlr.AntlrProposalConflictHelper")
-			.addTypeToType("org.eclipse.xtext.ui.editor.IDamagerRepairer", "org.eclipse.xtext.ui.editor.XtextDamagerRepairer")
+			.addTypeToType("org.eclipse.xtext.ui.editor.IDamagerRepairer", "org.eclipse.xtext.ui.editor.FastDamagerRepairer")
 			.addConfiguredBinding("HighlightingLexer", 
 					"binder.bind(" + Lexer.class.getName() + ".class)"+
 					".annotatedWith(com.google.inject.name.Names.named(" +
