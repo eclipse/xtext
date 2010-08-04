@@ -1,0 +1,9 @@
+grammar org.eclipse.xtext.valueconverter.QualifiedNameTestlanguage with org.eclipse.xtext.common.Terminals
+
+generate qualifiedName "http://www.xtext.org/tests/QualifiedNametestLanguage" 
+
+Element:
+	'keyword' qualifiedName=QualifiedName;
+
+QualifiedName:
+	ID ('.' ID)* ('.' '*')?;

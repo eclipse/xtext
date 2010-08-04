@@ -417,6 +417,10 @@ Workflow {
 			fragment = @TestLanguagesFragments {}
 		}
 		language = { 
+			uri = "classpath:/org/eclipse/xtext/valueconverter/QualifiedNameTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
 			uri = "classpath:/org/eclipse/xtext/xtext/ecoreInference/MultiValueFeatureTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
