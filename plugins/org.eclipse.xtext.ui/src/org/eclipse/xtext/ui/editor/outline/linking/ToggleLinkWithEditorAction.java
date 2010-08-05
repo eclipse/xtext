@@ -69,7 +69,7 @@ public class ToggleLinkWithEditorAction extends Action implements IPropertyChang
 	}
 
 	public void partActivated(IWorkbenchPart part) {
-		if (equalsEditorOrOutlinePart(part) && isLinkingEnabled() && outlinePage.getEditor()!=null) {
+		if (outlinePage.getEditor()!=null && equalsEditorOrOutlinePart(part) && isLinkingEnabled()) {
 			outlinePage.synchronizeOutlinePage();
 		}
 	}
@@ -91,7 +91,8 @@ public class ToggleLinkWithEditorAction extends Action implements IPropertyChang
 	}
 
 	protected boolean equalsEditorOrOutlinePart(IWorkbenchPart part) {
-		return outlinePage.getEditor().equals(part) || outlinePage.equals(part.getAdapter(IContentOutlinePage.class));
+		return (outlinePage.getEditor() != null && outlinePage.getEditor().equals(part))
+				|| outlinePage.equals(part.getAdapter(IContentOutlinePage.class));
 	}
 
 }
