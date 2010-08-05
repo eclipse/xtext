@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.xtext.ui;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.common.types.xtext.AbstractTypeScope;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 
 /**
@@ -65,7 +67,15 @@ public class JdtBasedSimpleTypeScope extends AbstractTypeScope {
 						fqName.append('$');
 					}
 					fqName.append(simpleTypeName);
-					IEObjectDescription eObjectDescription = createScopedElement(fqName.toString());
+					String fullyQualifiedName = fqName.toString();
+					InternalEObject proxy = createProxy(fullyQualifiedName);
+					Map<String, String> userData = null;
+					if (enclosingTypeNames.length == 0) {
+						userData = ImmutableMap.of("flags", String.valueOf(modifiers));
+					} else {
+						userData = ImmutableMap.of("flags", String.valueOf(modifiers), "inner", "true");
+					}
+					IEObjectDescription eObjectDescription = EObjectDescription.create(fullyQualifiedName, proxy, userData);
 					if (eObjectDescription != null)
 						allScopedElements.add(eObjectDescription);
 				}
@@ -79,11 +89,16 @@ public class JdtBasedSimpleTypeScope extends AbstractTypeScope {
 	}
 	
 	public IEObjectDescription createScopedElement(String fullyQualifiedName) {
+		InternalEObject proxy = createProxy(fullyQualifiedName);
+		IEObjectDescription eObjectDescription = EObjectDescription.create(fullyQualifiedName, proxy);
+		return eObjectDescription;
+	}
+
+	protected InternalEObject createProxy(String fullyQualifiedName) {
 		URI uri = getTypeProvider().getTypeUriHelper().getFullURIForClass(fullyQualifiedName);
 		InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmVoid();
 		proxy.eSetProxyURI(uri);
-		IEObjectDescription eObjectDescription = EObjectDescription.create(fullyQualifiedName, proxy);
-		return eObjectDescription;
+		return proxy;
 	}
 	
 	public void collectContents(IJavaSearchScope searchScope, TypeNameRequestor nameMatchRequestor) throws JavaModelException {

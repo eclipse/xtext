@@ -72,9 +72,39 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 		}
 
 	}
+	
+	public static class ReferenceProposalCreator {
+		
+		@Inject
+		private IScopeProvider scopeProvider;
+		
+		public void lookupCrossReference(EObject model, EReference reference, ICompletionProposalAcceptor acceptor,
+				Predicate<IEObjectDescription> filter, Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
+			IScope scope = getScopeProvider().getScope(model, reference);
+			Iterable<IEObjectDescription> candidates = scope.getAllContents();
+			for (IEObjectDescription candidate: candidates) {
+				if (!acceptor.canAcceptMoreProposals())
+					return;
+				if (filter.apply(candidate)) {
+					acceptor.accept(proposalFactory.apply(candidate));
+				}
+			}
+		}
+
+		public void setScopeProvider(IScopeProvider scopeProvider) {
+			this.scopeProvider = scopeProvider;
+		}
+
+		public IScopeProvider getScopeProvider() {
+			return scopeProvider;
+		}
+	}
 
 	@Inject
 	private IScopeProvider scopeProvider;
+	
+	@Inject
+	private ReferenceProposalCreator crossReferenceProposalCreator;
 	
 	private final Map<String, PolymorphicDispatcher<Void>> dispatchers;
 	
@@ -146,15 +176,7 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 	
 	protected void lookupCrossReference(EObject model, EReference reference, ICompletionProposalAcceptor acceptor,
 			Predicate<IEObjectDescription> filter, Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
-		IScope scope = getScopeProvider().getScope(model, reference);
-		Iterable<IEObjectDescription> candidates = scope.getAllContents();
-		for (IEObjectDescription candidate: candidates) {
-			if (!acceptor.canAcceptMoreProposals())
-				return;
-			if (filter.apply(candidate)) {
-				acceptor.accept(proposalFactory.apply(candidate));
-			}
-		}
+		crossReferenceProposalCreator.lookupCrossReference(model, reference, acceptor, filter, proposalFactory);
 	}
 	
 	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(String ruleName, ContentAssistContext contentAssistContext) {
@@ -201,6 +223,14 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 
 	public IScopeProvider getScopeProvider() {
 		return scopeProvider;
+	}
+
+	public void setCrossReferenceProposalCreator(ReferenceProposalCreator crossReferenceProposalCreator) {
+		this.crossReferenceProposalCreator = crossReferenceProposalCreator;
+	}
+
+	public ReferenceProposalCreator getCrossReferenceProposalCreator() {
+		return crossReferenceProposalCreator;
 	}
 
 }

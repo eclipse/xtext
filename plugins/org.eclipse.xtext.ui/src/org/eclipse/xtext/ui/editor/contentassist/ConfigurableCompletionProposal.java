@@ -59,6 +59,13 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	/** The additional info of this proposal. */
 	private String additionalProposalInfo;
 	
+	private IReplacementTextApplier textApplier;
+	
+	public interface IReplacementTextApplier {
+		void apply(IDocument document, ConfigurableCompletionProposal proposal) throws BadLocationException;
+		String getActualReplacementString(ConfigurableCompletionProposal proposal);
+	}
+	
 	/**
 	 * Creates a new completion proposal based on the provided information. The replacement string is
 	 * considered being the display string too. All remaining fields are set to <code>null</code>.
@@ -106,7 +113,11 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	 */
 	public void apply(IDocument document) {
 		try {
-			document.replace(getReplacementOffset(), getReplacementLength(), getReplacementString());
+			if (getTextApplier() == null) {
+				document.replace(getReplacementOffset(), getReplacementLength(), getReplacementString());
+			} else {
+				getTextApplier().apply(document, this);
+			}
 			if (linkedMode)
 				setUpLinkedMode(document);
 		} catch (BadLocationException x) {
@@ -385,6 +396,14 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 		} catch (BadLocationException e) {
 			log.info(e.getMessage(), e);
 		}
+	}
+
+	public void setTextApplier(IReplacementTextApplier textApplier) {
+		this.textApplier = textApplier;
+	}
+
+	public IReplacementTextApplier getTextApplier() {
+		return textApplier;
 	}
 
 	// mainly copied from AbstractJavaCompletionProposal

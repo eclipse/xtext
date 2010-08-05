@@ -11,6 +11,7 @@ import java.util.Collection;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
@@ -20,12 +21,19 @@ import org.eclipse.jdt.core.search.IJavaSearchScope;
 import org.eclipse.jdt.core.search.SearchEngine;
 import org.eclipse.jdt.core.search.SearchPattern;
 import org.eclipse.jdt.core.search.TypeNameRequestor;
+import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.jdt.internal.ui.viewsupport.JavaElementImageProvider;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal.IReplacementTextApplier;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalFactory;
@@ -43,6 +51,71 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 	
 	@Inject
 	private IJavaProjectProvider projectProvider;
+	
+	public class ScopeAwareProposalProvider extends AbstractTypesProposalProvider implements IReplacementTextApplier {
+
+		private final IScope scope;
+		private final EObject context;
+
+		public ScopeAwareProposalProvider(EObject context, IScope scope) {
+			this.context = context;
+			this.scope = scope;
+		}
+		
+		public ICompletionProposalAcceptor wrap(ICompletionProposalAcceptor acceptor) {
+			ICompletionProposalAcceptor.Delegate result = new ICompletionProposalAcceptor.Delegate() {
+				@Override
+				public void accept(ICompletionProposal proposal) {
+					if (proposal instanceof ConfigurableCompletionProposal) {
+						((ConfigurableCompletionProposal) proposal).setTextApplier(ScopeAwareProposalProvider.this);
+					}
+					super.accept(proposal);
+				}
+			};
+			result.setDelegate(acceptor);
+			return result;
+		}
+
+		public void createTypeProposals(ICompletionProposalFactory proposalFactory, ContentAssistContext context,
+				Filter filter, ICompletionProposalAcceptor acceptor) {
+			JdtTypesProposalProvider.this.createTypeProposals(proposalFactory, context, filter, wrap(acceptor));
+		}
+
+		public void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory,
+				ContentAssistContext context, Filter filter, ICompletionProposalAcceptor acceptor) {
+			JdtTypesProposalProvider.this.createSubTypeProposals(superType, proposalFactory, context, filter, wrap(acceptor));
+		}
+		
+		protected String applyValueConverter(String string) {
+			return string;
+		}
+
+		public void apply(IDocument document, ConfigurableCompletionProposal proposal) throws BadLocationException {
+			String replacementString = getActualReplacementString(proposal);
+			document.replace(proposal.getReplacementOffset(), proposal.getReplacementLength(), replacementString);
+		}
+
+		public String getActualReplacementString(ConfigurableCompletionProposal proposal) {
+			String replacementString = proposal.getReplacementString();
+			IEObjectDescription element = scope.getContentByName(replacementString);
+			if (element != null) {
+				EObject resolved = EcoreUtil.resolve(element.getEObjectOrProxy(), context);
+				if (!resolved.eIsProxy()) {
+					IEObjectDescription shortedElement = scope.getContentByEObject(resolved);
+					if (shortedElement != null) {
+						replacementString = applyValueConverter(shortedElement.getName());
+					}
+				}
+			}
+			return replacementString;
+		}
+		
+	}
+	
+	@Override
+	public ITypesProposalProvider getScopedProposalProvider(EObject context, IScope scope) {
+		return new ScopeAwareProposalProvider(context, scope);
+	}
 	
 	public void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory, 
 			ContentAssistContext context, Filter filter, ICompletionProposalAcceptor acceptor) {
@@ -176,7 +249,8 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 	}
 
 	protected Image computeImage(String typeName, boolean isInnerType, int modifiers) {
-		return JavaElementImageProvider.getTypeImageDescriptor(isInnerType, false, modifiers, false).createImage();
+		return JavaPlugin.getImageDescriptorRegistry().get(
+				JavaElementImageProvider.getTypeImageDescriptor(isInnerType, false, modifiers, false));
 	}
 
 	public void setSuperTypeCollector(SuperTypeCollector superTypeCollector) {
