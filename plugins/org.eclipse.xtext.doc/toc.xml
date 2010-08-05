@@ -201,7 +201,9 @@
 <topic href="help/contentAssist.html#ProposalProvider" label="ProposalProvider"></topic>
 <topic href="help/contentAssist.html#SampleImplementation" label="Sample Implementation"></topic>
 </topic>
-<topic href="help/quickfixes.html" label="Quick Fixes"></topic>
+<topic href="help/quickfixes.html" label="Quick Fixes">
+<topic href="help/quickfixes.html#QuickfixesforLinkingErrorsandSyntaxErrors" label="Quickfixes for Linking Errors and Syntax Errors"></topic>
+</topic>
 <topic href="help/templates.html" label="Template Proposals">
 <topic href="help/templates.html#CrossReferenceTemplateVariableResolver" label="CrossReference TemplateVariableResolver"></topic>
 <topic href="help/templates.html#EnumerationTemplateVariableResolver" label="Enumeration TemplateVariableResolver"></topic>

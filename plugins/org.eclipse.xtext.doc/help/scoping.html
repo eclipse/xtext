@@ -187,7 +187,7 @@ end<br>
 <p>There are also two different default implementations of 
 						<span class="emphasis"><em>IQualifiedNameProvider</em></span>. Both work by looking 
 						up an 
-						<span class="emphasis"><em>EAttribute</em></span> &lsquo;name&rsquo;. The 
+						<span class="emphasis"><em>EAttribute</em></span> &sbquo;name&rsquo;. The 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/SimpleNameProvider.java?root=Modeling_Project&view=co" target="_new">SimpleNameProvider</a> 
 						simply returns the plain value, while the 
 
@@ -258,7 +258,8 @@ private&nbsp;IResourceDescription.Manager&nbsp;getManager(Resource&nbsp;res)&nbs
 </div>
 <p>However, we strongly encourage you to use dependency injection.
 						Now, that we know how to export elements to be referenceable from other resources, we need to learn 
-						how those exported _IEObjectDescription_s can be made available to the referencing resources. That is 
+						how those exported 
+						<span class="emphasis"><em>IEObjectDescriptions</em></span> can be made available to the referencing resources. That is 
 						the responsibility of global scoping (i.e. 
 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java?root=Modeling_Project&view=co" target="_new">IGlobalScopeProvider</a>) which is described in the 
@@ -315,9 +316,10 @@ Import&nbsp;:&nbsp;<br>
 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportUriGlobalScopeProvider.java?root=Modeling_Project&view=co" target="_new">ImportUriGlobalScopeProvider</a> for the type 
 
-						<span class="emphasis"><em>IGlobalScopeProvider</em></span> by the means of Guice:#dependencyInjection. That implementation looks up any 
+						<span class="emphasis"><em>IGlobalScopeProvider</em></span> by the means of 
+						<a class="link" href="dependencyInjection.html" title="Dependency Injection in Xtext with Google Guice">Guice</a>. That implementation looks up any 
 
-						<span class="emphasis"><em>EAttributes</em></span> named &lsquo;importURI&rsquo; in your model and interprets their values as URIs that point to imported
+						<span class="emphasis"><em>EAttributes</em></span> named &sbquo;importURI&rsquo; in your model and interprets their values as URIs that point to imported
 						resources. That is it adds the corresponding resources to the current resource&rsquo;s resource set. In 
 						addition the scope provider uses the 
 						<a class="link" href="scoping.html#resourcedescriptions" title="Resource and EObject Descriptions ( IResourceDescription, IEObjectDescription)">
@@ -365,7 +367,7 @@ Import&nbsp;:&nbsp;<br>
 						by most of our users. The available tooling provided by JDT and PDE to configure the classpath adds 
 						even more value. However, it is just a default: You can reuse the infrastructure without using Java 
 						and independent from the JDT.</p>
-<p>In order to know what is available in the &ldquo;world&rdquo; a global scope provider which relies on external 
+<p>In order to know what is available in the &bdquo;world&rdquo; a global scope provider which relies on external 
 						configuration needs to read that configuration in and be able to find all candidates for a certain 
 
 						<span class="emphasis"><em>EReference</em></span>. If you don&rsquo;t want to force users to have a folder and file name structure reflecting 
@@ -743,9 +745,7 @@ IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;ERefer
 					</p>
 <p>The latter method signature is used when computing the scope for a given element type and is applicable 
 						to all cross-references of that type. Here 
-						<span class="emphasis"><em>TypeToReturn</em></span> is the name of that type which also corresponds 
-						to the 
-						<span class="emphasis"><em>type</em></span> parameter. 
+						<span class="emphasis"><em>TypeToReturn</em></span> is the name of that type. 
 					</p>
 <p>So if you for example have a state machine with a  
 						<span class="emphasis"><em>Transition</em></span> object owned by its source 
@@ -774,11 +774,8 @@ IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;ERefer
 						<span class="emphasis"><em>StateMachine</em></span> object.
 					</p>
 <p>If no method specific to the cross-reference in question was found for any of the objects in the 
-						containment hierarchy, the implementation will start looking for methods matching the other signature 
-						(with the 
-						<span class="emphasis"><em>EClass</em></span> parameter). Again it will first attempt to match the context object. Thus in the 
-						example the signature first matched would be:
-					</p>
+						containment hierarchy, the implementation will start looking for methods matching the other signature. Again it will first attempt to match the context object. Thus in the 
+						example the signature first matched would be:</p>
 <div class="literallayout">
 <p>
 <code class="code">IScope&nbsp;scope_State(Transition&nbsp;this,&nbsp;EReference&nbsp;ref)<br>
@@ -837,7 +834,8 @@ IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;ERefer
 						service. It computes qualified names for EObjects. The default implementation 
 						(
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/DefaultDeclarativeQualifiedNameProvider.java?root=Modeling_Project&view=co" target="_new">DefaultDeclarativeQualifiedNameProvider</a>) uses 
-						a simple name look up and concatenates the result to the qualified name of its parent object. 
+						a simple name look up and concatenates the result to the qualified name of its parent object using a dot 
+						as separator. 
 					</p>
 <p>It also allows to override the name computation declaratively. The following snippet shows how you could 
 						make 
@@ -849,7 +847,7 @@ IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;ERefer
 <code class="code">FowlerDslQualifiedNameProvider&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;DefaultDeclarativeQualifiedNameProvider&nbsp;{<br>
 &nbsp;&nbsp;public&nbsp;String&nbsp;qualifiedName(Transition&nbsp;t)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;if(t.getEvent()&nbsp;==&nbsp;null&nbsp;||&nbsp;!(t.eContainer()&nbsp;instanceof&nbsp;State))&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if(t.getEvent()&nbsp;==&nbsp;null&nbsp;||&#65533;!(t.eContainer()&nbsp;instanceof&nbsp;State))&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;((State)t.eContainer()).getName()&nbsp;+&nbsp;"."&nbsp;t.getEvent().getName();<br>
@@ -873,7 +871,7 @@ IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;ERefer
 </div>
 <p>The 
 						<span class="emphasis"><em>ImportedNamespaceAwareLocalScopeProvider</em></span> looks up 
-						<span class="emphasis"><em>EAttributes</em></span> with name &lsquo;importNamespace&rsquo; and 
+						<span class="emphasis"><em>EAttributes</em></span> with name &sbquo;importNamespace&rsquo; and 
 						interprets them as import statements. By default qualified names with or without a wildcard at the end 
 						are supported. For an import of a qualified name the simple name is made available as we know from e.g. 
 						Java, where
@@ -885,7 +883,7 @@ IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;ERefer
 </code>
 </p>
 </div>
-<p>makes it possible to refer to &lsquo;java.util.Set&rsquo; by its simple name &lsquo;Set&rsquo;.
+<p>makes it possible to refer to &sbquo;java.util.Set&rsquo; by its simple name &sbquo;Set&rsquo;.
 						Contrary to Java the import is not active for the whole file but only for the namespace it is declared 
 						in and its child namespaces. That is why you can write the following in the example DSL:</p>
 <div class="literallayout">

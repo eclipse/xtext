@@ -1,8 +1,7 @@
 
 h2(#quickfixes). Quick Fixes
 
-For validations written using the 
-${org.eclipse.xtext/src/org.eclipse.xtext.validation.AbstractDeclarativeValidator}:#custom_validation 
+For validations written using the "AbstractDeclarativeValidator":#custom_validation 
 it is possible to provide corresponding quick fixes in the editor. To be able to implement a quick fix 
 for a given diagnostic (a warning or error) the underlying _cause_ of the diagnostic must be known 
 (i.e. what actual problem does the diagnostic represent?), otherwise the fix doesn't know what needs 
@@ -11,7 +10,7 @@ specific _code_ with the diagnostic.
 
 In the following example taken from the _DomainmodelJavaValidator_ 
 the diagnostic's _code_ is given by the third argument to the _warning()_ method and it is a reference 
-to the static _String_ field _INVALID_TYPE_NAME_ in the validator class.
+to the static _String_ field _INVALID TYPE NAME_ in the validator class.
 
 bc.. warning("Name should start with a capital", 
     DomainmodelPackage.TYPE__NAME, INVALID_TYPE_NAME, type.getName());
@@ -20,9 +19,9 @@ p. Now that the validation has a unique code identifying the problem we can regi
 We start by adding the 
 ${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment} 
 to our workflow and after regenerating the code we should find an empty class _MyDslQuickfixProvider_ 
-in our DSL's UI project and new entries in the _plugin.xml___gen_ file.
+in our DSL's UI project and new entries in the _plugin.xml gen_ file.
 
-Continuing with the _INVALID_TYPE_NAME_ problem from the Domainmodel example we add a method with which 
+Continuing with the _INVALID TYPE NAME_ problem from the Domainmodel example we add a method with which 
 the problem can be fixed (have a look at the _DomainmodelQuickfixProvider_ for details):
 
 bc.. @Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)
@@ -86,3 +85,10 @@ public void fixFeatureName(final Issue issue,
   );
 }
 
+h3. Quickfixes for Linking Errors and Syntax Errors
+
+You can even define quick fixes for linking errors. The issue codes are assigned by the ${org.eclipse.xtext/src/org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider}. Have a look at the domain model example how to add quick fixes for these errors.
+
+Analogously, there is the ${org.eclipse.xtext/src/org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider} to assign issue codes to syntactical errors.
+
+  

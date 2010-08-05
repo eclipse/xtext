@@ -15,7 +15,7 @@
 				
 <span class="emphasis"><em>Encoding</em></span>, AKA 
 				<span class="emphasis"><em>character set</em></span>, describes the way characters are encoded into bytes and vice versa. 
-				Famous standard encodings are &ldquo;UTF-8&rdquo; or &ldquo;ISO-8859-1&rdquo;. The list of available encodings can be determined
+				Famous standard encodings are &bdquo;UTF-8&rdquo; or &bdquo;ISO-8859-1&rdquo;. The list of available encodings can be determined
 				by calling 
 				<span class="emphasis"><em>java.nio.Charset.availableCharsets()</em></span>. There is also a list of encodings and their 
 				canonical Java names in the 
@@ -105,10 +105,40 @@
 <p>Unless you want to enforce a uniform encoding for all models of your language, we advise to 
 					override the runtime service only. It is bound in the runtime module using the binding annotation 
 
-					<span class="emphasis"><em>@Runtime</em></span>. For the uniform encoding, bind the plain 
-					<span class="emphasis"><em>IEncodingProvider</em></span> to the same implementation 
-					in both modules.
+					<span class="emphasis"><em>@Runtime</em></span>:
 				</p>
+<div class="literallayout">
+<p>
+<code class="code">@Override<br>
+public&nbsp;void&nbsp;configureRuntimeEncodingProvider(Binder&nbsp;binder)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;binder.bind(IEncodingProvider.class)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.annotatedWith(DispatchingProvider.Runtime.class)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to(MyEncodingProvider.class);<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>For the uniform encoding, bind the plain 
+					<span class="emphasis"><em>IEncodingProvider</em></span> to the same implementation 
+					in both modules:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">@Override<br>
+public&nbsp;Class&lt;?&nbsp;extends&nbsp;IEncodingProvider&gt;&nbsp;bindIEncodingProvider()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;MyEncodingProvider.class;<br>
+}<br>
+	
+<br>
+	
+<br>
+
+</code>
+</p>
+</div>
 </div>
 <div class="section" title="Encoding of an XtextResource">
 <div class="titlepage">
@@ -164,7 +194,7 @@ myXtextResource.save(options);<br>
 </div>
 </div>
 </div>
-<p>The source code of the Xtext framework itself is completely encoded in &ldquo;ISO 8859-1&rdquo;, which is necessary 
+<p>The source code of the Xtext framework itself is completely encoded in &bdquo;ISO 8859-1&rdquo;, which is necessary 
 					to make the Xpand templates work everywhere (they use french quotation markup). That encoding is hard 
 					coded into the Xtext generator code. You are likely never going to change that. </p>
 </div>

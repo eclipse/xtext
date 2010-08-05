@@ -135,7 +135,7 @@ bc.. private IResourceServiceProvider.Registry resourceServiceProviderRegistry =
 
 p. However, we strongly encourage you to use dependency injection.
 Now, that we know how to export elements to be referenceable from other resources, we need to learn 
-how those exported _IEObjectDescription_s can be made available to the referencing resources. That is 
+how those exported _IEObjectDescriptions_ can be made available to the referencing resources. That is 
 the responsibility of global scoping (i.e. 
 ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.IGlobalScopeProvider}) which is described in the 
 following chapter.
@@ -169,7 +169,7 @@ Import :
 p.  This effectively allows import statements to be declared before the events section. In addition 
 you'll have to make sure that you have bound the 
 ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider} for the type 
-_IGlobalScopeProvider_ by the means of Guice:#dependencyInjection. That implementation looks up any 
+_IGlobalScopeProvider_ by the means of "Guice":#dependencyInjection. That implementation looks up any 
 _EAttributes_ named 'importURI' in your model and interprets their values as URIs that point to imported
 resources. That is it adds the corresponding resources to the current resource's resource set. In 
 addition the scope provider uses the "_IResourceDescription.Manager_":#resourcedescriptions of that 
@@ -405,8 +405,7 @@ corresponds to the name of this reference (prefixed with the name of the referen
 separated by an underscore). The _ref_ parameter represents this cross-reference.
 
 The latter method signature is used when computing the scope for a given element type and is applicable 
-to all cross-references of that type. Here _TypeToReturn_ is the name of that type which also corresponds 
-to the _type_ parameter. 
+to all cross-references of that type. Here _TypeToReturn_ is the name of that type. 
 
 So if you for example have a state machine with a  _Transition_ object owned by its source _State_ and 
 you want to compute all reachable states (i.e. potential target states), the corresponding method could 
@@ -423,8 +422,7 @@ scope are quite often owned or referenced by a container of the context object. 
 _State_ objects could for instance be owned by a containing _StateMachine_ object.
 
 If no method specific to the cross-reference in question was found for any of the objects in the 
-containment hierarchy, the implementation will start looking for methods matching the other signature 
-(with the _EClass_ parameter). Again it will first attempt to match the context object. Thus in the 
+containment hierarchy, the implementation will start looking for methods matching the other signature. Again it will first attempt to match the context object. Thus in the 
 example the signature first matched would be:
 
 bc. IScope scope_State(Transition this, EReference ref)
@@ -452,7 +450,8 @@ The ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.impl.ImportedNamespaceAwar
 makes use of the so called ${org.eclipse.xtext/src/org.eclipse.xtext.scoping.IQualifiedNameProvider} 
 service. It computes qualified names for EObjects. The default implementation 
 (${org.eclipse.xtext/src/org.eclipse.xtext.scoping.impl.DefaultDeclarativeQualifiedNameProvider}) uses 
-a simple name look up and concatenates the result to the qualified name of its parent object. 
+a simple name look up and concatenates the result to the qualified name of its parent object using a dot 
+as separator. 
 
 It also allows to override the name computation declaratively. The following snippet shows how you could 
 make _Transitions_ in the state machine example referable by giving them a name. Don't forget to bind 

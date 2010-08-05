@@ -58,9 +58,24 @@ workspace encoding information as soon as you leave this workspace, e.g. deploy 
 
 p. Unless you want to enforce a uniform encoding for all models of your language, we advise to 
 override the runtime service only. It is bound in the runtime module using the binding annotation 
-_@Runtime_. For the uniform encoding, bind the plain _IEncodingProvider_ to the same implementation 
-in both modules.
+_@Runtime_:
 
+bc.. @Override
+public void configureRuntimeEncodingProvider(Binder binder) {
+    binder.bind(IEncodingProvider.class)
+          .annotatedWith(DispatchingProvider.Runtime.class)
+          .to(MyEncodingProvider.class);
+}
+
+p. For the uniform encoding, bind the plain _IEncodingProvider_ to the same implementation 
+in both modules:
+
+bc.. @Override
+public Class<? extends IEncodingProvider> bindIEncodingProvider() {
+    return MyEncodingProvider.class;
+}
+	
+	
 h3. Encoding of an XtextResource
 
 p. An ${org.eclipse.xtext/src/org.eclipse.xtext.resource.XtextResource} uses the _IEncodingProvider_ 

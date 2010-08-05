@@ -421,12 +421,12 @@ type for data type rules. The rule looks like this:
 bc.. QualifiedName:
   ID ('.' ID)*;
 
-p. Note, that Xtext automatically figures out that the rule is a _data type 
-rule_ rather then a normal parser rule, because it doesn't contain any assignments 
+p. Note, that Xtext automatically figures out that the rule is a _data type rule_ 
+rather then a normal parser rule, because it doesn't contain any assignments 
 and all rule calls go to either other _data type rules_ or _terminal rules_. 
 For a _data type rule_ the parser simply concatenates the consumed text and returns 
 it as a string. The transformation to a user defined data type is done by so 
-called _ValueConverters_. But as we use strings we don't need to care about 
+called "ValueConverters":#valueconverter. But as we use strings we don't need to care about 
 _ValueConverters_ here.
 
 Next up we need to define the syntax of _PackageDeclarations_, which makes use of 
@@ -471,7 +471,7 @@ name _QualifiedNameWithWildCard_:
 bc.. QualifiedNameWithWildCard:
   QualifiedName '.*'?;
 
-The declaration of the _Import_ rule should look familiar by now:
+p. The declaration of the _Import_ rule should look familiar by now:
 
 bc.. Import:
   'import' importedNamespace=QualifiedNameWithWildCard;

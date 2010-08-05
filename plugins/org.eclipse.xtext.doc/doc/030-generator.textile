@@ -18,7 +18,7 @@ h3(#short_intro_to_mwe). A Short Introduction to MWE2
 
 MWE2 allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just 
 instantiates Java classes and the configuration is done through public setter and adder methods as one is used to 
-from Java Beans encapsulation principles. An in-depth documentation can be found in the chapter "MWE2"#MWE2.
+from Java Beans encapsulation principles. An in-depth documentation can be found in the chapter "MWE2":#MWE2.
 
 Given the following simple Java class (POJO):
 

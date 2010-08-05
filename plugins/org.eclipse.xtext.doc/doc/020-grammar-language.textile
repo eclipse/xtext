@@ -94,7 +94,7 @@ Transition :
   event=[Event] '=>' state=[State];
   
 p. Martin uses this example throughout his book "Domain-Specific Languages" to implement external and internal DSLs using
-different technologies. Note, that non of his implmentations is nearly as readable and concise as the description in
+different technologies. Note, that none of his implmentations is nearly as readable and concise as the description in
 Xtext's grammar language above. That is of course because the grammar language is designed to do just that, i.e. it is 
 specific to the domain of language descriptions.
 
@@ -296,7 +296,10 @@ bc. terminal ID : '^'? .... ;
 
 The question mark sets the cardinality to "none or one" (i.e. optional) like explained above.
 
-Note that a keyword can have any length and contain arbitrary characters.
+Note that a keyword can have any length and contain arbitrary characters. 
+
+The following standard Java notations for special characters are allowed: _\n_, _\r_,
+ _\t_, _\b_, and _\f_. We currently don't support quoted unicode character notation, as _\u123_.
 
 h5. Character Ranges
 
@@ -331,7 +334,7 @@ h5. Negated Token
 
 All the tokens explained above can be inverted using a preceding exclamation mark:
 
-bc. terminal ML_COMMENT	: '/*' (!'*/')+;
+bc. terminal BETWEEN_HASHES	: '#' (!'#')* '#';
 
 h5. Rule Calls
 
@@ -340,7 +343,7 @@ We refer to this as rule calls. Rule calls in terminal rules can only point to t
 
 Example:
 
-bc. terminal QUALIFIED_NAME : ID ('.' ID)*;
+bc. terminal DOUBLE : INT '.' INT;
 
 h5. Alternatives 
 
@@ -564,7 +567,11 @@ bc.. AbstractToken :
     TokenC ) (cardinality=('?'|'+'|'*'))?
 ;
 
-p. This way the _cardinality_ is optional (last question mark) and can be represented by a question mark, a plus, or an asterisk. It will be assigned to either an _EObject_ of type _TokenA_,  _TokenB_, or _TokenC_ which are all subtypes of _AbstractToken_. The rule in this example will never create an instance of _AbstractToken_ directly.
+p. This way the _cardinality_ is optional (last question mark) and can be represented 
+by a question mark, a plus, or an asterisk. It will be assigned to either an 
+_EObject_ of type _TokenA_,  _TokenB_, or _TokenC_ which are all subtypes of 
+_AbstractToken_. The rule in this example will never create an instance of _AbstractToken_ directly 
+as long as the preceeding _TokenX_ rule call returns an element. 
 
 h5(#grammarActions). Assigned Actions 
 
@@ -677,7 +684,7 @@ p. This looks similar to the terminal rule we've defined above in order to expla
 However, the difference is that because it is a parser rule and therefore only valid in certain contexts, it won't conflict with the rule _ID_.
 If you had defined it as a terminal rule, it would possibly hide the _ID_ rule.
 
-In addition when this has been defined as a data type rule, it is allowed to use hidden tokens (e.g. "/* comment **/") between the IDs and dots (e.g. _foo/* comment */. bar . Baz"_)
+In addition when this has been defined as a data type rule, it is allowed to use hidden tokens (e.g. "/* comment **/") between the IDs and dots (e.g. _foo/* comment */. bar . Baz_).
 
 Return types can be specified in the same way as in terminal rules:
 
@@ -786,7 +793,7 @@ In the next step the generator examines all generated _EClasses_ and lifts up si
 
 h3(#customPostProcessing). Customized Post Processing
 
-As a last step, the generator invokes the post processor for every generated Ecore model. The post processor expects an Xtend file with name _[MyDsl]PostProcessor.ext_ (if the name of the grammar file is _MyDsl.xtext_) in the same folder as the grammar file. Further, for a successful invocation, the Xtend file must declare an extension with signature _process(xtext::GeneratedMetamodel)_. E.g.
+As a last step, the generator invokes the post processor for every generated Ecore model. The post processor expects an Xtend file with name _MyDslPostProcessor.ext_ (if the name of the grammar file is _MyDsl.xtext_) in the same folder as the grammar file. Further, for a successful invocation, the Xtend file must declare an extension with signature _process(xtext::GeneratedMetamodel)_. E.g.
 
 bc.. process(xtext::GeneratedMetamodel this) :
   process(ePackage)

@@ -48,7 +48,7 @@ p. The typical use cases for the concrete syntax validator are validation in non
 p. There are some limitations to the concrete syntax validator which result from the fact that it treats the grammar as declarative, which is something the parser doesn't always do.
 * Grammar rules containing assigned actions (e.g. _{MyType.myFeature=current}_ are ignored. Unassigned actions (e.g. _{MyType}_), however, are supported. 
 * Grammar rules that delegate to one or more rules containing assigned actions via unassigned rule calls are ignored.
-* Orders within list-features can not be validated. e.g. _Rule: (foo+=R1 foo+=R2)*_ implies that _foo_ is expected to contain instances of _R1_ and _R1_ in an alternating order. 
+* Orders within list-features can not be validated. e.g. _Rule: (foo+=R1 foo+=R2)*_ implies that _foo_ is expected to contain instances of _R1_ and _R2_ in an alternating order. 
 
 p. To use concrete syntax validation you can let Guice inject an instance of 
 ${org.eclipse.xtext/src/org.eclipse.xtext.validation.IConcreteSyntaxValidator} and use it directly. 

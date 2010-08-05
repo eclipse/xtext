@@ -12,8 +12,7 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Quick Fixes</h1>
 <p>For validations written using the 
-
-				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java?root=Modeling_Project&view=co" target="_new">AbstractDeclarativeValidator</a>:#custom_validation 
+				<a class="link" href="validation.html#custom_validation" title="Custom Validation">AbstractDeclarativeValidator</a> 
 				it is possible to provide corresponding quick fixes in the editor. To be able to implement a quick fix 
 				for a given diagnostic (a warning or error) the underlying 
 				<span class="emphasis"><em>cause</em></span> of the diagnostic must be known 
@@ -28,7 +27,8 @@
 				<span class="emphasis"><em>code</em></span> is given by the third argument to the 
 				<span class="emphasis"><em>warning()</em></span> method and it is a reference 
 				to the static 
-				<span class="emphasis"><em>String</em></span> field _INVALID_TYPE_NAME_ in the validator class.
+				<span class="emphasis"><em>String</em></span> field 
+				<span class="emphasis"><em>INVALID TYPE NAME</em></span> in the validator class.
 			</p>
 <div class="literallayout">
 <p>
@@ -46,9 +46,11 @@
 				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/quickfix/QuickfixProviderFragment.java?root=Modeling_Project&view=co" target="_new">QuickfixProviderFragment</a> 
 				to our workflow and after regenerating the code we should find an empty class 
 				<span class="emphasis"><em>MyDslQuickfixProvider</em></span> 
-				in our DSL&rsquo;s UI project and new entries in the _plugin.xml___gen_ file.
+				in our DSL&rsquo;s UI project and new entries in the 
+				<span class="emphasis"><em>plugin.xml gen</em></span> file.
 			</p>
-<p>Continuing with the _INVALID_TYPE_NAME_ problem from the Domainmodel example we add a method with which 
+<p>Continuing with the 
+				<span class="emphasis"><em>INVALID TYPE NAME</em></span> problem from the Domainmodel example we add a method with which 
 				the problem can be fixed (have a look at the 
 				<span class="emphasis"><em>DomainmodelQuickfixProvider</em></span> for details):
 			</p>
@@ -132,10 +134,24 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;<br>
 
 <br>
 
-<br>
-
 </code>
 </p>
+</div>
+<div class="section" title="Quickfixes for Linking Errors and Syntax Errors">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="QuickfixesforLinkingErrorsandSyntaxErrors"></a>Quickfixes for Linking Errors and Syntax Errors</h3>
+</div>
+</div>
+</div>
+<p>You can even define quick fixes for linking errors. The issue codes are assigned by the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/ILinkingDiagnosticMessageProvider.java?root=Modeling_Project&view=co" target="_new">ILinkingDiagnosticMessageProvider</a>. Have a look at the domain model example how to add quick fixes for these errors.
+				</p>
+<p>Analogously, there is the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/antlr/ISyntaxErrorMessageProvider.java?root=Modeling_Project&view=co" target="_new">ISyntaxErrorMessageProvider</a> to assign issue codes to syntactical errors.
+				</p>
 </div>
 </body>
 </html>

@@ -100,7 +100,7 @@ the referenced resource (See the chapter on "index-based scopes":#index_based fo
 elements from this index also appear in some UI contexts, e.g. in the _Find model elements_ dialog or 
 in the _Find references_ view. For reasons of scalability, the UI should not automatically load 
 resources, so we need another implementation of a label provider that works with the elements from the 
-index, i.e. _IResourceDescription_, IEObjectDescription_, and _IReferenceDescription_.
+index, i.e. _IResourceDescription_, _IEObjectDescription_, and _IReferenceDescription_.
 
 The default implementation of this service is the 
 ${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider}. It employs the 

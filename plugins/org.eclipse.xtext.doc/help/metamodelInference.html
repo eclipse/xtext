@@ -193,7 +193,7 @@
 					<span class="emphasis"><em>=</em></span>' operator and 0...* for assignments with the '
 					<span class="emphasis"><em>+=</em></span>' operator. 
 				</p>
-<p>Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of &ldquo;artificial&rdquo; parser rules, that are never called, e.g.</p>
+<p>Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of &bdquo;artificial&rdquo; parser rules, that are never called, e.g.</p>
 <div class="literallayout">
 <p>
 <code class="code">CommonSuperType:<br>
@@ -253,7 +253,7 @@
 </div>
 </div>
 <p>As a last step, the generator invokes the post processor for every generated Ecore model. The post processor expects an Xtend file with name 
-					<span class="emphasis"><em>PostProcessor.ext</em></span> (if the name of the grammar file is 
+					<span class="emphasis"><em>MyDslPostProcessor.ext</em></span> (if the name of the grammar file is 
 					<span class="emphasis"><em>MyDsl.xtext</em></span>) in the same folder as the grammar file. Further, for a successful invocation, the Xtend file must declare an extension with signature 
 					<span class="emphasis"><em>process(xtext::GeneratedMetamodel)</em></span>. E.g.
 				</p>
