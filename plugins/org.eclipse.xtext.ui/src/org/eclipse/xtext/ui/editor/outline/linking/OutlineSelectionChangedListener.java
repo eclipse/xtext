@@ -26,7 +26,7 @@ public final class OutlineSelectionChangedListener extends AbstractSelectionChan
 	}
 
 	public void selectionChanged(SelectionChangedEvent event) {
-		if (outlinePage.getControl().isFocusControl()) {
+		if (outlinePage.getControl().isFocusControl() && outlinePage.isLinkingEnabled()) {
 			ISelection sel = event.getSelection();
 			if (sel instanceof IStructuredSelection) {
 				IStructuredSelection structuredSelection = (IStructuredSelection) sel;
