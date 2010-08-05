@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
@@ -63,6 +64,9 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 		Resource resource = copiedResourceSet.createResource(URI.createURI(ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath()
 				+ "/" + xmiPath), ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		addAllGrammarsToResource(resource, copiedGrammar, new HashSet<Grammar>());
+		if(resource instanceof XMLResource) {
+			((XMLResource) resource).setXMLVersion("1.1");
+		}
 		try {
 			resource.save(null);
 		} catch (IOException e) {
