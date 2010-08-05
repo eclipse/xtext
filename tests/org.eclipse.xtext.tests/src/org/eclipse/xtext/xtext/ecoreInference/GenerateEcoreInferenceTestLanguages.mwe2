@@ -1,0 +1,41 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+module org.eclipse.xtext.xtext.ecoreInference.GenerateEcoreInferenceTestLanguages
+       
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.*
+import org.eclipse.xtext.generator.*
+
+var projectName = "org.eclipse.xtext.tests"
+var runtimeProject = "../${projectName}"
+
+Workflow {
+	bean = StandaloneSetup {
+		platformUri = "${runtimeProject}/.."
+	}
+	
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/xtext/ecoreInference"
+	}
+	
+	component = Generator {
+		pathRtProject = runtimeProject
+		projectNameRt = projectName
+		
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/xtext/ecoreInference/MultiValueFeatureTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/xtext/ecoreInference/UnassignedRuleCallTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+	}
+}
+
