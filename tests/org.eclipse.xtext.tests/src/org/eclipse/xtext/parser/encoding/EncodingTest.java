@@ -30,6 +30,8 @@ public class EncodingTest extends AbstractXtextTests {
 	private String model;
 	private byte[] utfBytes;
 	private byte[] isoBytes;
+	private Map<String, String> isoOptions;
+	private Map<String, String> utfOptions;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -38,35 +40,95 @@ public class EncodingTest extends AbstractXtextTests {
 		model = "Öclüpß Mödelüng Främwörk";
 		utfBytes = model.getBytes(UTF_8);
 		isoBytes = model.getBytes(ISO_8859_1);
+		isoOptions = Collections.singletonMap(XtextResource.OPTION_ENCODING, ISO_8859_1);
+		utfOptions = Collections.singletonMap(XtextResource.OPTION_ENCODING, UTF_8);
+	}
+	
+	@Override
+	protected void tearDown() throws Exception {
+		model = null;
+		utfBytes = null;
+		isoBytes = null;
+		isoOptions = null;
+		utfOptions = null;
+		super.tearDown();
 	}
 	
 	public void testDefaultEncoding() throws Exception {
 		XtextResource resource = createXtextResource();
 		assertEquals(Charset.defaultCharset().name(), resource.getEncoding());
 	}
-
-	public void testEncodingOption() throws Exception {
-		Map<String,String> isoOptions = Collections.singletonMap(XtextResource.OPTION_ENCODING, ISO_8859_1);
-		Map<String,String> utfOptions = Collections.singletonMap(XtextResource.OPTION_ENCODING, UTF_8);
-		
+	
+	public void testSetup() {
 		assertFalse(Arrays.equals(utfBytes, isoBytes));
+		assertTrue(Charset.defaultCharset().name().equals(UTF_8) || Charset.defaultCharset().name().equals(ISO_8859_1));
+	}
+	
+	public void testUtfBytesWithIsoOptions() throws Exception {
 		XtextResource resource = createXtextResource();
-		
 		resource.load(new ByteArrayInputStream(utfBytes), isoOptions);
 		assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
-
+		resource.reparse(model);
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+	}
+	
+	public void testIsoBytesWithUtfOptions() throws Exception {
+		XtextResource resource = createXtextResource();
 		resource.load(new ByteArrayInputStream(isoBytes), utfOptions);
 		assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
-
-		resource = createXtextResource();
+		resource.reparse(model);
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+	}
+	
+	public void testIsoEncoding() throws Exception {
+		XtextResource resource = createXtextResource();
 		resource.load(new ByteArrayInputStream(isoBytes), isoOptions);
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		resource.reparse(model);
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+	}
+	
+	public void testUtfEncoding() throws Exception {
+		XtextResource resource = createXtextResource();
+		resource.load(new ByteArrayInputStream(utfBytes), utfOptions);
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		resource.reparse(model);
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+	}
+	
+	public void testSaveIsoToIso() throws Exception {
+		XtextResource resource = createXtextResource();
+		resource.load(new ByteArrayInputStream(isoBytes), isoOptions);
 		ByteArrayOutputStream isoSaveStream = new ByteArrayOutputStream();
 		resource.save(isoSaveStream, null);
 		isoSaveStream.close();
 		byte[] savedIsoBytes = isoSaveStream.toByteArray();
 		assertTrue(Arrays.equals(isoBytes, savedIsoBytes));
-		
+	}
+	
+	public void testSaveUtfToUtf() throws Exception {
+		XtextResource resource = createXtextResource();
+		resource.load(new ByteArrayInputStream(utfBytes), utfOptions);
+		ByteArrayOutputStream utfSaveStream = new ByteArrayOutputStream();
+		resource.save(utfSaveStream, null);
+		utfSaveStream.close();
+		byte[] savedUtfBytes = utfSaveStream.toByteArray();
+		assertTrue(Arrays.equals(utfBytes, savedUtfBytes));
+	}
+	
+	public void testSaveUtfToIso() throws Exception {
+		XtextResource resource = createXtextResource();
+		resource.load(new ByteArrayInputStream(utfBytes), utfOptions);
+		ByteArrayOutputStream isoSaveStream = new ByteArrayOutputStream();
+		resource.save(isoSaveStream, isoOptions);
+		isoSaveStream.close();
+		byte[] savedIsoBytes = isoSaveStream.toByteArray();
+		assertTrue(Arrays.equals(isoBytes, savedIsoBytes));
+	}
+	
+	public void testSaveIsoToUtf() throws Exception {
+		XtextResource resource = createXtextResource();
+		resource.load(new ByteArrayInputStream(isoBytes), isoOptions);
 		ByteArrayOutputStream utfSaveStream = new ByteArrayOutputStream();
 		resource.save(utfSaveStream, utfOptions);
 		byte[] savedUtfBytes = utfSaveStream.toByteArray();
