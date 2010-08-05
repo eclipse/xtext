@@ -48,7 +48,7 @@
 <p>Previously when we created the projects to develop the domain model language, we had checked the option 
 					<span class="emphasis"><em>Create a generator project</em></span> in the wizard, which as 
 					a result created a third project for us in the workspace. If you&rsquo;ve followed along you should have a project called 
-					&lsquo;org.eclipse.xtext.example.domainmodel.generator&rsquo; in your workspace. It should look like shown in the following screenshot:
+&sbquo;					org.eclipse.xtext.example.domainmodel.generator&rsquo; in your workspace. It should look like shown in the following screenshot:
 				</p>
 <p>
 					
@@ -68,7 +68,7 @@
 </div>
 </div>
 </div>
-<p>The four files shown in the image above are very simple stubs generated for the &lsquo;Hello World&rsquo;-language the wizard creates as a starting point. 
+<p>The four files shown in the image above are very simple stubs generated for the &sbquo;Hello World&rsquo;-language the wizard creates as a starting point. 
 					We&rsquo;ll have to adapt them to match the domain model language we have developed in the 
 					<a class="link" href="getting-started.html#getting-started-xtext" title="Creating a DSL">getting started section</a>. The first 
 					thing we should do is open up the example model file (1) and replace its contents with an instance of the domain model language. To do so 
@@ -294,33 +294,33 @@ Workflow&nbsp;{<br>
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">&laquo;IMPORT&nbsp;org::eclipse::xtext::example::domainmodel&raquo;<br>
-&laquo;EXTENSION&nbsp;templates::Extensions&raquo;<br>
+<code class="code">&#65533;IMPORT&nbsp;org::eclipse::xtext::example::domainmodel&#65533;<br>
+&#65533;EXTENSION&nbsp;templates::Extensions&#65533;<br>
 
 <br>
-&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Entity-&raquo;<br>
-&laquo;FILE&nbsp;qualifiedName().replaceAll("\\.","/")+".java"-&raquo;<br>
-package&nbsp;&laquo;packageName()&raquo;;<br>
+&#65533;DEFINE&nbsp;main&nbsp;FOR&nbsp;Entity-&#65533;<br>
+&#65533;FILE&nbsp;qualifiedName().replaceAll("\\.","/")+".java"-&#65533;<br>
+package&nbsp;&#65533;packageName()&#65533;;<br>
 
 <br>
-public&nbsp;class&nbsp;&laquo;name&raquo;&nbsp;{<br>
-&nbsp;&nbsp;&laquo;EXPAND&nbsp;property&nbsp;FOREACH&nbsp;features&raquo;<br>
+public&nbsp;class&nbsp;&#65533;name&#65533;&nbsp;{<br>
+&nbsp;&nbsp;&#65533;EXPAND&nbsp;property&nbsp;FOREACH&nbsp;features&#65533;<br>
 }<br>
-&laquo;ENDFILE&raquo;<br>
-&laquo;ENDDEFINE&raquo;<br>
+&#65533;ENDFILE&#65533;<br>
+&#65533;ENDDEFINE&#65533;<br>
 
 <br>
-&laquo;DEFINE&nbsp;property&nbsp;FOR&nbsp;Feature&raquo;<br>
-&nbsp;&nbsp;private&nbsp;&laquo;type.referenced.qualifiedName()&raquo;&nbsp;&laquo;name&raquo;;<br>
+&#65533;DEFINE&nbsp;property&nbsp;FOR&nbsp;Feature&#65533;<br>
+&nbsp;&nbsp;private&nbsp;&#65533;type.referenced.qualifiedName()&#65533;&nbsp;&#65533;name&#65533;;<br>
 &nbsp;&nbsp;<br>
-&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;name.toFirstUpper()&raquo;(<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;type.referenced.qualifiedName()&raquo;&nbsp;&laquo;name&raquo;)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;name&raquo;&nbsp;=&nbsp;&laquo;name&raquo;;<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;set&#65533;name.toFirstUpper()&#65533;(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#65533;type.referenced.qualifiedName()&#65533;&nbsp;&#65533;name&#65533;)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.&#65533;name&#65533;&nbsp;=&nbsp;&#65533;name&#65533;;<br>
 &nbsp;&nbsp;}&nbsp;<br>
-&nbsp;&nbsp;public&nbsp;&laquo;type.referenced.qualifiedName()&raquo;&nbsp;get&laquo;name.toFirstUpper()&raquo;()&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;name&raquo;;<br>
+&nbsp;&nbsp;public&nbsp;&#65533;type.referenced.qualifiedName()&#65533;&nbsp;get&#65533;name.toFirstUpper()&#65533;()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&#65533;name&#65533;;<br>
 &nbsp;&nbsp;}&nbsp;<br>
-&laquo;ENDDEFINE&raquo;<br>
+&#65533;ENDDEFINE&#65533;<br>
 
 <br>
 
@@ -337,7 +337,7 @@ public&nbsp;class&nbsp;&laquo;name&raquo;&nbsp;{<br>
 					for one or more arguments. The general syntax is as follows:</p>
 <div class="literallayout">
 <p>
-<code class="code">&laquo;DEFINE&nbsp;name(ArgType1&nbsp;arg1,&nbsp;ArgType2&nbsp;arg2)&nbsp;FOR&nbsp;MainArgType&raquo;<br>
+<code class="code">&#65533;DEFINE&nbsp;name(ArgType1&nbsp;arg1,&nbsp;ArgType2&nbsp;arg2)&nbsp;FOR&nbsp;MainArgType&#65533;<br>
 
 <br>
 

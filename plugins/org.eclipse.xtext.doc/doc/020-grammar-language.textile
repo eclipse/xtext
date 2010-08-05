@@ -461,7 +461,7 @@ Have a look at the "linking section":#linking in order to understand how linking
 
 h5(#unordered_groups). Unordered Groups
 
-The elements of an unordered group can occur in any order but each element can occur at most once. Unordered 
+The elements of an unordered group can occur in any order but each element must appear once. Unordered 
 groups are separated with '_&_', e.g.
 
 bc.. Modifier: 
@@ -482,6 +482,23 @@ p. but not
 bc.. static final static // ERROR: static appears twice
 public static final private // ERROR: visibility appears twice
 final // ERROR: visibility is missing
+
+p. Note that if you want an element of an unordered group to appear once or not at all, 
+you have to choose a cardinality of '_?_'. In the example, the visibility is mandatory, 
+while '_static_' or '_final_' are optional. Elements with a cardinality of '_*_' or '_+_'
+have to appear continuously without interruption, i.e.
+
+bc.. Rule:
+	values+=INT* & name=ID;
+
+p. will parse
+
+bc.. 0 8 15 x
+x 0 8 15 
+
+p. but not 
+
+bc.. 0 x 8 15 // wrong, as values cannot be interrupted.
 
 h5. Simple Actions 
 

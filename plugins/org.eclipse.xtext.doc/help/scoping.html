@@ -187,7 +187,7 @@ end<br>
 <p>There are also two different default implementations of 
 						<span class="emphasis"><em>IQualifiedNameProvider</em></span>. Both work by looking 
 						up an 
-						<span class="emphasis"><em>EAttribute</em></span> &lsquo;name&rsquo;. The 
+						<span class="emphasis"><em>EAttribute</em></span> &sbquo;name&rsquo;. The 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/SimpleNameProvider.java?root=Modeling_Project&view=co" target="_new">SimpleNameProvider</a> 
 						simply returns the plain value, while the 
 
@@ -317,7 +317,7 @@ Import&nbsp;:&nbsp;<br>
 
 						<span class="emphasis"><em>IGlobalScopeProvider</em></span> by the means of Guice:#dependencyInjection. That implementation looks up any 
 
-						<span class="emphasis"><em>EAttributes</em></span> named &lsquo;importURI&rsquo; in your model and interprets their values as URIs that point to imported
+						<span class="emphasis"><em>EAttributes</em></span> named &sbquo;importURI&rsquo; in your model and interprets their values as URIs that point to imported
 						resources. That is it adds the corresponding resources to the current resource&rsquo;s resource set. In 
 						addition the scope provider uses the 
 						<a class="link" href="scoping.html#resourcedescriptions" title="Resource and EObject Descriptions ( IResourceDescription, IEObjectDescription)">
@@ -365,7 +365,7 @@ Import&nbsp;:&nbsp;<br>
 						by most of our users. The available tooling provided by JDT and PDE to configure the classpath adds 
 						even more value. However, it is just a default: You can reuse the infrastructure without using Java 
 						and independent from the JDT.</p>
-<p>In order to know what is available in the &ldquo;world&rdquo; a global scope provider which relies on external 
+<p>In order to know what is available in the &bdquo;world&rdquo; a global scope provider which relies on external 
 						configuration needs to read that configuration in and be able to find all candidates for a certain 
 
 						<span class="emphasis"><em>EReference</em></span>. If you don&rsquo;t want to force users to have a folder and file name structure reflecting 
@@ -849,7 +849,7 @@ IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;ERefer
 <code class="code">FowlerDslQualifiedNameProvider&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;DefaultDeclarativeQualifiedNameProvider&nbsp;{<br>
 &nbsp;&nbsp;public&nbsp;String&nbsp;qualifiedName(Transition&nbsp;t)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;if(t.getEvent()&nbsp;==&nbsp;null&nbsp;||&nbsp;!(t.eContainer()&nbsp;instanceof&nbsp;State))&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if(t.getEvent()&nbsp;==&nbsp;null&nbsp;||&#65533;!(t.eContainer()&nbsp;instanceof&nbsp;State))&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;((State)t.eContainer()).getName()&nbsp;+&nbsp;"."&nbsp;t.getEvent().getName();<br>
@@ -873,7 +873,7 @@ IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;ERefer
 </div>
 <p>The 
 						<span class="emphasis"><em>ImportedNamespaceAwareLocalScopeProvider</em></span> looks up 
-						<span class="emphasis"><em>EAttributes</em></span> with name &lsquo;importNamespace&rsquo; and 
+						<span class="emphasis"><em>EAttributes</em></span> with name &sbquo;importNamespace&rsquo; and 
 						interprets them as import statements. By default qualified names with or without a wildcard at the end 
 						are supported. For an import of a qualified name the simple name is made available as we know from e.g. 
 						Java, where
@@ -885,7 +885,7 @@ IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;ERefer
 </code>
 </p>
 </div>
-<p>makes it possible to refer to &lsquo;java.util.Set&rsquo; by its simple name &lsquo;Set&rsquo;.
+<p>makes it possible to refer to &sbquo;java.util.Set&rsquo; by its simple name &sbquo;Set&rsquo;.
 						Contrary to Java the import is not active for the whole file but only for the namespace it is declared 
 						in and its child namespaces. That is why you can write the following in the example DSL:</p>
 <div class="literallayout">

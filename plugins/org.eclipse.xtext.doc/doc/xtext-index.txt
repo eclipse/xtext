@@ -35,6 +35,7 @@
 199-jvmtypes.textile
 
 200-Appendix.textile
+205-typical-language-configs.textile
 210-emf-integration.textile
 215-migrating-from-0.7.textile
 230-antlr-ip-issue.textile

@@ -1,0 +1,108 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Languages Independent of JDT</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="special_languages.html" title="Typical Language Configurations">
+<link rel="prev" href="special_languages.html" title="Typical Language Configurations">
+<link rel="next" href="emf_integration.html" title="Integration with EMF and Other EMF Editors">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Languages Independent of JDT</h1>
+<p>The following section describes how you make your language independent of Eclipse&rsquo;s Java Development Toolkit (JDT).</p>
+<p>In the 
+				<span class="emphasis"><em>UIModule</em></span> of your language you have to overwrite some bindings. First, remove the bindings to components with support for the '
+				<span class="emphasis"><em>classpath:</em></span>' URI protocol, i.e. 
+			</p>
+<div class="literallayout">
+<p>
+<code class="code">@Override<br>
+public&nbsp;Class&lt;?&nbsp;extends&nbsp;IResourceForEditorInputFactory&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bindIResourceForEditorInputFactory()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;ResourceForIEditorInputFactory.class;<br>
+}<br>
+
+<br>
+@Override<br>
+public&nbsp;Class&lt;?&nbsp;extends&nbsp;IResourceSetProvider&gt;&nbsp;bindIResourceSetProvider()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;SimpleResourceSetProvider.class;<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>Second, configure the global scope provider to scan project root folders instead of the classpath of Java projects.   </p>
+<div class="literallayout">
+<p>
+<code class="code">@Override<br>
+public&nbsp;com.google.inject.Provider<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;org.eclipse.xtext.resource.containers.IAllContainersState&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;provideIAllContainersState()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>The remaining steps show you how to adapt the  
+
+				<a class="link" href="projectwizard.html" title="Project Wizard">project wizard</a> for your language, if you have generated one.
+				The best way to do this is to create a new subclass of the generated 
+
+				<span class="emphasis"><em>IProjectCreator</em></span> in the 
+				<span class="emphasis"><em>src/</em></span> folder of the 
+				<span class="emphasis"><em>ui</em></span> project and 
+				apply the necessary changes there. First, remove the JDT project configuration 
+				by overriding 
+				<span class="emphasis"><em>configureProject</em></span> with an empty body. 
+			</p>
+<p>The next thing is to redefine the project natures and builders that should be
+				applied to you language projects.</p>
+<p>In in this case just remove the JDT stuff in this way:</p>
+<div class="literallayout">
+<p>
+<code class="code">protected&nbsp;String[]&nbsp;getProjectNatures()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;String[]&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"org.eclipse.pde.PluginNature",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"org.eclipse.xtext.ui.shared.xtextNature"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;};<br>
+}<br>
+
+<br>
+protected&nbsp;String[]&nbsp;getBuilders()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;String[]&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"org.eclipse.pde.ManifestBuilder",&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"org.eclipse.pde.SchemaBuilder"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;};<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>After that you have to bind the new 
+				<span class="emphasis"><em>IProjectCreator</em></span>
+			
+</p>
+<div class="literallayout">
+<p>
+<code class="code">@Override<br>
+public&nbsp;Class&lt;?&nbsp;extends&nbsp;IProjectCreator&gt;&nbsp;bindIProjectCreator()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;JDTFreeMyDslProjectCreator.class;<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>That&rsquo;s all. Your language and its IDE should now no longer depend on JDT.</p>
+</body>
+</html>

@@ -204,7 +204,7 @@ In the following table the most important standard generator fragments are liste
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment}|EMF code for generated models|"Model inference":#metamodelInference|
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment}|ANTLR grammar, parser, lexer and related services| |
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment}|Access to the grammar| |
-|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment}|EMF resource factory| |
+|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment}|EMF resource factory| "Xtext Resource":#xtext_resource|
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment}|Model-to-text serialization|"Serialization":#serialization|
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment}|Index-based scoping|"Index-based namespace scoping":#index_based|
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.validation.JavaValidatorFragment}|Model validation|"Model validation":#custom_validation|
@@ -213,7 +213,7 @@ In the following table the most important standard generator fragments are liste
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.outline.OutlineNodeAdapterFactoryFragment}|Outline view configuration|"Outline":#outline|
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.outline.TransformerFragment}|Outline view configuration|"Outline":#outline|
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment}| Java-based content assist|"Content assist":#contentAssist|
-|XtextAntlrUiGeneratorFragment|Content assist helper based on ANTLR|"Content assist":#contentAssist|
+|${org.eclipse.xtext.generator/src/org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment}|Content assist helper based on ANTLR|"Content assist":#contentAssist|
 |${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment}|New project wizard|"Project wizard":#projectwizard|
 
 

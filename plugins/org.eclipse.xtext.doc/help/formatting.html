@@ -162,13 +162,13 @@
 <p>
 								
 <span class="emphasis"><em>after(ele)</em></span>: The instruction is applied after the grammar element 
-								<span class="emphasis"><em>ele</em></span> has been matched. For example, if your grammar uses the keyword &ldquo;;&rdquo; to end lines, this can instruct the formatter to insert a line break after the semicolon.  
+								<span class="emphasis"><em>ele</em></span> has been matched. For example, if your grammar uses the keyword &bdquo;;&rdquo; to end lines, this can instruct the formatter to insert a line break after the semicolon.  
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<span class="emphasis"><em>before(ele)</em></span>: The instruction is executed before the matched element. For example, if your grammar contains lists which separate their values with the keyword &ldquo;,&rdquo;, you can instruct the formatter to suppress the whitespace before the comma.
+<span class="emphasis"><em>before(ele)</em></span>: The instruction is executed before the matched element. For example, if your grammar contains lists which separate their values with the keyword &bdquo;,&rdquo;, you can instruct the formatter to suppress the whitespace before the comma.
 							</p>
 </li>
 <li class="listitem">
@@ -222,7 +222,7 @@
 						and alternatives. The semantic of 
 						<span class="emphasis"><em>before(ele)</em></span>, 
 						<span class="emphasis"><em>after(ele)</em></span>, etc. for rule calls and parser rules is 
-						identical to when the parser would &ldquo;pass&rdquo; this part of the grammar. The stack of called rules is taken 
+						identical to when the parser would &bdquo;pass&rdquo; this part of the grammar. The stack of called rules is taken 
 						into account. The following abstract elements can 
 						<span class="bold"><strong>not</strong></span> have assigned formatting instructions:
 					</p>
@@ -335,8 +335,8 @@
 <p>
 								
 <span class="emphasis"><em>findKeywordPairs(String leftKw, String rightKw)</em></span>: returns tuples of keywords from the same grammar rule. Pairs are matched nested and sequentially.  Example: for 
-								<span class="emphasis"><em>Rule: &lsquo;(&rsquo; name=ID (&lsquo;(&rsquo; foo=ID &lsquo;)&rsquo;) &lsquo;)&rsquo; | &lsquo;(&rsquo; bar=ID ')'</em></span> 
-								<span class="emphasis"><em>findKeywordPairs(&ldquo;(&rdquo;, &ldquo;)&rdquo;)</em></span> returns three pairs.
+								<span class="emphasis"><em>Rule: &sbquo;(&rsquo; name=ID (&sbquo;(&rsquo; foo=ID &sbquo;)&rsquo;) &sbquo;)&rsquo; | &sbquo;(&rsquo; bar=ID ')'</em></span> 
+								<span class="emphasis"><em>findKeywordPairs(&bdquo;(&rdquo;, &bdquo;)&rdquo;)</em></span> returns three pairs.
 							</p>
 </li>
 </ul>

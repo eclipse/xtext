@@ -1,0 +1,103 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Typical Language Configurations</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="Xtext User Guide">
+<link rel="up" href="index.html" title="Xtext User Guide">
+<link rel="prev" href="CustomizationPoints.html" title="Customization Points">
+<link rel="next" href="java_independent_languages.html" title="Languages Independent of JDT">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Typical Language Configurations</h1>
+<div class="section" title="Case Insensitive Languages">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="case_insensitive_languages"></a>Case Insensitive Languages</h2>
+</div>
+</div>
+</div>
+<p>In some cases, e.g. if your 
+				<span class="emphasis"><em>SHIFT</em></span> key is broken, you might want to design a case insensitive language. Xtext offers separate 
+				<a class="link" href="configuration.html#generator_fragment" title="Generator Fragments">generator fragments</a> for this purpose. 
+			</p>
+<p>For case insensitive keywords, open your MWE workflow and replace the Antlr related fragments: </p>
+<div class="literallayout">
+<p>
+<code class="code">//&nbsp;The&nbsp;antlr&nbsp;parser&nbsp;generator&nbsp;fragment.<br>
+fragment&nbsp;=&nbsp;parser.antlr.XtextAntlrGeneratorFragment&nbsp;{<br>
+//&nbsp;&nbsp;options&nbsp;=&nbsp;{<br>
+//		backtrack&nbsp;=&nbsp;true<br>
+//	}<br>
+}<br>
+...<br>
+
+<br>
+//&nbsp;generates&nbsp;a&nbsp;more&nbsp;lightweight&nbsp;Antlr&nbsp;parser&nbsp;and&nbsp;lexer&nbsp;tailored&nbsp;...<br>
+fragment&nbsp;=&nbsp;parser.antlr.XtextAntlrUiGeneratorFragment&nbsp;{<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>with</p>
+<div class="literallayout">
+<p>
+<code class="code">//&nbsp;The&nbsp;antlr&nbsp;parser&nbsp;generator&nbsp;fragment.<br>
+fragment&nbsp;=&nbsp;parser.antlr.ex.rt.AntlrGeneratorFragment&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;options&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase&nbsp;=&nbsp;true<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}<br>
+...<br>
+
+<br>
+//&nbsp;generates&nbsp;a&nbsp;more&nbsp;lightweight&nbsp;Antlr&nbsp;parser&nbsp;and&nbsp;lexer&nbsp;tailored&nbsp;...<br>
+fragment&nbsp;=&nbsp;parser.antlr.ex.ca.ContentAssistParserGeneratorFragment&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;options&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase&nbsp;=&nbsp;true<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>For case insensitve element names, use the 
+				<span class="emphasis"><em>ignoreCase</em></span> option in your scope fragment, i.e.
+			</p>
+<div class="literallayout">
+<p>
+<code class="code">fragment&nbsp;=&nbsp;scoping.ImportNamespacesScopingFragment&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase&nbsp;=&nbsp;true<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>or if you are using 
+				<a class="link" href="scoping.html#import_uri" title="Global Scopes Based On Explicit Imports (ImportURI Mechanism)">importURI based global scopes</a>
+			
+</p>
+<div class="literallayout">
+<p>
+<code class="code">fragment&nbsp;=&nbsp;scoping.ImportURIScopingFragment&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase&nbsp;=&nbsp;true<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
+</body>
+</html>

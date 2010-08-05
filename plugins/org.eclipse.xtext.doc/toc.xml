@@ -233,10 +233,14 @@
 <topic href="help/jvmtypes.html#HowtoUseJavaTypes" label="How to Use Java Types"></topic>
 <topic href="help/CustomizationPoints.html" label="Customization Points"></topic>
 </topic>
+<topic href="help/special_languages.html" label="Typical Language Configurations">
+<topic href="help/special_languages.html#case_insensitive_languages" label="Case Insensitive Languages"></topic>
+<topic href="help/java_independent_languages.html" label="Languages Independent of JDT"></topic>
+</topic>
 <topic href="help/emf_integration.html" label="Integration with EMF and Other EMF Editors">
 <topic href="help/emf_integration.html#model_metamodel" label="Model, Ecore Model, and Ecore"></topic>
 <topic href="help/emf_codegen.html" label="EMF Code Generation"></topic>
-<topic href="help/XtextResourceImplementation.html" label="XtextResource Implementation"></topic>
+<topic href="help/xtext_resource.html" label="XtextResource Implementation"></topic>
 <topic href="help/gmf_integration.html" label="Integration with GMF Editors">
 <topic href="help/gmf_integration.html#gmf_integration_stage_1" label="Stage 1: Make GMF Read and Write the Semantic Model As Text">
 <topic href="help/gmf_integration.html#Stage2CallingtheXtextParsertoParseGMFLabels" label="Stage 2: Calling the Xtext Parser to Parse GMF Labels"></topic>

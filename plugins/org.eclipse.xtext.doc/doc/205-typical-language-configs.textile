@@ -1,0 +1,109 @@
+h1(#special_languages). Typical Language Configurations
+
+h2(#case_insensitive_languages). Case Insensitive Languages
+
+In some cases, e.g. if your _SHIFT_ key is broken, you might want to design a case insensitive language. Xtext offers separate "generator fragments":#generator_fragment for this purpose. 
+
+For case insensitive keywords, open your MWE workflow and replace the Antlr related fragments: 
+
+bc.. // The antlr parser generator fragment.
+fragment = parser.antlr.XtextAntlrGeneratorFragment {
+//  options = {
+//		backtrack = true
+//	}
+}
+...
+
+// generates a more lightweight Antlr parser and lexer tailored ...
+fragment = parser.antlr.XtextAntlrUiGeneratorFragment {
+}
+
+p. with
+
+bc.. // The antlr parser generator fragment.
+fragment = parser.antlr.ex.rt.AntlrGeneratorFragment {
+    options = {
+        ignoreCase = true
+    }
+}
+...
+
+// generates a more lightweight Antlr parser and lexer tailored ...
+fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment {
+    options = {
+        ignoreCase = true
+    }
+}
+
+p. For case insensitve element names, use the _ignoreCase_ option in your scope fragment, i.e.
+
+bc.. fragment = scoping.ImportNamespacesScopingFragment {
+    ignoreCase = true
+}
+
+p. or if you are using "importURI based global scopes":#import_uri
+
+bc.. fragment = scoping.ImportURIScopingFragment {
+    ignoreCase = true
+}
+
+h2(#java_independent_languages). Languages Independent of JDT
+
+The following section describes how you make your language independent of Eclipse's Java Development Toolkit (JDT).
+
+In the _UIModule_ of your language you have to overwrite some bindings. First, remove the bindings to components with support for the '_classpath:_' URI protocol, i.e. 
+
+bc.. @Override
+public Class<? extends IResourceForEditorInputFactory>
+    bindIResourceForEditorInputFactory() {
+        return ResourceForIEditorInputFactory.class;
+}
+
+@Override
+public Class<? extends IResourceSetProvider> bindIResourceSetProvider() {
+    return SimpleResourceSetProvider.class;
+}
+
+p. Second, configure the global scope provider to scan project root folders instead of the classpath of Java projects.   
+
+bc.. @Override
+public com.google.inject.Provider
+    <org.eclipse.xtext.resource.containers.IAllContainersState>
+    provideIAllContainersState() {
+    return org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();
+}
+
+p. The remaining steps show you how to adapt the  
+"project wizard":#projectwizard for your language, if you have generated one.
+The best way to do this is to create a new subclass of the generated 
+_IProjectCreator_ in the _src/_ folder of the _ui_ project and 
+apply the necessary changes there. First, remove the JDT project configuration 
+by overriding _configureProject_ with an empty body. 
+
+The next thing is to redefine the project natures and builders that should be
+applied to you language projects.
+
+In in this case just remove the JDT stuff in this way:
+
+bc.. protected String[] getProjectNatures() {
+    return new String[] {
+        "org.eclipse.pde.PluginNature",
+        "org.eclipse.xtext.ui.shared.xtextNature"
+    };
+}
+
+protected String[] getBuilders() {
+    return new String[] {
+        "org.eclipse.pde.ManifestBuilder", 
+        "org.eclipse.pde.SchemaBuilder"
+    };
+}
+
+p. After that you have to bind the new _IProjectCreator_
+
+bc.. @Override
+public Class<? extends IProjectCreator> bindIProjectCreator() {
+    return JDTFreeMyDslProjectCreator.class;
+}
+
+p. That's all. Your language and its IDE should now no longer depend on JDT.

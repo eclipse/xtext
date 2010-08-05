@@ -52,7 +52,7 @@ Among other things, the code generator will generate
 * A factory interface and class for creating instances
 * An abstract switch class implementing a visitor pattern to avoid if-instanceof cascades in your code.
 
-h2. XtextResource Implementation
+h2(#xtext_resource). XtextResource Implementation
 
 Xtext provides an implementation of EMF's resource, the ${org.eclipse.xtext/src/org.eclipse.xtext.resource.XtextResource}. This does not only encapsulate the parser that converts text to an EMF model but also the serializer working the opposite direction. That way, an Xtext model just looks like any other Ecore-based model from the outside, making it amenable for the use by other EMF based tools. In fact, the Xpand templates in the generator plug-in created by the Xtext wizard do not make any assumption on the fact that the model is described in Xtext, and they would work fine with any model based on the same Ecore model of the language. So in the ideal case, you can switch the serialization format of your models to your self-defined DSL by just replacing the resource implementation used by your other modeling tools. 
 
