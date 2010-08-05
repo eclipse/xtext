@@ -9,12 +9,14 @@ package org.eclipse.xtext.parser.encoding;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.CharConversionException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory;
 import org.eclipse.xtext.junit.AbstractXtextTests;
@@ -66,16 +68,32 @@ public class EncodingTest extends AbstractXtextTests {
 	
 	public void testUtfBytesWithIsoOptions() throws Exception {
 		XtextResource resource = createXtextResource();
-		resource.load(new ByteArrayInputStream(utfBytes), isoOptions);
-		assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		try {
+			resource.load(new ByteArrayInputStream(utfBytes), isoOptions);
+			assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		} catch (WrappedException e) {
+			if (e.getCause() instanceof CharConversionException) {
+				// ok
+			} else {
+				throw e;
+			}
+		}
 		resource.reparse(model);
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 	}
 	
 	public void testIsoBytesWithUtfOptions() throws Exception {
 		XtextResource resource = createXtextResource();
-		resource.load(new ByteArrayInputStream(isoBytes), utfOptions);
-		assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		try {
+			resource.load(new ByteArrayInputStream(isoBytes), utfOptions);
+			assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		} catch(WrappedException e) {
+			if (e.getCause() instanceof CharConversionException) {
+				// ok
+			} else {
+				throw e;
+			}
+		}
 		resource.reparse(model);
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 	}
