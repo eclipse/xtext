@@ -34,23 +34,36 @@ public interface IXtextBuilderParticipant {
 		IProject getBuiltProject();
 		List<IResourceDescription.Delta> getDeltas();
 		ResourceSet getResourceSet();
+		BuildType getBuildType();
 		void needRebuild();
+	}
+	
+	public static enum BuildType {
+		INCREMENTAL,
+		FULL,
+		CLEAN,
+		/**
+		 * Triggered if the persisted builder state could not be loaded.
+		 */
+		RECOVERY
 	}
 
 	public static class BuildContext implements IBuildContext {
-		private ResourceSet resourceSet;
-		private List<IResourceDescription.Delta> deltas;
-		private XtextBuilder xtextBuilder;
+		private final ResourceSet resourceSet;
+		private final List<IResourceDescription.Delta> deltas;
+		private final XtextBuilder builder;
+		private final BuildType type;
 
-		public BuildContext(XtextBuilder xtextBuilder, ResourceSet resourceSet, List<Delta> deltas) {
+		public BuildContext(XtextBuilder builder, ResourceSet resourceSet, List<Delta> deltas, BuildType type) {
 			super();
-			this.xtextBuilder = xtextBuilder;
+			this.type = type;
+			this.builder = builder;
 			this.resourceSet = resourceSet;
 			this.deltas = deltas;
 		}
 
 		public IProject getBuiltProject() {
-			return xtextBuilder.getProject();
+			return builder.getProject();
 		}
 
 		public List<IResourceDescription.Delta> getDeltas() {
@@ -62,7 +75,11 @@ public interface IXtextBuilderParticipant {
 		}
 		
 		public void needRebuild() {
-			xtextBuilder.needRebuild();
+			builder.needRebuild();
+		}
+		
+		public BuildType getBuildType() {
+			return type;
 		}
 	}
 }

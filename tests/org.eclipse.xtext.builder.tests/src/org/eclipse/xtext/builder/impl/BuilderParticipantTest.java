@@ -15,6 +15,7 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
+import org.eclipse.xtext.builder.IXtextBuilderParticipant.BuildType;
 import org.eclipse.xtext.builder.tests.Activator;
 import org.eclipse.xtext.builder.tests.LoggingBuilderParticipant;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -56,11 +57,19 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		file.delete(true, monitor());
 		waitForAutoBuild();
 		assertEquals(1, participant.getInvocationCount());
-		
+		assertSame(BuildType.INCREMENTAL, participant.getContext().getBuildType());
 		participant.reset();
+		
 		project.getProject().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor());
+		assertSame(BuildType.CLEAN, participant.getContext().getBuildType());
 		waitForAutoBuild();
 		assertEquals(2, participant.getInvocationCount());
+		assertSame(BuildType.FULL, participant.getContext().getBuildType());
+		participant.reset();
+		
+		project.getProject().build(IncrementalProjectBuilder.FULL_BUILD, monitor());
+		assertSame(BuildType.FULL, participant.getContext().getBuildType());
+		participant.reset();
 	}
 	
 }

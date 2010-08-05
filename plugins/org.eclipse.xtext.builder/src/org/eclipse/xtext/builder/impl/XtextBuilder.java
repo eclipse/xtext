@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
+import org.eclipse.xtext.builder.IXtextBuilderParticipant.BuildType;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -38,7 +39,8 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein
  */
 public class XtextBuilder extends IncrementalProjectBuilder {
-	public static Logger log = Logger.getLogger(XtextBuilder.class);
+	
+	private static final Logger log = Logger.getLogger(XtextBuilder.class);
 
 	public static final String BUILDER_ID = XtextProjectHelper.BUILDER_ID;
 
@@ -99,11 +101,14 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 				public boolean visit(IResourceDelta delta) throws CoreException {
 					if (delta.getResource() instanceof IStorage) {
 						if (delta.getKind() == IResourceDelta.REMOVED) {
-							return toBeBuiltComputer.removeStorage(subMonitor, toBeBuilt, (IStorage) delta
-									.getResource());
+							return toBeBuiltComputer.removeStorage(
+									subMonitor, 
+									toBeBuilt, (IStorage) delta.getResource());
 						} else if (delta.getKind() == IResourceDelta.ADDED || delta.getKind() == IResourceDelta.CHANGED) {
-							return toBeBuiltComputer.updateStorage(subMonitor, toBeBuilt, (IStorage) delta
-									.getResource());
+							return toBeBuiltComputer.updateStorage(
+									subMonitor, 
+									toBeBuilt, 
+									(IStorage) delta.getResource());
 						}
 					}
 					return true;
@@ -111,13 +116,13 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			};
 			delta.accept(visitor);
 			subMonitor.worked(1);
-			doBuild(toBeBuilt, subMonitor.newChild(1));
+			doBuild(toBeBuilt, subMonitor.newChild(1), BuildType.INCREMENTAL);
 		} finally {
 			subMonitor.done();
 		}
 	}
 
-	protected void doBuild(ToBeBuilt toBeBuilt, IProgressMonitor monitor) throws CoreException {
+	protected void doBuild(ToBeBuilt toBeBuilt, IProgressMonitor monitor, BuildType type) throws CoreException {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
 		try {
 			ResourceSet resourceSet = getResourceSetProvider().get(getProject());
@@ -128,7 +133,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 					toBeBuilt.toBeDeleted, subMonitor.newChild(1));
 			if (participant != null) {
 				participant.build(
-						new IXtextBuilderParticipant.BuildContext(this, resourceSet, deltas), 
+						new IXtextBuilderParticipant.BuildContext(this, resourceSet, deltas, type), 
 						subMonitor.newChild(1));
 			}
 			resourceSet.getResources().clear();
@@ -144,7 +149,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			IProject project = getProject();
 			final ToBeBuilt toBeBuilt = (isRecoveryBuild) ? toBeBuiltComputer.updateProjectNewResourcesOnly(project,
 					subMonitor.newChild(1)) : toBeBuiltComputer.updateProject(project, subMonitor.newChild(1));
-			doBuild(toBeBuilt, subMonitor.newChild(1));
+			doBuild(toBeBuilt, subMonitor.newChild(1), isRecoveryBuild ? BuildType.RECOVERY : BuildType.FULL);
 		} finally {
 			subMonitor.done();
 		}
@@ -171,8 +176,11 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		try {
 			ImmutableList<Delta> deltas = builderState.clean(toBeBuilt.toBeDeleted, subMonitor.newChild(1));
 			if (participant != null)
-				participant.build(new IXtextBuilderParticipant.BuildContext(this, getResourceSetProvider().get(getProject()), deltas), subMonitor
-						.newChild(1));
+				participant.build(new IXtextBuilderParticipant.BuildContext(this, 
+						getResourceSetProvider().get(getProject()), 
+						deltas,
+						BuildType.CLEAN), 
+						subMonitor.newChild(1));
 		} finally {
 			subMonitor.done();
 		}
