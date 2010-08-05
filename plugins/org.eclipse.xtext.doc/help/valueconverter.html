@@ -56,6 +56,9 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IValueConverterService&gt;&nbsp;bindIVa
 					<span class="emphasis"><em>EDataType</em></span> that reuses the functionality of the corresponding EMF 
 					<span class="emphasis"><em>EFactory</em></span>.
 				</p>
+<p>As qualified names &ndash; i.e. names composed of namespaces separated by a delimiter &ndash; are expected to occur often, we&rsquo;ve added a 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/impl/QualifiedNameValueConverter.java?root=Modeling_Project&view=co" target="_new">QualifiedNameValueConverter</a>. This one removes comments and whitespaces and delegates to another value converter for each segment, allowing individually quoted segments. The domainmodel example shows how to use it. 
+				</p>
 <p>The protocol of an 
 					<span class="emphasis"><em>IValueConverter</em></span> allows to throw a 
 					<span class="emphasis"><em>ValueConverterException</em></span> if something went wrong.

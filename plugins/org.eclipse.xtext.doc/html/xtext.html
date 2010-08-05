@@ -6520,6 +6520,9 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IValueConverterService&gt;&nbsp;bindIVa
 					<span class="emphasis"><em>EDataType</em></span> that reuses the functionality of the corresponding EMF 
 					<span class="emphasis"><em>EFactory</em></span>.
 				</p>
+<p>As qualified names &ndash; i.e. names composed of namespaces separated by a delimiter &ndash; are expected to occur often, we&rsquo;ve added a 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/impl/QualifiedNameValueConverter.java?root=Modeling_Project&view=co" target="_new">QualifiedNameValueConverter</a>. This one removes comments and whitespaces and delegates to another value converter for each segment, allowing individually quoted segments. The domainmodel example shows how to use it. 
+				</p>
 <p>The protocol of an 
 					<span class="emphasis"><em>IValueConverter</em></span> allows to throw a 
 					<span class="emphasis"><em>ValueConverterException</em></span> if something went wrong.
@@ -9022,7 +9025,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 <p>In the following example taken from the 
 				<span class="emphasis"><em>DomainmodelJavaValidator</em></span> 
 				the diagnostic&rsquo;s 
-				<span class="emphasis"><em>code</em></span> is given by the last argument to the 
+				<span class="emphasis"><em>code</em></span> is given by the third argument to the 
 				<span class="emphasis"><em>warning()</em></span> method and it is a reference 
 				to the static 
 				<span class="emphasis"><em>String</em></span> field _INVALID_TYPE_NAME_ in the validator class.
@@ -9987,8 +9990,8 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;&nbsp;Iterable&lt;AbstractNode&gt;&nbsp;allNodes&nbsp;=&nbsp;NodeUtil.getAllContents(<br>
 &nbsp;&nbsp;&nbsp;&nbsp;resource.getParseResult().getRootNode());<br>
-&nbsp;&nbsp;for&nbsp;(AbstractNode&nbsp;abstractNode&nbsp;:&nbsp;allNodes)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(abstractNode.getGrammarElement()&nbsp;instanceof&nbsp;CrossReference)&nbsp;{<br>
+&nbsp;&nbsp;for&nbsp;(AbstractNode&nbsp;node&nbsp;:&nbsp;allNodes)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(node.getGrammarElement()&nbsp;instanceof&nbsp;CrossReference)&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;acceptor.addPosition(node.getOffset(),&nbsp;node.getLength(),&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyHighlightingConfiguration.CROSS_REF);<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
@@ -10773,7 +10776,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IProjectCreator&gt;&nbsp;bindIProjectCr
 				<span class="emphasis"><em>XtextResource</em></span> we have provided an example. You must have the Helios version 2.3 of GMF Notation, Runtime and Tooling and their dependencies installed in your workbench to run the example. With other versions of GMF it might work to regenerate the diagram code. Choose 
 				<span class="emphasis"><em>New-&gt;Examples-&gt;Xtext-&gt;Xtext GMF Integration</em></span> to import it into your workbench. The example consists of a number of plug-ins
 			</p>
-<table id="N121B5">
+<table id="N121BB">
 <tr>
 					
 <td>Plug-in</td>

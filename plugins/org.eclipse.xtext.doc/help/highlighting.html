@@ -154,8 +154,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;&nbsp;Iterable&lt;AbstractNode&gt;&nbsp;allNodes&nbsp;=&nbsp;NodeUtil.getAllContents(<br>
 &nbsp;&nbsp;&nbsp;&nbsp;resource.getParseResult().getRootNode());<br>
-&nbsp;&nbsp;for&nbsp;(AbstractNode&nbsp;abstractNode&nbsp;:&nbsp;allNodes)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(abstractNode.getGrammarElement()&nbsp;instanceof&nbsp;CrossReference)&nbsp;{<br>
+&nbsp;&nbsp;for&nbsp;(AbstractNode&nbsp;node&nbsp;:&nbsp;allNodes)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(node.getGrammarElement()&nbsp;instanceof&nbsp;CrossReference)&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;acceptor.addPosition(node.getOffset(),&nbsp;node.getLength(),&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyHighlightingConfiguration.CROSS_REF);<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>

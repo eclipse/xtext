@@ -24,6 +24,8 @@ add additional value converters by adding the respective methods. In addition to
 defined converters in the default implementation, a delegating converter is registered for each 
 available _EDataType_ that reuses the functionality of the corresponding EMF _EFactory_.
 
+p. As qualified names - i.e. names composed of namespaces separated by a delimiter - are expected to occur often, we've added a ${org.eclipse.xtext/src/org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter}. This one removes comments and whitespaces and delegates to another value converter for each segment, allowing individually quoted segments. The domainmodel example shows how to use it. 
+
 p. The protocol of an _IValueConverter_ allows to throw a _ValueConverterException_ if something went wrong.
 The exception is propagated as a syntax error by the parser or as a validation problem by the 
 _ConcreteSyntaxValidator_ if the value cannot be converted to a valid string. The 

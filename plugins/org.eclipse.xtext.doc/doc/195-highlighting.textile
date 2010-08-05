@@ -97,8 +97,8 @@ bc.. public void provideHighlightingFor(XtextResource resource,
     
   Iterable<AbstractNode> allNodes = NodeUtil.getAllContents(
     resource.getParseResult().getRootNode());
-  for (AbstractNode abstractNode : allNodes) {
-    if (abstractNode.getGrammarElement() instanceof CrossReference) {
+  for (AbstractNode node : allNodes) {
+    if (node.getGrammarElement() instanceof CrossReference) {
       acceptor.addPosition(node.getOffset(), node.getLength(), 
         MyHighlightingConfiguration.CROSS_REF);
     }
