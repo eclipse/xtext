@@ -165,7 +165,7 @@ public class XtextResource extends ResourceImpl {
 
 	public void reparse(String newContent) throws IOException {
 		clearInternalState();
-		doLoad(new StringInputStream(newContent), null);
+		doLoad(new StringInputStream(newContent, getEncoding()), null);
 		setModified(false);
 	}
 
