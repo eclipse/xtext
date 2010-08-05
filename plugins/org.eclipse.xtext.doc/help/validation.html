@@ -150,7 +150,7 @@
 </ol>
 </div>
 <p>The typical use cases for the concrete syntax validator are validation in non-Xtext-editors that, however, use an 
-						<span class="emphasis"><em>XtextResource</em></span>. This is, for example, the case when combining GMF and Xtext. Another use case is when the semantic model is modified &bdquo;manually&rdquo; (not by the parser) and then serialized again. Since it is very difficult for the serializer to provide 
+						<span class="emphasis"><em>XtextResource</em></span>. This is, for example, the case when combining GMF and Xtext. Another use case is when the semantic model is modified &ldquo;manually&rdquo; (not by the parser) and then serialized again. Since it is very difficult for the serializer to provide 
 						<a class="link" href="serialization.html#parsetreeconstructor" title="Parse Tree Constructor">meaningful error messages</a>, the concrete syntax validator is executed by default before serialization. A textual Xtext editor itself, however, is 
 						<span class="emphasis"><em>not</em></span> a valid use case. Here, the parser ensures that all syntactical constraints are met. Therefore, there is no value in additionally running the concrete syntax validator.  
 					</p>
@@ -296,7 +296,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;ConcreteSyntaxEValidator&gt;&nbsp;<br>
 </code>
 </p>
 </div>
-<p>After regenerating your language artifacts you will find three new files &bdquo;YourLanguageChecks.chk&rdquo;, &bdquo;YourLanguageFastChecks.chk&rdquo; and &bdquo;YourLanguageExpensiveChecks.chk&rdquo; in the 
+<p>After regenerating your language artifacts you will find three new files &ldquo;YourLanguageChecks.chk&rdquo;, &ldquo;YourLanguageFastChecks.chk&rdquo; and &ldquo;YourLanguageExpensiveChecks.chk&rdquo; in the 
 					<span class="emphasis"><em>src/</em></span> folder in the sub-package 
 					<span class="emphasis"><em>validation</em></span>.  The checks in these files will be executed when saving a file, while typing (FastChecks) or when triggering the validation explicitly (ExpensiveChecks). When using Check the example of the previous chapter could be written like this.
 				</p>
@@ -492,7 +492,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;ConcreteSyntaxEValidator&gt;&nbsp;<br>
 							<span class="emphasis"><em>error()</em></span> and 
 							<span class="emphasis"><em>warning()</em></span>-methods which help to create the needed 
 							<span class="emphasis"><em>DiagnosticPredicate</em></span>. Example: 
-							<span class="emphasis"><em>assertAll(error(123), warning(&bdquo;some part of the message&rdquo;))</em></span>. 
+							<span class="emphasis"><em>assertAll(error(123), warning(&ldquo;some part of the message&rdquo;))</em></span>. 
 						</p>
 </li>
 <li class="listitem">

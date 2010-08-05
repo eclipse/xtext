@@ -81,3 +81,25 @@ bc.. import static org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters.*;
   proposalProvider.createSubTypeProposals(factory, context,
       and(not(canInstantiate()), isPublic()), acceptor);
  
+ 
+p. _Since Xtext 1.0.1:_
+
+Proposals can be created by means of a scoped proposal provider that is actually aware of existing import 
+statements and scoping rules while still leveraging the JDT index for faster proposal creation. Use the 
+_ITypesProposalProvider.IScopableTypesProposalProvider_ to create a scoped proposal provider and use this 
+one instead of the plain implementation.
+
+bc.. @Override
+public void complete<TypeName>_<ReferenceName>(
+    EObject model,
+    Assignment assignment,
+    ContentAssistContext context,
+    ICompletionProposalAcceptor acceptor) {
+  IScope scope = getScopeProvider().getScope(
+      model,
+      <MyDsl>Package.Literals.<POINTER_TO_REFERENCE>);
+  ITypesProposalProvider scopedProposalProvider =
+      scopableProposalProvider.getScopedProposalProvider(model, scope);
+  scopedProposalProvider.create...
+}
+

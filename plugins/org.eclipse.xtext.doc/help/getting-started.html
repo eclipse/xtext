@@ -104,7 +104,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 					
 </tr>
 </table>
-<p>Keep &bdquo;Create generator project&rdquo; checked, as we will also create a code generator in a second step.
+<p>Keep &ldquo;Create generator project&rdquo; checked, as we will also create a code generator in a second step.
 					If you want to materialize the full blown Domainmodel example that ships with Xtext, it is
 					strongly recommend to use another language name and file extension for this tutorial.</p>
 <p>Click on 
@@ -185,7 +185,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 					</strong></span>: If you encounter strange errors while copying and pasting
 					a snippet from this document to your Eclipse editor, your documentation
 					viewer most likely has inserted characters different from {space} into your 
-					clipboard. Reenter the &bdquo;whitespace&rdquo; or type the text by hand to be sure everything
+					clipboard. Reenter the &ldquo;whitespace&rdquo; or type the text by hand to be sure everything
 					works fine. 
 				</p>
 <p>The wizard will automatically open the example grammar file 
@@ -544,7 +544,7 @@ DataType:<br>
 </div>
 <p>In many target platforms there is a difference between the notion of a simple 
 					attribute and a reference. In relational databases, for instance, a table contains 
-					the values of attributes directly, but references are &bdquo;modeled&rdquo; by the means of 
+					the values of attributes directly, but references are &ldquo;modeled&rdquo; by the means of 
 					foreign keys. In object-relational persistence technologies such as JPA or Hibernate 
 					references can have additional life-cycle semantics, which define what to do with 
 					referenced objects in certain circumstances. Therefore you typically make a distinction 
@@ -556,7 +556,7 @@ DataType:<br>
 <p>As the type reference has an additional property for the multiplicity (many or one), 
 					we make it a separate model element and parser rule 
 					<span class="emphasis"><em>TypeRef</em></span>. The presence of the 
-					postfix &sbquo;*&rsquo; in an input file should set the boolean flag to &sbquo;true&rsquo; that indicates a multi-value
+					postfix &lsquo;*&rsquo; in an input file should set the boolean flag to &lsquo;true&rsquo; that indicates a multi-value
 					type reference in the AST model. 
 					This is the purpose of the assignment operator '
 					<span class="emphasis"><em>?=</em></span>'. The parser rule looks like this:
@@ -919,7 +919,7 @@ The&nbsp;declaration&nbsp;of&nbsp;the&nbsp;_Import_&nbsp;rule&nbsp;should&nbsp;l
 					names can be arbitrarily changed by implementing an 
 					<span class="emphasis"><em>IQualifedNameProvider</em></span>. 
 					The other naming convention is that if some element has an EAttribute 
-&sbquo;					importedNamespace&rsquo; that value is used as a namespace import and is automatically 
+					&lsquo;importedNamespace&rsquo; that value is used as a namespace import and is automatically 
 					prefixed to any simple names used within that namespace. Also the asterisk '
 					<span class="emphasis"><em>*</em></span>' 
 					is used as a wildcard by default.

@@ -41,6 +41,39 @@
 &nbsp;&nbsp;proposalProvider.createSubTypeProposals(factory,&nbsp;context,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and(not(canInstantiate()),&nbsp;isPublic()),&nbsp;acceptor);<br>
 &nbsp;<br>
+&nbsp;<br>
+
+</code>
+</p>
+</div>
+<p>
+				
+<span class="emphasis"><em>Since Xtext 1.0.1:</em></span>
+			
+</p>
+<p>Proposals can be created by means of a scoped proposal provider that is actually aware of existing import 
+				statements and scoping rules while still leveraging the JDT index for faster proposal creation. Use the 
+
+				<span class="emphasis"><em>ITypesProposalProvider.IScopableTypesProposalProvider</em></span> to create a scoped proposal provider and use this 
+				one instead of the plain implementation.
+			</p>
+<div class="literallayout">
+<p>
+<code class="code">@Override<br>
+public&nbsp;void&nbsp;complete&lt;TypeName&gt;_&lt;ReferenceName&gt;(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;EObject&nbsp;model,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Assignment&nbsp;assignment,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ContentAssistContext&nbsp;context,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{<br>
+&nbsp;&nbsp;IScope&nbsp;scope&nbsp;=&nbsp;getScopeProvider().getScope(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;model,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;MyDsl&gt;Package.Literals.&lt;POINTER_TO_REFERENCE&gt;);<br>
+&nbsp;&nbsp;ITypesProposalProvider&nbsp;scopedProposalProvider&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scopableProposalProvider.getScopedProposalProvider(model,&nbsp;scope);<br>
+&nbsp;&nbsp;scopedProposalProvider.create...<br>
+}<br>
+
+<br>
 
 <br>
 
