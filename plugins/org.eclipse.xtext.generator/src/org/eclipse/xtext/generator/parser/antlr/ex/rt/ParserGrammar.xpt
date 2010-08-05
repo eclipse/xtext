@@ -598,7 +598,7 @@ finally {
 «ENDDEFINE»
 
 «DEFINE ebnf2(Grammar grammar, AntlrOptions options) FOR RuleCall-»
-«IF (ParserRule.isInstance(rule) && !isDatatypeRule((ParserRule)rule) || EnumRule.isInstance(rule)) && !isAssigned()»
+«IF (ParserRule.isInstance(rule) || EnumRule.isInstance(rule)) && !isAssigned()»
 «IF options.backtrack-»
 	{ 
 	  /* */ 
@@ -607,11 +607,14 @@ finally {
     { 
         currentNode=«EXPAND createCompositeNode» 
     }
-    «localVar()»=«ENDIF-»
+«IF (ParserRule.isInstance(rule) && !isDatatypeRule((ParserRule)rule) && !EnumRule.isInstance(rule))-»
+    «localVar()»=«ENDIF-»«ENDIF-»
 «rule.ruleName()-»
-«IF (ParserRule.isInstance(rule) && !isDatatypeRule((ParserRule)rule) || EnumRule.isInstance(rule)) && !isAssigned()»
-    { 
-        $current = $«localVar()».current; 
+«IF (ParserRule.isInstance(rule) || EnumRule.isInstance(rule)) && !isAssigned()»
+    {
+«IF (ParserRule.isInstance(rule) && !isDatatypeRule((ParserRule)rule) && !EnumRule.isInstance(rule))-»
+        $current = $«localVar()».current;
+«ENDIF-» 
         currentNode = currentNode.getParent();
     }
 «ENDIF-»

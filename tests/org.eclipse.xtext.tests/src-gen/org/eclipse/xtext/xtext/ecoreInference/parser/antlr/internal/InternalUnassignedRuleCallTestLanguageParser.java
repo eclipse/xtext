@@ -307,11 +307,17 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_ruleDataTypeRule_in_ruleModelFeatures264);
+             
+                    currentNode=createCompositeNode(grammarAccess.getModelFeaturesAccess().getDataTypeRuleParserRuleCall_2(), currentNode); 
+                
+            pushFollow(FollowSets000.FOLLOW_ruleDataTypeRule_in_ruleModelFeatures271);
             ruleDataTypeRule();
             _fsp--;
 
-            match(input,13,FollowSets000.FOLLOW_13_in_ruleModelFeatures266); 
+             
+                    currentNode = currentNode.getParent();
+                
+            match(input,13,FollowSets000.FOLLOW_13_in_ruleModelFeatures280); 
 
                     createLeafNode(grammarAccess.getModelFeaturesAccess().getSemicolonKeyword_3(), null); 
                 
@@ -338,7 +344,7 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start entryRuleDataTypeRule
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:187:1: entryRuleDataTypeRule returns [String current=null] : iv_ruleDataTypeRule= ruleDataTypeRule EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:195:1: entryRuleDataTypeRule returns [String current=null] : iv_ruleDataTypeRule= ruleDataTypeRule EOF ;
     public final String entryRuleDataTypeRule() throws RecognitionException {
         String current = null;
 
@@ -346,16 +352,16 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:188:2: (iv_ruleDataTypeRule= ruleDataTypeRule EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:189:2: iv_ruleDataTypeRule= ruleDataTypeRule EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:196:2: (iv_ruleDataTypeRule= ruleDataTypeRule EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:197:2: iv_ruleDataTypeRule= ruleDataTypeRule EOF
             {
              currentNode = createCompositeNode(grammarAccess.getDataTypeRuleRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleDataTypeRule_in_entryRuleDataTypeRule303);
+            pushFollow(FollowSets000.FOLLOW_ruleDataTypeRule_in_entryRuleDataTypeRule317);
             iv_ruleDataTypeRule=ruleDataTypeRule();
             _fsp--;
 
              current =iv_ruleDataTypeRule.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDataTypeRule314); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDataTypeRule328); 
 
             }
 
@@ -373,7 +379,7 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start ruleDataTypeRule
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:196:1: ruleDataTypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:204:1: ruleDataTypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? ) ;
     public final AntlrDatatypeRuleToken ruleDataTypeRule() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -385,14 +391,14 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
          setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:201:6: ( (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:202:1: (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:209:6: ( (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:210:1: (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:202:1: (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:202:6: this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:210:1: (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:210:6: this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )?
             {
             this_INT_0=(Token)input.LT(1);
-            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleDataTypeRule354); 
+            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleDataTypeRule368); 
 
             		current.merge(this_INT_0);
                 
@@ -400,20 +406,20 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
                 createLeafNode(grammarAccess.getDataTypeRuleAccess().getINTTerminalRuleCall_0(), null); 
                 
             kw=(Token)input.LT(1);
-            match(input,14,FollowSets000.FOLLOW_14_in_ruleDataTypeRule372); 
+            match(input,14,FollowSets000.FOLLOW_14_in_ruleDataTypeRule386); 
 
                     current.merge(kw);
                     createLeafNode(grammarAccess.getDataTypeRuleAccess().getKeywordKeyword_1(), null); 
                 
             this_INT_2=(Token)input.LT(1);
-            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleDataTypeRule387); 
+            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleDataTypeRule401); 
 
             		current.merge(this_INT_2);
                 
              
                 createLeafNode(grammarAccess.getDataTypeRuleAccess().getINTTerminalRuleCall_2(), null); 
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:222:1: (this_STRING_3= RULE_STRING )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:230:1: (this_STRING_3= RULE_STRING )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -422,10 +428,10 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:222:6: this_STRING_3= RULE_STRING
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:230:6: this_STRING_3= RULE_STRING
                     {
                     this_STRING_3=(Token)input.LT(1);
-                    match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleDataTypeRule408); 
+                    match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleDataTypeRule422); 
 
                     		current.merge(this_STRING_3);
                         
@@ -473,14 +479,14 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
         public static final BitSet FOLLOW_EOF_in_entryRuleModelFeatures198 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_12_in_ruleModelFeatures233 = new BitSet(new long[]{0x0000000000000020L});
         public static final BitSet FOLLOW_RULE_ID_in_ruleModelFeatures250 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleDataTypeRule_in_ruleModelFeatures264 = new BitSet(new long[]{0x0000000000002000L});
-        public static final BitSet FOLLOW_13_in_ruleModelFeatures266 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleDataTypeRule_in_entryRuleDataTypeRule303 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleDataTypeRule314 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleDataTypeRule354 = new BitSet(new long[]{0x0000000000004000L});
-        public static final BitSet FOLLOW_14_in_ruleDataTypeRule372 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleDataTypeRule387 = new BitSet(new long[]{0x0000000000000042L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleDataTypeRule408 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleDataTypeRule_in_ruleModelFeatures271 = new BitSet(new long[]{0x0000000000002000L});
+        public static final BitSet FOLLOW_13_in_ruleModelFeatures280 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleDataTypeRule_in_entryRuleDataTypeRule317 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleDataTypeRule328 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleDataTypeRule368 = new BitSet(new long[]{0x0000000000004000L});
+        public static final BitSet FOLLOW_14_in_ruleDataTypeRule386 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleDataTypeRule401 = new BitSet(new long[]{0x0000000000000042L});
+        public static final BitSet FOLLOW_RULE_STRING_in_ruleDataTypeRule422 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

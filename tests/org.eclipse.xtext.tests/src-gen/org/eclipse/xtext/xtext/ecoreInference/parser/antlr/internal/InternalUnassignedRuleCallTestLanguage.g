@@ -172,7 +172,15 @@ ruleModelFeatures returns [EObject current=null]
 	    }
 
 )
-)ruleDataTypeRule	';' 
+)
+    { 
+        currentNode=createCompositeNode(grammarAccess.getModelFeaturesAccess().getDataTypeRuleParserRuleCall_2(), currentNode); 
+    }
+ruleDataTypeRule
+    { 
+        currentNode = currentNode.getParent();
+    }
+	';' 
     {
         createLeafNode(grammarAccess.getModelFeaturesAccess().getSemicolonKeyword_3(), null); 
     }
