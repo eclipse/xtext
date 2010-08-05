@@ -46,13 +46,18 @@ public class TypesGeneratorFragment extends DefaultGeneratorFragment {
 			 .addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()")
 			 .addTypeToType(ITypeProvider.Factory.class.getName(), "org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory")
 			 .addTypeToType(AbstractTypeScopeProvider.class.getName(), "org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScopeProvider")
-			 .addTypeToType("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider", "org.eclipse.xtext.common.types.xtext.ui.JdtTypesProposalProvider")
+			 .addTypeToType("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider", 
+					 	"org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider.IScopableTypesProposalProvider")
+			 .addTypeToType("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider$IScopableTypesProposalProvider", 
+					 	"org.eclipse.xtext.common.types.xtext.ui.JdtTypesProposalProvider")		 	
 			 .addTypeToType("org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider", 
 					 	"org.eclipse.xtext.common.types.xtext.ui.XtextResourceSetBasedProjectProvider")
 			 .addTypeToType("org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper", 
 					 	"org.eclipse.xtext.common.types.xtext.ui.TypeAwareHyperlinkHelper")
 			 .addTypeToType("org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher", 
 					 	"org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher")
+			 .addTypeToType("org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider$ReferenceProposalCreator", 
+					 	"org.eclipse.xtext.common.types.xtext.ui.TypeAwareReferenceProposalCreator")
 			 .getBindings();
 	}
 	

@@ -7,7 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.xtext.ui;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider.IScopableTypesProposalProvider;
+import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalFactory;
@@ -15,7 +18,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalFactory;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractTypesProposalProvider implements ITypesProposalProvider {
+public abstract class AbstractTypesProposalProvider implements IScopableTypesProposalProvider {
 
 	public void createTypeProposals(ICompletionProposalFactory proposalFactory, ContentAssistContext context, 
 			ICompletionProposalAcceptor acceptor) {
@@ -25,6 +28,10 @@ public abstract class AbstractTypesProposalProvider implements ITypesProposalPro
 	public void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		createSubTypeProposals(superType, proposalFactory, context, TypeMatchFilters.all(), acceptor);
+	}
+	
+	public ITypesProposalProvider getScopedProposalProvider(EObject context, IScope scope) {
+		throw new UnsupportedOperationException("IScopableTypesProposalProvider.getScopedProposalProvider");
 	}
 
 }

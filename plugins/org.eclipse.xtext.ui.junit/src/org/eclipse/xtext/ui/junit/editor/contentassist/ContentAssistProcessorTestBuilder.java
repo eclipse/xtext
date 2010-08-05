@@ -143,8 +143,12 @@ public class ContentAssistProcessorTestBuilder {
 		for (int i = 0; i < computeCompletionProposals.length; i++) {
 			ICompletionProposal completionProposal = computeCompletionProposals[i];
 			String proposedText = completionProposal.getDisplayString();
-			if (completionProposal instanceof ConfigurableCompletionProposal)
-				proposedText = ((ConfigurableCompletionProposal) completionProposal).getReplacementString();
+			if (completionProposal instanceof ConfigurableCompletionProposal) {
+				ConfigurableCompletionProposal configurableProposal = (ConfigurableCompletionProposal) completionProposal;
+				proposedText = configurableProposal.getReplacementString();
+				if (configurableProposal.getTextApplier() != null)
+					proposedText = configurableProposal.getTextApplier().getActualReplacementString(configurableProposal);
+			}
 			Assert.assertTrue("expect completionProposal text '" + expectation + "', but got " +
 					Strings.concat(", ", toString(computeCompletionProposals)),
 					Arrays.asList(expectedText).contains(proposedText));
@@ -178,8 +182,12 @@ public class ContentAssistProcessorTestBuilder {
 		List<String> res = new ArrayList<String>(proposals.length);
 		for (ICompletionProposal proposal : proposals) {
 			String proposedText = proposal.getDisplayString();
-			if (proposal instanceof ConfigurableCompletionProposal)
-				proposedText = ((ConfigurableCompletionProposal) proposal).getReplacementString();
+			if (proposal instanceof ConfigurableCompletionProposal) {
+				ConfigurableCompletionProposal configurableProposal = (ConfigurableCompletionProposal) proposal;
+				proposedText = configurableProposal.getReplacementString();
+				if (configurableProposal.getTextApplier() != null)
+					proposedText = configurableProposal.getTextApplier().getActualReplacementString(configurableProposal);
+			}
 			res.add(proposedText);
 		}
 		Collections.sort(res);
