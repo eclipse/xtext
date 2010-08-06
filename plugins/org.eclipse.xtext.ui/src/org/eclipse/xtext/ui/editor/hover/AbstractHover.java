@@ -26,7 +26,6 @@ import org.eclipse.xtext.ui.XtextUIMessages;
 /**
  * @author Patrick Schoenbach - Initial API and implementation
  */
-
 public abstract class AbstractHover implements IAnnotationHover, ITextHover, ITextHoverExtension2 {
 
 	protected final ISourceViewer sourceViewer;

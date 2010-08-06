@@ -14,7 +14,9 @@ import org.eclipse.jface.text.ITextViewer;
 
 /**
  * Displays the parser rule the current token was consumed by.
+ * TODO: Delete me!
  */
+@Deprecated
 public class XtextTextHover implements ITextHover {
 
 	@Deprecated

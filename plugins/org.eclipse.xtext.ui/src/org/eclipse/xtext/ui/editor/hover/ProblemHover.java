@@ -51,14 +51,13 @@ public class ProblemHover extends AbstractHover {
 						continue;
 					}
 					try {
-						if (lineNumber != sourceViewer.getDocument().getLineOfOffset(
-								start)) {
+						if (lineNumber != sourceViewer.getDocument().getLineOfOffset(start)) {
 							continue;
 						}
 					} catch (final Exception x) {
 						continue;
 					}
-					if (!isLineDiffInfo(annotation)) {
+					if (annotation.getText() != null && !isLineDiffInfo(annotation)) {
 						messages.add(annotation.getText().trim());
 					} 
 				}
