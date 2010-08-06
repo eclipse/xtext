@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.generator; singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.1.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
@@ -32,14 +32,14 @@ Export-Package: de.itemis.xtext.antlr,
  org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr,
  org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.internal,
  org.eclipse.xtext.generator.parser.antlr.splitting.validation
-Require-Bundle: org.eclipse.xtext.util;resolution:=optional,
- org.eclipse.xtend;visibility:=reexport,
- org.eclipse.xpand;visibility:=reexport,
- org.eclipse.xtend.typesystem.emf;visibility:=reexport,
+Require-Bundle: org.eclipse.xtext.util;bundle-version="1.0.1";resolution:=optional,
+ org.eclipse.xtend;bundle-version="1.0.1";visibility:=reexport,
+ org.eclipse.xpand;bundle-version="1.0.1";visibility:=reexport,
+ org.eclipse.xtend.typesystem.emf;bundle-version="1.0.1";visibility:=reexport,
  org.eclipse.emf.codegen.ecore;resolution:=optional;visibility:=reexport,
- org.eclipse.xtext;bundle-version="1.0.0";resolution:=optional,
- org.eclipse.xtext.common.types;bundle-version="1.0.0";resolution:=optional,
- de.itemis.xtext.antlr;bundle-version="1.0.0";resolution:=optional;visibility:=reexport,
+ org.eclipse.xtext;bundle-version="1.0.1";resolution:=optional,
+ org.eclipse.xtext.common.types;bundle-version="1.0.1";resolution:=optional,
+ de.itemis.xtext.antlr;bundle-version="1.0.1";resolution:=optional;visibility:=reexport,
  com.ibm.icu,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
