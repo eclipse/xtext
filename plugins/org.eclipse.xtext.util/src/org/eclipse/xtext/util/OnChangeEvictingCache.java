@@ -55,7 +55,15 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 
 	public static class CacheAdapter extends EContentAdapter {
 		
-		private Map<Object, Object> values = new HashMap<Object, Object>();
+		private Map<Object, Object> values = new HashMap<Object, Object>() {
+			private static final long serialVersionUID = 362498820763181265L;
+			@Override
+			public void clear() {
+				if (isEmpty())
+					return;
+				super.clear();
+			}
+		};
 
 		private Collection<Listener> listeners = Sets.newHashSet();
 		
