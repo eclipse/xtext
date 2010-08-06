@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtext.examples"
       label="%featureName"
-      version="1.0.0.qualifier"
+      version="1.0.1.qualifier"
       provider-name="%providerName">
 
    <description>
@@ -21,8 +21,8 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    <license url="http://www.eclipse.org/legal/epl-v10.html">%license</license>
 
    <requires>
-      <import feature="org.eclipse.xtext.runtime"/>
-      <import feature="org.eclipse.xtext.ui"/>
+      <import feature="org.eclipse.xtext.runtime" version="1.0.1" match="equivalent"/>
+      <import feature="org.eclipse.xtext.ui" version="1.0.1" match="equivalent"/>
    </requires>
 
    <plugin

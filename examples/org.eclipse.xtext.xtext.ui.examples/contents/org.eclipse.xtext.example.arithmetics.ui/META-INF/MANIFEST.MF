@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.example.arithmetics.ui
-Bundle-Vendor: My Company
-Bundle-Version: 1.0.0
+Bundle-Vendor: itemis AG
+Bundle-Version: 1.0.1.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.arithmetics.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.example.arithmetics;visibility:=reexport,
