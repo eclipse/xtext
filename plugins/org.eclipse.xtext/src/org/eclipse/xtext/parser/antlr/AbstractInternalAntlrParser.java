@@ -25,6 +25,7 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
@@ -53,9 +54,8 @@ import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Multimaps;
+import com.google.inject.internal.Maps;
 
 /**
  * TODO Javadoc
@@ -180,7 +180,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	
 	private IUnorderedGroupHelper unorderedGroupHelper;
 	
-	private final ListMultimap<Token, CompositeNode> deferredLookaheadMap = Multimaps.newArrayListMultimap();
+	private final Map<Token, List<CompositeNode>> deferredLookaheadMap = Maps.newHashMap();
 	private final Map<Token, LeafNode> token2NodeMap = new HashMap<Token, LeafNode>();
 
 	protected AbstractInternalAntlrParser(TokenStream input) {
@@ -290,7 +290,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	protected CompositeNode createCompositeNode(EObject grammarElement, CompositeNode parentNode) {
 		CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
 		if (parentNode != null)
-			parentNode.getChildren().add(compositeNode);
+			((BasicEList<AbstractNode>) parentNode.getChildren()).addUnique(compositeNode);
 		compositeNode.setGrammarElement(grammarElement);
 		return compositeNode;
 	}
@@ -317,7 +317,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			error.setMessage(lexerErrorMessage);
 			leafNode.setSyntaxError(error);
 		}
-		currentNode.getChildren().add(leafNode);
+		((BasicEList<AbstractNode>) currentNode.getChildren()).addUnique(leafNode);
 		return leafNode;
 	}
 
@@ -532,10 +532,12 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 
 	private void tokenConsumed(Token token, LeafNode leafNode) {
 		List<CompositeNode> nodesDecidingOnToken = deferredLookaheadMap.get(token);
-		for (CompositeNode nodeDecidingOnToken : nodesDecidingOnToken) {
-			nodeDecidingOnToken.getLookaheadLeafNodes().add(leafNode);
+		if (nodesDecidingOnToken != null && !nodesDecidingOnToken.isEmpty()) {
+			for (CompositeNode nodeDecidingOnToken : nodesDecidingOnToken) {
+				nodeDecidingOnToken.getLookaheadLeafNodes().add(leafNode);
+			}
+			deferredLookaheadMap.remove(token);
 		}
-		deferredLookaheadMap.removeAll(token);
 		token2NodeMap.put(token, leafNode);
 	}
 
@@ -551,7 +553,12 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		for (Token lookaheadToken : lookaheadTokens) {
 			LeafNode leafNode = token2NodeMap.get(lookaheadToken);
 			if (leafNode == null) {
-				deferredLookaheadMap.put(lookaheadToken, currentNode);
+				List<CompositeNode> mapValue = deferredLookaheadMap.get(lookaheadToken);
+				if (mapValue == null) {
+					mapValue = Lists.newArrayListWithExpectedSize(3);
+					deferredLookaheadMap.put(lookaheadToken, mapValue);
+				}
+				mapValue.add(currentNode);
 			} else {
 				currentNode.getLookaheadLeafNodes().add(leafNode);
 			}
