@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.validation;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -73,6 +74,8 @@ public class ValidationJob extends Job {
 		final List<Issue> issues = xtextDocument
 				.readOnly(new IUnitOfWork<List<Issue>, XtextResource>() {
 					public List<Issue> exec(XtextResource resource) throws Exception {
+						if (resource == null)
+							return Collections.emptyList();
 						return resourceValidator.validate(resource, getCheckMode(), new CancelIndicator() {
 							public boolean isCanceled() {
 								return monitor.isCanceled();
