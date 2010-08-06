@@ -161,7 +161,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 				return super.modify(work);
 			} catch (RuntimeException e) {
 				try {
-					getState().reparse(get());
+					XtextResource state = getState();
+					if (state != null)
+						state.reparse(get());
 				} catch (IOException ioe) {
 				}
 				throw e;
