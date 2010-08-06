@@ -39,6 +39,7 @@ Workflow {
 			fileExtensions = "typesAssistTest"
 			fragment = @TestLanguagesFragments {
 				referencedGenModels = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+				file.extensions = "typesAssistTest"
 			}
 		}
 	}
