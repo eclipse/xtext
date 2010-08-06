@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.impl;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -87,12 +89,25 @@ public class ParsetreeUtil {
 		if (_this instanceof LeafNodeImpl)
 			return serialize((LeafNodeImpl)_this);
 		checkArgument(_this);
-		StringBuffer buff = new StringBuffer();
-		EList<LeafNode> leafNodes = _this.getLeafNodes();
-		for (LeafNode leafNode : leafNodes) {
-			buff.append(leafNode.getText());
+		StringBuilder buffer = new StringBuilder(Math.max(16, _this.getTotalLength()));
+//		EList<LeafNode> leafNodes = _this.getLeafNodes();
+//		for (LeafNode leafNode : leafNodes) {
+//			buff.append(leafNode.getText());
+//		}
+		serialize(_this, buffer);
+		return buffer.toString();
+	}
+	
+	public static void serialize(AbstractNode node, StringBuilder buffer) {
+		if (node instanceof LeafNode)
+			buffer.append(((LeafNode) node).getText());
+		else {
+			CompositeNode parent = (CompositeNode) node;
+			EList<AbstractNode> children = parent.getChildren();
+			for(int i = 0; i < children.size(); i++) {
+				serialize(children.get(i), buffer);
+			}
 		}
-		return buff.toString();
 	}
 
 	public static String serialize(LeafNodeImpl _this) {
@@ -120,13 +135,23 @@ public class ParsetreeUtil {
 
 	public static EList<SyntaxError> allSyntaxErrors(CompositeNodeImpl compositeNodeImpl) {
 		BasicEList<SyntaxError> basicEList = new BasicEList<SyntaxError>();
-		TreeIterator<Object> iterator = EcoreUtil.getAllContents(compositeNodeImpl, false);
-		while (iterator.hasNext()) {
-			Object next = iterator.next();
-			if (next instanceof SyntaxError)
-				basicEList.add((SyntaxError) next);
-		}
+		addAllSyntaxErrors(compositeNodeImpl, basicEList);
 		return basicEList;
+	}
+	
+	public static void addAllSyntaxErrors(CompositeNode node, BasicEList<SyntaxError> result) {
+		if (node.getSyntaxError() != null)
+			result.add(node.getSyntaxError());
+		List<AbstractNode> children = node.getChildren();
+		for(int i = 0; i< children.size(); i++) {
+			AbstractNode child = children.get(i);
+			if (child instanceof LeafNode) {
+				if (child.getSyntaxError() != null)
+					result.addUnique(child.getSyntaxError());
+			} else {
+				addAllSyntaxErrors((CompositeNode) child, result);
+			}
+		}
 	}
 
 	public static EList<SyntaxError> allSyntaxErrors(LeafNodeImpl leafNodeImpl) {

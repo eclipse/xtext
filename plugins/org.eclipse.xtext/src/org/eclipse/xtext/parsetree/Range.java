@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree;
 
+import java.util.List;
+
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.SyntaxError;
@@ -58,8 +60,9 @@ public class Range {
 		if (node.getSyntaxError() != null)
 			merge(node.getSyntaxError());
 		else if (node instanceof CompositeNode) {
-			for(AbstractNode child: ((CompositeNode)node).getChildren()) {
-				mergeAllErrors(child);
+			List<AbstractNode> children = ((CompositeNode) node).getChildren();
+			for(int i = 0; i < children.size(); i++) {
+				mergeAllErrors(children.get(i));
 			}
 		}
 	}
