@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.example.gmf.diagram; singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.1.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.eclipse.xtext.example.gmf.diagram.part.EntitiesDiagramEditorPlugin
 Bundle-Vendor: %providerName
@@ -35,9 +35,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide,
  org.eclipse.draw2d;visibility:=reexport,
  org.eclipse.gmf.runtime.draw2d.ui;visibility:=reexport,
- org.eclipse.xtext.gmf.glue;visibility:=reexport,
- org.eclipse.xtext.example.gmf;visibility:=reexport,
- org.eclipse.xtext.example.gmf.edit;visibility:=reexport,
+ org.eclipse.xtext.gmf.glue;bundle-version="1.0.1";visibility:=reexport,
+ org.eclipse.xtext.example.gmf;bundle-version="1.0.1";visibility:=reexport,
+ org.eclipse.xtext.example.gmf.edit;bundle-version="1.0.1";visibility:=reexport,
  org.eclipse.ocl.ecore;visibility:=reexport,
  org.eclipse.emf.validation;visibility:=reexport,
  org.eclipse.gef;visibility:=reexport
