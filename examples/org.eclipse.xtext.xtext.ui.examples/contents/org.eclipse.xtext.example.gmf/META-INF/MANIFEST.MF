@@ -2,23 +2,23 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.example.gmf
 Bundle-Vendor: Eclipse Modeling Project
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.1
 Bundle-SymbolicName: org.eclipse.xtext.example.gmf; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext,
- org.eclipse.xtext.generator;resolution:=optional,
- de.itemis.xtext.antlr;resolution:=optional,
+Require-Bundle: org.eclipse.xtext;bundle-version="1.0.1",
+ org.eclipse.xtext.generator;bundle-version="1.0.1";resolution:=optional,
+ de.itemis.xtext.antlr;bundle-version="1.0.1";resolution:=optional,
  org.apache.commons.logging;resolution:=optional,
  org.eclipse.emf.codegen.ecore;resolution:=optional,
- org.eclipse.emf.mwe.utils;resolution:=optional,
- org.eclipse.emf.mwe.core;resolution:=optional,
+ org.eclipse.emf.mwe.utils;bundle-version="1.0.0";resolution:=optional,
+ org.eclipse.emf.mwe.core;bundle-version="1.0.0";resolution:=optional,
  com.ibm.icu;resolution:=optional,
- org.eclipse.xtext.xtend;resolution:=optional,
- org.eclipse.xtext.util,
+ org.eclipse.xtext.xtend;bundle-version="1.0.1";resolution:=optional,
+ org.eclipse.xtext.util;bundle-version="1.0.1",
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.antlr.runtime,
- org.eclipse.emf.mwe2.launch;bundle-version="1.0.0";resolution:=optional
+ org.eclipse.emf.mwe2.launch;bundle-version="1.0.1";resolution:=optional
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.example.gmf,
