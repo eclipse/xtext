@@ -490,7 +490,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 					
 </tr>
 </table>
-<p>Keep &ldquo;Create generator project&rdquo; checked, as we will also create a code generator in a second step.
+<p>Keep &bdquo;Create generator project&rdquo; checked, as we will also create a code generator in a second step.
 					If you want to materialize the full blown Domainmodel example that ships with Xtext, it is
 					strongly recommend to use another language name and file extension for this tutorial.</p>
 <p>Click on 
@@ -571,7 +571,7 @@ entity&nbsp;Speaker&nbsp;extends&nbsp;Person&nbsp;{<br>
 					</strong></span>: If you encounter strange errors while copying and pasting
 					a snippet from this document to your Eclipse editor, your documentation
 					viewer most likely has inserted characters different from {space} into your 
-					clipboard. Reenter the &ldquo;whitespace&rdquo; or type the text by hand to be sure everything
+					clipboard. Reenter the &bdquo;whitespace&rdquo; or type the text by hand to be sure everything
 					works fine. 
 				</p>
 <p>The wizard will automatically open the example grammar file 
@@ -930,7 +930,7 @@ DataType:<br>
 </div>
 <p>In many target platforms there is a difference between the notion of a simple 
 					attribute and a reference. In relational databases, for instance, a table contains 
-					the values of attributes directly, but references are &ldquo;modeled&rdquo; by the means of 
+					the values of attributes directly, but references are &bdquo;modeled&rdquo; by the means of 
 					foreign keys. In object-relational persistence technologies such as JPA or Hibernate 
 					references can have additional life-cycle semantics, which define what to do with 
 					referenced objects in certain circumstances. Therefore you typically make a distinction 
@@ -942,7 +942,7 @@ DataType:<br>
 <p>As the type reference has an additional property for the multiplicity (many or one), 
 					we make it a separate model element and parser rule 
 					<span class="emphasis"><em>TypeRef</em></span>. The presence of the 
-					postfix &lsquo;*&rsquo; in an input file should set the boolean flag to &lsquo;true&rsquo; that indicates a multi-value
+					postfix &sbquo;*&rsquo; in an input file should set the boolean flag to &sbquo;true&rsquo; that indicates a multi-value
 					type reference in the AST model. 
 					This is the purpose of the assignment operator '
 					<span class="emphasis"><em>?=</em></span>'. The parser rule looks like this:
@@ -1306,7 +1306,7 @@ package&nbsp;my.entities&nbsp;{<br>
 					names can be arbitrarily changed by implementing an 
 					<span class="emphasis"><em>IQualifedNameProvider</em></span>. 
 					The other naming convention is that if some element has an EAttribute 
-					&lsquo;importedNamespace&rsquo; that value is used as a namespace import and is automatically 
+&sbquo;					importedNamespace&rsquo; that value is used as a namespace import and is automatically 
 					prefixed to any simple names used within that namespace. Also the asterisk '
 					<span class="emphasis"><em>*</em></span>' 
 					is used as a wildcard by default.
@@ -1708,7 +1708,7 @@ assertEquals("DomainModel",&nbsp;parserRule.getName());<br>
 <p>Previously when we created the projects to develop the domain model language, we had checked the option 
 					<span class="emphasis"><em>Create a generator project</em></span> in the wizard, which as 
 					a result created a third project for us in the workspace. If you&rsquo;ve followed along you should have a project called 
-					&lsquo;org.eclipse.xtext.example.domainmodel.generator&rsquo; in your workspace. It should look like shown in the following screenshot:
+&sbquo;					org.eclipse.xtext.example.domainmodel.generator&rsquo; in your workspace. It should look like shown in the following screenshot:
 				</p>
 <p>
 					
@@ -1728,7 +1728,7 @@ assertEquals("DomainModel",&nbsp;parserRule.getName());<br>
 </div>
 </div>
 </div>
-<p>The four files shown in the image above are very simple stubs generated for the &lsquo;Hello World&rsquo;-language the wizard creates as a starting point. 
+<p>The four files shown in the image above are very simple stubs generated for the &sbquo;Hello World&rsquo;-language the wizard creates as a starting point. 
 					We&rsquo;ll have to adapt them to match the domain model language we have developed in the 
 					<a class="link" href="#getting-started-xtext" title="Creating a DSL">getting started section</a>. The first 
 					thing we should do is open up the example model file (1) and replace its contents with an instance of the domain model language. To do so 
@@ -1954,33 +1954,33 @@ Workflow&nbsp;{<br>
 				</p>
 <div class="literallayout">
 <p>
-<code class="code">&laquo;IMPORT&nbsp;org::eclipse::xtext::example::domainmodel&raquo;<br>
-&laquo;EXTENSION&nbsp;templates::Extensions&raquo;<br>
+<code class="code">&#65533;IMPORT&nbsp;org::eclipse::xtext::example::domainmodel&#65533;<br>
+&#65533;EXTENSION&nbsp;templates::Extensions&#65533;<br>
 
 <br>
-&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Entity-&raquo;<br>
-&laquo;FILE&nbsp;qualifiedName().replaceAll("\\.","/")+".java"-&raquo;<br>
-package&nbsp;&laquo;packageName()&raquo;;<br>
+&#65533;DEFINE&nbsp;main&nbsp;FOR&nbsp;Entity-&#65533;<br>
+&#65533;FILE&nbsp;qualifiedName().replaceAll("\\.","/")+".java"-&#65533;<br>
+package&nbsp;&#65533;packageName()&#65533;;<br>
 
 <br>
-public&nbsp;class&nbsp;&laquo;name&raquo;&nbsp;{<br>
-&nbsp;&nbsp;&laquo;EXPAND&nbsp;property&nbsp;FOREACH&nbsp;features&raquo;<br>
+public&nbsp;class&nbsp;&#65533;name&#65533;&nbsp;{<br>
+&nbsp;&nbsp;&#65533;EXPAND&nbsp;property&nbsp;FOREACH&nbsp;features&#65533;<br>
 }<br>
-&laquo;ENDFILE&raquo;<br>
-&laquo;ENDDEFINE&raquo;<br>
+&#65533;ENDFILE&#65533;<br>
+&#65533;ENDDEFINE&#65533;<br>
 
 <br>
-&laquo;DEFINE&nbsp;property&nbsp;FOR&nbsp;Feature&raquo;<br>
-&nbsp;&nbsp;private&nbsp;&laquo;type.referenced.qualifiedName()&raquo;&nbsp;&laquo;name&raquo;;<br>
+&#65533;DEFINE&nbsp;property&nbsp;FOR&nbsp;Feature&#65533;<br>
+&nbsp;&nbsp;private&nbsp;&#65533;type.referenced.qualifiedName()&#65533;&nbsp;&#65533;name&#65533;;<br>
 &nbsp;&nbsp;<br>
-&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;name.toFirstUpper()&raquo;(<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;type.referenced.qualifiedName()&raquo;&nbsp;&laquo;name&raquo;)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;name&raquo;&nbsp;=&nbsp;&laquo;name&raquo;;<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;set&#65533;name.toFirstUpper()&#65533;(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#65533;type.referenced.qualifiedName()&#65533;&nbsp;&#65533;name&#65533;)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.&#65533;name&#65533;&nbsp;=&nbsp;&#65533;name&#65533;;<br>
 &nbsp;&nbsp;}&nbsp;<br>
-&nbsp;&nbsp;public&nbsp;&laquo;type.referenced.qualifiedName()&raquo;&nbsp;get&laquo;name.toFirstUpper()&raquo;()&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;name&raquo;;<br>
+&nbsp;&nbsp;public&nbsp;&#65533;type.referenced.qualifiedName()&#65533;&nbsp;get&#65533;name.toFirstUpper()&#65533;()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&#65533;name&#65533;;<br>
 &nbsp;&nbsp;}&nbsp;<br>
-&laquo;ENDDEFINE&raquo;<br>
+&#65533;ENDDEFINE&#65533;<br>
 
 <br>
 
@@ -1997,7 +1997,7 @@ public&nbsp;class&nbsp;&laquo;name&raquo;&nbsp;{<br>
 					for one or more arguments. The general syntax is as follows:</p>
 <div class="literallayout">
 <p>
-<code class="code">&laquo;DEFINE&nbsp;name(ArgType1&nbsp;arg1,&nbsp;ArgType2&nbsp;arg2)&nbsp;FOR&nbsp;MainArgType&raquo;<br>
+<code class="code">&#65533;DEFINE&nbsp;name(ArgType1&nbsp;arg1,&nbsp;ArgType2&nbsp;arg2)&nbsp;FOR&nbsp;MainArgType&#65533;<br>
 
 <br>
 
@@ -2194,7 +2194,7 @@ Transition&nbsp;:<br>
 </code>
 </p>
 </div>
-<p>Martin uses this example throughout his book &ldquo;Domain-Specific Languages&rdquo; to implement external and internal DSLs using
+<p>Martin uses this example throughout his book &bdquo;Domain-Specific Languages&rdquo; to implement external and internal DSLs using
 				different technologies. Note, that none of his implmentations is nearly as readable and concise as the description in
 				Xtext&rsquo;s grammar language above. That is of course because the grammar language is designed to do just that, i.e. it is 
 				specific to the domain of language descriptions.</p>
@@ -2280,8 +2280,8 @@ Transition&nbsp;:<br>
 </div>
 <p>That statement means: generate an 
 						<span class="emphasis"><em>EPackage</em></span> with the 
-						<span class="emphasis"><em>name</em></span> &ldquo;secretcompartment&rdquo; and the 
-						<span class="emphasis"><em>nsURI</em></span> &ldquo;http://www.eclipse.org/secretcompartment&rdquo;. 
+						<span class="emphasis"><em>name</em></span> &bdquo;secretcompartment&rdquo; and the 
+						<span class="emphasis"><em>nsURI</em></span> &bdquo;http://www.eclipse.org/secretcompartment&rdquo;. 
 						Actually these are the properties that are required to create an 
 						<span class="emphasis"><em>EPackage</em></span>.
 						Xtext will then add 
@@ -2531,9 +2531,9 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 <p>It says that a token 
 						<span class="emphasis"><em>ID</em></span> starts with an optional 
 						<span class="emphasis"><em>'^'</em></span> character (caret), followed by a letter 
-						<span class="emphasis"><em>(&lsquo;a&rsquo;..&lsquo;z&rsquo;|&lsquo;A&rsquo;..&lsquo;Z&rsquo;)</em></span> 
-						or underscore (&lsquo;_&rsquo;) followed by any number of letters, underscores and numbers 
-						<span class="emphasis"><em>(&lsquo;0&rsquo;..&lsquo;9&rsquo;)</em></span>. 
+						<span class="emphasis"><em>(&sbquo;a&rsquo;..&sbquo;z&rsquo;|&sbquo;A&rsquo;..&sbquo;Z&rsquo;)</em></span> 
+						or underscore (&sbquo;_&rsquo;) followed by any number of letters, underscores and numbers 
+						<span class="emphasis"><em>(&sbquo;0&rsquo;..&sbquo;9&rsquo;)</em></span>. 
 					</p>
 <p>The caret is used to escape an identifier for cases where there are conflicts with keywords. It is removed 
 						by the 
@@ -2595,7 +2595,7 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java?root=Modeling_Project&view=co" target="_new">IValueConverterService</a> (cf. 
 
 							<a class="link" href="#valueconverter" title="Value Converter">value converters</a>). The value converter is also the point where you can remove things 
-							like quotes from string literals or the caret (&lsquo;^&rsquo;) from identifiers. Its implementation needs to be registered 
+							like quotes from string literals or the caret (&sbquo;^&rsquo;) from identifiers. Its implementation needs to be registered 
 							as a service (cf. 
 							<a class="link" href="#dependencyInjection" title="Dependency Injection in Xtext with Google Guice">Service Framework</a>).
 						</p>
@@ -2610,7 +2610,7 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 </div>
 </div>
 </div>
-<p>Token rules are described using &ldquo;Extended Backus-Naur Form&rdquo;-like (EBNF) expressions. The different expressions 
+<p>Token rules are described using &bdquo;Extended Backus-Naur Form&rdquo;-like (EBNF) expressions. The different expressions 
 						are described in the following. The one thing all of these expressions have in common is the cardinality operator.
 						There are four different possible cardinalities</p>
 <div class="orderedlist">
@@ -2656,7 +2656,7 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 </code>
 </p>
 </div>
-<p>The question mark sets the cardinality to &ldquo;none or one&rdquo; (i.e. optional) like explained above.</p>
+<p>The question mark sets the cardinality to &bdquo;none or one&rdquo; (i.e. optional) like explained above.</p>
 <p>Note that a keyword can have any length and contain arbitrary characters. </p>
 <p>The following standard Java notations for special characters are allowed: 
 							<span class="emphasis"><em>\n</em></span>, 
@@ -2677,7 +2677,7 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 </div>
 </div>
 </div>
-<p>A character range can be declared using the &lsquo;..&rsquo; operator.</p>
+<p>A character range can be declared using the &sbquo;..&rsquo; operator.</p>
 <p>Example:</p>
 <div class="literallayout">
 <p>
@@ -2714,7 +2714,7 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 </code>
 </p>
 </div>
-<p>The rule above would allow expressions like &lsquo;foo&rsquo;, &lsquo;f0o&rsquo; or even &lsquo;f\no&rsquo;.</p>
+<p>The rule above would allow expressions like &sbquo;foo&rsquo;, &sbquo;f0o&rsquo; or even &sbquo;f\no&rsquo;.</p>
 </div>
 <div class="section" title="Until Token">
 <div class="titlepage">
@@ -2795,7 +2795,7 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 </code>
 </p>
 </div>
-<p>That is a WS can be made of one or more whitespace characters (including &lsquo; &rsquo;, '
+<p>That is a WS can be made of one or more whitespace characters (including &sbquo; &rsquo;, '
 							<span class="emphasis"><em>\t</em></span>', '
 							<span class="emphasis"><em>\r</em></span>', '
 							<span class="emphasis"><em>\n</em></span>').
@@ -3219,11 +3219,11 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 							<span class="emphasis"><em>EObject</em></span> to be returned is created lazily when the first assignment occurs or 
 							when a simple action is evaluated. There is another way one can set the 
 							<span class="emphasis"><em>EObject</em></span> to be returned, which we call 
-							an &ldquo;unassigned rule call&rdquo;.
+							an &bdquo;unassigned rule call&rdquo;.
 						</p>
 <p>Unassigned rule calls (the name suggests it) are rule calls to other parser rules, which are not used within an 
 							assignment. If there is no feature the returned value shall be assigned to, the value is assigned to the 
-							&ldquo;to-be-returned&rdquo; result of the calling rule.</p>
+&bdquo;							to-be-returned&rdquo; result of the calling rule.</p>
 <p>With unassigned rule calls one can, for instance, create rules which just dispatch between several other rules:</p>
 <div class="literallayout">
 <p>
@@ -3287,7 +3287,7 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 <p>LL-parsing has some significant advantages over LR algorithms. The most important ones for Xtext are, that the generated code is much simpler to understand and debug and that it is easier to recover from errors. Especially ANTLR has a very nice generic error recovery mechanism. This allows to construct an AST even if there are syntactic errors in the text. You wouldn&rsquo;t get any of the nice IDE features as soon as there is one little error, if we hadn&rsquo;t error recovery.</p>
 <p>However, LL also has some drawbacks. The most important one is that it does not allow left recursive grammars.
 							For instance, the following is not allowed in LL-based grammars, because 
-							<span class="emphasis"><em>Expression &lsquo;+&rsquo; Expression</em></span> is left recursive:
+							<span class="emphasis"><em>Expression &sbquo;+&rsquo; Expression</em></span> is left recursive:
 						</p>
 <div class="literallayout">
 <p>
@@ -3302,7 +3302,7 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 </code>
 </p>
 </div>
-<p>Instead one has to rewrite such things by &ldquo;left-factoring&rdquo; it:</p>
+<p>Instead one has to rewrite such things by &bdquo;left-factoring&rdquo; it:</p>
 <div class="literallayout">
 <p>
 <code class="code">Expression&nbsp;:<br>
@@ -3431,7 +3431,7 @@ Fullname:&nbsp;<br>
 </code>
 </p>
 </div>
-<p>The sample rule &ldquo;Person&rdquo; defines multiline comments (_ML_COMMENT_), single-line comments (_SL_COMMENT_), and whitespace (
+<p>The sample rule &bdquo;Person&rdquo; defines multiline comments (_ML_COMMENT_), single-line comments (_SL_COMMENT_), and whitespace (
 					<span class="emphasis"><em>WS</em></span>) to be allowed between the 
 					<span class="emphasis"><em>Fullname</em></span> and the 
 					<span class="emphasis"><em>age</em></span>. Because the rule 
@@ -3480,7 +3480,7 @@ Fullname:&nbsp;<br>
 </li>
 </ol>
 </div>
-<p>If you, for instance, want to define a rule to consume Java-like qualified names (e.g. &ldquo;foo.bar.Baz&rdquo;)
+<p>If you, for instance, want to define a rule to consume Java-like qualified names (e.g. &bdquo;foo.bar.Baz&rdquo;)
 					you could write:</p>
 <div class="literallayout">
 <p>
@@ -3493,13 +3493,12 @@ Fullname:&nbsp;<br>
 </code>
 </p>
 </div>
-<p>This looks similar to the terminal rule we&rsquo;ve defined above in order to explain rule calls.
-					However, the difference is that because it is a parser rule and therefore only valid in certain contexts, it won&rsquo;t conflict with the rule 
+<p>In contrast to a terminal rule this is only valid in certain contexts, i.e. it won&rsquo;t conflict with the rule 
 					<span class="emphasis"><em>ID</em></span>.
 					If you had defined it as a terminal rule, it would possibly hide the 
 					<span class="emphasis"><em>ID</em></span> rule.
 				</p>
-<p>In addition when this has been defined as a data type rule, it is allowed to use hidden tokens (e.g. &ldquo;/* comment **/&rdquo;) between the IDs and dots (e.g. 
+<p>In addition when this has been defined as a data type rule, it is allowed to use hidden tokens (e.g. &bdquo;/* comment **/&rdquo;) between the IDs and dots (e.g. 
 					<span class="emphasis"><em>foo/* comment */. bar . Baz</em></span>).
 				</p>
 <p>Return types can be specified in the same way as in terminal rules:</p>
@@ -3583,7 +3582,7 @@ Fullname:&nbsp;<br>
 </p>
 </div>
 <p>the resulting value of the element 
-					<span class="emphasis"><em>Foo</em></span> will hold the enum value with the internal representation of &lsquo;0&rsquo; (zero). When generating the 
+					<span class="emphasis"><em>Foo</em></span> will hold the enum value with the internal representation of &sbquo;0&rsquo; (zero). When generating the 
 					<span class="emphasis"><em>EPackage</em></span> from your grammar this will be the first literal you define. As a workaround you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define an enum literal with an empty textual representation.
 				</p>
 <div class="literallayout">
@@ -3792,7 +3791,7 @@ Fullname:&nbsp;<br>
 					<span class="emphasis"><em>=</em></span>' operator and 0...* for assignments with the '
 					<span class="emphasis"><em>+=</em></span>' operator. 
 				</p>
-<p>Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of &ldquo;artificial&rdquo; parser rules, that are never called, e.g.</p>
+<p>Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of &bdquo;artificial&rdquo; parser rules, that are never called, e.g.</p>
 <div class="literallayout">
 <p>
 <code class="code">CommonSuperType:<br>
@@ -4187,11 +4186,11 @@ public&nbsp;class&nbsp;CreatePersons&nbsp;{<br>
 					into this workflow as well to make it convenient to instantiate actual workflows and components, but these ones are covered 
 					in depth in the appropriate 
 					<a class="link" href="#MWE2" title="Chapter&nbsp;6.&nbsp;MWE2">chapter</a>. The constructed objects are furthermore configured according to the declaration 
-					in the module, e.g. a second instance of Person will be created and added to the list of children of &ldquo;Grandpa&rdquo; while the third 
-					person &ndash; the class is inferred from the assigned feature &ndash; becomes a child of &ldquo;Father&rdquo;. All three instances will have 
+					in the module, e.g. a second instance of Person will be created and added to the list of children of &bdquo;Grandpa&rdquo; while the third 
+					person &ndash; the class is inferred from the assigned feature &ndash; becomes a child of &bdquo;Father&rdquo;. All three instances will have 
 					their respective 
 					<span class="emphasis"><em>name</em></span> assigned via a reflective invocation 
-					<span class="emphasis"><em>setName</em></span>. If one wants to add another child to &ldquo;Father&rdquo;, she
+					<span class="emphasis"><em>setName</em></span>. If one wants to add another child to &bdquo;Father&rdquo;, she
 					can simply repeat the child assignment:
 				</p>
 <div class="literallayout">
@@ -4726,7 +4725,7 @@ Workflow&nbsp;{<br>
 </div>
 <p>respectively.</p>
 <p>The last binding method provided by Xtext allows to do anything you can do with Guice&rsquo;s binding API, since it allows you to 
-					use it directly. If your method&rsquo;s name starts with the name &lsquo;configure&rsquo;, has a return type 
+					use it directly. If your method&rsquo;s name starts with the name &sbquo;configure&rsquo;, has a return type 
 					<span class="emphasis"><em>void</em></span> and accepts one argument of 
 					type 
 					<span class="emphasis"><em>Binder</em></span>
@@ -5052,7 +5051,7 @@ Workflow&nbsp;{<br>
 </ol>
 </div>
 <p>The typical use cases for the concrete syntax validator are validation in non-Xtext-editors that, however, use an 
-						<span class="emphasis"><em>XtextResource</em></span>. This is, for example, the case when combining GMF and Xtext. Another use case is when the semantic model is modified &ldquo;manually&rdquo; (not by the parser) and then serialized again. Since it is very difficult for the serializer to provide 
+						<span class="emphasis"><em>XtextResource</em></span>. This is, for example, the case when combining GMF and Xtext. Another use case is when the semantic model is modified &bdquo;manually&rdquo; (not by the parser) and then serialized again. Since it is very difficult for the serializer to provide 
 						<a class="link" href="#parsetreeconstructor" title="Parse Tree Constructor">meaningful error messages</a>, the concrete syntax validator is executed by default before serialization. A textual Xtext editor itself, however, is 
 						<span class="emphasis"><em>not</em></span> a valid use case. Here, the parser ensures that all syntactical constraints are met. Therefore, there is no value in additionally running the concrete syntax validator.  
 					</p>
@@ -5198,7 +5197,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;ConcreteSyntaxEValidator&gt;&nbsp;<br>
 </code>
 </p>
 </div>
-<p>After regenerating your language artifacts you will find three new files &ldquo;YourLanguageChecks.chk&rdquo;, &ldquo;YourLanguageFastChecks.chk&rdquo; and &ldquo;YourLanguageExpensiveChecks.chk&rdquo; in the 
+<p>After regenerating your language artifacts you will find three new files &bdquo;YourLanguageChecks.chk&rdquo;, &bdquo;YourLanguageFastChecks.chk&rdquo; and &bdquo;YourLanguageExpensiveChecks.chk&rdquo; in the 
 					<span class="emphasis"><em>src/</em></span> folder in the sub-package 
 					<span class="emphasis"><em>validation</em></span>.  The checks in these files will be executed when saving a file, while typing (FastChecks) or when triggering the validation explicitly (ExpensiveChecks). When using Check the example of the previous chapter could be written like this.
 				</p>
@@ -5394,7 +5393,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;ConcreteSyntaxEValidator&gt;&nbsp;<br>
 							<span class="emphasis"><em>error()</em></span> and 
 							<span class="emphasis"><em>warning()</em></span>-methods which help to create the needed 
 							<span class="emphasis"><em>DiagnosticPredicate</em></span>. Example: 
-							<span class="emphasis"><em>assertAll(error(123), warning(&ldquo;some part of the message&rdquo;))</em></span>. 
+							<span class="emphasis"><em>assertAll(error(123), warning(&bdquo;some part of the message&rdquo;))</em></span>. 
 						</p>
 </li>
 <li class="listitem">
@@ -5731,7 +5730,7 @@ end<br>
 <p>There are also two different default implementations of 
 						<span class="emphasis"><em>IQualifiedNameProvider</em></span>. Both work by looking 
 						up an 
-						<span class="emphasis"><em>EAttribute</em></span> &lsquo;name&rsquo;. The 
+						<span class="emphasis"><em>EAttribute</em></span> &sbquo;name&rsquo;. The 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/SimpleNameProvider.java?root=Modeling_Project&view=co" target="_new">SimpleNameProvider</a> 
 						simply returns the plain value, while the 
 
@@ -5863,7 +5862,7 @@ Import&nbsp;:&nbsp;<br>
 						<span class="emphasis"><em>IGlobalScopeProvider</em></span> by the means of 
 						<a class="link" href="#dependencyInjection" title="Dependency Injection in Xtext with Google Guice">Guice</a>. That implementation looks up any 
 
-						<span class="emphasis"><em>EAttributes</em></span> named &lsquo;importURI&rsquo; in your model and interprets their values as URIs that point to imported
+						<span class="emphasis"><em>EAttributes</em></span> named &sbquo;importURI&rsquo; in your model and interprets their values as URIs that point to imported
 						resources. That is it adds the corresponding resources to the current resource&rsquo;s resource set. In 
 						addition the scope provider uses the 
 						<a class="link" href="#resourcedescriptions" title="Resource and EObject Descriptions ( IResourceDescription, IEObjectDescription)">
@@ -5911,7 +5910,7 @@ Import&nbsp;:&nbsp;<br>
 						by most of our users. The available tooling provided by JDT and PDE to configure the classpath adds 
 						even more value. However, it is just a default: You can reuse the infrastructure without using Java 
 						and independent from the JDT.</p>
-<p>In order to know what is available in the &ldquo;world&rdquo; a global scope provider which relies on external 
+<p>In order to know what is available in the &bdquo;world&rdquo; a global scope provider which relies on external 
 						configuration needs to read that configuration in and be able to find all candidates for a certain 
 
 						<span class="emphasis"><em>EReference</em></span>. If you don&rsquo;t want to force users to have a folder and file name structure reflecting 
@@ -6391,7 +6390,7 @@ IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;ERefer
 <code class="code">FowlerDslQualifiedNameProvider&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;DefaultDeclarativeQualifiedNameProvider&nbsp;{<br>
 &nbsp;&nbsp;public&nbsp;String&nbsp;qualifiedName(Transition&nbsp;t)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;if(t.getEvent()&nbsp;==&nbsp;null&nbsp;||&nbsp;!(t.eContainer()&nbsp;instanceof&nbsp;State))&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if(t.getEvent()&nbsp;==&nbsp;null&nbsp;||&#65533;!(t.eContainer()&nbsp;instanceof&nbsp;State))&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;((State)t.eContainer()).getName()&nbsp;+&nbsp;"."&nbsp;t.getEvent().getName();<br>
@@ -6415,7 +6414,7 @@ IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;ERefer
 </div>
 <p>The 
 						<span class="emphasis"><em>ImportedNamespaceAwareLocalScopeProvider</em></span> looks up 
-						<span class="emphasis"><em>EAttributes</em></span> with name &lsquo;importNamespace&rsquo; and 
+						<span class="emphasis"><em>EAttributes</em></span> with name &sbquo;importNamespace&rsquo; and 
 						interprets them as import statements. By default qualified names with or without a wildcard at the end 
 						are supported. For an import of a qualified name the simple name is made available as we know from e.g. 
 						Java, where
@@ -6427,7 +6426,7 @@ IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;ERefer
 </code>
 </p>
 </div>
-<p>makes it possible to refer to &lsquo;java.util.Set&rsquo; by its simple name &lsquo;Set&rsquo;.
+<p>makes it possible to refer to &sbquo;java.util.Set&rsquo; by its simple name &sbquo;Set&rsquo;.
 						Contrary to Java the import is not active for the whole file but only for the namespace it is declared 
 						in and its child namespaces. That is why you can write the following in the example DSL:</p>
 <div class="literallayout">
@@ -7150,13 +7149,13 @@ terminal&nbsp;Plural:&nbsp;<br>
 <p>
 								
 <span class="emphasis"><em>after(ele)</em></span>: The instruction is applied after the grammar element 
-								<span class="emphasis"><em>ele</em></span> has been matched. For example, if your grammar uses the keyword &ldquo;;&rdquo; to end lines, this can instruct the formatter to insert a line break after the semicolon.  
+								<span class="emphasis"><em>ele</em></span> has been matched. For example, if your grammar uses the keyword &bdquo;;&rdquo; to end lines, this can instruct the formatter to insert a line break after the semicolon.  
 							</p>
 </li>
 <li class="listitem">
 <p>
 								
-<span class="emphasis"><em>before(ele)</em></span>: The instruction is executed before the matched element. For example, if your grammar contains lists which separate their values with the keyword &ldquo;,&rdquo;, you can instruct the formatter to suppress the whitespace before the comma.
+<span class="emphasis"><em>before(ele)</em></span>: The instruction is executed before the matched element. For example, if your grammar contains lists which separate their values with the keyword &bdquo;,&rdquo;, you can instruct the formatter to suppress the whitespace before the comma.
 							</p>
 </li>
 <li class="listitem">
@@ -7210,7 +7209,7 @@ terminal&nbsp;Plural:&nbsp;<br>
 						and alternatives. The semantic of 
 						<span class="emphasis"><em>before(ele)</em></span>, 
 						<span class="emphasis"><em>after(ele)</em></span>, etc. for rule calls and parser rules is 
-						identical to when the parser would &ldquo;pass&rdquo; this part of the grammar. The stack of called rules is taken 
+						identical to when the parser would &bdquo;pass&rdquo; this part of the grammar. The stack of called rules is taken 
 						into account. The following abstract elements can 
 						<span class="bold"><strong>not</strong></span> have assigned formatting instructions:
 					</p>
@@ -7323,8 +7322,8 @@ terminal&nbsp;Plural:&nbsp;<br>
 <p>
 								
 <span class="emphasis"><em>findKeywordPairs(String leftKw, String rightKw)</em></span>: returns tuples of keywords from the same grammar rule. Pairs are matched nested and sequentially.  Example: for 
-								<span class="emphasis"><em>Rule: &lsquo;(&rsquo; name=ID (&lsquo;(&rsquo; foo=ID &lsquo;)&rsquo;) &lsquo;)&rsquo; | &lsquo;(&rsquo; bar=ID ')'</em></span> 
-								<span class="emphasis"><em>findKeywordPairs(&ldquo;(&rdquo;, &ldquo;)&rdquo;)</em></span> returns three pairs.
+								<span class="emphasis"><em>Rule: &sbquo;(&rsquo; name=ID (&sbquo;(&rsquo; foo=ID &sbquo;)&rsquo;) &sbquo;)&rsquo; | &sbquo;(&rsquo; bar=ID ')'</em></span> 
+								<span class="emphasis"><em>findKeywordPairs(&bdquo;(&rdquo;, &bdquo;)&rdquo;)</em></span> returns three pairs.
 							</p>
 </li>
 </ul>
@@ -7434,7 +7433,7 @@ terminal&nbsp;Plural:&nbsp;<br>
 				
 <span class="emphasis"><em>Encoding</em></span>, AKA 
 				<span class="emphasis"><em>character set</em></span>, describes the way characters are encoded into bytes and vice versa. 
-				Famous standard encodings are &ldquo;UTF-8&rdquo; or &ldquo;ISO-8859-1&rdquo;. The list of available encodings can be determined
+				Famous standard encodings are &bdquo;UTF-8&rdquo; or &bdquo;ISO-8859-1&rdquo;. The list of available encodings can be determined
 				by calling 
 				<span class="emphasis"><em>java.nio.Charset.availableCharsets()</em></span>. There is also a list of encodings and their 
 				canonical Java names in the 
@@ -7613,7 +7612,7 @@ myXtextResource.save(options);<br>
 </div>
 </div>
 </div>
-<p>The source code of the Xtext framework itself is completely encoded in &ldquo;ISO 8859-1&rdquo;, which is necessary 
+<p>The source code of the Xtext framework itself is completely encoded in &bdquo;ISO 8859-1&rdquo;, which is necessary 
 					to make the Xpand templates work everywhere (they use french quotation markup). That encoding is hard 
 					coded into the Xtext generator code. You are likely never going to change that. </p>
 </div>
@@ -8422,7 +8421,7 @@ SampleClass&nbsp;auto-inject&nbsp;{<br>
 				identifiers. A valid ID-segment in MWE2 starts with a letter or an 
 				underscore and is followed by any number of letters, numbers or underscores.
 				An identifier is composed from one or more segments which are delimited
-				by a &lsquo;.&rsquo; dot.</p>
+				by a &sbquo;.&rsquo; dot.</p>
 <div class="literallayout">
 <p>
 <code class="code">Name:&nbsp;ID&nbsp;('.'&nbsp;ID)*;<br>
@@ -9004,7 +9003,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 <p>To provide a dummy proposal for the description of a model object, you may introduce a specialization 
-					of the generated method and implement it as follows. This will give &lsquo;Description for model #7&rsquo; for a 
+					of the generated method and implement it as follows. This will give &sbquo;Description for model #7&rsquo; for a 
 					model with the intAttribute '7'</p>
 <div class="literallayout">
 <p>
@@ -9353,7 +9352,7 @@ public&nbsp;void&nbsp;fixFeatureName(final&nbsp;Issue&nbsp;issue,&nbsp;<br>
 </p>
 </div>
 <p>yields the text 
-					<span class="emphasis"><em>public op name(): type</em></span> where the display text &lsquo;public&rsquo; is replaced with a drop 
+					<span class="emphasis"><em>public op name(): type</em></span> where the display text &sbquo;public&rsquo; is replaced with a drop 
 					down filled with the literal values as defined in the 
 					<span class="emphasis"><em>EEnum</em></span> 
 					<span class="emphasis"><em>Visibility</em></span>. Also, 
@@ -10717,7 +10716,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IProjectCreator&gt;&nbsp;bindIProjectCr
 <p>The superclass of EAttibutes and EReferences is 
 				<span class="emphasis"><em>EStructuralFeature</em></span> and allows to define a name and a cardinality by setting 
 				<span class="emphasis"><em>lowerBound</em></span> and 
-				<span class="emphasis"><em>upperBound</em></span>. Setting the latter to -1 means &lsquo;unbounded&rsquo;. 
+				<span class="emphasis"><em>upperBound</em></span>. Setting the latter to -1 means &sbquo;unbounded&rsquo;. 
 			</p>
 <p>The common supertype of EDataType and EClass is 
 				<span class="emphasis"><em>EClassifier</em></span>. An 
@@ -10963,7 +10962,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IProjectCreator&gt;&nbsp;bindIProjectCr
 				</p>
 <p>In the example, we started with writing an Xtext grammar for an entity language. As explained above, we preferred optional assignments and rather covered mandatory attributes in a validator. Into the bargain, we added some services to improve the EMF integration, namely a formatter, a fragment provider and an unloader. Then we let Xtext generate the language infrastructure. From the derived Ecore model and its generator model, we generated the edit plug-in (needed by GMF) and added some fancier icons. </p>
 <p>From the GMF side, we followed the default procedure and created a gmfgraph model, a gmftool model and a gmfmap model referring to the Ecore model derived form the Xtext grammar. We changed some settings in the gmfgen model derived by GMF from the gmfmap model, namely to enable printing and to enable validation and validation decorators. Then we generated the diagram editor.     </p>
-<p>Voil&agrave;, we now have a diagram editor that reads/writes its semantic model as text. Also note that the validator from Xtext is already integrated in the diagram editor via the menu bar. </p>
+<p>Voil&#65533;, we now have a diagram editor that reads/writes its semantic model as text. Also note that the validator from Xtext is already integrated in the diagram editor via the menu bar. </p>
 <div class="section" title="Stage 2: Calling the Xtext Parser to Parse GMF Labels">
 <div class="titlepage">
 <div>
@@ -11125,10 +11124,10 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IProjectCreator&gt;&nbsp;bindIProjectCr
 </div>
 <p>We changed the naming pattern for artifacts in the 
 					<span class="emphasis"><em>dsl.ui</em></span>-plug-in to match the OSGI conventions. The easiest way to update your existing projects is to apply a 
-					&ldquo;Rename Package&rdquo; refactoring on the packages in the 
+&bdquo;					Rename Package&rdquo; refactoring on the packages in the 
 					<span class="emphasis"><em>src</em></span>- and 
 					<span class="emphasis"><em>src-gen</em></span> folder 
-					<span class="bold"><strong>before</strong></span> you re-run the workflow that regenerates your language. Make sure you ticked &ldquo;Rename sub-packages&rdquo; in the dialog. It is error-prone to enable the search in non-Java files as this will perform incompatible changes in the manifest files. Furthermore, it is important to perform the rename operation in the 
+					<span class="bold"><strong>before</strong></span> you re-run the workflow that regenerates your language. Make sure you ticked &bdquo;Rename sub-packages&rdquo; in the dialog. It is error-prone to enable the search in non-Java files as this will perform incompatible changes in the manifest files. Furthermore, it is important to perform the rename operation in the 
 					<span class="emphasis"><em>src-gen</em></span> folder, too. This ensures that the references in your manually written code are properly updated.
 				</p>
 </div>

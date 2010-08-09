@@ -680,8 +680,7 @@ bc.. QualifiedName :
   ID ('.' ID)*
 ;
 
-p. This looks similar to the terminal rule we've defined above in order to explain rule calls.
-However, the difference is that because it is a parser rule and therefore only valid in certain contexts, it won't conflict with the rule _ID_.
+p. In contrast to a terminal rule this is only valid in certain contexts, i.e. it won't conflict with the rule _ID_.
 If you had defined it as a terminal rule, it would possibly hide the _ID_ rule.
 
 In addition when this has been defined as a data type rule, it is allowed to use hidden tokens (e.g. "/* comment **/") between the IDs and dots (e.g. _foo/* comment */. bar . Baz_).
