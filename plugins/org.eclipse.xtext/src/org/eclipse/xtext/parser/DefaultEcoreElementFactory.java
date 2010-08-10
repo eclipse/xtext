@@ -11,6 +11,7 @@ package org.eclipse.xtext.parser;
 import java.util.Collection;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -97,8 +98,13 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 			throw new IllegalArgumentException(object.eClass().getName() + "." + feature + " does not exist");
 		
 		try {
-			final Object tokenValue = getTokenValue(value, ruleName, node);
-			((Collection<Object>) object.eGet(structuralFeature)).add(tokenValue);
+			if (value instanceof EObject) {
+				// containment lists are unique per-se and the tokenValue was created just a sec ago
+				((BasicEList<EObject>) object.eGet(structuralFeature)).addUnique((EObject) value);
+			} else {
+				final Object tokenValue = getTokenValue(value, ruleName, node);
+				((Collection<Object>) object.eGet(structuralFeature)).add(tokenValue);
+			}
 		} catch(ValueConverterException e) {
 			throw e;
 		} catch(NullPointerException e) {

@@ -18,6 +18,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
@@ -99,11 +100,13 @@ public class EObjectDescriptionLookUp {
 		if (nameToObjects == null) {
 			synchronized (this) {
 				if (nameToObjects == null) {
-					this.nameToObjects = Multimaps.unmodifiableMultimap(Multimaps.index(allDescriptions, new Function<IEObjectDescription, String>() {
-						public String apply(IEObjectDescription from) {
-							return from.getName().toLowerCase();
-						}
-					}));
+					ArrayListMultimap<String, IEObjectDescription> newMap = new ArrayListMultimap<String, IEObjectDescription>(allDescriptions.size(), 1);
+					Multimaps.index(allDescriptions, new Function<IEObjectDescription, String>() {
+								public String apply(IEObjectDescription from) {
+									return from.getName().toLowerCase();
+								}
+							}, newMap);
+					this.nameToObjects = Multimaps.unmodifiableMultimap(newMap);
 				}
 			}
 		}

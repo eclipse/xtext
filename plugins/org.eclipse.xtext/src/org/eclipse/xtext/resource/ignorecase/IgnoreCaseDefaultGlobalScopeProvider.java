@@ -9,8 +9,11 @@ package org.eclipse.xtext.resource.ignorecase;
 
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.resource.IContainer;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
+
+import com.google.common.collect.Iterables;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -19,8 +22,12 @@ public class IgnoreCaseDefaultGlobalScopeProvider extends DefaultGlobalScopeProv
 
 	@Override
 	protected IScope createContainerScope(IScope parent, IContainer container, EReference reference) {
-		if (container instanceof IIgnoreCaseContainer)
+		if (container instanceof IIgnoreCaseContainer) {
+			Iterable<IResourceDescription> content = container.getResourceDescriptions();
+			if (Iterables.isEmpty(content))
+				return parent;
 			return new IgnoreCaseContainerBasedScope(parent, reference, (IIgnoreCaseContainer) container);
+		}
 		return super.createContainerScope(parent, container, reference);
 	}
 	

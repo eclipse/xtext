@@ -96,6 +96,9 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 	}
 
 	protected IScope createContainerScope(IScope parent, IContainer container, EReference reference) {
+		Iterable<IResourceDescription> content = container.getResourceDescriptions();
+		if (Iterables.isEmpty(content))
+			return parent;
 		return new ContainerBasedScope(parent, reference, container);
 	}
 

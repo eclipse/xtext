@@ -8,9 +8,9 @@
 package org.eclipse.xtext.util;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -70,27 +70,32 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 
 	public static class CacheAdapter extends EContentAdapter {
 		
-		private Map<Object, Object> values = new HashMap<Object, Object>() {
-			private static final long serialVersionUID = 362498820763181265L;
-			@Override
-			public void clear() {
-				if (isEmpty())
-					return;
-				super.clear();
-			}
-		};
+		private static final Object NULL = new Object();
+		
+		private Map<Object, Object> values = new ConcurrentHashMap<Object, Object>(500);
 
 		private Collection<Listener> listeners = Sets.newHashSet();
 		
 		private volatile boolean ignoreNotifications = false;
+		
+		private volatile boolean empty = true;
 
 		public void set(Object name, Object value) {
-			this.values.put(name, value);
+			empty = false;
+			if (value != null)
+				this.values.put(name, value);
+			else
+				this.values.put(name, NULL);
 		}
 
 		@SuppressWarnings("unchecked")
 		public <T> T get(Object name) {
-			return (T) this.values.get(name);
+			if (empty)
+				return null;
+			T result = (T) this.values.get(name);
+			if (result != NULL)
+				return result;
+			return null;
 		}
 		
 		public void addCacheListener(Listener listener) {
@@ -105,7 +110,10 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		public void notifyChanged(Notification notification) {
 			super.notifyChanged(notification);
 			if (!ignoreNotifications && isSemanticStateChange(notification)) {
-				values.clear();
+				if (!empty) {
+					values.clear();
+					empty = true;
+				}
 				Iterator<Listener> iter = listeners.iterator();
 				while(iter.hasNext()) {
 					Listener next = iter.next();
@@ -132,6 +140,7 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 			return ignoreNotifications;
 		}
 
+		@Deprecated
 		public <T> T get(Object key, Resource res, Provider<T> provider) {
 			// TODO Auto-generated method stub
 			return null;

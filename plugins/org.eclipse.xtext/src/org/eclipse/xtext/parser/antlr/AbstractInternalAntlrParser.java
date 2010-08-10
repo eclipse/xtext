@@ -12,7 +12,6 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -184,11 +183,11 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	private IUnorderedGroupHelper unorderedGroupHelper;
 	
 	private final Map<Token, List<CompositeNode>> deferredLookaheadMap = Maps.newHashMap();
-	private final Map<Token, LeafNode> token2NodeMap = new HashMap<Token, LeafNode>();
+	private final Map<Token, LeafNode> token2NodeMap = Maps.newHashMap();
 
 	protected AbstractInternalAntlrParser(TokenStream input) {
 		super(input);
-		allRules = new HashMap<String, AbstractRule>();
+		allRules = Maps.newHashMap();
 	}
 
 	protected void registerRules(Grammar grammar) {
@@ -249,7 +248,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	private String[] readableTokenNames = null;
 
 	public void setTokenTypeMap(Map<Integer, String> tokenTypeMap) {
-		antlrTypeToLexerName = new HashMap<Integer, String>();
+		antlrTypeToLexerName = Maps.newHashMap();
 		for(Entry<Integer, String> mapEntry: tokenTypeMap.entrySet()) {
 			String value = mapEntry.getValue();
 			if(TokenTool.isLexerRule(value)) {
@@ -586,7 +585,8 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	protected void resetLookahead() {
 		XtextTokenStream xtextTokenStream = (XtextTokenStream) input;
 		xtextTokenStream.resetLookahead();
-		token2NodeMap.clear();
+		if (!token2NodeMap.isEmpty())
+			token2NodeMap.clear();
 	}
 
 	protected void moveLookaheadInfo(CompositeNode source, CompositeNode target) {
