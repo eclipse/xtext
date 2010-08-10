@@ -15,7 +15,7 @@
 
 «DEFINE main FOR XtextProjectInfo»
 
-«FILE ".settings/org.eclipse.xtend.shared.ui.prefs"-»
+«FILE "../.settings/org.eclipse.xtend.shared.ui.prefs"-»
 eclipse.preferences.version=1
 metamodelContributor=org.eclipse.xtend.shared.ui.core.metamodel.jdt.javabean.JavaBeanMetamodelContributor
 project.specific.metamodel=true
