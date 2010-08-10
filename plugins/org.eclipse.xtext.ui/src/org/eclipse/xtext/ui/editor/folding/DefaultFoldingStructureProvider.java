@@ -80,6 +80,8 @@ public class DefaultFoldingStructureProvider implements IFoldingStructureProvide
 	 * @see org.eclipse.xtext.ui.editor.model.IXtextModelListener#modelChanged(org.eclipse.xtext.resource.XtextResource)
 	 */
 	public void modelChanged(XtextResource resource) {
+		if (resource == null)
+			return;
 		boolean existingSyntaxErrors = Iterables.any(resource.getErrors(), new Predicate<Diagnostic>() {
 			public boolean apply(Diagnostic diagnostic) {
 				return diagnostic instanceof XtextSyntaxDiagnostic;
