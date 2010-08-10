@@ -5,7 +5,6 @@ grammar InternalDomainmodel;
 
 options {
 	superClass=AbstractInternalContentAssistParser;
-	backtrack=true;
 	
 }
 
