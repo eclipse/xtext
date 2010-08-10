@@ -74,7 +74,7 @@ public abstract class AbstractXtextTests extends TestCase {
 	private HashMap<String, Object> extensionToServiceProviderMap;
 	private HashMap<String, Object> contentTypeIdentifierToServiceProviderMap;
 	private List<String> testGrammarPaths;
-
+	
 	static {
 		//EMF Standalone setup
 		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
@@ -151,6 +151,8 @@ public abstract class AbstractXtextTests extends TestCase {
 	}
 	
 	protected Injector getInjector() {
+		if (injector==null)
+			throw new IllegalStateException("No injector set. Did you forget to call something like 'with(new YourStadaloneSetup())'?");
 		return injector;
 	}
 
@@ -173,47 +175,47 @@ public abstract class AbstractXtextTests extends TestCase {
 	}
 
 	protected IParser getParser() {
-		return injector.getInstance(IParser.class);
+		return getInjector().getInstance(IParser.class);
 	}
 
 	protected IAntlrParser getAntlrParser() {
-		return injector.getInstance(IAntlrParser.class);
+		return getInjector().getInstance(IAntlrParser.class);
 	}
 
 	protected ILinkingService getLinkingService() {
-		return injector.getInstance(ILinkingService.class);
+		return getInjector().getInstance(ILinkingService.class);
 	}
 
 	protected IAstFactory getASTFactory() {
-		return injector.getInstance(IAstFactory.class);
+		return getInjector().getInstance(IAstFactory.class);
 	}
 
 	protected IGrammarAccess getGrammarAccess() {
-		return injector.getInstance(IGrammarAccess.class);
+		return getInjector().getInstance(IGrammarAccess.class);
 	}
 
 	protected IParseTreeConstructor getParseTreeConstructor() {
-		return injector.getInstance(IParseTreeConstructor.class);
+		return getInjector().getInstance(IParseTreeConstructor.class);
 	}
 
 	protected IResourceFactory getResourceFactory()  {
-		return injector.getInstance(IResourceFactory.class);
+		return getInjector().getInstance(IResourceFactory.class);
 	}
 
 	protected IValueConverterService getValueConverterService() {
-		return injector.getInstance(IValueConverterService.class);
+		return getInjector().getInstance(IValueConverterService.class);
 	}
 
 	protected Serializer getSerializer() {
-		return injector.getInstance(Serializer.class);
+		return getInjector().getInstance(Serializer.class);
 	}
 	
 	protected INodeModelFormatter getNodeModelFormatter() {
-		return injector.getInstance(INodeModelFormatter.class);
+		return getInjector().getInstance(INodeModelFormatter.class);
 	}
 
 	protected IScopeProvider getScopeProvider() {
-		return injector.getInstance(IScopeProvider.class);
+		return getInjector().getInstance(IScopeProvider.class);
 	}
 	
 	protected InputStream getAsStream(String model) {
@@ -260,7 +262,7 @@ public abstract class AbstractXtextTests extends TestCase {
 	}
 	
 	protected String getCurrentFileExtension() {
-		String instance = injector.getInstance(Key.get(String.class,Names.named(Constants.FILE_EXTENSIONS)));
+		String instance = getInjector().getInstance(Key.get(String.class,Names.named(Constants.FILE_EXTENSIONS)));
 		if (instance.indexOf(',')==-1)
 			return instance;
 		return instance.split(",")[0];
