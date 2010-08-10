@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.CrossReference;
@@ -40,7 +41,9 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.util.EcoreGenericsUtil;
+import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.SimpleCache;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
@@ -75,19 +78,26 @@ public class LazyLinker extends AbstractCleaningLinker {
 	
 	@Inject
 	private IGrammarAccess grammarAccess;
+	
+	@Inject
+	private OnChangeEvictingCache cache;
 
 	@Override
-	protected void doLinkModel(EObject model, IDiagnosticConsumer consumer) {
-		Multimap<EStructuralFeature.Setting, AbstractNode> settingsToLink = Multimaps.newArrayListMultimap();
-		LinkingDiagnosticProducer producer = new LinkingDiagnosticProducer(consumer);
-		installProxies(model, producer, settingsToLink);
-		TreeIterator<EObject> iterator = model.eAllContents();
-		while (iterator.hasNext()) {
-			EObject eObject = iterator.next();
-			installProxies(eObject, producer, settingsToLink);
-		}
+	protected void doLinkModel(final EObject model, IDiagnosticConsumer consumer) {
+		final Multimap<EStructuralFeature.Setting, AbstractNode> settingsToLink = Multimaps.newArrayListMultimap();
+		final LinkingDiagnosticProducer producer = new LinkingDiagnosticProducer(consumer);
+		cache.execWithoutCacheClear(model.eResource(), new IUnitOfWork.Void<Resource>() {
+			@Override
+			public void process(Resource state) throws Exception {
+				installProxies(model, producer, settingsToLink);
+				TreeIterator<EObject> iterator = model.eAllContents();
+				while (iterator.hasNext()) {
+					EObject eObject = iterator.next();
+					installProxies(eObject, producer, settingsToLink);
+				}
+			}
+		});
 		installQueuedLinks(settingsToLink);
-		settingsToLink = null;
 	}
 
 	protected void installProxies(EObject obj, IDiagnosticProducer producer,
