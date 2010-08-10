@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchListener;
@@ -63,6 +64,7 @@ public class EMFBasedPersister implements PersistableResourceDescriptionsImpl.Pe
 					Resource resource = createResource();
 					if (resource != null) {
 						resource.load(null);
+						EcoreUtil.resolveAll(resource);
 						return loadFromResource(resource);
 					}
 					if (workspace != null && workspace.isAutoBuilding()) {

@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.builderState;
 
-import org.eclipse.emf.common.util.WrappedException;
-
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -19,20 +16,6 @@ public class BinaryResourceBasedPersisterTest extends AbstractEMFBasedPersisterT
 	protected void setUp() throws Exception {
 		super.setUp();
 		persister.setFactory(new BufferedBinaryResourceFactory());
-	}
-	
-	@Override
-	public void testSaveAndReloadTwice() throws Exception {
-		try {
-			super.testSaveAndReloadTwice();
-			fail("Expected ArrayStoreException");
-		} catch(WrappedException exc) {
-			try {
-				throw (Exception)exc.getCause();
-			} catch (ArrayStoreException e) {
-				// expected
-			}
-		}
 	}
 	
 }
