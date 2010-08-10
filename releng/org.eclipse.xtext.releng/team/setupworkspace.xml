@@ -1,0 +1,6 @@
+<project default="all" name="org.eclipse.xtext.releng/setup" basedir="..">
+	<property name="releng.dir" value="${basedir}/../org.eclipse.emf.mwe.releng"/>
+	<property name="copysettings.includes" value=".*.xtext.*"/>
+	
+	<import file="${releng.dir}/team/tasks.xml"/>
+</project>
