@@ -469,7 +469,7 @@ bc.. FowlerDslQualifiedNameProvider
 
 h4. Importing Namespaces
 
-The _ImportedNamespaceAwareLocalScopeProvider_ looks up _EAttributes_ with name 'importNamespace' and 
+The _ImportedNamespaceAwareLocalScopeProvider_ looks up _EAttributes_ with name 'importedNamespace' and 
 interprets them as import statements. By default qualified names with or without a wildcard at the end 
 are supported. For an import of a qualified name the simple name is made available as we know from e.g. 
 Java, where
