@@ -85,7 +85,7 @@ public final class ToggleSLCommentAction extends TextEditorAction {
 		Shell shell= editor.getSite().getShell();
 		if (!fOperationTarget.canDoOperation(operationCode)) {
 			if (shell != null)
-				MessageDialog.openError(shell, Messages.ToggleSLCommentAction_0, "ToggleComment_error_message=An error occurred while toggling comments."); //$NON-NLS-2$
+				MessageDialog.openError(shell, Messages.ToggleSLCommentAction_0, Messages.ToggleSLCommentAction_1); //$NON-NLS-2$
 			return;
 		}
 
