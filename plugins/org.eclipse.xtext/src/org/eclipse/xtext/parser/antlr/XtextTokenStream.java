@@ -68,6 +68,13 @@ public class XtextTokenStream extends CommonTokenStream {
 				tok.setChannel(hiddenTokens.get(tok.getType()) ? Token.HIDDEN_CHANNEL : Token.DEFAULT_CHANNEL);
 			return tok;
 		}
+		
+		@Override
+		public void clear() {
+			if (isEmpty())
+				return;
+			super.clear();
+		}
 	}
 
 	public interface HiddenTokens {
@@ -187,7 +194,8 @@ public class XtextTokenStream extends CommonTokenStream {
 	}
 
 	public void resetLookahead() {
-		lookaheadTokens.clear();
+		if (!lookaheadTokens.isEmpty())
+			lookaheadTokens.clear();
 	}
 
 	public String getLexerErrorMessage(Token invalidToken) {

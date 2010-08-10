@@ -20,6 +20,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -45,6 +46,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ReflectionUtil;
+
+import com.google.common.base.ReferenceType;
+import com.google.common.collect.ReferenceMap;
 
 /**
  * @author Heiko Behrens
@@ -498,14 +502,23 @@ public class EcoreUtil2 extends EcoreUtil {
 	public static String toExternalForm(EReference ref) {
 		if (ref == null)
 			return null;
-		EClass class1 = ref.getEContainingClass();
-		if (class1 == null) // some references may be contained in an EAnnotation
-			return EcoreUtil.getURI(ref).toString();
-		StringBuffer buff = new StringBuffer(class1.getEPackage().getNsURI());
-		buff.append(delim).append(class1.getName());
-		buff.append(delim).append(class1.getFeatureID(ref));
-		return buff.toString();
+		String result = exernalFormCache.get(ref);
+		if (result == null) {
+			EClass class1 = ref.getEContainingClass();
+			if (class1 == null) // some references may be contained in an EAnnotation
+				result = EcoreUtil.getURI(ref).toString();
+			else {
+				StringBuilder buff = new StringBuilder(class1.getEPackage().getNsURI());
+				buff.append(delim).append(class1.getName());
+				buff.append(delim).append(class1.getFeatureID(ref));
+				result = buff.toString();
+			}
+			exernalFormCache.put(ref, result);
+		}
+		return result;
 	}
+
+	private static Map<EReference, String> exernalFormCache = new ReferenceMap<EReference, String>(ReferenceType.WEAK, ReferenceType.STRONG);
 
 	/**
 	 * looks up the EReference in the passed registry, given the external form. if registry == null this

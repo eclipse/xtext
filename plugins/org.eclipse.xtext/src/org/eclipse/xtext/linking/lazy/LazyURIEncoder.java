@@ -8,12 +8,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking.lazy;
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
@@ -40,11 +41,31 @@ public class LazyURIEncoder {
 	 * @return
 	 */
 	public String encode(EObject obj, EReference ref, AbstractNode node) {
-		StringBuilder fragment = new StringBuilder(40).append(XTEXT_LINK).append(SEP);
-		fragment.append(obj.eResource().getURIFragment(obj)).append(SEP);
-		fragment.append(EcoreUtil2.toExternalForm(ref)).append(SEP);
+		StringBuilder fragment = new StringBuilder(20).append(XTEXT_LINK).append(SEP);
+		appendShortFragment(obj, fragment);
+		fragment.append(SEP);
+		fragment.append(toShortExternalForm(obj.eClass(), ref)).append(SEP);
 		getRelativePath(fragment, NodeUtil.getNodeAdapter(obj).getParserNode(), node);
 		return fragment.toString();
+	}
+	
+	public void appendShortFragment(EObject obj, StringBuilder target) {
+		EReference containmentFeature = obj.eContainmentFeature();
+		if (containmentFeature == null) {
+			target.append(obj.eResource().getContents().indexOf(obj));
+		} else {
+			EObject container = obj.eContainer();
+			appendShortFragment(container, target);
+			target.append('.').append(container.eClass().getFeatureID(containmentFeature));
+			if (containmentFeature.isMany()) {
+				List<?> list = (List<?>) container.eGet(containmentFeature);
+				target.append('.').append(list.indexOf(obj));
+			}
+		}
+	}
+	
+	public String toShortExternalForm(EClass clazz, EReference ref) {
+		return Integer.toString(clazz.getFeatureID(ref));
 	}
 
 	/**
@@ -56,14 +77,37 @@ public class LazyURIEncoder {
 	 */
 	public Triple<EObject, EReference, AbstractNode> decode(Resource res, String uriFragment) {
 		String[] split = uriFragment.split(SEP);
-		EObject source = res.getEObject(split[1]);
-		Registry packageRegistry = res.getResourceSet().getPackageRegistry();
-		EReference ref = EcoreUtil2.getEReferenceFromExternalForm(packageRegistry,split[2]);
+		EObject source = resolveShortFragment(res, split[1]);
+		EReference ref = fromShortExternalForm(source.eClass(), split[2]);
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(source);
 		if (nodeAdapter==null)
 			throw new IllegalStateException("Couldn't resolve lazy link, because no node model is attached.");
 		AbstractNode text = getNode(nodeAdapter.getParserNode(), split[3]);
 		return Tuples.create(source, ref, text);
+	}
+	
+	public EObject resolveShortFragment(Resource res, String shortFragment) {
+		String[] split = shortFragment.split("\\.");
+		int contentsIdx = Integer.parseInt(split[0]);
+		EObject result = res.getContents().get(contentsIdx);
+		int splitIdx = 1;
+		while(splitIdx < split.length) {
+			int featureId = Integer.parseInt(split[splitIdx++]);
+			EReference reference = (EReference) result.eClass().getEStructuralFeature(featureId);
+			if (reference.isMany()) {
+				List<?> list = (List<?>) result.eGet(reference);
+				int listIdx = Integer.parseInt(split[splitIdx++]);
+				result = (EObject) list.get(listIdx);
+			} else {
+				result = (EObject) result.eGet(reference);
+			}
+		}
+		return result;
+	}
+	
+	public EReference fromShortExternalForm(EClass clazz, String shortForm) {
+		int featureId = Integer.parseInt(shortForm);
+		return (EReference) clazz.getEStructuralFeature(featureId);
 	}
 
 	/**

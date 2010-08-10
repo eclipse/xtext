@@ -88,7 +88,8 @@ public class SimpleCache<Key, Value> {
 	public void clear() {
 		try {
 			writeLock.lock();
-			content.clear();
+			if (!content.isEmpty())
+				content.clear();
 		} finally {
 			writeLock.unlock();
 		}

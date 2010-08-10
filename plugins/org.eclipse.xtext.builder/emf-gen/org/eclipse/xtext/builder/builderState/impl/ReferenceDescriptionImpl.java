@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ReferenceDescriptionImpl.java,v 1.2 2010/01/26 14:27:52 jkohnlein Exp $
+ * $Id: ReferenceDescriptionImpl.java,v 1.3 2010/08/10 16:05:35 szarnekow Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -211,22 +211,25 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getExternalFormOfEReference() {
+		if (this.externalFormOfEReference == null && this.reference != null)
+			this.externalFormOfEReference = EcoreUtil2.toExternalForm(reference);
 		return externalFormOfEReference;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setExternalFormOfEReference(String newExternalFormOfEReference) {
 		String oldExternalFormOfEReference = externalFormOfEReference;
 		externalFormOfEReference = newExternalFormOfEReference;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BuilderStatePackage.REFERENCE_DESCRIPTION__EXTERNAL_FORM_OF_EREFERENCE, oldExternalFormOfEReference, externalFormOfEReference));
+		this.reference = null;
 	}
 
 	/**
@@ -372,13 +375,13 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 	public EReference getEReference() {
 		if (reference==null) {
 			reference = EcoreUtil2.getEReferenceFromExternalForm(EPackage.Registry.INSTANCE, getExternalFormOfEReference());
+			externalFormOfEReference = null;
 		}
 		return reference;
 	}
 	
 	public void setReference(EReference reference) {
 		this.reference = reference;
-		this.setExternalFormOfEReference(EcoreUtil2.toExternalForm(reference));
 	}
 
 } //ReferenceDescriptionImpl
