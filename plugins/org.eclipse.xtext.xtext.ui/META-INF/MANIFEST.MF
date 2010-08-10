@@ -21,7 +21,8 @@ Require-Bundle: org.eclipse.xtext.ui;bundle-version="1.0.1",
  org.eclipse.emf.mwe2.language;bundle-version="1.0.1";resolution:=optional,
  org.eclipse.emf.mwe2.launch;bundle-version="1.0.1";resolution:=optional,
  org.eclipse.emf.mwe2.language.ui;bundle-version="1.0.1";resolution:=optional,
- org.eclipse.pde.ui;bundle-version="3.5.0";resolution:=optional
+ org.eclipse.pde.ui;bundle-version="3.5.0";resolution:=optional,
+ org.eclipse.xtext.builder;bundle-version="1.0.1"
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
