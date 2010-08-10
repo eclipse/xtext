@@ -56,10 +56,10 @@ Workflow {
 
 			// the following fragment generates an Antlr parser -->
 			fragment = parser.antlr.XtextAntlrGeneratorFragment {
-				options = {
-					backtrack = true
-					classSplitting = true
-				}
+//				options = {
+//					backtrack = true
+//					classSplitting = true
+//				}
 			}
 
 			// java-based API for validation 
@@ -83,10 +83,10 @@ Workflow {
 			// java-based API for content assistance 
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
 			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {
-				options = {
-					backtrack = true
-					classSplitting = true
-				}
+//				options = {
+//					backtrack = true
+//					classSplitting = true
+//				}
 			}
 
 			fragment = builder.BuilderIntegrationFragment {}
