@@ -8,9 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree;
 
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.parsetree.impl.ParsetreeUtil;
@@ -37,8 +40,8 @@ public class NodeContentAdapter extends EContentAdapter {
 
 	public void addToNode(final CompositeNode node) {
 		if (node != null) {
-			node.eAdapters().add(this);
 			updateCompositeNode(node, -1, createWorkingNodeInfo());
+			node.eAdapters().add(this);
 		}
 	}
 	
@@ -162,6 +165,30 @@ public class NodeContentAdapter extends EContentAdapter {
 	@Override
 	public boolean isAdapterForType(Object type) {
 		return type == NodeContentAdapter.class;
+	}
+	
+	@Override
+	protected void setTarget(EObject target) {
+		basicSetTarget(target);
+		if (target instanceof CompositeNode) {
+			List<AbstractNode> children = ((CompositeNode) target).getChildren();
+			for(int i = 0; i < children.size(); i++) {
+				AbstractNode child = children.get(i);
+				addAdapter(child);
+			}
+		}
+	}
+	
+	@Override
+	protected void unsetTarget(EObject target) {
+		basicUnsetTarget(target);
+		if (target instanceof CompositeNode) {
+			List<AbstractNode> children = ((CompositeNode) target).getChildren();
+			for(int i = 0; i < children.size(); i++) {
+				AbstractNode child = children.get(i);
+				removeAdapter(child);
+			}
+		}
 	}
 	
 	/**

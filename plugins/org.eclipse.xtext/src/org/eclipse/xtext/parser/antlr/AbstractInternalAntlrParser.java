@@ -25,6 +25,7 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.WrappedException;
@@ -167,6 +168,8 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	private final Logger logger = Logger.getLogger(AbstractInternalAntlrParser.class);
 	
 	protected CompositeNode currentNode;
+	
+	private List<Notifier> allParseTreeElements = Lists.newArrayListWithExpectedSize(50);
 
 	protected IAstFactory factory;
 	
@@ -289,6 +292,8 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	
 	protected CompositeNode createCompositeNode(EObject grammarElement, CompositeNode parentNode) {
 		CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
+		compositeNode.eSetDeliver(false);
+		allParseTreeElements.add(compositeNode);
 		if (parentNode != null)
 			((BasicEList<AbstractNode>) parentNode.getChildren()).addUnique(compositeNode);
 		compositeNode.setGrammarElement(grammarElement);
@@ -298,6 +303,8 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	private void appendError(AbstractNode node) {
 		if (currentError != null) {
 			SyntaxError error = ParsetreeFactory.eINSTANCE.createSyntaxError();
+			error.eSetDeliver(false);
+			allParseTreeElements.add(error);
 			error.setMessage(currentError.getMessage());
 			error.setIssueCode(currentError.getIssueCode());
 			node.setSyntaxError(error);
@@ -307,12 +314,16 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 
 	private LeafNode createLeafNode(Token token, boolean isHidden) {
 		LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+		leafNode.eSetDeliver(false);
+		allParseTreeElements.add(leafNode);
 		leafNode.setText(token.getText());
 		leafNode.setHidden(isHidden);
 		if (isSemanticChannel(token))
 			appendError(leafNode);
 		if (token.getType() == Token.INVALID_TOKEN_TYPE) {
 			SyntaxError error = ParsetreeFactory.eINSTANCE.createSyntaxError();
+			error.eSetDeliver(false);
+			allParseTreeElements.add(error);
 			String lexerErrorMessage = ((XtextTokenStream) input).getLexerErrorMessage(token);
 			error.setMessage(lexerErrorMessage);
 			leafNode.setSyntaxError(error);
@@ -510,6 +521,9 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			try {
 				appendAllTokens();
 			} finally {
+				for(Notifier notifier: allParseTreeElements)
+					notifier.eSetDeliver(true);
+				allParseTreeElements = Lists.newArrayListWithExpectedSize(50);
 				result = new ParseResult(current, currentNode);
 			}
 		}
