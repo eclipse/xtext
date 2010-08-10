@@ -48,6 +48,7 @@ import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.TransformationDiagnosticsProducer;
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer;
@@ -72,7 +73,7 @@ public class XtextLinker extends Linker {
 	private IReferableElementsUnloader unloader;
 	
 	@Inject
-	private ModifyableCache cache;
+	private OnChangeEvictingCache cache;
 
 	public IScopeProvider getScopeProvider() {
 		return scopeProvider;
@@ -417,11 +418,11 @@ public class XtextLinker extends Linker {
 		return packageRemover;
 	}
 
-	public void setCache(ModifyableCache cache) {
+	public void setCache(OnChangeEvictingCache cache) {
 		this.cache = cache;
 	}
 
-	public ModifyableCache getCache() {
+	public OnChangeEvictingCache getCache() {
 		return cache;
 	}
 

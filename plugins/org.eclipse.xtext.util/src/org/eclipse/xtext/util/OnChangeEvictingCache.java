@@ -14,10 +14,12 @@ import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Provider;
@@ -31,11 +33,11 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		void onEvict(CacheAdapter cache);
 	}
 	
-	public <T> T get(Object key, Resource cache, Provider<T> provider) {
-		if(cache == null) {
+	public <T> T get(Object key, Resource resource, Provider<T> provider) {
+		if(resource == null) {
 			return provider.get();
 		}
-		CacheAdapter adapter = getOrCreate(cache);
+		CacheAdapter adapter = getOrCreate(resource);
 		T element = adapter.<T>get(key);
 		if (element==null) {
 			element = provider.get();
@@ -52,6 +54,19 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		}
 		return adapter;
 	}
+	
+	public <Result, Param extends Resource> Result execWithoutCacheClear(Param resource, IUnitOfWork<Result, Param> transaction) throws WrappedException {
+		CacheAdapter cacheAdapter = getOrCreate(resource);
+		boolean wasIgnoreNotifications = cacheAdapter.isIgnoreNotifications();
+		try {
+			cacheAdapter.setIgnoreNotifications(true);
+			return transaction.exec(resource);
+		} catch (Exception e) {
+			throw new WrappedException(e);
+		} finally {
+			cacheAdapter.setIgnoreNotifications(wasIgnoreNotifications);
+		}
+	}
 
 	public static class CacheAdapter extends EContentAdapter {
 		
@@ -67,6 +82,8 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 
 		private Collection<Listener> listeners = Sets.newHashSet();
 		
+		private volatile boolean ignoreNotifications = false;
+
 		public void set(Object name, Object value) {
 			this.values.put(name, value);
 		}
@@ -87,7 +104,7 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		@Override
 		public void notifyChanged(Notification notification) {
 			super.notifyChanged(notification);
-			if (isSemanticStateChange(notification)) {
+			if (!ignoreNotifications && isSemanticStateChange(notification)) {
 				values.clear();
 				Iterator<Listener> iter = listeners.iterator();
 				while(iter.hasNext()) {
@@ -105,6 +122,14 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		@Override
 		public boolean isAdapterForType(Object type) {
 			return type == getClass();
+		}
+		
+		public void setIgnoreNotifications(boolean ignoreNotifications) {
+			this.ignoreNotifications = ignoreNotifications;
+		}
+
+		public boolean isIgnoreNotifications() {
+			return ignoreNotifications;
 		}
 
 		public <T> T get(Object key, Resource res, Provider<T> provider) {
