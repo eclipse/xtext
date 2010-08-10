@@ -22,7 +22,7 @@
 			</uri>
 		</provider>
 		<provider componentTypes="eclipse.feature" readerType="local" mutable="false">
-			<uri format="{0}/features/{1}">
+			<uri format="{0}/features/{1}.feature">
 				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
