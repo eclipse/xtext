@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rmap xmlns="http://www.eclipse.org/buckminster/RMap-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0"
->
+	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0">
+	<property key="checkout.location" value="${workspace.root}/org.eclipse.xtext.git" />
+
 	<locator pattern="^org\.eclipse\.xtext\.releng(?:\..+)?$" searchPathRef="releng" />
 	<locator pattern="^org\.eclipse\.xtext\.example(?:\..*)?$" searchPathRef="xtext.examples" />
 	<locator pattern="^org\.eclipse\.xtext\.gmf\.glue$" searchPathRef="xtext.examples" />
@@ -12,63 +13,52 @@
 	<locator pattern="^org\.eclipse\.test$" searchPathRef="eclipse.test" />
 	<locator pattern="^org\.eclipse\.ant\.optional\.junit$" searchPathRef="eclipse.test" />
 
+
 	<searchPath name="xtext">
-		<provider componentTypes="osgi.bundle" readerType="git" mutable="false">
-			<uri format="{0}/org.eclipse.xtext.git,plugins/{1}">
-				<bc:propertyRef key="workspace.root" />
+		<provider componentTypes="osgi.bundle" readerType="local" mutable="false">
+			<uri format="{0}/plugins/{1}">
+				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
-			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git" />
-			<property key="git.auto.fetch" value="true" />
 		</provider>
-		<provider componentTypes="eclipse.feature" readerType="git" mutable="false">
-			<uri format="{0}/org.eclipse.xtext.git,features/{1}.feature">
-				<bc:propertyRef key="workspace.root" />
+		<provider componentTypes="eclipse.feature" readerType="local" mutable="false">
+			<uri format="{0}/features/{1}">
+				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
-			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git" />
-			<property key="git.auto.fetch" value="true" />
 		</provider>
-		<provider componentTypes="osgi.bundle" readerType="git" mutable="false">
-			<uri format="{0}/org.eclipse.xtext.git,tests/{1}">
-				<bc:propertyRef key="workspace.root" />
+		<provider componentTypes="osgi.bundle" readerType="local" mutable="false">
+			<uri format="{0}/tests/{1}">
+				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
-			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git" />
-			<property key="git.auto.fetch" value="true" />
 		</provider>
 	</searchPath>
 
 	<searchPath name="xtext.examples">
-		<provider componentTypes="osgi.bundle" readerType="git" mutable="false">
-			<uri format="{0}/org.eclipse.xtext.git,examples/org.eclipse.xtext.xtext.ui.examples/contents/{1}">
-				<bc:propertyRef key="workspace.root" />
+		<provider componentTypes="osgi.bundle" readerType="local" mutable="false">
+			<uri format="{0}/examples/org.eclipse.xtext.xtext.ui.examples/contents/{1}">
+				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
-			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git" />
-			<property key="git.auto.fetch" value="true" />
 		</provider>
 	</searchPath>
 
 	<searchPath name="xtext.examples.container">
-		<provider componentTypes="osgi.bundle" readerType="git" mutable="false">
-			<uri format="{0}/org.eclipse.xtext.git,examples/org.eclipse.xtext.xtext.ui.examples/{1}">
-				<bc:propertyRef key="workspace.root" />
+		<provider componentTypes="osgi.bundle" readerType="local" mutable="false">
+			<uri format="{0}/examples/org.eclipse.xtext.xtext.ui.examples/{1}">
+				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
-			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git" />
-			<property key="git.auto.fetch" value="true" />
 		</provider>
 	</searchPath>
 
 	<searchPath name="releng">
-		<provider componentTypes="buckminster" readerType="git" mutable="false">
-			<uri format="{0}/org.eclipse.xtext.releng.git,{1}">
-				<bc:propertyRef key="workspace.root" />
+		<provider componentTypes="buckminster" readerType="local" mutable="false">
+			<uri format="{0}/releng/{1}">
+				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
-			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.releng.git" />
-			<property key="git.auto.fetch" value="true" />
 		</provider>
 	</searchPath>
 
