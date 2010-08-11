@@ -28,8 +28,10 @@ import com.google.common.collect.Maps;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class CopiedResourceDescription extends AbstractResourceDescription {
-    private URI uri;
-    private ImmutableList<IEObjectDescription> exported;
+    
+	private URI uri;
+    
+	private ImmutableList<IEObjectDescription> exported;
 
     public CopiedResourceDescription(IResourceDescription original) {
         this.uri = original.getURI();
@@ -39,7 +41,7 @@ public class CopiedResourceDescription extends AbstractResourceDescription {
                         if (from.getEObjectOrProxy().eIsProxy()) {
                             return from;
                         }
-                        final InternalEObject result = (InternalEObject) EcoreUtil.create(from.getEClass());
+                        InternalEObject result = (InternalEObject) EcoreUtil.create(from.getEClass());
                         result.eSetProxyURI(EcoreUtil.getURI(from.getEObjectOrProxy()));
                         Map<String, String> userData = null;
                         for (final String key : from.getUserDataKeys()) {

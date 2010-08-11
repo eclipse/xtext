@@ -20,7 +20,10 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(MarkerUpdaterImpl.class)
 public interface IMarkerUpdater {
 	/**
-	 * updates the {@link org.eclipse.core.resources.IMarker} for all changed resources.
+	 * Updates the {@link org.eclipse.core.resources.IMarker} for all changed resources.
+	 * @param monitor the progress monitor to use for reporting progress to the user. It is the caller's responsibility
+	 *        to call done() on the given monitor. Accepts null, indicating that no progress should be
+	 *        reported and that the operation cannot be cancelled.
 	 */
 	public void updateMarker(ResourceSet resourceSet,
 			ImmutableList<IResourceDescription.Delta> resourceDescriptionDeltas, IProgressMonitor monitor);

@@ -68,7 +68,8 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
     }
     
     protected void updateMarkers(ResourceSet resourceSet, ImmutableList<IResourceDescription.Delta> deltas, IProgressMonitor monitor) {
-    	markerUpdater.updateMarker(resourceSet, deltas, monitor);
+    	SubMonitor progress = SubMonitor.convert(monitor, 1);
+    	markerUpdater.updateMarker(resourceSet, deltas, progress.newChild(1));
     }
     
     protected Map<URI,IResourceDescription> getCopiedResourceDescriptionsMap() {
@@ -97,69 +98,64 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
         toBeAddedOrUpdated = ensureNotNull(toBeAddedOrUpdated);
         toBeRemoved = ensureNotNull(toBeRemoved);
 
-        final SubMonitor subMonitor = SubMonitor.convert(monitor, "Create resource descriptions", 3);
+        final SubMonitor subMonitor = SubMonitor.convert(monitor, "Create resource descriptions", 1);
         subMonitor.subTask("Create resource descriptions");
-        try {
-            if (subMonitor.isCanceled() || (toBeAddedOrUpdated.isEmpty() && toBeRemoved.isEmpty())) {
-                return ImmutableList.of();
-            }
-            
-            final Map<URI, IResourceDescription> newMap = getCopiedResourceDescriptionsMap();
-            final Collection<Delta> result = doUpdate(resourceSet, toBeAddedOrUpdated, toBeRemoved,
-					newMap, subMonitor);
-            
-            if (subMonitor.isCanceled())
-				return ImmutableList.of();
-            final ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(result, this);
-            // update the reference
-            setResourceDescriptionsMap(newMap);
-            notifyListeners(event);
-            return event.getDeltas();
-        } finally {
-            subMonitor.done();
+        if (subMonitor.isCanceled() || (toBeAddedOrUpdated.isEmpty() && toBeRemoved.isEmpty())) {
+            return ImmutableList.of();
         }
+        
+        final Map<URI, IResourceDescription> newMap = getCopiedResourceDescriptionsMap();
+        final Collection<Delta> result = doUpdate(resourceSet, toBeAddedOrUpdated, toBeRemoved,
+				newMap, subMonitor.newChild(1));
+        
+        if (subMonitor.isCanceled())
+			return ImmutableList.of();
+        final ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(result, this);
+        // update the reference
+        setResourceDescriptionsMap(newMap);
+        notifyListeners(event);
+        return event.getDeltas();
     }
 	
 	protected abstract Collection<Delta> doUpdate(ResourceSet resourceSet, Set<URI> toBeAddedOrUpdated,
-			Set<URI> toBeRemoved, Map<URI, IResourceDescription> newMap, SubMonitor subMonitor);
+			Set<URI> toBeRemoved, Map<URI, IResourceDescription> newMap, IProgressMonitor monitor);
 	
 	public synchronized ImmutableList<IResourceDescription.Delta> clean(Set<URI> toBeRemoved, IProgressMonitor monitor) {
 		ensureLoaded();
-		
 		toBeRemoved = ensureNotNull(toBeRemoved);
-		SubMonitor subMonitor = SubMonitor.convert(monitor, "Create resource descriptions", 3);
+		
+		SubMonitor subMonitor = SubMonitor.convert(monitor, "Create resource descriptions", 2);
 		subMonitor.subTask("Create resource descriptions");
-		try {
-			if (subMonitor.isCanceled() || toBeRemoved.isEmpty())
-				return ImmutableList.of();
-			Collection<Delta> deltas = doClean(toBeRemoved, subMonitor.newChild(1));
+		if (subMonitor.isCanceled() || toBeRemoved.isEmpty())
+			return ImmutableList.of();
+		Collection<Delta> deltas = doClean(toBeRemoved, subMonitor.newChild(1));
 
-			final Map<URI, IResourceDescription> newMap = getCopiedResourceDescriptionsMap();
-			if (subMonitor.isCanceled())
-				return ImmutableList.of();
-			for(Delta delta: deltas) {
-				newMap.remove(delta.getOld().getURI());
-			}
-			ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(deltas, this);
-			if (subMonitor.isCanceled())
-				return ImmutableList.of();
-			updateMarkers(null, event.getDeltas(), subMonitor);
-			// update the reference
-			setResourceDescriptionsMap(newMap);
-			notifyListeners(event);
-			return event.getDeltas();
-		} finally {
-			subMonitor.done();
+		final Map<URI, IResourceDescription> newMap = getCopiedResourceDescriptionsMap();
+		if (subMonitor.isCanceled())
+			return ImmutableList.of();
+		for(Delta delta: deltas) {
+			newMap.remove(delta.getOld().getURI());
 		}
+		ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(deltas, this);
+		if (subMonitor.isCanceled())
+			return ImmutableList.of();
+		updateMarkers(null, event.getDeltas(), subMonitor.newChild(1));
+		// update the reference
+		setResourceDescriptionsMap(newMap);
+		notifyListeners(event);
+		return event.getDeltas();
 	}
 
-	protected Collection<Delta> doClean(Set<URI> toBeRemoved, SubMonitor monitor) {
-		Collection<Delta> result = updater.clean(this, toBeRemoved, monitor);
+	protected Collection<Delta> doClean(Set<URI> toBeRemoved, IProgressMonitor monitor) {
+		SubMonitor subMonitor = SubMonitor.convert(monitor, 1);
+		Collection<Delta> result = updater.clean(this, toBeRemoved, subMonitor.newChild(1));
 		return result;
 	}
 	
 	protected Collection<Delta> transitiveUpdate(ResourceSet resourceSet, Set<URI> toBeAddedOrUpdated, Set<URI> toBeRemoved,
-			SubMonitor subMonitor) {
-		return updater.transitiveUpdate(this, resourceSet, toBeAddedOrUpdated, toBeRemoved, subMonitor.newChild(1));
+			IProgressMonitor monitor) {
+		SubMonitor subMonitor = SubMonitor.convert(monitor, 1);
+		Collection<Delta> result = updater.transitiveUpdate(this, resourceSet, toBeAddedOrUpdated, toBeRemoved, subMonitor.newChild(1));
+		return result;
 	}
 }

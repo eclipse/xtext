@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -44,24 +45,27 @@ public class ClusteringBuilderState extends AbstractBuilderState {
 
 	@Override
 	protected Collection<Delta> doUpdate(ResourceSet resourceSet, Set<URI> toBeAddedOrUpdated,
-			Set<URI> toBeRemoved, final Map<URI, IResourceDescription> newMap, final SubMonitor subMonitor) {
-		final Collection<Delta> deltas = collectResources(resourceSet, toBeAddedOrUpdated, toBeRemoved, subMonitor);
-		final Set<Delta> allCopiedDeltas = Sets.newHashSet();
+			Set<URI> toBeRemoved, final Map<URI, IResourceDescription> newMap, IProgressMonitor monitor) {
+		SubMonitor progress = SubMonitor.convert(monitor, 100);
+		
+		Collection<Delta> deltas = collectResources(resourceSet, toBeAddedOrUpdated, toBeRemoved, progress.newChild(20));
+		Set<Delta> allCopiedDeltas = Sets.newHashSet();
 
-		final Iterator<Delta> deltaIterator = deltas.iterator();
-		final int nofDeltas = deltas.size();
+		Iterator<Delta> deltaIterator = deltas.iterator();
+		int noOfDeltas = deltas.size();
 		int currentDeltaIndex = 1;
 		while (deltaIterator.hasNext()) {
-		    final ImmutableList<Delta> copiedDeltas = updateAndCopyDescriptions(resourceSet, subMonitor, deltaIterator,
-		            newMap, currentDeltaIndex, nofDeltas);
-		    if (subMonitor.isCanceled()) {
+			progress.setWorkRemaining(2 * (noOfDeltas - currentDeltaIndex));
+		    ImmutableList<Delta> copiedDeltas = updateAndCopyDescriptions(resourceSet, deltaIterator, newMap,
+		            currentDeltaIndex, noOfDeltas, progress.newChild(clusterSize));
+		    if (monitor.isCanceled()) {
 		        return ImmutableList.of();
 		    }
 		    currentDeltaIndex += copiedDeltas.size();
-		    updateMarkers(resourceSet, copiedDeltas, subMonitor);
+		    updateMarkers(resourceSet, copiedDeltas, progress.newChild(copiedDeltas.size()));
 		    resourceSet.getResources().clear();
 		    allCopiedDeltas.addAll(copiedDeltas);
-		    if (subMonitor.isCanceled()) {
+		    if (monitor.isCanceled()) {
 		        return ImmutableList.of();
 		    }
 		}
@@ -69,52 +73,49 @@ public class ClusteringBuilderState extends AbstractBuilderState {
 	}
 
     protected Collection<Delta> collectResources(ResourceSet resourceSet, Set<URI> toBeAddedOrUpdated, Set<URI> toBeRemoved,
-            SubMonitor subMonitor) {
+    		IProgressMonitor monitor) {
+    	SubMonitor progress = SubMonitor.convert(monitor, 1);
         resourceSet.getLoadOptions().put(AbstractGlobalScopeProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
-        final Collection<Delta> deltas = transitiveUpdate(resourceSet, toBeAddedOrUpdated, toBeRemoved, subMonitor);
-        return deltas;
+        Collection<Delta> result = transitiveUpdate(resourceSet, toBeAddedOrUpdated, toBeRemoved, progress.newChild(1));
+        return result;
     }
 
     protected ImmutableList<Delta> updateAndCopyDescriptions(
-            ResourceSet resourceSet, SubMonitor subMonitor,
-            Iterator<Delta> deltaIterator,
+            ResourceSet resourceSet, Iterator<Delta> deltaIterator,
             Map<URI, IResourceDescription> newMap,
             int firstIndex,
-            final int nofDeltas) {
-        final SubMonitor deltaMonitor = SubMonitor.convert(subMonitor.newChild(1), "Update resource descriptions", clusterSize);
-        final Set<Delta> result = Sets.newHashSet();
-        try {
-            for (int i = 0; i < clusterSize && deltaIterator.hasNext(); i++) {
-                final Delta delta = deltaIterator.next();
-                if (deltaMonitor.isCanceled()) {
-                    return ImmutableList.of();
-                }
-                deltaMonitor.subTask("Update resource description " + firstIndex + " of " + nofDeltas);
-                IResourceDescription newDescription = null;
-                if (delta.getNew() != null) {
-                    final Resource resource = resourceSet.getResource(delta.getUri(), true);
-                    final IResourceDescription.Manager manager = getResourceDescriptionManager(delta.getUri());
-                    newDescription = manager.getResourceDescription(resource);
-                }
-                final DefaultResourceDescriptionDelta copiedDelta = new DefaultResourceDescriptionDelta(delta.getOld(),
-                        copy(newDescription));
-                result.add(copiedDelta);
-                if (copiedDelta.getNew() == null) {
-                    newMap.remove(copiedDelta.getUri());
-                } else {
-                    newMap.put(copiedDelta.getUri(), copiedDelta.getNew());
-                }
-                firstIndex++;
-                deltaMonitor.worked(1);
+            int noOfDeltas,
+            IProgressMonitor monitor) {
+        SubMonitor progress = SubMonitor.convert(monitor, "Update resource descriptions", clusterSize);
+        Set<Delta> result = Sets.newHashSet();
+        for (int i = 0; i < clusterSize && deltaIterator.hasNext(); i++) {
+            Delta delta = deltaIterator.next();
+            if (progress.isCanceled()) {
+                return ImmutableList.of();
             }
-            return ImmutableList.copyOf(result);
-        } finally {
-            deltaMonitor.done();
+            progress.subTask("Update resource description " + firstIndex + " of " + noOfDeltas);
+            IResourceDescription newDescription = null;
+            if (delta.getNew() != null) {
+                Resource resource = resourceSet.getResource(delta.getUri(), true);
+                IResourceDescription.Manager manager = getResourceDescriptionManager(delta.getUri());
+                newDescription = manager.getResourceDescription(resource);
+            }
+            DefaultResourceDescriptionDelta copiedDelta = new DefaultResourceDescriptionDelta(delta.getOld(),
+                    copy(newDescription));
+            result.add(copiedDelta);
+            if (copiedDelta.getNew() == null) {
+                newMap.remove(copiedDelta.getUri());
+            } else {
+                newMap.put(copiedDelta.getUri(), copiedDelta.getNew());
+            }
+            firstIndex++;
+            progress.worked(1);
         }
+        return ImmutableList.copyOf(result);
     }
 
     protected IResourceDescription.Manager getResourceDescriptionManager(URI uri) {
-        final IResourceServiceProvider resourceServiceProvider = managerRegistry.getResourceServiceProvider(uri);
+        IResourceServiceProvider resourceServiceProvider = managerRegistry.getResourceServiceProvider(uri);
         if (resourceServiceProvider == null) {
             return null;
         }
@@ -125,8 +126,8 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         if (toCopy == null) {
             return null;
         }
-        final ResourceDescriptionImpl copied = BuilderStateUtil.create(toCopy);
-        return copied;
+        ResourceDescriptionImpl result = BuilderStateUtil.create(toCopy);
+        return result;
     }
 
 }
