@@ -52,16 +52,12 @@ public class RegistryBuilderParticipant implements IXtextBuilderParticipant {
 		ImmutableList<IXtextBuilderParticipant> participants = getParticipants();
 		if (participants.isEmpty())
 			return;
-		SubMonitor subMonitor = SubMonitor.convert(monitor, participants.size());
-		subMonitor.subTask("Invoking build participants");
-		try {
-			for(IXtextBuilderParticipant participant: participants) {
-				if (subMonitor.isCanceled())
-					return;
-				participant.build(buildContext, subMonitor.newChild(1));
-			}
-		} finally {
-			subMonitor.done();
+		SubMonitor progress = SubMonitor.convert(monitor, participants.size());
+		progress.subTask("Invoking build participants");
+		for(IXtextBuilderParticipant participant: participants) {
+			if (progress.isCanceled())
+				return;
+			participant.build(buildContext, progress.newChild(1));
 		}
 	}
 	

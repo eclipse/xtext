@@ -28,12 +28,14 @@ import com.google.common.collect.Maps;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class CurrentDescriptions extends AdapterImpl implements IResourceDescriptions {
-    private final IResourceDescriptions oldState;
-    private final Map<URI, IResourceDescription> updatedDescriptions = Maps.newHashMap();
+    
+	private final IResourceDescriptions oldState;
+    
+	private final Map<URI, IResourceDescription> updatedDescriptions = Maps.newHashMap();
 
     public CurrentDescriptions(ResourceSet resourceSet, IResourceDescriptions oldState, Set<URI> initiallyDeleted) {
         this.oldState = oldState;
-        for (final URI uri : initiallyDeleted) {
+        for (URI uri : initiallyDeleted) {
             updatedDescriptions.put(uri, null);
         }
         resourceSet.eAdapters().add(this);
@@ -67,7 +69,7 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 
     @Override
     public boolean isAdapterForType(Object type) {
-        return getClass().equals(type);
+        return CurrentDescriptions.class.equals(type);
     }
 
     public static class ResourceSetAware implements IResourceDescriptions.IContextAware {
@@ -75,7 +77,7 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
         private IResourceDescriptions delegate;
 
         public void setContext(Notifier ctx) {
-            final ResourceSet resourceSet = EcoreUtil2.getResourceSet(ctx);
+            ResourceSet resourceSet = EcoreUtil2.getResourceSet(ctx);
             delegate = (IResourceDescriptions) EcoreUtil.getAdapter(
                     resourceSet.eAdapters(), CurrentDescriptions.class);
         }

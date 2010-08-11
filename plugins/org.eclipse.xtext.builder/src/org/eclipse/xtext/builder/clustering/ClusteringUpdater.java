@@ -26,7 +26,6 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -36,7 +35,8 @@ import com.google.inject.name.Named;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ClusteringUpdater implements IResourceDescriptionsUpdater {
-    private static final Logger log = Logger.getLogger(ClusteringUpdater.class);
+    
+	private static final Logger log = Logger.getLogger(ClusteringUpdater.class);
 
     @Inject
     private IResourceServiceProvider.Registry managerRegistry;
@@ -66,114 +66,110 @@ public class ClusteringUpdater implements IResourceDescriptionsUpdater {
      * @return returns an iterable of fresh {@link IResourceDescription} for all resources, which are affected by the
      *         change (i.e. the to BeUpdated and toBeDeleted resources)
      */
-    public Collection<IResourceDescription.Delta> transitiveUpdate(final IResourceDescriptions oldState, final ResourceSet rs,
+    public Collection<IResourceDescription.Delta> transitiveUpdate(IResourceDescriptions oldState, final ResourceSet rs,
             Set<URI> toBeUpdated, Set<URI> toBeDeleted, IProgressMonitor monitor) {
-        final SubMonitor subMonitor = SubMonitor.convert(monitor, "Find affected resources", 2);
+        SubMonitor subMonitor = SubMonitor.convert(monitor, "Find affected resources", 100);
         subMonitor.subTask("Find affected resources");
-        try {
-            final Set<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted);
-            toBeDeletedAsSet.removeAll(Collections2.forIterable(toBeUpdated));
-            final Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
-            // add deleted
-            for (final URI toDelete : toBeDeletedAsSet) {
-                final IResourceDescription resourceDescription = oldState.getResourceDescription(toDelete);
-                if (resourceDescription != null) {
-                    result.put(toDelete, new DefaultResourceDescriptionDelta(resourceDescription, null));
-                }
-            }
 
-            final CurrentDescriptions newState = new CurrentDescriptions(rs, oldState, toBeDeletedAsSet);
-            final IUniqueURIQueue queue = queueFactory.create(toBeUpdated);
-            queueAffectedResourceDescriptions(oldState, newState, result.values(), queue);            
-            while (!queue.isEmpty()) {
-                final Map<URI, Delta> clusterDeltas = loadResourceCluster(oldState, rs, queue, toBeDeletedAsSet,
-                		subMonitor.newChild(1), result.size() + 1);
-                result.putAll(clusterDeltas);
-                for (final Delta delta : clusterDeltas.values()) {
-                    newState.register(delta);
-                }
-                queueAffectedResourceDescriptions(oldState, newState, clusterDeltas.values(), queue);
-
-                rs.getResources().clear();
-            }
-            return result.values();
-        } finally {
-            subMonitor.done();
+        Set<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted);
+        if (!toBeDeletedAsSet.isEmpty()) {
+	        for(URI updatedURI: toBeUpdated) {
+	        	toBeDeletedAsSet.remove(updatedURI);
+	        	if (toBeDeletedAsSet.isEmpty())
+	        		break;
+	        }
         }
+        Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
+        // add deleted
+        for (final URI toDelete : toBeDeletedAsSet) {
+            IResourceDescription resourceDescription = oldState.getResourceDescription(toDelete);
+            if (resourceDescription != null) {
+                result.put(toDelete, new DefaultResourceDescriptionDelta(resourceDescription, null));
+            }
+        }
+
+        int startWith = result.size();
+        CurrentDescriptions newState = new CurrentDescriptions(rs, oldState, toBeDeletedAsSet);
+        IUniqueURIQueue queue = queueFactory.create(toBeUpdated);
+        queueAffectedResourceDescriptions(oldState, newState, result.values(), queue);            
+        while (!queue.isEmpty()) {
+        	subMonitor.setWorkRemaining(100);
+            Map<URI, Delta> clusterDeltas = loadResourceCluster(oldState, rs, queue, toBeDeletedAsSet,
+            		subMonitor.newChild(30), result.size() - startWith + 1);
+            result.putAll(clusterDeltas);
+            for (final Delta delta : clusterDeltas.values()) {
+                newState.register(delta);
+            }
+            queueAffectedResourceDescriptions(oldState, newState, clusterDeltas.values(), queue);
+            rs.getResources().clear();
+        }
+        return result.values();
     }
 
     public Collection<IResourceDescription.Delta> clean(IResourceDescriptions oldState, Set<URI> toBeDeleted,
             IProgressMonitor monitor) {
-        final SubMonitor subMonitor = SubMonitor.convert(monitor, "Clean resources", 2);
+        SubMonitor subMonitor = SubMonitor.convert(monitor, "Clean resources", toBeDeleted.size());
         subMonitor.subTask("Clean resources");
-        try {
-            final Set<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted);
-            final Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
-            for (final URI toDelete : toBeDeletedAsSet) {
-                final IResourceDescription resourceDescription = oldState.getResourceDescription(toDelete);
-                if (resourceDescription != null) {
-                    result.put(toDelete, new DefaultResourceDescriptionDelta(resourceDescription, null));
-                }
+        Set<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted);
+        Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
+        for (URI toDelete : toBeDeletedAsSet) {
+            IResourceDescription resourceDescription = oldState.getResourceDescription(toDelete);
+            if (resourceDescription != null) {
+                result.put(toDelete, new DefaultResourceDescriptionDelta(resourceDescription, null));
             }
-            return result.values();
-        } finally {
-            subMonitor.done();
+            subMonitor.worked(1);
         }
+        return result.values();
     }
 
     protected Map<URI, IResourceDescription.Delta> loadResourceCluster(
             IResourceDescriptions oldState,
-            final ResourceSet set,
+            ResourceSet resourceSet,
             IUniqueURIQueue queue,
-            Set<URI> ignoredURIs,
+            Collection<URI> ignoredURIs,
             IProgressMonitor monitor,
             int baseIndex) {
-        final SubMonitor subMonitor = SubMonitor.convert(monitor, clusterSize);
-        try {
-            final Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
-            for (int i = 0; i < clusterSize && !queue.isEmpty(); i++) {
-                if (subMonitor.isCanceled()) {
-                    return Collections.emptyMap();
-                }
-                subMonitor.subTask("Loading affected resource " + baseIndex);
-                final URI uri = queue.get();
-                Resource resource = null;
-                try {
-                	if (!ignoredURIs.contains(uri)) {
-                		resource = set.getResource(uri, true);
-
-	                    final IResourceDescription.Manager manager = getResourceDescriptionManager(uri);
-	                    if (manager != null) {
-	                        final IResourceDescription description = manager.getResourceDescription(resource);
-	                        final IResourceDescription copiedDescription = new CopiedResourceDescription(description);
-	                        result.put(uri, new DefaultResourceDescriptionDelta(
-	                                oldState.getResourceDescription(uri), copiedDescription));
-	                    }
-                	}
-                } catch (final WrappedException ex) {
-                    if (set.getURIConverter().exists(uri, Collections.emptyMap())) {
-                        log.error("Error loading resource from: " + uri.toString(), ex);
-                    }
-                    if (resource != null) {
-                        set.getResources().remove(resource);
-                    }
-                    final IResourceDescription oldDescription = oldState.getResourceDescription(uri);
-                    if (oldDescription != null) {
-                        result.put(uri, new DefaultResourceDescriptionDelta(oldDescription, null));
-                    }
-                }
-                baseIndex++;
-                subMonitor.worked(1);
+        SubMonitor subMonitor = SubMonitor.convert(monitor, clusterSize);
+        Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
+        for (int i = 0; i < clusterSize && !queue.isEmpty(); i++) {
+            if (subMonitor.isCanceled()) {
+                return Collections.emptyMap();
             }
-            return result;
-        } finally {
-            subMonitor.done();
-        }
+            subMonitor.subTask("Loading affected resource " + baseIndex + " of " + queue.totalSize());
+            URI nextURI = queue.remove();
+            Resource resource = null;
+            try {
+            	if (!ignoredURIs.contains(nextURI)) {
+            		resource = resourceSet.getResource(nextURI, true);
 
+                    IResourceDescription.Manager manager = getResourceDescriptionManager(nextURI);
+                    if (manager != null) {
+                        IResourceDescription description = manager.getResourceDescription(resource);
+                        IResourceDescription copiedDescription = new CopiedResourceDescription(description);
+                        result.put(nextURI, new DefaultResourceDescriptionDelta(
+                                oldState.getResourceDescription(nextURI), copiedDescription));
+                    }
+            	}
+            } catch (final WrappedException ex) {
+                if (resourceSet.getURIConverter().exists(nextURI, Collections.emptyMap())) {
+                    log.error("Error loading resource from: " + nextURI.toString(), ex);
+                }
+                if (resource != null) {
+                    resourceSet.getResources().remove(resource);
+                }
+                IResourceDescription oldDescription = oldState.getResourceDescription(nextURI);
+                if (oldDescription != null) {
+                    result.put(nextURI, new DefaultResourceDescriptionDelta(oldDescription, null));
+                }
+            }
+            baseIndex++;
+            subMonitor.worked(1);
+        }
+        return result;
     }
 
     protected IResourceDescription.Manager getResourceDescriptionManager(URI uri) {
-        final IResourceServiceProvider resourceServiceProvider = managerRegistry.getResourceServiceProvider(uri);
+        IResourceServiceProvider resourceServiceProvider = managerRegistry.getResourceServiceProvider(uri);
         if (resourceServiceProvider == null) {
             return null;
         }
@@ -185,9 +181,9 @@ public class ClusteringUpdater implements IResourceDescriptionsUpdater {
             CurrentDescriptions newState,
             Collection<IResourceDescription.Delta> deltas,
             IUniqueURIQueue queue) throws IllegalArgumentException {
-        final Iterable<? extends IResourceDescription> descriptions = oldState.getAllResourceDescriptions();
-        for (final IResourceDescription desc : descriptions) {
-            final IResourceDescription.Manager manager = getResourceDescriptionManager(desc.getURI());
+        Iterable<IResourceDescription> descriptions = oldState.getAllResourceDescriptions();
+        for (IResourceDescription desc : descriptions) {
+            IResourceDescription.Manager manager = getResourceDescriptionManager(desc.getURI());
             if (manager != null) {
                 if (manager.isAffected(deltas, desc, newState)) {
                     queue.add(desc.getURI());

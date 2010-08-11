@@ -40,7 +40,9 @@ public class PersistableResourceDescriptionsImpl extends AbstractBuilderState {
 	
 	@Override
 	protected ImmutableList<Delta> doUpdate(ResourceSet resourceSet, Set<URI> toBeAddedOrUpdated,
-			Set<URI> toBeRemoved, final Map<URI, IResourceDescription> newMap, SubMonitor subMonitor) {
+			Set<URI> toBeRemoved, Map<URI, IResourceDescription> newMap, IProgressMonitor monitor) {
+		SubMonitor subMonitor = SubMonitor.convert(monitor, 3);
+		
 		resourceSet.eAdapters().add(new ShadowingResourceDescriptions.Adapter(this, toBeAddedOrUpdated, toBeRemoved));
 		resourceSet.getLoadOptions().put(AbstractGlobalScopeProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
 		Collection<Delta> deltas = transitiveUpdate(resourceSet, toBeAddedOrUpdated, toBeRemoved, subMonitor.newChild(1));
@@ -50,24 +52,20 @@ public class PersistableResourceDescriptionsImpl extends AbstractBuilderState {
 		SubMonitor deltaMonitor = SubMonitor.convert(subMonitor.newChild(1), "Update resource descriptions", deltas.size());
 		int total = deltas.size();
 		int current = 1;
-		try {
-			for (Delta delta : deltas) {
-				if (deltaMonitor.isCanceled())
-					return ImmutableList.of();
-				deltaMonitor.subTask("Update resource description " + current + " of " + total);
-				DefaultResourceDescriptionDelta copiedDelta = new DefaultResourceDescriptionDelta(delta.getOld(),
-						createNew(delta, toBeAddedOrUpdated));
-				copiedDeltas.add(copiedDelta);
-				if (delta.getNew() == null) {
-					newMap.remove(copiedDelta.getOld().getURI());
-				} else {
-					newMap.put(copiedDelta.getNew().getURI(), copiedDelta.getNew());
-				}
-				current++;
-				deltaMonitor.worked(1);
+		for (Delta delta : deltas) {
+			if (deltaMonitor.isCanceled())
+				return ImmutableList.of();
+			deltaMonitor.subTask("Update resource description " + current + " of " + total);
+			DefaultResourceDescriptionDelta copiedDelta = new DefaultResourceDescriptionDelta(delta.getOld(),
+					createNew(delta, toBeAddedOrUpdated));
+			copiedDeltas.add(copiedDelta);
+			if (delta.getNew() == null) {
+				newMap.remove(copiedDelta.getOld().getURI());
+			} else {
+				newMap.put(copiedDelta.getNew().getURI(), copiedDelta.getNew());
 			}
-		} finally {
-			deltaMonitor.done();
+			current++;
+			deltaMonitor.worked(1);
 		}
 		ImmutableList<Delta> immutableDeltas = ImmutableList.copyOf(copiedDeltas);
 		doValidate(resourceSet, immutableDeltas, subMonitor.newChild(1));
@@ -75,7 +73,8 @@ public class PersistableResourceDescriptionsImpl extends AbstractBuilderState {
 	}
 	
 	protected void doValidate(ResourceSet rs, ImmutableList<Delta> deltas, IProgressMonitor monitor) {
-		updateMarkers(rs, deltas, monitor);
+		SubMonitor progress = SubMonitor.convert(monitor, 1); 
+		updateMarkers(rs, deltas, progress.newChild(1));
 	}
 
 	private IResourceDescription createNew(Delta delta, Set<URI> toBeAddedOrUpdated) {

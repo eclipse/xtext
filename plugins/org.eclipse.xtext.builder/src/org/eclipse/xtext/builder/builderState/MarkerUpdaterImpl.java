@@ -51,57 +51,56 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 			IProgressMonitor monitor) {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, "Validate resources", resourceDescriptionDeltas.size());
 		subMonitor.subTask("Validate resources");
-		try {
-			for (Delta delta : resourceDescriptionDeltas) {
-				if (subMonitor.isCanceled())
-					return;
-				if (delta.getNew() != null) {
-					Iterable<IStorage> storages = mapper.getStorages(delta.getNew().getURI());
-					SubMonitor child = subMonitor.newChild(1);
-					for (IStorage storage : storages) {
-						if (storage instanceof IFile) {
-							IFile file = (IFile) storage;
-							if (!file.isReadOnly()) {
-								Resource resource = resourceSet.getResource(delta.getNew().getURI(), true);
-								addMarkers(file, resource, child);
-							}
+		for (Delta delta : resourceDescriptionDeltas) {
+			if (subMonitor.isCanceled())
+				return;
+			if (delta.getNew() != null) {
+				Iterable<IStorage> storages = mapper.getStorages(delta.getNew().getURI());
+				SubMonitor child = subMonitor.newChild(1);
+				child.setWorkRemaining(3);
+				for (IStorage storage : storages) {
+					child.setWorkRemaining(3);
+					if (storage instanceof IFile) {
+						IFile file = (IFile) storage;
+						if (!file.isReadOnly()) {
+							Resource resource = resourceSet.getResource(delta.getNew().getURI(), true);
+							addMarkers(file, resource, child.newChild(2));
 						}
+					} else {
+						child.worked(1);
 					}
-				} else {
-					Iterable<IStorage> storages = mapper.getStorages(delta.getOld().getURI());
-					for (IStorage storage : storages) {
-						if (storage instanceof IFile) {
-							IFile file = (IFile) storage;
-							if (!file.isReadOnly() && file.isAccessible()) {
-								try {
-									file.deleteMarkers(MarkerTypes.FAST_VALIDATION, true, IResource.DEPTH_ZERO);
-									file.deleteMarkers(MarkerTypes.NORMAL_VALIDATION, true, IResource.DEPTH_ZERO);
-								} catch(CoreException ex) {
-									log.error(ex.getMessage(), ex);
-								}
-							}
-						}
-					}
-					subMonitor.worked(1);
 				}
+			} else {
+				Iterable<IStorage> storages = mapper.getStorages(delta.getOld().getURI());
+				for (IStorage storage : storages) {
+					if (storage instanceof IFile) {
+						IFile file = (IFile) storage;
+						if (!file.isReadOnly() && file.isAccessible()) {
+							try {
+								file.deleteMarkers(MarkerTypes.FAST_VALIDATION, true, IResource.DEPTH_ZERO);
+								file.deleteMarkers(MarkerTypes.NORMAL_VALIDATION, true, IResource.DEPTH_ZERO);
+							} catch(CoreException ex) {
+								log.error(ex.getMessage(), ex);
+							}
+						}
+					}
+				}
+				subMonitor.worked(1);
 			}
-		} finally {
-			subMonitor.done();
 		}
 	}
 
 	protected void addMarkers(IFile file, Resource resource, final IProgressMonitor monitor) {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
+		SubMonitor subMonitor = SubMonitor.convert(monitor, 1);
 		try {
-			IResourceServiceProvider provider = resourceServiceProviderRegistry.getResourceServiceProvider(resource
-					.getURI());
+			IResourceServiceProvider provider = 
+				resourceServiceProviderRegistry.getResourceServiceProvider(resource.getURI());
 			if (provider == null)
 				return;
 
 			IResourceValidator resourceValidator = provider.getResourceValidator();
-			List<Issue> list = resourceValidator
-					.validate(resource, CheckMode.NORMAL_AND_FAST, getCancelIndicator(subMonitor));
-			if (monitor.isCanceled())
+			List<Issue> list = resourceValidator.validate(resource, CheckMode.NORMAL_AND_FAST, getCancelIndicator(subMonitor));
+			if (subMonitor.isCanceled())
 				return;
 			subMonitor.worked(1);
 			file.deleteMarkers(MarkerTypes.FAST_VALIDATION, true, IResource.DEPTH_ZERO);
@@ -111,9 +110,7 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 			}
 		} catch (CoreException e) {
 			log.error(e.getMessage(), e);
-		} finally {
-			subMonitor.done();
-		}
+		} 
 	}
 
 	private CancelIndicator getCancelIndicator(final IProgressMonitor monitor) {

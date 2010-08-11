@@ -65,113 +65,107 @@ public class ResourceDescriptionsUpdater implements IResourceDescriptionsUpdater
 	 */
 	public Collection<IResourceDescription.Delta> transitiveUpdate(IResourceDescriptions oldState, final ResourceSet rs,
 			Set<URI> toBeUpdated, Set<URI> toBeDeleted, IProgressMonitor monitor) {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, "Find affected resources", 2);
+		SubMonitor subMonitor = SubMonitor.convert(monitor, "Find affected resources", 10);
 		subMonitor.subTask("Find affected resources");
-		try {
-			Set<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted);
-			toBeDeletedAsSet.removeAll(Collections2.forIterable(toBeUpdated));
-			Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
-			// add deleted
-			for (URI toDelete : toBeDeletedAsSet) {
-				IResourceDescription resourceDescription = oldState.getResourceDescription(toDelete);
-				if (resourceDescription != null)
-					result.put(toDelete, new DefaultResourceDescriptionDelta(resourceDescription, null));
+			
+		Set<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted);
+		toBeDeletedAsSet.removeAll(Collections2.forIterable(toBeUpdated));
+		Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
+		// add deleted
+		for (URI toDelete : toBeDeletedAsSet) {
+			IResourceDescription resourceDescription = oldState.getResourceDescription(toDelete);
+			if (resourceDescription != null)
+				result.put(toDelete, new DefaultResourceDescriptionDelta(resourceDescription, null));
+		}
+
+		// add toBeUpdated
+		result.putAll(update(oldState, rs, toBeUpdated, subMonitor.newChild(3)));
+
+		// add dependent
+		while (true) {
+			if (subMonitor.isCanceled())
+				return Collections.emptySet();
+			subMonitor.setWorkRemaining(7);
+			ShadowingResourceDescriptions newState = shadowingResourceDescriptionsProvider.get();
+			newState.setContext(rs);
+			Set<IResourceDescription> descriptions = findAffectedResourceDescriptions(
+					oldState, newState, result.values(), subMonitor.newChild(2));
+			Set<URI> uris = Sets.newHashSet(Iterables.transform(descriptions,
+					new Function<IResourceDescription, URI>() {
+						public URI apply(IResourceDescription from) {
+							return from.getURI();
+						}
+					}));
+			uris.removeAll(result.keySet());
+			if (!uris.isEmpty()) {
+				result.putAll(update(oldState, rs, uris, subMonitor.newChild(3)));
+			} else {
+				return result.values();
 			}
-	
-			// add toBeUpdated
-			result.putAll(update(oldState, rs, toBeUpdated, subMonitor.newChild(1)));
-	
-			// add dependent
-			while (true) {
-				if (subMonitor.isCanceled())
-					return Collections.emptySet();
-				subMonitor.setWorkRemaining(1);
-				ShadowingResourceDescriptions newState = shadowingResourceDescriptionsProvider.get();
-				newState.setContext(rs);
-				Set<IResourceDescription> descriptions = findAffectedResourceDescriptions(
-						oldState, newState, result.values(), subMonitor);
-				Set<URI> uris = Sets.newHashSet(Iterables.transform(descriptions,
-						new Function<IResourceDescription, URI>() {
-							public URI apply(IResourceDescription from) {
-								return from.getURI();
-							}
-						}));
-				uris.removeAll(result.keySet());
-				if (!uris.isEmpty()) {
-					result.putAll(update(oldState, rs, uris, subMonitor.newChild(1)));
-				} else {
-					return result.values();
-				}
-			}
-		} finally {
-			subMonitor.done();
 		}
 	}
 	
 	public Collection<IResourceDescription.Delta> clean(IResourceDescriptions oldState, Set<URI> toBeDeleted, IProgressMonitor monitor) {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, "Clean resources", 2);
+		SubMonitor subMonitor = SubMonitor.convert(monitor, "Clean resources", toBeDeleted.size());
 		subMonitor.subTask("Clean resources");
-		try {
-			Set<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted);
-			Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
-			// add deleted
-			for (URI toDelete : toBeDeletedAsSet) {
-				IResourceDescription resourceDescription = oldState.getResourceDescription(toDelete);
-				if (resourceDescription != null)
-					result.put(toDelete, new DefaultResourceDescriptionDelta(resourceDescription, null));
-			}
-	
-			return result.values();
-		} finally {
-			subMonitor.done();
+		
+		Set<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted);
+		Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
+		// add deleted
+		for (URI toDelete : toBeDeletedAsSet) {
+			if (subMonitor.isCanceled())
+				return Collections.emptyList();
+			IResourceDescription resourceDescription = oldState.getResourceDescription(toDelete);
+			if (resourceDescription != null)
+				result.put(toDelete, new DefaultResourceDescriptionDelta(resourceDescription, null));
+			subMonitor.worked(1);
 		}
+
+		return result.values();
 	}
 
-	protected Map<URI, IResourceDescription.Delta> update(IResourceDescriptions oldState, final ResourceSet set,
+	protected Map<URI, IResourceDescription.Delta> update(IResourceDescriptions oldState, ResourceSet set,
 			Set<URI> toBeUpdated, IProgressMonitor monitor) {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, toBeUpdated.size() * 2);
 		int total = toBeUpdated.size();
 		int current = 1;
-		try {
-			Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
-			for (URI uri : toBeUpdated) {
-				if (subMonitor.isCanceled())
-					return Collections.emptyMap();
-				Resource res = null;
-				try {
-					subMonitor.subTask("Loading affected resource " + current + " of " + total);
-					res = set.getResource(uri, true);
-					current++;
-				} catch (WrappedException ex) {
-					if (set.getURIConverter().exists(uri, Collections.emptyMap()))
-						log.error("Error loading resource from: " + uri.toString(), ex);
-					if (res != null) {
-						set.getResources().remove(res);
-					}
-					IResourceDescription oldDescription = oldState.getResourceDescription(uri);
-					if (oldDescription != null)
-						result.put(uri, new DefaultResourceDescriptionDelta(oldDescription, null));
+		Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
+		for (URI uri : toBeUpdated) {
+			if (subMonitor.isCanceled())
+				return Collections.emptyMap();
+			Resource res = null;
+			try {
+				subMonitor.subTask("Loading affected resource " + current + " of " + total);
+				res = set.getResource(uri, true);
+				current++;
+			} catch (WrappedException ex) {
+				if (set.getURIConverter().exists(uri, Collections.emptyMap()))
+					log.error("Error loading resource from: " + uri.toString(), ex);
+				if (res != null) {
+					set.getResources().remove(res);
 				}
-				subMonitor.worked(1);
+				IResourceDescription oldDescription = oldState.getResourceDescription(uri);
+				if (oldDescription != null)
+					result.put(uri, new DefaultResourceDescriptionDelta(oldDescription, null));
 			}
-			for (URI uri : toBeUpdated) {
-				if (subMonitor.isCanceled())
-					return Collections.emptyMap();
-				if (!result.containsKey(uri)) {
-					IResourceDescription.Manager manager = getResourceDescriptionManager(uri);
-					if (manager != null) {
-						Resource resource = set.getResource(uri, false);
-						IResourceDescription description = manager.getResourceDescription(resource);
-						result.put(uri, new DefaultResourceDescriptionDelta(oldState.getResourceDescription(uri),
-								description));
-					}
-				}
-				subMonitor.worked(1);
-			}
-			return result;
-		} finally {
-			subMonitor.done();
+			subMonitor.worked(1);
 		}
+		subMonitor.setWorkRemaining(total - result.size());
+		for (URI uri : toBeUpdated) {
+			if (!result.containsKey(uri)) {
+				if (subMonitor.isCanceled())
+					return Collections.emptyMap();
+				IResourceDescription.Manager manager = getResourceDescriptionManager(uri);
+				if (manager != null) {
+					Resource resource = set.getResource(uri, false);
+					IResourceDescription description = manager.getResourceDescription(resource);
+					result.put(uri, new DefaultResourceDescriptionDelta(
+							oldState.getResourceDescription(uri), description));
+				}
+				subMonitor.worked(1);
+			}
+		}
+		return result;
 	}
 
 	protected IResourceDescription.Manager getResourceDescriptionManager(URI uri) {
@@ -183,10 +177,12 @@ public class ResourceDescriptionsUpdater implements IResourceDescriptionsUpdater
 
 	protected Set<IResourceDescription> findAffectedResourceDescriptions(IResourceDescriptions oldState,
 			IResourceDescriptions newState, Collection<IResourceDescription.Delta> deltas, IProgressMonitor monitor) throws IllegalArgumentException {
+		SubMonitor progress = SubMonitor.convert(monitor, Iterables.size(oldState.getAllResourceDescriptions()));
+		
 		Set<IResourceDescription> result = Sets.newHashSet();
 		Iterable<? extends IResourceDescription> descriptions = oldState.getAllResourceDescriptions();
 		for (IResourceDescription desc : descriptions) {
-			if (monitor.isCanceled())
+			if (progress.isCanceled())
 				return Collections.emptySet();
 			IResourceDescription.Manager manager = getResourceDescriptionManager(desc.getURI());
 			if (manager != null) {
@@ -194,6 +190,7 @@ public class ResourceDescriptionsUpdater implements IResourceDescriptionsUpdater
 					result.add(desc);
 				}
 			}
+			progress.worked(1);
 		}
 		return result;
 	}

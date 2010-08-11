@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import java.util.Collection;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -24,7 +22,6 @@ import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.UriValidator;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
@@ -39,12 +36,14 @@ public class ToBeBuiltComputer {
 
 	@Inject
 	private IStorage2UriMapper mapper;
+	
+	@Inject
+	private UriValidator uriValidator;
 
-	public ToBeBuilt removeProject(IProject project, final IProgressMonitor monitor) {
+	public ToBeBuilt removeProject(IProject project, IProgressMonitor monitor) {
+		SubMonitor progress = SubMonitor.convert(monitor, Iterables.size(builderState.getAllResourceDescriptions()));
 		ToBeBuilt result = new ToBeBuilt();
-		SubMonitor.convert(monitor, 0);
 		Iterable<IResourceDescription> allResourceDescriptions = builderState.getAllResourceDescriptions();
-		SubMonitor subMonitor = SubMonitor.convert(monitor, Collections2.forIterable(allResourceDescriptions).size());
 		for (IResourceDescription description : allResourceDescriptions) {
 			Iterable<IStorage> storages = mapper.getStorages(description.getURI());
 			if (!storages.iterator().hasNext()) {
@@ -55,7 +54,7 @@ public class ToBeBuiltComputer {
 						result.getToBeDeleted().add(description.getURI());
 				}
 			}
-			subMonitor.worked(1);
+			progress.worked(1);
 		}
 		return result;
 	}
@@ -67,43 +66,47 @@ public class ToBeBuiltComputer {
 		return false;
 	}
 
-	public ToBeBuilt updateProjectNewResourcesOnly(final IProject project, final IProgressMonitor monitor) throws CoreException {
-		ToBeBuilt toBeBuilt = updateProject(project, monitor);
-		Collection<URI> existingURIs = Collections2.forIterable(Iterables.transform(builderState
-				.getAllResourceDescriptions(), new Function<IResourceDescription, URI>() {
-			public URI apply(IResourceDescription from) {
-				return from.getURI();
-			}
-		}));
-		toBeBuilt.getToBeDeleted().removeAll(existingURIs);
-		toBeBuilt.getToBeUpdated().removeAll(existingURIs);
+	public ToBeBuilt updateProjectNewResourcesOnly(IProject project, IProgressMonitor monitor) throws CoreException {
+		SubMonitor progress = SubMonitor.convert(monitor, "Collecting resources", 1);
+		progress.subTask("Collecting resources");
+		ToBeBuilt toBeBuilt = updateProject(project, progress.newChild(1));
+		Iterable<URI> existingURIs = Iterables.transform(
+				builderState.getAllResourceDescriptions(), 
+				new Function<IResourceDescription, URI>() {
+					public URI apply(IResourceDescription from) {
+						return from.getURI();
+					}
+				}
+		);
+		for(URI existingURI: existingURIs) {
+			toBeBuilt.getToBeDeleted().remove(existingURI);
+			toBeBuilt.getToBeUpdated().remove(existingURI);
+		}
 		return toBeBuilt;
 	}
 	
-	public ToBeBuilt updateProject(final IProject project, final IProgressMonitor monitor) throws CoreException {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, "Collecting resources", 1);
-		subMonitor.subTask("Collecting resources");
-		try {
-			final ToBeBuilt toBeBuilt = removeProject(project, monitor);
-			if (!project.isAccessible())
-				return toBeBuilt;
-			project.accept(new IResourceVisitor() {
-				public boolean visit(IResource resource) throws CoreException {
-					if (resource instanceof IStorage) {
-						return updateStorage(monitor, toBeBuilt, (IStorage) resource);
-					}
-					return true;
-				}
-			});
+	public ToBeBuilt updateProject(IProject project, IProgressMonitor monitor) throws CoreException {
+		final SubMonitor progress = SubMonitor.convert(monitor, "Collecting resources", 1);
+		progress.subTask("Collecting resources");
+		
+		final ToBeBuilt toBeBuilt = removeProject(project, progress.newChild(1));
+		if (!project.isAccessible() || progress.isCanceled())
 			return toBeBuilt;
-		} finally {
-			subMonitor.done();
-		}
+		
+		project.accept(new IResourceVisitor() {
+			public boolean visit(IResource resource) throws CoreException {
+				if (progress.isCanceled())
+					return false;
+				if (resource instanceof IStorage) {
+					return updateStorage(null, toBeBuilt, (IStorage) resource);
+				}
+				return true;
+			}
+		});
+		return toBeBuilt;
 	}
 
 	public boolean updateStorage(final IProgressMonitor monitor, final ToBeBuilt toBeBuilt, IStorage storage) {
-		if (monitor.isCanceled())
-			return false;
 		if (!isHandled(storage))
 			return true;
 		URI uri = getUri(storage);
@@ -114,8 +117,6 @@ public class ToBeBuiltComputer {
 	}
 	
 	public boolean removeStorage(final IProgressMonitor monitor, final ToBeBuilt toBeBuilt, IStorage storage) {
-		if (monitor.isCanceled())
-			return false;
 		if (!isHandled(storage))
 			return true;
 		URI uri = getUri(storage);
@@ -137,8 +138,5 @@ public class ToBeBuiltComputer {
 	protected boolean isValid(URI uri, IStorage storage) {
 		return uriValidator.isValid(uri, storage);
 	}
-
-	@Inject
-	private UriValidator uriValidator;
 
 }

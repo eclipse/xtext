@@ -26,9 +26,11 @@ public interface IXtextBuilderParticipant {
 	/**
 	 * Allows clients to perform additional steps in the build process such as code generation. It is not expected that
 	 * any object in the resource set will be modified by a builder participant.
+	 * @param monitor the progress monitor to use for reporting progress to the user. It is the caller's responsibility
+	 *        to call done() on the given monitor. Accepts null, indicating that no progress should be
+	 *        reported and that the operation cannot be cancelled.
 	 */
-	void build(IBuildContext context,
-			IProgressMonitor monitor) throws CoreException;
+	void build(IBuildContext context, IProgressMonitor monitor) throws CoreException;
 	
 	public static interface IBuildContext {
 		IProject getBuiltProject();

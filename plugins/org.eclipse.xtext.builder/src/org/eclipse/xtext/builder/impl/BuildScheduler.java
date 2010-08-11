@@ -18,6 +18,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.xtext.builder.internal.Activator;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -32,7 +33,7 @@ import com.google.inject.Singleton;
  * Schedules extraordinary Xtext builds, e.g. on project open/close. Keeps a set of scheduled jobs to avoid duplicate
  * builds.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @Singleton
 public class BuildScheduler {
@@ -88,19 +89,27 @@ public class BuildScheduler {
 
 		@Override
 		protected IStatus run(IProgressMonitor monitor) {
-			synchronized (projectsScheduledForBuild) {
-				projectsScheduledForBuild.remove(project);
-			}
+			SubMonitor progress = SubMonitor.convert(monitor, 1);
 			try {
-				// project could have been modified in the meantime, so check again
-				if (isBuildable(project)) {
-					project.build(IncrementalProjectBuilder.FULL_BUILD, XtextBuilder.BUILDER_ID, builderArguments,
-							monitor);
+				synchronized (projectsScheduledForBuild) {
+					projectsScheduledForBuild.remove(project);
 				}
-			} catch (Exception x) {
-				log.error(x.getMessage(), x);
-				return new Status(IStatus.ERROR, Activator.getDefault().getBundle().getSymbolicName(), "Build of "
-						+ Strings.notNull(project.getName()) + " failed.\nSee log for details.");
+				try {
+					// project could have been modified in the meantime, so check again
+					if (isBuildable(project)) {
+						project.build(IncrementalProjectBuilder.FULL_BUILD, XtextBuilder.BUILDER_ID, builderArguments,
+								progress.newChild(1));
+					} else {
+						progress.worked(1);
+					}
+				} catch (Exception x) {
+					log.error(x.getMessage(), x);
+					return new Status(IStatus.ERROR, Activator.getDefault().getBundle().getSymbolicName(), "Build of "
+							+ Strings.notNull(project.getName()) + " failed.\nSee log for details.");
+				}
+			} finally {
+				if (monitor != null)
+					monitor.done();
 			}
 			return Status.OK_STATUS;
 		}

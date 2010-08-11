@@ -34,6 +34,7 @@ public class UniqueURIQueue implements IUniqueURIQueue {
     private static final Logger logger = Logger.getLogger(UniqueURIQueue.class);
 
     private final Queue<URI> delegate;
+    
     private final Set<URI> allURIs;
 
     private UniqueURIQueue() {
@@ -55,11 +56,11 @@ public class UniqueURIQueue implements IUniqueURIQueue {
         }
     }
 
-	public URI get() {
+	public URI remove() {
         if (isEmpty()) {
             return null;
         }
-        final URI result = delegate.poll();
+        URI result = delegate.poll();
         if (logger.isDebugEnabled())
             logger.debug("Get element no " + (delegate.size() + 1) + ": " + result.toString());
         return result;
@@ -72,5 +73,13 @@ public class UniqueURIQueue implements IUniqueURIQueue {
 	public boolean isEmpty() {
         return delegate.isEmpty();
     }
+	
+	public int totalSize() {
+		return allURIs.size();
+	}
+	
+	public int currentSize() {
+		return delegate.size();
+	}
 
 }

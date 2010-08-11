@@ -31,6 +31,9 @@ public interface IBuilderState extends IResourceDescriptions, IResourceDescripti
 	 * 
 	 * @param toBeAddedOrUpdated a map containing URI to String, where the String is the external representation of the underlying storage.
 	 * @param toBeRemoved the uris to be removed.
+	 * @param monitor the progress monitor to use for reporting progress to the user. It is the caller's responsibility
+	 *        to call done() on the given monitor. Accepts null, indicating that no progress should be
+	 *        reported and that the operation cannot be canceled.
 	 * 
 	 * @return a list of changes in the form of deltas.
 	 */
@@ -43,7 +46,10 @@ public interface IBuilderState extends IResourceDescriptions, IResourceDescripti
 	 * The change to the underlying {@link IResourceDescriptions} is guaranteed to be atomic.
 	 * 
 	 * @param toBeRemoved the uris or the cleaned resources.
-	 * 
+	 * @param monitor the progress monitor to use for reporting progress to the user. It is the caller's responsibility
+	 *        to call done() on the given monitor. Accepts null, indicating that no progress should be
+	 *        reported and that the operation cannot be canceled.
+	 *        
 	 * @return a list of changes in the form of deltas.
 	 */
 	ImmutableList<IResourceDescription.Delta> clean(Set<URI> toBeRemoved, IProgressMonitor monitor);

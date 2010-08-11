@@ -19,14 +19,25 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import com.google.inject.ImplementedBy;
 
 /**
+ * Strategy that implements the transitive analysis of dependencies among resources. 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @ImplementedBy(ResourceDescriptionsUpdater.class)
 public interface IResourceDescriptionsUpdater {
 
+	/**
+	 * @param monitor the progress monitor to use for reporting progress to the user. It is the caller's responsibility
+	 *        to call done() on the given monitor. Accepts null, indicating that no progress should be
+	 *        reported and that the operation cannot be cancelled.
+	 */
 	Collection<IResourceDescription.Delta> transitiveUpdate(IResourceDescriptions oldState, ResourceSet rs,
 			Set<URI> toBeUpdated, Set<URI> toBeDeleted, IProgressMonitor monitor);
 	
+	/**
+	 * @param monitor the progress monitor to use for reporting progress to the user. It is the caller's responsibility
+	 *        to call done() on the given monitor. Accepts null, indicating that no progress should be
+	 *        reported and that the operation cannot be cancelled.
+	 */
 	Collection<IResourceDescription.Delta> clean(IResourceDescriptions oldState, Set<URI> toBeDeleted, IProgressMonitor monitor);
 	
 }

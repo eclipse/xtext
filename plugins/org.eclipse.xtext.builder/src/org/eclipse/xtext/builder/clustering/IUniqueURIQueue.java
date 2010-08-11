@@ -14,21 +14,51 @@ import org.eclipse.emf.common.util.URI;
 import com.google.inject.ImplementedBy;
 
 /**
+ * A queue that holds a number of URIs. Subsequently added equal URIs will be ignored.
+ * Implementors are free to provide prioritized or otherwise ordered results.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface IUniqueURIQueue {
 
+	/**
+	 * An injectable factory allows to instantiate queues with initial content.
+	 * @author Sebastian Zarnekow - Initial contribution and API
+	 */
 	@ImplementedBy(UniqueURIQueue.Factory.class)
 	interface Factory {
+		
+		/**
+		 * @return a newly created queue that holds the unique entries 
+		 * of the initial collection URIs.
+		 */
 		IUniqueURIQueue create(Collection<URI> initial);
 	}
 	
-	boolean isEmpty();
+	/**
+	 * Remove the first entry of the queue. 
+	 * @return the first entry of the queue or <code>null<code> if it is empty.
+	 */
+	URI remove();
 
-	Collection<URI> getAllURIs();
-
-	URI get();
-
+	/**
+	 * Add an URI to the queue. If it has been added before, it will be ignored. 
+	 */
 	void add(URI uri);
+	
+	/**
+	 * @return <code>true</code> if the queue is empty.
+	 */
+	boolean isEmpty();
+	
+	/**
+	 * @return the total number of elements.
+	 */
+	int totalSize();
+	
+	/**
+	 * @return the current number of available elements.
+	 */
+	int currentSize();
 
 }

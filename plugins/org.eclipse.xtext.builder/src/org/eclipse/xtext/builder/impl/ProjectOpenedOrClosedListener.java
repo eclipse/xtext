@@ -24,6 +24,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
@@ -126,15 +127,21 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 						@Override
 						protected void execute(IProgressMonitor monitor) throws CoreException,
 								InvocationTargetException, InterruptedException {
-							ResourceSet resourceSet = getResourceSetProvider().get(project);
-							
-							getBuilderState().update(resourceSet,
-									toBeBuilt.getToBeUpdated(), 
-									toBeBuilt.getToBeDeleted(), 
-									monitor);
-							
-							resourceSet.getResources().clear();
-							resourceSet.eAdapters().clear();
+							SubMonitor progress = SubMonitor.convert(monitor, 1);
+							try {
+								ResourceSet resourceSet = getResourceSetProvider().get(project);
+								
+								getBuilderState().update(resourceSet,
+										toBeBuilt.getToBeUpdated(), 
+										toBeBuilt.getToBeDeleted(), 
+										progress.newChild(1));
+								
+								resourceSet.getResources().clear();
+								resourceSet.eAdapters().clear();
+							} finally {
+								if (monitor != null)
+									monitor.done();
+							}
 						}
 					}.run(monitor);
 				} catch (InvocationTargetException e) {
