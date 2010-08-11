@@ -28,7 +28,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.generator.ManifestMergerTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.ecore.Bug283278Test.class);
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.ElementFinderTest.class);
-      suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.EmptyPackageAwareGrammarAccessFragmentTest.class);
+      suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.SubPackageAwareGrammarAccessFragmentTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.FragmentFakingEcoreResourceTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.ParserTest.class);
