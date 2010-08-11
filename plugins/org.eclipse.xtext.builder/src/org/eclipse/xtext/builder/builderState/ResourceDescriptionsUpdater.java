@@ -35,7 +35,7 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ResourceDescriptionsUpdater {
+public class ResourceDescriptionsUpdater implements IResourceDescriptionsUpdater {
 
 	private static final Logger log = Logger.getLogger(ResourceDescriptionsUpdater.class);
 

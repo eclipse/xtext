@@ -71,9 +71,9 @@ public class ResourceDescriptionUpdaterTest extends AbstractBuilderTest {
 		participant.reset();
 		changeFile(folder, REFERENCED_FILE_NAME, "namespace bar { object B object C }");
 
-		assertTrue(affectedResourcesContain(PROJECT1, REFERENCED_FILE_NAME));
-		assertTrue(affectedResourcesContain(PROJECT1, REFERENCING_FILE_NAME));
-		assertFalse(affectedResourcesContain(PROJECT2, REFERENCING_FILE_NAME));
+		assertTrue(REFERENCED_FILE_NAME, affectedResourcesContain(PROJECT1, REFERENCED_FILE_NAME));
+		assertTrue(REFERENCING_FILE_NAME, affectedResourcesContain(PROJECT1, REFERENCING_FILE_NAME));
+		assertFalse(REFERENCING_FILE_NAME, affectedResourcesContain(PROJECT2, REFERENCING_FILE_NAME));
 	}
 
 	private boolean affectedResourcesContain(final String projectName, final String fileName) {

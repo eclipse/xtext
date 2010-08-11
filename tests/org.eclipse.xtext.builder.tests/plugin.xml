@@ -150,6 +150,12 @@
     <participant class="org.eclipse.xtext.builder.tests.ui.BuilderTestLanguageExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
     </participant>
  </extension>
+  <extension
+        point="org.eclipse.xtext.ui.shared.overridingGuiceModule">
+     <module
+           class="org.eclipse.xtext.builder.builderState.DispatchingSharedModule">
+     </module>
+  </extension>
 
 
 
