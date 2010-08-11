@@ -1636,6 +1636,75 @@ assertEquals("DomainModel",&nbsp;parserRule.getName());<br>
 </p>
 </div>
 </div>
+<div class="section" title="Working with Live Models">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="WorkingwithLiveModels"></a>Working with Live Models</h3>
+</div>
+</div>
+</div>
+<p>In a running Xtext Workbench, there are a number of components which access the semantic model of an open editor, i.e. the parser, the linker, the validator, the outline, the index builder etc. While some of these components are executed by the display thread, others like the parser or the indexer use different concurrent threads to not deteriorate the editing experience. If you for example want to have a consistent outline of your model, it is essential to keep other threads from modifying the model while the outline component reads it.</p>
+<p>Many of the prominent locations where users can hook in their own code in Xtext are already called from within a thread safe context, e.g. the API for 
+					<a class="link" href="#quickfixes" title="Quick Fixes">quick fixes</a>. Consequently, the following usually applies only if you add additional functionality on top of Xtext, e.g. custom UI actions.
+				</p>
+<p>Each 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/XtextEditor.java?root=Modeling_Project&view=co" target="_new">XtextEditor</a> uses an 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/IXtextDocument.java?root=Modeling_Project&view=co" target="_new">IXtextDocument</a> to store its model. To avoid synchronization trouble, neither of them provides direct access to the 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java?root=Modeling_Project&view=co" target="_new">XtextResource</a> storing the semantic model. Instead, the 
+					<span class="emphasis"><em>IXtextDocument</em></span> has two methods 
+					<span class="emphasis"><em>readOnly()</em></span> and 
+					<span class="emphasis"><em>modify()</em></span>. Both take an argument of type 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.util/src/org/eclipse/xtext/util/concurrent/IUnitOfWork.java?root=Modeling_Project&view=co" target="_new">IUnitOfWork</a>
+					<span class="emphasis"><em>(&lt;T&gt;, IXtextResource)</em></span> which defines a method 
+					<span class="emphasis"><em>&lt;T&gt; exec(IXtextResource)</em></span> that contains what you want to do with the model and allows to deliver a result of arbitrary type.
+				</p>
+<p>So here is an example of safely reading a model:</p>
+<div class="literallayout">
+<p>
+<code class="code">IXtextDocument&nbsp;myDocument&nbsp;=&nbsp;...;<br>
+String&nbsp;rootElementName&nbsp;=&nbsp;&nbsp;myDocument.readOnly(<br>
+&nbsp;&nbsp;new&nbsp;IUnitOfWork(){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;String&nbsp;exec(IXtextResource&nbsp;resource)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyType&nbsp;type&nbsp;=&nbsp;(MyType)resource.getContents().get(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;myType.getName();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;});<br>
+
+<br>
+
+</code>
+</p>
+</div>
+<p>Direct write-access on the document is usually only performed inside the framework. If you want to change a document by means of its semantic model, you should rather use an 
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IDocumentEditor.java?root=Modeling_Project&view=co" target="_new">IDocumentEditor</a> which uses the 
+					<span class="emphasis"><em>modify()</em></span> method internally but takes care of synchronizing the 
+					<a class="link" href="#node_model" title="Working with the Parse Tree (aka Node Model)">node model</a>, too:
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">@Inject<br>
+private&nbsp;IDocumentEditor&nbsp;documentEditor;<br>
+
+<br>
+public&nbsp;void&nbsp;setRootName(IXtextDocument&nbsp;myDocument,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;final&nbsp;String&nbsp;newName)&nbsp;{<br>
+&nbsp;documentEditor.process(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;new&nbsp;IUnitOfWork.Void()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;process(IXtextResource&nbsp;resource)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyType&nbsp;type&nbsp;=&nbsp;(MyType)resource.getContents().get(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myType.setName(newName);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},&nbsp;myDocument);<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
 <div class="section" title="Summary">
 <div class="titlepage">
 <div>
@@ -4395,7 +4464,7 @@ Workflow&nbsp;{<br>
 </div>
 </div>
 <p>In the following table the most important standard generator fragments are listed. Please refer to the Javadocs for more detailed documentation.</p>
-<table id="N10CF3">
+<table id="N10D39">
 <tr>
 						
 <th>Class</th>
@@ -6414,7 +6483,7 @@ IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;ERefer
 </div>
 <p>The 
 						<span class="emphasis"><em>ImportedNamespaceAwareLocalScopeProvider</em></span> looks up 
-						<span class="emphasis"><em>EAttributes</em></span> with name &sbquo;importNamespace&rsquo; and 
+						<span class="emphasis"><em>EAttributes</em></span> with name &sbquo;importedNamespace&rsquo; and 
 						interprets them as import statements. By default qualified names with or without a wildcard at the end 
 						are supported. For an import of a qualified name the simple name is made available as we know from e.g. 
 						Java, where
@@ -9072,8 +9141,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 				<span class="emphasis"><em>code</em></span> is given by the third argument to the 
 				<span class="emphasis"><em>warning()</em></span> method and it is a reference 
 				to the static 
-				<span class="emphasis"><em>String</em></span> field 
-				<span class="emphasis"><em>INVALID TYPE NAME</em></span> in the validator class.
+				<span class="emphasis"><em>String</em></span> field _==INVALID_TYPE_NAME==_ in the validator class.
 			</p>
 <div class="literallayout">
 <p>
@@ -9091,11 +9159,9 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 				<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/quickfix/QuickfixProviderFragment.java?root=Modeling_Project&view=co" target="_new">QuickfixProviderFragment</a> 
 				to our workflow and after regenerating the code we should find an empty class 
 				<span class="emphasis"><em>MyDslQuickfixProvider</em></span> 
-				in our DSL&rsquo;s UI project and new entries in the 
-				<span class="emphasis"><em>plugin.xml gen</em></span> file.
+				in our DSL&rsquo;s UI project and new entries in the _==plugin.xml_gen==_ file.
 			</p>
-<p>Continuing with the 
-				<span class="emphasis"><em>INVALID TYPE NAME</em></span> problem from the Domainmodel example we add a method with which 
+<p>Continuing with the _==INVALID_TYPE_NAME==_ problem from the Domainmodel example we add a method with which 
 				the problem can be fixed (have a look at the 
 				<span class="emphasis"><em>DomainmodelQuickfixProvider</em></span> for details):
 			</p>
@@ -10870,7 +10936,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IProjectCreator&gt;&nbsp;bindIProjectCr
 				<span class="emphasis"><em>XtextResource</em></span> we have provided an example. You must have the Helios version 2.3 of GMF Notation, Runtime and Tooling and their dependencies installed in your workbench to run the example. With other versions of GMF it might work to regenerate the diagram code. Choose 
 				<span class="emphasis"><em>New-&gt;Examples-&gt;Xtext-&gt;Xtext GMF Integration</em></span> to import it into your workbench. The example consists of a number of plug-ins
 			</p>
-<table id="N12217">
+<table id="N12254">
 <tr>
 					
 <td>Plug-in</td>

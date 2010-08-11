@@ -120,6 +120,41 @@ CompositeNode node = NodeUtil.getNode(domainModel);
 ParserRule parserRule = (ParserRule) node.getGrammarElement();
 assertEquals("DomainModel", parserRule.getName());
 
+h3. Working with Live Models
+
+p. In a running Xtext Workbench, there are a number of components which access the semantic model of an open editor, i.e. the parser, the linker, the validator, the outline, the index builder etc. While some of these components are executed by the display thread, others like the parser or the indexer use different concurrent threads to not deteriorate the editing experience. If you for example want to have a consistent outline of your model, it is essential to keep other threads from modifying the model while the outline component reads it.
+
+p. Many of the prominent locations where users can hook in their own code in Xtext are already called from within a thread safe context, e.g. the API for "quick fixes":#quickfixes. Consequently, the following usually applies only if you add additional functionality on top of Xtext, e.g. custom UI actions.
+
+p. Each ${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.XtextEditor} uses an ${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.model.IXtextDocument} to store its model. To avoid synchronization trouble, neither of them provides direct access to the ${org.eclipse.xtext/src/org.eclipse.xtext.resource.XtextResource} storing the semantic model. Instead, the _IXtextDocument_ has two methods _readOnly()_ and _modify()_. Both take an argument of type ${org.eclipse.xtext.util/src/org.eclipse.xtext.util.concurrent.IUnitOfWork}_(==&lt;T&gt;==, IXtextResource)_ which defines a method _==&lt;T&gt;== exec(IXtextResource)_ that contains what you want to do with the model and allows to deliver a result of arbitrary type.
+
+So here is an example of safely reading a model:
+
+bc.. IXtextDocument myDocument = ...;
+String rootElementName =  myDocument.readOnly(
+  new IUnitOfWork(){
+    public String exec(IXtextResource resource) {
+      MyType type = (MyType)resource.getContents().get(0);
+      return myType.getName();
+    }
+  });
+
+p. Direct write-access on the document is usually only performed inside the framework. If you want to change a document by means of its semantic model, you should rather use an ${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.model.edit.IDocumentEditor} which uses the _modify()_ method internally but takes care of synchronizing the "node model":#node_model, too:
+
+bc.. @Inject
+private IDocumentEditor documentEditor;
+
+public void setRootName(IXtextDocument myDocument,
+                        final String newName) {
+ documentEditor.process(
+    new IUnitOfWork.Void() {
+       public void process(IXtextResource resource) {
+          MyType type = (MyType)resource.getContents().get(0);
+          myType.setName(newName);
+       }
+    }, myDocument);
+}
+
 h3. Summary
 
 p. Let's summarize what we have learned: An Xtext model is loaded by an EMF Resource. The main model is represented as an instance of so called _EClasses_ which are themselves

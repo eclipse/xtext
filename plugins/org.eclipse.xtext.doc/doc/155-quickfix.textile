@@ -10,7 +10,7 @@ specific _code_ with the diagnostic.
 
 In the following example taken from the _DomainmodelJavaValidator_ 
 the diagnostic's _code_ is given by the third argument to the _warning()_ method and it is a reference 
-to the static _String_ field _INVALID TYPE NAME_ in the validator class.
+to the static _String_ field _==INVALID_TYPE_NAME==_ in the validator class.
 
 bc.. warning("Name should start with a capital", 
     DomainmodelPackage.TYPE__NAME, INVALID_TYPE_NAME, type.getName());
@@ -19,9 +19,9 @@ p. Now that the validation has a unique code identifying the problem we can regi
 We start by adding the 
 ${org.eclipse.xtext.generator/src/org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment} 
 to our workflow and after regenerating the code we should find an empty class _MyDslQuickfixProvider_ 
-in our DSL's UI project and new entries in the _plugin.xml gen_ file.
+in our DSL's UI project and new entries in the _==plugin.xml_gen==_ file.
 
-Continuing with the _INVALID TYPE NAME_ problem from the Domainmodel example we add a method with which 
+Continuing with the _==INVALID_TYPE_NAME==_ problem from the Domainmodel example we add a method with which 
 the problem can be fixed (have a look at the _DomainmodelQuickfixProvider_ for details):
 
 bc.. @Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)

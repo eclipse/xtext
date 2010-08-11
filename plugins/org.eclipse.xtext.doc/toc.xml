@@ -21,6 +21,7 @@
 <topic href="help/processing_Xtext_models.html#programmatic_EMF" label="Working with EMF Models"></topic>
 <topic href="help/processing_Xtext_models.html#node_model" label="Working with the Parse Tree (aka Node Model)"></topic>
 <topic href="help/processing_Xtext_models.html#working_with_grammar_model" label="Working with the Grammar"></topic>
+<topic href="help/processing_Xtext_models.html#WorkingwithLiveModels" label="Working with Live Models"></topic>
 <topic href="help/processing_Xtext_models.html#Summary" label="Summary"></topic>
 </topic>
 <topic href="help/getting-started-xpand.html" label="Writing a Code Generator">
