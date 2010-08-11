@@ -4,7 +4,14 @@
 package org.eclipse.xtext.builder.tests.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.builder.builderState.DispatchingSharedModule;
+import org.eclipse.xtext.builder.clustering.CurrentDescriptions;
 import org.eclipse.xtext.resource.IContainer;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeProvider;
+
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -16,5 +23,14 @@ public class BuilderTestLanguageUiModule extends org.eclipse.xtext.builder.tests
 
 	public Class<? extends IContainer.Manager> bindIContainer$Manager() {
 		return org.eclipse.xtext.resource.containers.StateBasedContainerManager.class;
+	}
+	
+	@Override
+	public void configureIResourceDescriptionsBuilderScope(Binder binder) {
+		if (DispatchingSharedModule.useClusteredBuilder())
+			binder.bind(IResourceDescriptions.class).annotatedWith(
+					Names.named(AbstractGlobalScopeProvider.NAMED_BUILDER_SCOPE)).to(CurrentDescriptions.ResourceSetAware.class);
+		else
+			super.configureIResourceDescriptionsBuilderScope(binder);
 	}
 }
