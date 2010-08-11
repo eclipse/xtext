@@ -40,6 +40,8 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 
 	private static final Logger log = Logger.getLogger(GrammarAccessFragment.class);
 
+	private String xmlVersion = "1.1";
+	
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory()
@@ -65,7 +67,7 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 				+ "/" + xmiPath), ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		addAllGrammarsToResource(resource, copiedGrammar, new HashSet<Grammar>());
 		if(resource instanceof XMLResource) {
-			((XMLResource) resource).setXMLVersion("1.1");
+			((XMLResource) resource).setXMLVersion(getXmlVersion());
 		}
 		try {
 			resource.save(null);
@@ -90,5 +92,13 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 			Resource packResource = generatedPackage.eResource();
 			packResource.setURI(URI.createURI(generatedPackage.getNsURI()));
 		}
+	}
+
+	public void setXmlVersion(String xmlVersion) {
+		this.xmlVersion = xmlVersion;
+	}
+
+	public String getXmlVersion() {
+		return xmlVersion;
 	}
 }
