@@ -33,20 +33,24 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 		this.document = document;
 		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
-			public void process(XtextResource resource) throws Exception {
+			public void process(XtextResource resource) {
 				if (resource != null) {
-					IResourceServiceProvider serviceProvider = resource.getResourceServiceProvider();
-					if (serviceProvider != null) {
-						IResourceDescription.Manager descriptionManager = serviceProvider.getResourceDescriptionManager();
-						if (descriptionManager != null) {
-							final IResourceDescription description = descriptionManager.getResourceDescription(resource);
-							if (description != null)
-								copyState(description);							
-						}
-					}
+					initiallyProcessResource(resource);
 				}
 			}
 		});
+	}
+	
+	protected void initiallyProcessResource(XtextResource resource) {
+		IResourceServiceProvider serviceProvider = resource.getResourceServiceProvider();
+		if (serviceProvider != null) {
+			IResourceDescription.Manager descriptionManager = serviceProvider.getResourceDescriptionManager();
+			if (descriptionManager != null) {
+				final IResourceDescription description = descriptionManager.getResourceDescription(resource);
+				if (description != null)
+					copyState(description);							
+			}
+		}
 	}
 	
 	public void disconnect(IXtextDocument document) {
@@ -95,5 +99,5 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 			throw new IllegalStateException("Cannot use getContents if this dirty resource is currently not mementoed");
 		return content;
 	}
-	
+
 }
