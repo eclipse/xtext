@@ -5287,6 +5287,37 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;ConcreteSyntaxEValidator&gt;&nbsp;<br>
 					<span class="emphasis"><em>ERROR</em></span> with a given string to explain the situation. The essential part of each check is an invariant that must hold true for the given context. If it fails the check will produce an issue with the provided explanation.
 				</p>Please read more about the Check language as well as the underlying expression language in Xpand&rsquo;s reference documentation which is shipped as Eclipse help. 
 			</div>
+<div class="section" title="Validating Manually">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="ValidatingManually"></a>Validating Manually</h3>
+</div>
+</div>
+</div>
+<p>As noted above, Xtext uses EMF&rsquo;s 
+					<span class="emphasis"><em>EValidator</em></span> API to register Java or Check validators. You can run the validators on your model programmatically using EMF&rsquo;s 
+					<span class="emphasis"><em>Diagnostician</em></span>, e.g.
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">EObject&nbsp;myModel&nbsp;=&nbsp;myResource.getContents().get(0);<br>
+Diagnostic&nbsp;diagnostic&nbsp;=&nbsp;Diagnostician.INSTANCE.validate(myModel);<br>
+switch&nbsp;(diagnostic.getSeverity())&nbsp;{<br>
+&nbsp;&nbsp;case&nbsp;Diagnostic.ERROR:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.err.println("Model&nbsp;has&nbsp;errors:&nbsp;",diagnostic);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+&nbsp;&nbsp;case&nbsp;Diagnostic.WARNING:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.err.println("Model&nbsp;has&nbsp;warnings:&nbsp;",diagnostic);<br>
+}<br>
+
+<br>
+
+</code>
+</p>
+</div>
+</div>
 <div class="section" title="Test Validators">
 <div class="titlepage">
 <div>
@@ -6045,14 +6076,15 @@ Import&nbsp;:&nbsp;<br>
 <div class="literallayout">
 <p>
 <code class="code">@Inject<br>
-IContainer.Manager&nbsp;containerManager;<br>
+IContainer.Manager&nbsp;manager;<br>
 
 <br>
 public&nbsp;void&nbsp;listVisibleResources(<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;myResource,&nbsp;IResourceDescriptions&nbsp;index)&nbsp;{<br>
 &nbsp;&nbsp;IResourceDescription&nbsp;descr&nbsp;=&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index.getResourceDescription(myResource.getURI());<br>
-&nbsp;&nbsp;for(IContainer&nbsp;visibleContainer:&nbsp;manager.getVisibleContainers(descr))&nbsp;{&nbsp;<br>
+&nbsp;&nbsp;for(IContainer&nbsp;visibleContainer:&nbsp;<br>
+&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;manager.getVisibleContainers(descr,&nbsp;index))&nbsp;{&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;for(IResourceDescription&nbsp;visibleResourceDesc:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visibleContainer.getResourceDescription())&nbsp;{&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(visibleResourceDesc.getURI());<br>
@@ -10936,7 +10968,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;IProjectCreator&gt;&nbsp;bindIProjectCr
 				<span class="emphasis"><em>XtextResource</em></span> we have provided an example. You must have the Helios version 2.3 of GMF Notation, Runtime and Tooling and their dependencies installed in your workbench to run the example. With other versions of GMF it might work to regenerate the diagram code. Choose 
 				<span class="emphasis"><em>New-&gt;Examples-&gt;Xtext-&gt;Xtext GMF Integration</em></span> to import it into your workbench. The example consists of a number of plug-ins
 			</p>
-<table id="N12254">
+<table id="N12265">
 <tr>
 					
 <td>Plug-in</td>

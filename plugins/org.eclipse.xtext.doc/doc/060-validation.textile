@@ -117,6 +117,20 @@ p. Each check works in a specific context (here: _Type_) and can further denote 
 
  Please read more about the Check language as well as the underlying expression language in Xpand's reference documentation which is shipped as Eclipse help. 
  
+h3. Validating Manually
+
+As noted above, Xtext uses EMF's _EValidator_ API to register Java or Check validators. You can run the validators on your model programmatically using EMF's _Diagnostician_, e.g.
+
+bc.. EObject myModel = myResource.getContents().get(0);
+Diagnostic diagnostic = Diagnostician.INSTANCE.validate(myModel);
+switch (diagnostic.getSeverity()) {
+  case Diagnostic.ERROR:
+    System.err.println("Model has errors: ",diagnostic);
+    break;
+  case Diagnostic.WARNING:
+    System.err.println("Model has warnings: ",diagnostic);
+}
+
 h3(#test_validators). Test Validators
  
 If you have implemented your validators by extending ${org.eclipse.xtext/src/org.eclipse.xtext.validation.AbstractDeclarativeValidator}, there are helper classes which may assist you when testing your validators.

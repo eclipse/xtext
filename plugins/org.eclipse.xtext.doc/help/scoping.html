@@ -433,14 +433,15 @@ Import&nbsp;:&nbsp;<br>
 <div class="literallayout">
 <p>
 <code class="code">@Inject<br>
-IContainer.Manager&nbsp;containerManager;<br>
+IContainer.Manager&nbsp;manager;<br>
 
 <br>
 public&nbsp;void&nbsp;listVisibleResources(<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;myResource,&nbsp;IResourceDescriptions&nbsp;index)&nbsp;{<br>
 &nbsp;&nbsp;IResourceDescription&nbsp;descr&nbsp;=&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index.getResourceDescription(myResource.getURI());<br>
-&nbsp;&nbsp;for(IContainer&nbsp;visibleContainer:&nbsp;manager.getVisibleContainers(descr))&nbsp;{&nbsp;<br>
+&nbsp;&nbsp;for(IContainer&nbsp;visibleContainer:&nbsp;<br>
+&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;manager.getVisibleContainers(descr,&nbsp;index))&nbsp;{&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;for(IResourceDescription&nbsp;visibleResourceDesc:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visibleContainer.getResourceDescription())&nbsp;{&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(visibleResourceDesc.getURI());<br>

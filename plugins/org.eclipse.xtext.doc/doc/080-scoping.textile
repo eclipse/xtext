@@ -235,13 +235,14 @@ be very different depending on the language. The following method lists all reso
 given _Resource_:  
 
 bc.. @Inject
-IContainer.Manager containerManager;
+IContainer.Manager manager;
 
 public void listVisibleResources(
         Resource myResource, IResourceDescriptions index) {
   IResourceDescription descr = 
         index.getResourceDescription(myResource.getURI());
-  for(IContainer visibleContainer: manager.getVisibleContainers(descr)) { 
+  for(IContainer visibleContainer: 
+  	    manager.getVisibleContainers(descr, index)) { 
     for(IResourceDescription visibleResourceDesc:
             visibleContainer.getResourceDescription()) { 
       System.out.println(visibleResourceDesc.getURI());
