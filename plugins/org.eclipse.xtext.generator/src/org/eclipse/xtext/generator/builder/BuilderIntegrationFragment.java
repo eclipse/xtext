@@ -55,6 +55,13 @@ public class BuilderIntegrationFragment extends DefaultGeneratorFragment {
 							+ AbstractGlobalScopeProvider.class.getName() + ".NAMED_BUILDER_SCOPE)).to("
 							+ "org.eclipse.xtext.builder.builderState.ShadowingResourceDescriptions.class)")
 			.addTypeToType("org.eclipse.xtext.ui.editor.IXtextEditorCallback", "org.eclipse.xtext.builder.nature.NatureAddingEditorCallback")
+			.addConfiguredBinding(
+					IResourceDescriptions.class.getName() + "Persisted",
+					"binder.bind("+ IResourceDescriptions.class.getName() + ".class"
+							+ ").annotatedWith(com.google.inject.name.Names.named("
+							+ "org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource.PERSISTED_DESCRIPTIONS)).to("
+							+ "org.eclipse.xtext.builder.builderState.IBuilderState.class)")
+			.addTypeToType("org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource", "org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource")
 			.getBindings();
 	}
 
