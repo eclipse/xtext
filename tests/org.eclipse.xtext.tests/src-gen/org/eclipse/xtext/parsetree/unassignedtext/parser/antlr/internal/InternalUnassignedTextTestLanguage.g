@@ -358,7 +358,15 @@ ruleDatatypeRule returns [EObject current=null]
 	    }
 
 )
-)ruleDatatype)
+)
+    { 
+        currentNode=createCompositeNode(grammarAccess.getDatatypeRuleAccess().getDatatypeParserRuleCall_2(), currentNode); 
+    }
+ruleDatatype
+    { 
+        currentNode = currentNode.getParent();
+    }
+)
 ;
 
 

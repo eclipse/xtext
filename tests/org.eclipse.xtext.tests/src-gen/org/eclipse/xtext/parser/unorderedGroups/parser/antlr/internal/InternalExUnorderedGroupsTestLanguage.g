@@ -88,8 +88,8 @@ ruleDelegateModel returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getDelegateModelAccess().getModelParserRuleCall(), currentNode); 
     }
     this_Model_0=ruleModel
-    { 
-        $current = $this_Model_0.current; 
+    {
+        $current = $this_Model_0.current;
         currentNode = currentNode.getParent();
     }
 

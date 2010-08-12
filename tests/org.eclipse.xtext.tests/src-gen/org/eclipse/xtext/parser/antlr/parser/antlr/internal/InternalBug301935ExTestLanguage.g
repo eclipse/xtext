@@ -88,8 +88,8 @@ ruleDelegateModel returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getDelegateModelAccess().getModelParserRuleCall(), currentNode); 
     }
     this_Model_0=ruleModel
-    { 
-        $current = $this_Model_0.current; 
+    {
+        $current = $this_Model_0.current;
         currentNode = currentNode.getParent();
     }
 
@@ -167,7 +167,15 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)ruleNL(
+)
+    { 
+        currentNode=createCompositeNode(grammarAccess.getModelAccess().getNLParserRuleCall_3(), currentNode); 
+    }
+ruleNL
+    {
+        currentNode = currentNode.getParent();
+    }
+(
 (
 		lv_value2_4_0=RULE_ID
 		{

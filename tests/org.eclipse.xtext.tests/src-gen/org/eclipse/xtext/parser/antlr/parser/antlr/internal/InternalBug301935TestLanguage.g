@@ -141,7 +141,15 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)ruleNL(
+)
+    { 
+        currentNode=createCompositeNode(grammarAccess.getModelAccess().getNLParserRuleCall_3(), currentNode); 
+    }
+ruleNL
+    { 
+        currentNode = currentNode.getParent();
+    }
+(
 (
 		lv_value2_4_0=RULE_ID
 		{

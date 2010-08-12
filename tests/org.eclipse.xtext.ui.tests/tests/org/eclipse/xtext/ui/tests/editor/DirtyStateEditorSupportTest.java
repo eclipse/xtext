@@ -20,19 +20,19 @@ import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.naming.SimpleNameProvider;
 import org.eclipse.xtext.resource.EObjectDescription;
+import org.eclipse.xtext.resource.IContainer.Manager;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.IContainer.Manager;
-import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport;
+import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport.IDirtyStateEditorSupportClient;
 import org.eclipse.xtext.ui.editor.DirtyStateManager;
 import org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource;
 import org.eclipse.xtext.ui.editor.IDirtyResource;
-import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport.IDirtyStateEditorSupportClient;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
 import org.eclipse.xtext.ui.notification.StateChangeEventBroker;
@@ -45,7 +45,7 @@ import com.google.common.collect.Lists;
  */
 public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest 
 	implements DirtyStateEditorSupport.IDirtyStateEditorSupportClient, DirtyStateEditorSupport.IConcurrentEditingCallback, IDirtyResource,
-		IResourceDescription.Manager {
+		IResourceDescription.Manager, IResourceDescriptions {
 
 	private DirtyStateEditorSupport dirtyStateSupport;
 	private VerifyListener verifyListener;
@@ -374,5 +374,13 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 	public boolean isDirty() {
 		return true;
 	}
-	
+
+	public Iterable<IResourceDescription> getAllResourceDescriptions() {
+		throw new UnsupportedOperationException();
+	}
+
+	public IResourceDescription getResourceDescription(URI uri) {
+		return null;
+	}
+
 }

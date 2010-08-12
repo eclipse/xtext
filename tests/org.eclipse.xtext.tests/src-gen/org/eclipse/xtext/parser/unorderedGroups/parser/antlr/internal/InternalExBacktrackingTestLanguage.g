@@ -98,8 +98,8 @@ ruleDelegateModel returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getDelegateModelAccess().getModelParserRuleCall(), currentNode); 
     }
     this_Model_0=ruleModel
-    { 
-        $current = $this_Model_0.current; 
+    {
+        $current = $this_Model_0.current;
         currentNode = currentNode.getParent();
     }
 
@@ -1874,8 +1874,8 @@ ruleFirstParameter returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getFirstParameterAccess().getClosureParameterParserRuleCall_0(), currentNode); 
     }
     this_ClosureParameter_0=ruleClosureParameter
-    { 
-        $current = $this_ClosureParameter_0.current; 
+    {
+        $current = $this_ClosureParameter_0.current;
         currentNode = currentNode.getParent();
     }
 
@@ -1887,8 +1887,8 @@ ruleFirstParameter returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getFirstParameterAccess().getParameterParserRuleCall_1(), currentNode); 
     }
     this_Parameter_1=ruleParameter
-    { 
-        $current = $this_Parameter_1.current; 
+    {
+        $current = $this_Parameter_1.current;
         currentNode = currentNode.getParent();
     }
 )
@@ -2713,8 +2713,8 @@ ruleTopLevelExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getTopLevelExpressionAccess().getVarDeclarationParserRuleCall_0(), currentNode); 
     }
     this_VarDeclaration_0=ruleVarDeclaration
-    { 
-        $current = $this_VarDeclaration_0.current; 
+    {
+        $current = $this_VarDeclaration_0.current;
         currentNode = currentNode.getParent();
     }
 
@@ -2726,8 +2726,8 @@ ruleTopLevelExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getTopLevelExpressionAccess().getValDeclarationParserRuleCall_1(), currentNode); 
     }
     this_ValDeclaration_1=ruleValDeclaration
-    { 
-        $current = $this_ValDeclaration_1.current; 
+    {
+        $current = $this_ValDeclaration_1.current;
         currentNode = currentNode.getParent();
     }
 
@@ -2739,8 +2739,8 @@ ruleTopLevelExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getTopLevelExpressionAccess().getAssignmentExpressionParserRuleCall_2(), currentNode); 
     }
     this_AssignmentExpression_2=ruleAssignmentExpression
-    { 
-        $current = $this_AssignmentExpression_2.current; 
+    {
+        $current = $this_AssignmentExpression_2.current;
         currentNode = currentNode.getParent();
     }
 )
@@ -2774,8 +2774,8 @@ ruleExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getExpressionAccess().getAssignmentExpressionParserRuleCall(), currentNode); 
     }
     this_AssignmentExpression_0=ruleAssignmentExpression
-    { 
-        $current = $this_AssignmentExpression_0.current; 
+    {
+        $current = $this_AssignmentExpression_0.current;
         currentNode = currentNode.getParent();
     }
 
@@ -2809,8 +2809,8 @@ ruleAssignmentExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getAssignmentExpressionAccess().getCachedExpressionParserRuleCall_0(), currentNode); 
     }
     this_CachedExpression_0=ruleCachedExpression
-    { 
-        $current = $this_CachedExpression_0.current; 
+    {
+        $current = $this_CachedExpression_0.current;
         currentNode = currentNode.getParent();
     }
 ((
@@ -3211,8 +3211,8 @@ ruleTypeRef returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getTypeRefAccess().getClosureTypeRefParserRuleCall_0(), currentNode); 
     }
     this_ClosureTypeRef_0=ruleClosureTypeRef
-    { 
-        $current = $this_ClosureTypeRef_0.current; 
+    {
+        $current = $this_ClosureTypeRef_0.current;
         currentNode = currentNode.getParent();
     }
 
@@ -3224,8 +3224,8 @@ ruleTypeRef returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getTypeRefAccess().getSimpleTypeRefParserRuleCall_1(), currentNode); 
     }
     this_SimpleTypeRef_1=ruleSimpleTypeRef
-    { 
-        $current = $this_SimpleTypeRef_1.current; 
+    {
+        $current = $this_SimpleTypeRef_1.current;
         currentNode = currentNode.getParent();
     }
 )
@@ -3626,8 +3626,8 @@ ruleCachedExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getCachedExpressionAccess().getOrExpressionParserRuleCall_1(), currentNode); 
     }
     this_OrExpression_3=ruleOrExpression
-    { 
-        $current = $this_OrExpression_3.current; 
+    {
+        $current = $this_OrExpression_3.current;
         currentNode = currentNode.getParent();
     }
 )
@@ -3661,8 +3661,8 @@ ruleOrExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getOrExpressionAccess().getAndExpressionParserRuleCall_0(), currentNode); 
     }
     this_AndExpression_0=ruleAndExpression
-    { 
-        $current = $this_AndExpression_0.current; 
+    {
+        $current = $this_AndExpression_0.current;
         currentNode = currentNode.getParent();
     }
 ((
@@ -3744,8 +3744,8 @@ ruleAndExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getAndExpressionAccess().getRelationalExpressionParserRuleCall_0(), currentNode); 
     }
     this_RelationalExpression_0=ruleRelationalExpression
-    { 
-        $current = $this_RelationalExpression_0.current; 
+    {
+        $current = $this_RelationalExpression_0.current;
         currentNode = currentNode.getParent();
     }
 ((
@@ -3827,8 +3827,8 @@ ruleRelationalExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getRelationalExpressionAccess().getAdditiveExpressionParserRuleCall_0(), currentNode); 
     }
     this_AdditiveExpression_0=ruleAdditiveExpression
-    { 
-        $current = $this_AdditiveExpression_0.current; 
+    {
+        $current = $this_AdditiveExpression_0.current;
         currentNode = currentNode.getParent();
     }
 ((
@@ -3929,8 +3929,8 @@ ruleAdditiveExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getAdditiveExpressionAccess().getMultiplicativeExpressionParserRuleCall_0(), currentNode); 
     }
     this_MultiplicativeExpression_0=ruleMultiplicativeExpression
-    { 
-        $current = $this_MultiplicativeExpression_0.current; 
+    {
+        $current = $this_MultiplicativeExpression_0.current;
         currentNode = currentNode.getParent();
     }
 ((
@@ -4051,8 +4051,8 @@ ruleMultiplicativeExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getMultiplicativeExpressionAccess().getSetExpressionParserRuleCall_0(), currentNode); 
     }
     this_SetExpression_0=ruleSetExpression
-    { 
-        $current = $this_SetExpression_0.current; 
+    {
+        $current = $this_SetExpression_0.current;
         currentNode = currentNode.getParent();
     }
 ((
@@ -4192,8 +4192,8 @@ ruleSetExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getSetExpressionAccess().getUnaryOrInfixExpressionParserRuleCall_0(), currentNode); 
     }
     this_UnaryOrInfixExpression_0=ruleUnaryOrInfixExpression
-    { 
-        $current = $this_UnaryOrInfixExpression_0.current; 
+    {
+        $current = $this_UnaryOrInfixExpression_0.current;
         currentNode = currentNode.getParent();
     }
 ((
@@ -4292,8 +4292,8 @@ ruleUnaryOrInfixExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getUnaryOrInfixExpressionAccess().getPostopExpressionParserRuleCall_0(), currentNode); 
     }
     this_PostopExpression_0=rulePostopExpression
-    { 
-        $current = $this_PostopExpression_0.current; 
+    {
+        $current = $this_PostopExpression_0.current;
         currentNode = currentNode.getParent();
     }
 
@@ -4305,8 +4305,8 @@ ruleUnaryOrInfixExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getUnaryOrInfixExpressionAccess().getUnaryExpressionParserRuleCall_1(), currentNode); 
     }
     this_UnaryExpression_1=ruleUnaryExpression
-    { 
-        $current = $this_UnaryExpression_1.current; 
+    {
+        $current = $this_UnaryExpression_1.current;
         currentNode = currentNode.getParent();
     }
 
@@ -4318,8 +4318,8 @@ ruleUnaryOrInfixExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getUnaryOrInfixExpressionAccess().getPreopExpressionParserRuleCall_2(), currentNode); 
     }
     this_PreopExpression_2=rulePreopExpression
-    { 
-        $current = $this_PreopExpression_2.current; 
+    {
+        $current = $this_PreopExpression_2.current;
         currentNode = currentNode.getParent();
     }
 )
@@ -4563,8 +4563,8 @@ rulePostopExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getPostopExpressionAccess().getInfixExpressionParserRuleCall_0(), currentNode); 
     }
     this_InfixExpression_0=ruleInfixExpression
-    { 
-        $current = $this_InfixExpression_0.current; 
+    {
+        $current = $this_InfixExpression_0.current;
         currentNode = currentNode.getParent();
     }
 ((
@@ -4661,8 +4661,8 @@ ruleInfixExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getInfixExpressionAccess().getCallExpressionParserRuleCall_0(), currentNode); 
     }
     this_CallExpression_0=ruleCallExpression
-    { 
-        $current = $this_CallExpression_0.current; 
+    {
+        $current = $this_CallExpression_0.current;
         currentNode = currentNode.getParent();
     }
 (((
@@ -4881,8 +4881,8 @@ ruleCallExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getCallExpressionAccess().getPrimaryExpressionParserRuleCall_0(), currentNode); 
     }
     this_PrimaryExpression_0=rulePrimaryExpression
-    { 
-        $current = $this_PrimaryExpression_0.current; 
+    {
+        $current = $this_PrimaryExpression_0.current;
         currentNode = currentNode.getParent();
     }
 ((
@@ -4969,8 +4969,8 @@ rulePrimaryExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getFeatureCallParserRuleCall_0(), currentNode); 
     }
     this_FeatureCall_0=ruleFeatureCall
-    { 
-        $current = $this_FeatureCall_0.current; 
+    {
+        $current = $this_FeatureCall_0.current;
         currentNode = currentNode.getParent();
     }
 
@@ -4982,8 +4982,8 @@ rulePrimaryExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getConstructorCallExpressionParserRuleCall_1(), currentNode); 
     }
     this_ConstructorCallExpression_1=ruleConstructorCallExpression
-    { 
-        $current = $this_ConstructorCallExpression_1.current; 
+    {
+        $current = $this_ConstructorCallExpression_1.current;
         currentNode = currentNode.getParent();
     }
 
@@ -4995,8 +4995,8 @@ rulePrimaryExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getValueParserRuleCall_2(), currentNode); 
     }
     this_Value_2=ruleValue
-    { 
-        $current = $this_Value_2.current; 
+    {
+        $current = $this_Value_2.current;
         currentNode = currentNode.getParent();
     }
 
@@ -5008,8 +5008,8 @@ rulePrimaryExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getLiteralParserRuleCall_3(), currentNode); 
     }
     this_Literal_3=ruleLiteral
-    { 
-        $current = $this_Literal_3.current; 
+    {
+        $current = $this_Literal_3.current;
         currentNode = currentNode.getParent();
     }
 
@@ -5021,8 +5021,8 @@ rulePrimaryExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getKeywordVariablesParserRuleCall_4(), currentNode); 
     }
     this_KeywordVariables_4=ruleKeywordVariables
-    { 
-        $current = $this_KeywordVariables_4.current; 
+    {
+        $current = $this_KeywordVariables_4.current;
         currentNode = currentNode.getParent();
     }
 
@@ -5034,8 +5034,8 @@ rulePrimaryExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getParanthesizedExpressionParserRuleCall_5(), currentNode); 
     }
     this_ParanthesizedExpression_5=ruleParanthesizedExpression
-    { 
-        $current = $this_ParanthesizedExpression_5.current; 
+    {
+        $current = $this_ParanthesizedExpression_5.current;
         currentNode = currentNode.getParent();
     }
 
@@ -5047,8 +5047,8 @@ rulePrimaryExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getBlockExpressionParserRuleCall_6(), currentNode); 
     }
     this_BlockExpression_6=ruleBlockExpression
-    { 
-        $current = $this_BlockExpression_6.current; 
+    {
+        $current = $this_BlockExpression_6.current;
         currentNode = currentNode.getParent();
     }
 
@@ -5060,8 +5060,8 @@ rulePrimaryExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getWithExpressionParserRuleCall_7(), currentNode); 
     }
     this_WithExpression_7=ruleWithExpression
-    { 
-        $current = $this_WithExpression_7.current; 
+    {
+        $current = $this_WithExpression_7.current;
         currentNode = currentNode.getParent();
     }
 
@@ -5073,8 +5073,8 @@ rulePrimaryExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getWithContextExpressionParserRuleCall_8(), currentNode); 
     }
     this_WithContextExpression_8=ruleWithContextExpression
-    { 
-        $current = $this_WithContextExpression_8.current; 
+    {
+        $current = $this_WithContextExpression_8.current;
         currentNode = currentNode.getParent();
     }
 )
@@ -5676,8 +5676,8 @@ ruleFeatureCall returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getFeatureCallAccess().getOperationCallParserRuleCall_0(), currentNode); 
     }
     this_OperationCall_0=ruleOperationCall
-    { 
-        $current = $this_OperationCall_0.current; 
+    {
+        $current = $this_OperationCall_0.current;
         currentNode = currentNode.getParent();
     }
 
@@ -6325,8 +6325,8 @@ ruleLiteral returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getLiteralAccess().getValueLiteralParserRuleCall_0(), currentNode); 
     }
     this_ValueLiteral_0=ruleValueLiteral
-    { 
-        $current = $this_ValueLiteral_0.current; 
+    {
+        $current = $this_ValueLiteral_0.current;
         currentNode = currentNode.getParent();
     }
 
@@ -6338,8 +6338,8 @@ ruleLiteral returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getLiteralAccess().getLiteralFunctionParserRuleCall_1(), currentNode); 
     }
     this_LiteralFunction_1=ruleLiteralFunction
-    { 
-        $current = $this_LiteralFunction_1.current; 
+    {
+        $current = $this_LiteralFunction_1.current;
         currentNode = currentNode.getParent();
     }
 )
@@ -6378,8 +6378,8 @@ ruleLiteralFunction returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getLiteralFunctionAccess().getClosureExpressionParserRuleCall_1(), currentNode); 
     }
     this_ClosureExpression_1=ruleClosureExpression
-    { 
-        $current = $this_ClosureExpression_1.current; 
+    {
+        $current = $this_ClosureExpression_1.current;
         currentNode = currentNode.getParent();
     }
 
@@ -6674,8 +6674,8 @@ ruleOneOrManyExpressions returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getOneOrManyExpressionsAccess().getBlockExpressionWithoutBracketsParserRuleCall_0(), currentNode); 
     }
     this_BlockExpressionWithoutBrackets_0=ruleBlockExpressionWithoutBrackets
-    { 
-        $current = $this_BlockExpressionWithoutBrackets_0.current; 
+    {
+        $current = $this_BlockExpressionWithoutBrackets_0.current;
         currentNode = currentNode.getParent();
     }
 
@@ -6687,8 +6687,8 @@ ruleOneOrManyExpressions returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getOneOrManyExpressionsAccess().getExpressionParserRuleCall_1(), currentNode); 
     }
     this_Expression_1=ruleExpression
-    { 
-        $current = $this_Expression_1.current; 
+    {
+        $current = $this_Expression_1.current;
         currentNode = currentNode.getParent();
     }
 )
@@ -6840,8 +6840,8 @@ ruleParanthesizedExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getParanthesizedExpressionAccess().getExpressionParserRuleCall_1(), currentNode); 
     }
     this_Expression_1=ruleExpression
-    { 
-        $current = $this_Expression_1.current; 
+    {
+        $current = $this_Expression_1.current;
         currentNode = currentNode.getParent();
     }
 

@@ -74,7 +74,7 @@ public abstract class AbstractGrammarAccessTestLanguageRuntimeModule extends Def
 		return org.eclipse.xtext.generator.grammarAccess.parseTreeConstruction.GrammarAccessTestLanguageParsetreeConstructor.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.grammarAccess.EmptyPackageAwareGrammarAccessFragment
+	// contributed by org.eclipse.xtext.generator.grammarAccess.SubPackageAwareGrammarAccessFragment
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.generator.grammarAccess.services.GrammarAccessTestLanguageGrammarAccess.class;
 	}

@@ -424,8 +424,8 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
                     _fsp--;
                     if (failed) return current;
                     if ( backtracking==0 ) {
-                       
-                              current = this_Postop_0; 
+
+                              current = this_Postop_0;
                               currentNode = currentNode.getParent();
                           
                     }
@@ -450,8 +450,8 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
                     _fsp--;
                     if (failed) return current;
                     if ( backtracking==0 ) {
-                       
-                              current = this_Preop_1; 
+
+                              current = this_Preop_1;
                               currentNode = currentNode.getParent();
                           
                     }
@@ -731,8 +731,8 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
-               
-                      current = this_Variable_0; 
+
+                      current = this_Variable_0;
                       currentNode = currentNode.getParent();
                   
             }

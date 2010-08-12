@@ -152,8 +152,8 @@ public class InternalExUnorderedGroupsTestLanguageParser extends AbstractInterna
             this_Model_0=ruleModel();
             _fsp--;
 
-             
-                    current = this_Model_0; 
+
+                    current = this_Model_0;
                     currentNode = currentNode.getParent();
                 
 

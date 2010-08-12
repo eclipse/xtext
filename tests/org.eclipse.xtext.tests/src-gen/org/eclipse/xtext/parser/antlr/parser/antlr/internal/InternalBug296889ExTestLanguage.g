@@ -179,8 +179,8 @@ ruleExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getExpressionAccess().getPostopParserRuleCall_0(), currentNode); 
     }
     this_Postop_0=rulePostop
-    { 
-        $current = $this_Postop_0.current; 
+    {
+        $current = $this_Postop_0.current;
         currentNode = currentNode.getParent();
     }
 
@@ -192,8 +192,8 @@ ruleExpression returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getExpressionAccess().getPreopParserRuleCall_1(), currentNode); 
     }
     this_Preop_1=rulePreop
-    { 
-        $current = $this_Preop_1.current; 
+    {
+        $current = $this_Preop_1.current;
         currentNode = currentNode.getParent();
     }
 )
@@ -310,8 +310,8 @@ rulePostop returns [EObject current=null]
         currentNode=createCompositeNode(grammarAccess.getPostopAccess().getVariableParserRuleCall_0(), currentNode); 
     }
     this_Variable_0=ruleVariable
-    { 
-        $current = $this_Variable_0.current; 
+    {
+        $current = $this_Variable_0.current;
         currentNode = currentNode.getParent();
     }
 ((
