@@ -111,6 +111,9 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 	private static final String contextMenuID = "xtextOutlineContextMenu";
 
 	private ViewerSorter sorter;
+
+	@Inject(optional=true)
+	private IContentOutlineContextMenuOverrides contextMenuManagerOverrides;
 	
 	public XtextContentOutlinePage() {
 		sorter = createSorter();
@@ -149,6 +152,9 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 				fillContextMenu(manager);
 			}
 		});
+		if(contextMenuManagerOverrides != null) {
+			manager.setOverrides(contextMenuManagerOverrides);			
+		}
 		contextMenu = manager.createContextMenu(getTreeViewer().getTree());
 		getTreeViewer().getTree().setMenu(contextMenu);
 
@@ -389,4 +395,5 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 			}
 		});
 	}
+	
 }
