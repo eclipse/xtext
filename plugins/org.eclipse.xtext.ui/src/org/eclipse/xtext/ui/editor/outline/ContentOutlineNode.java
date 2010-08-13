@@ -213,7 +213,8 @@ public class ContentOutlineNode implements IContentOutlineNode {
 				|| ResourceMapping.class.isAssignableFrom(expected)
 				|| IContributorResourceAdapter.class.isAssignableFrom(expected))
 			return null;
-		return Platform.getAdapterManager().getAdapter(this, expected);
+		Object adapter = Platform.getAdapterManager().getAdapter(this, expected);
+		return adapter;
 	}
 	
 	public void setTransformer(AbstractSemanticModelTransformer transformer) {

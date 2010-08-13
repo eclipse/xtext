@@ -9,13 +9,9 @@
 package org.eclipse.xtext.ui.editor.outline.actions;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IContentOutlineNode;
-import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -40,22 +36,8 @@ public class DefaultContentOutlineNodeAdapterFactory implements IContentOutlineN
 				if (clazz.getInstanceClass().equals(adapterType)) {
 					return Boolean.TRUE;
 				}
-				else if (IFile.class.equals(adapterType)) {
-					return getUnderlyingResource();
-				}
-				else if (IResource.class.equals(adapterType)) {
-					return getUnderlyingResource();
-				}
 			}
-
 		}
-		return null;
-	}
-
-	private Object getUnderlyingResource() {
-		XtextEditor activeEditor = EditorUtils.getActiveXtextEditor();
-		if (activeEditor != null)
-			return activeEditor.getResource();
 		return null;
 	}
 
