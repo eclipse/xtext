@@ -30,7 +30,7 @@ public interface IXtextEObjectSearch {
 
 	public static class Default implements IXtextEObjectSearch {
 		@Inject
-		protected IResourceDescriptions resourceDescriptions;
+		private IResourceDescriptions resourceDescriptions;
 
 		public Iterable<IEObjectDescription> findMatches(final String searchPattern, final String typeSearchPattern) {
 			return Iterables.filter(getSearchScope(), getSearchPredicate(searchPattern, typeSearchPattern));
@@ -77,12 +77,20 @@ public interface IXtextEObjectSearch {
 		}
 		
 		protected Iterable<IEObjectDescription> getSearchScope() {
-			return Iterables.concat(Iterables.transform(resourceDescriptions.getAllResourceDescriptions(),
+			return Iterables.concat(Iterables.transform(getResourceDescriptions().getAllResourceDescriptions(),
 					new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
 						public Iterable<IEObjectDescription> apply(IResourceDescription from) {
 							return from.getExportedObjects();
 						}
 					}));
+		}
+
+		public void setResourceDescriptions(IResourceDescriptions resourceDescriptions) {
+			this.resourceDescriptions = resourceDescriptions;
+		}
+
+		public IResourceDescriptions getResourceDescriptions() {
+			return resourceDescriptions;
 		}
 
 	}

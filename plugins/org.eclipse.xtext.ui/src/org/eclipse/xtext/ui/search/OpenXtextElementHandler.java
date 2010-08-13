@@ -12,10 +12,10 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.window.Window;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.dialogs.ListDialog;
+import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.label.GlobalDescriptionLabelProvider;
 
@@ -25,9 +25,6 @@ import com.google.inject.Inject;
  * @author koehnlein - Initial contribution and API
  */
 public class OpenXtextElementHandler extends AbstractHandler {
-
-	@Inject
-	private IResourceDescriptions resourceDescriptions;
 
 	@Inject
 	private IURIEditorOpener uriEditorOpener;
@@ -41,8 +38,8 @@ public class OpenXtextElementHandler extends AbstractHandler {
 	private static final Logger LOG = Logger.getLogger(OpenXtextElementHandler.class);
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		Shell activeShell = Display.getCurrent().getActiveShell();
-		XtextEObjectSearchDialog searchDialog = new XtextEObjectSearchDialog(activeShell, searchEngine, globalDescriptionLabelProvider);
+		Shell activeShell = HandlerUtil.getActiveShell(event);
+		ListDialog searchDialog = createSearchDialog(event, activeShell, searchEngine);
 		int result = searchDialog.open();
 		if (result == Window.OK) {
 			try {
@@ -62,8 +59,8 @@ public class OpenXtextElementHandler extends AbstractHandler {
 		return null;
 	}
 
-	protected IResourceDescriptions getResourceDescriptions() {
-		return resourceDescriptions;
+	protected ListDialog createSearchDialog(ExecutionEvent event, Shell activeShell, IXtextEObjectSearch searchEngine) {
+		return new XtextEObjectSearchDialog(activeShell, searchEngine, globalDescriptionLabelProvider);
 	}
 
 }
