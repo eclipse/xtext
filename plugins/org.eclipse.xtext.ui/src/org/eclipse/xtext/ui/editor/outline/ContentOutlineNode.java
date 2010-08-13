@@ -117,13 +117,17 @@ public class ContentOutlineNode implements IContentOutlineNode {
 		List<IEObjectHandle<EObject>> handlesForChildren = this.handlesForChildren;
 		this.handlesForChildren = null;
 		for(IEObjectHandle<EObject> handleForChildren: handlesForChildren) {
-			handleForChildren.readOnly(new IUnitOfWork.Void<EObject>() {
-				@Override
-				public void process(EObject state) throws Exception {
-					getTransformer().transformSemanticChildNodes(state, ContentOutlineNode.this);
-				}
-			});
+			processHandleForChildren(handleForChildren);
 		}
+	}
+
+	protected void processHandleForChildren(IEObjectHandle<EObject> handleForChildren) {
+		handleForChildren.readOnly(new IUnitOfWork.Void<EObject>() {
+			@Override
+			public void process(EObject state) throws Exception {
+				getTransformer().transformSemanticChildNodes(state, ContentOutlineNode.this);
+			}
+		});
 	}
 	
 	public IContentOutlineNode[] getChildrenAsArray() {
