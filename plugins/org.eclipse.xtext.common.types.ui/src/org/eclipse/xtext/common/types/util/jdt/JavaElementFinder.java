@@ -72,8 +72,11 @@ public class JavaElementFinder implements IJavaElementFinder {
 		
 		@Override
 		public IJavaElement caseJvmMember(JvmMember object) {
-			IJavaElement typeElement = doSwitch(object.getDeclaringType());
-			return typeElement;
+			if (object.getDeclaringType() != null) {
+				IJavaElement typeElement = doSwitch(object.getDeclaringType());
+				return typeElement;
+			} 
+			return null;
 		}
 		
 		@Override
