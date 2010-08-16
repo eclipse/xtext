@@ -315,17 +315,19 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 	}
 
 	public void synchronizeOutlinePage() {
-		getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
-			@Override
-			public void process(XtextResource resource) throws Exception {
-				if (resource != null) {
-					Point selection = getSourceViewer().getTextWidget().getSelection();
-					EObject eObject = EObjectAtOffsetHelper.resolveContainedElementAt(resource, selection.x,
-							new TextLocation());
-					synchronizeOutlinePage(eObject);
+		if (isLinkingEnabled()) {
+			getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+				@Override
+				public void process(XtextResource resource) throws Exception {
+					if (resource != null) {
+						Point selection = getSourceViewer().getTextWidget().getSelection();
+						EObject eObject = EObjectAtOffsetHelper.resolveContainedElementAt(resource, selection.x,
+								new TextLocation());
+						synchronizeOutlinePage(eObject);
+					}
 				}
-			}
-		});
+			});
+		}
 	}
 
 	public void synchronizeOutlinePage(EObject eObject) {

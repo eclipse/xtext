@@ -16,8 +16,13 @@ import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextInputListener;
 import org.eclipse.jface.text.ITextViewer;
+import org.eclipse.jface.text.contentassist.ContentAssistEvent;
+import org.eclipse.jface.text.contentassist.ICompletionListener;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
+import org.eclipse.jface.text.source.ContentAssistantFacade;
+import org.eclipse.jface.text.source.ISourceViewerExtension4;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
@@ -42,6 +47,8 @@ public class XtextReconciler extends Job implements IReconciler {
 	private static final Logger log = Logger.getLogger(XtextReconciler.class);
 
 	private boolean isInstalled;
+	private boolean shouldInstallCompletionListener;
+	private volatile boolean paused;
 	private ITextViewer textViewer;
 	private TextInputListener textInputListener;
 	private final DocumentListener documentListener;
@@ -50,7 +57,9 @@ public class XtextReconciler extends Job implements IReconciler {
 	private int delay;
 	private IReconcilingStrategy strategy;
 
-	class DocumentListener implements IXtextDocumentContentObserver {
+	private CompletionListener completionListener;
+
+	protected class DocumentListener implements IXtextDocumentContentObserver {
 
 		public void documentAboutToBeChanged(DocumentEvent event) {
 			
@@ -62,7 +71,7 @@ public class XtextReconciler extends Job implements IReconciler {
 
 		public void performNecessaryUpdates(Processor processor) {
 			final IXtextDocument document = XtextDocumentUtil.get(textViewer);
-			if (document != null) {
+			if (document != null && !paused) {
 				final ReplaceRegion replaceRegionToBeProcessed = getAndResetReplaceRegion();
 				if (replaceRegionToBeProcessed != null) {
 					processor.process(new XtextReconcilerUnitOfWork(replaceRegionToBeProcessed, document));
@@ -77,7 +86,7 @@ public class XtextReconciler extends Job implements IReconciler {
 	 * changed. This happens when the document is initially opened, as well as
 	 * after a save-as.
 	 */
-	class TextInputListener implements ITextInputListener {
+	protected class TextInputListener implements ITextInputListener {
 		public void inputDocumentAboutToBeChanged(IDocument oldInput, IDocument newInput) {
 			// do nothing
 		}
@@ -85,6 +94,23 @@ public class XtextReconciler extends Job implements IReconciler {
 		public void inputDocumentChanged(IDocument oldInput, IDocument newInput) {
 			handleInputDocumentChanged(oldInput, newInput);
 		}
+	}
+	
+	protected class CompletionListener implements ICompletionListener {
+
+		public void assistSessionStarted(ContentAssistEvent event) {
+			pause();
+		}
+
+		public void assistSessionEnded(ContentAssistEvent event) {
+			resume();
+		}
+
+		public void selectionChanged(ICompletionProposal proposal, boolean smartToggle) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 
 	@Inject
@@ -95,6 +121,8 @@ public class XtextReconciler extends Job implements IReconciler {
 		isInstalled = false;
 		documentListener = new DocumentListener();
 		pendingReplaceRegionLock = new Object();
+		paused = false;
+		shouldInstallCompletionListener = false;
 		setDelay(500);
 		setReconcilingStrategy(strategy);
 	}
@@ -113,6 +141,15 @@ public class XtextReconciler extends Job implements IReconciler {
 			textInputListener = new TextInputListener();
 			textViewer.addTextInputListener(textInputListener);
 			handleInputDocumentChanged(null, textViewer.getDocument());
+			if (textViewer instanceof ISourceViewerExtension4) {
+				ContentAssistantFacade facade = ((ISourceViewerExtension4) textViewer).getContentAssistantFacade();
+				if (facade == null) {
+					shouldInstallCompletionListener = true;
+				} else {
+					completionListener = new CompletionListener();
+					facade.addCompletionListener(completionListener);
+				}
+			}
 			isInstalled = true;
 		}
 	}
@@ -121,14 +158,25 @@ public class XtextReconciler extends Job implements IReconciler {
 		if (isInstalled) {
 			textViewer.removeTextInputListener(textInputListener);
 			isInstalled = false;
+			if (completionListener != null) {
+				if (textViewer instanceof ISourceViewerExtension4) {
+					ContentAssistantFacade facade = ((ISourceViewerExtension4) textViewer).getContentAssistantFacade();
+					completionListener = new CompletionListener();
+					facade.removeCompletionListener(completionListener);
+				}
+			}
 		}
 	}
 
-	/**
-	 * @param oldInput
-	 * @param newInput
-	 */
-	private void handleInputDocumentChanged(IDocument oldInput, IDocument newInput) {
+	protected void handleInputDocumentChanged(IDocument oldInput, IDocument newInput) {
+		if (shouldInstallCompletionListener) {
+			ContentAssistantFacade facade = ((ISourceViewerExtension4) textViewer).getContentAssistantFacade();
+			if (facade != null) {
+				completionListener = new CompletionListener();
+				facade.addCompletionListener(completionListener);
+			}
+			shouldInstallCompletionListener = false;
+		}
 		if (oldInput != null) {
 			((IXtextDocument)oldInput).removeXtextDocumentContentObserver(documentListener);
 		}
@@ -152,7 +200,16 @@ public class XtextReconciler extends Job implements IReconciler {
 		}
 		schedule(delay);
 	}
+	
+	protected void pause() {
+		paused = true;
+	}
 
+	protected void resume() {
+		paused = false;
+		schedule(delay);
+	}
+	
 	public void setDelay(int delay) {
 		this.delay = delay;
 	}
@@ -164,7 +221,7 @@ public class XtextReconciler extends Job implements IReconciler {
 
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
-		if (monitor.isCanceled())
+		if (monitor.isCanceled() || paused)
 			return Status.CANCEL_STATUS;
 
 		long start = System.currentTimeMillis();
@@ -184,7 +241,7 @@ public class XtextReconciler extends Job implements IReconciler {
 		return Status.OK_STATUS;
 	}
 
-	private ReplaceRegion getAndResetReplaceRegion() {
+	protected ReplaceRegion getAndResetReplaceRegion() {
 		final ReplaceRegion replaceRegionToBeProcessed;
 		synchronized (pendingReplaceRegionLock) {
 			if (pendingReplaceRegion != null) {
