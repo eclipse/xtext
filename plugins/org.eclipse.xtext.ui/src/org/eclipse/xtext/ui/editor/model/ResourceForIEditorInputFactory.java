@@ -75,7 +75,7 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 		Resource aResource = resourceSet.createResource(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		if (!(aResource instanceof XtextResource))
 			throw new IllegalStateException("The resource factory registered for " + uri
-					+ " does not yield an XtextResource. Make sure the right resource factory has been registered.");
+					+ " does not yield an XtextResource. Make sure the file name extension / content type is correct.");
 		return (XtextResource) aResource;
 	}
 
