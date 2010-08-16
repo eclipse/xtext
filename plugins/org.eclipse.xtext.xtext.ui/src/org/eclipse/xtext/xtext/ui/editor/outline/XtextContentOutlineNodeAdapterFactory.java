@@ -14,7 +14,9 @@ import org.eclipse.xtext.ui.editor.outline.actions.DefaultContentOutlineNodeAdap
 
 /**
  * @author Peter Friese - Initial contribution and API
+ * @deprecation see {@link org.eclipse.xtext.ui.editor.outline.actions.IContentOutlineNodeAdapterFactory}.  
  */
+@Deprecated
 public class XtextContentOutlineNodeAdapterFactory extends DefaultContentOutlineNodeAdapterFactory {
 
 	@SuppressWarnings("rawtypes")

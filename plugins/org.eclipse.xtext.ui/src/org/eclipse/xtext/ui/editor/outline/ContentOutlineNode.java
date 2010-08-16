@@ -209,10 +209,6 @@ public class ContentOutlineNode implements IContentOutlineNode {
 
 	@SuppressWarnings("rawtypes")
 	public Object getAdapter(Class expected) {
-		if (IResource.class.isAssignableFrom(expected) 
-				|| ResourceMapping.class.isAssignableFrom(expected)
-				|| IContributorResourceAdapter.class.isAssignableFrom(expected))
-			return null;
 		Object adapter = Platform.getAdapterManager().getAdapter(this, expected);
 		return adapter;
 	}

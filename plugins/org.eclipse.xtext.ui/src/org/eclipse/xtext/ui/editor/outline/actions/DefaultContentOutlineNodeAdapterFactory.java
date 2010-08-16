@@ -10,17 +10,22 @@ package org.eclipse.xtext.ui.editor.outline.actions;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IContentOutlineNode;
+import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 
 /**
  * @author Peter Friese - Initial contribution and API
+ * @author Jan Köhnlein - deprecation 
+ * @deprecated see {@link IContentOutlineNodeAdapterFactory}.
  */
+@Deprecated
 public class DefaultContentOutlineNodeAdapterFactory implements IContentOutlineNodeAdapterFactory {
 
 	@SuppressWarnings("rawtypes")
 	private static final Class[] EMPTY_CLASSES = new Class[0];
-	
+
 	static final Logger logger = Logger.getLogger(DefaultContentOutlineNodeAdapterFactory.class);
 
 	@SuppressWarnings("rawtypes")
@@ -34,6 +39,8 @@ public class DefaultContentOutlineNodeAdapterFactory implements IContentOutlineN
 			EClass clazz = node.getClazz();
 			if (clazz != null) {
 				if (clazz.getInstanceClass().equals(adapterType)) {
+					// This breaks the contract of getAdapter, which should return an instance of adapterType
+					// I couldn't find where it's used.
 					return Boolean.TRUE;
 				}
 			}
@@ -49,4 +56,10 @@ public class DefaultContentOutlineNodeAdapterFactory implements IContentOutlineN
 		return EMPTY_CLASSES;
 	}
 
+	protected Object getUnderlyingResource() {
+		XtextEditor activeEditor = EditorUtils.getActiveXtextEditor();
+		if (activeEditor != null)
+			return activeEditor.getResource();
+		return null;
+	}
 }

@@ -90,8 +90,12 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 	@Inject
 	private ContentOutlineNodeLabelProvider labelProvider;
 
-	@Inject
-	private IContentOutlineNodeAdapterFactory outlineNodeFactory;
+	/**
+	 * @deprecation see {@link IContentOutlineNodeAdapterFactory}
+	 */
+	@Deprecated
+	@Inject(optional=true)
+	private IContentOutlineNodeAdapterFactory outlineNodeAdapterFactory;
 
 	@Inject
 	private IActionBarContributor actionbarContributor;
@@ -153,7 +157,9 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 		getTreeViewer().getTree().setMenu(contextMenu);
 
 		IPageSite site = getSite();
-		Platform.getAdapterManager().registerAdapters(outlineNodeFactory, IContentOutlineNode.class);
+		// TODO: remove on next API change
+		if(outlineNodeAdapterFactory != null)
+			Platform.getAdapterManager().registerAdapters(outlineNodeAdapterFactory, IContentOutlineNode.class);
 		site.registerContextMenu(Activator.PLUGIN_ID + ".outline", manager, getTreeViewer()); //$NON-NLS-1$
 	}
 	
