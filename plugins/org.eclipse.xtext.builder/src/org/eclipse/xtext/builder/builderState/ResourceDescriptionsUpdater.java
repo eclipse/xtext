@@ -65,8 +65,8 @@ public class ResourceDescriptionsUpdater implements IResourceDescriptionsUpdater
 	 */
 	public Collection<IResourceDescription.Delta> transitiveUpdate(IResourceDescriptions oldState, final ResourceSet rs,
 			Set<URI> toBeUpdated, Set<URI> toBeDeleted, IProgressMonitor monitor) {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, "Find affected resources", 10);
-		subMonitor.subTask("Find affected resources");
+		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.ResourceDescriptionsUpdater_0, 10);
+		subMonitor.subTask(Messages.ResourceDescriptionsUpdater_0);
 			
 		Set<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted);
 		toBeDeletedAsSet.removeAll(Collections2.forIterable(toBeUpdated));
@@ -106,8 +106,8 @@ public class ResourceDescriptionsUpdater implements IResourceDescriptionsUpdater
 	}
 	
 	public Collection<IResourceDescription.Delta> clean(IResourceDescriptions oldState, Set<URI> toBeDeleted, IProgressMonitor monitor) {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, "Clean resources", toBeDeleted.size());
-		subMonitor.subTask("Clean resources");
+		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.ResourceDescriptionsUpdater_2, toBeDeleted.size());
+		subMonitor.subTask(Messages.ResourceDescriptionsUpdater_2);
 		
 		Set<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted);
 		Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
@@ -135,12 +135,12 @@ public class ResourceDescriptionsUpdater implements IResourceDescriptionsUpdater
 				return Collections.emptyMap();
 			Resource res = null;
 			try {
-				subMonitor.subTask("Loading affected resource " + current + " of " + total);
+				subMonitor.subTask(Messages.ResourceDescriptionsUpdater_4 + current + Messages.ResourceDescriptionsUpdater_5 + total);
 				res = set.getResource(uri, true);
 				current++;
 			} catch (WrappedException ex) {
 				if (set.getURIConverter().exists(uri, Collections.emptyMap()))
-					log.error("Error loading resource from: " + uri.toString(), ex);
+					log.error("Error loading resource from: " + uri.toString(), ex); //$NON-NLS-1$
 				if (res != null) {
 					set.getResources().remove(res);
 				}

@@ -86,14 +86,14 @@ public class ClusteringBuilderState extends AbstractBuilderState {
             int firstIndex,
             int noOfDeltas,
             IProgressMonitor monitor) {
-        SubMonitor progress = SubMonitor.convert(monitor, "Update resource descriptions", clusterSize);
+        SubMonitor progress = SubMonitor.convert(monitor, Messages.ClusteringBuilderState_0, clusterSize);
         Set<Delta> result = Sets.newHashSet();
         for (int i = 0; i < clusterSize && deltaIterator.hasNext(); i++) {
             Delta delta = deltaIterator.next();
             if (progress.isCanceled()) {
                 return ImmutableList.of();
             }
-            progress.subTask("Update resource description " + firstIndex + " of " + noOfDeltas);
+            progress.subTask(Messages.ClusteringBuilderState_1 + firstIndex + Messages.ClusteringBuilderState_2 + noOfDeltas);
             IResourceDescription newDescription = null;
             if (delta.getNew() != null) {
                 Resource resource = resourceSet.getResource(delta.getUri(), true);

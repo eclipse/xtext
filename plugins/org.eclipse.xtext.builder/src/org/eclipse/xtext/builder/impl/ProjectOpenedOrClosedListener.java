@@ -110,7 +110,7 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 
 	protected void scheduleRemoveProjectJob(final IProject project) {
 		final ToBeBuilt toBeBuilt = getToBeBuiltComputer().removeProject(project, new NullProgressMonitor());
-		new Job("Removing project " + project.getName() + " from Xtext index.") {
+		new Job(Messages.ProjectOpenedOrClosedListener_0 + project.getName() + Messages.ProjectOpenedOrClosedListener_1) {
 			{
 				setRule(workspace.getRoot());
 			}

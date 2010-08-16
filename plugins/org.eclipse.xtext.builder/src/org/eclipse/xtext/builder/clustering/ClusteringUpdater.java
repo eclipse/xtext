@@ -68,8 +68,8 @@ public class ClusteringUpdater implements IResourceDescriptionsUpdater {
      */
     public Collection<IResourceDescription.Delta> transitiveUpdate(IResourceDescriptions oldState, final ResourceSet rs,
             Set<URI> toBeUpdated, Set<URI> toBeDeleted, IProgressMonitor monitor) {
-        SubMonitor subMonitor = SubMonitor.convert(monitor, "Find affected resources", 100);
-        subMonitor.subTask("Find affected resources");
+        SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.ClusteringUpdater_0, 100);
+        subMonitor.subTask(Messages.ClusteringUpdater_0);
 
         Set<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted);
         if (!toBeDeletedAsSet.isEmpty()) {
@@ -108,8 +108,8 @@ public class ClusteringUpdater implements IResourceDescriptionsUpdater {
 
     public Collection<IResourceDescription.Delta> clean(IResourceDescriptions oldState, Set<URI> toBeDeleted,
             IProgressMonitor monitor) {
-        SubMonitor subMonitor = SubMonitor.convert(monitor, "Clean resources", toBeDeleted.size());
-        subMonitor.subTask("Clean resources");
+        SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.ClusteringUpdater_2, toBeDeleted.size());
+        subMonitor.subTask(Messages.ClusteringUpdater_2);
         Set<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted);
         Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
         for (URI toDelete : toBeDeletedAsSet) {
@@ -135,7 +135,7 @@ public class ClusteringUpdater implements IResourceDescriptionsUpdater {
             if (subMonitor.isCanceled()) {
                 return Collections.emptyMap();
             }
-            subMonitor.subTask("Loading affected resource " + baseIndex + " of " + queue.totalSize());
+            subMonitor.subTask(Messages.ClusteringUpdater_4 + baseIndex + Messages.ClusteringUpdater_5 + queue.totalSize());
             URI nextURI = queue.remove();
             Resource resource = null;
             try {
@@ -152,7 +152,7 @@ public class ClusteringUpdater implements IResourceDescriptionsUpdater {
             	}
             } catch (final WrappedException ex) {
                 if (resourceSet.getURIConverter().exists(nextURI, Collections.emptyMap())) {
-                    log.error("Error loading resource from: " + nextURI.toString(), ex);
+                    log.error("Error loading resource from: " + nextURI.toString(), ex); //$NON-NLS-1$
                 }
                 if (resource != null) {
                     resourceSet.getResources().remove(resource);
