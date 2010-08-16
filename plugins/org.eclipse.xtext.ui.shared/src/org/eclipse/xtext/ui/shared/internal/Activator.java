@@ -13,7 +13,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionPoint;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.jdt.core.JavaCore;
@@ -82,7 +81,7 @@ public class Activator extends Plugin {
 
 	protected boolean isJavaEnabled() {
 		try {
-			JavaCore.initializeAfterLoad(new NullProgressMonitor());
+			getClass().getClassLoader().loadClass(JavaCore.class.getName());
 			return true;
 		} catch (Throwable e) {
 			log.warn("Disabling JDT use. : "+e.getMessage());
