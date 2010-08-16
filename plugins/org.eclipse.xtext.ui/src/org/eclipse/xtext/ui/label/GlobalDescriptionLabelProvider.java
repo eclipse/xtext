@@ -11,6 +11,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.jface.viewers.BaseLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -23,7 +25,7 @@ import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
  * 
  * @author koehnlein - Initial contribution and API
  */
-public class GlobalDescriptionLabelProvider extends BaseLabelProvider implements ILabelProvider, IItemLabelProvider {
+public class GlobalDescriptionLabelProvider extends BaseLabelProvider implements ILabelProvider, IItemLabelProvider, IStyledLabelProvider {
 
 	public Image getImage(Object element) {
 		ILabelProvider descriptionLabelProvider = lookupDescriptionLabelProvider(element);
@@ -43,6 +45,21 @@ public class GlobalDescriptionLabelProvider extends BaseLabelProvider implements
 				return descriptionLabelProvider.getText(element);
 			} else {
 				return element.toString();
+			}
+		}
+	}
+	
+	public StyledString getStyledText(Object element) {
+		if (element == null) {
+			return new StyledString(Messages.GlobalDescriptionLabelProvider_0);
+		} else {
+			ILabelProvider descriptionLabelProvider = lookupDescriptionLabelProvider(element);
+			if (descriptionLabelProvider instanceof IStyledLabelProvider)
+				return ((IStyledLabelProvider) descriptionLabelProvider).getStyledText(element);
+			else if(descriptionLabelProvider != null) {
+				return new StyledString(descriptionLabelProvider.getText(element));
+			} else {
+				return new StyledString(element.toString());
 			}
 		}
 	}

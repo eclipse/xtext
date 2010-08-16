@@ -16,6 +16,7 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -28,6 +29,10 @@ public class DefaultContentAssistantFactory implements IContentAssistantFactory 
 	
 	@Inject(optional=true)
 	private IDialogSettings dialogSettings;
+	
+	@Inject(optional=true)
+	@Named("xtext.enable.styledLables")
+	private boolean enableStyledLabels = true;
 	
 	public IContentAssistant createConfiguredAssistant(SourceViewerConfiguration configuration,
 			ISourceViewer sourceViewer) {
@@ -94,7 +99,7 @@ public class DefaultContentAssistantFactory implements IContentAssistantFactory 
 	}
 	
 	protected void setColoredLabels(ContentAssistant assistant) {
-		assistant.enableColoredLabels(true);
+		assistant.enableColoredLabels(enableStyledLabels);
 	}
 	
 }
