@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.search;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jface.internal.text.TableOwnerDrawSupport;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -17,9 +18,12 @@ import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.ModifyEvent;
@@ -29,15 +33,20 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ListDialog;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class XtextEObjectSearchDialog extends ListDialog {
 
 	protected Text searchControl;
@@ -53,10 +62,15 @@ public class XtextEObjectSearchDialog extends ListDialog {
 	private Text typeSearchControl;
 
 	private IXtextEObjectSearch searchEngine;
+
+	private final ILabelProvider labelProvider;
+
+	private boolean enableStyledLabels;
 	
 	public XtextEObjectSearchDialog(Shell parent, IXtextEObjectSearch searchEngine, ILabelProvider labelProvider) {
 		super(parent);
 		this.searchEngine = searchEngine;
+		this.labelProvider = labelProvider;
 		setTitle(Messages.XtextEObjectSearchDialog_TableLabelDialogTitle);
 		setMessage(Messages.XtextEObjectSearchDialog_TableLabelSearchControlLabel);
 		setAddCancelButton(true);
@@ -75,6 +89,11 @@ public class XtextEObjectSearchDialog extends ListDialog {
 		});
 		setLabelProvider(labelProvider);
 	}
+	
+	public XtextEObjectSearchDialog(Shell parent, IXtextEObjectSearch searchEngine, ILabelProvider labelProvider, boolean enableStyledLabels) {
+		this(parent, searchEngine, labelProvider);
+		this.enableStyledLabels = enableStyledLabels;
+	}
 
 	@Override
 	protected int getTableStyle() {
@@ -84,6 +103,28 @@ public class XtextEObjectSearchDialog extends ListDialog {
 	@Override
 	protected Control createDialogArea(Composite container) {
 		Composite parent = (Composite) super.createDialogArea(container);
+		if (enableStyledLabels && labelProvider instanceof IStyledLabelProvider) {
+			final Table table = getTableViewer().getTable();
+			final IStyledLabelProvider styledLabelProvider = (IStyledLabelProvider) labelProvider;
+			TableOwnerDrawSupport.install(table);
+			Listener listener= new Listener() {
+				public void handleEvent(Event event) {
+					handleSetData(event);
+				}
+				protected void handleSetData(Event event) {
+					TableItem item= (TableItem) event.item;
+					IEObjectDescription description = (IEObjectDescription) item.getData();
+					if (description != null) {
+						StyledString styledString = styledLabelProvider.getStyledText(description);
+						String displayString = styledString.toString();
+						StyleRange[] styleRanges = styledString.getStyleRanges();
+						item.setText(displayString);
+						TableOwnerDrawSupport.storeStyleRanges(item, 0, styleRanges);
+					}
+				}
+			};
+			table.addListener(SWT.SetData, listener);
+		}
 		messageLabel = new Label(parent, SWT.NONE);
 		setDefaultGridData(messageLabel);
 		EObjectDescriptionContentProvider contentProvider = new EObjectDescriptionContentProvider();
@@ -114,6 +155,8 @@ public class XtextEObjectSearchDialog extends ListDialog {
 		});
 		return parent;
 	}
+	
+	
 
 	@Override
 	protected Label createMessageArea(Composite composite) {

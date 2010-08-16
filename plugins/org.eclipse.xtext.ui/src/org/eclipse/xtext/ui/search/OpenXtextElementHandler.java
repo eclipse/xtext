@@ -20,6 +20,7 @@ import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.label.GlobalDescriptionLabelProvider;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -34,6 +35,10 @@ public class OpenXtextElementHandler extends AbstractHandler {
 	
 	@Inject
 	private GlobalDescriptionLabelProvider globalDescriptionLabelProvider;
+	
+	@Inject(optional=true)
+	@Named("xtext.enable.styledLables")
+	private boolean enableStyledLabels = true;
 	
 	private static final Logger LOG = Logger.getLogger(OpenXtextElementHandler.class);
 
@@ -60,7 +65,15 @@ public class OpenXtextElementHandler extends AbstractHandler {
 	}
 
 	protected ListDialog createSearchDialog(ExecutionEvent event, Shell activeShell, IXtextEObjectSearch searchEngine) {
-		return new XtextEObjectSearchDialog(activeShell, searchEngine, globalDescriptionLabelProvider);
+		return new XtextEObjectSearchDialog(activeShell, searchEngine, globalDescriptionLabelProvider, isEnableStyledLabels());
+	}
+
+	public void setEnableStyledLabels(boolean enableStyledLabels) {
+		this.enableStyledLabels = enableStyledLabels;
+	}
+
+	public boolean isEnableStyledLabels() {
+		return enableStyledLabels;
 	}
 
 }
