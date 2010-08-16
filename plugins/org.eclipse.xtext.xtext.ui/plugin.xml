@@ -324,9 +324,7 @@
 							<adapt type="org.eclipse.core.resources.IResource">
 								<test property="org.eclipse.core.resources.name" value="*.xtext"/>
 							</adapt>							
-							<adapt type="org.eclipse.jface.text.ITextSelection">
-								<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
-							</adapt>
+							<reference definitionId="org.eclipse.xtext.Xtext.Editor.opened" />
 						</or>
 						<test property="org.eclipse.xtext.xtext.launcher.workflowavailable" />
 					</and>
@@ -341,19 +339,6 @@
               label="%contextLabel.debug.label"/>
          </contextualLaunch>
       </shortcut>
-   </extension>
-   <extension point="org.eclipse.core.runtime.adapters">
-      <factory 
-         class="org.eclipse.xtext.xtext.ui.editor.outline.XtextContentOutlineNodeAdapterFactory" 
-         adaptableType="org.eclipse.xtext.ui.editor.outline.ContentOutlineNode">
-         <adapter type="org.eclipse.debug.ui.actions.ILaunchable"/>
-      </factory>
-      <factory
-         adaptableType="org.eclipse.xtext.ui.editor.outline.ContentOutlineNode"
-         class="org.eclipse.xtext.xtext.ui.editor.outline.XtextContentOutlineNodeAdapterFactory">
-         <adapter type="org.eclipse.core.resources.IResource"/>
-         <adapter type="org.eclipse.core.resources.IFile"/>
-      </factory>
    </extension>
    <extension
          point="org.eclipse.core.expressions.propertyTesters">
