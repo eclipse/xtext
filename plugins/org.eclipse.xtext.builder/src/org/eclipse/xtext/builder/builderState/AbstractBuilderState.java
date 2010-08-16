@@ -98,8 +98,8 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
         toBeAddedOrUpdated = ensureNotNull(toBeAddedOrUpdated);
         toBeRemoved = ensureNotNull(toBeRemoved);
 
-        final SubMonitor subMonitor = SubMonitor.convert(monitor, "Create resource descriptions", 1);
-        subMonitor.subTask("Create resource descriptions");
+        final SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.AbstractBuilderState_0, 1);
+        subMonitor.subTask(Messages.AbstractBuilderState_0);
         if (subMonitor.isCanceled() || (toBeAddedOrUpdated.isEmpty() && toBeRemoved.isEmpty())) {
             return ImmutableList.of();
         }
@@ -124,8 +124,8 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 		ensureLoaded();
 		toBeRemoved = ensureNotNull(toBeRemoved);
 		
-		SubMonitor subMonitor = SubMonitor.convert(monitor, "Create resource descriptions", 2);
-		subMonitor.subTask("Create resource descriptions");
+		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.AbstractBuilderState_0, 2);
+		subMonitor.subTask(Messages.AbstractBuilderState_0);
 		if (subMonitor.isCanceled() || toBeRemoved.isEmpty())
 			return ImmutableList.of();
 		Collection<Delta> deltas = doClean(toBeRemoved, subMonitor.newChild(1));

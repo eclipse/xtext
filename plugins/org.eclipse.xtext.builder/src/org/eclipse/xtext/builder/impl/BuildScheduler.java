@@ -51,7 +51,7 @@ public class BuildScheduler {
 				synchronized (projectsScheduledForBuild) {
 					if (!projectsScheduledForBuild.contains(project)) {
 						projectsScheduledForBuild.add(project);
-						new BuildJob("Updating projects", project, buildFlags).schedule();
+						new BuildJob(Messages.BuildScheduler_0, project, buildFlags).schedule();
 					}
 				}
 			}
@@ -104,8 +104,8 @@ public class BuildScheduler {
 					}
 				} catch (Exception x) {
 					log.error(x.getMessage(), x);
-					return new Status(IStatus.ERROR, Activator.getDefault().getBundle().getSymbolicName(), "Build of "
-							+ Strings.notNull(project.getName()) + " failed.\nSee log for details.");
+					return new Status(IStatus.ERROR, Activator.getDefault().getBundle().getSymbolicName(), Messages.BuildScheduler_1
+							+ Strings.notNull(project.getName()) + Messages.BuildScheduler_2);
 				}
 			} finally {
 				if (monitor != null)

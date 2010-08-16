@@ -29,8 +29,8 @@ public class NatureAddingEditorCallback extends AbstractDirtyStateAwareEditorCal
 		super.afterCreatePartControl(editor);
 		IResource resource = editor.getResource();
 		if (resource!=null && !toggleNature.hasNature(resource.getProject()) && resource.getProject().isAccessible()) {
-			String title = "Add Xtext Nature";
-			String message = "Do you want to add the Xtext nature to the project '" + resource.getProject().getName() + "'?";
+			String title = Messages.NatureAddingEditorCallback_0;
+			String message = Messages.NatureAddingEditorCallback_1 + resource.getProject().getName() + Messages.NatureAddingEditorCallback_2;
 			Image image = null;
 			MessageDialog dialog = new MessageDialog(editor.getEditorSite().getShell(), title, image, message, MessageDialog.QUESTION, 
 					new String[] { IDialogConstants.YES_LABEL, IDialogConstants.NO_LABEL, IDialogConstants.CANCEL_LABEL }, 0);

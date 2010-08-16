@@ -67,8 +67,8 @@ public class ToBeBuiltComputer {
 	}
 
 	public ToBeBuilt updateProjectNewResourcesOnly(IProject project, IProgressMonitor monitor) throws CoreException {
-		SubMonitor progress = SubMonitor.convert(monitor, "Collecting resources", 1);
-		progress.subTask("Collecting resources");
+		SubMonitor progress = SubMonitor.convert(monitor, Messages.ToBeBuiltComputer_0, 1);
+		progress.subTask(Messages.ToBeBuiltComputer_0);
 		ToBeBuilt toBeBuilt = updateProject(project, progress.newChild(1));
 		Iterable<URI> existingURIs = Iterables.transform(
 				builderState.getAllResourceDescriptions(), 
@@ -86,8 +86,8 @@ public class ToBeBuiltComputer {
 	}
 	
 	public ToBeBuilt updateProject(IProject project, IProgressMonitor monitor) throws CoreException {
-		final SubMonitor progress = SubMonitor.convert(monitor, "Collecting resources", 1);
-		progress.subTask("Collecting resources");
+		final SubMonitor progress = SubMonitor.convert(monitor, Messages.ToBeBuiltComputer_0, 1);
+		progress.subTask(Messages.ToBeBuiltComputer_0);
 		
 		final ToBeBuilt toBeBuilt = removeProject(project, progress.newChild(1));
 		if (!project.isAccessible() || progress.isCanceled())

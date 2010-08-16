@@ -49,13 +49,13 @@ public class PersistableResourceDescriptionsImpl extends AbstractBuilderState {
 		
 		Set<Delta> copiedDeltas = Sets.newHashSet();
 		
-		SubMonitor deltaMonitor = SubMonitor.convert(subMonitor.newChild(1), "Update resource descriptions", deltas.size());
+		SubMonitor deltaMonitor = SubMonitor.convert(subMonitor.newChild(1), Messages.PersistableResourceDescriptionsImpl_0, deltas.size());
 		int total = deltas.size();
 		int current = 1;
 		for (Delta delta : deltas) {
 			if (deltaMonitor.isCanceled())
 				return ImmutableList.of();
-			deltaMonitor.subTask("Update resource description " + current + " of " + total);
+			deltaMonitor.subTask(Messages.PersistableResourceDescriptionsImpl_1 + current + Messages.PersistableResourceDescriptionsImpl_2 + total);
 			DefaultResourceDescriptionDelta copiedDelta = new DefaultResourceDescriptionDelta(delta.getOld(),
 					createNew(delta, toBeAddedOrUpdated));
 			copiedDeltas.add(copiedDelta);

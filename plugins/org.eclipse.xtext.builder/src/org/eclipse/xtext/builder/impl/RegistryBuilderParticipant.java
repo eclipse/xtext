@@ -32,11 +32,11 @@ import com.google.inject.Singleton;
 @Singleton
 public class RegistryBuilderParticipant implements IXtextBuilderParticipant {
 
-	private static final String PARTICIPANT = "participant";
+	private static final String PARTICIPANT = "participant"; //$NON-NLS-1$
 	
 	private static final String EXTENSION_POINT_ID = PARTICIPANT;
 
-	private static final String ATT_CLASS = "class";
+	private static final String ATT_CLASS = "class"; //$NON-NLS-1$
 	
 	private static final Logger readerLog = Logger.getLogger(BuilderParticipantReader.class);
 	
@@ -53,7 +53,7 @@ public class RegistryBuilderParticipant implements IXtextBuilderParticipant {
 		if (participants.isEmpty())
 			return;
 		SubMonitor progress = SubMonitor.convert(monitor, participants.size());
-		progress.subTask("Invoking build participants");
+		progress.subTask(Messages.RegistryBuilderParticipant_2);
 		for(IXtextBuilderParticipant participant: participants) {
 			if (progress.isCanceled())
 				return;
@@ -102,12 +102,12 @@ public class RegistryBuilderParticipant implements IXtextBuilderParticipant {
 						Object participant = element.createExecutableExtension(ATT_CLASS);
 						if (participant instanceof IXtextBuilderParticipant) {
 							if (classToParticipant.containsKey(className)) {
-								readerLog.warn("The builder participant '" + className + "' was registered twice.");
+								readerLog.warn("The builder participant '" + className + "' was registered twice."); //$NON-NLS-1$ //$NON-NLS-2$
 							}
 							classToParticipant.put(className, (IXtextBuilderParticipant) participant);
 							participants = null;
 						} else {
-							logError(element, className + " did not yield an instance of IXtextBuilderParticipant but " + 
+							logError(element, className + " did not yield an instance of IXtextBuilderParticipant but " +  //$NON-NLS-1$
 									participant.getClass().getName());
 						}
 						return true;
@@ -126,7 +126,7 @@ public class RegistryBuilderParticipant implements IXtextBuilderParticipant {
 		@Override
 		protected void logError(IConfigurationElement element, String text) {
 			IExtension extension = element.getDeclaringExtension();
-		    readerLog.error("Plugin " + extension.getContributor().getName() + ", extension " + extension.getExtensionPointUniqueIdentifier());
+		    readerLog.error("Plugin " + extension.getContributor().getName() + ", extension " + extension.getExtensionPointUniqueIdentifier()); //$NON-NLS-1$ //$NON-NLS-2$
 		    readerLog.error(text);
 		}
 		

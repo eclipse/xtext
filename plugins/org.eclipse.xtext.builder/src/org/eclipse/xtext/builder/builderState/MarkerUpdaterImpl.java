@@ -49,8 +49,8 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 
 	public void updateMarker(ResourceSet resourceSet, ImmutableList<Delta> resourceDescriptionDeltas,
 			IProgressMonitor monitor) {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, "Validate resources", resourceDescriptionDeltas.size());
-		subMonitor.subTask("Validate resources");
+		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.MarkerUpdaterImpl_0, resourceDescriptionDeltas.size());
+		subMonitor.subTask(Messages.MarkerUpdaterImpl_0);
 		for (Delta delta : resourceDescriptionDeltas) {
 			if (subMonitor.isCanceled())
 				return;
