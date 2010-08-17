@@ -57,10 +57,10 @@ public class XtextReconciler extends Job implements IReconciler {
 	private int delay;
 	private IReconcilingStrategy strategy;
 
-	private CompletionListener completionListener;
+	protected class DocumentListener implements IXtextDocumentContentObserver, ICompletionListener {
 
-	protected class DocumentListener implements IXtextDocumentContentObserver {
-
+		private volatile boolean sessionStarted = false;
+		
 		public void documentAboutToBeChanged(DocumentEvent event) {
 			
 		}
@@ -77,6 +77,23 @@ public class XtextReconciler extends Job implements IReconciler {
 					processor.process(new XtextReconcilerUnitOfWork(replaceRegionToBeProcessed, document));
 				}
 			}
+			if (sessionStarted && !paused) {
+				pause();
+			}
+		}
+
+		public void assistSessionStarted(ContentAssistEvent event) {
+			sessionStarted = true;
+		}
+
+		public void assistSessionEnded(ContentAssistEvent event) {
+			sessionStarted = false;
+			resume();
+		}
+
+		public void selectionChanged(ICompletionProposal proposal, boolean smartToggle) {
+			// TODO Auto-generated method stub
+			
 		}
 
 	}
@@ -96,23 +113,6 @@ public class XtextReconciler extends Job implements IReconciler {
 		}
 	}
 	
-	protected class CompletionListener implements ICompletionListener {
-
-		public void assistSessionStarted(ContentAssistEvent event) {
-			pause();
-		}
-
-		public void assistSessionEnded(ContentAssistEvent event) {
-			resume();
-		}
-
-		public void selectionChanged(ICompletionProposal proposal, boolean smartToggle) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-	}
-
 	@Inject
 	public XtextReconciler(XtextDocumentReconcileStrategy strategy) {
 		super("XtextReconcilerJob");
@@ -146,8 +146,7 @@ public class XtextReconciler extends Job implements IReconciler {
 				if (facade == null) {
 					shouldInstallCompletionListener = true;
 				} else {
-					completionListener = new CompletionListener();
-					facade.addCompletionListener(completionListener);
+					facade.addCompletionListener(documentListener);
 				}
 			}
 			isInstalled = true;
@@ -158,11 +157,10 @@ public class XtextReconciler extends Job implements IReconciler {
 		if (isInstalled) {
 			textViewer.removeTextInputListener(textInputListener);
 			isInstalled = false;
-			if (completionListener != null) {
+			if (documentListener != null) {
 				if (textViewer instanceof ISourceViewerExtension4) {
 					ContentAssistantFacade facade = ((ISourceViewerExtension4) textViewer).getContentAssistantFacade();
-					completionListener = new CompletionListener();
-					facade.removeCompletionListener(completionListener);
+					facade.removeCompletionListener(documentListener);
 				}
 			}
 		}
@@ -172,8 +170,7 @@ public class XtextReconciler extends Job implements IReconciler {
 		if (shouldInstallCompletionListener) {
 			ContentAssistantFacade facade = ((ISourceViewerExtension4) textViewer).getContentAssistantFacade();
 			if (facade != null) {
-				completionListener = new CompletionListener();
-				facade.addCompletionListener(completionListener);
+				facade.addCompletionListener(documentListener);
 			}
 			shouldInstallCompletionListener = false;
 		}
