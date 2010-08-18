@@ -41,7 +41,7 @@ public class SubPackageAwareGrammarAccessFragment extends AbstractGeneratorFragm
 
 	private static final Logger log = Logger.getLogger(SubPackageAwareGrammarAccessFragment.class);
 
-	private String xmlVersion = "1.1";
+	private String xmlVersion = "1.0";
 	
 	@Override
 	protected String getTemplate() {
