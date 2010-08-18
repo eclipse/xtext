@@ -99,6 +99,8 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	private boolean skipGenerate = false;
 
 	private String xmiModelDirectory = null;
+	
+	private String fileExtensions = null;
 
 	private BiMap<URI, URI> saveMappings = Maps.newHashBiMap();
 	
@@ -456,6 +458,9 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		genModel.initialize(packs);
 		for (GenPackage genPackage : genModel.getGenPackages()) {
 			genPackage.setBasePackage(getBasePackage(grammar));
+			if (getFileExtensions() != null && packs.contains(genPackage.getEcorePackage())) {
+                genPackage.setFileExtensions(getFileExtensions());
+            }
 		}
 		genModel.getUsedGenPackages().addAll(usedGenPackages);
 		resolveAll(rs);
@@ -466,7 +471,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		}
 		return genModel;
 	}
-
+	
 	public String getXmiModelDirectory() {
 		return xmiModelDirectory;
 	}
@@ -627,5 +632,16 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	public void addSaveMapping(Mapping mapping) {
 		saveMappings.put(
 				URI.createURI(mapping.getFrom()), URI.createURI(mapping.getTo()));
+	}
+
+	/**
+	 * @param fileExtensions a comma-separated list of fileExtensions for the generated packages.
+	 */
+	public void setFileExtensions(String fileExtensions) {
+		this.fileExtensions = fileExtensions;
+	}
+
+	public String getFileExtensions() {
+		return fileExtensions;
 	}
 }
