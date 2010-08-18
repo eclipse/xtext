@@ -40,7 +40,7 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 
 	private static final Logger log = Logger.getLogger(GrammarAccessFragment.class);
 
-	private String xmlVersion = "1.1";
+	private String xmlVersion = "1.0";
 	
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
