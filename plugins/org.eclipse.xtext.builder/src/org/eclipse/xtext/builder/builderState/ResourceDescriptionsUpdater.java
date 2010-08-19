@@ -65,8 +65,8 @@ public class ResourceDescriptionsUpdater implements IResourceDescriptionsUpdater
 	 */
 	public Collection<IResourceDescription.Delta> transitiveUpdate(IResourceDescriptions oldState, final ResourceSet rs,
 			Set<URI> toBeUpdated, Set<URI> toBeDeleted, IProgressMonitor monitor) {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.ResourceDescriptionsUpdater_0, 10);
-		subMonitor.subTask(Messages.ResourceDescriptionsUpdater_0);
+		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.ResourceDescriptionsUpdater_FindAffectedResources, 10);
+		subMonitor.subTask(Messages.ResourceDescriptionsUpdater_FindAffectedResources);
 			
 		Set<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted);
 		toBeDeletedAsSet.removeAll(Collections2.forIterable(toBeUpdated));
@@ -106,8 +106,8 @@ public class ResourceDescriptionsUpdater implements IResourceDescriptionsUpdater
 	}
 	
 	public Collection<IResourceDescription.Delta> clean(IResourceDescriptions oldState, Set<URI> toBeDeleted, IProgressMonitor monitor) {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.ResourceDescriptionsUpdater_2, toBeDeleted.size());
-		subMonitor.subTask(Messages.ResourceDescriptionsUpdater_2);
+		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.ResourceDescriptionsUpdater_CleanResources, toBeDeleted.size());
+		subMonitor.subTask(Messages.ResourceDescriptionsUpdater_CleanResources);
 		
 		Set<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted);
 		Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
@@ -135,7 +135,7 @@ public class ResourceDescriptionsUpdater implements IResourceDescriptionsUpdater
 				return Collections.emptyMap();
 			Resource res = null;
 			try {
-				subMonitor.subTask(Messages.ResourceDescriptionsUpdater_4 + current + Messages.ResourceDescriptionsUpdater_5 + total);
+				subMonitor.subTask(Messages.ResourceDescriptionsUpdater_LoadingAffectedResources + current + Messages.ResourceDescriptionsUpdater_of + total);
 				res = set.getResource(uri, true);
 				current++;
 			} catch (WrappedException ex) {

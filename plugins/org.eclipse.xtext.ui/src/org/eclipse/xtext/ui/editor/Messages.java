@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.nature;
+package org.eclipse.xtext.ui.editor;
 
 import org.eclipse.osgi.util.NLS;
 
@@ -13,10 +13,11 @@ import org.eclipse.osgi.util.NLS;
  * @author koehnlein - Initial contribution and API
  */
 public class Messages extends NLS {
-	private static final String BUNDLE_NAME = "org.eclipse.xtext.builder.nature.messages"; //$NON-NLS-1$
-	public static String NatureAddingEditorCallback_MessageDialog_Msg0;
-	public static String NatureAddingEditorCallback_MessageDialog_Msg1;
-	public static String NatureAddingEditorCallback_MessageDialog_Title;
+	private static final String BUNDLE_NAME = "org.eclipse.xtext.ui.editor.messages"; //$NON-NLS-1$
+	public static String DirtyStateEditorSupport_ConcurrentChangeDialog_Message;
+	public static String DirtyStateEditorSupport_ConcurrentChangeDialog_Title;
+	public static String DirtyStateEditorSupport_JobName;
+	public static String XtextEditorErrorTickUpdater_JobName;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

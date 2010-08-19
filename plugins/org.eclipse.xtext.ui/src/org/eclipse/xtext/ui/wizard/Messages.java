@@ -15,6 +15,7 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.xtext.ui.wizard.messages"; //$NON-NLS-1$
 	public static String AbstractProjectCreator_0;
+	public static String XtextNewProjectWizard_ErrorDialog_Title;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

@@ -147,7 +147,7 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 		private volatile Image titleImage;
 
 		public UpdateEditorImageJob(ISchedulingRule schedulingRule) {
-			super("Update editor image");
+			super(Messages.XtextEditorErrorTickUpdater_JobName);
 			setRule(schedulingRule);
 		}
 

@@ -115,7 +115,7 @@ public class XtextReconciler extends Job implements IReconciler {
 	
 	@Inject
 	public XtextReconciler(XtextDocumentReconcileStrategy strategy) {
-		super("XtextReconcilerJob");
+		super(Messages.XtextReconciler_JobName);
 		setPriority(Job.SHORT);
 		setSystem(true);
 		isInstalled = false;
@@ -223,7 +223,7 @@ public class XtextReconciler extends Job implements IReconciler {
 
 		long start = System.currentTimeMillis();
 		if (log.isDebugEnabled()) {
-			log.debug("Preparing reconciliation.");
+			log.debug("Preparing reconciliation."); //$NON-NLS-1$
 		}
 
 		final IXtextDocument document = XtextDocumentUtil.get(textViewer);
@@ -234,7 +234,7 @@ public class XtextReconciler extends Job implements IReconciler {
 			}
 		}
 		if (log.isDebugEnabled())
-			log.debug("Reconciliation finished. Time required: " + (System.currentTimeMillis() - start));
+			log.debug("Reconciliation finished. Time required: " + (System.currentTimeMillis() - start)); //$NON-NLS-1$
 		return Status.OK_STATUS;
 	}
 

@@ -53,7 +53,7 @@ public class RegistryBuilderParticipant implements IXtextBuilderParticipant {
 		if (participants.isEmpty())
 			return;
 		SubMonitor progress = SubMonitor.convert(monitor, participants.size());
-		progress.subTask(Messages.RegistryBuilderParticipant_2);
+		progress.subTask(Messages.RegistryBuilderParticipant_InvokingBuildParticipants);
 		for(IXtextBuilderParticipant participant: participants) {
 			if (progress.isCanceled())
 				return;
