@@ -65,7 +65,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
 		try {
 			if (monitor != null) {
-				final String taskName = Messages.XtextBuilder_0 + getProject().getName() + Messages.XtextBuilder_1;
+				final String taskName = Messages.XtextBuilder_Building + getProject().getName() + ": "; //$NON-NLS-1$
 				monitor = new ProgressMonitorWrapper(monitor) {
 					@Override
 					public void subTask(String name) {
@@ -102,8 +102,8 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	 *        reported and that the operation cannot be cancelled.
 	 */
 	protected void incrementalBuild(IResourceDelta delta, final IProgressMonitor monitor) throws CoreException {
-		final SubMonitor progress = SubMonitor.convert(monitor, Messages.XtextBuilder_2, 2);
-		progress.subTask(Messages.XtextBuilder_2);
+		final SubMonitor progress = SubMonitor.convert(monitor, Messages.XtextBuilder_CollectingResources, 2);
+		progress.subTask(Messages.XtextBuilder_CollectingResources);
 		
 		final ToBeBuilt toBeBuilt = new ToBeBuilt();
 		IResourceDeltaVisitor visitor = new IResourceDeltaVisitor() {

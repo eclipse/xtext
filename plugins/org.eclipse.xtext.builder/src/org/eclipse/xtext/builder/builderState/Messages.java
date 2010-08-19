@@ -15,14 +15,14 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.xtext.builder.builderState.messages"; //$NON-NLS-1$
 	public static String AbstractBuilderState_0;
-	public static String MarkerUpdaterImpl_0;
-	public static String PersistableResourceDescriptionsImpl_0;
-	public static String PersistableResourceDescriptionsImpl_1;
-	public static String PersistableResourceDescriptionsImpl_2;
-	public static String ResourceDescriptionsUpdater_0;
-	public static String ResourceDescriptionsUpdater_2;
-	public static String ResourceDescriptionsUpdater_4;
-	public static String ResourceDescriptionsUpdater_5;
+	public static String MarkerUpdaterImpl_ValidateResources;
+	public static String PersistableResourceDescriptionsImpl_of;
+	public static String PersistableResourceDescriptionsImpl_UpdateResourceDescription;
+	public static String PersistableResourceDescriptionsImpl_UpdateResourceDescriptions;
+	public static String ResourceDescriptionsUpdater_CleanResources;
+	public static String ResourceDescriptionsUpdater_FindAffectedResources;
+	public static String ResourceDescriptionsUpdater_LoadingAffectedResources;
+	public static String ResourceDescriptionsUpdater_of;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

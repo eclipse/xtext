@@ -70,7 +70,7 @@ public abstract class XtextNewProjectWizard extends Wizard implements INewWizard
 		catch (InvocationTargetException e) {
 			logger.error(e.getMessage(), e);
 			Throwable realException = e.getTargetException();
-			MessageDialog.openError(getShell(), "Error", realException.getMessage());
+			MessageDialog.openError(getShell(), Messages.XtextNewProjectWizard_ErrorDialog_Title, realException.getMessage());
 			return false;
 		}
 		return true;

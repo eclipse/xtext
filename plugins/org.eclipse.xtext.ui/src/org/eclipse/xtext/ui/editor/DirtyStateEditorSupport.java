@@ -60,7 +60,7 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		private Queue<IResourceDescription.Delta> pendingChanges;
 
 		protected UpdateEditorStateJob(ISchedulingRule rule) {
-			this(rule, "Updating editor state");
+			this(rule, Messages.DirtyStateEditorSupport_JobName);
 		}
 		
 		protected UpdateEditorStateJob(ISchedulingRule rule, String name) {
@@ -163,8 +163,8 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	public static class InteractiveConcurrentEditingQuestion implements IConcurrentEditingCallback {
 
 		public boolean isConcurrentEditingIgnored(IDirtyStateEditorSupportClient client) {
-			String title = "Resource was edited concurrently.";
-			String message = "The resource is currently edited in another editor. Do you want to continue?";
+			String title = Messages.DirtyStateEditorSupport_ConcurrentChangeDialog_Title;
+			String message = Messages.DirtyStateEditorSupport_ConcurrentChangeDialog_Message;
 			return MessageDialog.openQuestion(client.getShell(), title, message);
 		}
 		
@@ -209,7 +209,7 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	
 	public void initializeDirtyStateSupport(IDirtyStateEditorSupportClient client) {
 		if (this.currentClient != null)
-			throw new IllegalStateException("editor was already assigned");
+			throw new IllegalStateException("editor was already assigned"); //$NON-NLS-1$
 		this.currentClient = client;
 		this.isDirty = false;
 		IXtextDocument document = client.getDocument();
@@ -239,7 +239,7 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	
 	public boolean isEditingPossible(IDirtyStateEditorSupportClient client) {
 		if (this.currentClient == null || this.currentClient != client)
-			throw new IllegalStateException("Was configured with another client or not configured at all.");
+			throw new IllegalStateException("Was configured with another client or not configured at all."); //$NON-NLS-1$
 		if (isDirty)
 			return true;
 	
@@ -259,7 +259,7 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	
 	public void removeDirtyStateSupport(IDirtyStateEditorSupportClient client) {
 		if (this.currentClient == null || this.currentClient != client)
-			throw new IllegalStateException("Was configured with another client or not configured at all.");
+			throw new IllegalStateException("Was configured with another client or not configured at all."); //$NON-NLS-1$
 		client.removeVerifyListener(this);
 		stateChangeEventBroker.removeListener(this);
 		if (dirtyResource.isInitialized()) 
@@ -276,7 +276,7 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	
 	public void markEditorClean(IDirtyStateEditorSupportClient client) {
 		if (this.currentClient == null || this.currentClient != client)
-			throw new IllegalStateException("Was configured with another client or not configured at all.");
+			throw new IllegalStateException("Was configured with another client or not configured at all."); //$NON-NLS-1$
 		dirtyStateManager.discardDirtyState(dirtyResource);
 		isDirty = false;
 	}

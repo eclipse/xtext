@@ -37,7 +37,7 @@ public class JavaProjectFactory extends ProjectFactory {
 		if (builderIds.contains(JavaCore.BUILDER_ID)) {
 			SubMonitor subMonitor = SubMonitor.convert(monitor, 10);
 			try {
-				subMonitor.subTask("Configure Java project " + projectName);
+				subMonitor.subTask(Messages.JavaProjectFactory_ConfigureJavaProject + projectName);
 				IJavaProject javaProject = JavaCore.create(project);
 				List<IClasspathEntry> classpathEntries = new ArrayList<IClasspathEntry>();
 				for (final IProject referencedProject : project.getReferencingProjects()) {
@@ -51,12 +51,12 @@ public class JavaProjectFactory extends ProjectFactory {
 					classpathEntries.add(srcClasspathEntry);
 				}
 
-				classpathEntries.add(JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5")));
-				classpathEntries.add(JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins")));
+				classpathEntries.add(JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"))); //$NON-NLS-1$
+				classpathEntries.add(JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins"))); //$NON-NLS-1$
 
 				javaProject.setRawClasspath(classpathEntries.toArray(new IClasspathEntry[classpathEntries.size()]),
 						subMonitor.newChild(1));
-				javaProject.setOutputLocation(new Path("/" + project.getName() + "/bin"), subMonitor.newChild(1));
+				javaProject.setOutputLocation(new Path("/" + project.getName() + "/bin"), subMonitor.newChild(1)); //$NON-NLS-1$ //$NON-NLS-2$
 			} catch (JavaModelException e) {
 				logger.error(e.getMessage(), e);
 			}

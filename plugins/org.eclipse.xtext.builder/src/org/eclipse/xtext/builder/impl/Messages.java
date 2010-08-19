@@ -14,16 +14,15 @@ import org.eclipse.osgi.util.NLS;
  */
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.xtext.builder.impl.messages"; //$NON-NLS-1$
-	public static String BuildScheduler_0;
-	public static String BuildScheduler_1;
-	public static String BuildScheduler_2;
-	public static String ProjectOpenedOrClosedListener_0;
-	public static String ProjectOpenedOrClosedListener_1;
-	public static String RegistryBuilderParticipant_2;
-	public static String ToBeBuiltComputer_0;
-	public static String XtextBuilder_0;
-	public static String XtextBuilder_1;
-	public static String XtextBuilder_2;
+	public static String BuildScheduler_BuildOf;
+	public static String BuildScheduler_FailedEtc;
+	public static String BuildScheduler_JobName;
+	public static String ProjectOpenedOrClosedListener_FromIndex;
+	public static String ProjectOpenedOrClosedListener_RemovingProject;
+	public static String RegistryBuilderParticipant_InvokingBuildParticipants;
+	public static String ToBeBuiltComputer_CollectingReosurces;
+	public static String XtextBuilder_Building;
+	public static String XtextBuilder_CollectingResources;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
