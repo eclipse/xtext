@@ -139,6 +139,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 		viewer.setAutoExpandLevel(getAutoExpandLevel());
 		viewer.setUseHashlookup(false);
 		viewer.setComparer(nodeComparer);
+		viewer.addDoubleClickListener(getOutlineSelectionListener());
 	}
 
 	protected int getAutoExpandLevel() {
@@ -229,6 +230,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 
 	@Override
 	public void dispose() {
+		getTreeViewer().removeDoubleClickListener(outlineSelectionChangedListener);
 		outlineSelectionChangedListener.uninstall(this);
 		outlineSelectionChangedListener = null;
 		editorSelectionChangedListener.uninstall(sourceViewer.getSelectionProvider());
