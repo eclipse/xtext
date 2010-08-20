@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
@@ -25,19 +26,20 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
-import org.eclipse.xtext.util.PolymorphicDispatcher.NullErrorHandler;
+import org.eclipse.xtext.util.PolymorphicDispatcher.WarningErrorHandler;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.Sets;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -47,7 +49,10 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractJavaBasedContentProposalProvider extends AbstractContentProposalProvider {
 	
+	private final static Logger log = Logger.getLogger(AbstractJavaBasedContentProposalProvider.class);
+	
 	protected class DefaultProposalCreator implements Function<IEObjectDescription, ICompletionProposal> {
+		
 		private final ContentAssistContext contentAssistContext;
 		private final String ruleName;
 
@@ -61,8 +66,13 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 				return null;
 			ICompletionProposal result = null;
 			String proposal = candidate.getName();
-			if (ruleName != null)
-				proposal = getValueConverter().toString(proposal, ruleName);
+			if (ruleName != null) {
+				try {
+					proposal = getValueConverter().toString(proposal, ruleName);
+				} catch (ValueConverterException e) {
+					log.debug(e.getMessage(),e);
+				}
+			}
 			EObject objectOrProxy = candidate.getEObjectOrProxy();
 			StyledString displayString = getStyledDisplayString(objectOrProxy, candidate.getQualifiedName(), candidate.getName());
 			Image image = getImage(objectOrProxy);
@@ -198,7 +208,7 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 	protected void invokeMethod(String methodName, ICompletionProposalAcceptor acceptor, Object... params) {
 		PolymorphicDispatcher<Void> dispatcher = dispatchers.get(methodName);
 		if (dispatcher == null) {
-			ErrorHandler<Void> errorHandler = NullErrorHandler.get();
+			ErrorHandler<Void> errorHandler = WarningErrorHandler.get(log);
 			dispatcher = new PolymorphicDispatcher<Void>(methodName, params.length + 1, params.length + 1, Collections.singletonList(this), errorHandler) {
 				@Override
 				public Class<?> getDefaultClass(int paramIndex) {
