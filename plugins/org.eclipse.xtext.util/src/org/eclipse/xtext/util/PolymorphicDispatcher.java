@@ -36,16 +36,14 @@ public class PolymorphicDispatcher<RT> {
 
 	// private final Comparator<MethodDesc> comparator;
 
-	/**
-	 * @author Sven Efftinge - Initial contribution and API
-	 */
-	private static class DefaultErrorHandler<RT> implements ErrorHandler<RT> {
+	public static class DefaultErrorHandler<RT> implements ErrorHandler<RT> {
 		public RT handle(Object[] params, Throwable e) {
 			return Exceptions.throwUncheckedException(e);
 		}
 	}
 
 	public static class NullErrorHandler<RT> implements ErrorHandler<RT> {
+
 		public static <RT> ErrorHandler<RT> get() {
 			return new NullErrorHandler<RT>();
 		}
@@ -55,10 +53,25 @@ public class PolymorphicDispatcher<RT> {
 			return null;
 		}
 	}
+	
+	public static class WarningErrorHandler<RT> implements ErrorHandler<RT> {
+		
+		private Logger logger;
 
-	/**
-	 * @author Sven Efftinge - Initial contribution and API
-	 */
+		public WarningErrorHandler(Logger logger) {
+			this.logger = logger;
+		}
+		
+		public static <RT> ErrorHandler<RT> get(Logger logger) {
+			return new WarningErrorHandler<RT>(logger);
+		}
+		
+		public RT handle(Object[] params, Throwable throwable) {
+			logger.warn("Error in polymorphic dispatcher : "+throwable.getMessage(), throwable);
+			return null;
+		}
+	}
+
 	static class MethodNameFilter implements Predicate<Method> {
 
 		private final int maxParams;
