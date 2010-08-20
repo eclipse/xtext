@@ -11,8 +11,6 @@ package org.eclipse.xtext.ui.editor.outline;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.mapping.ResourceMapping;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
@@ -22,7 +20,6 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.StyledString.Styler;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.ui.IContributorResourceAdapter;
 import org.eclipse.xtext.ui.editor.outline.transformer.AbstractSemanticModelTransformer;
 import org.eclipse.xtext.util.concurrent.IEObjectHandle;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -93,6 +90,7 @@ public class ContentOutlineNode implements IContentOutlineNode {
 		return image;
 	}
 
+	// TODO: rename to addChild
 	public void addChildren(ContentOutlineNode contentOutlineNode) {
 		contentOutlineNode.parent = this;
 		getChildren().add(contentOutlineNode);

@@ -18,10 +18,12 @@ import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ITreeSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.TreePathViewerSorter;
@@ -36,7 +38,6 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.part.IPageSite;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
-import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.editor.IXtextEditorAware;
@@ -51,10 +52,9 @@ import org.eclipse.xtext.ui.editor.outline.linking.EditorSelectionChangedListene
 import org.eclipse.xtext.ui.editor.outline.linking.LinkingHelper;
 import org.eclipse.xtext.ui.editor.outline.linking.OutlineSelectionChangedListener;
 import org.eclipse.xtext.ui.internal.Activator;
-import org.eclipse.xtext.util.TextLocation;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * An outline page for Xtext resources.
@@ -83,7 +83,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 			return (styledText != null) ? styledText.getString() : null;
 		}
 	}
-	
+
 	@Inject
 	private IOutlineTreeProvider contentProvider;
 
@@ -94,12 +94,12 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 	 * @deprecation see {@link IContentOutlineNodeAdapterFactory}
 	 */
 	@Deprecated
-	@Inject(optional=true)
+	@Inject(optional = true)
 	private IContentOutlineNodeAdapterFactory outlineNodeAdapterFactory;
 
 	@Inject
 	private IActionBarContributor actionbarContributor;
-	
+
 	@Inject
 	private IContentOutlineNodeComparer nodeComparer;
 
@@ -116,6 +116,9 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 
 	private ViewerSorter sorter;
 
+	@Inject
+	private Provider<IContentOutlineNodeForTextSelectionFinder> nodeForTextSelectionFinderProvider;
+
 	public XtextContentOutlinePage() {
 		sorter = createSorter();
 	}
@@ -123,7 +126,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 	protected ViewerSorter createSorter() {
 		return new TreePathViewerSorter();
 	}
-	
+
 	@Override
 	public void createControl(Composite parent) {
 		super.createControl(parent);
@@ -159,11 +162,11 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 
 		IPageSite site = getSite();
 		// TODO: remove on next API change
-		if(outlineNodeAdapterFactory != null)
+		if (outlineNodeAdapterFactory != null)
 			Platform.getAdapterManager().registerAdapters(outlineNodeAdapterFactory, IContentOutlineNode.class);
 		site.registerContextMenu(Activator.PLUGIN_ID + ".outline", manager, getTreeViewer()); //$NON-NLS-1$
 	}
-	
+
 	protected void fillContextMenu(IMenuManager menu) {
 		menu.add(new Separator(IContextMenuConstants.GROUP_ADDITIONS));
 	}
@@ -318,20 +321,48 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 
 	public void synchronizeOutlinePage() {
 		if (isLinkingEnabled()) {
-			getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
-				@Override
-				public void process(XtextResource resource) throws Exception {
-					if (resource != null) {
-						Point selection = getSourceViewer().getTextWidget().getSelection();
-						EObject eObject = EObjectAtOffsetHelper.resolveContainedElementAt(resource, selection.x,
-								new TextLocation());
-						synchronizeOutlinePage(eObject);
+			final Point textSelection = getSourceViewer().getTextWidget().getSelection();
+			if (!outlineSelectionRegionEqualsTextSelection(textSelection)) {
+				IContentOutlineNodeForTextSelectionFinder nodeForTextSelectionFinder = nodeForTextSelectionFinderProvider
+						.get();
+				nodeForTextSelectionFinder.setTextSelection(textSelection);
+				for (Object rootElement : contentProvider.getElements(null)) {
+					if (rootElement instanceof IContentOutlineNode) {
+						nodeForTextSelectionFinder.traverse((IContentOutlineNode) rootElement);
 					}
 				}
-			});
+				IContentOutlineNode bestMatch = nodeForTextSelectionFinder.getBestMatch();
+				if (bestMatch != null) {
+					outlineSelectionChangedListener.uninstall(this);
+					this.setSelection(new StructuredSelection(bestMatch), true);
+					outlineSelectionChangedListener.install(this);
+				}
+			}
 		}
 	}
 
+	protected boolean outlineSelectionRegionEqualsTextSelection(final Point textSelection) {
+		ITreeSelection outlineSelection = (ITreeSelection) getTreeViewer().getSelection();
+		if (outlineSelection.size() == 1) {
+			Object outlineSelectedElement = outlineSelection.getFirstElement();
+			if (outlineSelectedElement instanceof IContentOutlineNode) {
+				IRegion nodeRegion = ((IContentOutlineNode) outlineSelectedElement).getRegion();
+				if (nodeRegion != null) {
+					if (nodeRegion.getOffset() == textSelection.x
+							&& nodeRegion.getOffset() + nodeRegion.getLength() == textSelection.y) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * @deprecated ContentOutlineNodeAdapter may not be initialised as the nodes are created lazyly. 
+	 *             See https://bugs.eclipse.org/bugs/show_bug.cgi?id=322656
+	 */
+	@Deprecated
 	public void synchronizeOutlinePage(EObject eObject) {
 		if (isLinkingEnabled()) {
 			IContentOutlineNode mostSignificantOutlineNode = findMostSignificantOutlineNode(eObject);
@@ -343,6 +374,11 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 		}
 	}
 
+	/**
+	 * @deprecated ContentOutlineNodeAdapter may not be initialised as the nodes are created lazyly. 
+	 *             See https://bugs.eclipse.org/bugs/show_bug.cgi?id=322656
+	 */
+	@Deprecated
 	protected IContentOutlineNode findMostSignificantOutlineNode(EObject eObject) {
 		if (eObject != null) {
 			ContentOutlineNodeAdapter adapter = (ContentOutlineNodeAdapter) EcoreUtil.getAdapter(eObject.eAdapters(),
@@ -399,5 +435,5 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 			}
 		});
 	}
-	
+
 }
