@@ -164,7 +164,7 @@ public class FormatterTest extends AbstractXtextTests {
 
 	public void testLinewrapDatatypeRulePartial1() throws Exception {
 		final String model = "test linewrap fqn ab . xx .yy   .zz;";
-		final String expected = "test linewrap fqn \nab.xx.yy.zz;";
+		final String expected = "test linewrap fqn ab.xx.yy.zz;";
 		assertFormattedNM(expected, model, 22, 2);
 	}
 
@@ -176,8 +176,26 @@ public class FormatterTest extends AbstractXtextTests {
 
 	public void testLinewrapDatatypeRulePartial3() throws Exception {
 		final String model = "test linewrap fqn ab . xx .yy   .zz;fqn xxx;";
-		final String expected = "test linewrap fqn \nab.xx.yy.zz;\nfqn xxx;";
+		final String expected = "test linewrap fqn ab.xx.yy.zz;\nfqn xxx;";
 		assertFormattedNM(expected, model, 25, 12);
+	}
+
+	public void testFormatSegment1() throws Exception {
+		final String model = "test\nindentation {\n    indentation  {  x  x  ;  }  }";
+		final String expected = "test\nindentation {\n    indentation {\n    	x x;\n    }  }";
+		assertFormattedNM(expected, model, 30, 18);
+	}
+
+	public void testFormatSegment2() throws Exception {
+		final String model = "test       indentation {\n    indentation  {  x  x  ;  }  }";
+		//		final String expected = "test\nindentation {\n    indentation {\n    	x x;\n    }  }";
+		assertFormattedNM(model, model, 7, 10);
+	}
+
+	public void testFormatSegment3() throws Exception {
+		final String model = "     test       indentation {\n    indentation  {  x  x  ;  }  }";
+		final String expected = "test indentation {\n	indentation {\n		x x;\n	}\n}";
+		assertFormattedNM(expected, model, 0, model.length());
 	}
 
 	public void testLinewrapDatatypeRuleRef1() throws Exception {
@@ -281,7 +299,7 @@ public class FormatterTest extends AbstractXtextTests {
 		assertEqualTokenStreams(model);
 		assertPreserved(model);
 	}
-	
+
 	public void testDatatypeRules() throws Exception {
 		final String model = "test linewrap datatypes abc kw1 bcd def kw3;";
 		final String expected = "test linewrap\ndatatypes abc\nkw1\nbcd\ndef\nkw3;";
