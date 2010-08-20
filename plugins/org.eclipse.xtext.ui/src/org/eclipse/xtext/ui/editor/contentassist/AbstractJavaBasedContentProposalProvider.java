@@ -71,6 +71,7 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 					proposal = getValueConverter().toString(proposal, ruleName);
 				} catch (ValueConverterException e) {
 					log.debug(e.getMessage(),e);
+					return null;
 				}
 			}
 			EObject objectOrProxy = candidate.getEObjectOrProxy();
