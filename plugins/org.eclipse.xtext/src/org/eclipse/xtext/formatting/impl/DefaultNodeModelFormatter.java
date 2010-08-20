@@ -15,10 +15,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.formatting.INodeModelStreamer;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
 import org.eclipse.xtext.util.TextLocation;
@@ -30,8 +32,41 @@ import com.google.inject.Inject;
  */
 public class DefaultNodeModelFormatter extends AbstractNodeModelFormatter {
 
+	protected class FilterFirstWhitespaceStream extends BaseTokenStream {
+
+		boolean firstPassed = false;
+
+		protected FilterFirstWhitespaceStream(ITokenStream out) {
+			super(out);
+		}
+
+		@Override
+		public void writeHidden(EObject grammarElement, String value) throws IOException {
+			if (firstPassed)
+				out.writeHidden(grammarElement, value);
+			else {
+				boolean isWhitespace = grammarElement instanceof AbstractRule
+						&& hiddenTokenHelper.isWhitespace((AbstractRule) grammarElement);
+				if (!isWhitespace) {
+					out.writeHidden(grammarElement, value);
+					firstPassed = true;
+				}
+			}
+		}
+
+		@Override
+		public void writeSemantic(EObject grammarElement, String value) throws IOException {
+			firstPassed = true;
+			out.writeSemantic(grammarElement, value);
+		}
+
+	}
+
 	@Inject
 	protected IFormatter formatter;
+
+	@Inject
+	protected IHiddenTokenHelper hiddenTokenHelper;
 
 	@Inject
 	protected INodeModelStreamer nodeModelStreamer;
@@ -40,7 +75,8 @@ public class DefaultNodeModelFormatter extends AbstractNodeModelFormatter {
 	public IFormattedRegion format(CompositeNode root, int offset, int length) {
 		String indent = getIndentation(root, offset);
 		TokenStringBuffer buf = new TokenStringBuffer();
-		ITokenStream fmt = formatter.createFormatterStream(indent, buf, false);
+		ITokenStream out = offset == 0 ? buf : new FilterFirstWhitespaceStream(buf);
+		ITokenStream fmt = formatter.createFormatterStream(indent, out, false);
 		try {
 			TextLocation range = nodeModelStreamer.feedTokenStream(fmt, root, offset, length);
 			return new FormattedRegion(range.getOffset(), range.getLength(), buf.toString());
