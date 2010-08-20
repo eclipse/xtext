@@ -89,7 +89,7 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 			int lastLineLength = lineEntry.countCharactersInLastLine();
 			if (lastLineLength >= 0) {
 				flush();
-				return new Line(lastLineLength);
+				return createLine(lastLineLength);
 			}
 			if (lineEntry.isBreakable())
 				lastBreakableEntryIndex = entries.size() - 1;
@@ -151,7 +151,7 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 			// TokenStringBuffer b = new TokenStringBuffer();
 			// flush(b, lastBreakable);
 			// System.out.println("WrapLine: \"" + b + "\"");
-			return new Line(Lists.newArrayList(entries.subList(lastBreakableEntryIndex, entries.size())));
+			return createLine(Lists.newArrayList(entries.subList(lastBreakableEntryIndex, entries.size())));
 		}
 
 		protected String getIndentation(int indentation) {
@@ -364,11 +364,11 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 			else
 				hiddenTokenDef = (ParserRule) hiddenTokenDefCall2.getSecond().getRule();
 		}
-		LineEntry e = new LineEntry(grammarElement, value, true, locators, preservedWS, indentationLevel,
+		LineEntry e = createLineEntry(grammarElement, value, true, locators, preservedWS, indentationLevel,
 				hiddenTokenDef);
 		preservedWS = null;
 		if (currentLine == null)
-			currentLine = new Line();
+			currentLine = createLine();
 		Line newLine = currentLine.add(e);
 		if (newLine != null)
 			currentLine = newLine;
@@ -421,6 +421,27 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 			result.addAll(leadingElementLocators);
 		}
 		return result;
+	}
+
+	protected Line createLine() {
+		return createLine(null);
+	}
+
+	protected Line createLine(int leftover) {
+		return createLine(null, leftover);
+	}
+
+	protected Line createLine(List<LineEntry> entries) {
+		return createLine(entries, 0);
+	}
+
+	protected Line createLine(List<LineEntry> initialEntries, int leftover) {
+		return new Line(initialEntries, leftover);
+	}
+
+	public LineEntry createLineEntry(EObject grammarElement, String value, boolean isHidden,
+			Set<ElementLocator> beforeLocators, String leadingWS, int indent, ParserRule hiddenTokenDefition) {
+		return new LineEntry(grammarElement, value, isHidden, beforeLocators, leadingWS, indent, hiddenTokenDefition);
 	}
 
 	protected Pair<Integer, RuleCall> findTopmostHiddenTokenDef() {
