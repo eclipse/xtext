@@ -91,13 +91,15 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 		
 		public void lookupCrossReference(EObject model, EReference reference, ICompletionProposalAcceptor acceptor,
 				Predicate<IEObjectDescription> filter, Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
-			IScope scope = getScopeProvider().getScope(model, reference);
-			Iterable<IEObjectDescription> candidates = scope.getAllContents();
-			for (IEObjectDescription candidate: candidates) {
-				if (!acceptor.canAcceptMoreProposals())
-					return;
-				if (filter.apply(candidate)) {
-					acceptor.accept(proposalFactory.apply(candidate));
+			if (model != null) {
+				IScope scope = getScopeProvider().getScope(model, reference);
+				Iterable<IEObjectDescription> candidates = scope.getAllContents();
+				for (IEObjectDescription candidate: candidates) {
+					if (!acceptor.canAcceptMoreProposals())
+						return;
+					if (filter.apply(candidate)) {
+						acceptor.accept(proposalFactory.apply(candidate));
+					}
 				}
 			}
 		}
