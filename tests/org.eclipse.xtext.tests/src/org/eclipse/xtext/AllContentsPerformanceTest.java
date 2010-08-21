@@ -71,7 +71,7 @@ public class AllContentsPerformanceTest extends AbstractXtextTests {
 				callCount++;
 			}
 		}
-		System.out.println(callCount);
+//		System.out.println(callCount);
 	}
 	
 	private void doTestUoW(EObject object) throws Exception {
@@ -85,7 +85,7 @@ public class AllContentsPerformanceTest extends AbstractXtextTests {
 		for(int i = 0; i < LOOPS; i++) {
 			doTestUoWImpl(object, uow);
 		}
-		System.out.println(callCount[0]);
+//		System.out.println(callCount[0]);
 	}
 		
 
