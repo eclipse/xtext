@@ -11,6 +11,7 @@ import junit.framework.TestSuite;
 public class AllTests {
    public static Test suite() {
       TestSuite suite = new TestSuite("Tests for org.eclipse.xtext.tests");
+      suite.addTestSuite(org.eclipse.xtext.AllContentsPerformanceTest.class);
       suite.addTestSuite(org.eclipse.xtext.EcoreUtil2Test.class);
       suite.addTestSuite(org.eclipse.xtext.GrammarUtilGetReferenceTest.class);
       suite.addTestSuite(org.eclipse.xtext.GrammarUtilTest.class);
@@ -28,10 +29,10 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.generator.ManifestMergerTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.ecore.Bug283278Test.class);
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.ElementFinderTest.class);
-      suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.SubPackageAwareGrammarAccessFragmentTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.FragmentFakingEcoreResourceTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.ParserTest.class);
+      suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.SubPackageAwareGrammarAccessFragmentTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.UnicodeCharacterDatabaseNamesTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.parser.AntlrGrammarGenUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.parser.TerminalRuleToLexerBodyTest.class);
@@ -98,6 +99,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parser.antlr.Bug301935Test.class);
       suite.addTestSuite(org.eclipse.xtext.parser.antlr.LexerProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.antlr.TokenAcceptorTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.antlr.XtextTokenStreamTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.assignments.Bug287184Test.class);
       suite.addTestSuite(org.eclipse.xtext.parser.assignments.Bug288432Test.class);
       suite.addTestSuite(org.eclipse.xtext.parser.assignments.ParserBug281962Test.class);
@@ -229,6 +231,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.valueconverter.IDValueConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.INTValueConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.IgnoreCaseIDValueConverterTest.class);
+      suite.addTestSuite(org.eclipse.xtext.valueconverter.QualifiedNameValueConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.STRINGConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.Bug285605Test.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.Bug290919Test.class);
