@@ -12,6 +12,7 @@ public class AllTests {
    public static Test suite() {
       TestSuite suite = new TestSuite("Tests for org.eclipse.xtext.example.domainmodel.ui.tests");
       suite.addTestSuite(org.eclipse.xtext.example.domainmodel.IntegrationTest.class);
+      suite.addTestSuite(org.eclipse.xtext.example.domainmodel.ScopeProviderTest.class);
       return suite;
    }
 }

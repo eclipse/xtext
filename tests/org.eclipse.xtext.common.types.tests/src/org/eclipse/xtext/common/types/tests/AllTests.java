@@ -60,6 +60,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.common.types.util.JavaRefectAccessTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.util.JdtAssignabilityComputerTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.util.JdtSuperTypeCollectorTest.class);
+      suite.addTestSuite(org.eclipse.xtext.common.types.xtext.ui.ContentAssistTest.class);
       return suite;
    }
 }
