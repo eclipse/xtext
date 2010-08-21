@@ -13,10 +13,13 @@ import java.util.BitSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
+
+import com.google.common.collect.Sets;
 
 /**
  * A token stream that is aware of the current lookahead.
@@ -26,6 +29,8 @@ import org.antlr.runtime.TokenSource;
 public class XtextTokenStream extends CommonTokenStream {
 
 	private final List<Token> lookaheadTokens;
+	
+	private final Set<Token> lookaheadTokenSet;
 
 	private Map<String, Integer> rulenameToTokenType;
 	
@@ -35,18 +40,21 @@ public class XtextTokenStream extends CommonTokenStream {
 		super();
 		tokens = new TokenList(500);
 		lookaheadTokens = createLookAheadTokenList();
+		lookaheadTokenSet = createLookAheadTokenSet();
 	}
 
 	public XtextTokenStream(TokenSource tokenSource, int channel) {
 		super(tokenSource, channel);
 		tokens = new TokenList(500);
 		lookaheadTokens = createLookAheadTokenList();
+		lookaheadTokenSet = createLookAheadTokenSet();
 	}
 
 	public XtextTokenStream(TokenSource tokenSource, ITokenDefProvider tokenDefProvider) {
 		super(tokenSource);
 		tokens = new TokenList(500);
 		lookaheadTokens = createLookAheadTokenList();
+		lookaheadTokenSet = createLookAheadTokenSet();
 		rulenameToTokenType = new HashMap<String, Integer>(tokenDefProvider.getTokenDefMap().size());
 		for(Map.Entry<Integer, String> entry: tokenDefProvider.getTokenDefMap().entrySet()) {
 			rulenameToTokenType.put(entry.getValue(), entry.getKey());
@@ -138,7 +146,7 @@ public class XtextTokenStream extends CommonTokenStream {
 	@Override
 	public int LA(int i) {
 		Token lookaheadToken = LT(i);
-		if (!lookaheadTokens.contains(lookaheadToken)) {
+		if (lookaheadTokenSet.add(lookaheadToken)) {
 			lookaheadTokens.add(lookaheadToken);
 		}
 		// return super.LA(i); // inlined
@@ -186,16 +194,23 @@ public class XtextTokenStream extends CommonTokenStream {
 	}
 
 	public void removeLastLookaheadToken() {
-		lookaheadTokens.remove(lookaheadTokens.size() - 1);
+		Token removed = lookaheadTokens.remove(lookaheadTokens.size() - 1);
+		lookaheadTokenSet.remove(removed);
 	}
 	
 	protected List<Token> createLookAheadTokenList() {
 		return new ArrayList<Token>();
 	}
+	
+	protected Set<Token> createLookAheadTokenSet() {
+		return Sets.newHashSet();
+	}
 
 	public void resetLookahead() {
-		if (!lookaheadTokens.isEmpty())
+		if (!lookaheadTokens.isEmpty()) {
 			lookaheadTokens.clear();
+			lookaheadTokenSet.clear();
+		}
 	}
 
 	public String getLexerErrorMessage(Token invalidToken) {
