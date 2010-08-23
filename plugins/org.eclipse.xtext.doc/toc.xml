@@ -240,6 +240,10 @@
 <topic href="help/special_languages.html" label="Typical Language Configurations">
 <topic href="help/special_languages.html#case_insensitive_languages" label="Case Insensitive Languages"></topic>
 <topic href="help/java_independent_languages.html" label="Languages Independent of JDT"></topic>
+<topic href="help/expressions.html" label="Parsing Expressions with Xtext">
+<topic href="help/expressions.html#ConstructionofanAST" label="Construction of an AST"></topic>
+<topic href="help/expressions.html#Associativity" label="Associativity"></topic>
+</topic>
 </topic>
 <topic href="help/emf_integration.html" label="Integration with EMF and Other EMF Editors">
 <topic href="help/emf_integration.html#model_metamodel" label="Model, Ecore Model, and Ecore"></topic>

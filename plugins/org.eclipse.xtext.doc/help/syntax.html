@@ -83,8 +83,8 @@
 </div>
 <p>That statement means: generate an 
 						<span class="emphasis"><em>EPackage</em></span> with the 
-						<span class="emphasis"><em>name</em></span> &bdquo;secretcompartment&rdquo; and the 
-						<span class="emphasis"><em>nsURI</em></span> &bdquo;http://www.eclipse.org/secretcompartment&rdquo;. 
+						<span class="emphasis"><em>name</em></span> &ldquo;secretcompartment&rdquo; and the 
+						<span class="emphasis"><em>nsURI</em></span> &ldquo;http://www.eclipse.org/secretcompartment&rdquo;. 
 						Actually these are the properties that are required to create an 
 						<span class="emphasis"><em>EPackage</em></span>.
 						Xtext will then add 
@@ -334,9 +334,9 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 <p>It says that a token 
 						<span class="emphasis"><em>ID</em></span> starts with an optional 
 						<span class="emphasis"><em>'^'</em></span> character (caret), followed by a letter 
-						<span class="emphasis"><em>(&sbquo;a&rsquo;..&sbquo;z&rsquo;|&sbquo;A&rsquo;..&sbquo;Z&rsquo;)</em></span> 
-						or underscore (&sbquo;_&rsquo;) followed by any number of letters, underscores and numbers 
-						<span class="emphasis"><em>(&sbquo;0&rsquo;..&sbquo;9&rsquo;)</em></span>. 
+						<span class="emphasis"><em>(&lsquo;a&rsquo;..&lsquo;z&rsquo;|&lsquo;A&rsquo;..&lsquo;Z&rsquo;)</em></span> 
+						or underscore (&lsquo;_&rsquo;) followed by any number of letters, underscores and numbers 
+						<span class="emphasis"><em>(&lsquo;0&rsquo;..&lsquo;9&rsquo;)</em></span>. 
 					</p>
 <p>The caret is used to escape an identifier for cases where there are conflicts with keywords. It is removed 
 						by the 
@@ -398,7 +398,7 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java?root=Modeling_Project&view=co" target="_new">IValueConverterService</a> (cf. 
 
 							<a class="link" href="valueconverter.html" title="Value Converter">value converters</a>). The value converter is also the point where you can remove things 
-							like quotes from string literals or the caret (&sbquo;^&rsquo;) from identifiers. Its implementation needs to be registered 
+							like quotes from string literals or the caret (&lsquo;^&rsquo;) from identifiers. Its implementation needs to be registered 
 							as a service (cf. 
 							<a class="link" href="dependencyInjection.html" title="Dependency Injection in Xtext with Google Guice">Service Framework</a>).
 						</p>
@@ -413,7 +413,7 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 </div>
 </div>
 </div>
-<p>Token rules are described using &bdquo;Extended Backus-Naur Form&rdquo;-like (EBNF) expressions. The different expressions 
+<p>Token rules are described using &ldquo;Extended Backus-Naur Form&rdquo;-like (EBNF) expressions. The different expressions 
 						are described in the following. The one thing all of these expressions have in common is the cardinality operator.
 						There are four different possible cardinalities</p>
 <div class="orderedlist">
@@ -459,7 +459,7 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 </code>
 </p>
 </div>
-<p>The question mark sets the cardinality to &bdquo;none or one&rdquo; (i.e. optional) like explained above.</p>
+<p>The question mark sets the cardinality to &ldquo;none or one&rdquo; (i.e. optional) like explained above.</p>
 <p>Note that a keyword can have any length and contain arbitrary characters. </p>
 <p>The following standard Java notations for special characters are allowed: 
 							<span class="emphasis"><em>\n</em></span>, 
@@ -480,7 +480,7 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 </div>
 </div>
 </div>
-<p>A character range can be declared using the &sbquo;..&rsquo; operator.</p>
+<p>A character range can be declared using the &lsquo;..&rsquo; operator.</p>
 <p>Example:</p>
 <div class="literallayout">
 <p>
@@ -517,7 +517,7 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 </code>
 </p>
 </div>
-<p>The rule above would allow expressions like &sbquo;foo&rsquo;, &sbquo;f0o&rsquo; or even &sbquo;f\no&rsquo;.</p>
+<p>The rule above would allow expressions like &lsquo;foo&rsquo;, &lsquo;f0o&rsquo; or even &lsquo;f\no&rsquo;.</p>
 </div>
 <div class="section" title="Until Token">
 <div class="titlepage">
@@ -598,7 +598,7 @@ import&nbsp;'http://www.eclipse.org/anotherPackage'&nbsp;as&nbsp;another<br>
 </code>
 </p>
 </div>
-<p>That is a WS can be made of one or more whitespace characters (including &sbquo; &rsquo;, '
+<p>That is a WS can be made of one or more whitespace characters (including &lsquo; &rsquo;, '
 							<span class="emphasis"><em>\t</em></span>', '
 							<span class="emphasis"><em>\r</em></span>', '
 							<span class="emphasis"><em>\n</em></span>').
@@ -1022,11 +1022,11 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 							<span class="emphasis"><em>EObject</em></span> to be returned is created lazily when the first assignment occurs or 
 							when a simple action is evaluated. There is another way one can set the 
 							<span class="emphasis"><em>EObject</em></span> to be returned, which we call 
-							an &bdquo;unassigned rule call&rdquo;.
+							an &ldquo;unassigned rule call&rdquo;.
 						</p>
 <p>Unassigned rule calls (the name suggests it) are rule calls to other parser rules, which are not used within an 
 							assignment. If there is no feature the returned value shall be assigned to, the value is assigned to the 
-&bdquo;							to-be-returned&rdquo; result of the calling rule.</p>
+							&ldquo;to-be-returned&rdquo; result of the calling rule.</p>
 <p>With unassigned rule calls one can, for instance, create rules which just dispatch between several other rules:</p>
 <div class="literallayout">
 <p>
@@ -1090,7 +1090,7 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 <p>LL-parsing has some significant advantages over LR algorithms. The most important ones for Xtext are, that the generated code is much simpler to understand and debug and that it is easier to recover from errors. Especially ANTLR has a very nice generic error recovery mechanism. This allows to construct an AST even if there are syntactic errors in the text. You wouldn&rsquo;t get any of the nice IDE features as soon as there is one little error, if we hadn&rsquo;t error recovery.</p>
 <p>However, LL also has some drawbacks. The most important one is that it does not allow left recursive grammars.
 							For instance, the following is not allowed in LL-based grammars, because 
-							<span class="emphasis"><em>Expression &sbquo;+&rsquo; Expression</em></span> is left recursive:
+							<span class="emphasis"><em>Expression &lsquo;+&rsquo; Expression</em></span> is left recursive:
 						</p>
 <div class="literallayout">
 <p>
@@ -1105,7 +1105,7 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 </code>
 </p>
 </div>
-<p>Instead one has to rewrite such things by &bdquo;left-factoring&rdquo; it:</p>
+<p>Instead one has to rewrite such things by &ldquo;left-factoring&rdquo; it:</p>
 <div class="literallayout">
 <p>
 <code class="code">Expression&nbsp;:<br>
@@ -1234,7 +1234,7 @@ Fullname:&nbsp;<br>
 </code>
 </p>
 </div>
-<p>The sample rule &bdquo;Person&rdquo; defines multiline comments (_ML_COMMENT_), single-line comments (_SL_COMMENT_), and whitespace (
+<p>The sample rule &ldquo;Person&rdquo; defines multiline comments (_ML_COMMENT_), single-line comments (_SL_COMMENT_), and whitespace (
 					<span class="emphasis"><em>WS</em></span>) to be allowed between the 
 					<span class="emphasis"><em>Fullname</em></span> and the 
 					<span class="emphasis"><em>age</em></span>. Because the rule 
@@ -1283,7 +1283,7 @@ Fullname:&nbsp;<br>
 </li>
 </ol>
 </div>
-<p>If you, for instance, want to define a rule to consume Java-like qualified names (e.g. &bdquo;foo.bar.Baz&rdquo;)
+<p>If you, for instance, want to define a rule to consume Java-like qualified names (e.g. &ldquo;foo.bar.Baz&rdquo;)
 					you could write:</p>
 <div class="literallayout">
 <p>
@@ -1301,7 +1301,7 @@ Fullname:&nbsp;<br>
 					If you had defined it as a terminal rule, it would possibly hide the 
 					<span class="emphasis"><em>ID</em></span> rule.
 				</p>
-<p>In addition when this has been defined as a data type rule, it is allowed to use hidden tokens (e.g. &bdquo;/* comment **/&rdquo;) between the IDs and dots (e.g. 
+<p>In addition when this has been defined as a data type rule, it is allowed to use hidden tokens (e.g. &ldquo;/* comment **/&rdquo;) between the IDs and dots (e.g. 
 					<span class="emphasis"><em>foo/* comment */. bar . Baz</em></span>).
 				</p>
 <p>Return types can be specified in the same way as in terminal rules:</p>
@@ -1385,7 +1385,7 @@ Fullname:&nbsp;<br>
 </p>
 </div>
 <p>the resulting value of the element 
-					<span class="emphasis"><em>Foo</em></span> will hold the enum value with the internal representation of &sbquo;0&rsquo; (zero). When generating the 
+					<span class="emphasis"><em>Foo</em></span> will hold the enum value with the internal representation of &lsquo;0&rsquo; (zero). When generating the 
 					<span class="emphasis"><em>EPackage</em></span> from your grammar this will be the first literal you define. As a workaround you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define an enum literal with an empty textual representation.
 				</p>
 <div class="literallayout">

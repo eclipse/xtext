@@ -87,7 +87,7 @@
 	<!-- <property name="docbook.version" value="1.73.2" /> -->
 	<property name="docbook.version" value="1.75.1" />
 	<property name="docbook.dir" value="${download.dir}${file.separator}docbook-xsl-${docbook.version}"/>
-	<property name="docbookxsl.url" value="http://internap.dl.sourceforge.net/sourceforge/docbook/docbook-xsl-${docbook.version}.zip"/>
+	<property name="docbookxsl.url" value="http://downloads.sourceforge.net/project/docbook/docbook-xsl/1.75.1/docbook-xsl-${docbook.version}.zip"/>
 	<property name="fop.dir" value="${download.dir}${file.separator}fop-0.95"/>
 	<property name="fop.url" value="http://mirrorspace.org/apache/xmlgraphics/fop/binaries/fop-0.95-bin.zip"/>
 	<property name="jai.dir" value="ENTER_JAI_DIRECTORY"/>
