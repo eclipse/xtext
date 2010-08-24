@@ -25,7 +25,7 @@
 <p>
 <code class="code">Expression&nbsp;:<br>
 &nbsp;&nbsp;Expression&nbsp;'+'&nbsp;Expression&nbsp;|<br>
-&nbsp;&nbsp;Expression&nbsp;'-'&nbsp;Expression&nbsp;|<br>
+&nbsp;&nbsp;Expression&nbsp;'*'&nbsp;Expression&nbsp;|<br>
 &nbsp;&nbsp;INT;<br>
 
 <br>
@@ -34,7 +34,7 @@
 </p>
 </div>
 <p>This grammar would be left recursive because the parser reads the grammar top down and left to right and would endlessly call the Expression rule without consuming any characters, i.e. altering the underlying state of the parser. While this kind of grammars can be written for bottom-up parsers, you&rsquo;ld still have to deal with operator precedence in addition. That is define that a multiplication has higher precedence than an addition for example.</p>
-<p>In Xtext you define the precedence implicitly when left-factoring such a grammar. Left-factoring means you get rid of left recursion by applying a certain technique, which I will show in the following.</p>
+<p>In Xtext you define the precedence implicitly when left-factoring such a grammar. Left-factoring means you get rid of left recursion by applying a certain technique, which we will show in the following.</p>
 <p>So here is a left-factored grammar (not yet working with Xtext) for the expression language above :</p>
 <div class="literallayout">
 <p>
@@ -90,7 +90,7 @@ NumberLiteral:<br>
 </div>
 </div>
 <p>Now that we know how to avoid left recursion, let&rsquo;s have a look at what the parser produces. In Xtext each rule returns some value. Parser rules return AST nodes (i.e. EObject instances), enum rules return enum literals and datatype rules as well as terminal rules return simple values like strings and the like (EDatatype in EMF jargon).
-					Xtext can automatically infer whether some rule is a parser rule, i.e. constructs and returns an AST node or if it is a datatype rule. Above&rsquo;s grammars only consisted of datatype rules so all they would produce is a string.
+					Xtext can automatically infer whether some rule is a parser rule, i.e. constructs and returns an AST node or if it is a datatype rule. Above&rsquo;s grammars only consisted of datatype rules so they would only return a plain string.
 					In order to construct an AST we need to add Assignments and Actions. But before we do that we need to talk about return types.</p>
 <p>The return type of a rule can be specified explicitly using the &lsquo;returns&rsquo; keyword but can be inferred if the type&rsquo;s name is the same as the rule&rsquo;s name.
 					That is</p>
@@ -113,7 +113,7 @@ NumberLiteral:<br>
 </code>
 </p>
 </div>
-<p>However in the case of the expressions grammar above, the rules all need to return the same type since they are recursive. So in order to make the grammar functional we need to add a common return type explicitly (but the grammar is still missing some bits):</p>
+<p>However in the case of the expressions grammar above, all rules need to return the same type since they are recursive. So in order to make the grammar functional we need to add a common return type explicitly (but the grammar is still missing some bits):</p>
 <div class="literallayout">
 <p>
 <code class="code">Addition&nbsp;returns&nbsp;Expression:<br>
@@ -164,9 +164,9 @@ NumberLiteral:<br>
 </code>
 </p>
 </div>
-<p>The parser always starts with the first rule (Addition). Therein the first element is an unassigned rule call to Multiplication which in turn calls Primary. Primary now has two alternatives. The first on is calling NumberLiteral which consists only of one assignment to a feature called &lsquo;value&rsquo; of what the INT rule returns.</p>
-<p>But as the first token in the expression is an opening parenthesis &lsquo;(&rsquo; the parser will take the second alternative in Primary, consume the &lsquo;(&rsquo; and call the rue Addition. Now the value &lsquo;1&rsquo; is the look ahead token and again Addition calls Multiplication and Multiplication calls Primary. This time the parser takes the first alternative because &lsquo;1&rsquo; was consumed by the INT rule (which btw. is a reused library terminal rule).</p>
-<p>As soon as the parser hits an assignment it checks whether an AST node for the current rule was already created. If not it will create one based on the return type, which is NumberLiteral. The Xtext generator will have created an EClass &lsquo;NumberLiteral&rsquo; before which can now be instantiated. That type will also have a property called value of type Integer, which will get the value &lsquo;1&rsquo; set. This is what the Java equivalent would look like:</p>
+<p>The parser always starts with the first rule (Addition). Therein the first element is an unassigned rule call to Multiplication which in turn calls Primary. Primary now has two alternatives. The first one is calling NumberLiteral which consists only of one assignment to a feature called &lsquo;value&rsquo;. The type of &lsquo;value&rsquo; has to be compatible to the return type of the INT rule.</p>
+<p>But as the first token in the sample expression is an opening parenthesis &lsquo;(&rsquo; the parser will take the second alternative in Primary, consume the &lsquo;(&rsquo; and call the rule Addition. Now the value &lsquo;1&rsquo; is the lookahead token and again Addition calls Multiplication and Multiplication calls Primary. This time the parser takes the first alternative because &lsquo;1&rsquo; was consumed by the INT rule (which btw. is a reused library terminal rule).</p>
+<p>As soon as the parser hits an assignment it checks whether an AST node for the current rule was already created. If not it will create one based on the return type of the current rule, which is NumberLiteral. The Xtext generator created an EClass &lsquo;NumberLiteral&rsquo; before which can now be instantiated. That type will also have a property called value of type int (actually of type EInt), which will get the value &lsquo;1&rsquo; set. This is what the Java equivalent would look like:</p>
 <div class="literallayout">
 <p>
 <code class="code">//&nbsp;value=INT<br>
@@ -180,9 +180,9 @@ current.setValue(ruleINT());<br>
 </code>
 </p>
 </div>
-<p>Now that the rule has been completed the created EObject is returned to the calling rule Primary, which in turn returns the object unchanged to its own caller. Within Multiplication the call to Primary has been successfully parsed and returned an instance of NumberLiteral. The second part of the rule is a so called group (everything within the parenthesis). The asterisk behind the closing parenthesis states that this part can be consumed zero or more times. The first token to consume in this part is the multiplication operator &lsquo;*&rsquo;. Unfortunately in the current situation the next token to consume is the plus operator &lsquo;+&rsquo;, so the group is not consumed at all and the rule returns what they got from the unassigned rule call (the NumberLiteral) .</p>
-<p>In rule Addition there&rsquo;s a similar group but this time it expects the correct operator so the parser goes into the group.
-					The first element in the group is a so called action. As Xtext grammars are highly declarative and bi-directional it is not a good idea to allow arbitrary expression within actions as it is usually the case with other parser generators. Instead we only support two kinds of actions. This one will create a new instance of type Addition and assign what was the to be returned object to the feature left. In Java this would have been something like:</p>
+<p>Now that the rule has been completed the created EObject is returned to the calling rule Primary, which in turn returns the object unchanged to its own caller. Within Multiplication the call to Primary has been successfully parsed and returned an instance of NumberLiteral. The second part of the rule (everything within the parenthesis) is a so called group. The asterisk behind the closing parenthesis states that this part can be consumed zero or more times. The first token to consume in this part is the multiplication operator &lsquo;*&rsquo;. Unfortunately in the current situation the next token to accept is the plus operator &lsquo;+&rsquo;, so the group is not consumed at all and the rule returns what they got from the unassigned rule call (the NumberLiteral).</p>
+<p>In rule Addition there&rsquo;s a similar group but this time it expects the correct operator so the parser steps into the group.
+					The first element in the group is a so called action. As Xtext grammars are highly declarative and bi-directional it is not a good idea to allow arbitrary expression within actions as it is usually the case with parser generators. Instead we only support two kinds of actions. This one will create a new instance of type Addition and assign what was the to-be-returned object to the feature left. In Java this would have been something like:</p>
 <div class="literallayout">
 <p>
 <code class="code">//&nbsp;Multiplication&nbsp;rule&nbsp;call<br>
@@ -199,9 +199,9 @@ current&nbsp;=&nbsp;temp;<br>
 </p>
 </div>
 <p>As a result the rule would now return an instance of Addition which has a NumberLiteral set to its property left. Next up the parser consumes the &lsquo;+&rsquo; operator. We do not store the operator in the AST because we have an explicit Addition type, which implicitly contains this information.
-					The assignment (&lsquo;right=Multiplication&rsquo;) calls Multiplication another time and assigns the returned object (a NumberLiteral of value=20) to the property named right.</p>
-<p>If we now had an additional plus operation &lsquo;+&rsquo; (e.g. 1 + 2 + 3) the group would match another time and create another instance of Addition. But we don&rsquo;t and therefore the rule is completed and returns the created instance of Addition to its caller which was the second alternative in Primary. Now the closing parenthesis is matched and consumed and the stack is reduced once more.</p>
-<p>We are now in rule Multiplication and have the multiplication operator &lsquo;*&rsquo; on the look ahead. The parser goes into the group and applies the action. Finally it calls the Primary rule gets another instance of NumberLiteral (value=2), assigns it as the &lsquo;right&rsquo; operand of the Multiplication and returns the Multiplication to Addition which in turn returns the very same object as there&rsquo;s nothing left to parse.</p>
+					The assignment (&lsquo;right=Multiplication&rsquo;) calls the rule Multiplication another time and assigns the returned object (a NumberLiteral of value=20) to the property named right.</p>
+<p>If we now had an additional plus operation &lsquo;+&rsquo; (e.g. 1 + 2 + 3) the group would match another time and create another instance of Addition. But we don&rsquo;t and therefore the rule is completed and returns the created instance of Addition to its caller which was the second alternative in Primary. Now the closing parenthesis is matched and consumed and the parser stack is reduced once more.</p>
+<p>We are now in rule Multiplication and have the multiplication operator &lsquo;*&rsquo; on the lookahead. The parser goes into the group and applies the action. Finally it calls the Primary rule, gets another instance of NumberLiteral (value=2), assigns it as the &lsquo;right&rsquo; operand of the Multiplication and returns the Multiplication to the rule Addition which in turn returns the very same object as there&rsquo;s nothing left to parse.</p>
 <p>The resulting AST looks like this:</p>
 <p>
 					
@@ -211,7 +211,7 @@ current&nbsp;=&nbsp;temp;<br>
 <p>
 				
 </p>
-<p>(I&rsquo;m sure that it&rsquo;s pretty hard to follow what&rsquo;s going on just by reading this text. Therefore we have prepared a small video which visualizes and explains the details. see http://vimeo.com/14358869)</p>
+<p>(It&rsquo;s pretty hard to follow what&rsquo;s going on just by reading this text. Therefore we have prepared a small video which visualizes and explains the details. see http://vimeo.com/14358869)</p>
 </div>
 <div class="section" title="Associativity">
 <div class="titlepage">
@@ -222,7 +222,7 @@ current&nbsp;=&nbsp;temp;<br>
 </div>
 </div>
 </div>
-<p>There is still one topic I should mention, which is associativity. There is left and right associativity as well as none associativity. In the example we have seen left associativity. Associativity tells the parser how to construct the AST when there are two infix operations with the same precedence. The following example is taken from the corresponding wikipedia entry:</p>
+<p>There is still one topic we should mention, which is associativity. There is left and right associativity as well as none associativity. In the example we have seen left associativity. Associativity tells the parser how to construct the AST when there are two infix operations with the same precedence. The following example is taken from the corresponding wikipedia entry:</p>
 <p>Consider the expression a ~ b ~ c. If the operator ~ has left associativity, this expression would be interpreted as (a ~ b) ~ c and evaluated left-to-right. If the operator has right associativity, the expression would be interpreted as a ~ (b ~ c) and evaluated right-to-left. If the operator is non-associative, the expression might be a syntax error, or it might have some special meaning.
 					We already know the most important form which is right associativity:</p>
 <div class="literallayout">
