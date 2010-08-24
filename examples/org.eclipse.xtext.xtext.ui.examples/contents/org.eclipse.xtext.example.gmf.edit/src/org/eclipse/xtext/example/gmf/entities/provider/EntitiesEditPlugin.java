@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EntitiesEditPlugin.java,v 1.5 2010/03/09 09:10:13 jkohnlein Exp $
+ * $Id: EntitiesEditPlugin.java,v 1.6 2010/08/24 12:29:20 jkohnlein Exp $
  */
 package org.eclipse.xtext.example.gmf.entities.provider;
 

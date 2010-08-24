@@ -4,6 +4,7 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.xtext.example.gmf.diagram.edit.parts.EntitiesEditPartFactory;
 import org.eclipse.xtext.example.gmf.diagram.edit.parts.ModelEditPart;
+import org.eclipse.xtext.example.gmf.diagram.edit.parts.ReferenceNameEditPart;
 import org.eclipse.xtext.example.gmf.diagram.edit.parts.SimplePropertyEditPart;
 import org.eclipse.xtext.example.gmf.diagram.part.EntitiesVisualIDRegistry;
 
@@ -20,6 +21,8 @@ public class EntitiesEditPartFactoryOverride extends EntitiesEditPartFactory {
 			case SimplePropertyEditPart.VISUAL_ID:
 				return new SimplePropertyPopupXtextEditorEditPartOverride(view);
 				// return new SimplePropertyWrapperEditPartOverride(view);
+			case ReferenceNameEditPart.VISUAL_ID:
+				return new ReferenceNameEditPartOverride(view);
 			}
 		}
 		return super.createEditPart(context, model);
