@@ -93,7 +93,7 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 		}
 	}
 
-	private void reset() {
+	protected void reset() {
 		getModifiedObjects().clear();
 		resourceChanged = false;
 	}
@@ -149,7 +149,7 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 		return result;
 	}
 
-	private List<TextEdit> getObjectEdits() {
+	protected List<TextEdit> getObjectEdits() {
 		final Collection<EObject> modifiedObjects = getModifiedObjects();
 		Collection<EObject> topLevelObjects = EcoreUtil.filterDescendants(modifiedObjects);
 		Iterable<EObject> containedModifiedObjects = Iterables.filter(topLevelObjects, new Predicate<EObject>() {
@@ -159,11 +159,15 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 		});
 		List<TextEdit> edits = Lists.newArrayListWithExpectedSize(Iterables.size(containedModifiedObjects));
 		for (EObject modifiedObject : containedModifiedObjects) {
-			ReplaceRegion replaceRegion = serializer.serializeReplacement(modifiedObject, SaveOptions.defaultOptions());
+			ReplaceRegion replaceRegion = serializer.serializeReplacement(modifiedObject, getSaveOptions());
 			TextEdit edit = new ReplaceEdit(replaceRegion.getOffset(), replaceRegion.getLength(), replaceRegion.getText());
 			edits.add(edit);
 		}
 		return edits;
+	}
+
+	protected SaveOptions getSaveOptions() {
+		return SaveOptions.defaultOptions();
 	}
 
 	/**
