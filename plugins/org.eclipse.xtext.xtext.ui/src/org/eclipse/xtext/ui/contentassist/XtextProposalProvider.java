@@ -301,8 +301,6 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 					if (!Strings.isEmpty(prefix))
 						proposal.setDisplayString(classifier.getName() + " - " + alias);
 					proposal.setPriority(proposal.getPriority() * 2);
-					proposal.setDisplayString(stylerFactory.createFromXtextStyle(proposal.getDisplayString(),
-							semanticHighlightingConfiguration.typeReference()));
 				}
 				acceptor.accept(proposal);
 			}
