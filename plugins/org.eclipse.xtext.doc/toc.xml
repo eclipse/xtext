@@ -82,7 +82,6 @@
 <topic href="help/metamodelInference.html#customPostProcessing" label="Customized Post Processing"></topic>
 <topic href="help/metamodelInference.html#ErrorConditions" label="Error Conditions"></topic>
 </topic>
-<topic href="help/grammarImport.html" label="Importing Existing Ecore Models"></topic>
 <topic href="help/grammarMixins.html" label="Grammar Mixins"></topic>
 <topic href="help/CommonTerminals.html" label="Common Terminals"></topic>
 </topic>

@@ -820,16 +820,6 @@ The following conditions cause an error
 * An undeclared alias is used. 
 * An imported Ecore model cannot be loaded.
 
-h2(#grammarImport). Importing Existing Ecore Models
-
-With the import directive in Xtext you can refer to existing Ecore models and reuse the types that are declared in an _EPackage_. Xtext uses this technique itself to leverage Ecore data types.
-
-bc. import 'http://www.eclipse.org/emf/2002/Ecore' as ecore
-
-Specify an explicit return type to reuse such imported types. Note that this even works for terminal rules.
-
-bc. terminal INT returns ecore::EInt : ('0'..'9')+;
-
 h2(#grammarMixins). Grammar Mixins
 
 Xtext supports the reuse of existing grammars. Grammars that are created via the Xtext wizard use _org.eclipse.xtext.common.Terminals_ by default which introduces a common set of terminal rules and defines reasonable defaults for hidden terminals.

@@ -14,7 +14,7 @@ bc.. Expression :
   Expression '*' Expression |
   INT;
 
-p. This grammar would be left recursive because the parser reads the grammar top down and left to right and would endlessly call the Expression rule without consuming any characters, i.e. altering the underlying state of the parser. While this kind of grammars can be written for bottom-up parsers, you'ld still have to deal with operator precedence in addition. That is define that a multiplication has higher precedence than an addition for example.
+p. This grammar would be left recursive because the parser reads the grammar top down and left to right and would endlessly call the Expression rule without consuming any characters, i.e. altering the underlying state of the parser. While this kind of grammar can be written for bottom-up parsers, you'ld still have to deal with operator precedence in addition. That is define that a multiplication has higher precedence than an addition for example.
 
 In Xtext you define the precedence implicitly when left-factoring such a grammar. Left-factoring means you get rid of left recursion by applying a certain technique, which we will show in the following.
 
@@ -52,7 +52,7 @@ p. So once again: if you have some construct that recurses on the left hand side
 h3. Construction of an AST
 
 Now that we know how to avoid left recursion, let's have a look at what the parser produces. In Xtext each rule returns some value. Parser rules return AST nodes (i.e. EObject instances), enum rules return enum literals and datatype rules as well as terminal rules return simple values like strings and the like (EDatatype in EMF jargon).
-Xtext can automatically infer whether some rule is a parser rule, i.e. constructs and returns an AST node or if it is a datatype rule. Above's grammars only consisted of datatype rules so they would only return a plain string.
+Xtext can automatically infer whether some rule is a parser rule, i.e. constructs and returns an AST node, or if it is a datatype rule that returns a value. The grammar above only consists of datatype rules all of them returning plain strings.
 In order to construct an AST we need to add Assignments and Actions. But before we do that we need to talk about return types.
 
 The return type of a rule can be specified explicitly using the 'returns' keyword but can be inferred if the type's name is the same as the rule's name.
@@ -98,7 +98,7 @@ NumberLiteral:
 
 p. Let's go through the grammar as the parser would do it for the expression
 
-bc.	( 1 + 20 ) * 2
+bc.. (1 + 20) * 2
 
 p. The parser always starts with the first rule (Addition). Therein the first element is an unassigned rule call to Multiplication which in turn calls Primary. Primary now has two alternatives. The first one is calling NumberLiteral which consists only of one assignment to a feature called 'value'. The type of 'value' has to be compatible to the return type of the INT rule.
 
