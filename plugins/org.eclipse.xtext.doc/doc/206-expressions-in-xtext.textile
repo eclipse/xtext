@@ -134,7 +134,7 @@ We are now in rule Multiplication and have the multiplication operator '*' on th
 
 The resulting AST looks like this:
 
-!images/expressions-ast.png!
+!images/expression-ast.png!
 
 
 p. (It's pretty hard to follow what's going on just by reading this text. Therefore we have prepared a small video which visualizes and explains the details. see http://vimeo.com/14358869)
