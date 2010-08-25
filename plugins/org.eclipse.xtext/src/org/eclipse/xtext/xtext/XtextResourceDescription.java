@@ -47,6 +47,8 @@ public class XtextResourceDescription extends DefaultResourceDescription {
 				return Collections.<IEObjectDescription> emptyList();
 			}
 		}
+		if (getResource().getContents().isEmpty())
+			return Collections.emptyList();
 		Grammar grammar = (Grammar) getResource().getContents().get(0);
 		List<EObject> exported = Lists.<EObject>newArrayList(grammar);
 		exported.addAll(grammar.getMetamodelDeclarations());

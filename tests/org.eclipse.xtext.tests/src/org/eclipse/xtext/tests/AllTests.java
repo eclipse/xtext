@@ -243,6 +243,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.xtext.ValidEntryRuleInspectorTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.XtextGrammarSerializationTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.XtextLinkerTest.class);
+      suite.addTestSuite(org.eclipse.xtext.xtext.XtextResourceDescriptionTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.XtextScopingTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.XtextValidationTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.MultiValueFeatureTest.class);
