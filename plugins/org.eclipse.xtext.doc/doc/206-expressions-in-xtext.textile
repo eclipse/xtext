@@ -144,12 +144,12 @@ h3. Associativity
 There is still one topic we should mention, which is associativity. There is left and right associativity as well as none associativity. In the example we have seen left associativity. Associativity tells the parser how to construct the AST when there are two infix operations with the same precedence. The following example is taken from the corresponding wikipedia entry:
 
 Consider the expression a ~ b ~ c. If the operator ~ has left associativity, this expression would be interpreted as (a ~ b) ~ c and evaluated left-to-right. If the operator has right associativity, the expression would be interpreted as a ~ (b ~ c) and evaluated right-to-left. If the operator is non-associative, the expression might be a syntax error, or it might have some special meaning.
-We already know the most important form which is right associativity:
+We already know the most important form which is left associativity:
 
 bc.. Addition returns Expression:
   Multiplication ({Addition.left=current} '+' right=Multiplication)*;
 
-p. Left associativity is done using the following pattern (note the quantity operator and the call to the rule itself at the end):
+p. Right associativity is done using the following pattern (note the quantity operator and the call to the rule itself at the end):
 
 bc.. Addition returns Expression:
   Multiplication ({Addition.left=current} '+' right=Addition)?;
