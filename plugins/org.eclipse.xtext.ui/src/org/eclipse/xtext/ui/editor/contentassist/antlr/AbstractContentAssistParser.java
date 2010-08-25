@@ -23,6 +23,7 @@ import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
@@ -165,10 +166,12 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 
 	private String[][] getRequiredRuleNames(String ruleName, AbstractElement elementToParse) {
 		if (ruleName == null) {
-			if (elementToParse instanceof RuleCall)
-				return new String[][] {{ "rule" + ((RuleCall) elementToParse).getRule().getName() }};
-			else
-				return new String[0][];
+			if (elementToParse instanceof RuleCall) {
+				RuleCall call = (RuleCall) elementToParse;
+				if (call.getRule() instanceof ParserRule)
+					return new String[][] {{ "rule" + call.getRule().getName() }};
+			}
+			return new String[0][];
 		}
 		if (!(GrammarUtil.isOptionalCardinality(elementToParse) || GrammarUtil.isOneOrMoreCardinality(elementToParse)))
 			return new String[][] {{ ruleName }};
