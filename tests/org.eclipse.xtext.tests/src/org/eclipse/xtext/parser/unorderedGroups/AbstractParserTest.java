@@ -16,7 +16,7 @@ import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Nest
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class AbstractParserTest extends AbstractXtextTests {
+public abstract class AbstractParserTest extends AbstractXtextTests {
 
 	public void testParse_1_A_B() throws Exception {
 		Model model = (Model) getModel("1 a b");
