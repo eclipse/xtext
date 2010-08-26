@@ -23,9 +23,10 @@ import org.eclipse.xtext.validation.IConcreteSyntaxConstraintProvider.ISyntaxCon
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxConstraintProvider;
 
 import com.google.common.base.Function;
-import com.google.common.base.Join;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -71,7 +72,7 @@ public class ConcreteSyntaxConstraintProviderTest extends AbstractXtextTests {
 						}
 					}));
 			Collections.sort(names);
-			t = "<" + Join.join(", ", names) + ">";
+			t = "<" + Joiner.on(", ").join(names) + ">";
 		}
 		Iterable<String> contents = Iterables.transform(c.getContents(), new Function<ISyntaxConstraint, String>() {
 			public String apply(ISyntaxConstraint from) {

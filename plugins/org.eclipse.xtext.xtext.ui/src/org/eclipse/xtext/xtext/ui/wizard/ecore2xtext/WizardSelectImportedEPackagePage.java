@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -75,7 +76,7 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 			}
 
 			public Object[] getElements(Object inputElement) {
-				return Iterables.newArray(ePackageInfos, EPackageInfo.class);
+				return Iterables.toArray(ePackageInfos, EPackageInfo.class);
 			}
 		});
 		importedEPackagesViewer.setLabelProvider(new LabelProvider() {
@@ -174,11 +175,13 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 								return from.getEPackage().getEClassifiers();
 							}
 						})), EClass.class);
-				return Iterables.newArray(Lists.sortedCopy(eClasses, new Comparator<EClass>() {
+				List<EClass> result = Lists.newArrayList(eClasses);
+				Collections.sort(result, new Comparator<EClass>() {
 					public int compare(EClass o1, EClass o2) {
 						return o1.getName().compareTo(o2.getName());
 					}
-				}), EClass.class);
+				});
+				return Iterables.toArray(result, EClass.class);
 			}
 		});
 		updateUI();

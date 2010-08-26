@@ -30,9 +30,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.util.Wrapper;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Multimaps;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
 
@@ -76,8 +77,8 @@ public abstract class AbstractAllContainersState extends AbstractStorage2UriMapp
 		try {
 			writeLock.lock();
 			uriToHandle = Collections.synchronizedMap(Maps.<URI, String>newHashMap());
-			handleToVisibleHandles = Multimaps.newArrayListMultimap();
-			handleToContent = Multimaps.newLinkedHashMultimap();
+			handleToVisibleHandles = ArrayListMultimap.create();
+			handleToContent = LinkedHashMultimap.create();
 			emptyHandles = Collections.synchronizedSet(Sets.<String>newHashSet());
 		} finally {
 			writeLock.unlock();

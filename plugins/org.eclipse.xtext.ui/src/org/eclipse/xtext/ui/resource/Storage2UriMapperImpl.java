@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.util.SimpleCache;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -107,7 +106,7 @@ public class Storage2UriMapperImpl implements IStorage2UriMapper, IResourceChang
 				if (isValidStorageFor(uri, file))
 					return Collections.singleton((IStorage) file);
 			}
-			return Iterables.emptyIterable();
+			return Collections.emptyList();
 		}
 	});
 

@@ -29,7 +29,6 @@ import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.util.StopWatch;
 import org.eclipse.xtext.util.StringInputStream;
 
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 
 /**
@@ -187,7 +186,7 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 	}
 
 	private int countResourcesInIndex() {
-		return Collections2.forIterable(getBuilderState().getAllResourceDescriptions()).size();
+		return Lists.newArrayList(getBuilderState().getAllResourceDescriptions()).size();
 	}
 
 	public void descriptionsChanged(Event event) {

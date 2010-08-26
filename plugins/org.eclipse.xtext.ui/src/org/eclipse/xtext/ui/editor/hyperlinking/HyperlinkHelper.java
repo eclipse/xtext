@@ -65,7 +65,7 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 		
 		createHyperlinksByOffset(resource, offset, acceptor);
 		if (!links.isEmpty())
-			return Iterables.newArray(links, IHyperlink.class);
+			return Iterables.toArray(links, IHyperlink.class);
 		return null;
 	}
 
