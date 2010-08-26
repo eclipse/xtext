@@ -16,7 +16,7 @@ import com.google.common.collect.ImmutableBiMap;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class AbstractBug301935Test extends AbstractXtextTests {
+public abstract class AbstractBug301935Test extends AbstractXtextTests {
 
 	public void testParseValidInput() throws Exception {
 		String input = "a b\nc ";
