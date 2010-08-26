@@ -8,7 +8,7 @@
 package org.eclipse.xtext.util;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class TextLocation {
 
@@ -57,6 +57,14 @@ public class TextLocation {
 		int newEnd = newOffset + newLength;
 		offset = Math.min(offset, newOffset);
 		length = Math.max(end, newEnd) - offset;
+	}
+	
+	public boolean contains(TextLocation other) {
+		return !isEmpty && other.length <= length - (other.offset - offset) && other.offset >= offset; 
+	}
+	
+	public boolean contains(int offset) {
+		return offset >= this.offset && offset < this.offset + length;
 	}
 
 }
