@@ -211,6 +211,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.util.SimpleCacheTest.class);
       suite.addTestSuite(org.eclipse.xtext.util.StringsTest.class);
       suite.addTestSuite(org.eclipse.xtext.util.TailWriterTest.class);
+      suite.addTestSuite(org.eclipse.xtext.util.TextLocationTest.class);
       suite.addTestSuite(org.eclipse.xtext.util.TuplesTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.AssignmentAllocatorTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.CompositeValidatorWithEObjectValidatorTest.class);
